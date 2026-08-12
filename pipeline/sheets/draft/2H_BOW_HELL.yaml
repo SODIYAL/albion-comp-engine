@@ -1,0 +1,21 @@
+# DRAFT — auto-seeded from the structured effect map. Usage: 3 sightings, dominant role: range.
+# Every score is provisional; the comment names the effect and target
+# direction it was derived from. Humans: adjust scores, ADD what the
+# effect layer cannot see (zone_control/burst_aoe/clump_create/heal_burst/
+# anti_dive), then move to sheets/.
+
+- weapon: 2H_BOW_HELL
+  # Adept's Wailing Bow
+  role_hint: range
+  capabilities:
+    - {cap: catch, score: 1, evidence: PASSIVE_SLOWPOISON, review: TODO}   # PASSIVE: Slow Poison — movespeedbonus- on enemy
+    - {cap: disengage, score: 1, evidence: SPEEDSHOT2, review: TODO}   # W: Speed Shot — movespeedbonus+ on self
+    - {cap: engage, score: 1, evidence: SPEEDSHOT2, review: TODO}   # W: Speed Shot — movespeedbonus+ on self
+    - {cap: knockback_displace, score: 1, evidence: JUMPSHOT2, review: TODO}   # W: Frost Shot — prose:knockback
+    - {cap: mobility, score: 1, evidence: SPEEDSHOT2, review: TODO}   # W: Speed Shot — movespeedbonus+ on self
+    - {cap: peel, score: 1, evidence: PASSIVE_SLOWPOISON, review: TODO}   # PASSIVE: Slow Poison — movespeedbonus- on enemy
+    - {cap: resist_shred, score: 1, evidence: PASSIVE_ARMOR_PIERCE_STACK, review: TODO}   # PASSIVE: Piercing Arrows — bonusdefensevsplayers- on enemy; prose:pierce
+    - {cap: root, score: 1, evidence: GROUNDARROW, review: TODO}   # W: Ray of Light — root on enemy; prose:root
+    - {cap: self_sustain, score: 1, evidence: DEADLYSHOT, review: TODO}   # Q: Deadly Shot — prose:shield
+    - {cap: slow, score: 1, evidence: PASSIVE_SLOWPOISON, review: TODO}   # PASSIVE: Slow Poison — movespeedbonus- on enemy; prose:slow
+    - {cap: tankiness, score: 1, evidence: DEADLYSHOT, review: TODO}   # Q: Deadly Shot — prose:shield

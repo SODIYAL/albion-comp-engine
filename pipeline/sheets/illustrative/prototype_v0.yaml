@@ -1,0 +1,96 @@
+# ILLUSTRATIVE — NOT CURATED, NOT EVIDENCE-LINTED.
+#
+# These are the design-doc §2.3 hand-sketched numbers that the throwaway
+# prototype (tests/prototype_engine.py) used to validate the model shape. They
+# exist here for exactly one reason: to keep the 9 golden tests runnable while
+# curation is in progress. They are NOT a data release.
+#
+# Every entry lacks an `evidence` field, so `evidence_lint.py` would reject all
+# of them — that is intentional and correct. `build_dataset.py` refuses to mark
+# a release clean while any illustrative sheet is present.
+#
+# CURATION PATH: when a weapon here gets a real curated sheet in ../ (with
+# evidence spells), delete its block from this file. The loader gives curated
+# sheets precedence, so a leftover block is shadowed rather than harmful — but
+# delete it anyway so the illustrative count reports the truth.
+#
+# Weapon keys resolved against pipeline/out/weapon_lines.json (2026-08-12).
+
+- weapon: MAIN_ARCANESTAFF_UNDEAD      # Witchwork Staff
+  status: illustrative
+  capabilities:
+    - {cap: burst_aoe, score: 2}
+    - {cap: clump_create, score: 2}
+    - {cap: energy_drain, score: 2}
+    - {cap: sustained_dps, score: 2}
+    - {cap: heal_reduction, score: 1}
+    - {cap: zone_control, score: 1}
+
+- weapon: 2H_ICECRYSTAL_UNDEAD         # Permafrost Prism
+  status: illustrative
+  capabilities:
+    - {cap: burst_aoe, score: 3}
+    - {cap: zone_control, score: 3}
+    - {cap: slow, score: 2}
+    - {cap: clump_create, score: 2}
+    - {cap: root, score: 1}
+    - {cap: mobility, score: 1}
+    - {cap: tankiness, score: 1}
+
+# MAIN_HOLYSTAFF_AVALON (Hallowfall) — CURATED 2026-08-12, see ../holy_line.yaml
+# Its illustrative block claimed `cleanse 2`; curation found no cleanse anywhere
+# in the holy kit. Removed rather than shadowed.
+
+- weapon: 2H_HOLYSTAFF                 # Great Holy Staff
+  status: illustrative
+  capabilities:
+    - {cap: heal_burst, score: 3}
+    - {cap: heal_sustain, score: 3}
+    - {cap: cleanse, score: 2}
+    - {cap: buff_allies, score: 1}
+
+# 2H_NATURESTAFF_HELL (Blight Staff) — CURATED 2026-08-12, see ../nature_line.yaml
+
+- weapon: 2H_HAMMER                    # Great Hammer
+  status: illustrative
+  capabilities:
+    - {cap: tankiness, score: 2}
+    - {cap: engage, score: 3}
+    - {cap: clump_create, score: 3}
+    - {cap: stun, score: 2}
+    - {cap: zone_control, score: 2}
+    - {cap: peel, score: 1}
+
+- weapon: 2H_RAM_KEEPER                # Grovekeeper
+  status: illustrative
+  capabilities:
+    - {cap: tankiness, score: 2}
+    - {cap: engage, score: 3}
+    - {cap: stun, score: 2}
+    - {cap: clump_create, score: 2}
+    - {cap: peel, score: 1}
+
+- weapon: 2H_DAGGERPAIR                # Dagger Pair
+  status: illustrative
+  capabilities:
+    - {cap: burst_st, score: 3}
+    - {cap: execute, score: 2}
+    - {cap: sustained_dps, score: 2}
+    - {cap: mobility, score: 1}
+
+- weapon: MAIN_RAPIER_MORGANA          # Bloodletter
+  status: illustrative
+  capabilities:
+    - {cap: mobility, score: 3}
+    - {cap: execute, score: 2}
+    - {cap: burst_st, score: 2}
+    - {cap: catch, score: 2}
+    - {cap: disengage, score: 2}
+
+- weapon: 2H_HARPOON_HELL              # Spirithunter
+  status: illustrative
+  capabilities:
+    - {cap: heal_reduction, score: 3}
+    - {cap: sustained_dps, score: 2}
+    - {cap: burst_aoe, score: 1}
+    - {cap: buff_allies, score: 1}

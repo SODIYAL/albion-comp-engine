@@ -1,0 +1,37 @@
+# Scoring configuration (design doc §4.1, §4.2). Data, not code.
+
+weights:
+  alpha: 0.55   # marginal capability gain
+  beta:  0.20   # synergy
+  delta: 0.15   # meta prior
+  gamma: 0.70   # concavity of the utility curve U_c(s) = w * min(1, s/target)^gamma
+
+# Capability-level synergy: pairs worth more across players than their sum
+# (design doc §4.2.1). Applies to any weapons supplying the pair — no
+# per-weapon-pair maintenance.
+capability_synergies:
+  - {a: clump_create,   b: burst_aoe,      bonus: 1.5}
+  - {a: engage,         b: catch,          bonus: 0.8}
+  - {a: resist_shred,   b: burst_st,       bonus: 0.8}
+  - {a: heal_reduction, b: sustained_dps,  bonus: 0.8}
+
+# Meta prior (design doc §4.1): guards against weapons that fit on paper but
+# nobody plays. HAND-SET PLACEHOLDER VALUES — real win-lift arrives in Phase 3
+# from battle data (§8), with Bayesian shrinkage and minimum-n gates. Keyed by
+# weapon unique_name.
+meta_prior:
+  MAIN_HOLYSTAFF_AVALON: 1.0   # Hallowfall
+  2H_MACE:               1.0   # Heavy Mace
+  2H_HAMMER:             0.8   # Great Hammer
+  2H_ICECRYSTAL_UNDEAD:  0.8   # Permafrost Prism
+  2H_HOLYSTAFF:          0.6   # Great Holy Staff
+  2H_LONGBOW:            0.6   # Longbow
+  MAIN_MACE:             0.6   # Mace
+
+# Role sets used by the golden regression suite (tests/test_golden.py).
+# These are test fixtures, not engine inputs — the engine has no role concept.
+role_sets:
+  healers:   [MAIN_HOLYSTAFF_AVALON, 2H_HOLYSTAFF, 2H_NATURESTAFF_HELL]
+  frontline: [2H_MACE, 2H_HAMMER, MAIN_MACE, 2H_RAM_KEEPER]
+  pure_dps:  [2H_LONGBOW, MAIN_ARCANESTAFF_UNDEAD, 2H_ICECRYSTAL_UNDEAD,
+              2H_DAGGERPAIR, MAIN_RAPIER_MORGANA, 2H_HARPOON_HELL]

@@ -1,0 +1,7 @@
+# Normalise line endings so Windows and Linux contributors don't churn diffs.
+* text=auto eol=lf
+
+# Generated single-file pages and parsed game data — collapse in PR diffs.
+dashboard/index.html   linguist-generated=true
+review/effects.html    linguist-generated=true
+pipeline/out/*.json    linguist-generated=true

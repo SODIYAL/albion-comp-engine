@@ -1,0 +1,257 @@
+# Effect -> capability map. DATA, not code.
+#
+# Analysed effect by effect against the 64 weapon-reachable effects in
+# out/effect_catalogue.json. Reviewed by Claude 2026-08-12; NOT yet signed off
+# by the domain expert. The agreed process is: use these now, correct them as
+# real comps get built and something looks wrong.
+#
+# TWO RULES THAT SHAPE THIS FILE
+#
+# 1. MANY-TO-MANY. One effect can support several capabilities. 1H Mace's Deep
+#    Leap grants brief immunity while it leaps: that single effect legitimately
+#    supports `engage` (dive in through CC), `disengage` (get out through CC)
+#    and `tankiness` (eat a burst window). Which one it actually is depends on
+#    how the weapon is played, so the effect layer offers CANDIDATES and the
+#    weapon sheet picks from them with evidence.
+#
+# 2. DIRECTION DECIDES. The same effect means opposite things by target:
+#    immunity on SELF is engage/disengage; immunity on an ALLY is peel. A slow
+#    on an enemy is `slow`; a slow on yourself (Holy Beam while channelling) is
+#    a drawback and grounds nothing. This mirrors the taxonomy's directionality
+#    rule (design doc §2.2).
+#
+# `[]` means the effect grounds no capability in that direction — a real answer,
+# not a gap. `ignore: true` marks PvE-only or structural entries.
+#
+# NEW CAPABILITIES PROPOSED (not yet in design doc §2.2):
+#   damage_debuff  reduce the enemy's damage OUTPUT (~42 weapon lines). Distinct
+#                  from resist_shred (which raises damage you DEAL) and from
+#                  tankiness (your own durability). Nothing existing covers it.
+#   reveal         strip invisibility (4 lines). Real but marginal; drop it if
+#                  you would rather keep the taxonomy lean.
+
+proposed_capabilities:
+  damage_debuff: "Reduces the enemy's damage output — group-defensive utility."
+  reveal: "Strips invisibility from enemies (anti-stealth)."
+
+effects:
+
+  # ---------------------------------------------------------------- control
+  stun:
+    enemy: [stun, peel, anti_dive, catch]
+    note: >
+      Hard CC. peel/anti_dive when used on a diver, catch when used on a runner,
+      engage only if the weapon's stun is itself the initiation (score that on
+      the weapon, not here).
+  root:
+    enemy: [root, peel, catch, anti_dive]
+    note: Stops movement but not casting — weaker peel than stun, equal catch.
+  silence:
+    enemy: [silence, peel, anti_dive]
+    note: >
+      Useless as catch (a silenced target still runs) and strong against casters
+      diving your backline.
+  knockback:
+    enemy: [knockback_displace, peel, anti_dive]
+    self:  [mobility, disengage]
+    note: >
+      Direction is the whole question — bow-line Frost Shot displaces the CASTER.
+      Only enemy-directed knockback grounds knockback_displace.
+  forced_movement:
+    enemy: [knockback_displace, clump_create, peel]
+    self:  [mobility, disengage]
+    note: Pulls group enemies together, so clump_create applies where knockback does not.
+
+  # ---------------------------------------------------------------- movement
+  movespeedbonus-:
+    enemy: [slow, catch, peel]
+    self:  []
+    ally:  []
+    note: >
+      A self-slow is a channelling drawback (Holy Beam) and grounds nothing.
+      100 weapon lines carry this and the prose regex sees almost none of them.
+  movespeedbonus+:
+    self:  [mobility, engage, disengage, catch]
+    ally:  [buff_allies, mobility, engage, disengage]
+    note: Group speed is how a comp both commits and breaks off.
+  dash:
+    self:  [mobility, engage, disengage, catch]
+    note: >
+      A dash is a gap-close and an escape with the same button. The weapon sheet
+      decides which, from range and cooldown.
+  invisibility:
+    self:  [disengage, engage]
+    note: Stealth opener or escape.
+
+  # ---------------------------------------------------------------- durability
+  invincibility:
+    self:  [tankiness, engage, disengage]
+    ally:  [peel]
+    note: >
+      The 1H Mace case. A damage-immune window is exactly what lets a bruiser
+      commit or withdraw through focus.
+  physicalarmor+:
+    self:  [tankiness, self_sustain]
+    ally:  [buff_allies, peel]
+    note: Resistances on a focused ally function as peel.
+  magicresistance+:
+    self:  [tankiness, self_sustain]
+    ally:  [buff_allies, peel]
+  bonusdefensevsplayers+:
+    self:  [tankiness]
+    ally:  [buff_allies, peel]
+  hitpointsmaxbonus+:
+    self:  [tankiness]
+    ally:  [buff_allies, tankiness]
+  crowdcontrolresistance+:
+    self:  [tankiness, engage]
+    ally:  [peel, buff_allies]
+    note: CC resistance is what lets a frontline actually reach the enemy.
+  hitpointsregenerationbonus+:
+    self:  [self_sustain]
+    ally:  [heal_sustain, buff_allies]
+
+  # ---------------------------------------------------------------- denial
+  physicalarmor-:
+    enemy: [resist_shred]
+    self:  []
+  magicresistance-:
+    enemy: [resist_shred]
+    self:  []
+  bonusdefensevsplayers-:
+    enemy: [resist_shred]
+    self:  []
+  healmodifier-:
+    enemy: [heal_reduction]
+    note: Reduces healing RECEIVED — the standard heal-cut.
+  healbonus-:
+    enemy: [heal_reduction]
+    note: Reduces healing the target DEALS — hits enemy healers specifically.
+  physicalattackdamagebonus-:
+    enemy: [damage_debuff]
+  magicattackdamagebonus-:
+    enemy: [damage_debuff]
+  physicalspelldamagebonus-:
+    enemy: [damage_debuff]
+  magicspelldamagebonus-:
+    enemy: [damage_debuff]
+  attackspeedbonus-:
+    enemy: [damage_debuff]
+  hitpointsmaxbonus-:
+    enemy: [execute, burst_st]
+    note: >
+      Cutting max health shortens every kill — it amplifies focus damage rather
+      than dealing any itself.
+  crowdcontrolresistance-:
+    enemy: []
+    note: >
+      Makes your own CC land harder. Genuinely distinct, but 1 weapon line — not
+      worth a capability until something else needs it.
+  focusfireprotectionpenetration+:
+    self:  [burst_st]
+    note: Pierces the falloff that protects an already-focused target.
+
+  # ---------------------------------------------------------------- offense buffs
+  physicalattackdamagebonus+:
+    self:  [sustained_dps]
+    ally:  [buff_allies]
+  magicattackdamagebonus+:
+    self:  [sustained_dps]
+    ally:  [buff_allies]
+  physicalspelldamagebonus+:
+    self:  [burst_st, burst_aoe]
+    ally:  [buff_allies]
+  magicspelldamagebonus+:
+    self:  [burst_st, burst_aoe]
+    ally:  [buff_allies]
+  attackspeedbonus+:
+    self:  [sustained_dps]
+    ally:  [buff_allies]
+  attackrangebonus+:
+    self:  [sustained_dps]
+  magiccooldownreduction+:
+    self:  [sustained_dps]
+    ally:  [buff_allies]
+  magiccasttimereduction+:
+    self:  [sustained_dps]
+    ally:  [buff_allies]
+  energycostreduction+:
+    self:  [sustained_dps]
+  healmodifier+:
+    ally:  [buff_allies, heal_sustain]
+    self:  [self_sustain]
+  healbonus+:
+    ally:  [heal_sustain, buff_allies]
+    self:  [self_sustain]
+
+  # ---------------------------------------------------------------- guards
+  # Immunity and diminishing returns are PROTECTION. They are never evidence
+  # that a weapon applies the effect they name.
+  immunity:stun:
+    self:  [tankiness, engage, disengage]
+    ally:  [peel]
+  immunity:root:
+    self:  [mobility, engage, disengage]
+    ally:  [peel]
+  immunity:silence:
+    self:  [tankiness]
+    ally:  [peel]
+  immunity:slow:
+    self:  [mobility, catch, disengage]
+    ally:  [peel, buff_allies]
+  immunity:forcedmovement:
+    self:  [tankiness, engage]
+    ally:  [peel]
+    note: What holds a frontline in place against knockback comps.
+  immunity:transformationcc:
+    self:  [tankiness]
+    ally:  [peel]
+  dr:DRStun:    {ally: [peel]}
+  dr:DRRoot:    {ally: [peel]}
+  dr:DRSilence: {ally: [peel]}
+  dr:DRSlow:    {ally: [peel]}
+  dr:DRTransformationCC: {ally: [peel]}
+
+  # ---------------------------------------------------------------- removal
+  remove:crowdcontrol:
+    ally:  [cleanse]
+  remove:debuff:
+    ally:  [cleanse]
+  remove:damage:
+    ally:  [cleanse]
+    note: Removes damage-over-time — a partial cleanse.
+  remove:buff:
+    enemy: [purge]
+  remove:buff_damageshield:
+    enemy: [purge, burst_st]
+    note: Stripping a shield is what makes a burst window land.
+  remove:movementbuff:
+    enemy: [catch, peel]
+    note: Strips sprint/speed — stops escapes and chases.
+  remove:invisibility:
+    enemy: [reveal]
+  remove:heal:
+    enemy: [heal_reduction]
+    note: Strips heal-over-time already on the target.
+
+  # ---------------------------------------------------------------- ignored
+  aura:
+    ignore: true
+    note: A delivery mechanism (persistent area), not an effect in itself.
+  threatbonus+:
+    ignore: true
+    note: PvE taunt.
+  bonusdefensevsmobs+:
+    ignore: true
+    note: PvE only.
+  bonusdefensevsmobs-:
+    ignore: true
+    note: PvE only.
+  bonusccdurationvsmobs+:
+    ignore: true
+    note: PvE only.
+  bonusccdurationvsplayers+:
+    self: []
+    note: >
+      Amplifies CC you already apply. Grounds nothing on its own — the CC it
+      lengthens is already scored.

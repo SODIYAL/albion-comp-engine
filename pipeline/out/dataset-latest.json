@@ -1,0 +1,588 @@
+{
+ "_meta": {
+  "illustrative_weapons": [
+   "2H_DAGGERPAIR",
+   "2H_HAMMER",
+   "2H_HARPOON_HELL",
+   "2H_HOLYSTAFF",
+   "2H_ICECRYSTAL_UNDEAD",
+   "2H_RAM_KEEPER",
+   "MAIN_ARCANESTAFF_UNDEAD",
+   "MAIN_RAPIER_MORGANA"
+  ],
+  "lint_passed": true,
+  "note": "NOT A RELEASE \u2014 contains illustrative placeholder sheets.",
+  "release_clean": false,
+  "templates": [
+   "castle_outpost"
+  ],
+  "unknown_to_game_data": [],
+  "version": "2026.08.1",
+  "weapons_curated": 6,
+  "weapons_illustrative": 8,
+  "weapons_total": 14
+ },
+ "scoring": {
+  "capability_synergies": [
+   {
+    "a": "clump_create",
+    "b": "burst_aoe",
+    "bonus": 1.5
+   },
+   {
+    "a": "engage",
+    "b": "catch",
+    "bonus": 0.8
+   },
+   {
+    "a": "resist_shred",
+    "b": "burst_st",
+    "bonus": 0.8
+   },
+   {
+    "a": "heal_reduction",
+    "b": "sustained_dps",
+    "bonus": 0.8
+   }
+  ],
+  "meta_prior": {
+   "2H_HAMMER": 0.8,
+   "2H_HOLYSTAFF": 0.6,
+   "2H_ICECRYSTAL_UNDEAD": 0.8,
+   "2H_LONGBOW": 0.6,
+   "2H_MACE": 1.0,
+   "MAIN_HOLYSTAFF_AVALON": 1.0,
+   "MAIN_MACE": 0.6
+  },
+  "role_sets": {
+   "frontline": [
+    "2H_MACE",
+    "2H_HAMMER",
+    "MAIN_MACE",
+    "2H_RAM_KEEPER"
+   ],
+   "healers": [
+    "MAIN_HOLYSTAFF_AVALON",
+    "2H_HOLYSTAFF",
+    "2H_NATURESTAFF_HELL"
+   ],
+   "pure_dps": [
+    "2H_LONGBOW",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_DAGGERPAIR",
+    "MAIN_RAPIER_MORGANA",
+    "2H_HARPOON_HELL"
+   ]
+  },
+  "weights": {
+   "alpha": 0.55,
+   "beta": 0.2,
+   "delta": 0.15,
+   "gamma": 0.7
+  }
+ },
+ "templates": {
+  "castle_outpost": {
+   "base_size": 7,
+   "content": "castle_outpost",
+   "hard_floors": {
+    "heal_sustain": {
+     "floor_units": 2.0,
+     "min_party_size": 4,
+     "penalty_mult": 1.5
+    },
+    "tankiness": {
+     "floor_units": 2.0,
+     "min_party_size": 5,
+     "penalty_mult": 1.0
+    }
+   },
+   "name": "Castle Outpost",
+   "requirements": {
+    "anti_zone": {
+     "scales": false,
+     "soft_cap": 2.0,
+     "target": 1.0,
+     "weight": 3
+    },
+    "burst_aoe": {
+     "scales": true,
+     "soft_cap": 9.0,
+     "target": 5.0,
+     "weight": 8
+    },
+    "cleanse": {
+     "scales": false,
+     "soft_cap": 3.0,
+     "target": 1.0,
+     "weight": 5
+    },
+    "clump_create": {
+     "scales": false,
+     "soft_cap": 4.0,
+     "target": 2.0,
+     "weight": 7
+    },
+    "disengage": {
+     "scales": false,
+     "soft_cap": 3.0,
+     "target": 1.0,
+     "weight": 4
+    },
+    "engage": {
+     "scales": false,
+     "soft_cap": 5.0,
+     "target": 2.0,
+     "weight": 7
+    },
+    "heal_burst": {
+     "scales": true,
+     "soft_cap": 4.0,
+     "target": 2.0,
+     "weight": 6
+    },
+    "heal_reduction": {
+     "scales": false,
+     "soft_cap": 3.0,
+     "target": 1.0,
+     "weight": 6
+    },
+    "heal_sustain": {
+     "scales": true,
+     "soft_cap": 5.0,
+     "target": 3.0,
+     "weight": 10
+    },
+    "mobility": {
+     "scales": true,
+     "soft_cap": 6.0,
+     "target": 2.0,
+     "weight": 3
+    },
+    "peel": {
+     "scales": true,
+     "soft_cap": 6.0,
+     "target": 3.0,
+     "weight": 8
+    },
+    "purge": {
+     "scales": false,
+     "soft_cap": 4.0,
+     "target": 2.0,
+     "weight": 6
+    },
+    "resist_shred": {
+     "scales": false,
+     "soft_cap": 4.0,
+     "target": 2.0,
+     "weight": 5
+    },
+    "silence": {
+     "scales": false,
+     "soft_cap": 3.0,
+     "target": 1.0,
+     "weight": 4
+    },
+    "stun": {
+     "scales": true,
+     "soft_cap": 5.0,
+     "target": 2.0,
+     "weight": 4
+    },
+    "sustained_dps": {
+     "scales": true,
+     "soft_cap": 7.0,
+     "target": 3.0,
+     "weight": 5
+    },
+    "tankiness": {
+     "scales": true,
+     "soft_cap": 7.0,
+     "target": 4.0,
+     "weight": 9
+    },
+    "zone_control": {
+     "scales": true,
+     "soft_cap": 7.0,
+     "target": 3.0,
+     "weight": 4
+    }
+   },
+   "validated_sizes": [
+    7
+   ]
+  }
+ },
+ "weapons": {
+  "2H_DAGGERPAIR": {
+   "capabilities": {
+    "burst_st": 3,
+    "execute": 2,
+    "mobility": 1,
+    "sustained_dps": 2
+   },
+   "display_name": "Dagger Pair",
+   "evidence": {},
+   "in_game_data": true,
+   "role_hint": null,
+   "source": "sheets/illustrative/prototype_v0.yaml",
+   "status": "illustrative",
+   "unique_name": "2H_DAGGERPAIR"
+  },
+  "2H_HAMMER": {
+   "capabilities": {
+    "clump_create": 3,
+    "engage": 3,
+    "peel": 1,
+    "stun": 2,
+    "tankiness": 2,
+    "zone_control": 2
+   },
+   "display_name": "Great Hammer",
+   "evidence": {},
+   "in_game_data": true,
+   "role_hint": null,
+   "source": "sheets/illustrative/prototype_v0.yaml",
+   "status": "illustrative",
+   "unique_name": "2H_HAMMER"
+  },
+  "2H_HARPOON_HELL": {
+   "capabilities": {
+    "buff_allies": 1,
+    "burst_aoe": 1,
+    "heal_reduction": 3,
+    "sustained_dps": 2
+   },
+   "display_name": "Spirithunter",
+   "evidence": {},
+   "in_game_data": true,
+   "role_hint": null,
+   "source": "sheets/illustrative/prototype_v0.yaml",
+   "status": "illustrative",
+   "unique_name": "2H_HARPOON_HELL"
+  },
+  "2H_HOLYSTAFF": {
+   "capabilities": {
+    "buff_allies": 1,
+    "cleanse": 2,
+    "heal_burst": 3,
+    "heal_sustain": 3
+   },
+   "display_name": "Great Holy Staff",
+   "evidence": {},
+   "in_game_data": true,
+   "role_hint": null,
+   "source": "sheets/illustrative/prototype_v0.yaml",
+   "status": "illustrative",
+   "unique_name": "2H_HOLYSTAFF"
+  },
+  "2H_HOLYSTAFF_UNDEAD": {
+   "capabilities": {
+    "buff_allies": 2,
+    "heal_burst": 2,
+    "heal_sustain": 3,
+    "knockback_displace": 1,
+    "peel": 1
+   },
+   "display_name": "Redemption Staff",
+   "evidence": {
+    "buff_allies": [
+     "HOLYHOT"
+    ],
+    "heal_burst": [
+     "HOLYFLASH"
+    ],
+    "heal_sustain": [
+     "CELESTIAL_SPHERE"
+    ],
+    "knockback_displace": [
+     "PASSIVE_KNOCKBACK_CASTER_HOLYSTAFF"
+    ],
+    "peel": [
+     "PULSINGHEAL"
+    ]
+   },
+   "in_game_data": true,
+   "role_hint": "healer",
+   "source": "sheets/holy_line.yaml",
+   "status": "curated",
+   "unique_name": "2H_HOLYSTAFF_UNDEAD"
+  },
+  "2H_ICECRYSTAL_UNDEAD": {
+   "capabilities": {
+    "burst_aoe": 3,
+    "clump_create": 2,
+    "mobility": 1,
+    "root": 1,
+    "slow": 2,
+    "tankiness": 1,
+    "zone_control": 3
+   },
+   "display_name": "Permafrost Prism",
+   "evidence": {},
+   "in_game_data": true,
+   "role_hint": null,
+   "source": "sheets/illustrative/prototype_v0.yaml",
+   "status": "illustrative",
+   "unique_name": "2H_ICECRYSTAL_UNDEAD"
+  },
+  "2H_LONGBOW": {
+   "capabilities": {
+    "burst_aoe": 2,
+    "resist_shred": 1,
+    "root": 1,
+    "slow": 2,
+    "sustained_dps": 2,
+    "zone_control": 2
+   },
+   "display_name": "Longbow",
+   "evidence": {
+    "burst_aoe": [
+     "ARROWRAIN"
+    ],
+    "resist_shred": [
+     "PASSIVE_ARMOR_PIERCE_STACK"
+    ],
+    "root": [
+     "GROUNDARROW"
+    ],
+    "slow": [
+     "ARROWRAIN"
+    ],
+    "sustained_dps": [
+     "WEAPON_STATS"
+    ],
+    "zone_control": [
+     "ARROWRAIN"
+    ]
+   },
+   "in_game_data": true,
+   "role_hint": null,
+   "source": "sheets/longbow.yaml",
+   "status": "curated",
+   "unique_name": "2H_LONGBOW"
+  },
+  "2H_MACE": {
+   "capabilities": {
+    "engage": 2,
+    "peel": 3,
+    "purge": 3,
+    "silence": 3,
+    "slow": 1,
+    "tankiness": 3,
+    "zone_control": 2
+   },
+   "display_name": "Heavy Mace",
+   "evidence": {
+    "engage": [
+     "CHARGE_ROOT"
+    ],
+    "peel": [
+     "SHRIEKMACE"
+    ],
+    "purge": [
+     "SHRIEKMACE"
+    ],
+    "silence": [
+     "SHRIEKMACE"
+    ],
+    "slow": [
+     "SACRED_GROUND"
+    ],
+    "tankiness": [
+     "WEAPON_STATS"
+    ],
+    "zone_control": [
+     "SACRED_GROUND"
+    ]
+   },
+   "in_game_data": true,
+   "role_hint": null,
+   "source": "sheets/mace_line.yaml",
+   "status": "curated",
+   "unique_name": "2H_MACE"
+  },
+  "2H_NATURESTAFF_HELL": {
+   "capabilities": {
+    "buff_allies": 2,
+    "cleanse": 2,
+    "heal_burst": 1,
+    "heal_sustain": 3,
+    "knockback_displace": 1,
+    "mobility": 1,
+    "self_sustain": 1,
+    "slow": 1,
+    "sustained_dps": 1,
+    "zone_control": 1
+   },
+   "display_name": "Blight Staff",
+   "evidence": {
+    "buff_allies": [
+     "NATURERESILIENCE"
+    ],
+    "cleanse": [
+     "CLEANSEHEAL"
+    ],
+    "heal_burst": [
+     "CLEANSEHEAL"
+    ],
+    "heal_sustain": [
+     "ROTTENVINES"
+    ],
+    "knockback_displace": [
+     "BRAMBLESEED"
+    ],
+    "mobility": [
+     "ROTTENVINES"
+    ],
+    "self_sustain": [
+     "PASSIVE_ARMOR_CASTER_NATURESTAFF"
+    ],
+    "slow": [
+     "THORNSAREA"
+    ],
+    "sustained_dps": [
+     "THORNSAREA"
+    ],
+    "zone_control": [
+     "THORNSAREA"
+    ]
+   },
+   "in_game_data": true,
+   "role_hint": "healer",
+   "source": "sheets/nature_line.yaml",
+   "status": "curated",
+   "unique_name": "2H_NATURESTAFF_HELL"
+  },
+  "2H_RAM_KEEPER": {
+   "capabilities": {
+    "clump_create": 2,
+    "engage": 3,
+    "peel": 1,
+    "stun": 2,
+    "tankiness": 2
+   },
+   "display_name": "Grovekeeper",
+   "evidence": {},
+   "in_game_data": true,
+   "role_hint": null,
+   "source": "sheets/illustrative/prototype_v0.yaml",
+   "status": "illustrative",
+   "unique_name": "2H_RAM_KEEPER"
+  },
+  "MAIN_ARCANESTAFF_UNDEAD": {
+   "capabilities": {
+    "burst_aoe": 2,
+    "clump_create": 2,
+    "energy_drain": 2,
+    "heal_reduction": 1,
+    "sustained_dps": 2,
+    "zone_control": 1
+   },
+   "display_name": "Witchwork Staff",
+   "evidence": {},
+   "in_game_data": true,
+   "role_hint": null,
+   "source": "sheets/illustrative/prototype_v0.yaml",
+   "status": "illustrative",
+   "unique_name": "MAIN_ARCANESTAFF_UNDEAD"
+  },
+  "MAIN_HOLYSTAFF_AVALON": {
+   "capabilities": {
+    "buff_allies": 2,
+    "disengage": 2,
+    "heal_burst": 3,
+    "heal_sustain": 2,
+    "knockback_displace": 2,
+    "mobility": 3,
+    "peel": 3,
+    "self_sustain": 1
+   },
+   "display_name": "Hallowfall",
+   "evidence": {
+    "buff_allies": [
+     "HOLYHOT"
+    ],
+    "disengage": [
+     "DIVINE_JUMP"
+    ],
+    "heal_burst": [
+     "DIVINE_JUMP"
+    ],
+    "heal_sustain": [
+     "HEALINGBEAM"
+    ],
+    "knockback_displace": [
+     "DIVINE_JUMP"
+    ],
+    "mobility": [
+     "DIVINE_JUMP"
+    ],
+    "peel": [
+     "DIVINE_JUMP"
+    ],
+    "self_sustain": [
+     "DIVINE_JUMP"
+    ]
+   },
+   "in_game_data": true,
+   "role_hint": "healer",
+   "source": "sheets/holy_line.yaml",
+   "status": "curated",
+   "unique_name": "MAIN_HOLYSTAFF_AVALON"
+  },
+  "MAIN_MACE": {
+   "capabilities": {
+    "engage": 2,
+    "mobility": 2,
+    "peel": 2,
+    "root": 1,
+    "stun": 2,
+    "tankiness": 2
+   },
+   "display_name": "Mace",
+   "evidence": {
+    "engage": [
+     "MACELEAP"
+    ],
+    "mobility": [
+     "MACELEAP"
+    ],
+    "peel": [
+     "GUARDRUNE"
+    ],
+    "root": [
+     "CHARGE_ROOT"
+    ],
+    "stun": [
+     "MACELEAP"
+    ],
+    "tankiness": [
+     "WEAPON_STATS"
+    ]
+   },
+   "in_game_data": true,
+   "role_hint": null,
+   "source": "sheets/mace_line.yaml",
+   "status": "curated",
+   "unique_name": "MAIN_MACE"
+  },
+  "MAIN_RAPIER_MORGANA": {
+   "capabilities": {
+    "burst_st": 2,
+    "catch": 2,
+    "disengage": 2,
+    "execute": 2,
+    "mobility": 3
+   },
+   "display_name": "Bloodletter",
+   "evidence": {},
+   "in_game_data": true,
+   "role_hint": null,
+   "source": "sheets/illustrative/prototype_v0.yaml",
+   "status": "illustrative",
+   "unique_name": "MAIN_RAPIER_MORGANA"
+  }
+ }
+}

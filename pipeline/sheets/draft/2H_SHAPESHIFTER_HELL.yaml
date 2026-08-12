@@ -1,0 +1,24 @@
+# DRAFT — auto-seeded from the structured effect map. Usage: 6 sightings, dominant role: range.
+# Every score is provisional; the comment names the effect and target
+# direction it was derived from. Humans: adjust scores, ADD what the
+# effect layer cannot see (zone_control/burst_aoe/clump_create/heal_burst/
+# anti_dive), then move to sheets/.
+
+- weapon: 2H_SHAPESHIFTER_HELL
+  # Adept's Hellspawn Staff
+  role_hint: range
+  capabilities:
+    - {cap: buff_allies, score: 1, evidence: PASSIVE_SHAPESHIFT_ATTACK_BUFF, review: TODO}   # PASSIVE: Altered Beast — hitpointsmaxbonus+ on ally
+    - {cap: catch, score: 1, evidence: PASSIVE_SHAPESHIFT_Q_CAST_DAMAGE_REDUCE, review: TODO}   # PASSIVE: Intimidating Presence — movespeedbonus- on enemy
+    - {cap: damage_debuff, score: 1, evidence: SHAPE_Q_CONE_MELEE, review: TODO}   # Q: Pulse Shock — magicattackdamagebonus- on enemy; magicspelldamagebonus- on enemy
+    - {cap: disengage, score: 1, evidence: SHAPE_W_TETHERBEAM, review: TODO}   # W: Tether Shift — dash on self
+    - {cap: engage, score: 1, evidence: SHAPE_W_TETHERBEAM, review: TODO}   # W: Tether Shift — dash on self
+    - {cap: heal_sustain, score: 2, evidence: SHAPESHIFT_IMP, review: TODO}   # E: Hellfire Imp Transformation — prose:heal
+    - {cap: mobility, score: 1, evidence: SHAPE_W_TETHERBEAM, review: TODO}   # W: Tether Shift — dash on self
+    - {cap: peel, score: 1, evidence: PASSIVE_SHAPESHIFT_Q_CAST_DAMAGE_REDUCE, review: TODO}   # PASSIVE: Intimidating Presence — movespeedbonus- on enemy
+    - {cap: resist_shred, score: 1, evidence: SHAPE_Q_CONE_MELEE, review: TODO}   # Q: Pulse Shock — magicresistance- on enemy; physicalarmor- on enemy
+    - {cap: root, score: 1, evidence: SHAPE_W_AREA_PULL, review: TODO}   # W: Positional Drift — root on enemy; prose:root
+    - {cap: self_sustain, score: 2, evidence: SHAPESHIFT_IMP, review: TODO}   # E: Hellfire Imp Transformation — prose:heal
+    - {cap: slow, score: 1, evidence: PASSIVE_SHAPESHIFT_Q_CAST_DAMAGE_REDUCE, review: TODO}   # PASSIVE: Intimidating Presence — movespeedbonus- on enemy
+    - {cap: stun, score: 2, evidence: SHAPESHIFT_IMP, review: TODO}   # E: Hellfire Imp Transformation — prose:stun
+    - {cap: tankiness, score: 1, evidence: PASSIVE_SHAPESHIFT_ATTACK_BUFF, review: TODO}   # PASSIVE: Altered Beast — hitpointsmaxbonus+ on ally; hitpointsmaxbonus+ on self

@@ -1,0 +1,36 @@
+# Holy line — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage rank #1 (Hallowfall, 20 sightings) and #2 (Redemption, 15).
+#
+# FINDING — neither Holy weapon has cleanse. The prototype's illustrative sheet
+# gave Hallowfall `cleanse 2`. No Q or W in the holy kit removes CC or debuffs:
+# the W list is PULSINGHEAL / HEALINGBEAM / HOLYHOT / HOLYORB / RESURRECTION, and
+# HOLYHOT grants *immunity to Forced Movement* — prevention, not removal. Holy
+# healers get cleanse from GEAR (Cleric Robe line), which per the evidence rule
+# belongs on the gear sheet, not here. Same error class as the 1H Mace purge.
+#
+# The two staves differ almost entirely in slot E, which is the point of the
+# archetype model: same "healer" role, very different structural contribution.
+
+- weapon: MAIN_HOLYSTAFF_AVALON      # Hallowfall — mobile peeling healer
+  role_hint: healer
+  capabilities:
+    - {cap: heal_burst,         score: 3, evidence: DIVINE_JUMP}   # E: Divine Intervention — burst heal on impact
+    - {cap: heal_sustain,       score: 2, evidence: HEALINGBEAM}   # W: Holy Beam — channeled single-target sustain
+    - {cap: mobility,           score: 3, evidence: DIVINE_JUMP}   # E: leap, immune to dmg/debuff/CC until impact
+    - {cap: disengage,          score: 2, evidence: DIVINE_JUMP}   # E: the immunity window is the escape
+    - {cap: peel,               score: 3, evidence: DIVINE_JUMP}   # E: throws all enemies in radius into the air
+    - {cap: knockback_displace, score: 2, evidence: DIVINE_JUMP}   # E: enemy-directed displacement (verified enemy dir)
+    - {cap: buff_allies,        score: 2, evidence: HOLYHOT}       # W: Holy Blessing — armor + healing received
+    - {cap: self_sustain,       score: 1, evidence: DIVINE_JUMP}   # E heals the caster too
+    # NO cleanse — see file header. NO purge, no damage contribution worth scoring.
+
+- weapon: 2H_HOLYSTAFF_UNDEAD        # Redemption Staff — stationary group healer
+  role_hint: healer
+  capabilities:
+    - {cap: heal_sustain,       score: 3, evidence: CELESTIAL_SPHERE}  # E: bouncing multi-ally sphere
+    - {cap: heal_burst,         score: 2, evidence: HOLYFLASH}         # Q: AoE burst heal
+    - {cap: buff_allies,        score: 2, evidence: HOLYHOT}           # W: Holy Blessing
+    - {cap: peel,               score: 1, evidence: PULSINGHEAL}       # W: Sacred Pulse knocks enemies off an ally
+    - {cap: knockback_displace, score: 1, evidence: PASSIVE_KNOCKBACK_CASTER_HOLYSTAFF}  # PASSIVE: auto-attack knockback
+    # NO mobility — this is the deliberate contrast with Hallowfall (design doc
+    # §2.3): same role, opposite mobility profile. NO cleanse (see header).

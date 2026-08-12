@@ -1,0 +1,24 @@
+# DRAFT — auto-seeded from the structured effect map. Usage: 5 sightings, dominant role: healer.
+# Every score is provisional; the comment names the effect and target
+# direction it was derived from. Humans: adjust scores, ADD what the
+# effect layer cannot see (zone_control/burst_aoe/clump_create/heal_burst/
+# anti_dive), then move to sheets/.
+
+- weapon: MAIN_HOLYSTAFF_MORGANA
+  # Adept's Lifetouch Staff
+  role_hint: healer
+  capabilities:
+    - {cap: buff_allies, score: 2, evidence: HOLYTOUCH, review: TODO}   # E: Holy Touch — immunity:slow on ally; magicattackdamagebonus+ on ally
+    - {cap: catch, score: 2, evidence: HOLYTOUCH, review: TODO}   # E: Holy Touch — immunity:slow on self
+    - {cap: cleanse, score: 2, evidence: HOLYTOUCH, review: TODO}   # E: Holy Touch — remove:crowdcontrol on ally; remove:debuff on ally
+    - {cap: disengage, score: 2, evidence: HOLYTOUCH, review: TODO}   # E: Holy Touch — immunity:root on self; immunity:slow on self
+    - {cap: engage, score: 2, evidence: HOLYTOUCH, review: TODO}   # E: Holy Touch — immunity:root on self; immunity:stun on self
+    - {cap: heal_reduction, score: 1, evidence: HOLYFLASH, review: TODO}   # Q: Holy Flash — healbonus- on enemy
+    - {cap: heal_sustain, score: 2, evidence: HOLYTOUCH, review: TODO}   # E: Holy Touch — prose:heal
+    - {cap: knockback_displace, score: 1, evidence: PASSIVE_KNOCKBACK_CASTER_HOLYSTAFF, review: TODO}   # PASSIVE: Magic Force — knockback on enemy; prose:knockback
+    - {cap: mobility, score: 2, evidence: HOLYTOUCH, review: TODO}   # E: Holy Touch — immunity:root on self; immunity:slow on self
+    - {cap: peel, score: 2, evidence: HOLYTOUCH, review: TODO}   # E: Holy Touch — dr:DRRoot on ally; dr:DRSilence on ally
+    - {cap: self_sustain, score: 2, evidence: HOLYTOUCH, review: TODO}   # E: Holy Touch — prose:heal
+    - {cap: silence, score: 2, evidence: HOLYTOUCH, review: TODO}   # E: Holy Touch — prose:silence
+    - {cap: stun, score: 2, evidence: HOLYTOUCH, review: TODO}   # E: Holy Touch — prose:stun
+    - {cap: tankiness, score: 2, evidence: HOLYTOUCH, review: TODO}   # E: Holy Touch — immunity:silence on self; immunity:stun on self

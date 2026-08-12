@@ -1,0 +1,20 @@
+# DRAFT — auto-seeded from the structured effect map. Usage: 4 sightings, dominant role: support.
+# Every score is provisional; the comment names the effect and target
+# direction it was derived from. Humans: adjust scores, ADD what the
+# effect layer cannot see (zone_control/burst_aoe/clump_create/heal_burst/
+# anti_dive), then move to sheets/.
+
+- weapon: 2H_CURSEDSTAFF_MORGANA
+  # Adept's Damnation Staff
+  role_hint: support
+  capabilities:
+    - {cap: catch, score: 1, evidence: PASSIVE_MOVESPEED_CHANCE_CURSEDSTAFF, review: TODO}   # PASSIVE: Hit and Run — movespeedbonus+ on self
+    - {cap: disengage, score: 1, evidence: PASSIVE_MOVESPEED_CHANCE_CURSEDSTAFF, review: TODO}   # PASSIVE: Hit and Run — movespeedbonus+ on self
+    - {cap: engage, score: 1, evidence: PASSIVE_MOVESPEED_CHANCE_CURSEDSTAFF, review: TODO}   # PASSIVE: Hit and Run — movespeedbonus+ on self
+    - {cap: mobility, score: 1, evidence: PASSIVE_MOVESPEED_CHANCE_CURSEDSTAFF, review: TODO}   # PASSIVE: Hit and Run — movespeedbonus+ on self
+    - {cap: peel, score: 1, evidence: CURSENOVA, review: TODO}   # W: Desecrate — root on enemy
+    - {cap: resist_shred, score: 2, evidence: CURSEULTIMATE, review: TODO}   # E: Cataclysm — magicresistance- on enemy; physicalarmor- on enemy
+    - {cap: root, score: 1, evidence: CURSENOVA, review: TODO}   # W: Desecrate — root on enemy; prose:root
+    - {cap: self_sustain, score: 2, evidence: CURSEULTIMATE, review: TODO}   # E: Cataclysm — prose:shield
+    - {cap: slow, score: 1, evidence: CURSED_SPLAT, review: TODO}   # Q: Cursed Tar — movespeedbonus- on enemy; prose:slow
+    - {cap: tankiness, score: 2, evidence: CURSEULTIMATE, review: TODO}   # E: Cataclysm — prose:shield

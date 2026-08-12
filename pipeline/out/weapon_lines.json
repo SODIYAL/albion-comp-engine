@@ -1,0 +1,4333 @@
+{
+ "2H_ARCANESTAFF": {
+  "example_item": "T4_2H_ARCANESTAFF",
+  "name": "Adept's Great Arcane Staff",
+  "spells": {
+   "e": [
+    "TIME_FREEZE"
+   ],
+   "passive": [
+    "PASSIVE_ATTACKBUFF_ARCANESTAFF",
+    "PASSIVE_ENERGYCHANCE_ARCANESTAFF",
+    "PASSIVE_ARMOR_CASTER_ARCANESTAFF",
+    "PASSIVE_SILENCECHANCE"
+   ],
+   "q": [
+    "ARCANE_CHAIN_MISSILE",
+    "SHIELDFRIENDLY",
+    "MAGICSHOCK"
+   ],
+   "w": [
+    "ENIGMA_BLADE",
+    "CLEANSESPEED2",
+    "FRAZZLE2",
+    "EMPOWERBEAM",
+    "MIMIC"
+   ]
+  },
+  "subcategory": "arcanestaff",
+  "two_handed": true
+ },
+ "2H_ARCANESTAFF_CRYSTAL": {
+  "example_item": "T4_2H_ARCANESTAFF_CRYSTAL",
+  "name": "Adept's Astral Staff",
+  "spells": {
+   "e": [
+    "STARFALL_DOT"
+   ],
+   "passive": [
+    "PASSIVE_ATTACKBUFF_ARCANESTAFF",
+    "PASSIVE_ENERGYCHANCE_ARCANESTAFF",
+    "PASSIVE_ARMOR_CASTER_ARCANESTAFF",
+    "PASSIVE_SILENCECHANCE"
+   ],
+   "q": [
+    "ARCANE_CHAIN_MISSILE",
+    "SHIELDFRIENDLY",
+    "MAGICSHOCK"
+   ],
+   "w": [
+    "ENIGMA_BLADE",
+    "CLEANSESPEED2",
+    "FRAZZLE2",
+    "EMPOWERBEAM",
+    "MIMIC"
+   ]
+  },
+  "subcategory": "arcanestaff",
+  "two_handed": true
+ },
+ "2H_ARCANESTAFF_HELL": {
+  "example_item": "T4_2H_ARCANESTAFF_HELL",
+  "name": "Adept's Occult Staff",
+  "spells": {
+   "e": [
+    "ARCANECORRIDOR"
+   ],
+   "passive": [
+    "PASSIVE_ATTACKBUFF_ARCANESTAFF",
+    "PASSIVE_ENERGYCHANCE_ARCANESTAFF",
+    "PASSIVE_ARMOR_CASTER_ARCANESTAFF",
+    "PASSIVE_SILENCECHANCE"
+   ],
+   "q": [
+    "ARCANE_CHAIN_MISSILE",
+    "SHIELDFRIENDLY",
+    "MAGICSHOCK"
+   ],
+   "w": [
+    "ENIGMA_BLADE",
+    "CLEANSESPEED2",
+    "FRAZZLE2",
+    "EMPOWERBEAM",
+    "MIMIC"
+   ]
+  },
+  "subcategory": "arcanestaff",
+  "two_handed": true
+ },
+ "2H_ARCANE_RINGPAIR_AVALON": {
+  "example_item": "T4_2H_ARCANE_RINGPAIR_AVALON",
+  "name": "Adept's Evensong",
+  "spells": {
+   "e": [
+    "ARCANE_METEOR"
+   ],
+   "passive": [
+    "PASSIVE_ATTACKBUFF_ARCANESTAFF",
+    "PASSIVE_ENERGYCHANCE_ARCANESTAFF",
+    "PASSIVE_ARMOR_CASTER_ARCANESTAFF",
+    "PASSIVE_SILENCECHANCE"
+   ],
+   "q": [
+    "ARCANE_CHAIN_MISSILE",
+    "SHIELDFRIENDLY",
+    "MAGICSHOCK"
+   ],
+   "w": [
+    "ENIGMA_BLADE",
+    "CLEANSESPEED2",
+    "FRAZZLE2",
+    "EMPOWERBEAM",
+    "MIMIC"
+   ]
+  },
+  "subcategory": "arcanestaff",
+  "two_handed": true
+ },
+ "2H_AXE": {
+  "example_item": "T4_2H_AXE",
+  "name": "Adept's Greataxe",
+  "spells": {
+   "e": [
+    "AXEWHIRLWIND2"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_AXE",
+    "PASSIVE_ARMORCHANCE_AXE",
+    "PASSIVE_SPELLPOWER_CHANCE_AXE"
+   ],
+   "q": [
+    "RENDINGSTRIKE",
+    "RENDINGSPIN",
+    "RENDINGCOMBO"
+   ],
+   "w": [
+    "AXESMASH",
+    "AXEBOOST",
+    "AXE_CHARGE",
+    "INNERBLEEDING",
+    "BLADE_AURA"
+   ]
+  },
+  "subcategory": "axe",
+  "two_handed": true
+ },
+ "2H_AXE_AVALON": {
+  "example_item": "T4_2H_AXE_AVALON",
+  "name": "Adept's Realmbreaker",
+  "spells": {
+   "e": [
+    "LETHAL_CLEAVER"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_AXE",
+    "PASSIVE_ARMORCHANCE_AXE",
+    "PASSIVE_SPELLPOWER_CHANCE_AXE"
+   ],
+   "q": [
+    "RENDINGSTRIKE",
+    "RENDINGSPIN",
+    "RENDINGCOMBO"
+   ],
+   "w": [
+    "AXESMASH",
+    "AXEBOOST",
+    "AXE_CHARGE",
+    "INNERBLEEDING",
+    "BLADE_AURA"
+   ]
+  },
+  "subcategory": "axe",
+  "two_handed": true
+ },
+ "2H_BOW": {
+  "example_item": "T4_2H_BOW",
+  "name": "Adept's Bow",
+  "spells": {
+   "e": [
+    "SPEEDARCHER_KITE"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_ENERGYCHANCE_BOW",
+    "PASSIVE_ARMOR_PIERCE_STACK",
+    "PASSIVE_AASPEEDCHANCE_BOW"
+   ],
+   "q": [
+    "MULTISHOT2",
+    "DEADLYSHOT",
+    "POISONARROW"
+   ],
+   "w": [
+    "GROUNDARROW",
+    "JUMPSHOT2",
+    "SPEEDSHOT2",
+    "BURNINGARROWS"
+   ]
+  },
+  "subcategory": "bow",
+  "two_handed": true
+ },
+ "2H_BOW_AVALON": {
+  "example_item": "T4_2H_BOW_AVALON",
+  "name": "Adept's Mistpiercer",
+  "spells": {
+   "e": [
+    "HAWK_SHOT_MULTI1"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_ENERGYCHANCE_BOW",
+    "PASSIVE_ARMOR_PIERCE_STACK",
+    "PASSIVE_AASPEEDCHANCE_BOW"
+   ],
+   "q": [
+    "MULTISHOT2",
+    "DEADLYSHOT",
+    "POISONARROW"
+   ],
+   "w": [
+    "GROUNDARROW",
+    "JUMPSHOT2",
+    "SPEEDSHOT2",
+    "BURNINGARROWS"
+   ]
+  },
+  "subcategory": "bow",
+  "two_handed": true
+ },
+ "2H_BOW_CRYSTAL": {
+  "example_item": "T4_2H_BOW_CRYSTAL",
+  "name": "Adept's Skystrider Bow",
+  "spells": {
+   "e": [
+    "AIR_RAID"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_ENERGYCHANCE_BOW",
+    "PASSIVE_ARMOR_PIERCE_STACK",
+    "PASSIVE_AASPEEDCHANCE_BOW"
+   ],
+   "q": [
+    "MULTISHOT2",
+    "DEADLYSHOT",
+    "POISONARROW"
+   ],
+   "w": [
+    "GROUNDARROW",
+    "JUMPSHOT2",
+    "SPEEDSHOT2",
+    "BURNINGARROWS"
+   ]
+  },
+  "subcategory": "bow",
+  "two_handed": true
+ },
+ "2H_BOW_HELL": {
+  "example_item": "T4_2H_BOW_HELL",
+  "name": "Adept's Wailing Bow",
+  "spells": {
+   "e": [
+    "HELL_ARROW"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_ENERGYCHANCE_BOW",
+    "PASSIVE_ARMOR_PIERCE_STACK",
+    "PASSIVE_AASPEEDCHANCE_BOW"
+   ],
+   "q": [
+    "MULTISHOT2",
+    "DEADLYSHOT",
+    "POISONARROW"
+   ],
+   "w": [
+    "GROUNDARROW",
+    "JUMPSHOT2",
+    "SPEEDSHOT2",
+    "BURNINGARROWS"
+   ]
+  },
+  "subcategory": "bow",
+  "two_handed": true
+ },
+ "2H_BOW_KEEPER": {
+  "example_item": "T4_2H_BOW_KEEPER",
+  "name": "Adept's Bow of Badon",
+  "spells": {
+   "e": [
+    "LIGHTNING_ARROW"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_ENERGYCHANCE_BOW",
+    "PASSIVE_ARMOR_PIERCE_STACK",
+    "PASSIVE_AASPEEDCHANCE_BOW"
+   ],
+   "q": [
+    "MULTISHOT2",
+    "DEADLYSHOT",
+    "POISONARROW"
+   ],
+   "w": [
+    "GROUNDARROW",
+    "JUMPSHOT2",
+    "SPEEDSHOT2",
+    "BURNINGARROWS"
+   ]
+  },
+  "subcategory": "bow",
+  "two_handed": true
+ },
+ "2H_CLAWPAIR": {
+  "example_item": "T4_2H_CLAWPAIR",
+  "name": "Adept's Claws",
+  "spells": {
+   "e": [
+    "DISEMBOWEL"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_DAGGER",
+    "PASSIVE_AASPEEDCHANCE_DAGGER",
+    "PASSIVE_SPELLPOWER_CHANCE_DAGGER"
+   ],
+   "q": [
+    "SUNDERARMOR2",
+    "QDASH",
+    "ASSASSINSPIRIT"
+   ],
+   "w": [
+    "THROWINGBLADES",
+    "GROUNDDASH",
+    "DEEPCUTS",
+    "SKILLSHOT_TELEPORT",
+    "CHAINDASH"
+   ]
+  },
+  "subcategory": "dagger",
+  "two_handed": true
+ },
+ "2H_CLAYMORE": {
+  "example_item": "T4_2H_CLAYMORE",
+  "name": "Adept's Claymore",
+  "spells": {
+   "e": [
+    "CLAYMORECHARGE"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_REDUCE_DMG_SWORD",
+    "PASSIVE_HEROICSTACK",
+    "PASSIVE_ARMORCHANCE_SWORD"
+   ],
+   "q": [
+    "HEROICSTRIKE2",
+    "CLEAVE"
+   ],
+   "w": [
+    "SWORD_SPIN",
+    "INTERRUPT2",
+    "SPLITTINGSLASH",
+    "HAMSTRINGSWORD",
+    "PARRY",
+    "DEFENSERUN"
+   ]
+  },
+  "subcategory": "sword",
+  "two_handed": true
+ },
+ "2H_CLAYMORE_AVALON": {
+  "example_item": "T4_2H_CLAYMORE_AVALON",
+  "name": "Adept's Kingmaker",
+  "spells": {
+   "e": [
+    "MAJESTIC_SMASH"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_REDUCE_DMG_SWORD",
+    "PASSIVE_HEROICSTACK",
+    "PASSIVE_ARMORCHANCE_SWORD"
+   ],
+   "q": [
+    "HEROICSTRIKE2",
+    "CLEAVE"
+   ],
+   "w": [
+    "SWORD_SPIN",
+    "INTERRUPT2",
+    "SPLITTINGSLASH",
+    "HAMSTRINGSWORD",
+    "PARRY",
+    "DEFENSERUN"
+   ]
+  },
+  "subcategory": "sword",
+  "two_handed": true
+ },
+ "2H_CLEAVER_HELL": {
+  "example_item": "T4_2H_CLEAVER_HELL",
+  "name": "Adept's Carving Sword",
+  "spells": {
+   "e": [
+    "CLAYMORESLASH"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_REDUCE_DMG_SWORD",
+    "PASSIVE_HEROICSTACK",
+    "PASSIVE_ARMORCHANCE_SWORD"
+   ],
+   "q": [
+    "HEROICSTRIKE2",
+    "CLEAVE"
+   ],
+   "w": [
+    "SWORD_SPIN",
+    "INTERRUPT2",
+    "SPLITTINGSLASH",
+    "HAMSTRINGSWORD",
+    "PARRY",
+    "DEFENSERUN"
+   ]
+  },
+  "subcategory": "sword",
+  "two_handed": true
+ },
+ "2H_COMBATSTAFF_MORGANA": {
+  "example_item": "T4_2H_COMBATSTAFF_MORGANA",
+  "name": "Adept's Black Monk Staff",
+  "spells": {
+   "e": [
+    "COMBATSTAFF_SLASH"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE_QUARTERSTAFF",
+    "PASSIVE_ENERGYCHANCE_QUARTERSTAFF",
+    "PASSIVE_HEALTHCHANCE_QUARTERSTAFF",
+    "PASSIVE_CCDURATION_CHANCE_QUARTERSTAFF"
+   ],
+   "q": [
+    "CONCUSSIVEBLOW_MULTI_1",
+    "WHIRLING_STAFF",
+    "CARTWHEEL"
+   ],
+   "w": [
+    "QSTAFF_COMBO",
+    "STUNRUN",
+    "QS_WHIRLWIND2",
+    "LAUNCHER",
+    "SEPARATING_SLAM"
+   ]
+  },
+  "subcategory": "quarterstaff",
+  "two_handed": true
+ },
+ "2H_CROSSBOW": {
+  "example_item": "T4_2H_CROSSBOW",
+  "name": "Adept's Crossbow",
+  "spells": {
+   "e": [
+    "SNIPESHOT_CROSSBOW"
+   ],
+   "passive": [
+    "PASSIVE_KNOCKBACKCHANCE",
+    "PASSIVE_CD_RESET_Q",
+    "PASSIVE_ENERGYCHANCE_CROSSBOW",
+    "PASSIVE_SPELLPOWER_CASTER_CROSSBOW"
+   ],
+   "q": [
+    "AUTOFIRE2",
+    "BOLTSHOT"
+   ],
+   "w": [
+    "ACID_BOMB",
+    "SUNDERSHOT",
+    "CALTROPS",
+    "KNOCKBACKSHOT2",
+    "SILENCINGBOLT"
+   ]
+  },
+  "subcategory": "crossbow",
+  "two_handed": true
+ },
+ "2H_CROSSBOWLARGE": {
+  "example_item": "T4_2H_CROSSBOWLARGE",
+  "name": "Adept's Heavy Crossbow",
+  "spells": {
+   "e": [
+    "CROSSBOW_ARMORPIERCER"
+   ],
+   "passive": [
+    "PASSIVE_KNOCKBACKCHANCE",
+    "PASSIVE_CD_RESET_Q",
+    "PASSIVE_ENERGYCHANCE_CROSSBOW",
+    "PASSIVE_SPELLPOWER_CASTER_CROSSBOW"
+   ],
+   "q": [
+    "AUTOFIRE2",
+    "BOLTSHOT"
+   ],
+   "w": [
+    "ACID_BOMB",
+    "SUNDERSHOT",
+    "CALTROPS",
+    "KNOCKBACKSHOT2",
+    "SILENCINGBOLT"
+   ]
+  },
+  "subcategory": "crossbow",
+  "two_handed": true
+ },
+ "2H_CROSSBOWLARGE_MORGANA": {
+  "example_item": "T4_2H_CROSSBOWLARGE_MORGANA",
+  "name": "Adept's Siegebow",
+  "spells": {
+   "e": [
+    "CROSSBOW_CONE_ULTIMATE"
+   ],
+   "passive": [
+    "PASSIVE_KNOCKBACKCHANCE",
+    "PASSIVE_CD_RESET_Q",
+    "PASSIVE_ENERGYCHANCE_CROSSBOW",
+    "PASSIVE_SPELLPOWER_CASTER_CROSSBOW"
+   ],
+   "q": [
+    "AUTOFIRE2",
+    "BOLTSHOT"
+   ],
+   "w": [
+    "ACID_BOMB",
+    "SUNDERSHOT",
+    "CALTROPS",
+    "KNOCKBACKSHOT2",
+    "SILENCINGBOLT"
+   ]
+  },
+  "subcategory": "crossbow",
+  "two_handed": true
+ },
+ "2H_CROSSBOW_CANNON_AVALON": {
+  "example_item": "T4_2H_CROSSBOW_CANNON_AVALON",
+  "name": "Adept's Energy Shaper",
+  "spells": {
+   "e": [
+    "CROSSBOW_DIVINE_SHOT"
+   ],
+   "passive": [
+    "PASSIVE_KNOCKBACKCHANCE",
+    "PASSIVE_CD_RESET_Q",
+    "PASSIVE_ENERGYCHANCE_CROSSBOW",
+    "PASSIVE_SPELLPOWER_CASTER_CROSSBOW"
+   ],
+   "q": [
+    "AUTOFIRE2",
+    "BOLTSHOT"
+   ],
+   "w": [
+    "ACID_BOMB",
+    "SUNDERSHOT",
+    "CALTROPS",
+    "KNOCKBACKSHOT2",
+    "SILENCINGBOLT"
+   ]
+  },
+  "subcategory": "crossbow",
+  "two_handed": true
+ },
+ "2H_CURSEDSTAFF": {
+  "example_item": "T4_2H_CURSEDSTAFF",
+  "name": "Adept's Great Cursed Staff",
+  "spells": {
+   "e": [
+    "AREAOFDECAY"
+   ],
+   "passive": [
+    "PASSIVE_CURSE",
+    "PASSIVE_ENERGYCHANCE_CURSEDSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_CURSEDSTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_CURSEDSTAFF"
+   ],
+   "q": [
+    "CURSEDOT",
+    "CURSEBLADE",
+    "CURSED_SPLAT"
+   ],
+   "w": [
+    "ARMORPIERCER",
+    "CURSENOVA",
+    "CURSEDHANDS_STACKUP",
+    "CURSEDBEAM",
+    "DARKMATTER"
+   ]
+  },
+  "subcategory": "cursestaff",
+  "two_handed": true
+ },
+ "2H_CURSEDSTAFF_MORGANA": {
+  "example_item": "T4_2H_CURSEDSTAFF_MORGANA",
+  "name": "Adept's Damnation Staff",
+  "spells": {
+   "e": [
+    "CURSEULTIMATE"
+   ],
+   "passive": [
+    "PASSIVE_CURSE",
+    "PASSIVE_ENERGYCHANCE_CURSEDSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_CURSEDSTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_CURSEDSTAFF"
+   ],
+   "q": [
+    "CURSEDOT",
+    "CURSEBLADE",
+    "CURSED_SPLAT"
+   ],
+   "w": [
+    "ARMORPIERCER",
+    "CURSENOVA",
+    "CURSEDHANDS_STACKUP",
+    "CURSEDBEAM",
+    "DARKMATTER"
+   ]
+  },
+  "subcategory": "cursestaff",
+  "two_handed": true
+ },
+ "2H_DAGGERPAIR": {
+  "example_item": "T4_2H_DAGGERPAIR",
+  "name": "Adept's Dagger Pair",
+  "spells": {
+   "e": [
+    "EXECUTEDAGGER"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_DAGGER",
+    "PASSIVE_AASPEEDCHANCE_DAGGER",
+    "PASSIVE_SPELLPOWER_CHANCE_DAGGER"
+   ],
+   "q": [
+    "SUNDERARMOR2",
+    "QDASH",
+    "ASSASSINSPIRIT"
+   ],
+   "w": [
+    "THROWINGBLADES",
+    "GROUNDDASH",
+    "DEEPCUTS",
+    "SKILLSHOT_TELEPORT",
+    "CHAINDASH"
+   ]
+  },
+  "subcategory": "dagger",
+  "two_handed": true
+ },
+ "2H_DAGGERPAIR_CRYSTAL": {
+  "example_item": "T4_2H_DAGGERPAIR_CRYSTAL",
+  "name": "Adept's Twin Slayers",
+  "spells": {
+   "e": [
+    "CRYSTAL_DAGGER_BLADE_RING"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_DAGGER",
+    "PASSIVE_AASPEEDCHANCE_DAGGER",
+    "PASSIVE_SPELLPOWER_CHANCE_DAGGER"
+   ],
+   "q": [
+    "SUNDERARMOR2",
+    "QDASH",
+    "ASSASSINSPIRIT"
+   ],
+   "w": [
+    "THROWINGBLADES",
+    "GROUNDDASH",
+    "DEEPCUTS",
+    "SKILLSHOT_TELEPORT",
+    "CHAINDASH"
+   ]
+  },
+  "subcategory": "dagger",
+  "two_handed": true
+ },
+ "2H_DAGGER_KATAR_AVALON": {
+  "example_item": "T4_2H_DAGGER_KATAR_AVALON",
+  "name": "Adept's Bridled Fury",
+  "spells": {
+   "e": [
+    "BACK_SLASH"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_DAGGER",
+    "PASSIVE_AASPEEDCHANCE_DAGGER",
+    "PASSIVE_SPELLPOWER_CHANCE_DAGGER"
+   ],
+   "q": [
+    "SUNDERARMOR2",
+    "QDASH",
+    "ASSASSINSPIRIT"
+   ],
+   "w": [
+    "THROWINGBLADES",
+    "GROUNDDASH",
+    "DEEPCUTS",
+    "SKILLSHOT_TELEPORT",
+    "CHAINDASH"
+   ]
+  },
+  "subcategory": "dagger",
+  "two_handed": true
+ },
+ "2H_DEMONICSTAFF": {
+  "example_item": "T4_2H_DEMONICSTAFF",
+  "name": "Adept's Demonic Staff",
+  "spells": {
+   "e": [
+    "CURSED_WALL"
+   ],
+   "passive": [
+    "PASSIVE_CURSE",
+    "PASSIVE_ENERGYCHANCE_CURSEDSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_CURSEDSTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_CURSEDSTAFF"
+   ],
+   "q": [
+    "CURSEDOT",
+    "CURSEBLADE",
+    "CURSED_SPLAT"
+   ],
+   "w": [
+    "ARMORPIERCER",
+    "CURSENOVA",
+    "CURSEDHANDS_STACKUP",
+    "CURSEDBEAM",
+    "DARKMATTER"
+   ]
+  },
+  "subcategory": "cursestaff",
+  "two_handed": true
+ },
+ "2H_DIVINESTAFF": {
+  "example_item": "T4_2H_DIVINESTAFF",
+  "name": "Adept's Divine Staff",
+  "spells": {
+   "e": [
+    "HOLYSHIELD"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_HOLYSTAFF",
+    "PASSIVE_KNOCKBACK_CASTER_HOLYSTAFF",
+    "PASSIVE_HOLY_ASCENDED"
+   ],
+   "q": [
+    "GENEROUSHEAL",
+    "SMITE_AOE",
+    "HOLYFLASH"
+   ],
+   "w": [
+    "PULSINGHEAL",
+    "HEALINGBEAM",
+    "HOLYHOT",
+    "HOLYORB",
+    "RESURRECTION"
+   ]
+  },
+  "subcategory": "holystaff",
+  "two_handed": true
+ },
+ "2H_DOUBLEBLADEDSTAFF": {
+  "example_item": "T4_2H_DOUBLEBLADEDSTAFF",
+  "name": "Adept's Double Bladed Staff",
+  "spells": {
+   "e": [
+    "DASH_KNOCKBACK"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE_QUARTERSTAFF",
+    "PASSIVE_ENERGYCHANCE_QUARTERSTAFF",
+    "PASSIVE_HEALTHCHANCE_QUARTERSTAFF",
+    "PASSIVE_CCDURATION_CHANCE_QUARTERSTAFF"
+   ],
+   "q": [
+    "CONCUSSIVEBLOW_MULTI_1",
+    "WHIRLING_STAFF",
+    "CARTWHEEL"
+   ],
+   "w": [
+    "QSTAFF_COMBO",
+    "STUNRUN",
+    "QS_WHIRLWIND2",
+    "LAUNCHER",
+    "SEPARATING_SLAM"
+   ]
+  },
+  "subcategory": "quarterstaff",
+  "two_handed": true
+ },
+ "2H_DOUBLEBLADEDSTAFF_CRYSTAL": {
+  "example_item": "T4_2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+  "name": "Adept's Phantom Twinblade",
+  "spells": {
+   "e": [
+    "QS_CRYSTAL_COMBO"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE_QUARTERSTAFF",
+    "PASSIVE_ENERGYCHANCE_QUARTERSTAFF",
+    "PASSIVE_HEALTHCHANCE_QUARTERSTAFF",
+    "PASSIVE_CCDURATION_CHANCE_QUARTERSTAFF"
+   ],
+   "q": [
+    "CONCUSSIVEBLOW_MULTI_1",
+    "WHIRLING_STAFF",
+    "CARTWHEEL"
+   ],
+   "w": [
+    "QSTAFF_COMBO",
+    "STUNRUN",
+    "QS_WHIRLWIND2",
+    "LAUNCHER",
+    "SEPARATING_SLAM"
+   ]
+  },
+  "subcategory": "quarterstaff",
+  "two_handed": true
+ },
+ "2H_DUALAXE_KEEPER": {
+  "example_item": "T4_2H_DUALAXE_KEEPER",
+  "name": "Adept's Bear Paws",
+  "spells": {
+   "e": [
+    "DUALAXE_CRAWLER"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_AXE",
+    "PASSIVE_ARMORCHANCE_AXE",
+    "PASSIVE_SPELLPOWER_CHANCE_AXE"
+   ],
+   "q": [
+    "RENDINGSTRIKE",
+    "RENDINGSPIN",
+    "RENDINGCOMBO"
+   ],
+   "w": [
+    "AXESMASH",
+    "AXEBOOST",
+    "AXE_CHARGE",
+    "INNERBLEEDING",
+    "BLADE_AURA"
+   ]
+  },
+  "subcategory": "axe",
+  "two_handed": true
+ },
+ "2H_DUALCROSSBOW_CRYSTAL": {
+  "example_item": "T4_2H_DUALCROSSBOW_CRYSTAL",
+  "name": "Adept's Arclight Blasters",
+  "spells": {
+   "e": [
+    "CRYSTALXBOW"
+   ],
+   "passive": [
+    "PASSIVE_KNOCKBACKCHANCE",
+    "PASSIVE_CD_RESET_Q",
+    "PASSIVE_ENERGYCHANCE_CROSSBOW",
+    "PASSIVE_SPELLPOWER_CASTER_CROSSBOW"
+   ],
+   "q": [
+    "AUTOFIRE2",
+    "BOLTSHOT"
+   ],
+   "w": [
+    "ACID_BOMB",
+    "SUNDERSHOT",
+    "CALTROPS",
+    "KNOCKBACKSHOT2",
+    "SILENCINGBOLT"
+   ]
+  },
+  "subcategory": "crossbow",
+  "two_handed": true
+ },
+ "2H_DUALCROSSBOW_HELL": {
+  "example_item": "T4_2H_DUALCROSSBOW_HELL",
+  "name": "Adept's Boltcasters",
+  "spells": {
+   "e": [
+    "DUAL_RAPIDFIRE"
+   ],
+   "passive": [
+    "PASSIVE_KNOCKBACKCHANCE",
+    "PASSIVE_CD_RESET_Q",
+    "PASSIVE_ENERGYCHANCE_CROSSBOW",
+    "PASSIVE_SPELLPOWER_CASTER_CROSSBOW"
+   ],
+   "q": [
+    "AUTOFIRE2",
+    "BOLTSHOT"
+   ],
+   "w": [
+    "ACID_BOMB",
+    "SUNDERSHOT",
+    "CALTROPS",
+    "KNOCKBACKSHOT2",
+    "SILENCINGBOLT"
+   ]
+  },
+  "subcategory": "crossbow",
+  "two_handed": true
+ },
+ "2H_DUALHAMMER_HELL": {
+  "example_item": "T4_2H_DUALHAMMER_HELL",
+  "name": "Adept's Forge Hammers",
+  "spells": {
+   "e": [
+    "GIANTSTEPS"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_HAMMER",
+    "PASSIVE_HEALTHCHANCE_HAMMER",
+    "PASSIVE_CCDURATION_CHANCE_HAMMER"
+   ],
+   "q": [
+    "HAMMER_SHOVE",
+    "THREATENINGSTRIKE_HAMMER",
+    "IRONBREAKER"
+   ],
+   "w": [
+    "HAMMER_TREMOR",
+    "CHARGESLOWAE",
+    "GEYSER",
+    "KNOCKOUT",
+    "TAR_RING"
+   ]
+  },
+  "subcategory": "hammer",
+  "two_handed": true
+ },
+ "2H_DUALMACE_AVALON": {
+  "example_item": "T4_2H_DUALMACE_AVALON",
+  "name": "Adept's Oathkeepers",
+  "spells": {
+   "e": [
+    "BLESSED_MACES"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_MACE",
+    "PASSIVE_HEALTHCHANCE_MACE",
+    "PASSIVE_CCDURATION_CHANCE_MACE"
+   ],
+   "q": [
+    "DEFENSIVESLAM",
+    "THREATENINGSMASH",
+    "SACRED_GROUND"
+   ],
+   "w": [
+    "GROUNDSHAKER",
+    "CHARGE_ROOT",
+    "GUARDRUNE",
+    "PBAOE_PULL"
+   ]
+  },
+  "subcategory": "mace",
+  "two_handed": true
+ },
+ "2H_DUALSCIMITAR_UNDEAD": {
+  "example_item": "T4_2H_DUALSCIMITAR_UNDEAD",
+  "name": "Adept's Galatine Pair",
+  "spells": {
+   "e": [
+    "BLADE_AREA"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_REDUCE_DMG_SWORD",
+    "PASSIVE_HEROICSTACK",
+    "PASSIVE_ARMORCHANCE_SWORD"
+   ],
+   "q": [
+    "HEROICSTRIKE2",
+    "CLEAVE"
+   ],
+   "w": [
+    "SWORD_SPIN",
+    "INTERRUPT2",
+    "SPLITTINGSLASH",
+    "HAMSTRINGSWORD",
+    "PARRY",
+    "DEFENSERUN"
+   ]
+  },
+  "subcategory": "sword",
+  "two_handed": true
+ },
+ "2H_DUALSICKLE_UNDEAD": {
+  "example_item": "T4_2H_DUALSICKLE_UNDEAD",
+  "name": "Adept's Deathgivers",
+  "spells": {
+   "e": [
+    "GHOSTSTRIKE"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_DAGGER",
+    "PASSIVE_AASPEEDCHANCE_DAGGER",
+    "PASSIVE_SPELLPOWER_CHANCE_DAGGER"
+   ],
+   "q": [
+    "SUNDERARMOR2",
+    "QDASH",
+    "ASSASSINSPIRIT"
+   ],
+   "w": [
+    "THROWINGBLADES",
+    "GROUNDDASH",
+    "DEEPCUTS",
+    "SKILLSHOT_TELEPORT",
+    "CHAINDASH"
+   ]
+  },
+  "subcategory": "dagger",
+  "two_handed": true
+ },
+ "2H_DUALSWORD": {
+  "example_item": "T4_2H_DUALSWORD",
+  "name": "Adept's Dual Swords",
+  "spells": {
+   "e": [
+    "SPINATTACK"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_REDUCE_DMG_SWORD",
+    "PASSIVE_HEROICSTACK",
+    "PASSIVE_ARMORCHANCE_SWORD"
+   ],
+   "q": [
+    "HEROICSTRIKE2",
+    "CLEAVE"
+   ],
+   "w": [
+    "SWORD_SPIN",
+    "INTERRUPT2",
+    "SPLITTINGSLASH",
+    "HAMSTRINGSWORD",
+    "PARRY",
+    "DEFENSERUN"
+   ]
+  },
+  "subcategory": "sword",
+  "two_handed": true
+ },
+ "2H_ENIGMATICORB_MORGANA": {
+  "example_item": "T4_2H_ENIGMATICORB_MORGANA",
+  "name": "Adept's Malevolent Locus",
+  "spells": {
+   "e": [
+    "VOID"
+   ],
+   "passive": [
+    "PASSIVE_ATTACKBUFF_ARCANESTAFF",
+    "PASSIVE_ENERGYCHANCE_ARCANESTAFF",
+    "PASSIVE_ARMOR_CASTER_ARCANESTAFF",
+    "PASSIVE_SILENCECHANCE"
+   ],
+   "q": [
+    "ARCANE_CHAIN_MISSILE",
+    "SHIELDFRIENDLY",
+    "MAGICSHOCK"
+   ],
+   "w": [
+    "ENIGMA_BLADE",
+    "CLEANSESPEED2",
+    "FRAZZLE2",
+    "EMPOWERBEAM",
+    "MIMIC"
+   ]
+  },
+  "subcategory": "arcanestaff",
+  "two_handed": true
+ },
+ "2H_ENIGMATICSTAFF": {
+  "example_item": "T4_2H_ENIGMATICSTAFF",
+  "name": "Adept's Enigmatic Staff",
+  "spells": {
+   "e": [
+    "INVULNERABILITY"
+   ],
+   "passive": [
+    "PASSIVE_ATTACKBUFF_ARCANESTAFF",
+    "PASSIVE_ENERGYCHANCE_ARCANESTAFF",
+    "PASSIVE_ARMOR_CASTER_ARCANESTAFF",
+    "PASSIVE_SILENCECHANCE"
+   ],
+   "q": [
+    "ARCANE_CHAIN_MISSILE",
+    "SHIELDFRIENDLY",
+    "MAGICSHOCK"
+   ],
+   "w": [
+    "ENIGMA_BLADE",
+    "CLEANSESPEED2",
+    "FRAZZLE2",
+    "EMPOWERBEAM",
+    "MIMIC"
+   ]
+  },
+  "subcategory": "arcanestaff",
+  "two_handed": true
+ },
+ "2H_FIRESTAFF": {
+  "example_item": "T4_2H_FIRESTAFF",
+  "name": "Adept's Great Fire Staff",
+  "spells": {
+   "e": [
+    "FLAMEPILLAR"
+   ],
+   "passive": [
+    "PASSIVE_BURN",
+    "PASSIVE_ENERGYCHANCE_FIRESTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FIRESTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FIRESTAFF"
+   ],
+   "q": [
+    "FIRESTAFFBOLT2",
+    "FIRESTAFFBOLT_AOE",
+    "SEARING_FLAME"
+   ],
+   "w": [
+    "FIRESTAFFIGNITE2_SPREAD",
+    "FIREWALL",
+    "SKILLSHOT_FIREBALL",
+    "FIRECONE",
+    "FIREARTILLERY"
+   ]
+  },
+  "subcategory": "firestaff",
+  "two_handed": true
+ },
+ "2H_FIRESTAFF_HELL": {
+  "example_item": "T4_2H_FIRESTAFF_HELL",
+  "name": "Adept's Brimstone Staff",
+  "spells": {
+   "e": [
+    "METEOR"
+   ],
+   "passive": [
+    "PASSIVE_BURN",
+    "PASSIVE_ENERGYCHANCE_FIRESTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FIRESTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FIRESTAFF"
+   ],
+   "q": [
+    "FIRESTAFFBOLT2",
+    "FIRESTAFFBOLT_AOE",
+    "SEARING_FLAME"
+   ],
+   "w": [
+    "FIRESTAFFIGNITE2_SPREAD",
+    "FIREWALL",
+    "SKILLSHOT_FIREBALL",
+    "FIRECONE",
+    "FIREARTILLERY"
+   ]
+  },
+  "subcategory": "firestaff",
+  "two_handed": true
+ },
+ "2H_FIRE_RINGPAIR_AVALON": {
+  "example_item": "T4_2H_FIRE_RINGPAIR_AVALON",
+  "name": "Adept's Dawnsong",
+  "spells": {
+   "e": [
+    "FIREPHOENIX"
+   ],
+   "passive": [
+    "PASSIVE_BURN",
+    "PASSIVE_ENERGYCHANCE_FIRESTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FIRESTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FIRESTAFF"
+   ],
+   "q": [
+    "FIRESTAFFBOLT2",
+    "FIRESTAFFBOLT_AOE",
+    "SEARING_FLAME"
+   ],
+   "w": [
+    "FIRESTAFFIGNITE2_SPREAD",
+    "FIREWALL",
+    "SKILLSHOT_FIREBALL",
+    "FIRECONE",
+    "FIREARTILLERY"
+   ]
+  },
+  "subcategory": "firestaff",
+  "two_handed": true
+ },
+ "2H_FLAIL": {
+  "example_item": "T4_2H_FLAIL",
+  "name": "Adept's Morning Star",
+  "spells": {
+   "e": [
+    "ROOTFIELD"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_MACE",
+    "PASSIVE_HEALTHCHANCE_MACE",
+    "PASSIVE_CCDURATION_CHANCE_MACE"
+   ],
+   "q": [
+    "DEFENSIVESLAM",
+    "THREATENINGSMASH",
+    "SACRED_GROUND"
+   ],
+   "w": [
+    "GROUNDSHAKER",
+    "CHARGE_ROOT",
+    "GUARDRUNE",
+    "PBAOE_PULL"
+   ]
+  },
+  "subcategory": "mace",
+  "two_handed": true
+ },
+ "2H_FROSTSTAFF": {
+  "example_item": "T4_2H_FROSTSTAFF",
+  "name": "Adept's Great Frost Staff",
+  "spells": {
+   "e": [
+    "HAIL_MULTI_1"
+   ],
+   "passive": [
+    "PASSIVE_FROST",
+    "PASSIVE_ENERGYCHANCE_FROSTSTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FROSTSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FROSTSTAFF"
+   ],
+   "q": [
+    "FROST_BITE",
+    "ICESHARD",
+    "SHATTER_Q"
+   ],
+   "w": [
+    "FROSTBOMB_CASTSLOW",
+    "FROSTBEAM",
+    "FROSTNOVA",
+    "FROST_LANCE",
+    "ICE_SCULPTURE"
+   ]
+  },
+  "subcategory": "froststaff",
+  "two_handed": true
+ },
+ "2H_FROSTSTAFF_CRYSTAL": {
+  "example_item": "T4_2H_FROSTSTAFF_CRYSTAL",
+  "name": "Adept's Arctic Staff",
+  "spells": {
+   "e": [
+    "FROST_TARGETED_CHANNEL"
+   ],
+   "passive": [
+    "PASSIVE_FROST",
+    "PASSIVE_ENERGYCHANCE_FROSTSTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FROSTSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FROSTSTAFF"
+   ],
+   "q": [
+    "FROST_BITE",
+    "ICESHARD",
+    "SHATTER_Q"
+   ],
+   "w": [
+    "FROSTBOMB_CASTSLOW",
+    "FROSTBEAM",
+    "FROSTNOVA",
+    "FROST_LANCE",
+    "ICE_SCULPTURE"
+   ]
+  },
+  "subcategory": "froststaff",
+  "two_handed": true
+ },
+ "2H_GLACIALSTAFF": {
+  "example_item": "T4_2H_GLACIALSTAFF",
+  "name": "Adept's Glacial Staff",
+  "spells": {
+   "e": [
+    "ICESTORM2"
+   ],
+   "passive": [
+    "PASSIVE_FROST",
+    "PASSIVE_ENERGYCHANCE_FROSTSTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FROSTSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FROSTSTAFF"
+   ],
+   "q": [
+    "FROST_BITE",
+    "ICESHARD",
+    "SHATTER_Q"
+   ],
+   "w": [
+    "FROSTBOMB_CASTSLOW",
+    "FROSTBEAM",
+    "FROSTNOVA",
+    "FROST_LANCE",
+    "ICE_SCULPTURE"
+   ]
+  },
+  "subcategory": "froststaff",
+  "two_handed": true
+ },
+ "2H_GLAIVE": {
+  "example_item": "T4_2H_GLAIVE",
+  "name": "Adept's Glaive",
+  "spells": {
+   "e": [
+    "SHOVEL"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_HEALTHCHANCE_SPEAR",
+    "PASSIVE_SPELLPOWER_CHANCE_SPEAR",
+    "PASSIVE_AASPEEDCHANCE_SPEAR"
+   ],
+   "q": [
+    "SPEAR_LUNGE",
+    "SPIRITSPEAR"
+   ],
+   "w": [
+    "FORESTOFSPEARS",
+    "CHARGINGBLADE",
+    "LEGBREAKER",
+    "DEFLECTINGSTANCE",
+    "GROUNDSPEAR",
+    "SKILLSHOT_PULL"
+   ]
+  },
+  "subcategory": "spear",
+  "two_handed": true
+ },
+ "2H_GLAIVE_CRYSTAL": {
+  "example_item": "T4_2H_GLAIVE_CRYSTAL",
+  "name": "Adept's Rift Glaive",
+  "spells": {
+   "e": [
+    "SPEAR_AOE_FINISHER"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_HEALTHCHANCE_SPEAR",
+    "PASSIVE_SPELLPOWER_CHANCE_SPEAR",
+    "PASSIVE_AASPEEDCHANCE_SPEAR"
+   ],
+   "q": [
+    "SPEAR_LUNGE",
+    "SPIRITSPEAR"
+   ],
+   "w": [
+    "FORESTOFSPEARS",
+    "CHARGINGBLADE",
+    "LEGBREAKER",
+    "DEFLECTINGSTANCE",
+    "GROUNDSPEAR",
+    "SKILLSHOT_PULL"
+   ]
+  },
+  "subcategory": "spear",
+  "two_handed": true
+ },
+ "2H_HALBERD": {
+  "example_item": "T4_2H_HALBERD",
+  "name": "Adept's Halberd",
+  "spells": {
+   "e": [
+    "RENDINGSWING"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_AXE",
+    "PASSIVE_ARMORCHANCE_AXE",
+    "PASSIVE_SPELLPOWER_CHANCE_AXE"
+   ],
+   "q": [
+    "RENDINGSTRIKE",
+    "RENDINGSPIN",
+    "RENDINGCOMBO"
+   ],
+   "w": [
+    "AXESMASH",
+    "AXEBOOST",
+    "AXE_CHARGE",
+    "INNERBLEEDING",
+    "BLADE_AURA"
+   ]
+  },
+  "subcategory": "axe",
+  "two_handed": true
+ },
+ "2H_HALBERD_MORGANA": {
+  "example_item": "T4_2H_HALBERD_MORGANA",
+  "name": "Adept's Carrioncaller",
+  "spells": {
+   "e": [
+    "SHOCKWAVE"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_AXE",
+    "PASSIVE_ARMORCHANCE_AXE",
+    "PASSIVE_SPELLPOWER_CHANCE_AXE"
+   ],
+   "q": [
+    "RENDINGSTRIKE",
+    "RENDINGSPIN",
+    "RENDINGCOMBO"
+   ],
+   "w": [
+    "AXESMASH",
+    "AXEBOOST",
+    "AXE_CHARGE",
+    "INNERBLEEDING",
+    "BLADE_AURA"
+   ]
+  },
+  "subcategory": "axe",
+  "two_handed": true
+ },
+ "2H_HAMMER": {
+  "example_item": "T4_2H_HAMMER",
+  "name": "Adept's Great Hammer",
+  "spells": {
+   "e": [
+    "HAMMERTACKLE"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_HAMMER",
+    "PASSIVE_HEALTHCHANCE_HAMMER",
+    "PASSIVE_CCDURATION_CHANCE_HAMMER"
+   ],
+   "q": [
+    "HAMMER_SHOVE",
+    "THREATENINGSTRIKE_HAMMER",
+    "IRONBREAKER"
+   ],
+   "w": [
+    "HAMMER_TREMOR",
+    "CHARGESLOWAE",
+    "GEYSER",
+    "KNOCKOUT",
+    "TAR_RING"
+   ]
+  },
+  "subcategory": "hammer",
+  "two_handed": true
+ },
+ "2H_HAMMER_AVALON": {
+  "example_item": "T4_2H_HAMMER_AVALON",
+  "name": "Adept's Hand of Justice",
+  "spells": {
+   "e": [
+    "SPINNING_SMASH"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_HAMMER",
+    "PASSIVE_HEALTHCHANCE_HAMMER",
+    "PASSIVE_CCDURATION_CHANCE_HAMMER"
+   ],
+   "q": [
+    "HAMMER_SHOVE",
+    "THREATENINGSTRIKE_HAMMER",
+    "IRONBREAKER"
+   ],
+   "w": [
+    "HAMMER_TREMOR",
+    "CHARGESLOWAE",
+    "GEYSER",
+    "KNOCKOUT",
+    "TAR_RING"
+   ]
+  },
+  "subcategory": "hammer",
+  "two_handed": true
+ },
+ "2H_HAMMER_CRYSTAL": {
+  "example_item": "T4_2H_HAMMER_CRYSTAL",
+  "name": "Adept's Truebolt Hammer",
+  "spells": {
+   "e": [
+    "CRYSTALWAVE"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_HAMMER",
+    "PASSIVE_HEALTHCHANCE_HAMMER",
+    "PASSIVE_CCDURATION_CHANCE_HAMMER"
+   ],
+   "q": [
+    "HAMMER_SHOVE",
+    "THREATENINGSTRIKE_HAMMER",
+    "IRONBREAKER"
+   ],
+   "w": [
+    "HAMMER_TREMOR",
+    "CHARGESLOWAE",
+    "GEYSER",
+    "KNOCKOUT",
+    "TAR_RING"
+   ]
+  },
+  "subcategory": "hammer",
+  "two_handed": true
+ },
+ "2H_HAMMER_UNDEAD": {
+  "example_item": "T4_2H_HAMMER_UNDEAD",
+  "name": "Adept's Tombhammer",
+  "spells": {
+   "e": [
+    "UNDEADHAND"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_HAMMER",
+    "PASSIVE_HEALTHCHANCE_HAMMER",
+    "PASSIVE_CCDURATION_CHANCE_HAMMER"
+   ],
+   "q": [
+    "HAMMER_SHOVE",
+    "THREATENINGSTRIKE_HAMMER",
+    "IRONBREAKER"
+   ],
+   "w": [
+    "HAMMER_TREMOR",
+    "CHARGESLOWAE",
+    "GEYSER",
+    "KNOCKOUT",
+    "TAR_RING"
+   ]
+  },
+  "subcategory": "hammer",
+  "two_handed": true
+ },
+ "2H_HARPOON_HELL": {
+  "example_item": "T4_2H_HARPOON_HELL",
+  "name": "Adept's Spirithunter",
+  "spells": {
+   "e": [
+    "TAINTED_STEEL"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_HEALTHCHANCE_SPEAR",
+    "PASSIVE_SPELLPOWER_CHANCE_SPEAR",
+    "PASSIVE_AASPEEDCHANCE_SPEAR"
+   ],
+   "q": [
+    "SPEAR_LUNGE",
+    "SPIRITSPEAR"
+   ],
+   "w": [
+    "FORESTOFSPEARS",
+    "CHARGINGBLADE",
+    "LEGBREAKER",
+    "DEFLECTINGSTANCE",
+    "GROUNDSPEAR",
+    "SKILLSHOT_PULL"
+   ]
+  },
+  "subcategory": "spear",
+  "two_handed": true
+ },
+ "2H_HOLYSTAFF": {
+  "example_item": "T4_2H_HOLYSTAFF",
+  "name": "Adept's Great Holy Staff",
+  "spells": {
+   "e": [
+    "HOLYEXPLOSION"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_HOLYSTAFF",
+    "PASSIVE_KNOCKBACK_CASTER_HOLYSTAFF",
+    "PASSIVE_HOLY_ASCENDED"
+   ],
+   "q": [
+    "GENEROUSHEAL",
+    "SMITE_AOE",
+    "HOLYFLASH"
+   ],
+   "w": [
+    "PULSINGHEAL",
+    "HEALINGBEAM",
+    "HOLYHOT",
+    "HOLYORB",
+    "RESURRECTION"
+   ]
+  },
+  "subcategory": "holystaff",
+  "two_handed": true
+ },
+ "2H_HOLYSTAFF_CRYSTAL": {
+  "example_item": "T4_2H_HOLYSTAFF_CRYSTAL",
+  "name": "Adept's Exalted Staff",
+  "spells": {
+   "e": [
+    "HOLY_DISPEL"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_HOLYSTAFF",
+    "PASSIVE_KNOCKBACK_CASTER_HOLYSTAFF",
+    "PASSIVE_HOLY_ASCENDED"
+   ],
+   "q": [
+    "GENEROUSHEAL",
+    "SMITE_AOE",
+    "HOLYFLASH"
+   ],
+   "w": [
+    "PULSINGHEAL",
+    "HEALINGBEAM",
+    "HOLYHOT",
+    "HOLYORB",
+    "RESURRECTION"
+   ]
+  },
+  "subcategory": "holystaff",
+  "two_handed": true
+ },
+ "2H_HOLYSTAFF_HELL": {
+  "example_item": "T4_2H_HOLYSTAFF_HELL",
+  "name": "Adept's Fallen Staff",
+  "spells": {
+   "e": [
+    "HOLY_ULTIMATE"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_HOLYSTAFF",
+    "PASSIVE_KNOCKBACK_CASTER_HOLYSTAFF",
+    "PASSIVE_HOLY_ASCENDED"
+   ],
+   "q": [
+    "GENEROUSHEAL",
+    "SMITE_AOE",
+    "HOLYFLASH"
+   ],
+   "w": [
+    "PULSINGHEAL",
+    "HEALINGBEAM",
+    "HOLYHOT",
+    "HOLYORB",
+    "RESURRECTION"
+   ]
+  },
+  "subcategory": "holystaff",
+  "two_handed": true
+ },
+ "2H_HOLYSTAFF_UNDEAD": {
+  "example_item": "T4_2H_HOLYSTAFF_UNDEAD",
+  "name": "Adept's Redemption Staff",
+  "spells": {
+   "e": [
+    "CELESTIAL_SPHERE"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_HOLYSTAFF",
+    "PASSIVE_KNOCKBACK_CASTER_HOLYSTAFF",
+    "PASSIVE_HOLY_ASCENDED"
+   ],
+   "q": [
+    "GENEROUSHEAL",
+    "SMITE_AOE",
+    "HOLYFLASH"
+   ],
+   "w": [
+    "PULSINGHEAL",
+    "HEALINGBEAM",
+    "HOLYHOT",
+    "HOLYORB",
+    "RESURRECTION"
+   ]
+  },
+  "subcategory": "holystaff",
+  "two_handed": true
+ },
+ "2H_ICECRYSTAL_UNDEAD": {
+  "example_item": "T4_2H_ICECRYSTAL_UNDEAD",
+  "name": "Adept's Permafrost Prism",
+  "spells": {
+   "e": [
+    "FROST_ULTIMATE"
+   ],
+   "passive": [
+    "PASSIVE_FROST",
+    "PASSIVE_ENERGYCHANCE_FROSTSTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FROSTSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FROSTSTAFF"
+   ],
+   "q": [
+    "FROST_BITE",
+    "ICESHARD",
+    "SHATTER_Q"
+   ],
+   "w": [
+    "FROSTBOMB_CASTSLOW",
+    "FROSTBEAM",
+    "FROSTNOVA",
+    "FROST_LANCE",
+    "ICE_SCULPTURE"
+   ]
+  },
+  "subcategory": "froststaff",
+  "two_handed": true
+ },
+ "2H_ICEGAUNTLETS_HELL": {
+  "example_item": "T4_2H_ICEGAUNTLETS_HELL",
+  "name": "Adept's Icicle Staff",
+  "spells": {
+   "e": [
+    "GLACIALFIELD"
+   ],
+   "passive": [
+    "PASSIVE_FROST",
+    "PASSIVE_ENERGYCHANCE_FROSTSTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FROSTSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FROSTSTAFF"
+   ],
+   "q": [
+    "FROST_BITE",
+    "ICESHARD",
+    "SHATTER_Q"
+   ],
+   "w": [
+    "FROSTBOMB_CASTSLOW",
+    "FROSTBEAM",
+    "FROSTNOVA",
+    "FROST_LANCE",
+    "ICE_SCULPTURE"
+   ]
+  },
+  "subcategory": "froststaff",
+  "two_handed": true
+ },
+ "2H_INFERNOSTAFF": {
+  "example_item": "T4_2H_INFERNOSTAFF",
+  "name": "Adept's Infernal Staff",
+  "spells": {
+   "e": [
+    "HUMAN_TORCH"
+   ],
+   "passive": [
+    "PASSIVE_BURN",
+    "PASSIVE_ENERGYCHANCE_FIRESTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FIRESTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FIRESTAFF"
+   ],
+   "q": [
+    "FIRESTAFFBOLT2",
+    "FIRESTAFFBOLT_AOE",
+    "SEARING_FLAME"
+   ],
+   "w": [
+    "FIRESTAFFIGNITE2_SPREAD",
+    "FIREWALL",
+    "SKILLSHOT_FIREBALL",
+    "FIRECONE",
+    "FIREARTILLERY"
+   ]
+  },
+  "subcategory": "firestaff",
+  "two_handed": true
+ },
+ "2H_INFERNOSTAFF_MORGANA": {
+  "example_item": "T4_2H_INFERNOSTAFF_MORGANA",
+  "name": "Adept's Blazing Staff",
+  "spells": {
+   "e": [
+    "FLAMETORNADO"
+   ],
+   "passive": [
+    "PASSIVE_BURN",
+    "PASSIVE_ENERGYCHANCE_FIRESTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FIRESTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FIRESTAFF"
+   ],
+   "q": [
+    "FIRESTAFFBOLT2",
+    "FIRESTAFFBOLT_AOE",
+    "SEARING_FLAME"
+   ],
+   "w": [
+    "FIRESTAFFIGNITE2_SPREAD",
+    "FIREWALL",
+    "SKILLSHOT_FIREBALL",
+    "FIRECONE",
+    "FIREARTILLERY"
+   ]
+  },
+  "subcategory": "firestaff",
+  "two_handed": true
+ },
+ "2H_IRONCLADEDSTAFF": {
+  "example_item": "T4_2H_IRONCLADEDSTAFF",
+  "name": "Adept's Iron-clad Staff",
+  "spells": {
+   "e": [
+    "QSWHIRLWIND"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE_QUARTERSTAFF",
+    "PASSIVE_ENERGYCHANCE_QUARTERSTAFF",
+    "PASSIVE_HEALTHCHANCE_QUARTERSTAFF",
+    "PASSIVE_CCDURATION_CHANCE_QUARTERSTAFF"
+   ],
+   "q": [
+    "CONCUSSIVEBLOW_MULTI_1",
+    "WHIRLING_STAFF",
+    "CARTWHEEL"
+   ],
+   "w": [
+    "QSTAFF_COMBO",
+    "STUNRUN",
+    "QS_WHIRLWIND2",
+    "LAUNCHER",
+    "SEPARATING_SLAM"
+   ]
+  },
+  "subcategory": "quarterstaff",
+  "two_handed": true
+ },
+ "2H_IRONGAUNTLETS_HELL": {
+  "example_item": "T4_2H_IRONGAUNTLETS_HELL",
+  "name": "Adept's Black Hands",
+  "spells": {
+   "e": [
+    "PUNCHCOMBO"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_DAGGER",
+    "PASSIVE_AASPEEDCHANCE_DAGGER",
+    "PASSIVE_SPELLPOWER_CHANCE_DAGGER"
+   ],
+   "q": [
+    "SUNDERARMOR2",
+    "QDASH",
+    "ASSASSINSPIRIT"
+   ],
+   "w": [
+    "THROWINGBLADES",
+    "GROUNDDASH",
+    "DEEPCUTS",
+    "SKILLSHOT_TELEPORT",
+    "CHAINDASH"
+   ]
+  },
+  "subcategory": "knuckles",
+  "two_handed": true
+ },
+ "2H_KNUCKLES_AVALON": {
+  "example_item": "T4_2H_KNUCKLES_AVALON",
+  "name": "Adept's Fists of Avalon",
+  "spells": {
+   "e": [
+    "TRIPLECOMBO_DIVEKICK"
+   ],
+   "passive": [
+    "PASSIVE_KNUCKLE_RAGE",
+    "PASSIVE_KNUCKLE_RUSHDOWN",
+    "PASSIVE_KNUCKLE_COMBOBREAKER",
+    "PASSIVE_KNUCKLE_BRAWLER_SPEED"
+   ],
+   "q": [
+    "CREATE_OPENING",
+    "DASHKICK",
+    "CROSSSTEP_ROUNDHOUSE",
+    "SHOCKWAVE_PUNCH"
+   ],
+   "w": [
+    "TRIPLE_KICK",
+    "BACKHAND_KNOCKBACK",
+    "KNUCKLE_COUNTER",
+    "KNUCKLECOMBO"
+   ]
+  },
+  "subcategory": "knuckles",
+  "two_handed": true
+ },
+ "2H_KNUCKLES_CRYSTAL": {
+  "example_item": "T4_2H_KNUCKLES_CRYSTAL",
+  "name": "Adept's Forcepulse Bracers",
+  "spells": {
+   "e": [
+    "CONEPUNCH2"
+   ],
+   "passive": [
+    "PASSIVE_KNUCKLE_RAGE",
+    "PASSIVE_KNUCKLE_RUSHDOWN",
+    "PASSIVE_KNUCKLE_COMBOBREAKER",
+    "PASSIVE_KNUCKLE_BRAWLER_SPEED"
+   ],
+   "q": [
+    "CREATE_OPENING",
+    "DASHKICK",
+    "CROSSSTEP_ROUNDHOUSE",
+    "SHOCKWAVE_PUNCH"
+   ],
+   "w": [
+    "TRIPLE_KICK",
+    "BACKHAND_KNOCKBACK",
+    "KNUCKLE_COUNTER",
+    "KNUCKLECOMBO"
+   ]
+  },
+  "subcategory": "knuckles",
+  "two_handed": true
+ },
+ "2H_KNUCKLES_HELL": {
+  "example_item": "T4_2H_KNUCKLES_HELL",
+  "name": "Adept's Hellfire Hands",
+  "spells": {
+   "e": [
+    "BOULDER_TOSS"
+   ],
+   "passive": [
+    "PASSIVE_KNUCKLE_BRAWLER",
+    "PASSIVE_KNUCKLE_RAGE",
+    "PASSIVE_KNUCKLE_RUSHDOWN",
+    "PASSIVE_KNUCKLE_COMBOBREAKER"
+   ],
+   "q": [
+    "CREATE_OPENING",
+    "DASHKICK",
+    "CROSSSTEP_ROUNDHOUSE",
+    "SHOCKWAVE_PUNCH"
+   ],
+   "w": [
+    "TRIPLE_KICK",
+    "BACKHAND_KNOCKBACK",
+    "KNUCKLE_COUNTER",
+    "KNUCKLECOMBO"
+   ]
+  },
+  "subcategory": "knuckles",
+  "two_handed": true
+ },
+ "2H_KNUCKLES_KEEPER": {
+  "example_item": "T4_2H_KNUCKLES_KEEPER",
+  "name": "Adept's Ursine Maulers",
+  "spells": {
+   "e": [
+    "PUMMELING_STRIKES"
+   ],
+   "passive": [
+    "PASSIVE_KNUCKLE_BRAWLER",
+    "PASSIVE_KNUCKLE_RAGE",
+    "PASSIVE_KNUCKLE_RUSHDOWN",
+    "PASSIVE_KNUCKLE_COMBOBREAKER"
+   ],
+   "q": [
+    "CREATE_OPENING",
+    "DASHKICK",
+    "CROSSSTEP_ROUNDHOUSE",
+    "SHOCKWAVE_PUNCH"
+   ],
+   "w": [
+    "TRIPLE_KICK",
+    "BACKHAND_KNOCKBACK",
+    "KNUCKLE_COUNTER",
+    "KNUCKLECOMBO"
+   ]
+  },
+  "subcategory": "knuckles",
+  "two_handed": true
+ },
+ "2H_KNUCKLES_MORGANA": {
+  "example_item": "T4_2H_KNUCKLES_MORGANA",
+  "name": "Adept's Ravenstrike Cestus",
+  "spells": {
+   "e": [
+    "GROWING_PUNCH"
+   ],
+   "passive": [
+    "PASSIVE_KNUCKLE_RAGE",
+    "PASSIVE_KNUCKLE_RUSHDOWN",
+    "PASSIVE_KNUCKLE_COMBOBREAKER",
+    "PASSIVE_KNUCKLE_BRAWLER_SPEED"
+   ],
+   "q": [
+    "CREATE_OPENING",
+    "DASHKICK",
+    "CROSSSTEP_ROUNDHOUSE",
+    "SHOCKWAVE_PUNCH"
+   ],
+   "w": [
+    "TRIPLE_KICK",
+    "BACKHAND_KNOCKBACK",
+    "KNUCKLE_COUNTER",
+    "KNUCKLECOMBO"
+   ]
+  },
+  "subcategory": "knuckles",
+  "two_handed": true
+ },
+ "2H_KNUCKLES_SET1": {
+  "example_item": "T4_2H_KNUCKLES_SET1",
+  "name": "Adept's Brawler Gloves",
+  "spells": {
+   "e": [
+    "BLAZING_GEYSER"
+   ],
+   "passive": [
+    "PASSIVE_KNUCKLE_BRAWLER",
+    "PASSIVE_KNUCKLE_RAGE",
+    "PASSIVE_KNUCKLE_RUSHDOWN",
+    "PASSIVE_KNUCKLE_COMBOBREAKER"
+   ],
+   "q": [
+    "CREATE_OPENING",
+    "DASHKICK",
+    "CROSSSTEP_ROUNDHOUSE",
+    "SHOCKWAVE_PUNCH"
+   ],
+   "w": [
+    "TRIPLE_KICK",
+    "BACKHAND_KNOCKBACK",
+    "KNUCKLE_COUNTER",
+    "KNUCKLECOMBO"
+   ]
+  },
+  "subcategory": "knuckles",
+  "two_handed": true
+ },
+ "2H_KNUCKLES_SET2": {
+  "example_item": "T4_2H_KNUCKLES_SET2",
+  "name": "Adept's Battle Bracers",
+  "spells": {
+   "e": [
+    "DIVEPUNCH_RISE"
+   ],
+   "passive": [
+    "PASSIVE_KNUCKLE_RAGE",
+    "PASSIVE_KNUCKLE_RUSHDOWN",
+    "PASSIVE_KNUCKLE_COMBOBREAKER",
+    "PASSIVE_KNUCKLE_BRAWLER_SPEED"
+   ],
+   "q": [
+    "CREATE_OPENING",
+    "DASHKICK",
+    "CROSSSTEP_ROUNDHOUSE",
+    "SHOCKWAVE_PUNCH"
+   ],
+   "w": [
+    "TRIPLE_KICK",
+    "BACKHAND_KNOCKBACK",
+    "KNUCKLE_COUNTER",
+    "KNUCKLECOMBO"
+   ]
+  },
+  "subcategory": "knuckles",
+  "two_handed": true
+ },
+ "2H_KNUCKLES_SET3": {
+  "example_item": "T4_2H_KNUCKLES_SET3",
+  "name": "Adept's Spiked Gauntlets",
+  "spells": {
+   "e": [
+    "IMPULSE_PUNCH"
+   ],
+   "passive": [
+    "PASSIVE_KNUCKLE_BRAWLER",
+    "PASSIVE_KNUCKLE_RAGE",
+    "PASSIVE_KNUCKLE_RUSHDOWN",
+    "PASSIVE_KNUCKLE_COMBOBREAKER"
+   ],
+   "q": [
+    "CREATE_OPENING",
+    "DASHKICK",
+    "CROSSSTEP_ROUNDHOUSE",
+    "SHOCKWAVE_PUNCH"
+   ],
+   "w": [
+    "TRIPLE_KICK",
+    "BACKHAND_KNOCKBACK",
+    "KNUCKLE_COUNTER",
+    "KNUCKLECOMBO"
+   ]
+  },
+  "subcategory": "knuckles",
+  "two_handed": true
+ },
+ "2H_LONGBOW": {
+  "example_item": "T4_2H_LONGBOW",
+  "name": "Adept's Longbow",
+  "spells": {
+   "e": [
+    "ARROWRAIN"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_ENERGYCHANCE_BOW",
+    "PASSIVE_ARMOR_PIERCE_STACK",
+    "PASSIVE_AASPEEDCHANCE_BOW"
+   ],
+   "q": [
+    "MULTISHOT2",
+    "DEADLYSHOT",
+    "POISONARROW"
+   ],
+   "w": [
+    "GROUNDARROW",
+    "JUMPSHOT2",
+    "SPEEDSHOT2",
+    "BURNINGARROWS"
+   ]
+  },
+  "subcategory": "bow",
+  "two_handed": true
+ },
+ "2H_LONGBOW_UNDEAD": {
+  "example_item": "T4_2H_LONGBOW_UNDEAD",
+  "name": "Adept's Whispering Bow",
+  "spells": {
+   "e": [
+    "UNDEADARROWS"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_ENERGYCHANCE_BOW",
+    "PASSIVE_ARMOR_PIERCE_STACK",
+    "PASSIVE_AASPEEDCHANCE_BOW"
+   ],
+   "q": [
+    "MULTISHOT2",
+    "DEADLYSHOT",
+    "POISONARROW"
+   ],
+   "w": [
+    "GROUNDARROW",
+    "JUMPSHOT2",
+    "SPEEDSHOT2",
+    "BURNINGARROWS"
+   ]
+  },
+  "subcategory": "bow",
+  "two_handed": true
+ },
+ "2H_MACE": {
+  "example_item": "T4_2H_MACE",
+  "name": "Adept's Heavy Mace",
+  "spells": {
+   "e": [
+    "SHRIEKMACE"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_MACE",
+    "PASSIVE_HEALTHCHANCE_MACE",
+    "PASSIVE_CCDURATION_CHANCE_MACE"
+   ],
+   "q": [
+    "DEFENSIVESLAM",
+    "THREATENINGSMASH",
+    "SACRED_GROUND"
+   ],
+   "w": [
+    "GROUNDSHAKER",
+    "CHARGE_ROOT",
+    "GUARDRUNE",
+    "PBAOE_PULL"
+   ]
+  },
+  "subcategory": "mace",
+  "two_handed": true
+ },
+ "2H_MACE_MORGANA": {
+  "example_item": "T4_2H_MACE_MORGANA",
+  "name": "Adept's Camlann Mace",
+  "spells": {
+   "e": [
+    "VACUUMSLASH"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_MACE",
+    "PASSIVE_HEALTHCHANCE_MACE",
+    "PASSIVE_CCDURATION_CHANCE_MACE"
+   ],
+   "q": [
+    "DEFENSIVESLAM",
+    "THREATENINGSMASH",
+    "SACRED_GROUND"
+   ],
+   "w": [
+    "GROUNDSHAKER",
+    "CHARGE_ROOT",
+    "GUARDRUNE",
+    "PBAOE_PULL"
+   ]
+  },
+  "subcategory": "mace",
+  "two_handed": true
+ },
+ "2H_NATURESTAFF": {
+  "example_item": "T4_2H_NATURESTAFF",
+  "name": "Adept's Great Nature Staff",
+  "spells": {
+   "e": [
+    "BRIEROFLIFE"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_NATURESTAFF",
+    "PASSIVE_ARMOR_CASTER_NATURESTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_NATURESTAFF"
+   ],
+   "q": [
+    "REJUVENATION",
+    "THORNSAREA",
+    "REJUVMUSHROOM_GRENADE"
+   ],
+   "w": [
+    "BRAMBLESEED",
+    "REANIMATE",
+    "NATURERESILIENCE",
+    "CLEANSEHEAL",
+    "REJUVENATING_BREEZE"
+   ]
+  },
+  "subcategory": "naturestaff",
+  "two_handed": true
+ },
+ "2H_NATURESTAFF_HELL": {
+  "example_item": "T4_2H_NATURESTAFF_HELL",
+  "name": "Adept's Blight Staff",
+  "spells": {
+   "e": [
+    "ROTTENVINES"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_NATURESTAFF",
+    "PASSIVE_ARMOR_CASTER_NATURESTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_NATURESTAFF"
+   ],
+   "q": [
+    "REJUVENATION",
+    "THORNSAREA",
+    "REJUVMUSHROOM_GRENADE"
+   ],
+   "w": [
+    "BRAMBLESEED",
+    "REANIMATE",
+    "NATURERESILIENCE",
+    "CLEANSEHEAL",
+    "REJUVENATING_BREEZE"
+   ]
+  },
+  "subcategory": "naturestaff",
+  "two_handed": true
+ },
+ "2H_NATURESTAFF_KEEPER": {
+  "example_item": "T4_2H_NATURESTAFF_KEEPER",
+  "name": "Adept's Rampant Staff",
+  "spells": {
+   "e": [
+    "SPIRITANIMAL"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_NATURESTAFF",
+    "PASSIVE_ARMOR_CASTER_NATURESTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_NATURESTAFF"
+   ],
+   "q": [
+    "REJUVENATION",
+    "THORNSAREA",
+    "REJUVMUSHROOM_GRENADE"
+   ],
+   "w": [
+    "BRAMBLESEED",
+    "REANIMATE",
+    "NATURERESILIENCE",
+    "CLEANSEHEAL",
+    "REJUVENATING_BREEZE"
+   ]
+  },
+  "subcategory": "naturestaff",
+  "two_handed": true
+ },
+ "2H_POLEHAMMER": {
+  "example_item": "T4_2H_POLEHAMMER",
+  "name": "Adept's Polehammer",
+  "spells": {
+   "e": [
+    "GROUNDBREAKER2"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_HAMMER",
+    "PASSIVE_HEALTHCHANCE_HAMMER",
+    "PASSIVE_CCDURATION_CHANCE_HAMMER"
+   ],
+   "q": [
+    "HAMMER_SHOVE",
+    "THREATENINGSTRIKE_HAMMER",
+    "IRONBREAKER"
+   ],
+   "w": [
+    "HAMMER_TREMOR",
+    "CHARGESLOWAE",
+    "GEYSER",
+    "KNOCKOUT",
+    "TAR_RING"
+   ]
+  },
+  "subcategory": "hammer",
+  "two_handed": true
+ },
+ "2H_QUARTERSTAFF": {
+  "example_item": "T4_2H_QUARTERSTAFF",
+  "name": "Adept's Quarterstaff",
+  "spells": {
+   "e": [
+    "VAULT_ATTACK"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE_QUARTERSTAFF",
+    "PASSIVE_ENERGYCHANCE_QUARTERSTAFF",
+    "PASSIVE_HEALTHCHANCE_QUARTERSTAFF",
+    "PASSIVE_CCDURATION_CHANCE_QUARTERSTAFF"
+   ],
+   "q": [
+    "CONCUSSIVEBLOW_MULTI_1",
+    "WHIRLING_STAFF",
+    "CARTWHEEL"
+   ],
+   "w": [
+    "QSTAFF_COMBO",
+    "STUNRUN",
+    "QS_WHIRLWIND2",
+    "LAUNCHER",
+    "SEPARATING_SLAM"
+   ]
+  },
+  "subcategory": "quarterstaff",
+  "two_handed": true
+ },
+ "2H_QUARTERSTAFF_AVALON": {
+  "example_item": "T4_2H_QUARTERSTAFF_AVALON",
+  "name": "Adept's Grailseeker",
+  "spells": {
+   "e": [
+    "SOULSHAKER"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE_QUARTERSTAFF",
+    "PASSIVE_ENERGYCHANCE_QUARTERSTAFF",
+    "PASSIVE_HEALTHCHANCE_QUARTERSTAFF",
+    "PASSIVE_CCDURATION_CHANCE_QUARTERSTAFF"
+   ],
+   "q": [
+    "CONCUSSIVEBLOW_MULTI_1",
+    "WHIRLING_STAFF",
+    "CARTWHEEL"
+   ],
+   "w": [
+    "QSTAFF_COMBO",
+    "STUNRUN",
+    "QS_WHIRLWIND2",
+    "LAUNCHER",
+    "SEPARATING_SLAM"
+   ]
+  },
+  "subcategory": "quarterstaff",
+  "two_handed": true
+ },
+ "2H_RAM_KEEPER": {
+  "example_item": "T4_2H_RAM_KEEPER",
+  "name": "Adept's Grovekeeper",
+  "spells": {
+   "e": [
+    "RAM_CHARGE"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_HAMMER",
+    "PASSIVE_HEALTHCHANCE_HAMMER",
+    "PASSIVE_CCDURATION_CHANCE_HAMMER"
+   ],
+   "q": [
+    "HAMMER_SHOVE",
+    "THREATENINGSTRIKE_HAMMER",
+    "IRONBREAKER"
+   ],
+   "w": [
+    "HAMMER_TREMOR",
+    "CHARGESLOWAE",
+    "GEYSER",
+    "KNOCKOUT",
+    "TAR_RING"
+   ]
+  },
+  "subcategory": "hammer",
+  "two_handed": true
+ },
+ "2H_REPEATINGCROSSBOW_UNDEAD": {
+  "example_item": "T4_2H_REPEATINGCROSSBOW_UNDEAD",
+  "name": "Adept's Weeping Repeater",
+  "spells": {
+   "e": [
+    "GROUNDMINE"
+   ],
+   "passive": [
+    "PASSIVE_KNOCKBACKCHANCE",
+    "PASSIVE_CD_RESET_Q",
+    "PASSIVE_ENERGYCHANCE_CROSSBOW",
+    "PASSIVE_SPELLPOWER_CASTER_CROSSBOW"
+   ],
+   "q": [
+    "AUTOFIRE2",
+    "BOLTSHOT"
+   ],
+   "w": [
+    "ACID_BOMB",
+    "SUNDERSHOT",
+    "CALTROPS",
+    "KNOCKBACKSHOT2",
+    "SILENCINGBOLT"
+   ]
+  },
+  "subcategory": "crossbow",
+  "two_handed": true
+ },
+ "2H_ROCKSTAFF_KEEPER": {
+  "example_item": "T4_2H_ROCKSTAFF_KEEPER",
+  "name": "Adept's Staff of Balance",
+  "spells": {
+   "e": [
+    "QS_SLOWROPE"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE_QUARTERSTAFF",
+    "PASSIVE_ENERGYCHANCE_QUARTERSTAFF",
+    "PASSIVE_HEALTHCHANCE_QUARTERSTAFF",
+    "PASSIVE_CCDURATION_CHANCE_QUARTERSTAFF"
+   ],
+   "q": [
+    "CONCUSSIVEBLOW_MULTI_1",
+    "WHIRLING_STAFF",
+    "CARTWHEEL"
+   ],
+   "w": [
+    "QSTAFF_COMBO",
+    "STUNRUN",
+    "QS_WHIRLWIND2",
+    "LAUNCHER",
+    "SEPARATING_SLAM"
+   ]
+  },
+  "subcategory": "quarterstaff",
+  "two_handed": true
+ },
+ "2H_SCYTHE_CRYSTAL": {
+  "example_item": "T4_2H_SCYTHE_CRYSTAL",
+  "name": "Adept's Crystal Reaper",
+  "spells": {
+   "e": [
+    "CRYSTAL_SCYTHE_DASH_ZONE"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_AXE",
+    "PASSIVE_ARMORCHANCE_AXE",
+    "PASSIVE_SPELLPOWER_CHANCE_AXE"
+   ],
+   "q": [
+    "RENDINGSTRIKE",
+    "RENDINGSPIN",
+    "RENDINGCOMBO"
+   ],
+   "w": [
+    "AXESMASH",
+    "AXEBOOST",
+    "AXE_CHARGE",
+    "INNERBLEEDING",
+    "BLADE_AURA"
+   ]
+  },
+  "subcategory": "axe",
+  "two_handed": true
+ },
+ "2H_SCYTHE_HELL": {
+  "example_item": "T4_2H_SCYTHE_HELL",
+  "name": "Adept's Infernal Scythe",
+  "spells": {
+   "e": [
+    "SCYTHESWING"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_AXE",
+    "PASSIVE_ARMORCHANCE_AXE",
+    "PASSIVE_SPELLPOWER_CHANCE_AXE"
+   ],
+   "q": [
+    "RENDINGSTRIKE",
+    "RENDINGSPIN",
+    "RENDINGCOMBO"
+   ],
+   "w": [
+    "AXESMASH",
+    "AXEBOOST",
+    "AXE_CHARGE",
+    "INNERBLEEDING",
+    "BLADE_AURA"
+   ]
+  },
+  "subcategory": "axe",
+  "two_handed": true
+ },
+ "2H_SHAPESHIFTER_AVALON": {
+  "example_item": "T4_2H_SHAPESHIFTER_AVALON",
+  "name": "Adept's Lightcaller",
+  "spells": {
+   "e": [
+    "SHAPESHIFT_AVALONIAN_EAGLE"
+   ],
+   "passive": [
+    "PASSIVE_SHAPESHIFT_ATTACK_BUFF",
+    "PASSIVE_SHAPESHIFT_Q_CAST_DAMAGE_REDUCE",
+    "PASSIVE_SHAPESHIFT_GATHER_CHARGES",
+    "PASSIVE_SHAPESHIFT_W_CAST_SPEED_BUFF"
+   ],
+   "q": [
+    "SHAPE_Q_CAST",
+    "SHAPE_Q_SKILLSHOT",
+    "SHAPE_Q_DAMAGE_AND_SHIELD",
+    "SHAPE_Q_CONE_MELEE"
+   ],
+   "w": [
+    "SHAPE_W_DAMAGE_AOE",
+    "SHAPE_W_AREA_PULL",
+    "SHAPE_W_TETHERBEAM",
+    "SHAPE_W_POLYMORPH"
+   ]
+  },
+  "subcategory": "shapeshifterstaff",
+  "two_handed": true
+ },
+ "2H_SHAPESHIFTER_CRYSTAL": {
+  "example_item": "T4_2H_SHAPESHIFTER_CRYSTAL",
+  "name": "Adept's Stillgaze Staff",
+  "spells": {
+   "e": [
+    "SHAPESHIFT_CRYSTAL_COBRA"
+   ],
+   "passive": [
+    "PASSIVE_SHAPESHIFT_ATTACK_BUFF",
+    "PASSIVE_SHAPESHIFT_Q_CAST_DAMAGE_REDUCE",
+    "PASSIVE_SHAPESHIFT_GATHER_CHARGES",
+    "PASSIVE_SHAPESHIFT_W_CAST_SPEED_BUFF"
+   ],
+   "q": [
+    "SHAPE_Q_CAST",
+    "SHAPE_Q_SKILLSHOT",
+    "SHAPE_Q_DAMAGE_AND_SHIELD",
+    "SHAPE_Q_CONE_MELEE"
+   ],
+   "w": [
+    "SHAPE_W_DAMAGE_AOE",
+    "SHAPE_W_AREA_PULL",
+    "SHAPE_W_TETHERBEAM",
+    "SHAPE_W_POLYMORPH"
+   ]
+  },
+  "subcategory": "shapeshifterstaff",
+  "two_handed": true
+ },
+ "2H_SHAPESHIFTER_HELL": {
+  "example_item": "T4_2H_SHAPESHIFTER_HELL",
+  "name": "Adept's Hellspawn Staff",
+  "spells": {
+   "e": [
+    "SHAPESHIFT_IMP"
+   ],
+   "passive": [
+    "PASSIVE_SHAPESHIFT_ATTACK_BUFF",
+    "PASSIVE_SHAPESHIFT_Q_CAST_DAMAGE_REDUCE",
+    "PASSIVE_SHAPESHIFT_GATHER_CHARGES",
+    "PASSIVE_SHAPESHIFT_W_CAST_SPEED_BUFF"
+   ],
+   "q": [
+    "SHAPE_Q_CAST",
+    "SHAPE_Q_SKILLSHOT",
+    "SHAPE_Q_DAMAGE_AND_SHIELD",
+    "SHAPE_Q_CONE_MELEE"
+   ],
+   "w": [
+    "SHAPE_W_DAMAGE_AOE",
+    "SHAPE_W_AREA_PULL",
+    "SHAPE_W_TETHERBEAM",
+    "SHAPE_W_POLYMORPH"
+   ]
+  },
+  "subcategory": "shapeshifterstaff",
+  "two_handed": true
+ },
+ "2H_SHAPESHIFTER_KEEPER": {
+  "example_item": "T4_2H_SHAPESHIFTER_KEEPER",
+  "name": "Adept's Earthrune Staff",
+  "spells": {
+   "e": [
+    "SHAPESHIFT_ROCK_ELEMENTAL"
+   ],
+   "passive": [
+    "PASSIVE_SHAPESHIFT_ATTACK_BUFF",
+    "PASSIVE_SHAPESHIFT_Q_CAST_DAMAGE_REDUCE",
+    "PASSIVE_SHAPESHIFT_GATHER_CHARGES",
+    "PASSIVE_SHAPESHIFT_W_CAST_SPEED_BUFF"
+   ],
+   "q": [
+    "SHAPE_Q_CAST",
+    "SHAPE_Q_SKILLSHOT",
+    "SHAPE_Q_DAMAGE_AND_SHIELD",
+    "SHAPE_Q_CONE_MELEE"
+   ],
+   "w": [
+    "SHAPE_W_DAMAGE_AOE",
+    "SHAPE_W_AREA_PULL",
+    "SHAPE_W_TETHERBEAM",
+    "SHAPE_W_POLYMORPH"
+   ]
+  },
+  "subcategory": "shapeshifterstaff",
+  "two_handed": true
+ },
+ "2H_SHAPESHIFTER_MORGANA": {
+  "example_item": "T4_2H_SHAPESHIFTER_MORGANA",
+  "name": "Adept's Bloodmoon Staff",
+  "spells": {
+   "e": [
+    "SHAPESHIFT_WEREWOLF"
+   ],
+   "passive": [
+    "PASSIVE_SHAPESHIFT_ATTACK_BUFF",
+    "PASSIVE_SHAPESHIFT_Q_CAST_DAMAGE_REDUCE",
+    "PASSIVE_SHAPESHIFT_GATHER_CHARGES",
+    "PASSIVE_SHAPESHIFT_W_CAST_SPEED_BUFF"
+   ],
+   "q": [
+    "SHAPE_Q_CAST",
+    "SHAPE_Q_SKILLSHOT",
+    "SHAPE_Q_DAMAGE_AND_SHIELD",
+    "SHAPE_Q_CONE_MELEE"
+   ],
+   "w": [
+    "SHAPE_W_DAMAGE_AOE",
+    "SHAPE_W_AREA_PULL",
+    "SHAPE_W_TETHERBEAM",
+    "SHAPE_W_POLYMORPH"
+   ]
+  },
+  "subcategory": "shapeshifterstaff",
+  "two_handed": true
+ },
+ "2H_SHAPESHIFTER_SET1": {
+  "example_item": "T4_2H_SHAPESHIFTER_SET1",
+  "name": "Adept's Prowling Staff",
+  "spells": {
+   "e": [
+    "SHAPESHIFT_PANTHER"
+   ],
+   "passive": [
+    "PASSIVE_SHAPESHIFT_ATTACK_BUFF",
+    "PASSIVE_SHAPESHIFT_Q_CAST_DAMAGE_REDUCE",
+    "PASSIVE_SHAPESHIFT_GATHER_CHARGES",
+    "PASSIVE_SHAPESHIFT_W_CAST_SPEED_BUFF"
+   ],
+   "q": [
+    "SHAPE_Q_CAST",
+    "SHAPE_Q_SKILLSHOT",
+    "SHAPE_Q_DAMAGE_AND_SHIELD",
+    "SHAPE_Q_CONE_MELEE"
+   ],
+   "w": [
+    "SHAPE_W_DAMAGE_AOE",
+    "SHAPE_W_AREA_PULL",
+    "SHAPE_W_TETHERBEAM",
+    "SHAPE_W_POLYMORPH"
+   ]
+  },
+  "subcategory": "shapeshifterstaff",
+  "two_handed": true
+ },
+ "2H_SHAPESHIFTER_SET2": {
+  "example_item": "T4_2H_SHAPESHIFTER_SET2",
+  "name": "Adept's Rootbound Staff",
+  "spells": {
+   "e": [
+    "SHAPESHIFT_ENT"
+   ],
+   "passive": [
+    "PASSIVE_SHAPESHIFT_ATTACK_BUFF",
+    "PASSIVE_SHAPESHIFT_Q_CAST_DAMAGE_REDUCE",
+    "PASSIVE_SHAPESHIFT_GATHER_CHARGES",
+    "PASSIVE_SHAPESHIFT_W_CAST_SPEED_BUFF"
+   ],
+   "q": [
+    "SHAPE_Q_CAST",
+    "SHAPE_Q_SKILLSHOT",
+    "SHAPE_Q_DAMAGE_AND_SHIELD",
+    "SHAPE_Q_CONE_MELEE"
+   ],
+   "w": [
+    "SHAPE_W_DAMAGE_AOE",
+    "SHAPE_W_AREA_PULL",
+    "SHAPE_W_TETHERBEAM",
+    "SHAPE_W_POLYMORPH"
+   ]
+  },
+  "subcategory": "shapeshifterstaff",
+  "two_handed": true
+ },
+ "2H_SHAPESHIFTER_SET3": {
+  "example_item": "T4_2H_SHAPESHIFTER_SET3",
+  "name": "Adept's Primal Staff",
+  "spells": {
+   "e": [
+    "SHAPESHIFT_BEAR"
+   ],
+   "passive": [
+    "PASSIVE_SHAPESHIFT_ATTACK_BUFF",
+    "PASSIVE_SHAPESHIFT_Q_CAST_DAMAGE_REDUCE",
+    "PASSIVE_SHAPESHIFT_GATHER_CHARGES",
+    "PASSIVE_SHAPESHIFT_W_CAST_SPEED_BUFF"
+   ],
+   "q": [
+    "SHAPE_Q_CAST",
+    "SHAPE_Q_SKILLSHOT",
+    "SHAPE_Q_DAMAGE_AND_SHIELD",
+    "SHAPE_Q_CONE_MELEE"
+   ],
+   "w": [
+    "SHAPE_W_DAMAGE_AOE",
+    "SHAPE_W_AREA_PULL",
+    "SHAPE_W_TETHERBEAM",
+    "SHAPE_W_POLYMORPH"
+   ]
+  },
+  "subcategory": "shapeshifterstaff",
+  "two_handed": true
+ },
+ "2H_SKULLORB_HELL": {
+  "example_item": "T4_2H_SKULLORB_HELL",
+  "name": "Adept's Cursed Skull",
+  "spells": {
+   "e": [
+    "SKULLCURSE"
+   ],
+   "passive": [
+    "PASSIVE_CURSE",
+    "PASSIVE_ENERGYCHANCE_CURSEDSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_CURSEDSTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_CURSEDSTAFF"
+   ],
+   "q": [
+    "CURSEDOT",
+    "CURSEBLADE",
+    "CURSED_SPLAT"
+   ],
+   "w": [
+    "ARMORPIERCER",
+    "CURSENOVA",
+    "CURSEDHANDS_STACKUP",
+    "CURSEDBEAM",
+    "DARKMATTER"
+   ]
+  },
+  "subcategory": "cursestaff",
+  "two_handed": true
+ },
+ "2H_SPEAR": {
+  "example_item": "T4_2H_SPEAR",
+  "name": "Adept's Pike",
+  "spells": {
+   "e": [
+    "HALBERDSMASH"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_HEALTHCHANCE_SPEAR",
+    "PASSIVE_SPELLPOWER_CHANCE_SPEAR",
+    "PASSIVE_AASPEEDCHANCE_SPEAR"
+   ],
+   "q": [
+    "SPEAR_LUNGE",
+    "SPIRITSPEAR"
+   ],
+   "w": [
+    "FORESTOFSPEARS",
+    "CHARGINGBLADE",
+    "LEGBREAKER",
+    "DEFLECTINGSTANCE",
+    "GROUNDSPEAR",
+    "SKILLSHOT_PULL"
+   ]
+  },
+  "subcategory": "spear",
+  "two_handed": true
+ },
+ "2H_TOOL_AXE_AVALON": {
+  "example_item": "T4_2H_TOOL_AXE_AVALON",
+  "name": "Adept's Avalonian Axe",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_AVALON_YIELD_WOOD_T4"
+   ],
+   "q": [],
+   "w": []
+  },
+  "subcategory": "wood",
+  "two_handed": true
+ },
+ "2H_TOOL_FISHINGROD_AVALON": {
+  "example_item": "T4_2H_TOOL_FISHINGROD_AVALON",
+  "name": "Adept's Avalonian Fishing Rod",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_AVALON_YIELD_FISH_T4"
+   ],
+   "q": [],
+   "w": []
+  },
+  "subcategory": "fish",
+  "two_handed": true
+ },
+ "2H_TOOL_HAMMER_AVALON": {
+  "example_item": "T4_2H_TOOL_HAMMER_AVALON",
+  "name": "Adept's Avalonian Stone Hammer",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_AVALON_YIELD_ROCK_T4"
+   ],
+   "q": [],
+   "w": []
+  },
+  "subcategory": "rock",
+  "two_handed": true
+ },
+ "2H_TOOL_KNIFE_AVALON": {
+  "example_item": "T4_2H_TOOL_KNIFE_AVALON",
+  "name": "Adept's Avalonian Skinning Knife",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_AVALON_YIELD_HIDE_T4"
+   ],
+   "q": [],
+   "w": []
+  },
+  "subcategory": "hide",
+  "two_handed": true
+ },
+ "2H_TOOL_PICK_AVALON": {
+  "example_item": "T4_2H_TOOL_PICK_AVALON",
+  "name": "Adept's Avalonian Pickaxe",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_AVALON_YIELD_ORE_T4"
+   ],
+   "q": [],
+   "w": []
+  },
+  "subcategory": "ore",
+  "two_handed": true
+ },
+ "2H_TOOL_SICKLE_AVALON": {
+  "example_item": "T4_2H_TOOL_SICKLE_AVALON",
+  "name": "Adept's Avalonian Sickle",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_AVALON_YIELD_FIBER_T4"
+   ],
+   "q": [],
+   "w": []
+  },
+  "subcategory": "fiber",
+  "two_handed": true
+ },
+ "2H_TRIDENT_UNDEAD": {
+  "example_item": "T4_2H_TRIDENT_UNDEAD",
+  "name": "Adept's Trinity Spear",
+  "spells": {
+   "e": [
+    "TRIDENTTHROW"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_HEALTHCHANCE_SPEAR",
+    "PASSIVE_SPELLPOWER_CHANCE_SPEAR",
+    "PASSIVE_AASPEEDCHANCE_SPEAR"
+   ],
+   "q": [
+    "SPEAR_LUNGE",
+    "SPIRITSPEAR"
+   ],
+   "w": [
+    "FORESTOFSPEARS",
+    "CHARGINGBLADE",
+    "LEGBREAKER",
+    "DEFLECTINGSTANCE",
+    "GROUNDSPEAR",
+    "SKILLSHOT_PULL"
+   ]
+  },
+  "subcategory": "spear",
+  "two_handed": true
+ },
+ "2H_TWINSCYTHE_HELL": {
+  "example_item": "T4_2H_TWINSCYTHE_HELL",
+  "name": "Adept's Soulscythe",
+  "spells": {
+   "e": [
+    "TORNADO"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE_QUARTERSTAFF",
+    "PASSIVE_ENERGYCHANCE_QUARTERSTAFF",
+    "PASSIVE_HEALTHCHANCE_QUARTERSTAFF",
+    "PASSIVE_CCDURATION_CHANCE_QUARTERSTAFF"
+   ],
+   "q": [
+    "CONCUSSIVEBLOW_MULTI_1",
+    "WHIRLING_STAFF",
+    "CARTWHEEL"
+   ],
+   "w": [
+    "QSTAFF_COMBO",
+    "STUNRUN",
+    "QS_WHIRLWIND2",
+    "LAUNCHER",
+    "SEPARATING_SLAM"
+   ]
+  },
+  "subcategory": "quarterstaff",
+  "two_handed": true
+ },
+ "2H_WARBOW": {
+  "example_item": "T4_2H_WARBOW",
+  "name": "Adept's Warbow",
+  "spells": {
+   "e": [
+    "SKILLSHOT_STUN"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_ENERGYCHANCE_BOW",
+    "PASSIVE_ARMOR_PIERCE_STACK",
+    "PASSIVE_AASPEEDCHANCE_BOW"
+   ],
+   "q": [
+    "MULTISHOT2",
+    "DEADLYSHOT",
+    "POISONARROW"
+   ],
+   "w": [
+    "GROUNDARROW",
+    "JUMPSHOT2",
+    "SPEEDSHOT2",
+    "BURNINGARROWS"
+   ]
+  },
+  "subcategory": "bow",
+  "two_handed": true
+ },
+ "2H_WILDSTAFF": {
+  "example_item": "T4_2H_WILDSTAFF",
+  "name": "Adept's Wild Staff",
+  "spells": {
+   "e": [
+    "WELLOFLIFE2"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_NATURESTAFF",
+    "PASSIVE_ARMOR_CASTER_NATURESTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_NATURESTAFF"
+   ],
+   "q": [
+    "REJUVENATION",
+    "THORNSAREA",
+    "REJUVMUSHROOM_GRENADE"
+   ],
+   "w": [
+    "BRAMBLESEED",
+    "REANIMATE",
+    "NATURERESILIENCE",
+    "CLEANSEHEAL",
+    "REJUVENATING_BREEZE"
+   ]
+  },
+  "subcategory": "naturestaff",
+  "two_handed": true
+ },
+ "MAIN_1HCROSSBOW": {
+  "example_item": "T4_MAIN_1HCROSSBOW",
+  "name": "Adept's Light Crossbow",
+  "spells": {
+   "e": [
+    "EXPLODING_SHOT"
+   ],
+   "passive": [
+    "PASSIVE_KNOCKBACKCHANCE",
+    "PASSIVE_CD_RESET_Q",
+    "PASSIVE_ENERGYCHANCE_CROSSBOW",
+    "PASSIVE_SPELLPOWER_CASTER_CROSSBOW"
+   ],
+   "q": [
+    "AUTOFIRE2",
+    "BOLTSHOT"
+   ],
+   "w": [
+    "ACID_BOMB",
+    "SUNDERSHOT",
+    "CALTROPS",
+    "KNOCKBACKSHOT2",
+    "SILENCINGBOLT"
+   ]
+  },
+  "subcategory": "crossbow",
+  "two_handed": false
+ },
+ "MAIN_ARCANESTAFF": {
+  "example_item": "T4_MAIN_ARCANESTAFF",
+  "name": "Adept's Arcane Staff",
+  "spells": {
+   "e": [
+    "ARCANEORB2"
+   ],
+   "passive": [
+    "PASSIVE_ATTACKBUFF_ARCANESTAFF",
+    "PASSIVE_ENERGYCHANCE_ARCANESTAFF",
+    "PASSIVE_ARMOR_CASTER_ARCANESTAFF",
+    "PASSIVE_SILENCECHANCE"
+   ],
+   "q": [
+    "ARCANE_CHAIN_MISSILE",
+    "SHIELDFRIENDLY",
+    "MAGICSHOCK"
+   ],
+   "w": [
+    "ENIGMA_BLADE",
+    "CLEANSESPEED2",
+    "FRAZZLE2",
+    "EMPOWERBEAM",
+    "MIMIC"
+   ]
+  },
+  "subcategory": "arcanestaff",
+  "two_handed": false
+ },
+ "MAIN_ARCANESTAFF_UNDEAD": {
+  "example_item": "T4_MAIN_ARCANESTAFF_UNDEAD",
+  "name": "Adept's Witchwork Staff",
+  "spells": {
+   "e": [
+    "BLACKHOLE"
+   ],
+   "passive": [
+    "PASSIVE_ATTACKBUFF_ARCANESTAFF",
+    "PASSIVE_ENERGYCHANCE_ARCANESTAFF",
+    "PASSIVE_ARMOR_CASTER_ARCANESTAFF",
+    "PASSIVE_SILENCECHANCE"
+   ],
+   "q": [
+    "ARCANE_CHAIN_MISSILE",
+    "SHIELDFRIENDLY",
+    "MAGICSHOCK"
+   ],
+   "w": [
+    "ENIGMA_BLADE",
+    "CLEANSESPEED2",
+    "FRAZZLE2",
+    "EMPOWERBEAM",
+    "MIMIC"
+   ]
+  },
+  "subcategory": "arcanestaff",
+  "two_handed": false
+ },
+ "MAIN_AXE": {
+  "example_item": "T4_MAIN_AXE",
+  "name": "Adept's Battleaxe",
+  "spells": {
+   "e": [
+    "AXETHROW"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_AXE",
+    "PASSIVE_ARMORCHANCE_AXE",
+    "PASSIVE_SPELLPOWER_CHANCE_AXE"
+   ],
+   "q": [
+    "RENDINGSTRIKE",
+    "RENDINGSPIN",
+    "RENDINGCOMBO"
+   ],
+   "w": [
+    "AXESMASH",
+    "AXEBOOST",
+    "AXE_CHARGE",
+    "INNERBLEEDING",
+    "BLADE_AURA"
+   ]
+  },
+  "subcategory": "axe",
+  "two_handed": false
+ },
+ "MAIN_CURSEDSTAFF": {
+  "example_item": "T4_MAIN_CURSEDSTAFF",
+  "name": "Adept's Cursed Staff",
+  "spells": {
+   "e": [
+    "DEATHCURSE2"
+   ],
+   "passive": [
+    "PASSIVE_CURSE",
+    "PASSIVE_ENERGYCHANCE_CURSEDSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_CURSEDSTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_CURSEDSTAFF"
+   ],
+   "q": [
+    "CURSEDOT",
+    "CURSEBLADE",
+    "CURSED_SPLAT"
+   ],
+   "w": [
+    "ARMORPIERCER",
+    "CURSENOVA",
+    "CURSEDHANDS_STACKUP",
+    "CURSEDBEAM",
+    "DARKMATTER"
+   ]
+  },
+  "subcategory": "cursestaff",
+  "two_handed": false
+ },
+ "MAIN_CURSEDSTAFF_AVALON": {
+  "example_item": "T4_MAIN_CURSEDSTAFF_AVALON",
+  "name": "Adept's Shadowcaller",
+  "spells": {
+   "e": [
+    "DYNAMIC_CURSE"
+   ],
+   "passive": [
+    "PASSIVE_CURSE",
+    "PASSIVE_ENERGYCHANCE_CURSEDSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_CURSEDSTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_CURSEDSTAFF"
+   ],
+   "q": [
+    "CURSEDOT",
+    "CURSEBLADE",
+    "CURSED_SPLAT"
+   ],
+   "w": [
+    "ARMORPIERCER",
+    "CURSENOVA",
+    "CURSEDHANDS_STACKUP",
+    "CURSEDBEAM",
+    "DARKMATTER"
+   ]
+  },
+  "subcategory": "cursestaff",
+  "two_handed": false
+ },
+ "MAIN_CURSEDSTAFF_CRYSTAL": {
+  "example_item": "T4_MAIN_CURSEDSTAFF_CRYSTAL",
+  "name": "Adept's Rotcaller Staff",
+  "spells": {
+   "e": [
+    "CURSE_SKELETON_BARF_FDHR"
+   ],
+   "passive": [
+    "PASSIVE_CURSE",
+    "PASSIVE_ENERGYCHANCE_CURSEDSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_CURSEDSTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_CURSEDSTAFF"
+   ],
+   "q": [
+    "CURSEDOT",
+    "CURSEBLADE",
+    "CURSED_SPLAT"
+   ],
+   "w": [
+    "ARMORPIERCER",
+    "CURSENOVA",
+    "CURSEDHANDS_STACKUP",
+    "CURSEDBEAM",
+    "DARKMATTER"
+   ]
+  },
+  "subcategory": "cursestaff",
+  "two_handed": false
+ },
+ "MAIN_CURSEDSTAFF_UNDEAD": {
+  "example_item": "T4_MAIN_CURSEDSTAFF_UNDEAD",
+  "name": "Adept's Lifecurse Staff",
+  "spells": {
+   "e": [
+    "ENFEEBLEBLADES"
+   ],
+   "passive": [
+    "PASSIVE_CURSE",
+    "PASSIVE_ENERGYCHANCE_CURSEDSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_CURSEDSTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_CURSEDSTAFF"
+   ],
+   "q": [
+    "CURSEDOT",
+    "CURSEBLADE",
+    "CURSED_SPLAT"
+   ],
+   "w": [
+    "ARMORPIERCER",
+    "CURSENOVA",
+    "CURSEDHANDS_STACKUP",
+    "CURSEDBEAM",
+    "DARKMATTER"
+   ]
+  },
+  "subcategory": "cursestaff",
+  "two_handed": false
+ },
+ "MAIN_DAGGER": {
+  "example_item": "T4_MAIN_DAGGER",
+  "name": "Adept's Dagger",
+  "spells": {
+   "e": [
+    "BLOODTHIRSTYBLADE"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_DAGGER",
+    "PASSIVE_AASPEEDCHANCE_DAGGER",
+    "PASSIVE_SPELLPOWER_CHANCE_DAGGER"
+   ],
+   "q": [
+    "SUNDERARMOR2",
+    "QDASH",
+    "ASSASSINSPIRIT"
+   ],
+   "w": [
+    "THROWINGBLADES",
+    "GROUNDDASH",
+    "DEEPCUTS",
+    "SKILLSHOT_TELEPORT",
+    "CHAINDASH"
+   ]
+  },
+  "subcategory": "dagger",
+  "two_handed": false
+ },
+ "MAIN_DAGGER_HELL": {
+  "example_item": "T4_MAIN_DAGGER_HELL",
+  "name": "Adept's Demonfang",
+  "spells": {
+   "e": [
+    "BLOOD_BLADE"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_DAGGER",
+    "PASSIVE_AASPEEDCHANCE_DAGGER",
+    "PASSIVE_SPELLPOWER_CHANCE_DAGGER"
+   ],
+   "q": [
+    "SUNDERARMOR2",
+    "QDASH",
+    "ASSASSINSPIRIT"
+   ],
+   "w": [
+    "THROWINGBLADES",
+    "GROUNDDASH",
+    "DEEPCUTS",
+    "SKILLSHOT_TELEPORT",
+    "CHAINDASH"
+   ]
+  },
+  "subcategory": "dagger",
+  "two_handed": false
+ },
+ "MAIN_FIRESTAFF": {
+  "example_item": "T4_MAIN_FIRESTAFF",
+  "name": "Adept's Fire Staff",
+  "spells": {
+   "e": [
+    "PYROBLAST_SKILLSHOT"
+   ],
+   "passive": [
+    "PASSIVE_BURN",
+    "PASSIVE_ENERGYCHANCE_FIRESTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FIRESTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FIRESTAFF"
+   ],
+   "q": [
+    "FIRESTAFFBOLT2",
+    "FIRESTAFFBOLT_AOE",
+    "SEARING_FLAME"
+   ],
+   "w": [
+    "FIRESTAFFIGNITE2_SPREAD",
+    "FIREWALL",
+    "SKILLSHOT_FIREBALL",
+    "FIRECONE",
+    "FIREARTILLERY"
+   ]
+  },
+  "subcategory": "firestaff",
+  "two_handed": false
+ },
+ "MAIN_FIRESTAFF_CRYSTAL": {
+  "example_item": "T4_MAIN_FIRESTAFF_CRYSTAL",
+  "name": "Adept's Flamewalker Staff",
+  "spells": {
+   "e": [
+    "FLAMEDASH"
+   ],
+   "passive": [
+    "PASSIVE_BURN",
+    "PASSIVE_ENERGYCHANCE_FIRESTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FIRESTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FIRESTAFF"
+   ],
+   "q": [
+    "FIRESTAFFBOLT2",
+    "FIRESTAFFBOLT_AOE",
+    "SEARING_FLAME"
+   ],
+   "w": [
+    "FIRESTAFFIGNITE2_SPREAD",
+    "FIREWALL",
+    "SKILLSHOT_FIREBALL",
+    "FIRECONE",
+    "FIREARTILLERY"
+   ]
+  },
+  "subcategory": "firestaff",
+  "two_handed": false
+ },
+ "MAIN_FIRESTAFF_KEEPER": {
+  "example_item": "T4_MAIN_FIRESTAFF_KEEPER",
+  "name": "Adept's Wildfire Staff",
+  "spells": {
+   "e": [
+    "MAGMASPHERE"
+   ],
+   "passive": [
+    "PASSIVE_BURN",
+    "PASSIVE_ENERGYCHANCE_FIRESTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FIRESTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FIRESTAFF"
+   ],
+   "q": [
+    "FIRESTAFFBOLT2",
+    "FIRESTAFFBOLT_AOE",
+    "SEARING_FLAME"
+   ],
+   "w": [
+    "FIRESTAFFIGNITE2_SPREAD",
+    "FIREWALL",
+    "SKILLSHOT_FIREBALL",
+    "FIRECONE",
+    "FIREARTILLERY"
+   ]
+  },
+  "subcategory": "firestaff",
+  "two_handed": false
+ },
+ "MAIN_FROSTSTAFF": {
+  "example_item": "T4_MAIN_FROSTSTAFF",
+  "name": "Adept's Frost Staff",
+  "spells": {
+   "e": [
+    "FREEZINGWIND"
+   ],
+   "passive": [
+    "PASSIVE_FROST",
+    "PASSIVE_ENERGYCHANCE_FROSTSTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FROSTSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FROSTSTAFF"
+   ],
+   "q": [
+    "FROST_BITE",
+    "ICESHARD",
+    "SHATTER_Q"
+   ],
+   "w": [
+    "FROSTBOMB_CASTSLOW",
+    "FROSTBEAM",
+    "FROSTNOVA",
+    "FROST_LANCE",
+    "ICE_SCULPTURE"
+   ]
+  },
+  "subcategory": "froststaff",
+  "two_handed": false
+ },
+ "MAIN_FROSTSTAFF_AVALON": {
+  "example_item": "T4_MAIN_FROSTSTAFF_AVALON",
+  "name": "Adept's Chillhowl",
+  "spells": {
+   "e": [
+    "FROZEN_CRYSTAL"
+   ],
+   "passive": [
+    "PASSIVE_FROST",
+    "PASSIVE_ENERGYCHANCE_FROSTSTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FROSTSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FROSTSTAFF"
+   ],
+   "q": [
+    "FROST_BITE",
+    "ICESHARD",
+    "SHATTER_Q"
+   ],
+   "w": [
+    "FROSTBOMB_CASTSLOW",
+    "FROSTBEAM",
+    "FROSTNOVA",
+    "FROST_LANCE",
+    "ICE_SCULPTURE"
+   ]
+  },
+  "subcategory": "froststaff",
+  "two_handed": false
+ },
+ "MAIN_FROSTSTAFF_KEEPER": {
+  "example_item": "T4_MAIN_FROSTSTAFF_KEEPER",
+  "name": "Adept's Hoarfrost Staff",
+  "spells": {
+   "e": [
+    "ICEROCK_EXPLODE"
+   ],
+   "passive": [
+    "PASSIVE_FROST",
+    "PASSIVE_ENERGYCHANCE_FROSTSTAFF",
+    "PASSIVE_CASTINGSPEED_CHANCE_FROSTSTAFF",
+    "PASSIVE_SPELLPOWER_CASTER_FROSTSTAFF"
+   ],
+   "q": [
+    "FROST_BITE",
+    "ICESHARD",
+    "SHATTER_Q"
+   ],
+   "w": [
+    "FROSTBOMB_CASTSLOW",
+    "FROSTBEAM",
+    "FROSTNOVA",
+    "FROST_LANCE",
+    "ICE_SCULPTURE"
+   ]
+  },
+  "subcategory": "froststaff",
+  "two_handed": false
+ },
+ "MAIN_HAMMER": {
+  "example_item": "T4_MAIN_HAMMER",
+  "name": "Adept's Hammer",
+  "spells": {
+   "e": [
+    "HAMMERWHIRLWIND2"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_HAMMER",
+    "PASSIVE_HEALTHCHANCE_HAMMER",
+    "PASSIVE_CCDURATION_CHANCE_HAMMER"
+   ],
+   "q": [
+    "HAMMER_SHOVE",
+    "THREATENINGSTRIKE_HAMMER",
+    "IRONBREAKER"
+   ],
+   "w": [
+    "HAMMER_TREMOR",
+    "CHARGESLOWAE",
+    "GEYSER",
+    "KNOCKOUT",
+    "TAR_RING"
+   ]
+  },
+  "subcategory": "hammer",
+  "two_handed": false
+ },
+ "MAIN_HOLYSTAFF": {
+  "example_item": "T4_MAIN_HOLYSTAFF",
+  "name": "Adept's Holy Staff",
+  "spells": {
+   "e": [
+    "HOLYDESPERATEPRAYER2"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_HOLYSTAFF",
+    "PASSIVE_KNOCKBACK_CASTER_HOLYSTAFF",
+    "PASSIVE_HOLY_ASCENDED"
+   ],
+   "q": [
+    "GENEROUSHEAL",
+    "SMITE_AOE",
+    "HOLYFLASH"
+   ],
+   "w": [
+    "PULSINGHEAL",
+    "HEALINGBEAM",
+    "HOLYHOT",
+    "HOLYORB",
+    "RESURRECTION"
+   ]
+  },
+  "subcategory": "holystaff",
+  "two_handed": false
+ },
+ "MAIN_HOLYSTAFF_AVALON": {
+  "example_item": "T4_MAIN_HOLYSTAFF_AVALON",
+  "name": "Adept's Hallowfall",
+  "spells": {
+   "e": [
+    "DIVINE_JUMP"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_HOLYSTAFF",
+    "PASSIVE_KNOCKBACK_CASTER_HOLYSTAFF",
+    "PASSIVE_HOLY_ASCENDED"
+   ],
+   "q": [
+    "GENEROUSHEAL",
+    "SMITE_AOE",
+    "HOLYFLASH"
+   ],
+   "w": [
+    "PULSINGHEAL",
+    "HEALINGBEAM",
+    "HOLYHOT",
+    "HOLYORB",
+    "RESURRECTION"
+   ]
+  },
+  "subcategory": "holystaff",
+  "two_handed": false
+ },
+ "MAIN_HOLYSTAFF_MORGANA": {
+  "example_item": "T4_MAIN_HOLYSTAFF_MORGANA",
+  "name": "Adept's Lifetouch Staff",
+  "spells": {
+   "e": [
+    "HOLYTOUCH"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_HOLYSTAFF",
+    "PASSIVE_KNOCKBACK_CASTER_HOLYSTAFF",
+    "PASSIVE_HOLY_ASCENDED"
+   ],
+   "q": [
+    "GENEROUSHEAL",
+    "SMITE_AOE",
+    "HOLYFLASH"
+   ],
+   "w": [
+    "PULSINGHEAL",
+    "HEALINGBEAM",
+    "HOLYHOT",
+    "HOLYORB",
+    "RESURRECTION"
+   ]
+  },
+  "subcategory": "holystaff",
+  "two_handed": false
+ },
+ "MAIN_MACE": {
+  "example_item": "T4_MAIN_MACE",
+  "name": "Adept's Mace",
+  "spells": {
+   "e": [
+    "MACELEAP"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_MACE",
+    "PASSIVE_HEALTHCHANCE_MACE",
+    "PASSIVE_CCDURATION_CHANCE_MACE"
+   ],
+   "q": [
+    "DEFENSIVESLAM",
+    "THREATENINGSMASH",
+    "SACRED_GROUND"
+   ],
+   "w": [
+    "GROUNDSHAKER",
+    "CHARGE_ROOT",
+    "GUARDRUNE",
+    "PBAOE_PULL"
+   ]
+  },
+  "subcategory": "mace",
+  "two_handed": false
+ },
+ "MAIN_MACE_CRYSTAL": {
+  "example_item": "T4_MAIN_MACE_CRYSTAL",
+  "name": "Adept's Dreadstorm Monarch",
+  "spells": {
+   "e": [
+    "MACE_CRYSTAL_FRAGMENT_STORM"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_MACE",
+    "PASSIVE_HEALTHCHANCE_MACE",
+    "PASSIVE_CCDURATION_CHANCE_MACE"
+   ],
+   "q": [
+    "DEFENSIVESLAM",
+    "THREATENINGSMASH",
+    "SACRED_GROUND"
+   ],
+   "w": [
+    "GROUNDSHAKER",
+    "CHARGE_ROOT",
+    "GUARDRUNE",
+    "PBAOE_PULL"
+   ]
+  },
+  "subcategory": "mace",
+  "two_handed": false
+ },
+ "MAIN_MACE_HELL": {
+  "example_item": "T4_MAIN_MACE_HELL",
+  "name": "Adept's Incubus Mace",
+  "spells": {
+   "e": [
+    "SHRINKINGSMASH"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_MACE",
+    "PASSIVE_HEALTHCHANCE_MACE",
+    "PASSIVE_CCDURATION_CHANCE_MACE"
+   ],
+   "q": [
+    "DEFENSIVESLAM",
+    "THREATENINGSMASH",
+    "SACRED_GROUND"
+   ],
+   "w": [
+    "GROUNDSHAKER",
+    "CHARGE_ROOT",
+    "GUARDRUNE",
+    "PBAOE_PULL"
+   ]
+  },
+  "subcategory": "mace",
+  "two_handed": false
+ },
+ "MAIN_NATURESTAFF": {
+  "example_item": "T4_MAIN_NATURESTAFF",
+  "name": "Adept's Nature Staff",
+  "spells": {
+   "e": [
+    "CIRCLEOFLIFE"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_NATURESTAFF",
+    "PASSIVE_ARMOR_CASTER_NATURESTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_NATURESTAFF"
+   ],
+   "q": [
+    "REJUVENATION",
+    "THORNSAREA",
+    "REJUVMUSHROOM_GRENADE"
+   ],
+   "w": [
+    "BRAMBLESEED",
+    "REANIMATE",
+    "NATURERESILIENCE",
+    "CLEANSEHEAL",
+    "REJUVENATING_BREEZE"
+   ]
+  },
+  "subcategory": "naturestaff",
+  "two_handed": false
+ },
+ "MAIN_NATURESTAFF_AVALON": {
+  "example_item": "T4_MAIN_NATURESTAFF_AVALON",
+  "name": "Adept's Ironroot Staff",
+  "spells": {
+   "e": [
+    "SOUL_LINK"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_NATURESTAFF",
+    "PASSIVE_ARMOR_CASTER_NATURESTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_NATURESTAFF"
+   ],
+   "q": [
+    "REJUVENATION",
+    "THORNSAREA",
+    "REJUVMUSHROOM_GRENADE"
+   ],
+   "w": [
+    "BRAMBLESEED",
+    "REANIMATE",
+    "NATURERESILIENCE",
+    "CLEANSEHEAL",
+    "REJUVENATING_BREEZE"
+   ]
+  },
+  "subcategory": "naturestaff",
+  "two_handed": false
+ },
+ "MAIN_NATURESTAFF_CRYSTAL": {
+  "example_item": "T4_MAIN_NATURESTAFF_CRYSTAL",
+  "name": "Adept's Forgebark Staff",
+  "spells": {
+   "e": [
+    "DUAL_NATURE"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_NATURESTAFF",
+    "PASSIVE_ARMOR_CASTER_NATURESTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_NATURESTAFF"
+   ],
+   "q": [
+    "REJUVENATION",
+    "THORNSAREA",
+    "REJUVMUSHROOM_GRENADE"
+   ],
+   "w": [
+    "BRAMBLESEED",
+    "REANIMATE",
+    "NATURERESILIENCE",
+    "CLEANSEHEAL",
+    "REJUVENATING_BREEZE"
+   ]
+  },
+  "subcategory": "naturestaff",
+  "two_handed": false
+ },
+ "MAIN_NATURESTAFF_KEEPER": {
+  "example_item": "T4_MAIN_NATURESTAFF_KEEPER",
+  "name": "Adept's Druidic Staff",
+  "spells": {
+   "e": [
+    "NATURE_ULTIMATE_SINGLE"
+   ],
+   "passive": [
+    "PASSIVE_HEALPOWERCHANCE",
+    "PASSIVE_ENERGYCHANCE_NATURESTAFF",
+    "PASSIVE_ARMOR_CASTER_NATURESTAFF",
+    "PASSIVE_MOVESPEED_CHANCE_NATURESTAFF"
+   ],
+   "q": [
+    "REJUVENATION",
+    "THORNSAREA",
+    "REJUVMUSHROOM_GRENADE"
+   ],
+   "w": [
+    "BRAMBLESEED",
+    "REANIMATE",
+    "NATURERESILIENCE",
+    "CLEANSEHEAL",
+    "REJUVENATING_BREEZE"
+   ]
+  },
+  "subcategory": "naturestaff",
+  "two_handed": false
+ },
+ "MAIN_RAPIER_MORGANA": {
+  "example_item": "T4_MAIN_RAPIER_MORGANA",
+  "name": "Adept's Bloodletter",
+  "spells": {
+   "e": [
+    "RAPIERSTAB"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_HEALTHCHANCE_DAGGER",
+    "PASSIVE_AASPEEDCHANCE_DAGGER",
+    "PASSIVE_SPELLPOWER_CHANCE_DAGGER"
+   ],
+   "q": [
+    "SUNDERARMOR2",
+    "QDASH",
+    "ASSASSINSPIRIT"
+   ],
+   "w": [
+    "THROWINGBLADES",
+    "GROUNDDASH",
+    "DEEPCUTS",
+    "SKILLSHOT_TELEPORT",
+    "CHAINDASH"
+   ]
+  },
+  "subcategory": "dagger",
+  "two_handed": false
+ },
+ "MAIN_ROCKMACE_KEEPER": {
+  "example_item": "T4_MAIN_ROCKMACE_KEEPER",
+  "name": "Adept's Bedrock Mace",
+  "spells": {
+   "e": [
+    "PRIMALSLAM"
+   ],
+   "passive": [
+    "PASSIVE_STUNCHANCE",
+    "PASSIVE_ENERGYCHANCE_MACE",
+    "PASSIVE_HEALTHCHANCE_MACE",
+    "PASSIVE_CCDURATION_CHANCE_MACE"
+   ],
+   "q": [
+    "DEFENSIVESLAM",
+    "THREATENINGSMASH",
+    "SACRED_GROUND"
+   ],
+   "w": [
+    "GROUNDSHAKER",
+    "CHARGE_ROOT",
+    "GUARDRUNE",
+    "PBAOE_PULL"
+   ]
+  },
+  "subcategory": "mace",
+  "two_handed": false
+ },
+ "MAIN_SCIMITAR_MORGANA": {
+  "example_item": "T4_MAIN_SCIMITAR_MORGANA",
+  "name": "Adept's Clarent Blade",
+  "spells": {
+   "e": [
+    "MIGHTYSWING"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_REDUCE_DMG_SWORD",
+    "PASSIVE_HEROICSTACK",
+    "PASSIVE_ARMORCHANCE_SWORD"
+   ],
+   "q": [
+    "HEROICSTRIKE2",
+    "CLEAVE"
+   ],
+   "w": [
+    "SWORD_SPIN",
+    "INTERRUPT2",
+    "SPLITTINGSLASH",
+    "HAMSTRINGSWORD",
+    "PARRY",
+    "DEFENSERUN"
+   ]
+  },
+  "subcategory": "sword",
+  "two_handed": false
+ },
+ "MAIN_SPEAR": {
+  "example_item": "T4_MAIN_SPEAR",
+  "name": "Adept's Spear",
+  "spells": {
+   "e": [
+    "DASHDMG"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_HEALTHCHANCE_SPEAR",
+    "PASSIVE_SPELLPOWER_CHANCE_SPEAR",
+    "PASSIVE_AASPEEDCHANCE_SPEAR"
+   ],
+   "q": [
+    "SPEAR_LUNGE",
+    "SPIRITSPEAR"
+   ],
+   "w": [
+    "FORESTOFSPEARS",
+    "CHARGINGBLADE",
+    "LEGBREAKER",
+    "DEFLECTINGSTANCE",
+    "GROUNDSPEAR",
+    "SKILLSHOT_PULL"
+   ]
+  },
+  "subcategory": "spear",
+  "two_handed": false
+ },
+ "MAIN_SPEAR_KEEPER": {
+  "example_item": "T4_MAIN_SPEAR_KEEPER",
+  "name": "Adept's Heron Spear",
+  "spells": {
+   "e": [
+    "SPEARTHROW"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_HEALTHCHANCE_SPEAR",
+    "PASSIVE_SPELLPOWER_CHANCE_SPEAR",
+    "PASSIVE_AASPEEDCHANCE_SPEAR"
+   ],
+   "q": [
+    "SPEAR_LUNGE",
+    "SPIRITSPEAR"
+   ],
+   "w": [
+    "FORESTOFSPEARS",
+    "CHARGINGBLADE",
+    "LEGBREAKER",
+    "DEFLECTINGSTANCE",
+    "GROUNDSPEAR",
+    "SKILLSHOT_PULL"
+   ]
+  },
+  "subcategory": "spear",
+  "two_handed": false
+ },
+ "MAIN_SPEAR_LANCE_AVALON": {
+  "example_item": "T4_MAIN_SPEAR_LANCE_AVALON",
+  "name": "Adept's Daybreaker",
+  "spells": {
+   "e": [
+    "LANCE_CHARGE"
+   ],
+   "passive": [
+    "PASSIVE_SLOWPOISON",
+    "PASSIVE_HEALTHCHANCE_SPEAR",
+    "PASSIVE_SPELLPOWER_CHANCE_SPEAR",
+    "PASSIVE_AASPEEDCHANCE_SPEAR"
+   ],
+   "q": [
+    "SPEAR_LUNGE",
+    "SPIRITSPEAR"
+   ],
+   "w": [
+    "FORESTOFSPEARS",
+    "CHARGINGBLADE",
+    "LEGBREAKER",
+    "DEFLECTINGSTANCE",
+    "GROUNDSPEAR",
+    "SKILLSHOT_PULL"
+   ]
+  },
+  "subcategory": "spear",
+  "two_handed": false
+ },
+ "MAIN_SWORD": {
+  "example_item": "T4_MAIN_SWORD",
+  "name": "Adept's Broadsword",
+  "spells": {
+   "e": [
+    "MIGHTYBLOW"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_REDUCE_DMG_SWORD",
+    "PASSIVE_HEROICSTACK",
+    "PASSIVE_ARMORCHANCE_SWORD"
+   ],
+   "q": [
+    "HEROICSTRIKE2",
+    "CLEAVE"
+   ],
+   "w": [
+    "SWORD_SPIN",
+    "INTERRUPT2",
+    "SPLITTINGSLASH",
+    "HAMSTRINGSWORD",
+    "PARRY",
+    "DEFENSERUN"
+   ]
+  },
+  "subcategory": "sword",
+  "two_handed": false
+ },
+ "MAIN_SWORD_CRYSTAL": {
+  "example_item": "T4_MAIN_SWORD_CRYSTAL",
+  "name": "Adept's Infinity Blade",
+  "spells": {
+   "e": [
+    "SWORD_BERSERK_RUN_RE"
+   ],
+   "passive": [
+    "PASSIVE_BLEEDCHANCE",
+    "PASSIVE_REDUCE_DMG_SWORD",
+    "PASSIVE_HEROICSTACK",
+    "PASSIVE_ARMORCHANCE_SWORD"
+   ],
+   "q": [
+    "HEROICSTRIKE2",
+    "CLEAVE"
+   ],
+   "w": [
+    "SWORD_SPIN",
+    "INTERRUPT2",
+    "SPLITTINGSLASH",
+    "HAMSTRINGSWORD",
+    "PARRY",
+    "DEFENSERUN"
+   ]
+  },
+  "subcategory": "sword",
+  "two_handed": false
+ },
+ "UNIQUE_VANITY_2H_BANNER_GUIDON_AJ": {
+  "example_item": "UNIQUE_VANITY_2H_BANNER_GUIDON_AJ",
+  "name": "Heraldic Guidon",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_CANNOTATTACK"
+   ],
+   "q": [
+    "VANITY_2H_BANNER_GUIDON_AJ_SPELL"
+   ],
+   "w": []
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_BANNER_GUIDON_GOLDEN_AJ": {
+  "example_item": "UNIQUE_VANITY_2H_BANNER_GUIDON_GOLDEN_AJ",
+  "name": "Glorious Heraldic Guidon",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_CANNOTATTACK"
+   ],
+   "q": [
+    "VANITY_2H_BANNER_GUIDON_GOLDEN_AJ_SPELL"
+   ],
+   "w": []
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_BANNER_KNIGHT_GUILD_COLORED": {
+  "example_item": "UNIQUE_VANITY_2H_BANNER_KNIGHT_GUILD_COLORED",
+  "name": "Knight Adventurer's Warbanner",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_CANNOTATTACK"
+   ],
+   "q": [
+    "VANITY_WARBANNER_PRESENT"
+   ],
+   "w": [
+    "VANITY_WARBANNER_CHARGE"
+   ]
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_CHICKENGUN_EASTER": {
+  "example_item": "UNIQUE_VANITY_2H_CHICKENGUN_EASTER",
+  "name": "The Eggsecutioner",
+  "spells": {
+   "e": [
+    "VANITY_SUMMONING_SNOWRABBIT"
+   ],
+   "passive": [],
+   "q": [
+    "VANITY_SUMMONING_HILLMARMOT"
+   ],
+   "w": [
+    "VANITY_SUMMONING_TOAD_EASTER"
+   ]
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_FW_BRIDGEWATCH_BANNER": {
+  "example_item": "UNIQUE_VANITY_2H_FW_BRIDGEWATCH_BANNER",
+  "name": "UNIQUE_VANITY_2H_FW_BRIDGEWATCH_BANNER",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_CANNOTATTACK"
+   ],
+   "q": [
+    "VANITY_WARBANNER_PRESENT_FW_BRIDGEWATCH"
+   ],
+   "w": []
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_FW_CAERLEON_BANNER": {
+  "example_item": "UNIQUE_VANITY_2H_FW_CAERLEON_BANNER",
+  "name": "UNIQUE_VANITY_2H_FW_CAERLEON_BANNER",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_CANNOTATTACK"
+   ],
+   "q": [
+    "VANITY_WARBANNER_PRESENT_FW_CAERLEON"
+   ],
+   "w": []
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_FW_FORTSTERLING_BANNER": {
+  "example_item": "UNIQUE_VANITY_2H_FW_FORTSTERLING_BANNER",
+  "name": "UNIQUE_VANITY_2H_FW_FORTSTERLING_BANNER",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_CANNOTATTACK"
+   ],
+   "q": [
+    "VANITY_WARBANNER_PRESENT_FW_FORTSTERLING"
+   ],
+   "w": []
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_FW_LYMHURST_BANNER": {
+  "example_item": "UNIQUE_VANITY_2H_FW_LYMHURST_BANNER",
+  "name": "UNIQUE_VANITY_2H_FW_LYMHURST_BANNER",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_CANNOTATTACK"
+   ],
+   "q": [
+    "VANITY_WARBANNER_PRESENT_FW_LYMHURST"
+   ],
+   "w": []
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_FW_MARTLOCK_BANNER": {
+  "example_item": "UNIQUE_VANITY_2H_FW_MARTLOCK_BANNER",
+  "name": "UNIQUE_VANITY_2H_FW_MARTLOCK_BANNER",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_CANNOTATTACK"
+   ],
+   "q": [
+    "VANITY_WARBANNER_PRESENT_FW_MARTLOCK"
+   ],
+   "w": []
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_FW_THETFORD_BANNER": {
+  "example_item": "UNIQUE_VANITY_2H_FW_THETFORD_BANNER",
+  "name": "UNIQUE_VANITY_2H_FW_THETFORD_BANNER",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_CANNOTATTACK"
+   ],
+   "q": [
+    "VANITY_WARBANNER_PRESENT_FW_THETFORD"
+   ],
+   "w": []
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_GUN_ANNIVERSARY": {
+  "example_item": "UNIQUE_VANITY_2H_GUN_ANNIVERSARY",
+  "name": "Chromacannon",
+  "spells": {
+   "e": [
+    "VANITY_FIREWORK_RED"
+   ],
+   "passive": [],
+   "q": [
+    "VANITY_FIREWORK_BLUE"
+   ],
+   "w": [
+    "VANITY_FIREWORK_GREEN"
+   ]
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_LUTE_AJ": {
+  "example_item": "UNIQUE_VANITY_2H_LUTE_AJ",
+  "name": "Wanderer's Lute",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_CANNOTATTACK"
+   ],
+   "q": [
+    "VANITY_2H_LUTE_AJ_OLDTOWNS_SPELL"
+   ],
+   "w": [
+    "VANITY_2H_LUTE_AJ_LOVESONG_SPELL"
+   ]
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_LUTE_MAGNIFICENT_AJ": {
+  "example_item": "UNIQUE_VANITY_2H_LUTE_MAGNIFICENT_AJ",
+  "name": "Troubadour's Lute",
+  "spells": {
+   "e": [
+    "VANITY_2H_LUTE_MAGNIFICENT_AJ_ALBION_SPELL"
+   ],
+   "passive": [
+    "PASSIVE_CANNOTATTACK"
+   ],
+   "q": [
+    "VANITY_2H_LUTE_MAGNIFICENT_AJ_OLDTOWNS_SPELL"
+   ],
+   "w": [
+    "VANITY_2H_LUTE_MAGNIFICENT_AJ_LOVESONG_SPELL"
+   ]
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_MULTITOOL_AJ": {
+  "example_item": "UNIQUE_VANITY_2H_MULTITOOL_AJ",
+  "name": "Sharpened Axe",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_CANNOTATTACK"
+   ],
+   "q": [
+    "VANITY_2H_MULTITOOL_AJ_SPELL"
+   ],
+   "w": []
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_MULTITOOL_OVERCHARGED_AJ": {
+  "example_item": "UNIQUE_VANITY_2H_MULTITOOL_OVERCHARGED_AJ",
+  "name": "Razor-Sharp Axe",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_CANNOTATTACK"
+   ],
+   "q": [
+    "VANITY_2H_MULTITOOL_OVERCHARGED_AJ_SPELL"
+   ],
+   "w": []
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_PHYLACTERY_SOULKEEPER": {
+  "example_item": "UNIQUE_VANITY_2H_PHYLACTERY_SOULKEEPER",
+  "name": "Phylactery of Souls",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_CANNOTATTACK"
+   ],
+   "q": [],
+   "w": []
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_PORTALGUN_TELLAFRIEND": {
+  "example_item": "UNIQUE_VANITY_2H_PORTALGUN_TELLAFRIEND",
+  "name": "Recruiter's Portal Cannon",
+  "spells": {
+   "e": [],
+   "passive": [],
+   "q": [
+    "VANITY_SUMMONING_PORTAL"
+   ],
+   "w": []
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ },
+ "UNIQUE_VANITY_2H_SPELLBOOK_MAGE": {
+  "example_item": "UNIQUE_VANITY_2H_SPELLBOOK_MAGE",
+  "name": "Mage Adventurer's Spellbook",
+  "spells": {
+   "e": [],
+   "passive": [
+    "PASSIVE_CANNOTATTACK"
+   ],
+   "q": [
+    "VANITY_SPELLBOOK_FIREWORKS"
+   ],
+   "w": [
+    "VANITY_SPELLBOOK_BIRD"
+   ]
+  },
+  "subcategory": "weapons",
+  "two_handed": true
+ }
+}

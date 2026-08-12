@@ -1,0 +1,689 @@
+<title>Comp Forge</title>
+<style>
+:root{
+  --bg:#E8EBEE; --surface:#F4F6F8; --surface-2:#DEE3E8; --sunk:#D6DCE2;
+  --ink:#161C23; --ink-2:#4A5763; --ink-3:#71808D;
+  --rule:#C6CED6; --rule-2:#B2BCC6;
+  --brass:#8A6420; --brass-bright:#A87C32; --brass-wash:#EFE6D4;
+  --gap:#A63D37; --gap-wash:#F2DEDC;
+  --ok:#3F6B4C;
+  --over:#5E4E8C;
+  --shadow:0 1px 2px rgba(22,28,35,.07), 0 8px 24px -12px rgba(22,28,35,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1218; --surface:#141B23; --surface-2:#1D262F; --sunk:#0A0F14;
+    --ink:#E4E9EE; --ink-2:#94A3B1; --ink-3:#6B7A88;
+    --rule:#29343E; --rule-2:#38454F;
+    --brass:#D2A251; --brass-bright:#E5BC72; --brass-wash:#2A2416;
+    --gap:#D4665E; --gap-wash:#2E1A18;
+    --ok:#6FA983;
+    --over:#9B87D4;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1218; --surface:#141B23; --surface-2:#1D262F; --sunk:#0A0F14;
+  --ink:#E4E9EE; --ink-2:#94A3B1; --ink-3:#6B7A88;
+  --rule:#29343E; --rule-2:#38454F;
+  --brass:#D2A251; --brass-bright:#E5BC72; --brass-wash:#2A2416;
+  --gap:#D4665E; --gap-wash:#2E1A18;
+  --ok:#6FA983;
+  --over:#9B87D4;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+}
+
+:root{
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:"Segoe UI Variable Text","Segoe UI",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--sans); font-size:15px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:var(--serif); font-weight:600; text-wrap:balance; margin:0}
+.mono{font-family:var(--mono); font-variant-numeric:tabular-nums}
+button{font:inherit; color:inherit; cursor:pointer}
+:focus-visible{outline:2px solid var(--brass-bright); outline-offset:2px; border-radius:3px}
+
+/* ---------- masthead ---------- */
+.masthead{
+  border-bottom:1px solid var(--rule); background:var(--surface);
+  padding:18px 28px; display:flex; flex-wrap:wrap; gap:20px 28px; align-items:baseline;
+}
+.brandmark{display:flex; align-items:baseline; gap:12px}
+.brandmark h1{font-size:22px; letter-spacing:-.01em}
+.brandmark .sub{
+  font-family:var(--mono); font-size:11px; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--ink-3);
+}
+.masthead .spacer{flex:1}
+.chip{
+  font-family:var(--mono); font-size:11px; letter-spacing:.05em;
+  padding:4px 9px; border:1px solid var(--rule-2); border-radius:2px; color:var(--ink-2);
+  display:inline-flex; gap:7px; align-items:center; white-space:nowrap;
+}
+.chip .dot{width:6px; height:6px; border-radius:50%; background:var(--ok); flex:none}
+
+/* ---------- shell ---------- */
+.shell{
+  display:grid; grid-template-columns:minmax(280px,340px) minmax(0,1fr);
+  gap:0; align-items:start; max-width:1500px; margin:0 auto;
+}
+@media (max-width:960px){ .shell{grid-template-columns:1fr} }
+
+.rail{
+  border-right:1px solid var(--rule); padding:24px 22px 60px;
+  display:flex; flex-direction:column; gap:26px;
+  position:sticky; top:0; max-height:100vh; overflow-y:auto;
+}
+@media (max-width:960px){ .rail{position:static; max-height:none; border-right:0; border-bottom:1px solid var(--rule)} }
+
+.main{padding:24px 28px 80px; display:flex; flex-direction:column; gap:26px; min-width:0}
+
+.sec-label{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-3); display:flex; align-items:center; gap:10px; margin-bottom:11px;
+}
+.sec-label::after{content:""; flex:1; height:1px; background:var(--rule)}
+
+/* ---------- setup ---------- */
+.field{display:flex; flex-direction:column; gap:6px; margin-bottom:12px}
+.field label{font-size:12px; color:var(--ink-2)}
+select{
+  font:inherit; font-family:var(--mono); font-size:13px; padding:7px 9px;
+  background:var(--surface); color:var(--ink);
+  border:1px solid var(--rule-2); border-radius:3px; width:100%;
+}
+.size-row{display:flex; gap:4px; flex-wrap:wrap}
+.size-btn{
+  font-family:var(--mono); font-size:13px; width:32px; height:30px;
+  background:var(--surface); border:1px solid var(--rule-2); border-radius:3px;
+  color:var(--ink-2);
+}
+.size-btn[aria-pressed="true"]{
+  background:var(--brass); border-color:var(--brass); color:var(--surface); font-weight:600;
+}
+:root[data-theme="dark"] .size-btn[aria-pressed="true"],
+html:not([data-theme="light"]) .size-btn[aria-pressed="true"]{color:#0D1218}
+.notice{
+  font-size:11.5px; line-height:1.45; color:var(--ink-2);
+  background:var(--gap-wash); border-left:2px solid var(--gap);
+  padding:7px 10px; margin-top:8px; border-radius:0 3px 3px 0;
+}
+
+/* ---------- roster ---------- */
+.roster{display:flex; flex-direction:column; gap:5px}
+.slot{
+  display:flex; align-items:center; gap:9px; padding:8px 10px;
+  background:var(--surface); border:1px solid var(--rule); border-radius:3px;
+}
+.slot .n{font-family:var(--mono); font-size:10.5px; color:var(--ink-3); width:14px; flex:none}
+.slot .nm{flex:1; font-size:13.5px; min-width:0}
+.slot .fn{
+  font-family:var(--mono); font-size:10px; color:var(--ink-3);
+  letter-spacing:.04em; display:block; margin-top:1px;
+}
+.slot .x{
+  background:none; border:0; color:var(--ink-3); font-size:16px; line-height:1;
+  padding:2px 5px; border-radius:3px; flex:none;
+}
+.slot .x:hover{color:var(--gap); background:var(--gap-wash)}
+.slot.empty{
+  border-style:dashed; background:transparent; color:var(--ink-3);
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.05em;
+}
+
+/* ---------- weapon picker ---------- */
+.pick-grid{display:flex; flex-direction:column; gap:3px}
+.pick{
+  display:flex; align-items:center; gap:8px; text-align:left; width:100%;
+  padding:7px 9px; background:transparent; border:1px solid transparent; border-radius:3px;
+}
+.pick:hover:not(:disabled){background:var(--surface-2); border-color:var(--rule)}
+.pick:disabled{opacity:.38; cursor:not-allowed}
+.pick .nm{flex:1; font-size:13.5px; min-width:0}
+.prov{
+  font-family:var(--mono); font-size:9px; letter-spacing:.06em; padding:2px 5px;
+  border-radius:2px; flex:none; text-transform:uppercase;
+}
+.prov.curated{background:var(--brass-wash); color:var(--brass)}
+.prov.draft{background:var(--surface-2); color:var(--ink-3)}
+
+/* ---------- fitness header ---------- */
+.fitness{
+  background:var(--surface); border:1px solid var(--rule); border-radius:4px;
+  padding:18px 20px; display:flex; align-items:center; gap:24px; flex-wrap:wrap;
+  box-shadow:var(--shadow);
+}
+.fitness .num{font-family:var(--mono); font-size:40px; font-weight:600; line-height:1; letter-spacing:-.02em}
+.fitness .of{font-family:var(--mono); font-size:14px; color:var(--ink-3)}
+.fitness .lbl{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin-bottom:7px}
+.meter{flex:1; min-width:200px}
+.meter-track{height:7px; background:var(--sunk); border-radius:4px; overflow:hidden}
+.meter-fill{height:100%; background:var(--brass); border-radius:4px; transition:width .35s cubic-bezier(.4,0,.2,1)}
+
+/* ---------- capability readout ---------- */
+.groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:2px 30px}
+.grp{padding:12px 0 4px}
+.grp h3{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-2); margin-bottom:9px; padding-bottom:5px; border-bottom:1px solid var(--rule);
+}
+.cap{display:grid; grid-template-columns:1fr auto; gap:2px 10px; padding:5px 0; align-items:center}
+.cap-name{
+  font-family:var(--mono); font-size:12px; color:var(--ink-2);
+  background:none; border:0; padding:0; text-align:left; letter-spacing:.01em;
+}
+.cap-name:hover{color:var(--brass); text-decoration:underline; text-underline-offset:2px}
+.cap-val{font-family:var(--mono); font-size:11.5px; color:var(--ink-3); white-space:nowrap}
+.cap-bar{grid-column:1/-1; height:5px; background:var(--sunk); border-radius:3px; position:relative; overflow:hidden}
+.cap-bar i{position:absolute; inset:0 auto 0 0; border-radius:3px; transition:width .35s cubic-bezier(.4,0,.2,1)}
+.cap-bar i.met{background:var(--ok)}
+.cap-bar i.part{background:var(--brass)}
+.cap-bar i.none{background:var(--gap)}
+.cap-bar i.over{background:var(--over)}
+.cap.floor-hit .cap-name{color:var(--gap); font-weight:600}
+.tag{font-family:var(--mono); font-size:9px; letter-spacing:.05em; padding:1px 4px; border-radius:2px; margin-left:5px}
+.tag.floor{background:var(--gap-wash); color:var(--gap)}
+.tag.over{background:var(--surface-2); color:var(--over)}
+
+/* ---------- weaknesses ---------- */
+.weak-list{display:flex; flex-direction:column; gap:8px}
+.weak{
+  display:flex; align-items:baseline; gap:12px; padding:11px 14px;
+  background:var(--surface); border:1px solid var(--rule);
+  border-left:3px solid var(--gap); border-radius:0 3px 3px 0;
+}
+.weak .rank{font-family:var(--mono); font-size:10px; color:var(--ink-3); flex:none}
+.weak .txt{flex:1; font-size:13.5px; line-height:1.45}
+.weak .txt b{font-family:var(--mono); font-size:12.5px; font-weight:600}
+.weak .sc{font-family:var(--mono); font-size:12px; color:var(--gap); flex:none}
+
+/* ---------- recommendation ---------- */
+.rec{
+  background:var(--surface); border:1px solid var(--brass); border-radius:4px;
+  overflow:hidden; box-shadow:var(--shadow);
+}
+.rec-top{padding:18px 20px; border-bottom:1px solid var(--rule); background:var(--brass-wash)}
+.rec-eyebrow{
+  font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--brass); margin-bottom:8px;
+}
+.rec-name{font-family:var(--serif); font-size:27px; letter-spacing:-.01em; margin-bottom:3px}
+.rec-role{font-family:var(--mono); font-size:11.5px; color:var(--ink-2)}
+.rec-body{padding:16px 20px; display:flex; flex-direction:column; gap:16px}
+.why{font-size:14px; line-height:1.6; margin:0}
+.why em{color:var(--brass); font-style:normal; font-weight:600}
+.terms{display:flex; flex-direction:column; gap:3px}
+.term{
+  display:grid; grid-template-columns:58px 1fr auto; gap:12px; align-items:center;
+  font-family:var(--mono); font-size:12px; padding:4px 0;
+}
+.term .d{color:var(--ok); text-align:right; font-weight:600}
+.term .c{color:var(--ink-2)}
+.term .mv{color:var(--ink-3); font-size:11px}
+.formula{
+  font-family:var(--mono); font-size:11px; color:var(--ink-3); line-height:1.7;
+  border-top:1px solid var(--rule); padding-top:12px;
+}
+.formula .k{color:var(--ink-2)}
+.alts{display:flex; flex-direction:column; gap:5px}
+.alt{
+  display:flex; align-items:center; gap:11px; width:100%; text-align:left;
+  padding:9px 12px; background:transparent; border:1px solid var(--rule); border-radius:3px;
+}
+.alt:hover{border-color:var(--brass); background:var(--surface-2)}
+.alt .sc{font-family:var(--mono); font-size:12px; color:var(--brass); width:44px; flex:none; font-weight:600}
+.alt .nm{flex:1; font-size:13.5px}
+.alt .rz{font-family:var(--mono); font-size:10.5px; color:var(--ink-3); text-align:right}
+.add{
+  width:100%; padding:11px; background:var(--brass); color:var(--surface);
+  border:0; border-radius:3px; font-size:14px; font-weight:600; letter-spacing:.01em;
+}
+:root[data-theme="dark"] .add, html:not([data-theme="light"]) .add{color:#0D1218}
+.add:hover{background:var(--brass-bright)}
+
+.warn{
+  background:var(--gap-wash); border:1px solid var(--gap); border-radius:4px;
+  padding:14px 16px; display:flex; gap:12px; align-items:flex-start;
+}
+.warn .t{
+  font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--gap); flex:none; padding-top:2px;
+}
+.warn .b{font-size:13.5px; line-height:1.5}
+.warn .b code{font-family:var(--mono); font-size:12px}
+
+/* ---------- evidence drawer ---------- */
+.drawer{
+  position:fixed; inset:auto 0 0 0; background:var(--surface);
+  border-top:2px solid var(--brass); box-shadow:0 -8px 32px -12px rgba(0,0,0,.35);
+  padding:18px 24px 22px; max-height:52vh; overflow-y:auto; z-index:20;
+  transform:translateY(101%); transition:transform .28s cubic-bezier(.4,0,.2,1);
+}
+.drawer[data-open="true"]{transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){
+  .drawer{transition:none}
+  .meter-fill,.cap-bar i{transition:none}
+}
+.drawer-hd{display:flex; align-items:baseline; gap:14px; margin-bottom:14px; flex-wrap:wrap}
+.drawer-hd h3{font-family:var(--mono); font-size:13px; letter-spacing:.04em}
+.drawer-hd .close{margin-left:auto; background:none; border:0; color:var(--ink-3); font-size:20px; line-height:1; padding:2px 7px}
+.drawer-hd .close:hover{color:var(--ink)}
+.ev-tbl{width:100%; border-collapse:collapse; font-size:13px}
+.ev-tbl th{
+  font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ink-3); text-align:left; padding:0 14px 7px 0; font-weight:400;
+  border-bottom:1px solid var(--rule);
+}
+.ev-tbl td{padding:8px 14px 8px 0; border-bottom:1px solid var(--rule); vertical-align:top}
+.ev-tbl .sc{font-family:var(--mono); font-weight:600}
+.ev-tbl .sp{font-family:var(--mono); font-size:11.5px; color:var(--brass)}
+.ev-tbl .pend{font-family:var(--mono); font-size:11px; color:var(--ink-3); font-style:italic}
+.ev-empty{font-size:13px; color:var(--ink-2); padding:6px 0}
+.scroll-x{overflow-x:auto}
+
+.footnote{
+  font-size:12px; line-height:1.6; color:var(--ink-2);
+  border-top:1px solid var(--rule); padding-top:14px;
+}
+.footnote code{font-family:var(--mono); font-size:11.5px; color:var(--brass)}
+</style>
+
+<header class="masthead">
+  <div class="brandmark">
+    <h1>Comp Forge</h1>
+    <span class="sub">Albion composition engine</span>
+  </div>
+  <div class="spacer"></div>
+  <span class="chip"><span class="dot"></span>engine v0 · 9/9 golden tests</span>
+  <span class="chip">dataset <span class="mono" id="build-stamp">—</span></span>
+</header>
+
+<div class="shell">
+  <aside class="rail">
+    <section>
+      <div class="sec-label">Setup</div>
+      <div class="field">
+        <label for="content">Content type</label>
+        <select id="content">
+          <option value="castle_outpost">Castle Outpost</option>
+          <option value="roads" disabled>Roads of Avalon — template pending</option>
+          <option value="hellgate5" disabled>Hellgate 5v5 — template pending</option>
+          <option value="openworld" disabled>Open-world skirmish — template pending</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Party size</label>
+        <div class="size-row" id="sizes"></div>
+      </div>
+      <div id="size-notice"></div>
+    </section>
+
+    <section>
+      <div class="sec-label">Party</div>
+      <div class="roster" id="roster"></div>
+    </section>
+
+    <section>
+      <div class="sec-label">Add weapon</div>
+      <div class="pick-grid" id="picker"></div>
+    </section>
+  </aside>
+
+  <main class="main">
+    <section class="fitness">
+      <div>
+        <div class="lbl">Composition fitness</div>
+        <span class="num" id="fit-num">0.0</span>
+        <span class="of" id="fit-of">/ 0</span>
+      </div>
+      <div class="meter">
+        <div class="lbl">Requirements satisfied</div>
+        <div class="meter-track"><div class="meter-fill" id="fit-bar" style="width:0%"></div></div>
+      </div>
+    </section>
+
+    <div id="warn-slot"></div>
+
+    <section>
+      <div class="sec-label">Capability supply vs. target</div>
+      <div class="groups" id="groups"></div>
+    </section>
+
+    <section>
+      <div class="sec-label">Biggest weaknesses</div>
+      <div class="weak-list" id="weaknesses"></div>
+    </section>
+
+    <section id="rec-slot"></section>
+
+    <p class="footnote" id="footnote"></p>
+  </main>
+</div>
+
+<div class="drawer" id="drawer" data-open="false" role="dialog" aria-label="Evidence">
+  <div class="drawer-hd">
+    <h3 id="drawer-title">evidence</h3>
+    <span class="chip" id="drawer-rule">every nonzero score cites an equippable spell</span>
+    <button class="close" id="drawer-close" aria-label="Close evidence">&times;</button>
+  </div>
+  <div class="scroll-x"><div id="drawer-body"></div></div>
+</div>
+
+<script>
+const DATASET = {"_meta":{"illustrative_weapons":["2H_DAGGERPAIR","2H_HAMMER","2H_HARPOON_HELL","2H_HOLYSTAFF","2H_ICECRYSTAL_UNDEAD","2H_RAM_KEEPER","MAIN_ARCANESTAFF_UNDEAD","MAIN_RAPIER_MORGANA"],"lint_passed":true,"note":"NOT A RELEASE \u2014 contains illustrative placeholder sheets.","release_clean":false,"templates":["castle_outpost"],"unknown_to_game_data":[],"version":"2026.08.1","weapons_curated":6,"weapons_illustrative":8,"weapons_total":14},"scoring":{"capability_synergies":[{"a":"clump_create","b":"burst_aoe","bonus":1.5},{"a":"engage","b":"catch","bonus":0.8},{"a":"resist_shred","b":"burst_st","bonus":0.8},{"a":"heal_reduction","b":"sustained_dps","bonus":0.8}],"meta_prior":{"2H_HAMMER":0.8,"2H_HOLYSTAFF":0.6,"2H_ICECRYSTAL_UNDEAD":0.8,"2H_LONGBOW":0.6,"2H_MACE":1.0,"MAIN_HOLYSTAFF_AVALON":1.0,"MAIN_MACE":0.6},"role_sets":{"frontline":["2H_MACE","2H_HAMMER","MAIN_MACE","2H_RAM_KEEPER"],"healers":["MAIN_HOLYSTAFF_AVALON","2H_HOLYSTAFF","2H_NATURESTAFF_HELL"],"pure_dps":["2H_LONGBOW","MAIN_ARCANESTAFF_UNDEAD","2H_ICECRYSTAL_UNDEAD","2H_DAGGERPAIR","MAIN_RAPIER_MORGANA","2H_HARPOON_HELL"]},"weights":{"alpha":0.55,"beta":0.2,"delta":0.15,"gamma":0.7}},"templates":{"castle_outpost":{"base_size":7,"content":"castle_outpost","hard_floors":{"heal_sustain":{"floor_units":2.0,"min_party_size":4,"penalty_mult":1.5},"tankiness":{"floor_units":2.0,"min_party_size":5,"penalty_mult":1.0}},"name":"Castle Outpost","requirements":{"anti_zone":{"scales":false,"soft_cap":2.0,"target":1.0,"weight":3},"burst_aoe":{"scales":true,"soft_cap":9.0,"target":5.0,"weight":8},"cleanse":{"scales":false,"soft_cap":3.0,"target":1.0,"weight":5},"clump_create":{"scales":false,"soft_cap":4.0,"target":2.0,"weight":7},"disengage":{"scales":false,"soft_cap":3.0,"target":1.0,"weight":4},"engage":{"scales":false,"soft_cap":5.0,"target":2.0,"weight":7},"heal_burst":{"scales":true,"soft_cap":4.0,"target":2.0,"weight":6},"heal_reduction":{"scales":false,"soft_cap":3.0,"target":1.0,"weight":6},"heal_sustain":{"scales":true,"soft_cap":5.0,"target":3.0,"weight":10},"mobility":{"scales":true,"soft_cap":6.0,"target":2.0,"weight":3},"peel":{"scales":true,"soft_cap":6.0,"target":3.0,"weight":8},"purge":{"scales":false,"soft_cap":4.0,"target":2.0,"weight":6},"resist_shred":{"scales":false,"soft_cap":4.0,"target":2.0,"weight":5},"silence":{"scales":false,"soft_cap":3.0,"target":1.0,"weight":4},"stun":{"scales":true,"soft_cap":5.0,"target":2.0,"weight":4},"sustained_dps":{"scales":true,"soft_cap":7.0,"target":3.0,"weight":5},"tankiness":{"scales":true,"soft_cap":7.0,"target":4.0,"weight":9},"zone_control":{"scales":true,"soft_cap":7.0,"target":3.0,"weight":4}},"validated_sizes":[7]}},"weapons":{"2H_DAGGERPAIR":{"capabilities":{"burst_st":3,"execute":2,"mobility":1,"sustained_dps":2},"display_name":"Dagger Pair","evidence":{},"in_game_data":true,"role_hint":null,"source":"sheets/illustrative/prototype_v0.yaml","status":"illustrative","unique_name":"2H_DAGGERPAIR"},"2H_HAMMER":{"capabilities":{"clump_create":3,"engage":3,"peel":1,"stun":2,"tankiness":2,"zone_control":2},"display_name":"Great Hammer","evidence":{},"in_game_data":true,"role_hint":null,"source":"sheets/illustrative/prototype_v0.yaml","status":"illustrative","unique_name":"2H_HAMMER"},"2H_HARPOON_HELL":{"capabilities":{"buff_allies":1,"burst_aoe":1,"heal_reduction":3,"sustained_dps":2},"display_name":"Spirithunter","evidence":{},"in_game_data":true,"role_hint":null,"source":"sheets/illustrative/prototype_v0.yaml","status":"illustrative","unique_name":"2H_HARPOON_HELL"},"2H_HOLYSTAFF":{"capabilities":{"buff_allies":1,"cleanse":2,"heal_burst":3,"heal_sustain":3},"display_name":"Great Holy Staff","evidence":{},"in_game_data":true,"role_hint":null,"source":"sheets/illustrative/prototype_v0.yaml","status":"illustrative","unique_name":"2H_HOLYSTAFF"},"2H_HOLYSTAFF_UNDEAD":{"capabilities":{"buff_allies":2,"heal_burst":2,"heal_sustain":3,"knockback_displace":1,"peel":1},"display_name":"Redemption Staff","evidence":{"buff_allies":["HOLYHOT"],"heal_burst":["HOLYFLASH"],"heal_sustain":["CELESTIAL_SPHERE"],"knockback_displace":["PASSIVE_KNOCKBACK_CASTER_HOLYSTAFF"],"peel":["PULSINGHEAL"]},"in_game_data":true,"role_hint":"healer","source":"sheets/holy_line.yaml","status":"curated","unique_name":"2H_HOLYSTAFF_UNDEAD"},"2H_ICECRYSTAL_UNDEAD":{"capabilities":{"burst_aoe":3,"clump_create":2,"mobility":1,"root":1,"slow":2,"tankiness":1,"zone_control":3},"display_name":"Permafrost Prism","evidence":{},"in_game_data":true,"role_hint":null,"source":"sheets/illustrative/prototype_v0.yaml","status":"illustrative","unique_name":"2H_ICECRYSTAL_UNDEAD"},"2H_LONGBOW":{"capabilities":{"burst_aoe":2,"resist_shred":1,"root":1,"slow":2,"sustained_dps":2,"zone_control":2},"display_name":"Longbow","evidence":{"burst_aoe":["ARROWRAIN"],"resist_shred":["PASSIVE_ARMOR_PIERCE_STACK"],"root":["GROUNDARROW"],"slow":["ARROWRAIN"],"sustained_dps":["WEAPON_STATS"],"zone_control":["ARROWRAIN"]},"in_game_data":true,"role_hint":null,"source":"sheets/longbow.yaml","status":"curated","unique_name":"2H_LONGBOW"},"2H_MACE":{"capabilities":{"engage":2,"peel":3,"purge":3,"silence":3,"slow":1,"tankiness":3,"zone_control":2},"display_name":"Heavy Mace","evidence":{"engage":["CHARGE_ROOT"],"peel":["SHRIEKMACE"],"purge":["SHRIEKMACE"],"silence":["SHRIEKMACE"],"slow":["SACRED_GROUND"],"tankiness":["WEAPON_STATS"],"zone_control":["SACRED_GROUND"]},"in_game_data":true,"role_hint":null,"source":"sheets/mace_line.yaml","status":"curated","unique_name":"2H_MACE"},"2H_NATURESTAFF_HELL":{"capabilities":{"buff_allies":2,"cleanse":2,"heal_burst":1,"heal_sustain":3,"knockback_displace":1,"mobility":1,"self_sustain":1,"slow":1,"sustained_dps":1,"zone_control":1},"display_name":"Blight Staff","evidence":{"buff_allies":["NATURERESILIENCE"],"cleanse":["CLEANSEHEAL"],"heal_burst":["CLEANSEHEAL"],"heal_sustain":["ROTTENVINES"],"knockback_displace":["BRAMBLESEED"],"mobility":["ROTTENVINES"],"self_sustain":["PASSIVE_ARMOR_CASTER_NATURESTAFF"],"slow":["THORNSAREA"],"sustained_dps":["THORNSAREA"],"zone_control":["THORNSAREA"]},"in_game_data":true,"role_hint":"healer","source":"sheets/nature_line.yaml","status":"curated","unique_name":"2H_NATURESTAFF_HELL"},"2H_RAM_KEEPER":{"capabilities":{"clump_create":2,"engage":3,"peel":1,"stun":2,"tankiness":2},"display_name":"Grovekeeper","evidence":{},"in_game_data":true,"role_hint":null,"source":"sheets/illustrative/prototype_v0.yaml","status":"illustrative","unique_name":"2H_RAM_KEEPER"},"MAIN_ARCANESTAFF_UNDEAD":{"capabilities":{"burst_aoe":2,"clump_create":2,"energy_drain":2,"heal_reduction":1,"sustained_dps":2,"zone_control":1},"display_name":"Witchwork Staff","evidence":{},"in_game_data":true,"role_hint":null,"source":"sheets/illustrative/prototype_v0.yaml","status":"illustrative","unique_name":"MAIN_ARCANESTAFF_UNDEAD"},"MAIN_HOLYSTAFF_AVALON":{"capabilities":{"buff_allies":2,"disengage":2,"heal_burst":3,"heal_sustain":2,"knockback_displace":2,"mobility":3,"peel":3,"self_sustain":1},"display_name":"Hallowfall","evidence":{"buff_allies":["HOLYHOT"],"disengage":["DIVINE_JUMP"],"heal_burst":["DIVINE_JUMP"],"heal_sustain":["HEALINGBEAM"],"knockback_displace":["DIVINE_JUMP"],"mobility":["DIVINE_JUMP"],"peel":["DIVINE_JUMP"],"self_sustain":["DIVINE_JUMP"]},"in_game_data":true,"role_hint":"healer","source":"sheets/holy_line.yaml","status":"curated","unique_name":"MAIN_HOLYSTAFF_AVALON"},"MAIN_MACE":{"capabilities":{"engage":2,"mobility":2,"peel":2,"root":1,"stun":2,"tankiness":2},"display_name":"Mace","evidence":{"engage":["MACELEAP"],"mobility":["MACELEAP"],"peel":["GUARDRUNE"],"root":["CHARGE_ROOT"],"stun":["MACELEAP"],"tankiness":["WEAPON_STATS"]},"in_game_data":true,"role_hint":null,"source":"sheets/mace_line.yaml","status":"curated","unique_name":"MAIN_MACE"},"MAIN_RAPIER_MORGANA":{"capabilities":{"burst_st":2,"catch":2,"disengage":2,"execute":2,"mobility":3},"display_name":"Bloodletter","evidence":{},"in_game_data":true,"role_hint":null,"source":"sheets/illustrative/prototype_v0.yaml","status":"illustrative","unique_name":"MAIN_RAPIER_MORGANA"}}};
+const PARITY_EXPECTED = {"fitness": 18.83, "recs": ["MAIN_HOLYSTAFF_AVALON", "2H_HOLYSTAFF", "2H_NATURESTAFF_HELL", "2H_HOLYSTAFF_UNDEAD"], "weaknesses": ["heal_sustain", "peel", "engage"]};
+"use strict";
+/* Dashboard client. Reads the injected DATASET — the same
+   pipeline/out/dataset-latest.json that engine/engine.py consumes. No
+   capability numbers live in this file. Regenerate with:
+       py -3 pipeline/build_dashboard.py                                     */
+
+const META = DATASET._meta;
+const WEAPONS = DATASET.weapons;
+const SCORING = DATASET.scoring;
+const W = SCORING.weights;
+const GAMMA = W.gamma, ALPHA = W.alpha, BETA = W.beta, DELTA = W.delta;
+const META_PRIOR = SCORING.meta_prior || {};
+const SYNERGY_PAIRS = (SCORING.capability_synergies || []).map(s => [s.a, s.b, s.bonus]);
+
+let CONTENT = Object.keys(DATASET.templates)[0];
+let SIZE = DATASET.templates[CONTENT].base_size || 7;
+
+const tpl = () => DATASET.templates[CONTENT];
+const REQS = () => tpl().requirements;
+const FLOORS = () => tpl().hard_floors || {};
+const baseSize = () => tpl().base_size || 7;
+const validatedSizes = () => tpl().validated_sizes || [baseSize()];
+
+const target = cap => { const r = REQS()[cap];
+  return r.scales ? r.target * SIZE / baseSize() : r.target; };
+const softCap = cap => { const r = REQS()[cap];
+  return r.scales ? r.soft_cap * SIZE / baseSize() : r.soft_cap; };
+
+const capsOf = w => WEAPONS[w].capabilities || {};
+/* Display names and evidence IDs originate in ao-bin-dumps (an external game-data
+   repo), so they are escaped before ever reaching innerHTML. */
+const esc = s => String(s).replace(/[&<>"']/g, c =>
+  ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const nameOf = w => esc(WEAPONS[w].display_name || w);
+
+const GROUPS = {
+  Sustain:   ["heal_burst","heal_sustain","cleanse","self_sustain"],
+  Frontline: ["tankiness","engage","disengage","anti_dive","zone_control"],
+  Control:   ["stun","root","silence","knockback_displace","slow","clump_create","peel"],
+  Denial:    ["purge","anti_zone","heal_reduction","resist_shred","energy_drain"],
+  Damage:    ["burst_st","burst_aoe","sustained_dps","execute"],
+  Tempo:     ["mobility","catch","buff_allies"],
+};
+
+/* ---------------------------------------------------------------- engine
+   Mirrors engine/engine.py exactly; parity is asserted at the bottom. */
+
+function supply(party){
+  const s = {};
+  for (const w of party) for (const [c,v] of Object.entries(capsOf(w))) s[c] = (s[c]||0) + v;
+  return s;
+}
+function floorPenalty(cap, have){
+  const f = FLOORS()[cap];
+  if (!f || SIZE < f.min_party_size || have >= f.floor_units) return 0;
+  return f.penalty_mult * REQS()[cap].weight * (f.floor_units - have) / f.floor_units;
+}
+function fitness(party){
+  const s = supply(party); let total = 0;
+  for (const [cap, r] of Object.entries(REQS())){
+    const have = s[cap] || 0, t = target(cap), soft = softCap(cap);
+    total += r.weight * Math.pow(Math.min(1, have/t), GAMMA);
+    if (have > soft) total -= 0.5 * r.weight * (have - soft) / t;
+    total -= floorPenalty(cap, have);
+  }
+  return total;
+}
+const maxFitness = () => Object.values(REQS()).reduce((a,r) => a + r.weight, 0);
+function synergy(party){
+  const s = supply(party);
+  return SYNERGY_PAIRS.reduce((a,[x,y,b]) => a + b * Math.min(s[x]||0, s[y]||0), 0);
+}
+function explain(party, cand){
+  const s = supply(party), terms = [];
+  for (const [cap, r] of Object.entries(REQS())){
+    const gain = capsOf(cand)[cap] || 0;
+    if (!gain) continue;
+    const have = s[cap] || 0, t = target(cap);
+    let d = r.weight * (Math.pow(Math.min(1,(have+gain)/t), GAMMA) - Math.pow(Math.min(1,have/t), GAMMA));
+    d += floorPenalty(cap, have) - floorPenalty(cap, have + gain);
+    if (d > 0.05) terms.push({d:+d.toFixed(2), cap, before:have, after:have+gain, target:t});
+  }
+  return terms.sort((a,b) => b.d - a.d);
+}
+function recommend(party, topN = 4){
+  const bf = fitness(party), bs = synergy(party);
+  return Object.keys(WEAPONS).map(w => {
+    const dFit = fitness(party.concat([w])) - bf, dSyn = synergy(party.concat([w])) - bs;
+    const meta = META_PRIOR[w] || 0;
+    return {w, dFit, dSyn, meta, score: ALPHA*dFit + BETA*dSyn + DELTA*meta};
+  }).sort((a,b) => b.score - a.score).slice(0, topN);
+}
+function weaknesses(party, topN = 3){
+  const s = supply(party);
+  return Object.entries(REQS()).map(([cap, r]) => ({
+    cap, gap: r.weight * (1 - Math.pow(Math.min(1,(s[cap]||0)/target(cap)), GAMMA)),
+  })).sort((a,b) => b.gap - a.gap).slice(0, topN);
+}
+function uncoveredCaps(party){
+  const s = supply(party);
+  return Object.entries(REQS()).filter(([cap, r]) =>
+    r.weight >= 5 && (s[cap]||0)/target(cap) < 0.5).map(([cap]) => cap);
+}
+
+/* ------------------------------------------------------------------ copy */
+
+const CAP_PROSE = {
+  heal_sustain:"sustained healing", heal_burst:"burst healing", cleanse:"cleanse",
+  tankiness:"frontline that survives focus", engage:"a way to initiate",
+  disengage:"a way to get out", zone_control:"space denial", stun:"stuns",
+  root:"roots", silence:"silences", slow:"slows", clump_create:"stacking enemies for AoE",
+  peel:"backline protection", purge:"buff removal", heal_reduction:"healing reduction",
+  anti_zone:"clearing enemy ground zones",
+  resist_shred:"resistance shred", energy_drain:"energy pressure",
+  burst_st:"single-target burst", burst_aoe:"AoE burst", sustained_dps:"sustained damage",
+  execute:"execute pressure", mobility:"mobility", catch:"chase-down", buff_allies:"ally buffs",
+  self_sustain:"self-sustain", anti_dive:"anti-dive", knockback_displace:"enemy displacement",
+};
+const prose = c => CAP_PROSE[c] || c.replace(/_/g," ");
+
+function roleOf(w){
+  return Object.entries(capsOf(w)).sort((a,b) => b[1]-a[1]).slice(0,2)
+    .map(e => prose(e[0])).join(" · ");
+}
+function whySentence(party, cand){
+  const terms = explain(party, cand);
+  if (!party.length)
+    return `Opening pick. With nothing on the board, ${nameOf(cand)} scores highest because it covers ${terms.slice(0,2).map(t => prose(t.cap)).join(" and ")} — the capabilities this template weights most heavily.`;
+  const s = supply(party);
+  const strong = Object.keys(REQS()).filter(c => (s[c]||0)/target(c) >= 0.85)
+    .sort((a,b) => REQS()[b].weight - REQS()[a].weight).slice(0,2).map(prose);
+  const lead = terms[0], rest = terms.slice(1,3).map(t => prose(t.cap));
+  const f = lead && FLOORS()[lead.cap];
+  const floorClause = (f && (s[lead.cap]||0) < f.floor_units && SIZE >= f.min_party_size)
+    ? ` — and at size ${SIZE} that is below the hard floor, not merely suboptimal` : "";
+  return `${strong.length ? `Your party already covers ${strong.join(" and ")}` : "Your party is thin across the board"}, but has <em>${lead ? prose(lead.cap) : "gaps"}</em> at ${lead ? lead.before : 0} of ${lead ? target(lead.cap).toFixed(1) : "0"} units${floorClause}. ${nameOf(cand)} closes that${rest.length ? `, and adds ${rest.join(" and ")}` : ""}.`;
+}
+
+/* ---------------------------------------------------------------- render */
+
+let party = [];
+const $ = id => document.getElementById(id);
+
+function renderSetup(){
+  $("content").innerHTML = Object.entries(DATASET.templates)
+    .map(([k,t]) => `<option value="${k}" ${k===CONTENT?"selected":""}>${t.name}</option>`).join("");
+  $("sizes").innerHTML = [2,3,4,5,6,7,8,9,10].map(n =>
+    `<button class="size-btn" data-size="${n}" aria-pressed="${n===SIZE}">${n}</button>`).join("");
+  $("size-notice").innerHTML = validatedSizes().includes(SIZE) ? "" :
+    `<div class="notice"><b>Extrapolated.</b> This template is fitted and validated at size ${validatedSizes().join(", ")} only. Per-player targets are scaled linearly to ${SIZE}; flat threshold targets are unchanged. Tier-2 validation must confirm each size before this is trustworthy.</div>`;
+}
+function renderRoster(){
+  const rows = party.map((w,i) =>
+    `<div class="slot"><span class="n mono">${String(i+1).padStart(2,"0")}</span>
+      <span class="nm">${nameOf(w)}<span class="fn">${roleOf(w)}</span></span>
+      <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>`);
+  for (let i = party.length; i < SIZE; i++)
+    rows.push(`<div class="slot empty"><span class="n mono">${String(i+1).padStart(2,"0")}</span>open slot</div>`);
+  $("roster").innerHTML = rows.join("");
+}
+function renderPicker(){
+  $("picker").innerHTML = Object.keys(WEAPONS)
+    .sort((a,b) => nameOf(a).localeCompare(nameOf(b)))
+    .map(w => `<button class="pick" data-add="${w}" ${party.length >= SIZE ? "disabled" : ""}>
+      <span class="nm">${nameOf(w)}</span>
+      <span class="prov ${WEAPONS[w].status === "curated" ? "curated" : "draft"}">${WEAPONS[w].status === "curated" ? "curated" : "illustrative"}</span>
+    </button>`).join("");
+}
+function renderFitness(){
+  const f = fitness(party), max = maxFitness();
+  $("fit-num").textContent = f.toFixed(1);
+  $("fit-of").textContent = `/ ${max}`;
+  $("fit-bar").style.width = `${Math.max(0, Math.min(100, f/max*100))}%`;
+}
+function renderGroups(){
+  const s = supply(party);
+  $("groups").innerHTML = Object.entries(GROUPS).map(([g, caps]) => {
+    const rows = caps.filter(c => REQS()[c]).map(c => {
+      const have = s[c] || 0, t = target(c), soft = softCap(c);
+      const f = FLOORS()[c], floorHit = f && SIZE >= f.min_party_size && have < f.floor_units;
+      const over = have > soft;
+      const cls = over ? "over" : have === 0 ? "none" : have >= t ? "met" : "part";
+      return `<div class="cap ${floorHit ? "floor-hit" : ""}">
+        <button class="cap-name" data-cap="${c}">${c}${floorHit ? '<span class="tag floor">below floor</span>' : ""}${over ? '<span class="tag over">overstacked</span>' : ""}</button>
+        <span class="cap-val">${have.toFixed(0)} / ${t.toFixed(1)}</span>
+        <span class="cap-bar"><i class="${cls}" style="width:${over ? 100 : Math.min(100, have/t*100)}%"></i></span>
+      </div>`;
+    }).join("");
+    return rows ? `<div class="grp"><h3>${g}</h3>${rows}</div>` : "";
+  }).join("");
+}
+function renderWeaknesses(){
+  const s = supply(party);
+  $("weaknesses").innerHTML = weaknesses(party).map((x,i) =>
+    `<div class="weak"><span class="rank">${String(i+1).padStart(2,"0")}</span>
+      <span class="txt">You have <b>${(s[x.cap]||0).toFixed(0)}</b> of <b>${target(x.cap).toFixed(1)}</b> units of <b>${x.cap}</b> — ${prose(x.cap)}.</span>
+      <span class="sc">−${x.gap.toFixed(1)}</span></div>`).join("");
+}
+function renderWarning(){
+  const unc = uncoveredCaps(party), left = SIZE - party.length;
+  $("warn-slot").innerHTML = (party.length && left > 0 && left <= 2 && unc.length >= 3)
+    ? `<div class="warn"><span class="t">Lookahead</span>
+       <span class="b"><b>Greedy trap.</b> ${left} slot${left>1?"s":""} left but ${unc.length} high-weight capabilities still uncovered
+       (<code>${unc.join(", ")}</code>). No single weapon closes all of them — expect to leave at least ${unc.length - left} unmet whatever you pick next.</span></div>`
+    : "";
+}
+function renderRec(){
+  if (party.length >= SIZE){
+    $("rec-slot").innerHTML = `<div class="sec-label">Recommendation</div>
+      <div class="rec"><div class="rec-body"><p class="why">Party is full at ${SIZE}. Remove a slot to see what the engine would swap in.</p></div></div>`;
+    return;
+  }
+  const recs = recommend(party, 4), top = recs[0], terms = explain(party, top.w).slice(0,4);
+  $("rec-slot").innerHTML = `
+    <div class="sec-label">Recommendation — slot ${party.length + 1} of ${SIZE}</div>
+    <div class="rec">
+      <div class="rec-top">
+        <div class="rec-eyebrow">Highest marginal gain</div>
+        <div class="rec-name">${nameOf(top.w)}</div>
+        <div class="rec-role">${roleOf(top.w)}</div>
+      </div>
+      <div class="rec-body">
+        <p class="why">${whySentence(party, top.w)}</p>
+        <div class="terms">${terms.map(t => `<div class="term">
+          <span class="d">+${t.d.toFixed(2)}</span><span class="c">${t.cap}</span>
+          <span class="mv">${t.before.toFixed(0)} → ${t.after.toFixed(0)} of ${t.target.toFixed(1)}</span></div>`).join("")}</div>
+        <div class="formula">
+          <span class="k">score</span> = ${ALPHA}·Δfitness + ${BETA}·Δsynergy + ${DELTA}·metaPrior<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= ${ALPHA}·<b>${top.dFit.toFixed(2)}</b> + ${BETA}·<b>${top.dSyn.toFixed(2)}</b> + ${DELTA}·<b>${top.meta.toFixed(2)}</b> = <b>${top.score.toFixed(2)}</b><br>
+          <span class="k">metaPrior</span> is a hand-set guard value — real win-lift arrives in Phase 3 from battle data.
+        </div>
+        <button class="add" data-add="${top.w}">Add ${nameOf(top.w)} to party</button>
+        <div><div class="sec-label" style="margin-bottom:8px">Alternatives</div>
+          <div class="alts">${recs.slice(1).map(r => {
+            const t0 = explain(party, r.w)[0];
+            return `<button class="alt" data-add="${r.w}"><span class="sc">${r.score.toFixed(2)}</span>
+              <span class="nm">${nameOf(r.w)}</span>
+              <span class="rz">${t0 ? `+${t0.d.toFixed(1)} ${t0.cap}` : "no template gain"}</span></button>`;
+          }).join("")}</div>
+        </div>
+      </div>
+    </div>`;
+}
+function renderFootnote(){
+  const c = party.filter(w => WEAPONS[w].status === "curated").length;
+  $("footnote").innerHTML = `Dataset <code>v${META.version}</code> — <code>${META.weapons_curated} curated</code>, <code>${META.weapons_illustrative} illustrative</code> of ${META.weapons_total} weapons; evidence lint <code>${META.lint_passed ? "passed" : "FAILED"}</code>, release_clean <code>${META.release_clean}</code>.
+    This party: ${c} curated, ${party.length - c} illustrative.
+    Curated sheets cite an equippable spell for every nonzero score. Illustrative sheets carry design-doc §2.3 placeholder numbers and are <b>not</b> evidence-checked — they exist to keep the engine runnable during curation. Click any capability for its evidence chain.`;
+}
+function renderEvidence(cap){
+  const rows = party.filter(w => capsOf(w)[cap]).map(w => {
+    const ev = (WEAPONS[w].evidence || {})[cap];
+    return `<tr><td>${nameOf(w)}</td><td class="sc">${capsOf(w)[cap]}</td>
+      <td>${ev && ev.length ? ev.map(e => `<span class="sp">${esc(e)}</span>`).join(", ")
+            : '<span class="pend">no evidence — illustrative sheet, blocks release</span>'}</td>
+      <td class="mono" style="font-size:11px;color:var(--ink-3)">${w}</td></tr>`;
+  });
+  $("drawer-title").textContent = cap;
+  $("drawer-body").innerHTML = rows.length
+    ? `<table class="ev-tbl"><thead><tr><th>Weapon</th><th>Score</th><th>Evidence spell</th><th>Item key</th></tr></thead><tbody>${rows.join("")}</tbody></table>`
+    : `<p class="ev-empty">No weapon in this party supplies <span class="mono">${cap}</span>. Supply is 0 of ${target(cap).toFixed(1)} units.</p>`;
+  $("drawer").dataset.open = "true";
+}
+function render(){
+  renderSetup(); renderRoster(); renderPicker(); renderFitness();
+  renderGroups(); renderWeaknesses(); renderWarning(); renderRec(); renderFootnote();
+}
+
+document.addEventListener("click", e => {
+  const add = e.target.closest("[data-add]");
+  if (add && !add.disabled){ if (party.length < SIZE){ party.push(add.dataset.add); render(); } return; }
+  const rm = e.target.closest("[data-remove]");
+  if (rm){ party.splice(+rm.dataset.remove, 1); render(); return; }
+  const sz = e.target.closest("[data-size]");
+  if (sz){ SIZE = +sz.dataset.size; if (party.length > SIZE) party.length = SIZE; render(); return; }
+  const cap = e.target.closest("[data-cap]");
+  if (cap){ renderEvidence(cap.dataset.cap); return; }
+  if (e.target.closest("#drawer-close")){ $("drawer").dataset.open = "false"; return; }
+  if (!e.target.closest("#drawer")) $("drawer").dataset.open = "false";
+});
+document.addEventListener("change", e => {
+  if (e.target.id === "content"){ CONTENT = e.target.value; SIZE = baseSize(); party = []; render(); }
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape") $("drawer").dataset.open = "false"; });
+
+$("build-stamp").textContent = `v${META.version} · ${META.weapons_curated}/${META.weapons_total} curated`;
+
+/* Seed with the design doc's worked example (§4.3), if those sheets exist. */
+const SEED = ["2H_LONGBOW","MAIN_ARCANESTAFF_UNDEAD","2H_ICECRYSTAL_UNDEAD"].filter(w => WEAPONS[w]);
+party = SEED;
+render();
+
+/* Parity guard. PARITY_EXPECTED is injected at build time by running
+   engine/engine.py over the same seed party, so this compares the client
+   against the Python engine's ACTUAL output rather than a hardcoded name that
+   goes stale the moment a sheet is curated. */
+(function parity(){
+  if (typeof PARITY_EXPECTED === "undefined" || !SEED.length) return;
+  const got = {
+    fitness: +fitness(SEED).toFixed(2),
+    recs: recommend(SEED, 4).map(r => r.w),
+    weaknesses: weaknesses(SEED).map(x => x.cap),
+  };
+  const ok = JSON.stringify(got) === JSON.stringify(PARITY_EXPECTED);
+  (ok ? console.info : console.error)("engine parity vs engine.py:",
+    ok ? "OK" : "MISMATCH", ok ? got : {got, expected: PARITY_EXPECTED});
+})();
+</script>

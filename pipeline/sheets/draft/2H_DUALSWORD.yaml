@@ -1,0 +1,24 @@
+# DRAFT — auto-seeded from the structured effect map. Usage: 7 sightings, dominant role: melee.
+# Every score is provisional; the comment names the effect and target
+# direction it was derived from. Humans: adjust scores, ADD what the
+# effect layer cannot see (zone_control/burst_aoe/clump_create/heal_burst/
+# anti_dive), then move to sheets/.
+
+- weapon: 2H_DUALSWORD
+  # Adept's Dual Swords
+  role_hint: melee
+  capabilities:
+    - {cap: buff_allies, score: 1, evidence: PASSIVE_ARMORCHANCE_SWORD, review: TODO}   # PASSIVE: Increased Defense — magicresistance+ on ally; physicalarmor+ on ally
+    - {cap: catch, score: 2, evidence: SPINATTACK, review: TODO}   # E: Spinning Blades — dash on self; immunity:slow on self
+    - {cap: damage_debuff, score: 1, evidence: PASSIVE_REDUCE_DMG_SWORD, review: TODO}   # PASSIVE: Weakening — magicattackdamagebonus- on enemy; magicspelldamagebonus- on enemy
+    - {cap: disengage, score: 2, evidence: SPINATTACK, review: TODO}   # E: Spinning Blades — dash on self; immunity:root on self
+    - {cap: engage, score: 2, evidence: SPINATTACK, review: TODO}   # E: Spinning Blades — dash on self; immunity:forcedmovement on self
+    - {cap: heal_reduction, score: 1, evidence: DEFENSERUN, review: TODO}   # W: Iron Will — remove:heal on enemy
+    - {cap: mobility, score: 2, evidence: SPINATTACK, review: TODO}   # E: Spinning Blades — dash on self; immunity:root on self
+    - {cap: peel, score: 1, evidence: PASSIVE_ARMORCHANCE_SWORD, review: TODO}   # PASSIVE: Increased Defense — magicresistance+ on ally; physicalarmor+ on ally
+    - {cap: purge, score: 1, evidence: DEFENSERUN, review: TODO}   # W: Iron Will — remove:buff on enemy; remove:buff_damageshield on enemy
+    - {cap: reveal, score: 1, evidence: DEFENSERUN, review: TODO}   # W: Iron Will — remove:invisibility on enemy
+    - {cap: root, score: 1, evidence: SPLITTINGSLASH, review: TODO}   # W: Splitting Slash — root on enemy; prose:root
+    - {cap: self_sustain, score: 1, evidence: PASSIVE_ARMORCHANCE_SWORD, review: TODO}   # PASSIVE: Increased Defense — magicresistance+ on self; physicalarmor+ on self
+    - {cap: slow, score: 1, evidence: HAMSTRINGSWORD, review: TODO}   # W: Hamstring — movespeedbonus- on enemy; prose:slow
+    - {cap: tankiness, score: 2, evidence: SPINATTACK, review: TODO}   # E: Spinning Blades — immunity:forcedmovement on self; immunity:silence on self

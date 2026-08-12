@@ -1,0 +1,378 @@
+<title>Comp Forge</title>
+<style>
+:root{
+  --bg:#E8EBEE; --surface:#F4F6F8; --surface-2:#DEE3E8; --sunk:#D6DCE2;
+  --ink:#161C23; --ink-2:#4A5763; --ink-3:#71808D;
+  --rule:#C6CED6; --rule-2:#B2BCC6;
+  --brass:#8A6420; --brass-bright:#A87C32; --brass-wash:#EFE6D4;
+  --gap:#A63D37; --gap-wash:#F2DEDC;
+  --ok:#3F6B4C;
+  --over:#5E4E8C;
+  --shadow:0 1px 2px rgba(22,28,35,.07), 0 8px 24px -12px rgba(22,28,35,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1218; --surface:#141B23; --surface-2:#1D262F; --sunk:#0A0F14;
+    --ink:#E4E9EE; --ink-2:#94A3B1; --ink-3:#6B7A88;
+    --rule:#29343E; --rule-2:#38454F;
+    --brass:#D2A251; --brass-bright:#E5BC72; --brass-wash:#2A2416;
+    --gap:#D4665E; --gap-wash:#2E1A18;
+    --ok:#6FA983;
+    --over:#9B87D4;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1218; --surface:#141B23; --surface-2:#1D262F; --sunk:#0A0F14;
+  --ink:#E4E9EE; --ink-2:#94A3B1; --ink-3:#6B7A88;
+  --rule:#29343E; --rule-2:#38454F;
+  --brass:#D2A251; --brass-bright:#E5BC72; --brass-wash:#2A2416;
+  --gap:#D4665E; --gap-wash:#2E1A18;
+  --ok:#6FA983;
+  --over:#9B87D4;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.7);
+}
+
+:root{
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:"Segoe UI Variable Text","Segoe UI",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--sans); font-size:15px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:var(--serif); font-weight:600; text-wrap:balance; margin:0}
+.mono{font-family:var(--mono); font-variant-numeric:tabular-nums}
+button{font:inherit; color:inherit; cursor:pointer}
+:focus-visible{outline:2px solid var(--brass-bright); outline-offset:2px; border-radius:3px}
+
+/* ---------- masthead ---------- */
+.masthead{
+  border-bottom:1px solid var(--rule); background:var(--surface);
+  padding:18px 28px; display:flex; flex-wrap:wrap; gap:20px 28px; align-items:baseline;
+}
+.brandmark{display:flex; align-items:baseline; gap:12px}
+.brandmark h1{font-size:22px; letter-spacing:-.01em}
+.brandmark .sub{
+  font-family:var(--mono); font-size:11px; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--ink-3);
+}
+.masthead .spacer{flex:1}
+.chip{
+  font-family:var(--mono); font-size:11px; letter-spacing:.05em;
+  padding:4px 9px; border:1px solid var(--rule-2); border-radius:2px; color:var(--ink-2);
+  display:inline-flex; gap:7px; align-items:center; white-space:nowrap;
+}
+.chip .dot{width:6px; height:6px; border-radius:50%; background:var(--ok); flex:none}
+
+/* ---------- shell ---------- */
+.shell{
+  display:grid; grid-template-columns:minmax(280px,340px) minmax(0,1fr);
+  gap:0; align-items:start; max-width:1500px; margin:0 auto;
+}
+@media (max-width:960px){ .shell{grid-template-columns:1fr} }
+
+.rail{
+  border-right:1px solid var(--rule); padding:24px 22px 60px;
+  display:flex; flex-direction:column; gap:26px;
+  position:sticky; top:0; max-height:100vh; overflow-y:auto;
+}
+@media (max-width:960px){ .rail{position:static; max-height:none; border-right:0; border-bottom:1px solid var(--rule)} }
+
+.main{padding:24px 28px 80px; display:flex; flex-direction:column; gap:26px; min-width:0}
+
+.sec-label{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-3); display:flex; align-items:center; gap:10px; margin-bottom:11px;
+}
+.sec-label::after{content:""; flex:1; height:1px; background:var(--rule)}
+
+/* ---------- setup ---------- */
+.field{display:flex; flex-direction:column; gap:6px; margin-bottom:12px}
+.field label{font-size:12px; color:var(--ink-2)}
+select{
+  font:inherit; font-family:var(--mono); font-size:13px; padding:7px 9px;
+  background:var(--surface); color:var(--ink);
+  border:1px solid var(--rule-2); border-radius:3px; width:100%;
+}
+.size-row{display:flex; gap:4px; flex-wrap:wrap}
+.size-btn{
+  font-family:var(--mono); font-size:13px; width:32px; height:30px;
+  background:var(--surface); border:1px solid var(--rule-2); border-radius:3px;
+  color:var(--ink-2);
+}
+.size-btn[aria-pressed="true"]{
+  background:var(--brass); border-color:var(--brass); color:var(--surface); font-weight:600;
+}
+:root[data-theme="dark"] .size-btn[aria-pressed="true"],
+html:not([data-theme="light"]) .size-btn[aria-pressed="true"]{color:#0D1218}
+.notice{
+  font-size:11.5px; line-height:1.45; color:var(--ink-2);
+  background:var(--gap-wash); border-left:2px solid var(--gap);
+  padding:7px 10px; margin-top:8px; border-radius:0 3px 3px 0;
+}
+
+/* ---------- roster ---------- */
+.roster{display:flex; flex-direction:column; gap:5px}
+.slot{
+  display:flex; align-items:center; gap:9px; padding:8px 10px;
+  background:var(--surface); border:1px solid var(--rule); border-radius:3px;
+}
+.slot .n{font-family:var(--mono); font-size:10.5px; color:var(--ink-3); width:14px; flex:none}
+.slot .nm{flex:1; font-size:13.5px; min-width:0}
+.slot .fn{
+  font-family:var(--mono); font-size:10px; color:var(--ink-3);
+  letter-spacing:.04em; display:block; margin-top:1px;
+}
+.slot .x{
+  background:none; border:0; color:var(--ink-3); font-size:16px; line-height:1;
+  padding:2px 5px; border-radius:3px; flex:none;
+}
+.slot .x:hover{color:var(--gap); background:var(--gap-wash)}
+.slot.empty{
+  border-style:dashed; background:transparent; color:var(--ink-3);
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.05em;
+}
+
+/* ---------- weapon picker ---------- */
+.pick-grid{display:flex; flex-direction:column; gap:3px}
+.pick{
+  display:flex; align-items:center; gap:8px; text-align:left; width:100%;
+  padding:7px 9px; background:transparent; border:1px solid transparent; border-radius:3px;
+}
+.pick:hover:not(:disabled){background:var(--surface-2); border-color:var(--rule)}
+.pick:disabled{opacity:.38; cursor:not-allowed}
+.pick .nm{flex:1; font-size:13.5px; min-width:0}
+.prov{
+  font-family:var(--mono); font-size:9px; letter-spacing:.06em; padding:2px 5px;
+  border-radius:2px; flex:none; text-transform:uppercase;
+}
+.prov.curated{background:var(--brass-wash); color:var(--brass)}
+.prov.draft{background:var(--surface-2); color:var(--ink-3)}
+
+/* ---------- fitness header ---------- */
+.fitness{
+  background:var(--surface); border:1px solid var(--rule); border-radius:4px;
+  padding:18px 20px; display:flex; align-items:center; gap:24px; flex-wrap:wrap;
+  box-shadow:var(--shadow);
+}
+.fitness .num{font-family:var(--mono); font-size:40px; font-weight:600; line-height:1; letter-spacing:-.02em}
+.fitness .of{font-family:var(--mono); font-size:14px; color:var(--ink-3)}
+.fitness .lbl{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin-bottom:7px}
+.meter{flex:1; min-width:200px}
+.meter-track{height:7px; background:var(--sunk); border-radius:4px; overflow:hidden}
+.meter-fill{height:100%; background:var(--brass); border-radius:4px; transition:width .35s cubic-bezier(.4,0,.2,1)}
+
+/* ---------- capability readout ---------- */
+.groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:2px 30px}
+.grp{padding:12px 0 4px}
+.grp h3{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-2); margin-bottom:9px; padding-bottom:5px; border-bottom:1px solid var(--rule);
+}
+.cap{display:grid; grid-template-columns:1fr auto; gap:2px 10px; padding:5px 0; align-items:center}
+.cap-name{
+  font-family:var(--mono); font-size:12px; color:var(--ink-2);
+  background:none; border:0; padding:0; text-align:left; letter-spacing:.01em;
+}
+.cap-name:hover{color:var(--brass); text-decoration:underline; text-underline-offset:2px}
+.cap-val{font-family:var(--mono); font-size:11.5px; color:var(--ink-3); white-space:nowrap}
+.cap-bar{grid-column:1/-1; height:5px; background:var(--sunk); border-radius:3px; position:relative; overflow:hidden}
+.cap-bar i{position:absolute; inset:0 auto 0 0; border-radius:3px; transition:width .35s cubic-bezier(.4,0,.2,1)}
+.cap-bar i.met{background:var(--ok)}
+.cap-bar i.part{background:var(--brass)}
+.cap-bar i.none{background:var(--gap)}
+.cap-bar i.over{background:var(--over)}
+.cap.floor-hit .cap-name{color:var(--gap); font-weight:600}
+.tag{font-family:var(--mono); font-size:9px; letter-spacing:.05em; padding:1px 4px; border-radius:2px; margin-left:5px}
+.tag.floor{background:var(--gap-wash); color:var(--gap)}
+.tag.over{background:var(--surface-2); color:var(--over)}
+
+/* ---------- weaknesses ---------- */
+.weak-list{display:flex; flex-direction:column; gap:8px}
+.weak{
+  display:flex; align-items:baseline; gap:12px; padding:11px 14px;
+  background:var(--surface); border:1px solid var(--rule);
+  border-left:3px solid var(--gap); border-radius:0 3px 3px 0;
+}
+.weak .rank{font-family:var(--mono); font-size:10px; color:var(--ink-3); flex:none}
+.weak .txt{flex:1; font-size:13.5px; line-height:1.45}
+.weak .txt b{font-family:var(--mono); font-size:12.5px; font-weight:600}
+.weak .sc{font-family:var(--mono); font-size:12px; color:var(--gap); flex:none}
+
+/* ---------- recommendation ---------- */
+.rec{
+  background:var(--surface); border:1px solid var(--brass); border-radius:4px;
+  overflow:hidden; box-shadow:var(--shadow);
+}
+.rec-top{padding:18px 20px; border-bottom:1px solid var(--rule); background:var(--brass-wash)}
+.rec-eyebrow{
+  font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--brass); margin-bottom:8px;
+}
+.rec-name{font-family:var(--serif); font-size:27px; letter-spacing:-.01em; margin-bottom:3px}
+.rec-role{font-family:var(--mono); font-size:11.5px; color:var(--ink-2)}
+.rec-body{padding:16px 20px; display:flex; flex-direction:column; gap:16px}
+.why{font-size:14px; line-height:1.6; margin:0}
+.why em{color:var(--brass); font-style:normal; font-weight:600}
+.terms{display:flex; flex-direction:column; gap:3px}
+.term{
+  display:grid; grid-template-columns:58px 1fr auto; gap:12px; align-items:center;
+  font-family:var(--mono); font-size:12px; padding:4px 0;
+}
+.term .d{color:var(--ok); text-align:right; font-weight:600}
+.term .c{color:var(--ink-2)}
+.term .mv{color:var(--ink-3); font-size:11px}
+.formula{
+  font-family:var(--mono); font-size:11px; color:var(--ink-3); line-height:1.7;
+  border-top:1px solid var(--rule); padding-top:12px;
+}
+.formula .k{color:var(--ink-2)}
+.alts{display:flex; flex-direction:column; gap:5px}
+.alt{
+  display:flex; align-items:center; gap:11px; width:100%; text-align:left;
+  padding:9px 12px; background:transparent; border:1px solid var(--rule); border-radius:3px;
+}
+.alt:hover{border-color:var(--brass); background:var(--surface-2)}
+.alt .sc{font-family:var(--mono); font-size:12px; color:var(--brass); width:44px; flex:none; font-weight:600}
+.alt .nm{flex:1; font-size:13.5px}
+.alt .rz{font-family:var(--mono); font-size:10.5px; color:var(--ink-3); text-align:right}
+.add{
+  width:100%; padding:11px; background:var(--brass); color:var(--surface);
+  border:0; border-radius:3px; font-size:14px; font-weight:600; letter-spacing:.01em;
+}
+:root[data-theme="dark"] .add, html:not([data-theme="light"]) .add{color:#0D1218}
+.add:hover{background:var(--brass-bright)}
+
+.warn{
+  background:var(--gap-wash); border:1px solid var(--gap); border-radius:4px;
+  padding:14px 16px; display:flex; gap:12px; align-items:flex-start;
+}
+.warn .t{
+  font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--gap); flex:none; padding-top:2px;
+}
+.warn .b{font-size:13.5px; line-height:1.5}
+.warn .b code{font-family:var(--mono); font-size:12px}
+
+/* ---------- evidence drawer ---------- */
+.drawer{
+  position:fixed; inset:auto 0 0 0; background:var(--surface);
+  border-top:2px solid var(--brass); box-shadow:0 -8px 32px -12px rgba(0,0,0,.35);
+  padding:18px 24px 22px; max-height:52vh; overflow-y:auto; z-index:20;
+  transform:translateY(101%); transition:transform .28s cubic-bezier(.4,0,.2,1);
+}
+.drawer[data-open="true"]{transform:translateY(0)}
+@media (prefers-reduced-motion:reduce){
+  .drawer{transition:none}
+  .meter-fill,.cap-bar i{transition:none}
+}
+.drawer-hd{display:flex; align-items:baseline; gap:14px; margin-bottom:14px; flex-wrap:wrap}
+.drawer-hd h3{font-family:var(--mono); font-size:13px; letter-spacing:.04em}
+.drawer-hd .close{margin-left:auto; background:none; border:0; color:var(--ink-3); font-size:20px; line-height:1; padding:2px 7px}
+.drawer-hd .close:hover{color:var(--ink)}
+.ev-tbl{width:100%; border-collapse:collapse; font-size:13px}
+.ev-tbl th{
+  font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ink-3); text-align:left; padding:0 14px 7px 0; font-weight:400;
+  border-bottom:1px solid var(--rule);
+}
+.ev-tbl td{padding:8px 14px 8px 0; border-bottom:1px solid var(--rule); vertical-align:top}
+.ev-tbl .sc{font-family:var(--mono); font-weight:600}
+.ev-tbl .sp{font-family:var(--mono); font-size:11.5px; color:var(--brass)}
+.ev-tbl .pend{font-family:var(--mono); font-size:11px; color:var(--ink-3); font-style:italic}
+.ev-empty{font-size:13px; color:var(--ink-2); padding:6px 0}
+.scroll-x{overflow-x:auto}
+
+.footnote{
+  font-size:12px; line-height:1.6; color:var(--ink-2);
+  border-top:1px solid var(--rule); padding-top:14px;
+}
+.footnote code{font-family:var(--mono); font-size:11.5px; color:var(--brass)}
+</style>
+
+<header class="masthead">
+  <div class="brandmark">
+    <h1>Comp Forge</h1>
+    <span class="sub">Albion composition engine</span>
+  </div>
+  <div class="spacer"></div>
+  <span class="chip"><span class="dot"></span>engine v0 · 9/9 golden tests</span>
+  <span class="chip">dataset <span class="mono" id="build-stamp">—</span></span>
+</header>
+
+<div class="shell">
+  <aside class="rail">
+    <section>
+      <div class="sec-label">Setup</div>
+      <div class="field">
+        <label for="content">Content type</label>
+        <select id="content">
+          <option value="castle_outpost">Castle Outpost</option>
+          <option value="roads" disabled>Roads of Avalon — template pending</option>
+          <option value="hellgate5" disabled>Hellgate 5v5 — template pending</option>
+          <option value="openworld" disabled>Open-world skirmish — template pending</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Party size</label>
+        <div class="size-row" id="sizes"></div>
+      </div>
+      <div id="size-notice"></div>
+    </section>
+
+    <section>
+      <div class="sec-label">Party</div>
+      <div class="roster" id="roster"></div>
+    </section>
+
+    <section>
+      <div class="sec-label">Add weapon</div>
+      <div class="pick-grid" id="picker"></div>
+    </section>
+  </aside>
+
+  <main class="main">
+    <section class="fitness">
+      <div>
+        <div class="lbl">Composition fitness</div>
+        <span class="num" id="fit-num">0.0</span>
+        <span class="of" id="fit-of">/ 0</span>
+      </div>
+      <div class="meter">
+        <div class="lbl">Requirements satisfied</div>
+        <div class="meter-track"><div class="meter-fill" id="fit-bar" style="width:0%"></div></div>
+      </div>
+    </section>
+
+    <div id="warn-slot"></div>
+
+    <section>
+      <div class="sec-label">Capability supply vs. target</div>
+      <div class="groups" id="groups"></div>
+    </section>
+
+    <section>
+      <div class="sec-label">Biggest weaknesses</div>
+      <div class="weak-list" id="weaknesses"></div>
+    </section>
+
+    <section id="rec-slot"></section>
+
+    <p class="footnote" id="footnote"></p>
+  </main>
+</div>
+
+<div class="drawer" id="drawer" data-open="false" role="dialog" aria-label="Evidence">
+  <div class="drawer-hd">
+    <h3 id="drawer-title">evidence</h3>
+    <span class="chip" id="drawer-rule">every nonzero score cites an equippable spell</span>
+    <button class="close" id="drawer-close" aria-label="Close evidence">&times;</button>
+  </div>
+  <div class="scroll-x"><div id="drawer-body"></div></div>
+</div>
+

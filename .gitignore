@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+
+# Local game-data clone — regenerate with pipeline/parse_dumps.py, never commit
+# (it is ~150 MB of Sandbox Interactive's client data)
+ao-bin-dumps/
+
+# Tier-2 blind-test responses may contain other people's names; keep them local
+tests/tier2_form_filled*.md
+tests/*_responses.md
+
+# NOTE: pipeline/out/*.json IS committed on purpose. It is the parsed game data
+# the engine, lint and dashboard all read, it is small (~600 KB total), and
+# committing it means the project runs without a 150 MB clone.

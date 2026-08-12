@@ -1,0 +1,23 @@
+# DRAFT — auto-seeded from the structured effect map. Usage: 4 sightings, dominant role: melee.
+# Every score is provisional; the comment names the effect and target
+# direction it was derived from. Humans: adjust scores, ADD what the
+# effect layer cannot see (zone_control/burst_aoe/clump_create/heal_burst/
+# anti_dive), then move to sheets/.
+
+- weapon: 2H_AXE_AVALON
+  # Adept's Realmbreaker
+  role_hint: melee
+  capabilities:
+    - {cap: buff_allies, score: 1, evidence: PASSIVE_ARMORCHANCE_AXE, review: TODO}   # PASSIVE: Increased Defense — magicresistance+ on ally; physicalarmor+ on ally
+    - {cap: catch, score: 2, evidence: LETHAL_CLEAVER, review: TODO}   # E: Aftershock — dash on self
+    - {cap: disengage, score: 2, evidence: LETHAL_CLEAVER, review: TODO}   # E: Aftershock — dash on self
+    - {cap: engage, score: 2, evidence: LETHAL_CLEAVER, review: TODO}   # E: Aftershock — dash on self
+    - {cap: heal_reduction, score: 1, evidence: AXE_CHARGE, review: TODO}   # W: Battle Rush — healmodifier- on enemy
+    - {cap: heal_sustain, score: 2, evidence: LETHAL_CLEAVER, review: TODO}   # E: Aftershock — prose:heal
+    - {cap: knockback_displace, score: 2, evidence: LETHAL_CLEAVER, review: TODO}   # E: Aftershock — knockback on enemy; prose:knockback
+    - {cap: mobility, score: 2, evidence: LETHAL_CLEAVER, review: TODO}   # E: Aftershock — dash on self
+    - {cap: peel, score: 2, evidence: LETHAL_CLEAVER, review: TODO}   # E: Aftershock — knockback on enemy
+    - {cap: resist_shred, score: 1, evidence: AXESMASH, review: TODO}   # W: Deadly Chop — magicresistance- on enemy; physicalarmor- on enemy
+    - {cap: root, score: 1, evidence: RENDINGCOMBO, review: TODO}   # Q: Rending Rage — prose:root
+    - {cap: self_sustain, score: 2, evidence: LETHAL_CLEAVER, review: TODO}   # E: Aftershock — prose:heal
+    - {cap: tankiness, score: 1, evidence: PASSIVE_ARMORCHANCE_AXE, review: TODO}   # PASSIVE: Increased Defense — magicresistance+ on self; physicalarmor+ on self

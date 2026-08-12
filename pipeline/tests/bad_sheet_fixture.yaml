@@ -1,0 +1,17 @@
+# LINT SELF-TEST FIXTURE — deliberately wrong. Reproduces the three real
+# curation errors found during review. The lint MUST flag all three.
+# Run: python3 evidence_lint.py tests/bad_sheet_fixture.yaml  (expect exit 1)
+
+- weapon: MAIN_MACE
+  capabilities:
+    # Error class 1: capability the weapon simply doesn't have (real bug: caught by user)
+    - {cap: purge, score: 1, evidence: GUARDRUNE}          # Guard Rune doesn't purge
+    # Error class 2: evidence spell not equippable on this weapon (gear smuggling)
+    - {cap: cleanse, score: 2, evidence: SHRIEKMACE}       # Battle Howl is Heavy Mace's E
+
+- weapon: 2H_LONGBOW
+  capabilities:
+    # Error class 3: direction misattribution (real bug: caught by user)
+    - {cap: knockback_displace, score: 2, evidence: JUMPSHOT2}   # Frost Shot pushes the USER
+    # Error class 1 again (real bug: caught by dump data)
+    - {cap: resist_shred, score: 2, evidence: GROUNDARROW}       # Ray of Light is a root

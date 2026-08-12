@@ -1,0 +1,14 @@
+# Longbow — corrected after review: no knockback_displace (Frost Shot pushes the
+# USER, and isn't in group kits) and no resist_shred (nothing in the bow line
+# reduces resistances — earlier draft fabricated it).
+
+- weapon: 2H_LONGBOW
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: ARROWRAIN}   # Rain of Arrows (E)
+    - {cap: zone_control,  score: 2, evidence: ARROWRAIN}   # channeled AoE slow zone
+    - {cap: slow,          score: 2, evidence: ARROWRAIN}
+    - {cap: sustained_dps, score: 2, evidence: WEAPON_STATS}
+    - {cap: root,          score: 1, evidence: GROUNDARROW} # Ray of Light (W)
+    # resist_shred survives at score 1: NOT from any Q/W (earlier draft's error)
+    # but from the Piercing Arrows passive — auto-attacks stack a Defense debuff
+    - {cap: resist_shred,  score: 1, evidence: PASSIVE_ARMOR_PIERCE_STACK}

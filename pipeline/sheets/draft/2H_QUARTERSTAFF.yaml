@@ -1,0 +1,22 @@
+# DRAFT — auto-seeded from the structured effect map. Usage: 3 sightings, dominant role: tank.
+# Every score is provisional; the comment names the effect and target
+# direction it was derived from. Humans: adjust scores, ADD what the
+# effect layer cannot see (zone_control/burst_aoe/clump_create/heal_burst/
+# anti_dive), then move to sheets/.
+
+- weapon: 2H_QUARTERSTAFF
+  # Adept's Quarterstaff
+  role_hint: tank
+  capabilities:
+    - {cap: catch, score: 2, evidence: VAULT_ATTACK, review: TODO}   # E: Vault Leap — dash on self; immunity:slow on self
+    - {cap: damage_debuff, score: 1, evidence: QS_WHIRLWIND2, review: TODO}   # W: Forceful Swing — attackspeedbonus- on enemy; magicattackdamagebonus- on enemy
+    - {cap: disengage, score: 2, evidence: VAULT_ATTACK, review: TODO}   # E: Vault Leap — dash on self; immunity:root on self
+    - {cap: engage, score: 2, evidence: VAULT_ATTACK, review: TODO}   # E: Vault Leap — dash on self; immunity:forcedmovement on self
+    - {cap: heal_sustain, score: 1, evidence: PASSIVE_HEALTHCHANCE_QUARTERSTAFF, review: TODO}   # PASSIVE: Life Leech — prose:heal
+    - {cap: knockback_displace, score: 2, evidence: VAULT_ATTACK, review: TODO}   # E: Vault Leap — knockback on enemy; prose:knockback
+    - {cap: mobility, score: 2, evidence: VAULT_ATTACK, review: TODO}   # E: Vault Leap — dash on self; immunity:root on self
+    - {cap: peel, score: 2, evidence: VAULT_ATTACK, review: TODO}   # E: Vault Leap — knockback on enemy
+    - {cap: root, score: 1, evidence: SEPARATING_SLAM, review: TODO}   # W: Separator — root on enemy; prose:root
+    - {cap: self_sustain, score: 1, evidence: PASSIVE_HEALTHCHANCE_QUARTERSTAFF, review: TODO}   # PASSIVE: Life Leech — prose:heal
+    - {cap: stun, score: 1, evidence: PASSIVE_STUNCHANCE_QUARTERSTAFF, review: TODO}   # PASSIVE: Stunning Strike — stun on enemy; prose:stun
+    - {cap: tankiness, score: 2, evidence: VAULT_ATTACK, review: TODO}   # E: Vault Leap — immunity:forcedmovement on self; immunity:silence on self
