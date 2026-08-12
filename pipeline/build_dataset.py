@@ -86,6 +86,9 @@ def load_sheets(weapon_lines):
                 "status": status,
                 "in_game_data": line is not None,
                 "role_hint": entry.get("role_hint"),
+                # YAML parses the unquoted date; keep it a plain string in JSON
+                "curated_as_of": (str(entry["curated_as_of"])
+                                  if entry.get("curated_as_of") else None),
                 "capabilities": caps,
                 "evidence": evidence,
             }
