@@ -62,6 +62,45 @@ Only needed after a game patch (`out/` is committed).
 git clone --depth 1 --filter=blob:none https://github.com/ao-data/ao-bin-dumps.git
 ```
 
+For `patch_history.py` the clone needs HISTORY, so drop `--depth 1`:
+
+```
+git clone --filter=blob:none --no-checkout https://github.com/ao-data/ao-bin-dumps.git
+```
+
+(~3 MB of history; each diffed snapshot fetches its ~14 MB `spells.json` blob
+on demand, so `--patches N` downloads N+1 blobs.)
+
+## Patch history / staleness
+
+```
+py -3 pipeline/patch_history.py <ao-bin-dumps clone> [--patches 8]
+   -> out/patch_history.json
+```
+
+Every game patch is a commit in ao-bin-dumps; diffing `spells.json` between
+consecutive commits gives exactly which spells changed, in the pipeline's own
+spell IDs. This is the design doc's risk-9 ("patch drift") mitigation: curated
+numbers go stale silently, and this makes the staleness mechanical.
+
+- Changes resolve **transitively** (same rule as the effect layer): the
+  2026-05-26 Incubus Mace nerf lives in `SHRINKINGSMASH_EFFECT_DEBUFF`
+  (`buffovertime[5].value: -0.25 -> -0.20`), a child node — it still maps back
+  to the equippable `SHRINKINGSMASH` and from there to the weapon line.
+- Changes whose every attribute path is vfx/audio/controller metadata are kept
+  but flagged `balance_relevant: false` (the 2026-04-13 patch stamped gamepad
+  metadata on 280 of its 311 weapon-spell changes; only 31 were real).
+- Sheets declare `curated_as_of: YYYY-MM-DD`. `evidence_lint.py` WARNS (never
+  blocks) when a cited evidence spell changed in a later patch;
+  `curate_helper.py` shows the weapon's recent patch changes on its worksheet.
+- Commit dates match the forum "Combat Balance Changes" threads one-for-one
+  (2026-06-29 ↔ "[29. June 2026] Radiant Wilds Patch 3"), so the date joins to
+  the human prose. The forum itself is Cloudflare-blocked to scripts, like the
+  wiki — the git history needs no scraping at all.
+- **Patch history is metadata, never evidence.** The evidence rule still
+  requires every nonzero score to cite an equippable spell through the effect
+  map; this file only says when to re-read one.
+
 Do **not** use `git sparse-checkout set items.json spells.json ...` — in cone
 mode those paths are treated as directories and the command fails. Either take
 the full checkout (as above) or use `sparse-checkout set --no-cone /items.json

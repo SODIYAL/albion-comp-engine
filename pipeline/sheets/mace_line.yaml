@@ -2,6 +2,7 @@
 # Every nonzero score cites the spell that provides it (evidence lint enforces this).
 
 - weapon: MAIN_MACE          # 1H Mace — mobility/stun bruiser-tank
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   capabilities:
     - {cap: tankiness,  score: 2, evidence: WEAPON_STATS}
     - {cap: engage,     score: 2, evidence: MACELEAP}      # Deep Leap: gap-close
@@ -12,6 +13,7 @@
     # NOTE: no purge — nothing in the mace Q/W kit nor Deep Leap removes buffs
 
 - weapon: 2H_MACE            # Heavy Mace — disruption tank
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   capabilities:
     - {cap: tankiness,  score: 3, evidence: WEAPON_STATS}
     - {cap: silence,    score: 3, evidence: SHRIEKMACE}    # Battle Howl: AoE silence

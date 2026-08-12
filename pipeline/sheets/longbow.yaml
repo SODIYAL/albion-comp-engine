@@ -3,6 +3,7 @@
 # reduces resistances — earlier draft fabricated it).
 
 - weapon: 2H_LONGBOW
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   capabilities:
     - {cap: burst_aoe,     score: 2, evidence: ARROWRAIN}   # Rain of Arrows (E)
     - {cap: zone_control,  score: 2, evidence: ARROWRAIN}   # channeled AoE slow zone

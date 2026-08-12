@@ -74,8 +74,15 @@ Requires Python 3 and `pyyaml`. On Windows use `py -3`.
 py -3 pipeline/evidence_lint.py      # CI gate — exit 1 blocks a release
 py -3 pipeline/build_dataset.py      # sheets + templates -> out/dataset-latest.json
 py -3 tests/test_golden.py           # 9 golden regression cases
+py -3 tests/test_patch_history.py    # patch-diff + staleness unit tests
 py -3 pipeline/build_dashboard.py    # -> dashboard/index.html (self-contained)
 ```
+
+After a game patch, `pipeline/patch_history.py` diffs ao-bin-dumps git history
+into `out/patch_history.json`; the lint then warns when a sheet's cited
+evidence spell changed after the sheet's `curated_as_of` date, so curation
+staleness is detected mechanically instead of noticed by accident. See
+`pipeline/README.md` § *Patch history / staleness*.
 
 `dashboard/index.html` and `review/effects.html` are generated, single-file
 pages — open them directly, no server needed.

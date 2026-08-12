@@ -21,6 +21,10 @@ clump_create, heal_burst, anti_dive, engage-by-range ...) remain pure human
 judgement and get checks 1-2 only. That boundary is computed, not hardcoded:
 a capability is checked iff the effect map can produce it at all.
 
+Additionally, if out/patch_history.json exists (patch_history.py), a WARNING
+is raised for any cited evidence spell that a game patch touched after the
+sheet's `curated_as_of` date — the scores resting on it need a re-read.
+
 Exit code 1 on any ERROR — blocks the data release.
 
 Usage:  py -3 pipeline/evidence_lint.py [sheets/*.yaml]
@@ -63,6 +67,48 @@ for _caps in PROSE_FALLBACK.values():
 # trace to a buff. Damage stays human judgement, like zone_control.
 CHECKABLE -= {"burst_st", "burst_aoe", "sustained_dps", "execute"}
 
+# ---- patch staleness (warning only, never blocks) ---------------------------
+# out/patch_history.json (built by patch_history.py from ao-bin-dumps git
+# history) records which spells each game patch touched, keyed back to the
+# equippable root spells sheets cite. A sheet declares `curated_as_of:
+# YYYY-MM-DD`; if a cited evidence spell changed in a LATER patch, the scores
+# resting on it need a re-read. Absent file or absent date = check is silent —
+# drafts and illustrative sheets carry no curation date to be stale against.
+
+
+def load_patch_index(path=os.path.join(HERE, "out", "patch_history.json")):
+    """{equippable root spell: [patch dates it changed in]}, newest last."""
+    if not os.path.exists(path):
+        return {}
+    idx = {}
+    for p in json.load(open(path, encoding="utf-8")).get("patches", []):
+        for s in p.get("spells", []):
+            # VFX/audio/controller-metadata churn can't move a score; a
+            # missing flag (older file) conservatively counts as relevant
+            if not s.get("balance_relevant", True):
+                continue
+            for root in s.get("roots", [s["id"]]):
+                idx.setdefault(root, set()).add(p["date"])
+    return {k: sorted(v) for k, v in idx.items()}
+
+
+PATCH_INDEX = load_patch_index()
+
+
+def stale_evidence(curated_as_of, spell_ids, index=None):
+    """[(spell_id, [dates])] for cited spells patched after the curation date.
+    Dates are ISO strings, so string comparison is date comparison."""
+    index = PATCH_INDEX if index is None else index
+    if not curated_as_of:
+        return []
+    d0 = str(curated_as_of)
+    out = []
+    for sid in sorted(set(spell_ids)):
+        dates = [d for d in index.get(sid, []) if d > d0]
+        if dates:
+            out.append((sid, dates))
+    return out
+
 
 def lint_sheet(path):
     errors, warnings = [], []
@@ -74,6 +120,7 @@ def lint_sheet(path):
             errors.append(f"{wkey}: unknown weapon line (not in game data)")
             continue
         equippable = {s for slot in line["spells"].values() for s in slot}
+        cited = set()
         for c in entry.get("capabilities", []):
             cap, score, ev = c.get("cap"), c.get("score", 0), c.get("evidence")
             where = f"{wkey}.{cap}"
@@ -89,6 +136,7 @@ def lint_sheet(path):
                     f"{where}: evidence spell '{ev}' is NOT equippable on {wkey} "
                     f"(if a gear item provides this, it belongs on that item's sheet)")
                 continue
+            cited.add(ev)
             if cap not in CHECKABLE:
                 continue                      # structural — human judgement
             cands = LOOKUP.candidates(ev)
@@ -103,6 +151,12 @@ def lint_sheet(path):
             offer = ", ".join(sorted(cands)) or "nothing"
             errors.append(
                 f"{where}: '{name}' cannot ground {cap}. Its effects support: {offer}")
+        for sid, dates in stale_evidence(entry.get("curated_as_of"), cited):
+            warnings.append(
+                f"{wkey}: evidence spell '{sid}' changed in patch(es) "
+                f"{', '.join(dates)}, after curated_as_of "
+                f"{entry['curated_as_of']} — re-verify the scores citing it "
+                f"(details in out/patch_history.json)")
     return errors, warnings
 
 

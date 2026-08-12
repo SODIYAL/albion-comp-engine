@@ -25,8 +25,14 @@ I'm building an Albion Online dynamic party-composition recommendation engine. P
 py -3 pipeline/evidence_lint.py        # CI gate — exit 1 blocks release
 py -3 pipeline/build_dataset.py        # sheets + templates -> out/dataset-latest.json
 py -3 tests/test_golden.py             # must stay 9/9
+py -3 tests/test_patch_history.py      # patch-diff + staleness units, no clone needed
 py -3 pipeline/build_dashboard.py      # -> dashboard/index.html
 ```
+
+After a game patch: re-clone ao-bin-dumps WITH history (see pipeline/README.md)
+and run `py -3 pipeline/patch_history.py <clone>` — the evidence lint then
+warns on any curated sheet whose cited spells changed after its
+`curated_as_of` date.
 
 ## Current state (verified 2026-08-12)
 

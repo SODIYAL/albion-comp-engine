@@ -8,6 +8,7 @@
 # rather than as a guaranteed capability.
 
 - weapon: 2H_NATURESTAFF_HELL        # Blight Staff — mobile sustain healer
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: healer
   capabilities:
     - {cap: heal_sustain,       score: 3, evidence: ROTTENVINES}    # E: Elevated Nature — channeled group heal aura

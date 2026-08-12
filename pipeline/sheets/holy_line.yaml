@@ -12,6 +12,7 @@
 # archetype model: same "healer" role, very different structural contribution.
 
 - weapon: MAIN_HOLYSTAFF_AVALON      # Hallowfall — mobile peeling healer
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: healer
   capabilities:
     - {cap: heal_burst,         score: 3, evidence: DIVINE_JUMP}   # E: Divine Intervention — burst heal on impact
@@ -25,6 +26,7 @@
     # NO cleanse — see file header. NO purge, no damage contribution worth scoring.
 
 - weapon: 2H_HOLYSTAFF_UNDEAD        # Redemption Staff — stationary group healer
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: healer
   capabilities:
     - {cap: heal_sustain,       score: 3, evidence: CELESTIAL_SPHERE}  # E: bouncing multi-ally sphere

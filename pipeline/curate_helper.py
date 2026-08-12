@@ -20,6 +20,12 @@ WEAPONS = json.load(open(os.path.join(OUT, "weapon_lines.json"), encoding="utf-8
 SPELLS = json.load(open(os.path.join(OUT, "spell_index.json"), encoding="utf-8"))
 USAGE = json.load(open(os.path.join(OUT, "weapon_usage.json"), encoding="utf-8"))["weapons"]
 
+# Optional: recent per-patch spell changes (patch_history.py). Curation context
+# only — "this E was nerfed on 2026-05-26" — never evidence for a score.
+_PH = os.path.join(OUT, "patch_history.json")
+PATCHES = (json.load(open(_PH, encoding="utf-8"))["patches"]
+           if os.path.exists(_PH) else [])
+
 STRUCTURAL = ["engage", "peel", "clump_create", "tankiness", "burst_aoe", "burst_st",
               "sustained_dps", "zone_control", "disengage", "anti_dive", "mobility",
               "catch", "execute", "buff_allies", "self_sustain", "energy_drain"]
@@ -65,6 +71,23 @@ def worksheet(key, width=104):
             desc = " ".join((sp.get("description") or "").split())
             for i in range(0, min(len(desc), 260), 92):
                 print(f"      | {desc[i:i+92]}")
+    rows = [(p["date"], s) for p in PATCHES for s in p["spells"]
+            if key in s["lines"] and s.get("balance_relevant", True)]
+    cosmetic = sum(1 for p in PATCHES for s in p["spells"]
+                   if key in s["lines"] and not s.get("balance_relevant", True))
+    if rows or cosmetic:
+        print(f"\n  [PATCH HISTORY]  (dumps diff — context, not evidence)")
+        for date, s in rows:
+            via = "" if s["id"] in s["roots"] else f"  (via {', '.join(s['roots'])})"
+            print(f"    {date}  {s['kind']:<8} {s['id']}{via}")
+            for c in s["changes"][:4]:
+                print(f"      {c['path']}: {c['old']} -> {c['new']}")
+            if s["changes_total"] > 4:
+                print(f"      ... {s['changes_total'] - 4} more (out/patch_history.json)")
+        if cosmetic:
+            print(f"    (+{cosmetic} cosmetic-only change(s) — vfx/audio/controller "
+                  f"metadata — in out/patch_history.json)")
+
     print(f"\n  Structural capabilities to judge (never auto-seeded):")
     print(f"    {', '.join(STRUCTURAL)}")
     print()

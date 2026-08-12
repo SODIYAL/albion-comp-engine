@@ -222,6 +222,7 @@
     "mobility": 1,
     "sustained_dps": 2
    },
+   "curated_as_of": null,
    "display_name": "Dagger Pair",
    "evidence": {},
    "in_game_data": true,
@@ -239,6 +240,7 @@
     "tankiness": 2,
     "zone_control": 2
    },
+   "curated_as_of": null,
    "display_name": "Great Hammer",
    "evidence": {},
    "in_game_data": true,
@@ -254,6 +256,7 @@
     "heal_reduction": 3,
     "sustained_dps": 2
    },
+   "curated_as_of": null,
    "display_name": "Spirithunter",
    "evidence": {},
    "in_game_data": true,
@@ -269,6 +272,7 @@
     "heal_burst": 3,
     "heal_sustain": 3
    },
+   "curated_as_of": null,
    "display_name": "Great Holy Staff",
    "evidence": {},
    "in_game_data": true,
@@ -285,6 +289,7 @@
     "knockback_displace": 1,
     "peel": 1
    },
+   "curated_as_of": "2026-08-12",
    "display_name": "Redemption Staff",
    "evidence": {
     "buff_allies": [
@@ -319,6 +324,7 @@
     "tankiness": 1,
     "zone_control": 3
    },
+   "curated_as_of": null,
    "display_name": "Permafrost Prism",
    "evidence": {},
    "in_game_data": true,
@@ -336,6 +342,7 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "curated_as_of": "2026-08-12",
    "display_name": "Longbow",
    "evidence": {
     "burst_aoe": [
@@ -373,6 +380,7 @@
     "tankiness": 3,
     "zone_control": 2
    },
+   "curated_as_of": "2026-08-12",
    "display_name": "Heavy Mace",
    "evidence": {
     "engage": [
@@ -416,6 +424,7 @@
     "sustained_dps": 1,
     "zone_control": 1
    },
+   "curated_as_of": "2026-08-12",
    "display_name": "Blight Staff",
    "evidence": {
     "buff_allies": [
@@ -463,6 +472,7 @@
     "stun": 2,
     "tankiness": 2
    },
+   "curated_as_of": null,
    "display_name": "Grovekeeper",
    "evidence": {},
    "in_game_data": true,
@@ -480,6 +490,7 @@
     "sustained_dps": 2,
     "zone_control": 1
    },
+   "curated_as_of": null,
    "display_name": "Witchwork Staff",
    "evidence": {},
    "in_game_data": true,
@@ -499,6 +510,7 @@
     "peel": 3,
     "self_sustain": 1
    },
+   "curated_as_of": "2026-08-12",
    "display_name": "Hallowfall",
    "evidence": {
     "buff_allies": [
@@ -541,6 +553,7 @@
     "stun": 2,
     "tankiness": 2
    },
+   "curated_as_of": "2026-08-12",
    "display_name": "Mace",
    "evidence": {
     "engage": [
@@ -576,6 +589,7 @@
     "execute": 2,
     "mobility": 3
    },
+   "curated_as_of": null,
    "display_name": "Bloodletter",
    "evidence": {},
    "in_game_data": true,
