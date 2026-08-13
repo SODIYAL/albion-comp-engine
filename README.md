@@ -141,8 +141,11 @@ covers what has been tested and what has not.
 Game data is parsed from [ao-data/ao-bin-dumps](https://github.com/ao-data/ao-bin-dumps),
 a community mirror of Albion Online's client data files. Files under
 `pipeline/out/` are derived from it and include ability names and descriptions
-that are © Sandbox Interactive GmbH. This project is unofficial and not
-affiliated with or endorsed by Sandbox Interactive.
+that are © Sandbox Interactive GmbH. Item icons are fetched once by
+`pipeline/fetch_icons.py` from the official Albion Online Render Service
+(render.albiononline.com) and embedded in the generated pages; the artwork is
+© Sandbox Interactive GmbH. This project is unofficial and not affiliated
+with or endorsed by Sandbox Interactive.
 
 The capability sheets, effect map, content templates and scoring model are the
 original work of this repository.

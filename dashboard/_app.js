@@ -39,6 +39,12 @@ const capsOf = w => WEAPONS[w].capabilities || {};
 const esc = s => String(s).replace(/[&<>"']/g, c =>
   ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const nameOf = w => esc(WEAPONS[w].display_name || w);
+/* In-game item renders (fetch_icons.py manifest, © Sandbox Interactive).
+   Missing entries — e.g. Black Hands, absent from the render service — get
+   a quiet placeholder square. */
+const icon = (w, s) => (typeof ICONS !== "undefined" && ICONS[w])
+  ? `<img class="icon" src="${ICONS[w]}" width="${s}" height="${s}" alt="" loading="lazy">`
+  : `<span class="icon ph" style="width:${s}px;height:${s}px"></span>`;
 
 const GROUPS = {
   Sustain:   ["heal_burst","heal_sustain","cleanse","self_sustain"],
@@ -137,7 +143,7 @@ function renderTally(){
 }
 function renderRoster(){
   const rows = party.map((w,i) =>
-    `<div class="slot"><span class="n mono">${String(i+1).padStart(2,"0")}</span>
+    `<div class="slot"><span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 26)}
       <span class="nm">${nameOf(w)}<span class="fn">${roleOf(w)}</span></span>
       <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>`);
   /* open slots collapse: one dashed "next" row, one "+N more" line */
@@ -157,7 +163,7 @@ function filteredWeapons(){
 function renderPicker(){
   const keys = filteredWeapons();
   $("picker").innerHTML = keys.map(w => `<button class="pick" data-add="${w}" ${party.length >= SIZE ? "disabled" : ""}>
-      <span class="nm">${nameOf(w)}<span class="fn">${roleOf(w)}</span></span>
+      ${icon(w, 26)}<span class="nm">${nameOf(w)}<span class="fn">${roleOf(w)}</span></span>
       ${WEAPONS[w].status === "curated" ? "" : '<span class="prov draft">illustrative</span>'}
     </button>`).join("")
     || `<p class="ev-empty">Nothing matches “${esc(pickFilter)}”.</p>`;
@@ -210,6 +216,7 @@ function renderCmdNext(recs){
   $("cb-next").innerHTML = `
     <div class="eyebrow">Next pick — slot ${party.length + 1} of ${SIZE}</div>
     <div class="cb-row">
+      ${icon(top.w, 44)}
       <span><span class="nm">${nameOf(top.w)}</span><span class="fn rl">${roleOf(top.w)}</span></span>
       <button class="cb-add" data-add="${top.w}">Add to party</button>
     </div>`;
@@ -239,7 +246,7 @@ function renderRecDetail(recs){
           <div class="alts">${recs.slice(1).map(r => {
             const t0 = explain(party, r.w)[0];
             return `<button class="alt" data-add="${r.w}"><span class="sc">${r.score.toFixed(2)}</span>
-              <span class="nm">${nameOf(r.w)}</span>
+              ${icon(r.w, 24)}<span class="nm">${nameOf(r.w)}</span>
               <span class="rz">${t0 ? `+${t0.d.toFixed(1)} ${t0.cap}` : "no template gain"}</span></button>`;
           }).join("")}</div>
         </div>
@@ -250,12 +257,13 @@ function renderFootnote(){
   const c = party.filter(w => WEAPONS[w].status === "curated").length;
   $("footnote").innerHTML = `Dataset <code>v${META.version}</code> — <code>${META.weapons_curated} curated</code>, <code>${META.weapons_illustrative} illustrative</code> of ${META.weapons_total} weapons; evidence lint <code>${META.lint_passed ? "passed" : "FAILED"}</code>, release_clean <code>${META.release_clean}</code>.
     This party: ${c} curated, ${party.length - c} illustrative.
-    Curated sheets cite an equippable spell for every nonzero score. Illustrative sheets carry design-doc §2.3 placeholder numbers and are <b>not</b> evidence-checked — they exist to keep the engine runnable during curation. Click any capability for its evidence chain.`;
+    Curated sheets cite an equippable spell for every nonzero score. Illustrative sheets carry design-doc §2.3 placeholder numbers and are <b>not</b> evidence-checked — they exist to keep the engine runnable during curation. Click any capability for its evidence chain.
+    Item renders from the official Albion Online Render Service, © Sandbox Interactive GmbH — this tool is unofficial and not affiliated.`;
 }
 function renderEvidence(cap){
   const rows = party.filter(w => capsOf(w)[cap]).map(w => {
     const ev = (WEAPONS[w].evidence || {})[cap];
-    return `<tr><td>${nameOf(w)}</td><td class="sc">${capsOf(w)[cap]}</td>
+    return `<tr><td>${icon(w, 20)} ${nameOf(w)}</td><td class="sc">${capsOf(w)[cap]}</td>
       <td>${ev && ev.length ? ev.map(e => `<span class="sp">${esc(e)}</span>`).join(", ")
             : '<span class="pend">no evidence — illustrative sheet, blocks release</span>'}</td>
       <td class="mono" style="font-size:11px;color:var(--ink-3)">${w}</td></tr>`;

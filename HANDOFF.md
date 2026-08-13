@@ -39,6 +39,9 @@ py -3 tests/test_js_parity.py          # app JS scoring == engine.py (needs node
 py -3 tests/test_patch_history.py      # patch-diff + staleness units, no clone needed
 py -3 pipeline/build_dashboard.py      # -> dashboard/index.html (the product page)
 py -3 pipeline/build_effect_review.py  # -> review/effects.html
+py -3 pipeline/fetch_icons.py          # only after a patch ADDS weapons —
+                                       # refreshes out/icon_data.json (icons
+                                       # are cached; --force re-downloads)
 ```
 
 ## Current state (verified 2026-08-12, post full-coverage pass)

@@ -38,6 +38,13 @@ def main():
         scoring = f.read()
     with open(os.path.join(DASH, "_app.js"), encoding="utf-8") as f:
         app = f.read()
+    # Item icons (fetch_icons.py). Optional: the page renders placeholders
+    # for any weapon missing from the manifest.
+    icons_path = os.path.join(HERE, "out", "icon_data.json")
+    icons = {}
+    if os.path.exists(icons_path):
+        with open(icons_path, encoding="utf-8") as f:
+            icons = json.load(f)
 
     # Parity fixture: run the Python engine over the dashboard's seed party and
     # inline its output, so the client asserts against the real engine on every
@@ -58,6 +65,7 @@ def main():
 
     out = (f"{shell}<script>\n{scoring}\n</script>\n"
            f"<script>\nconst DATASET = {blob};\n"
+           f"const ICONS = {json.dumps(icons, separators=(',', ':'))};\n"
            f"const PARITY_EXPECTED = {json.dumps(expected)};\n{app}</script>\n")
     path = os.path.join(DASH, "index.html")
     with open(path, "w", encoding="utf-8") as f:
