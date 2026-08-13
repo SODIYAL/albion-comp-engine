@@ -107,16 +107,19 @@ def load_sheets(weapon_lines):
 
 
 def load_templates():
-    templates, scoring = {}, {}
+    templates, scoring, styles = {}, {}, {}
     for path in sorted(glob.glob(os.path.join(HERE, "templates", "*.yaml"))):
         doc = _load_yaml(path)
         if not isinstance(doc, dict):
             continue
-        if os.path.basename(path) == "scoring.yaml":
+        base = os.path.basename(path)
+        if base == "scoring.yaml":
             scoring = doc
+        elif base == "styles.yaml":
+            styles = doc.get("styles", {})
         else:
             templates[doc["content"]] = doc
-    return templates, scoring
+    return templates, scoring, styles
 
 
 def run_lint():
@@ -138,7 +141,7 @@ def main():
 
     weapon_lines = load_weapon_lines()
     weapons = load_sheets(weapon_lines)
-    templates, scoring = load_templates()
+    templates, scoring, styles = load_templates()
 
     lint_ok, lint_out = (True, "skipped") if args.skip_lint else run_lint()
 
@@ -163,6 +166,7 @@ def main():
         "weapons": weapons,
         "templates": templates,
         "scoring": scoring,
+        "styles": styles,
     }
 
     os.makedirs(OUT, exist_ok=True)

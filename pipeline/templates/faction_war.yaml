@@ -1,0 +1,49 @@
+# Content template — Faction Warfare, Red Zone (15-man default).
+#
+# PROVISIONAL — created 2026-08-13, weights NOT expert-adjudicated. Faction
+# fights are open-world brawls around outposts with respawns nearby and
+# wildly variable numbers — mixed groups, lots of pugs, fights that reset
+# and re-engage repeatedly. Deliberate shifts vs blackzone_roam: dying is
+# cheaper (respawn close, no gear-fear discipline) so raw tankiness is
+# weighted a touch lower and sustained skirmish output a touch higher;
+# re-engage cycles reward catch/mobility like roam does; outpost capture
+# points give zone_control real weight, unlike open-field roam. Party size
+# is whatever the faction musters — 6 or 30 both happen; base is 15.
+
+content: faction_war
+name: Faction War (Red Zone)
+base_size: 15
+validated_sizes: [15]
+
+requirements:
+  heal_sustain:   {target: 6.5,  weight: 10, soft_cap: 10.0, scales: true}
+  heal_burst:     {target: 4.0,  weight: 6,  soft_cap: 6.0,  scales: true}
+  tankiness:      {target: 7.5,  weight: 8,  soft_cap: 12.0, scales: true}
+  peel:           {target: 6.0,  weight: 7,  soft_cap: 10.0, scales: true}
+  engage:         {target: 4.5,  weight: 7,  soft_cap: 8.0,  scales: true}
+  catch:          {target: 4.0,  weight: 7,  soft_cap: 7.0,  scales: true}
+  mobility:       {target: 6.0,  weight: 6,  soft_cap: 12.0, scales: true}
+  burst_aoe:      {target: 9.0,  weight: 8,  soft_cap: 15.0, scales: true}
+  sustained_dps:  {target: 7.0,  weight: 6,  soft_cap: 13.0, scales: true}
+  burst_st:       {target: 3.5,  weight: 4,  soft_cap: 6.0,  scales: true}
+  stun:           {target: 4.0,  weight: 4,  soft_cap: 8.0,  scales: true}
+  zone_control:   {target: 4.5,  weight: 5,  soft_cap: 9.0,  scales: true}
+  # threshold needs
+  clump_create:   {target: 2.0,  weight: 6,  soft_cap: 4.0,  scales: false}
+  purge:          {target: 1.0,  weight: 5,  soft_cap: 3.0,  scales: false}
+  heal_reduction: {target: 2.0,  weight: 6,  soft_cap: 4.0,  scales: false}
+  resist_shred:   {target: 2.0,  weight: 4,  soft_cap: 4.0,  scales: false}
+  cleanse:        {target: 1.0,  weight: 4,  soft_cap: 3.0,  scales: false}
+  silence:        {target: 1.0,  weight: 3,  soft_cap: 3.0,  scales: false}
+  buff_allies:    {target: 2.0,  weight: 3,  soft_cap: 5.0,  scales: false}
+  disengage:      {target: 2.0,  weight: 4,  soft_cap: 4.0,  scales: false}
+  execute:        {target: 1.0,  weight: 3,  soft_cap: 3.0,  scales: false}
+  anti_zone:      {target: 1.0,  weight: 2,  soft_cap: 2.0,  scales: false}
+  damage_debuff:  {target: 1.0,  weight: 3,  soft_cap: 2.0,  scales: false}
+
+# Floors slightly lower than blackzone_roam: respawns nearby make a
+# healer-less pug survivable-ish, but it is still the biggest single
+# mistake a faction group makes — the floor stays, tuned softer.
+hard_floors:
+  heal_sustain: {min_party_size: 8, floor_units: 4.0, penalty_mult: 1.75}
+  tankiness:    {min_party_size: 8, floor_units: 3.0, penalty_mult: 1.0}

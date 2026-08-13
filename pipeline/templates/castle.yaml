@@ -1,0 +1,46 @@
+# Content template — Castle Fight (25-man default, the big-blob objective).
+#
+# PROVISIONAL — created 2026-08-13, weights NOT expert-adjudicated. Castles
+# are the largest fixed-objective fights: chokes at the gates, a capture
+# point inside, multiple parties per side. Calibration leans on the same
+# evidence as territory_defense (Deadlyhooker's comp is explicitly "for
+# castles, terry, massive alliance roam") with two deliberate shifts:
+# even more clump punishment (gate chokes force stacking harder than an
+# open terry point) and a bigger silence/stun weight (Camlann-class point
+# control). Party size is whatever your alliance fields — the base is 25
+# but nothing blocks 15 or 40 (per-head targets scale; floors are absolute).
+
+content: castle
+name: Castle Fight
+base_size: 25
+validated_sizes: [25]
+
+requirements:
+  heal_sustain:   {target: 10.0, weight: 10, soft_cap: 15.0, scales: true}
+  heal_burst:     {target: 6.0,  weight: 6,  soft_cap: 10.0, scales: true}
+  tankiness:      {target: 15.0, weight: 9,  soft_cap: 21.0, scales: true}
+  peel:           {target: 11.0, weight: 8,  soft_cap: 17.0, scales: true}
+  burst_aoe:      {target: 17.0, weight: 9,  soft_cap: 25.0, scales: true}
+  zone_control:   {target: 10.0, weight: 6,  soft_cap: 17.0, scales: true}
+  engage:         {target: 6.0,  weight: 7,  soft_cap: 11.0, scales: true}
+  stun:           {target: 7.0,  weight: 5,  soft_cap: 13.0, scales: true}
+  sustained_dps:  {target: 9.0,  weight: 4,  soft_cap: 17.0, scales: true}
+  catch:          {target: 3.0,  weight: 3,  soft_cap: 7.0,  scales: true}
+  mobility:       {target: 6.0,  weight: 3,  soft_cap: 15.0, scales: true}
+  burst_st:       {target: 3.0,  weight: 3,  soft_cap: 7.0,  scales: true}
+  # threshold needs
+  clump_create:   {target: 4.0,  weight: 8,  soft_cap: 6.0,  scales: false}
+  purge:          {target: 2.0,  weight: 6,  soft_cap: 4.0,  scales: false}
+  heal_reduction: {target: 2.0,  weight: 6,  soft_cap: 4.0,  scales: false}
+  resist_shred:   {target: 3.0,  weight: 5,  soft_cap: 6.0,  scales: false}
+  cleanse:        {target: 2.0,  weight: 5,  soft_cap: 4.0,  scales: false}
+  silence:        {target: 3.0,  weight: 5,  soft_cap: 5.0,  scales: false}
+  buff_allies:    {target: 3.0,  weight: 4,  soft_cap: 6.0,  scales: false}
+  disengage:      {target: 1.0,  weight: 3,  soft_cap: 3.0,  scales: false}
+  execute:        {target: 1.0,  weight: 3,  soft_cap: 3.0,  scales: false}
+  anti_zone:      {target: 1.0,  weight: 4,  soft_cap: 2.0,  scales: false}
+  damage_debuff:  {target: 1.0,  weight: 3,  soft_cap: 2.0,  scales: false}
+
+hard_floors:
+  heal_sustain: {min_party_size: 10, floor_units: 5.0, penalty_mult: 2.0}
+  tankiness:    {min_party_size: 10, floor_units: 4.0, penalty_mult: 1.0}

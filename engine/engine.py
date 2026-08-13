@@ -22,7 +22,8 @@ DATASET = os.path.join(HERE, os.pardir, "pipeline", "out", "dataset-latest.json"
 
 
 class Engine:
-    def __init__(self, dataset_path=DATASET, content="castle_outpost", size=7):
+    def __init__(self, dataset_path=DATASET, content="castle_outpost", size=7,
+                 style="balanced"):
         with open(dataset_path, encoding="utf-8") as f:
             self.data = json.load(f)
         self.weapons = self.data["weapons"]
@@ -33,16 +34,25 @@ class Engine:
         self.meta_prior = self.scoring.get("meta_prior", {}) or {}
         self.synergies = [(s["a"], s["b"], s["bonus"])
                           for s in self.scoring.get("capability_synergies", [])]
-        self.set_content(content, size)
+        self.set_content(content, size, style)
 
     # ---------------------------------------------------------------- context
-    def set_content(self, content, size):
+    def set_content(self, content, size, style="balanced"):
         self.template = self.data["templates"][content]
         self.content = content
         self.size = size
         self.reqs = self.template["requirements"]
         self.floors = self.template.get("hard_floors", {}) or {}
         self.base_size = self.template.get("base_size", size)
+        # Playstyle overlay (templates/styles.yaml): multiplies capability
+        # WEIGHTS only. Targets/soft caps are content facts; hard floors stay
+        # on the base weight — a kite comp still needs its healers.
+        self.style = style
+        styles = self.data.get("styles", {}) or {}
+        self.style_mults = (styles.get(style, {}) or {}).get("multipliers", {}) or {}
+
+    def weight(self, cap):
+        return self.reqs[cap]["weight"] * self.style_mults.get(cap, 1.0)
 
     def extrapolated(self):
         """True when the requested size is outside the template's validated set."""
@@ -76,16 +86,19 @@ class Engine:
 
     def fitness(self, party):
         s, total = self.supply(party), 0.0
-        for cap, r in self.reqs.items():
+        for cap in self.reqs:
             have, target, soft = s.get(cap, 0.0), self.target(cap), self.soft_cap(cap)
-            total += r["weight"] * min(1.0, have / target) ** self.gamma
+            # style multiplies the VALUE of coverage; over-stack economics and
+            # floors stay on the base weight (T10 caught the alternative:
+            # clap style punished a clap comp for stacking bombs)
+            total += self.weight(cap) * min(1.0, have / target) ** self.gamma
             if have > soft:
-                total -= 0.5 * r["weight"] * (have - soft) / target
+                total -= 0.5 * self.reqs[cap]["weight"] * (have - soft) / target
             total -= self._floor_penalty(cap, have)
         return total
 
     def max_fitness(self):
-        return sum(r["weight"] for r in self.reqs.values())
+        return sum(self.weight(cap) for cap in self.reqs)
 
     def synergy(self, party):
         s = self.supply(party)
@@ -94,13 +107,13 @@ class Engine:
     def explain(self, party, candidate):
         """Per-capability delta terms — these ARE the 'why' text."""
         s, terms = self.supply(party), []
-        for cap, r in self.reqs.items():
+        for cap in self.reqs:
             gain = self.caps_of(candidate).get(cap, 0)
             if not gain:
                 continue
             have, target = s.get(cap, 0.0), self.target(cap)
-            d = r["weight"] * (min(1.0, (have + gain) / target) ** self.gamma
-                               - min(1.0, have / target) ** self.gamma)
+            d = self.weight(cap) * (min(1.0, (have + gain) / target) ** self.gamma
+                                    - min(1.0, have / target) ** self.gamma)
             # credit for lifting a critical floor
             d += self._floor_penalty(cap, have) - self._floor_penalty(cap, have + gain)
             if d > 0.05:
@@ -127,17 +140,17 @@ class Engine:
     def weaknesses(self, party, top_n=3):
         s = self.supply(party)
         gaps = [{"cap": cap,
-                 "gap": r["weight"] * (1 - min(1.0, s.get(cap, 0) / self.target(cap)) ** self.gamma),
+                 "gap": self.weight(cap) * (1 - min(1.0, s.get(cap, 0) / self.target(cap)) ** self.gamma),
                  "have": s.get(cap, 0), "target": self.target(cap)}
-                for cap, r in self.reqs.items()]
+                for cap in self.reqs]
         return sorted(gaps, key=lambda g: -g["gap"])[:top_n]
 
     def uncovered_caps(self, party):
         """High-weight capabilities under half-supplied — feeds the greedy-trap
         lookahead warning (design doc §4.4.1)."""
         s = self.supply(party)
-        return [cap for cap, r in self.reqs.items()
-                if r["weight"] >= 5 and s.get(cap, 0) / self.target(cap) < 0.5]
+        return [cap for cap in self.reqs
+                if self.weight(cap) >= 5 and s.get(cap, 0) / self.target(cap) < 0.5]
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ const dataset = JSON.parse(fs.readFileSync(process.argv[3], "utf8"));
 const cases = JSON.parse(fs.readFileSync(process.argv[4], "utf8"));
 
 const out = cases.map((c) => {
-  const e = new CompEngine(dataset, c.content, c.size);
+  const e = new CompEngine(dataset, c.content, c.size, c.style);
   return {
     fitness: e.fitness(c.party),
     synergy: e.synergy(c.party),

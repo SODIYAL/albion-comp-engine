@@ -209,6 +209,11 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 }
 :root[data-theme="dark"] .cb-add, html:not([data-theme="light"]) .cb-add{color:#0D1218}
 .cb-add:hover{background:var(--brass-bright)}
+.cb-forge{
+  padding:8px 13px; background:transparent; color:var(--brass);
+  border:1px solid var(--brass); border-radius:3px; font-size:12px; white-space:nowrap;
+}
+.cb-forge:hover{background:var(--brass-wash)}
 .cb-full{font-size:13.5px; color:var(--ink-2)}
 
 /* ---------- diagnosis | prescription band ---------- */
@@ -375,6 +380,11 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
           <option value="hellgate5" disabled>Hellgate 5v5 — template pending</option>
           <option value="openworld" disabled>Open-world skirmish — template pending</option>
         </select>
+      </div>
+      <div class="field">
+        <label for="style">Playstyle</label>
+        <select id="style"></select>
+        <div class="size-hint" id="style-blurb"></div>
       </div>
       <div class="field">
         <label for="size-input">Party size — however many you have</label>

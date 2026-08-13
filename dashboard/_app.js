@@ -16,9 +16,11 @@ const ENG = new CompEngine(DATASET, CONTENT);
    floors, scaling) is whichever is larger. Bring 4 or bring 40. */
 let PLANNED = ENG.size;
 let SIZE = PLANNED;
+let STYLE = "balanced";
 const HARD_CAP = 60;
+const STYLE_ORDER = ["balanced", "brawl", "clap", "kite", "brawl_clap"];
 
-function syncEngine(){ SIZE = Math.max(PLANNED, party.length); ENG.setContent(CONTENT, SIZE); }
+function syncEngine(){ SIZE = Math.max(PLANNED, party.length); ENG.setContent(CONTENT, SIZE, STYLE); }
 
 const tpl = () => DATASET.templates[CONTENT];
 const REQS = () => tpl().requirements;
@@ -104,13 +106,14 @@ function loadHash(){
     if (i > 0) p[kv.slice(0, i)] = decodeURIComponent(kv.slice(i + 1)); });
   if (p.c && DATASET.templates[p.c]) CONTENT = p.c;
   PLANNED = (p.n && +p.n >= 2 && +p.n <= HARD_CAP) ? +p.n : baseSize();
+  STYLE = (p.st && (DATASET.styles || {})[p.st]) ? p.st : "balanced";
   if (p.p) party = p.p.split(",").filter(w => WEAPONS[w]);
   syncEngine();
   return true;
 }
 function saveHash(){
   history.replaceState(null, "",
-    `#c=${CONTENT}&n=${PLANNED}${party.length ? "&p=" + party.join(",") : ""}`);
+    `#c=${CONTENT}&n=${PLANNED}${STYLE !== "balanced" ? "&st=" + STYLE : ""}${party.length ? "&p=" + party.join(",") : ""}`);
 }
 
 /* ---------------------------------------------------------------- render */
@@ -127,6 +130,12 @@ function renderSetup(){
     .map(([k,t]) => `<option value="${k}" ${k===CONTENT?"selected":""}>${t.name} — base ${t.base_size}</option>`)
     .join("") + PENDING.filter(([k]) => !DATASET.templates[k])
     .map(([k,n]) => `<option value="${k}" disabled>${n} — template pending</option>`).join("");
+  const styles = DATASET.styles || {};
+  const styleKeys = STYLE_ORDER.filter(k => styles[k])
+    .concat(Object.keys(styles).filter(k => STYLE_ORDER.indexOf(k) === -1));
+  $("style").innerHTML = styleKeys.map(k =>
+    `<option value="${k}" ${k===STYLE?"selected":""}>${esc(styles[k].name || k)}</option>`).join("");
+  $("style-blurb").textContent = (styles[STYLE] || {}).blurb || "";
   $("size-input").value = PLANNED;
   const presets = [...new Set(validatedSizes().concat([baseSize()]))].sort((a,b) => a-b);
   $("size-presets").innerHTML = presets.map(n =>
@@ -191,7 +200,7 @@ function renderPicker(){
 function renderFitness(){
   const f = fitness(party), max = maxFitness();
   $("fit-num").textContent = f.toFixed(1);
-  $("fit-of").textContent = `/ ${max}`;
+  $("fit-of").textContent = `/ ${Math.round(max)}`;
   $("fit-bar").style.width = `${Math.max(0, Math.min(100, f/max*100))}%`;
 }
 function renderGroups(){
@@ -253,12 +262,17 @@ function renderCmdNext(recs){
   const slotLabel = party.length + 1 > PLANNED
     ? `slot ${party.length + 1} — beyond planned ${PLANNED}`
     : `slot ${party.length + 1} of ${SIZE}`;
+  const styleTag = STYLE !== "balanced" ? ` · ${(DATASET.styles[STYLE] || {}).name || STYLE}` : "";
+  const forge = party.length < SIZE
+    ? `<button class="cb-forge" id="forge">${party.length ? "forge the rest" : "forge a full comp"}</button>`
+    : "";
   $("cb-next").innerHTML = `
-    <div class="eyebrow">Next pick — ${slotLabel}</div>
+    <div class="eyebrow">Next pick — ${slotLabel}${styleTag}</div>
     <div class="cb-row">
       ${icon(top.w, 44)}
       <span><span class="nm">${nameOf(top.w)}</span><span class="fn rl">${roleOf(top.w)}</span></span>
       <button class="cb-add" data-add="${top.w}">Add to party</button>
+      ${forge}
     </div>`;
 }
 function renderRecDetail(recs){
@@ -316,7 +330,7 @@ function renderEvidence(cap){
 }
 function render(){
   syncEngine(); saveHash();
-  const recs = party.length < SIZE ? recommend(party, 4) : null;
+  const recs = party.length < HARD_CAP ? recommend(party, 4) : null;
   renderSetup(); renderTally(); renderRoster(); renderPicker(); renderFitness();
   renderCmdNext(recs); renderGroups(); renderWeaknesses(); renderWarning();
   renderRecDetail(recs); renderFootnote();
@@ -325,8 +339,9 @@ function render(){
 function compText(){
   const counts = {};
   party.forEach(w => { const r = WEAPONS[w].role_hint || "other"; counts[r] = (counts[r]||0) + 1; });
+  const styleBit = STYLE !== "balanced" ? ` · ${(DATASET.styles[STYLE] || {}).name || STYLE}` : "";
   const lines = [
-    `**${tpl().name}** — ${party.length}/${SIZE} — fitness ${fitness(party).toFixed(1)}/${maxFitness()}`,
+    `**${tpl().name}${styleBit}** — ${party.length}/${SIZE} — fitness ${fitness(party).toFixed(1)}/${maxFitness().toFixed(0)}`,
     Object.entries(counts).sort((a,b) => b[1]-a[1]).map(([r,n]) => `${n} ${r}`).join(" · "),
     "",
   ];
@@ -347,6 +362,17 @@ function flashBtn(id, text, back){
 document.addEventListener("click", e => {
   const add = e.target.closest("[data-add]");
   if (add){ if (party.length < HARD_CAP){ party.push(add.dataset.add); render(); } return; }
+  if (e.target.closest("#forge")){
+    /* Greedy auto-build: repeatedly take the engine's top pick. */
+    const goal = Math.min(SIZE, HARD_CAP);
+    while (party.length < goal){
+      const r = recommend(party, 1);
+      if (!r.length) break;
+      party.push(r[0].w);
+    }
+    render();
+    return;
+  }
   const rm = e.target.closest("[data-remove]");
   if (rm){ party.splice(+rm.dataset.remove, 1); render(); return; }
   const sz = e.target.closest("[data-size]");
@@ -373,6 +399,7 @@ document.addEventListener("click", e => {
 });
 document.addEventListener("change", e => {
   if (e.target.id === "content"){ CONTENT = e.target.value; PLANNED = baseSize(); party = []; render(); }
+  if (e.target.id === "style"){ STYLE = e.target.value; render(); }
   if (e.target.id === "tree-filter"){ treeFilter = e.target.value; renderPicker(); }
   if (e.target.id === "size-input"){
     const v = Math.round(+e.target.value);

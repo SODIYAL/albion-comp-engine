@@ -1,0 +1,85 @@
+# Playstyles — caller-intent overlays on top of a content template.
+#
+# PROVISIONAL — created 2026-08-13, weights NOT expert-adjudicated. Every
+# multiplier scales a capability's WEIGHT in the chosen content template
+# (targets, soft caps and hard floors are untouched: a kite comp still
+# needs its healers — style changes what you emphasise, not what keeps the
+# party alive; floor penalties are computed on the BASE weight for the
+# same reason). A capability absent from the template's requirements is
+# unaffected by its multiplier.
+#
+# Vocabulary from the shotcaller world: brawl (stand and grind), clap
+# (stack them, one bomb), kite (never take the fight, bleed them),
+# brawl-clap (grind until they clump, then bomb). "Balanced" is the
+# identity — free mode, no thumb on the scale.
+
+styles:
+  balanced:
+    name: Balanced
+    blurb: no thumb on the scale — the content template as fitted
+    multipliers: {}
+
+  brawl:
+    name: Brawl
+    blurb: stand and grind — sustain, stall and attrition win
+    multipliers:
+      tankiness: 1.35
+      heal_sustain: 1.3
+      sustained_dps: 1.35
+      heal_reduction: 1.25
+      cleanse: 1.2
+      resist_shred: 1.2
+      peel: 1.15
+      execute: 1.1
+      burst_aoe: 0.85
+      clump_create: 0.8
+      disengage: 0.85
+      catch: 0.8
+      mobility: 0.75
+
+  clap:
+    name: Clap
+    blurb: stack them and delete them — one engage, one bomb
+    multipliers:
+      clump_create: 1.7
+      burst_aoe: 1.6
+      engage: 1.4
+      silence: 1.3
+      purge: 1.25
+      stun: 1.2
+      tankiness: 0.9
+      heal_sustain: 0.9
+      catch: 0.9
+      mobility: 0.85
+      heal_reduction: 0.8
+      sustained_dps: 0.6
+
+  kite:
+    name: Kite
+    blurb: never take the fight — range, tempo and chip damage
+    multipliers:
+      mobility: 1.6
+      disengage: 1.5
+      catch: 1.45
+      sustained_dps: 1.3
+      heal_reduction: 1.2
+      burst_st: 1.15
+      zone_control: 1.1
+      stun: 0.9
+      burst_aoe: 0.85
+      engage: 0.7
+      tankiness: 0.7
+      clump_create: 0.7
+
+  brawl_clap:
+    name: Brawl-Clap
+    blurb: grind until they clump, then bomb — the hybrid
+    multipliers:
+      clump_create: 1.4
+      burst_aoe: 1.35
+      tankiness: 1.2
+      engage: 1.2
+      heal_sustain: 1.15
+      sustained_dps: 1.1
+      catch: 0.85
+      mobility: 0.85

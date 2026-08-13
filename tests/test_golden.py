@@ -138,6 +138,29 @@ def run():
     check("T9b territory_defense: DH P1 minus healers -> top rec is a healer",
           recs9[0]["weapon"] in HEALERS, f"top4={names(recs9)}")
 
+    # T10 — playstyles must actually discriminate. Same tanks + healers;
+    # clap-flavored core (drags + AoE bombs) vs kite-flavored core (mobile
+    # ranged chip). Absolute fitness depends on overall comp quality, so the
+    # assertion is on the DIRECTION of the style effect: switching the style
+    # from kite to clap must shift preference toward the clap comp (and
+    # balanced must sit between the two), in the unsaturated regime (10
+    # bodies against 20-man targets) where weights, not caps, decide.
+    core = [GREAT_HAMMER, "MAIN_ROCKMACE_KEEPER", HALLOWFALL, GREAT_HOLY]
+    clap10 = core + [PERMAFROST, PERMAFROST, WITCHWORK, "2H_ARCANESTAFF_HELL",
+                     "2H_FIRE_RINGPAIR_AVALON", "2H_INFERNOSTAFF_MORGANA"]
+    kite10 = core + [LONGBOW, "2H_WARBOW", "2H_BOW", "MAIN_FROSTSTAFF",
+                     "MAIN_SPEAR_LANCE_AVALON", "2H_BOW_AVALON"]
+    prefs = {}
+    for st in ("clap", "balanced", "kite"):
+        e_st = Engine(content="blackzone_roam", size=20, style=st)
+        prefs[st] = e_st.fitness(clap10) - e_st.fitness(kite10)
+    check("T10 clap style shifts preference toward the clap comp (margin >1)",
+          prefs["clap"] > prefs["kite"] + 1.0,
+          f"pref clap_style={prefs['clap']:.2f} kite_style={prefs['kite']:.2f}")
+    check("T10b balanced sits between the style extremes",
+          prefs["kite"] <= prefs["balanced"] <= prefs["clap"],
+          f"kite={prefs['kite']:.2f} balanced={prefs['balanced']:.2f} clap={prefs['clap']:.2f}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

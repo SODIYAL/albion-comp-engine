@@ -30,12 +30,14 @@ def make_cases(data):
     rng = random.Random(SEED)
     weapons = sorted(data["weapons"])
     contents = sorted(data["templates"])
+    styles = sorted(data.get("styles") or {"balanced": {}})
     cases = []
     for i in range(N_CASES):
         content = contents[i % len(contents)]
         size = data["templates"][content]["base_size"]
         n = rng.randint(0, min(size, 12))
         cases.append({"content": content, "size": size,
+                      "style": styles[i % len(styles)],
                       "party": [rng.choice(weapons) for _ in range(n)]})
     return cases
 
@@ -43,7 +45,7 @@ def make_cases(data):
 def py_results(cases):
     out = []
     for c in cases:
-        e = Engine(content=c["content"], size=c["size"])
+        e = Engine(content=c["content"], size=c["size"], style=c["style"])
         out.append({
             "fitness": e.fitness(c["party"]),
             "synergy": e.synergy(c["party"]),
@@ -100,9 +102,11 @@ def main():
             errs.append(f"uncovered: py={a['uncovered']} js={b['uncovered']}")
         if errs:
             bad += 1
-            print(f"CASE {i} ({c['content']}, party {len(c['party'])}): " + "; ".join(errs))
+            print(f"CASE {i} ({c['content']}/{c['style']}, party {len(c['party'])}): "
+                  + "; ".join(errs))
     print(f"{N_CASES - bad}/{N_CASES} parity cases identical "
-          f"(tolerance {EPS}, contents: {sorted(data['templates'])})")
+          f"(tolerance {EPS}, contents: {sorted(data['templates'])}, "
+          f"styles: {sorted(data.get('styles') or {})})")
     return 1 if bad else 0
 
 

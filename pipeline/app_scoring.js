@@ -13,7 +13,7 @@
 (function (root) {
   "use strict";
 
-  function CompEngine(data, content, size) {
+  function CompEngine(data, content, size, style) {
     this.data = data;
     this.weapons = data.weapons;
     this.scoring = data.scoring;
@@ -24,16 +24,26 @@
     this.synergies = (this.scoring.capability_synergies || []).map(function (s) {
       return [s.a, s.b, s.bonus];
     });
-    this.setContent(content || "castle_outpost", size);
+    this.setContent(content || "castle_outpost", size, style);
   }
 
-  CompEngine.prototype.setContent = function (content, size) {
+  CompEngine.prototype.setContent = function (content, size, style) {
     this.template = this.data.templates[content];
     this.content = content;
     this.baseSize = this.template.base_size || size;
     this.size = (size === undefined || size === null) ? this.baseSize : size;
     this.reqs = this.template.requirements;
     this.floors = this.template.hard_floors || {};
+    /* Playstyle overlay: multiplies capability WEIGHTS only; hard floors
+       stay on the base weight (mirrors engine.py). */
+    this.style = style || "balanced";
+    var styles = this.data.styles || {};
+    this.styleMults = (styles[this.style] || {}).multipliers || {};
+  };
+
+  CompEngine.prototype.weight = function (cap) {
+    var m = this.styleMults[cap];
+    return this.reqs[cap].weight * (m === undefined ? 1.0 : m);
   };
 
   CompEngine.prototype.extrapolated = function () {
@@ -74,10 +84,11 @@
   CompEngine.prototype.fitness = function (party) {
     var s = this.supply(party), total = 0.0;
     for (var cap in this.reqs) {
-      var r = this.reqs[cap];
       var have = s[cap] || 0.0, target = this.target(cap), soft = this.softCap(cap);
-      total += r.weight * Math.pow(Math.min(1.0, have / target), this.gamma);
-      if (have > soft) total -= 0.5 * r.weight * (have - soft) / target;
+      /* style multiplies the VALUE of coverage; over-stack economics and
+         floors stay on the base weight (mirrors engine.py, see T10) */
+      total += this.weight(cap) * Math.pow(Math.min(1.0, have / target), this.gamma);
+      if (have > soft) total -= 0.5 * this.reqs[cap].weight * (have - soft) / target;
       total -= this._floorPenalty(cap, have);
     }
     return total;
@@ -85,7 +96,7 @@
 
   CompEngine.prototype.maxFitness = function () {
     var t = 0;
-    for (var cap in this.reqs) t += this.reqs[cap].weight;
+    for (var cap in this.reqs) t += this.weight(cap);
     return t;
   };
 
@@ -101,12 +112,11 @@
   CompEngine.prototype.explain = function (party, candidate) {
     var s = this.supply(party), terms = [];
     for (var cap in this.reqs) {
-      var r = this.reqs[cap];
       var gain = this.capsOf(candidate)[cap] || 0;
       if (!gain) continue;
       var have = s[cap] || 0.0, target = this.target(cap);
-      var d = r.weight * (Math.pow(Math.min(1.0, (have + gain) / target), this.gamma)
-                          - Math.pow(Math.min(1.0, have / target), this.gamma));
+      var d = this.weight(cap) * (Math.pow(Math.min(1.0, (have + gain) / target), this.gamma)
+                                  - Math.pow(Math.min(1.0, have / target), this.gamma));
       d += this._floorPenalty(cap, have) - this._floorPenalty(cap, have + gain);
       if (d > 0.05) {
         terms.push({ delta: Math.round(d * 100) / 100, cap: cap,
@@ -141,10 +151,9 @@
     if (topN === undefined) topN = 3;
     var s = this.supply(party), gaps = [];
     for (var cap in this.reqs) {
-      var r = this.reqs[cap];
       var have = s[cap] || 0;
       gaps.push({ cap: cap,
-                  gap: r.weight * (1 - Math.pow(Math.min(1.0, have / this.target(cap)), this.gamma)),
+                  gap: this.weight(cap) * (1 - Math.pow(Math.min(1.0, have / this.target(cap)), this.gamma)),
                   have: have, target: this.target(cap) });
     }
     return gaps.sort(function (x, y) { return y.gap - x.gap; }).slice(0, topN);
@@ -153,7 +162,7 @@
   CompEngine.prototype.uncoveredCaps = function (party) {
     var s = this.supply(party), out = [];
     for (var cap in this.reqs) {
-      if (this.reqs[cap].weight >= 5 && (s[cap] || 0) / this.target(cap) < 0.5) out.push(cap);
+      if (this.weight(cap) >= 5 && (s[cap] || 0) / this.target(cap) < 0.5) out.push(cap);
     }
     return out;
   };
