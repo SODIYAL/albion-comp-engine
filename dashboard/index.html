@@ -127,13 +127,19 @@ html:not([data-theme="light"]) .size-btn[aria-pressed="true"]{color:#0D1218}
 
 /* ---------- roster ---------- */
 .roster{display:flex; flex-direction:column; gap:5px}
+.tally{display:flex; flex-wrap:wrap; gap:5px; margin-bottom:9px}
+.tally .t{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.05em;
+  padding:3px 8px; border:1px solid var(--rule-2); border-radius:2px; color:var(--ink-2);
+}
+.tally .t b{color:var(--ink); font-weight:600}
 .slot{
   display:flex; align-items:center; gap:9px; padding:8px 10px;
   background:var(--surface); border:1px solid var(--rule); border-radius:3px;
 }
 .slot .n{font-family:var(--mono); font-size:10.5px; color:var(--ink-3); width:14px; flex:none}
 .slot .nm{flex:1; font-size:13.5px; min-width:0}
-.slot .fn{
+.fn{
   font-family:var(--mono); font-size:10px; color:var(--ink-3);
   letter-spacing:.04em; display:block; margin-top:1px;
 }
@@ -142,9 +148,15 @@ html:not([data-theme="light"]) .size-btn[aria-pressed="true"]{color:#0D1218}
   padding:2px 5px; border-radius:3px; flex:none;
 }
 .slot .x:hover{color:var(--gap); background:var(--gap-wash)}
-.slot.empty{
-  border-style:dashed; background:transparent; color:var(--ink-3);
-  font-family:var(--mono); font-size:11.5px; letter-spacing:.05em;
+.slot.next{
+  border-style:dashed; border-color:var(--brass); background:transparent;
+  color:var(--brass); font-family:var(--mono); font-size:11px; letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.slot.next .n{color:var(--brass)}
+.slot.more{
+  border:0; background:transparent; color:var(--ink-3);
+  font-family:var(--mono); font-size:11px; letter-spacing:.05em; padding:2px 10px;
 }
 
 /* ---------- weapon picker ---------- */
@@ -163,18 +175,36 @@ html:not([data-theme="light"]) .size-btn[aria-pressed="true"]{color:#0D1218}
 .prov.curated{background:var(--brass-wash); color:var(--brass)}
 .prov.draft{background:var(--surface-2); color:var(--ink-3)}
 
-/* ---------- fitness header ---------- */
-.fitness{
+/* ---------- command bar: state left, action right ---------- */
+.lbl{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
+.cmdbar{
+  display:grid; grid-template-columns:minmax(240px,1fr) minmax(320px,1.35fr);
   background:var(--surface); border:1px solid var(--rule); border-radius:4px;
-  padding:18px 20px; display:flex; align-items:center; gap:24px; flex-wrap:wrap;
-  box-shadow:var(--shadow);
+  overflow:hidden; box-shadow:var(--shadow);
 }
-.fitness .num{font-family:var(--mono); font-size:40px; font-weight:600; line-height:1; letter-spacing:-.02em}
-.fitness .of{font-family:var(--mono); font-size:14px; color:var(--ink-3)}
-.fitness .lbl{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); margin-bottom:7px}
-.meter{flex:1; min-width:200px}
+@media (max-width:880px){ .cmdbar{grid-template-columns:1fr} }
+.cb-fit{padding:16px 20px 18px; border-right:1px solid var(--rule); display:flex; flex-direction:column; gap:9px}
+@media (max-width:880px){ .cb-fit{border-right:0; border-bottom:1px solid var(--rule)} }
+.cb-fit .num{font-family:var(--mono); font-size:38px; font-weight:600; line-height:1; letter-spacing:-.02em}
+.cb-fit .of{font-family:var(--mono); font-size:13px; color:var(--ink-3)}
 .meter-track{height:7px; background:var(--sunk); border-radius:4px; overflow:hidden}
 .meter-fill{height:100%; background:var(--brass); border-radius:4px; transition:width .35s cubic-bezier(.4,0,.2,1)}
+.cb-next{padding:16px 20px; background:var(--brass-wash); display:flex; flex-direction:column; gap:4px; justify-content:center}
+.cb-next .eyebrow{font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--brass)}
+.cb-row{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+.cb-next .nm{font-family:var(--serif); font-size:24px; letter-spacing:-.01em; line-height:1.2}
+.cb-next .rl{font-family:var(--mono); font-size:11px; color:var(--ink-2)}
+.cb-add{
+  margin-left:auto; padding:9px 16px; background:var(--brass); color:var(--surface);
+  border:0; border-radius:3px; font-size:13.5px; font-weight:600; white-space:nowrap;
+}
+:root[data-theme="dark"] .cb-add, html:not([data-theme="light"]) .cb-add{color:#0D1218}
+.cb-add:hover{background:var(--brass-bright)}
+.cb-full{font-size:13.5px; color:var(--ink-2)}
+
+/* ---------- diagnosis | prescription band ---------- */
+.duo{display:grid; grid-template-columns:minmax(250px,330px) minmax(0,1fr); gap:24px; align-items:start}
+@media (max-width:1100px){ .duo{grid-template-columns:1fr} }
 
 /* ---------- capability readout ---------- */
 .groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:2px 30px}
@@ -260,6 +290,7 @@ html:not([data-theme="light"]) .size-btn[aria-pressed="true"]{color:#0D1218}
 .warn{
   background:var(--gap-wash); border:1px solid var(--gap); border-radius:4px;
   padding:14px 16px; display:flex; gap:12px; align-items:flex-start;
+  flex-direction:column; margin-top:12px;
 }
 .warn .t{
   font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
@@ -337,6 +368,7 @@ html:not([data-theme="light"]) .size-btn[aria-pressed="true"]{color:#0D1218}
 
     <section>
       <div class="sec-label">Party</div>
+      <div class="tally" id="tally"></div>
       <div class="roster" id="roster"></div>
     </section>
 
@@ -350,31 +382,31 @@ html:not([data-theme="light"]) .size-btn[aria-pressed="true"]{color:#0D1218}
   </aside>
 
   <main class="main">
-    <section class="fitness">
-      <div>
+    <section class="cmdbar">
+      <div class="cb-fit">
         <div class="lbl">Composition fitness</div>
-        <span class="num" id="fit-num">0.0</span>
-        <span class="of" id="fit-of">/ 0</span>
-      </div>
-      <div class="meter">
-        <div class="lbl">Requirements satisfied</div>
+        <div><span class="num" id="fit-num">0.0</span> <span class="of" id="fit-of">/ 0</span></div>
         <div class="meter-track"><div class="meter-fill" id="fit-bar" style="width:0%"></div></div>
       </div>
+      <div class="cb-next" id="cb-next"></div>
     </section>
 
-    <div id="warn-slot"></div>
+    <section class="duo">
+      <div>
+        <div class="sec-label">Biggest weaknesses</div>
+        <div class="weak-list" id="weaknesses"></div>
+        <div id="warn-slot"></div>
+      </div>
+      <div>
+        <div class="sec-label" id="rec-label">Why this pick</div>
+        <div id="rec-slot"></div>
+      </div>
+    </section>
 
     <section>
       <div class="sec-label">Capability supply vs. target</div>
       <div class="groups" id="groups"></div>
     </section>
-
-    <section>
-      <div class="sec-label">Biggest weaknesses</div>
-      <div class="weak-list" id="weaknesses"></div>
-    </section>
-
-    <section id="rec-slot"></section>
 
     <p class="footnote" id="footnote"></p>
   </main>
@@ -686,23 +718,39 @@ function renderSetup(){
   $("size-notice").innerHTML = validatedSizes().includes(SIZE) ? "" :
     `<div class="notice"><b>Extrapolated.</b> This template is fitted and validated at size ${validatedSizes().join(", ")} only. Per-player targets are scaled linearly to ${SIZE}; flat threshold targets are unchanged. Tier-2 validation must confirm each size before this is trustworthy.</div>`;
 }
+function renderTally(){
+  const counts = {};
+  party.forEach(w => { const r = WEAPONS[w].role_hint || "other"; counts[r] = (counts[r]||0) + 1; });
+  $("tally").innerHTML = party.length
+    ? Object.entries(counts).sort((a,b) => b[1]-a[1])
+        .map(([r,n]) => `<span class="t"><b>${n}</b> ${esc(r)}</span>`).join("")
+      + `<span class="t"><b>${SIZE - party.length}</b> open</span>`
+    : "";
+}
 function renderRoster(){
   const rows = party.map((w,i) =>
     `<div class="slot"><span class="n mono">${String(i+1).padStart(2,"0")}</span>
       <span class="nm">${nameOf(w)}<span class="fn">${roleOf(w)}</span></span>
       <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>`);
-  for (let i = party.length; i < SIZE; i++)
-    rows.push(`<div class="slot empty"><span class="n mono">${String(i+1).padStart(2,"0")}</span>open slot</div>`);
+  /* open slots collapse: one dashed "next" row, one "+N more" line */
+  const open = SIZE - party.length;
+  if (open > 0)
+    rows.push(`<div class="slot next"><span class="n mono">${String(party.length+1).padStart(2,"0")}</span>next slot — pick below</div>`);
+  if (open > 1)
+    rows.push(`<div class="slot more">+ ${open - 1} more open slot${open > 2 ? "s" : ""}</div>`);
   $("roster").innerHTML = rows.join("");
 }
-function renderPicker(){
+function filteredWeapons(){
   const q = pickFilter.trim().toLowerCase();
-  const keys = Object.keys(WEAPONS)
+  return Object.keys(WEAPONS)
     .sort((a,b) => nameOf(a).localeCompare(nameOf(b)))
     .filter(w => !q || (WEAPONS[w].display_name || w).toLowerCase().includes(q));
+}
+function renderPicker(){
+  const keys = filteredWeapons();
   $("picker").innerHTML = keys.map(w => `<button class="pick" data-add="${w}" ${party.length >= SIZE ? "disabled" : ""}>
-      <span class="nm">${nameOf(w)}</span>
-      <span class="prov ${WEAPONS[w].status === "curated" ? "curated" : "draft"}">${WEAPONS[w].status === "curated" ? "curated" : "illustrative"}</span>
+      <span class="nm">${nameOf(w)}<span class="fn">${roleOf(w)}</span></span>
+      ${WEAPONS[w].status === "curated" ? "" : '<span class="prov draft">illustrative</span>'}
     </button>`).join("")
     || `<p class="ev-empty">Nothing matches “${esc(pickFilter)}”.</p>`;
 }
@@ -744,21 +792,31 @@ function renderWarning(){
        (<code>${unc.join(", ")}</code>). No single weapon closes all of them — expect to leave at least ${unc.length - left} unmet whatever you pick next.</span></div>`
     : "";
 }
-function renderRec(){
-  if (party.length >= SIZE){
-    $("rec-slot").innerHTML = `<div class="sec-label">Recommendation</div>
-      <div class="rec"><div class="rec-body"><p class="why">Party is full at ${SIZE}. Remove a slot to see what the engine would swap in.</p></div></div>`;
+function renderCmdNext(recs){
+  if (!recs){
+    $("cb-next").innerHTML = `<div class="eyebrow">Party full</div>
+      <div class="cb-row"><span class="cb-full">All ${SIZE} slots filled. Remove someone to explore swaps.</span></div>`;
     return;
   }
-  const recs = recommend(party, 4), top = recs[0], terms = explain(party, top.w).slice(0,4);
+  const top = recs[0];
+  $("cb-next").innerHTML = `
+    <div class="eyebrow">Next pick — slot ${party.length + 1} of ${SIZE}</div>
+    <div class="cb-row">
+      <span><span class="nm">${nameOf(top.w)}</span><span class="fn rl">${roleOf(top.w)}</span></span>
+      <button class="cb-add" data-add="${top.w}">Add to party</button>
+    </div>`;
+}
+function renderRecDetail(recs){
+  if (!recs){
+    $("rec-label").textContent = "Recommendation";
+    $("rec-slot").innerHTML = `<div class="rec"><div class="rec-body">
+      <p class="why">Party is full at ${SIZE}. Remove a slot to see what the engine would swap in.</p></div></div>`;
+    return;
+  }
+  const top = recs[0], terms = explain(party, top.w).slice(0,4);
+  $("rec-label").textContent = `Why ${WEAPONS[top.w].display_name}`;
   $("rec-slot").innerHTML = `
-    <div class="sec-label">Recommendation — slot ${party.length + 1} of ${SIZE}</div>
     <div class="rec">
-      <div class="rec-top">
-        <div class="rec-eyebrow">Highest marginal gain</div>
-        <div class="rec-name">${nameOf(top.w)}</div>
-        <div class="rec-role">${roleOf(top.w)}</div>
-      </div>
       <div class="rec-body">
         <p class="why">${whySentence(party, top.w)}</p>
         <div class="terms">${terms.map(t => `<div class="term">
@@ -769,8 +827,7 @@ function renderRec(){
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= ${ENG.alpha}·<b>${top.dFit.toFixed(2)}</b> + ${ENG.beta}·<b>${top.dSyn.toFixed(2)}</b> + ${ENG.delta}·<b>${top.meta.toFixed(2)}</b> = <b>${top.score.toFixed(2)}</b><br>
           <span class="k">metaPrior</span> is a hand-set guard value — real win-lift arrives in Phase 3 from battle data.
         </div>
-        <button class="add" data-add="${top.w}">Add ${nameOf(top.w)} to party</button>
-        <div><div class="sec-label" style="margin-bottom:8px">Alternatives</div>
+        <div><div class="sec-label" style="margin-bottom:8px">Alternatives — click to add instead</div>
           <div class="alts">${recs.slice(1).map(r => {
             const t0 = explain(party, r.w)[0];
             return `<button class="alt" data-add="${r.w}"><span class="sc">${r.score.toFixed(2)}</span>
@@ -803,8 +860,10 @@ function renderEvidence(cap){
 }
 function render(){
   syncEngine(); saveHash();
-  renderSetup(); renderRoster(); renderPicker(); renderFitness();
-  renderGroups(); renderWeaknesses(); renderWarning(); renderRec(); renderFootnote();
+  const recs = party.length < SIZE ? recommend(party, 4) : null;
+  renderSetup(); renderTally(); renderRoster(); renderPicker(); renderFitness();
+  renderCmdNext(recs); renderGroups(); renderWeaknesses(); renderWarning();
+  renderRecDetail(recs); renderFootnote();
 }
 
 document.addEventListener("click", e => {
@@ -834,7 +893,19 @@ document.addEventListener("change", e => {
 document.addEventListener("input", e => {
   if (e.target.id === "pick-filter"){ pickFilter = e.target.value; renderPicker(); }
 });
-document.addEventListener("keydown", e => { if (e.key === "Escape") $("drawer").dataset.open = "false"; });
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape"){ $("drawer").dataset.open = "false"; return; }
+  /* "/" jumps to the weapon filter from anywhere outside a text field */
+  if (e.key === "/" && !e.target.closest("input,select,textarea")){
+    e.preventDefault(); $("pick-filter").focus();
+  }
+});
+/* Enter in the filter adds the top match — repeatable for duplicate picks */
+$("pick-filter").addEventListener("keydown", e => {
+  if (e.key !== "Enter") return;
+  const keys = filteredWeapons();
+  if (keys.length && party.length < SIZE){ party.push(keys[0]); render(); }
+});
 /* A pasted share-link hash applies without a reload. saveHash() uses
    replaceState, which never fires hashchange, so this cannot loop. */
 window.addEventListener("hashchange", () => { if (loadHash()) render(); });

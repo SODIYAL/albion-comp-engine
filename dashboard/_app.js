@@ -126,23 +126,39 @@ function renderSetup(){
   $("size-notice").innerHTML = validatedSizes().includes(SIZE) ? "" :
     `<div class="notice"><b>Extrapolated.</b> This template is fitted and validated at size ${validatedSizes().join(", ")} only. Per-player targets are scaled linearly to ${SIZE}; flat threshold targets are unchanged. Tier-2 validation must confirm each size before this is trustworthy.</div>`;
 }
+function renderTally(){
+  const counts = {};
+  party.forEach(w => { const r = WEAPONS[w].role_hint || "other"; counts[r] = (counts[r]||0) + 1; });
+  $("tally").innerHTML = party.length
+    ? Object.entries(counts).sort((a,b) => b[1]-a[1])
+        .map(([r,n]) => `<span class="t"><b>${n}</b> ${esc(r)}</span>`).join("")
+      + `<span class="t"><b>${SIZE - party.length}</b> open</span>`
+    : "";
+}
 function renderRoster(){
   const rows = party.map((w,i) =>
     `<div class="slot"><span class="n mono">${String(i+1).padStart(2,"0")}</span>
       <span class="nm">${nameOf(w)}<span class="fn">${roleOf(w)}</span></span>
       <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>`);
-  for (let i = party.length; i < SIZE; i++)
-    rows.push(`<div class="slot empty"><span class="n mono">${String(i+1).padStart(2,"0")}</span>open slot</div>`);
+  /* open slots collapse: one dashed "next" row, one "+N more" line */
+  const open = SIZE - party.length;
+  if (open > 0)
+    rows.push(`<div class="slot next"><span class="n mono">${String(party.length+1).padStart(2,"0")}</span>next slot — pick below</div>`);
+  if (open > 1)
+    rows.push(`<div class="slot more">+ ${open - 1} more open slot${open > 2 ? "s" : ""}</div>`);
   $("roster").innerHTML = rows.join("");
 }
-function renderPicker(){
+function filteredWeapons(){
   const q = pickFilter.trim().toLowerCase();
-  const keys = Object.keys(WEAPONS)
+  return Object.keys(WEAPONS)
     .sort((a,b) => nameOf(a).localeCompare(nameOf(b)))
     .filter(w => !q || (WEAPONS[w].display_name || w).toLowerCase().includes(q));
+}
+function renderPicker(){
+  const keys = filteredWeapons();
   $("picker").innerHTML = keys.map(w => `<button class="pick" data-add="${w}" ${party.length >= SIZE ? "disabled" : ""}>
-      <span class="nm">${nameOf(w)}</span>
-      <span class="prov ${WEAPONS[w].status === "curated" ? "curated" : "draft"}">${WEAPONS[w].status === "curated" ? "curated" : "illustrative"}</span>
+      <span class="nm">${nameOf(w)}<span class="fn">${roleOf(w)}</span></span>
+      ${WEAPONS[w].status === "curated" ? "" : '<span class="prov draft">illustrative</span>'}
     </button>`).join("")
     || `<p class="ev-empty">Nothing matches “${esc(pickFilter)}”.</p>`;
 }
@@ -184,21 +200,31 @@ function renderWarning(){
        (<code>${unc.join(", ")}</code>). No single weapon closes all of them — expect to leave at least ${unc.length - left} unmet whatever you pick next.</span></div>`
     : "";
 }
-function renderRec(){
-  if (party.length >= SIZE){
-    $("rec-slot").innerHTML = `<div class="sec-label">Recommendation</div>
-      <div class="rec"><div class="rec-body"><p class="why">Party is full at ${SIZE}. Remove a slot to see what the engine would swap in.</p></div></div>`;
+function renderCmdNext(recs){
+  if (!recs){
+    $("cb-next").innerHTML = `<div class="eyebrow">Party full</div>
+      <div class="cb-row"><span class="cb-full">All ${SIZE} slots filled. Remove someone to explore swaps.</span></div>`;
     return;
   }
-  const recs = recommend(party, 4), top = recs[0], terms = explain(party, top.w).slice(0,4);
+  const top = recs[0];
+  $("cb-next").innerHTML = `
+    <div class="eyebrow">Next pick — slot ${party.length + 1} of ${SIZE}</div>
+    <div class="cb-row">
+      <span><span class="nm">${nameOf(top.w)}</span><span class="fn rl">${roleOf(top.w)}</span></span>
+      <button class="cb-add" data-add="${top.w}">Add to party</button>
+    </div>`;
+}
+function renderRecDetail(recs){
+  if (!recs){
+    $("rec-label").textContent = "Recommendation";
+    $("rec-slot").innerHTML = `<div class="rec"><div class="rec-body">
+      <p class="why">Party is full at ${SIZE}. Remove a slot to see what the engine would swap in.</p></div></div>`;
+    return;
+  }
+  const top = recs[0], terms = explain(party, top.w).slice(0,4);
+  $("rec-label").textContent = `Why ${WEAPONS[top.w].display_name}`;
   $("rec-slot").innerHTML = `
-    <div class="sec-label">Recommendation — slot ${party.length + 1} of ${SIZE}</div>
     <div class="rec">
-      <div class="rec-top">
-        <div class="rec-eyebrow">Highest marginal gain</div>
-        <div class="rec-name">${nameOf(top.w)}</div>
-        <div class="rec-role">${roleOf(top.w)}</div>
-      </div>
       <div class="rec-body">
         <p class="why">${whySentence(party, top.w)}</p>
         <div class="terms">${terms.map(t => `<div class="term">
@@ -209,8 +235,7 @@ function renderRec(){
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= ${ENG.alpha}·<b>${top.dFit.toFixed(2)}</b> + ${ENG.beta}·<b>${top.dSyn.toFixed(2)}</b> + ${ENG.delta}·<b>${top.meta.toFixed(2)}</b> = <b>${top.score.toFixed(2)}</b><br>
           <span class="k">metaPrior</span> is a hand-set guard value — real win-lift arrives in Phase 3 from battle data.
         </div>
-        <button class="add" data-add="${top.w}">Add ${nameOf(top.w)} to party</button>
-        <div><div class="sec-label" style="margin-bottom:8px">Alternatives</div>
+        <div><div class="sec-label" style="margin-bottom:8px">Alternatives — click to add instead</div>
           <div class="alts">${recs.slice(1).map(r => {
             const t0 = explain(party, r.w)[0];
             return `<button class="alt" data-add="${r.w}"><span class="sc">${r.score.toFixed(2)}</span>
@@ -243,8 +268,10 @@ function renderEvidence(cap){
 }
 function render(){
   syncEngine(); saveHash();
-  renderSetup(); renderRoster(); renderPicker(); renderFitness();
-  renderGroups(); renderWeaknesses(); renderWarning(); renderRec(); renderFootnote();
+  const recs = party.length < SIZE ? recommend(party, 4) : null;
+  renderSetup(); renderTally(); renderRoster(); renderPicker(); renderFitness();
+  renderCmdNext(recs); renderGroups(); renderWeaknesses(); renderWarning();
+  renderRecDetail(recs); renderFootnote();
 }
 
 document.addEventListener("click", e => {
@@ -274,7 +301,19 @@ document.addEventListener("change", e => {
 document.addEventListener("input", e => {
   if (e.target.id === "pick-filter"){ pickFilter = e.target.value; renderPicker(); }
 });
-document.addEventListener("keydown", e => { if (e.key === "Escape") $("drawer").dataset.open = "false"; });
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape"){ $("drawer").dataset.open = "false"; return; }
+  /* "/" jumps to the weapon filter from anywhere outside a text field */
+  if (e.key === "/" && !e.target.closest("input,select,textarea")){
+    e.preventDefault(); $("pick-filter").focus();
+  }
+});
+/* Enter in the filter adds the top match — repeatable for duplicate picks */
+$("pick-filter").addEventListener("keydown", e => {
+  if (e.key !== "Enter") return;
+  const keys = filteredWeapons();
+  if (keys.length && party.length < SIZE){ party.push(keys[0]); render(); }
+});
 /* A pasted share-link hash applies without a reload. saveHash() uses
    replaceState, which never fires hashchange, so this cannot loop. */
 window.addEventListener("hashchange", () => { if (loadHash()) render(); });
