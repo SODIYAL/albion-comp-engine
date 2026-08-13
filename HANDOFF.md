@@ -69,8 +69,11 @@ files, golden 9/9, patch-history 14/14.
   calibration from the two real comps in `tests/meta_comps.yaml` (see the
   circularity notes in the template headers). Golden suite: 15 cases
   (T8/T9 real-comp anchors, T10 style-direction discrimination).
-- **The product page is `dashboard/index.html` — "Comp Forge"** (generated
-  by `pipeline/build_dashboard.py` from `_shell.html` + `_app.js`). Content
+- **The product page is `dashboard/index.html` — "Comp Forge"**, deployed
+  publicly at <https://sodiyal.github.io/albion-comp-engine/> (GitHub Pages
+  serves `main:/docs`; `build_dashboard.py` writes `docs/index.html` as the
+  doctype'd copy, so rebuild + push = deploy). Generated
+  by `pipeline/build_dashboard.py` from `_shell.html` + `_app.js`. Content
   and playstyle pickers, free-form adaptive party size, numbered slots with
   role tally, tree + text weapon filters, "forge a full comp" greedy
   auto-build, needed-now/nice-to-have gap split, full capability board
