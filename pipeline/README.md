@@ -204,14 +204,17 @@ not needed as a source.
   Food, so gear *popularity* can be harvested from data; gear *capability*
   still needs the same evidence-cited curation as weapons (one active spell per
   piece, so seeding should get close to complete).
-- **Usage sample is small** (24 battles / 359 players, 2026-08-12) and skewed to
-  10–60 player fights. Re-run at ~200 battles before trusting shares
-  (VALIDATION V7). Measured coverage is far thinner than design doc §5 assumed:
-  top-30 weapons cover 62% of observations, not >90%; 97 distinct weapons appear.
+- ~~Usage sample is small (24 battles)~~ — superseded 2026-08-13 by
+  `sample_battles.py` (~200 battles from the albionbb API, size-bucketed,
+  per-battle cache, V7 coverage stat in `out/weapon_usage_v2.json`).
+  Display-only in the dashboard until validation admits it to scoring.
 - Structural capabilities (engage, peel, clump, tankiness…) are human-only by
   design; drafts contain effect capabilities only.
-- Only one content template exists (`castle_outpost`, validated at size 7 only).
-  Other sizes are linear extrapolation and are labelled as such in the UI.
+- Five content templates exist (`blackzone_roam` 20, `territory_defense` 20,
+  `castle` 25, `faction_war` 15, `castle_outpost` 7) plus the playstyle
+  overlays in `templates/styles.yaml` — everything but castle_outpost is a
+  2026-08-1x PROVISIONAL draft; sizes off the validated list are linear
+  extrapolation and labelled as such in the UI.
 - Default-kit harvester not built: Metabattle (open MediaWiki API, CC BY-SA,
   ~120 builds with per-slot spells) + Albion Free Market (4,478 builds,
   game-native spell IDs, SSR-scrapeable — ask their Discord first). Two-source

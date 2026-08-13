@@ -426,12 +426,28 @@ function renderEvidence(cap){
     : `<p class="ev-empty">No weapon in this party supplies <span class="mono">${cap}</span>. Supply is 0 of ${target(cap).toFixed(1)} units.</p>`;
   $("drawer").dataset.open = "true";
 }
+function renderMetaStrip(){
+  const sec = $("meta-sec");
+  if (typeof USAGE === "undefined" || !USAGE.buckets){ sec.hidden = true; return; }
+  const key = SIZE < 12 ? "small" : SIZE <= 30 ? "mid" : "large";
+  const m = (USAGE.meta || {})[key];
+  if (!m || m.players_attributed < 200){ sec.hidden = true; return; }
+  const rows = Object.entries(USAGE.buckets[key] || {})
+    .sort((a,b) => b[1] - a[1]).slice(0, 12);
+  $("meta-label").textContent =
+    `This week on the killboard — ${usageBucketName()} fights (${m.battles} battles, ${m.players_attributed} players)`;
+  $("meta-strip").innerHTML = rows.map(([w, n], i) =>
+    `<div class="meta-row"><span class="rk">${String(i+1).padStart(2,"0")}</span>${icon(w, 20)}
+      <button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>
+      <span class="pct">${(100 * n / m.players_attributed).toFixed(1)}%</span></div>`).join("");
+  sec.hidden = false;
+}
 function render(){
   syncEngine(); saveHash();
   const recs = party.length < HARD_CAP ? recommend(party, 4) : null;
   renderSetup(); renderTally(); renderRoster(); renderPicker(); renderFitness();
   renderCmdNext(recs); renderGroups(); renderWeaknesses(); renderWarning();
-  renderRecDetail(recs); renderFootnote();
+  renderRecDetail(recs); renderMetaStrip(); renderFootnote();
 }
 
 function compText(){

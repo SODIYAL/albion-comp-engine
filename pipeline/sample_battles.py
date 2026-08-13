@@ -86,6 +86,8 @@ def main():
     ap.add_argument("--battles", type=int, default=200)
     ap.add_argument("--min-players", type=int, default=6)
     ap.add_argument("--server", default="us", choices=["us", "eu", "asia"])
+    ap.add_argument("--no-topup", action="store_true",
+                    help="skip the large-bucket top-up sweep (e.g. when the API is throttling)")
     args = ap.parse_args()
     api = f"https://api.albionbb.com/{args.server}"
 
@@ -153,7 +155,7 @@ def main():
     # phase 1: the general sweep; phase 2: top up the large bucket, which
     # recent-battle listings underrepresent (big fights are rare)
     sweep(args.min_players, args.battles, 60)
-    if meta["large"]["battles"] < 40:
+    if not args.no_topup and meta["large"]["battles"] < 40:
         print("  topping up the large bucket (minPlayers=31)...", flush=True)
         sweep(31, 40 - meta["large"]["battles"], 20)
 
