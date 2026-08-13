@@ -152,6 +152,31 @@ html:not([data-theme="light"]) .size-btn[aria-pressed="true"]{color:#0D1218}
 }
 .icon{flex:none; border-radius:3px; vertical-align:middle}
 span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var(--rule-2)}
+.nm-btn{appearance:none; background:none; border:0; padding:0; font:inherit; color:inherit; text-align:left; cursor:pointer}
+.nm-btn:hover{color:var(--brass); text-decoration:underline; text-underline-offset:2px}
+.info{
+  font-family:var(--mono); font-size:9.5px; color:var(--ink-3); flex:none; cursor:pointer;
+  border:1px solid var(--rule-2); border-radius:50%; width:16px; height:16px;
+  display:inline-flex; align-items:center; justify-content:center; font-style:italic;
+}
+.info:hover{color:var(--brass); border-color:var(--brass)}
+/* weapon detail drawer */
+.dt-head{display:flex; gap:12px; align-items:center; margin-bottom:6px}
+.dt-head b{font-family:var(--serif); font-size:18px}
+.dt-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:4px 32px; align-items:start}
+#drawer h4{
+  font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-3); margin:12px 0 5px; font-weight:400;
+}
+.sp-list{list-style:none; margin:0; padding:0}
+.sp-list li{font-size:12.5px; padding:2.5px 0; display:flex; gap:9px; align-items:baseline}
+.sp-list .idx{font-family:var(--mono); font-size:9.5px; color:var(--ink-3); min-width:20px; flex:none; letter-spacing:.05em}
+.sp-list li.pick, .sp-list li.pick .idx{color:var(--brass); font-weight:600}
+.lo-box{
+  border:1px solid var(--brass); border-radius:3px; background:var(--brass-wash);
+  padding:8px 12px; font-size:12.5px; margin-top:10px; line-height:1.7;
+}
+.lo-box .who{font-family:var(--mono); font-size:9.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--brass)}
 .slot .x{
   background:none; border:0; color:var(--ink-3); font-size:16px; line-height:1;
   padding:2px 5px; border-radius:3px; flex:none;

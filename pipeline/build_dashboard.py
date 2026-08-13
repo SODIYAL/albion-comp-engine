@@ -16,12 +16,52 @@ JSON file.
 
 Usage:  py -3 pipeline/build_dashboard.py
 """
-import json, os, sys
+import json, os, re, sys
+
+try:
+    import yaml
+except ImportError:
+    yaml = None
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, os.pardir)
 DASH = os.path.join(ROOT, "dashboard")
 DATASET = os.path.join(HERE, "out", "dataset-latest.json")
+
+
+def load_loadouts(weapons):
+    """Caller-provided skill loadouts from tests/meta_comps.yaml (the 'skills'
+    columns, e.g. Timothy's blap sheet). Keyed content -> weapon -> variants.
+    Only real caller data ever lands here — never invented."""
+    path = os.path.join(ROOT, "tests", "meta_comps.yaml")
+    if yaml is None or not os.path.exists(path):
+        return {}
+    with open(path, encoding="utf-8") as f:
+        comps = (yaml.safe_load(f) or {}).get("comps", [])
+    out = {}
+    for comp in comps:
+        content = comp.get("content")
+        m = re.search(r'"([^"]+)"', comp.get("source", ""))
+        caller = m.group(1) if m else comp.get("id", "caller")
+        for party in comp.get("parties", []):
+            for slot in party.get("slots", []):
+                sk = slot.get("skills")
+                if not sk or not slot.get("weapons"):
+                    continue
+                mm = re.search(r"q(\d+)\D+w(\d+)\D+p(\d+)", sk, re.I)
+                if not mm:
+                    continue
+                w = slot["weapons"][0]
+                if w not in weapons:
+                    continue
+                variant = {"q": int(mm.group(1)), "w": int(mm.group(2)),
+                           "p": int(mm.group(3)),
+                           "role": slot.get("role_raw") or slot.get("role") or "",
+                           "caller": caller}
+                bucket = out.setdefault(content, {}).setdefault(w, [])
+                if variant not in bucket:
+                    bucket.append(variant)
+    return out
 
 
 def main():
@@ -50,6 +90,20 @@ def main():
         lines = json.load(f)
     trees = {k: (lines.get(k) or {}).get("subcategory", "other")
              for k in data["weapons"]}
+    # Spell pools with display names — powers the weapon detail drawer and
+    # resolves caller loadout indices (q3 = 3rd Q option, game-data order).
+    with open(os.path.join(HERE, "out", "spell_index.json"), encoding="utf-8") as f:
+        spell_index = json.load(f)
+
+    def spell_name(sid):
+        return (spell_index.get(sid) or {}).get("name") or sid
+
+    spells = {}
+    for k in data["weapons"]:
+        sp = (lines.get(k) or {}).get("spells") or {}
+        spells[k] = {slot: [[sid, spell_name(sid)] for sid in sp.get(slot, [])]
+                     for slot in ("q", "w", "e", "passive")}
+    loadouts = load_loadouts(data["weapons"])
 
     # Parity fixture: run the Python engine over the dashboard's seed party and
     # inline its output, so the client asserts against the real engine on every
@@ -72,6 +126,8 @@ def main():
            f"<script>\nconst DATASET = {blob};\n"
            f"const ICONS = {json.dumps(icons, separators=(',', ':'))};\n"
            f"const TREES = {json.dumps(trees, separators=(',', ':'))};\n"
+           f"const SPELLS = {json.dumps(spells, separators=(',', ':')).replace('</', '<\\/')};\n"
+           f"const LOADOUTS = {json.dumps(loadouts, separators=(',', ':')).replace('</', '<\\/')};\n"
            f"const PARITY_EXPECTED = {json.dumps(expected)};\n{app}</script>\n")
     path = os.path.join(DASH, "index.html")
     with open(path, "w", encoding="utf-8") as f:

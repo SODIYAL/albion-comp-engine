@@ -158,7 +158,7 @@ function renderTally(){
 function renderRoster(){
   const rows = party.map((w,i) =>
     `<div class="slot"><span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 26)}
-      <span class="nm">${nameOf(w)}<span class="fn">${roleOf(w)}</span></span>
+      <span class="nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button><span class="fn">${roleOf(w)}</span></span>
       <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>`);
   /* open slots collapse: one dashed "next" row, one "+N more" line */
   const open = SIZE - party.length;
@@ -194,6 +194,7 @@ function renderPicker(){
   $("picker").innerHTML = keys.map(w => `<button class="pick" data-add="${w}">
       ${icon(w, 26)}<span class="nm">${nameOf(w)}<span class="fn">${roleOf(w)}</span></span>
       ${WEAPONS[w].status === "curated" ? "" : '<span class="prov draft">illustrative</span>'}
+      <span class="info" data-detail="${w}" role="button" tabindex="0" aria-label="Details for ${nameOf(w)}">i</span>
     </button>`).join("")
     || `<p class="ev-empty">Nothing matches${treeFilter ? " in this tree" : ""}${pickFilter.trim() ? ` — “${esc(pickFilter)}”` : ""}.</p>`;
 }
@@ -270,7 +271,7 @@ function renderCmdNext(recs){
     <div class="eyebrow">Next pick — ${slotLabel}${styleTag}</div>
     <div class="cb-row">
       ${icon(top.w, 44)}
-      <span><span class="nm">${nameOf(top.w)}</span><span class="fn rl">${roleOf(top.w)}</span></span>
+      <span><button class="nm-btn nm" data-detail="${top.w}">${nameOf(top.w)}</button><span class="fn rl">${roleOf(top.w)}</span></span>
       <button class="cb-add" data-add="${top.w}">Add to party</button>
       ${forge}
     </div>`;
@@ -288,6 +289,11 @@ function renderRecDetail(recs){
     <div class="rec">
       <div class="rec-body">
         <p class="why">${whySentence(party, top.w)}</p>
+        ${((typeof LOADOUTS !== "undefined" && LOADOUTS[CONTENT]) || {})[top.w] ? (() => {
+          const v = LOADOUTS[CONTENT][top.w][0];
+          return `<div class="lo-box"><div class="who">caller loadout — ${esc(v.caller)}${v.role ? " · " + esc(v.role) : ""}</div>
+            Q${v.q} ${esc(spellAt(top.w, "q", v.q))} · W${v.w} ${esc(spellAt(top.w, "w", v.w))} · P${v.p} ${esc(spellAt(top.w, "passive", v.p))}</div>`;
+        })() : ""}
         <div class="terms">${terms.map(t => `<div class="term">
           <span class="d">+${t.d.toFixed(2)}</span><span class="c">${t.cap}</span>
           <span class="mv">${t.before.toFixed(0)} → ${t.after.toFixed(0)} of ${t.target.toFixed(1)}</span></div>`).join("")}</div>
@@ -313,6 +319,54 @@ function renderFootnote(){
     This party: ${c} curated, ${party.length - c} illustrative.
     Curated sheets cite an equippable spell for every nonzero score. Illustrative sheets carry design-doc §2.3 placeholder numbers and are <b>not</b> evidence-checked — they exist to keep the engine runnable during curation. Click any capability for its evidence chain.
     Item renders from the official Albion Online Render Service, © Sandbox Interactive GmbH — this tool is unofficial and not affiliated.`;
+}
+function loVariants(w){
+  /* caller loadouts for this weapon: current content first, then others */
+  const out = [];
+  for (const [ct, m] of Object.entries(typeof LOADOUTS !== "undefined" ? LOADOUTS : {}))
+    (m[w] || []).forEach(v => out.push({...v, ct}));
+  return out.sort((a,b) => (a.ct === CONTENT ? -1 : 0) - (b.ct === CONTENT ? -1 : 0));
+}
+function spellAt(w, slot, idx){
+  const pool = ((typeof SPELLS !== "undefined" && SPELLS[w]) || {})[slot] || [];
+  const e = pool[idx - 1];
+  return e ? e[1] : `#${idx}`;
+}
+function renderDetail(w){
+  const d = WEAPONS[w], sp = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
+  const vars = loVariants(w);
+  const picks = { q: new Set(), w: new Set(), passive: new Set() };
+  vars.filter(v => v.ct === CONTENT).forEach(v => {
+    picks.q.add(v.q); picks.w.add(v.w); picks.passive.add(v.p);
+  });
+  const pool = (slot, label) => {
+    const rows = (sp[slot] || []).map(([sid, nm], i) =>
+      `<li class="${picks[slot] && picks[slot].has(i+1) ? "pick" : ""}">
+         <span class="idx">${slot === "e" ? "E" : slot[0].toUpperCase() + (i+1)}</span>
+         <span>${esc(nm)}</span>
+         ${picks[slot] && picks[slot].has(i+1) ? '<span class="idx">caller pick</span>' : ""}
+       </li>`).join("");
+    return rows ? `<h4>${label}</h4><ul class="sp-list">${rows}</ul>` : "";
+  };
+  const caps = Object.entries(d.capabilities || {}).sort((a,b) => b[1]-a[1]).map(([c, v]) =>
+    `<tr><td><button class="cap-name" data-cap="${c}">${c}</button></td><td class="sc">${v}</td>
+     <td>${((d.evidence || {})[c] || []).map(e => `<span class="sp">${esc(e)}</span>`).join(", ")}</td></tr>`).join("");
+  const lo = vars.length ? `<div class="lo-box">
+      <div class="who">caller loadout${vars.length > 1 ? "s" : ""}</div>
+      ${vars.map(v => `<div>${esc(v.caller)}${v.role ? " · " + esc(v.role) : ""}${v.ct !== CONTENT ? ` · <i>${esc((DATASET.templates[v.ct] || {name: v.ct}).name)}</i>` : ""} —
+        Q${v.q} ${esc(spellAt(w, "q", v.q))} · W${v.w} ${esc(spellAt(w, "w", v.w))} · P${v.p} ${esc(spellAt(w, "passive", v.p))}</div>`).join("")}
+    </div>` : "";
+  $("drawer-title").textContent = d.display_name;
+  $("drawer-body").innerHTML = `
+    <div class="dt-head">${icon(w, 40)}
+      <div><b>${nameOf(w)}</b><span class="fn">${esc(TREE_NAMES[TREES[w]] || TREES[w] || "")} tree · ${roleOf(w)}</span></div>
+    </div>
+    <div class="dt-grid">
+      <div><h4>Capabilities — click one for party-wide evidence</h4>
+        <table class="ev-tbl"><tbody>${caps}</tbody></table></div>
+      <div>${pool("e", "E — the identity")}${pool("q", "Q options")}${pool("w", "W options")}${pool("passive", "Passives")}${lo}</div>
+    </div>`;
+  $("drawer").dataset.open = "true";
 }
 function renderEvidence(cap){
   const rows = party.filter(w => capsOf(w)[cap]).map(w => {
@@ -360,6 +414,8 @@ function flashBtn(id, text, back){
 }
 
 document.addEventListener("click", e => {
+  const det = e.target.closest("[data-detail]");
+  if (det){ renderDetail(det.dataset.detail); return; }
   const add = e.target.closest("[data-add]");
   if (add){ if (party.length < HARD_CAP){ party.push(add.dataset.add); render(); } return; }
   if (e.target.closest("#forge")){
