@@ -429,11 +429,11 @@ comps:
             gear: {offhand: null, helm: "Leather Hood(cleanse)", armor: "Hellion Jacket", boots: "Stalker Shoes", cape: "Smuggler", note: "E on engage EARLY, kidnap healers or overcommitted tanks"}
             potion: "Gig"
             food: "8.1 beef stew"
-            # REVIEW: "kidnap" implies the E channel displaces its target
-            # (steerable shove). PUMMELING_STRIKES has an EMPTY structured-
-            # effects list in the dumps (Black Hands situation) — sheet
-            # currently scores no displacement on the E. Expert to confirm;
-            # if real, it needs an add: override, not a sheet edit.
+            # RESOLVED 2026-08-12 (owner correction): the kidnap is NOT the
+            # E — it's the shared W Triple Kick ("Pulls up to 1 enemy player
+            # along with you", and this loadout runs w1 = Triple Kick).
+            # Scored clump_create 1 (QW) across the knuckles pool; Black
+            # Hands excluded (different W row, no Triple Kick).
           - raw: "Bloodletter"
             weapons: [MAIN_RAPIER_MORGANA]
             role: dps

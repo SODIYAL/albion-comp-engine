@@ -1,6 +1,13 @@
 # Knuckles line — remaining 7 weapons, curated 2026-08-12 (tree pass).
 # Q/W pool parity with the Battle Bracers sheet (dash-combo Qs, Backhand,
 # Counter, Devastating Combo, Triple Kick).
+#
+# 2026-08-12 expert correction (owner): Triple Kick "Pulls up to 1 enemy
+# player along with you" — the ZvZ "kidnap" (drag a healer/tank into your
+# team). Drag/pull CREATES clumps per the standing ruling, so clump_create 1
+# (QW) added line-wide. Black Hands is NOT in this pool (own W row, no
+# Triple Kick). Corroborated by Timothy's blap comp ("kidnap healers or
+# overcommitted tanks" on Ursine Maulers, running w1 = Triple Kick).
 
 - weapon: 2H_KNUCKLES_AVALON         # Fists of Avalon — purifying diver
   curated_as_of: 2026-08-12
@@ -13,6 +20,7 @@
     - {cap: disengage,     score: 1, evidence: TRIPLECOMBO_DIVEKICK}
     - {cap: peel,          score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
     - {cap: catch,         score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: clump_create,  score: 1, evidence: TRIPLE_KICK}    # W: pulls 1 enemy player along the dash — the kidnap (QW)
     - {cap: burst_st,      score: 1, evidence: KNUCKLECOMBO}   # (QW)
     - {cap: stun,          score: 1, evidence: KNUCKLECOMBO}   # (QW)
     - {cap: resist_shred,  score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
@@ -27,6 +35,7 @@
     - {cap: mobility,      score: 2, evidence: CONEPUNCH2}     # recastable dash + Q dashes
     - {cap: engage,        score: 1, evidence: CONEPUNCH2}
     - {cap: catch,         score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: clump_create,  score: 1, evidence: TRIPLE_KICK}    # W: pulls 1 enemy player along the dash — the kidnap (QW)
     - {cap: knockback_displace, score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
     - {cap: peel,          score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
     - {cap: stun,          score: 1, evidence: KNUCKLECOMBO}   # (QW)
@@ -41,6 +50,7 @@
     - {cap: heal_reduction, score: 1, evidence: BOULDER_TOSS}  # each impact reduces Healing Received
     - {cap: mobility,      score: 2, evidence: DASHKICK}       # Q dashes (QW)
     - {cap: catch,         score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: clump_create,  score: 1, evidence: TRIPLE_KICK}    # W: pulls 1 enemy player along the dash — the kidnap (QW)
     - {cap: engage,        score: 1, evidence: DASHKICK}       # (QW)
     - {cap: knockback_displace, score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
     - {cap: peel,          score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
@@ -58,6 +68,7 @@
     - {cap: burst_aoe,     score: 1, evidence: PUMMELING_STRIKES}  # the cone hits everyone in it
     - {cap: mobility,      score: 2, evidence: DASHKICK}       # Q dashes (QW)
     - {cap: catch,         score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: clump_create,  score: 1, evidence: TRIPLE_KICK}    # W: pulls 1 enemy player along the dash — the kidnap (QW)
     - {cap: engage,        score: 1, evidence: DASHKICK}       # (QW)
     - {cap: knockback_displace, score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
     - {cap: peel,          score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
@@ -73,6 +84,7 @@
     - {cap: peel,          score: 1, evidence: GROWING_PUNCH}
     - {cap: mobility,      score: 2, evidence: DASHKICK}       # Q dashes (QW)
     - {cap: catch,         score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: clump_create,  score: 1, evidence: TRIPLE_KICK}    # W: pulls 1 enemy player along the dash — the kidnap (QW)
     - {cap: engage,        score: 1, evidence: DASHKICK}       # (QW)
     - {cap: burst_st,      score: 1, evidence: KNUCKLECOMBO}   # (QW)
     - {cap: stun,          score: 1, evidence: KNUCKLECOMBO}   # (QW)
@@ -88,6 +100,7 @@
     - {cap: peel,          score: 1, evidence: BLAZING_GEYSER}
     - {cap: mobility,      score: 2, evidence: DASHKICK}       # Q dashes (QW)
     - {cap: catch,         score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: clump_create,  score: 1, evidence: TRIPLE_KICK}    # W: pulls 1 enemy player along the dash — the kidnap (QW)
     - {cap: engage,        score: 1, evidence: DASHKICK}       # (QW)
     - {cap: burst_st,      score: 1, evidence: KNUCKLECOMBO}   # (QW)
     - {cap: stun,          score: 1, evidence: KNUCKLECOMBO}   # (QW)
@@ -101,6 +114,7 @@
     - {cap: burst_aoe,     score: 2, evidence: IMPULSE_PUNCH}  # E: armor-typed cone — hits plate hardest
     - {cap: slow,          score: 2, evidence: IMPULSE_PUNCH}  # 2s cone slow
     - {cap: catch,         score: 1, evidence: IMPULSE_PUNCH}
+    - {cap: clump_create,  score: 1, evidence: TRIPLE_KICK}    # W: pulls 1 enemy player along the dash — the kidnap (QW)
     - {cap: peel,          score: 1, evidence: IMPULSE_PUNCH}
     - {cap: mobility,      score: 2, evidence: DASHKICK}       # Q dashes (QW)
     - {cap: engage,        score: 1, evidence: DASHKICK}       # (QW)

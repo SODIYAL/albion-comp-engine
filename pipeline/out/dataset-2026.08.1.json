@@ -3666,6 +3666,7 @@
    "capabilities": {
     "burst_st": 1,
     "catch": 1,
+    "clump_create": 1,
     "disengage": 1,
     "engage": 2,
     "knockback_displace": 2,
@@ -3684,6 +3685,9 @@
     ],
     "catch": [
      "DASHKICK"
+    ],
+    "clump_create": [
+     "TRIPLE_KICK"
     ],
     "disengage": [
      "TRIPLECOMBO_DIVEKICK"
@@ -3723,6 +3727,7 @@
    "capabilities": {
     "burst_st": 2,
     "catch": 1,
+    "clump_create": 1,
     "engage": 1,
     "execute": 1,
     "knockback_displace": 1,
@@ -3740,6 +3745,9 @@
     ],
     "catch": [
      "DASHKICK"
+    ],
+    "clump_create": [
+     "TRIPLE_KICK"
     ],
     "engage": [
      "CONEPUNCH2"
@@ -3777,6 +3785,7 @@
     "burst_aoe": 2,
     "burst_st": 1,
     "catch": 1,
+    "clump_create": 1,
     "engage": 1,
     "heal_reduction": 1,
     "knockback_displace": 1,
@@ -3797,6 +3806,9 @@
     ],
     "catch": [
      "DASHKICK"
+    ],
+    "clump_create": [
+     "TRIPLE_KICK"
     ],
     "engage": [
      "DASHKICK"
@@ -3834,6 +3846,7 @@
     "burst_aoe": 1,
     "burst_st": 2,
     "catch": 1,
+    "clump_create": 1,
     "engage": 1,
     "knockback_displace": 1,
     "mobility": 2,
@@ -3853,6 +3866,9 @@
     ],
     "catch": [
      "DASHKICK"
+    ],
+    "clump_create": [
+     "TRIPLE_KICK"
     ],
     "engage": [
      "DASHKICK"
@@ -3887,6 +3903,7 @@
     "burst_aoe": 2,
     "burst_st": 1,
     "catch": 1,
+    "clump_create": 1,
     "engage": 1,
     "knockback_displace": 2,
     "mobility": 2,
@@ -3906,6 +3923,9 @@
     ],
     "catch": [
      "DASHKICK"
+    ],
+    "clump_create": [
+     "TRIPLE_KICK"
     ],
     "engage": [
      "DASHKICK"
@@ -3940,6 +3960,7 @@
     "burst_aoe": 2,
     "burst_st": 1,
     "catch": 1,
+    "clump_create": 1,
     "engage": 1,
     "knockback_displace": 2,
     "mobility": 2,
@@ -3959,6 +3980,9 @@
     ],
     "catch": [
      "DASHKICK"
+    ],
+    "clump_create": [
+     "TRIPLE_KICK"
     ],
     "engage": [
      "DASHKICK"
@@ -3992,6 +4016,7 @@
    "capabilities": {
     "burst_st": 2,
     "catch": 2,
+    "clump_create": 1,
     "disengage": 2,
     "engage": 2,
     "knockback_displace": 2,
@@ -4009,6 +4034,9 @@
     ],
     "catch": [
      "DIVEPUNCH_RISE"
+    ],
+    "clump_create": [
+     "TRIPLE_KICK"
     ],
     "disengage": [
      "DIVEPUNCH_RISE"
@@ -4046,6 +4074,7 @@
     "burst_aoe": 2,
     "burst_st": 1,
     "catch": 1,
+    "clump_create": 1,
     "engage": 1,
     "knockback_displace": 1,
     "mobility": 2,
@@ -4066,6 +4095,9 @@
     ],
     "catch": [
      "IMPULSE_PUNCH"
+    ],
+    "clump_create": [
+     "TRIPLE_KICK"
     ],
     "engage": [
      "DASHKICK"

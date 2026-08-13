@@ -16,6 +16,7 @@
     - {cap: engage,        score: 2, evidence: DIVEPUNCH_RISE}   # CC-immune float into a dive
     - {cap: disengage,     score: 2, evidence: DIVEPUNCH_RISE}   # the float IS the escape window
     - {cap: catch,         score: 2, evidence: DIVEPUNCH_RISE}   # Q: Dragon Leap; W: Triple Kick drag
+    - {cap: clump_create,  score: 1, evidence: TRIPLE_KICK}      # W: pulls 1 enemy player along the dash — the kidnap (QW)
     - {cap: burst_st,      score: 2, evidence: KNUCKLECOMBO}     # W: 30+153 punch combo; Q: Create Opening (QW)
     - {cap: sustained_dps, score: 2, evidence: PASSIVE_KNUCKLE_BRAWLER_SPEED}  # Fatal Fury stacks + AA brawl
     - {cap: knockback_displace, score: 2, evidence: BACKHAND_KNOCKBACK}  # W: 9m shove, +100 on wall collision (QW)
