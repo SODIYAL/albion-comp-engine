@@ -117,11 +117,13 @@ py -3 tests/tier2_blindtest.py score tier2_form_filled.md
 
 Gate: expert pick in engine top-3 on ≥70% of cases. V4 (meta-comp
 reproduction) case list lives in `tests/meta_comps.yaml` — **real** comps
-only, never invented. First entry: Deadlyhooker's large-scale ZvZ comp
-(3 parties × 20, recorded 2026-08-12, weapon cells mapped to catalog keys,
-battlemounts flagged as outside the weapon model, gear columns kept verbatim
-as future gear-sheet input). The V4 runner is blocked on a `large_scale_zvz`
-template — whose weights must not be fitted to that same comp (circular).
+only, never invented. Two entries (2026-08-12): Deadlyhooker's large-content
+ZvZ comp (3 parties × 20, battlemounts flagged as outside the weapon model)
+and Timothy's blackzone-roam "blap" comp (1 × 20, **with per-slot q/w/p
+skill loadouts** — the only expert default-kit data we have; feeds the gear
+sheet work too). Weapon cells are mapped to catalog keys and validated; gear
+columns kept verbatim. The V4 runner is blocked on a 20-size template — fit
+its weights on one comp, test on the other, never both (circular).
 
 ## After Tier-2
 
