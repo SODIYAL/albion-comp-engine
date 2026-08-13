@@ -26,8 +26,8 @@ before doing anything:
 - `pyyaml` is installed. Node is available (used for ad-hoc data inspection).
 - The ao-bin-dumps clone is not in the repo and is only needed after a game
   patch. See `pipeline/README.md` for the correct clone command.
-- Work happens on branches; `weapon-curation-full-coverage` holds the
-  full-coverage pass (2 commits) pending merge to `main`.
+- Work happens on branches; the full-coverage pass
+  (`weapon-curation-full-coverage`, 3 commits) is merged to `main` and pushed.
 
 ## Rebuild everything
 
