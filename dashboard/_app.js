@@ -11,9 +11,14 @@ const WEAPONS = DATASET.weapons;
 
 let CONTENT = Object.keys(DATASET.templates)[0];
 const ENG = new CompEngine(DATASET, CONTENT);
-let SIZE = ENG.size;
+/* There is no fixed party size in open-world content: PLANNED is what you
+   expect to field, but the roster is reality — the effective SIZE (targets,
+   floors, scaling) is whichever is larger. Bring 4 or bring 40. */
+let PLANNED = ENG.size;
+let SIZE = PLANNED;
+const HARD_CAP = 60;
 
-function syncEngine(){ ENG.setContent(CONTENT, SIZE); }
+function syncEngine(){ SIZE = Math.max(PLANNED, party.length); ENG.setContent(CONTENT, SIZE); }
 
 const tpl = () => DATASET.templates[CONTENT];
 const REQS = () => tpl().requirements;
@@ -98,37 +103,37 @@ function loadHash(){
   h.split("&").forEach(kv => { const i = kv.indexOf("=");
     if (i > 0) p[kv.slice(0, i)] = decodeURIComponent(kv.slice(i + 1)); });
   if (p.c && DATASET.templates[p.c]) CONTENT = p.c;
-  SIZE = (p.n && +p.n >= 2 && +p.n <= 60) ? +p.n : baseSize();
+  PLANNED = (p.n && +p.n >= 2 && +p.n <= HARD_CAP) ? +p.n : baseSize();
   if (p.p) party = p.p.split(",").filter(w => WEAPONS[w]);
   syncEngine();
   return true;
 }
 function saveHash(){
   history.replaceState(null, "",
-    `#c=${CONTENT}&n=${SIZE}${party.length ? "&p=" + party.join(",") : ""}`);
+    `#c=${CONTENT}&n=${PLANNED}${party.length ? "&p=" + party.join(",") : ""}`);
 }
 
 /* ---------------------------------------------------------------- render */
 
 let party = [];
 let pickFilter = "";
+let treeFilter = "";
 const $ = id => document.getElementById(id);
-
-/* Content decides the sensible party sizes; validated + base always present. */
-function sizeOptions(){
-  const preset = baseSize() <= 10 ? [2,3,4,5,6,7,8,9,10] : [10,12,15,20,25,30];
-  return [...new Set(preset.concat(validatedSizes(), [baseSize()]))].sort((a,b) => a-b);
-}
 
 const PENDING = [["hellgate_5v5","Hellgate 5v5"], ["roads_7","Roads of Avalon"]];
 
 function renderSetup(){
   $("content").innerHTML = Object.entries(DATASET.templates)
-    .map(([k,t]) => `<option value="${k}" ${k===CONTENT?"selected":""}>${t.name} — ${t.base_size} players</option>`)
+    .map(([k,t]) => `<option value="${k}" ${k===CONTENT?"selected":""}>${t.name} — base ${t.base_size}</option>`)
     .join("") + PENDING.filter(([k]) => !DATASET.templates[k])
     .map(([k,n]) => `<option value="${k}" disabled>${n} — template pending</option>`).join("");
-  $("sizes").innerHTML = sizeOptions().map(n =>
-    `<button class="size-btn" data-size="${n}" aria-pressed="${n===SIZE}">${n}</button>`).join("");
+  $("size-input").value = PLANNED;
+  const presets = [...new Set(validatedSizes().concat([baseSize()]))].sort((a,b) => a-b);
+  $("size-presets").innerHTML = presets.map(n =>
+    `<button class="size-btn" data-size="${n}" aria-pressed="${n===PLANNED}">${n}</button>`).join("");
+  $("size-hint").textContent = party.length > PLANNED
+    ? `Roster is ${party.length} — targets and floors now scale to ${SIZE}, not the planned ${PLANNED}.`
+    : `Targets and floors scale to whoever shows up — ${SIZE} right now.`;
   $("size-notice").innerHTML = validatedSizes().includes(SIZE) ? "" :
     `<div class="notice"><b>Extrapolated.</b> This template is fitted and validated at size ${validatedSizes().join(", ")} only. Per-player targets are scaled linearly to ${SIZE}; flat threshold targets are unchanged. Tier-2 validation must confirm each size before this is trustworthy.</div>`;
 }
@@ -148,25 +153,40 @@ function renderRoster(){
       <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>`);
   /* open slots collapse: one dashed "next" row, one "+N more" line */
   const open = SIZE - party.length;
-  if (open > 0)
+  if (party.length < HARD_CAP)
     rows.push(`<div class="slot next"><span class="n mono">${String(party.length+1).padStart(2,"0")}</span>next slot — pick below</div>`);
   if (open > 1)
     rows.push(`<div class="slot more">+ ${open - 1} more open slot${open > 2 ? "s" : ""}</div>`);
   $("roster").innerHTML = rows.join("");
 }
+const TREE_NAMES = {
+  arcanestaff:"Arcane", axe:"Axe", bow:"Bow", crossbow:"Crossbow",
+  cursestaff:"Curse", dagger:"Dagger", firestaff:"Fire", froststaff:"Frost",
+  hammer:"Hammer", holystaff:"Holy", knuckles:"War Gloves", mace:"Mace",
+  naturestaff:"Nature", quarterstaff:"Quarterstaff",
+  shapeshifterstaff:"Shapeshifter", spear:"Spear", sword:"Sword",
+};
+function renderTreeFilter(){
+  const present = [...new Set(Object.values(TREES))];
+  const opts = present.map(t => [t, TREE_NAMES[t] || t])
+    .sort((a,b) => a[1].localeCompare(b[1]))
+    .map(([t,n]) => `<option value="${t}">${n}</option>`).join("");
+  $("tree-filter").innerHTML = `<option value="">All weapon trees</option>` + opts;
+}
 function filteredWeapons(){
   const q = pickFilter.trim().toLowerCase();
   return Object.keys(WEAPONS)
     .sort((a,b) => nameOf(a).localeCompare(nameOf(b)))
-    .filter(w => !q || (WEAPONS[w].display_name || w).toLowerCase().includes(q));
+    .filter(w => (!treeFilter || TREES[w] === treeFilter)
+              && (!q || (WEAPONS[w].display_name || w).toLowerCase().includes(q)));
 }
 function renderPicker(){
   const keys = filteredWeapons();
-  $("picker").innerHTML = keys.map(w => `<button class="pick" data-add="${w}" ${party.length >= SIZE ? "disabled" : ""}>
+  $("picker").innerHTML = keys.map(w => `<button class="pick" data-add="${w}">
       ${icon(w, 26)}<span class="nm">${nameOf(w)}<span class="fn">${roleOf(w)}</span></span>
       ${WEAPONS[w].status === "curated" ? "" : '<span class="prov draft">illustrative</span>'}
     </button>`).join("")
-    || `<p class="ev-empty">Nothing matches “${esc(pickFilter)}”.</p>`;
+    || `<p class="ev-empty">Nothing matches${treeFilter ? " in this tree" : ""}${pickFilter.trim() ? ` — “${esc(pickFilter)}”` : ""}.</p>`;
 }
 function renderFitness(){
   const f = fitness(party), max = maxFitness();
@@ -193,10 +213,27 @@ function renderGroups(){
 }
 function renderWeaknesses(){
   const s = supply(party);
-  $("weaknesses").innerHTML = weaknesses(party).map((x,i) =>
-    `<div class="weak"><span class="rank">${String(i+1).padStart(2,"0")}</span>
-      <span class="txt">You have <b>${(s[x.cap]||0).toFixed(0)}</b> of <b>${target(x.cap).toFixed(1)}</b> units of <b>${x.cap}</b> — ${prose(x.cap)}.</span>
-      <span class="sc">−${x.gap.toFixed(1)}</span></div>`).join("");
+  /* Split the gap list: floors and heavy under-supplied capabilities are
+     NEEDED; the rest are nice-to-haves. */
+  const needed = [], nice = [];
+  for (const x of weaknesses(party, 8)){
+    if (x.gap < 0.5) continue;
+    const f = FLOORS()[x.cap], r = REQS()[x.cap];
+    const floorHit = f && SIZE >= f.min_party_size && (s[x.cap]||0) < f.floor_units;
+    const ratio = (s[x.cap]||0) / target(x.cap);
+    if (floorHit || (r.weight >= 6 && ratio < 0.5)) needed.push({...x, floorHit});
+    else nice.push(x);
+  }
+  const row = (x, i, cls) =>
+    `<div class="weak ${cls}"><span class="rank">${String(i+1).padStart(2,"0")}</span>
+      <span class="txt">You have <b>${(s[x.cap]||0).toFixed(0)}</b> of <b>${target(x.cap).toFixed(1)}</b> units of <b>${x.cap}</b> — ${prose(x.cap)}${x.floorHit ? " <b>(below the hard floor)</b>" : ""}.</span>
+      <span class="sc">−${x.gap.toFixed(1)}</span></div>`;
+  $("weaknesses").innerHTML =
+    `<div class="weak-sub">Needed now</div>`
+    + (needed.length ? needed.slice(0,4).map((x,i) => row(x,i,"")).join("")
+                     : `<p class="weak-none">Nothing critical — the core is covered.</p>`)
+    + (nice.length ? `<div class="weak-sub nice">Nice to have</div>`
+                   + nice.slice(0,3).map((x,i) => row(x,i,"nice")).join("") : "");
 }
 function renderWarning(){
   const unc = uncoveredCaps(party), left = SIZE - party.length;
@@ -208,13 +245,16 @@ function renderWarning(){
 }
 function renderCmdNext(recs){
   if (!recs){
-    $("cb-next").innerHTML = `<div class="eyebrow">Party full</div>
-      <div class="cb-row"><span class="cb-full">All ${SIZE} slots filled. Remove someone to explore swaps.</span></div>`;
+    $("cb-next").innerHTML = `<div class="eyebrow">Roster cap</div>
+      <div class="cb-row"><span class="cb-full">That is ${HARD_CAP} people — beyond even a castle blob. Remove someone to explore swaps.</span></div>`;
     return;
   }
   const top = recs[0];
+  const slotLabel = party.length + 1 > PLANNED
+    ? `slot ${party.length + 1} — beyond planned ${PLANNED}`
+    : `slot ${party.length + 1} of ${SIZE}`;
   $("cb-next").innerHTML = `
-    <div class="eyebrow">Next pick — slot ${party.length + 1} of ${SIZE}</div>
+    <div class="eyebrow">Next pick — ${slotLabel}</div>
     <div class="cb-row">
       ${icon(top.w, 44)}
       <span><span class="nm">${nameOf(top.w)}</span><span class="fn rl">${roleOf(top.w)}</span></span>
@@ -282,29 +322,62 @@ function render(){
   renderRecDetail(recs); renderFootnote();
 }
 
+function compText(){
+  const counts = {};
+  party.forEach(w => { const r = WEAPONS[w].role_hint || "other"; counts[r] = (counts[r]||0) + 1; });
+  const lines = [
+    `**${tpl().name}** — ${party.length}/${SIZE} — fitness ${fitness(party).toFixed(1)}/${maxFitness()}`,
+    Object.entries(counts).sort((a,b) => b[1]-a[1]).map(([r,n]) => `${n} ${r}`).join(" · "),
+    "",
+  ];
+  party.forEach((w,i) => lines.push(
+    `${String(i+1).padStart(2,"0")}  ${WEAPONS[w].display_name}  (${roleOf(w)})`));
+  const s = supply(party);
+  const gaps = weaknesses(party, 3).filter(x => x.gap >= 0.5)
+    .map(x => `${x.cap} ${(s[x.cap]||0).toFixed(0)}/${target(x.cap).toFixed(0)}`);
+  if (gaps.length) lines.push("", `still needs: ${gaps.join(", ")}`);
+  lines.push("", location.href);
+  return lines.join("\n");
+}
+function flashBtn(id, text, back){
+  $(id).textContent = text;
+  setTimeout(() => { $(id).textContent = back; }, 1400);
+}
+
 document.addEventListener("click", e => {
   const add = e.target.closest("[data-add]");
-  if (add && !add.disabled){ if (party.length < SIZE){ party.push(add.dataset.add); render(); } return; }
+  if (add){ if (party.length < HARD_CAP){ party.push(add.dataset.add); render(); } return; }
   const rm = e.target.closest("[data-remove]");
   if (rm){ party.splice(+rm.dataset.remove, 1); render(); return; }
   const sz = e.target.closest("[data-size]");
-  if (sz){ SIZE = +sz.dataset.size; if (party.length > SIZE) party.length = SIZE; render(); return; }
+  if (sz){ PLANNED = +sz.dataset.size; render(); return; }
+  if (e.target.closest("#size-minus")){ PLANNED = Math.max(2, PLANNED - 1); render(); return; }
+  if (e.target.closest("#size-plus")){ PLANNED = Math.min(HARD_CAP, PLANNED + 1); render(); return; }
   const cap = e.target.closest("[data-cap]");
   if (cap){ renderEvidence(cap.dataset.cap); return; }
   if (e.target.closest("#share")){
     saveHash();
     if (navigator.clipboard && navigator.clipboard.writeText)
-      navigator.clipboard.writeText(location.href).then(() => {
-        $("share").textContent = "copied";
-        setTimeout(() => { $("share").textContent = "copy share link"; }, 1400);
-      });
+      navigator.clipboard.writeText(location.href).then(() =>
+        flashBtn("share", "copied", "copy share link"));
+    return;
+  }
+  if (e.target.closest("#export")){
+    if (navigator.clipboard && navigator.clipboard.writeText)
+      navigator.clipboard.writeText(compText()).then(() =>
+        flashBtn("export", "copied", "copy comp text"));
     return;
   }
   if (e.target.closest("#drawer-close")){ $("drawer").dataset.open = "false"; return; }
   if (!e.target.closest("#drawer")) $("drawer").dataset.open = "false";
 });
 document.addEventListener("change", e => {
-  if (e.target.id === "content"){ CONTENT = e.target.value; SIZE = baseSize(); party = []; render(); }
+  if (e.target.id === "content"){ CONTENT = e.target.value; PLANNED = baseSize(); party = []; render(); }
+  if (e.target.id === "tree-filter"){ treeFilter = e.target.value; renderPicker(); }
+  if (e.target.id === "size-input"){
+    const v = Math.round(+e.target.value);
+    if (v >= 2 && v <= HARD_CAP){ PLANNED = v; render(); } else { e.target.value = PLANNED; }
+  }
 });
 document.addEventListener("input", e => {
   if (e.target.id === "pick-filter"){ pickFilter = e.target.value; renderPicker(); }
@@ -320,7 +393,7 @@ document.addEventListener("keydown", e => {
 $("pick-filter").addEventListener("keydown", e => {
   if (e.key !== "Enter") return;
   const keys = filteredWeapons();
-  if (keys.length && party.length < SIZE){ party.push(keys[0]); render(); }
+  if (keys.length && party.length < HARD_CAP){ party.push(keys[0]); render(); }
 });
 /* A pasted share-link hash applies without a reload. saveHash() uses
    replaceState, which never fires hashchange, so this cannot loop. */
@@ -332,6 +405,7 @@ $("build-stamp").textContent = `v${META.version} · ${META.weapons_curated}/${ME
    design doc's worked example (§4.3), if those sheets exist. */
 const SEED = ["2H_LONGBOW","MAIN_ARCANESTAFF_UNDEAD","2H_ICECRYSTAL_UNDEAD"].filter(w => WEAPONS[w]);
 if (!loadHash()) party = SEED;
+renderTreeFilter();
 syncEngine();
 render();
 

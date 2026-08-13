@@ -45,6 +45,11 @@ def main():
     if os.path.exists(icons_path):
         with open(icons_path, encoding="utf-8") as f:
             icons = json.load(f)
+    # Weapon tree (subcategory) per weapon — powers the tree filter.
+    with open(os.path.join(HERE, "out", "weapon_lines.json"), encoding="utf-8") as f:
+        lines = json.load(f)
+    trees = {k: (lines.get(k) or {}).get("subcategory", "other")
+             for k in data["weapons"]}
 
     # Parity fixture: run the Python engine over the dashboard's seed party and
     # inline its output, so the client asserts against the real engine on every
@@ -66,6 +71,7 @@ def main():
     out = (f"{shell}<script>\n{scoring}\n</script>\n"
            f"<script>\nconst DATASET = {blob};\n"
            f"const ICONS = {json.dumps(icons, separators=(',', ':'))};\n"
+           f"const TREES = {json.dumps(trees, separators=(',', ':'))};\n"
            f"const PARITY_EXPECTED = {json.dumps(expected)};\n{app}</script>\n")
     path = os.path.join(DASH, "index.html")
     with open(path, "w", encoding="utf-8") as f:
