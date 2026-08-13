@@ -27,7 +27,11 @@ sheets/illustrative/      design-doc §2.3 placeholders — NOT a release
 out/dataset-<version>.json + dataset-latest.json    ← single source of truth
    │
    ├─ engine/engine.py            scoring engine (Python)
-   ├─ tests/test_golden.py        9 golden regression cases
+   ├─ tests/test_golden.py        13 golden regression cases
+   ├─ py -3 pipeline/build_app.py → app/index.html (the product page;
+   │        scoring runs in-browser via app_scoring.js — a port of engine.py
+   │        that tests/test_js_parity.py holds equal. Change one, change
+   │        both, rerun parity.)
    └─ py -3 pipeline/build_dashboard.py → dashboard/index.html (dataset inlined)
 ```
 

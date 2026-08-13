@@ -1,0 +1,106 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - heading "Warband Planner" [level=1] [ref=e5]
+      - paragraph [ref=e6]: Albion party composition — pick the content, build the party, see what’s missing.
+    - generic [ref=e7]:
+      - button "Blackzone Roam 20 players" [ref=e326] [cursor=pointer]:
+        - generic [ref=e327]: Blackzone Roam
+        - generic [ref=e328]: 20 players
+      - button "Territory Defense 20 players" [ref=e329] [cursor=pointer]:
+        - generic [ref=e330]: Territory Defense
+        - generic [ref=e331]: 20 players
+      - button "Castle Outpost 7 players" [ref=e332] [cursor=pointer]:
+        - generic [ref=e333]: Castle Outpost
+        - generic [ref=e334]: 7 players
+  - generic [ref=e17]: Pre-validation build — every score is an evidence-linted hypothesis; the Tier-2 expert blind test has not run yet. Treat recommendations as a strong draft, not doctrine.
+  - main [ref=e18]:
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - heading "Party" [level=2] [ref=e22]
+        - generic [ref=e23]:
+          - generic [ref=e24]: 0/20
+          - generic [ref=e25]:
+            - button "smaller party" [ref=e26] [cursor=pointer]: −
+            - button "bigger party" [ref=e27] [cursor=pointer]: +
+      - textbox "search weapons" [ref=e29]:
+        - /placeholder: Add a weapon — type to search
+      - list
+      - generic [ref=e30]: No one yet. Add weapons here, or click a recommendation.
+      - generic [ref=e31]:
+        - button "Clear party" [active] [ref=e32] [cursor=pointer]
+        - button "Copy share link" [ref=e33] [cursor=pointer]
+    - generic [ref=e34]:
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - heading "Fitness" [level=2] [ref=e37]
+          - generic [ref=e38]: "-29.0 / 128"
+        - generic [ref=e40]:
+          - generic [ref=e335]: "heal sustain below floor: 0/5"
+          - generic [ref=e336]: "tankiness below floor: 0/4"
+      - generic [ref=e43]:
+        - heading "Biggest gaps" [level=2] [ref=e44]
+        - generic [ref=e45]:
+          - generic [ref=e337]:
+            - generic [ref=e338]: heal sustain
+            - generic [ref=e340]: 0 / 9.0
+          - generic [ref=e341]:
+            - generic [ref=e342]: tankiness
+            - generic [ref=e344]: 0 / 11.0
+          - generic [ref=e345]:
+            - generic [ref=e346]: burst aoe
+            - generic [ref=e348]: 0 / 12.0
+          - generic [ref=e349]:
+            - generic [ref=e350]: engage
+            - generic [ref=e352]: 0 / 6.0
+          - generic [ref=e353]:
+            - generic [ref=e354]: peel
+            - generic [ref=e356]: 0 / 8.0
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - heading "Next pick" [level=2] [ref=e68]
+          - generic [ref=e69]: click a card to add it
+        - generic [ref=e70]:
+          - button "1 Great Hammer tank +7.2 tankiness 0→2 · +7.0 clump create 0→3 · +5.0 disengage 0→2 score 23.90" [ref=e357] [cursor=pointer]:
+            - generic [ref=e358]: "1"
+            - generic [ref=e359]:
+              - text: Great Hammer
+              - generic [ref=e360]: tank
+              - generic [ref=e361]: +7.2 tankiness 0→2 · +7.0 clump create 0→3 · +5.0 disengage 0→2
+            - generic [ref=e362]: score 23.90
+          - button "2 Hand of Justice tank +7.2 tankiness 0→2 · +7.0 clump create 0→3 · +5.0 disengage 0→2 score 23.78" [ref=e363] [cursor=pointer]:
+            - generic [ref=e364]: "2"
+            - generic [ref=e365]:
+              - text: Hand of Justice
+              - generic [ref=e366]: tank
+              - generic [ref=e367]: +7.2 tankiness 0→2 · +7.0 clump create 0→3 · +5.0 disengage 0→2
+            - generic [ref=e368]: score 23.78
+          - button "3 Grovekeeper tank +7.2 tankiness 0→2 · +5.0 disengage 0→2 · +4.9 engage 0→3 score 19.93" [ref=e369] [cursor=pointer]:
+            - generic [ref=e370]: "3"
+            - generic [ref=e371]:
+              - text: Grovekeeper
+              - generic [ref=e372]: tank
+              - generic [ref=e373]: +7.2 tankiness 0→2 · +5.0 disengage 0→2 · +4.9 engage 0→3
+            - generic [ref=e374]: score 19.93
+          - button "4 Polehammer tank +7.2 tankiness 0→2 · +4.9 engage 0→3 · +3.7 catch 0→2 score 18.77" [ref=e375] [cursor=pointer]:
+            - generic [ref=e376]: "4"
+            - generic [ref=e377]:
+              - text: Polehammer
+              - generic [ref=e378]: tank
+              - generic [ref=e379]: +7.2 tankiness 0→2 · +4.9 engage 0→3 · +3.7 catch 0→2
+            - generic [ref=e380]: score 18.77
+          - button "5 Tombhammer tank +7.2 tankiness 0→2 · +3.7 catch 0→2 · +3.7 purge 0→1 score 18.13" [ref=e381] [cursor=pointer]:
+            - generic [ref=e382]: "5"
+            - generic [ref=e383]:
+              - text: Tombhammer
+              - generic [ref=e384]: tank
+              - generic [ref=e385]: +7.2 tankiness 0→2 · +3.7 catch 0→2 · +3.7 purge 0→1
+            - generic [ref=e386]: score 18.13
+          - button "6 Quarterstaff tank +7.2 tankiness 0→2 · +5.0 disengage 0→2 · +4.0 peel 0→3 score 17.71" [ref=e387] [cursor=pointer]:
+            - generic [ref=e388]: "6"
+            - generic [ref=e389]:
+              - text: Quarterstaff
+              - generic [ref=e390]: tank
+              - generic [ref=e391]: +7.2 tankiness 0→2 · +5.0 disengage 0→2 · +4.0 peel 0→3
+            - generic [ref=e392]: score 17.71
+  - contentinfo [ref=e107]: "dataset v2026.08.1 · 137 weapons curated · release_clean: true · built 2026-08-12 · game data from ao-bin-dumps © Sandbox Interactive GmbH — unofficial, not affiliated with or endorsed by Sandbox Interactive."

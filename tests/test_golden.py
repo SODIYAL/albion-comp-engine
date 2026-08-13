@@ -15,6 +15,8 @@ Run:  py -3 tests/test_golden.py        (Windows)
 """
 import os, sys, subprocess
 
+import yaml
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, os.pardir)
 sys.path.insert(0, os.path.join(ROOT, "engine"))
@@ -28,6 +30,21 @@ if not os.path.exists(DATASET):
 from engine import Engine  # noqa: E402
 
 E = Engine(content="castle_outpost", size=7)
+
+# T8/T9 run the 20-size templates against the REAL comps in meta_comps.yaml.
+# These are fitness-discrimination and floor-sanity checks, deliberately NOT
+# leave-one-out reproduction — the 20-size templates took role-ratio
+# calibration from these same comps, so reproduction would be circular
+# (see the template headers). Weapon slots only; battlemount slots excluded.
+with open(os.path.join(HERE, "meta_comps.yaml"), encoding="utf-8") as f:
+    _COMPS = {c["id"]: c for c in yaml.safe_load(f)["comps"]}
+
+
+def _comp_party(comp_id, party_idx, drop_role=None):
+    slots = _COMPS[comp_id]["parties"][party_idx]["slots"]
+    return [s["weapons"][0] for s in slots
+            if s["weapons"] and s["role"] != "battlemount"
+            and (drop_role is None or s["role"] != drop_role)]
 ROLES = E.scoring["role_sets"]
 HEALERS, FRONTLINE, PURE_DPS = (set(ROLES["healers"]), set(ROLES["frontline"]),
                                 set(ROLES["pure_dps"]))
@@ -95,6 +112,31 @@ def run():
     check("T7  top reason term for T1 rec is a heal capability",
           terms and terms[0]["cap"] in ("heal_sustain", "heal_burst"),
           f"terms={[(t['delta'], t['cap']) for t in terms[:3]]}")
+
+    # T8/T9 — the 20-size content templates against the real comps
+    e_bz = Engine(content="blackzone_roam", size=20)
+    e_td = Engine(content="territory_defense", size=20)
+    troll20 = [LONGBOW] * 7 + [DAGGERS] * 7 + [BLOODLETTER] * 6
+
+    blap = _comp_party("timothy_blap_blackzone_roam_2026_08", 0)
+    f_blap, f_troll_bz = e_bz.fitness(blap), e_bz.fitness(troll20)
+    check("T8  blackzone_roam: real blap comp outscores troll 20 by >25%",
+          f_blap > 1.25 * f_troll_bz, f"blap={f_blap:.1f} troll={f_troll_bz:.1f}")
+
+    blap_nh = _comp_party("timothy_blap_blackzone_roam_2026_08", 0, drop_role="healer")
+    recs8 = e_bz.recommend(blap_nh)
+    check("T8b blackzone_roam: blap minus healers -> top rec is a healer",
+          recs8[0]["weapon"] in HEALERS, f"top4={names(recs8)}")
+
+    dh1 = _comp_party("deadlyhooker_large_scale_2026_08", 0)
+    f_dh1, f_troll_td = e_td.fitness(dh1), e_td.fitness(troll20)
+    check("T9  territory_defense: real Deadlyhooker P1 outscores troll 20 by >25%",
+          f_dh1 > 1.25 * f_troll_td, f"dh1={f_dh1:.1f} troll={f_troll_td:.1f}")
+
+    dh1_nh = _comp_party("deadlyhooker_large_scale_2026_08", 0, drop_role="healer")
+    recs9 = e_td.recommend(dh1_nh)
+    check("T9b territory_defense: DH P1 minus healers -> top rec is a healer",
+          recs9[0]["weapon"] in HEALERS, f"top4={names(recs9)}")
 
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)

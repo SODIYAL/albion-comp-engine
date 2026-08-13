@@ -1,0 +1,64 @@
+# Content template — Blackzone Roaming (20-man open-world brawl).
+#
+# PROVISIONAL — created 2026-08-12, weights NOT yet expert-adjudicated.
+# Role-ratio calibration comes from the first real comp for this content:
+# Timothy's "blap" (tests/meta_comps.yaml, 1×20 — 5 tank, 4 support, 7 dps
+# incl. dedicated heal-cut / hp-cut / pierce / purge slots, 4 healers).
+# CIRCULARITY NOTE (VALIDATION V4): because this template's role ratios were
+# calibrated against blap, a V4 leave-one-out run on blap itself is weakened
+# evidence. It still tests weapon-level ranking (the calibration used role
+# counts, not weapon identities), but the clean test needs an independent
+# blackzone comp from a different caller.
+#
+# Identity vs castle_outpost: roaming means you CHOOSE fights — catch,
+# mobility, engage and disengage all matter more; zone_control and anti_zone
+# matter less (open field, no fixed point to hold). Cleanse target is low
+# because in practice cleanse comes from helms (gear), not weapons — blap
+# runs three "Leather Hood(cleanse)" slots and zero cleanse weapons.
+#
+# Sanity check on the scale: castle_outpost wants heal_sustain 3.0 at size 7
+# (0.43/head); blap fields 4 healers ≈ 9–10 supply units at size 20
+# (0.45–0.5/head). The per-head need is stable across content; the targets
+# below are stated in units-for-20 (base_size: 20).
+
+content: blackzone_roam
+name: Blackzone Roam
+base_size: 20
+validated_sizes: [20]
+
+requirements:
+  heal_sustain:   {target: 9.0,  weight: 10, soft_cap: 13.0, scales: true}
+  heal_burst:     {target: 5.0,  weight: 6,  soft_cap: 8.0,  scales: true}
+  tankiness:      {target: 11.0, weight: 9,  soft_cap: 16.0, scales: true}
+  peel:           {target: 8.0,  weight: 8,  soft_cap: 14.0, scales: true}
+  engage:         {target: 6.0,  weight: 8,  soft_cap: 10.0, scales: true}
+  catch:          {target: 5.0,  weight: 7,  soft_cap: 9.0,  scales: true}
+  mobility:       {target: 8.0,  weight: 6,  soft_cap: 16.0, scales: true}
+  burst_aoe:      {target: 12.0, weight: 8,  soft_cap: 20.0, scales: true}
+  sustained_dps:  {target: 8.0,  weight: 5,  soft_cap: 16.0, scales: true}
+  burst_st:       {target: 4.0,  weight: 4,  soft_cap: 8.0,  scales: true}
+  stun:           {target: 5.0,  weight: 4,  soft_cap: 10.0, scales: true}
+  zone_control:   {target: 3.0,  weight: 3,  soft_cap: 8.0,  scales: true}
+  # threshold needs — one or two dedicated slots regardless of size
+  clump_create:   {target: 3.0,  weight: 7,  soft_cap: 5.0,  scales: false}
+  purge:          {target: 2.0,  weight: 6,  soft_cap: 4.0,  scales: false}
+  heal_reduction: {target: 2.0,  weight: 6,  soft_cap: 4.0,  scales: false}
+  resist_shred:   {target: 3.0,  weight: 5,  soft_cap: 6.0,  scales: false}
+  disengage:      {target: 2.0,  weight: 5,  soft_cap: 4.0,  scales: false}
+  execute:        {target: 2.0,  weight: 4,  soft_cap: 4.0,  scales: false}
+  buff_allies:    {target: 3.0,  weight: 4,  soft_cap: 6.0,  scales: false}
+  cleanse:        {target: 1.0,  weight: 4,  soft_cap: 3.0,  scales: false}
+  silence:        {target: 1.0,  weight: 4,  soft_cap: 3.0,  scales: false}
+  # PROVISIONAL low-and-flat (castle_outpost precedent): enemy-dependent
+  # capabilities must never dominate a recommendation on unvalidated numbers.
+  anti_zone:      {target: 1.0,  weight: 2,  soft_cap: 2.0,  scales: false}
+  damage_debuff:  {target: 1.0,  weight: 3,  soft_cap: 2.0,  scales: false}
+
+# Floors are absolute units (the engine does not scale them): at 20-man a
+# comp with fewer than ~2 real healers (5 units) or ~2 real tanks (4 units)
+# is catastrophically broken, not merely suboptimal. penalty_mult 2.0
+# inherits the castle_outpost PROVISIONAL (raised from 1.5 when synergy +
+# meta leakage out-ranked healers past the floor).
+hard_floors:
+  heal_sustain: {min_party_size: 10, floor_units: 5.0, penalty_mult: 2.0}
+  tankiness:    {min_party_size: 10, floor_units: 4.0, penalty_mult: 1.0}

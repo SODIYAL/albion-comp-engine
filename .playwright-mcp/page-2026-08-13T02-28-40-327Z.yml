@@ -1,0 +1,109 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - heading "Warband Planner" [level=1] [ref=e5]
+      - paragraph [ref=e6]: Albion party composition — pick the content, build the party, see what’s missing.
+    - generic [ref=e7]:
+      - button "Blackzone Roam 20 players" [ref=e532] [cursor=pointer]:
+        - generic [ref=e533]: Blackzone Roam
+        - generic [ref=e534]: 20 players
+      - button "Territory Defense 20 players" [ref=e535] [cursor=pointer]:
+        - generic [ref=e536]: Territory Defense
+        - generic [ref=e537]: 20 players
+      - button "Castle Outpost 7 players" [ref=e538] [cursor=pointer]:
+        - generic [ref=e539]: Castle Outpost
+        - generic [ref=e540]: 7 players
+  - generic [ref=e17]: Pre-validation build — every score is an evidence-linted hypothesis; the Tier-2 expert blind test has not run yet. Treat recommendations as a strong draft, not doctrine.
+  - main [ref=e18]:
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - heading "Party" [level=2] [ref=e22]
+        - generic [ref=e23]:
+          - generic [ref=e24]: 2/7
+          - generic [ref=e25]:
+            - button "smaller party" [ref=e26] [cursor=pointer]: −
+            - button "bigger party" [ref=e27] [cursor=pointer]: +
+      - textbox "search weapons" [ref=e29]:
+        - /placeholder: Add a weapon — type to search
+      - list [ref=e117]:
+        - listitem [ref=e541]:
+          - generic [ref=e542]: Hallowfall
+          - generic [ref=e543]: healer
+          - button "remove" [ref=e544] [cursor=pointer]: ×
+        - listitem [ref=e545]:
+          - generic [ref=e546]: Great Hammer
+          - generic [ref=e547]: tank
+          - button "remove" [ref=e548] [cursor=pointer]: ×
+      - generic [ref=e31]:
+        - button "Clear party" [ref=e32] [cursor=pointer]
+        - button "Copy share link" [ref=e33] [cursor=pointer]
+    - generic [ref=e34]:
+      - generic [ref=e36]:
+        - heading "Fitness" [level=2] [ref=e37]
+        - generic [ref=e38]: 58.7 / 107
+      - generic [ref=e43]:
+        - heading "Biggest gaps" [level=2] [ref=e44]
+        - generic [ref=e45]:
+          - generic [ref=e549]:
+            - generic [ref=e550]: burst aoe
+            - generic [ref=e552]: 0 / 5.0
+          - generic [ref=e553]:
+            - generic [ref=e554]: heal reduction
+            - generic [ref=e556]: 0 / 1.0
+          - generic [ref=e557]:
+            - generic [ref=e558]: cleanse
+            - generic [ref=e560]: 0 / 1.0
+          - generic [ref=e561]:
+            - generic [ref=e562]: sustained dps
+            - generic [ref=e564]: 0 / 3.0
+          - generic [ref=e565]:
+            - generic [ref=e566]: silence
+            - generic [ref=e568]: 0 / 1.0
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - heading "Next pick" [level=2] [ref=e68]
+          - generic [ref=e69]: click a card to add it
+        - generic [ref=e70]:
+          - button "1 Evensong range +6.0 heal reduction 0→2 · +5.0 cleanse 0→2 · +4.2 burst aoe 0→2 score 15.31" [ref=e569] [cursor=pointer]:
+            - generic [ref=e570]: "1"
+            - generic [ref=e571]:
+              - text: Evensong
+              - generic [ref=e572]: range
+              - generic [ref=e573]: +6.0 heal reduction 0→2 · +5.0 cleanse 0→2 · +4.2 burst aoe 0→2
+            - generic [ref=e574]: score 15.31
+          - button "2 Astral Staff range +5.0 cleanse 0→2 · +4.2 burst aoe 0→2 · +4.0 silence 0→1 score 11.63" [ref=e575] [cursor=pointer]:
+            - generic [ref=e576]: "2"
+            - generic [ref=e577]:
+              - text: Astral Staff
+              - generic [ref=e578]: range
+              - generic [ref=e579]: +5.0 cleanse 0→2 · +4.2 burst aoe 0→2 · +4.0 silence 0→1
+            - generic [ref=e580]: score 11.63
+          - button "3 Dawnsong range +6.0 heal reduction 0→2 · +5.6 burst aoe 0→3 · +3.8 sustained dps 0→2 score 10.85" [ref=e581] [cursor=pointer]:
+            - generic [ref=e582]: "3"
+            - generic [ref=e583]:
+              - text: Dawnsong
+              - generic [ref=e584]: range
+              - generic [ref=e585]: +6.0 heal reduction 0→2 · +5.6 burst aoe 0→3 · +3.8 sustained dps 0→2
+            - generic [ref=e586]: score 10.85
+          - button "4 Greataxe melee +6.0 heal reduction 0→1 · +4.2 burst aoe 0→2 · +3.8 sustained dps 0→2 score 9.66" [ref=e587] [cursor=pointer]:
+            - generic [ref=e588]: "4"
+            - generic [ref=e589]:
+              - text: Greataxe
+              - generic [ref=e590]: melee
+              - generic [ref=e591]: +6.0 heal reduction 0→1 · +4.2 burst aoe 0→2 · +3.8 sustained dps 0→2
+            - generic [ref=e592]: score 9.66
+          - button "5 Halberd melee +6.0 heal reduction 0→1 · +4.2 burst aoe 0→2 · +3.8 sustained dps 0→2 score 9.66" [ref=e593] [cursor=pointer]:
+            - generic [ref=e594]: "5"
+            - generic [ref=e595]:
+              - text: Halberd
+              - generic [ref=e596]: melee
+              - generic [ref=e597]: +6.0 heal reduction 0→1 · +4.2 burst aoe 0→2 · +3.8 sustained dps 0→2
+            - generic [ref=e598]: score 9.66
+          - button "6 Infernal Scythe melee +6.0 heal reduction 0→1 · +4.2 burst aoe 0→2 · +3.8 sustained dps 0→2 score 9.66" [ref=e599] [cursor=pointer]:
+            - generic [ref=e600]: "6"
+            - generic [ref=e601]:
+              - text: Infernal Scythe
+              - generic [ref=e602]: melee
+              - generic [ref=e603]: +6.0 heal reduction 0→1 · +4.2 burst aoe 0→2 · +3.8 sustained dps 0→2
+            - generic [ref=e604]: score 9.66
+  - contentinfo [ref=e107]: "dataset v2026.08.1 · 137 weapons curated · release_clean: true · built 2026-08-12 · game data from ao-bin-dumps © Sandbox Interactive GmbH — unofficial, not affiliated with or endorsed by Sandbox Interactive."

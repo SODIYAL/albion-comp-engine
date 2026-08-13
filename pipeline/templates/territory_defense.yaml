@@ -1,0 +1,62 @@
+# Content template — Territory Defense (20-man objective fight).
+#
+# PROVISIONAL — created 2026-08-12, weights NOT yet expert-adjudicated.
+# Role-ratio calibration comes from Deadlyhooker's large-content comp
+# (tests/meta_comps.yaml, castle/territory/mass roam, 3×20): per party
+# roughly 5–6 frontline/utility, 3 arcane-class supports, an Exalted slot in
+# ALL three parties (cleanse + zone denial), 2–3 healers, and an AoE bomb
+# core (Permafrost ×2, Occult beam, Hoarfrost obelisk). Battlemount slots
+# (up to a third of parties 2–3) are OUTSIDE the weapon model and were
+# ignored for calibration.
+# CIRCULARITY NOTE (VALIDATION V4): a V4 leave-one-out run against the
+# Deadlyhooker comp is weakened evidence for the same reason as
+# blackzone_roam vs blap — role counts informed these numbers. The clean
+# test needs an independent territory comp.
+#
+# Identity vs blackzone_roam: the fight comes to YOU at a fixed objective.
+# Zone control and stall (tankiness) are the win condition; anti_zone is
+# worth more than anywhere else (attackers will stack zones on the point —
+# hence the standing Exalted slot); catch/mobility/disengage matter less;
+# clump punishment (drag + burst_aoe) matters more because chokes and the
+# point force stacking.
+
+content: territory_defense
+name: Territory Defense
+base_size: 20
+validated_sizes: [20]
+
+requirements:
+  heal_sustain:   {target: 8.0,  weight: 10, soft_cap: 12.0, scales: true}
+  heal_burst:     {target: 5.0,  weight: 6,  soft_cap: 8.0,  scales: true}
+  tankiness:      {target: 12.0, weight: 9,  soft_cap: 17.0, scales: true}
+  peel:           {target: 9.0,  weight: 8,  soft_cap: 14.0, scales: true}
+  burst_aoe:      {target: 13.0, weight: 9,  soft_cap: 20.0, scales: true}
+  zone_control:   {target: 8.0,  weight: 6,  soft_cap: 14.0, scales: true}
+  engage:         {target: 5.0,  weight: 7,  soft_cap: 9.0,  scales: true}
+  stun:           {target: 5.0,  weight: 4,  soft_cap: 10.0, scales: true}
+  sustained_dps:  {target: 7.0,  weight: 4,  soft_cap: 14.0, scales: true}
+  catch:          {target: 3.0,  weight: 4,  soft_cap: 6.0,  scales: true}
+  mobility:       {target: 5.0,  weight: 3,  soft_cap: 12.0, scales: true}
+  burst_st:       {target: 3.0,  weight: 3,  soft_cap: 6.0,  scales: true}
+  # threshold needs
+  clump_create:   {target: 3.0,  weight: 8,  soft_cap: 5.0,  scales: false}
+  purge:          {target: 2.0,  weight: 6,  soft_cap: 4.0,  scales: false}
+  heal_reduction: {target: 2.0,  weight: 6,  soft_cap: 4.0,  scales: false}
+  resist_shred:   {target: 3.0,  weight: 5,  soft_cap: 6.0,  scales: false}
+  cleanse:        {target: 2.0,  weight: 5,  soft_cap: 4.0,  scales: false}
+  silence:        {target: 2.0,  weight: 4,  soft_cap: 4.0,  scales: false}
+  buff_allies:    {target: 3.0,  weight: 4,  soft_cap: 6.0,  scales: false}
+  disengage:      {target: 1.0,  weight: 3,  soft_cap: 3.0,  scales: false}
+  execute:        {target: 1.0,  weight: 3,  soft_cap: 3.0,  scales: false}
+  # PROVISIONAL — but deliberately above the castle_outpost weight (3 -> 4):
+  # the one piece of real evidence we have (a standing Exalted slot in all
+  # three Deadlyhooker parties) is territory/castle content. Still flat and
+  # small so an unvalidated number cannot dominate.
+  anti_zone:      {target: 1.0,  weight: 4,  soft_cap: 2.0,  scales: false}
+  damage_debuff:  {target: 1.0,  weight: 3,  soft_cap: 2.0,  scales: false}
+
+# Absolute-unit floors, same rationale + PROVISIONAL penalty_mult as
+# blackzone_roam (see that file / castle_outpost.yaml for the history).
+hard_floors:
+  heal_sustain: {min_party_size: 10, floor_units: 5.0, penalty_mult: 2.0}
+  tankiness:    {min_party_size: 10, floor_units: 4.0, penalty_mult: 1.0}
