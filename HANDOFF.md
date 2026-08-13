@@ -42,6 +42,9 @@ py -3 pipeline/build_effect_review.py  # -> review/effects.html
 py -3 pipeline/fetch_icons.py          # only after a patch ADDS weapons —
                                        # refreshes out/icon_data.json (icons
                                        # are cached; --force re-downloads)
+py -3 pipeline/sample_battles.py       # optional, ~10 min: refresh the real-
+                                       # usage field reports (gameinfo API,
+                                       # cached per battle, display-only)
 ```
 
 ## Current state (verified 2026-08-12, post full-coverage pass)
@@ -55,23 +58,31 @@ files, golden 9/9, patch-history 14/14.
   vanity items / gathering tools — no sheets, on purpose. Drafts: 0.
   Illustrative placeholders: 0 (`sheets/illustrative/prototype_v0.yaml` is a
   tombstone record of the §2.3 prototype numbers and their corrections).
-- **Three content templates, sizes set by the content** (2026-08-12):
-  `blackzone_roam` (20), `territory_defense` (20), `castle_outpost` (7).
-  The 20-size pair is PROVISIONAL — role-ratio calibration from the two real
-  comps in `tests/meta_comps.yaml` (see the circularity notes in the
-  template headers). Golden suite extended to 13 cases (T8/T9 anchor the new
-  templates to the real comps).
+- **Five content templates, sizes set by the content**: `blackzone_roam`
+  (20), `territory_defense` (20), `castle` (25), `faction_war` (15),
+  `castle_outpost` (7) — plus **five playstyles** in
+  `templates/styles.yaml` (balanced/brawl/clap/kite/brawl_clap) that
+  multiply capability WEIGHTS on top of any template (floors and
+  over-stack stay on base weight — see T10's history). Party size is
+  free-form in the UI (2–60): effective size = max(planned, roster).
+  Everything 2026-08-13 is PROVISIONAL; the 20-size pair took role-ratio
+  calibration from the two real comps in `tests/meta_comps.yaml` (see the
+  circularity notes in the template headers). Golden suite: 15 cases
+  (T8/T9 real-comp anchors, T10 style-direction discrimination).
 - **The product page is `dashboard/index.html` — "Comp Forge"** (generated
   by `pipeline/build_dashboard.py` from `_shell.html` + `_app.js`). Content
-  picker with content-driven party sizes, numbered slots, weapon filter,
-  full capability supply-vs-target board with evidence drawer, floor
-  alarms, prose weaknesses, recommendation with formula, and shareable
-  URL-hash state. Scoring runs in the browser via `pipeline/app_scoring.js`
-  — a port of `engine/engine.py` that `tests/test_js_parity.py` holds equal
-  (change one, change both, rerun parity); a build-time fixture re-checks
-  parity on every page load (masthead chip). A short-lived duplicate app
-  (`app/`, `build_app.py`, 2026-08-12) was folded back in here — don't
-  recreate it.
+  and playstyle pickers, free-form adaptive party size, numbered slots with
+  role tally, tree + text weapon filters, "forge a full comp" greedy
+  auto-build, needed-now/nice-to-have gap split, full capability board
+  with evidence drawer, weapon detail drawer (real Q/W/E/passive pools by
+  in-game name + caller loadouts from `tests/meta_comps.yaml` skills
+  columns), real-usage field reports (`sample_battles.py`, display-only),
+  embedded item icons, share-link hash state, Discord comp export.
+  Scoring runs in the browser via `pipeline/app_scoring.js` — a port of
+  `engine/engine.py` that `tests/test_js_parity.py` holds equal (change
+  one, change both, rerun parity); a build-time fixture re-checks parity
+  on every page load (masthead chip). A short-lived duplicate app (`app/`,
+  `build_app.py`, 2026-08-12) was folded back in here — don't recreate it.
 - **Line structure is the organizing principle**: all weapons in a line share
   the same Q/W spell pool; only the E differs. Line-mates carry identical
   QW-conditional scores (marked `(QW)` in comments); per-weapon files exist
@@ -118,6 +129,9 @@ files, golden 9/9, patch-history 14/14.
   pseudo-tankiness eat half the tank-floor penalty.
 - The entire `blackzone_roam` and `territory_defense` requirement sets —
   every target/weight is a calibrated first draft, not an expert number.
+- Likewise `castle` and `faction_war` (2026-08-13, reasoning in headers)
+  and every multiplier in `templates/styles.yaml` — the golden suite only
+  pins the style DIRECTIONS (T10), not the magnitudes.
 - `anti_zone` weight (sole supplier: Exalted Staff) and `damage_debuff`
   weight (scored on 6 defining carriers; small carriers like Weakening and
   Frost Beam held at 0 pending expert weighting).

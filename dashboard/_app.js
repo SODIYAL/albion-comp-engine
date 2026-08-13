@@ -112,8 +112,17 @@ function loadHash(){
   return true;
 }
 function saveHash(){
-  history.replaceState(null, "",
-    `#c=${CONTENT}&n=${PLANNED}${STYLE !== "balanced" ? "&st=" + STYLE : ""}${party.length ? "&p=" + party.join(",") : ""}`);
+  const h = `c=${CONTENT}&n=${PLANNED}${STYLE !== "balanced" ? "&st=" + STYLE : ""}${party.length ? "&p=" + party.join(",") : ""}`;
+  history.replaceState(null, "", "#" + h);
+  try { localStorage.setItem("compforge", h); } catch (e) { /* file:// may deny */ }
+}
+function loadStored(){
+  try {
+    const h = localStorage.getItem("compforge");
+    if (!h) return false;
+    location.hash = h;
+    return loadHash();
+  } catch (e) { return false; }
 }
 
 /* ---------------------------------------------------------------- render */
@@ -156,9 +165,20 @@ function renderTally(){
     : "";
 }
 function renderRoster(){
+  /* contribution = fitness lost if this member left — the caller's
+     "who is load-bearing" number. Lowest contributor gets flagged. */
+  const base = fitness(party);
+  const contrib = party.map((w, i) =>
+    base - fitness(party.filter((_, j) => j !== i)));
+  const minI = party.length > 2 ? contrib.indexOf(Math.min(...contrib)) : -1;
+  const signed = v => (v < 0 ? "−" : "+") + Math.abs(v).toFixed(1);
+  const flag = i => i !== minI ? "" : contrib[i] < 0
+    ? ' · <b class="least">comp gains without it</b>'
+    : ' · <b class="least">least load-bearing</b>';
   const rows = party.map((w,i) =>
     `<div class="slot"><span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 26)}
-      <span class="nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button><span class="fn">${roleOf(w)}</span></span>
+      <span class="nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>
+        <span class="fn">${roleOf(w)} · ${signed(contrib[i])} fit${flag(i)}</span></span>
       <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>`);
   /* open slots collapse: one dashed "next" row, one "+N more" line */
   const open = SIZE - party.length;
@@ -213,7 +233,7 @@ function renderGroups(){
       const over = have > soft;
       const cls = over ? "over" : have === 0 ? "none" : have >= t ? "met" : "part";
       return `<div class="cap ${floorHit ? "floor-hit" : ""}">
-        <button class="cap-name" data-cap="${c}">${c}${floorHit ? '<span class="tag floor">below floor</span>' : ""}${over ? '<span class="tag over">overstacked</span>' : ""}</button>
+        <button class="cap-name" data-cap="${c}" title="${esc(prose(c))} — click for evidence">${c}${floorHit ? '<span class="tag floor">below floor</span>' : ""}${over ? '<span class="tag over">overstacked</span>' : ""}</button>
         <span class="cap-val">${have.toFixed(0)} / ${t.toFixed(1)}</span>
         <span class="cap-bar"><i class="${cls}" style="width:${over ? 100 : Math.min(100, have/t*100)}%"></i></span>
       </div>`;
@@ -289,6 +309,7 @@ function renderRecDetail(recs){
     <div class="rec">
       <div class="rec-body">
         <p class="why">${whySentence(party, top.w)}</p>
+        ${usageLine(top.w)}
         ${((typeof LOADOUTS !== "undefined" && LOADOUTS[CONTENT]) || {})[top.w] ? (() => {
           const v = LOADOUTS[CONTENT][top.w][0];
           return `<div class="lo-box"><div class="who">caller loadout — ${esc(v.caller)}${v.role ? " · " + esc(v.role) : ""}</div>
@@ -320,6 +341,29 @@ function renderFootnote(){
     Curated sheets cite an equippable spell for every nonzero score. Illustrative sheets carry design-doc §2.3 placeholder numbers and are <b>not</b> evidence-checked — they exist to keep the engine runnable during curation. Click any capability for its evidence chain.
     Item renders from the official Albion Online Render Service, © Sandbox Interactive GmbH — this tool is unofficial and not affiliated.`;
 }
+/* Real-usage field report (sample_battles.py): how often a weapon actually
+   appeared on players in recent fights of roughly this party's size.
+   Display evidence only — never feeds the scoring. */
+function usageBucketName(){ return SIZE < 12 ? "small" : SIZE <= 30 ? "mid-size" : "large"; }
+function usageOf(w){
+  if (typeof USAGE === "undefined" || !USAGE.buckets) return null;
+  const key = SIZE < 12 ? "small" : SIZE <= 30 ? "mid" : "large";
+  const m = (USAGE.meta || {})[key];
+  if (!m || m.players_attributed < 200) return null;   // not enough data to quote
+  const n = (USAGE.buckets[key] || {})[w] || 0;
+  return { pct: 100 * n / m.players_attributed, n,
+           players: m.players_attributed, battles: m.battles };
+}
+function usageLine(w){
+  const u = usageOf(w);
+  if (!u) return "";
+  const bucket = usageBucketName();
+  const txt = u.n === 0
+    ? `not seen in ${u.battles} recent ${bucket} fights`
+    : `on ${u.pct.toFixed(u.pct < 1 ? 1 : 0)}% of ${u.players} players across ${u.battles} recent ${bucket} fights`;
+  return `<div class="fieldnote">field report: ${txt} <span>(${esc((USAGE.generated_utc || "").slice(0, 10))}, killboard)</span></div>`;
+}
+
 function loVariants(w){
   /* caller loadouts for this weapon: current content first, then others */
   const out = [];
@@ -359,7 +403,7 @@ function renderDetail(w){
   $("drawer-title").textContent = d.display_name;
   $("drawer-body").innerHTML = `
     <div class="dt-head">${icon(w, 40)}
-      <div><b>${nameOf(w)}</b><span class="fn">${esc(TREE_NAMES[TREES[w]] || TREES[w] || "")} tree · ${roleOf(w)}</span></div>
+      <div><b>${nameOf(w)}</b><span class="fn">${esc(TREE_NAMES[TREES[w]] || TREES[w] || "")} tree · ${roleOf(w)}</span>${usageLine(w)}</div>
     </div>
     <div class="dt-grid">
       <div><h4>Capabilities — click one for party-wide evidence</h4>
@@ -487,7 +531,7 @@ $("build-stamp").textContent = `v${META.version} · ${META.weapons_curated}/${ME
 /* Boot: a shared link restores content/size/party; otherwise seed with the
    design doc's worked example (§4.3), if those sheets exist. */
 const SEED = ["2H_LONGBOW","MAIN_ARCANESTAFF_UNDEAD","2H_ICECRYSTAL_UNDEAD"].filter(w => WEAPONS[w]);
-if (!loadHash()) party = SEED;
+if (!loadHash() && !loadStored()) party = SEED;
 renderTreeFilter();
 syncEngine();
 render();

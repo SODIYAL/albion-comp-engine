@@ -26,3 +26,4 @@ tests/*_responses.md
 # committing it means the project runs without a 150 MB clone.
 .playwright-mcp/
 pipeline/out/icons/
+pipeline/out/battles_cache/

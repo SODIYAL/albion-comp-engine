@@ -104,6 +104,12 @@ def main():
         spells[k] = {slot: [[sid, spell_name(sid)] for sid in sp.get(slot, [])]
                      for slot in ("q", "w", "e", "passive")}
     loadouts = load_loadouts(data["weapons"])
+    # Real-usage sample (sample_battles.py). Optional; display evidence only.
+    usage_path = os.path.join(HERE, "out", "weapon_usage_v2.json")
+    usage = {}
+    if os.path.exists(usage_path):
+        with open(usage_path, encoding="utf-8") as f:
+            usage = json.load(f)
 
     # Parity fixture: run the Python engine over the dashboard's seed party and
     # inline its output, so the client asserts against the real engine on every
@@ -128,6 +134,7 @@ def main():
            f"const TREES = {json.dumps(trees, separators=(',', ':'))};\n"
            f"const SPELLS = {json.dumps(spells, separators=(',', ':')).replace('</', '<\\/')};\n"
            f"const LOADOUTS = {json.dumps(loadouts, separators=(',', ':')).replace('</', '<\\/')};\n"
+           f"const USAGE = {json.dumps(usage, separators=(',', ':')).replace('</', '<\\/')};\n"
            f"const PARITY_EXPECTED = {json.dumps(expected)};\n{app}</script>\n")
     path = os.path.join(DASH, "index.html")
     with open(path, "w", encoding="utf-8") as f:

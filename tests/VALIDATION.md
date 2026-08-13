@@ -65,7 +65,7 @@ there produced two more load-bearing findings of the V1 class:
 ## Tier 3 — Data pipeline claims (before Phase 3 investment)
 
 **V6. Content-labeling accuracy.** Sample 100 battles, hand-label content type from context, measure classifier agreement. Gate: ≥80% precision on castle/hellgate/roads labels, else Phase 3 stats stay content-agnostic.
-**V7. Coverage at scale.** Rerun V2 across ~200 battles of varied size/server (script, not eyeball). Gate: ≥85% weapon attribution in 10–50-player battles.
+**V7. Coverage at scale.** Rerun V2 across ~200 battles of varied size/server (script, not eyeball). Gate: ≥85% weapon attribution in 10–50-player battles. **Script exists (2026-08-13): `pipeline/sample_battles.py`** — samples the official gameinfo API with per-battle caching, buckets by fight size (small <12 / mid 12–30 / large >30), writes `out/weapon_usage_v2.json` with a coverage stat; the dashboard quotes it as display-only "field reports". Check the coverage number in that file against the 85% gate on each refresh.
 **V8. Statistical sanity backtest.** Compute weapon win-lift on 3 months of data; check that community-consensus-strong weapons show positive lift. If stats contradict consensus everywhere, the confounds dominate and δ (MetaPrior weight) stays small.
 
 ## Standing regression suite

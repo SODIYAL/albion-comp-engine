@@ -35,20 +35,32 @@ Alternatives: Exalted Staff, Great Holy Staff, Redemption Staff
   gathering tools). Weapons in a line share their Q/W pool, so line-mates
   carry identical pool scores and differ only in their E — sheets are
   organized accordingly.
-- **Three content templates**, each with its own party size: Blackzone Roam
-  (20), Territory Defense (20), Castle Outpost (7). The 20-size templates
-  took role-ratio calibration from two real shotcaller comps
-  (`tests/meta_comps.yaml`) and are PROVISIONAL until the expert pass.
+- **Five content templates** — Blackzone Roam (20), Territory Defense (20),
+  Castle Fight (25), Faction War Red Zone (15), Castle Outpost (7) — and
+  **five playstyles** (balanced / brawl / clap / kite / brawl-clap) that
+  reweight any template toward the caller's plan. The 2026-08-13 templates
+  and all style multipliers are PROVISIONAL until the expert pass; role
+  calibration for the 20-size pair came from two real shotcaller comps
+  (`tests/meta_comps.yaml`).
 - **`dashboard/index.html` (Comp Forge) is the product page** — pick the
-  content (party size follows it), build the party in numbered slots, see
-  fitness, the full capability supply-vs-target board, floor alarms,
-  weaknesses in plain language, and the recommended next pick with its
-  reasoning, formula and evidence drawer. Party state lives in the URL hash
-  (copy share link). Self-contained; open it directly. Its in-browser
-  scoring is `pipeline/app_scoring.js`, a line-for-line port of the Python
-  engine held equal by `tests/test_js_parity.py` (60/60 random parties, all
-  templates, 1e-9) plus a build-time parity fixture checked on every load.
-- The scoring model passes 13/13 golden regression tests against the full
+  content and playstyle, set the party size to however many actually show
+  up (targets, floors and scaling adapt from 2 to 60), build the party in
+  numbered slots or let **forge a full comp** greedy-build one, and read
+  fitness, floor alarms, needed-now vs nice-to-have gaps, and the
+  recommended next pick with its reasoning, formula, caller loadout and
+  evidence. Weapon detail drawer shows every weapon's real Q/W/E/passive
+  options by in-game name. Party state lives in the URL hash (copy share
+  link); "copy comp text" exports a Discord-ready roster. Self-contained;
+  open it directly. In-browser scoring is `pipeline/app_scoring.js`, a
+  line-for-line port of the Python engine held equal by
+  `tests/test_js_parity.py` (60/60 random parties across all templates and
+  styles, 1e-9) plus a build-time parity fixture checked on every load.
+- **Real-usage field reports**: `pipeline/sample_battles.py` samples recent
+  battles from the official gameinfo killboard API and counts weapons per
+  fight-size bucket; the page quotes "seen on X% of players in fights your
+  size". Display evidence only — it does not feed the scoring until
+  validation says it may.
+- The scoring model passes 15/15 golden regression tests against the full
   dataset — that validates its *shape*, not its recommendation quality.
 - Every score is a Claude proposal grounded in the game's own spell text and
   passed through the evidence lint, plus the first owner corrections (glove
