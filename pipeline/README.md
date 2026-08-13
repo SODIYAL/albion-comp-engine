@@ -58,6 +58,15 @@ none of them.
 
 Only needed after a game patch (`out/` is committed).
 
+**After every re-clone + rebuild, re-check `pipeline/effect_overrides.yaml`.**
+That file holds runtime corrections to parser output (direction bugs,
+reference-chain artifacts, prose-flag misfires, and `add:` entries for
+mechanics outside the structured vocabulary). Each entry cites the dumps text
+it was verified against; an entry whose upstream bug gets fixed becomes
+silently redundant — or wrong, if the spell was redesigned. Diff each entry's
+spell against the fresh dumps text and delete entries the rebuild made
+unnecessary.
+
 ```
 git clone --depth 1 --filter=blob:none https://github.com/ao-data/ao-bin-dumps.git
 ```
@@ -106,11 +115,16 @@ mode those paths are treated as directories and the command fails. Either take
 the full checkout (as above) or use `sparse-checkout set --no-cone /items.json
 /spells.json /localization.json /formatted/items.json`.
 
-## Status
+## Status (2026-08-12, full-coverage pass)
 
-- Curated: 6 weapons — mace line (2), longbow, holy line (2), blight.
-- Illustrative placeholders: 8 — these block `release_clean`.
-- Drafts awaiting curation: 34, seeded in usage order.
+- Curated: **137 of 137 combat weapons** — every line complete;
+  `release_clean: True`. The other 24 catalog entries are vanity items and
+  gathering tools and get no sheets.
+- Illustrative placeholders: 0 (all 8 replaced; `sheets/illustrative/` is a
+  tombstone record of the §2.3 prototype numbers and their corrections).
+- Drafts: 0. All scores are Claude-proposed and lint-clean; the expert
+  correction pass and Tier-2 blind validation are the outstanding quality
+  gates.
 
 ## The effect layer
 
@@ -146,7 +160,11 @@ Hallowfall looked like it had no displacement at all).
 
 Two sources, because neither is complete: structured nodes have high precision,
 and the old prose regexes survive as a fallback in `effect_lookup.PROSE_FALLBACK`
-(they are what caught Battle Howl's purge first).
+(they are what caught Battle Howl's purge first). Since 2026-08-12 the
+structured layer properly SUPERSEDES a prose flag when the spell has a
+structured counterpart for the same mechanic (with an ally-direction guard for
+the heal flag), and `effect_overrides.yaml` corrects the artifacts the parser
+gets wrong — both layers feed the seeder and the lint identically.
 
 **What the effect layer cannot see**, and therefore never seeds or blocks: raw
 damage (`burst_st`/`burst_aoe`/`sustained_dps`/`execute` — damage is a plain
@@ -187,8 +205,6 @@ not needed as a source.
   10–60 player fights. Re-run at ~200 battles before trusting shares
   (VALIDATION V7). Measured coverage is far thinner than design doc §5 assumed:
   top-30 weapons cover 62% of observations, not >90%; 97 distinct weapons appear.
-- **59 weapons seen in usage data have no sheet at all** — the draft set does not
-  yet track the observed meta.
 - Structural capabilities (engage, peel, clump, tankiness…) are human-only by
   design; drafts contain effect capabilities only.
 - Only one content template exists (`castle_outpost`, validated at size 7 only).
@@ -198,14 +214,15 @@ not needed as a source.
   game-native spell IDs, SSR-scrapeable — ask their Discord first). Two-source
   agreement = high-confidence kit; see design doc §2.4.
 
-- **Taxonomy gap: no capability covers "remove enemy ground areas."** The Crystal
-  Holy Staff's E (`HOLY_DISPEL`, "Sanctify") removes enemy-placed ground areas.
-  Nothing in the 26-capability set (design doc §2.2) expresses that — it is the
-  counter to `zone_control`, not an instance of it. Decide before curating
-  `2H_HOLYSTAFF_CRYSTAL`: add an `anti_zone` capability, or fold it into
-  `purge`? Note it is NOT a cleanse; it does not touch CC or debuffs on allies.
-
 ### Resolved
+
+- ~~Taxonomy gap: "remove enemy ground areas"~~ — resolved as `anti_zone`
+  (design doc §2.2 amendment); scored on the Exalted Staff, still the sole
+  supplier. Its template weight remains PROVISIONAL.
+- ~~`damage_debuff` proposed but unpromotable~~ — promoted into §2.2
+  (2026-08-12) after six poster-child weapons; template weight low/flat/
+  PROVISIONAL like anti_zone's. Small carriers (Weakening, Frost Beam,
+  Intimidating Presence) deliberately held at 0 pending expert weighting.
 
 - ~~Shapeshifter weapons not ingested~~ — fixed 2026-08-12. They live under
   `transformationweapon` in items.json and are now merged before `by_name` is

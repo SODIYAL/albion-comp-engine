@@ -106,12 +106,24 @@ It is the counter to `zone_control`, not an instance of it, and folding it into
 `purge` would let a comp look purge-covered when it has no answer to a Frost
 comp's zones.*
 
+*Added 2026-08-12 (full-coverage curation): `damage_debuff` — reducing the
+enemy's damage OUTPUT. Promoted from the effect map's proposed list after
+curation found six weapons whose value is partly or mostly this axis and
+nothing else can express it: Cripple (-25% all damage), Forceful Swing (-50%
+plus Auto-Attack disable), Black Monk's Fatal Blade (-40% stacking), Incubus
+Mace's Shrinking Curse (-40%), Evensong's Dark Aura (-15%), and the sword
+line's Weakening passive. Distinct from `resist_shred` (raises damage the
+enemy TAKES) and from `tankiness` (your own durability): it is
+group-defensive utility delivered onto the enemy. Template weight starts low
+and flat, like `anti_zone`, until the expert tunes it. The map's remaining
+proposed capability (`reveal`) stays unpromoted.*
+
 | Group | Capabilities |
 |---|---|
 | **Sustain** | `heal_burst`, `heal_sustain`, `cleanse` (remove CC/debuffs from allies), `self_sustain` |
 | **Frontline** | `tankiness` (survive focus), `engage` (initiate/dive), `disengage` (get the group out), `anti_dive` (punish divers), `zone_control` (deny/hold space) |
 | **Control** | `stun`, `root`, `silence`, `knockback_displace`, `slow`, `clump_create` (stack enemies for AoE), `peel` (protect own backline) |
-| **Denial** | `purge` (strip enemy buffs), `anti_zone` (remove enemy ground areas), `heal_reduction`, `resist_shred` (pierce/armor reduction), `energy_drain` |
+| **Denial** | `purge` (strip enemy buffs), `anti_zone` (remove enemy ground areas), `heal_reduction`, `resist_shred` (pierce/armor reduction), `damage_debuff` (cut enemy damage output), `energy_drain` |
 | **Damage** | `burst_st` (single-target burst), `burst_aoe`, `sustained_dps`, `execute` |
 | **Tempo** | `mobility`, `catch` (run enemies down), `buff_allies` |
 

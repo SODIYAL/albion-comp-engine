@@ -1,5 +1,5 @@
 # Spirithunter — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
-# Usage: 4 sightings, dominant role: melee. Replaces the illustrative Â§2.3
+# Usage: 4 sightings, dominant role: melee. Replaces the illustrative §2.3
 # block (heal_reduction 3, sustained_dps 2, burst_aoe 1, buff_allies 1).
 #
 # MAJOR CORRECTION — the illustrative sheet's defining stat was FABRICATED.
@@ -10,10 +10,8 @@
 #
 # Real identity: shred + anti-kite skirmisher. The E is AoE resist shred with
 # a zone trail; Cripple (W) purges Move Speed buffs, slows, and cuts the
-# target's damage dealt by 25% — the strongest damage debuff seen so far,
-# UNSCORED because damage_debuff is still a proposed capability outside Â§2.2.
-# This weapon is now the poster child for promoting it: without that cap the
-# sheet undersells the weapon's actual value.
+# target's damage dealt by 25% — scored as damage_debuff since the 2026-08-12
+# §2.2 promotion (this weapon was the founding poster child for it).
 
 - weapon: 2H_HARPOON_HELL            # Spirithunter — shred anti-kite skirmisher
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
@@ -22,6 +20,7 @@
     - {cap: resist_shred,  score: 2, evidence: TAINTED_STEEL}   # E: -12% AoE pierce + trail stacking magical shred
     - {cap: catch,         score: 2, evidence: LEGBREAKER}      # W: Cripple strips MS buffs + self MS vs sprinters;
                                                                 # W: Harpoon pull (QW)
+    - {cap: damage_debuff, score: 1, evidence: LEGBREAKER}      # W: Cripple -25% ALL damage dealt, 4s (QW)
     - {cap: sustained_dps, score: 2, evidence: SPIRITSPEAR}     # Q: Spirit Spear charges, +28% AA damage x3
     - {cap: burst_aoe,     score: 1, evidence: GROUNDSPEAR}     # W: Impaler 155 in 2.5m; E pierce line (QW)
     - {cap: root,          score: 1, evidence: SKILLSHOT_PULL}  # W: Harpoon — pull + 2.2s root with charges (QW)

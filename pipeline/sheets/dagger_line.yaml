@@ -36,9 +36,12 @@
 - weapon: 2H_IRONGAUNTLETS_HELL      # Black Hands — combo striker
   curated_as_of: 2026-08-12
   role_hint: melee
-  # NOTE: the E's dumps description is EMPTY; scores below rest on its
-  # structured effects only (stun, purge, heal-cut candidates verified by the
-  # lint). Expert should sanity-check against in-game behavior.
+  # NOTE: the E's dumps description is EMPTY; scores rest on structured
+  # effects, cross-checked against community sources (2026-08-12): Devastating
+  # Strike is a two-hit combo — 1st hit ~66% damage + PURGE, 2nd hit ~33% +
+  # knockback, stun in the effect list. Matches the structured candidates.
+  # The 2nd-hit knockback has NO structured candidate and stays unscored
+  # (would need an effect_overrides add: entry — expert's call).
   capabilities:
     - {cap: burst_st,      score: 2, evidence: PUNCHCOMBO}        # E: Devastating Strike combo
     - {cap: stun,          score: 1, evidence: PUNCHCOMBO}        # structured stun, enemy-directed

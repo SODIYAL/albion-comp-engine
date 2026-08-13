@@ -68,5 +68,5 @@
 # Its illustrative block claimed heal_reduction 3 — FABRICATED: nothing in the
 # kit reduces healing (verified against every Q/W/E/passive description).
 # buff_allies 1 also had no basis. Same error class as Hallowfall's cleanse.
-# The weapon's real strength (Cripple's -25% damage dealt) is unscoreable
-# until damage_debuff is promoted into §2.2.
+# The weapon's real strength (Cripple's -25% damage dealt) became scoreable
+# when damage_debuff was promoted into §2.2 (2026-08-12) — see the curated sheet.

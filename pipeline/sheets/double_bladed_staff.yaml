@@ -24,4 +24,5 @@
     - {cap: stun,          score: 1, evidence: STUNRUN}          # W option; Q3 combo; passive (QW)
     - {cap: root,          score: 1, evidence: SEPARATING_SLAM}  # (QW)
     - {cap: anti_dive,     score: 1, evidence: QS_WHIRLWIND2}    # (QW)
+    - {cap: damage_debuff, score: 1, evidence: QS_WHIRLWIND2}    # W: -50% damage dealt + AA disable (QW)
     - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_QUARTERSTAFF}  # PASSIVE: Life Leech

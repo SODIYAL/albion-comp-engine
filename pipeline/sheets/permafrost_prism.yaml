@@ -14,7 +14,8 @@
 #     misread — Frost Lance SHREDS enemy resistances, it shields nothing.
 #   - stun/peel/catch ADDED: the E is a large-radius AoE stun the illustrative
 #     block never scored as CC.
-# Draft's `damage_debuff` (Frost Beam AA-speed debuff) dropped: not a §2.2 cap.
+# Draft's `damage_debuff` (Frost Beam AA-speed debuff) held at 0: the cap was
+# promoted into §2.2 (2026-08-12) but small W-option carriers await expert weighting.
 # No engage scored: a ranged stun can start a fight, but initiation-by-dive is
 # not this kit's job — flag for expert if the templates disagree.
 

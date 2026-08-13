@@ -13,8 +13,9 @@
 #     else in the kit is defensive).
 #   - No engage: a ranged root can start a fight but initiation-by-dive is
 #     not this kit's job.
-# Frost Beam's AA-speed debuff noted but unscored: damage_debuff is a proposed
-# capability not yet in design doc §2.2.
+# Frost Beam's AA-speed debuff noted, still unscored: damage_debuff was
+# promoted into §2.2 (2026-08-12) but the small W-option carriers are held
+# at 0 pending expert weighting.
 
 - weapon: MAIN_FROSTSTAFF            # Frost Staff — AoE root mage
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json

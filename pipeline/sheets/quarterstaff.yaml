@@ -8,8 +8,8 @@
 # damage dealt AND disables enemy Auto-Attacks). knockback_displace 3 and
 # peel 3 — the highest displacement scores in the dataset, matching the
 # line's in-game role as the dedicated peel bruiser.
-# Forceful Swing's -50% damage-dealt debuff is the third damage_debuff
-# poster child (after Cripple and Weakening) — unscored until §2.2 promotes it.
+# Forceful Swing's -50% damage-dealt debuff scored as damage_debuff since the
+# 2026-08-12 §2.2 promotion (it was a founding poster child).
 
 - weapon: 2H_QUARTERSTAFF            # Quarterstaff — the displacement line
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
@@ -22,6 +22,7 @@
     - {cap: disengage,     score: 2, evidence: VAULT_ATTACK}     # immune leap out; Q: Cartwheel
     - {cap: catch,         score: 2, evidence: STUNRUN}          # W: Stun Run 2.11s opener + leap (QW)
     - {cap: anti_dive,     score: 2, evidence: QS_WHIRLWIND2}    # W: divers get shoved, damage-halved, AA-disabled (QW)
+    - {cap: damage_debuff, score: 1, evidence: QS_WHIRLWIND2}    # W: -50% damage dealt + AA disable, 5s AoE (QW)
     - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}     # tank-role bruiser; Q: Cartwheel +20% resists
     - {cap: stun,          score: 1, evidence: STUNRUN}          # W option; Q3: Concussive Blow; passive (QW)
     - {cap: root,          score: 1, evidence: SEPARATING_SLAM}  # W: 2.2s single-target (QW)

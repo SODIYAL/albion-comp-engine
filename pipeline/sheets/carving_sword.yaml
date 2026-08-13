@@ -9,7 +9,9 @@
 # Rulings carried over from the Dual Swords curation:
 #   - Iron Will grounds nothing offensive (purge-immunity artifact, suppressed).
 #   - Interrupt scores no silence (instant interrupt != cast denial).
-#   - Weakening passive noted, unscored (damage_debuff not yet in Â§2.2).
+#   - Weakening passive noted, still unscored: damage_debuff was promoted
+#     into §2.2 (2026-08-12) but the -2%-per-AA stack is held at 0 pending
+#     expert weighting of the small carriers.
 #   - Parry grounds NO tankiness (momentary-defensive ruling, 2026-08-12:
 #     personal channel/dash defensives are not frontline durability).
 # mobility 2 not 3: Fearless Strike's 25s cooldown is more than double the

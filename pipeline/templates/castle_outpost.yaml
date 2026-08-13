@@ -35,6 +35,13 @@ requirements:
   # (design doc §4.4.5). Set low and flat until the expert tunes it, so it can
   # never dominate a recommendation on an unvalidated number.
   anti_zone:      {target: 1.0, weight: 3,  soft_cap: 2.0, scales: false}
+  # PROVISIONAL WEIGHT — promoted 2026-08-12 with the anti_zone treatment:
+  # low and flat so an unvalidated number can never dominate a recommendation.
+  # Scored so far only on the defining carriers (Black Monk 2, Incubus Mace 2,
+  # Spirithunter/Quarterstaff/DBS/Evensong 1); many more lines carry small
+  # versions (Weakening, Frost Beam, Intimidating Presence) left at 0 pending
+  # expert weighting.
+  damage_debuff:  {target: 1.0, weight: 3,  soft_cap: 2.0, scales: false}
   heal_reduction: {target: 1.0, weight: 6,  soft_cap: 3.0, scales: false}
   resist_shred:   {target: 2.0, weight: 5,  soft_cap: 4.0, scales: false}
   cleanse:        {target: 1.0, weight: 5,  soft_cap: 3.0, scales: false}

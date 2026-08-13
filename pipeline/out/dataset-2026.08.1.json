@@ -224,6 +224,12 @@
      "target": 2.0,
      "weight": 7
     },
+    "damage_debuff": {
+     "scales": false,
+     "soft_cap": 2.0,
+     "target": 1.0,
+     "weight": 3
+    },
     "disengage": {
      "scales": false,
      "soft_cap": 3.0,
@@ -459,6 +465,7 @@
     "buff_allies": 1,
     "burst_aoe": 2,
     "cleanse": 2,
+    "damage_debuff": 1,
     "heal_reduction": 2,
     "peel": 1,
     "resist_shred": 1,
@@ -477,6 +484,9 @@
     ],
     "cleanse": [
      "CLEANSESPEED2"
+    ],
+    "damage_debuff": [
+     "ARCANE_METEOR"
     ],
     "heal_reduction": [
      "ARCANE_METEOR"
@@ -1122,6 +1132,7 @@
    "capabilities": {
     "anti_dive": 1,
     "burst_aoe": 1,
+    "damage_debuff": 2,
     "knockback_displace": 1,
     "peel": 1,
     "purge": 2,
@@ -1138,6 +1149,9 @@
      "QS_WHIRLWIND2"
     ],
     "burst_aoe": [
+     "COMBATSTAFF_SLASH"
+    ],
+    "damage_debuff": [
      "COMBATSTAFF_SLASH"
     ],
     "knockback_displace": [
@@ -1703,6 +1717,7 @@
     "anti_dive": 1,
     "burst_aoe": 1,
     "catch": 2,
+    "damage_debuff": 1,
     "disengage": 2,
     "engage": 2,
     "knockback_displace": 2,
@@ -1725,6 +1740,9 @@
     ],
     "catch": [
      "DASH_KNOCKBACK"
+    ],
+    "damage_debuff": [
+     "QS_WHIRLWIND2"
     ],
     "disengage": [
      "DASH_KNOCKBACK"
@@ -3153,6 +3171,7 @@
    "capabilities": {
     "burst_aoe": 1,
     "catch": 2,
+    "damage_debuff": 1,
     "mobility": 1,
     "peel": 1,
     "resist_shred": 2,
@@ -3168,6 +3187,9 @@
      "GROUNDSPEAR"
     ],
     "catch": [
+     "LEGBREAKER"
+    ],
+    "damage_debuff": [
      "LEGBREAKER"
     ],
     "mobility": [
@@ -4477,6 +4499,7 @@
     "anti_dive": 2,
     "burst_aoe": 1,
     "catch": 2,
+    "damage_debuff": 1,
     "disengage": 2,
     "engage": 2,
     "knockback_displace": 3,
@@ -4498,6 +4521,9 @@
     ],
     "catch": [
      "STUNRUN"
+    ],
+    "damage_debuff": [
+     "QS_WHIRLWIND2"
     ],
     "disengage": [
      "VAULT_ATTACK"
@@ -6690,6 +6716,7 @@
   "MAIN_MACE_HELL": {
    "capabilities": {
     "burst_st": 1,
+    "damage_debuff": 2,
     "engage": 1,
     "execute": 2,
     "heal_reduction": 1,
@@ -6703,6 +6730,9 @@
    "display_name": "Incubus Mace",
    "evidence": {
     "burst_st": [
+     "SHRINKINGSMASH"
+    ],
+    "damage_debuff": [
      "SHRINKINGSMASH"
     ],
     "engage": [

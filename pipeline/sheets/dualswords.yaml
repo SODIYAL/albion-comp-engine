@@ -14,8 +14,9 @@
 #     Suppressed in effect_overrides.yaml.
 #   - Interrupt (W) scores no silence, per the Forbidden Stab ruling: an
 #     instant interrupt is not a cast-denial window.
-#   - Weakening passive (stacking -2% enemy damage) noted but unscored:
-#     damage_debuff is a proposed capability not yet in design doc Â§2.2.
+#   - Weakening passive (stacking -2% enemy damage) noted, still unscored:
+#     damage_debuff was promoted into §2.2 (2026-08-12) but the small
+#     AA-stack carriers are held at 0 pending expert weighting.
 # Parry's reflect is real anti-dive material but the map cannot express
 # reflect; left unscored rather than grounded on a loose candidate.
 

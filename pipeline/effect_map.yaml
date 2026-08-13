@@ -23,15 +23,15 @@
 # `[]` means the effect grounds no capability in that direction — a real answer,
 # not a gap. `ignore: true` marks PvE-only or structural entries.
 #
-# NEW CAPABILITIES PROPOSED (not yet in design doc §2.2):
-#   damage_debuff  reduce the enemy's damage OUTPUT (~42 weapon lines). Distinct
-#                  from resist_shred (which raises damage you DEAL) and from
-#                  tankiness (your own durability). Nothing existing covers it.
+# damage_debuff PROMOTED into design doc §2.2 (2026-08-12, full-coverage
+# curation): six poster-child weapons made the case — see the §2.2 amendment.
+# Template weight starts low/flat/PROVISIONAL like anti_zone's.
+#
+# STILL PROPOSED (not yet in design doc §2.2):
 #   reveal         strip invisibility (4 lines). Real but marginal; drop it if
 #                  you would rather keep the taxonomy lean.
 
 proposed_capabilities:
-  damage_debuff: "Reduces the enemy's damage output — group-defensive utility."
   reveal: "Strips invisibility from enemies (anti-stealth)."
 
 effects:

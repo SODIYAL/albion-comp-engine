@@ -63,7 +63,7 @@
     - {cap: execute,      score: 2, evidence: SHRINKINGSMASH}  # E: -40% max AND current Health for 8s — the focus call
     - {cap: heal_reduction, score: 1, evidence: SHRINKINGSMASH}  # -40% Healing CAST hits enemy healers
     - {cap: burst_st,     score: 1, evidence: SHRINKINGSMASH}
-    # E also cuts damage dealt -40%: damage_debuff poster child #6
+    - {cap: damage_debuff, score: 2, evidence: SHRINKINGSMASH}  # E: -40% damage dealt for 8s, cone
     - {cap: tankiness,    score: 2, evidence: WEAPON_STATS}
     - {cap: peel,         score: 2, evidence: GUARDRUNE}       # (QW)
     - {cap: engage,       score: 1, evidence: CHARGE_ROOT}     # (QW)
