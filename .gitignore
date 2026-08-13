@@ -24,3 +24,4 @@ tests/*_responses.md
 # NOTE: pipeline/out/*.json IS committed on purpose. It is the parsed game data
 # the engine, lint and dashboard all read, it is small (~600 KB total), and
 # committing it means the project runs without a 150 MB clone.
+.playwright-mcp/
