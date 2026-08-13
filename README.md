@@ -1,5 +1,7 @@
 # Albion Composition Engine
 
+**Live planner: <https://sodiyal.github.io/albion-comp-engine/>**
+
 A recommendation engine for Albion Online party composition. Given the content
 type, the party size and who is already in the group, it proposes the next
 player — and explains why in terms of what the composition is actually missing.

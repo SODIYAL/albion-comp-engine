@@ -139,6 +139,14 @@ def main():
     path = os.path.join(DASH, "index.html")
     with open(path, "w", encoding="utf-8") as f:
         f.write(out)
+    # GitHub Pages copy (Settings -> Pages -> main /docs): same page with a
+    # doctype so the public site renders in standards mode. The dashboard/
+    # copy stays skeleton-less because the artifact host wraps it itself.
+    docs = os.path.join(ROOT, "docs")
+    os.makedirs(docs, exist_ok=True)
+    with open(os.path.join(docs, "index.html"), "w", encoding="utf-8") as f:
+        f.write("<!doctype html>\n" + out)
+    open(os.path.join(docs, ".nojekyll"), "w").close()
 
     m = data["_meta"]
     print(f"wrote dashboard/index.html  ({len(out)/1024:.0f} KB)")
