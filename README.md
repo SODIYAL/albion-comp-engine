@@ -11,40 +11,48 @@ recommendation is the archetype with the highest marginal gain against the gap.
 Roles fall out of the vector rather than being assigned to it.
 
 ```
-Party: Longbow, Witchwork, Permafrost      Castle Outpost, size 7
-Fitness 18.8 / 104
+Party: Longbow, Witchwork Staff, Permafrost Prism      Castle Outpost, size 7
+Fitness 25.0 / 107
 
 Biggest weaknesses
   heal_sustain    0 / 3.0   −10.0
-  peel            0 / 3.0    −8.0
+  tankiness       0 / 4.0    −9.0
   engage          0 / 2.0    −7.0
 
 Recommend: Hallowfall
-  +22.53  heal_sustain: 0 → 2 (target 3.0)
-  + 8.00  peel:         0 → 3 (target 3.0)
+  +27.53  heal_sustain: 0 → 2 (target 3.0)
   + 6.00  heal_burst:   0 → 3 (target 2.0)
+  + 3.00  mobility:     0 → 3 (target 2.0)
+Alternatives: Exalted Staff, Great Holy Staff, Redemption Staff
 ```
 
-## Status
+## Status (2026-08-12)
 
-**Pre-validation. Do not trust the numbers yet.**
+**Fully curated, pre-validation. Do not trust the numbers yet.**
 
-- The scoring model passes 9/9 golden regression tests — that validates its
-  *shape*, not its recommendation quality.
-- 6 weapons have curated, evidence-checked capability sheets. 34 more are
-  auto-seeded drafts awaiting human curation. 8 are placeholder numbers that
-  block a clean release.
+- **All 137 combat weapons have curated, evidence-linted capability sheets**
+  (`release_clean: True`; the other 24 catalog entries are vanity items and
+  gathering tools). Weapons in a line share their Q/W pool, so line-mates
+  carry identical pool scores and differ only in their E — sheets are
+  organized accordingly.
+- The scoring model passes 9/9 golden regression tests against the full
+  dataset — that validates its *shape*, not its recommendation quality.
+- Every score is a Claude proposal grounded in the game's own spell text and
+  passed through the evidence lint. The **human expert correction pass has
+  not happened**, and two template numbers are marked PROVISIONAL
+  (`anti_zone`, `damage_debuff` weights; heal-floor `penalty_mult`).
 - One content template exists (Castle Outpost), fitted at size 7 only.
 - **Tier-2 validation has not run.** The real accuracy gate is a blind test
-  against experienced shotcallers (≥70% top-3 agreement). Until that passes,
-  treat output as a plausible hypothesis.
+  against experienced shotcallers (≥70% top-3 agreement); the form is
+  generated at `tests/tier2_form.md` against the full weapon pool. Until it
+  passes, treat output as a plausible hypothesis.
 
 ## The two-layer design
 
 | layer | what it holds | source | count |
 |---|---|---|---|
 | **effects** | game mechanics: `stun`, `movespeedbonus-`, `remove:buff` | derived from game data | 64 reachable from weapons |
-| **capabilities** | what a composition needs: `peel`, `engage`, `heal_sustain` | human taxonomy | 28 |
+| **capabilities** | what a composition needs: `peel`, `engage`, `heal_sustain` | human taxonomy | 29 |
 
 They are deliberately not collapsed. The map between them is many-to-many and
 direction-aware: 1H Mace's Deep Leap resolves to `dash` + `invincibility` + five
@@ -63,8 +71,12 @@ invalid by definition.
 This exists because hand-curation produced real errors that all looked
 plausible: a purge attributed to a weapon whose kit has none; a knockback that
 displaces the *caster* filed as enemy displacement; a cleanse credited to a
-weapon line that has no cleanse anywhere in its kit. The lint catches that class
-of mistake without waiting for a human to notice.
+weapon line that has no cleanse anywhere in its kit. The full-coverage pass
+found the same class in the original hand-sketched sheets themselves — a
+dedicated anti-heal weapon whose kit contains no anti-heal, an energy drain
+that no spell provides. The lint catches that class of mistake without waiting
+for a human to notice; `pipeline/effect_overrides.yaml` documents the cases
+where the *parser* is the one that is wrong.
 
 ## Running it
 

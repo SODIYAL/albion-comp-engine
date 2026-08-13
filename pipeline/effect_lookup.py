@@ -13,9 +13,17 @@ an engage tool is a curation judgement. The lint's job is to reject
 capabilities the spell cannot support at all — not to pick between the ones it
 can.
 
-Reads out/effect_catalogue.json (built by effect_catalogue.py) and
-effect_map.yaml. Falls back to the prose flags in spell_index.json where the
-structured layer is silent, because neither source is complete on its own.
+Reads out/effect_catalogue.json (built by effect_catalogue.py),
+effect_map.yaml, and effect_overrides.yaml (documented runtime corrections to
+parser output — direction bugs, reference-chain artifacts, prose-flag
+misfires, and additions for mechanics outside the structured vocabulary).
+
+Prose flags from spell_index.json survive as a fallback where the structured
+layer is silent — but since 2026-08-12 a structured entry for the same
+mechanic SUPERSEDES the direction-blind prose flag (PROSE_SUPERSEDED_BY),
+with an ally-direction guard for the heal flag: a spell's self healing-cast
+buff must not mask the prose flag standing in for its structurally invisible
+direct ally heal (the Desperate Prayer case).
 """
 import json, os, sys
 

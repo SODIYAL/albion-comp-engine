@@ -23,6 +23,20 @@ A ~250-line throwaway implementation of the scoring model (13 hand-scored weapon
 
 *Caveat: 9 assertions over 13 weapons is a smoke test of model shape, not proof of recommendation quality. Quality is tested in Tier 2.*
 
+**Status 2026-08-12 (full-coverage pass):** the golden suite graduated to
+`test_golden.py` running against the built dataset and stays **9/9 with all
+137 combat weapons curated** (no illustrative placeholders left). Getting
+there produced two more load-bearing findings of the V1 class:
+
+- *Heal-floor strength*: with richer curated data, synergy + meta-prior
+  leakage let a breadth pick out-rank every healer for a healer-less party by
+  0.014 — `penalty_mult` raised 1.5 → 2.0 (PROVISIONAL). The structural fix
+  worth testing after Tier-2 is step-function floors (no partial relief).
+- *Pseudo-tankiness*: personal defensive cooldowns (Parry, Deflecting Spin,
+  Counter…) scored as `tankiness 1` harvested tank-floor relief and put a
+  purge lance above every tank. Resolved by the momentary-defensive ruling
+  (they ground no tankiness); 41 scores removed in one pass.
+
 **V2. Live data spikes** — real albionbb battle `1431808107` (22 players, 2-sided):
 
 | Claim from design doc | Measured | Verdict |
@@ -34,7 +48,7 @@ A ~250-line throwaway implementation of the scoring model (13 hand-scored weapon
 
 ## Tier 2 — Recommendation quality (before/while building MVP, needs humans)
 
-**V3. Expert blind test.** Give 10–15 partial parties to 3+ experienced shotcallers; collect their next-pick independently; compare with engine top-3. Target: expert pick appears in engine top-3 ≥70% of cases. This is the true accuracy metric — run it after curating the top-60 weapon sheets, before UI work.
+**V3. Expert blind test.** Give 10–15 partial parties to 3+ experienced shotcallers; collect their next-pick independently; compare with engine top-3. Target: expert pick appears in engine top-3 ≥70% of cases. This is the true accuracy metric — the curation prerequisite is now MET (all 137 weapons, 2026-08-12) and `tests/tier2_form.md` is regenerated against the full pool (seed 20260812). **V3 is the project's current critical path**; everything else is tuning noise until it runs.
 
 **V4. Meta-comp reproduction.** Feed the engine each published meta comp (albioncompo, guild guides) minus one member; the engine should propose the missing member's role in top-3. Automatable version of V3; build the case list during curation.
 

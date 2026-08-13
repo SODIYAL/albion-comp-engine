@@ -4,7 +4,9 @@ Build the versioned dataset the engine and the SPA both consume
 (design doc §6.3 step 5).
 
     sheets/*.yaml              curated, evidence-linted        (authoritative)
-    sheets/illustrative/*.yaml design-doc §2.3 placeholders    (NOT a release)
+    sheets/illustrative/*.yaml design-doc §2.3 placeholders    (NOT a release;
+                               empty since 2026-08-12 — all weapons curated,
+                               the file is a tombstone record)
     templates/*.yaml           content templates + scoring config
         │
         ▼

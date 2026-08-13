@@ -96,7 +96,7 @@ Battle data tells us *what* people wear and *whether* they won — it cannot tel
 3. **Scores are 0–3**, not booleans: 0 = none, 1 = minor/situational, 2 = solid, 3 = defining strength. Coarse on purpose — finer granularity is false precision and makes curation contentious.
 4. **Evidence rule (added after review caught two fabricated scores).** Every nonzero score must cite the specific ability that provides it — the spell's UniqueName from ao-bin-dumps (or the gear item, see below). A *weapon's* sheet may only contain capabilities delivered by the weapon's own Q/W/E/passives (its `craftingspelllist`). Capabilities provided by helmets, armor, boots, capes, potions or food live on *those items'* sheets — never smuggled onto a weapon. The two error classes this kills, both found in review: attributing a gear capability to a weapon (1H Mace "purge" — no mace Q/W/E removes buffs), and misattributing effect direction (Longbow "knockback" — bow Frost Shot displaces the *user*, not enemies). An uncited score is invalid by definition; the pipeline enforces this mechanically (§6.3).
 
-### 2.2 The capability set (v1: 27 capabilities, 6 groups)
+### 2.2 The capability set (v1: 27 capabilities, 6 groups — now 29 after the two amendments below)
 
 *Added 2026-08-12: `anti_zone`. The Crystal Holy Staff's E (`HOLY_DISPEL`,
 "Sanctify") removes enemy-placed ground areas. That is neither `purge` (which
@@ -144,6 +144,15 @@ Scores shown as `value(provenance)`; omitted = 0.
 **Great Holy** — heal_burst 3(E), heal_sustain 3, cleanse 2(QW), buff_allies 1, mobility 0 — contrast with Hallowfall: same "healer" role, opposite mobility profile, which is exactly why roles alone are insufficient.
 
 *(Illustrative, not final — final numbers come from the curation pass in Phase 1.)*
+
+*Status 2026-08-12: the curation pass is COMPLETE — all 137 combat weapons
+have evidence-linted sheets and every illustrative block above has been
+replaced. Three of these hand-sketched numbers turned out to be fabricated
+against the game data (Hallowfall's cleanse, Spirithunter's heal_reduction,
+Witchwork's energy_drain) — see the tombstone notes in
+`pipeline/sheets/illustrative/prototype_v0.yaml` for the full corrections.
+This is the strongest argument the project has produced for the evidence
+rule: even the designer's own careful sketches drift from the actual kits.*
 
 ### 2.4 Handling ability- and gear-dependent capabilities
 
@@ -271,6 +280,14 @@ Weighted unmet need ranks: `heal_sustain` (10 × fully unmet) > `tankiness` > `p
 - IN: 3–4 content types (Castle Outpost, Hellgate 5v5, Roads 7, open-world 5–10), party sizes 2–10, full capability engine + recommendations + explanations, ~60 most-played weapons (covers >90% of actual usage — verify against albionbb frequency data), curated synergy/meta lists, static client-side app.
 - OUT (later phases): ZvZ-scale templates, equipment/ability customization, live battle-data ingestion, enemy-comp counter-picking, accounts/sharing.
 
+*Amendment 2026-08-12: the "~60 weapons cover >90%" assumption was measured
+and falsified (top-30 covers 62% of the first albionbb sample; 97 distinct
+weapons appeared in 359 observations) — and then mooted: curating tree-by-tree
+turned out to be cheap because line-mates share their whole Q/W pool, so ALL
+137 combat weapons are now curated. The weapon-coverage cut line is gone; the
+archetype unit (weapon + default kit) still stands and still needs gear
+sheets and the default-kit harvest (§2.4).*
+
 **Notably: the MVP needs no backend at all** (§6) — the entire dataset (~120 weapon vectors + templates + synergy tables) is a few hundred KB of static JSON, and scoring is trivial computation. This makes the MVP a static React SPA, free to host, with the statistics pipeline added as Phase 3 without rearchitecting.
 
 ---
@@ -290,6 +307,13 @@ scoring in client    curation UI (internal)      win-rate lift → MetaPrior JSO
 ```
 
 The stats service never serves user traffic — it *compiles* statistics into the same static JSON the SPA consumes. User-facing latency stays zero; API fragility (gameinfo 504s/outages) never touches users.
+
+*Status 2026-08-12: Phase 2 is effectively built — dumps parser, effect
+layer, seeder, evidence lint, versioned dataset builder, patch-history
+staleness, and the generated dashboard all exist and run green. The
+"curation UI" turned out to be unnecessary: YAML sheets in git (reviewable,
+diffable) plus `curate_helper.py` worksheets did the job for all 137 weapons.
+Phase 1's React SPA and Phase 3 remain.*
 
 ### 6.2 Data model (works as SQLite/Postgres in the pipeline, exported to JSON for the client)
 
@@ -322,6 +346,14 @@ weapon_content_stats(weapon_id, content_id, window, usage_rate, win_lift, sample
 3. Curation pass in a simple internal editor (or just YAML in git — reviewable, diffable, community-PR-able).
 4. **Evidence lint (mandatory CI gate).** For every nonzero capability score, verify mechanically: (a) the cited `evidence_spell` exists in that item's `craftingspelllist` in ao-bin-dumps — kills gear-capability-on-weapon errors like "1H Mace purge"; (b) the spell's `[cc]/[heal]/[dmg]/[buff]/[debuff]/[mobility]` localization tags and description keywords are consistent with the claimed capability class (a `purge` claim requires buff-removal language; a `knockback_displace` claim requires an enemy-targeted effect) — kills direction errors like "Longbow knockback"; (c) every archetype's kit references only spells its weapon can equip and items that exist. Lint failures block the data release.
 5. Release as versioned JSON (`data-v2026.08.1.json`); the SPA pins a version.
+
+*Amendment 2026-08-12: step 4(b) as written — keyword/tag consistency checks —
+is superseded. The implemented lint resolves each cited spell's STRUCTURED
+effects with target direction through `effect_map.yaml` and rejects
+capabilities the spell cannot ground at all; the old prose keywords survive
+only as a fallback layer that structured coverage supersedes. Parser errors
+discovered during curation are corrected in `pipeline/effect_overrides.yaml`
+(cited against dumps text), never by fudging sheets. See pipeline/README.md.*
 
 ---
 
