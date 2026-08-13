@@ -116,8 +116,12 @@ py -3 tests/tier2_blindtest.py score tier2_form_filled.md
 ```
 
 Gate: expert pick in engine top-3 on ≥70% of cases. V4 (meta-comp
-reproduction) needs `tests/meta_comps.yaml` — a list of **real published**
-comps from albioncompo or guild guides. Do not invent them.
+reproduction) case list lives in `tests/meta_comps.yaml` — **real** comps
+only, never invented. First entry: Deadlyhooker's large-scale ZvZ comp
+(3 parties × 20, recorded 2026-08-12, weapon cells mapped to catalog keys,
+battlemounts flagged as outside the weapon model, gear columns kept verbatim
+as future gear-sheet input). The V4 runner is blocked on a `large_scale_zvz`
+template — whose weights must not be fitted to that same comp (circular).
 
 ## After Tier-2
 

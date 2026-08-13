@@ -50,7 +50,7 @@ there produced two more load-bearing findings of the V1 class:
 
 **V3. Expert blind test.** Give 10–15 partial parties to 3+ experienced shotcallers; collect their next-pick independently; compare with engine top-3. Target: expert pick appears in engine top-3 ≥70% of cases. This is the true accuracy metric — the curation prerequisite is now MET (all 137 weapons, 2026-08-12) and `tests/tier2_form.md` is regenerated against the full pool (seed 20260812). **V3 is the project's current critical path**; everything else is tuning noise until it runs.
 
-**V4. Meta-comp reproduction.** Feed the engine each published meta comp (albioncompo, guild guides) minus one member; the engine should propose the missing member's role in top-3. Automatable version of V3; build the case list during curation.
+**V4. Meta-comp reproduction.** Feed the engine each published meta comp (albioncompo, guild guides) minus one member; the engine should propose the missing member's role in top-3. Automatable version of V3. Case list: `tests/meta_comps.yaml` — first real entry recorded 2026-08-12 (shotcaller "Deadlyhooker", large-scale ZvZ, 3 parties × 20, relayed by the project owner; all weapon cells mapped to catalog keys, battlemount slots flagged as outside the weapon model). The runner is blocked on a `large_scale_zvz` content template (only `castle_outpost` at size 7 exists) — and that template's weights must NOT be fitted to this same comp, or the test is circular.
 
 **V5. Curation reliability.** Two people independently score 15 weapons; disagreement >1 point on >10% of cells means the capability definitions are too vague — tighten definitions before mass curation.
 
