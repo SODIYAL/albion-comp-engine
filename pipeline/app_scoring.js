@@ -6,7 +6,8 @@
  * If you change one, change both, then run the parity test.
  *
  * Used two ways:
- *   - inlined into app/index.html by build_app.py (browser)
+ *   - inlined into dashboard/index.html by build_dashboard.py (browser —
+ *     dashboard/_app.js is rendering-only and calls this engine)
  *   - require()'d by tests/js_parity_runner.js (node)
  */
 (function (root) {

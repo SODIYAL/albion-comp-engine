@@ -39,11 +39,15 @@ Alternatives: Exalted Staff, Great Holy Staff, Redemption Staff
   (20), Territory Defense (20), Castle Outpost (7). The 20-size templates
   took role-ratio calibration from two real shotcaller comps
   (`tests/meta_comps.yaml`) and are PROVISIONAL until the expert pass.
-- **`app/index.html` is the product page** — pick the content, build the
-  party, see fitness, floor alarms, gaps and ranked next-picks with reasons.
-  Self-contained; open it directly. Its JS scoring is a line-for-line port
-  of the Python engine, held equal by `tests/test_js_parity.py` (60/60
-  random parties, all templates, tolerance 1e-9).
+- **`dashboard/index.html` (Comp Forge) is the product page** — pick the
+  content (party size follows it), build the party in numbered slots, see
+  fitness, the full capability supply-vs-target board, floor alarms,
+  weaknesses in plain language, and the recommended next pick with its
+  reasoning, formula and evidence drawer. Party state lives in the URL hash
+  (copy share link). Self-contained; open it directly. Its in-browser
+  scoring is `pipeline/app_scoring.js`, a line-for-line port of the Python
+  engine held equal by `tests/test_js_parity.py` (60/60 random parties, all
+  templates, 1e-9) plus a build-time parity fixture checked on every load.
 - The scoring model passes 13/13 golden regression tests against the full
   dataset — that validates its *shape*, not its recommendation quality.
 - Every score is a Claude proposal grounded in the game's own spell text and
@@ -97,8 +101,7 @@ py -3 pipeline/build_dataset.py      # sheets + templates -> out/dataset-latest.
 py -3 tests/test_golden.py           # 13 golden regression cases
 py -3 tests/test_js_parity.py        # JS scoring == Python engine (needs node)
 py -3 tests/test_patch_history.py    # patch-diff + staleness unit tests
-py -3 pipeline/build_app.py          # -> app/index.html (the product page)
-py -3 pipeline/build_dashboard.py    # -> dashboard/index.html (self-contained)
+py -3 pipeline/build_dashboard.py    # -> dashboard/index.html (the product page)
 ```
 
 After a game patch, `pipeline/patch_history.py` diffs ao-bin-dumps git history
@@ -126,8 +129,8 @@ pipeline/                      game data -> capability sheets -> dataset
   templates/                   content requirements + scoring weights, as data
   app_scoring.js               JS port of the engine (parity-tested)
 tests/                         golden suite + Tier-2 harness + meta comps
-app/                           the party-planner app (generated, single file)
-dashboard/, review/            generated single-file pages
+dashboard/                     Comp Forge, the product page (generated, single file)
+review/                        effects review page (generated)
 ```
 
 `pipeline/README.md` covers the data pipeline in detail; `tests/VALIDATION.md`

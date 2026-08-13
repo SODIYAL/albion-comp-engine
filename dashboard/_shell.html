@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Comp Forge</title>
 <style>
 :root{
@@ -94,11 +96,18 @@ button{font:inherit; color:inherit; cursor:pointer}
 /* ---------- setup ---------- */
 .field{display:flex; flex-direction:column; gap:6px; margin-bottom:12px}
 .field label{font-size:12px; color:var(--ink-2)}
-select{
+select, .text-input{
   font:inherit; font-family:var(--mono); font-size:13px; padding:7px 9px;
   background:var(--surface); color:var(--ink);
   border:1px solid var(--rule-2); border-radius:3px; width:100%;
 }
+.text-input::placeholder{color:var(--ink-3)}
+.share-btn{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.06em; text-transform:uppercase;
+  width:100%; padding:8px; margin-top:10px;
+  background:var(--surface); border:1px solid var(--rule-2); border-radius:3px; color:var(--ink-2);
+}
+.share-btn:hover{border-color:var(--brass); color:var(--brass)}
 .size-row{display:flex; gap:4px; flex-wrap:wrap}
 .size-btn{
   font-family:var(--mono); font-size:13px; width:32px; height:30px;
@@ -301,7 +310,7 @@ html:not([data-theme="light"]) .size-btn[aria-pressed="true"]{color:#0D1218}
     <span class="sub">Albion composition engine</span>
   </div>
   <div class="spacer"></div>
-  <span class="chip"><span class="dot"></span>engine v0 · 9/9 golden tests</span>
+  <span class="chip"><span class="dot" id="parity-dot"></span><span id="parity-chip">parity — checking</span></span>
   <span class="chip">dataset <span class="mono" id="build-stamp">—</span></span>
 </header>
 
@@ -323,6 +332,7 @@ html:not([data-theme="light"]) .size-btn[aria-pressed="true"]{color:#0D1218}
         <div class="size-row" id="sizes"></div>
       </div>
       <div id="size-notice"></div>
+      <button class="share-btn" id="share">copy share link</button>
     </section>
 
     <section>
@@ -332,6 +342,9 @@ html:not([data-theme="light"]) .size-btn[aria-pressed="true"]{color:#0D1218}
 
     <section>
       <div class="sec-label">Add weapon</div>
+      <div class="field">
+        <input class="text-input" id="pick-filter" placeholder="filter — type a weapon name" aria-label="Filter weapons" autocomplete="off">
+      </div>
       <div class="pick-grid" id="picker"></div>
     </section>
   </aside>

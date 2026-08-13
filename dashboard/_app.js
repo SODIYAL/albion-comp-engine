@@ -1,19 +1,19 @@
 "use strict";
 /* Dashboard client. Reads the injected DATASET — the same
    pipeline/out/dataset-latest.json that engine/engine.py consumes. No
-   capability numbers live in this file. Regenerate with:
+   capability numbers live in this file, and no scoring math either: the
+   engine is pipeline/app_scoring.js (inlined by the build just before this
+   file), the SAME code node runs in tests/test_js_parity.py. Regenerate:
        py -3 pipeline/build_dashboard.py                                     */
 
 const META = DATASET._meta;
 const WEAPONS = DATASET.weapons;
-const SCORING = DATASET.scoring;
-const W = SCORING.weights;
-const GAMMA = W.gamma, ALPHA = W.alpha, BETA = W.beta, DELTA = W.delta;
-const META_PRIOR = SCORING.meta_prior || {};
-const SYNERGY_PAIRS = (SCORING.capability_synergies || []).map(s => [s.a, s.b, s.bonus]);
 
 let CONTENT = Object.keys(DATASET.templates)[0];
-let SIZE = DATASET.templates[CONTENT].base_size || 7;
+const ENG = new CompEngine(DATASET, CONTENT);
+let SIZE = ENG.size;
+
+function syncEngine(){ ENG.setContent(CONTENT, SIZE); }
 
 const tpl = () => DATASET.templates[CONTENT];
 const REQS = () => tpl().requirements;
@@ -21,10 +21,17 @@ const FLOORS = () => tpl().hard_floors || {};
 const baseSize = () => tpl().base_size || 7;
 const validatedSizes = () => tpl().validated_sizes || [baseSize()];
 
-const target = cap => { const r = REQS()[cap];
-  return r.scales ? r.target * SIZE / baseSize() : r.target; };
-const softCap = cap => { const r = REQS()[cap];
-  return r.scales ? r.soft_cap * SIZE / baseSize() : r.soft_cap; };
+const target = cap => ENG.target(cap);
+const softCap = cap => ENG.softCap(cap);
+const supply = p => ENG.supply(p);
+const fitness = p => ENG.fitness(p);
+const maxFitness = () => ENG.maxFitness();
+const uncoveredCaps = p => ENG.uncoveredCaps(p);
+const weaknesses = (p, n = 3) => ENG.weaknesses(p, n);
+/* app_scoring.js term/rec field names -> the short ones this file renders */
+const explain = (p, cand) => ENG.explain(p, cand).map(t => ({d: t.delta, ...t}));
+const recommend = (p, n = 4) => ENG.recommend(p, n).map(r =>
+  ({w: r.weapon, dFit: r.d_fitness, dSyn: r.d_synergy, meta: r.meta_prior, score: r.score}));
 
 const capsOf = w => WEAPONS[w].capabilities || {};
 /* Display names and evidence IDs originate in ao-bin-dumps (an external game-data
@@ -41,66 +48,6 @@ const GROUPS = {
   Damage:    ["burst_st","burst_aoe","sustained_dps","execute"],
   Tempo:     ["mobility","catch","buff_allies"],
 };
-
-/* ---------------------------------------------------------------- engine
-   Mirrors engine/engine.py exactly; parity is asserted at the bottom. */
-
-function supply(party){
-  const s = {};
-  for (const w of party) for (const [c,v] of Object.entries(capsOf(w))) s[c] = (s[c]||0) + v;
-  return s;
-}
-function floorPenalty(cap, have){
-  const f = FLOORS()[cap];
-  if (!f || SIZE < f.min_party_size || have >= f.floor_units) return 0;
-  return f.penalty_mult * REQS()[cap].weight * (f.floor_units - have) / f.floor_units;
-}
-function fitness(party){
-  const s = supply(party); let total = 0;
-  for (const [cap, r] of Object.entries(REQS())){
-    const have = s[cap] || 0, t = target(cap), soft = softCap(cap);
-    total += r.weight * Math.pow(Math.min(1, have/t), GAMMA);
-    if (have > soft) total -= 0.5 * r.weight * (have - soft) / t;
-    total -= floorPenalty(cap, have);
-  }
-  return total;
-}
-const maxFitness = () => Object.values(REQS()).reduce((a,r) => a + r.weight, 0);
-function synergy(party){
-  const s = supply(party);
-  return SYNERGY_PAIRS.reduce((a,[x,y,b]) => a + b * Math.min(s[x]||0, s[y]||0), 0);
-}
-function explain(party, cand){
-  const s = supply(party), terms = [];
-  for (const [cap, r] of Object.entries(REQS())){
-    const gain = capsOf(cand)[cap] || 0;
-    if (!gain) continue;
-    const have = s[cap] || 0, t = target(cap);
-    let d = r.weight * (Math.pow(Math.min(1,(have+gain)/t), GAMMA) - Math.pow(Math.min(1,have/t), GAMMA));
-    d += floorPenalty(cap, have) - floorPenalty(cap, have + gain);
-    if (d > 0.05) terms.push({d:+d.toFixed(2), cap, before:have, after:have+gain, target:t});
-  }
-  return terms.sort((a,b) => b.d - a.d);
-}
-function recommend(party, topN = 4){
-  const bf = fitness(party), bs = synergy(party);
-  return Object.keys(WEAPONS).map(w => {
-    const dFit = fitness(party.concat([w])) - bf, dSyn = synergy(party.concat([w])) - bs;
-    const meta = META_PRIOR[w] || 0;
-    return {w, dFit, dSyn, meta, score: ALPHA*dFit + BETA*dSyn + DELTA*meta};
-  }).sort((a,b) => b.score - a.score).slice(0, topN);
-}
-function weaknesses(party, topN = 3){
-  const s = supply(party);
-  return Object.entries(REQS()).map(([cap, r]) => ({
-    cap, gap: r.weight * (1 - Math.pow(Math.min(1,(s[cap]||0)/target(cap)), GAMMA)),
-  })).sort((a,b) => b.gap - a.gap).slice(0, topN);
-}
-function uncoveredCaps(party){
-  const s = supply(party);
-  return Object.entries(REQS()).filter(([cap, r]) =>
-    r.weight >= 5 && (s[cap]||0)/target(cap) < 0.5).map(([cap]) => cap);
-}
 
 /* ------------------------------------------------------------------ copy */
 
@@ -136,15 +83,45 @@ function whySentence(party, cand){
   return `${strong.length ? `Your party already covers ${strong.join(" and ")}` : "Your party is thin across the board"}, but has <em>${lead ? prose(lead.cap) : "gaps"}</em> at ${lead ? lead.before : 0} of ${lead ? target(lead.cap).toFixed(1) : "0"} units${floorClause}. ${nameOf(cand)} closes that${rest.length ? `, and adds ${rest.join(" and ")}` : ""}.`;
 }
 
+/* ------------------------------------------------------- shareable state */
+
+function loadHash(){
+  const h = location.hash.replace(/^#/, "");
+  if (!h) return false;
+  const p = {};
+  h.split("&").forEach(kv => { const i = kv.indexOf("=");
+    if (i > 0) p[kv.slice(0, i)] = decodeURIComponent(kv.slice(i + 1)); });
+  if (p.c && DATASET.templates[p.c]) CONTENT = p.c;
+  SIZE = (p.n && +p.n >= 2 && +p.n <= 60) ? +p.n : baseSize();
+  if (p.p) party = p.p.split(",").filter(w => WEAPONS[w]);
+  syncEngine();
+  return true;
+}
+function saveHash(){
+  history.replaceState(null, "",
+    `#c=${CONTENT}&n=${SIZE}${party.length ? "&p=" + party.join(",") : ""}`);
+}
+
 /* ---------------------------------------------------------------- render */
 
 let party = [];
+let pickFilter = "";
 const $ = id => document.getElementById(id);
+
+/* Content decides the sensible party sizes; validated + base always present. */
+function sizeOptions(){
+  const preset = baseSize() <= 10 ? [2,3,4,5,6,7,8,9,10] : [10,12,15,20,25,30];
+  return [...new Set(preset.concat(validatedSizes(), [baseSize()]))].sort((a,b) => a-b);
+}
+
+const PENDING = [["hellgate_5v5","Hellgate 5v5"], ["roads_7","Roads of Avalon"]];
 
 function renderSetup(){
   $("content").innerHTML = Object.entries(DATASET.templates)
-    .map(([k,t]) => `<option value="${k}" ${k===CONTENT?"selected":""}>${t.name}</option>`).join("");
-  $("sizes").innerHTML = [2,3,4,5,6,7,8,9,10].map(n =>
+    .map(([k,t]) => `<option value="${k}" ${k===CONTENT?"selected":""}>${t.name} — ${t.base_size} players</option>`)
+    .join("") + PENDING.filter(([k]) => !DATASET.templates[k])
+    .map(([k,n]) => `<option value="${k}" disabled>${n} — template pending</option>`).join("");
+  $("sizes").innerHTML = sizeOptions().map(n =>
     `<button class="size-btn" data-size="${n}" aria-pressed="${n===SIZE}">${n}</button>`).join("");
   $("size-notice").innerHTML = validatedSizes().includes(SIZE) ? "" :
     `<div class="notice"><b>Extrapolated.</b> This template is fitted and validated at size ${validatedSizes().join(", ")} only. Per-player targets are scaled linearly to ${SIZE}; flat threshold targets are unchanged. Tier-2 validation must confirm each size before this is trustworthy.</div>`;
@@ -159,12 +136,15 @@ function renderRoster(){
   $("roster").innerHTML = rows.join("");
 }
 function renderPicker(){
-  $("picker").innerHTML = Object.keys(WEAPONS)
+  const q = pickFilter.trim().toLowerCase();
+  const keys = Object.keys(WEAPONS)
     .sort((a,b) => nameOf(a).localeCompare(nameOf(b)))
-    .map(w => `<button class="pick" data-add="${w}" ${party.length >= SIZE ? "disabled" : ""}>
+    .filter(w => !q || (WEAPONS[w].display_name || w).toLowerCase().includes(q));
+  $("picker").innerHTML = keys.map(w => `<button class="pick" data-add="${w}" ${party.length >= SIZE ? "disabled" : ""}>
       <span class="nm">${nameOf(w)}</span>
       <span class="prov ${WEAPONS[w].status === "curated" ? "curated" : "draft"}">${WEAPONS[w].status === "curated" ? "curated" : "illustrative"}</span>
-    </button>`).join("");
+    </button>`).join("")
+    || `<p class="ev-empty">Nothing matches “${esc(pickFilter)}”.</p>`;
 }
 function renderFitness(){
   const f = fitness(party), max = maxFitness();
@@ -225,8 +205,8 @@ function renderRec(){
           <span class="d">+${t.d.toFixed(2)}</span><span class="c">${t.cap}</span>
           <span class="mv">${t.before.toFixed(0)} → ${t.after.toFixed(0)} of ${t.target.toFixed(1)}</span></div>`).join("")}</div>
         <div class="formula">
-          <span class="k">score</span> = ${ALPHA}·Δfitness + ${BETA}·Δsynergy + ${DELTA}·metaPrior<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= ${ALPHA}·<b>${top.dFit.toFixed(2)}</b> + ${BETA}·<b>${top.dSyn.toFixed(2)}</b> + ${DELTA}·<b>${top.meta.toFixed(2)}</b> = <b>${top.score.toFixed(2)}</b><br>
+          <span class="k">score</span> = ${ENG.alpha}·Δfitness + ${ENG.beta}·Δsynergy + ${ENG.delta}·metaPrior<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= ${ENG.alpha}·<b>${top.dFit.toFixed(2)}</b> + ${ENG.beta}·<b>${top.dSyn.toFixed(2)}</b> + ${ENG.delta}·<b>${top.meta.toFixed(2)}</b> = <b>${top.score.toFixed(2)}</b><br>
           <span class="k">metaPrior</span> is a hand-set guard value — real win-lift arrives in Phase 3 from battle data.
         </div>
         <button class="add" data-add="${top.w}">Add ${nameOf(top.w)} to party</button>
@@ -262,6 +242,7 @@ function renderEvidence(cap){
   $("drawer").dataset.open = "true";
 }
 function render(){
+  syncEngine(); saveHash();
   renderSetup(); renderRoster(); renderPicker(); renderFitness();
   renderGroups(); renderWeaknesses(); renderWarning(); renderRec(); renderFootnote();
 }
@@ -275,33 +256,54 @@ document.addEventListener("click", e => {
   if (sz){ SIZE = +sz.dataset.size; if (party.length > SIZE) party.length = SIZE; render(); return; }
   const cap = e.target.closest("[data-cap]");
   if (cap){ renderEvidence(cap.dataset.cap); return; }
+  if (e.target.closest("#share")){
+    saveHash();
+    if (navigator.clipboard && navigator.clipboard.writeText)
+      navigator.clipboard.writeText(location.href).then(() => {
+        $("share").textContent = "copied";
+        setTimeout(() => { $("share").textContent = "copy share link"; }, 1400);
+      });
+    return;
+  }
   if (e.target.closest("#drawer-close")){ $("drawer").dataset.open = "false"; return; }
   if (!e.target.closest("#drawer")) $("drawer").dataset.open = "false";
 });
 document.addEventListener("change", e => {
   if (e.target.id === "content"){ CONTENT = e.target.value; SIZE = baseSize(); party = []; render(); }
 });
+document.addEventListener("input", e => {
+  if (e.target.id === "pick-filter"){ pickFilter = e.target.value; renderPicker(); }
+});
 document.addEventListener("keydown", e => { if (e.key === "Escape") $("drawer").dataset.open = "false"; });
+/* A pasted share-link hash applies without a reload. saveHash() uses
+   replaceState, which never fires hashchange, so this cannot loop. */
+window.addEventListener("hashchange", () => { if (loadHash()) render(); });
 
 $("build-stamp").textContent = `v${META.version} · ${META.weapons_curated}/${META.weapons_total} curated`;
 
-/* Seed with the design doc's worked example (§4.3), if those sheets exist. */
+/* Boot: a shared link restores content/size/party; otherwise seed with the
+   design doc's worked example (§4.3), if those sheets exist. */
 const SEED = ["2H_LONGBOW","MAIN_ARCANESTAFF_UNDEAD","2H_ICECRYSTAL_UNDEAD"].filter(w => WEAPONS[w]);
-party = SEED;
+if (!loadHash()) party = SEED;
+syncEngine();
 render();
 
 /* Parity guard. PARITY_EXPECTED is injected at build time by running
    engine/engine.py over the same seed party, so this compares the client
    against the Python engine's ACTUAL output rather than a hardcoded name that
-   goes stale the moment a sheet is curated. */
+   goes stale the moment a sheet is curated. Reported in the masthead chip. */
 (function parity(){
   if (typeof PARITY_EXPECTED === "undefined" || !SEED.length) return;
+  const e2 = new CompEngine(DATASET, "castle_outpost", 7);
   const got = {
-    fitness: +fitness(SEED).toFixed(2),
-    recs: recommend(SEED, 4).map(r => r.w),
-    weaknesses: weaknesses(SEED).map(x => x.cap),
+    fitness: +e2.fitness(SEED).toFixed(2),
+    recs: e2.recommend(SEED, 4).map(r => r.weapon),
+    weaknesses: e2.weaknesses(SEED).map(x => x.cap),
   };
   const ok = JSON.stringify(got) === JSON.stringify(PARITY_EXPECTED);
   (ok ? console.info : console.error)("engine parity vs engine.py:",
     ok ? "OK" : "MISMATCH", ok ? got : {got, expected: PARITY_EXPECTED});
+  const chip = $("parity-chip"), dot = $("parity-dot");
+  if (chip) chip.textContent = ok ? "parity vs engine.py — OK" : "PARITY MISMATCH — do not trust";
+  if (dot && !ok) dot.style.background = "var(--gap)";
 })();

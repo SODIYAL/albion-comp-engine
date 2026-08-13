@@ -32,6 +32,10 @@ def main():
         data = json.load(f)
     with open(os.path.join(DASH, "_shell.html"), encoding="utf-8") as f:
         shell = f.read()
+    # The scoring engine is app_scoring.js — the same file node runs in
+    # tests/test_js_parity.py. _app.js contains rendering only.
+    with open(os.path.join(HERE, "app_scoring.js"), encoding="utf-8") as f:
+        scoring = f.read()
     with open(os.path.join(DASH, "_app.js"), encoding="utf-8") as f:
         app = f.read()
 
@@ -52,7 +56,8 @@ def main():
     # `</script>` inside a JSON string would close the tag early; escape it.
     blob = json.dumps(data, separators=(",", ":")).replace("</", "<\\/")
 
-    out = (f"{shell}<script>\nconst DATASET = {blob};\n"
+    out = (f"{shell}<script>\n{scoring}\n</script>\n"
+           f"<script>\nconst DATASET = {blob};\n"
            f"const PARITY_EXPECTED = {json.dumps(expected)};\n{app}</script>\n")
     path = os.path.join(DASH, "index.html")
     with open(path, "w", encoding="utf-8") as f:
