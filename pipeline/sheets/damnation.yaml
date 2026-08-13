@@ -1,0 +1,22 @@
+# Damnation Staff — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 4 sightings, dominant role: support.
+#
+# Identity: the curse bomb. The E (Cataclysm) curses everything in a large
+# radius — heavy damage over time plus -18% damage resistances while
+# affected. Scored burst_aoe 3 with the caveat that it is DoT-DELIVERED: the
+# payload lands over the curse duration, not on impact. Shares the curse Q/W
+# pool with the Rotcaller sheet; QW-conditional scores mirror it.
+# No anti-heal here — the Healing-Received negate is the Rotcaller E's
+# mechanic, absent from this kit.
+
+- weapon: 2H_CURSEDSTAFF_MORGANA     # Damnation Staff — the curse bomb
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: support
+  capabilities:
+    - {cap: burst_aoe,     score: 3, evidence: CURSEULTIMATE}    # E: large-radius curse, DoT-delivered payload
+    - {cap: resist_shred,  score: 2, evidence: CURSEULTIMATE}    # E: -18% while cursed; W: Armor Piercer -17% (QW)
+    - {cap: sustained_dps, score: 2, evidence: CURSEDOT}         # stacking Vile Curse engine + Bane passive
+    - {cap: root,          score: 1, evidence: CURSENOVA}        # W: Desecrate 2.6s AoE root (QW)
+    - {cap: slow,          score: 1, evidence: CURSED_SPLAT}     # Q: Cursed Tar (QW)
+    - {cap: zone_control,  score: 1, evidence: CURSED_SPLAT}     # tar puddle — modest (QW)
+    - {cap: buff_allies,   score: 1, evidence: CURSEDHANDS_STACKUP}  # W: Grudge ally AA enchant (QW, via override)

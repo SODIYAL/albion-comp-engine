@@ -1,0 +1,33 @@
+# Bear Paws — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 10 sightings, dominant role: melee.
+#
+# Identity: diving AoE bruiser. The E (Razor Cut) is a CC-immune leap whose
+# cooldown refunds on player hit, with 15% of damage dealt returned as Health —
+# mobility, engage, disengage and self_sustain all hang off it. The Q3 combo
+# finisher (Raging Leap) is a second leap that roots on landing.
+#
+# DRAFT CORRECTIONS (directionality rule):
+#   - heal_sustain 2 REMOVED: Razor Cut's lifesteal heals the WIELDER only.
+#   - buff_allies 1 + peel 1 via PASSIVE_ARMORCHANCE_AXE REMOVED: the passive
+#     reads "YOUR damage resistances increase" — self-directed; the effect map
+#     mis-tagged it as ally-directed. buff_allies instead grounds on Battle
+#     Rush's ally-side +20% Healing Received.
+#   - tankiness REMOVED entirely (was 2 in the draft): CC-immunity windows
+#     are personal defensives, not frontline durability — the
+#     momentary-defensive ruling (2026-08-12).
+
+- weapon: 2H_DUALAXE_KEEPER          # Bear Paws — diving AoE bruiser
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: melee
+  capabilities:
+    - {cap: mobility,       score: 3, evidence: DUALAXE_CRAWLER}  # E: CC-immune leap, CD refund on player hit; Q3 Raging Leap
+    - {cap: engage,         score: 2, evidence: DUALAXE_CRAWLER}  # commits into the clump CC-immune
+    - {cap: disengage,      score: 2, evidence: DUALAXE_CRAWLER}  # same leap outwards
+    - {cap: catch,          score: 2, evidence: DUALAXE_CRAWLER}  # repeatable gap-close
+    - {cap: burst_aoe,      score: 2, evidence: DUALAXE_CRAWLER}  # 170 cone on impact; W: Internal Bleeding / Raging Blades
+    - {cap: sustained_dps,  score: 2, evidence: RENDINGSTRIKE}    # Q: stacking Rending bleeds
+    - {cap: self_sustain,   score: 2, evidence: DUALAXE_CRAWLER}  # E: 15% of damage dealt as Health, AoE-fed
+    - {cap: root,           score: 1, evidence: RENDINGCOMBO}     # Q3: Raging Leap roots on landing
+    - {cap: buff_allies,    score: 1, evidence: AXE_CHARGE}       # W: Battle Rush +20% Healing Received to allies (QW)
+    - {cap: heal_reduction, score: 1, evidence: AXE_CHARGE}       # W: same cast, -20% Healing Received on enemies (QW)
+    - {cap: resist_shred,   score: 1, evidence: AXESMASH}         # W: Deadly Chop -16% single target, 8s (QW)

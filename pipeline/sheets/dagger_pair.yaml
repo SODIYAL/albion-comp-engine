@@ -1,0 +1,34 @@
+# Dagger Pair — curated 2026-08-12 from ao-bin-dumps spell text
+# (effect_lookup dump). Replaces the illustrative §2.3 block (burst_st 3,
+# execute 2, sustained_dps 2, mobility 1).
+#
+# CORRECTIONS vs the illustrative block:
+#   - execute 2 -> 1: Slit Throat scales with CHARGES (Assassin Spirit /
+#     Sunder Armor), not with the target's missing health — mechanically it
+#     is charge-burst, not an execute. Held at 1 for the kill-confirm role;
+#     the clean health-threshold execute in the dataset is the Bloodletter E.
+#   - mobility 1 -> 2: Deadly Swipe leap, Dash, and Chain Slash are the same
+#     dagger pool that scores 2 on Deathgivers.
+#   - heal_reduction ADDED: Slit Throat also reduces the target's Healing
+#     Received (verified text; negate override) — stacking with Forbidden
+#     Stab as a W choice.
+#
+# Identity: the charge-burst assassin — Sunder Armor into Slit Throat is the
+# canonical single-target deletion combo.
+
+- weapon: 2H_DAGGERPAIR              # Dagger Pair — charge-burst assassin
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: melee
+  capabilities:
+    - {cap: burst_st,       score: 3, evidence: EXECUTEDAGGER}      # E: charge-scaled devastating blow + bleed
+    - {cap: sustained_dps,  score: 2, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # dagger AA passives + spirit stacks
+    - {cap: mobility,       score: 2, evidence: QDASH}              # Q: Deadly Swipe; W: Dash / Chain Slash (QW)
+    - {cap: catch,          score: 2, evidence: SKILLSHOT_TELEPORT} # W: Shadow Edge; dashes (QW)
+    - {cap: heal_reduction, score: 1, evidence: EXECUTEDAGGER}      # E: reduces Healing Received; W: Forbidden Stab
+    - {cap: execute,        score: 1, evidence: EXECUTEDAGGER}      # kill-confirm role; charge-scaled, not health-scaled
+    - {cap: resist_shred,   score: 1, evidence: SUNDERARMOR2}       # Q: stacking -4% x3 — feeds the E (QW)
+    - {cap: engage,         score: 1, evidence: QDASH}              # leap in (QW)
+    - {cap: disengage,      score: 1, evidence: GROUNDDASH}         # W: Dash; Chain Slash iframes (QW)
+    - {cap: stun,           score: 1, evidence: SKILLSHOT_TELEPORT} # W: 1s skillshot (QW)
+    - {cap: peel,           score: 1, evidence: SKILLSHOT_TELEPORT} # (QW)
+    - {cap: self_sustain,   score: 1, evidence: PASSIVE_HEALTHCHANCE_DAGGER}  # PASSIVE: Life Leech

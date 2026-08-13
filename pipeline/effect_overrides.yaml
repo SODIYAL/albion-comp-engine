@@ -1,0 +1,140 @@
+# Runtime corrections to the BUILT artifacts (out/effect_catalogue.json,
+# out/spell_index.json), applied by effect_lookup.py. DATA, not code.
+#
+# WHY THIS FILE EXISTS: the catalogue and spell index are built from an
+# ao-bin-dumps clone that is not kept in the repo, so parse bugs found between
+# rebuilds are corrected here, at lookup time, where the seeder and the
+# evidence lint both see them. Every entry cites the dumps description text it
+# was verified against. Delete an entry once the parser bug it works around is
+# fixed and the artifacts are rebuilt after the next game patch.
+#
+# Found during batch-2 curation review (2026-08-12).
+
+# ---------------------------------------------------------------------------
+# Structured-effect direction rewrites: spell -> effect -> the CORRECT dirs.
+# The parser tagged self-armor procs as ally+enemy+self, which made
+# "YOUR damage resistances increase" passives lint-valid evidence for
+# buff_allies/peel — a false-negative hole in the CI gate (bear_paws draft
+# seeded exactly that error).
+dir_overrides:
+  PASSIVE_ARMORCHANCE_AXE:            # "Every 5 Auto-Attacks, your damage resistances increase by 0.29"
+    magicresistance+: [self]
+    physicalarmor+: [self]
+  PASSIVE_ARMORCHANCE_SWORD:          # "Every 5 Auto-Attacks, increase your damage resistances by 0.23"
+    magicresistance+: [self]
+    physicalarmor+: [self]
+  PASSIVE_ARMOR_CASTER_ARCANESTAFF:   # "After every 5 spells cast increase your damage resistances"
+    magicresistance+: [self]
+    physicalarmor+: [self]
+  PASSIVE_ARMOR_CASTER_NATURESTAFF:   # same text, nature line
+    magicresistance+: [self]
+    physicalarmor+: [self]
+  DEFENSIVESLAM:                      # "Attack the targeted enemy... Increases damage resistances" — the
+    magicresistance+: [self]          # buff lands on the CASTER; parser said ally
+    physicalarmor+: [self]
+  PASSIVE_SHAPESHIFT_ATTACK_BUFF:     # "you increase your Max and Current Health" — self; parser said ally+self
+    hitpointsmaxbonus+: [self]
+
+# ---------------------------------------------------------------------------
+# Structured effects that are ARTIFACTS, not abilities: drop them entirely.
+# Iron Will "Grants you immunity to purges" — the game data references the
+# purge-type effects it is immune TO, and the parser read them as purges the
+# spell performs. Iron Will removes nothing from anyone.
+suppress_effects:
+  DEFENSERUN: ["remove:buff", "remove:buff_damageshield", "remove:heal",
+               "remove:invisibility", "remove:movementbuff"]
+  # Ghost Strike's cooldown-reset condition REFERENCES Sunder Armor / Assassin
+  # Spirit charges; the parser walked into those spells' effects and credited
+  # the E with the Q spells' shred and damage buffs. The E itself only deals
+  # damage, stealths, and cuts energy costs (full text verified 2026-08-12).
+  GHOSTSTRIKE: ["magicattackdamagebonus+", "magicspelldamagebonus+",
+                "physicalattackdamagebonus+", "physicalspelldamagebonus+",
+                "magicresistance-", "physicalarmor-"]
+  # Cripple's text: "Purges all Move Speed buffs" — ONLY movement buffs. The
+  # parser expanded the purge reference into the full removal family.
+  # remove:movementbuff is kept (real).
+  LEGBREAKER: ["remove:buff", "remove:buff_damageshield", "remove:heal",
+               "remove:invisibility"]
+
+# ---------------------------------------------------------------------------
+# Prose flags that misfired on drawback or unrelated wording: drop the flag.
+suppress_flags:
+  SHAPESHIFT_IMP: [stun]              # "While healing YOU are stunned" — a self-stun drawback, not enemy CC
+  SHAPE_W_POLYMORPH: [heal]           # "decrease their max and current Health" tripped the heal regex
+  DEFENSERUN: [purge]                 # "immunity to PURGES" — resists purges, performs none
+  CURSE_SKELETON_BARF_FDHR: [shield]  # nothing shield-like in the text; flag noise
+  SUNDERSHOT: [heal]                  # "Health the targeted enemy has LEFT" — a shred scaler, no healing
+  CHARGINGBLADE: [stun, root, slow]   # "immune to Stuns, Roots and Slows" — immunity wording, not enemy CC
+  CROSSBOW_CONE_ULTIMATE: [heal]      # "0.03 of their Current Health as true damage" — no healing anywhere
+  LEGBREAKER: [purge]                 # movement-buff strip maps to catch/peel by design (remove:movementbuff), not purge
+  LETHAL_CLEAVER: [heal]              # "Decreases Max and current Health" — a max-HP cut, no healing
+  BLOOD_BLADE: [heal]                 # Blood Ritual — "take X of your Max Health as true damage": self-COST, no heal
+
+# ---------------------------------------------------------------------------
+# Real mechanics the structured vocabulary cannot express (damage-absorb
+# shields and ally-repositioning are not effect nodes — same class as raw
+# damage/heals). Each entry adds a candidate the curator may then score.
+add:
+  SHAPE_Q_DAMAGE_AND_SHIELD:          # "Applies a shield to yourself and up to 5 allies that absorbs 150"
+    buff_allies: "ally damage-absorb shield; absorb shields are outside the structured vocab"
+  SHAPE_W_TETHERBEAM:                 # "If the ally is a guild/alliance/party member, pull them to your position"
+    peel: "pulling an endangered ally out of danger IS peel; ally-repositioning is outside the structured vocab"
+  SHAPE_W_AREA_PULL:                  # "pulling up to 5 enemies towards you, rooting them for 1.35"
+    clump_create: "a 5-target enemy pull stacks enemies for AoE; the parser only captured the root"
+  CURSEDHANDS_STACKUP:                # "Enchant the targeted ally's Auto-Attacks for the next 10"
+    buff_allies: "ally auto-attack damage enchant; direct damage adds are outside the structured vocab"
+  HAMMERTACKLE:                       # "knocking back all enemies you pass through" — along the dash line
+    clump_create: "dash-through knockback shoves every enemy on the path into a pile; the canonical clump engine (design doc heavy-hammer example)"
+  SHAPESHIFT_ENT:                     # "Growth: Increases the Max and Current Health of up to {0} allies in a 11 radius by 0.08"
+    buff_allies: "group Max-HP grant on transform; HP grants are outside the structured vocab"
+  SHOVEL:                             # Fling — "pulling them 10 behind you"
+    catch: "single-target pull INTO your team is the pick tool"
+    knockback_displace: "enemy-directed forced repositioning; parser captured no displacement"
+  HOLYSHIELD:                         # Divine Protection — "shield absorbing up to 456.3 damage" on an ally
+    buff_allies: "ally damage-absorb shield; absorb shields are outside the structured vocab"
+  CRYSTALWAVE:                        # Hyperstatic — "Allies in the area gain a Shield, absorbing up to 350"
+    buff_allies: "group absorb shield; outside the structured vocab"
+  INVULNERABILITY:                    # Protective Beam — refreshing 240 absorb bubble on an ally
+    buff_allies: "channeled ally absorb shield; outside the structured vocab"
+  SOUL_LINK:                          # "Redirects 0.5 of the damage taken by one target to the other"
+    peel: "halving the focus damage on a dived ally IS peel; damage redirection is outside the vocab"
+  SHAPESHIFT_PANTHER:                 # "On the Prowl — you will turn invisible to players"
+    engage: "stealth opener; the conditional invisibility was not parsed as an effect node"
+    disengage: "stealth escape; same gap"
+  SHAPESHIFT_WEREWOLF:                # wolf form's lunge/chase abilities are the form payload
+    catch: "form abilities (Tear Open / Rip Through lunges) are not separately equippable spells"
+    mobility: "same — the wolf's movement kit lives inside the form"
+
+# ---------------------------------------------------------------------------
+# What a spell's prose `heal` flag actually means. The heal regex fires on any
+# health-restoring OR healing-related sentence, so by default the flag offers
+# heal_burst/heal_sustain/self_sustain. Two misfire classes need reclassifying:
+#
+#   self_only — lifesteal ("steals X of the Health the enemy has lost",
+#               "Restore X of the damage you deal as Health"): heals the
+#               WIELDER; may never ground ally-healing (directionality rule).
+#   negate    — anti-heal ("Negates the target's Healing Received"): the exact
+#               OPPOSITE of a heal; grounds heal_reduction and nothing else.
+heal_flag_meaning:
+  PASSIVE_HEALTHCHANCE_AXE: self_only          # "steals 0.15 of the Health the enemy has lost"
+  PASSIVE_HEALTHCHANCE_DAGGER: self_only       # same Life Leech text
+  PASSIVE_HEALTHCHANCE_HAMMER: self_only       # same
+  PASSIVE_HEALTHCHANCE_MACE: self_only         # same
+  PASSIVE_HEALTHCHANCE_QUARTERSTAFF: self_only # same
+  PASSIVE_HEALTHCHANCE_SPEAR: self_only        # same
+  BLOODTHIRSTYBLADE: self_only                 # dualsword E — heals per own damage dealt
+  DUALAXE_CRAWLER: self_only                   # Razor Cut — "Restore 0.15 of the damage you deal as Health"
+  RAPIERSTAB: self_only                        # Lunging Stabs — restores Health to the caster per enemy hit
+  SHAPESHIFT_WEREWOLF: self_only               # werewolf self-sustain kit
+  DEEPCUTS: negate                             # Forbidden Stab — "Negates the target's Healing Received for 1.5"
+  CURSE_SKELETON_BARF_FDHR: negate             # Plaguebringer — AoE Healing Received negation
+  QS_SLOWROPE: negate                          # Mystic Rocks — reduces Healing Received in the area
+  FIREPHOENIX: negate                          # Flaming Phoenix — "Also reduces Healing Received by 0.4"
+  SHAPESHIFT_IMP: self_only                    # Return from Hell — "heal for {2} of YOUR Max Health"
+  PASSIVE_SHAPESHIFT_ATTACK_BUFF: self_only    # Altered Beast — "you increase your Max and Current Health"
+  RENDINGSTRIKE: negate                        # axe bleeds at 3 stacks: "Healing Received is reduced by 0.12"
+  RENDINGSPIN: negate                          # same Rending Bleed mechanic
+  RENDINGCOMBO: negate                         # same Rending Bleed mechanic
+  AXETHROW: self_only                          # Blood Bandit — "Heals YOU based on the number of Rending Bleed Charges"
+  EXECUTEDAGGER: negate                        # Slit Throat — "Reduces Heal[ing Received]" on the target
+  SHAPESHIFT_ROCK_ELEMENTAL: self_only         # Runestone Golem — "increases YOUR max and current Health"

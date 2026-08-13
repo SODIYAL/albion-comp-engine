@@ -1,0 +1,31 @@
+# Realmbreaker — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 4 sightings, dominant role: melee.
+#
+# Identity: max-HP-cut slam axe. The E (Aftershock) leaps, slams for 212 AoE,
+# throws the cone in front into the air, and cuts Max AND current Health by
+# 15% for 5s — a focus-fire amplifier scored as execute (hitpointsmaxbonus-
+# per the map). Shares the axe Q/W pool with Bear Paws; QW-conditional scores
+# mirror that sheet.
+#
+# DRAFT CORRECTION: the E's heal flag ("Decreases Max and current Health")
+# is regex noise, suppressed. heal_reduction re-grounds on the Rending bleed
+# cap (-12% Healing Received at 3 stacks), reclassified negate in overrides.
+
+- weapon: 2H_AXE_AVALON              # Realmbreaker — max-HP-cut slam axe
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: melee
+  capabilities:
+    - {cap: burst_aoe,      score: 2, evidence: LETHAL_CLEAVER}   # E: 212 AoE slam + cone follow-up
+    - {cap: knockback_displace, score: 2, evidence: LETHAL_CLEAVER}  # E: cone air-throw, enemy-directed
+    - {cap: engage,         score: 2, evidence: LETHAL_CLEAVER}   # leap in, slam the clump
+    - {cap: mobility,       score: 2, evidence: LETHAL_CLEAVER}   # E leap; Q3: Raging Leap
+    - {cap: sustained_dps,  score: 2, evidence: RENDINGSTRIKE}    # Q: stacking Rending bleeds
+    - {cap: execute,        score: 1, evidence: LETHAL_CLEAVER}   # -15% Max Health for 5s amplifies the focus window
+    - {cap: peel,           score: 1, evidence: LETHAL_CLEAVER}   # air-throw divers off the backline
+    - {cap: catch,          score: 1, evidence: LETHAL_CLEAVER}   # leap range is modest
+    - {cap: disengage,      score: 1, evidence: LETHAL_CLEAVER}   # leap out — no CD refund unlike Bear Paws
+    - {cap: heal_reduction, score: 1, evidence: RENDINGSTRIKE}    # Q: bleed cap -12% Healing Received (QW)
+    - {cap: resist_shred,   score: 1, evidence: AXESMASH}         # W: -16% single target (QW)
+    - {cap: root,           score: 1, evidence: RENDINGCOMBO}     # Q3: Raging Leap root (QW)
+    - {cap: buff_allies,    score: 1, evidence: AXE_CHARGE}       # W: +20% Healing Received to allies (QW)
+    - {cap: self_sustain,   score: 1, evidence: PASSIVE_HEALTHCHANCE_AXE}  # PASSIVE: Life Leech

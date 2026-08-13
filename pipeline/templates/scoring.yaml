@@ -31,7 +31,62 @@ meta_prior:
 # Role sets used by the golden regression suite (tests/test_golden.py).
 # These are test fixtures, not engine inputs — the engine has no role concept.
 role_sets:
-  healers:   [MAIN_HOLYSTAFF_AVALON, 2H_HOLYSTAFF, 2H_NATURESTAFF_HELL]
-  frontline: [2H_MACE, 2H_HAMMER, MAIN_MACE, 2H_RAM_KEEPER]
+  # 2H_HOLYSTAFF_UNDEAD (Redemption) was curated batch-1 but never listed —
+  # caught when it legitimately topped T5's recommendation (2026-08-12).
+  # Tree pass (2026-08-12) added the full holy + nature rosters.
+  healers:   [MAIN_HOLYSTAFF_AVALON, 2H_HOLYSTAFF, 2H_NATURESTAFF_HELL,
+              MAIN_HOLYSTAFF_MORGANA, MAIN_HOLYSTAFF, 2H_HOLYSTAFF_UNDEAD,
+              2H_DIVINESTAFF, 2H_HOLYSTAFF_CRYSTAL, 2H_HOLYSTAFF_HELL,
+              2H_NATURESTAFF, 2H_NATURESTAFF_KEEPER, 2H_WILDSTAFF,
+              MAIN_NATURESTAFF, MAIN_NATURESTAFF_AVALON,
+              MAIN_NATURESTAFF_CRYSTAL, MAIN_NATURESTAFF_KEEPER]
+  # 2H_POLEHAMMER added batch-2, 2H_HAMMER_AVALON batch-5, 2H_QUARTERSTAFF
+  # batch-7 (role_hint: tank — the dedicated peel bruiser)
+  frontline: [2H_MACE, 2H_HAMMER, MAIN_MACE, 2H_RAM_KEEPER, 2H_POLEHAMMER,
+              2H_HAMMER_AVALON, 2H_QUARTERSTAFF, 2H_DUALHAMMER_HELL,
+              2H_HAMMER_CRYSTAL, 2H_HAMMER_UNDEAD, MAIN_HAMMER,
+              2H_FLAIL, 2H_MACE_MORGANA, MAIN_MACE_CRYSTAL, MAIN_MACE_HELL,
+              MAIN_ROCKMACE_KEEPER, 2H_DUALMACE_AVALON,
+              2H_IRONCLADEDSTAFF, 2H_ROCKSTAFF_KEEPER, 2H_SHAPESHIFTER_KEEPER]
+  # 2H_DUALAXE_KEEPER + 2H_BOW_AVALON added with batch-2 curation: DPS picks,
+  # not first-slot comp anchors (Bear Paws' bruiser sustain notwithstanding)
+  # batch-3 + batch-4 additions (2026-08-12). MAIN_CURSEDSTAFF_CRYSTAL
+  # (Rotcaller, role_hint: support) is deliberately in NO set: it is neither
+  # healer, frontline, nor pure DPS — the first support-class weapon curated.
   pure_dps:  [2H_LONGBOW, MAIN_ARCANESTAFF_UNDEAD, 2H_ICECRYSTAL_UNDEAD,
-              2H_DAGGERPAIR, MAIN_RAPIER_MORGANA, 2H_HARPOON_HELL]
+              2H_DAGGERPAIR, MAIN_RAPIER_MORGANA, 2H_HARPOON_HELL,
+              2H_DUALAXE_KEEPER, 2H_BOW_AVALON,
+              MAIN_FROSTSTAFF, 2H_DUALSWORD, 2H_FIRE_RINGPAIR_AVALON,
+              2H_SHAPESHIFTER_HELL, 2H_INFERNOSTAFF_MORGANA,
+              2H_CLEAVER_HELL, 2H_DUALSICKLE_UNDEAD, 2H_CROSSBOW_CANNON_AVALON,
+              2H_BOW_KEEPER, 2H_CROSSBOWLARGE_MORGANA,
+              2H_AXE_AVALON, 2H_CLAYMORE_AVALON, 2H_BOW,
+              2H_KNUCKLES_SET2, 2H_BOW_HELL, 2H_DOUBLEBLADEDSTAFF,
+              2H_CLAWPAIR, 2H_DUALCROSSBOW_HELL, MAIN_AXE,
+              # tree pass (2026-08-12) — unambiguous DPS only; supports
+              # (arcane utility, curse line, Chillhowl, Rotcaller class)
+              # stay deliberately unclassified
+              2H_BOW_CRYSTAL, 2H_LONGBOW_UNDEAD, 2H_WARBOW,
+              2H_CROSSBOW, 2H_CROSSBOWLARGE, 2H_DUALCROSSBOW_CRYSTAL,
+              2H_REPEATINGCROSSBOW_UNDEAD, MAIN_1HCROSSBOW,
+              2H_DAGGERPAIR_CRYSTAL, 2H_DAGGER_KATAR_AVALON,
+              2H_IRONGAUNTLETS_HELL, MAIN_DAGGER, MAIN_DAGGER_HELL,
+              2H_CLAYMORE, 2H_DUALSCIMITAR_UNDEAD, MAIN_SCIMITAR_MORGANA,
+              MAIN_SWORD, MAIN_SWORD_CRYSTAL,
+              2H_FIRESTAFF, 2H_FIRESTAFF_HELL, 2H_INFERNOSTAFF,
+              MAIN_FIRESTAFF, MAIN_FIRESTAFF_CRYSTAL, MAIN_FIRESTAFF_KEEPER,
+              2H_FROSTSTAFF, 2H_FROSTSTAFF_CRYSTAL, 2H_GLACIALSTAFF,
+              2H_ICEGAUNTLETS_HELL, MAIN_FROSTSTAFF_KEEPER,
+              2H_AXE, 2H_HALBERD, 2H_HALBERD_MORGANA, 2H_SCYTHE_CRYSTAL,
+              2H_SCYTHE_HELL,
+              2H_KNUCKLES_AVALON, 2H_KNUCKLES_CRYSTAL, 2H_KNUCKLES_HELL,
+              2H_KNUCKLES_KEEPER, 2H_KNUCKLES_MORGANA, 2H_KNUCKLES_SET1,
+              2H_KNUCKLES_SET3,
+              2H_GLAIVE, 2H_GLAIVE_CRYSTAL, 2H_SPEAR, 2H_TRIDENT_UNDEAD,
+              MAIN_SPEAR, MAIN_SPEAR_KEEPER, MAIN_SPEAR_LANCE_AVALON,
+              2H_COMBATSTAFF_MORGANA, 2H_DOUBLEBLADEDSTAFF_CRYSTAL,
+              2H_QUARTERSTAFF_AVALON, 2H_TWINSCYTHE_HELL,
+              2H_ARCANESTAFF_CRYSTAL, 2H_ARCANE_RINGPAIR_AVALON,
+              2H_SHAPESHIFTER_AVALON, 2H_SHAPESHIFTER_CRYSTAL,
+              2H_SHAPESHIFTER_MORGANA, 2H_SHAPESHIFTER_SET1,
+              2H_SHAPESHIFTER_SET3]

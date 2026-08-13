@@ -1,0 +1,85 @@
+# Mace line — remaining 6 weapons, curated 2026-08-12 (tree pass).
+# Q/W pool parity with the mace_line.yaml sheets (Guard Rune, Snare Charge,
+# Sacred Ground). Tank line: WEAPON_STATS tankiness 2 throughout.
+
+- weapon: 2H_DUALMACE_AVALON         # Oathkeepers — aurora support tank
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  capabilities:
+    - {cap: buff_allies,  score: 2, evidence: BLESSED_MACES}   # E: group MS aurora + 400 absorb shields + heal
+    - {cap: heal_sustain, score: 1, evidence: BLESSED_MACES}   # 30 Health pulses to 10 allies
+    - {cap: engage,       score: 1, evidence: BLESSED_MACES}   # the aurora is a group sprint lane
+    - {cap: tankiness,    score: 2, evidence: WEAPON_STATS}
+    - {cap: peel,         score: 2, evidence: GUARDRUNE}       # W: ally CC immunity (QW)
+    - {cap: root,         score: 1, evidence: CHARGE_ROOT}     # (QW)
+    - {cap: zone_control, score: 1, evidence: SACRED_GROUND}   # (QW)
+    - {cap: slow,         score: 1, evidence: SACRED_GROUND}   # (QW)
+
+- weapon: 2H_FLAIL                   # Morning Star — the mass-root field
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  capabilities:
+    - {cap: root,         score: 3, evidence: ROOTFIELD}       # E: Gravitas — channeled AoE root IGNORING CC resistance
+    - {cap: engage,       score: 2, evidence: ROOTFIELD}       # Close In dash into the field
+    - {cap: catch,        score: 2, evidence: ROOTFIELD}       # nothing leaves Gravitas
+    - {cap: peel,         score: 2, evidence: ROOTFIELD}       # cast it on the divers; W: Guard Rune (QW)
+    - {cap: tankiness,    score: 2, evidence: WEAPON_STATS}
+    - {cap: mobility,     score: 1, evidence: ROOTFIELD}       # the Close In dash
+    - {cap: zone_control, score: 1, evidence: SACRED_GROUND}   # (QW)
+    - {cap: slow,         score: 1, evidence: SACRED_GROUND}   # (QW)
+
+- weapon: 2H_MACE_MORGANA            # Camlann Mace — the vendetta clump
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  capabilities:
+    - {cap: clump_create, score: 3, evidence: VACUUMSLASH}     # E: pulls everything in 8m onto the cursed target
+    - {cap: stun,         score: 1, evidence: VACUUMSLASH}     # 0.8s on the pile
+    - {cap: catch,        score: 1, evidence: VACUUMSLASH}
+    - {cap: peel,         score: 2, evidence: GUARDRUNE}       # W: ally CC immunity (QW)
+    - {cap: engage,       score: 1, evidence: CHARGE_ROOT}     # W: Snare Charge (QW)
+    - {cap: tankiness,    score: 2, evidence: WEAPON_STATS}
+    - {cap: root,         score: 1, evidence: CHARGE_ROOT}     # (QW)
+    - {cap: zone_control, score: 1, evidence: SACRED_GROUND}   # (QW)
+    - {cap: slow,         score: 1, evidence: SACRED_GROUND}   # (QW)
+
+- weapon: MAIN_MACE_CRYSTAL          # Dreadstorm Monarch — storm-combo tank
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  capabilities:
+    - {cap: slow,         score: 1, evidence: MACE_CRYSTAL_FRAGMENT_STORM}  # E: Dreadstorm Surge storm
+    - {cap: resist_shred, score: 1, evidence: MACE_CRYSTAL_FRAGMENT_STORM}
+    - {cap: burst_aoe,    score: 1, evidence: MACE_CRYSTAL_FRAGMENT_STORM}
+    - {cap: zone_control, score: 1, evidence: MACE_CRYSTAL_FRAGMENT_STORM}  # the surge storm + Sacred Ground
+    - {cap: catch,        score: 1, evidence: MACE_CRYSTAL_FRAGMENT_STORM}
+    - {cap: tankiness,    score: 2, evidence: WEAPON_STATS}
+    - {cap: peel,         score: 2, evidence: GUARDRUNE}       # (QW)
+    - {cap: engage,       score: 1, evidence: CHARGE_ROOT}     # (QW)
+    - {cap: root,         score: 1, evidence: CHARGE_ROOT}     # (QW)
+
+- weapon: MAIN_MACE_HELL             # Incubus Mace — the shrinking curse
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  capabilities:
+    - {cap: execute,      score: 2, evidence: SHRINKINGSMASH}  # E: -40% max AND current Health for 8s — the focus call
+    - {cap: heal_reduction, score: 1, evidence: SHRINKINGSMASH}  # -40% Healing CAST hits enemy healers
+    - {cap: burst_st,     score: 1, evidence: SHRINKINGSMASH}
+    # E also cuts damage dealt -40%: damage_debuff poster child #6
+    - {cap: tankiness,    score: 2, evidence: WEAPON_STATS}
+    - {cap: peel,         score: 2, evidence: GUARDRUNE}       # (QW)
+    - {cap: engage,       score: 1, evidence: CHARGE_ROOT}     # (QW)
+    - {cap: root,         score: 1, evidence: CHARGE_ROOT}     # (QW)
+    - {cap: zone_control, score: 1, evidence: SACRED_GROUND}   # (QW)
+    - {cap: slow,         score: 1, evidence: SACRED_GROUND}   # (QW)
+
+- weapon: MAIN_ROCKMACE_KEEPER       # Bedrock Mace — the air-jet wall
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  capabilities:
+    - {cap: knockback_displace, score: 3, evidence: PRIMALSLAM}  # E: 18m knockback jets on a 4s line
+    - {cap: peel,         score: 2, evidence: PRIMALSLAM}      # the wall between them and your backline
+    - {cap: zone_control, score: 1, evidence: PRIMALSLAM}      # the jets hold the line they occupy
+    - {cap: anti_dive,    score: 1, evidence: PRIMALSLAM}      # divers get launched 18m home
+    - {cap: tankiness,    score: 2, evidence: WEAPON_STATS}
+    - {cap: engage,       score: 1, evidence: CHARGE_ROOT}     # (QW)
+    - {cap: root,         score: 1, evidence: CHARGE_ROOT}     # (QW)
+    - {cap: slow,         score: 1, evidence: SACRED_GROUND}   # (QW)

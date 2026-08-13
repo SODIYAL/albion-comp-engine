@@ -1,0 +1,28 @@
+# Hand of Justice — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 4 sightings, dominant role: tank.
+#
+# Identity: the drag-clump tank. The E (Onslaught) spins to the target
+# position PULLING up to 10 enemies along the path, pulse-stunning them, then
+# slams — throwing everything within 5m into the air. A drag-and-pile engine:
+# clump_create 3 alongside Great Hammer's Tackle. Shares the hammer Q/W pool
+# with Polehammer and Great Hammer; QW-conditional scores mirror those sheets.
+
+- weapon: 2H_HAMMER_AVALON           # Hand of Justice — drag-clump tank
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: tank
+  capabilities:
+    - {cap: engage,        score: 3, evidence: SPINNING_SMASH}   # E: spin INTO them, dragging the line with you
+    - {cap: clump_create,  score: 3, evidence: SPINNING_SMASH}   # pulls up to 10 enemies into the slam point
+    - {cap: stun,          score: 2, evidence: SPINNING_SMASH}   # 0.8s pulse stuns during the drag; slam knock-up
+    - {cap: knockback_displace, score: 2, evidence: SPINNING_SMASH}  # the slam throws everything airborne; W: Geyser
+    - {cap: peel,          score: 2, evidence: SPINNING_SMASH}   # drag divers off the backline; W: Knockout, ring
+    - {cap: catch,         score: 2, evidence: SPINNING_SMASH}   # spin onto runners, they come along
+    - {cap: mobility,      score: 2, evidence: SPINNING_SMASH}   # the E moves you; W: Slowing Charge
+    - {cap: disengage,     score: 2, evidence: SPINNING_SMASH}   # spin OUT through the line
+    - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}     # tank-line weapon, played frontline
+    - {cap: slow,          score: 2, evidence: TAR_RING}         # W: 0.8 slow ring, ignores CC resistance (QW)
+    - {cap: anti_dive,     score: 2, evidence: TAR_RING}         # (QW)
+    - {cap: zone_control,  score: 1, evidence: TAR_RING}         # (QW)
+    - {cap: purge,         score: 1, evidence: IRONBREAKER}      # Q: shield break only (QW)
+    - {cap: resist_shred,  score: 1, evidence: IRONBREAKER}      # Q: -12% AoE (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_HAMMER}  # PASSIVE: Life Leech

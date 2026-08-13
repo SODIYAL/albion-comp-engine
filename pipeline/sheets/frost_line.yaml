@@ -1,0 +1,98 @@
+# Frost line — remaining 6 weapons, curated 2026-08-12 (tree pass).
+# Q/W pool parity with Permafrost Prism / Frost Staff (Frost Bomb, Frozen
+# Surge, Frost Nova, Frost Lance, Glacial Obelisk, Frost passive).
+
+- weapon: 2H_FROSTSTAFF              # Great Frost Staff — hail battery
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: HAIL_MULTI_1}   # E: 160 AoE, recastable
+    - {cap: zone_control,  score: 2, evidence: FROSTBOMB_CASTSLOW}  # frost QW ground slows (QW)
+    - {cap: slow,          score: 2, evidence: FROSTBOMB_CASTSLOW}  # (QW)
+    - {cap: catch,         score: 1, evidence: HAIL_MULTI_1}
+    - {cap: peel,          score: 1, evidence: HAIL_MULTI_1}
+    - {cap: stun,          score: 1, evidence: FROSTNOVA}      # (QW)
+    - {cap: disengage,     score: 1, evidence: FROSTNOVA}      # (QW)
+    - {cap: resist_shred,  score: 1, evidence: FROST_LANCE}    # (QW)
+    - {cap: buff_allies,   score: 1, evidence: ICE_SCULPTURE}  # (QW)
+    - {cap: root,          score: 1, evidence: PASSIVE_FROST}
+    - {cap: sustained_dps, score: 1, evidence: WEAPON_STATS}
+
+- weapon: 2H_FROSTSTAFF_CRYSTAL      # Arctic Staff — volley channel mage
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: FROST_TARGETED_CHANNEL}  # E: mobile volley channel
+    - {cap: slow,          score: 2, evidence: FROST_TARGETED_CHANNEL}  # stacks up to 6 times
+    - {cap: burst_aoe,     score: 1, evidence: FROST_TARGETED_CHANNEL}
+    - {cap: zone_control,  score: 2, evidence: FROSTBOMB_CASTSLOW}  # (QW)
+    - {cap: catch,         score: 1, evidence: FROST_BITE}     # Q: Frostbite stacks to a stun (QW)
+    - {cap: stun,          score: 1, evidence: FROSTNOVA}      # (QW)
+    - {cap: disengage,     score: 1, evidence: FROSTNOVA}      # (QW)
+    - {cap: resist_shred,  score: 1, evidence: FROST_LANCE}    # (QW)
+    - {cap: buff_allies,   score: 1, evidence: ICE_SCULPTURE}  # (QW)
+    - {cap: root,          score: 1, evidence: PASSIVE_FROST}
+
+- weapon: 2H_GLACIALSTAFF            # Glacial Staff — the roaming storm
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: zone_control,  score: 3, evidence: ICESTORM2}      # E: 15-SECOND moving storm — the longest zone curated
+    - {cap: slow,          score: 2, evidence: ICESTORM2}      # storm + frost QW pool
+    - {cap: burst_aoe,     score: 1, evidence: ICESTORM2}      # tick damage
+    - {cap: sustained_dps, score: 1, evidence: ICESTORM2}
+    - {cap: catch,         score: 1, evidence: ICESTORM2}
+    - {cap: peel,          score: 1, evidence: ICESTORM2}
+    - {cap: stun,          score: 1, evidence: FROSTNOVA}      # (QW)
+    - {cap: disengage,     score: 1, evidence: FROSTNOVA}      # (QW)
+    - {cap: resist_shred,  score: 1, evidence: FROST_LANCE}    # (QW)
+    - {cap: buff_allies,   score: 1, evidence: ICE_SCULPTURE}  # (QW)
+    - {cap: root,          score: 1, evidence: PASSIVE_FROST}
+
+- weapon: 2H_ICEGAUNTLETS_HELL       # Icicle Staff — the hard-slow blizzard
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: slow,          score: 2, evidence: GLACIALFIELD}   # E: 50%+30% center, IGNORES CC resistance
+    - {cap: zone_control,  score: 2, evidence: GLACIALFIELD}   # 5s blizzard
+    - {cap: anti_dive,     score: 1, evidence: FROSTNOVA}      # divers crawl in the blizzard; Nova punishes (QW)
+    - {cap: catch,         score: 1, evidence: GLACIALFIELD}
+    - {cap: peel,          score: 1, evidence: GLACIALFIELD}
+    - {cap: burst_aoe,     score: 1, evidence: GLACIALFIELD}
+    - {cap: stun,          score: 1, evidence: FROSTNOVA}      # (QW)
+    - {cap: disengage,     score: 1, evidence: FROSTNOVA}      # (QW)
+    - {cap: resist_shred,  score: 1, evidence: FROST_LANCE}    # (QW)
+    - {cap: buff_allies,   score: 1, evidence: ICE_SCULPTURE}  # (QW)
+    - {cap: root,          score: 1, evidence: PASSIVE_FROST}
+    - {cap: sustained_dps, score: 1, evidence: WEAPON_STATS}
+
+- weapon: MAIN_FROSTSTAFF_AVALON     # Chillhowl — the crystal-save support
+  curated_as_of: 2026-08-12
+  role_hint: support
+  capabilities:
+    - {cap: peel,          score: 2, evidence: FROZEN_CRYSTAL} # E: crystal-freeze the focused ALLY (2s invulnerable)
+                                                               # or freeze the diving enemy — a save either way
+    - {cap: stun,          score: 1, evidence: FROZEN_CRYSTAL} # the enemy-freeze is a 2s incapacitate
+    - {cap: slow,          score: 2, evidence: FROZEN_CRYSTAL} # field slow ignores CC resistance + QW pool
+    - {cap: catch,         score: 1, evidence: FROZEN_CRYSTAL}
+    - {cap: zone_control,  score: 1, evidence: FROSTBOMB_CASTSLOW}  # (QW)
+    - {cap: disengage,     score: 1, evidence: FROSTNOVA}      # (QW)
+    - {cap: resist_shred,  score: 1, evidence: FROST_LANCE}    # (QW)
+    - {cap: buff_allies,   score: 1, evidence: ICE_SCULPTURE}  # (QW)
+    - {cap: root,          score: 1, evidence: PASSIVE_FROST}
+
+- weapon: MAIN_FROSTSTAFF_KEEPER     # Hoarfrost Staff — snowball displacer
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: knockback_displace, score: 2, evidence: ICEROCK_EXPLODE}  # E: rolling 10m knockback + wall explosion
+    - {cap: slow,          score: 2, evidence: ICEROCK_EXPLODE}  # freezing trail + QW pool
+    - {cap: peel,          score: 1, evidence: ICEROCK_EXPLODE}
+    - {cap: zone_control,  score: 1, evidence: ICEROCK_EXPLODE}  # the trail
+    - {cap: burst_aoe,     score: 1, evidence: ICEROCK_EXPLODE}
+    - {cap: catch,         score: 1, evidence: ICEROCK_EXPLODE}
+    - {cap: stun,          score: 1, evidence: FROSTNOVA}      # (QW)
+    - {cap: disengage,     score: 1, evidence: FROSTNOVA}      # (QW)
+    - {cap: resist_shred,  score: 1, evidence: FROST_LANCE}    # (QW)
+    - {cap: buff_allies,   score: 1, evidence: ICE_SCULPTURE}  # (QW)
+    - {cap: root,          score: 1, evidence: PASSIVE_FROST}

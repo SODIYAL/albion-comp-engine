@@ -1,0 +1,23 @@
+# Bow — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 4 sightings, dominant role: range.
+#
+# Identity: the pure kiter. The E (Enchanted Quiver) is an auto-attack
+# steroid — +50% AA speed, +280% AA damage for 4 arrows — that PUNISHES
+# proximity (damage drops if an enemy player is within 6m) and recasts into a
+# dash with 3 more arrows. Sustained single-target pressure at maximum range;
+# the only bow scored sustained_dps 3. Shares the bow Q/W pool with Longbow /
+# Mistpiercer / Bow of Badon; QW-conditional scores mirror those sheets.
+
+- weapon: 2H_BOW                     # Bow — the pure kiter
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: range
+  capabilities:
+    - {cap: sustained_dps, score: 3, evidence: SPEEDARCHER_KITE}  # E: AA steroid, anti-proximity kite design
+    - {cap: mobility,      score: 2, evidence: SPEEDARCHER_KITE}  # E recast dash; W: Speed Shot (QW)
+    - {cap: burst_st,      score: 1, evidence: SPEEDARCHER_KITE}  # 280% arrows front-load the window
+    - {cap: disengage,     score: 1, evidence: SPEEDARCHER_KITE}  # the dash resets kite distance; W: Frost Shot
+    - {cap: root,          score: 1, evidence: GROUNDARROW}       # W: Ray of Light (QW)
+    - {cap: catch,         score: 1, evidence: GROUNDARROW}       # (QW)
+    - {cap: peel,          score: 1, evidence: GROUNDARROW}       # (QW)
+    - {cap: slow,          score: 1, evidence: PASSIVE_SLOWPOISON}  # every AA slows; Q: Multishot
+    - {cap: resist_shred,  score: 1, evidence: DEADLYSHOT}        # Q: stacking -3% x3; Piercing Arrows passive (QW)

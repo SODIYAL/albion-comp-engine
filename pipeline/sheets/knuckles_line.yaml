@@ -1,0 +1,111 @@
+# Knuckles line — remaining 7 weapons, curated 2026-08-12 (tree pass).
+# Q/W pool parity with the Battle Bracers sheet (dash-combo Qs, Backhand,
+# Counter, Devastating Combo, Triple Kick).
+
+- weapon: 2H_KNUCKLES_AVALON         # Fists of Avalon — purifying diver
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: engage,        score: 2, evidence: TRIPLECOMBO_DIVEKICK}  # E: CC-immune dive kick
+    - {cap: knockback_displace, score: 2, evidence: TRIPLECOMBO_DIVEKICK}  # air-throw + Backhand (QW)
+    - {cap: purge,         score: 1, evidence: TRIPLECOMBO_DIVEKICK}  # Purifying Fist strips buffs
+    - {cap: mobility,      score: 2, evidence: TRIPLECOMBO_DIVEKICK}  # dive + Q dashes
+    - {cap: disengage,     score: 1, evidence: TRIPLECOMBO_DIVEKICK}
+    - {cap: peel,          score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
+    - {cap: catch,         score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: burst_st,      score: 1, evidence: KNUCKLECOMBO}   # (QW)
+    - {cap: stun,          score: 1, evidence: KNUCKLECOMBO}   # (QW)
+    - {cap: resist_shred,  score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_KNUCKLE_BRAWLER_SPEED}
+
+- weapon: 2H_KNUCKLES_CRYSTAL        # Forcepulse Bracers — pulse-stack burster
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: burst_st,      score: 2, evidence: CONEPUNCH2}     # E: dash + pulse charges on everything you do
+    - {cap: execute,       score: 1, evidence: CONEPUNCH2}     # -3% max/current Health x5 stacks
+    - {cap: mobility,      score: 2, evidence: CONEPUNCH2}     # recastable dash + Q dashes
+    - {cap: engage,        score: 1, evidence: CONEPUNCH2}
+    - {cap: catch,         score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: knockback_displace, score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
+    - {cap: peel,          score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
+    - {cap: stun,          score: 1, evidence: KNUCKLECOMBO}   # (QW)
+    - {cap: resist_shred,  score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_KNUCKLE_BRAWLER_SPEED}
+
+- weapon: 2H_KNUCKLES_HELL           # Hellfire Hands — boulder artillery brawler
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: BOULDER_TOSS}   # E: triple-bounce boulder, 177/126/76 + burn
+    - {cap: heal_reduction, score: 1, evidence: BOULDER_TOSS}  # each impact reduces Healing Received
+    - {cap: mobility,      score: 2, evidence: DASHKICK}       # Q dashes (QW)
+    - {cap: catch,         score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: engage,        score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: knockback_displace, score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
+    - {cap: peel,          score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
+    - {cap: burst_st,      score: 1, evidence: KNUCKLECOMBO}   # (QW)
+    - {cap: stun,          score: 1, evidence: KNUCKLECOMBO}   # (QW)
+    - {cap: resist_shred,  score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_KNUCKLE_BRAWLER}  # artifact variant passive
+
+- weapon: 2H_KNUCKLES_KEEPER         # Ursine Maulers — hundred-fist channel
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: burst_st,      score: 2, evidence: PUMMELING_STRIKES}  # E: uninterruptible steerable fist cone
+    - {cap: sustained_dps, score: 2, evidence: PUMMELING_STRIKES}  # 36/0.5s channel + Fatal Fury stacks
+    - {cap: burst_aoe,     score: 1, evidence: PUMMELING_STRIKES}  # the cone hits everyone in it
+    - {cap: mobility,      score: 2, evidence: DASHKICK}       # Q dashes (QW)
+    - {cap: catch,         score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: engage,        score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: knockback_displace, score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
+    - {cap: peel,          score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
+    - {cap: stun,          score: 1, evidence: KNUCKLECOMBO}   # (QW)
+    - {cap: resist_shred,  score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
+
+- weapon: 2H_KNUCKLES_MORGANA        # Ravenstrike Cestus — charged crusher
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: GROWING_PUNCH}  # E: charge-scaled AoE crusher
+    - {cap: knockback_displace, score: 2, evidence: GROWING_PUNCH}  # the crusher scatters; Backhand (QW)
+    - {cap: peel,          score: 1, evidence: GROWING_PUNCH}
+    - {cap: mobility,      score: 2, evidence: DASHKICK}       # Q dashes (QW)
+    - {cap: catch,         score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: engage,        score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: burst_st,      score: 1, evidence: KNUCKLECOMBO}   # (QW)
+    - {cap: stun,          score: 1, evidence: KNUCKLECOMBO}   # (QW)
+    - {cap: resist_shred,  score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_KNUCKLE_BRAWLER_SPEED}
+
+- weapon: 2H_KNUCKLES_SET1           # Brawler Gloves — geyser brawler
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: knockback_displace, score: 2, evidence: BLAZING_GEYSER}  # E: AoE knock-up, Q-reset on hit
+    - {cap: burst_aoe,     score: 2, evidence: BLAZING_GEYSER} # 188 in the geyser
+    - {cap: peel,          score: 1, evidence: BLAZING_GEYSER}
+    - {cap: mobility,      score: 2, evidence: DASHKICK}       # Q dashes (QW)
+    - {cap: catch,         score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: engage,        score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: burst_st,      score: 1, evidence: KNUCKLECOMBO}   # (QW)
+    - {cap: stun,          score: 1, evidence: KNUCKLECOMBO}   # (QW)
+    - {cap: resist_shred,  score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_KNUCKLE_BRAWLER}  # artifact variant passive
+
+- weapon: 2H_KNUCKLES_SET3           # Spiked Gauntlets — armor-punisher cone
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: IMPULSE_PUNCH}  # E: armor-typed cone — hits plate hardest
+    - {cap: slow,          score: 2, evidence: IMPULSE_PUNCH}  # 2s cone slow
+    - {cap: catch,         score: 1, evidence: IMPULSE_PUNCH}
+    - {cap: peel,          score: 1, evidence: IMPULSE_PUNCH}
+    - {cap: mobility,      score: 2, evidence: DASHKICK}       # Q dashes (QW)
+    - {cap: engage,        score: 1, evidence: DASHKICK}       # (QW)
+    - {cap: knockback_displace, score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
+    - {cap: burst_st,      score: 1, evidence: KNUCKLECOMBO}   # (QW)
+    - {cap: stun,          score: 1, evidence: KNUCKLECOMBO}   # (QW)
+    - {cap: resist_shred,  score: 1, evidence: BACKHAND_KNOCKBACK}  # (QW)
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_KNUCKLE_BRAWLER}  # artifact variant passive

@@ -1,0 +1,32 @@
+# Rotcaller Staff (1H) — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 6 sightings, dominant role: support — the only support-role weapon
+# curated so far.
+#
+# Identity: anti-heal peel support. The E (Plaguebringer) is one cast doing
+# three support jobs: 6m AoE knockback that IGNORES CC resistance, 161 damage,
+# and a 2s Healing-Received NEGATION (with a 6s re-application immunity).
+#
+# DRAFT CORRECTIONS (verified against full dumps text):
+#   - tankiness 2 + self_sustain 2 via Plaguebringer's prose:shield REMOVED —
+#     nothing in the text shields anything; flag suppressed in overrides.
+#   - engage/disengage/catch/mobility via the Hit and Run passive REMOVED:
+#     +20% MS for 3s every 6 spells is a kiting nicety, not movement tooling.
+# heal_reduction 2 not 3: the negate is one E application; the Spirithunter
+# class (full-kit anti-heal) holds 3. Expert may bump — in practice this E is
+# why the weapon gets picked.
+# Armor Piercer (-17% for 4s) is the strongest single shred curated so far but
+# is one W among five: held at the W-option ladder score of 1, flagged.
+
+- weapon: MAIN_CURSEDSTAFF_CRYSTAL   # Rotcaller Staff — anti-heal peel support
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: support
+  capabilities:
+    - {cap: heal_reduction, score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # E: negates Healing Received 2s, AoE
+    - {cap: knockback_displace, score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # E: 6m AoE, ignores CC resistance
+    - {cap: peel,           score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # the CC-resist-ignoring shove IS the peel
+    - {cap: root,           score: 1, evidence: CURSENOVA}          # W: Desecrate — 2.6s AoE root (QW)
+    - {cap: slow,           score: 1, evidence: CURSED_SPLAT}       # Q: Cursed Tar puddle (QW)
+    - {cap: zone_control,   score: 1, evidence: CURSED_SPLAT}       # tar puddle + Desecrate wave — modest (QW)
+    - {cap: resist_shred,   score: 1, evidence: ARMORPIERCER}       # W: -17% for 4s — strongest shred yet, W option (QW)
+    - {cap: buff_allies,    score: 1, evidence: CURSEDHANDS_STACKUP}  # W: Grudge — ally AA enchant (QW, via override)
+    - {cap: sustained_dps,  score: 1, evidence: CURSEDOT}           # Q: stacking Vile Curse DoTs; 1H damage budget

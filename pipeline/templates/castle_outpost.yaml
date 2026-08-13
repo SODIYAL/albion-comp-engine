@@ -48,6 +48,14 @@ requirements:
 # HARD FLOORS — capabilities where near-zero supply is catastrophic, not merely
 # suboptimal. Load-bearing: the first prototype run omitted these and failed 4/9
 # because breadth weapons out-ranked a healer fixing the single critical gap.
+#
+# PROVISIONAL penalty_mult 2.0 (was 1.5) — batch-2 curation (2026-08-12)
+# reproduced the same failure mode at a finer margin: with Permafrost Prism's
+# curated catch 2, Heavy Mace picked up the (engage, catch) synergy bonus and
+# out-ranked every healer for slot 4 of a healer-less party BY 0.014 — synergy
+# and meta-prior leakage outvoted a hard-floor violation. 1.5 made the floor
+# almost decisive; 2.0 makes it actually decisive. Needs expert confirmation
+# (or a structural fix: floors as lexicographic gates rather than penalties).
 hard_floors:
-  heal_sustain: {min_party_size: 4, floor_units: 2.0, penalty_mult: 1.5}
+  heal_sustain: {min_party_size: 4, floor_units: 2.0, penalty_mult: 2.0}
   tankiness:    {min_party_size: 5, floor_units: 2.0, penalty_mult: 1.0}

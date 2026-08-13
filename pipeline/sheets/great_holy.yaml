@@ -1,0 +1,29 @@
+# Great Holy Staff — curated 2026-08-12 from ao-bin-dumps spell text
+# (effect_lookup dump). Replaces the illustrative §2.3 block (heal_burst 3,
+# heal_sustain 3, cleanse 2, buff_allies 1). Fifth holy weapon curated.
+#
+# CORRECTIONS vs the illustrative block:
+#   - cleanse 2 REMOVED: the settled holy finding (holy_line.yaml header,
+#     HANDOFF) — no holy Q/W cleanses, and this E does not either. The
+#     illustrative sheet predates that finding.
+#   - heal_burst 3 -> 2: the E is a sustain CHANNEL, not burst; the burst
+#     tools are the shared Q/W (Holy Flash / Holy Orb). Hallowfall keeps the
+#     line's heal_burst 3 on its jump-heal.
+#   - knockback_displace ADDED: the E's 10m CC-resist-IGNORING AoE shove is
+#     real peel the sketch never scored.
+#
+# Identity: the stationary group-heal anchor. The E (Holy Explosion) channels
+# 50 Health/0.5s to 10 allies while shoving all enemies 10m off the party
+# and buffing allied resistances +16%.
+
+- weapon: 2H_HOLYSTAFF               # Great Holy Staff — group-heal anchor
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: healer
+  capabilities:
+    - {cap: heal_sustain, score: 3, evidence: HOLYEXPLOSION}   # E: 10-ally channel; W: Beam / Orb pool
+    - {cap: heal_burst,   score: 2, evidence: HOLYFLASH}       # Q: 117 AoE; W: Holy Orb 135 (QW)
+    - {cap: knockback_displace, score: 2, evidence: HOLYEXPLOSION}  # E: 10m AoE, ignores CC resistance
+    - {cap: peel,         score: 2, evidence: HOLYEXPLOSION}   # the shove clears divers off the party
+    - {cap: buff_allies,  score: 2, evidence: HOLYEXPLOSION}   # E: +16% ally resistances; W: Holy Blessing
+    # NO cleanse (settled holy finding). NO mobility — stationary anchor,
+    # the deliberate contrast with Hallowfall.

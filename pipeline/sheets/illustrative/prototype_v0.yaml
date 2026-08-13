@@ -16,81 +16,57 @@
 #
 # Weapon keys resolved against pipeline/out/weapon_lines.json (2026-08-12).
 
-- weapon: MAIN_ARCANESTAFF_UNDEAD      # Witchwork Staff
-  status: illustrative
-  capabilities:
-    - {cap: burst_aoe, score: 2}
-    - {cap: clump_create, score: 2}
-    - {cap: energy_drain, score: 2}
-    - {cap: sustained_dps, score: 2}
-    - {cap: heal_reduction, score: 1}
-    - {cap: zone_control, score: 1}
+# MAIN_ARCANESTAFF_UNDEAD (Witchwork) — CURATED 2026-08-12, see ../witchwork.yaml.
+# Its illustrative block claimed energy_drain 2 — FABRICATED: nothing in the
+# current kit drains energy (verified against every equippable spell). Its
+# heal_reduction 1 was tagged GEAR and belongs on gear sheets. Curation found
+# the real identity instead: group cleanse (W), ally empowerment, Black Hole clump.
 
-- weapon: 2H_ICECRYSTAL_UNDEAD         # Permafrost Prism
-  status: illustrative
-  capabilities:
-    - {cap: burst_aoe, score: 3}
-    - {cap: zone_control, score: 3}
-    - {cap: slow, score: 2}
-    - {cap: clump_create, score: 2}
-    - {cap: root, score: 1}
-    - {cap: mobility, score: 1}
-    - {cap: tankiness, score: 1}
+# 2H_ICECRYSTAL_UNDEAD (Permafrost Prism) — CURATED 2026-08-12, see
+# ../permafrost_prism.yaml. Its illustrative block claimed clump_create 2,
+# zone_control 3, tankiness 1 and mobility 1; curation dropped clump_create
+# (nothing stacks enemies), tankiness (Frost Lance shreds, it doesn't shield)
+# and mobility (teleport filed as disengage), and downgraded zone_control to 2.
 
 # MAIN_HOLYSTAFF_AVALON (Hallowfall) — CURATED 2026-08-12, see ../holy_line.yaml
 # Its illustrative block claimed `cleanse 2`; curation found no cleanse anywhere
 # in the holy kit. Removed rather than shadowed.
 
-- weapon: 2H_HOLYSTAFF                 # Great Holy Staff
-  status: illustrative
-  capabilities:
-    - {cap: heal_burst, score: 3}
-    - {cap: heal_sustain, score: 3}
-    - {cap: cleanse, score: 2}
-    - {cap: buff_allies, score: 1}
+# 2H_HOLYSTAFF (Great Holy) — CURATED 2026-08-12, see ../great_holy.yaml.
+# Its illustrative cleanse 2 was the already-settled holy error (no holy
+# weapon cleanses except Lifetouch/Fallen E). heal_burst downgraded to 2
+# (the E is a sustain channel); the E's CC-resist-ignoring 10m shove was
+# never scored — knockback_displace/peel 2 added.
 
 # 2H_NATURESTAFF_HELL (Blight Staff) — CURATED 2026-08-12, see ../nature_line.yaml
 
-- weapon: 2H_HAMMER                    # Great Hammer
-  status: illustrative
-  capabilities:
-    - {cap: tankiness, score: 2}
-    - {cap: engage, score: 3}
-    - {cap: clump_create, score: 3}
-    - {cap: stun, score: 2}
-    - {cap: zone_control, score: 2}
-    - {cap: peel, score: 1}
+# 2H_HAMMER (Great Hammer) — CURATED 2026-08-12, see ../great_hammer.yaml.
+# Curation confirmed engage 3 / clump_create 3 / stun 2 / tankiness 2,
+# downgraded zone_control to 1 (Polehammer W-pool parity), upgraded peel to 2,
+# and added the QW conditionals + knockback_displace (E structured, verified).
 
-- weapon: 2H_RAM_KEEPER                # Grovekeeper
-  status: illustrative
-  capabilities:
-    - {cap: tankiness, score: 2}
-    - {cap: engage, score: 3}
-    - {cap: stun, score: 2}
-    - {cap: clump_create, score: 2}
-    - {cap: peel, score: 1}
+# 2H_RAM_KEEPER (Grovekeeper) — CURATED 2026-08-12, see ../grovekeeper.yaml.
+# clump_create 2 removed (air-throw holds a clump, it does not create one —
+# the Permafrost/Kingmaker ruling); peel upgraded to 2; knockback_displace
+# added (scaling CC-resist-ignoring air-throw, structured, verified).
 
-- weapon: 2H_DAGGERPAIR                # Dagger Pair
-  status: illustrative
-  capabilities:
-    - {cap: burst_st, score: 3}
-    - {cap: execute, score: 2}
-    - {cap: sustained_dps, score: 2}
-    - {cap: mobility, score: 1}
+# 2H_DAGGERPAIR (Dagger Pair) — CURATED 2026-08-12, see ../dagger_pair.yaml.
+# burst_st 3 confirmed; execute downgraded to 1 (Slit Throat scales with
+# charges, not target health — the clean execute is Bloodletter's E);
+# mobility upgraded to 2 (dagger pool parity); heal_reduction 1 added
+# (Slit Throat reduces Healing Received — verified text).
+#
+# ALL EIGHT ILLUSTRATIVE BLOCKS ARE NOW CURATED. This file is retained as
+# the historical record of the §2.3 prototype numbers and their corrections;
+# it contributes nothing to the dataset.
 
-- weapon: MAIN_RAPIER_MORGANA          # Bloodletter
-  status: illustrative
-  capabilities:
-    - {cap: mobility, score: 3}
-    - {cap: execute, score: 2}
-    - {cap: burst_st, score: 2}
-    - {cap: catch, score: 2}
-    - {cap: disengage, score: 2}
+# MAIN_RAPIER_MORGANA (Bloodletter) — CURATED 2026-08-12, see
+# ../bloodletter.yaml. Curation confirmed all five illustrative scores and
+# added the Q/W conditionals (stun/peel via Shadow Edge, shred via Sunder Armor).
 
-- weapon: 2H_HARPOON_HELL              # Spirithunter
-  status: illustrative
-  capabilities:
-    - {cap: heal_reduction, score: 3}
-    - {cap: sustained_dps, score: 2}
-    - {cap: burst_aoe, score: 1}
-    - {cap: buff_allies, score: 1}
+# 2H_HARPOON_HELL (Spirithunter) — CURATED 2026-08-12, see ../spirithunter.yaml.
+# Its illustrative block claimed heal_reduction 3 — FABRICATED: nothing in the
+# kit reduces healing (verified against every Q/W/E/passive description).
+# buff_allies 1 also had no basis. Same error class as Hallowfall's cleanse.
+# The weapon's real strength (Cripple's -25% damage dealt) is unscoreable
+# until damage_debuff is promoted into §2.2.

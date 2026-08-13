@@ -1,0 +1,78 @@
+# Curse line — remaining 6 weapons, curated 2026-08-12 (tree pass).
+# Q/W pool parity with Rotcaller / Damnation (Vile Curse engine, Armor
+# Piercer, Desecrate, Cursed Tar, Grudge).
+
+- weapon: 2H_CURSEDSTAFF             # Great Cursed Staff — decay zone caster
+  curated_as_of: 2026-08-12
+  role_hint: support
+  capabilities:
+    - {cap: zone_control,  score: 2, evidence: AREAOFDECAY}    # E: channel area stacking Vile Curses
+    - {cap: heal_reduction, score: 1, evidence: AREAOFDECAY}   # purges healing-over-time in the area
+    - {cap: sustained_dps, score: 2, evidence: CURSEDOT}       # curse DoT engine (QW)
+    - {cap: burst_aoe,     score: 1, evidence: AREAOFDECAY}
+    - {cap: resist_shred,  score: 1, evidence: ARMORPIERCER}   # (QW)
+    - {cap: root,          score: 1, evidence: CURSENOVA}      # (QW)
+    - {cap: slow,          score: 1, evidence: CURSED_SPLAT}   # (QW)
+    - {cap: buff_allies,   score: 1, evidence: CURSEDHANDS_STACKUP}  # (QW)
+
+- weapon: 2H_DEMONICSTAFF            # Demonic Staff — the fear wave
+  curated_as_of: 2026-08-12
+  role_hint: support
+  capabilities:
+    - {cap: knockback_displace, score: 2, evidence: CURSED_WALL}  # E: AoE FEAR — forced flight scatters the clump
+    - {cap: peel,          score: 2, evidence: CURSED_WALL}    # feared divers run away from you
+    - {cap: burst_aoe,     score: 1, evidence: CURSED_WALL}    # 160 pierce
+    - {cap: sustained_dps, score: 2, evidence: CURSEDOT}       # (QW)
+    - {cap: resist_shred,  score: 1, evidence: ARMORPIERCER}   # (QW)
+    - {cap: root,          score: 1, evidence: CURSENOVA}      # (QW)
+    - {cap: slow,          score: 1, evidence: CURSED_SPLAT}   # (QW)
+    - {cap: buff_allies,   score: 1, evidence: CURSEDHANDS_STACKUP}  # (QW)
+
+- weapon: 2H_SKULLORB_HELL           # Cursed Skull — roaming %HP zone
+  curated_as_of: 2026-08-12
+  role_hint: support
+  capabilities:
+    - {cap: zone_control,  score: 2, evidence: SKULLCURSE}     # E: moving haunted ground, 5s
+    - {cap: burst_aoe,     score: 2, evidence: SKULLCURSE}     # players also take %Health souls damage
+    - {cap: sustained_dps, score: 2, evidence: CURSEDOT}       # (QW)
+    - {cap: resist_shred,  score: 1, evidence: ARMORPIERCER}   # (QW)
+    - {cap: root,          score: 1, evidence: CURSENOVA}      # (QW)
+    - {cap: slow,          score: 1, evidence: CURSED_SPLAT}   # (QW)
+    - {cap: buff_allies,   score: 1, evidence: CURSEDHANDS_STACKUP}  # (QW)
+
+- weapon: MAIN_CURSEDSTAFF           # Cursed Staff (1H) — death-curse nuker
+  curated_as_of: 2026-08-12
+  role_hint: support
+  capabilities:
+    - {cap: burst_st,      score: 2, evidence: DEATHCURSE2}    # E: charge-scaled delayed nuke
+    - {cap: sustained_dps, score: 2, evidence: CURSEDOT}       # (QW)
+    - {cap: resist_shred,  score: 1, evidence: ARMORPIERCER}   # (QW)
+    - {cap: root,          score: 1, evidence: CURSENOVA}      # (QW)
+    - {cap: slow,          score: 1, evidence: CURSED_SPLAT}   # (QW)
+    - {cap: zone_control,  score: 1, evidence: CURSED_SPLAT}   # (QW)
+    - {cap: buff_allies,   score: 1, evidence: CURSEDHANDS_STACKUP}  # (QW)
+
+- weapon: MAIN_CURSEDSTAFF_AVALON    # Shadowcaller — armor-typed DoT aura
+  curated_as_of: 2026-08-12
+  role_hint: support
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: DYNAMIC_CURSE}  # E: Inner Shadow aura melts cloth clumps
+    - {cap: sustained_dps, score: 2, evidence: DYNAMIC_CURSE}  # the aura ticks; curse engine (QW)
+    - {cap: slow,          score: 1, evidence: DYNAMIC_CURSE}
+    - {cap: resist_shred,  score: 1, evidence: ARMORPIERCER}   # (QW)
+    - {cap: root,          score: 1, evidence: CURSENOVA}      # (QW)
+    - {cap: zone_control,  score: 1, evidence: CURSED_SPLAT}   # (QW)
+    - {cap: buff_allies,   score: 1, evidence: CURSEDHANDS_STACKUP}  # (QW)
+
+- weapon: MAIN_CURSEDSTAFF_UNDEAD    # Lifecurse Staff — the purge blades
+  curated_as_of: 2026-08-12
+  role_hint: support
+  capabilities:
+    - {cap: purge,         score: 2, evidence: ENFEEBLEBLADES} # E: continuous AoE purge zone, 3.75s
+    - {cap: zone_control,  score: 2, evidence: ENFEEBLEBLADES} # the blades hold the ground they spin on
+    - {cap: burst_aoe,     score: 1, evidence: ENFEEBLEBLADES}
+    - {cap: sustained_dps, score: 2, evidence: CURSEDOT}       # (QW)
+    - {cap: resist_shred,  score: 1, evidence: ARMORPIERCER}   # (QW)
+    - {cap: root,          score: 1, evidence: CURSENOVA}      # (QW)
+    - {cap: slow,          score: 1, evidence: CURSED_SPLAT}   # (QW)
+    - {cap: buff_allies,   score: 1, evidence: CURSEDHANDS_STACKUP}  # (QW)

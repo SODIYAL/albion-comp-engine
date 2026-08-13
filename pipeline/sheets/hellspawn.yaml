@@ -1,0 +1,38 @@
+# Hellspawn Staff — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 6 sightings, dominant role: range.
+#
+# Identity: shapeshifter AoE bomber. The E transforms into a Hellfire Imp
+# ("Offensive: very high / Defensive: very low") with a cheat-death: at 3+
+# Shift Charges, lethal damage instead heals a chunk of Max Health while
+# damage-immune. The human-form kit is utility: shields, a 5-target pull,
+# polymorph, slow cloud.
+#
+# DRAFT CORRECTIONS (verified against full dumps text):
+#   - stun 2 via SHAPESHIFT_IMP REMOVED: "While healing YOU are stunned" — a
+#     self-stun drawback on the cheat-death, not enemy CC. Flag suppressed.
+#   - heal_sustain 2 via SHAPESHIFT_IMP REMOVED: Return from Hell heals the
+#     WIELDER (self_sustain), never allies.
+#   - buff_allies + tankiness via Altered Beast (ally dirs) CORRECTED: "you
+#     increase your Max and Current Health" is self-only; parser direction
+#     bug fixed in effect_overrides.yaml. buff_allies re-grounds on Adapting
+#     Matter's real 5-ally absorb shield instead.
+# Polymorph (2.5s player transform) has no capability of its own — noted as
+# extra peel provenance only, like Knockout's sleep on the Polehammer sheet.
+# Damage caps ground on the E: imp-form spells are the weapon's real output
+# and are not separately equippable.
+
+- weapon: 2H_SHAPESHIFTER_HELL       # Hellspawn Staff — shapeshifter AoE bomber
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: range
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: SHAPESHIFT_IMP}   # E: imp-form fire AoE is the payload
+    - {cap: self_sustain,  score: 2, evidence: SHAPESHIFT_IMP}   # cheat-death heal + Altered Beast health stacks
+    - {cap: clump_create,  score: 1, evidence: SHAPE_W_AREA_PULL}  # W: tendrils pull up to 5 enemies to you (QW)
+    - {cap: root,          score: 1, evidence: SHAPE_W_AREA_PULL}  # same cast: 1.35s root (QW)
+    - {cap: catch,         score: 1, evidence: SHAPE_W_AREA_PULL}  # pull + root = a caught runner (QW)
+    - {cap: peel,          score: 1, evidence: SHAPE_W_TETHERBEAM} # W: tether-pull a party ally OUT; Polymorph a diver (QW)
+    - {cap: buff_allies,   score: 1, evidence: SHAPE_Q_DAMAGE_AND_SHIELD}  # Q: 150 absorb shield on 5 allies (QW)
+    - {cap: zone_control,  score: 1, evidence: SHAPE_W_DAMAGE_AOE}  # W: Distortion cloud, 3s DoT + slow (QW)
+    - {cap: slow,          score: 1, evidence: SHAPE_W_DAMAGE_AOE}  # -10% inside the cloud — weak (QW)
+    - {cap: resist_shred,  score: 1, evidence: SHAPE_Q_CONE_MELEE}  # Q: -2% x3 stacks (QW)
+    - {cap: mobility,      score: 1, evidence: SHAPE_W_TETHERBEAM}  # W: dash-to-enemy tether (QW)

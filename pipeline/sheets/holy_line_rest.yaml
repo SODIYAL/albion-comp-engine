@@ -1,0 +1,40 @@
+# Holy line — remaining 3 weapons, curated 2026-08-12 (tree pass).
+# Q/W pool parity with Hallowfall / Redemption / Lifetouch / Holy Staff /
+# Great Holy. Two settled findings land here: the Fallen Staff's inherent
+# E cleanse (HANDOFF), and the Exalted Staff's anti_zone (design doc §2.2
+# amendment — still the only anti_zone supplier).
+
+- weapon: 2H_DIVINESTAFF             # Divine Staff — shield-detonate healer
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  capabilities:
+    - {cap: buff_allies,  score: 2, evidence: HOLYSHIELD}    # E: 456 ally absorb shield (via override); W: Blessing
+    - {cap: heal_burst,   score: 2, evidence: HOLYSHIELD}    # E: Divinity's Grace detonation pulse; Q: Holy Flash
+    - {cap: heal_sustain, score: 2, evidence: HEALINGBEAM}   # holy W pool (QW)
+    - {cap: peel,         score: 1, evidence: PULSINGHEAL}   # (QW)
+    - {cap: knockback_displace, score: 1, evidence: PULSINGHEAL}  # (QW)
+    # NO cleanse (settled holy finding), NO mobility.
+
+- weapon: 2H_HOLYSTAFF_CRYSTAL       # Exalted Staff — the anti-zone healer
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  capabilities:
+    - {cap: anti_zone,    score: 2, evidence: HOLY_DISPEL}   # E: removes enemy-placed ground areas — sole supplier
+    - {cap: heal_burst,   score: 2, evidence: HOLY_DISPEL}   # E: 138 instant to 20 allies; Q: Holy Flash
+    - {cap: heal_sustain, score: 2, evidence: HEALINGBEAM}   # holy W pool (QW)
+    - {cap: buff_allies,  score: 1, evidence: HOLY_DISPEL}   # +20% max/current Health on healed allies, 3s
+    - {cap: peel,         score: 1, evidence: PULSINGHEAL}   # (QW)
+    - {cap: knockback_displace, score: 1, evidence: PULSINGHEAL}  # (QW)
+    # NO cleanse (settled holy finding), NO mobility.
+
+- weapon: 2H_HOLYSTAFF_HELL          # Fallen Staff — the immunity-cleanse healer
+  curated_as_of: 2026-08-12
+  role_hint: healer
+  capabilities:
+    - {cap: heal_burst,   score: 3, evidence: HOLY_ULTIMATE} # E: Salvation — 270 to 20 allies in one pulse
+    - {cap: cleanse,      score: 2, evidence: HOLY_ULTIMATE} # inherent E cleanse incl. DoTs (settled finding)
+    - {cap: peel,         score: 2, evidence: HOLY_ULTIMATE} # 2s damage IMMUNITY for everyone in the circle
+    - {cap: heal_sustain, score: 2, evidence: HEALINGBEAM}   # holy W pool (QW)
+    - {cap: buff_allies,  score: 1, evidence: HOLYHOT}       # (QW)
+    - {cap: knockback_displace, score: 1, evidence: PULSINGHEAL}  # (QW)
+    # NO mobility — the 2s charge-up makes it the anchor healer's anchor.

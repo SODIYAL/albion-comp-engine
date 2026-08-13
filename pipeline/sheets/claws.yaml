@@ -1,0 +1,27 @@
+# Claws — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 3 sightings, dominant role: melee.
+#
+# Identity: single-target lockdown assassin. The E (Disembowel) pins the
+# target — a channeled root with REPEATED interrupts and a shield break,
+# ending in a bleed. One person is removed from the fight while it channels.
+# Shares the dagger Q/W pool with Bloodletter/Deathgivers; QW scores mirror
+# those sheets. mobility 2 not 3: the E is a stationary channel, unlike the
+# Bloodletter's dash E.
+
+- weapon: 2H_CLAWPAIR                # Claws — single-target lockdown assassin
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: melee
+  capabilities:
+    - {cap: root,          score: 2, evidence: DISEMBOWEL}          # E: channeled pin, breaks if target moves 6m
+    - {cap: catch,         score: 2, evidence: DISEMBOWEL}          # the pin IS the catch; W: Shadow Edge
+    - {cap: burst_st,      score: 2, evidence: DISEMBOWEL}          # 45 every 0.3 + exit bleed + dagger stacking
+    - {cap: mobility,      score: 2, evidence: QDASH}               # Q: Deadly Swipe; W: Dash / Chain Slash (QW)
+    - {cap: purge,         score: 1, evidence: DISEMBOWEL}          # E: breaks active shields — narrow purge
+    - {cap: peel,          score: 1, evidence: SKILLSHOT_TELEPORT}  # W: Shadow Edge stun; E pins a diver (QW)
+    - {cap: stun,          score: 1, evidence: SKILLSHOT_TELEPORT}  # W: 1s skillshot (QW)
+    - {cap: engage,        score: 1, evidence: QDASH}               # leap in (QW)
+    - {cap: disengage,     score: 1, evidence: GROUNDDASH}          # W: Dash out; Chain Slash iframes (QW)
+    - {cap: heal_reduction, score: 1, evidence: DEEPCUTS}           # W: Forbidden Stab negate (QW)
+    - {cap: resist_shred,  score: 1, evidence: SUNDERARMOR2}        # Q: stacking -4% x3 (QW)
+    - {cap: sustained_dps, score: 1, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # AA-speed dagger passives
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_DAGGER}   # PASSIVE: Life Leech

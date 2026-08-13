@@ -1,0 +1,33 @@
+# Deathgivers — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 5 sightings, dominant role: melee.
+#
+# Identity: stealth burst assassin. The E (Ghost Strike) charges through the
+# target, stealths for 1s, and does NOT go on cooldown when the target carries
+# 3 Sunder Armor Charges — the shred-then-burst loop. Shares the dagger Q/W
+# pool with the Bloodletter sheet; QW-conditional scores mirror it.
+#
+# DRAFT CORRECTIONS (verified against full dumps text):
+#   - buff_allies 2 + resist_shred 2 via GHOSTSTRIKE REMOVED: the E's
+#     cooldown-reset condition REFERENCES Sunder Armor / Assassin Spirit
+#     charges, and the parser credited the E with those spells' effects.
+#     The E buffs no ally and shreds nothing. Suppressed in overrides;
+#     resist_shred re-grounds on Q: Sunder Armor at the W-option score.
+#   - tankiness 1 via Chain Slash iframes REMOVED (Bloodletter ruling).
+# No execute: health-threshold damage is the Bloodletter E's mechanic, not
+# this kit's. Burst here is flat and stealth-delivered.
+
+- weapon: 2H_DUALSICKLE_UNDEAD       # Deathgivers — stealth burst assassin
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: melee
+  capabilities:
+    - {cap: burst_st,      score: 2, evidence: GHOSTSTRIKE}         # E: 153 + repeatable at 3 Sunder charges
+    - {cap: engage,        score: 2, evidence: GHOSTSTRIKE}         # charge-through opener, stealth reset
+    - {cap: disengage,     score: 2, evidence: GHOSTSTRIKE}         # 1s invisibility out; W: Chain Slash iframes
+    - {cap: mobility,      score: 2, evidence: GROUNDDASH}          # W: Dash; E charge; Q: Deadly Swipe leap (QW)
+    - {cap: catch,         score: 2, evidence: SKILLSHOT_TELEPORT}  # W: Shadow Edge stun-teleport; Chain Slash multi-charge (QW)
+    - {cap: resist_shred,  score: 1, evidence: SUNDERARMOR2}        # Q: stacking -4% x3 — feeds the E reset (QW)
+    - {cap: stun,          score: 1, evidence: SKILLSHOT_TELEPORT}  # W: Shadow Edge — 1s skillshot stun (QW)
+    - {cap: peel,          score: 1, evidence: SKILLSHOT_TELEPORT}  # the stun defensively (QW)
+    - {cap: heal_reduction, score: 1, evidence: DEEPCUTS}           # W: Forbidden Stab — negate 1.5s (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_DAGGER}  # PASSIVE: Life Leech
+    - {cap: sustained_dps, score: 1, evidence: WEAPON_STATS}        # AA-speed dagger passives

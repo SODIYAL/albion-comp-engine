@@ -1,0 +1,24 @@
+# Battle Bracers — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 4 sightings, dominant role: melee.
+#
+# Identity: combo brawler. Every Q option is a dash-combo; the E (Falcon
+# Smash) floats CC-immune for up to 3s then dives; the W row carries a
+# counter-stance (Defense +300%, 150% reflect), a 9m wall-slam knockback,
+# and a stun-punch combo. The most mobile melee kit curated so far.
+# Backhand Strike's wall-slam bonus damage and Counter's reflect have no
+# capability axis — noted, unscored.
+
+- weapon: 2H_KNUCKLES_SET2           # Battle Bracers — combo brawler
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: melee
+  capabilities:
+    - {cap: mobility,      score: 3, evidence: DIVEPUNCH_RISE}   # E float-dive; every Q is a dash; W: Triple Kick
+    - {cap: engage,        score: 2, evidence: DIVEPUNCH_RISE}   # CC-immune float into a dive
+    - {cap: disengage,     score: 2, evidence: DIVEPUNCH_RISE}   # the float IS the escape window
+    - {cap: catch,         score: 2, evidence: DIVEPUNCH_RISE}   # Q: Dragon Leap; W: Triple Kick drag
+    - {cap: burst_st,      score: 2, evidence: KNUCKLECOMBO}     # W: 30+153 punch combo; Q: Create Opening (QW)
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_KNUCKLE_BRAWLER_SPEED}  # Fatal Fury stacks + AA brawl
+    - {cap: knockback_displace, score: 2, evidence: BACKHAND_KNOCKBACK}  # W: 9m shove, +100 on wall collision (QW)
+    - {cap: peel,          score: 1, evidence: BACKHAND_KNOCKBACK}  # shove a diver into a wall (QW)
+    - {cap: stun,          score: 1, evidence: KNUCKLECOMBO}     # W: 1.1s in the combo (QW)
+    - {cap: resist_shred,  score: 1, evidence: BACKHAND_KNOCKBACK}  # W: -20% for 5s; Q: Create Opening -12% (QW)

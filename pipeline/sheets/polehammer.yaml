@@ -1,0 +1,35 @@
+# Polehammer — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 11 sightings, dominant role: tank.
+#
+# Identity: the E (Groundbreaker, 20m line, 2.7s stun at the split's center) is
+# a ranged initiation AND a peel tool — scored on both, weighted to engage.
+# KNOCKOUT (W, 5s single-target sleep that breaks on damage) has no capability
+# of its own in §2.2 (sleep != stun); it is noted here as extra peel provenance
+# only, not scored separately.
+#
+# DRAFT CORRECTIONS (directionality rule):
+#   - heal_sustain 1 REMOVED: Life Leech passive heals the WIELDER — a
+#     self-directed heal cannot ground the ally-healing capability.
+#   - knockback_displace evidence moved off TAR_RING (a slow ring, no enemy
+#     knockback) onto GEYSER (throws enemies into the air — enemy-directed).
+
+- weapon: 2H_POLEHAMMER              # Polehammer — long-range line-stun tank
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: tank
+  capabilities:
+    - {cap: stun,          score: 3, evidence: GROUNDBREAKER2}   # E: 20m line, 2.7s stun at center
+    - {cap: engage,        score: 3, evidence: CHARGESLOWAE}     # W: Slowing Charge dash is the map-visible evidence; the
+                                                                 # SCORE is 3 because the E's 20m line stun is the initiation
+                                                                 # (effect map derives engage from dashes only, not enemy CC)
+    - {cap: peel,          score: 2, evidence: GROUNDBREAKER2}   # same tool defensively; W: Knockout, Power Geyser
+    - {cap: catch,         score: 2, evidence: GROUNDBREAKER2}   # 20m lockdown line
+    - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}     # tank-line weapon, played frontline
+    - {cap: slow,          score: 2, evidence: TAR_RING}         # W: Inertia Ring — 0.8 slow, IGNORES CC resistance (QW)
+    - {cap: anti_dive,     score: 2, evidence: TAR_RING}         # the ring punishes anyone who walks through it (QW)
+    - {cap: zone_control,  score: 1, evidence: TAR_RING}         # brief self-centred denial ring (QW)
+    - {cap: knockback_displace, score: 1, evidence: GEYSER}      # W: Power Geyser knock-up — enemy-directed (QW)
+    - {cap: mobility,      score: 1, evidence: CHARGESLOWAE}     # W: Slowing Charge dash (QW)
+    - {cap: disengage,     score: 1, evidence: CHARGESLOWAE}     # dash out through the gap (QW)
+    - {cap: purge,         score: 1, evidence: IRONBREAKER}      # Q: breaks active shields only — narrow purge
+    - {cap: resist_shred,  score: 1, evidence: IRONBREAKER}      # Q: -12% AoE for 4s
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_HAMMER}  # PASSIVE: Life Leech

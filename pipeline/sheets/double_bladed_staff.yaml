@@ -1,0 +1,27 @@
+# Double Bladed Staff — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 3 sightings, dominant role: melee.
+#
+# Identity: skirmish bruiser on the quarterstaff pool. The E (Soaring Swipe)
+# is a leap with an AoE 50% slow and a per-player-hit cooldown refund — a
+# skirmisher's engage/chase tool rather than the Quarterstaff's peel E.
+# Q/W pool identical to Quarterstaff; QW-conditional scores mirror it (stun 1
+# on both — Stun Run is a W option, not an E identity; the Quarterstaff sheet
+# uses the same ladder).
+
+- weapon: 2H_DOUBLEBLADEDSTAFF       # Double Bladed Staff — skirmish bruiser
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: melee
+  capabilities:
+    - {cap: slow,          score: 2, evidence: DASH_KNOCKBACK}   # E: 50% AoE slow for 3s — the signature
+    - {cap: mobility,      score: 2, evidence: DASH_KNOCKBACK}   # E leap w/ partial CD refund; Q: Cartwheel
+    - {cap: engage,        score: 2, evidence: DASH_KNOCKBACK}   # leap in, slow the clump
+    - {cap: catch,         score: 2, evidence: DASH_KNOCKBACK}   # leap + 50% slow = caught
+    - {cap: disengage,     score: 2, evidence: DASH_KNOCKBACK}   # leap out; Q: Cartwheel
+    - {cap: knockback_displace, score: 2, evidence: LAUNCHER}    # W: Rising Blow / Separator / Forceful Swing (QW)
+    - {cap: peel,          score: 2, evidence: SEPARATING_SLAM}  # same W row as Quarterstaff (QW)
+    - {cap: sustained_dps, score: 1, evidence: QSTAFF_COMBO}     # W: Gale Dance AA buff; Whirling Strikes (QW)
+    - {cap: burst_aoe,     score: 1, evidence: DASH_KNOCKBACK}   # 80 on impact + Whirling — modest
+    - {cap: stun,          score: 1, evidence: STUNRUN}          # W option; Q3 combo; passive (QW)
+    - {cap: root,          score: 1, evidence: SEPARATING_SLAM}  # (QW)
+    - {cap: anti_dive,     score: 1, evidence: QS_WHIRLWIND2}    # (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_QUARTERSTAFF}  # PASSIVE: Life Leech

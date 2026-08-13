@@ -1,0 +1,40 @@
+# Great Hammer — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 5 sightings, dominant role: tank. Replaces the illustrative §2.3
+# block (tankiness 2, engage 3, clump_create 3, stun 2, zone_control 2, peel 1).
+#
+# Identity: the clump engine. The E (Tackle) dashes through the enemy line,
+# knocking everyone on the path together and stunning them 2.35s, with the
+# cooldown refunded per enemy player hit — engage, clump and stun in one
+# spammable button. This is the design doc's own example weapon for
+# clump_create ("Great Hammer clumps, Heavy Mace peels", §2.2 notes).
+#
+# Shares the hammer Q/W pool with the Polehammer sheet — QW-conditional
+# scores (slow/anti_dive/zone via Inertia Ring, purge/shred via Iron Breaker,
+# knock-up via Power Geyser, Life Leech) mirror it exactly.
+#
+# Differences vs the illustrative block, for expert review:
+#   - zone_control 2 -> 1: same W pool as Polehammer (scored 1); nothing in
+#     the kit denies ground beyond the Inertia Ring.
+#   - peel 1 -> 2: Tackle + Power Geyser + Knockout + the ring is more
+#     defensive tooling than the illustrative sketch credited.
+#   - knockback_displace ADDED (E structured, enemy-directed, verified).
+
+- weapon: 2H_HAMMER                  # Great Hammer — the clump engine
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: tank
+  capabilities:
+    - {cap: engage,        score: 3, evidence: HAMMERTACKLE}     # E: dash-through, CD refund per player hit
+    - {cap: clump_create,  score: 3, evidence: HAMMERTACKLE}     # knockback along the dash line piles enemies (override)
+    - {cap: stun,          score: 2, evidence: HAMMERTACKLE}     # 2.35s on everyone tackled; Stunning Strike passive
+    - {cap: knockback_displace, score: 2, evidence: HAMMERTACKLE}  # E displacement; W: Power Geyser knock-up
+    - {cap: peel,          score: 2, evidence: HAMMERTACKLE}     # tackle a diver; W: Knockout, Geyser, ring
+    - {cap: catch,         score: 2, evidence: HAMMERTACKLE}     # dash + stun = caught
+    - {cap: mobility,      score: 2, evidence: HAMMERTACKLE}     # the E is a real dash; W: Slowing Charge
+    - {cap: disengage,     score: 2, evidence: HAMMERTACKLE}     # tackle OUT through the line, stunning pursuit
+    - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}     # tank-line weapon, played frontline
+    - {cap: slow,          score: 2, evidence: TAR_RING}         # W: 0.8 slow ring, ignores CC resistance (QW)
+    - {cap: anti_dive,     score: 2, evidence: TAR_RING}         # the ring punishes walkers (QW)
+    - {cap: zone_control,  score: 1, evidence: TAR_RING}         # brief self-centred denial (QW)
+    - {cap: purge,         score: 1, evidence: IRONBREAKER}      # Q: breaks active shields only (QW)
+    - {cap: resist_shred,  score: 1, evidence: IRONBREAKER}      # Q: -12% AoE for 4s (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_HAMMER}  # PASSIVE: Life Leech

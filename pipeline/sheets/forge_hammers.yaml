@@ -1,0 +1,30 @@
+# Forge Hammers — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 3 sightings, dominant role: tank.
+#
+# Identity: the walking zone. The E (Giant Steps) grows you giant for 10s —
+# +30% damage resistances, +AA range, and a 7m aura slowing everything near
+# you by 35%, with repeatable Giant Smashes. The zone IS the tank: space
+# denial that moves with you. Shares the hammer Q/W pool with Polehammer /
+# Great Hammer / Hand of Justice; QW-conditional scores mirror those sheets.
+# Knockout's 5s sleep grounds the stun score with the usual caveat (breaks
+# on damage).
+
+- weapon: 2H_DUALHAMMER_HELL         # Forge Hammers — the walking zone
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: tank
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: GIANTSTEPS}       # E: +30% resistances for 10s; tank line
+    - {cap: zone_control,  score: 2, evidence: GIANTSTEPS}       # the 7m slow aura moves with you
+    - {cap: slow,          score: 2, evidence: GIANTSTEPS}       # 35% aura; W: Inertia Ring (QW)
+    - {cap: anti_dive,     score: 2, evidence: GIANTSTEPS}       # divers stand in the aura; W: ring (QW)
+    - {cap: peel,          score: 2, evidence: GIANTSTEPS}       # aura + W: Geyser / Knockout (QW)
+    - {cap: catch,         score: 1, evidence: GIANTSTEPS}       # the aura shears escape speed
+    - {cap: sustained_dps, score: 1, evidence: GIANTSTEPS}       # repeatable Giant Smashes — modest
+    - {cap: stun,          score: 1, evidence: KNOCKOUT}         # W: 5s sleep, breaks on damage; Stunning Strike passive (QW)
+    - {cap: knockback_displace, score: 1, evidence: GEYSER}      # W: knock-up (QW)
+    - {cap: engage,        score: 1, evidence: CHARGESLOWAE}     # W: Slowing Charge dash (QW)
+    - {cap: mobility,      score: 1, evidence: CHARGESLOWAE}     # (QW)
+    - {cap: disengage,     score: 1, evidence: CHARGESLOWAE}     # (QW)
+    - {cap: purge,         score: 1, evidence: IRONBREAKER}      # Q: shield break only (QW)
+    - {cap: resist_shred,  score: 1, evidence: IRONBREAKER}      # Q: -12% AoE (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_HAMMER}  # PASSIVE: Life Leech

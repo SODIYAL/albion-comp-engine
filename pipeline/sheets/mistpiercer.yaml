@@ -1,0 +1,31 @@
+# Mistpiercer — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 9 sightings, dominant role: range.
+#
+# Identity: piercing line burst. The E (Lucent Hawk) fires a 178-damage
+# line-piercing hawk recastable 4 more times within 3s — five hawks into one
+# target is single-target burst, five hawks through a clump is line AoE; scored
+# on both, like the design doc's Permafrost dual-use precedent.
+#
+# DRAFT CORRECTIONS:
+#   - knockback_displace 1 via JUMPSHOT2 REMOVED: Frost Shot knocks the USER
+#     back — the exact self-reposition error §2.3 documents correcting on the
+#     Longbow sheet. It grounds disengage instead.
+#   - engage 1 via SPEEDSHOT2 REMOVED: self move speed is not initiation.
+#   - tankiness 1 + self_sustain 1 via DEADLYSHOT REMOVED: Deadly Shot SHREDS
+#     enemy resistances (prose:shield misfire); nothing in this kit shields or
+#     heals the wielder.
+
+- weapon: 2H_BOW_AVALON              # Mistpiercer — piercing line-burst archer
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: range
+  capabilities:
+    - {cap: burst_st,      score: 2, evidence: HAWK_SHOT_MULTI1}   # E: 178 x5 recasts into one target
+    - {cap: burst_aoe,     score: 2, evidence: HAWK_SHOT_MULTI1}   # hawks pierce every enemy on the line
+    - {cap: sustained_dps, score: 2, evidence: WEAPON_STATS}       # bow AA pattern (Longbow precedent)
+    - {cap: root,          score: 1, evidence: GROUNDARROW}        # W: Ray of Light — 3m AoE root 1.8s (QW; same spell as Longbow)
+    - {cap: catch,         score: 1, evidence: GROUNDARROW}        # ranged root sets up the catch (QW)
+    - {cap: peel,          score: 1, evidence: GROUNDARROW}        # root a diver off the backline (QW)
+    - {cap: slow,          score: 1, evidence: PASSIVE_SLOWPOISON} # every AA slows 10%; Q: Multishot, W: Frost Shot add more
+    - {cap: resist_shred,  score: 1, evidence: DEADLYSHOT}         # Q: stacking -3% x3 line pierce; Piercing Arrows passive too
+    - {cap: mobility,      score: 1, evidence: SPEEDSHOT2}         # W: Speed Shot +30% MS (QW)
+    - {cap: disengage,     score: 1, evidence: JUMPSHOT2}          # W: Frost Shot — self-knockback escape jump (QW)

@@ -1,0 +1,36 @@
+# Grovekeeper — curated 2026-08-12 from ao-bin-dumps spell text
+# (effect_lookup dump). Replaces the illustrative §2.3 block (tankiness 2,
+# engage 3, stun 2, clump_create 2, peel 1).
+#
+# CORRECTIONS vs the illustrative block:
+#   - clump_create 2 REMOVED: Ground Pound throws enemies into the air where
+#     they stand — it holds a clump, it does not create one. Same ruling as
+#     Permafrost (stun) and Kingmaker (knock-up). The hammer-line clump
+#     engines are Tackle and Onslaught (drag mechanics), which this E lacks.
+#   - peel 1 -> 2: the E plus the hammer W pool (Geyser, Knockout, ring) is
+#     more defensive tooling than the sketch credited.
+#   - knockback_displace ADDED (E air-throw, scaling with enemies hit,
+#     ignores CC resistance — structured, verified).
+#
+# Identity: immune-leap engage tank. The E (Ground Pound) is a CC+damage
+# immune leap into a 2.5s stun in 5.5m with a scaling knock-up. Shares the
+# hammer Q/W pool; QW-conditional scores mirror the other hammer sheets.
+
+- weapon: 2H_RAM_KEEPER              # Grovekeeper — immune-leap engage tank
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: tank
+  capabilities:
+    - {cap: engage,        score: 3, evidence: RAM_CHARGE}      # E: CC+damage-immune leap into the stun
+    - {cap: stun,          score: 2, evidence: RAM_CHARGE}      # 2.5s in 5.5m; Stunning Strike passive
+    - {cap: knockback_displace, score: 2, evidence: RAM_CHARGE} # scaling air-throw, ignores CC resistance
+    - {cap: peel,          score: 2, evidence: RAM_CHARGE}      # pound the divers; W: Geyser / Knockout (QW)
+    - {cap: catch,         score: 2, evidence: RAM_CHARGE}      # leap + 2.5s stun = caught
+    - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}    # tank-line weapon, played frontline
+    - {cap: mobility,      score: 2, evidence: RAM_CHARGE}      # the E moves you; W: Slowing Charge
+    - {cap: disengage,     score: 2, evidence: RAM_CHARGE}      # immune leap OUT
+    - {cap: slow,          score: 2, evidence: TAR_RING}        # W: 0.8 CC-resist-ignoring ring (QW)
+    - {cap: anti_dive,     score: 2, evidence: TAR_RING}        # (QW)
+    - {cap: zone_control,  score: 1, evidence: TAR_RING}        # (QW)
+    - {cap: purge,         score: 1, evidence: IRONBREAKER}     # Q: shield break only (QW)
+    - {cap: resist_shred,  score: 1, evidence: IRONBREAKER}     # Q: -12% AoE (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_HAMMER}  # PASSIVE: Life Leech

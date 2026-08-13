@@ -1,0 +1,36 @@
+# Bloodletter — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 9 sightings, dominant role: melee.
+#
+# Identity: the game's mobility ceiling — E dash, Q Deadly Swipe leap, and W
+# options Dash / Chain Slash / Shadow Edge. The E (Lunging Stabs) deals
+# health-threshold-scaled damage: the classic executioner. Agrees with the
+# illustrative §2.3 block (mobility 3, execute 2, burst_st 2, catch 2,
+# disengage 2); this sheet adds the evidence and the Q/W conditionals.
+#
+# DRAFT CORRECTIONS (directionality rule):
+#   - heal_sustain 2 REMOVED: E lifesteal heals the WIELDER only.
+#   - resist_shred evidence moved off ASSASSINSPIRIT (it lowers YOUR defense —
+#     a self-debuff, not enemy shred) onto Q: Sunder Armor.
+#   - tankiness 1 via CHAINDASH REMOVED: momentary charge iframes are not
+#     frontline durability.
+# Forbidden Stab's interrupt has no `silence` score: an instant interrupt is
+# not a cast-denial window. Its 100% heal negation grounds heal_reduction.
+
+- weapon: MAIN_RAPIER_MORGANA        # Bloodletter — mobile executioner
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: melee
+  capabilities:
+    - {cap: mobility,       score: 3, evidence: RAPIERSTAB}         # E dash; Q: Deadly Swipe; W: Dash / Chain Slash / Shadow Edge
+    - {cap: execute,        score: 2, evidence: RAPIERSTAB}         # E: damage keyed to target health threshold
+    - {cap: burst_st,       score: 2, evidence: RAPIERSTAB}         # E + stacked Assassin Spirit charges
+    - {cap: catch,          score: 2, evidence: RAPIERSTAB}         # W: Chain Slash / Shadow Edge close anything (QW)
+    - {cap: disengage,      score: 2, evidence: GROUNDDASH}         # W: Dash; Chain Slash grants immunity while charging (QW)
+    - {cap: engage,         score: 1, evidence: RAPIERSTAB}         # dives for itself, not a group initiation
+    - {cap: stun,           score: 1, evidence: SKILLSHOT_TELEPORT} # W: Shadow Edge — 1s skillshot stun (QW)
+    - {cap: peel,           score: 1, evidence: SKILLSHOT_TELEPORT} # the stun works defensively too (QW)
+    - {cap: resist_shred,   score: 1, evidence: SUNDERARMOR2}       # Q: stacking -4% x3 (QW)
+    - {cap: heal_reduction, score: 1, evidence: DEEPCUTS}           # W: Forbidden Stab — "Negates the target's Healing
+                                                                    # Received for 1.5" + interrupt (QW). Grounded via the
+                                                                    # heal_flag_meaning: negate override (effect_overrides.yaml)
+    - {cap: self_sustain,   score: 1, evidence: PASSIVE_HEALTHCHANCE_DAGGER}  # PASSIVE: Life Leech
+    - {cap: sustained_dps,  score: 1, evidence: WEAPON_STATS}       # stacking damage buffs, single-target melee pattern

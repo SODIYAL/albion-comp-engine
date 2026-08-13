@@ -1,0 +1,98 @@
+# Quarterstaff line — remaining 6 weapons, curated 2026-08-12 (tree pass).
+# Q/W pool parity with the Quarterstaff / Double Bladed Staff sheets; each
+# block below is that pool plus the weapon's own E. Line identity:
+# displacement and disruption.
+
+- weapon: 2H_COMBATSTAFF_MORGANA     # Black Monk Staff — anti-shield disruption
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: purge,         score: 2, evidence: COMBATSTAFF_SLASH}  # E: breaks shields AND prevents new ones, 3s zone
+    - {cap: zone_control,  score: 1, evidence: COMBATSTAFF_SLASH}  # spinning blade zone
+    - {cap: burst_aoe,     score: 1, evidence: COMBATSTAFF_SLASH}
+    # E also stacks -40% damage dealt on players: damage_debuff poster child #4
+    - {cap: knockback_displace, score: 1, evidence: LAUNCHER}     # W pool (QW)
+    - {cap: peel,          score: 1, evidence: SEPARATING_SLAM}   # (QW)
+    - {cap: stun,          score: 1, evidence: STUNRUN}           # (QW)
+    - {cap: root,          score: 1, evidence: SEPARATING_SLAM}   # (QW)
+    - {cap: anti_dive,     score: 1, evidence: QS_WHIRLWIND2}     # (QW)
+    - {cap: sustained_dps, score: 1, evidence: QSTAFF_COMBO}      # (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_QUARTERSTAFF}
+
+- weapon: 2H_DOUBLEBLADEDSTAFF_CRYSTAL  # Phantom Twinblade — projection skirmisher
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: burst_aoe,     score: 1, evidence: QS_CRYSTAL_COMBO}  # E: projections slash + slam
+    - {cap: slow,          score: 1, evidence: QS_CRYSTAL_COMBO}
+    - {cap: knockback_displace, score: 1, evidence: QS_CRYSTAL_COMBO}  # 3rd-combo slam
+    - {cap: zone_control,  score: 1, evidence: QS_CRYSTAL_COMBO}  # moving projection areas
+    - {cap: peel,          score: 1, evidence: SEPARATING_SLAM}   # (QW)
+    - {cap: stun,          score: 1, evidence: STUNRUN}           # (QW)
+    - {cap: root,          score: 1, evidence: SEPARATING_SLAM}   # (QW)
+    - {cap: anti_dive,     score: 1, evidence: QS_WHIRLWIND2}     # (QW)
+    - {cap: mobility,      score: 1, evidence: CARTWHEEL}         # (QW)
+    - {cap: sustained_dps, score: 1, evidence: QSTAFF_COMBO}      # (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_QUARTERSTAFF}
+
+- weapon: 2H_IRONCLADEDSTAFF         # Iron-clad Staff — mobile mass-displace tank
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  capabilities:
+    - {cap: knockback_displace, score: 3, evidence: QSWHIRLWIND}  # E: mobile channel, 12m shove IGNORING CC resistance
+    - {cap: peel,          score: 2, evidence: QSWHIRLWIND}       # walk the whirlwind over your backline
+    - {cap: anti_dive,     score: 2, evidence: QSWHIRLWIND}       # divers get ejected; W: Forceful Swing (QW)
+    - {cap: tankiness,     score: 2, evidence: QSWHIRLWIND}       # +15% resists while channeling; tank role
+    - {cap: stun,          score: 1, evidence: STUNRUN}           # (QW)
+    - {cap: root,          score: 1, evidence: SEPARATING_SLAM}   # (QW)
+    - {cap: mobility,      score: 1, evidence: CARTWHEEL}         # (QW)
+    - {cap: sustained_dps, score: 1, evidence: QSTAFF_COMBO}      # (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_QUARTERSTAFF}
+
+- weapon: 2H_QUARTERSTAFF_AVALON     # Grailseeker — root-wall zoner
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: root,          score: 2, evidence: SOULSHAKER}        # E: energy wall roots everyone touching it, 3.5s
+    - {cap: zone_control,  score: 2, evidence: SOULSHAKER}        # the wall denies the line it stands on
+    - {cap: peel,          score: 2, evidence: SOULSHAKER}        # wall between divers and backline; W pool
+    - {cap: catch,         score: 1, evidence: SOULSHAKER}        # cast it ahead of runners
+    - {cap: burst_aoe,     score: 1, evidence: SOULSHAKER}        # 125 line
+    - {cap: knockback_displace, score: 1, evidence: LAUNCHER}     # (QW)
+    - {cap: stun,          score: 1, evidence: STUNRUN}           # (QW)
+    - {cap: anti_dive,     score: 1, evidence: QS_WHIRLWIND2}     # (QW)
+    - {cap: mobility,      score: 1, evidence: CARTWHEEL}         # (QW)
+    - {cap: sustained_dps, score: 1, evidence: QSTAFF_COMBO}      # (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_QUARTERSTAFF}
+
+- weapon: 2H_ROCKSTAFF_KEEPER        # Staff of Balance — anti-heal aura bruiser
+  curated_as_of: 2026-08-12
+  role_hint: tank
+  capabilities:
+    - {cap: heal_reduction, score: 2, evidence: QS_SLOWROPE}      # E: -50% Healing Received aura (negates own healing too)
+    - {cap: slow,          score: 2, evidence: QS_SLOWROPE}       # 50% aura slow
+    - {cap: zone_control,  score: 2, evidence: QS_SLOWROPE}       # 6.5m walking denial zone, up to 15s
+    - {cap: anti_dive,     score: 2, evidence: QS_WHIRLWIND2}     # divers stand in the aura; W: Forceful Swing (QW)
+    - {cap: tankiness,     score: 1, evidence: QS_SLOWROPE}       # +20% resists while active
+    - {cap: peel,          score: 1, evidence: SEPARATING_SLAM}   # (QW)
+    - {cap: stun,          score: 1, evidence: STUNRUN}           # (QW)
+    - {cap: root,          score: 1, evidence: SEPARATING_SLAM}   # (QW)
+    - {cap: knockback_displace, score: 1, evidence: LAUNCHER}     # (QW)
+    - {cap: sustained_dps, score: 1, evidence: QSTAFF_COMBO}      # (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_QUARTERSTAFF}
+
+- weapon: 2H_TWINSCYTHE_HELL         # Soulscythe — tornado displace skirmisher
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: knockback_displace, score: 2, evidence: TORNADO}      # E: line air-throw, ignores CC resistance
+    - {cap: burst_aoe,     score: 2, evidence: TORNADO}           # 152 through the line
+    - {cap: slow,          score: 2, evidence: TORNADO}           # 80% around the tornado
+    - {cap: peel,          score: 1, evidence: TORNADO}           # send it through the divers
+    - {cap: catch,         score: 1, evidence: TORNADO}           # the 80% slow shears escapes
+    - {cap: stun,          score: 1, evidence: STUNRUN}           # (QW)
+    - {cap: root,          score: 1, evidence: SEPARATING_SLAM}   # (QW)
+    - {cap: anti_dive,     score: 1, evidence: QS_WHIRLWIND2}     # (QW)
+    - {cap: mobility,      score: 1, evidence: CARTWHEEL}         # (QW)
+    - {cap: sustained_dps, score: 1, evidence: QSTAFF_COMBO}      # (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_QUARTERSTAFF}

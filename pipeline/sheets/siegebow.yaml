@@ -1,0 +1,25 @@
+# Siegebow — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 5 sightings, dominant role: range.
+#
+# Identity: anti-tank channel artillery. The E (Vicious Barrage) is a cone
+# volley channel where every volley adds 3% of the target's CURRENT Health as
+# true damage, with +50% Defense while channeling. Current-health true damage
+# is anti-TANK (strongest on full-health targets) — deliberately NOT scored as
+# execute, which is the low-health finisher axis. Shares the crossbow Q/W
+# pool with Energy Shaper; QW-conditional scores mirror that sheet.
+#
+# DRAFT CORRECTION: heal flag on the E ("0.03 of their Current Health as true
+# damage") is regex noise, suppressed in overrides — nothing here heals.
+
+- weapon: 2H_CROSSBOWLARGE_MORGANA   # Siegebow — anti-tank channel artillery
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: range
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: CROSSBOW_CONE_ULTIMATE}  # E: repeating volleys + %HP true damage
+    - {cap: burst_aoe,     score: 2, evidence: BOLTSHOT}          # Q: 130 in 3m; W: Explosive Salvo (crossbow pool)
+    - {cap: silence,       score: 1, evidence: SILENCINGBOLT}     # W: 3.83s skillshot silence (QW)
+    - {cap: resist_shred,  score: 1, evidence: SUNDERSHOT}        # W: stacking shred; Salvo fumes (QW)
+    - {cap: knockback_displace, score: 1, evidence: KNOCKBACKSHOT2}  # W: 10m bolt; Forceful Bolts passive (QW)
+    - {cap: peel,          score: 1, evidence: KNOCKBACKSHOT2}    # (QW)
+    - {cap: slow,          score: 1, evidence: CALTROPS}          # W: trap (QW)
+    - {cap: zone_control,  score: 1, evidence: CALTROPS}          # 12s trap + fume field (QW)

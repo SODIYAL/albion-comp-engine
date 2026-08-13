@@ -1,0 +1,32 @@
+# Carving Sword — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 5 sightings, dominant role: melee.
+#
+# Identity: the sword line's shred bruiser. The E (Fearless Strike) is a dash
+# that cuts damage resistances of everyone on its path by up to 20% (scaling
+# with Heroic Charges) — group shred delivered by initiation. Shares the
+# sword Q/W pool with the Dual Swords sheet; QW-conditional scores mirror it.
+#
+# Rulings carried over from the Dual Swords curation:
+#   - Iron Will grounds nothing offensive (purge-immunity artifact, suppressed).
+#   - Interrupt scores no silence (instant interrupt != cast denial).
+#   - Weakening passive noted, unscored (damage_debuff not yet in Â§2.2).
+#   - Parry grounds NO tankiness (momentary-defensive ruling, 2026-08-12:
+#     personal channel/dash defensives are not frontline durability).
+# mobility 2 not 3: Fearless Strike's 25s cooldown is more than double the
+# Spinning Blades cadence that earned Dual Swords its 3.
+
+- weapon: 2H_CLEAVER_HELL            # Carving Sword — shred-on-dash bruiser
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: melee
+  capabilities:
+    - {cap: resist_shred,  score: 2, evidence: CLAYMORESLASH}    # E: up to -20% AoE on the dash path — the signature
+    - {cap: engage,        score: 2, evidence: CLAYMORESLASH}    # shred-by-initiation
+    - {cap: mobility,      score: 2, evidence: CLAYMORESLASH}    # E dash; Q: Heroic Strike; W: Blade Cyclone / Heroic Leap
+    - {cap: catch,         score: 2, evidence: CLAYMORESLASH}    # dash + W: Hamstring slow-into-leap
+    - {cap: disengage,     score: 2, evidence: CLAYMORESLASH}    # same dash out; W: Iron Will sprint
+    - {cap: sustained_dps, score: 2, evidence: HEROICSTRIKE2}    # heroic-charge AA stacking, same engine as Dual Swords
+    - {cap: burst_aoe,     score: 1, evidence: CLAYMORESLASH}    # 135 on the path; modest
+    - {cap: root,          score: 1, evidence: SPLITTINGSLASH}   # W: 1.25s line root (QW)
+    - {cap: peel,          score: 1, evidence: SPLITTINGSLASH}   # the root defensively; W: Interrupt (QW)
+    - {cap: slow,          score: 1, evidence: HAMSTRINGSWORD}   # W: -25% for 4s (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_ARMORCHANCE_SWORD}  # PASSIVE: armor proc

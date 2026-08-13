@@ -1,0 +1,28 @@
+# Rootbound Staff — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 4 sightings, dominant role: support. Second support-class weapon.
+#
+# Identity: group-sustain shapeshifter. The E (Sylvian Transformation) grants
+# up to +8% Max AND Current Health to allies in 11m on transform (Growth) and
+# the Sylvian form carries the weapon's healing output — form abilities are
+# the payload, per the Hellspawn precedent. Shares the shapeshifter Q/W pool
+# with Hellspawn; QW-conditional scores mirror that sheet.
+# heal_sustain held at 1: the DESCRIBED evidence is the current-health grant;
+# the form's healing abilities are not separately equippable text. Expert may
+# bump if Sylvian healing throughput reads stronger in practice.
+
+- weapon: 2H_SHAPESHIFTER_SET2       # Rootbound Staff — group-sustain shapeshifter
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: support
+  capabilities:
+    - {cap: buff_allies,   score: 2, evidence: SHAPESHIFT_ENT}   # E: Growth +8% Max/Current HP, 11m (via override);
+                                                                 # Q: Adapting Matter ally shields
+    - {cap: heal_sustain,  score: 1, evidence: SHAPESHIFT_ENT}   # the Current-Health grant; form heals beyond it
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_SHAPESHIFT_ATTACK_BUFF}  # Altered Beast HP stacks
+    - {cap: clump_create,  score: 1, evidence: SHAPE_W_AREA_PULL}  # W: 5-target pull (QW)
+    - {cap: root,          score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
+    - {cap: catch,         score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
+    - {cap: peel,          score: 1, evidence: SHAPE_W_TETHERBEAM} # W: ally-save tether pull; Polymorph (QW)
+    - {cap: zone_control,  score: 1, evidence: SHAPE_W_DAMAGE_AOE} # W: Distortion cloud (QW)
+    - {cap: slow,          score: 1, evidence: SHAPE_W_DAMAGE_AOE} # (QW)
+    - {cap: resist_shred,  score: 1, evidence: SHAPE_Q_CONE_MELEE} # Q: -2% x3 stacks (QW)
+    - {cap: mobility,      score: 1, evidence: SHAPE_W_TETHERBEAM} # W: dash-to-enemy tether (QW)

@@ -1,0 +1,94 @@
+# Arcane line — remaining 7 weapons, curated 2026-08-12 (tree pass).
+# Q/W pool parity with the Witchwork sheet (Motivating Cleanse, Arcane
+# Protection, Magic Shock, Frazzle, Empowering Beam). The utility line:
+# most members are supports, kept OUT of the pure_dps role set.
+
+- weapon: 2H_ARCANESTAFF             # Great Arcane Staff — the time-freeze support
+  curated_as_of: 2026-08-12
+  role_hint: support
+  capabilities:
+    - {cap: stun,         score: 2, evidence: TIME_FREEZE}    # E: 2.5s AoE stasis, ignores CC resistance
+    - {cap: peel,         score: 2, evidence: TIME_FREEZE}    # freeze the dive (targets are damage-immune too)
+    - {cap: cleanse,      score: 2, evidence: CLEANSESPEED2}  # W: 10-ally cleanse + MS (QW)
+    - {cap: buff_allies,  score: 2, evidence: EMPOWERBEAM}    # W: stacking ally damage channel (QW)
+    - {cap: anti_dive,    score: 1, evidence: TIME_FREEZE}    # divers get frozen out of their window
+    - {cap: silence,      score: 1, evidence: MAGICSHOCK}     # (QW)
+    - {cap: resist_shred, score: 1, evidence: FRAZZLE2}       # (QW)
+    - {cap: sustained_dps, score: 1, evidence: PASSIVE_ATTACKBUFF_ARCANESTAFF}
+
+- weapon: 2H_ARCANESTAFF_CRYSTAL     # Astral Staff — starfall artillery
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: burst_aoe,    score: 2, evidence: STARFALL_DOT}   # E: 63/0.6s in 8m around you
+    - {cap: zone_control, score: 1, evidence: STARFALL_DOT}   # standing in the shower is a choice
+    - {cap: sustained_dps, score: 2, evidence: STARFALL_DOT}  # channel + Lingering Power weave
+    - {cap: cleanse,      score: 2, evidence: CLEANSESPEED2}  # (QW)
+    - {cap: buff_allies,  score: 1, evidence: EMPOWERBEAM}    # (QW)
+    - {cap: silence,      score: 1, evidence: MAGICSHOCK}     # (QW)
+    - {cap: resist_shred, score: 1, evidence: FRAZZLE2}       # (QW)
+    - {cap: peel,         score: 1, evidence: SHIELDFRIENDLY} # (QW)
+
+- weapon: 2H_ARCANESTAFF_HELL        # Occult Staff — the corridor enabler
+  curated_as_of: 2026-08-12
+  role_hint: support
+  capabilities:
+    - {cap: buff_allies,  score: 2, evidence: ARCANECORRIDOR} # E: +60% MS/AA speed corridor for the group, 8s
+    - {cap: engage,       score: 2, evidence: ARCANECORRIDOR} # the corridor IS how the comp commits
+    - {cap: slow,         score: 1, evidence: ARCANECORRIDOR} # -30% on enemies inside
+    - {cap: zone_control, score: 1, evidence: ARCANECORRIDOR}
+    - {cap: cleanse,      score: 2, evidence: CLEANSESPEED2}  # (QW)
+    - {cap: silence,      score: 1, evidence: MAGICSHOCK}     # (QW)
+    - {cap: resist_shred, score: 1, evidence: FRAZZLE2}       # (QW)
+    - {cap: peel,         score: 1, evidence: SHIELDFRIENDLY} # (QW)
+    - {cap: sustained_dps, score: 1, evidence: PASSIVE_ATTACKBUFF_ARCANESTAFF}
+
+- weapon: 2H_ARCANE_RINGPAIR_AVALON  # Evensong — aura-debuff artillery
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: heal_reduction, score: 2, evidence: ARCANE_METEOR}  # E: Dark Aura -15% Healing Received around 3 enemies
+    - {cap: burst_aoe,    score: 2, evidence: ARCANE_METEOR}  # 112 in 5m
+    - {cap: slow,         score: 1, evidence: ARCANE_METEOR}  # aura slow
+    # Dark Aura's -15% damage dealt: damage_debuff poster child #5
+    - {cap: cleanse,      score: 2, evidence: CLEANSESPEED2}  # (QW)
+    - {cap: buff_allies,  score: 1, evidence: EMPOWERBEAM}    # (QW)
+    - {cap: silence,      score: 1, evidence: MAGICSHOCK}     # (QW)
+    - {cap: resist_shred, score: 1, evidence: FRAZZLE2}       # (QW)
+    - {cap: peel,         score: 1, evidence: SHIELDFRIENDLY} # (QW)
+    - {cap: sustained_dps, score: 1, evidence: PASSIVE_ATTACKBUFF_ARCANESTAFF}
+
+- weapon: 2H_ENIGMATICORB_MORGANA    # Malevolent Locus — the cleanse bubble
+  curated_as_of: 2026-08-12
+  role_hint: support
+  capabilities:
+    - {cap: cleanse,      score: 2, evidence: VOID}           # E: growing bubble, CONTINUOUS group cleanse
+    - {cap: peel,         score: 1, evidence: VOID}           # divers lose their CC inside it
+    - {cap: buff_allies,  score: 1, evidence: EMPOWERBEAM}    # (QW)
+    - {cap: silence,      score: 1, evidence: MAGICSHOCK}     # (QW)
+    - {cap: resist_shred, score: 1, evidence: FRAZZLE2}       # (QW)
+    - {cap: sustained_dps, score: 1, evidence: PASSIVE_ATTACKBUFF_ARCANESTAFF}
+
+- weapon: 2H_ENIGMATICSTAFF          # Enigmatic Staff — the bubble-shield support
+  curated_as_of: 2026-08-12
+  role_hint: support
+  capabilities:
+    - {cap: buff_allies,  score: 2, evidence: INVULNERABILITY}  # E: refreshing 240 absorb bubble (via override)
+    - {cap: cleanse,      score: 2, evidence: CLEANSESPEED2}  # (QW)
+    - {cap: peel,         score: 1, evidence: SHIELDFRIENDLY} # Q: shield + forced-movement immunity (QW)
+    - {cap: silence,      score: 1, evidence: MAGICSHOCK}     # (QW)
+    - {cap: resist_shred, score: 1, evidence: FRAZZLE2}       # (QW)
+    - {cap: sustained_dps, score: 1, evidence: PASSIVE_ATTACKBUFF_ARCANESTAFF}
+
+- weapon: MAIN_ARCANESTAFF           # Arcane Staff (1H) — the purge orb
+  curated_as_of: 2026-08-12
+  role_hint: support
+  capabilities:
+    - {cap: purge,        score: 2, evidence: ARCANEORB2}     # E: AoE purge on a 6m skillshot orb
+    - {cap: silence,      score: 1, evidence: ARCANEORB2}     # 1.68s AoE on the same orb; Q: Magic Shock (QW)
+    - {cap: burst_st,     score: 1, evidence: ARCANEORB2}     # modest orb damage
+    - {cap: cleanse,      score: 2, evidence: CLEANSESPEED2}  # (QW)
+    - {cap: buff_allies,  score: 1, evidence: EMPOWERBEAM}    # (QW)
+    - {cap: resist_shred, score: 1, evidence: FRAZZLE2}       # (QW)
+    - {cap: peel,         score: 1, evidence: SHIELDFRIENDLY} # (QW)
+    - {cap: sustained_dps, score: 1, evidence: PASSIVE_ATTACKBUFF_ARCANESTAFF}

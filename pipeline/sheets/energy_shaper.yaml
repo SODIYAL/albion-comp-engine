@@ -1,0 +1,31 @@
+# Energy Shaper — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 5 sightings, dominant role: range.
+#
+# Identity: channeled line artillery with a utility W rack. The E (Divine
+# Engine) is an uninterruptible piercing beam (106 every 0.3s, steerable) —
+# sustained line damage rather than a one-shot. The W row is all utility
+# forks: 3.83s single-target silence bolt, 10m knockback shot, caltrops trap,
+# AoE shred fumes, stacking single-target shred.
+#
+# DRAFT CORRECTIONS (verified against full dumps text):
+#   - heal_sustain/self_sustain via SUNDERSHOT REMOVED: "Health the targeted
+#     enemy has LEFT" is a shred scaler that tripped the heal regex; flag
+#     suppressed in overrides.
+#   - engage/disengage/catch/mobility via Caltrops' trigger MS REMOVED: +30%
+#     MS only when an enemy steps on the trap is not movement tooling.
+# silence held at 1 despite the 3.83s duration: single-target skillshot W
+# option, not the Heavy Mace AoE class. Expert may bump for small-scale
+# templates where deleting one healer's cast window decides fights.
+
+- weapon: 2H_CROSSBOW_CANNON_AVALON  # Energy Shaper — channeled line artillery
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: range
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: CROSSBOW_DIVINE_SHOT}  # E: steerable piercing beam, can't be interrupted
+    - {cap: burst_aoe,     score: 2, evidence: BOLTSHOT}           # Q: 130 in 3m; W: Explosive Salvo 135 in 4.5m
+    - {cap: silence,       score: 1, evidence: SILENCINGBOLT}      # W: Noise Eraser — 3.83s skillshot silence (QW)
+    - {cap: resist_shred,  score: 1, evidence: SUNDERSHOT}         # W: stacking shred; Explosive Salvo -14% fumes (QW)
+    - {cap: knockback_displace, score: 1, evidence: KNOCKBACKSHOT2}  # W: 10m bolt; Forceful Bolts passive (QW)
+    - {cap: peel,          score: 1, evidence: KNOCKBACKSHOT2}     # shove a diver; PASSIVE: AA knockback every 5 casts (QW)
+    - {cap: slow,          score: 1, evidence: CALTROPS}           # W: trap, -30% AoE for 3s (QW)
+    - {cap: zone_control,  score: 1, evidence: CALTROPS}           # 12s trap + Salvo fume field — modest (QW)

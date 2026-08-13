@@ -1,0 +1,35 @@
+# Dual Swords — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 7 sightings, dominant role: melee.
+#
+# Identity: heroic-charge skirmisher. The E (Spinning Blades) is a CC-immune
+# leap into stacked auto-attack buffs; the kit's damage is sustained melee
+# pressure, not burst. Every W is a build fork: Parry (defensive stance,
+# damage-immune channel + 125% reflect), Iron Will (MS + defense sprint),
+# Splitting Slash (line root), Hamstring (slow + leap combo).
+#
+# DRAFT CORRECTIONS (all verified against full dumps text):
+#   - purge/heal_reduction/peel/reveal via DEFENSERUN (Iron Will) REMOVED:
+#     "Grants you immunity to purges" — the parser read the purge-immunity
+#     references as purges the spell performs. It removes nothing from anyone.
+#     Suppressed in effect_overrides.yaml.
+#   - Interrupt (W) scores no silence, per the Forbidden Stab ruling: an
+#     instant interrupt is not a cast-denial window.
+#   - Weakening passive (stacking -2% enemy damage) noted but unscored:
+#     damage_debuff is a proposed capability not yet in design doc Â§2.2.
+# Parry's reflect is real anti-dive material but the map cannot express
+# reflect; left unscored rather than grounded on a loose candidate.
+
+- weapon: 2H_DUALSWORD               # Dual Swords — heroic-charge skirmisher
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: melee
+  capabilities:
+    - {cap: mobility,      score: 3, evidence: SPINATTACK}       # E leap; Q: dash-to-target; W: Blade Cyclone / Heroic Leap
+    - {cap: engage,        score: 2, evidence: SPINATTACK}       # CC-immune leap in
+    - {cap: disengage,     score: 2, evidence: SPINATTACK}       # same leap out; W: Iron Will sprint
+    - {cap: catch,         score: 2, evidence: SPINATTACK}       # Q: Heroic Strike dash; W: Hamstring slow-into-leap
+    - {cap: sustained_dps, score: 2, evidence: SPINATTACK}       # E: +30% AA speed +65% AA damage; heroic charges stack
+    - {cap: burst_aoe,     score: 1, evidence: SPINATTACK}       # 160 on impact in 5m; Q: Cleave — modest
+    - {cap: root,          score: 1, evidence: SPLITTINGSLASH}   # W: 1.25s line root (QW)
+    - {cap: peel,          score: 1, evidence: SPLITTINGSLASH}   # the root defensively; W: Interrupt stops a caster (QW)
+    - {cap: slow,          score: 1, evidence: HAMSTRINGSWORD}   # W: Hamstring -25% for 4s (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_ARMORCHANCE_SWORD}  # PASSIVE: armor proc every 5 AAs

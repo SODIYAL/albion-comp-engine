@@ -1,0 +1,71 @@
+# Crossbow line — remaining 5 weapons, curated 2026-08-12 (tree pass).
+# Q/W pool parity with Energy Shaper / Siegebow / Boltcasters.
+
+- weapon: 2H_CROSSBOW                # Crossbow — the sniper
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: burst_st,      score: 2, evidence: SNIPESHOT_CROSSBOW}  # E: 386 single shot
+    - {cap: resist_shred,  score: 2, evidence: SNIPESHOT_CROSSBOW}  # E: -15%; W: Sunder Shot / Salvo stack more
+    - {cap: sustained_dps, score: 1, evidence: WEAPON_STATS}
+    - {cap: burst_aoe,     score: 1, evidence: BOLTSHOT}          # (QW)
+    - {cap: silence,       score: 1, evidence: SILENCINGBOLT}     # (QW)
+    - {cap: knockback_displace, score: 1, evidence: KNOCKBACKSHOT2}  # (QW)
+    - {cap: peel,          score: 1, evidence: KNOCKBACKSHOT2}    # (QW)
+    - {cap: slow,          score: 1, evidence: CALTROPS}          # (QW)
+    - {cap: zone_control,  score: 1, evidence: CALTROPS}          # (QW)
+
+- weapon: 2H_CROSSBOWLARGE           # Heavy Crossbow — line-pierce interrupter
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: CROSSBOW_ARMORPIERCER}  # E: 225 pierce through the line
+    - {cap: burst_st,      score: 1, evidence: CROSSBOW_ARMORPIERCER}
+    - {cap: sustained_dps, score: 1, evidence: WEAPON_STATS}
+    - {cap: silence,       score: 1, evidence: SILENCINGBOLT}     # (QW); the E also interrupts casts
+    - {cap: resist_shred,  score: 1, evidence: SUNDERSHOT}        # (QW)
+    - {cap: knockback_displace, score: 1, evidence: KNOCKBACKSHOT2}  # (QW)
+    - {cap: peel,          score: 1, evidence: KNOCKBACKSHOT2}    # (QW)
+    - {cap: slow,          score: 1, evidence: CALTROPS}          # (QW)
+    - {cap: zone_control,  score: 1, evidence: CALTROPS}          # (QW)
+
+- weapon: 2H_DUALCROSSBOW_CRYSTAL    # Arclight Blasters — dash-blast skirmisher
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: mobility,      score: 2, evidence: CRYSTALXBOW}       # E: dash, recastable x3
+    - {cap: burst_aoe,     score: 2, evidence: CRYSTALXBOW}       # 81 in 8m per dash
+    - {cap: disengage,     score: 2, evidence: CRYSTALXBOW}       # three dashes out
+    - {cap: engage,        score: 1, evidence: CRYSTALXBOW}
+    - {cap: sustained_dps, score: 1, evidence: WEAPON_STATS}
+    - {cap: silence,       score: 1, evidence: SILENCINGBOLT}     # (QW)
+    - {cap: resist_shred,  score: 1, evidence: SUNDERSHOT}        # (QW)
+    - {cap: knockback_displace, score: 1, evidence: KNOCKBACKSHOT2}  # (QW)
+    - {cap: peel,          score: 1, evidence: KNOCKBACKSHOT2}    # (QW)
+    - {cap: slow,          score: 1, evidence: CALTROPS}          # (QW)
+
+- weapon: 2H_REPEATINGCROSSBOW_UNDEAD  # Weeping Repeater — mine zoner
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: GROUNDMINE}        # E: 270 mine in 7m
+    - {cap: zone_control,  score: 2, evidence: GROUNDMINE}        # the planted mine denies the ground it watches
+    - {cap: sustained_dps, score: 2, evidence: WEAPON_STATS}      # repeater AA pattern
+    - {cap: silence,       score: 1, evidence: SILENCINGBOLT}     # (QW)
+    - {cap: resist_shred,  score: 1, evidence: SUNDERSHOT}        # (QW)
+    - {cap: knockback_displace, score: 1, evidence: KNOCKBACKSHOT2}  # (QW)
+    - {cap: peel,          score: 1, evidence: KNOCKBACKSHOT2}    # (QW)
+    - {cap: slow,          score: 1, evidence: CALTROPS}          # (QW)
+
+- weapon: MAIN_1HCROSSBOW            # Light Crossbow — sticky-bomb poker
+  curated_as_of: 2026-08-12
+  role_hint: range
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: EXPLODING_SHOT}    # E: 180 in 5m delayed bomb
+    - {cap: sustained_dps, score: 1, evidence: WEAPON_STATS}      # 1H budget
+    - {cap: silence,       score: 1, evidence: SILENCINGBOLT}     # (QW)
+    - {cap: resist_shred,  score: 1, evidence: SUNDERSHOT}        # (QW)
+    - {cap: knockback_displace, score: 1, evidence: KNOCKBACKSHOT2}  # (QW)
+    - {cap: peel,          score: 1, evidence: KNOCKBACKSHOT2}    # (QW)
+    - {cap: slow,          score: 1, evidence: CALTROPS}          # (QW)
+    - {cap: zone_control,  score: 1, evidence: CALTROPS}          # (QW)

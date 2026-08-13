@@ -1,0 +1,23 @@
+# Lifetouch Staff (1H) — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 5 sightings, dominant role: healer. Third holy weapon curated.
+#
+# Identity: THE cleanse healer. The E (Holy Touch) channels a single-ally
+# heal that CLEANSES all CC and debuffs (except DoTs), grants OTHER allies
+# immunity to all CC while channeling, buffs the target's damage +15%, and is
+# castable while stunned or silenced. This is the settled cleanse finding
+# (HANDOFF 2026-08-12): cleanse is per WEAPON, not per line — Lifetouch and
+# Fallen have it inherent on E; the shared holy Q/W pool has none.
+#
+# Q/W pool scores mirror the Hallowfall/Redemption sheets (same spells).
+# NO mobility — stationary like Redemption; the Hallowfall contrast stands.
+
+- weapon: MAIN_HOLYSTAFF_MORGANA     # Lifetouch Staff — the cleanse healer
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: healer
+  capabilities:
+    - {cap: cleanse,      score: 2, evidence: HOLYTOUCH}    # E: strips all CC + debuffs off the ally, inherent
+    - {cap: heal_sustain, score: 2, evidence: HOLYTOUCH}    # E: 55 every 0.5 channel; W: Holy Beam (QW)
+    - {cap: heal_burst,   score: 2, evidence: HOLYFLASH}    # Q: 117 AoE burst (holy pool parity)
+    - {cap: peel,         score: 2, evidence: HOLYTOUCH}    # E: group CC immunity while channeling; W: Sacred Pulse
+    - {cap: buff_allies,  score: 2, evidence: HOLYTOUCH}    # E: +15% damage to the target; W: Holy Blessing
+    - {cap: knockback_displace, score: 1, evidence: PULSINGHEAL}  # W: Sacred Pulse 9m enemy knockback (QW)

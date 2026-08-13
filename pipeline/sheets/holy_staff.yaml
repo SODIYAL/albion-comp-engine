@@ -1,0 +1,24 @@
+# Holy Staff (1H) — curated 2026-08-12 from ao-bin-dumps spell text (curate_helper.py).
+# Usage: 4 sightings, dominant role: healer. Fourth holy weapon curated.
+#
+# Identity: the clutch single-target healer. The E (Desperate Prayer) heals
+# based on the target's health — 100 above 40%, 220 below — the emergency
+# save button, plus a stacking self Healing-Cast buff when used proactively.
+# Q/W pool scores mirror the other holy sheets (same spells). NO cleanse
+# (settled finding), NO mobility (stationary; the Hallowfall contrast).
+#
+# NOTE for the effect layer: this E exposed the heal-supersession bug fixed
+# 2026-08-12 in effect_lookup.py — its incidental self healbonus+ was
+# blocking the prose heal flag that stands in for the (structurally
+# invisible) 220-point direct ally heal.
+
+- weapon: MAIN_HOLYSTAFF             # Holy Staff — clutch single-target healer
+  curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: healer
+  capabilities:
+    - {cap: heal_burst,   score: 2, evidence: HOLYDESPERATEPRAYER2}  # E: 220 below 40% — the save button; Q: Holy Flash
+    - {cap: heal_sustain, score: 2, evidence: HEALINGBEAM}     # W: Holy Beam channel; Q: Generous Heal (QW)
+    - {cap: buff_allies,  score: 1, evidence: HOLYHOT}         # W: Holy Blessing armor + healing received (QW)
+    - {cap: peel,         score: 1, evidence: PULSINGHEAL}     # W: Sacred Pulse knocks enemies off an ally (QW)
+    - {cap: knockback_displace, score: 1, evidence: PULSINGHEAL}  # 9m enemy knockback (QW)
+    - {cap: self_sustain, score: 1, evidence: HOLYDESPERATEPRAYER2}  # E's stacking Healing-Cast self buff

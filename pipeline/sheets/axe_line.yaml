@@ -1,0 +1,82 @@
+# Axe line — remaining 5 weapons, curated 2026-08-12 (tree pass).
+# Q/W pool parity with Bear Paws / Realmbreaker / Battleaxe (Rending bleeds,
+# Deadly Chop, Battle Rush, Adrenaline Boost).
+
+- weapon: 2H_AXE                     # Greataxe — whirlwind bruiser
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: AXEWHIRLWIND2}  # E: mobile uninterruptible spin, ramping per hit
+    - {cap: sustained_dps, score: 2, evidence: RENDINGSTRIKE}  # bleeds (QW)
+    - {cap: mobility,      score: 1, evidence: AXEWHIRLWIND2}  # can move while spinning; Q3 leap
+    - {cap: catch,         score: 1, evidence: AXEBOOST}       # (QW)
+    - {cap: heal_reduction, score: 1, evidence: RENDINGSTRIKE} # bleed cap (QW)
+    - {cap: resist_shred,  score: 1, evidence: AXESMASH}       # (QW)
+    - {cap: root,          score: 1, evidence: RENDINGCOMBO}   # (QW)
+    - {cap: buff_allies,   score: 1, evidence: AXE_CHARGE}     # (QW)
+    - {cap: engage,        score: 1, evidence: AXE_CHARGE}     # (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_AXE}
+
+- weapon: 2H_HALBERD                 # Halberd — bleed-spread cleaver
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: RENDINGSWING}   # E: 7m cleave, equalizes bleed stacks across all hit
+    - {cap: heal_reduction, score: 1, evidence: RENDINGSWING}  # spread bleeds hit the cap on everyone
+    - {cap: sustained_dps, score: 2, evidence: RENDINGSTRIKE}  # (QW)
+    # E also cuts CC Resistance -20%: no capability axis, noted
+    - {cap: catch,         score: 1, evidence: AXEBOOST}       # (QW)
+    - {cap: resist_shred,  score: 1, evidence: AXESMASH}       # (QW)
+    - {cap: root,          score: 1, evidence: RENDINGCOMBO}   # (QW)
+    - {cap: mobility,      score: 1, evidence: RENDINGCOMBO}   # (QW)
+    - {cap: buff_allies,   score: 1, evidence: AXE_CHARGE}     # (QW)
+    - {cap: engage,        score: 1, evidence: AXE_CHARGE}     # (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_AXE}
+
+- weapon: 2H_HALBERD_MORGANA         # Carrioncaller — the anti-heal raven
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: heal_reduction, score: 2, evidence: SHOCKWAVE}     # E: -40% Healing Received on a piercing line, 4s —
+                                                               # the meta anti-heal axe; expert may bump to 3
+    - {cap: sustained_dps, score: 2, evidence: RENDINGSTRIKE}  # bleeds (QW)
+    - {cap: burst_aoe,     score: 1, evidence: SHOCKWAVE}      # 106 pierce
+    - {cap: catch,         score: 1, evidence: AXEBOOST}       # (QW)
+    - {cap: resist_shred,  score: 1, evidence: AXESMASH}       # (QW)
+    - {cap: root,          score: 1, evidence: RENDINGCOMBO}   # (QW)
+    - {cap: mobility,      score: 1, evidence: RENDINGCOMBO}   # (QW)
+    - {cap: buff_allies,   score: 1, evidence: AXE_CHARGE}     # (QW)
+    - {cap: engage,        score: 1, evidence: AXE_CHARGE}     # (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_AXE}
+
+- weapon: 2H_SCYTHE_CRYSTAL          # Crystal Reaper — dash-zone reaper
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: mobility,      score: 2, evidence: CRYSTAL_SCYTHE_DASH_ZONE}  # E: recastable dash
+    - {cap: engage,        score: 2, evidence: CRYSTAL_SCYTHE_DASH_ZONE}  # dash in, CDR zone sustains the brawl
+    - {cap: disengage,     score: 1, evidence: CRYSTAL_SCYTHE_DASH_ZONE}
+    - {cap: zone_control,  score: 1, evidence: CRYSTAL_SCYTHE_DASH_ZONE}  # the 12s CDR area anchors you
+    - {cap: burst_aoe,     score: 1, evidence: CRYSTAL_SCYTHE_DASH_ZONE}
+    - {cap: sustained_dps, score: 2, evidence: RENDINGSTRIKE}  # (QW)
+    - {cap: heal_reduction, score: 1, evidence: RENDINGSTRIKE} # (QW)
+    - {cap: resist_shred,  score: 1, evidence: AXESMASH}       # (QW)
+    - {cap: root,          score: 1, evidence: RENDINGCOMBO}   # (QW)
+    - {cap: buff_allies,   score: 1, evidence: AXE_CHARGE}     # (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_AXE}
+
+- weapon: 2H_SCYTHE_HELL             # Infernal Scythe — the reap execute
+  curated_as_of: 2026-08-12
+  role_hint: melee
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: SCYTHESWING}    # E: double reap in 5m
+    - {cap: execute,       score: 1, evidence: SCYTHESWING}    # second swing scales on targets below 40% Health
+    - {cap: sustained_dps, score: 2, evidence: RENDINGSTRIKE}  # (QW)
+    - {cap: catch,         score: 1, evidence: AXEBOOST}       # (QW)
+    - {cap: heal_reduction, score: 1, evidence: RENDINGSTRIKE} # (QW)
+    - {cap: resist_shred,  score: 1, evidence: AXESMASH}       # (QW)
+    - {cap: root,          score: 1, evidence: RENDINGCOMBO}   # (QW)
+    - {cap: mobility,      score: 1, evidence: RENDINGCOMBO}   # (QW)
+    - {cap: buff_allies,   score: 1, evidence: AXE_CHARGE}     # (QW)
+    - {cap: engage,        score: 1, evidence: AXE_CHARGE}     # (QW)
+    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_AXE}
