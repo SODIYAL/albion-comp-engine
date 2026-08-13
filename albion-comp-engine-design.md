@@ -315,6 +315,29 @@ staleness, and the generated dashboard all exist and run green. The
 diffable) plus `curate_helper.py` worksheets did the job for all 137 weapons.
 Phase 1's React SPA and Phase 3 remain.*
 
+*Amendment 2026-08-13: Phase 1 shipped WITHOUT React — the "static SPA"
+became Comp Forge (`dashboard/index.html`), a generated single-file page
+whose in-browser engine (`pipeline/app_scoring.js`) is a parity-tested port
+of `engine/engine.py` (60/60 random parties at 1e-9 + a build-time fixture
+on every load). Scope grew past the MVP cut line: five content templates
+(blackzone roam 20 / territory defense 20 / castle 25 / faction war 15 /
+castle outpost 7), playstyle overlays (`templates/styles.yaml` — brawl /
+clap / kite / brawl-clap as weight multipliers; floors and over-stack stay
+on base weight), free-form adaptive party size (effective size =
+max(planned, roster), 2–60), greedy auto-forge, weapon detail drawer with
+real spell pools and caller loadouts, embedded item renders, Discord
+export, and share-link/localStorage state. The "OUT: ZvZ-scale templates"
+line is obsolete — real 20-man caller comps arrived (tests/meta_comps.yaml)
+and made the 20-size templates the calibration-rich ones. Phase 3 got its
+first real piece early: `pipeline/sample_battles.py` (albionbb; the
+official gameinfo events endpoint 504s at sampling scale) feeds size-
+bucketed usage "field reports" into the page as DISPLAY-ONLY evidence —
+149 battles / 1,252 players / 99.4% weapon attribution, so V7's ≥85%
+attribution gate passed. MetaPrior still hand-set pending validation. The
+first V4 leave-one-out baseline exists: role-level 69% (n=26), with the
+saturation-degeneracy and support-undervaluation findings recorded in
+`tests/VALIDATION.md`.*
+
 ### 6.2 Data model (works as SQLite/Postgres in the pipeline, exported to JSON for the client)
 
 ```sql

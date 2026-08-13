@@ -154,15 +154,43 @@ class Engine:
 
 
 if __name__ == "__main__":
-    e = Engine()
+    import argparse
+
+    ap = argparse.ArgumentParser(
+        description="Score a party from the CLI. Weapons are UniqueNames "
+                    "(2H_MACE) or unambiguous display-name substrings (heavy mace).")
+    ap.add_argument("weapons", nargs="*",
+                    help="party members; default is the design-doc §4.3 worked example")
+    ap.add_argument("--content", default="castle_outpost")
+    ap.add_argument("--size", type=int, default=None,
+                    help="party size (default: the template's base size)")
+    ap.add_argument("--style", default="balanced")
+    args = ap.parse_args()
+
+    e = Engine(content=args.content, size=7, style=args.style)
+    e.set_content(args.content, args.size or e.base_size, args.style)
+
+    def resolve(text):
+        if text in e.weapons:
+            return text
+        hits = [k for k, w in e.weapons.items()
+                if text.lower() in w["display_name"].lower()]
+        if len(hits) != 1:
+            raise SystemExit(f"'{text}' is {'ambiguous: ' + ', '.join(sorted(e.weapons[h]['display_name'] for h in hits)) if hits else 'not a known weapon'}")
+        return hits[0]
+
+    party = [resolve(t) for t in args.weapons] or \
+            [w for w in ("2H_LONGBOW", "MAIN_ARCANESTAFF_UNDEAD", "2H_ICECRYSTAL_UNDEAD")
+             if w in e.weapons]
+
     meta = e.data["_meta"]
     print(f"dataset v{meta['version']}  "
           f"{meta['weapons_curated']} curated / {meta['weapons_illustrative']} illustrative  "
           f"release_clean={meta['release_clean']}")
-    party = ["2H_LONGBOW", "MAIN_ARCANESTAFF_UNDEAD", "2H_ICECRYSTAL_UNDEAD"]
+    style_bit = f", {e.style}" if e.style != "balanced" else ""
     print(f"\nParty: {[e.weapons[w]['display_name'] for w in party]}  "
-          f"({e.template['name']}, size {e.size})")
-    print(f"Fitness {e.fitness(party):.1f} / {e.max_fitness()}")
+          f"({e.template['name']}, size {e.size}{style_bit})")
+    print(f"Fitness {e.fitness(party):.1f} / {e.max_fitness():.0f}")
     print("\nWeaknesses:")
     for w in e.weaknesses(party):
         print(f"  {w['cap']:<16} {w['have']:.0f}/{w['target']:.1f}  −{w['gap']:.1f}")
