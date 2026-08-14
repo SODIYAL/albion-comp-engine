@@ -23,15 +23,31 @@ public sealed class PartyState
 
     public void SetSpellDb(SpellDb spells) => _spells = spells;
 
-    /// <summary>Roster persistence: the party event (231) only fires on zone/
-    /// party change, so a fresh launch may not see it. We save the roster
-    /// (names+guids, no gear) whenever it updates and reload it on startup, so
-    /// the party survives restarts — gear then fills back in from visibility
-    /// events by name. A fresh 231 always replaces the cached roster.</summary>
+    /// <summary>Our own character name, once the self-join is seen.</summary>
+    public string? SelfName { get { lock (_lock) return _selfName; } }
+
+    // Party composition changes often, so a cache older than this is more
+    // likely to MISLEAD (show a stale party) than to help. Beyond it we start
+    // empty and wait for a live roster event.
+    private static readonly TimeSpan CacheMaxAge = TimeSpan.FromHours(2);
+
+    /// <summary>Roster persistence: the party event only fires on zone/party
+    /// change, so a fresh launch may not see it immediately. We save the roster
+    /// (names+guids, no gear) whenever it updates and reload it on startup IF
+    /// it is recent — gear then fills back in from visibility events by name.
+    /// A fresh roster event always replaces the cache. An old cache is ignored
+    /// so it can't show a party you left days ago.</summary>
     public void EnablePersistence(string path)
     {
         _cachePath = path;
         if (!File.Exists(path)) return;
+        var age = DateTime.UtcNow - File.GetLastWriteTimeUtc(path);
+        if (age > CacheMaxAge)
+        {
+            Console.WriteLine($"[party] cached roster is {age.TotalHours:F1}h old — ignoring "
+                              + "(zone once to capture the current party)");
+            return;
+        }
         try
         {
             var roster = JsonSerializer.Deserialize<List<RosterEntry>>(File.ReadAllText(path));
@@ -43,8 +59,10 @@ public sealed class PartyState
                     _members[r.Name.ToLowerInvariant()] =
                         new Member { Name = r.Name, Guid = r.Guid, Source = "cache" };
                 }
+            Console.WriteLine($"[party] restored {_members.Count} cached members "
+                              + $"({age.TotalMinutes:F0}m old) — a live roster event will refresh them");
         }
-        catch { /* corrupt cache — ignore, a live 231 rebuilds it */ }
+        catch { /* corrupt cache — ignore, a live roster event rebuilds it */ }
     }
 
     private void SaveRoster()

@@ -88,11 +88,26 @@ public sealed class AlbionEventParser : PhotonParser
         IsNum(p, 0) && !(p.TryGetValue(1, out var n) && n is string)
         && HasNumArray(p, 10) && HasNumArray(p, 14);
 
-    // OUR party: numeric party id at 0 + a names string[] + a guid list (>=2).
-    // The numeric-0 requirement excludes the "enemy party spotted" event, whose
-    // param 0 is a string.
-    private static bool LooksLikePartyRoster(Dictionary<byte, object> p) =>
-        IsNum(p, 0) && FindStringArray(p) != null && FindGuidList(p) != null;
+    // OUR party roster. This is the fussy one: guild vault/bank tab listings
+    // ALSO carry a numeric id + a string[] + a guid list, so the naive shape
+    // matched them and flip-flopped the binding (live bug, 2026-08-14).
+    // Distinguish the real party by three things a bank listing never satisfies:
+    //   1. exactly ONE string[] — bank tabs carry names AND icon-name arrays (two)
+    //   2. one guid per name
+    //   3. when we know who we are, the roster CONTAINS self — bank tabs don't
+    private bool LooksLikePartyRoster(Dictionary<byte, object> p)
+    {
+        if (!IsNum(p, 0)) return false;
+        var strArrays = 0;
+        foreach (var v in p.Values) if (v is string[] { Length: > 0 }) strArrays++;
+        if (strArrays != 1) return false;
+        var names = FindStringArray(p);
+        var guids = FindGuidList(p);
+        if (names == null || guids == null || guids.Count != names.Length) return false;
+        var self = _state.SelfName;
+        return self == null
+            || names.Any(n => n.Equals(self, StringComparison.OrdinalIgnoreCase));
+    }
 
     // ------------------------------------------------------------- handlers
     // Return true when the event was genuinely handled (used to confirm the
