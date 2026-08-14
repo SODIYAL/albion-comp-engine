@@ -40,6 +40,12 @@ class Engine:
         self.alpha, self.beta = w["alpha"], w["beta"]
         self.delta, self.gamma = w["delta"], w["gamma"]
         self.meta_prior = self.scoring.get("meta_prior", {}) or {}
+        # meta_prior is either a FLAT {weapon: value} map, or SIZE-BUCKETED
+        # {small|mid|large: {weapon: value}} (usage-derived, Q17). Bucketed is
+        # detected by its top-level keys; the value for a weapon is then chosen
+        # by the current party size — the same buckets sample_battles.py uses.
+        self.meta_bucketed = bool(self.meta_prior) and \
+            set(self.meta_prior) <= {"small", "mid", "large"}
         self.synergies = [(s["a"], s["b"], s["bonus"])
                           for s in self.scoring.get("capability_synergies", [])]
         self.mechanics = self.data.get("mechanics", {}) or {}
@@ -176,13 +182,22 @@ class Engine:
                               "before": have, "after": have + gain, "target": target})
         return sorted(terms, key=lambda t: -t["delta"])
 
+    def meta_of(self, weapon):
+        """Meta-prior value for a weapon at the current size. Flat map -> direct
+        lookup; size-bucketed map -> the bucket the current size falls in
+        (small <12, mid 12-30, large >30, matching sample_battles.py)."""
+        if not self.meta_bucketed:
+            return self.meta_prior.get(weapon, 0.0)
+        b = "small" if self.size < 12 else "mid" if self.size <= 30 else "large"
+        return (self.meta_prior.get(b) or {}).get(weapon, 0.0)
+
     def recommend(self, party, top_n=4, pool=None):
         base_fit, base_syn = self.fitness(party), self.synergy(party)
         out = []
         for w in (pool or self.weapons):
             d_fit = self.fitness(party + [w]) - base_fit
             d_syn = self.synergy(party + [w]) - base_syn
-            meta = self.meta_prior.get(w, 0.0)
+            meta = self.meta_of(w)
             out.append({
                 "weapon": w,
                 "display_name": self.weapons[w]["display_name"],

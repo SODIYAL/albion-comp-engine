@@ -26,6 +26,12 @@
     this.alpha = w.alpha; this.beta = w.beta;
     this.delta = w.delta; this.gamma = w.gamma;
     this.metaPrior = this.scoring.meta_prior || {};
+    /* meta_prior is a FLAT {weapon: value} map or SIZE-BUCKETED
+       {small|mid|large: {weapon: value}} (usage-derived, Q17). Mirrors
+       engine.py meta_bucketed. */
+    var mpKeys = Object.keys(this.metaPrior);
+    this.metaBucketed = mpKeys.length > 0 &&
+      mpKeys.every(function (k) { return k === "small" || k === "mid" || k === "large"; });
     this.synergies = (this.scoring.capability_synergies || []).map(function (s) {
       return [s.a, s.b, s.bonus];
     });
@@ -184,6 +190,12 @@
     return terms.sort(function (x, y) { return y.delta - x.delta; });
   };
 
+  CompEngine.prototype.metaOf = function (w) {
+    if (!this.metaBucketed) return this.metaPrior[w] || 0.0;
+    var b = this.size < 12 ? "small" : this.size <= 30 ? "mid" : "large";
+    return (this.metaPrior[b] || {})[w] || 0.0;
+  };
+
   CompEngine.prototype.recommend = function (party, topN, pool) {
     if (topN === undefined) topN = 4;
     var baseFit = this.fitness(party), baseSyn = this.synergy(party);
@@ -193,7 +205,7 @@
       var w = keys[i];
       var dFit = this.fitness(party.concat([w])) - baseFit;
       var dSyn = this.synergy(party.concat([w])) - baseSyn;
-      var meta = this.metaPrior[w] || 0.0;
+      var meta = this.metaOf(w);
       out.push({
         weapon: w,
         display_name: this.weapons[w].display_name,

@@ -348,15 +348,30 @@ trusted; disagreement → expert queue, never silently overridden.
   driven), style modulating around them, so single-target supply is taxed
   at 20-man even under balanced. Requires target recalibration — do after
   the usage prior lands (cheaper, independent win first).
-- [ ] **Q17 (new) — usage-derived MetaPrior.** bucket→content mapping
-  (castle_outpost→small, roam/territory/faction→mid, castle→large?),
-  shrinkage constant, and the V4 on/off A/B as the acceptance gate.
-  CONFOUND (measured 2026-08-13): usage frequency conflates viability with
-  PRICE/ACCESSIBILITY — Bridled Fury (crystal dagger) shows 2/1/0 players
-  across small/mid/large buckets, less than Dagger Pair, because crystal
-  weapons are expensive-rare, not because the E is worse for groups. Usage
-  prior must shrink toward NEUTRAL at low n (never negative from absence),
-  and only win-lift (V8) may demote a weapon the mechanism layer likes.
+- [~] **Q17 — usage-derived MetaPrior. BUILT + MEASURED 2026-08-14; NOT
+  wired (deliberately).** `pipeline/build_meta_prior.py` produces a
+  size-bucketed prior from `weapon_usage_v2.json` (share × n/(n+8) shrinkage,
+  per-bucket normalize to 1.0, positive-only) → `out/meta_prior_usage.json`.
+  The engine + JS now DETECT a bucketed prior and pick the bucket by size
+  (small <12 / mid 12-30 / large >30); flat maps behave exactly as before
+  (golden 20/20, parity 60/60). The prior is data-honest and size-correct —
+  it captures the case study cleanly: Dagger Pair 0.43 mid / 0.00 large,
+  Bridled Fury 0.00 mid / 0.20 large.
+  **KEY FINDING — the prior does NOT fix the Dagger-Pair-at-scale
+  over-ranking.** A/B (flat vs usage) and a δ sweep (0.15→0.8, i.e. up to 5×)
+  both leave V4 at 69% and Dagger Pair at #3. The meta term (δ·prior) is far
+  weaker than the fitness term; DP ranks high on shallow-broad COVERAGE, and
+  no prior weight overcomes that. The real fix is fitness-side: **Q16**
+  (content-absolute Resilience taxing single-target damage at scale) or a
+  breadth/redundancy penalty. Also note: at mid (20-man) the usage data
+  actually SUPPORTS Dagger Pair (0.43) — people do run daggers there; the
+  genuine bug is only at large (30+), where DP is absent yet still ranks #3.
+  CONFOUND still stands: usage conflates viability with price/accessibility;
+  the prior shrinks toward NEUTRAL at low n (never negative), and only
+  win-lift (V8) may demote a weapon the mechanism layer likes. TO ADMIT:
+  paste `meta_prior_usage.json`'s `meta_prior` into scoring.yaml, rebuild,
+  re-run the A/B — but per project rule it stays display-only until it
+  demonstrably improves a metric, which at δ=0.15 it does not.
 
 **Case study (2026-08-13): Dagger Pair vs Bridled Fury** — line-mates,
 identical Q/W, only the E differs (EXECUTEDAGGER burst_st:3+execute vs
@@ -384,6 +399,19 @@ SHIPPED overnight (committed, tested where possible without a live game):
 BLOCKED on one live run (needs the game + you): confirm spells resolve,
 auto-calibration binds, and the connect button pulls the live party. See
 `companion/README.md` "Status — pick up here".
+
+OPEN REQUIREMENT (2026-08-14, from live testing): **keep the roster live
+through mid-fight joins/leaves.** Today only the bulk roster event (231)
+updates membership; if a party join/leave arrives as a separate INCREMENTAL
+event, the roster goes stale until the next zone. Must determine (by watching
+a live join/leave): does 231 re-fire on membership change (then already
+handled), or is there an incremental "player joined/left" event to add a
+handler for? Identify by correlating the /schema + --debug timestamp with the
+actual join/leave; do NOT guess the shape (a party-join looks like NewCharacter
+— a name + guid + flag — so a blind handler would pollute the party with
+visible guildmates). Also: the roster event only fires on zone/party-change,
+so the companion must be running before you zone into content (or trigger one
+zone) to capture the initial party.
 
 Upgrade menu, roughly highest-value first — pick when you resume:
 1. **The one live verification run** (finishes the whole companion arc).
