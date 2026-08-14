@@ -343,11 +343,46 @@ capability-derived role (sheets) × albionbb's pre-classified per-player
 `role` field (real battles) × Metabattle tags (community). 3/3 agree →
 trusted; disagreement → expert queue, never silently overridden.
 
-- [ ] **Q16 (new) — content-level mechanics params.** Give templates
-  absolute `expected_aoe_targets`/`focus_attackers` (size- and content-
-  driven), style modulating around them, so single-target supply is taxed
-  at 20-man even under balanced. Requires target recalibration — do after
-  the usage prior lands (cheaper, independent win first).
+- [~] **Q16 — content-absolute mechanics physics. BUILT + MEASURED
+  2026-08-14; UNCOMMITTED, pending sign-off.** The physics is now ABSOLUTE by
+  size, anchored to (balanced style, base_size): at base size nothing changes
+  (calibration untouched, golden 20/20 + parity 60/60 green), but ABOVE base
+  size single-target damage is taxed harder (more Focus Fire) and AoE boosted
+  (more Escalation). Growth is sub-linear + capped: `grow(p) = min(8, p*(1 +
+  0.5*(scale-1)))`, `scale = size/base_size` (the "capped/realistic" curve the
+  user chose). Verified: `burst_st` mult drops x1.000@20 → x0.896@30 →
+  x0.825@40 → x0.736@60; `burst_aoe` rises to x1.258@60.
+  **KEY FINDING — Q16 is correct physics but is NOT the Dagger-Pair fix.**
+  It taxes DAMAGE caps only (`burst_st`/`execute`, boosts `burst_aoe`), but DP
+  ranks high on UTILITY BREADTH (catch/mobility/peel/stun/…), which Q16 doesn't
+  touch — so DP stays #3 through size 40, dropping to #5 only at 60. Bridled
+  Fury (also a single-target dagger) drops too; Q16 taxes ST broadly and does
+  not distinguish the two. Magnitudes (0.5 damp, cap 8) are my choices, not
+  expert-validated, and V4 can't validate Q16 (V4 runs at base size where
+  scale==1). Ship-or-hold is a validation call; it stands on grounded-physics
+  merit (Resilience/escalation tables are wiki-sourced) independent of DP.
+
+- [x] **Q18 — breadth/redundancy penalty. INVESTIGATED + REJECTED 2026-08-14.**
+  Hypothesis (VALIDATION.md V4 finding #2): DP over-ranks because fitness SUMS
+  its per-cap marginal gains across all 12 caps, as if one player delivers
+  every capability at once (an action-economy fiction). Fix tried: a geometric
+  discount on a candidate's sorted per-cap benefits (`rho^rank`; best counts
+  full, 2nd × rho, …; costs undiscounted; rho=1.0 = provable identity, verified
+  to 3.6e-14). **Swept rho 1.0→0.35 and it does NOT earn its place:**
+  - DP barely moves at base size (its TOP contributions are genuine gaps); it
+    only drops meaningfully once rho is aggressive enough to distort everything.
+  - V4 role stays 69% then REGRESSES to 65% at rho≤0.45 — the 8 role-misses are
+    the saturation-metric artifact (drop 1 of several healers → healing still
+    covered → a bruiser wins the 20th-body contest), not breadth cases.
+  - It can BACKFIRE: rho=0.55 nudged DP from #8 UP to #5 in a diver-present
+    party, because the discount also hits DP's breadth-bruiser competitors.
+  **Decisive counter-evidence — the engine ALREADY de-ranks DP by context:**
+  dive-less party DP #3 (a real gap, correct) → add 1 diver #8 → add more #39.
+  Concavity + supply already collapse DP's marginal once its niche is filled.
+  So the "DP over-ranks" premise is largely FALSE for realistic parties; the
+  original #2/#3 alarm was a dive-LESS party where DP filling that gap is right.
+  Reverted; engine.py left Q16-only. REVISIT only with V4b (reconstruct the
+  last ~5 binding slots) if a genuine saturated-regime breadth failure appears.
 - [~] **Q17 — usage-derived MetaPrior. BUILT + MEASURED 2026-08-14; NOT
   wired (deliberately).** `pipeline/build_meta_prior.py` produces a
   size-bucketed prior from `weapon_usage_v2.json` (share × n/(n+8) shrinkage,

@@ -65,21 +65,29 @@ class Engine:
         self.style = style
         styles = self.data.get("styles", {}) or {}
         self.style_mults = (styles.get(style, {}) or {}).get("multipliers", {}) or {}
-        # Mechanics overlay (templates/mechanics.yaml + per-style parameters):
-        # weight multipliers say what a style VALUES; these say what a style's
-        # damage delivery makes EFFECTIVE. Both curves are normalized to the
-        # balanced style so balanced stays the identity and template
-        # calibration is untouched — styles diverge by RELATIVE physics only.
+        # Mechanics overlay (templates/mechanics.yaml + per-style parameters).
+        # Weight multipliers say what a style VALUES; these say what its damage
+        # delivery makes EFFECTIVE. Q16: the physics is now ABSOLUTE by size,
+        # anchored to (balanced style, base size) — so at base size nothing
+        # changes and template calibration is untouched, but ABOVE base size a
+        # bigger fight puts more attackers on the called target (more Focus
+        # Fire, single-target damage taxed) and hits more clumped enemies (more
+        # AoE Escalation). Focus/target counts grow SUB-LINEARLY with size and
+        # saturate (bodies can't all reach one target): capped/realistic curve.
         style_mech = (styles.get(style, {}) or {}).get("mechanics", {}) or {}
         base_mech = (styles.get("balanced", {}) or {}).get("mechanics", {}) or {}
+        scale = self.size / self.base_size if self.base_size else 1.0
+        # sub-linear damping (0.5) + a hard cap of 8 (the AoE-escalation cap and
+        # a realistic max pile-on). At base size scale==1 -> counts unchanged.
+        grow = lambda p: (min(8.0, p * (1.0 + 0.5 * (scale - 1.0))) if p else p)
         self.mech_mults = {}
         for cap in AOE_ESCALATION_CAPS:
             self.mech_mults[cap] = (
-                self._escalation_mult(style_mech.get("expected_aoe_targets"))
+                self._escalation_mult(grow(style_mech.get("expected_aoe_targets")))
                 / self._escalation_mult(base_mech.get("expected_aoe_targets")))
         for cap in RESILIENCE_CAPS:
             self.mech_mults[cap] = (
-                self._resilience_eff(style_mech.get("focus_attackers"))
+                self._resilience_eff(grow(style_mech.get("focus_attackers")))
                 / self._resilience_eff(base_mech.get("focus_attackers")))
 
     def _escalation_mult(self, targets):

@@ -51,21 +51,26 @@
     this.style = style || "balanced";
     var styles = this.data.styles || {};
     this.styleMults = (styles[this.style] || {}).multipliers || {};
-    /* Mechanics overlay: normalized to the balanced style so balanced stays
-       the identity — styles diverge by RELATIVE physics only (mirrors
-       engine.py set_content). */
+    /* Mechanics overlay: ABSOLUTE physics by size, anchored to (balanced,
+       base size) — base size unchanged, above it single-target damage is
+       taxed harder (more focus fire) and AoE boosted (more escalation).
+       Sub-linear growth (0.5) capped at 8. Mirrors engine.py set_content. */
     var styleMech = (styles[this.style] || {}).mechanics || {};
     var baseMech = (styles.balanced || {}).mechanics || {};
+    var scale = this.baseSize ? this.size / this.baseSize : 1.0;
+    var grow = function (p) {
+      return p ? Math.min(8.0, p * (1.0 + 0.5 * (scale - 1.0))) : p;
+    };
     this.mechMults = {};
     var i;
     for (i = 0; i < AOE_ESCALATION_CAPS.length; i++) {
       this.mechMults[AOE_ESCALATION_CAPS[i]] =
-        this._escalationMult(styleMech.expected_aoe_targets)
+        this._escalationMult(grow(styleMech.expected_aoe_targets))
         / this._escalationMult(baseMech.expected_aoe_targets);
     }
     for (i = 0; i < RESILIENCE_CAPS.length; i++) {
       this.mechMults[RESILIENCE_CAPS[i]] =
-        this._resilienceEff(styleMech.focus_attackers)
+        this._resilienceEff(grow(styleMech.focus_attackers))
         / this._resilienceEff(baseMech.focus_attackers);
     }
   };
