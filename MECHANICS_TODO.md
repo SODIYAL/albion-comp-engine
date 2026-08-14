@@ -417,7 +417,12 @@ recent-loadout history. CAVEAT: no `access-control-allow-origin` header
   FORGING: best comp where each member plays only weapons they demonstrably
   play (assignment problem over engine scores × player weapon pools).
   Decide CORS route: Worker proxy vs local helper JSON.
-- [~] **Stage 2 — live companion. BUILT (v0.1) — `companion/`** (2026-08-13).
+- [~] **Stage 2 — live companion. WORKING (live-verified 2026-08-14) —
+  `companion/`**. Roster + weapon + full gear confirmed against a real
+  5-person party; spell-name resolution built (needs a live test); the Comp
+  Forge "connect companion" button is the remaining piece. Authoritative
+  resume notes: `companion/README.md` "Status — pick up here" + HANDOFF.
+  (Older detail below kept for context.)
   Standalone MIT-stack C# console app: raw-socket capture → PhotonPackageParser
   → party/equipment/spell handlers → `localhost:53321/party` JSON. Compiles
   clean; item DB + HTTP + JSON verified without a live game. REMAINING: one

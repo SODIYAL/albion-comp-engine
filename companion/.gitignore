@@ -1,5 +1,6 @@
 bin/
 obj/
 items.txt
+spells.xml
 party-cache.json
 *.log

@@ -10,6 +10,34 @@ same data the party UI and the inspect window already render on your screen —
 the tolerated category (like Statistics Analysis Tool), not radar. Full scope,
 event map, and legality reasoning: [../COMPANION_SCOPE.md](../COMPANION_SCOPE.md).
 
+## Status — pick up here (2026-08-14)
+
+**WORKING and live-verified against a real 5-person party:** party roster,
+each member's name/guild, weapon (as the engine's `unique_name`), full
+tier+enchant equipment. Members outside your zone correctly show name-only.
+
+**BUILT, not yet live-verified:** spell-name resolution — `/party` spells now
+resolve to UniqueNames (`HOLYFLASH`, `CELESTIAL_SPHERE`, …) that match the
+engine's sheet evidence IDs. Validated by index math against the last live
+party; needs one in-game run to confirm the resolved names look right.
+
+**NOT STARTED:** the Comp Forge "connect companion" button — poll `/party`,
+drop each member's weapon into a slot, forge around the real party. This is
+the last piece; the data it needs (weapons) already works perfectly.
+
+**To resume: verify spells, then build the button.**
+
+1. Close any running companion window; double-click `run-companion.bat` → Yes.
+2. First launch downloads `spells.xml` (~9 MB, once) — watch for
+   `[spells] 9216 spell indices loaded` in the console.
+3. In a zone with a party member visible, open `http://localhost:53321/party`
+   and confirm `spells` shows names (not numbers), e.g. Redemption Staff →
+   `q:"HOLYFLASH" w:"HEALINGBEAM" e:"CELESTIAL_SPHERE"`.
+4. If names look wrong, delete `spells.xml` to re-pull, or re-run the
+   `/schema` discovery (below) — spell indices shift per patch.
+
+Everything below is the full run/troubleshooting reference.
+
 ## Run it
 
 Needs the [.NET 8 SDK](https://dotnet.microsoft.com/download) to build.
@@ -78,9 +106,12 @@ Two things can go stale after an update:
   `/status` shows Albion packets flowing but `handled_events` stuck at 0,
   re-sync these against SAT's `EventCodes.cs`
   (`Triky313/AlbionOnline-StatisticsAnalysis`, `src/StatisticsAnalysisTool/Network/EventCodes.cs`).
-- **Item indices** — refreshed automatically from `ao-bin-dumps` on first run
-  and every 7 days (cached as `items.txt` beside the exe). Delete the cache to
-  force a refresh.
+- **Item and spell indices** — refreshed automatically from `ao-bin-dumps` on
+  first run and every 7 days (cached beside the exe as `items.txt` and
+  `spells.xml`). Delete a cache file to force a refresh. Spell indices are a
+  position in the game's flat spell list (document order of `spells.xml`,
+  colortag skipped, channeling spells taking an extra slot); if resolved spell
+  names look wrong after a patch, delete `spells.xml` to re-download.
 - **The Protocol18 parser itself** (`photon/`) can drift if Albion changes its
   wire encoding. If a future patch brings back `Type code: N not implemented`
   in `--debug`, re-vendor `photon/` from the current SAT source (see

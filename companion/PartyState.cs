@@ -19,6 +19,9 @@ public sealed class PartyState
     private readonly Dictionary<long, string> _objectIdToName = new();
     private string? _selfName;
     private string? _cachePath;
+    private SpellDb? _spells;
+
+    public void SetSpellDb(SpellDb spells) => _spells = spells;
 
     /// <summary>Roster persistence: the party event (231) only fires on zone/
     /// party change, so a fresh launch may not see it. We save the roster
@@ -71,7 +74,9 @@ public sealed class PartyState
         [JsonPropertyName("weapon_item")] public string? WeaponItem { get; set; } // full item, e.g. T8_2H_MACE@3
         [JsonPropertyName("item_power")] public double? ItemPower { get; set; }
         [JsonPropertyName("equipment")] public Dictionary<string, string>? Equipment { get; set; }
-        [JsonPropertyName("spells")] public Dictionary<string, int>? SpellsRaw { get; set; }
+        // spell slot -> UniqueName (matches the engine's sheet evidence IDs);
+        // resolved from the packet index via SpellDb
+        [JsonPropertyName("spells")] public Dictionary<string, string>? Spells { get; set; }
         [JsonPropertyName("updated_utc")] public string? UpdatedUtc { get; set; }
         [JsonPropertyName("source")] public string? Source { get; set; }          // which event last touched this
     }
@@ -158,12 +163,17 @@ public sealed class PartyState
                 }
                 if (spells is { Length: > 0 })
                 {
-                    // indices per COMPANION_SCOPE.md: 0,1,2 = Q,W,E; 3=D; 4=R; 5=F
-                    var sp = new Dictionary<string, int>();
+                    // indices per COMPANION_SCOPE.md: 0,1,2 = Q,W,E; 3=D; 4=R; 5=F.
+                    // Resolve to UniqueNames so they match the engine's evidence IDs.
+                    var sp = new Dictionary<string, string>();
                     string[] slotNames = { "q", "w", "e", "d", "r", "f" };
                     for (var i = 0; i < spells.Length && i < slotNames.Length; i++)
-                        if (spells[i] >= 0) sp[slotNames[i]] = spells[i];
-                    m.SpellsRaw = sp;
+                    {
+                        if (spells[i] < 0) continue;
+                        var nm = _spells?.Name(spells[i]);
+                        if (!string.IsNullOrEmpty(nm)) sp[slotNames[i]] = nm;
+                    }
+                    if (sp.Count > 0) m.Spells = sp;
                 }
                 if (itemPower is > 0) m.ItemPower = itemPower;
             }, source);

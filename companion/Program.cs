@@ -30,7 +30,9 @@ Console.WriteLine();
 
 var exeDir = AppContext.BaseDirectory;
 var items = await ItemDb.LoadAsync(exeDir);
+var spells = await SpellDb.LoadAsync(exeDir);
 var state = new PartyState();
+state.SetSpellDb(spells);
 state.EnablePersistence(Path.Combine(exeDir, "party-cache.json"));
 var parser = new AlbionEventParser(state, items, debug);
 var capture = new RawSocketCapture(parser);
@@ -89,6 +91,7 @@ while (true)
                 last_event_utc = parser.LastEventUtc == DateTime.MinValue ? null : parser.LastEventUtc.ToString("o"),
                 party_members = state.Count,
                 item_indices = items.Count,
+                spell_indices = spells.Count,
             }, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
             res.ContentType = "application/json";
             break;
