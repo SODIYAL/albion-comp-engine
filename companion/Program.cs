@@ -87,6 +87,7 @@ while (true)
                 photon_requests = parser.RequestsSeen,
                 photon_responses = parser.ResponsesSeen,
                 handled_events = parser.EventsHandled,
+                detected_codes = parser.Bindings(),   // role -> code, self-calibrated this session
                 event_code_histogram = parser.TopEventCodes(15),
                 last_event_utc = parser.LastEventUtc == DateTime.MinValue ? null : parser.LastEventUtc.ToString("o"),
                 party_members = state.Count,

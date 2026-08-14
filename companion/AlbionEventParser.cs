@@ -3,23 +3,23 @@ using StatisticsAnalysisTool.PhotonPackageParser;
 namespace CompForgeCompanion;
 
 /// <summary>
-/// Photon -> Albion event dispatch. Albion's REAL event code travels in
-/// parameter 252 (operations: 253), not the Photon-level code byte
-/// (COMPANION_SCOPE.md, verified from SAT's AlbionParser). Event codes are
-/// positional per game version — when the numbers below stop matching,
-/// sync them against SAT's EventCodes.cs (see README, "patch ritual").
+/// Photon -> Albion event dispatch, SHAPE-BASED (self-calibrating).
+///
+/// Albion's event-code NUMBERS shift with game patches, so we do NOT hardcode
+/// them. Instead each event is identified by the SHAPE of its parameters — a
+/// NewCharacter is "a name string + a 10-slot equipment array + a 14-slot
+/// spell array", whatever code number it carries this patch. The important
+/// payload arrays are read by SEARCHING for the right-length array, so the
+/// handlers also survive per-event parameter-index shifts. Fingerprints were
+/// verified unique against a live /schema capture (2026-08-14); the detected
+/// code<->role bindings are exposed at /status so a patch that renumbers
+/// events shows up as new numbers there instead of a silent breakage.
+///
+/// Albion's real code still travels in parameter 252 (operations: 253); we
+/// keep it only for the histogram/schema diagnostics, never for dispatch.
 /// </summary>
 public sealed class AlbionEventParser : PhotonParser
 {
-    // Event/op codes IDENTIFIED FROM LIVE /schema (2026-08-13, Realm Divided
-    // era). These shift per game patch: if handled_events stalls at 0 after an
-    // update, re-run the /schema discovery (README) and re-map — the param
-    // SHAPES (name string, equipment short[10], guid list) are the fingerprints.
-    private const short EvNewCharacter = 29;            // 0=objId 1=name 8=guild 40=equip short[10] 43=spells short[14]
-    private const short EvEquipmentChanged = 90;        // 0=objId 2=equip short[10] 7=spells short[14]
-    private const short EvPartyRoster = 231;            // 9=names string[] 8=guids byte[16*n]
-    private const short OpSelfJoin = 2;                 // response: 0=objId 2=name 58=guild (52 is INSTANCE ids, not item types)
-
     private readonly PartyState _state;
     private readonly ItemDb _items;
     private readonly bool _debug;
@@ -27,121 +27,154 @@ public sealed class AlbionEventParser : PhotonParser
 
     public long EventsSeen, EventsHandled, RequestsSeen, ResponsesSeen;
     public DateTime LastEventUtc = DateTime.MinValue;
-    // diagnostic: histogram of the raw Albion event codes (param 252) we see,
-    // so a live run tells us which codes are actually flowing vs the constants
     public readonly Dictionary<short, long> EventCodeHist = new();
-    // diagnostic: per event/op code, the SHAPE of its parameters (index -> a
-    // short type/value description). Event codes shift per patch, so this is
-    // how we IDENTIFY which code carries names+equipment (NewCharacter) or a
-    // name+guid list (party) without trusting hardcoded numbers.
     private readonly Dictionary<short, Dictionary<byte, string>> _eventSchema = new();
     private readonly Dictionary<short, Dictionary<byte, string>> _reqSchema = new();
     private readonly Dictionary<short, Dictionary<byte, string>> _resSchema = new();
+    // role -> the code number currently carrying it (self-calibrated), for
+    // /status. If this ever shows a different number after a patch, the
+    // shape-detection re-bound automatically — no code change needed.
+    private readonly Dictionary<string, short> _bindings = new();
 
     public AlbionEventParser(PartyState state, ItemDb items, bool debug)
     {
         _state = state; _items = items; _debug = debug;
     }
 
-    protected override void OnEvent(byte code, Dictionary<byte, object> parameters)
+    protected override void OnEvent(byte code, Dictionary<byte, object> p)
     {
         EventsSeen++; LastEventUtc = DateTime.UtcNow;
-        if (!TryGetShort(parameters, 252, out var evCode)) return;
+        if (!TryGetShort(p, 252, out var evCode)) return;
         lock (EventCodeHist)
             EventCodeHist[evCode] = EventCodeHist.GetValueOrDefault(evCode) + 1;
-        SampleSchema(_eventSchema, evCode, parameters);
-        switch (evCode)
-        {
-            case EvNewCharacter: HandleNewCharacter(parameters); break;
-            case EvEquipmentChanged: HandleEquipmentChanged(parameters); break;
-            case EvPartyRoster: HandlePartyRoster(parameters); break;
-        }
+        SampleSchema(_eventSchema, evCode, p);
+
+        // Dispatch by shape, not by code number. Order matters: NewCharacter
+        // (has a name) is tested before EquipmentChanged (same arrays, no name).
+        string? role =
+            LooksLikeNewCharacter(p) ? (HandleNewCharacter(p) ? "NewCharacter" : null)
+          : LooksLikeEquipmentChanged(p) ? (HandleEquipmentChanged(p) ? "EquipmentChanged" : null)
+          : LooksLikePartyRoster(p) ? (HandlePartyRoster(p) ? "PartyRoster" : null)
+          : null;
+        if (role != null) Bind(role, evCode);
     }
 
-    protected override void OnRequest(byte operationCode, Dictionary<byte, object> parameters)
+    protected override void OnRequest(byte operationCode, Dictionary<byte, object> p)
     {
         RequestsSeen++;
-        if (TryGetShort(parameters, 253, out var reqOp)) SampleSchema(_reqSchema, reqOp, parameters);
+        if (TryGetShort(p, 253, out var reqOp)) SampleSchema(_reqSchema, reqOp, p);
     }
 
     protected override void OnResponse(byte operationCode, short returnCode,
-        string debugMessage, Dictionary<byte, object> parameters)
+        string debugMessage, Dictionary<byte, object> p)
     {
         ResponsesSeen++;
-        if (!TryGetShort(parameters, 253, out var op)) return;
-        SampleSchema(_resSchema, op, parameters);
-        if (op == OpSelfJoin) HandleSelfJoin(parameters);
+        if (TryGetShort(p, 253, out var op)) SampleSchema(_resSchema, op, p);
+        // Self-join response: a numeric objectId at 0 + a name string at 2.
+        if (IsNum(p, 0) && p.TryGetValue(2, out var v) && v is string && HandleSelfJoin(p))
+            Bind("SelfJoin", TryGetShort(p, 253, out var o) ? o : (short)0);
     }
+
+    // ---------------------------------------------------- shape fingerprints
+    // Each verified UNIQUE against a live /schema capture (2026-08-14).
+
+    // name at 1, objectId at 0, a 10-slot equipment array, a 14-slot spell array
+    private static bool LooksLikeNewCharacter(Dictionary<byte, object> p) =>
+        IsNum(p, 0) && p.TryGetValue(1, out var n) && n is string
+        && HasNumArray(p, 10) && HasNumArray(p, 14);
+
+    // same arrays as NewCharacter but NO name at 1 (it's a numeric objectId)
+    private static bool LooksLikeEquipmentChanged(Dictionary<byte, object> p) =>
+        IsNum(p, 0) && !(p.TryGetValue(1, out var n) && n is string)
+        && HasNumArray(p, 10) && HasNumArray(p, 14);
+
+    // OUR party: numeric party id at 0 + a names string[] + a guid list (>=2).
+    // The numeric-0 requirement excludes the "enemy party spotted" event, whose
+    // param 0 is a string.
+    private static bool LooksLikePartyRoster(Dictionary<byte, object> p) =>
+        IsNum(p, 0) && FindStringArray(p) != null && FindGuidList(p) != null;
 
     // ------------------------------------------------------------- handlers
+    // Return true when the event was genuinely handled (used to confirm the
+    // shape binding). Payload arrays are found by size, robust to index shifts.
 
-    private void HandleNewCharacter(Dictionary<byte, object> p)
+    private bool HandleNewCharacter(Dictionary<byte, object> p)
     {
-        if (!TryGetLong(p, 0, out var objectId)) return;
+        if (!TryGetLong(p, 0, out var objectId)) return false;
         var name = GetString(p, 1);
-        if (name == null) return;
-        var guild = GetString(p, 8);
+        if (name == null) return false;
+        var guild = SecondString(p, name);
         _state.SeeCharacter(objectId, name, guild);
-        // Equipment (40, short[10] geared / byte[10] of zeros when naked) and
-        // selected spells (43, short[14]) both arrive right here on visibility —
-        // no need to wait for an EquipmentChanged. Empty slots are 0 and get
-        // skipped in UpdateLoadout, so a naked byte[10] harmlessly yields nothing.
-        var equipment = GetIntArray(p, 40);
-        var spells = GetIntArray(p, 43);
+        // Equipment (10-slot, geared) and spells (14-slot) arrive right here on
+        // visibility; naked players send zeros, which UpdateLoadout skips.
+        var equipment = FindNumArray(p, 10);
+        var spells = FindNumArray(p, 14);
         _state.UpdateLoadout(name, _items, equipment, spells, null, "NewCharacter");
-        Log($"NewCharacter[29] {name} guild={guild} eq={equipment?.Length} sp={spells?.Length}");
+        Log($"NewCharacter {name} guild={guild} eq={equipment?.Length} sp={spells?.Length}");
         EventsHandled++;
+        return true;
     }
 
-    private void HandleEquipmentChanged(Dictionary<byte, object> p)
+    private bool HandleEquipmentChanged(Dictionary<byte, object> p)
     {
-        if (!TryGetLong(p, 0, out var objectId)) return;
+        if (!TryGetLong(p, 0, out var objectId)) return false;
         var name = _state.NameForObject(objectId);
-        if (name == null) return;               // an object we haven't named yet
-        var equipment = GetIntArray(p, 2);      // short[10]
-        var spells = GetIntArray(p, 7);         // short[14]
-        if (_state.UpdateLoadout(name, _items, equipment, spells, null, "EquipmentChanged"))
-        {
-            Log($"Equip[90] {name} eq={equipment?.Length} sp={spells?.Length}");
-            EventsHandled++;
-        }
+        if (name == null) return false;         // an object we haven't named yet
+        var equipment = FindNumArray(p, 10);
+        var spells = FindNumArray(p, 14);
+        if (!_state.UpdateLoadout(name, _items, equipment, spells, null, "EquipmentChanged"))
+            return false;
+        Log($"Equip {name} eq={equipment?.Length} sp={spells?.Length}");
+        EventsHandled++;
+        return true;
     }
 
-    private void HandlePartyRoster(Dictionary<byte, object> p)
+    private bool HandlePartyRoster(Dictionary<byte, object> p)
     {
-        var names = GetStringArray(p, 9);
-        if (names is not { Length: > 0 })
-        {
-            Log("Party[231] no names — RAW " + Shapes(p));
-            return;
-        }
-        p.TryGetValue(8, out var guidRaw);
-        var guids = AsGuidList(guidRaw) ?? new List<Guid>();
+        var names = FindStringArray(p);
+        if (names is not { Length: > 0 }) return false;
+        var guids = FindGuidList(p, names.Length) ?? new List<Guid>();
         var members = new List<(Guid, string)>();
         for (var i = 0; i < names.Length; i++)
             members.Add((i < guids.Count ? guids[i] : Guid.Empty, names[i]));
         _guidToName.Clear();
         foreach (var (g, n) in members) if (g != Guid.Empty) _guidToName[g] = n;
         _state.SetParty(members);
-        Log($"Party[231] [{string.Join(", ", names)}]");
+        Log($"Party [{string.Join(", ", names)}]");
         EventsHandled++;
+        return true;
     }
 
-    private void HandleSelfJoin(Dictionary<byte, object> p)
+    private bool HandleSelfJoin(Dictionary<byte, object> p)
     {
-        // Establishes self name + objectId so YOUR EquipmentChanged (90) maps.
-        // We deliberately do NOT read gear here: the join response's 10-slot
-        // int array is item INSTANCE ids (consecutive per-world-item), not
-        // item TYPE ids — it won't map to weapon names. Self gear arrives via
-        // event 90 like every other player.
-        if (!TryGetLong(p, 0, out var objectId)) return;
+        // Registers self name + objectId so YOUR EquipmentChanged maps. We do
+        // NOT read gear here: the join response's 10-slot int array is item
+        // INSTANCE ids (consecutive per-world-item), not item TYPE ids. Self
+        // gear arrives via EquipmentChanged like every other player.
+        if (!TryGetLong(p, 0, out var objectId)) return false;
         var name = GetString(p, 2);
-        if (name == null) return;
+        if (name == null) return false;
         _state.SetSelf(name);
-        _state.SeeCharacter(objectId, name, GetString(p, 58));
-        _state.UpdateLoadout(name, _items, null, null, null, "Self");   // put self on the roster; gear fills from event 90
-        Log($"SelfJoin[resp2] {name} (self registered)");
+        _state.SeeCharacter(objectId, name, null);
+        _state.UpdateLoadout(name, _items, null, null, null, "Self");
+        Log($"SelfJoin {name} (self registered)");
         EventsHandled++;
+        return true;
+    }
+
+    private void Bind(string role, short code)
+    {
+        lock (_bindings)
+        {
+            if (_bindings.TryGetValue(role, out var prev) && prev != code)
+                Console.WriteLine($"[calibrate] {role} rebound: code {prev} -> {code} (patch shift)");
+            _bindings[role] = code;
+        }
+    }
+
+    public Dictionary<string, short> Bindings()
+    {
+        lock (_bindings) return new Dictionary<string, short>(_bindings);
     }
 
     // ------------------------------------------------------- param helpers
@@ -160,41 +193,85 @@ public sealed class AlbionEventParser : PhotonParser
         try { v = Convert.ToInt64(o); return true; } catch { return false; }
     }
 
-    private static bool TryGetDouble(Dictionary<byte, object> p, byte k, out double v)
-    {
-        v = 0;
-        if (!p.TryGetValue(k, out var o)) return false;
-        try { v = Convert.ToDouble(o); return true; } catch { return false; }
-    }
-
     private static string? GetString(Dictionary<byte, object> p, byte k) =>
         p.TryGetValue(k, out var o) ? o as string : null;
 
-    /// <summary>Equipment/spell arrays arrive as byte[]/short[]/int[] depending
-    /// on the values involved — normalize to int[].</summary>
-    private static int[]? GetIntArray(Dictionary<byte, object> p, byte k)
+    /// <summary>The first non-empty string in parameter order that isn't the
+    /// name — used for the guild, robust to its exact parameter index.</summary>
+    private static string? SecondString(Dictionary<byte, object> p, string notThis)
     {
-        if (!p.TryGetValue(k, out var o)) return null;
-        return o switch
-        {
-            byte[] b => b.Select(x => (int)x).ToArray(),
-            short[] s => s.Select(x => (int)x).ToArray(),
-            int[] i => i,
-            long[] l => l.Select(x => (int)x).ToArray(),
-            float[] f => f.Select(x => (int)x).ToArray(),
-            _ => null,
-        };
+        foreach (var kv in p.OrderBy(x => x.Key))
+            if (kv.Value is string s && s.Length > 0 && s != notThis) return s;
+        return null;
     }
 
-    private static string[]? GetStringArray(Dictionary<byte, object> p, byte k) =>
-        p.TryGetValue(k, out var o) ? o as string[] : null;
+    private static bool IsNum(Dictionary<byte, object> p, byte k) =>
+        p.TryGetValue(k, out var o)
+        && o is byte or sbyte or short or ushort or int or uint or long or ulong;
+
+    private static int ArrayLen(object? o) => o switch
+    {
+        byte[] a => a.Length, short[] a => a.Length,
+        int[] a => a.Length, long[] a => a.Length, _ => -1,
+    };
+
+    /// <summary>Does any parameter hold a numeric array of exactly this length?
+    /// (Equipment is 10, spells are 14 — the shape fingerprints.)</summary>
+    private static bool HasNumArray(Dictionary<byte, object> p, int len)
+    {
+        foreach (var v in p.Values) if (ArrayLen(v) == len) return true;
+        return false;
+    }
+
+    /// <summary>The first numeric array of exactly `len`, normalized to int[].
+    /// Found by SIZE, not fixed index, so it survives parameter-index shifts.</summary>
+    private static int[]? FindNumArray(Dictionary<byte, object> p, int len)
+    {
+        foreach (var kv in p.OrderBy(x => x.Key))
+        {
+            if (ArrayLen(kv.Value) != len) continue;
+            return kv.Value switch
+            {
+                byte[] b => Array.ConvertAll(b, x => (int)x),
+                short[] s => Array.ConvertAll(s, x => (int)x),
+                int[] i => i,
+                long[] l => Array.ConvertAll(l, x => (int)x),
+                _ => null,
+            };
+        }
+        return null;
+    }
+
+    private static string[]? FindStringArray(Dictionary<byte, object> p)
+    {
+        foreach (var kv in p.OrderBy(x => x.Key))
+            if (kv.Value is string[] { Length: > 0 } sa) return sa;
+        return null;
+    }
+
+    /// <summary>The party guid list: a byte[] of 16-byte chunks (>=2) or
+    /// byte[][]. Prefers the list whose count matches the roster size, else the
+    /// largest — so a single leader guid never wins over the full roster.</summary>
+    private static List<Guid>? FindGuidList(Dictionary<byte, object> p, int preferCount = 0)
+    {
+        List<Guid>? best = null;
+        foreach (var v in p.Values)
+        {
+            var g = AsGuidList(v);
+            if (g == null) continue;
+            if (preferCount > 0 && g.Count == preferCount) return g;
+            if (best == null || g.Count > best.Count) best = g;
+        }
+        return best;
+    }
 
     private static List<Guid>? AsGuidList(object? v)
     {
-        // guid lists arrive either as byte[][] or as one flat byte[] of 16-byte chunks
+        // guid lists arrive either as byte[][] or as one flat byte[] of 16-byte
+        // chunks; require >=2 (>=32 bytes) so a single guid isn't a "list"
         switch (v)
         {
-            case byte[][] arr when arr.Length > 0 && arr.All(x => x.Length == 16):
+            case byte[][] arr when arr.Length >= 2 && arr.All(x => x.Length == 16):
                 return arr.Select(x => new Guid(x)).ToList();
             case byte[] flat when flat.Length >= 32 && flat.Length % 16 == 0:
                 return Enumerable.Range(0, flat.Length / 16)
@@ -203,10 +280,6 @@ public sealed class AlbionEventParser : PhotonParser
                 return null;
         }
     }
-
-    private static string Shapes(Dictionary<byte, object> p) =>
-        "{" + string.Join(", ", p.Select(kv =>
-            $"{kv.Key}:{kv.Value?.GetType().Name ?? "null"}")) + "}";
 
     private void Log(string msg)
     {
