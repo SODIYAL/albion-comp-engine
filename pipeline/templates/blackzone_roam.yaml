@@ -36,7 +36,12 @@ requirements:
   mobility:       {target: 8.0,  weight: 6,  soft_cap: 16.0, scales: true}
   burst_aoe:      {target: 12.0, weight: 8,  soft_cap: 20.0, scales: true}
   sustained_dps:  {target: 8.0,  weight: 5,  soft_cap: 16.0, scales: true}
-  burst_st:       {target: 4.0,  weight: 4,  soft_cap: 8.0,  scales: true}
+  # single-target damage is WEAK in 20-man group content: enemy heals +
+  # Resilience (focus-fire damage reduction) overpower damage piled on one
+  # player, so a dedicated single-target slot buys little (expert ruling
+  # 2026-08-14, "single-target dive isn't needed past ~5 players"). Kept a
+  # token weight (kill-secure still happens) — not zeroed like castle_outpost.
+  burst_st:       {target: 2.0,  weight: 1,  soft_cap: 4.0,  scales: true}
   stun:           {target: 5.0,  weight: 4,  soft_cap: 10.0, scales: true}
   zone_control:   {target: 3.0,  weight: 3,  soft_cap: 8.0,  scales: true}
   # threshold needs — one or two dedicated slots regardless of size
@@ -45,7 +50,7 @@ requirements:
   heal_reduction: {target: 2.0,  weight: 6,  soft_cap: 4.0,  scales: false}
   resist_shred:   {target: 3.0,  weight: 5,  soft_cap: 6.0,  scales: false}
   disengage:      {target: 2.0,  weight: 5,  soft_cap: 4.0,  scales: false}
-  execute:        {target: 2.0,  weight: 4,  soft_cap: 4.0,  scales: false}
+  execute:        {target: 1.0,  weight: 1,  soft_cap: 2.0,  scales: false}  # single-target kill-secure; weak at scale (see burst_st)
   buff_allies:    {target: 3.0,  weight: 4,  soft_cap: 6.0,  scales: false}
   cleanse:        {target: 1.0,  weight: 4,  soft_cap: 3.0,  scales: false}
   silence:        {target: 1.0,  weight: 4,  soft_cap: 3.0,  scales: false}

@@ -177,12 +177,94 @@
     return total;
   };
 
+  /* ---- loadout model (mirrors engine.py; a player equips one spell per slot,
+     so a candidate's marginal is its BEST single loadout, not the whole menu).
+     Base-party supply stays flat-union; only the evaluated candidate is
+     loadout-limited. Enumeration ORDER matches itertools.product exactly so
+     the argmax picks the same loadout in both engines (parity). */
+  CompEngine.prototype._eff = function (caps) {
+    var out = {}, m;
+    for (var c in caps) { m = this.mechMults[c]; out[c] = caps[c] * (m === undefined ? 1.0 : m); }
+    return out;
+  };
+
+  CompEngine.prototype._loadoutEff = function (weapon) {
+    var lo = this.weapons[weapon].loadout;
+    var hasSlots = lo && lo.slots && lo.slots.length;
+    var hasAlways = lo && lo.always && Object.keys(lo.always).length;
+    if (!lo || (!hasSlots && !hasAlways))
+      return { always: this._eff(this.capsOf(weapon)), slots: [] };
+    var self = this;
+    return {
+      always: this._eff(lo.always || {}),
+      slots: (lo.slots || []).map(function (slot) {
+        return slot.map(function (b) { return self._eff(b); });
+      }),
+    };
+  };
+
+  CompEngine.prototype._margFitFrom = function (s, extra) {
+    var total = 0.0;
+    for (var cap in extra) {
+      var gain = extra[cap];
+      if (!(cap in this.reqs) || !gain) continue;
+      var have = s[cap] || 0.0, target = this.target(cap), soft = this.softCap(cap);
+      var baseW = this.reqs[cap].weight;
+      total += this.weight(cap) * (Math.pow(Math.min(1.0, (have + gain) / target), this.gamma)
+                                   - Math.pow(Math.min(1.0, have / target), this.gamma));
+      total += this._floorPenalty(cap, have) - this._floorPenalty(cap, have + gain);
+      var ob = have > soft ? 0.5 * baseW * (have - soft) / target : 0.0;
+      var oa = (have + gain) > soft ? 0.5 * baseW * (have + gain - soft) / target : 0.0;
+      total -= oa - ob;
+    }
+    return total;
+  };
+
+  CompEngine.prototype._margSynFrom = function (s, baseSyn, extra) {
+    var total = 0.0;
+    for (var i = 0; i < this.synergies.length; i++) {
+      var a = this.synergies[i][0], c = this.synergies[i][1], b = this.synergies[i][2];
+      total += b * Math.min((s[a] || 0) + (extra[a] || 0), (s[c] || 0) + (extra[c] || 0));
+    }
+    return total - baseSyn;
+  };
+
+  CompEngine.prototype.bestLoadout = function (s, baseSyn, weapon) {
+    var le = this._loadoutEff(weapon), always = le.always, slots = le.slots;
+    /* each slot equips exactly ONE spell (no empty option) — see engine.py */
+    var choices = slots.filter(function (slot) { return slot.length; });
+    var combos = [[]], i, j, k, next;
+    for (i = 0; i < choices.length; i++) {           /* cartesian product, itertools order */
+      next = [];
+      for (j = 0; j < combos.length; j++)
+        for (k = 0; k < choices[i].length; k++)
+          next.push(combos[j].concat([choices[i][k]]));
+      combos = next;
+    }
+    var best = null;
+    for (i = 0; i < combos.length; i++) {
+      var extra = {}, c0; for (c0 in always) extra[c0] = always[c0];
+      var combo = combos[i];
+      for (j = 0; j < combo.length; j++) {
+        var bd = combo[j];
+        if (bd) for (var c in bd) if (bd[c] > (extra[c] || 0)) extra[c] = bd[c];
+      }
+      var dFit = this._margFitFrom(s, extra);
+      var dSyn = this._margSynFrom(s, baseSyn, extra);
+      var val = this.alpha * dFit + this.beta * dSyn;
+      if (best === null || val > best.val)
+        best = { val: val, dFit: dFit, dSyn: dSyn, extra: extra };
+    }
+    return best === null ? { dFit: 0.0, dSyn: 0.0, extra: {} } : best;
+  };
+
   CompEngine.prototype.explain = function (party, candidate) {
-    var s = this.effectiveSupply(party), terms = [];
-    for (var cap in this.reqs) {
-      var m = this.mechMults[cap];
-      var gain = (this.capsOf(candidate)[cap] || 0) * (m === undefined ? 1.0 : m);
-      if (!gain) continue;
+    var s = this.effectiveSupply(party);
+    var bl = this.bestLoadout(s, this.synergy(party), candidate);
+    var extra = bl.extra, terms = [];
+    for (var cap in extra) {
+      var gain = extra[cap];
+      if (!(cap in this.reqs) || !gain) continue;
       var have = s[cap] || 0.0, target = this.target(cap);
       var d = this.weight(cap) * (Math.pow(Math.min(1.0, (have + gain) / target), this.gamma)
                                   - Math.pow(Math.min(1.0, have / target), this.gamma));
@@ -203,20 +285,20 @@
 
   CompEngine.prototype.recommend = function (party, topN, pool) {
     if (topN === undefined) topN = 4;
-    var baseFit = this.fitness(party), baseSyn = this.synergy(party);
+    var baseSyn = this.synergy(party);
+    var s = this.effectiveSupply(party);
     var out = [];
     var keys = pool || Object.keys(this.weapons);
     for (var i = 0; i < keys.length; i++) {
       var w = keys[i];
-      var dFit = this.fitness(party.concat([w])) - baseFit;
-      var dSyn = this.synergy(party.concat([w])) - baseSyn;
+      var bl = this.bestLoadout(s, baseSyn, w);
       var meta = this.metaOf(w);
       out.push({
         weapon: w,
         display_name: this.weapons[w].display_name,
         status: this.weapons[w].status,
-        d_fitness: dFit, d_synergy: dSyn, meta_prior: meta,
-        score: this.alpha * dFit + this.beta * dSyn + this.delta * meta,
+        d_fitness: bl.dFit, d_synergy: bl.dSyn, meta_prior: meta,
+        score: this.alpha * bl.dFit + this.beta * bl.dSyn + this.delta * meta,
       });
     }
     return out.sort(function (x, y) { return y.score - x.score; }).slice(0, topN);

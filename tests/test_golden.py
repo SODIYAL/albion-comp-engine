@@ -218,6 +218,34 @@ def run():
           f"qs={kd('2H_QUARTERSTAFF')} great_holy={kd('2H_HOLYSTAFF')} "
           f"hallowfall={kd(HALLOWFALL)} holy_staff={kd('MAIN_HOLYSTAFF')}")
 
+    # T14 — one-spell-per-slot loadout model (2026-08-14): a weapon's sheet
+    # lists caps across all its Q/W/E/passive options, but a player equips one
+    # per slot. Dagger Pair's W is Shadow Edge (catch/stun/peel) OR Dash
+    # (disengage); its Q is Deadly Swipe (mobility) OR Sunder Armor
+    # (resist_shred). The flat union has all of them; the scored loadout must
+    # never count both alternatives of a slot at once.
+    ez = Engine(content="blackzone_roam", size=20)
+    _df, _ds, extra = ez.best_loadout(ez.effective_supply([]), 0.0, DAGGERS)
+    flat = E.caps_of(DAGGERS)
+    check("T14 one-spell-per-slot: DP loadout never counts both W (or both Q) picks",
+          not ("catch" in extra and "disengage" in extra)
+          and not ("mobility" in extra and "resist_shred" in extra)
+          and {"catch", "disengage", "mobility", "resist_shred"} <= set(flat),
+          f"loadout extra={sorted(extra)} (flat union has all four)")
+
+    # T15 — expert ruling 2026-08-14: single-target damage is WEAK in 20-man
+    # group content (enemy heals + Resilience overpower focused damage), so
+    # burst_st/execute are devalued in the 20-man templates. Consequence: a
+    # clump-damage dagger (Demonfang, burst_aoe) out-scores a pure single-
+    # target dagger (Dagger Pair) in a rounded party — the reverse of before.
+    real20 = [HALLOWFALL, GREAT_HOLY, HEAVY_MACE, GREAT_HAMMER, "2H_QUARTERSTAFF",
+              "MAIN_ROCKMACE_KEEPER", PERMAFROST, "2H_FIRE_RINGPAIR_AVALON",
+              WITCHWORK, LONGBOW, "2H_WARBOW"]
+    scored = {r["weapon"]: r["score"] for r in ez.recommend(real20, top_n=300)}
+    check("T15 single-target weak at scale: AoE dagger out-scores pure-ST dagger",
+          scored["MAIN_DAGGER_HELL"] > scored[DAGGERS],
+          f"Demonfang={scored['MAIN_DAGGER_HELL']:.3f} > DaggerPair={scored[DAGGERS]:.3f}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

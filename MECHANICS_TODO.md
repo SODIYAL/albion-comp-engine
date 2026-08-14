@@ -383,6 +383,39 @@ trusted; disagreement → expert queue, never silently overridden.
   original #2/#3 alarm was a dive-LESS party where DP filling that gap is right.
   Reverted; engine.py left Q16-only. REVISIT only with V4b (reconstruct the
   last ~5 binding slots) if a genuine saturated-regime breadth failure appears.
+- [x] **Q19 — loadout model (one-spell-per-slot) + single-target recalibration.
+  SHIPPED 2026-08-14.** Expert insight: a weapon's sheet lists caps across ALL
+  its Q/W/E/passive spell options, but a player equips ONE per slot — Dagger
+  Pair can't run Shadow Edge (catch/stun/peel) AND Dash (disengage) AND
+  Forbidden Stab at once. The flat `caps[cap]=max(...)` union in build_dataset
+  summed the whole menu. FIX (two coupled parts, both required):
+  1. **Loadout model.** `build_dataset.build_loadout()` auto-derives each cap's
+     ability SLOT from its evidence spell (via weapon_lines spells-by-slot;
+     measured clean — 1278/1319 caps resolve to one slot, 0 span multiple, 41
+     are the WEAPON_STATS always-on sentinel) and emits `loadout:{always, slots}`
+     per weapon. The engine (`best_loadout`) + JS score a CANDIDATE as its best
+     single loadout: one bundle per slot, NO empty option (a player always has
+     each slot filled — the empty option let weapons dodge over-stack penalties
+     and cost 11pts of V4). Base-party supply stays flat-union so fitness()/
+     golden are untouched; only the evaluated candidate is loadout-limited.
+  2. **Single-target recalibration** (expert ruling: single-target damage is
+     weak in 20-man group content — heals + Resilience overpower focused
+     damage). blackzone_roam + territory_defense `burst_st` weight 4/3→1,
+     target 4/3→2; `execute` weight 4/3→1. Kept a token weight (kill-secure
+     still happens), not zeroed like castle_outpost.
+  **COUPLING (measured):** the loadout model ALONE regresses V4 to 50% (fixing
+  the double-count changes every marginal, so the flat-calibrated templates no
+  longer fit); WITH the recalibration it reaches **V4 role 73% — first pass of
+  the 70% gate**, up from the 69% flat baseline. Golden **22/22** (added T14
+  one-spell-per-slot, T15 AoE-dagger-beats-ST-dagger), parity **60/60**. Dagger
+  Pair in a rounded 20-man: **#3 → #33**, and Demonfang (AoE dagger) now
+  out-scores it — the expert's principle. FOLLOW-UPS: (a) other template
+  targets were calibrated on the flat supply model too and may want a full
+  recalibration pass now that supply is loadout-aware (V4 is weak-form here —
+  circularity); (b) base-party members still use flat-union supply, not a joint
+  best-loadout — a future refinement; (c) `explain()`/dashboard now report the
+  chosen loadout's caps, but the dashboard artifact under docs/ must be rebuilt
+  (`build_dashboard.py`) + deployed for the live site to reflect this.
 - [~] **Q17 — usage-derived MetaPrior. BUILT + MEASURED 2026-08-14; NOT
   wired (deliberately).** `pipeline/build_meta_prior.py` produces a
   size-bucketed prior from `weapon_usage_v2.json` (share × n/(n+8) shrinkage,

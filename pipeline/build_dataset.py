@@ -55,6 +55,36 @@ def display_name(line, key):
     return name
 
 
+def build_loadout(caps, evidence, line):
+    """Group a weapon's capabilities by the ability SLOT they come from, so the
+    engine can enforce one-spell-per-slot (a player equips one Q, one W, one E,
+    one passive — not the whole menu). Slot is auto-derived from each
+    capability's evidence spell via the weapon's equippable spell list
+    (weapon_lines[key]["spells"], keyed q/w/e/passive). Capabilities from base
+    stats / auto-attack (evidence WEAPON_STATS, no slot) are "always on".
+
+    Returns {"always": {cap: score}, "slots": [[bundle, ...], ...]} where each
+    bundle is one spell's {cap: score} and each inner list is the mutually-
+    exclusive choices for one slot. Measured 2026-08-14: 1278/1319 cap-entries
+    resolve to exactly one slot, 0 span multiple slots, 41 are WEAPON_STATS."""
+    spell_slot = {}
+    for slot, ids in ((line or {}).get("spells", {}) or {}).items():
+        for sid in ids:
+            spell_slot.setdefault(sid, slot)
+    always, bundles = {}, {}
+    for cap, score in caps.items():
+        slot_spell = next(((spell_slot[sp], sp) for sp in evidence.get(cap, [])
+                           if sp in spell_slot), None)
+        if slot_spell:
+            bundles.setdefault(slot_spell, {})[cap] = score
+        else:
+            always[cap] = score
+    slots = {}
+    for (slot, _sp), b in bundles.items():
+        slots.setdefault(slot, []).append(b)
+    return {"always": always, "slots": list(slots.values())}
+
+
 def load_sheets(weapon_lines):
     """Curated sheets win over illustrative ones for the same weapon key."""
     weapons, sources = {}, {}
@@ -93,6 +123,10 @@ def load_sheets(weapon_lines):
                                   if entry.get("curated_as_of") else None),
                 "capabilities": caps,
                 "evidence": evidence,
+                # one-spell-per-slot decomposition for loadout-aware scoring
+                # (engine reads this; flat `capabilities` stays for display +
+                # base-party supply). Auto-derived from evidence spell -> slot.
+                "loadout": build_loadout(caps, evidence, line),
             }
             sources[key] = os.path.relpath(path, HERE).replace("\\", "/")
 

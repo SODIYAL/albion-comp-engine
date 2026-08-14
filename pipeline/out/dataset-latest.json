@@ -502,9 +502,9 @@
     },
     "burst_st": {
      "scales": true,
-     "soft_cap": 8.0,
-     "target": 4.0,
-     "weight": 4
+     "soft_cap": 4.0,
+     "target": 2.0,
+     "weight": 1
     },
     "catch": {
      "scales": true,
@@ -544,9 +544,9 @@
     },
     "execute": {
      "scales": false,
-     "soft_cap": 4.0,
-     "target": 2.0,
-     "weight": 4
+     "soft_cap": 2.0,
+     "target": 1.0,
+     "weight": 1
     },
     "heal_burst": {
      "scales": true,
@@ -1118,9 +1118,9 @@
     },
     "burst_st": {
      "scales": true,
-     "soft_cap": 6.0,
-     "target": 3.0,
-     "weight": 3
+     "soft_cap": 4.0,
+     "target": 2.0,
+     "weight": 1
     },
     "catch": {
      "scales": true,
@@ -1160,9 +1160,9 @@
     },
     "execute": {
      "scales": false,
-     "soft_cap": 3.0,
+     "soft_cap": 2.0,
      "target": 1.0,
-     "weight": 3
+     "weight": 1
     },
     "heal_burst": {
      "scales": true,
@@ -1283,6 +1283,39 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "anti_dive": 1,
+       "peel": 2,
+       "stun": 2
+      }
+     ],
+     [
+      {
+       "cleanse": 2
+      },
+      {
+       "buff_allies": 2
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "silence": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
@@ -1328,6 +1361,37 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "sustained_dps": 2,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "cleanse": 2
+      },
+      {
+       "buff_allies": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "silence": 1
+      },
+      {
+       "peel": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
@@ -1377,6 +1441,40 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "buff_allies": 2,
+       "engage": 2,
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "cleanse": 2
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "silence": 1
+      },
+      {
+       "peel": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
@@ -1430,6 +1528,43 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "damage_debuff": 1,
+       "heal_reduction": 2,
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "cleanse": 2
+      },
+      {
+       "buff_allies": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "silence": 1
+      },
+      {
+       "peel": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
@@ -1483,6 +1618,43 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "mobility": 1
+      }
+     ],
+     [
+      {
+       "heal_reduction": 1,
+       "sustained_dps": 2
+      },
+      {
+       "root": 1
+      }
+     ],
+     [
+      {
+       "catch": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "buff_allies": 1,
+       "engage": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
@@ -1552,6 +1724,45 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "catch": 1,
+       "disengage": 1,
+       "engage": 2,
+       "execute": 1,
+       "knockback_displace": 1,
+       "mobility": 2,
+       "peel": 1
+      }
+     ],
+     [
+      {
+       "heal_reduction": 1,
+       "sustained_dps": 2
+      },
+      {
+       "root": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/realmbreaker.yaml",
    "status": "curated",
@@ -1601,6 +1812,36 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 1,
+       "disengage": 1,
+       "mobility": 2,
+       "sustained_dps": 3
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "peel": 1,
+       "root": 1
+      }
+     ],
+     [
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/bow.yaml",
    "status": "curated",
@@ -1654,6 +1895,42 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "burst_st": 2
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "peel": 1,
+       "root": 1
+      },
+      {
+       "mobility": 1
+      },
+      {
+       "disengage": 1
+      }
+     ],
+     [
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/mistpiercer.yaml",
    "status": "curated",
@@ -1703,6 +1980,37 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "disengage": 2,
+       "mobility": 2
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "peel": 1,
+       "root": 1
+      }
+     ],
+     [
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/bow_line.yaml",
    "status": "curated",
@@ -1752,6 +2060,41 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 3
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "peel": 1,
+       "root": 1
+      },
+      {
+       "mobility": 1
+      },
+      {
+       "disengage": 1
+      }
+     ],
+     [
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/wailing_bow.yaml",
    "status": "curated",
@@ -1805,6 +2148,42 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "zone_control": 2
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "peel": 1,
+       "root": 1
+      },
+      {
+       "mobility": 1
+      },
+      {
+       "disengage": 1
+      }
+     ],
+     [
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/bow_of_badon.yaml",
    "status": "curated",
@@ -1870,6 +2249,48 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 2,
+       "catch": 2,
+       "purge": 1,
+       "root": 2
+      }
+     ],
+     [
+      {
+       "engage": 1,
+       "mobility": 2
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "peel": 1,
+       "stun": 1
+      },
+      {
+       "disengage": 1
+      },
+      {
+       "heal_reduction": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 1
+      },
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/claws.yaml",
    "status": "curated",
@@ -1927,6 +2348,42 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 1,
+       "catch": 2,
+       "engage": 3,
+       "mobility": 2,
+       "stun": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "peel": 1,
+       "root": 1
+      },
+      {
+       "slow": 1
+      },
+      {
+       "disengage": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
@@ -1988,6 +2445,43 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "buff_allies": 1,
+       "burst_aoe": 2,
+       "knockback_displace": 1,
+       "peel": 2
+      }
+     ],
+     [
+      {
+       "engage": 1,
+       "mobility": 2,
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "slow": 1
+      },
+      {
+       "root": 1
+      },
+      {
+       "disengage": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/kingmaker.yaml",
    "status": "curated",
@@ -2045,6 +2539,40 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "catch": 2,
+       "disengage": 2,
+       "engage": 2,
+       "mobility": 2,
+       "resist_shred": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "peel": 1,
+       "root": 1
+      },
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/carving_sword.yaml",
    "status": "curated",
@@ -2102,6 +2630,42 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "damage_debuff": 2,
+       "purge": 2,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "knockback_displace": 1
+      },
+      {
+       "peel": 1,
+       "root": 1
+      },
+      {
+       "stun": 1
+      },
+      {
+       "anti_dive": 1
+      },
+      {
+       "sustained_dps": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -2151,6 +2715,37 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 1
+    },
+    "slots": [
+     [
+      {
+       "burst_st": 2,
+       "resist_shred": 2
+      }
+     ],
+     [
+      {
+       "burst_aoe": 1
+      }
+     ],
+     [
+      {
+       "silence": 1
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1
+      },
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
@@ -2200,6 +2795,35 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 1
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "burst_st": 1
+      }
+     ],
+     [
+      {
+       "silence": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1
+      },
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
@@ -2245,6 +2869,37 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "burst_aoe": 2
+      }
+     ],
+     [
+      {
+       "silence": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1
+      },
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/siegebow.yaml",
    "status": "curated",
@@ -2290,6 +2945,37 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "burst_aoe": 2
+      }
+     ],
+     [
+      {
+       "silence": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1
+      },
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/energy_shaper.yaml",
    "status": "curated",
@@ -2335,6 +3021,37 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "heal_reduction": 1,
+       "zone_control": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      },
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      },
+      {
+       "root": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
@@ -2376,6 +3093,34 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 3,
+       "resist_shred": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      },
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "root": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/damnation.yaml",
    "status": "curated",
@@ -2437,6 +3182,45 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 3,
+       "execute": 1,
+       "heal_reduction": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      },
+      {
+       "self_sustain": 1
+      }
+     ],
+     [
+      {
+       "engage": 1,
+       "mobility": 2
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "catch": 2,
+       "peel": 1,
+       "stun": 1
+      },
+      {
+       "disengage": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/dagger_pair.yaml",
    "status": "curated",
@@ -2494,6 +3278,46 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "mobility": 2
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "peel": 1,
+       "stun": 1
+      },
+      {
+       "disengage": 1
+      },
+      {
+       "heal_reduction": 1
+      }
+     ],
+     [
+      {
+       "engage": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 1
+      },
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
@@ -2551,6 +3375,44 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 2,
+       "disengage": 2,
+       "mobility": 2
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "peel": 1,
+       "stun": 1
+      },
+      {
+       "heal_reduction": 1
+      }
+     ],
+     [
+      {
+       "engage": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 1
+      },
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
@@ -2596,6 +3458,37 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "knockback_displace": 2,
+       "peel": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      },
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      },
+      {
+       "root": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
@@ -2625,6 +3518,25 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "buff_allies": 2,
+       "heal_burst": 2
+      }
+     ],
+     [
+      {
+       "heal_sustain": 2
+      },
+      {
+       "peel": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
@@ -2694,6 +3606,45 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "catch": 2,
+       "disengage": 2,
+       "engage": 2,
+       "mobility": 2,
+       "slow": 2
+      }
+     ],
+     [
+      {
+       "knockback_displace": 1
+      },
+      {
+       "peel": 2,
+       "root": 1
+      },
+      {
+       "sustained_dps": 1
+      },
+      {
+       "stun": 1
+      },
+      {
+       "anti_dive": 1,
+       "damage_debuff": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/double_bladed_staff.yaml",
    "status": "curated",
@@ -2751,6 +3702,44 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "knockback_displace": 1,
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "peel": 1,
+       "root": 1
+      },
+      {
+       "stun": 1
+      },
+      {
+       "anti_dive": 1
+      },
+      {
+       "sustained_dps": 1
+      }
+     ],
+     [
+      {
+       "mobility": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -2808,6 +3797,38 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "catch": 2,
+       "disengage": 2,
+       "engage": 2,
+       "mobility": 3,
+       "self_sustain": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      },
+      {
+       "root": 1
+      }
+     ],
+     [
+      {
+       "buff_allies": 1,
+       "heal_reduction": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/bear_paws.yaml",
    "status": "curated",
@@ -2861,6 +3882,36 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 1
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "disengage": 2,
+       "engage": 1,
+       "mobility": 2
+      }
+     ],
+     [
+      {
+       "silence": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1
+      },
+      {
+       "slow": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
@@ -2910,6 +3961,38 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 2,
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "burst_aoe": 1
+      }
+     ],
+     [
+      {
+       "silence": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1
+      },
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/boltcasters.yaml",
    "status": "curated",
@@ -2983,6 +4066,46 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "anti_dive": 2,
+       "catch": 1,
+       "peel": 2,
+       "slow": 2,
+       "sustained_dps": 1,
+       "tankiness": 2,
+       "zone_control": 2
+      }
+     ],
+     [
+      {
+       "stun": 1
+      },
+      {
+       "knockback_displace": 1
+      },
+      {
+       "disengage": 1,
+       "engage": 1,
+       "mobility": 1
+      }
+     ],
+     [
+      {
+       "purge": 1,
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/forge_hammers.yaml",
    "status": "curated",
@@ -3028,6 +4151,34 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "buff_allies": 2,
+       "engage": 1,
+       "heal_sustain": 1
+      }
+     ],
+     [
+      {
+       "peel": 2
+      },
+      {
+       "root": 1
+      }
+     ],
+     [
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -3081,6 +4232,41 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 3,
+       "execute": 1
+      }
+     ],
+     [
+      {
+       "mobility": 2,
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "peel": 1,
+       "root": 1
+      },
+      {
+       "catch": 1,
+       "slow": 1
+      },
+      {
+       "disengage": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
@@ -3138,6 +4324,43 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 1
+    },
+    "slots": [
+     [
+      {
+       "burst_st": 2,
+       "disengage": 2,
+       "engage": 2
+      }
+     ],
+     [
+      {
+       "mobility": 2
+      },
+      {
+       "catch": 2,
+       "peel": 1,
+       "stun": 1
+      },
+      {
+       "heal_reduction": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/deathgivers.yaml",
    "status": "curated",
@@ -3191,6 +4414,35 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "catch": 2,
+       "disengage": 2,
+       "engage": 2,
+       "mobility": 3,
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "peel": 1,
+       "root": 1
+      },
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/dualswords.yaml",
    "status": "curated",
@@ -3228,6 +4480,35 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "cleanse": 2,
+       "peel": 1
+      }
+     ],
+     [
+      {
+       "buff_allies": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "silence": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
@@ -3265,6 +4546,37 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "buff_allies": 2
+      }
+     ],
+     [
+      {
+       "cleanse": 2
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "peel": 1
+      },
+      {
+       "silence": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
@@ -3302,6 +4614,30 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 2
+      }
+     ],
+     [
+      {
+       "zone_control": 1
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
@@ -3339,6 +4675,30 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 3,
+       "knockback_displace": 1
+      }
+     ],
+     [
+      {
+       "zone_control": 1
+      },
+      {
+       "peel": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
@@ -3380,6 +4740,29 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 3,
+       "heal_reduction": 2,
+       "zone_control": 2
+      }
+     ],
+     [
+      {
+       "knockback_displace": 1,
+       "peel": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/dawnsong.yaml",
    "status": "curated",
@@ -3425,6 +4808,28 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "catch": 2,
+       "engage": 2,
+       "mobility": 1,
+       "peel": 2,
+       "root": 3
+      }
+     ],
+     [
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -3482,6 +4887,41 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 1
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "catch": 1,
+       "peel": 1
+      }
+     ],
+     [
+      {
+       "slow": 2,
+       "zone_control": 2
+      },
+      {
+       "disengage": 1,
+       "stun": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ],
+     [
+      {
+       "root": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
@@ -3535,6 +4975,43 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "slow": 2,
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "zone_control": 2
+      },
+      {
+       "disengage": 1,
+       "stun": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ],
+     [
+      {
+       "catch": 1
+      }
+     ],
+     [
+      {
+       "root": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
@@ -3592,6 +5069,38 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "catch": 1,
+       "peel": 1,
+       "slow": 2,
+       "sustained_dps": 1,
+       "zone_control": 3
+      }
+     ],
+     [
+      {
+       "disengage": 1,
+       "stun": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ],
+     [
+      {
+       "root": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
@@ -3637,6 +5146,41 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "catch": 2,
+       "knockback_displace": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "peel": 1
+      },
+      {
+       "root": 1
+      },
+      {
+       "slow": 1
+      },
+      {
+       "mobility": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -3686,6 +5230,42 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "knockback_displace": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "catch": 2,
+       "peel": 1
+      },
+      {
+       "root": 1
+      },
+      {
+       "slow": 1
+      },
+      {
+       "mobility": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -3739,6 +5319,43 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "heal_reduction": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      },
+      {
+       "mobility": 1,
+       "root": 1
+      }
+     ],
+     [
+      {
+       "catch": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "buff_allies": 1,
+       "engage": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
@@ -3792,6 +5409,43 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "heal_reduction": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      },
+      {
+       "mobility": 1,
+       "root": 1
+      }
+     ],
+     [
+      {
+       "catch": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "buff_allies": 1,
+       "engage": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
@@ -3861,6 +5515,42 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "catch": 2,
+       "disengage": 2,
+       "engage": 3,
+       "knockback_displace": 1,
+       "mobility": 2,
+       "peel": 2,
+       "stun": 2
+      }
+     ],
+     [
+      {
+       "anti_dive": 2,
+       "slow": 2,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "purge": 1,
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/great_hammer.yaml",
    "status": "curated",
@@ -3934,6 +5624,43 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "catch": 2,
+       "clump_create": 3,
+       "disengage": 2,
+       "engage": 3,
+       "knockback_displace": 1,
+       "mobility": 2,
+       "peel": 2,
+       "stun": 2
+      }
+     ],
+     [
+      {
+       "anti_dive": 2,
+       "slow": 2,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "purge": 1,
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/hand_of_justice.yaml",
    "status": "curated",
@@ -4003,6 +5730,46 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "buff_allies": 1,
+       "stun": 2
+      }
+     ],
+     [
+      {
+       "knockback_displace": 1,
+       "peel": 2
+      },
+      {
+       "anti_dive": 2,
+       "slow": 2,
+       "zone_control": 1
+      },
+      {
+       "disengage": 1,
+       "engage": 1,
+       "mobility": 1
+      }
+     ],
+     [
+      {
+       "purge": 1,
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
@@ -4076,6 +5843,47 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "catch": 2,
+       "execute": 1,
+       "peel": 2,
+       "stun": 2
+      }
+     ],
+     [
+      {
+       "anti_dive": 2,
+       "slow": 2,
+       "zone_control": 1
+      },
+      {
+       "knockback_displace": 1
+      },
+      {
+       "disengage": 1,
+       "engage": 1,
+       "mobility": 1
+      }
+     ],
+     [
+      {
+       "purge": 1,
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
@@ -4129,6 +5937,43 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "resist_shred": 2
+      }
+     ],
+     [
+      {
+       "catch": 2,
+       "damage_debuff": 1,
+       "peel": 1
+      },
+      {
+       "burst_aoe": 1,
+       "slow": 1
+      },
+      {
+       "root": 1
+      },
+      {
+       "mobility": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/spirithunter.yaml",
    "status": "curated",
@@ -4162,6 +6007,24 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "buff_allies": 2,
+       "heal_sustain": 3,
+       "knockback_displace": 2,
+       "peel": 2
+      }
+     ],
+     [
+      {
+       "heal_burst": 2
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/great_holy.yaml",
    "status": "curated",
@@ -4195,6 +6058,26 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "anti_zone": 2,
+       "buff_allies": 1,
+       "heal_burst": 2
+      }
+     ],
+     [
+      {
+       "heal_sustain": 2
+      },
+      {
+       "peel": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
@@ -4228,6 +6111,26 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "cleanse": 2,
+       "heal_burst": 3,
+       "peel": 2
+      }
+     ],
+     [
+      {
+       "heal_sustain": 2
+      },
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
@@ -4257,6 +6160,29 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "heal_sustain": 3
+      }
+     ],
+     [
+      {
+       "heal_burst": 2
+      }
+     ],
+     [
+      {
+       "buff_allies": 2
+      },
+      {
+       "peel": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/holy_line.yaml",
    "status": "curated",
@@ -4314,6 +6240,41 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 1
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 3,
+       "catch": 2,
+       "peel": 1,
+       "stun": 2
+      }
+     ],
+     [
+      {
+       "slow": 2,
+       "zone_control": 3
+      },
+      {
+       "disengage": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ],
+     [
+      {
+       "root": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/permafrost_prism.yaml",
    "status": "curated",
@@ -4375,6 +6336,40 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 1
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "catch": 1,
+       "peel": 1,
+       "slow": 2,
+       "zone_control": 2
+      }
+     ],
+     [
+      {
+       "anti_dive": 1,
+       "disengage": 1,
+       "stun": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ],
+     [
+      {
+       "root": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
@@ -4412,6 +6407,26 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_st": 1,
+       "knockback_displace": 1,
+       "peel": 2,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
@@ -4449,6 +6464,29 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "sustained_dps": 2,
+       "zone_control": 3
+      }
+     ],
+     [
+      {
+       "burst_aoe": 2
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/blazing_staff.yaml",
    "status": "curated",
@@ -4498,6 +6536,40 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "anti_dive": 2,
+       "knockback_displace": 3,
+       "peel": 2,
+       "tankiness": 2
+      }
+     ],
+     [
+      {
+       "stun": 1
+      },
+      {
+       "root": 1
+      },
+      {
+       "sustained_dps": 1
+      }
+     ],
+     [
+      {
+       "mobility": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -4559,6 +6631,47 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 2,
+       "purge": 1,
+       "stun": 1
+      }
+     ],
+     [
+      {
+       "engage": 1,
+       "mobility": 2
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "peel": 1
+      },
+      {
+       "disengage": 1
+      },
+      {
+       "heal_reduction": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 1
+      },
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
@@ -4620,6 +6733,43 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "disengage": 1,
+       "engage": 2,
+       "knockback_displace": 1,
+       "mobility": 2,
+       "purge": 1
+      }
+     ],
+     [
+      {
+       "peel": 1,
+       "resist_shred": 1
+      },
+      {
+       "clump_create": 1
+      },
+      {
+       "burst_st": 1,
+       "stun": 1
+      }
+     ],
+     [
+      {
+       "catch": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -4677,6 +6827,42 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 2,
+       "engage": 1,
+       "execute": 1,
+       "mobility": 2
+      }
+     ],
+     [
+      {
+       "catch": 1
+      }
+     ],
+     [
+      {
+       "clump_create": 1
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1,
+       "resist_shred": 1
+      },
+      {
+       "stun": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -4738,6 +6924,43 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "heal_reduction": 1
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "engage": 1,
+       "mobility": 2
+      }
+     ],
+     [
+      {
+       "clump_create": 1
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1,
+       "resist_shred": 1
+      },
+      {
+       "burst_st": 1,
+       "stun": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -4795,6 +7018,38 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "burst_st": 2,
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "engage": 1,
+       "mobility": 2
+      }
+     ],
+     [
+      {
+       "clump_create": 1
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1,
+       "resist_shred": 1
+      },
+      {
+       "stun": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -4852,6 +7107,42 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "knockback_displace": 2,
+       "peel": 1
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "engage": 1,
+       "mobility": 2
+      }
+     ],
+     [
+      {
+       "clump_create": 1
+      },
+      {
+       "burst_st": 1,
+       "stun": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -4909,6 +7200,42 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "knockback_displace": 1,
+       "peel": 1
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "engage": 1,
+       "mobility": 2
+      }
+     ],
+     [
+      {
+       "clump_create": 1
+      },
+      {
+       "burst_st": 1,
+       "stun": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -4966,6 +7293,38 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "catch": 2,
+       "disengage": 2,
+       "engage": 2,
+       "mobility": 3
+      }
+     ],
+     [
+      {
+       "clump_create": 1
+      },
+      {
+       "burst_st": 2,
+       "stun": 1
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1,
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/battle_bracers.yaml",
    "status": "curated",
@@ -5027,6 +7386,43 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "catch": 1,
+       "peel": 1,
+       "slow": 2
+      }
+     ],
+     [
+      {
+       "clump_create": 1
+      },
+      {
+       "knockback_displace": 1,
+       "resist_shred": 1
+      },
+      {
+       "burst_st": 1,
+       "stun": 1
+      }
+     ],
+     [
+      {
+       "engage": 1,
+       "mobility": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -5064,6 +7460,30 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "slow": 2,
+       "zone_control": 2
+      }
+     ],
+     [
+      {
+       "root": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      }
+     ]
+    ]
+   },
    "role_hint": null,
    "source": "sheets/longbow.yaml",
    "status": "curated",
@@ -5109,6 +7529,39 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "sustained_dps": 3
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "peel": 1,
+       "root": 1
+      },
+      {
+       "mobility": 1
+      },
+      {
+       "disengage": 1
+      }
+     ],
+     [
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/bow_line.yaml",
    "status": "curated",
@@ -5150,6 +7603,31 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 3
+    },
+    "slots": [
+     [
+      {
+       "peel": 3,
+       "purge": 3,
+       "silence": 3
+      }
+     ],
+     [
+      {
+       "engage": 2
+      }
+     ],
+     [
+      {
+       "slow": 1,
+       "zone_control": 2
+      }
+     ]
+    ]
+   },
    "role_hint": null,
    "source": "sheets/mace_line.yaml",
    "status": "curated",
@@ -5199,6 +7677,35 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "catch": 1,
+       "clump_create": 3,
+       "stun": 1
+      }
+     ],
+     [
+      {
+       "peel": 2
+      },
+      {
+       "engage": 1,
+       "root": 1
+      }
+     ],
+     [
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -5252,6 +7759,39 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "buff_allies": 2,
+       "heal_sustain": 2,
+       "peel": 1
+      }
+     ],
+     [
+      {
+       "cleanse": 2,
+       "heal_burst": 1
+      },
+      {
+       "knockback_displace": 1
+      }
+     ],
+     [
+      {
+       "slow": 1,
+       "sustained_dps": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
@@ -5305,6 +7845,41 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "heal_sustain": 3,
+       "mobility": 1
+      }
+     ],
+     [
+      {
+       "cleanse": 2,
+       "heal_burst": 1
+      },
+      {
+       "buff_allies": 2
+      },
+      {
+       "knockback_displace": 1
+      }
+     ],
+     [
+      {
+       "slow": 1,
+       "sustained_dps": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/nature_line.yaml",
    "status": "curated",
@@ -5354,6 +7929,40 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "heal_burst": 1,
+       "heal_sustain": 3
+      }
+     ],
+     [
+      {
+       "cleanse": 2
+      },
+      {
+       "buff_allies": 2
+      },
+      {
+       "knockback_displace": 1
+      }
+     ],
+     [
+      {
+       "slow": 1,
+       "sustained_dps": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
@@ -5423,6 +8032,46 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "catch": 2,
+       "peel": 2,
+       "stun": 3
+      }
+     ],
+     [
+      {
+       "disengage": 1,
+       "engage": 3,
+       "mobility": 1
+      },
+      {
+       "anti_dive": 2,
+       "slow": 2,
+       "zone_control": 1
+      },
+      {
+       "knockback_displace": 1
+      }
+     ],
+     [
+      {
+       "purge": 1,
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/polehammer.yaml",
    "status": "curated",
@@ -5488,6 +8137,41 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "disengage": 2,
+       "engage": 2,
+       "knockback_displace": 3,
+       "mobility": 2
+      }
+     ],
+     [
+      {
+       "peel": 3,
+       "root": 1
+      },
+      {
+       "catch": 2,
+       "stun": 1
+      },
+      {
+       "anti_dive": 2,
+       "damage_debuff": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/quarterstaff.yaml",
    "status": "curated",
@@ -5545,6 +8229,44 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "catch": 1,
+       "peel": 2,
+       "root": 2,
+       "zone_control": 2
+      }
+     ],
+     [
+      {
+       "knockback_displace": 1
+      },
+      {
+       "stun": 1
+      },
+      {
+       "anti_dive": 1
+      },
+      {
+       "sustained_dps": 1
+      }
+     ],
+     [
+      {
+       "mobility": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -5614,6 +8336,42 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "catch": 2,
+       "disengage": 2,
+       "engage": 3,
+       "knockback_displace": 1,
+       "mobility": 2,
+       "peel": 2,
+       "stun": 2
+      }
+     ],
+     [
+      {
+       "anti_dive": 2,
+       "slow": 2,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "purge": 1,
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/grovekeeper.yaml",
    "status": "curated",
@@ -5659,6 +8417,34 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "zone_control": 2
+      }
+     ],
+     [
+      {
+       "silence": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1
+      },
+      {
+       "slow": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
@@ -5716,6 +8502,42 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "heal_reduction": 2,
+       "slow": 2,
+       "tankiness": 1,
+       "zone_control": 2
+      }
+     ],
+     [
+      {
+       "anti_dive": 2
+      },
+      {
+       "peel": 1,
+       "root": 1
+      },
+      {
+       "stun": 1
+      },
+      {
+       "knockback_displace": 1
+      },
+      {
+       "sustained_dps": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -5773,6 +8595,42 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "disengage": 1,
+       "engage": 2,
+       "mobility": 2,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "heal_reduction": 1,
+       "sustained_dps": 2
+      },
+      {
+       "root": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
@@ -5830,6 +8688,44 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "execute": 1
+      }
+     ],
+     [
+      {
+       "heal_reduction": 1,
+       "sustained_dps": 2
+      },
+      {
+       "mobility": 1,
+       "root": 1
+      }
+     ],
+     [
+      {
+       "catch": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "buff_allies": 1,
+       "engage": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
@@ -5895,6 +8791,46 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "disengage": 2,
+       "engage": 1,
+       "mobility": 2
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "clump_create": 1,
+       "root": 1
+      },
+      {
+       "peel": 1
+      },
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "buff_allies": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -5956,6 +8892,45 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 2,
+       "disengage": 1,
+       "mobility": 1
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "clump_create": 1,
+       "root": 1
+      },
+      {
+       "peel": 1
+      },
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "buff_allies": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -6013,6 +8988,40 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "self_sustain": 2
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "clump_create": 1,
+       "root": 1
+      },
+      {
+       "mobility": 1,
+       "peel": 1
+      },
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "buff_allies": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/hellspawn.yaml",
    "status": "curated",
@@ -6070,6 +9079,40 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "engage": 1,
+       "self_sustain": 2,
+       "tankiness": 3
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "clump_create": 1,
+       "root": 1
+      },
+      {
+       "peel": 1
+      },
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "buff_allies": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -6127,6 +9170,40 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 2,
+       "catch": 2,
+       "mobility": 2,
+       "self_sustain": 1
+      }
+     ],
+     [
+      {
+       "clump_create": 1,
+       "root": 1
+      },
+      {
+       "peel": 1
+      },
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "buff_allies": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -6188,6 +9265,45 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 2,
+       "disengage": 2,
+       "engage": 2
+      }
+     ],
+     [
+      {
+       "mobility": 1,
+       "peel": 1
+      },
+      {
+       "catch": 1,
+       "clump_create": 1,
+       "root": 1
+      },
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "buff_allies": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -6245,6 +9361,42 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "buff_allies": 2,
+       "heal_sustain": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "clump_create": 1,
+       "root": 1
+      },
+      {
+       "mobility": 1,
+       "peel": 1
+      },
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/rootbound.yaml",
    "status": "curated",
@@ -6306,6 +9458,42 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "self_sustain": 1,
+       "sustained_dps": 1
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "clump_create": 1,
+       "root": 1
+      },
+      {
+       "peel": 1
+      },
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "buff_allies": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -6347,6 +9535,36 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "zone_control": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      },
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      },
+      {
+       "root": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
@@ -6388,6 +9606,36 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "catch": 2,
+       "peel": 1,
+       "root": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "slow": 1
+      },
+      {
+       "mobility": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -6441,6 +9689,37 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "buff_allies": 1,
+       "catch": 2,
+       "disengage": 1,
+       "engage": 2,
+       "mobility": 2,
+       "peel": 1,
+       "root": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -6498,6 +9777,44 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "catch": 1,
+       "knockback_displace": 1,
+       "peel": 1,
+       "slow": 2
+      }
+     ],
+     [
+      {
+       "stun": 1
+      },
+      {
+       "root": 1
+      },
+      {
+       "anti_dive": 1
+      },
+      {
+       "sustained_dps": 1
+      }
+     ],
+     [
+      {
+       "mobility": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -6547,6 +9864,41 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_st": 2
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "peel": 1,
+       "root": 1
+      },
+      {
+       "mobility": 1
+      },
+      {
+       "disengage": 1
+      }
+     ],
+     [
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/bow_line.yaml",
    "status": "curated",
@@ -6596,6 +9948,40 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "heal_sustain": 3
+      }
+     ],
+     [
+      {
+       "cleanse": 2,
+       "heal_burst": 1
+      },
+      {
+       "buff_allies": 2
+      },
+      {
+       "knockback_displace": 1
+      }
+     ],
+     [
+      {
+       "slow": 1,
+       "sustained_dps": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
@@ -6641,6 +10027,34 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 1
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 2
+      }
+     ],
+     [
+      {
+       "silence": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1
+      },
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
@@ -6686,6 +10100,39 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 1,
+       "purge": 2,
+       "silence": 1
+      }
+     ],
+     [
+      {
+       "cleanse": 2
+      },
+      {
+       "buff_allies": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "peel": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
@@ -6743,6 +10190,44 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "catch": 1,
+       "clump_create": 2,
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "cleanse": 2
+      },
+      {
+       "buff_allies": 2
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "peel": 2
+      },
+      {
+       "silence": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/witchwork.yaml",
    "status": "curated",
@@ -6796,6 +10281,39 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "heal_reduction": 1,
+       "sustained_dps": 2
+      },
+      {
+       "mobility": 1,
+       "root": 1
+      }
+     ],
+     [
+      {
+       "burst_st": 1,
+       "self_sustain": 2
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      },
+      {
+       "catch": 1
+      },
+      {
+       "buff_allies": 1,
+       "engage": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/battleaxe.yaml",
    "status": "curated",
@@ -6837,6 +10355,36 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      },
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      },
+      {
+       "root": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
@@ -6878,6 +10426,34 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "slow": 1,
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      },
+      {
+       "root": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ],
+     [
+      {
+       "zone_control": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
@@ -6927,6 +10503,38 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "heal_reduction": 2,
+       "knockback_displace": 2,
+       "peel": 2
+      }
+     ],
+     [
+      {
+       "root": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ],
+     [
+      {
+       "slow": 1,
+       "zone_control": 1
+      },
+      {
+       "sustained_dps": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/rotcaller.yaml",
    "status": "curated",
@@ -6972,6 +10580,37 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "purge": 2,
+       "zone_control": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      },
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      },
+      {
+       "root": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
@@ -7025,6 +10664,39 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "mobility": 2,
+       "self_sustain": 2,
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "peel": 1,
+       "stun": 1
+      },
+      {
+       "disengage": 1
+      },
+      {
+       "heal_reduction": 1
+      }
+     ],
+     [
+      {
+       "engage": 1
+      },
+      {
+       "resist_shred": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
@@ -7086,6 +10758,47 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "burst_st": 1
+      }
+     ],
+     [
+      {
+       "engage": 1,
+       "mobility": 2
+      },
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "peel": 1,
+       "stun": 1
+      },
+      {
+       "disengage": 1
+      },
+      {
+       "heal_reduction": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 1
+      },
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
@@ -7127,6 +10840,31 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "burst_st": 1
+      }
+     ],
+     [
+      {
+       "zone_control": 1
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
@@ -7172,6 +10910,32 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "disengage": 2,
+       "engage": 2,
+       "mobility": 2
+      }
+     ],
+     [
+      {
+       "zone_control": 1
+      },
+      {
+       "peel": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
@@ -7209,6 +10973,30 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 2
+      }
+     ],
+     [
+      {
+       "zone_control": 1
+      },
+      {
+       "knockback_displace": 1,
+       "peel": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
@@ -7266,6 +11054,37 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 1
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "catch": 2,
+       "peel": 2,
+       "root": 3
+      }
+     ],
+     [
+      {
+       "slow": 2,
+       "zone_control": 2
+      },
+      {
+       "disengage": 1,
+       "stun": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/froststaff.yaml",
    "status": "curated",
@@ -7315,6 +11134,38 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "catch": 1,
+       "peel": 2,
+       "slow": 2,
+       "stun": 1
+      }
+     ],
+     [
+      {
+       "zone_control": 1
+      },
+      {
+       "disengage": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ],
+     [
+      {
+       "root": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "support",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
@@ -7372,6 +11223,38 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "catch": 1,
+       "knockback_displace": 2,
+       "peel": 1,
+       "slow": 2,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "disengage": 1,
+       "stun": 1
+      },
+      {
+       "resist_shred": 1
+      },
+      {
+       "buff_allies": 1
+      }
+     ],
+     [
+      {
+       "root": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "range",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
@@ -7437,6 +11320,45 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "peel": 2,
+       "stun": 2
+      }
+     ],
+     [
+      {
+       "disengage": 1,
+       "engage": 1,
+       "mobility": 1
+      },
+      {
+       "anti_dive": 2,
+       "slow": 2,
+       "zone_control": 1
+      },
+      {
+       "knockback_displace": 1
+      }
+     ],
+     [
+      {
+       "purge": 1,
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
@@ -7470,6 +11392,28 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "heal_burst": 2,
+       "self_sustain": 1
+      }
+     ],
+     [
+      {
+       "heal_sustain": 2
+      },
+      {
+       "buff_allies": 1
+      },
+      {
+       "peel": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/holy_staff.yaml",
    "status": "curated",
@@ -7515,6 +11459,29 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "disengage": 2,
+       "heal_burst": 3,
+       "knockback_displace": 1,
+       "mobility": 3,
+       "peel": 3,
+       "self_sustain": 1
+      }
+     ],
+     [
+      {
+       "heal_sustain": 2
+      },
+      {
+       "buff_allies": 2
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/holy_line.yaml",
    "status": "curated",
@@ -7548,6 +11515,24 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "buff_allies": 2,
+       "cleanse": 2,
+       "heal_sustain": 2,
+       "peel": 2
+      }
+     ],
+     [
+      {
+       "heal_burst": 2
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/lifetouch.yaml",
    "status": "curated",
@@ -7585,6 +11570,28 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "engage": 2,
+       "mobility": 2,
+       "stun": 2
+      }
+     ],
+     [
+      {
+       "peel": 2
+      },
+      {
+       "root": 1
+      }
+     ]
+    ]
+   },
    "role_hint": null,
    "source": "sheets/mace_line.yaml",
    "status": "curated",
@@ -7634,6 +11641,31 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "catch": 1,
+       "resist_shred": 1,
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "peel": 2
+      },
+      {
+       "engage": 1,
+       "root": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -7687,6 +11719,36 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "burst_st": 1,
+       "damage_debuff": 2,
+       "execute": 2,
+       "heal_reduction": 1
+      }
+     ],
+     [
+      {
+       "peel": 2
+      },
+      {
+       "engage": 1,
+       "root": 1
+      }
+     ],
+     [
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -7736,6 +11798,40 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "heal_burst": 2,
+       "heal_sustain": 2,
+       "root": 1
+      }
+     ],
+     [
+      {
+       "cleanse": 2
+      },
+      {
+       "buff_allies": 2
+      },
+      {
+       "knockback_displace": 1
+      }
+     ],
+     [
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
@@ -7785,6 +11881,40 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "heal_sustain": 2,
+       "peel": 2
+      }
+     ],
+     [
+      {
+       "cleanse": 2,
+       "heal_burst": 1
+      },
+      {
+       "buff_allies": 2
+      },
+      {
+       "knockback_displace": 1
+      }
+     ],
+     [
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
@@ -7834,6 +11964,38 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "buff_allies": 1,
+       "heal_sustain": 2,
+       "root": 1
+      }
+     ],
+     [
+      {
+       "cleanse": 2,
+       "heal_burst": 1
+      },
+      {
+       "knockback_displace": 1
+      }
+     ],
+     [
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
@@ -7879,6 +12041,39 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "heal_burst": 2,
+       "heal_sustain": 2
+      }
+     ],
+     [
+      {
+       "cleanse": 2
+      },
+      {
+       "buff_allies": 2
+      },
+      {
+       "knockback_displace": 1
+      }
+     ],
+     [
+      {
+       "slow": 1,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
@@ -7940,6 +12135,44 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "sustained_dps": 1
+    },
+    "slots": [
+     [
+      {
+       "burst_st": 2,
+       "catch": 2,
+       "engage": 1,
+       "execute": 2,
+       "mobility": 3
+      }
+     ],
+     [
+      {
+       "disengage": 2
+      },
+      {
+       "peel": 1,
+       "stun": 1
+      },
+      {
+       "heal_reduction": 1
+      }
+     ],
+     [
+      {
+       "resist_shred": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/bloodletter.yaml",
    "status": "curated",
@@ -7985,6 +12218,32 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slots": [
+     [
+      {
+       "anti_dive": 1,
+       "knockback_displace": 3,
+       "peel": 2,
+       "zone_control": 1
+      }
+     ],
+     [
+      {
+       "engage": 1,
+       "root": 1
+      }
+     ],
+     [
+      {
+       "slow": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -8038,6 +12297,39 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 2,
+       "catch": 1,
+       "silence": 1,
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "mobility": 2,
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "peel": 1,
+       "root": 1
+      },
+      {
+       "disengage": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
@@ -8091,6 +12383,41 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "disengage": 1,
+       "engage": 2,
+       "knockback_displace": 1,
+       "mobility": 2,
+       "peel": 1
+      }
+     ],
+     [
+      {
+       "catch": 2
+      },
+      {
+       "root": 1
+      },
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -8140,6 +12467,40 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "catch": 2,
+       "peel": 1,
+       "stun": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "root": 1
+      },
+      {
+       "slow": 1
+      },
+      {
+       "mobility": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -8189,6 +12550,40 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 1,
+       "engage": 2,
+       "mobility": 2,
+       "purge": 2
+      }
+     ],
+     [
+      {
+       "catch": 1
+      },
+      {
+       "root": 1
+      },
+      {
+       "slow": 1
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -8242,6 +12637,41 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_st": 2,
+       "catch": 1,
+       "engage": 1,
+       "mobility": 2
+      }
+     ],
+     [
+      {
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "peel": 1,
+       "root": 1
+      },
+      {
+       "slow": 1
+      },
+      {
+       "disengage": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
@@ -8295,6 +12725,37 @@
     ]
    },
    "in_game_data": true,
+   "loadout": {
+    "always": {},
+    "slots": [
+     [
+      {
+       "burst_aoe": 1,
+       "burst_st": 2,
+       "mobility": 2,
+       "sustained_dps": 2
+      }
+     ],
+     [
+      {
+       "catch": 1,
+       "slow": 1
+      },
+      {
+       "peel": 1,
+       "root": 1
+      },
+      {
+       "disengage": 1
+      }
+     ],
+     [
+      {
+       "self_sustain": 1
+      }
+     ]
+    ]
+   },
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",

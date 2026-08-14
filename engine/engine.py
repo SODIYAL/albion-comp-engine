@@ -15,7 +15,7 @@ The math is unchanged from the prototype that passed 9/9:
 
 Party members are weapon unique_names (e.g. "2H_MACE"), matching the dataset.
 """
-import json, os
+import json, os, itertools
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATASET = os.path.join(HERE, os.pardir, "pipeline", "out", "dataset-latest.json")
@@ -172,13 +172,87 @@ class Engine:
         s = self.effective_supply(party)
         return sum(b * min(s.get(a, 0), s.get(c, 0)) for a, c, b in self.synergies)
 
+    # ---------------------------------------------------------- loadout model
+    # A weapon's sheet lists capabilities across ALL its Q/W/E/passive spell
+    # options, but a player equips ONE per slot — a dagger can't run Shadow Edge
+    # (catch/stun/peel) AND Dash (disengage) AND Forbidden Stab at once. So a
+    # candidate's marginal value is the BEST single loadout (one bundle per
+    # slot) for the current party, not the whole menu summed. Base-party supply
+    # stays flat-union (fitness()/golden unchanged); only the candidate the
+    # engine is *evaluating* is loadout-limited — that is the pick decision.
+    def _eff(self, caps):
+        """Apply mechanics multipliers (AoE escalation / Resilience) to a bundle."""
+        return {c: v * self.mech_mults.get(c, 1.0) for c, v in caps.items()}
+
+    def _loadout_eff(self, weapon):
+        """(always_eff, [[bundle_eff, ...], ...]) for a weapon; empty loadout
+        (illustrative / no game data) falls back to the flat capability union."""
+        lo = self.weapons[weapon].get("loadout")
+        if not lo or not lo.get("slots") and not lo.get("always"):
+            return self._eff(self.caps_of(weapon)), []
+        return (self._eff(lo.get("always", {})),
+                [[self._eff(b) for b in slot] for slot in lo.get("slots", [])])
+
+    def _marg_fit_from(self, s, extra):
+        """Marginal fitness of adding effective caps `extra` to effective supply
+        `s` — same coverage/floor/over-stack terms fitness() sums."""
+        total = 0.0
+        for cap, gain in extra.items():
+            if cap not in self.reqs or not gain:
+                continue
+            have, target, soft = s.get(cap, 0.0), self.target(cap), self.soft_cap(cap)
+            base_w = self.reqs[cap]["weight"]
+            total += self.weight(cap) * (min(1.0, (have + gain) / target) ** self.gamma
+                                         - min(1.0, have / target) ** self.gamma)
+            total += self._floor_penalty(cap, have) - self._floor_penalty(cap, have + gain)
+            ob = 0.5 * base_w * (have - soft) / target if have > soft else 0.0
+            oa = (0.5 * base_w * (have + gain - soft) / target
+                  if have + gain > soft else 0.0)
+            total -= oa - ob
+        return total
+
+    def _marg_syn_from(self, s, base_syn, extra):
+        """Marginal synergy of adding effective caps `extra`."""
+        total = 0.0
+        for a, c, b in self.synergies:
+            total += b * min(s.get(a, 0) + extra.get(a, 0), s.get(c, 0) + extra.get(c, 0))
+        return total - base_syn
+
+    def best_loadout(self, s, base_syn, weapon):
+        """Pick the one-spell-per-slot loadout maximizing alpha*dFit+beta*dSyn
+        for effective base supply `s`. Returns (d_fit, d_syn, extra_caps)."""
+        always, slots = self._loadout_eff(weapon)
+        best = None
+        # each slot equips exactly ONE of its mutually-exclusive spells (no
+        # "empty" — a player always has a Q/W/E/passive slotted). This blocks
+        # the within-slot double-count (catch AND disengage from two W spells)
+        # WITHOUT letting a weapon dodge over-stack penalties by shedding a
+        # redundant cap — the latter wrongly inflated generalists in saturated
+        # parties and cost 11pts of V4 role accuracy.
+        choices = [slot for slot in slots if slot]
+        for combo in (itertools.product(*choices) if choices else [()]):
+            extra = dict(always)
+            for b in combo:
+                for cap, v in b.items():
+                    if v > extra.get(cap, 0.0):
+                        extra[cap] = v
+            d_fit = self._marg_fit_from(s, extra)
+            d_syn = self._marg_syn_from(s, base_syn, extra)
+            val = self.alpha * d_fit + self.beta * d_syn
+            if best is None or val > best[0]:
+                best = (val, d_fit, d_syn, extra)
+        if best is None:
+            return 0.0, 0.0, {}
+        return best[1], best[2], best[3]
+
     def explain(self, party, candidate):
-        """Per-capability delta terms — these ARE the 'why' text."""
-        s, terms = self.effective_supply(party), []
-        for cap in self.reqs:
-            gain = (self.caps_of(candidate).get(cap, 0)
-                    * self.mech_mults.get(cap, 1.0))
-            if not gain:
+        """Per-capability delta terms for the candidate's BEST loadout — these
+        ARE the 'why' text, and they match what best_loadout actually picks."""
+        s = self.effective_supply(party)
+        _dfit, _dsyn, extra = self.best_loadout(s, self.synergy(party), candidate)
+        terms = []
+        for cap, gain in extra.items():
+            if cap not in self.reqs or not gain:
                 continue
             have, target = s.get(cap, 0.0), self.target(cap)
             d = self.weight(cap) * (min(1.0, (have + gain) / target) ** self.gamma
@@ -200,11 +274,11 @@ class Engine:
         return (self.meta_prior.get(b) or {}).get(weapon, 0.0)
 
     def recommend(self, party, top_n=4, pool=None):
-        base_fit, base_syn = self.fitness(party), self.synergy(party)
+        base_syn = self.synergy(party)
+        s = self.effective_supply(party)
         out = []
         for w in (pool or self.weapons):
-            d_fit = self.fitness(party + [w]) - base_fit
-            d_syn = self.synergy(party + [w]) - base_syn
+            d_fit, d_syn, _extra = self.best_loadout(s, base_syn, w)
             meta = self.meta_of(w)
             out.append({
                 "weapon": w,
