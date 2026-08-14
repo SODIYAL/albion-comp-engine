@@ -46,6 +46,7 @@ py -3 tests/test_js_parity.py          # browser scoring == engine.py (needs nod
 py -3 tests/test_patch_history.py      # patch-diff + staleness units, no clone needed
 py -3 pipeline/build_dashboard.py      # -> dashboard/index.html AND docs/index.html
 py -3 pipeline/build_effect_review.py  # -> review/effects.html
+py -3 pipeline/build_magnitude_review.py  # -> review/magnitude.html (score-vs-dumps audit boards)
 py -3 pipeline/fetch_icons.py          # only after a patch ADDS weapons (cached; --force redownloads)
 py -3 pipeline/sample_battles.py       # optional: refresh usage field reports
                                        # (albionbb API — gameinfo 504s at scale;
@@ -58,9 +59,10 @@ dashboard) on every build, so pushing `main` updates the live site.
 
 ## Current state (verified 2026-08-13)
 
-**One source of truth.** Capability numbers live only in `pipeline/sheets/*.yaml`.
+**One source of truth.** Capability numbers live only in `pipeline/sheets/*.yaml`;
+global combat-mechanics numbers live only in `pipeline/templates/mechanics.yaml`.
 The engine, the golden tests and the page all consume `out/dataset-latest.json`.
-All gates green: lint 0 errors across 60 sheet files, golden 15/15, JS/Python
+All gates green: lint 0 errors across 60 sheet files, golden 18/18, JS/Python
 parity 60/60 across all templates × styles at 1e-9, patch-history 14/14.
 
 - **Curated: 137/137 combat weapons.** The remaining 24 catalog entries are
@@ -105,6 +107,15 @@ parity 60/60 across all templates × styles at 1e-9, patch-history 14/14.
   saturated margin; dedicated support never reproduces (undervalued at the
   margin). **Nothing was retuned** — these comps calibrated the templates
   (circularity), so the findings await the expert and independent comps.
+- **Game-mechanics layer (2026-08-13)**: `pipeline/templates/mechanics.yaml`
+  holds the wiki-sourced ZvZ mechanics (Focus Fire/Resilience tables, AoE
+  Escalation curve, Disarray — the last recorded but UNWIRED: it cancels in
+  a mirror fight). Styles carry `mechanics: {expected_aoe_targets,
+  focus_attackers}`; the engine turns these into effectiveness multipliers
+  on `burst_aoe` (escalation) and `burst_st`/`execute` (Resilience),
+  NORMALIZED so balanced ≡ identity — template calibration untouched, V4
+  baseline unchanged by construction. Golden T11 pins the directions.
+  Open questions + provisional numbers tracked in `MECHANICS_TODO.md`.
 - **Line structure is the organizing principle**: all weapons in a line share
   the same Q/W spell pool; only the E differs. Line-mates carry identical
   QW-conditional scores (marked `(QW)` in comments).
@@ -124,8 +135,24 @@ parity 60/60 across all templates × styles at 1e-9, patch-history 14/14.
 - **Momentary-defensive ruling:** personal channel/dash defensives (Parry,
   Deflecting Spin, Counter stance, Cartwheel, untargetable windows) do NOT
   ground `tankiness`. Sustained/identity durability does.
-- Knock-ups and stuns HOLD clumps; only drag/pull mechanics CREATE them
-  (Tackle, Onslaught, Vendetta, Black Hole, Triple Kick's kidnap).
+- Knock-ups, knockbacks and stuns HOLD (or scatter) clumps; only drag/pull
+  mechanics CREATE them (Onslaught, Vendetta, Black Hole, Triple Kick's
+  kidnap). Great Hammer's Tackle is a knockback, NOT a clump creator —
+  expert-corrected 2026-08-13, pinned by golden T12.
+- **Magnitude, not existence — ALL capabilities** (expert, 2026-08-13):
+  every score encodes impact magnitude; a token effect is not the same
+  number as a battle-shaping one. First applied to `knockback_displace`
+  (golden T13): 3 = battle-shaping (≥12m or kit-wide, CC-resist-ignoring);
+  2 = real AoE travel; 1 = minor/incidental (single-target bolts, small
+  scatters, ALL knock-ups/air-throws — no travel, control value lives in
+  peel/stun); 0 = trivial in group fights (healer self-peel nudges, AA
+  passives). Never score the same control twice across
+  clump_create/peel/knockback_displace. The dataset-wide audit runs
+  through `review/magnitude.html` (`py -3 pipeline/build_magnitude_review.py`
+  — per-capability boards with dumps numbers beside every score; RULE/PASV/
+  TOP flags). Open queue in MECHANICS_TODO.md. When a shared QW spell's
+  score is topped up by an E contribution, the sheet comment MUST say so —
+  a same-spell score mismatch without that comment is a bug.
 - Interrupts are not silences; charge-scaled burst is not execute (execute =
   health-threshold scaling, e.g. Bloodletter E).
 - Hard floors are load-bearing; the golden suite (15 cases) is permanent —
@@ -148,7 +175,12 @@ parity 60/60 across all templates × styles at 1e-9, patch-history 14/14.
 - `anti_zone` weight (sole supplier: Exalted Staff) and `damage_debuff`
   weight (6 defining carriers; small carriers held at 0).
 - The ~15 `add:` entries in `effect_overrides.yaml` — text-verified but
-  judgment-flavored; SOUL_LINK→peel and HAMMERTACKLE→clump_create especially.
+  judgment-flavored; SOUL_LINK→peel especially (HAMMERTACKLE→clump_create
+  was expert-adjudicated 2026-08-13: removed, tombstoned in the overrides).
+- The per-style `mechanics` parameters in `styles.yaml`
+  (`expected_aoe_targets`, `focus_attackers`) — research-derived, not
+  expert numbers yet (`MECHANICS_TODO.md` Q14; curves themselves are wiki
+  data in `mechanics.yaml` and are NOT provisional).
 - Black Hands: empty dumps description AND missing from the render service;
   scores rest on structured effects + community sources.
 - From the V4 baseline: support undervaluation at the margin and a possible

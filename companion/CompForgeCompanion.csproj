@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Comp Forge Party Companion — read-only local Photon reader.
+       Scope + event map: ../COMPANION_SCOPE.md. MIT-stack on purpose:
+       PhotonPackageParser (MIT) + raw sockets + HttpListener, no GPL code. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>compforge-companion</AssemblyName>
+    <RootNamespace>CompForgeCompanion</RootNamespace>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <!-- Windows-only by design (raw-socket promiscuous capture); the
+         platform-compat analyzer flag on ReceiveAll is expected. -->
+    <SupportedOSPlatform>windows</SupportedOSPlatform>
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
+  </PropertyGroup>
+
+  <!-- No PhotonPackageParser NuGet: it only speaks Photon "Protocol16",
+       but current Albion serializes with "Protocol18". The working parser is
+       vendored under photon/ from Statistics Analysis Tool (GPL-3.0) — see
+       photon/NOTICE.md. That makes THIS companion binary GPL-3.0; Comp Forge
+       (the web app) is unaffected, it only talks to us over localhost HTTP. -->
+
+</Project>

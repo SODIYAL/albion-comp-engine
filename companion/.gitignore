@@ -1,0 +1,5 @@
+bin/
+obj/
+items.txt
+party-cache.json
+*.log
