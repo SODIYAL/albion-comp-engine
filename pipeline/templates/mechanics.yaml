@@ -1,0 +1,215 @@
+# Global combat mechanics — data, not code.
+#
+# Source: Albion Online wiki ("Focus Fire", "AoE Escalation" pages), recorded
+# 2026-08-13; tables reflect the Realm Divided update (30.000.1, 2025-11-24).
+#
+# STATUS: NOT yet consumed by build_dataset.py or the engine. Wiring is
+# blocked on the open design questions in MECHANICS_TODO.md (supply-units to
+# attackers mapping, enemy clumping model, double-counting audit vs gamma /
+# soft caps / synergies). Numbers land here first so there is exactly ONE
+# place to correct them after a patch — same rule as the capability sheets.
+
+# ---------------------------------------------------------------------------
+# Focus Fire (aka Resilience): percentage damage reduction applied to a
+# player being attacked by multiple enemy players. Diminishing returns on
+# stacked single-target damage.
+focus_fire:
+  lookback_seconds: 10      # window used to count attackers on the target
+  buff_duration_seconds: 5
+  # Damage reduction by number of attackers. Melee and ranged currently share
+  # the same unmounted values (kept as one table until they diverge again).
+  damage_reduction_unmounted:
+    1: 0.000
+    2: 0.143
+    3: 0.259
+    4: 0.353
+    5: 0.420
+    6: 0.466
+    7: 0.500
+    8: 0.524
+    9: 0.546
+    10: 0.566
+    11: 0.585
+    12: 0.602
+    13: 0.618
+    14: 0.633
+    15: 0.646
+    16: 0.659
+    17: 0.671
+    18: 0.682
+    19: 0.692
+    20: 0.702
+    21: 0.711
+    22: 0.720
+    23: 0.728
+    24: 0.736
+    25: 0.743
+    26: 0.750   # cap — flat 75% for 26+ attackers
+  damage_reduction_mounted:
+    1: 0.000
+    2: 0.143
+    3: 0.259
+    4: 0.353
+    5: 0.430
+    6: 0.494
+    7: 0.547
+    8: 0.592
+    9: 0.630
+    10: 0.662
+    11: 0.690
+    12: 0.713
+    13: 0.734
+    14: 0.752
+    15: 0.768
+    16: 0.782
+    17: 0.795
+    18: 0.800   # cap — flat 80% for 18+ attackers
+  caps:
+    unmounted: {attackers: 26, value: 0.750}   # was 0.80 @ 25+ pre-Realm-Divided
+    mounted:   {attackers: 18, value: 0.800}
+  # Resilience Penetration: per-weapon/ability stat letting an attacker ignore
+  # a % of this reduction (melee-heavy; cut across the board in Realm
+  # Divided). Per-weapon values NOT yet recorded — MECHANICS_TODO.md Q7.
+  resilience_penetration: null
+
+# ---------------------------------------------------------------------------
+# AoE Escalation: AoE damage spells (designed to hit 3+ players) deal bonus
+# damage per player hit. AoE root/stun/silence spells get increased CC
+# duration instead ("CC Escalation").
+aoe_escalation:
+  starts_at_targets: 2
+  bonus_per_extra_target: 0.08   # bonus = 0.08 * (targets_hit - 1)
+  cap_targets: 8
+  max_bonus: 0.56                # flat 56% for 8+ targets hit
+  damage_bonus_by_targets:
+    1: 0.00
+    2: 0.08
+    3: 0.16
+    4: 0.24
+    5: 0.32
+    6: 0.40
+    7: 0.48
+    8: 0.56    # cap — 9+ targets stays 56%
+  # Applied after all other buffs; NOT reduced by the ~150% damage soft cap.
+  applied_after_buffs: true
+  bypasses_damage_soft_cap: true
+  # Escalation is per-ability ELIGIBILITY, global MAGNITUDE: which spells
+  # escalate is a per-spell flag (Wild Blood 23.000.1 fixed/improved ~40
+  # damage + 9 CC spells); the curve above is the same for all of them.
+  # Eligibility extraction from ao-bin-dumps: MECHANICS_TODO.md Q9.
+  # CC escalation duration curve values: NOT yet recorded — Q8.
+  cc_escalation_duration_curve: null
+
+# ---------------------------------------------------------------------------
+# Disarray (zerg debuff): reduces DAMAGE OUTPUT and CC DURATION when attacking
+# targets with a LOWER Disarray level; no effect vs same-or-higher level.
+# Debuff % = (attacker's level − target's level), i.e. 1% per level of
+# difference. RELATIVE mechanic: in a mirror fight (equal sizes) it is a
+# no-op — it prices OUTNUMBERING, not composition (MECHANICS_TODO.md Q11).
+# Wiki, recorded 2026-08-13.
+disarray:
+  debuff_pct_per_level_difference: 0.01
+  affects: [damage_vs_players, cc_duration_vs_players]
+  max_level: 99          # extended from 67 in Radiant Wilds (31.000.1, 2026-04)
+  # Disarray level by group size. SOURCE VERSION 22.090.1 — the wiki table
+  # predates Radiant Wilds' extension to 99 levels; re-verify against current
+  # dumps/forum before wiring (MECHANICS_TODO.md Q12). Key: level, value:
+  # minimum group size that reaches it. Level 0 for groups of 20 or fewer.
+  level_by_group_size:
+    1: 21
+    2: 22
+    3: 23
+    4: 24
+    5: 25
+    6: 26
+    7: 27
+    8: 28
+    9: 29
+    10: 30
+    11: 31
+    12: 32
+    13: 33
+    14: 34
+    15: 36
+    16: 37
+    17: 39
+    18: 41
+    19: 44
+    20: 46
+    21: 48
+    22: 49
+    23: 51
+    24: 54
+    25: 56
+    26: 58
+    27: 61
+    28: 64
+    29: 67
+    30: 70
+    31: 74
+    32: 79
+    33: 83
+    34: 89
+    35: 95
+    36: 99
+    37: 103
+    38: 108
+    39: 114
+    40: 119
+    41: 126
+    42: 133
+    43: 141
+    44: 148
+    45: 154
+    46: 160
+    47: 167
+    48: 175
+    49: 183
+    50: 192
+    51: 200
+    52: 207
+    53: 215
+    54: 223
+    55: 232
+    56: 242
+    57: 252
+    58: 264
+    59: 276
+    60: 290
+    61: 305
+    62: 322
+    63: 341
+    64: 361
+    65: 385
+    66: 412
+    67: 445
+  # Radiant Wilds (31.000.1): battle mounts add fixed Disarray points to the
+  # group; only the excess above 15 total is added to the alliance's Disarray.
+  # Recorded for completeness — the engine rosters WEAPONS only; mounts are
+  # out of scope until mount slots exist.
+  battle_mount_points:
+    threshold_before_effect: 15
+    values:
+      ancient_ent: 2
+      battle_eagle: 4
+      battle_rhino: 2
+      behemoth: 4
+      colossus_beetle: 5
+      command_mammoth: 5
+      flame_basilisk: 5
+      goliath_horseeater: 3
+      juggernaut: 4
+      phalanx_beetle: 2
+      roving_bastion: 5
+      siege_ballista: 2
+      tower_chariot: 5
+      venom_basilisk: 5
+  # Homesick (Rogue Frontier 28.000.1): +20 percentage points on the Disarray
+  # debuff (level 1: 1% → 21%) when entering Outlands from a Portal Town with
+  # home set in an Outlands Hideout / Smuggler's Den, groups of 21+. Player-
+  # state debuff, not a comp property — out of scope for scoring.
+  homesick_extra_debuff: 0.20
+  # Abyssal Depths P4 (29.040.1): forced dismount grants NO cleanse/CC
+  # immunity while Disarray is active (solo/small groups keep it). Relevant
+  # to `catch` value at 21+ sizes: dismount-bombing a blob is more lethal.
+  forced_dismount_immunity_removed_with_disarray: true

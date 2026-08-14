@@ -83,8 +83,12 @@ add:
     clump_create: "a 5-target enemy pull stacks enemies for AoE; the parser only captured the root"
   CURSEDHANDS_STACKUP:                # "Enchant the targeted ally's Auto-Attacks for the next 10"
     buff_allies: "ally auto-attack damage enchant; direct damage adds are outside the structured vocab"
-  HAMMERTACKLE:                       # "knocking back all enemies you pass through" — along the dash line
-    clump_create: "dash-through knockback shoves every enemy on the path into a pile; the canonical clump engine (design doc heavy-hammer example)"
+  # HAMMERTACKLE clump_create — REMOVED 2026-08-13 by expert correction.
+  # Dumps text: "knocking back all enemies you pass through". A knockback
+  # along the dash line displaces/scatters, it does not pull into a pile —
+  # the standing drag/pull ruling applies (Grovekeeper/Permafrost precedent).
+  # TOMBSTONE: do NOT re-add on the post-patch override re-check; the
+  # displacement is captured as knockback_displace on the sheet.
   SHAPESHIFT_ENT:                     # "Growth: Increases the Max and Current Health of up to {0} allies in a 11 radius by 0.08"
     buff_allies: "group Max-HP grant on transform; HP grants are outside the structured vocab"
   SHOVEL:                             # Fling — "pulling them 10 behind you"

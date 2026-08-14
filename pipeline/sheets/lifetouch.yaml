@@ -20,4 +20,5 @@
     - {cap: heal_burst,   score: 2, evidence: HOLYFLASH}    # Q: 117 AoE burst (holy pool parity)
     - {cap: peel,         score: 2, evidence: HOLYTOUCH}    # E: group CC immunity while channeling; W: Sacred Pulse
     - {cap: buff_allies,  score: 2, evidence: HOLYTOUCH}    # E: +15% damage to the target; W: Holy Blessing
-    - {cap: knockback_displace, score: 1, evidence: PULSINGHEAL}  # W: Sacred Pulse 9m enemy knockback (QW)
+    # knockback_displace REMOVED 2026-08-13 (expert magnitude pass): Sacred
+    # Pulse = healer self-peel, already scored as peel — line-wide ruling. (QW)

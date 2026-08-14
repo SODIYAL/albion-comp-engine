@@ -13,6 +13,11 @@
 (function (root) {
   "use strict";
 
+  /* Mechanics-affected capability families (MECHANICS_TODO.md): mirrors
+     AOE_ESCALATION_CAPS / RESILIENCE_CAPS in engine.py. */
+  var AOE_ESCALATION_CAPS = ["burst_aoe"];
+  var RESILIENCE_CAPS = ["burst_st", "execute"];
+
   function CompEngine(data, content, size, style) {
     this.data = data;
     this.weapons = data.weapons;
@@ -24,6 +29,7 @@
     this.synergies = (this.scoring.capability_synergies || []).map(function (s) {
       return [s.a, s.b, s.bonus];
     });
+    this.mechanics = data.mechanics || {};
     this.setContent(content || "castle_outpost", size, style);
   }
 
@@ -39,6 +45,45 @@
     this.style = style || "balanced";
     var styles = this.data.styles || {};
     this.styleMults = (styles[this.style] || {}).multipliers || {};
+    /* Mechanics overlay: normalized to the balanced style so balanced stays
+       the identity — styles diverge by RELATIVE physics only (mirrors
+       engine.py set_content). */
+    var styleMech = (styles[this.style] || {}).mechanics || {};
+    var baseMech = (styles.balanced || {}).mechanics || {};
+    this.mechMults = {};
+    var i;
+    for (i = 0; i < AOE_ESCALATION_CAPS.length; i++) {
+      this.mechMults[AOE_ESCALATION_CAPS[i]] =
+        this._escalationMult(styleMech.expected_aoe_targets)
+        / this._escalationMult(baseMech.expected_aoe_targets);
+    }
+    for (i = 0; i < RESILIENCE_CAPS.length; i++) {
+      this.mechMults[RESILIENCE_CAPS[i]] =
+        this._resilienceEff(styleMech.focus_attackers)
+        / this._resilienceEff(baseMech.focus_attackers);
+    }
+  };
+
+  CompEngine.prototype._tableClamp = function (table, x) {
+    var maxK = 0;
+    for (var k in table) { var ki = parseInt(k, 10); if (ki > maxK) maxK = ki; }
+    return Math.max(1, Math.min(Math.round(x), maxK));
+  };
+
+  CompEngine.prototype._escalationMult = function (targets) {
+    var table = (this.mechanics.aoe_escalation || {}).damage_bonus_by_targets || {};
+    var empty = true;
+    for (var k in table) { empty = false; break; }
+    if (empty || !targets) return 1.0;
+    return 1.0 + table[String(this._tableClamp(table, targets))];
+  };
+
+  CompEngine.prototype._resilienceEff = function (attackers) {
+    var table = (this.mechanics.focus_fire || {}).damage_reduction_unmounted || {};
+    var empty = true;
+    for (var k in table) { empty = false; break; }
+    if (empty || !attackers) return 1.0;
+    return 1.0 - table[String(this._tableClamp(table, attackers))];
   };
 
   CompEngine.prototype.weight = function (cap) {
@@ -66,10 +111,22 @@
   };
 
   CompEngine.prototype.supply = function (party) {
+    /* Raw capability units summed over the party (sheet numbers). */
     var s = {};
     for (var i = 0; i < party.length; i++) {
       var caps = this.capsOf(party[i]);
       for (var cap in caps) s[cap] = (s[cap] || 0) + caps[cap];
+    }
+    return s;
+  };
+
+  CompEngine.prototype.effectiveSupply = function (party) {
+    /* Supply after style-delivery physics (AoE escalation, Resilience).
+       Balanced is the identity. All scoring reads THIS (mirrors engine.py). */
+    var s = this.supply(party);
+    for (var cap in this.mechMults) {
+      var m = this.mechMults[cap];
+      if (m !== 1.0 && cap in s) s[cap] = s[cap] * m;
     }
     return s;
   };
@@ -82,7 +139,7 @@
   };
 
   CompEngine.prototype.fitness = function (party) {
-    var s = this.supply(party), total = 0.0;
+    var s = this.effectiveSupply(party), total = 0.0;
     for (var cap in this.reqs) {
       var have = s[cap] || 0.0, target = this.target(cap), soft = this.softCap(cap);
       /* style multiplies the VALUE of coverage; over-stack economics and
@@ -101,7 +158,7 @@
   };
 
   CompEngine.prototype.synergy = function (party) {
-    var s = this.supply(party), total = 0.0;
+    var s = this.effectiveSupply(party), total = 0.0;
     for (var i = 0; i < this.synergies.length; i++) {
       var a = this.synergies[i][0], c = this.synergies[i][1], b = this.synergies[i][2];
       total += b * Math.min(s[a] || 0, s[c] || 0);
@@ -110,9 +167,10 @@
   };
 
   CompEngine.prototype.explain = function (party, candidate) {
-    var s = this.supply(party), terms = [];
+    var s = this.effectiveSupply(party), terms = [];
     for (var cap in this.reqs) {
-      var gain = this.capsOf(candidate)[cap] || 0;
+      var m = this.mechMults[cap];
+      var gain = (this.capsOf(candidate)[cap] || 0) * (m === undefined ? 1.0 : m);
       if (!gain) continue;
       var have = s[cap] || 0.0, target = this.target(cap);
       var d = this.weight(cap) * (Math.pow(Math.min(1.0, (have + gain) / target), this.gamma)
@@ -149,7 +207,7 @@
 
   CompEngine.prototype.weaknesses = function (party, topN) {
     if (topN === undefined) topN = 3;
-    var s = this.supply(party), gaps = [];
+    var s = this.effectiveSupply(party), gaps = [];
     for (var cap in this.reqs) {
       var have = s[cap] || 0;
       gaps.push({ cap: cap,
@@ -160,7 +218,7 @@
   };
 
   CompEngine.prototype.uncoveredCaps = function (party) {
-    var s = this.supply(party), out = [];
+    var s = this.effectiveSupply(party), out = [];
     for (var cap in this.reqs) {
       if (this.weight(cap) >= 5 && (s[cap] || 0) / this.target(cap) < 0.5) out.push(cap);
     }

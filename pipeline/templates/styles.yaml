@@ -12,12 +12,24 @@
 # (stack them, one bomb), kite (never take the fight, bleed them),
 # brawl-clap (grind until they clump, then bomb). "Balanced" is the
 # identity — free mode, no thumb on the scale.
+#
+# `mechanics` blocks (added 2026-08-13, PROVISIONAL — MECHANICS_TODO.md Q14,
+# research-derived, awaiting expert numbers): how the style DELIVERS damage.
+#   expected_aoe_targets — enemies a typical AoE hits under this style;
+#     feeds the AoE Escalation curve (mechanics.yaml) into burst_aoe supply.
+#   focus_attackers — players concentrating on one called target; feeds the
+#     Focus Fire / Resilience curve into burst_st + execute supply.
+# The engine NORMALIZES both curves to the balanced style's parameters, so
+# balanced stays the identity and template calibration is untouched; styles
+# diverge by RELATIVE physics only. Weight multipliers say what a style
+# VALUES; mechanics say what a style's delivery makes EFFECTIVE.
 
 styles:
   balanced:
     name: Balanced
     blurb: no thumb on the scale — the content template as fitted
     multipliers: {}
+    mechanics: {expected_aoe_targets: 4, focus_attackers: 4}
 
   brawl:
     name: Brawl
@@ -36,6 +48,9 @@ styles:
       disengage: 0.85
       catch: 0.8
       mobility: 0.75
+    # spread melee ball: cleaves clip ~3, damage split across whoever's in
+    # reach, so few attackers stack on any one enemy
+    mechanics: {expected_aoe_targets: 3, focus_attackers: 3}
 
   clap:
     name: Clap
@@ -53,6 +68,9 @@ styles:
       mobility: 0.85
       heal_reduction: 0.8
       sustained_dps: 0.6
+    # synced bombs on a manufactured clump: AoE rides the escalation curve
+    # toward its 8-target cap; ST damage is incidental (few attackers each)
+    mechanics: {expected_aoe_targets: 7, focus_attackers: 3}
 
   kite:
     name: Kite
@@ -70,6 +88,8 @@ styles:
       engage: 0.7
       tankiness: 0.7
       clump_create: 0.7
+    # ranged poke on the advancing clump; focus fire only on caught divers
+    mechanics: {expected_aoe_targets: 4, focus_attackers: 4}
 
   brawl_clap:
     name: Brawl-Clap
@@ -83,3 +103,5 @@ styles:
       sustained_dps: 1.1
       catch: 0.85
       mobility: 0.85
+    # the hybrid: grind spreads damage until the clump forms, then bomb it
+    mechanics: {expected_aoe_targets: 5, focus_attackers: 3}

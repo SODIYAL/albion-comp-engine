@@ -16,7 +16,7 @@
   role_hint: melee
   capabilities:
     - {cap: burst_aoe,      score: 2, evidence: LETHAL_CLEAVER}   # E: 212 AoE slam + cone follow-up
-    - {cap: knockback_displace, score: 2, evidence: LETHAL_CLEAVER}  # E: cone air-throw, enemy-directed
+    - {cap: knockback_displace, score: 1, evidence: LETHAL_CLEAVER}  # E: cone air-THROW — no travel (magnitude pass 2026-08-13)
     - {cap: engage,         score: 2, evidence: LETHAL_CLEAVER}   # leap in, slam the clump
     - {cap: mobility,       score: 2, evidence: LETHAL_CLEAVER}   # E leap; Q3: Raging Leap
     - {cap: sustained_dps,  score: 2, evidence: RENDINGSTRIKE}    # Q: stacking Rending bleeds

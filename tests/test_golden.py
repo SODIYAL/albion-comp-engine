@@ -161,6 +161,63 @@ def run():
           prefs["kite"] <= prefs["balanced"] <= prefs["clap"],
           f"kite={prefs['kite']:.2f} balanced={prefs['balanced']:.2f} clap={prefs['clap']:.2f}")
 
+    # T11 — mechanics physics (MECHANICS_TODO.md, wired 2026-08-13): AoE
+    # Escalation and Focus Fire/Resilience move EFFECTIVE supply, normalized
+    # so balanced is the identity. Directions pinned by the wiki curves:
+    # clap (7 targets) escalates AoE above balanced (4); brawl (3 targets)
+    # sits below; fewer focus attackers (3 vs 4) means less Resilience tax,
+    # so brawl/clap ST damage lands MORE than balanced's.
+    e_bal = Engine(content="blackzone_roam", size=20, style="balanced")
+    e_clap = Engine(content="blackzone_roam", size=20, style="clap")
+    e_brawl = Engine(content="blackzone_roam", size=20, style="brawl")
+    check("T11 AoE escalation direction: clap > balanced(=1) > brawl",
+          e_clap.mech_mults["burst_aoe"] > 1.0 + 1e-9
+          and abs(e_bal.mech_mults["burst_aoe"] - 1.0) < 1e-9
+          and e_brawl.mech_mults["burst_aoe"] < 1.0 - 1e-9,
+          f"clap={e_clap.mech_mults['burst_aoe']:.3f} "
+          f"bal={e_bal.mech_mults['burst_aoe']:.3f} "
+          f"brawl={e_brawl.mech_mults['burst_aoe']:.3f}")
+    check("T11b Resilience direction: 3 focus attackers beat balanced's 4",
+          e_brawl.mech_mults["burst_st"] > 1.0 + 1e-9
+          and abs(e_bal.mech_mults["burst_st"] - 1.0) < 1e-9,
+          f"brawl={e_brawl.mech_mults['burst_st']:.3f} "
+          f"bal={e_bal.mech_mults['burst_st']:.3f}")
+    aoe_party = [PERMAFROST, WITCHWORK, "2H_FIRE_RINGPAIR_AVALON"]
+    raw = e_clap.supply(aoe_party).get("burst_aoe", 0)
+    eff = e_clap.effective_supply(aoe_party).get("burst_aoe", 0)
+    check("T11c effective supply applies the multiplier (clap AoE > raw)",
+          raw > 0 and abs(eff - raw * e_clap.mech_mults["burst_aoe"]) < 1e-9
+          and eff > raw,
+          f"raw={raw:.1f} eff={eff:.2f}")
+
+    # T12 — expert correction 2026-08-13: knockback is NOT clump creation.
+    # Great Hammer's Tackle ("knocking back all enemies you pass through")
+    # displaces; only drag/pull mechanics create clumps. The true clump
+    # engines keep their scores: Hand of Justice's Onslaught (10-enemy drag),
+    # Camlann's Vendetta (8m vacuum), Witchwork's Black Hole (radius pull).
+    gh = E.caps_of(GREAT_HAMMER)
+    check("T12 Great Hammer supplies no clump_create; true pulls still do",
+          "clump_create" not in gh and gh.get("knockback_displace", 0) >= 1
+          and E.caps_of("2H_MACE_MORGANA").get("clump_create", 0) >= 3
+          and E.caps_of(WITCHWORK).get("clump_create", 0) >= 2,
+          f"GH caps={sorted(gh)}; camlann={E.caps_of('2H_MACE_MORGANA').get('clump_create', 0)}")
+
+    # T13 — expert magnitude pass 2026-08-13: knockback_displace scores
+    # repositioning power, not existence. Ladder pinned within one role
+    # family: Quarterstaff (12m CC-resist-ignoring kit) = 3 > Great Holy
+    # (10m real AoE shove) = 2 > Hallowfall (air-throw, no travel) = 1 >
+    # Holy Staff / Lifetouch / Redemption (Sacred Pulse self-peel, AA
+    # passive) = absent.
+    kd = lambda w: E.caps_of(w).get("knockback_displace", 0)
+    check("T13 displacement magnitude ladder holds",
+          kd("2H_QUARTERSTAFF") == 3 and kd("2H_HOLYSTAFF") == 2
+          and kd(HALLOWFALL) == 1
+          and all("knockback_displace" not in E.caps_of(w)
+                  for w in ("MAIN_HOLYSTAFF", "MAIN_HOLYSTAFF_MORGANA",
+                            "2H_HOLYSTAFF_UNDEAD")),
+          f"qs={kd('2H_QUARTERSTAFF')} great_holy={kd('2H_HOLYSTAFF')} "
+          f"hallowfall={kd(HALLOWFALL)} holy_staff={kd('MAIN_HOLYSTAFF')}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

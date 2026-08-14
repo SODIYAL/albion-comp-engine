@@ -14,7 +14,7 @@
   role_hint: melee
   capabilities:
     - {cap: engage,        score: 2, evidence: TRIPLECOMBO_DIVEKICK}  # E: CC-immune dive kick
-    - {cap: knockback_displace, score: 2, evidence: TRIPLECOMBO_DIVEKICK}  # air-throw + Backhand (QW)
+    - {cap: knockback_displace, score: 1, evidence: TRIPLECOMBO_DIVEKICK}  # air-throw — no travel; Backhand is single-target (QW) (magnitude pass 2026-08-13)
     - {cap: purge,         score: 1, evidence: TRIPLECOMBO_DIVEKICK}  # Purifying Fist strips buffs
     - {cap: mobility,      score: 2, evidence: TRIPLECOMBO_DIVEKICK}  # dive + Q dashes
     - {cap: disengage,     score: 1, evidence: TRIPLECOMBO_DIVEKICK}
@@ -95,7 +95,7 @@
   curated_as_of: 2026-08-12
   role_hint: melee
   capabilities:
-    - {cap: knockback_displace, score: 2, evidence: BLAZING_GEYSER}  # E: AoE knock-up, Q-reset on hit
+    - {cap: knockback_displace, score: 1, evidence: BLAZING_GEYSER}  # E: AoE knock-UP — no travel (magnitude pass 2026-08-13)
     - {cap: burst_aoe,     score: 2, evidence: BLAZING_GEYSER} # 188 in the geyser
     - {cap: peel,          score: 1, evidence: BLAZING_GEYSER}
     - {cap: mobility,      score: 2, evidence: DASHKICK}       # Q dashes (QW)

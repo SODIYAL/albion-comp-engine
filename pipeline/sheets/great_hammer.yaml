@@ -2,11 +2,21 @@
 # Usage: 5 sightings, dominant role: tank. Replaces the illustrative §2.3
 # block (tankiness 2, engage 3, clump_create 3, stun 2, zone_control 2, peel 1).
 #
-# Identity: the clump engine. The E (Tackle) dashes through the enemy line,
-# knocking everyone on the path together and stunning them 2.35s, with the
-# cooldown refunded per enemy player hit — engage, clump and stun in one
-# spammable button. This is the design doc's own example weapon for
-# clump_create ("Great Hammer clumps, Heavy Mace peels", §2.2 notes).
+# Identity: the engage/disrupt tank. The E (Tackle) dashes through the enemy
+# line, knocking back everyone on the path and stunning them 2.35s, with the
+# cooldown refunded per enemy player hit — engage, displacement and stun in
+# one spammable button.
+#
+# EXPERT CORRECTION 2026-08-13: clump_create 3 REMOVED. Dumps text says
+# "knocking back all enemies you pass through" — a knockback along the dash
+# line DISPLACES enemies, it does not compress them to a point the way a
+# drag/pull does (Hand of Justice's Onslaught, Camlann's Vendetta, Black
+# Hole). Same ruling that stripped Grovekeeper and Permafrost: knock-ups/
+# knockbacks/stuns HOLD or SCATTER, only drag/pull mechanics CREATE clumps.
+# The displacement stays scored as knockback_displace 2; the stun holds
+# clumps others make. This overrules the design doc's §2.3-era "Great
+# Hammer clumps" example and the HAMMERTACKLE override (tombstoned there).
+# Golden T12 pins this.
 #
 # Shares the hammer Q/W pool with the Polehammer sheet — QW-conditional
 # scores (slow/anti_dive/zone via Inertia Ring, purge/shred via Iron Breaker,
@@ -24,9 +34,9 @@
   role_hint: tank
   capabilities:
     - {cap: engage,        score: 3, evidence: HAMMERTACKLE}     # E: dash-through, CD refund per player hit
-    - {cap: clump_create,  score: 3, evidence: HAMMERTACKLE}     # knockback along the dash line piles enemies (override)
+    # clump_create removed 2026-08-13 (expert): knockback != pull — see header
     - {cap: stun,          score: 2, evidence: HAMMERTACKLE}     # 2.35s on everyone tackled; Stunning Strike passive
-    - {cap: knockback_displace, score: 2, evidence: HAMMERTACKLE}  # E displacement; W: Power Geyser knock-up
+    - {cap: knockback_displace, score: 1, evidence: HAMMERTACKLE}  # dumps: knockback "by 2" (meters) — minor; W: Geyser knock-up (magnitude pass 2026-08-13)
     - {cap: peel,          score: 2, evidence: HAMMERTACKLE}     # tackle a diver; W: Knockout, Geyser, ring
     - {cap: catch,         score: 2, evidence: HAMMERTACKLE}     # dash + stun = caught
     - {cap: mobility,      score: 2, evidence: HAMMERTACKLE}     # the E is a real dash; W: Slowing Charge

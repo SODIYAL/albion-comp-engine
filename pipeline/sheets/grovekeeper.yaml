@@ -22,7 +22,7 @@
   capabilities:
     - {cap: engage,        score: 3, evidence: RAM_CHARGE}      # E: CC+damage-immune leap into the stun
     - {cap: stun,          score: 2, evidence: RAM_CHARGE}      # 2.5s in 5.5m; Stunning Strike passive
-    - {cap: knockback_displace, score: 2, evidence: RAM_CHARGE} # scaling air-throw, ignores CC resistance
+    - {cap: knockback_displace, score: 1, evidence: RAM_CHARGE} # scaling air-THROW — no travel; hold value is peel/stun (magnitude pass 2026-08-13)
     - {cap: peel,          score: 2, evidence: RAM_CHARGE}      # pound the divers; W: Geyser / Knockout (QW)
     - {cap: catch,         score: 2, evidence: RAM_CHARGE}      # leap + 2.5s stun = caught
     - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}    # tank-line weapon, played frontline

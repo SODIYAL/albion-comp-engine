@@ -61,7 +61,7 @@
   role_hint: melee
   capabilities:
     - {cap: engage,        score: 2, evidence: DASHDMG}          # E: dash-through air-throw
-    - {cap: knockback_displace, score: 2, evidence: DASHDMG}     # everyone on the path goes airborne
+    - {cap: knockback_displace, score: 1, evidence: DASHDMG}     # path air-throw — no travel (magnitude pass 2026-08-13)
     - {cap: mobility,      score: 2, evidence: DASHDMG}          # the dash; Inner Focus (QW)
     - {cap: catch,         score: 2, evidence: LEGBREAKER}       # Cripple anti-kite (QW)
     - {cap: peel,          score: 1, evidence: DASHDMG}          # dash through the divers

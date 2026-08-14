@@ -85,7 +85,7 @@
   curated_as_of: 2026-08-12
   role_hint: melee
   capabilities:
-    - {cap: knockback_displace, score: 2, evidence: TORNADO}      # E: line air-throw, ignores CC resistance
+    - {cap: knockback_displace, score: 1, evidence: TORNADO}      # E: line air-THROW, ignores CC resistance — no travel (magnitude pass 2026-08-13)
     - {cap: burst_aoe,     score: 2, evidence: TORNADO}           # 152 through the line
     - {cap: slow,          score: 2, evidence: TORNADO}           # 80% around the tornado
     - {cap: peel,          score: 1, evidence: TORNADO}           # send it through the divers

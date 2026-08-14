@@ -20,6 +20,14 @@ import json, os
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATASET = os.path.join(HERE, os.pardir, "pipeline", "out", "dataset-latest.json")
 
+# Mechanics-affected capability families (MECHANICS_TODO.md, 2026-08-13):
+# AoE Escalation multiplies AoE damage effectiveness by targets hit;
+# Focus Fire (Resilience) cuts focused single-target damage by attackers-on-
+# target. sustained_dps is deliberately in NEITHER family — brawl sustained
+# damage is spread across targets, so neither curve cleanly applies.
+AOE_ESCALATION_CAPS = ("burst_aoe",)
+RESILIENCE_CAPS = ("burst_st", "execute")
+
 
 class Engine:
     def __init__(self, dataset_path=DATASET, content="castle_outpost", size=7,
@@ -34,6 +42,7 @@ class Engine:
         self.meta_prior = self.scoring.get("meta_prior", {}) or {}
         self.synergies = [(s["a"], s["b"], s["bonus"])
                           for s in self.scoring.get("capability_synergies", [])]
+        self.mechanics = self.data.get("mechanics", {}) or {}
         self.set_content(content, size, style)
 
     # ---------------------------------------------------------------- context
@@ -50,6 +59,40 @@ class Engine:
         self.style = style
         styles = self.data.get("styles", {}) or {}
         self.style_mults = (styles.get(style, {}) or {}).get("multipliers", {}) or {}
+        # Mechanics overlay (templates/mechanics.yaml + per-style parameters):
+        # weight multipliers say what a style VALUES; these say what a style's
+        # damage delivery makes EFFECTIVE. Both curves are normalized to the
+        # balanced style so balanced stays the identity and template
+        # calibration is untouched — styles diverge by RELATIVE physics only.
+        style_mech = (styles.get(style, {}) or {}).get("mechanics", {}) or {}
+        base_mech = (styles.get("balanced", {}) or {}).get("mechanics", {}) or {}
+        self.mech_mults = {}
+        for cap in AOE_ESCALATION_CAPS:
+            self.mech_mults[cap] = (
+                self._escalation_mult(style_mech.get("expected_aoe_targets"))
+                / self._escalation_mult(base_mech.get("expected_aoe_targets")))
+        for cap in RESILIENCE_CAPS:
+            self.mech_mults[cap] = (
+                self._resilience_eff(style_mech.get("focus_attackers"))
+                / self._resilience_eff(base_mech.get("focus_attackers")))
+
+    def _escalation_mult(self, targets):
+        """1 + AoE Escalation bonus for hitting `targets` players (capped at 8)."""
+        table = (self.mechanics.get("aoe_escalation") or {}).get(
+            "damage_bonus_by_targets") or {}
+        if not table or not targets:
+            return 1.0
+        t = max(1, min(int(round(targets)), max(int(k) for k in table)))
+        return 1.0 + table[str(t)]
+
+    def _resilience_eff(self, attackers):
+        """Fraction of ST damage that survives Focus Fire with N attackers."""
+        table = (self.mechanics.get("focus_fire") or {}).get(
+            "damage_reduction_unmounted") or {}
+        if not table or not attackers:
+            return 1.0
+        n = max(1, min(int(round(attackers)), max(int(k) for k in table)))
+        return 1.0 - table[str(n)]
 
     def weight(self, cap):
         return self.reqs[cap]["weight"] * self.style_mults.get(cap, 1.0)
@@ -71,10 +114,21 @@ class Engine:
 
     # ----------------------------------------------------------------- core
     def supply(self, party):
+        """Raw capability units summed over the party (sheet numbers)."""
         s = {}
         for w in party:
             for cap, v in self.caps_of(w).items():
                 s[cap] = s.get(cap, 0) + v
+        return s
+
+    def effective_supply(self, party):
+        """Supply after style-delivery physics (AoE escalation, Resilience).
+        Balanced is the identity, so raw == effective there. All scoring
+        reads THIS; `supply` stays raw for display and floors semantics."""
+        s = self.supply(party)
+        for cap, m in self.mech_mults.items():
+            if m != 1.0 and cap in s:
+                s[cap] = s[cap] * m
         return s
 
     def _floor_penalty(self, cap, have):
@@ -85,7 +139,7 @@ class Engine:
         return f["penalty_mult"] * w * (f["floor_units"] - have) / f["floor_units"]
 
     def fitness(self, party):
-        s, total = self.supply(party), 0.0
+        s, total = self.effective_supply(party), 0.0
         for cap in self.reqs:
             have, target, soft = s.get(cap, 0.0), self.target(cap), self.soft_cap(cap)
             # style multiplies the VALUE of coverage; over-stack economics and
@@ -101,14 +155,15 @@ class Engine:
         return sum(self.weight(cap) for cap in self.reqs)
 
     def synergy(self, party):
-        s = self.supply(party)
+        s = self.effective_supply(party)
         return sum(b * min(s.get(a, 0), s.get(c, 0)) for a, c, b in self.synergies)
 
     def explain(self, party, candidate):
         """Per-capability delta terms — these ARE the 'why' text."""
-        s, terms = self.supply(party), []
+        s, terms = self.effective_supply(party), []
         for cap in self.reqs:
-            gain = self.caps_of(candidate).get(cap, 0)
+            gain = (self.caps_of(candidate).get(cap, 0)
+                    * self.mech_mults.get(cap, 1.0))
             if not gain:
                 continue
             have, target = s.get(cap, 0.0), self.target(cap)
@@ -138,7 +193,7 @@ class Engine:
         return sorted(out, key=lambda r: -r["score"])[:top_n]
 
     def weaknesses(self, party, top_n=3):
-        s = self.supply(party)
+        s = self.effective_supply(party)
         gaps = [{"cap": cap,
                  "gap": self.weight(cap) * (1 - min(1.0, s.get(cap, 0) / self.target(cap)) ** self.gamma),
                  "have": s.get(cap, 0), "target": self.target(cap)}
@@ -148,7 +203,7 @@ class Engine:
     def uncovered_caps(self, party):
         """High-weight capabilities under half-supplied — feeds the greedy-trap
         lookahead warning (design doc §4.4.1)."""
-        s = self.supply(party)
+        s = self.effective_supply(party)
         return [cap for cap in self.reqs
                 if self.weight(cap) >= 5 and s.get(cap, 0) / self.target(cap) < 0.5]
 

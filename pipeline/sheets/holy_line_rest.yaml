@@ -12,7 +12,6 @@
     - {cap: heal_burst,   score: 2, evidence: HOLYSHIELD}    # E: Divinity's Grace detonation pulse; Q: Holy Flash
     - {cap: heal_sustain, score: 2, evidence: HEALINGBEAM}   # holy W pool (QW)
     - {cap: peel,         score: 1, evidence: PULSINGHEAL}   # (QW)
-    - {cap: knockback_displace, score: 1, evidence: PULSINGHEAL}  # (QW)
     # NO cleanse (settled holy finding), NO mobility.
 
 - weapon: 2H_HOLYSTAFF_CRYSTAL       # Exalted Staff — the anti-zone healer
@@ -24,7 +23,6 @@
     - {cap: heal_sustain, score: 2, evidence: HEALINGBEAM}   # holy W pool (QW)
     - {cap: buff_allies,  score: 1, evidence: HOLY_DISPEL}   # +20% max/current Health on healed allies, 3s
     - {cap: peel,         score: 1, evidence: PULSINGHEAL}   # (QW)
-    - {cap: knockback_displace, score: 1, evidence: PULSINGHEAL}  # (QW)
     # NO cleanse (settled holy finding), NO mobility.
 
 - weapon: 2H_HOLYSTAFF_HELL          # Fallen Staff — the immunity-cleanse healer
@@ -36,5 +34,4 @@
     - {cap: peel,         score: 2, evidence: HOLY_ULTIMATE} # 2s damage IMMUNITY for everyone in the circle
     - {cap: heal_sustain, score: 2, evidence: HEALINGBEAM}   # holy W pool (QW)
     - {cap: buff_allies,  score: 1, evidence: HOLYHOT}       # (QW)
-    - {cap: knockback_displace, score: 1, evidence: PULSINGHEAL}  # (QW)
     # NO mobility — the 2s charge-up makes it the anchor healer's anchor.

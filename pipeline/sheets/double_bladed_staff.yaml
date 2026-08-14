@@ -17,7 +17,7 @@
     - {cap: engage,        score: 2, evidence: DASH_KNOCKBACK}   # leap in, slow the clump
     - {cap: catch,         score: 2, evidence: DASH_KNOCKBACK}   # leap + 50% slow = caught
     - {cap: disengage,     score: 2, evidence: DASH_KNOCKBACK}   # leap out; Q: Cartwheel
-    - {cap: knockback_displace, score: 2, evidence: LAUNCHER}    # W: Rising Blow / Separator / Forceful Swing (QW)
+    - {cap: knockback_displace, score: 1, evidence: LAUNCHER}    # W: Rising Blow / Separator / Forceful Swing (QW) — unified with line-mates (magnitude pass 2026-08-13)
     - {cap: peel,          score: 2, evidence: SEPARATING_SLAM}  # same W row as Quarterstaff (QW)
     - {cap: sustained_dps, score: 1, evidence: QSTAFF_COMBO}     # W: Gale Dance AA buff; Whirling Strikes (QW)
     - {cap: burst_aoe,     score: 1, evidence: DASH_KNOCKBACK}   # 80 on impact + Whirling — modest

@@ -4,7 +4,8 @@
 # Identity: the drag-clump tank. The E (Onslaught) spins to the target
 # position PULLING up to 10 enemies along the path, pulse-stunning them, then
 # slams — throwing everything within 5m into the air. A drag-and-pile engine:
-# clump_create 3 alongside Great Hammer's Tackle. Shares the hammer Q/W pool
+# clump_create 3 (a TRUE pull — unlike Great Hammer's Tackle knockback,
+# which lost its clump score to the 2026-08-13 ruling). Shares the hammer Q/W pool
 # with Polehammer and Great Hammer; QW-conditional scores mirror those sheets.
 
 - weapon: 2H_HAMMER_AVALON           # Hand of Justice — drag-clump tank
@@ -14,7 +15,7 @@
     - {cap: engage,        score: 3, evidence: SPINNING_SMASH}   # E: spin INTO them, dragging the line with you
     - {cap: clump_create,  score: 3, evidence: SPINNING_SMASH}   # pulls up to 10 enemies into the slam point
     - {cap: stun,          score: 2, evidence: SPINNING_SMASH}   # 0.8s pulse stuns during the drag; slam knock-up
-    - {cap: knockback_displace, score: 2, evidence: SPINNING_SMASH}  # the slam throws everything airborne; W: Geyser
+    - {cap: knockback_displace, score: 1, evidence: SPINNING_SMASH}  # slam air-throw — no travel; the DRAG is clump_create 3 (magnitude pass 2026-08-13)
     - {cap: peel,          score: 2, evidence: SPINNING_SMASH}   # drag divers off the backline; W: Knockout, ring
     - {cap: catch,         score: 2, evidence: SPINNING_SMASH}   # spin onto runners, they come along
     - {cap: mobility,      score: 2, evidence: SPINNING_SMASH}   # the E moves you; W: Slowing Charge

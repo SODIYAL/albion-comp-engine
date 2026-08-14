@@ -338,6 +338,47 @@ first V4 leave-one-out baseline exists: role-level 69% (n=26), with the
 saturation-degeneracy and support-undervaluation findings recorded in
 `tests/VALIDATION.md`.*
 
+*Amendment 2026-08-13 (later): a game-mechanics layer was added. Global
+combat mechanics now live in `pipeline/templates/mechanics.yaml` (wiki
+numbers, post-Realm-Divided: Focus Fire/Resilience damage-reduction tables,
+the AoE Escalation curve — 8%/target, cap 56% at 8 — and Disarray, recorded
+but deliberately unwired since it cancels in a mirror fight). Each style in
+`styles.yaml` gained a `mechanics` block: `expected_aoe_targets` feeds the
+escalation curve into `burst_aoe` supply; `focus_attackers` feeds the
+Resilience curve into `burst_st` + `execute` supply. The engine computes
+per-capability effectiveness multipliers NORMALIZED to the balanced style —
+balanced stays the identity, so template calibration and the V4 baseline are
+untouched; styles diverge by relative delivery physics on top of their
+weight multipliers (weights = what a style VALUES, mechanics = what its
+delivery makes EFFECTIVE). `sustained_dps` is deliberately in neither
+family (spread damage fits neither curve cleanly). Wired identically in
+`engine/engine.py` and `app_scoring.js` (parity 60/60); golden T11 pins the
+directions; per-style parameter magnitudes are PROVISIONAL pending expert
+sign-off (`MECHANICS_TODO.md` Q14). Not yet modeled: Resilience Penetration
+per weapon (Q7), CC-escalation durations (Q8), per-spell escalation
+eligibility (Q9).*
+
+*Amendment 2026-08-13 (expert correction): the §2.2/§2.3 "Great Hammer
+clumps, Heavy Mace peels" example is half wrong — Great Hammer's Tackle is
+a dash-through KNOCKBACK ("knocking back all enemies you pass through"),
+which displaces but does not compress; its `clump_create 3` was removed
+(kept: `knockback_displace 2`, engage/stun). The drag/pull ruling stands
+with the corrected example set: Hand of Justice's Onslaught, Camlann's
+Vendetta, Black Hole, Triple Kick's kidnap. Golden T12 pins it.*
+
+*Amendment 2026-08-13 (expert magnitude pass): `knockback_displace` now
+scores repositioning MAGNITUDE, not existence — 3 battle-shaping (≥12m /
+kit-wide, CC-resist-ignoring), 2 real AoE travel, 1 minor/incidental
+(explicitly including ALL knock-ups/air-throws: no travel, control value
+lives in peel/stun), 0 trivial-in-group-fights (healer self-peel nudges,
+AA passives — removed). Downgraded: Hallowfall E, Kingmaker, Grovekeeper,
+Hand of Justice slam, Realmbreaker, spear dash, Tornado, knuckles
+air-throws (2→1); Battle Bracers Backhand and Double Bladed Staff Launcher
+unified with line-mates at 1. Removed: the holy W Sacred Pulse knockback
+line-wide and Redemption's AA-passive knockback. Golden T13 pins the
+ladder. Note: no template requires `knockback_displace` yet, so rankings
+are unchanged today — this pass makes the data safe to value later.*
+
 ### 6.2 Data model (works as SQLite/Postgres in the pipeline, exported to JSON for the client)
 
 ```sql

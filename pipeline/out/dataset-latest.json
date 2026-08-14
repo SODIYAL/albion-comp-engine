@@ -17,6 +17,188 @@
   "weapons_illustrative": 0,
   "weapons_total": 137
  },
+ "mechanics": {
+  "aoe_escalation": {
+   "applied_after_buffs": true,
+   "bonus_per_extra_target": 0.08,
+   "bypasses_damage_soft_cap": true,
+   "cap_targets": 8,
+   "cc_escalation_duration_curve": null,
+   "damage_bonus_by_targets": {
+    "1": 0.0,
+    "2": 0.08,
+    "3": 0.16,
+    "4": 0.24,
+    "5": 0.32,
+    "6": 0.4,
+    "7": 0.48,
+    "8": 0.56
+   },
+   "max_bonus": 0.56,
+   "starts_at_targets": 2
+  },
+  "disarray": {
+   "affects": [
+    "damage_vs_players",
+    "cc_duration_vs_players"
+   ],
+   "battle_mount_points": {
+    "threshold_before_effect": 15,
+    "values": {
+     "ancient_ent": 2,
+     "battle_eagle": 4,
+     "battle_rhino": 2,
+     "behemoth": 4,
+     "colossus_beetle": 5,
+     "command_mammoth": 5,
+     "flame_basilisk": 5,
+     "goliath_horseeater": 3,
+     "juggernaut": 4,
+     "phalanx_beetle": 2,
+     "roving_bastion": 5,
+     "siege_ballista": 2,
+     "tower_chariot": 5,
+     "venom_basilisk": 5
+    }
+   },
+   "debuff_pct_per_level_difference": 0.01,
+   "forced_dismount_immunity_removed_with_disarray": true,
+   "homesick_extra_debuff": 0.2,
+   "level_by_group_size": {
+    "1": 21,
+    "2": 22,
+    "3": 23,
+    "4": 24,
+    "5": 25,
+    "6": 26,
+    "7": 27,
+    "8": 28,
+    "9": 29,
+    "10": 30,
+    "11": 31,
+    "12": 32,
+    "13": 33,
+    "14": 34,
+    "15": 36,
+    "16": 37,
+    "17": 39,
+    "18": 41,
+    "19": 44,
+    "20": 46,
+    "21": 48,
+    "22": 49,
+    "23": 51,
+    "24": 54,
+    "25": 56,
+    "26": 58,
+    "27": 61,
+    "28": 64,
+    "29": 67,
+    "30": 70,
+    "31": 74,
+    "32": 79,
+    "33": 83,
+    "34": 89,
+    "35": 95,
+    "36": 99,
+    "37": 103,
+    "38": 108,
+    "39": 114,
+    "40": 119,
+    "41": 126,
+    "42": 133,
+    "43": 141,
+    "44": 148,
+    "45": 154,
+    "46": 160,
+    "47": 167,
+    "48": 175,
+    "49": 183,
+    "50": 192,
+    "51": 200,
+    "52": 207,
+    "53": 215,
+    "54": 223,
+    "55": 232,
+    "56": 242,
+    "57": 252,
+    "58": 264,
+    "59": 276,
+    "60": 290,
+    "61": 305,
+    "62": 322,
+    "63": 341,
+    "64": 361,
+    "65": 385,
+    "66": 412,
+    "67": 445
+   },
+   "max_level": 99
+  },
+  "focus_fire": {
+   "buff_duration_seconds": 5,
+   "caps": {
+    "mounted": {
+     "attackers": 18,
+     "value": 0.8
+    },
+    "unmounted": {
+     "attackers": 26,
+     "value": 0.75
+    }
+   },
+   "damage_reduction_mounted": {
+    "1": 0.0,
+    "2": 0.143,
+    "3": 0.259,
+    "4": 0.353,
+    "5": 0.43,
+    "6": 0.494,
+    "7": 0.547,
+    "8": 0.592,
+    "9": 0.63,
+    "10": 0.662,
+    "11": 0.69,
+    "12": 0.713,
+    "13": 0.734,
+    "14": 0.752,
+    "15": 0.768,
+    "16": 0.782,
+    "17": 0.795,
+    "18": 0.8
+   },
+   "damage_reduction_unmounted": {
+    "1": 0.0,
+    "2": 0.143,
+    "3": 0.259,
+    "4": 0.353,
+    "5": 0.42,
+    "6": 0.466,
+    "7": 0.5,
+    "8": 0.524,
+    "9": 0.546,
+    "10": 0.566,
+    "11": 0.585,
+    "12": 0.602,
+    "13": 0.618,
+    "14": 0.633,
+    "15": 0.646,
+    "16": 0.659,
+    "17": 0.671,
+    "18": 0.682,
+    "19": 0.692,
+    "20": 0.702,
+    "21": 0.711,
+    "22": 0.72,
+    "23": 0.728,
+    "24": 0.736,
+    "25": 0.743,
+    "26": 0.75
+   },
+   "lookback_seconds": 10,
+   "resilience_penetration": null
+  }
+ },
  "scoring": {
   "capability_synergies": [
    {
@@ -189,11 +371,19 @@
  "styles": {
   "balanced": {
    "blurb": "no thumb on the scale \u2014 the content template as fitted",
+   "mechanics": {
+    "expected_aoe_targets": 4,
+    "focus_attackers": 4
+   },
    "multipliers": {},
    "name": "Balanced"
   },
   "brawl": {
    "blurb": "stand and grind \u2014 sustain, stall and attrition win",
+   "mechanics": {
+    "expected_aoe_targets": 3,
+    "focus_attackers": 3
+   },
    "multipliers": {
     "burst_aoe": 0.85,
     "catch": 0.8,
@@ -213,6 +403,10 @@
   },
   "brawl_clap": {
    "blurb": "grind until they clump, then bomb \u2014 the hybrid",
+   "mechanics": {
+    "expected_aoe_targets": 5,
+    "focus_attackers": 3
+   },
    "multipliers": {
     "burst_aoe": 1.35,
     "catch": 0.85,
@@ -227,6 +421,10 @@
   },
   "clap": {
    "blurb": "stack them and delete them \u2014 one engage, one bomb",
+   "mechanics": {
+    "expected_aoe_targets": 7,
+    "focus_attackers": 3
+   },
    "multipliers": {
     "burst_aoe": 1.6,
     "catch": 0.9,
@@ -245,6 +443,10 @@
   },
   "kite": {
    "blurb": "never take the fight \u2014 range, tempo and chip damage",
+   "mechanics": {
+    "expected_aoe_targets": 4,
+    "focus_attackers": 4
+   },
    "multipliers": {
     "burst_aoe": 0.85,
     "burst_st": 1.15,
@@ -1295,7 +1497,7 @@
     "engage": 2,
     "execute": 1,
     "heal_reduction": 1,
-    "knockback_displace": 2,
+    "knockback_displace": 1,
     "mobility": 2,
     "peel": 1,
     "resist_shred": 1,
@@ -1737,7 +1939,7 @@
     "catch": 1,
     "disengage": 1,
     "engage": 1,
-    "knockback_displace": 2,
+    "knockback_displace": 1,
     "mobility": 2,
     "peel": 2,
     "root": 1,
@@ -2404,7 +2606,6 @@
     "buff_allies": 2,
     "heal_burst": 2,
     "heal_sustain": 2,
-    "knockback_displace": 1,
     "peel": 1
    },
    "curated_as_of": "2026-08-12",
@@ -2418,9 +2619,6 @@
     ],
     "heal_sustain": [
      "HEALINGBEAM"
-    ],
-    "knockback_displace": [
-     "PULSINGHEAL"
     ],
     "peel": [
      "PULSINGHEAL"
@@ -2440,7 +2638,7 @@
     "damage_debuff": 1,
     "disengage": 2,
     "engage": 2,
-    "knockback_displace": 2,
+    "knockback_displace": 1,
     "mobility": 2,
     "peel": 2,
     "root": 1,
@@ -3603,10 +3801,9 @@
    "capabilities": {
     "anti_dive": 2,
     "catch": 2,
-    "clump_create": 3,
     "disengage": 2,
     "engage": 3,
-    "knockback_displace": 2,
+    "knockback_displace": 1,
     "mobility": 2,
     "peel": 2,
     "purge": 1,
@@ -3624,9 +3821,6 @@
      "TAR_RING"
     ],
     "catch": [
-     "HAMMERTACKLE"
-    ],
-    "clump_create": [
      "HAMMERTACKLE"
     ],
     "disengage": [
@@ -3679,7 +3873,7 @@
     "clump_create": 3,
     "disengage": 2,
     "engage": 3,
-    "knockback_displace": 2,
+    "knockback_displace": 1,
     "mobility": 2,
     "peel": 2,
     "purge": 1,
@@ -3979,7 +4173,6 @@
     "buff_allies": 1,
     "heal_burst": 2,
     "heal_sustain": 2,
-    "knockback_displace": 1,
     "peel": 1
    },
    "curated_as_of": "2026-08-12",
@@ -3997,9 +4190,6 @@
     "heal_sustain": [
      "HEALINGBEAM"
     ],
-    "knockback_displace": [
-     "PULSINGHEAL"
-    ],
     "peel": [
      "PULSINGHEAL"
     ]
@@ -4016,7 +4206,6 @@
     "cleanse": 2,
     "heal_burst": 3,
     "heal_sustain": 2,
-    "knockback_displace": 1,
     "peel": 2
    },
    "curated_as_of": "2026-08-12",
@@ -4034,9 +4223,6 @@
     "heal_sustain": [
      "HEALINGBEAM"
     ],
-    "knockback_displace": [
-     "PULSINGHEAL"
-    ],
     "peel": [
      "HOLY_ULTIMATE"
     ]
@@ -4052,7 +4238,6 @@
     "buff_allies": 2,
     "heal_burst": 2,
     "heal_sustain": 3,
-    "knockback_displace": 1,
     "peel": 1
    },
    "curated_as_of": "2026-08-12",
@@ -4066,9 +4251,6 @@
     ],
     "heal_sustain": [
      "CELESTIAL_SPHERE"
-    ],
-    "knockback_displace": [
-     "PASSIVE_KNOCKBACK_CASTER_HOLYSTAFF"
     ],
     "peel": [
      "PULSINGHEAL"
@@ -4389,7 +4571,7 @@
     "clump_create": 1,
     "disengage": 1,
     "engage": 2,
-    "knockback_displace": 2,
+    "knockback_displace": 1,
     "mobility": 2,
     "peel": 1,
     "purge": 1,
@@ -4682,7 +4864,7 @@
     "catch": 1,
     "clump_create": 1,
     "engage": 1,
-    "knockback_displace": 2,
+    "knockback_displace": 1,
     "mobility": 2,
     "peel": 1,
     "resist_shred": 1,
@@ -4739,7 +4921,7 @@
     "clump_create": 1,
     "disengage": 2,
     "engage": 2,
-    "knockback_displace": 2,
+    "knockback_displace": 1,
     "mobility": 3,
     "peel": 1,
     "resist_shred": 1,
@@ -5374,7 +5556,7 @@
     "catch": 2,
     "disengage": 2,
     "engage": 3,
-    "knockback_displace": 2,
+    "knockback_displace": 1,
     "mobility": 2,
     "peel": 2,
     "purge": 1,
@@ -6269,7 +6451,7 @@
     "anti_dive": 1,
     "burst_aoe": 2,
     "catch": 1,
-    "knockback_displace": 2,
+    "knockback_displace": 1,
     "mobility": 1,
     "peel": 1,
     "root": 1,
@@ -7265,7 +7447,6 @@
     "buff_allies": 1,
     "heal_burst": 2,
     "heal_sustain": 2,
-    "knockback_displace": 1,
     "peel": 1,
     "self_sustain": 1
    },
@@ -7280,9 +7461,6 @@
     ],
     "heal_sustain": [
      "HEALINGBEAM"
-    ],
-    "knockback_displace": [
-     "PULSINGHEAL"
     ],
     "peel": [
      "PULSINGHEAL"
@@ -7303,7 +7481,7 @@
     "disengage": 2,
     "heal_burst": 3,
     "heal_sustain": 2,
-    "knockback_displace": 2,
+    "knockback_displace": 1,
     "mobility": 3,
     "peel": 3,
     "self_sustain": 1
@@ -7348,7 +7526,6 @@
     "cleanse": 2,
     "heal_burst": 2,
     "heal_sustain": 2,
-    "knockback_displace": 1,
     "peel": 2
    },
    "curated_as_of": "2026-08-12",
@@ -7365,9 +7542,6 @@
     ],
     "heal_sustain": [
      "HOLYTOUCH"
-    ],
-    "knockback_displace": [
-     "PULSINGHEAL"
     ],
     "peel": [
      "HOLYTOUCH"
@@ -7874,7 +8048,7 @@
     "catch": 2,
     "disengage": 1,
     "engage": 2,
-    "knockback_displace": 2,
+    "knockback_displace": 1,
     "mobility": 2,
     "peel": 1,
     "root": 1,
