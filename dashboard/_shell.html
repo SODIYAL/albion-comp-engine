@@ -1,3 +1,6 @@
+<!doctype html>
+<html lang="en">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9876;</text></svg>">
@@ -71,6 +74,12 @@ button{font:inherit; color:inherit; cursor:pointer}
   display:inline-flex; gap:7px; align-items:center; white-space:nowrap;
 }
 .chip .dot{width:6px; height:6px; border-radius:50%; background:var(--ok); flex:none}
+.about-link{
+  font-family:var(--mono); font-size:11px; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--brass); text-decoration:none; white-space:nowrap;
+  padding:4px 0; border-bottom:1px solid transparent;
+}
+.about-link:hover{border-bottom-color:var(--brass)}
 
 /* ---------- shell ---------- */
 .shell{
@@ -109,6 +118,8 @@ select, .text-input{
   background:var(--surface); border:1px solid var(--rule-2); border-radius:3px; color:var(--ink-2);
 }
 .share-btn:hover{border-color:var(--brass); color:var(--brass)}
+.clear-btn:hover{border-color:var(--gap); color:var(--gap)}
+.clear-btn[data-armed="1"]{border-color:var(--gap); color:var(--gap); background:var(--gap-wash)}
 .size-row{display:flex; gap:4px; flex-wrap:wrap; align-items:center}
 .size-btn{
   font-family:var(--mono); font-size:13px; min-width:32px; height:30px; padding:0 6px;
@@ -133,7 +144,9 @@ html:not([data-theme="light"]) .size-btn[aria-pressed="true"]{color:#0D1218}
   padding:7px 10px; margin-top:8px; border-radius:0 3px 3px 0;
 }
 
-/* ---------- roster ---------- */
+/* ---------- roster — champion-select styling. Each row is "lit" by its
+   own weapon render (right-aligned, masked to a glow) and carries a
+   role-colored edge, lobby style. Role hues match the badge palette. ---------- */
 .roster{display:flex; flex-direction:column; gap:5px}
 .tally{display:flex; flex-wrap:wrap; gap:5px; margin-bottom:9px}
 .tally .t{
@@ -141,10 +154,62 @@ html:not([data-theme="light"]) .size-btn[aria-pressed="true"]{color:#0D1218}
   padding:3px 8px; border:1px solid var(--rule-2); border-radius:2px; color:var(--ink-2);
 }
 .tally .t b{color:var(--ink); font-weight:600}
-.slot{
-  display:flex; align-items:center; gap:9px; padding:8px 10px;
-  background:var(--surface); border:1px solid var(--rule); border-radius:3px;
+.tally .t[data-pfilter]{cursor:pointer}
+.tally .t[data-pfilter]:hover{border-color:currentColor}
+.tally .t[aria-pressed="true"]{
+  background:var(--surface-2); border-color:currentColor;
+  box-shadow:inset 0 0 0 1px currentColor;
 }
+.tally .t-tank{color:#6A8FC9; border-color:#6A8FC9}
+.tally .t-healer{color:var(--ok); border-color:var(--ok)}
+.tally .t-melee{color:#BA5C72; border-color:#BA5C72}
+.tally .t-range{color:#C97B4A; border-color:#C97B4A}
+.tally .t-support{color:var(--over); border-color:var(--over)}
+.tally .t[data-pfilter] b{color:inherit}
+
+/* Add-weapon chip bar: the picker's own facet chips (role + provides) */
+.pchips{display:flex; flex-wrap:wrap; gap:4px; margin-bottom:9px; align-items:center}
+.pchips .lbl2{font-family:var(--mono); font-size:9px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-3); margin-right:2px}
+.pchip{
+  font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.08em;
+  text-transform:uppercase; padding:2px 7px; background:transparent;
+  border:1px solid var(--rule-2); border-radius:2px; color:var(--ink-2);
+}
+.pchip:hover{border-color:currentColor}
+.pchip[aria-pressed="true"]{
+  background:var(--surface-2); border-color:currentColor;
+  box-shadow:inset 0 0 0 1px currentColor;
+}
+.pchip.b-tank,.pchip.t-tank{color:#6A8FC9}
+.pchip.b-heal,.pchip.t-healer{color:var(--ok)}
+.pchip.b-peel{color:#45A3AD}
+.pchip.b-cc{color:var(--over)}
+.pchip.b-aoe,.pchip.t-range{color:#C97B4A}
+.pchip.b-st,.pchip.t-melee{color:#BA5C72}
+.pchip.b-dps{color:#948A45}
+.pchip.t-support{color:var(--over)}
+.slot{
+  display:flex; align-items:center; gap:9px; padding:9px 10px; min-height:50px;
+  background:var(--surface); border:1px solid var(--rule); border-radius:3px;
+  position:relative; overflow:hidden;
+  --role:var(--rule-2);
+  border-left:3px solid var(--role);
+}
+.slot.role-tank{--role:#6A8FC9} .slot.role-healer{--role:var(--ok)}
+.slot.role-melee{--role:#BA5C72} .slot.role-range{--role:#C97B4A}
+.slot.role-support{--role:var(--over)}
+.slot::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:var(--wbg); background-repeat:no-repeat;
+  background-position:left -18px center; background-size:96px;
+  opacity:.13; filter:saturate(1.25);
+  -webkit-mask-image:linear-gradient(90deg,#000 28%,transparent 70%);
+  mask-image:linear-gradient(90deg,#000 28%,transparent 70%);
+}
+.slot:hover{border-color:var(--role); border-left-color:var(--role)}
+.slot:hover::before{opacity:.26}
+.slot > *{position:relative}
 .slot .n{font-family:var(--mono); font-size:10.5px; color:var(--ink-3); width:14px; flex:none}
 .slot .nm{flex:1; font-size:13.5px; min-width:0}
 .fn{
@@ -219,6 +284,34 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .prov.curated{background:var(--brass-wash); color:var(--brass)}
 .prov.draft{background:var(--surface-2); color:var(--ink-3)}
 
+/* ---------- capability badges: what a weapon PROVIDES, at a glance.
+   A chip appears only at defining strength (score >= 2) — score-1 trickles
+   are minor by the magnitude rule and would drown the signal. Mid-tone hues
+   hold up on both themes; the label itself is the legend. ---------- */
+.bdg{
+  display:inline-block; font-family:var(--mono); font-size:8.5px; font-weight:600;
+  letter-spacing:.09em; text-transform:uppercase; padding:1px 4px; margin-left:4px;
+  border-radius:2px; border:1px solid currentColor; vertical-align:1.5px;
+  line-height:1.4; opacity:.92; cursor:pointer;
+}
+.bdg:hover{opacity:1; background:var(--surface-2)}
+.facet{
+  display:flex; align-items:center; gap:8px; margin:-4px 0 8px;
+  font-family:var(--mono); font-size:11px; color:var(--ink-2);
+}
+.facet .fx{
+  background:none; border:1px solid var(--rule-2); border-radius:2px;
+  color:var(--ink-3); font-size:12px; line-height:1; padding:2px 6px;
+}
+.facet .fx:hover{color:var(--gap); border-color:var(--gap)}
+.b-tank{color:#6A8FC9}
+.b-heal{color:var(--ok)}
+.b-peel{color:#45A3AD}
+.b-cc{color:var(--over)}
+.b-aoe{color:#C97B4A}
+.b-st{color:#BA5C72}
+.b-dps{color:#948A45}
+
 /* ---------- command bar: state left, action right ---------- */
 .lbl{font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
 .cmdbar{
@@ -232,8 +325,20 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .cb-fit .num{font-family:var(--mono); font-size:38px; font-weight:600; line-height:1; letter-spacing:-.02em}
 .cb-fit .of{font-family:var(--mono); font-size:13px; color:var(--ink-3)}
 .meter-track{height:7px; background:var(--sunk); border-radius:4px; overflow:hidden}
-.meter-fill{height:100%; background:var(--brass); border-radius:4px; transition:width .35s cubic-bezier(.4,0,.2,1)}
-.cb-next{padding:16px 20px; background:var(--brass-wash); display:flex; flex-direction:column; gap:4px; justify-content:center}
+.meter-fill{height:100%; background:linear-gradient(180deg,var(--brass-bright),var(--brass)); border-radius:4px; transition:width .35s cubic-bezier(.4,0,.2,1)}
+.cb-next{
+  padding:16px 20px; background:var(--brass-wash); display:flex; flex-direction:column;
+  gap:4px; justify-content:center; position:relative; overflow:hidden;
+}
+.cb-next::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:var(--wbg); background-repeat:no-repeat;
+  background-position:right -26px center; background-size:150px;
+  opacity:.12; filter:saturate(1.25);
+  -webkit-mask-image:linear-gradient(90deg,transparent 45%,#000 85%);
+  mask-image:linear-gradient(90deg,transparent 45%,#000 85%);
+}
+.cb-next > *{position:relative}
 .cb-next .eyebrow{font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--brass)}
 .cb-row{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
 .cb-next .nm{font-family:var(--serif); font-size:24px; letter-spacing:-.01em; line-height:1.2}
@@ -392,6 +497,8 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 }
 .footnote code{font-family:var(--mono); font-size:11.5px; color:var(--brass)}
 </style>
+</head>
+<body>
 
 <header class="masthead">
   <div class="brandmark">
@@ -399,6 +506,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
     <span class="sub">Albion composition engine</span>
   </div>
   <div class="spacer"></div>
+  <a class="about-link" href="how-it-works.html">How it works <span aria-hidden="true">→</span></a>
   <span class="chip"><span class="dot" id="parity-dot"></span><span id="parity-chip">parity — checking</span></span>
   <span class="chip">dataset <span class="mono" id="build-stamp">—</span></span>
 </header>
@@ -436,6 +544,9 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
         <button class="share-btn" id="share">copy share link</button>
         <button class="share-btn" id="export">copy comp text</button>
       </div>
+      <div class="btn-row">
+        <button class="share-btn clear-btn" id="clear">clear comp</button>
+      </div>
     </section>
 
     <section>
@@ -452,6 +563,8 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
       <div class="field">
         <input class="text-input" id="pick-filter" placeholder="filter — type a weapon name" aria-label="Filter weapons" autocomplete="off">
       </div>
+      <div id="picker-chips"></div>
+      <div id="facet-slot"></div>
       <div class="pick-grid" id="picker"></div>
     </section>
   </aside>
@@ -500,4 +613,3 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   </div>
   <div class="scroll-x"><div id="drawer-body"></div></div>
 </div>
-

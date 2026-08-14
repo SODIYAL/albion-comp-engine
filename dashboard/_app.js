@@ -82,6 +82,55 @@ function roleOf(w){
   return Object.entries(capsOf(w)).sort((a,b) => b[1]-a[1]).slice(0,2)
     .map(e => prose(e[0])).join(" · ");
 }
+
+/* Capability badges — visual cues for what a weapon PROVIDES. A chip shows
+   only at defining strength (score >= 2): score-1 effects are minor by the
+   magnitude rule (HANDOFF) and would drown the signal. Tooltip carries the
+   component scores. */
+const BADGE_DEFS = [
+  ["tank", ["tankiness"]],
+  ["heal", ["heal_sustain", "heal_burst"]],
+  ["peel", ["peel"]],
+  ["cc",   ["stun", "root", "silence", "slow", "clump_create", "knockback_displace"]],
+  ["aoe",  ["burst_aoe"]],
+  ["st",   ["burst_st", "execute"]],
+  ["dps",  ["sustained_dps"]],
+];
+function badgeHtml(w){
+  const caps = capsOf(w);
+  return BADGE_DEFS.map(([cls, keys]) => {
+    const hits = keys.filter(k => (caps[k] || 0) >= 2);
+    if (!hits.length) return "";
+    const tip = hits.map(k => `${prose(k)} ${caps[k]}`).join(", ");
+    return `<span class="bdg b-${cls}" data-bfilter="${cls}" role="button" tabindex="0"
+      title="${esc(tip)} — click to list every ${cls} weapon">${cls}</span>`;
+  }).join("");
+}
+
+/* Two independent chip facets:
+   FACET       — filters the ADD-WEAPON picker (its own chip bar, plus any
+                 capability badge clicked on a weapon anywhere)
+   PARTY_FACET — filters the PARTY roster view (tally role chips); display
+                 only, never touches the engine */
+let FACET = null;
+let PARTY_FACET = null;
+const BADGE_KEYS = Object.fromEntries(BADGE_DEFS);
+function facetOk(w){
+  if (!FACET) return true;
+  if (FACET.type === "role") return (WEAPONS[w].role_hint || "other") === FACET.v;
+  return (BADGE_KEYS[FACET.v] || []).some(k => (capsOf(w)[k] || 0) >= 2);
+}
+function setFacet(f, scroll){
+  FACET = (f && FACET && FACET.type === f.type && FACET.v === f.v) ? null : f;
+  renderPicker();
+  if (FACET && scroll && !matchMedia("(prefers-reduced-motion: reduce)").matches)
+    $("pick-filter").scrollIntoView({behavior: "smooth", block: "center"});
+}
+function roleBg(w){
+  return (typeof ICONS !== "undefined" && ICONS[w])
+    ? ` style="--wbg:url('${ICONS[w]}')"` : "";
+}
+const roleCls = w => `role-${WEAPONS[w].role_hint || "other"}`;
 function whySentence(party, cand){
   const terms = explain(party, cand);
   if (!party.length)
@@ -160,7 +209,9 @@ function renderTally(){
   party.forEach(w => { const r = WEAPONS[w].role_hint || "other"; counts[r] = (counts[r]||0) + 1; });
   $("tally").innerHTML = party.length
     ? Object.entries(counts).sort((a,b) => b[1]-a[1])
-        .map(([r,n]) => `<span class="t"><b>${n}</b> ${esc(r)}</span>`).join("")
+        .map(([r,n]) => `<span class="t t-${esc(r)}" data-pfilter="${esc(r)}" role="button" tabindex="0"
+           aria-pressed="${PARTY_FACET === r}"
+           title="show only the ${esc(r)} slots — click again for all"><b>${n}</b> ${esc(r)}</span>`).join("")
       + `<span class="t"><b>${SIZE - party.length}</b> open</span>`
     : "";
 }
@@ -175,17 +226,26 @@ function renderRoster(){
   const flag = i => i !== minI ? "" : contrib[i] < 0
     ? ' · <b class="least">comp gains without it</b>'
     : ' · <b class="least">least load-bearing</b>';
-  const rows = party.map((w,i) =>
-    `<div class="slot"><span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 26)}
-      <span class="nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>
+  /* party facet: a display filter over the roster — slot numbers and remove
+     buttons keep their true indices */
+  let idxs = party.map((_, i) => i);
+  if (PARTY_FACET)
+    idxs = idxs.filter(i => (WEAPONS[party[i]].role_hint || "other") === PARTY_FACET);
+  const rows = idxs.map(i => { const w = party[i]; return (
+    `<div class="slot ${roleCls(w)}"${roleBg(w)}><span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 32)}
+      <span class="nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>${badgeHtml(w)}
         <span class="fn">${roleOf(w)} · ${signed(contrib[i])} fit${flag(i)}</span></span>
-      <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>`);
-  /* open slots collapse: one dashed "next" row, one "+N more" line */
-  const open = SIZE - party.length;
-  if (party.length < HARD_CAP)
-    rows.push(`<div class="slot next"><span class="n mono">${String(party.length+1).padStart(2,"0")}</span>next slot — pick below</div>`);
-  if (open > 1)
-    rows.push(`<div class="slot more">+ ${open - 1} more open slot${open > 2 ? "s" : ""}</div>`);
+      <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>`); });
+  if (PARTY_FACET){
+    rows.push(`<div class="slot more">${idxs.length} of ${party.length} — ${esc(PARTY_FACET)} only · click the chip again for all</div>`);
+  } else {
+    /* open slots collapse: one dashed "next" row, one "+N more" line */
+    const open = SIZE - party.length;
+    if (party.length < HARD_CAP)
+      rows.push(`<div class="slot next"><span class="n mono">${String(party.length+1).padStart(2,"0")}</span>next slot — pick below</div>`);
+    if (open > 1)
+      rows.push(`<div class="slot more">+ ${open - 1} more open slot${open > 2 ? "s" : ""}</div>`);
+  }
   $("roster").innerHTML = rows.join("");
 }
 const TREE_NAMES = {
@@ -207,12 +267,39 @@ function filteredWeapons(){
   return Object.keys(WEAPONS)
     .sort((a,b) => nameOf(a).localeCompare(nameOf(b)))
     .filter(w => (!treeFilter || TREES[w] === treeFilter)
+              && facetOk(w)
               && (!q || (WEAPONS[w].display_name || w).toLowerCase().includes(q)));
+}
+const PICKER_ROLES = ["tank", "melee", "range", "healer", "support"];
+function renderPickerChips(){
+  /* built once; afterwards only pressed states change — replacing the chip
+     node mid-click would let a double-click toggle the facet back off */
+  const holder = $("picker-chips");
+  if (!holder.dataset.built){
+    holder.innerHTML =
+      `<div class="pchips"><span class="lbl2">role</span>` +
+      PICKER_ROLES.map(r =>
+        `<button class="pchip t-${r}" data-rfilter="${r}">${r}</button>`).join("") +
+      `</div><div class="pchips"><span class="lbl2">provides</span>` +
+      BADGE_DEFS.map(([cls]) =>
+        `<button class="pchip b-${cls}" data-bfilter="${cls}">${cls}</button>`).join("") +
+      `</div>`;
+    holder.dataset.built = "1";
+  }
+  holder.querySelectorAll("[data-rfilter]").forEach(el => el.setAttribute("aria-pressed",
+    String(!!FACET && FACET.type === "role" && FACET.v === el.dataset.rfilter)));
+  holder.querySelectorAll("[data-bfilter]").forEach(el => el.setAttribute("aria-pressed",
+    String(!!FACET && FACET.type === "badge" && FACET.v === el.dataset.bfilter)));
 }
 function renderPicker(){
   const keys = filteredWeapons();
+  renderPickerChips();
+  $("facet-slot").innerHTML = FACET
+    ? `<div class="facet"><span>showing: <b>${esc(FACET.type === "role" ? FACET.v + " weapons" : "provides " + FACET.v)}</b> — ${keys.length} match${keys.length === 1 ? "" : "es"}</span>
+       <button class="fx" id="facet-clear" aria-label="Clear filter">&times; clear</button></div>`
+    : "";
   $("picker").innerHTML = keys.map(w => `<button class="pick" data-add="${w}">
-      ${icon(w, 26)}<span class="nm">${nameOf(w)}<span class="fn">${roleOf(w)}</span></span>
+      ${icon(w, 26)}<span class="nm">${nameOf(w)}${badgeHtml(w)}<span class="fn">${roleOf(w)}</span></span>
       ${WEAPONS[w].status === "curated" ? "" : '<span class="prov draft">illustrative</span>'}
       <span class="info" data-detail="${w}" role="button" tabindex="0" aria-label="Details for ${nameOf(w)}">i</span>
     </button>`).join("")
@@ -275,11 +362,15 @@ function renderWarning(){
 }
 function renderCmdNext(recs){
   if (!recs){
+    $("cb-next").style.removeProperty("--wbg");
     $("cb-next").innerHTML = `<div class="eyebrow">Roster cap</div>
       <div class="cb-row"><span class="cb-full">That is ${HARD_CAP} people — beyond even a castle blob. Remove someone to explore swaps.</span></div>`;
     return;
   }
   const top = recs[0];
+  if (typeof ICONS !== "undefined" && ICONS[top.w])
+    $("cb-next").style.setProperty("--wbg", `url('${ICONS[top.w]}')`);
+  else $("cb-next").style.removeProperty("--wbg");
   const slotLabel = party.length + 1 > PLANNED
     ? `slot ${party.length + 1} — beyond planned ${PLANNED}`
     : `slot ${party.length + 1} of ${SIZE}`;
@@ -291,7 +382,7 @@ function renderCmdNext(recs){
     <div class="eyebrow">Next pick — ${slotLabel}${styleTag}</div>
     <div class="cb-row">
       ${icon(top.w, 44)}
-      <span><button class="nm-btn nm" data-detail="${top.w}">${nameOf(top.w)}</button><span class="fn rl">${roleOf(top.w)}</span></span>
+      <span><button class="nm-btn nm" data-detail="${top.w}">${nameOf(top.w)}</button><span class="fn rl">${roleOf(top.w)} ${badgeHtml(top.w)}</span></span>
       <button class="cb-add" data-add="${top.w}">Add to party</button>
       ${forge}
     </div>`;
@@ -327,7 +418,7 @@ function renderRecDetail(recs){
           <div class="alts">${recs.slice(1).map(r => {
             const t0 = explain(party, r.w)[0];
             return `<button class="alt" data-add="${r.w}"><span class="sc">${r.score.toFixed(2)}</span>
-              ${icon(r.w, 24)}<span class="nm">${nameOf(r.w)}</span>
+              ${icon(r.w, 24)}<span class="nm">${nameOf(r.w)}${badgeHtml(r.w)}</span>
               <span class="rz">${t0 ? `+${t0.d.toFixed(1)} ${t0.cap}` : "no template gain"}</span></button>`;
           }).join("")}</div>
         </div>
@@ -403,7 +494,7 @@ function renderDetail(w){
   $("drawer-title").textContent = d.display_name;
   $("drawer-body").innerHTML = `
     <div class="dt-head">${icon(w, 40)}
-      <div><b>${nameOf(w)}</b><span class="fn">${esc(TREE_NAMES[TREES[w]] || TREES[w] || "")} tree · ${roleOf(w)}</span>${usageLine(w)}</div>
+      <div><b>${nameOf(w)}</b>${badgeHtml(w)}<span class="fn">${esc(TREE_NAMES[TREES[w]] || TREES[w] || "")} tree · ${roleOf(w)}</span>${usageLine(w)}</div>
     </div>
     <div class="dt-grid">
       <div><h4>Capabilities — click one for party-wide evidence</h4>
@@ -474,10 +565,31 @@ function flashBtn(id, text, back){
 }
 
 document.addEventListener("click", e => {
+  /* chip facets first: badges/role chips nest inside add/detail buttons,
+     so they must win the closest() race */
+  const pf = e.target.closest("[data-pfilter]");
+  if (pf){
+    PARTY_FACET = PARTY_FACET === pf.dataset.pfilter ? null : pf.dataset.pfilter;
+    /* update pressed states IN PLACE — rebuilding the tally would replace
+       the chip mid-click and a double-click would toggle straight back off */
+    document.querySelectorAll("#tally .t[data-pfilter]").forEach(el =>
+      el.setAttribute("aria-pressed", String(el.dataset.pfilter === PARTY_FACET)));
+    renderRoster(); return;
+  }
+  const bf = e.target.closest("[data-bfilter]");
+  if (bf){ setFacet({type: "badge", v: bf.dataset.bfilter},
+                    !bf.closest("#picker-chips")); return; }
+  const rf = e.target.closest("[data-rfilter]");
+  if (rf){ setFacet({type: "role", v: rf.dataset.rfilter},
+                    !rf.closest("#picker-chips")); return; }
+  if (e.target.closest("#facet-clear")){ setFacet(null); return; }
   const det = e.target.closest("[data-detail]");
   if (det){ renderDetail(det.dataset.detail); return; }
   const add = e.target.closest("[data-add]");
-  if (add){ if (party.length < HARD_CAP){ party.push(add.dataset.add); render(); } return; }
+  if (add){ if (party.length < HARD_CAP){
+    party.push(add.dataset.add);
+    PARTY_FACET = null;   /* the new member must be visible */
+    render(); } return; }
   if (e.target.closest("#forge")){
     /* Greedy auto-build: repeatedly take the engine's top pick. */
     const goal = Math.min(SIZE, HARD_CAP);
@@ -486,11 +598,25 @@ document.addEventListener("click", e => {
       if (!r.length) break;
       party.push(r[0].w);
     }
+    PARTY_FACET = null;   /* show the whole forged comp, not a filtered view */
     render();
     return;
   }
   const rm = e.target.closest("[data-remove]");
   if (rm){ party.splice(+rm.dataset.remove, 1); render(); return; }
+  if (e.target.closest("#clear")){
+    /* two-step: first click arms, second within 2.2s clears — a misclick
+       must never wipe a 20-slot comp */
+    const b = $("clear");
+    if (b.dataset.armed === "1"){
+      delete b.dataset.armed; b.textContent = "clear comp";
+      party = []; PARTY_FACET = null; render();
+    } else {
+      b.dataset.armed = "1"; b.textContent = "really clear? click again";
+      setTimeout(() => { delete b.dataset.armed; b.textContent = "clear comp"; }, 2200);
+    }
+    return;
+  }
   const sz = e.target.closest("[data-size]");
   if (sz){ PLANNED = +sz.dataset.size; render(); return; }
   if (e.target.closest("#size-minus")){ PLANNED = Math.max(2, PLANNED - 1); render(); return; }
@@ -514,7 +640,7 @@ document.addEventListener("click", e => {
   if (!e.target.closest("#drawer")) $("drawer").dataset.open = "false";
 });
 document.addEventListener("change", e => {
-  if (e.target.id === "content"){ CONTENT = e.target.value; PLANNED = baseSize(); party = []; render(); }
+  if (e.target.id === "content"){ CONTENT = e.target.value; PLANNED = baseSize(); party = []; PARTY_FACET = null; render(); }
   if (e.target.id === "style"){ STYLE = e.target.value; render(); }
   if (e.target.id === "tree-filter"){ treeFilter = e.target.value; renderPicker(); }
   if (e.target.id === "size-input"){
@@ -526,6 +652,10 @@ document.addEventListener("input", e => {
   if (e.target.id === "pick-filter"){ pickFilter = e.target.value; renderPicker(); }
 });
 document.addEventListener("keydown", e => {
+  if ((e.key === "Enter" || e.key === " ")
+      && e.target.matches("[data-bfilter],[data-rfilter],[data-pfilter]")){
+    e.preventDefault(); e.target.click(); return;
+  }
   if (e.key === "Escape"){ $("drawer").dataset.open = "false"; return; }
   /* "/" jumps to the weapon filter from anywhere outside a text field */
   if (e.key === "/" && !e.target.closest("input,select,textarea")){
@@ -539,8 +669,11 @@ $("pick-filter").addEventListener("keydown", e => {
   if (keys.length && party.length < HARD_CAP){ party.push(keys[0]); render(); }
 });
 /* A pasted share-link hash applies without a reload. saveHash() uses
-   replaceState, which never fires hashchange, so this cannot loop. */
-window.addEventListener("hashchange", () => { if (loadHash()) render(); });
+   replaceState, which never fires hashchange, so this cannot loop. The
+   party view-filter resets — it described the previous comp. */
+window.addEventListener("hashchange", () => {
+  if (loadHash()){ PARTY_FACET = null; render(); }
+});
 
 $("build-stamp").textContent = `v${META.version} · ${META.weapons_curated}/${META.weapons_total} curated`;
 

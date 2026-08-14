@@ -9,10 +9,12 @@ inlined (design doc §6.1: static SPA, no backend, scoring in the client).
         │
         ▼
     dashboard/index.html
+    dashboard/how-it-works.html
 
 Inlining rather than fetching is deliberate: the page must work from file://
 and inside a strict-CSP artifact host, neither of which can fetch a sibling
-JSON file.
+JSON file. The shell opens a complete HTML document; this builder appends the
+scripts and closes it so development servers can safely inject reload code.
 
 Usage:  py -3 pipeline/build_dashboard.py
 """
@@ -135,21 +137,32 @@ def main():
            f"const SPELLS = {json.dumps(spells, separators=(',', ':')).replace('</', '<\\/')};\n"
            f"const LOADOUTS = {json.dumps(loadouts, separators=(',', ':')).replace('</', '<\\/')};\n"
            f"const USAGE = {json.dumps(usage, separators=(',', ':')).replace('</', '<\\/')};\n"
-           f"const PARITY_EXPECTED = {json.dumps(expected)};\n{app}</script>\n")
+           f"const PARITY_EXPECTED = {json.dumps(expected)};\n{app}</script>\n"
+           f"</body>\n</html>\n")
     path = os.path.join(DASH, "index.html")
     with open(path, "w", encoding="utf-8") as f:
         f.write(out)
-    # GitHub Pages copy (Settings -> Pages -> main /docs): same page with a
-    # doctype so the public site renders in standards mode. The dashboard/
-    # copy stays skeleton-less because the artifact host wraps it itself.
+    # The explainer is authored as a separate, self-contained source page so
+    # the generated dashboard and GitHub Pages copies cannot drift apart.
+    explainer_src = os.path.join(DASH, "_explainer.html")
+    with open(explainer_src, encoding="utf-8") as f:
+        explainer = f.read()
+    explainer_path = os.path.join(DASH, "how-it-works.html")
+    with open(explainer_path, "w", encoding="utf-8") as f:
+        f.write(explainer)
+    # GitHub Pages copy (Settings -> Pages -> main /docs): byte-for-byte the
+    # same complete standards-mode document as the dashboard build.
     docs = os.path.join(ROOT, "docs")
     os.makedirs(docs, exist_ok=True)
     with open(os.path.join(docs, "index.html"), "w", encoding="utf-8") as f:
-        f.write("<!doctype html>\n" + out)
+        f.write(out)
+    with open(os.path.join(docs, "how-it-works.html"), "w", encoding="utf-8") as f:
+        f.write(explainer)
     open(os.path.join(docs, ".nojekyll"), "w").close()
 
     m = data["_meta"]
     print(f"wrote dashboard/index.html  ({len(out)/1024:.0f} KB)")
+    print(f"wrote dashboard/how-it-works.html  ({len(explainer)/1024:.0f} KB)")
     print(f"  dataset v{m['version']}: {m['weapons_curated']} curated / "
           f"{m['weapons_illustrative']} illustrative, release_clean={m['release_clean']}")
     if not m["release_clean"]:

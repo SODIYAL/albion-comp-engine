@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A visual, plain-language guide to the data, mechanics, scoring, verification, and roadmap behind Comp Forge.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9876;</text></svg>">
+<title>Inside Comp Forge — How the engine works</title>
+<style>
+:root{
+  --bg:#E8EBEE; --surface:#F4F6F8; --surface-2:#DEE3E8; --sunk:#D6DCE2;
+  --ink:#161C23; --ink-2:#4A5763; --ink-3:#71808D;
+  --rule:#C6CED6; --rule-2:#B2BCC6;
+  --brass:#8A6420; --brass-bright:#A87C32; --brass-wash:#EFE6D4;
+  --gap:#A63D37; --gap-wash:#F2DEDC; --ok:#3F6B4C; --ok-wash:#DDE9E0;
+  --over:#5E4E8C; --shadow:0 1px 2px rgba(22,28,35,.07),0 18px 48px -34px rgba(22,28,35,.45);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:"Segoe UI Variable Text","Segoe UI",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0D1218; --surface:#141B23; --surface-2:#1D262F; --sunk:#0A0F14;
+    --ink:#E4E9EE; --ink-2:#94A3B1; --ink-3:#6B7A88;
+    --rule:#29343E; --rule-2:#38454F;
+    --brass:#D2A251; --brass-bright:#E5BC72; --brass-wash:#2A2416;
+    --gap:#D4665E; --gap-wash:#2E1A18; --ok:#6FA983; --ok-wash:#17271E;
+    --over:#9B87D4; --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 48px -28px rgba(0,0,0,.8);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:84px}
+body{
+  margin:0; color:var(--ink); background-color:var(--bg);
+  background-image:linear-gradient(rgba(113,128,141,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(113,128,141,.055) 1px,transparent 1px);
+  background-size:32px 32px; font:15px/1.6 var(--sans); -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+button,a{font:inherit}
+:focus-visible{outline:2px solid var(--brass-bright); outline-offset:3px; border-radius:3px}
+.mono{font-family:var(--mono); font-variant-numeric:tabular-nums}
+.wrap{width:min(1180px,calc(100% - 48px)); margin-inline:auto}
+.topbar{
+  position:sticky; top:0; z-index:20; min-height:64px; border-bottom:1px solid var(--rule);
+  background:color-mix(in srgb,var(--surface) 92%,transparent); backdrop-filter:blur(14px);
+}
+.topbar .wrap{min-height:64px; display:flex; align-items:center; gap:24px}
+.brand{display:flex; align-items:baseline; gap:12px; text-decoration:none; white-space:nowrap}
+.brand strong{font:600 20px/1 var(--serif)}
+.brand span{font:10px/1 var(--mono); letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
+.topnav{display:flex; align-items:center; gap:20px; margin-left:auto}
+.topnav a{font:11px/1 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2); text-decoration:none}
+.topnav a:hover,.topnav a[aria-current="true"]{color:var(--brass)}
+.planner-link{
+  display:inline-flex; align-items:center; gap:9px; padding:9px 12px; border:1px solid var(--brass);
+  border-radius:3px; color:var(--brass)!important; white-space:nowrap;
+}
+.planner-link:hover{background:var(--brass-wash)}
+.progress{height:2px; position:absolute; inset:auto auto -1px 0; width:0; background:var(--brass); transition:width .12s linear}
+
+.hero{padding:84px 0 68px; border-bottom:1px solid var(--rule)}
+.hero-grid{display:grid; grid-template-columns:minmax(0,1.05fr) minmax(390px,.95fr); gap:72px; align-items:center}
+.eyebrow{font:10.5px/1.4 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--brass); margin-bottom:18px}
+h1,h2,h3{font-family:var(--serif); font-weight:600; text-wrap:balance; margin:0}
+h1{font-size:clamp(46px,6.2vw,82px); line-height:.98; letter-spacing:-.045em; max-width:790px}
+.hero-lede{font-size:18px; line-height:1.62; color:var(--ink-2); max-width:650px; margin:26px 0 28px}
+.hero-lede strong{color:var(--ink); font-weight:650}
+.hero-actions{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.button{
+  display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:42px; padding:10px 16px;
+  border:1px solid var(--rule-2); border-radius:3px; background:var(--surface); text-decoration:none; font-weight:600;
+}
+.button.primary{background:var(--brass); border-color:var(--brass); color:#fff}
+@media (prefers-color-scheme:dark){.button.primary{color:#0D1218}}
+.button:hover{border-color:var(--brass); color:var(--brass)}
+.button.primary:hover{background:var(--brass-bright); color:#fff}
+@media (prefers-color-scheme:dark){.button.primary:hover{color:#0D1218}}
+.trust-note{
+  margin-top:28px; padding:12px 15px; border-left:2px solid var(--gap); border-radius:0 3px 3px 0;
+  background:var(--gap-wash); color:var(--ink-2); font-size:13px; max-width:680px;
+}
+.trust-note b{color:var(--gap)}
+
+/* The page's signature: a real recommendation rendered as an audit trace. */
+.trace-card{
+  position:relative; background:var(--surface); border:1px solid var(--rule-2); border-radius:5px;
+  box-shadow:var(--shadow); padding:22px 22px 20px 54px; overflow:hidden;
+}
+.trace-card::before{content:""; position:absolute; left:26px; top:30px; bottom:30px; width:2px; background:var(--rule)}
+.trace-card::after{content:""; position:absolute; left:26px; top:30px; width:2px; height:calc(100% - 60px); background:var(--brass); transform-origin:top; animation:trace-grow 1.1s .2s both cubic-bezier(.2,.8,.2,1)}
+@keyframes trace-grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.trace-label{font:10px/1.4 var(--mono); text-transform:uppercase; letter-spacing:.12em; color:var(--ink-3); margin-bottom:8px}
+.route-step{position:relative; padding:3px 0 18px; animation:route-in .5s both}
+.route-step:nth-child(2){animation-delay:.08s}.route-step:nth-child(3){animation-delay:.22s}.route-step:nth-child(4){animation-delay:.36s}.route-step:nth-child(5){animation-delay:.5s}
+@keyframes route-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.route-step::before{
+  content:""; position:absolute; left:-34px; top:7px; width:9px; height:9px; border-radius:50%;
+  background:var(--surface); border:2px solid var(--brass); z-index:2;
+}
+.party-chips{display:flex; flex-wrap:wrap; gap:5px}
+.party-chips span{font:11px/1 var(--mono); padding:6px 8px; background:var(--surface-2); border:1px solid var(--rule); border-radius:2px}
+.gap-row{display:grid; grid-template-columns:1fr auto; gap:14px; padding:5px 0; border-bottom:1px solid var(--rule); font-size:12.5px}
+.gap-row:last-child{border-bottom:0}.gap-row b{font-family:var(--mono); font-size:11.5px; color:var(--gap); font-weight:600}
+.recommendation{margin-top:2px; padding:13px 14px; background:var(--brass-wash); border:1px solid var(--brass); border-radius:3px}
+.recommendation .pick{display:flex; align-items:baseline; justify-content:space-between; gap:12px}
+.recommendation .pick strong{font:600 25px/1.2 var(--serif)}
+.recommendation .score{font:600 12px/1 var(--mono); color:var(--brass)}
+.recommendation p{font-size:12.5px; color:var(--ink-2); margin:7px 0 0}
+.trace-proof{display:flex; align-items:center; gap:8px; margin-top:13px; color:var(--ok); font:10.5px/1.4 var(--mono)}
+.proof-dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px var(--ok-wash)}
+
+.ledger{background:var(--surface); border-bottom:1px solid var(--rule)}
+.ledger .wrap{display:grid; grid-template-columns:repeat(4,1fr)}
+.stat{padding:22px 24px; border-left:1px solid var(--rule)}
+.stat:last-child{border-right:1px solid var(--rule)}
+.stat strong{display:block; font:600 28px/1 var(--mono); color:var(--ink); letter-spacing:-.04em}
+.stat span{display:block; margin-top:7px; font-size:12px; color:var(--ink-3)}
+
+.section{padding:92px 0; border-bottom:1px solid var(--rule); background:color-mix(in srgb,var(--bg) 92%,transparent)}
+.section.surface{background:var(--surface)}
+.section-head{display:grid; grid-template-columns:180px minmax(0,700px); gap:36px; align-items:start; margin-bottom:48px}
+.section-kicker{font:10.5px/1.5 var(--mono); letter-spacing:.14em; text-transform:uppercase; color:var(--brass); padding-top:8px}
+.section-head h2{font-size:clamp(36px,5vw,58px); line-height:1.03; letter-spacing:-.035em}
+.section-intro{font-size:17px; color:var(--ink-2); margin:18px 0 0; max-width:710px}
+
+.plain-flow{display:grid; grid-template-columns:repeat(5,1fr); border:1px solid var(--rule-2); border-radius:4px; overflow:hidden; box-shadow:var(--shadow)}
+.plain-step{position:relative; min-height:205px; padding:24px 20px; background:var(--surface); border-right:1px solid var(--rule)}
+.plain-step:last-child{border-right:0}
+.plain-step::after{content:"→"; position:absolute; right:-11px; top:25px; z-index:2; width:21px; height:21px; border-radius:50%; display:grid; place-items:center; background:var(--brass); color:#fff; font:12px/1 var(--mono)}
+.plain-step:last-child::after{display:none}
+.plain-step .n{font:10px/1 var(--mono); color:var(--ink-3)}
+.plain-step h3{font-size:21px; line-height:1.15; margin:45px 0 10px}
+.plain-step p{font-size:13px; color:var(--ink-2); margin:0}
+
+.compare{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:42px}
+.compare-card{padding:26px; border:1px solid var(--rule); border-radius:4px; background:var(--surface)}
+.compare-card.capability{border-color:var(--brass); box-shadow:inset 3px 0 var(--brass)}
+.compare-card .mini-label{font:10px/1 var(--mono); letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3)}
+.compare-card h3{font-size:25px; margin:12px 0 13px}
+.compare-card p{color:var(--ink-2); margin:0}
+.vector{display:flex; flex-wrap:wrap; gap:6px; margin-top:18px}
+.vector span{padding:5px 7px; border:1px solid var(--rule-2); border-radius:2px; font:10.5px/1 var(--mono); color:var(--ink-2)}
+.vector b{color:var(--brass)}
+
+.schematic{position:relative; max-width:1000px; margin:0 auto}
+.schematic::before{content:""; position:absolute; left:29px; top:26px; bottom:26px; width:1px; background:var(--rule-2)}
+.pipe-stage{position:relative; display:grid; grid-template-columns:60px 180px minmax(0,1fr); gap:24px; padding:0 0 44px}
+.pipe-stage:last-child{padding-bottom:0}
+.node{width:59px; height:59px; border-radius:50%; display:grid; place-items:center; background:var(--bg); border:1px solid var(--rule-2); font:600 12px/1 var(--mono); color:var(--ink-3); z-index:1}
+.pipe-stage.hot .node{border-color:var(--brass); color:var(--brass); box-shadow:0 0 0 7px var(--brass-wash)}
+.stage-meta{padding-top:7px}
+.stage-meta .kind{font:10px/1.3 var(--mono); letter-spacing:.12em; text-transform:uppercase; color:var(--brass)}
+.stage-meta h3{font-size:23px; line-height:1.15; margin:8px 0 0}
+.stage-body{background:var(--surface); border:1px solid var(--rule); border-radius:4px; padding:19px 21px}
+.stage-body p{margin:0; color:var(--ink-2)}
+.stage-body strong{color:var(--ink)}
+.stage-sample{margin-top:14px; padding:12px 14px; background:var(--sunk); border-radius:3px; font:11.5px/1.65 var(--mono); color:var(--ink-2); overflow:auto}
+.stage-sample .hi{color:var(--brass); font-weight:600}.stage-sample .good{color:var(--ok)}
+.stage-foot{margin-top:12px; display:flex; flex-wrap:wrap; gap:7px}
+.tag{display:inline-flex; align-items:center; gap:6px; padding:4px 7px; border-radius:2px; font:9.5px/1 var(--mono); letter-spacing:.05em; text-transform:uppercase; border:1px solid var(--rule-2); color:var(--ink-3)}
+.tag.scoring{border-color:var(--brass); color:var(--brass); background:var(--brass-wash)}
+.tag.verified{border-color:var(--ok); color:var(--ok); background:var(--ok-wash)}
+
+.source-table{width:100%; border-collapse:collapse; background:var(--surface); border:1px solid var(--rule-2); box-shadow:var(--shadow)}
+.source-table th{padding:12px 16px; text-align:left; border-bottom:1px solid var(--rule-2); color:var(--ink-3); font:10px/1.3 var(--mono); letter-spacing:.1em; text-transform:uppercase; font-weight:400}
+.source-table td{padding:17px 16px; border-bottom:1px solid var(--rule); vertical-align:top; font-size:13px}
+.source-table tr:last-child td{border-bottom:0}
+.source-table td:first-child{font-weight:650; width:22%}
+.source-table td:nth-child(2){color:var(--ink-2); width:42%}
+.use{font:10px/1 var(--mono); white-space:nowrap; text-transform:uppercase; letter-spacing:.06em}
+.use.yes{color:var(--brass)}.use.no{color:var(--ink-3)}.use.guard{color:var(--ok)}
+.source-note{margin-top:18px; padding:14px 16px; border:1px solid var(--rule); background:var(--surface-2); color:var(--ink-2); font-size:13px}
+
+.mechanic-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+.mechanic{display:grid; grid-template-columns:54px minmax(0,1fr); gap:17px; padding:21px; border:1px solid var(--rule); background:var(--surface); border-radius:4px}
+.mechanic .symbol{width:54px; height:54px; display:grid; place-items:center; background:var(--sunk); border:1px solid var(--rule-2); border-radius:3px; color:var(--brass); font:600 14px/1 var(--mono)}
+.mechanic h3{font:650 17px/1.25 var(--sans); margin:1px 0 7px}
+.mechanic p{font-size:13px; color:var(--ink-2); margin:0}
+.formula-board{margin-top:30px; border:1px solid var(--rule-2); border-radius:4px; background:var(--sunk); padding:26px; display:grid; grid-template-columns:1fr auto; gap:28px; align-items:center}
+.formula-board code{font:clamp(13px,2vw,18px)/1.8 var(--mono); color:var(--ink)}
+.formula-board code b{color:var(--brass)}
+.formula-board p{max-width:350px; margin:0; color:var(--ink-2); font-size:13px}
+.physics-note{margin-top:16px; display:grid; grid-template-columns:150px 1fr; gap:20px; padding:18px 20px; border-left:2px solid var(--over); background:color-mix(in srgb,var(--over) 9%,var(--surface))}
+.physics-note strong{font:10px/1.5 var(--mono); letter-spacing:.1em; text-transform:uppercase; color:var(--over)}
+.physics-note p{margin:0; color:var(--ink-2); font-size:13px}
+
+.proof-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
+.proof-card{position:relative; padding:25px 25px 23px; border:1px solid var(--rule); background:var(--surface); border-radius:4px; min-height:210px}
+.proof-card .status{font:10px/1 var(--mono); letter-spacing:.08em; text-transform:uppercase; color:var(--ok); margin-bottom:33px}
+.proof-card.pending .status{color:var(--gap)}
+.proof-card h3{font-size:25px; margin-bottom:10px}
+.proof-card p{font-size:13px; color:var(--ink-2); margin:0}
+.proof-card .measure{position:absolute; top:22px; right:22px; font:600 22px/1 var(--mono); color:var(--ink-3)}
+.truth-banner{margin-top:20px; padding:22px 24px; display:grid; grid-template-columns:180px 1fr; gap:26px; border:1px solid var(--gap); background:var(--gap-wash); border-radius:4px}
+.truth-banner strong{font:11px/1.5 var(--mono); letter-spacing:.1em; text-transform:uppercase; color:var(--gap)}
+.truth-banner p{margin:0; color:var(--ink-2)}
+.truth-banner b{color:var(--ink)}
+
+.limits{display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--rule-2); border-radius:4px; overflow:hidden}
+.limit{min-height:185px; padding:22px; background:var(--surface); border-right:1px solid var(--rule); border-bottom:1px solid var(--rule)}
+.limit:nth-child(3n){border-right:0}.limit:nth-last-child(-n+3){border-bottom:0}
+.limit .x{font:18px/1 var(--mono); color:var(--gap)}
+.limit h3{font:650 16px/1.25 var(--sans); margin:20px 0 7px}
+.limit p{font-size:12.5px; color:var(--ink-2); margin:0}
+
+.roadmap{position:relative; margin-left:18px}
+.roadmap::before{content:""; position:absolute; left:12px; top:12px; bottom:32px; width:2px; background:var(--rule-2)}
+.road{position:relative; display:grid; grid-template-columns:58px 160px 1fr; gap:22px; padding-bottom:36px}
+.road:last-child{padding-bottom:0}
+.road-mark{width:26px;height:26px;border-radius:50%;border:2px solid var(--rule-2);background:var(--bg);display:grid;place-items:center;z-index:1;font:9px/1 var(--mono);color:var(--ink-3)}
+.road.now .road-mark{border-color:var(--brass);background:var(--brass);color:#fff;box-shadow:0 0 0 6px var(--brass-wash)}
+.road-phase{font:10px/1.5 var(--mono); letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); padding-top:5px}
+.road.now .road-phase{color:var(--brass)}
+.road-body{padding:0 0 26px; border-bottom:1px solid var(--rule)}
+.road:last-child .road-body{border-bottom:0}
+.road-body h3{font-size:25px; margin-bottom:7px}
+.road-body p{color:var(--ink-2); margin:0; max-width:760px}
+.road-body .deliverable{display:inline-block; margin-top:12px; font:10.5px/1.4 var(--mono); color:var(--ink-3)}
+
+.cta{padding:75px 0 80px; background:var(--surface)}
+.cta-box{display:grid; grid-template-columns:1fr auto; gap:30px; align-items:center; padding:36px; border:1px solid var(--brass); background:var(--brass-wash); border-radius:5px}
+.cta h2{font-size:clamp(31px,4vw,48px); line-height:1.05; letter-spacing:-.03em}
+.cta p{margin:12px 0 0; color:var(--ink-2)}
+footer{border-top:1px solid var(--rule); background:var(--surface); padding:24px 0 38px; color:var(--ink-3); font-size:11.5px}
+footer .wrap{display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap}
+
+@media (max-width:960px){
+  .hero-grid{grid-template-columns:1fr;gap:48px}.trace-card{max-width:680px}.ledger .wrap{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:1px solid var(--rule)}.stat:nth-child(-n+2){border-bottom:1px solid var(--rule)}
+  .plain-flow{grid-template-columns:1fr 1fr}.plain-step{min-height:170px;border-bottom:1px solid var(--rule)}
+  .plain-step:nth-child(2n){border-right:0}.plain-step::after{display:none}.plain-step:last-child{grid-column:1/-1;min-height:145px}
+  .section-head{grid-template-columns:130px 1fr}.pipe-stage{grid-template-columns:60px 145px minmax(0,1fr)}
+  .limits{grid-template-columns:repeat(2,1fr)}.limit:nth-child(3n){border-right:1px solid var(--rule)}.limit:nth-child(2n){border-right:0}.limit:nth-last-child(-n+3){border-bottom:1px solid var(--rule)}.limit:nth-last-child(-n+2){border-bottom:0}
+}
+@media (max-width:720px){
+  .wrap{width:min(100% - 30px,1180px)}.topnav a:not(.planner-link){display:none}.brand span{display:none}
+  .hero{padding:58px 0 50px}.hero-grid{gap:38px}.trace-card{padding-left:48px}.trace-card::before,.trace-card::after{left:23px}.route-step::before{left:-31px}
+  .section{padding:66px 0}.section-head{grid-template-columns:1fr;gap:8px;margin-bottom:34px}.section-kicker{padding-top:0}
+  .compare,.mechanic-grid,.proof-grid{grid-template-columns:1fr}.pipe-stage{grid-template-columns:48px 1fr;gap:14px;padding-bottom:38px}.schematic::before{left:23px}.node{width:47px;height:47px}.stage-meta{padding-top:2px}.stage-body{grid-column:2}
+  .formula-board{grid-template-columns:1fr}.physics-note,.truth-banner{grid-template-columns:1fr;gap:9px}.source-scroll{overflow-x:auto}.source-table{min-width:700px}
+  .limits{grid-template-columns:1fr}.limit,.limit:nth-child(3n),.limit:nth-child(2n){border-right:0;border-bottom:1px solid var(--rule)}.limit:nth-last-child(-n+2){border-bottom:1px solid var(--rule)}.limit:last-child{border-bottom:0}
+  .road{grid-template-columns:42px 1fr;gap:14px}.road-phase{grid-column:2}.road-body{grid-column:2}.cta-box{grid-template-columns:1fr}.cta .button{width:100%}
+}
+@media (max-width:480px){
+  h1{font-size:44px}.ledger .wrap{grid-template-columns:1fr}.stat,.stat:nth-child(2){border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}.stat:last-child{border-bottom:0}
+  .plain-flow{grid-template-columns:1fr}.plain-step,.plain-step:last-child{grid-column:auto;min-height:auto}.plain-step{padding-bottom:26px;border-right:0}
+  .hero-actions .button{width:100%}.recommendation .pick{align-items:flex-start;flex-direction:column}.cta-box{padding:26px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.trace-card::after,.route-step{animation:none}.progress{transition:none}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="./"><strong>Comp Forge</strong><span>engine manual</span></a>
+    <nav class="topnav" aria-label="On this page">
+      <a href="#engine">Engine</a>
+      <a href="#proof">Proof</a>
+      <a href="#roadmap">Roadmap</a>
+      <a class="planner-link" href="./">Open the planner <span aria-hidden="true">→</span></a>
+    </nav>
+  </div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">Project snapshot · dataset 2026.08.1</div>
+        <h1>A recommendation you can trace back to a spell.</h1>
+        <p class="hero-lede"><strong>Comp Forge does not fill a role checklist.</strong> It measures what every weapon can actually do, compares the whole party with what a specific fight needs, and recommends the next weapon that closes the most valuable gaps.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#simple">See the simple version <span aria-hidden="true">↓</span></a>
+          <a class="button" href="#engine">Open the full trace</a>
+        </div>
+        <div class="trust-note"><b>Honest status:</b> every weapon is curated and mechanically evidence-checked, but recommendation quality is still awaiting the independent expert blind test. Treat picks as explainable hypotheses, not settled meta truth.</div>
+      </div>
+
+      <div class="trace-card" aria-label="A worked recommendation trace">
+        <div class="route-step">
+          <div class="trace-label">Party entered</div>
+          <div class="party-chips"><span>Longbow</span><span>Witchwork</span><span>Permafrost</span></div>
+        </div>
+        <div class="route-step">
+          <div class="trace-label">Largest gaps · Castle Outpost · 7 players</div>
+          <div class="gap-row"><span>Healing sustain</span><b>0 / 3.0</b></div>
+          <div class="gap-row"><span>Tankiness</span><b>0 / 4.0</b></div>
+          <div class="gap-row"><span>Engage</span><b>0 / 2.0</b></div>
+        </div>
+        <div class="route-step">
+          <div class="trace-label">Best marginal improvement</div>
+          <div class="recommendation">
+            <div class="pick"><strong>Hallowfall</strong><span class="score">score 20.24</span></div>
+            <p>Supplies 2 healing-sustain units, 3 burst-heal units and 3 mobility units where this party is weakest.</p>
+          </div>
+        </div>
+        <div class="route-step trace-proof"><span class="proof-dot"></span><span>Each nonzero capability links to an equippable spell</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ledger" aria-label="Project totals">
+    <div class="wrap">
+      <div class="stat"><strong>137 / 137</strong><span>combat weapons curated</span></div>
+      <div class="stat"><strong>29</strong><span>capabilities in the vocabulary</span></div>
+      <div class="stat"><strong>5 × 5</strong><span>content templates × playstyles</span></div>
+      <div class="stat"><strong>0</strong><span>backend calls needed to score a party</span></div>
+    </div>
+  </div>
+
+  <section class="section" id="simple">
+    <div class="wrap">
+      <header class="section-head">
+        <div class="section-kicker">The 20-second version</div>
+        <div><h2>Five moves from roster to recommendation.</h2><p class="section-intro">The engine asks “what can this party do, what does this fight reward, and which next weapon improves the answer most?”</p></div>
+      </header>
+
+      <div class="plain-flow">
+        <article class="plain-step"><span class="n">01</span><h3>Choose the fight</h3><p>Content, party size and playstyle set the needs and their importance.</p></article>
+        <article class="plain-step"><span class="n">02</span><h3>Add the party</h3><p>Every weapon contributes evidence-backed capability units.</p></article>
+        <article class="plain-step"><span class="n">03</span><h3>Find the gaps</h3><p>The party’s total supply is compared with adaptive targets and critical floors.</p></article>
+        <article class="plain-step"><span class="n">04</span><h3>Try every weapon</h3><p>The engine temporarily adds each candidate and measures the improvement.</p></article>
+        <article class="plain-step"><span class="n">05</span><h3>Show the winner</h3><p>The best marginal gain is returned with alternatives and the exact reasons.</p></article>
+      </div>
+
+      <div class="compare">
+        <article class="compare-card">
+          <div class="mini-label">A role checklist asks</div>
+          <h3>“Do we have a healer?”</h3>
+          <p>That hides hybrids, assumes every healer is interchangeable, and cannot explain why one fits this party better than another.</p>
+        </article>
+        <article class="compare-card capability">
+          <div class="mini-label">The capability model asks</div>
+          <h3>“How much sustain, burst recovery and safety do we have?”</h3>
+          <p>A role emerges from the weapon’s actual functions. The engine can see partial coverage, overlap and multi-purpose picks.</p>
+          <div class="vector"><span>heal_sustain <b>2</b></span><span>heal_burst <b>3</b></span><span>mobility <b>3</b></span><span>cleanse <b>0</b></span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section surface" id="engine">
+    <div class="wrap">
+      <header class="section-head">
+        <div class="section-kicker">Inside the engine</div>
+        <div><h2>One evidence chain, six deliberate layers.</h2><p class="section-intro">Game facts and human judgment stay separate. That makes balance patches repairable and every recommendation inspectable.</p></div>
+      </header>
+
+      <div class="schematic">
+        <article class="pipe-stage hot">
+          <div class="node">01</div>
+          <div class="stage-meta"><div class="kind">Raw facts</div><h3>Game files</h3></div>
+          <div class="stage-body"><p>A community mirror of Albion’s client data supplies the weapon catalog, localized spell text, structured effects and target direction. The official render service supplies item art.</p><div class="stage-sample">Hallowfall E · <span class="hi">DIVINE_JUMP</span><br>effects → dash · heal · knockback<br>direction → self · ally · enemy</div><div class="stage-foot"><span class="tag verified">machine parsed</span><span class="tag">patch-diffable</span></div></div>
+        </article>
+        <article class="pipe-stage hot">
+          <div class="node">02</div>
+          <div class="stage-meta"><div class="kind">Translation</div><h3>Effect map</h3></div>
+          <div class="stage-body"><p>Sixty-four low-level effects such as <span class="mono">stun</span>, <span class="mono">dash</span> and <span class="mono">remove:buff</span> map into party-level meaning. Direction matters: moving yourself is mobility; moving an enemy is displacement.</p><div class="stage-sample">effect + direction → candidate capabilities<br><span class="hi">dash + self</span> → mobility · engage · disengage<br><span class="hi">immunity + ally</span> → peel</div><div class="stage-foot"><span class="tag verified">many-to-many</span><span class="tag">parser overrides documented</span></div></div>
+        </article>
+        <article class="pipe-stage hot">
+          <div class="node">03</div>
+          <div class="stage-meta"><div class="kind">Curated judgment</div><h3>Capability sheets</h3></div>
+          <div class="stage-body"><p>A curator scores each weapon from 0–3 across the 29-capability vocabulary. Every nonzero number must cite the exact spell that provides it; a parser suggestion is never treated as truth by itself.</p><div class="stage-sample">Hallowfall<br><span class="hi">heal_sustain: 2</span> ← HEALINGBEAM<br><span class="hi">heal_burst: 3</span> ← DIVINE_JUMP<br><span class="hi">mobility: 3</span> ← DIVINE_JUMP</div><div class="stage-foot"><span class="tag scoring">drives scoring</span><span class="tag verified">evidence lint passed</span></div></div>
+        </article>
+        <article class="pipe-stage">
+          <div class="node">04</div>
+          <div class="stage-meta"><div class="kind">Fight context</div><h3>Needs template</h3></div>
+          <div class="stage-body"><p>The chosen content supplies targets, weights, hard floors and soft caps. Party size scales the targets from 2–60; playstyle reweights what matters without changing the underlying weapon.</p><div class="stage-sample">Castle Outpost · size 7 · balanced<br>heal_sustain → target <span class="hi">3.0</span> · weight <span class="hi">10</span><br>tankiness → target <span class="hi">4.0</span> · weight <span class="hi">9</span></div><div class="stage-foot"><span class="tag scoring">drives scoring</span><span class="tag">5 templates · 5 styles</span></div></div>
+        </article>
+        <article class="pipe-stage">
+          <div class="node">05</div>
+          <div class="stage-meta"><div class="kind">Calculation</div><h3>Marginal gain</h3></div>
+          <div class="stage-body"><p>The engine sums the party’s capability supply, values the first useful units more than redundant ones, protects critical floors, penalizes overstacking, then tries every candidate weapon.</p><div class="stage-sample">candidate score =<br><span class="hi">0.55 × Δfitness</span> + 0.20 × Δsynergy<br>+ 0.15 × meta guard</div><div class="stage-foot"><span class="tag scoring">deterministic</span><span class="tag verified">Python ↔ browser parity</span></div></div>
+        </article>
+        <article class="pipe-stage hot">
+          <div class="node">06</div>
+          <div class="stage-meta"><div class="kind">Visible result</div><h3>Reason, not oracle</h3></div>
+          <div class="stage-body"><p>The highest-scoring candidate becomes the recommendation. Its explanation is built from the same per-capability deltas that produced the score—plus alternatives, gap bars and clickable spell evidence.</p><div class="stage-sample"><span class="good">Recommend Hallowfall</span><br>+27.53 heal_sustain · 0 → 2<br>+6.00 heal_burst · 0 → 3<br>+3.00 mobility · 0 → 3</div><div class="stage-foot"><span class="tag verified">explainable output</span><span class="tag">shareable in URL</span></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="data">
+    <div class="wrap">
+      <header class="section-head">
+        <div class="section-kicker">Where the data comes from</div>
+        <div><h2>Not every visible number gets a vote.</h2><p class="section-intro">The scoring boundary is intentional. Live-looking usage data remains display-only until it proves that it improves recommendations.</p></div>
+      </header>
+      <div class="source-scroll">
+        <table class="source-table">
+          <thead><tr><th>Source</th><th>What it supplies</th><th>How it is used</th><th>Affects picks?</th></tr></thead>
+          <tbody>
+            <tr><td>Albion client data<br><span class="mono">ao-bin-dumps</span></td><td>Items, spell pools, descriptions, structured effects and target directions.</td><td>Grounds and checks capability evidence; detects changes after patches.</td><td><span class="use guard">Evidence gate</span></td></tr>
+            <tr><td>Curated project YAML</td><td>Weapon capability scores, content needs, style weights, floors, soft caps and synergy rules.</td><td>The authoritative input compiled into the static dataset.</td><td><span class="use yes">Yes</span></td></tr>
+            <tr><td>Albion Wiki mechanics</td><td>Focus Fire / Resilience tables, AoE Escalation curve and the recorded Disarray rules.</td><td>AoE and single-target effectiveness use the first two curves; per-style delivery assumptions remain provisional.</td><td><span class="use yes">Yes · two curves</span></td></tr>
+            <tr><td>Real caller comps</td><td>Two 20-player compositions and one caller’s Q/W/passive loadouts.</td><td>Helped calibrate the 20-player templates and surfaces loadout context in the UI.</td><td><span class="use guard">Calibration</span></td></tr>
+            <tr><td>AlbionBB killboard API</td><td>149 recent battles, 1,252 attributed players, bucketed by fight size.</td><td>Shows “seen on X% of players in fights your size.” Current attribution coverage is 99.4%.</td><td><span class="use no">Display only</span></td></tr>
+            <tr><td>Official render service</td><td>Weapon artwork, fetched once and embedded into the page.</td><td>Visual identification only; the app remains usable offline.</td><td><span class="use no">No</span></td></tr>
+            <tr><td>Expert shotcallers</td><td>Blind next-pick judgments and corrections.</td><td>The pending quality gate. Correct expert disagreements become permanent regression cases.</td><td><span class="use guard">Pending gate</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source-note"><strong>One source of truth:</strong> capability numbers live only in the curated YAML sheets. The Python engine, browser engine, tests and generated page all consume the same compiled dataset.</p>
+    </div>
+  </section>
+
+  <section class="section surface" id="mechanics">
+    <div class="wrap">
+      <header class="section-head">
+        <div class="section-kicker">Mechanics used today</div>
+        <div><h2>Simple rules that model real composition pressure.</h2><p class="section-intro">These controls prevent the engine from blindly stacking the largest raw numbers.</p></div>
+      </header>
+      <div class="mechanic-grid">
+        <article class="mechanic"><div class="symbol">Σ</div><div><h3>Capability supply</h3><p>Every party member adds 0–3 units for each function their kit can provide. Roles are labels for display, not scoring inputs.</p></div></article>
+        <article class="mechanic"><div class="symbol">n↗</div><div><h3>Adaptive targets</h3><p>Healing, frontline and damage needs grow with party size; threshold utilities such as cleanse can stay nearly flat.</p></div></article>
+        <article class="mechanic"><div class="symbol">γ.7</div><div><h3>Diminishing returns</h3><p>A concave utility curve makes the first missing unit worth more than another copy of something already covered.</p></div></article>
+        <article class="mechanic"><div class="symbol">!</div><div><h3>Hard floors</h3><p>Critical failures such as zero healing get an extra penalty. This keeps “broadly useful” weapons from beating a load-bearing need.</p></div></article>
+        <article class="mechanic"><div class="symbol">CAP</div><div><h3>Overstack penalties</h3><p>Supply beyond a template’s soft cap loses value and can reduce fitness, exposing redundant composition choices.</p></div></article>
+        <article class="mechanic"><div class="symbol">A×B</div><div><h3>Capability synergies</h3><p>Pairs such as clump creation + AoE burst or resist shred + single-target burst earn value across any weapons that provide them.</p></div></article>
+        <article class="mechanic"><div class="symbol">STYLE</div><div><h3>Playstyle weights</h3><p>Brawl, clap, kite and brawl-clap change the value of capabilities while the balanced style leaves the content template untouched.</p></div></article>
+        <article class="mechanic"><div class="symbol">δ</div><div><h3>Small meta guard</h3><p>A tiny hand-set prior stops obviously impractical on-paper fits. It is not live win-rate data and is deliberately weaker than capability gain.</p></div></article>
+      </div>
+      <div class="formula-board"><code>fitness = Σ <b>useful coverage</b> − floor gaps − overstack<br>pick score = .55<b>Δfitness</b> + .20Δsynergy + .15meta guard</code><p>Plain English: try a weapon, measure how much healthier the whole composition becomes, then rank the change.</p></div>
+      <div class="physics-note"><strong>Combat physics · wired</strong><p>Albion’s Focus Fire / Resilience and AoE Escalation tables now adjust effective single-target and AoE supply by playstyle. The curves are normalized to balanced, and Python/browser parity plus three golden checks pin their direction. The per-style “targets hit” assumptions are still provisional; Disarray is recorded but deliberately does not alter mirror-fight composition scoring.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="proof">
+    <div class="wrap">
+      <header class="section-head">
+        <div class="section-kicker">How the flow is verified</div>
+        <div><h2>Four different questions need four different proofs.</h2><p class="section-intro">“The code agrees with itself” is useful, but it is not the same as “the recommendations are good.” The project tracks both.</p></div>
+      </header>
+      <div class="proof-grid">
+        <article class="proof-card"><div class="status">Passed · data integrity</div><div class="measure">137/137</div><h3>Evidence lint</h3><p>Every nonzero score cites a spell the weapon can equip. The lint also checks that the effect can support the claim and that self, ally and enemy direction is correct.</p></article>
+        <article class="proof-card"><div class="status">Passed · intended behavior</div><div class="measure">18/18</div><h3>Golden cases</h3><p>Permanent scenarios assert basics such as “a damage-only party needs healing,” then pin style and combat-mechanics directions as the model grows.</p></article>
+        <article class="proof-card"><div class="status">Passed · implementation parity</div><div class="measure">60/60</div><h3>Python equals browser</h3><p>Random parties across every template and style match to 1e-9. A build-time fixture also checks the browser against Python on every page load.</p></article>
+        <article class="proof-card pending"><div class="status">Pending · recommendation quality</div><div class="measure">≥70%</div><h3>Expert blind test</h3><p>Three or more experienced shotcallers independently choose the next pick. The gate is their choice appearing in the engine’s top three at least 70% of the time.</p></article>
+      </div>
+      <div class="truth-banner"><strong>Current accuracy evidence</strong><p>A first weak-form leave-one-out baseline reached <b>69% role-level agreement</b>, but it used two comps that also helped calibrate the templates. That makes it a useful diagnostic, not independent validation. The page therefore says <b>pre-validation</b>.</p></div>
+    </div>
+  </section>
+
+  <section class="section surface" id="limits">
+    <div class="wrap">
+      <header class="section-head">
+        <div class="section-kicker">The honest boundary</div>
+        <div><h2>What the engine does not know yet.</h2><p class="section-intro">These are product limits, not hidden assumptions. Several become the roadmap below.</p></div>
+      </header>
+      <div class="limits">
+        <article class="limit"><span class="x">×</span><h3>No armor or consumables in scoring</h3><p>Helmets, chest pieces, shoes, capes, food and potions are not capability sheets yet.</p></article>
+        <article class="limit"><span class="x">×</span><h3>No observed active spells</h3><p>Killboards expose gear but not the chosen Q/W abilities, so optional kit capabilities remain conditional.</p></article>
+        <article class="limit"><span class="x">×</span><h3>No player skill, IP or cost</h3><p>A mechanically good pick may still be hard to pilot, expensive or wrong for a specific player.</p></article>
+        <article class="limit"><span class="x">×</span><h3>No enemy-comp input</h3><p>The templates model the expected field. Purge and anti-dive cannot yet respond to the exact opposing roster.</p></article>
+        <article class="limit"><span class="x">×</span><h3>No learned win-rate signal</h3><p>Killboard frequency is shown for context but cannot influence recommendations before the statistical gates pass.</p></article>
+        <article class="limit"><span class="x">×</span><h3>No independent accuracy claim</h3><p>Mechanical evidence is complete; the expert blind test remains the real recommendation-quality gate.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="roadmap">
+    <div class="wrap">
+      <header class="section-head">
+        <div class="section-kicker">Roadmap</div>
+        <div><h2>Improve trust first, then add intelligence.</h2><p class="section-intro">The order matters: validate the recommendations before adding more knobs or learning from noisier data.</p></div>
+      </header>
+      <div class="roadmap">
+        <article class="road now"><div class="road-mark">1</div><div class="road-phase">Now · quality gate</div><div class="road-body"><h3>Independent shotcaller blind test</h3><p>Send the same hidden-output scenarios to 3+ experienced callers. Score top-three agreement and turn every correct expert disagreement into a permanent regression test.</p><span class="deliverable">EXIT GATE · ≥70% top-three agreement</span></div></article>
+        <article class="road"><div class="road-mark">2</div><div class="road-phase">Next · calibration</div><div class="road-body"><h3>Expert correction and saturation pass</h3><p>Review all proposed capability scores, provisional content templates and style multipliers. Address the observed support undervaluation and breadth-over-depth behavior at full-party saturation.</p><span class="deliverable">DELIVERABLE · expert-reviewed dataset and templates</span></div></article>
+        <article class="road"><div class="road-mark">3</div><div class="road-phase">Combat physics</div><div class="road-body"><h3>Refine the mechanics layer</h3><p>Get expert sign-off on the wired style assumptions, then add per-weapon Resilience Penetration, CC escalation and per-spell escalation eligibility where the game data supports them—without double-counting existing utility curves.</p><span class="deliverable">DELIVERABLE · higher-fidelity scale mechanics</span></div></article>
+        <article class="road"><div class="road-mark">4</div><div class="road-phase">Build fidelity</div><div class="road-body"><h3>Add equipment and kit variants</h3><p>Give armor, boots, capes and consumables the same evidence-cited treatment. Represent weapon × kit archetypes so optional Q/W choices no longer look guaranteed.</p><span class="deliverable">DELIVERABLE · full-build capability model</span></div></article>
+        <article class="road"><div class="road-mark">5</div><div class="road-phase">Learning layer</div><div class="road-body"><h3>Promote battle data carefully</h3><p>Validate content labeling, compute win lift with minimum sample sizes and Bayesian shrinkage, and let statistics propose—never silently apply—template or meta-prior changes.</p><span class="deliverable">DELIVERABLE · human-approved, data-informed updates</span></div></article>
+        <article class="road"><div class="road-mark">6</div><div class="road-phase">Product depth</div><div class="road-body"><h3>Model the actual matchup</h3><p>Add expected enemy composition, player comfort, cost and difficulty filters; improve multi-slot lookahead so the forge plans a coherent remaining roster instead of only the best immediate pick.</p><span class="deliverable">DELIVERABLE · recommendations shaped to the real team</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <div class="cta-box"><div><h2>Now try the trace with your own party.</h2><p>Choose the fight, add the weapons you already have, and click any capability to inspect its evidence.</p></div><a class="button primary" href="./">Open Comp Forge <span aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>Comp Forge · Albion composition engine · unofficial and not affiliated with Sandbox Interactive</span><span class="mono">snapshot · 2026-08-13</span></div></footer>
+
+<script>
+(() => {
+  const bar = document.getElementById("progress");
+  const nav = [...document.querySelectorAll('.topnav a[href^="#"]')];
+  const sections = nav.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+  const update = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.width = `${max > 0 ? Math.min(100, scrollY / max * 100) : 0}%`;
+    let current = null;
+    for (const section of sections) if (section.getBoundingClientRect().top <= 130) current = section;
+    nav.forEach(a => {
+      if (current && a.getAttribute("href") === `#${current.id}`) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+  };
+  addEventListener("scroll", update, {passive:true});
+  addEventListener("resize", update);
+  update();
+})();
+</script>
+</body>
+</html>
