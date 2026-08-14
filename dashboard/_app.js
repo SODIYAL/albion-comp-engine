@@ -533,6 +533,74 @@ function renderMetaStrip(){
       <span class="pct">${(100 * n / m.players_attributed).toFixed(1)}%</span></div>`).join("");
   sec.hidden = false;
 }
+/* ------------------------------------------------ live party (companion)
+   Polls the local companion app (companion/) for the real in-game party and
+   maps each member's weapon (an engine unique_name) into the comp. The
+   companion serves loopback-only, and browsers exempt http://localhost from
+   mixed-content blocking, so the HTTPS page can read it directly. */
+const COMPANION_URL = "http://localhost:53321";
+let companionOn = false, companionTimer = null, companionData = null;
+
+async function companionPoll(){
+  try {
+    const r = await fetch(COMPANION_URL + "/party", {cache: "no-store"});
+    if (!r.ok) throw new Error("http " + r.status);
+    companionData = await r.json();
+    renderCompanion(true);
+  } catch (e) {
+    companionData = null;
+    renderCompanion(false, e.message);
+  }
+}
+function companionRoleClass(w){
+  const rh = (WEAPONS[w] && WEAPONS[w].role_hint) || "";
+  return rh ? `role-${rh}` : "";
+}
+function renderCompanion(live){
+  const box = $("companion"), status = $("companion-status");
+  const members = $("companion-members"), load = $("companion-load"), connect = $("companion-connect");
+  box.dataset.live = live ? "true" : "false";
+  if (!companionOn){
+    status.hidden = true; members.innerHTML = ""; load.hidden = true;
+    connect.textContent = "connect live party";
+    return;
+  }
+  connect.textContent = "disconnect";
+  status.hidden = false;
+  if (!live){
+    status.innerHTML = `<span class="comp-dot"></span>companion not found
+      <span class="sub">start <code>companion/run-companion.bat</code> as admin — retrying…</span>`;
+    members.innerHTML = ""; load.hidden = true;
+    return;
+  }
+  const mem = companionData.members || [];
+  const known = mem.filter(m => m.weapon && WEAPONS[m.weapon]);
+  status.innerHTML = `<span class="comp-dot"></span>connected — ${mem.length} in party${companionData.self ? ` · you: ${esc(companionData.self)}` : ""}
+    <span class="sub">${known.length} with a known weapon${mem.length > known.length ? `; ${mem.length - known.length} out of zone / unmapped` : ""}</span>`;
+  members.innerHTML = mem.map(m => {
+    const k = m.weapon && WEAPONS[m.weapon];
+    const wpn = k ? nameOf(m.weapon) : (m.weapon ? esc(m.weapon) : "— out of zone —");
+    return `<div class="comp-m ${k ? companionRoleClass(m.weapon) : ""}"><span class="cm-role"></span>
+      <span class="cm-name">${esc(m.name)}</span>
+      <span class="cm-wpn ${k ? "" : "unknown"}">${wpn}</span></div>`;
+  }).join("");
+  load.hidden = false; load.disabled = known.length === 0;
+}
+function loadCompanionParty(){
+  if (!companionData) return;
+  const weapons = (companionData.members || []).map(m => m.weapon).filter(w => w && WEAPONS[w]);
+  if (!weapons.length) return;
+  party = weapons.slice(0, HARD_CAP);
+  PLANNED = Math.max(PLANNED, party.length);
+  PARTY_FACET = null;
+  render();
+}
+function toggleCompanion(){
+  companionOn = !companionOn;
+  if (companionOn){ companionPoll(); companionTimer = setInterval(companionPoll, 5000); }
+  else { clearInterval(companionTimer); companionTimer = null; companionData = null; renderCompanion(false); }
+}
+
 function render(){
   syncEngine(); saveHash();
   const recs = party.length < HARD_CAP ? recommend(party, 4) : null;
@@ -604,6 +672,8 @@ document.addEventListener("click", e => {
   }
   const rm = e.target.closest("[data-remove]");
   if (rm){ party.splice(+rm.dataset.remove, 1); render(); return; }
+  if (e.target.closest("#companion-connect")){ toggleCompanion(); return; }
+  if (e.target.closest("#companion-load")){ loadCompanionParty(); return; }
   if (e.target.closest("#clear")){
     /* two-step: first click arms, second within 2.2s clears — a misclick
        must never wipe a 20-slot comp */

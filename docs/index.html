@@ -462,6 +462,37 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .warn .b{font-size:13.5px; line-height:1.5}
 .warn .b code{font-family:var(--mono); font-size:12px}
 
+/* ---------- live party (companion) ---------- */
+.companion{margin-top:14px; border-top:1px solid var(--rule); padding-top:14px}
+.comp-dot{
+  display:inline-block; width:7px; height:7px; border-radius:50%;
+  background:var(--ink-3); margin-right:7px; vertical-align:1px;
+}
+.companion[data-live="true"] .comp-dot{background:var(--ok)}
+.companion .status{font-family:var(--mono); font-size:11px; color:var(--ink-2); margin:7px 0}
+.companion .status .sub{color:var(--ink-3); display:block; margin-top:2px; line-height:1.5}
+.comp-members{display:flex; flex-direction:column; gap:3px; margin:8px 0}
+.comp-m{
+  display:flex; align-items:center; gap:8px; font-size:12px;
+  padding:4px 7px; background:var(--surface); border:1px solid var(--rule); border-radius:3px;
+}
+.comp-m .cm-role{width:6px; height:6px; border-radius:50%; background:var(--rule-2); flex:none}
+.comp-m.role-tank .cm-role{background:#6A8FC9} .comp-m.role-healer .cm-role{background:var(--ok)}
+.comp-m.role-melee .cm-role{background:#BA5C72} .comp-m.role-range .cm-role{background:#C97B4A}
+.comp-m.role-support .cm-role{background:var(--over)}
+.comp-m .cm-name{flex:none; color:var(--ink-2)}
+.comp-m .cm-wpn{flex:1; color:var(--ink); min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.comp-m .cm-wpn.unknown{color:var(--ink-3); font-style:italic}
+.companion .load-btn{
+  width:100%; padding:9px; margin-top:6px; background:var(--brass); color:var(--surface);
+  border:0; border-radius:3px; font-family:var(--mono); font-size:11.5px;
+  letter-spacing:.06em; text-transform:uppercase; font-weight:600;
+}
+:root[data-theme="dark"] .companion .load-btn,
+html:not([data-theme="light"]) .companion .load-btn{color:#0D1218}
+.companion .load-btn:hover{background:var(--brass-bright)}
+.companion .load-btn:disabled{opacity:.4; cursor:not-allowed}
+
 /* ---------- evidence drawer ---------- */
 .drawer{
   position:fixed; inset:auto 0 0 0; background:var(--surface);
@@ -546,6 +577,12 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
       </div>
       <div class="btn-row">
         <button class="share-btn clear-btn" id="clear">clear comp</button>
+      </div>
+      <div class="companion" id="companion" data-live="false">
+        <button class="share-btn" id="companion-connect">connect live party</button>
+        <div class="status" id="companion-status" hidden></div>
+        <div class="comp-members" id="companion-members"></div>
+        <button class="load-btn" id="companion-load" hidden>load party into comp</button>
       </div>
     </section>
 
@@ -1389,6 +1426,74 @@ function renderMetaStrip(){
       <span class="pct">${(100 * n / m.players_attributed).toFixed(1)}%</span></div>`).join("");
   sec.hidden = false;
 }
+/* ------------------------------------------------ live party (companion)
+   Polls the local companion app (companion/) for the real in-game party and
+   maps each member's weapon (an engine unique_name) into the comp. The
+   companion serves loopback-only, and browsers exempt http://localhost from
+   mixed-content blocking, so the HTTPS page can read it directly. */
+const COMPANION_URL = "http://localhost:53321";
+let companionOn = false, companionTimer = null, companionData = null;
+
+async function companionPoll(){
+  try {
+    const r = await fetch(COMPANION_URL + "/party", {cache: "no-store"});
+    if (!r.ok) throw new Error("http " + r.status);
+    companionData = await r.json();
+    renderCompanion(true);
+  } catch (e) {
+    companionData = null;
+    renderCompanion(false, e.message);
+  }
+}
+function companionRoleClass(w){
+  const rh = (WEAPONS[w] && WEAPONS[w].role_hint) || "";
+  return rh ? `role-${rh}` : "";
+}
+function renderCompanion(live){
+  const box = $("companion"), status = $("companion-status");
+  const members = $("companion-members"), load = $("companion-load"), connect = $("companion-connect");
+  box.dataset.live = live ? "true" : "false";
+  if (!companionOn){
+    status.hidden = true; members.innerHTML = ""; load.hidden = true;
+    connect.textContent = "connect live party";
+    return;
+  }
+  connect.textContent = "disconnect";
+  status.hidden = false;
+  if (!live){
+    status.innerHTML = `<span class="comp-dot"></span>companion not found
+      <span class="sub">start <code>companion/run-companion.bat</code> as admin — retrying…</span>`;
+    members.innerHTML = ""; load.hidden = true;
+    return;
+  }
+  const mem = companionData.members || [];
+  const known = mem.filter(m => m.weapon && WEAPONS[m.weapon]);
+  status.innerHTML = `<span class="comp-dot"></span>connected — ${mem.length} in party${companionData.self ? ` · you: ${esc(companionData.self)}` : ""}
+    <span class="sub">${known.length} with a known weapon${mem.length > known.length ? `; ${mem.length - known.length} out of zone / unmapped` : ""}</span>`;
+  members.innerHTML = mem.map(m => {
+    const k = m.weapon && WEAPONS[m.weapon];
+    const wpn = k ? nameOf(m.weapon) : (m.weapon ? esc(m.weapon) : "— out of zone —");
+    return `<div class="comp-m ${k ? companionRoleClass(m.weapon) : ""}"><span class="cm-role"></span>
+      <span class="cm-name">${esc(m.name)}</span>
+      <span class="cm-wpn ${k ? "" : "unknown"}">${wpn}</span></div>`;
+  }).join("");
+  load.hidden = false; load.disabled = known.length === 0;
+}
+function loadCompanionParty(){
+  if (!companionData) return;
+  const weapons = (companionData.members || []).map(m => m.weapon).filter(w => w && WEAPONS[w]);
+  if (!weapons.length) return;
+  party = weapons.slice(0, HARD_CAP);
+  PLANNED = Math.max(PLANNED, party.length);
+  PARTY_FACET = null;
+  render();
+}
+function toggleCompanion(){
+  companionOn = !companionOn;
+  if (companionOn){ companionPoll(); companionTimer = setInterval(companionPoll, 5000); }
+  else { clearInterval(companionTimer); companionTimer = null; companionData = null; renderCompanion(false); }
+}
+
 function render(){
   syncEngine(); saveHash();
   const recs = party.length < HARD_CAP ? recommend(party, 4) : null;
@@ -1460,6 +1565,8 @@ document.addEventListener("click", e => {
   }
   const rm = e.target.closest("[data-remove]");
   if (rm){ party.splice(+rm.dataset.remove, 1); render(); return; }
+  if (e.target.closest("#companion-connect")){ toggleCompanion(); return; }
+  if (e.target.closest("#companion-load")){ loadCompanionParty(); return; }
   if (e.target.closest("#clear")){
     /* two-step: first click arms, second within 2.2s clears — a misclick
        must never wipe a 20-slot comp */
