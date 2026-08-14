@@ -372,6 +372,37 @@ targets/weights in the 20-size templates are also suspect (expert: how many
 dedicated ST units does a real 20-man want? plausibly ~0 — ST arrives
 incidentally on utility kits).
 
+## Overnight session (2026-08-14) — done + upgrade menu
+
+SHIPPED overnight (committed, tested where possible without a live game):
+- **Shape-based auto-calibration** (`4e1e779`): the companion dispatches events
+  by parameter SHAPE, not hardcoded code numbers, so a patch that renumbers
+  events self-heals. `/status` shows the detected role→code bindings.
+- **Connect-companion button** (`afa0f62`): Comp Forge rail control that polls
+  the companion and loads the live party into a comp. Verified vs a mock.
+
+BLOCKED on one live run (needs the game + you): confirm spells resolve,
+auto-calibration binds, and the connect button pulls the live party. See
+`companion/README.md` "Status — pick up here".
+
+Upgrade menu, roughly highest-value first — pick when you resume:
+1. **The one live verification run** (finishes the whole companion arc).
+2. **Q17 usage-derived MetaPrior** — kills the Dagger Pair over-ranking using
+   the 149-battle data already in hand; has a clean V4 on/off A/B. Biggest
+   engine-quality win that needs no new data.
+3. **Spell picks into scoring** — now that the companion resolves each player's
+   real Q/W/E to sheet evidence IDs, feed them into the (QW)-conditional layer
+   so a comp is scored on actual loadouts, not line defaults.
+4. **Magnitude audit queue** (below) — 16 RULE groups need your adjudication;
+   each is a quick call that improves data quality.
+5. **Q16 content-level physics** — absolute Resilience/escalation by content so
+   single-target damage is taxed at 20-man even under balanced (flips the
+   Dagger Pair vs Bridled Fury case). Needs a template recalibration.
+6. **Gear sheets** — the biggest remaining build item (design doc §2.4);
+   unblocks archetype composition + the cleanse-if-running-X conditional UI.
+7. **Companion polish** — show spell names in the connect box / weapon drawer;
+   version-check cache refresh instead of the 7-day timer; item-power display.
+
 ## Magnitude audit — dataset-wide (opened 2026-08-13)
 
 Standing rule: every capability score encodes MAGNITUDE, not existence.

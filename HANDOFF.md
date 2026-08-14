@@ -57,32 +57,36 @@ py -3 pipeline/sample_battles.py       # optional: refresh usage field reports
 `build_dashboard.py` writes `docs/index.html` (the doctype'd copy of the
 dashboard) on every build, so pushing `main` updates the live site.
 
-## RESUME HERE — Party Companion (in progress, 2026-08-14)
+## RESUME HERE — Party Companion (2026-08-14, one live run from done)
 
-`companion/` is a new C# console app that reads your live Albion party (roster,
-weapons, gear, spells) and serves it as JSON on `localhost:53321` for Comp
-Forge to forge around. **Its README has a "Status — pick up here" block with
-the exact resume steps** — read `companion/README.md` first. Design + event
-map + legality: `COMPANION_SCOPE.md`.
+`companion/` is a C# console app that reads your live Albion party (roster,
+weapons, gear, spells) and serves it as JSON on `localhost:53321`; Comp Forge's
+new "connect live party" button pulls it into a comp. **Read
+`companion/README.md`'s "Status — pick up here" block first** — it has the exact
+one-live-run checklist. Design + event map + legality: `COMPANION_SCOPE.md`.
 
-- **WORKING, live-verified**: party roster + per-member weapon (engine
-  `unique_name`) + full equipment. Requires running the exe **as Administrator**
-  (`run-companion.bat` rebuilds + self-elevates). Needs .NET 8 SDK (installed).
-- **BUILT, needs one live test**: spell-name resolution (`SpellDb.cs`) — spells
-  resolve to sheet-matching UniqueNames (HOLYFLASH, CELESTIAL_SPHERE). Verify
-  `/party` shows spell names in-game, then it feeds the (QW)-conditional layer.
-- **NOT STARTED — the last piece**: a Comp Forge "connect companion" button
-  that polls `http://localhost:53321/party`, maps each member's `weapon` onto a
-  slot, and forges around the real party. Data it needs already works.
-- **Key facts** (all in COMPANION_SCOPE.md / companion/README.md): current
-  Albion uses Photon **Protocol18** (the stock NuGet parser is Protocol16 and
-  decodes nothing) — the working parser is vendored under `companion/photon/`
-  (GPL-3.0; makes the companion binary GPL, Comp Forge unaffected). Event codes
-  and spell indices **shift per game patch**; the `/schema` endpoint re-discovers
-  event codes, and deleting the cached `spells.xml`/`items.txt` re-pulls indices.
-- **Uncommitted right now**: the spell-resolution slice (SpellDb + wiring) is
-  committed as of this handoff; the earlier companion core is commit
-  `6a75dc3`. Working tree should be clean — check `git status`.
+Everything is BUILT and committed (tree clean — check `git status`). The whole
+thing needs **one live in-game run** to confirm three things at once:
+
+1. **Spells resolve** to sheet-matching UniqueNames in `/party` (`SpellDb.cs`).
+2. **Auto-calibration binds** — `/status` `detected_codes` shows e.g.
+   `NewCharacter:29`. Events now dispatch by parameter SHAPE, not hardcoded
+   numbers, so a patch that renumbers events self-heals.
+3. **Connect button works end-to-end** — in Comp Forge's left rail; polls
+   `/party`, lists the party, "load party into comp" fills slots. Verified
+   against a mock; needs the live companion to confirm.
+
+- Run the exe **as Administrator** (`run-companion.bat` rebuilds + self-elevates).
+  Needs .NET 8 SDK (installed).
+- **Key facts** (COMPANION_SCOPE.md / companion/README.md): current Albion uses
+  Photon **Protocol18** (stock NuGet parser is Protocol16, decodes nothing) —
+  working parser vendored under `companion/photon/` (GPL-3.0; companion binary
+  is GPL, Comp Forge unaffected). Item/spell indices shift per patch (delete the
+  cache to re-pull); event codes now self-heal via shape detection.
+- Commits this session: `907ee88` mechanics+corrections · `953244b` UI ·
+  `6a75dc3` companion core · `a50e620` spell resolution · `4e1e779` shape
+  auto-calibration · `afa0f62` connect button. None pushed (public site
+  untouched).
 
 ## Current state (verified 2026-08-13)
 

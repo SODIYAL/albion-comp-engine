@@ -10,31 +10,41 @@ same data the party UI and the inspect window already render on your screen —
 the tolerated category (like Statistics Analysis Tool), not radar. Full scope,
 event map, and legality reasoning: [../COMPANION_SCOPE.md](../COMPANION_SCOPE.md).
 
-## Status — pick up here (2026-08-14)
+## Status — pick up here (2026-08-14, overnight build)
 
-**WORKING and live-verified against a real 5-person party:** party roster,
-each member's name/guild, weapon (as the engine's `unique_name`), full
-tier+enchant equipment. Members outside your zone correctly show name-only.
+Everything is BUILT and the tree is committed. What remains is **one live
+in-game run to confirm three things at once**, then it's done.
 
-**BUILT, not yet live-verified:** spell-name resolution — `/party` spells now
-resolve to UniqueNames (`HOLYFLASH`, `CELESTIAL_SPHERE`, …) that match the
-engine's sheet evidence IDs. Validated by index math against the last live
-party; needs one in-game run to confirm the resolved names look right.
+**WORKING, live-verified earlier:** party roster, name/guild, weapon (engine
+`unique_name`), full tier+enchant equipment. Out-of-zone members show
+name-only (visibility rule).
 
-**NOT STARTED:** the Comp Forge "connect companion" button — poll `/party`,
-drop each member's weapon into a slot, forge around the real party. This is
-the last piece; the data it needs (weapons) already works perfectly.
+**BUILT overnight, needs the one live run to confirm:**
 
-**To resume: verify spells, then build the button.**
+- **Spell-name resolution** — `/party` spells resolve to UniqueNames
+  (`HOLYFLASH`, `CELESTIAL_SPHERE`) matching the sheet evidence IDs.
+- **Shape-based auto-calibration** — events are now dispatched by their
+  parameter SHAPE, not hardcoded code numbers, so a patch that renumbers
+  events self-heals. `/status` shows `detected_codes` (role → code this
+  session); a rebind logs `[calibrate] … patch shift`.
+- **Comp Forge "connect live party" button** — in the web app's left rail;
+  polls `http://localhost:53321/party`, lists the party with weapons, and
+  "load party into comp" drops them into slots. Verified against a mock;
+  needs the live companion running to confirm end-to-end.
+
+**The one live run to finish it all:**
 
 1. Close any running companion window; double-click `run-companion.bat` → Yes.
-2. First launch downloads `spells.xml` (~9 MB, once) — watch for
-   `[spells] 9216 spell indices loaded` in the console.
-3. In a zone with a party member visible, open `http://localhost:53321/party`
-   and confirm `spells` shows names (not numbers), e.g. Redemption Staff →
-   `q:"HOLYFLASH" w:"HEALINGBEAM" e:"CELESTIAL_SPHERE"`.
-4. If names look wrong, delete `spells.xml` to re-pull, or re-run the
-   `/schema` discovery (below) — spell indices shift per patch.
+2. First launch downloads `items.txt` + `spells.xml` (~10 MB, once).
+3. In a zone with a party member visible, check `http://localhost:53321/status`
+   — `handled_events` climbing, `detected_codes` populated (e.g.
+   `NewCharacter:29`), `party_members` > 0.
+4. `http://localhost:53321/party` — spells show names (not numbers).
+5. Open Comp Forge (the deployed site or a local build), click **connect live
+   party** in the rail, confirm your party lists, then **load party into comp**.
+
+If any of that misbehaves, the troubleshooting below covers it (the `/schema`
+endpoint re-discovers event shapes; delete a cache file to re-pull indices).
 
 Everything below is the full run/troubleshooting reference.
 
