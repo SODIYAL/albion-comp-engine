@@ -34,7 +34,17 @@ def make_cases(data):
     cases = []
     for i in range(N_CASES):
         content = contents[i % len(contents)]
-        size = data["templates"][content]["base_size"]
+        base = data["templates"][content]["base_size"]
+        # Sizes must LEAVE base_size: at base the mechanics growth is the
+        # identity and target scaling is a no-op, so an all-base suite is
+        # blind to the whole size path — a real rounding divergence shipped
+        # behind a green 60/60 that way (review 2026-08-15). The variants
+        # cover shrunk/grown scaling, the exact .5 counts grow() produces
+        # (e.g. size 10/14 with 3-focus styles), and >30 for the large
+        # meta-prior bucket.
+        size_opts = [base, max(2, base // 2), base + base // 2,
+                     2 * base + 1, 10, 14]
+        size = size_opts[(i // len(contents)) % len(size_opts)]
         n = rng.randint(0, min(size, 12))
         cases.append({"content": content, "size": size,
                       "style": styles[i % len(styles)],

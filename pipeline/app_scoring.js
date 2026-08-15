@@ -78,7 +78,10 @@
   CompEngine.prototype._tableClamp = function (table, x) {
     var maxK = 0;
     for (var k in table) { var ki = parseInt(k, 10); if (ki > maxK) maxK = ki; }
-    return Math.max(1, Math.min(Math.round(x), maxK));
+    /* half-UP rounding, explicitly (Math.floor(x+0.5)) — mirrors engine.py
+       _half_up. Python round() is half-to-even; the implicit rules disagreed
+       on the .5 counts grow() produces at ordinary sizes (review 2026-08-15). */
+    return Math.max(1, Math.min(Math.floor(x + 0.5), maxK));
   };
 
   CompEngine.prototype._escalationMult = function (targets) {
@@ -133,7 +136,9 @@
 
   CompEngine.prototype.effectiveSupply = function (party) {
     /* Supply after style-delivery physics (AoE escalation, Resilience).
-       Balanced is the identity. All scoring reads THIS (mirrors engine.py). */
+       Balanced-at-base-size is the identity. ALL scoring — floors included —
+       reads THIS (mirrors engine.py); raw supply() is the sheet-unit
+       reference only. */
     var s = this.supply(party);
     for (var cap in this.mechMults) {
       var m = this.mechMults[cap];

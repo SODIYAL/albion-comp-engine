@@ -82,6 +82,23 @@ while (listener.IsListening)
     if (allowed != null) res.Headers["Access-Control-Allow-Origin"] = allowed;
     res.Headers["Cache-Control"] = "no-store";
 
+    // Chrome's Private Network Access gates public-HTTPS -> localhost
+    // fetches behind an OPTIONS preflight that must be acknowledged —
+    // without this the Pages site can never reach the companion once PNA
+    // enforcement is on, and the page shows "companion not found" forever.
+    if (ctx.Request.HttpMethod == "OPTIONS")
+    {
+        if (allowed != null)
+        {
+            res.Headers["Access-Control-Allow-Methods"] = "GET";
+            res.Headers["Access-Control-Allow-Headers"] = "*";
+            res.Headers["Access-Control-Allow-Private-Network"] = "true";
+        }
+        res.StatusCode = 204;
+        res.Close();
+        continue;
+    }
+
     string body;
     switch (ctx.Request.Url?.AbsolutePath)
     {

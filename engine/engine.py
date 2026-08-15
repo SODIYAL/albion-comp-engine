@@ -90,13 +90,22 @@ class Engine:
                 self._resilience_eff(grow(style_mech.get("focus_attackers")))
                 / self._resilience_eff(base_mech.get("focus_attackers")))
 
+    @staticmethod
+    def _half_up(x):
+        """Round half UP, explicitly. Python's round() is half-to-even and
+        JS Math.round() is half-up, and grow() lands on exact .5 counts at
+        ordinary sizes (e.g. focus 3 grown at scale 2 = 4.5) — the implicit
+        rules silently disagreed between the engines (review, 2026-08-15).
+        int(x + 0.5) pins ONE rule; app_scoring.js mirrors it."""
+        return int(x + 0.5)
+
     def _escalation_mult(self, targets):
         """1 + AoE Escalation bonus for hitting `targets` players (capped at 8)."""
         table = (self.mechanics.get("aoe_escalation") or {}).get(
             "damage_bonus_by_targets") or {}
         if not table or not targets:
             return 1.0
-        t = max(1, min(int(round(targets)), max(int(k) for k in table)))
+        t = max(1, min(self._half_up(targets), max(int(k) for k in table)))
         return 1.0 + table[str(t)]
 
     def _resilience_eff(self, attackers):
@@ -105,7 +114,7 @@ class Engine:
             "damage_reduction_unmounted") or {}
         if not table or not attackers:
             return 1.0
-        n = max(1, min(int(round(attackers)), max(int(k) for k in table)))
+        n = max(1, min(self._half_up(attackers), max(int(k) for k in table)))
         return 1.0 - table[str(n)]
 
     def weight(self, cap):
@@ -137,8 +146,9 @@ class Engine:
 
     def effective_supply(self, party):
         """Supply after style-delivery physics (AoE escalation, Resilience).
-        Balanced is the identity, so raw == effective there. All scoring
-        reads THIS; `supply` stays raw for display and floors semantics."""
+        Balanced-at-base-size is the identity, so raw == effective there.
+        ALL scoring — floors included — reads THIS; `supply` stays raw only
+        as the sheet-unit reference (weapon detail views)."""
         s = self.supply(party)
         for cap, m in self.mech_mults.items():
             if m != 1.0 and cap in s:

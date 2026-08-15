@@ -119,6 +119,41 @@ Still open for the goal: gear-quality advice needs gear sheets (§2.4, the
 known big build item); live-join re-advice works via the companion connect
 button (poll → load party → advisor runs on every render).
 
+### Full code-review pass (same day) — web app + companion
+
+Three reviews ran (scoped diff review + holistic web-app + companion C#);
+every confirmed finding is fixed, gates green after each batch:
+
+- **Cross-engine rounding divergence (HIGH, was live)**: Python `round()` is
+  half-to-even, JS `Math.round` half-up, and the Q16 `grow()` curve lands on
+  exact .5 counts at ordinary sizes (faction_war@10/brawl measured 16% apart
+  on burst_st supply). Both engines now share one explicit half-UP rule
+  (`_half_up` / `Math.floor(x+0.5)`). The parity suite was blind to it
+  because all 60 cases ran at base_size — sizes now cycle through shrunk /
+  grown / .5-tie / >30 variants per case.
+- Swap advisor: party-wide gaps no longer nag every member (per-role dedupe,
+  cheapest converter keeps the hint); empty-pool JS/Python divergence fixed
+  (`_pool()`); score formula deduped into `pick_score`/`pickScore`; sweep
+  memoized in the dashboard.
+- Dashboard robustness: share-hash roster capped at HARD_CAP; junk hashes
+  fall back to seed; empty-party links clear the roster; `loadStored` uses
+  replaceState (no history pollution / double render); facet dead-end
+  auto-clears; stale usage keys filtered at build AND render (a rename
+  previously killed every render); keyboard activation for the picker's "i"
+  span; groups/weakness "have" numbers now show EFFECTIVE supply (they mixed
+  raw numbers with effective gap scores); parity fixture compares at 1e-9
+  instead of 2dp rounding; a handful of esc() gaps closed.
+- Companion (compile-verified, dotnet 0 warnings): per-request try/catch —
+  one aborted poll used to kill the process; Photon fragment reassembly TTL
+  sweep + 4MB totalLength cap (leak + hostile allocation); parser calls
+  serialized across capture threads; CORS wildcard → allowlist per
+  COMPANION_SCOPE + OPTIONS/Private-Network-Access preflight; CRC branch
+  read header bytes as the CRC (latent, fixed per upstream semantics);
+  objectId map bounded (4096); roster/self-join shape guards require
+  plausible character names (3-16 alphanumeric). Cross-zone objectId reuse
+  stays a KNOWN LIMITATION (companion/README.md) — needs a live zone-change
+  event identified before it can be fixed properly.
+
 ## Current state (verified 2026-08-13)
 
 **One source of truth.** Capability numbers live only in `pipeline/sheets/*.yaml`;

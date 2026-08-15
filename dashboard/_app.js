@@ -30,7 +30,12 @@ const validatedSizes = () => tpl().validated_sizes || [baseSize()];
 
 const target = cap => ENG.target(cap);
 const softCap = cap => ENG.softCap(cap);
-const supply = p => ENG.supply(p);
+/* EFFECTIVE supply (after the mechanics multipliers) — the numbers scoring
+   actually uses. Displaying raw sheet units next to effective-supply gap
+   scores let a bar read "met" while the weakness list still charged a gap
+   for the same capability (review 2026-08-15). Raw sheet numbers stay
+   visible per-weapon in the detail drawer. */
+const supply = p => ENG.effectiveSupply(p);
 const fitness = p => ENG.fitness(p);
 const maxFitness = () => ENG.maxFitness();
 const uncoveredCaps = p => ENG.uncoveredCaps(p);
@@ -163,10 +168,17 @@ function loadHash(){
   const p = {};
   h.split("&").forEach(kv => { const i = kv.indexOf("=");
     if (i > 0) p[kv.slice(0, i)] = decodeURIComponent(kv.slice(i + 1)); });
+  /* junk hashes (#foo) are not state — returning true for them would
+     suppress the localStorage restore and the seed party */
+  if (!("c" in p) && !("n" in p) && !("st" in p) && !("p" in p)) return false;
   if (p.c && DATASET.templates[p.c]) CONTENT = p.c;
-  PLANNED = (p.n && +p.n >= 2 && +p.n <= HARD_CAP) ? +p.n : baseSize();
+  const n = parseInt(p.n, 10);   // integers only — +"0x10"/+"7.5" slipped through
+  PLANNED = (n >= 2 && n <= HARD_CAP) ? n : baseSize();
   STYLE = (p.st && (DATASET.styles || {})[p.st]) ? p.st : "balanced";
-  if (p.p) party = p.p.split(",").filter(w => WEAPONS[w]);
+  /* a link WITHOUT p= is a shared empty comp — clear, don't keep the old
+     party (saveHash omits p= when empty, so restore must mirror that);
+     cap at HARD_CAP like every other roster path */
+  party = p.p ? p.p.split(",").filter(w => WEAPONS[w]).slice(0, HARD_CAP) : [];
   syncEngine();
   return true;
 }
@@ -179,7 +191,11 @@ function loadStored(){
   try {
     const h = localStorage.getItem("compforge");
     if (!h) return false;
-    location.hash = h;
+    /* replaceState, NOT location.hash: assigning the hash is a navigation —
+       it pushes a history entry (Back then lands on a hashless URL that
+       disagrees with the rendered state) and fires an async hashchange that
+       double-renders the boot. */
+    history.replaceState(null, "", "#" + h);
     return loadHash();
   } catch (e) { return false; }
 }
@@ -195,7 +211,7 @@ const PENDING = [["hellgate_5v5","Hellgate 5v5"]];
 
 function renderSetup(){
   $("content").innerHTML = Object.entries(DATASET.templates)
-    .map(([k,t]) => `<option value="${k}" ${k===CONTENT?"selected":""}>${t.name} — base ${t.base_size}</option>`)
+    .map(([k,t]) => `<option value="${k}" ${k===CONTENT?"selected":""}>${esc(t.name)} — base ${t.base_size}</option>`)
     .join("") + PENDING.filter(([k]) => !DATASET.templates[k])
     .map(([k,n]) => `<option value="${k}" disabled>${n} — template pending</option>`).join("");
   const styles = DATASET.styles || {};
@@ -285,8 +301,15 @@ function renderRoster(){
   /* party facet: a display filter over the roster — slot numbers and remove
      buttons keep their true indices */
   let idxs = party.map((_, i) => i);
-  if (PARTY_FACET)
+  if (PARTY_FACET){
     idxs = idxs.filter(i => (WEAPONS[party[i]].role_hint || "other") === PARTY_FACET);
+    if (!idxs.length){
+      /* removing the last member of the filtered role also removes the tally
+         chip that exits the filter — a dead end. Auto-clear instead. */
+      PARTY_FACET = null;
+      idxs = party.map((_, i) => i);
+    }
+  }
   const rows = idxs.map(i => { const w = party[i]; return (
     `<div class="slot ${roleCls(w)}"${roleBg(w)}><span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 32)}
       <span class="nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>${badgeHtml(w)}
@@ -460,7 +483,7 @@ function renderRecDetail(recs){
         ${((typeof LOADOUTS !== "undefined" && LOADOUTS[CONTENT]) || {})[top.w] ? (() => {
           const v = LOADOUTS[CONTENT][top.w][0];
           return `<div class="lo-box"><div class="who">caller loadout — ${esc(v.caller)}${v.role ? " · " + esc(v.role) : ""}</div>
-            Q${v.q} ${esc(spellAt(top.w, "q", v.q))} · W${v.w} ${esc(spellAt(top.w, "w", v.w))} · P${v.p} ${esc(spellAt(top.w, "passive", v.p))}</div>`;
+            Q${esc(v.q)} ${esc(spellAt(top.w, "q", v.q))} · W${esc(v.w)} ${esc(spellAt(top.w, "w", v.w))} · P${esc(v.p)} ${esc(spellAt(top.w, "passive", v.p))}</div>`;
         })() : ""}
         <div class="terms">${terms.map(t => `<div class="term">
           <span class="d">+${t.d.toFixed(2)}</span><span class="c">${t.cap}</span>
@@ -545,7 +568,7 @@ function renderDetail(w){
   const lo = vars.length ? `<div class="lo-box">
       <div class="who">caller loadout${vars.length > 1 ? "s" : ""}</div>
       ${vars.map(v => `<div>${esc(v.caller)}${v.role ? " · " + esc(v.role) : ""}${v.ct !== CONTENT ? ` · <i>${esc((DATASET.templates[v.ct] || {name: v.ct}).name)}</i>` : ""} —
-        Q${v.q} ${esc(spellAt(w, "q", v.q))} · W${v.w} ${esc(spellAt(w, "w", v.w))} · P${v.p} ${esc(spellAt(w, "passive", v.p))}</div>`).join("")}
+        Q${esc(v.q)} ${esc(spellAt(w, "q", v.q))} · W${esc(v.w)} ${esc(spellAt(w, "w", v.w))} · P${esc(v.p)} ${esc(spellAt(w, "passive", v.p))}</div>`).join("")}
     </div>` : "";
   $("drawer-title").textContent = d.display_name;
   $("drawer-body").innerHTML = `
@@ -570,7 +593,7 @@ function renderEvidence(cap){
   $("drawer-title").textContent = cap;
   $("drawer-body").innerHTML = rows.length
     ? `<table class="ev-tbl"><thead><tr><th>Weapon</th><th>Score</th><th>Evidence spell</th><th>Item key</th></tr></thead><tbody>${rows.join("")}</tbody></table>`
-    : `<p class="ev-empty">No weapon in this party supplies <span class="mono">${cap}</span>. Supply is 0 of ${target(cap).toFixed(1)} units.</p>`;
+    : `<p class="ev-empty">No weapon in this party supplies <span class="mono">${esc(cap)}</span>. Supply is 0 of ${target(cap).toFixed(1)} units.</p>`;
   $("drawer").dataset.open = "true";
 }
 function renderMetaStrip(){
@@ -579,7 +602,11 @@ function renderMetaStrip(){
   const key = SIZE < 12 ? "small" : SIZE <= 30 ? "mid" : "large";
   const m = (USAGE.meta || {})[key];
   if (!m || m.players_attributed < 200){ sec.hidden = true; return; }
+  /* usage keys are filtered against the dataset at build time too, but a
+     stale inlined file must degrade to a shorter list, not throw in nameOf
+     and kill every render after a weapon rename */
   const rows = Object.entries(USAGE.buckets[key] || {})
+    .filter(([w]) => WEAPONS[w])
     .sort((a,b) => b[1] - a[1]).slice(0, 12);
   $("meta-label").textContent =
     `This week on the killboard — ${usageBucketName()} fights (${m.battles} battles, ${m.players_attributed} players)`;
@@ -612,7 +639,7 @@ function companionRoleClass(w){
   const rh = (WEAPONS[w] && WEAPONS[w].role_hint) || "";
   return rh ? `role-${rh}` : "";
 }
-function renderCompanion(live){
+function renderCompanion(live, err){
   const box = $("companion"), status = $("companion-status");
   const members = $("companion-members"), load = $("companion-load"), connect = $("companion-connect");
   box.dataset.live = live ? "true" : "false";
@@ -624,8 +651,11 @@ function renderCompanion(live){
   connect.textContent = "disconnect";
   status.hidden = false;
   if (!live){
-    status.innerHTML = `<span class="comp-dot"></span>companion not found
-      <span class="sub">start <code>companion/run-companion.bat</code> as admin — retrying…</span>`;
+    /* the raw error distinguishes "not running" from a browser-side block
+       (CORS / local-network permission) — without it every failure reads as
+       "start the exe" even when the exe is fine */
+    status.innerHTML = `<span class="comp-dot"></span>companion not reachable
+      <span class="sub">${err ? esc(err) + " — " : ""}start <code>companion/run-companion.bat</code> as admin; if it IS running, check for a local-network permission prompt in the address bar — retrying…</span>`;
     members.innerHTML = ""; load.hidden = true;
     return;
   }
@@ -781,7 +811,10 @@ document.addEventListener("input", e => {
 });
 document.addEventListener("keydown", e => {
   if ((e.key === "Enter" || e.key === " ")
-      && e.target.matches("[data-bfilter],[data-rfilter],[data-pfilter]")){
+      && e.target.matches("[data-bfilter],[data-rfilter],[data-pfilter],span.info[data-detail]")){
+    /* the picker's "i" detail control is a focusable role=button SPAN inside
+       the add-weapon button — without this it is announced as a button but
+       Enter/Space do nothing (and would otherwise trigger the outer add) */
     e.preventDefault(); e.target.click(); return;
   }
   if (e.key === "Escape"){ $("drawer").dataset.open = "false"; return; }
@@ -821,11 +854,15 @@ render();
   if (typeof PARITY_EXPECTED === "undefined" || !SEED.length) return;
   const e2 = new CompEngine(DATASET, "castle_outpost", 7);
   const got = {
-    fitness: +e2.fitness(SEED).toFixed(2),
+    fitness: e2.fitness(SEED),
     recs: e2.recommend(SEED, 4).map(r => r.weapon),
     weaknesses: e2.weaknesses(SEED).map(x => x.cap),
   };
-  const ok = JSON.stringify(got) === JSON.stringify(PARITY_EXPECTED);
+  /* tolerance compare like the test suite — rounding both sides to 2dp
+     could flip a healthy build to "do not trust" on an exact rounding tie */
+  const ok = Math.abs(got.fitness - PARITY_EXPECTED.fitness) < 1e-9
+    && JSON.stringify(got.recs) === JSON.stringify(PARITY_EXPECTED.recs)
+    && JSON.stringify(got.weaknesses) === JSON.stringify(PARITY_EXPECTED.weaknesses);
   (ok ? console.info : console.error)("engine parity vs engine.py:",
     ok ? "OK" : "MISMATCH", ok ? got : {got, expected: PARITY_EXPECTED});
   const chip = $("parity-chip"), dot = $("parity-dot");
