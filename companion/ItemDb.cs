@@ -22,33 +22,8 @@ public sealed class ItemDb
     public static async Task<ItemDb> LoadAsync(string cacheDir)
     {
         var db = new ItemDb();
-        var cache = Path.Combine(cacheDir, "items.txt");
-        string? text = null;
-
-        var fresh = File.Exists(cache)
-            && DateTime.UtcNow - File.GetLastWriteTimeUtc(cache) < TimeSpan.FromDays(7);
-        if (fresh)
-            text = await File.ReadAllTextAsync(cache);
-        else
-        {
-            try
-            {
-                using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(30) };
-                http.DefaultRequestHeaders.UserAgent.ParseAdd("compforge-companion/0.1");
-                text = await http.GetStringAsync(SourceUrl);
-                await File.WriteAllTextAsync(cache, text);
-                Console.WriteLine($"[items] refreshed from ao-bin-dumps ({text.Length / 1024} KB)");
-            }
-            catch (Exception e) when (File.Exists(cache))
-            {
-                Console.WriteLine($"[items] refresh failed ({e.Message}) — using stale cache");
-                text = await File.ReadAllTextAsync(cache);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"[items] WARNING: no item table ({e.Message}) — raw indices only");
-            }
-        }
+        var text = await CachedFetch.GetAsync(SourceUrl,
+            Path.Combine(cacheDir, "items.txt"), "items", TimeSpan.FromSeconds(30));
 
         if (text != null)
             foreach (var line in text.Split('\n'))

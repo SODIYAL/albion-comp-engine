@@ -9,6 +9,7 @@
    "castle",
    "castle_outpost",
    "faction_war",
+   "roads",
    "territory_defense"
   ],
   "unknown_to_game_data": [],
@@ -360,6 +361,11 @@
     "2H_SHAPESHIFTER_SET1",
     "2H_SHAPESHIFTER_SET3"
    ]
+  },
+  "swap_advisor": {
+   "min_gain": 1.0,
+   "min_rank": 15,
+   "offcomp_rank": 60
   },
   "weights": {
    "alpha": 0.55,
@@ -1079,6 +1085,173 @@
    },
    "validated_sizes": [
     15
+   ]
+  },
+  "roads": {
+   "base_size": 7,
+   "content": "roads",
+   "hard_floors": {
+    "heal_sustain": {
+     "floor_units": 2.0,
+     "min_party_size": 5,
+     "penalty_mult": 2.0
+    },
+    "tankiness": {
+     "floor_units": 2.0,
+     "min_party_size": 6,
+     "penalty_mult": 1.0
+    }
+   },
+   "max_size": 7,
+   "name": "Roads of Avalon",
+   "requirements": {
+    "anti_zone": {
+     "scales": false,
+     "soft_cap": 2.0,
+     "target": 1.0,
+     "weight": 2
+    },
+    "buff_allies": {
+     "scales": false,
+     "soft_cap": 3.0,
+     "target": 1.0,
+     "weight": 2
+    },
+    "burst_aoe": {
+     "scales": true,
+     "soft_cap": 8.0,
+     "target": 4.0,
+     "weight": 5
+    },
+    "burst_st": {
+     "scales": true,
+     "soft_cap": 7.0,
+     "target": 4.0,
+     "weight": 7
+    },
+    "catch": {
+     "scales": true,
+     "soft_cap": 6.0,
+     "target": 3.0,
+     "weight": 7
+    },
+    "cleanse": {
+     "scales": false,
+     "soft_cap": 3.0,
+     "target": 1.0,
+     "weight": 5
+    },
+    "clump_create": {
+     "scales": false,
+     "soft_cap": 3.0,
+     "target": 1.0,
+     "weight": 3
+    },
+    "damage_debuff": {
+     "scales": false,
+     "soft_cap": 2.0,
+     "target": 1.0,
+     "weight": 3
+    },
+    "disengage": {
+     "scales": false,
+     "soft_cap": 4.0,
+     "target": 2.0,
+     "weight": 6
+    },
+    "engage": {
+     "scales": false,
+     "soft_cap": 4.0,
+     "target": 2.0,
+     "weight": 5
+    },
+    "execute": {
+     "scales": false,
+     "soft_cap": 4.0,
+     "target": 2.0,
+     "weight": 4
+    },
+    "heal_burst": {
+     "scales": true,
+     "soft_cap": 3.0,
+     "target": 1.5,
+     "weight": 5
+    },
+    "heal_reduction": {
+     "scales": false,
+     "soft_cap": 4.0,
+     "target": 2.0,
+     "weight": 7
+    },
+    "heal_sustain": {
+     "scales": true,
+     "soft_cap": 5.0,
+     "target": 3.0,
+     "weight": 10
+    },
+    "mobility": {
+     "scales": true,
+     "soft_cap": 8.0,
+     "target": 4.0,
+     "weight": 8
+    },
+    "peel": {
+     "scales": true,
+     "soft_cap": 6.0,
+     "target": 3.0,
+     "weight": 8
+    },
+    "purge": {
+     "scales": false,
+     "soft_cap": 3.0,
+     "target": 1.0,
+     "weight": 4
+    },
+    "resist_shred": {
+     "scales": false,
+     "soft_cap": 3.0,
+     "target": 1.5,
+     "weight": 4
+    },
+    "self_sustain": {
+     "scales": true,
+     "soft_cap": 5.0,
+     "target": 2.0,
+     "weight": 3
+    },
+    "silence": {
+     "scales": false,
+     "soft_cap": 3.0,
+     "target": 1.0,
+     "weight": 5
+    },
+    "stun": {
+     "scales": true,
+     "soft_cap": 5.0,
+     "target": 2.0,
+     "weight": 5
+    },
+    "sustained_dps": {
+     "scales": true,
+     "soft_cap": 7.0,
+     "target": 3.0,
+     "weight": 5
+    },
+    "tankiness": {
+     "scales": true,
+     "soft_cap": 6.0,
+     "target": 3.0,
+     "weight": 7
+    },
+    "zone_control": {
+     "scales": true,
+     "soft_cap": 4.0,
+     "target": 1.5,
+     "weight": 2
+    }
+   },
+   "validated_sizes": [
+    7
    ]
   },
   "territory_defense": {

@@ -89,39 +89,69 @@ class Engine:
             self.mech_mults[cap] = (
                 self._resilience_eff(grow(style_mech.get("focus_attackers")))
                 / self._resilience_eff(base_mech.get("focus_attackers")))
+        # Per-context caches — constant until the next set_content: scaled
+        # targets/soft caps, styled weights, and (lazily) each weapon's
+        # loadout combos with mechanics applied. The recommend/swap hot path
+        # otherwise recomputes all of them per candidate per combo (~2x on
+        # swap_review, measured). Same expressions, same floats.
+        self._targets = {c: (r["target"] * self.size / self.base_size
+                             if r.get("scales") else r["target"])
+                         for c, r in self.reqs.items()}
+        self._softs = {c: (r["soft_cap"] * self.size / self.base_size
+                           if r.get("scales") else r["soft_cap"])
+                       for c, r in self.reqs.items()}
+        self._weights = {c: r["weight"] * self.style_mults.get(c, 1.0)
+                         for c, r in self.reqs.items()}
+        self._extras_cache = {}
+
+    @staticmethod
+    def _half_up(x):
+        """Round half UP, explicitly. Python's round() is half-to-even and
+        JS Math.round() is half-up, and grow() lands on exact .5 counts at
+        ordinary sizes (e.g. focus 3 grown at scale 2 = 4.5) — the implicit
+        rules silently disagreed between the engines (review, 2026-08-15).
+        int(x + 0.5) pins ONE rule; app_scoring.js mirrors it."""
+        return int(x + 0.5)
+
+    def _table_lookup(self, table, x):
+        """Clamped mechanics-table value for count `x` (half-up rounding),
+        or None when the table is missing or x is falsy. The single home of
+        the clamp rule — it used to live inline in both curve methods."""
+        if not table or not x:
+            return None
+        k = max(1, min(self._half_up(x), max(int(t) for t in table)))
+        return table[str(k)]
 
     def _escalation_mult(self, targets):
         """1 + AoE Escalation bonus for hitting `targets` players (capped at 8)."""
-        table = (self.mechanics.get("aoe_escalation") or {}).get(
-            "damage_bonus_by_targets") or {}
-        if not table or not targets:
-            return 1.0
-        t = max(1, min(int(round(targets)), max(int(k) for k in table)))
-        return 1.0 + table[str(t)]
+        v = self._table_lookup((self.mechanics.get("aoe_escalation") or {})
+                               .get("damage_bonus_by_targets"), targets)
+        return 1.0 if v is None else 1.0 + v
 
     def _resilience_eff(self, attackers):
         """Fraction of ST damage that survives Focus Fire with N attackers."""
-        table = (self.mechanics.get("focus_fire") or {}).get(
-            "damage_reduction_unmounted") or {}
-        if not table or not attackers:
-            return 1.0
-        n = max(1, min(int(round(attackers)), max(int(k) for k in table)))
-        return 1.0 - table[str(n)]
+        v = self._table_lookup((self.mechanics.get("focus_fire") or {})
+                               .get("damage_reduction_unmounted"), attackers)
+        return 1.0 if v is None else 1.0 - v
 
     def weight(self, cap):
-        return self.reqs[cap]["weight"] * self.style_mults.get(cap, 1.0)
+        return self._weights[cap]
 
     def extrapolated(self):
         """True when the requested size is outside the template's validated set."""
         return self.size not in (self.template.get("validated_sizes") or [self.base_size])
 
+    def size_bucket(self):
+        """small <12 / mid <=30 / large >30 — sample_battles.py's buckets.
+        The one definition both the meta prior and the dashboard's usage
+        display read, so they can never quote different buckets."""
+        return "small" if self.size < 12 else "mid" if self.size <= 30 else "large"
+
     def target(self, cap):
-        r = self.reqs[cap]
-        return r["target"] * self.size / self.base_size if r.get("scales") else r["target"]
+        return self._targets[cap]
 
     def soft_cap(self, cap):
-        r = self.reqs[cap]
-        return r["soft_cap"] * self.size / self.base_size if r.get("scales") else r["soft_cap"]
+        return self._softs[cap]
 
     def caps_of(self, weapon):
         return self.weapons[weapon]["capabilities"]
@@ -137,20 +167,45 @@ class Engine:
 
     def effective_supply(self, party):
         """Supply after style-delivery physics (AoE escalation, Resilience).
-        Balanced is the identity, so raw == effective there. All scoring
-        reads THIS; `supply` stays raw for display and floors semantics."""
+        Balanced-at-base-size is the identity, so raw == effective there.
+        ALL scoring — floors included — reads THIS; `supply` stays raw only
+        as the sheet-unit reference (weapon detail views)."""
         s = self.supply(party)
         for cap, m in self.mech_mults.items():
             if m != 1.0 and cap in s:
                 s[cap] = s[cap] * m
         return s
 
-    def _floor_penalty(self, cap, have):
+    def floor_armed(self, cap, have):
+        """True when `cap` is below its hard floor at the current size — the
+        ONE definition of that predicate; the dashboard's floor tags read it
+        too, so display can never disagree with scoring."""
         f = self.floors.get(cap)
-        if not f or self.size < f["min_party_size"] or have >= f["floor_units"]:
+        return bool(f) and self.size >= f["min_party_size"] \
+            and have < f["floor_units"]
+
+    def _floor_penalty(self, cap, have):
+        if not self.floor_armed(cap, have):
             return 0.0
+        f = self.floors[cap]
         w = self.reqs[cap]["weight"]
         return f["penalty_mult"] * w * (f["floor_units"] - have) / f["floor_units"]
+
+    def _overstack(self, cap, have, target, soft):
+        """Over-stack penalty at one supply level. Stays on the BASE weight —
+        style never changes the economics (T10). One home for a rule that
+        used to be written out three times per engine."""
+        if have <= soft:
+            return 0.0
+        return 0.5 * self.reqs[cap]["weight"] * (have - soft) / target
+
+    def _cover_terms(self, cap, have, gain, target):
+        """(coverage delta, floor-lift delta) for adding `gain` units. Kept
+        as two terms so callers accumulate in their original order — float
+        addition is not associative and parity pins the exact sums."""
+        cov = self.weight(cap) * (min(1.0, (have + gain) / target) ** self.gamma
+                                  - min(1.0, have / target) ** self.gamma)
+        return cov, self._floor_penalty(cap, have) - self._floor_penalty(cap, have + gain)
 
     def fitness(self, party):
         s, total = self.effective_supply(party), 0.0
@@ -160,8 +215,7 @@ class Engine:
             # floors stay on the base weight (T10 caught the alternative:
             # clap style punished a clap comp for stacking bombs)
             total += self.weight(cap) * min(1.0, have / target) ** self.gamma
-            if have > soft:
-                total -= 0.5 * self.reqs[cap]["weight"] * (have - soft) / target
+            total -= self._overstack(cap, have, target, soft)
             total -= self._floor_penalty(cap, have)
         return total
 
@@ -201,14 +255,11 @@ class Engine:
             if cap not in self.reqs or not gain:
                 continue
             have, target, soft = s.get(cap, 0.0), self.target(cap), self.soft_cap(cap)
-            base_w = self.reqs[cap]["weight"]
-            total += self.weight(cap) * (min(1.0, (have + gain) / target) ** self.gamma
-                                         - min(1.0, have / target) ** self.gamma)
-            total += self._floor_penalty(cap, have) - self._floor_penalty(cap, have + gain)
-            ob = 0.5 * base_w * (have - soft) / target if have > soft else 0.0
-            oa = (0.5 * base_w * (have + gain - soft) / target
-                  if have + gain > soft else 0.0)
-            total -= oa - ob
+            cov, floor_d = self._cover_terms(cap, have, gain, target)
+            total += cov
+            total += floor_d
+            total -= (self._overstack(cap, have + gain, target, soft)
+                      - self._overstack(cap, have, target, soft))
         return total
 
     def _marg_syn_from(self, s, base_syn, extra):
@@ -218,24 +269,39 @@ class Engine:
             total += b * min(s.get(a, 0) + extra.get(a, 0), s.get(c, 0) + extra.get(c, 0))
         return total - base_syn
 
+    def _loadout_extras(self, weapon):
+        """The weapon's candidate loadouts as merged effective-caps dicts,
+        cached per set_content (they depend only on the weapon and the
+        mechanics multipliers). itertools.product order is preserved so the
+        argmax tie-break is identical to the uncached enumeration. Treat the
+        returned dicts as read-only — best_loadout hands them out directly."""
+        extras = self._extras_cache.get(weapon)
+        if extras is None:
+            always, slots = self._loadout_eff(weapon)
+            # each slot equips exactly ONE of its mutually-exclusive spells
+            # (no "empty" — a player always has a Q/W/E/passive slotted).
+            # This blocks the within-slot double-count (catch AND disengage
+            # from two W spells) WITHOUT letting a weapon dodge over-stack
+            # penalties by shedding a redundant cap — the latter wrongly
+            # inflated generalists in saturated parties and cost 11pts of V4
+            # role accuracy.
+            choices = [slot for slot in slots if slot]
+            extras = []
+            for combo in (itertools.product(*choices) if choices else [()]):
+                extra = dict(always)
+                for b in combo:
+                    for cap, v in b.items():
+                        if v > extra.get(cap, 0.0):
+                            extra[cap] = v
+                extras.append(extra)
+            self._extras_cache[weapon] = extras
+        return extras
+
     def best_loadout(self, s, base_syn, weapon):
         """Pick the one-spell-per-slot loadout maximizing alpha*dFit+beta*dSyn
         for effective base supply `s`. Returns (d_fit, d_syn, extra_caps)."""
-        always, slots = self._loadout_eff(weapon)
         best = None
-        # each slot equips exactly ONE of its mutually-exclusive spells (no
-        # "empty" — a player always has a Q/W/E/passive slotted). This blocks
-        # the within-slot double-count (catch AND disengage from two W spells)
-        # WITHOUT letting a weapon dodge over-stack penalties by shedding a
-        # redundant cap — the latter wrongly inflated generalists in saturated
-        # parties and cost 11pts of V4 role accuracy.
-        choices = [slot for slot in slots if slot]
-        for combo in (itertools.product(*choices) if choices else [()]):
-            extra = dict(always)
-            for b in combo:
-                for cap, v in b.items():
-                    if v > extra.get(cap, 0.0):
-                        extra[cap] = v
+        for extra in self._loadout_extras(weapon):
             d_fit = self._marg_fit_from(s, extra)
             d_syn = self._marg_syn_from(s, base_syn, extra)
             val = self.alpha * d_fit + self.beta * d_syn
@@ -255,10 +321,10 @@ class Engine:
             if cap not in self.reqs or not gain:
                 continue
             have, target = s.get(cap, 0.0), self.target(cap)
-            d = self.weight(cap) * (min(1.0, (have + gain) / target) ** self.gamma
-                                    - min(1.0, have / target) ** self.gamma)
-            # credit for lifting a critical floor
-            d += self._floor_penalty(cap, have) - self._floor_penalty(cap, have + gain)
+            # coverage + credit for lifting a critical floor — the same
+            # terms best_loadout scored, from the same helper
+            cov, floor_d = self._cover_terms(cap, have, gain, target)
+            d = cov + floor_d
             if d > 0.05:
                 terms.append({"delta": round(d, 2), "cap": cap,
                               "before": have, "after": have + gain, "target": target})
@@ -266,28 +332,73 @@ class Engine:
 
     def meta_of(self, weapon):
         """Meta-prior value for a weapon at the current size. Flat map -> direct
-        lookup; size-bucketed map -> the bucket the current size falls in
-        (small <12, mid 12-30, large >30, matching sample_battles.py)."""
+        lookup; size-bucketed map -> the size_bucket() the current size falls
+        in (matching sample_battles.py)."""
         if not self.meta_bucketed:
             return self.meta_prior.get(weapon, 0.0)
-        b = "small" if self.size < 12 else "mid" if self.size <= 30 else "large"
-        return (self.meta_prior.get(b) or {}).get(weapon, 0.0)
+        return (self.meta_prior.get(self.size_bucket()) or {}).get(weapon, 0.0)
+
+    def pick_score(self, s, base_syn, weapon):
+        """THE candidate score — alpha*dFit + beta*dSyn + delta*meta for
+        picking `weapon` into effective supply `s`. recommend() and
+        swap_review() (and their JS mirrors) all read this one helper so the
+        formula can never drift between them. Returns (score, d_fit, d_syn,
+        meta)."""
+        d_fit, d_syn, _extra = self.best_loadout(s, base_syn, weapon)
+        meta = self.meta_of(weapon)
+        return (self.alpha * d_fit + self.beta * d_syn + self.delta * meta,
+                d_fit, d_syn, meta)
 
     def recommend(self, party, top_n=4, pool=None):
         base_syn = self.synergy(party)
         s = self.effective_supply(party)
         out = []
         for w in (pool or self.weapons):
-            d_fit, d_syn, _extra = self.best_loadout(s, base_syn, w)
-            meta = self.meta_of(w)
+            score, d_fit, d_syn, meta = self.pick_score(s, base_syn, w)
             out.append({
                 "weapon": w,
                 "display_name": self.weapons[w]["display_name"],
                 "status": self.weapons[w]["status"],
                 "d_fitness": d_fit, "d_synergy": d_syn, "meta_prior": meta,
-                "score": self.alpha * d_fit + self.beta * d_syn + self.delta * meta,
+                "score": score,
             })
         return sorted(out, key=lambda r: -r["score"])[:top_n]
+
+    def swap_review(self, party, top_n=3, pool=None):
+        """Per-member swap advisor — the "you'd serve this comp better on X"
+        pass. For each member, value their CURRENT weapon exactly as
+        recommend() would value it as a pick into the REST of the party (best
+        single loadout, alpha*dFit + beta*dSyn + delta*meta), rank that
+        against every alternative pick, and return the top upgrade options
+        with their gains. rank counts strictly-better alternatives only, so
+        ties never demote the member; gain is in score units (same scale as
+        recommend()'s score). The caller decides what rank/gain reads as
+        "poor fit" — this returns the data, not the verdict."""
+        out = []
+        for i, cur in enumerate(party):
+            rest = party[:i] + party[i + 1:]
+            s = self.effective_supply(rest)
+            base_syn = self.synergy(rest)
+            cur_score = self.pick_score(s, base_syn, cur)[0]
+            better = []
+            for w in (pool or self.weapons):
+                if w == cur:
+                    continue
+                v = self.pick_score(s, base_syn, w)[0]
+                if v > cur_score:
+                    better.append((v, w))
+            better.sort(key=lambda t: (-t[0], t[1]))
+            out.append({
+                "index": i, "weapon": cur,
+                "display_name": self.weapons[cur]["display_name"],
+                # rank = strictly-better alternatives + 1 (ties never demote)
+                "score": cur_score, "rank": len(better) + 1,
+                "options": [{"weapon": w,
+                             "display_name": self.weapons[w]["display_name"],
+                             "score": v, "gain": v - cur_score}
+                            for v, w in better[:top_n]],
+            })
+        return out
 
     def weaknesses(self, party, top_n=3):
         s = self.effective_supply(party)
@@ -317,6 +428,9 @@ if __name__ == "__main__":
     ap.add_argument("--size", type=int, default=None,
                     help="party size (default: the template's base size)")
     ap.add_argument("--style", default="balanced")
+    ap.add_argument("--review", action="store_true",
+                    help="per-member swap advisor: rank each member's weapon "
+                         "against every alternative and list better options")
     args = ap.parse_args()
 
     e = Engine(content=args.content, size=7, style=args.style)
@@ -346,6 +460,13 @@ if __name__ == "__main__":
     print("\nWeaknesses:")
     for w in e.weaknesses(party):
         print(f"  {w['cap']:<16} {w['have']:.0f}/{w['target']:.1f}  −{w['gap']:.1f}")
+    if args.review:
+        print("\nSwap review (rank 1 = nothing beats the current pick):")
+        for m in e.swap_review(party):
+            opts = ", ".join(f"{o['display_name']} (+{o['gain']:.2f})"
+                             for o in m["options"]) or "—"
+            print(f"  {m['index'] + 1}. {m['display_name']:<24} "
+                  f"rank {m['rank']:>3}/{len(e.weapons)}  better: {opts}")
     recs = e.recommend(party)
     print(f"\nRecommend: {recs[0]['display_name']}  (score {recs[0]['score']:.2f})")
     for t in e.explain(party, recs[0]["weapon"])[:4]:

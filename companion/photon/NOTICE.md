@@ -17,7 +17,12 @@ Source subprojects:
 
 Local edits: removed the `StatisticsAnalysisTool.Diagnostics.DebugConsole`
 logging calls from `PhotonParser.cs` (three lines) so the files stand alone;
-namespaces are otherwise unchanged.
+namespaces are otherwise unchanged. Hardening pass (2026-08-15, code review):
+`PhotonParser.cs` gained a `totalLength` sanity cap and a periodic sweep of
+stranded fragment reassembly buffers (raw-socket capture drops packets, so
+incomplete trains otherwise leak), and its CRC branch now reads the CRC from
+the CRC field (it read bytes 0-3 — header bytes — before) and compares
+unsigned; `SegmentedPackage.cs` gained the `CreatedUtc` stamp the sweep uses.
 
 ## License consequence
 

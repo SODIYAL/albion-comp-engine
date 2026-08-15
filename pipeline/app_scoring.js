@@ -73,33 +73,50 @@
         this._resilienceEff(grow(styleMech.focus_attackers))
         / this._resilienceEff(baseMech.focus_attackers);
     }
+    /* Per-context caches (mirrors engine.py set_content): scaled targets/
+       soft caps, styled weights, per-weapon loadout combos (lazy), pool
+       keys. Constant until the next setContent; same expressions, same
+       floats — the recommend/swap hot path otherwise recomputes them per
+       candidate per combo (~2x on swapReview, measured). */
+    this._targets = {}; this._softs = {}; this._weights = {};
+    for (var cap2 in this.reqs) {
+      var r = this.reqs[cap2];
+      this._targets[cap2] = r.scales ? r.target * this.size / this.baseSize : r.target;
+      this._softs[cap2] = r.scales ? r.soft_cap * this.size / this.baseSize : r.soft_cap;
+      var m2 = this.styleMults[cap2];
+      this._weights[cap2] = r.weight * (m2 === undefined ? 1.0 : m2);
+    }
+    this._extrasCache = {};
+    this._poolKeys = null;
   };
 
-  CompEngine.prototype._tableClamp = function (table, x) {
+  CompEngine.prototype._tableLookup = function (table, x) {
+    /* Clamped mechanics-table value for count x, or null when the table is
+       missing or x falsy (mirrors engine.py _table_lookup). half-UP rounding,
+       explicitly (Math.floor(x+0.5)) — Python round() is half-to-even; the
+       implicit rules disagreed on the .5 counts grow() produces at ordinary
+       sizes (review 2026-08-15). */
+    if (!table || !x) return null;
     var maxK = 0;
     for (var k in table) { var ki = parseInt(k, 10); if (ki > maxK) maxK = ki; }
-    return Math.max(1, Math.min(Math.round(x), maxK));
+    if (maxK === 0) return null;
+    return table[String(Math.max(1, Math.min(Math.floor(x + 0.5), maxK)))];
   };
 
   CompEngine.prototype._escalationMult = function (targets) {
-    var table = (this.mechanics.aoe_escalation || {}).damage_bonus_by_targets || {};
-    var empty = true;
-    for (var k in table) { empty = false; break; }
-    if (empty || !targets) return 1.0;
-    return 1.0 + table[String(this._tableClamp(table, targets))];
+    var v = this._tableLookup((this.mechanics.aoe_escalation || {})
+                              .damage_bonus_by_targets, targets);
+    return v === null || v === undefined ? 1.0 : 1.0 + v;
   };
 
   CompEngine.prototype._resilienceEff = function (attackers) {
-    var table = (this.mechanics.focus_fire || {}).damage_reduction_unmounted || {};
-    var empty = true;
-    for (var k in table) { empty = false; break; }
-    if (empty || !attackers) return 1.0;
-    return 1.0 - table[String(this._tableClamp(table, attackers))];
+    var v = this._tableLookup((this.mechanics.focus_fire || {})
+                              .damage_reduction_unmounted, attackers);
+    return v === null || v === undefined ? 1.0 : 1.0 - v;
   };
 
   CompEngine.prototype.weight = function (cap) {
-    var m = this.styleMults[cap];
-    return this.reqs[cap].weight * (m === undefined ? 1.0 : m);
+    return this._weights[cap];
   };
 
   CompEngine.prototype.extrapolated = function () {
@@ -107,14 +124,18 @@
     return v.indexOf(this.size) === -1;
   };
 
+  CompEngine.prototype.sizeBucket = function () {
+    /* small <12 / mid <=30 / large >30 — sample_battles.py's buckets; the
+       one definition the meta prior AND the usage display read. */
+    return this.size < 12 ? "small" : this.size <= 30 ? "mid" : "large";
+  };
+
   CompEngine.prototype.target = function (cap) {
-    var r = this.reqs[cap];
-    return r.scales ? r.target * this.size / this.baseSize : r.target;
+    return this._targets[cap];
   };
 
   CompEngine.prototype.softCap = function (cap) {
-    var r = this.reqs[cap];
-    return r.scales ? r.soft_cap * this.size / this.baseSize : r.soft_cap;
+    return this._softs[cap];
   };
 
   CompEngine.prototype.capsOf = function (weapon) {
@@ -133,7 +154,9 @@
 
   CompEngine.prototype.effectiveSupply = function (party) {
     /* Supply after style-delivery physics (AoE escalation, Resilience).
-       Balanced is the identity. All scoring reads THIS (mirrors engine.py). */
+       Balanced-at-base-size is the identity. ALL scoring — floors included —
+       reads THIS (mirrors engine.py); raw supply() is the sheet-unit
+       reference only. */
     var s = this.supply(party);
     for (var cap in this.mechMults) {
       var m = this.mechMults[cap];
@@ -142,11 +165,35 @@
     return s;
   };
 
-  CompEngine.prototype._floorPenalty = function (cap, have) {
+  CompEngine.prototype.floorArmed = function (cap, have) {
+    /* THE below-the-hard-floor predicate (mirrors engine.py floor_armed);
+       the dashboard's floor tags read it too, so display can never disagree
+       with scoring. */
     var f = this.floors[cap];
-    if (!f || this.size < f.min_party_size || have >= f.floor_units) return 0.0;
+    return !!f && this.size >= f.min_party_size && have < f.floor_units;
+  };
+
+  CompEngine.prototype._floorPenalty = function (cap, have) {
+    if (!this.floorArmed(cap, have)) return 0.0;
+    var f = this.floors[cap];
     var w = this.reqs[cap].weight;
     return f.penalty_mult * w * (f.floor_units - have) / f.floor_units;
+  };
+
+  CompEngine.prototype._overstack = function (cap, have, target, soft) {
+    /* Over-stack penalty at one supply level, on the BASE weight (T10) —
+       one home for a rule written out three times before (mirrors engine.py). */
+    if (have <= soft) return 0.0;
+    return 0.5 * this.reqs[cap].weight * (have - soft) / target;
+  };
+
+  CompEngine.prototype._coverTerms = function (cap, have, gain, target) {
+    /* [coverage delta, floor-lift delta] — two terms so callers accumulate
+       in their original order (float addition is not associative; parity
+       pins the exact sums). Mirrors engine.py _cover_terms. */
+    var cov = this.weight(cap) * (Math.pow(Math.min(1.0, (have + gain) / target), this.gamma)
+                                  - Math.pow(Math.min(1.0, have / target), this.gamma));
+    return [cov, this._floorPenalty(cap, have) - this._floorPenalty(cap, have + gain)];
   };
 
   CompEngine.prototype.fitness = function (party) {
@@ -156,7 +203,7 @@
       /* style multiplies the VALUE of coverage; over-stack economics and
          floors stay on the base weight (mirrors engine.py, see T10) */
       total += this.weight(cap) * Math.pow(Math.min(1.0, have / target), this.gamma);
-      if (have > soft) total -= 0.5 * this.reqs[cap].weight * (have - soft) / target;
+      total -= this._overstack(cap, have, target, soft);
       total -= this._floorPenalty(cap, have);
     }
     return total;
@@ -209,13 +256,11 @@
       var gain = extra[cap];
       if (!(cap in this.reqs) || !gain) continue;
       var have = s[cap] || 0.0, target = this.target(cap), soft = this.softCap(cap);
-      var baseW = this.reqs[cap].weight;
-      total += this.weight(cap) * (Math.pow(Math.min(1.0, (have + gain) / target), this.gamma)
-                                   - Math.pow(Math.min(1.0, have / target), this.gamma));
-      total += this._floorPenalty(cap, have) - this._floorPenalty(cap, have + gain);
-      var ob = have > soft ? 0.5 * baseW * (have - soft) / target : 0.0;
-      var oa = (have + gain) > soft ? 0.5 * baseW * (have + gain - soft) / target : 0.0;
-      total -= oa - ob;
+      var ct = this._coverTerms(cap, have, gain, target);
+      total += ct[0];
+      total += ct[1];
+      total -= (this._overstack(cap, have + gain, target, soft)
+                - this._overstack(cap, have, target, soft));
     }
     return total;
   };
@@ -229,7 +274,15 @@
     return total - baseSyn;
   };
 
-  CompEngine.prototype.bestLoadout = function (s, baseSyn, weapon) {
+  CompEngine.prototype._loadoutExtras = function (weapon) {
+    /* The weapon's candidate loadouts as merged effective-caps objects,
+       cached per setContent (they depend only on the weapon and the
+       mechanics multipliers). Enumeration order matches itertools.product
+       so the argmax tie-break is identical to the uncached path. Returned
+       objects are READ-ONLY — bestLoadout hands them out directly.
+       Mirrors engine.py _loadout_extras. */
+    var extras = this._extrasCache[weapon];
+    if (extras) return extras;
     var le = this._loadoutEff(weapon), always = le.always, slots = le.slots;
     /* each slot equips exactly ONE spell (no empty option) — see engine.py */
     var choices = slots.filter(function (slot) { return slot.length; });
@@ -241,7 +294,7 @@
           next.push(combos[j].concat([choices[i][k]]));
       combos = next;
     }
-    var best = null;
+    extras = [];
     for (i = 0; i < combos.length; i++) {
       var extra = {}, c0; for (c0 in always) extra[c0] = always[c0];
       var combo = combos[i];
@@ -249,6 +302,17 @@
         var bd = combo[j];
         if (bd) for (var c in bd) if (bd[c] > (extra[c] || 0)) extra[c] = bd[c];
       }
+      extras.push(extra);
+    }
+    this._extrasCache[weapon] = extras;
+    return extras;
+  };
+
+  CompEngine.prototype.bestLoadout = function (s, baseSyn, weapon) {
+    var extras = this._loadoutExtras(weapon);
+    var best = null;
+    for (var i = 0; i < extras.length; i++) {
+      var extra = extras[i];
       var dFit = this._margFitFrom(s, extra);
       var dSyn = this._margSynFrom(s, baseSyn, extra);
       var val = this.alpha * dFit + this.beta * dSyn;
@@ -266,9 +330,9 @@
       var gain = extra[cap];
       if (!(cap in this.reqs) || !gain) continue;
       var have = s[cap] || 0.0, target = this.target(cap);
-      var d = this.weight(cap) * (Math.pow(Math.min(1.0, (have + gain) / target), this.gamma)
-                                  - Math.pow(Math.min(1.0, have / target), this.gamma));
-      d += this._floorPenalty(cap, have) - this._floorPenalty(cap, have + gain);
+      /* coverage + floor-lift credit — the same terms bestLoadout scored */
+      var ct = this._coverTerms(cap, have, gain, target);
+      var d = ct[0] + ct[1];
       if (d > 0.05) {
         terms.push({ delta: Math.round(d * 100) / 100, cap: cap,
                      before: have, after: have + gain, target: target });
@@ -279,8 +343,26 @@
 
   CompEngine.prototype.metaOf = function (w) {
     if (!this.metaBucketed) return this.metaPrior[w] || 0.0;
-    var b = this.size < 12 ? "small" : this.size <= 30 ? "mid" : "large";
-    return (this.metaPrior[b] || {})[w] || 0.0;
+    return (this.metaPrior[this.sizeBucket()] || {})[w] || 0.0;
+  };
+
+  CompEngine.prototype.pickScore = function (s, baseSyn, weapon) {
+    /* THE candidate score (mirrors engine.py pick_score): recommend() and
+       swapReview() both read this one helper so the formula cannot drift. */
+    var bl = this.bestLoadout(s, baseSyn, weapon);
+    var meta = this.metaOf(weapon);
+    return { score: this.alpha * bl.dFit + this.beta * bl.dSyn + this.delta * meta,
+             dFit: bl.dFit, dSyn: bl.dSyn, meta: meta };
+  };
+
+  CompEngine.prototype._pool = function (pool) {
+    /* mirrors Python's `pool or self.weapons`: an EMPTY pool array also
+       falls back to the full catalog (a bare `pool ||` kept truthy empty
+       arrays and silently swept nothing — parity bug). Default keys cached
+       per setContent — swapReview called this once per member. */
+    if (pool && pool.length) return pool;
+    if (!this._poolKeys) this._poolKeys = Object.keys(this.weapons);
+    return this._poolKeys;
   };
 
   CompEngine.prototype.recommend = function (party, topN, pool) {
@@ -288,20 +370,60 @@
     var baseSyn = this.synergy(party);
     var s = this.effectiveSupply(party);
     var out = [];
-    var keys = pool || Object.keys(this.weapons);
+    var keys = this._pool(pool);
     for (var i = 0; i < keys.length; i++) {
       var w = keys[i];
-      var bl = this.bestLoadout(s, baseSyn, w);
-      var meta = this.metaOf(w);
+      var ps = this.pickScore(s, baseSyn, w);
       out.push({
         weapon: w,
         display_name: this.weapons[w].display_name,
         status: this.weapons[w].status,
-        d_fitness: bl.dFit, d_synergy: bl.dSyn, meta_prior: meta,
-        score: this.alpha * bl.dFit + this.beta * bl.dSyn + this.delta * meta,
+        d_fitness: ps.dFit, d_synergy: ps.dSyn, meta_prior: ps.meta,
+        score: ps.score,
       });
     }
     return out.sort(function (x, y) { return y.score - x.score; }).slice(0, topN);
+  };
+
+  CompEngine.prototype.swapReview = function (party, topN, pool) {
+    /* Per-member swap advisor (mirrors engine.py swap_review): value each
+       member's CURRENT weapon as a pick into the REST of the party, rank it
+       against every alternative (strictly-better only, so ties never demote),
+       return the top upgrade options with gains. Data, not verdict. */
+    if (topN === undefined) topN = 3;
+    var out = [];
+    for (var i = 0; i < party.length; i++) {
+      var cur = party[i];
+      var rest = party.slice(0, i).concat(party.slice(i + 1));
+      var s = this.effectiveSupply(rest);
+      var baseSyn = this.synergy(rest);
+      var self = this;
+      var curScore = this.pickScore(s, baseSyn, cur).score;
+      var better = [];
+      var keys = this._pool(pool);
+      for (var j = 0; j < keys.length; j++) {
+        var w = keys[j];
+        if (w === cur) continue;
+        var v = this.pickScore(s, baseSyn, w).score;
+        if (v > curScore) better.push([v, w]);
+      }
+      better.sort(function (a, b) {
+        if (a[0] !== b[0]) return b[0] - a[0];
+        return a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0;
+      });
+      out.push({
+        index: i, weapon: cur,
+        display_name: this.weapons[cur].display_name,
+        /* rank = strictly-better alternatives + 1 (ties never demote) */
+        score: curScore, rank: better.length + 1,
+        options: better.slice(0, topN).map(function (t) {
+          return { weapon: t[1],
+                   display_name: self.weapons[t[1]].display_name,
+                   score: t[0], gain: t[0] - curScore };
+        }),
+      });
+    }
+    return out;
   };
 
   CompEngine.prototype.weaknesses = function (party, topN) {

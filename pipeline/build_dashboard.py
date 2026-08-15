@@ -112,6 +112,13 @@ def main():
     if os.path.exists(usage_path):
         with open(usage_path, encoding="utf-8") as f:
             usage = json.load(f)
+        # The usage sample is filtered against the dataset at GENERATION
+        # time, but the dataset can move on (weapon renames) while the
+        # sample file sits still — inline only keys the page can render.
+        if isinstance(usage.get("buckets"), dict):
+            usage["buckets"] = {b: {w: n for w, n in m.items()
+                                    if w in data["weapons"]}
+                                for b, m in usage["buckets"].items()}
 
     # Parity fixture: run the Python engine over the dashboard's seed party and
     # inline its output, so the client asserts against the real engine on every
@@ -122,22 +129,37 @@ def main():
     seed = [w for w in ("2H_LONGBOW", "MAIN_ARCANESTAFF_UNDEAD", "2H_ICECRYSTAL_UNDEAD")
             if w in eng.weapons]
     expected = {
-        "fitness": round(eng.fitness(seed), 2),
+        # The fixture carries its own party + context: the client seeds and
+        # re-scores exactly this, so the two can never drift apart (three
+        # hardcoded copies of the seed used to have to agree by eyeball).
+        "party": seed,
+        "content": eng.content,
+        "size": eng.size,
+        # full precision — the client compares fitness with a 1e-9 tolerance
+        # like the test suite. Rounding both sides to 2 decimals looked safe
+        # but Python round() (half-even) vs toFixed (half-up) can disagree on
+        # exact ties and raise a false "do not trust" banner.
+        "fitness": eng.fitness(seed),
         "recs": [r["weapon"] for r in eng.recommend(seed, 4)],
         "weaknesses": [w["cap"] for w in eng.weaknesses(seed)],
     }
 
     # `</script>` inside a JSON string would close the tag early; escape it.
-    blob = json.dumps(data, separators=(",", ":")).replace("</", "<\\/")
+    # (Escaping happens outside the f-string: expression-part backslashes
+    # need Python 3.12+, and this must build on 3.11 too.)
+    def js(obj):
+        return json.dumps(obj, separators=(",", ":")).replace("</", "<\\/")
+
+    blob = js(data)
 
     out = (f"{shell}<script>\n{scoring}\n</script>\n"
            f"<script>\nconst DATASET = {blob};\n"
-           f"const ICONS = {json.dumps(icons, separators=(',', ':'))};\n"
-           f"const TREES = {json.dumps(trees, separators=(',', ':'))};\n"
-           f"const SPELLS = {json.dumps(spells, separators=(',', ':')).replace('</', '<\\/')};\n"
-           f"const LOADOUTS = {json.dumps(loadouts, separators=(',', ':')).replace('</', '<\\/')};\n"
-           f"const USAGE = {json.dumps(usage, separators=(',', ':')).replace('</', '<\\/')};\n"
-           f"const PARITY_EXPECTED = {json.dumps(expected)};\n{app}</script>\n"
+           f"const ICONS = {js(icons)};\n"
+           f"const TREES = {js(trees)};\n"
+           f"const SPELLS = {js(spells)};\n"
+           f"const LOADOUTS = {js(loadouts)};\n"
+           f"const USAGE = {js(usage)};\n"
+           f"const PARITY_EXPECTED = {js(expected)};\n{app}</script>\n"
            f"</body>\n</html>\n")
     path = os.path.join(DASH, "index.html")
     with open(path, "w", encoding="utf-8") as f:

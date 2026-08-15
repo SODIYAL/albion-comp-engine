@@ -30,8 +30,13 @@ const validatedSizes = () => tpl().validated_sizes || [baseSize()];
 
 const target = cap => ENG.target(cap);
 const softCap = cap => ENG.softCap(cap);
-const supply = p => ENG.supply(p);
-const fitness = p => ENG.fitness(p);
+/* EFFECTIVE supply (after the mechanics multipliers) — the numbers scoring
+   actually uses. Displaying raw sheet units next to effective-supply gap
+   scores let a bar read "met" while the weakness list still charged a gap
+   for the same capability (review 2026-08-15). Raw sheet numbers stay
+   visible per-weapon in the detail drawer. */
+const supply = p => p === party ? partyCalc().sup : ENG.effectiveSupply(p);
+const fitness = p => p === party ? partyCalc().fit : ENG.fitness(p);
 const maxFitness = () => ENG.maxFitness();
 const uncoveredCaps = p => ENG.uncoveredCaps(p);
 const weaknesses = (p, n = 3) => ENG.weaknesses(p, n);
@@ -39,8 +44,39 @@ const weaknesses = (p, n = 3) => ENG.weaknesses(p, n);
 const explain = (p, cand) => ENG.explain(p, cand).map(t => ({d: t.delta, ...t}));
 const recommend = (p, n = 4) => ENG.recommend(p, n).map(r =>
   ({w: r.weapon, dFit: r.d_fitness, dSyn: r.d_synergy, meta: r.meta_prior, score: r.score}));
+/* swapReview is a full-pool sweep per member (~40-100ms at 20-40 members) —
+   memoized on the engine context + party so facet clicks, companion polls
+   and other no-op re-renders don't pay it again. */
+let swapCache = { key: null, val: [] };
+function swapReviewCached(){
+  const key = `${CONTENT}|${SIZE}|${STYLE}|${party.join(",")}`;
+  if (swapCache.key !== key)
+    swapCache = { key, val: party.length > 1 ? ENG.swapReview(party, 3) : [] };
+  return swapCache.val;
+}
+
+/* fitness + effective supply for the CURRENT party, computed once per state
+   (renderers used to re-derive them 3-4x per render pass) */
+let calcCache = { key: null, fit: 0, sup: null };
+function partyCalc(){
+  const key = `${CONTENT}|${SIZE}|${STYLE}|${party.join(",")}`;
+  if (calcCache.key !== key)
+    calcCache = { key, fit: ENG.fitness(party), sup: ENG.effectiveSupply(party) };
+  return calcCache;
+}
 
 const capsOf = w => WEAPONS[w].capabilities || {};
+/* one home for the role-hint default and the below-floor predicate — the
+   latter delegates to the engine so display can never disagree with scoring */
+const roleHint = w => WEAPONS[w].role_hint || "other";
+const floorHit = (cap, have) => ENG.floorArmed(cap, have);
+function roleCounts(){
+  const counts = {};
+  party.forEach(w => { const r = roleHint(w); counts[r] = (counts[r]||0) + 1; });
+  return counts;
+}
+const styleName = () =>
+  STYLE !== "balanced" ? (DATASET.styles[STYLE] || {}).name || STYLE : "";
 /* Display names and evidence IDs originate in ao-bin-dumps (an external game-data
    repo), so they are escaped before ever reaching innerHTML. */
 const esc = s => String(s).replace(/[&<>"']/g, c =>
@@ -57,7 +93,7 @@ const GROUPS = {
   Sustain:   ["heal_burst","heal_sustain","cleanse","self_sustain"],
   Frontline: ["tankiness","engage","disengage","anti_dive","zone_control"],
   Control:   ["stun","root","silence","knockback_displace","slow","clump_create","peel"],
-  Denial:    ["purge","anti_zone","heal_reduction","resist_shred","energy_drain"],
+  Denial:    ["purge","anti_zone","heal_reduction","resist_shred","energy_drain","damage_debuff"],
   Damage:    ["burst_st","burst_aoe","sustained_dps","execute"],
   Tempo:     ["mobility","catch","buff_allies"],
 };
@@ -117,7 +153,7 @@ let PARTY_FACET = null;
 const BADGE_KEYS = Object.fromEntries(BADGE_DEFS);
 function facetOk(w){
   if (!FACET) return true;
-  if (FACET.type === "role") return (WEAPONS[w].role_hint || "other") === FACET.v;
+  if (FACET.type === "role") return roleHint(w) === FACET.v;
   return (BADGE_KEYS[FACET.v] || []).some(k => (capsOf(w)[k] || 0) >= 2);
 }
 function setFacet(f, scroll){
@@ -130,7 +166,7 @@ function roleBg(w){
   return (typeof ICONS !== "undefined" && ICONS[w])
     ? ` style="--wbg:url('${ICONS[w]}')"` : "";
 }
-const roleCls = w => `role-${WEAPONS[w].role_hint || "other"}`;
+const roleCls = w => `role-${roleHint(w)}`;
 function whySentence(party, cand){
   const terms = explain(party, cand);
   if (!party.length)
@@ -139,8 +175,7 @@ function whySentence(party, cand){
   const strong = Object.keys(REQS()).filter(c => (s[c]||0)/target(c) >= 0.85)
     .sort((a,b) => REQS()[b].weight - REQS()[a].weight).slice(0,2).map(prose);
   const lead = terms[0], rest = terms.slice(1,3).map(t => prose(t.cap));
-  const f = lead && FLOORS()[lead.cap];
-  const floorClause = (f && (s[lead.cap]||0) < f.floor_units && SIZE >= f.min_party_size)
+  const floorClause = (lead && floorHit(lead.cap, s[lead.cap] || 0))
     ? ` — and at size ${SIZE} that is below the hard floor, not merely suboptimal` : "";
   return `${strong.length ? `Your party already covers ${strong.join(" and ")}` : "Your party is thin across the board"}, but has <em>${lead ? prose(lead.cap) : "gaps"}</em> at ${lead ? lead.before : 0} of ${lead ? target(lead.cap).toFixed(1) : "0"} units${floorClause}. ${nameOf(cand)} closes that${rest.length ? `, and adds ${rest.join(" and ")}` : ""}.`;
 }
@@ -153,10 +188,17 @@ function loadHash(){
   const p = {};
   h.split("&").forEach(kv => { const i = kv.indexOf("=");
     if (i > 0) p[kv.slice(0, i)] = decodeURIComponent(kv.slice(i + 1)); });
+  /* junk hashes (#foo) are not state — returning true for them would
+     suppress the localStorage restore and the seed party */
+  if (!("c" in p) && !("n" in p) && !("st" in p) && !("p" in p)) return false;
   if (p.c && DATASET.templates[p.c]) CONTENT = p.c;
-  PLANNED = (p.n && +p.n >= 2 && +p.n <= HARD_CAP) ? +p.n : baseSize();
+  const n = parseInt(p.n, 10);   // integers only — +"0x10"/+"7.5" slipped through
+  PLANNED = (n >= 2 && n <= HARD_CAP) ? n : baseSize();
   STYLE = (p.st && (DATASET.styles || {})[p.st]) ? p.st : "balanced";
-  if (p.p) party = p.p.split(",").filter(w => WEAPONS[w]);
+  /* a link WITHOUT p= is a shared empty comp — clear, don't keep the old
+     party (saveHash omits p= when empty, so restore must mirror that);
+     cap at HARD_CAP like every other roster path */
+  party = p.p ? p.p.split(",").filter(w => WEAPONS[w]).slice(0, HARD_CAP) : [];
   syncEngine();
   return true;
 }
@@ -169,7 +211,11 @@ function loadStored(){
   try {
     const h = localStorage.getItem("compforge");
     if (!h) return false;
-    location.hash = h;
+    /* replaceState, NOT location.hash: assigning the hash is a navigation —
+       it pushes a history entry (Back then lands on a hashless URL that
+       disagrees with the rendered state) and fires an async hashchange that
+       double-renders the boot. */
+    history.replaceState(null, "", "#" + h);
     return loadHash();
   } catch (e) { return false; }
 }
@@ -181,18 +227,30 @@ let pickFilter = "";
 let treeFilter = "";
 const $ = id => document.getElementById(id);
 
-const PENDING = [["hellgate_5v5","Hellgate 5v5"], ["roads_7","Roads of Avalon"]];
+const PENDING = [["hellgate_5v5","Hellgate 5v5"]];
 
 function renderSetup(){
-  $("content").innerHTML = Object.entries(DATASET.templates)
-    .map(([k,t]) => `<option value="${k}" ${k===CONTENT?"selected":""}>${t.name} — base ${t.base_size}</option>`)
-    .join("") + PENDING.filter(([k]) => !DATASET.templates[k])
-    .map(([k,n]) => `<option value="${k}" disabled>${n} — template pending</option>`).join("");
+  /* the option lists are static per page load — build once, then only set
+     .value (rewriting a focused <select>'s options mid-interaction is
+     fragile, and it was churned on every render) */
+  const content = $("content"), styleSel = $("style");
+  if (!content.dataset.built){
+    content.innerHTML = Object.entries(DATASET.templates)
+      .map(([k,t]) => `<option value="${k}">${esc(t.name)} — base ${t.base_size}</option>`)
+      .join("") + PENDING.filter(([k]) => !DATASET.templates[k])
+      .map(([k,n]) => `<option value="${k}" disabled>${n} — template pending</option>`).join("");
+    content.dataset.built = "1";
+  }
+  content.value = CONTENT;
   const styles = DATASET.styles || {};
-  const styleKeys = STYLE_ORDER.filter(k => styles[k])
-    .concat(Object.keys(styles).filter(k => STYLE_ORDER.indexOf(k) === -1));
-  $("style").innerHTML = styleKeys.map(k =>
-    `<option value="${k}" ${k===STYLE?"selected":""}>${esc(styles[k].name || k)}</option>`).join("");
+  if (!styleSel.dataset.built){
+    const styleKeys = STYLE_ORDER.filter(k => styles[k])
+      .concat(Object.keys(styles).filter(k => STYLE_ORDER.indexOf(k) === -1));
+    styleSel.innerHTML = styleKeys.map(k =>
+      `<option value="${k}">${esc(styles[k].name || k)}</option>`).join("");
+    styleSel.dataset.built = "1";
+  }
+  styleSel.value = STYLE;
   $("style-blurb").textContent = (styles[STYLE] || {}).blurb || "";
   $("size-input").value = PLANNED;
   const presets = [...new Set(validatedSizes().concat([baseSize()]))].sort((a,b) => a-b);
@@ -201,19 +259,65 @@ function renderSetup(){
   $("size-hint").textContent = party.length > PLANNED
     ? `Roster is ${party.length} — targets and floors now scale to ${SIZE}, not the planned ${PLANNED}.`
     : `Targets and floors scale to whoever shows up — ${SIZE} right now.`;
-  $("size-notice").innerHTML = validatedSizes().includes(SIZE) ? "" :
-    `<div class="notice"><b>Extrapolated.</b> This template is fitted and validated at size ${validatedSizes().join(", ")} only. Per-player targets are scaled linearly to ${SIZE}; flat threshold targets are unchanged. Tier-2 validation must confirm each size before this is trustworthy.</div>`;
+  $("size-notice").innerHTML =
+    (tpl().max_size && SIZE > tpl().max_size
+      ? `<div class="notice"><b>Over the in-game cap.</b> ${esc(tpl().name)} parties are capped at ${tpl().max_size} players in game — ${SIZE} cannot actually field. The advice below still computes, but treat it as hypothetical.</div>`
+      : "")
+    + (!ENG.extrapolated() ? "" :
+    `<div class="notice"><b>Extrapolated.</b> This template is fitted and validated at size ${validatedSizes().join(", ")} only. Per-player targets are scaled linearly to ${SIZE}; flat threshold targets are unchanged. Tier-2 validation must confirm each size before this is trustworthy.</div>`);
 }
 function renderTally(){
-  const counts = {};
-  party.forEach(w => { const r = WEAPONS[w].role_hint || "other"; counts[r] = (counts[r]||0) + 1; });
   $("tally").innerHTML = party.length
-    ? Object.entries(counts).sort((a,b) => b[1]-a[1])
+    ? Object.entries(roleCounts()).sort((a,b) => b[1]-a[1])
         .map(([r,n]) => `<span class="t t-${esc(r)}" data-pfilter="${esc(r)}" role="button" tabindex="0"
            aria-pressed="${PARTY_FACET === r}"
            title="show only the ${esc(r)} slots — click again for all"><b>${n}</b> ${esc(r)}</span>`).join("")
       + `<span class="t"><b>${SIZE - party.length}</b> open</span>`
     : "";
+}
+/* Per-member swap advice (engine swapReview): a member's weapon is valued as
+   if being picked into the rest of the party and ranked against every
+   alternative. Hints show only when they're worth acting on — a decent pick
+   (top ~10% rank) or marginal gains stay silent, so a 3-man missing "ideal"
+   pieces isn't nagged; a genuinely off-comp weapon at this content + size
+   gets multiple concrete options, clickable to swap in place. */
+/* Verdict thresholds live in the DATA layer (templates/scoring.yaml
+   swap_advisor block) like every other PROVISIONAL tunable, so the expert
+   pass can find them; the fallback only covers a pre-block dataset. */
+const SWAP_CFG = (DATASET.scoring || {}).swap_advisor
+  || { min_rank: 15, min_gain: 1.0, offcomp_rank: 60 };
+/* A party-wide gap (say, no healer yet) makes EVERY member's best
+   alternative the same role, and rank measures the shared gap, not
+   individual misfit — naive gating would nag the whole roster with the
+   same "go healer" hint (the next-pick panel already owns that gap). So
+   each suggested ROLE keeps its hint only on the member who'd convert
+   cheapest (largest gain); everyone else stays quiet. Members whose top
+   options point at different roles are genuinely individual advice and
+   all keep their hints. */
+function swapEligible(review){
+  const claim = {};
+  review.forEach((m, i) => {
+    if (!m || m.rank < SWAP_CFG.min_rank) return;
+    const top = m.options.find(o => o.gain >= SWAP_CFG.min_gain);
+    if (!top) return;
+    const role = roleHint(top.weapon);
+    if (!claim[role] || top.gain > claim[role].gain) claim[role] = { i, gain: top.gain };
+  });
+  const ok = new Set();
+  Object.values(claim).forEach(c => ok.add(c.i));
+  return ok;
+}
+function swapHint(m, i){
+  if (!m || m.rank < SWAP_CFG.min_rank) return "";
+  const opts = m.options.filter(o => o.gain >= SWAP_CFG.min_gain);
+  if (!opts.length) return "";
+  const pool = Object.keys(WEAPONS).length;
+  const label = m.rank >= SWAP_CFG.offcomp_rank
+    ? `<b class="offcomp">off-comp here — rank ${m.rank}/${pool}</b>`
+    : `<span class="swap-lbl">better options</span>`;
+  return `<span class="fn swap">${label} ${opts.map(o =>
+    `<button class="swap-opt" data-swapat="${i}" data-swapto="${o.weapon}"
+       title="swap ${nameOf(m.weapon)} for ${nameOf(o.weapon)} (+${o.gain.toFixed(1)} score)">${nameOf(o.weapon)} +${o.gain.toFixed(1)}</button>`).join(" ")}</span>`;
 }
 function renderRoster(){
   /* contribution = fitness lost if this member left — the caller's
@@ -221,6 +325,8 @@ function renderRoster(){
   const base = fitness(party);
   const contrib = party.map((w, i) =>
     base - fitness(party.filter((_, j) => j !== i)));
+  const review = swapReviewCached();
+  const hintable = swapEligible(review);
   const minI = party.length > 2 ? contrib.indexOf(Math.min(...contrib)) : -1;
   const signed = v => (v < 0 ? "−" : "+") + Math.abs(v).toFixed(1);
   const flag = i => i !== minI ? "" : contrib[i] < 0
@@ -229,12 +335,19 @@ function renderRoster(){
   /* party facet: a display filter over the roster — slot numbers and remove
      buttons keep their true indices */
   let idxs = party.map((_, i) => i);
-  if (PARTY_FACET)
-    idxs = idxs.filter(i => (WEAPONS[party[i]].role_hint || "other") === PARTY_FACET);
+  if (PARTY_FACET){
+    idxs = idxs.filter(i => roleHint(party[i]) === PARTY_FACET);
+    if (!idxs.length){
+      /* removing the last member of the filtered role also removes the tally
+         chip that exits the filter — a dead end. Auto-clear instead. */
+      PARTY_FACET = null;
+      idxs = party.map((_, i) => i);
+    }
+  }
   const rows = idxs.map(i => { const w = party[i]; return (
     `<div class="slot ${roleCls(w)}"${roleBg(w)}><span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 32)}
       <span class="nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>${badgeHtml(w)}
-        <span class="fn">${roleOf(w)} · ${signed(contrib[i])} fit${flag(i)}</span></span>
+        <span class="fn">${roleOf(w)} · ${signed(contrib[i])} fit${flag(i)}</span>${hintable.has(i) ? swapHint(review[i], i) : ""}</span>
       <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>`); });
   if (PARTY_FACET){
     rows.push(`<div class="slot more">${idxs.length} of ${party.length} — ${esc(PARTY_FACET)} only · click the chip again for all</div>`);
@@ -262,10 +375,13 @@ function renderTreeFilter(){
     .map(([t,n]) => `<option value="${t}">${n}</option>`).join("");
   $("tree-filter").innerHTML = `<option value="">All weapon trees</option>` + opts;
 }
+/* WEAPONS is static per page load — sort once, not per keystroke (the old
+   per-render sort ran ~2,000 escape-regex + localeCompare calls each pass) */
+const WEAPONS_BY_NAME = Object.keys(WEAPONS)
+  .sort((a,b) => nameOf(a).localeCompare(nameOf(b)));
 function filteredWeapons(){
   const q = pickFilter.trim().toLowerCase();
-  return Object.keys(WEAPONS)
-    .sort((a,b) => nameOf(a).localeCompare(nameOf(b)))
+  return WEAPONS_BY_NAME
     .filter(w => (!treeFilter || TREES[w] === treeFilter)
               && facetOk(w)
               && (!q || (WEAPONS[w].display_name || w).toLowerCase().includes(q)));
@@ -313,14 +429,21 @@ function renderFitness(){
 }
 function renderGroups(){
   const s = supply(party);
-  $("groups").innerHTML = Object.entries(GROUPS).map(([g, caps]) => {
+  /* any requirement cap missing from the hardcoded GROUPS map lands in an
+     "Other" group instead of silently vanishing from the board — the
+     taxonomy grows (anti_zone, damage_debuff, self_sustain all post-date
+     the map) and a forgotten entry hid the cap with zero errors */
+  const grouped = new Set(Object.values(GROUPS).flat());
+  const other = Object.keys(REQS()).filter(c => !grouped.has(c));
+  const groups = other.length ? {...GROUPS, Other: other} : GROUPS;
+  $("groups").innerHTML = Object.entries(groups).map(([g, caps]) => {
     const rows = caps.filter(c => REQS()[c]).map(c => {
       const have = s[c] || 0, t = target(c), soft = softCap(c);
-      const f = FLOORS()[c], floorHit = f && SIZE >= f.min_party_size && have < f.floor_units;
+      const below = floorHit(c, have);
       const over = have > soft;
       const cls = over ? "over" : have === 0 ? "none" : have >= t ? "met" : "part";
-      return `<div class="cap ${floorHit ? "floor-hit" : ""}">
-        <button class="cap-name" data-cap="${c}" title="${esc(prose(c))} — click for evidence">${c}${floorHit ? '<span class="tag floor">below floor</span>' : ""}${over ? '<span class="tag over">overstacked</span>' : ""}</button>
+      return `<div class="cap ${below ? "floor-hit" : ""}">
+        <button class="cap-name" data-cap="${c}" title="${esc(prose(c))} — click for evidence">${c}${below ? '<span class="tag floor">below floor</span>' : ""}${over ? '<span class="tag over">overstacked</span>' : ""}</button>
         <span class="cap-val">${have.toFixed(0)} / ${t.toFixed(1)}</span>
         <span class="cap-bar"><i class="${cls}" style="width:${over ? 100 : Math.min(100, have/t*100)}%"></i></span>
       </div>`;
@@ -335,10 +458,12 @@ function renderWeaknesses(){
   const needed = [], nice = [];
   for (const x of weaknesses(party, 8)){
     if (x.gap < 0.5) continue;
-    const f = FLOORS()[x.cap], r = REQS()[x.cap];
-    const floorHit = f && SIZE >= f.min_party_size && (s[x.cap]||0) < f.floor_units;
+    const below = floorHit(x.cap, s[x.cap] || 0);
     const ratio = (s[x.cap]||0) / target(x.cap);
-    if (floorHit || (r.weight >= 6 && ratio < 0.5)) needed.push({...x, floorHit});
+    // styled weight (ENG.weight), same scale as the engine's own
+    // uncovered-caps test — raw template weight silently disagreed with the
+    // greedy-trap warning under any non-balanced style
+    if (below || (ENG.weight(x.cap) >= 6 && ratio < 0.5)) needed.push({...x, floorHit: below});
     else nice.push(x);
   }
   const row = (x, i, cls) =>
@@ -374,7 +499,8 @@ function renderCmdNext(recs){
   const slotLabel = party.length + 1 > PLANNED
     ? `slot ${party.length + 1} — beyond planned ${PLANNED}`
     : `slot ${party.length + 1} of ${SIZE}`;
-  const styleTag = STYLE !== "balanced" ? ` · ${(DATASET.styles[STYLE] || {}).name || STYLE}` : "";
+  const sn = styleName();
+  const styleTag = sn ? ` · ${sn}` : "";
   const forge = party.length < SIZE
     ? `<button class="cb-forge" id="forge">${party.length ? "forge the rest" : "forge a full comp"}</button>`
     : "";
@@ -404,7 +530,7 @@ function renderRecDetail(recs){
         ${((typeof LOADOUTS !== "undefined" && LOADOUTS[CONTENT]) || {})[top.w] ? (() => {
           const v = LOADOUTS[CONTENT][top.w][0];
           return `<div class="lo-box"><div class="who">caller loadout — ${esc(v.caller)}${v.role ? " · " + esc(v.role) : ""}</div>
-            Q${v.q} ${esc(spellAt(top.w, "q", v.q))} · W${v.w} ${esc(spellAt(top.w, "w", v.w))} · P${v.p} ${esc(spellAt(top.w, "passive", v.p))}</div>`;
+            ${loLine(top.w, v)}</div>`;
         })() : ""}
         <div class="terms">${terms.map(t => `<div class="term">
           <span class="d">+${t.d.toFixed(2)}</span><span class="c">${t.cap}</span>
@@ -435,23 +561,32 @@ function renderFootnote(){
 /* Real-usage field report (sample_battles.py): how often a weapon actually
    appeared on players in recent fights of roughly this party's size.
    Display evidence only — never feeds the scoring. */
-function usageBucketName(){ return SIZE < 12 ? "small" : SIZE <= 30 ? "mid-size" : "large"; }
-function usageOf(w){
+/* One gate for the usage sample: the bucket key comes from the ENGINE's
+   size_bucket, so the display bucket is provably the bucket the meta prior
+   scores with; the min-sample rule lives here once (it was copy-pasted
+   between usageOf and renderMetaStrip). */
+const USAGE_BUCKET_LABEL = { small: "small", mid: "mid-size", large: "large" };
+function usageStats(){
   if (typeof USAGE === "undefined" || !USAGE.buckets) return null;
-  const key = SIZE < 12 ? "small" : SIZE <= 30 ? "mid" : "large";
+  const key = ENG.sizeBucket();
   const m = (USAGE.meta || {})[key];
   if (!m || m.players_attributed < 200) return null;   // not enough data to quote
-  const n = (USAGE.buckets[key] || {})[w] || 0;
-  return { pct: 100 * n / m.players_attributed, n,
-           players: m.players_attributed, battles: m.battles };
+  return { key, label: USAGE_BUCKET_LABEL[key], m };
+}
+function usageOf(w){
+  const u = usageStats();
+  if (!u) return null;
+  const n = (USAGE.buckets[u.key] || {})[w] || 0;
+  return { pct: 100 * n / u.m.players_attributed, n,
+           players: u.m.players_attributed, battles: u.m.battles,
+           label: u.label };
 }
 function usageLine(w){
   const u = usageOf(w);
   if (!u) return "";
-  const bucket = usageBucketName();
   const txt = u.n === 0
-    ? `not seen in ${u.battles} recent ${bucket} fights`
-    : `on ${u.pct.toFixed(u.pct < 1 ? 1 : 0)}% of ${u.players} players across ${u.battles} recent ${bucket} fights`;
+    ? `not seen in ${u.battles} recent ${u.label} fights`
+    : `on ${u.pct.toFixed(u.pct < 1 ? 1 : 0)}% of ${u.players} players across ${u.battles} recent ${u.label} fights`;
   return `<div class="fieldnote">field report: ${txt} <span>(${esc((USAGE.generated_utc || "").slice(0, 10))}, killboard)</span></div>`;
 }
 
@@ -467,6 +602,10 @@ function spellAt(w, slot, idx){
   const e = pool[idx - 1];
   return e ? e[1] : `#${idx}`;
 }
+/* one renderer for the "Q# name · W# name · P# name" caller-loadout line —
+   it was duplicated between the recommendation box and the detail drawer */
+const loLine = (w, v) =>
+  `Q${esc(v.q)} ${esc(spellAt(w, "q", v.q))} · W${esc(v.w)} ${esc(spellAt(w, "w", v.w))} · P${esc(v.p)} ${esc(spellAt(w, "passive", v.p))}`;
 function renderDetail(w){
   const d = WEAPONS[w], sp = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
   const vars = loVariants(w);
@@ -489,7 +628,7 @@ function renderDetail(w){
   const lo = vars.length ? `<div class="lo-box">
       <div class="who">caller loadout${vars.length > 1 ? "s" : ""}</div>
       ${vars.map(v => `<div>${esc(v.caller)}${v.role ? " · " + esc(v.role) : ""}${v.ct !== CONTENT ? ` · <i>${esc((DATASET.templates[v.ct] || {name: v.ct}).name)}</i>` : ""} —
-        Q${v.q} ${esc(spellAt(w, "q", v.q))} · W${v.w} ${esc(spellAt(w, "w", v.w))} · P${v.p} ${esc(spellAt(w, "passive", v.p))}</div>`).join("")}
+        ${loLine(w, v)}</div>`).join("")}
     </div>` : "";
   $("drawer-title").textContent = d.display_name;
   $("drawer-body").innerHTML = `
@@ -514,23 +653,25 @@ function renderEvidence(cap){
   $("drawer-title").textContent = cap;
   $("drawer-body").innerHTML = rows.length
     ? `<table class="ev-tbl"><thead><tr><th>Weapon</th><th>Score</th><th>Evidence spell</th><th>Item key</th></tr></thead><tbody>${rows.join("")}</tbody></table>`
-    : `<p class="ev-empty">No weapon in this party supplies <span class="mono">${cap}</span>. Supply is 0 of ${target(cap).toFixed(1)} units.</p>`;
+    : `<p class="ev-empty">No weapon in this party supplies <span class="mono">${esc(cap)}</span>. Supply is 0 of ${target(cap).toFixed(1)} units.</p>`;
   $("drawer").dataset.open = "true";
 }
 function renderMetaStrip(){
   const sec = $("meta-sec");
-  if (typeof USAGE === "undefined" || !USAGE.buckets){ sec.hidden = true; return; }
-  const key = SIZE < 12 ? "small" : SIZE <= 30 ? "mid" : "large";
-  const m = (USAGE.meta || {})[key];
-  if (!m || m.players_attributed < 200){ sec.hidden = true; return; }
-  const rows = Object.entries(USAGE.buckets[key] || {})
+  const u = usageStats();
+  if (!u){ sec.hidden = true; return; }
+  /* usage keys are filtered against the dataset at build time too, but a
+     stale inlined file must degrade to a shorter list, not throw in nameOf
+     and kill every render after a weapon rename */
+  const rows = Object.entries(USAGE.buckets[u.key] || {})
+    .filter(([w]) => WEAPONS[w])
     .sort((a,b) => b[1] - a[1]).slice(0, 12);
   $("meta-label").textContent =
-    `This week on the killboard — ${usageBucketName()} fights (${m.battles} battles, ${m.players_attributed} players)`;
+    `This week on the killboard — ${u.label} fights (${u.m.battles} battles, ${u.m.players_attributed} players)`;
   $("meta-strip").innerHTML = rows.map(([w, n], i) =>
     `<div class="meta-row"><span class="rk">${String(i+1).padStart(2,"0")}</span>${icon(w, 20)}
       <button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>
-      <span class="pct">${(100 * n / m.players_attributed).toFixed(1)}%</span></div>`).join("");
+      <span class="pct">${(100 * n / u.m.players_attributed).toFixed(1)}%</span></div>`).join("");
   sec.hidden = false;
 }
 /* ------------------------------------------------ live party (companion)
@@ -540,15 +681,24 @@ function renderMetaStrip(){
    mixed-content blocking, so the HTTPS page can read it directly. */
 const COMPANION_URL = "http://localhost:53321";
 let companionOn = false, companionTimer = null, companionData = null;
+let companionSig = null;
 
 async function companionPoll(){
+  if (document.hidden) return;   // no point polling a tab nobody sees
   try {
     const r = await fetch(COMPANION_URL + "/party", {cache: "no-store"});
     if (!r.ok) throw new Error("http " + r.status);
-    companionData = await r.json();
+    const j = await r.json();
+    /* skip the DOM rebuild when the party payload is unchanged (the ts
+       field ticks every response, so compare the content, not the text) */
+    const sig = JSON.stringify({ self: j.self, members: j.members });
+    companionData = j;
+    if (sig === companionSig) return;
+    companionSig = sig;
     renderCompanion(true);
   } catch (e) {
     companionData = null;
+    companionSig = null;
     renderCompanion(false, e.message);
   }
 }
@@ -556,7 +706,7 @@ function companionRoleClass(w){
   const rh = (WEAPONS[w] && WEAPONS[w].role_hint) || "";
   return rh ? `role-${rh}` : "";
 }
-function renderCompanion(live){
+function renderCompanion(live, err){
   const box = $("companion"), status = $("companion-status");
   const members = $("companion-members"), load = $("companion-load"), connect = $("companion-connect");
   box.dataset.live = live ? "true" : "false";
@@ -568,8 +718,11 @@ function renderCompanion(live){
   connect.textContent = "disconnect";
   status.hidden = false;
   if (!live){
-    status.innerHTML = `<span class="comp-dot"></span>companion not found
-      <span class="sub">start <code>companion/run-companion.bat</code> as admin — retrying…</span>`;
+    /* the raw error distinguishes "not running" from a browser-side block
+       (CORS / local-network permission) — without it every failure reads as
+       "start the exe" even when the exe is fine */
+    status.innerHTML = `<span class="comp-dot"></span>companion not reachable
+      <span class="sub">${err ? esc(err) + " — " : ""}start <code>companion/run-companion.bat</code> as admin; if it IS running, check for a local-network permission prompt in the address bar — retrying…</span>`;
     members.innerHTML = ""; load.hidden = true;
     return;
   }
@@ -597,6 +750,10 @@ function loadCompanionParty(){
 }
 function toggleCompanion(){
   companionOn = !companionOn;
+  /* reset the skip-unchanged signature on every toggle: after a manual
+     disconnect/reconnect the first poll must re-render the connected state
+     even when the party payload is identical to before */
+  companionSig = null;
   if (companionOn){ companionPoll(); companionTimer = setInterval(companionPoll, 5000); }
   else { clearInterval(companionTimer); companionTimer = null; companionData = null; renderCompanion(false); }
 }
@@ -610,12 +767,10 @@ function render(){
 }
 
 function compText(){
-  const counts = {};
-  party.forEach(w => { const r = WEAPONS[w].role_hint || "other"; counts[r] = (counts[r]||0) + 1; });
-  const styleBit = STYLE !== "balanced" ? ` · ${(DATASET.styles[STYLE] || {}).name || STYLE}` : "";
+  const sn = styleName();
   const lines = [
-    `**${tpl().name}${styleBit}** — ${party.length}/${SIZE} — fitness ${fitness(party).toFixed(1)}/${maxFitness().toFixed(0)}`,
-    Object.entries(counts).sort((a,b) => b[1]-a[1]).map(([r,n]) => `${n} ${r}`).join(" · "),
+    `**${tpl().name}${sn ? " · " + sn : ""}** — ${party.length}/${SIZE} — fitness ${fitness(party).toFixed(1)}/${maxFitness().toFixed(0)}`,
+    Object.entries(roleCounts()).sort((a,b) => b[1]-a[1]).map(([r,n]) => `${n} ${r}`).join(" · "),
     "",
   ];
   party.forEach((w,i) => lines.push(
@@ -651,6 +806,8 @@ document.addEventListener("click", e => {
   if (rf){ setFacet({type: "role", v: rf.dataset.rfilter},
                     !rf.closest("#picker-chips")); return; }
   if (e.target.closest("#facet-clear")){ setFacet(null); return; }
+  const sw = e.target.closest("[data-swapat]");
+  if (sw){ party[+sw.dataset.swapat] = sw.dataset.swapto; render(); return; }
   const det = e.target.closest("[data-detail]");
   if (det){ renderDetail(det.dataset.detail); return; }
   const add = e.target.closest("[data-add]");
@@ -723,7 +880,10 @@ document.addEventListener("input", e => {
 });
 document.addEventListener("keydown", e => {
   if ((e.key === "Enter" || e.key === " ")
-      && e.target.matches("[data-bfilter],[data-rfilter],[data-pfilter]")){
+      && e.target.matches("[data-bfilter],[data-rfilter],[data-pfilter],span.info[data-detail]")){
+    /* the picker's "i" detail control is a focusable role=button SPAN inside
+       the add-weapon button — without this it is announced as a button but
+       Enter/Space do nothing (and would otherwise trigger the outer add) */
     e.preventDefault(); e.target.click(); return;
   }
   if (e.key === "Escape"){ $("drawer").dataset.open = "false"; return; }
@@ -748,8 +908,12 @@ window.addEventListener("hashchange", () => {
 $("build-stamp").textContent = `v${META.version} · ${META.weapons_curated}/${META.weapons_total} curated`;
 
 /* Boot: a shared link restores content/size/party; otherwise seed with the
-   design doc's worked example (§4.3), if those sheets exist. */
-const SEED = ["2H_LONGBOW","MAIN_ARCANESTAFF_UNDEAD","2H_ICECRYSTAL_UNDEAD"].filter(w => WEAPONS[w]);
+   design doc's worked example (§4.3). The seed comes from the build-time
+   parity fixture, so the client and the fixture provably score the SAME
+   party — three hardcoded copies used to have to agree by eyeball, and one
+   drifting meant a false "PARITY MISMATCH" banner. */
+const SEED = ((typeof PARITY_EXPECTED !== "undefined" && PARITY_EXPECTED.party) || [])
+  .filter(w => WEAPONS[w]);
 if (!loadHash() && !loadStored()) party = SEED;
 renderTreeFilter();
 syncEngine();
@@ -761,13 +925,18 @@ render();
    goes stale the moment a sheet is curated. Reported in the masthead chip. */
 (function parity(){
   if (typeof PARITY_EXPECTED === "undefined" || !SEED.length) return;
-  const e2 = new CompEngine(DATASET, "castle_outpost", 7);
+  const e2 = new CompEngine(DATASET, PARITY_EXPECTED.content || "castle_outpost",
+                            PARITY_EXPECTED.size || 7);
   const got = {
-    fitness: +e2.fitness(SEED).toFixed(2),
+    fitness: e2.fitness(SEED),
     recs: e2.recommend(SEED, 4).map(r => r.weapon),
     weaknesses: e2.weaknesses(SEED).map(x => x.cap),
   };
-  const ok = JSON.stringify(got) === JSON.stringify(PARITY_EXPECTED);
+  /* tolerance compare like the test suite — rounding both sides to 2dp
+     could flip a healthy build to "do not trust" on an exact rounding tie */
+  const ok = Math.abs(got.fitness - PARITY_EXPECTED.fitness) < 1e-9
+    && JSON.stringify(got.recs) === JSON.stringify(PARITY_EXPECTED.recs)
+    && JSON.stringify(got.weaknesses) === JSON.stringify(PARITY_EXPECTED.weaknesses);
   (ok ? console.info : console.error)("engine parity vs engine.py:",
     ok ? "OK" : "MISMATCH", ok ? got : {got, expected: PARITY_EXPECTED});
   const chip = $("parity-chip"), dot = $("parity-dot");

@@ -14,14 +14,21 @@ namespace CompForgeCompanion;
 /// </summary>
 public sealed class PartyState
 {
+    /// <summary>Shared serializer options — a fresh instance per call
+    /// discards System.Text.Json's cached type metadata (Program.cs's
+    /// endpoints reuse this too).</summary>
+    internal static readonly JsonSerializerOptions Indented = new() { WriteIndented = true };
+
     private readonly object _lock = new();
     private readonly Dictionary<string, Member> _members = new();   // key: name.ToLowerInvariant()
     private readonly Dictionary<long, string> _objectIdToName = new();
     private string? _selfName;
     private string? _cachePath;
     private SpellDb? _spells;
+    private ItemDb? _items;
 
     public void SetSpellDb(SpellDb spells) => _spells = spells;
+    public void SetItemDb(ItemDb items) => _items = items;
 
     /// <summary>Our own character name, once the self-join is seen.</summary>
     public string? SelfName { get { lock (_lock) return _selfName; } }
@@ -118,27 +125,24 @@ public sealed class PartyState
         }
     }
 
-    public void AddMember(Guid guid, string name) =>
-        Upsert(name, m => m.Guid = guid.ToString(), "PartyPlayerJoined");
-
-    public void RemoveMember(string name)
-    {
-        lock (_lock) _members.Remove(name.ToLowerInvariant());
-    }
-
-    public void Disband()
-    {
-        lock (_lock)
-        {
-            _members.Clear();
-            _objectIdToName.Clear();
-        }
-    }
+    // Object ids are per-zone and the game offers no clean zone-change signal
+    // here, so the id->name map cannot be invalidated precisely; bound it so a
+    // long session can't grow it forever (KNOWN LIMITATION: a reused id can
+    // briefly attribute a stranger's gear to a party member until their next
+    // NewCharacter — see companion/README.md).
+    private const int MaxObjectIds = 4096;
+    private readonly Queue<long> _objectIdOrder = new();
 
     public void SeeCharacter(long objectId, string name, string? guild)
     {
         lock (_lock)
         {
+            if (!_objectIdToName.ContainsKey(objectId))
+            {
+                _objectIdOrder.Enqueue(objectId);
+                while (_objectIdOrder.Count > MaxObjectIds)
+                    _objectIdToName.Remove(_objectIdOrder.Dequeue());
+            }
             _objectIdToName[objectId] = name;
             if (_members.ContainsKey(name.ToLowerInvariant()) && guild != null)
                 Upsert(name, m => m.Guild = guild, "NewCharacter");
@@ -152,7 +156,7 @@ public sealed class PartyState
 
     /// <summary>Equipment update for a player we may or may not track.
     /// Only party members (or self) are recorded — party scope only.</summary>
-    public bool UpdateLoadout(string name, ItemDb items,
+    public bool UpdateLoadout(string name,
         int[]? equipment, int[]? spells, double? itemPower, string source)
     {
         lock (_lock)
@@ -162,15 +166,15 @@ public sealed class PartyState
             if (!_members.ContainsKey(key) && !isSelf) return false;
             Upsert(name, m =>
             {
-                if (equipment is { Length: > 0 })
+                if (equipment is { Length: > 0 } && _items is ItemDb items)
                 {
                     var eq = new Dictionary<string, string>();
-                    string?[] slots = { "mainhand", "offhand", "head", "chest", "shoes",
-                                        "bag", "cape", "mount", "potion", "food" };
+                    string[] slots = { "mainhand", "offhand", "head", "chest", "shoes",
+                                       "bag", "cape", "mount", "potion", "food" };
                     for (var i = 0; i < equipment.Length && i < slots.Length; i++)
                     {
-                        if (equipment[i] <= 0 || slots[i] == null) continue;
-                        eq[slots[i]!] = items.FullName(equipment[i]);
+                        if (equipment[i] <= 0) continue;
+                        eq[slots[i]] = items.FullName(equipment[i]);
                     }
                     m.Equipment = eq;
                     if (eq.TryGetValue("mainhand", out var mh))
@@ -201,15 +205,15 @@ public sealed class PartyState
 
     private void Upsert(string name, Action<Member> mutate, string source)
     {
-        lock (_lock)
-        {
-            var key = name.ToLowerInvariant();
-            if (!_members.TryGetValue(key, out var m))
-                _members[key] = m = new Member { Name = name };
-            mutate(m);
-            m.UpdatedUtc = DateTime.UtcNow.ToString("o");
-            m.Source = source;
-        }
+        // caller must hold _lock — every caller (SetParty, SeeCharacter,
+        // UpdateLoadout) provably does; re-locking here only obscured who
+        // owns the lock
+        var key = name.ToLowerInvariant();
+        if (!_members.TryGetValue(key, out var m))
+            _members[key] = m = new Member { Name = name };
+        mutate(m);
+        m.UpdatedUtc = DateTime.UtcNow.ToString("o");
+        m.Source = source;
     }
 
     public string ToJson()
@@ -222,7 +226,7 @@ public sealed class PartyState
                 self = _selfName,
                 members = _members.Values.OrderBy(m => m.Name).ToList(),
             };
-            return JsonSerializer.Serialize(doc, new JsonSerializerOptions { WriteIndented = true });
+            return JsonSerializer.Serialize(doc, Indented);
         }
     }
 

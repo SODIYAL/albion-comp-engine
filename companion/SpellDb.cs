@@ -28,33 +28,8 @@ public sealed class SpellDb
     public static async Task<SpellDb> LoadAsync(string cacheDir)
     {
         var db = new SpellDb();
-        var cache = Path.Combine(cacheDir, "spells.xml");
-        string? xml = null;
-
-        var fresh = File.Exists(cache)
-            && DateTime.UtcNow - File.GetLastWriteTimeUtc(cache) < TimeSpan.FromDays(7);
-        if (fresh)
-            xml = await File.ReadAllTextAsync(cache);
-        else
-        {
-            try
-            {
-                using var http = new HttpClient { Timeout = TimeSpan.FromSeconds(60) };
-                http.DefaultRequestHeaders.UserAgent.ParseAdd("compforge-companion/0.1");
-                xml = await http.GetStringAsync(SourceUrl);
-                await File.WriteAllTextAsync(cache, xml);
-                Console.WriteLine($"[spells] refreshed from ao-bin-dumps ({xml.Length / 1024 / 1024} MB)");
-            }
-            catch (Exception e) when (File.Exists(cache))
-            {
-                Console.WriteLine($"[spells] refresh failed ({e.Message}) — using stale cache");
-                xml = await File.ReadAllTextAsync(cache);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"[spells] WARNING: no spell table ({e.Message}) — raw indices only");
-            }
-        }
+        var xml = await CachedFetch.GetAsync(SourceUrl,
+            Path.Combine(cacheDir, "spells.xml"), "spells", TimeSpan.FromSeconds(60));
 
         if (xml != null) db.Parse(xml);
         Console.WriteLine($"[spells] {db.Count} spell indices loaded");

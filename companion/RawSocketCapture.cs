@@ -21,6 +21,11 @@ public sealed class RawSocketCapture
     private static readonly int[] AlbionPorts = { 5055, 5056, 5058 };
     private readonly AlbionEventParser _parser;
     private readonly FragmentReassembler _reasm = new();
+    // One capture thread runs per interface (VPN/Hyper-V adapters included),
+    // but the parser's internal state (fragment reassembly, guid maps) is not
+    // thread-safe — all ReceivePacket calls are serialized through this lock.
+    // Game traffic rides one interface, so contention is nil.
+    private readonly object _parserLock = new();
     public long PacketsSeen, AlbionPackets, ParseErrors, Fragments, Reassembled;
     public string? LastParseError;
 
@@ -71,7 +76,7 @@ public sealed class RawSocketCapture
             int n;
             try { n = socket.Receive(buf); }
             catch (SocketException) { continue; }
-            PacketsSeen++;
+            Interlocked.Increment(ref PacketsSeen);
             HandleIpPacket(buf, n);
         }
     }
@@ -99,6 +104,13 @@ public sealed class RawSocketCapture
         byte[] ipPayload;
         if (!moreFragments && fragOffset == 0)
         {
+            // Filter BEFORE copying: this promiscuous socket sees every UDP
+            // datagram on the host (voice, streams, browsers) — copying each
+            // one just to drop it at the port check below was steady GC churn.
+            if (ipPayloadLen < 8) return;
+            var sp = (buf[ihl] << 8) | buf[ihl + 1];
+            var dp = (buf[ihl + 2] << 8) | buf[ihl + 3];
+            if (!AlbionPorts.Contains(sp) && !AlbionPorts.Contains(dp)) return;
             ipPayload = new byte[ipPayloadLen];
             Array.Copy(buf, ihl, ipPayload, 0, ipPayloadLen);
         }
@@ -124,11 +136,11 @@ public sealed class RawSocketCapture
         var photon = new byte[photonLen];
         Array.Copy(ipPayload, 8, photon, 0, photonLen);
 
-        AlbionPackets++;
-        try { _parser.ReceivePacket(photon); }
+        Interlocked.Increment(ref AlbionPackets);
+        try { lock (_parserLock) _parser.ReceivePacket(photon); }
         catch (Exception e)
         {
-            ParseErrors++;
+            Interlocked.Increment(ref ParseErrors);
             LastParseError = e.Message;
         }
     }

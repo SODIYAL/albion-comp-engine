@@ -21,7 +21,7 @@ anything:
    and the first V4 baseline (with its three findings) is recorded there
 4. `engine/engine.py` + `tests/test_golden.py` — the engine (it has a CLI:
    `py -3 engine/engine.py camlann hallowfall --content blackzone_roam
-   --size 10 --style clap`) and its 15 golden regression cases
+   --size 10 --style clap`) and its golden regression cases (24)
 
 ## Environment (Windows)
 
@@ -41,7 +41,7 @@ anything:
 ```
 py -3 pipeline/evidence_lint.py        # CI gate — exit 1 blocks release
 py -3 pipeline/build_dataset.py        # sheets + templates + styles -> out/dataset-latest.json
-py -3 tests/test_golden.py             # must stay 15/15
+py -3 tests/test_golden.py             # must stay 24/24
 py -3 tests/test_js_parity.py          # browser scoring == engine.py (needs node)
 py -3 tests/test_patch_history.py      # patch-diff + staleness units, no clone needed
 py -3 pipeline/build_dashboard.py      # -> dashboard/index.html AND docs/index.html
@@ -88,21 +88,125 @@ thing needs **one live in-game run** to confirm three things at once:
   auto-calibration · `afa0f62` connect button. None pushed (public site
   untouched).
 
+## Session 2026-08-15 — Roads template + per-member swap advisor
+
+Goal driven ("caller picks the content; small parties may lack roles, big
+ones shouldn't; poor picks get multiple better options"):
+
+- **`pipeline/templates/roads.yaml`** — Roads of Avalon (base 7, `max_size: 7`
+  = the in-game cap, UI warns above it). PROVISIONAL like all templates; the
+  header documents the small-scale inversion (burst_st weight 7 vs
+  blackzone's 1, heal_reduction 7, mobility/catch/disengage high, AoE/zone
+  low; `self_sustain` used for the first time — healer-less duos/trios are
+  legitimate). Floors arm by size: heal from 5, tank from 6 — a 3-man
+  without a healer is fine (T16 pins this), a 7-man is flagged broken.
+- **Swap advisor** — `Engine.swap_review(party)` (+ identical
+  `swapReview` in `app_scoring.js`, parity-covered on every 6th case): each
+  member's CURRENT weapon valued exactly as recommend() would value it into
+  the rest of the party, ranked vs all alternatives (strictly-better counts
+  only), top-3 upgrade options with gains. CLI: `--review`. Comp Forge
+  renders it per roster slot — silent for decent picks (rank < 15 or gain
+  < 1.0), "better options" links otherwise, "off-comp here — rank N/137"
+  past rank 60; options click-to-swap in place. T17 pins the directions
+  (Realmbreaker in a roads 7-man: rank 105, healer-staff options offered).
+- Golden 24/24 (T16 roads size graduation, T17 swap advisor); parity 60/60;
+  headless Chromium run verified the built page (picker, hints, swap click,
+  cap notice, parity chip OK, zero console errors).
+- `build_dashboard.py` now builds on Python 3.11 too (backslash-in-f-string
+  expressions hoisted out — 3.12-only syntax).
+
+Still open for the goal: gear-quality advice needs gear sheets (§2.4, the
+known big build item); live-join re-advice works via the companion connect
+button (poll → load party → advisor runs on every render).
+
+### Full code-review pass (same day) — web app + companion
+
+Three reviews ran (scoped diff review + holistic web-app + companion C#);
+every confirmed finding is fixed, gates green after each batch:
+
+- **Cross-engine rounding divergence (HIGH, was live)**: Python `round()` is
+  half-to-even, JS `Math.round` half-up, and the Q16 `grow()` curve lands on
+  exact .5 counts at ordinary sizes (faction_war@10/brawl measured 16% apart
+  on burst_st supply). Both engines now share one explicit half-UP rule
+  (`_half_up` / `Math.floor(x+0.5)`). The parity suite was blind to it
+  because all 60 cases ran at base_size — sizes now cycle through shrunk /
+  grown / .5-tie / >30 variants per case.
+- Swap advisor: party-wide gaps no longer nag every member (per-role dedupe,
+  cheapest converter keeps the hint); empty-pool JS/Python divergence fixed
+  (`_pool()`); score formula deduped into `pick_score`/`pickScore`; sweep
+  memoized in the dashboard.
+- Dashboard robustness: share-hash roster capped at HARD_CAP; junk hashes
+  fall back to seed; empty-party links clear the roster; `loadStored` uses
+  replaceState (no history pollution / double render); facet dead-end
+  auto-clears; stale usage keys filtered at build AND render (a rename
+  previously killed every render); keyboard activation for the picker's "i"
+  span; groups/weakness "have" numbers now show EFFECTIVE supply (they mixed
+  raw numbers with effective gap scores); parity fixture compares at 1e-9
+  instead of 2dp rounding; a handful of esc() gaps closed.
+- Companion (compile-verified, dotnet 0 warnings): per-request try/catch —
+  one aborted poll used to kill the process; Photon fragment reassembly TTL
+  sweep + 4MB totalLength cap (leak + hostile allocation); parser calls
+  serialized across capture threads; CORS wildcard → allowlist per
+  COMPANION_SCOPE + OPTIONS/Private-Network-Access preflight; CRC branch
+  read header bytes as the CRC (latent, fixed per upstream semantics);
+  objectId map bounded (4096); roster/self-join shape guards require
+  plausible character names (3-16 alphanumeric). Cross-zone objectId reuse
+  stays a KNOWN LIMITATION (companion/README.md) — needs a live zone-change
+  event identified before it can be fixed properly.
+
+### Cleanup/efficiency pass (2026-08-15, four-angle review: reuse /
+### simplification / efficiency / altitude)
+
+- **Engines ~2x faster on the hot path** (JS swapReview 56→18ms, recommend
+  2.2→0.94ms; Python swap_review 89→70ms): per-set_content caches for
+  scaled targets / styled weights / per-weapon loadout combos
+  (`_loadout_extras`) — same expressions, same floats, parity 60/60
+  unchanged. Scoring math deduped into `_overstack` + `_cover_terms`
+  (the T10 base-weight rule now lives ONCE per engine); `_table_lookup`,
+  `size_bucket()` and `floor_armed()` are the single homes of the clamp
+  rule, the usage buckets and the below-floor predicate — the dashboard
+  consumes the last two instead of re-deriving them (bucket boundaries were
+  written 5x across 3 files; the floor predicate 3x).
+- Dashboard: swap-advisor thresholds moved to `templates/scoring.yaml
+  swap_advisor` (data layer, visible to the expert pass); needed-now split
+  uses STYLED weight (raw weight silently disagreed with the greedy-trap
+  warning under any style); weapon list sorted once not per keystroke;
+  fitness/supply computed once per state; static <select>s built once;
+  companion poll skips DOM churn on unchanged payloads and pauses in
+  hidden tabs; capability board grew an "Other" fallback group — which
+  immediately surfaced that `damage_debuff` had been silently missing from
+  the board (now in Denial); parity fixture carries its own seed party
+  (was 3 hardcoded copies that had to agree by eyeball).
+- Companion: UDP port filter now runs BEFORE the per-packet copy (the
+  promiscuous socket was copying every datagram on the host); shared
+  `CachedFetch` (ItemDb/SpellDb had drifted copies); shared
+  JsonSerializerOptions; ItemDb injected once instead of threaded through
+  every UpdateLoadout call; dead code deleted (AddMember/RemoveMember/
+  Disband, `_guidToName`); Upsert lock discipline documented; self-join
+  gate consolidated into its handler. dotnet build 0 warnings.
+- Deliberately SKIPPED: rerouting _app.js's tpl/REQS accessors through ENG
+  (they run before syncEngine during state transitions — would read stale
+  context); moving `load_loadouts` into build_dataset (dataset schema +
+  meta_comps format decision for the owner); merging companionRoleClass
+  into roleCls (different unknown-weapon semantics).
+
 ## Current state (verified 2026-08-13)
 
 **One source of truth.** Capability numbers live only in `pipeline/sheets/*.yaml`;
 global combat-mechanics numbers live only in `pipeline/templates/mechanics.yaml`.
 The engine, the golden tests and the page all consume `out/dataset-latest.json`.
-All gates green: lint 0 errors across 60 sheet files, golden 18/18, JS/Python
-parity 60/60 across all templates × styles at 1e-9, patch-history 14/14.
+All gates green: lint 0 errors across 60 sheet files, golden 24/24, JS/Python
+parity 60/60 across all templates × styles at 1e-9 (now also covering
+swap_review), patch-history 14/14.
 
 - **Curated: 137/137 combat weapons.** The remaining 24 catalog entries are
   vanity items / gathering tools — no sheets, on purpose. Drafts: 0.
   Illustrative placeholders: 0 (`sheets/illustrative/prototype_v0.yaml` is a
   tombstone record of the §2.3 prototype numbers and their corrections).
-- **Five content templates, sizes set by the content**: `blackzone_roam` (20),
+- **Six content templates, sizes set by the content**: `blackzone_roam` (20),
   `territory_defense` (20), `castle` (25), `faction_war` (15),
-  `castle_outpost` (7) — plus **five playstyles** in `templates/styles.yaml`
+  `castle_outpost` (7), `roads` (7, `max_size: 7` — the in-game Roads party
+  cap; the UI warns above it) — plus **five playstyles** in `templates/styles.yaml`
   (balanced/brawl/clap/kite/brawl_clap) that multiply capability WEIGHTS on
   top of any template (floors and over-stack stay on base weight — T10 caught
   the alternative punishing a clap comp for stacking bombs). Party size is

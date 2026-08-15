@@ -27,7 +27,7 @@ sheets/illustrative/      design-doc §2.3 placeholders — NOT a release
 out/dataset-<version>.json + dataset-latest.json    ← single source of truth
    │
    ├─ engine/engine.py            scoring engine (Python)
-   ├─ tests/test_golden.py        13 golden regression cases
+   ├─ tests/test_golden.py        golden regression cases (24)
    └─ py -3 pipeline/build_dashboard.py → dashboard/index.html (Comp Forge,
             the product page; dataset inlined, scoring runs in-browser via
             app_scoring.js — a port of engine.py that tests/test_js_parity.py
@@ -210,8 +210,8 @@ not needed as a source.
   Display-only in the dashboard until validation admits it to scoring.
 - Structural capabilities (engage, peel, clump, tankiness…) are human-only by
   design; drafts contain effect capabilities only.
-- Five content templates exist (`blackzone_roam` 20, `territory_defense` 20,
-  `castle` 25, `faction_war` 15, `castle_outpost` 7) plus the playstyle
+- Six content templates exist (`blackzone_roam` 20, `territory_defense` 20,
+  `castle` 25, `faction_war` 15, `castle_outpost` 7, `roads` 7) plus the playstyle
   overlays in `templates/styles.yaml` — everything but castle_outpost is a
   2026-08-1x PROVISIONAL draft; sizes off the validated list are linear
   extrapolation and labelled as such in the UI.

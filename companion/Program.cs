@@ -33,8 +33,9 @@ var items = await ItemDb.LoadAsync(exeDir);
 var spells = await SpellDb.LoadAsync(exeDir);
 var state = new PartyState();
 state.SetSpellDb(spells);
+state.SetItemDb(items);
 state.EnablePersistence(Path.Combine(exeDir, "party-cache.json"));
-var parser = new AlbionEventParser(state, items, debug);
+var parser = new AlbionEventParser(state, debug);
 var capture = new RawSocketCapture(parser);
 capture.Start();
 
@@ -43,19 +44,61 @@ listener.Prefixes.Add($"http://127.0.0.1:{port}/");
 listener.Prefixes.Add($"http://localhost:{port}/");
 listener.Start();
 Console.WriteLine($"[http] serving http://localhost:{port}/party  (and /status)");
-Console.WriteLine("[http] CORS: any origin (loopback-only server; data is party-scope only)");
+Console.WriteLine("[http] CORS allowlist: Comp Forge Pages origin, localhost, file://");
 if (!debug) Console.WriteLine("tip: --debug prints every handled event — use it for the first live run");
 
+// CORS: echo the request Origin only when it is Comp Forge's own page —
+// the public Pages site, a localhost dev copy, or the file:// build (which
+// sends the literal Origin "null"). Loopback binding already keeps LAN
+// peers out; this keeps arbitrary WEBSITES the user has open from silently
+// polling character/party data (COMPANION_SCOPE.md specifies the Pages
+// origin, not a wildcard).
+static string? AllowedOrigin(string? origin) =>
+    origin != null
+    && (origin == "https://sodiyal.github.io"
+        || origin == "null"                                  // file:// page
+        || origin.StartsWith("http://localhost:")
+        || origin == "http://localhost"
+        || origin.StartsWith("http://127.0.0.1:")
+        || origin == "http://127.0.0.1")
+    ? origin : null;
+
 var started = DateTime.UtcNow;
-while (true)
+while (listener.IsListening)
 {
     HttpListenerContext ctx;
     try { ctx = await listener.GetContextAsync(); }
-    catch (Exception) { break; }
+    catch (ObjectDisposedException) { break; }
+    catch (HttpListenerException) { break; }        // listener stopped
+    catch (Exception) { continue; }                 // transient accept error
 
+    // One flaky client must never take the server (and with it the whole
+    // process, capture threads included) down: everything per-request is
+    // contained. HttpListener throws from the response stream on a client
+    // abort mid-write — the most common failure with a polling page.
+    try
+    {
     var res = ctx.Response;
-    res.Headers["Access-Control-Allow-Origin"] = "*";
+    var allowed = AllowedOrigin(ctx.Request.Headers["Origin"]);
+    if (allowed != null) res.Headers["Access-Control-Allow-Origin"] = allowed;
     res.Headers["Cache-Control"] = "no-store";
+
+    // Chrome's Private Network Access gates public-HTTPS -> localhost
+    // fetches behind an OPTIONS preflight that must be acknowledged —
+    // without this the Pages site can never reach the companion once PNA
+    // enforcement is on, and the page shows "companion not found" forever.
+    if (ctx.Request.HttpMethod == "OPTIONS")
+    {
+        if (allowed != null)
+        {
+            res.Headers["Access-Control-Allow-Methods"] = "GET";
+            res.Headers["Access-Control-Allow-Headers"] = "*";
+            res.Headers["Access-Control-Allow-Private-Network"] = "true";
+        }
+        res.StatusCode = 204;
+        res.Close();
+        continue;
+    }
 
     string body;
     switch (ctx.Request.Url?.AbsolutePath)
@@ -68,7 +111,7 @@ while (true)
             // parameter-shape map per event/op code — used to identify which
             // codes carry party/equipment data on the current game version
             body = System.Text.Json.JsonSerializer.Serialize(parser.SchemaDump(),
-                new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+                PartyState.Indented);
             res.ContentType = "application/json";
             break;
         case "/status":
@@ -93,7 +136,7 @@ while (true)
                 party_members = state.Count,
                 item_indices = items.Count,
                 spell_indices = spells.Count,
-            }, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+            }, PartyState.Indented);
             res.ContentType = "application/json";
             break;
         default:
@@ -106,4 +149,10 @@ while (true)
     res.ContentLength64 = bytes.Length;
     await res.OutputStream.WriteAsync(bytes);
     res.Close();
+    }
+    catch (Exception e)
+    {
+        try { ctx.Response.Abort(); } catch { /* already gone */ }
+        if (debug) Console.WriteLine($"[http] request aborted: {e.Message}");
+    }
 }
