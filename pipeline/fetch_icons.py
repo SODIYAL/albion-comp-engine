@@ -29,8 +29,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
 CACHE = os.path.join(OUT, "icons")
 MANIFEST = os.path.join(OUT, "icon_data.json")
-URL = "https://render.albiononline.com/v1/item/{item}.png?size=64"
-SIZE = 64
+URL = "https://render.albiononline.com/v1/item/{item}.png?size=96"
+SIZE = 96  # 2.2x the largest list display (44px) — crisp on retina; rerun with --force after bumping
 UA = {"User-Agent": "albion-comp-engine icon fetch (github.com/SODIYAL/albion-comp-engine)"}
 
 

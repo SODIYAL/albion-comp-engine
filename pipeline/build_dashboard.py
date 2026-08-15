@@ -92,6 +92,12 @@ def main():
         lines = json.load(f)
     trees = {k: (lines.get(k) or {}).get("subcategory", "other")
              for k in data["weapons"]}
+    # Render-service item ids (T4_2H_MACE …) — the dossier hot-loads the
+    # full-resolution render at runtime when online, falling back to the
+    # small inlined icon offline.
+    items = {k: (lines.get(k) or {}).get("example_item")
+             for k in data["weapons"]
+             if (lines.get(k) or {}).get("example_item")}
     # Spell pools with display names — powers the weapon detail drawer and
     # resolves caller loadout indices (q3 = 3rd Q option, game-data order).
     with open(os.path.join(HERE, "out", "spell_index.json"), encoding="utf-8") as f:
@@ -156,6 +162,7 @@ def main():
            f"<script>\nconst DATASET = {blob};\n"
            f"const ICONS = {js(icons)};\n"
            f"const TREES = {js(trees)};\n"
+           f"const ITEMS = {js(items)};\n"
            f"const SPELLS = {js(spells)};\n"
            f"const LOADOUTS = {js(loadouts)};\n"
            f"const USAGE = {js(usage)};\n"

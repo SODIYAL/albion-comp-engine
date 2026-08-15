@@ -281,10 +281,54 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   transition:color .18s var(--ease), border-color .18s var(--ease);
 }
 .info:hover{color:var(--brass); border-color:var(--brass)}
-/* weapon detail drawer */
-.dt-head{display:flex; gap:12px; align-items:center; margin-bottom:6px}
-.dt-head b{font-family:var(--serif); font-size:19px}
-.dt-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:4px 32px; align-items:start}
+/* weapon detail drawer — the dossier */
+.dt-head{display:flex; gap:18px; align-items:center; margin-bottom:10px}
+.dt-head b{font-family:var(--serif); font-size:22px}
+.dt-id{min-width:0}
+.hero-art{
+  position:relative; flex:none; display:grid; place-items:center;
+  border-radius:12px; overflow:hidden;
+  background:radial-gradient(closest-side, rgba(217,164,78,.16), rgba(217,164,78,.02) 75%);
+  box-shadow:inset 0 0 0 1px rgba(217,164,78,.25), 0 8px 24px -10px rgba(0,0,0,.7);
+}
+.hero-art > *{grid-area:1/1}
+.hero-art img{width:100%; height:100%; object-fit:contain;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.6)) saturate(1.15)}
+.dt-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:4px 36px; align-items:start}
+.h4-note{color:var(--ink-3); letter-spacing:.04em; text-transform:none; margin-left:6px}
+/* content affinity — where this weapon lives */
+.aff-rows{display:flex; flex-direction:column; gap:6px; margin-bottom:6px}
+.aff{
+  display:grid; grid-template-columns:minmax(0,1fr) auto auto; gap:3px 10px;
+  align-items:baseline; padding:6px 9px; border-radius:7px;
+  border:1px solid transparent;
+}
+.aff.here{border-color:rgba(217,164,78,.35); background:var(--brass-wash)}
+.aff-name{font-size:12.5px; color:var(--ink-2)}
+.aff.here .aff-name{color:var(--ink)}
+.aff-rank{font-size:11.5px; color:var(--ink); font-weight:600}
+.aff-tier{
+  font-family:var(--mono); font-size:8.5px; font-weight:700; letter-spacing:.09em;
+  text-transform:uppercase; padding:1px 6px; border-radius:99px; border:1px solid currentColor;
+}
+.aff-tier.prime{color:var(--ok-bright)}
+.aff-tier.solid{color:var(--brass)}
+.aff-tier.situational{color:var(--ink-2)}
+.aff-tier.fringe{color:var(--ink-3)}
+.aff-bar{grid-column:1/-1; height:3px; background:#1B202B; border-radius:99px; overflow:hidden}
+.aff-bar i{display:block; height:100%; border-radius:99px;
+  background:linear-gradient(90deg, var(--brass-deep), var(--brass-bright))}
+.aff.here .aff-bar i{box-shadow:0 0 8px rgba(217,164,78,.5)}
+/* field reports per fight-size bucket */
+.ub-rows{display:flex; flex-direction:column; gap:5px; margin:2px 0 4px}
+.ub{display:grid; grid-template-columns:64px 1fr auto; gap:10px; align-items:center}
+.ub-k{font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3)}
+.ub-bar{height:3px; background:#1B202B; border-radius:99px; overflow:hidden}
+.ub-bar i{display:block; height:100%; background:var(--role-tank); border-radius:99px}
+.ub-v{font-size:11px; color:var(--ink-2)}
+.ub-note{font-family:var(--mono); font-size:9.5px; color:var(--ink-3); margin-bottom:8px}
+.sp-ic{flex:none; border-radius:4px; align-self:center;
+  filter:drop-shadow(0 1px 3px rgba(0,0,0,.5))}
 #drawer h4{
   font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase;
   color:var(--ink-3); margin:12px 0 5px; font-weight:400;

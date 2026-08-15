@@ -590,6 +590,75 @@ function usageLine(w){
   return `<div class="fieldnote">field report: ${txt} <span>(${esc((USAGE.generated_utc || "").slice(0, 10))}, killboard)</span></div>`;
 }
 
+/* ------------------------------------------------------ weapon dossier
+   Live art: when online, the dossier hot-loads the official full-res
+   render + spell icons (render.albiononline.com, the sanctioned community
+   CDN); offline or blocked, onerror quietly falls back to the inlined
+   icon / hides the spell icon. Item ids and spell UniqueNames are
+   repo-controlled strings, safe in URLs. */
+const RENDER_BASE = "https://render.albiononline.com/v1";
+function heroArt(w, size){
+  const item = typeof ITEMS !== "undefined" && ITEMS[w];
+  const fallback = icon(w, size);
+  if (!item) return fallback;
+  return `<span class="hero-art" style="width:${size}px;height:${size}px">${fallback}
+    <img src="${RENDER_BASE}/item/${item}.png?size=217&quality=4" width="${size}" height="${size}"
+      alt="" loading="lazy" onerror="this.remove()"></span>`;
+}
+const spellIcon = sid =>
+  `<img class="sp-ic" src="${RENDER_BASE}/spell/${sid}.png?size=40" width="20" height="20"
+     alt="" loading="lazy" onerror="this.remove()">`;
+
+/* Content affinity: how this weapon rates as the OPENING pick into an
+   empty party, per content template (balanced style, base size) — the
+   apples-to-apples "where does this weapon live" comparison. Computed once
+   from the same engine that powers everything else, so it can never
+   disagree with the planner. */
+let AFFINITY = null;
+function affinity(){
+  if (AFFINITY) return AFFINITY;
+  AFFINITY = {};
+  for (const c of Object.keys(DATASET.templates)){
+    const e2 = new CompEngine(DATASET, c);
+    const rows = e2.recommend([], Object.keys(WEAPONS).length);
+    const top = rows[0].score || 1;
+    const m = {};
+    rows.forEach((r, i) => { m[r.weapon] = { rank: i + 1, score: r.score, top }; });
+    AFFINITY[c] = m;
+  }
+  return AFFINITY;
+}
+function affinityRows(w){
+  const a = affinity();
+  return Object.entries(DATASET.templates).map(([c, t]) => {
+    const e = a[c][w] || { rank: 0, score: 0, top: 1 };
+    const pct = Math.max(2, Math.round(100 * Math.max(0, e.score) / e.top));
+    const tier = e.rank <= 12 ? "prime" : e.rank <= 45 ? "solid" : e.rank <= 90 ? "situational" : "fringe";
+    return `<div class="aff ${c === CONTENT ? "here" : ""}">
+      <span class="aff-name">${esc(t.name)}</span>
+      <span class="aff-rank mono" title="opening-pick rank of ${Object.keys(WEAPONS).length} weapons">#${e.rank}</span>
+      <span class="aff-tier ${tier}">${tier}</span>
+      <span class="aff-bar"><i style="width:${pct}%"></i></span>
+    </div>`;
+  }).join("");
+}
+/* field reports across every fight-size bucket, not just the current one */
+function usageAllBuckets(w){
+  if (typeof USAGE === "undefined" || !USAGE.buckets) return "";
+  const rows = ["small", "mid", "large"].map(k => {
+    const m = (USAGE.meta || {})[k];
+    if (!m || m.players_attributed < 200) return "";
+    const n = (USAGE.buckets[k] || {})[w] || 0;
+    const pct = 100 * n / m.players_attributed;
+    return `<div class="ub"><span class="ub-k">${USAGE_BUCKET_LABEL[k]}</span>
+      <span class="ub-bar"><i style="width:${Math.min(100, pct * 8)}%"></i></span>
+      <span class="ub-v mono">${n ? pct.toFixed(1) + "%" : "—"}</span></div>`;
+  }).join("");
+  return rows ? `<h4>Field reports — share of players, by fight size</h4>
+    <div class="ub-rows">${rows}</div>
+    <div class="ub-note">killboard sample, display only — never feeds the scoring</div>` : "";
+}
+
 function loVariants(w){
   /* caller loadouts for this weapon: current content first, then others */
   const out = [];
@@ -617,7 +686,7 @@ function renderDetail(w){
     const rows = (sp[slot] || []).map(([sid, nm], i) =>
       `<li class="${picks[slot] && picks[slot].has(i+1) ? "pick" : ""}">
          <span class="idx">${slot === "e" ? "E" : slot[0].toUpperCase() + (i+1)}</span>
-         <span>${esc(nm)}</span>
+         ${spellIcon(sid)}<span>${esc(nm)}</span>
          ${picks[slot] && picks[slot].has(i+1) ? '<span class="idx">caller pick</span>' : ""}
        </li>`).join("");
     return rows ? `<h4>${label}</h4><ul class="sp-list">${rows}</ul>` : "";
@@ -632,12 +701,22 @@ function renderDetail(w){
     </div>` : "";
   $("drawer-title").textContent = d.display_name;
   $("drawer-body").innerHTML = `
-    <div class="dt-head">${icon(w, 40)}
-      <div><b>${nameOf(w)}</b>${badgeHtml(w)}<span class="fn">${esc(TREE_NAMES[TREES[w]] || TREES[w] || "")} tree · ${roleOf(w)}</span>${usageLine(w)}</div>
+    <div class="dt-head">${heroArt(w, 84)}
+      <div class="dt-id">
+        <b>${nameOf(w)}</b>${badgeHtml(w)}
+        <span class="fn">${esc(TREE_NAMES[TREES[w]] || TREES[w] || "")} tree · ${roleOf(w)}</span>
+        ${usageLine(w)}
+      </div>
     </div>
-    <div class="dt-grid">
-      <div><h4>Capabilities — click one for party-wide evidence</h4>
-        <table class="ev-tbl"><tbody>${caps}</tbody></table></div>
+    <div class="dt-grid dossier">
+      <div>
+        <h4>Where it lives — opening-pick rank per content
+          <span class="h4-note">(balanced · base size · of ${Object.keys(WEAPONS).length} weapons)</span></h4>
+        <div class="aff-rows">${affinityRows(w)}</div>
+        ${usageAllBuckets(w)}
+        <h4>Capabilities — click one for party-wide evidence</h4>
+        <table class="ev-tbl"><tbody>${caps}</tbody></table>
+      </div>
       <div>${pool("e", "E — the identity")}${pool("q", "Q options")}${pool("w", "W options")}${pool("passive", "Passives")}${lo}</div>
     </div>`;
   $("drawer").dataset.open = "true";

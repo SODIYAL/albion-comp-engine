@@ -206,6 +206,23 @@ sit beside text labels. Verified headlessly: desktop/mobile/drawer
 screenshots, forge + picker + evidence interactions, parity chip OK, zero
 console errors; golden 24/24, parity 60/60 (CSS-only change).
 
+### Weapon dossier + asset upgrade (same session)
+
+- The weapon drawer is now a DOSSIER: "where it lives" content-affinity
+  board (opening-pick rank of 137 per content template, balanced/base-size,
+  computed in-browser from the same engine — tier chips prime/solid/
+  situational/fringe, current content highlighted), field reports across
+  all three fight-size buckets, capabilities+evidence, spell pools with
+  spell icons.
+- Assets: the dossier hero + spell lists hot-load full-res art from the
+  official render service at RUNTIME (render.albiononline.com; item ids
+  injected as `ITEMS` by build_dashboard) with silent onerror fallback to
+  the inlined icons — zero page-weight cost, works offline. Inline icons:
+  fetch_icons.py bumped 64px → 96px for retina-crisp list icons —
+  **owner must rerun `py -3 pipeline/fetch_icons.py --force` once** (the
+  render service is proxy-blocked from the cloud session; page works with
+  the old 64px manifest until then).
+
 ## Current state (verified 2026-08-13)
 
 **One source of truth.** Capability numbers live only in `pipeline/sheets/*.yaml`;
