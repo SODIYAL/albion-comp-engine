@@ -7,32 +7,25 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9876;</text></svg>">
 <title>Inside Comp Forge — How the engine works</title>
 <style>
+/* The War Table — the same committed dark look as the planner (see
+   _shell.html). Single theme by design. */
 :root{
-  --bg:#E8EBEE; --surface:#F4F6F8; --surface-2:#DEE3E8; --sunk:#D6DCE2;
-  --ink:#161C23; --ink-2:#4A5763; --ink-3:#71808D;
-  --rule:#C6CED6; --rule-2:#B2BCC6;
-  --brass:#8A6420; --brass-bright:#A87C32; --brass-wash:#EFE6D4;
-  --gap:#A63D37; --gap-wash:#F2DEDC; --ok:#3F6B4C; --ok-wash:#DDE9E0;
-  --over:#5E4E8C; --shadow:0 1px 2px rgba(22,28,35,.07),0 18px 48px -34px rgba(22,28,35,.45);
+  color-scheme:dark;
+  --bg:#0B0D12; --surface:#12151C; --surface-2:#1A1E28; --sunk:#080A0F;
+  --ink:#ECE7DB; --ink-2:#B0AB9D; --ink-3:#847F74;
+  --rule:#232834; --rule-2:#343B4A;
+  --brass:#D9A44E; --brass-bright:#F0C274; --brass-wash:rgba(217,164,78,.09);
+  --gap:#E66767; --gap-wash:rgba(230,103,103,.10); --ok:#199E70; --ok-wash:rgba(25,158,112,.12);
+  --over:#9085E9; --shadow:0 1px 2px rgba(0,0,0,.5),0 18px 48px -28px rgba(0,0,0,.8);
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
   --sans:"Segoe UI Variable Text","Segoe UI",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
   --mono:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;
-}
-@media (prefers-color-scheme:dark){
-  :root{
-    --bg:#0D1218; --surface:#141B23; --surface-2:#1D262F; --sunk:#0A0F14;
-    --ink:#E4E9EE; --ink-2:#94A3B1; --ink-3:#6B7A88;
-    --rule:#29343E; --rule-2:#38454F;
-    --brass:#D2A251; --brass-bright:#E5BC72; --brass-wash:#2A2416;
-    --gap:#D4665E; --gap-wash:#2E1A18; --ok:#6FA983; --ok-wash:#17271E;
-    --over:#9B87D4; --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 48px -28px rgba(0,0,0,.8);
-  }
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth; scroll-padding-top:84px}
 body{
   margin:0; color:var(--ink); background-color:var(--bg);
-  background-image:linear-gradient(rgba(113,128,141,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(113,128,141,.055) 1px,transparent 1px);
+  background-image:linear-gradient(rgba(132,127,116,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(132,127,116,.05) 1px,transparent 1px);
   background-size:32px 32px; font:15px/1.6 var(--sans); -webkit-font-smoothing:antialiased;
 }
 a{color:inherit}
@@ -70,11 +63,9 @@ h1{font-size:clamp(46px,6.2vw,82px); line-height:.98; letter-spacing:-.045em; ma
   display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:42px; padding:10px 16px;
   border:1px solid var(--rule-2); border-radius:3px; background:var(--surface); text-decoration:none; font-weight:600;
 }
-.button.primary{background:var(--brass); border-color:var(--brass); color:#fff}
-@media (prefers-color-scheme:dark){.button.primary{color:#0D1218}}
+.button.primary{background:linear-gradient(180deg,var(--brass-bright),var(--brass)); border-color:var(--brass); color:#1A1206}
 .button:hover{border-color:var(--brass); color:var(--brass)}
-.button.primary:hover{background:var(--brass-bright); color:#fff}
-@media (prefers-color-scheme:dark){.button.primary:hover{color:#0D1218}}
+.button.primary:hover{filter:brightness(1.07)}
 .trust-note{
   margin-top:28px; padding:12px 15px; border-left:2px solid var(--gap); border-radius:0 3px 3px 0;
   background:var(--gap-wash); color:var(--ink-2); font-size:13px; max-width:680px;

@@ -190,6 +190,39 @@ every confirmed finding is fixed, gates green after each batch:
   meta_comps format decision for the owner); merging companionRoleClass
   into roleCls (different unknown-weapon semantics).
 
+## Session 2026-08-15 (later) — "The War Table" visual redesign
+
+Comp Forge + the how-it-works page now wear one committed dark identity
+(single theme by design — no light mode): iron surfaces with a warm
+undertone, forge-light atmosphere (ember bloom + steel wash + film grain),
+ember-brass reserved for the machine's voice (recommendations, actions,
+evidence), game item renders as the decorative color. All markup IDs/classes
+consumed by `_app.js` unchanged — the redesign is the `_shell.html` style
+layer + masthead (SVG sigil, sticky glass header) and `_explainer.html`
+tokens. Data colors are VALIDATED, not eyeballed (dataviz six-checks vs the
+dark surface): role palette #3987E5/#D95926/#199E70/#C98500/#D55181 passes
+CVD + normal-vision + contrast gates in that order; bar status colors always
+sit beside text labels. Verified headlessly: desktop/mobile/drawer
+screenshots, forge + picker + evidence interactions, parity chip OK, zero
+console errors; golden 24/24, parity 60/60 (CSS-only change).
+
+### Weapon dossier + asset upgrade (same session)
+
+- The weapon drawer is now a DOSSIER: "where it lives" content-affinity
+  board (opening-pick rank of 137 per content template, balanced/base-size,
+  computed in-browser from the same engine — tier chips prime/solid/
+  situational/fringe, current content highlighted), field reports across
+  all three fight-size buckets, capabilities+evidence, spell pools with
+  spell icons.
+- Assets: the dossier hero + spell lists hot-load full-res art from the
+  official render service at RUNTIME (render.albiononline.com; item ids
+  injected as `ITEMS` by build_dashboard) with silent onerror fallback to
+  the inlined icons — zero page-weight cost, works offline. Inline icons:
+  fetch_icons.py bumped 64px → 96px for retina-crisp list icons —
+  **owner must rerun `py -3 pipeline/fetch_icons.py --force` once** (the
+  render service is proxy-blocked from the cloud session; page works with
+  the old 64px manifest until then).
+
 ## Current state (verified 2026-08-13)
 
 **One source of truth.** Capability numbers live only in `pipeline/sheets/*.yaml`;
