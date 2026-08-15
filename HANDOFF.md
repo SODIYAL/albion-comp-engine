@@ -154,6 +154,42 @@ every confirmed finding is fixed, gates green after each batch:
   stays a KNOWN LIMITATION (companion/README.md) — needs a live zone-change
   event identified before it can be fixed properly.
 
+### Cleanup/efficiency pass (2026-08-15, four-angle review: reuse /
+### simplification / efficiency / altitude)
+
+- **Engines ~2x faster on the hot path** (JS swapReview 56→18ms, recommend
+  2.2→0.94ms; Python swap_review 89→70ms): per-set_content caches for
+  scaled targets / styled weights / per-weapon loadout combos
+  (`_loadout_extras`) — same expressions, same floats, parity 60/60
+  unchanged. Scoring math deduped into `_overstack` + `_cover_terms`
+  (the T10 base-weight rule now lives ONCE per engine); `_table_lookup`,
+  `size_bucket()` and `floor_armed()` are the single homes of the clamp
+  rule, the usage buckets and the below-floor predicate — the dashboard
+  consumes the last two instead of re-deriving them (bucket boundaries were
+  written 5x across 3 files; the floor predicate 3x).
+- Dashboard: swap-advisor thresholds moved to `templates/scoring.yaml
+  swap_advisor` (data layer, visible to the expert pass); needed-now split
+  uses STYLED weight (raw weight silently disagreed with the greedy-trap
+  warning under any style); weapon list sorted once not per keystroke;
+  fitness/supply computed once per state; static <select>s built once;
+  companion poll skips DOM churn on unchanged payloads and pauses in
+  hidden tabs; capability board grew an "Other" fallback group — which
+  immediately surfaced that `damage_debuff` had been silently missing from
+  the board (now in Denial); parity fixture carries its own seed party
+  (was 3 hardcoded copies that had to agree by eyeball).
+- Companion: UDP port filter now runs BEFORE the per-packet copy (the
+  promiscuous socket was copying every datagram on the host); shared
+  `CachedFetch` (ItemDb/SpellDb had drifted copies); shared
+  JsonSerializerOptions; ItemDb injected once instead of threaded through
+  every UpdateLoadout call; dead code deleted (AddMember/RemoveMember/
+  Disband, `_guidToName`); Upsert lock discipline documented; self-join
+  gate consolidated into its handler. dotnet build 0 warnings.
+- Deliberately SKIPPED: rerouting _app.js's tpl/REQS accessors through ENG
+  (they run before syncEngine during state transitions — would read stale
+  context); moving `load_loadouts` into build_dataset (dataset schema +
+  meta_comps format decision for the owner); merging companionRoleClass
+  into roleCls (different unknown-weapon semantics).
+
 ## Current state (verified 2026-08-13)
 
 **One source of truth.** Capability numbers live only in `pipeline/sheets/*.yaml`;

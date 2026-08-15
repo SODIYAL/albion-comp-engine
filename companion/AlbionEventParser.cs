@@ -21,9 +21,7 @@ namespace CompForgeCompanion;
 public sealed class AlbionEventParser : PhotonParser
 {
     private readonly PartyState _state;
-    private readonly ItemDb _items;
     private readonly bool _debug;
-    private readonly Dictionary<Guid, string> _guidToName = new();
 
     public long EventsSeen, EventsHandled, RequestsSeen, ResponsesSeen;
     public DateTime LastEventUtc = DateTime.MinValue;
@@ -36,9 +34,9 @@ public sealed class AlbionEventParser : PhotonParser
     // shape-detection re-bound automatically — no code change needed.
     private readonly Dictionary<string, short> _bindings = new();
 
-    public AlbionEventParser(PartyState state, ItemDb items, bool debug)
+    public AlbionEventParser(PartyState state, bool debug)
     {
-        _state = state; _items = items; _debug = debug;
+        _state = state; _debug = debug;
     }
 
     protected override void OnEvent(byte code, Dictionary<byte, object> p)
@@ -69,10 +67,12 @@ public sealed class AlbionEventParser : PhotonParser
         string debugMessage, Dictionary<byte, object> p)
     {
         ResponsesSeen++;
-        if (TryGetShort(p, 253, out var op)) SampleSchema(_resSchema, op, p);
-        // Self-join response: a numeric objectId at 0 + a name string at 2.
-        if (IsNum(p, 0) && p.TryGetValue(2, out var v) && v is string && HandleSelfJoin(p))
-            Bind("SelfJoin", TryGetShort(p, 253, out var o) ? o : (short)0);
+        if (!TryGetShort(p, 253, out var op)) return;   // Albion ops always carry 253
+        SampleSchema(_resSchema, op, p);
+        // Self-join fingerprint lives entirely in HandleSelfJoin (objectId at
+        // 0, plausible character name at 2) — it used to be half-duplicated
+        // here, so the true gate was split across two places.
+        if (HandleSelfJoin(p)) Bind("SelfJoin", op);
     }
 
     // ---------------------------------------------------- shape fingerprints
@@ -129,7 +129,7 @@ public sealed class AlbionEventParser : PhotonParser
         // visibility; naked players send zeros, which UpdateLoadout skips.
         var equipment = FindNumArray(p, 10);
         var spells = FindNumArray(p, 14);
-        _state.UpdateLoadout(name, _items, equipment, spells, null, "NewCharacter");
+        _state.UpdateLoadout(name, equipment, spells, null, "NewCharacter");
         Log($"NewCharacter {name} guild={guild} eq={equipment?.Length} sp={spells?.Length}");
         EventsHandled++;
         return true;
@@ -142,7 +142,7 @@ public sealed class AlbionEventParser : PhotonParser
         if (name == null) return false;         // an object we haven't named yet
         var equipment = FindNumArray(p, 10);
         var spells = FindNumArray(p, 14);
-        if (!_state.UpdateLoadout(name, _items, equipment, spells, null, "EquipmentChanged"))
+        if (!_state.UpdateLoadout(name, equipment, spells, null, "EquipmentChanged"))
             return false;
         Log($"Equip {name} eq={equipment?.Length} sp={spells?.Length}");
         EventsHandled++;
@@ -157,8 +157,6 @@ public sealed class AlbionEventParser : PhotonParser
         var members = new List<(Guid, string)>();
         for (var i = 0; i < names.Length; i++)
             members.Add((i < guids.Count ? guids[i] : Guid.Empty, names[i]));
-        _guidToName.Clear();
-        foreach (var (g, n) in members) if (g != Guid.Empty) _guidToName[g] = n;
         _state.SetParty(members);
         Log($"Party [{string.Join(", ", names)}]");
         EventsHandled++;
@@ -180,7 +178,7 @@ public sealed class AlbionEventParser : PhotonParser
         if (name == null || !IsPlausibleCharName(name)) return false;
         _state.SetSelf(name);
         _state.SeeCharacter(objectId, name, null);
-        _state.UpdateLoadout(name, _items, null, null, null, "Self");
+        _state.UpdateLoadout(name, null, null, null, "Self");
         Log($"SelfJoin {name} (self registered)");
         EventsHandled++;
         return true;
@@ -247,12 +245,10 @@ public sealed class AlbionEventParser : PhotonParser
     };
 
     /// <summary>Does any parameter hold a numeric array of exactly this length?
-    /// (Equipment is 10, spells are 14 — the shape fingerprints.)</summary>
-    private static bool HasNumArray(Dictionary<byte, object> p, int len)
-    {
-        foreach (var v in p.Values) if (ArrayLen(v) == len) return true;
-        return false;
-    }
+    /// (Equipment is 10, spells are 14 — the shape fingerprints.) One search
+    /// implementation: this is FindNumArray's scan as a boolean.</summary>
+    private static bool HasNumArray(Dictionary<byte, object> p, int len) =>
+        FindNumArray(p, len) != null;
 
     /// <summary>The first numeric array of exactly `len`, normalized to int[].
     /// Found by SIZE, not fixed index, so it survives parameter-index shifts.</summary>

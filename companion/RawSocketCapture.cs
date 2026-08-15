@@ -104,6 +104,13 @@ public sealed class RawSocketCapture
         byte[] ipPayload;
         if (!moreFragments && fragOffset == 0)
         {
+            // Filter BEFORE copying: this promiscuous socket sees every UDP
+            // datagram on the host (voice, streams, browsers) — copying each
+            // one just to drop it at the port check below was steady GC churn.
+            if (ipPayloadLen < 8) return;
+            var sp = (buf[ihl] << 8) | buf[ihl + 1];
+            var dp = (buf[ihl + 2] << 8) | buf[ihl + 3];
+            if (!AlbionPorts.Contains(sp) && !AlbionPorts.Contains(dp)) return;
             ipPayload = new byte[ipPayloadLen];
             Array.Copy(buf, ihl, ipPayload, 0, ipPayloadLen);
         }

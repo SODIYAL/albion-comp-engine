@@ -362,6 +362,11 @@
     "2H_SHAPESHIFTER_SET3"
    ]
   },
+  "swap_advisor": {
+   "min_gain": 1.0,
+   "min_rank": 15,
+   "offcomp_rank": 60
+  },
   "weights": {
    "alpha": 0.55,
    "beta": 0.2,

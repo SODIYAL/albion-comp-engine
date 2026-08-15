@@ -129,6 +129,12 @@ def main():
     seed = [w for w in ("2H_LONGBOW", "MAIN_ARCANESTAFF_UNDEAD", "2H_ICECRYSTAL_UNDEAD")
             if w in eng.weapons]
     expected = {
+        # The fixture carries its own party + context: the client seeds and
+        # re-scores exactly this, so the two can never drift apart (three
+        # hardcoded copies of the seed used to have to agree by eyeball).
+        "party": seed,
+        "content": eng.content,
+        "size": eng.size,
         # full precision — the client compares fitness with a 1e-9 tolerance
         # like the test suite. Rounding both sides to 2 decimals looked safe
         # but Python round() (half-even) vs toFixed (half-up) can disagree on

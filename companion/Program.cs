@@ -33,8 +33,9 @@ var items = await ItemDb.LoadAsync(exeDir);
 var spells = await SpellDb.LoadAsync(exeDir);
 var state = new PartyState();
 state.SetSpellDb(spells);
+state.SetItemDb(items);
 state.EnablePersistence(Path.Combine(exeDir, "party-cache.json"));
-var parser = new AlbionEventParser(state, items, debug);
+var parser = new AlbionEventParser(state, debug);
 var capture = new RawSocketCapture(parser);
 capture.Start();
 
@@ -110,7 +111,7 @@ while (listener.IsListening)
             // parameter-shape map per event/op code — used to identify which
             // codes carry party/equipment data on the current game version
             body = System.Text.Json.JsonSerializer.Serialize(parser.SchemaDump(),
-                new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+                PartyState.Indented);
             res.ContentType = "application/json";
             break;
         case "/status":
@@ -135,7 +136,7 @@ while (listener.IsListening)
                 party_members = state.Count,
                 item_indices = items.Count,
                 spell_indices = spells.Count,
-            }, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+            }, PartyState.Indented);
             res.ContentType = "application/json";
             break;
         default:
