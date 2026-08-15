@@ -1873,6 +1873,10 @@ function loadCompanionParty(){
 }
 function toggleCompanion(){
   companionOn = !companionOn;
+  /* reset the skip-unchanged signature on every toggle: after a manual
+     disconnect/reconnect the first poll must re-render the connected state
+     even when the party payload is identical to before */
+  companionSig = null;
   if (companionOn){ companionPoll(); companionTimer = setInterval(companionPoll, 5000); }
   else { clearInterval(companionTimer); companionTimer = null; companionData = null; renderCompanion(false); }
 }
