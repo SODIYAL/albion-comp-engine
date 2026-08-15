@@ -135,10 +135,24 @@ public sealed class PartyState
         }
     }
 
+    // Object ids are per-zone and the game offers no clean zone-change signal
+    // here, so the id->name map cannot be invalidated precisely; bound it so a
+    // long session can't grow it forever (KNOWN LIMITATION: a reused id can
+    // briefly attribute a stranger's gear to a party member until their next
+    // NewCharacter — see companion/README.md).
+    private const int MaxObjectIds = 4096;
+    private readonly Queue<long> _objectIdOrder = new();
+
     public void SeeCharacter(long objectId, string name, string? guild)
     {
         lock (_lock)
         {
+            if (!_objectIdToName.ContainsKey(objectId))
+            {
+                _objectIdOrder.Enqueue(objectId);
+                while (_objectIdOrder.Count > MaxObjectIds)
+                    _objectIdToName.Remove(_objectIdOrder.Dequeue());
+            }
             _objectIdToName[objectId] = name;
             if (_members.ContainsKey(name.ToLowerInvariant()) && guild != null)
                 Upsert(name, m => m.Guild = guild, "NewCharacter");

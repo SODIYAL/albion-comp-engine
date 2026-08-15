@@ -104,6 +104,11 @@ public sealed class AlbionEventParser : PhotonParser
         var names = FindStringArray(p);
         var guids = FindGuidList(p);
         if (names == null || guids == null || guids.Count != names.Length) return false;
+        // every entry must be shaped like a character name — until self is
+        // known the contains-self guard below is bypassed, and in that window
+        // any (id, string[], guid-list) event (chat rosters, listings…) could
+        // otherwise wipe the cached party
+        if (!names.All(IsPlausibleCharName)) return false;
         var self = _state.SelfName;
         return self == null
             || names.Any(n => n.Equals(self, StringComparison.OrdinalIgnoreCase));
@@ -168,7 +173,11 @@ public sealed class AlbionEventParser : PhotonParser
         // gear arrives via EquipmentChanged like every other player.
         if (!TryGetLong(p, 0, out var objectId)) return false;
         var name = GetString(p, 2);
-        if (name == null) return false;
+        // The (num@0, string@2) response shape is broad — hundreds of ops
+        // could match. Requiring the string to be a plausible character name
+        // keeps a stray op from rebinding "self" (which would both pollute
+        // /party and break the roster contains-self guard).
+        if (name == null || !IsPlausibleCharName(name)) return false;
         _state.SetSelf(name);
         _state.SeeCharacter(objectId, name, null);
         _state.UpdateLoadout(name, _items, null, null, null, "Self");
@@ -219,6 +228,13 @@ public sealed class AlbionEventParser : PhotonParser
             if (kv.Value is string s && s.Length > 0 && s != notThis) return s;
         return null;
     }
+
+    /// <summary>Albion character names are 3-16 characters, letters and
+    /// digits only (no spaces) — a cheap shape check that real names always
+    /// pass and most non-name strings (titles, tab labels, locale codes,
+    /// system text) fail.</summary>
+    private static bool IsPlausibleCharName(string s) =>
+        s.Length is >= 3 and <= 16 && s.All(char.IsLetterOrDigit);
 
     private static bool IsNum(Dictionary<byte, object> p, byte k) =>
         p.TryGetValue(k, out var o)

@@ -1,6 +1,12 @@
 // Vendored from Statistics Analysis Tool (Triky313/AlbionOnline-StatisticsAnalysis,
-// GPL-3.0). Local edits: removed DebugConsole logging (StatisticsAnalysisTool.Diagnostics
-// dependency) — three LogEvent/LogOperation* calls stripped. See photon/NOTICE.md.
+// GPL-3.0). Local edits (see photon/NOTICE.md):
+//   - removed DebugConsole logging (StatisticsAnalysisTool.Diagnostics
+//     dependency) — three LogEvent/LogOperation* calls stripped
+//   - hardened fragment reassembly (2026-08-15): totalLength sanity cap and a
+//     periodic sweep of stranded segments — raw-socket capture drops packets,
+//     and a fragment train missing one piece otherwise pins its buffer forever
+//   - fixed the CRC branch (2026-08-15): the crc must be read from the
+//     current offset (the CRC field), not from byte 0, and compared unsigned
 using StatisticsAnalysisTool.Abstractions;
 using StatisticsAnalysisTool.Protocol18;
 using StatisticsAnalysisTool.Protocol18.Photon;
@@ -12,8 +18,15 @@ public abstract class PhotonParser : IPhotonReceiver
 {
     private const int CommandHeaderLength = 12;
     private const int PhotonHeaderLength = 12;
+    // Largest plausible segmented Photon message. Albion's biggest payloads
+    // are far below this; the field arrives off the wire, and without a cap a
+    // forged fragment (the capture socket is promiscuous) makes us allocate
+    // totalLength bytes up front.
+    private const int MaxSegmentedLength = 4 * 1024 * 1024;
+    private static readonly TimeSpan SegmentTtl = TimeSpan.FromSeconds(10);
 
     private readonly Dictionary<int, SegmentedPackage> _pendingSegments = new();
+    private DateTime _lastSegmentSweep = DateTime.UtcNow;
 
     public void ReceivePacket(byte[] payload)
     {
@@ -60,14 +73,18 @@ public abstract class PhotonParser : IPhotonReceiver
 
         if (isCrcEnabled)
         {
-            int ignoredOffset = 0;
-            if (!NumberDeserializer.Deserialize(out int crc, payload, ref ignoredOffset))
+            // The 4-byte CRC field sits at the current offset; read it, zero
+            // it in place (offset advances past it), then check the whole
+            // packet. Unsigned compare — Calculate returns uint.
+            int crcOffset = offset;
+            if (!NumberDeserializer.Deserialize(out int crc, payload, ref offset))
             {
                 return;
             }
+            offset = crcOffset;
             NumberSerializer.Serialize(0, payload, ref offset);
 
-            if (crc != CrcCalculator.Calculate(payload, payload.Length))
+            if (unchecked((uint) crc) != CrcCalculator.Calculate(payload, payload.Length))
             {
                 // Invalid crc
                 return;
@@ -239,11 +256,12 @@ public abstract class PhotonParser : IPhotonReceiver
         commandLength -= 4;
 
         int fragmentLength = commandLength;
-        if (totalLength <= 0 || fragmentLength <= 0)
+        if (totalLength <= 0 || totalLength > MaxSegmentedLength || fragmentLength <= 0)
         {
             return;
         }
 
+        SweepStaleSegments();
         HandleSegmentedPayload(startSequenceNumber, totalLength, fragmentLength, fragmentOffset, source, ref offset);
     }
 
@@ -295,6 +313,35 @@ public abstract class PhotonParser : IPhotonReceiver
         {
             _pendingSegments.Remove(startSequenceNumber);
             HandleFinishedSegmentedPackage(segmentedPackage.TotalPayload);
+        }
+    }
+
+    private void SweepStaleSegments()
+    {
+        // A fragment train that lost a piece to packet drop never completes
+        // and never gets removed — without this sweep its buffer is pinned
+        // for the life of the process.
+        var now = DateTime.UtcNow;
+        if (now - _lastSegmentSweep < SegmentTtl)
+        {
+            return;
+        }
+        _lastSegmentSweep = now;
+        var cutoff = now - SegmentTtl;
+        List<int>? stale = null;
+        foreach (var kv in _pendingSegments)
+        {
+            if (kv.Value.CreatedUtc < cutoff)
+            {
+                (stale ??= new List<int>()).Add(kv.Key);
+            }
+        }
+        if (stale != null)
+        {
+            foreach (var key in stale)
+            {
+                _pendingSegments.Remove(key);
+            }
         }
     }
 

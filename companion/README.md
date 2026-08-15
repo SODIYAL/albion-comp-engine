@@ -82,16 +82,24 @@ works. `--port N` changes the port (default 53321).
       { "name": "Alstroameria", "weapon": "2H_HOLYSTAFF",
         "weapon_item": "T5_2H_HOLYSTAFF@1", "item_power": 796,
         "equipment": { "head": "T6_HEAD_CLOTH_SET1", "chest": "…", "shoes": "…", "cape": "…" },
-        "spells": { "q": 12, "w": 34, "e": 56, "d": 78, "r": 90, "f": 11 },
+        "spells": { "q": "HOLY_GENERIC_HEAL", "w": "SACRED_PULSE",
+                    "e": "HOLY_BEAM_AVALON" },
         "source": "EquipmentChanged" }
     ]
   }
   ```
 
   `weapon` is the engine `unique_name` (matches the Comp Forge dataset);
-  `spells` are raw spell indices per slot (Q/W/E/D/R/F) — the page resolves
-  them to names. A member appears the moment they're in your party; their
-  loadout fills in as they become visible or change gear.
+  `spells` are resolved server-side from raw indices to spell UniqueNames per
+  slot (Q/W/E/D/R/F) so they match the engine's sheet evidence IDs. A member
+  appears the moment they're in your party; their loadout fills in as they
+  become visible or change gear.
+
+  Known limitation: the game's object ids are per-zone and there is no clean
+  zone-change signal, so a reused id can briefly attribute a nearby player's
+  gear to a party member with the same stale id — it self-corrects on that
+  member's next visibility (NewCharacter) event. The id map is bounded
+  (4096 entries) so long sessions don't grow it forever.
 
 - `GET http://localhost:53321/status` — health: packets seen, Albion packets,
   events parsed, party size, item-table size. Use it to confirm capture is
