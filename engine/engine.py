@@ -273,19 +273,29 @@ class Engine:
         b = "small" if self.size < 12 else "mid" if self.size <= 30 else "large"
         return (self.meta_prior.get(b) or {}).get(weapon, 0.0)
 
+    def pick_score(self, s, base_syn, weapon):
+        """THE candidate score — alpha*dFit + beta*dSyn + delta*meta for
+        picking `weapon` into effective supply `s`. recommend() and
+        swap_review() (and their JS mirrors) all read this one helper so the
+        formula can never drift between them. Returns (score, d_fit, d_syn,
+        meta)."""
+        d_fit, d_syn, _extra = self.best_loadout(s, base_syn, weapon)
+        meta = self.meta_of(weapon)
+        return (self.alpha * d_fit + self.beta * d_syn + self.delta * meta,
+                d_fit, d_syn, meta)
+
     def recommend(self, party, top_n=4, pool=None):
         base_syn = self.synergy(party)
         s = self.effective_supply(party)
         out = []
         for w in (pool or self.weapons):
-            d_fit, d_syn, _extra = self.best_loadout(s, base_syn, w)
-            meta = self.meta_of(w)
+            score, d_fit, d_syn, meta = self.pick_score(s, base_syn, w)
             out.append({
                 "weapon": w,
                 "display_name": self.weapons[w]["display_name"],
                 "status": self.weapons[w]["status"],
                 "d_fitness": d_fit, "d_synergy": d_syn, "meta_prior": meta,
-                "score": self.alpha * d_fit + self.beta * d_syn + self.delta * meta,
+                "score": score,
             })
         return sorted(out, key=lambda r: -r["score"])[:top_n]
 
@@ -304,18 +314,12 @@ class Engine:
             rest = party[:i] + party[i + 1:]
             s = self.effective_supply(rest)
             base_syn = self.synergy(rest)
-
-            def value(w):
-                d_fit, d_syn, _extra = self.best_loadout(s, base_syn, w)
-                return self.alpha * d_fit + self.beta * d_syn \
-                    + self.delta * self.meta_of(w)
-
-            cur_score = value(cur)
+            cur_score = self.pick_score(s, base_syn, cur)[0]
             rank, better = 1, []
             for w in (pool or self.weapons):
                 if w == cur:
                     continue
-                v = value(w)
+                v = self.pick_score(s, base_syn, w)[0]
                 if v > cur_score:
                     rank += 1
                     better.append((v, w))

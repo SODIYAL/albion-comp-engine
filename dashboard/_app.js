@@ -39,7 +39,16 @@ const weaknesses = (p, n = 3) => ENG.weaknesses(p, n);
 const explain = (p, cand) => ENG.explain(p, cand).map(t => ({d: t.delta, ...t}));
 const recommend = (p, n = 4) => ENG.recommend(p, n).map(r =>
   ({w: r.weapon, dFit: r.d_fitness, dSyn: r.d_synergy, meta: r.meta_prior, score: r.score}));
-const swapReview = p => ENG.swapReview(p, 3);
+/* swapReview is a full-pool sweep per member (~40-100ms at 20-40 members) —
+   memoized on the engine context + party so facet clicks, companion polls
+   and other no-op re-renders don't pay it again. */
+let swapCache = { key: null, val: [] };
+function swapReviewCached(){
+  const key = `${CONTENT}|${SIZE}|${STYLE}|${party.join(",")}`;
+  if (swapCache.key !== key)
+    swapCache = { key, val: party.length > 1 ? ENG.swapReview(party, 3) : [] };
+  return swapCache.val;
+}
 
 const capsOf = w => WEAPONS[w].capabilities || {};
 /* Display names and evidence IDs originate in ao-bin-dumps (an external game-data
@@ -227,6 +236,27 @@ function renderTally(){
    pieces isn't nagged; a genuinely off-comp weapon at this content + size
    gets multiple concrete options, clickable to swap in place. */
 const SWAP_MIN_RANK = 15, SWAP_MIN_GAIN = 1.0, OFFCOMP_RANK = 60;
+/* A party-wide gap (say, no healer yet) makes EVERY member's best
+   alternative the same role, and rank measures the shared gap, not
+   individual misfit — naive gating would nag the whole roster with the
+   same "go healer" hint (the next-pick panel already owns that gap). So
+   each suggested ROLE keeps its hint only on the member who'd convert
+   cheapest (largest gain); everyone else stays quiet. Members whose top
+   options point at different roles are genuinely individual advice and
+   all keep their hints. */
+function swapEligible(review){
+  const claim = {};
+  review.forEach((m, i) => {
+    if (!m || m.rank < SWAP_MIN_RANK) return;
+    const top = m.options.find(o => o.gain >= SWAP_MIN_GAIN);
+    if (!top) return;
+    const role = WEAPONS[top.weapon].role_hint || "other";
+    if (!claim[role] || top.gain > claim[role].gain) claim[role] = { i, gain: top.gain };
+  });
+  const ok = new Set();
+  Object.values(claim).forEach(c => ok.add(c.i));
+  return ok;
+}
 function swapHint(m, i){
   if (!m || m.rank < SWAP_MIN_RANK) return "";
   const opts = m.options.filter(o => o.gain >= SWAP_MIN_GAIN);
@@ -245,7 +275,8 @@ function renderRoster(){
   const base = fitness(party);
   const contrib = party.map((w, i) =>
     base - fitness(party.filter((_, j) => j !== i)));
-  const review = party.length > 1 ? swapReview(party) : [];
+  const review = swapReviewCached();
+  const hintable = swapEligible(review);
   const minI = party.length > 2 ? contrib.indexOf(Math.min(...contrib)) : -1;
   const signed = v => (v < 0 ? "−" : "+") + Math.abs(v).toFixed(1);
   const flag = i => i !== minI ? "" : contrib[i] < 0
@@ -259,7 +290,7 @@ function renderRoster(){
   const rows = idxs.map(i => { const w = party[i]; return (
     `<div class="slot ${roleCls(w)}"${roleBg(w)}><span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 32)}
       <span class="nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>${badgeHtml(w)}
-        <span class="fn">${roleOf(w)} · ${signed(contrib[i])} fit${flag(i)}</span>${swapHint(review[i], i)}</span>
+        <span class="fn">${roleOf(w)} · ${signed(contrib[i])} fit${flag(i)}</span>${hintable.has(i) ? swapHint(review[i], i) : ""}</span>
       <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>`); });
   if (PARTY_FACET){
     rows.push(`<div class="slot more">${idxs.length} of ${party.length} — ${esc(PARTY_FACET)} only · click the chip again for all</div>`);

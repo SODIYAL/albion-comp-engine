@@ -283,22 +283,37 @@
     return (this.metaPrior[b] || {})[w] || 0.0;
   };
 
+  CompEngine.prototype.pickScore = function (s, baseSyn, weapon) {
+    /* THE candidate score (mirrors engine.py pick_score): recommend() and
+       swapReview() both read this one helper so the formula cannot drift. */
+    var bl = this.bestLoadout(s, baseSyn, weapon);
+    var meta = this.metaOf(weapon);
+    return { score: this.alpha * bl.dFit + this.beta * bl.dSyn + this.delta * meta,
+             dFit: bl.dFit, dSyn: bl.dSyn, meta: meta };
+  };
+
+  CompEngine.prototype._pool = function (pool) {
+    /* mirrors Python's `pool or self.weapons`: an EMPTY pool array also
+       falls back to the full catalog (a bare `pool ||` kept truthy empty
+       arrays and silently swept nothing — parity bug). */
+    return (pool && pool.length) ? pool : Object.keys(this.weapons);
+  };
+
   CompEngine.prototype.recommend = function (party, topN, pool) {
     if (topN === undefined) topN = 4;
     var baseSyn = this.synergy(party);
     var s = this.effectiveSupply(party);
     var out = [];
-    var keys = pool || Object.keys(this.weapons);
+    var keys = this._pool(pool);
     for (var i = 0; i < keys.length; i++) {
       var w = keys[i];
-      var bl = this.bestLoadout(s, baseSyn, w);
-      var meta = this.metaOf(w);
+      var ps = this.pickScore(s, baseSyn, w);
       out.push({
         weapon: w,
         display_name: this.weapons[w].display_name,
         status: this.weapons[w].status,
-        d_fitness: bl.dFit, d_synergy: bl.dSyn, meta_prior: meta,
-        score: this.alpha * bl.dFit + this.beta * bl.dSyn + this.delta * meta,
+        d_fitness: ps.dFit, d_synergy: ps.dSyn, meta_prior: ps.meta,
+        score: ps.score,
       });
     }
     return out.sort(function (x, y) { return y.score - x.score; }).slice(0, topN);
@@ -317,17 +332,13 @@
       var s = this.effectiveSupply(rest);
       var baseSyn = this.synergy(rest);
       var self = this;
-      var value = function (w) {
-        var bl = self.bestLoadout(s, baseSyn, w);
-        return self.alpha * bl.dFit + self.beta * bl.dSyn + self.delta * self.metaOf(w);
-      };
-      var curScore = value(cur);
+      var curScore = this.pickScore(s, baseSyn, cur).score;
       var rank = 1, better = [];
-      var keys = pool || Object.keys(this.weapons);
+      var keys = this._pool(pool);
       for (var j = 0; j < keys.length; j++) {
         var w = keys[j];
         if (w === cur) continue;
-        var v = value(w);
+        var v = this.pickScore(s, baseSyn, w).score;
         if (v > curScore) {
           rank += 1;
           better.push([v, w]);
