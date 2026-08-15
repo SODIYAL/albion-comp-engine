@@ -37,8 +37,9 @@ Alternatives: Exalted Staff, Great Holy Staff, Redemption Staff
   gathering tools). Weapons in a line share their Q/W pool, so line-mates
   carry identical pool scores and differ only in their E — sheets are
   organized accordingly.
-- **Five content templates** — Blackzone Roam (20), Territory Defense (20),
-  Castle Fight (25), Faction War Red Zone (15), Castle Outpost (7) — and
+- **Six content templates** — Blackzone Roam (20), Territory Defense (20),
+  Castle Fight (25), Faction War Red Zone (15), Castle Outpost (7), Roads of
+  Avalon (7, in-game party cap) — and
   **five playstyles** (balanced / brawl / clap / kite / brawl-clap) that
   reweight any template toward the caller's plan. The 2026-08-13 templates
   and all style multipliers are PROVISIONAL until the expert pass; role
@@ -62,7 +63,15 @@ Alternatives: Exalted Staff, Great Holy Staff, Redemption Staff
   fight-size bucket; the page quotes "seen on X% of players in fights your
   size". Display evidence only — it does not feed the scoring until
   validation says it may.
-- The scoring model passes 15/15 golden regression tests against the full
+- **Per-member swap advisor** — each party member's weapon is valued exactly
+  as the recommender would value it as a pick into the rest of the party,
+  ranked against all 137 alternatives at the current content and size, and
+  members with markedly better options get multiple concrete suggestions
+  (click to swap in place). Rankings are size-aware: floors arm only above
+  their `min_party_size`, and the focus-fire physics boosts single-target
+  damage below a template's base size — so a 3-man missing a healer reads
+  as a gap, while a 7-man missing one reads as broken.
+- The scoring model passes 24/24 golden regression tests against the full
   dataset — that validates its *shape*, not its recommendation quality.
 - Every score is a Claude proposal grounded in the game's own spell text and
   passed through the evidence lint, plus the first owner corrections (glove
@@ -112,7 +121,7 @@ Requires Python 3 and `pyyaml`. On Windows use `py -3`.
 ```bash
 py -3 pipeline/evidence_lint.py      # CI gate — exit 1 blocks a release
 py -3 pipeline/build_dataset.py      # sheets + templates -> out/dataset-latest.json
-py -3 tests/test_golden.py           # 13 golden regression cases
+py -3 tests/test_golden.py           # golden regression cases (24)
 py -3 tests/test_js_parity.py        # JS scoring == Python engine (needs node)
 py -3 tests/test_patch_history.py    # patch-diff + staleness unit tests
 py -3 pipeline/build_dashboard.py    # -> dashboard/index.html (the product page)

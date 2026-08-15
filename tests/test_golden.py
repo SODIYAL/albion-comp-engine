@@ -246,6 +246,49 @@ def run():
           scored["MAIN_DAGGER_HELL"] > scored[DAGGERS],
           f"Demonfang={scored['MAIN_DAGGER_HELL']:.3f} > DaggerPair={scored[DAGGERS]:.3f}")
 
+    # T16 — Roads of Avalon size graduation (2026-08-15, the goal behavior):
+    # a healer-less trio is a legitimate comp (floors silent, single-target
+    # damage BOOSTED below base size by the Q16 physics), but the same
+    # weapons read as a 7-man are broken (heal floor armed from 5) and the
+    # healer recommendation urgency roughly doubles.
+    trio = [BLOODLETTER, "2H_BOW_AVALON", "2H_HARPOON_HELL"]
+    er3 = Engine(content="roads", size=3)
+    er7 = Engine(content="roads", size=7)
+    heal_at = lambda e: max(r["score"] for r in e.recommend(trio, top_n=300)
+                            if r["weapon"] in HEALERS)
+    check("T16 roads floors arm by size: trio fine at 3, healer urgent at 7",
+          er3._floor_penalty("heal_sustain", 0) == 0.0
+          and er7._floor_penalty("heal_sustain", 0) > 0.0
+          and heal_at(er7) > 1.5 * heal_at(er3)
+          and er3.mech_mults["burst_st"] > 1.0 + 1e-9,
+          f"floor@3={er3._floor_penalty('heal_sustain', 0):.1f} "
+          f"floor@7={er7._floor_penalty('heal_sustain', 0):.1f} "
+          f"healer score 3->{heal_at(er3):.2f} 7->{heal_at(er7):.2f} "
+          f"st_mult@3={er3.mech_mults['burst_st']:.3f}")
+
+    # T17 — per-member swap advisor (2026-08-15): each member's current
+    # weapon is valued exactly as recommend() would value it into the rest of
+    # the party, ranked against all alternatives, with better options listed.
+    # Pin the directions in a real-shaped roads 7-man: the ZvZ bomb axe
+    # (Realmbreaker) must rank far worse than the tank pick (Heavy Mace), a
+    # poor fit must come with non-empty upgrade options, and a member's score
+    # must equal their weapon's recommend() value into the rest.
+    roads7 = [HEAVY_MACE, HALLOWFALL, "2H_CROSSBOWLARGE_MORGANA",
+              "2H_HARPOON_HELL", BLOODLETTER, "2H_AXE_AVALON", "2H_BOW_AVALON"]
+    rev = er7.swap_review(roads7)
+    by_w = {m["weapon"]: m for m in rev}
+    rb, hm = by_w["2H_AXE_AVALON"], by_w[HEAVY_MACE]
+    rest = [w for w in roads7 if w != "2H_AXE_AVALON"]
+    rec_rb = next(r for r in er7.recommend(rest, top_n=300)
+                  if r["weapon"] == "2H_AXE_AVALON")
+    check("T17 swap advisor: ZvZ axe flagged in roads, options offered, "
+          "score consistent with recommend()",
+          rb["rank"] > 2 * hm["rank"] and len(rb["options"]) == 3
+          and all(o["gain"] > 0 for o in rb["options"])
+          and abs(rb["score"] - rec_rb["score"]) < 1e-9,
+          f"realmbreaker rank {rb['rank']} vs heavy mace {hm['rank']}; "
+          f"options={[o['display_name'] for o in rb['options']]}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

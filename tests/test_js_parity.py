@@ -42,11 +42,26 @@ def make_cases(data):
     return cases
 
 
+# swap_review is a full-pool sweep PER MEMBER — cover it on every 6th case
+# with the party capped at 6 members so the parity run stays fast.
+SWAP_EVERY, SWAP_MAX_PARTY = 6, 6
+
+
+def swap_case(i, party):
+    return party[:SWAP_MAX_PARTY] if i % SWAP_EVERY == 0 else None
+
+
 def py_results(cases):
     out = []
-    for c in cases:
+    for i, c in enumerate(cases):
         e = Engine(content=c["content"], size=c["size"], style=c["style"])
+        sp = swap_case(i, c["party"])
         out.append({
+            "swap": None if sp is None else [
+                {"weapon": m["weapon"], "score": m["score"], "rank": m["rank"],
+                 "options": [{"weapon": o["weapon"], "score": o["score"]}
+                             for o in m["options"]]}
+                for m in e.swap_review(sp)],
             "fitness": e.fitness(c["party"]),
             "synergy": e.synergy(c["party"]),
             "max_fitness": e.max_fitness(),
@@ -100,6 +115,20 @@ def main():
             errs.append("weakness order differs")
         if a["uncovered"] != b["uncovered"]:
             errs.append(f"uncovered: py={a['uncovered']} js={b['uncovered']}")
+        if a["swap"] is not None:
+            for ma, mb in zip(a["swap"], b["swap"] or []):
+                if ma["rank"] != mb["rank"] or abs(ma["score"] - mb["score"]) > EPS:
+                    errs.append(f"swap {ma['weapon']}: py rank {ma['rank']} "
+                                f"score {ma['score']!r} vs js rank {mb['rank']} "
+                                f"score {mb['score']!r}")
+                elif [o["weapon"] for o in ma["options"]] != \
+                        [o["weapon"] for o in mb["options"]]:
+                    errs.append(f"swap {ma['weapon']} option order differs")
+                elif any(abs(oa["score"] - ob["score"]) > EPS for oa, ob
+                         in zip(ma["options"], mb["options"])):
+                    errs.append(f"swap {ma['weapon']} option scores differ")
+            if len(a["swap"]) != len(b["swap"] or []):
+                errs.append("swap member count differs")
         if errs:
             bad += 1
             print(f"CASE {i} ({c['content']}/{c['style']}, party {len(c['party'])}): "

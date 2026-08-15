@@ -6,9 +6,17 @@ const CompEngine = require(process.argv[2]);
 const dataset = JSON.parse(fs.readFileSync(process.argv[3], "utf8"));
 const cases = JSON.parse(fs.readFileSync(process.argv[4], "utf8"));
 
-const out = cases.map((c) => {
+// mirrors SWAP_EVERY / SWAP_MAX_PARTY in test_js_parity.py
+const SWAP_EVERY = 6, SWAP_MAX_PARTY = 6;
+
+const out = cases.map((c, i) => {
   const e = new CompEngine(dataset, c.content, c.size, c.style);
+  const sp = i % SWAP_EVERY === 0 ? c.party.slice(0, SWAP_MAX_PARTY) : null;
   return {
+    swap: sp === null ? null : e.swapReview(sp).map((m) => ({
+      weapon: m.weapon, score: m.score, rank: m.rank,
+      options: m.options.map((o) => ({ weapon: o.weapon, score: o.score })),
+    })),
     fitness: e.fitness(c.party),
     synergy: e.synergy(c.party),
     max_fitness: e.maxFitness(),

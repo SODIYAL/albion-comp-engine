@@ -128,15 +128,20 @@ def main():
     }
 
     # `</script>` inside a JSON string would close the tag early; escape it.
-    blob = json.dumps(data, separators=(",", ":")).replace("</", "<\\/")
+    # (Escaping happens outside the f-string: expression-part backslashes
+    # need Python 3.12+, and this must build on 3.11 too.)
+    def js(obj):
+        return json.dumps(obj, separators=(",", ":")).replace("</", "<\\/")
+
+    blob = js(data)
 
     out = (f"{shell}<script>\n{scoring}\n</script>\n"
            f"<script>\nconst DATASET = {blob};\n"
-           f"const ICONS = {json.dumps(icons, separators=(',', ':'))};\n"
-           f"const TREES = {json.dumps(trees, separators=(',', ':'))};\n"
-           f"const SPELLS = {json.dumps(spells, separators=(',', ':')).replace('</', '<\\/')};\n"
-           f"const LOADOUTS = {json.dumps(loadouts, separators=(',', ':')).replace('</', '<\\/')};\n"
-           f"const USAGE = {json.dumps(usage, separators=(',', ':')).replace('</', '<\\/')};\n"
+           f"const ICONS = {js(icons)};\n"
+           f"const TREES = {js(trees)};\n"
+           f"const SPELLS = {js(spells)};\n"
+           f"const LOADOUTS = {js(loadouts)};\n"
+           f"const USAGE = {js(usage)};\n"
            f"const PARITY_EXPECTED = {json.dumps(expected)};\n{app}</script>\n"
            f"</body>\n</html>\n")
     path = os.path.join(DASH, "index.html")

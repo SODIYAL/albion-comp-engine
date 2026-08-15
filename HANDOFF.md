@@ -21,7 +21,7 @@ anything:
    and the first V4 baseline (with its three findings) is recorded there
 4. `engine/engine.py` + `tests/test_golden.py` — the engine (it has a CLI:
    `py -3 engine/engine.py camlann hallowfall --content blackzone_roam
-   --size 10 --style clap`) and its 15 golden regression cases
+   --size 10 --style clap`) and its golden regression cases (24)
 
 ## Environment (Windows)
 
@@ -41,7 +41,7 @@ anything:
 ```
 py -3 pipeline/evidence_lint.py        # CI gate — exit 1 blocks release
 py -3 pipeline/build_dataset.py        # sheets + templates + styles -> out/dataset-latest.json
-py -3 tests/test_golden.py             # must stay 15/15
+py -3 tests/test_golden.py             # must stay 24/24
 py -3 tests/test_js_parity.py          # browser scoring == engine.py (needs node)
 py -3 tests/test_patch_history.py      # patch-diff + staleness units, no clone needed
 py -3 pipeline/build_dashboard.py      # -> dashboard/index.html AND docs/index.html
@@ -88,21 +88,54 @@ thing needs **one live in-game run** to confirm three things at once:
   auto-calibration · `afa0f62` connect button. None pushed (public site
   untouched).
 
+## Session 2026-08-15 — Roads template + per-member swap advisor
+
+Goal driven ("caller picks the content; small parties may lack roles, big
+ones shouldn't; poor picks get multiple better options"):
+
+- **`pipeline/templates/roads.yaml`** — Roads of Avalon (base 7, `max_size: 7`
+  = the in-game cap, UI warns above it). PROVISIONAL like all templates; the
+  header documents the small-scale inversion (burst_st weight 7 vs
+  blackzone's 1, heal_reduction 7, mobility/catch/disengage high, AoE/zone
+  low; `self_sustain` used for the first time — healer-less duos/trios are
+  legitimate). Floors arm by size: heal from 5, tank from 6 — a 3-man
+  without a healer is fine (T16 pins this), a 7-man is flagged broken.
+- **Swap advisor** — `Engine.swap_review(party)` (+ identical
+  `swapReview` in `app_scoring.js`, parity-covered on every 6th case): each
+  member's CURRENT weapon valued exactly as recommend() would value it into
+  the rest of the party, ranked vs all alternatives (strictly-better counts
+  only), top-3 upgrade options with gains. CLI: `--review`. Comp Forge
+  renders it per roster slot — silent for decent picks (rank < 15 or gain
+  < 1.0), "better options" links otherwise, "off-comp here — rank N/137"
+  past rank 60; options click-to-swap in place. T17 pins the directions
+  (Realmbreaker in a roads 7-man: rank 105, healer-staff options offered).
+- Golden 24/24 (T16 roads size graduation, T17 swap advisor); parity 60/60;
+  headless Chromium run verified the built page (picker, hints, swap click,
+  cap notice, parity chip OK, zero console errors).
+- `build_dashboard.py` now builds on Python 3.11 too (backslash-in-f-string
+  expressions hoisted out — 3.12-only syntax).
+
+Still open for the goal: gear-quality advice needs gear sheets (§2.4, the
+known big build item); live-join re-advice works via the companion connect
+button (poll → load party → advisor runs on every render).
+
 ## Current state (verified 2026-08-13)
 
 **One source of truth.** Capability numbers live only in `pipeline/sheets/*.yaml`;
 global combat-mechanics numbers live only in `pipeline/templates/mechanics.yaml`.
 The engine, the golden tests and the page all consume `out/dataset-latest.json`.
-All gates green: lint 0 errors across 60 sheet files, golden 18/18, JS/Python
-parity 60/60 across all templates × styles at 1e-9, patch-history 14/14.
+All gates green: lint 0 errors across 60 sheet files, golden 24/24, JS/Python
+parity 60/60 across all templates × styles at 1e-9 (now also covering
+swap_review), patch-history 14/14.
 
 - **Curated: 137/137 combat weapons.** The remaining 24 catalog entries are
   vanity items / gathering tools — no sheets, on purpose. Drafts: 0.
   Illustrative placeholders: 0 (`sheets/illustrative/prototype_v0.yaml` is a
   tombstone record of the §2.3 prototype numbers and their corrections).
-- **Five content templates, sizes set by the content**: `blackzone_roam` (20),
+- **Six content templates, sizes set by the content**: `blackzone_roam` (20),
   `territory_defense` (20), `castle` (25), `faction_war` (15),
-  `castle_outpost` (7) — plus **five playstyles** in `templates/styles.yaml`
+  `castle_outpost` (7), `roads` (7, `max_size: 7` — the in-game Roads party
+  cap; the UI warns above it) — plus **five playstyles** in `templates/styles.yaml`
   (balanced/brawl/clap/kite/brawl_clap) that multiply capability WEIGHTS on
   top of any template (floors and over-stack stay on base weight — T10 caught
   the alternative punishing a clap comp for stacking bombs). Party size is

@@ -304,6 +304,53 @@
     return out.sort(function (x, y) { return y.score - x.score; }).slice(0, topN);
   };
 
+  CompEngine.prototype.swapReview = function (party, topN, pool) {
+    /* Per-member swap advisor (mirrors engine.py swap_review): value each
+       member's CURRENT weapon as a pick into the REST of the party, rank it
+       against every alternative (strictly-better only, so ties never demote),
+       return the top upgrade options with gains. Data, not verdict. */
+    if (topN === undefined) topN = 3;
+    var out = [];
+    for (var i = 0; i < party.length; i++) {
+      var cur = party[i];
+      var rest = party.slice(0, i).concat(party.slice(i + 1));
+      var s = this.effectiveSupply(rest);
+      var baseSyn = this.synergy(rest);
+      var self = this;
+      var value = function (w) {
+        var bl = self.bestLoadout(s, baseSyn, w);
+        return self.alpha * bl.dFit + self.beta * bl.dSyn + self.delta * self.metaOf(w);
+      };
+      var curScore = value(cur);
+      var rank = 1, better = [];
+      var keys = pool || Object.keys(this.weapons);
+      for (var j = 0; j < keys.length; j++) {
+        var w = keys[j];
+        if (w === cur) continue;
+        var v = value(w);
+        if (v > curScore) {
+          rank += 1;
+          better.push([v, w]);
+        }
+      }
+      better.sort(function (a, b) {
+        if (a[0] !== b[0]) return b[0] - a[0];
+        return a[1] < b[1] ? -1 : a[1] > b[1] ? 1 : 0;
+      });
+      out.push({
+        index: i, weapon: cur,
+        display_name: this.weapons[cur].display_name,
+        score: curScore, rank: rank,
+        options: better.slice(0, topN).map(function (t) {
+          return { weapon: t[1],
+                   display_name: self.weapons[t[1]].display_name,
+                   score: t[0], gain: t[0] - curScore };
+        }),
+      });
+    }
+    return out;
+  };
+
   CompEngine.prototype.weaknesses = function (party, topN) {
     if (topN === undefined) topN = 3;
     var s = this.effectiveSupply(party), gaps = [];

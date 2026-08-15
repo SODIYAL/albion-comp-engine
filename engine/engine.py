@@ -289,6 +289,48 @@ class Engine:
             })
         return sorted(out, key=lambda r: -r["score"])[:top_n]
 
+    def swap_review(self, party, top_n=3, pool=None):
+        """Per-member swap advisor — the "you'd serve this comp better on X"
+        pass. For each member, value their CURRENT weapon exactly as
+        recommend() would value it as a pick into the REST of the party (best
+        single loadout, alpha*dFit + beta*dSyn + delta*meta), rank that
+        against every alternative pick, and return the top upgrade options
+        with their gains. rank counts strictly-better alternatives only, so
+        ties never demote the member; gain is in score units (same scale as
+        recommend()'s score). The caller decides what rank/gain reads as
+        "poor fit" — this returns the data, not the verdict."""
+        out = []
+        for i, cur in enumerate(party):
+            rest = party[:i] + party[i + 1:]
+            s = self.effective_supply(rest)
+            base_syn = self.synergy(rest)
+
+            def value(w):
+                d_fit, d_syn, _extra = self.best_loadout(s, base_syn, w)
+                return self.alpha * d_fit + self.beta * d_syn \
+                    + self.delta * self.meta_of(w)
+
+            cur_score = value(cur)
+            rank, better = 1, []
+            for w in (pool or self.weapons):
+                if w == cur:
+                    continue
+                v = value(w)
+                if v > cur_score:
+                    rank += 1
+                    better.append((v, w))
+            better.sort(key=lambda t: (-t[0], t[1]))
+            out.append({
+                "index": i, "weapon": cur,
+                "display_name": self.weapons[cur]["display_name"],
+                "score": cur_score, "rank": rank,
+                "options": [{"weapon": w,
+                             "display_name": self.weapons[w]["display_name"],
+                             "score": v, "gain": v - cur_score}
+                            for v, w in better[:top_n]],
+            })
+        return out
+
     def weaknesses(self, party, top_n=3):
         s = self.effective_supply(party)
         gaps = [{"cap": cap,
@@ -317,6 +359,9 @@ if __name__ == "__main__":
     ap.add_argument("--size", type=int, default=None,
                     help="party size (default: the template's base size)")
     ap.add_argument("--style", default="balanced")
+    ap.add_argument("--review", action="store_true",
+                    help="per-member swap advisor: rank each member's weapon "
+                         "against every alternative and list better options")
     args = ap.parse_args()
 
     e = Engine(content=args.content, size=7, style=args.style)
@@ -346,6 +391,13 @@ if __name__ == "__main__":
     print("\nWeaknesses:")
     for w in e.weaknesses(party):
         print(f"  {w['cap']:<16} {w['have']:.0f}/{w['target']:.1f}  −{w['gap']:.1f}")
+    if args.review:
+        print("\nSwap review (rank 1 = nothing beats the current pick):")
+        for m in e.swap_review(party):
+            opts = ", ".join(f"{o['display_name']} (+{o['gain']:.2f})"
+                             for o in m["options"]) or "—"
+            print(f"  {m['index'] + 1}. {m['display_name']:<24} "
+                  f"rank {m['rank']:>3}/{len(e.weapons)}  better: {opts}")
     recs = e.recommend(party)
     print(f"\nRecommend: {recs[0]['display_name']}  (score {recs[0]['score']:.2f})")
     for t in e.explain(party, recs[0]["weapon"])[:4]:

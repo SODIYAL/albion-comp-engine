@@ -1,0 +1,92 @@
+# Content template — Roads of Avalon (small-group roaming, party cap 7).
+#
+# PROVISIONAL — created 2026-08-15, weights NOT expert-adjudicated. Roads
+# parties are hard-capped at 7 by the game; real groups run anywhere from 2
+# (gank pair) to the full 7 (chest-fight squad). Sizes above 7 are not
+# meaningful for this content — the UI should treat 7 as the ceiling.
+#
+# Identity vs the other templates — Roads is the SMALL-SCALE inversion of
+# the ZvZ sheets:
+#   - Single-target kill pressure WORKS here. Resilience at 2–4 attackers is
+#     only 14–35% (mechanics.yaml focus-fire table), so focused damage is a
+#     primary win condition, not a taxed afterthought. burst_st carries real
+#     weight for the first time (compare blackzone_roam weight 1) and
+#     execute is a genuine capability (finishing through the last heal).
+#     The Q16 size physics reinforces this direction automatically: below
+#     base size the expected pile-on shrinks, boosting ST effectiveness.
+#   - Anti-heal is comp-defining. At 5v5–7v7 one enemy healer can out-heal
+#     an entire team's damage; heal_reduction/silence stop being situational
+#     luxuries and become near-mandatory (weight 7 vs blackzone's 6 at
+#     nearly 3x the party size).
+#   - Mobility, catch and disengage rule the map. Fights happen around
+#     portals that close; enemies flee through them and so do you. Catch
+#     converts sightings into fights, disengage converts bad fights into
+#     nothing.
+#   - Self-sustain is a real requirement (first template to use it): duos
+#     and trios routinely run healer-less, living on lifesteal/bruiser
+#     sustain. Low weight so it never outranks a real healer at 5+, where
+#     the heal floor takes over.
+#   - AoE matters less (max 7 targets, usually fewer and spread), zone
+#     control barely (chest-room chokes exist, but most fights are open
+#     mist). clump_create is a nice-to-have, not the fight-winner it is
+#     at 20+.
+#
+# Size behavior is deliberate (the whole point of this template): at 2–4 the
+# floors are silent — a trio of assassins with self-sustain is a legitimate
+# comp, and scaled targets are small enough that "no healer" reads as a gap,
+# not a catastrophe. From 5 the healer floor arms, from 6 the tank floor —
+# by 7 the engine actively demands the classic 1 tank / 1–2 healers spine.
+#
+# Sanity check on the scale: per-head heal need is stable across content
+# (castle_outpost 3.0@7 = 0.43/head; blap 9.0@20 = 0.45/head) — kept at
+# 3.0@7 here.
+
+content: roads
+name: Roads of Avalon
+base_size: 7
+validated_sizes: [7]
+# In-game hard cap: Roads zones refuse parties larger than 7. The engine will
+# still score bigger sizes if asked (free-form size is a product rule); the
+# UI reads this field to warn that such a party cannot actually field.
+max_size: 7
+
+requirements:
+  heal_sustain:   {target: 3.0, weight: 10, soft_cap: 5.0, scales: true}
+  heal_burst:     {target: 1.5, weight: 5,  soft_cap: 3.0, scales: true}
+  tankiness:      {target: 3.0, weight: 7,  soft_cap: 6.0, scales: true}
+  peel:           {target: 3.0, weight: 8,  soft_cap: 6.0, scales: true}
+  # small-scale kill pressure — the inversion vs ZvZ templates (see header)
+  burst_st:       {target: 4.0, weight: 7,  soft_cap: 7.0, scales: true}
+  sustained_dps:  {target: 3.0, weight: 5,  soft_cap: 7.0, scales: true}
+  burst_aoe:      {target: 4.0, weight: 5,  soft_cap: 8.0, scales: true}
+  mobility:       {target: 4.0, weight: 8,  soft_cap: 8.0, scales: true}
+  catch:          {target: 3.0, weight: 7,  soft_cap: 6.0, scales: true}
+  stun:           {target: 2.0, weight: 5,  soft_cap: 5.0, scales: true}
+  # healer-less small groups live on this; low weight so it never outranks
+  # a real healer once the floor arms at 5 (first template to use the cap)
+  self_sustain:   {target: 2.0, weight: 3,  soft_cap: 5.0, scales: true}
+  # threshold needs — one or two copies regardless of size
+  engage:         {target: 2.0, weight: 5,  soft_cap: 4.0, scales: false}
+  disengage:      {target: 2.0, weight: 6,  soft_cap: 4.0, scales: false}
+  heal_reduction: {target: 2.0, weight: 7,  soft_cap: 4.0, scales: false}
+  silence:        {target: 1.0, weight: 5,  soft_cap: 3.0, scales: false}
+  cleanse:        {target: 1.0, weight: 5,  soft_cap: 3.0, scales: false}
+  purge:          {target: 1.0, weight: 4,  soft_cap: 3.0, scales: false}
+  execute:        {target: 2.0, weight: 4,  soft_cap: 4.0, scales: false}
+  resist_shred:   {target: 1.5, weight: 4,  soft_cap: 3.0, scales: false}
+  clump_create:   {target: 1.0, weight: 3,  soft_cap: 3.0, scales: false}
+  zone_control:   {target: 1.5, weight: 2,  soft_cap: 4.0, scales: true}
+  buff_allies:    {target: 1.0, weight: 2,  soft_cap: 3.0, scales: false}
+  # PROVISIONAL low-and-flat (castle_outpost precedent): enemy-dependent
+  # capabilities must never dominate a recommendation on unvalidated numbers.
+  anti_zone:      {target: 1.0, weight: 2,  soft_cap: 2.0, scales: false}
+  damage_debuff:  {target: 1.0, weight: 3,  soft_cap: 2.0, scales: false}
+
+# Floors are absolute units and arm BY SIZE — this is what makes a 3-man
+# without a healer "fine, just know the gap" while a 6–7-man without one is
+# flagged as broken. penalty_mult 2.0 inherits the castle_outpost
+# PROVISIONAL (raised from 1.5 when synergy + meta leakage out-ranked
+# healers past the floor).
+hard_floors:
+  heal_sustain: {min_party_size: 5, floor_units: 2.0, penalty_mult: 2.0}
+  tankiness:    {min_party_size: 6, floor_units: 2.0, penalty_mult: 1.0}

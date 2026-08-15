@@ -39,6 +39,7 @@ const weaknesses = (p, n = 3) => ENG.weaknesses(p, n);
 const explain = (p, cand) => ENG.explain(p, cand).map(t => ({d: t.delta, ...t}));
 const recommend = (p, n = 4) => ENG.recommend(p, n).map(r =>
   ({w: r.weapon, dFit: r.d_fitness, dSyn: r.d_synergy, meta: r.meta_prior, score: r.score}));
+const swapReview = p => ENG.swapReview(p, 3);
 
 const capsOf = w => WEAPONS[w].capabilities || {};
 /* Display names and evidence IDs originate in ao-bin-dumps (an external game-data
@@ -181,7 +182,7 @@ let pickFilter = "";
 let treeFilter = "";
 const $ = id => document.getElementById(id);
 
-const PENDING = [["hellgate_5v5","Hellgate 5v5"], ["roads_7","Roads of Avalon"]];
+const PENDING = [["hellgate_5v5","Hellgate 5v5"]];
 
 function renderSetup(){
   $("content").innerHTML = Object.entries(DATASET.templates)
@@ -201,8 +202,12 @@ function renderSetup(){
   $("size-hint").textContent = party.length > PLANNED
     ? `Roster is ${party.length} — targets and floors now scale to ${SIZE}, not the planned ${PLANNED}.`
     : `Targets and floors scale to whoever shows up — ${SIZE} right now.`;
-  $("size-notice").innerHTML = validatedSizes().includes(SIZE) ? "" :
-    `<div class="notice"><b>Extrapolated.</b> This template is fitted and validated at size ${validatedSizes().join(", ")} only. Per-player targets are scaled linearly to ${SIZE}; flat threshold targets are unchanged. Tier-2 validation must confirm each size before this is trustworthy.</div>`;
+  $("size-notice").innerHTML =
+    (tpl().max_size && SIZE > tpl().max_size
+      ? `<div class="notice"><b>Over the in-game cap.</b> ${esc(tpl().name)} parties are capped at ${tpl().max_size} players in game — ${SIZE} cannot actually field. The advice below still computes, but treat it as hypothetical.</div>`
+      : "")
+    + (validatedSizes().includes(SIZE) ? "" :
+    `<div class="notice"><b>Extrapolated.</b> This template is fitted and validated at size ${validatedSizes().join(", ")} only. Per-player targets are scaled linearly to ${SIZE}; flat threshold targets are unchanged. Tier-2 validation must confirm each size before this is trustworthy.</div>`);
 }
 function renderTally(){
   const counts = {};
@@ -215,12 +220,32 @@ function renderTally(){
       + `<span class="t"><b>${SIZE - party.length}</b> open</span>`
     : "";
 }
+/* Per-member swap advice (engine swapReview): a member's weapon is valued as
+   if being picked into the rest of the party and ranked against every
+   alternative. Hints show only when they're worth acting on — a decent pick
+   (top ~10% rank) or marginal gains stay silent, so a 3-man missing "ideal"
+   pieces isn't nagged; a genuinely off-comp weapon at this content + size
+   gets multiple concrete options, clickable to swap in place. */
+const SWAP_MIN_RANK = 15, SWAP_MIN_GAIN = 1.0, OFFCOMP_RANK = 60;
+function swapHint(m, i){
+  if (!m || m.rank < SWAP_MIN_RANK) return "";
+  const opts = m.options.filter(o => o.gain >= SWAP_MIN_GAIN);
+  if (!opts.length) return "";
+  const pool = Object.keys(WEAPONS).length;
+  const label = m.rank >= OFFCOMP_RANK
+    ? `<b class="offcomp">off-comp here — rank ${m.rank}/${pool}</b>`
+    : `<span class="swap-lbl">better options</span>`;
+  return `<span class="fn swap">${label} ${opts.map(o =>
+    `<button class="swap-opt" data-swapat="${i}" data-swapto="${o.weapon}"
+       title="swap ${nameOf(m.weapon)} for ${nameOf(o.weapon)} (+${o.gain.toFixed(1)} score)">${nameOf(o.weapon)} +${o.gain.toFixed(1)}</button>`).join(" ")}</span>`;
+}
 function renderRoster(){
   /* contribution = fitness lost if this member left — the caller's
      "who is load-bearing" number. Lowest contributor gets flagged. */
   const base = fitness(party);
   const contrib = party.map((w, i) =>
     base - fitness(party.filter((_, j) => j !== i)));
+  const review = party.length > 1 ? swapReview(party) : [];
   const minI = party.length > 2 ? contrib.indexOf(Math.min(...contrib)) : -1;
   const signed = v => (v < 0 ? "−" : "+") + Math.abs(v).toFixed(1);
   const flag = i => i !== minI ? "" : contrib[i] < 0
@@ -234,7 +259,7 @@ function renderRoster(){
   const rows = idxs.map(i => { const w = party[i]; return (
     `<div class="slot ${roleCls(w)}"${roleBg(w)}><span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 32)}
       <span class="nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>${badgeHtml(w)}
-        <span class="fn">${roleOf(w)} · ${signed(contrib[i])} fit${flag(i)}</span></span>
+        <span class="fn">${roleOf(w)} · ${signed(contrib[i])} fit${flag(i)}</span>${swapHint(review[i], i)}</span>
       <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>`); });
   if (PARTY_FACET){
     rows.push(`<div class="slot more">${idxs.length} of ${party.length} — ${esc(PARTY_FACET)} only · click the chip again for all</div>`);
@@ -651,6 +676,8 @@ document.addEventListener("click", e => {
   if (rf){ setFacet({type: "role", v: rf.dataset.rfilter},
                     !rf.closest("#picker-chips")); return; }
   if (e.target.closest("#facet-clear")){ setFacet(null); return; }
+  const sw = e.target.closest("[data-swapat]");
+  if (sw){ party[+sw.dataset.swapat] = sw.dataset.swapto; render(); return; }
   const det = e.target.closest("[data-detail]");
   if (det){ renderDetail(det.dataset.detail); return; }
   const add = e.target.closest("[data-add]");
