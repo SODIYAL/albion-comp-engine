@@ -6,6 +6,8 @@ the artifact host's CSP blocks external hosts, and file:// use is offline).
 
     out/dataset-latest.json   which weapons need icons (curated set)
     out/weapon_lines.json     key -> example_item (T4_...) for the render URL
+    out/gear_lines.json       the loadout half: head/armor/shoes/cape/offhand
+                              + potion/food (fetch_gear_lines.py)
         │
         ▼
     out/icons/<KEY>.webp      local cache — service is hit ONCE per weapon
@@ -58,14 +60,29 @@ def main():
     with open(os.path.join(OUT, "weapon_lines.json"), encoding="utf-8") as f:
         lines = json.load(f)
 
+    # Gear is optional so a checkout without it still packs weapon icons —
+    # run fetch_gear_lines.py to populate it.
+    gear_path = os.path.join(OUT, "gear_lines.json")
+    gear = {}
+    if os.path.exists(gear_path):
+        with open(gear_path, encoding="utf-8") as f:
+            gear = json.load(f)
+    else:
+        print("note: out/gear_lines.json absent — run fetch_gear_lines.py "
+              "for loadout icons; packing weapons only")
+
+    # One namespace, no collisions: weapons are 2H_*/MAIN_*, gear is
+    # HEAD_*/ARMOR_*/SHOES_*/CAPE*/OFF_*/POTION_*/MEAL_*.
+    wanted = {k: (lines.get(k) or {}).get("example_item") for k in weapons}
+    wanted.update({k: v.get("example_item") for k, v in sorted(gear.items())})
+
     os.makedirs(CACHE, exist_ok=True)
     manifest, fetched, cached, failed = {}, 0, 0, []
-    for key in weapons:
+    for key, item in wanted.items():
         path = os.path.join(CACHE, key + ".webp")
         if args.force or not os.path.exists(path):
-            item = (lines.get(key) or {}).get("example_item")
             if not item:
-                failed.append((key, "no example_item in weapon_lines.json"))
+                failed.append((key, "no example_item in the line catalogue"))
                 continue
             try:
                 webp = to_webp(fetch_png(item))
@@ -85,8 +102,10 @@ def main():
         json.dump(manifest, f, indent=0, sort_keys=True)
 
     total = sum(len(v) for v in manifest.values())
-    print(f"icons: {len(manifest)}/{len(weapons)} packed "
-          f"({fetched} fetched, {cached} from cache), manifest {total // 1024} KB")
+    n_gear = sum(1 for k in manifest if k in gear)
+    print(f"icons: {len(manifest)}/{len(wanted)} packed "
+          f"({len(manifest) - n_gear} weapon, {n_gear} gear; "
+          f"{fetched} fetched, {cached} from cache), manifest {total // 1024} KB")
     for key, err in failed:
         print(f"  MISSING {key}: {err}")
     print(f"wrote {os.path.relpath(MANIFEST, os.path.join(HERE, os.pardir))}")

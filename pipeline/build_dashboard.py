@@ -112,6 +112,19 @@ def main():
         spells[k] = {slot: [[sid, spell_name(sid)] for sid in sp.get(slot, [])]
                      for slot in ("q", "w", "e", "passive")}
     loadouts = load_loadouts(data["weapons"])
+    # Gear catalogue (fetch_gear_lines.py) — the loadout half: head, armor,
+    # shoes, cape, offhand, potion, food. Optional, and DISPLAY ONLY for now:
+    # no gear capabilities are curated yet, so the engine still scores weapons
+    # alone. Shipping the catalogue + art first is what lets the loadout UI be
+    # built against real items instead of placeholders.
+    gear_path = os.path.join(HERE, "out", "gear_lines.json")
+    gear = {}
+    if os.path.exists(gear_path):
+        with open(gear_path, encoding="utf-8") as f:
+            gear = json.load(f)
+        # Same rule the usage sample follows: inline only what the page can
+        # actually draw, so a stale catalogue can never render a broken tile.
+        gear = {k: v for k, v in gear.items() if k in icons}
     # Real-usage sample (sample_battles.py). Optional; display evidence only.
     usage_path = os.path.join(HERE, "out", "weapon_usage_v2.json")
     usage = {}
@@ -165,6 +178,7 @@ def main():
            f"const ITEMS = {js(items)};\n"
            f"const SPELLS = {js(spells)};\n"
            f"const LOADOUTS = {js(loadouts)};\n"
+           f"const GEAR = {js(gear)};\n"
            f"const USAGE = {js(usage)};\n"
            f"const PARITY_EXPECTED = {js(expected)};\n{app}</script>\n"
            f"</body>\n</html>\n")
