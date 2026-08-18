@@ -1,3 +1,15 @@
+# ---------------------------------------------------------------------------
+# UNIT RESCALE 2026-08-18 — targets, soft caps and floor units below are
+# expressed in LOADOUT-RESOLVED units (x0.836 from the previous flat-union
+# units). Nothing here was re-tuned: the engine used to credit a party member
+# with every spell on its sheet at once, including mutually exclusive picks
+# from the same Q/W slot, and these thresholds were originally fitted against
+# that inflated measurement. engine.py now resolves one spell per slot
+# (Engine._equipped), so the same real comp measures ~16% smaller and the
+# thresholds are converted to match. Same comps pass, same comps fail.
+# Weights, penalty multipliers and min_party_size are dimensionless and were
+# NOT touched.
+# ---------------------------------------------------------------------------
 # Content template — Faction Warfare, Red Zone (15-man default).
 #
 # PROVISIONAL — created 2026-08-13, weights NOT expert-adjudicated. Faction
@@ -16,34 +28,34 @@ base_size: 15
 validated_sizes: [15]
 
 requirements:
-  heal_sustain:   {target: 6.5,  weight: 10, soft_cap: 10.0, scales: true}
-  heal_burst:     {target: 4.0,  weight: 6,  soft_cap: 6.0,  scales: true}
-  tankiness:      {target: 7.5,  weight: 8,  soft_cap: 12.0, scales: true}
-  peel:           {target: 6.0,  weight: 7,  soft_cap: 10.0, scales: true}
-  engage:         {target: 4.5,  weight: 7,  soft_cap: 8.0,  scales: true}
-  catch:          {target: 4.0,  weight: 7,  soft_cap: 7.0,  scales: true}
-  mobility:       {target: 6.0,  weight: 6,  soft_cap: 12.0, scales: true}
-  burst_aoe:      {target: 9.0,  weight: 8,  soft_cap: 15.0, scales: true}
-  sustained_dps:  {target: 7.0,  weight: 6,  soft_cap: 13.0, scales: true}
-  burst_st:       {target: 3.5,  weight: 4,  soft_cap: 6.0,  scales: true}
-  stun:           {target: 4.0,  weight: 4,  soft_cap: 8.0,  scales: true}
-  zone_control:   {target: 4.5,  weight: 5,  soft_cap: 9.0,  scales: true}
+  heal_sustain:   {target: 5.4,  weight: 10, soft_cap: 8.4, scales: true}
+  heal_burst:     {target: 3.3,  weight: 6,  soft_cap: 5.0,  scales: true}
+  tankiness:      {target: 6.3,  weight: 8,  soft_cap: 10.0, scales: true}
+  peel:           {target: 5.0,  weight: 7,  soft_cap: 8.4, scales: true}
+  engage:         {target: 3.8,  weight: 7,  soft_cap: 6.7,  scales: true}
+  catch:          {target: 3.3,  weight: 7,  soft_cap: 5.9,  scales: true}
+  mobility:       {target: 5.0,  weight: 6,  soft_cap: 10.0, scales: true}
+  burst_aoe:      {target: 7.5,  weight: 8,  soft_cap: 12.5, scales: true}
+  sustained_dps:  {target: 5.9,  weight: 6,  soft_cap: 10.9, scales: true}
+  burst_st:       {target: 2.9,  weight: 4,  soft_cap: 5.0,  scales: true}
+  stun:           {target: 3.3,  weight: 4,  soft_cap: 6.7,  scales: true}
+  zone_control:   {target: 3.8,  weight: 5,  soft_cap: 7.5,  scales: true}
   # threshold needs
-  clump_create:   {target: 2.0,  weight: 6,  soft_cap: 4.0,  scales: false}
-  purge:          {target: 1.0,  weight: 5,  soft_cap: 3.0,  scales: false}
-  heal_reduction: {target: 2.0,  weight: 6,  soft_cap: 4.0,  scales: false}
-  resist_shred:   {target: 2.0,  weight: 4,  soft_cap: 4.0,  scales: false}
-  cleanse:        {target: 1.0,  weight: 4,  soft_cap: 3.0,  scales: false}
-  silence:        {target: 1.0,  weight: 3,  soft_cap: 3.0,  scales: false}
-  buff_allies:    {target: 2.0,  weight: 3,  soft_cap: 5.0,  scales: false}
-  disengage:      {target: 2.0,  weight: 4,  soft_cap: 4.0,  scales: false}
-  execute:        {target: 1.0,  weight: 3,  soft_cap: 3.0,  scales: false}
-  anti_zone:      {target: 1.0,  weight: 2,  soft_cap: 2.0,  scales: false}
-  damage_debuff:  {target: 1.0,  weight: 3,  soft_cap: 2.0,  scales: false}
+  clump_create:   {target: 1.7,  weight: 6,  soft_cap: 3.3,  scales: false}
+  purge:          {target: 0.8,  weight: 5,  soft_cap: 2.5,  scales: false}
+  heal_reduction: {target: 1.7,  weight: 6,  soft_cap: 3.3,  scales: false}
+  resist_shred:   {target: 1.7,  weight: 4,  soft_cap: 3.3,  scales: false}
+  cleanse:        {target: 0.8,  weight: 4,  soft_cap: 2.5,  scales: false}
+  silence:        {target: 0.8,  weight: 3,  soft_cap: 2.5,  scales: false}
+  buff_allies:    {target: 1.7,  weight: 3,  soft_cap: 4.2,  scales: false}
+  disengage:      {target: 1.7,  weight: 4,  soft_cap: 3.3,  scales: false}
+  execute:        {target: 0.8,  weight: 3,  soft_cap: 2.5,  scales: false}
+  anti_zone:      {target: 0.8,  weight: 2,  soft_cap: 1.7,  scales: false}
+  damage_debuff:  {target: 0.8,  weight: 3,  soft_cap: 1.7,  scales: false}
 
 # Floors slightly lower than blackzone_roam: respawns nearby make a
 # healer-less pug survivable-ish, but it is still the biggest single
 # mistake a faction group makes — the floor stays, tuned softer.
 hard_floors:
-  heal_sustain: {min_party_size: 8, floor_units: 4.0, penalty_mult: 1.75}
-  tankiness:    {min_party_size: 8, floor_units: 3.0, penalty_mult: 1.0}
+  heal_sustain: {min_party_size: 8, floor_units: 3.3, penalty_mult: 1.75}
+  tankiness:    {min_party_size: 8, floor_units: 2.5, penalty_mult: 1.0}

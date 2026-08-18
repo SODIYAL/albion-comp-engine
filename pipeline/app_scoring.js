@@ -96,6 +96,7 @@
       this._weights[cap2] = r.weight * (m2 === undefined ? 1.0 : m2);
     }
     this._extrasCache = {};
+    this._equippedCache = {};
     this._poolKeys = null;
   };
 
@@ -161,15 +162,50 @@
     return s;
   };
 
+  CompEngine.prototype._equipped = function (weapon) {
+    /* What ONE party member actually brings: `always` plus the single best
+       bundle per loadout slot — never two alternatives of the same slot.
+       Mechanics already applied; cached per setContent.
+
+       THE FIX (2026-08-18): party supply used to be the FLAT CAPABILITY
+       UNION, so a Crossbow was credited with Silencing Bolt AND Knockback
+       Shot AND Caltrops — three mutually exclusive picks from one W slot.
+       The over-credit was uneven (hand-curated meta weapons cite one spell
+       per slot and gained nothing; bulk-curated line sheets gained 33-80%),
+       which is why forged comps filled with Crossbows. The slot is resolved
+       against the CURRENT template weights, and STATICALLY — party supply
+       must stay a plain sum over members or every incremental marginal
+       (recommend / swapReview / _coverTerms) is invalidated.
+       Mirrors engine.py _equipped. */
+    var hit = this._equippedCache[weapon];
+    if (hit !== undefined) return hit;
+    var lo = this._loadoutEff(weapon), always = lo.always, slots = lo.slots;
+    var out = {}, c;
+    for (c in always) out[c] = always[c];
+    for (var i = 0; i < slots.length; i++) {
+      var best = null, bestVal = 0, bestUnits = 0;
+      for (var j = 0; j < slots[i].length; j++) {
+        var b = slots[i][j], val = 0, units = 0;
+        for (c in b) { val += (this._weights[c] || 0.0) * b[c]; units += b[c]; }
+        /* value first, unit count breaks ties (mirrors Python tuple compare) */
+        if (best === null || val > bestVal || (val === bestVal && units > bestUnits)) {
+          best = b; bestVal = val; bestUnits = units;
+        }
+      }
+      if (best) for (c in best) out[c] = (out[c] || 0.0) + best[c];
+    }
+    this._equippedCache[weapon] = out;
+    return out;
+  };
+
   CompEngine.prototype.effectiveSupply = function (party) {
-    /* Supply after style-delivery physics (AoE escalation, Resilience).
-       Balanced-at-base-size is the identity. ALL scoring — floors included —
-       reads THIS (mirrors engine.py); raw supply() is the sheet-unit
-       reference only. */
-    var s = this.supply(party);
-    for (var cap in this.mechMults) {
-      var m = this.mechMults[cap];
-      if (m !== 1.0 && cap in s) s[cap] = s[cap] * m;
+    /* Supply after style-delivery physics AND the one-spell-per-slot loadout
+       rule (see _equipped). ALL scoring — floors included — reads THIS
+       (mirrors engine.py); raw supply() is the sheet-unit reference only. */
+    var s = {}, c;
+    for (var i = 0; i < party.length; i++) {
+      var eq = this._equipped(party[i]);
+      for (c in eq) s[c] = (s[c] || 0.0) + eq[c];
     }
     return s;
   };

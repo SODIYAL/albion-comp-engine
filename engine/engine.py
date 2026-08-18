@@ -113,6 +113,7 @@ class Engine:
         self._weights = {c: r["weight"] * self.style_mults.get(c, 1.0)
                          for c, r in self.reqs.items()}
         self._extras_cache = {}
+        self._equipped_cache = {}
 
     @staticmethod
     def _half_up(x):
@@ -175,15 +176,60 @@ class Engine:
                 s[cap] = s.get(cap, 0) + v
         return s
 
+    def _equipped(self, weapon):
+        """What ONE party member actually brings: `always`, plus the single
+        best bundle from each loadout slot — never two alternatives of the
+        same slot. Mechanics multipliers already applied. Cached per
+        set_content (the choice depends on the styled weights).
+
+        THE FIX (2026-08-18). Party supply used to be the weapon's FLAT
+        CAPABILITY UNION, so a member was credited with every spell on its
+        sheet at once: a Crossbow got Silencing Bolt AND Knockback Shot AND
+        Caltrops — three mutually exclusive picks from one W slot — for 12
+        units where a real player fields 9. The over-credit was not uniform,
+        which is what made it damaging: hand-curated meta weapons (Hand of
+        Justice, Great Holy, Heavy Mace) cite ONE spell per slot and gained
+        nothing, while bulk-curated line sheets enumerate the whole shared
+        Q/W pool and gained 33-80%. The engine was handing free capability to
+        exactly the filler weapons, which is why forged comps filled with
+        Crossbows and Cursed Staffs.
+
+        The slot is resolved against the CURRENT template weights (what this
+        content actually wants), not raw unit count, and statically — it does
+        not depend on the rest of the party. That keeps supply a plain sum
+        over members, which every incremental marginal calculation
+        (_marg_fit_from, _cover_terms, recommend, swap_review) relies on:
+        make it party-dependent and adding a weapon would silently re-pick
+        the incumbents' spells, invalidating their marginals."""
+        hit = self._equipped_cache.get(weapon)
+        if hit is not None:
+            return hit
+        always, slots = self._loadout_eff(weapon)
+        out = dict(always)
+        for slot in slots:
+            best, best_key = None, None
+            for bundle in slot:
+                # value under this content+style; unit count breaks ties so a
+                # slot of pure non-requirement caps still resolves stably
+                key = (sum(self._weights.get(c, 0.0) * v for c, v in bundle.items()),
+                       sum(bundle.values()))
+                if best_key is None or key > best_key:
+                    best, best_key = bundle, key
+            if best:
+                for c, v in best.items():
+                    out[c] = out.get(c, 0.0) + v
+        self._equipped_cache[weapon] = out
+        return out
+
     def effective_supply(self, party):
-        """Supply after style-delivery physics (AoE escalation, Resilience).
-        Balanced-at-base-size is the identity, so raw == effective there.
-        ALL scoring — floors included — reads THIS; `supply` stays raw only
-        as the sheet-unit reference (weapon detail views)."""
-        s = self.supply(party)
-        for cap, m in self.mech_mults.items():
-            if m != 1.0 and cap in s:
-                s[cap] = s[cap] * m
+        """Supply after style-delivery physics (AoE escalation, Resilience)
+        AND the one-spell-per-slot loadout rule (see _equipped).
+        ALL scoring — floors included — reads THIS; `supply` stays the raw
+        flat-union sheet reference for weapon detail views."""
+        s = {}
+        for w in party:
+            for cap, v in self._equipped(w).items():
+                s[cap] = s.get(cap, 0.0) + v
         return s
 
     def floor_armed(self, cap, have):

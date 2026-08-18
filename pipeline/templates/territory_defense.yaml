@@ -1,3 +1,15 @@
+# ---------------------------------------------------------------------------
+# UNIT RESCALE 2026-08-18 — targets, soft caps and floor units below are
+# expressed in LOADOUT-RESOLVED units (x0.833 from the previous flat-union
+# units). Nothing here was re-tuned: the engine used to credit a party member
+# with every spell on its sheet at once, including mutually exclusive picks
+# from the same Q/W slot, and these thresholds were originally fitted against
+# that inflated measurement. engine.py now resolves one spell per slot
+# (Engine._equipped), so the same real comp measures ~17% smaller and the
+# thresholds are converted to match. Same comps pass, same comps fail.
+# Weights, penalty multipliers and min_party_size are dimensionless and were
+# NOT touched.
+# ---------------------------------------------------------------------------
 # Content template — Territory Defense (20-man objective fight).
 #
 # PROVISIONAL — created 2026-08-12, weights NOT yet expert-adjudicated.
@@ -26,39 +38,39 @@ base_size: 20
 validated_sizes: [20]
 
 requirements:
-  heal_sustain:   {target: 8.0,  weight: 10, soft_cap: 12.0, scales: true}
-  heal_burst:     {target: 5.0,  weight: 6,  soft_cap: 8.0,  scales: true}
-  tankiness:      {target: 12.0, weight: 9,  soft_cap: 17.0, scales: true}
-  peel:           {target: 9.0,  weight: 8,  soft_cap: 14.0, scales: true}
-  burst_aoe:      {target: 13.0, weight: 9,  soft_cap: 20.0, scales: true}
-  zone_control:   {target: 8.0,  weight: 6,  soft_cap: 14.0, scales: true}
-  engage:         {target: 5.0,  weight: 7,  soft_cap: 9.0,  scales: true}
-  stun:           {target: 5.0,  weight: 4,  soft_cap: 10.0, scales: true}
-  sustained_dps:  {target: 7.0,  weight: 4,  soft_cap: 14.0, scales: true}
-  catch:          {target: 3.0,  weight: 4,  soft_cap: 6.0,  scales: true}
-  mobility:       {target: 5.0,  weight: 3,  soft_cap: 12.0, scales: true}
+  heal_sustain:   {target: 6.7,  weight: 10, soft_cap: 10.0, scales: true}
+  heal_burst:     {target: 4.2,  weight: 6,  soft_cap: 6.7,  scales: true}
+  tankiness:      {target: 10.0, weight: 9,  soft_cap: 14.2, scales: true}
+  peel:           {target: 7.5,  weight: 8,  soft_cap: 11.7, scales: true}
+  burst_aoe:      {target: 10.8, weight: 9,  soft_cap: 16.7, scales: true}
+  zone_control:   {target: 6.7,  weight: 6,  soft_cap: 11.7, scales: true}
+  engage:         {target: 4.2,  weight: 7,  soft_cap: 7.5,  scales: true}
+  stun:           {target: 4.2,  weight: 4,  soft_cap: 8.3, scales: true}
+  sustained_dps:  {target: 5.8,  weight: 4,  soft_cap: 11.7, scales: true}
+  catch:          {target: 2.5,  weight: 4,  soft_cap: 5.0,  scales: true}
+  mobility:       {target: 4.2,  weight: 3,  soft_cap: 10.0, scales: true}
   # single-target damage weak in 20-man defense (heals + Resilience overpower
   # focused damage; chokes reward AoE) — expert ruling 2026-08-14. Token weight.
-  burst_st:       {target: 2.0,  weight: 1,  soft_cap: 4.0,  scales: true}
+  burst_st:       {target: 1.7,  weight: 1,  soft_cap: 3.3,  scales: true}
   # threshold needs
-  clump_create:   {target: 3.0,  weight: 8,  soft_cap: 5.0,  scales: false}
-  purge:          {target: 2.0,  weight: 6,  soft_cap: 4.0,  scales: false}
-  heal_reduction: {target: 2.0,  weight: 6,  soft_cap: 4.0,  scales: false}
-  resist_shred:   {target: 3.0,  weight: 5,  soft_cap: 6.0,  scales: false}
-  cleanse:        {target: 2.0,  weight: 5,  soft_cap: 4.0,  scales: false}
-  silence:        {target: 2.0,  weight: 4,  soft_cap: 4.0,  scales: false}
-  buff_allies:    {target: 3.0,  weight: 4,  soft_cap: 6.0,  scales: false}
-  disengage:      {target: 1.0,  weight: 3,  soft_cap: 3.0,  scales: false}
-  execute:        {target: 1.0,  weight: 1,  soft_cap: 2.0,  scales: false}  # single-target kill-secure; weak at scale
+  clump_create:   {target: 2.5,  weight: 8,  soft_cap: 4.2,  scales: false}
+  purge:          {target: 1.7,  weight: 6,  soft_cap: 3.3,  scales: false}
+  heal_reduction: {target: 1.7,  weight: 6,  soft_cap: 3.3,  scales: false}
+  resist_shred:   {target: 2.5,  weight: 5,  soft_cap: 5.0,  scales: false}
+  cleanse:        {target: 1.7,  weight: 5,  soft_cap: 3.3,  scales: false}
+  silence:        {target: 1.7,  weight: 4,  soft_cap: 3.3,  scales: false}
+  buff_allies:    {target: 2.5,  weight: 4,  soft_cap: 5.0,  scales: false}
+  disengage:      {target: 0.8,  weight: 3,  soft_cap: 2.5,  scales: false}
+  execute:        {target: 0.8,  weight: 1,  soft_cap: 1.7,  scales: false}  # single-target kill-secure; weak at scale
   # PROVISIONAL — but deliberately above the castle_outpost weight (3 -> 4):
   # the one piece of real evidence we have (a standing Exalted slot in all
   # three Deadlyhooker parties) is territory/castle content. Still flat and
   # small so an unvalidated number cannot dominate.
-  anti_zone:      {target: 1.0,  weight: 4,  soft_cap: 2.0,  scales: false}
-  damage_debuff:  {target: 1.0,  weight: 3,  soft_cap: 2.0,  scales: false}
+  anti_zone:      {target: 0.8,  weight: 4,  soft_cap: 1.7,  scales: false}
+  damage_debuff:  {target: 0.8,  weight: 3,  soft_cap: 1.7,  scales: false}
 
 # Absolute-unit floors, same rationale + PROVISIONAL penalty_mult as
 # blackzone_roam (see that file / castle_outpost.yaml for the history).
 hard_floors:
-  heal_sustain: {min_party_size: 10, floor_units: 5.0, penalty_mult: 2.0}
-  tankiness:    {min_party_size: 10, floor_units: 4.0, penalty_mult: 1.0}
+  heal_sustain: {min_party_size: 10, floor_units: 4.2, penalty_mult: 2.0}
+  tankiness:    {min_party_size: 10, floor_units: 3.3, penalty_mult: 1.0}
