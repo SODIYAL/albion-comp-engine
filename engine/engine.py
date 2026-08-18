@@ -288,9 +288,29 @@ class Engine:
     def max_fitness(self):
         return sum(self.weight(cap) for cap in self.reqs)
 
+    def _syn_side(self, cap, amount):
+        """One side of a synergy pair, CAPPED AT ITS TARGET (2026-08-18).
+
+        Synergy used to read raw supply, so it was the one term in the whole
+        engine with no target, no soft cap and no diminishing return — it paid
+        1.5 * min(clump_create, burst_aoe) however far past the target both
+        went. That was survivable only while the over-stack penalty was also
+        unbounded and cancelled it. Bounding over-stack without bounding this
+        left an uncapped reward against a capped cost, and the optimiser found
+        it immediately: a forged 20-man ran clump_create to 25.0 against a
+        target of 2.5 (10x) because every extra copy of a weapon supplying
+        BOTH halves of the pair kept paying. Capping each side at its target
+        makes synergy saturate exactly where coverage does, which is the
+        model the rest of the engine already uses."""
+        if cap not in self.reqs:
+            return amount
+        return min(amount, self.target(cap))
+
     def synergy(self, party):
         s = self.effective_supply(party)
-        return sum(b * min(s.get(a, 0), s.get(c, 0)) for a, c, b in self.synergies)
+        return sum(b * min(self._syn_side(a, s.get(a, 0)),
+                           self._syn_side(c, s.get(c, 0)))
+                   for a, c, b in self.synergies)
 
     # -------------------------------------------------------- comp-level score
     def comp_score(self, party):
@@ -382,10 +402,13 @@ class Engine:
         return total
 
     def _marg_syn_from(self, s, base_syn, extra):
-        """Marginal synergy of adding effective caps `extra`."""
+        """Marginal synergy of adding effective caps `extra`. Sides are capped
+        at their targets exactly as synergy() does — the two must agree or a
+        candidate is scored on a different rule than the comp it joins."""
         total = 0.0
         for a, c, b in self.synergies:
-            total += b * min(s.get(a, 0) + extra.get(a, 0), s.get(c, 0) + extra.get(c, 0))
+            total += b * min(self._syn_side(a, s.get(a, 0) + extra.get(a, 0)),
+                             self._syn_side(c, s.get(c, 0) + extra.get(c, 0)))
         return total - base_syn
 
     def _loadout_extras(self, weapon):

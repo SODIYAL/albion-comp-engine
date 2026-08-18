@@ -266,11 +266,23 @@
     return t;
   };
 
+  CompEngine.prototype._synSide = function (cap, amount) {
+    /* One side of a synergy pair, CAPPED AT ITS TARGET (2026-08-18).
+       Synergy was the one term with no target, no soft cap and no diminishing
+       return — survivable only while the over-stack penalty was also
+       unbounded and cancelled it. Bounding over-stack alone left an uncapped
+       reward against a capped cost and the optimiser found it at once: a
+       forged 20-man ran clump_create to 25.0 against a target of 2.5.
+       Mirrors engine.py _syn_side. */
+    if (!(cap in this.reqs)) return amount;
+    return Math.min(amount, this.target(cap));
+  };
+
   CompEngine.prototype.synergy = function (party) {
     var s = this.effectiveSupply(party), total = 0.0;
     for (var i = 0; i < this.synergies.length; i++) {
       var a = this.synergies[i][0], c = this.synergies[i][1], b = this.synergies[i][2];
-      total += b * Math.min(s[a] || 0, s[c] || 0);
+      total += b * Math.min(this._synSide(a, s[a] || 0), this._synSide(c, s[c] || 0));
     }
     return total;
   };
@@ -371,7 +383,10 @@
     var total = 0.0;
     for (var i = 0; i < this.synergies.length; i++) {
       var a = this.synergies[i][0], c = this.synergies[i][1], b = this.synergies[i][2];
-      total += b * Math.min((s[a] || 0) + (extra[a] || 0), (s[c] || 0) + (extra[c] || 0));
+      /* capped exactly as synergy() does — a candidate must be scored on the
+         same rule as the comp it joins (mirrors engine.py _marg_syn_from) */
+      total += b * Math.min(this._synSide(a, (s[a] || 0) + (extra[a] || 0)),
+                            this._synSide(c, (s[c] || 0) + (extra[c] || 0)));
     }
     return total - baseSyn;
   };
