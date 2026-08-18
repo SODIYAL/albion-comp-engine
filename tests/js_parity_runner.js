@@ -8,11 +8,16 @@ const cases = JSON.parse(fs.readFileSync(process.argv[4], "utf8"));
 
 // mirrors SWAP_EVERY / SWAP_MAX_PARTY in test_js_parity.py
 const SWAP_EVERY = 6, SWAP_MAX_PARTY = 6;
+// mirrors REFINE_* in test_js_parity.py
+const REFINE_EVERY = 6, REFINE_MAX_PARTY = 6, REFINE_PASSES = 2;
 
 const out = cases.map((c, i) => {
   const e = new CompEngine(dataset, c.content, c.size, c.style);
   const sp = i % SWAP_EVERY === 0 ? c.party.slice(0, SWAP_MAX_PARTY) : null;
+  const rp = i % REFINE_EVERY === 0 ? c.party.slice(0, REFINE_MAX_PARTY) : null;
   return {
+    refine: rp === null ? null : e.refine(rp, REFINE_PASSES, c.refine_pool),
+    comp_score: e.compScore(c.party),
     swap: sp === null ? null : e.swapReview(sp).map((m) => ({
       weapon: m.weapon, score: m.score, rank: m.rank,
       options: m.options.map((o) => ({ weapon: o.weapon, score: o.score })),

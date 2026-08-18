@@ -39,6 +39,8 @@ styles:
       heal_sustain: 1.3
       sustained_dps: 1.35
       heal_reduction: 1.25
+      # a melee ball is a legitimate brawl answer — blap fields zero ranged
+      ranged_presence: 0.5
       cleanse: 1.2
       resist_shred: 1.2
       peel: 1.15
@@ -58,6 +60,8 @@ styles:
     multipliers:
       clump_create: 1.7
       burst_aoe: 1.6
+      # the bomb has to land from OUTSIDE the clump you just made
+      ranged_presence: 1.6
       engage: 1.4
       silence: 1.3
       purge: 1.25
@@ -78,6 +82,7 @@ styles:
     multipliers:
       mobility: 1.6
       disengage: 1.5
+      ranged_presence: 1.8
       catch: 1.45
       sustained_dps: 1.3
       heal_reduction: 1.2
@@ -97,6 +102,7 @@ styles:
     multipliers:
       clump_create: 1.4
       burst_aoe: 1.35
+      ranged_presence: 1.1
       tankiness: 1.2
       engage: 1.2
       heal_sustain: 1.15

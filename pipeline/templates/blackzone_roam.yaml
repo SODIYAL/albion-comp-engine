@@ -44,6 +44,17 @@ requirements:
   burst_st:       {target: 2.0,  weight: 1,  soft_cap: 4.0,  scales: true}
   stun:           {target: 5.0,  weight: 4,  soft_cap: 10.0, scales: true}
   zone_control:   {target: 3.0,  weight: 3,  soft_cap: 8.0,  scales: true}
+  # PROVISIONAL 2026-08-18. Positioning, derived from role_hint (see
+  # build_dataset.inject_positioning) — "can this comp put damage on a clump
+  # from outside it". Added because the model could not tell a ranged bomb
+  # core from a melee ball: both supplied burst_aoe identically, so a "clap"
+  # request returned 10 frontline bodies and one real ranged bomb.
+  # Target is deliberately MODEST and the weight LOW at content level: the
+  # calibration comp (blap) fields ZERO ranged weapons and is a perfectly
+  # good blackzone comp, so range is a STYLE demand (clap/kite want it, a
+  # brawl melee ball legitimately does not), not a content floor. The style
+  # multipliers in styles.yaml carry the real signal.
+  ranged_presence: {target: 6.0, weight: 4,  soft_cap: 12.0, scales: true}
   # threshold needs — one or two dedicated slots regardless of size
   clump_create:   {target: 3.0,  weight: 7,  soft_cap: 5.0,  scales: false}
   purge:          {target: 2.0,  weight: 6,  soft_cap: 4.0,  scales: false}

@@ -118,6 +118,9 @@ def load_sheets(weapon_lines):
                 "status": status,
                 "in_game_data": line is not None,
                 "role_hint": entry.get("role_hint"),
+                # retired by the game: still scoreable (old permalinks must
+                # load) but never recommended — see Engine.pool
+                "removed": bool(entry.get("removed")),
                 # YAML parses the unquoted date; keep it a plain string in JSON
                 "curated_as_of": (str(entry["curated_as_of"])
                                   if entry.get("curated_as_of") else None),
@@ -137,7 +140,38 @@ def load_sheets(weapon_lines):
 
     for key, src in sources.items():
         weapons[key]["source"] = src
+    inject_positioning(weapons)
     return weapons
+
+
+# Positioning capability (2026-08-18, PROVISIONAL). The capability model had
+# no notion of WHERE damage comes from, so a Galatine spin at 3m and a Frost
+# bomb at 20m supplied identical `burst_aoe`. Consequence: asking for a "clap"
+# (stack them, bomb them from range) returned a comp with 10 frontline bodies
+# and one real ranged bomb — structurally a brawl comp wearing a clap label,
+# because melee AoE satisfied the clap weights just as well.
+#
+# This is a SHAPE constraint, not true per-spell range modelling: it is derived
+# from the curated `role_hint`, so it costs no new curation and cites no
+# evidence spell (hence injected post-lint, here, rather than in the sheets).
+# Real range modelling would need a per-spell radius/cast-range read — see
+# MECHANICS_TODO.md. Only role_hint "range" counts: the question it answers is
+# "can this comp put damage on a clump from outside it", so healers and
+# supports (also back-line, but not damage) are deliberately excluded.
+RANGED_ROLE_HINTS = ("range",)
+
+
+def inject_positioning(weapons):
+    """Add `ranged_presence: 1` to every ranged weapon, in BOTH the flat
+    capability map (display + base-party supply) and `loadout.always` (the
+    loadout-aware scoring path). It goes in `always`, never a slot: a weapon's
+    range is not a spell choice the player trades against another."""
+    for w in weapons.values():
+        if w.get("role_hint") not in RANGED_ROLE_HINTS:
+            continue
+        w["capabilities"]["ranged_presence"] = 1
+        lo = w.setdefault("loadout", {})
+        lo.setdefault("always", {})["ranged_presence"] = 1
 
 
 def load_templates():

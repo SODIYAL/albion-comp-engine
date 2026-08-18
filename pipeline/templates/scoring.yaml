@@ -5,6 +5,20 @@ weights:
   beta:  0.20   # synergy
   delta: 0.15   # meta prior
   gamma: 0.70   # concavity of the utility curve U_c(s) = w * min(1, s/target)^gamma
+  # Over-stack penalty asymptote, as a fraction of a capability's BASE weight
+  # (2026-08-18). The penalty used to be LINEAR AND UNBOUNDED
+  # (0.5*w*(have-soft)/target), which had two consequences neither intended:
+  #   1. a saturated capability could score deeply NEGATIVE, so fitness peaked
+  #      at ~10 players and fell monotonically to 20 — the model preferred
+  #      bringing FEWER bodies to a ZvZ, and a 13-of-20 subset of a forged
+  #      20-man out-scored the full comp by 24 points.
+  #   2. dividing by `target` meant threshold caps (scales:false, target 2.0)
+  #      were punished ~6x harder per excess unit than burst_aoe (target 12).
+  # Now saturating and scaled by soft_cap: pen = max * w * x/(1+x), where
+  # x = (have - soft_cap)/soft_cap. Bounded by max*w, so redundancy always
+  # costs something but can never invert a covered capability's value. The
+  # rational form (not exp) keeps Python/JS bit-identical for the parity test.
+  overstack_max: 0.5
 
 # Capability-level synergy: pairs worth more across players than their sum
 # (design doc §4.2.1). Applies to any weapons supplying the pair — no

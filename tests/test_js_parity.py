@@ -46,9 +46,16 @@ def make_cases(data):
                      2 * base + 1, 10, 14]
         size = size_opts[(i // len(contents)) % len(size_opts)]
         n = rng.randint(0, min(size, 12))
+        # refine() is a full-pool sweep PER SLOT PER PASS — far too slow to
+        # run over all 137 weapons on every case, so each case carries a
+        # deterministic pool subset that BOTH engines use. Steepest-descent
+        # resolves ties by iteration order, so the pool must be an ordered
+        # list, identical on both sides, not a set.
+        pool = weapons[(i % 7)::11]
         cases.append({"content": content, "size": size,
                       "style": styles[i % len(styles)],
-                      "party": [rng.choice(weapons) for _ in range(n)]})
+                      "party": [rng.choice(weapons) for _ in range(n)],
+                      "refine_pool": pool})
     return cases
 
 
@@ -61,12 +68,27 @@ def swap_case(i, party):
     return party[:SWAP_MAX_PARTY] if i % SWAP_EVERY == 0 else None
 
 
+# refine() is the other full-pool sweep — same sampling deal as swap_review.
+# Two passes is enough to catch a divergence: if the engines disagree at all
+# they disagree on the FIRST move, and each pass is a full steepest-descent
+# sweep over every slot.
+REFINE_EVERY, REFINE_MAX_PARTY, REFINE_PASSES = 6, 6, 2
+
+
+def refine_case(i, party):
+    return party[:REFINE_MAX_PARTY] if i % REFINE_EVERY == 0 else None
+
+
 def py_results(cases):
     out = []
     for i, c in enumerate(cases):
         e = Engine(content=c["content"], size=c["size"], style=c["style"])
         sp = swap_case(i, c["party"])
+        rp = refine_case(i, c["party"])
         out.append({
+            "refine": None if rp is None else e.refine(
+                rp, max_passes=REFINE_PASSES, pool=c["refine_pool"]),
+            "comp_score": e.comp_score(c["party"]),
             "swap": None if sp is None else [
                 {"weapon": m["weapon"], "score": m["score"], "rank": m["rank"],
                  "options": [{"weapon": o["weapon"], "score": o["score"]}
@@ -111,7 +133,9 @@ def main():
     bad = 0
     for i, (a, b, c) in enumerate(zip(py, js, cases)):
         errs = []
-        for k in ("fitness", "synergy", "max_fitness"):
+        if a["refine"] is not None and a["refine"] != b["refine"]:
+            errs.append(f"refine: py={a['refine']} js={b['refine']}")
+        for k in ("fitness", "synergy", "max_fitness", "comp_score"):
             if abs(a[k] - b[k]) > EPS:
                 errs.append(f"{k}: py={a[k]!r} js={b[k]!r}")
         if [r["weapon"] for r in a["recommend"]] != [r["weapon"] for r in b["recommend"]]:

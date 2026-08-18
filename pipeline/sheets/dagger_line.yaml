@@ -36,6 +36,17 @@
 - weapon: 2H_IRONGAUNTLETS_HELL      # Black Hands — combo striker
   curated_as_of: 2026-08-12
   role_hint: melee
+  # REMOVED FROM THE GAME (expert ruling 2026-08-18, project owner). The item
+  # still exists in ao-bin-dumps — legacy entries are never deleted from the
+  # dumps, and its parsed line is structurally indistinguishable from a live
+  # weapon (same subcategory, full q/w/e/passive spell lists), so this CANNOT
+  # be auto-detected; it has to be asserted. Corroborating signal: zero
+  # occurrences in every size bucket of weapon_usage_v2.json, while its
+  # sibling Hellfire Hands appears in both small and large.
+  # The curation is kept rather than deleted so an old permalink containing
+  # this weapon still loads and scores; `removed` only bars it from being
+  # RECOMMENDED. Same treatment for any other weapon the game retires.
+  removed: true
   # NOTE: the E's dumps description is EMPTY; scores rest on structured
   # effects, cross-checked against community sources (2026-08-12): Devastating
   # Strike is a two-hit combo — 1st hit ~66% damage + PURGE, 2nd hit ~33% +

@@ -377,7 +377,9 @@ function renderTreeFilter(){
 }
 /* WEAPONS is static per page load — sort once, not per keystroke (the old
    per-render sort ran ~2,000 escape-regex + localeCompare calls each pass) */
-const WEAPONS_BY_NAME = Object.keys(WEAPONS)
+/* Game-retired weapons are dropped from the picker: they stay in WEAPONS so
+   an old permalink still loads and scores, but must never be offered. */
+const WEAPONS_BY_NAME = Object.keys(WEAPONS).filter(w => !WEAPONS[w].removed)
   .sort((a,b) => nameOf(a).localeCompare(nameOf(b)));
 function filteredWeapons(){
   const q = pickFilter.trim().toLowerCase();
@@ -895,12 +897,24 @@ document.addEventListener("click", e => {
     PARTY_FACET = null;   /* the new member must be visible */
     render(); } return; }
   if (e.target.closest("#forge")){
-    /* Greedy auto-build: repeatedly take the engine's top pick. */
+    /* Greedy auto-build, then a 1-opt refine pass. Greedy alone judges slot 1
+       against an EMPTY party and never revisits it, so a forged comp could be
+       led by a weapon its own swap advisor then ranked 132nd, with a tail of
+       narrow picks chosen only because they added least to saturated pools.
+       refine() re-optimises the finished comp against the same objective. */
     const goal = Math.min(SIZE, HARD_CAP);
+    const startedAt = party.length;
     while (party.length < goal){
       const r = recommend(party, 1);
       if (!r.length) break;
       party.push(r[0].w);
+    }
+    /* `startedAt` locks the hand-placed members: only the slots this forge
+       added are the engine's to rewrite. */
+    if (party.length > startedAt){
+      const refined = ENG.refine(party, 8, null, startedAt);
+      party.length = 0;
+      party.push(...refined);
     }
     PARTY_FACET = null;   /* show the whole forged comp, not a filtered view */
     render();

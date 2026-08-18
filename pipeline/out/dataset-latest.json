@@ -371,7 +371,8 @@
    "alpha": 0.55,
    "beta": 0.2,
    "delta": 0.15,
-   "gamma": 0.7
+   "gamma": 0.7,
+   "overstack_max": 0.5
   }
  },
  "styles": {
@@ -401,6 +402,7 @@
     "heal_sustain": 1.3,
     "mobility": 0.75,
     "peel": 1.15,
+    "ranged_presence": 0.5,
     "resist_shred": 1.2,
     "sustained_dps": 1.35,
     "tankiness": 1.35
@@ -420,6 +422,7 @@
     "engage": 1.2,
     "heal_sustain": 1.15,
     "mobility": 0.85,
+    "ranged_presence": 1.1,
     "sustained_dps": 1.1,
     "tankiness": 1.2
    },
@@ -440,6 +443,7 @@
     "heal_sustain": 0.9,
     "mobility": 0.85,
     "purge": 1.25,
+    "ranged_presence": 1.6,
     "silence": 1.3,
     "stun": 1.2,
     "sustained_dps": 0.6,
@@ -462,6 +466,7 @@
     "engage": 0.7,
     "heal_reduction": 1.2,
     "mobility": 1.6,
+    "ranged_presence": 1.8,
     "stun": 0.9,
     "sustained_dps": 1.3,
     "tankiness": 0.7,
@@ -589,6 +594,12 @@
      "soft_cap": 4.0,
      "target": 2.0,
      "weight": 6
+    },
+    "ranged_presence": {
+     "scales": true,
+     "soft_cap": 12.0,
+     "target": 6.0,
+     "weight": 4
     },
     "resist_shred": {
      "scales": false,
@@ -1489,6 +1500,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
@@ -1500,6 +1512,7 @@
     "burst_aoe": 2,
     "cleanse": 2,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "silence": 1,
     "sustained_dps": 2,
@@ -1535,7 +1548,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -1565,6 +1580,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
@@ -1648,6 +1664,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
@@ -1661,6 +1678,7 @@
     "damage_debuff": 1,
     "heal_reduction": 2,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "silence": 1,
     "slow": 1,
@@ -1702,7 +1720,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -1738,6 +1758,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
@@ -1828,6 +1849,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
@@ -1936,6 +1958,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/realmbreaker.yaml",
    "status": "curated",
@@ -1948,6 +1971,7 @@
     "disengage": 1,
     "mobility": 2,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 1,
@@ -1986,7 +2010,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -2015,6 +2041,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/bow.yaml",
    "status": "curated",
@@ -2028,6 +2055,7 @@
     "disengage": 1,
     "mobility": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 1,
@@ -2070,6 +2098,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 2
     },
     "slots": [
@@ -2104,6 +2133,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/mistpiercer.yaml",
    "status": "curated",
@@ -2116,6 +2146,7 @@
     "disengage": 2,
     "mobility": 2,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 1,
@@ -2155,6 +2186,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 2
     },
     "slots": [
@@ -2184,6 +2216,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/bow_line.yaml",
    "status": "curated",
@@ -2196,6 +2229,7 @@
     "disengage": 1,
     "mobility": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 1,
@@ -2235,6 +2269,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 2
     },
     "slots": [
@@ -2268,6 +2303,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/wailing_bow.yaml",
    "status": "curated",
@@ -2280,6 +2316,7 @@
     "disengage": 1,
     "mobility": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 1,
@@ -2323,6 +2360,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 2
     },
     "slots": [
@@ -2357,6 +2395,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/bow_of_badon.yaml",
    "status": "curated",
@@ -2464,6 +2503,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/claws.yaml",
    "status": "curated",
@@ -2557,6 +2597,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
@@ -2655,6 +2696,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/kingmaker.yaml",
    "status": "curated",
@@ -2746,6 +2788,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/carving_sword.yaml",
    "status": "curated",
@@ -2839,6 +2882,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -2850,6 +2894,7 @@
     "burst_st": 2,
     "knockback_displace": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 2,
     "silence": 1,
     "slow": 1,
@@ -2890,6 +2935,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 1
     },
     "slots": [
@@ -2919,6 +2965,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
@@ -2930,6 +2977,7 @@
     "burst_st": 1,
     "knockback_displace": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "silence": 1,
     "slow": 1,
@@ -2970,6 +3018,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 1
     },
     "slots": [
@@ -2997,6 +3046,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
@@ -3007,6 +3057,7 @@
     "burst_aoe": 2,
     "knockback_displace": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "silence": 1,
     "slow": 1,
@@ -3043,7 +3094,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -3073,6 +3126,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/siegebow.yaml",
    "status": "curated",
@@ -3083,6 +3137,7 @@
     "burst_aoe": 2,
     "knockback_displace": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "silence": 1,
     "slow": 1,
@@ -3119,7 +3174,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -3149,6 +3206,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/energy_shaper.yaml",
    "status": "curated",
@@ -3225,6 +3283,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
@@ -3294,6 +3353,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/damnation.yaml",
    "status": "curated",
@@ -3394,6 +3454,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/dagger_pair.yaml",
    "status": "curated",
@@ -3491,6 +3552,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
@@ -3586,6 +3648,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
@@ -3662,6 +3725,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
@@ -3710,6 +3774,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
@@ -3818,6 +3883,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/double_bladed_staff.yaml",
    "status": "curated",
@@ -3913,6 +3979,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -4002,6 +4069,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/bear_paws.yaml",
    "status": "curated",
@@ -4015,6 +4083,7 @@
     "knockback_displace": 1,
     "mobility": 2,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "silence": 1,
     "slow": 1,
@@ -4057,6 +4126,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 1
     },
     "slots": [
@@ -4085,6 +4155,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
@@ -4096,6 +4167,7 @@
     "burst_st": 2,
     "knockback_displace": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "silence": 1,
     "slow": 1,
@@ -4135,7 +4207,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -4166,6 +4240,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/boltcasters.yaml",
    "status": "curated",
@@ -4279,6 +4354,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/forge_hammers.yaml",
    "status": "curated",
@@ -4352,6 +4428,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -4440,6 +4517,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
@@ -4534,6 +4612,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/deathgivers.yaml",
    "status": "curated",
@@ -4616,6 +4695,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/dualswords.yaml",
    "status": "curated",
@@ -4682,6 +4762,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
@@ -4750,6 +4831,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
@@ -4761,6 +4843,7 @@
     "burst_aoe": 2,
     "knockback_displace": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "sustained_dps": 2,
     "zone_control": 1
    },
@@ -4789,6 +4872,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 2
     },
     "slots": [
@@ -4811,6 +4895,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
@@ -4822,6 +4907,7 @@
     "burst_aoe": 3,
     "knockback_displace": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "sustained_dps": 2,
     "zone_control": 1
    },
@@ -4850,6 +4936,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 2
     },
     "slots": [
@@ -4872,6 +4959,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
@@ -4884,6 +4972,7 @@
     "heal_reduction": 2,
     "knockback_displace": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "sustained_dps": 2,
     "zone_control": 2
    },
@@ -4915,6 +5004,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 2
     },
     "slots": [
@@ -4936,6 +5026,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/dawnsong.yaml",
    "status": "curated",
@@ -5003,6 +5094,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -5015,6 +5107,7 @@
     "catch": 1,
     "disengage": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 2,
@@ -5062,6 +5155,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 1
     },
     "slots": [
@@ -5095,6 +5189,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
@@ -5106,6 +5201,7 @@
     "burst_aoe": 1,
     "catch": 1,
     "disengage": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 2,
@@ -5149,7 +5245,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -5185,6 +5283,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
@@ -5197,6 +5296,7 @@
     "catch": 1,
     "disengage": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 2,
@@ -5243,7 +5343,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -5274,6 +5376,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
@@ -5354,6 +5457,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -5439,6 +5543,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -5529,6 +5634,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
@@ -5619,6 +5725,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
@@ -5724,6 +5831,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/great_hammer.yaml",
    "status": "curated",
@@ -5834,6 +5942,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/hand_of_justice.yaml",
    "status": "curated",
@@ -5943,6 +6052,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
@@ -6057,6 +6167,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
@@ -6147,6 +6258,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/spirithunter.yaml",
    "status": "curated",
@@ -6198,6 +6310,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/great_holy.yaml",
    "status": "curated",
@@ -6251,6 +6364,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
@@ -6304,6 +6418,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
@@ -6356,6 +6471,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/holy_line.yaml",
    "status": "curated",
@@ -6368,6 +6484,7 @@
     "catch": 2,
     "disengage": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 2,
@@ -6415,6 +6532,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 1
     },
     "slots": [
@@ -6448,6 +6566,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/permafrost_prism.yaml",
    "status": "curated",
@@ -6461,6 +6580,7 @@
     "catch": 1,
     "disengage": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 2,
@@ -6511,6 +6631,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 1
     },
     "slots": [
@@ -6543,6 +6664,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
@@ -6554,6 +6676,7 @@
     "burst_st": 1,
     "knockback_displace": 1,
     "peel": 2,
+    "ranged_presence": 1,
     "sustained_dps": 2,
     "zone_control": 1
    },
@@ -6582,6 +6705,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 2
     },
     "slots": [
@@ -6600,6 +6724,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
@@ -6611,6 +6736,7 @@
     "burst_aoe": 2,
     "knockback_displace": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "sustained_dps": 2,
     "zone_control": 3
    },
@@ -6638,7 +6764,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -6660,6 +6788,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/blazing_staff.yaml",
    "status": "curated",
@@ -6743,6 +6872,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -6845,6 +6975,7 @@
      ]
     ]
    },
+   "removed": true,
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
@@ -6943,6 +7074,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -7036,6 +7168,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -7134,6 +7267,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -7223,6 +7357,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -7316,6 +7451,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -7409,6 +7545,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -7498,6 +7635,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/battle_bracers.yaml",
    "status": "curated",
@@ -7596,6 +7734,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -7657,6 +7796,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": null,
    "source": "sheets/longbow.yaml",
    "status": "curated",
@@ -7668,6 +7808,7 @@
     "disengage": 1,
     "mobility": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 1,
@@ -7703,7 +7844,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -7735,6 +7878,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/bow_line.yaml",
    "status": "curated",
@@ -7801,6 +7945,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": null,
    "source": "sheets/mace_line.yaml",
    "status": "curated",
@@ -7879,6 +8024,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -7965,6 +8111,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
@@ -8053,6 +8200,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/nature_line.yaml",
    "status": "curated",
@@ -8136,6 +8284,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
@@ -8245,6 +8394,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/polehammer.yaml",
    "status": "curated",
@@ -8345,6 +8495,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/quarterstaff.yaml",
    "status": "curated",
@@ -8440,6 +8591,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -8545,6 +8697,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/grovekeeper.yaml",
    "status": "curated",
@@ -8555,6 +8708,7 @@
     "burst_aoe": 2,
     "knockback_displace": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "silence": 1,
     "slow": 1,
@@ -8592,6 +8746,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 2
     },
     "slots": [
@@ -8618,6 +8773,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
@@ -8711,6 +8867,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -8804,6 +8961,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
@@ -8899,6 +9057,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
@@ -8914,6 +9073,7 @@
     "engage": 1,
     "mobility": 2,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "self_sustain": 1,
@@ -8965,7 +9125,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -9004,6 +9166,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -9018,6 +9181,7 @@
     "disengage": 1,
     "mobility": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "self_sustain": 1,
@@ -9066,7 +9230,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -9104,6 +9270,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -9117,6 +9284,7 @@
     "clump_create": 1,
     "mobility": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "self_sustain": 2,
@@ -9162,7 +9330,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -9195,6 +9365,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/hellspawn.yaml",
    "status": "curated",
@@ -9286,6 +9457,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -9377,6 +9549,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -9477,6 +9650,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -9570,6 +9744,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/rootbound.yaml",
    "status": "curated",
@@ -9667,6 +9842,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -9738,6 +9914,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
@@ -9809,6 +9986,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -9893,6 +10071,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -9988,6 +10167,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -10000,6 +10180,7 @@
     "disengage": 1,
     "mobility": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 1,
@@ -10039,6 +10220,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 2
     },
     "slots": [
@@ -10072,6 +10254,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/bow_line.yaml",
    "status": "curated",
@@ -10155,6 +10338,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
@@ -10165,6 +10349,7 @@
     "burst_aoe": 2,
     "knockback_displace": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "silence": 1,
     "slow": 1,
@@ -10202,6 +10387,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 1
     },
     "slots": [
@@ -10228,6 +10414,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
@@ -10306,6 +10493,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
@@ -10401,6 +10589,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/witchwork.yaml",
    "status": "curated",
@@ -10487,6 +10676,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/battleaxe.yaml",
    "status": "curated",
@@ -10558,6 +10748,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
@@ -10627,6 +10818,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
@@ -10708,6 +10900,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/rotcaller.yaml",
    "status": "curated",
@@ -10784,6 +10977,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
@@ -10870,6 +11064,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
@@ -10972,6 +11167,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
@@ -10984,6 +11180,7 @@
     "burst_st": 1,
     "knockback_displace": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "sustained_dps": 2,
     "zone_control": 1
    },
@@ -11015,6 +11212,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 2
     },
     "slots": [
@@ -11038,6 +11236,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
@@ -11051,6 +11250,7 @@
     "engage": 2,
     "mobility": 2,
     "peel": 1,
+    "ranged_presence": 1,
     "sustained_dps": 2,
     "zone_control": 1
    },
@@ -11085,6 +11285,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 2
     },
     "slots": [
@@ -11109,6 +11310,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
@@ -11120,6 +11322,7 @@
     "burst_aoe": 2,
     "knockback_displace": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "sustained_dps": 2,
     "zone_control": 1
    },
@@ -11148,6 +11351,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 2
     },
     "slots": [
@@ -11170,6 +11374,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
@@ -11182,6 +11387,7 @@
     "catch": 2,
     "disengage": 1,
     "peel": 2,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 3,
     "slow": 2,
@@ -11229,6 +11435,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 1
     },
     "slots": [
@@ -11258,6 +11465,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/froststaff.yaml",
    "status": "curated",
@@ -11339,6 +11547,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "support",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
@@ -11352,6 +11561,7 @@
     "disengage": 1,
     "knockback_displace": 2,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 2,
@@ -11397,7 +11607,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -11428,6 +11640,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "range",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
@@ -11532,6 +11745,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
@@ -11587,6 +11801,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/holy_staff.yaml",
    "status": "curated",
@@ -11655,6 +11870,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/holy_line.yaml",
    "status": "curated",
@@ -11706,6 +11922,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/lifetouch.yaml",
    "status": "curated",
@@ -11765,6 +11982,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": null,
    "source": "sheets/mace_line.yaml",
    "status": "curated",
@@ -11839,6 +12057,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -11922,6 +12141,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -12005,6 +12225,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
@@ -12088,6 +12309,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
@@ -12169,6 +12391,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
@@ -12247,6 +12470,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
@@ -12346,6 +12570,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/bloodletter.yaml",
    "status": "curated",
@@ -12417,6 +12642,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -12503,6 +12729,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
@@ -12591,6 +12818,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -12674,6 +12902,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -12757,6 +12986,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -12845,6 +13075,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
@@ -12929,6 +13160,7 @@
      ]
     ]
    },
+   "removed": false,
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",

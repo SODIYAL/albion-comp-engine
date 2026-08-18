@@ -8,7 +8,7 @@ throwaway with inline dicts into the real engine reading curated data.
 
 The math is unchanged from the prototype that passed 9/9:
     U_c(s)   = weight * min(1, s/target)^gamma      concave utility
-             - 0.5 * weight * (s - soft_cap)/target  over-stack penalty
+             - omax * weight * x/(1+x), x=(s-soft)/soft   over-stack penalty
              - mult * weight * (floor - s)/floor     hard-floor penalty
     fitness  = sum over capabilities
     score(w) = alpha*dFitness + beta*dSynergy + delta*metaPrior
@@ -39,6 +39,9 @@ class Engine:
         w = self.scoring["weights"]
         self.alpha, self.beta = w["alpha"], w["beta"]
         self.delta, self.gamma = w["delta"], w["gamma"]
+        # Over-stack asymptote (scoring.yaml). Defaulted so an older dataset
+        # still loads; the shipped config carries the real value.
+        self.overstack_max = w.get("overstack_max", 0.5)
         self.meta_prior = self.scoring.get("meta_prior", {}) or {}
         # meta_prior is either a FLAT {weapon: value} map, or SIZE-BUCKETED
         # {small|mid|large: {weapon: value}} (usage-derived, Q17). Bucketed is
@@ -49,6 +52,13 @@ class Engine:
         self.synergies = [(s["a"], s["b"], s["bonus"])
                           for s in self.scoring.get("capability_synergies", [])]
         self.mechanics = self.data.get("mechanics", {}) or {}
+        # Candidate pool for every SUGGESTION path (recommend / swap_review /
+        # refine). Weapons the game has retired stay in self.weapons so an old
+        # permalink containing one still loads and scores — they are only
+        # barred from being offered. Insertion order is preserved: steepest-
+        # descent in refine() breaks ties by iteration order and the JS mirror
+        # must walk the same sequence.
+        self.pool = [w for w, d in self.weapons.items() if not d.get("removed")]
         self.set_content(content, size, style)
 
     # ---------------------------------------------------------------- context
@@ -194,10 +204,20 @@ class Engine:
     def _overstack(self, cap, have, target, soft):
         """Over-stack penalty at one supply level. Stays on the BASE weight —
         style never changes the economics (T10). One home for a rule that
-        used to be written out three times per engine."""
+        used to be written out three times per engine.
+
+        SATURATING (2026-08-18, was linear-unbounded/target). Redundancy is
+        worth less and less, but never negative value: the penalty approaches
+        overstack_max * weight and never exceeds it. Scaled by soft_cap rather
+        than target so a threshold capability with a tiny target is no longer
+        punished several times harder per excess unit than a big scaling one.
+        Rational (x/(1+x)) not exponential: exp() is not guaranteed
+        bit-identical across Python and JS, and the parity test is exact."""
         if have <= soft:
             return 0.0
-        return 0.5 * self.reqs[cap]["weight"] * (have - soft) / target
+        scale = soft if soft > 0 else target
+        x = (have - soft) / scale
+        return self.overstack_max * self.reqs[cap]["weight"] * x / (1.0 + x)
 
     def _cover_terms(self, cap, have, gain, target):
         """(coverage delta, floor-lift delta) for adding `gain` units. Kept
@@ -225,6 +245,59 @@ class Engine:
     def synergy(self, party):
         s = self.effective_supply(party)
         return sum(b * min(s.get(a, 0), s.get(c, 0)) for a, c, b in self.synergies)
+
+    # -------------------------------------------------------- comp-level score
+    def comp_score(self, party):
+        """Party-level objective — the SAME alpha/beta/delta blend pick_score
+        applies marginally. The greedy builder and this must optimise one
+        objective or they disagree about their own output: before this existed
+        the builder took Hand of Justice as its FIRST pick (empty party, clump
+        unmet) and swap_review then ranked that very slot 132nd (full party,
+        clump saturated), with every one of the 20 slots scoring negative."""
+        return (self.alpha * self.fitness(party)
+                + self.beta * self.synergy(party)
+                + self.delta * sum(self.meta_of(w) for w in party))
+
+    def refine(self, party, max_passes=8, pool=None, fixed=0):
+        """1-opt local search over a built party: repeatedly apply the single
+        slot replacement that most improves comp_score, until none does.
+
+        Greedy fill alone cannot undo an early pick — slot 1 is chosen against
+        an EMPTY party and never revisited once the comp is full, which is how
+        a forged comp ends up led by a weapon its own advisor ranks 132nd, and
+        how the tail fills with narrow single-target weapons chosen only
+        because they add least to already-saturated pools. Steepest-descent
+        (best move per pass, not first-improvement) so the result does not
+        depend on slot or weapon iteration order.
+
+        `fixed` locks the first N slots: members the caller placed by hand
+        must survive a "forge the rest" untouched, so only the slots the
+        engine itself added are the engine's to rewrite.
+
+        Returns a NEW list; the input is not mutated. Terminates on no
+        improvement or max_passes, whichever comes first."""
+        party = list(party)
+        if not party:
+            return party
+        candidates = list(pool or self.pool)
+        best = self.comp_score(party)
+        for _ in range(max_passes):
+            move, gain = None, 1e-9   # strictly-positive gain required
+            for i in range(fixed, len(party)):
+                orig = party[i]
+                for w in candidates:
+                    if w == orig:
+                        continue
+                    party[i] = w
+                    d = self.comp_score(party) - best
+                    if d > gain:
+                        move, gain = (i, w), d
+                party[i] = orig
+            if move is None:
+                break
+            party[move[0]] = move[1]
+            best += gain
+        return party
 
     # ---------------------------------------------------------- loadout model
     # A weapon's sheet lists capabilities across ALL its Q/W/E/passive spell
@@ -353,7 +426,7 @@ class Engine:
         base_syn = self.synergy(party)
         s = self.effective_supply(party)
         out = []
-        for w in (pool or self.weapons):
+        for w in (pool or self.pool):
             score, d_fit, d_syn, meta = self.pick_score(s, base_syn, w)
             out.append({
                 "weapon": w,
@@ -381,7 +454,7 @@ class Engine:
             base_syn = self.synergy(rest)
             cur_score = self.pick_score(s, base_syn, cur)[0]
             better = []
-            for w in (pool or self.weapons):
+            for w in (pool or self.pool):
                 if w == cur:
                     continue
                 v = self.pick_score(s, base_syn, w)[0]

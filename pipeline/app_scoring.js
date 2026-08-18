@@ -25,6 +25,8 @@
     var w = this.scoring.weights;
     this.alpha = w.alpha; this.beta = w.beta;
     this.delta = w.delta; this.gamma = w.gamma;
+    /* Over-stack asymptote (scoring.yaml); defaulted for older datasets. */
+    this.overstackMax = (w.overstack_max === undefined) ? 0.5 : w.overstack_max;
     this.metaPrior = this.scoring.meta_prior || {};
     /* meta_prior is a FLAT {weapon: value} map or SIZE-BUCKETED
        {small|mid|large: {weapon: value}} (usage-derived, Q17). Mirrors
@@ -36,6 +38,13 @@
       return [s.a, s.b, s.bonus];
     });
     this.mechanics = data.mechanics || {};
+    /* Candidate pool for every SUGGESTION path (recommend/swapReview/refine).
+       Retired weapons stay in this.weapons so an old permalink still loads and
+       scores; they are only barred from being offered. Insertion order is
+       preserved — refine() breaks ties by iteration order and must walk the
+       same sequence as engine.py. Mirrors engine.py self.pool. */
+    this.pool = [];
+    for (var pk in this.weapons) if (!this.weapons[pk].removed) this.pool.push(pk);
     this.setContent(content || "castle_outpost", size, style);
   }
 
@@ -182,9 +191,15 @@
 
   CompEngine.prototype._overstack = function (cap, have, target, soft) {
     /* Over-stack penalty at one supply level, on the BASE weight (T10) —
-       one home for a rule written out three times before (mirrors engine.py). */
+       one home for a rule written out three times before (mirrors engine.py).
+       SATURATING (2026-08-18): approaches overstackMax*weight and never
+       exceeds it, scaled by soft_cap not target. Rational, not exp() — the
+       parity test is exact and exp() is not guaranteed identical across
+       Python and JS. Mirrors engine.py _overstack. */
     if (have <= soft) return 0.0;
-    return 0.5 * this.reqs[cap].weight * (have - soft) / target;
+    var scale = soft > 0 ? soft : target;
+    var x = (have - soft) / scale;
+    return this.overstackMax * this.reqs[cap].weight * x / (1.0 + x);
   };
 
   CompEngine.prototype._coverTerms = function (cap, have, gain, target) {
@@ -222,6 +237,57 @@
       total += b * Math.min(s[a] || 0, s[c] || 0);
     }
     return total;
+  };
+
+  /* ---- comp-level score + local search (mirrors engine.py comp_score/refine) */
+
+  CompEngine.prototype.compScore = function (party) {
+    /* The SAME alpha/beta/delta blend pickScore applies marginally, so the
+       greedy builder and the refine pass optimise ONE objective. Before this
+       they disagreed about their own output: the builder took Hand of Justice
+       as its first pick (empty party, clump unmet) and swapReview then ranked
+       that very slot 132nd (full party, clump saturated). */
+    var meta = 0.0;
+    for (var i = 0; i < party.length; i++) meta += this.metaOf(party[i]);
+    return this.alpha * this.fitness(party)
+         + this.beta * this.synergy(party)
+         + this.delta * meta;
+  };
+
+  CompEngine.prototype.refine = function (party, maxPasses, pool, fixed) {
+    /* 1-opt local search: repeatedly apply the single slot replacement that
+       most improves compScore, until none does. Greedy fill alone cannot undo
+       an early pick — slot 1 is chosen against an EMPTY party and never
+       revisited once the comp is full. Steepest-descent (best move per pass,
+       not first-improvement) so the result does not depend on iteration
+       order. `fixed` locks the first N slots (hand-placed members survive
+       "forge the rest" untouched). Returns a NEW array. Mirrors engine.py
+       refine. */
+    party = party.slice();
+    fixed = fixed || 0;
+    if (!party.length) return party;
+    var candidates;
+    if (pool) { candidates = pool.slice(); }
+    else { candidates = this.pool.slice(); }
+    if (maxPasses === undefined || maxPasses === null) maxPasses = 8;
+    var best = this.compScore(party);
+    for (var pass = 0; pass < maxPasses; pass++) {
+      var moveIdx = -1, moveW = null, gain = 1e-9;   /* strictly-positive */
+      for (var i = fixed; i < party.length; i++) {
+        var orig = party[i];
+        for (var j = 0; j < candidates.length; j++) {
+          if (candidates[j] === orig) continue;
+          party[i] = candidates[j];
+          var d = this.compScore(party) - best;
+          if (d > gain) { moveIdx = i; moveW = candidates[j]; gain = d; }
+        }
+        party[i] = orig;
+      }
+      if (moveIdx < 0) break;
+      party[moveIdx] = moveW;
+      best += gain;
+    }
+    return party;
   };
 
   /* ---- loadout model (mirrors engine.py; a player equips one spell per slot,
@@ -356,13 +422,12 @@
   };
 
   CompEngine.prototype._pool = function (pool) {
-    /* mirrors Python's `pool or self.weapons`: an EMPTY pool array also
-       falls back to the full catalog (a bare `pool ||` kept truthy empty
-       arrays and silently swept nothing — parity bug). Default keys cached
-       per setContent — swapReview called this once per member. */
+    /* mirrors Python's `pool or self.pool`: an EMPTY pool array also falls
+       back to the default catalog (a bare `pool ||` kept truthy empty arrays
+       and silently swept nothing — parity bug). The default is this.pool,
+       which excludes game-retired weapons; it is built once in the ctor. */
     if (pool && pool.length) return pool;
-    if (!this._poolKeys) this._poolKeys = Object.keys(this.weapons);
-    return this._poolKeys;
+    return this.pool;
   };
 
   CompEngine.prototype.recommend = function (party, topN, pool) {
