@@ -212,6 +212,11 @@ def main():
     weapon_lines = load_weapon_lines()
     weapons = load_sheets(weapon_lines)
     templates, scoring, styles, mechanics = load_templates()
+    stats_path = os.path.join(OUT, "item_stats.json")
+    item_stats = {}
+    if os.path.exists(stats_path):
+        with open(stats_path, encoding="utf-8") as f:
+            item_stats = json.load(f).get("items", {})
 
     lint_ok, lint_out = (True, "skipped") if args.skip_lint else run_lint()
 
@@ -234,6 +239,12 @@ def main():
             "unknown_to_game_data": unknown,
         },
         "weapons": weapons,
+        # Item stats bank (fetch_item_stats.py) — the game's own numbers for
+        # every weapon and worn item. Optional so a checkout without it still
+        # builds. REFERENCE DATA: nothing in the scoring path reads it, the
+        # same rule gear capabilities follow. It is here so the engine and the
+        # dossier read one source instead of two.
+        "item_stats": item_stats,
         "templates": templates,
         "scoring": scoring,
         "styles": styles,

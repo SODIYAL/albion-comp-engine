@@ -3,8 +3,8 @@
 Build the GEAR catalogue — the equipment half of a loadout, alongside
 out/weapon_lines.json (which parse_dumps.py builds for weapons only).
 
-    ao-bin-dumps formatted/items.txt   authoritative item list + localized names
-        │
+    out/item_stats.json    every equippable line + its authoritative slottype
+        │                  (fetch_item_stats.py)
         ▼
     out/gear_lines.json    {KEY: {slot, example_item, name}}
 
@@ -13,94 +13,67 @@ five worn slots plus the consumables, and several capabilities the templates
 already ask for come from GEAR rather than weapons — blackzone_roam.yaml says
 so outright about cleanse ("in practice cleanse comes from helms, not
 weapons — blap runs three Leather Hood(cleanse) slots and zero cleanse
-weapons"). This file is step one: the catalogue and its art. Capability
-curation for gear is a separate job and deliberately NOT done here.
+weapons"). This file is the catalogue; capability curation for gear is a
+separate job and deliberately NOT done here.
 
-Gear and weapon keys share one namespace without colliding: weapons are
-2H_*/MAIN_*, gear is HEAD_*/ARMOR_*/SHOES_*/CAPE*/OFF_* and T<n>_POTION_*/
-T<n>_MEAL_*. Worn keys drop the tier prefix the way weapon keys do
-(T4_HEAD_PLATE_SET1 -> HEAD_PLATE_SET1); consumables keep theirs, for the
-reason below.
+WHY THIS DERIVES FROM item_stats.json
+It used to parse formatted/items.txt and decide what counted as gear from the
+NAME ("^T4_(HEAD|ARMOR|...)"). That let 14 Crest items in — CAPEITEM_*_BP —
+which are named like capes but are `simpleitem` in the dumps, with no
+slottype at all: trophies, not wearables. Reading the game's own `@slottype`
+instead of pattern-matching names removes that whole class of mistake, and
+classifies a new item by what the game says it is rather than what it is
+called.
 
-Tiering differs by slot and this matters:
-  - WORN slots (head/armor/shoes/cape/offhand) are one line across T4-T8, so
-    T4 is the canonical tier for the render URL, matching weapon_lines.py's
-    example_item convention.
-  - CONSUMABLES are a DIFFERENT ITEM LINE PER TIER — T5_MEAL_OMELETTE and
-    T7_MEAL_ROAST are not tiers of one thing. Restricting them to T4 dropped
-    every potion and food a ZvZ actually uses: blap runs Gigantify Potion and
-    an Avalonian pork omelette, neither of which exists at T4. So consumables
-    are enumerated across all tiers and keep the tier in their key.
+Keys follow item_stats.json exactly: worn lines drop the tier prefix
+(T4_HEAD_PLATE_SET1 -> HEAD_PLATE_SET1) because one line spans T4-T8;
+consumables keep it, because T5_POTION_REVIVE and T7_POTION_REVIVE are
+different items, not tiers of one. Gear and weapon keys share one namespace
+without colliding — weapons are 2H_*/MAIN_*.
 
-@1/@2/@3 enchantment variants share their line's art and are skipped.
+MOUNT is excluded on purpose: battlemounts are a real ZvZ factor but
+meta_comps.yaml already excludes mount slots from comps, so pulling them in
+would be catalogue weight nothing reads. Add it when the engine scores mounts.
 
-Usage:  py -3 pipeline/fetch_gear_lines.py
+Usage:  py -3 pipeline/fetch_item_stats.py   (first — builds the source)
+        py -3 pipeline/fetch_gear_lines.py
 """
-import json, os, re, sys, urllib.request
+import json, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
+SRC = os.path.join(OUT, "item_stats.json")
 DEST = os.path.join(OUT, "gear_lines.json")
-SRC = ("https://raw.githubusercontent.com/ao-data/ao-bin-dumps/master/"
-       "formatted/items.txt")
-UA = {"User-Agent": "albion-comp-engine gear catalogue "
-                    "(github.com/SODIYAL/albion-comp-engine)"}
 
-# "  1234: T4_HEAD_PLATE_SET1        : Adept's Soldier Helmet"
-LINE = re.compile(r'^\s*\d+:\s*(\S+)\s*:\s*(.*?)\s*$')
-# Worn slots + consumables. MOUNT is deliberately excluded: battlemounts are a
-# real ZvZ factor but meta_comps.yaml already excludes mount slots from comps,
-# so pulling ~90 mount lines in would be catalogue weight with nothing reading
-# it. Add it when the engine actually scores mounts.
-WORN = re.compile(r'^T4_(HEAD|ARMOR|SHOES|CAPE|OFF)')
-CONSUMABLE = re.compile(r'^T\d_(POTION|MEAL)')
-
-
-RENAME = {"OFF": "offhand", "MEAL": "food"}
-
-
-def classify(uid):
-    """(slot, catalogue_key) for a unique_name, or None if it is not loadout
-    gear. CAPE has no underscore in the plain-cape case (T4_CAPE), hence the
-    prefix match rather than a split.
-
-    Worn keys drop the tier prefix (weapons do the same); consumable keys KEEP
-    it, because each tier is a distinct item rather than a tier of one line."""
-    m = WORN.match(uid)
-    if m:
-        raw = m.group(1)
-        return RENAME.get(raw, raw.lower()), uid[3:]
-    m = CONSUMABLE.match(uid)
-    if m:
-        raw = m.group(1)
-        return RENAME.get(raw, raw.lower()), uid
-    return None
+# The worn + consumable slots a loadout has. "mainhand" is a weapon and lives
+# in weapon_lines.json; "bag" carries no combat stat worth a slot in the UI.
+GEAR_SLOTS = ("head", "armor", "shoes", "cape", "offhand", "potion", "food")
 
 
 def main():
-    req = urllib.request.Request(SRC, headers=UA)
-    with urllib.request.urlopen(req, timeout=90) as r:
-        text = r.read().decode("utf-8", errors="replace")
+    if not os.path.exists(SRC):
+        sys.exit("out/item_stats.json missing — run: "
+                 "py -3 pipeline/fetch_item_stats.py")
+    with open(SRC, encoding="utf-8") as f:
+        items = json.load(f)["items"]
 
-    gear, skipped = {}, 0
-    for line in text.splitlines():
-        m = LINE.match(line)
-        if not m:
+    gear, unnamed = {}, []
+    for key, e in items.items():
+        if e.get("slot") not in GEAR_SLOTS:
             continue
-        uid, name = m.group(1), m.group(2)
-        if "@" in uid:            # enchantment variant — same art, same line
-            skipped += 1
+        # No localized name means the game never shows this to a player: the
+        # dumps carry DEBUG_* and *_PROTOTYPE dev entries with real slottypes.
+        # Absence of a name is the game's own signal, so this stays a rule
+        # about the data rather than a list of items to exclude by hand.
+        if not e.get("name"):
+            unnamed.append(key)
             continue
-        hit = classify(uid)
-        if not hit:
-            continue
-        slot, key = hit
-        if key in gear:           # items.txt repeats lines; first wins
-            continue
-        gear[key] = {"slot": slot, "example_item": uid, "name": name}
+        gear[key] = {"slot": e["slot"],
+                     "example_item": e.get("example_item", ""),
+                     "name": e["name"]}
 
     if not gear:
-        sys.exit("no gear lines parsed — items.txt format may have changed")
+        sys.exit("no gear lines found — item_stats.json may be malformed")
 
     with open(DEST, "w", encoding="utf-8") as f:
         json.dump(gear, f, indent=1, sort_keys=True)
@@ -108,9 +81,11 @@ def main():
     counts = {}
     for v in gear.values():
         counts[v["slot"]] = counts.get(v["slot"], 0) + 1
-    print(f"gear lines: {len(gear)} ({skipped} enchant variants skipped)")
+    print(f"gear lines: {len(gear)}")
     for slot in sorted(counts):
         print(f"  {slot:9} {counts[slot]:4}")
+    if unnamed:
+        print(f"  dropped {len(unnamed)} unnamed dev entries: {unnamed[:6]}")
     print(f"wrote {os.path.relpath(DEST, os.path.join(HERE, os.pardir))}")
     return 0
 

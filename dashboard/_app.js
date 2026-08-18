@@ -688,6 +688,48 @@ function spellAt(w, slot, idx){
    it was duplicated between the recommendation box and the detail drawer */
 const loLine = (w, v) =>
   `Q${esc(v.q)} ${esc(spellAt(w, "q", v.q))} · W${esc(v.w)} ${esc(spellAt(w, "w", v.w))} · P${esc(v.p)} ${esc(spellAt(w, "passive", v.p))}`;
+/* ---- item stats bank (pipeline/fetch_item_stats.py) --------------------
+   The game's own numbers. These are BASE values: the dumps are tier-invariant
+   per line and the in-game figure is base x f(itempower, quality, enchant), a
+   curve the dumps do not carry — so the item-power ladder is shown next to
+   them rather than folded into them. Reference only; scoring never reads it. */
+const STAT_LABEL = {
+  attackdamage:"Attack damage", attackspeed:"Attack speed", attackrange:"Range",
+  attacktype:"Attack type", twohanded:"Two-handed", abilitypower:"Ability power",
+  activespellslots:"Active spell slots", passivespellslots:"Passive slots",
+  physicalarmor:"Physical armor", magicresistance:"Magic resistance",
+  crowdcontrolresistance:"CC resistance", hitpointsmax:"Max health",
+  hitpointsregenerationbonus:"Health regen", energymax:"Max energy",
+  energyregenerationbonus:"Energy regen", energycostreduction:"Energy cost −",
+  movespeed:"Move speed", movespeedbonus:"Move speed +",
+  attackspeedbonus:"Attack speed +", magiccooldownreduction:"Cooldown −",
+  magiccasttimereduction:"Cast time −", healbonus:"Heal bonus",
+  healmodifier:"Heal modifier", threatbonus:"Threat", maxload:"Max load",
+  masterymodifier:"Mastery", focusfireprotectionpenetration:"Focus-fire pen",
+  physicalspelldamagebonus:"Phys spell dmg +", magicspelldamagebonus:"Magic spell dmg +",
+  physicalattackdamagebonus:"Phys attack dmg +", magicattackdamagebonus:"Magic attack dmg +",
+  bonusccdurationvsplayers:"CC duration vs players", bonusdefensevsplayers:"Defense vs players",
+  weight:"Weight", durability:"Durability", nutrition:"Nutrition",
+  dummyitempower:"Item power", consumespell:"Effect spell",
+};
+const statLabel = k => STAT_LABEL[k] || k.replace(/([a-z])([A-Z])/g, "$1 $2");
+function statsBlock(key){
+  const e = (typeof ITEM_STATS !== "undefined" && ITEM_STATS[key]) || null;
+  if (!e) return "";
+  const rows = Object.entries(e.stats || {})
+    .map(([k, v]) => `<tr><td>${esc(statLabel(k))}</td><td class="sc">${esc(String(v))}</td></tr>`);
+  /* a stat that genuinely differs per tier is shown as its range, not averaged */
+  Object.entries(e.by_tier || {}).forEach(([k, per]) => {
+    const vals = Object.values(per);
+    rows.push(`<tr><td>${esc(statLabel(k))}</td><td class="sc">${esc(String(vals[0]))} – ${esc(String(vals[vals.length-1]))}
+      <span class="st-note">by tier</span></td></tr>`);
+  });
+  if (!rows.length) return "";
+  const ip = Object.entries(e.ip || {}).map(([t, v]) => `T${t} <b>${v}</b>`).join(" · ");
+  return `<h4>Game stats <span class="h4-note">(base values — in game these scale with item power)</span></h4>
+    <table class="ev-tbl st-tbl"><tbody>${rows.join("")}</tbody></table>
+    ${ip ? `<div class="st-ip">item power — ${ip}</div>` : ""}`;
+}
 function renderDetail(w){
   const d = WEAPONS[w], sp = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
   const vars = loVariants(w);
@@ -730,7 +772,7 @@ function renderDetail(w){
         <h4>Capabilities — click one for party-wide evidence</h4>
         <table class="ev-tbl"><tbody>${caps}</tbody></table>
       </div>
-      <div>${pool("e", "E — the identity")}${pool("q", "Q options")}${pool("w", "W options")}${pool("passive", "Passives")}${lo}</div>
+      <div>${pool("e", "E — the identity")}${pool("q", "Q options")}${pool("w", "W options")}${pool("passive", "Passives")}${lo}${statsBlock(w)}</div>
     </div>`;
   $("drawer").dataset.open = "true";
 }

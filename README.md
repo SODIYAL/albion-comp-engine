@@ -120,7 +120,10 @@ Requires Python 3 and `pyyaml`. On Windows use `py -3`.
 
 ```bash
 py -3 pipeline/evidence_lint.py      # CI gate — exit 1 blocks a release
-py -3 pipeline/build_dataset.py      # sheets + templates -> out/dataset-latest.json
+py -3 pipeline/fetch_item_stats.py   # ao-bin-dumps -> out/item_stats.json (the numbers)
+py -3 pipeline/fetch_gear_lines.py   # item_stats -> out/gear_lines.json (loadout catalogue)
+py -3 pipeline/fetch_icons.py        # render service -> out/icon_data.json (weapon + gear art)
+py -3 pipeline/build_dataset.py      # sheets + templates + stats -> out/dataset-latest.json
 py -3 tests/test_golden.py           # golden regression cases (24)
 py -3 tests/test_js_parity.py        # JS scoring == Python engine (needs node)
 py -3 tests/test_patch_history.py    # patch-diff + staleness unit tests

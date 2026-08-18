@@ -261,6 +261,7 @@ def main():
            f"const SPELLS = {js(spells)};\n"
            f"const LOADOUTS = {js(loadouts)};\n"
            f"const GEAR = {js(gear)};\n"
+           f"const ITEM_STATS = {js(data.get('item_stats', {}))};\n"
            f"const USAGE = {js(usage)};\n"
            f"const PARITY_EXPECTED = {js(expected)};\n{loadout_js}\n{app}</script>\n"
            f"</body>\n</html>\n")

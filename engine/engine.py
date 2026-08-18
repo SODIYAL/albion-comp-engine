@@ -52,6 +52,14 @@ class Engine:
         self.synergies = [(s["a"], s["b"], s["bonus"])
                           for s in self.scoring.get("capability_synergies", [])]
         self.mechanics = self.data.get("mechanics", {}) or {}
+        # Item stats bank (pipeline/fetch_item_stats.py) — the game's own
+        # numbers for every weapon and worn item, keyed the same way weapons
+        # are. REFERENCE DATA ONLY: no scoring path reads it. Capability
+        # scores stay the curated, evidence-cited layer; these are the raw
+        # numbers behind them, for display and for future work that wants a
+        # fact instead of a heuristic (attacktype/attackrange, for one, could
+        # replace the role_hint guess behind ranged_presence).
+        self.item_stats = self.data.get("item_stats", {}) or {}
         # Candidate pool for every SUGGESTION path (recommend / swap_review /
         # refine). Weapons the game has retired stay in self.weapons so an old
         # permalink containing one still loads and scores — they are only
@@ -166,6 +174,17 @@ class Engine:
 
     def caps_of(self, weapon):
         return self.weapons[weapon]["capabilities"]
+
+    def stats_of(self, item):
+        """Game stats for a weapon or gear key: {slot, category, name, tiers,
+        ip:{tier:itempower}, stats:{...}, by_tier:{...}}. Empty when the bank
+        has no entry.
+
+        `stats` are BASE values — the dumps are tier-invariant per line and the
+        in-game number is base x f(itempower, quality, enchantment), a curve
+        the dumps do not contain. `ip` carries the exact item power per tier;
+        anything that genuinely does vary by tier sits in `by_tier`."""
+        return self.item_stats.get(item) or {}
 
     # ----------------------------------------------------------------- core
     def supply(self, party):
