@@ -4,6 +4,8 @@
 
 - weapon: 2H_LONGBOW
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
+  role_hint: range            # was missing (2026-08-18): ranged AoE/zone DPS,
+                              # attackrange 13 in the item stats bank
   capabilities:
     - {cap: burst_aoe,     score: 2, evidence: ARROWRAIN}   # Rain of Arrows (E)
     - {cap: zone_control,  score: 2, evidence: ARROWRAIN}   # channeled AoE slow zone

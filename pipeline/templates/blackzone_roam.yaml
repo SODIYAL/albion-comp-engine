@@ -79,8 +79,14 @@ requirements:
   silence:        {target: 0.8,  weight: 4,  soft_cap: 2.5,  scales: false}
   # PROVISIONAL low-and-flat (castle_outpost precedent): enemy-dependent
   # capabilities must never dominate a recommendation on unvalidated numbers.
-  anti_zone:      {target: 0.8,  weight: 2,  soft_cap: 1.7,  scales: false}
-  damage_debuff:  {target: 0.8,  weight: 3,  soft_cap: 1.7,  scales: false}
+  # REWEIGHT 2026-08-18: still PROVISIONAL and deliberately "low and flat so
+  # an unvalidated number can never dominate a recommendation" — but concave
+  # from-zero coverage hands the FULL weight to a sole supplier, so weight 3
+  # was a +3.0 windfall that made the damage_debuff carriers (Incubus Mace,
+  # Black Monk, Evensong) the constant top pick for every tail slot of a
+  # 20-man. Lowered to actually honor the rule; the expert pass owns finals.
+  anti_zone:      {target: 0.8,  weight: 1,  soft_cap: 1.7,  scales: false}
+  damage_debuff:  {target: 0.8,  weight: 1,  soft_cap: 1.7,  scales: false}
 
 # Floors are absolute units (the engine does not scale them): at 20-man a
 # comp with fewer than ~2 real healers (5 units) or ~2 real tanks (4 units)

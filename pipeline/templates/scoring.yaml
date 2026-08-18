@@ -19,10 +19,49 @@ weights:
   # costs something but can never invert a covered capability's value. The
   # rational form (not exp) keeps Python/JS bit-identical for the parity test.
   overstack_max: 0.5
+  # Exact-weapon redundancy weight (design doc §4.1's rho term, implemented
+  # 2026-08-18 — it was documented but missing from the engine). Each copy of
+  # a weapon beyond its penalty-free allowance (composition.yaml duplication)
+  # costs rho * (copy_index - free): the 2nd extra copy costs twice the 1st,
+  # deliberately NON-saturating — the capability over-stack penalty saturates,
+  # which is exactly how a 3rd basic Cursed Staff used to become nearly free.
+  # PROVISIONAL magnitude: the design doc suggested 0.10 for the weight blend;
+  # 0.25 is set so one extra copy (~0.25) outweighs the ~0.1-0.2 marginal
+  # coverage a duplicate typically adds to an already-filled comp.
+  rho: 0.25
+  # Viability-tier prior weight (composition.yaml viability.core). Same scale
+  # as delta: a core-listed weapon gets +viability * core_bonus. PROVISIONAL.
+  viability: 0.15
+  # Headroom slope (2026-08-18): supply between target and soft_cap earns a
+  # small linear bonus, capped at headroom * weight when supply reaches the
+  # soft cap. Rationale: the coverage curve min(1, s/target)^gamma flatlines
+  # AT the target, so in a fixed-size roster every body past coverage was
+  # worth exactly zero and the forge's tail slots went NET NEGATIVE (comp
+  # score peaked below the requested size — the "negative filler" failure).
+  # The template model already declares target..soft_cap a legitimate range
+  # ("supply beyond soft_cap starts costing" — so below it, more of a good
+  # thing is mildly good, not worthless). PROVISIONAL magnitude.
+  headroom: 0.1
 
 # Capability-level synergy: pairs worth more across players than their sum
 # (design doc §4.2.1). Applies to any weapons supplying the pair — no
 # per-weapon-pair maintenance.
+#
+# ENGINE RULES (2026-08-18 rework; engine.py synergy()):
+#   1. A pair is INACTIVE unless BOTH capabilities are in the active content
+#      template's requirements. Before this, a capability the template
+#      deliberately omitted (castle_outpost has no burst_st — the expert
+#      zeroed it) still paid synergy UNCAPPED, which is how Cursed Staff
+#      earned resist_shred x burst_st value in a template that values
+#      neither burst_st nor the pair.
+#   2. "Across players" is enforced: the pair pays
+#         bonus * max(0, min(cap_a(S_a), cap_b(S_b)) - J)
+#      where J is the LARGEST single member's joint supply
+#      min(member_a, member_b). One weapon supplying both halves cannot
+#      self-trigger the pair (a lone 1H Cursed shreds, then bursts, with no
+#      teammate amplified); two members each covering one half pay in full.
+#      PROVISIONAL formulation — the subtraction (rather than a hard
+#      two-member gate) keeps partial credit for mixed parties.
 capability_synergies:
   - {a: clump_create,   b: burst_aoe,      bonus: 1.5}
   - {a: engage,         b: catch,          bonus: 0.8}

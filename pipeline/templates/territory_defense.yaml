@@ -52,6 +52,11 @@ requirements:
   # single-target damage weak in 20-man defense (heals + Resilience overpower
   # focused damage; chokes reward AoE) — expert ruling 2026-08-14. Token weight.
   burst_st:       {target: 1.7,  weight: 1,  soft_cap: 3.3,  scales: true}
+  # PROVISIONAL (2026-08-18) — ranged positioning, same rationale and
+  # per-player rate as blackzone_roam (0.25/player, weight 4): zone bombs on
+  # the point come from range. Was only on blackzone_roam, so this template
+  # forged melee balls for clap comps.
+  ranged_presence: {target: 5.0,  weight: 4,  soft_cap: 10.0, scales: true}
   # threshold needs
   clump_create:   {target: 2.5,  weight: 8,  soft_cap: 4.2,  scales: false}
   purge:          {target: 1.7,  weight: 6,  soft_cap: 3.3,  scales: false}
@@ -62,12 +67,13 @@ requirements:
   buff_allies:    {target: 2.5,  weight: 4,  soft_cap: 5.0,  scales: false}
   disengage:      {target: 0.8,  weight: 3,  soft_cap: 2.5,  scales: false}
   execute:        {target: 0.8,  weight: 1,  soft_cap: 1.7,  scales: false}  # single-target kill-secure; weak at scale
-  # PROVISIONAL — but deliberately above the castle_outpost weight (3 -> 4):
-  # the one piece of real evidence we have (a standing Exalted slot in all
-  # three Deadlyhooker parties) is territory/castle content. Still flat and
-  # small so an unvalidated number cannot dominate.
-  anti_zone:      {target: 0.8,  weight: 4,  soft_cap: 1.7,  scales: false}
-  damage_debuff:  {target: 0.8,  weight: 3,  soft_cap: 1.7,  scales: false}
+  # REWEIGHT 2026-08-18 (see blackzone_roam.yaml note): from-zero windfall of
+  # these provisional niche weights dominated tail recommendations (weight 3+
+  # = a +3.0 pick score at saturated margins). anti_zone kept ABOVE the other
+  # contents (2, not 1): the standing Exalted slot in all three Deadlyhooker
+  # parties is territory/castle evidence. Still flat, still PROVISIONAL.
+  anti_zone:      {target: 0.8,  weight: 2,  soft_cap: 1.7,  scales: false}
+  damage_debuff:  {target: 0.8,  weight: 1,  soft_cap: 1.7,  scales: false}
 
 # Absolute-unit floors, same rationale + PROVISIONAL penalty_mult as
 # blackzone_roam (see that file / castle_outpost.yaml for the history).

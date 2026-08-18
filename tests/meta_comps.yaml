@@ -304,6 +304,12 @@ comps:
       Includes per-slot skill loadouts (q/w/passive choice indices), potions
       and food — the only expert default-kit data we have.
     content: blackzone_roam
+    # The comp's own declared intent — "(brawl comp)" in the source line
+    # above. Recorded 2026-08-18 so leave-one-out evaluation scores the comp
+    # under the style it was built for: a deliberate melee ball evaluated
+    # under `balanced` reads as "missing its ranged AoE core", which is the
+    # comp's design, not a deficiency. Not invented — quoted from source.
+    style: brawl
     party_size: 20
     parties:
 

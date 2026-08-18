@@ -45,7 +45,13 @@ styles:
       resist_shred: 1.2
       peel: 1.15
       execute: 1.1
-      burst_aoe: 0.85
+      # 0.85 -> 0.7 (2026-08-18): consistency with this style's own rule
+      # above — the ranged BOMB the ball doesn't field was still valued at
+      # near-parity, so leave-one-out on a real brawl ball recommended
+      # Permafrost/Damnation bombs over the tanks and healers the caller
+      # actually runs. Direction was always "less AoE"; magnitude is the
+      # PROVISIONAL part (header) and is deepened to match ranged_presence.
+      burst_aoe: 0.7
       clump_create: 0.8
       disengage: 0.85
       catch: 0.8

@@ -1,0 +1,194 @@
+# Composition constraints — data, not code (Forge structural rework 2026-08-18).
+#
+# Everything the FORGE is allowed / required to do when it GENERATES a roster
+# lives here: role-count bands, exact-weapon copy limits, non-stacking groups,
+# content/size viability, and the size-physics table. None of this constrains
+# SCORING a hand-built or live party — a manual comp always loads and scores;
+# constraint violations there surface as advice (off-comp flags), never errors.
+#
+# PROVISIONAL — seeded from the only real large-group evidence in the repo:
+# the four curated caller parties in tests/meta_comps.yaml (Deadlyhooker
+# parties 1-3, castle/territory/mass-roam 3x20, 2026-08-12; Timothy "blap"
+# blackzone roam 20, 2026-08-12), battlemount slots excluded. Every number
+# cites its tally. Owner review pass expected; the same circularity caveat as
+# the 20-size templates applies (VALIDATION V4).
+
+# ---------------------------------------------------------------------------
+# Role classes for constraint counting. Primary source is each sheet's
+# role_hint (dataset field); overrides correct the cases where the curated
+# hint and the caller's usage disagree.
+roles:
+  by_hint: {healer: healer, tank: frontline, support: support, melee: dps, range: dps}
+  overrides:
+    # Exalted Staff is a holy line weapon (role_hint: healer) but is fielded
+    # as the standing cleanse/zone-denial slot — tagged "support" by the
+    # curator in ALL FOUR real parties (meta_comps.yaml). Counting it as a
+    # healer would let a forged 11-man treat Exalted as one of its 2-3 heals.
+    2H_HOLYSTAFF_CRYSTAL: support
+
+# Capability predicates used by constraint rows below. A weapon satisfies a
+# predicate when its flat capability score meets every listed minimum.
+predicates:
+  # "real ranged AoE damage": can put an AoE bomb on a clump from outside it.
+  # burst_aoe >= 2 + the measured attackrange-derived ranged_presence flag
+  # (build_dataset.inject_positioning). 26 of 137 weapons qualify.
+  ranged_aoe_core: {burst_aoe: 2, ranged_presence: 1}
+
+# ---------------------------------------------------------------------------
+# Role-count bands by GENERATED party size. Rows sit on the breakpoints the
+# 2026-08-18 failure analysis flagged (5, 7, 10-12, 15, 20). min/max are
+# absolute counts for the requested size; a missing key = unconstrained.
+#
+# Seeding tallies per 20 weapon slots (meta_comps.yaml, Exalted counted
+# support per the override): Deadlyhooker P1 = 3 healer / 5 frontline /
+# 4 support / 8 dps; P2 (16 slots) = 2 / 3 / 6 / 5; P3 (14 slots) =
+# 2 / 2 / 6 / 4 (its frontline lives on battlemounts, outside this model);
+# Timothy blap = 4 healer / 5 frontline / 4 support / 7 dps.
+# Healers cluster at 15-20% of slots, frontline at 15-25% (P3 excepted),
+# support at 20-30% (P2/P3 up to ~40% — the generous max reflects that),
+# and every large party fields a multi-weapon ranged AoE bomb core.
+constraint_bands:
+  - {min_size: 2,  max_size: 4,  healer: {max: 1}, frontline: {max: 2}, support: {max: 1}}
+  - {min_size: 5,  max_size: 7,  healer: {min: 1, max: 2}, frontline: {min: 1, max: 3}, support: {max: 2}}
+  - {min_size: 8,  max_size: 9,  healer: {min: 1, max: 2}, frontline: {min: 1, max: 4}, support: {max: 3}}
+  - {min_size: 10, max_size: 14, healer: {min: 2, max: 3}, frontline: {min: 2, max: 5}, support: {max: 4}, ranged_aoe_core: {min: 2}}
+  - {min_size: 15, max_size: 19, healer: {min: 2, max: 4}, frontline: {min: 3, max: 7}, support: {max: 6}, ranged_aoe_core: {min: 3}}
+  - {min_size: 20, max_size: 29, healer: {min: 3, max: 5}, frontline: {min: 4, max: 9}, support: {max: 8}, ranged_aoe_core: {min: 4}}
+  - {min_size: 30, max_size: 44, healer: {min: 5, max: 8}, frontline: {min: 6, max: 13}, support: {max: 11}, ranged_aoe_core: {min: 6}}
+  - {min_size: 45, max_size: 60, healer: {min: 7, max: 12}, frontline: {min: 9, max: 20}, support: {max: 15}, ranged_aoe_core: {min: 9}}
+
+# ---------------------------------------------------------------------------
+# Exact-weapon duplication.
+#   max: hard cap on copies the forge may GENERATE (small = size < 10).
+#   free: penalty-free copies for the redundancy term in comp_score —
+#         every copy beyond `free` costs rho * (copy_index - free), a
+#         marginal that GROWS per extra copy (deliberately non-saturating:
+#         the old capability-only over-stack penalty saturates, which is
+#         exactly how a third Cursed Staff became nearly free).
+# per_weapon entries cite the real comps that field legitimate duplicates.
+duplication:
+  max_copies_default_small: 1
+  max_copies_default_large: 2
+  free_copies_default: 1
+  # per_weapon allowances below are seeded EXCLUSIVELY from 20-man comps —
+  # they apply only at party size >= this (review 2026-08-18): two
+  # Permafrosts in a trio pay like any other duplicate.
+  per_weapon_min_size: 10
+  per_weapon:
+    MAIN_HOLYSTAFF_AVALON: {free: 3, max: 4}  # Hallowfall x3 (Deadlyhooker P1), x2 (blap)
+    2H_ICECRYSTAL_UNDEAD:  {free: 2, max: 3}  # Permafrost x2 (Deadlyhooker P1)
+    MAIN_ROCKMACE_KEEPER:  {free: 2, max: 3}  # Bedrock x2 (Deadlyhooker P1)
+    2H_ARCANESTAFF:        {free: 2, max: 3}  # Great Arcane x2 (Deadlyhooker P2)
+    2H_GLAIVE_CRYSTAL:     {free: 2, max: 3}  # Rift Glaive x2 (Deadlyhooker P2)
+    2H_BOW_HELL:           {free: 2, max: 3}  # Wailing Bow x2 (Deadlyhooker P3, alt slots)
+
+# Non-stacking groups: at most `max` members of the group per generated
+# roster, regardless of which weapons fill it. Mechanism seeded with the one
+# group the evidence supports; more groups are an owner-review item.
+groups:
+  - name: exalted_slot
+    max: 1
+    weapons: [2H_HOLYSTAFF_CRYSTAL]
+    # Exalted appears EXACTLY once in every one of the four real parties —
+    # a standing utility slot, never stacked (meta_comps.yaml).
+
+# ---------------------------------------------------------------------------
+# Viability layer (expert-curated, content/size-aware). PERMISSIVE BY DESIGN:
+# a weapon absent from every list below is still fully eligible — absence
+# from the 6-battle large killboard sample is NOT evidence a weapon is bad
+# (that sample stays display-only). Only `exclusions` remove weapons from
+# the DEFAULT generation/suggestion pool; `core` adds a small prior bonus.
+viability:
+  exclusions:
+    # Owner ruling 2026-08-18: for GENERATED comps at party size >= 10 the
+    # basic 1H Cursed Staff, Iron-clad Staff and Chillhowl are not valid
+    # default large-group choices. Manually-added / live-party instances
+    # still load and score, but are flagged off-comp with replacement
+    # advice. `allow` re-admits a weapon per content id when an expert rule
+    # says so (empty today).
+    - weapons: [MAIN_CURSEDSTAFF, 2H_IRONCLADEDSTAFF, MAIN_FROSTSTAFF_AVALON]
+      min_size: 10
+      allow: {}
+  # Additive prior (scoring.weights.viability x core_bonus) for weapons a
+  # real caller has fielded in this size class. Large list = the union of
+  # the four meta_comps.yaml parties' weapon slots (battlemounts excluded).
+  # No mid/small lists yet: no curated comps at those sizes exist — PROVISIONAL,
+  # empty means neutral, never a penalty.
+  core_bonus: 1.0
+  core_min_size: 10   # the `large` list below applies at party size >= this
+  core:
+    large:   # size >= 10
+      [2H_HAMMER_AVALON, 2H_SHAPESHIFTER_KEEPER, MAIN_ARCANESTAFF,
+       MAIN_ROCKMACE_KEEPER, 2H_ARCANESTAFF, 2H_POLEHAMMER,
+       MAIN_HOLYSTAFF_AVALON, 2H_HOLYSTAFF_CRYSTAL, 2H_DUALMACE_AVALON,
+       2H_ARCANESTAFF_HELL, 2H_ICECRYSTAL_UNDEAD, 2H_KNUCKLES_SET3,
+       2H_AXE_AVALON, 2H_HARPOON_HELL, MAIN_ARCANESTAFF_UNDEAD,
+       2H_CURSEDSTAFF_MORGANA, 2H_FIRE_RINGPAIR_AVALON,
+       MAIN_CURSEDSTAFF_CRYSTAL, 2H_ICEGAUNTLETS_HELL,
+       2H_ENIGMATICORB_MORGANA, MAIN_CURSEDSTAFF_UNDEAD,
+       MAIN_FROSTSTAFF_KEEPER, 2H_SHAPESHIFTER_SET2, 2H_BOW_HELL,
+       2H_GLAIVE_CRYSTAL, 2H_HAMMER, 2H_SHAPESHIFTER_CRYSTAL,
+       2H_NATURESTAFF_KEEPER, 2H_CLEAVER_HELL, 2H_MACE_MORGANA, 2H_MACE,
+       2H_ROCKSTAFF_KEEPER, MAIN_MACE_CRYSTAL, MAIN_MACE,
+       2H_HALBERD_MORGANA, MAIN_DAGGER_HELL, MAIN_SCIMITAR_MORGANA,
+       2H_KNUCKLES_KEEPER, MAIN_RAPIER_MORGANA, 2H_HOLYSTAFF_UNDEAD,
+       2H_NATURESTAFF_HELL]
+
+# ---------------------------------------------------------------------------
+# Size physics — replaces the linear grow() extrapolation (removed
+# 2026-08-18). The style mechanics counts in styles.yaml are multiplied by
+# the piecewise STEP function below (largest breakpoint <= party size, the
+# smallest row for tinier parties), then clamped to the wiki curve caps by
+# the engine. Both the numerator (this style, this size) and the anchor
+# (balanced style, base size) read the same table, so template calibration
+# at (balanced, base_size) is untouched — identical to the old anchoring.
+#
+# Breakpoints sit on the sizes the 2026-08-18 analysis flagged (5, 7,
+# 10-12, 15, 20) plus the Disarray-relevant 25/30/40/60. Values are chosen
+# so a 7-man matches the styles.yaml calibration exactly (mult 1.0) and a
+# 20-man's balanced focus count lands at 6 attackers (~53% Resilience
+# surviving, mechanics.yaml) — the regime the Q19 expert ruling describes.
+# PROVISIONAL — owner-reviewable, like every style mechanics parameter.
+size_physics:
+  count_mult:
+    2: 0.7
+    5: 0.75
+    7: 1.0
+    10: 1.15
+    12: 1.25
+    15: 1.4
+    20: 1.6
+    25: 1.75
+    30: 1.9
+    40: 2.0
+    60: 2.0
+  # The Resilience SIZE factor (single-target effectiveness vs the
+  # template's base-size anchor) may exceed 1.0 only at parties of <= this
+  # size: a genuine trio has fewer bodies piling a target (golden T16 pins
+  # that inversion). Beyond it, dedicated single-target damage is never
+  # BOOSTED above the template's base calibration merely because the party
+  # is smaller than base_size (the 11-in-a-20-template failure,
+  # 2026-08-18). Style-relative physics (brawl's 3 focus attackers vs
+  # balanced's 4 — golden T11b) is a separate factor and never clamped.
+  st_boost_max_size: 5
+  # Dedicated single-target VALUE devaluation by party size (2026-08-18):
+  # multiplies the WEIGHT of the Resilience capabilities (burst_st,
+  # execute) — supply-side multipliers cannot express this, because concave
+  # coverage hands the FULL weight to whoever fills an empty capability
+  # first (a Dagger Pair "kill-secure" checkbox outbidding proven ZvZ
+  # weapons for the 20th slot — golden T15's failure). Owner rule: dedicated
+  # single-target damage is strongly devalued beyond ~5 players unless a
+  # content rule restores it (roads sets `st_full_value: true` — its header
+  # documents the small-scale inversion; castle_outpost simply has no ST
+  # capabilities). Shape follows the Focus-Fire survival curve, steepened —
+  # PROVISIONAL, owner-reviewable like every style multiplier.
+  st_value_mult:
+    2: 1.0
+    5: 1.0
+    7: 0.8
+    10: 0.5
+    12: 0.45
+    15: 0.35
+    20: 0.25
+    30: 0.2
+    60: 0.2

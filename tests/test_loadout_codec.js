@@ -148,5 +148,75 @@ const someKey = slot => Object.keys(GEAR).find(k => GEAR[k].slot === slot);
         `${enc.length} chars`);
 }
 
+/* 7 — provenance codec (2026-08-18): forged-slot flags survive the permalink;
+   pre-provenance links decode to all-manual */
+{
+  const enc = vm.runInContext('provEncode(["m","f","f","m","m"], 5)', ctx);
+  check("provenance encodes with trailing manuals trimmed", enc === "mff", `got ${JSON.stringify(enc)}`);
+  const dec = vm.runInContext('provDecode("mff", 5)', ctx);
+  check("provenance decodes and pads to party size",
+        JSON.stringify(dec) === JSON.stringify(["m", "f", "f", "m", "m"]),
+        JSON.stringify(dec));
+  const legacy = vm.runInContext('provDecode("", 3)', ctx);
+  check("a pre-provenance link decodes to all-manual",
+        JSON.stringify(legacy) === JSON.stringify(["m", "m", "m"]), JSON.stringify(legacy));
+  const junk = vm.runInContext('provDecode("zzz!@#", 4)', ctx);
+  check("junk provenance degrades to manual, never throws",
+        JSON.stringify(junk) === JSON.stringify(["m", "m", "m", "m"]), JSON.stringify(junk));
+}
+
+/* 8 — spell picks -> engine picks map (the scoring bridge) */
+{
+  ctx.__spells = { CURSED: { q: [["QA", "Q first"], ["QB", "Q second"]],
+                             w: [["WA", "W first"]],
+                             passive: [["PA", "P first"], ["PB", "P second"]] } };
+  vm.runInContext("SPELLS = __spells;", ctx);
+  ctx.party = ["CURSED"];
+  ctx.__lo = [{q: 1, p: 0}];
+  vm.runInContext("LOADOUT = __lo;", ctx);
+  const picks = vm.runInContext("loadoutPicks(0)", ctx);
+  check("picks map slot indices to spell ids for the engine",
+        picks && picks.q === "QB" && picks.passive === "PA" && !("w" in picks),
+        JSON.stringify(picks));
+  vm.runInContext("LOADOUT = [{}];", ctx);
+  const none = vm.runInContext("loadoutPicks(0)", ctx);
+  check("a member with no picks yields null (engine default combo)", none === null,
+        JSON.stringify(none));
+  const oob = (vm.runInContext("LOADOUT = [{q: 99}];", ctx),
+               vm.runInContext("loadoutPicks(0)", ctx));
+  check("an out-of-pool pick is ignored, not sent as garbage", oob === null,
+        JSON.stringify(oob));
+}
+
+/* 9 — forged combo -> picker state (what the forge scored is what shows) */
+{
+  ctx.ENG = { comboSpells: () => [["q", "QB"], ["w", "WA"], ["passive", "PB"], ["e", "EE"]] };
+  vm.runInContext("LOADOUT = [{}];", ctx);
+  vm.runInContext("loadoutApplySpells(0, 3)", ctx);
+  const L = vm.runInContext("LOADOUT[0]", ctx);
+  check("forged combo writes q/w/p picker indices; fixed E is skipped",
+        L.q === 1 && L.w === 0 && L.p === 1 && !("e" in L), JSON.stringify(L));
+}
+
+/* 10 — combo permalink codec (2026-08-18): explicit forge combos (E-slot use
+   variants no picker can express) survive the k= param */
+{
+  const enc = vm.runInContext("comboEncode([null, 3, 0, null, null], 5)", ctx);
+  check("combo indexes encode with trailing nulls trimmed", enc === "-.3.0",
+        `got ${JSON.stringify(enc)}`);
+  const dec = vm.runInContext('comboDecode("-.3.0", 5)', ctx);
+  check("combo indexes decode and pad to party size",
+        JSON.stringify(dec) === JSON.stringify([null, 3, 0, null, null]),
+        JSON.stringify(dec));
+  const none = vm.runInContext('comboEncode([null, null], 2)', ctx);
+  check("all-default combos encode to nothing (plain links unchanged)",
+        none === "", JSON.stringify(none));
+  const junk = vm.runInContext('comboDecode("zz.!!.-1", 3)', ctx);
+  check("junk combo fields degrade to default, never throw",
+        JSON.stringify(junk) === JSON.stringify([1295, null, null]) ||
+        JSON.stringify(junk) === JSON.stringify([null, null, null]),
+        JSON.stringify(junk));
+}
+
 console.log(`\n${pass}/${pass + fail} loadout codec tests passed`);
 process.exit(fail ? 1 : 0);

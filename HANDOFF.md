@@ -40,9 +40,13 @@ anything:
 
 ```
 py -3 pipeline/evidence_lint.py        # CI gate — exit 1 blocks release
-py -3 pipeline/build_dataset.py        # sheets + templates + styles -> out/dataset-latest.json
+py -3 pipeline/build_dataset.py        # sheets + templates + styles + composition -> out/dataset-latest.json
 py -3 tests/test_golden.py             # must stay 24/24
-py -3 tests/test_js_parity.py          # browser scoring == engine.py (needs node)
+py -3 tests/test_forge.py              # forge rework contracts: invariant, synergy rules,
+                                       # redundancy, size-11 matrix, exclusions (11/11)
+py -3 tests/tier2_blindtest.py v4 tests/meta_comps.yaml   # role gate >= 70% (currently 77%)
+py -3 tests/test_js_parity.py          # browser scoring == engine.py incl. forge (needs node)
+node tests/test_loadout_codec.js       # permalink codec + provenance + pick bridges
 py -3 tests/test_patch_history.py      # patch-diff + staleness units, no clone needed
 py -3 pipeline/build_dashboard.py      # -> dashboard/index.html AND docs/index.html
 py -3 pipeline/build_effect_review.py  # -> review/effects.html
@@ -56,6 +60,79 @@ py -3 pipeline/sample_battles.py       # optional: refresh usage field reports
 **Deploy = rebuild + push.** GitHub Pages serves `main:/docs`;
 `build_dashboard.py` writes `docs/index.html` (the doctype'd copy of the
 dashboard) on every build, so pushing `main` updates the live site.
+
+## Session 2026-08-18 — Forge structural rework (one objective, real optimizer,
+## composition constraints)
+
+Forge used to greedy-append top-1 picks and 1-opt them, with a candidate
+scorer (dynamic bestLoadout) that disagreed with the completed-party scorer
+(static _equipped) — so an 11-man Territory Defense clap comp shipped 3×
+basic Cursed Staff plus Iron-clad, and removing one of its own picks RAISED
+its own score. Structural fixes, all mirrored in `pipeline/app_scoring.js`
+and pinned by `tests/test_forge.py` (11/11) + extended parity (60/60 incl.
+forge/locks/redundancy):
+
+- **One canonical objective.** A party member is (weapon, one-spell-per-slot
+  combo); `_eval_pick` reports the EXACT `comp_score` delta (invariant test
+  at 1e-9 across every content × style). The forge persists the combos it
+  scored; the dashboard maps the user's real Q/W/passive picks into combos
+  (`combo_from_picks`), so spell picks now affect scoring where curated
+  data exists. Gear stays display-only.
+- **Synergy rules.** A pair is inactive unless BOTH capabilities are in the
+  template (castle_outpost can no longer pay resist_shred × burst_st), and
+  one weapon supplying both sides cannot self-trigger a pair (largest
+  single-member joint supply is subtracted).
+- **comp_score grew three terms:** exact-weapon redundancy (rho, growing
+  per-copy cost; free allowances seeded from meta_comps duplicates),
+  viability tier (weapons real callers field at size >= 10), and a small
+  target→soft-cap headroom slope (a covered capability's extra body is
+  mildly good, not worthless — fixes negative tail filler).
+- **Forge = deterministic constrained beam search** (`Engine.forge`) + 1-opt
+  + bounded 2-opt + a filler/held audit, under `templates/composition.yaml`:
+  role-count bands, exact-copy limits, non-stacking groups, ranged-AoE core
+  minimum, and the owner's viability exclusions (basic Cursed / Iron-clad /
+  Chillhowl are not default large-group picks at size >= 10; manual adds
+  still load, score, and get flagged off-comp with swap advice). Infeasible
+  or objective-negative slots are SURFACED (UI notices), never silent.
+  Perf: ~0.6 s at 20, ~2.5 s at 60 (node).
+- **Size behavior.** Piecewise absolute size-physics table replaces the
+  linear grow(); no single-target boost above 5 players from a sub-base
+  size (T16's small-gang inversion preserved); size-banded ST VALUE
+  devaluation (st_value_mult — the T15 fix; roads opts out via
+  `st_full_value`); hard floors clamp to the scaled target; the usage
+  bucket axis maps party size through 2× (participants), display-only.
+- **Data corrections:** Iron-clad tankiness 2→1 (channel-conditional buff),
+  Chillhowl's Frozen Crystal split into exclusive ally-save / enemy-control
+  uses (`use:` sheet field → exclusive bundles), role_hints for Longbow /
+  Heavy Mace / Mace, ranged_presence requirement extended to castle /
+  territory_defense / faction_war, anti_zone + damage_debuff reweighted to
+  honor their own "can never dominate" rule, brawl burst_aoe 0.85→0.7,
+  blap's declared style recorded (`style: brawl`) and used by the V4 runner.
+- **Slot provenance** ('m'/'f', permalink `f=` param): "forge the rest"
+  locks all current members; "reforge all" rebuilds every forged slot for
+  the current content/style/size; content switches keep manual members and
+  drop forged ones. Roster rows show a `forged` chip; roleOf() now derives
+  from the scored loadout, not the two highest raw capabilities.
+
+Gates after the rework: golden 24/24 (T15 passes for the intended reason),
+V4 role 20/26 = 77% (first pass of the 70% gate on the current suite),
+forge 11/11, parity 60/60 + dashboard-embed check, codec 24/24,
+patch-history 14/14, lint clean. Full size-11 large-content matrix: zero
+Cursed/Iron-clad/Chillhowl, constraints hold, no unheld negative slots.
+
+A five-lens adversarial review pass (parity / UI state / engine / data /
+spec+test-integrity; every finding independently re-verified) then fixed:
+JS [] -truthiness divergences in forge locked_combos and refine pool,
+swap-in-place carrying the old weapon's spell picks and forged flag,
+kit-panel-open silently changing scores via spell prefill (now gear-only),
+positional permalink decode shifting loadouts past unknown weapon keys,
+stale 2-opt slot indexes after an accepted pair move, max_fitness missing
+the headroom band, per-weapon duplicate allowances applying at small sizes
+(now gated by per_weapon_min_size), and explicit combos not surviving
+permalinks (new `k=` param). One review finding is a standing OWNER
+question, disclosed in tests/VALIDATION.md: the 77% V4 pass is load-bearing
+on the 2026-08-18 reweights, which were motivated by defects visible in the
+gate comps themselves — weak-form evidence until adjudicated.
 
 ## RESUME HERE — Party Companion (2026-08-14, one live run from done)
 
@@ -354,6 +431,16 @@ swap_review), patch-history 14/14.
 - From the V4 baseline: support undervaluation at the margin and a possible
   redundancy/diversity term for the saturated range — expert questions, not
   numbers to tweak blind.
+- 2026-08-18 forge rework additions (all data, all owner-reviewable):
+  everything in `templates/composition.yaml` (role bands seeded from the
+  four meta_comps parties, copy limits/free allowances, the exalted_slot
+  group, the viability core list + exclusions, size_physics count_mult and
+  st_value_mult tables); `scoring.yaml` rho 0.25 / viability 0.15 /
+  headroom 0.1; the cross-member synergy formulation (min-minus-best-self-
+  joint); `roads.yaml` `st_full_value: true`; the anti_zone/damage_debuff
+  reweights; brawl `burst_aoe: 0.7`; ranged_presence rows on castle /
+  territory_defense / faction_war (0.25/player, copied from
+  blackzone_roam); Iron-clad tankiness 1; the Chillhowl `use:` split.
 
 ## Immediate next step: Tier-2 blind validation (V3)
 

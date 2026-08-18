@@ -42,7 +42,12 @@
     - {cap: knockback_displace, score: 3, evidence: QSWHIRLWIND}  # E: mobile channel, 12m shove IGNORING CC resistance
     - {cap: peel,          score: 2, evidence: QSWHIRLWIND}       # walk the whirlwind over your backline
     - {cap: anti_dive,     score: 2, evidence: QSWHIRLWIND}       # divers get ejected; W: Forceful Swing (QW)
-    - {cap: tankiness,     score: 2, evidence: QSWHIRLWIND}       # +15% resists while channeling; tank role
+    # tankiness 2 -> 1 (2026-08-18 owner directive): the +15% resistance is
+    # only up WHILE CHANNELING the E — a momentary, conditional buff, not
+    # standing frontline bulk. One unit for the tank-class body + the buff;
+    # two units equated it with Bedrock-class dedicated frontline, which is
+    # how the forge sold it as a second frontliner in 11-mans.
+    - {cap: tankiness,     score: 1, evidence: QSWHIRLWIND}
     - {cap: stun,          score: 1, evidence: STUNRUN}           # (QW)
     - {cap: root,          score: 1, evidence: SEPARATING_SLAM}   # (QW)
     - {cap: mobility,      score: 1, evidence: CARTWHEEL}         # (QW)

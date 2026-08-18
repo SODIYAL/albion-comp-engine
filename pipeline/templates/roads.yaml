@@ -54,6 +54,13 @@
 # 3.0@7 here.
 
 content: roads
+# Content rule (2026-08-18): Roads keeps FULL single-target value at every
+# size — small-gang content where kill pressure on one target is the win
+# condition (this template's header documents the small-scale inversion;
+# burst_st weight 7 is the fitted expression of it). Without this flag the
+# global size-banded ST devaluation (composition.yaml st_value_mult) would
+# tax it at 6-7 players.
+st_full_value: true
 name: Roads of Avalon
 base_size: 7
 validated_sizes: [7]
@@ -91,8 +98,10 @@ requirements:
   buff_allies:    {target: 0.9, weight: 2,  soft_cap: 2.6, scales: false}
   # PROVISIONAL low-and-flat (castle_outpost precedent): enemy-dependent
   # capabilities must never dominate a recommendation on unvalidated numbers.
-  anti_zone:      {target: 0.9, weight: 2,  soft_cap: 1.7, scales: false}
-  damage_debuff:  {target: 0.9, weight: 3,  soft_cap: 1.7, scales: false}
+  # REWEIGHT 2026-08-18 (see blackzone_roam.yaml note): from-zero windfall of
+  # these provisional niche weights dominated tail recommendations.
+  anti_zone:      {target: 0.9, weight: 1,  soft_cap: 1.7, scales: false}
+  damage_debuff:  {target: 0.9, weight: 1,  soft_cap: 1.7, scales: false}
 
 # Floors are absolute units and arm BY SIZE — this is what makes a 3-man
 # without a healer "fine, just know the gap" while a 6–7-man without one is

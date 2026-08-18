@@ -18,6 +18,289 @@
   "weapons_illustrative": 0,
   "weapons_total": 137
  },
+ "composition": {
+  "constraint_bands": [
+   {
+    "frontline": {
+     "max": 2
+    },
+    "healer": {
+     "max": 1
+    },
+    "max_size": 4,
+    "min_size": 2,
+    "support": {
+     "max": 1
+    }
+   },
+   {
+    "frontline": {
+     "max": 3,
+     "min": 1
+    },
+    "healer": {
+     "max": 2,
+     "min": 1
+    },
+    "max_size": 7,
+    "min_size": 5,
+    "support": {
+     "max": 2
+    }
+   },
+   {
+    "frontline": {
+     "max": 4,
+     "min": 1
+    },
+    "healer": {
+     "max": 2,
+     "min": 1
+    },
+    "max_size": 9,
+    "min_size": 8,
+    "support": {
+     "max": 3
+    }
+   },
+   {
+    "frontline": {
+     "max": 5,
+     "min": 2
+    },
+    "healer": {
+     "max": 3,
+     "min": 2
+    },
+    "max_size": 14,
+    "min_size": 10,
+    "ranged_aoe_core": {
+     "min": 2
+    },
+    "support": {
+     "max": 4
+    }
+   },
+   {
+    "frontline": {
+     "max": 7,
+     "min": 3
+    },
+    "healer": {
+     "max": 4,
+     "min": 2
+    },
+    "max_size": 19,
+    "min_size": 15,
+    "ranged_aoe_core": {
+     "min": 3
+    },
+    "support": {
+     "max": 6
+    }
+   },
+   {
+    "frontline": {
+     "max": 9,
+     "min": 4
+    },
+    "healer": {
+     "max": 5,
+     "min": 3
+    },
+    "max_size": 29,
+    "min_size": 20,
+    "ranged_aoe_core": {
+     "min": 4
+    },
+    "support": {
+     "max": 8
+    }
+   },
+   {
+    "frontline": {
+     "max": 13,
+     "min": 6
+    },
+    "healer": {
+     "max": 8,
+     "min": 5
+    },
+    "max_size": 44,
+    "min_size": 30,
+    "ranged_aoe_core": {
+     "min": 6
+    },
+    "support": {
+     "max": 11
+    }
+   },
+   {
+    "frontline": {
+     "max": 20,
+     "min": 9
+    },
+    "healer": {
+     "max": 12,
+     "min": 7
+    },
+    "max_size": 60,
+    "min_size": 45,
+    "ranged_aoe_core": {
+     "min": 9
+    },
+    "support": {
+     "max": 15
+    }
+   }
+  ],
+  "duplication": {
+   "free_copies_default": 1,
+   "max_copies_default_large": 2,
+   "max_copies_default_small": 1,
+   "per_weapon": {
+    "2H_ARCANESTAFF": {
+     "free": 2,
+     "max": 3
+    },
+    "2H_BOW_HELL": {
+     "free": 2,
+     "max": 3
+    },
+    "2H_GLAIVE_CRYSTAL": {
+     "free": 2,
+     "max": 3
+    },
+    "2H_ICECRYSTAL_UNDEAD": {
+     "free": 2,
+     "max": 3
+    },
+    "MAIN_HOLYSTAFF_AVALON": {
+     "free": 3,
+     "max": 4
+    },
+    "MAIN_ROCKMACE_KEEPER": {
+     "free": 2,
+     "max": 3
+    }
+   },
+   "per_weapon_min_size": 10
+  },
+  "groups": [
+   {
+    "max": 1,
+    "name": "exalted_slot",
+    "weapons": [
+     "2H_HOLYSTAFF_CRYSTAL"
+    ]
+   }
+  ],
+  "predicates": {
+   "ranged_aoe_core": {
+    "burst_aoe": 2,
+    "ranged_presence": 1
+   }
+  },
+  "roles": {
+   "by_hint": {
+    "healer": "healer",
+    "melee": "dps",
+    "range": "dps",
+    "support": "support",
+    "tank": "frontline"
+   },
+   "overrides": {
+    "2H_HOLYSTAFF_CRYSTAL": "support"
+   }
+  },
+  "size_physics": {
+   "count_mult": {
+    "2": 0.7,
+    "5": 0.75,
+    "7": 1.0,
+    "10": 1.15,
+    "12": 1.25,
+    "15": 1.4,
+    "20": 1.6,
+    "25": 1.75,
+    "30": 1.9,
+    "40": 2.0,
+    "60": 2.0
+   },
+   "st_boost_max_size": 5,
+   "st_value_mult": {
+    "2": 1.0,
+    "5": 1.0,
+    "7": 0.8,
+    "10": 0.5,
+    "12": 0.45,
+    "15": 0.35,
+    "20": 0.25,
+    "30": 0.2,
+    "60": 0.2
+   }
+  },
+  "viability": {
+   "core": {
+    "large": [
+     "2H_HAMMER_AVALON",
+     "2H_SHAPESHIFTER_KEEPER",
+     "MAIN_ARCANESTAFF",
+     "MAIN_ROCKMACE_KEEPER",
+     "2H_ARCANESTAFF",
+     "2H_POLEHAMMER",
+     "MAIN_HOLYSTAFF_AVALON",
+     "2H_HOLYSTAFF_CRYSTAL",
+     "2H_DUALMACE_AVALON",
+     "2H_ARCANESTAFF_HELL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_KNUCKLES_SET3",
+     "2H_AXE_AVALON",
+     "2H_HARPOON_HELL",
+     "MAIN_ARCANESTAFF_UNDEAD",
+     "2H_CURSEDSTAFF_MORGANA",
+     "2H_FIRE_RINGPAIR_AVALON",
+     "MAIN_CURSEDSTAFF_CRYSTAL",
+     "2H_ICEGAUNTLETS_HELL",
+     "2H_ENIGMATICORB_MORGANA",
+     "MAIN_CURSEDSTAFF_UNDEAD",
+     "MAIN_FROSTSTAFF_KEEPER",
+     "2H_SHAPESHIFTER_SET2",
+     "2H_BOW_HELL",
+     "2H_GLAIVE_CRYSTAL",
+     "2H_HAMMER",
+     "2H_SHAPESHIFTER_CRYSTAL",
+     "2H_NATURESTAFF_KEEPER",
+     "2H_CLEAVER_HELL",
+     "2H_MACE_MORGANA",
+     "2H_MACE",
+     "2H_ROCKSTAFF_KEEPER",
+     "MAIN_MACE_CRYSTAL",
+     "MAIN_MACE",
+     "2H_HALBERD_MORGANA",
+     "MAIN_DAGGER_HELL",
+     "MAIN_SCIMITAR_MORGANA",
+     "2H_KNUCKLES_KEEPER",
+     "MAIN_RAPIER_MORGANA",
+     "2H_HOLYSTAFF_UNDEAD",
+     "2H_NATURESTAFF_HELL"
+    ]
+   },
+   "core_bonus": 1.0,
+   "core_min_size": 10,
+   "exclusions": [
+    {
+     "allow": {},
+     "min_size": 10,
+     "weapons": [
+      "MAIN_CURSEDSTAFF",
+      "2H_IRONCLADEDSTAFF",
+      "MAIN_FROSTSTAFF_AVALON"
+     ]
+    }
+   ]
+  }
+ },
  "item_stats": {
   "2H_ARCANESTAFF": {
    "by_tier": {
@@ -16867,7 +17150,10 @@
    "beta": 0.2,
    "delta": 0.15,
    "gamma": 0.7,
-   "overstack_max": 0.5
+   "headroom": 0.1,
+   "overstack_max": 0.5,
+   "rho": 0.25,
+   "viability": 0.15
   }
  },
  "styles": {
@@ -16887,7 +17173,7 @@
     "focus_attackers": 3
    },
    "multipliers": {
-    "burst_aoe": 0.85,
+    "burst_aoe": 0.7,
     "catch": 0.8,
     "cleanse": 1.2,
     "clump_create": 0.8,
@@ -16992,7 +17278,7 @@
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.8,
-     "weight": 2
+     "weight": 1
     },
     "buff_allies": {
      "scales": false,
@@ -17034,7 +17320,7 @@
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.8,
-     "weight": 3
+     "weight": 1
     },
     "disengage": {
      "scales": false,
@@ -17158,7 +17444,7 @@
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.8,
-     "weight": 4
+     "weight": 2
     },
     "buff_allies": {
      "scales": false,
@@ -17200,7 +17486,7 @@
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.8,
-     "weight": 3
+     "weight": 1
     },
     "disengage": {
      "scales": false,
@@ -17255,6 +17541,12 @@
      "soft_cap": 3.3,
      "target": 1.7,
      "weight": 6
+    },
+    "ranged_presence": {
+     "scales": true,
+     "soft_cap": 12.5,
+     "target": 6.3,
+     "weight": 4
     },
     "resist_shred": {
      "scales": false,
@@ -17318,7 +17610,7 @@
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.9,
-     "weight": 3
+     "weight": 1
     },
     "burst_aoe": {
      "scales": true,
@@ -17342,7 +17634,7 @@
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.9,
-     "weight": 3
+     "weight": 1
     },
     "disengage": {
      "scales": false,
@@ -17454,7 +17746,7 @@
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.8,
-     "weight": 2
+     "weight": 1
     },
     "buff_allies": {
      "scales": false,
@@ -17496,7 +17788,7 @@
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.8,
-     "weight": 3
+     "weight": 1
     },
     "disengage": {
      "scales": false,
@@ -17551,6 +17843,12 @@
      "soft_cap": 2.5,
      "target": 0.8,
      "weight": 5
+    },
+    "ranged_presence": {
+     "scales": true,
+     "soft_cap": 7.5,
+     "target": 3.8,
+     "weight": 4
     },
     "resist_shred": {
      "scales": false,
@@ -17615,7 +17913,7 @@
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.9,
-     "weight": 2
+     "weight": 1
     },
     "buff_allies": {
      "scales": false,
@@ -17657,7 +17955,7 @@
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.9,
-     "weight": 3
+     "weight": 1
     },
     "disengage": {
      "scales": false,
@@ -17756,6 +18054,7 @@
      "weight": 2
     }
    },
+   "st_full_value": true,
    "validated_sizes": [
     7
    ]
@@ -17781,7 +18080,7 @@
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.8,
-     "weight": 4
+     "weight": 2
     },
     "buff_allies": {
      "scales": false,
@@ -17823,7 +18122,7 @@
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.8,
-     "weight": 3
+     "weight": 1
     },
     "disengage": {
      "scales": false,
@@ -17878,6 +18177,12 @@
      "soft_cap": 3.3,
      "target": 1.7,
      "weight": 6
+    },
+    "ranged_presence": {
+     "scales": true,
+     "soft_cap": 10.0,
+     "target": 5.0,
+     "weight": 4
     },
     "resist_shred": {
      "scales": false,
@@ -17967,6 +18272,28 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "TIME_FREEZE"
+     ],
+     [
+      "CLEANSESPEED2",
+      "EMPOWERBEAM",
+      "FRAZZLE2"
+     ],
+     [
+      "MAGICSHOCK"
+     ],
+     [
+      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -18049,6 +18376,25 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "STARFALL_DOT"
+     ],
+     [
+      "CLEANSESPEED2",
+      "EMPOWERBEAM",
+      "FRAZZLE2"
+     ],
+     [
+      "MAGICSHOCK",
+      "SHIELDFRIENDLY"
+     ]
+    ],
     "slots": [
      [
       {
@@ -18133,6 +18479,28 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "ARCANECORRIDOR"
+     ],
+     [
+      "CLEANSESPEED2",
+      "FRAZZLE2"
+     ],
+     [
+      "MAGICSHOCK",
+      "SHIELDFRIENDLY"
+     ],
+     [
+      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -18224,6 +18592,29 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "ARCANE_METEOR"
+     ],
+     [
+      "CLEANSESPEED2",
+      "EMPOWERBEAM",
+      "FRAZZLE2"
+     ],
+     [
+      "MAGICSHOCK",
+      "SHIELDFRIENDLY"
+     ],
+     [
+      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -18315,6 +18706,29 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "AXEWHIRLWIND2"
+     ],
+     [
+      "RENDINGSTRIKE",
+      "RENDINGCOMBO"
+     ],
+     [
+      "AXEBOOST",
+      "AXESMASH",
+      "AXE_CHARGE"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_AXE"
+     ]
+    ],
     "slots": [
      [
       {
@@ -18422,6 +18836,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "LETHAL_CLEAVER"
+     ],
+     [
+      "RENDINGSTRIKE",
+      "RENDINGCOMBO"
+     ],
+     [
+      "AXESMASH",
+      "AXE_CHARGE"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_AXE"
+     ]
+    ],
     "slots": [
      [
       {
@@ -18514,6 +18950,26 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "passive",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "SPEEDARCHER_KITE"
+     ],
+     [
+      "GROUNDARROW"
+     ],
+     [
+      "PASSIVE_SLOWPOISON"
+     ],
+     [
+      "DEADLYSHOT"
+     ]
+    ],
     "slots": [
      [
       {
@@ -18602,6 +19058,28 @@
      "ranged_presence": 1,
      "sustained_dps": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "passive",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "HAWK_SHOT_MULTI1"
+     ],
+     [
+      "GROUNDARROW",
+      "SPEEDSHOT2",
+      "JUMPSHOT2"
+     ],
+     [
+      "PASSIVE_SLOWPOISON"
+     ],
+     [
+      "DEADLYSHOT"
+     ]
+    ],
     "slots": [
      [
       {
@@ -18690,6 +19168,26 @@
      "ranged_presence": 1,
      "sustained_dps": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "passive",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "AIR_RAID"
+     ],
+     [
+      "GROUNDARROW"
+     ],
+     [
+      "PASSIVE_SLOWPOISON"
+     ],
+     [
+      "DEADLYSHOT"
+     ]
+    ],
     "slots": [
      [
       {
@@ -18773,6 +19271,28 @@
      "ranged_presence": 1,
      "sustained_dps": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "passive",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "HELL_ARROW"
+     ],
+     [
+      "GROUNDARROW",
+      "SPEEDSHOT2",
+      "JUMPSHOT2"
+     ],
+     [
+      "PASSIVE_SLOWPOISON"
+     ],
+     [
+      "DEADLYSHOT"
+     ]
+    ],
     "slots": [
      [
       {
@@ -18864,6 +19384,28 @@
      "ranged_presence": 1,
      "sustained_dps": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "passive",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "LIGHTNING_ARROW"
+     ],
+     [
+      "GROUNDARROW",
+      "SPEEDSHOT2",
+      "JUMPSHOT2"
+     ],
+     [
+      "PASSIVE_SLOWPOISON"
+     ],
+     [
+      "DEADLYSHOT"
+     ]
+    ],
     "slots": [
      [
       {
@@ -18964,6 +19506,30 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "DISEMBOWEL"
+     ],
+     [
+      "QDASH",
+      "SUNDERARMOR2"
+     ],
+     [
+      "SKILLSHOT_TELEPORT",
+      "GROUNDDASH",
+      "DEEPCUTS"
+     ],
+     [
+      "PASSIVE_AASPEEDCHANCE_DAGGER",
+      "PASSIVE_HEALTHCHANCE_DAGGER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -19064,6 +19630,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "CLAYMORECHARGE"
+     ],
+     [
+      "HEROICSTRIKE2"
+     ],
+     [
+      "SPLITTINGSLASH",
+      "HAMSTRINGSWORD",
+      "DEFENSERUN"
+     ],
+     [
+      "PASSIVE_ARMORCHANCE_SWORD"
+     ]
+    ],
     "slots": [
      [
       {
@@ -19162,6 +19750,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "MAJESTIC_SMASH"
+     ],
+     [
+      "HEROICSTRIKE2"
+     ],
+     [
+      "HAMSTRINGSWORD",
+      "SPLITTINGSLASH",
+      "DEFENSERUN"
+     ],
+     [
+      "PASSIVE_ARMORCHANCE_SWORD"
+     ]
+    ],
     "slots": [
      [
       {
@@ -19257,6 +19867,27 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "CLAYMORESLASH"
+     ],
+     [
+      "HEROICSTRIKE2"
+     ],
+     [
+      "SPLITTINGSLASH",
+      "HAMSTRINGSWORD"
+     ],
+     [
+      "PASSIVE_ARMORCHANCE_SWORD"
+     ]
+    ],
     "slots": [
      [
       {
@@ -19349,6 +19980,26 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "COMBATSTAFF_SLASH"
+     ],
+     [
+      "LAUNCHER",
+      "SEPARATING_SLAM",
+      "STUNRUN",
+      "QS_WHIRLWIND2",
+      "QSTAFF_COMBO"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -19439,6 +20090,24 @@
      "ranged_presence": 1,
      "sustained_dps": 1
     },
+    "slot_names": [
+     "e",
+     "q",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "SNIPESHOT_CROSSBOW"
+     ],
+     [
+      "BOLTSHOT"
+     ],
+     [
+      "SILENCINGBOLT",
+      "KNOCKBACKSHOT2",
+      "CALTROPS"
+     ]
+    ],
     "slots": [
      [
       {
@@ -19522,6 +20191,21 @@
      "ranged_presence": 1,
      "sustained_dps": 1
     },
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "CROSSBOW_ARMORPIERCER"
+     ],
+     [
+      "SILENCINGBOLT",
+      "SUNDERSHOT",
+      "KNOCKBACKSHOT2",
+      "CALTROPS"
+     ]
+    ],
     "slots": [
      [
       {
@@ -19598,6 +20282,25 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "q",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "CROSSBOW_CONE_ULTIMATE"
+     ],
+     [
+      "BOLTSHOT"
+     ],
+     [
+      "SILENCINGBOLT",
+      "SUNDERSHOT",
+      "KNOCKBACKSHOT2",
+      "CALTROPS"
+     ]
+    ],
     "slots": [
      [
       {
@@ -19678,6 +20381,25 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "q",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "CROSSBOW_DIVINE_SHOT"
+     ],
+     [
+      "BOLTSHOT"
+     ],
+     [
+      "SILENCINGBOLT",
+      "SUNDERSHOT",
+      "KNOCKBACKSHOT2",
+      "CALTROPS"
+     ]
+    ],
     "slots": [
      [
       {
@@ -19758,6 +20480,25 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "q",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "AREAOFDECAY"
+     ],
+     [
+      "CURSEDOT",
+      "CURSED_SPLAT"
+     ],
+     [
+      "ARMORPIERCER",
+      "CURSENOVA",
+      "CURSEDHANDS_STACKUP"
+     ]
+    ],
     "slots": [
      [
       {
@@ -19834,6 +20575,24 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "q",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "CURSEULTIMATE"
+     ],
+     [
+      "CURSEDOT",
+      "CURSED_SPLAT"
+     ],
+     [
+      "CURSENOVA",
+      "CURSEDHANDS_STACKUP"
+     ]
+    ],
     "slots": [
      [
       {
@@ -19924,6 +20683,29 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "passive",
+     "q",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "EXECUTEDAGGER"
+     ],
+     [
+      "PASSIVE_AASPEEDCHANCE_DAGGER",
+      "PASSIVE_HEALTHCHANCE_DAGGER"
+     ],
+     [
+      "QDASH",
+      "SUNDERARMOR2"
+     ],
+     [
+      "SKILLSHOT_TELEPORT",
+      "GROUNDDASH"
+     ]
+    ],
     "slots": [
      [
       {
@@ -20021,6 +20803,30 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "CRYSTAL_DAGGER_BLADE_RING"
+     ],
+     [
+      "SKILLSHOT_TELEPORT",
+      "GROUNDDASH",
+      "DEEPCUTS"
+     ],
+     [
+      "QDASH",
+      "SUNDERARMOR2"
+     ],
+     [
+      "PASSIVE_AASPEEDCHANCE_DAGGER",
+      "PASSIVE_HEALTHCHANCE_DAGGER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -20119,6 +20925,29 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "BACK_SLASH"
+     ],
+     [
+      "SKILLSHOT_TELEPORT",
+      "DEEPCUTS"
+     ],
+     [
+      "QDASH",
+      "SUNDERARMOR2"
+     ],
+     [
+      "PASSIVE_AASPEEDCHANCE_DAGGER",
+      "PASSIVE_HEALTHCHANCE_DAGGER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -20206,6 +21035,25 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "q",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "CURSED_WALL"
+     ],
+     [
+      "CURSEDOT",
+      "CURSED_SPLAT"
+     ],
+     [
+      "ARMORPIERCER",
+      "CURSENOVA",
+      "CURSEDHANDS_STACKUP"
+     ]
+    ],
     "slots": [
      [
       {
@@ -20267,6 +21115,19 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "HOLYSHIELD"
+     ],
+     [
+      "HEALINGBEAM",
+      "PULSINGHEAL"
+     ]
+    ],
     "slots": [
      [
       {
@@ -20356,6 +21217,26 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "DASH_KNOCKBACK"
+     ],
+     [
+      "LAUNCHER",
+      "SEPARATING_SLAM",
+      "QSTAFF_COMBO",
+      "STUNRUN",
+      "QS_WHIRLWIND2"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -20453,6 +21334,29 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "QS_CRYSTAL_COMBO"
+     ],
+     [
+      "SEPARATING_SLAM",
+      "STUNRUN",
+      "QS_WHIRLWIND2",
+      "QSTAFF_COMBO"
+     ],
+     [
+      "CARTWHEEL"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -20549,6 +21453,24 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "DUALAXE_CRAWLER"
+     ],
+     [
+      "RENDINGSTRIKE",
+      "RENDINGCOMBO"
+     ],
+     [
+      "AXE_CHARGE",
+      "AXESMASH"
+     ]
+    ],
     "slots": [
      [
       {
@@ -20639,6 +21561,21 @@
      "ranged_presence": 1,
      "sustained_dps": 1
     },
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "CRYSTALXBOW"
+     ],
+     [
+      "SILENCINGBOLT",
+      "SUNDERSHOT",
+      "KNOCKBACKSHOT2",
+      "CALTROPS"
+     ]
+    ],
     "slots": [
      [
       {
@@ -20720,6 +21657,25 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "q",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "DUAL_RAPIDFIRE"
+     ],
+     [
+      "BOLTSHOT"
+     ],
+     [
+      "SILENCINGBOLT",
+      "SUNDERSHOT",
+      "KNOCKBACKSHOT2",
+      "CALTROPS"
+     ]
+    ],
     "slots": [
      [
       {
@@ -20826,6 +21782,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "GIANTSTEPS"
+     ],
+     [
+      "KNOCKOUT",
+      "GEYSER",
+      "CHARGESLOWAE"
+     ],
+     [
+      "IRONBREAKER"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_HAMMER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -20914,6 +21892,23 @@
     "always": {
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "BLESSED_MACES"
+     ],
+     [
+      "GUARDRUNE",
+      "CHARGE_ROOT"
+     ],
+     [
+      "SACRED_GROUND"
+     ]
+    ],
     "slots": [
      [
       {
@@ -20994,6 +21989,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "BLADE_AREA"
+     ],
+     [
+      "HEROICSTRIKE2"
+     ],
+     [
+      "SPLITTINGSLASH",
+      "HAMSTRINGSWORD",
+      "DEFENSERUN"
+     ],
+     [
+      "PASSIVE_ARMORCHANCE_SWORD"
+     ]
+    ],
     "slots": [
      [
       {
@@ -21089,6 +22106,28 @@
     "always": {
      "sustained_dps": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "GHOSTSTRIKE"
+     ],
+     [
+      "GROUNDDASH",
+      "SKILLSHOT_TELEPORT",
+      "DEEPCUTS"
+     ],
+     [
+      "SUNDERARMOR2"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_DAGGER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -21178,6 +22217,23 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "SPINATTACK"
+     ],
+     [
+      "SPLITTINGSLASH",
+      "HAMSTRINGSWORD"
+     ],
+     [
+      "PASSIVE_ARMORCHANCE_SWORD"
+     ]
+    ],
     "slots": [
      [
       {
@@ -21248,6 +22304,27 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "VOID"
+     ],
+     [
+      "EMPOWERBEAM",
+      "FRAZZLE2"
+     ],
+     [
+      "MAGICSHOCK"
+     ],
+     [
+      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -21318,6 +22395,28 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "INVULNERABILITY"
+     ],
+     [
+      "CLEANSESPEED2",
+      "FRAZZLE2"
+     ],
+     [
+      "SHIELDFRIENDLY",
+      "MAGICSHOCK"
+     ],
+     [
+      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -21391,6 +22490,20 @@
      "ranged_presence": 1,
      "sustained_dps": 2
     },
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "FLAMEPILLAR"
+     ],
+     [
+      "FIREWALL",
+      "FIRECONE",
+      "FIRESTAFFIGNITE2_SPREAD"
+     ]
+    ],
     "slots": [
      [
       {
@@ -21455,6 +22568,20 @@
      "ranged_presence": 1,
      "sustained_dps": 2
     },
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "METEOR"
+     ],
+     [
+      "FIREWALL",
+      "FIRECONE",
+      "FIRESTAFFIGNITE2_SPREAD"
+     ]
+    ],
     "slots": [
      [
       {
@@ -21523,6 +22650,19 @@
      "ranged_presence": 1,
      "sustained_dps": 2
     },
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "FIREPHOENIX"
+     ],
+     [
+      "FIRECONE",
+      "FIRESTAFFIGNITE2_SPREAD"
+     ]
+    ],
     "slots": [
      [
       {
@@ -21592,6 +22732,18 @@
     "always": {
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "ROOTFIELD"
+     ],
+     [
+      "SACRED_GROUND"
+     ]
+    ],
     "slots": [
      [
       {
@@ -21674,6 +22826,25 @@
      "ranged_presence": 1,
      "sustained_dps": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "HAIL_MULTI_1"
+     ],
+     [
+      "FROSTBOMB_CASTSLOW",
+      "FROSTNOVA",
+      "FROST_LANCE",
+      "ICE_SCULPTURE"
+     ],
+     [
+      "PASSIVE_FROST"
+     ]
+    ],
     "slots": [
      [
       {
@@ -21764,6 +22935,29 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "FROST_TARGETED_CHANNEL"
+     ],
+     [
+      "FROSTBOMB_CASTSLOW",
+      "FROSTNOVA",
+      "FROST_LANCE",
+      "ICE_SCULPTURE"
+     ],
+     [
+      "FROST_BITE"
+     ],
+     [
+      "PASSIVE_FROST"
+     ]
+    ],
     "slots": [
      [
       {
@@ -21862,6 +23056,24 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "ICESTORM2"
+     ],
+     [
+      "FROSTNOVA",
+      "FROST_LANCE",
+      "ICE_SCULPTURE"
+     ],
+     [
+      "PASSIVE_FROST"
+     ]
+    ],
     "slots": [
      [
       {
@@ -21940,6 +23152,29 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "SHOVEL"
+     ],
+     [
+      "SPIRITSPEAR"
+     ],
+     [
+      "LEGBREAKER",
+      "SKILLSHOT_PULL",
+      "GROUNDSPEAR",
+      "CHARGINGBLADE"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_SPEAR"
+     ]
+    ],
     "slots": [
      [
       {
@@ -22025,6 +23260,29 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "SPEAR_AOE_FINISHER"
+     ],
+     [
+      "SPIRITSPEAR"
+     ],
+     [
+      "LEGBREAKER",
+      "SKILLSHOT_PULL",
+      "GROUNDSPEAR",
+      "CHARGINGBLADE"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_SPEAR"
+     ]
+    ],
     "slots": [
      [
       {
@@ -22115,6 +23373,29 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "RENDINGSWING"
+     ],
+     [
+      "RENDINGSTRIKE",
+      "RENDINGCOMBO"
+     ],
+     [
+      "AXEBOOST",
+      "AXESMASH",
+      "AXE_CHARGE"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_AXE"
+     ]
+    ],
     "slots": [
      [
       {
@@ -22206,6 +23487,29 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "SHOCKWAVE"
+     ],
+     [
+      "RENDINGSTRIKE",
+      "RENDINGCOMBO"
+     ],
+     [
+      "AXEBOOST",
+      "AXESMASH",
+      "AXE_CHARGE"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_AXE"
+     ]
+    ],
     "slots": [
      [
       {
@@ -22315,6 +23619,26 @@
     "always": {
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "HAMMERTACKLE"
+     ],
+     [
+      "TAR_RING"
+     ],
+     [
+      "IRONBREAKER"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_HAMMER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -22425,6 +23749,26 @@
     "always": {
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "SPINNING_SMASH"
+     ],
+     [
+      "TAR_RING"
+     ],
+     [
+      "IRONBREAKER"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_HAMMER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -22532,6 +23876,28 @@
     "always": {
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "CRYSTALWAVE"
+     ],
+     [
+      "GEYSER",
+      "TAR_RING",
+      "CHARGESLOWAE"
+     ],
+     [
+      "IRONBREAKER"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_HAMMER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -22646,6 +24012,28 @@
     "always": {
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "UNDEADHAND"
+     ],
+     [
+      "TAR_RING",
+      "GEYSER",
+      "CHARGESLOWAE"
+     ],
+     [
+      "IRONBREAKER"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_HAMMER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -22739,6 +24127,29 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "TAINTED_STEEL"
+     ],
+     [
+      "LEGBREAKER",
+      "GROUNDSPEAR",
+      "SKILLSHOT_PULL",
+      "CHARGINGBLADE"
+     ],
+     [
+      "SPIRITSPEAR"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_SPEAR"
+     ]
+    ],
     "slots": [
      [
       {
@@ -22810,6 +24221,18 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "HOLYEXPLOSION"
+     ],
+     [
+      "HOLYFLASH"
+     ]
+    ],
     "slots": [
      [
       {
@@ -22862,6 +24285,19 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "HOLY_DISPEL"
+     ],
+     [
+      "HEALINGBEAM",
+      "PULSINGHEAL"
+     ]
+    ],
     "slots": [
      [
       {
@@ -22916,6 +24352,19 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "HOLY_ULTIMATE"
+     ],
+     [
+      "HEALINGBEAM",
+      "HOLYHOT"
+     ]
+    ],
     "slots": [
      [
       {
@@ -22966,6 +24415,23 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "CELESTIAL_SPHERE"
+     ],
+     [
+      "HOLYFLASH"
+     ],
+     [
+      "HOLYHOT",
+      "PULSINGHEAL"
+     ]
+    ],
     "slots": [
      [
       {
@@ -23051,6 +24517,25 @@
      "ranged_presence": 1,
      "sustained_dps": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "FROST_ULTIMATE"
+     ],
+     [
+      "FROSTBOMB_CASTSLOW",
+      "FROSTNOVA",
+      "FROST_LANCE",
+      "ICE_SCULPTURE"
+     ],
+     [
+      "PASSIVE_FROST"
+     ]
+    ],
     "slots": [
      [
       {
@@ -23150,6 +24635,24 @@
      "ranged_presence": 1,
      "sustained_dps": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "GLACIALFIELD"
+     ],
+     [
+      "FROSTNOVA",
+      "FROST_LANCE",
+      "ICE_SCULPTURE"
+     ],
+     [
+      "PASSIVE_FROST"
+     ]
+    ],
     "slots": [
      [
       {
@@ -23224,6 +24727,18 @@
      "ranged_presence": 1,
      "sustained_dps": 2
     },
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "HUMAN_TORCH"
+     ],
+     [
+      "FIRESTAFFIGNITE2_SPREAD"
+     ]
+    ],
     "slots": [
      [
       {
@@ -23283,6 +24798,20 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "FLAMETORNADO"
+     ],
+     [
+      "SKILLSHOT_FIREBALL",
+      "FIRECONE",
+      "FIRESTAFFIGNITE2_SPREAD"
+     ]
+    ],
     "slots": [
      [
       {
@@ -23320,7 +24849,7 @@
     "self_sustain": 1,
     "stun": 1,
     "sustained_dps": 1,
-    "tankiness": 2
+    "tankiness": 1
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Iron-clad Staff",
@@ -23356,13 +24885,35 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "QSWHIRLWIND"
+     ],
+     [
+      "STUNRUN",
+      "SEPARATING_SLAM",
+      "QSTAFF_COMBO"
+     ],
+     [
+      "CARTWHEEL"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
+     ]
+    ],
     "slots": [
      [
       {
        "anti_dive": 2,
        "knockback_displace": 3,
        "peel": 2,
-       "tankiness": 2
+       "tankiness": 1
       }
      ],
      [
@@ -23452,6 +25003,30 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "PUNCHCOMBO"
+     ],
+     [
+      "QDASH",
+      "SUNDERARMOR2"
+     ],
+     [
+      "SKILLSHOT_TELEPORT",
+      "GROUNDDASH",
+      "DEEPCUTS"
+     ],
+     [
+      "PASSIVE_AASPEEDCHANCE_DAGGER",
+      "PASSIVE_HEALTHCHANCE_DAGGER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -23555,6 +25130,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "TRIPLECOMBO_DIVEKICK"
+     ],
+     [
+      "BACKHAND_KNOCKBACK",
+      "TRIPLE_KICK",
+      "KNUCKLECOMBO"
+     ],
+     [
+      "DASHKICK"
+     ],
+     [
+      "PASSIVE_KNUCKLE_BRAWLER_SPEED"
+     ]
+    ],
     "slots": [
      [
       {
@@ -23650,6 +25247,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "CONEPUNCH2"
+     ],
+     [
+      "DASHKICK"
+     ],
+     [
+      "TRIPLE_KICK",
+      "BACKHAND_KNOCKBACK",
+      "KNUCKLECOMBO"
+     ],
+     [
+      "PASSIVE_KNUCKLE_BRAWLER_SPEED"
+     ]
+    ],
     "slots": [
      [
       {
@@ -23748,6 +25367,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "BOULDER_TOSS"
+     ],
+     [
+      "DASHKICK"
+     ],
+     [
+      "TRIPLE_KICK",
+      "BACKHAND_KNOCKBACK",
+      "KNUCKLECOMBO"
+     ],
+     [
+      "PASSIVE_KNUCKLE_BRAWLER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -23843,6 +25484,24 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "PUMMELING_STRIKES"
+     ],
+     [
+      "DASHKICK"
+     ],
+     [
+      "TRIPLE_KICK",
+      "BACKHAND_KNOCKBACK",
+      "KNUCKLECOMBO"
+     ]
+    ],
     "slots": [
      [
       {
@@ -23933,6 +25592,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "GROWING_PUNCH"
+     ],
+     [
+      "DASHKICK"
+     ],
+     [
+      "TRIPLE_KICK",
+      "KNUCKLECOMBO",
+      "BACKHAND_KNOCKBACK"
+     ],
+     [
+      "PASSIVE_KNUCKLE_BRAWLER_SPEED"
+     ]
+    ],
     "slots": [
      [
       {
@@ -24027,6 +25708,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "BLAZING_GEYSER"
+     ],
+     [
+      "DASHKICK"
+     ],
+     [
+      "TRIPLE_KICK",
+      "KNUCKLECOMBO",
+      "BACKHAND_KNOCKBACK"
+     ],
+     [
+      "PASSIVE_KNUCKLE_BRAWLER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -24121,6 +25824,24 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "DIVEPUNCH_RISE"
+     ],
+     [
+      "TRIPLE_KICK",
+      "KNUCKLECOMBO",
+      "BACKHAND_KNOCKBACK"
+     ],
+     [
+      "PASSIVE_KNUCKLE_BRAWLER_SPEED"
+     ]
+    ],
     "slots": [
      [
       {
@@ -24215,6 +25936,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "IMPULSE_PUNCH"
+     ],
+     [
+      "TRIPLE_KICK",
+      "BACKHAND_KNOCKBACK",
+      "KNUCKLECOMBO"
+     ],
+     [
+      "DASHKICK"
+     ],
+     [
+      "PASSIVE_KNUCKLE_BRAWLER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -24294,6 +26037,22 @@
      "ranged_presence": 1,
      "sustained_dps": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "ARROWRAIN"
+     ],
+     [
+      "GROUNDARROW"
+     ],
+     [
+      "PASSIVE_ARMOR_PIERCE_STACK"
+     ]
+    ],
     "slots": [
      [
       {
@@ -24315,7 +26074,7 @@
     ]
    },
    "removed": false,
-   "role_hint": null,
+   "role_hint": "range",
    "source": "sheets/longbow.yaml",
    "status": "curated",
    "unique_name": "2H_LONGBOW"
@@ -24365,6 +26124,28 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "passive",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "UNDEADARROWS"
+     ],
+     [
+      "GROUNDARROW",
+      "SPEEDSHOT2",
+      "JUMPSHOT2"
+     ],
+     [
+      "PASSIVE_SLOWPOISON"
+     ],
+     [
+      "DEADLYSHOT"
+     ]
+    ],
     "slots": [
      [
       {
@@ -24442,6 +26223,22 @@
     "always": {
      "tankiness": 3
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "SHRIEKMACE"
+     ],
+     [
+      "CHARGE_ROOT"
+     ],
+     [
+      "SACRED_GROUND"
+     ]
+    ],
     "slots": [
      [
       {
@@ -24464,7 +26261,7 @@
     ]
    },
    "removed": false,
-   "role_hint": null,
+   "role_hint": "tank",
    "source": "sheets/mace_line.yaml",
    "status": "curated",
    "unique_name": "2H_MACE"
@@ -24517,6 +26314,23 @@
     "always": {
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "VACUUMSLASH"
+     ],
+     [
+      "GUARDRUNE",
+      "CHARGE_ROOT"
+     ],
+     [
+      "SACRED_GROUND"
+     ]
+    ],
     "slots": [
      [
       {
@@ -24601,6 +26415,27 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "BRIEROFLIFE"
+     ],
+     [
+      "CLEANSEHEAL",
+      "BRAMBLESEED"
+     ],
+     [
+      "THORNSAREA"
+     ],
+     [
+      "PASSIVE_ARMOR_CASTER_NATURESTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -24691,6 +26526,28 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "ROTTENVINES"
+     ],
+     [
+      "CLEANSEHEAL",
+      "NATURERESILIENCE",
+      "BRAMBLESEED"
+     ],
+     [
+      "THORNSAREA"
+     ],
+     [
+      "PASSIVE_ARMOR_CASTER_NATURESTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -24779,6 +26636,28 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "SPIRITANIMAL"
+     ],
+     [
+      "CLEANSEHEAL",
+      "NATURERESILIENCE",
+      "BRAMBLESEED"
+     ],
+     [
+      "THORNSAREA"
+     ],
+     [
+      "PASSIVE_ARMOR_CASTER_NATURESTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -24885,6 +26764,28 @@
     "always": {
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "GROUNDBREAKER2"
+     ],
+     [
+      "CHARGESLOWAE",
+      "TAR_RING",
+      "GEYSER"
+     ],
+     [
+      "IRONBREAKER"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_HAMMER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -24991,6 +26892,24 @@
     "always": {
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "VAULT_ATTACK"
+     ],
+     [
+      "SEPARATING_SLAM",
+      "STUNRUN",
+      "QS_WHIRLWIND2"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -25082,6 +27001,29 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "SOULSHAKER"
+     ],
+     [
+      "LAUNCHER",
+      "STUNRUN",
+      "QS_WHIRLWIND2",
+      "QSTAFF_COMBO"
+     ],
+     [
+      "CARTWHEEL"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -25192,6 +27134,26 @@
     "always": {
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "RAM_CHARGE"
+     ],
+     [
+      "TAR_RING"
+     ],
+     [
+      "IRONBREAKER"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_HAMMER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -25276,6 +27238,21 @@
      "ranged_presence": 1,
      "sustained_dps": 2
     },
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "GROUNDMINE"
+     ],
+     [
+      "SILENCINGBOLT",
+      "SUNDERSHOT",
+      "KNOCKBACKSHOT2",
+      "CALTROPS"
+     ]
+    ],
     "slots": [
      [
       {
@@ -25360,6 +27337,26 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "QS_SLOWROPE"
+     ],
+     [
+      "QS_WHIRLWIND2",
+      "SEPARATING_SLAM",
+      "STUNRUN",
+      "LAUNCHER",
+      "QSTAFF_COMBO"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -25454,6 +27451,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "CRYSTAL_SCYTHE_DASH_ZONE"
+     ],
+     [
+      "RENDINGSTRIKE",
+      "RENDINGCOMBO"
+     ],
+     [
+      "AXESMASH",
+      "AXE_CHARGE"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_AXE"
+     ]
+    ],
     "slots": [
      [
       {
@@ -25548,6 +27567,29 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "SCYTHESWING"
+     ],
+     [
+      "RENDINGSTRIKE",
+      "RENDINGCOMBO"
+     ],
+     [
+      "AXEBOOST",
+      "AXESMASH",
+      "AXE_CHARGE"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_AXE"
+     ]
+    ],
     "slots": [
      [
       {
@@ -25655,6 +27697,29 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "SHAPESHIFT_AVALONIAN_EAGLE"
+     ],
+     [
+      "SHAPE_W_AREA_PULL",
+      "SHAPE_W_TETHERBEAM",
+      "SHAPE_W_DAMAGE_AOE"
+     ],
+     [
+      "SHAPE_Q_DAMAGE_AND_SHIELD",
+      "SHAPE_Q_CONE_MELEE"
+     ],
+     [
+      "PASSIVE_SHAPESHIFT_ATTACK_BUFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -25760,6 +27825,29 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "SHAPESHIFT_CRYSTAL_COBRA"
+     ],
+     [
+      "SHAPE_W_AREA_PULL",
+      "SHAPE_W_TETHERBEAM",
+      "SHAPE_W_DAMAGE_AOE"
+     ],
+     [
+      "SHAPE_Q_DAMAGE_AND_SHIELD",
+      "SHAPE_Q_CONE_MELEE"
+     ],
+     [
+      "PASSIVE_SHAPESHIFT_ATTACK_BUFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -25860,6 +27948,25 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "SHAPESHIFT_IMP"
+     ],
+     [
+      "SHAPE_W_AREA_PULL",
+      "SHAPE_W_TETHERBEAM",
+      "SHAPE_W_DAMAGE_AOE"
+     ],
+     [
+      "SHAPE_Q_DAMAGE_AND_SHIELD",
+      "SHAPE_Q_CONE_MELEE"
+     ]
+    ],
     "slots": [
      [
       {
@@ -25952,6 +28059,25 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "SHAPESHIFT_ROCK_ELEMENTAL"
+     ],
+     [
+      "SHAPE_W_AREA_PULL",
+      "SHAPE_W_TETHERBEAM",
+      "SHAPE_W_DAMAGE_AOE"
+     ],
+     [
+      "SHAPE_Q_DAMAGE_AND_SHIELD",
+      "SHAPE_Q_CONE_MELEE"
+     ]
+    ],
     "slots": [
      [
       {
@@ -26047,6 +28173,25 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "SHAPESHIFT_WEREWOLF"
+     ],
+     [
+      "SHAPE_W_AREA_PULL",
+      "SHAPE_W_TETHERBEAM",
+      "SHAPE_W_DAMAGE_AOE"
+     ],
+     [
+      "SHAPE_Q_DAMAGE_AND_SHIELD",
+      "SHAPE_Q_CONE_MELEE"
+     ]
+    ],
     "slots": [
      [
       {
@@ -26146,6 +28291,29 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "SHAPESHIFT_PANTHER"
+     ],
+     [
+      "SHAPE_W_TETHERBEAM",
+      "SHAPE_W_AREA_PULL",
+      "SHAPE_W_DAMAGE_AOE"
+     ],
+     [
+      "SHAPE_Q_DAMAGE_AND_SHIELD",
+      "SHAPE_Q_CONE_MELEE"
+     ],
+     [
+      "PASSIVE_SHAPESHIFT_ATTACK_BUFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -26243,6 +28411,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "passive",
+     "w",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "SHAPESHIFT_ENT"
+     ],
+     [
+      "PASSIVE_SHAPESHIFT_ATTACK_BUFF"
+     ],
+     [
+      "SHAPE_W_AREA_PULL",
+      "SHAPE_W_TETHERBEAM",
+      "SHAPE_W_DAMAGE_AOE"
+     ],
+     [
+      "SHAPE_Q_CONE_MELEE"
+     ]
+    ],
     "slots": [
      [
       {
@@ -26345,6 +28535,25 @@
      "ranged_presence": 1,
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "SHAPESHIFT_BEAR"
+     ],
+     [
+      "SHAPE_W_AREA_PULL",
+      "SHAPE_W_TETHERBEAM",
+      "SHAPE_W_DAMAGE_AOE"
+     ],
+     [
+      "SHAPE_Q_DAMAGE_AND_SHIELD",
+      "SHAPE_Q_CONE_MELEE"
+     ]
+    ],
     "slots": [
      [
       {
@@ -26424,6 +28633,25 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "q",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "SKULLCURSE"
+     ],
+     [
+      "CURSEDOT",
+      "CURSED_SPLAT"
+     ],
+     [
+      "ARMORPIERCER",
+      "CURSENOVA",
+      "CURSEDHANDS_STACKUP"
+     ]
+    ],
     "slots": [
      [
       {
@@ -26496,6 +28724,27 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "HALBERDSMASH"
+     ],
+     [
+      "SPIRITSPEAR"
+     ],
+     [
+      "GROUNDSPEAR",
+      "CHARGINGBLADE"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_SPEAR"
+     ]
+    ],
     "slots": [
      [
       {
@@ -26580,6 +28829,26 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "TRIDENTTHROW"
+     ],
+     [
+      "SPIRITSPEAR"
+     ],
+     [
+      "GROUNDSPEAR"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_SPEAR"
+     ]
+    ],
     "slots": [
      [
       {
@@ -26669,6 +28938,29 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "TORNADO"
+     ],
+     [
+      "STUNRUN",
+      "SEPARATING_SLAM",
+      "QS_WHIRLWIND2",
+      "QSTAFF_COMBO"
+     ],
+     [
+      "CARTWHEEL"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_QUARTERSTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -26761,6 +29053,28 @@
      "ranged_presence": 1,
      "sustained_dps": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "passive",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "SKILLSHOT_STUN"
+     ],
+     [
+      "GROUNDARROW",
+      "SPEEDSHOT2",
+      "JUMPSHOT2"
+     ],
+     [
+      "PASSIVE_SLOWPOISON"
+     ],
+     [
+      "DEADLYSHOT"
+     ]
+    ],
     "slots": [
      [
       {
@@ -26847,6 +29161,28 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "WELLOFLIFE2"
+     ],
+     [
+      "CLEANSEHEAL",
+      "NATURERESILIENCE",
+      "BRAMBLESEED"
+     ],
+     [
+      "THORNSAREA"
+     ],
+     [
+      "PASSIVE_ARMOR_CASTER_NATURESTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -26931,6 +29267,21 @@
      "ranged_presence": 1,
      "sustained_dps": 1
     },
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "EXPLODING_SHOT"
+     ],
+     [
+      "SILENCINGBOLT",
+      "SUNDERSHOT",
+      "KNOCKBACKSHOT2",
+      "CALTROPS"
+     ]
+    ],
     "slots": [
      [
       {
@@ -27006,6 +29357,28 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "ARCANEORB2"
+     ],
+     [
+      "CLEANSESPEED2",
+      "EMPOWERBEAM",
+      "FRAZZLE2"
+     ],
+     [
+      "SHIELDFRIENDLY"
+     ],
+     [
+      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -27100,6 +29473,29 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "BLACKHOLE"
+     ],
+     [
+      "CLEANSESPEED2",
+      "EMPOWERBEAM",
+      "FRAZZLE2"
+     ],
+     [
+      "SHIELDFRIENDLY",
+      "MAGICSHOCK"
+     ],
+     [
+      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -27192,6 +29588,25 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "q",
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "RENDINGSTRIKE",
+      "RENDINGCOMBO"
+     ],
+     [
+      "AXETHROW"
+     ],
+     [
+      "AXESMASH",
+      "AXEBOOST",
+      "AXE_CHARGE"
+     ]
+    ],
     "slots": [
      [
       {
@@ -27270,6 +29685,25 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "q",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "DEATHCURSE2"
+     ],
+     [
+      "CURSEDOT",
+      "CURSED_SPLAT"
+     ],
+     [
+      "ARMORPIERCER",
+      "CURSENOVA",
+      "CURSEDHANDS_STACKUP"
+     ]
+    ],
     "slots": [
      [
       {
@@ -27345,6 +29779,24 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "DYNAMIC_CURSE"
+     ],
+     [
+      "ARMORPIERCER",
+      "CURSENOVA",
+      "CURSEDHANDS_STACKUP"
+     ],
+     [
+      "CURSED_SPLAT"
+     ]
+    ],
     "slots": [
      [
       {
@@ -27426,6 +29878,25 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "CURSE_SKELETON_BARF_FDHR"
+     ],
+     [
+      "CURSENOVA",
+      "ARMORPIERCER",
+      "CURSEDHANDS_STACKUP"
+     ],
+     [
+      "CURSED_SPLAT",
+      "CURSEDOT"
+     ]
+    ],
     "slots": [
      [
       {
@@ -27507,6 +29978,25 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "q",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "ENFEEBLEBLADES"
+     ],
+     [
+      "CURSEDOT",
+      "CURSED_SPLAT"
+     ],
+     [
+      "ARMORPIERCER",
+      "CURSENOVA",
+      "CURSEDHANDS_STACKUP"
+     ]
+    ],
     "slots": [
      [
       {
@@ -27592,6 +30082,25 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "BLOODTHIRSTYBLADE"
+     ],
+     [
+      "SKILLSHOT_TELEPORT",
+      "GROUNDDASH",
+      "DEEPCUTS"
+     ],
+     [
+      "QDASH",
+      "SUNDERARMOR2"
+     ]
+    ],
     "slots": [
      [
       {
@@ -27687,6 +30196,30 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "BLOOD_BLADE"
+     ],
+     [
+      "QDASH",
+      "SUNDERARMOR2"
+     ],
+     [
+      "SKILLSHOT_TELEPORT",
+      "GROUNDDASH",
+      "DEEPCUTS"
+     ],
+     [
+      "PASSIVE_AASPEEDCHANCE_DAGGER",
+      "PASSIVE_HEALTHCHANCE_DAGGER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -27774,6 +30307,20 @@
      "ranged_presence": 1,
      "sustained_dps": 2
     },
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "PYROBLAST_SKILLSHOT"
+     ],
+     [
+      "FIREWALL",
+      "FIRECONE",
+      "FIRESTAFFIGNITE2_SPREAD"
+     ]
+    ],
     "slots": [
      [
       {
@@ -27847,6 +30394,20 @@
      "ranged_presence": 1,
      "sustained_dps": 2
     },
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "FLAMEDASH"
+     ],
+     [
+      "FIREWALL",
+      "FIRECONE",
+      "FIRESTAFFIGNITE2_SPREAD"
+     ]
+    ],
     "slots": [
      [
       {
@@ -27913,6 +30474,20 @@
      "ranged_presence": 1,
      "sustained_dps": 2
     },
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "MAGMASPHERE"
+     ],
+     [
+      "FIREWALL",
+      "FIRECONE",
+      "FIRESTAFFIGNITE2_SPREAD"
+     ]
+    ],
     "slots": [
      [
       {
@@ -27997,6 +30572,21 @@
      "ranged_presence": 1,
      "sustained_dps": 1
     },
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "FREEZINGWIND"
+     ],
+     [
+      "FROSTBOMB_CASTSLOW",
+      "FROSTNOVA",
+      "FROST_LANCE",
+      "ICE_SCULPTURE"
+     ]
+    ],
     "slots": [
      [
       {
@@ -28076,11 +30666,33 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "FROZEN_CRYSTAL",
+      "FROZEN_CRYSTAL"
+     ],
+     [
+      "FROSTBOMB_CASTSLOW",
+      "FROSTNOVA",
+      "FROST_LANCE",
+      "ICE_SCULPTURE"
+     ],
+     [
+      "PASSIVE_FROST"
+     ]
+    ],
     "slots": [
      [
       {
+       "peel": 2
+      },
+      {
        "catch": 1,
-       "peel": 2,
        "slow": 2,
        "stun": 1
       }
@@ -28169,6 +30781,24 @@
     "always": {
      "ranged_presence": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "ICEROCK_EXPLODE"
+     ],
+     [
+      "FROSTNOVA",
+      "FROST_LANCE",
+      "ICE_SCULPTURE"
+     ],
+     [
+      "PASSIVE_FROST"
+     ]
+    ],
     "slots": [
      [
       {
@@ -28269,6 +30899,28 @@
     "always": {
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "HAMMERWHIRLWIND2"
+     ],
+     [
+      "CHARGESLOWAE",
+      "TAR_RING",
+      "GEYSER"
+     ],
+     [
+      "IRONBREAKER"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_HAMMER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -28340,6 +30992,20 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "HOLYDESPERATEPRAYER2"
+     ],
+     [
+      "HEALINGBEAM",
+      "HOLYHOT",
+      "PULSINGHEAL"
+     ]
+    ],
     "slots": [
      [
       {
@@ -28408,6 +31074,19 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "DIVINE_JUMP"
+     ],
+     [
+      "HEALINGBEAM",
+      "HOLYHOT"
+     ]
+    ],
     "slots": [
      [
       {
@@ -28465,6 +31144,18 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "HOLYTOUCH"
+     ],
+     [
+      "HOLYFLASH"
+     ]
+    ],
     "slots": [
      [
       {
@@ -28523,6 +31214,19 @@
     "always": {
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "MACELEAP"
+     ],
+     [
+      "GUARDRUNE",
+      "CHARGE_ROOT"
+     ]
+    ],
     "slots": [
      [
       {
@@ -28542,7 +31246,7 @@
     ]
    },
    "removed": false,
-   "role_hint": null,
+   "role_hint": "tank",
    "source": "sheets/mace_line.yaml",
    "status": "curated",
    "unique_name": "MAIN_MACE"
@@ -28595,6 +31299,19 @@
     "always": {
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "w"
+    ],
+    "slot_spells": [
+     [
+      "MACE_CRYSTAL_FRAGMENT_STORM"
+     ],
+     [
+      "GUARDRUNE",
+      "CHARGE_ROOT"
+     ]
+    ],
     "slots": [
      [
       {
@@ -28674,6 +31391,23 @@
     "always": {
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "SHRINKINGSMASH"
+     ],
+     [
+      "GUARDRUNE",
+      "CHARGE_ROOT"
+     ],
+     [
+      "SACRED_GROUND"
+     ]
+    ],
     "slots": [
      [
       {
@@ -28752,6 +31486,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "CIRCLEOFLIFE"
+     ],
+     [
+      "CLEANSEHEAL",
+      "NATURERESILIENCE",
+      "BRAMBLESEED"
+     ],
+     [
+      "THORNSAREA"
+     ],
+     [
+      "PASSIVE_ARMOR_CASTER_NATURESTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -28836,6 +31592,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "SOUL_LINK"
+     ],
+     [
+      "CLEANSEHEAL",
+      "NATURERESILIENCE",
+      "BRAMBLESEED"
+     ],
+     [
+      "THORNSAREA"
+     ],
+     [
+      "PASSIVE_ARMOR_CASTER_NATURESTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -28920,6 +31698,27 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "DUAL_NATURE"
+     ],
+     [
+      "CLEANSEHEAL",
+      "BRAMBLESEED"
+     ],
+     [
+      "THORNSAREA"
+     ],
+     [
+      "PASSIVE_ARMOR_CASTER_NATURESTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -28998,6 +31797,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "NATURE_ULTIMATE_SINGLE"
+     ],
+     [
+      "CLEANSEHEAL",
+      "NATURERESILIENCE",
+      "BRAMBLESEED"
+     ],
+     [
+      "THORNSAREA"
+     ],
+     [
+      "PASSIVE_ARMOR_CASTER_NATURESTAFF"
+     ]
+    ],
     "slots": [
      [
       {
@@ -29095,6 +31916,28 @@
     "always": {
      "sustained_dps": 1
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "RAPIERSTAB"
+     ],
+     [
+      "GROUNDDASH",
+      "SKILLSHOT_TELEPORT",
+      "DEEPCUTS"
+     ],
+     [
+      "SUNDERARMOR2"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_DAGGER"
+     ]
+    ],
     "slots": [
      [
       {
@@ -29179,6 +32022,22 @@
     "always": {
      "tankiness": 2
     },
+    "slot_names": [
+     "e",
+     "w",
+     "q"
+    ],
+    "slot_spells": [
+     [
+      "PRIMALSLAM"
+     ],
+     [
+      "CHARGE_ROOT"
+     ],
+     [
+      "SACRED_GROUND"
+     ]
+    ],
     "slots": [
      [
       {
@@ -29257,6 +32116,27 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "MIGHTYSWING"
+     ],
+     [
+      "HEROICSTRIKE2"
+     ],
+     [
+      "SPLITTINGSLASH",
+      "DEFENSERUN"
+     ],
+     [
+      "PASSIVE_ARMORCHANCE_SWORD"
+     ]
+    ],
     "slots": [
      [
       {
@@ -29344,6 +32224,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "DASHDMG"
+     ],
+     [
+      "LEGBREAKER",
+      "SKILLSHOT_PULL",
+      "GROUNDSPEAR"
+     ],
+     [
+      "SPIRITSPEAR"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_SPEAR"
+     ]
+    ],
     "slots": [
      [
       {
@@ -29429,6 +32331,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "SPEARTHROW"
+     ],
+     [
+      "SPIRITSPEAR"
+     ],
+     [
+      "SKILLSHOT_PULL",
+      "GROUNDSPEAR",
+      "CHARGINGBLADE"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_SPEAR"
+     ]
+    ],
     "slots": [
      [
       {
@@ -29513,6 +32437,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "q",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "LANCE_CHARGE"
+     ],
+     [
+      "LEGBREAKER",
+      "SKILLSHOT_PULL",
+      "GROUNDSPEAR"
+     ],
+     [
+      "SPIRITSPEAR"
+     ],
+     [
+      "PASSIVE_HEALTHCHANCE_SPEAR"
+     ]
+    ],
     "slots": [
      [
       {
@@ -29601,6 +32547,28 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "q",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "MIGHTYBLOW"
+     ],
+     [
+      "HEROICSTRIKE2"
+     ],
+     [
+      "SPLITTINGSLASH",
+      "HAMSTRINGSWORD",
+      "DEFENSERUN"
+     ],
+     [
+      "PASSIVE_ARMORCHANCE_SWORD"
+     ]
+    ],
     "slots": [
      [
       {
@@ -29690,6 +32658,24 @@
    "in_game_data": true,
    "loadout": {
     "always": {},
+    "slot_names": [
+     "e",
+     "w",
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "SWORD_BERSERK_RUN_RE"
+     ],
+     [
+      "HAMSTRINGSWORD",
+      "SPLITTINGSLASH",
+      "DEFENSERUN"
+     ],
+     [
+      "PASSIVE_ARMORCHANCE_SWORD"
+     ]
+    ],
     "slots": [
      [
       {

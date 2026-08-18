@@ -206,7 +206,10 @@ function loadoutHandleClick(e){
     const i = +tog.dataset.loOpen;
     LO_OPEN = (LO_OPEN === i) ? null : i;
     LO_PICKING = null; LO_FILTER = "";
-    if (LO_OPEN !== null) loadoutPrefill(LO_OPEN);
+    /* GEAR only: spell picks now feed scoring, and merely LOOKING at a kit
+       must never change the party's fitness (review 2026-08-18). Spell
+       prefill happens at add/forge time, where it is announced. */
+    if (LO_OPEN !== null) loadoutPrefillGear(LO_OPEN);
     return true;
   }
   const pick = e.target.closest("[data-lo-pick]");
@@ -251,4 +254,106 @@ function loadoutHandleInput(e){
 function loadoutCount(i){
   const L = LOADOUT[i] || {};
   return LO_SLOTS.concat(LO_SPELLS).filter(k => L[k] !== undefined).length;
+}
+
+/* --------------------------------------------------- provenance codec
+   Slot provenance (2026-08-18): 'm' = manual / live-party, 'f' = forged.
+   Encoded into the permalink as a plain m/f string (`f=` param) so "reforge
+   all" knows which slots the engine owns even across a shared link; links
+   from before this feature decode to all-manual, which only means the first
+   reforge won't rebuild them — never a wrong comp. Trailing 'm's are
+   trimmed like the loadout codec trims empty members. */
+function provEncode(prov, n){
+  let s = "";
+  for (let i = 0; i < n; i++) s += prov[i] === "f" ? "f" : "m";
+  s = s.replace(/m+$/, "");
+  return s;
+}
+function provDecode(str, n){
+  const out = [];
+  for (let i = 0; i < n; i++)
+    out.push(str && str[i] === "f" ? "f" : "m");
+  return out;
+}
+
+/* -------------------------------------------- spell picks <-> engine combos
+   The bridge that makes the player's REAL Q/W/passive picks reach scoring
+   (2026-08-18): picks map to the engine's curated loadout bundles via
+   spell ids; slots without a curated pick fall back to the engine's default
+   resolution. Gear stays display-only — no gear capabilities are curated. */
+
+/* {engine slot name -> picked spell id} for member i, or null when the
+   member has no spell picks at all. */
+function loadoutPicks(i){
+  const L = LOADOUT[i] || {};
+  const pools = ((typeof SPELLS !== "undefined" && SPELLS[party[i]]) || {});
+  const picks = {};
+  let any = false;
+  LO_SPELLS.forEach(s => {
+    const idx = L[s];
+    const pool = pools[LO_SPELL_POOL[s]] || [];
+    if (Number.isInteger(idx) && pool[idx]){
+      picks[LO_SPELL_POOL[s]] = pool[idx][0];
+      any = true;
+    }
+  });
+  return any ? picks : null;
+}
+
+/* Write a forged combo's spell choices back into the member's pickers, so
+   the kit the user sees IS the kit the forge scored. E-slot use-variants
+   have no picker (E is fixed per weapon) and are carried by the member's
+   stored combo instead. */
+function loadoutApplySpells(i, combo){
+  if (combo === null || combo === undefined) return;
+  const w = party[i];
+  const pools = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
+  const L = LOADOUT[i] || (LOADOUT[i] = {});
+  (ENG.comboSpells(w, combo) || []).forEach(([slotName, sid]) => {
+    const s = slotName === "passive" ? "p" : slotName;
+    if (LO_SPELLS.indexOf(s) === -1) return;   // E is fixed, not a picker
+    const pool = pools[slotName] || [];
+    for (let j = 0; j < pool.length; j++){
+      if (pool[j][0] === sid){ L[s] = j; break; }
+    }
+  });
+}
+
+/* Gear-only half of the caller-reference prefill — forged slots take their
+   SPELLS from the scored combo, not the reference. */
+function loadoutPrefillGear(i){
+  const ref = loadoutReference(party[i]);
+  if (!ref) return;
+  const L = LOADOUT[i] || (LOADOUT[i] = {});
+  Object.entries(ref.gear || {}).forEach(([slot, key]) => {
+    if (!(slot in L) && loGear(key)) L[slot] = key;
+  });
+}
+
+/* ------------------------------------------------------ combo permalink
+   Explicit member combos (forge results — e.g. an E-slot use variant no
+   picker can express) travel in the permalink `k=` param, base36 per
+   member, `-` = none (review 2026-08-18: without this a forged E-variant
+   silently reverted to the default bundle on reload, changing the score).
+   Combo indexes are dataset-stable (product order over the weapon's
+   loadout slots), not context-dependent, so they persist safely. */
+function comboEncode(combo, n){
+  const fields = [];
+  for (let i = 0; i < n; i++){
+    const c = combo[i];
+    fields.push(Number.isInteger(c) && c >= 0 ? c.toString(36) : LO_UNSET);
+  }
+  while (fields.length && fields[fields.length - 1] === LO_UNSET) fields.pop();
+  return fields.join(LO_SEP_FIELD);
+}
+function comboDecode(str, n){
+  const out = [];
+  const f = String(str || "").split(LO_SEP_FIELD);
+  for (let i = 0; i < n; i++){
+    const v = f[i];
+    if (v === undefined || v === LO_UNSET){ out.push(null); continue; }
+    const c = parseInt(v, 36);
+    out.push(Number.isInteger(c) && c >= 0 ? c : null);
+  }
+  return out;
 }

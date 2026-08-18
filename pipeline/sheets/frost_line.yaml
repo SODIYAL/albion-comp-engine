@@ -70,11 +70,15 @@
   curated_as_of: 2026-08-12
   role_hint: support
   capabilities:
-    - {cap: peel,          score: 2, evidence: FROZEN_CRYSTAL} # E: crystal-freeze the focused ALLY (2s invulnerable)
-                                                               # or freeze the diving enemy — a save either way
-    - {cap: stun,          score: 1, evidence: FROZEN_CRYSTAL} # the enemy-freeze is a 2s incapacitate
-    - {cap: slow,          score: 2, evidence: FROZEN_CRYSTAL} # field slow ignores CC resistance + QW pool
-    - {cap: catch,         score: 1, evidence: FROZEN_CRYSTAL}
+    # Frozen Crystal is ONE cast with two mutually exclusive uses — freeze
+    # the focused ALLY (2s invulnerable save) OR freeze a diving ENEMY.
+    # Split 2026-08-18 (`use:` variants -> exclusive loadout bundles): the
+    # engine used to credit peel + catch + stun + slow simultaneously, as if
+    # one E delivered the save and the catch in the same fight moment.
+    - {cap: peel,          score: 2, evidence: FROZEN_CRYSTAL, use: ally_save}
+    - {cap: stun,          score: 1, evidence: FROZEN_CRYSTAL, use: enemy_control} # the enemy-freeze is a 2s incapacitate
+    - {cap: slow,          score: 2, evidence: FROZEN_CRYSTAL, use: enemy_control} # shatter field slow ignores CC resistance
+    - {cap: catch,         score: 1, evidence: FROZEN_CRYSTAL, use: enemy_control}
     - {cap: zone_control,  score: 1, evidence: FROSTBOMB_CASTSLOW}  # (QW)
     - {cap: disengage,     score: 1, evidence: FROSTNOVA}      # (QW)
     - {cap: resist_shred,  score: 1, evidence: FROST_LANCE}    # (QW)

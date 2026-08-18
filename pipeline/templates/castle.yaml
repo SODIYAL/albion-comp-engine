@@ -40,6 +40,11 @@ requirements:
   catch:          {target: 2.5,  weight: 3,  soft_cap: 5.9,  scales: true}
   mobility:       {target: 5.0,  weight: 3,  soft_cap: 12.5, scales: true}
   burst_st:       {target: 2.5,  weight: 3,  soft_cap: 5.9,  scales: true}
+  # PROVISIONAL (2026-08-18) — ranged positioning, same rationale and
+  # per-player rate as blackzone_roam (0.25/player, weight 4): the bomb has
+  # to land on the gate choke from OUTSIDE it. Was only on blackzone_roam,
+  # so every other large template forged melee balls for clap comps.
+  ranged_presence: {target: 6.3, weight: 4,  soft_cap: 12.5, scales: true}
   # threshold needs
   clump_create:   {target: 3.3,  weight: 8,  soft_cap: 5.0,  scales: false}
   purge:          {target: 1.7,  weight: 6,  soft_cap: 3.3,  scales: false}
@@ -50,8 +55,12 @@ requirements:
   buff_allies:    {target: 2.5,  weight: 4,  soft_cap: 5.0,  scales: false}
   disengage:      {target: 0.8,  weight: 3,  soft_cap: 2.5,  scales: false}
   execute:        {target: 0.8,  weight: 3,  soft_cap: 2.5,  scales: false}
-  anti_zone:      {target: 0.8,  weight: 4,  soft_cap: 1.7,  scales: false}
-  damage_debuff:  {target: 0.8,  weight: 3,  soft_cap: 1.7,  scales: false}
+  # REWEIGHT 2026-08-18 (see blackzone_roam.yaml note): from-zero windfall of
+  # these provisional niche weights dominated tail recommendations. anti_zone
+  # kept ABOVE the other contents (2, not 1): the standing Exalted slot in
+  # all Deadlyhooker parties is castle/territory evidence.
+  anti_zone:      {target: 0.8,  weight: 2,  soft_cap: 1.7,  scales: false}
+  damage_debuff:  {target: 0.8,  weight: 1,  soft_cap: 1.7,  scales: false}
 
 hard_floors:
   heal_sustain: {min_party_size: 10, floor_units: 4.2, penalty_mult: 2.0}

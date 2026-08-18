@@ -46,14 +46,17 @@ requirements:
   # zone comps, near-worthless otherwise, exactly like purge vs buff-less comps
   # (design doc §4.4.5). Set low and flat until the expert tunes it, so it can
   # never dominate a recommendation on an unvalidated number.
-  anti_zone:      {target: 0.9, weight: 3,  soft_cap: 1.7, scales: false}
+  # REWEIGHT 2026-08-18 (see blackzone_roam.yaml note): 3 -> 1 — concave
+  # from-zero coverage made weight 3 a +3.0 windfall that DID dominate tail
+  # recommendations, defeating this row's own rule.
+  anti_zone:      {target: 0.9, weight: 1,  soft_cap: 1.7, scales: false}
   # PROVISIONAL WEIGHT — promoted 2026-08-12 with the anti_zone treatment:
   # low and flat so an unvalidated number can never dominate a recommendation.
   # Scored so far only on the defining carriers (Black Monk 2, Incubus Mace 2,
   # Spirithunter/Quarterstaff/DBS/Evensong 1); many more lines carry small
   # versions (Weakening, Frost Beam, Intimidating Presence) left at 0 pending
-  # expert weighting.
-  damage_debuff:  {target: 0.9, weight: 3,  soft_cap: 1.7, scales: false}
+  # expert weighting. REWEIGHT 2026-08-18: 3 -> 1 (same rationale as anti_zone).
+  damage_debuff:  {target: 0.9, weight: 1,  soft_cap: 1.7, scales: false}
   heal_reduction: {target: 0.9, weight: 6,  soft_cap: 2.6, scales: false}
   resist_shred:   {target: 1.7, weight: 5,  soft_cap: 3.5, scales: false}
   cleanse:        {target: 0.9, weight: 5,  soft_cap: 2.6, scales: false}

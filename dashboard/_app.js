@@ -20,7 +20,22 @@ let STYLE = "balanced";
 const HARD_CAP = 60;
 const STYLE_ORDER = ["balanced", "brawl", "clap", "kite", "brawl_clap"];
 
-function syncEngine(){ SIZE = Math.max(PLANNED, party.length); ENG.setContent(CONTENT, SIZE, STYLE); }
+function syncEngine(){
+  SIZE = Math.max(PLANNED, party.length);
+  ENG.setContent(CONTENT, SIZE, STYLE);
+  /* member combos re-resolve after every context change: the default
+     loadout depends on the styled weights, and pick-derived combos map
+     through the current engine (2026-08-18) */
+  COMBOS_CUR = party.map((_, i) => comboAt(i));
+}
+/* The loadout combo actually scored for member i: an explicit stored combo
+   (a forge result) wins; otherwise the member's real Q/W/passive picks map
+   to curated bundles; otherwise null = the engine's static default. */
+function comboAt(i){
+  if (COMBO[i] !== undefined && COMBO[i] !== null) return COMBO[i];
+  const picks = loadoutPicks(i);
+  return picks ? ENG.comboFromPicks(party[i], picks) : null;
+}
 
 const tpl = () => DATASET.templates[CONTENT];
 const REQS = () => tpl().requirements;
@@ -35,23 +50,29 @@ const softCap = cap => ENG.softCap(cap);
    scores let a bar read "met" while the weakness list still charged a gap
    for the same capability (review 2026-08-15). Raw sheet numbers stay
    visible per-weapon in the detail drawer. */
+/* Every scoring call for THE party passes the members' resolved combos
+   (COMBOS_CUR) — the user's spell picks and forged loadouts reach the
+   engine; ad-hoc parties (contribution what-ifs) pass their own slices. */
 const supply = p => p === party ? partyCalc().sup : ENG.effectiveSupply(p);
 const fitness = p => p === party ? partyCalc().fit : ENG.fitness(p);
 const maxFitness = () => ENG.maxFitness();
-const uncoveredCaps = p => ENG.uncoveredCaps(p);
-const weaknesses = (p, n = 3) => ENG.weaknesses(p, n);
+const uncoveredCaps = p => ENG.uncoveredCaps(p, p === party ? COMBOS_CUR : null);
+const weaknesses = (p, n = 3) => ENG.weaknesses(p, n, p === party ? COMBOS_CUR : null);
 /* app_scoring.js term/rec field names -> the short ones this file renders */
-const explain = (p, cand) => ENG.explain(p, cand).map(t => ({d: t.delta, ...t}));
-const recommend = (p, n = 4) => ENG.recommend(p, n).map(r =>
-  ({w: r.weapon, dFit: r.d_fitness, dSyn: r.d_synergy, meta: r.meta_prior, score: r.score}));
+const explain = (p, cand) => ENG.explain(p, cand, p === party ? COMBOS_CUR : null)
+  .map(t => ({d: t.delta, ...t}));
+const recommend = (p, n = 4) => ENG.recommend(p, n, null, p === party ? COMBOS_CUR : null)
+  .map(r => ({w: r.weapon, dFit: r.d_fitness, dSyn: r.d_synergy, meta: r.meta_prior,
+              viab: r.viability, combo: r.combo, score: r.score}));
 /* swapReview is a full-pool sweep per member (~40-100ms at 20-40 members) —
-   memoized on the engine context + party so facet clicks, companion polls
-   and other no-op re-renders don't pay it again. */
+   memoized on the engine context + party + loadouts so facet clicks,
+   companion polls and other no-op re-renders don't pay it again. */
+const comboSig = () => COMBOS_CUR.join(",");
 let swapCache = { key: null, val: [] };
 function swapReviewCached(){
-  const key = `${CONTENT}|${SIZE}|${STYLE}|${party.join(",")}`;
+  const key = `${CONTENT}|${SIZE}|${STYLE}|${party.join(",")}|${comboSig()}`;
   if (swapCache.key !== key)
-    swapCache = { key, val: party.length > 1 ? ENG.swapReview(party, 3) : [] };
+    swapCache = { key, val: party.length > 1 ? ENG.swapReview(party, 3, null, COMBOS_CUR) : [] };
   return swapCache.val;
 }
 
@@ -59,9 +80,10 @@ function swapReviewCached(){
    (renderers used to re-derive them 3-4x per render pass) */
 let calcCache = { key: null, fit: 0, sup: null };
 function partyCalc(){
-  const key = `${CONTENT}|${SIZE}|${STYLE}|${party.join(",")}`;
+  const key = `${CONTENT}|${SIZE}|${STYLE}|${party.join(",")}|${comboSig()}`;
   if (calcCache.key !== key)
-    calcCache = { key, fit: ENG.fitness(party), sup: ENG.effectiveSupply(party) };
+    calcCache = { key, fit: ENG.fitness(party, COMBOS_CUR),
+                  sup: ENG.effectiveSupply(party, COMBOS_CUR) };
   return calcCache;
 }
 
@@ -114,8 +136,14 @@ const CAP_PROSE = {
 };
 const prose = c => CAP_PROSE[c] || c.replace(/_/g," ");
 
-function roleOf(w){
-  return Object.entries(capsOf(w)).sort((a,b) => b[1]-a[1]).slice(0,2)
+function roleOf(w, combo){
+  /* Role label from the SCORED loadout (2026-08-18): the top capabilities
+     of the combo the engine actually resolves for this content — a Cursed
+     Staff whose scored kit is sustain-dps utility no longer wears its two
+     highest RAW capabilities (burst_st) as a label. Pass a member's combo
+     for their actual kit; omit for the content default. */
+  const extra = ENG.memberExtra(w, combo === undefined ? null : combo);
+  return Object.entries(extra).sort((a,b) => b[1]-a[1]).slice(0,2)
     .map(e => prose(e[0])).join(" · ");
 }
 
@@ -196,21 +224,37 @@ function loadHash(){
   PLANNED = (n >= 2 && n <= HARD_CAP) ? n : baseSize();
   STYLE = (p.st && (DATASET.styles || {})[p.st]) ? p.st : "balanced";
   /* a link WITHOUT p= is a shared empty comp — clear, don't keep the old
-     party (saveHash omits p= when empty, so restore must mirror that);
-     cap at HARD_CAP like every other roster path */
-  party = p.p ? p.p.split(",").filter(w => WEAPONS[w]).slice(0, HARD_CAP) : [];
-  /* `g` is optional and always has been — a link without it is a weapons-only
-     comp, which is every link shared before loadouts existed. */
-  LOADOUT = p.g ? loadoutDecode(p.g).slice(0, HARD_CAP) : [];
+     party (saveHash omits p= when empty, so restore must mirror that).
+     g / f / k decode POSITIONALLY against the ORIGINAL p= list, so unknown
+     weapon keys are dropped from all four arrays TOGETHER — filtering the
+     party alone used to shift loadouts and forged flags onto the wrong
+     members (review 2026-08-18). Cap at HARD_CAP like every roster path. */
+  const rawParty = p.p ? p.p.split(",") : [];
+  const rawLoadout = p.g ? loadoutDecode(p.g) : [];
+  const rawProv = provDecode(p.f || "", rawParty.length);
+  /* `k` (2026-08-18) carries explicit member combos (forge results whose
+     E-slot use variant no spell picker can express). Optional like g/f. */
+  const rawCombo = comboDecode(p.k || "", rawParty.length);
+  party = []; LOADOUT = []; PROV = []; COMBO = [];
+  rawParty.forEach((w, i) => {
+    if (!WEAPONS[w] || party.length >= HARD_CAP) return;
+    party.push(w);
+    LOADOUT[party.length - 1] = rawLoadout[i];
+    PROV[party.length - 1] = rawProv[i];
+    COMBO[party.length - 1] = rawCombo[i];
+  });
+  FORGE_NOTE = null;
   LO_OPEN = null; LO_PICKING = null; LO_FILTER = "";
   syncEngine();
   return true;
 }
 function saveHash(){
-  /* omitted entirely when no member has a loadout, so a plain comp's link is
-     byte-for-byte what it was before this feature existed */
+  /* every optional param is omitted when empty, so a plain comp's link is
+     byte-for-byte what it was before these features existed */
   const g = loadoutEncode();
-  const h = `c=${CONTENT}&n=${PLANNED}${STYLE !== "balanced" ? "&st=" + STYLE : ""}${party.length ? "&p=" + party.join(",") : ""}${g ? "&g=" + g : ""}`;
+  const f = provEncode(PROV, party.length);
+  const k = comboEncode(COMBO, party.length);
+  const h = `c=${CONTENT}&n=${PLANNED}${STYLE !== "balanced" ? "&st=" + STYLE : ""}${party.length ? "&p=" + party.join(",") : ""}${g ? "&g=" + g : ""}${f ? "&f=" + f : ""}${k ? "&k=" + k : ""}`;
   history.replaceState(null, "", "#" + h);
   try { localStorage.setItem("compforge", h); } catch (e) { /* file:// may deny */ }
 }
@@ -230,6 +274,18 @@ function loadStored(){
 /* ---------------------------------------------------------------- render */
 
 let party = [];
+/* Slot provenance (2026-08-18): 'm' manual / live-party, 'f' forged. "Forge
+   the rest" locks every current member; "reforge all" rebuilds only the 'f'
+   slots. Without this, a slot the engine created was permanently treated as
+   the user's the moment the handler returned. */
+let PROV = [];
+/* Explicit per-member combo overrides (forge results — e.g. an E-slot use
+   variant no picker can express). null/undefined = derive from picks. */
+let COMBO = [];
+/* Resolved combos for the current party — recomputed in syncEngine. */
+let COMBOS_CUR = [];
+/* The last forge's honesty report: {feasible, filler, held} or null. */
+let FORGE_NOTE = null;
 let pickFilter = "";
 let treeFilter = "";
 const $ = id => document.getElementById(id);
@@ -303,25 +359,34 @@ const SWAP_CFG = (DATASET.scoring || {}).swap_advisor
    all keep their hints. */
 function swapEligible(review){
   const claim = {};
+  const ok = new Set();
   review.forEach((m, i) => {
-    if (!m || m.rank < SWAP_CFG.min_rank) return;
+    if (!m) return;
+    /* viability-excluded members always get their replacement advice —
+       the owner rule flags them regardless of rank (2026-08-18) */
+    if (m.off_comp && m.options.length){ ok.add(i); return; }
+    if (m.rank < SWAP_CFG.min_rank) return;
     const top = m.options.find(o => o.gain >= SWAP_CFG.min_gain);
     if (!top) return;
     const role = roleHint(top.weapon);
     if (!claim[role] || top.gain > claim[role].gain) claim[role] = { i, gain: top.gain };
   });
-  const ok = new Set();
   Object.values(claim).forEach(c => ok.add(c.i));
   return ok;
 }
 function swapHint(m, i){
-  if (!m || m.rank < SWAP_CFG.min_rank) return "";
-  const opts = m.options.filter(o => o.gain >= SWAP_CFG.min_gain);
+  if (!m) return "";
+  const forced = m.off_comp && m.options.length;
+  if (!forced && m.rank < SWAP_CFG.min_rank) return "";
+  const opts = forced ? m.options
+    : m.options.filter(o => o.gain >= SWAP_CFG.min_gain);
   if (!opts.length) return "";
   const pool = Object.keys(WEAPONS).length;
-  const label = m.rank >= SWAP_CFG.offcomp_rank
-    ? `<b class="offcomp">off-comp here — rank ${m.rank}/${pool}</b>`
-    : `<span class="swap-lbl">better options</span>`;
+  const label = m.off_comp
+    ? `<b class="offcomp">off-comp at this size (owner rule) — swap to</b>`
+    : m.rank >= SWAP_CFG.offcomp_rank
+      ? `<b class="offcomp">off-comp here — rank ${m.rank}/${pool}</b>`
+      : `<span class="swap-lbl">better options</span>`;
   return `<span class="fn swap">${label} ${opts.map(o =>
     `<button class="swap-opt" data-swapat="${i}" data-swapto="${o.weapon}"
        title="swap ${nameOf(m.weapon)} for ${nameOf(o.weapon)} (+${o.gain.toFixed(1)} score)">${nameOf(o.weapon)} +${o.gain.toFixed(1)}</button>`).join(" ")}</span>`;
@@ -331,7 +396,8 @@ function renderRoster(){
      "who is load-bearing" number. Lowest contributor gets flagged. */
   const base = fitness(party);
   const contrib = party.map((w, i) =>
-    base - fitness(party.filter((_, j) => j !== i)));
+    base - ENG.fitness(party.filter((_, j) => j !== i),
+                       COMBOS_CUR.filter((_, j) => j !== i)));
   const review = swapReviewCached();
   const hintable = swapEligible(review);
   const minI = party.length > 2 ? contrib.indexOf(Math.min(...contrib)) : -1;
@@ -353,8 +419,8 @@ function renderRoster(){
   }
   const rows = idxs.map(i => { const w = party[i]; return (
     `<div class="slot ${roleCls(w)}"${roleBg(w)}><span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 32)}
-      <span class="nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>${badgeHtml(w)}
-        <span class="fn">${roleOf(w)} · ${signed(contrib[i])} fit${flag(i)}</span>${hintable.has(i) ? swapHint(review[i], i) : ""}</span>
+      <span class="nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>${badgeHtml(w)}${PROV[i] === "f" ? '<span class="prov forged" title="slot generated by the forge — reforge all rebuilds it">forged</span>' : ""}
+        <span class="fn">${roleOf(w, COMBOS_CUR[i])} · ${signed(contrib[i])} fit${flag(i)}${ENG.isExcluded(w) ? ' · <b class="offcomp" title="owner rule: not a default large-group pick at this size — swap advice below">off-comp at size ' + SIZE + "</b>" : ""}</span>${hintable.has(i) ? swapHint(review[i], i) : ""}</span>
       <button class="lo-open${LO_OPEN === i ? " on" : ""}" data-lo-open="${i}"
         aria-expanded="${LO_OPEN === i}" aria-label="Loadout for ${nameOf(w)}"
         >kit${loadoutCount(i) ? `<i>${loadoutCount(i)}</i>` : ""}</button>
@@ -429,6 +495,7 @@ function renderPicker(){
     : "";
   $("picker").innerHTML = keys.map(w => `<button class="pick" data-add="${w}">
       ${icon(w, 26)}<span class="nm">${nameOf(w)}${badgeHtml(w)}<span class="fn">${roleOf(w)}</span></span>
+      ${ENG.isExcluded(w) ? '<span class="prov draft offcomp" title="owner rule: not a default large-group pick at this size — manual add still allowed">off-comp</span>' : ""}
       ${WEAPONS[w].status === "curated" ? "" : '<span class="prov draft">illustrative</span>'}
       <span class="info" data-detail="${w}" role="button" tabindex="0" aria-label="Details for ${nameOf(w)}">i</span>
     </button>`).join("")
@@ -492,11 +559,28 @@ function renderWeaknesses(){
 }
 function renderWarning(){
   const unc = uncoveredCaps(party), left = SIZE - party.length;
-  $("warn-slot").innerHTML = (party.length && left > 0 && left <= 2 && unc.length >= 3)
+  const greedy = (party.length && left > 0 && left <= 2 && unc.length >= 3)
     ? `<div class="warn"><span class="t">Lookahead</span>
        <span class="b"><b>Greedy trap.</b> ${left} slot${left>1?"s":""} left but ${unc.length} high-weight capabilities still uncovered
        (<code>${unc.join(", ")}</code>). No single weapon closes all of them — expect to leave at least ${unc.length - left} unmet whatever you pick next.</span></div>`
     : "";
+  /* The forge's honesty report (2026-08-18): an infeasible constraint set
+     or a slot the objective dislikes is SAID, never silently absorbed. */
+  let forgeBits = "";
+  if (FORGE_NOTE){
+    const slotNames = idx => idx.map(i =>
+      `${String(i + 1).padStart(2, "0")} ${party[i] ? nameOf(party[i]) : ""}`).join(", ");
+    if (!FORGE_NOTE.feasible)
+      forgeBits += `<div class="warn"><span class="t">Forge</span>
+        <span class="b"><b>Infeasible.</b> The composition constraints for this content and size could not all be met from the allowed weapon pool — the roster below is partial/provisional. Loosen the locked picks or change the size.</span></div>`;
+    if (FORGE_NOTE.filler && FORGE_NOTE.filler.length)
+      forgeBits += `<div class="warn"><span class="t">Forge</span>
+        <span class="b"><b>Saturated tail.</b> Slot${FORGE_NOTE.filler.length > 1 ? "s" : ""} ${slotNames(FORGE_NOTE.filler)} reduce${FORGE_NOTE.filler.length > 1 ? "" : "s"} the comp score and no allowed replacement does better — the template is fully covered before size ${SIZE}. Treat ${FORGE_NOTE.filler.length > 1 ? "these slots" : "this slot"} as provisional.</span></div>`;
+    if (FORGE_NOTE.held && FORGE_NOTE.held.length)
+      forgeBits += `<div class="warn"><span class="t">Forge</span>
+        <span class="b"><b>Constraint-held.</b> Slot${FORGE_NOTE.held.length > 1 ? "s" : ""} ${slotNames(FORGE_NOTE.held)} score${FORGE_NOTE.held.length > 1 ? "" : "s"} slightly negative but ${FORGE_NOTE.held.length > 1 ? "are" : "is"} required by the composition minimums (healers/frontline/ranged core) — expert structure the capability score alone does not see.</span></div>`;
+  }
+  $("warn-slot").innerHTML = greedy + forgeBits;
 }
 function renderCmdNext(recs){
   if (!recs){
@@ -514,9 +598,15 @@ function renderCmdNext(recs){
     : `slot ${party.length + 1} of ${SIZE}`;
   const sn = styleName();
   const styleTag = sn ? ` · ${sn}` : "";
-  const forge = party.length < SIZE
+  /* "forge the rest" fills open slots locking every current member;
+     "reforge all" (shown whenever forged slots exist — even on a full
+     roster after a content/style/size change) rebuilds every generated
+     slot and keeps only the manual/live ones (2026-08-18). */
+  const forge = (party.length < SIZE
     ? `<button class="cb-forge" id="forge">${party.length ? "forge the rest" : "forge a full comp"}</button>`
-    : "";
+    : "") + (PROV.some(x => x === "f")
+    ? `<button class="cb-forge" id="reforge" title="rebuild every forged slot for the current content, style and size — manual picks stay">reforge all</button>`
+    : "");
   $("cb-next").innerHTML = `
     <div class="eyebrow">Next pick — ${slotLabel}${styleTag}</div>
     <div class="cb-row">
@@ -525,6 +615,20 @@ function renderCmdNext(recs){
       <button class="cb-add" data-add="${top.w}">Add to party</button>
       ${forge}
     </div>`;
+}
+/* Names for the spells a scored combo equips — the loadout the engine
+   ACTUALLY valued, shown with the recommendation (2026-08-18). */
+function scoredKitLine(w, combo){
+  const pools = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
+  const parts = (ENG.comboSpells(w, combo) || []).map(([slot, sid]) => {
+    const pool = pools[slot] || [];
+    let nm = sid;
+    for (const e of pool) if (e[0] === sid){ nm = e[1]; break; }
+    return `${slot === "passive" ? "P" : slot.toUpperCase()} ${esc(nm)}`;
+  });
+  return parts.length
+    ? `<div class="fieldnote">scored loadout: ${parts.join(" · ")} — the marginal terms below are THIS kit, one spell per slot</div>`
+    : "";
 }
 function renderRecDetail(recs){
   if (!recs){
@@ -539,6 +643,7 @@ function renderRecDetail(recs){
     <div class="rec">
       <div class="rec-body">
         <p class="why">${whySentence(party, top.w)}</p>
+        ${scoredKitLine(top.w, top.combo)}
         ${usageLine(top.w)}
         ${((typeof LOADOUTS !== "undefined" && LOADOUTS[CONTENT]) || {})[top.w] ? (() => {
           const v = LOADOUTS[CONTENT][top.w][0];
@@ -548,11 +653,20 @@ function renderRecDetail(recs){
         <div class="terms">${terms.map(t => `<div class="term">
           <span class="d">+${t.d.toFixed(2)}</span><span class="c">${t.cap}</span>
           <span class="mv">${t.before.toFixed(0)} → ${t.after.toFixed(0)} of ${t.target.toFixed(1)}</span></div>`).join("")}</div>
-        <div class="formula">
-          <span class="k">score</span> = ${ENG.alpha}·Δfitness + ${ENG.beta}·Δsynergy + ${ENG.delta}·metaPrior<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= ${ENG.alpha}·<b>${top.dFit.toFixed(2)}</b> + ${ENG.beta}·<b>${top.dSyn.toFixed(2)}</b> + ${ENG.delta}·<b>${top.meta.toFixed(2)}</b> = <b>${top.score.toFixed(2)}</b><br>
-          <span class="k">metaPrior</span> is a hand-set guard value — real win-lift arrives in Phase 3 from battle data.
-        </div>
+        ${(() => {
+          /* the score is the EXACT compScore delta: base blend + the prior
+             and duplication terms. adj = viability tier − duplicate cost,
+             shown when it moves the number (2026-08-18). */
+          const blend = ENG.alpha * top.dFit + ENG.beta * top.dSyn + ENG.delta * top.meta;
+          const adj = top.score - blend;
+          const adjBit = Math.abs(adj) > 0.005
+            ? ` ${adj >= 0 ? "+" : "−"} <b>${Math.abs(adj).toFixed(2)}</b><span class="k"> priors</span>` : "";
+          return `<div class="formula">
+          <span class="k">score</span> = ${ENG.alpha}·Δfitness + ${ENG.beta}·Δsynergy + ${ENG.delta}·metaPrior ± viability/duplication<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= ${ENG.alpha}·<b>${top.dFit.toFixed(2)}</b> + ${ENG.beta}·<b>${top.dSyn.toFixed(2)}</b> + ${ENG.delta}·<b>${top.meta.toFixed(2)}</b>${adjBit} = <b>${top.score.toFixed(2)}</b><br>
+          <span class="k">score</span> is the exact change to the party's comp score if this pick joins with the loadout above. <span class="k">metaPrior</span> and the viability tier are hand-curated guard values — real win-lift arrives in Phase 3 from battle data.
+        </div>`;
+        })()}
         <div><div class="sec-label" style="margin-bottom:8px">Alternatives — click to add instead</div>
           <div class="alts">${recs.slice(1).map(r => {
             const t0 = explain(party, r.w)[0];
@@ -878,6 +992,11 @@ function loadCompanionParty(){
   const weapons = (companionData.members || []).map(m => m.weapon).filter(w => w && WEAPONS[w]);
   if (!weapons.length) return;
   party = weapons.slice(0, HARD_CAP);
+  /* live-party members are the user's, never the forge's */
+  PROV = party.map(() => "m");
+  COMBO = party.map(() => null);
+  FORGE_NOTE = null;
+  loadoutClear();
   PLANNED = Math.max(PLANNED, party.length);
   PARTY_FACET = null;
   render();
@@ -944,45 +1063,75 @@ document.addEventListener("click", e => {
                     !rf.closest("#picker-chips")); return; }
   if (e.target.closest("#facet-clear")){ setFacet(null); return; }
   const sw = e.target.closest("[data-swapat]");
-  if (sw){ party[+sw.dataset.swapat] = sw.dataset.swapto; render(); return; }
+  if (sw){
+    const si = +sw.dataset.swapat;
+    party[si] = sw.dataset.swapto;
+    COMBO[si] = null;      /* the new weapon resolves its own loadout */
+    LOADOUT[si] = undefined;   /* old spell-pick indices would misread
+                                  against the new weapon's pools */
+    loadoutPrefill(si);    /* same start as a fresh add: caller reference */
+    PROV[si] = "m";        /* an explicit user choice is manual, even in a
+                              formerly forged slot */
+    FORGE_NOTE = null;
+    render(); return;
+  }
   const det = e.target.closest("[data-detail]");
   if (det){ renderDetail(det.dataset.detail); return; }
   const add = e.target.closest("[data-add]");
   if (add){ if (party.length < HARD_CAP){
     party.push(add.dataset.add);
+    PROV.push("m"); COMBO.push(null); FORGE_NOTE = null;
     loadoutInsert(party.length - 1);   /* prefill from the caller reference */
     PARTY_FACET = null;   /* the new member must be visible */
     render(); } return; }
-  if (e.target.closest("#forge")){
-    /* Greedy auto-build, then a 1-opt refine pass. Greedy alone judges slot 1
-       against an EMPTY party and never revisits it, so a forged comp could be
-       led by a weapon its own swap advisor then ranked 132nd, with a tail of
-       narrow picks chosen only because they added least to saturated pools.
-       refine() re-optimises the finished comp against the same objective. */
+  const forgeBtn = e.target.closest("#forge") || e.target.closest("#reforge");
+  if (forgeBtn){
+    /* Deterministic constrained beam search in the engine (2026-08-18) —
+       greedy top-1 append + a 1-opt pass used to force-fill negative-value
+       bodies and treated every forged slot as manual afterwards.
+       "forge the rest" locks every current member; "reforge all" keeps
+       only the manual/live slots and rebuilds the rest for the CURRENT
+       content, style and size. */
+    const reforgeAll = forgeBtn.id === "reforge";
     const goal = Math.min(SIZE, HARD_CAP);
-    const startedAt = party.length;
-    while (party.length < goal){
-      const r = recommend(party, 1);
-      if (!r.length) break;
-      party.push(r[0].w);
+    const keep = party.map((_, i) => i)
+      .filter(i => reforgeAll ? PROV[i] !== "f" : true);
+    const locked = keep.map(i => party[i]);
+    const lockedCombos = keep.map(i => comboAt(i));
+    const lockedLoadouts = keep.map(i => LOADOUT[i]);
+    const lockedProv = keep.map(i => PROV[i] || "m");
+    if (locked.length >= goal && !reforgeAll){ return; }
+    const lockedStored = keep.map(i => COMBO[i]);
+    const r = ENG.forge(Math.max(goal, locked.length), locked, lockedCombos);
+    party = r.party.slice();
+    /* locked members keep only their EXPLICIT stored combos — pick-derived
+       resolutions must keep re-resolving under future context changes
+       (review 2026-08-18) */
+    COMBO = lockedStored.slice();
+    LOADOUT = lockedLoadouts.slice();
+    PROV = lockedProv.slice();
+    for (let i = locked.length; i < party.length; i++){
+      PROV[i] = "f";
+      COMBO[i] = r.combos[i];
+      LOADOUT[i] = undefined;
+      /* gear from the caller reference; SPELLS from the combo the forge
+         actually scored — the kit shown is the kit valued */
+      loadoutPrefillGear(i);
+      loadoutApplySpells(i, r.combos[i]);
     }
-    /* `startedAt` locks the hand-placed members: only the slots this forge
-       added are the engine's to rewrite. */
-    if (party.length > startedAt){
-      const refined = ENG.refine(party, 8, null, startedAt);
-      party.length = 0;
-      party.push(...refined);
-    }
-    /* forge rewrites the roster wholesale — rebuild the loadout slots to
-       match, prefilling each from its caller reference */
-    loadoutClear();
-    party.forEach((_, i) => loadoutPrefill(i));
+    FORGE_NOTE = { feasible: r.feasible, filler: r.filler, held: r.held };
+    LO_OPEN = null; LO_PICKING = null;
     PARTY_FACET = null;   /* show the whole forged comp, not a filtered view */
     render();
     return;
   }
   const rm = e.target.closest("[data-remove]");
-  if (rm){ const ri = +rm.dataset.remove; party.splice(ri, 1); loadoutRemove(ri); render(); return; }
+  if (rm){
+    const ri = +rm.dataset.remove;
+    party.splice(ri, 1); PROV.splice(ri, 1); COMBO.splice(ri, 1);
+    FORGE_NOTE = null;
+    loadoutRemove(ri); render(); return;
+  }
   if (e.target.closest("#companion-connect")){ toggleCompanion(); return; }
   if (e.target.closest("#companion-load")){ loadCompanionParty(); return; }
   if (e.target.closest("#clear")){
@@ -991,7 +1140,8 @@ document.addEventListener("click", e => {
     const b = $("clear");
     if (b.dataset.armed === "1"){
       delete b.dataset.armed; b.textContent = "clear comp";
-      party = []; loadoutClear(); PARTY_FACET = null; render();
+      party = []; PROV = []; COMBO = []; FORGE_NOTE = null;
+      loadoutClear(); PARTY_FACET = null; render();
     } else {
       b.dataset.armed = "1"; b.textContent = "really clear? click again";
       setTimeout(() => { delete b.dataset.armed; b.textContent = "clear comp"; }, 2200);
@@ -999,9 +1149,9 @@ document.addEventListener("click", e => {
     return;
   }
   const sz = e.target.closest("[data-size]");
-  if (sz){ PLANNED = +sz.dataset.size; render(); return; }
-  if (e.target.closest("#size-minus")){ PLANNED = Math.max(2, PLANNED - 1); render(); return; }
-  if (e.target.closest("#size-plus")){ PLANNED = Math.min(HARD_CAP, PLANNED + 1); render(); return; }
+  if (sz){ PLANNED = +sz.dataset.size; FORGE_NOTE = null; render(); return; }
+  if (e.target.closest("#size-minus")){ PLANNED = Math.max(2, PLANNED - 1); FORGE_NOTE = null; render(); return; }
+  if (e.target.closest("#size-plus")){ PLANNED = Math.min(HARD_CAP, PLANNED + 1); FORGE_NOTE = null; render(); return; }
   const cap = e.target.closest("[data-cap]");
   if (cap){ renderEvidence(cap.dataset.cap); return; }
   if (e.target.closest("#share")){
@@ -1021,13 +1171,32 @@ document.addEventListener("click", e => {
   if (!e.target.closest("#drawer")) $("drawer").dataset.open = "false";
 });
 document.addEventListener("change", e => {
-  if (loadoutHandleChange(e)){ render(); return; }
-  if (e.target.id === "content"){ CONTENT = e.target.value; PLANNED = baseSize(); party = []; loadoutClear(); PARTY_FACET = null; render(); }
-  if (e.target.id === "style"){ STYLE = e.target.value; render(); }
+  if (loadoutHandleChange(e)){
+    /* a user spell pick takes over the member's loadout: drop any stored
+       forge combo so scoring follows the picker (2026-08-18) */
+    const sel = e.target.closest("[data-lo-spell]");
+    if (sel) COMBO[+sel.dataset.loSpell.split(":")[0]] = null;
+    render(); return;
+  }
+  if (e.target.id === "content"){
+    CONTENT = e.target.value; PLANNED = baseSize();
+    /* manual/live members SURVIVE a content switch (2026-08-18); slots the
+       forge generated were built for the OLD template and are dropped —
+       "reforge all" or "forge the rest" rebuilds them for the new one. */
+    const keep = party.map((_, i) => i).filter(i => PROV[i] !== "f");
+    party = keep.map(i => party[i]);
+    LOADOUT = keep.map(i => LOADOUT[i]);
+    COMBO = keep.map(i => COMBO[i]);
+    PROV = keep.map(() => "m");
+    FORGE_NOTE = null; LO_OPEN = null; LO_PICKING = null;
+    PARTY_FACET = null; render();
+  }
+  if (e.target.id === "style"){ STYLE = e.target.value; FORGE_NOTE = null; render(); }
   if (e.target.id === "tree-filter"){ treeFilter = e.target.value; renderPicker(); }
   if (e.target.id === "size-input"){
     const v = Math.round(+e.target.value);
-    if (v >= 2 && v <= HARD_CAP){ PLANNED = v; render(); } else { e.target.value = PLANNED; }
+    if (v >= 2 && v <= HARD_CAP){ PLANNED = v; FORGE_NOTE = null; render(); }
+    else { e.target.value = PLANNED; }
   }
 });
 document.addEventListener("input", e => {
@@ -1061,7 +1230,9 @@ $("pick-filter").addEventListener("keydown", e => {
   if (e.key !== "Enter") return;
   const keys = filteredWeapons();
   if (keys.length && party.length < HARD_CAP){
-    party.push(keys[0]); loadoutInsert(party.length - 1); render(); }
+    party.push(keys[0]); PROV.push("m"); COMBO.push(null); FORGE_NOTE = null;
+    PARTY_FACET = null;   /* the new member must be visible (matches click-add) */
+    loadoutInsert(party.length - 1); render(); }
 });
 /* A pasted share-link hash applies without a reload. saveHash() uses
    replaceState, which never fires hashchange, so this cannot loop. The
@@ -1079,7 +1250,7 @@ $("build-stamp").textContent = `v${META.version} · ${META.weapons_curated}/${ME
    drifting meant a false "PARITY MISMATCH" banner. */
 const SEED = ((typeof PARITY_EXPECTED !== "undefined" && PARITY_EXPECTED.party) || [])
   .filter(w => WEAPONS[w]);
-if (!loadHash() && !loadStored()) party = SEED;
+if (!loadHash() && !loadStored()){ party = SEED; PROV = party.map(() => "m"); }
 renderTreeFilter();
 syncEngine();
 render();

@@ -10,22 +10,42 @@ const cases = JSON.parse(fs.readFileSync(process.argv[4], "utf8"));
 const SWAP_EVERY = 6, SWAP_MAX_PARTY = 6;
 // mirrors REFINE_* in test_js_parity.py
 const REFINE_EVERY = 6, REFINE_MAX_PARTY = 6, REFINE_PASSES = 2;
+// mirrors FORGE_* in test_js_parity.py
+const FORGE_EVERY = 10, FORGE_SIZE = 8;
 
 const out = cases.map((c, i) => {
   const e = new CompEngine(dataset, c.content, c.size, c.style);
   const sp = i % SWAP_EVERY === 0 ? c.party.slice(0, SWAP_MAX_PARTY) : null;
   const rp = i % REFINE_EVERY === 0 ? c.party.slice(0, REFINE_MAX_PARTY) : null;
+  let forged = null;
+  if (i % FORGE_EVERY === 0) {
+    // mirrors forge_case in test_js_parity.py incl. the empty-locked-combos
+    // alternation (the [] truthiness divergence shipped once)
+    const combos = Math.floor(i / FORGE_EVERY) % 2 === 0 ? c.combos.slice(0, 2) : [];
+    const r = e.forge(FORGE_SIZE, c.party.slice(0, 2), combos, c.refine_pool);
+    forged = { party: r.party, combos: r.combos, score: r.score,
+               feasible: r.feasible, filler: r.filler, held: r.held };
+  }
   return {
     refine: rp === null ? null : e.refine(rp, REFINE_PASSES, c.refine_pool),
     comp_score: e.compScore(c.party),
+    comp_score_locked: e.compScore(c.party, c.combos),
+    redundancy: e.redundancy(c.party),
+    size_bucket: e.sizeBucket(),
+    forge: forged,
     swap: sp === null ? null : e.swapReview(sp).map((m) => ({
-      weapon: m.weapon, score: m.score, rank: m.rank,
+      weapon: m.weapon, score: m.score, rank: m.rank, off_comp: m.off_comp,
       options: m.options.map((o) => ({ weapon: o.weapon, score: o.score })),
     })),
     fitness: e.fitness(c.party),
+    fitness_locked: e.fitness(c.party, c.combos),
     synergy: e.synergy(c.party),
+    synergy_locked: e.synergy(c.party, c.combos),
     max_fitness: e.maxFitness(),
-    recommend: e.recommend(c.party, 5).map((r) => ({ weapon: r.weapon, score: r.score })),
+    recommend: e.recommend(c.party, 5).map((r) => ({
+      weapon: r.weapon, score: r.score, combo: r.combo })),
+    recommend_locked: e.recommend(c.party, 5, null, c.combos).map((r) => ({
+      weapon: r.weapon, score: r.score })),
     weaknesses: e.weaknesses(c.party, 5).map((g) => ({ cap: g.cap, gap: g.gap })),
     uncovered: e.uncoveredCaps(c.party).slice().sort(),
   };

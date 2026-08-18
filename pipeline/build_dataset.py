@@ -55,7 +55,7 @@ def display_name(line, key):
     return name
 
 
-def build_loadout(caps, evidence, line):
+def build_loadout(caps, evidence, line, uses=None):
     """Group a weapon's capabilities by the ability SLOT they come from, so the
     engine can enforce one-spell-per-slot (a player equips one Q, one W, one E,
     one passive — not the whole menu). Slot is auto-derived from each
@@ -63,26 +63,40 @@ def build_loadout(caps, evidence, line):
     (weapon_lines[key]["spells"], keyed q/w/e/passive). Capabilities from base
     stats / auto-attack (evidence WEAPON_STATS, no slot) are "always on".
 
-    Returns {"always": {cap: score}, "slots": [[bundle, ...], ...]} where each
-    bundle is one spell's {cap: score} and each inner list is the mutually-
-    exclusive choices for one slot. Measured 2026-08-14: 1278/1319 cap-entries
-    resolve to exactly one slot, 0 span multiple slots, 41 are WEAPON_STATS."""
+    A sheet may split ONE spell into mutually exclusive `use:` variants
+    (Chillhowl's Frozen Crystal saves an ALLY or freezes an ENEMY — never both
+    in the same moment); each (spell, use) pair becomes its own bundle in the
+    spell's slot, so the engine scores one use, not the union.
+
+    Returns {"always": {cap: score}, "slots": [[bundle, ...], ...],
+             "slot_names": [game slot per entry in slots],
+             "slot_spells": [[spell id per bundle], ...]} where each bundle is
+    one spell-use's {cap: score} and each inner list is the mutually-exclusive
+    choices for one slot. slot_names/slot_spells let the dashboard map a
+    player's actual Q/W/passive picks onto the scored bundles. Measured
+    2026-08-14: 1278/1319 cap-entries resolve to exactly one slot, 0 span
+    multiple slots, 41 are WEAPON_STATS."""
     spell_slot = {}
     for slot, ids in ((line or {}).get("spells", {}) or {}).items():
         for sid in ids:
             spell_slot.setdefault(sid, slot)
+    uses = uses or {}
     always, bundles = {}, {}
     for cap, score in caps.items():
         slot_spell = next(((spell_slot[sp], sp) for sp in evidence.get(cap, [])
                            if sp in spell_slot), None)
         if slot_spell:
-            bundles.setdefault(slot_spell, {})[cap] = score
+            key = slot_spell + (uses.get(cap),)
+            bundles.setdefault(key, {})[cap] = score
         else:
             always[cap] = score
-    slots = {}
-    for (slot, _sp), b in bundles.items():
+    slots, spells = {}, {}
+    for (slot, sp, _use), b in bundles.items():
         slots.setdefault(slot, []).append(b)
-    return {"always": always, "slots": list(slots.values())}
+        spells.setdefault(slot, []).append(sp)
+    names = list(slots)
+    return {"always": always, "slots": [slots[n] for n in names],
+            "slot_names": names, "slot_spells": [spells[n] for n in names]}
 
 
 def load_sheets(weapon_lines):
@@ -97,7 +111,7 @@ def load_sheets(weapon_lines):
             # curated always wins; never let illustrative overwrite it
             if weapons.get(key, {}).get("status") == "curated" and status != "curated":
                 continue
-            caps, evidence = {}, {}
+            caps, evidence, uses = {}, {}, {}
             for c in entry.get("capabilities", []):
                 if not isinstance(c, dict):
                     continue
@@ -111,6 +125,10 @@ def load_sheets(weapon_lines):
                     evidence.setdefault(cap, [])
                     if c["evidence"] not in evidence[cap]:
                         evidence[cap].append(c["evidence"])
+                # `use:` marks mutually exclusive uses of ONE spell — the
+                # capability lands in a use-specific loadout bundle
+                if c.get("use"):
+                    uses[cap] = c["use"]
             line = weapon_lines.get(key)
             weapons[key] = {
                 "unique_name": key,
@@ -129,7 +147,7 @@ def load_sheets(weapon_lines):
                 # one-spell-per-slot decomposition for loadout-aware scoring
                 # (engine reads this; flat `capabilities` stays for display +
                 # base-party supply). Auto-derived from evidence spell -> slot.
-                "loadout": build_loadout(caps, evidence, line),
+                "loadout": build_loadout(caps, evidence, line, uses),
             }
             sources[key] = os.path.relpath(path, HERE).replace("\\", "/")
 
@@ -193,7 +211,7 @@ def inject_positioning(weapons, item_stats):
 
 
 def load_templates():
-    templates, scoring, styles, mechanics = {}, {}, {}, {}
+    templates, scoring, styles, mechanics, composition = {}, {}, {}, {}, {}
     for path in sorted(glob.glob(os.path.join(HERE, "templates", "*.yaml"))):
         doc = _load_yaml(path)
         if not isinstance(doc, dict):
@@ -205,9 +223,11 @@ def load_templates():
             styles = doc.get("styles", {})
         elif base == "mechanics.yaml":
             mechanics = doc
+        elif base == "composition.yaml":
+            composition = doc
         else:
             templates[doc["content"]] = doc
-    return templates, scoring, styles, mechanics
+    return templates, scoring, styles, mechanics, composition
 
 
 def run_lint():
@@ -229,7 +249,7 @@ def main():
 
     weapon_lines = load_weapon_lines()
     weapons = load_sheets(weapon_lines)
-    templates, scoring, styles, mechanics = load_templates()
+    templates, scoring, styles, mechanics, composition = load_templates()
     stats_path = os.path.join(OUT, "item_stats.json")
     item_stats = {}
     if os.path.exists(stats_path):
@@ -268,6 +288,9 @@ def main():
         "scoring": scoring,
         "styles": styles,
         "mechanics": mechanics,
+        # Composition constraints + viability + size physics (composition.yaml)
+        # — what the FORGE may generate; never a bar to scoring a manual party.
+        "composition": composition,
     }
 
     os.makedirs(OUT, exist_ok=True)

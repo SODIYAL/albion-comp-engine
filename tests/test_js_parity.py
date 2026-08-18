@@ -26,6 +26,17 @@ N_CASES = 60
 SEED = 20260812
 
 
+def _combo_count(data, weapon):
+    """Number of one-spell-per-slot combos, from the dataset alone (both
+    engines derive the same enumeration from the same loadout record)."""
+    lo = data["weapons"][weapon].get("loadout") or {}
+    n = 1
+    for slot in lo.get("slots") or []:
+        if slot:
+            n *= len(slot)
+    return n
+
+
 def make_cases(data):
     rng = random.Random(SEED)
     weapons = sorted(data["weapons"])
@@ -39,9 +50,8 @@ def make_cases(data):
         # identity and target scaling is a no-op, so an all-base suite is
         # blind to the whole size path — a real rounding divergence shipped
         # behind a green 60/60 that way (review 2026-08-15). The variants
-        # cover shrunk/grown scaling, the exact .5 counts grow() produces
-        # (e.g. size 10/14 with 3-focus styles), and >30 for the large
-        # meta-prior bucket.
+        # cover shrunk/grown scaling, the piecewise size-physics breakpoints
+        # (10/14), and >30 for the large meta-prior bucket.
         size_opts = [base, max(2, base // 2), base + base // 2,
                      2 * base + 1, 10, 14]
         size = size_opts[(i // len(contents)) % len(size_opts)]
@@ -52,9 +62,14 @@ def make_cases(data):
         # resolves ties by iteration order, so the pool must be an ordered
         # list, identical on both sides, not a set.
         pool = weapons[(i % 7)::11]
+        party = [rng.choice(weapons) for _ in range(n)]
+        # loadout locks (2026-08-18): half the members carry a pinned combo
+        # index — the archetype path must agree between engines too
+        combos = [rng.randrange(_combo_count(data, w))
+                  if rng.random() < 0.5 else None for w in party]
         cases.append({"content": content, "size": size,
                       "style": styles[i % len(styles)],
-                      "party": [rng.choice(weapons) for _ in range(n)],
+                      "party": party, "combos": combos,
                       "refine_pool": pool})
     return cases
 
@@ -79,26 +94,63 @@ def refine_case(i, party):
     return party[:REFINE_MAX_PARTY] if i % REFINE_EVERY == 0 else None
 
 
+# forge() runs beam search + refinement — the heaviest call in either
+# engine. Every 10th case forges a small roster with the case's first two
+# party members locked, over the case's deterministic refine_pool. Sizes
+# stay modest so the parity run keeps its budget.
+FORGE_EVERY, FORGE_SIZE = 10, 8
+
+
+def forge_case(i, c):
+    if i % FORGE_EVERY != 0:
+        return None
+    # every second forge case passes an EMPTY locked_combos list — the
+    # engines must both pad it to len(locked) with defaults (an empty array
+    # is truthy in JS and falsy in Python; that divergence shipped once)
+    combos = c["combos"][:2] if (i // FORGE_EVERY) % 2 == 0 else []
+    return {"size": FORGE_SIZE, "locked": c["party"][:2],
+            "locked_combos": combos, "pool": c["refine_pool"]}
+
+
 def py_results(cases):
     out = []
     for i, c in enumerate(cases):
         e = Engine(content=c["content"], size=c["size"], style=c["style"])
         sp = swap_case(i, c["party"])
         rp = refine_case(i, c["party"])
+        fc = forge_case(i, c)
+        forged = None
+        if fc is not None:
+            r = e.forge(fc["size"], locked=fc["locked"],
+                        locked_combos=fc["locked_combos"], pool=fc["pool"])
+            forged = {"party": r["party"], "combos": r["combos"],
+                      "score": r["score"], "feasible": r["feasible"],
+                      "filler": r["filler"], "held": r["held"]}
         out.append({
             "refine": None if rp is None else e.refine(
                 rp, max_passes=REFINE_PASSES, pool=c["refine_pool"]),
             "comp_score": e.comp_score(c["party"]),
+            "comp_score_locked": e.comp_score(c["party"], c["combos"]),
+            "redundancy": e.redundancy(c["party"]),
+            "size_bucket": e.size_bucket(),
+            "forge": forged,
             "swap": None if sp is None else [
                 {"weapon": m["weapon"], "score": m["score"], "rank": m["rank"],
+                 "off_comp": m["off_comp"],
                  "options": [{"weapon": o["weapon"], "score": o["score"]}
                              for o in m["options"]]}
                 for m in e.swap_review(sp)],
             "fitness": e.fitness(c["party"]),
+            "fitness_locked": e.fitness(c["party"], c["combos"]),
             "synergy": e.synergy(c["party"]),
+            "synergy_locked": e.synergy(c["party"], c["combos"]),
             "max_fitness": e.max_fitness(),
-            "recommend": [{"weapon": r["weapon"], "score": r["score"]}
+            "recommend": [{"weapon": r["weapon"], "score": r["score"],
+                           "combo": r["combo"]}
                           for r in e.recommend(c["party"], 5)],
+            "recommend_locked": [{"weapon": r["weapon"], "score": r["score"]}
+                                 for r in e.recommend(c["party"], 5,
+                                                      combos=c["combos"])],
             "weaknesses": [{"cap": g["cap"], "gap": g["gap"]}
                            for g in e.weaknesses(c["party"], 5)],
             "uncovered": sorted(e.uncovered_caps(c["party"])),
@@ -135,23 +187,46 @@ def main():
         errs = []
         if a["refine"] is not None and a["refine"] != b["refine"]:
             errs.append(f"refine: py={a['refine']} js={b['refine']}")
-        for k in ("fitness", "synergy", "max_fitness", "comp_score"):
+        for k in ("fitness", "synergy", "max_fitness", "comp_score",
+                  "comp_score_locked", "fitness_locked", "synergy_locked",
+                  "redundancy"):
             if abs(a[k] - b[k]) > EPS:
                 errs.append(f"{k}: py={a[k]!r} js={b[k]!r}")
+        if a["size_bucket"] != b["size_bucket"]:
+            errs.append(f"size_bucket: py={a['size_bucket']} js={b['size_bucket']}")
+        if a["forge"] is not None:
+            fa, fb = a["forge"], b["forge"] or {}
+            if fa["party"] != fb.get("party") or fa["combos"] != fb.get("combos"):
+                errs.append(f"forge roster: py={fa['party']} js={fb.get('party')}")
+            elif abs(fa["score"] - fb.get("score", 1e9)) > EPS \
+                    or fa["feasible"] != fb.get("feasible") \
+                    or fa["filler"] != fb.get("filler") \
+                    or fa["held"] != fb.get("held"):
+                errs.append(f"forge result: py={fa} js={fb}")
         if [r["weapon"] for r in a["recommend"]] != [r["weapon"] for r in b["recommend"]]:
             errs.append(f"recommend order: py={[r['weapon'] for r in a['recommend']]} "
                         f"js={[r['weapon'] for r in b['recommend']]}")
         else:
             for ra, rb in zip(a["recommend"], b["recommend"]):
+                if abs(ra["score"] - rb["score"]) > EPS or ra["combo"] != rb["combo"]:
+                    errs.append(f"score {ra['weapon']}: py={ra['score']!r}/{ra['combo']} "
+                                f"js={rb['score']!r}/{rb['combo']}")
+        if [r["weapon"] for r in a["recommend_locked"]] != \
+                [r["weapon"] for r in b["recommend_locked"]]:
+            errs.append("locked recommend order differs")
+        else:
+            for ra, rb in zip(a["recommend_locked"], b["recommend_locked"]):
                 if abs(ra["score"] - rb["score"]) > EPS:
-                    errs.append(f"score {ra['weapon']}: py={ra['score']!r} js={rb['score']!r}")
+                    errs.append(f"locked score {ra['weapon']}: "
+                                f"py={ra['score']!r} js={rb['score']!r}")
         if [g["cap"] for g in a["weaknesses"]] != [g["cap"] for g in b["weaknesses"]]:
             errs.append("weakness order differs")
         if a["uncovered"] != b["uncovered"]:
             errs.append(f"uncovered: py={a['uncovered']} js={b['uncovered']}")
         if a["swap"] is not None:
             for ma, mb in zip(a["swap"], b["swap"] or []):
-                if ma["rank"] != mb["rank"] or abs(ma["score"] - mb["score"]) > EPS:
+                if ma["rank"] != mb["rank"] or abs(ma["score"] - mb["score"]) > EPS \
+                        or ma["off_comp"] != mb.get("off_comp"):
                     errs.append(f"swap {ma['weapon']}: py rank {ma['rank']} "
                                 f"score {ma['score']!r} vs js rank {mb['rank']} "
                                 f"score {mb['score']!r}")
@@ -170,6 +245,25 @@ def main():
     print(f"{N_CASES - bad}/{N_CASES} parity cases identical "
           f"(tolerance {EPS}, contents: {sorted(data['templates'])}, "
           f"styles: {sorted(data.get('styles') or {})})")
+
+    # The generated dashboard must embed THIS engine verbatim — a stale
+    # build means the public page scores with different math than the source
+    # both suites verified (2026-08-18).
+    with open(SCORING_JS, encoding="utf-8") as f:
+        engine_src = f.read()
+    for page in (os.path.join(ROOT, "dashboard", "index.html"),
+                 os.path.join(ROOT, "docs", "index.html")):
+        if not os.path.exists(page):
+            continue
+        with open(page, encoding="utf-8") as f:
+            if engine_src not in f.read():
+                print(f"FAIL: {os.path.relpath(page, ROOT)} does not embed the "
+                      "current app_scoring.js — rerun pipeline/build_dashboard.py")
+                bad += 1
+        # the check needs the raw source in the page; build_dashboard.py
+        # inlines it unminified precisely so this comparison stays byte-exact
+    if not bad:
+        print("dashboard embed check: generated pages carry the verified engine")
     return 1 if bad else 0
 
 

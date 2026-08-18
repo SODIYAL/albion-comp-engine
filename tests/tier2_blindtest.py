@@ -170,11 +170,16 @@ def v4(args):
             print(f"  skip {comp.get('id','?')}: no template for content "
                   f"{comp.get('content')!r}")
             continue
+        # A comp is evaluated under its own declared style (meta_comps.yaml
+        # `style:`, quoted from the comp's source — e.g. Timothy's blap is
+        # "(brawl comp)"). Default balanced. Scoring a deliberate melee ball
+        # under balanced misreads its missing ranged core as a deficiency.
+        style = comp.get("style", "balanced")
         for party in comp.get("parties", []):
             slots = [s for s in party.get("slots", [])
                      if s.get("weapons") and s.get("role") != "battlemount"]
             members = [s["weapons"][0] for s in slots]
-            e = Engine(content=content, size=len(members))
+            e = Engine(content=content, size=len(members), style=style)
             for i, slot in enumerate(slots):
                 rest = members[:i] + members[i+1:]
                 top = [r["weapon"] for r in e.recommend(rest, TOP_N)]
