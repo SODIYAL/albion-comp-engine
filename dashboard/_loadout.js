@@ -30,6 +30,23 @@ let LO_OPEN = null, LO_PICKING = null, LO_FILTER = "";
 const loGear = k => (typeof GEAR !== "undefined" && GEAR[k]) || null;
 const loName = k => (loGear(k) || {}).name || k;
 
+/* Gear art is HOTLINKED, not embedded — it is ~270 of the ~400 icons and
+   embedding it cost the page ~1.1 MB for a picker most sessions never open.
+   Weapon art stays inlined in ICONS (on screen from the first paint, and has
+   to survive file:// and offline). If ICONS happens to carry a gear key it
+   wins, so nothing breaks if that policy is reverted. `onerror` strips a
+   failed image rather than leaving a broken-image glyph. */
+function loArt(key, px){
+  if (typeof ICONS !== "undefined" && ICONS[key])
+    return `<img src="${ICONS[key]}" width="${px}" height="${px}" alt="" loading="lazy">`;
+  const item = (loGear(key) || {}).example_item;
+  if (!item) return "";
+  const base = (typeof RENDER_BASE !== "undefined") ? RENDER_BASE
+                                                    : "https://render.albiononline.com/v1";
+  return `<img src="${base}/item/${encodeURIComponent(item)}.png?size=96"
+    width="${px}" height="${px}" alt="" loading="lazy" onerror="this.remove()">`;
+}
+
 /* Items for one slot, name-sorted. Built once per slot on first use — the
    picker re-renders on every keystroke of the filter box. */
 const LO_BY_SLOT = {};
@@ -77,7 +94,8 @@ function loadoutDecode(str){
     LO_SLOTS.forEach((s, j) => {
       if (f[j] === undefined || f[j] === LO_UNSET) return;
       const key = dict[parseInt(f[j], 36)];
-      /* drop anything this build has no art for rather than render a hole */
+      /* drop anything this build's catalogue does not know, rather than
+         carry a key nothing can name or draw */
       if (key && loGear(key)) L[s] = key;
     });
     LO_SPELLS.forEach((s, j) => {
@@ -127,12 +145,11 @@ function loadoutClear(){ LOADOUT = []; LO_OPEN = null; LO_PICKING = null; }
 /* ---------------------------------------------------------------- render */
 function loTile(i, slot){
   const key = (LOADOUT[i] || {})[slot];
-  const art = key && typeof ICONS !== "undefined" && ICONS[key];
+  const art = key ? loArt(key, 34) : "";
   const picking = LO_PICKING && LO_PICKING.i === i && LO_PICKING.slot === slot;
   return `<button class="lo-tile${picking ? " on" : ""}${key ? " set" : ""}"
       data-lo-pick="${i}:${slot}" title="${esc(key ? loName(key) : LO_SLOT_LABEL[slot])}">
-    ${art ? `<img src="${art}" width="34" height="34" alt="" loading="lazy">`
-          : `<span class="lo-empty"></span>`}
+    ${art || `<span class="lo-empty"></span>`}
     <span class="lo-tag">${esc(LO_SLOT_LABEL[slot])}</span></button>`;
 }
 
@@ -155,8 +172,7 @@ function loPickerGrid(){
   const cur = (LOADOUT[i] || {})[slot];
   const cells = items.map(k =>
     `<button class="lo-opt${k === cur ? " on" : ""}" data-lo-set="${i}:${slot}:${k}" title="${esc(loName(k))}">
-      ${typeof ICONS !== "undefined" && ICONS[k]
-        ? `<img src="${ICONS[k]}" width="30" height="30" alt="" loading="lazy">` : ""}
+      ${loArt(k, 30)}
       <span>${esc(loName(k))}</span></button>`).join("");
   return `<div class="lo-picker">
     <div class="lo-picker-head">

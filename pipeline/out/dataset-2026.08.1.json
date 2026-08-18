@@ -17928,6 +17928,7 @@
     "buff_allies": 2,
     "cleanse": 2,
     "peel": 2,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "silence": 1,
     "stun": 2,
@@ -17963,7 +17964,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -18087,6 +18090,7 @@
     "cleanse": 2,
     "engage": 2,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "silence": 1,
     "slow": 1,
@@ -18126,7 +18130,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -19712,6 +19718,7 @@
     "buff_allies": 1,
     "burst_aoe": 1,
     "heal_reduction": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 1,
@@ -19748,7 +19755,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -19788,6 +19797,7 @@
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 3,
+    "ranged_presence": 1,
     "resist_shred": 2,
     "root": 1,
     "slow": 1,
@@ -19821,7 +19831,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -20155,6 +20167,7 @@
     "burst_aoe": 1,
     "knockback_displace": 2,
     "peel": 2,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 1,
@@ -20190,7 +20203,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -21201,6 +21216,7 @@
     "buff_allies": 1,
     "cleanse": 2,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "silence": 1,
     "sustained_dps": 1
@@ -21229,7 +21245,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -21268,6 +21286,7 @@
     "buff_allies": 2,
     "cleanse": 2,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "silence": 1,
     "sustained_dps": 1
@@ -21296,7 +21315,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -24238,6 +24259,7 @@
   "2H_LONGBOW": {
    "capabilities": {
     "burst_aoe": 2,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 2,
@@ -24269,6 +24291,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "sustained_dps": 2
     },
     "slots": [
@@ -24533,6 +24556,7 @@
     "heal_sustain": 2,
     "knockback_displace": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "self_sustain": 1,
     "slow": 1,
     "sustained_dps": 1,
@@ -24574,7 +24598,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -24620,6 +24646,7 @@
     "heal_sustain": 3,
     "knockback_displace": 1,
     "mobility": 1,
+    "ranged_presence": 1,
     "self_sustain": 1,
     "slow": 1,
     "sustained_dps": 1,
@@ -24661,7 +24688,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -24708,6 +24737,7 @@
     "heal_burst": 1,
     "heal_sustain": 3,
     "knockback_displace": 1,
+    "ranged_presence": 1,
     "self_sustain": 1,
     "slow": 1,
     "sustained_dps": 1,
@@ -24746,7 +24776,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -25966,6 +25998,7 @@
     "clump_create": 1,
     "mobility": 2,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "self_sustain": 1,
@@ -26011,7 +26044,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -26060,6 +26095,7 @@
     "engage": 2,
     "mobility": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "self_sustain": 1,
@@ -26107,7 +26143,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -26252,6 +26290,7 @@
     "catch": 1,
     "clump_create": 1,
     "peel": 1,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "self_sustain": 1,
@@ -26303,6 +26342,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
+     "ranged_presence": 1,
      "tankiness": 2
     },
     "slots": [
@@ -26347,6 +26387,7 @@
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 1,
@@ -26380,7 +26421,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -26762,6 +26805,7 @@
     "heal_burst": 1,
     "heal_sustain": 3,
     "knockback_displace": 1,
+    "ranged_presence": 1,
     "self_sustain": 1,
     "slow": 1,
     "sustained_dps": 1,
@@ -26800,7 +26844,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -26922,6 +26968,7 @@
     "cleanse": 2,
     "peel": 1,
     "purge": 2,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "silence": 1,
     "sustained_dps": 1
@@ -26956,7 +27003,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -27002,6 +27051,7 @@
     "cleanse": 2,
     "clump_create": 2,
     "peel": 2,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "silence": 1,
     "slow": 1,
@@ -27047,7 +27097,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -27181,6 +27233,7 @@
    "capabilities": {
     "buff_allies": 1,
     "burst_st": 2,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 1,
@@ -27214,7 +27267,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -27253,6 +27308,7 @@
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 1,
@@ -27286,7 +27342,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -27325,6 +27383,7 @@
     "heal_reduction": 2,
     "knockback_displace": 2,
     "peel": 2,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 1,
@@ -27364,7 +27423,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {
@@ -27406,6 +27467,7 @@
     "buff_allies": 1,
     "burst_aoe": 1,
     "purge": 2,
+    "ranged_presence": 1,
     "resist_shred": 1,
     "root": 1,
     "slow": 1,
@@ -27442,7 +27504,9 @@
    },
    "in_game_data": true,
    "loadout": {
-    "always": {},
+    "always": {
+     "ranged_presence": 1
+    },
     "slots": [
      [
       {

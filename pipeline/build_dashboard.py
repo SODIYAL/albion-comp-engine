@@ -206,7 +206,17 @@ def main():
     loadouts = load_loadouts(data["weapons"], gear_all)
     # Same rule the usage sample follows: inline only what the page can
     # actually draw, so a stale catalogue can never render a broken tile.
+    # `icons` stays the authority on WHICH items have art even though gear art
+    # is no longer embedded — 11 catalogue entries have none at any tier
+    # (Black Hands, decorative capes) and must not become empty tiles.
     gear = {k: v for k, v in gear_all.items() if k in icons}
+    # PAGE WEIGHT: embed weapon art only. Gear art is hotlinked from the render
+    # service at display size instead, the same way spell icons and the
+    # full-res dossier art already are. Gear is ~270 of the ~400 icons, so
+    # embedding it cost ~1.1 MB for a picker most sessions never open. Weapons
+    # stay embedded because they are on screen from the first paint and must
+    # survive file:// and offline use.
+    icons = {k: v for k, v in icons.items() if k in data["weapons"]}
     # Real-usage sample (sample_battles.py). Optional; display evidence only.
     usage_path = os.path.join(HERE, "out", "weapon_usage_v2.json")
     usage = {}
