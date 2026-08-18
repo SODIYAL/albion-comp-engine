@@ -5,6 +5,7 @@ inlined (design doc §6.1: static SPA, no backend, scoring in the client).
 
     dashboard/_shell.html   markup + CSS
     dashboard/_app.js       client (contains NO capability numbers)
+    dashboard/_loadout.js   per-member gear + spell picks (display only)
     out/dataset-latest.json the single source of truth
         │
         ▼
@@ -31,10 +32,70 @@ DASH = os.path.join(ROOT, "dashboard")
 DATASET = os.path.join(HERE, "out", "dataset-latest.json")
 
 
-def load_loadouts(weapons):
-    """Caller-provided skill loadouts from tests/meta_comps.yaml (the 'skills'
-    columns, e.g. Timothy's blap sheet). Keyed content -> weapon -> variants.
-    Only real caller data ever lands here — never invented."""
+# Caller sheets write gear as free text ("Knight Helmet", "Stalker Shoes",
+# "Ava pork omelette"). These normalise both sides before matching: drop the
+# tier adjective a catalogue name carries ("Adept's", "Minor", "Major"), drop
+# a curator's parenthetical ("Leather Hood(cleanse)"), and flatten
+# punctuation. Never guess — an ambiguous name stays raw text.
+TIER_WORDS = r"(?:adept's|expert's|master's|grandmaster's|elder's|minor|major|beginner's|novice's|journeyman's)"
+GEAR_FIELD_SLOT = {"helm": "head", "armor": "armor", "boots": "shoes",
+                   "cape": "cape", "offhand": "offhand"}
+
+
+def _norm_item(text):
+    text = re.sub(r"\(.*?\)", " ", text or "")        # "Leather Hood(cleanse)"
+    text = re.sub(TIER_WORDS, " ", text.lower())
+    text = re.sub(r"[^a-z0-9 ]+", " ", text)
+    return " ".join(text.split())
+
+
+def _token_prefix_match(caller_tokens, name_tokens):
+    """Every caller token is a prefix of a name token, in order — lets a
+    caller's "Ava pork omelette" reach "Avalonian Pork Omelette" without
+    letting unrelated items through."""
+    it = iter(name_tokens)
+    return all(any(n.startswith(tok) for n in it) for tok in caller_tokens)
+
+
+def match_gear(text, slot, catalogue):
+    """A catalogue key for free-text `text` in `slot`, or None when it is
+    absent or ambiguous. Callers keep the raw text when this returns None, so
+    a near-miss shows what the caller wrote instead of the wrong item."""
+    want = _norm_item(text)
+    if not want:
+        return None
+    cands = [(k, _norm_item(v["name"])) for k, v in catalogue.items()
+             if v["slot"] == slot]
+
+    def pick(hits):
+        if len(hits) == 1:
+            return hits[0]
+        if not hits:
+            return None
+        # Consumables are one line PER TIER, so "Gigantify Potion" legitimately
+        # matches Minor/base/Major. Prefer the plain tier — the one whose raw
+        # name carried no tier adjective — and only then call it decided.
+        plain = [k for k in hits
+                 if _norm_item(catalogue[k]["name"]) == catalogue[k]["name"].lower()]
+        return plain[0] if len(plain) == 1 else None
+
+    hit = pick([k for k, n in cands if n == want])
+    if hit:
+        return hit
+    hit = pick([k for k, n in cands if want in n])
+    if hit:
+        return hit
+    toks = want.split()
+    return pick([k for k, n in cands if _token_prefix_match(toks, n.split())])
+
+
+def load_loadouts(weapons, catalogue=None):
+    """Caller-provided loadouts from tests/meta_comps.yaml — the 'skills'
+    columns AND the gear/potion/food a caller wrote down (e.g. Timothy's blap
+    sheet). Keyed content -> weapon -> variants. Only real caller data ever
+    lands here — never invented; gear that cannot be matched to the catalogue
+    with confidence is carried as the caller's raw text under `raw`."""
+    catalogue = catalogue or {}
     path = os.path.join(ROOT, "tests", "meta_comps.yaml")
     if yaml is None or not os.path.exists(path):
         return {}
@@ -56,10 +117,26 @@ def load_loadouts(weapons):
                 w = slot["weapons"][0]
                 if w not in weapons:
                     continue
+                gear, raw = {}, {}
+                src = dict(slot.get("gear") or {})
+                src["potion"], src["food"] = slot.get("potion"), slot.get("food")
+                for field, gslot in list(GEAR_FIELD_SLOT.items()) +                         [("potion", "potion"), ("food", "food")]:
+                    text = src.get(field)
+                    if not text:
+                        continue
+                    key = match_gear(text, gslot, catalogue)
+                    if key:
+                        gear[gslot] = key
+                    else:
+                        raw[gslot] = text
                 variant = {"q": int(mm.group(1)), "w": int(mm.group(2)),
                            "p": int(mm.group(3)),
                            "role": slot.get("role_raw") or slot.get("role") or "",
                            "caller": caller}
+                if gear:
+                    variant["gear"] = gear
+                if raw:
+                    variant["raw"] = raw
                 bucket = out.setdefault(content, {}).setdefault(w, [])
                 if variant not in bucket:
                     bucket.append(variant)
@@ -78,6 +155,9 @@ def main():
     # tests/test_js_parity.py. _app.js contains rendering only.
     with open(os.path.join(HERE, "app_scoring.js"), encoding="utf-8") as f:
         scoring = f.read()
+    # Loadout layer — inlined BEFORE _app.js, which calls into it.
+    with open(os.path.join(DASH, "_loadout.js"), encoding="utf-8") as f:
+        loadout_js = f.read()
     with open(os.path.join(DASH, "_app.js"), encoding="utf-8") as f:
         app = f.read()
     # Item icons (fetch_icons.py). Optional: the page renders placeholders
@@ -111,20 +191,22 @@ def main():
         sp = (lines.get(k) or {}).get("spells") or {}
         spells[k] = {slot: [[sid, spell_name(sid)] for sid in sp.get(slot, [])]
                      for slot in ("q", "w", "e", "passive")}
-    loadouts = load_loadouts(data["weapons"])
     # Gear catalogue (fetch_gear_lines.py) — the loadout half: head, armor,
     # shoes, cape, offhand, potion, food. Optional, and DISPLAY ONLY for now:
     # no gear capabilities are curated yet, so the engine still scores weapons
     # alone. Shipping the catalogue + art first is what lets the loadout UI be
     # built against real items instead of placeholders.
     gear_path = os.path.join(HERE, "out", "gear_lines.json")
-    gear = {}
+    gear_all = {}
     if os.path.exists(gear_path):
         with open(gear_path, encoding="utf-8") as f:
-            gear = json.load(f)
-        # Same rule the usage sample follows: inline only what the page can
-        # actually draw, so a stale catalogue can never render a broken tile.
-        gear = {k: v for k, v in gear.items() if k in icons}
+            gear_all = json.load(f)
+    # Matched against the FULL catalogue: a caller's gear should resolve even
+    # if that item's art failed to fetch.
+    loadouts = load_loadouts(data["weapons"], gear_all)
+    # Same rule the usage sample follows: inline only what the page can
+    # actually draw, so a stale catalogue can never render a broken tile.
+    gear = {k: v for k, v in gear_all.items() if k in icons}
     # Real-usage sample (sample_battles.py). Optional; display evidence only.
     usage_path = os.path.join(HERE, "out", "weapon_usage_v2.json")
     usage = {}
@@ -180,7 +262,7 @@ def main():
            f"const LOADOUTS = {js(loadouts)};\n"
            f"const GEAR = {js(gear)};\n"
            f"const USAGE = {js(usage)};\n"
-           f"const PARITY_EXPECTED = {js(expected)};\n{app}</script>\n"
+           f"const PARITY_EXPECTED = {js(expected)};\n{loadout_js}\n{app}</script>\n"
            f"</body>\n</html>\n")
     path = os.path.join(DASH, "index.html")
     with open(path, "w", encoding="utf-8") as f:

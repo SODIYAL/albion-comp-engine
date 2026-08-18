@@ -124,6 +124,7 @@ py -3 pipeline/build_dataset.py      # sheets + templates -> out/dataset-latest.
 py -3 tests/test_golden.py           # golden regression cases (24)
 py -3 tests/test_js_parity.py        # JS scoring == Python engine (needs node)
 py -3 tests/test_patch_history.py    # patch-diff + staleness unit tests
+node tests/test_loadout_codec.js     # loadout permalink round-trip (12)
 py -3 pipeline/build_dashboard.py    # -> dashboard/index.html (the product page)
 ```
 

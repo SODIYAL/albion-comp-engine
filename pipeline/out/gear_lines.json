@@ -479,46 +479,6 @@
   "name": "Adept's Graveguard Helmet",
   "slot": "head"
  },
- "MEAL_SALAD": {
-  "example_item": "T4_MEAL_SALAD",
-  "name": "Turnip Salad",
-  "slot": "food"
- },
- "MEAL_SALAD_FISH": {
-  "example_item": "T4_MEAL_SALAD_FISH",
-  "name": "Midwater Octopus Salad",
-  "slot": "food"
- },
- "MEAL_SANDWICH": {
-  "example_item": "T4_MEAL_SANDWICH",
-  "name": "Goat Sandwich",
-  "slot": "food"
- },
- "MEAL_SANDWICH_AVALON": {
-  "example_item": "T4_MEAL_SANDWICH_AVALON",
-  "name": "Avalonian Goat Sandwich",
-  "slot": "food"
- },
- "MEAL_SANDWICH_FISH": {
-  "example_item": "T4_MEAL_SANDWICH_FISH",
-  "name": "Stonestream Lurcher Sandwich",
-  "slot": "food"
- },
- "MEAL_STEW": {
-  "example_item": "T4_MEAL_STEW",
-  "name": "Goat Stew",
-  "slot": "food"
- },
- "MEAL_STEW_AVALON": {
-  "example_item": "T4_MEAL_STEW_AVALON",
-  "name": "Avalonian Goat Stew",
-  "slot": "food"
- },
- "MEAL_STEW_FISH": {
-  "example_item": "T4_MEAL_STEW_FISH",
-  "name": "Greenriver Eel Stew",
-  "slot": "food"
- },
  "OFF_BOOK": {
   "example_item": "T4_OFF_BOOK",
   "name": "Adept's Tome of Spells",
@@ -608,41 +568,6 @@
   "example_item": "T4_OFF_TOWERSHIELD_UNDEAD",
   "name": "Adept's Sarcophagus",
   "slot": "offhand"
- },
- "POTION_BERSERK": {
-  "example_item": "T4_POTION_BERSERK",
-  "name": "Minor Berserk Potion",
-  "slot": "potion"
- },
- "POTION_COOLDOWN": {
-  "example_item": "T4_POTION_COOLDOWN",
-  "name": "Minor Poison Potion",
-  "slot": "potion"
- },
- "POTION_ENERGY": {
-  "example_item": "T4_POTION_ENERGY",
-  "name": "Energy Potion",
-  "slot": "potion"
- },
- "POTION_GATHER": {
-  "example_item": "T4_POTION_GATHER",
-  "name": "Minor Gathering Potion",
-  "slot": "potion"
- },
- "POTION_HEAL": {
-  "example_item": "T4_POTION_HEAL",
-  "name": "Healing Potion",
-  "slot": "potion"
- },
- "POTION_LAVA": {
-  "example_item": "T4_POTION_LAVA",
-  "name": "Minor Hellfire Potion",
-  "slot": "potion"
- },
- "POTION_TORNADO": {
-  "example_item": "T4_POTION_TORNADO",
-  "name": "Minor Tornado in a Bottle",
-  "slot": "potion"
  },
  "SHOES_CLOTH_AVALON": {
   "example_item": "T4_SHOES_CLOTH_AVALON",
@@ -808,5 +733,470 @@
   "example_item": "T4_SHOES_PLATE_UNDEAD",
   "name": "Adept's Graveguard Boots",
   "slot": "shoes"
+ },
+ "T1_MEAL_GRILLEDFISH": {
+  "example_item": "T1_MEAL_GRILLEDFISH",
+  "name": "Grilled Fish",
+  "slot": "food"
+ },
+ "T1_MEAL_SEAWEEDSALAD": {
+  "example_item": "T1_MEAL_SEAWEEDSALAD",
+  "name": "Seaweed Salad",
+  "slot": "food"
+ },
+ "T1_MEAL_SOUP": {
+  "example_item": "T1_MEAL_SOUP",
+  "name": "Carrot Soup",
+  "slot": "food"
+ },
+ "T1_MEAL_SOUP_FISH": {
+  "example_item": "T1_MEAL_SOUP_FISH",
+  "name": "Greenmoor Clam Soup",
+  "slot": "food"
+ },
+ "T2_MEAL_SALAD": {
+  "example_item": "T2_MEAL_SALAD",
+  "name": "Bean Salad",
+  "slot": "food"
+ },
+ "T2_MEAL_SALAD_FISH": {
+  "example_item": "T2_MEAL_SALAD_FISH",
+  "name": "Shallowshore Squid Salad",
+  "slot": "food"
+ },
+ "T2_POTION_ENERGY": {
+  "example_item": "T2_POTION_ENERGY",
+  "name": "Minor Energy Potion",
+  "slot": "potion"
+ },
+ "T2_POTION_HEAL": {
+  "example_item": "T2_POTION_HEAL",
+  "name": "Minor Healing Potion",
+  "slot": "potion"
+ },
+ "T3_MEAL_OMELETTE": {
+  "example_item": "T3_MEAL_OMELETTE",
+  "name": "Chicken Omelette",
+  "slot": "food"
+ },
+ "T3_MEAL_OMELETTE_AVALON": {
+  "example_item": "T3_MEAL_OMELETTE_AVALON",
+  "name": "Avalonian Chicken Omelette",
+  "slot": "food"
+ },
+ "T3_MEAL_OMELETTE_FISH": {
+  "example_item": "T3_MEAL_OMELETTE_FISH",
+  "name": "Lowriver Crab Omelette",
+  "slot": "food"
+ },
+ "T3_MEAL_PIE": {
+  "example_item": "T3_MEAL_PIE",
+  "name": "Chicken Pie",
+  "slot": "food"
+ },
+ "T3_MEAL_PIE_FISH": {
+  "example_item": "T3_MEAL_PIE_FISH",
+  "name": "Upland Coldeye Pie",
+  "slot": "food"
+ },
+ "T3_MEAL_ROAST": {
+  "example_item": "T3_MEAL_ROAST",
+  "name": "Roast Chicken",
+  "slot": "food"
+ },
+ "T3_MEAL_ROAST_FISH": {
+  "example_item": "T3_MEAL_ROAST_FISH",
+  "name": "Roasted Whitefog Snapper",
+  "slot": "food"
+ },
+ "T3_MEAL_SOUP": {
+  "example_item": "T3_MEAL_SOUP",
+  "name": "Wheat Soup",
+  "slot": "food"
+ },
+ "T3_MEAL_SOUP_FISH": {
+  "example_item": "T3_MEAL_SOUP_FISH",
+  "name": "Murkwater Clam Soup",
+  "slot": "food"
+ },
+ "T3_POTION_ACID": {
+  "example_item": "T3_POTION_ACID",
+  "name": "Minor Acid Potion",
+  "slot": "potion"
+ },
+ "T3_POTION_CLEANSE2": {
+  "example_item": "T3_POTION_CLEANSE2",
+  "name": "Minor Cleansing Potion",
+  "slot": "potion"
+ },
+ "T3_POTION_MOB_RESET": {
+  "example_item": "T3_POTION_MOB_RESET",
+  "name": "Minor Calming Potion",
+  "slot": "potion"
+ },
+ "T3_POTION_REVIVE": {
+  "example_item": "T3_POTION_REVIVE",
+  "name": "Minor Gigantify Potion",
+  "slot": "potion"
+ },
+ "T3_POTION_SLOWFIELD": {
+  "example_item": "T3_POTION_SLOWFIELD",
+  "name": "Minor Sticky Potion",
+  "slot": "potion"
+ },
+ "T3_POTION_STONESKIN": {
+  "example_item": "T3_POTION_STONESKIN",
+  "name": "Minor Resistance Potion",
+  "slot": "potion"
+ },
+ "T4_MEAL_SALAD": {
+  "example_item": "T4_MEAL_SALAD",
+  "name": "Turnip Salad",
+  "slot": "food"
+ },
+ "T4_MEAL_SALAD_FISH": {
+  "example_item": "T4_MEAL_SALAD_FISH",
+  "name": "Midwater Octopus Salad",
+  "slot": "food"
+ },
+ "T4_MEAL_SANDWICH": {
+  "example_item": "T4_MEAL_SANDWICH",
+  "name": "Goat Sandwich",
+  "slot": "food"
+ },
+ "T4_MEAL_SANDWICH_AVALON": {
+  "example_item": "T4_MEAL_SANDWICH_AVALON",
+  "name": "Avalonian Goat Sandwich",
+  "slot": "food"
+ },
+ "T4_MEAL_SANDWICH_FISH": {
+  "example_item": "T4_MEAL_SANDWICH_FISH",
+  "name": "Stonestream Lurcher Sandwich",
+  "slot": "food"
+ },
+ "T4_MEAL_STEW": {
+  "example_item": "T4_MEAL_STEW",
+  "name": "Goat Stew",
+  "slot": "food"
+ },
+ "T4_MEAL_STEW_AVALON": {
+  "example_item": "T4_MEAL_STEW_AVALON",
+  "name": "Avalonian Goat Stew",
+  "slot": "food"
+ },
+ "T4_MEAL_STEW_FISH": {
+  "example_item": "T4_MEAL_STEW_FISH",
+  "name": "Greenriver Eel Stew",
+  "slot": "food"
+ },
+ "T4_POTION_BERSERK": {
+  "example_item": "T4_POTION_BERSERK",
+  "name": "Minor Berserk Potion",
+  "slot": "potion"
+ },
+ "T4_POTION_COOLDOWN": {
+  "example_item": "T4_POTION_COOLDOWN",
+  "name": "Minor Poison Potion",
+  "slot": "potion"
+ },
+ "T4_POTION_ENERGY": {
+  "example_item": "T4_POTION_ENERGY",
+  "name": "Energy Potion",
+  "slot": "potion"
+ },
+ "T4_POTION_GATHER": {
+  "example_item": "T4_POTION_GATHER",
+  "name": "Minor Gathering Potion",
+  "slot": "potion"
+ },
+ "T4_POTION_HEAL": {
+  "example_item": "T4_POTION_HEAL",
+  "name": "Healing Potion",
+  "slot": "potion"
+ },
+ "T4_POTION_LAVA": {
+  "example_item": "T4_POTION_LAVA",
+  "name": "Minor Hellfire Potion",
+  "slot": "potion"
+ },
+ "T4_POTION_TORNADO": {
+  "example_item": "T4_POTION_TORNADO",
+  "name": "Minor Tornado in a Bottle",
+  "slot": "potion"
+ },
+ "T5_MEAL_OMELETTE": {
+  "example_item": "T5_MEAL_OMELETTE",
+  "name": "Goose Omelette",
+  "slot": "food"
+ },
+ "T5_MEAL_OMELETTE_AVALON": {
+  "example_item": "T5_MEAL_OMELETTE_AVALON",
+  "name": "Avalonian Goose Omelette",
+  "slot": "food"
+ },
+ "T5_MEAL_OMELETTE_FISH": {
+  "example_item": "T5_MEAL_OMELETTE_FISH",
+  "name": "Drybrook Crab Omelette",
+  "slot": "food"
+ },
+ "T5_MEAL_PIE": {
+  "example_item": "T5_MEAL_PIE",
+  "name": "Goose Pie",
+  "slot": "food"
+ },
+ "T5_MEAL_PIE_FISH": {
+  "example_item": "T5_MEAL_PIE_FISH",
+  "name": "Mountain Blindeye Pie",
+  "slot": "food"
+ },
+ "T5_MEAL_ROAST": {
+  "example_item": "T5_MEAL_ROAST",
+  "name": "Roast Goose",
+  "slot": "food"
+ },
+ "T5_MEAL_ROAST_FISH": {
+  "example_item": "T5_MEAL_ROAST_FISH",
+  "name": "Roasted Clearhaze Snapper",
+  "slot": "food"
+ },
+ "T5_MEAL_SOUP": {
+  "example_item": "T5_MEAL_SOUP",
+  "name": "Cabbage Soup",
+  "slot": "food"
+ },
+ "T5_MEAL_SOUP_FISH": {
+  "example_item": "T5_MEAL_SOUP_FISH",
+  "name": "Blackbog Clam Soup",
+  "slot": "food"
+ },
+ "T5_POTION_ACID": {
+  "example_item": "T5_POTION_ACID",
+  "name": "Acid Potion",
+  "slot": "potion"
+ },
+ "T5_POTION_CLEANSE2": {
+  "example_item": "T5_POTION_CLEANSE2",
+  "name": "Cleansing Potion",
+  "slot": "potion"
+ },
+ "T5_POTION_MOB_RESET": {
+  "example_item": "T5_POTION_MOB_RESET",
+  "name": "Calming Potion",
+  "slot": "potion"
+ },
+ "T5_POTION_REVIVE": {
+  "example_item": "T5_POTION_REVIVE",
+  "name": "Gigantify Potion",
+  "slot": "potion"
+ },
+ "T5_POTION_SLOWFIELD": {
+  "example_item": "T5_POTION_SLOWFIELD",
+  "name": "Sticky Potion",
+  "slot": "potion"
+ },
+ "T5_POTION_STONESKIN": {
+  "example_item": "T5_POTION_STONESKIN",
+  "name": "Resistance Potion",
+  "slot": "potion"
+ },
+ "T6_MEAL_SALAD": {
+  "example_item": "T6_MEAL_SALAD",
+  "name": "Potato Salad",
+  "slot": "food"
+ },
+ "T6_MEAL_SALAD_FISH": {
+  "example_item": "T6_MEAL_SALAD_FISH",
+  "name": "Deepwater Kraken Salad",
+  "slot": "food"
+ },
+ "T6_MEAL_SANDWICH": {
+  "example_item": "T6_MEAL_SANDWICH",
+  "name": "Mutton Sandwich",
+  "slot": "food"
+ },
+ "T6_MEAL_SANDWICH_AVALON": {
+  "example_item": "T6_MEAL_SANDWICH_AVALON",
+  "name": "Avalonian Mutton Sandwich",
+  "slot": "food"
+ },
+ "T6_MEAL_SANDWICH_FISH": {
+  "example_item": "T6_MEAL_SANDWICH_FISH",
+  "name": "Rushwater Lurcher Sandwich",
+  "slot": "food"
+ },
+ "T6_MEAL_STEW": {
+  "example_item": "T6_MEAL_STEW",
+  "name": "Mutton Stew",
+  "slot": "food"
+ },
+ "T6_MEAL_STEW_AVALON": {
+  "example_item": "T6_MEAL_STEW_AVALON",
+  "name": "Avalonian Mutton Stew",
+  "slot": "food"
+ },
+ "T6_MEAL_STEW_FISH": {
+  "example_item": "T6_MEAL_STEW_FISH",
+  "name": "Redspring Eel Stew",
+  "slot": "food"
+ },
+ "T6_POTION_BERSERK": {
+  "example_item": "T6_POTION_BERSERK",
+  "name": "Berserk Potion",
+  "slot": "potion"
+ },
+ "T6_POTION_COOLDOWN": {
+  "example_item": "T6_POTION_COOLDOWN",
+  "name": "Poison Potion",
+  "slot": "potion"
+ },
+ "T6_POTION_ENERGY": {
+  "example_item": "T6_POTION_ENERGY",
+  "name": "Major Energy Potion",
+  "slot": "potion"
+ },
+ "T6_POTION_GATHER": {
+  "example_item": "T6_POTION_GATHER",
+  "name": "Gathering Potion",
+  "slot": "potion"
+ },
+ "T6_POTION_HEAL": {
+  "example_item": "T6_POTION_HEAL",
+  "name": "Major Healing Potion",
+  "slot": "potion"
+ },
+ "T6_POTION_LAVA": {
+  "example_item": "T6_POTION_LAVA",
+  "name": "Hellfire Potion",
+  "slot": "potion"
+ },
+ "T6_POTION_TORNADO": {
+  "example_item": "T6_POTION_TORNADO",
+  "name": "Tornado in a Bottle",
+  "slot": "potion"
+ },
+ "T7_MEAL_OMELETTE": {
+  "example_item": "T7_MEAL_OMELETTE",
+  "name": "Pork Omelette",
+  "slot": "food"
+ },
+ "T7_MEAL_OMELETTE_AVALON": {
+  "example_item": "T7_MEAL_OMELETTE_AVALON",
+  "name": "Avalonian Pork Omelette",
+  "slot": "food"
+ },
+ "T7_MEAL_OMELETTE_FISH": {
+  "example_item": "T7_MEAL_OMELETTE_FISH",
+  "name": "Dusthole Crab Omelette",
+  "slot": "food"
+ },
+ "T7_MEAL_PIE": {
+  "example_item": "T7_MEAL_PIE",
+  "name": "Pork Pie",
+  "slot": "food"
+ },
+ "T7_MEAL_PIE_FISH": {
+  "example_item": "T7_MEAL_PIE_FISH",
+  "name": "Frostpeak Deadeye Pie",
+  "slot": "food"
+ },
+ "T7_MEAL_ROAST": {
+  "example_item": "T7_MEAL_ROAST",
+  "name": "Roast Pork",
+  "slot": "food"
+ },
+ "T7_MEAL_ROAST_FISH": {
+  "example_item": "T7_MEAL_ROAST_FISH",
+  "name": "Roasted Puremist Snapper",
+  "slot": "food"
+ },
+ "T7_POTION_ACID": {
+  "example_item": "T7_POTION_ACID",
+  "name": "Major Acid Potion",
+  "slot": "potion"
+ },
+ "T7_POTION_CLEANSE2": {
+  "example_item": "T7_POTION_CLEANSE2",
+  "name": "Major Cleansing Potion",
+  "slot": "potion"
+ },
+ "T7_POTION_MOB_RESET": {
+  "example_item": "T7_POTION_MOB_RESET",
+  "name": "Major Calming Potion",
+  "slot": "potion"
+ },
+ "T7_POTION_REVIVE": {
+  "example_item": "T7_POTION_REVIVE",
+  "name": "Major Gigantify Potion",
+  "slot": "potion"
+ },
+ "T7_POTION_SLOWFIELD": {
+  "example_item": "T7_POTION_SLOWFIELD",
+  "name": "Major Sticky Potion",
+  "slot": "potion"
+ },
+ "T7_POTION_STONESKIN": {
+  "example_item": "T7_POTION_STONESKIN",
+  "name": "Major Resistance Potion",
+  "slot": "potion"
+ },
+ "T8_MEAL_SANDWICH": {
+  "example_item": "T8_MEAL_SANDWICH",
+  "name": "Beef Sandwich",
+  "slot": "food"
+ },
+ "T8_MEAL_SANDWICH_AVALON": {
+  "example_item": "T8_MEAL_SANDWICH_AVALON",
+  "name": "Avalonian Beef Sandwich",
+  "slot": "food"
+ },
+ "T8_MEAL_SANDWICH_FISH": {
+  "example_item": "T8_MEAL_SANDWICH_FISH",
+  "name": "Thunderfall Lurcher Sandwich",
+  "slot": "food"
+ },
+ "T8_MEAL_STEW": {
+  "example_item": "T8_MEAL_STEW",
+  "name": "Beef Stew",
+  "slot": "food"
+ },
+ "T8_MEAL_STEW_AVALON": {
+  "example_item": "T8_MEAL_STEW_AVALON",
+  "name": "Avalonian Beef Stew",
+  "slot": "food"
+ },
+ "T8_MEAL_STEW_FISH": {
+  "example_item": "T8_MEAL_STEW_FISH",
+  "name": "Deadwater Eel Stew",
+  "slot": "food"
+ },
+ "T8_POTION_BERSERK": {
+  "example_item": "T8_POTION_BERSERK",
+  "name": "Major Berserk Potion",
+  "slot": "potion"
+ },
+ "T8_POTION_CLEANSE": {
+  "example_item": "T8_POTION_CLEANSE",
+  "name": "Invisibility Potion",
+  "slot": "potion"
+ },
+ "T8_POTION_COOLDOWN": {
+  "example_item": "T8_POTION_COOLDOWN",
+  "name": "Major Poison Potion",
+  "slot": "potion"
+ },
+ "T8_POTION_GATHER": {
+  "example_item": "T8_POTION_GATHER",
+  "name": "Major Gathering Potion",
+  "slot": "potion"
+ },
+ "T8_POTION_LAVA": {
+  "example_item": "T8_POTION_LAVA",
+  "name": "Major Hellfire Potion",
+  "slot": "potion"
+ },
+ "T8_POTION_TORNADO": {
+  "example_item": "T8_POTION_TORNADO",
+  "name": "Major Tornado in a Bottle",
+  "slot": "potion"
  }
 }

@@ -16,14 +16,23 @@ weapons — blap runs three Leather Hood(cleanse) slots and zero cleanse
 weapons"). This file is step one: the catalogue and its art. Capability
 curation for gear is a separate job and deliberately NOT done here.
 
-Keys drop the tier prefix the same way weapon keys do (T4_HEAD_PLATE_SET1 ->
-HEAD_PLATE_SET1), so gear and weapon keys share one namespace without
-colliding: weapons are 2H_*/MAIN_*, gear is HEAD_*/ARMOR_*/SHOES_*/CAPE*/
-OFF_*/POTION_*/MEAL_*.
+Gear and weapon keys share one namespace without colliding: weapons are
+2H_*/MAIN_*, gear is HEAD_*/ARMOR_*/SHOES_*/CAPE*/OFF_* and T<n>_POTION_*/
+T<n>_MEAL_*. Worn keys drop the tier prefix the way weapon keys do
+(T4_HEAD_PLATE_SET1 -> HEAD_PLATE_SET1); consumables keep theirs, for the
+reason below.
 
-T4 is the canonical tier for the render URL, matching weapon_lines.py's
-example_item convention — icon art is per line, not per tier, and @1/@2/@3
-enchantment variants share the same art, so they are skipped.
+Tiering differs by slot and this matters:
+  - WORN slots (head/armor/shoes/cape/offhand) are one line across T4-T8, so
+    T4 is the canonical tier for the render URL, matching weapon_lines.py's
+    example_item convention.
+  - CONSUMABLES are a DIFFERENT ITEM LINE PER TIER — T5_MEAL_OMELETTE and
+    T7_MEAL_ROAST are not tiers of one thing. Restricting them to T4 dropped
+    every potion and food a ZvZ actually uses: blap runs Gigantify Potion and
+    an Avalonian pork omelette, neither of which exists at T4. So consumables
+    are enumerated across all tiers and keep the tier in their key.
+
+@1/@2/@3 enchantment variants share their line's art and are skipped.
 
 Usage:  py -3 pipeline/fetch_gear_lines.py
 """
@@ -43,17 +52,29 @@ LINE = re.compile(r'^\s*\d+:\s*(\S+)\s*:\s*(.*?)\s*$')
 # real ZvZ factor but meta_comps.yaml already excludes mount slots from comps,
 # so pulling ~90 mount lines in would be catalogue weight with nothing reading
 # it. Add it when the engine actually scores mounts.
-SLOT = re.compile(r'^T4_(HEAD|ARMOR|SHOES|CAPE|OFF|POTION|MEAL)')
+WORN = re.compile(r'^T4_(HEAD|ARMOR|SHOES|CAPE|OFF)')
+CONSUMABLE = re.compile(r'^T\d_(POTION|MEAL)')
 
 
-def slot_of(uid):
-    """Bucket a unique_name into a loadout slot. CAPE has no underscore in the
-    plain-cape case (T4_CAPE), hence the prefix match rather than a split."""
-    m = SLOT.match(uid)
-    if not m:
-        return None
-    raw = m.group(1)
-    return {"OFF": "offhand", "MEAL": "food"}.get(raw, raw.lower())
+RENAME = {"OFF": "offhand", "MEAL": "food"}
+
+
+def classify(uid):
+    """(slot, catalogue_key) for a unique_name, or None if it is not loadout
+    gear. CAPE has no underscore in the plain-cape case (T4_CAPE), hence the
+    prefix match rather than a split.
+
+    Worn keys drop the tier prefix (weapons do the same); consumable keys KEEP
+    it, because each tier is a distinct item rather than a tier of one line."""
+    m = WORN.match(uid)
+    if m:
+        raw = m.group(1)
+        return RENAME.get(raw, raw.lower()), uid[3:]
+    m = CONSUMABLE.match(uid)
+    if m:
+        raw = m.group(1)
+        return RENAME.get(raw, raw.lower()), uid
+    return None
 
 
 def main():
@@ -70,10 +91,10 @@ def main():
         if "@" in uid:            # enchantment variant — same art, same line
             skipped += 1
             continue
-        slot = slot_of(uid)
-        if not slot:
+        hit = classify(uid)
+        if not hit:
             continue
-        key = uid[3:]             # strip the T4_ tier prefix
+        slot, key = hit
         if key in gear:           # items.txt repeats lines; first wins
             continue
         gear[key] = {"slot": slot, "example_item": uid, "name": name}

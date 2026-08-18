@@ -199,11 +199,18 @@ function loadHash(){
      party (saveHash omits p= when empty, so restore must mirror that);
      cap at HARD_CAP like every other roster path */
   party = p.p ? p.p.split(",").filter(w => WEAPONS[w]).slice(0, HARD_CAP) : [];
+  /* `g` is optional and always has been — a link without it is a weapons-only
+     comp, which is every link shared before loadouts existed. */
+  LOADOUT = p.g ? loadoutDecode(p.g).slice(0, HARD_CAP) : [];
+  LO_OPEN = null; LO_PICKING = null; LO_FILTER = "";
   syncEngine();
   return true;
 }
 function saveHash(){
-  const h = `c=${CONTENT}&n=${PLANNED}${STYLE !== "balanced" ? "&st=" + STYLE : ""}${party.length ? "&p=" + party.join(",") : ""}`;
+  /* omitted entirely when no member has a loadout, so a plain comp's link is
+     byte-for-byte what it was before this feature existed */
+  const g = loadoutEncode();
+  const h = `c=${CONTENT}&n=${PLANNED}${STYLE !== "balanced" ? "&st=" + STYLE : ""}${party.length ? "&p=" + party.join(",") : ""}${g ? "&g=" + g : ""}`;
   history.replaceState(null, "", "#" + h);
   try { localStorage.setItem("compforge", h); } catch (e) { /* file:// may deny */ }
 }
@@ -348,7 +355,11 @@ function renderRoster(){
     `<div class="slot ${roleCls(w)}"${roleBg(w)}><span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 32)}
       <span class="nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>${badgeHtml(w)}
         <span class="fn">${roleOf(w)} · ${signed(contrib[i])} fit${flag(i)}</span>${hintable.has(i) ? swapHint(review[i], i) : ""}</span>
-      <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>`); });
+      <button class="lo-open${LO_OPEN === i ? " on" : ""}" data-lo-open="${i}"
+        aria-expanded="${LO_OPEN === i}" aria-label="Loadout for ${nameOf(w)}"
+        >kit${loadoutCount(i) ? `<i>${loadoutCount(i)}</i>` : ""}</button>
+      <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>
+      ${loadoutPanel(i)}`); });
   if (PARTY_FACET){
     rows.push(`<div class="slot more">${idxs.length} of ${party.length} — ${esc(PARTY_FACET)} only · click the chip again for all</div>`);
   } else {
@@ -869,6 +880,9 @@ function flashBtn(id, text, back){
 }
 
 document.addEventListener("click", e => {
+  /* loadout layer first: its controls live inside party rows, so a later
+     [data-remove]/[data-detail] match must not swallow them */
+  if (loadoutHandleClick(e)){ render(); return; }
   /* chip facets first: badges/role chips nest inside add/detail buttons,
      so they must win the closest() race */
   const pf = e.target.closest("[data-pfilter]");
@@ -894,6 +908,7 @@ document.addEventListener("click", e => {
   const add = e.target.closest("[data-add]");
   if (add){ if (party.length < HARD_CAP){
     party.push(add.dataset.add);
+    loadoutInsert(party.length - 1);   /* prefill from the caller reference */
     PARTY_FACET = null;   /* the new member must be visible */
     render(); } return; }
   if (e.target.closest("#forge")){
@@ -916,12 +931,16 @@ document.addEventListener("click", e => {
       party.length = 0;
       party.push(...refined);
     }
+    /* forge rewrites the roster wholesale — rebuild the loadout slots to
+       match, prefilling each from its caller reference */
+    loadoutClear();
+    party.forEach((_, i) => loadoutPrefill(i));
     PARTY_FACET = null;   /* show the whole forged comp, not a filtered view */
     render();
     return;
   }
   const rm = e.target.closest("[data-remove]");
-  if (rm){ party.splice(+rm.dataset.remove, 1); render(); return; }
+  if (rm){ const ri = +rm.dataset.remove; party.splice(ri, 1); loadoutRemove(ri); render(); return; }
   if (e.target.closest("#companion-connect")){ toggleCompanion(); return; }
   if (e.target.closest("#companion-load")){ loadCompanionParty(); return; }
   if (e.target.closest("#clear")){
@@ -930,7 +949,7 @@ document.addEventListener("click", e => {
     const b = $("clear");
     if (b.dataset.armed === "1"){
       delete b.dataset.armed; b.textContent = "clear comp";
-      party = []; PARTY_FACET = null; render();
+      party = []; loadoutClear(); PARTY_FACET = null; render();
     } else {
       b.dataset.armed = "1"; b.textContent = "really clear? click again";
       setTimeout(() => { delete b.dataset.armed; b.textContent = "clear comp"; }, 2200);
@@ -960,7 +979,8 @@ document.addEventListener("click", e => {
   if (!e.target.closest("#drawer")) $("drawer").dataset.open = "false";
 });
 document.addEventListener("change", e => {
-  if (e.target.id === "content"){ CONTENT = e.target.value; PLANNED = baseSize(); party = []; PARTY_FACET = null; render(); }
+  if (loadoutHandleChange(e)){ render(); return; }
+  if (e.target.id === "content"){ CONTENT = e.target.value; PLANNED = baseSize(); party = []; loadoutClear(); PARTY_FACET = null; render(); }
   if (e.target.id === "style"){ STYLE = e.target.value; render(); }
   if (e.target.id === "tree-filter"){ treeFilter = e.target.value; renderPicker(); }
   if (e.target.id === "size-input"){
@@ -969,6 +989,15 @@ document.addEventListener("change", e => {
   }
 });
 document.addEventListener("input", e => {
+  if (loadoutHandleInput(e)){
+    /* the filter box lives inside the party list, so render() replaces the
+       node the user is typing in — put the caret back where it was */
+    const at = e.target.selectionStart;
+    render();
+    const box = $("lo-filter");
+    if (box){ box.focus(); try { box.setSelectionRange(at, at); } catch (err) { /* type=search */ } }
+    return;
+  }
   if (e.target.id === "pick-filter"){ pickFilter = e.target.value; renderPicker(); }
 });
 document.addEventListener("keydown", e => {
@@ -989,7 +1018,8 @@ document.addEventListener("keydown", e => {
 $("pick-filter").addEventListener("keydown", e => {
   if (e.key !== "Enter") return;
   const keys = filteredWeapons();
-  if (keys.length && party.length < HARD_CAP){ party.push(keys[0]); render(); }
+  if (keys.length && party.length < HARD_CAP){
+    party.push(keys[0]); loadoutInsert(party.length - 1); render(); }
 });
 /* A pasted share-link hash applies without a reload. saveHash() uses
    replaceState, which never fires hashchange, so this cannot loop. The
