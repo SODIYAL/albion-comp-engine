@@ -178,8 +178,18 @@ check("analyzer reports strengths, cc coverage and profiles",
 
 # ---- seed-data integrity --------------------------------------------------------
 inter = BASE["interactions"]
-check("all 9 seed spells are embedded in the dataset",
-      len(inter) == 9 and "DEATHCURSE2" in inter and "SPEEDARCHER_KITE" in inter)
+check("all curated spells are embedded in the dataset (9 seeds + the "
+      "19-spell structural-reflect backlog)",
+      len(inter) == 28 and "DEATHCURSE2" in inter and "SPEEDARCHER_KITE" in inter
+      and "METEOR" in inter and "THORNSAREA" in inter)
+check("the structural-reflect curation backlog is empty",
+      json.load(open(os.path.join(PIPELINE, "out", "interactions.json"),
+                     encoding="utf-8"))["_meta"]["structural_unclaimed"] == [])
+check("interrupt facts derive from the descriptions' own words",
+      inter["ENFEEBLEBLADES"]["interrupt"]["uninterruptible"] is True
+      and "UNINTERRUPTIBLE" in inter["ENFEEBLEBLADES"]["badges"]
+      and inter["GROWING_PUNCH"]["interrupt"]["uninterruptible"] is True
+      and inter["METEOR"]["interrupt"]["uninterruptible"] is None)
 check("Death Curse carries the verified shared Vile-Curse-Charge model",
       inter["DEATHCURSE2"]["duplicate"] == "shared_stack"
       and inter["DEATHCURSE2"]["confidence"] == "verified")

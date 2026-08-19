@@ -246,3 +246,425 @@
       cc_type: slow
       cleanse: unknown
       duplicate: unknown
+
+# ---------------------------------------------------------------------------
+# Batch 2 (2026-08-19): the structural-reflect backlog — every spell whose
+# description states reflect facts, curated with the same discipline as the
+# seeds. Ground zones from independent casters are independent areas
+# (duplicate: full for the zone component); named debuff/CC stacking across
+# casters stays unknown unless the game says otherwise.
+
+- spell: ENFEEBLEBLADES
+  effect_name: "Enfeeble Blades (purging zone)"
+  duplicate: partial
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: channel "(cannot be
+    interrupted)", blade damage "(this damage cannot be reflected)",
+    "Purges all buffs of enemies within the area."
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: [PURGE]
+  components:
+    - id: blade_zone
+      kind: ground_dot
+      reflect: non_reflectable
+      duplicate: full
+      notes: "independent zones per caster"
+    - id: buff_purge
+      kind: debuff
+      reflect: not_applicable
+      duplicate: unknown
+      notes: "strips enemy buffs in the area; duplicate-caster value unstated"
+
+- spell: EXPLODING_SHOT
+  effect_name: "Exploding Shot (sticky bomb)"
+  duplicate: unknown
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: initial hit, then the bomb
+    "explodes ... (the damage can't be reflected)". Whether two bombs
+    coexist on one target is not stated.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: sticky_hit
+      kind: damage
+      reflect: unknown
+      duplicate: unknown
+    - id: delayed_explosion
+      kind: damage
+      reflect: non_reflectable
+      duplicate: unknown
+
+- spell: FIREARTILLERY
+  effect_name: "Fire Artillery (orbs + burning patches, burn stacks to 4)"
+  duplicate: partial
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: orbs in a 3 radius, burning
+    patch ignite "(stacks up to 4 times)" whose damage "cannot be
+    reflected". Whether two casters share the 4-stack cap is not stated.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: orb_hits
+      kind: damage
+      reflect: unknown
+      duplicate: full
+    - id: burning_patch
+      kind: ground_dot
+      reflect: non_reflectable
+      duplicate: unknown
+      notes: "ignite stacks up to 4; cross-caster cap sharing unstated"
+
+- spell: FIRESTAFFBOLT_AOE
+  effect_name: "Burning Field (hit + ground fire)"
+  duplicate: full
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: 3-radius hit, ground fire
+    "(this damage cannot be reflected)". Independent areas per caster.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: orb_hit
+      kind: damage
+      reflect: unknown
+      duplicate: full
+    - id: ground_fire
+      kind: ground_dot
+      reflect: non_reflectable
+      duplicate: full
+
+- spell: FIREWALL
+  effect_name: "Wall of Flames (wall + aflame fear)"
+  duplicate: partial
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: firewall damage over time
+    "(this damage cannot be reflected)"; "Enemies set aflame will flee" —
+    a fear. Fear stacking across casters unstated.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: wall_burn
+      kind: dot
+      reflect: non_reflectable
+      duplicate: full
+      notes: "independent walls per caster"
+    - id: aflame_fear
+      kind: cc
+      cc_type: fear
+      cleanse: unknown
+      duplicate: unknown
+
+- spell: FLAMETORNADO
+  effect_name: "Flame Tornado (moving zone + lingering burn)"
+  duplicate: full
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: tornado zone ticks; enemies
+    leaving keep taking damage "(damage can't be reflected)". Independent
+    tornadoes per caster.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: tornado_zone
+      kind: ground_dot
+      reflect: unknown
+      duplicate: full
+    - id: lingering_burn
+      kind: dot
+      reflect: non_reflectable
+      cleanse: unknown
+      duplicate: unknown
+
+- spell: GLACIALFIELD
+  effect_name: "Frozen Hell (blizzard; slow ignores CC Resistance)"
+  duplicate: partial
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: blizzard ticks "(this damage
+    cannot be reflected)"; "Slows by 0.5 (ignores Crowd Control
+    Resistance)" plus a stronger center slow, also ignoring CC Resistance.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: blizzard
+      kind: ground_dot
+      reflect: non_reflectable
+      duplicate: full
+      notes: "independent zones per caster"
+    - id: zone_slow
+      kind: cc
+      cc_type: slow
+      cleanse: unknown
+      duplicate: unknown
+      notes: "verified: ignores Crowd Control Resistance (both rings)"
+
+- spell: GROUNDMINE
+  effect_name: "Explosive Mine (first player triggers)"
+  duplicate: full
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: "The first player to step on
+    the mine will activate it ... (the damage can't be reflected)".
+    Independent mines per caster.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: mine_explosion
+      kind: damage
+      reflect: non_reflectable
+      duplicate: full
+
+- spell: GROWING_PUNCH
+  effect_name: "Earth Crusher (charged self-centered blast)"
+  duplicate: full
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: channel "(can't be
+    interrupted)"; damage/radius scale with channel time "(this damage
+    cannot be reflected)". Each caster charges their own blast.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: charged_blast
+      kind: damage
+      reflect: non_reflectable
+      duplicate: full
+
+- spell: HELL_ARROW
+  effect_name: "Demon Arrow (ramping pierce line)"
+  duplicate: full
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: pierces all enemies, player
+    damage ramps per enemy already hit "(the damage can't be reflected)".
+    Independent arrows per caster.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: piercing_arrow
+      kind: damage
+      reflect: non_reflectable
+      duplicate: full
+
+- spell: HUMAN_TORCH
+  effect_name: "Combustion (burn + AoE fear + fiery trail)"
+  duplicate: partial
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: target burn; "The burning
+    enemy and all enemies within a 4 radius will flee" — a fear; the trail
+    damage "(the damage can't be reflected)".
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: target_burn
+      kind: dot
+      reflect: unknown
+      cleanse: unknown
+      duplicate: unknown
+    - id: flee_fear
+      kind: cc
+      cc_type: fear
+      cleanse: unknown
+      duplicate: unknown
+    - id: fiery_trail
+      kind: ground_dot
+      reflect: non_reflectable
+      duplicate: full
+
+- spell: ICEROCK_EXPLODE
+  effect_name: "Avalanche (rolling snowball + knockback + trail)"
+  duplicate: full
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: rolling damage "(damage
+    cannot be reflected)", knockback 10, freezing trail slow, terrain
+    explosion. Independent snowballs per caster.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: snowball
+      kind: damage
+      reflect: non_reflectable
+      duplicate: full
+    - id: knockback
+      kind: cc
+      cc_type: knockback
+      reflect: not_applicable
+      cleanse: unknown
+      duplicate: full
+    - id: freezing_trail
+      kind: cc
+      cc_type: slow
+      cleanse: unknown
+      duplicate: full
+
+- spell: ICESTORM2
+  effect_name: "Ice Storm (moving zone)"
+  duplicate: full
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: moving storm ticks "(the
+    damage can't be reflected)". Independent storms per caster.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: storm_zone
+      kind: ground_dot
+      reflect: non_reflectable
+      duplicate: full
+
+- spell: MAGMASPHERE
+  effect_name: "Magma Sphere (roll + max-Health true damage vs unmounted)"
+  duplicate: partial
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: rolling 240 damage; unmounted
+    players take a share of Max Health as true damage over time "(this
+    damage can't be reflected)". Cross-caster stacking of the burn unstated.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: [MAX-HP DAMAGE]
+  components:
+    - id: rolling_hit
+      kind: damage
+      reflect: unknown
+      duplicate: full
+    - id: maxhp_true_burn
+      kind: dot
+      reflect: non_reflectable
+      cleanse: unknown
+      duplicate: unknown
+      notes: "percentage-of-Max-Health TRUE damage, unmounted players only"
+
+- spell: METEOR
+  effect_name: "Meteor (delayed burst + knockback)"
+  duplicate: full
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: 434 damage in a 5 radius
+    "(this damage cannot be reflected)", knockback 3. Independent meteors
+    per caster.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: impact
+      kind: damage
+      reflect: non_reflectable
+      duplicate: full
+    - id: knockback
+      kind: cc
+      cc_type: knockback
+      reflect: not_applicable
+      cleanse: unknown
+      duplicate: full
+
+- spell: QS_CRYSTAL_COMBO
+  effect_name: "Phantom Twin (remote projection combo)"
+  duplicate: full
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: projection slashes at the
+    target position "(damage cannot be reflected)" + slow; 3rd combo slam.
+    Independent projections per caster.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: projection_zone
+      kind: ground_dot
+      reflect: non_reflectable
+      duplicate: full
+    - id: projection_slow
+      kind: cc
+      cc_type: slow
+      cleanse: unknown
+      duplicate: unknown
+
+- spell: SHAPE_W_DAMAGE_AOE
+  effect_name: "Distortion (zone + self Shift Charges)"
+  duplicate: full
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: cloud ticks "(this damage
+    cannot be reflected)" + slow; each enemy hit applies a Shift Charge ON
+    THE CASTER (self resource — duplicates each charge their own).
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: [SELF-BUFF]
+  components:
+    - id: distortion_zone
+      kind: ground_dot
+      reflect: non_reflectable
+      duplicate: full
+    - id: zone_slow
+      kind: cc
+      cc_type: slow
+      cleanse: unknown
+      duplicate: unknown
+    - id: shift_charges
+      kind: buff
+      reflect: not_applicable
+      purge: unknown
+      cleanse: not_applicable
+      duplicate: full
+      notes: "charges accrue on the caster — independent per player"
+
+- spell: SKULLCURSE
+  effect_name: "Haunting Screams (moving haunt zone)"
+  duplicate: full
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: moving 6-radius zone ticks
+    "(the damage can't be reflected)" plus a players-only extra component.
+    Independent zones per caster.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: haunt_zone
+      kind: ground_dot
+      reflect: non_reflectable
+      duplicate: full
+
+- spell: THORNSAREA
+  effect_name: "Thorn Growth (zone + Thorns Charges on enemies)"
+  duplicate: partial
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: growth ticks "(this damage
+    cannot be reflected)"; every tick applies a Thorns Charge to enemies in
+    the growth. Whether charges from two casters share one pool is not
+    stated.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: [CHARGE BUILDER]
+  components:
+    - id: thorn_zone
+      kind: ground_dot
+      reflect: non_reflectable
+      duplicate: full
+    - id: thorns_charges
+      kind: debuff
+      reflect: not_applicable
+      cleanse: unknown
+      duplicate: unknown
+      notes: "charge pool ownership across casters unstated"

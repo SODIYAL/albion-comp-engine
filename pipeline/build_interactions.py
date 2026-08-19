@@ -64,6 +64,12 @@ CONFIDENCE = {"verified", "likely", "community_reported", "unknown"}
 
 NON_REFLECT_RE = re.compile(r"[^.\n]*(?:cannot|can't|can not) be "
                             r"reflected[^.\n]*\.?", re.I)
+# interrupt facts the descriptions state outright: a channel that "can't be
+# interrupted", or an ability that "interrupts the target's spell casting"
+UNINTERRUPTIBLE_RE = re.compile(r"[^.\n]*\((?:cannot|can't|can not) be "
+                                r"interrupted[^)\n]*\)[^.\n]*\.?", re.I)
+INTERRUPTS_RE = re.compile(r"[^.\n]*interrupt(?:s|ing)\b[^.\n]*"
+                           r"(?:cast|channel)[^.\n]*\.?", re.I)
 
 
 def rollup_reflect(components):
@@ -139,6 +145,26 @@ def main():
         # a description statement or must say where it comes from
         desc = (spell_index[sid].get("description") or "")
         statements = [m.group(0).strip() for m in NON_REFLECT_RE.finditer(desc)]
+        # interrupt facts (spec §4): derived from the description's own words;
+        # a curated `interrupt:` block on the entry overrides/extends
+        int_stmts = ([m.group(0).strip() for m in
+                      UNINTERRUPTIBLE_RE.finditer(desc)]
+                     + [m.group(0).strip() for m in
+                        INTERRUPTS_RE.finditer(desc)])
+        interrupt = dict(e.get("interrupt") or {})
+        if "uninterruptible" not in interrupt:
+            interrupt["uninterruptible"] = (
+                True if any(UNINTERRUPTIBLE_RE.search(x) for x in int_stmts)
+                else None)
+        if "can_interrupt" not in interrupt:
+            interrupt["can_interrupt"] = (
+                True if any(INTERRUPTS_RE.search(x)
+                            and not UNINTERRUPTIBLE_RE.search(x)
+                            for x in int_stmts) else None)
+        for field in ("uninterruptible", "can_interrupt"):
+            if interrupt.get(field) not in (True, False, None):
+                errors.append(f"{where}: interrupt.{field} must be true/"
+                              f"false/null, got {interrupt[field]!r}")
         claims_nr = any(c.get("reflect") == "non_reflectable" for c in comps)
         if claims_nr and conf == "verified" and not statements \
                 and "description" in (e.get("source") or "").lower():
@@ -173,6 +199,10 @@ def main():
                 b = c["cc_type"].upper()
                 if b not in badges:
                     badges.append(b)
+        if interrupt.get("uninterruptible"):
+            badges.append("UNINTERRUPTIBLE")
+        if interrupt.get("can_interrupt"):
+            badges.append("INTERRUPT")
         badges.append(f"DUPLICATE:{str(dup).upper()}")
 
         spells[sid] = {
@@ -192,6 +222,8 @@ def main():
             "as_of": str(e.get("as_of") or ""),
             "verified_patch": str(e.get("verified_patch") or ""),
             "structural_reflect_statements": statements,
+            "interrupt": interrupt,
+            "structural_interrupt_statements": int_stmts,
             "notes": (e.get("notes") or "").strip() or None,
         }
 
