@@ -54,10 +54,11 @@ py -3 tests/test_patch_history.py      # patch-diff + staleness units, no clone 
 py -3 tests/test_provenance.py         # chapter-2 §A gates: pinned snapshot, hashes,
                                        # determinism, fail-closed release, coverage (24/24)
 py -3 tests/test_builds.py             # chapter-2 §B-§F gates: ranged evidence, builds schema,
-                                       # equippability, independence, 1v1 bar, semantics (44/44)
+                                       # equippability, independence, 1v1 bar, semantics,
+                                       # quarantine-never-canonical (46/46)
 py -3 pipeline/build_interactions.py   # PvP interaction records -> out/interactions.json
 py -3 tests/test_interactions.py       # interaction gates: count-once scoring, twin parity on
-                                       # duplicates, analyzer, seeds (25/25; needs node)
+                                       # duplicates, analyzer, seeds, interrupt facts (27/27; needs node)
 py -3 pipeline/build_dashboard.py      # -> dashboard/index.html AND docs/index.html
 py -3 pipeline/build_effect_review.py  # -> review/effects.html
 py -3 pipeline/build_magnitude_review.py  # -> review/magnitude.html (score-vs-dumps audit boards)
