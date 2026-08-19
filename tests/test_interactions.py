@@ -179,9 +179,11 @@ check("analyzer reports strengths, cc coverage and profiles",
 # ---- seed-data integrity --------------------------------------------------------
 inter = BASE["interactions"]
 check("all curated spells are embedded in the dataset (9 seeds + the "
-      "19-spell structural-reflect backlog)",
-      len(inter) == 28 and "DEATHCURSE2" in inter and "SPEEDARCHER_KITE" in inter
-      and "METEOR" in inter and "THORNSAREA" in inter)
+      "reflect backlog incl. PUMMELING_STRIKES surfaced by the fuller "
+      "descriptions)",
+      len(inter) == 29 and "DEATHCURSE2" in inter and "SPEEDARCHER_KITE" in inter
+      and "METEOR" in inter and "THORNSAREA" in inter
+      and "PUMMELING_STRIKES" in inter)
 check("the structural-reflect curation backlog is empty",
       json.load(open(os.path.join(PIPELINE, "out", "interactions.json"),
                      encoding="utf-8"))["_meta"]["structural_unclaimed"] == [])
@@ -190,6 +192,38 @@ check("interrupt facts derive from the descriptions' own words",
       and "UNINTERRUPTIBLE" in inter["ENFEEBLEBLADES"]["badges"]
       and inter["GROWING_PUNCH"]["interrupt"]["uninterruptible"] is True
       and inter["METEOR"]["interrupt"]["uninterruptible"] is None)
+
+# ---- ability facts layer (2026-08-19): every effect visible per spell ----
+def load_json(path):
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+SPELL_IDX = load_json(os.path.join(PIPELINE, "out", "spell_index.json"))
+FX = load_json(os.path.join(PIPELINE, "out",
+                            "effect_catalogue.json"))["spell_effects"]
+leap = SPELL_IDX["MACELEAP"]                     # Deep Leap — the example
+check("Deep Leap's resolved description carries the game's own numbers "
+      "(damage, slow, STUN DURATION)",
+      "203 physical damage" in leap["description"]
+      and "stunned for 1.8" in leap["description"]
+      and "Slows all enemies hit by 0.3 for 3" in leap["description"])
+check("Deep Leap's typed effect list accounts for stun, slow and the self "
+      "immunities",
+      {"stun", "movespeedbonus-"} <=
+      {e["effect"] for e in FX["MACELEAP"]}
+      and any(e["effect"].startswith("immunity:") for e in FX["MACELEAP"]))
+gear_sp = load_json(os.path.join(PIPELINE, "out", "gear_spells.json"))
+check("equipment abilities are parsed with the same coverage (Knight "
+      "Helmet's Block is a named, described spell)",
+      "BLOCK" in gear_sp["HEAD_PLATE_SET1"]["actives"]
+      and SPELL_IDX["BLOCK"]["name"] == "Block"
+      and (SPELL_IDX["BLOCK"]["description"] or "").startswith("Block"))
+check("gear reflect facts are backlogged separately, never silently dropped",
+      isinstance(json.load(open(os.path.join(PIPELINE, "out",
+                                             "interactions.json"),
+                                encoding="utf-8"))
+                 ["_meta"]["structural_unclaimed_gear"], list))
 check("Death Curse carries the verified shared Vile-Curse-Charge model",
       inter["DEATHCURSE2"]["duplicate"] == "shared_stack"
       and inter["DEATHCURSE2"]["confidence"] == "verified")

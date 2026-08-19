@@ -50,6 +50,7 @@ PROVENANCE_INPUTS = {
     "spell_index.json": (_parse_mod.ADAPTER, _parse_mod.ADAPTER_VERSION),
     "item_stats.json": (_stats_mod.ADAPTER, _stats_mod.ADAPTER_VERSION),
     "gear_lines.json": (_gear_mod.ADAPTER, _gear_mod.ADAPTER_VERSION),
+    "gear_spells.json": (_parse_mod.ADAPTER, _parse_mod.ADAPTER_VERSION),
     "interactions.json": (_inter_mod.ADAPTER, _inter_mod.ADAPTER_VERSION),
 }
 

@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from provenance import record_derived, snapshot_commit, snapshot_dir  # noqa: E402
 
 ADAPTER = "parse_dumps"
-ADAPTER_VERSION = "2"
+ADAPTER_VERSION = "3"
 
 TAG_RE = re.compile(r"\[(dmg|heal|cc|debuff|buff|mobility|other)\]")
 
@@ -289,18 +289,19 @@ def main(dump_dir, source_commit):
     # ---- weapon lines: resolve craftingspelllist references ------------------
     by_name = {w["@uniquename"]: w for w in weapons_raw}
 
-    def craftspells(w, depth=0):
+    def craftspells(w, registry, depth=0):
         """A craftingspelllist can hold @reference (inherited line spells),
-        removespell (inherited spells this weapon can't use), AND its own
-        craftspell entries (typically the weapon's unique E) — merge all three."""
+        removespell (inherited spells this item can't use), AND its own
+        craftspell entries — merge all three. `registry` is the item family
+        the @reference chain resolves within (weapons or equipment)."""
         csl = w.get("craftingspelllist")
         if not csl or depth > 3:
             return []
         result = []
         if "@reference" in csl:
-            ref = by_name.get(csl["@reference"])
+            ref = registry.get(csl["@reference"])
             if ref:
-                result.extend(craftspells(ref, depth + 1))
+                result.extend(craftspells(ref, registry, depth + 1))
         removed = csl.get("removespell", [])
         removed = removed if isinstance(removed, list) else [removed]
         removed_ids = {r.get("@uniquename") for r in removed}
@@ -316,7 +317,7 @@ def main(dump_dir, source_commit):
         if "@" in u or w.get("@slottype") not in ("mainhand", "2h"):
             continue
         key = line_key(u)
-        cs = craftspells(w)
+        cs = craftspells(w, by_name)
         if not cs:
             continue
         # canonical entry = the tier with the LARGEST resolved spell list
@@ -338,6 +339,35 @@ def main(dump_dir, source_commit):
             "spells": {k: slots.get(k, []) for k in ("q", "w", "e", "passive")},
         }
 
+    # ---- gear ability pools (equipment actives/passives) ---------------------
+    # The other half of a kit: helm/armor/shoes/cape/offhand items carry their
+    # own craftingspelllist with the same @reference inheritance weapons use.
+    # Keys match gear_lines.json (tier prefix stripped — one line spans T4-T8).
+    # This is what lets the loadout picker and the MetaBattle importer talk
+    # about "Knight Helmet's Block" as a real spell instead of raw text.
+    gear_raw = items.get("equipmentitem", [])
+    gear_by_name = {g["@uniquename"]: g for g in gear_raw}
+    GEAR_SLOTTYPES = ("head", "armor", "shoes", "cape", "offhand")
+    gear_spells = {}
+    for g in gear_raw:
+        u = g["@uniquename"]
+        if "@" in u or g.get("@slottype") not in GEAR_SLOTTYPES:
+            continue
+        key = line_key(u)
+        cs = craftspells(g, gear_by_name)
+        if not cs:
+            continue
+        # canonical entry = the tier with the LARGEST resolved list, same
+        # rule as weapon lines (low tiers have entries locked/removed)
+        if key in gear_spells and gear_spells[key]["_n"] >= len(cs):
+            continue
+        # gear craftspells carry no @slots — actives and passives are told
+        # apart below by the SPELL's own group in spells.json (activespell /
+        # togglespell vs passivespell), the game's own classification
+        sids = [c.get("@uniquename") for c in cs if c.get("@uniquename")]
+        gear_spells[key] = {"_n": len(cs), "slot": g.get("@slottype"),
+                            "_sids": sids}
+
     # ---- spell metadata ------------------------------------------------------
     spells_root = load(os.path.join(dump_dir, "spells.json"))["spells"]
     # full_registry spans EVERY group in spells.json — geometry extraction
@@ -350,7 +380,7 @@ def main(dump_dir, source_commit):
                 full_registry.setdefault(s["@uniquename"], s)
     # registry holds EVERY spell node (including effect sub-spells like
     # PULSINGHEAL_KNOCKBACK) so description tags can be resolved across spells
-    registry, spell_meta = {}, {}
+    registry, spell_meta, spell_group = {}, {}, {}
     for group in ("activespell", "passivespell", "togglespell"):
         entries = spells_root.get(group, [])
         for s in (entries if isinstance(entries, list) else [entries]):
@@ -358,6 +388,7 @@ def main(dump_dir, source_commit):
             if not sid:
                 continue
             registry[sid] = s
+            spell_group[sid] = group
             spell_meta[sid] = {
                 "target": s.get("@target"),
                 "uitype": s.get("@uitype"),
@@ -378,7 +409,18 @@ def main(dump_dir, source_commit):
         if tid.startswith("@SPELLS_"):
             loc_map[tid] = en(tu.get("tuv", []))
 
+    # bucket gear abilities by the game's own spell group
+    for G in gear_spells.values():
+        sids = G.pop("_sids", [])
+        G["actives"] = [s for s in sids
+                        if spell_group.get(s) in ("activespell", "togglespell")]
+        G["passives"] = [s for s in sids
+                         if spell_group.get(s) == "passivespell"]
+
     used_spells = {s for L in lines.values() for slot in L["spells"].values() for s in slot}
+    # gear actives/passives get the same name/description/facts coverage
+    used_spells |= {s for G in gear_spells.values()
+                    for s in G["actives"] + G["passives"]}
     spell_index = {}
     resolved_hits = resolved_misses = 0
     for sid in sorted(used_spells):
@@ -411,7 +453,10 @@ def main(dump_dir, source_commit):
             "radius": geom.get("radius"),
             "max_targets": geom.get("max_targets"),
             "area": geom.get("area"),
-            "description": plain[:400],
+            # 700, not 400: the ability-detail view (2026-08-19) shows the
+            # full resolved text — 400 cut 49 spells mid-fact (ramp tables,
+            # multi-component Es)
+            "description": plain[:700],
         }
 
     for L in lines.values():
@@ -419,10 +464,15 @@ def main(dump_dir, source_commit):
 
     wl_path = os.path.join(out_dir, "weapon_lines.json")
     si_path = os.path.join(out_dir, "spell_index.json")
+    gs_path = os.path.join(out_dir, "gear_spells.json")
     with open(wl_path, "w", encoding="utf-8") as f:
         json.dump(lines, f, indent=1, sort_keys=True)
     with open(si_path, "w", encoding="utf-8") as f:
         json.dump(spell_index, f, indent=1, sort_keys=True)
+    for G in gear_spells.values():
+        G.pop("_n", None)
+    with open(gs_path, "w", encoding="utf-8") as f:
+        json.dump(gear_spells, f, indent=1, sort_keys=True)
 
     src_files = ["items.json", "spells.json", "localization.json",
                  "formatted/items.json"]
@@ -430,9 +480,12 @@ def main(dump_dir, source_commit):
                    source_commit, src_files)
     record_derived("spell_index.json", si_path, ADAPTER, ADAPTER_VERSION,
                    source_commit, src_files)
+    record_derived("gear_spells.json", gs_path, ADAPTER, ADAPTER_VERSION,
+                   source_commit, src_files)
 
     total_tags = resolved_hits + resolved_misses
-    print(f"weapon lines: {len(lines)}   spells indexed: {len(spell_index)}"
+    print(f"weapon lines: {len(lines)}   gear lines with abilities: "
+          f"{len(gear_spells)}   spells indexed: {len(spell_index)}"
           f"   @ {source_commit[:12]}")
     print(f"description numbers resolved: {resolved_hits}/{total_tags} tags"
           f" ({resolved_hits / total_tags:.0%})" if total_tags else "")

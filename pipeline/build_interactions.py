@@ -227,11 +227,19 @@ def main():
             "notes": (e.get("notes") or "").strip() or None,
         }
 
-    # curation backlog: spells whose descriptions state reflect facts but
-    # have no curated interaction record yet
+    # curation backlog: WEAPON-equippable spells whose descriptions state
+    # reflect facts but have no curated interaction record yet. Gear spells
+    # (in spell_index since parse_dumps v3) are out of the interaction
+    # layer's scope until gear records exist — listed separately, never
+    # silently dropped.
     unclaimed = sorted(
         sid for sid, s in spell_index.items()
-        if sid not in spells and NON_REFLECT_RE.search(s.get("description") or ""))
+        if sid not in spells and sid in equippable_on
+        and NON_REFLECT_RE.search(s.get("description") or ""))
+    gear_unclaimed = sorted(
+        sid for sid, s in spell_index.items()
+        if sid not in spells and sid not in equippable_on
+        and NON_REFLECT_RE.search(s.get("description") or ""))
 
     payload = {
         "_meta": {
@@ -244,6 +252,7 @@ def main():
             "with_nonstacking_caps": sum(1 for s in spells.values()
                                          if s["nonstacking_caps"]),
             "structural_unclaimed": unclaimed,
+            "structural_unclaimed_gear": gear_unclaimed,
             "note": ("Spell-keyed PvP interaction records. Scoring reads ONLY "
                      "verified nonstacking_caps; everything else is display/"
                      "analysis. unknown is a stored answer, never a guess."),

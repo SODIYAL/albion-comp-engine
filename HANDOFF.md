@@ -58,7 +58,8 @@ py -3 tests/test_builds.py             # chapter-2 §B-§F gates: ranged evidenc
                                        # quarantine-never-canonical (46/46)
 py -3 pipeline/build_interactions.py   # PvP interaction records -> out/interactions.json
 py -3 tests/test_interactions.py       # interaction gates: count-once scoring, twin parity on
-                                       # duplicates, analyzer, seeds, interrupt facts (27/27; needs node)
+                                       # duplicates, analyzer, seeds, interrupt facts,
+                                       # ability-facts layer (31/31; needs node)
 py -3 pipeline/build_dashboard.py      # -> dashboard/index.html AND docs/index.html
 py -3 pipeline/build_effect_review.py  # -> review/effects.html
 py -3 pipeline/build_magnitude_review.py  # -> review/magnitude.html (score-vs-dumps audit boards)
@@ -72,6 +73,31 @@ ao-bin-dumps commit, then `fetch_snapshot.py` -> `parse_dumps.py` ->
 `fetch_item_stats.py` -> `fetch_gear_lines.py` -> the full gate list above.
 Every derived input records its snapshot commit + adapter version in
 `out/source_manifest.json`; `build_dataset.py` fails closed on any mismatch.
+
+## Session 2026-08-19 (ability facts) — every effect visible per spell
+
+- **Per-ability detail panel**: click any spell row in the weapon dossier
+  for its typed effect list (stun/slow/immunities/…, from the structured
+  effect layer), the game's own resolved numbers (damage, CC DURATIONS,
+  radii — Deep Leap shows stun 1.8s, 203 damage, slow 30%/3s), cooldown/
+  cast-range/radius/max-targets facts, and its PvP interaction record
+  (reflect / party stacking + confidence) or an explicit "unknown". The
+  panel states the IP truth out loud: numbers are the game's BASE values;
+  in-game damage/durations scale with item power and the scaling curve is
+  not in the public game files, so it is never invented.
+- **Equipment abilities parsed** (parse_dumps v3): equipmentitem
+  craftingspelllist resolved through the same @reference chains as weapons
+  → out/gear_spells.json (146 worn lines, actives/passives classified by
+  the game's own spell groups) + those spells joined spell_index (559
+  total). Gear/picker tiles' tooltips list each item's actives/passives.
+  Descriptions raised 400→700 chars (49 were cut mid-fact) — which
+  surfaced PUMMELING_STRIKES' reflect statement; curated (29 interaction
+  records). Gear reflect facts backlogged separately
+  (structural_unclaimed_gear), never silently dropped.
+- gear_spells.json joined the provenance chain (PROVENANCE_INPUTS).
+- Also folded in: the owner's semantic role/effect icon set
+  (dashboard/assets/semantic-icons + SEMANTIC_ICONS embed in
+  build_dashboard.py).
 
 ## Session 2026-08-19 (review fixes) — combo-aware constraints, quarantine gate
 

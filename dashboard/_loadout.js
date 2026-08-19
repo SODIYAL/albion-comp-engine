@@ -29,6 +29,17 @@ let LO_OPEN = null, LO_PICKING = null, LO_FILTER = "";
 
 const loGear = k => (typeof GEAR !== "undefined" && GEAR[k]) || null;
 const loName = k => (loGear(k) || {}).name || k;
+/* equipment ability tooltip (2026-08-19): the item's actives/passives from
+   the game's own craftingspelllist (parse_dumps gear_spells.json) */
+function loAbilityTip(k){
+  const g = (typeof GEAR_SPELLS !== "undefined" && GEAR_SPELLS[k]) || null;
+  if (!g) return "";
+  const names = arr => (arr || []).map(x => x[1]).join(" / ");
+  const bits = [];
+  if (g.a && g.a.length) bits.push("actives: " + names(g.a));
+  if (g.p && g.p.length) bits.push("passives: " + names(g.p));
+  return bits.length ? " — " + bits.join(" · ") : "";
+}
 
 /* Gear art is HOTLINKED, not embedded — it is ~270 of the ~400 icons and
    embedding it cost the page ~1.1 MB for a picker most sessions never open.
@@ -186,7 +197,7 @@ function loTile(i, slot){
   const art = key ? loArt(key, 34) : "";
   const picking = LO_PICKING && LO_PICKING.i === i && LO_PICKING.slot === slot;
   return `<button class="lo-tile${picking ? " on" : ""}${key ? " set" : ""}"
-      data-lo-pick="${i}:${slot}" title="${esc(key ? loName(key) : LO_SLOT_LABEL[slot])}">
+      data-lo-pick="${i}:${slot}" title="${esc(key ? loName(key) + loAbilityTip(key) : LO_SLOT_LABEL[slot])}">
     ${art || `<span class="lo-empty"></span>`}
     <span class="lo-tag">${esc(LO_SLOT_LABEL[slot])}</span></button>`;
 }
@@ -209,7 +220,7 @@ function loPickerGrid(){
   const items = loItems(slot).filter(k => !q || loName(k).toLowerCase().includes(q));
   const cur = (LOADOUT[i] || {})[slot];
   const cells = items.map(k =>
-    `<button class="lo-opt${k === cur ? " on" : ""}" data-lo-set="${i}:${slot}:${k}" title="${esc(loName(k))}">
+    `<button class="lo-opt${k === cur ? " on" : ""}" data-lo-set="${i}:${slot}:${k}" title="${esc(loName(k) + loAbilityTip(k))}">
       ${loArt(k, 30)}
       <span>${esc(loName(k))}</span></button>`).join("");
   return `<div class="lo-picker">

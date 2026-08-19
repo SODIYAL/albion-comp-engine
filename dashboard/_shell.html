@@ -395,6 +395,22 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .slot.int-high b{color:var(--bad)}
 .slot.int-warning b{color:var(--amber)}
 .slot.int-info b,.slot.int-verify b{color:var(--ink-2)}
+/* per-ability facts panel (click a spell row in the dossier) */
+.sp-row{cursor:pointer}
+.sp-row:hover{background:var(--surface-2)}
+.sp-row.open{background:var(--surface-2)}
+.sp-detail{display:block; padding:8px 10px 10px; margin:0 0 6px;
+  border-left:2px solid var(--brass-deep); background:var(--sunk, var(--surface-2));
+  border-radius:0 6px 6px 0}
+.sp-fline{font-size:11px; color:var(--brass); letter-spacing:.04em; margin-bottom:6px}
+.sp-fx{margin-bottom:6px; display:flex; flex-wrap:wrap; gap:4px}
+.fx-chip{font-family:var(--mono); font-size:9.5px; padding:1px 6px;
+  border:1px solid var(--rule-2); border-radius:3px; color:var(--ink-2)}
+.sp-desc{font-size:12px; line-height:1.55; color:var(--ink-2);
+  white-space:pre-line; margin-bottom:6px}
+.sp-inter{margin-bottom:4px}
+.sp-detail .fn{display:block; margin-top:3px}
+
 /* dossier PvP-interaction rows + badges + utility filter chips */
 .int-row{margin:0 0 10px; font-size:12.5px}
 .int-row .bdg.b-int{color:var(--brass); cursor:default}

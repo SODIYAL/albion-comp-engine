@@ -49,12 +49,13 @@ DATASET = load_json(os.path.join(OUT, "dataset-latest.json"))
 MANIFEST = load_json(provenance.MANIFEST_PATH)
 
 INPUTS = ["weapon_lines.json", "spell_index.json", "item_stats.json",
-          "gear_lines.json", "interactions.json"]
+          "gear_lines.json", "gear_spells.json", "interactions.json"]
 VERSIONS = {
     "weapon_lines.json": (pd.ADAPTER, pd.ADAPTER_VERSION),
     "spell_index.json": (pd.ADAPTER, pd.ADAPTER_VERSION),
     "item_stats.json": (fis.ADAPTER, fis.ADAPTER_VERSION),
     "gear_lines.json": ("fetch_gear_lines", "2"),
+    "gear_spells.json": (pd.ADAPTER, pd.ADAPTER_VERSION),
     "interactions.json": (bi.ADAPTER, bi.ADAPTER_VERSION),
 }
 

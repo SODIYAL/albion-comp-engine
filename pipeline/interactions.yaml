@@ -668,3 +668,29 @@
       cleanse: unknown
       duplicate: unknown
       notes: "charge pool ownership across casters unstated"
+
+- spell: PUMMELING_STRIKES
+  effect_name: "Hundred Striking Fists (cone channel + delayed detonation)"
+  duplicate: partial
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9 (full text surfaced by the
+    700-char description cap, 2026-08-19): channel "(can't be
+    interrupted)"; cone hits every 0.5; 2s after the last hit the target
+    takes extra damage per hit received "(stacks up to 10 times, damage
+    can't be reflected)". Cross-caster behavior of the detonation stack is
+    not stated.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: cone_hits
+      kind: damage
+      reflect: unknown
+      duplicate: full
+      notes: "independent channels per caster"
+    - id: delayed_detonation
+      kind: damage
+      reflect: non_reflectable
+      duplicate: unknown
+      notes: "per-hit stack on the target, up to 10; cross-caster pooling unstated"

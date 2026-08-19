@@ -13,10 +13,22 @@
     "items.json"
    ]
   },
+  "gear_spells.json": {
+   "adapter": "parse_dumps",
+   "adapter_version": "3",
+   "sha256": "201cc9fcb37a5de39d4677d0ff0e562c5498c9409a34a8350102ce96f2c042b4",
+   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+   "source_files": [
+    "formatted/items.json",
+    "items.json",
+    "localization.json",
+    "spells.json"
+   ]
+  },
   "interactions.json": {
    "adapter": "build_interactions",
    "adapter_version": "1",
-   "sha256": "54e6e670fdff94c0d046222d34cfed05a85afba6d9fe8dec584d44b8e76d7505",
+   "sha256": "ef1dcdfb270cb910dbe3629312908cc2a267603ec006593980858de43ea4186f",
    "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
    "source_files": [
     "interactions.yaml",
@@ -35,8 +47,8 @@
   },
   "spell_index.json": {
    "adapter": "parse_dumps",
-   "adapter_version": "2",
-   "sha256": "d8897677ee459f3d2009b31aaed1ddd8195d7fa3a8d356c3800dd510621a8c45",
+   "adapter_version": "3",
+   "sha256": "63af6008ed9020228a4249d6a6ec0376f65a9a83d1bd15f439d795341c661236",
    "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
    "source_files": [
     "formatted/items.json",
@@ -47,7 +59,7 @@
   },
   "weapon_lines.json": {
    "adapter": "parse_dumps",
-   "adapter_version": "2",
+   "adapter_version": "3",
    "sha256": "3a5303c584f4bb7e4de4c372352948d1c0243d280e8b709cbd9942b13574fcc2",
    "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
    "source_files": [

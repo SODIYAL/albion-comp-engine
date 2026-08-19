@@ -146,6 +146,23 @@ const icon = (w, s) => (typeof ICONS !== "undefined" && ICONS[w])
   ? `<img class="icon" src="${ICONS[w]}" width="${s}" height="${s}" alt="" loading="lazy">`
   : `<span class="icon ph" style="width:${s}px;height:${s}px"></span>`;
 
+const ROLE_LABELS = {
+  tank: "Tank", melee: "Melee", range: "Ranged",
+  healer: "Healer", support: "Support",
+};
+const roleLabel = r => ROLE_LABELS[r] || r.replace(/_/g, " ");
+/* Generated role/effect art is injected by build_dashboard.py beside the
+   weapon icon manifest. Empty fallback is intentional: every icon-only
+   control also carries an accessible text name, and the builder fails early
+   if one of the committed assets is missing. */
+function semanticIcon(key, extraClass = ""){
+  const src = (typeof SEMANTIC_ICONS !== "undefined" && SEMANTIC_ICONS[key]) || "";
+  return src
+    ? `<img class="sem-icon${extraClass ? " " + extraClass : ""}" src="${src}"
+         alt="" aria-hidden="true" draggable="false">`
+    : "";
+}
+
 const GROUPS = {
   Sustain:   ["heal_burst","heal_sustain","cleanse","self_sustain"],
   Frontline: ["tankiness","engage","disengage","anti_dive","zone_control"],
@@ -187,22 +204,24 @@ function roleOf(w, combo){
    magnitude rule (HANDOFF) and would drown the signal. Tooltip carries the
    component scores. */
 const BADGE_DEFS = [
-  ["tank", ["tankiness"]],
-  ["heal", ["heal_sustain", "heal_burst"]],
-  ["peel", ["peel"]],
-  ["cc",   ["stun", "root", "silence", "slow", "clump_create", "knockback_displace"]],
-  ["aoe",  ["burst_aoe"]],
-  ["st",   ["burst_st", "execute"]],
-  ["dps",  ["sustained_dps"]],
+  {id:"tank", label:"Tankiness",              icon:"tank",   caps:["tankiness"]},
+  {id:"heal", label:"Healing",                icon:"healer", caps:["heal_sustain", "heal_burst"]},
+  {id:"peel", label:"Peel / ally protection", icon:"peel",   caps:["peel"]},
+  {id:"cc",   label:"Crowd control",           icon:"cc",     caps:["stun", "root", "silence", "slow", "clump_create", "knockback_displace"]},
+  {id:"aoe",  label:"Area damage",             icon:"aoe",    caps:["burst_aoe"]},
+  {id:"st",   label:"Single-target burst",     icon:"st",     caps:["burst_st", "execute"]},
+  {id:"dps",  label:"Sustained damage",        icon:"dps",    caps:["sustained_dps"]},
 ];
+const BADGE_BY_ID = Object.fromEntries(BADGE_DEFS.map(d => [d.id, d]));
 function badgeHtml(w){
   const caps = capsOf(w);
-  return BADGE_DEFS.map(([cls, keys]) => {
+  return BADGE_DEFS.map(({id, label, icon, caps: keys}) => {
     const hits = keys.filter(k => (caps[k] || 0) >= 2);
     if (!hits.length) return "";
     const tip = hits.map(k => `${prose(k)} ${caps[k]}`).join(", ");
-    return `<span class="bdg b-${cls}" data-bfilter="${cls}" role="button" tabindex="0"
-      title="${esc(tip)} — click to list every ${cls} weapon">${cls}</span>`;
+    return `<span class="bdg b-${id}" data-bfilter="${id}" role="button" tabindex="0"
+      aria-label="${esc(label)}: ${esc(tip)}. Click to filter weapons"
+      title="${esc(label)} — ${esc(tip)} — click to filter">${semanticIcon(icon)}<span class="sr-only">${esc(label)}</span></span>`;
   }).join("");
 }
 
@@ -213,7 +232,7 @@ function badgeHtml(w){
                  only, never touches the engine */
 let FACET = null;
 let PARTY_FACET = null;
-const BADGE_KEYS = Object.fromEntries(BADGE_DEFS);
+const BADGE_KEYS = Object.fromEntries(BADGE_DEFS.map(d => [d.id, d.caps]));
 
 /* ---- PvP interaction records (pipeline/build_interactions.py -> dataset).
    Spell-keyed: duplicate semantics, reflect/cleanse/purge per component, CC
@@ -422,7 +441,8 @@ function renderTally(){
     ? Object.entries(roleCounts()).sort((a,b) => b[1]-a[1])
         .map(([r,n]) => `<span class="t t-${esc(r)}" data-pfilter="${esc(r)}" role="button" tabindex="0"
            aria-pressed="${PARTY_FACET === r}"
-           title="show only the ${esc(r)} slots — click again for all"><b>${n}</b> ${esc(r)}</span>`).join("")
+           aria-label="${n} ${esc(roleLabel(r))} slots. Filter the roster"
+           title="${esc(roleLabel(r))}: ${n} — click to filter the roster">${semanticIcon(r)}<b>${n}</b><span class="sr-only"> ${esc(roleLabel(r))}</span></span>`).join("")
       + `<span class="t"><b>${SIZE - party.length}</b> open</span>`
     : "";
 }
@@ -577,11 +597,15 @@ function renderPickerChips(){
   if (!holder.dataset.built){
     holder.innerHTML =
       `<div class="pchips"><span class="lbl2">role</span>` +
-      PICKER_ROLES.map(r =>
-        `<button class="pchip t-${r}" data-rfilter="${r}">${r}</button>`).join("") +
+      PICKER_ROLES.map(r => {
+        const label = roleLabel(r);
+        return `<button class="pchip icon-chip t-${r}" data-rfilter="${r}"
+          aria-label="${esc(label)} role" title="${esc(label)} role">${semanticIcon(r)}<span class="sr-only">${esc(label)}</span></button>`;
+      }).join("") +
       `</div><div class="pchips"><span class="lbl2">provides</span>` +
-      BADGE_DEFS.map(([cls]) =>
-        `<button class="pchip b-${cls}" data-bfilter="${cls}">${cls}</button>`).join("") +
+      BADGE_DEFS.map(({id, label, icon}) =>
+        `<button class="pchip icon-chip b-${id}" data-bfilter="${id}"
+          aria-label="${esc(label)}" title="${esc(label)}">${semanticIcon(icon)}<span class="sr-only">${esc(label)}</span></button>`).join("") +
       `</div><div class="pchips"><span class="lbl2">utility</span>` +
       UTIL_DEFS.map(([cls]) =>
         `<button class="pchip u-chip" data-ufilter="${cls}">${cls}</button>`).join("") +
@@ -598,8 +622,13 @@ function renderPickerChips(){
 function renderPicker(){
   const keys = filteredWeapons();
   renderPickerChips();
+  const facetText = !FACET ? "" : FACET.type === "role"
+    ? `${roleLabel(FACET.v)} weapons`
+    : FACET.type === "badge"
+      ? `provides ${(BADGE_BY_ID[FACET.v] || {label:FACET.v}).label.toLowerCase()}`
+      : `utility: ${FACET.v}`;
   $("facet-slot").innerHTML = FACET
-    ? `<div class="facet"><span>showing: <b>${esc(FACET.type === "role" ? FACET.v + " weapons" : "provides " + FACET.v)}</b> — ${keys.length} match${keys.length === 1 ? "" : "es"}</span>
+    ? `<div class="facet"><span>showing: <b>${esc(facetText)}</b> — ${keys.length} match${keys.length === 1 ? "" : "es"}</span>
        <button class="fx" id="facet-clear" aria-label="Clear filter">&times; clear</button></div>`
     : "";
   $("picker").innerHTML = keys.map(w => `<button class="pick" data-add="${w}">
@@ -1006,6 +1035,8 @@ function statsBlock(key){
     ${ip ? `<div class="st-ip">item power — ${ip}</div>` : ""}`;
 }
 function renderDetail(w){
+  if (DETAIL_W !== w) DETAIL_SPELL = null;   /* new weapon, fold open panels */
+  DETAIL_W = w;
   const d = WEAPONS[w], sp = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
   const vars = loVariants(w);
   const picks = { q: new Set(), w: new Set(), passive: new Set() };
@@ -1016,11 +1047,14 @@ function renderDetail(w){
   });
   const pool = (slot, label) => {
     const rows = (sp[slot] || []).map(([sid, nm], i) =>
-      `<li class="${picks[slot] && picks[slot].has(i+1) ? "pick" : ""}">
+      `<li class="sp-row ${picks[slot] && picks[slot].has(i+1) ? "pick" : ""}${DETAIL_SPELL === sid ? " open" : ""}"
+           data-spellinfo="${sid}" role="button" tabindex="0"
+           aria-expanded="${DETAIL_SPELL === sid}"
+           title="click for this ability's effects, numbers and PvP interactions">
          <span class="idx">${slot === "e" ? "E" : slot[0].toUpperCase() + (i+1)}</span>
          ${spellIcon(sid)}<span>${esc(nm)}</span>
          ${picks[slot] && picks[slot].has(i+1) ? '<span class="idx">caller pick</span>' : ""}
-       </li>`).join("");
+       </li>${DETAIL_SPELL === sid ? `<li class="sp-detail">${spellFactsBlock(sid)}</li>` : ""}`).join("");
     return rows ? `<h4>${label}</h4><ul class="sp-list">${rows}</ul>` : "";
   };
   const caps = Object.entries(d.capabilities || {}).sort((a,b) => b[1]-a[1]).map(([c, v]) =>
@@ -1056,6 +1090,45 @@ function renderDetail(w){
       <div>${pool("e", "E — the identity")}${pool("q", "Q options")}${pool("w", "W options")}${pool("passive", "Passives")}${interactionBlock(w)}${lo}${statsBlock(w)}</div>
     </div>`;
   $("drawer").dataset.open = "true";
+}
+/* Per-ability facts panel (2026-08-19): every effect the game data states
+   for a spell — typed effects from the structured effect layer, the
+   resolved description carrying the game's own numbers (damage, CC
+   durations, radii), cooldown/range facts, and the PvP interaction record
+   (reflect / party stacking). BASE-value honesty: in-game numbers scale
+   with item power and the scaling curve is not in the public game files,
+   so the panel says so instead of inventing it. */
+let DETAIL_W = null, DETAIL_SPELL = null;
+function spellFactsBlock(sid){
+  const f = (typeof SPELL_FACTS !== "undefined" && SPELL_FACTS[sid]) || null;
+  if (!f) return `<div class="fn">no game-data facts recorded for this ability</div>`;
+  const facts = [];
+  if (f.cd !== undefined && +f.cd > 0) facts.push(`cooldown ${f.cd}s`);
+  if (f.cr !== undefined && +f.cr > 0) facts.push(`cast range ${f.cr}m`);
+  if (f.r !== undefined) facts.push(`radius ${f.r}m`);
+  if (f.mt !== undefined) facts.push(`max targets ${f.mt}`);
+  if (f.ct !== undefined && +f.ct > 0) facts.push(`cast time ${f.ct}s`);
+  const fx = (f.fx || []).map(t => {
+    const cut = t.indexOf(">");
+    const eff = cut < 0 ? t : t.slice(0, cut);
+    const tgt = cut < 0 ? "" : t.slice(cut + 1);
+    return `<span class="fx-chip" title="typed effect extracted from the game's structured spell data">${esc(eff)}${tgt ? " → " + esc(tgt) : ""}</span>`;
+  }).join("");
+  const rec = (typeof INTERACTIONS !== "undefined") ? INTERACTIONS[sid] : null;
+  const inter = rec
+    ? `<div class="sp-inter">${(rec.badges || []).map(b =>
+        `<span class="bdg b-int" title="${esc(intBadgeTip(b))}">${esc(b)}</span>`).join(" ")}
+       <span class="prov${rec.confidence === "verified" ? "" : " draft"}"
+         title="${esc(rec.source || "no source recorded")}">${esc(rec.confidence)}</span>
+       <span class="fn">reflect / party-stacking components in “PvP interactions” below</span></div>`
+    : `<div class="fn">no curated PvP interaction record yet — duplicate and reflect behavior is unknown, never guessed</div>`;
+  return `<div class="sp-facts">
+    ${facts.length ? `<div class="sp-fline mono">${facts.join(" · ")}</div>` : ""}
+    ${fx ? `<div class="sp-fx">${fx}</div>` : ""}
+    ${f.d ? `<div class="sp-desc">${esc(f.d)}</div>` : ""}
+    ${inter}
+    <div class="fn">numbers are the game’s own BASE values — in-game damage and durations scale with item power; the scaling curve is not in the public game files, so it is shown as base rather than invented</div>
+  </div>`;
 }
 /* PvP interactions section of the dossier (spec §6): per-spell badges with
    human-readable tooltips, a confidence chip carrying the source citation,
@@ -1275,6 +1348,13 @@ document.addEventListener("click", e => {
     sortPartyByRole();     /* the swap may have changed the slot's role */
     render(); return;
   }
+  const spi = e.target.closest("[data-spellinfo]");
+  if (spi){
+    DETAIL_SPELL = DETAIL_SPELL === spi.dataset.spellinfo
+      ? null : spi.dataset.spellinfo;
+    if (DETAIL_W) renderDetail(DETAIL_W);
+    return;
+  }
   const det = e.target.closest("[data-detail]");
   if (det){ renderDetail(det.dataset.detail); return; }
   const add = e.target.closest("[data-add]");
@@ -1419,7 +1499,7 @@ document.addEventListener("input", e => {
 });
 document.addEventListener("keydown", e => {
   if ((e.key === "Enter" || e.key === " ")
-      && e.target.matches("[data-bfilter],[data-rfilter],[data-ufilter],[data-pfilter],span.info[data-detail]")){
+      && e.target.matches("[data-bfilter],[data-rfilter],[data-ufilter],[data-pfilter],[data-spellinfo],span.info[data-detail]")){
     /* the picker's "i" detail control is a focusable role=button SPAN inside
        the add-weapon button — without this it is announced as a button but
        Enter/Space do nothing (and would otherwise trigger the outer add) */

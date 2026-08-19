@@ -19,12 +19,41 @@ scripts and closes it so development servers can safely inject reload code.
 
 Usage:  py -3 pipeline/build_dashboard.py
 """
-import json, os, sys
+import base64, json, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, os.pardir)
 DASH = os.path.join(ROOT, "dashboard")
 DATASET = os.path.join(HERE, "out", "dataset-latest.json")
+
+# Original role/effect art generated for the dashboard.  The production-sized
+# PNGs stay in the repo, while the builder embeds them as data URIs so the
+# generated page keeps its file:// / strict-artifact-host guarantee.
+SEMANTIC_ICON_FILES = {
+    "tank": "tank-96.png",
+    "healer": "healer-96.png",
+    "melee": "melee-96.png",
+    "range": "range-96.png",
+    "support": "support-96.png",
+    "peel": "peel-96.png",
+    "cc": "cc-96.png",
+    "aoe": "aoe-96.png",
+    "st": "st-96.png",
+    "dps": "dps-96.png",
+}
+
+
+def load_semantic_icons():
+    icon_dir = os.path.join(DASH, "assets", "semantic-icons")
+    icons = {}
+    for key, filename in SEMANTIC_ICON_FILES.items():
+        path = os.path.join(icon_dir, filename)
+        if not os.path.exists(path):
+            sys.exit(f"semantic icon missing: {path}")
+        with open(path, "rb") as f:
+            encoded = base64.b64encode(f.read()).decode("ascii")
+        icons[key] = f"data:image/png;base64,{encoded}"
+    return icons
 
 
 def load_loadouts(weapons):
@@ -62,6 +91,7 @@ def main():
         loadout_js = f.read()
     with open(os.path.join(DASH, "_app.js"), encoding="utf-8") as f:
         app = f.read()
+    semantic_icons = load_semantic_icons()
     # Item icons (fetch_icons.py). Optional: the page renders placeholders
     # for any weapon missing from the manifest.
     icons_path = os.path.join(HERE, "out", "icon_data.json")
@@ -93,6 +123,48 @@ def main():
         sp = (lines.get(k) or {}).get("spells") or {}
         spells[k] = {slot: [[sid, spell_name(sid)] for sid in sp.get(slot, [])]
                      for slot in ("q", "w", "e", "passive")}
+    # Gear ability pools (parse_dumps gear_spells.json) — the equipment half
+    # of the ability-detail view: actives/passives with display names.
+    gear_spells_path = os.path.join(HERE, "out", "gear_spells.json")
+    gear_spells = {}
+    if os.path.exists(gear_spells_path):
+        with open(gear_spells_path, encoding="utf-8") as f:
+            raw_gs = json.load(f)
+        gear_spells = {k: {"a": [[s, spell_name(s)] for s in v.get("actives", [])],
+                           "p": [[s, spell_name(s)] for s in v.get("passives", [])]}
+                       for k, v in raw_gs.items()}
+    # Per-spell FACTS for the ability-detail view: the game's own resolved
+    # description (BASE numbers — in-game values scale with item power and
+    # that curve is not in the public dumps, which the UI says out loud),
+    # cooldown/range/radius/cast time/max targets, and the typed effect list
+    # from the structured effect layer (effect_catalogue.py).
+    fx_path = os.path.join(HERE, "out", "effect_catalogue.json")
+    spell_fx = {}
+    if os.path.exists(fx_path):
+        with open(fx_path, encoding="utf-8") as f:
+            spell_fx = json.load(f).get("spell_effects", {})
+    wanted_spells = {sid for k in spells for pool in spells[k].values()
+                     for sid, _n in pool}
+    wanted_spells |= {sid for g in gear_spells.values()
+                      for pool in g.values() for sid, _n in pool}
+    spell_facts = {}
+    for sid in sorted(wanted_spells):
+        s = spell_index.get(sid) or {}
+        fx = []
+        for e in spell_fx.get(sid, []):
+            tgt = ",".join(e.get("targets") or e.get("dirs") or [])
+            tag = f"{e.get('effect')}>{tgt}"
+            if tag not in fx:
+                fx.append(tag)
+        entry = {"d": s.get("description") or ""}
+        for src, dst in (("cooldown", "cd"), ("cast_range", "cr"),
+                         ("casting_time", "ct"), ("radius", "r"),
+                         ("max_targets", "mt")):
+            if s.get(src) is not None:
+                entry[dst] = s[src]
+        if fx:
+            entry["fx"] = fx
+        spell_facts[sid] = entry
     # Gear catalogue (fetch_gear_lines.py) — the loadout half: head, armor,
     # shoes, cape, offhand, potion, food. Optional, and DISPLAY ONLY for now:
     # no gear capabilities are curated yet, so the engine still scores weapons
@@ -165,9 +237,12 @@ def main():
     out = (f"{shell}<script>\n{scoring}\n</script>\n"
            f"<script>\nconst DATASET = {blob};\n"
            f"const ICONS = {js(icons)};\n"
+           f"const SEMANTIC_ICONS = {js(semantic_icons)};\n"
            f"const TREES = {js(trees)};\n"
            f"const ITEMS = {js(items)};\n"
            f"const SPELLS = {js(spells)};\n"
+           f"const SPELL_FACTS = {js(spell_facts)};\n"
+           f"const GEAR_SPELLS = {js(gear_spells)};\n"
            f"const LOADOUTS = {js(loadouts)};\n"
            f"const LOADOUT_COVERS = {js(loadout_covers)};\n"
            f"const GEAR = {js(gear)};\n"

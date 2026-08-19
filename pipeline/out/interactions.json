@@ -2,11 +2,15 @@
  "_meta": {
   "adapter": "build_interactions",
   "adapter_version": "1",
-  "entries": 28,
+  "entries": 29,
   "note": "Spell-keyed PvP interaction records. Scoring reads ONLY verified nonstacking_caps; everything else is display/analysis. unknown is a stored answer, never a guess.",
   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
   "structural_unclaimed": [],
-  "verified": 27,
+  "structural_unclaimed_gear": [
+   "INNER_CORRUPTION",
+   "NASTY_WOUNDS"
+  ],
+  "verified": 28,
   "with_nonstacking_caps": 0
  },
  "spells": {
@@ -139,7 +143,9 @@
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: per-armor-class duration/ damage, \"(this damage cannot be reflected)\". Whether two Inner Shadows on one target coexist is NOT stated.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
-    "5 (this damage cannot be reflected)."
+    "5 (this damage cannot be reflected).",
+    "5 (this damage cannot be reflected).",
+    "5, the shadow hits all enemies within the area, dealing 144 physical damage (this damage cannot be reflected)."
    ],
    "verified_patch": "2026-07-21",
    "weapons": [
@@ -1039,6 +1045,54 @@
    "verified_patch": "2026-07-21",
    "weapons": [
     "2H_FIRESTAFF_HELL"
+   ]
+  },
+  "PUMMELING_STRIKES": {
+   "as_of": "2026-08-19",
+   "badges": [
+    "PARTIAL REFLECT",
+    "UNINTERRUPTIBLE",
+    "DUPLICATE:PARTIAL"
+   ],
+   "cc_types": [],
+   "components": [
+    {
+     "duplicate": "full",
+     "id": "cone_hits",
+     "kind": "damage",
+     "notes": "independent channels per caster",
+     "reflect": "unknown"
+    },
+    {
+     "duplicate": "unknown",
+     "id": "delayed_detonation",
+     "kind": "damage",
+     "notes": "per-hit stack on the target, up to 10; cross-caster pooling unstated",
+     "reflect": "non_reflectable"
+    }
+   ],
+   "confidence": "verified",
+   "duplicate": "partial",
+   "effect_name": "Hundred Striking Fists (cone channel + delayed detonation)",
+   "interrupt": {
+    "can_interrupt": null,
+    "uninterruptible": true
+   },
+   "name": "Hundred Striking Fists",
+   "nonstacking_caps": [],
+   "notes": null,
+   "reflect": "partial",
+   "scoring_note": null,
+   "source": "Spell description @ ao-bin-dumps 5cf2e8e9 (full text surfaced by the 700-char description cap, 2026-08-19): channel \"(can't be interrupted)\"; cone hits every 0.5; 2s after the last hit the target takes extra damage per hit received \"(stacks up to 10 times, damage can't be reflected)\". Cross-caster behavior of the detonation stack is not stated.",
+   "structural_interrupt_statements": [
+    "totalduration$ (can't be interrupted)."
+   ],
+   "structural_reflect_statements": [
+    "2 after the last Striking Fist hits, the enemy will take an additional 30 magical damage for each hit they received (stacks up to 10 times, damage can't be reflected)."
+   ],
+   "verified_patch": "2026-07-21",
+   "weapons": [
+    "2H_KNUCKLES_KEEPER"
    ]
   },
   "QS_CRYSTAL_COMBO": {
