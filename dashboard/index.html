@@ -70,6 +70,16 @@ h1,h2,h3{font-family:var(--serif); font-weight:600; text-wrap:balance; margin:0}
 button{font:inherit; color:inherit; cursor:pointer}
 ::selection{background:rgba(217,164,78,.32); color:var(--ink)}
 :focus-visible{outline:2px solid var(--brass-bright); outline-offset:2px; border-radius:3px}
+.sr-only{
+  position:absolute!important; width:1px!important; height:1px!important;
+  padding:0!important; margin:-1px!important; overflow:hidden!important;
+  clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important;
+}
+.sem-icon{
+  display:block; width:20px; height:20px; object-fit:contain; flex:none;
+  pointer-events:none; user-select:none;
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.75));
+}
 ::-webkit-scrollbar{width:10px; height:10px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:#2C313D; border-radius:5px; border:2px solid var(--bg)}
@@ -126,11 +136,42 @@ button{font:inherit; color:inherit; cursor:pointer}
 
 .rail{
   border-right:1px solid var(--rule); padding:26px 22px 60px;
-  display:flex; flex-direction:column; gap:30px;
+  display:flex; flex-direction:column; gap:0;
   position:sticky; top:63px; max-height:calc(100vh - 63px); overflow-y:auto;
   background:linear-gradient(180deg, rgba(18,21,28,.5), transparent 220px);
 }
 @media (max-width:960px){ .rail{position:static; max-height:none; border-right:0; border-bottom:1px solid var(--rule)} }
+/* collapsible rail: the arrow trades setup for wheel room. State lives on
+   .shell[data-rail="min"] and persists in localStorage. */
+.rail-body{display:flex; flex-direction:column; gap:30px}
+.rail-toggle{
+  align-self:flex-start; margin-bottom:18px;
+  font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-3); background:transparent; border:1px solid var(--rule); border-radius:6px;
+  padding:5px 10px; transition:color .18s var(--ease), border-color .18s var(--ease);
+}
+.rail-toggle:hover{color:var(--brass); border-color:var(--brass-deep)}
+.rail-strip{display:none; flex-direction:column; gap:10px; align-items:center}
+.rs-btn{
+  width:34px; height:34px; display:grid; place-items:center;
+  background:var(--sunk); border:1px solid var(--rule-2); border-radius:7px;
+  color:var(--ink-2); font-size:14px; line-height:1;
+  transition:color .18s var(--ease), border-color .18s var(--ease);
+}
+.rs-btn:hover{color:var(--brass); border-color:var(--brass-deep)}
+.rs-forge{color:var(--brass); border-color:rgba(217,164,78,.5)}
+.rs-forge:hover{background:var(--brass-wash); border-color:var(--brass)}
+.shell[data-rail="min"]{grid-template-columns:56px minmax(0,1fr)}
+.shell[data-rail="min"] .rail{padding:16px 10px 30px}
+.shell[data-rail="min"] .rail-body{display:none}
+.shell[data-rail="min"] .rail-strip{display:flex}
+@media (max-width:960px){
+  /* the rail stacks on top on small screens — collapsing means nothing there */
+  .rail-toggle, .rail-strip{display:none !important}
+  .shell[data-rail="min"]{grid-template-columns:1fr}
+  .shell[data-rail="min"] .rail{padding:26px 22px 60px}
+  .shell[data-rail="min"] .rail-body{display:flex}
+}
 
 .main{padding:26px 32px 90px; display:flex; flex-direction:column; gap:30px; min-width:0}
 
@@ -194,15 +235,84 @@ select:focus, .text-input:focus{border-color:var(--brass-deep)}
   padding:8px 11px; margin-top:8px; border-radius:0 6px 6px 0;
 }
 
-/* ---------- roster — champion-select styling. Each row is "lit" by its
-   own weapon render and carries a glowing role-colored edge. ---------- */
-.roster{display:flex; flex-direction:column; gap:6px}
+/* ---------- party dock — the roster as a fish-eye row under the wheel.
+   Hover (or keyboard focus) swells a card like a macOS dock icon and opens
+   its popover: role, fit contribution, swap advice, and the kit / dossier /
+   remove actions. Wraps to more rows for big parties. ---------- */
+.dock-sec{margin-top:26px}
+.roster{
+  display:flex; flex-wrap:wrap; gap:12px 9px; align-items:flex-end;
+  padding:6px 2px 2px; min-height:70px;
+}
+.dm{position:relative; display:flex; flex-direction:column; align-items:center}
+.dm-card{
+  position:relative; width:56px; height:60px;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
+  --role:var(--rule-2);
+  border:1px solid var(--rule); border-bottom:3px solid var(--role);
+  border-radius:9px; cursor:pointer; padding:0;
+  box-shadow:0 1px 3px rgba(0,0,0,.4), 0 4px 10px -6px var(--role);
+  transform-origin:50% 100%;
+  transition:transform .18s var(--ease), border-color .18s var(--ease),
+    box-shadow .18s var(--ease);
+}
+.dm.role-tank .dm-card{--role:var(--role-tank)} .dm.role-healer .dm-card{--role:var(--role-healer)}
+.dm.role-melee .dm-card{--role:var(--role-melee)} .dm.role-range .dm-card{--role:var(--role-range)}
+.dm.role-support .dm-card{--role:var(--role-support)}
+.dm-card .n{position:absolute; top:2px; left:5px; font-size:9px; color:var(--ink-3)}
+.dm-card .icon{pointer-events:none}
+/* fish-eye: the hovered card swells, immediate neighbors lean in */
+.dm:hover .dm-card, .dm:focus-within .dm-card{
+  transform:scale(1.42); z-index:6; border-color:var(--rule-2);
+  box-shadow:0 8px 20px rgba(0,0,0,.55), 0 6px 14px -6px var(--role);
+}
+.dm:hover + .dm .dm-card, .dm:has(+ .dm:hover) .dm-card{transform:scale(1.16)}
+.dm-card.next{
+  border:1px dashed rgba(217,164,78,.4); background:transparent; box-shadow:none;
+  color:var(--brass); cursor:default;
+}
+.dm-card.next .n{color:var(--brass)}
+.dm-card.next .dm-plus{font-size:20px; line-height:1; color:var(--brass); opacity:.8}
+.dm.next:hover .dm-card{transform:none; box-shadow:none}
+.dock-note{
+  font-family:var(--mono); font-size:10.5px; color:var(--ink-3);
+  align-self:center; padding:0 6px;
+}
+/* the popover: everything the old roster row said, above the card */
+.dm-pop{
+  position:absolute; bottom:calc(100% + 12px); left:50%; transform:translateX(-50%);
+  width:256px; z-index:30; visibility:hidden; opacity:0;
+  transition:opacity .16s var(--ease), visibility .16s;
+  background:rgba(16,19,26,.97); border:1px solid var(--rule-2); border-radius:10px;
+  padding:11px 13px 12px; text-align:left; box-shadow:var(--shadow-lift);
+}
+.dm-pop::after{ /* hover bridge so the pointer can travel into the popover */
+  content:""; position:absolute; top:100%; left:0; right:0; height:14px;
+}
+.dm:hover .dm-pop, .dm:focus-within .dm-pop{visibility:visible; opacity:1}
+.dm:first-child .dm-pop{left:-6px; transform:none}
+.dm:last-child .dm-pop{left:auto; right:-6px; transform:none}
+.dm-pop .dm-nm{font-size:13.5px; margin-bottom:2px}
+.dm-pop .fn{display:block}
+.dm-actions{display:flex; gap:6px; margin-top:9px; align-items:center}
+.dm-act{
+  font:600 10px/1 var(--sans); letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ink-3); background:transparent; padding:4px 8px;
+  border:1px solid var(--rule); border-radius:5px;
+  transition:color .15s var(--ease), border-color .15s var(--ease);
+}
+.dm-act:hover{color:var(--brass); border-color:var(--brass-deep)}
+.dm-act.dm-x:hover{color:var(--gap); border-color:var(--gap)}
+.roster-notes .lo-panel{margin:8px 0 0; border-top:1px solid var(--rule); border-radius:8px}
+.kit-head{margin:12px 0 0; color:var(--brass)}
 .tally{display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px}
 .tally .t{
   font-family:var(--mono); font-size:10.5px; letter-spacing:.05em;
   padding:3px 9px; border:1px solid var(--rule-2); border-radius:99px; color:var(--ink-2);
-  background:rgba(18,21,28,.55);
+  background:rgba(18,21,28,.55); display:inline-flex; align-items:center; gap:5px;
 }
+.tally .t .sem-icon{width:18px; height:18px; margin:-2px 0}
 .tally .t b{color:var(--ink); font-weight:600}
 .tally .t[data-pfilter]{cursor:pointer; transition:border-color .18s var(--ease)}
 .tally .t[data-pfilter]:hover{border-color:currentColor}
@@ -224,11 +334,15 @@ select:focus, .text-input:focus{border-color:var(--brass-deep)}
   font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.08em;
   text-transform:uppercase; padding:2.5px 8px; background:transparent;
   border:1px solid var(--rule-2); border-radius:99px; color:var(--ink-2);
-  transition:border-color .18s var(--ease);
+  transition:border-color .18s var(--ease), background .18s var(--ease);
+  display:inline-flex; align-items:center; justify-content:center;
 }
+.pchip.icon-chip{width:32px; height:29px; padding:3px}
+.pchip.icon-chip .sem-icon{width:22px; height:22px}
 .pchip:hover{border-color:currentColor}
 .pchip[aria-pressed="true"]{
-  border-color:currentColor; box-shadow:inset 0 0 0 1px currentColor, 0 0 10px -4px currentColor;
+  border-color:currentColor; background:rgba(255,255,255,.035);
+  box-shadow:inset 0 0 0 1px currentColor, 0 0 10px -4px currentColor;
 }
 .pchip.b-tank,.pchip.t-tank{color:var(--role-tank)}
 .pchip.b-heal,.pchip.t-healer{color:var(--role-healer)}
@@ -238,36 +352,6 @@ select:focus, .text-input:focus{border-color:var(--brass-deep)}
 .pchip.b-st,.pchip.t-melee{color:var(--role-melee)}
 .pchip.b-dps{color:var(--role-support)}
 .pchip.t-support{color:var(--over)}
-.slot{
-  display:flex; align-items:center; gap:10px; padding:10px 11px; min-height:54px;
-  background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
-  border:1px solid var(--rule); border-radius:8px;
-  position:relative; overflow:hidden;
-  --role:var(--rule-2);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.03), 0 1px 3px rgba(0,0,0,.35);
-  transition:border-color .18s var(--ease), transform .18s var(--ease);
-}
-.slot::after{
-  content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
-  background:var(--role); box-shadow:0 0 12px 0 var(--role); opacity:.85;
-}
-.slot.role-tank{--role:var(--role-tank)} .slot.role-healer{--role:var(--role-healer)}
-.slot.role-melee{--role:var(--role-melee)} .slot.role-range{--role:var(--role-range)}
-.slot.role-support{--role:var(--role-support)}
-.slot::before{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background-image:var(--wbg); background-repeat:no-repeat;
-  background-position:left -18px center; background-size:104px;
-  opacity:.20; filter:saturate(1.35);
-  -webkit-mask-image:linear-gradient(90deg,#000 24%,transparent 72%);
-  mask-image:linear-gradient(90deg,#000 24%,transparent 72%);
-  transition:opacity .18s var(--ease);
-}
-.slot:hover{border-color:var(--rule-2); transform:translateX(2px)}
-.slot:hover::before{opacity:.34}
-.slot > *{position:relative}
-.slot .n{font-family:var(--mono); font-size:10.5px; color:var(--ink-3); width:16px; flex:none}
-.slot .nm{flex:1; font-size:13.5px; min-width:0}
 .fn{
   font-family:var(--mono); font-size:10px; color:var(--ink-3);
   letter-spacing:.04em; display:block; margin-top:1px;
@@ -366,35 +450,16 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   border-bottom:1px solid rgba(35,40,52,.6)}
 .meta-row .rk{font-family:var(--mono); font-size:10px; color:var(--ink-3); width:14px; flex:none}
 .meta-row .pct{font-family:var(--mono); font-size:11.5px; color:var(--ink-2); margin-left:auto}
-.slot .x{
-  background:none; border:0; color:var(--ink-3); font-size:16px; line-height:1;
-  padding:2px 6px; border-radius:5px; flex:none;
-  transition:color .18s var(--ease), background .18s var(--ease);
+/* duplicate-interaction notices (PvP interaction layer) — full-width
+   under the dock */
+.inote{
+  font-size:12px; line-height:1.5; padding:8px 12px; margin-top:8px;
+  color:var(--ink-2); border:1px dashed var(--rule-2); border-radius:8px;
 }
-.slot .x:hover{color:var(--gap); background:var(--gap-wash)}
-.slot.next{
-  border-style:dashed; border-color:rgba(217,164,78,.4); background:transparent;
-  color:var(--brass); font-family:var(--mono); font-size:11px; letter-spacing:.08em;
-  text-transform:uppercase; box-shadow:none;
-}
-.slot.next::after{display:none}
-.slot.next .n{color:var(--brass)}
-.slot.more{
-  border:0; background:transparent; color:var(--ink-3); box-shadow:none;
-  font-family:var(--mono); font-size:11px; letter-spacing:.05em; padding:2px 11px;
-}
-.slot.more::after{display:none}
-
-/* duplicate-interaction notices (PvP interaction layer) */
-.slot.inote{
-  display:block; font-size:12px; line-height:1.5; padding:7px 11px;
-  color:var(--ink-2); border-style:dashed;
-}
-.slot.inote::after{display:none}
-.slot.inote .fn{display:block}
-.slot.int-high b{color:var(--bad)}
-.slot.int-warning b{color:var(--amber)}
-.slot.int-info b,.slot.int-verify b{color:var(--ink-2)}
+.inote .fn{display:block}
+.inote.int-high b{color:var(--gap)}
+.inote.int-warning b{color:var(--amber)}
+.inote.int-info b,.inote.int-verify b{color:var(--ink-2)}
 /* per-ability facts panel (click a spell row in the dossier) */
 .sp-row{cursor:pointer}
 .sp-row:hover{background:var(--surface-2)}
@@ -419,16 +484,13 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .int-comps i{color:var(--ink-3)}
 .pchip.u-chip{color:var(--brass)}
 
-/* ---------- weapon picker ---------- */
-.pick-grid{display:flex; flex-direction:column; gap:3px}
-.pick{
-  display:flex; align-items:center; gap:9px; text-align:left; width:100%;
-  padding:7px 9px; background:transparent; border:1px solid transparent; border-radius:7px;
-  transition:background .15s var(--ease), border-color .15s var(--ease);
-}
-.pick:hover:not(:disabled){background:var(--surface-2); border-color:var(--rule)}
-.pick:disabled{opacity:.38; cursor:not-allowed}
-.pick .nm{flex:1; font-size:13.5px; min-width:0}
+/* ---------- weapon wheel: filters above the wheel ---------- */
+.wheel-filters{display:flex; flex-direction:column; gap:9px; margin-bottom:4px}
+.wf-filter-row{display:flex; gap:8px}
+.wf-filter-row select{width:auto; flex:0 1 190px}
+.wf-filter-row .text-input{flex:1; min-width:0}
+.wheel-filters .pchips{margin-bottom:0; justify-content:center}
+.wheel-filters .facet{margin:0; justify-content:center}
 .prov{
   font-family:var(--mono); font-size:9px; letter-spacing:.06em; padding:2px 6px;
   border-radius:99px; flex:none; text-transform:uppercase;
@@ -443,11 +505,12 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 
 /* ---------- capability badges: what a weapon PROVIDES, at a glance ---------- */
 .bdg{
-  display:inline-block; font-family:var(--mono); font-size:8.5px; font-weight:700;
-  letter-spacing:.09em; text-transform:uppercase; padding:1px 5px; margin-left:4px;
-  border-radius:3px; border:1px solid currentColor; vertical-align:1.5px;
-  line-height:1.4; opacity:.85; cursor:pointer; transition:opacity .15s var(--ease);
+  display:inline-flex; align-items:center; justify-content:center;
+  width:22px; height:22px; padding:2px; margin-left:4px;
+  border-radius:5px; border:1px solid currentColor; vertical-align:-6px;
+  opacity:.88; cursor:pointer; transition:opacity .15s var(--ease), background .15s var(--ease);
 }
+.bdg .sem-icon{width:18px; height:18px}
 .bdg:hover{opacity:1; background:var(--surface-2)}
 .facet{
   display:flex; align-items:center; gap:8px; margin:-4px 0 8px;
@@ -466,49 +529,124 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .b-st{color:var(--role-melee)}
 .b-dps{color:var(--role-support)}
 
-/* ---------- command bar: the forge's centerpiece ---------- */
+/* ---------- the forge wheel stage: the page's centerpiece ----------
+   An iron ring of weapon cards riding the rim, a brass notch marking the
+   focused pick at 12 o'clock, and the party's role rings closing around
+   the hub — the composition literally fills in at the center of the
+   picking experience. Analysis flanks it: fitness + weaknesses left,
+   the engine's reasoning right. */
 .lbl{font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3)}
-.cmdbar{
-  display:grid; grid-template-columns:minmax(240px,1fr) minmax(320px,1.4fr);
-  background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
-  border:1px solid var(--rule-2); border-radius:12px;
-  overflow:hidden; box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.04);
+.wheelstage{
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,360px);
+  gap:30px; align-items:start;
 }
-@media (max-width:880px){ .cmdbar{grid-template-columns:1fr} }
-.cb-fit{padding:20px 24px 22px; border-right:1px solid var(--rule); display:flex; flex-direction:column; gap:10px}
-@media (max-width:880px){ .cb-fit{border-right:0; border-bottom:1px solid var(--rule)} }
-.cb-fit .num{
-  font-family:var(--mono); font-size:46px; font-weight:700; line-height:1; letter-spacing:-.03em;
+@media (max-width:1250px){ .wheelstage{grid-template-columns:1fr} }
+.ws-flank{display:flex; flex-direction:column; gap:12px; min-width:0}
+.ws-fit{margin-bottom:14px}
+.ws-fit .num{
+  font-family:var(--mono); font-size:40px; font-weight:700; line-height:1; letter-spacing:-.03em;
   background:linear-gradient(180deg, #F5EBD6, #C9B283);
   -webkit-background-clip:text; background-clip:text; color:transparent;
 }
-.cb-fit .of{font-family:var(--mono); font-size:13px; color:var(--ink-3)}
+.ws-fit .of{font-family:var(--mono); font-size:13px; color:var(--ink-3)}
+.ws-fit .meter-track{margin-top:8px}
 .meter-track{height:8px; background:var(--sunk); border-radius:99px; overflow:hidden;
   box-shadow:inset 0 1px 3px rgba(0,0,0,.6)}
 .meter-fill{height:100%;
   background:linear-gradient(90deg, var(--brass-deep), var(--brass) 60%, var(--brass-bright));
   border-radius:99px; transition:width .45s var(--ease);
   box-shadow:0 0 10px rgba(217,164,78,.45)}
-.cb-next{
-  padding:20px 24px; display:flex; flex-direction:column;
-  gap:5px; justify-content:center; position:relative; overflow:hidden;
-  background:linear-gradient(120deg, rgba(217,164,78,.13), rgba(217,164,78,.03) 55%, transparent);
+.ws-center{min-width:0; container-type:inline-size}
+
+/* the wheel proper — all rim geometry derives from --wd so the whole
+   instrument scales with its column (100cqi = the center column's width) */
+.wheel{
+  position:relative; margin:10px auto 0;
+  --wd:min(560px, calc(100vw - 64px));
+  --wd:min(560px, 100cqi);
+  --card-w:clamp(64px, calc(var(--wd)*.175), 96px);
+  --card-h:clamp(68px, calc(var(--wd)*.165), 92px);
+  --wr:calc(var(--wd)/2 - var(--card-h)/2 - 8px);
+  width:var(--wd); height:var(--wd);
 }
-.cb-next::before{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background-image:var(--wbg); background-repeat:no-repeat;
-  background-position:right -30px center; background-size:180px;
-  opacity:.2; filter:saturate(1.35);
-  -webkit-mask-image:linear-gradient(90deg,transparent 40%,#000 85%);
-  mask-image:linear-gradient(90deg,transparent 40%,#000 85%);
+.wheel:focus-visible{outline:2px solid var(--brass-bright); outline-offset:4px; border-radius:50%}
+.wheel-track{
+  position:absolute; inset:2px; border-radius:50%;
+  border:1px solid var(--rule);
+  background:radial-gradient(closest-side,
+    transparent 60%, rgba(18,21,28,.55) 62%, rgba(8,10,15,.6) 82%,
+    rgba(217,164,78,.10) 96%, transparent);
+  box-shadow:inset 0 0 30px rgba(0,0,0,.5);
 }
-.cb-next > *{position:relative}
-.cb-next .eyebrow{font-family:var(--mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--brass)}
-.cb-row{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
-.cb-next .nm{font-family:var(--serif); font-size:26px; letter-spacing:0; line-height:1.2}
-.cb-next .rl{font-family:var(--mono); font-size:11px; color:var(--ink-2)}
+.wheel-notch{
+  position:absolute; top:-4px; left:50%; z-index:3;
+  width:12px; height:12px; transform:translateX(-50%) rotate(45deg);
+  background:linear-gradient(135deg, var(--brass-bright), var(--brass-deep));
+  border-radius:2px; box-shadow:0 0 14px rgba(217,164,78,.65);
+}
+.wheel-ring{position:absolute; inset:0; transform-origin:50% 50%}
+.wheel.spun .wheel-ring{animation:wheel-spin 1.15s cubic-bezier(.16,.7,.25,1)}
+@keyframes wheel-spin{from{transform:rotate(2turn)}to{transform:rotate(0)}}
+/* rim cards ride the wheel: rotate to their angle, push out to the rim,
+   and stay tilted with it — like chest segments on a fortune wheel */
+.wseg{
+  position:absolute; left:50%; top:50%;
+  width:var(--card-w); height:var(--card-h);
+  margin-left:calc(var(--card-w)/-2); margin-top:calc(var(--card-h)/-2);
+  transform:rotate(var(--a,0deg)) translateY(calc(var(--wr)*-1));
+  opacity:var(--fade,1);
+  transition:transform .45s var(--ease), opacity .45s var(--ease),
+    border-color .18s var(--ease), box-shadow .18s var(--ease);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+  padding:5px 3px; background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
+  border:1px solid var(--rule); border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,.45);
+}
+.wseg:hover{border-color:var(--rule-2)}
+.wseg.on{
+  border-color:rgba(217,164,78,.65); opacity:1;
+  box-shadow:0 0 20px -6px rgba(217,164,78,.6), 0 2px 8px rgba(0,0,0,.45);
+}
+.wseg .icon{filter:drop-shadow(0 2px 6px rgba(0,0,0,.5)) saturate(1.1)}
+.wseg .ws-nm{
+  font-size:9.5px; line-height:1.2; text-align:center; color:var(--ink-2);
+  max-width:100%; padding:0 3px; overflow:hidden;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+}
+.wseg.on .ws-nm{color:var(--ink)}
+
+/* the hub: party role rings closing around the focused weapon */
+.wheel-hub{
+  position:absolute; inset:calc(var(--card-h) + 14px); border-radius:50%;
+  background:radial-gradient(closest-side, rgba(24,28,37,.94), rgba(13,16,22,.97));
+  border:1px solid var(--rule-2);
+  box-shadow:inset 0 0 42px rgba(0,0,0,.55), 0 0 34px -14px rgba(217,164,78,.3);
+}
+.hub-rings{position:absolute; inset:5px; width:calc(100% - 10px); height:calc(100% - 10px)}
+.hub-rings circle{fill:none; stroke-width:6.5;
+  transform:rotate(-90deg); transform-origin:100px 100px}
+.hub-rings .ring-track{stroke:rgba(255,255,255,.055)}
+.hub-rings .ring-fill{stroke-linecap:round; transition:stroke-dasharray .5s var(--ease)}
+.hub-rings .ring-fill.empty{opacity:0}
+.hub-rings .ring-fill.done{filter:drop-shadow(0 0 4px currentColor)}
+.hub-body{
+  position:absolute; inset:26%; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:3px; text-align:center; min-width:0;
+}
+.hub-body .icon{filter:drop-shadow(0 6px 14px rgba(0,0,0,.6)) saturate(1.15)}
+.hub-nm{
+  font-family:var(--serif); font-size:15px; line-height:1.15; max-width:100%;
+  overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+}
+.hub-role{
+  font-family:var(--mono); font-size:9px; color:var(--ink-2); max-width:92%;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.hub-score{font-size:10.5px; color:var(--brass)}
+.hub-score .offcomp{font-style:normal}
+.hub-empty{font-size:12px; line-height:1.5; color:var(--ink-2); padding:0 6px}
 .cb-add{
-  margin-left:auto; padding:10px 18px;
+  padding:10px 18px;
   background:linear-gradient(180deg, var(--brass-bright), var(--brass));
   color:#1A1206; border:0; border-radius:8px; font-size:13.5px; font-weight:700; white-space:nowrap;
   box-shadow:0 2px 14px -4px rgba(217,164,78,.55), inset 0 1px 0 rgba(255,255,255,.35);
@@ -517,17 +655,28 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .cb-add:hover{filter:brightness(1.07); transform:translateY(-1px);
   box-shadow:0 4px 20px -4px rgba(217,164,78,.65), inset 0 1px 0 rgba(255,255,255,.35)}
 .cb-add:active{transform:translateY(0)}
+.hub-add{padding:7px 15px; font-size:11.5px; margin-top:4px}
 .cb-forge{
   padding:9px 14px; background:transparent; color:var(--brass);
   border:1px solid rgba(217,164,78,.5); border-radius:8px; font-size:12px; white-space:nowrap;
   transition:background .15s var(--ease), border-color .15s var(--ease);
 }
 .cb-forge:hover{background:var(--brass-wash); border-color:var(--brass)}
-.cb-full{font-size:13.5px; color:var(--ink-2)}
 
-/* ---------- diagnosis | prescription band ---------- */
-.duo{display:grid; grid-template-columns:minmax(250px,330px) minmax(0,1fr); gap:26px; align-items:start}
-@media (max-width:1100px){ .duo{grid-template-columns:1fr} }
+/* beneath the wheel: next-pick eyebrow, ring tallies, forge actions */
+.wheel-foot{display:flex; flex-direction:column; gap:9px; margin-top:16px}
+.wheel-foot .wf-row{
+  display:flex; align-items:center; justify-content:center; gap:10px 16px; flex-wrap:wrap;
+}
+.wheel-foot .eyebrow{
+  font-family:var(--mono); font-size:10px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--brass);
+}
+.wf-count{font-family:var(--mono); font-size:10px; color:var(--ink-3)}
+.wf-rings{display:flex; gap:6px 14px; flex-wrap:wrap; justify-content:center}
+.wf-ring{font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase}
+.wf-ring b{color:var(--ink); font-weight:600}
+.wf-actions{display:flex; gap:8px}
 
 /* ---------- capability readout ---------- */
 .groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:2px 34px}
@@ -630,36 +779,47 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .warn .b{font-size:13.5px; line-height:1.5}
 .warn .b code{font-family:var(--mono); font-size:12px}
 
-/* ---------- live party (companion) ---------- */
-.companion{margin-top:14px; border-top:1px solid var(--rule); padding-top:14px}
+/* ---------- live party feed: one card per in-game member ---------- */
+.livefeed{border-top:1px solid var(--rule); padding-top:4px}
+.lf-bar{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+.lf-btn{width:auto; margin-top:0}
 .comp-dot{
   display:inline-block; width:7px; height:7px; border-radius:50%;
   background:var(--ink-3); margin-right:7px; vertical-align:1px;
 }
-.companion[data-live="true"] .comp-dot{background:var(--ok-bright); box-shadow:0 0 8px var(--ok-bright)}
-.companion .status{font-family:var(--mono); font-size:11px; color:var(--ink-2); margin:7px 0}
-.companion .status .sub{color:var(--ink-3); display:block; margin-top:2px; line-height:1.5}
-.comp-members{display:flex; flex-direction:column; gap:3px; margin:8px 0}
+.livefeed[data-live="true"] .comp-dot{background:var(--ok-bright); box-shadow:0 0 8px var(--ok-bright)}
+.livefeed .status{font-family:var(--mono); font-size:11px; color:var(--ink-2)}
+.livefeed .status .sub{color:var(--ink-3); display:block; margin-top:2px; line-height:1.5}
+.comp-members{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 0}
 .comp-m{
-  display:flex; align-items:center; gap:8px; font-size:12px;
-  padding:5px 8px; background:var(--surface); border:1px solid var(--rule); border-radius:6px;
+  display:flex; flex-direction:column; align-items:flex-start; gap:5px; font-size:12px;
+  padding:10px 12px; min-width:150px; max-width:220px; position:relative;
+  background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
+  border:1px solid var(--rule); border-radius:8px;
+  box-shadow:0 1px 3px rgba(0,0,0,.35);
 }
-.comp-m .cm-role{width:6px; height:6px; border-radius:50%; background:var(--rule-2); flex:none}
-.comp-m.role-tank .cm-role{background:var(--role-tank)} .comp-m.role-healer .cm-role{background:var(--role-healer)}
-.comp-m.role-melee .cm-role{background:var(--role-melee)} .comp-m.role-range .cm-role{background:var(--role-range)}
-.comp-m.role-support .cm-role{background:var(--role-support)}
-.comp-m .cm-name{flex:none; color:var(--ink-2)}
-.comp-m .cm-wpn{flex:1; color:var(--ink); min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.comp-m .cm-role{position:absolute; top:11px; right:11px;
+  width:7px; height:7px; border-radius:50%; background:var(--rule-2); flex:none;
+  box-shadow:0 0 8px 0 currentColor}
+.comp-m.role-tank .cm-role{background:var(--role-tank); color:var(--role-tank)}
+.comp-m.role-healer .cm-role{background:var(--role-healer); color:var(--role-healer)}
+.comp-m.role-melee .cm-role{background:var(--role-melee); color:var(--role-melee)}
+.comp-m.role-range .cm-role{background:var(--role-range); color:var(--role-range)}
+.comp-m.role-support .cm-role{background:var(--role-support); color:var(--role-support)}
+.comp-m .cm-name{color:var(--ink-2); font-family:var(--mono); font-size:10.5px;
+  max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding-right:14px}
+.comp-m .cm-wpn{color:var(--ink); width:100%; min-width:0; display:flex; align-items:center; gap:7px}
+.comp-m .cm-wpn > span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 .comp-m .cm-wpn.unknown{color:var(--ink-3); font-style:italic}
-.companion .load-btn{
-  width:100%; padding:10px; margin-top:6px;
+.livefeed .load-btn{
+  padding:10px 16px;
   background:linear-gradient(180deg, var(--brass-bright), var(--brass));
   color:#1A1206; border:0; border-radius:8px; font-family:var(--mono); font-size:11.5px;
   letter-spacing:.08em; text-transform:uppercase; font-weight:700;
   box-shadow:0 2px 14px -4px rgba(217,164,78,.55), inset 0 1px 0 rgba(255,255,255,.35);
 }
-.companion .load-btn:hover{filter:brightness(1.07)}
-.companion .load-btn:disabled{opacity:.4; cursor:not-allowed; filter:none}
+.livefeed .load-btn:hover{filter:brightness(1.07)}
+.livefeed .load-btn:disabled{opacity:.4; cursor:not-allowed; filter:none}
 
 /* ---------- evidence drawer ---------- */
 .drawer{
@@ -816,8 +976,17 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   <span class="chip">dataset <span class="mono" id="build-stamp">—</span></span>
 </header>
 
-<div class="shell">
+<div class="shell" id="shell">
   <aside class="rail">
+    <!-- collapsed rail: a slim strip — expand arrow, setup, forge -->
+    <div class="rail-strip">
+      <button class="rs-btn" id="rail-expand" title="expand the setup rail" aria-label="Expand setup rail">&#10095;</button>
+      <button class="rs-btn" id="rail-expand-setup" title="open setup" aria-label="Open setup">&#9881;</button>
+      <button class="rs-btn rs-forge" id="forge-rail-mini" title="forge full comp" aria-label="Forge full comp">&#9874;</button>
+    </div>
+    <div class="rail-body">
+    <button class="rail-toggle" id="rail-toggle" aria-expanded="true"
+      title="collapse the setup rail — more room for the wheel">&#10094; hide setup</button>
     <section>
       <div class="sec-label">Setup</div>
       <div class="field">
@@ -853,51 +1022,53 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
       <div class="btn-row">
         <button class="share-btn clear-btn" id="clear">clear comp</button>
       </div>
-      <div class="companion" id="companion" data-live="false">
-        <button class="share-btn" id="companion-connect">connect live party</button>
-        <div class="status" id="companion-status" hidden></div>
-        <div class="comp-members" id="companion-members"></div>
-        <button class="load-btn" id="companion-load" hidden>load party into comp</button>
-      </div>
     </section>
-
-    <section>
-      <div class="sec-label">Party</div>
-      <div class="tally" id="tally"></div>
-      <div class="roster" id="roster"></div>
-    </section>
-
-    <section>
-      <div class="sec-label">Add weapon</div>
-      <div class="field">
-        <select id="tree-filter" aria-label="Filter by weapon tree"></select>
-      </div>
-      <div class="field">
-        <input class="text-input" id="pick-filter" placeholder="filter — type a weapon name" aria-label="Filter weapons" autocomplete="off">
-      </div>
-      <div id="picker-chips"></div>
-      <div id="facet-slot"></div>
-      <div class="pick-grid" id="picker"></div>
-    </section>
+    </div>
   </aside>
 
   <main class="main">
-    <section class="cmdbar">
-      <div class="cb-fit">
-        <div class="lbl">Composition fitness</div>
-        <div><span class="num" id="fit-num">0.0</span> <span class="of" id="fit-of">/ 0</span></div>
-        <div class="meter-track"><div class="meter-fill" id="fit-bar" style="width:0%"></div></div>
+    <!-- The forge wheel stage: analysis flanks left, the wheel centers,
+         reasoning flanks right. The wheel replaces the old rail picker. -->
+    <section class="wheelstage">
+      <div class="ws-center">
+        <div class="sec-label">Add weapon</div>
+        <div class="wheel-filters">
+          <div class="wf-filter-row">
+            <select id="tree-filter" aria-label="Filter by weapon tree"></select>
+            <input class="text-input" id="pick-filter" placeholder="filter — type a weapon name" aria-label="Filter weapons" autocomplete="off">
+          </div>
+          <div id="picker-chips"></div>
+          <div id="facet-slot"></div>
+        </div>
+        <div class="wheel" id="wheel" role="listbox" tabindex="0"
+          aria-label="Weapon wheel. Arrow keys rotate, Enter adds the focused weapon">
+          <div class="wheel-track" aria-hidden="true"></div>
+          <div class="wheel-notch" aria-hidden="true"></div>
+          <div class="wheel-ring" id="wheel-ring"></div>
+          <div class="wheel-hub">
+            <svg class="hub-rings" id="hub-rings" viewBox="0 0 200 200" aria-hidden="true"></svg>
+            <div class="hub-body" id="hub-body"></div>
+          </div>
+        </div>
+        <div class="wheel-foot" id="wheel-foot"></div>
+        <!-- the party dock: the roster as a fish-eye row under the wheel -->
+        <div class="dock-sec">
+          <div class="sec-label">Party</div>
+          <div class="tally" id="tally"></div>
+          <div class="roster" id="roster"></div>
+          <div class="roster-notes" id="roster-notes"></div>
+        </div>
       </div>
-      <div class="cb-next" id="cb-next"></div>
-    </section>
 
-    <section class="duo">
-      <div>
+      <div class="ws-flank ws-right">
+        <div class="ws-fit">
+          <div class="sec-label">Composition fitness</div>
+          <div><span class="num" id="fit-num">0.0</span> <span class="of" id="fit-of">/ 0</span></div>
+          <div class="meter-track"><div class="meter-fill" id="fit-bar" style="width:0%"></div></div>
+        </div>
         <div class="sec-label">Biggest weaknesses</div>
         <div class="weak-list" id="weaknesses"></div>
         <div id="warn-slot"></div>
-      </div>
-      <div>
         <div class="sec-label" id="rec-label">Why this pick</div>
         <div id="rec-slot"></div>
       </div>
@@ -911,6 +1082,17 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
     <section id="meta-sec" hidden>
       <div class="sec-label" id="meta-label">This week on the killboard</div>
       <div class="meta-grid" id="meta-strip"></div>
+    </section>
+
+    <!-- Live party feed: the companion's home, one card per in-game member -->
+    <section class="livefeed" id="companion" data-live="false">
+      <div class="sec-label">Live party</div>
+      <div class="lf-bar">
+        <button class="share-btn lf-btn" id="companion-connect">connect live party</button>
+        <div class="status" id="companion-status" hidden></div>
+        <button class="load-btn lf-btn" id="companion-load" hidden>load party into comp</button>
+      </div>
+      <div class="comp-members" id="companion-members"></div>
     </section>
 
     <p class="footnote" id="footnote"></p>
@@ -3188,13 +3370,9 @@ function facetOk(w){
 }
 function setFacet(f, scroll){
   FACET = (f && FACET && FACET.type === f.type && FACET.v === f.v) ? null : f;
-  renderPicker();
+  renderWheel(RECS_CUR);
   if (FACET && scroll && !matchMedia("(prefers-reduced-motion: reduce)").matches)
-    $("pick-filter").scrollIntoView({behavior: "smooth", block: "center"});
-}
-function roleBg(w){
-  return (typeof ICONS !== "undefined" && ICONS[w])
-    ? ` style="--wbg:url('${ICONS[w]}')"` : "";
+    $("wheel").scrollIntoView({behavior: "smooth", block: "center"});
 }
 const roleCls = w => `role-${roleHint(w)}`;
 function whySentence(party, cand){
@@ -3291,6 +3469,12 @@ let COMBOS_CUR = [];
 let FORGE_NOTE = null;
 let pickFilter = "";
 let treeFilter = "";
+/* Forge-wheel state: the focused weapon rides at 12 o'clock. Roster changes
+   re-aim the wheel at the engine's top pick (render() owns that); pure
+   browsing (drag / scroll / arrows / filters) never fights the user. */
+let WHEEL_FOCUS_W = null;
+let RECS_CUR = null;   /* last recommendations, so filter handlers can
+                          re-render the wheel without re-running the engine */
 const $ = id => document.getElementById(id);
 
 const PENDING = [["hellgate_5v5","Hellgate 5v5"]];
@@ -3337,7 +3521,8 @@ function renderTally(){
     ? Object.entries(roleCounts()).sort((a,b) => b[1]-a[1])
         .map(([r,n]) => `<span class="t t-${esc(r)}" data-pfilter="${esc(r)}" role="button" tabindex="0"
            aria-pressed="${PARTY_FACET === r}"
-           title="show only the ${esc(r)} slots — click again for all"><b>${n}</b> ${esc(r)}</span>`).join("")
+           aria-label="${n} ${esc(roleLabel(r))} slots. Filter the roster"
+           title="${esc(roleLabel(r))}: ${n} — click to filter the roster">${semanticIcon(r)}<b>${n}</b><span class="sr-only"> ${esc(roleLabel(r))}</span></span>`).join("")
       + `<span class="t"><b>${SIZE - party.length}</b> open</span>`
     : "";
 }
@@ -3420,31 +3605,48 @@ function renderRoster(){
       idxs = party.map((_, i) => i);
     }
   }
-  const rows = idxs.map(i => { const w = party[i]; return (
-    `<div class="slot ${roleCls(w)}"${roleBg(w)}><span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 32)}
-      <span class="nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>${badgeHtml(w)}${PROV[i] === "f" ? '<span class="prov forged" title="slot generated by the forge — reforge all rebuilds it">forged</span>' : ""}
-        <span class="fn">${roleOf(w, COMBOS_CUR[i])} · ${signed(contrib[i])} fit${flag(i)}${ENG.isExcluded(w) ? ' · <b class="offcomp" title="owner rule: not a default large-group pick at this size — swap advice below">off-comp at size ' + SIZE + "</b>" : ""}</span>${hintable.has(i) ? swapHint(review[i], i) : ""}</span>
-      <button class="lo-open${LO_OPEN === i ? " on" : ""}" data-lo-open="${i}"
-        aria-expanded="${LO_OPEN === i}" aria-label="Loadout for ${nameOf(w)}"
-        >kit${loadoutCount(i) ? `<i>${loadoutCount(i)}</i>` : ""}</button>
-      <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>
-      ${loadoutPanel(i)}`); });
-  /* duplicate-interaction notices (spec §7): what a duplicated SPELL
-     actually does, from the compiled interaction records — the message
-     names the exact effect, and unknown says "verify", never a penalty */
-  const inotes = interactionNotices();
-  if (inotes) rows.push(inotes);
+  /* dock cards: the card is the hover/focus target, the popover carries
+     everything the old roster row said plus the kit/dossier/remove actions */
+  const cards = idxs.map(i => { const w = party[i]; return (
+    `<div class="dm ${roleCls(w)}">
+      <button class="dm-card" aria-label="${nameOf(w)} — slot ${i+1}, hover or focus for details">
+        <span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 34)}
+      </button>
+      <div class="dm-pop" role="group" aria-label="Slot ${i+1} — ${nameOf(w)}">
+        <div class="dm-nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>${badgeHtml(w)}${PROV[i] === "f" ? '<span class="prov forged" title="slot generated by the forge — reforge all rebuilds it">forged</span>' : ""}</div>
+        <span class="fn">${roleOf(w, COMBOS_CUR[i])} · ${signed(contrib[i])} fit${flag(i)}${ENG.isExcluded(w) ? ' · <b class="offcomp" title="owner rule: not a default large-group pick at this size — swap advice below">off-comp at size ' + SIZE + "</b>" : ""}</span>
+        ${hintable.has(i) ? swapHint(review[i], i) : ""}
+        <div class="dm-actions">
+          <button class="lo-open${LO_OPEN === i ? " on" : ""}" data-lo-open="${i}"
+            aria-expanded="${LO_OPEN === i}" aria-label="Loadout for ${nameOf(w)}"
+            >kit${loadoutCount(i) ? `<i>${loadoutCount(i)}</i>` : ""}</button>
+          <button class="dm-act" data-detail="${w}">dossier</button>
+          <button class="dm-act dm-x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">remove</button>
+        </div>
+      </div>
+    </div>`); });
   if (PARTY_FACET){
-    rows.push(`<div class="slot more">${idxs.length} of ${party.length} — ${esc(PARTY_FACET)} only · click the chip again for all</div>`);
+    cards.push(`<div class="dock-note">${idxs.length} of ${party.length} — ${esc(PARTY_FACET)} only · click the chip again for all</div>`);
   } else {
-    /* open slots collapse: one dashed "next" row, one "+N more" line */
+    /* open slots collapse: one dashed "next" card, one "+N more" note */
     const open = SIZE - party.length;
     if (party.length < HARD_CAP)
-      rows.push(`<div class="slot next"><span class="n mono">${String(party.length+1).padStart(2,"0")}</span>next slot — pick below</div>`);
+      cards.push(`<div class="dm next"><div class="dm-card next" title="next slot — pick on the wheel">
+        <span class="n mono">${String(party.length+1).padStart(2,"0")}</span><span class="dm-plus">+</span></div></div>`);
     if (open > 1)
-      rows.push(`<div class="slot more">+ ${open - 1} more open slot${open > 2 ? "s" : ""}</div>`);
+      cards.push(`<div class="dock-note">+ ${open - 1} more open slot${open > 2 ? "s" : ""}</div>`);
   }
-  $("roster").innerHTML = rows.join("");
+  $("roster").innerHTML = cards.join("");
+  /* below the dock: duplicate-interaction notices (spec §7 — the message
+     names the exact effect, and unknown says "verify", never a penalty)
+     and the open kit editor, full width */
+  const notes = [];
+  const inotes = interactionNotices();
+  if (inotes) notes.push(inotes);
+  if (LO_OPEN !== null && party[LO_OPEN] !== undefined)
+    notes.push(`<div class="kit-head fn">kit — ${nameOf(party[LO_OPEN])} · slot ${String(LO_OPEN + 1).padStart(2,"0")}</div>`
+      + loadoutPanel(LO_OPEN));
+  $("roster-notes").innerHTML = notes.join("");
 }
 const INOTE_LABEL = {high: "duplicate utility wasted",
                      warning: "duplicate utility warning",
@@ -3453,7 +3655,7 @@ function interactionNotices(){
   if (party.length < 2) return "";
   const conf = ENG.duplicateConflicts(party, COMBOS_CUR);
   if (!conf.length) return "";
-  return conf.map(c => `<div class="slot inote int-${c.severity}">
+  return conf.map(c => `<div class="inote int-${c.severity}">
     <b>${esc(INOTE_LABEL[c.severity] || c.severity)}</b> — ${esc(c.reason)}
     <span class="fn">${c.weapons.map(nameOf).join(" + ")} · ${esc(c.confidence)}</span></div>`).join("");
 }
@@ -3492,11 +3694,15 @@ function renderPickerChips(){
   if (!holder.dataset.built){
     holder.innerHTML =
       `<div class="pchips"><span class="lbl2">role</span>` +
-      PICKER_ROLES.map(r =>
-        `<button class="pchip t-${r}" data-rfilter="${r}">${r}</button>`).join("") +
+      PICKER_ROLES.map(r => {
+        const label = roleLabel(r);
+        return `<button class="pchip icon-chip t-${r}" data-rfilter="${r}"
+          aria-label="${esc(label)} role" title="${esc(label)} role">${semanticIcon(r)}<span class="sr-only">${esc(label)}</span></button>`;
+      }).join("") +
       `</div><div class="pchips"><span class="lbl2">provides</span>` +
-      BADGE_DEFS.map(([cls]) =>
-        `<button class="pchip b-${cls}" data-bfilter="${cls}">${cls}</button>`).join("") +
+      BADGE_DEFS.map(({id, label, icon}) =>
+        `<button class="pchip icon-chip b-${id}" data-bfilter="${id}"
+          aria-label="${esc(label)}" title="${esc(label)}">${semanticIcon(icon)}<span class="sr-only">${esc(label)}</span></button>`).join("") +
       `</div><div class="pchips"><span class="lbl2">utility</span>` +
       UTIL_DEFS.map(([cls]) =>
         `<button class="pchip u-chip" data-ufilter="${cls}">${cls}</button>`).join("") +
@@ -3510,20 +3716,177 @@ function renderPickerChips(){
   holder.querySelectorAll("[data-ufilter]").forEach(el => el.setAttribute("aria-pressed",
     String(!!FACET && FACET.type === "util" && FACET.v === el.dataset.ufilter)));
 }
-function renderPicker(){
-  const keys = filteredWeapons();
+/* ------------------------------------------------------- the forge wheel
+   The picker as a wheel: filtered weapons ride the rim, the focused one
+   sits under the brass notch at 12 o'clock, and the hub shows it over the
+   party's role rings. Rim cards are DIFFED by weapon key, never rebuilt —
+   updating each card's --a angle lets CSS transitions carry them around
+   the rim instead of snapping. */
+const WHEEL_STEP = 26;     /* degrees between rim cards */
+const WHEEL_WINDOW = 4;    /* cards rendered each side of the focus */
+
+function wheelFocusIdx(keys, recs){
+  /* keep the user's focus when it survives the filter; otherwise aim at
+     the best engine pick present, else the first card */
+  let i = WHEEL_FOCUS_W ? keys.indexOf(WHEEL_FOCUS_W) : -1;
+  if (i === -1 && recs)
+    for (const r of recs){ i = keys.indexOf(r.w); if (i !== -1) break; }
+  if (i === -1 && keys.length) i = 0;
+  WHEEL_FOCUS_W = i === -1 ? null : keys[i];
+  return i;
+}
+function renderWheelRing(keys, idx){
+  const ring = $("wheel-ring");
+  const want = new Map();   /* weapon -> signed offset from focus */
+  const L = keys.length;
+  if (idx !== -1 && L){
+    const v = Math.min(L, WHEEL_WINDOW * 2 + 1);
+    const lo = -Math.floor((v - 1) / 2);
+    for (let k = 0; k < v; k++)
+      want.set(keys[((idx + lo + k) % L + L) % L], lo + k);
+  }
+  [...ring.children].forEach(el => { if (!want.has(el.dataset.wfocus)) el.remove(); });
+  const have = new Map([...ring.children].map(el => [el.dataset.wfocus, el]));
+  want.forEach((o, w) => {
+    let el = have.get(w);
+    if (!el){
+      el = document.createElement("button");
+      el.className = "wseg";
+      el.dataset.wfocus = w;
+      el.id = "wseg-" + w;
+      el.setAttribute("role", "option");
+      el.tabIndex = -1;
+      el.title = `${WEAPONS[w].display_name || w} — click to focus`;
+      el.innerHTML = `${icon(w, 40)}<span class="ws-nm">${nameOf(w)}</span>`;
+      /* spawn one step beyond the final angle so the entry animates inward */
+      el.style.setProperty("--a", `${(o + Math.sign(o || 1)) * WHEEL_STEP}deg`);
+      el.style.setProperty("--fade", "0");
+      ring.appendChild(el);
+      void el.offsetWidth;
+    }
+    el.style.setProperty("--a", `${o * WHEEL_STEP}deg`);
+    el.style.setProperty("--fade", String(Math.max(.3, 1 - Math.abs(o) * .15)));
+    el.classList.toggle("on", o === 0);
+    el.setAttribute("aria-selected", String(o === 0));
+  });
+  $("wheel").setAttribute("aria-activedescendant",
+    idx === -1 ? "" : "wseg-" + WHEEL_FOCUS_W);
+}
+/* Ring data is engine truth, never invented: the outer brass ring is the
+   party filling toward SIZE; the role rings are the forge's own composition
+   minima for this content + size (the constraint band — a display-only read;
+   scoring paths never come through here). No band, no role rings. */
+function hubRingData(){
+  const rings = [{label:"party", have:party.length, want:SIZE, color:"var(--brass)"}];
+  const band = ENG._band;
+  if (band){
+    const counts = {};
+    party.forEach(w => { const c = ENG.roleOf(w); counts[c] = (counts[c] || 0) + 1; });
+    [["healer","var(--role-healer)"], ["frontline","var(--role-tank)"],
+     ["support","var(--role-support)"], ["dps","var(--role-range)"]]
+      .forEach(([k, color]) => {
+        const rule = band[k];
+        if (rule && typeof rule === "object" && rule.min)
+          rings.push({label:k, have:counts[k] || 0, want:rule.min, color});
+      });
+  }
+  return rings;
+}
+function renderHubRings(rings){
+  let r = 94;
+  $("hub-rings").innerHTML = rings.map(g => {
+    const v = Math.max(0, Math.min(100, 100 * g.have / g.want));
+    const seg = `
+      <circle class="ring-track" cx="100" cy="100" r="${r}"></circle>
+      <circle class="ring-fill${g.have >= g.want ? " done" : ""}${v <= 0 ? " empty" : ""}"
+        cx="100" cy="100" r="${r}" pathLength="100"
+        stroke-dasharray="${v.toFixed(2)} ${(100 - v).toFixed(2)}"
+        style="stroke:${g.color}; color:${g.color}">
+        <title>${esc(g.label)}: ${g.have} of ${g.want}</title></circle>`;
+    r -= 11;
+    return seg;
+  }).join("");
+}
+function renderHub(keys, idx, recs){
+  const body = $("hub-body");
+  if (recs === null){
+    body.innerHTML = `<div class="hub-empty">That is ${HARD_CAP} people — beyond even a castle blob. Remove someone to explore swaps.</div>`;
+    return;
+  }
+  if (idx === -1){
+    body.innerHTML = `<div class="hub-empty">Nothing matches${treeFilter ? " in this tree" : ""}${pickFilter.trim() ? ` — “${esc(pickFilter)}”` : ""}. Clear a filter to respin.</div>`;
+    return;
+  }
+  const w = keys[idx];
+  /* score the focused weapon exactly as recommend() would — a one-candidate
+     pool eval, so any card on the rim carries its true marginal score */
+  let r = (recs || []).find(x => x.w === w);
+  if (!r){
+    const rr = ENG.recommend(party, 1, [w], COMBOS_CUR);
+    r = rr.length ? {w, score: rr[0].score} : null;
+  }
+  const isTop = !!(recs && recs.length && recs[0].w === w);
+  const marks = (isTop ? ' · <b>engine pick</b>' : "")
+    + (ENG.isExcluded(w) ? ' · <i class="offcomp">off-comp</i>' : "")
+    + (WEAPONS[w].status === "curated" ? "" : " · illustrative");
+  body.innerHTML = `
+    <div class="hub-art-slot">${icon(w, 54)}</div>
+    <button class="nm-btn hub-nm" data-detail="${w}" title="open the dossier">${nameOf(w)}</button>
+    <span class="hub-role">${roleOf(w)}</span>
+    <span class="hub-score mono">${r ? (r.score >= 0 ? "+" : "−") + Math.abs(r.score).toFixed(2) : "—"}${marks}</span>
+    <button class="cb-add hub-add" data-add="${w}">Add to comp</button>`;
+}
+function renderWheelFoot(keys, recs, rings){
+  const sn = styleName();
+  const slotLabel = recs === null
+    ? `roster cap — ${HARD_CAP}`
+    : party.length + 1 > PLANNED
+      ? `slot ${party.length + 1} — beyond planned ${PLANNED}`
+      : `slot ${party.length + 1} of ${SIZE}`;
+  /* same commands as ever: "forge the rest" locks current members,
+     "reforge all" rebuilds only the generated slots (2026-08-18) */
+  const forge = recs === null ? "" : (party.length < SIZE
+    ? `<button class="cb-forge" id="forge">${party.length ? "forge the rest" : "forge a full comp"}</button>`
+    : "") + (PROV.some(x => x === "f")
+    ? `<button class="cb-forge" id="reforge" title="rebuild every forged slot for the current content, style and size — manual picks stay">reforge all</button>`
+    : "");
+  $("wheel-foot").innerHTML = `
+    <div class="wf-row">
+      <span class="eyebrow">Next pick — ${slotLabel}${sn ? " · " + esc(sn) : ""}</span>
+      <span class="wf-count">${keys.length} weapon${keys.length === 1 ? "" : "s"} on the wheel</span>
+    </div>
+    <div class="wf-row">
+      <span class="wf-rings">${rings.map(g =>
+        `<span class="wf-ring" style="color:${g.color}">${esc(g.label)} <b>${g.have}/${g.want}</b></span>`).join("")}</span>
+      ${forge ? `<span class="wf-actions">${forge}</span>` : ""}
+    </div>`;
+}
+function renderWheel(recs){
   renderPickerChips();
+  const keys = filteredWeapons();
+  const facetText = !FACET ? "" : FACET.type === "role"
+    ? `${roleLabel(FACET.v)} weapons`
+    : FACET.type === "badge"
+      ? `provides ${(BADGE_BY_ID[FACET.v] || {label:FACET.v}).label.toLowerCase()}`
+      : `utility: ${FACET.v}`;
   $("facet-slot").innerHTML = FACET
-    ? `<div class="facet"><span>showing: <b>${esc(FACET.type === "role" ? FACET.v + " weapons" : "provides " + FACET.v)}</b> — ${keys.length} match${keys.length === 1 ? "" : "es"}</span>
+    ? `<div class="facet"><span>showing: <b>${esc(facetText)}</b> — ${keys.length} match${keys.length === 1 ? "" : "es"}</span>
        <button class="fx" id="facet-clear" aria-label="Clear filter">&times; clear</button></div>`
     : "";
-  $("picker").innerHTML = keys.map(w => `<button class="pick" data-add="${w}">
-      ${icon(w, 26)}<span class="nm">${nameOf(w)}${badgeHtml(w)}<span class="fn">${roleOf(w)}</span></span>
-      ${ENG.isExcluded(w) ? '<span class="prov draft offcomp" title="owner rule: not a default large-group pick at this size — manual add still allowed">off-comp</span>' : ""}
-      ${WEAPONS[w].status === "curated" ? "" : '<span class="prov draft">illustrative</span>'}
-      <span class="info" data-detail="${w}" role="button" tabindex="0" aria-label="Details for ${nameOf(w)}">i</span>
-    </button>`).join("")
-    || `<p class="ev-empty">Nothing matches${treeFilter ? " in this tree" : ""}${pickFilter.trim() ? ` — “${esc(pickFilter)}”` : ""}.</p>`;
+  const idx = wheelFocusIdx(keys, recs);
+  const rings = hubRingData();
+  renderWheelRing(keys, idx);
+  renderHubRings(rings);
+  renderHub(keys, idx, recs);
+  renderWheelFoot(keys, recs, rings);
+}
+function wheelStep(d){
+  const keys = filteredWeapons();
+  if (!keys.length) return;
+  let i = WHEEL_FOCUS_W ? keys.indexOf(WHEEL_FOCUS_W) : -1;
+  i = i === -1 ? 0 : ((i + d) % keys.length + keys.length) % keys.length;
+  WHEEL_FOCUS_W = keys[i];
+  renderWheel(RECS_CUR);
 }
 function renderFitness(){
   const f = fitness(party), max = maxFitness();
@@ -3605,40 +3968,6 @@ function renderWarning(){
         <span class="b"><b>Constraint-held.</b> Slot${FORGE_NOTE.held.length > 1 ? "s" : ""} ${slotNames(FORGE_NOTE.held)} score${FORGE_NOTE.held.length > 1 ? "" : "s"} slightly negative but ${FORGE_NOTE.held.length > 1 ? "are" : "is"} required by the composition minimums (healers/frontline/ranged core) — expert structure the capability score alone does not see.</span></div>`;
   }
   $("warn-slot").innerHTML = greedy + forgeBits;
-}
-function renderCmdNext(recs){
-  if (!recs){
-    $("cb-next").style.removeProperty("--wbg");
-    $("cb-next").innerHTML = `<div class="eyebrow">Roster cap</div>
-      <div class="cb-row"><span class="cb-full">That is ${HARD_CAP} people — beyond even a castle blob. Remove someone to explore swaps.</span></div>`;
-    return;
-  }
-  const top = recs[0];
-  if (typeof ICONS !== "undefined" && ICONS[top.w])
-    $("cb-next").style.setProperty("--wbg", `url('${ICONS[top.w]}')`);
-  else $("cb-next").style.removeProperty("--wbg");
-  const slotLabel = party.length + 1 > PLANNED
-    ? `slot ${party.length + 1} — beyond planned ${PLANNED}`
-    : `slot ${party.length + 1} of ${SIZE}`;
-  const sn = styleName();
-  const styleTag = sn ? ` · ${sn}` : "";
-  /* "forge the rest" fills open slots locking every current member;
-     "reforge all" (shown whenever forged slots exist — even on a full
-     roster after a content/style/size change) rebuilds every generated
-     slot and keeps only the manual/live ones (2026-08-18). */
-  const forge = (party.length < SIZE
-    ? `<button class="cb-forge" id="forge">${party.length ? "forge the rest" : "forge a full comp"}</button>`
-    : "") + (PROV.some(x => x === "f")
-    ? `<button class="cb-forge" id="reforge" title="rebuild every forged slot for the current content, style and size — manual picks stay">reforge all</button>`
-    : "");
-  $("cb-next").innerHTML = `
-    <div class="eyebrow">Next pick — ${slotLabel}${styleTag}</div>
-    <div class="cb-row">
-      ${icon(top.w, 44)}
-      <span><button class="nm-btn nm" data-detail="${top.w}">${nameOf(top.w)}</button><span class="fn rl">${roleOf(top.w)} ${badgeHtml(top.w)}</span></span>
-      <button class="cb-add" data-add="${top.w}">Add to party</button>
-      ${forge}
-    </div>`;
 }
 /* Names for the spells a scored combo equips — the loadout the engine
    ACTUALLY valued, shown with the recommendation (2026-08-18). */
@@ -4137,7 +4466,7 @@ function renderCompanion(live, err){
     const wpn = k ? nameOf(m.weapon) : (m.weapon ? esc(m.weapon) : "— out of zone —");
     return `<div class="comp-m ${k ? companionRoleClass(m.weapon) : ""}"><span class="cm-role"></span>
       <span class="cm-name">${esc(m.name)}</span>
-      <span class="cm-wpn ${k ? "" : "unknown"}">${wpn}</span></div>`;
+      <span class="cm-wpn ${k ? "" : "unknown"}">${k ? icon(m.weapon, 26) : ""}<span>${wpn}</span></span></div>`;
   }).join("");
   load.hidden = false; load.disabled = known.length === 0;
 }
@@ -4169,8 +4498,12 @@ function toggleCompanion(){
 function render(){
   syncEngine(); saveHash();
   const recs = party.length < HARD_CAP ? recommend(party, 4) : null;
-  renderSetup(); renderTally(); renderRoster(); renderPicker(); renderFitness();
-  renderCmdNext(recs); renderGroups(); renderWeaknesses(); renderWarning();
+  RECS_CUR = recs;
+  /* every roster/context change re-aims the wheel at the engine's pick;
+     browsing between changes belongs to the user (wheelStep) */
+  if (recs && recs.length) WHEEL_FOCUS_W = recs[0].w;
+  renderSetup(); renderTally(); renderRoster(); renderFitness();
+  renderWheel(recs); renderGroups(); renderWeaknesses(); renderWarning();
   renderRecDetail(recs); renderMetaStrip(); renderFootnote();
 }
 
@@ -4193,6 +4526,15 @@ function compText(){
 function flashBtn(id, text, back){
   $(id).textContent = text;
   setTimeout(() => { $(id).textContent = back; }, 1400);
+}
+
+/* Collapsible setup rail: state on .shell[data-rail], persisted so the
+   layout choice survives reloads. Display only. */
+const RAIL_KEY = "compforge.rail";
+function setRail(min){
+  $("shell").dataset.rail = min ? "min" : "";
+  $("rail-toggle").setAttribute("aria-expanded", String(!min));
+  try { localStorage.setItem(RAIL_KEY, min ? "min" : ""); } catch (e) { /* private mode */ }
 }
 
 document.addEventListener("click", e => {
@@ -4234,6 +4576,9 @@ document.addEventListener("click", e => {
     sortPartyByRole();     /* the swap may have changed the slot's role */
     render(); return;
   }
+  /* rim card click = focus it (adding stays a deliberate hub action) */
+  const wf = e.target.closest("[data-wfocus]");
+  if (wf){ WHEEL_FOCUS_W = wf.dataset.wfocus; renderWheel(RECS_CUR); return; }
   const spi = e.target.closest("[data-spellinfo]");
   if (spi){
     DETAIL_SPELL = DETAIL_SPELL === spi.dataset.spellinfo
@@ -4252,7 +4597,7 @@ document.addEventListener("click", e => {
     PARTY_FACET = null;   /* the new member must be visible */
     render(); } return; }
   const forgeBtn = e.target.closest("#forge") || e.target.closest("#reforge")
-                || e.target.closest("#forge-rail");
+                || e.target.closest("#forge-rail") || e.target.closest("#forge-rail-mini");
   if (forgeBtn){
     /* Deterministic constrained beam search in the engine (2026-08-18) —
        greedy top-1 append + a 1-opt pass used to force-fill negative-value
@@ -4263,8 +4608,8 @@ document.addEventListener("click", e => {
        slots, and on a fully forged roster acts as a reforge. */
     const goal = Math.min(SIZE, HARD_CAP);
     const reforgeAll = forgeBtn.id === "reforge"
-      || (forgeBtn.id === "forge-rail" && party.length >= goal
-          && PROV.some(x => x === "f"));
+      || ((forgeBtn.id === "forge-rail" || forgeBtn.id === "forge-rail-mini")
+          && party.length >= goal && PROV.some(x => x === "f"));
     const keep = party.map((_, i) => i)
       .filter(i => reforgeAll ? PROV[i] !== "f" : true);
     const locked = keep.map(i => party[i]);
@@ -4295,6 +4640,12 @@ document.addEventListener("click", e => {
     sortPartyByRole();    /* remaps the forge note's slot indexes too */
     PARTY_FACET = null;   /* show the whole forged comp, not a filtered view */
     render();
+    /* the forge flourish: the wheel spins and settles on the engine's next
+       pick. Purely visual — reduced-motion kills it via the global rule. */
+    const wheelEl = $("wheel");
+    wheelEl.classList.remove("spun");
+    void wheelEl.offsetWidth;
+    wheelEl.classList.add("spun");
     return;
   }
   const rm = e.target.closest("[data-remove]");
@@ -4304,6 +4655,9 @@ document.addEventListener("click", e => {
     FORGE_NOTE = null;
     loadoutRemove(ri); render(); return;
   }
+  if (e.target.closest("#rail-toggle")){ setRail(true); return; }
+  if (e.target.closest("#rail-expand") || e.target.closest("#rail-expand-setup")){
+    setRail(false); return; }
   if (e.target.closest("#companion-connect")){ toggleCompanion(); return; }
   if (e.target.closest("#companion-load")){ loadCompanionParty(); return; }
   if (e.target.closest("#clear")){
@@ -4364,7 +4718,7 @@ document.addEventListener("change", e => {
     PARTY_FACET = null; render();
   }
   if (e.target.id === "style"){ STYLE = e.target.value; FORGE_NOTE = null; render(); }
-  if (e.target.id === "tree-filter"){ treeFilter = e.target.value; renderPicker(); }
+  if (e.target.id === "tree-filter"){ treeFilter = e.target.value; renderWheel(RECS_CUR); }
   if (e.target.id === "size-input"){
     const v = Math.round(+e.target.value);
     if (v >= 2 && v <= HARD_CAP){ PLANNED = v; FORGE_NOTE = null; render(); }
@@ -4381,7 +4735,7 @@ document.addEventListener("input", e => {
     if (box){ box.focus(); try { box.setSelectionRange(at, at); } catch (err) { /* type=search */ } }
     return;
   }
-  if (e.target.id === "pick-filter"){ pickFilter = e.target.value; renderPicker(); }
+  if (e.target.id === "pick-filter"){ pickFilter = e.target.value; renderWheel(RECS_CUR); }
 });
 document.addEventListener("keydown", e => {
   if ((e.key === "Enter" || e.key === " ")
@@ -4406,6 +4760,56 @@ $("pick-filter").addEventListener("keydown", e => {
     PARTY_FACET = null;   /* the new member must be visible (matches click-add) */
     loadoutInsert(party.length - 1); sortPartyByRole(); render(); }
 });
+/* ---- wheel inputs: scroll, arrow keys, and drag all rotate the rim ---- */
+(function wheelInputs(){
+  const el = $("wheel");
+  el.addEventListener("wheel", e => {
+    e.preventDefault();
+    wheelStep((e.deltaY || e.deltaX) > 0 ? 1 : -1);
+  }, {passive: false});
+  el.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight" || e.key === "ArrowDown"){ e.preventDefault(); wheelStep(1); }
+    else if (e.key === "ArrowLeft" || e.key === "ArrowUp"){ e.preventDefault(); wheelStep(-1); }
+    else if (e.key === "Home" || e.key === "End"){
+      e.preventDefault();
+      const keys = filteredWeapons();
+      if (keys.length){
+        WHEEL_FOCUS_W = keys[e.key === "Home" ? 0 : keys.length - 1];
+        renderWheel(RECS_CUR);
+      }
+    } else if ((e.key === "Enter" || e.key === " ") && !e.target.closest("button")){
+      e.preventDefault();
+      const btn = $("hub-body").querySelector("[data-add]");
+      if (btn) btn.click();
+    }
+  });
+  /* drag-to-rotate: track the pointer's angle around the wheel center;
+     every WHEEL_STEP degrees crossed shifts the focus one card. Clockwise
+     drag brings the 11-o'clock card under the notch (focus − 1). */
+  let dragBase = null;
+  const angleOf = e => {
+    const b = el.getBoundingClientRect();
+    return Math.atan2(e.clientY - (b.top + b.height / 2),
+                      e.clientX - (b.left + b.width / 2)) * 180 / Math.PI;
+  };
+  el.addEventListener("pointerdown", e => {
+    if (e.target.closest(".wheel-hub") || e.target.closest("button")) return;
+    dragBase = angleOf(e);
+    el.setPointerCapture(e.pointerId);
+  });
+  el.addEventListener("pointermove", e => {
+    if (dragBase === null) return;
+    let d = angleOf(e) - dragBase;
+    if (d > 180) d -= 360;
+    if (d < -180) d += 360;
+    const steps = Math.trunc(d / WHEEL_STEP);
+    if (steps){ dragBase += steps * WHEEL_STEP; wheelStep(-steps); }
+  });
+  ["pointerup", "pointercancel"].forEach(t =>
+    el.addEventListener(t, () => { dragBase = null; }));
+  /* one-shot cleanup for the forge spin class */
+  el.addEventListener("animationend", () => el.classList.remove("spun"));
+})();
 /* A pasted share-link hash applies without a reload. saveHash() uses
    replaceState, which never fires hashchange, so this cannot loop. The
    party view-filter resets — it described the previous comp. */
@@ -4426,6 +4830,7 @@ if (!loadHash() && !loadStored()){
   party = SEED; PROV = party.map(() => "m");
   sortPartyByRole();
 }
+try { if (localStorage.getItem(RAIL_KEY) === "min") setRail(true); } catch (e) { /* private mode */ }
 renderTreeFilter();
 syncEngine();
 render();

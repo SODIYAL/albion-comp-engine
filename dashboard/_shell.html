@@ -70,6 +70,16 @@ h1,h2,h3{font-family:var(--serif); font-weight:600; text-wrap:balance; margin:0}
 button{font:inherit; color:inherit; cursor:pointer}
 ::selection{background:rgba(217,164,78,.32); color:var(--ink)}
 :focus-visible{outline:2px solid var(--brass-bright); outline-offset:2px; border-radius:3px}
+.sr-only{
+  position:absolute!important; width:1px!important; height:1px!important;
+  padding:0!important; margin:-1px!important; overflow:hidden!important;
+  clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important;
+}
+.sem-icon{
+  display:block; width:20px; height:20px; object-fit:contain; flex:none;
+  pointer-events:none; user-select:none;
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.75));
+}
 ::-webkit-scrollbar{width:10px; height:10px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:#2C313D; border-radius:5px; border:2px solid var(--bg)}
@@ -126,11 +136,42 @@ button{font:inherit; color:inherit; cursor:pointer}
 
 .rail{
   border-right:1px solid var(--rule); padding:26px 22px 60px;
-  display:flex; flex-direction:column; gap:30px;
+  display:flex; flex-direction:column; gap:0;
   position:sticky; top:63px; max-height:calc(100vh - 63px); overflow-y:auto;
   background:linear-gradient(180deg, rgba(18,21,28,.5), transparent 220px);
 }
 @media (max-width:960px){ .rail{position:static; max-height:none; border-right:0; border-bottom:1px solid var(--rule)} }
+/* collapsible rail: the arrow trades setup for wheel room. State lives on
+   .shell[data-rail="min"] and persists in localStorage. */
+.rail-body{display:flex; flex-direction:column; gap:30px}
+.rail-toggle{
+  align-self:flex-start; margin-bottom:18px;
+  font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--ink-3); background:transparent; border:1px solid var(--rule); border-radius:6px;
+  padding:5px 10px; transition:color .18s var(--ease), border-color .18s var(--ease);
+}
+.rail-toggle:hover{color:var(--brass); border-color:var(--brass-deep)}
+.rail-strip{display:none; flex-direction:column; gap:10px; align-items:center}
+.rs-btn{
+  width:34px; height:34px; display:grid; place-items:center;
+  background:var(--sunk); border:1px solid var(--rule-2); border-radius:7px;
+  color:var(--ink-2); font-size:14px; line-height:1;
+  transition:color .18s var(--ease), border-color .18s var(--ease);
+}
+.rs-btn:hover{color:var(--brass); border-color:var(--brass-deep)}
+.rs-forge{color:var(--brass); border-color:rgba(217,164,78,.5)}
+.rs-forge:hover{background:var(--brass-wash); border-color:var(--brass)}
+.shell[data-rail="min"]{grid-template-columns:56px minmax(0,1fr)}
+.shell[data-rail="min"] .rail{padding:16px 10px 30px}
+.shell[data-rail="min"] .rail-body{display:none}
+.shell[data-rail="min"] .rail-strip{display:flex}
+@media (max-width:960px){
+  /* the rail stacks on top on small screens — collapsing means nothing there */
+  .rail-toggle, .rail-strip{display:none !important}
+  .shell[data-rail="min"]{grid-template-columns:1fr}
+  .shell[data-rail="min"] .rail{padding:26px 22px 60px}
+  .shell[data-rail="min"] .rail-body{display:flex}
+}
 
 .main{padding:26px 32px 90px; display:flex; flex-direction:column; gap:30px; min-width:0}
 
@@ -194,15 +235,84 @@ select:focus, .text-input:focus{border-color:var(--brass-deep)}
   padding:8px 11px; margin-top:8px; border-radius:0 6px 6px 0;
 }
 
-/* ---------- roster — champion-select styling. Each row is "lit" by its
-   own weapon render and carries a glowing role-colored edge. ---------- */
-.roster{display:flex; flex-direction:column; gap:6px}
+/* ---------- party dock — the roster as a fish-eye row under the wheel.
+   Hover (or keyboard focus) swells a card like a macOS dock icon and opens
+   its popover: role, fit contribution, swap advice, and the kit / dossier /
+   remove actions. Wraps to more rows for big parties. ---------- */
+.dock-sec{margin-top:26px}
+.roster{
+  display:flex; flex-wrap:wrap; gap:12px 9px; align-items:flex-end;
+  padding:6px 2px 2px; min-height:70px;
+}
+.dm{position:relative; display:flex; flex-direction:column; align-items:center}
+.dm-card{
+  position:relative; width:56px; height:60px;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
+  --role:var(--rule-2);
+  border:1px solid var(--rule); border-bottom:3px solid var(--role);
+  border-radius:9px; cursor:pointer; padding:0;
+  box-shadow:0 1px 3px rgba(0,0,0,.4), 0 4px 10px -6px var(--role);
+  transform-origin:50% 100%;
+  transition:transform .18s var(--ease), border-color .18s var(--ease),
+    box-shadow .18s var(--ease);
+}
+.dm.role-tank .dm-card{--role:var(--role-tank)} .dm.role-healer .dm-card{--role:var(--role-healer)}
+.dm.role-melee .dm-card{--role:var(--role-melee)} .dm.role-range .dm-card{--role:var(--role-range)}
+.dm.role-support .dm-card{--role:var(--role-support)}
+.dm-card .n{position:absolute; top:2px; left:5px; font-size:9px; color:var(--ink-3)}
+.dm-card .icon{pointer-events:none}
+/* fish-eye: the hovered card swells, immediate neighbors lean in */
+.dm:hover .dm-card, .dm:focus-within .dm-card{
+  transform:scale(1.42); z-index:6; border-color:var(--rule-2);
+  box-shadow:0 8px 20px rgba(0,0,0,.55), 0 6px 14px -6px var(--role);
+}
+.dm:hover + .dm .dm-card, .dm:has(+ .dm:hover) .dm-card{transform:scale(1.16)}
+.dm-card.next{
+  border:1px dashed rgba(217,164,78,.4); background:transparent; box-shadow:none;
+  color:var(--brass); cursor:default;
+}
+.dm-card.next .n{color:var(--brass)}
+.dm-card.next .dm-plus{font-size:20px; line-height:1; color:var(--brass); opacity:.8}
+.dm.next:hover .dm-card{transform:none; box-shadow:none}
+.dock-note{
+  font-family:var(--mono); font-size:10.5px; color:var(--ink-3);
+  align-self:center; padding:0 6px;
+}
+/* the popover: everything the old roster row said, above the card */
+.dm-pop{
+  position:absolute; bottom:calc(100% + 12px); left:50%; transform:translateX(-50%);
+  width:256px; z-index:30; visibility:hidden; opacity:0;
+  transition:opacity .16s var(--ease), visibility .16s;
+  background:rgba(16,19,26,.97); border:1px solid var(--rule-2); border-radius:10px;
+  padding:11px 13px 12px; text-align:left; box-shadow:var(--shadow-lift);
+}
+.dm-pop::after{ /* hover bridge so the pointer can travel into the popover */
+  content:""; position:absolute; top:100%; left:0; right:0; height:14px;
+}
+.dm:hover .dm-pop, .dm:focus-within .dm-pop{visibility:visible; opacity:1}
+.dm:first-child .dm-pop{left:-6px; transform:none}
+.dm:last-child .dm-pop{left:auto; right:-6px; transform:none}
+.dm-pop .dm-nm{font-size:13.5px; margin-bottom:2px}
+.dm-pop .fn{display:block}
+.dm-actions{display:flex; gap:6px; margin-top:9px; align-items:center}
+.dm-act{
+  font:600 10px/1 var(--sans); letter-spacing:.08em; text-transform:uppercase;
+  color:var(--ink-3); background:transparent; padding:4px 8px;
+  border:1px solid var(--rule); border-radius:5px;
+  transition:color .15s var(--ease), border-color .15s var(--ease);
+}
+.dm-act:hover{color:var(--brass); border-color:var(--brass-deep)}
+.dm-act.dm-x:hover{color:var(--gap); border-color:var(--gap)}
+.roster-notes .lo-panel{margin:8px 0 0; border-top:1px solid var(--rule); border-radius:8px}
+.kit-head{margin:12px 0 0; color:var(--brass)}
 .tally{display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px}
 .tally .t{
   font-family:var(--mono); font-size:10.5px; letter-spacing:.05em;
   padding:3px 9px; border:1px solid var(--rule-2); border-radius:99px; color:var(--ink-2);
-  background:rgba(18,21,28,.55);
+  background:rgba(18,21,28,.55); display:inline-flex; align-items:center; gap:5px;
 }
+.tally .t .sem-icon{width:18px; height:18px; margin:-2px 0}
 .tally .t b{color:var(--ink); font-weight:600}
 .tally .t[data-pfilter]{cursor:pointer; transition:border-color .18s var(--ease)}
 .tally .t[data-pfilter]:hover{border-color:currentColor}
@@ -224,11 +334,15 @@ select:focus, .text-input:focus{border-color:var(--brass-deep)}
   font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.08em;
   text-transform:uppercase; padding:2.5px 8px; background:transparent;
   border:1px solid var(--rule-2); border-radius:99px; color:var(--ink-2);
-  transition:border-color .18s var(--ease);
+  transition:border-color .18s var(--ease), background .18s var(--ease);
+  display:inline-flex; align-items:center; justify-content:center;
 }
+.pchip.icon-chip{width:32px; height:29px; padding:3px}
+.pchip.icon-chip .sem-icon{width:22px; height:22px}
 .pchip:hover{border-color:currentColor}
 .pchip[aria-pressed="true"]{
-  border-color:currentColor; box-shadow:inset 0 0 0 1px currentColor, 0 0 10px -4px currentColor;
+  border-color:currentColor; background:rgba(255,255,255,.035);
+  box-shadow:inset 0 0 0 1px currentColor, 0 0 10px -4px currentColor;
 }
 .pchip.b-tank,.pchip.t-tank{color:var(--role-tank)}
 .pchip.b-heal,.pchip.t-healer{color:var(--role-healer)}
@@ -238,36 +352,6 @@ select:focus, .text-input:focus{border-color:var(--brass-deep)}
 .pchip.b-st,.pchip.t-melee{color:var(--role-melee)}
 .pchip.b-dps{color:var(--role-support)}
 .pchip.t-support{color:var(--over)}
-.slot{
-  display:flex; align-items:center; gap:10px; padding:10px 11px; min-height:54px;
-  background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
-  border:1px solid var(--rule); border-radius:8px;
-  position:relative; overflow:hidden;
-  --role:var(--rule-2);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.03), 0 1px 3px rgba(0,0,0,.35);
-  transition:border-color .18s var(--ease), transform .18s var(--ease);
-}
-.slot::after{
-  content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
-  background:var(--role); box-shadow:0 0 12px 0 var(--role); opacity:.85;
-}
-.slot.role-tank{--role:var(--role-tank)} .slot.role-healer{--role:var(--role-healer)}
-.slot.role-melee{--role:var(--role-melee)} .slot.role-range{--role:var(--role-range)}
-.slot.role-support{--role:var(--role-support)}
-.slot::before{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background-image:var(--wbg); background-repeat:no-repeat;
-  background-position:left -18px center; background-size:104px;
-  opacity:.20; filter:saturate(1.35);
-  -webkit-mask-image:linear-gradient(90deg,#000 24%,transparent 72%);
-  mask-image:linear-gradient(90deg,#000 24%,transparent 72%);
-  transition:opacity .18s var(--ease);
-}
-.slot:hover{border-color:var(--rule-2); transform:translateX(2px)}
-.slot:hover::before{opacity:.34}
-.slot > *{position:relative}
-.slot .n{font-family:var(--mono); font-size:10.5px; color:var(--ink-3); width:16px; flex:none}
-.slot .nm{flex:1; font-size:13.5px; min-width:0}
 .fn{
   font-family:var(--mono); font-size:10px; color:var(--ink-3);
   letter-spacing:.04em; display:block; margin-top:1px;
@@ -366,35 +450,16 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   border-bottom:1px solid rgba(35,40,52,.6)}
 .meta-row .rk{font-family:var(--mono); font-size:10px; color:var(--ink-3); width:14px; flex:none}
 .meta-row .pct{font-family:var(--mono); font-size:11.5px; color:var(--ink-2); margin-left:auto}
-.slot .x{
-  background:none; border:0; color:var(--ink-3); font-size:16px; line-height:1;
-  padding:2px 6px; border-radius:5px; flex:none;
-  transition:color .18s var(--ease), background .18s var(--ease);
+/* duplicate-interaction notices (PvP interaction layer) — full-width
+   under the dock */
+.inote{
+  font-size:12px; line-height:1.5; padding:8px 12px; margin-top:8px;
+  color:var(--ink-2); border:1px dashed var(--rule-2); border-radius:8px;
 }
-.slot .x:hover{color:var(--gap); background:var(--gap-wash)}
-.slot.next{
-  border-style:dashed; border-color:rgba(217,164,78,.4); background:transparent;
-  color:var(--brass); font-family:var(--mono); font-size:11px; letter-spacing:.08em;
-  text-transform:uppercase; box-shadow:none;
-}
-.slot.next::after{display:none}
-.slot.next .n{color:var(--brass)}
-.slot.more{
-  border:0; background:transparent; color:var(--ink-3); box-shadow:none;
-  font-family:var(--mono); font-size:11px; letter-spacing:.05em; padding:2px 11px;
-}
-.slot.more::after{display:none}
-
-/* duplicate-interaction notices (PvP interaction layer) */
-.slot.inote{
-  display:block; font-size:12px; line-height:1.5; padding:7px 11px;
-  color:var(--ink-2); border-style:dashed;
-}
-.slot.inote::after{display:none}
-.slot.inote .fn{display:block}
-.slot.int-high b{color:var(--bad)}
-.slot.int-warning b{color:var(--amber)}
-.slot.int-info b,.slot.int-verify b{color:var(--ink-2)}
+.inote .fn{display:block}
+.inote.int-high b{color:var(--gap)}
+.inote.int-warning b{color:var(--amber)}
+.inote.int-info b,.inote.int-verify b{color:var(--ink-2)}
 /* per-ability facts panel (click a spell row in the dossier) */
 .sp-row{cursor:pointer}
 .sp-row:hover{background:var(--surface-2)}
@@ -419,16 +484,13 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .int-comps i{color:var(--ink-3)}
 .pchip.u-chip{color:var(--brass)}
 
-/* ---------- weapon picker ---------- */
-.pick-grid{display:flex; flex-direction:column; gap:3px}
-.pick{
-  display:flex; align-items:center; gap:9px; text-align:left; width:100%;
-  padding:7px 9px; background:transparent; border:1px solid transparent; border-radius:7px;
-  transition:background .15s var(--ease), border-color .15s var(--ease);
-}
-.pick:hover:not(:disabled){background:var(--surface-2); border-color:var(--rule)}
-.pick:disabled{opacity:.38; cursor:not-allowed}
-.pick .nm{flex:1; font-size:13.5px; min-width:0}
+/* ---------- weapon wheel: filters above the wheel ---------- */
+.wheel-filters{display:flex; flex-direction:column; gap:9px; margin-bottom:4px}
+.wf-filter-row{display:flex; gap:8px}
+.wf-filter-row select{width:auto; flex:0 1 190px}
+.wf-filter-row .text-input{flex:1; min-width:0}
+.wheel-filters .pchips{margin-bottom:0; justify-content:center}
+.wheel-filters .facet{margin:0; justify-content:center}
 .prov{
   font-family:var(--mono); font-size:9px; letter-spacing:.06em; padding:2px 6px;
   border-radius:99px; flex:none; text-transform:uppercase;
@@ -443,11 +505,12 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 
 /* ---------- capability badges: what a weapon PROVIDES, at a glance ---------- */
 .bdg{
-  display:inline-block; font-family:var(--mono); font-size:8.5px; font-weight:700;
-  letter-spacing:.09em; text-transform:uppercase; padding:1px 5px; margin-left:4px;
-  border-radius:3px; border:1px solid currentColor; vertical-align:1.5px;
-  line-height:1.4; opacity:.85; cursor:pointer; transition:opacity .15s var(--ease);
+  display:inline-flex; align-items:center; justify-content:center;
+  width:22px; height:22px; padding:2px; margin-left:4px;
+  border-radius:5px; border:1px solid currentColor; vertical-align:-6px;
+  opacity:.88; cursor:pointer; transition:opacity .15s var(--ease), background .15s var(--ease);
 }
+.bdg .sem-icon{width:18px; height:18px}
 .bdg:hover{opacity:1; background:var(--surface-2)}
 .facet{
   display:flex; align-items:center; gap:8px; margin:-4px 0 8px;
@@ -466,49 +529,124 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .b-st{color:var(--role-melee)}
 .b-dps{color:var(--role-support)}
 
-/* ---------- command bar: the forge's centerpiece ---------- */
+/* ---------- the forge wheel stage: the page's centerpiece ----------
+   An iron ring of weapon cards riding the rim, a brass notch marking the
+   focused pick at 12 o'clock, and the party's role rings closing around
+   the hub — the composition literally fills in at the center of the
+   picking experience. Analysis flanks it: fitness + weaknesses left,
+   the engine's reasoning right. */
 .lbl{font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3)}
-.cmdbar{
-  display:grid; grid-template-columns:minmax(240px,1fr) minmax(320px,1.4fr);
-  background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
-  border:1px solid var(--rule-2); border-radius:12px;
-  overflow:hidden; box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.04);
+.wheelstage{
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,360px);
+  gap:30px; align-items:start;
 }
-@media (max-width:880px){ .cmdbar{grid-template-columns:1fr} }
-.cb-fit{padding:20px 24px 22px; border-right:1px solid var(--rule); display:flex; flex-direction:column; gap:10px}
-@media (max-width:880px){ .cb-fit{border-right:0; border-bottom:1px solid var(--rule)} }
-.cb-fit .num{
-  font-family:var(--mono); font-size:46px; font-weight:700; line-height:1; letter-spacing:-.03em;
+@media (max-width:1250px){ .wheelstage{grid-template-columns:1fr} }
+.ws-flank{display:flex; flex-direction:column; gap:12px; min-width:0}
+.ws-fit{margin-bottom:14px}
+.ws-fit .num{
+  font-family:var(--mono); font-size:40px; font-weight:700; line-height:1; letter-spacing:-.03em;
   background:linear-gradient(180deg, #F5EBD6, #C9B283);
   -webkit-background-clip:text; background-clip:text; color:transparent;
 }
-.cb-fit .of{font-family:var(--mono); font-size:13px; color:var(--ink-3)}
+.ws-fit .of{font-family:var(--mono); font-size:13px; color:var(--ink-3)}
+.ws-fit .meter-track{margin-top:8px}
 .meter-track{height:8px; background:var(--sunk); border-radius:99px; overflow:hidden;
   box-shadow:inset 0 1px 3px rgba(0,0,0,.6)}
 .meter-fill{height:100%;
   background:linear-gradient(90deg, var(--brass-deep), var(--brass) 60%, var(--brass-bright));
   border-radius:99px; transition:width .45s var(--ease);
   box-shadow:0 0 10px rgba(217,164,78,.45)}
-.cb-next{
-  padding:20px 24px; display:flex; flex-direction:column;
-  gap:5px; justify-content:center; position:relative; overflow:hidden;
-  background:linear-gradient(120deg, rgba(217,164,78,.13), rgba(217,164,78,.03) 55%, transparent);
+.ws-center{min-width:0; container-type:inline-size}
+
+/* the wheel proper — all rim geometry derives from --wd so the whole
+   instrument scales with its column (100cqi = the center column's width) */
+.wheel{
+  position:relative; margin:10px auto 0;
+  --wd:min(560px, calc(100vw - 64px));
+  --wd:min(560px, 100cqi);
+  --card-w:clamp(64px, calc(var(--wd)*.175), 96px);
+  --card-h:clamp(68px, calc(var(--wd)*.165), 92px);
+  --wr:calc(var(--wd)/2 - var(--card-h)/2 - 8px);
+  width:var(--wd); height:var(--wd);
 }
-.cb-next::before{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background-image:var(--wbg); background-repeat:no-repeat;
-  background-position:right -30px center; background-size:180px;
-  opacity:.2; filter:saturate(1.35);
-  -webkit-mask-image:linear-gradient(90deg,transparent 40%,#000 85%);
-  mask-image:linear-gradient(90deg,transparent 40%,#000 85%);
+.wheel:focus-visible{outline:2px solid var(--brass-bright); outline-offset:4px; border-radius:50%}
+.wheel-track{
+  position:absolute; inset:2px; border-radius:50%;
+  border:1px solid var(--rule);
+  background:radial-gradient(closest-side,
+    transparent 60%, rgba(18,21,28,.55) 62%, rgba(8,10,15,.6) 82%,
+    rgba(217,164,78,.10) 96%, transparent);
+  box-shadow:inset 0 0 30px rgba(0,0,0,.5);
 }
-.cb-next > *{position:relative}
-.cb-next .eyebrow{font-family:var(--mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--brass)}
-.cb-row{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
-.cb-next .nm{font-family:var(--serif); font-size:26px; letter-spacing:0; line-height:1.2}
-.cb-next .rl{font-family:var(--mono); font-size:11px; color:var(--ink-2)}
+.wheel-notch{
+  position:absolute; top:-4px; left:50%; z-index:3;
+  width:12px; height:12px; transform:translateX(-50%) rotate(45deg);
+  background:linear-gradient(135deg, var(--brass-bright), var(--brass-deep));
+  border-radius:2px; box-shadow:0 0 14px rgba(217,164,78,.65);
+}
+.wheel-ring{position:absolute; inset:0; transform-origin:50% 50%}
+.wheel.spun .wheel-ring{animation:wheel-spin 1.15s cubic-bezier(.16,.7,.25,1)}
+@keyframes wheel-spin{from{transform:rotate(2turn)}to{transform:rotate(0)}}
+/* rim cards ride the wheel: rotate to their angle, push out to the rim,
+   and stay tilted with it — like chest segments on a fortune wheel */
+.wseg{
+  position:absolute; left:50%; top:50%;
+  width:var(--card-w); height:var(--card-h);
+  margin-left:calc(var(--card-w)/-2); margin-top:calc(var(--card-h)/-2);
+  transform:rotate(var(--a,0deg)) translateY(calc(var(--wr)*-1));
+  opacity:var(--fade,1);
+  transition:transform .45s var(--ease), opacity .45s var(--ease),
+    border-color .18s var(--ease), box-shadow .18s var(--ease);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+  padding:5px 3px; background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
+  border:1px solid var(--rule); border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,.45);
+}
+.wseg:hover{border-color:var(--rule-2)}
+.wseg.on{
+  border-color:rgba(217,164,78,.65); opacity:1;
+  box-shadow:0 0 20px -6px rgba(217,164,78,.6), 0 2px 8px rgba(0,0,0,.45);
+}
+.wseg .icon{filter:drop-shadow(0 2px 6px rgba(0,0,0,.5)) saturate(1.1)}
+.wseg .ws-nm{
+  font-size:9.5px; line-height:1.2; text-align:center; color:var(--ink-2);
+  max-width:100%; padding:0 3px; overflow:hidden;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+}
+.wseg.on .ws-nm{color:var(--ink)}
+
+/* the hub: party role rings closing around the focused weapon */
+.wheel-hub{
+  position:absolute; inset:calc(var(--card-h) + 14px); border-radius:50%;
+  background:radial-gradient(closest-side, rgba(24,28,37,.94), rgba(13,16,22,.97));
+  border:1px solid var(--rule-2);
+  box-shadow:inset 0 0 42px rgba(0,0,0,.55), 0 0 34px -14px rgba(217,164,78,.3);
+}
+.hub-rings{position:absolute; inset:5px; width:calc(100% - 10px); height:calc(100% - 10px)}
+.hub-rings circle{fill:none; stroke-width:6.5;
+  transform:rotate(-90deg); transform-origin:100px 100px}
+.hub-rings .ring-track{stroke:rgba(255,255,255,.055)}
+.hub-rings .ring-fill{stroke-linecap:round; transition:stroke-dasharray .5s var(--ease)}
+.hub-rings .ring-fill.empty{opacity:0}
+.hub-rings .ring-fill.done{filter:drop-shadow(0 0 4px currentColor)}
+.hub-body{
+  position:absolute; inset:26%; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:3px; text-align:center; min-width:0;
+}
+.hub-body .icon{filter:drop-shadow(0 6px 14px rgba(0,0,0,.6)) saturate(1.15)}
+.hub-nm{
+  font-family:var(--serif); font-size:15px; line-height:1.15; max-width:100%;
+  overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+}
+.hub-role{
+  font-family:var(--mono); font-size:9px; color:var(--ink-2); max-width:92%;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.hub-score{font-size:10.5px; color:var(--brass)}
+.hub-score .offcomp{font-style:normal}
+.hub-empty{font-size:12px; line-height:1.5; color:var(--ink-2); padding:0 6px}
 .cb-add{
-  margin-left:auto; padding:10px 18px;
+  padding:10px 18px;
   background:linear-gradient(180deg, var(--brass-bright), var(--brass));
   color:#1A1206; border:0; border-radius:8px; font-size:13.5px; font-weight:700; white-space:nowrap;
   box-shadow:0 2px 14px -4px rgba(217,164,78,.55), inset 0 1px 0 rgba(255,255,255,.35);
@@ -517,17 +655,28 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .cb-add:hover{filter:brightness(1.07); transform:translateY(-1px);
   box-shadow:0 4px 20px -4px rgba(217,164,78,.65), inset 0 1px 0 rgba(255,255,255,.35)}
 .cb-add:active{transform:translateY(0)}
+.hub-add{padding:7px 15px; font-size:11.5px; margin-top:4px}
 .cb-forge{
   padding:9px 14px; background:transparent; color:var(--brass);
   border:1px solid rgba(217,164,78,.5); border-radius:8px; font-size:12px; white-space:nowrap;
   transition:background .15s var(--ease), border-color .15s var(--ease);
 }
 .cb-forge:hover{background:var(--brass-wash); border-color:var(--brass)}
-.cb-full{font-size:13.5px; color:var(--ink-2)}
 
-/* ---------- diagnosis | prescription band ---------- */
-.duo{display:grid; grid-template-columns:minmax(250px,330px) minmax(0,1fr); gap:26px; align-items:start}
-@media (max-width:1100px){ .duo{grid-template-columns:1fr} }
+/* beneath the wheel: next-pick eyebrow, ring tallies, forge actions */
+.wheel-foot{display:flex; flex-direction:column; gap:9px; margin-top:16px}
+.wheel-foot .wf-row{
+  display:flex; align-items:center; justify-content:center; gap:10px 16px; flex-wrap:wrap;
+}
+.wheel-foot .eyebrow{
+  font-family:var(--mono); font-size:10px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--brass);
+}
+.wf-count{font-family:var(--mono); font-size:10px; color:var(--ink-3)}
+.wf-rings{display:flex; gap:6px 14px; flex-wrap:wrap; justify-content:center}
+.wf-ring{font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase}
+.wf-ring b{color:var(--ink); font-weight:600}
+.wf-actions{display:flex; gap:8px}
 
 /* ---------- capability readout ---------- */
 .groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:2px 34px}
@@ -630,36 +779,47 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .warn .b{font-size:13.5px; line-height:1.5}
 .warn .b code{font-family:var(--mono); font-size:12px}
 
-/* ---------- live party (companion) ---------- */
-.companion{margin-top:14px; border-top:1px solid var(--rule); padding-top:14px}
+/* ---------- live party feed: one card per in-game member ---------- */
+.livefeed{border-top:1px solid var(--rule); padding-top:4px}
+.lf-bar{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
+.lf-btn{width:auto; margin-top:0}
 .comp-dot{
   display:inline-block; width:7px; height:7px; border-radius:50%;
   background:var(--ink-3); margin-right:7px; vertical-align:1px;
 }
-.companion[data-live="true"] .comp-dot{background:var(--ok-bright); box-shadow:0 0 8px var(--ok-bright)}
-.companion .status{font-family:var(--mono); font-size:11px; color:var(--ink-2); margin:7px 0}
-.companion .status .sub{color:var(--ink-3); display:block; margin-top:2px; line-height:1.5}
-.comp-members{display:flex; flex-direction:column; gap:3px; margin:8px 0}
+.livefeed[data-live="true"] .comp-dot{background:var(--ok-bright); box-shadow:0 0 8px var(--ok-bright)}
+.livefeed .status{font-family:var(--mono); font-size:11px; color:var(--ink-2)}
+.livefeed .status .sub{color:var(--ink-3); display:block; margin-top:2px; line-height:1.5}
+.comp-members{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 0}
 .comp-m{
-  display:flex; align-items:center; gap:8px; font-size:12px;
-  padding:5px 8px; background:var(--surface); border:1px solid var(--rule); border-radius:6px;
+  display:flex; flex-direction:column; align-items:flex-start; gap:5px; font-size:12px;
+  padding:10px 12px; min-width:150px; max-width:220px; position:relative;
+  background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
+  border:1px solid var(--rule); border-radius:8px;
+  box-shadow:0 1px 3px rgba(0,0,0,.35);
 }
-.comp-m .cm-role{width:6px; height:6px; border-radius:50%; background:var(--rule-2); flex:none}
-.comp-m.role-tank .cm-role{background:var(--role-tank)} .comp-m.role-healer .cm-role{background:var(--role-healer)}
-.comp-m.role-melee .cm-role{background:var(--role-melee)} .comp-m.role-range .cm-role{background:var(--role-range)}
-.comp-m.role-support .cm-role{background:var(--role-support)}
-.comp-m .cm-name{flex:none; color:var(--ink-2)}
-.comp-m .cm-wpn{flex:1; color:var(--ink); min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.comp-m .cm-role{position:absolute; top:11px; right:11px;
+  width:7px; height:7px; border-radius:50%; background:var(--rule-2); flex:none;
+  box-shadow:0 0 8px 0 currentColor}
+.comp-m.role-tank .cm-role{background:var(--role-tank); color:var(--role-tank)}
+.comp-m.role-healer .cm-role{background:var(--role-healer); color:var(--role-healer)}
+.comp-m.role-melee .cm-role{background:var(--role-melee); color:var(--role-melee)}
+.comp-m.role-range .cm-role{background:var(--role-range); color:var(--role-range)}
+.comp-m.role-support .cm-role{background:var(--role-support); color:var(--role-support)}
+.comp-m .cm-name{color:var(--ink-2); font-family:var(--mono); font-size:10.5px;
+  max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding-right:14px}
+.comp-m .cm-wpn{color:var(--ink); width:100%; min-width:0; display:flex; align-items:center; gap:7px}
+.comp-m .cm-wpn > span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
 .comp-m .cm-wpn.unknown{color:var(--ink-3); font-style:italic}
-.companion .load-btn{
-  width:100%; padding:10px; margin-top:6px;
+.livefeed .load-btn{
+  padding:10px 16px;
   background:linear-gradient(180deg, var(--brass-bright), var(--brass));
   color:#1A1206; border:0; border-radius:8px; font-family:var(--mono); font-size:11.5px;
   letter-spacing:.08em; text-transform:uppercase; font-weight:700;
   box-shadow:0 2px 14px -4px rgba(217,164,78,.55), inset 0 1px 0 rgba(255,255,255,.35);
 }
-.companion .load-btn:hover{filter:brightness(1.07)}
-.companion .load-btn:disabled{opacity:.4; cursor:not-allowed; filter:none}
+.livefeed .load-btn:hover{filter:brightness(1.07)}
+.livefeed .load-btn:disabled{opacity:.4; cursor:not-allowed; filter:none}
 
 /* ---------- evidence drawer ---------- */
 .drawer{
@@ -816,8 +976,17 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   <span class="chip">dataset <span class="mono" id="build-stamp">—</span></span>
 </header>
 
-<div class="shell">
+<div class="shell" id="shell">
   <aside class="rail">
+    <!-- collapsed rail: a slim strip — expand arrow, setup, forge -->
+    <div class="rail-strip">
+      <button class="rs-btn" id="rail-expand" title="expand the setup rail" aria-label="Expand setup rail">&#10095;</button>
+      <button class="rs-btn" id="rail-expand-setup" title="open setup" aria-label="Open setup">&#9881;</button>
+      <button class="rs-btn rs-forge" id="forge-rail-mini" title="forge full comp" aria-label="Forge full comp">&#9874;</button>
+    </div>
+    <div class="rail-body">
+    <button class="rail-toggle" id="rail-toggle" aria-expanded="true"
+      title="collapse the setup rail — more room for the wheel">&#10094; hide setup</button>
     <section>
       <div class="sec-label">Setup</div>
       <div class="field">
@@ -853,51 +1022,53 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
       <div class="btn-row">
         <button class="share-btn clear-btn" id="clear">clear comp</button>
       </div>
-      <div class="companion" id="companion" data-live="false">
-        <button class="share-btn" id="companion-connect">connect live party</button>
-        <div class="status" id="companion-status" hidden></div>
-        <div class="comp-members" id="companion-members"></div>
-        <button class="load-btn" id="companion-load" hidden>load party into comp</button>
-      </div>
     </section>
-
-    <section>
-      <div class="sec-label">Party</div>
-      <div class="tally" id="tally"></div>
-      <div class="roster" id="roster"></div>
-    </section>
-
-    <section>
-      <div class="sec-label">Add weapon</div>
-      <div class="field">
-        <select id="tree-filter" aria-label="Filter by weapon tree"></select>
-      </div>
-      <div class="field">
-        <input class="text-input" id="pick-filter" placeholder="filter — type a weapon name" aria-label="Filter weapons" autocomplete="off">
-      </div>
-      <div id="picker-chips"></div>
-      <div id="facet-slot"></div>
-      <div class="pick-grid" id="picker"></div>
-    </section>
+    </div>
   </aside>
 
   <main class="main">
-    <section class="cmdbar">
-      <div class="cb-fit">
-        <div class="lbl">Composition fitness</div>
-        <div><span class="num" id="fit-num">0.0</span> <span class="of" id="fit-of">/ 0</span></div>
-        <div class="meter-track"><div class="meter-fill" id="fit-bar" style="width:0%"></div></div>
+    <!-- The forge wheel stage: analysis flanks left, the wheel centers,
+         reasoning flanks right. The wheel replaces the old rail picker. -->
+    <section class="wheelstage">
+      <div class="ws-center">
+        <div class="sec-label">Add weapon</div>
+        <div class="wheel-filters">
+          <div class="wf-filter-row">
+            <select id="tree-filter" aria-label="Filter by weapon tree"></select>
+            <input class="text-input" id="pick-filter" placeholder="filter — type a weapon name" aria-label="Filter weapons" autocomplete="off">
+          </div>
+          <div id="picker-chips"></div>
+          <div id="facet-slot"></div>
+        </div>
+        <div class="wheel" id="wheel" role="listbox" tabindex="0"
+          aria-label="Weapon wheel. Arrow keys rotate, Enter adds the focused weapon">
+          <div class="wheel-track" aria-hidden="true"></div>
+          <div class="wheel-notch" aria-hidden="true"></div>
+          <div class="wheel-ring" id="wheel-ring"></div>
+          <div class="wheel-hub">
+            <svg class="hub-rings" id="hub-rings" viewBox="0 0 200 200" aria-hidden="true"></svg>
+            <div class="hub-body" id="hub-body"></div>
+          </div>
+        </div>
+        <div class="wheel-foot" id="wheel-foot"></div>
+        <!-- the party dock: the roster as a fish-eye row under the wheel -->
+        <div class="dock-sec">
+          <div class="sec-label">Party</div>
+          <div class="tally" id="tally"></div>
+          <div class="roster" id="roster"></div>
+          <div class="roster-notes" id="roster-notes"></div>
+        </div>
       </div>
-      <div class="cb-next" id="cb-next"></div>
-    </section>
 
-    <section class="duo">
-      <div>
+      <div class="ws-flank ws-right">
+        <div class="ws-fit">
+          <div class="sec-label">Composition fitness</div>
+          <div><span class="num" id="fit-num">0.0</span> <span class="of" id="fit-of">/ 0</span></div>
+          <div class="meter-track"><div class="meter-fill" id="fit-bar" style="width:0%"></div></div>
+        </div>
         <div class="sec-label">Biggest weaknesses</div>
         <div class="weak-list" id="weaknesses"></div>
         <div id="warn-slot"></div>
-      </div>
-      <div>
         <div class="sec-label" id="rec-label">Why this pick</div>
         <div id="rec-slot"></div>
       </div>
@@ -911,6 +1082,17 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
     <section id="meta-sec" hidden>
       <div class="sec-label" id="meta-label">This week on the killboard</div>
       <div class="meta-grid" id="meta-strip"></div>
+    </section>
+
+    <!-- Live party feed: the companion's home, one card per in-game member -->
+    <section class="livefeed" id="companion" data-live="false">
+      <div class="sec-label">Live party</div>
+      <div class="lf-bar">
+        <button class="share-btn lf-btn" id="companion-connect">connect live party</button>
+        <div class="status" id="companion-status" hidden></div>
+        <button class="load-btn lf-btn" id="companion-load" hidden>load party into comp</button>
+      </div>
+      <div class="comp-members" id="companion-members"></div>
     </section>
 
     <p class="footnote" id="footnote"></p>
