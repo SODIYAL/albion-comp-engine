@@ -71,10 +71,13 @@
         : (byHint[this.weapons[k].role_hint] !== undefined
            ? byHint[this.weapons[k].role_hint] : "dps");
     }
+    /* Capability predicates — COMBO-AWARE since 2026-08-19 (mirrors
+       engine.py): predMembers keeps the flat could-qualify view; every
+       forge constraint counts through _predContrib(weapon, combo). */
+    this.predDefs = comp.predicates || {};
     this.predMembers = {};
-    var preds = comp.predicates || {};
-    for (var pn in preds) {
-      var mins = preds[pn], members = {};
+    for (var pn in this.predDefs) {
+      var mins = this.predDefs[pn], members = {};
       for (k in this.weapons) {
         var okp = true;
         for (var pc in mins) {
@@ -84,6 +87,8 @@
       }
       this.predMembers[pn] = members;
     }
+    this._predCache = {};
+    this._predPossibleCache = {};
     var dup = comp.duplication || {};
     this.dupFreeDefault = (dup.free_copies_default === undefined) ? 1 : dup.free_copies_default;
     this.dupMaxSmall = (dup.max_copies_default_small === undefined) ? 1e9 : dup.max_copies_default_small;
@@ -808,6 +813,26 @@
     return adj === null ? extra : adj;
   };
 
+  CompEngine.prototype._comboScore = function (state, weapon, i, extra) {
+    /* One combo's value against a party state (mirrors engine.py
+       _combo_score) — identical float-op order to the original loop. */
+    var adj = this._nonstackAdjust(state, weapon, i, extra);
+    var dFit = this._margFitFrom(state.s, adj);
+    var dSyn = this._margSynFrom(state, adj, extra);
+    return { val: this.alpha * dFit + this.beta * dSyn, dFit: dFit, dSyn: dSyn };
+  };
+
+  CompEngine.prototype._pickTail = function (state, weapon, best) {
+    /* Combo-independent candidate-score terms (mirrors engine.py
+       _pick_tail). */
+    var meta = this.metaOf(weapon);
+    var dup = (state.counts[weapon] || 0) + 1 - this._dupFree(weapon);
+    var score = best.val + this.delta * meta
+              + this.viabilityW * this.viabilityOf(weapon)
+              - (dup > 0 ? this.rho * dup : 0.0);
+    return { score: score, dFit: best.dFit, dSyn: best.dSyn, meta: meta, combo: best.combo };
+  };
+
   CompEngine.prototype._evalPick = function (state, weapon) {
     /* THE candidate score — the exact compScore delta of adding `weapon`
        with its best loadout (mirrors engine.py _eval_pick). Returns
@@ -815,20 +840,66 @@
     var best = null;
     var extras = this._comboExtras(weapon);
     for (var i = 0; i < extras.length; i++) {
-      var adj = this._nonstackAdjust(state, weapon, i, extras[i]);
-      var dFit = this._margFitFrom(state.s, adj);
-      var dSyn = this._margSynFrom(state, adj, extras[i]);
-      var val = this.alpha * dFit + this.beta * dSyn;
-      if (best === null || val > best.val)
-        best = { val: val, dFit: dFit, dSyn: dSyn, combo: i };
+      var cs = this._comboScore(state, weapon, i, extras[i]);
+      if (best === null || cs.val > best.val)
+        best = { val: cs.val, dFit: cs.dFit, dSyn: cs.dSyn, combo: i };
     }
     if (best === null) best = { val: 0.0, dFit: 0.0, dSyn: 0.0, combo: null };
-    var meta = this.metaOf(weapon);
-    var dup = (state.counts[weapon] || 0) + 1 - this._dupFree(weapon);
-    var score = best.val + this.delta * meta
-              + this.viabilityW * this.viabilityOf(weapon)
-              - (dup > 0 ? this.rho * dup : 0.0);
-    return { score: score, dFit: best.dFit, dSyn: best.dSyn, meta: meta, combo: best.combo };
+    return this._pickTail(state, weapon, best);
+  };
+
+  CompEngine.prototype._predContrib = function (weapon, combo) {
+    /* {pred name: true} the member's SELECTED combo satisfies, from RAW
+       loadout caps (mirrors engine.py _pred_contrib). */
+    var extras = this._comboExtras(weapon);
+    if (combo === null || combo === undefined || combo < 0 || combo >= extras.length)
+      combo = this.defaultCombo(weapon);
+    var key = weapon + " " + combo;
+    var hit = this._predCache[key];
+    if (hit !== undefined) return hit;
+    var lo = this.weapons[weapon].loadout || {};
+    var caps;
+    if ((lo.slots && lo.slots.length) || lo.always) {
+      caps = {};
+      var alw = lo.always || {};
+      for (var c in alw) caps[c] = alw[c];
+      var slots = lo.slots || [];
+      var choices = this.comboChoices(weapon, combo);
+      for (var ci = 0; ci < choices.length; ci++) {
+        var oi = choices[ci][0], bi = choices[ci][1];
+        if (oi < slots.length && bi < slots[oi].length) {
+          var b = slots[oi][bi];
+          for (var c2 in b) caps[c2] = (caps[c2] || 0) + b[c2];
+        }
+      }
+    } else {
+      caps = this.weapons[weapon].capabilities;
+    }
+    var out = {};
+    for (var pn in this.predDefs) {
+      var mins = this.predDefs[pn], okp = true;
+      for (var pc in mins) {
+        if ((caps[pc] || 0) < mins[pc]) { okp = false; break; }
+      }
+      if (okp) out[pn] = true;
+    }
+    this._predCache[key] = out;
+    return out;
+  };
+
+  CompEngine.prototype._predPossible = function (weapon) {
+    /* Predicates SOME combo can satisfy — the optimistic beam bound
+       (mirrors engine.py _pred_possible). */
+    var hit = this._predPossibleCache[weapon];
+    if (hit !== undefined) return hit;
+    var out = {};
+    var n = this._comboExtras(weapon).length;
+    for (var i = 0; i < n; i++) {
+      var per = this._predContrib(weapon, i);
+      for (var pn in per) out[pn] = true;
+    }
+    this._predPossibleCache[weapon] = out;
+    return out;
   };
 
   CompEngine.prototype.bestLoadout = function (s, baseSyn, weapon) {
@@ -1104,7 +1175,7 @@
       if (key === "min_size" || key === "max_size") continue;
       var rule = band[key];
       if (typeof rule !== "object" || rule === null) continue;
-      if (key in this.predMembers) {
+      if (key in this.predDefs) {
         if (rule.min !== undefined) predMin[key] = rule.min;
         continue;
       }
@@ -1114,26 +1185,44 @@
     return { pool: pool, roleMin: roleMin, roleMax: roleMax, predMin: predMin };
   };
 
-  CompEngine.prototype._forgeCounts = function (party) {
-    /* [weapon counts, role counts, predicate counts, group counts]. */
+  CompEngine.prototype._forgeCounts = function (party, combos) {
+    /* [weapon counts, role counts, predicate counts, group counts].
+       Predicate counts are COMBO-AWARE (mirrors engine.py _forge_counts,
+       review 2026-08-19). */
     var counts = {}, roles = {}, preds = {}, groups = {};
     for (var i = 0; i < party.length; i++) {
       var w = party[i];
       counts[w] = (counts[w] || 0) + 1;
       var r = this.roleOf(w);
       roles[r] = (roles[r] || 0) + 1;
-      for (var pn in this.predMembers) {
-        if (this.predMembers[pn][w]) preds[pn] = (preds[pn] || 0) + 1;
-      }
+      var contrib = this._predContrib(w, combos ? combos[i] : null);
+      for (var pn in contrib) preds[pn] = (preds[pn] || 0) + 1;
       var gs = this.groupsOf[w] || [];
       for (var g = 0; g < gs.length; g++) groups[gs[g]] = (groups[gs[g]] || 0) + 1;
     }
     return [counts, roles, preds, groups];
   };
 
+  CompEngine.prototype._forgeMinNeed = function (ctx, roles, preds, w, predContrib) {
+    /* Slots still required for unmet minima after adding `w` (mirrors
+       engine.py _forge_min_need). */
+    var need = 0;
+    var r = this.roleOf(w);
+    for (var r2 in ctx.roleMin) {
+      var have = (roles[r2] || 0) + (r2 === r ? 1 : 0);
+      if (ctx.roleMin[r2] > have) need += ctx.roleMin[r2] - have;
+    }
+    for (var pn in ctx.predMin) {
+      var haveP = (preds[pn] || 0) + (predContrib[pn] ? 1 : 0);
+      if (ctx.predMin[pn] > haveP) need += ctx.predMin[pn] - haveP;
+    }
+    return need;
+  };
+
   CompEngine.prototype._forgeFeasible = function (ctx, counts, roles, preds, groups, w, slotsLeftAfter) {
     /* May the forge add `w` here and still complete a legal roster?
-       (mirrors engine.py _forge_feasible) */
+       Predicate contribution is OPTIMISTIC here; _forgeEvalPick enforces
+       the exact per-combo need (mirrors engine.py _forge_feasible). */
     if ((counts[w] || 0) >= this._dupGenMax(w)) return false;
     var gs = this.groupsOf[w] || [];
     for (var g = 0; g < gs.length; g++) {
@@ -1143,16 +1232,31 @@
     var r = this.roleOf(w);
     var mx = ctx.roleMax[r];
     if (mx !== undefined && (roles[r] || 0) >= mx) return false;
-    var need = 0;
-    for (var r2 in ctx.roleMin) {
-      var have = (roles[r2] || 0) + (r2 === r ? 1 : 0);
-      if (ctx.roleMin[r2] > have) need += ctx.roleMin[r2] - have;
+    return this._forgeMinNeed(ctx, roles, preds, w, this._predPossible(w))
+           <= slotsLeftAfter;
+  };
+
+  CompEngine.prototype._forgeEvalPick = function (ctx, beam, w, slotsLeftAfter) {
+    /* _evalPick restricted to combos that keep the roster completable
+       (mirrors engine.py _forge_eval_pick). Returns null when no combo
+       keeps the minima satisfiable. */
+    var state = beam.state;
+    var best = null;
+    var extras = this._comboExtras(w);
+    var hasPred = false;
+    for (var k in ctx.predMin) { hasPred = true; break; }
+    for (var i = 0; i < extras.length; i++) {
+      if (hasPred) {
+        var need = this._forgeMinNeed(ctx, beam.roles, beam.preds, w,
+                                      this._predContrib(w, i));
+        if (need > slotsLeftAfter) continue;
+      }
+      var cs = this._comboScore(state, w, i, extras[i]);
+      if (best === null || cs.val > best.val)
+        best = { val: cs.val, dFit: cs.dFit, dSyn: cs.dSyn, combo: i };
     }
-    for (var pn in ctx.predMin) {
-      var haveP = (preds[pn] || 0) + (this.predMembers[pn][w] ? 1 : 0);
-      if (ctx.predMin[pn] > haveP) need += ctx.predMin[pn] - haveP;
-    }
-    return need <= slotsLeftAfter;
+    if (best === null) return null;
+    return this._pickTail(state, w, best);
   };
 
   CompEngine.prototype._memberTag = function (w, combo) {
@@ -1191,7 +1295,7 @@
     if (beamWidth === undefined || beamWidth === null) beamWidth = 8;
     var feasible = true;
 
-    var fc = this._forgeCounts(locked);
+    var fc = this._forgeCounts(locked, combos);
     var items0 = [];
     for (var li = 0; li < locked.length; li++)
       items0.push(this._memberTag(locked[li], combos[li]));
@@ -1209,7 +1313,8 @@
           var w = candPool[wi];
           if (!this._forgeFeasible(ctx, beam.counts, beam.roles, beam.preds,
                                    beam.groups, w, slotsLeftAfter)) continue;
-          var pick = this._evalPick(beam.state, w);
+          var pick = this._forgeEvalPick(ctx, beam, w, slotsLeftAfter);
+          if (pick === null) continue;  /* no combo keeps minima satisfiable */
           expansions.push([beam.score + pick.score, bi, w, pick.combo]);
         }
       }
@@ -1229,7 +1334,7 @@
         seen[key] = true;
         var party2 = src.party.concat([ex[2]]);
         var combos2 = src.combos.concat([ex[3]]);
-        var fc2 = this._forgeCounts(party2);
+        var fc2 = this._forgeCounts(party2, combos2);
         nextBeams.push({ party: party2, combos: combos2,
                          counts: fc2[0], roles: fc2[1], preds: fc2[2], groups: fc2[3],
                          state: this.partyState(party2, combos2), items: items,
@@ -1256,7 +1361,7 @@
       var sub = party.slice(0, i2).concat(party.slice(i2 + 1));
       var subC = combosOut.slice(0, i2).concat(combosOut.slice(i2 + 1));
       if (base - this.compScore(sub, subC) >= -1e-9) continue;
-      var fcs = this._forgeCounts(sub);
+      var fcs = this._forgeCounts(sub, subC);
       var needed = false;
       for (var rr in ctx.roleMin) {
         if ((fcs[1][rr] || 0) < ctx.roleMin[rr]) { needed = true; break; }
@@ -1268,61 +1373,61 @@
       }
       (needed ? held : filler).push(i2);
     }
+    /* final feasibility net (mirrors engine.py): the SELECTED combos must
+       meet every minimum — locked non-qualifying spell picks are reported,
+       never counted through the flat sheet map. */
+    var fcf = this._forgeCounts(party, combosOut);
+    for (var rf in ctx.roleMin) {
+      if ((fcf[1][rf] || 0) < ctx.roleMin[rf]) feasible = false;
+    }
+    for (var pf in ctx.predMin) {
+      if ((fcf[2][pf] || 0) < ctx.predMin[pf]) feasible = false;
+    }
     return { party: party, combos: combosOut, score: base,
              feasible: feasible, filler: filler, held: held, locked: fixed };
   };
 
-  CompEngine.prototype._swapOk = function (ctx, counts, roles, preds, groups, orig, w) {
-    /* Constraint check for replacing member `orig` with `w`, against the
-       CURRENT roster's precomputed counts — O(1) deltas (mirrors engine.py
-       _swap_ok; a full count rebuild per candidate dominated size 60). */
+  CompEngine.prototype._addOk = function (ctx, counts, roles, groups, w) {
+    /* Copy/group/role-MAX check for adding `w` to a roster whose counts
+       exclude the slot being replaced (mirrors engine.py _add_ok). Minima
+       are enforced through _forgeEvalPick's exact per-combo need. */
     if ((counts[w] || 0) + 1 > this._dupGenMax(w)) return false;
-    var gw = this.groupsOf[w] || [];
-    if (gw.length) {
-      var go = this.groupsOf[orig] || [];
-      for (var g = 0; g < gw.length; g++) {
-        var after = (groups[gw[g]] || 0) + 1 - (go.indexOf(gw[g]) >= 0 ? 1 : 0);
-        var gmax = this.groups[gw[g]].max;
-        if (after > (gmax === undefined ? 1e9 : gmax)) return false;
-      }
+    var gs = this.groupsOf[w] || [];
+    for (var g = 0; g < gs.length; g++) {
+      var gmax = this.groups[gs[g]].max;
+      if ((groups[gs[g]] || 0) + 1 > (gmax === undefined ? 1e9 : gmax)) return false;
     }
-    var ro = this.roleOf(orig), rw = this.roleOf(w);
-    if (rw !== ro) {
-      var mx = ctx.roleMax[rw];
-      if (mx !== undefined && (roles[rw] || 0) + 1 > mx) return false;
-      var mn = ctx.roleMin[ro];
-      if (mn !== undefined && (roles[ro] || 0) - 1 < mn) return false;
-    }
-    for (var pn in ctx.predMin) {
-      var members = this.predMembers[pn];
-      var d = (members[w] ? 1 : 0) - (members[orig] ? 1 : 0);
-      if ((preds[pn] || 0) + d < ctx.predMin[pn]) return false;
-    }
+    var r = this.roleOf(w);
+    var mx = ctx.roleMax[r];
+    if (mx !== undefined && (roles[r] || 0) + 1 > mx) return false;
     return true;
   };
 
   CompEngine.prototype._refineConstrained = function (ctx, party, combos, fixed, maxPasses) {
-    /* Steepest-descent 1-opt over generated slots, constraint-aware
-       (mirrors engine.py _refine_constrained). */
+    /* Steepest-descent 1-opt over generated slots, constraint-aware:
+       minima are checked against the REST roster's combo-aware counts, so
+       a swap can never trade away the spells a minimum was counting on
+       (mirrors engine.py _refine_constrained, review 2026-08-19). */
     party = party.slice(); combos = combos.slice();
     if (maxPasses === undefined) maxPasses = 8;
     var best = this.compScore(party, combos);
     for (var pass = 0; pass < maxPasses; pass++) {
-      var fc = this._forgeCounts(party);
-      var counts = fc[0], roles = fc[1], preds = fc[2], groups = fc[3];
       var move = null, gain = 1e-9;
       for (var i = fixed; i < party.length; i++) {
         var rest = party.slice(0, i).concat(party.slice(i + 1));
         var restC = combos.slice(0, i).concat(combos.slice(i + 1));
+        var fcr = this._forgeCounts(rest, restC);
         var state = this.partyState(rest, restC);
         var baseRest = this.compScore(rest, restC);
         var contrib = best - baseRest;
         var orig = party[i];
+        var beam = { state: state, roles: fcr[1], preds: fcr[2] };
         for (var j = 0; j < ctx.pool.length; j++) {
           var w = ctx.pool[j];
           if (w === orig) continue;
-          if (!this._swapOk(ctx, counts, roles, preds, groups, orig, w)) continue;
-          var pick = this._evalPick(state, w);
+          if (!this._addOk(ctx, fcr[0], fcr[1], fcr[3], w)) continue;
+          var pick = this._forgeEvalPick(ctx, beam, w, 0);
+          if (pick === null) continue;
           var d = pick.score - contrib;
           if (d > gain) { move = [i, w, pick.combo]; gain = d; }
         }
@@ -1388,7 +1493,7 @@
               var pkb = this._evalPick(state2, wb);
               var candParty = pa.concat([wb]);
               var candCombos = pca.concat([pkb.combo]);
-              var fc = this._forgeCounts(candParty);
+              var fc = this._forgeCounts(candParty, candCombos);
               var counts = fc[0], roles = fc[1], preds = fc[2], groups = fc[3];
               var ok = true;
               for (var cw in counts) {

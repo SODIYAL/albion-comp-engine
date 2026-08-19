@@ -138,6 +138,20 @@ check("H8 an out-of-pool index (Enigmatic p5) is quarantined as unknown, "
 check("H8 the quarantine landed in the committed validation_result",
       any("passive: index 5" in f for q in VALIDATION["quarantined"]
           for f in q["fields"]))
+# review 2026-08-19: a quarantined record must never BE the canonical
+# default, whatever its comp-level approval says
+bad = [(ct, w) for ct, by_w in INDEX["by_content"].items()
+       for w, vs in by_w.items() for v in vs
+       if v.get("canonical") and (v.get("status") == "quarantined"
+                                  or v.get("quarantined_fields"))]
+check("H8 no canonical default anywhere is a quarantined record", not bad,
+      str(bad[:3]))
+locus = next(p for p in VALIDATION["promotions"]
+             if p["weapon"] == "2H_ENIGMATICORB_MORGANA"
+             and p["content"] == "blackzone_roam")
+check("H8 the quarantined Enigmatic p5 build lost its canonical promotion",
+      locus["build_id"] is None
+      and "quarantine" in locus["basis"].lower(), str(locus))
 mb = yaml.safe_load(open(os.path.join(ROOT, "data", "published_builds",
                                       "metabattle_zvz.yaml"), encoding="utf-8"))
 bad = []

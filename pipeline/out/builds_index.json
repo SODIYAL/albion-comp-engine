@@ -15,7 +15,7 @@
   "counts": {
    "approved": 70,
    "candidate": 31,
-   "canonical_defaults": 46,
+   "canonical_defaults": 45,
    "quarantined_fields": 2,
    "quarantined_records": 2,
    "records": 101
@@ -79,6 +79,7 @@
       "q": "RENDINGCOMBO",
       "w": "AXESMASH"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [
       "gear.offhand"
@@ -142,6 +143,7 @@
       "q": "CLEAVE",
       "w": "DEFENSERUN"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [
       "gear.offhand"
@@ -205,6 +207,7 @@
       "q": "DEFENSIVESLAM",
       "w": "GUARDRUNE"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [
       "gear.offhand"
@@ -222,8 +225,6 @@
      "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
      "build_id": "timothy_blap_blackzone_roam_2026_08:blap:5",
      "caller": "Timothy",
-     "canonical": true,
-     "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
       "item_mapping": 0.83,
@@ -270,6 +271,7 @@
       "q": "SHIELDFRIENDLY",
       "w": "MIMIC"
      },
+     "status": "quarantined",
      "style": "brawl",
      "unknowns": [
       "gear.offhand",
@@ -334,6 +336,7 @@
       "q": "RENDINGCOMBO",
       "w": "AXESMASH"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [
       "gear.offhand"
@@ -397,6 +400,7 @@
       "q": "GENEROUSHEAL",
       "w": "HEALINGBEAM"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [
       "gear.offhand"
@@ -460,6 +464,7 @@
       "q": "DASHKICK",
       "w": "TRIPLE_KICK"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [
       "gear.offhand"
@@ -523,6 +528,7 @@
       "q": "SACRED_GROUND",
       "w": "CHARGE_ROOT"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [
       "gear.offhand"
@@ -585,6 +591,7 @@
       "q": "DEFENSIVESLAM",
       "w": "CHARGE_ROOT"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [
       "gear.offhand"
@@ -647,6 +654,7 @@
       "q": "REJUVENATION",
       "w": "REJUVENATING_BREEZE"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [
       "gear.offhand"
@@ -709,6 +717,7 @@
       "q": "CARTWHEEL",
       "w": "LAUNCHER"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [
       "gear.offhand"
@@ -772,6 +781,7 @@
       "q": "SHAPE_Q_CONE_MELEE",
       "w": "SHAPE_W_POLYMORPH"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [
       "gear.offhand"
@@ -836,6 +846,7 @@
       "q": "CURSED_SPLAT",
       "w": "CURSENOVA"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [],
      "w": 2
@@ -898,6 +909,7 @@
       "q": "QDASH",
       "w": "THROWINGBLADES"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [],
      "w": 1
@@ -959,6 +971,7 @@
       "q": "HOLYFLASH",
       "w": "HOLYORB"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [],
      "w": 4
@@ -1016,6 +1029,7 @@
       "q": "HOLYFLASH",
       "w": "HEALINGBEAM"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [],
      "w": 2
@@ -1078,6 +1092,7 @@
       "q": "SACRED_GROUND",
       "w": "CHARGE_ROOT"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [],
      "w": 2
@@ -1140,6 +1155,7 @@
       "q": "SACRED_GROUND",
       "w": "CHARGE_ROOT"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [],
      "w": 2
@@ -1202,6 +1218,7 @@
       "q": "QDASH",
       "w": "GROUNDDASH"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [],
      "w": 2
@@ -1264,6 +1281,7 @@
       "q": "CLEAVE",
       "w": "DEFENSERUN"
      },
+     "status": "normalized",
      "style": "brawl",
      "unknowns": [],
      "w": 6
@@ -1323,6 +1341,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -1381,6 +1400,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -1439,6 +1459,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -1501,6 +1522,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -1559,6 +1581,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -1628,6 +1651,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -1690,6 +1714,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -1753,6 +1778,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -1816,6 +1842,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -1878,6 +1905,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -1939,6 +1967,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2010,6 +2039,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2068,6 +2098,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2130,6 +2161,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2188,6 +2220,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2254,6 +2287,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2316,6 +2350,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2374,6 +2409,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2444,6 +2480,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2510,6 +2547,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2571,6 +2609,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2633,6 +2672,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2691,6 +2731,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2749,6 +2790,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2810,6 +2852,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2867,6 +2910,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2929,6 +2973,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -2999,6 +3044,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -3061,6 +3107,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -3131,6 +3178,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -3197,6 +3245,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -3274,6 +3323,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -3336,6 +3386,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -3394,6 +3445,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -3465,6 +3517,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -3532,6 +3585,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -3599,6 +3653,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -3676,6 +3731,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -3747,6 +3803,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -3814,6 +3871,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -3885,6 +3943,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -3956,6 +4015,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -4023,6 +4083,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -4090,6 +4151,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -4157,6 +4219,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -4224,6 +4287,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -4283,6 +4347,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -4354,6 +4419,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -4421,6 +4487,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -4488,6 +4555,7 @@
       "q": null,
       "w": null
      },
+     "status": "normalized",
      "style": null,
      "unknowns": [
       "gear.food",
@@ -4549,6 +4617,7 @@
       "q": "SHIELDFRIENDLY",
       "w": "CLEANSESPEED2"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -4601,6 +4670,7 @@
       "q": "RENDINGCOMBO",
       "w": "AXEBOOST"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -4653,6 +4723,7 @@
       "q": "MULTISHOT2",
       "w": "GROUNDARROW"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -4705,6 +4776,7 @@
       "q": "MULTISHOT2",
       "w": "GROUNDARROW"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -4757,6 +4829,7 @@
       "q": "CLEAVE",
       "w": "DEFENSERUN"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -4809,6 +4882,7 @@
       "q": "BOLTSHOT",
       "w": "CALTROPS"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -4861,6 +4935,7 @@
       "q": "BOLTSHOT",
       "w": "CALTROPS"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -4913,6 +4988,7 @@
       "q": "SACRED_GROUND",
       "w": "CHARGE_ROOT"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -4965,6 +5041,7 @@
       "q": "SHIELDFRIENDLY",
       "w": "CLEANSESPEED2"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5017,6 +5094,7 @@
       "q": "SPIRITSPEAR",
       "w": "CHARGINGBLADE"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5069,6 +5147,7 @@
       "q": "RENDINGSPIN",
       "w": "BLADE_AURA"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5121,6 +5200,7 @@
       "q": "RENDINGCOMBO",
       "w": "AXEBOOST"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5173,6 +5253,7 @@
       "q": "IRONBREAKER",
       "w": "TAR_RING"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5225,6 +5306,7 @@
       "q": "SPEAR_LUNGE",
       "w": "GROUNDSPEAR"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5277,6 +5359,7 @@
       "q": "HOLYFLASH",
       "w": "HOLYORB"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5329,6 +5412,7 @@
       "q": "ICESHARD",
       "w": "FROSTNOVA"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5383,6 +5467,7 @@
       "q": "SHATTER_Q",
       "w": "FROSTNOVA"
      },
+     "status": "quarantined",
      "style": null,
      "unknowns": [
       "passive"
@@ -5437,6 +5522,7 @@
       "q": "DASHKICK",
       "w": "TRIPLE_KICK"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5489,6 +5575,7 @@
       "q": "DASHKICK",
       "w": "TRIPLE_KICK"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5541,6 +5628,7 @@
       "q": "DASHKICK",
       "w": "TRIPLE_KICK"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5593,6 +5681,7 @@
       "q": "DASHKICK",
       "w": "TRIPLE_KICK"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5645,6 +5734,7 @@
       "q": "MULTISHOT2",
       "w": "GROUNDARROW"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5697,6 +5787,7 @@
       "q": "REJUVMUSHROOM_GRENADE",
       "w": "CLEANSEHEAL"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5749,6 +5840,7 @@
       "q": "REJUVMUSHROOM_GRENADE",
       "w": "CLEANSEHEAL"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5801,6 +5893,7 @@
       "q": "IRONBREAKER",
       "w": "TAR_RING"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5853,6 +5946,7 @@
       "q": "CARTWHEEL",
       "w": "SEPARATING_SLAM"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5905,6 +5999,7 @@
       "q": "RENDINGCOMBO",
       "w": "BLADE_AURA"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -5958,6 +6053,7 @@
       "q": "SHIELDFRIENDLY",
       "w": "CLEANSESPEED2"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -6011,6 +6107,7 @@
       "q": "SACRED_GROUND",
       "w": "CHARGE_ROOT"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -6064,6 +6161,7 @@
       "q": "QDASH",
       "w": "THROWINGBLADES"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }
@@ -6117,6 +6215,7 @@
       "q": "CLEAVE",
       "w": "DEFENSERUN"
      },
+     "status": "candidate",
      "style": null,
      "unknowns": []
     }

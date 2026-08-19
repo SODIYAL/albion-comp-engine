@@ -172,9 +172,14 @@ def t_size11_matrix():
                 problems.append(f"frontline {roles.get('frontline', 0)}")
             if roles.get("support", 0) > 4:
                 problems.append(f"support {roles.get('support', 0)}")
-            core = sum(1 for w in party if w in e.pred_members.get("ranged_aoe_core", ()))
+            # COMBO-AWARE (review 2026-08-19): a member counts toward the
+            # ranged-AoE core only if the spell combination the forge
+            # actually SELECTED supplies the minima — the flat sheet count
+            # marked comps legal while the equipped kits supplied less.
+            core = sum(1 for w, c in zip(party, r["combos"])
+                       if "ranged_aoe_core" in e._pred_contrib(w, c))
             if core < 2:
-                problems.append(f"ranged core {core}")
+                problems.append(f"ranged core {core} (selected combos)")
             counts = {}
             for w in party:
                 counts[w] = counts.get(w, 0) + 1
@@ -184,7 +189,8 @@ def t_size11_matrix():
             # every held slot must genuinely be constraint-mandated
             for i in r["held"]:
                 sub = party[:i] + party[i + 1:]
-                _c, rr, pp, _g = e._forge_counts(sub)
+                sub_c = r["combos"][:i] + r["combos"][i + 1:]
+                _c, rr, pp, _g = e._forge_counts(sub, sub_c)
                 ctx = e._forge_ctx(list(e.suggest_pool()))
                 needed = any(rr.get(role, 0) < mn for role, mn in ctx["role_min"].items()) \
                     or any(pp.get(pn, 0) < mn for pn, mn in ctx["pred_min"].items())
@@ -297,6 +303,41 @@ def t_locked_forge():
           f"party head {r['party'][:3]}, generated excluded: {regen}")
 
 
+def t_pred_combo_aware():
+    """Review 2026-08-19: the ranged-AoE minimum must be met by the spell
+    combinations the forge actually SELECTS — the flat sheet count marked a
+    member as core even when its equipped kit supplied nothing. A member
+    locked with a non-qualifying spell pick must not count, and the forge
+    must still deliver the minimum with real kits (or report infeasible)."""
+    e = Engine(content="blackzone_roam", size=20, style="brawl")
+    need = 4   # constraint_bands 20-29: ranged_aoe_core min 4
+    # lock core-capable weapons with spell kits that do NOT qualify
+    locked, lcs = [], []
+    for w in sorted(e.pred_members["ranged_aoe_core"]):
+        bad = next((c for c in range(len(e._combo_extras(w)))
+                    if "ranged_aoe_core" not in e._pred_contrib(w, c)), None)
+        if bad is not None:
+            locked.append(w)
+            lcs.append(bad)
+        if len(locked) == 2:
+            break
+    check("F12a a non-qualifying combo exists to lock (fixture sanity)",
+          len(locked) >= 1, str(list(zip(locked, lcs))))
+    r = e.forge(20, locked, lcs)
+    sel = sum(1 for w, c in zip(r["party"], r["combos"])
+              if "ranged_aoe_core" in e._pred_contrib(w, c))
+    locked_kept = all(r["combos"][i] == lcs[i] for i in range(len(locked)))
+    check("F12b locked non-AoE picks kept verbatim; SELECTED kits still meet "
+          "the ranged-AoE minimum; forge honest about feasibility",
+          locked_kept and r["feasible"] and sel >= need,
+          f"selected core {sel}/{need}, locked kept {locked_kept}, "
+          f"feasible {r['feasible']}")
+    # the locked members' own kits must NOT be counted toward the minimum
+    _c, _r, preds, _g = e._forge_counts(locked, lcs)
+    check("F12c a locked member with a non-qualifying kit is not counted",
+          preds.get("ranged_aoe_core", 0) == 0, str(preds))
+
+
 if __name__ == "__main__":
     t_invariant()
     t_synergy_gating()
@@ -309,6 +350,7 @@ if __name__ == "__main__":
     t_headroom()
     t_locks()
     t_locked_forge()
+    t_pred_combo_aware()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")

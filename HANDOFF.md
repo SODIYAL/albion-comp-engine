@@ -45,7 +45,7 @@ py -3 pipeline/build_dataset.py        # sheets + templates + styles + compositi
                                        # (verifies snapshot provenance; exit 2 = release blocked)
 py -3 tests/test_golden.py             # must stay 24/24
 py -3 tests/test_forge.py              # forge rework contracts: invariant, synergy rules,
-                                       # redundancy, size-11 matrix, exclusions (11/11)
+                                       # redundancy, size-11 matrix, exclusions, combo-aware minima (14/14)
 py -3 tests/tier2_blindtest.py v4      # role gate >= 70% (73% since the ranged rework)
                                        # (reads data/published_comps/ — the production comp files)
 py -3 tests/test_js_parity.py          # browser scoring == engine.py incl. forge (needs node)
@@ -71,6 +71,34 @@ ao-bin-dumps commit, then `fetch_snapshot.py` -> `parse_dumps.py` ->
 `fetch_item_stats.py` -> `fetch_gear_lines.py` -> the full gate list above.
 Every derived input records its snapshot commit + adapter version in
 `out/source_manifest.json`; `build_dataset.py` fails closed on any mismatch.
+
+## Session 2026-08-19 (review fixes) — combo-aware constraints, quarantine gate
+
+Two defects from the owner's chapter-2 review, both verified then fixed:
+
+- **Forge minima now bind the SELECTED spell kits.** `ranged_presence`
+  lives in spell bundles (§B), but the forge's `ranged_aoe_core` minimum
+  counted the flat sheet map — a member counted as ranged AoE even when
+  its equipped combo supplied nothing (reproduced via locked non-AoE spell
+  picks: static 7 vs selected 6). Predicate membership is now
+  `_pred_contrib(weapon, combo)` from RAW loadout caps; the beam prune
+  keeps an optimistic any-combo bound (`_pred_possible`) while
+  `_forge_eval_pick` refuses combos that leave more unmet minima than
+  remaining slots; refinement checks minima against rest-roster
+  combo-aware counts (`_swap_ok` replaced by `_add_ok` + exact need); a
+  final feasibility net re-verifies every minimum on the selected combos
+  (locked non-qualifying picks surface as infeasible, never pass through
+  the flat map). Mirrored line-for-line in app_scoring.js; parity 60/60.
+  test_forge's static core check is now combo-aware + new F12a-c pin the
+  locked-pick scenario (14/14). 40-forge sweep: 0 violations.
+- **A quarantined record can no longer become the canonical default.**
+  The Enigmatic p5 build (quarantined field, approved comp envelope) was
+  shipping as the dashboard default. `builds_lib.promotable()` gates
+  `canonical_eligible` and `selection_order` (quarantined/rejected sink
+  last); `build_builds` promotes the first PROMOTABLE variant, pins can't
+  rescue a quarantined record; variants carry `status`. Canonical
+  defaults 46 -> 45 (blackzone Locus now has none — basis
+  "no non-quarantined record"). New H8 assertions pin both.
 
 ## Session 2026-08-19 (later) — PvP interaction layer ("new prompt")
 

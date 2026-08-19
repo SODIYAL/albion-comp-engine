@@ -92,12 +92,23 @@ class Engine:
         for k, d in self.weapons.items():
             self.role_class[k] = overrides.get(
                 k, by_hint.get(d.get("role_hint"), "dps"))
-        # capability predicates (flat sheet scores, static per dataset)
+        # Capability predicates (composition.yaml). Membership is COMBO-AWARE
+        # since 2026-08-19: the §B rework put ranged_presence in spell
+        # bundles, so a member counts toward ranged_aoe_core only when the
+        # spell combination it actually equips supplies the minima — the flat
+        # sheet map says "could, with the right spells", never "does".
+        # pred_members keeps the flat could-qualify view (display/back-compat
+        # + the optimistic beam bound via _pred_possible); every forge
+        # constraint counts through _pred_contrib(weapon, combo).
+        self.pred_defs = comp.get("predicates", {}) or {}
         self.pred_members = {}
-        for name, mins in (comp.get("predicates", {}) or {}).items():
+        for name, mins in self.pred_defs.items():
             self.pred_members[name] = set(
                 k for k, d in self.weapons.items()
                 if all(d["capabilities"].get(c, 0) >= v for c, v in mins.items()))
+        # raw-caps predicate caches — content-independent (raw loadout numbers)
+        self._pred_cache = {}
+        self._pred_possible_cache = {}
         dup = comp.get("duplication", {}) or {}
         self.dup_free_default = dup.get("free_copies_default", 1)
         self.dup_max_small = dup.get("max_copies_default_small", 10 ** 9)
@@ -472,6 +483,48 @@ class Engine:
             combo = self.default_combo(weapon)
         return extras[combo]
 
+    def _pred_contrib(self, weapon, combo=None):
+        """frozenset of predicate names this member's SELECTED combo
+        satisfies, from RAW loadout caps (always + chosen bundles — the
+        units the predicate minima were calibrated on). Weapons without
+        loadout data fall back to the flat sheet capabilities. Cached per
+        (weapon, resolved combo); raw caps are content-independent."""
+        extras = self._combo_extras(weapon)
+        if combo is None or combo < 0 or combo >= len(extras):
+            combo = self.default_combo(weapon)
+        key = (weapon, combo)
+        hit = self._pred_cache.get(key)
+        if hit is not None:
+            return hit
+        lo = self.weapons[weapon].get("loadout") or {}
+        if lo.get("slots") or lo.get("always"):
+            caps = dict(lo.get("always") or {})
+            slots = lo.get("slots") or []
+            for oi, ci in self.combo_choices(weapon, combo):
+                if oi < len(slots) and ci < len(slots[oi]):
+                    for c, v in slots[oi][ci].items():
+                        caps[c] = caps.get(c, 0) + v
+        else:
+            caps = self.weapons[weapon]["capabilities"]
+        out = frozenset(
+            pn for pn, mins in self.pred_defs.items()
+            if all(caps.get(c, 0) >= v for c, v in mins.items()))
+        self._pred_cache[key] = out
+        return out
+
+    def _pred_possible(self, weapon):
+        """Predicates SOME combo of this weapon can satisfy — the optimistic
+        bound the beam prune uses before a combo is chosen."""
+        hit = self._pred_possible_cache.get(weapon)
+        if hit is not None:
+            return hit
+        out = set()
+        for i in range(len(self._combo_extras(weapon))):
+            out |= self._pred_contrib(weapon, i)
+        out = frozenset(out)
+        self._pred_possible_cache[weapon] = out
+        return out
+
     def _nonstack_contrib(self, weapon, combo=None):
         """{spell: {cap: effective value}} for every verified non-stacking
         interaction spell this member's combo equips — the contributions
@@ -815,6 +868,25 @@ class Engine:
                 adj[cap] = adj.get(cap, 0.0) - v + (gain if gain > 0.0 else 0.0)
         return adj if adj is not None else extra
 
+    def _combo_score(self, state, weapon, i, extra):
+        """(value, d_fit, d_syn) of ONE combo against a party state — the
+        shared inner term of _eval_pick and the forge's constraint-aware
+        variant. Identical float-op order to the original inline loop."""
+        adj = self._nonstack_adjust(state, weapon, i, extra)
+        d_fit = self._marg_fit_from(state["s"], adj)
+        d_syn = self._marg_syn_from(state, adj, extra)
+        return self.alpha * d_fit + self.beta * d_syn, d_fit, d_syn
+
+    def _pick_tail(self, state, weapon, best):
+        """The combo-independent terms of a candidate score — shared by
+        _eval_pick and _forge_eval_pick so the formula can never drift."""
+        meta = self.meta_of(weapon)
+        dup = state["counts"].get(weapon, 0) + 1 - self._dup_free(weapon)
+        score = (best[0] + self.delta * meta
+                 + self.viability_w * self.viability_of(weapon)
+                 - (self.rho * dup if dup > 0 else 0.0))
+        return score, best[1], best[2], meta, best[3]
+
     def _eval_pick(self, state, weapon):
         """THE candidate score — the exact comp_score delta of adding
         `weapon` with its best loadout for this party. Every suggestion path
@@ -823,21 +895,12 @@ class Engine:
         best = None
         extras = self._combo_extras(weapon)
         for i in range(len(extras)):
-            extra = extras[i]
-            adj = self._nonstack_adjust(state, weapon, i, extra)
-            d_fit = self._marg_fit_from(state["s"], adj)
-            d_syn = self._marg_syn_from(state, adj, extra)
-            val = self.alpha * d_fit + self.beta * d_syn
+            val, d_fit, d_syn = self._combo_score(state, weapon, i, extras[i])
             if best is None or val > best[0]:
                 best = (val, d_fit, d_syn, i)
         if best is None:
             best = (0.0, 0.0, 0.0, None)
-        meta = self.meta_of(weapon)
-        dup = state["counts"].get(weapon, 0) + 1 - self._dup_free(weapon)
-        score = (best[0] + self.delta * meta
-                 + self.viability_w * self.viability_of(weapon)
-                 - (self.rho * dup if dup > 0 else 0.0))
-        return score, best[1], best[2], meta, best[3]
+        return self._pick_tail(state, weapon, best)
 
     def best_loadout(self, s, base_syn, weapon):
         """Legacy shim (golden T14; explain callers migrated): the candidate's
@@ -1087,7 +1150,7 @@ class Engine:
         for key, rule in band.items():
             if key in ("min_size", "max_size") or not isinstance(rule, dict):
                 continue
-            if key in self.pred_members:
+            if key in self.pred_defs:
                 if "min" in rule:
                     pred_min[key] = rule["min"]
                 continue
@@ -1098,22 +1161,45 @@ class Engine:
         return {"pool": pool, "role_min": role_min, "role_max": role_max,
                 "pred_min": pred_min}
 
-    def _forge_counts(self, party):
-        """(weapon counts, role counts, predicate counts, group counts)."""
+    def _forge_counts(self, party, combos=None):
+        """(weapon counts, role counts, predicate counts, group counts).
+        Predicate counts are COMBO-AWARE: a member counts only when the
+        spell combination it actually equips satisfies the minima (review
+        2026-08-19 — the flat count marked comps ranged-AoE-legal while the
+        selected loadouts supplied less)."""
         counts, roles, preds, groups = {}, {}, {}, {}
-        for w in party:
+        for i, w in enumerate(party):
             counts[w] = counts.get(w, 0) + 1
             r = self.role_of(w)
             roles[r] = roles.get(r, 0) + 1
-            for name, members in self.pred_members.items():
-                if w in members:
-                    preds[name] = preds.get(name, 0) + 1
+            for pn in self._pred_contrib(w, combos[i] if combos else None):
+                preds[pn] = preds.get(pn, 0) + 1
             for gi in self.groups_of.get(w, []):
                 groups[gi] = groups.get(gi, 0) + 1
         return counts, roles, preds, groups
 
+    def _forge_min_need(self, ctx, roles, preds, w, pred_contrib):
+        """Slots still required for unmet role/predicate minima after adding
+        `w` whose predicate contribution is `pred_contrib` (a weapon may
+        serve one role AND a predicate; the sum slightly over-counts that
+        overlap — conservative, documented)."""
+        need = 0
+        r = self.role_of(w)
+        for r2, mn in ctx["role_min"].items():
+            have = roles.get(r2, 0) + (1 if r2 == r else 0)
+            if mn > have:
+                need += mn - have
+        for pn, mn in ctx["pred_min"].items():
+            have = preds.get(pn, 0) + (1 if pn in pred_contrib else 0)
+            if mn > have:
+                need += mn - have
+        return need
+
     def _forge_feasible(self, ctx, counts, roles, preds, groups, w, slots_left_after):
-        """May the forge add `w` here and still complete a legal roster?"""
+        """May the forge add `w` here and still complete a legal roster?
+        Predicate contribution is OPTIMISTIC here (any combo could qualify) —
+        the cheap prune before a combo is chosen; _forge_eval_pick enforces
+        the exact per-combo need afterwards."""
         if counts.get(w, 0) >= self._dup_gen_max(w):
             return False
         for gi in self.groups_of.get(w, []):
@@ -1123,19 +1209,31 @@ class Engine:
         mx = ctx["role_max"].get(r)
         if mx is not None and roles.get(r, 0) >= mx:
             return False
-        # min-satisfiability: unmet role/predicate minima must fit in the
-        # remaining slots (a weapon may serve one role AND a predicate; the
-        # sum slightly over-counts that overlap — conservative, documented)
-        need = 0
-        for r2, mn in ctx["role_min"].items():
-            have = roles.get(r2, 0) + (1 if r2 == r else 0)
-            if mn > have:
-                need += mn - have
-        for pn, mn in ctx["pred_min"].items():
-            have = preds.get(pn, 0) + (1 if w in self.pred_members[pn] else 0)
-            if mn > have:
-                need += mn - have
+        need = self._forge_min_need(ctx, roles, preds, w,
+                                    self._pred_possible(w))
         return need <= slots_left_after
+
+    def _forge_eval_pick(self, ctx, beam, w, slots_left_after):
+        """_eval_pick restricted to combos that keep the roster completable:
+        a combo whose ACTUAL predicate contribution would leave more unmet
+        minima than remaining slots is not offered — the beam may not spend
+        a needed core slot on a non-qualifying spell kit. With no predicate
+        minima active every combo passes and this is exactly _eval_pick."""
+        state = beam["state"]
+        best = None
+        extras = self._combo_extras(w)
+        for i in range(len(extras)):
+            if ctx["pred_min"]:
+                need = self._forge_min_need(ctx, beam["roles"], beam["preds"],
+                                            w, self._pred_contrib(w, i))
+                if need > slots_left_after:
+                    continue
+            val, d_fit, d_syn = self._combo_score(state, w, i, extras[i])
+            if best is None or val > best[0]:
+                best = (val, d_fit, d_syn, i)
+        if best is None:
+            return None
+        return self._pick_tail(state, w, best)
 
     @staticmethod
     def _member_tag(w, combo):
@@ -1187,7 +1285,7 @@ class Engine:
         ctx = self._forge_ctx(cand_pool)
         feasible = True
 
-        counts, roles, preds, groups = self._forge_counts(locked)
+        counts, roles, preds, groups = self._forge_counts(locked, combos)
         state = self.party_state(locked, combos)
         items0 = sorted(self._member_tag(w, c) for w, c in zip(locked, combos))
         beams = [{"party": locked, "combos": combos,
@@ -1204,7 +1302,10 @@ class Engine:
                                                 beam["preds"], beam["groups"], w,
                                                 slots_left_after):
                         continue
-                    sc, _df, _ds, _meta, combo = self._eval_pick(beam["state"], w)
+                    pick = self._forge_eval_pick(ctx, beam, w, slots_left_after)
+                    if pick is None:
+                        continue      # no combo keeps the minima satisfiable
+                    sc, combo = pick[0], pick[4]
                     expansions.append((beam["score"] + sc, bi, w, combo))
             if not expansions:
                 feasible = False
@@ -1224,7 +1325,7 @@ class Engine:
                 seen.add(key)
                 party2 = beam["party"] + [w]
                 combos2 = beam["combos"] + [combo]
-                counts2, roles2, preds2, groups2 = self._forge_counts(party2)
+                counts2, roles2, preds2, groups2 = self._forge_counts(party2, combos2)
                 next_beams.append({"party": party2, "combos": combos2,
                                    "counts": counts2, "roles": roles2,
                                    "preds": preds2, "groups": groups2,
@@ -1256,7 +1357,7 @@ class Engine:
             sub_c = combos[:i] + combos[i + 1:]
             if base - self.comp_score(sub, sub_c) >= -1e-9:
                 continue
-            _counts, roles, preds, _groups = self._forge_counts(sub)
+            _counts, roles, preds, _groups = self._forge_counts(sub, sub_c)
             needed = False
             for r, mn in ctx["role_min"].items():
                 if roles.get(r, 0) < mn:
@@ -1268,66 +1369,68 @@ class Engine:
                         needed = True
                         break
             (held if needed else filler).append(i)
+        # final feasibility net: the SELECTED combos must meet every minimum.
+        # Construction guarantees it for generated slots; locked members with
+        # non-qualifying spell picks can still leave a minimum unmet — that
+        # is reported honestly, never counted through the flat sheet map.
+        _c, roles_f, preds_f, _g = self._forge_counts(party, combos)
+        for r, mn in ctx["role_min"].items():
+            if roles_f.get(r, 0) < mn:
+                feasible = False
+        for pn, mn in ctx["pred_min"].items():
+            if preds_f.get(pn, 0) < mn:
+                feasible = False
         return {"party": party, "combos": combos, "score": base,
                 "feasible": feasible, "filler": filler, "held": held,
                 "locked": fixed}
 
-    def _swap_ok(self, ctx, counts, roles, preds, groups, orig, w):
-        """Constraint check for replacing a member `orig` with `w`, against
-        the CURRENT roster's precomputed counts — O(1) deltas (a full count
-        rebuild per candidate was the forge's dominant cost at size 60).
-        Only what the swap can push OVER a max (w's copies, w's groups, w's
-        role) or UNDER a min (orig's role, predicate membership orig had)
-        needs checking; everything else moves the safe direction."""
+    def _add_ok(self, ctx, counts, roles, groups, w):
+        """Copy/group/role-MAX check for adding `w` to a roster whose counts
+        exclude the slot being replaced. Minima (roles AND combo-aware
+        predicates) are enforced through _forge_eval_pick's exact per-combo
+        need — the old flat pred delta let a swap replace a member whose
+        SELECTED spells filled a minimum (review 2026-08-19)."""
         if counts.get(w, 0) + 1 > self._dup_gen_max(w):
             return False
-        gw = self.groups_of.get(w, [])
-        if gw:
-            go = self.groups_of.get(orig, [])
-            for gi in gw:
-                after = groups.get(gi, 0) + 1 - (1 if gi in go else 0)
-                if after > self.groups[gi].get("max", 10 ** 9):
-                    return False
-        ro, rw = self.role_of(orig), self.role_of(w)
-        if rw != ro:
-            mx = ctx["role_max"].get(rw)
-            if mx is not None and roles.get(rw, 0) + 1 > mx:
+        for gi in self.groups_of.get(w, []):
+            if groups.get(gi, 0) + 1 > self.groups[gi].get("max", 10 ** 9):
                 return False
-            mn = ctx["role_min"].get(ro)
-            if mn is not None and roles.get(ro, 0) - 1 < mn:
-                return False
-        for pn, mn in ctx["pred_min"].items():
-            members = self.pred_members[pn]
-            d = (1 if w in members else 0) - (1 if orig in members else 0)
-            if preds.get(pn, 0) + d < mn:
-                return False
+        mx = ctx["role_max"].get(self.role_of(w))
+        if mx is not None and roles.get(self.role_of(w), 0) + 1 > mx:
+            return False
         return True
 
     def _refine_constrained(self, ctx, party, combos, fixed, max_passes=8):
         """Steepest-descent 1-opt over generated slots, constraint-aware.
         Replacement combos re-resolve dynamically (the replacement is scored
-        exactly as a pick into the rest of the party)."""
+        exactly as a pick into the rest of the party); minima are checked
+        against the REST roster's combo-aware counts, so a swap can never
+        trade away the spells a minimum was counting on."""
         party, combos = list(party), list(combos)
         best = self.comp_score(party, combos)
         for _ in range(max_passes):
-            counts, roles, preds, groups = self._forge_counts(party)
             move, gain = None, 1e-9
             for i in range(fixed, len(party)):
                 rest = party[:i] + party[i + 1:]
                 rest_c = combos[:i] + combos[i + 1:]
+                counts_r, roles_r, preds_r, groups_r = \
+                    self._forge_counts(rest, rest_c)
                 state = self.party_state(rest, rest_c)
                 base_rest = self.comp_score(rest, rest_c)
                 contrib = best - base_rest
                 orig = party[i]
+                beam = {"state": state, "roles": roles_r, "preds": preds_r}
                 for w in ctx["pool"]:
                     if w == orig:
                         continue
-                    if not self._swap_ok(ctx, counts, roles, preds, groups, orig, w):
+                    if not self._add_ok(ctx, counts_r, roles_r, groups_r, w):
                         continue
-                    sc, _df, _ds, _meta, combo = self._eval_pick(state, w)
-                    d = sc - contrib
+                    pick = self._forge_eval_pick(ctx, beam, w, 0)
+                    if pick is None:
+                        continue
+                    d = pick[0] - contrib
                     if d > gain:
-                        move, gain = (i, w, combo), d
+                        move, gain = (i, w, pick[4]), d
             if move is None:
                 break
             party[move[0]] = move[1]
@@ -1388,7 +1491,8 @@ class Engine:
                             sc_b, _df2, _ds2, _m2, cb2 = self._eval_pick(state2, wb)
                             cand_party = pa + [wb]
                             cand_combos = pca + [cb2]
-                            counts, roles, preds, groups = self._forge_counts(cand_party)
+                            counts, roles, preds, groups = \
+                                self._forge_counts(cand_party, cand_combos)
                             ok = True
                             for wk, c in counts.items():
                                 if c > self._dup_gen_max(wk):

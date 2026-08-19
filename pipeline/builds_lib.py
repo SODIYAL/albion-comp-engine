@@ -351,8 +351,22 @@ def independent_families(records):
             for r in records if (r.get("source") or {}).get("family")}
 
 
+def promotable(record):
+    """A record may back or become a canonical default only when its OWN
+    normalization is clean: a quarantined record (invalid spell index, bad
+    reference) or a rejected one is evidence that needs fixing, not a
+    default to ship (review 2026-08-19 — the quarantined Enigmatic p5 build
+    was reaching the dashboard as canonical through its comp-level
+    approval)."""
+    return record.get("status") not in ("quarantined", "rejected")
+
+
 def canonical_eligible(records):
-    """(ok, basis) — may these records back one canonical default? (§F)"""
+    """(ok, basis) — may these records back one canonical default? (§F)
+    Quarantined/rejected records carry no promotion weight."""
+    records = [r for r in records if promotable(r)]
+    if not records:
+        return False, "no non-quarantined record"
     approved = [r for r in records
                 if (r.get("approval") or {}).get("status") == "approved"]
     armory = [r for r in records
@@ -376,9 +390,11 @@ APPROVAL_RANK = {"approved": 0, "candidate": 1, "normalized": 2,
 
 def selection_order(records):
     """Displayed-build ordering for one (weapon, content) group (§F):
-    approval, patch freshness (newer first), confidence/source agreement,
-    stable id. NEVER `variants[0]` of arrival order."""
+    clean records before quarantined/rejected ones, then approval, patch
+    freshness (newer first), confidence/source agreement, stable id. NEVER
+    `variants[0]` of arrival order."""
     return sorted(records, key=lambda r: (
+        0 if promotable(r) else 1,
         APPROVAL_RANK.get((r.get("approval") or {}).get("status"), 9),
         _neg_date(r.get("patch")),
         -sum(v for v in (r.get("confidence") or {}).values()

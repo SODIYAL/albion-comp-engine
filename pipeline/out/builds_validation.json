@@ -2,7 +2,7 @@
  "counts": {
   "approved": 70,
   "candidate": 31,
-  "canonical_defaults": 46,
+  "canonical_defaults": 45,
   "quarantined_fields": 2,
   "quarantined_records": 2,
   "records": 101
@@ -30,8 +30,8 @@
    "weapon": "2H_DUALMACE_AVALON"
   },
   {
-   "basis": "explicit shotcaller approval",
-   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:5",
+   "basis": "no non-quarantined record",
+   "build_id": null,
    "content": "blackzone_roam",
    "weapon": "2H_ENIGMATICORB_MORGANA"
   },
@@ -384,7 +384,7 @@
    "weapon": "2H_ICECRYSTAL_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "basis": "no non-quarantined record",
    "build_id": null,
    "content": "zvz",
    "weapon": "2H_ICEGAUNTLETS_HELL"

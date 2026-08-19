@@ -152,6 +152,7 @@ def variant_of(rec):
         },
         "unknowns": rec.get("unknowns") or [],
         "quarantined_fields": rec.get("quarantined_fields") or [],
+        "status": rec.get("status"),
         "source": {k: (rec.get("source") or {}).get(k)
                    for k in ("kind", "family", "author", "url", "record")},
         "published": rec.get("published"),
@@ -222,13 +223,22 @@ def main():
                 ordered.sort(key=lambda r: r.get("build_id") != pin["build_id"])
             ok, basis = bl.canonical_eligible(ordered)
             variants = [variant_of(r) for r in ordered]
-            if ok and variants:
-                variants[0]["canonical"] = True
-                variants[0]["canonical_basis"] = (
-                    "manual canonical pin" if pin else basis)
+            # the default is the first PROMOTABLE record — a quarantined
+            # record is never a default, no matter its comp-level approval
+            # (review 2026-08-19: the Enigmatic p5 build shipped as
+            # canonical through exactly this gap). A pin cannot rescue a
+            # quarantined record either.
+            first_ok = next((i for i, r in enumerate(ordered)
+                             if bl.promotable(r)), None)
+            if ok and first_ok is not None:
+                variants[first_ok]["canonical"] = True
+                variants[first_ok]["canonical_basis"] = (
+                    "manual canonical pin"
+                    if pin and ordered[first_ok].get("build_id") ==
+                    pin.get("build_id") else basis)
                 promotions.append({"weapon": w, "content": ct,
-                                   "build_id": variants[0]["build_id"],
-                                   "basis": variants[0]["canonical_basis"]})
+                                   "build_id": variants[first_ok]["build_id"],
+                                   "basis": variants[first_ok]["canonical_basis"]})
             else:
                 promotions.append({"weapon": w, "content": ct,
                                    "build_id": None, "basis": basis})
