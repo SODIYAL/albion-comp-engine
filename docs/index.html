@@ -2959,8 +2959,39 @@ const capsOf = w => WEAPONS[w].capabilities || {};
 const roleHint = w => WEAPONS[w].role_hint || "other";
 /* roster role order — tanks first, then supports, damage (melee, range),
    healers: the order real caller sheets read in (Timothy's blap, the
-   Deadlyhooker parties). Applied when a forge completes. */
+   Deadlyhooker parties). The roster is ALWAYS kept in this order: every
+   path that changes its membership (add, swap, forge, companion load,
+   permalink load) runs sortPartyByRole(). */
 const ROLE_SORT = { tank: 0, support: 1, melee: 2, range: 3, healer: 4 };
+function sortPartyByRole(){
+  /* One stable permutation over ALL parallel slot state — party, forged/
+     manual provenance, stored combos, loadouts — plus every live index
+     that points at a slot (open kit panel, gear picker, forge-note
+     filler/held). Scoring, permalinks and codecs are order-independent,
+     so only the presentation moves. Stable within a role: equal-role
+     members keep their relative order, so re-sorting a sorted roster is a
+     no-op and members never shuffle gratuitously. */
+  const order = party.map((_, i) => i).sort((a, b) => {
+    const ra = ROLE_SORT[roleHint(party[a])];
+    const rb = ROLE_SORT[roleHint(party[b])];
+    return (ra === undefined ? 9 : ra) - (rb === undefined ? 9 : rb)
+           || a - b;
+  });
+  if (order.every((v, i) => v === i)) return;   /* already in role order */
+  party = order.map(i => party[i]);
+  PROV = order.map(i => PROV[i]);
+  COMBO = order.map(i => COMBO[i]);
+  LOADOUT = order.map(i => LOADOUT[i]);
+  if (LO_OPEN !== null) LO_OPEN = order.indexOf(LO_OPEN);
+  if (LO_PICKING) LO_PICKING.i = order.indexOf(LO_PICKING.i);
+  if (FORGE_NOTE){
+    const remap = idxs => (idxs || []).map(x => order.indexOf(x))
+      .sort((a, b) => a - b);
+    FORGE_NOTE = { feasible: FORGE_NOTE.feasible,
+                   filler: remap(FORGE_NOTE.filler),
+                   held: remap(FORGE_NOTE.held) };
+  }
+}
 const floorHit = (cap, have) => ENG.floorArmed(cap, have);
 function roleCounts(){
   const counts = {};
@@ -3167,6 +3198,7 @@ function loadHash(){
   });
   FORGE_NOTE = null;
   LO_OPEN = null; LO_PICKING = null; LO_FILTER = "";
+  sortPartyByRole();   /* restored comps read in role order too */
   syncEngine();
   return true;
 }
@@ -4026,6 +4058,7 @@ function loadCompanionParty(){
   COMBO = party.map(() => null);
   FORGE_NOTE = null;
   loadoutClear();
+  sortPartyByRole();
   PLANNED = Math.max(PLANNED, party.length);
   PARTY_FACET = null;
   render();
@@ -4105,6 +4138,7 @@ document.addEventListener("click", e => {
     PROV[si] = "m";        /* an explicit user choice is manual, even in a
                               formerly forged slot */
     FORGE_NOTE = null;
+    sortPartyByRole();     /* the swap may have changed the slot's role */
     render(); return;
   }
   const det = e.target.closest("[data-detail]");
@@ -4114,6 +4148,7 @@ document.addEventListener("click", e => {
     party.push(add.dataset.add);
     PROV.push("m"); COMBO.push(null); FORGE_NOTE = null;
     loadoutInsert(party.length - 1);   /* prefill from the caller reference */
+    sortPartyByRole();    /* the new member lands in its role group */
     PARTY_FACET = null;   /* the new member must be visible */
     render(); } return; }
   const forgeBtn = e.target.closest("#forge") || e.target.closest("#reforge")
@@ -4155,26 +4190,9 @@ document.addEventListener("click", e => {
       loadoutPrefillGear(i);
       loadoutApplySpells(i, r.combos[i]);
     }
-    /* Organize the forged roster by role — tanks, supports, damage (melee,
-       range), healers — the order caller sheets read in. One stable
-       permutation over ALL parallel slot state; scoring, permalinks and
-       codecs are order-independent, so only the presentation changes. The
-       forge note's slot indexes are remapped through the same permutation. */
-    const order = party.map((_, i) => i).sort((a, b) => {
-      const ra = ROLE_SORT[roleHint(party[a])];
-      const rb = ROLE_SORT[roleHint(party[b])];
-      return (ra === undefined ? 9 : ra) - (rb === undefined ? 9 : rb)
-             || a - b;
-    });
-    party = order.map(i => party[i]);
-    PROV = order.map(i => PROV[i]);
-    COMBO = order.map(i => COMBO[i]);
-    LOADOUT = order.map(i => LOADOUT[i]);
-    const remap = idxs => (idxs || []).map(x => order.indexOf(x))
-      .sort((a, b) => a - b);
-    FORGE_NOTE = { feasible: r.feasible, filler: remap(r.filler),
-                   held: remap(r.held) };
+    FORGE_NOTE = { feasible: r.feasible, filler: r.filler, held: r.held };
     LO_OPEN = null; LO_PICKING = null;
+    sortPartyByRole();    /* remaps the forge note's slot indexes too */
     PARTY_FACET = null;   /* show the whole forged comp, not a filtered view */
     render();
     return;
@@ -4286,7 +4304,7 @@ $("pick-filter").addEventListener("keydown", e => {
   if (keys.length && party.length < HARD_CAP){
     party.push(keys[0]); PROV.push("m"); COMBO.push(null); FORGE_NOTE = null;
     PARTY_FACET = null;   /* the new member must be visible (matches click-add) */
-    loadoutInsert(party.length - 1); render(); }
+    loadoutInsert(party.length - 1); sortPartyByRole(); render(); }
 });
 /* A pasted share-link hash applies without a reload. saveHash() uses
    replaceState, which never fires hashchange, so this cannot loop. The
@@ -4304,7 +4322,10 @@ $("build-stamp").textContent = `v${META.version} · ${META.weapons_curated}/${ME
    drifting meant a false "PARITY MISMATCH" banner. */
 const SEED = ((typeof PARITY_EXPECTED !== "undefined" && PARITY_EXPECTED.party) || [])
   .filter(w => WEAPONS[w]);
-if (!loadHash() && !loadStored()){ party = SEED; PROV = party.map(() => "m"); }
+if (!loadHash() && !loadStored()){
+  party = SEED; PROV = party.map(() => "m");
+  sortPartyByRole();
+}
 renderTreeFilter();
 syncEngine();
 render();

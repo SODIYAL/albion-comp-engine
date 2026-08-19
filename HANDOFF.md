@@ -106,12 +106,17 @@ Two defects from the owner's chapter-2 review, both verified then fixed:
 - The setup rail gained **"forge full comp"** (`#forge-rail`): fills every
   open slot like the next-pick bar's forge; on a fully forged roster it
   acts as a reforge. Same handler, same engine call.
-- A completed forge now **organizes the roster by role** — tanks,
-  supports, damage (melee, range), healers, the order caller sheets read
-  in (`ROLE_SORT` on `role_hint`). One stable permutation over all
-  parallel slot state (party/PROV/COMBO/LOADOUT) with the forge note's
-  filler/held indexes remapped; scoring, permalinks and codecs are
-  order-independent, so only presentation changes.
+- The roster is now **ALWAYS kept in role order** — tanks, supports,
+  damage (melee, range), healers, the order caller sheets read in
+  (`sortPartyByRole()` on `role_hint`). Every membership-changing path
+  runs it: add (click + Enter), swap, forge, companion load, permalink/
+  storage restore, seed boot; removal and content switches preserve a
+  sorted order. One stable permutation over all parallel slot state
+  (party/PROV/COMBO/LOADOUT) with live slot indexes (open kit panel,
+  gear picker, forge-note filler/held) remapped; scoring, permalinks and
+  codecs are order-independent, so only presentation moves. Stable within
+  a role, so re-sorting is a no-op and members never shuffle
+  gratuitously.
 
 ## Session 2026-08-19 (later) — PvP interaction layer ("new prompt")
 
