@@ -1,0 +1,61 @@
+# FORMAT EXAMPLE ONLY (`example: true` — never ingested). Copy, fill from a
+# real Armory reading, drop the flag, and run pipeline/build_builds.py.
+example: true
+kind: armory_import
+id: armory_example_2026_08
+source:
+  kind: armory_manual
+  family: armory
+  author: null                    # the Armory aggregates; no single author
+  url: null
+  record: "in-game Armory reading — see per-build source_citation"
+snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4
+patch: "2026-07-21"
+builds:
+  - build_id: "armory:example:1"
+    activity: "Crystal League 20v20"      # Armory's own label, verbatim
+    group_size_tag: "20"                  # official group-size tag, verbatim
+    recent_or_established: recent
+    captured: "2026-08-19"
+    source_citation: "screenshot 2026-08-19_armory_longbow.png"
+    reviewer: "owner"
+    weapon: 2H_LONGBOW
+    weapon_raw: "Longbow"
+    role: dps
+    content: zvz
+    party_size: {min: 20, max: 20}
+    spells:
+      q: MULTISHOT2
+      w: GROUNDARROW
+      e: ARROWRAIN
+      passive: PASSIVE_SLOWPOISON
+    gear:
+      head: HEAD_LEATHER_SET3
+      armor: ARMOR_CLOTH_SET2
+      shoes: SHOES_CLOTH_ROYAL
+      cape: null                          # Armory view did not show it
+      offhand: null                       # 2H weapon — none, not unknown
+      potion: T7_POTION_REVIVE
+      food: T8_MEAL_STEW
+    gear_alternatives: {}
+    weapon_alternatives: []
+    tier: 8
+    enchant: 1
+    quality: null
+    ip: null
+    unknowns: [gear.cape]
+    quarantined_fields: []
+    status: candidate
+    approval: {status: candidate, basis: "manual Armory import — awaiting validation"}
+    performance:                          # ONLY what the Armory displayed
+      popularity_rank: 2
+      note: "second most-played Range DPS in the activity, per the Armory list"
+    confidence:
+      item_mapping: 1.0
+      spell_mapping: 1.0
+      patch: 1.0
+      content_context: 1.0
+      party_size: 1.0
+      source_independence: null
+      loadout_completeness: 0.9
+      outcome: null

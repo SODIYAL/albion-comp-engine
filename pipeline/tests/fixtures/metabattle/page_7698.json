@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Frost_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Range_DPS_builds",
+     "sortkey": "Range DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7698,
+   "revid": 8971,
+   "title": "Permafrost Prism ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Frost Staff\n| mode = ZvZ\n| focus = Range DPS\n| strengths = Amazing burst damage\n| weaknesses = Ping dependent, Expensive\n}}\n==Overview==\nThis Permafrost Prism ZvZ PvP build is centered around engaging with your zerg and utilizing {{Skill|Ice Crystal}} on clumps of enemies. You also use {{Skill|Frost Nova}} as both a movement and crowd control skill. This build synergizes well with {{Skill|Meditation}} from your helm slot, as it allows you to regain the cooldown of {{Skill|Ice Crystal}} much faster. This build is also widely used and highly effective in bombsquads.\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Permafrost Prism\n| main hand weapon skills = Ice Shard, Frost Nova, Ice Crystal, Aggressive Caster\n| head = Elder's Assassin Hood\n| head alternatives = Elder's Royal Cowl\n| head skills = Meditation, Quick Thinker\n| cape = Elder's Lymhurst Cape\n| cape alternatives = Elder's Morgana Cape\n| cape skills = Energy Reserve\n| armor = Elder's Scholar Robe\n| armor skills = Speed Caster, Concentration\n| shoes = Elder's Boots of Valor\n| shoes alternatives = Elder's Cleric Sandals\n| shoes skills = Premonition\n| potion = Major Resistance Potion\n| food = Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Permafrost Prism|45}}===\n{{Skill|Ice Shard}} — A spammable skill that deals significant AOE damage in the targeted area. Unlike other abilities, this skill is quite ping-dependent, so lower ping will allow for faster casting.\n\n{{Skill|Frost Nova}} — A great skill for escaping and providing on-demand CC. You'll typically use this skill to reposition and find better angles for using your {{Skill|Ice Crystal}}, but feel free to employ it as a crowd control skill if enemies are too close and you need to escape while also slowing them down. When you use this skill, you also gain a brief window of damage immunity, but you shouldn't rely on it to work consistently.\n\n{{Skill|Ice Crystal}} — Your core skill for this build. It deals significant damage and stuns enemies. The length of this stun increases with weapon specialization and tier, so high IP will make you more effective than it would for other builds. Aim to use it on enemy clumps, as this will result in tremendous damage due to the game's damage escalation mechanic.\n\n{{Skill|Aggressive Caster}} — You will gain greatly increased cast speed after casting any 4 spells, which pairs very well with {{Skill|Speed Caster}} and allows you to rapidly spam {{Skill|Ice Shard}} while one or both buffs are active. Use this skill during engagements to maximize your DPS while engaged with the enemy zerg.\n\n==={{Item|Elder's Scholar Robe|45}}===\n{{Skill|Speed Caster}} — Use this ability just before casting your other abilities like {{Skill|Ice Shard}} and {{Skill|Ice Crystal}} as it increases your cast speed and decreases your mana consumption. \n\n{{Skill|Concentration}} — This build benefits greatly from cast speed, so this is your obvious pick. {{Skill|Aggression}} is also acceptable but currently not recommended.\n\n==={{Item|Elder's Assassin Hood|45}}===\n{{Skill|Meditation}} — Helps with reducing the cooldown of {{Skill|Ice Crystal}} which is your strongest ability and your goal is to use it as many times as possible per engagement. Use it when you won't be immediately interrupted since it's a channeled skill, but don't hesitate to use it in the middle of the fight if you run out of cooldowns.\n\n{{Skill|Quick Thinker}} — Just more cooldown reduction, which is always useful since all skills benefit from it. You can also use {{Skill|Balanced Mind}} for this build, as it scales your damage skills, but cooldown reduction is generally better in this case.\n\n\n==={{Item|Elder's Boots of Valor|45}}===\n{{Skill|Premonition}} — Use this ability when engaging and when getting CC'd while doing so. Ideally, you want to use these boots when you are about to get CC'd so you can gain the extra movement speed and duration, but don't worry if that isn't always possible since boots are all about getting into the right position to maximize the efficiency of your other skills.\n\n{{Skill|Toughness}} — Since you currently use plate boots with this build, this is the best choice to provide you with a bit more survivability. If you use cloth boots, then both damage and cast speed are good choices.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — Ideal for this build because you use a lot of mana and don't have access to {{Skill|Perpetual Energy}}.\n\n\n==Rotations==\n{{Rotation|Engage|Premonition, Speed Caster, Ice Crystal, Ice Shard, Ice Shard, Ice Shard, Meditation }}\n* You use {{Skill|Premonition}} to get in range of enemy clumps, ideally on the sides so you don't get counter-engaged on. {{Skill|Speed Caster}} allows you to cast subsequent spells much faster. After using {{Skill|Ice Crystal}}, spam {{Skill|Ice Shard}} as many times as possible, or until you need to disengage or are in danger. Utilize {{Skill|Meditation}} whenever possible, but depending on how your zerg plays, you still need to be in sync with the next engage. Ideal for a zerg that does two or more consecutive engages.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Good as a defensive cooldown and against CC when you get caught, but since most cloth-wearing builds are very squishy, you are still likely to die if you get caught.\n\n{{Item|Pork Omelette}} — The best option for this build. You should use higher enchantment food if you can afford it. Some people use beef stew since it gives you more damage on your {{Skill|Ice Crystal}}, but it's overall a much worse choice.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7698": {
+     "ns": 0,
+     "pageid": 7698,
+     "revisions": [
+      {
+       "parentid": 8308,
+       "revid": 8971,
+       "timestamp": "2025-04-01T23:22:54Z"
+      }
+     ],
+     "title": "Permafrost Prism ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

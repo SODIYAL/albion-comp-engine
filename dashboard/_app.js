@@ -179,9 +179,61 @@ function badgeHtml(w){
 let FACET = null;
 let PARTY_FACET = null;
 const BADGE_KEYS = Object.fromEntries(BADGE_DEFS);
+
+/* ---- PvP interaction records (pipeline/build_interactions.py -> dataset).
+   Spell-keyed: duplicate semantics, reflect/cleanse/purge per component, CC
+   classes — with chapter-2 confidence provenance. Display + analysis here;
+   the only scoring coupling lives inside app_scoring.js (verified
+   nonstacking_caps). `unknown` renders as unknown, never hidden. */
+const INTERACTIONS = (typeof DATASET !== "undefined" && DATASET.interactions) || {};
+const INTERACTIONS_BY_WEAPON = (() => {
+  const out = {};
+  for (const sid of Object.keys(INTERACTIONS).sort())
+    (INTERACTIONS[sid].weapons || []).forEach(w => (out[w] = out[w] || []).push(sid));
+  return out;
+})();
+/* human-readable tooltips for the duplicate enum (spec §14) */
+const DUP_TIP = {
+  full: "Two copies receive essentially full independent value.",
+  damage_only: "Both players can deal their normal damage, but one or more utility effects from the ability do not stack.",
+  refresh: "Reapplying this effect refreshes its duration instead of creating a second independent effect.",
+  override: "A new application replaces the existing version of the same effect.",
+  shared_stack: "Multiple players feed the same stack counter on the target rather than maintaining independent copies.",
+  unique_effect_only: "The same named effect does not stack with itself; a differently named effect on the same stat can coexist.",
+  partial: "Different parts of this ability follow different stacking or interaction rules (or are not uniformly verified).",
+  does_not_stack: "Duplicate applications provide no overlapping effect for this component.",
+  unknown: "Duplicate behavior is not verified by the game data — treated as unknown, never guessed.",
+};
+function intBadgeTip(b){
+  if (b.indexOf("DUPLICATE:") === 0)
+    return DUP_TIP[b.slice(10).toLowerCase()] || b;
+  if (b === "NON-REFLECTABLE")
+    return "The game's own spell description states this damage cannot be reflected.";
+  if (b === "PARTIAL REFLECT")
+    return "Some components are non-reflectable; others differ or are unverified — see the component list.";
+  return b.charAt(0) + b.slice(1).toLowerCase();
+}
+/* utility / interaction filter chips (spec §13). Capability chips use the
+   1-point utility threshold (purge/cleanse slots are 1-2 pointers);
+   interaction chips read the compiled records. */
+const UTIL_DEFS = [
+  ["purge", w => (capsOf(w).purge || 0) >= 1],
+  ["cleanse", w => (capsOf(w).cleanse || 0) >= 1],
+  ["anti-heal", w => (capsOf(w).heal_reduction || 0) >= 1],
+  ["pierce", w => (capsOf(w).resist_shred || 0) >= 1],
+  ["displace", w => (capsOf(w).knockback_displace || 0) >= 1],
+  ["no-reflect", w => (INTERACTIONS_BY_WEAPON[w] || [])
+    .some(sid => INTERACTIONS[sid].reflect === "non_reflectable")],
+  ["dup-verified", w => (INTERACTIONS_BY_WEAPON[w] || [])
+    .some(sid => INTERACTIONS[sid].confidence === "verified"
+              && (INTERACTIONS[sid].duplicate === "full"
+                  || INTERACTIONS[sid].duplicate === "shared_stack"))],
+];
+const UTIL_FN = Object.fromEntries(UTIL_DEFS);
 function facetOk(w){
   if (!FACET) return true;
   if (FACET.type === "role") return roleHint(w) === FACET.v;
+  if (FACET.type === "util") return (UTIL_FN[FACET.v] || (() => false))(w);
   return (BADGE_KEYS[FACET.v] || []).some(k => (capsOf(w)[k] || 0) >= 2);
 }
 function setFacet(f, scroll){
@@ -426,6 +478,11 @@ function renderRoster(){
         >kit${loadoutCount(i) ? `<i>${loadoutCount(i)}</i>` : ""}</button>
       <button class="x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">&times;</button></div>
       ${loadoutPanel(i)}`); });
+  /* duplicate-interaction notices (spec §7): what a duplicated SPELL
+     actually does, from the compiled interaction records — the message
+     names the exact effect, and unknown says "verify", never a penalty */
+  const inotes = interactionNotices();
+  if (inotes) rows.push(inotes);
   if (PARTY_FACET){
     rows.push(`<div class="slot more">${idxs.length} of ${party.length} — ${esc(PARTY_FACET)} only · click the chip again for all</div>`);
   } else {
@@ -437,6 +494,17 @@ function renderRoster(){
       rows.push(`<div class="slot more">+ ${open - 1} more open slot${open > 2 ? "s" : ""}</div>`);
   }
   $("roster").innerHTML = rows.join("");
+}
+const INOTE_LABEL = {high: "duplicate utility wasted",
+                     warning: "duplicate utility warning",
+                     info: "duplicate check", verify: "verify duplicate"};
+function interactionNotices(){
+  if (party.length < 2) return "";
+  const conf = ENG.duplicateConflicts(party, COMBOS_CUR);
+  if (!conf.length) return "";
+  return conf.map(c => `<div class="slot inote int-${c.severity}">
+    <b>${esc(INOTE_LABEL[c.severity] || c.severity)}</b> — ${esc(c.reason)}
+    <span class="fn">${c.weapons.map(nameOf).join(" + ")} · ${esc(c.confidence)}</span></div>`).join("");
 }
 const TREE_NAMES = {
   arcanestaff:"Arcane", axe:"Axe", bow:"Bow", crossbow:"Crossbow",
@@ -478,6 +546,9 @@ function renderPickerChips(){
       `</div><div class="pchips"><span class="lbl2">provides</span>` +
       BADGE_DEFS.map(([cls]) =>
         `<button class="pchip b-${cls}" data-bfilter="${cls}">${cls}</button>`).join("") +
+      `</div><div class="pchips"><span class="lbl2">utility</span>` +
+      UTIL_DEFS.map(([cls]) =>
+        `<button class="pchip u-chip" data-ufilter="${cls}">${cls}</button>`).join("") +
       `</div>`;
     holder.dataset.built = "1";
   }
@@ -485,6 +556,8 @@ function renderPickerChips(){
     String(!!FACET && FACET.type === "role" && FACET.v === el.dataset.rfilter)));
   holder.querySelectorAll("[data-bfilter]").forEach(el => el.setAttribute("aria-pressed",
     String(!!FACET && FACET.type === "badge" && FACET.v === el.dataset.bfilter)));
+  holder.querySelectorAll("[data-ufilter]").forEach(el => el.setAttribute("aria-pressed",
+    String(!!FACET && FACET.type === "util" && FACET.v === el.dataset.ufilter)));
 }
 function renderPicker(){
   const keys = filteredWeapons();
@@ -645,11 +718,15 @@ function renderRecDetail(recs){
         <p class="why">${whySentence(party, top.w)}</p>
         ${scoredKitLine(top.w, top.combo)}
         ${usageLine(top.w)}
-        ${((typeof LOADOUTS !== "undefined" && LOADOUTS[CONTENT]) || {})[top.w] ? (() => {
-          const v = LOADOUTS[CONTENT][top.w][0];
-          return `<div class="lo-box"><div class="who">caller loadout — ${esc(v.caller)}${v.role ? " · " + esc(v.role) : ""}</div>
-            ${loLine(top.w, v)}</div>`;
-        })() : ""}
+        ${(() => {
+          /* §F selection, never variants[0]; §G provenance on every
+             displayed reference build */
+          const v = (typeof loadoutSelect !== "undefined")
+            ? loadoutSelect(top.w, CONTENT, SIZE) : null;
+          return v ? `<div class="lo-box"><div class="who">reference build — ${esc(v.caller)}${v.role ? " · " + esc(v.role) : ""}</div>
+            ${loLine(top.w, v)}
+            <div class="fieldnote">${loProvenance(v)}</div></div>` : "";
+        })()}
         <div class="terms">${terms.map(t => `<div class="term">
           <span class="d">+${t.d.toFixed(2)}</span><span class="c">${t.cap}</span>
           <span class="mv">${t.before.toFixed(0)} → ${t.after.toFixed(0)} of ${t.target.toFixed(1)}</span></div>`).join("")}</div>
@@ -685,9 +762,12 @@ function renderFootnote(){
     Curated sheets cite an equippable spell for every nonzero score. Illustrative sheets carry design-doc §2.3 placeholder numbers and are <b>not</b> evidence-checked — they exist to keep the engine runnable during curation. Click any capability for its evidence chain.
     Item renders from the official Albion Online Render Service, © Sandbox Interactive GmbH — this tool is unofficial and not affiliated.`;
 }
-/* Real-usage field report (sample_battles.py): how often a weapon actually
-   appeared on players in recent fights of roughly this party's size.
-   Display evidence only — never feeds the scoring. */
+/* FIGHT-SIZE EQUIPMENT PREVALENCE (sample_battles.py, §E): how often a
+   weapon appeared on observed combatants in recent fights of roughly the
+   size this party would find itself in. The killboard states only the total
+   fight size — party size, side size and selected abilities are UNKNOWN and
+   never inferred; prevalence is not effectiveness, and none of this feeds
+   the scoring. */
 /* One gate for the usage sample: the bucket key comes from the ENGINE's
    size_bucket, so the display bucket is provably the bucket the meta prior
    scores with; the min-sample rule lives here once (it was copy-pasted
@@ -706,15 +786,20 @@ function usageOf(w){
   const n = (USAGE.buckets[u.key] || {})[w] || 0;
   return { pct: 100 * n / u.m.players_attributed, n,
            players: u.m.players_attributed, battles: u.m.battles,
+           inBattles: ((USAGE.buckets_battles || {})[u.key] || {})[w] || 0,
            label: u.label };
 }
 function usageLine(w){
   const u = usageOf(w);
   if (!u) return "";
+  /* fight-size prevalence, battle-level count alongside the player share —
+     one fight's players are correlated, not independent samples (§E) */
   const txt = u.n === 0
-    ? `not seen in ${u.battles} recent ${u.label} fights`
-    : `on ${u.pct.toFixed(u.pct < 1 ? 1 : 0)}% of ${u.players} players across ${u.battles} recent ${u.label} fights`;
-  return `<div class="fieldnote">field report: ${txt} <span>(${esc((USAGE.generated_utc || "").slice(0, 10))}, killboard)</span></div>`;
+    ? `not seen in ${u.battles} recent ${u.label}-size fights`
+    : `on ${u.pct.toFixed(u.pct < 1 ? 1 : 0)}% of ${u.players} observed combatants` +
+      `${u.inBattles ? ` (in ${u.inBattles} of ${u.battles} fights)` : ` across ${u.battles} fights`}`;
+  return `<div class="fieldnote">equipment prevalence, ${esc(u.label)}-size fights — ${txt}
+    <span>(${esc((USAGE.generated_utc || "").slice(0, 10))}, killboard; fight size ≠ party size; not a build recommendation)</span></div>`;
 }
 
 /* ------------------------------------------------------ weapon dossier
@@ -781,9 +866,9 @@ function usageAllBuckets(w){
       <span class="ub-bar"><i style="width:${Math.min(100, pct * 8)}%"></i></span>
       <span class="ub-v mono">${n ? pct.toFixed(1) + "%" : "—"}</span></div>`;
   }).join("");
-  return rows ? `<h4>Field reports — share of players, by fight size</h4>
+  return rows ? `<h4>Equipment prevalence — share of observed combatants, by fight size</h4>
     <div class="ub-rows">${rows}</div>
-    <div class="ub-note">killboard sample, display only — never feeds the scoring</div>` : "";
+    <div class="ub-note">killboard sample; fight size ≠ party size; prevalence ≠ effectiveness; display only — never feeds the scoring</div>` : "";
 }
 
 function loVariants(w){
@@ -798,10 +883,50 @@ function spellAt(w, slot, idx){
   const e = pool[idx - 1];
   return e ? e[1] : `#${idx}`;
 }
-/* one renderer for the "Q# name · W# name · P# name" caller-loadout line —
-   it was duplicated between the recommendation box and the detail drawer */
-const loLine = (w, v) =>
-  `Q${esc(v.q)} ${esc(spellAt(w, "q", v.q))} · W${esc(v.w)} ${esc(spellAt(w, "w", v.w))} · P${esc(v.p)} ${esc(spellAt(w, "passive", v.p))}`;
+function spellNameById(w, slot, sid){
+  const pool = ((typeof SPELLS !== "undefined" && SPELLS[w]) || {})[slot] || [];
+  const hit = pool.find(p => p[0] === sid);
+  return hit ? hit[1] : sid;
+}
+/* one renderer for the "Q# name · W# name · P# name" build line — resolved
+   spell UniqueNames are authoritative; the source's raw 1-based index is
+   display data; a field the source never stated renders as UNKNOWN, never
+   silently as option 1 (§C). */
+const loLine = (w, v) => ["q", "w", "passive"].map(slot => {
+  const label = slot === "passive" ? "P" : slot.toUpperCase();
+  const idx = {q: v.q, w: v.w, passive: v.p}[slot];
+  const sid = (v.spells || {})[slot];
+  if (Number.isInteger(idx)) return `${label}${idx} ${esc(spellAt(w, slot, idx))}`;
+  if (sid) return `${label} ${esc(spellNameById(w, slot, sid))}`;
+  return `${label} <i class="lo-unknown">unknown</i>`;
+}).join(" · ");
+/* provenance line for a displayed build (§G): source, revision/date, patch,
+   party size, approval + canonical basis, explicit fallbacks, confidence by
+   dimension, unresolved fields. */
+function loProvenance(v){
+  const bits = [];
+  if (v.source && (v.source.kind || v.source.author))
+    bits.push(esc([v.source.kind, v.source.author &&
+      `“${v.source.author}”`].filter(Boolean).join(" ")));
+  if (v.published) bits.push(esc(String(v.published)));
+  if (v.patch) bits.push(`patch ${esc(String(v.patch))}`);
+  if (v.party_size)
+    bits.push(`party ${v.party_size.min}${v.party_size.max !== v.party_size.min
+      ? "–" + v.party_size.max : ""}`);
+  if (v.approval)
+    bits.push(esc(v.approval) + (v.canonical
+      ? ` · canonical (${esc(v.canonical_basis || "")})`
+      : v.canonical_for_fallback ? " · canonical in its own content" : ""));
+  if (v.fallback_from) bits.push(`<b>fallback from ${esc(v.fallback_from)}</b>`);
+  if (v.size_fallback) bits.push("<b>size range differs from this party</b>");
+  const conf = Object.entries(v.confidence || {})
+    .filter(([, x]) => typeof x === "number")
+    .map(([k, x]) => `${esc(k.replace(/_/g, " "))} ${x}`);
+  if (conf.length) bits.push(`confidence: ${conf.join(", ")}`);
+  const unk = (v.unknowns || []).concat(v.quarantined_fields || []);
+  if (unk.length) bits.push(`unresolved: ${esc(unk.join(", "))}`);
+  return bits.join(" · ");
+}
 /* ---- item stats bank (pipeline/fetch_item_stats.py) --------------------
    The game's own numbers. These are BASE values: the dumps are tier-invariant
    per line and the in-game figure is base x f(itempower, quality, enchant), a
@@ -849,7 +974,9 @@ function renderDetail(w){
   const vars = loVariants(w);
   const picks = { q: new Set(), w: new Set(), passive: new Set() };
   vars.filter(v => v.ct === CONTENT).forEach(v => {
-    picks.q.add(v.q); picks.w.add(v.w); picks.passive.add(v.p);
+    if (Number.isInteger(v.q)) picks.q.add(v.q);
+    if (Number.isInteger(v.w)) picks.w.add(v.w);
+    if (Number.isInteger(v.p)) picks.passive.add(v.p);
   });
   const pool = (slot, label) => {
     const rows = (sp[slot] || []).map(([sid, nm], i) =>
@@ -863,10 +990,14 @@ function renderDetail(w){
   const caps = Object.entries(d.capabilities || {}).sort((a,b) => b[1]-a[1]).map(([c, v]) =>
     `<tr><td><button class="cap-name" data-cap="${c}">${c}</button></td><td class="sc">${v}</td>
      <td>${((d.evidence || {})[c] || []).map(e => `<span class="sp">${esc(e)}</span>`).join(", ")}</td></tr>`).join("");
-  const lo = vars.length ? `<div class="lo-box">
-      <div class="who">caller loadout${vars.length > 1 ? "s" : ""}</div>
-      ${vars.map(v => `<div>${esc(v.caller)}${v.role ? " · " + esc(v.role) : ""}${v.ct !== CONTENT ? ` · <i>${esc((DATASET.templates[v.ct] || {name: v.ct}).name)}</i>` : ""} —
-        ${loLine(w, v)}</div>`).join("")}
+  /* fallback copies of the same build under other contents would repeat
+     here — list each build once, under its home content */
+  const homeVars = vars.filter(v => !v.fallback_from);
+  const lo = homeVars.length ? `<div class="lo-box">
+      <div class="who">recorded builds</div>
+      ${homeVars.map(v => `<div>${esc(v.caller)}${v.role ? " · " + esc(v.role) : ""}${v.ct !== CONTENT ? ` · <i>${esc((DATASET.templates[v.ct] || {name: v.ct}).name)}</i>` : ""} —
+        ${loLine(w, v)}
+        <div class="fieldnote">${loProvenance(v)}</div></div>`).join("")}
     </div>` : "";
   $("drawer-title").textContent = d.display_name;
   $("drawer-body").innerHTML = `
@@ -886,9 +1017,37 @@ function renderDetail(w){
         <h4>Capabilities — click one for party-wide evidence</h4>
         <table class="ev-tbl"><tbody>${caps}</tbody></table>
       </div>
-      <div>${pool("e", "E — the identity")}${pool("q", "Q options")}${pool("w", "W options")}${pool("passive", "Passives")}${lo}${statsBlock(w)}</div>
+      <div>${pool("e", "E — the identity")}${pool("q", "Q options")}${pool("w", "W options")}${pool("passive", "Passives")}${interactionBlock(w)}${lo}${statsBlock(w)}</div>
     </div>`;
   $("drawer").dataset.open = "true";
+}
+/* PvP interactions section of the dossier (spec §6): per-spell badges with
+   human-readable tooltips, a confidence chip carrying the source citation,
+   and the component-level detail. Unknown is shown as unknown. */
+function interactionBlock(w){
+  const sids = INTERACTIONS_BY_WEAPON[w] || [];
+  if (!sids.length) return "";
+  const rows = sids.map(sid => {
+    const rec = INTERACTIONS[sid];
+    const badges = (rec.badges || []).map(b =>
+      `<span class="bdg b-int" title="${esc(intBadgeTip(b))}">${esc(b)}</span>`).join("");
+    const comps = (rec.components || []).map(c => {
+      const bits = [c.kind + (c.cc_type ? ` (${c.cc_type})` : "")];
+      if (c.reflect && c.reflect !== "not_applicable") bits.push(`reflect: ${c.reflect}`);
+      if (c.cleanse && c.cleanse !== "not_applicable") bits.push(`cleanse: ${c.cleanse}`);
+      if (c.purge && c.purge !== "not_applicable") bits.push(`purge: ${c.purge}`);
+      if (c.duplicate) bits.push(`duplicate: ${c.duplicate}`);
+      return `<li><b>${esc(c.id)}</b> — ${esc(bits.join(" · "))}${c.notes ? ` <i>${esc(c.notes)}</i>` : ""}</li>`;
+    }).join("");
+    return `<div class="int-row">
+      <div>${spellIcon(sid)}<b>${esc(rec.name || sid)}</b> ${badges}
+        <span class="prov${rec.confidence === "verified" ? "" : " draft"}"
+          title="${esc(rec.source || "no source recorded")}">${esc(rec.confidence)}</span></div>
+      ${rec.effect_name ? `<div class="fn">${esc(rec.effect_name)}</div>` : ""}
+      ${comps ? `<ul class="sp-list int-comps">${comps}</ul>` : ""}
+    </div>`;
+  }).join("");
+  return `<h4>PvP interactions <span class="h4-note">(duplicate / reflect / cleanse semantics — “unknown” means the game data does not say)</span></h4>${rows}`;
 }
 function renderEvidence(cap){
   const rows = party.filter(w => capsOf(w)[cap]).map(w => {
@@ -915,7 +1074,7 @@ function renderMetaStrip(){
     .filter(([w]) => WEAPONS[w])
     .sort((a,b) => b[1] - a[1]).slice(0, 12);
   $("meta-label").textContent =
-    `This week on the killboard — ${u.label} fights (${u.m.battles} battles, ${u.m.players_attributed} players)`;
+    `Killboard equipment prevalence — ${u.label}-size fights (${u.m.battles} battles, ${u.m.players_attributed} observed combatants; fight size, not party size)`;
   $("meta-strip").innerHTML = rows.map(([w, n], i) =>
     `<div class="meta-row"><span class="rk">${String(i+1).padStart(2,"0")}</span>${icon(w, 20)}
       <button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>
@@ -1061,6 +1220,9 @@ document.addEventListener("click", e => {
   const rf = e.target.closest("[data-rfilter]");
   if (rf){ setFacet({type: "role", v: rf.dataset.rfilter},
                     !rf.closest("#picker-chips")); return; }
+  const uf = e.target.closest("[data-ufilter]");
+  if (uf){ setFacet({type: "util", v: uf.dataset.ufilter},
+                    !uf.closest("#picker-chips")); return; }
   if (e.target.closest("#facet-clear")){ setFacet(null); return; }
   const sw = e.target.closest("[data-swapat]");
   if (sw){
@@ -1213,7 +1375,7 @@ document.addEventListener("input", e => {
 });
 document.addEventListener("keydown", e => {
   if ((e.key === "Enter" || e.key === " ")
-      && e.target.matches("[data-bfilter],[data-rfilter],[data-pfilter],span.info[data-detail]")){
+      && e.target.matches("[data-bfilter],[data-rfilter],[data-ufilter],[data-pfilter],span.info[data-detail]")){
     /* the picker's "i" detail control is a focusable role=button SPAN inside
        the add-weapon button — without this it is announced as a button but
        Enter/Space do nothing (and would otherwise trigger the outer add) */

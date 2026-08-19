@@ -1,0 +1,35 @@
+# Pinned upstream inputs — the source_snapshot declaration for the evidence
+# layer (changeschapter2.md §A). Every game-data input is fetched from THIS
+# exact commit by pipeline/fetch_snapshot.py; nothing follows a moving branch.
+#
+# To move to a new game patch: update `commit`/`commit_timestamp` (from
+# https://api.github.com/repos/ao-data/ao-bin-dumps/commits/master), run
+#   py -3 pipeline/fetch_snapshot.py
+#   py -3 pipeline/parse_dumps.py
+#   py -3 pipeline/fetch_item_stats.py
+#   py -3 pipeline/fetch_gear_lines.py
+#   py -3 pipeline/build_dataset.py
+# and re-run the full gate list in HANDOFF.md. The manifest
+# (pipeline/out/source_manifest.json) records what was actually fetched.
+
+ao-bin-dumps:
+  repository: https://github.com/ao-data/ao-bin-dumps
+  commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4
+  commit_timestamp: "2026-07-27T11:31:41Z"
+  # The server environment these dumps describe. ao-bin-dumps extracts the
+  # live-server client; there is no per-server split in this repository.
+  environment: live
+  # Nearest game patch at/preceding the commit, from out/patch_history.json
+  # (patch_history.py over the same repository's git history).
+  game_patch:
+    date: "2026-07-21"
+    message: "update 20260721"
+  # Chosen 2026-08-19: master HEAD at pin time. Verified byte-identical
+  # items.json (sha256 fc009a9f…) to the inputs the committed outputs were
+  # already built from — pinning introduced zero data drift.
+  files:
+    - items.json
+    - spells.json
+    - localization.json
+    - formatted/items.json
+    - formatted/items.txt

@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Hammer_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Tank_builds",
+     "sortkey": "Tank"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7559,
+   "revid": 8973,
+   "title": "Grovekeeper ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Hammer\n| mode = ZvZ\n| focus = Tank\n| strengths = Easy to play, High AoE CCs\n| weaknesses = Low Mobility, Bad 1vs1\n}}\n==Overview==\nThis Grovekeeper ZvZ PvP build is focused around CC-ing large numbers of enemies and exposing them for your zerg's push. It can act as both an offensive and a defensive tank though. In it's defensive role it will cover retreats through the mix of {{Skill|Inertia Ring}}, {{Skill|Mythical Web}} and {{Skill|Electric Discharge}} to keep enemies from following your group as it retreats.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Grovekeeper\n| main hand weapon skills = Iron Breaker, Inertia Ring, Ground Pound, Stunning Strike\n| head = Elder's Judicator Helmet\n| head skills = Electric Discharge, Toughness\n| cape = Elder's Martlock Cape\n| cape skills = Shield of Protection\n| armor = Elder's Duskweaver Armor\n| armor alternatives = Elder's Guardian Armor\n| armor skills = Mythical Web, Toughness, Protective Instinct\n| shoes = Elder's Hunter Shoes\n| shoes skills = Rush, Balanced Mind\n| potion = Major Gigantify Potion\n| potion alternatives = Major Resistance Potion\n| food = Avalonian Pork Omelette\n| food alternatives = Avalonian Beef Sandwich, Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Grovekeeper|45}}===\n{{Skill|Iron Breaker}} — This is a great ability to use after coming across a CC'd group of players as it lowers their damage resistance but also breaks all shields like {{Skill|Arcane Protection}} provided by Arcane Staffs.\n\n{{Skill|Inertia Ring}} — You want to use this ability to deny enemy zerg movement as it creates a large circle that greatly lowers movement speed when passing through. Try to use this either after initiating with {{Skill|Ground Pound}} or before the enemies can engage your zerg to slow down their backline players.\n\n{{Skill|Ground Pound}} — This is the most important ability for a Grovekeeper player, it allows you to jump and stun large groups of enemies. It is best used offensively in order to stop an enemy backline from pushing through as it stuns for a long time and can singlehandedly stop a push.\n\n{{Skill|Stunning Strike}} — This passive is great when you are on the move and can keep hitting the same target repeatedly to proc the stun on them but you shouldn't focus too much on using this passive and instead look for possible ways to deliver a {{Skill|Ground Pound}}.\n\n\n==={{Item|Elder's Duskweaver Armor|45}}===\n{{Skill|Mythical Web}} — The slow delivered by this ability to players that pass through it is particularly useful in small corridors through which enemies have to push. The web also purges all movement speed buffs which can slow down a zerg considerably and make it impossible for them to catch up to your own group.\n\n{{Skill|Toughness}} — As a tank you want to be as resistent as possible and this offers you exactly that, improving all your defense stats by a considerable amount.\n\n{{Skill|Protective Instinct}} - Neither of the two options make a difference as they are both aimed for PvE but {{Skill|Protective Instinct}} allows you to take aggro from mobs in the rare situations where you need to.\n\n\n==={{Item|Elder's Judicator Helmet|45}}===\n{{Skill|Electric Discharge}} — This AoE electricity expands outwards from your position and will stun all targets that get hit by it. While it doesn't do much damage, it is an incredible ability for stopping enemies as it expands up to 11m in all directions.\n\n{{Skill|Toughness}} — As a tank, your priority is maximizing your resistance to damage, and this passive skill accomplishes exactly that. It significantly boosts all your defense stats, making you much harder to take down.\n\n\n==={{Item|Elder's Hunter Shoes|45}}===\n{{Skill|Rush}} — Using the {{Item|Elder's Hunter Shoes}} gives you access to {{Skill|Rush}} which is a bit part of your build. While it only lasts 3 seconds, it increases the duration of your CCs by 35% which is very useful as the build relies heavily on CC.\n\n{{Skill|Balanced Mind}} — This passive not only increases both your damage but also your defense which is useful to us.\n\n\n==={{Item|Elder's Martlock Cape|45}}===\n{{Skill|Shield of Protection}} — We want to use Martlock Cape for it's defense increase whenever your HP drops below 25%. The increased defense can save you from many deaths, be it while you are venturing into the enemy backline or if you are caught out of position.\n\n\n==Rotations==\n{{Rotation|Main Engage|Rush, Ground Pound, Mythical Web, Inertia Ring, Electric Discharge}}\n*You want to start your engage by using {{Skill|Rush}} in order to boost both your movement speed and the duration of following CC abilities you use. As the speed boost doesn't have a long duration, make sure that you are already well positioned for a {{Skill|Ground Pound}} before you use {{Skill|Rush}}. Try to always use {{Skill|Ground Pound}} on the enemy backline, forcing an early {{Skill|Cleanse}} from {{Item|Elder's Mercenary Hood}} users. You then continue with {{Skill|Mythical Web}} in order to keep enemies from using their runs before using {{Skill|Inertia Ring}} to further stop their movement. {{Skill|Electric Discharge}} should be used inside the biggest group of players you can find in order to maximize the amount of players exposed to your group's DPS.\n\n{{Rotation|Defensive Rotation|Mythical Web, Inertia Ring, Rush, Ground Pound, Electric Discharge}}\n*From a defensive situation, you want to start off by placing {{Skill|Mythical Web}} just as the enemies propped their sprints, forcing them to lose the movement speed by running through your web. {{Skill|Inertia Ring}} is used while running alongside your group's backline, keeping an eye on the enemies so they don't get to catch your tail. If you see the enemies managing to catch up to your group, you want to use {{Skill|Rush}} alongside {{Skill|Ground Pound}} on top of the enemy backline to stop them from following up. {{Skill|Electric Discharge}} is used afterwards to help you move out and to further disrupt the enemies.\n\n\n==Consumables==\n{{Item|Major Gigantify Potion}} — This comes into use whenever your your zerg has lost an engage and you need to move away or if you are too deep into the enemy backline and need to get back to your frontline. It will increase you Max HP, making you incredibly difficult to kill while also making you immune to Forced Movement Effects. It will also increase your character model size however which makes it obvious for the enemy whenever the potion runs out so they can wait for you to go back to normal before killing you. \n\n{{Item|Avalonian Pork Omelette}} — The special {{Item|Avalonian Pork Omelette}} is the perfect choice for a tank in ZVZ as it lowers your Cooldowns and also offers you great extra defense that you need as a tank. {{Item|Avalonian Beef Sandwich}} is also a great choice as it considerably improves your max HP and increases the duration of your CCs by a lot.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7559": {
+     "ns": 0,
+     "pageid": 7559,
+     "revisions": [
+      {
+       "parentid": 7946,
+       "revid": 8973,
+       "timestamp": "2025-04-01T23:23:01Z"
+      }
+     ],
+     "title": "Grovekeeper ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

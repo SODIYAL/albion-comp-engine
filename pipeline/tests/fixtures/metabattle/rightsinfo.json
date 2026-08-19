@@ -1,0 +1,107 @@
+{
+ "batchcomplete": "",
+ "query": {
+  "general": {
+   "allcentralidlookupproviders": [
+    "local"
+   ],
+   "articlepath": "/albion/$1",
+   "base": "https://metabattle.com/albion/Builds",
+   "case": "first-letter",
+   "categorycollation": "uppercase",
+   "centralidlookupprovider": "local",
+   "dbtype": "mysql",
+   "dbversion": "8.0.42-0ubuntu0.20.04.1",
+   "externallinktarget": "_blank",
+   "fallback": [],
+   "fallback8bitEncoding": "windows-1252",
+   "favicon": "https://metabattle.com/albion/images/6/64/Favicon.ico",
+   "fixarabicunicode": "",
+   "fixmalayalamunicode": "",
+   "galleryoptions": {
+    "captionLength": "",
+    "imageHeight": 120,
+    "imageWidth": 120,
+    "imagesPerRow": 0,
+    "mode": "traditional",
+    "showBytes": "",
+    "showDimensions": ""
+   },
+   "generator": "MediaWiki 1.39.6",
+   "imagelimits": [
+    {
+     "height": 240,
+     "width": 320
+    },
+    {
+     "height": 480,
+     "width": 640
+    },
+    {
+     "height": 600,
+     "width": 800
+    },
+    {
+     "height": 768,
+     "width": 1024
+    },
+    {
+     "height": 1024,
+     "width": 1280
+    },
+    {
+     "height": 2048,
+     "width": 2560
+    }
+   ],
+   "interwikimagic": "",
+   "invalidusernamechars": "@:>",
+   "lang": "en",
+   "langconversion": "",
+   "legaltitlechars": " %!\"$&'()*,\\-.\\/0-9:;=?@A-Z\\\\^_`a-z~\\x80-\\xFF+",
+   "linkconversion": "",
+   "linkprefix": "",
+   "linkprefixcharset": "",
+   "linktrail": "/^([a-z]+)(.*)$/sD",
+   "logo": "https://metabattle.com/wiki/images/c/c9/Logo.png",
+   "magiclinks": [],
+   "mainpage": "Builds",
+   "maxarticlesize": 2097152,
+   "maxuploadsize": 104857600,
+   "minuploadchunksize": 1024,
+   "misermode": "",
+   "nofollowdomainexceptions": [
+    "mediawiki.org"
+   ],
+   "nofollowlinks": "",
+   "nofollownsexceptions": [],
+   "phpsapi": "apache2handler",
+   "phpversion": "7.4.3-4ubuntu2.29",
+   "script": "/albion/index.php",
+   "scriptpath": "/albion",
+   "server": "https://metabattle.com",
+   "servername": "metabattle.com",
+   "sitename": "Metabattle",
+   "thumblimits": [
+    120,
+    150,
+    180,
+    200,
+    250,
+    300
+   ],
+   "time": "2026-08-19T19:27:22Z",
+   "timeoffset": 0,
+   "timezone": "UTC",
+   "titleconversion": "",
+   "uploadsenabled": "",
+   "variantarticlepath": false,
+   "wikiid": "metabattlea",
+   "writeapi": ""
+  },
+  "rightsinfo": {
+   "text": "MediaWiki:Copyright",
+   "url": "https://metabattle.com/albion/MediaWiki:Copyright"
+  }
+ }
+}

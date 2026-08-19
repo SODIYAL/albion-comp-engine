@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Sword_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7658,
+   "revid": 8999,
+   "title": "Clarent Blade ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Sword\n| mode = ZvZ\n| focus = Melee DPS\n| strengths = High Bomb Burst Damage, Good Sustain, Versatile\n| weaknesses = Mana issues, Low Mobility\n}}\n==Overview==\nThis Clarent Blade build offers incredible damage through the use of your {{Skill|Crescent Slash}} that is incredibly valuable in ZvZ PvP. Due to it's long range, it allows you to throw damage skills onto the enemy zerg without being deep into the enemy zerg like {{Item|Elder's Halberd}}. This makes the build more newbie friendly and with the added versatility of the sword W, you can easily adapt to many different situations.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Clarent Blade\n| main hand weapon skills = Heroic Cleave, Iron Will, Crescent Slash, Heroic Fighting\n| off hand weapon = Elder's Muisak\n| off hand weapon alternatives = Elder's Cryptcandle\n| head = Elder's Knight Helmet\n| head skills = Displacement Immunity, Toughness\n| cape = Elder's Martlock Cape\n| cape alternatives = Elder's Lymhurst Cape\n| cape skills = Shield of Protection\n| armor = Elder's Hellion Jacket\n| armor skills = Life Steal Aura, Balanced Mind\n| shoes = Elder's Stalker Shoes\n| shoes alternatives = Elder's Royal Sandals, Elder's Cleric Sandals\n| shoes skills = Raging Blink, Balanced Mind\n| potion = Major Resistance Potion\n| potion alternatives = Major Resistance Potion\n| food = Beef Stew\n| food alternatives = Deadwater Eel Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Clarent Blade|45}}===\n{{Skill|Heroic Cleave}} — Your main damaging and the ability you also use for mobility. Try to always use it on cooldown even if you have to use it on mobs or critters. The {{Skill|Heroic Cleave}} does an AOE attack around you and hits multiple people. Each hit you land with this ability will put a stack of Heroic Charges that increases your movement speed and attack speed pairing perfectly with {{Skill|Heroic Fighting}} as it is very useful to help with your repositioning.\n\n{{Skill|Iron Will}} — This skill applies another Heroic Charge but also makes you immune to purges while increasing your defense and movement speed. This is invaluable and helps you make sure that you don't lose your Heroic Charges before you get to use {{Skill|Crescent Slash}}.\n\n{{Skill|Crescent Slash}} — The main damaging ability. It fires a wave in a straight line wherever you point. Make sure to always try and use this ability when you have 3 Heroic Charges.\nAt 1 stack of Heroic Charges your {{Skill|Crescent Slash}} also slows whoever it hits.\nAt 2 stacks you silence the enemies hit.\nAnd finally at 3 stacks your damage is almost doubled. \n\n{{Skill|Heroic Fighting}} — This passive will increase your movement speed and attack speed based on the amount of Heroic Charges you have, it is a no-brainer choice as your main damage comes from your {{Skill|Crescent Slash}} that also benefits from the same damage increase when having Heroic Charges.\n\n\n==={{Item|Elder's Hellion Jacket|45}}===\n{{Skill|Life Steal Aura}} — Use this to leech HP off enemies and heal yourself. The heal is incredible and based on how many enemies you touch with the red AOE that forms around you. Keep in mind that this can be purged unless you are using {{Skill|Iron Will}}.\n\n{{Skill|Balanced Mind}} — Straight up increases your damage and defense, good for this build.\n\n\n==={{Item|Elder's Knight Helmet|45}}===\n{{Skill|Displacement Immunity}} — You'll typically use this skill when engaging a group of enemies to avoid getting interrupted or stopped by items like {{Item|Elder's Knight Armor}}. If you are out position and cannot go to the frontline, feel free to use this on your own backline as it assists them regardless.\n\n{{Skill|Toughness}} — This provides nice additional defense that helps during PvP and is the only real option for you.\n\n\n==={{Item|Elder's Stalker Shoes|45}}===\n{{Skill|Raging Blink}} — Stacking up to 2 times, this ability allows you to teleport twice and increases the damage you do for a short while, it is a perfect choice for this build as you rely on high burst damage. Another option would be {{Item|Elder's Royal Sandals}} but those also decrease your defenses.\n\n{{Skill|Balanced Mind}} — The standard choice for any damaging build. Remember that you can always switch to {{Skill|Courier}} to carry more weight when you loot items off corpses.\n\n\n==={{Item|Elder's Martlock Cape|45}}===\n{{Skill|Shield of Protection}} — A great defensive choice to help your survival. Keep in mind that it only activates when you HP drops to below 25% so make sure to keep track of it when losing HP in engagements so you don't waste the cooldown or push deep into the enemy zerg without knowing you are missing this important ability.\n\n\n==Rotations==\n{{Rotation|Bomb Rotation|Displacement Immunity, Raging Blink, Raging Blink, Iron Will, Crescent Slash}}\n* This rotation assumes that you already have 3 stacks of Heroic Charge on you by using {{Skill|Heroic Cleave}} on as many enemies as possible to minimize the time it takes to stack up. You then want to pop your Displacement Immunity to counter any firewalls or other CCs before using Raging Blink twice to stack up the damage and Iron Will to make sure you don't get purged before you can use Crescent Slash. Practice this rotation outside combat so you can execute it flawlessly as you only have a short window to do this and you should always try to hit as many enemies as possible.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Feel free to use this potion as a general damage reduction cooldown if you anticipate burst damage from the enemy zerg or if you just want to get deeper. Often enough you want to use this after pumping in your damage.\n\n{{Item|Beef Stew}} — The best choice for flat damage increase and to boost your {{Skill|Crescent Slash}} damage. Always try to go for at least 8.1 though.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7658": {
+     "ns": 0,
+     "pageid": 7658,
+     "revisions": [
+      {
+       "parentid": 8862,
+       "revid": 8999,
+       "timestamp": "2025-04-01T23:28:34Z"
+      }
+     ],
+     "title": "Clarent Blade ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

@@ -110,13 +110,51 @@ function loadoutDecode(str){
 }
 
 /* ------------------------------------------------------------- defaults */
-/* The caller reference loadout for a weapon under the current content, if any
-   caller wrote one down. This is what makes an added member start populated
-   instead of blank. */
+/* Displayed-build selection (changeschapter2.md §F). The index arrives
+   pre-ordered by approval / patch freshness / confidence and flags canonical
+   defaults with their promotion basis; at runtime we additionally require a
+   matching party-size range and prefer exact-content records over explicit
+   content fallbacks. NEVER variants[0] of arrival order, and a fallback is
+   always visible on the returned record (fallback_from / size_fallback). */
+function loadoutVariantsFor(w, ct){
+  /* exact-content records first, then records whose broad content tag covers
+     this template (LOADOUT_COVERS, e.g. large_scale_zvz -> castle) — each of
+     those carries fallback_from so the UI can say so (§F) */
+  const all = (typeof LOADOUTS !== "undefined") ? LOADOUTS : {};
+  const out = (((all[ct]) || {})[w] || []).slice();
+  const covers = (typeof LOADOUT_COVERS !== "undefined") ? LOADOUT_COVERS : {};
+  for (const broad of Object.keys(covers)){
+    if (!covers[broad].includes(ct)) continue;
+    ((all[broad] || {})[w] || []).forEach(v => out.push(Object.assign({}, v, {
+      fallback_from: broad,
+      canonical: false,
+      canonical_for_fallback: !!v.canonical,
+      canonical_basis: undefined,
+    })));
+  }
+  return out;
+}
+
+function loadoutSelect(w, ct, size){
+  const variants = loadoutVariantsFor(w, ct);
+  const fits = v => !v.party_size ||
+    (size >= v.party_size.min && size <= v.party_size.max);
+  const pick =
+    variants.find(v => v.canonical && fits(v)) ||
+    variants.find(v => (v.canonical || v.canonical_for_fallback) && fits(v)) ||
+    variants.find(v => v.canonical || v.canonical_for_fallback) ||
+    null;
+  if (!pick) return null;
+  return Object.assign({}, pick, {size_fallback: !fits(pick)});
+}
+
+/* The canonical reference build for a weapon under the current content, if
+   the evidence layer promoted one. This is what makes an added member start
+   populated instead of blank — candidates that never cleared the promotion
+   gate are shown in the drawer but never drive the default kit. */
 function loadoutReference(w){
-  const byContent = (typeof LOADOUTS !== "undefined" && LOADOUTS[CONTENT]) || {};
-  const variants = byContent[w];
-  return (variants && variants.length) ? variants[0] : null;
+  const size = (typeof SIZE !== "undefined") ? SIZE : 20;
+  return loadoutSelect(w, (typeof CONTENT !== "undefined") ? CONTENT : "", size);
 }
 
 function loadoutPrefill(i){

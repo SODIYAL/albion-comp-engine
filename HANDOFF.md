@@ -40,22 +40,132 @@ anything:
 
 ```
 py -3 pipeline/evidence_lint.py        # CI gate — exit 1 blocks release
+py -3 pipeline/build_builds.py         # data/ evidence layer -> out/builds_index.json + validation
 py -3 pipeline/build_dataset.py        # sheets + templates + styles + composition -> out/dataset-latest.json
+                                       # (verifies snapshot provenance; exit 2 = release blocked)
 py -3 tests/test_golden.py             # must stay 24/24
 py -3 tests/test_forge.py              # forge rework contracts: invariant, synergy rules,
                                        # redundancy, size-11 matrix, exclusions (11/11)
-py -3 tests/tier2_blindtest.py v4 tests/meta_comps.yaml   # role gate >= 70% (currently 77%)
+py -3 tests/tier2_blindtest.py v4      # role gate >= 70% (73% since the ranged rework)
+                                       # (reads data/published_comps/ — the production comp files)
 py -3 tests/test_js_parity.py          # browser scoring == engine.py incl. forge (needs node)
 node tests/test_loadout_codec.js       # permalink codec + provenance + pick bridges
 py -3 tests/test_patch_history.py      # patch-diff + staleness units, no clone needed
+py -3 tests/test_provenance.py         # chapter-2 §A gates: pinned snapshot, hashes,
+                                       # determinism, fail-closed release, coverage (24/24)
+py -3 tests/test_builds.py             # chapter-2 §B-§F gates: ranged evidence, builds schema,
+                                       # equippability, independence, 1v1 bar, semantics (44/44)
+py -3 pipeline/build_interactions.py   # PvP interaction records -> out/interactions.json
+py -3 tests/test_interactions.py       # interaction gates: count-once scoring, twin parity on
+                                       # duplicates, analyzer, seeds (25/25; needs node)
 py -3 pipeline/build_dashboard.py      # -> dashboard/index.html AND docs/index.html
 py -3 pipeline/build_effect_review.py  # -> review/effects.html
 py -3 pipeline/build_magnitude_review.py  # -> review/magnitude.html (score-vs-dumps audit boards)
 py -3 pipeline/fetch_icons.py          # only after a patch ADDS weapons (cached; --force redownloads)
-py -3 pipeline/sample_battles.py       # optional: refresh usage field reports
-                                       # (albionbb API — gameinfo 504s at scale;
-                                       # per-battle cache; display-only data)
+py -3 pipeline/sample_battles.py       # optional: refresh FIGHT-SIZE equipment prevalence
+                                       # (albionbb API; per-battle cache; display-only data)
 ```
+
+Game-patch procedure (chapter 2): update `data/source_pins.yaml` to the new
+ao-bin-dumps commit, then `fetch_snapshot.py` -> `parse_dumps.py` ->
+`fetch_item_stats.py` -> `fetch_gear_lines.py` -> the full gate list above.
+Every derived input records its snapshot commit + adapter version in
+`out/source_manifest.json`; `build_dataset.py` fails closed on any mismatch.
+
+## Session 2026-08-19 (later) — PvP interaction layer ("new prompt")
+
+Spell-keyed PvP interaction records: duplicate semantics, reflect/cleanse/
+purge per COMPONENT, CC classes — with chapter-2 confidence provenance.
+The revised spec (repo-fitted, stale examples corrected against the pinned
+game data) is the `new prompt` file at the repo root.
+
+- **Data**: `pipeline/interactions.yaml` (9 seed spells; every claim cites
+  the spell description @ the pinned snapshot; unstated facts stay
+  `unknown`) → `pipeline/build_interactions.py` → `out/interactions.json`
+  (validated: enums, equippability, verified-requires-source,
+  nonstacking_caps only on verified entries + must be caps the spell
+  grounds) → embedded in the dataset, part of the provenance chain.
+  Structural pre-pass extracts "cannot be reflected" statements from
+  descriptions; 19 spells with such facts await curation
+  (`_meta.structural_unclaimed`).
+- **Scoring (BOTH engines, parity-pinned)**: the one coupling is verified
+  `nonstacking_caps` — party supply counts that spell's listed caps ONCE
+  across members equipping it (max, not sum), in `effective_supply` and
+  exactly mirrored in `_eval_pick` marginals (F1-style invariant holds at
+  1e-9; cross-engine duplicate case tested at 1e-9). unknown/likely/
+  community_reported NEVER change a score. The shipped seeds carry ZERO
+  verified nonstacking caps — nothing in the game data verifies one yet —
+  so live scoring is unchanged; the machinery is proven with synthetic
+  fixtures in `tests/test_interactions.py`.
+- **Analysis**: `Engine.analyze(party, combos)` + `duplicate_conflicts`
+  (+ JS mirrors): strengths / missing capabilities / duplicate conflicts
+  (severity high|warning only on verified non-stacking; verified full and
+  shared stacks are info; unstated = "verify", never a penalty) / CC
+  coverage / damage-utility-defense profiles.
+- **Dashboard**: dossier "PvP interactions" section (badges + §14 tooltips
+  + confidence chip carrying the source + component detail), roster
+  duplicate notices, "utility" filter chips (purge/cleanse/anti-heal/
+  pierce/displace/no-reflect/dup-verified).
+- **Corrected stale examples**: Enchanted Quiver is a self-buff (duplicates
+  verified `full`, no resistance shred exists on it in current data);
+  Vile Curse Charges are the verified `shared_stack` case; Witchwork
+  carries curated cleanse (the "no cleanse" example trio was wrong).
+- **mechanics.yaml**: `cc_diminishing_returns: null` +
+  `healing_modifiers: null` placeholders (numbers only when citable).
+- Gates: everything green incl. new interactions 25/25.
+
+## Session 2026-08-19 — Chapter 2: evidence layer (changeschapter2.md)
+
+Implemented the reproducible game-data + build-provenance layer. Design
+record: `docs/superpowers/specs/2026-08-19-evidence-layer-design.md`.
+
+- **Pinned snapshot (§A).** All five ao-bin-dumps inputs (items, spells,
+  localization, formatted names) now come from ONE commit —
+  `data/source_pins.yaml`, fetched by `pipeline/fetch_snapshot.py`, cached
+  by commit, SHA-256s + timestamps + patch in `out/source_manifest.json`.
+  Verified byte-identical to the inputs the old outputs were built from
+  (zero drift). `build_dataset.py` verifies the derived chain (hashes,
+  adapter versions, one-commit rule, curated coverage) and exits 2 with
+  `release_clean: false` on any failure. Normalization fixes: tier from the
+  dump's own `@tier` (regex is corroboration only), nested enchantment IP
+  preserved (`ip_ench`), zero-to-nonzero tier transitions kept, cross-tier
+  slot/category consistency validated, per-tier raw item ids kept, dev
+  entries dropped by the no-localized-name rule.
+- **ranged_presence rework (§B).** The `attackrange >= 9` always-on rule is
+  GONE. Now per SPELL BUNDLE: curated `burst_aoe` claim + the spell's own
+  delivery (ground/enemy) + `castrange >= 9`, with cited grant/deny
+  overrides in `pipeline/ranged_overrides.yaml` (gap-closer leaps denied);
+  full audit trail in `out/ranged_presence_report.json`. 42 weapons qualify
+  (was 57); 1H Cursed, Chillhowl, Ironclad correctly excluded. It lands in
+  the qualifying bundle, never `loadout.always`. V4 role gate moved 77% ->
+  73% (still >= 70%) — a legitimate consequence of the sounder rule.
+  parse_dumps.py now also extracts structural spell geometry
+  (radius/area/max_targets) from spells.json.
+- **Evidence layer (§C-§F).** `data/` is the versioned home: caller comps
+  migrated OUT of tests/ into `data/published_comps/` (verbatim slots +
+  provenance envelopes; tests/meta_comps.yaml deleted), MetaBattle imports
+  in `data/published_builds/` (31 ZvZ builds via the MediaWiki API adapter
+  `pipeline/adapters/metabattle.py`, fixtures checked in, CC BY-SA
+  attribution, all `candidate`), manual Armory format in
+  `data/armory_imports/`. `pipeline/builds_lib.py` +
+  `pipeline/build_builds.py` normalize/validate/promote ->
+  `out/builds_index.json` + `out/builds_validation.json`. Spell picks
+  resolve q3/w2/p1 -> exact UniqueNames with bounds quarantine (caught the
+  Enigmatic p5 overflow). Canonical promotion gate: Armory+validation OR
+  two independent families OR shotcaller approval. Composition exclusions
+  now carry evidence records + an evidence gate that flags contradictions.
+- **Observation semantics (§E).** sample_battles.py reworked: fight-size
+  prevalence (party/side size explicitly unknown), loadout swaps tracked,
+  event/battle dedup, battle-level aggregation, abilities stored unknown.
+  Dashboard copy relabeled. Still display-only, never in scoring.
+- **Dashboard (§G).** Reference builds selected by §F criteria (never
+  `variants[0]`), provenance line (source, date, patch, party size,
+  approval + canonical basis, confidence by dimension, unknowns, explicit
+  fallbacks). Gear catalogue no longer filtered by icon availability;
+  ITEM_STATS aliased instead of double-embedded (~190 KB saved).
+- **Gates:** golden 24/24, forge 11/11, parity 60/60 + embed, V4 73%
+  (gate 70%), codec 24/24, patch-history 14/14, lint clean, provenance
+  24/24, builds 44/44.
 
 **Deploy = rebuild + push.** GitHub Pages serves `main:/docs`;
 `build_dashboard.py` writes `docs/index.html` (the doctype'd copy of the

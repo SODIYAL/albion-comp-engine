@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Arcane_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Range_DPS_builds",
+     "sortkey": "Range DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7760,
+   "revid": 8911,
+   "title": "Occult Staff ZvZ Support Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Arcane Staff\n| mode = ZvZ\n| focus = Range DPS\n| strengths = Easy to play, Great Support, Great Mobility\n| weaknesses = Squishy\n}}\n==Overview==\nThis {{Item|Elder's Occult Staff}} build offers incredible help for your zerg's mobility throughout a ZvZ fight and can be a great choice when escorting a vortex as mobility is key when you are forced to remain off your mount. Otherwise, the support build offers good CD reduction for your group and can be played well even in bomb squads as an alternative to {{Item|Elder's Oathkeepers}} with a bigger focus on movement instead of shielding. \n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Occult Staff\n| main hand weapon skills = Arcane Protection, Motivating Cleanse, Time Corridor, Lingering Power\n| off hand weapon = Elder's Cryptcandle\n| head = Elder's Cleric Cowl\n| head alternatives = Elder's Assassin Hood\n| head skills = Ice Block, Aggression\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Royal Jacket\n| armor skills = Royal Banner, Quick Thinker\n| shoes = Elder's Boots of Valor\n| shoes alternatives = Elder's Graveguard Boots, Elder's Soldier Boots\n| shoes skills = Premonition, Toughness\n| potion = Major Gigantify Potion\n| food = Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Wildfire Staff|45}}===\n{{Skill|Arcane Protection}} — Use this skill to help your tanks when engaging or any players in your party that might need help, while the shield is temporary, it can easily work to stop burst damage coming in after your ally got rooted or otherwise CC'd. This is your main support ability and you should always keep your eyes open to see opportunities where you can use it to help your group.\n\n{{Skill|Motivating Cleanse}} — Use this to save your group from CCs whenever they get caught in CCs. This AOE will not only cleanse CC debuffs (and other debuffs that aren't DoT damage) but also give a good movement speed increase that you can use when carrying vortexes or have to remain dismounted.\n\n{{Skill|Time Corridor}} — Pop this whenever your zerg is engaging another zerg or if you are retreating, try to put the Corridor in the path of as many allies as possible so everyone can make use of it as there isn't any limit to how many people can pass through it.\n\n{{Skill|Lingering Power}} — This passive triggers after every skill cast and increases your auto-attack speed for the next 3 auto-attacks. This shouldn't be a priority but its still a decent choice as you can do a bit of damage after a fight and when chasing down enemies.\n\n\n==={{Item|Elder's Royal Jacket|45}}===\n{{Skill|Royal Banner}} — Make sure to use this for your group after an engage to lower their cooldowns (and yours). Try to always communicate with your team whenever you are about to use this so they can stack on top of you and benefit from the skill. You don't have to stand in place when using this skill so keep that in mind!\n\n{{Skill|Quick Thinker}} — This is a great passive as it decreases your cooldowns and lets you use all your skills more often.\n\n\n==={{Item|Elder's Cleric Cowl|45}}===\n{{Skill|Ice Block}} — Use this as your main defense when enemy zergs engage your group. Don't move after using this skill, or it will stop and you'll be vulnerable. Shotcallers will often tell you when to use it, but always watch the enemies and be ready.\n\nYou can also use the {{Item|Elder's Assassin Hood}} for extra CC reduction and to constantly pop out {{Skill|Time Corridor}} but this will make you more vulnerable. Once you've mastered the build and positioning during ZVZ, you should definitely consider this alternative.\n\n{{Skill|Aggression}} — This passive grants you extra damage which is great to have even though damage isn't the goal of this build.\n\n\n==={{Item|Elder's Boots of Valor|45}}===\n{{Skill|Premonition}} — While not particularly easy to play, this run allows you to ignore CCs, however, you want to use this BEFORE walking over slow effects like the {{Skill|Frozen Hell}}. Another cheaper alternative is to use {{Item|Elder's Graveguard Boots}} instead but it offers a shorter sprint.\n\nYou just use {{Item|Elder's Soldier Boots}} with {{Skill|Wanderlust}} if you are carrying a vortex or something similar to that as it offers a much longer sprint duration.\n\n{{Skill|Toughness}} — This extra damage resistance is very useful.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — Long ZvZ fights drain a lot of mana, especially when you're defending against multiple enemy engages. This cape will trigger the regenerating your mana, returning 80% of your max mana once it reaches 40%.\n\n\n==Rotations==\n{{Rotation|Support Rotation|Premonition, Time Corridor, Arcane Protection, Motivating Cleanse, Royal Banner}}\n*Start off by using {{Skill|Premonition}} to increase your movement speed and move in with your group. You want to start by placing a {{Skill|Time Corridor}} ahead of your allies and in the direction of the engage unless you are playing defensive and you put it down in your retreat path. Use {{Skill|Arcane Protection}} on an offensive tank or someone using a {{Item|Elder's Hand of Justice}}. Use {{Skill|Motivating Cleanse}} if you see groups of allies caught in enemy CC. Use {{Skill|Royal Banner}} once allies have used their skills and you want to prepare for another engage.\n\n\n==Consumables==\n{{Item|Major Gigantify Potion}} — Use this as your secondary defensive skill after {{Skill|Ice Block}}, use it if you see the enemy zerg trying an engage on you or if you need to reposition through an enemy group.\n\n{{Item|Pork Omelette}} — Only good choice for food, the {{Item|Pork Omelette}} decreases your cooldowns and allows you to use skills more often. Use at least a 7.1 version if you can afford it.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7760": {
+     "ns": 0,
+     "pageid": 7760,
+     "revisions": [
+      {
+       "parentid": 8609,
+       "revid": 8911,
+       "timestamp": "2025-04-01T23:16:21Z"
+      }
+     ],
+     "title": "Occult Staff ZvZ Support Build"
+    }
+   }
+  }
+ }
+}

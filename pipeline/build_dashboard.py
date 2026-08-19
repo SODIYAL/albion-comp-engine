@@ -19,12 +19,7 @@ scripts and closes it so development servers can safely inject reload code.
 
 Usage:  py -3 pipeline/build_dashboard.py
 """
-import json, os, re, sys
-
-try:
-    import yaml
-except ImportError:
-    yaml = None
+import json, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, os.pardir)
@@ -32,115 +27,22 @@ DASH = os.path.join(ROOT, "dashboard")
 DATASET = os.path.join(HERE, "out", "dataset-latest.json")
 
 
-# Caller sheets write gear as free text ("Knight Helmet", "Stalker Shoes",
-# "Ava pork omelette"). These normalise both sides before matching: drop the
-# tier adjective a catalogue name carries ("Adept's", "Minor", "Major"), drop
-# a curator's parenthetical ("Leather Hood(cleanse)"), and flatten
-# punctuation. Never guess — an ambiguous name stays raw text.
-TIER_WORDS = r"(?:adept's|expert's|master's|grandmaster's|elder's|minor|major|beginner's|novice's|journeyman's)"
-GEAR_FIELD_SLOT = {"helm": "head", "armor": "armor", "boots": "shoes",
-                   "cape": "cape", "offhand": "offhand"}
-
-
-def _norm_item(text):
-    text = re.sub(r"\(.*?\)", " ", text or "")        # "Leather Hood(cleanse)"
-    text = re.sub(TIER_WORDS, " ", text.lower())
-    text = re.sub(r"[^a-z0-9 ]+", " ", text)
-    return " ".join(text.split())
-
-
-def _token_prefix_match(caller_tokens, name_tokens):
-    """Every caller token is a prefix of a name token, in order — lets a
-    caller's "Ava pork omelette" reach "Avalonian Pork Omelette" without
-    letting unrelated items through."""
-    it = iter(name_tokens)
-    return all(any(n.startswith(tok) for n in it) for tok in caller_tokens)
-
-
-def match_gear(text, slot, catalogue):
-    """A catalogue key for free-text `text` in `slot`, or None when it is
-    absent or ambiguous. Callers keep the raw text when this returns None, so
-    a near-miss shows what the caller wrote instead of the wrong item."""
-    want = _norm_item(text)
-    if not want:
-        return None
-    cands = [(k, _norm_item(v["name"])) for k, v in catalogue.items()
-             if v["slot"] == slot]
-
-    def pick(hits):
-        if len(hits) == 1:
-            return hits[0]
-        if not hits:
-            return None
-        # Consumables are one line PER TIER, so "Gigantify Potion" legitimately
-        # matches Minor/base/Major. Prefer the plain tier — the one whose raw
-        # name carried no tier adjective — and only then call it decided.
-        plain = [k for k in hits
-                 if _norm_item(catalogue[k]["name"]) == catalogue[k]["name"].lower()]
-        return plain[0] if len(plain) == 1 else None
-
-    hit = pick([k for k, n in cands if n == want])
-    if hit:
-        return hit
-    hit = pick([k for k, n in cands if want in n])
-    if hit:
-        return hit
-    toks = want.split()
-    return pick([k for k, n in cands if _token_prefix_match(toks, n.split())])
-
-
-def load_loadouts(weapons, catalogue=None):
-    """Caller-provided loadouts from tests/meta_comps.yaml — the 'skills'
-    columns AND the gear/potion/food a caller wrote down (e.g. Timothy's blap
-    sheet). Keyed content -> weapon -> variants. Only real caller data ever
-    lands here — never invented; gear that cannot be matched to the catalogue
-    with confidence is carried as the caller's raw text under `raw`."""
-    catalogue = catalogue or {}
-    path = os.path.join(ROOT, "tests", "meta_comps.yaml")
-    if yaml is None or not os.path.exists(path):
-        return {}
+def load_loadouts(weapons):
+    """The builds index (pipeline/build_builds.py) — validated, provenance-
+    carrying build variants keyed content -> weapon -> [variant], ordered by
+    the §F selection criteria with canonical defaults flagged. Only weapons
+    the dataset knows are inlined. Replaces the old direct meta_comps.yaml
+    parse: production build data lives in data/, normalization is generated,
+    and every variant carries its source, patch, approval and confidence."""
+    path = os.path.join(HERE, "out", "builds_index.json")
+    if not os.path.exists(path):
+        return {}, {}
     with open(path, encoding="utf-8") as f:
-        comps = (yaml.safe_load(f) or {}).get("comps", [])
-    out = {}
-    for comp in comps:
-        content = comp.get("content")
-        m = re.search(r'"([^"]+)"', comp.get("source", ""))
-        caller = m.group(1) if m else comp.get("id", "caller")
-        for party in comp.get("parties", []):
-            for slot in party.get("slots", []):
-                sk = slot.get("skills")
-                if not sk or not slot.get("weapons"):
-                    continue
-                mm = re.search(r"q(\d+)\D+w(\d+)\D+p(\d+)", sk, re.I)
-                if not mm:
-                    continue
-                w = slot["weapons"][0]
-                if w not in weapons:
-                    continue
-                gear, raw = {}, {}
-                src = dict(slot.get("gear") or {})
-                src["potion"], src["food"] = slot.get("potion"), slot.get("food")
-                for field, gslot in list(GEAR_FIELD_SLOT.items()) +                         [("potion", "potion"), ("food", "food")]:
-                    text = src.get(field)
-                    if not text:
-                        continue
-                    key = match_gear(text, gslot, catalogue)
-                    if key:
-                        gear[gslot] = key
-                    else:
-                        raw[gslot] = text
-                variant = {"q": int(mm.group(1)), "w": int(mm.group(2)),
-                           "p": int(mm.group(3)),
-                           "role": slot.get("role_raw") or slot.get("role") or "",
-                           "caller": caller}
-                if gear:
-                    variant["gear"] = gear
-                if raw:
-                    variant["raw"] = raw
-                bucket = out.setdefault(content, {}).setdefault(w, [])
-                if variant not in bucket:
-                    bucket.append(variant)
-    return out
+        doc = json.load(f)
+    by_content = {ct: {w: vs for w, vs in by_weapon.items() if w in weapons}
+                  for ct, by_weapon in doc.get("by_content", {}).items()}
+    covers = (doc.get("_meta") or {}).get("content_covers", {})
+    return by_content, covers
 
 
 def main():
@@ -201,15 +103,12 @@ def main():
     if os.path.exists(gear_path):
         with open(gear_path, encoding="utf-8") as f:
             gear_all = json.load(f)
-    # Matched against the FULL catalogue: a caller's gear should resolve even
-    # if that item's art failed to fetch.
-    loadouts = load_loadouts(data["weapons"], gear_all)
-    # Same rule the usage sample follows: inline only what the page can
-    # actually draw, so a stale catalogue can never render a broken tile.
-    # `icons` stays the authority on WHICH items have art even though gear art
-    # is no longer embedded — 11 catalogue entries have none at any tier
-    # (Black Hands, decorative capes) and must not become empty tiles.
-    gear = {k: v for k, v in gear_all.items() if k in icons}
+    loadouts, loadout_covers = load_loadouts(data["weapons"])
+    # Catalog inclusion must NOT depend on icon availability (§A): the page
+    # gets the full catalogue; loArt() falls back inlined icon -> hotlinked
+    # render -> neutral empty tile, so an artless entry degrades gracefully
+    # instead of silently vanishing from the picker.
+    gear = gear_all
     # PAGE WEIGHT: embed weapon art only. Gear art is hotlinked from the render
     # service at display size instead, the same way spell icons and the
     # full-res dossier art already are. Gear is ~270 of the ~400 icons, so
@@ -270,8 +169,11 @@ def main():
            f"const ITEMS = {js(items)};\n"
            f"const SPELLS = {js(spells)};\n"
            f"const LOADOUTS = {js(loadouts)};\n"
+           f"const LOADOUT_COVERS = {js(loadout_covers)};\n"
            f"const GEAR = {js(gear)};\n"
-           f"const ITEM_STATS = {js(data.get('item_stats', {}))};\n"
+           # aliased, not re-embedded: the full item-stat payload is already
+           # inside DATASET; a second copy cost ~190 KB of page weight (§A)
+           f"const ITEM_STATS = DATASET.item_stats || {{}};\n"
            f"const USAGE = {js(usage)};\n"
            f"const PARITY_EXPECTED = {js(expected)};\n{loadout_js}\n{app}</script>\n"
            f"</body>\n</html>\n")

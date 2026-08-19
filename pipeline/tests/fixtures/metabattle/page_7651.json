@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Axe_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7651,
+   "revid": 8919,
+   "title": "Infernal Scythe ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Axe\n| mode = ZvZ\n| focus = Melee DPS\n| strengths = CCs by rooting, Burst Damage, Anti Heal\n| weaknesses = Mana issues, Low Mobility\n}}\n==Overview==\nThis Infernal Scythe ZvZ PvP build isn't only capable of delivering high burst damage but also helps with reducing enemy healing and executing low HP targets during long brawls. It's HP sustain is excellent through the use of {{Skill|Life Steal Aura}} which makes the weapon a great choice for any zvz situation.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Infernal Scythe\n| main hand weapon skills = Rending Rage, Raging Blades, Bloody Reap, Aggressive Rush\n| head = Elder's Knight Helmet\n| head skills = Displacement Immunity, Toughness\n| cape = Elder's Lymhurst Cape\n| cape alternatives = Elder's Martlock Cape\n| cape skills = Energy Reserve\n| armor = Elder's Hellion Jacket\n| armor skills = Life Steal Aura, Balanced Mind\n| shoes = Elder's Royal Sandals\n| shoes alternatives = Elder's Cleric Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Deadwater Eel Stew\n| food alternatives = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Infernal Scythe|45}}===\n{{Skill|Rending Rage}} — Use this skill to apply stacks of bleed using the first two attacks and always try to put as many bleeds as possible on targets during pushes. The third cast of the ability will make you leap and root all targets where you land however so make sure that you use that to root as many players as possible before using {{Skill|Bloody Reap}}.\n\n{{Skill|Raging Blades}} — While this skill doesn't do much damage on its own, its important to always try and hit as many enemies with it in order to stack up the damage boost provided by it for an even higher damage {{Skill|Bloody Reap}}.\n\n{{Skill|Bloody Reap}} — This is your highest damage ability and works a lot like the Bloodletter {{Skill|Lunging Stabs}} as it does more damage to enemies below 40% HP but does this in an AOE around you instead of a line. Always try to pair this with the third hit on {{Skill|Rending Rage}} after using {{Skill|Raging Blades}} to maximize damage.\n\n{{Skill|Aggressive Rush}} — A nice damage buff as you will be auto-attacking a lot during long fights.\n\n\n==={{Item|Elder's Hellion Jacket|45}}===\n{{Skill|Life Steal Aura}} — Use this skill to heal yourself back up and become nearly invulnerable during group fights. Try to hit as many enemies as possible while you have this active in order to maximize the healing you receive.\n\n{{Skill|Balanced Mind}} — Straight up increases your damage and defense, which is generally good and a no-brainer choice for DPS.\n\n\n==={{Item|Elder's Knight Helmet|45}}===\n{{Skill|Displacement Immunity}} — You'll typically use this skill when engaging a group of enemies to avoid getting interrupted. If you are out position and cannot go to the frontline, feel free to use this on your own backline as it assists them regardless.\n\n{{Skill|Toughness}} — This provides nice additional defense that helps during zvz fights.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — Stay aware that this skill not only increases your damage but also increases the damage you take. Try to use this right before your combo so its still active when you use {{Skill|Bloody Reap}}.\n\n{{Skill|Aggression}} — The standard choice for DPS builds. Remember that you can always switch to {{Skill|Courier}} to carry more weight when you loot items off corpses.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — Not unlike many other builds, energy can become an issue, especially when spamming {{Skill|Rending Rage}} during fights. This cape offers you almost passive energy regen as all you need to do to activate it is get below 40% max energy and you will get a quick boost of 80%. Watch out for the cooldown however so try to not fully rely on this. \n\n\n==Rotations==\n{{Rotation|Damage Combo|Raging Blades, Defenseless Rush, Displacement Immunity, Rending Rage, Rending Rage, Rending Rage, Bloody Reap}}\n* Start off with {{Skill|Raging Blades}} and stack as much of the damage boost as you can while using {{Skill|Defenseless Rush}} to move around the zerg as you get hits. Use {{Skill|Displacement Immunity}} so you don't get stopped before you use two hits of {{Skill|Rending Rage}} followed by the third and leaping into a group of enemies. Use {{Skill|Bloody Reap}} to deal high damage, especially to low HP enemies. You should always try to finish off targets using {{Skill|Bloody Reap}} whenever you find them low HP.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Feel free to use this potion as a general damage reduction cooldown if you anticipate burst damage from the enemy zerg or if you just want to get deeper into the enemy backline without taking as much damage.\n\n{{Item|Deadwater Eel Stew}} — This food offers a good combination of damage and cooldown reduction. Another good option is {{Item|Beef Stew}} for flat damage increase and to boost your {{Skill|Rending Rage}} damage. Always try to go for at least 8.1 though.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7651": {
+     "ns": 0,
+     "pageid": 7651,
+     "revisions": [
+      {
+       "parentid": 8084,
+       "revid": 8919,
+       "timestamp": "2025-04-01T23:17:36Z"
+      }
+     ],
+     "title": "Infernal Scythe ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

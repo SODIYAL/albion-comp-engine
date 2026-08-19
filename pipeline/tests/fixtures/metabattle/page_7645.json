@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Dagger_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7645,
+   "revid": 8952,
+   "title": "Bloodletter ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Dagger\n| mode = ZvZ\n| focus = Melee DPS\n| strengths = High Burst Damage, Good Self-Healing\n| weaknesses = High Skill Ceiling, No utility, Mana Issues\n}}\n==Overview==\nThis Bloodletter ZvZ PvP build prioritizes on buffing up your damage using {{Skill|Deadly Swipe}} & {{Skill|Throwing Blades}} and delivering high burst damage and finishing off targets using {{Skill|Lunging Stabs}}. The role of this weapon in a zerg is mostly to finish off targets as it excels at killing low HP enemies and can act as a decent brawler while remaining alive in the middle of a brawl with relative ease. \n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Bloodletter\n| main hand weapon skills = Deadly Swipe, Throwing Blades, Lunging Stabs, Deep Cuts\n| off hand weapon = Elder's Taproot\n| head = Elder's Assassin Hood\n| head skills = Meditation, Balanced Mind\n| cape = Elder's Undead Cape\n| cape alternatives = Elder's Avalonian Cape\n| cape skills = Vanisher\n| armor = Elder's Hellion Jacket\n| armor alternatives = Elder's Stalker Jacket\n| armor skills = Life Steal Aura, Balanced Mind\n| shoes = Elder's Royal Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Resistance Potion\n| food = Beef Stew\n| food alternatives = Deadwater Eel Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Bloodletter|45}}===\n{{Skill|Deadly Swipe}} — This is your main movement ability that applies an Assassin's Spirit Charge which increases your damage by 6% and stacks up to 3 times. You should use this ability on cooldown, consistantly keeping up your Assassin's Spirit Charges and being ready to use {{Skill|Lunging Stabs}}.\n\n{{Skill|Throwing Blades}} — This ability does nice AoE damage as it fires off 3 blades in the direction you point, each hit offers you a movement and damage increasing buff that also stacks up to 3 but only lasts 5 seconds. Ideally, you should try to hit as many targets as possible in order to max out the amount of buffs you get with each cast of the ability.\n\n{{Skill|Lunging Stabs}} — This is your finishing skill and the main skill you will use to pick up kills for your team. Make sure you ONLY use this ability when you can hit atleast one enemy that is below 40% percent HP as it doubles the damage of the skill and also reduces your cooldown by 40% which is very important during fights. You should always only use this ability once you're buffed up with 3 Assassin's Spirit Charges and {{Skill|Throwing Blades}}.\n\n{{Skill|Deep Cuts}} — During zvz fights, you should use this passive to constantly poke the enemies, with your high attack speed, this passive will keep a constant bleed dot on any target and help with grinding down enemies.\n\n\n==={{Item|Elder's Hellion Jacket|45}}===\n{{Skill|Life Steal Aura}} — As you constantly remain within the main group of your team, {{Skill|Life Steal Aura}} will help greatly with your survival if the enemy zerg pushes through your frontline. Always use {{Skill|Life Steal Aura}} to heal yourself if you fall to around 50% HP when enemies are nearby or you are split off from your team. Try to touch as many enemies as you can with the ability as the heal is based on how many targets it hits. You will become essentially immortal during the time you have this ability on but be careful not to get purged and always retreat before enemies could stunlock you.\n\n{{Skill|Balanced Mind}} — This passive not only increases both your damage and healing but also your defense. Its the only good choice for this build.\n\n\n==={{Item|Elder's Assassin Hood|45}}===\n{{Skill|Meditation}} — You want to use this ability after you used your {{Skill|Lunging Stabs}} combo in order to reset most of the cooldowns and get another chance to execute more targets. Try to only use this ability inside your own team and away from the frontline as you dont want to be interrupted before going back into the fight.\n\n{{Skill|Balanced Mind}} — This passive not only boosts your damage but also gives you a small defense increase.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — This ability boosts your movement speed and pairs perfectly with the build, boosting all damage by 15% but also lowering your defense when in use. You want to use this ability before using your {{Skill|Lunging Stabs}}. It pairs very well with both {{Skill|Throwing Blades}} and the Assassin's Spirit Charge damage buff. Be careful however as this ability also increases the damage you take for the duration of the run.\n\n{{Skill|Aggression}} — Aggression provides flat extra damage which is exactly what you need but also the only choice that makes sense.\n\n\n==={{Item|Elder's Undead Cape|45}}===\n{{Skill|Vanisher}} — This cape automatically procs and make you invisible if you hit 15% HP, boosting your survivability during engagements and allowing you to reposition out of a lost fight. Make sure to always try and stay as healthy as possible in order to avoid proccing the cape without a need for it.\n\n\n==Rotations==\n{{Rotation|Execute|Deadly Swipe, Deadly Swipe, Deadly Swipe, Throwing Blades, Defenseless Rush, Lunging Stabs}}\n*Once you dismount, make sure to always try and play around the middle of your zerg and not in the frontline. Your job is to finish off low targets more than it is to brawl and should always focus on that, looking for new targets to kill. Follow your tanks into engagements and try to make use of {{Skill|Deadly Swipe}} as much as possible to stack up your Assassin's Spirit Charges and improve your damage. Always keep your stacks up before using {{Skill|Throwing Blades}} into the enemy group, trying to hit at least 3 enemies with your ability. Use {{Skill|Defenseless Rush}} to properly position yourself and find a target below 40% for your {{Skill|Lunging Stabs}}\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — This comes into use whenever your {{Skill|Life Steal Aura}} is on cooldown or when your zerg has lost an engage and you need to move away. This potion will massively increase all your defensive stats, allowing you to take more damage while still allowing your healers to top you up.\n\n{{Item|Beef Stew}} — Beef Stew is a great increase to your damage with a flat bonus, making it a top choice for all DPS builds. Bloodletter focuses on maximizing damage output which makes the {{Item|Beef Stew}} an excellent option. Another option would be {{Item|Deadwater Eel Stew}} that combines the effect of {{Item|Beef Stew}} and {{Item|Pork Omelette}}, increasing your damage but also lowering your cooldowns but most players opt for {{Item|Beef Stew}} because of the damage. Always try to have atleast an 8.1 {{Item|Beef Stew}} for all ZVZ content.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7645": {
+     "ns": 0,
+     "pageid": 7645,
+     "revisions": [
+      {
+       "parentid": 8861,
+       "revid": 8952,
+       "timestamp": "2025-04-01T23:20:57Z"
+      }
+     ],
+     "title": "Bloodletter ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Bow_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Range_DPS_builds",
+     "sortkey": "Range DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7701,
+   "revid": 8929,
+   "title": "Mistpiercer ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Bow\n| mode = ZvZ\n| focus = Range DPS\n| strengths = Great Burst, Easy to Play\n| weaknesses = High Skill Ceiling\n}}\n==Overview==\nThis build focuses on the high damage of the {{Skill|Lucent Hawk}} coupled with {{Skill|Avalonian Beam}}. The build performs very well in defensive positions like castles or territory defense as the high range of the {{Item|Elder's Mistpiercer}}. With a straight-forward rotation that is easy to execute, this build can be used well by new players.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Mistpiercer\n| main hand weapon skills = Multishot, Ray of Light, Lucent Hawk, Slow Poison\n| head = Elder's Cowl of Purity\n| head skills = Avalonian Beam, Aggression\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Hunter Jacket\n| armor skills = Haste, Balanced Mind\n| shoes = Elder's Royal Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Gigantify Potion\n| food = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Mistpiercer|45}}===\n{{Skill|Multishot}} — This AOE knockback is a great choice as it hits multiple targets and pushes them away while also interrupting them. You can use this over walls in order to disrupt enemies when given the chance.\n\n{{Skill|Ray of Light}} — You want to use this to setup your kills and to help your team. This ability will root all enemies and can be very useful for both yourself and your team as it forces defensive CDs off your enemies and offers your offensive tanks to engage.\n\n{{Skill|Lucent Hawk}} — You can cast this ability up to 4 times, dealing equal damage every hit to any enemy hit. If possible, try to always use this on chokepoints where enemies are stacked close together so you can deal maximum damage.\n\n{{Skill|Slow Poison}} — Each auto-attack will slow the enemy. This will help chase enemies after winning fights but otherwise you don't have other good options for the passive skill.\n\n\n==={{Item|Elder's Hunter Jacket|45}}===\n{{Skill|Haste}} — You want to use this in combination with {{Skill|Defenseless Rush}} for a total of 40% damage increase. The auto-attack speed increase is irrelevant as you shouldn't be auto-attacking anyway as the main damage output is provided by {{Skill|Lucent Hawk}}.\n\n{{Skill|Balanced Mind}} — Another passive that increases your damage and even increases your defense by a little bit.\n\n\n==={{Item|Elder's Cowl of Purity|45}}===\n{{Skill|Avalonian Beam}} — Use this to deliver a quick burst of damage and interrupt spellcasting. As the beam travels a lot like the {{Skill|Lucent Hawk}}, you should use this in the same way on chokepoints where enemies clump up or on top of enemies caught in a {{Skill|Onslaught}}.\n\n{{Skill|Aggression}} — This passive increases your damage which is perfect for the build.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — A good damage increase on demand, great for increasing the damage of all your skills but most importantly increasing the damage you do with {{Skill|Avalonian Beam}} and {{Skill|Lucent Hawk}}. Keep in mind however that this will also lower your defenses and make you even squishier.\n\n{{Skill|Aggression}} — This increases your damage even further, can't go wrong with it.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — As the build can be rather mana intensive, this will help a lot with mana sustain as it triggers once your mana falls below 40% and it restores 80% of your total mana.\n\n\n==Rotations==\n{{Rotation|Burst Damage|Defenseless Rush, Haste, Ray of Light, Avalonian Beam, Lucent Hawk}}\n* Start the rotation with {{Skill|Defenseless Rush}} and {{Skill|Haste}} in order to boost all your damage by 40% as you look for a clump to use {{Skill|Ray of Light}} on, this will make it easier for you to land {{Skill|Avalonian Beam}}. Follow with {{Skill|Lucent Hawk}}, casting it 4 times in order to maximize the damage done.\n\n\n==Consumables==\n{{Item|Major Gigantify Potion}} — Use this as your defensive, pop it if you see enemies trying to catch you or if you get slowed down and you cannot avoid damage coming onto you. Can also be used during an engagement to soak damage while you do your rotation.\n\n{{Item|Beef Stew}} — As damage is the most important part of this build, you want to use the {{Item|Beef Stew}} to improve that. Try to use an 8.1 or 8.2 for best return on your investment.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7701": {
+     "ns": 0,
+     "pageid": 7701,
+     "revisions": [
+      {
+       "parentid": 8324,
+       "revid": 8929,
+       "timestamp": "2025-04-01T23:18:13Z"
+      }
+     ],
+     "title": "Mistpiercer ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

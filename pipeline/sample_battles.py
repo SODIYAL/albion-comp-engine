@@ -1,27 +1,45 @@
 #!/usr/bin/env python3
 """
 Sample recent battles and count which weapons real players actually brought,
-bucketed by fight size (VALIDATION V7 — the proper ~200-battle re-run of the
-original 24-battle eyeball sample).
+bucketed by FIGHT size (VALIDATION V7; semantics fixed per changeschapter2.md
+§E).
 
 Source: the albionbb API (api.albionbb.com) — the same community killboard
 the original V2 spike used. The official gameinfo events endpoint 504s too
 often to sample at scale (verified 2026-08-13); albionbb serves the same
 kill-event data reliably. Weapons come from kill events (killer + victim),
-so coverage is combatants, not lurkers — the same limitation V2 measured.
+so coverage is combatants, not lurkers.
 
-Public killboards do NOT record content type, only the fight — so the honest
-bucketing is by size: small (<12 players), mid (12–30), large (>30). The
-dashboard maps the user's party size to a bucket and shows "seen on X% of
-players in fights your size". Display evidence only: nothing here feeds the
-scoring engine until validation says it may (design doc §8, Phase 3).
+WHAT THIS DATA IS — AND IS NOT (§E). A battle's `totalPlayers` is the TOTAL
+FIGHT SIZE. It is NOT a party size: parties, side sizes and actual roster
+splits are not in the kill feed. These dimensions stay distinct here:
+
+  fight size          totalPlayers — the only size the killboard states
+  observed roster     players we saw in kill events — a LOWER BOUND
+  side size           unknown (not reconstructed; alliances overlap)
+  actual party size   unknown — never inferred from any of the above
+
+So the output is FIGHT-SIZE EQUIPMENT PREVALENCE: "share of observed
+combatants fielding X in fights of roughly this size". It is never party-size
+evidence, never a build recommendation, and selected abilities are UNKNOWN
+(kill events carry equipment only — stored as such, never inferred).
+Prevalence is not effectiveness: no win/loss dimension exists here at all.
+Display evidence only: nothing here feeds the scoring engine until
+validation says it may (design doc §8, Phase 3).
 
     /us/battles?minPlayers=N&page=P      20 battles per page, recent first
     /us/battles/kills?ids=<battleId>     kill events with Equipment.MainHand
         │
         ▼
-    out/battles_cache/<id>.json          per-battle cache (gitignored)
-    out/weapon_usage_v2.json             {buckets, meta, coverage}
+    out/battles_cache/<id>.json          per-battle RAW observation cache
+    out/weapon_usage_v2.json             {buckets, buckets_battles, meta,
+                                          battles, coverage}
+
+Loadout swaps are tracked: a player seen on two weapons counts once for
+EACH weapon (players_attributed counts player-weapon pairs), and
+`buckets_battles` aggregates at BATTLE level — in how many distinct fights a
+weapon appeared — because the players of one battle are correlated, not
+independent samples. Battles and events are deduplicated by id.
 
 MainHand Type "T5_2H_SHAPESHIFTER_MORGANA@4" -> catalog key
 "2H_SHAPESHIFTER_MORGANA". Unknown keys are tallied for the coverage stat.
@@ -38,6 +56,10 @@ CACHE = os.path.join(OUT, "battles_cache")
 UA = {"User-Agent": "albion-comp-engine usage sample (github.com/SODIYAL/albion-comp-engine)"}
 SLEEP = 0.5
 TIER_RE = re.compile(r"^T\d+_")
+
+# fight-size buckets (players in the WHOLE battle, both sides)
+def bucket_of(n):
+    return "small" if n < 12 else "mid" if n <= 30 else "large"
 
 
 def get_json(url, tries=4):
@@ -77,10 +99,6 @@ def battle_kills(api, battle_id):
     return events
 
 
-def bucket_of(n):
-    return "small" if n < 12 else "mid" if n <= 30 else "large"
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--battles", type=int, default=200)
@@ -96,34 +114,63 @@ def main():
     os.makedirs(CACHE, exist_ok=True)
 
     buckets = {b: {} for b in ("small", "mid", "large")}
+    battles_with = {b: {} for b in buckets}          # battle-level aggregation
     meta = {b: {"battles": 0, "players_attributed": 0} for b in buckets}
-    unknown, no_weapon, sampled, seen_ids = {}, 0, 0, set()
+    battles_index = []
+    unknown, no_weapon, sampled, swaps = {}, 0, 0, 0
+    seen_battles, seen_events = set(), set()
 
-    def ingest(bid, n_players):
-        nonlocal sampled, no_weapon
+    def ingest(bid, fight_size, start_time):
+        nonlocal sampled, no_weapon, swaps
         try:
             events = battle_kills(api, bid)
         except Exception as e:  # noqa: BLE001
             print(f"  battle {bid} kills failed: {e}")
             return
+        # per player, EVERY weapon they were seen on — a swap counts for each
+        # kit fielded, instead of whichever sighting arrived first (§E)
         per_player = {}
         for ev in events:
+            eid = ev.get("EventId") or ev.get("Id")
+            if eid is not None:
+                if eid in seen_events:
+                    continue              # event dedup across battle overlaps
+                seen_events.add(eid)
             for a in (ev.get("Killer"), ev.get("Victim")):
-                if not a or a.get("Id") in per_player:
+                if not a:
                     continue
-                per_player[a.get("Id")] = weapon_key((a.get("Equipment") or {}).get("MainHand"))
-        bucket = bucket_of(n_players)
+                wk = weapon_key((a.get("Equipment") or {}).get("MainHand"))
+                per_player.setdefault(a.get("Id"), set()).add(wk)
+        bucket = bucket_of(fight_size)
         attributed = 0
-        for wk in per_player.values():
-            if wk is None:
+        weapons_here = set()
+        for kits in per_player.values():
+            kits.discard(None)
+            if not kits:
                 no_weapon += 1
-            elif wk in known:
-                buckets[bucket][wk] = buckets[bucket].get(wk, 0) + 1
-                attributed += 1
-            else:
-                unknown[wk] = unknown.get(wk, 0) + 1
+                continue
+            if len(kits) > 1:
+                swaps += 1
+            for wk in kits:
+                if wk in known:
+                    buckets[bucket][wk] = buckets[bucket].get(wk, 0) + 1
+                    weapons_here.add(wk)
+                    attributed += 1
+                else:
+                    unknown[wk] = unknown.get(wk, 0) + 1
+        for wk in weapons_here:
+            battles_with[bucket][wk] = battles_with[bucket].get(wk, 0) + 1
         meta[bucket]["battles"] += 1
         meta[bucket]["players_attributed"] += attributed
+        battles_index.append({
+            "battle_id": bid, "server": args.server,
+            "fight_size": fight_size,            # totalPlayers — fight, not party
+            "observed_roster": len(per_player),  # lower bound, combatants only
+            "party_size": None,                  # unknown — never inferred (§E)
+            "side_size": None,                   # unknown — not reconstructed
+            "start_time": start_time,
+            "attributed": attributed,
+        })
         sampled += 1
         if sampled % 20 == 0:
             print(f"  {sampled} battles "
@@ -147,10 +194,10 @@ def main():
                 if sampled - start >= want:
                     break
                 bid, n_players = b.get("albionId"), b.get("totalPlayers", 0)
-                if not bid or bid in seen_ids:
-                    continue
-                seen_ids.add(bid)
-                ingest(bid, n_players)
+                if not bid or bid in seen_battles:
+                    continue                     # battle dedup
+                seen_battles.add(bid)
+                ingest(bid, n_players, b.get("startTime"))
 
     # phase 1: the general sweep; phase 2: top up the large bucket, which
     # recent-battle listings underrepresent (big fights are rare)
@@ -163,17 +210,33 @@ def main():
     total_unknown = sum(unknown.values())
     coverage = total_attr / max(1, total_attr + no_weapon + total_unknown)
     out = {
+        "semantics": ("FIGHT-SIZE EQUIPMENT PREVALENCE. Buckets are total "
+                      "fight size (both sides). Party size, side size and "
+                      "selected abilities are UNKNOWN — kill events carry "
+                      "equipment only. Prevalence is not effectiveness. "
+                      "Display evidence only; never feeds scoring."),
+        "sampling_frame": {"axis": "fight_size",
+                           "buckets": {"small": "<12", "mid": "12-30",
+                                       "large": ">30"},
+                           "source": "albionbb kill events (killer+victim)",
+                           "coverage_is": "combatants, not lurkers"},
+        "abilities": "unknown",
         "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
         "server": args.server, "battles_sampled": sampled,
-        "buckets": buckets, "meta": meta,
+        "buckets": buckets,                  # player-weapon pairs per bucket
+        "buckets_battles": battles_with,     # distinct fights containing the
+                                             # weapon — battle-level confidence
+        "meta": meta,
+        "battles": battles_index,            # raw per-battle observation index
+        "players_with_swaps": swaps,
         "coverage": round(coverage, 3),
         "unknown_keys_top": dict(sorted(unknown.items(), key=lambda kv: -kv[1])[:20]),
     }
     with open(os.path.join(OUT, "weapon_usage_v2.json"), "w", encoding="utf-8") as f:
         json.dump(out, f, indent=1, sort_keys=True)
     print(f"sampled {sampled} battles; weapon attribution {coverage:.0%} "
-          f"({total_attr} players known-weapon, {total_unknown} unknown key, "
-          f"{no_weapon} no weapon)")
+          f"({total_attr} player-weapon pairs, {swaps} players swapped kits, "
+          f"{total_unknown} unknown key, {no_weapon} no weapon)")
     print("wrote out/weapon_usage_v2.json")
     return 0
 

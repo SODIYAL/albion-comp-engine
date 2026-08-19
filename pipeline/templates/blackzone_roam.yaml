@@ -14,7 +14,7 @@
 #
 # PROVISIONAL — created 2026-08-12, weights NOT yet expert-adjudicated.
 # Role-ratio calibration comes from the first real comp for this content:
-# Timothy's "blap" (tests/meta_comps.yaml, 1×20 — 5 tank, 4 support, 7 dps
+# Timothy's "blap" (data/published_comps/, 1×20 — 5 tank, 4 support, 7 dps
 # incl. dedicated heal-cut / hp-cut / pierce / purge slots, 4 healers).
 # CIRCULARITY NOTE (VALIDATION V4): because this template's role ratios were
 # calibrated against blap, a V4 leave-one-out run on blap itself is weakened
@@ -56,9 +56,12 @@ requirements:
   burst_st:       {target: 1.7,  weight: 1,  soft_cap: 3.3,  scales: true}
   stun:           {target: 4.2,  weight: 4,  soft_cap: 8.4, scales: true}
   zone_control:   {target: 2.5,  weight: 3,  soft_cap: 6.7,  scales: true}
-  # PROVISIONAL 2026-08-18. Positioning, derived from role_hint (see
-  # build_dataset.inject_positioning) — "can this comp put damage on a clump
-  # from outside it". Added because the model could not tell a ranged bomb
+  # Positioning — "can this comp put damage on a clump from outside it".
+  # Since 2026-08-19 derived per spell bundle from the curated burst_aoe
+  # claim + the spell's own delivery/cast range with cited overrides
+  # (build_dataset.derive_ranged_presence, audit in
+  # out/ranged_presence_report.json). Added because the model could not
+  # tell a ranged bomb
   # core from a melee ball: both supplied burst_aoe identically, so a "clap"
   # request returned 10 frontline bodies and one real ranged bomb.
   # Target is deliberately MODEST and the weight LOW at content level: the

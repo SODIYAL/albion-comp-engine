@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Spear_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7660,
+   "revid": 8996,
+   "title": "Spirithunter ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Spear\n| mode = ZvZ\n| focus = Melee DPS\n| strengths = CCs by rooting, Burst Damage, Versatile\n| weaknesses = Mana issues, Low Mobility\n}}\n==Overview==\nThis ZvZ PvP build focuses on how to play the {{Item|Elder's Spirithunter}} in order to bring value to your guild's zerg. The {{Item|Elder's Spirithunter}} remains as one of the most popular weapon choices for ZvZ PvP with years of history being used for it's excellent range and CC. The versatility given by the {{Item|Elder's Spirithunter}} is often appreciated by all zergs and it keeps the weapon fresh even for players that played it for a long time. \n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Spirithunter\n| main hand weapon skills = Lunging Strike, Impaler, Corrupting Steel, Slow Poison\n| head = Elder's Assassin Hood\n| head skills = Meditation, Balanced Mind\n| cape = Elder's Martlock Cape\n| cape skills = Shield of Protection\n| armor = Elder's Hellion Jacket\n| armor skills = Life Steal Aura, Balanced Mind\n| shoes = Elder's Royal Sandals\n| shoes alternatives = Elder's Cleric Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Deadwater Eel Stew\n| food alternatives = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Spirithunter|45}}===\n{{Skill|Lunging Strike}} — This is your main poking ability. With a rather long range, you can use it to do poke damage on enemies nearby while ramaining out of their range. It will also give you a Spirit Spear Charge every time you hit someone and that increases your auto-attack damage and it can stack up to 3.\n\n{{Skill|Impaler}} — This range AOE skill allows you to support your allies by slowing down enemies. The damage is also very high for a W ability and you should always try to maximize it's efficiency by hitting stacks of enemies. Try to practice it a bit before using it in PvP however as there is a small delay between casting the ability and the spear coming out of the ground.\n\n{{Skill|Corrupting Steel}} — This is your main damaging ability and the reason why the {{Item|Elder's Spirithunter}} is a great choice for ZvZ. It launches a spear in any direction you choose that deals initial damage and also leaves a trail of magic behind that deals damage to anyone walking over or standing in it. Try to always use this in tight corridors and chokes as the main damage comes from enemies being stuck in your AOE.\n\n{{Skill|Slow Poison}} — A great choice for this build and to help finish off targets {{Skill|Slow Poison}} slows down enemies when you auto-attack them and helps with securing kills.\n\n\n==={{Item|Elder's Hellion Jacket|45}}===\n{{Skill|Life Steal Aura}} — Use this skill to heal yourself back up and become very difficult to deal with during group fights. Try to hit as many enemies as possible while you have this active in order to maximize the healing you receive. However, keep in mind that you can still be purged but you should be fine as long you don't walk into purging abilities like {{Skill|Mythical Web}}.\n\n{{Skill|Balanced Mind}} — Straight up increases your damage and defense, which is generally good and a no-brainer choice for DPS.\n\n\n==={{Item|Elder's Assassin Hood|45}}===\n{{Skill|Meditation}} — This is the ability that resets your cooldowns and should be used inside your zerg's safety as you remain vulnerable while channeling it. Use it mainly so you can use your {{Skill|Corrupting Steel}} again but keep in mind that it will lower all your active cooldowns so try to use as many abilities as possible before using this skill. \n\n{{Skill|Balanced Mind}} — This passive not only boosts your damage and healing but also enhances your defense by a little bit. It's the best choice for this build.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — Keep in mind that this skill not only increases your damage but also increases the damage you take. Try to use the run right before your combo so its still active when you use {{Skill|Corrupting Steel}} but try to make sure that the run is still active while your damage is ticking and the AOE is active on teh ground.\n\n{{Skill|Aggression}} — The standard choice for DPS builds. Remember that you can always switch to {{Skill|Courier}} to carry more weight when you loot items off kills.\n\n\n==={{Item|Elder's Martlock Cape|45}}===\n{{Skill|Shield of Protection}} — This is a great cape to use as it allows you to survive even in dire situations where you would normally die to burst damage. It actives when your HP lowers below 25%. \n\n\n==Rotations==\n{{Rotation|Damage Combo|Defenseless Rush, Impaler, Corrupting Steel, Meditation}}\n* Start off with {{Skill|Defenseless Rush}} to move alongside your frontline and watch for where your tanks engage. You want to use {{Skill|Impaler}} wherever you see a clump of enemies before throwing the {{Skill|Corrupting Steel}} on top of it in order to maximize the damage done by the {{Skill|Corrupting Steel}} AOE as targets remain slowed. {{Skill|Meditation}} can be used after to reset the cooldown on your abilities.\n\nConstantly use {{Skill|Lunging Strike}} to do damage to anyone near your zerg but try not to overextend.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Feel free to use this potion as a general damage reduction cooldown if you anticipate burst damage from the enemy zerg or if you just want to get deeper into the enemy backline without taking as much damage. Another option is also the {{Item|Major Gigantify Potion}} so the choices is yours. Keep in mind however that healers will have a tough time healing you during the {{Item|Major Gigantify Potion}} as your HP is greatly increased before it goes back to normal.\n\n{{Item|Deadwater Eel Stew}} — This food offers a good combination of damage and cooldown reduction. Another good option is {{Item|Beef Stew}} for flat damage increase and to boost your damage. Always try to go for at least 8.1 though if you choose the {{Item|Beef Stew}}.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7660": {
+     "ns": 0,
+     "pageid": 7660,
+     "revisions": [
+      {
+       "parentid": 8129,
+       "revid": 8996,
+       "timestamp": "2025-04-01T23:28:05Z"
+      }
+     ],
+     "title": "Spirithunter ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

@@ -44,7 +44,7 @@ Alternatives: Exalted Staff, Great Holy Staff, Redemption Staff
   reweight any template toward the caller's plan. The 2026-08-13 templates
   and all style multipliers are PROVISIONAL until the expert pass; role
   calibration for the 20-size pair came from two real shotcaller comps
-  (`tests/meta_comps.yaml`).
+  (`data/published_comps/` — the evidence layer, chapter 2).
 - **`dashboard/index.html` (Comp Forge) is the product page** — pick the
   content and playstyle, set the party size to however many actually show
   up (targets, floors and scaling adapt from 2 to 60), build the party in

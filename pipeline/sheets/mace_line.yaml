@@ -4,7 +4,7 @@
 - weapon: MAIN_MACE          # 1H Mace — mobility/stun bruiser-tank
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: tank             # was missing (2026-08-18): frontline bruiser-tank,
-                              # fielded as "Tank" in Timothy's blap (meta_comps)
+                              # fielded as "Tank" in Timothy's blap (data/published_comps)
   capabilities:
     - {cap: tankiness,  score: 2, evidence: WEAPON_STATS}
     - {cap: engage,     score: 2, evidence: MACELEAP}      # Deep Leap: gap-close

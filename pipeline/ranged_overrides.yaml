@@ -1,0 +1,89 @@
+# Curated overrides for the ranged_presence derivation (changeschapter2.md §B).
+#
+# The structural rule in build_dataset.py grants ranged_presence to a loadout
+# bundle when its curated burst_aoe evidence spell is ground/enemy-delivered
+# with cast_range >= 9. Structure cannot tell a THROWN area spell from a LEAP
+# that carries the wielder into the clump — both are `target: ground` with a
+# long cast range — so gap-closers are denied here explicitly, each citing the
+# game's own spell description and, where available, how real callers field
+# the weapon. An override is evidence, not taste: every entry needs a reason
+# and a source.
+#
+# decision: deny  — the spell must NOT ground ranged_presence
+# decision: grant — force a grant the structural rule missed (cite why)
+#
+# Validated at dataset build: the weapon must exist and the spell must be
+# equippable on it, or the release fails.
+
+- weapon: 2H_AXE_AVALON
+  spell: LETHAL_CLEAVER
+  decision: deny
+  reason: >
+    "Leap towards the targeted position and slam your axe into the ground" —
+    the AoE lands around the wielder after a gap-close; this is an engage,
+    not ranged pressure on a clump from outside it.
+  source: >
+    Spell description (ao-bin-dumps 5cf2e8e9); Timothy's blap sheet fields
+    Realmbreaker as melee dps — "Press E on engage, chop people" (2026-08).
+  as_of: 2026-08-19
+
+- weapon: 2H_CLEAVER_HELL
+  spell: CLAYMORESLASH
+  decision: deny
+  reason: >
+    "Dash towards the targeted position, dealing damage to all enemies you
+    pass through" — a dash line, wielder ends inside the enemy clump.
+  source: >
+    Spell description (ao-bin-dumps 5cf2e8e9); Timothy's blap sheet fields
+    Carving as melee pierce — "Pierce for engage" (2026-08).
+  as_of: 2026-08-19
+
+- weapon: 2H_DOUBLEBLADEDSTAFF
+  spell: DASH_KNOCKBACK
+  decision: deny
+  reason: >
+    "Leap towards the targeted position, dealing damage in a 5 radius" —
+    body-delivered impact AoE after a gap-close.
+  source: Spell description (ao-bin-dumps 5cf2e8e9).
+  as_of: 2026-08-19
+
+- weapon: 2H_DUALSWORD
+  spell: SPINATTACK
+  decision: deny
+  reason: >
+    "Leap towards the targeted position … deals damage in a 5 radius on
+    impact" — body-delivered impact AoE after a gap-close.
+  source: Spell description (ao-bin-dumps 5cf2e8e9).
+  as_of: 2026-08-19
+
+- weapon: 2H_QUARTERSTAFF
+  spell: VAULT_ATTACK
+  decision: deny
+  reason: >
+    "Vault Leap towards the targeted position … deals damage in a 5 radius"
+    — body-delivered impact AoE after a gap-close.
+  source: Spell description (ao-bin-dumps 5cf2e8e9).
+  as_of: 2026-08-19
+
+- weapon: 2H_KNUCKLES_KEEPER
+  spell: PUMMELING_STRIKES
+  decision: deny
+  reason: >
+    The cone channel reaches ~11m but the weapon is fielded as a diving
+    kidnap/brawl pick, not ranged clump pressure; its clump value is
+    curated separately (clump_create via Triple Kick).
+  source: >
+    Timothy's blap sheet — "E on engage EARLY, kidnap healers or
+    overcommitted tanks" (2026-08).
+  as_of: 2026-08-19
+
+- weapon: MAIN_FIRESTAFF_CRYSTAL
+  spell: FLAMEDASH
+  decision: deny
+  reason: >
+    "Transform into a Fireball … Fly up to 14 towards the targeted position,
+    deals damage to all enemies in a radius" — the wielder IS the projectile;
+    damage lands around self at the destination. Same body-delivery class as
+    the melee leaps.
+  source: Spell description (ao-bin-dumps 5cf2e8e9).
+  as_of: 2026-08-19

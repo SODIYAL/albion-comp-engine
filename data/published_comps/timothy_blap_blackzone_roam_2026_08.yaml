@@ -1,0 +1,343 @@
+# Production caller-comp record (changeschapter2.md §C/§D.3) — migrated from
+# tests/meta_comps.yaml 2026-08-19. Slot rows are VERBATIM source data; never
+# invent an entry. Normalization to exact spell/gear UniqueNames is GENERATED
+# by pipeline/build_builds.py (out/builds_index.json), never hand-written here.
+#
+# Slot fields: raw (source cell verbatim), weapons (catalog UniqueNames;
+# a list = source-named alternatives), role (curator annotation), role_raw
+# (source's own label), skills (verbatim "q3, w2, p1" 1-based indices),
+# potion/food/gear (verbatim), battlemount (outside the weapon model).
+kind: published_comp
+id: timothy_blap_blackzone_roam_2026_08
+source:
+  kind: caller_sheet
+  family: caller:timothy
+  author: Timothy
+  url: null
+  record: Shotcaller "Timothy" - blackzone roaming comp "blap" (brawl comp), single party of 20; relayed
+    verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices),
+    potions and food.
+  license: shared with the project by its author via the owner
+published: '2026-08-12'
+ingested: '2026-08-12'
+observed: null
+patch: '2026-07-21'
+snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4
+content: blackzone_roam
+style: brawl
+party_size:
+  min: 20
+  max: 20
+approval:
+  status: approved
+  basis: shotcaller-authored sheet (explicit caller approval for their own comp)
+  approved_by: Timothy (author); relayed by owner
+  as_of: '2026-08-12'
+parties:
+- name: blap
+  slots:
+  - raw: Camlann
+    weapons:
+    - 2H_MACE_MORGANA
+    role: main_tank
+    role_raw: Caller
+    skills: q1, w2, p4
+    gear:
+      offhand: null
+      helm: Knight Helmet
+      armor: Judicator Armor
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: Yes.
+    potion: Gig
+    food: Ava pork omelette
+  - raw: Heavy Mace
+    weapons:
+    - 2H_MACE
+    role: tank
+    role_raw: Tank
+    skills: q3, w2, p1
+    gear:
+      offhand: null
+      helm: Hellion Hood
+      armor: Guardian Armor
+      boots: Stalker Shoes
+      cape: Smugglar
+      note: Full monkey tank, shut down their zerg
+    potion: Gig
+    food: Ava pork omelette
+  - raw: Staff of Balance
+    weapons:
+    - 2H_ROCKSTAFF_KEEPER
+    role: tank
+    role_raw: Tank
+    skills: q3, w4, p1
+    gear:
+      offhand: null
+      helm: Hellion Hood
+      armor: Duskweaver Armor
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: Full monkey tank, shut down their zerg
+    potion: Gig
+    food: Ava pork omelette
+  - raw: Dreadstorm Monarch
+    weapons:
+    - MAIN_MACE_CRYSTAL
+    role: tank
+    role_raw: Tank
+    skills: q3, w2, p1
+    gear:
+      offhand: Caitiff or Aegis
+      helm: Hellion Hood
+      armor: Duskweaver Armor
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: Pre-engage, catch and pierce them, spam royal armor like CRAZY
+    potion: Gig
+    food: Ava pork omelette
+  - raw: 1h mace
+    weapons:
+    - MAIN_MACE
+    role: tank
+    role_raw: Tank
+    skills: q3, w2, p1
+    gear:
+      offhand: Caitiff or Aegis
+      helm: Hellion Hood
+      armor: Duskweaver Armor
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: Full monkey tank, shut down their zerg
+    potion: Gig
+    food: Ava pork omelette
+  - raw: Locus
+    weapons:
+    - 2H_ENIGMATICORB_MORGANA
+    role: support
+    role_raw: Support
+    skills: q2, w5, p5
+    gear:
+      offhand: null
+      helm: Assassin Hood
+      armor: Demon Armor
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: use E to guarantee our engage hits, mimic any mace for guardrune, demon for defense
+    potion: Gig
+    food: 7.1 omelette
+  - raw: Oathkeepers
+    weapons:
+    - 2H_DUALMACE_AVALON
+    role: support
+    role_raw: Support
+    skills: q1, w3, p1
+    gear:
+      offhand: null
+      helm: Assassin Hood
+      armor: Demon Armor
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: guard runes on chokes or when they engage.
+    potion: Gig
+    food: 7.1 omelette
+  - raw: Rootbound
+    weapons:
+    - 2H_SHAPESHIFTER_SET2
+    role: support
+    role_raw: Support
+    skills: q4, w4, p2
+    gear:
+      offhand: null
+      helm: Assassin Hood
+      armor: Judicator Armor
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: Find their engage and E to defend it.
+    potion: Gig
+    food: 7.1 omelette
+  - raw: Carving
+    weapons:
+    - 2H_CLEAVER_HELL
+    role: dps
+    role_raw: Pierce
+    skills: q2, w6, p2
+    gear:
+      offhand: null
+      helm: Knight Helmet
+      armor: Royal Armor
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: Pierce for engage, spam royal armor like CRAZY
+    potion: Gig
+    food: 7.1 omelette
+  - raw: Lifecurse
+    weapons:
+    - MAIN_CURSEDSTAFF_UNDEAD
+    role: support
+    role_raw: Purge
+    skills: q3, w2, p2
+    gear:
+      offhand: Astral Aegis
+      helm: Assassin Hood
+      armor: Judicator Armor
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: Purge their juice as we engage
+    potion: Gig
+    food: 7.1 omelette
+  - raw: Carrioncaller
+    weapons:
+    - 2H_HALBERD_MORGANA
+    role: dps
+    role_raw: Heal Cut
+    skills: q3, w1, p3
+    gear:
+      offhand: null
+      helm: Stalker Hood
+      armor: Royal Armor
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: Press E on engage or low targets, chop people.
+    potion: Gig
+    food: 7.1 omelette
+  - raw: Realmbreaker
+    weapons:
+    - 2H_AXE_AVALON
+    role: dps
+    role_raw: HP Cut
+    skills: q3, w1, p3
+    gear:
+      offhand: null
+      helm: Knight Helmet
+      armor: Royal Armor
+      boots: Stalker Shoes
+      cape: Smugglar
+      note: Press E on engage, chop people, royal armor like CRAZY
+    potion: Gig
+    food: 7.1 omelette
+  - raw: Demonfang
+    weapons:
+    - MAIN_DAGGER_HELL
+    role: dps
+    role_raw: Dps
+    skills: q2, w1, p4
+    gear:
+      offhand: Facebreaker
+      helm: Soldier Helmet
+      armor: Hellion Jacket
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: Keep dagger stacks, kill engage
+    potion: Gig
+    food: 8.1 beef stew
+  - raw: Clarent Blade
+    weapons:
+    - MAIN_SCIMITAR_MORGANA
+    role: dps
+    role_raw: Dps
+    skills: q2, w6, p2
+    gear:
+      offhand: Mistcaller
+      helm: Leather hood(cleanse)
+      armor: Hellion Jacket
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: E on engage, E low targets or 2nd engage in between
+    potion: Gig
+    food: 8.1 beef stew
+  - raw: Ursine Maulers
+    weapons:
+    - 2H_KNUCKLES_KEEPER
+    role: dps
+    role_raw: Dps
+    skills: q2, w1, p4
+    gear:
+      offhand: null
+      helm: Leather Hood(cleanse)
+      armor: Hellion Jacket
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: E on engage EARLY, kidnap healers or overcommitted tanks
+    potion: Gig
+    food: 8.1 beef stew
+    note_curation: 'RESOLVED 2026-08-12 (owner correction): the kidnap is NOT the E - it is the shared
+      W Triple Kick ("Pulls up to 1 enemy player along with you"; this loadout runs w1 = Triple Kick).
+      Scored clump_create 1 (QW) across the knuckles pool; Black Hands excluded (different W row, no Triple
+      Kick).'
+  - raw: Bloodletter
+    weapons:
+    - MAIN_RAPIER_MORGANA
+    role: dps
+    role_raw: Dps
+    skills: q2, w2, p4
+    gear:
+      offhand: Facebreaker
+      helm: Stalker Hood
+      armor: Hellion Jacket
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: Execute the engage, execute healers, execute morale, execute, execute, execute...
+    potion: Gig
+    food: 8.1 beef stew
+  - raw: Hallowfall
+    weapons:
+    - MAIN_HOLYSTAFF_AVALON
+    role: healer
+    role_raw: Healer
+    skills: q3, w4, p1
+    gear:
+      offhand: Mistcaller
+      helm: Soldier Helm
+      armor: Cleric Robe
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: Heal people around you. Don't stack on other healers.
+    potion: Gig
+    food: dusthole crab omelette
+  - raw: Hallowfall
+    weapons:
+    - MAIN_HOLYSTAFF_AVALON
+    role: healer
+    role_raw: Healer
+    skills: q3, w2, p4
+    gear:
+      offhand: Mistcaller
+      helm: Guardian Helm
+      armor: Judicator Armor
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: Heal people around you, save W for tanks.
+    potion: Gig
+    food: dusthole crab omelette
+  - raw: Redemption
+    weapons:
+    - 2H_HOLYSTAFF_UNDEAD
+    role: healer
+    role_raw: Tanky Healer
+    skills: q1, w2, p4
+    gear:
+      offhand: null
+      helm: Leather Hood(cleanse)
+      armor: Judicator Armor
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: Heal tanks or very low targets, save E for reset or big heals to be called.
+    potion: Gig
+    food: dusthole crab omelette
+  - raw: Blight
+    weapons:
+    - 2H_NATURESTAFF_HELL
+    role: healer
+    role_raw: Healer
+    skills: q1, w5, p1
+    gear:
+      offhand: null
+      helm: Soldier Helm
+      armor: Cleric Robe
+      boots: Stalker Shoes
+      cape: Smuggler
+      note: 'Keep 2 stacks on maximum # of targets, add 3rd stack and W on W cooldown. Use E to reposition
+        when necessary.'
+    potion: Gig
+    food: dusthole crab omelette

@@ -1,0 +1,46 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Mace_builds",
+     "missing": "",
+     "sortkey": ""
+    },
+    {
+     "*": "Tank_builds",
+     "sortkey": "Tank"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7679,
+   "revid": 8332,
+   "title": "One Handed Mace PvP ZvZ Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Mace\n| mode = ZvZ\n| focus = Tank\n| strengths = Valuable Utility\n| weaknesses = No run on boots\n}}\n==Overview==\nThis One-Handed Mace ZvZ PvP build focuses on providing utility to your zerg while being hard to kill, as well as aiding in the clumping of enemies with {{Skill|Air Compressor}}. Variations of this build are frequently used by shotcallers when leading a zerg, as it offers ample survivability along with valuable defensive skills like {{Skill|Force Shield}} and {{Skill|Displacement Immunity}}.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Mace\n| main hand weapon skills = Sacred Ground, Snare Charge, Deep Leap, Energetic\n| off hand weapon = Elder's Leering Cane\n| off hand weapon alternatives = Elder's Astral Aegis\n| head = Elder's Knight Helmet\n| head alternatives = Elder's Judicator Helmet\n| head skills = Displacement Immunity, Toughness\n| cape = Elder's Martlock Cape\n| cape skills = Shield of Protection\n| armor = Elder's Judicator Armor\n| armor skills = Force Shield, Toughness, Protective Instinct\n| armor alternatives = Elder's Demon Armor\n| shoes = Elder's Cleric Sandals\n| shoes skills = Blink, Concentration\n| potion = Major Resistance Potion\n| food = Avalonian Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Mace|45}}===\n{{Skill|Sacred Ground}} —  Very effective when placed in chokepoints due to the silence and slow it provides. Additionally, positioning it beneath enemies using channeled abilities will interrupt them, making it doubly useful.\n\n{{Skill|Snare Charge}} — A great skill for catching and slowing enemies, as the root can enable you or your allies to follow up with additional CC or damage. {{Skill|Air Compressor}} is an excellent choice when you can catch an enemy zerg without CC resistance, but you need to time it carefully to make it effective.\n\n{{Skill|Deep Leap}} — Target enemy clumps or occasionally use it as just a stun on priority targets. If you're in a pinch and won't be able to use it to assist your zerg, it can serve as an escape movement skill.\n\n{{Skill|Energetic}} — Great for sustaining your mana, but once you're familiar with the build and confident you won't need the mana regeneration, you can switch to {{Skill|Stunning Strike}}.\n\n\n==={{Item|Elder's Judicator Armor|45}}===\n{{Skill|Force Shield}} — An amazing skill for saving the zerg or tanks that get caught. Demon armor with {{Skill|Protection of the Fiends}} is invaluable if used well, but it can lead to more deaths if an ally isn't also using {{Skill|Protection of the Fiends}} simultaneously to provide you with the extra resistance. If your zerg has a few Judicator armors, you should opt for using demon armor instead.\n\n{{Skill|Toughness}} — Straight up increases your defenses. Always good on any tank build.\n\n{{Skill|Protective Instinct}} — The best option, and it can also be used occasionally to draw aggro from mobs, preventing them from attacking healers or other allies.\n\t\n==={{Item|Elder's Knight Helmet|45}}===\n{{Skill|Displacement Immunity}} — You'll usually use this skill when engaging enemies to avoid getting interrupted, but remember you can also use it to support allies. {{Skill|Electric Discharge}} from the Judicator Helm is also a good alternative option but currently not used often with this build.\n\n{{Skill|Toughness}} — The standard choice for this build. Some people opt for {{Skill|Tenacity}}, but prioritizing your defensive stats is usually more important.\n\n\n==={{Item|Elder's Cleric Sandals|45}}===\n{{Skill|Blink}} — A good movement skill to readjust and help with landing good {{Skill|Air Compressor}} clumps.\n\n{{Skill|Aggression}} — The standard choice for this build but you can also use {{Skill|Efficiency}} Remember that you can always switch to {{Skill|Courier}} if needed.\n\n\n==={{Item|Elder's Martlock Cape|45}}===\n{{Skill|Shield of Protection}} — Used in most tank builds, it can sometimes save you when caught in clumps. It activates automatically, like most capes, making it easy to benefit from.\n\n\n==Rotations==\n{{Rotation|Engage|Blink, Snare Charge, Deep Leap }}\n* Tanks typically use skills situationally rather than following a strict rotation. Use {{Skill|Blink}} to reposition yourself, and {{Skill|Snare Charge}} to root enemies, allowing your zerg to catch up and group enemies together. As a follow-up or to catch even more enemies, you can also utilize {{Skill|Deep Leap}}.\n{{Rotation|Engage 2|Blink, Air Compressor }}\n* Switch to {{Skill|Air Compressor}} on your weapon. Use {{Skill|Blink}} to help you get into a good position, and use {{Skill|Air Compressor}} when the enemy's CC resistance isn't active. Keep an eye out for when the enemy zerg uses {{Skill|Displacement Immunity}}, and use your {{Skill|Air Compressor}} when it's on cooldown.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Use it when you get targeted or get caught in a clump. Otherwise you just use it as a general defensive cooldown but you are tough enough to save it for when you really need it.\n\n{{Item|Avalonian Pork Omelette}} — The buff to your defensive stats helps all tank builds and the cooldown reduction is always great to have. You could use a {{Item|Pork Omelette}} but it is not recommended.\n\n\n==Comments==\n{{Comments}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7679": {
+     "ns": 0,
+     "pageid": 7679,
+     "revisions": [
+      {
+       "parentid": 8233,
+       "revid": 8332,
+       "timestamp": "2024-05-10T15:42:45Z"
+      }
+     ],
+     "title": "One Handed Mace PvP ZvZ Build"
+    }
+   }
+  }
+ }
+}

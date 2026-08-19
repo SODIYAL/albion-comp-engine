@@ -14,7 +14,7 @@
 #
 # PROVISIONAL — created 2026-08-12, weights NOT yet expert-adjudicated.
 # Role-ratio calibration comes from Deadlyhooker's large-content comp
-# (tests/meta_comps.yaml, castle/territory/mass roam, 3×20): per party
+# (data/published_comps/, castle/territory/mass roam, 3×20): per party
 # roughly 5–6 frontline/utility, 3 arcane-class supports, an Exalted slot in
 # ALL three parties (cleanse + zone denial), 2–3 healers, and an AoE bomb
 # core (Permafrost ×2, Occult beam, Hoarfrost obelisk). Battlemount slots

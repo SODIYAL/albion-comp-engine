@@ -7,7 +7,7 @@
 # constraint violations there surface as advice (off-comp flags), never errors.
 #
 # PROVISIONAL — seeded from the only real large-group evidence in the repo:
-# the four curated caller parties in tests/meta_comps.yaml (Deadlyhooker
+# the four curated caller parties in data/published_comps/ (Deadlyhooker
 # parties 1-3, castle/territory/mass-roam 3x20, 2026-08-12; Timothy "blap"
 # blackzone roam 20, 2026-08-12), battlemount slots excluded. Every number
 # cites its tally. Owner review pass expected; the same circularity caveat as
@@ -22,7 +22,7 @@ roles:
   overrides:
     # Exalted Staff is a holy line weapon (role_hint: healer) but is fielded
     # as the standing cleanse/zone-denial slot — tagged "support" by the
-    # curator in ALL FOUR real parties (meta_comps.yaml). Counting it as a
+    # curator in ALL FOUR real parties (data/published_comps/). Counting it as a
     # healer would let a forged 11-man treat Exalted as one of its 2-3 heals.
     2H_HOLYSTAFF_CRYSTAL: support
 
@@ -30,8 +30,10 @@ roles:
 # predicate when its flat capability score meets every listed minimum.
 predicates:
   # "real ranged AoE damage": can put an AoE bomb on a clump from outside it.
-  # burst_aoe >= 2 + the measured attackrange-derived ranged_presence flag
-  # (build_dataset.inject_positioning). 26 of 137 weapons qualify.
+  # burst_aoe >= 2 + the evidence-derived ranged_presence flag — per spell
+  # bundle, from the curated burst_aoe claim + the spell's own delivery and
+  # cast range, with cited overrides (build_dataset.derive_ranged_presence;
+  # audit trail in out/ranged_presence_report.json).
   ranged_aoe_core: {burst_aoe: 2, ranged_presence: 1}
 
 # ---------------------------------------------------------------------------
@@ -39,7 +41,7 @@ predicates:
 # 2026-08-18 failure analysis flagged (5, 7, 10-12, 15, 20). min/max are
 # absolute counts for the requested size; a missing key = unconstrained.
 #
-# Seeding tallies per 20 weapon slots (meta_comps.yaml, Exalted counted
+# Seeding tallies per 20 weapon slots (data/published_comps/, Exalted counted
 # support per the override): Deadlyhooker P1 = 3 healer / 5 frontline /
 # 4 support / 8 dps; P2 (16 slots) = 2 / 3 / 6 / 5; P3 (14 slots) =
 # 2 / 2 / 6 / 4 (its frontline lives on battlemounts, outside this model);
@@ -90,7 +92,7 @@ groups:
     max: 1
     weapons: [2H_HOLYSTAFF_CRYSTAL]
     # Exalted appears EXACTLY once in every one of the four real parties —
-    # a standing utility slot, never stacked (meta_comps.yaml).
+    # a standing utility slot, never stacked (data/published_comps/).
 
 # ---------------------------------------------------------------------------
 # Viability layer (expert-curated, content/size-aware). PERMISSIVE BY DESIGN:
@@ -100,18 +102,32 @@ groups:
 # the DEFAULT generation/suggestion pool; `core` adds a small prior bonus.
 viability:
   exclusions:
-    # Owner ruling 2026-08-18: for GENERATED comps at party size >= 10 the
-    # basic 1H Cursed Staff, Iron-clad Staff and Chillhowl are not valid
-    # default large-group choices. Manually-added / live-party instances
-    # still load and score, but are flagged off-comp with replacement
-    # advice. `allow` re-admits a weapon per content id when an expert rule
-    # says so (empty today).
+    # EVIDENCE-GATED ELIGIBILITY, not a permanent hardcoded ban (chapter-2
+    # §F). Context attaches to the EXACT weapon: family-level evidence (a
+    # popular Avalonian frost staff cousin, a curated cursed line) never
+    # re-admits these. Manually-added / live-party instances still load and
+    # score, but are flagged off-comp with replacement advice. Two exits:
+    #   - `allow` re-admits a weapon per content id when an expert rule says
+    #     so, or
+    #   - the evidence gate: pipeline/build_builds.py flags any excluded
+    #     weapon that gains a CURRENT approved canonical large-group build
+    #     (exact weapon, party size >= min_size) so the owner can lift the
+    #     entry — the data clears the gate, not a code change.
     - weapons: [MAIN_CURSEDSTAFF, 2H_IRONCLADEDSTAFF, MAIN_FROSTSTAFF_AVALON]
       min_size: 10
       allow: {}
+      evidence:
+        reason: >
+          Not valid default large-group choices: no caller sheet, published
+          build or observation fields them at party size >= 10, and the
+          2026-08-19 ranged-presence rework confirmed none delivers ranged
+          AoE via any selected spell (out/ranged_presence_report.json).
+        source: "owner ruling 2026-08-18; re-grounded against the evidence layer 2026-08-19"
+        as_of: "2026-08-19"
+        clears_when: "an approved canonical build for the exact weapon at party size >= 10"
   # Additive prior (scoring.weights.viability x core_bonus) for weapons a
   # real caller has fielded in this size class. Large list = the union of
-  # the four meta_comps.yaml parties' weapon slots (battlemounts excluded).
+  # the four data/published_comps/ parties' weapon slots (battlemounts excluded).
   # No mid/small lists yet: no curated comps at those sizes exist — PROVISIONAL,
   # empty means neutral, never a penalty.
   core_bonus: 1.0

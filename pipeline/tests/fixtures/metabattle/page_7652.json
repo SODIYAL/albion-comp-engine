@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "War_Gloves_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7652,
+   "revid": 9006,
+   "title": "Hellfire Hands ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = War Gloves\n| mode = ZvZ\n| focus = Melee DPS\n| strengths = Easy to play, High AoE Damage, Good Self-Healing\n| weaknesses = Low Mobility, Bad 1vs1\n}}\n==Overview==\nThis {{Item|Elder's Hellfire Hands}} ZvZ PvP build prioritizes delivering high burst AoE damage during pushes and also offering great healing reduction through the {{Skill|Infernal Boulder}} that sets targets on fire. This build is highly requested in all zergs due to the current brawling meta where fights are decided in melee range. As any other War Gloves, the {{Item|Elder's Hellfire Hands}} also provide great mobility, allowing you to kite and reposition with ease during long fights.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Hellfire Hands\n| main hand weapon skills = Dragon Leap, Triple Kick, Infernal Boulder, Hard to Catch\n| head = Elder's Assassin Hood\n| head skills = Meditation, Balanced Mind\n| cape = Elder's Martlock Cape\n| cape alternatives = Elder's Lymhurst Cape\n| cape skills = Shield of Protection\n| armor = Elder's Hellion Jacket\n| armor alternatives = Elder's Soldier Armor\n| armor skills = Life Steal Aura, Balanced Mind\n| shoes = Elder's Royal Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Beef Stew\n| food alternatives = Deadwater Eel Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Hellfire Hands|45}}===\n{{Skill|Dragon Leap}} — This is one of your two movement abilities. With a very short cooldown, {{Skill|Dragon Leap}} can be used a lot to gain distance from enemies or to chase down fleeing players. If you manage to kick at least one enemy, then you can recast the ability with the same 2.5m range and the target hit will be knocked into the air for 0.5s. \n\n{{Skill|Triple Kick}} — This is your secondary movement ability and couples perfectly with {{Skill|Dragon Leap}} helping you move away from a fight and repositioning. With {{Skill|Hard to Catch}}, you also get higher resistances and CC resistance, it should be used right after a use of {{Skill|Infernal Boulder}} in order to help with your retreat.\n\nMaking contact with an enemy player when using this ability will drag the enemy along with you so try to be careful not to drag enemies along and bring them to your exposed healers.\n\n{{Skill|Infernal Boulder}} — The AOE ability will launch a fireball at a location before it bounces off in the direction your character is facing when you cast the ability. The first hit deals the most damage and with the large AOE you should always try to hit as many enemies as possible while the extra bounces still decrease the healing received by targets hit but won't do nearly as much damage.\n\n{{Skill|Hard to Catch}} — This passive offers you extra resistance when you use {{Skill|Triple Kick}} and helps a lot with your overall survival.\n\n\n==={{Item|Elder's Hellion Jacket|45}}===\n{{Skill|Life Steal Aura}} — Because of your role as a melee DPS, you will always find yourself being at the front of your zerg in an attempt to position for a good {{Skill|Infernal Boulder}}. {{Skill|Life Steal Aura}} will heal you based on how many enemies you hit with the ability and that for you should always try to touch as many as possible!\n\n{{Skill|Balanced Mind}} — This passive not only increases both your damage and healing but also your defense and is a standard choice for DPS players.\n\n\n==={{Item|Elder's Assassin Hood|45}}===\n{{Skill|Meditation}} — Use this after in case you need to cast two {{Skill|Infernal Boulder}} in quick succession but keep in mind that this ability will lower the cooldown of ALL your abilities and that for you should use as many spells as possible before using it. Always try to be safe when you use this ability as it has a rather long channel time!\n\n{{Skill|Balanced Mind}} — This passive not only boosts your damage but also enhances your defense. It's the optimal choice for this build as we aim to maximize damage potential.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — This ability pairs perfectly with the build, boosting all damage by 15% but also lowering your defense when in use. You want to use this ability before engaging the enemy zerg and before you use your {{Skill|Infernal Boulder}}.\n\n{{Skill|Aggression}} — Aggression provides flat extra damage which is exactly what you need for this build while the other three options are worthless to you.\n\n\n==={{Item|Elder's Martlock Cape|45}}===\n{{Skill|Shield of Protection}} — This will save you a lot of the time when you are overextending or caught by enemies while your team already retreated. Keep in mind that it only activates when you HP drops to below 25% so you should make sure you stay above that threshold in order to not activate it without a reason.\n\n\n==Rotations==\n{{Rotation|Bomb Rotation + Retreat|Defenseless Rush, Infernal Boulder, Triple Kick, Dragon Leap, Meditation}}\n*The damage rotation is quite simple. Use {{Skill|Defenseless Rush}} to get closer to the enemy frontline and find a group of stacked enemies, particularly on gates when fighting over castles or territories. Throw your {{Skill|Infernal Boulder}} on top of them and angle yourself so the bounces travel across all enemies behind, debuffing them. Retreat using {{Skill|Triple Kick}} and {{Skill|Dragon Leap}} and position yourself behind your frontline so you can safely cast {{Skill|Meditation}} and do it all over again.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — This comes into use whenever your {{Skill|Life Steal Aura}} is on cooldown or when your zerg has lost an engage and you need to move away. Keep in mind however that you aren't invulnerable while under the effect of this potion and you should still use it to retreat.\n\n{{Item|Beef Stew}} — Beef Stew significantly boosts your damage output, making it a top choice for all DPS builds and one of the standard choices. Always try to bring atleast one 8.1 or 8.2 version of this. Another option would be {{Item|Deadwater Eel Stew}} that combines the effect of {{Item|Beef Stew}} and {{Item|Pork Omelette}} and is another popular choice but it remains considerably more expensive.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7652": {
+     "ns": 0,
+     "pageid": 7652,
+     "revisions": [
+      {
+       "parentid": 8071,
+       "revid": 9006,
+       "timestamp": "2025-04-01T23:29:24Z"
+      }
+     ],
+     "title": "Hellfire Hands ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "War_Gloves_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7513,
+   "revid": 9008,
+   "title": "Spiked Gauntlets ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = War Gloves\n| mode = ZvZ\n| focus = Melee DPS\n| strengths = Easy to play, High AoE Damage, Good Self-Healing\n| weaknesses = Low Mobility, Bad 1vs1\n}}\n==Overview==\nThis Spiked Gauntlets ZvZ PvP build prioritizes delivering high burst AoE damage during pushes, with focus on eliminating tanks. {{Skill|Gravitational Collapse}} deals extra damage to players wearing plate armor and slows them down by 75%. This build excels when your zerg is in a defensive stance, aiming to prevent enemy engages by dispatching tanks before they can reach your zerg.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Spiked Gauntlets\n| main hand weapon skills = Dragon Leap, Triple Kick, Gravitational Collapse, Hard to Catch\n| head = Elder's Assassin Hood\n| head skills = Meditation, Balanced Mind\n| cape = Elder's Lymhurst Cape\n| cape alternatives = Elder's Martlock Cape\n| cape skills = Energy Reserve\n| armor = Elder's Hellion Jacket\n| armor skills = Life Steal Aura, Balanced Mind\n| shoes = Elder's Royal Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Gigantify Potion\n| potion alternatives = Major Resistance Potion\n| food = Beef Stew\n| food alternatives = Deadwater Eel Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Spiked Gauntlets|45}}===\n{{Skill|Dragon Leap}} — This is one of your two movement abilities. With a very short cooldown, {{Skill|Dragon Leap}} can be spammed on cooldown allowing you to gain distance from enemies or to chase down fleeing players. If you manage to kick at least one enemy, then you can recast the ability with the same 2.5m range and the target hit will be knocked into the air for 0.5s. \n\n{{Skill|Triple Kick}} — This is your secondary movement ability and couples perfectly with {{Skill|Dragon Leap}} helping you move away from a fight and repositioning. However, due to {{Skill|Hard to Catch}} boosting your damage resistances and CC resistance, it should be used right after a use of {{Skill|Gravitational Collapse}} in order to help with your survival in case an enemy zerg follows you in your retreat. \n\nMaking contact with an enemy player when using this ability will drag the enemy along with you so try to be careful not to drag enemies along and bring them to your zerg's backline when using this ability.\n\n{{Skill|Gravitational Collapse}} — This is your bread & butter, your main damaging ability that deals AoE damage in a cone depending on the armor type the enemy wears, dealing the most damage to players wearing plate. The ability also slows based on armor type. Keep in mind however that once an enemy is hit by {{Skill|Gravitational Collapse}}, they become immune for one second to another {{Skill|Gravitational Collapse}} so timing your damage is very important.\n\n{{Skill|Hard to Catch}} — This passive offers you extra resistance after a use of {{Skill|Gravitational Collapse}} and its the ideal choice for ZvZ settings where survival is important and any bit of extra defense is needed.\n\n\n==={{Item|Elder's Hellion Jacket|45}}===\n{{Skill|Life Steal Aura}} — Because of your role as a melee bomber, you will always find yourself being at the front of your zerg in an attempt to reach their tanks. {{Skill|Life Steal Aura}} will help greatly with your survival if the enemy zerg pushes through your frontline or if you find yourself surrounded by enemies. With the {{Skill|Life Steal Aura}} healing you more based on how many targets it hits, it will allow you to become more or less impossible to kill while the effect is active. However, you should still do your best to get away from the situation before it runs out.\n\n{{Skill|Balanced Mind}} — This passive not only increases both your damage and healing but also your defense. It is the only choice for this build as we try to achieve as much damage as possible.\n\n\n==={{Item|Elder's Assassin Hood|45}}===\n{{Skill|Meditation}} — You want to use this ability after you used your {{Skill|Gravitational Collapse}} in order to reset most of the cooldown and get another chance to use the ability as fast as possible. Because the ability lowers all your cooldowns, try to use both {{Skill|Triple Kick}} and {{Skill|Dragon Leap}} to reposition before using the ability so you don't get interrupted or killed during it's cast time. Always try to be in a safe spot when using this as you are exposed for the duration of the cast.\n\n{{Skill|Balanced Mind}} — This passive not only boosts your damage and healing but also enhances your defense. It's the optimal choice for this build as we aim to maximize damage potential.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — This ability pairs perfectly with the build, boosting all damage by 15% but also lowering your defense when in use. You want to use this ability before engaging a target as a buff before you'd use {{Skill|Gravitational Collapse}}.\n\n{{Skill|Aggression}} — Aggression provides flat extra damage which is exactly what you need for this build while the other three options are worthless to you.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — This cape offers amazing mana regen once your mana drops below 40%, giving you back 80% mana on a roughly 2 minutes cooldown depending on the quality of the cape. Because the build is quite mana intensive, this cape fixes that problem. Another option would be {{Item|Elder's Martlock Cape}} for it's defense increase whenever your HP drops below 25% if you are in a defensive position protecting a fort or in a fight that doesn't last too long.\n\n\n==Rotations==\n{{Rotation|Bomb Rotation + Retreat|Defenseless Rush, Gravitational Collapse, Triple Kick, Dragon Leap}}\n*You want to start your combo by using {{Skill|Defenseless Rush}} in order to position yourself ahead and close enough to the enemy frontline to cast {{Skill|Gravitational Collapse}}, make sure to align yourself properly so the cone damage hits as many enemies as possible. Once you've delivered the damage, you want to use {{Skill|Triple Kick}} coupled with {{Skill|Dragon Leap}} in order to move back and away from the enemy and reset your abilities using {{Skill|Meditation}}. Make sure to wait for your {{Skill|Defenseless Rush}} to be fully off cooldown and useable before you go back in for round 2!\n\n\n==Consumables==\n{{Item|Major Gigantify Potion}} — This comes into use whenever your {{Skill|Life Steal Aura}} is on cooldown or when your zerg has lost an engage and you need to move away. It will increase you Max HP, making you incredibly difficult to kill while also making you immune to Forced Movement Effects. It will also increase your character model size however which makes it obvious for the enemy whenever the potion runs out so they can wait for you to go back to normal before killing you. \n\n{{Item|Beef Stew}} — Beef Stew significantly enhances your damage output with a flat bonus, making it a top choice for all DPS builds. Spiked Gauntlets are no exception, as the noticeable damage boost they provide makes them an excellent option. Another option would be {{Item|Deadwater Eel Stew}} that combines the effect of {{Item|Beef Stew}} and {{Item|Pork Omelette}} but normally the damage increase of {{Item|Beef Stew}} remains preferable.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7513": {
+     "ns": 0,
+     "pageid": 7513,
+     "revisions": [
+      {
+       "parentid": 8054,
+       "revid": 9008,
+       "timestamp": "2025-04-01T23:29:31Z"
+      }
+     ],
+     "title": "Spiked Gauntlets ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

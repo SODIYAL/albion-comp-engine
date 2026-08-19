@@ -1,0 +1,491 @@
+{
+ "counts": {
+  "approved": 70,
+  "candidate": 31,
+  "canonical_defaults": 46,
+  "quarantined_fields": 2,
+  "quarantined_records": 2,
+  "records": 101
+ },
+ "exclusion_gate": [],
+ "kind": "validation_result",
+ "problems": [],
+ "promotions": [
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:11",
+   "content": "blackzone_roam",
+   "weapon": "2H_AXE_AVALON"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:8",
+   "content": "blackzone_roam",
+   "weapon": "2H_CLEAVER_HELL"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:6",
+   "content": "blackzone_roam",
+   "weapon": "2H_DUALMACE_AVALON"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:5",
+   "content": "blackzone_roam",
+   "weapon": "2H_ENIGMATICORB_MORGANA"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:10",
+   "content": "blackzone_roam",
+   "weapon": "2H_HALBERD_MORGANA"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:18",
+   "content": "blackzone_roam",
+   "weapon": "2H_HOLYSTAFF_UNDEAD"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:14",
+   "content": "blackzone_roam",
+   "weapon": "2H_KNUCKLES_KEEPER"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:1",
+   "content": "blackzone_roam",
+   "weapon": "2H_MACE"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:0",
+   "content": "blackzone_roam",
+   "weapon": "2H_MACE_MORGANA"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:19",
+   "content": "blackzone_roam",
+   "weapon": "2H_NATURESTAFF_HELL"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:2",
+   "content": "blackzone_roam",
+   "weapon": "2H_ROCKSTAFF_KEEPER"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:7",
+   "content": "blackzone_roam",
+   "weapon": "2H_SHAPESHIFTER_SET2"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:9",
+   "content": "blackzone_roam",
+   "weapon": "MAIN_CURSEDSTAFF_UNDEAD"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:12",
+   "content": "blackzone_roam",
+   "weapon": "MAIN_DAGGER_HELL"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:16",
+   "content": "blackzone_roam",
+   "weapon": "MAIN_HOLYSTAFF_AVALON"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:4",
+   "content": "blackzone_roam",
+   "weapon": "MAIN_MACE"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:3",
+   "content": "blackzone_roam",
+   "weapon": "MAIN_MACE_CRYSTAL"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:15",
+   "content": "blackzone_roam",
+   "weapon": "MAIN_RAPIER_MORGANA"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:13",
+   "content": "blackzone_roam",
+   "weapon": "MAIN_SCIMITAR_MORGANA"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_1:4",
+   "content": "large_scale_zvz",
+   "weapon": "2H_ARCANESTAFF"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_1:11",
+   "content": "large_scale_zvz",
+   "weapon": "2H_ARCANESTAFF_HELL"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_1:15",
+   "content": "large_scale_zvz",
+   "weapon": "2H_AXE_AVALON"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_2:13",
+   "content": "large_scale_zvz",
+   "weapon": "2H_BOW_HELL"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_3:11",
+   "content": "large_scale_zvz",
+   "weapon": "2H_CLEAVER_HELL"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_1:18",
+   "content": "large_scale_zvz",
+   "weapon": "2H_CURSEDSTAFF_MORGANA"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_1:10",
+   "content": "large_scale_zvz",
+   "weapon": "2H_DUALMACE_AVALON"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_2:8",
+   "content": "large_scale_zvz",
+   "weapon": "2H_ENIGMATICORB_MORGANA"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_1:19",
+   "content": "large_scale_zvz",
+   "weapon": "2H_FIRE_RINGPAIR_AVALON"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_2:14",
+   "content": "large_scale_zvz",
+   "weapon": "2H_GLAIVE_CRYSTAL"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_3:0",
+   "content": "large_scale_zvz",
+   "weapon": "2H_HAMMER"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_1:0",
+   "content": "large_scale_zvz",
+   "weapon": "2H_HAMMER_AVALON"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_1:16",
+   "content": "large_scale_zvz",
+   "weapon": "2H_HARPOON_HELL"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_2:6",
+   "content": "large_scale_zvz",
+   "weapon": "2H_HOLYSTAFF_CRYSTAL"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_1:12",
+   "content": "large_scale_zvz",
+   "weapon": "2H_ICECRYSTAL_UNDEAD"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_2:2",
+   "content": "large_scale_zvz",
+   "weapon": "2H_ICEGAUNTLETS_HELL"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_1:14",
+   "content": "large_scale_zvz",
+   "weapon": "2H_KNUCKLES_SET3"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_3:4",
+   "content": "large_scale_zvz",
+   "weapon": "2H_NATURESTAFF_KEEPER"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_1:5",
+   "content": "large_scale_zvz",
+   "weapon": "2H_POLEHAMMER"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_3:3",
+   "content": "large_scale_zvz",
+   "weapon": "2H_SHAPESHIFTER_CRYSTAL"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_2:12",
+   "content": "large_scale_zvz",
+   "weapon": "2H_SHAPESHIFTER_SET2"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_1:1",
+   "content": "large_scale_zvz",
+   "weapon": "MAIN_ARCANESTAFF"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_1:17",
+   "content": "large_scale_zvz",
+   "weapon": "MAIN_ARCANESTAFF_UNDEAD"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_2:9",
+   "content": "large_scale_zvz",
+   "weapon": "MAIN_CURSEDSTAFF_UNDEAD"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_2:11",
+   "content": "large_scale_zvz",
+   "weapon": "MAIN_FROSTSTAFF_KEEPER"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_1:6",
+   "content": "large_scale_zvz",
+   "weapon": "MAIN_HOLYSTAFF_AVALON"
+  },
+  {
+   "basis": "explicit shotcaller approval",
+   "build_id": "deadlyhooker_large_scale_2026_08:party_1:2",
+   "content": "large_scale_zvz",
+   "weapon": "MAIN_ROCKMACE_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_ARCANESTAFF_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_AXE_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_BOW_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_BOW_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_CLEAVER_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_CROSSBOWLARGE_MORGANA"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_CROSSBOW_CANNON_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_DUALMACE_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_ENIGMATICORB_MORGANA"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_GLAIVE_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_HALBERD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_HALBERD_MORGANA"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_HAMMER_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_HARPOON_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_HOLYSTAFF_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_ICECRYSTAL_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_ICEGAUNTLETS_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_KNUCKLES_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_KNUCKLES_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_KNUCKLES_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_KNUCKLES_SET3"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_LONGBOW"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_NATURESTAFF_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_NATURESTAFF_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_RAM_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_ROCKSTAFF_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "2H_SCYTHE_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "MAIN_ARCANESTAFF_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "MAIN_MACE"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "MAIN_RAPIER_MORGANA"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz",
+   "weapon": "MAIN_SCIMITAR_MORGANA"
+  }
+ ],
+ "quarantined": [
+  {
+   "build_id": "metabattle:7642:8970",
+   "fields": [
+    "spell: unresolved 'Frost'"
+   ]
+  },
+  {
+   "build_id": "timothy_blap_blackzone_roam_2026_08:blap:5",
+   "fields": [
+    "passive: index 5 exceeds the 4-option pool"
+   ]
+  }
+ ]
+}

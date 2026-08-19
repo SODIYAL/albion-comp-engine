@@ -34,6 +34,25 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
 DEFAULT_VERSION = "2026.08.1"
 
+sys.path.insert(0, HERE)
+from provenance import load_manifest, verify_derived  # noqa: E402
+import build_interactions as _inter_mod  # noqa: E402  (adapter versions)
+import fetch_gear_lines as _gear_mod  # noqa: E402
+import fetch_item_stats as _stats_mod  # noqa: E402
+import parse_dumps as _parse_mod  # noqa: E402
+
+# Every game-data input the release artifacts consume, and the adapter
+# version the CURRENT code would produce it with. verify_derived() fails the
+# release if any file is missing, hash-drifted, version-stale, or from a
+# different snapshot commit than the others (changeschapter2.md §A).
+PROVENANCE_INPUTS = {
+    "weapon_lines.json": (_parse_mod.ADAPTER, _parse_mod.ADAPTER_VERSION),
+    "spell_index.json": (_parse_mod.ADAPTER, _parse_mod.ADAPTER_VERSION),
+    "item_stats.json": (_stats_mod.ADAPTER, _stats_mod.ADAPTER_VERSION),
+    "gear_lines.json": (_gear_mod.ADAPTER, _gear_mod.ADAPTER_VERSION),
+    "interactions.json": (_inter_mod.ADAPTER, _inter_mod.ADAPTER_VERSION),
+}
+
 
 def _load_yaml(path):
     with open(path, encoding="utf-8") as f:
@@ -161,53 +180,135 @@ def load_sheets(weapon_lines):
     return weapons
 
 
-# Positioning capability (2026-08-18). The capability model had no notion of
-# WHERE damage comes from, so a Galatine spin at 3m and a Frost bomb at 20m
-# supplied identical `burst_aoe`. Consequence: asking for a "clap" (stack them,
-# bomb them from range) returned a comp with 10 frontline bodies and one real
-# ranged bomb — structurally a brawl comp wearing a clap label.
+# Positioning capability (§B rework, 2026-08-19). The capability model needs
+# to know WHERE damage comes from: a Galatine spin at 3m and a Frost bomb at
+# 20m supply identical `burst_aoe`, and a "clap" comp needs the bomb, not the
+# spin. Two earlier derivations shipped and were replaced: role_hint
+# (PROVISIONAL), then basic-attack `attackrange >= 9` — which wrongly granted
+# permanent ranged_presence to weapons whose long autoattack says nothing
+# about whether their SELECTED Q/W/E delivers ranged AoE (one-hand Cursed,
+# Chillhowl).
 #
-# This was first derived from the curated `role_hint` and shipped marked
-# PROVISIONAL. It now reads the GAME'S OWN NUMBERS (fetch_item_stats.py):
-# `attackrange`, plus whether the weapon supplies any damage at all.
+# The current model is per SPELL BUNDLE, evidence-first:
+#   - the bundle must claim `burst_aoe` — a curated, evidence-linted human
+#     judgement that the spell delivers AoE damage;
+#   - the claiming spell's own game data must say it is delivered at range:
+#     target `ground`/`enemy` with cast_range >= RANGED_MIN_CASTRANGE.
+#     Cast ranges cluster like autoattack ranges did: melee spins/cleaves sit
+#     at 6-8, real ranged delivery at 9-26, so 9 splits in a real gap;
+#   - structure cannot tell a thrown bomb from a LEAP that carries the
+#     wielder into the clump (both are `target: ground` at range), so
+#     ranged_overrides.yaml carries explicit curated grant/deny records with
+#     citations — gap-closers are denied there;
+#   - a claim whose spell has no structural facts is UNKNOWN: the capability
+#     stays off and the weapon is listed for curation, never inferred.
 #
-# The threshold is measured, not chosen: across the curated set attackrange
-# clusters at 1.5/2/3/4 and then 9/11/13, with NOTHING in between. 9 is the
-# floor of the upper cluster, so the split falls in a real gap rather than on
-# a number someone liked.
+# The capability lands in the qualifying BUNDLE, not `loadout.always`: it
+# participates in scoring only when the scored combo actually equips the AoE
+# spell. The flat capability map still gets 1 when any bundle qualifies —
+# pred_members (composition ranged_aoe_core) and the display read that map as
+# "this weapon CAN bring ranged AoE with the right spell".
 #
-# BOTH conditions are required, and each fixes a different error the role_hint
-# version made. Range alone would count every healer (Great Holy, Hallowfall —
-# range 9, no damage): they stand at range but put nothing on the clump, and
-# counting them would make the capability meaningless since every comp has
-# healers. Damage alone would count melee cleave. Requiring both took the
-# qualifying set from 35 weapons to 57, and everything it added is real ranged
-# damage that `role_hint: support` was hiding — Damnation, Great Cursed,
-# Occult, Enigmatic, Malevolent Locus, Demonic and Great Arcane. Nothing the
-# old rule counted was lost.
-RANGED_MIN_ATTACKRANGE = 9
-DAMAGE_CAPS = ("burst_aoe", "burst_st", "sustained_dps")
+# Every decision is written to out/ranged_presence_report.json with the facts
+# it rests on (spell, slot, cast range, radius, max targets, cooldown, basis)
+# and the report participates in release validation.
+RANGED_MIN_CASTRANGE = 9
+RANGED_DELIVERY = ("ground", "enemy")
+AOE_CLAIM = "burst_aoe"
 
 
-def inject_positioning(weapons, item_stats):
-    """Add `ranged_presence: 1` to every weapon that can put damage on a clump
-    from outside it, in BOTH the flat capability map (display + base-party
-    supply) and `loadout.always` (the loadout-aware scoring path). It goes in
-    `always`, never a slot: a weapon's range is not a spell choice the player
-    trades against another."""
+def load_ranged_overrides():
+    path = os.path.join(HERE, "ranged_overrides.yaml")
+    if not os.path.exists(path):
+        return {}
+    out = {}
+    for e in _load_yaml(path):
+        if isinstance(e, dict) and e.get("weapon") and e.get("spell"):
+            out[(e["weapon"], e["spell"])] = e
+    return out
+
+
+def derive_ranged_presence(weapons, spell_index, overrides):
+    """Per-bundle ranged_presence with an evidence trail. Returns
+    (tagged_count, report, problems) — problems are release blockers
+    (an override referencing a weapon/spell that does not exist)."""
+    report, problems = {}, []
+    used_overrides = set()
     tagged = 0
-    for key, w in weapons.items():
-        stats = (item_stats.get(key) or {}).get("stats") or {}
-        rng = stats.get("attackrange")
-        if not isinstance(rng, (int, float)) or rng < RANGED_MIN_ATTACKRANGE:
+    for key, w in sorted(weapons.items()):
+        lo = w.get("loadout") or {}
+        slots = lo.get("slots") or []
+        names = lo.get("slot_names") or []
+        spells = lo.get("slot_spells") or []
+        decisions, granted = [], False
+        for i, slot in enumerate(slots):
+            for j, bundle in enumerate(slot):
+                if not bundle.get(AOE_CLAIM):
+                    continue
+                sid = spells[i][j]
+                facts = spell_index.get(sid) or {}
+                cast_range = facts.get("cast_range")
+                cast_range = float(cast_range) if cast_range is not None else None
+                rec = {
+                    "spell": sid, "slot": names[i] if i < len(names) else None,
+                    "cast_range": cast_range,
+                    "radius": facts.get("radius"),
+                    "max_targets": facts.get("max_targets"),
+                    "cooldown": facts.get("cooldown"),
+                    "delivery": facts.get("target"),
+                }
+                ov = overrides.get((key, sid))
+                if ov:
+                    used_overrides.add((key, sid))
+                    rec["basis"] = f"curated_override_{ov['decision']}"
+                    rec["granted"] = ov["decision"] == "grant"
+                    rec["override"] = {"reason": (ov.get("reason") or "").strip(),
+                                       "source": (ov.get("source") or "").strip(),
+                                       "as_of": str(ov.get("as_of") or "")}
+                elif cast_range is None or not facts:
+                    rec["basis"] = "unknown_no_structural_facts"
+                    rec["granted"] = False
+                elif (facts.get("target") in RANGED_DELIVERY
+                        and cast_range >= RANGED_MIN_CASTRANGE):
+                    rec["basis"] = "curated_burst_aoe+structural_range"
+                    rec["granted"] = True
+                else:
+                    rec["basis"] = "structural_below_threshold"
+                    rec["granted"] = False
+                decisions.append(rec)
+                if rec["granted"]:
+                    bundle["ranged_presence"] = 1
+                    granted = True
+                    tagged += 1
+        if granted:
+            w["capabilities"]["ranged_presence"] = 1
+            w.setdefault("evidence", {})["ranged_presence"] = sorted(
+                {d["spell"] for d in decisions if d["granted"]})
+        if decisions:
+            unknown = any(d["basis"] == "unknown_no_structural_facts"
+                          for d in decisions)
+            report[key] = {
+                "status": ("granted" if granted else
+                           "unknown" if unknown else "not_granted"),
+                "decisions": decisions,
+            }
+    for (wk, sid), ov in sorted(overrides.items()):
+        if (wk, sid) in used_overrides:
             continue
-        if not any(w["capabilities"].get(c) for c in DAMAGE_CAPS):
-            continue
-        w["capabilities"]["ranged_presence"] = 1
-        lo = w.setdefault("loadout", {})
-        lo.setdefault("always", {})["ranged_presence"] = 1
-        tagged += 1
-    return tagged
+        line = (weapons.get(wk) or {}).get("loadout") or {}
+        all_spells = {s for sl in line.get("slot_spells", []) for s in sl}
+        if wk not in weapons:
+            problems.append(f"ranged_overrides: unknown weapon {wk}")
+        elif sid not in all_spells:
+            problems.append(
+                f"ranged_overrides: spell {sid} is not a curated bundle "
+                f"spell on {wk}")
+        else:
+            # equippable but its bundle claims no burst_aoe — the override
+            # is dead weight; surface it rather than let it rot
+            problems.append(
+                f"ranged_overrides: {wk}/{sid} matched no burst_aoe bundle")
+    return tagged, report, problems
 
 
 def load_templates():
@@ -230,6 +331,26 @@ def load_templates():
     return templates, scoring, styles, mechanics, composition
 
 
+def check_provenance(weapons, item_stats, stats_meta):
+    """The fail-closed release gate (§A): verified snapshot chain + full
+    curated-weapon coverage + internally consistent item bank. Returns a list
+    of problems — empty means the release may proceed."""
+    problems = verify_derived(sorted(PROVENANCE_INPUTS), PROVENANCE_INPUTS)
+    if stats_meta.get("inconsistent"):
+        problems.append(
+            f"item_stats.json records {len(stats_meta['inconsistent'])} "
+            "cross-tier slot/category inconsistencies — fix upstream")
+    missing_stats = sorted(
+        k for k, w in weapons.items()
+        if w["status"] == "curated" and w["in_game_data"]
+        and not w.get("removed") and k not in item_stats)
+    if missing_stats:
+        problems.append(
+            f"{len(missing_stats)} curated weapon(s) missing from the item "
+            f"stats bank: {missing_stats[:8]}")
+    return problems
+
+
 def run_lint():
     """Run the evidence lint over curated sheets only. Illustrative sheets are
     deliberately excluded — they have no evidence and would always fail."""
@@ -245,17 +366,54 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--version", default=DEFAULT_VERSION)
     ap.add_argument("--skip-lint", action="store_true")
+    ap.add_argument("--skip-provenance", action="store_true",
+                    help="dev escape hatch: report provenance problems but "
+                         "exit 0 (release_clean still goes false)")
     args = ap.parse_args()
 
     weapon_lines = load_weapon_lines()
     weapons = load_sheets(weapon_lines)
     templates, scoring, styles, mechanics, composition = load_templates()
     stats_path = os.path.join(OUT, "item_stats.json")
-    item_stats = {}
+    item_stats, stats_meta = {}, {}
     if os.path.exists(stats_path):
         with open(stats_path, encoding="utf-8") as f:
-            item_stats = json.load(f).get("items", {})
-    n_ranged = inject_positioning(weapons, item_stats)
+            stats_doc = json.load(f)
+        item_stats = stats_doc.get("items", {})
+        stats_meta = stats_doc.get("_meta", {})
+    with open(os.path.join(OUT, "spell_index.json"), encoding="utf-8") as f:
+        spell_index = json.load(f)
+    interactions = {}
+    inter_path = os.path.join(OUT, "interactions.json")
+    if os.path.exists(inter_path):
+        with open(inter_path, encoding="utf-8") as f:
+            interactions = json.load(f).get("spells", {})
+    n_ranged, ranged_report, ranged_problems = derive_ranged_presence(
+        weapons, spell_index, load_ranged_overrides())
+    with open(os.path.join(OUT, "ranged_presence_report.json"), "w",
+              encoding="utf-8") as f:
+        json.dump({"_meta": {
+            "rule": (f"bundle claims {AOE_CLAIM} (curated, evidence-linted) "
+                     f"AND its spell is {'/'.join(RANGED_DELIVERY)}-delivered "
+                     f"with cast_range >= {RANGED_MIN_CASTRANGE}; "
+                     "ranged_overrides.yaml wins with citation; missing "
+                     "structural facts = unknown, never inferred"),
+            "granted": sorted(k for k, r in ranged_report.items()
+                              if r["status"] == "granted"),
+            "unknown": sorted(k for k, r in ranged_report.items()
+                              if r["status"] == "unknown"),
+        }, "weapons": ranged_report}, f, indent=1, sort_keys=True)
+
+    provenance_problems = check_provenance(weapons, item_stats, stats_meta)
+    provenance_problems += ranged_problems
+    # every derived scoring capability must carry evidence (§B/H.6)
+    for k, w in sorted(weapons.items()):
+        if (w["capabilities"].get("ranged_presence")
+                and not w.get("evidence", {}).get("ranged_presence")):
+            provenance_problems.append(
+                f"{k}: ranged_presence without an evidence record")
+    manifest = load_manifest() or {}
+    sources = manifest.get("sources", {})
 
     lint_ok, lint_out = (True, "skipped") if args.skip_lint else run_lint()
 
@@ -263,6 +421,7 @@ def main():
     illustrative = sorted(k for k, w in weapons.items() if w["status"] == "illustrative")
     unknown = sorted(k for k, w in weapons.items() if not w["in_game_data"])
 
+    provenance_ok = not provenance_problems
     dataset = {
         "_meta": {
             "version": args.version,
@@ -271,11 +430,30 @@ def main():
             "weapons_illustrative": len(illustrative),
             "templates": sorted(templates),
             "lint_passed": lint_ok,
-            "release_clean": bool(lint_ok and not illustrative and not unknown),
+            "release_clean": bool(lint_ok and provenance_ok
+                                  and not illustrative and not unknown),
             "note": ("NOT A RELEASE — contains illustrative placeholder sheets."
-                     if illustrative else "release candidate"),
+                     if illustrative else
+                     "NOT A RELEASE — provenance verification failed."
+                     if not provenance_ok else "release candidate"),
             "illustrative_weapons": illustrative,
             "unknown_to_game_data": unknown,
+            # Source provenance (§A): the one pinned snapshot every game-data
+            # input came from, plus the verified hash of each input. No fetch
+            # timestamp here — the dataset must be deterministic; timestamps
+            # live in out/source_manifest.json.
+            "provenance": {
+                "source_repository": sources.get("repository"),
+                "source_commit": sources.get("commit"),
+                "commit_timestamp": sources.get("commit_timestamp"),
+                "environment": sources.get("environment"),
+                "game_patch": sources.get("game_patch"),
+                "inputs": {name: (manifest.get("derived", {})
+                                  .get(name, {}).get("sha256"))
+                           for name in sorted(PROVENANCE_INPUTS)},
+                "verified": provenance_ok,
+                "problems": provenance_problems,
+            },
         },
         "weapons": weapons,
         # Item stats bank (fetch_item_stats.py) — the game's own numbers for
@@ -284,6 +462,11 @@ def main():
         # same rule gear capabilities follow. It is here so the engine and the
         # dossier read one source instead of two.
         "item_stats": item_stats,
+        # PvP interaction records (build_interactions.py), spell-keyed. The
+        # ONLY scoring coupling is verified `nonstacking_caps` (party supply
+        # counts that spell's caps once across members equipping it);
+        # everything else is dossier/analysis display. unknown never scores.
+        "interactions": interactions,
         "templates": templates,
         "scoring": scoring,
         "styles": styles,
@@ -304,13 +487,28 @@ def main():
     print(f"  evidence lint : {'PASS' if lint_ok else 'FAIL'}")
     if not lint_ok:
         print("   " + lint_out.replace("\n", "\n   "))
+    n_unknown_rp = sum(1 for r in ranged_report.values()
+                       if r["status"] == "unknown")
+    print(f"  ranged_presence: {n_ranged} bundle grant(s) across "
+          f"{len([r for r in ranged_report.values() if r['status'] == 'granted'])} "
+          f"weapon(s), {n_unknown_rp} unknown -> out/ranged_presence_report.json")
+    print(f"  provenance    : {'VERIFIED' if provenance_ok else 'FAIL'}"
+          f"  (snapshot {str(sources.get('commit'))[:12]})")
+    for p in provenance_problems:
+        print(f"    PROBLEM {p}")
     if unknown:
         print(f"  NOT in game data: {unknown}")
-    print(f"  release_clean : {dataset['_meta']['release_clean']}"
-          + ("" if dataset["_meta"]["release_clean"]
-             else f"  (blocked by {len(illustrative)} illustrative sheet(s))"))
+    blocked_by = ("" if dataset["_meta"]["release_clean"] else
+                  f"  (blocked by "
+                  f"{'provenance; ' if not provenance_ok else ''}"
+                  f"{len(illustrative)} illustrative sheet(s))")
+    print(f"  release_clean : {dataset['_meta']['release_clean']}{blocked_by}")
     print(f"  wrote out/dataset-{args.version}.json + out/dataset-latest.json")
-    return 0 if lint_ok else 1
+    if not lint_ok:
+        return 1
+    if provenance_problems and not args.skip_provenance:
+        return 2
+    return 0
 
 
 if __name__ == "__main__":

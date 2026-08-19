@@ -1,0 +1,49 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Hammer_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Tank_builds",
+     "sortkey": "Tank"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Open_World_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7757,
+   "revid": 8974,
+   "title": "Hand of Justice ZvZ Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Hammer\n| mode = ZvZ, Open World\n| focus = Tank\n| strengths = Versatile, Great Mobility\n| weaknesses = Low Sustain, Bad 1vs1\n}}\n==Overview==\nThis {{Item|Elder's Hand of Justice}} ZvZ PvP build is focused around CC-ing and repositioning enemy players, pulling them along and out of position so your team can follow up and kill them. While the build mostly acts as an offensive build and is a great choice for a shotcaller, it can still be played well by skilled players. The build offers great CC options like {{Skill|Mythical Web}} and {{Skill|Electric Discharge}}, offering great utility for any zerg.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Hand of Justice\n| main hand weapon skills = Iron Breaker, Inertia Ring, Onslaught, Stunning Strike\n| head = Elder's Judicator Helmet\n| head alternatives = Elder's Cleric Cowl\n| head skills = Electric Discharge, Toughness\n| cape = Elder's Martlock Cape\n| cape skills = Shield of Protection\n| armor = Elder's Duskweaver Armor\n| armor alternatives = Elder's Guardian Armor\n| armor skills = Mythical Web, Toughness, Protective Instinct\n| shoes = Elder's Boots of Valor\n| shoes alternatives = Elder's Graveguard Boots\n| shoes skills = Premonition, Toughness\n| potion = Major Gigantify Potion\n| potion alternatives = Major Resistance Potion\n| food = Avalonian Pork Omelette\n| food alternatives = Avalonian Beef Sandwich, Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Hand of Justice|45}}===\n{{Skill|Iron Breaker}} — This is a great ability to use after you pulled and CC'd a group of players as it lowers their damage resistance but also breaks all shields like {{Skill|Arcane Protection}}, making it easier for your DPS players to deal damage.\n\n{{Skill|Inertia Ring}} — You want to use this ability to deny enemy zerg movement as it creates a large circle that greatly lowers movement speed when passing through. You can also use this after the use of {{Skill|Onslaught}} or simply to slow down enemy engages.\n\n{{Skill|Onslaught}} — This is the most important ability for you and it should be used to pull enemies towards your zerg. You want to position deeper into the enemy zerg and then cast this skill behind them, travelling with the skill towards your zerg. 10 enemies hit will be pulled along in the path while also being stunned. Once you stop, the enemies will be thrown into the air and CC'd. \n\n{{Skill|Stunning Strike}} — This passive is great when you are on the move and can keep hitting the same target repeatedly to proc the stun on them but you shouldn't focus too much on auto-attacking, instead, focus on positioning yourself better so you can use your active skills.\n\n\n==={{Item|Elder's Duskweaver Armor|45}}===\n{{Skill|Mythical Web}} — Use this skill to slow players that pass through it, especially in small corridors through which enemies have to push. The web also purges all movement speed buffs which can slow down a zerg considerably. This can also be used right after using {{Skill|Onslaught}} to deny their escape.\n\n{{Skill|Toughness}} — As a tank you want to have high resistance, improving all your defense stats by a large amount.\n\n{{Skill|Protective Instinct}} - Neither of the two options actually matter as both are used for PvE but {{Skill|Protective Instinct}} allows you to take aggro from mobs in the rare situations where you need to. This normally only happens if you are diving statics or move through Avalonian Roads.\n\n\n==={{Item|Elder's Judicator Helmet|45}}===\n{{Skill|Electric Discharge}} — This AoE electricity expands outwards from your position and will stun all targets that get hit by it. You should use this to deny engages or as follow-up after {{Skill|Onslaught}}.\n\nAs an alternative, you should use {{Item|Elder's Cleric Cowl|}} for it's fantastic defensive ability ({{Skill|Ice Block}}). This is more or less mandatory if you are shotcalling.\n\n{{Skill|Toughness}} — This is another defensive increasing passive, awesome to have.\n\n\n==={{Item|Elder's Boots of Valor|45}}===\n{{Skill|Premonition}} — While a bit more difficult to use, this skill is great for ZvZ where you can run into slows, roots or stuns to boost your movement speed and also making you immune to all those effects. You want to use this skill when beginning an engage in order to boost your chances of successfully CC'ing enemies.\n\nYou can also use {{Item|Elder's Graveguard Boots}} as a cheaper alternative.\n\n{{Skill|Toughness}} — This passive also increases your defensive stats which can help a lot when playing as an aggressive tank.\n\n\n==={{Item|Elder's Martlock Cape|45}}===\n{{Skill|Shield of Protection}} — Use this cape for it's defense increase whenever your HP drops below 25%. The increased defense can save you from many deaths, be it while you are pushing into the enemy backline to make your plays or if you are caught out of position.\n\n\n==Rotations==\n{{Rotation|CC Pull|Premonition, Onslaught, Iron Breaker, Mythical Web, Electric Discharge, Inertia Ring}}\n*Start by using {{Skill|Premonition}} in order to boost both your movement speed anticipate CCs that might otherwise stop you from pushing through the enemy frontline. Position yourself so enemies are between yourself and your zerg before using {{Skill|Onslaught}} to pull them along and towards your zerg. Follow up with a quick {{Skill|Iron Breaker}} to lower enemy defenses then continue with {{Skill|Mythical Web}} in order to keep enemies from using their runs and purging them if they do. Use {{Skill|Electric Discharge}} to stun enemies caught but also other enemies that might try to come closer. You then can continue with {{Skill|Inertia Ring}} if enemies are still caught but not dead, making it easier for your zerg to kill them.\n\n\n==Consumables==\n{{Item|Major Gigantify Potion}} — This comes into use whenever your zerg has lost an engage and you need to move away or if you are too deep into the enemy backline and need to get back to your frontline. This can also be used to position yourself for the use of {{Skill|Onslaught}}. Most of the time however you should use this as a defensive option. {{Item|Major Resistance Potion}} is also a good choice as it allows healers to heal you.\n\n{{Item|Avalonian Pork Omelette}} — The special {{Item|Avalonian Pork Omelette}} is the perfect choice for a tank in ZVZ, lowering your cooldowns and also offers you great extra defense. {{Item|Avalonian Beef Sandwich}} is also a great choice as it considerably improves your max HP and increases the duration of your CCs.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7757": {
+     "ns": 0,
+     "pageid": 7757,
+     "revisions": [
+      {
+       "parentid": 8600,
+       "revid": 8974,
+       "timestamp": "2025-04-01T23:23:04Z"
+      }
+     ],
+     "title": "Hand of Justice ZvZ Build"
+    }
+   }
+  }
+ }
+}

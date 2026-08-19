@@ -13,7 +13,7 @@ Add a case whenever a human expert corrects the engine (VALIDATION.md).
 Run:  py -3 tests/test_golden.py        (Windows)
       python3 tests/test_golden.py
 """
-import os, sys, subprocess
+import glob, os, sys, subprocess
 
 import yaml
 
@@ -31,13 +31,19 @@ from engine import Engine  # noqa: E402
 
 E = Engine(content="castle_outpost", size=7)
 
-# T8/T9 run the 20-size templates against the REAL comps in meta_comps.yaml.
-# These are fitness-discrimination and floor-sanity checks, deliberately NOT
-# leave-one-out reproduction — the 20-size templates took role-ratio
-# calibration from these same comps, so reproduction would be circular
-# (see the template headers). Weapon slots only; battlemount slots excluded.
-with open(os.path.join(HERE, "meta_comps.yaml"), encoding="utf-8") as f:
-    _COMPS = {c["id"]: c for c in yaml.safe_load(f)["comps"]}
+# T8/T9 run the 20-size templates against the REAL caller comps, which live
+# in data/published_comps/ (the production evidence layer — chapter 2 moved
+# them out of tests/). These are fitness-discrimination and floor-sanity
+# checks, deliberately NOT leave-one-out reproduction — the 20-size templates
+# took role-ratio calibration from these same comps, so reproduction would be
+# circular (see the template headers). Weapon slots only; battlemounts excluded.
+_COMPS = {}
+for _p in sorted(glob.glob(os.path.join(ROOT, "data", "published_comps",
+                                        "*.yaml"))):
+    with open(_p, encoding="utf-8") as f:
+        _doc = yaml.safe_load(f)
+    if isinstance(_doc, dict) and _doc.get("kind") == "published_comp":
+        _COMPS[_doc["id"]] = _doc
 
 
 def _comp_party(comp_id, party_idx, drop_role=None):

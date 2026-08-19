@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Quarter_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Tank_builds",
+     "sortkey": "Tank"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7700,
+   "revid": 8988,
+   "title": "Staff of Balance ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Quarter Staff\n| mode = ZvZ\n| focus = Tank\n| strengths = Very impactful\n| weaknesses = Hard to master\n}}\n==Overview==\nThis Staff of Balance ZvZ PvP build emphasizes slowing the enemy zerg with {{Skill|Mystic Rocks}} and {{Skill|Mythical Web}}, enabling your zerg to counter-engage effectively while disrupting the enemy's engagement attempts.While similar to {{Skill|Frozen Hell}} in concept, it provides mobility at the expense of being unable to receive healing during its duration. Additionally, if you become impactful enough, the enemy zerg might prioritize trying to kill you, which can be both advantageous and difficult for newer players to manage and survive.\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Staff of Balance\n| main hand weapon skills = Cartwheel, Separator, Mystic Rocks, Stunning Strike\n| head = Elder's Assassin Hood\n| head alternatives = Elder's Hellion Hood, Elder's Mercenary Hood\n| head skills = Meditation, Quick Thinker\n| cape = Elder's Martlock Cape\n| cape skills = Shield of Protection\n| armor = Elder's Duskweaver Armor\n| armor alternatives = Elder's Guardian Armor\n| armor skills = Mythical Web, Toughness, Protective Instinct\n| shoes = Elder's Cleric Sandals\n| shoes skills = Crush Charge, Toughness\n| potion = Major Gigantify Potion\n| potion alternatives = Major Resistance Potion\n| food = Avalonian Pork Omelette\n| food alternatives = Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Staff of Balance|45}}===\n{{Skill|Cartwheel}} — A useful skill for a bit of extra movement, but it can also be used to knock back enemies, interrupting their casting or channeled abilities.\n\n{{Skill|Separator}} — A very useful way to knock back multiple enemies by targeting one. It helps with disengaging and kiting the enemy zerg. The second ability for this weapon is quite flexible, so you can opt for {{Skill|Rising Blow}}, {{Skill|Forceful Swing}}, or even {{Skill|Stun Run}} if you're skilled enough to interrupt priority targets and want the extra movement speed.\n\n{{Skill|Mystic Rocks}} — Your main ability and the cornerstone of this build. When cast, it creates a circle around your character that slows enemies, reduces their healing received, and provides you with a small damage resistance buff while its active. Your objective is to position yourself in the path of the enemy zerg, ideally in front of their DPS, but slowing down their engage tanks is also effective. The challenge of this build lies in managing your health and knowing when to retreat to your zerg, but you should aim to disrupt the enemy backline as much as possible.\n\n{{Skill|Stunning Strike}} — Auto attack anyone close by or try to time it in a way so you interrupt an enemy channeled ability. This skill can be highly valuable if used well and this build lets you use it to its full potential because you will be in the middle of the enemy zerg very often.\n\n\n==={{Item|Elder's Duskweaver Armor|45}}===\n{{Skill|Mythical Web}} — Use it in front of or on enemy engages. Your priority targets with this skill are engage tanks and DPS that have used their boots and are actively trying to engage. This ability is the main reason why you use {{Skill|Meditation}} for this build, as it allows you to use {{Skill|Mythical Web}} on almost every enemy engage.\n\n{{Skill|Toughness}} — The extra defensive stats any tank will want, although you could also consider using {{Skill|Authority}}, but it's not recommended.\n\n==={{Item|Elder's Assassin Hood|45}}===\n{{Skill|Meditation}} — An excellent ability to reduce the cooldown of your {{Skill|Mythical Web}} and other abilities. Don't hesitate to use it while in the middle of the enemy zerg, even if there's a chance you'll be interrupted while channeling. You're tanky enough to afford to do so, and it positions you closer to where you want to be when your abilities come off cooldown.\n\n{{Skill|Quick Thinker}} — The only viable choice of passive for this build since you don't need attack speed and lack any significant damage ability to scale with {{Skill|Balanced Mind}}.\n\n\n==={{Item|Elder's Duskweaver Boots|45}}===\n{{Skill|Crush Charge}} — Effective movement ability since it cannot be interrupted, but can interrupt and knock back enemies when dashing through them. You can also knock enemies into walls and have your zerg follow up with other CC or damage.\n\n{{Skill|Toughness}} — Just more defensive stats for a tank, which you'll particularly need for this build since it's based around being in the middle of the enemy zerg.\n\n\n==={{Item|Elder's Martlock Cape|45}}===\n{{Skill|Shield of Protection}} — Great defensive for this build, especially since you won't be able to get healed while {{Skill|Mystic Rocks}} is active, but you shouldn't rely on it too heavily.\n\n\n==Rotations==\n{{Rotation|Engage|Mystic Rocks, Crush Charge, Mythical Web, Meditation }}\n* This build doesn't rely on a fixed rotation, as most of your abilities are situational. However, you can use {{Skill|Crush Charge}} to quickly change your direction and potentially stun enemies when you get the chance. Additionally, slow enemies with {{Skill|Mystic Rocks}} and {{Skill|Mythical Web}} as needed. Consider using {{Skill|Meditation}} immediately after to get a chance of using another charge of {{Skill|Mythical Web}} as soon as possible.\n\n\n\n==Consumables==\n{{Item|Major Gigantify Potion}} — Pop this potion if you start getting focused or are caught out of position. While you can also use {{Item|Major Resistance Potion}}, you benefit more from {{Item|Major Gigantify Potion}} since it scales from maximum HP, and you have a lot of HP since you use \n\n{{Item|Avalonian Pork Omelette}} — You can also use {{Item|Pork Omelette}}, but the extra defensive stats from the Avalonian version are much better. Additionally, you can opt for higher enchantments of this food, but it can be very pricey.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7700": {
+     "ns": 0,
+     "pageid": 7700,
+     "revisions": [
+      {
+       "parentid": 8868,
+       "revid": 8988,
+       "timestamp": "2025-04-01T23:27:02Z"
+      }
+     ],
+     "title": "Staff of Balance ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

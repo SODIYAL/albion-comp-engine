@@ -1,0 +1,162 @@
+{
+ "batchcomplete": "",
+ "query": {
+  "categorymembers": [
+   {
+    "ns": 0,
+    "pageid": 7662,
+    "title": "Blight Staff ZvZ PvP Healer Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7645,
+    "title": "Bloodletter ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7655,
+    "title": "Carrioncaller ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7691,
+    "title": "Carving Sword ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7658,
+    "title": "Clarent Blade ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7712,
+    "title": "Energy Shaper ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7641,
+    "title": "Fallen Staff ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7656,
+    "title": "Fists of Avalon ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7559,
+    "title": "Grovekeeper ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7643,
+    "title": "Halberd ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7757,
+    "title": "Hand of Justice ZvZ Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7652,
+    "title": "Hellfire Hands ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7642,
+    "title": "Icicle Staff ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7651,
+    "title": "Infernal Scythe ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7699,
+    "title": "Longbow ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7661,
+    "title": "Malevolent Locus ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7701,
+    "title": "Mistpiercer ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7758,
+    "title": "Oathkeepers Support ZvZ Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7760,
+    "title": "Occult Staff ZvZ Support Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7679,
+    "title": "One Handed Mace PvP ZvZ Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7698,
+    "title": "Permafrost Prism ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7667,
+    "title": "Rampant Staff ZvZ PvP Healer Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7659,
+    "title": "Realmbreaker ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7766,
+    "title": "Rift Glaive ZvZ Bombing Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7780,
+    "title": "Siegebow ZvZ Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7513,
+    "title": "Spiked Gauntlets ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7660,
+    "title": "Spirithunter ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7700,
+    "title": "Staff of Balance ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7657,
+    "title": "Ursine Maulers ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7725,
+    "title": "Wailing Bow ZvZ PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7755,
+    "title": "Witchwork Staff ZvZ Build"
+   }
+  ]
+ }
+}

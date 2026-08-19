@@ -42,6 +42,21 @@
       return [s.a, s.b, s.bonus];
     });
     this.mechanics = data.mechanics || {};
+    /* PvP interaction records (build_interactions.py), spell-keyed. Scoring
+       coupling: VERIFIED records' nonstacking_caps — party supply counts
+       those caps once across members equipping the same spell. unknown/
+       likely never scores. Mirrors engine.py __init__. */
+    this.interactions = data.interactions || {};
+    this.nonstack = {};
+    var nsIds = Object.keys(this.interactions).sort();
+    for (var ni = 0; ni < nsIds.length; ni++) {
+      var nrec = this.interactions[nsIds[ni]];
+      if (nrec.confidence === "verified" && nrec.nonstacking_caps &&
+          nrec.nonstacking_caps.length) {
+        this.nonstack[nsIds[ni]] = nrec.nonstacking_caps.slice();
+      }
+    }
+    this.hasNonstack = Object.keys(this.nonstack).length > 0;
     /* Composition layer (composition.yaml -> dataset): forge constraints,
        duplication, viability, size physics. Mirrors engine.py __init__. */
     var comp = data.composition || {};
@@ -213,6 +228,7 @@
     }
     this._extrasCache = {};
     this._defaultCache = {};
+    this._nsCache = {};
   };
 
   CompEngine.prototype._stepTable = function (table, size) {
@@ -460,6 +476,41 @@
     return extras[combo];
   };
 
+  CompEngine.prototype._nonstackContrib = function (weapon, combo) {
+    /* {spell: {cap: effective value}} for every verified non-stacking
+       interaction spell this member's combo equips (mirrors engine.py
+       _nonstack_contrib). Empty when no interaction data applies. */
+    if (!this.hasNonstack) return {};
+    var extras = this._comboExtras(weapon);
+    if (combo === null || combo === undefined || combo < 0 || combo >= extras.length)
+      combo = this.defaultCombo(weapon);
+    var key = weapon + " " + combo;
+    var hit = this._nsCache[key];
+    if (hit !== undefined) return hit;
+    var lo = this.weapons[weapon].loadout || {};
+    var spells = lo.slot_spells || [];
+    var le = this._loadoutEff(weapon), slotsEff = le.slots;
+    var out = {};
+    var choices = this.comboChoices(weapon, combo);
+    for (var ci = 0; ci < choices.length; ci++) {
+      var oi = choices[ci][0], bi = choices[ci][1];
+      if (oi >= spells.length || bi >= spells[oi].length) continue;
+      var sid = spells[oi][bi];
+      var caps = this.nonstack[sid];
+      if (!caps || oi >= slotsEff.length || bi >= slotsEff[oi].length) continue;
+      var bundle = slotsEff[oi][bi];
+      var contrib = out[sid] || (out[sid] = {});
+      var any = false;
+      for (var cj = 0; cj < caps.length; cj++) {
+        var v = bundle[caps[cj]] || 0.0;
+        if (v) { contrib[caps[cj]] = (contrib[caps[cj]] || 0.0) + v; any = true; }
+      }
+      if (!any && Object.keys(contrib).length === 0) delete out[sid];
+    }
+    this._nsCache[key] = out;
+    return out;
+  };
+
   /* ----------------------------------------------------------------- supply */
   CompEngine.prototype.supply = function (party) {
     /* Raw capability units summed over the party (sheet numbers) — display
@@ -480,7 +531,35 @@
       var extra = this.memberExtra(party[i], combos ? combos[i] : null);
       for (c in extra) s[c] = (s[c] || 0.0) + extra[c];
     }
+    if (this.hasNonstack) this._applyNonstack(s, party, combos);
     return s;
+  };
+
+  CompEngine.prototype._applyNonstack = function (s, party, combos) {
+    /* Count-once rule for verified non-stacking interaction spells —
+       identical accumulation ORDER to engine.py _apply_nonstack (sorted
+       spell ids, stored cap order, party order): float parity is exact. */
+    var groups = {};
+    for (var i = 0; i < party.length; i++) {
+      var per = this._nonstackContrib(party[i], combos ? combos[i] : null);
+      for (var sid in per) (groups[sid] = groups[sid] || []).push(per[sid]);
+    }
+    var ids = Object.keys(groups).sort();
+    for (var gi = 0; gi < ids.length; gi++) {
+      var lst = groups[ids[gi]];
+      if (lst.length < 2) continue;
+      var caps = this.nonstack[ids[gi]];
+      for (var cj = 0; cj < caps.length; cj++) {
+        var cap = caps[cj], total = 0.0, mx = 0.0;
+        for (var li = 0; li < lst.length; li++) {
+          var v = lst[li][cap] || 0.0;
+          total += v;
+          if (v > mx) mx = v;
+        }
+        var excess = total - mx;
+        if (excess > 0.0) s[cap] = (s[cap] || 0.0) - excess;
+      }
+    }
   };
 
   /* ----------------------------------------------------------------- floors */
@@ -657,7 +736,19 @@
     for (var i = 0; i < party.length; i++) {
       counts[party[i]] = (counts[party[i]] || 0) + 1;
     }
-    return { s: s, J: J, pairVals: pairVals, counts: counts };
+    var nsMax = {};
+    if (this.hasNonstack) {
+      for (i = 0; i < party.length; i++) {
+        var per = this._nonstackContrib(party[i], combos ? combos[i] : null);
+        for (var sid in per) {
+          var cur = nsMax[sid] || (nsMax[sid] = {});
+          for (var cap in per[sid]) {
+            if (per[sid][cap] > (cur[cap] || 0.0)) cur[cap] = per[sid][cap];
+          }
+        }
+      }
+    }
+    return { s: s, J: J, pairVals: pairVals, counts: counts, nsMax: nsMax };
   };
 
   CompEngine.prototype._margFitFrom = function (s, extra) {
@@ -675,17 +766,46 @@
     return total;
   };
 
-  CompEngine.prototype._margSynFrom = function (state, extra) {
+  CompEngine.prototype._margSynFrom = function (state, extra, extraJ) {
+    /* extraJ (default: extra) is the member's UNADJUSTED caps for the
+       largest-single-member joint term J (mirrors engine.py). */
+    if (extraJ === undefined || extraJ === null) extraJ = extra;
     var total = 0.0;
     for (var p = 0; p < this._activeSyn.length; p++) {
       var a = this._activeSyn[p][0], b = this._activeSyn[p][1];
-      var j = Math.min(extra[a] || 0.0, extra[b] || 0.0);
+      var j = Math.min(extraJ[a] || 0.0, extraJ[b] || 0.0);
       var j2 = state.J[p] > j ? state.J[p] : j;
       total += this._pairValue(p, (state.s[a] || 0.0) + (extra[a] || 0.0),
                                (state.s[b] || 0.0) + (extra[b] || 0.0), j2)
              - state.pairVals[p];
     }
     return total;
+  };
+
+  CompEngine.prototype._nonstackAdjust = function (state, weapon, combo, extra) {
+    /* Candidate caps with the count-once rule applied against the current
+       party (mirrors engine.py _nonstack_adjust). Returns `extra` itself
+       when nothing applies. */
+    var nsMax = state.nsMax;
+    if (!this.hasNonstack || !nsMax) return extra;
+    var adj = null;
+    var per = this._nonstackContrib(weapon, combo);
+    for (var sid in per) {
+      var pmax = nsMax[sid];
+      if (!pmax) continue;
+      if (adj === null) {
+        adj = {};
+        for (var c in extra) adj[c] = extra[c];
+      }
+      var caps = this.nonstack[sid];
+      for (var cj = 0; cj < caps.length; cj++) {
+        var cap = caps[cj], v = per[sid][cap] || 0.0;
+        if (!v) continue;
+        var gain = v - (pmax[cap] || 0.0);
+        adj[cap] = (adj[cap] || 0.0) - v + (gain > 0.0 ? gain : 0.0);
+      }
+    }
+    return adj === null ? extra : adj;
   };
 
   CompEngine.prototype._evalPick = function (state, weapon) {
@@ -695,8 +815,9 @@
     var best = null;
     var extras = this._comboExtras(weapon);
     for (var i = 0; i < extras.length; i++) {
-      var dFit = this._margFitFrom(state.s, extras[i]);
-      var dSyn = this._margSynFrom(state, extras[i]);
+      var adj = this._nonstackAdjust(state, weapon, i, extras[i]);
+      var dFit = this._margFitFrom(state.s, adj);
+      var dSyn = this._margSynFrom(state, adj, extras[i]);
       var val = this.alpha * dFit + this.beta * dSyn;
       if (best === null || val > best.val)
         best = { val: val, dFit: dFit, dSyn: dSyn, combo: i };
@@ -841,6 +962,104 @@
       if (this.weight(cap) >= 5 && (s[cap] || 0) / this.target(cap) < 0.5) out.push(cap);
     }
     return out;
+  };
+
+  /* ----------------------------------------------- interaction analysis
+     (mirrors engine.py duplicate_conflicts / analyze — "new prompt" spec
+     §7/§9). Severity high/warning only on VERIFIED non-stacking records;
+     verified full and shared stacks are info; anything the game data does
+     not state is 'verify', never an invented penalty. */
+  var DAMAGE_CAPS_PROFILE = ["burst_aoe", "burst_st", "sustained_dps", "execute"];
+  var UTILITY_CAPS_PROFILE = ["purge", "cleanse", "silence", "heal_reduction",
+                              "resist_shred", "clump_create", "anti_zone",
+                              "damage_debuff", "buff_allies"];
+  var DEFENSE_CAPS_PROFILE = ["tankiness", "peel", "heal_sustain", "heal_burst",
+                              "disengage", "mobility"];
+
+  CompEngine.prototype.duplicateConflicts = function (party, combos) {
+    var bySpell = {};
+    for (var i = 0; i < party.length; i++) {
+      var eq = this.comboSpells(party[i], combos ? combos[i] : null);
+      for (var ei = 0; ei < eq.length; ei++) {
+        var sid = eq[ei][1];
+        (bySpell[sid] = bySpell[sid] || []).push(party[i]);
+      }
+    }
+    var out = [];
+    var ids = Object.keys(bySpell).sort();
+    for (var si = 0; si < ids.length; si++) {
+      var members = bySpell[ids[si]];
+      if (members.length < 2) continue;
+      var rec = this.interactions[ids[si]];
+      if (!rec) continue;
+      var name = rec.name || ids[si];
+      var dup = rec.duplicate || "unknown";
+      var verified = rec.confidence === "verified";
+      var ns = (rec.nonstacking_caps || []).filter(
+        function (c) { return c in this.reqs; }, this);
+      var severity, reason;
+      if (verified && ns.length) {
+        severity = (dup === "does_not_stack" || dup === "override" ||
+                    dup === "refresh") ? "high" : "warning";
+        reason = name + ": " + ns.join(", ") + " counts once for the party (" +
+                 dup + ") — a duplicate adds its other components only";
+      } else if (verified && dup === "full") {
+        severity = "info";
+        reason = name + ": duplicates give verified full independent value";
+      } else if (dup === "shared_stack") {
+        severity = "info";
+        reason = name + ": duplicates feed one shared stack on the target — " +
+                 "faster stacking, not wasted value";
+      } else {
+        severity = "verify";
+        reason = name + ": duplicate behavior is not stated by the game data" +
+                 " — verify before stacking (" + rec.confidence + ")";
+      }
+      out.push({ spell: ids[si], name: name, weapons: members,
+                 severity: severity, duplicate: dup, effect: rec.effect_name,
+                 confidence: rec.confidence, reason: reason });
+    }
+    return out;
+  };
+
+  CompEngine.prototype.analyze = function (party, combos) {
+    var s = this.effectiveSupply(party, combos);
+    var strengths = [], missing = [];
+    for (var cap in this.reqs) {
+      var have = s[cap] || 0.0, target = this.target(cap);
+      if (have >= target) {
+        strengths.push({ cap: cap, have: have, target: target });
+      } else if (this.weight(cap) > 0) {
+        missing.push({ cap: cap, have: have, target: target,
+                       gap: target - have,
+                       weighted_gap: this.weight(cap) * (target - have) / target });
+      }
+    }
+    missing.sort(function (a, b) { return b.weighted_gap - a.weighted_gap; });
+    var cc = {};
+    for (var i = 0; i < party.length; i++) {
+      var eq = this.comboSpells(party[i], combos ? combos[i] : null);
+      for (var ei = 0; ei < eq.length; ei++) {
+        var rec = this.interactions[eq[ei][1]];
+        if (rec) (rec.cc_types || []).forEach(function (t) { cc[t] = true; });
+      }
+    }
+    var profile = function (caps) {
+      var out = {};
+      for (var pi = 0; pi < caps.length; pi++) {
+        if (s[caps[pi]]) out[caps[pi]] = s[caps[pi]];
+      }
+      return out;
+    };
+    return {
+      strengths: strengths,
+      missing_capabilities: missing,
+      duplicate_conflicts: this.duplicateConflicts(party, combos),
+      cc_coverage: Object.keys(cc).sort(),
+      damage_profile: profile(DAMAGE_CAPS_PROFILE),
+      utility_coverage: profile(UTILITY_CAPS_PROFILE),
+      defensive_coverage: profile(DEFENSE_CAPS_PROFILE),
+    };
   };
 
   /* ------------------------------------------------------------ local search */

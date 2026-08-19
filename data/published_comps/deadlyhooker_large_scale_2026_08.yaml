@@ -1,0 +1,693 @@
+# Production caller-comp record (changeschapter2.md §C/§D.3) — migrated from
+# tests/meta_comps.yaml 2026-08-19. Slot rows are VERBATIM source data; never
+# invent an entry. Normalization to exact spell/gear UniqueNames is GENERATED
+# by pipeline/build_builds.py (out/builds_index.json), never hand-written here.
+#
+# Slot fields: raw (source cell verbatim), weapons (catalog UniqueNames;
+# a list = source-named alternatives), role (curator annotation), role_raw
+# (source's own label), skills (verbatim "q3, w2, p1" 1-based indices),
+# potion/food/gear (verbatim), battlemount (outside the weapon model).
+kind: published_comp
+id: deadlyhooker_large_scale_2026_08
+source:
+  kind: caller_sheet
+  family: caller:deadlyhooker
+  author: Deadlyhooker
+  url: null
+  record: Shotcaller "Deadlyhooker" - large-content comp (castle, territory, mass alliance roam), up to
+    3 parties of 20; relayed verbatim by the project owner, 2026-08-12.
+  license: shared with the project by its author via the owner
+published: '2026-08-12'
+ingested: '2026-08-12'
+observed: null
+patch: '2026-07-21'
+snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4
+content: large_scale_zvz
+party_size:
+  min: 20
+  max: 20
+approval:
+  status: approved
+  basis: shotcaller-authored sheet (explicit caller approval for their own comp)
+  approved_by: Deadlyhooker (author); relayed by owner
+  as_of: '2026-08-12'
+parties:
+- name: party_1
+  slots:
+  - raw: HoJ/Golem
+    weapons:
+    - 2H_HAMMER_AVALON
+    - 2H_SHAPESHIFTER_KEEPER
+    role: main_tank
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Knight
+      boots: Cleric
+      cape: Smuggler
+  - raw: 1h arcane
+    weapons:
+    - MAIN_ARCANESTAFF
+    role: support
+    gear:
+      offhand: Aegis/Taproot
+      helm: Judicator
+      armor: Knight
+      boots: Blink
+      cape: Smuggler
+      note: Use helm to help setup
+  - raw: Bedrock
+    weapons:
+    - MAIN_ROCKMACE_KEEPER
+    role: tank
+    gear:
+      offhand: Aegis/Taproot
+      helm: Assassin
+      armor: Demon
+      boots: Blink
+      cape: Smuggler
+      note: Guard Rune
+  - raw: Bedrock
+    weapons:
+    - MAIN_ROCKMACE_KEEPER
+    role: tank
+    gear:
+      offhand: Aegis/Taproot
+      helm: Assassin
+      armor: Demon
+      boots: Blink
+      cape: Smuggler
+      note: Guard Rune
+  - raw: Great Arcane
+    weapons:
+    - 2H_ARCANESTAFF
+    role: support
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Knight
+      boots: Blink
+      cape: Smuggler
+      note: Peel/Control
+  - raw: Polehammer
+    weapons:
+    - 2H_POLEHAMMER
+    role: tank
+    gear:
+      offhand: N/A
+      helm: Judi/Hellion
+      armor: Knight
+      boots: Blink
+      cape: Smuggler
+      note: control enemy on our engage
+  - raw: Hallowfall
+    weapons:
+    - MAIN_HOLYSTAFF_AVALON
+    role: healer
+    gear:
+      offhand: Mistcaller
+      helm: Guardian
+      armor: Feyscale/RoP
+      boots: Blink
+      cape: Smuggler
+      note: Druid Cowl Swap if no Chariot
+  - raw: Hallowfall
+    weapons:
+    - MAIN_HOLYSTAFF_AVALON
+    role: healer
+    gear:
+      offhand: Mistcaller
+      helm: Cleanse
+      armor: Feyscale/RoP
+      boots: Blink
+      cape: Smuggler
+      note: Druid Cowl Swap if no Chariot
+  - raw: Hallowfall
+    weapons:
+    - MAIN_HOLYSTAFF_AVALON
+    role: healer
+    gear:
+      offhand: Mistcaller
+      helm: Cleanse
+      armor: Feyscale/RoP
+      boots: Blink
+      cape: Smuggler
+  - raw: Exalted
+    weapons:
+    - 2H_HOLYSTAFF_CRYSTAL
+    role: support
+    gear:
+      offhand: N/A
+      helm: Cleanse
+      armor: RoP
+      boots: Blink
+      cape: Smuggler
+      note: Cleanse Behe/Hellion
+  - raw: Oathkeepers
+    weapons:
+    - 2H_DUALMACE_AVALON
+    role: tank
+    gear:
+      offhand: Aegis/Taproot
+      helm: Assassin
+      armor: Demon
+      boots: Blink
+      cape: Smuggler
+      note: E+W for engage
+  - raw: Occult (1)
+    weapons:
+    - 2H_ARCANESTAFF_HELL
+    role: dps
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Royal Jacket
+      boots: GG
+      cape: Smuggler
+      note: Beam Spiked
+  - raw: Perma
+    weapons:
+    - 2H_ICECRYSTAL_UNDEAD
+    role: dps
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Scholar
+      boots: Stalker
+      cape: Smuggler
+  - raw: Perma
+    weapons:
+    - 2H_ICECRYSTAL_UNDEAD
+    role: dps
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Scholar
+      boots: Stalker
+      cape: Smuggler
+      note: Fake if called
+  - raw: Spiked
+    weapons:
+    - 2H_KNUCKLES_SET3
+    role: dps
+    gear:
+      offhand: N/A
+      helm: Mistwalker
+      armor: RoP
+      boots: Mistwalker/Stalker
+      cape: Smuggler
+  - raw: Realm (2)
+    weapons:
+    - 2H_AXE_AVALON
+    role: dps
+    gear:
+      offhand: N/A
+      helm: Knight
+      armor: Royal Jacket
+      boots: Mistwalker/Stalker
+      cape: Smuggler
+  - raw: Spirithunter (3)
+    weapons:
+    - 2H_HARPOON_HELL
+    role: dps
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Royal Jacket
+      boots: Stalker
+      cape: Smuggler
+  - raw: Witchwork
+    weapons:
+    - MAIN_ARCANESTAFF_UNDEAD
+    role: dps
+    gear:
+      offhand: Muisak
+      helm: Assassin
+      armor: Mage/RoP
+      boots: Mistwalker/Stalker
+      cape: Smuggler
+      note: Fake if called
+  - raw: Damn
+    weapons:
+    - 2H_CURSEDSTAFF_MORGANA
+    role: dps
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Scholar
+      boots: Stalker
+      cape: Smuggler
+      note: Fake if called
+  - raw: Dawns/Rotcaller
+    weapons:
+    - 2H_FIRE_RINGPAIR_AVALON
+    - MAIN_CURSEDSTAFF_CRYSTAL
+    role: dps
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Feyscale
+      boots: Stalker
+      cape: Smuggler
+- name: party_2
+  slots:
+  - raw: Great Arcane
+    weapons:
+    - 2H_ARCANESTAFF
+    role: support
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Knight
+      boots: Blink
+      cape: Smuggler
+      note: Peel/Control
+  - raw: Great Arcane
+    weapons:
+    - 2H_ARCANESTAFF
+    role: support
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Duskweaver
+      boots: Blink
+      cape: Smuggler
+      note: Peel/Control
+  - raw: Icicle
+    weapons:
+    - 2H_ICEGAUNTLETS_HELL
+    role: tank
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Duskweaver
+      boots: Blink
+      cape: Smuggler
+      note: Big Boy Stall
+  - raw: 1h Arcane
+    weapons:
+    - MAIN_ARCANESTAFF
+    role: support
+    gear:
+      offhand: Aegis/Taproot
+      helm: Assassin
+      armor: Knight
+      boots: Blink
+      cape: Smuggler
+      note: Watch Bombs
+  - raw: Polehammer
+    weapons:
+    - 2H_POLEHAMMER
+    role: tank
+    gear:
+      offhand: N/A
+      helm: Judi/Hellion
+      armor: Knight
+      boots: Blink
+      cape: Smuggler
+      note: control enemy on our engage
+  - raw: Hallowfall
+    weapons:
+    - MAIN_HOLYSTAFF_AVALON
+    role: healer
+    gear:
+      offhand: Mistcaller
+      helm: Guardian
+      armor: Feyscale/RoP
+      boots: Blink
+      cape: Smuggler
+  - raw: Exalted
+    weapons:
+    - 2H_HOLYSTAFF_CRYSTAL
+    role: support
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: RoP
+      boots: Blink
+      cape: Smuggler
+      note: Offensive E on DPS
+  - raw: Hallowfall
+    weapons:
+    - MAIN_HOLYSTAFF_AVALON
+    role: healer
+    gear:
+      offhand: MIstcaller
+      helm: Assassin
+      armor: RoP
+      boots: Blink
+      cape: Smuggler
+      note: Play with DPS to Buff
+  - raw: Locus
+    weapons:
+    - 2H_ENIGMATICORB_MORGANA
+    role: support
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Judicator
+      boots: Blink
+      cape: Smuggler
+      note: Mimic Guard Rune
+  - raw: Lifecurse
+    weapons:
+    - MAIN_CURSEDSTAFF_UNDEAD
+    role: dps
+    gear:
+      offhand: Taproot/Aegis
+      helm: Assassin
+      armor: Demon
+      boots: Blink
+      cape: Smuggler
+  - raw: Oathkeepers
+    weapons:
+    - 2H_DUALMACE_AVALON
+    role: tank
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Demon
+      boots: Blink
+      cape: Smuggler
+  - raw: Hoarfrost
+    weapons:
+    - MAIN_FROSTSTAFF_KEEPER
+    role: support
+    gear:
+      offhand: Aegis/Taproot
+      helm: Assassin
+      armor: Demon
+      boots: Blink
+      cape: Smuggler
+      note: Offensive Obelisk
+  - raw: Rootbound
+    weapons:
+    - 2H_SHAPESHIFTER_SET2
+    role: support
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Judicator
+      boots: Blink
+      cape: Smuggler
+      note: Perma ent form pls
+  - raw: Wailing
+    weapons:
+    - 2H_BOW_HELL
+    role: dps
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: RoP
+      boots: Stalker
+      cape: Smuggler
+  - raw: Rift Glaive
+    weapons:
+    - 2H_GLAIVE_CRYSTAL
+    role: dps
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: RoP
+      boots: Stalker
+      cape: Smuggler
+  - raw: Rift Glaive
+    weapons:
+    - 2H_GLAIVE_CRYSTAL
+    role: dps
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: RoP
+      boots: Stalker
+      cape: Smuggler
+  - raw: Behemoth (Mace/BL)
+    battlemount: Behemoth
+    weapons:
+    - MAIN_MACE
+    - MAIN_RAPIER_MORGANA
+    role: battlemount
+    gear:
+      offhand: Aegis/Mistcaller
+      helm: Soldier
+      armor: Judicator
+      boots: Feyscale
+      cape: Undead
+  - raw: Bastion (Mace/BL)
+    battlemount: Bastion
+    weapons:
+    - MAIN_MACE
+    - MAIN_RAPIER_MORGANA
+    role: battlemount
+    gear:
+      offhand: Aegis/Mistcaller
+      helm: Soldier
+      armor: Judicator
+      boots: Feyscale
+      cape: Undead
+  - raw: Venom Basilisk
+    battlemount: Venom Basilisk
+    weapons: []
+    role: battlemount
+    gear:
+      offhand: Timelocked Grimoire
+      helm: Mistwalker
+      armor: Mistwalker
+      boots: Feyscale
+      cape: Undead
+      note: Reg Pork Ome .3
+  - raw: Chariot (Mace/BL)
+    battlemount: Chariot
+    weapons:
+    - MAIN_MACE
+    - MAIN_RAPIER_MORGANA
+    role: battlemount
+    gear:
+      offhand: Mistcaller
+      helm: Soldier
+      armor: Judicator
+      boots: Feyscale
+      cape: Undead
+- name: party_3
+  slots:
+  - raw: Great Hammer
+    weapons:
+    - 2H_HAMMER
+    role: main_tank
+    gear:
+      offhand: N/A
+      helm: Hellion
+      armor: Duskweaver
+      boots: Blink/Feyscale
+      cape: Smuggler
+  - raw: 1h Arcane
+    weapons:
+    - MAIN_ARCANESTAFF
+    role: support
+    gear:
+      offhand: Aegis/Taproot
+      helm: Assassin
+      armor: Knight
+      boots: Blink
+      cape: Smuggler
+      note: Watch Bombs/Stop engages
+  - raw: Bedrock
+    weapons:
+    - MAIN_ROCKMACE_KEEPER
+    role: tank
+    gear:
+      offhand: Aegis/Taproot
+      helm: Assassin
+      armor: Demon
+      boots: Blink
+      cape: Smuggler
+      note: Guard Rune
+  - raw: Stillgaze
+    weapons:
+    - 2H_SHAPESHIFTER_CRYSTAL
+    role: support
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Dusk/Knight
+      boots: Blink/Feyscale
+      cape: Smuggler
+  - raw: Rampant
+    weapons:
+    - 2H_NATURESTAFF_KEEPER
+    role: healer
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Cleric
+      boots: Blink
+      cape: Smuggler
+  - raw: Hallowfall
+    weapons:
+    - MAIN_HOLYSTAFF_AVALON
+    role: healer
+    gear:
+      offhand: Mistcaller
+      helm: Guardian
+      armor: Feyscale/RoP
+      boots: Blink
+      cape: Smuggler
+  - raw: Exalted
+    weapons:
+    - 2H_HOLYSTAFF_CRYSTAL
+    role: support
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: RoP
+      boots: Blink
+      cape: Smuggler
+      note: Help us Kite
+  - raw: Locus
+    weapons:
+    - 2H_ENIGMATICORB_MORGANA
+    role: support
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Judicator
+      boots: Blink
+      cape: Smuggler
+      note: E on Engage
+  - raw: Lifecurse
+    weapons:
+    - MAIN_CURSEDSTAFF_UNDEAD
+    role: support
+    gear:
+      offhand: Aegis/Taproot
+      helm: Assassin
+      armor: Demon
+      boots: Blink
+      cape: Smuggler
+      note: Defensive Lifecurse
+  - raw: Occult
+    weapons:
+    - 2H_ARCANESTAFF_HELL
+    role: dps
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Demon
+      boots: GG
+      cape: Smuggler
+      note: 2nd Occult for Tempo
+  - raw: Rootbound
+    weapons:
+    - 2H_SHAPESHIFTER_SET2
+    role: support
+    gear:
+      offhand: N/A
+      helm: Assassin
+      armor: Judicator
+      boots: Blink
+      cape: Smuggler
+      note: Perma Ent Form Pls
+  - raw: carving
+    weapons:
+    - 2H_CLEAVER_HELL
+    role: dps
+    gear:
+      offhand: N/A
+      helm: Knight
+      armor: Judicator
+      boots: GG
+      cape: Smuggler
+  - raw: Wailing/RG
+    weapons:
+    - 2H_BOW_HELL
+    - 2H_GLAIVE_CRYSTAL
+    role: dps
+    gear:
+      offhand: N/A
+      helm: Cleanse
+      armor: RoP
+      boots: Stalker
+      cape: Smuggler
+  - raw: Wailing/RG
+    weapons:
+    - 2H_BOW_HELL
+    - 2H_GLAIVE_CRYSTAL
+    role: dps
+    gear:
+      offhand: N/A
+      helm: Cleanse
+      armor: RoP
+      boots: Stalker
+      cape: Smuggler
+  - raw: Ballista (Mace/BL)
+    battlemount: Ballista
+    weapons:
+    - MAIN_MACE
+    - MAIN_RAPIER_MORGANA
+    role: battlemount
+    gear:
+      offhand: Mistcaller
+      helm: Soldier
+      armor: Judicator
+      boots: Feyscale
+      cape: Undead
+  - raw: Ballista (Mace/BL)
+    battlemount: Ballista
+    weapons:
+    - MAIN_MACE
+    - MAIN_RAPIER_MORGANA
+    role: battlemount
+    gear:
+      offhand: Mistcaller
+      helm: Soldier
+      armor: Judicator
+      boots: Feyscale
+      cape: Undead
+  - raw: Ballista (Mace/BL)
+    battlemount: Ballista
+    weapons:
+    - MAIN_MACE
+    - MAIN_RAPIER_MORGANA
+    role: battlemount
+    gear:
+      offhand: Mistcaller
+      helm: Soldier
+      armor: Judicator
+      boots: Feyscale
+      cape: Undead
+  - raw: Bastion (Mace/BL)
+    battlemount: Bastion
+    weapons:
+    - MAIN_MACE
+    - MAIN_RAPIER_MORGANA
+    role: battlemount
+    gear:
+      offhand: Mistcaller
+      helm: Soldier
+      armor: Judicator
+      boots: Feyscale
+      cape: Undead
+  - raw: Eagle (Mace/BL)
+    battlemount: Eagle
+    weapons:
+    - MAIN_MACE
+    - MAIN_RAPIER_MORGANA
+    role: battlemount
+    gear:
+      offhand: Mistcaller
+      helm: Soldier
+      armor: Judicator
+      boots: Feyscale
+      cape: Undead
+  - raw: Beetle (Mace/BL)
+    battlemount: Beetle
+    weapons:
+    - MAIN_MACE
+    - MAIN_RAPIER_MORGANA
+    role: battlemount
+    gear:
+      offhand: Mistcaller
+      helm: Soldier
+      armor: Judicator
+      boots: Feyscale
+      cape: Undead

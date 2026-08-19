@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Axe_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7643,
+   "revid": 8918,
+   "title": "Halberd ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Axe\n| mode = ZvZ\n| focus = Melee DPS\n| strengths = Reduces enemy healing potential, Consistent bleed damage\n| weaknesses = Mana sustain\n}}\n==Overview==\nThis Halberd ZvZ PvP build focuses on stacking bleed with {{Skill|Rending Spin}} and spreading it even more with {{Skill|Tear Apart}} which reduces enemy healing received and deals a good amount of damage while being relatively hard to kill. You will typically find yourself in the frontline and amidst the thick of the fights with this build.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Halberd\n| main hand weapon skills = Rending Spin, Raging Blades, Tear Apart, Aggressive Rush\n| head = Elder's Knight Helmet\n| head alternatives = Elder's Scholar Cowl\n| head skills = Displacement Immunity, Toughness\n| cape = Elder's Lymhurst Cape\n| cape alternatives = Elder's Martlock Cape\n| cape skills = Shield of Protection\n| armor = Elder's Jacket of Tenacity\n| armor alternatives = Elder's Hellion Jacket, Elder's Soldier Armor\n| armor skills = Dynamic Defense, Balanced Mind\n| shoes = Elder's Royal Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Deadwater Eel Stew\n| food alternatives = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Halberd|45}}===\n{{Skill|Rending Spin}} — Use this skill to apply stacks of bleed. Your goal is to apply as many stacks as possible while avoiding taking too much damage, allowing you to engage alongside your zerg. {{Skill|Rending Rage}} is also a very good option since it provides a bit of extra mobility.\nThe healing reduction counterpart of the bleed stacks is also highly beneficial.\n\n{{Skill|Raging Blades}} — This skill deals mediocre damage but provides a significant damage buff if you hit enemies with it. Ideally, you want to target at least 3 or 4 enemies to maximize the damage boost for subsequent skills.\n\n{{Skill|Tear Apart}} — This skill inflicts significant damage when used in conjunction with various buffs and is particularly effective because it spreads bleed stacks, which also reduce healing for all affected targets, assuming you spread 3 bleed stacks. Overall, it's highly effective, although the timing can be challenging to execute.\n\n{{Skill|Aggressive Rush}} — A nice damage buff, but you can also opt for {{Skill|Increased Defense}} for added defense.\n\n\n==={{Item|Elder's Jacket of Tenacity|45}}===\n{{Skill|Dynamic Defense}} — It's important to use this skill on a target that wields a physical damage weapon type so that you receive the damage buff.\n\n{{Skill|Balanced Mind}} — Straight up increases your damage and defense, which is great for when you pull off your {{Skill|Tear Apart}} combo. Some people prefer {{Skill|Quick Thinker}}.\n\n\n==={{Item|Elder's Knight Helmet|45}}===\n{{Skill|Displacement Immunity}} — You'll typically use this skill when engaging a clump of enemies to avoid getting interrupted, but remember you can also use it to support allies even if your {{Skill|Defenseless Rush}} is on cooldown and you can't follow up with damage yourself.\n\n{{Skill|Toughness}} — The standard choice for this build. Some people opt for {{Skill|Tenacity}}, but prioritizing your defensive stats is usually more important.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — Be cautious when using this skill as it increases the damage you receive, and remember that you can disable it early, right after you execute your damage combo.\n\n{{Skill|Aggression}} — The standard choice for halberd builds. Remember that you can always switch to {{Skill|Courier}} after winning big fights.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — Halberd always struggles with energy sustain, so utilizing {{Skill|Energy Reserve}} will immensely alleviate this issue. Alternatively, you could consider a Scholar Cowl with {{Skill|Energy Shield}}, but {{Skill|Displacement Immunity}} is often more beneficial for supporting your zerg.\n\n\n==Rotations==\n{{Rotation|Optimal DPS|Rending Spin, Rending Spin, Rending Spin, Defenseless Rush, Displacement Immunity, Dynamic Defense, Raging Blades, Aggressive Rush, Tear Apart}}\n* Stack the bleed component of {{Skill|Rending Spin}} on as many targets as possible. Utilize {{Skill|Defenseless Rush}} as both a movement and damage-increasing skill to reach a clump of enemies, while also hitting enemies with {{Skill|Raging Blades}} to stack a damage increase of up to 40%. Activate {{Skill|Dynamic Defense}} for an additional damage increase. Auto-attack any enemy three times beforehand so you can auto-attack once more for the 8% damage buff in the combo. Remember to reapply the bleed from {{Skill|Rending Spin}} if its close to running out. During the window where you have all these buffs active, aim to use {{Skill|Tear Apart}} in the midst of as many enemies as possible, ensuring that at least one of them has 3 bleed stacks to further spread the bleeds.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Feel free to use this potion as a general damage reduction cooldown, even if you haven't been caught in a clump. However, be cautious when it's on cooldown. You can also substitute it with {{Item|Major Gigantify Potion}}, but it typically offers less value.\n\n{{Item|Deadwater Eel Stew}} — This food compensates for its expense by offering a good combination of damage and cooldown reduction. A suitable budget option is still {{Item|Beef Stew}}.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7643": {
+     "ns": 0,
+     "pageid": 7643,
+     "revisions": [
+      {
+       "parentid": 8300,
+       "revid": 8918,
+       "timestamp": "2025-04-01T23:17:32Z"
+      }
+     ],
+     "title": "Halberd ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Arcane_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Range_DPS_builds",
+     "sortkey": "Range DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7755,
+   "revid": 8913,
+   "title": "Witchwork Staff ZvZ Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Arcane Staff\n| mode = ZvZ\n| focus = Range DPS\n| strengths = Easy to play, Great Support\n| weaknesses = Low Mobility\n}}\n==Overview==\nThis {{Item|Elder's Witchwork Staff}} build offers is a great choice for Bomb Squads in ZvZ PvP but can work well even in smaller scale ZvZ fights where you play with the main zerg. {{Skill|Black Hole}} is a great skill for clumping enemies and enables your party to make plays and kill groups of enemies with ease when played correctly. The build is rather easy to play once you've figured out the combo so even newer players can have a great time playing this. This build is also a great choice for those looking to become shotcallers.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Witchwork Staff\n| main hand weapon skills = Arcane Protection, Motivating Cleanse, Black Hole, Lingering Power\n| off hand weapon = Elder's Cryptcandle\n| head = Elder's Cleric Cowl\n| head skills = Ice Block, Aggression\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Royal Jacket\n| armor skills = Royal Banner, Quick Thinker\n| shoes = Elder's Boots of Valor\n| shoes skills = Premonition, Toughness\n| potion = Major Gigantify Potion\n| food = Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Wildfire Staff|45}}===\n{{Skill|Arcane Protection}} — Use this on yourself before an engage for the large shield that helps a lot and denies enemy damage, allowing you to push a bit deeper without taking any real damage. This skill can also be used on other allies to help them remain healthy during fights, often enough saving their lives.\n\n{{Skill|Motivating Cleanse}} — Use this to save your group from CCs whenever they get caught in CCs. This AOE will not only cleanse CC debuffs (and other debuffs that aren't DoT damage) but also give a good movement speed increase.\n\n{{Skill|Black Hole}} — This is the main skill you want to use in ZvZ as it casts a large AOE on the location and pulls all enemies caught in it to the center after 1 second, dealing damage and allowing your team to follow up with CCs and damage.\n\n{{Skill|Lingering Power}} — This passive triggers after every skill cast and increases your auto-attack speed for the next 3 auto-attacks. This shouldn't be a priority but its still a decent choice as you can do a bit of damage after a fight and when chasing down enemies.\n\n\n==={{Item|Elder's Royal Jacket|45}}===\n{{Skill|Royal Banner}} — Make sure to use this for your group after an engage to lower their cooldowns (and yours) before doing another engage. Try to call out when you are using this skill so your party knows.\n\n{{Skill|Quick Thinker}} — This is a great passive as it decreases your cooldowns and lets you use all your skills more often.\n\n\n==={{Item|Elder's Cleric Cowl|45}}===\n{{Skill|Ice Block}} — Use this as your main defensive skill whenever enemies engage on your zerg. Make sure not to move after you use this skill as it will cancel the ice block and make you vulnerable again. Often enough, shotcallers will ask for you to use this when they see an engage happening but you should still keep your eyes on the enemy movement and anticipate.\n\n{{Skill|Aggression}} — This passive grants you extra damage which is great to have even though damage isn't your main goal.\n\n\n==={{Item|Elder's Boots of Valor|45}}===\n{{Skill|Premonition}} — While not particularly easy to play, this run allows you to ignore CCs, however, you want to use this BEFORE walking over slow effects like the {{Skill|Frozen Hell}}.\n\n{{Skill|Toughness}} — This extra damage resistance is very useful.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — Long ZvZ fights are very mana intensive, especially when you are in a defensive position and you are fighting multiple enemy engages. This cape will constantly regenerate your mana which is perfect for such moments. An alternative is to use a {{Item|Elder's Martlock Cape}} for extra defence but only if you use a different helm.\n\n\n==Rotations==\n{{Rotation|Black Hole Engage|Premonition, Arcane Protection, Black Hole, Royal Banner}}\n*Start off by using {{Skill|Premonition}} to increase your movement speed and move into position. You want to follow up with {{Skill|Arcane Protection}} to give yourself a shield so you don't get killed while repositioning. Use {{Skill|Black Hole}} on a group of enemies before moving back and letting your allies do damage on the pull you've made. Use {{Skill|Royal Banner}} once allies have used their skills and feel free to use {{Skill|Motivating Cleanse}} to free any CC'd enemies.\n\n\n==Consumables==\n{{Item|Major Gigantify Potion}} — Use this as your secondary defensive skill after {{Skill|Ice Block}}, pop it if you see the enemy zerg trying an engage on you or if you need to reposition through an enemy group.\n\n{{Item|Pork Omelette}} — Only good choice for food, the {{Item|Pork Omelette}} decreases your cooldowns and allows you to use skills more often. Use at least a 7.1 version if you can afford it.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7755": {
+     "ns": 0,
+     "pageid": 7755,
+     "revisions": [
+      {
+       "parentid": 8602,
+       "revid": 8913,
+       "timestamp": "2025-04-01T23:16:29Z"
+      }
+     ],
+     "title": "Witchwork Staff ZvZ Build"
+    }
+   }
+  }
+ }
+}

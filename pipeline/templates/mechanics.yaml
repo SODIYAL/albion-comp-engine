@@ -101,6 +101,24 @@ aoe_escalation:
   cc_escalation_duration_curve: null
 
 # ---------------------------------------------------------------------------
+# CC diminishing returns (PvP interaction layer, 2026-08-19): repeated
+# crowd control on one target within a window is reduced in duration.
+# PLACEHOLDER — the curve, window and which CC classes share a DR bucket are
+# NOT recorded from a citable source yet; numbers land here first when they
+# are, same rule as resilience_penetration above. The interaction records
+# (pipeline/interactions.yaml) can already mark per-spell DR facts when
+# verified; nothing is invented meanwhile.
+cc_diminishing_returns: null
+
+# Healing-modifier rules (PvP interaction layer, 2026-08-19): global
+# penalties/modifiers on healing (e.g. reduced healing received under
+# repeated sources, "healing sickness"-type debuffs where they exist).
+# PLACEHOLDER — no citable table recorded; per-spell healing-received
+# reductions (Dawnsong's Flaming Phoenix -40%) live in the interaction
+# records with their sources instead.
+healing_modifiers: null
+
+# ---------------------------------------------------------------------------
 # Disarray (zerg debuff): reduces DAMAGE OUTPUT and CC DURATION when attacking
 # targets with a LOWER Disarray level; no effect vs same-or-higher level.
 # Debuff % = (attacker's level − target's level), i.e. 1% per level of

@@ -1,0 +1,46 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Mace_builds",
+     "missing": "",
+     "sortkey": ""
+    },
+    {
+     "*": "Tank_builds",
+     "sortkey": "Tank"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7758,
+   "revid": 8614,
+   "title": "Oathkeepers Support ZvZ Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Mace\n| mode = ZvZ\n| focus = Tank\n| strengths = Easy to play, Great Support, Tanky\n| weaknesses = Low Mobility\n}}\n==Overview==\nThe {{Item|Elder's Oathkeepers}} build is the perfect support for Bomb Squads in ZvZ PvP but can also be played well with the main zerg. {{Skill|Blessed Aurora}} is a fantastic shield that makes it very difficult for your team to be killed during pushes and also boosts their movement speed just enough to make a decisive push or survive during an enemy engage.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Oathkeepers\n| main hand weapon skills = Sacred Ground, Snare Charge, Blessed Aurora, Life Leech\n| head = Elder's Cleric Cowl\n| head skills = Ice Block, Aggression\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Royal Jacket\n| armor skills = Royal Banner, Quick Thinker\n| shoes = Elder's Boots of Valor\n| shoes alternatives = Elder's Graveguard Boots\n| shoes skills = Premonition, Toughness\n| potion = Major Gigantify Potion\n| food = Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Oathkeepers|45}}===\n{{Skill|Sacred Ground}} — Use this to deny enemy use of abilities and as a follow up after using your {{Skill|Snare Charge}}, you can also use this to deny enemy healers from healing once they are CC'd or you can use it on top of a player that used {{Skill|Ice Block}} in order to deny their escape.\n\n{{Skill|Snare Charge}} — Use this skill to pin down enemies and CC them or as a follow up after someone used {{Skill|Black Hole}} to keep them CC'd. It can also be used as a follow-up for essentially all other pulls offensive tanks make but you can use it on its own as well if enemies are stacked together.\n\n{{Skill|Blessed Aurora}} — This is your main skill and the most useful one you have. Always position yourself in front of your zerg and use this during engages so everyone passing through the wall receives a shield and increased movement speed. You can also use it on retreats to help with your zerg's movement in fights as the skill can affect up to 20 allies.\n\n{{Skill|Life Leech}} — Realistically none of the passives are particularly good as you don't use your auto-attacks too often. However, the {{Skill|Life Leech}} pairs well with the healing received from {{Skill|Blessed Aurora}} and can help a bit. {{Skill|Stunning Strike}} can also be a good alternative.\n\n\n==={{Item|Elder's Royal Jacket|45}}===\n{{Skill|Royal Banner}} — Always try to use this after an engage and make sure to call it out for your team to group up on top of you while you use it so they can benefit from the cooldown refresh. \n\n{{Skill|Quick Thinker}} — This is a great passive as it decreases your cooldowns and allow you to use skills more often.\n\n\n==={{Item|Elder's Cleric Cowl|45}}===\n{{Skill|Ice Block}} — Use this as your main defensive skill whenever enemies engage on your zerg or yourself. Make sure not to move after you use this skill as it will cancel the ice block and make you vulnerable again. Watch enemy zerg movement as you position yourself at the front of your zerg (or with your bomb squad) so you can better anticipate when enemies are about to drop damage.\n\n{{Skill|Aggression}} — This passive grants you extra damage which is great to have even though damage isn't your main goal.\n\n\n==={{Item|Elder's Boots of Valor|45}}===\n{{Skill|Premonition}} — Not the easiest skill to use but its not too difficult either, this run allows you to ignore CCs like slows, roots and slows. Walking over any of those 3 while the skill is active will give you a movement speed buff and also make you immune to the effects, acting similarly to a {{Skill|Displacement Immunity}} but its considerably less powerful. You can also use {{Item|Elder's Graveguard Boots}} as a cheaper alternative.\n\n{{Skill|Toughness}} — This extra damage resistance is very useful.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — Long ZvZ fights are very mana intensive, especially when you are in a defensive position and you are fighting multiple enemy engages. With your constant use of {{Skill|Royal Banner}}, the build can grow very mana hungry. This cape will constantly regenerate your mana which is perfect for such moments.\n\n\n==Rotations==\n{{Rotation|Support Rotation|Premonition, Blessed Aurora, Snare Charge, Sacred Ground, Royal Banner}}\n*Start off by using {{Skill|Premonition}} to increase your movement speed and move into position. You want to follow up with {{Skill|Blessed Aurora}} used in the path of your allies so they can make use of it and receive the shield. Use {{Skill|Snare Charge}} on a group of enemies to root them in place before using {{Skill|Sacred Ground}} to also silence them while they are rooted. You want to then move with your zerg and continue pushing or move back while {{Skill|Royal Banner}} remains active and your group stacks on top of you to receive its benefits.\n\n\n==Consumables==\n{{Item|Major Gigantify Potion}} — Use this as your secondary defensive skill after {{Skill|Ice Block}}, use it if you see the enemy zerg trying an engage on you or whenever your shotcaller asks for it to help with repositioning through enemies.\n\n{{Item|Pork Omelette}} — Only good choice for food, the {{Item|Pork Omelette}} decreases your cooldowns and allows you to use skills more often. As damage isn't a priority on this build, you want to maximize the utility you provide by using your skills as often as possible. Use at least a 7.1 version if you can afford it.\n\n\n==Comments==\n{{Comments}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7758": {
+     "ns": 0,
+     "pageid": 7758,
+     "revisions": [
+      {
+       "parentid": 8604,
+       "revid": 8614,
+       "timestamp": "2024-06-08T19:21:35Z"
+      }
+     ],
+     "title": "Oathkeepers Support ZvZ Build"
+    }
+   }
+  }
+ }
+}

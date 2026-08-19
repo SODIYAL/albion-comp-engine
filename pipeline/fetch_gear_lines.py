@@ -32,7 +32,7 @@ different items, not tiers of one. Gear and weapon keys share one namespace
 without colliding — weapons are 2H_*/MAIN_*.
 
 MOUNT is excluded on purpose: battlemounts are a real ZvZ factor but
-meta_comps.yaml already excludes mount slots from comps, so pulling them in
+the caller comps (data/published_comps/) already exclude mount slots, so pulling them in
 would be catalogue weight nothing reads. Add it when the engine scores mounts.
 
 Usage:  py -3 pipeline/fetch_item_stats.py   (first — builds the source)
@@ -44,6 +44,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
 SRC = os.path.join(OUT, "item_stats.json")
 DEST = os.path.join(OUT, "gear_lines.json")
+
+sys.path.insert(0, HERE)
+from provenance import record_derived  # noqa: E402
+
+ADAPTER = "fetch_gear_lines"
+ADAPTER_VERSION = "2"
 
 # The worn + consumable slots a loadout has. "mainhand" is a weapon and lives
 # in weapon_lines.json; "bag" carries no combat stat worth a slot in the UI.
@@ -77,6 +83,13 @@ def main():
 
     with open(DEST, "w", encoding="utf-8") as f:
         json.dump(gear, f, indent=1, sort_keys=True)
+    # gear_lines derives from item_stats.json — inherit its snapshot commit
+    # so the release check can prove the whole chain is one snapshot
+    with open(SRC, encoding="utf-8") as f:
+        src_commit = json.load(f).get("_meta", {}).get("source_commit",
+                                                       "local-override")
+    record_derived("gear_lines.json", DEST, ADAPTER, ADAPTER_VERSION,
+                   src_commit, ["items.json", "formatted/items.txt"])
 
     counts = {}
     for v in gear.values():

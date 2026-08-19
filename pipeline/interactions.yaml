@@ -1,0 +1,248 @@
+# PvP interaction records — curated, spell-keyed ("new prompt" spec §1-§4).
+#
+# Identity is the SPELL UniqueName, not the weapon: two different bows running
+# the same W share one named effect, and two different weapons with
+# same-stat-but-differently-named debuffs (Aftershock's HP cut vs Shrinking
+# Curse) must never be auto-merged. Compiled + validated by
+# pipeline/build_interactions.py into out/interactions.json.
+#
+# Field contract:
+#   spell            UniqueName (must exist in spell_index + be equippable)
+#   effect_name      the named buff/debuff identity, verbatim-ish
+#   duplicate        rollup enum: full | damage_only | refresh | override |
+#                    shared_stack | unique_effect_only | partial |
+#                    does_not_stack | unknown
+#   components       [{id, kind: damage|dot|ground_dot|buff|debuff|cc,
+#                      cc_type?, reflect?, purge?, cleanse?, duplicate?,
+#                      notes?}] — component enums add not_applicable/unknown
+#   badges           display chips for the dossier (derived ones are added
+#                    automatically: NON-REFLECTABLE, DUPLICATE:<X>)
+#   nonstacking_caps capability names whose PARTY SUPPLY counts once when two
+#                    members equip this same spell. ONLY honored when
+#                    confidence == verified; requires scoring_note. Unknown
+#                    never changes a score.
+#   confidence       verified | likely | community_reported | unknown
+#                    verified   = the game's own data states it
+#                    likely     = baseline game behavior (e.g. independent
+#                                 damage instances), not individually stated
+#   source, as_of, verified_patch — chapter-2 provenance conventions
+#
+# Every non-unknown claim cites its source. Missing facts stay unknown —
+# never guessed (§12).
+
+- spell: SPEEDARCHER_KITE
+  effect_name: "Enchanted Quiver (self arrow enchant)"
+  duplicate: full
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: "Enchant 4 of YOUR arrows …
+    YOUR Auto-Attack Speed / physical Auto-Attack damage" — a self-targeted
+    buff; each caster enchants their own arrows, so duplicates are fully
+    independent. (Corrects the stale community example of a shared
+    resistance-reduction Quiver — no such component exists in current data.)
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: [SELF-BUFF]
+  components:
+    - id: arrow_enchant
+      kind: buff
+      reflect: not_applicable
+      purge: unknown            # buff purgeability is not stated in the dumps
+      cleanse: not_applicable
+      duplicate: full
+
+- spell: LETHAL_CLEAVER
+  effect_name: "Aftershock (max & current Health -15%)"
+  duplicate: partial
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: leap + AoE hit, cone throw-up,
+    "Decreases Max and current Health by 0.15 for 5." Whether two casters'
+    Aftershock cuts stack is NOT stated — unknown, not assumed.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: [MAX-HP CUT, DISPLACEMENT]
+  components:
+    - id: initial_hit
+      kind: damage
+      reflect: unknown
+      duplicate: full
+      notes: "independent damage instances per caster (baseline behavior — likely)"
+    - id: cone_throw_up
+      kind: cc
+      cc_type: knockup
+      cleanse: unknown
+      duplicate: full
+    - id: hp_cut
+      kind: debuff
+      cleanse: unknown
+      duplicate: unknown
+      notes: >
+        Named effect distinct from Incubus Mace's Shrinking Curse — two
+        different named max-HP effects coexist and are never auto-merged.
+
+- spell: SHRINKINGSMASH
+  effect_name: "Shrinking Curse (max & current Health, damage, Healing Cast -40%)"
+  duplicate: partial
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: "decreasing max and current
+    Health of all enemies hit by 0.4 and their damage dealt and Healing Cast
+    by 0.4 for 8." Duplicate-caster stacking of the named debuff is NOT
+    stated — unknown.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: [MAX-HP CUT, ANTI-HEAL, DAMAGE CUT]
+  components:
+    - id: smash_damage
+      kind: damage
+      reflect: unknown
+      duplicate: full
+    - id: shrinking_curse
+      kind: debuff
+      cleanse: unknown
+      duplicate: unknown
+      notes: "distinct named effect from Aftershock's HP cut — they coexist"
+
+- spell: FROST_ULTIMATE
+  effect_name: "Ice Crystal (stun + explosion)"
+  duplicate: full
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: stun 1s, then explosion
+    "(the damage can't be reflected)". Two casters place two independent
+    crystals (ground zones) — full duplicate value for damage and control;
+    stun diminishing-returns interaction is not stated.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: [STUN]
+  components:
+    - id: stun
+      kind: cc
+      cc_type: stun
+      reflect: not_applicable   # CC placement is not reflectable damage
+      cleanse: unknown
+      duplicate: full
+    - id: explosion
+      kind: damage
+      reflect: non_reflectable
+      duplicate: full
+
+- spell: LIGHTNING_ARROW
+  effect_name: "Raging Storm (stormcloud zone)"
+  duplicate: full
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: stormcloud DoT "(this damage
+    cannot be reflected)" + lingering damage on enemies leaving the area.
+    Independent zones per caster.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: storm_zone
+      kind: ground_dot
+      reflect: non_reflectable
+      duplicate: full
+    - id: lingering_dot
+      kind: dot
+      reflect: non_reflectable
+      cleanse: unknown
+      duplicate: full
+
+- spell: DEATHCURSE2
+  effect_name: "Death Curse (consumes shared Vile Curse Charges)"
+  duplicate: shared_stack
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: "dealing magical damage based
+    on the amount of Vile Curse Charges on the target … (the damage cannot be
+    reflected)". Vile Curse Charges are one pool ON THE TARGET that every
+    curse caster feeds — duplicates accelerate the shared stack (a synergy,
+    not a conflict; each cast's damage is its own instance).
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: [CURSE CHARGES]
+  components:
+    - id: delayed_damage
+      kind: damage
+      reflect: non_reflectable
+      duplicate: full
+    - id: charge_consumption
+      kind: debuff
+      reflect: not_applicable   # a charge-pool mechanic, not damage that lands
+      duplicate: shared_stack
+      cleanse: unknown
+
+- spell: DYNAMIC_CURSE
+  effect_name: "Inner Shadow (armor-class-dependent zone)"
+  duplicate: unknown
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: per-armor-class duration/
+    damage, "(this damage cannot be reflected)". Whether two Inner Shadows
+    on one target coexist is NOT stated.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: []
+  components:
+    - id: shadow_dot
+      kind: dot
+      reflect: non_reflectable
+      cleanse: unknown
+      duplicate: unknown
+
+- spell: FIREPHOENIX
+  effect_name: "Flaming Phoenix (hit + burning ground + Healing Received -40%)"
+  duplicate: partial
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: initial 200 damage, ground
+    fire for 6.5 whose ticks "(this damage cannot be reflected)", and
+    "reduces Healing Received by 0.4". The initial hit's reflectability and
+    the anti-heal's duplicate-caster stacking are NOT stated. The showcase
+    partial-interaction ability: three components, three behaviors.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: [ANTI-HEAL]
+  components:
+    - id: initial_hit
+      kind: damage
+      reflect: unknown
+      duplicate: full
+    - id: burning_ground
+      kind: ground_dot
+      reflect: non_reflectable
+      duplicate: full
+      notes: "independent ground areas per caster"
+    - id: healing_received_cut
+      kind: debuff
+      cleanse: unknown
+      duplicate: unknown
+
+- spell: BLACKHOLE
+  effect_name: "Black Hole (pull + damage + slow)"
+  duplicate: full
+  confidence: likely
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9 states pull, damage and slow;
+    nothing about reflect or duplicate behavior. Two black holes are two
+    ground zones (baseline behavior) — likely full, not verified.
+  as_of: 2026-08-19
+  verified_patch: "2026-07-21"
+  badges: [PULL]
+  components:
+    - id: pull
+      kind: cc
+      cc_type: pull
+      cleanse: unknown
+      duplicate: full
+    - id: damage
+      kind: damage
+      reflect: unknown
+      duplicate: full
+    - id: slow
+      kind: cc
+      cc_type: slow
+      cleanse: unknown
+      duplicate: unknown

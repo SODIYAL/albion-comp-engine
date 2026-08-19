@@ -1,0 +1,1175 @@
+{
+ "_meta": {
+  "granted": [
+   "2H_ARCANE_RINGPAIR_AVALON",
+   "2H_BOW_AVALON",
+   "2H_BOW_CRYSTAL",
+   "2H_BOW_HELL",
+   "2H_BOW_KEEPER",
+   "2H_COMBATSTAFF_MORGANA",
+   "2H_CROSSBOW",
+   "2H_CROSSBOWLARGE",
+   "2H_CROSSBOWLARGE_MORGANA",
+   "2H_CROSSBOW_CANNON_AVALON",
+   "2H_CURSEDSTAFF",
+   "2H_CURSEDSTAFF_MORGANA",
+   "2H_DEMONICSTAFF",
+   "2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+   "2H_DUALCROSSBOW_HELL",
+   "2H_FIRESTAFF",
+   "2H_FIRESTAFF_HELL",
+   "2H_FIRE_RINGPAIR_AVALON",
+   "2H_FROSTSTAFF",
+   "2H_FROSTSTAFF_CRYSTAL",
+   "2H_GLACIALSTAFF",
+   "2H_GLAIVE_CRYSTAL",
+   "2H_HALBERD_MORGANA",
+   "2H_HARPOON_HELL",
+   "2H_ICECRYSTAL_UNDEAD",
+   "2H_ICEGAUNTLETS_HELL",
+   "2H_INFERNOSTAFF_MORGANA",
+   "2H_KNUCKLES_HELL",
+   "2H_KNUCKLES_SET3",
+   "2H_LONGBOW",
+   "2H_QUARTERSTAFF_AVALON",
+   "2H_REPEATINGCROSSBOW_UNDEAD",
+   "2H_SKULLORB_HELL",
+   "2H_TWINSCYTHE_HELL",
+   "MAIN_1HCROSSBOW",
+   "MAIN_ARCANESTAFF_UNDEAD",
+   "MAIN_CURSEDSTAFF_UNDEAD",
+   "MAIN_FIRESTAFF",
+   "MAIN_FIRESTAFF_KEEPER",
+   "MAIN_FROSTSTAFF",
+   "MAIN_FROSTSTAFF_KEEPER",
+   "MAIN_SPEAR_KEEPER"
+  ],
+  "rule": "bundle claims burst_aoe (curated, evidence-linted) AND its spell is ground/enemy-delivered with cast_range >= 9; ranged_overrides.yaml wins with citation; missing structural facts = unknown, never inferred",
+  "unknown": []
+ },
+ "weapons": {
+  "2H_ARCANESTAFF_CRYSTAL": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 0.0,
+     "cooldown": "30",
+     "delivery": "self",
+     "granted": false,
+     "max_targets": null,
+     "radius": 8.0,
+     "slot": "e",
+     "spell": "STARFALL_DOT"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_ARCANE_RINGPAIR_AVALON": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 15.0,
+     "cooldown": "38",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 3,
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "ARCANE_METEOR"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_AXE": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 5.0,
+     "cooldown": "25",
+     "delivery": "self",
+     "granted": false,
+     "max_targets": null,
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "AXEWHIRLWIND2"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_AXE_AVALON": {
+   "decisions": [
+    {
+     "basis": "curated_override_deny",
+     "cast_range": 10.0,
+     "cooldown": "25",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": null,
+     "override": {
+      "as_of": "2026-08-19",
+      "reason": "\"Leap towards the targeted position and slam your axe into the ground\" \u2014 the AoE lands around the wielder after a gap-close; this is an engage, not ranged pressure on a clump from outside it.",
+      "source": "Spell description (ao-bin-dumps 5cf2e8e9); Timothy's blap sheet fields Realmbreaker as melee dps \u2014 \"Press E on engage, chop people\" (2026-08)."
+     },
+     "radius": 4.0,
+     "slot": "e",
+     "spell": "LETHAL_CLEAVER"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_BOW_AVALON": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 24.0,
+     "cooldown": "0",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 12.0,
+     "slot": "e",
+     "spell": "HAWK_SHOT_MULTI1"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_BOW_CRYSTAL": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 10.0,
+     "cooldown": "25",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 1.0,
+     "slot": "e",
+     "spell": "AIR_RAID"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_BOW_HELL": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 24.0,
+     "cooldown": "25",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 5,
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "HELL_ARROW"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_BOW_KEEPER": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 26.0,
+     "cooldown": "30",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 1,
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "LIGHTNING_ARROW"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_CLAYMORE_AVALON": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 6.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": null,
+     "radius": 6.0,
+     "slot": "e",
+     "spell": "MAJESTIC_SMASH"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_CLEAVER_HELL": {
+   "decisions": [
+    {
+     "basis": "curated_override_deny",
+     "cast_range": 11.0,
+     "cooldown": "25",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": null,
+     "override": {
+      "as_of": "2026-08-19",
+      "reason": "\"Dash towards the targeted position, dealing damage to all enemies you pass through\" \u2014 a dash line, wielder ends inside the enemy clump.",
+      "source": "Spell description (ao-bin-dumps 5cf2e8e9); Timothy's blap sheet fields Carving as melee pierce \u2014 \"Pierce for engage\" (2026-08)."
+     },
+     "radius": null,
+     "slot": "e",
+     "spell": "CLAYMORESLASH"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_COMBATSTAFF_MORGANA": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 15.0,
+     "cooldown": "26.8",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "COMBATSTAFF_SLASH"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_CROSSBOW": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 13.0,
+     "cooldown": "2",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 3.0,
+     "slot": "q",
+     "spell": "BOLTSHOT"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_CROSSBOWLARGE": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 24.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 11.75,
+     "slot": "e",
+     "spell": "CROSSBOW_ARMORPIERCER"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_CROSSBOWLARGE_MORGANA": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 13.0,
+     "cooldown": "2",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 3.0,
+     "slot": "q",
+     "spell": "BOLTSHOT"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_CROSSBOW_CANNON_AVALON": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 13.0,
+     "cooldown": "2",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 3.0,
+     "slot": "q",
+     "spell": "BOLTSHOT"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_CURSEDSTAFF": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 15.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "AREAOFDECAY"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_CURSEDSTAFF_MORGANA": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 12.0,
+     "cooldown": "30",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 13.0,
+     "slot": "e",
+     "spell": "CURSEULTIMATE"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_DAGGERPAIR_CRYSTAL": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 7.0,
+     "cooldown": "1",
+     "delivery": "self",
+     "granted": false,
+     "max_targets": null,
+     "radius": null,
+     "slot": "e",
+     "spell": "CRYSTAL_DAGGER_BLADE_RING"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_DEMONICSTAFF": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 22.0,
+     "cooldown": "25",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 3.0,
+     "slot": "e",
+     "spell": "CURSED_WALL"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_DOUBLEBLADEDSTAFF": {
+   "decisions": [
+    {
+     "basis": "curated_override_deny",
+     "cast_range": 15.0,
+     "cooldown": "25",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": null,
+     "override": {
+      "as_of": "2026-08-19",
+      "reason": "\"Leap towards the targeted position, dealing damage in a 5 radius\" \u2014 body-delivered impact AoE after a gap-close.",
+      "source": "Spell description (ao-bin-dumps 5cf2e8e9)."
+     },
+     "radius": null,
+     "slot": "e",
+     "spell": "DASH_KNOCKBACK"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_DOUBLEBLADEDSTAFF_CRYSTAL": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 9.0,
+     "cooldown": "1",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "QS_CRYSTAL_COMBO"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_DUALAXE_KEEPER": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 8.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": null,
+     "radius": 1.0,
+     "slot": "e",
+     "spell": "DUALAXE_CRAWLER"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_DUALCROSSBOW_CRYSTAL": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 8.0,
+     "cooldown": "10",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": null,
+     "radius": null,
+     "slot": "e",
+     "spell": "CRYSTALXBOW"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_DUALCROSSBOW_HELL": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 13.0,
+     "cooldown": "2",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 3.0,
+     "slot": "q",
+     "spell": "BOLTSHOT"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_DUALSCIMITAR_UNDEAD": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 0.0,
+     "cooldown": "30",
+     "delivery": "self",
+     "granted": false,
+     "max_targets": null,
+     "radius": 8.5,
+     "slot": "e",
+     "spell": "BLADE_AREA"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_DUALSWORD": {
+   "decisions": [
+    {
+     "basis": "curated_override_deny",
+     "cast_range": 13.0,
+     "cooldown": "15",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": null,
+     "override": {
+      "as_of": "2026-08-19",
+      "reason": "\"Leap towards the targeted position \u2026 deals damage in a 5 radius on impact\" \u2014 body-delivered impact AoE after a gap-close.",
+      "source": "Spell description (ao-bin-dumps 5cf2e8e9)."
+     },
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "SPINATTACK"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_FIRESTAFF": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 15.0,
+     "cooldown": "15",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 4.0,
+     "slot": "e",
+     "spell": "FLAMEPILLAR"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_FIRESTAFF_HELL": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 15.0,
+     "cooldown": "30",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "METEOR"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_FIRE_RINGPAIR_AVALON": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 15.0,
+     "cooldown": "30",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 9.0,
+     "slot": "e",
+     "spell": "FIREPHOENIX"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_FROSTSTAFF": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 15.0,
+     "cooldown": "1",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "HAIL_MULTI_1"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_FROSTSTAFF_CRYSTAL": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 22.0,
+     "cooldown": "12",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 1,
+     "radius": 4.0,
+     "slot": "e",
+     "spell": "FROST_TARGETED_CHANNEL"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_GLACIALSTAFF": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 10.0,
+     "cooldown": "30",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "ICESTORM2"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_GLAIVE_CRYSTAL": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 17.0,
+     "cooldown": "30",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 8.5,
+     "slot": "e",
+     "spell": "SPEAR_AOE_FINISHER"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_HALBERD": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 7.0,
+     "cooldown": "15",
+     "delivery": "self",
+     "granted": false,
+     "max_targets": null,
+     "radius": 15.0,
+     "slot": "e",
+     "spell": "RENDINGSWING"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_HALBERD_MORGANA": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 20.0,
+     "cooldown": "15",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 2.5,
+     "slot": "e",
+     "spell": "SHOCKWAVE"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_HARPOON_HELL": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 12.0,
+     "cooldown": "12",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 2.5,
+     "slot": "w",
+     "spell": "GROUNDSPEAR"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_ICECRYSTAL_UNDEAD": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 15.0,
+     "cooldown": "30",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 4.0,
+     "slot": "e",
+     "spell": "FROST_ULTIMATE"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_ICEGAUNTLETS_HELL": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 14.0,
+     "cooldown": "30",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 8.0,
+     "slot": "e",
+     "spell": "GLACIALFIELD"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_INFERNOSTAFF_MORGANA": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 22.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 1,
+     "radius": 5.0,
+     "slot": "w",
+     "spell": "SKILLSHOT_FIREBALL"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_KNUCKLES_HELL": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 10.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 4.0,
+     "slot": "e",
+     "spell": "BOULDER_TOSS"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_KNUCKLES_KEEPER": {
+   "decisions": [
+    {
+     "basis": "curated_override_deny",
+     "cast_range": 11.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": null,
+     "override": {
+      "as_of": "2026-08-19",
+      "reason": "The cone channel reaches ~11m but the weapon is fielded as a diving kidnap/brawl pick, not ranged clump pressure; its clump value is curated separately (clump_create via Triple Kick).",
+      "source": "Timothy's blap sheet \u2014 \"E on engage EARLY, kidnap healers or overcommitted tanks\" (2026-08)."
+     },
+     "radius": null,
+     "slot": "e",
+     "spell": "PUMMELING_STRIKES"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_KNUCKLES_MORGANA": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 0.0,
+     "cooldown": "30",
+     "delivery": "self",
+     "granted": false,
+     "max_targets": null,
+     "radius": null,
+     "slot": "e",
+     "spell": "GROWING_PUNCH"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_KNUCKLES_SET1": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 3.0,
+     "cooldown": "15",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": null,
+     "radius": 4.0,
+     "slot": "e",
+     "spell": "BLAZING_GEYSER"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_KNUCKLES_SET3": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 13.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": null,
+     "slot": "e",
+     "spell": "IMPULSE_PUNCH"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_LONGBOW": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 15.0,
+     "cooldown": "15",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 5,
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "ARROWRAIN"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_QUARTERSTAFF": {
+   "decisions": [
+    {
+     "basis": "curated_override_deny",
+     "cast_range": 13.0,
+     "cooldown": "15",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": null,
+     "override": {
+      "as_of": "2026-08-19",
+      "reason": "\"Vault Leap towards the targeted position \u2026 deals damage in a 5 radius\" \u2014 body-delivered impact AoE after a gap-close.",
+      "source": "Spell description (ao-bin-dumps 5cf2e8e9)."
+     },
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "VAULT_ATTACK"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_QUARTERSTAFF_AVALON": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 20.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 10.0,
+     "slot": "e",
+     "spell": "SOULSHAKER"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_REPEATINGCROSSBOW_UNDEAD": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 15.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 1,
+     "radius": 7.0,
+     "slot": "e",
+     "spell": "GROUNDMINE"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_SCYTHE_CRYSTAL": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 3.0,
+     "cooldown": "3",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": null,
+     "radius": null,
+     "slot": "e",
+     "spell": "CRYSTAL_SCYTHE_DASH_ZONE"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_SCYTHE_HELL": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 0.0,
+     "cooldown": "20",
+     "delivery": "self",
+     "granted": false,
+     "max_targets": null,
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "SCYTHESWING"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_SHAPESHIFTER_AVALON": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 0.0,
+     "cooldown": "15",
+     "delivery": "self",
+     "granted": false,
+     "max_targets": null,
+     "radius": null,
+     "slot": "e",
+     "spell": "SHAPESHIFT_AVALONIAN_EAGLE"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_SHAPESHIFTER_HELL": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 0.0,
+     "cooldown": "8",
+     "delivery": "self",
+     "granted": false,
+     "max_targets": null,
+     "radius": null,
+     "slot": "e",
+     "spell": "SHAPESHIFT_IMP"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_SHAPESHIFTER_SET3": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 0.0,
+     "cooldown": "10",
+     "delivery": "self",
+     "granted": false,
+     "max_targets": null,
+     "radius": null,
+     "slot": "e",
+     "spell": "SHAPESHIFT_BEAR"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_SKULLORB_HELL": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 15.0,
+     "cooldown": "30",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 6.0,
+     "slot": "e",
+     "spell": "SKULLCURSE"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_TWINSCYTHE_HELL": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 25.0,
+     "cooldown": "30",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 7.0,
+     "slot": "e",
+     "spell": "TORNADO"
+    }
+   ],
+   "status": "granted"
+  },
+  "MAIN_1HCROSSBOW": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 11.0,
+     "cooldown": "15",
+     "delivery": "enemy",
+     "granted": true,
+     "max_targets": null,
+     "radius": null,
+     "slot": "e",
+     "spell": "EXPLODING_SHOT"
+    }
+   ],
+   "status": "granted"
+  },
+  "MAIN_ARCANESTAFF_UNDEAD": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 14.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 6.0,
+     "slot": "e",
+     "spell": "BLACKHOLE"
+    }
+   ],
+   "status": "granted"
+  },
+  "MAIN_CURSEDSTAFF_AVALON": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 15.0,
+     "cooldown": "30",
+     "delivery": "allplayers",
+     "granted": false,
+     "max_targets": null,
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "DYNAMIC_CURSE"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "MAIN_CURSEDSTAFF_UNDEAD": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 15.0,
+     "cooldown": "63",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 6.5,
+     "slot": "e",
+     "spell": "ENFEEBLEBLADES"
+    }
+   ],
+   "status": "granted"
+  },
+  "MAIN_DAGGER_HELL": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 3.0,
+     "cooldown": "0",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": null,
+     "radius": null,
+     "slot": "e",
+     "spell": "BLOOD_BLADE"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "MAIN_FIRESTAFF": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 15.0,
+     "cooldown": "15",
+     "delivery": "enemy",
+     "granted": true,
+     "max_targets": null,
+     "radius": null,
+     "slot": "e",
+     "spell": "PYROBLAST_SKILLSHOT"
+    }
+   ],
+   "status": "granted"
+  },
+  "MAIN_FIRESTAFF_CRYSTAL": {
+   "decisions": [
+    {
+     "basis": "curated_override_deny",
+     "cast_range": 14.0,
+     "cooldown": "40",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": null,
+     "override": {
+      "as_of": "2026-08-19",
+      "reason": "\"Transform into a Fireball \u2026 Fly up to 14 towards the targeted position, deals damage to all enemies in a radius\" \u2014 the wielder IS the projectile; damage lands around self at the destination. Same body-delivery class as the melee leaps.",
+      "source": "Spell description (ao-bin-dumps 5cf2e8e9)."
+     },
+     "radius": 5.0,
+     "slot": "e",
+     "spell": "FLAMEDASH"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "MAIN_FIRESTAFF_KEEPER": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 25.0,
+     "cooldown": "30",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 2.0,
+     "slot": "e",
+     "spell": "MAGMASPHERE"
+    }
+   ],
+   "status": "granted"
+  },
+  "MAIN_FROSTSTAFF": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 12.0,
+     "cooldown": "18",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": null,
+     "slot": "e",
+     "spell": "FREEZINGWIND"
+    }
+   ],
+   "status": "granted"
+  },
+  "MAIN_FROSTSTAFF_KEEPER": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 26.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 2.5,
+     "slot": "e",
+     "spell": "ICEROCK_EXPLODE"
+    }
+   ],
+   "status": "granted"
+  },
+  "MAIN_MACE_CRYSTAL": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 3.0,
+     "cooldown": "1.5",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": 1,
+     "radius": null,
+     "slot": "e",
+     "spell": "MACE_CRYSTAL_FRAGMENT_STORM"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "MAIN_SPEAR_KEEPER": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 22.0,
+     "cooldown": "20",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 1,
+     "radius": 4.0,
+     "slot": "e",
+     "spell": "SPEARTHROW"
+    }
+   ],
+   "status": "granted"
+  },
+  "MAIN_SWORD_CRYSTAL": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 0.0,
+     "cooldown": "0",
+     "delivery": "self",
+     "granted": false,
+     "max_targets": null,
+     "radius": null,
+     "slot": "e",
+     "spell": "SWORD_BERSERK_RUN_RE"
+    }
+   ],
+   "status": "not_granted"
+  }
+ }
+}

@@ -1,5 +1,15 @@
 {
  "ACID_BOMB": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.5
+   },
+   {
+    "kind": "circle",
+    "radius": 4.5
+   }
+  ],
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "12",
@@ -8,8 +18,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Explosive Salvo",
   "preferred_target": "enemy",
+  "radius": 4.5,
   "tags": [
    "debuff",
    "dmg",
@@ -18,6 +30,7 @@
   "target": "ground"
  },
  "AIR_RAID": {
+  "area": null,
   "cast_range": "10",
   "casting_time": "0",
   "cooldown": "25",
@@ -26,8 +39,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Sky's Fury",
   "preferred_target": "enemy",
+  "radius": 1.0,
   "tags": [
    "buff",
    "dmg",
@@ -37,6 +52,28 @@
   "target": "ground"
  },
  "ARCANECORRIDOR": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 25.0,
+    "width": 4.0
+   },
+   {
+    "kind": "rect",
+    "length": null,
+    "width": 4.0
+   },
+   {
+    "kind": "rect",
+    "length": 25.0,
+    "width": 4.0
+   },
+   {
+    "kind": "rect",
+    "length": 25.0,
+    "width": 4.0
+   }
+  ],
   "cast_range": "25",
   "casting_time": "0",
   "cooldown": "44",
@@ -48,8 +85,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Time Corridor",
   "preferred_target": "ally",
+  "radius": 12.5,
   "tags": [
    "buff",
    "cc",
@@ -58,6 +97,12 @@
   "target": "ground"
  },
  "ARCANEORB2": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 2.0
+   }
+  ],
   "cast_range": "25",
   "casting_time": "0",
   "cooldown": "20",
@@ -70,8 +115,10 @@
    "purge",
    "silence"
   ],
+  "max_targets": 1,
   "name": "Arcane Orb",
   "preferred_target": "enemy",
+  "radius": 6.0,
   "tags": [
    "cc",
    "dmg",
@@ -80,6 +127,13 @@
   "target": "ground"
  },
  "ARCANE_CHAIN_MISSILE": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 3.5,
+    "width": 2.0
+   }
+  ],
   "cast_range": "17",
   "casting_time": "0.2",
   "cooldown": "3",
@@ -89,8 +143,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": 1,
   "name": "Chain Missile",
   "preferred_target": "enemy",
+  "radius": 1.75,
   "tags": [
    "dmg",
    "other"
@@ -98,6 +154,12 @@
   "target": "ground"
  },
  "ARCANE_METEOR": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0.4",
   "cooldown": "38",
@@ -109,8 +171,10 @@
    "heal",
    "slow"
   ],
+  "max_targets": 3,
   "name": "Dark Sphere",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "cc",
    "debuff",
@@ -120,6 +184,12 @@
   "target": "ground"
  },
  "AREAOFDECAY": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0",
   "cooldown": "20",
@@ -131,8 +201,10 @@
    "heal",
    "purge"
   ],
+  "max_targets": null,
   "name": "Area of Decay",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "dmg",
    "other"
@@ -140,6 +212,13 @@
   "target": "ground"
  },
  "ARMORPIERCER": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 22.0,
+    "width": 2.0
+   }
+  ],
   "cast_range": "22",
   "casting_time": "0",
   "cooldown": "15",
@@ -151,8 +230,10 @@
    "pierce",
    "shield"
   ],
+  "max_targets": null,
   "name": "Armor Piercer",
   "preferred_target": "enemy",
+  "radius": 11.0,
   "tags": [
    "debuff",
    "dmg"
@@ -160,6 +241,12 @@
   "target": "ground"
  },
  "ARROWRAIN": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0",
   "cooldown": "15",
@@ -170,8 +257,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": 5,
   "name": "Rain of Arrows",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "cc",
    "dmg",
@@ -180,6 +269,7 @@
   "target": "ground"
  },
  "ASSASSINSPIRIT": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "1",
@@ -190,8 +280,10 @@
   "flags": [
    "pierce"
   ],
+  "max_targets": null,
   "name": "Assassin Spirit",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -199,6 +291,7 @@
   "target": "self"
  },
  "AUTOFIRE2": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "5",
@@ -207,8 +300,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Auto Fire",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "dmg",
    "other"
@@ -216,6 +311,7 @@
   "target": "enemy"
  },
  "AXEBOOST": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "20",
@@ -224,8 +320,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Adrenaline Boost",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -233,6 +331,7 @@
   "target": "self"
  },
  "AXESMASH": {
+  "area": null,
   "cast_range": "3",
   "casting_time": "0.4",
   "cooldown": "15",
@@ -243,8 +342,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Deadly Chop",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "debuff",
    "dmg"
@@ -252,6 +353,13 @@
   "target": "enemy"
  },
  "AXETHROW": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 3.0,
+    "width": 2.5
+   }
+  ],
   "cast_range": "18",
   "casting_time": "0",
   "cooldown": "10",
@@ -263,8 +371,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Blood Bandit",
   "preferred_target": "enemy",
+  "radius": 1.5,
   "tags": [
    "dmg",
    "heal",
@@ -273,6 +383,7 @@
   "target": "ground"
  },
  "AXEWHIRLWIND2": {
+  "area": null,
   "cast_range": "5",
   "casting_time": "0",
   "cooldown": "25",
@@ -281,8 +392,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Whirlwind",
   "preferred_target": "neutral",
+  "radius": 5.0,
   "tags": [
    "buff",
    "dmg",
@@ -291,6 +404,7 @@
   "target": "self"
  },
  "AXE_CHARGE": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "18",
@@ -302,8 +416,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Battle Rush",
   "preferred_target": "enemyandally",
+  "radius": 5.0,
   "tags": [
    "buff",
    "debuff",
@@ -313,6 +429,18 @@
   "target": "ground"
  },
  "BACKHAND_KNOCKBACK": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 9.0,
+    "width": 5.0
+   },
+   {
+    "kind": "rect",
+    "length": 9.0,
+    "width": 5.0
+   }
+  ],
   "cast_range": "6",
   "casting_time": "0",
   "cooldown": "15",
@@ -323,8 +451,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": 10,
   "name": "Backhand Strike",
   "preferred_target": "enemy",
+  "radius": 4.5,
   "tags": [
    "cc",
    "debuff",
@@ -334,6 +464,7 @@
   "target": "ground"
  },
  "BACK_SLASH": {
+  "area": null,
   "cast_range": "6",
   "casting_time": "0",
   "cooldown": "20",
@@ -342,8 +473,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Merciless Finish",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "dmg",
    "mobility",
@@ -352,6 +485,16 @@
   "target": "ground"
  },
  "BLACKHOLE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 6.0
+   },
+   {
+    "kind": "circle",
+    "radius": 6.0
+   }
+  ],
   "cast_range": "14",
   "casting_time": "0",
   "cooldown": "20",
@@ -363,8 +506,10 @@
    "pull",
    "slow"
   ],
+  "max_targets": null,
   "name": "Black Hole",
   "preferred_target": "enemy",
+  "radius": 6.0,
   "tags": [
    "cc",
    "dmg",
@@ -373,6 +518,28 @@
   "target": "ground"
  },
  "BLADE_AREA": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": null,
+    "width": 1.2
+   },
+   {
+    "kind": "rect",
+    "length": null,
+    "width": 1.2
+   },
+   {
+    "kind": "rect",
+    "length": null,
+    "width": 1.2
+   },
+   {
+    "kind": "rect",
+    "length": null,
+    "width": 1.2
+   }
+  ],
   "cast_range": "0",
   "casting_time": "0.9",
   "cooldown": "30",
@@ -384,8 +551,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Soulless Stream",
   "preferred_target": "neutral",
+  "radius": 8.5,
   "tags": [
    "debuff",
    "dmg",
@@ -394,6 +563,7 @@
   "target": "self"
  },
  "BLADE_AURA": {
+  "area": null,
   "cast_range": "5",
   "casting_time": "0",
   "cooldown": "12",
@@ -403,8 +573,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Raging Blades",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -413,6 +585,20 @@
   "target": "self"
  },
  "BLAZING_GEYSER": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   },
+   {
+    "kind": "circle",
+    "radius": 4.0
+   },
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "15",
@@ -424,8 +610,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Blazing Geyser",
   "preferred_target": "enemy",
+  "radius": 4.0,
   "tags": [
    "cc",
    "dmg",
@@ -434,6 +622,13 @@
   "target": "ground"
  },
  "BLESSED_MACES": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 2.5,
+    "width": null
+   }
+  ],
   "cast_range": "2",
   "casting_time": "0",
   "cooldown": "30",
@@ -446,8 +641,10 @@
    "heal",
    "shield"
   ],
+  "max_targets": 20,
   "name": "Blessed Aurora",
   "preferred_target": "neutral",
+  "radius": 1.25,
   "tags": [
    "buff",
    "heal",
@@ -456,6 +653,7 @@
   "target": "ground"
  },
  "BLOODTHIRSTYBLADE": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "20",
@@ -467,8 +665,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Bloodthirsty Blade",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -478,6 +678,7 @@
   "target": "self"
  },
  "BLOOD_BLADE": {
+  "area": null,
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "0",
@@ -486,8 +687,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Blood Ritual",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "dmg",
    "other"
@@ -495,6 +698,7 @@
   "target": "ground"
  },
  "BOLTSHOT": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "2",
@@ -503,8 +707,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Explosive Bolt",
   "preferred_target": "enemy",
+  "radius": 3.0,
   "tags": [
    "dmg",
    "other"
@@ -512,6 +718,24 @@
   "target": "ground"
  },
  "BOULDER_TOSS": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   },
+   {
+    "kind": "circle",
+    "radius": 4.0
+   },
+   {
+    "kind": "circle",
+    "radius": 3.5
+   },
+   {
+    "kind": "circle",
+    "radius": 3.0
+   }
+  ],
   "cast_range": "10",
   "casting_time": "0.62",
   "cooldown": "20",
@@ -523,8 +747,10 @@
    "heal",
    "heal_reduction"
   ],
+  "max_targets": null,
   "name": "Infernal Boulder",
   "preferred_target": "enemy",
+  "radius": 4.0,
   "tags": [
    "debuff",
    "dmg",
@@ -533,6 +759,27 @@
   "target": "ground"
  },
  "BRAMBLESEED": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 1.0
+   },
+   {
+    "kind": "rect",
+    "length": 16.0,
+    "width": 3.5
+   },
+   {
+    "kind": "rect",
+    "length": 4.0,
+    "width": 3.5
+   },
+   {
+    "kind": "rect",
+    "length": 4.0,
+    "width": 3.5
+   }
+  ],
   "cast_range": "16",
   "casting_time": "0.25",
   "cooldown": "10",
@@ -543,8 +790,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Brambleseed",
   "preferred_target": "enemy",
+  "radius": 8.0,
   "tags": [
    "cc",
    "dmg",
@@ -553,6 +802,7 @@
   "target": "ground"
  },
  "BRIEROFLIFE": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "15",
@@ -564,8 +814,10 @@
    "heal",
    "shield"
   ],
+  "max_targets": null,
   "name": "Living Armor",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "buff",
    "heal"
@@ -573,6 +825,7 @@
   "target": "friendall"
  },
  "BURNINGARROWS": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "20",
@@ -581,8 +834,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Explosive Arrows",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "dmg",
    "other"
@@ -590,6 +845,12 @@
   "target": "self"
  },
  "CALTROPS": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 2.0
+   }
+  ],
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "5",
@@ -598,8 +859,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": 1,
   "name": "Caltrops",
   "preferred_target": "enemy",
+  "radius": 3.0,
   "tags": [
    "buff",
    "cc",
@@ -609,6 +872,7 @@
   "target": "ground"
  },
  "CARTWHEEL": {
+  "area": null,
   "cast_range": "8",
   "casting_time": "0",
   "cooldown": "6",
@@ -621,8 +885,10 @@
    "knockback",
    "shield"
   ],
+  "max_targets": null,
   "name": "Cartwheel",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "cc",
@@ -632,6 +898,7 @@
   "target": "ground"
  },
  "CELESTIAL_SPHERE": {
+  "area": null,
   "cast_range": "10",
   "casting_time": "0.5",
   "cooldown": "25",
@@ -642,8 +909,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Celestial Sphere",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "heal",
    "other"
@@ -651,6 +920,7 @@
   "target": "friendall"
  },
  "CHAINDASH": {
+  "area": null,
   "cast_range": "6",
   "casting_time": "0",
   "cooldown": "15",
@@ -660,8 +930,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Chain Slash",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -671,6 +943,7 @@
   "target": "enemy"
  },
  "CHARGESLOWAE": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "15",
@@ -682,8 +955,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Slowing Charge",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -692,6 +967,7 @@
   "target": "ground"
  },
  "CHARGE_ROOT": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "15",
@@ -702,8 +978,10 @@
   "flags": [
    "root"
   ],
+  "max_targets": null,
   "name": "Snare Charge",
   "preferred_target": "enemy",
+  "radius": 6.0,
   "tags": [
    "cc",
    "dmg",
@@ -713,6 +991,7 @@
   "target": "ground"
  },
  "CHARGINGBLADE": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "15",
@@ -725,8 +1004,10 @@
    "slow",
    "stun"
   ],
+  "max_targets": null,
   "name": "Inner Focus",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -734,6 +1015,12 @@
   "target": "self"
  },
  "CIRCLEOFLIFE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 11.0
+   }
+  ],
   "cast_range": "0",
   "casting_time": "0.5",
   "cooldown": "18",
@@ -747,8 +1034,10 @@
    "heal",
    "root"
   ],
+  "max_targets": 15,
   "name": "Circle of Life",
   "preferred_target": "ally",
+  "radius": 11.0,
   "tags": [
    "cc",
    "dmg",
@@ -758,6 +1047,7 @@
   "target": "self"
  },
  "CLAYMORECHARGE": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0.4",
   "cooldown": "20",
@@ -770,8 +1060,10 @@
    "shield",
    "stun"
   ],
+  "max_targets": null,
   "name": "Charge",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "cc",
@@ -782,6 +1074,7 @@
   "target": "enemy"
  },
  "CLAYMORESLASH": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "25",
@@ -794,8 +1087,10 @@
    "pierce",
    "shield"
   ],
+  "max_targets": null,
   "name": "Fearless Strike",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "debuff",
    "dmg",
@@ -805,6 +1100,7 @@
   "target": "ground"
  },
  "CLEANSEHEAL": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "20",
@@ -818,8 +1114,10 @@
    "silence",
    "stun"
   ],
+  "max_targets": 10,
   "name": "Cleanse Heal",
   "preferred_target": "ally",
+  "radius": 4.0,
   "tags": [
    "heal",
    "other"
@@ -827,6 +1125,7 @@
   "target": "ground"
  },
  "CLEANSESPEED2": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "18",
@@ -839,8 +1138,10 @@
    "silence",
    "stun"
   ],
+  "max_targets": 10,
   "name": "Motivating Cleanse",
   "preferred_target": "ally",
+  "radius": 4.0,
   "tags": [
    "buff",
    "other"
@@ -848,6 +1149,7 @@
   "target": "ground"
  },
  "CLEAVE": {
+  "area": null,
   "cast_range": "6",
   "casting_time": "0",
   "cooldown": "3",
@@ -857,8 +1159,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Heroic Cleave",
   "preferred_target": "neutral",
+  "radius": 6.0,
   "tags": [
    "buff",
    "dmg",
@@ -867,6 +1171,12 @@
   "target": "self"
  },
  "COMBATSTAFF_SLASH": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0",
   "cooldown": "26.8",
@@ -877,8 +1187,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Fatal Blade",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "debuff",
    "dmg",
@@ -887,6 +1199,7 @@
   "target": "ground"
  },
  "CONCUSSIVEBLOW_MULTI_1": {
+  "area": null,
   "cast_range": "4",
   "casting_time": "0",
   "cooldown": "3",
@@ -898,8 +1211,10 @@
   "flags": [
    "stun"
   ],
+  "max_targets": null,
   "name": "Concussive Combo",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -908,6 +1223,7 @@
   "target": "enemy"
  },
  "CONEPUNCH2": {
+  "area": null,
   "cast_range": "9",
   "casting_time": "0",
   "cooldown": "15",
@@ -918,8 +1234,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Unstoppable Rush",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "debuff",
    "dmg",
@@ -929,6 +1247,7 @@
   "target": "enemy"
  },
  "CREATE_OPENING": {
+  "area": null,
   "cast_range": "2.5",
   "casting_time": "0",
   "cooldown": "0",
@@ -939,8 +1258,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": 10,
   "name": "Create Opening",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "debuff",
    "dmg",
@@ -949,6 +1270,13 @@
   "target": "enemy"
  },
  "CROSSBOW_ARMORPIERCER": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 23.5,
+    "width": 2.75
+   }
+  ],
   "cast_range": "24",
   "casting_time": "0",
   "cooldown": "20",
@@ -957,8 +1285,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Sweeping Bolt",
   "preferred_target": "enemy",
+  "radius": 11.75,
   "tags": [
    "cc",
    "dmg",
@@ -967,6 +1297,7 @@
   "target": "ground"
  },
  "CROSSBOW_CONE_ULTIMATE": {
+  "area": null,
   "cast_range": "20",
   "casting_time": "0.5",
   "cooldown": "30",
@@ -978,8 +1309,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Vicious Barrage",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -988,6 +1321,28 @@
   "target": "ground"
  },
  "CROSSBOW_DIVINE_SHOT": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 26.0,
+    "width": 3.0
+   },
+   {
+    "kind": "rect",
+    "length": 26.0,
+    "width": null
+   },
+   {
+    "kind": "rect",
+    "length": 26.0,
+    "width": 3.0
+   },
+   {
+    "kind": "rect",
+    "length": 26.0,
+    "width": 4.0
+   }
+  ],
   "cast_range": "26",
   "casting_time": "0.7",
   "cooldown": "35",
@@ -996,8 +1351,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Divine Engine",
   "preferred_target": "enemy",
+  "radius": 13.0,
   "tags": [
    "dmg",
    "other"
@@ -1005,6 +1362,7 @@
   "target": "ground"
  },
  "CROSSSTEP_ROUNDHOUSE": {
+  "area": null,
   "cast_range": "5",
   "casting_time": "0",
   "cooldown": "2",
@@ -1015,8 +1373,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": 10,
   "name": "Fleet Footwork",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -1026,6 +1386,7 @@
   "target": "ground"
  },
  "CRYSTALWAVE": {
+  "area": null,
   "cast_range": "15",
   "casting_time": "0",
   "cooldown": "25",
@@ -1039,8 +1400,10 @@
    "shield",
    "stun"
   ],
+  "max_targets": null,
   "name": "Hyperstatic",
   "preferred_target": "enemyandally",
+  "radius": null,
   "tags": [
    "buff",
    "cc",
@@ -1050,6 +1413,7 @@
   "target": "ground"
  },
  "CRYSTALXBOW": {
+  "area": null,
   "cast_range": "8",
   "casting_time": "0",
   "cooldown": "10",
@@ -1060,8 +1424,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Flickershots",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -1071,6 +1437,7 @@
   "target": "ground"
  },
  "CRYSTAL_DAGGER_BLADE_RING": {
+  "area": null,
   "cast_range": "7",
   "casting_time": "0",
   "cooldown": "1",
@@ -1080,8 +1447,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Ring of Death",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -1090,6 +1459,7 @@
   "target": "self"
  },
  "CRYSTAL_SCYTHE_DASH_ZONE": {
+  "area": null,
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "3",
@@ -1099,8 +1469,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Relentless Assault",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "dmg",
    "mobility",
@@ -1109,6 +1481,12 @@
   "target": "ground"
  },
  "CURSEBLADE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 2.0
+   }
+  ],
   "cast_range": "16",
   "casting_time": "0",
   "cooldown": "5",
@@ -1117,8 +1495,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Cursed Sickle",
   "preferred_target": "enemy",
+  "radius": 2.0,
   "tags": [
    "dmg",
    "other"
@@ -1126,6 +1506,7 @@
   "target": "ground"
  },
  "CURSEDBEAM": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "10",
@@ -1134,8 +1515,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Cursed Beam",
   "preferred_target": "enemy",
+  "radius": 4.0,
   "tags": [
    "dmg",
    "other"
@@ -1143,6 +1526,7 @@
   "target": "enemy"
  },
  "CURSEDHANDS_STACKUP": {
+  "area": null,
   "cast_range": "8",
   "casting_time": "0",
   "cooldown": "20",
@@ -1151,8 +1535,10 @@
    "ally"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Grudge",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "dmg",
    "other"
@@ -1160,6 +1546,7 @@
   "target": "friendall"
  },
  "CURSEDOT": {
+  "area": null,
   "cast_range": "9",
   "casting_time": "0",
   "cooldown": "2.4",
@@ -1168,8 +1555,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Vile Curse",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "dmg",
    "other"
@@ -1177,6 +1566,12 @@
   "target": "enemy"
  },
  "CURSED_SPLAT": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0.2",
   "cooldown": "5",
@@ -1187,8 +1582,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Cursed Tar",
   "preferred_target": "enemy",
+  "radius": 3.0,
   "tags": [
    "cc",
    "dmg",
@@ -1197,6 +1594,23 @@
   "target": "ground"
  },
  "CURSED_WALL": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 4.5,
+    "width": 6.0
+   },
+   {
+    "kind": "rect",
+    "length": null,
+    "width": 6.0
+   },
+   {
+    "kind": "rect",
+    "length": 4.5,
+    "width": 6.0
+   }
+  ],
   "cast_range": "22",
   "casting_time": "0",
   "cooldown": "25",
@@ -1205,8 +1619,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Anguished Soul",
   "preferred_target": "enemy",
+  "radius": 3.0,
   "tags": [
    "cc",
    "dmg",
@@ -1215,6 +1631,12 @@
   "target": "ground"
  },
  "CURSENOVA": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "15",
@@ -1225,8 +1647,10 @@
   "flags": [
    "root"
   ],
+  "max_targets": null,
   "name": "Desecrate",
   "preferred_target": "enemy",
+  "radius": 4.0,
   "tags": [
    "cc",
    "dmg",
@@ -1235,6 +1659,16 @@
   "target": "ground"
  },
  "CURSEULTIMATE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 13.0
+   },
+   {
+    "kind": "circle",
+    "radius": 13.0
+   }
+  ],
   "cast_range": "12",
   "casting_time": "2",
   "cooldown": "30",
@@ -1245,8 +1679,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Cataclysm",
   "preferred_target": "enemy",
+  "radius": 13.0,
   "tags": [
    "debuff",
    "dmg",
@@ -1255,6 +1691,7 @@
   "target": "ground"
  },
  "CURSE_SKELETON_BARF_FDHR": {
+  "area": null,
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "30",
@@ -1267,8 +1704,10 @@
    "knockback",
    "shield"
   ],
+  "max_targets": null,
   "name": "Plaguebringer",
   "preferred_target": "enemy",
+  "radius": 18.0,
   "tags": [
    "cc",
    "debuff",
@@ -1278,6 +1717,7 @@
   "target": "ground"
  },
  "DARKMATTER": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0.5",
   "cooldown": "15",
@@ -1286,8 +1726,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Dark Matter",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "dmg",
    "other"
@@ -1295,6 +1737,7 @@
   "target": "enemy"
  },
  "DASHDMG": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "20",
@@ -1306,8 +1749,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Reckless Charge",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -1317,6 +1762,7 @@
   "target": "ground"
  },
  "DASHKICK": {
+  "area": null,
   "cast_range": "4",
   "casting_time": "0",
   "cooldown": "4",
@@ -1327,8 +1773,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Dragon Leap",
   "preferred_target": "enemy",
+  "radius": 2.5,
   "tags": [
    "cc",
    "dmg",
@@ -1338,6 +1786,7 @@
   "target": "ground"
  },
  "DASH_KNOCKBACK": {
+  "area": null,
   "cast_range": "15",
   "casting_time": "0",
   "cooldown": "25",
@@ -1348,8 +1797,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Soaring Swipe",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -1359,6 +1810,13 @@
   "target": "ground"
  },
  "DEADLYSHOT": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 18.0,
+    "width": 2.0
+   }
+  ],
   "cast_range": "18",
   "casting_time": "0",
   "cooldown": "2",
@@ -1369,8 +1827,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": 5,
   "name": "Deadly Shot",
   "preferred_target": "enemy",
+  "radius": 9.0,
   "tags": [
    "debuff",
    "dmg",
@@ -1379,6 +1839,7 @@
   "target": "ground"
  },
  "DEATHCURSE2": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0.6",
   "cooldown": "15",
@@ -1387,8 +1848,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Death Curse",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "dmg",
    "other"
@@ -1396,6 +1859,7 @@
   "target": "enemy"
  },
  "DEEPCUTS": {
+  "area": null,
   "cast_range": "2",
   "casting_time": "0",
   "cooldown": "15",
@@ -1406,8 +1870,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Forbidden Stab",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "debuff",
@@ -1416,6 +1882,7 @@
   "target": "enemy"
  },
  "DEFENSERUN": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "20",
@@ -1426,8 +1893,10 @@
   "flags": [
    "purge"
   ],
+  "max_targets": null,
   "name": "Iron Will",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -1435,6 +1904,7 @@
   "target": "self"
  },
  "DEFENSIVESLAM": {
+  "area": null,
   "cast_range": "3.5",
   "casting_time": "0",
   "cooldown": "2",
@@ -1447,8 +1917,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": 10,
   "name": "Defensive Slam",
   "preferred_target": "enemy",
+  "radius": 8.0,
   "tags": [
    "buff",
    "dmg",
@@ -1457,6 +1929,7 @@
   "target": "enemy"
  },
  "DEFLECTINGSTANCE": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "10",
@@ -1465,8 +1938,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Deflecting Spin",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -1475,6 +1950,7 @@
   "target": "self"
  },
  "DISEMBOWEL": {
+  "area": null,
   "cast_range": "2",
   "casting_time": "0",
   "cooldown": "25",
@@ -1486,8 +1962,10 @@
    "root",
    "shield"
   ],
+  "max_targets": null,
   "name": "Disembowel",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -1496,6 +1974,7 @@
   "target": "enemy"
  },
  "DIVEPUNCH_RISE": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "0",
@@ -1504,8 +1983,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Falcon Smash",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -1515,6 +1996,7 @@
   "target": "self"
  },
  "DIVINE_JUMP": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "30",
@@ -1527,8 +2009,10 @@
    "heal",
    "knockback"
   ],
+  "max_targets": null,
   "name": "Divine Intervention",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "buff",
    "cc",
@@ -1538,6 +2022,7 @@
   "target": "ground"
  },
  "DUALAXE_CRAWLER": {
+  "area": null,
   "cast_range": "8",
   "casting_time": "0",
   "cooldown": "20",
@@ -1549,8 +2034,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Razor Cut",
   "preferred_target": "enemy",
+  "radius": 1.0,
   "tags": [
    "buff",
    "dmg",
@@ -1561,6 +2048,7 @@
   "target": "ground"
  },
  "DUAL_NATURE": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "30",
@@ -1575,8 +2063,10 @@
    "root",
    "shield"
   ],
+  "max_targets": 10,
   "name": "Dual Nature",
   "preferred_target": "neutral",
+  "radius": 7.0,
   "tags": [
    "buff",
    "cc",
@@ -1586,6 +2076,7 @@
   "target": "self"
  },
  "DUAL_RAPIDFIRE": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "20",
@@ -1595,8 +2086,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Deathward Climax",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "dmg",
    "other"
@@ -1604,6 +2097,20 @@
   "target": "enemy"
  },
  "DYNAMIC_CURSE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   },
+   {
+    "kind": "circle",
+    "radius": 5.0
+   },
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0.4",
   "cooldown": "30",
@@ -1617,8 +2124,10 @@
    "shield",
    "slow"
   ],
+  "max_targets": null,
   "name": "Inner Shadow",
   "preferred_target": "enemyandally",
+  "radius": 5.0,
   "tags": [
    "cc",
    "debuff",
@@ -1629,6 +2138,7 @@
   "target": "allplayers"
  },
  "EMPOWERBEAM": {
+  "area": null,
   "cast_range": "9",
   "casting_time": "0",
   "cooldown": "15",
@@ -1637,8 +2147,10 @@
    "ally"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Empowering Beam",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -1646,6 +2158,16 @@
   "target": "friendother"
  },
  "ENFEEBLEBLADES": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 6.5
+   },
+   {
+    "kind": "circle",
+    "radius": 6.5
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0.4",
   "cooldown": "63",
@@ -1656,8 +2178,10 @@
   "flags": [
    "purge"
   ],
+  "max_targets": null,
   "name": "Enfeeble Blades",
   "preferred_target": "enemy",
+  "radius": 6.5,
   "tags": [
    "dmg",
    "other"
@@ -1665,6 +2189,7 @@
   "target": "ground"
  },
  "ENIGMA_BLADE": {
+  "area": null,
   "cast_range": "10",
   "casting_time": "0",
   "cooldown": "15",
@@ -1673,8 +2198,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Enigma Blade",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -1684,6 +2211,7 @@
   "target": "ground"
  },
  "EXECUTEDAGGER": {
+  "area": null,
   "cast_range": "3",
   "casting_time": "0.4",
   "cooldown": "15",
@@ -1696,8 +2224,10 @@
    "heal",
    "heal_reduction"
   ],
+  "max_targets": null,
   "name": "Slit Throat",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "debuff",
    "dmg",
@@ -1706,6 +2236,7 @@
   "target": "enemy"
  },
  "EXPLODING_SHOT": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "15",
@@ -1714,8 +2245,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Exploding Shot",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "dmg",
    "other"
@@ -1723,6 +2256,12 @@
   "target": "enemy"
  },
  "FIREARTILLERY": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.0
+   }
+  ],
   "cast_range": "18",
   "casting_time": "1.5",
   "cooldown": "15",
@@ -1731,8 +2270,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": 3,
   "name": "Fire Artillery",
   "preferred_target": "enemy",
+  "radius": 3.0,
   "tags": [
    "dmg",
    "other"
@@ -1740,6 +2281,7 @@
   "target": "enemy"
  },
  "FIRECONE": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "12",
@@ -1751,8 +2293,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Fire Wave",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "cc",
    "dmg",
@@ -1761,6 +2305,28 @@
   "target": "ground"
  },
  "FIREPHOENIX": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 3.0,
+    "width": 7.0
+   },
+   {
+    "kind": "rect",
+    "length": 3.0,
+    "width": 7.0
+   },
+   {
+    "kind": "rect",
+    "length": 3.0,
+    "width": 7.0
+   },
+   {
+    "kind": "rect",
+    "length": 18.0,
+    "width": 7.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0.6",
   "cooldown": "30",
@@ -1772,8 +2338,10 @@
    "heal",
    "heal_reduction"
   ],
+  "max_targets": null,
   "name": "Flaming Phoenix",
   "preferred_target": "enemy",
+  "radius": 9.0,
   "tags": [
    "debuff",
    "dmg",
@@ -1782,6 +2350,7 @@
   "target": "ground"
  },
  "FIRESTAFFBOLT2": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0.8",
   "cooldown": "0",
@@ -1790,8 +2359,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Fire Bolt",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "dmg",
    "other"
@@ -1799,14 +2370,22 @@
   "target": "enemy"
  },
  "FIRESTAFFBOLT_AOE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0.5",
   "cooldown": "4",
   "description": "Fire a burning orb at the targeted position, dealing 70 magical damage in a 3 radius.\nSets the ground on fire for 4.\nDeals 55 magical damage (vs players) / 55 magical damage (vs mobs) every 0.5 (this damage cannot be reflected).",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Burning Field",
   "preferred_target": "enemy",
+  "radius": 3.0,
   "tags": [
    "dmg",
    "other"
@@ -1814,6 +2393,12 @@
   "target": "ground"
  },
  "FIRESTAFFIGNITE2_SPREAD": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "12",
@@ -1824,8 +2409,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Flame Blast",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "buff",
    "dmg",
@@ -1834,6 +2421,13 @@
   "target": "all"
  },
  "FIREWALL": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 1.3,
+    "width": 14.0
+   }
+  ],
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "15",
@@ -1843,8 +2437,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Wall of Flames",
   "preferred_target": "enemy",
+  "radius": 7.0,
   "tags": [
    "cc",
    "dmg",
@@ -1853,6 +2449,7 @@
   "target": "ground"
  },
  "FLAMEDASH": {
+  "area": null,
   "cast_range": "14",
   "casting_time": "0",
   "cooldown": "40",
@@ -1862,8 +2459,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Spontaneous Combustion",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "buff",
    "dmg",
@@ -1873,6 +2472,12 @@
   "target": "ground"
  },
  "FLAMEPILLAR": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0",
   "cooldown": "15",
@@ -1881,8 +2486,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Flame Pillar",
   "preferred_target": "enemy",
+  "radius": 4.0,
   "tags": [
    "dmg",
    "other"
@@ -1890,6 +2497,16 @@
   "target": "ground"
  },
  "FLAMETORNADO": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   },
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "1",
   "cooldown": "35",
@@ -1898,8 +2515,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Flame Tornado",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "dmg",
    "other"
@@ -1907,6 +2526,7 @@
   "target": "ground"
  },
  "FORESTOFSPEARS": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "12",
@@ -1915,8 +2535,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Forest of Spears",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "dmg",
    "other"
@@ -1924,6 +2546,7 @@
   "target": "ground"
  },
  "FRAZZLE2": {
+  "area": null,
   "cast_range": "15",
   "casting_time": "0.5",
   "cooldown": "12",
@@ -1934,8 +2557,10 @@
   "flags": [
    "pierce"
   ],
+  "max_targets": null,
   "name": "Frazzle",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "debuff",
    "dmg"
@@ -1943,6 +2568,7 @@
   "target": "enemy"
  },
  "FREEZINGWIND": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "18",
@@ -1954,8 +2580,10 @@
   "flags": [
    "root"
   ],
+  "max_targets": null,
   "name": "Freezing Wind",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -1964,6 +2592,7 @@
   "target": "ground"
  },
  "FROSTBEAM": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "15",
@@ -1974,8 +2603,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Frost Beam",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "cc",
    "debuff",
@@ -1985,6 +2616,20 @@
   "target": "enemy"
  },
  "FROSTBOMB_CASTSLOW": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   },
+   {
+    "kind": "circle",
+    "radius": 5.0
+   },
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "10",
@@ -1995,8 +2640,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Frost Bomb",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "cc",
    "dmg",
@@ -2005,6 +2652,12 @@
   "target": "ground"
  },
  "FROSTNOVA": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.0
+   }
+  ],
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "20",
@@ -2015,8 +2668,10 @@
   "flags": [
    "stun"
   ],
+  "max_targets": null,
   "name": "Frost Nova",
   "preferred_target": "neutral",
+  "radius": 3.0,
   "tags": [
    "buff",
    "cc",
@@ -2027,6 +2682,13 @@
   "target": "ground"
  },
  "FROST_BITE": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 3.0,
+    "width": 2.0
+   }
+  ],
   "cast_range": "18",
   "casting_time": "0.3",
   "cooldown": "1.2",
@@ -2037,8 +2699,10 @@
   "flags": [
    "stun"
   ],
+  "max_targets": 1,
   "name": "Frostbite",
   "preferred_target": "enemy",
+  "radius": 1.5,
   "tags": [
    "cc",
    "dmg",
@@ -2047,6 +2711,13 @@
   "target": "ground"
  },
  "FROST_LANCE": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 3.0,
+    "width": 2.0
+   }
+  ],
   "cast_range": "9",
   "casting_time": "0",
   "cooldown": "8",
@@ -2057,8 +2728,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": 1,
   "name": "Frost Lance",
   "preferred_target": "enemy",
+  "radius": 3.0,
   "tags": [
    "debuff",
    "dmg",
@@ -2067,6 +2740,7 @@
   "target": "ground"
  },
  "FROST_TARGETED_CHANNEL": {
+  "area": null,
   "cast_range": "22",
   "casting_time": "0",
   "cooldown": "12",
@@ -2075,8 +2749,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": 1,
   "name": "Arctic Volley",
   "preferred_target": "enemy",
+  "radius": 4.0,
   "tags": [
    "cc",
    "dmg",
@@ -2085,6 +2761,20 @@
   "target": "ground"
  },
  "FROST_ULTIMATE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   },
+   {
+    "kind": "circle",
+    "radius": 4.0
+   },
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0.7",
   "cooldown": "30",
@@ -2095,8 +2785,10 @@
   "flags": [
    "stun"
   ],
+  "max_targets": null,
   "name": "Ice Crystal",
   "preferred_target": "enemy",
+  "radius": 4.0,
   "tags": [
    "cc",
    "dmg",
@@ -2105,6 +2797,12 @@
   "target": "ground"
  },
  "FROZEN_CRYSTAL": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 6.0
+   }
+  ],
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "25",
@@ -2119,8 +2817,10 @@
    "slow",
    "stun"
   ],
+  "max_targets": null,
   "name": "Glacial Prison",
   "preferred_target": "enemy",
+  "radius": 6.0,
   "tags": [
    "cc",
    "dmg",
@@ -2129,6 +2829,7 @@
   "target": "all"
  },
  "GENEROUSHEAL": {
+  "area": null,
   "cast_range": "15",
   "casting_time": "0.5",
   "cooldown": "1.5",
@@ -2139,8 +2840,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Generous Heal",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "buff",
    "heal",
@@ -2149,6 +2852,12 @@
   "target": "friendall"
  },
  "GEYSER": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.0
+   }
+  ],
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "10",
@@ -2160,8 +2869,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Power Geyser",
   "preferred_target": "enemy",
+  "radius": 3.0,
   "tags": [
    "cc",
    "dmg",
@@ -2170,6 +2881,7 @@
   "target": "ground"
  },
  "GHOSTSTRIKE": {
+  "area": null,
   "cast_range": "7",
   "casting_time": "0",
   "cooldown": "25",
@@ -2179,8 +2891,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Ghost Strike",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -2190,6 +2904,7 @@
   "target": "enemy"
  },
  "GIANTSTEPS": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "30",
@@ -2202,8 +2917,10 @@
    "knockback",
    "shield"
   ],
+  "max_targets": null,
   "name": "Giant Steps",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "cc",
@@ -2213,6 +2930,20 @@
   "target": "self"
  },
  "GLACIALFIELD": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 8.0
+   },
+   {
+    "kind": "circle",
+    "radius": 8.0
+   },
+   {
+    "kind": "circle",
+    "radius": 3.5
+   }
+  ],
   "cast_range": "14",
   "casting_time": "0",
   "cooldown": "30",
@@ -2224,8 +2955,10 @@
    "shield",
    "slow"
   ],
+  "max_targets": null,
   "name": "Frozen Hell",
   "preferred_target": "enemy",
+  "radius": 8.0,
   "tags": [
    "cc",
    "dmg",
@@ -2234,6 +2967,12 @@
   "target": "ground"
  },
  "GROUNDARROW": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0",
   "cooldown": "10",
@@ -2244,8 +2983,10 @@
   "flags": [
    "root"
   ],
+  "max_targets": null,
   "name": "Ray of Light",
   "preferred_target": "enemy",
+  "radius": 3.0,
   "tags": [
    "cc",
    "dmg",
@@ -2254,6 +2995,22 @@
   "target": "ground"
  },
  "GROUNDBREAKER2": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 2.5
+   },
+   {
+    "kind": "rect",
+    "length": 20.0,
+    "width": 4.0
+   },
+   {
+    "kind": "rect",
+    "length": 20.0,
+    "width": 4.0
+   }
+  ],
   "cast_range": "20",
   "casting_time": "0",
   "cooldown": "15",
@@ -2265,8 +3022,10 @@
   "flags": [
    "stun"
   ],
+  "max_targets": null,
   "name": "Groundbreaker",
   "preferred_target": "enemy",
+  "radius": 10.0,
   "tags": [
    "cc",
    "dmg",
@@ -2275,6 +3034,7 @@
   "target": "ground"
  },
  "GROUNDDASH": {
+  "area": null,
   "cast_range": "8",
   "casting_time": "0",
   "cooldown": "23.5",
@@ -2283,8 +3043,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Dash",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "mobility"
@@ -2292,6 +3054,16 @@
   "target": "ground"
  },
  "GROUNDMINE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 1.5
+   },
+   {
+    "kind": "circle",
+    "radius": 1.5
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0",
   "cooldown": "20",
@@ -2300,8 +3072,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": 1,
   "name": "Explosive Mine",
   "preferred_target": "enemy",
+  "radius": 7.0,
   "tags": [
    "dmg",
    "other"
@@ -2309,6 +3083,12 @@
   "target": "ground"
  },
  "GROUNDSHAKER": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
   "cast_range": "3",
   "casting_time": "0.6",
   "cooldown": "10",
@@ -2319,8 +3099,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Ground Shaker",
   "preferred_target": "enemy",
+  "radius": 4.0,
   "tags": [
    "cc",
    "dmg",
@@ -2329,6 +3111,12 @@
   "target": "ground"
  },
  "GROUNDSPEAR": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 2.5
+   }
+  ],
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "12",
@@ -2339,8 +3127,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Impaler",
   "preferred_target": "enemy",
+  "radius": 2.5,
   "tags": [
    "cc",
    "dmg",
@@ -2349,6 +3139,7 @@
   "target": "ground"
  },
  "GROWING_PUNCH": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "30",
@@ -2360,8 +3151,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Earth Crusher",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -2370,6 +3163,16 @@
   "target": "self"
  },
  "GUARDRUNE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   },
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "14",
   "casting_time": "0.4",
   "cooldown": "15",
@@ -2381,8 +3184,10 @@
    "shield",
    "stun"
   ],
+  "max_targets": 10,
   "name": "Guard Rune",
   "preferred_target": "ally",
+  "radius": 5.0,
   "tags": [
    "buff",
    "other"
@@ -2390,6 +3195,16 @@
   "target": "ground"
  },
  "HAIL_MULTI_1": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   },
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0",
   "cooldown": "1",
@@ -2398,8 +3213,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Hail",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "cc",
    "dmg",
@@ -2408,6 +3225,7 @@
   "target": "ground"
  },
  "HALBERDSMASH": {
+  "area": null,
   "cast_range": "5.5",
   "casting_time": "0",
   "cooldown": "15",
@@ -2419,8 +3237,10 @@
   "flags": [
    "root"
   ],
+  "max_targets": null,
   "name": "Rooting Smash",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -2429,6 +3249,7 @@
   "target": "enemy"
  },
  "HAMMERTACKLE": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "20",
@@ -2441,8 +3262,10 @@
    "knockback",
    "stun"
   ],
+  "max_targets": null,
   "name": "Tackle",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -2452,6 +3275,7 @@
   "target": "ground"
  },
  "HAMMERWHIRLWIND2": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "15",
@@ -2463,8 +3287,10 @@
   "flags": [
    "stun"
   ],
+  "max_targets": null,
   "name": "Earth Shatter",
   "preferred_target": "neutral",
+  "radius": 5.5,
   "tags": [
    "cc",
    "dmg",
@@ -2473,6 +3299,7 @@
   "target": "self"
  },
  "HAMMER_SHOVE": {
+  "area": null,
   "cast_range": "2",
   "casting_time": "0",
   "cooldown": "4",
@@ -2484,8 +3311,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Powerful Swing",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -2495,6 +3324,7 @@
   "target": "ground"
  },
  "HAMMER_TREMOR": {
+  "area": null,
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "10",
@@ -2503,8 +3333,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Seismic Tremor",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "dmg",
    "other"
@@ -2512,6 +3344,7 @@
   "target": "ground"
  },
  "HAMSTRINGSWORD": {
+  "area": null,
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "6",
@@ -2522,8 +3355,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Hamstring",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -2533,6 +3368,23 @@
   "target": "enemy"
  },
  "HAWK_SHOT_MULTI1": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 24.0,
+    "width": 4.0
+   },
+   {
+    "kind": "rect",
+    "length": 4.0,
+    "width": 4.0
+   },
+   {
+    "kind": "rect",
+    "length": 18.0,
+    "width": 2.0
+   }
+  ],
   "cast_range": "24",
   "casting_time": "0.6",
   "cooldown": "0",
@@ -2541,8 +3393,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Lucent Hawk",
   "preferred_target": null,
+  "radius": 12.0,
   "tags": [
    "dmg",
    "other"
@@ -2550,6 +3404,7 @@
   "target": "ground"
  },
  "HEALINGBEAM": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "12",
@@ -2561,8 +3416,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Holy Beam",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "heal",
    "other"
@@ -2570,6 +3427,13 @@
   "target": "friendother"
  },
  "HELL_ARROW": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 6.0,
+    "width": 2.0
+   }
+  ],
   "cast_range": "24",
   "casting_time": "0",
   "cooldown": "25",
@@ -2578,8 +3442,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": 5,
   "name": "Demon Arrow",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "dmg",
    "other"
@@ -2587,6 +3453,7 @@
   "target": "ground"
  },
  "HEROICSTRIKE2": {
+  "area": null,
   "cast_range": "3.5",
   "casting_time": "0",
   "cooldown": "3",
@@ -2596,8 +3463,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Heroic Strike",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -2606,6 +3475,7 @@
   "target": "enemy"
  },
  "HOLYDESPERATEPRAYER2": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "10",
@@ -2616,8 +3486,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Desperate Prayer",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "buff",
    "heal",
@@ -2626,6 +3498,12 @@
   "target": "friendall"
  },
  "HOLYEXPLOSION": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 7.0
+   }
+  ],
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "18",
@@ -2640,8 +3518,10 @@
    "knockback",
    "shield"
   ],
+  "max_targets": 10,
   "name": "Holy Explosion",
   "preferred_target": "neutral",
+  "radius": 7.0,
   "tags": [
    "buff",
    "cc",
@@ -2651,6 +3531,12 @@
   "target": "self"
  },
  "HOLYFLASH": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "13",
   "casting_time": "0.4",
   "cooldown": "3.5",
@@ -2661,8 +3547,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": 10,
   "name": "Holy Flash",
   "preferred_target": "ally",
+  "radius": 5.0,
   "tags": [
    "heal",
    "other"
@@ -2670,6 +3558,7 @@
   "target": "ground"
  },
  "HOLYHOT": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "15",
@@ -2680,14 +3569,17 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Holy Blessing",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "buff"
   ],
   "target": "friendall"
  },
  "HOLYORB": {
+  "area": null,
   "cast_range": "25",
   "casting_time": "0",
   "cooldown": "15",
@@ -2698,8 +3590,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": 10,
   "name": "Holy Orb",
   "preferred_target": "ally",
+  "radius": 7.0,
   "tags": [
    "heal",
    "other"
@@ -2707,6 +3601,7 @@
   "target": "ground"
  },
  "HOLYSHIELD": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "0",
@@ -2719,8 +3614,10 @@
    "heal",
    "shield"
   ],
+  "max_targets": null,
   "name": "Divine Protection",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "buff",
    "heal",
@@ -2729,6 +3626,7 @@
   "target": "friendall"
  },
  "HOLYTOUCH": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "20",
@@ -2742,8 +3640,10 @@
    "silence",
    "stun"
   ],
+  "max_targets": null,
   "name": "Holy Touch",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "buff",
    "heal",
@@ -2752,6 +3652,12 @@
   "target": "friendall"
  },
  "HOLY_DISPEL": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "12",
   "casting_time": "0.6",
   "cooldown": "65",
@@ -2764,8 +3670,10 @@
    "area_removal",
    "heal"
   ],
+  "max_targets": 20,
   "name": "Sanctify",
   "preferred_target": "ally",
+  "radius": 5.0,
   "tags": [
    "buff",
    "heal",
@@ -2774,6 +3682,12 @@
   "target": "ground"
  },
  "HOLY_ULTIMATE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.5
+   }
+  ],
   "cast_range": "14",
   "casting_time": "1",
   "cooldown": "30",
@@ -2785,8 +3699,10 @@
    "cleanse",
    "heal"
   ],
+  "max_targets": 20,
   "name": "Salvation",
   "preferred_target": "ally",
+  "radius": 5.5,
   "tags": [
    "buff",
    "heal",
@@ -2795,6 +3711,7 @@
   "target": "ground"
  },
  "HUMAN_TORCH": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0.7",
   "cooldown": "20",
@@ -2804,8 +3721,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Combustion",
   "preferred_target": "enemy",
+  "radius": 4.0,
   "tags": [
    "cc",
    "dmg",
@@ -2814,6 +3733,12 @@
   "target": "enemy"
  },
  "ICEROCK_EXPLODE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 2.5
+   }
+  ],
   "cast_range": "26",
   "casting_time": "0",
   "cooldown": "20",
@@ -2825,8 +3750,10 @@
    "knockback",
    "slow"
   ],
+  "max_targets": null,
   "name": "Avalanche",
   "preferred_target": "enemy",
+  "radius": 2.5,
   "tags": [
    "cc",
    "dmg",
@@ -2835,6 +3762,12 @@
   "target": "ground"
  },
  "ICESHARD": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.0
+   }
+  ],
   "cast_range": "14",
   "casting_time": "1.2",
   "cooldown": "0",
@@ -2843,8 +3776,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Ice Shard",
   "preferred_target": "enemy",
+  "radius": 3.0,
   "tags": [
    "dmg",
    "other"
@@ -2852,6 +3787,16 @@
   "target": "ground"
  },
  "ICESTORM2": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   },
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "10",
   "casting_time": "0.5",
   "cooldown": "30",
@@ -2862,8 +3807,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Ice Storm",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "cc",
    "dmg",
@@ -2872,6 +3819,20 @@
   "target": "ground"
  },
  "ICE_SCULPTURE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 6.0
+   },
+   {
+    "kind": "circle",
+    "radius": 6.0
+   },
+   {
+    "kind": "circle",
+    "radius": 6.0
+   }
+  ],
   "cast_range": "12",
   "casting_time": "0.4",
   "cooldown": "16",
@@ -2883,8 +3844,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": 10,
   "name": "Glacial Obelisk",
   "preferred_target": "ally",
+  "radius": 6.0,
   "tags": [
    "buff",
    "cc",
@@ -2894,6 +3857,7 @@
   "target": "ground"
  },
  "IMPULSE_PUNCH": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0.6",
   "cooldown": "20",
@@ -2905,8 +3869,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Gravitational Collapse",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -2915,6 +3881,7 @@
   "target": "ground"
  },
  "INNERBLEEDING": {
+  "area": null,
   "cast_range": "6",
   "casting_time": "0",
   "cooldown": "15",
@@ -2924,8 +3891,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Internal Bleeding",
   "preferred_target": "enemy",
+  "radius": 6.0,
   "tags": [
    "dmg",
    "other"
@@ -2933,6 +3902,7 @@
   "target": "self"
  },
  "INTERRUPT2": {
+  "area": null,
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "10",
@@ -2942,8 +3912,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Interrupt",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "cc",
@@ -2953,6 +3925,7 @@
   "target": "enemy"
  },
  "INVULNERABILITY": {
+  "area": null,
   "cast_range": "14",
   "casting_time": "0",
   "cooldown": "30",
@@ -2964,8 +3937,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Protective Beam",
   "preferred_target": "ally",
+  "radius": 6.5,
   "tags": [
    "buff",
    "other"
@@ -2973,6 +3948,16 @@
   "target": "friendother"
  },
  "IRONBREAKER": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 2.5
+   },
+   {
+    "kind": "circle",
+    "radius": 2.5
+   }
+  ],
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "6",
@@ -2984,8 +3969,10 @@
    "pierce",
    "shield"
   ],
+  "max_targets": null,
   "name": "Iron Breaker",
   "preferred_target": "enemy",
+  "radius": 2.5,
   "tags": [
    "debuff",
    "dmg",
@@ -2994,6 +3981,12 @@
   "target": "ground"
  },
  "JUMPSHOT2": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
   "cast_range": "2",
   "casting_time": "0.3",
   "cooldown": "18",
@@ -3006,8 +3999,10 @@
    "knockback",
    "slow"
   ],
+  "max_targets": null,
   "name": "Frost Shot",
   "preferred_target": "enemy",
+  "radius": 4.0,
   "tags": [
    "cc",
    "dmg",
@@ -3017,6 +4012,13 @@
   "target": "ground"
  },
  "KNOCKBACKSHOT2": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 4.0,
+    "width": 1.5
+   }
+  ],
   "cast_range": "14",
   "casting_time": "0",
   "cooldown": "12",
@@ -3027,8 +4029,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": 1,
   "name": "Knockback Shot",
   "preferred_target": "enemy",
+  "radius": 2.0,
   "tags": [
    "buff",
    "cc",
@@ -3037,6 +4041,7 @@
   "target": "ground"
  },
  "KNOCKOUT": {
+  "area": null,
   "cast_range": "1.5",
   "casting_time": "0",
   "cooldown": "15",
@@ -3045,8 +4050,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Knockout",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg"
@@ -3054,6 +4061,7 @@
   "target": "enemy"
  },
  "KNUCKLECOMBO": {
+  "area": null,
   "cast_range": "2",
   "casting_time": "0",
   "cooldown": "15",
@@ -3065,8 +4073,10 @@
    "knockback",
    "stun"
   ],
+  "max_targets": 10,
   "name": "Devastating Combo",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -3075,6 +4085,7 @@
   "target": "enemy"
  },
  "KNUCKLE_COUNTER": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "15",
@@ -3086,8 +4097,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Counter",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "cc",
@@ -3098,6 +4111,7 @@
   "target": "self"
  },
  "LANCE_CHARGE": {
+  "area": null,
   "cast_range": "16",
   "casting_time": "0.35",
   "cooldown": "25",
@@ -3109,8 +4123,10 @@
   "flags": [
    "purge"
   ],
+  "max_targets": null,
   "name": "Breakthrough",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -3120,6 +4136,7 @@
   "target": "ground"
  },
  "LAUNCHER": {
+  "area": null,
   "cast_range": "10",
   "casting_time": "0",
   "cooldown": "15",
@@ -3131,8 +4148,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Rising Blow",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -3141,6 +4160,7 @@
   "target": "ground"
  },
  "LEGBREAKER": {
+  "area": null,
   "cast_range": "4",
   "casting_time": "0",
   "cooldown": "18",
@@ -3152,8 +4172,10 @@
    "purge",
    "slow"
   ],
+  "max_targets": null,
   "name": "Cripple",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "cc",
@@ -3164,6 +4186,7 @@
   "target": "enemy"
  },
  "LETHAL_CLEAVER": {
+  "area": null,
   "cast_range": "10",
   "casting_time": "0",
   "cooldown": "25",
@@ -3175,8 +4198,10 @@
    "heal",
    "knockback"
   ],
+  "max_targets": null,
   "name": "Aftershock",
   "preferred_target": "enemy",
+  "radius": 4.0,
   "tags": [
    "cc",
    "debuff",
@@ -3187,6 +4212,17 @@
   "target": "ground"
  },
  "LIGHTNING_ARROW": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   },
+   {
+    "kind": "rect",
+    "length": 4.0,
+    "width": 2.5
+   }
+  ],
   "cast_range": "26",
   "casting_time": "0",
   "cooldown": "30",
@@ -3195,8 +4231,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": 1,
   "name": "Raging Storm",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "cc",
    "dmg",
@@ -3205,6 +4243,7 @@
   "target": "ground"
  },
  "MACELEAP": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "25",
@@ -3216,8 +4255,10 @@
    "slow",
    "stun"
   ],
+  "max_targets": null,
   "name": "Deep Leap",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "buff",
    "cc",
@@ -3228,6 +4269,7 @@
   "target": "ground"
  },
  "MACE_CRYSTAL_FRAGMENT_STORM": {
+  "area": null,
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "1.5",
@@ -3241,8 +4283,10 @@
    "shield",
    "slow"
   ],
+  "max_targets": 1,
   "name": "Eye of the Storm",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "debuff",
@@ -3252,6 +4296,12 @@
   "target": "ground"
  },
  "MAGICSHOCK": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.0
+   }
+  ],
   "cast_range": "14",
   "casting_time": "0.35",
   "cooldown": "5",
@@ -3262,8 +4312,10 @@
   "flags": [
    "silence"
   ],
+  "max_targets": null,
   "name": "Magic Shock",
   "preferred_target": "enemy",
+  "radius": 3.0,
   "tags": [
    "cc",
    "dmg",
@@ -3272,6 +4324,12 @@
   "target": "ground"
  },
  "MAGMASPHERE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 2.0
+   }
+  ],
   "cast_range": "25",
   "casting_time": "0.6",
   "cooldown": "30",
@@ -3282,8 +4340,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Magma Sphere",
   "preferred_target": "enemy",
+  "radius": 2.0,
   "tags": [
    "dmg",
    "other"
@@ -3291,6 +4351,13 @@
   "target": "ground"
  },
  "MAJESTIC_SMASH": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 12.0,
+    "width": null
+   }
+  ],
   "cast_range": "6",
   "casting_time": "0",
   "cooldown": "20",
@@ -3303,8 +4370,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Majestic Smash",
   "preferred_target": "enemy",
+  "radius": 6.0,
   "tags": [
    "buff",
    "cc",
@@ -3314,6 +4383,12 @@
   "target": "ground"
  },
  "METEOR": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "2",
   "cooldown": "30",
@@ -3324,8 +4399,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Meteor",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "cc",
    "dmg",
@@ -3334,6 +4411,7 @@
   "target": "ground"
  },
  "MIGHTYBLOW": {
+  "area": null,
   "cast_range": "8",
   "casting_time": "0",
   "cooldown": "12",
@@ -3343,8 +4421,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Mighty Blow",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -3354,6 +4434,13 @@
   "target": "enemy"
  },
  "MIGHTYSWING": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 1.75,
+    "width": 4.5
+   }
+  ],
   "cast_range": "20",
   "casting_time": "0",
   "cooldown": "15",
@@ -3365,8 +4452,10 @@
    "silence",
    "slow"
   ],
+  "max_targets": 25,
   "name": "Crescent Slash",
   "preferred_target": "enemy",
+  "radius": 2.25,
   "tags": [
    "cc",
    "dmg",
@@ -3375,6 +4464,7 @@
   "target": "ground"
  },
  "MIMIC": {
+  "area": null,
   "cast_range": "15",
   "casting_time": "0",
   "cooldown": "0",
@@ -3383,14 +4473,17 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Mimic",
   "preferred_target": "enemyandally",
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": "allplayers"
  },
  "MULTISHOT2": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "3",
@@ -3401,8 +4494,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": 5,
   "name": "Multishot",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "cc",
    "dmg",
@@ -3411,6 +4506,7 @@
   "target": "ground"
  },
  "NATURERESILIENCE": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "15",
@@ -3422,14 +4518,17 @@
    "heal",
    "shield"
   ],
+  "max_targets": null,
   "name": "Protection of Nature",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "buff"
   ],
   "target": "friendall"
  },
  "NATURE_ULTIMATE_SINGLE": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "0",
@@ -3440,8 +4539,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Spiritual Seed",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "heal",
    "other"
@@ -3449,6 +4550,7 @@
   "target": "friendall"
  },
  "PARRY": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "15",
@@ -3457,8 +4559,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Parry Strike",
   "preferred_target": "neutral",
+  "radius": 5.0,
   "tags": [
    "buff",
    "dmg",
@@ -3467,14 +4571,17 @@
   "target": "self"
  },
  "PASSIVE_AASPEEDCHANCE_BOW": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Every 5 Auto-Attacks, increase your Auto-Attack Speed by 0.35 for 5.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Auto-Attack Speed",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -3482,14 +4589,17 @@
   "target": null
  },
  "PASSIVE_AASPEEDCHANCE_DAGGER": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Every 5 Auto-Attacks, increase your Auto-Attack Speed by 0.3 for 3.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Auto-Attack Speed",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -3497,14 +4607,17 @@
   "target": null
  },
  "PASSIVE_AASPEEDCHANCE_SPEAR": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Every 5 Auto-Attacks, increase your Auto-Attack Speed by 0.4 for 3.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Auto-Attack Speed",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -3512,6 +4625,7 @@
   "target": null
  },
  "PASSIVE_ARMORCHANCE_AXE": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -3520,8 +4634,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Increased Defense",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -3529,6 +4645,7 @@
   "target": null
  },
  "PASSIVE_ARMORCHANCE_SWORD": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -3537,8 +4654,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Increased Defense",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -3546,6 +4665,7 @@
   "target": null
  },
  "PASSIVE_ARMOR_CASTER_ARCANESTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -3554,8 +4674,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Calmness",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -3563,6 +4685,7 @@
   "target": null
  },
  "PASSIVE_ARMOR_CASTER_NATURESTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -3571,8 +4694,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Calmness",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -3580,6 +4705,7 @@
   "target": null
  },
  "PASSIVE_ARMOR_PIERCE_STACK": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -3590,8 +4716,10 @@
   "flags": [
    "pierce"
   ],
+  "max_targets": null,
   "name": "Piercing Arrows",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "debuff",
    "other"
@@ -3599,104 +4727,126 @@
   "target": null
  },
  "PASSIVE_ATTACKBUFF_ARCANESTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "After casting any spell, increase your Auto-Attack Speed by 1.2 and your Auto-Attack Range by 1.2 for the next 3 Auto-Attacks within 3.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Lingering Power",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff"
   ],
   "target": null
  },
  "PASSIVE_AVALON_YIELD_FIBER_T4": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Increases your Gathering Yield by 0.1 for Tier 4 Fiber or lower.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Harvesting Proficiency",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff"
   ],
   "target": null
  },
  "PASSIVE_AVALON_YIELD_FISH_T4": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Increases your Gathering Yield by 0.1 for Tier 4 Fish or lower.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Fisherman Proficiency",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff"
   ],
   "target": null
  },
  "PASSIVE_AVALON_YIELD_HIDE_T4": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Increases your Gathering Yield by 0.1 for Tier 4 Hide or lower.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Skinning Proficiency",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff"
   ],
   "target": null
  },
  "PASSIVE_AVALON_YIELD_ORE_T4": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Increases your Gathering Yield by 0.1 for Tier 4 Ore or lower.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Mining Proficiency",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff"
   ],
   "target": null
  },
  "PASSIVE_AVALON_YIELD_ROCK_T4": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Increases your Gathering Yield by 0.1 for Tier 4 Stone or lower.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Quarrying Proficiency",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff"
   ],
   "target": null
  },
  "PASSIVE_AVALON_YIELD_WOOD_T4": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Increases your Gathering Yield by 0.1 for Tier 4 Wood or lower.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Lumberjack Proficiency",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff"
   ],
   "target": null
  },
  "PASSIVE_BLEEDCHANCE": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -3705,8 +4855,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Deep Cuts",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "dmg",
    "other"
@@ -3714,6 +4866,7 @@
   "target": null
  },
  "PASSIVE_BURN": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -3722,8 +4875,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Burn",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "dmg",
    "other"
@@ -3731,26 +4886,32 @@
   "target": null
  },
  "PASSIVE_CANNOTATTACK": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Cannot Auto-Attack",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Harmless",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": null
  },
  "PASSIVE_CASTINGSPEED_CHANCE_FIRESTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "After every 4 spells cast reduce your Cast Times by 0.4 for 3.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Aggressive Caster",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -3758,14 +4919,17 @@
   "target": null
  },
  "PASSIVE_CASTINGSPEED_CHANCE_FROSTSTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "After every 4 spells cast reduce your Cast Times by 0.4 for 3.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Aggressive Caster",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -3773,14 +4937,17 @@
   "target": null
  },
  "PASSIVE_CCDURATION_CHANCE_HAMMER": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Every 4 Auto-Attacks, increase the duration of your Crowd Control effects by 0.35 for 2.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Dreadladen Fighting",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -3788,14 +4955,17 @@
   "target": null
  },
  "PASSIVE_CCDURATION_CHANCE_MACE": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Every 4 Auto-Attacks, increase the duration of your Crowd Control effects by 0.35 for 2.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Dreadladen Fighting",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -3803,14 +4973,17 @@
   "target": null
  },
  "PASSIVE_CCDURATION_CHANCE_QUARTERSTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Every 8 Auto-Attacks, increase the duration of your Crowd Control effects by 0.35 for 2.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Dreadladen Fighting",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -3818,6 +4991,7 @@
   "target": null
  },
  "PASSIVE_CD_RESET_Q": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -3826,14 +5000,17 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Well-Prepared",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": null
  },
  "PASSIVE_CURSE": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -3842,8 +5019,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Bane",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "dmg",
    "other"
@@ -3851,160 +5030,194 @@
   "target": null
  },
  "PASSIVE_ENERGYCHANCE_ARCANESTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Each Auto-Attack restores 1.24 Energy.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Energetic",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": null
  },
  "PASSIVE_ENERGYCHANCE_BOW": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Each Auto-Attack restores 1.24 Energy.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Energetic",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": null
  },
  "PASSIVE_ENERGYCHANCE_CROSSBOW": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Each Auto-Attack restores 1.24 Energy.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Energetic",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": null
  },
  "PASSIVE_ENERGYCHANCE_CURSEDSTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Each Auto-Attack restores 1.24 Energy.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Energetic",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": null
  },
  "PASSIVE_ENERGYCHANCE_FIRESTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Each Auto-Attack restores 1.24 Energy.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Energetic",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": null
  },
  "PASSIVE_ENERGYCHANCE_FROSTSTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Each Auto-Attack restores 1.24 Energy.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Energetic",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": null
  },
  "PASSIVE_ENERGYCHANCE_HAMMER": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Each Auto-Attack restores 1.74 Energy.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Energetic",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": null
  },
  "PASSIVE_ENERGYCHANCE_HOLYSTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Each Auto-Attack restores 1.24 Energy.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Energetic",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": null
  },
  "PASSIVE_ENERGYCHANCE_MACE": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Each Auto-Attack restores 1.74 Energy.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Energetic",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": null
  },
  "PASSIVE_ENERGYCHANCE_NATURESTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Each Auto-Attack restores 1.24 Energy.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Energetic",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": null
  },
  "PASSIVE_ENERGYCHANCE_QUARTERSTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Every Auto-Attack restores 0.62 Energy.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Energetic",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": null
  },
  "PASSIVE_FROST": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4015,8 +5228,10 @@
   "flags": [
    "root"
   ],
+  "max_targets": null,
   "name": "Frost",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "cc",
    "other"
@@ -4024,6 +5239,7 @@
   "target": null
  },
  "PASSIVE_HEALPOWERCHANCE": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4032,8 +5248,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Adrenaline Driven Charity",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4041,6 +5259,7 @@
   "target": null
  },
  "PASSIVE_HEALTHCHANCE_AXE": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4051,8 +5270,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Life Leech",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "heal",
    "other"
@@ -4060,6 +5281,7 @@
   "target": null
  },
  "PASSIVE_HEALTHCHANCE_DAGGER": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4070,8 +5292,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Life Leech",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "heal",
    "other"
@@ -4079,6 +5303,7 @@
   "target": null
  },
  "PASSIVE_HEALTHCHANCE_HAMMER": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4089,8 +5314,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Life Leech",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "heal",
    "other"
@@ -4098,6 +5325,7 @@
   "target": null
  },
  "PASSIVE_HEALTHCHANCE_MACE": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4108,8 +5336,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Life Leech",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "heal",
    "other"
@@ -4117,6 +5347,7 @@
   "target": null
  },
  "PASSIVE_HEALTHCHANCE_QUARTERSTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4127,8 +5358,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Life Leech",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "heal",
    "other"
@@ -4136,6 +5369,7 @@
   "target": null
  },
  "PASSIVE_HEALTHCHANCE_SPEAR": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4146,8 +5380,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Life Leech",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "heal",
    "other"
@@ -4155,6 +5391,7 @@
   "target": null
  },
  "PASSIVE_HEROICSTACK": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4163,8 +5400,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Heroic Fighting",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4172,6 +5411,7 @@
   "target": null
  },
  "PASSIVE_HOLY_ASCENDED": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4180,8 +5420,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Ascended",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4189,6 +5431,7 @@
   "target": null
  },
  "PASSIVE_KNOCKBACKCHANCE": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4199,8 +5442,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Forceful Bolts",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "cc",
    "other"
@@ -4208,6 +5453,7 @@
   "target": null
  },
  "PASSIVE_KNOCKBACK_CASTER_HOLYSTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4218,8 +5464,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Magic Force",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "cc",
    "other"
@@ -4227,14 +5475,17 @@
   "target": null
  },
  "PASSIVE_KNUCKLE_BRAWLER": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Every Auto-Attack, your damage increases by 0.02 for 3 (Stacks up to 9 times).\n\nOn max stacks the buff can't be refreshed and will run out.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Fatal Fury",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4242,14 +5493,17 @@
   "target": null
  },
  "PASSIVE_KNUCKLE_BRAWLER_SPEED": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Every Auto-Attack, your damage increases by 0.015 for 3 (Stacks up to 12 times)\n\nOn max stacks the buff can't be refreshed and will run out.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Fatal Fury",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4257,6 +5511,7 @@
   "target": null
  },
  "PASSIVE_KNUCKLE_COMBOBREAKER": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4267,8 +5522,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Hard to Catch",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4276,6 +5533,7 @@
   "target": null
  },
  "PASSIVE_KNUCKLE_RAGE": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4286,8 +5544,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Rage",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4295,14 +5555,17 @@
   "target": null
  },
  "PASSIVE_KNUCKLE_RUSHDOWN": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Every Auto-Attack, your Move Speed increases by 0.3 for 2.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Rushdown",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4310,14 +5573,17 @@
   "target": null
  },
  "PASSIVE_MOVESPEED_CHANCE_CURSEDSTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "After every 6 spells cast, your Move Speed increases by 0.2 for 3.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Hit and Run",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4325,14 +5591,17 @@
   "target": null
  },
  "PASSIVE_MOVESPEED_CHANCE_NATURESTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "After every 6 spells cast, increase your Move Speed by 0.2 for 3.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Hit and Run",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4340,6 +5609,7 @@
   "target": null
  },
  "PASSIVE_REDUCE_DMG_SWORD": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4348,8 +5618,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Weakening",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "debuff",
    "other"
@@ -4357,6 +5629,7 @@
   "target": null
  },
  "PASSIVE_SHAPESHIFT_ATTACK_BUFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4367,8 +5640,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Altered Beast",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4376,6 +5651,7 @@
   "target": null
  },
  "PASSIVE_SHAPESHIFT_GATHER_CHARGES": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4384,14 +5660,17 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Innate Power",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": null
  },
  "PASSIVE_SHAPESHIFT_Q_CAST_DAMAGE_REDUCE": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4401,8 +5680,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Intimidating Presence",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "debuff",
@@ -4411,14 +5692,17 @@
   "target": null
  },
  "PASSIVE_SHAPESHIFT_W_CAST_SPEED_BUFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "After casting a second-slot ability in human form, increase your Auto-Attack Speed and Cast Speed by 0.3 for 5.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Rule Bender",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4426,6 +5710,7 @@
   "target": null
  },
  "PASSIVE_SILENCECHANCE": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4436,8 +5721,10 @@
   "flags": [
    "silence"
   ],
+  "max_targets": null,
   "name": "Hush",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "cc",
    "other"
@@ -4445,6 +5732,7 @@
   "target": null
  },
  "PASSIVE_SLOWPOISON": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4455,8 +5743,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Slow Poison",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "cc",
    "other"
@@ -4464,14 +5754,17 @@
   "target": null
  },
  "PASSIVE_SPELLPOWER_CASTER_CROSSBOW": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "After every 5 spells cast, increase your damage dealt by 0.1 for 4.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Furious",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4479,14 +5772,17 @@
   "target": null
  },
  "PASSIVE_SPELLPOWER_CASTER_CURSEDSTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "After every 5 spells cast, increase your damage dealt by 0.1 for 4.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Furious",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4494,14 +5790,17 @@
   "target": null
  },
  "PASSIVE_SPELLPOWER_CASTER_FIRESTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "After every 5 spells cast, increase your damage dealt by 0.1 for 4.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Furious",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4509,14 +5808,17 @@
   "target": null
  },
  "PASSIVE_SPELLPOWER_CASTER_FROSTSTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "After every 5 spells cast, increase your damage dealt by 0.1 for 4.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Furious",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4524,14 +5826,17 @@
   "target": null
  },
  "PASSIVE_SPELLPOWER_CHANCE_AXE": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Every 4 Auto-Attacks, your damage increases by 0.08 for 3.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Aggressive Rush",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4539,14 +5844,17 @@
   "target": null
  },
  "PASSIVE_SPELLPOWER_CHANCE_DAGGER": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Every 4 Auto-Attacks, your damage increases by 0.06 for 3.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Aggressive Rush",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4554,14 +5862,17 @@
   "target": null
  },
  "PASSIVE_SPELLPOWER_CHANCE_SPEAR": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
   "description": "Every 4 Auto-Attacks, your damage increases by 0.07 for 3.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Aggressive Rush",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -4569,6 +5880,7 @@
   "target": null
  },
  "PASSIVE_STUNCHANCE": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4579,8 +5891,10 @@
   "flags": [
    "stun"
   ],
+  "max_targets": null,
   "name": "Stunning Strike",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "cc",
    "other"
@@ -4588,6 +5902,7 @@
   "target": null
  },
  "PASSIVE_STUNCHANCE_QUARTERSTAFF": {
+  "area": null,
   "cast_range": null,
   "casting_time": null,
   "cooldown": null,
@@ -4598,8 +5913,10 @@
   "flags": [
    "stun"
   ],
+  "max_targets": null,
   "name": "Stunning Strike",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "cc",
    "other"
@@ -4607,6 +5924,7 @@
   "target": null
  },
  "PBAOE_PULL": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "30",
@@ -4618,8 +5936,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Air Compressor",
   "preferred_target": "neutral",
+  "radius": 7.0,
   "tags": [
    "cc",
    "other"
@@ -4627,6 +5947,7 @@
   "target": "self"
  },
  "POISONARROW": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "3",
@@ -4635,8 +5956,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": 5,
   "name": "Poisoned Arrow",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "dmg",
    "other"
@@ -4644,6 +5967,18 @@
   "target": "enemy"
  },
  "PRIMALSLAM": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 1.0,
+    "width": 1.0
+   },
+   {
+    "kind": "rect",
+    "length": 18.0,
+    "width": 2.0
+   }
+  ],
   "cast_range": "18",
   "casting_time": "0",
   "cooldown": "27.5",
@@ -4655,8 +5990,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Force of Nature",
   "preferred_target": "enemy",
+  "radius": 9.0,
   "tags": [
    "cc",
    "dmg",
@@ -4665,6 +6002,7 @@
   "target": "ground"
  },
  "PULSINGHEAL": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "12",
@@ -4677,8 +6015,10 @@
    "heal",
    "knockback"
   ],
+  "max_targets": null,
   "name": "Sacred Pulse",
   "preferred_target": "ally",
+  "radius": 5.0,
   "tags": [
    "cc",
    "dmg",
@@ -4688,6 +6028,7 @@
   "target": "friendall"
  },
  "PUMMELING_STRIKES": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0.5",
   "cooldown": "20",
@@ -4697,8 +6038,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Hundred Striking Fists",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "dmg",
    "other"
@@ -4706,18 +6049,22 @@
   "target": "ground"
  },
  "PUNCHCOMBO": {
+  "area": null,
   "cast_range": "2",
   "casting_time": "0",
   "cooldown": "20",
   "description": "",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Devastating Strike",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "enemy"
  },
  "PYROBLAST_SKILLSHOT": {
+  "area": null,
   "cast_range": "15",
   "casting_time": "0",
   "cooldown": "15",
@@ -4729,8 +6076,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Pyroblast",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -4739,6 +6088,7 @@
   "target": "enemy"
  },
  "QDASH": {
+  "area": null,
   "cast_range": "4.5",
   "casting_time": "0",
   "cooldown": "4",
@@ -4748,8 +6098,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Deadly Swipe",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -4759,6 +6111,18 @@
   "target": "ground"
  },
  "QSTAFF_COMBO": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 10.0,
+    "width": 5.0
+   },
+   {
+    "kind": "rect",
+    "length": 10.0,
+    "width": 5.0
+   }
+  ],
   "cast_range": "10",
   "casting_time": "0",
   "cooldown": "12",
@@ -4767,8 +6131,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Gale Dance",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "buff",
    "dmg"
@@ -4776,6 +6142,7 @@
   "target": "ground"
  },
  "QSWHIRLWIND": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "29",
@@ -4788,8 +6155,10 @@
    "knockback",
    "shield"
   ],
+  "max_targets": null,
   "name": "Hurricane",
   "preferred_target": "neutral",
+  "radius": 5.0,
   "tags": [
    "buff",
    "cc",
@@ -4799,6 +6168,12 @@
   "target": "self"
  },
  "QS_CRYSTAL_COMBO": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "9",
   "casting_time": "0",
   "cooldown": "1",
@@ -4811,8 +6186,10 @@
    "knockback",
    "slow"
   ],
+  "max_targets": null,
   "name": "Phantom Twin",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "cc",
    "dmg",
@@ -4821,6 +6198,7 @@
   "target": "ground"
  },
  "QS_SLOWROPE": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "37.5",
@@ -4834,8 +6212,10 @@
    "heal_reduction",
    "shield"
   ],
+  "max_targets": null,
   "name": "Mystic Rocks",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "cc",
@@ -4845,6 +6225,7 @@
   "target": "self"
  },
  "QS_WHIRLWIND2": {
+  "area": null,
   "cast_range": "4",
   "casting_time": "0",
   "cooldown": "18",
@@ -4856,8 +6237,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Forceful Swing",
   "preferred_target": "neutral",
+  "radius": 6.0,
   "tags": [
    "cc",
    "debuff",
@@ -4867,6 +6250,12 @@
   "target": "self"
  },
  "RAM_CHARGE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.5
+   }
+  ],
   "cast_range": "16",
   "casting_time": "0.4",
   "cooldown": "30",
@@ -4879,8 +6268,10 @@
    "shield",
    "stun"
   ],
+  "max_targets": null,
   "name": "Ground Pound",
   "preferred_target": "enemy",
+  "radius": 5.5,
   "tags": [
    "buff",
    "cc",
@@ -4891,6 +6282,7 @@
   "target": "ground"
  },
  "RAPIERSTAB": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "35",
@@ -4902,8 +6294,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Lunging Stabs",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "dmg",
    "mobility",
@@ -4912,6 +6306,7 @@
   "target": "ground"
  },
  "REANIMATE": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "7",
@@ -4922,8 +6317,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Revitalize",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "heal",
    "other"
@@ -4931,6 +6328,12 @@
   "target": "friendall"
  },
  "REJUVENATING_BREEZE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 12.0
+   }
+  ],
   "cast_range": "9",
   "casting_time": "0",
   "cooldown": "15",
@@ -4942,8 +6345,10 @@
    "heal",
    "shield"
   ],
+  "max_targets": 20,
   "name": "Rejuvenating Breeze",
   "preferred_target": "ally",
+  "radius": 15.0,
   "tags": [
    "buff",
    "heal",
@@ -4952,6 +6357,7 @@
   "target": "friendall"
  },
  "REJUVENATION": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "1",
@@ -4963,8 +6369,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Rejuvenation",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "buff",
    "heal",
@@ -4973,6 +6381,24 @@
   "target": "friendall"
  },
  "REJUVMUSHROOM_GRENADE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 1.5
+   },
+   {
+    "kind": "circle",
+    "radius": 1.5
+   },
+   {
+    "kind": "circle",
+    "radius": 1.5
+   },
+   {
+    "kind": "circle",
+    "radius": 1.5
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0",
   "cooldown": "2.5",
@@ -4983,8 +6409,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": 15,
   "name": "Rejuvenating Flower",
   "preferred_target": "ally",
+  "radius": 5.0,
   "tags": [
    "buff",
    "heal",
@@ -4993,6 +6421,7 @@
   "target": "ground"
  },
  "RENDINGCOMBO": {
+  "area": null,
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "0",
@@ -5005,8 +6434,10 @@
    "heal_reduction",
    "root"
   ],
+  "max_targets": null,
   "name": "Rending Rage",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "debuff",
@@ -5017,6 +6448,7 @@
   "target": "ground"
  },
  "RENDINGSPIN": {
+  "area": null,
   "cast_range": "5",
   "casting_time": "0",
   "cooldown": "3",
@@ -5029,8 +6461,10 @@
    "heal",
    "heal_reduction"
   ],
+  "max_targets": null,
   "name": "Rending Spin",
   "preferred_target": "neutral",
+  "radius": 5.0,
   "tags": [
    "debuff",
    "dmg",
@@ -5039,6 +6473,7 @@
   "target": "self"
  },
  "RENDINGSTRIKE": {
+  "area": null,
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "2",
@@ -5050,8 +6485,10 @@
    "heal",
    "heal_reduction"
   ],
+  "max_targets": null,
   "name": "Rending Strike",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "debuff",
    "dmg",
@@ -5060,6 +6497,7 @@
   "target": "enemy"
  },
  "RENDINGSWING": {
+  "area": null,
   "cast_range": "7",
   "casting_time": "0",
   "cooldown": "15",
@@ -5073,8 +6511,10 @@
    "heal_reduction",
    "shield"
   ],
+  "max_targets": null,
   "name": "Tear Apart",
   "preferred_target": "neutral",
+  "radius": 15.0,
   "tags": [
    "debuff",
    "dmg",
@@ -5083,6 +6523,7 @@
   "target": "self"
  },
  "RESURRECTION": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "1",
   "cooldown": "30",
@@ -5093,8 +6534,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Reawaken",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "heal",
    "other"
@@ -5102,6 +6545,7 @@
   "target": "knockeddownplayer"
  },
  "ROOTFIELD": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "0",
@@ -5114,8 +6558,10 @@
    "root",
    "shield"
   ],
+  "max_targets": null,
   "name": "Gravitas",
   "preferred_target": "neutral",
+  "radius": 1.0,
   "tags": [
    "cc",
    "mobility",
@@ -5124,6 +6570,7 @@
   "target": "ground"
  },
  "ROTTENVINES": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "25",
@@ -5134,8 +6581,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": 10,
   "name": "Elevated Nature",
   "preferred_target": "neutral",
+  "radius": 9.0,
   "tags": [
    "buff",
    "heal",
@@ -5144,6 +6593,16 @@
   "target": "self"
  },
  "SACRED_GROUND": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.0
+   },
+   {
+    "kind": "circle",
+    "radius": 3.0
+   }
+  ],
   "cast_range": "2",
   "casting_time": "0.6",
   "cooldown": "7",
@@ -5155,8 +6614,10 @@
    "silence",
    "slow"
   ],
+  "max_targets": null,
   "name": "Sacred Ground",
   "preferred_target": "enemy",
+  "radius": 3.0,
   "tags": [
    "cc",
    "other"
@@ -5164,6 +6625,12 @@
   "target": "ground"
  },
  "SCYTHESWING": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "20",
@@ -5175,8 +6642,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Bloody Reap",
   "preferred_target": "neutral",
+  "radius": 5.0,
   "tags": [
    "dmg",
    "other"
@@ -5184,6 +6653,12 @@
   "target": "self"
  },
  "SEARING_FLAME": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 1.5
+   }
+  ],
   "cast_range": "18",
   "casting_time": "0.3",
   "cooldown": "1.5",
@@ -5192,8 +6667,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": 1,
   "name": "Searing Flame",
   "preferred_target": "enemy",
+  "radius": 1.5,
   "tags": [
    "dmg",
    "other"
@@ -5201,6 +6678,7 @@
   "target": "ground"
  },
  "SEPARATING_SLAM": {
+  "area": null,
   "cast_range": "5",
   "casting_time": "0",
   "cooldown": "20",
@@ -5213,8 +6691,10 @@
    "root",
    "shield"
   ],
+  "max_targets": null,
   "name": "Separator",
   "preferred_target": "enemy",
+  "radius": 6.0,
   "tags": [
    "cc",
    "dmg",
@@ -5223,6 +6703,7 @@
   "target": "enemy"
  },
  "SHAPESHIFT_AVALONIAN_EAGLE": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "15",
@@ -5231,8 +6712,10 @@
   "flags": [
    "root"
   ],
+  "max_targets": null,
   "name": "Dawnbird Transformation",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -5240,6 +6723,7 @@
   "target": "self"
  },
  "SHAPESHIFT_BEAR": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "10",
@@ -5248,8 +6732,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Spirit Bear Transformation",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -5257,6 +6743,7 @@
   "target": "self"
  },
  "SHAPESHIFT_CRYSTAL_COBRA": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "12",
@@ -5269,8 +6756,10 @@
    "root",
    "stun"
   ],
+  "max_targets": null,
   "name": "Crystal Cobra Transformation",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -5278,6 +6767,7 @@
   "target": "self"
  },
  "SHAPESHIFT_ENT": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "5",
@@ -5289,8 +6779,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Sylvian Transformation",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -5298,6 +6790,7 @@
   "target": "self"
  },
  "SHAPESHIFT_IMP": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "8",
@@ -5309,8 +6802,10 @@
    "heal",
    "stun"
   ],
+  "max_targets": null,
   "name": "Hellfire Imp Transformation",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "heal",
@@ -5319,6 +6814,7 @@
   "target": "self"
  },
  "SHAPESHIFT_PANTHER": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "5",
@@ -5328,8 +6824,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Shadow Panther Transformation",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -5337,6 +6835,7 @@
   "target": "self"
  },
  "SHAPESHIFT_ROCK_ELEMENTAL": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "25",
@@ -5347,8 +6846,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Runestone Golem Transformation",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -5356,6 +6857,7 @@
   "target": "self"
  },
  "SHAPESHIFT_WEREWOLF": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "8",
@@ -5366,8 +6868,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Werewolf Transformation",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "heal",
    "other"
@@ -5375,6 +6879,7 @@
   "target": "self"
  },
  "SHAPE_Q_CAST": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0.8",
   "cooldown": "0",
@@ -5384,8 +6889,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": 1,
   "name": "Unstable Projectile",
   "preferred_target": "enemy",
+  "radius": 3.0,
   "tags": [
    "dmg",
    "other"
@@ -5393,6 +6900,7 @@
   "target": "enemy"
  },
  "SHAPE_Q_CONE_MELEE": {
+  "area": null,
   "cast_range": "10",
   "casting_time": "0",
   "cooldown": "4",
@@ -5404,8 +6912,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": 2,
   "name": "Pulse Shock",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "debuff",
    "dmg",
@@ -5414,6 +6924,12 @@
   "target": "ground"
  },
  "SHAPE_Q_DAMAGE_AND_SHIELD": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.0
+   }
+  ],
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "7",
@@ -5426,8 +6942,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": 5,
   "name": "Adapting Matter",
   "preferred_target": "enemyandally",
+  "radius": 3.0,
   "tags": [
    "buff",
    "dmg",
@@ -5436,6 +6954,28 @@
   "target": "ground"
  },
  "SHAPE_Q_SKILLSHOT": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 16.0,
+    "width": 2.5
+   },
+   {
+    "kind": "rect",
+    "length": null,
+    "width": 2.5
+   },
+   {
+    "kind": "rect",
+    "length": 16.0,
+    "width": 2.5
+   },
+   {
+    "kind": "rect",
+    "length": 14.0,
+    "width": 2.5
+   }
+  ],
   "cast_range": "16",
   "casting_time": "0.3",
   "cooldown": "2",
@@ -5445,8 +6985,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": 1,
   "name": "Reality Fissure",
   "preferred_target": "enemy",
+  "radius": 8.0,
   "tags": [
    "dmg",
    "other"
@@ -5454,6 +6996,28 @@
   "target": "ground"
  },
  "SHAPE_W_AREA_PULL": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 12.0,
+    "width": 4.5
+   },
+   {
+    "kind": "rect",
+    "length": null,
+    "width": 4.5
+   },
+   {
+    "kind": "rect",
+    "length": 12.0,
+    "width": 4.5
+   },
+   {
+    "kind": "rect",
+    "length": 12.0,
+    "width": 4.5
+   }
+  ],
   "cast_range": "12",
   "casting_time": "0.4",
   "cooldown": "15",
@@ -5465,8 +7029,10 @@
   "flags": [
    "root"
   ],
+  "max_targets": 5,
   "name": "Positional Drift",
   "preferred_target": "enemy",
+  "radius": 6.0,
   "tags": [
    "cc",
    "dmg",
@@ -5475,6 +7041,16 @@
   "target": "ground"
  },
  "SHAPE_W_DAMAGE_AOE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 4.0
+   },
+   {
+    "kind": "circle",
+    "radius": 4.0
+   }
+  ],
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "8",
@@ -5486,8 +7062,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": 2,
   "name": "Distortion",
   "preferred_target": "enemy",
+  "radius": 4.0,
   "tags": [
    "cc",
    "dmg",
@@ -5496,6 +7074,12 @@
   "target": "ground"
  },
  "SHAPE_W_POLYMORPH": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 2.0
+   }
+  ],
   "cast_range": "22",
   "casting_time": "0.4",
   "cooldown": "15",
@@ -5507,8 +7091,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": 1,
   "name": "Polymorph",
   "preferred_target": "enemy",
+  "radius": 4.0,
   "tags": [
    "cc",
    "debuff",
@@ -5518,6 +7104,7 @@
   "target": "ground"
  },
  "SHAPE_W_TETHERBEAM": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "18",
@@ -5531,8 +7118,10 @@
    "pull",
    "shield"
   ],
+  "max_targets": null,
   "name": "Tether Shift",
   "preferred_target": "enemyandally",
+  "radius": null,
   "tags": [
    "buff",
    "mobility",
@@ -5541,6 +7130,18 @@
   "target": "other"
  },
  "SHATTER_Q": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 1.0,
+    "width": 3.8
+   },
+   {
+    "kind": "rect",
+    "length": 11.0,
+    "width": 3.8
+   }
+  ],
   "cast_range": "16",
   "casting_time": "0",
   "cooldown": "3",
@@ -5552,8 +7153,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Frozen Surge",
   "preferred_target": "enemy",
+  "radius": 5.5,
   "tags": [
    "cc",
    "dmg",
@@ -5562,6 +7165,7 @@
   "target": "ground"
  },
  "SHIELDFRIENDLY": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "6",
@@ -5572,14 +7176,28 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Arcane Protection",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "buff"
   ],
   "target": "friendall"
  },
  "SHOCKWAVE": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 2.0,
+    "width": 5.0
+   },
+   {
+    "kind": "rect",
+    "length": 2.0,
+    "width": 5.0
+   }
+  ],
   "cast_range": "20",
   "casting_time": "0",
   "cooldown": "15",
@@ -5591,8 +7209,10 @@
    "heal",
    "heal_reduction"
   ],
+  "max_targets": null,
   "name": "Morgana Raven",
   "preferred_target": "enemy",
+  "radius": 2.5,
   "tags": [
    "debuff",
    "dmg",
@@ -5601,6 +7221,16 @@
   "target": "ground"
  },
  "SHOCKWAVE_PUNCH": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 1.75
+   },
+   {
+    "kind": "circle",
+    "radius": 1.75
+   }
+  ],
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "3.5",
@@ -5609,8 +7239,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": 10,
   "name": "Shockwave",
   "preferred_target": "enemy",
+  "radius": 1.75,
   "tags": [
    "dmg",
    "mobility",
@@ -5619,6 +7251,7 @@
   "target": "ground"
  },
  "SHOVEL": {
+  "area": null,
   "cast_range": "5",
   "casting_time": "0",
   "cooldown": "18",
@@ -5628,8 +7261,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Fling",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "cc",
    "dmg",
@@ -5638,6 +7273,12 @@
   "target": "enemy"
  },
  "SHRIEKMACE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 6.0
+   }
+  ],
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "20",
@@ -5649,8 +7290,10 @@
    "purge",
    "silence"
   ],
+  "max_targets": null,
   "name": "Battle Howl",
   "preferred_target": "neutral",
+  "radius": 6.0,
   "tags": [
    "cc",
    "debuff",
@@ -5659,6 +7302,7 @@
   "target": "self"
  },
  "SHRINKINGSMASH": {
+  "area": null,
   "cast_range": "10",
   "casting_time": "0",
   "cooldown": "30",
@@ -5670,8 +7314,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Shrinking Curse",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "debuff",
    "dmg",
@@ -5680,6 +7326,13 @@
   "target": "ground"
  },
  "SILENCINGBOLT": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 4.0,
+    "width": 1.5
+   }
+  ],
   "cast_range": "20",
   "casting_time": "0.7",
   "cooldown": "15",
@@ -5690,8 +7343,10 @@
   "flags": [
    "silence"
   ],
+  "max_targets": 1,
   "name": "Noise Eraser",
   "preferred_target": "enemy",
+  "radius": 2.0,
   "tags": [
    "cc",
    "dmg",
@@ -5700,6 +7355,13 @@
   "target": "ground"
  },
  "SKILLSHOT_FIREBALL": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 3.5,
+    "width": 2.5
+   }
+  ],
   "cast_range": "22",
   "casting_time": "0.4",
   "cooldown": "20",
@@ -5708,8 +7370,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": 1,
   "name": "Raging Flare",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "dmg",
    "other"
@@ -5717,6 +7381,13 @@
   "target": "ground"
  },
  "SKILLSHOT_PULL": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 5.0,
+    "width": 2.5
+   }
+  ],
   "cast_range": "20",
   "casting_time": "0",
   "cooldown": "20",
@@ -5728,8 +7399,10 @@
   "flags": [
    "root"
   ],
+  "max_targets": 1,
   "name": "Harpoon",
   "preferred_target": "enemy",
+  "radius": 2.5,
   "tags": [
    "cc",
    "dmg",
@@ -5738,6 +7411,13 @@
   "target": "ground"
  },
  "SKILLSHOT_STUN": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 3.0,
+    "width": 2.5
+   }
+  ],
   "cast_range": "26",
   "casting_time": "0",
   "cooldown": "10",
@@ -5746,8 +7426,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": 5,
   "name": "Magic Arrow",
   "preferred_target": "enemy",
+  "radius": 6.0,
   "tags": [
    "dmg",
    "other"
@@ -5755,6 +7437,13 @@
   "target": "ground"
  },
  "SKILLSHOT_TELEPORT": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 3.0,
+    "width": 2.0
+   }
+  ],
   "cast_range": "22",
   "casting_time": "0",
   "cooldown": "20",
@@ -5767,8 +7456,10 @@
    "pull",
    "stun"
   ],
+  "max_targets": 1,
   "name": "Shadow Edge",
   "preferred_target": "enemy",
+  "radius": 40.0,
   "tags": [
    "buff",
    "cc",
@@ -5778,6 +7469,12 @@
   "target": "ground"
  },
  "SKULLCURSE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 6.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0.4",
   "cooldown": "30",
@@ -5788,8 +7485,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": null,
   "name": "Haunting Screams",
   "preferred_target": "enemy",
+  "radius": 6.0,
   "tags": [
    "dmg",
    "other"
@@ -5797,6 +7496,12 @@
   "target": "ground"
  },
  "SMITE_AOE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 2.5
+   }
+  ],
   "cast_range": "13",
   "casting_time": "0.5",
   "cooldown": "3",
@@ -5805,8 +7510,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Smite",
   "preferred_target": "enemy",
+  "radius": 2.5,
   "tags": [
    "dmg",
    "other"
@@ -5814,6 +7521,7 @@
   "target": "ground"
  },
  "SNIPESHOT_CROSSBOW": {
+  "area": null,
   "cast_range": "16",
   "casting_time": "2",
   "cooldown": "15",
@@ -5824,8 +7532,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Snipe Shot",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "debuff",
    "dmg"
@@ -5833,6 +7543,18 @@
   "target": "enemy"
  },
  "SOULSHAKER": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 20.0,
+    "width": 2.0
+   },
+   {
+    "kind": "rect",
+    "length": 20.0,
+    "width": 2.0
+   }
+  ],
   "cast_range": "20",
   "casting_time": "0",
   "cooldown": "20",
@@ -5843,8 +7565,10 @@
   "flags": [
    "root"
   ],
+  "max_targets": null,
   "name": "Soul Shaker",
   "preferred_target": "enemy",
+  "radius": 10.0,
   "tags": [
    "cc",
    "dmg",
@@ -5853,6 +7577,7 @@
   "target": "ground"
  },
  "SOUL_LINK": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "0",
@@ -5865,8 +7590,10 @@
    "heal",
    "shield"
   ],
+  "max_targets": null,
   "name": "Soul Link",
   "preferred_target": "ally",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -5875,6 +7602,13 @@
   "target": "allunmounted"
  },
  "SPEARTHROW": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 5.0,
+    "width": 2.5
+   }
+  ],
   "cast_range": "22",
   "casting_time": "0",
   "cooldown": "20",
@@ -5885,8 +7619,10 @@
   "flags": [
    "stun"
   ],
+  "max_targets": 1,
   "name": "Spear Throw",
   "preferred_target": "enemy",
+  "radius": 4.0,
   "tags": [
    "cc",
    "dmg",
@@ -5895,6 +7631,23 @@
   "target": "ground"
  },
  "SPEAR_AOE_FINISHER": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 8.0,
+    "width": 7.0
+   },
+   {
+    "kind": "rect",
+    "length": 10.0,
+    "width": 7.0
+   },
+   {
+    "kind": "rect",
+    "length": 17.0,
+    "width": 0.0
+   }
+  ],
   "cast_range": "17",
   "casting_time": "0.4",
   "cooldown": "30",
@@ -5906,8 +7659,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Razor's Edge",
   "preferred_target": "enemy",
+  "radius": 8.5,
   "tags": [
    "cc",
    "dmg",
@@ -5916,6 +7671,13 @@
   "target": "ground"
  },
  "SPEAR_LUNGE": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 9.0,
+    "width": 3.0
+   }
+  ],
   "cast_range": "10",
   "casting_time": "0",
   "cooldown": "3",
@@ -5927,8 +7689,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Lunging Strike",
   "preferred_target": "enemy",
+  "radius": 4.5,
   "tags": [
    "buff",
    "cc",
@@ -5938,6 +7702,7 @@
   "target": "ground"
  },
  "SPEEDARCHER_KITE": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "0",
@@ -5947,8 +7712,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Enchanted Quiver",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "mobility",
@@ -5957,6 +7724,7 @@
   "target": "self"
  },
  "SPEEDSHOT2": {
+  "area": null,
   "cast_range": "15",
   "casting_time": "0",
   "cooldown": "10",
@@ -5965,8 +7733,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Speed Shot",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -5975,6 +7745,7 @@
   "target": "enemy"
  },
  "SPINATTACK": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "15",
@@ -5983,8 +7754,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Spinning Blades",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "buff",
    "dmg",
@@ -5994,6 +7767,7 @@
   "target": "ground"
  },
  "SPINNING_SMASH": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "30",
@@ -6007,8 +7781,10 @@
    "pull",
    "stun"
   ],
+  "max_targets": null,
   "name": "Onslaught",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "cc",
    "dmg",
@@ -6017,6 +7793,18 @@
   "target": "ground"
  },
  "SPIRITANIMAL": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 2.0,
+    "width": 5.0
+   },
+   {
+    "kind": "rect",
+    "length": null,
+    "width": 5.0
+   }
+  ],
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "30",
@@ -6028,8 +7816,10 @@
    "cleanse",
    "heal"
   ],
+  "max_targets": 20,
   "name": "Spirit Animal",
   "preferred_target": "ally",
+  "radius": 2.5,
   "tags": [
    "heal",
    "other"
@@ -6037,6 +7827,7 @@
   "target": "ground"
  },
  "SPIRITSPEAR": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "2",
@@ -6045,8 +7836,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Spirit Spear",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "other"
@@ -6054,6 +7847,13 @@
   "target": "self"
  },
  "SPLITTINGSLASH": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 13.0,
+    "width": 2.0
+   }
+  ],
   "cast_range": "13",
   "casting_time": "0",
   "cooldown": "15",
@@ -6064,8 +7864,10 @@
   "flags": [
    "root"
   ],
+  "max_targets": null,
   "name": "Splitting Slash",
   "preferred_target": "enemy",
+  "radius": 6.5,
   "tags": [
    "cc",
    "dmg",
@@ -6074,6 +7876,16 @@
   "target": "ground"
  },
  "STARFALL_DOT": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 8.0
+   },
+   {
+    "kind": "circle",
+    "radius": 8.0
+   }
+  ],
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "30",
@@ -6082,8 +7894,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Starfall",
   "preferred_target": "neutral",
+  "radius": 8.0,
   "tags": [
    "buff",
    "dmg",
@@ -6092,6 +7906,7 @@
   "target": "self"
  },
  "STUNRUN": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "15",
@@ -6102,8 +7917,10 @@
   "flags": [
    "stun"
   ],
+  "max_targets": null,
   "name": "Stun Run",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "cc",
@@ -6112,6 +7929,7 @@
   "target": "self"
  },
  "SUNDERARMOR2": {
+  "area": null,
   "cast_range": "2",
   "casting_time": "0",
   "cooldown": "2",
@@ -6122,8 +7940,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Sunder Armor",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "debuff",
    "dmg",
@@ -6132,6 +7952,7 @@
   "target": "enemy"
  },
  "SUNDERSHOT": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "1",
   "cooldown": "7",
@@ -6143,8 +7964,10 @@
    "heal",
    "shield"
   ],
+  "max_targets": null,
   "name": "Sunder Shot",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "debuff",
    "dmg",
@@ -6153,6 +7976,7 @@
   "target": "enemy"
  },
  "SWORD_BERSERK_RUN_RE": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "0",
@@ -6161,8 +7985,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Limitbreaker",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -6171,6 +7997,7 @@
   "target": "self"
  },
  "SWORD_SPIN": {
+  "area": null,
   "cast_range": "9",
   "casting_time": "0",
   "cooldown": "12",
@@ -6180,8 +8007,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Blade Cyclone",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "dmg",
    "mobility",
@@ -6190,6 +8019,18 @@
   "target": "ground"
  },
  "TAINTED_STEEL": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 6.0,
+    "width": 2.0
+   },
+   {
+    "kind": "rect",
+    "length": 26.0,
+    "width": 4.0
+   }
+  ],
   "cast_range": "26",
   "casting_time": "0",
   "cooldown": "30",
@@ -6200,8 +8041,10 @@
   "flags": [
    "shield"
   ],
+  "max_targets": null,
   "name": "Corrupting Steel",
   "preferred_target": "enemy",
+  "radius": 13.0,
   "tags": [
    "debuff",
    "dmg",
@@ -6210,6 +8053,7 @@
   "target": "ground"
  },
  "TAR_RING": {
+  "area": null,
   "cast_range": "8",
   "casting_time": "0.5",
   "cooldown": "20",
@@ -6222,8 +8066,10 @@
    "shield",
    "slow"
   ],
+  "max_targets": null,
   "name": "Inertia Ring",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "cc",
    "other"
@@ -6231,6 +8077,12 @@
   "target": "self"
  },
  "THORNSAREA": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 3.0
+   }
+  ],
   "cast_range": "12",
   "casting_time": "0.4",
   "cooldown": "0",
@@ -6241,8 +8093,10 @@
   "flags": [
    "slow"
   ],
+  "max_targets": null,
   "name": "Thorn Growth",
   "preferred_target": "enemy",
+  "radius": 3.0,
   "tags": [
    "cc",
    "dmg",
@@ -6251,6 +8105,7 @@
   "target": "ground"
  },
  "THREATENINGSMASH": {
+  "area": null,
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "4",
@@ -6260,8 +8115,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Threatening Smash",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "dmg",
    "other"
@@ -6269,6 +8126,7 @@
   "target": "ground"
  },
  "THREATENINGSTRIKE_HAMMER": {
+  "area": null,
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "2",
@@ -6277,8 +8135,10 @@
    "enemy"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Threatening Strike",
   "preferred_target": "enemy",
+  "radius": null,
   "tags": [
    "buff",
    "dmg"
@@ -6286,6 +8146,20 @@
   "target": "enemy"
  },
  "THROWINGBLADES": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 1.2
+   },
+   {
+    "kind": "circle",
+    "radius": 1.2
+   },
+   {
+    "kind": "circle",
+    "radius": 1.2
+   }
+  ],
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "15",
@@ -6295,8 +8169,10 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Throwing Blades",
   "preferred_target": "enemy",
+  "radius": 1.2,
   "tags": [
    "buff",
    "dmg",
@@ -6305,6 +8181,12 @@
   "target": "ground"
  },
  "TIME_FREEZE": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 5.0
+   }
+  ],
   "cast_range": "14",
   "casting_time": "0",
   "cooldown": "72",
@@ -6316,8 +8198,10 @@
    "shield",
    "stun"
   ],
+  "max_targets": null,
   "name": "Time Freeze",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "cc",
    "other"
@@ -6325,6 +8209,12 @@
   "target": "ground"
  },
  "TORNADO": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 7.0
+   }
+  ],
   "cast_range": "25",
   "casting_time": "0",
   "cooldown": "30",
@@ -6337,8 +8227,10 @@
    "shield",
    "slow"
   ],
+  "max_targets": null,
   "name": "Tornado",
   "preferred_target": "enemy",
+  "radius": 7.0,
   "tags": [
    "cc",
    "dmg",
@@ -6347,6 +8239,7 @@
   "target": "ground"
  },
  "TRIDENTTHROW": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "30",
@@ -6358,8 +8251,10 @@
   "flags": [
    "root"
   ],
+  "max_targets": null,
   "name": "Spectral Trident",
   "preferred_target": "enemy",
+  "radius": 3.0,
   "tags": [
    "buff",
    "cc",
@@ -6370,6 +8265,7 @@
   "target": "ground"
  },
  "TRIPLECOMBO_DIVEKICK": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "25",
@@ -6383,8 +8279,10 @@
    "knockback",
    "purge"
   ],
+  "max_targets": null,
   "name": "Purifying Combination",
   "preferred_target": "neutral",
+  "radius": null,
   "tags": [
    "buff",
    "cc",
@@ -6395,6 +8293,7 @@
   "target": "ground"
  },
  "TRIPLE_KICK": {
+  "area": null,
   "cast_range": "11",
   "casting_time": "0",
   "cooldown": "18",
@@ -6406,8 +8305,10 @@
   "flags": [
    "pull"
   ],
+  "max_targets": 1,
   "name": "Triple Kick",
   "preferred_target": "enemy",
+  "radius": 4.0,
   "tags": [
    "cc",
    "dmg",
@@ -6417,6 +8318,7 @@
   "target": "ground"
  },
  "UNDEADARROWS": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "10",
@@ -6427,8 +8329,10 @@
   "flags": [
    "pierce"
   ],
+  "max_targets": null,
   "name": "Undead Arrows",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "buff",
    "dmg",
@@ -6437,6 +8341,12 @@
   "target": "self"
  },
  "UNDEADHAND": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 2.5
+   }
+  ],
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "14",
@@ -6448,8 +8358,10 @@
    "heal",
    "stun"
   ],
+  "max_targets": null,
   "name": "Grasp of the Undead",
   "preferred_target": "enemy",
+  "radius": 2.5,
   "tags": [
    "cc",
    "debuff",
@@ -6459,6 +8371,13 @@
   "target": "ground"
  },
  "VACUUMSLASH": {
+  "area": [
+   {
+    "kind": "rect",
+    "length": 4.0,
+    "width": 2.5
+   }
+  ],
   "cast_range": "25",
   "casting_time": "0.25",
   "cooldown": "25",
@@ -6470,8 +8389,10 @@
    "pull",
    "stun"
   ],
+  "max_targets": 1,
   "name": "Vendetta",
   "preferred_target": "enemy",
+  "radius": 8.0,
   "tags": [
    "cc",
    "dmg",
@@ -6480,186 +8401,232 @@
   "target": "ground"
  },
  "VANITY_2H_BANNER_GUIDON_AJ_SPELL": {
+  "area": null,
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "25",
   "description": "Display your Heraldic Guidon",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Present Standard",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "ground"
  },
  "VANITY_2H_BANNER_GUIDON_GOLDEN_AJ_SPELL": {
+  "area": null,
   "cast_range": "3",
   "casting_time": "0",
   "cooldown": "25",
   "description": "Display your Glorious Heraldic Guidon",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Present Standard",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "ground"
  },
  "VANITY_2H_LUTE_AJ_LOVESONG_SPELL": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "25",
   "description": "Play a rather sentimental tune.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Clair de Lune",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "self"
  },
  "VANITY_2H_LUTE_AJ_OLDTOWNS_SPELL": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "25",
   "description": "Play a tune about exploring settlements far away in the Outlands.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Outland Towns",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "self"
  },
  "VANITY_2H_LUTE_MAGNIFICENT_AJ_ALBION_SPELL": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "25",
   "description": "Play the Albion Theme - a tune about setting out for new and unexplored lands.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Melody of Albion",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "self"
  },
  "VANITY_2H_LUTE_MAGNIFICENT_AJ_LOVESONG_SPELL": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "25",
   "description": "Play a rather sentimental tune.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Clair de Lune",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "self"
  },
  "VANITY_2H_LUTE_MAGNIFICENT_AJ_OLDTOWNS_SPELL": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "25",
   "description": "Play a tune about exploring settlements far away in the Outlands.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Outland Towns",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "self"
  },
  "VANITY_2H_MULTITOOL_AJ_SPELL": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "10",
   "description": "Demonstrate your tool's prowess by felling a tree with one swing.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Masterful Cut",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "self"
  },
  "VANITY_2H_MULTITOOL_OVERCHARGED_AJ_SPELL": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "10",
   "description": "Demonstrate your tool's prowess by felling a tree with one swing.",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Masterful Cut",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "self"
  },
  "VANITY_FIREWORK_BLUE": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "10",
   "description": "Light up the sky with a shimmering blue explosion[-].",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Blue Fireworks",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "self"
  },
  "VANITY_FIREWORK_GREEN": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "10",
   "description": "Light up the sky with a shimmering green explosion[-].",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Green Fireworks",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "self"
  },
  "VANITY_FIREWORK_RED": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "10",
   "description": "Light up the sky with a shimmering red explosion[-].",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Red Fireworks",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "self"
  },
  "VANITY_SPELLBOOK_BIRD": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "35",
   "description": "Release a being of pure magical energy towards the sky.\n\nEnergy Cost: $energyusage \nCast time: instant \nRange: self\nCooldown: $recastdelay",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Wings of Magic",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "self"
  },
  "VANITY_SPELLBOOK_FIREWORKS": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "25",
   "description": "Form the magical energy of your spellbook into fireworks.\n\nEnergy Cost: $energyusage \nCast time: instant \nRange: self\nCooldown: $recastdelay",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Magical Fireworks",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "self"
  },
  "VANITY_SUMMONING_HILLMARMOT": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "10",
   "description": "Summon a small, harmless marmot. It will last for 120 seconds, but only one can be summoned at a time.\n\nCast time: instant\nRange: $castrange\nCooldown: $recastdelay",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Summon Marmot",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "ground"
  },
  "VANITY_SUMMONING_PORTAL": {
+  "area": null,
   "cast_range": "14",
   "casting_time": "0",
   "cooldown": "12",
@@ -6668,36 +8635,45 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Portal",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "ground"
  },
  "VANITY_SUMMONING_SNOWRABBIT": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "10",
   "description": "Summon a small, harmless Snow Bunny. It will last for 120 seconds, but only one can be summoned at a time.\n\nCast time: instant\nRange: $castrange\nCooldown: $recastdelay",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Summon Snow Bunny",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "ground"
  },
  "VANITY_SUMMONING_TOAD_EASTER": {
+  "area": null,
   "cast_range": "12",
   "casting_time": "0",
   "cooldown": "10",
   "description": "Summon a small, harmless frog. It will last for 120 seconds, but only one can be summoned at a time.\n\nCast time: instant\nRange: $castrange\nCooldown: $recastdelay",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Summon Frog",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "ground"
  },
  "VANITY_WARBANNER_CHARGE": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "35",
@@ -6706,24 +8682,30 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Rally the Troops!",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "self"
  },
  "VANITY_WARBANNER_PRESENT": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "25",
   "description": "Ram your Warbanner into the ground, claiming this land for your guild.\n\nEnergy Cost: $energyusage \nCast time: instant \nRange: self\nCooldown: $recastdelay",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Honor the Flag!",
   "preferred_target": null,
+  "radius": null,
   "tags": [],
   "target": "self"
  },
  "VANITY_WARBANNER_PRESENT_FW_BRIDGEWATCH": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "25",
@@ -6732,14 +8714,17 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Honor the Flag!",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": "factionself"
  },
  "VANITY_WARBANNER_PRESENT_FW_CAERLEON": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "25",
@@ -6748,14 +8733,17 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Honor the Flag!",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": "factionself"
  },
  "VANITY_WARBANNER_PRESENT_FW_FORTSTERLING": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "25",
@@ -6764,14 +8752,17 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Honor the Flag!",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": "factionself"
  },
  "VANITY_WARBANNER_PRESENT_FW_LYMHURST": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "25",
@@ -6780,14 +8771,17 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Honor the Flag!",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": "factionself"
  },
  "VANITY_WARBANNER_PRESENT_FW_MARTLOCK": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "25",
@@ -6796,14 +8790,17 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Honor the Flag!",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": "factionself"
  },
  "VANITY_WARBANNER_PRESENT_FW_THETFORD": {
+  "area": null,
   "cast_range": "0",
   "casting_time": "0",
   "cooldown": "25",
@@ -6812,14 +8809,17 @@
    "self"
   ],
   "flags": [],
+  "max_targets": null,
   "name": "Honor the Flag!",
   "preferred_target": null,
+  "radius": null,
   "tags": [
    "other"
   ],
   "target": "factionself"
  },
  "VAULT_ATTACK": {
+  "area": null,
   "cast_range": "13",
   "casting_time": "0.6",
   "cooldown": "15",
@@ -6830,8 +8830,10 @@
   "flags": [
    "knockback"
   ],
+  "max_targets": null,
   "name": "Vault Leap",
   "preferred_target": "enemy",
+  "radius": 5.0,
   "tags": [
    "buff",
    "cc",
@@ -6842,6 +8844,7 @@
   "target": "ground"
  },
  "VOID": {
+  "area": null,
   "cast_range": "15",
   "casting_time": "0.5",
   "cooldown": "62",
@@ -6853,8 +8856,10 @@
    "cleanse",
    "shield"
   ],
+  "max_targets": null,
   "name": "The Void",
   "preferred_target": "ally",
+  "radius": 2.0,
   "tags": [
    "buff",
    "other"
@@ -6862,6 +8867,16 @@
   "target": "ground"
  },
  "WELLOFLIFE2": {
+  "area": [
+   {
+    "kind": "circle",
+    "radius": 7.0
+   },
+   {
+    "kind": "circle",
+    "radius": 7.0
+   }
+  ],
   "cast_range": "15",
   "casting_time": "0.7",
   "cooldown": "20",
@@ -6872,8 +8887,10 @@
   "flags": [
    "heal"
   ],
+  "max_targets": 20,
   "name": "Well Of Life",
   "preferred_target": "ally",
+  "radius": 7.0,
   "tags": [
    "heal",
    "other"
@@ -6881,14 +8898,17 @@
   "target": "ground"
  },
  "WHIRLING_STAFF": {
+  "area": null,
   "cast_range": "5",
   "casting_time": "0",
   "cooldown": "3",
   "description": "Whirl your staff around, dealing 40 physical damage every 0.25 in a 5 radius while channeling for up to {3} (can move while channeling).",
   "directions": [],
   "flags": [],
+  "max_targets": null,
   "name": "Whirling Strikes",
   "preferred_target": "neutral",
+  "radius": 5.0,
   "tags": [
    "dmg",
    "other"

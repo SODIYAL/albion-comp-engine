@@ -4,12 +4,26 @@ Windows note: use `py -3`, not `python`/`python3` — those resolve to the
 Microsoft Store stub. Requires `pyyaml` (`py -3 -m pip install pyyaml`).
 
 ```
-ao-bin-dumps (git clone, see below)
-   │  py -3 pipeline/parse_dumps.py <clone-path>
+data/source_pins.yaml     the ONE pinned ao-bin-dumps commit (chapter 2, §A)
+   │  py -3 pipeline/fetch_snapshot.py     ← the only network step for dumps
+   ▼
+out/dumps_cache/<sha12>/  raw snapshot, cached BY COMMIT (gitignored)
+out/source_manifest.json  repository/commit/timestamps/patch + SHA-256 per file
+   │  py -3 pipeline/parse_dumps.py        (reads the pinned snapshot)
+   │  py -3 pipeline/fetch_item_stats.py
+   │  py -3 pipeline/fetch_gear_lines.py
    ▼
 out/weapon_lines.json     161 weapon lines: name + full Q/W/E/passive spell lists
-out/spell_index.json      367 spells: function flags + target-direction hints
-out/weapon_usage.json     usage ranking from albionbb battle sampling
+out/spell_index.json      367 spells: function flags, direction hints, and
+                          structural AREA GEOMETRY (radius/max targets)
+out/item_stats.json       base stats + per-tier/per-enchant item power
+out/weapon_usage_v2.json  FIGHT-SIZE equipment prevalence (albionbb; display only)
+   │  py -3 pipeline/build_interactions.py   (interactions.yaml -> validated)
+   ▼
+out/interactions.json     spell-keyed PvP interaction records: duplicate
+                          semantics, reflect/cleanse/purge per component, CC
+                          classes, confidence provenance. Scoring reads ONLY
+                          verified nonstacking_caps; unknown never scores.
    │  py -3 pipeline/seed_sheets.py 40
    ▼
 sheets/draft/*.yaml       auto-seeded, lint-clean drafts (effect caps only)
@@ -57,11 +71,41 @@ Rule 3 used to match description keywords, which saw a fraction of the game —
 100 weapon lines apply a movespeed debuff and the `slow` regex matched almost
 none of them.
 
+## The evidence layer (chapter 2)
+
+Build provenance lives in `data/` (see `data/README.md`): caller comps
+(`published_comps/`), MetaBattle imports (`published_builds/`, adapter:
+`py -3 pipeline/adapters/metabattle.py fetch|parse` — fetch is explicit and
+never part of a normal build), manual Armory imports (`armory_imports/`).
+`py -3 pipeline/build_builds.py` validates + normalizes everything into
+`out/builds_index.json` (§F selection order, canonical flags) and
+`out/builds_validation.json` (problems, quarantines, promotion decisions).
+`build_dashboard.py` inlines the index; nothing in it feeds scoring.
+
+## Moving to a new game patch
+
+Update `data/source_pins.yaml` to the new ao-bin-dumps commit
+(`https://api.github.com/repos/ao-data/ao-bin-dumps/commits/master`), then:
+
+```
+py -3 pipeline/fetch_snapshot.py
+py -3 pipeline/parse_dumps.py
+py -3 pipeline/fetch_item_stats.py
+py -3 pipeline/fetch_gear_lines.py
+py -3 pipeline/build_builds.py
+py -3 pipeline/build_dataset.py     # verifies the chain; exit 2 = blocked
+```
+
+then the full gate list in HANDOFF.md. `build_dataset.py` fails closed if
+any input is missing, hash-drifted, adapter-stale, or from a different
+commit than the others.
+
 ## Re-cloning ao-bin-dumps
 
-Only needed after a game patch (`out/` is committed).
+Only needed for `patch_history.py` (it walks git history; the pinned
+snapshot fetch covers everything else).
 
-**After every re-clone + rebuild, re-check `pipeline/effect_overrides.yaml`.**
+**After every snapshot move + rebuild, re-check `pipeline/effect_overrides.yaml`.**
 That file holds runtime corrections to parser output (direction bugs,
 reference-chain artifacts, prose-flag misfires, and `add:` entries for
 mechanics outside the structured vocabulary). Each entry cites the dumps text
@@ -70,11 +114,7 @@ silently redundant — or wrong, if the spell was redesigned. Diff each entry's
 spell against the fresh dumps text and delete entries the rebuild made
 unnecessary.
 
-```
-git clone --depth 1 --filter=blob:none https://github.com/ao-data/ao-bin-dumps.git
-```
-
-For `patch_history.py` the clone needs HISTORY, so drop `--depth 1`:
+`patch_history.py` needs a clone WITH HISTORY:
 
 ```
 git clone --filter=blob:none --no-checkout https://github.com/ao-data/ao-bin-dumps.git

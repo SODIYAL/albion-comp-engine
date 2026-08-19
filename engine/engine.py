@@ -67,6 +67,19 @@ class Engine:
         self.synergies = [(s["a"], s["b"], s["bonus"])
                           for s in self.scoring.get("capability_synergies", [])]
         self.mechanics = self.data.get("mechanics", {}) or {}
+        # PvP interaction records (build_interactions.py, 2026-08-19),
+        # spell-keyed. The scoring coupling is deliberately narrow: a
+        # VERIFIED record may declare nonstacking_caps — capability names
+        # whose party supply counts ONCE across members equipping that same
+        # spell (largest single contribution, not the sum: refresh/override
+        # semantics). unknown/likely records never change a score; all other
+        # interaction data is analysis/display only.
+        self.interactions = self.data.get("interactions", {}) or {}
+        self.nonstack = {}
+        for _sid in sorted(self.interactions):
+            _rec = self.interactions[_sid]
+            if _rec.get("confidence") == "verified" and _rec.get("nonstacking_caps"):
+                self.nonstack[_sid] = list(_rec["nonstacking_caps"])
         # Composition layer (pipeline/templates/composition.yaml): what the
         # FORGE may generate — role bands, copy limits, groups, viability,
         # size physics. Absent (older dataset) -> everything defaults open.
@@ -230,6 +243,7 @@ class Engine:
                 break
         self._extras_cache = {}
         self._default_cache = {}
+        self._ns_cache = {}
 
     @staticmethod
     def _step_table(table, size):
@@ -458,6 +472,41 @@ class Engine:
             combo = self.default_combo(weapon)
         return extras[combo]
 
+    def _nonstack_contrib(self, weapon, combo=None):
+        """{spell: {cap: effective value}} for every verified non-stacking
+        interaction spell this member's combo equips — the contributions
+        effective_supply must count once across the party. Empty when no
+        interaction data applies (the common case: zero overhead)."""
+        if not self.nonstack:
+            return {}
+        extras = self._combo_extras(weapon)
+        if combo is None or combo < 0 or combo >= len(extras):
+            combo = self.default_combo(weapon)
+        hit = self._ns_cache.get((weapon, combo))
+        if hit is not None:
+            return hit
+        lo = self.weapons[weapon].get("loadout") or {}
+        spells = lo.get("slot_spells") or []
+        _always, slots_eff = self._loadout_eff(weapon)
+        out = {}
+        for oi, ci in self.combo_choices(weapon, combo):
+            if oi >= len(spells) or ci >= len(spells[oi]):
+                continue
+            sid = spells[oi][ci]
+            caps = self.nonstack.get(sid)
+            if not caps or oi >= len(slots_eff) or ci >= len(slots_eff[oi]):
+                continue
+            bundle = slots_eff[oi][ci]
+            contrib = out.setdefault(sid, {})
+            for cap in caps:
+                v = bundle.get(cap, 0.0)
+                if v:
+                    contrib[cap] = contrib.get(cap, 0.0) + v
+            if not contrib:
+                del out[sid]
+        self._ns_cache[(weapon, combo)] = out
+        return out
+
     # ----------------------------------------------------------------- supply
     def supply(self, party):
         """Raw capability units summed over the party (sheet numbers) —
@@ -476,7 +525,36 @@ class Engine:
             extra = self.member_extra(w, combos[i] if combos else None)
             for cap, v in extra.items():
                 s[cap] = s.get(cap, 0.0) + v
+        if self.nonstack:
+            self._apply_nonstack(s, party, combos)
         return s
+
+    def _apply_nonstack(self, s, party, combos):
+        """Count-once rule for verified non-stacking interaction spells: when
+        two or more members equip the same such spell, each listed capability
+        keeps only the LARGEST single-member contribution. Deterministic
+        order (sorted spell ids, stored cap order, party order) — the JS
+        mirror must accumulate identically."""
+        groups = {}
+        for i, w in enumerate(party):
+            for sid, contrib in self._nonstack_contrib(
+                    w, combos[i] if combos else None).items():
+                groups.setdefault(sid, []).append(contrib)
+        for sid in sorted(groups):
+            lst = groups[sid]
+            if len(lst) < 2:
+                continue
+            for cap in self.nonstack[sid]:
+                total = 0.0
+                mx = 0.0
+                for contrib in lst:
+                    v = contrib.get(cap, 0.0)
+                    total += v
+                    if v > mx:
+                        mx = v
+                excess = total - mx
+                if excess > 0.0:
+                    s[cap] = s.get(cap, 0.0) - excess
 
     # ----------------------------------------------------------------- floors
     def floor_armed(self, cap, have):
@@ -656,7 +734,9 @@ class Engine:
     # -------------------------------------------------- candidate evaluation
     def party_state(self, party, combos=None):
         """Everything a candidate marginal needs: effective supply, per-pair
-        synergy state, and exact-weapon counts. Build once per sweep."""
+        synergy state, exact-weapon counts, and the per-spell max non-stacking
+        contributions (so _eval_pick can price a duplicate of a verified
+        non-stacking spell exactly). Build once per sweep."""
         s, J = self._syn_state(party, combos)
         pair_vals = []
         for p in range(len(self._active_syn)):
@@ -665,7 +745,17 @@ class Engine:
         counts = {}
         for w in party:
             counts[w] = counts.get(w, 0) + 1
-        return {"s": s, "J": J, "pair_vals": pair_vals, "counts": counts}
+        ns_max = {}
+        if self.nonstack:
+            for i, w in enumerate(party):
+                for sid, contrib in self._nonstack_contrib(
+                        w, combos[i] if combos else None).items():
+                    cur = ns_max.setdefault(sid, {})
+                    for cap, v in contrib.items():
+                        if v > cur.get(cap, 0.0):
+                            cur[cap] = v
+        return {"s": s, "J": J, "pair_vals": pair_vals, "counts": counts,
+                "ns_max": ns_max}
 
     def _marg_fit_from(self, s, extra):
         """Marginal fitness of adding effective caps `extra` to effective
@@ -682,18 +772,48 @@ class Engine:
                       - self._overstack(cap, have, target, soft))
         return total
 
-    def _marg_syn_from(self, state, extra):
+    def _marg_syn_from(self, state, extra, extra_j=None):
         """Marginal synergy of adding effective caps `extra` — exact against
-        the same per-pair rule synergy() applies."""
+        the same per-pair rule synergy() applies. `extra_j` (default: extra)
+        is the member's UNADJUSTED caps for the largest-single-member joint
+        term J — synergy() computes J from member_extra, so a non-stacking
+        supply adjustment must not leak into it."""
+        if extra_j is None:
+            extra_j = extra
         total = 0.0
         s, J, pv = state["s"], state["J"], state["pair_vals"]
         for p in range(len(self._active_syn)):
             a, b, _bonus = self._active_syn[p]
-            j = min(extra.get(a, 0.0), extra.get(b, 0.0))
+            j = min(extra_j.get(a, 0.0), extra_j.get(b, 0.0))
             j2 = J[p] if J[p] > j else j
             total += self._pair_value(p, s.get(a, 0.0) + extra.get(a, 0.0),
                                       s.get(b, 0.0) + extra.get(b, 0.0), j2) - pv[p]
         return total
+
+    def _nonstack_adjust(self, state, weapon, combo, extra):
+        """The candidate's effective caps with the count-once rule applied
+        against the CURRENT party (state.ns_max): for each verified
+        non-stacking spell the combo shares with a member, the listed caps
+        gain only max(0, candidate - party_max) — exactly what
+        effective_supply(party + candidate) would show. Returns `extra`
+        itself when nothing applies (fast path)."""
+        ns_max = state.get("ns_max")
+        if not self.nonstack or not ns_max:
+            return extra
+        adj = None
+        for sid, contrib in self._nonstack_contrib(weapon, combo).items():
+            pmax = ns_max.get(sid)
+            if not pmax:
+                continue
+            if adj is None:
+                adj = dict(extra)
+            for cap in self.nonstack[sid]:
+                v = contrib.get(cap, 0.0)
+                if not v:
+                    continue
+                gain = v - pmax.get(cap, 0.0)
+                adj[cap] = adj.get(cap, 0.0) - v + (gain if gain > 0.0 else 0.0)
+        return adj if adj is not None else extra
 
     def _eval_pick(self, state, weapon):
         """THE candidate score — the exact comp_score delta of adding
@@ -704,8 +824,9 @@ class Engine:
         extras = self._combo_extras(weapon)
         for i in range(len(extras)):
             extra = extras[i]
-            d_fit = self._marg_fit_from(state["s"], extra)
-            d_syn = self._marg_syn_from(state, extra)
+            adj = self._nonstack_adjust(state, weapon, i, extra)
+            d_fit = self._marg_fit_from(state["s"], adj)
+            d_syn = self._marg_syn_from(state, adj, extra)
             val = self.alpha * d_fit + self.beta * d_syn
             if best is None or val > best[0]:
                 best = (val, d_fit, d_syn, i)
@@ -819,6 +940,110 @@ class Engine:
         s = self.effective_supply(party, combos)
         return [cap for cap in self.reqs
                 if self.weight(cap) >= 5 and s.get(cap, 0) / self.target(cap) < 0.5]
+
+    # ----------------------------------------------- interaction analysis
+    # ("new prompt" spec §7/§9, 2026-08-19.) Assembly over existing scoring
+    # pieces — coverage reads effective_supply, gaps read the weakness logic,
+    # duplicate conflicts read the interaction records. No parallel scoring
+    # path exists here; everything a message claims is what the score used.
+    DAMAGE_CAPS_PROFILE = ("burst_aoe", "burst_st", "sustained_dps", "execute")
+    UTILITY_CAPS_PROFILE = ("purge", "cleanse", "silence", "heal_reduction",
+                            "resist_shred", "clump_create", "anti_zone",
+                            "damage_debuff", "buff_allies")
+    DEFENSE_CAPS_PROFILE = ("tankiness", "peel", "heal_sustain", "heal_burst",
+                            "disengage", "mobility")
+
+    def duplicate_conflicts(self, party, combos=None):
+        """Per-SPELL duplicate analysis: for every spell equipped by two or
+        more members that has an interaction record, report what duplicating
+        it actually does. Severity: 'high'/'warning' only on VERIFIED
+        non-stacking records; verified full value and shared stacks are
+        'info'; anything the game data does not state is 'verify' — an
+        honest prompt to check, never an invented penalty (§12). Keyed by
+        spell, so the same effect via two different weapons is caught and
+        two different named effects on one stat are NOT."""
+        by_spell = {}
+        for i, w in enumerate(party):
+            for _slot, sid in self.combo_spells(
+                    w, combos[i] if combos else None):
+                by_spell.setdefault(sid, []).append(w)
+        out = []
+        for sid in sorted(by_spell):
+            members = by_spell[sid]
+            if len(members) < 2:
+                continue
+            rec = self.interactions.get(sid)
+            if not rec:
+                continue
+            name = rec.get("name") or sid
+            dup = rec.get("duplicate", "unknown")
+            verified = rec.get("confidence") == "verified"
+            ns = [c for c in (rec.get("nonstacking_caps") or [])
+                  if c in self.reqs]
+            if verified and ns:
+                severity = ("high" if dup in ("does_not_stack", "override",
+                                              "refresh") else "warning")
+                reason = (f"{name}: {', '.join(ns)} counts once for the "
+                          f"party ({dup}) — a duplicate adds its other "
+                          "components only")
+            elif verified and dup == "full":
+                severity = "info"
+                reason = (f"{name}: duplicates give verified full "
+                          "independent value")
+            elif dup == "shared_stack":
+                severity = "info"
+                reason = (f"{name}: duplicates feed one shared stack on the "
+                          "target — faster stacking, not wasted value")
+            else:
+                severity = "verify"
+                reason = (f"{name}: duplicate behavior is not stated by the "
+                          "game data — verify before stacking "
+                          f"({rec.get('confidence')})")
+            out.append({"spell": sid, "name": name, "weapons": members,
+                        "severity": severity, "duplicate": dup,
+                        "effect": rec.get("effect_name"),
+                        "confidence": rec.get("confidence"),
+                        "reason": reason})
+        return out
+
+    def analyze(self, party, combos=None):
+        """Whole-composition interaction analysis: strengths (capabilities at
+        or above target), missing capabilities (weighted deficit order),
+        duplicate conflicts, CC-type coverage from interaction records, and
+        the damage/utility/defense supply profiles. Returns plain data —
+        callers render it."""
+        s = self.effective_supply(party, combos)
+        strengths, missing = [], []
+        for cap in self.reqs:
+            have, target = s.get(cap, 0.0), self.target(cap)
+            row = {"cap": cap, "have": have, "target": target}
+            if have >= target:
+                strengths.append(row)
+            elif self.weight(cap) > 0:
+                row["gap"] = target - have
+                row["weighted_gap"] = self.weight(cap) * (target - have) / target
+                missing.append(row)
+        missing.sort(key=lambda m: -m["weighted_gap"])
+        cc = set()
+        for i, w in enumerate(party):
+            for _slot, sid in self.combo_spells(
+                    w, combos[i] if combos else None):
+                rec = self.interactions.get(sid)
+                if rec:
+                    cc.update(rec.get("cc_types") or [])
+
+        def profile(caps):
+            return {cap: s.get(cap, 0.0) for cap in caps if s.get(cap, 0.0)}
+
+        return {
+            "strengths": strengths,
+            "missing_capabilities": missing,
+            "duplicate_conflicts": self.duplicate_conflicts(party, combos),
+            "cc_coverage": sorted(cc),
+            "damage_profile": profile(self.DAMAGE_CAPS_PROFILE),
+            "utility_coverage": profile(self.UTILITY_CAPS_PROFILE),
+            "defensive_coverage": profile(self.DEFENSE_CAPS_PROFILE),
+        }
 
     # ------------------------------------------------------------ local search
     def refine(self, party, max_passes=8, pool=None, fixed=0):

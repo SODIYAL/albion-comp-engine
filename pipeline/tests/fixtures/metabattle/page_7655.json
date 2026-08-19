@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Axe_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7655,
+   "revid": 8917,
+   "title": "Carrioncaller ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Axe\n| mode = ZvZ\n| focus = Melee DPS\n| strengths = CCs by rooting, Dot Bleed Damage, Big Anti Heal\n| weaknesses = Mana issues, Low Mobility\n}}\n==Overview==\nThis Carrioncaller ZvZ PvP build offering great damage and utility through the use of {{Skill|Morgana Raven}} that goes through enemies and can decrease the healing enemies receive by 40%. This helps all the damage dealers in your zerg a lot, helping set up kills while also doing respectable damage.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Carrioncaller\n| main hand weapon skills = Rending Rage, Adrenaline Boost, Morgana Raven, Aggressive Rush\n| head = Elder's Assassin Hood\n| head skills = Meditation, Balanced Mind\n| cape = Elder's Martlock Cape\n| cape skills = Shield of Protection\n| armor = Elder's Royal Armor\n| armor skills = Energy Source, Toughness, Spirit Crush\n| shoes = Elder's Royal Sandals\n| shoes alternatives = Elder's Cleric Sandals, Elder's Stalker Shoes\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Pork Omelette\n| food alternatives = Avalonian Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Carrioncaller|45}}===\n{{Skill|Rending Rage}} — Use this skill to apply stacks of bleed using the first two attacks and always try to put as many bleeds as possible on targets during pushes. Use the third cast of the ability to root enemies and pin them down using that for an easy {{Skill|Morgana Raven}} follow-up.\n\n{{Skill|Adrenaline Boost}} — This ability will help you a lot with repositioning as it gives you a boost in damage and movement. Use it to position yourself so you hit as many enemies as possible when you cast {{Skill|Morgana Raven}}.\n\n{{Skill|Morgana Raven}} — Your main use in the zerg. {{Skill|Morgana Raven}} does decent damge in a line to wherever you point the ability and applies a bleed alongside a 40% decrease in healing received by anyone hit. The low cooldown coupled with {{Skill|Meditation}} lets you use the skill very often throughout zvz fights.\n\n{{Skill|Aggressive Rush}} — A nice damage buff as you will be auto-attacking a lot during long fights.\n\n\n==={{Item|Elder's Royal Armor|45}}===\n{{Skill|Energy Source}} — Use this skill to refill your mana and also refill the mana of allies near you. It creates an AOE blue effect around you that follows you around so try to get as many allies near you as possible so they can benefit from the mana refill.\n\n{{Skill|Toughness}} — A good increase for your defense and only choice that makes sense.\n\n{{Skill|Spirit Crush}} — This is irrelevant for PVP but it lowers max HP on mobs in PVE when you auto-attack them.\n\n\n==={{Item|Elder's Assassin Hood|45}}===\n{{Skill|Meditation}} — To further increase the utility you provide to your zerg, use this skill to reset the cooldowns of all your abilities and recast {{Skill|Morgana Raven}} alongside {{Skill|Energy Source}}. Your allies will be thankful!\n\n{{Skill|Balanced Mind}} — Even though damage dealing isn't the best in this build as it focuses more on supporting, the extra damage is always nice.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — Stay aware that this skill not only increases your damage but also increases the damage you take. Try to use this coupled with {{Skill|Adrenaline Boost}} for a quick burst of speed that can take enemies by surprise as you reposition.\n\n{{Skill|Aggression}} — Another passive giving you extra damage!\n\n\n==={{Item|Elder's Martlock Cape|45}}===\n{{Skill|Shield of Protection}} — The {{Item|Elder's Martlock Cape}} will save you in many situations when your HP goes lower than 25% as it increases your defense by a lot and the longer you live the more you can help your team.\n\n\n==Rotations==\n{{Rotation|Morgana Raven Combo|Defenseless Rush, Adrenaline Boost, Rending Rage, Rending Rage, Rending Rage, Morgana Raven, }}\n* Start off using {{Skill|Defenseless Rush}} to move around the zerg as you get into a good position. Try to always remain within the frontline of your own zerg without pushing too deeply into the enemy as you look for stacks of enemies. Use {{Skill|Rending Rage}} to apply bleeds and some healing reduction to the enemies before using the third cast of {{Skill|Rending Rage}} and leaping into a group of enemies to root them for your team. Follow up with {{Skill|Morgana Raven}} on top of the stacked enemies before moving back and using {{Skill|Meditation}} so you can repeat it all in the next push.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Feel free to use this potion as a general damage reduction cooldown if you anticipate burst damage from the enemy zerg or if you just want to get deeper into the enemy backline without taking as much damage.\n\n{{Item|Pork Omelette}} — You want to use your abilities as much as possible and {{Item|Pork Omelette}} will help you do exactly that. Another option would be the {{Item|Avalonian Pork Omelette}} as it helps a bit decreasing the cast time of your {{Skill|Meditation}} but usually isn't worth the price increase. Try to use 7.1 and 7.2 regular {{Item|Pork Omelette}} though as the price difference between 7.0 and 7.2 isn't that big.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7655": {
+     "ns": 0,
+     "pageid": 7655,
+     "revisions": [
+      {
+       "parentid": 8077,
+       "revid": 8917,
+       "timestamp": "2025-04-01T23:17:28Z"
+      }
+     ],
+     "title": "Carrioncaller ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

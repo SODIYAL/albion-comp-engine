@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Crossbow_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Range_DPS_builds",
+     "sortkey": "Range DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7780,
+   "revid": 8938,
+   "title": "Siegebow ZvZ Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Crossbow\n| mode = ZvZ\n| focus = Range DPS\n| strengths = Great Burst, Easy to Play\n| weaknesses = Requires good positioning, Low Mobility\n}}\n==Overview==\nThis build focuses on the high damage of the {{Skill|Vicious Barrage}}, making it an easy build to play even for the newer players that just joined a ZVZ guild. While it lacks mobility, it remains one of the best choices for ZvZ fights where you are in a defensive position (castles, territory fights, etc). \n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Siegebow\n| main hand weapon skills = Explosive Bolt, Caltrops, Vicious Barrage, Well-Prepared\n| head = Elder's Mistwalker Hood\n| head skills = Immortal, Balanced Mind\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Hunter Jacket\n| armor skills = Haste, Balanced Mind\n| shoes = Elder's Royal Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Gigantify Potion\n| food = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Siegebow|45}}===\n{{Skill|Explosive Bolt}} — This AOE ability does decent damage but it shouldn't be something you focus on using. Because of the defensive positions you normally want to use an {{Item|Elder's Energy Shaper}} in, you can use {{Skill|Explosive Bolt}} over walls to poke.\n\n{{Skill|Caltrops}} — Similar to {{Skill|Explosive Bolt}}, use {{Skill|Caltrops}} by throwing them over walls and in front of enemy zergs without moving too far from your position as a ranged DPS. Once an enemy walks over your {{Skill|Caltrops}}, you will gain a movement speed buff which will help with your positioning. You can also place them on your zerg's wake as you move, slowing down some targets if they walk over them without a CC immunity buff.\n\n{{Skill|Vicious Barrage}} — This is the highest damaging skill in your arsenal and is the main way of getting kills. The {{Skill|Vicious Barrage}} deals damage 3 times during the 3 seconds channel, once every second and also deals true damage based on enemy HP. Use this skill to deal damage over walls and out of a safe position while you are under the effect of {{Skill|Immortal}} so {{Item|Elder's Demon Armor}} cannot kill you while you do this. \n\n{{Skill|Well-Prepared}} — Using abilities will reset your {{Skill|Explosive Bolt}} every 4th time you use a a skill. You can stack 3 charges and then use {{Skill|Explosive Bolt}} twice in quick succession to deal some burst AOE damage.\n\n\n==={{Item|Elder's Hunter Jacket|45}}===\n{{Skill|Haste}} — You want to use this in combination with {{Skill|Defenseless Rush}} for a total of 40% damage increase. Thanks to the use of {{Skill|Immortal}}, you become a glass cannon that cannot be killed so this skill makes perfect sense.\n\n{{Skill|Balanced Mind}} — This passive offers you a flat increase to your damage, always good to have!\n\n\n==={{Item|Elder's Mistwalker Hood|45}}===\n{{Skill|Immortal}} — This is your only and most important defensive skill on a relatively low cooldown that is even lower than the cooldown of your {{Skill|Vicious Barrage}}. Use this skill before delivering damage as it will entirely negate possible {{Item|Elder's Demon Armor}} users in the enemy zerg. You can also use this skill to save yourself if you are caught out of position, allowing you to move through enemies without dying for up to 6 seconds.\n\n{{Skill|Balanced Mind}} — Another damage increasing passive which perfectly matches the build.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — This is a fantastic damage increase on demand, great for increasing the damage of all your skills but most importantly increasing the damage you do with your main rotation. Keep in mind that {{Skill|Defenseless Rush}} will also lower your defenses and make you even squishier.\n\n{{Skill|Aggression}} — This increases your damage even further.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — As the build can be mana intensive with the use of {{Skill|Immortal}} and your full rotation, this will help a lot with mana sustain as it triggers once your mana falls below 40% and it restores 80% of your total mana. \n\n\n==Rotations==\n{{Rotation|Burst Damage|Defenseless Rush, Haste, Immortal, Vicious Barrage}}\n* Your rotation is very simple and the main task is to position in such a way that your {{Skill|Vicious Barrage}} reaches as many enemies as possible. Start with {{Skill|Defenseless Rush}} to boost your damage and movement speed before following up with {{Skill|Haste}} to further boost your damage before finally using {{Skill|Immortal}} to make yourself unkillable while you use {{Skill|Vicious Barrage}}.\n\nUse {{Skill|Explosive Bolt}} and {{Skill|Caltrops}} over walls to help chip away at zerg's HP and to slow them down but you should remain safe without getting to close to the enemy zerg so you don't end up as one of their kills between pushes.\n\n\n==Consumables==\n{{Item|Major Gigantify Potion}} — Use this as your secondary defensive if you don't want to use {{Skill|Immortal}}, pop it if you see enemies trying to catch you or if you get slowed down and you cannot avoid incoming enemy damage. Can also be used during an engagement to reposition yourself, chaining it with {{Skill|Immortal}}.\n\n{{Item|Beef Stew}} — Since damage is the most important part of this build, use {{Item|Beef Stew}} to boost it. Aim for an 8.1 or 8.2 stew for the best return on your investment.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7780": {
+     "ns": 0,
+     "pageid": 7780,
+     "revisions": [
+      {
+       "parentid": 8747,
+       "revid": 8938,
+       "timestamp": "2025-04-01T23:19:18Z"
+      }
+     ],
+     "title": "Siegebow ZvZ Build"
+    }
+   }
+  }
+ }
+}

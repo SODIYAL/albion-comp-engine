@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Arcane_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Support_builds",
+     "sortkey": "Support"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7661,
+   "revid": 8910,
+   "title": "Malevolent Locus ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Arcane Staff\n| mode = ZvZ\n| focus = Support\n| strengths = Great Support, Easy to Play\n| weaknesses = No offensive abilities, Low Mobility\n}}\n==Overview==\nThis {{Item|Elder's Malevolent Locus}} ZvZ PvP build offers incredible utility to all zergs. Capable of helping allies caught by enemy CC or rectify mistakes in positioning while also offering shields to allies that took damage before healers could get them healed back up. The build is very versatile and the perfect choice for any player that chooses to play support in ZvZ content.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Malevolent Locus\n| main hand weapon skills = Arcane Protection, Motivating Cleanse, The Void, Energetic\n| head = Elder's Assassin Hood\n| head skills = Meditation, Quick Thinker\n| cape = Elder's Martlock Cape\n| cape skills = Shield of Protection\n| armor = Elder's Judicator Armor\n| armor skills = Force Shield, Toughness, Spirit Crush\n| shoes = Elder's Scholar Sandals\n| shoes skills = Focused Run, Aggression\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Pork Omelette\n| food alternatives = Avalonian Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Malevolent Locus|45}}===\n{{Skill|Arcane Protection}} — This is your main support ability. Use this to give a quick shield to any friendly target that is about to take damage or is already low HP and help them survive!\n\n{{Skill|Motivating Cleanse}} — Another great choice for ZvZ content. This puts an AOE field onto the ground and clears all CC effects and debuffs from someone that is hit by the AOE. Use this whenever a group of friendly players got caught in a mass CC and free them while also giving them a movement speed increase.\n\n{{Skill|The Void}} — This is the main reason why Locus is chosen for ZvZ content. It creates a bubble that grows from the original location and cleanses all debuffs from allies passing through or being inside it. It also applies a big damage resistance buff and can cover a large area which makes it very useful in ZvZ fights. Use this defensively to stop enemy engagements as they cannot make any CCs stick on that area.\n\n{{Skill|Energetic}} — Your main mana regen, every hit you make with your auto-attacks will give you a bit of mana which is nice to have.\n\n\n==={{Item|Elder's Judicator Armor|45}}===\n{{Skill|Force Shield}} — This ability creates a bubble similar to how {{Skill|The Void}} looks but with different effects. It increases the healing received by any allies and also offers damage resistance within the bubble. This can be stacked on top of a {{Skill|The Void}} when your zerg is playing defensive!\n\n{{Skill|Toughness}} — A good increase to your defense which is good to have.\n\n{{Skill|Spirit Crush}} — This is irrelevant for PvP but it lowers max HP on mobs in PVE when you auto-attack them.\n\n\n==={{Item|Elder's Assassin Hood|45}}===\n{{Skill|Meditation}} — To further increase the utility you provide to your zerg, use this skill to reset the cooldowns of all your abilities and recast {{Skill|The Void}} but also your {{Skill|Force Shield}}. Try to remain safe when channeling this ability though as it has a long cast-time.\n\n{{Skill|Quick Thinker}} — As damage isn't something this build is capable of doing, {{Skill|Quick Thinker}} is a good choice to lower your cooldowns.\n\n\n==={{Item|Elder's Scholar Sandals|45}}===\n{{Skill|Focused Run}} — Without any other defensive options, {{Skill|Focused Run}} is a great choice to help with your survival as it offers CC immunity and stops you from relying on others using {{Skill|Displacement Immunity}}. Another good option would be {{Item|Elder's Cleric Sandals}} but {{Item|Elder's Scholar Sandals}} remain superior.\n\n{{Skill|Aggression}} — Another passive giving you extra damage!\n\n\n==={{Item|Elder's Martlock Cape|45}}===\n{{Skill|Shield of Protection}} — The {{Item|Elder's Martlock Cape}} will save you in many situations when your HP goes lower than 25%. It increases your defenses and allows you to escape.\n\n\n==Rotations==\n{{Rotation|Support|Focused Run, Force Shield, Motivating Cleanse, The Void}}\n* While there isn't a rotation that you should always use and this is a more reactive weapon that uses skills based on what's needed, this should give you a good idea of what to play it like>\n\nAs your team retreats, you want to use Focused Run to position yourself in the center of your zerg. Use {{Skill|Force Shield}} to help those that are behind you get healed quicker and improve their defense while using {{Skill|Motivating Cleanse}} on groups of allies that might've been caught by enemy CC. {{Skill|The Void}} is then used in a similar manner if a large group of allies ends up caught in a CC. Keep channeling it so other allies can also pass through {{Skill|The Void}} and make use of it's benefits. Make sure to always use {{Skill|Arcane Protection}} on low HP targets or your shotcaller in case the enemy zerg might try to snipe them.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Feel free to use this potion as a general damage reduction cooldown if you anticipate to take damage or if you are caught out of position.\n\n{{Item|Pork Omelette}} — With the strength of the build being the use of abilities to help others, {{Item|Pork Omelette}} will help you do exactly that. Try to bring at least a 7.1 for ZvZ fights!\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7661": {
+     "ns": 0,
+     "pageid": 7661,
+     "revisions": [
+      {
+       "parentid": 8130,
+       "revid": 8910,
+       "timestamp": "2025-04-01T23:16:16Z"
+      }
+     ],
+     "title": "Malevolent Locus ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

@@ -17,12 +17,12 @@ This script does the three mechanical parts. It cannot do the human part.
 Usage:
     py -3 tests/tier2_blindtest.py generate --n 12 --out tier2_form.md
     py -3 tests/tier2_blindtest.py score tier2_form_filled.md
-    py -3 tests/tier2_blindtest.py v4 tests/meta_comps.yaml
+    py -3 tests/tier2_blindtest.py v4            # data/published_comps/
 
 Party generation is seeded and deterministic, so every expert sees the same
 parties and a re-run reproduces the same set.
 """
-import os, sys, argparse, random, re
+import glob, os, sys, argparse, random, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, os.pardir)
@@ -150,11 +150,23 @@ def v4(args):
     except ImportError:
         sys.exit("pip install pyyaml")
     if not os.path.exists(args.comps):
-        sys.exit(f"{args.comps} not found — see tests/meta_comps.yaml schema; "
-                 "comps must be REAL, never invented.")
-    with open(args.comps, encoding="utf-8") as f:
-        doc = yaml.safe_load(f)
-    comps = doc["comps"] if isinstance(doc, dict) else doc
+        sys.exit(f"{args.comps} not found — see data/published_comps/ for the "
+                 "schema; comps must be REAL, never invented.")
+    # A directory of published_comp docs (data/published_comps/, the
+    # production evidence layer) or a single file — which may be one
+    # published_comp doc or the legacy {comps: [...]} shape.
+    paths = (sorted(glob.glob(os.path.join(args.comps, "*.yaml")))
+             if os.path.isdir(args.comps) else [args.comps])
+    comps = []
+    for path in paths:
+        with open(path, encoding="utf-8") as f:
+            doc = yaml.safe_load(f)
+        if isinstance(doc, dict) and doc.get("kind") == "published_comp":
+            comps.append(doc)
+        elif isinstance(doc, dict):
+            comps += doc.get("comps", [])
+        elif isinstance(doc, list):
+            comps += doc
 
     probe = Engine()
     role_sets = probe.scoring.get("role_sets", {})
@@ -231,7 +243,8 @@ if __name__ == "__main__":
     s.add_argument("--size", type=int, default=7)
 
     v = sub.add_parser("v4"); v.set_defaults(fn=v4)
-    v.add_argument("comps", nargs="?", default=os.path.join(HERE, "meta_comps.yaml"))
+    v.add_argument("comps", nargs="?",
+                   default=os.path.join(ROOT, "data", "published_comps"))
     v.add_argument("--verbose", action="store_true", help="list weapon-level misses")
 
     a = ap.parse_args()

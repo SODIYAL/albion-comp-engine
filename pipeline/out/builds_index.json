@@ -1,0 +1,6126 @@
+{
+ "_meta": {
+  "content_covers": {
+   "large_scale_zvz": [
+    "castle",
+    "territory_defense",
+    "faction_war"
+   ],
+   "zvz": [
+    "castle",
+    "territory_defense",
+    "faction_war"
+   ]
+  },
+  "counts": {
+   "approved": 70,
+   "candidate": 31,
+   "canonical_defaults": 46,
+   "quarantined_fields": 2,
+   "quarantined_records": 2,
+   "records": 101
+  }
+ },
+ "by_content": {
+  "blackzone_roam": {
+   "2H_AXE_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:11",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.67,
+      "loadout_completeness": 0.92,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_ROYAL",
+      "head": "HEAD_PLATE_SET2",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Press E on engage, chop people, royal armor like CRAZY",
+     "p": 3,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 3,
+     "quarantined_fields": [],
+     "raw": {
+      "cape": "Smugglar",
+      "food": "7.1 omelette"
+     },
+     "role": "HP Cut",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "LETHAL_CLEAVER",
+      "passive": "PASSIVE_ARMORCHANCE_AXE",
+      "q": "RENDINGCOMBO",
+      "w": "AXESMASH"
+     },
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand"
+     ],
+     "w": 1
+    }
+   ],
+   "2H_CLEAVER_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:8",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.83,
+      "loadout_completeness": 0.92,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_ROYAL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_SET2",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Pierce for engage, spam royal armor like CRAZY",
+     "p": 2,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 2,
+     "quarantined_fields": [],
+     "raw": {
+      "food": "7.1 omelette"
+     },
+     "role": "Pierce",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "CLAYMORESLASH",
+      "passive": "PASSIVE_REDUCE_DMG_SWORD",
+      "q": "CLEAVE",
+      "w": "DEFENSERUN"
+     },
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand"
+     ],
+     "w": 6
+    }
+   ],
+   "2H_DUALMACE_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:6",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.83,
+      "loadout_completeness": 0.92,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "guard runes on chokes or when they engage.",
+     "p": 1,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 1,
+     "quarantined_fields": [],
+     "raw": {
+      "food": "7.1 omelette"
+     },
+     "role": "Support",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "BLESSED_MACES",
+      "passive": "PASSIVE_STUNCHANCE",
+      "q": "DEFENSIVESLAM",
+      "w": "GUARDRUNE"
+     },
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand"
+     ],
+     "w": 3
+    }
+   ],
+   "2H_ENIGMATICORB_MORGANA": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:5",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.83,
+      "loadout_completeness": 0.83,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.75
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "use E to guarantee our engage hits, mimic any mace for guardrune, demon for defense",
+     "p": 5,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 2,
+     "quarantined_fields": [
+      "passive: index 5 exceeds the 4-option pool"
+     ],
+     "raw": {
+      "food": "7.1 omelette"
+     },
+     "role": "Support",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "VOID",
+      "passive": null,
+      "q": "SHIELDFRIENDLY",
+      "w": "MIMIC"
+     },
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand",
+      "passive"
+     ],
+     "w": 5
+    }
+   ],
+   "2H_HALBERD_MORGANA": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:10",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.83,
+      "loadout_completeness": 0.92,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_ROYAL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_MORGANA",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Press E on engage or low targets, chop people.",
+     "p": 3,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 3,
+     "quarantined_fields": [],
+     "raw": {
+      "food": "7.1 omelette"
+     },
+     "role": "Heal Cut",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "SHOCKWAVE",
+      "passive": "PASSIVE_ARMORCHANCE_AXE",
+      "q": "RENDINGCOMBO",
+      "w": "AXESMASH"
+     },
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand"
+     ],
+     "w": 1
+    }
+   ],
+   "2H_HOLYSTAFF_UNDEAD": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:18",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.83,
+      "loadout_completeness": 0.92,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "T7_MEAL_OMELETTE_FISH",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Heal tanks or very low targets, save E for reset or big heals to be called.",
+     "p": 4,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 1,
+     "quarantined_fields": [],
+     "raw": {
+      "head": "Leather Hood(cleanse)"
+     },
+     "role": "Tanky Healer",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "CELESTIAL_SPHERE",
+      "passive": "PASSIVE_HOLY_ASCENDED",
+      "q": "GENEROUSHEAL",
+      "w": "HEALINGBEAM"
+     },
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand"
+     ],
+     "w": 2
+    }
+   ],
+   "2H_KNUCKLES_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:14",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.67,
+      "loadout_completeness": 0.92,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "E on engage EARLY, kidnap healers or overcommitted tanks",
+     "p": 4,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 2,
+     "quarantined_fields": [],
+     "raw": {
+      "food": "8.1 beef stew",
+      "head": "Leather Hood(cleanse)"
+     },
+     "role": "Dps",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "PUMMELING_STRIKES",
+      "passive": "PASSIVE_KNUCKLE_COMBOBREAKER",
+      "q": "DASHKICK",
+      "w": "TRIPLE_KICK"
+     },
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand"
+     ],
+     "w": 1
+    }
+   ],
+   "2H_MACE": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:1",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.83,
+      "loadout_completeness": 0.92,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_SET3",
+      "food": "T7_MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_HELL",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Full monkey tank, shut down their zerg",
+     "p": 1,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 3,
+     "quarantined_fields": [],
+     "raw": {
+      "cape": "Smugglar"
+     },
+     "role": "Tank",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "SHRIEKMACE",
+      "passive": "PASSIVE_STUNCHANCE",
+      "q": "SACRED_GROUND",
+      "w": "CHARGE_ROOT"
+     },
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand"
+     ],
+     "w": 2
+    }
+   ],
+   "2H_MACE_MORGANA": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:0",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.92,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "T7_MEAL_OMELETTE_AVALON",
+      "head": "HEAD_PLATE_SET2",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Yes.",
+     "p": 4,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 1,
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Caller",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "VACUUMSLASH",
+      "passive": "PASSIVE_CCDURATION_CHANCE_MACE",
+      "q": "DEFENSIVESLAM",
+      "w": "CHARGE_ROOT"
+     },
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand"
+     ],
+     "w": 2
+    }
+   ],
+   "2H_NATURESTAFF_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:19",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.92,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "T7_MEAL_OMELETTE_FISH",
+      "head": "HEAD_PLATE_SET1",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Keep 2 stacks on maximum # of targets, add 3rd stack and W on W cooldown. Use E to reposition when necessary.",
+     "p": 1,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 1,
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Healer",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "ROTTENVINES",
+      "passive": "PASSIVE_HEALPOWERCHANCE",
+      "q": "REJUVENATION",
+      "w": "REJUVENATING_BREEZE"
+     },
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand"
+     ],
+     "w": 5
+    }
+   ],
+   "2H_ROCKSTAFF_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:2",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.92,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "T7_MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_HELL",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Full monkey tank, shut down their zerg",
+     "p": 1,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 3,
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Tank",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "QS_SLOWROPE",
+      "passive": "PASSIVE_STUNCHANCE_QUARTERSTAFF",
+      "q": "CARTWHEEL",
+      "w": "LAUNCHER"
+     },
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand"
+     ],
+     "w": 4
+    }
+   ],
+   "2H_SHAPESHIFTER_SET2": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:7",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.83,
+      "loadout_completeness": 0.92,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Find their engage and E to defend it.",
+     "p": 2,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 4,
+     "quarantined_fields": [],
+     "raw": {
+      "food": "7.1 omelette"
+     },
+     "role": "Support",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "SHAPESHIFT_ENT",
+      "passive": "PASSIVE_SHAPESHIFT_Q_CAST_DAMAGE_REDUCE",
+      "q": "SHAPE_Q_CONE_MELEE",
+      "w": "SHAPE_W_POLYMORPH"
+     },
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand"
+     ],
+     "w": 4
+    }
+   ],
+   "MAIN_CURSEDSTAFF_UNDEAD": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:9",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.86,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SHIELD_AVALON",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Purge their juice as we engage",
+     "p": 2,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 3,
+     "quarantined_fields": [],
+     "raw": {
+      "food": "7.1 omelette"
+     },
+     "role": "Purge",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "ENFEEBLEBLADES",
+      "passive": "PASSIVE_ENERGYCHANCE_CURSEDSTAFF",
+      "q": "CURSED_SPLAT",
+      "w": "CURSENOVA"
+     },
+     "style": "brawl",
+     "unknowns": [],
+     "w": 2
+    }
+   ],
+   "MAIN_DAGGER_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:12",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.86,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_SET1",
+      "offhand": "OFF_SPIKEDSHIELD_MORGANA",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Keep dagger stacks, kill engage",
+     "p": 4,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 2,
+     "quarantined_fields": [],
+     "raw": {
+      "food": "8.1 beef stew"
+     },
+     "role": "Dps",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "BLOOD_BLADE",
+      "passive": "PASSIVE_SPELLPOWER_CHANCE_DAGGER",
+      "q": "QDASH",
+      "w": "THROWINGBLADES"
+     },
+     "style": "brawl",
+     "unknowns": [],
+     "w": 1
+    }
+   ],
+   "MAIN_HOLYSTAFF_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:16",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "T7_MEAL_OMELETTE_FISH",
+      "head": "HEAD_PLATE_SET1",
+      "offhand": "OFF_HORN_KEEPER",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Heal people around you. Don't stack on other healers.",
+     "p": 1,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 3,
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Healer",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "DIVINE_JUMP",
+      "passive": "PASSIVE_HEALPOWERCHANCE",
+      "q": "HOLYFLASH",
+      "w": "HOLYORB"
+     },
+     "style": "brawl",
+     "unknowns": [],
+     "w": 4
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:17",
+     "caller": "Timothy",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "T7_MEAL_OMELETTE_FISH",
+      "head": "HEAD_PLATE_SET3",
+      "offhand": "OFF_HORN_KEEPER",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Heal people around you, save W for tanks.",
+     "p": 4,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 3,
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Healer",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "DIVINE_JUMP",
+      "passive": "PASSIVE_HOLY_ASCENDED",
+      "q": "HOLYFLASH",
+      "w": "HEALINGBEAM"
+     },
+     "style": "brawl",
+     "unknowns": [],
+     "w": 2
+    }
+   ],
+   "MAIN_MACE": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:4",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.86,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "T7_MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_HELL",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Full monkey tank, shut down their zerg",
+     "p": 1,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 3,
+     "quarantined_fields": [],
+     "raw": {
+      "offhand": "Caitiff or Aegis"
+     },
+     "role": "Tank",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "MACELEAP",
+      "passive": "PASSIVE_STUNCHANCE",
+      "q": "SACRED_GROUND",
+      "w": "CHARGE_ROOT"
+     },
+     "style": "brawl",
+     "unknowns": [],
+     "w": 2
+    }
+   ],
+   "MAIN_MACE_CRYSTAL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:3",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.86,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "T7_MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_HELL",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Pre-engage, catch and pierce them, spam royal armor like CRAZY",
+     "p": 1,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 3,
+     "quarantined_fields": [],
+     "raw": {
+      "offhand": "Caitiff or Aegis"
+     },
+     "role": "Tank",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "MACE_CRYSTAL_FRAGMENT_STORM",
+      "passive": "PASSIVE_STUNCHANCE",
+      "q": "SACRED_GROUND",
+      "w": "CHARGE_ROOT"
+     },
+     "style": "brawl",
+     "unknowns": [],
+     "w": 2
+    }
+   ],
+   "MAIN_RAPIER_MORGANA": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:15",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.86,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_MORGANA",
+      "offhand": "OFF_SPIKEDSHIELD_MORGANA",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Execute the engage, execute healers, execute morale, execute, execute, execute...",
+     "p": 4,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 2,
+     "quarantined_fields": [],
+     "raw": {
+      "food": "8.1 beef stew"
+     },
+     "role": "Dps",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "RAPIERSTAB",
+      "passive": "PASSIVE_SPELLPOWER_CHANCE_DAGGER",
+      "q": "QDASH",
+      "w": "GROUNDDASH"
+     },
+     "style": "brawl",
+     "unknowns": [],
+     "w": 2
+    }
+   ],
+   "MAIN_SCIMITAR_MORGANA": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "timothy_blap_blackzone_roam_2026_08:blap:13",
+     "caller": "Timothy",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.71,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "offhand": "OFF_HORN_KEEPER",
+      "potion": "T5_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "E on engage, E low targets or 2nd engage in between",
+     "p": 2,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "q": 2,
+     "quarantined_fields": [],
+     "raw": {
+      "food": "8.1 beef stew",
+      "head": "Leather hood(cleanse)"
+     },
+     "role": "Dps",
+     "source": {
+      "author": "Timothy",
+      "family": "caller:timothy",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Timothy\" - blackzone roaming comp \"blap\" (brawl comp), single party of 20; relayed verbatim by the project owner, 2026-08-12. Includes per-slot skill loadouts (q/w/passive choice indices), potions and food.",
+      "url": null
+     },
+     "spells": {
+      "e": "MIGHTYSWING",
+      "passive": "PASSIVE_REDUCE_DMG_SWORD",
+      "q": "CLEAVE",
+      "w": "DEFENSERUN"
+     },
+     "style": "brawl",
+     "unknowns": [],
+     "w": 6
+    }
+   ]
+  },
+  "large_scale_zvz": {
+   "2H_ARCANESTAFF": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:4",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3"
+     },
+     "note": "Peel/Control",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "TIME_FREEZE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:0",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3"
+     },
+     "note": "Peel/Control",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "TIME_FREEZE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:1",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3"
+     },
+     "note": "Peel/Control",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "TIME_FREEZE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_ARCANESTAFF_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:11",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3"
+     },
+     "note": "Beam Spiked",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "GG"
+     },
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "ARCANECORRIDOR",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_3:9",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3"
+     },
+     "note": "2nd Occult for Tempo",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "GG"
+     },
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "ARCANECORRIDOR",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_AXE_AVALON": [
+    {
+     "alternatives": {
+      "gear": {
+       "shoes": [
+        {
+         "condition": null,
+         "key": "SHOES_LEATHER_MORGANA",
+         "raw": "Stalker"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:15",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_SET2",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "LETHAL_CLEAVER",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_BOW_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:13",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "RoP"
+     },
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "HELL_ARROW",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "2H_GLAIVE_CRYSTAL"
+       }
+      ]
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_3:12",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.5,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "cape": "CAPEITEM_SMUGGLER",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "RoP",
+      "head": "Cleanse"
+     },
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "HELL_ARROW",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "2H_GLAIVE_CRYSTAL"
+       }
+      ]
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_3:13",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.5,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "cape": "CAPEITEM_SMUGGLER",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "RoP",
+      "head": "Cleanse"
+     },
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "HELL_ARROW",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_CLEAVER_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_3:11",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_SET2"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "GG"
+     },
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "CLAYMORESLASH",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_CURSEDSTAFF_MORGANA": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:18",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET1",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Fake if called",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "CURSEULTIMATE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_DUALMACE_AVALON": [
+    {
+     "alternatives": {
+      "gear": {
+       "offhand": [
+        {
+         "condition": null,
+         "key": "OFF_TOTEM_KEEPER",
+         "raw": "Taproot"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:10",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.8,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SHIELD_AVALON"
+     },
+     "note": "E+W for engage",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "tank",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "BLESSED_MACES",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:10",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "tank",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "BLESSED_MACES",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_ENIGMATICORB_MORGANA": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:8",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3"
+     },
+     "note": "Mimic Guard Rune",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "VOID",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_3:7",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3"
+     },
+     "note": "E on Engage",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "VOID",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_FIRE_RINGPAIR_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
+       }
+      ]
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:19",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "FIREPHOENIX",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_GLAIVE_CRYSTAL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:14",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "RoP"
+     },
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "SPEAR_AOE_FINISHER",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:15",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "RoP"
+     },
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "SPEAR_AOE_FINISHER",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_HAMMER": [
+    {
+     "alternatives": {
+      "gear": {
+       "shoes": [
+        {
+         "condition": null,
+         "key": "SHOES_CLOTH_FEY",
+         "raw": "Feyscale"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_3:0",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_HELL"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "main_tank",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "HAMMERTACKLE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_HAMMER_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "2H_SHAPESHIFTER_KEEPER"
+       }
+      ]
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:0",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "main_tank",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "SPINNING_SMASH",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_HARPOON_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:16",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "TAINTED_STEEL",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_HOLYSTAFF_CRYSTAL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:6",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.5,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3"
+     },
+     "note": "Offensive E on DPS",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "RoP",
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "HOLY_DISPEL",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_3:6",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.5,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3"
+     },
+     "note": "Help us Kite",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "RoP",
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "HOLY_DISPEL",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:9",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.25,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "cape": "CAPEITEM_SMUGGLER"
+     },
+     "note": "Cleanse Behe/Hellion",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "RoP",
+      "head": "Cleanse",
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "HOLY_DISPEL",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_ICECRYSTAL_UNDEAD": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:12",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET1",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "FROST_ULTIMATE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:13",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET1",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Fake if called",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "FROST_ULTIMATE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_ICEGAUNTLETS_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:2",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3"
+     },
+     "note": "Big Boy Stall",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "tank",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "GLACIALFIELD",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_KNUCKLES_SET3": [
+    {
+     "alternatives": {
+      "gear": {
+       "shoes": [
+        {
+         "condition": null,
+         "key": "SHOES_LEATHER_MORGANA",
+         "raw": "Stalker"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:14",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_FEY",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "RoP"
+     },
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "IMPULSE_PUNCH",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_NATURESTAFF_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_3:4",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "healer",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "SPIRITANIMAL",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_POLEHAMMER": [
+    {
+     "alternatives": {
+      "gear": {
+       "head": [
+        {
+         "condition": null,
+         "key": "HEAD_LEATHER_HELL",
+         "raw": "Hellion"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:5",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_KEEPER"
+     },
+     "note": "control enemy on our engage",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "tank",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "GROUNDBREAKER2",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {
+       "head": [
+        {
+         "condition": null,
+         "key": "HEAD_LEATHER_HELL",
+         "raw": "Hellion"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:4",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_KEEPER"
+     },
+     "note": "control enemy on our engage",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "tank",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "GROUNDBREAKER2",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_SHAPESHIFTER_CRYSTAL": [
+    {
+     "alternatives": {
+      "gear": {
+       "armor": [
+        {
+         "condition": null,
+         "key": "ARMOR_PLATE_SET2",
+         "raw": "Knight"
+        }
+       ],
+       "shoes": [
+        {
+         "condition": null,
+         "key": "SHOES_CLOTH_FEY",
+         "raw": "Feyscale"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_3:3",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "SHAPESHIFT_CRYSTAL_COBRA",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_SHAPESHIFTER_SET2": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:12",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3"
+     },
+     "note": "Perma ent form pls",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "SHAPESHIFT_ENT",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_3:10",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.75,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3"
+     },
+     "note": "Perma Ent Form Pls",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "SHAPESHIFT_ENT",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_ARCANESTAFF": [
+    {
+     "alternatives": {
+      "gear": {
+       "offhand": [
+        {
+         "condition": null,
+         "key": "OFF_TOTEM_KEEPER",
+         "raw": "Taproot"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:1",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.8,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_KEEPER",
+      "offhand": "OFF_SHIELD_AVALON"
+     },
+     "note": "Use helm to help setup",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "ARCANEORB2",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {
+       "offhand": [
+        {
+         "condition": null,
+         "key": "OFF_TOTEM_KEEPER",
+         "raw": "Taproot"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:3",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.8,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SHIELD_AVALON"
+     },
+     "note": "Watch Bombs",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "ARCANEORB2",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {
+       "offhand": [
+        {
+         "condition": null,
+         "key": "OFF_TOTEM_KEEPER",
+         "raw": "Taproot"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_3:1",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.8,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SHIELD_AVALON"
+     },
+     "note": "Watch Bombs/Stop engages",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "ARCANEORB2",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_ARCANESTAFF_UNDEAD": [
+    {
+     "alternatives": {
+      "gear": {
+       "armor": [
+        {
+         "condition": null,
+         "key": null,
+         "raw": "RoP"
+        }
+       ],
+       "shoes": [
+        {
+         "condition": null,
+         "key": "SHOES_LEATHER_MORGANA",
+         "raw": "Stalker"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:17",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET3",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_DEMONSKULL_HELL",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
+     "note": "Fake if called",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "BLACKHOLE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_CURSEDSTAFF_UNDEAD": [
+    {
+     "alternatives": {
+      "gear": {
+       "offhand": [
+        {
+         "condition": null,
+         "key": "OFF_SHIELD_AVALON",
+         "raw": "Aegis"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:9",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.8,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_TOTEM_KEEPER"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "dps",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "ENFEEBLEBLADES",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {
+       "offhand": [
+        {
+         "condition": null,
+         "key": "OFF_TOTEM_KEEPER",
+         "raw": "Taproot"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_3:8",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.8,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SHIELD_AVALON"
+     },
+     "note": "Defensive Lifecurse",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "ENFEEBLEBLADES",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_FROSTSTAFF_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {
+       "offhand": [
+        {
+         "condition": null,
+         "key": "OFF_TOTEM_KEEPER",
+         "raw": "Taproot"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:11",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.8,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SHIELD_AVALON"
+     },
+     "note": "Offensive Obelisk",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "ICEROCK_EXPLODE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_HOLYSTAFF_AVALON": [
+    {
+     "alternatives": {
+      "gear": {
+       "armor": [
+        {
+         "condition": null,
+         "key": null,
+         "raw": "RoP"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:6",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.8,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_SET3",
+      "offhand": "OFF_HORN_KEEPER"
+     },
+     "note": "Druid Cowl Swap if no Chariot",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "healer",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "DIVINE_JUMP",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {
+       "armor": [
+        {
+         "condition": null,
+         "key": null,
+         "raw": "RoP"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:5",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.8,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_SET3",
+      "offhand": "OFF_HORN_KEEPER"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "healer",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "DIVINE_JUMP",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {
+       "armor": [
+        {
+         "condition": null,
+         "key": null,
+         "raw": "RoP"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_3:5",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.8,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_SET3",
+      "offhand": "OFF_HORN_KEEPER"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "healer",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "DIVINE_JUMP",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {
+       "armor": [
+        {
+         "condition": null,
+         "key": null,
+         "raw": "RoP"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:7",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.6,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "offhand": "OFF_HORN_KEEPER"
+     },
+     "note": "Druid Cowl Swap if no Chariot",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "head": "Cleanse",
+      "shoes": "Blink"
+     },
+     "role": "healer",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "DIVINE_JUMP",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {
+       "armor": [
+        {
+         "condition": null,
+         "key": null,
+         "raw": "RoP"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:8",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.6,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "offhand": "OFF_HORN_KEEPER"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "head": "Cleanse",
+      "shoes": "Blink"
+     },
+     "role": "healer",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "DIVINE_JUMP",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:7",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.6,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_HORN_KEEPER"
+     },
+     "note": "Play with DPS to Buff",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "RoP",
+      "shoes": "Blink"
+     },
+     "role": "healer",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "DIVINE_JUMP",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_ROCKMACE_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {
+       "offhand": [
+        {
+         "condition": null,
+         "key": "OFF_TOTEM_KEEPER",
+         "raw": "Taproot"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:2",
+     "caller": "Deadlyhooker",
+     "canonical": true,
+     "canonical_basis": "explicit shotcaller approval",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.8,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SHIELD_AVALON"
+     },
+     "note": "Guard Rune",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "tank",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "PRIMALSLAM",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {
+       "offhand": [
+        {
+         "condition": null,
+         "key": "OFF_TOTEM_KEEPER",
+         "raw": "Taproot"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:3",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.8,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SHIELD_AVALON"
+     },
+     "note": "Guard Rune",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "tank",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "PRIMALSLAM",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {
+       "offhand": [
+        {
+         "condition": null,
+         "key": "OFF_TOTEM_KEEPER",
+         "raw": "Taproot"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_3:2",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.8,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SHIELD_AVALON"
+     },
+     "note": "Guard Rune",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {
+      "shoes": "Blink"
+     },
+     "role": "tank",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "PRIMALSLAM",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ]
+  },
+  "zvz": {
+   "2H_ARCANESTAFF_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7760:8911",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_CLOTH_SET2",
+      "offhand": "OFF_LAMP_UNDEAD",
+      "potion": "T7_POTION_REVIVE",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:16:21Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Range DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7760, revision 8911",
+      "url": "https://metabattle.com/albion/Occult_Staff_ZvZ_Support_Build"
+     },
+     "spells": {
+      "e": "ARCANECORRIDOR",
+      "passive": "PASSIVE_ATTACKBUFF_ARCANESTAFF",
+      "q": "SHIELDFRIENDLY",
+      "w": "CLEANSESPEED2"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_AXE_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7659:8921",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_AVALON",
+      "food": "T8_MEAL_STEW_FISH",
+      "head": "HEAD_PLATE_SET2",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:17:44Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7659, revision 8921",
+      "url": "https://metabattle.com/albion/Realmbreaker_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "LETHAL_CLEAVER",
+      "passive": "PASSIVE_SPELLPOWER_CHANCE_AXE",
+      "q": "RENDINGCOMBO",
+      "w": "AXEBOOST"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_BOW_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7701:8929",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_SET2",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_CLOTH_AVALON",
+      "potion": "T7_POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:18:13Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Range DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7701, revision 8929",
+      "url": "https://metabattle.com/albion/Mistpiercer_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "HAWK_SHOT_MULTI1",
+      "passive": "PASSIVE_SLOWPOISON",
+      "q": "MULTISHOT2",
+      "w": "GROUNDARROW"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_BOW_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7725:8930",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_SET2",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_CLOTH_AVALON",
+      "potion": "T7_POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:18:17Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Range DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7725, revision 8930",
+      "url": "https://metabattle.com/albion/Wailing_Bow_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "HELL_ARROW",
+      "passive": "PASSIVE_SLOWPOISON",
+      "q": "MULTISHOT2",
+      "w": "GROUNDARROW"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_CLEAVER_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7691:8998",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_PLATE_KEEPER",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_SET1"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:28:30Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7691, revision 8998",
+      "url": "https://metabattle.com/albion/Carving_Sword_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "CLAYMORESLASH",
+      "passive": "PASSIVE_HEROICSTACK",
+      "q": "CLEAVE",
+      "w": "DEFENSERUN"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_CROSSBOWLARGE_MORGANA": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7780:8938",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_SET2",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_LEATHER_FEY",
+      "potion": "T7_POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:19:18Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Range DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7780, revision 8938",
+      "url": "https://metabattle.com/albion/Siegebow_ZvZ_Build"
+     },
+     "spells": {
+      "e": "CROSSBOW_CONE_ULTIMATE",
+      "passive": "PASSIVE_CD_RESET_Q",
+      "q": "BOLTSHOT",
+      "w": "CALTROPS"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_CROSSBOW_CANNON_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7712:8935",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_CLOTH_AVALON",
+      "potion": "T7_POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:19:08Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Range DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7712, revision 8935",
+      "url": "https://metabattle.com/albion/Energy_Shaper_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "CROSSBOW_DIVINE_SHOT",
+      "passive": "PASSIVE_CD_RESET_Q",
+      "q": "BOLTSHOT",
+      "w": "CALTROPS"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_DUALMACE_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7758:8614",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_CLOTH_SET2",
+      "potion": "T7_POTION_REVIVE",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2024-06-08T19:21:35Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Tank",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7758, revision 8614",
+      "url": "https://metabattle.com/albion/Oathkeepers_Support_ZvZ_Build"
+     },
+     "spells": {
+      "e": "BLESSED_MACES",
+      "passive": "PASSIVE_HEALTHCHANCE_MACE",
+      "q": "SACRED_GROUND",
+      "w": "CHARGE_ROOT"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_ENIGMATICORB_MORGANA": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7661:8910",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_SET1"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:16:16Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Support",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7661, revision 8910",
+      "url": "https://metabattle.com/albion/Malevolent_Locus_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "VOID",
+      "passive": "PASSIVE_ENERGYCHANCE_ARCANESTAFF",
+      "q": "SHIELDFRIENDLY",
+      "w": "CLEANSESPEED2"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_GLAIVE_CRYSTAL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7766:8995",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_LEATHER_FEY",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_PLATE_UNDEAD"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:28:01Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7766, revision 8995",
+      "url": "https://metabattle.com/albion/Rift_Glaive_ZvZ_Bombing_Build"
+     },
+     "spells": {
+      "e": "SPEAR_AOE_FINISHER",
+      "passive": "PASSIVE_SLOWPOISON",
+      "q": "SPIRITSPEAR",
+      "w": "CHARGINGBLADE"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_HALBERD": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7643:8918",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T8_MEAL_STEW_FISH",
+      "head": "HEAD_PLATE_SET2",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:17:32Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7643, revision 8918",
+      "url": "https://metabattle.com/albion/Halberd_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "RENDINGSWING",
+      "passive": "PASSIVE_SPELLPOWER_CHANCE_AXE",
+      "q": "RENDINGSPIN",
+      "w": "BLADE_AURA"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_HALBERD_MORGANA": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7655:8917",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_ROYAL",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:17:28Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7655, revision 8917",
+      "url": "https://metabattle.com/albion/Carrioncaller_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "SHOCKWAVE",
+      "passive": "PASSIVE_SPELLPOWER_CHANCE_AXE",
+      "q": "RENDINGCOMBO",
+      "w": "AXEBOOST"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_HAMMER_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7757:8974",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "T7_MEAL_OMELETTE_AVALON",
+      "head": "HEAD_PLATE_KEEPER",
+      "potion": "T7_POTION_REVIVE",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:23:04Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Tank",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7757, revision 8974",
+      "url": "https://metabattle.com/albion/Hand_of_Justice_ZvZ_Build"
+     },
+     "spells": {
+      "e": "SPINNING_SMASH",
+      "passive": "PASSIVE_STUNCHANCE",
+      "q": "IRONBREAKER",
+      "w": "TAR_RING"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_HARPOON_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7660:8996",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "T8_MEAL_STEW_FISH",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:28:05Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7660, revision 8996",
+      "url": "https://metabattle.com/albion/Spirithunter_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "TAINTED_STEEL",
+      "passive": "PASSIVE_SLOWPOISON",
+      "q": "SPEAR_LUNGE",
+      "w": "GROUNDSPEAR"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_HOLYSTAFF_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7641:8979",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_PLATE_SET2",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_SET1"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:24:44Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Healer",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7641, revision 8979",
+      "url": "https://metabattle.com/albion/Fallen_Staff_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "HOLY_ULTIMATE",
+      "passive": "PASSIVE_HEALPOWERCHANCE",
+      "q": "HOLYFLASH",
+      "w": "HOLYORB"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_ICECRYSTAL_UNDEAD": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7698:8971",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET1",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:22:54Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Range DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7698, revision 8971",
+      "url": "https://metabattle.com/albion/Permafrost_Prism_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "FROST_ULTIMATE",
+      "passive": "PASSIVE_CASTINGSPEED_CHANCE_FROSTSTAFF",
+      "q": "ICESHARD",
+      "w": "FROSTNOVA"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_ICEGAUNTLETS_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7642:8970",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.92,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.75
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:22:50Z",
+     "quarantined_fields": [
+      "spell: unresolved 'Frost'"
+     ],
+     "raw": {},
+     "role": "Support",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7642, revision 8970",
+      "url": "https://metabattle.com/albion/Icicle_Staff_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "GLACIALFIELD",
+      "passive": null,
+      "q": "SHATTER_Q",
+      "w": "FROSTNOVA"
+     },
+     "style": null,
+     "unknowns": [
+      "passive"
+     ]
+    }
+   ],
+   "2H_KNUCKLES_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7656:9004",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_AVALON",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:29:17Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7656, revision 9004",
+      "url": "https://metabattle.com/albion/Fists_of_Avalon_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "TRIPLECOMBO_DIVEKICK",
+      "passive": "PASSIVE_KNUCKLE_COMBOBREAKER",
+      "q": "DASHKICK",
+      "w": "TRIPLE_KICK"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_KNUCKLES_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7652:9006",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:29:24Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7652, revision 9006",
+      "url": "https://metabattle.com/albion/Hellfire_Hands_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "BOULDER_TOSS",
+      "passive": "PASSIVE_KNUCKLE_COMBOBREAKER",
+      "q": "DASHKICK",
+      "w": "TRIPLE_KICK"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_KNUCKLES_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7657:9009",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:29:34Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7657, revision 9009",
+      "url": "https://metabattle.com/albion/Ursine_Maulers_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "PUMMELING_STRIKES",
+      "passive": "PASSIVE_KNUCKLE_COMBOBREAKER",
+      "q": "DASHKICK",
+      "w": "TRIPLE_KICK"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_KNUCKLES_SET3": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7513:9008",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T7_POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:29:31Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7513, revision 9008",
+      "url": "https://metabattle.com/albion/Spiked_Gauntlets_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "IMPULSE_PUNCH",
+      "passive": "PASSIVE_KNUCKLE_COMBOBREAKER",
+      "q": "DASHKICK",
+      "w": "TRIPLE_KICK"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_LONGBOW": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7699:8928",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T7_POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:18:09Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Range DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7699, revision 8928",
+      "url": "https://metabattle.com/albion/Longbow_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "ARROWRAIN",
+      "passive": "PASSIVE_SLOWPOISON",
+      "q": "MULTISHOT2",
+      "w": "GROUNDARROW"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_NATURESTAFF_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7662:8977",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_SET1"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:24:27Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Healer",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7662, revision 8977",
+      "url": "https://metabattle.com/albion/Blight_Staff_ZvZ_PvP_Healer_Build"
+     },
+     "spells": {
+      "e": "ROTTENVINES",
+      "passive": "PASSIVE_HEALPOWERCHANCE",
+      "q": "REJUVMUSHROOM_GRENADE",
+      "w": "CLEANSEHEAL"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_NATURESTAFF_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7667:8978",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_SET1"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:24:30Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Healer",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7667, revision 8978",
+      "url": "https://metabattle.com/albion/Rampant_Staff_ZvZ_PvP_Healer_Build"
+     },
+     "spells": {
+      "e": "SPIRITANIMAL",
+      "passive": "PASSIVE_HEALPOWERCHANCE",
+      "q": "REJUVMUSHROOM_GRENADE",
+      "w": "CLEANSEHEAL"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_RAM_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7559:8973",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "T7_MEAL_OMELETTE_AVALON",
+      "head": "HEAD_PLATE_KEEPER",
+      "potion": "T7_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_SET2"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:23:01Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Tank",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7559, revision 8973",
+      "url": "https://metabattle.com/albion/Grovekeeper_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "RAM_CHARGE",
+      "passive": "PASSIVE_STUNCHANCE",
+      "q": "IRONBREAKER",
+      "w": "TAR_RING"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_ROCKSTAFF_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7700:8988",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "T7_MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "T7_POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:27:02Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Tank",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7700, revision 8988",
+      "url": "https://metabattle.com/albion/Staff_of_Balance_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "QS_SLOWROPE",
+      "passive": "PASSIVE_STUNCHANCE_QUARTERSTAFF",
+      "q": "CARTWHEEL",
+      "w": "SEPARATING_SLAM"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_SCYTHE_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7651:8919",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T8_MEAL_STEW_FISH",
+      "head": "HEAD_PLATE_SET2",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:17:36Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7651, revision 8919",
+      "url": "https://metabattle.com/albion/Infernal_Scythe_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "SCYTHESWING",
+      "passive": "PASSIVE_SPELLPOWER_CHANCE_AXE",
+      "q": "RENDINGCOMBO",
+      "w": "BLADE_AURA"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "MAIN_ARCANESTAFF_UNDEAD": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7755:8913",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_CLOTH_SET2",
+      "offhand": "OFF_LAMP_UNDEAD",
+      "potion": "T7_POTION_REVIVE",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:16:29Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Range DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7755, revision 8913",
+      "url": "https://metabattle.com/albion/Witchwork_Staff_ZvZ_Build"
+     },
+     "spells": {
+      "e": "BLACKHOLE",
+      "passive": "PASSIVE_ATTACKBUFF_ARCANESTAFF",
+      "q": "SHIELDFRIENDLY",
+      "w": "CLEANSESPEED2"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "MAIN_MACE": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7679:8332",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "T7_MEAL_OMELETTE_AVALON",
+      "head": "HEAD_PLATE_SET2",
+      "offhand": "OFF_JESTERCANE_HELL",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2024-05-10T15:42:45Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Tank",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7679, revision 8332",
+      "url": "https://metabattle.com/albion/One_Handed_Mace_PvP_ZvZ_Build"
+     },
+     "spells": {
+      "e": "MACELEAP",
+      "passive": "PASSIVE_ENERGYCHANCE_MACE",
+      "q": "SACRED_GROUND",
+      "w": "CHARGE_ROOT"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "MAIN_RAPIER_MORGANA": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7645:8952",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_UNDEAD",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_TOTEM_KEEPER",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:20:57Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7645, revision 8952",
+      "url": "https://metabattle.com/albion/Bloodletter_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "RAPIERSTAB",
+      "passive": "PASSIVE_BLEEDCHANCE",
+      "q": "QDASH",
+      "w": "THROWINGBLADES"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "MAIN_SCIMITAR_MORGANA": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7658:8999",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_PLATE_SET2",
+      "offhand": "OFF_DEMONSKULL_HELL",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:28:34Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7658, revision 8999",
+      "url": "https://metabattle.com/albion/Clarent_Blade_ZvZ_PvP_Build"
+     },
+     "spells": {
+      "e": "MIGHTYSWING",
+      "passive": "PASSIVE_HEROICSTACK",
+      "q": "CLEAVE",
+      "w": "DEFENSERUN"
+     },
+     "style": null,
+     "unknowns": []
+    }
+   ]
+  }
+ }
+}

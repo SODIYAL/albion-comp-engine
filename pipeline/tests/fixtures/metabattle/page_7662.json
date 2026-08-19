@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Nature_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Healer_builds",
+     "sortkey": "Healer"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7662,
+   "revid": 8977,
+   "title": "Blight Staff ZvZ PvP Healer Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Nature Staff\n| mode = ZvZ\n| focus = Healer\n| strengths = Great AOE Heal, Easy to Play\n| weaknesses = No offensive abilities, Team reliant\n}}\n==Overview==\nThe {{Item|Elder's Blight Staff}} build is currently enjoying great popularity in the Albion ZvZ PvP scene with its ease of use that even new players can play without issues and the great healing it provides. The {{Item|Elder's Blight Staff}} offers invaluable support to any zerg and can be a good stepping stone before trying out different healing builds like the {{Item|Elder's Rampant Staff}}.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Blight Staff\n| main hand weapon skills = Rejuvenating Flower, Cleanse Heal, Elevated Nature, Adrenaline Driven Charity\n| head = Elder's Assassin Hood\n| head skills = Meditation, Balanced Mind\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Cleric Robe\n| armor skills = Everlasting Spirit, Aggression\n| shoes = Elder's Scholar Sandals\n| shoes skills = Focused Run, Aggression\n| potion = Major Resistance Potion\n| potion alternatives = Major Energy Potion\n| food = Pork Omelette\n| food alternatives = Avalonian Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Blight Staff|45}}===\n{{Skill|Rejuvenating Flower}} — This spell creates a flower over which allies can step. Any allies stepping over will spread Rejuvenation Charges in an AOE to 10 allies while also healing them. The number of Rejuvenation Charges being applied depends on how long the flowers have been on the ground. \n\nOne charge will be applied without any growth time while 2 charges are applied if the flower remains untouched for 2 seconds. If the flowers manage to grow for 4 seconds, 3 charges will be applied and the healing is greatly increased.\n\n{{Skill|Cleanse Heal}} — This AOE will remove all CC effects from allies while also cleansing any other debuffs. The ability also heals based on the amount of Rejuvenation Charges but it consumes 1 Rejuvenation Charge from the targets it heals.\n\n{{Skill|Elevated Nature}} — Use this ability to rapidly heal allies around you as you move. The ability also offers you a nice movement speed increase during the channel and you cannot be interrupted during the channel. Make sure to walk around with this and stay close to the most wounded allies in order to heal them quickly.\n\n{{Skill|Adrenaline Driven Charity}} — After casting any 4 spells, your healing amount will be increased by 20% for 3 seconds. This is easy to trigger as you will be spamming {{Skill|Rejuvenating Flower}} anyway.\n\n\n==={{Item|Elder's Cleric Robe|45}}===\n{{Skill|Everlasting Spirit}} — One of the best defensive abilities in the game even though it was nerfed numerous times. This allows you to gain a shield that makes you completely invulnerable for a short duration while also increasing your healing done by 20% . However, once you press the ability, you MUST take damage to trigger the effect. \n\n{{Skill|Aggression}} — 8% increased healing amount cannot be denied and makes this the obvious choice.\n\n\n==={{Item|Elder's Assassin Hood|45}}===\n{{Skill|Meditation}} — A great choice as it allows you to essentially reset the cooldowns of your abilities and use them again very quickly. Particularly useful for you {{Skill|Elevated Nature}}!\n\n{{Skill|Balanced Mind}} — This increases your healing amount. And as you have no casting time, there is no point in taking {{Skill|Quick Thinker}}.\n\n\n==={{Item|Elder's Scholar Sandals|45}}===\n{{Skill|Focused Run}} — Without any other defensive options, {{Skill|Focused Run}} is a great choice to help with your survival as it offers CC immunity and stops you from relying on others using {{Skill|Displacement Immunity}}. With your intention being not to get caught, this is the perfect choice for a healer.\n\n{{Skill|Aggression}} — Another passive giving you healing.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — The {{Item|Elder's Lymhurst Cape}} is the perfect choice for a healer as it replenishes your energy and allows you to keep healing. Couple this with tactical use of {{Item|Major Energy Potion}} and you will have a difficult time running out of energy.\n\n\n==Rotations==\n{{Rotation|Support|Rejuvenating Flower, Rejuvenating Flower, Rejuvenating Flower, Cleanse Heal, Elevated Nature}}\n* While there isn't a real rotation for this, you want to always be stacking flowers by using {{Skill|Rejuvenating Flower}} and planting your flowers a bit out of the way where allies move in such a manner that they can see them but won't instantly step on them. A good idea is to keep flowers in the retreat path of your team but you can also put them down on top of your allies to atleast start stacking Rejuvenation Charges on them. Use {{Skill|Cleanse Heal}} to free your allies from CC and also offer burst healing when needed.\n\nWith {{Skill|Elevated Nature}} being your main healing ability, you want to use this to follow your team through pushes and retreats alike, making sure that they remain as close as possible to full health.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Feel free to use this potion as a general damage reduction cooldown if you anticipate to take damage or if you are caught out of position.\n\n{{Item|Major Energy Potion}} — Keep plenty in your inventory and switch to one whenever you need mana then switch to your {{Item|Major Resistance Potion}}. Doing this won't put your abilities on cooldown.\n\n{{Item|Pork Omelette}} — With the strength of the build being the use of abilities to help others, {{Item|Pork Omelette}} will help you do exactly that. Try to bring at least a 7.1 for ZvZ fights as the prices isn't all that steep.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7662": {
+     "ns": 0,
+     "pageid": 7662,
+     "revisions": [
+      {
+       "parentid": 8183,
+       "revid": 8977,
+       "timestamp": "2025-04-01T23:24:27Z"
+      }
+     ],
+     "title": "Blight Staff ZvZ PvP Healer Build"
+    }
+   }
+  }
+ }
+}

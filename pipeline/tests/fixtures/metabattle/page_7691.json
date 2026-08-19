@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Sword_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7691,
+   "revid": 8998,
+   "title": "Carving Sword ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Sword\n| mode = ZvZ\n| focus = Melee DPS\n| strengths = Good Utility, Good Mobility, Versatile\n| weaknesses = Mana issues, Low Mobility\n}}\n==Overview==\nThis {{Item|Elder's Carving Sword}} Build focuses on supporting zergs during ZvZ fights by reducing the resistance of enemies after they've been clumped up by abilities like {{Skill|Onslaught}}. With the goal being to push through a clump of enemies and debuff them all so your team has an easier time scoring kills. However, your damage is nothing to scoff at either!\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Carving Sword\n| main hand weapon skills = Heroic Cleave, Iron Will, Fearless Strike, Heroic Fighting\n| head = Elder's Judicator Helmet\n| head skills = Electric Discharge, Toughness\n| cape = Elder's Martlock Cape\n| cape alternatives = Elder's Lymhurst Cape\n| cape skills = Shield of Protection\n| armor = Elder's Hellion Jacket\n| armor skills = Life Steal Aura, Balanced Mind\n| shoes = Elder's Scholar Sandals\n| shoes alternatives = Elder's Royal Sandals, Elder's Cleric Sandals\n| shoes skills = Focused Run, Aggression\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Pork Omelette\n| food alternatives = Deadwater Eel Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Carving Sword|45}}===\n{{Skill|Heroic Cleave}} — Your main damaging and the ability you also use for mobility. Try to always use it on cooldown even if you have to use it on mobs or critters. The {{Skill|Heroic Cleave}} does an AOE attack around you and hits multiple people. Each hit you land with this ability will put a stack of Heroic Charges that increases your movement speed and attack speed. This spell will help a lot with movement in and out of engages.\n\n{{Skill|Iron Will}} — This skill applies another Heroic Charge but also makes you immune to purges while increasing your defense and movement speed. This is invaluable and helps you make sure that you don't lose your Heroic Charges before you get to use {{Skill|Fearless Strike}}.\n\n{{Skill|Fearless Strike}} — The main ability that will be used in ZvZ content, you want to use this against clumps of already stacked enemies in order to hit as many enemies as possible right before the damage drop comes from your team. Try to follow your shotcaller as much as possible as he is usually the one using a {{Item|Elder's Hand of Justice}}\n\n{{Skill|Heroic Fighting}} — This passive will increase your movement speed and attack speed based on the amount of Heroic Charges you have, it is a great choice!\n\n\n==={{Item|Elder's Hellion Jacket|45}}===\n{{Skill|Life Steal Aura}} — This is the main way you can heal yourself and stay alive while in ZvZ fights. The {{Skill|Life Steal Aura}} allows you even some mistakes when trying to get in on clumps of enemies.\n\n{{Skill|Balanced Mind}} — Straight up increases your damage and defense, good for this build.\n\n\n==={{Item|Elder's Judicator Helmet|45}}===\n{{Skill|Electric Discharge}} — As your goal remains as a support, the {{Skill|Electric Discharge}} will help lengthen the duration enemies remain CC'd. Use this right after charging in with {{Skill|Fearless Strike}} as the expanding AOE of {{Skill|Electric Discharge}} will reach many enemies even in their retreat.\n\n{{Skill|Toughness}} — This provides nice additional defense that helps during PvP and is the only real option for you.\n\n\n==={{Item|Elder's Scholar Sandals|45}}===\n{{Skill|Focused Run}} — With your main goal being to stay alive and support your team, {{Skill|Focused Run}} helps a lot with not getting CC'd out of position and remains a great choice for retreats.\n\n{{Skill|Aggression}} — The standard choice for most DPS builds, it increases your damage which is always good.\n\n\n==={{Item|Elder's Martlock Cape|45}}===\n{{Skill|Shield of Protection}} — A great defensive choice to help your survival. Keep in mind that it only activates when you HP drops to below 25% so make sure to keep track of it when losing HP in engagements so you don't waste the cooldown. \n\n\n==Rotations==\n{{Rotation|Pierce Combo|Heroic Cleave, Heroic Cleave, Heroic Cleave, Iron Will, Fearless Strike, Electric Discharge}}\n* Use {{Skill|Heroic Cleave}} to get as many Heroic Charges as you can, your goal being to have 3 at all times. Use {{Skill|Iron Will}} to make it so you cannot be purged and cannot lose your Heroic Charges. Once your zerg caught an enemy group, use {{Skill|Fearless Strike}} amd try to hit as many enemies as possible before following up with {{Skill|Electric Discharge}} to help CC enemies before following your tanks in either retreat or pushing deeper.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Feel free to use this potion as a general damage reduction cooldown if you anticipate burst damage from the enemy zerg or if you just want to get deeper. Another option would be the {{Item|Major Gigantify Potion}} as it helps more with staying alive during high bursts of damage.\n\n{{Item|Pork Omelette}} — Use this to decrease your cooldowns and help with having abilities ready for all engages. Try to use atleast a 7.1 version for the extra CD decrease.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7691": {
+     "ns": 0,
+     "pageid": 7691,
+     "revisions": [
+      {
+       "parentid": 8863,
+       "revid": 8998,
+       "timestamp": "2025-04-01T23:28:30Z"
+      }
+     ],
+     "title": "Carving Sword ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

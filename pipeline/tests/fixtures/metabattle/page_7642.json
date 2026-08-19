@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Frost_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Support_builds",
+     "sortkey": "Support"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7642,
+   "revid": 8970,
+   "title": "Icicle Staff ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Frost Staff\n| mode = ZvZ\n| focus = Support\n| strengths = Highly impactful if played well\n| weaknesses = Can be expensive\n}}\n==Overview==\nThis Icicle Staff ZvZ PvP build focuses on hindering your enemies and peeling for your zerg. An icicle player can have a significant impact by slowing down large portions of the enemy zerg, causing them to be out of sync or halting their engagement altogether. {{Skill|Frozen Hell}} and {{Skill|Mythical Web}} can render an enemy engagement completely ineffective. You have two instant blink movement options by using {{Skill|Frost Nova}} and {{Skill|Blink}}, and very strong cooldown reduction if you choose to use {{Skill|Meditation}}. A skilled icicle player will also scout around their zerg, preemptively disrupting any approaching enemy zergs while alerting their allies about potential flanking attempts.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Icicle Staff\n| main hand weapon skills = Frozen Surge, Frost Nova, Frozen Hell, Frost\n| head = Elder's Assassin Hood\n| head alternatives = Elder's Mercenary Hood\n| head skills = Meditation, Quick Thinker\n| cape = Elder's Martlock Cape\n| cape alternatives = Elder's Bridgewatch Cape\n| cape skills = Shield of Protection\n| armor = Elder's Duskweaver Armor\n| armor alternatives = Elder's Knight Armor\n| armor skills = Mythical Web, Authority, Protective Instinct\n| shoes = Elder's Cleric Sandals\n| shoes skills = Blink, Efficiency\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Pork Omelette\n| food alternatives = Avalonian Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Icicle Staff|45}}===\n{{Skill|Frozen Surge}} — Doesn't do a lot of damage but good for slowing down anyone in its path. Feel free to spam it off cooldown.\n\n{{Skill|Frost Nova}} — Use it to freeze anyone near you. Ideally, you'll position yourself in the middle of the enemy frontline, giving you ample opportunity to freeze priority targets, such as enemy DPS who have activated their speed buffs and are actively trying to engage your zerg. It's great for halting pushes and also serves as a very useful movement skill when something goes wrong and you need to escape.\n\n{{Skill|Frozen Hell}} — The idea behind this skill is similar to {{Skill|Frost Nova}}. Your main goal is to peel for your zerg. Ideally, you'll drop this in a chokepoint and watch as the enemy slows down enough for your zerg to either escape or reengage. Try to prioritize the use of {{Skill|Meditation}} to reduce the cooldown of this skill, as well as {{Skill|Mythical Web}}, since these are your most useful abilities.\n\n{{Skill|Frost}} — Use this passive to root priority targets or switch to {{Skill|Energetic}} for better mana sustain.\n\n\n==={{Item|Elder's Duskweaver Armor|45}}===\n{{Skill|Mythical Web}} — This skill will remove any movement buffs from enemies, so try to use it directly on or in front of an actively engaging enemy zerg. Doing so will create an opportunity for your zerg to counter them and can lead to a very fast turnaround in the fight because the enemy movement skills will be on cooldown as well. Similar to {{Skill|Frozen Hell}}, try to use {{Skill|Meditation}} as frequently as possible to reduce the cooldown of this skill. \nKnight armor is a good alternative option if you're on a budget.\n\n{{Skill|Authority}} — Increases the CC of your skills, and since your build is mostly focused on crowd control, this is the right choice.\n\n\n==={{Item|Elder's Assassin Hood|45}}===\n{{Skill|Meditation}} — Channel this skill to rapidly regain cooldown for your other skills. Try to use it as much as possible, but be aware that it can be interrupted, and you can't move during its use.\n\n{{Skill|Quick Thinker}} — Additional cooldown reduction is the most beneficial choice for this build.\n\n\n==={{Item|Elder's Cleric Sandals|45}}===\n{{Skill|Blink}} — A useful movement skill, but it can also be substituted with other boots and any run skill.{{Skill|Blink}} and {{Skill|Frost Nova}} can be used consecutively, providing you with a significant instant travel distance, which can save you in a pinch.\n\n{{Skill|Efficiency}} — This passive helps with mana consumption, but an argument can be made for using {{Skill|Concentration}} or {{Skill|Courier}} depending on the situation you are in.\n\n\n==={{Item|Elder's Martlock Cape|45}}===\n{{Skill|Shield of Protection}} — Quite self-explanatory, but can help you survive when you get caught. The Bridgewatch Cape's {{Skill|Sandstorm}} is also a very good option for this build. \n\n\n==Rotations==\n{{Rotation|Enemy is engaging|Blink, Mythical Web, Frozen Hell, Meditation }}\n*First, utilize a movement ability or walk to get in the way of the enemy push. Then, use {{Skill|Mythical Web}} to purge the enemy speed buffs. Subsequently, activate {{Skill|Frozen Hell}} or, if the engagement front is broad, utilize {{Skill|Frozen Hell}} to slow the other half of the enemy's engage. When your cooldowns are depleted and you're not in any immediate danger, use {{Skill|Meditation}} to replenish them and repeat the process.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Provides significantly higher resistance to all crowd control (CC) and damage, so ideally, you'd want to activate it just before taking damage or getting CC'd. While the 7.1 version offers significant benefits if you have the extra silver to spend, it isn't essential.\n\n{{Item|Pork Omelette}} — This omelette is the most common food for this build. An argument can be made for using {{Item|Avalonian Pork Omelette}} but, since you aren't a tank, the cooldown reduction is more beneficial.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7642": {
+     "ns": 0,
+     "pageid": 7642,
+     "revisions": [
+      {
+       "parentid": 7989,
+       "revid": 8970,
+       "timestamp": "2025-04-01T23:22:50Z"
+      }
+     ],
+     "title": "Icicle Staff ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

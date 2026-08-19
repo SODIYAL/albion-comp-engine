@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Crossbow_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Range_DPS_builds",
+     "sortkey": "Range DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7712,
+   "revid": 8935,
+   "title": "Energy Shaper ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Crossbow\n| mode = ZvZ\n| focus = Range DPS\n| strengths = Great Burst, Easy to Play\n| weaknesses = Requires good positioning\n}}\n==Overview==\nThis build focuses on the high damage of the {{Skill|Divine Engine}} used to deny choke points of entry like territory gates. You also have access to {{Skill|Avalonian Beam}} for quick bursts. The build performs very well in defensive positions like castles or territory defense as the high range is fantastic at denying pushes from the enemy zergs.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Energy Shaper\n| main hand weapon skills = Explosive Bolt, Caltrops, Divine Engine, Well-Prepared\n| head = Elder's Cowl of Purity\n| head skills = Avalonian Beam, Aggression\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Cleric Robe\n| armor skills = Everlasting Spirit, Aggression\n| shoes = Elder's Royal Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Gigantify Potion\n| food = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Energy Shaper|45}}===\n{{Skill|Explosive Bolt}} — This AOE ability does decent damage but it shouldn't be something you focus on using. Because of the defensive positions you normally want to use an {{Item|Elder's Energy Shaper}} in, you can use {{Skill|Explosive Bolt}} over walls to poke.\n\n{{Skill|Caltrops}} — Similar to how the {{Skill|Explosive Bolt}} is used, you want to throw the {{Skill|Caltrops}} over walls and in front of enemy zergs without getting too far out of your position as a range DPS. You can also use this on top of your zerg's position in order to prepare for a retreat and help your team by slowing enemies that push through your previous position.\n\n{{Skill|Divine Engine}} — This laser is the bread and butter of the build and can be used on choke points in order to deal high sustained damage. Try to always aim for the choke points while enemies are pushing in order to stop an enemy push. Keep in mind that this skill can still be blocked by {{Item|Elder's Demon Armor}} so always try to keep an eye out for that, especially if you didn't manage to trigger {{Skill|Everlasting Spirit}}.\n\n{{Skill|Well-Prepared}} — Using abilities will reset your {{Skill|Explosive Bolt}} every 4th spell which is nice to have but you don't have many other options anyway.\n\n\n==={{Item|Elder's Cleric Robe|45}}===\n{{Skill|Everlasting Spirit}} — This is the main defensive ability you should learn how to use first. You want to pop this right before you use {{Skill|Divine Engine}}. Because of the damage ramping up, the initial damage isn't high enough to hurt you even if you get hit back by a {{Item|Elder's Demon Armor}}. However, any damage you receive is enough to trigger the invulnerability bubble.\n\n{{Skill|Aggression}} — Another passive that increases your damage and even increases your defense by a little bit.\n\n\n==={{Item|Elder's Cowl of Purity|45}}===\n{{Skill|Avalonian Beam}} — Use this to deliver a quick burst of damage and interrupt spellcasting. As the beam travels in a straight line, so try to use this in choke points or when you see clumps of enemies tightly together.\n\n{{Skill|Aggression}} — This passive increases your damage which is perfect for the build.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — A good damage increase on demand, great for increasing the damage of all your skills but most importantly increasing the damage you do with {{Skill|Avalonian Beam}} and {{Skill|Divine Engine}}. This will also lower your defenses and make you even squishier.\n\n{{Skill|Aggression}} — This increases your damage even further.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — As the build can be rather mana intensive, this will help a lot with mana sustain as it triggers once your mana falls below 40% and it restores 80% of your total mana.\n\n\n==Rotations==\n{{Rotation|Burst Damage|Defenseless Rush, Avalonian Beam, Everlasting Spirit, Divine Engine}}\n* Your rotation is quite simple and the main task is to position so your {{Skill|Divine Engine}} can do as much damage as possible. Start with {{Skill|Defenseless Rush}} to boost your damage, using {{Skill|Avalonian Beam}} next on a clump to deal burst damage before following up by activating {{Skill|Everlasting Spirit}}. Use {{Skill|Divine Engine}} on a choke point or before enemies make their push in order to deny that particular push.\n\nUse {{Skill|Explosive Bolt}} and {{Skill|Caltrops}} over walls to help chip away at zerg's HP and to slow them down but try not to get yourself out of position when using these.\n\n\n==Consumables==\n{{Item|Major Gigantify Potion}} — Use this as your defensive, pop it if you see enemies trying to catch you or if you get slowed down and you cannot avoid damage coming onto you. Can also be used during an engagement to soak damage while you do your rotation.\n\n{{Item|Beef Stew}} — As damage is the most important part of this build, you want to use the {{Item|Beef Stew}} to improve that. Try to use an 8.1 or 8.2 for best return on your investment.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7712": {
+     "ns": 0,
+     "pageid": 7712,
+     "revisions": [
+      {
+       "parentid": 8345,
+       "revid": 8935,
+       "timestamp": "2025-04-01T23:19:08Z"
+      }
+     ],
+     "title": "Energy Shaper ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

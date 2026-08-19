@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Nature_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Healer_builds",
+     "sortkey": "Healer"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7667,
+   "revid": 8978,
+   "title": "Rampant Staff ZvZ PvP Healer Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Nature Staff\n| mode = ZvZ\n| focus = Healer\n| strengths = Great AOE Heal, Easy to Play\n| weaknesses = No offensive abilities, Expensive\n}}\n==Overview==\nThe {{Item|Elder's Rampant Staff}} build remains one of the most popular choices for zvz pvp as it offers great healing and helps with the overall movement of the zerg as it can easily heal while moving through the use of {{Skill|Spirit Animal}}. Even though the build remains rather expensive with the use of many pricey items like {{Item|Elder's Robe of Purity}}, the build isn't too difficult to play and even newer players could easily get used to the playstyle and support their teams.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Rampant Staff\n| main hand weapon skills = Rejuvenating Flower, Cleanse Heal, Spirit Animal, Adrenaline Driven Charity\n| head = Elder's Assassin Hood\n| head skills = Meditation, Balanced Mind\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Robe of Purity\n| armor skills = Energy Emission, Aggression\n| shoes = Elder's Scholar Sandals\n| shoes alternatives = Elder's Boots of Valor\n| shoes skills = Focused Run, Aggression\n| potion = Major Resistance Potion\n| potion alternatives = Major Energy Potion\n| food = Pork Omelette\n| food alternatives = Avalonian Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Rampant Staff|45}}===\n{{Skill|Rejuvenating Flower}} — This spell creates a flower over which allies can step. Any allies stepping over will spread Rejuvenation Charges in an AOE to 10 allies while also healing them. The number of Rejuvenation Charges being applied depends on how long the flowers have been active.\n\nOne charge will be applied without any growth time while 2 charges are applied if the flower remains for 2 seconds. If the flowers can grow for 4 seconds, 3 charges will be applied and the healing is greatly increased.\n\n{{Skill|Cleanse Heal}} — This AOE will remove all CC effects from allies while also cleansing any other debuffs. The ability also heals based on the amount of Rejuvenation Charges but it consumes 1 Rejuvenation Charge from the targets it heals.\n\n{{Skill|Spirit Animal}} — This ability creates a long line in the targeted direction, healing friendly enemies hit by it before leaving behind a green trail. Standing on the trail allows allies to be healed and the healing increases by 25% per ally (up to 20 allies). Make sure to use this in the path where your zerg is going so players can get healed while moving.\n\n{{Skill|Adrenaline Driven Charity}} — After casting any 4 spells, your healing amount will be increased by 20% for 3 seconds. This is easy to trigger as you will be spamming {{Skill|Rejuvenating Flower}} anyway and will boost the healing provided by your {{Skill|Spirit Animal}} along with every other spell.\n\n\n==={{Item|Elder's Robe of Purity|45}}===\n{{Skill|Energy Emission}} — This ability creates a force-field around you and denies anyone from getting into melee auto-attack range. It pushes all players attempting away. It remains a top choice in the current melee heavy meta and will save you a lot of times. Try to use this ability whenever your zerg is split or losing a fight and you are being ran over. Keep in mind that you can still use your abilities normally when \n\n{{Skill|Aggression}} — 8% increased healing amount cannot be denied and makes this the obvious choice.\n\n\n==={{Item|Elder's Assassin Hood|45}}===\n{{Skill|Meditation}} — A great choice as it allows you to essentially reset the cooldowns of your abilities and use them again very quickly. This allows you to cast a secondary {{Skill|Energy Emission}} that could save your life or even a second {{Skill|Spirit Animal}} for your team to walk on.\n\n{{Skill|Balanced Mind}} — This increases your healing amount. And as you have no casting time, there is no point in taking {{Skill|Quick Thinker}}.\n\n\n==={{Item|Elder's Scholar Sandals|45}}===\n{{Skill|Focused Run}} — Without any other defensive options, {{Skill|Focused Run}} is a great choice to help with your survival as it offers CC immunity and stops you from relying on others using {{Skill|Displacement Immunity}}. This helps a lot with your defensive and allows you to remain very slippery. Another option would be {{Item|Elder's Boots of Valor}} but they are very expensive and much more difficult to play even if arguably better as they don't force you into the long {{Skill|Focused Run}} channel.\n\n{{Skill|Aggression}} — Another passive giving you healing.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — The {{Item|Elder's Lymhurst Cape}} is by far the best choice for a healer as you need plenty of energy. Couple this with tactical use of {{Item|Major Energy Potion}} and you will have trouble running out of energy.\n\n\n==Rotations==\n{{Rotation|Support|Rejuvenating Flower, Rejuvenating Flower, Rejuvenating Flower, Cleanse Heal,}}\n* While there isn't a real rotation for this, you want to always be stacking flowers by using {{Skill|Rejuvenating Flower}} and planting your flowers a bit out of the way where allies move in so they don't just step on it before it grows. A good idea is to keep flowers in the retreat path of your team but you can also put them down on top of your allies to atleast start stacking Rejuvenation Charges on them. Use {{Skill|Cleanse Heal}} to free your allies from CC and also offer burst healing when needed.\n\nThe {{Skill|Spirit Animal}} shouldn't be part of a fixed rotation however. You want to use this more as your team retreats in order to heal up allies that walk back or use it to heal up lots of allies in the middle of your zerg if they stack properly on top of your 'carpet'. Good shotcallers will ask for players to stack on these carpets in order to boost healing and get back into fights easily. {{Skill|Spirit Animal}} can also be used during pushes however as it spreads over a large area and offers good staying power for your frontline.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Feel free to use this potion as a general damage reduction cooldown if you anticipate to take damage or if you are caught out of position.\n\n{{Item|Major Energy Potion}} — Keep plenty in your inventory and switch to one whenever you need mana then switch to your {{Item|Major Resistance Potion}}. Doing this won't put your abilities on cooldown.\n\n{{Item|Pork Omelette}} — With the strength of the build being the use of abilities to help others, {{Item|Pork Omelette}} will help you do exactly that. Try to bring at least a 7.1 for ZvZ fights as the prices isn't all that steep.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7667": {
+     "ns": 0,
+     "pageid": 7667,
+     "revisions": [
+      {
+       "parentid": 8184,
+       "revid": 8978,
+       "timestamp": "2025-04-01T23:24:30Z"
+      }
+     ],
+     "title": "Rampant Staff ZvZ PvP Healer Build"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Axe_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7659,
+   "revid": 8921,
+   "title": "Realmbreaker ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Axe\n| mode = ZvZ\n| focus = Melee DPS\n| strengths = High AOE Burst, Versatile, Good Self-heal\n| weaknesses = Low Mobility, High Skill Ceiling\n}}\n==Overview==\nThis Realmbreaker build focuses on ZvZ PvP DPS. While the weapon remains rather expensive, its very enjoyable to play and rather straight forward even for newer players. With its straightforward yet satisfying playstyle, the {{Item|Elder's Realmbreaker}} is a core part of the current ZvZ scene.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Realmbreaker\n| main hand weapon skills = Rending Rage, Adrenaline Boost, Aftershock, Aggressive Rush\n| head = Elder's Knight Helmet\n| head skills = Displacement Immunity, Toughness\n| cape = Elder's Avalonian Cape\n| cape skills = Force Pulse\n| armor = Elder's Hellion Jacket\n| armor skills = Life Steal Aura, Balanced Mind\n| shoes = Elder's Royal Sandals\n| shoes alternatives = Elder's Cleric Sandals, Elder's Stalker Shoes\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Deadwater Eel Stew\n| food alternatives = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Realmbreaker|45}}===\n{{Skill|Rending Rage}} — Utilize this skill to apply stacks of bleeding with the initial two strikes, try to always put as many stacks of the bleeds as you can on nearby players during the brawling phase of an engagement. Use the third execution of the ability to root enemies before following up with {{Skill|Aftershock}}.\n\n{{Skill|Adrenaline Boost}} — This ability will help you a lot with repositioning as it gives you a boost in damage and movement. Use it to position yourself so you land your {{Skill|Aftershock}} on multiple enemies. Another option is the {{Skill|Battle Rush}} as it allows you to quickly leap and provides good anti-heal while boosting friendly healing received. You should try both and see what you like best! \n\n{{Skill|Aftershock}} — Your main use in the zerg as its your highest damage and easy to execute while providing help for your allies. You leap to a target location and break the ground directly in front of you. Enemies hit will not only be popped into the air but also have their maximum and current HP decreased. This will allow your team to follow up and secure kills.\n\n{{Skill|Aggressive Rush}} — A nice damage buff as you will be auto-attacking a lot during long fights.\n\n\n==={{Item|Elder's Hellion Jacket|45}}===\n{{Skill|Life Steal Aura}} — This is your main self-healing ability. It will heal you based on the amount of enemies hit by your AOE that follows you around wherever you move. Keep in mind that the {{Skill|Life Steal Aura}} can be purged so always try to stay out of abilities like {{Skill|Mythical Web}}.\n\n{{Skill|Balanced Mind}} — A good increase for your damage, the other options aren't worth it.\n\n\n==={{Item|Elder's Knight Helmet|45}}===\n{{Skill|Displacement Immunity}} — This is the ability you want to use in order to secure {{Skill|Aftershock}} hits and also help your fellow zerg members as it provides the same buff to a total of 10 allies around the location of where you casted it. As you are one of the front line fighters, using this becomes an obvious choice as it helps against items like the {{Item|Elder's Knight Armor}}.\n\n{{Skill|Toughness}} — This provides nice additional defense that helps a bit with your resistance.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — Make sure you know this skill not only increases your damage but also increases the damage you take. Try to use this coupled with {{Skill|Adrenaline Boost}} for a quick burst of speed that can take enemies by surprise as you reposition.\n\n{{Skill|Aggression}} — Another passive giving you extra damage!\n\n\n==={{Item|Elder's Avalonian Cape|45}}===\n{{Skill|Force Pulse}} — The perfect choice for this build as this cape creates and explosion after a short wind-up on any target you hit with your auto-attack. This is a fantastic follow-up for your {{Skill|Aftershock}} and the added damage is hard to deny.\n\n\n==Rotations==\n{{Rotation|Realmbreaker Burst|Defenseless Rush, Displacement Immunity, Adrenaline Boost, Aftershock, Force Pulse}}\n* You should always use {{Skill|Rending Rage}} pretty much on cooldown in order to help your team with brawling and to keep enemies off. The third cast can be used to root targets and then you can follow up with your rotation. However, setting it all up yourself isn't needed as you can follow up on tank engages instead.\n\nStart with {{Skill|Defenseless Rush}} followed by Displacement Immunity (try to get as many friendly targets around you when you cast this) and Adrenaline Boost for the damage and movement speed increase before you finally use Aftershock. Make sure to follow-up with an auto-attack on whatever targets you put into the air so the {{Item|Elder's Avalonian Cape}} can trigger the {{Skill|Aftershock}} for extra damage. Make your retreat quickly after that.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Usually you want to have this popped before engagements but it's not always required if the enemy zerg cannot respond in time to your bomb. Instead, keep this for your retreat in case you are rooted or otherwise CC'd.\n\n{{Item|Deadwater Eel Stew}} — This combines the damage increase of {{Item|Beef Stew}} and the cooldown rate of {{Item|Pork Omelette}} into the perfect food to be used by this build. Another option would be a 8.2 {{Item|Beef Stew}} for the sheer damage increase.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7659": {
+     "ns": 0,
+     "pageid": 7659,
+     "revisions": [
+      {
+       "parentid": 8094,
+       "revid": 8921,
+       "timestamp": "2025-04-01T23:17:44Z"
+      }
+     ],
+     "title": "Realmbreaker ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

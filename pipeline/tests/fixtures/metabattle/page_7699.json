@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Bow_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Range_DPS_builds",
+     "sortkey": "Range DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7699,
+   "revid": 8928,
+   "title": "Longbow ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Bow\n| mode = ZvZ\n| focus = Range DPS\n| strengths = Great Burst, Versatile\n| weaknesses = High Skill Ceiling, Low Mobility\n}}\n==Overview==\nThis {{Item|Elder's Longbow}} build focuses on dealing high burst damage before retreating and either resetting cooldowns or waiting for them to count down and re-engaging. The build is more than capable of dealing with clumps of enemies, and with good positioning, can be a menace to the enemies. It performs particularly well in defensive positions like castles but it can do just as well in less organized fights like faction warfare.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Longbow\n| main hand weapon skills = Multishot, Ray of Light, Rain of Arrows, Slow Poison\n| head = Elder's Assassin Hood\n| head skills = Meditation, Balanced Mind\n| cape = Elder's Martlock Cape\n| cape skills = Shield of Protection\n| armor = Elder's Cleric Robe\n| armor skills = Everlasting Spirit, Aggression\n| shoes = Elder's Royal Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Gigantify Potion\n| food = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Longbow|45}}===\n{{Skill|Multishot}} — This AOE knockback is a great choice as it hits multiple targets and pushes them away while also interrupting them. You can use this over walls in order to disrupt enemies when given the chance.\n\n{{Skill|Ray of Light}} — You want to use this before using {{Skill|Rain of Arrows}} but it can also be used to root enemies and give opportunities for the rest of your party as the root applies to ALL targets hit and doesn't have a limit on how many enemies can be rooted.\n\n{{Skill|Rain of Arrows}} — This is your main damage ability and it offers great burst potential. However, keep in mind that it fires 3 volleys and you have to remain stationary when casting it. Try to always hit as many targets as possible when using this in order to maximize damage.\n\n{{Skill|Slow Poison}} — Each auto-attack will slow the enemy. Because there aren't any good passives worth picking for this playstyle, this is the only passive that somewhat makes sense.\n\n\n==={{Item|Elder's Cleric Robe|45}}===\n{{Skill|Everlasting Spirit}} — This isn't only a good defensive to use but it will also boost your damage if you successfully activate it by taking damage in the short window of time after you used the ability. Keep in mind that you have 1.5 seconds to take ANY sort of damage and activate the shield that makes you invulnerable and increases your damage by 20%.\n\n{{Skill|Aggression}} — Another passive that increases your damage which is good to have!\n\n\n==={{Item|Elder's Assassin Hood|45}}===\n{{Skill|Meditation}} — You want to use this after using your {{Skill|Rain of Arrows}} as it will reset its cooldown and allow you to do it all over again. This also resets your other cooldowns like {{Skill|Ray of Light}} or {{Skill|Defenseless Rush}} so try to stack as many cooldowns as possible before using this to make the most out of it.\n\n{{Skill|Balanced Mind}} — This passive increases your damage which is perfect as it matches your goal to deal as much damage as possible.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — A good damage increase on demand, great for increasing the damage of your {{Skill|Rain of Arrows}} when doing your combo. Keep in mind however that this will also lower your defenses and make you even squishier.\n\n{{Skill|Aggression}} — This increases your damage even further, can't go wrong with it.\n\n\n==={{Item|Elder's Martlock Cape|45}}===\n{{Skill|Shield of Protection}} — Because of your lack of defensive abilities, this cape helps you survive different engagements or when you are caught and it triggers when your HP falls below 25%.\n\n\n==Rotations==\n{{Rotation|Solo Bomb|Defenseless Rush, Ray of Light, Rain of Arrows, Meditation, Ray of Light, Rain of Arrows}}\n* The damage combo is quite easy to perform but requires good positioning. Try to always stay on castle walls or in a safe position where enemy tanks cannot reach you. Start off by popping {{Skill|Defenseless Rush}} and look for a clump to use {{Skill|Ray of Light}} on. Follow up with {{Skill|Rain of Arrows}} before quickly moving away and using {{Skill|Meditation}} to reset your cooldowns. You want to repeat it again after that, using {{Skill|Ray of Light}} again and {{Skill|Rain of Arrows}} right after that.\n\n\n==Consumables==\n{{Item|Major Gigantify Potion}} — Use this as your defensive, pop it if you see enemies trying to catch you or if you get slowed down and you cannot avoid damage coming onto you. Can also be used during an engagement to soak damage while you do your rotation.\n\n{{Item|Beef Stew}} — As damage is the most important part of this build, you want to use the {{Item|Beef Stew}} to improve that. Try to use an 8.1 or 8.2 for best return on your investment.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7699": {
+     "ns": 0,
+     "pageid": 7699,
+     "revisions": [
+      {
+       "parentid": 8326,
+       "revid": 8928,
+       "timestamp": "2025-04-01T23:18:09Z"
+      }
+     ],
+     "title": "Longbow ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

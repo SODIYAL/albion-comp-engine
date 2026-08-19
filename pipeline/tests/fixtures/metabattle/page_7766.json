@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Spear_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7766,
+   "revid": 8995,
+   "title": "Rift Glaive ZvZ Bombing Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Spear\n| mode = ZvZ\n| focus = Melee DPS\n| strengths = Burst Damage, Versatile\n| weaknesses = Low Range, Low Mobility\n}}\n==Overview==\nThis ZvZ PvP build focuses on dealing burst damage using the {{Item|Elder's Rift Glaive}} while within a bombsquad. The {{Item|Elder's Rift Glaive}} is one of the most popular new weapons added to the game. It is one of the easier weapons to play in a bombsquad and a great choice for any new players that joined a ZvZ guild.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Rift Glaive\n| main hand weapon skills = Spirit Spear, Inner Focus, Razor's Edge, Slow Poison\n| head = Elder's Mistwalker Hood\n| head skills = Immortal, Balanced Mind\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Jacket of Tenacity\n| armor skills = Dynamic Defense, Balanced Mind\n| shoes = Elder's Graveguard Boots\n| shoes alternatives = Elder's Boots of Valor\n| shoes skills = Battle Frenzy, Toughness\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Rift Glaive|45}}===\n{{Skill|Spirit Spear}} — You want to always use this skill 3 times in order to stack up Spirit Spear Charges that increase your {{Skill|Razor's Edge}} damage based on the amount of charges you have at the time you use your ability. However, on its own, the {{Skill|Spirit Spear}} doesn't increase your overall damage, only your auto-attack damage and also increases your range.\n\n{{Skill|Inner Focus}} — Unlike the {{Skill|Spirit Spear}}, this actually increases your overall damage AND your movement speed which makes it a very important skill to use before bursting with {{Skill|Razor's Edge}}. Make sure to always use this before pushing in for a quick bomb with your squad. Keep in mind that you have to release (press the ability again) to gain an additional movement speed boost for a short while.\n\n{{Skill|Razor's Edge}} — Make sure that you've stacked {{Skill|Spirit Spear}} 3 times before using this skill in order to maximize the damage done with it. Follow your caller when they go in and look for the clump of enemies pulled together before using this. The large AOE is great for hitting entire clumps in a wide line in front of you but don't forget that the skill will also push you forward a bit.\n\n{{Skill|Slow Poison}} — A great choice for this build and to help finish off targets {{Skill|Slow Poison}} slows down enemies when you auto-attack them and helps with securing kills after a battle your zerg won.\n\n\n==={{Item|Elder's Jacket of Tenacity|45}}===\n{{Skill|Dynamic Defense}} — Use this skill to increase your damage before a bomb. As {{Skill|Razor's Edge}} damage is physical and not magical, this means you should use this on yourself to boost your damage and armor for a short while. Make sure you don't forget to use this before pushing in with your bombsquad as the 25% damage increase is invaluable.\n\n{{Skill|Balanced Mind}} — Straight up increases your damage, a great choice for any DPS.\n\n\n==={{Item|Elder's Mistwalker Hood|45}}===\n{{Skill|Immortal}} — This ability should be used in order to become unkillable while you are pushing towards the enemy zerg so you can apply your damage. You can also use this skill if you are caught out of position and need to stay alive, offering you a great defensive skill.\n\n{{Skill|Balanced Mind}} — Yet another damage increasing passive, great to have.\n\n\n==={{Item|Elder's Graveguard Boots|45}}===\n{{Skill|Battle Frenzy}} — This skill will negate all CCs and allow you to push through without being stopped by random CCs or defensive tanks. Make sure to use this before bombing. Another alternative is the more expensive but better {{Item|Elder's Boots of Valor}} that has a similar effect so check with your guild on what they use.\n\n{{Skill|Toughness}} — This passive offers you a bit of defense which is good to have and the only relevant choice.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — With how mana hungry this build is, this cape is the only choice worth taking as it restores your mana once it reaches 40%, allowing you to do multiple engages without running out of mana.\n\n\n==Rotations==\n{{Rotation|Bomb Comber|Spirit Spear, Spirit Spear, Spirit Spear, Inner Focus, Immortal, Dynamic Defense, Razor's Edge}}\n* Start off with stacking {{Skill|Spirit Spear}} 3 times before as you and your bombsquad look for targets. Use {{Skill|Inner Focus}} to boost your damage and movement speed. Use your {{Skill|Immortal}} to become unkillable before finally buffing yourself with {{Skill|Dynamic Defense}}, boosting your damage before using {{Skill|Razor's Edge}} on a clump of enemies pulled together by your team. Once the damage was done, retreat back into your zerg or with your bomb squad to refresh cooldowns.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Feel free to use this potion as a general damage reduction cooldown if you anticipate burst damage from the enemy zerg or if you are caught out of position. Another option is the {{Item|Major Gigantify Potion}} so the choices is yours. Keep in mind however that healers will have a tough time healing you during the {{Item|Major Gigantify Potion}} as your HP is greatly increased before it goes back to normal.\n\n{{Item|Beef Stew}} — With the main point of this build being to deliver burst damage quickly, this is the perfect food for that as it offers a high flat damage increase. Make sure to use an 8.1 or 8.2 version if you can afford it as the build is rather expensive and you shouldn't be cheap with food.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7766": {
+     "ns": 0,
+     "pageid": 7766,
+     "revisions": [
+      {
+       "parentid": 8767,
+       "revid": 8995,
+       "timestamp": "2025-04-01T23:28:01Z"
+      }
+     ],
+     "title": "Rift Glaive ZvZ Bombing Build"
+    }
+   }
+  }
+ }
+}

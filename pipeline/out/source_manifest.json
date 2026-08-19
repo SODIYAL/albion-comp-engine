@@ -1,0 +1,95 @@
+{
+ "auxiliary": {
+  "render_service": "https://render.albiononline.com/v1 (icons only, not pinned)"
+ },
+ "derived": {
+  "gear_lines.json": {
+   "adapter": "fetch_gear_lines",
+   "adapter_version": "2",
+   "sha256": "6e828e960ae879b0610eccac2d56dcb020f9667895fd5f4af7699c88c8e8c0d1",
+   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+   "source_files": [
+    "formatted/items.txt",
+    "items.json"
+   ]
+  },
+  "interactions.json": {
+   "adapter": "build_interactions",
+   "adapter_version": "1",
+   "sha256": "92b23d88816b52436cbdfdd7ceed56a3c02b80d6f93cd3fd740628c328afadda",
+   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+   "source_files": [
+    "interactions.yaml",
+    "spells.json (via spell_index)"
+   ]
+  },
+  "item_stats.json": {
+   "adapter": "fetch_item_stats",
+   "adapter_version": "2",
+   "sha256": "544d293670e4f3adc6daa83e940af115186902b216add0f8fddb9880c882712a",
+   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+   "source_files": [
+    "formatted/items.txt",
+    "items.json"
+   ]
+  },
+  "spell_index.json": {
+   "adapter": "parse_dumps",
+   "adapter_version": "2",
+   "sha256": "d8897677ee459f3d2009b31aaed1ddd8195d7fa3a8d356c3800dd510621a8c45",
+   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+   "source_files": [
+    "formatted/items.json",
+    "items.json",
+    "localization.json",
+    "spells.json"
+   ]
+  },
+  "weapon_lines.json": {
+   "adapter": "parse_dumps",
+   "adapter_version": "2",
+   "sha256": "3a5303c584f4bb7e4de4c372352948d1c0243d280e8b709cbd9942b13574fcc2",
+   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+   "source_files": [
+    "formatted/items.json",
+    "items.json",
+    "localization.json",
+    "spells.json"
+   ]
+  }
+ },
+ "schema_version": 1,
+ "sources": {
+  "commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+  "commit_timestamp": "2026-07-27T11:31:41Z",
+  "environment": "live",
+  "fetch_timestamp_utc": "2026-08-19T18:52:20Z",
+  "files": {
+   "formatted/items.json": {
+    "bytes": 23954341,
+    "sha256": "226a22be333c949f47021130eadce697f921bf55ad3cf740e86e254b0d89163f"
+   },
+   "formatted/items.txt": {
+    "bytes": 1154622,
+    "sha256": "a0a678bb497dfb5bc89ce5ae93f27780c37be21900eb2a4fe10fe6b57ac51654"
+   },
+   "items.json": {
+    "bytes": 17219057,
+    "sha256": "fc009a9fb60fb9219c9e44391a842fa6032b5a1d218d1b53e0ffdaa28f29c077"
+   },
+   "localization.json": {
+    "bytes": 91272451,
+    "sha256": "a86d1b78de570c4afaada32237d9095b729ef348f5be2311f4f0ea49ee86395f"
+   },
+   "spells.json": {
+    "bytes": 14461889,
+    "sha256": "382ae5d48ff177be682efcfe257472619ce6fbc899cf8e6e2df5ae1219629134"
+   }
+  },
+  "game_patch": {
+   "date": "2026-07-21",
+   "message": "update 20260721"
+  },
+  "repository": "https://github.com/ao-data/ao-bin-dumps"
+ }
+}

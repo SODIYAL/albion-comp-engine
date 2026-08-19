@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "War_Gloves_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7657,
+   "revid": 9009,
+   "title": "Ursine Maulers ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = War Gloves\n| mode = ZvZ\n| focus = Melee DPS\n| strengths = Easy to play, High AoE DPS, Good HP Regen\n| weaknesses = Bad 1vs1, Low Mobility\n}}\n==Overview==\nThe {{Item|Elder's Ursine Maulers}} build is focused on ZVZ PvP and offers great sustained damage and AOE denial for any zerg. While the gameplay remains quite stationary and can be compared to using a {{Item|Elder's Siegebow}} but with a considerably smaller AOE. This build shines brightest when used on defense in a territory or castle fight as you are allowed to cast the full channel of your {{Skill|Hundred Striking Fists}} without being interrupted.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Ursine Maulers\n| main hand weapon skills = Dragon Leap, Triple Kick, Hundred Striking Fists, Hard to Catch\n| head = Elder's Assassin Hood\n| head skills = Meditation, Balanced Mind\n| cape = Elder's Martlock Cape\n| cape alternatives = Elder's Lymhurst Cape\n| cape skills = Shield of Protection\n| armor = Elder's Hellion Jacket\n| armor alternatives = Elder's Soldier Armor\n| armor skills = Life Steal Aura, Balanced Mind\n| shoes = Elder's Royal Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Ursine Maulers|45}}===\n{{Skill|Dragon Leap}} — This is one of your two movement abilities. With a very short cooldown, {{Skill|Dragon Leap}} can be used a lot to gain distance from enemies or to chase down fleeing players. If you manage to kick at least one enemy, then you can recast the ability with the same 2.5m range and the target hit will be knocked into the air for 0.5s. \n\n{{Skill|Triple Kick}} — This is your secondary movement ability and couples perfectly with {{Skill|Dragon Leap}} helping you move away from a fight and repositioning. With {{Skill|Hard to Catch}}, you also get higher resistances and CC resistance. You can also use the ability to pull enemies along and out of position in case you caught a healer in the frontline for example.\n\n{{Skill|Hundred Striking Fists}} — Use this ability whenever you find the chance to push alongside your frontline tanks as it creates a cone in front of you dealing damage over time to eveyone caught in it. You can move the direction of the cone by moving your mouse as well! Once the channel ends, enemies that were caught in the attack take extra burst damage based on how many hits they took initially (up to 10 stacks).\n\n{{Skill|Hard to Catch}} — This passive offers you extra resistance when you use {{Skill|Triple Kick}} and helps a lot with your overall survival.\n\n\n==={{Item|Elder's Hellion Jacket|45}}===\n{{Skill|Life Steal Aura}} — Because of your role as a melee DPS, you will always find yourself being at the front of your zerg in an attempt to position for a good {{Skill|Infernal Boulder}}. {{Skill|Life Steal Aura}} will heal you based on how many enemies you hit with the ability and that for you should always try to touch as many as possible!\n\n{{Skill|Balanced Mind}} — This passive not only increases your damage but also your defense and is a good choice for DPS players.\n\n\n==={{Item|Elder's Assassin Hood|45}}===\n{{Skill|Meditation}} — The main use of this ability is to restart the cooldowns of your rotation and repeat it providing another opportunity to deal damage. Try to be safe when using this as it locks you in place in a rather long channel time.\n\n{{Skill|Balanced Mind}} — This passive not only boosts your damage but also enhances your defense.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — {{Skill|Hundred Striking Fists}} damage is highly increased by this run ability but you should be careful as the damage increase comes at the cost of a decrease in defense.\n\n{{Skill|Aggression}} — Aggression provides flat extra damage which is exactly what you need.\n\n\n==={{Item|Elder's Martlock Cape|45}}===\n{{Skill|Shield of Protection}} — Keep in mind that it only activates when you HP drops to below 25% so make sure to keep track of it when losing HP in engagements so you don't waste the cooldown or push deep into the enemy zerg without knowing you are missing this important ability.\n\n\n==Rotations==\n{{Rotation|Bomb Rotation + Retreat|Defenseless Rush, Hundred Striking Fists, Triple Kick, Dragon Leap, Meditation}}\n*Use {{Skill|Defenseless Rush}} to get closer to the enemy zerg while running alongside your frontline tanks. Once you've made it past their aggressive tanks, start casting your {{Skill|Hundred Striking Fists}} so you catch as much of the enemy team as possible. The more hits you make on targets, the higher your damage is when the cast of {{Skill|Hundred Striking Fists}} ends. You can then use {{Skill|Triple Kick}} and {{Skill|Dragon Leap}} to either advance deeper into the enemy zerg for a new position or retreat. Only use {{Skill|Meditation}} once you are in the safety of your team. \n\nThis rotation and approach works much better from defensive positions as the wide range of {{Skill|Hundred Striking Fists}} can be used over walls and you remain safe throughout the whole cast instead of being exposed.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — While this is normally used whenever you need to stay alive during fights or you are out of position and trying to get away... The channel duration of {{Skill|Hundred Striking Fists}} leaves you vulnerable for a long time so you can use the potion before using {{Skill|Hundred Striking Fists}} so you minimize the damage taken.\n\n{{Item|Beef Stew}} — Beef Stew significantly boosts your damage output. Always bring atleast a 8.1 version of it or even push for 8.2 as the damage increase is worth the extra cost.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7657": {
+     "ns": 0,
+     "pageid": 7657,
+     "revisions": [
+      {
+       "parentid": 8089,
+       "revid": 9009,
+       "timestamp": "2025-04-01T23:29:34Z"
+      }
+     ],
+     "title": "Ursine Maulers ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

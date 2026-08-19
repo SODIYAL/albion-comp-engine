@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "War_Gloves_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7656,
+   "revid": 9004,
+   "title": "Fists of Avalon ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = War Gloves\n| mode = ZvZ\n| focus = Melee DPS\n| strengths = High AoE Burst, Good Self-Healing, Good 1vs1\n| weaknesses = High Skill Ceiling, Expensive\n}}\n==Overview==\nThis {{Item|Elder's Fists of Avalon}} ZvZ PvP build prioritizes delivering high burst AoE damage and incredible mobility, allowing you to move across the battlefield with ease and find clumps to deliver damage even deep into the enemy backline. The build remains very satisfying and can be an enjoyable challenge to master even though the price of the {{Item|Elder's Fists of Avalon}} remains high.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Fists of Avalon\n| main hand weapon skills = Dragon Leap, Triple Kick, Purifying Combination, Hard to Catch\n| head = Elder's Assassin Hood\n| head skills = Meditation, Balanced Mind\n| cape = Elder's Martlock Cape\n| cape skills = Shield of Protection\n| armor = Elder's Jacket of Tenacity\n| armor alternatives = Elder's Hellion Jacket\n| armor skills = Dynamic Defense, Balanced Mind\n| shoes = Elder's Royal Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Beef Stew\n| food alternatives = Deadwater Eel Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Fists of Avalon|45}}===\n{{Skill|Dragon Leap}} — This is one of your two movement abilities. With a very short cooldown, {{Skill|Dragon Leap}} can be used a lot to gain distance from enemies or to chase down fleeing players. If you manage to kick at least one enemy, then you can recast the ability with the same 2.5m range and the target hit will be knocked into the air for 0.5s. \n\n{{Skill|Triple Kick}} — This is your secondary movement ability and couples perfectly with {{Skill|Dragon Leap}} helping you move away from a fight and repositioning. With {{Skill|Hard to Catch}}, you also get higher resistances and CC resistance, it should be used to keep yourself out of danger.\n\nYou can use this ability to also drag enemies into your group as it drags enemies hit to wherever you land at the end of the skill.\n\n{{Skill|Purifying Combination}} — This ability has 2 parts. The initial cast allows you to leap to a location and throw enemies hit into the air. The second cast will create an explosion in a line outwards from the character and in any direction you want. All enemies caught in the explosion will take high damage and you should always hit the same enemies you've thrown into the air.\n\n{{Skill|Hard to Catch}} — This passive offers you extra resistance when you use {{Skill|Triple Kick}} and helps a lot with your overall survival.\n\n\n==={{Item|Elder's Jacket of Tenacity|45}}===\n{{Skill|Dynamic Defense}} — One of the most interesting skills in the game, this allows you to switch up your resistance on the go. You use this and target someone (can be enemy or friendly). Then based on what weapon they wield, your damage and resistance will increase accordingly. Magical weapons will increase your magic resistance while physical weapons increase your armor. Because of {{Skill|Purifying Combination}} being a physical skill, you want to always use this on physical weapon users.\n\n{{Skill|Balanced Mind}} — This passive not only increases both your damage and healing but also your defense and is a standard choice for DPS players.\n\n\n==={{Item|Elder's Assassin Hood|45}}===\n{{Skill|Meditation}} — Use this after first using your rotation, it allows you to restart all your abilities and repeat the rotation again, giving you another chance to use {{Skill|Purifying Combination}}.\n\n{{Skill|Balanced Mind}} — This passive not only boosts your damage but also enhances your defense.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — This ability boosts all damage by 15% but also lowering your defense when you use it. You want to use this ability before engaging the enemy zerg or while you're repositioning and preparing to use {{Skill|Purifying Combination}}.\n\n{{Skill|Aggression}} — Aggression provides flat extra damage which is exactly what you need for this build while the other three options are worthless to you.\n\n\n==={{Item|Elder's Martlock Cape|45}}===\n{{Skill|Shield of Protection}} — This will save you a lot of the time when you are overextending or caught by enemies while your team already retreated. As you don't need a lot of mana and you shouldn't have any mana issues, {{Item|Elder's Martlock Cape}} is a great choice. Keep in mind that it only activates when you HP drops to below 25% so you should make sure you stay above that in order to not activate it without a reason.\n\n\n==Rotations==\n{{Rotation|Bomb Rotation + Retreat|Defenseless Rush, Dynamic Defense, Purifying Combination, Triple Kick, Dragon Leap, Meditation}}\n*The damage rotation is quite simple. Use {{Skill|Defenseless Rush}} to get closer to the enemy zerg. Try to always look past the enemy tanks as your damage won't do much against them but you can use them for your cast of {{Skill|Dynamic Defense}} that will increase your physical damage. After that, find the range enemies that are overextending or those caught by a friendly {{Item|Elder's Hand of Justice}}. You want to use first part of {{Skill|Purifying Combination}} to chain the CC on enemies by putting them up in the air before using the second cast to damage them. Retreat using {{Skill|Triple Kick}} and {{Skill|Dragon Leap}} and position yourself behind your frontline so you can safely cast {{Skill|Meditation}} and do it again.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Use this to minimize damage taken during zerg pushes that went badly or when you are separated from your healers!\n\n{{Item|Beef Stew}} — Beef Stew significantly boosts your damage output, making it a top choice for all DPS builds and one of the standard choices when using {{Item|Elder's Fists of Avalon}}. Always try to bring atleast one 8.1 or 8.2 version of this. Another option would be {{Item|Deadwater Eel Stew}} that combines the effect of {{Item|Beef Stew}} and {{Item|Pork Omelette}} and is another popular choice but it remains considerably more expensive \n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7656": {
+     "ns": 0,
+     "pageid": 7656,
+     "revisions": [
+      {
+       "parentid": 8185,
+       "revid": 9004,
+       "timestamp": "2025-04-01T23:29:17Z"
+      }
+     ],
+     "title": "Fists of Avalon ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

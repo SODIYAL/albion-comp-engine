@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Holy_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Healer_builds",
+     "sortkey": "Healer"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7641,
+   "revid": 8979,
+   "title": "Fallen Staff ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Holy Staff\n| mode = ZvZ\n| focus = Healer\n| strengths = Always need a few per zerg\n| weaknesses = Totally dependent on zerg, Timing and positioning is very important\n}}\n==Overview==\nThis Fallen Staff ZvZ PvP build focuses on healing and supporting your zerg during engagements, especially effective with skills like {{Skill|Salvation}} for cleansing and healing. It also includes {{Skill|Displacement Immunity}} which is highly desired in almost all zerg compositions.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Fallen Staff\n| main hand weapon skills = Holy Flash, Holy Orb, Salvation, Adrenaline Driven Charity\n| head = Elder's Knight Helmet\n| head alternatives = Elder's Cleric Cowl\n| head skills = Displacement Immunity, Toughness\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Cleric Robe\n| armor skills = Everlasting Spirit, Aggression\n| shoes = Elder's Scholar Sandals\n| shoes skills = Focused Run, Aggression\n| potion = Major Resistance Potion\n| food = Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Fallen Staff|45}}===\n{{Skill|Holy Flash}} — Use this versatile healing skill to restore up to 5 party members' health, prioritizing those not at full health. Ensure to promptly heal your tanks when they return to the zerg.\n\n{{Skill|Holy Orb}} — Utilize this effective AOE skill to heal up to 10 nearby allies, centered around the initial target struck. Its extensive range allows for creative usage, including healing through obstacles like walls.\n\n{{Skill|Salvation}} — This skill not only provides substantial healing but also removes any CC effects from affected allies upon activation. This feature is invaluable for rescuing groups of CC'd allies, potentially turning the tide of battle in your favor when timed correctly. However, it's essential to note that the skill has a cast time, making you vulnerable to being interrupted, and a 2-second delay before it takes effect. Thus, precise timing and prediction of allies' movements are crucial for optimal use.\n\n{{Skill|Adrenaline Driven Charity}} — Timing the use of this passive ability will significantly boost the healing of your other healing spells. However, it's not always necessary to line it up perfectly.\n\n\n==={{Item|Elder's Cleric Robe|45}}===\n{{Skill|Everlasting Spirit}} — Activating this skill grants you a shield that renders you immune to damage for 3 seconds if you're hit within the next 1.5 seconds. The challenge lies in triggering the shield by taking damage. The optimal timing for activation is just before taking significant damage spikes. There exist various strategies to preemptively trigger it before encountering more formidable attacks, such as area of effect attacks, frequently ensuring your survival. While opponents could wait out the 1.5-second window to negate the 3-second immunity, such deliberate actions are rare during the chaos of ZvZ.\n\n{{Skill|Aggression}} — An 8% increase in healing across all your spells holds significant value, surpassing the importance of cast time for this particular weapon.\n\n\n==={{Item|Elder's Knight Helmet|45}}===\n{{Skill|Displacement Immunity}} — The crowd control immunity from this skill proves its worth when the enemy tries to disrupt your zerg or block your path. Your shotcaller might instruct you to use it at a specific time. Always keep your zerg in mind when using it, since it can help both in offense and defense. You could also go for a Cleric Cowl with {{Skill|Ice Block}}, which gives you a good defensive option, but it won't do as much for your zerg, even if it keeps you alive.\n\n{{Skill|Toughness}} — It's always beneficial to have, especially since your defensive stats as a healer are typically quite low.\n\n\n==={{Item|Elder's Scholar Sandals|45}}===\n{{Skill|Focused Run}} — The stun immunity provided by this skill is incredibly useful, allowing you to escape from risky situations. Additionally, don't hesitate to use it to replenish your mana if the fight drags on and you're not in danger of being CC'd.\n\n{{Skill|Aggression}} — Even more healing for all your abilities. You can swap this for {{Skill|Courier}} to assist your zerg in transporting loot, but it's strongly discouraged to engage in looting as a healer if the fight hasn't entirely concluded.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — This cape provides a reliable and passive means of sustaining your mana. When equipped, you generally won't run into issues with mana. However, it's crucial to be mindful of its cooldown during extended fights, particularly if your {{Skill|Energy Reserve}} is on cooldown.\n\n\n==Rotations==\n{{Rotation|Disengage|Holy Flash, Holy Orb, Holy Flash, Salvation,Holy Flash}}\n*With this rotation you wait after you use your second {{Skill|Holy Flash}} to use {{Skill|Salvation}} while {{Skill|Adrenaline Driven Charity}} is active. Cleanse and heal up any clump or concentration of allies. The biggest mistake is leaving your allies behind and running too far away even if your {{Skill|Holy Orb}} can reach them. You need vision and a general understanding of the situation to use {{Skill|Salvation}} to its fullest potential and you should also look for opportunities to use {{Skill|Displacement Immunity}} which will help you and your allies not get caught while your zerg's defensive tanks try to peel for your zerg.\n\n{{Rotation|Choke pushing|Displacement Immunity, Everlasting Spirit, Focused Run, Salvation}}\n*In this situation we assume you need to get through a heavily contested choke and another zerg is flanking you. You need to run through and as soon as you are past the chokepoint you should walk to the sides to minimize the chance of getting caught by any kind of CC. When you are past the choke and you should try to use {{Skill|Salvation}} on any allies that are actively moving through it since that will also cleanse any possible CC and keep them healthy. Be aware that you can be interrupted and try to not get cut off from your zerg because a healer cant fight anyone on its own.\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Provides significantly higher resistance to all crowd control (CC) and damage, so ideally, you'd want to activate it just before taking damage or getting CC'd. While the 7.1 version offers significant benefits if you have the extra silver to spend, it isn't essential.\n\n{{Item|Pork Omelette}} — This omelette, often in its higher enchantments, will be the sole food you'll ever need for this build. The cooldown reduction it offers is incredibly beneficial, so it's essential to always have a pork omelette active while healing.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7641": {
+     "ns": 0,
+     "pageid": 7641,
+     "revisions": [
+      {
+       "parentid": 7952,
+       "revid": 8979,
+       "timestamp": "2025-04-01T23:24:44Z"
+      }
+     ],
+     "title": "Fallen Staff ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

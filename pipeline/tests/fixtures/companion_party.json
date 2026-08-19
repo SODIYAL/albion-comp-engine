@@ -1,0 +1,29 @@
+{
+  "_comment": "Checked-in fixture: a companion /party response (companion/README.md shape) for offline tests of loadout-observation normalization. Names are synthetic.",
+  "observed": "2026-08-14T21:03:00Z",
+  "members": [
+    {
+      "name": "TestCaller",
+      "guild": "UNIT",
+      "weapon": "2H_MACE_MORGANA",
+      "ip": 1387,
+      "spells": {"q": "IRONBREAKER", "w": "SEISMIC_SLAM", "e": "CAMLANN_MACE_BANISH"},
+      "equipment": {"head": "T8_HEAD_PLATE_SET2@1", "armor": "T8_ARMOR_PLATE_KEEPER@2"}
+    },
+    {
+      "name": "TestHealer",
+      "guild": "UNIT",
+      "weapon": "MAIN_HOLYSTAFF_AVALON",
+      "ip": 1350,
+      "spells": {"q": "HOLYFLASH", "w": "CELESTIAL_SPHERE", "e": "HOLYSTAFF_AVALON_E", "passive": "PASSIVE_HEALINGWIND"},
+      "equipment": {}
+    },
+    {
+      "name": "OutOfZone",
+      "guild": "UNIT",
+      "weapon": null,
+      "spells": {},
+      "equipment": {}
+    }
+  ]
+}

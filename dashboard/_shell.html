@@ -381,6 +381,24 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 }
 .slot.more::after{display:none}
 
+/* duplicate-interaction notices (PvP interaction layer) */
+.slot.inote{
+  display:block; font-size:12px; line-height:1.5; padding:7px 11px;
+  color:var(--ink-2); border-style:dashed;
+}
+.slot.inote::after{display:none}
+.slot.inote .fn{display:block}
+.slot.int-high b{color:var(--bad)}
+.slot.int-warning b{color:var(--amber)}
+.slot.int-info b,.slot.int-verify b{color:var(--ink-2)}
+/* dossier PvP-interaction rows + badges + utility filter chips */
+.int-row{margin:0 0 10px; font-size:12.5px}
+.int-row .bdg.b-int{color:var(--brass); cursor:default}
+.int-comps{margin-top:3px}
+.int-comps li{font-size:11.5px; color:var(--ink-2)}
+.int-comps i{color:var(--ink-3)}
+.pchip.u-chip{color:var(--brass)}
+
 /* ---------- weapon picker ---------- */
 .pick-grid{display:flex; flex-direction:column; gap:3px}
 .pick{

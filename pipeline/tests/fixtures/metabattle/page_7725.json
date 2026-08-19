@@ -1,0 +1,45 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Bow_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Range_DPS_builds",
+     "sortkey": "Range DPS"
+    },
+    {
+     "*": "ZvZ_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7725,
+   "revid": 8930,
+   "title": "Wailing Bow ZvZ PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Bow\n| mode = ZvZ\n| focus = Range DPS\n| strengths = Great Burst, Easy to Play\n| weaknesses = High Skill Ceiling\n}}\n==Overview==\nThis build focuses on the high damage of the {{Skill|Demon Arrow}} and performs very well in defensive positions such as territories or in less coordinated ZvZ fights like the faction warfare. The {{Item|Elder's Wailing Bow}} remains one of the easier weapons to use as the {{Skill|Demon Arrow}} can be shot and forgotten about, allowing you plenty of time to reposition.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Wailing Bow\n| main hand weapon skills = Multishot, Ray of Light, Demon Arrow, Slow Poison\n| head = Elder's Cowl of Purity\n| head skills = Avalonian Beam, Aggression\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Hunter Jacket\n| armor skills = Haste, Balanced Mind\n| shoes = Elder's Royal Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Gigantify Potion\n| food = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Wailing Bow|45}}===\n{{Skill|Multishot}} — This AOE knockback is a great choice as it hits multiple targets and pushes them away while also interrupting them. You can use this over walls in order to disrupt enemies when given the chance.\n\n{{Skill|Ray of Light}} — You want to use this to setup your kills and to help your team. This ability will root all enemies and can be very useful for both yourself and your team as it forces defensive CDs off your enemies. Rooting remains very important and can setup a lot of kills, especially if you manage to hit the {{Skill|Ray of Light}} on clumps made by your tanks.\n\n{{Skill|Demon Arrow}} — This ability will do more damage depending on how many targets it has gone through. While the initial damage on the first targets hit will be quite low, the more targets you hit, the more damage the skill does. You should always try to anticipate enemy pushes and use this skill as the enemies push in, forcing them to take damage.\n\n{{Skill|Slow Poison}} — Each auto-attack will slow the enemy. This will help chase enemies after winning fights but otherwise you don't have other good options for the passive skill.\n\n\n==={{Item|Elder's Hunter Jacket|45}}===\n{{Skill|Haste}} — You want to use this in combination with {{Skill|Defenseless Rush}} for a total of 40% damage increase. The auto-attack speed increase is irrelevant as you shouldn't be auto-attacking anyway but your {{Skill|Demon Arrow}} still benefits from this high increase.\n\n{{Skill|Balanced Mind}} — Another passive that increases your damage and even increases your defense by a little bit.\n\n\n==={{Item|Elder's Cowl of Purity|45}}===\n{{Skill|Avalonian Beam}} — Use this to deliver a quick burst of damage and interrupt spellcasting. As the beam travels a lot like the {{Skill|Demon Arrow}} but with a much lower range. You should use this in the same way on chokepoints where enemies clump up or on top of enemies caught by your offensive tanks.\n\n{{Skill|Aggression}} — This passive increases your damage which is perfect for the build.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — A good damage increase on demand, great for increasing the damage of all your skills but most importantly increasing the damage you do with {{Skill|Avalonian Beam}} and {{Skill|Demon Arrow}}. Your defenses will also be decreased by this so keep that in mind that you will be a bit squishier for the duration of the {{Skill|Defenseless Rush}}.\n\n{{Skill|Aggression}} — This increases your damage even further.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — As the build can be rather mana intensive, this will help a lot with mana sustain as it triggers once your mana falls below 40% and it restores 80% of your total mana. Another option would be using the {{Item|Elder's Martlock Cape}} to help with your defense but you should be dead if you get caught anyway. \n\n\n==Rotations==\n{{Rotation|Burst Damage|Defenseless Rush, Haste, Ray of Light, Avalonian Beam, Demon Arrow}}\n* Keep in mind that you can easily use {{Skill|Demon Arrow}} on its own if you saw an opportunity to do so or your pre-buffs are on cooldown, it is more important for you to catch as many enemies as possible but the best is to also pre-buff before using your {{Skill|Demon Arrow}}.\n\n* Your pre-buffs are {{Skill|Defenseless Rush}} and {{Skill|Haste}} in order to boost all your damage by 40% as you look for a clump to use {{Skill|Ray of Light}} on, this will make it easier for you to land {{Skill|Avalonian Beam}}. While this could be a combo in itself, you should look to always follow with {{Skill|Demon Arrow}} and make sure that the arrow flies into as many enemies as possible.\n\n\n==Consumables==\n{{Item|Major Gigantify Potion}} — Use this as your defensive, pop it if you see enemies trying to catch you or if you are caught out of position during an enemy push.\n\n{{Item|Beef Stew}} — As damage is the most important part of this build, you want to use the {{Item|Beef Stew}} to improve that. Try to use an 8.1 or 8.2 if you can afford it!\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7725": {
+     "ns": 0,
+     "pageid": 7725,
+     "revisions": [
+      {
+       "parentid": 8388,
+       "revid": 8930,
+       "timestamp": "2025-04-01T23:18:17Z"
+      }
+     ],
+     "title": "Wailing Bow ZvZ PvP Build"
+    }
+   }
+  }
+ }
+}

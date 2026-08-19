@@ -1,0 +1,403 @@
+{
+ "_meta": {
+  "adapter": "build_interactions",
+  "adapter_version": "1",
+  "entries": 9,
+  "note": "Spell-keyed PvP interaction records. Scoring reads ONLY verified nonstacking_caps; everything else is display/analysis. unknown is a stored answer, never a guess.",
+  "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+  "structural_unclaimed": [
+   "ENFEEBLEBLADES",
+   "EXPLODING_SHOT",
+   "FIREARTILLERY",
+   "FIRESTAFFBOLT_AOE",
+   "FIREWALL",
+   "FLAMETORNADO",
+   "GLACIALFIELD",
+   "GROUNDMINE",
+   "GROWING_PUNCH",
+   "HELL_ARROW",
+   "HUMAN_TORCH",
+   "ICEROCK_EXPLODE",
+   "ICESTORM2",
+   "MAGMASPHERE",
+   "METEOR",
+   "QS_CRYSTAL_COMBO",
+   "SHAPE_W_DAMAGE_AOE",
+   "SKULLCURSE",
+   "THORNSAREA"
+  ],
+  "verified": 8,
+  "with_nonstacking_caps": 0
+ },
+ "spells": {
+  "BLACKHOLE": {
+   "as_of": "2026-08-19",
+   "badges": [
+    "PULL",
+    "SLOW",
+    "DUPLICATE:FULL"
+   ],
+   "cc_types": [
+    "pull",
+    "slow"
+   ],
+   "components": [
+    {
+     "cc_type": "pull",
+     "cleanse": "unknown",
+     "duplicate": "full",
+     "id": "pull",
+     "kind": "cc"
+    },
+    {
+     "duplicate": "full",
+     "id": "damage",
+     "kind": "damage",
+     "reflect": "unknown"
+    },
+    {
+     "cc_type": "slow",
+     "cleanse": "unknown",
+     "duplicate": "unknown",
+     "id": "slow",
+     "kind": "cc"
+    }
+   ],
+   "confidence": "likely",
+   "duplicate": "full",
+   "effect_name": "Black Hole (pull + damage + slow)",
+   "name": "Black Hole",
+   "nonstacking_caps": [],
+   "notes": null,
+   "reflect": "unknown",
+   "scoring_note": null,
+   "source": "Spell description @ ao-bin-dumps 5cf2e8e9 states pull, damage and slow; nothing about reflect or duplicate behavior. Two black holes are two ground zones (baseline behavior) \u2014 likely full, not verified.",
+   "structural_reflect_statements": [],
+   "verified_patch": "2026-07-21",
+   "weapons": [
+    "MAIN_ARCANESTAFF_UNDEAD"
+   ]
+  },
+  "DEATHCURSE2": {
+   "as_of": "2026-08-19",
+   "badges": [
+    "CURSE CHARGES",
+    "NON-REFLECTABLE",
+    "DUPLICATE:SHARED_STACK"
+   ],
+   "cc_types": [],
+   "components": [
+    {
+     "duplicate": "full",
+     "id": "delayed_damage",
+     "kind": "damage",
+     "reflect": "non_reflectable"
+    },
+    {
+     "cleanse": "unknown",
+     "duplicate": "shared_stack",
+     "id": "charge_consumption",
+     "kind": "debuff",
+     "reflect": "not_applicable"
+    }
+   ],
+   "confidence": "verified",
+   "duplicate": "shared_stack",
+   "effect_name": "Death Curse (consumes shared Vile Curse Charges)",
+   "name": "Death Curse",
+   "nonstacking_caps": [],
+   "notes": null,
+   "reflect": "non_reflectable",
+   "scoring_note": null,
+   "source": "Spell description @ ao-bin-dumps 5cf2e8e9: \"dealing magical damage based on the amount of Vile Curse Charges on the target \u2026 (the damage cannot be reflected)\". Vile Curse Charges are one pool ON THE TARGET that every curse caster feeds \u2014 duplicates accelerate the shared stack (a synergy, not a conflict; each cast's damage is its own instance).",
+   "structural_reflect_statements": [
+    "time$ (the damage cannot be reflected)."
+   ],
+   "verified_patch": "2026-07-21",
+   "weapons": [
+    "MAIN_CURSEDSTAFF"
+   ]
+  },
+  "DYNAMIC_CURSE": {
+   "as_of": "2026-08-19",
+   "badges": [
+    "NON-REFLECTABLE",
+    "DUPLICATE:UNKNOWN"
+   ],
+   "cc_types": [],
+   "components": [
+    {
+     "cleanse": "unknown",
+     "duplicate": "unknown",
+     "id": "shadow_dot",
+     "kind": "dot",
+     "reflect": "non_reflectable"
+    }
+   ],
+   "confidence": "verified",
+   "duplicate": "unknown",
+   "effect_name": "Inner Shadow (armor-class-dependent zone)",
+   "name": "Inner Shadow",
+   "nonstacking_caps": [],
+   "notes": null,
+   "reflect": "non_reflectable",
+   "scoring_note": null,
+   "source": "Spell description @ ao-bin-dumps 5cf2e8e9: per-armor-class duration/ damage, \"(this damage cannot be reflected)\". Whether two Inner Shadows on one target coexist is NOT stated.",
+   "structural_reflect_statements": [
+    "5 (this damage cannot be reflected)."
+   ],
+   "verified_patch": "2026-07-21",
+   "weapons": [
+    "MAIN_CURSEDSTAFF_AVALON"
+   ]
+  },
+  "FIREPHOENIX": {
+   "as_of": "2026-08-19",
+   "badges": [
+    "ANTI-HEAL",
+    "PARTIAL REFLECT",
+    "DUPLICATE:PARTIAL"
+   ],
+   "cc_types": [],
+   "components": [
+    {
+     "duplicate": "full",
+     "id": "initial_hit",
+     "kind": "damage",
+     "reflect": "unknown"
+    },
+    {
+     "duplicate": "full",
+     "id": "burning_ground",
+     "kind": "ground_dot",
+     "notes": "independent ground areas per caster",
+     "reflect": "non_reflectable"
+    },
+    {
+     "cleanse": "unknown",
+     "duplicate": "unknown",
+     "id": "healing_received_cut",
+     "kind": "debuff"
+    }
+   ],
+   "confidence": "verified",
+   "duplicate": "partial",
+   "effect_name": "Flaming Phoenix (hit + burning ground + Healing Received -40%)",
+   "name": "Flaming Phoenix",
+   "nonstacking_caps": [],
+   "notes": null,
+   "reflect": "partial",
+   "scoring_note": null,
+   "source": "Spell description @ ao-bin-dumps 5cf2e8e9: initial 200 damage, ground fire for 6.5 whose ticks \"(this damage cannot be reflected)\", and \"reduces Healing Received by 0.4\". The initial hit's reflectability and the anti-heal's duplicate-caster stacking are NOT stated. The showcase partial-interaction ability: three components, three behaviors.",
+   "structural_reflect_statements": [
+    "5 (this damage cannot be reflected)."
+   ],
+   "verified_patch": "2026-07-21",
+   "weapons": [
+    "2H_FIRE_RINGPAIR_AVALON"
+   ]
+  },
+  "FROST_ULTIMATE": {
+   "as_of": "2026-08-19",
+   "badges": [
+    "STUN",
+    "NON-REFLECTABLE",
+    "DUPLICATE:FULL"
+   ],
+   "cc_types": [
+    "stun"
+   ],
+   "components": [
+    {
+     "cc_type": "stun",
+     "cleanse": "unknown",
+     "duplicate": "full",
+     "id": "stun",
+     "kind": "cc",
+     "reflect": "not_applicable"
+    },
+    {
+     "duplicate": "full",
+     "id": "explosion",
+     "kind": "damage",
+     "reflect": "non_reflectable"
+    }
+   ],
+   "confidence": "verified",
+   "duplicate": "full",
+   "effect_name": "Ice Crystal (stun + explosion)",
+   "name": "Ice Crystal",
+   "nonstacking_caps": [],
+   "notes": null,
+   "reflect": "non_reflectable",
+   "scoring_note": null,
+   "source": "Spell description @ ao-bin-dumps 5cf2e8e9: stun 1s, then explosion \"(the damage can't be reflected)\". Two casters place two independent crystals (ground zones) \u2014 full duplicate value for damage and control; stun diminishing-returns interaction is not stated.",
+   "structural_reflect_statements": [
+    "radius_max$ radius (the damage can't be reflected)."
+   ],
+   "verified_patch": "2026-07-21",
+   "weapons": [
+    "2H_ICECRYSTAL_UNDEAD"
+   ]
+  },
+  "LETHAL_CLEAVER": {
+   "as_of": "2026-08-19",
+   "badges": [
+    "MAX-HP CUT",
+    "DISPLACEMENT",
+    "KNOCKUP",
+    "DUPLICATE:PARTIAL"
+   ],
+   "cc_types": [
+    "knockup"
+   ],
+   "components": [
+    {
+     "duplicate": "full",
+     "id": "initial_hit",
+     "kind": "damage",
+     "notes": "independent damage instances per caster (baseline behavior \u2014 likely)",
+     "reflect": "unknown"
+    },
+    {
+     "cc_type": "knockup",
+     "cleanse": "unknown",
+     "duplicate": "full",
+     "id": "cone_throw_up",
+     "kind": "cc"
+    },
+    {
+     "cleanse": "unknown",
+     "duplicate": "unknown",
+     "id": "hp_cut",
+     "kind": "debuff",
+     "notes": "Named effect distinct from Incubus Mace's Shrinking Curse \u2014 two different named max-HP effects coexist and are never auto-merged.\n"
+    }
+   ],
+   "confidence": "verified",
+   "duplicate": "partial",
+   "effect_name": "Aftershock (max & current Health -15%)",
+   "name": "Aftershock",
+   "nonstacking_caps": [],
+   "notes": null,
+   "reflect": "unknown",
+   "scoring_note": null,
+   "source": "Spell description @ ao-bin-dumps 5cf2e8e9: leap + AoE hit, cone throw-up, \"Decreases Max and current Health by 0.15 for 5.\" Whether two casters' Aftershock cuts stack is NOT stated \u2014 unknown, not assumed.",
+   "structural_reflect_statements": [],
+   "verified_patch": "2026-07-21",
+   "weapons": [
+    "2H_AXE_AVALON"
+   ]
+  },
+  "LIGHTNING_ARROW": {
+   "as_of": "2026-08-19",
+   "badges": [
+    "NON-REFLECTABLE",
+    "DUPLICATE:FULL"
+   ],
+   "cc_types": [],
+   "components": [
+    {
+     "duplicate": "full",
+     "id": "storm_zone",
+     "kind": "ground_dot",
+     "reflect": "non_reflectable"
+    },
+    {
+     "cleanse": "unknown",
+     "duplicate": "full",
+     "id": "lingering_dot",
+     "kind": "dot",
+     "reflect": "non_reflectable"
+    }
+   ],
+   "confidence": "verified",
+   "duplicate": "full",
+   "effect_name": "Raging Storm (stormcloud zone)",
+   "name": "Raging Storm",
+   "nonstacking_caps": [],
+   "notes": null,
+   "reflect": "non_reflectable",
+   "scoring_note": null,
+   "source": "Spell description @ ao-bin-dumps 5cf2e8e9: stormcloud DoT \"(this damage cannot be reflected)\" + lingering damage on enemies leaving the area. Independent zones per caster.",
+   "structural_reflect_statements": [
+    "3 (this damage cannot be reflected)."
+   ],
+   "verified_patch": "2026-07-21",
+   "weapons": [
+    "2H_BOW_KEEPER"
+   ]
+  },
+  "SHRINKINGSMASH": {
+   "as_of": "2026-08-19",
+   "badges": [
+    "MAX-HP CUT",
+    "ANTI-HEAL",
+    "DAMAGE CUT",
+    "DUPLICATE:PARTIAL"
+   ],
+   "cc_types": [],
+   "components": [
+    {
+     "duplicate": "full",
+     "id": "smash_damage",
+     "kind": "damage",
+     "reflect": "unknown"
+    },
+    {
+     "cleanse": "unknown",
+     "duplicate": "unknown",
+     "id": "shrinking_curse",
+     "kind": "debuff",
+     "notes": "distinct named effect from Aftershock's HP cut \u2014 they coexist"
+    }
+   ],
+   "confidence": "verified",
+   "duplicate": "partial",
+   "effect_name": "Shrinking Curse (max & current Health, damage, Healing Cast -40%)",
+   "name": "Shrinking Curse",
+   "nonstacking_caps": [],
+   "notes": null,
+   "reflect": "unknown",
+   "scoring_note": null,
+   "source": "Spell description @ ao-bin-dumps 5cf2e8e9: \"decreasing max and current Health of all enemies hit by 0.4 and their damage dealt and Healing Cast by 0.4 for 8.\" Duplicate-caster stacking of the named debuff is NOT stated \u2014 unknown.",
+   "structural_reflect_statements": [],
+   "verified_patch": "2026-07-21",
+   "weapons": [
+    "MAIN_MACE_HELL"
+   ]
+  },
+  "SPEEDARCHER_KITE": {
+   "as_of": "2026-08-19",
+   "badges": [
+    "SELF-BUFF",
+    "DUPLICATE:FULL"
+   ],
+   "cc_types": [],
+   "components": [
+    {
+     "cleanse": "not_applicable",
+     "duplicate": "full",
+     "id": "arrow_enchant",
+     "kind": "buff",
+     "purge": "unknown",
+     "reflect": "not_applicable"
+    }
+   ],
+   "confidence": "verified",
+   "duplicate": "full",
+   "effect_name": "Enchanted Quiver (self arrow enchant)",
+   "name": "Enchanted Quiver",
+   "nonstacking_caps": [],
+   "notes": null,
+   "reflect": "not_applicable",
+   "scoring_note": null,
+   "source": "Spell description @ ao-bin-dumps 5cf2e8e9: \"Enchant 4 of YOUR arrows \u2026 YOUR Auto-Attack Speed / physical Auto-Attack damage\" \u2014 a self-targeted buff; each caster enchants their own arrows, so duplicates are fully independent. (Corrects the stale community example of a shared resistance-reduction Quiver \u2014 no such component exists in current data.)",
+   "structural_reflect_statements": [],
+   "verified_patch": "2026-07-21",
+   "weapons": [
+    "2H_BOW"
+   ]
+  }
+ }
+}
