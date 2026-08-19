@@ -91,6 +91,10 @@ const capsOf = w => WEAPONS[w].capabilities || {};
 /* one home for the role-hint default and the below-floor predicate — the
    latter delegates to the engine so display can never disagree with scoring */
 const roleHint = w => WEAPONS[w].role_hint || "other";
+/* roster role order — tanks first, then supports, damage (melee, range),
+   healers: the order real caller sheets read in (Timothy's blap, the
+   Deadlyhooker parties). Applied when a forge completes. */
+const ROLE_SORT = { tank: 0, support: 1, melee: 2, range: 3, healer: 4 };
 const floorHit = (cap, have) => ENG.floorArmed(cap, have);
 function roleCounts(){
   const counts = {};
@@ -1246,16 +1250,20 @@ document.addEventListener("click", e => {
     loadoutInsert(party.length - 1);   /* prefill from the caller reference */
     PARTY_FACET = null;   /* the new member must be visible */
     render(); } return; }
-  const forgeBtn = e.target.closest("#forge") || e.target.closest("#reforge");
+  const forgeBtn = e.target.closest("#forge") || e.target.closest("#reforge")
+                || e.target.closest("#forge-rail");
   if (forgeBtn){
     /* Deterministic constrained beam search in the engine (2026-08-18) —
        greedy top-1 append + a 1-opt pass used to force-fill negative-value
        bodies and treated every forged slot as manual afterwards.
        "forge the rest" locks every current member; "reforge all" keeps
        only the manual/live slots and rebuilds the rest for the CURRENT
-       content, style and size. */
-    const reforgeAll = forgeBtn.id === "reforge";
+       content, style and size. The rail's "forge full comp" fills open
+       slots, and on a fully forged roster acts as a reforge. */
     const goal = Math.min(SIZE, HARD_CAP);
+    const reforgeAll = forgeBtn.id === "reforge"
+      || (forgeBtn.id === "forge-rail" && party.length >= goal
+          && PROV.some(x => x === "f"));
     const keep = party.map((_, i) => i)
       .filter(i => reforgeAll ? PROV[i] !== "f" : true);
     const locked = keep.map(i => party[i]);
@@ -1281,7 +1289,25 @@ document.addEventListener("click", e => {
       loadoutPrefillGear(i);
       loadoutApplySpells(i, r.combos[i]);
     }
-    FORGE_NOTE = { feasible: r.feasible, filler: r.filler, held: r.held };
+    /* Organize the forged roster by role — tanks, supports, damage (melee,
+       range), healers — the order caller sheets read in. One stable
+       permutation over ALL parallel slot state; scoring, permalinks and
+       codecs are order-independent, so only the presentation changes. The
+       forge note's slot indexes are remapped through the same permutation. */
+    const order = party.map((_, i) => i).sort((a, b) => {
+      const ra = ROLE_SORT[roleHint(party[a])];
+      const rb = ROLE_SORT[roleHint(party[b])];
+      return (ra === undefined ? 9 : ra) - (rb === undefined ? 9 : rb)
+             || a - b;
+    });
+    party = order.map(i => party[i]);
+    PROV = order.map(i => PROV[i]);
+    COMBO = order.map(i => COMBO[i]);
+    LOADOUT = order.map(i => LOADOUT[i]);
+    const remap = idxs => (idxs || []).map(x => order.indexOf(x))
+      .sort((a, b) => a - b);
+    FORGE_NOTE = { feasible: r.feasible, filler: remap(r.filler),
+                   held: remap(r.held) };
     LO_OPEN = null; LO_PICKING = null;
     PARTY_FACET = null;   /* show the whole forged comp, not a filtered view */
     render();

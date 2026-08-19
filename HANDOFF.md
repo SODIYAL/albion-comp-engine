@@ -101,6 +101,18 @@ Two defects from the owner's chapter-2 review, both verified then fixed:
   defaults 46 -> 45 (blackzone Locus now has none — basis
   "no non-quarantined record"). New H8 assertions pin both.
 
+## Session 2026-08-19 (UX) — rail forge button, role-ordered rosters
+
+- The setup rail gained **"forge full comp"** (`#forge-rail`): fills every
+  open slot like the next-pick bar's forge; on a fully forged roster it
+  acts as a reforge. Same handler, same engine call.
+- A completed forge now **organizes the roster by role** — tanks,
+  supports, damage (melee, range), healers, the order caller sheets read
+  in (`ROLE_SORT` on `role_hint`). One stable permutation over all
+  parallel slot state (party/PROV/COMBO/LOADOUT) with the forge note's
+  filler/held indexes remapped; scoring, permalinks and codecs are
+  order-independent, so only presentation changes.
+
 ## Session 2026-08-19 (later) — PvP interaction layer ("new prompt")
 
 Spell-keyed PvP interaction records: duplicate semantics, reflect/cleanse/
