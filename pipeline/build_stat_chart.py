@@ -266,12 +266,23 @@ def main():
     extracted = {sid: extract(sid, reg) for sid in spells}
     n_ok = sum(1 for v in extracted.values() if v)
 
-    boards = {}
+    # SPELL-keyed boards (expert correction 2026-08-20): the measurement is
+    # a property of the SPELL — one row per (capability, spell), with every
+    # weapon that cites it listed. Where line-mates score the same spell
+    # differently, the row shows the score SPREAD — that is the drift the
+    # magnitude audit's RULE queue tracks, visible in place.
+    grouped = {}
     for cap, wk, sid, score in rows:
+        g = grouped.setdefault((cap, sid), {"weapons": [], "scores": set()})
+        g["weapons"].append(names.get(wk, wk))
+        g["scores"].add(score)
+    boards = {}
+    for (cap, sid), g in grouped.items():
         val, unit, detail = metric_for(cap, extracted.get(sid))
         boards.setdefault(cap, []).append({
-            "weapon": wk, "display_name": names.get(wk, wk), "spell": sid,
-            "score": score, "value": val, "unit": unit, "detail": detail})
+            "spell": sid, "value": val, "unit": unit, "detail": detail,
+            "weapons": sorted(g["weapons"]),
+            "scores": sorted(g["scores"])})
     for cap in boards:
         boards[cap].sort(key=lambda r: (r["value"] is None,
                                         -(r["value"] or 0)))
@@ -299,6 +310,7 @@ table{border-collapse:collapse;width:100%}
 td,th{padding:3px 10px;text-align:left;border-bottom:1px solid #2a2a2a}
 th{color:#888;font-weight:normal} .n{text-align:right;font-variant-numeric:tabular-nums}
 .s3{color:#f0c674}.s2{color:#8abeb7}.s1{color:#777}
+.drift{color:#cc6666;font-weight:bold}
 .none{color:#555} .d{color:#888;font-size:12px}
 p.note{color:#999;font-size:13px}
 </style>
@@ -313,19 +325,27 @@ stays).</p>"""]
     for cap in sorted(boards):
         rows_c = boards[cap]
         measured = sum(1 for r in rows_c if r["value"] is not None)
-        parts.append(f"<h2>{esc(cap)} <span class='d'>({measured}/{len(rows_c)} measured)</span></h2>")
-        parts.append("<table><tr><th>weapon</th><th>spell</th>"
+        parts.append(f"<h2>{esc(cap)} <span class='d'>({measured}/{len(rows_c)} spells measured)</span></h2>")
+        parts.append("<table><tr><th>spell</th>"
                      "<th class='n'>measured</th><th>unit</th>"
-                     "<th class='n'>curated</th><th>detail</th></tr>")
+                     "<th class='n'>curated</th><th>detail</th>"
+                     "<th>weapons citing it</th></tr>")
         for r in rows_c:
             v = "—" if r["value"] is None else f"{r['value']:g}"
             cls = "none" if r["value"] is None else "n"
+            scores = r["scores"]
+            if len(scores) == 1:
+                sc = f"<span class='s{scores[0]}'>{scores[0]}</span>"
+            else:                          # same spell, different scores: DRIFT
+                sc = ("<span class='drift'>"
+                      + "–".join(str(s) for s in scores) + " drift</span>")
+            weapons = ", ".join(r["weapons"])
             parts.append(
-                f"<tr><td>{esc(r['display_name'])}</td>"
-                f"<td class='d'>{esc(r['spell'])}</td>"
+                f"<tr><td>{esc(r['spell'])}</td>"
                 f"<td class='{cls} n'>{v}</td><td class='d'>{esc(r['unit'])}</td>"
-                f"<td class='n s{r['score']}'>{r['score']}</td>"
-                f"<td class='d'>{esc(r['detail'])}</td></tr>")
+                f"<td class='n'>{sc}</td>"
+                f"<td class='d'>{esc(r['detail'])}</td>"
+                f"<td class='d'>{esc(weapons)}</td></tr>")
         parts.append("</table>")
     out_html = os.path.join(ROOT, "review", "stat_chart.html")
     with open(out_html, "w", encoding="utf-8") as f:
