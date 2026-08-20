@@ -74,6 +74,39 @@ ao-bin-dumps commit, then `fetch_snapshot.py` -> `parse_dumps.py` ->
 Every derived input records its snapshot commit + adapter version in
 `out/source_manifest.json`; `build_dataset.py` fails closed on any mismatch.
 
+## Session 2026-08-20 (the measurement layer) — geometric AoE, MASTERSHEET, 1–7 scale
+
+Read **MASTERSHEET.md first** — it is now the expert's single control
+surface (its `tune:` blocks OVERRIDE scoring/mechanics/templates/sheets at
+build time) and the plain-language map of the whole system. Shipped:
+
+- **Geometric AoE utility** (expert ruling in MECHANICS_TODO): AoE-delivered
+  catch/peel/slow/stun/root/silence/displace scales with min(clump, spell
+  reach)/min(reference_clump 2, reach); per-spell escalation + area facts
+  extracted from dumps (parse_dumps v4, Q8/Q9/Q10 answered). Soulscythe
+  catch 3x Battleaxe at 20+, gap closes small-scale. Golden T18/T18b.
+- **Spell-level sheets**: tree Q/W pools in sheets/pools/ (818 rows hoisted,
+  sheets_lib.py composition, `except:` non-takes, drift kept as overrides).
+- **1–7 grading scale** (bit-identical migration): old 0–3 on the even
+  slots, odd slots for finer rulings, `score_unit: 2` keeps calibration.
+  The 11-question rubric (S1–S8 spell, W1–W3 weapon) is canonical in
+  MASTERSHEET §7; first ruling applied via §6 (Bedrock 6 / Iron-clad 2
+  anti_dive, golden T19).
+- **Stat chart** (`py -3 pipeline/build_stat_chart.py` →
+  review/stat_chart.html): real dump numbers per capability, spell-keyed,
+  typed unit groups, /min throughput (casts/min for displacement), rubric
+  fact lines (persistence/delivery/ignores-CCR/tier-flat), tier lens
+  (IP model ×1.0918 per 100 IP, family AP coefficients), AA-amplifier
+  profile group, drift flags. THE judging instrument for the rescore.
+- **Guild-approved builds** recorded in MASTERSHEET §8 (guideline layer,
+  shipped verbatim in the dataset as `guild_builds`).
+- Fixed pre-existing provenance drift (ba416f2 committed out/ files without
+  re-stamping the manifest) — full adapter chain re-run, release_clean True.
+
+NEXT: the board-by-board 1–7 rescore pass using the chart + rubric
+(rulings → MASTERSHEET §6 + golden pins); then guild-name→id mapping for a
+guild-agreement metric; enabler-value channel; gear sheets (§2.4).
+
 ## Session 2026-08-19 (ability facts) — every effect visible per spell
 
 - **Per-ability detail panel**: click any spell row in the weapon dossier
