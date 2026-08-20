@@ -366,7 +366,7 @@ h1{font-size:20px} h2{font-size:16px;margin:28px 0 6px;color:#f0c674}
 table{border-collapse:collapse;width:100%}
 td,th{padding:3px 10px;text-align:left;border-bottom:1px solid #2a2a2a}
 th{color:#888;font-weight:normal} .n{text-align:right;font-variant-numeric:tabular-nums}
-.s3{color:#f0c674}.s2{color:#8abeb7}.s1{color:#777}
+.s7,.s6{color:#f0c674}.s5,.s4{color:#8abeb7}.s3,.s2,.s1{color:#777}
 .drift{color:#cc6666;font-weight:bold}
 .grp{color:#b294bb;font-size:12px;padding-top:12px;border-bottom:1px solid #444}
 .none{color:#555} .d{color:#888;font-size:12px}

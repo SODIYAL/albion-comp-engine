@@ -35,7 +35,7 @@ The chain, start to finish:
 | --- | --- | --- |
 | **Game files** | The game's own data: every spell's numbers, areas, escalation flags — pinned to one exact game-data snapshot so results are reproducible | `out/dumps_cache/` (snapshot), `data/source_pins.yaml` (the pin) |
 | **Parsed spells** | Each spell's damage, radius, max targets, escalation factors, cooldown, description | `out/spell_index.json` |
-| **Capability sheets** | The human judgment layer: what each weapon is actually good at, scored 0–3 (soon 1–7), with the exact spell cited as evidence. Shared Q/W spells are curated once per tree; each weapon's sheet carries only its E — the E is the weapon's identity | `pipeline/sheets/pools/` (tree Q/W), `pipeline/sheets/*.yaml` (the E) |
+| **Capability sheets** | The human judgment layer: what each weapon is actually good at, scored **1–7** (2 points = one supply unit; old 0–3 scores live on the even slots), with the exact spell cited as evidence. Shared Q/W spells are curated once per tree; each weapon's sheet carries only its E — the E is the weapon's identity | `pipeline/sheets/pools/` (tree Q/W), `pipeline/sheets/*.yaml` (the E) |
 | **Delivery physics** | Auto-derived per capability from its evidence spell: area footprint, target cap, escalation — this is what makes an AoE slow count more than a self speed-buff in big fights | stamped into the dataset at build time |
 | **Content templates** | What each content type demands: how much healing, catch, AoE damage etc. a castle fight vs a roads gank wants | `pipeline/templates/*.yaml` |
 | **The dataset** | Everything above compiled into one file; the browser engine and the Python engine read this same file, verified identical to 9 decimal places | `out/dataset-latest.json` |
@@ -89,6 +89,13 @@ These values are LIVE: edit and rebuild. They currently mirror the tuned
 defaults.
 
 ```yaml tune:scoring
+# 1-7 grading scale (2026-08-20): sheets grade every capability 1-7. Old
+# 0-3 scores moved to the EVEN slots (1->2, 2->4, 3->6); odd slots are for
+# finer rulings — 1 = weaker than anything previously scored, 7 = beyond
+# the old top. score_unit = how many points make one supply unit; 2 keeps
+# all template targets and floors calibrated exactly as before.
+score_unit: 2
+
 weights:
   alpha: 0.55        # weight of raw capability gain
   beta: 0.20         # weight of synergy gain
@@ -177,23 +184,25 @@ intact. Empty = no overrides. Example:
 # whirlwind must physically contact the diver while channeling — in large
 # fights nobody uses it for this. The raw numbers alone (18m vs 12m) hid
 # the delivery nuance; this is rubric Q2 reliability + Q8 kit fit.
-MAIN_ROCKMACE_KEEPER:          # Bedrock Mace
-  anti_dive: 3
+MAIN_ROCKMACE_KEEPER:          # Bedrock Mace  (1-7 scale)
+  anti_dive: 6
 2H_IRONCLADEDSTAFF:            # Iron-clad Staff
-  anti_dive: 1
+  anti_dive: 2
 
 # 2H_TWINSCYTHE_HELL:          # Soulscythe
-#   knockback_displace: 2      # the line knockup is undervalued at 1
+#   knockback_displace: 4      # the line knockup is undervalued at 2
 # 2H_DOUBLEBLADEDSTAFF:
-#   catch: 1                   # gank kit, not ZvZ catch — down from 2
+#   catch: 2                   # gank kit, not ZvZ catch — down from 4
 ```
 
 Weapon keys are the game's unique names — see any weapon's dossier in the
 dashboard, or `pipeline/sheets/*.yaml`.
 
-## 7. The 1–7 ability rubric (canonical, 2026-08-20)
+## 7. The 1–7 ability rubric (canonical, 2026-08-20 — scale is LIVE)
 
-The 0–3 scale is being replaced by a 1–7 score per (spell, capability),
+Sheets now grade 1–7 (the old 0–3 sits on the even slots; odd slots are
+for finer rulings, 7 = beyond the old top; `score_unit: 2` in §3 keeps all
+calibration intact). The rubric below is how new 1–7 judgments are made,
 refined against the worked case that proved raw magnitude alone misleads:
 Bedrock's Primal Slam (18m throw + a wall that persists 4s, ground-cast
 from 18m, ignores CC resistance, on a kit with Guard Rune / Snare Charge /

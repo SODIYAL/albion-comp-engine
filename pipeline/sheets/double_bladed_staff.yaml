@@ -15,10 +15,10 @@
   except:
     - {cap: mobility, evidence: CARTWHEEL}
   capabilities:
-    - {cap: slow,          score: 2, evidence: DASH_KNOCKBACK}   # E: 50% AoE slow for 3s — the signature
-    - {cap: mobility,      score: 2, evidence: DASH_KNOCKBACK}   # E leap w/ partial CD refund; Q: Cartwheel
-    - {cap: engage,        score: 2, evidence: DASH_KNOCKBACK}   # leap in, slow the clump
-    - {cap: catch,         score: 2, evidence: DASH_KNOCKBACK}   # leap + 50% slow = caught
-    - {cap: disengage,     score: 2, evidence: DASH_KNOCKBACK}   # leap out; Q: Cartwheel
-    - {cap: peel,          score: 2, evidence: SEPARATING_SLAM}  # same W row as Quarterstaff (QW)
-    - {cap: burst_aoe,     score: 1, evidence: DASH_KNOCKBACK}   # 80 on impact + Whirling — modest
+    - {cap: slow,          score: 4, evidence: DASH_KNOCKBACK}   # E: 50% AoE slow for 3s — the signature
+    - {cap: mobility,      score: 4, evidence: DASH_KNOCKBACK}   # E leap w/ partial CD refund; Q: Cartwheel
+    - {cap: engage,        score: 4, evidence: DASH_KNOCKBACK}   # leap in, slow the clump
+    - {cap: catch,         score: 4, evidence: DASH_KNOCKBACK}   # leap + 50% slow = caught
+    - {cap: disengage,     score: 4, evidence: DASH_KNOCKBACK}   # leap out; Q: Cartwheel
+    - {cap: peel,          score: 4, evidence: SEPARATING_SLAM}  # same W row as Quarterstaff (QW)
+    - {cap: burst_aoe,     score: 2, evidence: DASH_KNOCKBACK}   # 80 on impact + Whirling — modest

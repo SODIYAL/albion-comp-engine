@@ -15,9 +15,9 @@
     - {cap: slow, evidence: PASSIVE_SLOWPOISON}
     - {cap: mobility, evidence: SPEEDSHOT2}
   capabilities:
-    - {cap: burst_aoe,     score: 2, evidence: ARROWRAIN}   # Rain of Arrows (E)
-    - {cap: zone_control,  score: 2, evidence: ARROWRAIN}   # channeled AoE slow zone
-    - {cap: slow,          score: 2, evidence: ARROWRAIN}
+    - {cap: burst_aoe,     score: 4, evidence: ARROWRAIN}   # Rain of Arrows (E)
+    - {cap: zone_control,  score: 4, evidence: ARROWRAIN}   # channeled AoE slow zone
+    - {cap: slow,          score: 4, evidence: ARROWRAIN}
     # resist_shred survives at score 1: NOT from any Q/W (earlier draft's error)
     # but from the Piercing Arrows passive — auto-attacks stack a Defense debuff
-    - {cap: resist_shred,  score: 1, evidence: PASSIVE_ARMOR_PIERCE_STACK}
+    - {cap: resist_shred,  score: 2, evidence: PASSIVE_ARMOR_PIERCE_STACK}

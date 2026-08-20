@@ -8,8 +8,8 @@
   except:
     - {cap: resist_shred, evidence: SUNDERSHOT}
   capabilities:
-    - {cap: burst_st,      score: 2, evidence: SNIPESHOT_CROSSBOW}  # E: 386 single shot
-    - {cap: resist_shred,  score: 2, evidence: SNIPESHOT_CROSSBOW}  # E: -15%; W: Sunder Shot / Salvo stack more
+    - {cap: burst_st,      score: 4, evidence: SNIPESHOT_CROSSBOW}  # E: 386 single shot
+    - {cap: resist_shred,  score: 4, evidence: SNIPESHOT_CROSSBOW}  # E: -15%; W: Sunder Shot / Salvo stack more
 
 - weapon: 2H_CROSSBOWLARGE           # Heavy Crossbow — line-pierce interrupter
   curated_as_of: 2026-08-12
@@ -18,8 +18,8 @@
   except:
     - {cap: burst_aoe, evidence: BOLTSHOT}
   capabilities:
-    - {cap: burst_aoe,     score: 2, evidence: CROSSBOW_ARMORPIERCER}  # E: 225 pierce through the line
-    - {cap: burst_st,      score: 1, evidence: CROSSBOW_ARMORPIERCER}
+    - {cap: burst_aoe,     score: 4, evidence: CROSSBOW_ARMORPIERCER}  # E: 225 pierce through the line
+    - {cap: burst_st,      score: 2, evidence: CROSSBOW_ARMORPIERCER}
 
 - weapon: 2H_DUALCROSSBOW_CRYSTAL    # Arclight Blasters — dash-blast skirmisher
   curated_as_of: 2026-08-12
@@ -29,10 +29,10 @@
     - {cap: burst_aoe, evidence: BOLTSHOT}
     - {cap: zone_control, evidence: CALTROPS}
   capabilities:
-    - {cap: mobility,      score: 2, evidence: CRYSTALXBOW}       # E: dash, recastable x3
-    - {cap: burst_aoe,     score: 2, evidence: CRYSTALXBOW}       # 81 in 8m per dash
-    - {cap: disengage,     score: 2, evidence: CRYSTALXBOW}       # three dashes out
-    - {cap: engage,        score: 1, evidence: CRYSTALXBOW}
+    - {cap: mobility,      score: 4, evidence: CRYSTALXBOW}       # E: dash, recastable x3
+    - {cap: burst_aoe,     score: 4, evidence: CRYSTALXBOW}       # 81 in 8m per dash
+    - {cap: disengage,     score: 4, evidence: CRYSTALXBOW}       # three dashes out
+    - {cap: engage,        score: 2, evidence: CRYSTALXBOW}
 
 - weapon: 2H_REPEATINGCROSSBOW_UNDEAD  # Weeping Repeater — mine zoner
   curated_as_of: 2026-08-12
@@ -42,9 +42,9 @@
     - {cap: burst_aoe, evidence: BOLTSHOT}
     - {cap: zone_control, evidence: CALTROPS}
   capabilities:
-    - {cap: burst_aoe,     score: 2, evidence: GROUNDMINE}        # E: 270 mine in 7m
-    - {cap: zone_control,  score: 2, evidence: GROUNDMINE}        # the planted mine denies the ground it watches
-    - {cap: sustained_dps, score: 2, evidence: WEAPON_STATS}      # repeater AA pattern
+    - {cap: burst_aoe,     score: 4, evidence: GROUNDMINE}        # E: 270 mine in 7m
+    - {cap: zone_control,  score: 4, evidence: GROUNDMINE}        # the planted mine denies the ground it watches
+    - {cap: sustained_dps, score: 4, evidence: WEAPON_STATS}      # repeater AA pattern
 
 - weapon: MAIN_1HCROSSBOW            # Light Crossbow — sticky-bomb poker
   curated_as_of: 2026-08-12
@@ -53,4 +53,4 @@
   except:
     - {cap: burst_aoe, evidence: BOLTSHOT}
   capabilities:
-    - {cap: burst_aoe,     score: 2, evidence: EXPLODING_SHOT}    # E: 180 in 5m delayed bomb
+    - {cap: burst_aoe,     score: 4, evidence: EXPLODING_SHOT}    # E: 180 in 5m delayed bomb

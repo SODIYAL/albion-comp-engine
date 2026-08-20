@@ -14,5 +14,5 @@
   except:
     - {cap: self_sustain, evidence: PASSIVE_HEALTHCHANCE_AXE}
   capabilities:
-    - {cap: self_sustain,   score: 2, evidence: AXETHROW}        # E: heals per bleed charge; Life Leech passive
-    - {cap: burst_st,       score: 1, evidence: AXETHROW}        # E: charge-scaled axe throws — 1H budget
+    - {cap: self_sustain,   score: 4, evidence: AXETHROW}        # E: heals per bleed charge; Life Leech passive
+    - {cap: burst_st,       score: 2, evidence: AXETHROW}        # E: charge-scaled axe throws — 1H budget

@@ -7,12 +7,12 @@
 # adjudication — or lists the pair under `except:`.
 subcategory: quarterstaff
 capabilities:
-  - {cap: mobility, score: 1, evidence: CARTWHEEL}                              # (QW)
-  - {cap: knockback_displace, score: 1, evidence: LAUNCHER}                     # W: Rising Blow / Separator / Forceful Swing (QW) — unified with line-mates (magnitude pass 2026-08-13)
-  - {cap: self_sustain, score: 1, evidence: PASSIVE_HEALTHCHANCE_QUARTERSTAFF}  # PASSIVE: Life Leech
-  - {cap: sustained_dps, score: 1, evidence: QSTAFF_COMBO}                      # W: Gale Dance AA buff; Whirling Strikes (QW)
-  - {cap: anti_dive, score: 1, evidence: QS_WHIRLWIND2}                         # (QW)
-  - {cap: damage_debuff, score: 1, evidence: QS_WHIRLWIND2}                     # W: -50% damage dealt + AA disable (QW)
-  - {cap: peel, score: 1, evidence: SEPARATING_SLAM}                            # (QW)
-  - {cap: root, score: 1, evidence: SEPARATING_SLAM}                            # (QW)
-  - {cap: stun, score: 1, evidence: STUNRUN}                                    # W option; Q3 combo; passive (QW)
+  - {cap: mobility, score: 2, evidence: CARTWHEEL}                              # (QW)
+  - {cap: knockback_displace, score: 2, evidence: LAUNCHER}                     # W: Rising Blow / Separator / Forceful Swing (QW) — unified with line-mates (magnitude pass 2026-08-13)
+  - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_QUARTERSTAFF}  # PASSIVE: Life Leech
+  - {cap: sustained_dps, score: 2, evidence: QSTAFF_COMBO}                      # W: Gale Dance AA buff; Whirling Strikes (QW)
+  - {cap: anti_dive, score: 2, evidence: QS_WHIRLWIND2}                         # (QW)
+  - {cap: damage_debuff, score: 2, evidence: QS_WHIRLWIND2}                     # W: -50% damage dealt + AA disable (QW)
+  - {cap: peel, score: 2, evidence: SEPARATING_SLAM}                            # (QW)
+  - {cap: root, score: 2, evidence: SEPARATING_SLAM}                            # (QW)
+  - {cap: stun, score: 2, evidence: STUNRUN}                                    # W option; Q3 combo; passive (QW)

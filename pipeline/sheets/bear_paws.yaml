@@ -27,10 +27,10 @@
     - {cap: mobility, evidence: RENDINGCOMBO}
     - {cap: heal_reduction, evidence: RENDINGSTRIKE}
   capabilities:
-    - {cap: mobility,       score: 3, evidence: DUALAXE_CRAWLER}  # E: CC-immune leap, CD refund on player hit; Q3 Raging Leap
-    - {cap: engage,         score: 2, evidence: DUALAXE_CRAWLER}  # commits into the clump CC-immune
-    - {cap: disengage,      score: 2, evidence: DUALAXE_CRAWLER}  # same leap outwards
-    - {cap: catch,          score: 2, evidence: DUALAXE_CRAWLER}  # repeatable gap-close
-    - {cap: burst_aoe,      score: 2, evidence: DUALAXE_CRAWLER}  # 170 cone on impact; W: Internal Bleeding / Raging Blades
-    - {cap: self_sustain,   score: 2, evidence: DUALAXE_CRAWLER}  # E: 15% of damage dealt as Health, AoE-fed
-    - {cap: heal_reduction, score: 1, evidence: AXE_CHARGE}       # W: same cast, -20% Healing Received on enemies (QW)
+    - {cap: mobility,       score: 6, evidence: DUALAXE_CRAWLER}  # E: CC-immune leap, CD refund on player hit; Q3 Raging Leap
+    - {cap: engage,         score: 4, evidence: DUALAXE_CRAWLER}  # commits into the clump CC-immune
+    - {cap: disengage,      score: 4, evidence: DUALAXE_CRAWLER}  # same leap outwards
+    - {cap: catch,          score: 4, evidence: DUALAXE_CRAWLER}  # repeatable gap-close
+    - {cap: burst_aoe,      score: 4, evidence: DUALAXE_CRAWLER}  # 170 cone on impact; W: Internal Bleeding / Raging Blades
+    - {cap: self_sustain,   score: 4, evidence: DUALAXE_CRAWLER}  # E: 15% of damage dealt as Health, AoE-fed
+    - {cap: heal_reduction, score: 2, evidence: AXE_CHARGE}       # W: same cast, -20% Healing Received on enemies (QW)

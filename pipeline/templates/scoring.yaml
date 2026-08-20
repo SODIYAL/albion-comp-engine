@@ -1,5 +1,13 @@
 # Scoring configuration (design doc §4.1, §4.2). Data, not code.
 
+# Capability-score scale (2026-08-20): sheets grade 1-7. The old 0-3
+# ordinals moved to the EVEN slots (1->2, 2->4, 3->6) — odd slots exist for
+# finer rulings (1 = weaker than anything previously scored, 7 = beyond the
+# old top). score_unit is how many 1-7 points equal ONE supply unit: 2
+# keeps every template target, floor and synergy bonus calibrated exactly
+# as before — the migration is bit-identical by construction.
+score_unit: 2
+
 weights:
   alpha: 0.55   # marginal capability gain
   beta:  0.20   # synergy

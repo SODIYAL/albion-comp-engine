@@ -17,9 +17,9 @@
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: tank
   capabilities:
-    - {cap: stun,          score: 3, evidence: GROUNDBREAKER2}   # E: 20m line, 2.7s stun at center
-    - {cap: engage,        score: 3, evidence: CHARGESLOWAE}     # W: Slowing Charge dash is the map-visible evidence; the
+    - {cap: stun,          score: 6, evidence: GROUNDBREAKER2}   # E: 20m line, 2.7s stun at center
+    - {cap: engage,        score: 6, evidence: CHARGESLOWAE}     # W: Slowing Charge dash is the map-visible evidence; the
                                                                  # SCORE is 3 because the E's 20m line stun is the initiation
                                                                  # (effect map derives engage from dashes only, not enemy CC)
-    - {cap: peel,          score: 2, evidence: GROUNDBREAKER2}   # same tool defensively; W: Knockout, Power Geyser
-    - {cap: catch,         score: 2, evidence: GROUNDBREAKER2}   # 20m lockdown line
+    - {cap: peel,          score: 4, evidence: GROUNDBREAKER2}   # same tool defensively; W: Knockout, Power Geyser
+    - {cap: catch,         score: 4, evidence: GROUNDBREAKER2}   # 20m lockdown line

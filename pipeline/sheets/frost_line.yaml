@@ -6,9 +6,9 @@
   curated_as_of: 2026-08-12
   role_hint: range
   capabilities:
-    - {cap: burst_aoe,     score: 2, evidence: HAIL_MULTI_1}   # E: 160 AoE, recastable
-    - {cap: catch,         score: 1, evidence: HAIL_MULTI_1}
-    - {cap: peel,          score: 1, evidence: HAIL_MULTI_1}
+    - {cap: burst_aoe,     score: 4, evidence: HAIL_MULTI_1}   # E: 160 AoE, recastable
+    - {cap: catch,         score: 2, evidence: HAIL_MULTI_1}
+    - {cap: peel,          score: 2, evidence: HAIL_MULTI_1}
 
 - weapon: 2H_FROSTSTAFF_CRYSTAL      # Arctic Staff — volley channel mage
   curated_as_of: 2026-08-12
@@ -18,10 +18,10 @@
     - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
     - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
-    - {cap: sustained_dps, score: 2, evidence: FROST_TARGETED_CHANNEL}  # E: mobile volley channel
-    - {cap: slow,          score: 2, evidence: FROST_TARGETED_CHANNEL}  # stacks up to 6 times
-    - {cap: burst_aoe,     score: 1, evidence: FROST_TARGETED_CHANNEL}
-    - {cap: catch,         score: 1, evidence: FROST_BITE}     # Q: Frostbite stacks to a stun (QW)
+    - {cap: sustained_dps, score: 4, evidence: FROST_TARGETED_CHANNEL}  # E: mobile volley channel
+    - {cap: slow,          score: 4, evidence: FROST_TARGETED_CHANNEL}  # stacks up to 6 times
+    - {cap: burst_aoe,     score: 2, evidence: FROST_TARGETED_CHANNEL}
+    - {cap: catch,         score: 2, evidence: FROST_BITE}     # Q: Frostbite stacks to a stun (QW)
 
 - weapon: 2H_GLACIALSTAFF            # Glacial Staff — the roaming storm
   curated_as_of: 2026-08-12
@@ -32,12 +32,12 @@
     - {cap: zone_control, evidence: FROSTBOMB_CASTSLOW}
     - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
-    - {cap: zone_control,  score: 3, evidence: ICESTORM2}      # E: 15-SECOND moving storm — the longest zone curated
-    - {cap: slow,          score: 2, evidence: ICESTORM2}      # storm + frost QW pool
-    - {cap: burst_aoe,     score: 1, evidence: ICESTORM2}      # tick damage
-    - {cap: sustained_dps, score: 1, evidence: ICESTORM2}
-    - {cap: catch,         score: 1, evidence: ICESTORM2}
-    - {cap: peel,          score: 1, evidence: ICESTORM2}
+    - {cap: zone_control,  score: 6, evidence: ICESTORM2}      # E: 15-SECOND moving storm — the longest zone curated
+    - {cap: slow,          score: 4, evidence: ICESTORM2}      # storm + frost QW pool
+    - {cap: burst_aoe,     score: 2, evidence: ICESTORM2}      # tick damage
+    - {cap: sustained_dps, score: 2, evidence: ICESTORM2}
+    - {cap: catch,         score: 2, evidence: ICESTORM2}
+    - {cap: peel,          score: 2, evidence: ICESTORM2}
 
 - weapon: 2H_ICEGAUNTLETS_HELL       # Icicle Staff — the hard-slow blizzard
   curated_as_of: 2026-08-12
@@ -47,12 +47,12 @@
     - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
     - {cap: zone_control, evidence: FROSTBOMB_CASTSLOW}
   capabilities:
-    - {cap: slow,          score: 2, evidence: GLACIALFIELD}   # E: 50%+30% center, IGNORES CC resistance
-    - {cap: zone_control,  score: 2, evidence: GLACIALFIELD}   # 5s blizzard
-    - {cap: anti_dive,     score: 1, evidence: FROSTNOVA}      # divers crawl in the blizzard; Nova punishes (QW)
-    - {cap: catch,         score: 1, evidence: GLACIALFIELD}
-    - {cap: peel,          score: 1, evidence: GLACIALFIELD}
-    - {cap: burst_aoe,     score: 1, evidence: GLACIALFIELD}
+    - {cap: slow,          score: 4, evidence: GLACIALFIELD}   # E: 50%+30% center, IGNORES CC resistance
+    - {cap: zone_control,  score: 4, evidence: GLACIALFIELD}   # 5s blizzard
+    - {cap: anti_dive,     score: 2, evidence: FROSTNOVA}      # divers crawl in the blizzard; Nova punishes (QW)
+    - {cap: catch,         score: 2, evidence: GLACIALFIELD}
+    - {cap: peel,          score: 2, evidence: GLACIALFIELD}
+    - {cap: burst_aoe,     score: 2, evidence: GLACIALFIELD}
 
 - weapon: MAIN_FROSTSTAFF_AVALON     # Chillhowl — the crystal-save support
   curated_as_of: 2026-08-12
@@ -68,11 +68,11 @@
     # Split 2026-08-18 (`use:` variants -> exclusive loadout bundles): the
     # engine used to credit peel + catch + stun + slow simultaneously, as if
     # one E delivered the save and the catch in the same fight moment.
-    - {cap: peel,          score: 2, evidence: FROZEN_CRYSTAL, use: ally_save}
-    - {cap: stun,          score: 1, evidence: FROZEN_CRYSTAL, use: enemy_control} # the enemy-freeze is a 2s incapacitate
-    - {cap: slow,          score: 2, evidence: FROZEN_CRYSTAL, use: enemy_control} # shatter field slow ignores CC resistance
-    - {cap: catch,         score: 1, evidence: FROZEN_CRYSTAL, use: enemy_control}
-    - {cap: zone_control,  score: 1, evidence: FROSTBOMB_CASTSLOW}  # (QW)
+    - {cap: peel,          score: 4, evidence: FROZEN_CRYSTAL, use: ally_save}
+    - {cap: stun,          score: 2, evidence: FROZEN_CRYSTAL, use: enemy_control} # the enemy-freeze is a 2s incapacitate
+    - {cap: slow,          score: 4, evidence: FROZEN_CRYSTAL, use: enemy_control} # shatter field slow ignores CC resistance
+    - {cap: catch,         score: 2, evidence: FROZEN_CRYSTAL, use: enemy_control}
+    - {cap: zone_control,  score: 2, evidence: FROSTBOMB_CASTSLOW}  # (QW)
 
 - weapon: MAIN_FROSTSTAFF_KEEPER     # Hoarfrost Staff — snowball displacer
   curated_as_of: 2026-08-12
@@ -83,9 +83,9 @@
     - {cap: zone_control, evidence: FROSTBOMB_CASTSLOW}
     - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
-    - {cap: knockback_displace, score: 2, evidence: ICEROCK_EXPLODE}  # E: rolling 10m knockback + wall explosion
-    - {cap: slow,          score: 2, evidence: ICEROCK_EXPLODE}  # freezing trail + QW pool
-    - {cap: peel,          score: 1, evidence: ICEROCK_EXPLODE}
-    - {cap: zone_control,  score: 1, evidence: ICEROCK_EXPLODE}  # the trail
-    - {cap: burst_aoe,     score: 1, evidence: ICEROCK_EXPLODE}
-    - {cap: catch,         score: 1, evidence: ICEROCK_EXPLODE}
+    - {cap: knockback_displace, score: 4, evidence: ICEROCK_EXPLODE}  # E: rolling 10m knockback + wall explosion
+    - {cap: slow,          score: 4, evidence: ICEROCK_EXPLODE}  # freezing trail + QW pool
+    - {cap: peel,          score: 2, evidence: ICEROCK_EXPLODE}
+    - {cap: zone_control,  score: 2, evidence: ICEROCK_EXPLODE}  # the trail
+    - {cap: burst_aoe,     score: 2, evidence: ICEROCK_EXPLODE}
+    - {cap: catch,         score: 2, evidence: ICEROCK_EXPLODE}

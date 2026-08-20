@@ -24,7 +24,7 @@
   except:
     - {cap: root, evidence: PASSIVE_FROST}
   capabilities:
-    - {cap: root,          score: 3, evidence: FREEZINGWIND}        # E: 2.5s AoE root cone — the signature
-    - {cap: peel,          score: 2, evidence: FREEZINGWIND}        # root divers off the backline; enemy-directed
-    - {cap: catch,         score: 2, evidence: FREEZINGWIND}        # 2.5s root = a caught runner; Q: Frostbite stacks
-    - {cap: burst_aoe,     score: 1, evidence: FREEZINGWIND}        # 200 cone + Q: Ice Shard; 1H damage budget
+    - {cap: root,          score: 6, evidence: FREEZINGWIND}        # E: 2.5s AoE root cone — the signature
+    - {cap: peel,          score: 4, evidence: FREEZINGWIND}        # root divers off the backline; enemy-directed
+    - {cap: catch,         score: 4, evidence: FREEZINGWIND}        # 2.5s root = a caught runner; Q: Frostbite stacks
+    - {cap: burst_aoe,     score: 2, evidence: FREEZINGWIND}        # 200 cone + Q: Ice Shard; 1H damage budget

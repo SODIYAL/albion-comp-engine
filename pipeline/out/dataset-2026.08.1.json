@@ -5,7 +5,7 @@
   "mastersheet": [
    "guild_builds: present (shipped verbatim)",
    "mechanics: aoe_geometry",
-   "scoring: capability_synergies, meta_prior, weights",
+   "scoring: capability_synergies, meta_prior, score_unit, weights",
    "sheets: 2 score override(s) on 2 weapon(s)"
   ],
   "note": "release candidate",
@@ -223,8 +223,8 @@
   ],
   "predicates": {
    "ranged_aoe_core": {
-    "burst_aoe": 2,
-    "ranged_presence": 1
+    "burst_aoe": 4,
+    "ranged_presence": 2
    }
   },
   "roles": {
@@ -30337,6 +30337,7 @@
     "2H_SHAPESHIFTER_SET3"
    ]
   },
+  "score_unit": 2,
   "swap_advisor": {
    "min_gain": 1.0,
    "min_rank": 15,
@@ -31453,14 +31454,14 @@
     }
    },
    "capabilities": {
-    "anti_dive": 1,
-    "buff_allies": 2,
-    "cleanse": 2,
-    "peel": 2,
-    "resist_shred": 1,
-    "silence": 1,
-    "stun": 2,
-    "sustained_dps": 1
+    "anti_dive": 2,
+    "buff_allies": 4,
+    "cleanse": 4,
+    "peel": 4,
+    "resist_shred": 2,
+    "silence": 2,
+    "stun": 4,
+    "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Great Arcane Staff",
@@ -31518,30 +31519,30 @@
     "slots": [
      [
       {
-       "anti_dive": 1,
-       "peel": 2,
-       "stun": 2
+       "anti_dive": 2,
+       "peel": 4,
+       "stun": 4
       }
      ],
      [
       {
-       "buff_allies": 2
+       "buff_allies": 4
       },
       {
-       "cleanse": 2
+       "cleanse": 4
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "silence": 1
+       "silence": 2
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       }
      ]
     ]
@@ -31590,14 +31591,14 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "cleanse": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "silence": 1,
-    "sustained_dps": 2,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "cleanse": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "silence": 2,
+    "sustained_dps": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Astral Staff",
@@ -31652,28 +31653,28 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "sustained_dps": 2,
-       "zone_control": 1
+       "burst_aoe": 4,
+       "sustained_dps": 4,
+       "zone_control": 2
       }
      ],
      [
       {
-       "cleanse": 2
+       "cleanse": 4
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "silence": 1
+       "silence": 2
       },
       {
-       "peel": 1
+       "peel": 2
       }
      ]
     ]
@@ -31717,15 +31718,15 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "cleanse": 2,
-    "engage": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "silence": 1,
-    "slow": 1,
-    "sustained_dps": 1,
-    "zone_control": 1
+    "buff_allies": 4,
+    "cleanse": 4,
+    "engage": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "silence": 2,
+    "slow": 2,
+    "sustained_dps": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Occult Staff",
@@ -31786,31 +31787,31 @@
     "slots": [
      [
       {
-       "buff_allies": 2,
-       "engage": 2,
-       "slow": 1,
-       "zone_control": 1
+       "buff_allies": 4,
+       "engage": 4,
+       "slow": 2,
+       "zone_control": 2
       }
      ],
      [
       {
-       "cleanse": 2
+       "cleanse": 4
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "silence": 1
+       "silence": 2
       },
       {
-       "peel": 1
+       "peel": 2
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       }
      ]
     ]
@@ -31870,17 +31871,17 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "cleanse": 2,
-    "damage_debuff": 1,
-    "heal_reduction": 2,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "silence": 1,
-    "slow": 1,
-    "sustained_dps": 1
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "cleanse": 4,
+    "damage_debuff": 2,
+    "heal_reduction": 4,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "silence": 2,
+    "slow": 2,
+    "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Evensong",
@@ -31948,35 +31949,35 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "damage_debuff": 1,
-       "heal_reduction": 2,
-       "ranged_presence": 1,
-       "slow": 1
+       "burst_aoe": 4,
+       "damage_debuff": 2,
+       "heal_reduction": 4,
+       "ranged_presence": 2,
+       "slow": 2
       }
      ],
      [
       {
-       "cleanse": 2
+       "cleanse": 4
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "silence": 1
+       "silence": 2
       },
       {
-       "peel": 1
+       "peel": 2
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       }
      ]
     ]
@@ -32031,16 +32032,16 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "catch": 1,
-    "engage": 1,
-    "heal_reduction": 1,
-    "mobility": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "sustained_dps": 2
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "catch": 2,
+    "engage": 2,
+    "heal_reduction": 2,
+    "mobility": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Greataxe",
@@ -32105,34 +32106,34 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "mobility": 1
+       "burst_aoe": 4,
+       "mobility": 2
       }
      ],
      [
       {
-       "catch": 1
+       "catch": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1,
-       "engage": 1
+       "buff_allies": 2,
+       "engage": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "root": 1
+       "root": 2
       },
       {
-       "heal_reduction": 1,
-       "sustained_dps": 2
+       "heal_reduction": 2,
+       "sustained_dps": 4
       }
      ]
     ]
@@ -32201,20 +32202,20 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "catch": 1,
-    "disengage": 1,
-    "engage": 2,
-    "execute": 1,
-    "heal_reduction": 1,
-    "knockback_displace": 1,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "sustained_dps": 2
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "catch": 2,
+    "disengage": 2,
+    "engage": 4,
+    "execute": 2,
+    "heal_reduction": 2,
+    "knockback_displace": 2,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Realmbreaker",
@@ -32290,36 +32291,36 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "catch": 1,
-       "disengage": 1,
-       "engage": 2,
-       "execute": 1,
-       "knockback_displace": 1,
-       "mobility": 2,
-       "peel": 1
+       "burst_aoe": 4,
+       "catch": 2,
+       "disengage": 2,
+       "engage": 4,
+       "execute": 2,
+       "knockback_displace": 2,
+       "mobility": 4,
+       "peel": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "root": 1
+       "root": 2
       },
       {
-       "heal_reduction": 1,
-       "sustained_dps": 2
+       "heal_reduction": 2,
+       "sustained_dps": 4
       }
      ]
     ]
@@ -32366,15 +32367,15 @@
     }
    },
    "capabilities": {
-    "burst_st": 1,
-    "catch": 1,
-    "disengage": 1,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 1,
-    "sustained_dps": 3
+    "burst_st": 2,
+    "catch": 2,
+    "disengage": 2,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 2,
+    "sustained_dps": 6
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Bow",
@@ -32433,27 +32434,27 @@
     "slots": [
      [
       {
-       "burst_st": 1,
-       "disengage": 1,
-       "mobility": 2,
-       "sustained_dps": 3
+       "burst_st": 2,
+       "disengage": 2,
+       "mobility": 4,
+       "sustained_dps": 6
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "peel": 1,
-       "root": 1
+       "catch": 2,
+       "peel": 2,
+       "root": 2
       }
      ],
      [
       {
-       "slow": 1
+       "slow": 2
       }
      ]
     ]
@@ -32521,17 +32522,17 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "burst_st": 2,
-    "catch": 1,
-    "disengage": 1,
-    "mobility": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "burst_aoe": 4,
+    "burst_st": 4,
+    "catch": 2,
+    "disengage": 2,
+    "mobility": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Mistpiercer",
@@ -32573,7 +32574,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 2
+     "sustained_dps": 4
     },
     "slot_names": [
      "e",
@@ -32600,32 +32601,32 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "burst_st": 2,
-       "ranged_presence": 1
+       "burst_aoe": 4,
+       "burst_st": 4,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "peel": 1,
-       "root": 1
+       "catch": 2,
+       "peel": 2,
+       "root": 2
       },
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "mobility": 1
+       "mobility": 2
       }
      ],
      [
       {
-       "slow": 1
+       "slow": 2
       }
      ]
     ]
@@ -32684,16 +32685,16 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "catch": 1,
-    "disengage": 2,
-    "mobility": 2,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "burst_aoe": 4,
+    "catch": 2,
+    "disengage": 4,
+    "mobility": 4,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Skystrider Bow",
@@ -32732,7 +32733,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 2
+     "sustained_dps": 4
     },
     "slot_names": [
      "e",
@@ -32757,27 +32758,27 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "disengage": 2,
-       "mobility": 2,
-       "ranged_presence": 1
+       "burst_aoe": 4,
+       "disengage": 4,
+       "mobility": 4,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "peel": 1,
-       "root": 1
+       "catch": 2,
+       "peel": 2,
+       "root": 2
       }
      ],
      [
       {
-       "slow": 1
+       "slow": 2
       }
      ]
     ]
@@ -32839,16 +32840,16 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 3,
-    "catch": 1,
-    "disengage": 1,
-    "mobility": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "burst_aoe": 6,
+    "catch": 2,
+    "disengage": 2,
+    "mobility": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Wailing Bow",
@@ -32887,7 +32888,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 2
+     "sustained_dps": 4
     },
     "slot_names": [
      "e",
@@ -32914,31 +32915,31 @@
     "slots": [
      [
       {
-       "burst_aoe": 3,
-       "ranged_presence": 1
+       "burst_aoe": 6,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "peel": 1,
-       "root": 1
+       "catch": 2,
+       "peel": 2,
+       "root": 2
       },
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "mobility": 1
+       "mobility": 2
       }
      ],
      [
       {
-       "slow": 1
+       "slow": 2
       }
      ]
     ]
@@ -33008,17 +33009,17 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 1,
-    "catch": 1,
-    "disengage": 1,
-    "mobility": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 1,
-    "sustained_dps": 2,
-    "zone_control": 2
+    "burst_aoe": 2,
+    "catch": 2,
+    "disengage": 2,
+    "mobility": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 2,
+    "sustained_dps": 4,
+    "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Bow of Badon",
@@ -33060,7 +33061,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 2
+     "sustained_dps": 4
     },
     "slot_names": [
      "e",
@@ -33087,32 +33088,32 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "ranged_presence": 1,
-       "zone_control": 2
+       "burst_aoe": 2,
+       "ranged_presence": 2,
+       "zone_control": 4
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "peel": 1,
-       "root": 1
+       "catch": 2,
+       "peel": 2,
+       "root": 2
       },
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "mobility": 1
+       "mobility": 2
       }
      ],
      [
       {
-       "slow": 1
+       "slow": 2
       }
      ]
     ]
@@ -33137,19 +33138,19 @@
     }
    },
    "capabilities": {
-    "burst_st": 2,
-    "catch": 2,
-    "disengage": 1,
-    "engage": 1,
-    "heal_reduction": 1,
-    "mobility": 2,
-    "peel": 1,
-    "purge": 1,
-    "resist_shred": 1,
-    "root": 2,
-    "self_sustain": 1,
-    "stun": 1,
-    "sustained_dps": 1
+    "burst_st": 4,
+    "catch": 4,
+    "disengage": 2,
+    "engage": 2,
+    "heal_reduction": 2,
+    "mobility": 4,
+    "peel": 2,
+    "purge": 2,
+    "resist_shred": 2,
+    "root": 4,
+    "self_sustain": 2,
+    "stun": 2,
+    "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Claws",
@@ -33224,39 +33225,39 @@
     "slots": [
      [
       {
-       "burst_st": 2,
-       "catch": 2,
-       "purge": 1,
-       "root": 2
+       "burst_st": 4,
+       "catch": 4,
+       "purge": 2,
+       "root": 4
       }
      ],
      [
       {
-       "heal_reduction": 1
+       "heal_reduction": 2
       },
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "peel": 1,
-       "stun": 1
+       "peel": 2,
+       "stun": 2
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       },
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "engage": 1,
-       "mobility": 2
+       "engage": 2,
+       "mobility": 4
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ]
     ]
@@ -33317,17 +33318,17 @@
     }
    },
    "capabilities": {
-    "burst_st": 1,
-    "catch": 2,
-    "disengage": 1,
-    "engage": 3,
-    "mobility": 2,
-    "peel": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "stun": 1,
-    "sustained_dps": 2
+    "burst_st": 2,
+    "catch": 4,
+    "disengage": 2,
+    "engage": 6,
+    "mobility": 4,
+    "peel": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "stun": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Claymore",
@@ -33394,33 +33395,33 @@
     "slots": [
      [
       {
-       "burst_st": 1,
-       "catch": 2,
-       "engage": 3,
-       "mobility": 2,
-       "stun": 1
+       "burst_st": 2,
+       "catch": 4,
+       "engage": 6,
+       "mobility": 4,
+       "stun": 2
       }
      ],
      [
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "slow": 1
+       "slow": 2
       },
       {
-       "peel": 1,
-       "root": 1
+       "peel": 2,
+       "root": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -33471,18 +33472,18 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "catch": 1,
-    "disengage": 1,
-    "engage": 1,
-    "knockback_displace": 1,
-    "mobility": 2,
-    "peel": 2,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "catch": 2,
+    "disengage": 2,
+    "engage": 2,
+    "knockback_displace": 2,
+    "mobility": 4,
+    "peel": 4,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Kingmaker",
@@ -33552,34 +33553,34 @@
     "slots": [
      [
       {
-       "buff_allies": 1,
-       "burst_aoe": 2,
-       "knockback_displace": 1,
-       "peel": 2
+       "buff_allies": 2,
+       "burst_aoe": 4,
+       "knockback_displace": 2,
+       "peel": 4
       }
      ],
      [
       {
-       "engage": 1,
-       "mobility": 2,
-       "sustained_dps": 2
+       "engage": 2,
+       "mobility": 4,
+       "sustained_dps": 4
       }
      ],
      [
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "catch": 1,
-       "slow": 1
+       "catch": 2,
+       "slow": 2
       },
       {
-       "root": 1
+       "root": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -33646,17 +33647,17 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 1,
-    "catch": 2,
-    "disengage": 2,
-    "engage": 2,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 2,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "burst_aoe": 2,
+    "catch": 4,
+    "disengage": 4,
+    "engage": 4,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 4,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Carving Sword",
@@ -33722,31 +33723,31 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "catch": 2,
-       "disengage": 2,
-       "engage": 2,
-       "mobility": 2,
-       "resist_shred": 2
+       "burst_aoe": 2,
+       "catch": 4,
+       "disengage": 4,
+       "engage": 4,
+       "mobility": 4,
+       "resist_shred": 4
       }
      ],
      [
       {
-       "slow": 1
+       "slow": 2
       },
       {
-       "peel": 1,
-       "root": 1
+       "peel": 2,
+       "root": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -33823,18 +33824,18 @@
     }
    },
    "capabilities": {
-    "anti_dive": 1,
-    "burst_aoe": 1,
-    "damage_debuff": 2,
-    "knockback_displace": 1,
-    "peel": 1,
-    "purge": 2,
-    "ranged_presence": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "stun": 1,
-    "sustained_dps": 1,
-    "zone_control": 1
+    "anti_dive": 2,
+    "burst_aoe": 2,
+    "damage_debuff": 4,
+    "knockback_displace": 2,
+    "peel": 2,
+    "purge": 4,
+    "ranged_presence": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "stun": 2,
+    "sustained_dps": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Black Monk Staff",
@@ -33902,34 +33903,34 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "damage_debuff": 2,
-       "purge": 2,
-       "ranged_presence": 1,
-       "zone_control": 1
+       "burst_aoe": 2,
+       "damage_debuff": 4,
+       "purge": 4,
+       "ranged_presence": 2,
+       "zone_control": 2
       }
      ],
      [
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       },
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       },
       {
-       "anti_dive": 1
+       "anti_dive": 2
       },
       {
-       "peel": 1,
-       "root": 1
+       "peel": 2,
+       "root": 2
       },
       {
-       "stun": 1
+       "stun": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -33984,16 +33985,16 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 1,
-    "burst_st": 2,
-    "knockback_displace": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 2,
-    "silence": 1,
-    "slow": 1,
-    "sustained_dps": 1,
-    "zone_control": 1
+    "burst_aoe": 2,
+    "burst_st": 4,
+    "knockback_displace": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 4,
+    "silence": 2,
+    "slow": 2,
+    "sustained_dps": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Crossbow",
@@ -34032,7 +34033,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 1
+     "sustained_dps": 2
     },
     "slot_names": [
      "e",
@@ -34055,27 +34056,27 @@
     "slots": [
      [
       {
-       "burst_st": 2,
-       "resist_shred": 2
+       "burst_st": 4,
+       "resist_shred": 4
       }
      ],
      [
       {
-       "burst_aoe": 1,
-       "ranged_presence": 1
+       "burst_aoe": 2,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       },
       {
-       "knockback_displace": 1,
-       "peel": 1
+       "knockback_displace": 2,
+       "peel": 2
       },
       {
-       "silence": 1
+       "silence": 2
       }
      ]
     ]
@@ -34137,16 +34138,16 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "burst_st": 1,
-    "knockback_displace": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "silence": 1,
-    "slow": 1,
-    "sustained_dps": 1,
-    "zone_control": 1
+    "burst_aoe": 4,
+    "burst_st": 2,
+    "knockback_displace": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "silence": 2,
+    "slow": 2,
+    "sustained_dps": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Heavy Crossbow",
@@ -34185,7 +34186,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 1
+     "sustained_dps": 2
     },
     "slot_names": [
      "e",
@@ -34205,25 +34206,25 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "burst_st": 1,
-       "ranged_presence": 1
+       "burst_aoe": 4,
+       "burst_st": 2,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       },
       {
-       "knockback_displace": 1,
-       "peel": 1
+       "knockback_displace": 2,
+       "peel": 2
       },
       {
-       "silence": 1
+       "silence": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ]
     ]
@@ -34284,15 +34285,15 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "knockback_displace": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "silence": 1,
-    "slow": 1,
-    "sustained_dps": 2,
-    "zone_control": 1
+    "burst_aoe": 4,
+    "knockback_displace": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "silence": 2,
+    "slow": 2,
+    "sustained_dps": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Siegebow",
@@ -34350,29 +34351,29 @@
     "slots": [
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ],
      [
       {
-       "burst_aoe": 2,
-       "ranged_presence": 1
+       "burst_aoe": 4,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       },
       {
-       "knockback_displace": 1,
-       "peel": 1
+       "knockback_displace": 2,
+       "peel": 2
       },
       {
-       "silence": 1
+       "silence": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ]
     ]
@@ -34434,15 +34435,15 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "knockback_displace": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "silence": 1,
-    "slow": 1,
-    "sustained_dps": 2,
-    "zone_control": 1
+    "burst_aoe": 4,
+    "knockback_displace": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "silence": 2,
+    "slow": 2,
+    "sustained_dps": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Energy Shaper",
@@ -34500,29 +34501,29 @@
     "slots": [
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ],
      [
       {
-       "burst_aoe": 2,
-       "ranged_presence": 1
+       "burst_aoe": 4,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       },
       {
-       "knockback_displace": 1,
-       "peel": 1
+       "knockback_displace": 2,
+       "peel": 2
       },
       {
-       "silence": 1
+       "silence": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ]
     ]
@@ -34586,15 +34587,15 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 1,
-    "heal_reduction": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 1,
-    "sustained_dps": 2,
-    "zone_control": 2
+    "buff_allies": 2,
+    "burst_aoe": 2,
+    "heal_reduction": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 2,
+    "sustained_dps": 4,
+    "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Great Cursed Staff",
@@ -34652,29 +34653,29 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "heal_reduction": 1,
-       "ranged_presence": 1,
-       "zone_control": 2
+       "burst_aoe": 2,
+       "heal_reduction": 2,
+       "ranged_presence": 2,
+       "zone_control": 4
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "root": 1
+       "root": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       },
       {
-       "slow": 1
+       "slow": 2
       }
      ]
     ]
@@ -34731,14 +34732,14 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 3,
-    "ranged_presence": 1,
-    "resist_shred": 2,
-    "root": 1,
-    "slow": 1,
-    "sustained_dps": 2,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_aoe": 6,
+    "ranged_presence": 2,
+    "resist_shred": 4,
+    "root": 2,
+    "slow": 2,
+    "sustained_dps": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Damnation Staff",
@@ -34792,26 +34793,26 @@
     "slots": [
      [
       {
-       "burst_aoe": 3,
-       "ranged_presence": 1,
-       "resist_shred": 2
+       "burst_aoe": 6,
+       "ranged_presence": 2,
+       "resist_shred": 4
       }
      ],
      [
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "root": 1
+       "root": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       },
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -34841,18 +34842,18 @@
     }
    },
    "capabilities": {
-    "burst_st": 3,
-    "catch": 2,
-    "disengage": 1,
-    "engage": 1,
-    "execute": 1,
-    "heal_reduction": 1,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "self_sustain": 1,
-    "stun": 1,
-    "sustained_dps": 2
+    "burst_st": 6,
+    "catch": 4,
+    "disengage": 2,
+    "engage": 2,
+    "execute": 2,
+    "heal_reduction": 2,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "self_sustain": 2,
+    "stun": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Dagger Pair",
@@ -34923,36 +34924,36 @@
     "slots": [
      [
       {
-       "burst_st": 3,
-       "execute": 1,
-       "heal_reduction": 1
+       "burst_st": 6,
+       "execute": 2,
+       "heal_reduction": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       },
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "catch": 2,
-       "peel": 1,
-       "stun": 1
+       "catch": 4,
+       "peel": 2,
+       "stun": 2
       },
       {
-       "disengage": 1
+       "disengage": 2
       }
      ],
      [
       {
-       "engage": 1,
-       "mobility": 2
+       "engage": 2,
+       "mobility": 4
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ]
     ]
@@ -34994,17 +34995,17 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "catch": 1,
-    "disengage": 1,
-    "engage": 1,
-    "heal_reduction": 1,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "self_sustain": 1,
-    "stun": 1,
-    "sustained_dps": 1
+    "burst_aoe": 4,
+    "catch": 2,
+    "disengage": 2,
+    "engage": 2,
+    "heal_reduction": 2,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "self_sustain": 2,
+    "stun": 2,
+    "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Twin Slayers",
@@ -35073,37 +35074,37 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "mobility": 2
+       "burst_aoe": 4,
+       "mobility": 4
       }
      ],
      [
       {
-       "heal_reduction": 1
+       "heal_reduction": 2
       },
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "catch": 1,
-       "peel": 1,
-       "stun": 1
+       "catch": 2,
+       "peel": 2,
+       "stun": 2
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       },
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "engage": 1
+       "engage": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ]
     ]
@@ -35151,17 +35152,17 @@
     }
    },
    "capabilities": {
-    "burst_st": 2,
-    "catch": 1,
-    "disengage": 2,
-    "engage": 1,
-    "heal_reduction": 1,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "self_sustain": 1,
-    "stun": 1,
-    "sustained_dps": 1
+    "burst_st": 4,
+    "catch": 2,
+    "disengage": 4,
+    "engage": 2,
+    "heal_reduction": 2,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "self_sustain": 2,
+    "stun": 2,
+    "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Bridled Fury",
@@ -35229,35 +35230,35 @@
     "slots": [
      [
       {
-       "burst_st": 2,
-       "disengage": 2,
-       "mobility": 2
+       "burst_st": 4,
+       "disengage": 4,
+       "mobility": 4
       }
      ],
      [
       {
-       "heal_reduction": 1
+       "heal_reduction": 2
       },
       {
-       "catch": 1,
-       "peel": 1,
-       "stun": 1
+       "catch": 2,
+       "peel": 2,
+       "stun": 2
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       },
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "engage": 1
+       "engage": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ]
     ]
@@ -35321,15 +35322,15 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 1,
-    "knockback_displace": 2,
-    "peel": 2,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "buff_allies": 2,
+    "burst_aoe": 2,
+    "knockback_displace": 4,
+    "peel": 4,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Demonic Staff",
@@ -35387,29 +35388,29 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "knockback_displace": 2,
-       "peel": 2,
-       "ranged_presence": 1
+       "burst_aoe": 2,
+       "knockback_displace": 4,
+       "peel": 4,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "root": 1
+       "root": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       },
       {
-       "slow": 1
+       "slow": 2
       }
      ]
     ]
@@ -35431,10 +35432,10 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "heal_burst": 2,
-    "heal_sustain": 2,
-    "peel": 1
+    "buff_allies": 4,
+    "heal_burst": 4,
+    "heal_sustain": 4,
+    "peel": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Divine Staff",
@@ -35471,16 +35472,16 @@
     "slots": [
      [
       {
-       "buff_allies": 2,
-       "heal_burst": 2
+       "buff_allies": 4,
+       "heal_burst": 4
       }
      ],
      [
       {
-       "heal_sustain": 2
+       "heal_sustain": 4
       },
       {
-       "peel": 1
+       "peel": 2
       }
      ]
     ]
@@ -35536,20 +35537,20 @@
     }
    },
    "capabilities": {
-    "anti_dive": 1,
-    "burst_aoe": 1,
-    "catch": 2,
-    "damage_debuff": 1,
-    "disengage": 2,
-    "engage": 2,
-    "knockback_displace": 1,
-    "mobility": 2,
-    "peel": 2,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 2,
-    "stun": 1,
-    "sustained_dps": 1
+    "anti_dive": 2,
+    "burst_aoe": 2,
+    "catch": 4,
+    "damage_debuff": 2,
+    "disengage": 4,
+    "engage": 4,
+    "knockback_displace": 2,
+    "mobility": 4,
+    "peel": 4,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 4,
+    "stun": 2,
+    "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Double Bladed Staff",
@@ -35623,36 +35624,36 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "catch": 2,
-       "disengage": 2,
-       "engage": 2,
-       "mobility": 2,
-       "slow": 2
+       "burst_aoe": 2,
+       "catch": 4,
+       "disengage": 4,
+       "engage": 4,
+       "mobility": 4,
+       "slow": 4
       }
      ],
      [
       {
-       "peel": 2,
-       "root": 1
+       "peel": 4,
+       "root": 2
       },
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       },
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       },
       {
-       "anti_dive": 1,
-       "damage_debuff": 1
+       "anti_dive": 2,
+       "damage_debuff": 2
       },
       {
-       "stun": 1
+       "stun": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -35729,18 +35730,18 @@
     }
    },
    "capabilities": {
-    "anti_dive": 1,
-    "burst_aoe": 1,
-    "knockback_displace": 1,
-    "mobility": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "stun": 1,
-    "sustained_dps": 1,
-    "zone_control": 1
+    "anti_dive": 2,
+    "burst_aoe": 2,
+    "knockback_displace": 2,
+    "mobility": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "stun": 2,
+    "sustained_dps": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Phantom Twinblade",
@@ -35811,36 +35812,36 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "knockback_displace": 1,
-       "ranged_presence": 1,
-       "slow": 1,
-       "zone_control": 1
+       "burst_aoe": 2,
+       "knockback_displace": 2,
+       "ranged_presence": 2,
+       "slow": 2,
+       "zone_control": 2
       }
      ],
      [
       {
-       "mobility": 1
+       "mobility": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       },
       {
-       "anti_dive": 1
+       "anti_dive": 2
       },
       {
-       "peel": 1,
-       "root": 1
+       "peel": 2,
+       "root": 2
       },
       {
-       "stun": 1
+       "stun": 2
       }
      ]
     ]
@@ -35899,17 +35900,17 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "catch": 2,
-    "disengage": 2,
-    "engage": 2,
-    "heal_reduction": 1,
-    "mobility": 3,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 2,
-    "sustained_dps": 2
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "catch": 4,
+    "disengage": 4,
+    "engage": 4,
+    "heal_reduction": 2,
+    "mobility": 6,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 4,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Bear Paws",
@@ -35972,29 +35973,29 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "catch": 2,
-       "disengage": 2,
-       "engage": 2,
-       "mobility": 3,
-       "self_sustain": 2
+       "burst_aoe": 4,
+       "catch": 4,
+       "disengage": 4,
+       "engage": 4,
+       "mobility": 6,
+       "self_sustain": 4
       }
      ],
      [
       {
-       "buff_allies": 1,
-       "heal_reduction": 1
+       "buff_allies": 2,
+       "heal_reduction": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "root": 1
+       "root": 2
       },
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -36057,16 +36058,16 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "disengage": 2,
-    "engage": 1,
-    "knockback_displace": 1,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "silence": 1,
-    "slow": 1,
-    "sustained_dps": 1
+    "burst_aoe": 4,
+    "disengage": 4,
+    "engage": 2,
+    "knockback_displace": 2,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "silence": 2,
+    "slow": 2,
+    "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Arclight Blasters",
@@ -36105,7 +36106,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 1
+     "sustained_dps": 2
     },
     "slot_names": [
      "e",
@@ -36125,25 +36126,25 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "disengage": 2,
-       "engage": 1,
-       "mobility": 2
+       "burst_aoe": 4,
+       "disengage": 4,
+       "engage": 2,
+       "mobility": 4
       }
      ],
      [
       {
-       "slow": 1
+       "slow": 2
       },
       {
-       "knockback_displace": 1,
-       "peel": 1
+       "knockback_displace": 2,
+       "peel": 2
       },
       {
-       "silence": 1
+       "silence": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ]
     ]
@@ -36198,16 +36199,16 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 1,
-    "burst_st": 2,
-    "knockback_displace": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "silence": 1,
-    "slow": 1,
-    "sustained_dps": 2,
-    "zone_control": 1
+    "burst_aoe": 2,
+    "burst_st": 4,
+    "knockback_displace": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "silence": 2,
+    "slow": 2,
+    "sustained_dps": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Boltcasters",
@@ -36268,30 +36269,30 @@
     "slots": [
      [
       {
-       "burst_st": 2,
-       "sustained_dps": 2
+       "burst_st": 4,
+       "sustained_dps": 4
       }
      ],
      [
       {
-       "burst_aoe": 1,
-       "ranged_presence": 1
+       "burst_aoe": 2,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       },
       {
-       "knockback_displace": 1,
-       "peel": 1
+       "knockback_displace": 2,
+       "peel": 2
       },
       {
-       "silence": 1
+       "silence": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ]
     ]
@@ -36390,21 +36391,21 @@
     }
    },
    "capabilities": {
-    "anti_dive": 2,
-    "catch": 1,
-    "disengage": 1,
-    "engage": 1,
-    "knockback_displace": 1,
-    "mobility": 1,
-    "peel": 2,
-    "purge": 1,
-    "resist_shred": 1,
-    "self_sustain": 1,
-    "slow": 2,
-    "stun": 1,
-    "sustained_dps": 1,
-    "tankiness": 2,
-    "zone_control": 2
+    "anti_dive": 4,
+    "catch": 2,
+    "disengage": 2,
+    "engage": 2,
+    "knockback_displace": 2,
+    "mobility": 2,
+    "peel": 4,
+    "purge": 2,
+    "resist_shred": 2,
+    "self_sustain": 2,
+    "slow": 4,
+    "stun": 2,
+    "sustained_dps": 2,
+    "tankiness": 4,
+    "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Forge Hammers",
@@ -36483,37 +36484,37 @@
     "slots": [
      [
       {
-       "anti_dive": 2,
-       "catch": 1,
-       "peel": 2,
-       "slow": 2,
-       "sustained_dps": 1,
-       "tankiness": 2,
-       "zone_control": 2
+       "anti_dive": 4,
+       "catch": 2,
+       "peel": 4,
+       "slow": 4,
+       "sustained_dps": 2,
+       "tankiness": 4,
+       "zone_control": 4
       }
      ],
      [
       {
-       "stun": 1
+       "stun": 2
       },
       {
-       "disengage": 1,
-       "engage": 1,
-       "mobility": 1
+       "disengage": 2,
+       "engage": 2,
+       "mobility": 2
       },
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       }
      ],
      [
       {
-       "purge": 1,
-       "resist_shred": 1
+       "purge": 2,
+       "resist_shred": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -36560,14 +36561,14 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "engage": 1,
-    "heal_sustain": 1,
-    "peel": 2,
-    "root": 1,
-    "slow": 1,
-    "tankiness": 2,
-    "zone_control": 1
+    "buff_allies": 4,
+    "engage": 2,
+    "heal_sustain": 2,
+    "peel": 4,
+    "root": 2,
+    "slow": 2,
+    "tankiness": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Oathkeepers",
@@ -36600,7 +36601,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -36622,23 +36623,23 @@
     "slots": [
      [
       {
-       "buff_allies": 2,
-       "engage": 1,
-       "heal_sustain": 1
+       "buff_allies": 4,
+       "engage": 2,
+       "heal_sustain": 2
       }
      ],
      [
       {
-       "root": 1
+       "root": 2
       },
       {
-       "peel": 2
+       "peel": 4
       }
      ],
      [
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -36683,16 +36684,16 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 3,
-    "catch": 1,
-    "disengage": 1,
-    "execute": 1,
-    "mobility": 2,
-    "peel": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "burst_aoe": 6,
+    "catch": 2,
+    "disengage": 2,
+    "execute": 2,
+    "mobility": 4,
+    "peel": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Galatine Pair",
@@ -36756,32 +36757,32 @@
     "slots": [
      [
       {
-       "burst_aoe": 3,
-       "execute": 1
+       "burst_aoe": 6,
+       "execute": 2
       }
      ],
      [
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "catch": 1,
-       "slow": 1
+       "catch": 2,
+       "slow": 2
       },
       {
-       "peel": 1,
-       "root": 1
+       "peel": 2,
+       "root": 2
       }
      ],
      [
       {
-       "mobility": 2,
-       "sustained_dps": 2
+       "mobility": 4,
+       "sustained_dps": 4
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -36811,17 +36812,17 @@
     }
    },
    "capabilities": {
-    "burst_st": 2,
-    "catch": 2,
-    "disengage": 2,
-    "engage": 2,
-    "heal_reduction": 1,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "self_sustain": 1,
-    "stun": 1,
-    "sustained_dps": 1
+    "burst_st": 4,
+    "catch": 4,
+    "disengage": 4,
+    "engage": 4,
+    "heal_reduction": 2,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "self_sustain": 2,
+    "stun": 2,
+    "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Deathgivers",
@@ -36863,7 +36864,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 1
+     "sustained_dps": 2
     },
     "slot_names": [
      "e",
@@ -36890,32 +36891,32 @@
     "slots": [
      [
       {
-       "burst_st": 2,
-       "disengage": 2,
-       "engage": 2
+       "burst_st": 4,
+       "disengage": 4,
+       "engage": 4
       }
      ],
      [
       {
-       "mobility": 2
+       "mobility": 4
       },
       {
-       "catch": 2,
-       "peel": 1,
-       "stun": 1
+       "catch": 4,
+       "peel": 2,
+       "stun": 2
       },
       {
-       "heal_reduction": 1
+       "heal_reduction": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ]
     ]
@@ -36970,16 +36971,16 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 1,
-    "catch": 2,
-    "disengage": 2,
-    "engage": 2,
-    "mobility": 3,
-    "peel": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "burst_aoe": 2,
+    "catch": 4,
+    "disengage": 4,
+    "engage": 4,
+    "mobility": 6,
+    "peel": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Dual Swords",
@@ -37038,26 +37039,26 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "catch": 2,
-       "disengage": 2,
-       "engage": 2,
-       "mobility": 3,
-       "sustained_dps": 2
+       "burst_aoe": 2,
+       "catch": 4,
+       "disengage": 4,
+       "engage": 4,
+       "mobility": 6,
+       "sustained_dps": 4
       }
      ],
      [
       {
-       "slow": 1
+       "slow": 2
       },
       {
-       "peel": 1,
-       "root": 1
+       "peel": 2,
+       "root": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -37088,12 +37089,12 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "cleanse": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "silence": 1,
-    "sustained_dps": 1
+    "buff_allies": 2,
+    "cleanse": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "silence": 2,
+    "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Malevolent Locus",
@@ -37144,26 +37145,26 @@
     "slots": [
      [
       {
-       "cleanse": 2,
-       "peel": 1
+       "cleanse": 4,
+       "peel": 2
       }
      ],
      [
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "silence": 1
+       "silence": 2
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       }
      ]
     ]
@@ -37195,12 +37196,12 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "cleanse": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "silence": 1,
-    "sustained_dps": 1
+    "buff_allies": 4,
+    "cleanse": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "silence": 2,
+    "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Enigmatic Staff",
@@ -37252,28 +37253,28 @@
     "slots": [
      [
       {
-       "buff_allies": 2
+       "buff_allies": 4
       }
      ],
      [
       {
-       "cleanse": 2
+       "cleanse": 4
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "silence": 1
+       "silence": 2
       },
       {
-       "peel": 1
+       "peel": 2
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       }
      ]
     ]
@@ -37323,13 +37324,13 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "knockback_displace": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "sustained_dps": 2,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "knockback_displace": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "sustained_dps": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Great Fire Staff",
@@ -37359,7 +37360,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 2
+     "sustained_dps": 4
     },
     "slot_names": [
      "e",
@@ -37378,20 +37379,20 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "ranged_presence": 1
+       "burst_aoe": 4,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "knockback_displace": 1,
-       "peel": 1
+       "knockback_displace": 2,
+       "peel": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "zone_control": 1
+       "zone_control": 2
       }
      ]
     ]
@@ -37441,13 +37442,13 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 3,
-    "knockback_displace": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "sustained_dps": 2,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_aoe": 6,
+    "knockback_displace": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "sustained_dps": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Brimstone Staff",
@@ -37477,7 +37478,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 2
+     "sustained_dps": 4
     },
     "slot_names": [
      "e",
@@ -37496,20 +37497,20 @@
     "slots": [
      [
       {
-       "burst_aoe": 3,
-       "knockback_displace": 1,
-       "ranged_presence": 1
+       "burst_aoe": 6,
+       "knockback_displace": 2,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "peel": 1
+       "peel": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "zone_control": 1
+       "zone_control": 2
       }
      ]
     ]
@@ -37566,14 +37567,14 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 3,
-    "heal_reduction": 2,
-    "knockback_displace": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "sustained_dps": 2,
-    "zone_control": 2
+    "buff_allies": 2,
+    "burst_aoe": 6,
+    "heal_reduction": 4,
+    "knockback_displace": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "sustained_dps": 4,
+    "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Dawnsong",
@@ -37606,7 +37607,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 2
+     "sustained_dps": 4
     },
     "slot_names": [
      "e",
@@ -37624,19 +37625,19 @@
     "slots": [
      [
       {
-       "burst_aoe": 3,
-       "heal_reduction": 2,
-       "ranged_presence": 1,
-       "zone_control": 2
+       "burst_aoe": 6,
+       "heal_reduction": 4,
+       "ranged_presence": 2,
+       "zone_control": 4
       }
      ],
      [
       {
-       "knockback_displace": 1,
-       "peel": 1
+       "knockback_displace": 2,
+       "peel": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ]
     ]
@@ -37679,14 +37680,14 @@
     }
    },
    "capabilities": {
-    "catch": 2,
-    "engage": 2,
-    "mobility": 1,
-    "peel": 2,
-    "root": 3,
-    "slow": 1,
-    "tankiness": 2,
-    "zone_control": 1
+    "catch": 4,
+    "engage": 4,
+    "mobility": 2,
+    "peel": 4,
+    "root": 6,
+    "slow": 2,
+    "tankiness": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Morning Star",
@@ -37719,7 +37720,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -37736,17 +37737,17 @@
     "slots": [
      [
       {
-       "catch": 2,
-       "engage": 2,
-       "mobility": 1,
-       "peel": 2,
-       "root": 3
+       "catch": 4,
+       "engage": 4,
+       "mobility": 2,
+       "peel": 4,
+       "root": 6
       }
      ],
      [
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -37834,18 +37835,18 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "catch": 1,
-    "disengage": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 2,
-    "stun": 1,
-    "sustained_dps": 1,
-    "zone_control": 2
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "catch": 2,
+    "disengage": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 4,
+    "stun": 2,
+    "sustained_dps": 2,
+    "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Great Frost Staff",
@@ -37890,7 +37891,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 1
+     "sustained_dps": 2
     },
     "slot_names": [
      "e",
@@ -37914,31 +37915,31 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "catch": 1,
-       "peel": 1,
-       "ranged_presence": 1
+       "burst_aoe": 4,
+       "catch": 2,
+       "peel": 2,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "slow": 2,
-       "zone_control": 2
+       "slow": 4,
+       "zone_control": 4
       },
       {
-       "disengage": 1,
-       "stun": 1
+       "disengage": 2,
+       "stun": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "root": 1
+       "root": 2
       }
      ]
     ]
@@ -38023,17 +38024,17 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 1,
-    "catch": 1,
-    "disengage": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 2,
-    "stun": 1,
-    "sustained_dps": 2,
-    "zone_control": 2
+    "buff_allies": 2,
+    "burst_aoe": 2,
+    "catch": 2,
+    "disengage": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 4,
+    "stun": 2,
+    "sustained_dps": 4,
+    "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Arctic Staff",
@@ -38101,35 +38102,35 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "ranged_presence": 1,
-       "slow": 2,
-       "sustained_dps": 2
+       "burst_aoe": 2,
+       "ranged_presence": 2,
+       "slow": 4,
+       "sustained_dps": 4
       }
      ],
      [
       {
-       "catch": 1
+       "catch": 2
       }
      ],
      [
       {
-       "zone_control": 2
+       "zone_control": 4
       },
       {
-       "disengage": 1,
-       "stun": 1
+       "disengage": 2,
+       "stun": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "root": 1
+       "root": 2
       }
      ]
     ]
@@ -38219,18 +38220,18 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 1,
-    "catch": 1,
-    "disengage": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 2,
-    "stun": 1,
-    "sustained_dps": 1,
-    "zone_control": 3
+    "buff_allies": 2,
+    "burst_aoe": 2,
+    "catch": 2,
+    "disengage": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 4,
+    "stun": 2,
+    "sustained_dps": 2,
+    "zone_control": 6
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Glacial Staff",
@@ -38296,30 +38297,30 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "catch": 1,
-       "peel": 1,
-       "ranged_presence": 1,
-       "slow": 2,
-       "sustained_dps": 1,
-       "zone_control": 3
+       "burst_aoe": 2,
+       "catch": 2,
+       "peel": 2,
+       "ranged_presence": 2,
+       "slow": 4,
+       "sustained_dps": 2,
+       "zone_control": 6
       }
      ],
      [
       {
-       "disengage": 1,
-       "stun": 1
+       "disengage": 2,
+       "stun": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "root": 1
+       "root": 2
       }
      ]
     ]
@@ -38346,14 +38347,14 @@
     }
    },
    "capabilities": {
-    "catch": 2,
-    "knockback_displace": 2,
-    "mobility": 1,
-    "peel": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "catch": 4,
+    "knockback_displace": 4,
+    "mobility": 2,
+    "peel": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Glaive",
@@ -38412,32 +38413,32 @@
     "slots": [
      [
       {
-       "catch": 2,
-       "knockback_displace": 2
+       "catch": 4,
+       "knockback_displace": 4
       }
      ],
      [
       {
-       "mobility": 1
+       "mobility": 2
       },
       {
-       "slow": 1
+       "slow": 2
       },
       {
-       "peel": 1
+       "peel": 2
       },
       {
-       "root": 1
+       "root": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -38478,16 +38479,16 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "catch": 2,
-    "knockback_displace": 1,
-    "mobility": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "burst_aoe": 4,
+    "catch": 4,
+    "knockback_displace": 2,
+    "mobility": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Rift Glaive",
@@ -38552,34 +38553,34 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "knockback_displace": 1,
-       "ranged_presence": 1
+       "burst_aoe": 4,
+       "knockback_displace": 2,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "mobility": 1
+       "mobility": 2
       },
       {
-       "slow": 1
+       "slow": 2
       },
       {
-       "catch": 2,
-       "peel": 1
+       "catch": 4,
+       "peel": 2
       },
       {
-       "root": 1
+       "root": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -38634,16 +38635,16 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "catch": 1,
-    "engage": 1,
-    "heal_reduction": 1,
-    "mobility": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "sustained_dps": 2
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "catch": 2,
+    "engage": 2,
+    "heal_reduction": 2,
+    "mobility": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Halberd",
@@ -38708,34 +38709,34 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "heal_reduction": 1
+       "burst_aoe": 4,
+       "heal_reduction": 2
       }
      ],
      [
       {
-       "catch": 1
+       "catch": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1,
-       "engage": 1
+       "buff_allies": 2,
+       "engage": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "mobility": 1,
-       "root": 1
+       "mobility": 2,
+       "root": 2
       },
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -38790,17 +38791,17 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 1,
-    "catch": 1,
-    "engage": 1,
-    "heal_reduction": 2,
-    "mobility": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "sustained_dps": 2
+    "buff_allies": 2,
+    "burst_aoe": 2,
+    "catch": 2,
+    "engage": 2,
+    "heal_reduction": 4,
+    "mobility": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Carrioncaller",
@@ -38868,35 +38869,35 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "heal_reduction": 2,
-       "ranged_presence": 1
+       "burst_aoe": 2,
+       "heal_reduction": 4,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "catch": 1
+       "catch": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1,
-       "engage": 1
+       "buff_allies": 2,
+       "engage": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "mobility": 1,
-       "root": 1
+       "mobility": 2,
+       "root": 2
       },
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -38974,20 +38975,20 @@
     }
    },
    "capabilities": {
-    "anti_dive": 2,
-    "catch": 2,
-    "disengage": 2,
-    "engage": 3,
-    "knockback_displace": 1,
-    "mobility": 2,
-    "peel": 2,
-    "purge": 1,
-    "resist_shred": 1,
-    "self_sustain": 1,
-    "slow": 2,
-    "stun": 2,
-    "tankiness": 2,
-    "zone_control": 1
+    "anti_dive": 4,
+    "catch": 4,
+    "disengage": 4,
+    "engage": 6,
+    "knockback_displace": 2,
+    "mobility": 4,
+    "peel": 4,
+    "purge": 2,
+    "resist_shred": 2,
+    "self_sustain": 2,
+    "slow": 4,
+    "stun": 4,
+    "tankiness": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Great Hammer",
@@ -39038,7 +39039,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -39063,31 +39064,31 @@
     "slots": [
      [
       {
-       "catch": 2,
-       "disengage": 2,
-       "engage": 3,
-       "knockback_displace": 1,
-       "mobility": 2,
-       "peel": 2,
-       "stun": 2
+       "catch": 4,
+       "disengage": 4,
+       "engage": 6,
+       "knockback_displace": 2,
+       "mobility": 4,
+       "peel": 4,
+       "stun": 4
       }
      ],
      [
       {
-       "purge": 1,
-       "resist_shred": 1
+       "purge": 2,
+       "resist_shred": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "anti_dive": 2,
-       "slow": 2,
-       "zone_control": 1
+       "anti_dive": 4,
+       "slow": 4,
+       "zone_control": 2
       }
      ]
     ]
@@ -39172,21 +39173,21 @@
     }
    },
    "capabilities": {
-    "anti_dive": 2,
-    "catch": 2,
-    "clump_create": 3,
-    "disengage": 2,
-    "engage": 3,
-    "knockback_displace": 1,
-    "mobility": 2,
-    "peel": 2,
-    "purge": 1,
-    "resist_shred": 1,
-    "self_sustain": 1,
-    "slow": 2,
-    "stun": 2,
-    "tankiness": 2,
-    "zone_control": 1
+    "anti_dive": 4,
+    "catch": 4,
+    "clump_create": 6,
+    "disengage": 4,
+    "engage": 6,
+    "knockback_displace": 2,
+    "mobility": 4,
+    "peel": 4,
+    "purge": 2,
+    "resist_shred": 2,
+    "self_sustain": 2,
+    "slow": 4,
+    "stun": 4,
+    "tankiness": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Hand of Justice",
@@ -39240,7 +39241,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -39265,32 +39266,32 @@
     "slots": [
      [
       {
-       "catch": 2,
-       "clump_create": 3,
-       "disengage": 2,
-       "engage": 3,
-       "knockback_displace": 1,
-       "mobility": 2,
-       "peel": 2,
-       "stun": 2
+       "catch": 4,
+       "clump_create": 6,
+       "disengage": 4,
+       "engage": 6,
+       "knockback_displace": 2,
+       "mobility": 4,
+       "peel": 4,
+       "stun": 4
       }
      ],
      [
       {
-       "purge": 1,
-       "resist_shred": 1
+       "purge": 2,
+       "resist_shred": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "anti_dive": 2,
-       "slow": 2,
-       "zone_control": 1
+       "anti_dive": 4,
+       "slow": 4,
+       "zone_control": 2
       }
      ]
     ]
@@ -39368,20 +39369,20 @@
     }
    },
    "capabilities": {
-    "anti_dive": 2,
-    "buff_allies": 1,
-    "disengage": 1,
-    "engage": 1,
-    "knockback_displace": 1,
-    "mobility": 1,
-    "peel": 2,
-    "purge": 1,
-    "resist_shred": 1,
-    "self_sustain": 1,
-    "slow": 2,
-    "stun": 2,
-    "tankiness": 2,
-    "zone_control": 1
+    "anti_dive": 4,
+    "buff_allies": 2,
+    "disengage": 2,
+    "engage": 2,
+    "knockback_displace": 2,
+    "mobility": 2,
+    "peel": 4,
+    "purge": 2,
+    "resist_shred": 2,
+    "self_sustain": 2,
+    "slow": 4,
+    "stun": 4,
+    "tankiness": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Truebolt Hammer",
@@ -39432,7 +39433,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -39459,35 +39460,35 @@
     "slots": [
      [
       {
-       "buff_allies": 1,
-       "stun": 2
+       "buff_allies": 2,
+       "stun": 4
       }
      ],
      [
       {
-       "knockback_displace": 1,
-       "peel": 2
+       "knockback_displace": 2,
+       "peel": 4
       },
       {
-       "disengage": 1,
-       "engage": 1,
-       "mobility": 1
+       "disengage": 2,
+       "engage": 2,
+       "mobility": 2
       },
       {
-       "anti_dive": 2,
-       "slow": 2,
-       "zone_control": 1
+       "anti_dive": 4,
+       "slow": 4,
+       "zone_control": 2
       }
      ],
      [
       {
-       "purge": 1,
-       "resist_shred": 1
+       "purge": 2,
+       "resist_shred": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -39572,21 +39573,21 @@
     }
    },
    "capabilities": {
-    "anti_dive": 2,
-    "catch": 2,
-    "disengage": 1,
-    "engage": 1,
-    "execute": 1,
-    "knockback_displace": 1,
-    "mobility": 1,
-    "peel": 2,
-    "purge": 1,
-    "resist_shred": 1,
-    "self_sustain": 1,
-    "slow": 2,
-    "stun": 2,
-    "tankiness": 2,
-    "zone_control": 1
+    "anti_dive": 4,
+    "catch": 4,
+    "disengage": 2,
+    "engage": 2,
+    "execute": 2,
+    "knockback_displace": 2,
+    "mobility": 2,
+    "peel": 4,
+    "purge": 2,
+    "resist_shred": 2,
+    "self_sustain": 2,
+    "slow": 4,
+    "stun": 4,
+    "tankiness": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Tombhammer",
@@ -39640,7 +39641,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -39667,36 +39668,36 @@
     "slots": [
      [
       {
-       "catch": 2,
-       "execute": 1,
-       "peel": 2,
-       "stun": 2
+       "catch": 4,
+       "execute": 2,
+       "peel": 4,
+       "stun": 4
       }
      ],
      [
       {
-       "disengage": 1,
-       "engage": 1,
-       "mobility": 1
+       "disengage": 2,
+       "engage": 2,
+       "mobility": 2
       },
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       },
       {
-       "anti_dive": 2,
-       "slow": 2,
-       "zone_control": 1
+       "anti_dive": 4,
+       "slow": 4,
+       "zone_control": 2
       }
      ],
      [
       {
-       "purge": 1,
-       "resist_shred": 1
+       "purge": 2,
+       "resist_shred": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -39737,17 +39738,17 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 1,
-    "catch": 2,
-    "damage_debuff": 1,
-    "mobility": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 2,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "burst_aoe": 2,
+    "catch": 4,
+    "damage_debuff": 2,
+    "mobility": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 4,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Spirithunter",
@@ -39815,35 +39816,35 @@
     "slots": [
      [
       {
-       "resist_shred": 2
+       "resist_shred": 4
       }
      ],
      [
       {
-       "catch": 2,
-       "damage_debuff": 1,
-       "peel": 1
+       "catch": 4,
+       "damage_debuff": 2,
+       "peel": 2
       },
       {
-       "burst_aoe": 1,
-       "ranged_presence": 1,
-       "slow": 1
+       "burst_aoe": 2,
+       "ranged_presence": 2,
+       "slow": 2
       },
       {
-       "mobility": 1
+       "mobility": 2
       },
       {
-       "root": 1
+       "root": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -39883,11 +39884,11 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "heal_burst": 2,
-    "heal_sustain": 3,
-    "knockback_displace": 2,
-    "peel": 2
+    "buff_allies": 4,
+    "heal_burst": 4,
+    "heal_sustain": 6,
+    "knockback_displace": 4,
+    "peel": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Great Holy Staff",
@@ -39926,15 +39927,15 @@
     "slots": [
      [
       {
-       "buff_allies": 2,
-       "heal_sustain": 3,
-       "knockback_displace": 2,
-       "peel": 2
+       "buff_allies": 4,
+       "heal_sustain": 6,
+       "knockback_displace": 4,
+       "peel": 4
       }
      ],
      [
       {
-       "heal_burst": 2
+       "heal_burst": 4
       }
      ]
     ]
@@ -39971,11 +39972,11 @@
     }
    },
    "capabilities": {
-    "anti_zone": 2,
-    "buff_allies": 1,
-    "heal_burst": 2,
-    "heal_sustain": 2,
-    "peel": 1
+    "anti_zone": 4,
+    "buff_allies": 2,
+    "heal_burst": 4,
+    "heal_sustain": 4,
+    "peel": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Exalted Staff",
@@ -40015,17 +40016,17 @@
     "slots": [
      [
       {
-       "anti_zone": 2,
-       "buff_allies": 1,
-       "heal_burst": 2
+       "anti_zone": 4,
+       "buff_allies": 2,
+       "heal_burst": 4
       }
      ],
      [
       {
-       "heal_sustain": 2
+       "heal_sustain": 4
       },
       {
-       "peel": 1
+       "peel": 2
       }
      ]
     ]
@@ -40055,11 +40056,11 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "cleanse": 2,
-    "heal_burst": 3,
-    "heal_sustain": 2,
-    "peel": 2
+    "buff_allies": 2,
+    "cleanse": 4,
+    "heal_burst": 6,
+    "heal_sustain": 4,
+    "peel": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Fallen Staff",
@@ -40099,17 +40100,17 @@
     "slots": [
      [
       {
-       "cleanse": 2,
-       "heal_burst": 3,
-       "peel": 2
+       "cleanse": 4,
+       "heal_burst": 6,
+       "peel": 4
       }
      ],
      [
       {
-       "heal_sustain": 2
+       "heal_sustain": 4
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ]
     ]
@@ -40136,10 +40137,10 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "heal_burst": 2,
-    "heal_sustain": 3,
-    "peel": 1
+    "buff_allies": 4,
+    "heal_burst": 4,
+    "heal_sustain": 6,
+    "peel": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Redemption Staff",
@@ -40180,20 +40181,20 @@
     "slots": [
      [
       {
-       "heal_sustain": 3
+       "heal_sustain": 6
       }
      ],
      [
       {
-       "buff_allies": 2
+       "buff_allies": 4
       },
       {
-       "peel": 1
+       "peel": 2
       }
      ],
      [
       {
-       "heal_burst": 2
+       "heal_burst": 4
       }
      ]
     ]
@@ -40277,18 +40278,18 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 3,
-    "catch": 2,
-    "disengage": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 2,
-    "stun": 2,
-    "sustained_dps": 1,
-    "zone_control": 3
+    "buff_allies": 2,
+    "burst_aoe": 6,
+    "catch": 4,
+    "disengage": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 4,
+    "stun": 4,
+    "sustained_dps": 2,
+    "zone_control": 6
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Permafrost Prism",
@@ -40333,7 +40334,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 1
+     "sustained_dps": 2
     },
     "slot_names": [
      "e",
@@ -40357,31 +40358,31 @@
     "slots": [
      [
       {
-       "burst_aoe": 3,
-       "catch": 2,
-       "peel": 1,
-       "ranged_presence": 1,
-       "stun": 2
+       "burst_aoe": 6,
+       "catch": 4,
+       "peel": 2,
+       "ranged_presence": 2,
+       "stun": 4
       }
      ],
      [
       {
-       "slow": 2,
-       "zone_control": 3
+       "slow": 4,
+       "zone_control": 6
       },
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "root": 1
+       "root": 2
       }
      ]
     ]
@@ -40472,19 +40473,19 @@
     }
    },
    "capabilities": {
-    "anti_dive": 1,
-    "buff_allies": 1,
-    "burst_aoe": 1,
-    "catch": 1,
-    "disengage": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 2,
-    "stun": 1,
-    "sustained_dps": 1,
-    "zone_control": 2
+    "anti_dive": 2,
+    "buff_allies": 2,
+    "burst_aoe": 2,
+    "catch": 2,
+    "disengage": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 4,
+    "stun": 2,
+    "sustained_dps": 2,
+    "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Icicle Staff",
@@ -40532,7 +40533,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 1
+     "sustained_dps": 2
     },
     "slot_names": [
      "e",
@@ -40555,30 +40556,30 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "catch": 1,
-       "peel": 1,
-       "ranged_presence": 1,
-       "slow": 2,
-       "zone_control": 2
+       "burst_aoe": 2,
+       "catch": 2,
+       "peel": 2,
+       "ranged_presence": 2,
+       "slow": 4,
+       "zone_control": 4
       }
      ],
      [
       {
-       "anti_dive": 1,
-       "disengage": 1,
-       "stun": 1
+       "anti_dive": 2,
+       "disengage": 2,
+       "stun": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "root": 1
+       "root": 2
       }
      ]
     ]
@@ -40628,12 +40629,12 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_st": 1,
-    "knockback_displace": 1,
-    "peel": 2,
-    "sustained_dps": 2,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_st": 2,
+    "knockback_displace": 2,
+    "peel": 4,
+    "sustained_dps": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Infernal Staff",
@@ -40660,7 +40661,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 2
+     "sustained_dps": 4
     },
     "slot_names": [
      "e",
@@ -40677,15 +40678,15 @@
     "slots": [
      [
       {
-       "burst_st": 1,
-       "knockback_displace": 1,
-       "peel": 2,
-       "zone_control": 1
+       "burst_st": 2,
+       "knockback_displace": 2,
+       "peel": 4,
+       "zone_control": 2
       }
      ],
      [
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ]
     ]
@@ -40743,13 +40744,13 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "knockback_displace": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "sustained_dps": 2,
-    "zone_control": 3
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "knockback_displace": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "sustained_dps": 4,
+    "zone_control": 6
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Blazing Staff",
@@ -40796,21 +40797,21 @@
     "slots": [
      [
       {
-       "sustained_dps": 2,
-       "zone_control": 3
+       "sustained_dps": 4,
+       "zone_control": 6
       }
      ],
      [
       {
-       "burst_aoe": 2,
-       "ranged_presence": 1
+       "burst_aoe": 4,
+       "ranged_presence": 2
       },
       {
-       "knockback_displace": 1,
-       "peel": 1
+       "knockback_displace": 2,
+       "peel": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ]
     ]
@@ -40873,15 +40874,15 @@
     }
    },
    "capabilities": {
-    "anti_dive": 1,
-    "knockback_displace": 3,
-    "mobility": 1,
-    "peel": 2,
-    "root": 1,
-    "self_sustain": 1,
-    "stun": 1,
-    "sustained_dps": 1,
-    "tankiness": 1
+    "anti_dive": 2,
+    "knockback_displace": 6,
+    "mobility": 2,
+    "peel": 4,
+    "root": 2,
+    "self_sustain": 2,
+    "stun": 2,
+    "sustained_dps": 2,
+    "tankiness": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Iron-clad Staff",
@@ -40942,31 +40943,31 @@
     "slots": [
      [
       {
-       "anti_dive": 1,
-       "knockback_displace": 3,
-       "peel": 2,
-       "tankiness": 1
+       "anti_dive": 2,
+       "knockback_displace": 6,
+       "peel": 4,
+       "tankiness": 2
       }
      ],
      [
       {
-       "mobility": 1
+       "mobility": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       },
       {
-       "root": 1
+       "root": 2
       },
       {
-       "stun": 1
+       "stun": 2
       }
      ]
     ]
@@ -40991,18 +40992,18 @@
     }
    },
    "capabilities": {
-    "burst_st": 2,
-    "catch": 1,
-    "disengage": 1,
-    "engage": 1,
-    "heal_reduction": 1,
-    "mobility": 2,
-    "peel": 1,
-    "purge": 1,
-    "resist_shred": 1,
-    "self_sustain": 1,
-    "stun": 1,
-    "sustained_dps": 1
+    "burst_st": 4,
+    "catch": 2,
+    "disengage": 2,
+    "engage": 2,
+    "heal_reduction": 2,
+    "mobility": 4,
+    "peel": 2,
+    "purge": 2,
+    "resist_shred": 2,
+    "self_sustain": 2,
+    "stun": 2,
+    "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Black Hands",
@@ -41074,38 +41075,38 @@
     "slots": [
      [
       {
-       "burst_st": 2,
-       "purge": 1,
-       "stun": 1
+       "burst_st": 4,
+       "purge": 2,
+       "stun": 2
       }
      ],
      [
       {
-       "engage": 1,
-       "mobility": 2
+       "engage": 2,
+       "mobility": 4
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "peel": 1
+       "catch": 2,
+       "peel": 2
       },
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "heal_reduction": 1
+       "heal_reduction": 2
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       },
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -41192,18 +41193,18 @@
     }
    },
    "capabilities": {
-    "burst_st": 1,
-    "catch": 1,
-    "clump_create": 1,
-    "disengage": 1,
-    "engage": 2,
-    "knockback_displace": 1,
-    "mobility": 2,
-    "peel": 1,
-    "purge": 1,
-    "resist_shred": 1,
-    "stun": 1,
-    "sustained_dps": 2
+    "burst_st": 2,
+    "catch": 2,
+    "clump_create": 2,
+    "disengage": 2,
+    "engage": 4,
+    "knockback_displace": 2,
+    "mobility": 4,
+    "peel": 2,
+    "purge": 2,
+    "resist_shred": 2,
+    "stun": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Fists of Avalon",
@@ -41273,34 +41274,34 @@
     "slots": [
      [
       {
-       "disengage": 1,
-       "engage": 2,
-       "knockback_displace": 1,
-       "mobility": 2,
-       "purge": 1
+       "disengage": 2,
+       "engage": 4,
+       "knockback_displace": 2,
+       "mobility": 4,
+       "purge": 2
       }
      ],
      [
       {
-       "peel": 1,
-       "resist_shred": 1
+       "peel": 2,
+       "resist_shred": 2
       },
       {
-       "burst_st": 1,
-       "stun": 1
+       "burst_st": 2,
+       "stun": 2
       },
       {
-       "clump_create": 1
+       "clump_create": 2
       }
      ],
      [
       {
-       "catch": 1
+       "catch": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -41358,17 +41359,17 @@
     }
    },
    "capabilities": {
-    "burst_st": 2,
-    "catch": 1,
-    "clump_create": 1,
-    "engage": 1,
-    "execute": 1,
-    "knockback_displace": 1,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "stun": 1,
-    "sustained_dps": 2
+    "burst_st": 4,
+    "catch": 2,
+    "clump_create": 2,
+    "engage": 2,
+    "execute": 2,
+    "knockback_displace": 2,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "stun": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Forcepulse Bracers",
@@ -41435,33 +41436,33 @@
     "slots": [
      [
       {
-       "burst_st": 2,
-       "engage": 1,
-       "execute": 1,
-       "mobility": 2
+       "burst_st": 4,
+       "engage": 2,
+       "execute": 2,
+       "mobility": 4
       }
      ],
      [
       {
-       "knockback_displace": 1,
-       "peel": 1,
-       "resist_shred": 1
+       "knockback_displace": 2,
+       "peel": 2,
+       "resist_shred": 2
       },
       {
-       "stun": 1
+       "stun": 2
       },
       {
-       "clump_create": 1
+       "clump_create": 2
       }
      ],
      [
       {
-       "catch": 1
+       "catch": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -41548,19 +41549,19 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "burst_st": 1,
-    "catch": 1,
-    "clump_create": 1,
-    "engage": 1,
-    "heal_reduction": 1,
-    "knockback_displace": 1,
-    "mobility": 2,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "stun": 1,
-    "sustained_dps": 2
+    "burst_aoe": 4,
+    "burst_st": 2,
+    "catch": 2,
+    "clump_create": 2,
+    "engage": 2,
+    "heal_reduction": 2,
+    "knockback_displace": 2,
+    "mobility": 4,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "stun": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Hellfire Hands",
@@ -41633,35 +41634,35 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "heal_reduction": 1,
-       "ranged_presence": 1
+       "burst_aoe": 4,
+       "heal_reduction": 2,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "knockback_displace": 1,
-       "peel": 1,
-       "resist_shred": 1
+       "knockback_displace": 2,
+       "peel": 2,
+       "resist_shred": 2
       },
       {
-       "burst_st": 1,
-       "stun": 1
+       "burst_st": 2,
+       "stun": 2
       },
       {
-       "clump_create": 1
+       "clump_create": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "engage": 1,
-       "mobility": 2
+       "catch": 2,
+       "engage": 2,
+       "mobility": 4
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -41745,17 +41746,17 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 1,
-    "burst_st": 2,
-    "catch": 1,
-    "clump_create": 1,
-    "engage": 1,
-    "knockback_displace": 1,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "stun": 1,
-    "sustained_dps": 2
+    "burst_aoe": 2,
+    "burst_st": 4,
+    "catch": 2,
+    "clump_create": 2,
+    "engage": 2,
+    "knockback_displace": 2,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "stun": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Ursine Maulers",
@@ -41818,29 +41819,29 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "burst_st": 2,
-       "sustained_dps": 2
+       "burst_aoe": 2,
+       "burst_st": 4,
+       "sustained_dps": 4
       }
      ],
      [
       {
-       "knockback_displace": 1,
-       "peel": 1,
-       "resist_shred": 1
+       "knockback_displace": 2,
+       "peel": 2,
+       "resist_shred": 2
       },
       {
-       "stun": 1
+       "stun": 2
       },
       {
-       "clump_create": 1
+       "clump_create": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "engage": 1,
-       "mobility": 2
+       "catch": 2,
+       "engage": 2,
+       "mobility": 4
       }
      ]
     ]
@@ -41897,17 +41898,17 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "burst_st": 1,
-    "catch": 1,
-    "clump_create": 1,
-    "engage": 1,
-    "knockback_displace": 2,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "stun": 1,
-    "sustained_dps": 2
+    "burst_aoe": 4,
+    "burst_st": 2,
+    "catch": 2,
+    "clump_create": 2,
+    "engage": 2,
+    "knockback_displace": 4,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "stun": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Ravenstrike Cestus",
@@ -41974,33 +41975,33 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "knockback_displace": 2,
-       "peel": 1
+       "burst_aoe": 4,
+       "knockback_displace": 4,
+       "peel": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "burst_st": 1,
-       "stun": 1
+       "burst_st": 2,
+       "stun": 2
       },
       {
-       "clump_create": 1
+       "clump_create": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "engage": 1,
-       "mobility": 2
+       "catch": 2,
+       "engage": 2,
+       "mobility": 4
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -42078,17 +42079,17 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "burst_st": 1,
-    "catch": 1,
-    "clump_create": 1,
-    "engage": 1,
-    "knockback_displace": 1,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "stun": 1,
-    "sustained_dps": 2
+    "burst_aoe": 4,
+    "burst_st": 2,
+    "catch": 2,
+    "clump_create": 2,
+    "engage": 2,
+    "knockback_displace": 2,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "stun": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Brawler Gloves",
@@ -42155,33 +42156,33 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "knockback_displace": 1,
-       "peel": 1
+       "burst_aoe": 4,
+       "knockback_displace": 2,
+       "peel": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "burst_st": 1,
-       "stun": 1
+       "burst_st": 2,
+       "stun": 2
       },
       {
-       "clump_create": 1
+       "clump_create": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "engage": 1,
-       "mobility": 2
+       "catch": 2,
+       "engage": 2,
+       "mobility": 4
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -42242,17 +42243,17 @@
     }
    },
    "capabilities": {
-    "burst_st": 2,
-    "catch": 2,
-    "clump_create": 1,
-    "disengage": 2,
-    "engage": 2,
-    "knockback_displace": 1,
-    "mobility": 3,
-    "peel": 1,
-    "resist_shred": 1,
-    "stun": 1,
-    "sustained_dps": 2
+    "burst_st": 4,
+    "catch": 4,
+    "clump_create": 2,
+    "disengage": 4,
+    "engage": 4,
+    "knockback_displace": 2,
+    "mobility": 6,
+    "peel": 2,
+    "resist_shred": 2,
+    "stun": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Battle Bracers",
@@ -42315,29 +42316,29 @@
     "slots": [
      [
       {
-       "catch": 2,
-       "disengage": 2,
-       "engage": 2,
-       "mobility": 3
+       "catch": 4,
+       "disengage": 4,
+       "engage": 4,
+       "mobility": 6
       }
      ],
      [
       {
-       "burst_st": 2,
-       "stun": 1
+       "burst_st": 4,
+       "stun": 2
       },
       {
-       "knockback_displace": 1,
-       "peel": 1,
-       "resist_shred": 1
+       "knockback_displace": 2,
+       "peel": 2,
+       "resist_shred": 2
       },
       {
-       "clump_create": 1
+       "clump_create": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -42426,19 +42427,19 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "burst_st": 1,
-    "catch": 1,
-    "clump_create": 1,
-    "engage": 1,
-    "knockback_displace": 1,
-    "mobility": 2,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "slow": 2,
-    "stun": 1,
-    "sustained_dps": 2
+    "burst_aoe": 4,
+    "burst_st": 2,
+    "catch": 2,
+    "clump_create": 2,
+    "engage": 2,
+    "knockback_displace": 2,
+    "mobility": 4,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "slow": 4,
+    "stun": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Spiked Gauntlets",
@@ -42511,35 +42512,35 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "catch": 1,
-       "peel": 1,
-       "ranged_presence": 1,
-       "slow": 2
+       "burst_aoe": 4,
+       "catch": 2,
+       "peel": 2,
+       "ranged_presence": 2,
+       "slow": 4
       }
      ],
      [
       {
-       "knockback_displace": 1,
-       "resist_shred": 1
+       "knockback_displace": 2,
+       "resist_shred": 2
       },
       {
-       "burst_st": 1,
-       "stun": 1
+       "burst_st": 2,
+       "stun": 2
       },
       {
-       "clump_create": 1
+       "clump_create": 2
       }
      ],
      [
       {
-       "engage": 1,
-       "mobility": 2
+       "engage": 2,
+       "mobility": 4
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -42589,13 +42590,13 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 2,
-    "sustained_dps": 2,
-    "zone_control": 2
+    "burst_aoe": 4,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 4,
+    "sustained_dps": 4,
+    "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Longbow",
@@ -42625,7 +42626,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 2
+     "sustained_dps": 4
     },
     "slot_names": [
      "e",
@@ -42646,20 +42647,20 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "ranged_presence": 1,
-       "slow": 2,
-       "zone_control": 2
+       "burst_aoe": 4,
+       "ranged_presence": 2,
+       "slow": 4,
+       "zone_control": 4
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "root": 1
+       "root": 2
       }
      ]
     ]
@@ -42713,14 +42714,14 @@
     }
    },
    "capabilities": {
-    "catch": 1,
-    "disengage": 1,
-    "mobility": 1,
-    "peel": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 1,
-    "sustained_dps": 3
+    "catch": 2,
+    "disengage": 2,
+    "mobility": 2,
+    "peel": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 2,
+    "sustained_dps": 6
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Whispering Bow",
@@ -42778,30 +42779,30 @@
     "slots": [
      [
       {
-       "sustained_dps": 3
+       "sustained_dps": 6
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "peel": 1,
-       "root": 1
+       "catch": 2,
+       "peel": 2,
+       "root": 2
       },
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "mobility": 1
+       "mobility": 2
       }
      ],
      [
       {
-       "slow": 1
+       "slow": 2
       }
      ]
     ]
@@ -42849,13 +42850,13 @@
     }
    },
    "capabilities": {
-    "engage": 2,
-    "peel": 3,
-    "purge": 3,
-    "silence": 3,
-    "slow": 1,
-    "tankiness": 3,
-    "zone_control": 2
+    "engage": 4,
+    "peel": 6,
+    "purge": 6,
+    "silence": 6,
+    "slow": 2,
+    "tankiness": 6,
+    "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Heavy Mace",
@@ -42885,7 +42886,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 3
+     "tankiness": 6
     },
     "slot_names": [
      "e",
@@ -42906,20 +42907,20 @@
     "slots": [
      [
       {
-       "peel": 3,
-       "purge": 3,
-       "silence": 3
+       "peel": 6,
+       "purge": 6,
+       "silence": 6
       }
      ],
      [
       {
-       "engage": 2
+       "engage": 4
       }
      ],
      [
       {
-       "slow": 1,
-       "zone_control": 2
+       "slow": 2,
+       "zone_control": 4
       }
      ]
     ]
@@ -42982,15 +42983,15 @@
     }
    },
    "capabilities": {
-    "catch": 1,
-    "clump_create": 3,
-    "engage": 1,
-    "peel": 2,
-    "root": 1,
-    "slow": 1,
-    "stun": 1,
-    "tankiness": 2,
-    "zone_control": 1
+    "catch": 2,
+    "clump_create": 6,
+    "engage": 2,
+    "peel": 4,
+    "root": 2,
+    "slow": 2,
+    "stun": 2,
+    "tankiness": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Camlann Mace",
@@ -43026,7 +43027,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -43048,24 +43049,24 @@
     "slots": [
      [
       {
-       "catch": 1,
-       "clump_create": 3,
-       "stun": 1
+       "catch": 2,
+       "clump_create": 6,
+       "stun": 2
       }
      ],
      [
       {
-       "engage": 1,
-       "root": 1
+       "engage": 2,
+       "root": 2
       },
       {
-       "peel": 2
+       "peel": 4
       }
      ],
      [
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -43118,16 +43119,16 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "cleanse": 2,
-    "heal_burst": 1,
-    "heal_sustain": 2,
-    "knockback_displace": 1,
-    "peel": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 1,
-    "zone_control": 1
+    "buff_allies": 4,
+    "cleanse": 4,
+    "heal_burst": 2,
+    "heal_sustain": 4,
+    "knockback_displace": 2,
+    "peel": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Great Nature Staff",
@@ -43190,30 +43191,30 @@
     "slots": [
      [
       {
-       "buff_allies": 2,
-       "heal_sustain": 2,
-       "peel": 1
+       "buff_allies": 4,
+       "heal_sustain": 4,
+       "peel": 2
       }
      ],
      [
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       },
       {
-       "cleanse": 2,
-       "heal_burst": 1
+       "cleanse": 4,
+       "heal_burst": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "slow": 1,
-       "sustained_dps": 1,
-       "zone_control": 1
+       "slow": 2,
+       "sustained_dps": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -43276,16 +43277,16 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "cleanse": 2,
-    "heal_burst": 1,
-    "heal_sustain": 3,
-    "knockback_displace": 1,
-    "mobility": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 1,
-    "zone_control": 1
+    "buff_allies": 4,
+    "cleanse": 4,
+    "heal_burst": 2,
+    "heal_sustain": 6,
+    "knockback_displace": 2,
+    "mobility": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Blight Staff",
@@ -43349,32 +43350,32 @@
     "slots": [
      [
       {
-       "heal_sustain": 3,
-       "mobility": 1
+       "heal_sustain": 6,
+       "mobility": 2
       }
      ],
      [
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       },
       {
-       "cleanse": 2,
-       "heal_burst": 1
+       "cleanse": 4,
+       "heal_burst": 2
       },
       {
-       "buff_allies": 2
+       "buff_allies": 4
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "slow": 1,
-       "sustained_dps": 1,
-       "zone_control": 1
+       "slow": 2,
+       "sustained_dps": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -43438,15 +43439,15 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "cleanse": 2,
-    "heal_burst": 1,
-    "heal_sustain": 3,
-    "knockback_displace": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 1,
-    "zone_control": 1
+    "buff_allies": 4,
+    "cleanse": 4,
+    "heal_burst": 2,
+    "heal_sustain": 6,
+    "knockback_displace": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Rampant Staff",
@@ -43507,31 +43508,31 @@
     "slots": [
      [
       {
-       "heal_burst": 1,
-       "heal_sustain": 3
+       "heal_burst": 2,
+       "heal_sustain": 6
       }
      ],
      [
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       },
       {
-       "cleanse": 2
+       "cleanse": 4
       },
       {
-       "buff_allies": 2
+       "buff_allies": 4
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "slow": 1,
-       "sustained_dps": 1,
-       "zone_control": 1
+       "slow": 2,
+       "sustained_dps": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -43612,20 +43613,20 @@
     }
    },
    "capabilities": {
-    "anti_dive": 2,
-    "catch": 2,
-    "disengage": 1,
-    "engage": 3,
-    "knockback_displace": 1,
-    "mobility": 1,
-    "peel": 2,
-    "purge": 1,
-    "resist_shred": 1,
-    "self_sustain": 1,
-    "slow": 2,
-    "stun": 3,
-    "tankiness": 2,
-    "zone_control": 1
+    "anti_dive": 4,
+    "catch": 4,
+    "disengage": 2,
+    "engage": 6,
+    "knockback_displace": 2,
+    "mobility": 2,
+    "peel": 4,
+    "purge": 2,
+    "resist_shred": 2,
+    "self_sustain": 2,
+    "slow": 4,
+    "stun": 6,
+    "tankiness": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Polehammer",
@@ -43676,7 +43677,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -43703,35 +43704,35 @@
     "slots": [
      [
       {
-       "catch": 2,
-       "peel": 2,
-       "stun": 3
+       "catch": 4,
+       "peel": 4,
+       "stun": 6
       }
      ],
      [
       {
-       "disengage": 1,
-       "engage": 3,
-       "mobility": 1
+       "disengage": 2,
+       "engage": 6,
+       "mobility": 2
       },
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       },
       {
-       "anti_dive": 2,
-       "slow": 2,
-       "zone_control": 1
+       "anti_dive": 4,
+       "slow": 4,
+       "zone_control": 2
       }
      ],
      [
       {
-       "purge": 1,
-       "resist_shred": 1
+       "purge": 2,
+       "resist_shred": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -43794,19 +43795,19 @@
     }
    },
    "capabilities": {
-    "anti_dive": 2,
-    "burst_aoe": 1,
-    "catch": 2,
-    "damage_debuff": 1,
-    "disengage": 2,
-    "engage": 2,
-    "knockback_displace": 3,
-    "mobility": 2,
-    "peel": 3,
-    "root": 1,
-    "self_sustain": 1,
-    "stun": 1,
-    "tankiness": 2
+    "anti_dive": 4,
+    "burst_aoe": 2,
+    "catch": 4,
+    "damage_debuff": 2,
+    "disengage": 4,
+    "engage": 4,
+    "knockback_displace": 6,
+    "mobility": 4,
+    "peel": 6,
+    "root": 2,
+    "self_sustain": 2,
+    "stun": 2,
+    "tankiness": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Quarterstaff",
@@ -43854,7 +43855,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -43877,30 +43878,30 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "disengage": 2,
-       "engage": 2,
-       "knockback_displace": 3,
-       "mobility": 2
+       "burst_aoe": 2,
+       "disengage": 4,
+       "engage": 4,
+       "knockback_displace": 6,
+       "mobility": 4
       }
      ],
      [
       {
-       "peel": 3,
-       "root": 1
+       "peel": 6,
+       "root": 2
       },
       {
-       "catch": 2,
-       "stun": 1
+       "catch": 4,
+       "stun": 2
       },
       {
-       "anti_dive": 2,
-       "damage_debuff": 1
+       "anti_dive": 4,
+       "damage_debuff": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -43976,18 +43977,18 @@
     }
    },
    "capabilities": {
-    "anti_dive": 1,
-    "burst_aoe": 1,
-    "catch": 1,
-    "knockback_displace": 1,
-    "mobility": 1,
-    "peel": 2,
-    "ranged_presence": 1,
-    "root": 2,
-    "self_sustain": 1,
-    "stun": 1,
-    "sustained_dps": 1,
-    "zone_control": 2
+    "anti_dive": 2,
+    "burst_aoe": 2,
+    "catch": 2,
+    "knockback_displace": 2,
+    "mobility": 2,
+    "peel": 4,
+    "ranged_presence": 2,
+    "root": 4,
+    "self_sustain": 2,
+    "stun": 2,
+    "sustained_dps": 2,
+    "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Grailseeker",
@@ -44058,36 +44059,36 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "catch": 1,
-       "peel": 2,
-       "ranged_presence": 1,
-       "root": 2,
-       "zone_control": 2
+       "burst_aoe": 2,
+       "catch": 2,
+       "peel": 4,
+       "ranged_presence": 2,
+       "root": 4,
+       "zone_control": 4
       }
      ],
      [
       {
-       "mobility": 1
+       "mobility": 2
       }
      ],
      [
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       },
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       },
       {
-       "anti_dive": 1
+       "anti_dive": 2
       },
       {
-       "stun": 1
+       "stun": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -44144,20 +44145,20 @@
     }
    },
    "capabilities": {
-    "anti_dive": 2,
-    "catch": 2,
-    "disengage": 2,
-    "engage": 3,
-    "knockback_displace": 1,
-    "mobility": 2,
-    "peel": 2,
-    "purge": 1,
-    "resist_shred": 1,
-    "self_sustain": 1,
-    "slow": 2,
-    "stun": 2,
-    "tankiness": 2,
-    "zone_control": 1
+    "anti_dive": 4,
+    "catch": 4,
+    "disengage": 4,
+    "engage": 6,
+    "knockback_displace": 2,
+    "mobility": 4,
+    "peel": 4,
+    "purge": 2,
+    "resist_shred": 2,
+    "self_sustain": 2,
+    "slow": 4,
+    "stun": 4,
+    "tankiness": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Grovekeeper",
@@ -44208,7 +44209,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -44233,31 +44234,31 @@
     "slots": [
      [
       {
-       "catch": 2,
-       "disengage": 2,
-       "engage": 3,
-       "knockback_displace": 1,
-       "mobility": 2,
-       "peel": 2,
-       "stun": 2
+       "catch": 4,
+       "disengage": 4,
+       "engage": 6,
+       "knockback_displace": 2,
+       "mobility": 4,
+       "peel": 4,
+       "stun": 4
       }
      ],
      [
       {
-       "purge": 1,
-       "resist_shred": 1
+       "purge": 2,
+       "resist_shred": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "anti_dive": 2,
-       "slow": 2,
-       "zone_control": 1
+       "anti_dive": 4,
+       "slow": 4,
+       "zone_control": 2
       }
      ]
     ]
@@ -44312,15 +44313,15 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "knockback_displace": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "silence": 1,
-    "slow": 1,
-    "sustained_dps": 2,
-    "zone_control": 2
+    "burst_aoe": 4,
+    "knockback_displace": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "silence": 2,
+    "slow": 2,
+    "sustained_dps": 4,
+    "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Weeping Repeater",
@@ -44356,7 +44357,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 2
+     "sustained_dps": 4
     },
     "slot_names": [
      "e",
@@ -44376,24 +44377,24 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "ranged_presence": 1,
-       "zone_control": 2
+       "burst_aoe": 4,
+       "ranged_presence": 2,
+       "zone_control": 4
       }
      ],
      [
       {
-       "slow": 1
+       "slow": 2
       },
       {
-       "knockback_displace": 1,
-       "peel": 1
+       "knockback_displace": 2,
+       "peel": 2
       },
       {
-       "silence": 1
+       "silence": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ]
     ]
@@ -44442,17 +44443,17 @@
     }
    },
    "capabilities": {
-    "anti_dive": 2,
-    "heal_reduction": 2,
-    "knockback_displace": 1,
-    "peel": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 2,
-    "stun": 1,
-    "sustained_dps": 1,
-    "tankiness": 1,
-    "zone_control": 2
+    "anti_dive": 4,
+    "heal_reduction": 4,
+    "knockback_displace": 2,
+    "peel": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 4,
+    "stun": 2,
+    "sustained_dps": 2,
+    "tankiness": 2,
+    "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Staff of Balance",
@@ -44517,33 +44518,33 @@
     "slots": [
      [
       {
-       "heal_reduction": 2,
-       "slow": 2,
-       "tankiness": 1,
-       "zone_control": 2
+       "heal_reduction": 4,
+       "slow": 4,
+       "tankiness": 2,
+       "zone_control": 4
       }
      ],
      [
       {
-       "anti_dive": 2
+       "anti_dive": 4
       },
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       },
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       },
       {
-       "peel": 1,
-       "root": 1
+       "peel": 2,
+       "root": 2
       },
       {
-       "stun": 1
+       "stun": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -44580,17 +44581,17 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 1,
-    "disengage": 1,
-    "engage": 2,
-    "heal_reduction": 1,
-    "mobility": 2,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "sustained_dps": 2,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_aoe": 2,
+    "disengage": 2,
+    "engage": 4,
+    "heal_reduction": 2,
+    "mobility": 4,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "sustained_dps": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Crystal Reaper",
@@ -44657,33 +44658,33 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "disengage": 1,
-       "engage": 2,
-       "mobility": 2,
-       "zone_control": 1
+       "burst_aoe": 2,
+       "disengage": 2,
+       "engage": 4,
+       "mobility": 4,
+       "zone_control": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "root": 1
+       "root": 2
       },
       {
-       "heal_reduction": 1,
-       "sustained_dps": 2
+       "heal_reduction": 2,
+       "sustained_dps": 4
       }
      ]
     ]
@@ -44744,17 +44745,17 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "catch": 1,
-    "engage": 1,
-    "execute": 1,
-    "heal_reduction": 1,
-    "mobility": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "sustained_dps": 2
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "catch": 2,
+    "engage": 2,
+    "execute": 2,
+    "heal_reduction": 2,
+    "mobility": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Infernal Scythe",
@@ -44822,35 +44823,35 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "execute": 1
+       "burst_aoe": 4,
+       "execute": 2
       }
      ],
      [
       {
-       "catch": 1
+       "catch": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1,
-       "engage": 1
+       "buff_allies": 2,
+       "engage": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "mobility": 1,
-       "root": 1
+       "mobility": 2,
+       "root": 2
       },
       {
-       "heal_reduction": 1,
-       "sustained_dps": 2
+       "heal_reduction": 2,
+       "sustained_dps": 4
       }
      ]
     ]
@@ -44920,19 +44921,19 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "catch": 1,
-    "clump_create": 1,
-    "disengage": 2,
-    "engage": 1,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "catch": 2,
+    "clump_create": 2,
+    "disengage": 4,
+    "engage": 2,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Lightcaller",
@@ -45006,37 +45007,37 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "disengage": 2,
-       "engage": 1,
-       "mobility": 2
+       "burst_aoe": 4,
+       "disengage": 4,
+       "engage": 2,
+       "mobility": 4
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "clump_create": 1,
-       "root": 1
+       "catch": 2,
+       "clump_create": 2,
+       "root": 2
       },
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       },
       {
-       "peel": 1
+       "peel": 2
       }
      ]
     ]
@@ -45106,18 +45107,18 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_st": 2,
-    "catch": 1,
-    "clump_create": 1,
-    "disengage": 1,
-    "mobility": 1,
-    "peel": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_st": 4,
+    "catch": 2,
+    "clump_create": 2,
+    "disengage": 2,
+    "mobility": 2,
+    "peel": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Stillgaze Staff",
@@ -45188,36 +45189,36 @@
     "slots": [
      [
       {
-       "burst_st": 2,
-       "disengage": 1,
-       "mobility": 1
+       "burst_st": 4,
+       "disengage": 2,
+       "mobility": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "clump_create": 1,
-       "root": 1
+       "catch": 2,
+       "clump_create": 2,
+       "root": 2
       },
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       },
       {
-       "peel": 1
+       "peel": 2
       }
      ]
     ]
@@ -45287,17 +45288,17 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "catch": 1,
-    "clump_create": 1,
-    "mobility": 1,
-    "peel": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 2,
-    "slow": 1,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "catch": 2,
+    "clump_create": 2,
+    "mobility": 2,
+    "peel": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 4,
+    "slow": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Hellspawn Staff",
@@ -45361,31 +45362,31 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "self_sustain": 2
+       "burst_aoe": 4,
+       "self_sustain": 4
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "clump_create": 1,
-       "root": 1
+       "catch": 2,
+       "clump_create": 2,
+       "root": 2
       },
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       },
       {
-       "mobility": 1,
-       "peel": 1
+       "mobility": 2,
+       "peel": 2
       }
      ]
     ]
@@ -45455,17 +45456,17 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "catch": 1,
-    "clump_create": 1,
-    "engage": 1,
-    "peel": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 2,
-    "slow": 1,
-    "tankiness": 3,
-    "zone_control": 1
+    "buff_allies": 2,
+    "catch": 2,
+    "clump_create": 2,
+    "engage": 2,
+    "peel": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 4,
+    "slow": 2,
+    "tankiness": 6,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Earthrune Staff",
@@ -45529,31 +45530,31 @@
     "slots": [
      [
       {
-       "engage": 1,
-       "self_sustain": 2,
-       "tankiness": 3
+       "engage": 2,
+       "self_sustain": 4,
+       "tankiness": 6
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "clump_create": 1,
-       "root": 1
+       "catch": 2,
+       "clump_create": 2,
+       "root": 2
       },
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       },
       {
-       "peel": 1
+       "peel": 2
       }
      ]
     ]
@@ -45615,17 +45616,17 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_st": 2,
-    "catch": 2,
-    "clump_create": 1,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_st": 4,
+    "catch": 4,
+    "clump_create": 2,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Bloodmoon Staff",
@@ -45689,31 +45690,31 @@
     "slots": [
      [
       {
-       "burst_st": 2,
-       "catch": 2,
-       "mobility": 2,
-       "self_sustain": 1
+       "burst_st": 4,
+       "catch": 4,
+       "mobility": 4,
+       "self_sustain": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "clump_create": 1,
-       "root": 1
+       "clump_create": 2,
+       "root": 2
       },
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       },
       {
-       "peel": 1
+       "peel": 2
       }
      ]
     ]
@@ -45775,18 +45776,18 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_st": 2,
-    "catch": 1,
-    "clump_create": 1,
-    "disengage": 2,
-    "engage": 2,
-    "mobility": 1,
-    "peel": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1
+    "buff_allies": 2,
+    "burst_st": 4,
+    "catch": 2,
+    "clump_create": 2,
+    "disengage": 4,
+    "engage": 4,
+    "mobility": 2,
+    "peel": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Prowling Staff",
@@ -45857,36 +45858,36 @@
     "slots": [
      [
       {
-       "burst_st": 2,
-       "disengage": 2,
-       "engage": 2
+       "burst_st": 4,
+       "disengage": 4,
+       "engage": 4
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "clump_create": 1,
-       "root": 1
+       "catch": 2,
+       "clump_create": 2,
+       "root": 2
       },
       {
-       "slow": 1
+       "slow": 2
       },
       {
-       "mobility": 1,
-       "peel": 1
+       "mobility": 2,
+       "peel": 2
       }
      ]
     ]
@@ -45948,17 +45949,17 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "catch": 1,
-    "clump_create": 1,
-    "heal_sustain": 1,
-    "mobility": 1,
-    "peel": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "zone_control": 1
+    "buff_allies": 4,
+    "catch": 2,
+    "clump_create": 2,
+    "heal_sustain": 2,
+    "mobility": 2,
+    "peel": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Rootbound Staff",
@@ -46025,33 +46026,33 @@
     "slots": [
      [
       {
-       "buff_allies": 2,
-       "heal_sustain": 1
+       "buff_allies": 4,
+       "heal_sustain": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "clump_create": 1,
-       "root": 1
+       "catch": 2,
+       "clump_create": 2,
+       "root": 2
       },
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       },
       {
-       "mobility": 1,
-       "peel": 1
+       "mobility": 2,
+       "peel": 2
       }
      ]
     ]
@@ -46121,18 +46122,18 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 1,
-    "catch": 1,
-    "clump_create": 1,
-    "peel": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 1,
-    "tankiness": 2,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_aoe": 2,
+    "catch": 2,
+    "clump_create": 2,
+    "peel": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 2,
+    "tankiness": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Primal Staff",
@@ -46177,7 +46178,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -46201,31 +46202,31 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "self_sustain": 1,
-       "sustained_dps": 1
+       "burst_aoe": 2,
+       "self_sustain": 2,
+       "sustained_dps": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "clump_create": 1,
-       "root": 1
+       "catch": 2,
+       "clump_create": 2,
+       "root": 2
       },
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       },
       {
-       "peel": 1
+       "peel": 2
       }
      ]
     ]
@@ -46282,14 +46283,14 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 1,
-    "sustained_dps": 2,
-    "zone_control": 2
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 2,
+    "sustained_dps": 4,
+    "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Cursed Skull",
@@ -46344,28 +46345,28 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "ranged_presence": 1,
-       "zone_control": 2
+       "burst_aoe": 4,
+       "ranged_presence": 2,
+       "zone_control": 4
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "root": 1
+       "root": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       },
       {
-       "slow": 1
+       "slow": 2
       }
      ]
     ]
@@ -46387,13 +46388,13 @@
     }
    },
    "capabilities": {
-    "catch": 2,
-    "mobility": 1,
-    "peel": 1,
-    "root": 2,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "catch": 4,
+    "mobility": 2,
+    "peel": 2,
+    "root": 4,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Pike",
@@ -46447,27 +46448,27 @@
     "slots": [
      [
       {
-       "catch": 2,
-       "peel": 1,
-       "root": 2
+       "catch": 4,
+       "peel": 2,
+       "root": 4
       }
      ],
      [
       {
-       "mobility": 1
+       "mobility": 2
       },
       {
-       "slow": 1
+       "slow": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -46517,16 +46518,16 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "catch": 2,
-    "disengage": 1,
-    "engage": 2,
-    "mobility": 2,
-    "peel": 1,
-    "root": 2,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "buff_allies": 2,
+    "catch": 4,
+    "disengage": 2,
+    "engage": 4,
+    "mobility": 4,
+    "peel": 2,
+    "root": 4,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Trinity Spear",
@@ -46588,28 +46589,28 @@
     "slots": [
      [
       {
-       "buff_allies": 1,
-       "catch": 2,
-       "disengage": 1,
-       "engage": 2,
-       "mobility": 2,
-       "peel": 1,
-       "root": 2
+       "buff_allies": 2,
+       "catch": 4,
+       "disengage": 2,
+       "engage": 4,
+       "mobility": 4,
+       "peel": 2,
+       "root": 4
       }
      ],
      [
       {
-       "slow": 1
+       "slow": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -46686,18 +46687,18 @@
     }
    },
    "capabilities": {
-    "anti_dive": 1,
-    "burst_aoe": 2,
-    "catch": 1,
-    "knockback_displace": 1,
-    "mobility": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 2,
-    "stun": 1,
-    "sustained_dps": 1
+    "anti_dive": 2,
+    "burst_aoe": 4,
+    "catch": 2,
+    "knockback_displace": 2,
+    "mobility": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 4,
+    "stun": 2,
+    "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Soulscythe",
@@ -46768,36 +46769,36 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "catch": 1,
-       "knockback_displace": 1,
-       "peel": 1,
-       "ranged_presence": 1,
-       "slow": 2
+       "burst_aoe": 4,
+       "catch": 2,
+       "knockback_displace": 2,
+       "peel": 2,
+       "ranged_presence": 2,
+       "slow": 4
       }
      ],
      [
       {
-       "mobility": 1
+       "mobility": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       },
       {
-       "anti_dive": 1
+       "anti_dive": 2
       },
       {
-       "root": 1
+       "root": 2
       },
       {
-       "stun": 1
+       "stun": 2
       }
      ]
     ]
@@ -46859,15 +46860,15 @@
     }
    },
    "capabilities": {
-    "burst_st": 2,
-    "catch": 1,
-    "disengage": 1,
-    "mobility": 1,
-    "peel": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "burst_st": 4,
+    "catch": 2,
+    "disengage": 2,
+    "mobility": 2,
+    "peel": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Warbow",
@@ -46903,7 +46904,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 2
+     "sustained_dps": 4
     },
     "slot_names": [
      "e",
@@ -46930,30 +46931,30 @@
     "slots": [
      [
       {
-       "burst_st": 2
+       "burst_st": 4
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "catch": 1,
-       "peel": 1,
-       "root": 1
+       "catch": 2,
+       "peel": 2,
+       "root": 2
       },
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "mobility": 1
+       "mobility": 2
       }
      ],
      [
       {
-       "slow": 1
+       "slow": 2
       }
      ]
     ]
@@ -47011,15 +47012,15 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "cleanse": 2,
-    "heal_burst": 1,
-    "heal_sustain": 3,
-    "knockback_displace": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 1,
-    "zone_control": 1
+    "buff_allies": 4,
+    "cleanse": 4,
+    "heal_burst": 2,
+    "heal_sustain": 6,
+    "knockback_displace": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Wild Staff",
@@ -47080,31 +47081,31 @@
     "slots": [
      [
       {
-       "heal_sustain": 3
+       "heal_sustain": 6
       }
      ],
      [
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       },
       {
-       "cleanse": 2,
-       "heal_burst": 1
+       "cleanse": 4,
+       "heal_burst": 2
       },
       {
-       "buff_allies": 2
+       "buff_allies": 4
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "slow": 1,
-       "sustained_dps": 1,
-       "zone_control": 1
+       "slow": 2,
+       "sustained_dps": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -47158,15 +47159,15 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "knockback_displace": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "silence": 1,
-    "slow": 1,
-    "sustained_dps": 1,
-    "zone_control": 1
+    "burst_aoe": 4,
+    "knockback_displace": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "silence": 2,
+    "slow": 2,
+    "sustained_dps": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Light Crossbow",
@@ -47202,7 +47203,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 1
+     "sustained_dps": 2
     },
     "slot_names": [
      "e",
@@ -47222,24 +47223,24 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "ranged_presence": 1
+       "burst_aoe": 4,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       },
       {
-       "knockback_displace": 1,
-       "peel": 1
+       "knockback_displace": 2,
+       "peel": 2
       },
       {
-       "silence": 1
+       "silence": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ]
     ]
@@ -47286,14 +47287,14 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_st": 1,
-    "cleanse": 2,
-    "peel": 1,
-    "purge": 2,
-    "resist_shred": 1,
-    "silence": 1,
-    "sustained_dps": 1
+    "buff_allies": 2,
+    "burst_st": 2,
+    "cleanse": 4,
+    "peel": 2,
+    "purge": 4,
+    "resist_shred": 2,
+    "silence": 2,
+    "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Arcane Staff",
@@ -47351,30 +47352,30 @@
     "slots": [
      [
       {
-       "burst_st": 1,
-       "purge": 2,
-       "silence": 1
+       "burst_st": 2,
+       "purge": 4,
+       "silence": 2
       }
      ],
      [
       {
-       "cleanse": 2
+       "cleanse": 4
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       }
      ],
      [
       {
-       "peel": 1
+       "peel": 2
       }
      ]
     ]
@@ -47437,18 +47438,18 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "burst_aoe": 2,
-    "catch": 1,
-    "cleanse": 2,
-    "clump_create": 2,
-    "peel": 2,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "silence": 1,
-    "slow": 1,
-    "sustained_dps": 1,
-    "zone_control": 1
+    "buff_allies": 4,
+    "burst_aoe": 4,
+    "catch": 2,
+    "cleanse": 4,
+    "clump_create": 4,
+    "peel": 4,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "silence": 2,
+    "slow": 2,
+    "sustained_dps": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Witchwork Staff",
@@ -47519,36 +47520,36 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "catch": 1,
-       "clump_create": 2,
-       "ranged_presence": 1,
-       "slow": 1,
-       "zone_control": 1
+       "burst_aoe": 4,
+       "catch": 2,
+       "clump_create": 4,
+       "ranged_presence": 2,
+       "slow": 2,
+       "zone_control": 2
       }
      ],
      [
       {
-       "buff_allies": 2
+       "buff_allies": 4
       },
       {
-       "cleanse": 2
+       "cleanse": 4
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ],
      [
       {
-       "peel": 2
+       "peel": 4
       },
       {
-       "silence": 1
+       "silence": 2
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       }
      ]
     ]
@@ -47609,16 +47610,16 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_st": 1,
-    "catch": 1,
-    "engage": 1,
-    "heal_reduction": 1,
-    "mobility": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "self_sustain": 2,
-    "sustained_dps": 2
+    "buff_allies": 2,
+    "burst_st": 2,
+    "catch": 2,
+    "engage": 2,
+    "heal_reduction": 2,
+    "mobility": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "self_sustain": 4,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Battleaxe",
@@ -47679,30 +47680,30 @@
     "slots": [
      [
       {
-       "burst_st": 1,
-       "self_sustain": 2
+       "burst_st": 2,
+       "self_sustain": 4
       }
      ],
      [
       {
-       "catch": 1
+       "catch": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1,
-       "engage": 1
+       "buff_allies": 2,
+       "engage": 2
       }
      ],
      [
       {
-       "mobility": 1,
-       "root": 1
+       "mobility": 2,
+       "root": 2
       },
       {
-       "heal_reduction": 1,
-       "sustained_dps": 2
+       "heal_reduction": 2,
+       "sustained_dps": 4
       }
      ]
     ]
@@ -47758,13 +47759,13 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_st": 2,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 1,
-    "sustained_dps": 2,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_st": 4,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 2,
+    "sustained_dps": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Cursed Staff",
@@ -47816,27 +47817,27 @@
     "slots": [
      [
       {
-       "burst_st": 2
+       "burst_st": 4
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "root": 1
+       "root": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       },
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -47894,13 +47895,13 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 1,
-    "sustained_dps": 2,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 2,
+    "sustained_dps": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Shadowcaller",
@@ -47951,25 +47952,25 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "slow": 1,
-       "sustained_dps": 2
+       "burst_aoe": 4,
+       "slow": 2,
+       "sustained_dps": 4
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "root": 1
+       "root": 2
       }
      ],
      [
       {
-       "zone_control": 1
+       "zone_control": 2
       }
      ]
     ]
@@ -48040,15 +48041,15 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "heal_reduction": 2,
-    "knockback_displace": 2,
-    "peel": 2,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 1,
-    "sustained_dps": 1,
-    "zone_control": 1
+    "buff_allies": 2,
+    "heal_reduction": 4,
+    "knockback_displace": 4,
+    "peel": 4,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 2,
+    "sustained_dps": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Rotcaller Staff",
@@ -48106,29 +48107,29 @@
     "slots": [
      [
       {
-       "heal_reduction": 2,
-       "knockback_displace": 2,
-       "peel": 2
+       "heal_reduction": 4,
+       "knockback_displace": 4,
+       "peel": 4
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       },
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "root": 1
+       "root": 2
       }
      ]
     ]
@@ -48192,15 +48193,15 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 1,
-    "purge": 2,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 1,
-    "sustained_dps": 2,
-    "zone_control": 2
+    "buff_allies": 2,
+    "burst_aoe": 2,
+    "purge": 4,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 2,
+    "sustained_dps": 4,
+    "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Lifecurse Staff",
@@ -48258,29 +48259,29 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "purge": 2,
-       "ranged_presence": 1,
-       "zone_control": 2
+       "burst_aoe": 2,
+       "purge": 4,
+       "ranged_presence": 2,
+       "zone_control": 4
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "root": 1
+       "root": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       },
       {
-       "slow": 1
+       "slow": 2
       }
      ]
     ]
@@ -48310,16 +48311,16 @@
     }
    },
    "capabilities": {
-    "catch": 1,
-    "disengage": 1,
-    "engage": 1,
-    "heal_reduction": 1,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "self_sustain": 2,
-    "stun": 1,
-    "sustained_dps": 2
+    "catch": 2,
+    "disengage": 2,
+    "engage": 2,
+    "heal_reduction": 2,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "self_sustain": 4,
+    "stun": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Dagger",
@@ -48380,30 +48381,30 @@
     "slots": [
      [
       {
-       "mobility": 2,
-       "self_sustain": 2,
-       "sustained_dps": 2
+       "mobility": 4,
+       "self_sustain": 4,
+       "sustained_dps": 4
       }
      ],
      [
       {
-       "heal_reduction": 1
+       "heal_reduction": 2
       },
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "catch": 1,
-       "peel": 1,
-       "stun": 1
+       "catch": 2,
+       "peel": 2,
+       "stun": 2
       }
      ],
      [
       {
-       "engage": 1
+       "engage": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ]
     ]
@@ -48445,18 +48446,18 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
-    "burst_st": 1,
-    "catch": 1,
-    "disengage": 1,
-    "engage": 1,
-    "heal_reduction": 1,
-    "mobility": 2,
-    "peel": 1,
-    "resist_shred": 1,
-    "self_sustain": 1,
-    "stun": 1,
-    "sustained_dps": 1
+    "burst_aoe": 4,
+    "burst_st": 2,
+    "catch": 2,
+    "disengage": 2,
+    "engage": 2,
+    "heal_reduction": 2,
+    "mobility": 4,
+    "peel": 2,
+    "resist_shred": 2,
+    "self_sustain": 2,
+    "stun": 2,
+    "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Demonfang",
@@ -48528,38 +48529,38 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "burst_st": 1
+       "burst_aoe": 4,
+       "burst_st": 2
       }
      ],
      [
       {
-       "heal_reduction": 1
+       "heal_reduction": 2
       },
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "catch": 1,
-       "peel": 1,
-       "stun": 1
+       "catch": 2,
+       "peel": 2,
+       "stun": 2
       }
      ],
      [
       {
-       "sustained_dps": 1
+       "sustained_dps": 2
       },
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "engage": 1,
-       "mobility": 2
+       "engage": 2,
+       "mobility": 4
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ]
     ]
@@ -48602,14 +48603,14 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "burst_st": 1,
-    "knockback_displace": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "sustained_dps": 2,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "burst_st": 2,
+    "knockback_displace": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "sustained_dps": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Fire Staff",
@@ -48642,7 +48643,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 2
+     "sustained_dps": 4
     },
     "slot_names": [
      "e",
@@ -48661,21 +48662,21 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "burst_st": 1,
-       "ranged_presence": 1
+       "burst_aoe": 4,
+       "burst_st": 2,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "knockback_displace": 1,
-       "peel": 1
+       "knockback_displace": 2,
+       "peel": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "zone_control": 1
+       "zone_control": 2
       }
      ]
     ]
@@ -48739,14 +48740,14 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 1,
-    "disengage": 2,
-    "engage": 2,
-    "mobility": 2,
-    "peel": 1,
-    "sustained_dps": 2,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_aoe": 2,
+    "disengage": 4,
+    "engage": 4,
+    "mobility": 4,
+    "peel": 2,
+    "sustained_dps": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Flamewalker Staff",
@@ -48779,7 +48780,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 2
+     "sustained_dps": 4
     },
     "slot_names": [
      "e",
@@ -48798,21 +48799,21 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "disengage": 2,
-       "engage": 2,
-       "mobility": 2
+       "burst_aoe": 2,
+       "disengage": 4,
+       "engage": 4,
+       "mobility": 4
       }
      ],
      [
       {
-       "peel": 1
+       "peel": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "zone_control": 1
+       "zone_control": 2
       }
      ]
     ]
@@ -48862,13 +48863,13 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 2,
-    "knockback_displace": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "sustained_dps": 2,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_aoe": 4,
+    "knockback_displace": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "sustained_dps": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Wildfire Staff",
@@ -48898,7 +48899,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 2
+     "sustained_dps": 4
     },
     "slot_names": [
      "e",
@@ -48917,20 +48918,20 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
-       "ranged_presence": 1
+       "burst_aoe": 4,
+       "ranged_presence": 2
       }
      ],
      [
       {
-       "knockback_displace": 1,
-       "peel": 1
+       "knockback_displace": 2,
+       "peel": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "zone_control": 1
+       "zone_control": 2
       }
      ]
     ]
@@ -49022,18 +49023,18 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 1,
-    "catch": 2,
-    "disengage": 1,
-    "peel": 2,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 3,
-    "slow": 2,
-    "stun": 1,
-    "sustained_dps": 1,
-    "zone_control": 2
+    "buff_allies": 2,
+    "burst_aoe": 2,
+    "catch": 4,
+    "disengage": 2,
+    "peel": 4,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 6,
+    "slow": 4,
+    "stun": 2,
+    "sustained_dps": 2,
+    "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Frost Staff",
@@ -49078,7 +49079,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 1
+     "sustained_dps": 2
     },
     "slot_names": [
      "e",
@@ -49098,27 +49099,27 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "catch": 2,
-       "peel": 2,
-       "ranged_presence": 1,
-       "root": 3
+       "burst_aoe": 2,
+       "catch": 4,
+       "peel": 4,
+       "ranged_presence": 2,
+       "root": 6
       }
      ],
      [
       {
-       "slow": 2,
-       "zone_control": 2
+       "slow": 4,
+       "zone_control": 4
       },
       {
-       "disengage": 1,
-       "stun": 1
+       "disengage": 2,
+       "stun": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ]
     ]
@@ -49194,15 +49195,15 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "catch": 1,
-    "disengage": 1,
-    "peel": 2,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 2,
-    "stun": 1,
-    "zone_control": 1
+    "buff_allies": 2,
+    "catch": 2,
+    "disengage": 2,
+    "peel": 4,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 4,
+    "stun": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Chillhowl",
@@ -49261,31 +49262,31 @@
     "slots": [
      [
       {
-       "peel": 2
+       "peel": 4
       },
       {
-       "catch": 1,
-       "slow": 2,
-       "stun": 1
+       "catch": 2,
+       "slow": 4,
+       "stun": 2
       }
      ],
      [
       {
-       "zone_control": 1
+       "zone_control": 2
       },
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "root": 1
+       "root": 2
       }
      ]
     ]
@@ -49375,18 +49376,18 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "burst_aoe": 1,
-    "catch": 1,
-    "disengage": 1,
-    "knockback_displace": 2,
-    "peel": 1,
-    "ranged_presence": 1,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 2,
-    "stun": 1,
-    "zone_control": 1
+    "buff_allies": 2,
+    "burst_aoe": 2,
+    "catch": 2,
+    "disengage": 2,
+    "knockback_displace": 4,
+    "peel": 2,
+    "ranged_presence": 2,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 4,
+    "stun": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Hoarfrost Staff",
@@ -49452,30 +49453,30 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "catch": 1,
-       "knockback_displace": 2,
-       "peel": 1,
-       "ranged_presence": 1,
-       "slow": 2,
-       "zone_control": 1
+       "burst_aoe": 2,
+       "catch": 2,
+       "knockback_displace": 4,
+       "peel": 2,
+       "ranged_presence": 2,
+       "slow": 4,
+       "zone_control": 2
       }
      ],
      [
       {
-       "disengage": 1,
-       "stun": 1
+       "disengage": 2,
+       "stun": 2
       },
       {
-       "resist_shred": 1
+       "resist_shred": 2
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       }
      ],
      [
       {
-       "root": 1
+       "root": 2
       }
      ]
     ]
@@ -49548,19 +49549,19 @@
     }
    },
    "capabilities": {
-    "anti_dive": 2,
-    "disengage": 1,
-    "engage": 1,
-    "knockback_displace": 1,
-    "mobility": 1,
-    "peel": 2,
-    "purge": 1,
-    "resist_shred": 1,
-    "self_sustain": 1,
-    "slow": 2,
-    "stun": 2,
-    "tankiness": 2,
-    "zone_control": 1
+    "anti_dive": 4,
+    "disengage": 2,
+    "engage": 2,
+    "knockback_displace": 2,
+    "mobility": 2,
+    "peel": 4,
+    "purge": 2,
+    "resist_shred": 2,
+    "self_sustain": 2,
+    "slow": 4,
+    "stun": 4,
+    "tankiness": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Hammer",
@@ -49608,7 +49609,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -49635,34 +49636,34 @@
     "slots": [
      [
       {
-       "peel": 2,
-       "stun": 2
+       "peel": 4,
+       "stun": 4
       }
      ],
      [
       {
-       "disengage": 1,
-       "engage": 1,
-       "mobility": 1
+       "disengage": 2,
+       "engage": 2,
+       "mobility": 2
       },
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       },
       {
-       "anti_dive": 2,
-       "slow": 2,
-       "zone_control": 1
+       "anti_dive": 4,
+       "slow": 4,
+       "zone_control": 2
       }
      ],
      [
       {
-       "purge": 1,
-       "resist_shred": 1
+       "purge": 2,
+       "resist_shred": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -49684,11 +49685,11 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "heal_burst": 2,
-    "heal_sustain": 2,
-    "peel": 1,
-    "self_sustain": 1
+    "buff_allies": 2,
+    "heal_burst": 4,
+    "heal_sustain": 4,
+    "peel": 2,
+    "self_sustain": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Holy Staff",
@@ -49729,19 +49730,19 @@
     "slots": [
      [
       {
-       "heal_burst": 2,
-       "self_sustain": 1
+       "heal_burst": 4,
+       "self_sustain": 2
       }
      ],
      [
       {
-       "heal_sustain": 2
+       "heal_sustain": 4
       },
       {
-       "buff_allies": 1
+       "buff_allies": 2
       },
       {
-       "peel": 1
+       "peel": 2
       }
      ]
     ]
@@ -49754,14 +49755,14 @@
   },
   "MAIN_HOLYSTAFF_AVALON": {
    "capabilities": {
-    "buff_allies": 2,
-    "disengage": 2,
-    "heal_burst": 3,
-    "heal_sustain": 2,
-    "knockback_displace": 1,
-    "mobility": 3,
-    "peel": 3,
-    "self_sustain": 1
+    "buff_allies": 4,
+    "disengage": 4,
+    "heal_burst": 6,
+    "heal_sustain": 4,
+    "knockback_displace": 2,
+    "mobility": 6,
+    "peel": 6,
+    "self_sustain": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Hallowfall",
@@ -49810,20 +49811,20 @@
     "slots": [
      [
       {
-       "disengage": 2,
-       "heal_burst": 3,
-       "knockback_displace": 1,
-       "mobility": 3,
-       "peel": 3,
-       "self_sustain": 1
+       "disengage": 4,
+       "heal_burst": 6,
+       "knockback_displace": 2,
+       "mobility": 6,
+       "peel": 6,
+       "self_sustain": 2
       }
      ],
      [
       {
-       "buff_allies": 2
+       "buff_allies": 4
       },
       {
-       "heal_sustain": 2
+       "heal_sustain": 4
       }
      ]
     ]
@@ -49843,11 +49844,11 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "cleanse": 2,
-    "heal_burst": 2,
-    "heal_sustain": 2,
-    "peel": 2
+    "buff_allies": 4,
+    "cleanse": 4,
+    "heal_burst": 4,
+    "heal_sustain": 4,
+    "peel": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Lifetouch Staff",
@@ -49886,15 +49887,15 @@
     "slots": [
      [
       {
-       "buff_allies": 2,
-       "cleanse": 2,
-       "heal_sustain": 2,
-       "peel": 2
+       "buff_allies": 4,
+       "cleanse": 4,
+       "heal_sustain": 4,
+       "peel": 4
       }
      ],
      [
       {
-       "heal_burst": 2
+       "heal_burst": 4
       }
      ]
     ]
@@ -49930,12 +49931,12 @@
     }
    },
    "capabilities": {
-    "engage": 2,
-    "mobility": 2,
-    "peel": 2,
-    "root": 1,
-    "stun": 2,
-    "tankiness": 2
+    "engage": 4,
+    "mobility": 4,
+    "peel": 4,
+    "root": 2,
+    "stun": 4,
+    "tankiness": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Mace",
@@ -49962,7 +49963,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -49980,17 +49981,17 @@
     "slots": [
      [
       {
-       "engage": 2,
-       "mobility": 2,
-       "stun": 2
+       "engage": 4,
+       "mobility": 4,
+       "stun": 4
       }
      ],
      [
       {
-       "root": 1
+       "root": 2
       },
       {
-       "peel": 2
+       "peel": 4
       }
      ]
     ]
@@ -50053,15 +50054,15 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 1,
-    "catch": 1,
-    "engage": 1,
-    "peel": 2,
-    "resist_shred": 1,
-    "root": 1,
-    "slow": 1,
-    "tankiness": 2,
-    "zone_control": 1
+    "burst_aoe": 2,
+    "catch": 2,
+    "engage": 2,
+    "peel": 4,
+    "resist_shred": 2,
+    "root": 2,
+    "slow": 2,
+    "tankiness": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Dreadstorm Monarch",
@@ -50097,7 +50098,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -50115,20 +50116,20 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "catch": 1,
-       "resist_shred": 1,
-       "slow": 1,
-       "zone_control": 1
+       "burst_aoe": 2,
+       "catch": 2,
+       "resist_shred": 2,
+       "slow": 2,
+       "zone_control": 2
       }
      ],
      [
       {
-       "engage": 1,
-       "root": 1
+       "engage": 2,
+       "root": 2
       },
       {
-       "peel": 2
+       "peel": 4
       }
      ]
     ]
@@ -50188,16 +50189,16 @@
     }
    },
    "capabilities": {
-    "burst_st": 1,
-    "damage_debuff": 2,
-    "engage": 1,
-    "execute": 2,
-    "heal_reduction": 1,
-    "peel": 2,
-    "root": 1,
-    "slow": 1,
-    "tankiness": 2,
-    "zone_control": 1
+    "burst_st": 2,
+    "damage_debuff": 4,
+    "engage": 2,
+    "execute": 4,
+    "heal_reduction": 2,
+    "peel": 4,
+    "root": 2,
+    "slow": 2,
+    "tankiness": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Incubus Mace",
@@ -50236,7 +50237,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -50258,25 +50259,25 @@
     "slots": [
      [
       {
-       "burst_st": 1,
-       "damage_debuff": 2,
-       "execute": 2,
-       "heal_reduction": 1
+       "burst_st": 2,
+       "damage_debuff": 4,
+       "execute": 4,
+       "heal_reduction": 2
       }
      ],
      [
       {
-       "engage": 1,
-       "root": 1
+       "engage": 2,
+       "root": 2
       },
       {
-       "peel": 2
+       "peel": 4
       }
      ],
      [
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -50344,15 +50345,15 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "cleanse": 2,
-    "heal_burst": 2,
-    "heal_sustain": 2,
-    "knockback_displace": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "zone_control": 1
+    "buff_allies": 4,
+    "cleanse": 4,
+    "heal_burst": 4,
+    "heal_sustain": 4,
+    "knockback_displace": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Nature Staff",
@@ -50413,31 +50414,31 @@
     "slots": [
      [
       {
-       "heal_burst": 2,
-       "heal_sustain": 2,
-       "root": 1
+       "heal_burst": 4,
+       "heal_sustain": 4,
+       "root": 2
       }
      ],
      [
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       },
       {
-       "cleanse": 2
+       "cleanse": 4
       },
       {
-       "buff_allies": 2
+       "buff_allies": 4
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -50483,15 +50484,15 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "cleanse": 2,
-    "heal_burst": 1,
-    "heal_sustain": 2,
-    "knockback_displace": 1,
-    "peel": 2,
-    "self_sustain": 1,
-    "slow": 1,
-    "zone_control": 1
+    "buff_allies": 4,
+    "cleanse": 4,
+    "heal_burst": 2,
+    "heal_sustain": 4,
+    "knockback_displace": 2,
+    "peel": 4,
+    "self_sustain": 2,
+    "slow": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Ironroot Staff",
@@ -50552,31 +50553,31 @@
     "slots": [
      [
       {
-       "heal_sustain": 2,
-       "peel": 2
+       "heal_sustain": 4,
+       "peel": 4
       }
      ],
      [
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       },
       {
-       "cleanse": 2,
-       "heal_burst": 1
+       "cleanse": 4,
+       "heal_burst": 2
       },
       {
-       "buff_allies": 2
+       "buff_allies": 4
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -50646,15 +50647,15 @@
     }
    },
    "capabilities": {
-    "buff_allies": 1,
-    "cleanse": 2,
-    "heal_burst": 1,
-    "heal_sustain": 2,
-    "knockback_displace": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "zone_control": 1
+    "buff_allies": 2,
+    "cleanse": 4,
+    "heal_burst": 2,
+    "heal_sustain": 4,
+    "knockback_displace": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Forgebark Staff",
@@ -50714,29 +50715,29 @@
     "slots": [
      [
       {
-       "buff_allies": 1,
-       "heal_sustain": 2,
-       "root": 1
+       "buff_allies": 2,
+       "heal_sustain": 4,
+       "root": 2
       }
      ],
      [
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       },
       {
-       "cleanse": 2,
-       "heal_burst": 1
+       "cleanse": 4,
+       "heal_burst": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -50777,14 +50778,14 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
-    "cleanse": 2,
-    "heal_burst": 2,
-    "heal_sustain": 2,
-    "knockback_displace": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "zone_control": 1
+    "buff_allies": 4,
+    "cleanse": 4,
+    "heal_burst": 4,
+    "heal_sustain": 4,
+    "knockback_displace": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Druidic Staff",
@@ -50842,30 +50843,30 @@
     "slots": [
      [
       {
-       "heal_burst": 2,
-       "heal_sustain": 2
+       "heal_burst": 4,
+       "heal_sustain": 4
       }
      ],
      [
       {
-       "knockback_displace": 1
+       "knockback_displace": 2
       },
       {
-       "cleanse": 2
+       "cleanse": 4
       },
       {
-       "buff_allies": 2
+       "buff_allies": 4
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "slow": 1,
-       "zone_control": 1
+       "slow": 2,
+       "zone_control": 2
       }
      ]
     ]
@@ -50920,18 +50921,18 @@
     }
    },
    "capabilities": {
-    "burst_st": 2,
-    "catch": 2,
-    "disengage": 2,
-    "engage": 1,
-    "execute": 2,
-    "heal_reduction": 1,
-    "mobility": 3,
-    "peel": 1,
-    "resist_shred": 1,
-    "self_sustain": 1,
-    "stun": 1,
-    "sustained_dps": 1
+    "burst_st": 4,
+    "catch": 4,
+    "disengage": 4,
+    "engage": 2,
+    "execute": 4,
+    "heal_reduction": 2,
+    "mobility": 6,
+    "peel": 2,
+    "resist_shred": 2,
+    "self_sustain": 2,
+    "stun": 2,
+    "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Bloodletter",
@@ -50976,7 +50977,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "sustained_dps": 1
+     "sustained_dps": 2
     },
     "slot_names": [
      "e",
@@ -51003,33 +51004,33 @@
     "slots": [
      [
       {
-       "burst_st": 2,
-       "catch": 2,
-       "engage": 1,
-       "execute": 2,
-       "mobility": 3
+       "burst_st": 4,
+       "catch": 4,
+       "engage": 2,
+       "execute": 4,
+       "mobility": 6
       }
      ],
      [
       {
-       "disengage": 2
+       "disengage": 4
       },
       {
-       "heal_reduction": 1
+       "heal_reduction": 2
       },
       {
-       "peel": 1,
-       "stun": 1
+       "peel": 2,
+       "stun": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "resist_shred": 1
+       "resist_shred": 2
       }
      ]
     ]
@@ -51072,14 +51073,14 @@
     }
    },
    "capabilities": {
-    "anti_dive": 3,
-    "engage": 1,
-    "knockback_displace": 3,
-    "peel": 2,
-    "root": 1,
-    "slow": 1,
-    "tankiness": 2,
-    "zone_control": 1
+    "anti_dive": 6,
+    "engage": 2,
+    "knockback_displace": 6,
+    "peel": 4,
+    "root": 2,
+    "slow": 2,
+    "tankiness": 4,
+    "zone_control": 2
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Bedrock Mace",
@@ -51112,7 +51113,7 @@
    "in_game_data": true,
    "loadout": {
     "always": {
-     "tankiness": 2
+     "tankiness": 4
     },
     "slot_names": [
      "e",
@@ -51133,21 +51134,21 @@
     "slots": [
      [
       {
-       "anti_dive": 3,
-       "knockback_displace": 3,
-       "peel": 2,
-       "zone_control": 1
+       "anti_dive": 6,
+       "knockback_displace": 6,
+       "peel": 4,
+       "zone_control": 2
       }
      ],
      [
       {
-       "engage": 1,
-       "root": 1
+       "engage": 2,
+       "root": 2
       }
      ],
      [
       {
-       "slow": 1
+       "slow": 2
       }
      ]
     ]
@@ -51214,16 +51215,16 @@
     }
    },
    "capabilities": {
-    "burst_st": 2,
-    "catch": 1,
-    "disengage": 1,
-    "mobility": 2,
-    "peel": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "silence": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "burst_st": 4,
+    "catch": 2,
+    "disengage": 2,
+    "mobility": 4,
+    "peel": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "silence": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Clarent Blade",
@@ -51286,30 +51287,30 @@
     "slots": [
      [
       {
-       "burst_st": 2,
-       "catch": 1,
-       "silence": 1,
-       "slow": 1
+       "burst_st": 4,
+       "catch": 2,
+       "silence": 2,
+       "slow": 2
       }
      ],
      [
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "peel": 1,
-       "root": 1
+       "peel": 2,
+       "root": 2
       }
      ],
      [
       {
-       "mobility": 2,
-       "sustained_dps": 2
+       "mobility": 4,
+       "sustained_dps": 4
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -51366,16 +51367,16 @@
     }
    },
    "capabilities": {
-    "catch": 2,
-    "disengage": 1,
-    "engage": 2,
-    "knockback_displace": 1,
-    "mobility": 2,
-    "peel": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "catch": 4,
+    "disengage": 2,
+    "engage": 4,
+    "knockback_displace": 2,
+    "mobility": 4,
+    "peel": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Spear",
@@ -51439,32 +51440,32 @@
     "slots": [
      [
       {
-       "disengage": 1,
-       "engage": 2,
-       "knockback_displace": 1,
-       "mobility": 2,
-       "peel": 1
+       "disengage": 2,
+       "engage": 4,
+       "knockback_displace": 2,
+       "mobility": 4,
+       "peel": 2
       }
      ],
      [
       {
-       "slow": 1
+       "slow": 2
       },
       {
-       "catch": 2
+       "catch": 4
       },
       {
-       "root": 1
+       "root": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -51527,16 +51528,16 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 1,
-    "catch": 2,
-    "mobility": 1,
-    "peel": 1,
-    "ranged_presence": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "stun": 2,
-    "sustained_dps": 2
+    "burst_aoe": 2,
+    "catch": 4,
+    "mobility": 2,
+    "peel": 2,
+    "ranged_presence": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "stun": 4,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Heron Spear",
@@ -51600,32 +51601,32 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "catch": 2,
-       "peel": 1,
-       "ranged_presence": 1,
-       "stun": 2
+       "burst_aoe": 2,
+       "catch": 4,
+       "peel": 2,
+       "ranged_presence": 2,
+       "stun": 4
       }
      ],
      [
       {
-       "mobility": 1
+       "mobility": 2
       },
       {
-       "slow": 1
+       "slow": 2
       },
       {
-       "root": 1
+       "root": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -51676,15 +51677,15 @@
     }
    },
    "capabilities": {
-    "burst_st": 1,
-    "catch": 1,
-    "engage": 2,
-    "mobility": 2,
-    "purge": 2,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "burst_st": 2,
+    "catch": 2,
+    "engage": 4,
+    "mobility": 4,
+    "purge": 4,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Daybreaker",
@@ -51745,31 +51746,31 @@
     "slots": [
      [
       {
-       "burst_st": 1,
-       "engage": 2,
-       "mobility": 2,
-       "purge": 2
+       "burst_st": 2,
+       "engage": 4,
+       "mobility": 4,
+       "purge": 4
       }
      ],
      [
       {
-       "catch": 1
+       "catch": 2
       },
       {
-       "slow": 1
+       "slow": 2
       },
       {
-       "root": 1
+       "root": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ]
     ]
@@ -51800,16 +51801,16 @@
     }
    },
    "capabilities": {
-    "burst_st": 2,
-    "catch": 1,
-    "disengage": 1,
-    "engage": 1,
-    "mobility": 2,
-    "peel": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "burst_st": 4,
+    "catch": 2,
+    "disengage": 2,
+    "engage": 2,
+    "mobility": 4,
+    "peel": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Broadsword",
@@ -51873,32 +51874,32 @@
     "slots": [
      [
       {
-       "burst_st": 2,
-       "catch": 1,
-       "engage": 1,
-       "mobility": 2
+       "burst_st": 4,
+       "catch": 2,
+       "engage": 2,
+       "mobility": 4
       }
      ],
      [
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "slow": 1
+       "slow": 2
       },
       {
-       "peel": 1,
-       "root": 1
+       "peel": 2,
+       "root": 2
       }
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]
@@ -51929,16 +51930,16 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 1,
-    "burst_st": 2,
-    "catch": 1,
-    "disengage": 1,
-    "mobility": 2,
-    "peel": 1,
-    "root": 1,
-    "self_sustain": 1,
-    "slow": 1,
-    "sustained_dps": 2
+    "burst_aoe": 2,
+    "burst_st": 4,
+    "catch": 2,
+    "disengage": 2,
+    "mobility": 4,
+    "peel": 2,
+    "root": 2,
+    "self_sustain": 2,
+    "slow": 2,
+    "sustained_dps": 4
    },
    "curated_as_of": "2026-08-12",
    "display_name": "Infinity Blade",
@@ -51998,28 +51999,28 @@
     "slots": [
      [
       {
-       "burst_aoe": 1,
-       "burst_st": 2,
-       "mobility": 2,
-       "sustained_dps": 2
+       "burst_aoe": 2,
+       "burst_st": 4,
+       "mobility": 4,
+       "sustained_dps": 4
       }
      ],
      [
       {
-       "disengage": 1
+       "disengage": 2
       },
       {
-       "catch": 1,
-       "slow": 1
+       "catch": 2,
+       "slow": 2
       },
       {
-       "peel": 1,
-       "root": 1
+       "peel": 2,
+       "root": 2
       }
      ],
      [
       {
-       "self_sustain": 1
+       "self_sustain": 2
       }
      ]
     ]

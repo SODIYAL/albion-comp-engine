@@ -26,11 +26,11 @@
     - {cap: mobility, evidence: QDASH}
     - {cap: catch, evidence: SKILLSHOT_TELEPORT}
   capabilities:
-    - {cap: mobility,       score: 3, evidence: RAPIERSTAB}         # E dash; Q: Deadly Swipe; W: Dash / Chain Slash / Shadow Edge
-    - {cap: execute,        score: 2, evidence: RAPIERSTAB}         # E: damage keyed to target health threshold
-    - {cap: burst_st,       score: 2, evidence: RAPIERSTAB}         # E + stacked Assassin Spirit charges
-    - {cap: catch,          score: 2, evidence: RAPIERSTAB}         # W: Chain Slash / Shadow Edge close anything (QW)
-    - {cap: disengage,      score: 2, evidence: GROUNDDASH}         # W: Dash; Chain Slash grants immunity while charging (QW)
-    - {cap: engage,         score: 1, evidence: RAPIERSTAB}         # dives for itself, not a group initiation
+    - {cap: mobility,       score: 6, evidence: RAPIERSTAB}         # E dash; Q: Deadly Swipe; W: Dash / Chain Slash / Shadow Edge
+    - {cap: execute,        score: 4, evidence: RAPIERSTAB}         # E: damage keyed to target health threshold
+    - {cap: burst_st,       score: 4, evidence: RAPIERSTAB}         # E + stacked Assassin Spirit charges
+    - {cap: catch,          score: 4, evidence: RAPIERSTAB}         # W: Chain Slash / Shadow Edge close anything (QW)
+    - {cap: disengage,      score: 4, evidence: GROUNDDASH}         # W: Dash; Chain Slash grants immunity while charging (QW)
+    - {cap: engage,         score: 2, evidence: RAPIERSTAB}         # dives for itself, not a group initiation
                                                                     # Received for 1.5" + interrupt (QW). Grounded via the
                                                                     # heal_flag_meaning: negate override (effect_overrides.yaml)

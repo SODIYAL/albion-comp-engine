@@ -13,5 +13,5 @@
   except:
     - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
-    - {cap: burst_st,      score: 2, evidence: DUAL_RAPIDFIRE}    # E: ramping barrage into one target
-    - {cap: sustained_dps, score: 2, evidence: DUAL_RAPIDFIRE}    # E + Q: Auto Fire channel pattern
+    - {cap: burst_st,      score: 4, evidence: DUAL_RAPIDFIRE}    # E: ramping barrage into one target
+    - {cap: sustained_dps, score: 4, evidence: DUAL_RAPIDFIRE}    # E + Q: Auto Fire channel pattern

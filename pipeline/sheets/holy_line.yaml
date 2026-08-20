@@ -19,13 +19,13 @@
     - {cap: heal_burst, evidence: HOLYFLASH}
     - {cap: peel, evidence: PULSINGHEAL}
   capabilities:
-    - {cap: heal_burst,         score: 3, evidence: DIVINE_JUMP}   # E: Divine Intervention — burst heal on impact
-    - {cap: mobility,           score: 3, evidence: DIVINE_JUMP}   # E: leap, immune to dmg/debuff/CC until impact
-    - {cap: disengage,          score: 2, evidence: DIVINE_JUMP}   # E: the immunity window is the escape
-    - {cap: peel,               score: 3, evidence: DIVINE_JUMP}   # E: throws all enemies in radius into the air
-    - {cap: knockback_displace, score: 1, evidence: DIVINE_JUMP}   # E air-THROW: no travel — control value lives in peel 3 (magnitude pass 2026-08-13)
-    - {cap: buff_allies,        score: 2, evidence: HOLYHOT}       # W: Holy Blessing — armor + healing received
-    - {cap: self_sustain,       score: 1, evidence: DIVINE_JUMP}   # E heals the caster too
+    - {cap: heal_burst,         score: 6, evidence: DIVINE_JUMP}   # E: Divine Intervention — burst heal on impact
+    - {cap: mobility,           score: 6, evidence: DIVINE_JUMP}   # E: leap, immune to dmg/debuff/CC until impact
+    - {cap: disengage,          score: 4, evidence: DIVINE_JUMP}   # E: the immunity window is the escape
+    - {cap: peel,               score: 6, evidence: DIVINE_JUMP}   # E: throws all enemies in radius into the air
+    - {cap: knockback_displace, score: 2, evidence: DIVINE_JUMP}   # E air-THROW: no travel — control value lives in peel 3 (magnitude pass 2026-08-13)
+    - {cap: buff_allies,        score: 4, evidence: HOLYHOT}       # W: Holy Blessing — armor + healing received
+    - {cap: self_sustain,       score: 2, evidence: DIVINE_JUMP}   # E heals the caster too
     # NO cleanse — see file header. NO purge, no damage contribution worth scoring.
 
 - weapon: 2H_HOLYSTAFF_UNDEAD        # Redemption Staff — stationary group healer
@@ -35,8 +35,8 @@
   except:
     - {cap: heal_sustain, evidence: HEALINGBEAM}
   capabilities:
-    - {cap: heal_sustain,       score: 3, evidence: CELESTIAL_SPHERE}  # E: bouncing multi-ally sphere
-    - {cap: buff_allies,        score: 2, evidence: HOLYHOT}           # W: Holy Blessing
+    - {cap: heal_sustain,       score: 6, evidence: CELESTIAL_SPHERE}  # E: bouncing multi-ally sphere
+    - {cap: buff_allies,        score: 4, evidence: HOLYHOT}           # W: Holy Blessing
     # knockback_displace REMOVED 2026-08-13 (expert magnitude pass): an
     # auto-attack passive knockback is trivial in group fights.
     # NO mobility — this is the deliberate contrast with Hallowfall (design doc

@@ -17,8 +17,8 @@
     - {cap: engage, evidence: DASHKICK}
     - {cap: mobility, evidence: DASHKICK}
   capabilities:
-    - {cap: mobility,      score: 3, evidence: DIVEPUNCH_RISE}   # E float-dive; every Q is a dash; W: Triple Kick
-    - {cap: engage,        score: 2, evidence: DIVEPUNCH_RISE}   # CC-immune float into a dive
-    - {cap: disengage,     score: 2, evidence: DIVEPUNCH_RISE}   # the float IS the escape window
-    - {cap: catch,         score: 2, evidence: DIVEPUNCH_RISE}   # Q: Dragon Leap; W: Triple Kick drag
-    - {cap: burst_st,      score: 2, evidence: KNUCKLECOMBO}     # W: 30+153 punch combo; Q: Create Opening (QW)
+    - {cap: mobility,      score: 6, evidence: DIVEPUNCH_RISE}   # E float-dive; every Q is a dash; W: Triple Kick
+    - {cap: engage,        score: 4, evidence: DIVEPUNCH_RISE}   # CC-immune float into a dive
+    - {cap: disengage,     score: 4, evidence: DIVEPUNCH_RISE}   # the float IS the escape window
+    - {cap: catch,         score: 4, evidence: DIVEPUNCH_RISE}   # Q: Dragon Leap; W: Triple Kick drag
+    - {cap: burst_st,      score: 4, evidence: KNUCKLECOMBO}     # W: 30+153 punch combo; Q: Create Opening (QW)

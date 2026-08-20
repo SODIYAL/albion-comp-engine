@@ -21,7 +21,7 @@
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: support
   capabilities:
-    - {cap: heal_reduction, score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # E: negates Healing Received 2s, AoE
-    - {cap: knockback_displace, score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # E: 6m AoE, ignores CC resistance
-    - {cap: peel,           score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # the CC-resist-ignoring shove IS the peel
-    - {cap: sustained_dps,  score: 1, evidence: CURSEDOT}           # Q: stacking Vile Curse DoTs; 1H damage budget
+    - {cap: heal_reduction, score: 4, evidence: CURSE_SKELETON_BARF_FDHR}  # E: negates Healing Received 2s, AoE
+    - {cap: knockback_displace, score: 4, evidence: CURSE_SKELETON_BARF_FDHR}  # E: 6m AoE, ignores CC resistance
+    - {cap: peel,           score: 4, evidence: CURSE_SKELETON_BARF_FDHR}  # the CC-resist-ignoring shove IS the peel
+    - {cap: sustained_dps,  score: 2, evidence: CURSEDOT}           # Q: stacking Vile Curse DoTs; 1H damage budget

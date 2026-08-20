@@ -26,8 +26,8 @@
     - {cap: engage, evidence: QDASH}
     - {cap: mobility, evidence: QDASH}
   capabilities:
-    - {cap: burst_st,      score: 2, evidence: GHOSTSTRIKE}         # E: 153 + repeatable at 3 Sunder charges
-    - {cap: engage,        score: 2, evidence: GHOSTSTRIKE}         # charge-through opener, stealth reset
-    - {cap: disengage,     score: 2, evidence: GHOSTSTRIKE}         # 1s invisibility out; W: Chain Slash iframes
-    - {cap: mobility,      score: 2, evidence: GROUNDDASH}          # W: Dash; E charge; Q: Deadly Swipe leap (QW)
-    - {cap: catch,         score: 2, evidence: SKILLSHOT_TELEPORT}  # W: Shadow Edge stun-teleport; Chain Slash multi-charge (QW)
+    - {cap: burst_st,      score: 4, evidence: GHOSTSTRIKE}         # E: 153 + repeatable at 3 Sunder charges
+    - {cap: engage,        score: 4, evidence: GHOSTSTRIKE}         # charge-through opener, stealth reset
+    - {cap: disengage,     score: 4, evidence: GHOSTSTRIKE}         # 1s invisibility out; W: Chain Slash iframes
+    - {cap: mobility,      score: 4, evidence: GROUNDDASH}          # W: Dash; E charge; Q: Deadly Swipe leap (QW)
+    - {cap: catch,         score: 4, evidence: SKILLSHOT_TELEPORT}  # W: Shadow Edge stun-teleport; Chain Slash multi-charge (QW)

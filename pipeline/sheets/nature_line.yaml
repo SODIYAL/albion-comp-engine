@@ -11,5 +11,5 @@
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: healer
   capabilities:
-    - {cap: heal_sustain,       score: 3, evidence: ROTTENVINES}    # E: Elevated Nature — channeled group heal aura
-    - {cap: mobility,           score: 1, evidence: ROTTENVINES}    # E: self move-speed while channeling
+    - {cap: heal_sustain,       score: 6, evidence: ROTTENVINES}    # E: Elevated Nature — channeled group heal aura
+    - {cap: mobility,           score: 2, evidence: ROTTENVINES}    # E: self move-speed while channeling

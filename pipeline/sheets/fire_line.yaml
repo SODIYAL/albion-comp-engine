@@ -6,7 +6,7 @@
   curated_as_of: 2026-08-12
   role_hint: range
   capabilities:
-    - {cap: burst_aoe,     score: 2, evidence: FLAMEPILLAR}    # E: 200 in 4m, CD refund on hit
+    - {cap: burst_aoe,     score: 4, evidence: FLAMEPILLAR}    # E: 200 in 4m, CD refund on hit
 
 - weapon: 2H_FIRESTAFF_HELL          # Brimstone Staff — the meteor
   curated_as_of: 2026-08-12
@@ -15,8 +15,8 @@
   except:
     - {cap: knockback_displace, evidence: FIRECONE}
   capabilities:
-    - {cap: burst_aoe,     score: 3, evidence: METEOR}         # E: 434 in 5m — the biggest single AoE hit curated
-    - {cap: knockback_displace, score: 1, evidence: METEOR}    # 3m scatter on impact
+    - {cap: burst_aoe,     score: 6, evidence: METEOR}         # E: 434 in 5m — the biggest single AoE hit curated
+    - {cap: knockback_displace, score: 2, evidence: METEOR}    # 3m scatter on impact
 
 - weapon: 2H_INFERNOSTAFF            # Infernal Staff — the fear torch
   curated_as_of: 2026-08-12
@@ -27,17 +27,17 @@
     - {cap: peel, evidence: FIRECONE}
     - {cap: zone_control, evidence: FIREWALL}
   capabilities:
-    - {cap: peel,          score: 2, evidence: HUMAN_TORCH}    # E: AoE FEAR off the burning target
-    - {cap: knockback_displace, score: 1, evidence: HUMAN_TORCH}  # forced flight scatters
-    - {cap: zone_control,  score: 1, evidence: HUMAN_TORCH}    # fleeing enemies paint fire trails
-    - {cap: burst_st,      score: 1, evidence: HUMAN_TORCH}    # the torch DoT
+    - {cap: peel,          score: 4, evidence: HUMAN_TORCH}    # E: AoE FEAR off the burning target
+    - {cap: knockback_displace, score: 2, evidence: HUMAN_TORCH}  # forced flight scatters
+    - {cap: zone_control,  score: 2, evidence: HUMAN_TORCH}    # fleeing enemies paint fire trails
+    - {cap: burst_st,      score: 2, evidence: HUMAN_TORCH}    # the torch DoT
 
 - weapon: MAIN_FIRESTAFF             # Fire Staff (1H) — pyroblast poker
   curated_as_of: 2026-08-12
   role_hint: range
   capabilities:
-    - {cap: burst_aoe,     score: 2, evidence: PYROBLAST_SKILLSHOT}  # E: charged 4m blast
-    - {cap: burst_st,      score: 1, evidence: PYROBLAST_SKILLSHOT}
+    - {cap: burst_aoe,     score: 4, evidence: PYROBLAST_SKILLSHOT}  # E: charged 4m blast
+    - {cap: burst_st,      score: 2, evidence: PYROBLAST_SKILLSHOT}
 
 - weapon: MAIN_FIRESTAFF_CRYSTAL     # Flamewalker Staff — fireball flight mage
   curated_as_of: 2026-08-12
@@ -46,13 +46,13 @@
   except:
     - {cap: knockback_displace, evidence: FIRECONE}
   capabilities:
-    - {cap: mobility,      score: 2, evidence: FLAMEDASH}      # E: immune 14m fireball flight, CD refund
-    - {cap: engage,        score: 2, evidence: FLAMEDASH}      # fly INTO them, 178 on impact
-    - {cap: disengage,     score: 2, evidence: FLAMEDASH}      # fly OUT immune to everything
-    - {cap: burst_aoe,     score: 1, evidence: FLAMEDASH}      # 178 in 5m
+    - {cap: mobility,      score: 4, evidence: FLAMEDASH}      # E: immune 14m fireball flight, CD refund
+    - {cap: engage,        score: 4, evidence: FLAMEDASH}      # fly INTO them, 178 on impact
+    - {cap: disengage,     score: 4, evidence: FLAMEDASH}      # fly OUT immune to everything
+    - {cap: burst_aoe,     score: 2, evidence: FLAMEDASH}      # 178 in 5m
 
 - weapon: MAIN_FIRESTAFF_KEEPER      # Wildfire Staff — anti-tank magma
   curated_as_of: 2026-08-12
   role_hint: range
   capabilities:
-    - {cap: burst_aoe,     score: 2, evidence: MAGMASPHERE}    # E: 240 rolling sphere + %Max-Health true damage
+    - {cap: burst_aoe,     score: 4, evidence: MAGMASPHERE}    # E: 240 rolling sphere + %Max-Health true damage

@@ -16,9 +16,9 @@ ruling), never through this page.
 Auto-flags (also printed to console):
   RULE  same evidence spell grounding the same capability at different
         scores — violates the line-consistency rule, always a bug
-  PASV  PASSIVE_*/WEAPON_STATS evidence grounding score >= 2 — passives are
+  PASV  PASSIVE_*/WEAPON_STATS evidence grounding score >= 4 (1-7 scale) — passives are
         usually minor; each one needs an explicit justification
-  TOP   score 3 — the top of every ladder is reviewed first
+  TOP   score >= 6 — the top of every ladder is reviewed first
 
 Usage:  py -3 pipeline/build_magnitude_review.py   ->  review/magnitude.html
 """
@@ -129,15 +129,15 @@ def main():
         if (r["cap"], r["evidence"]) in rule_flags:
             f.append("RULE")
         if (r["evidence"].startswith("PASSIVE") or r["evidence"] == "WEAPON_STATS") \
-                and r["score"] >= 2:
+                and r["score"] >= 4:
             f.append("PASV")
-        if r["score"] == 3:
+        if r["score"] >= 6:
             f.append("TOP")
         return f
 
     n_rule = sum(1 for r in rows if "RULE" in flags_of(r))
     n_pasv = sum(1 for r in rows if "PASV" in flags_of(r))
-    n_top = sum(1 for r in rows if r["score"] == 3)
+    n_top = sum(1 for r in rows if r["score"] >= 6)
 
     def spell_cell(ev):
         s = spells.get(ev)

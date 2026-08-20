@@ -9,18 +9,18 @@
     - {cap: catch, evidence: HAMSTRINGSWORD}
     - {cap: mobility, evidence: HEROICSTRIKE2}
   capabilities:
-    - {cap: engage,        score: 3, evidence: CLAYMORECHARGE}    # E: CC+debuff+damage-immune 1s charge
-    - {cap: catch,         score: 2, evidence: CLAYMORECHARGE}    # charge + 0.8s CC-resist-ignoring stun
-    - {cap: mobility,      score: 2, evidence: CLAYMORECHARGE}    # charge + Q dash
-    - {cap: stun,          score: 1, evidence: CLAYMORECHARGE}    # 0.8s on impact
-    - {cap: burst_st,      score: 1, evidence: CLAYMORECHARGE}    # charge-scaled impact
+    - {cap: engage,        score: 6, evidence: CLAYMORECHARGE}    # E: CC+debuff+damage-immune 1s charge
+    - {cap: catch,         score: 4, evidence: CLAYMORECHARGE}    # charge + 0.8s CC-resist-ignoring stun
+    - {cap: mobility,      score: 4, evidence: CLAYMORECHARGE}    # charge + Q dash
+    - {cap: stun,          score: 2, evidence: CLAYMORECHARGE}    # 0.8s on impact
+    - {cap: burst_st,      score: 2, evidence: CLAYMORECHARGE}    # charge-scaled impact
 
 - weapon: 2H_DUALSCIMITAR_UNDEAD     # Galatine Pair — max-HP-cut AoE bomber
   curated_as_of: 2026-08-12
   role_hint: melee
   capabilities:
-    - {cap: burst_aoe,     score: 3, evidence: BLADE_AREA}        # E: 8.5m waves, charge-scaled to 320
-    - {cap: execute,       score: 1, evidence: BLADE_AREA}        # -10% max/current Health for 7s amplifies focus
+    - {cap: burst_aoe,     score: 6, evidence: BLADE_AREA}        # E: 8.5m waves, charge-scaled to 320
+    - {cap: execute,       score: 2, evidence: BLADE_AREA}        # -10% max/current Health for 7s amplifies focus
 
 - weapon: MAIN_SCIMITAR_MORGANA      # Clarent Blade — charge-fork wave slicer
   curated_as_of: 2026-08-12
@@ -30,10 +30,10 @@
     - {cap: catch, evidence: HAMSTRINGSWORD}
     - {cap: slow, evidence: HAMSTRINGSWORD}
   capabilities:
-    - {cap: burst_st,      score: 2, evidence: MIGHTYSWING}       # E: 170 pierce wave, charge-scaled bonus
-    - {cap: silence,       score: 1, evidence: MIGHTYSWING}       # 2.25s at 2 Heroic Charges — a build choice
-    - {cap: slow,          score: 1, evidence: MIGHTYSWING}       # 1-charge fork; W: Hamstring (QW)
-    - {cap: catch,         score: 1, evidence: MIGHTYSWING}       # slow/silence forks stop escapes
+    - {cap: burst_st,      score: 4, evidence: MIGHTYSWING}       # E: 170 pierce wave, charge-scaled bonus
+    - {cap: silence,       score: 2, evidence: MIGHTYSWING}       # 2.25s at 2 Heroic Charges — a build choice
+    - {cap: slow,          score: 2, evidence: MIGHTYSWING}       # 1-charge fork; W: Hamstring (QW)
+    - {cap: catch,         score: 2, evidence: MIGHTYSWING}       # slow/silence forks stop escapes
 
 - weapon: MAIN_SWORD                 # Broadsword — leap-interrupt bruiser
   curated_as_of: 2026-08-12
@@ -43,10 +43,10 @@
     - {cap: catch, evidence: HAMSTRINGSWORD}
     - {cap: mobility, evidence: HEROICSTRIKE2}
   capabilities:
-    - {cap: burst_st,      score: 2, evidence: MIGHTYBLOW}        # E: charge-scaled 271 + kill refund
-    - {cap: mobility,      score: 2, evidence: MIGHTYBLOW}        # E leap + Q dash
-    - {cap: engage,        score: 1, evidence: MIGHTYBLOW}        # leap-to-target with interrupt
-    - {cap: catch,         score: 1, evidence: MIGHTYBLOW}
+    - {cap: burst_st,      score: 4, evidence: MIGHTYBLOW}        # E: charge-scaled 271 + kill refund
+    - {cap: mobility,      score: 4, evidence: MIGHTYBLOW}        # E leap + Q dash
+    - {cap: engage,        score: 2, evidence: MIGHTYBLOW}        # leap-to-target with interrupt
+    - {cap: catch,         score: 2, evidence: MIGHTYBLOW}
 
 - weapon: MAIN_SWORD_CRYSTAL         # Infinity Blade — ramp-and-swipe duellist
   curated_as_of: 2026-08-12
@@ -56,7 +56,7 @@
     - {cap: mobility, evidence: HEROICSTRIKE2}
     - {cap: sustained_dps, evidence: HEROICSTRIKE2}
   capabilities:
-    - {cap: burst_st,      score: 2, evidence: SWORD_BERSERK_RUN_RE}  # E: +35% damage channel into Limitbreaker swipe
-    - {cap: sustained_dps, score: 2, evidence: SWORD_BERSERK_RUN_RE}  # the ramp lasts 6s; heroic engine
-    - {cap: mobility,      score: 2, evidence: SWORD_BERSERK_RUN_RE}  # +30% MS while channeling + Q dash
-    - {cap: burst_aoe,     score: 1, evidence: SWORD_BERSERK_RUN_RE}  # the swipe is a cone
+    - {cap: burst_st,      score: 4, evidence: SWORD_BERSERK_RUN_RE}  # E: +35% damage channel into Limitbreaker swipe
+    - {cap: sustained_dps, score: 4, evidence: SWORD_BERSERK_RUN_RE}  # the ramp lasts 6s; heroic engine
+    - {cap: mobility,      score: 4, evidence: SWORD_BERSERK_RUN_RE}  # +30% MS while channeling + Q dash
+    - {cap: burst_aoe,     score: 2, evidence: SWORD_BERSERK_RUN_RE}  # the swipe is a cone

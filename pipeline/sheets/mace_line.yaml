@@ -11,9 +11,9 @@
     - {cap: slow, evidence: SACRED_GROUND}
     - {cap: zone_control, evidence: SACRED_GROUND}
   capabilities:
-    - {cap: engage,     score: 2, evidence: MACELEAP}      # Deep Leap: gap-close
-    - {cap: stun,       score: 2, evidence: MACELEAP}
-    - {cap: mobility,   score: 2, evidence: MACELEAP}
+    - {cap: engage,     score: 4, evidence: MACELEAP}      # Deep Leap: gap-close
+    - {cap: stun,       score: 4, evidence: MACELEAP}
+    - {cap: mobility,   score: 4, evidence: MACELEAP}
     # NOTE: no purge — nothing in the mace Q/W kit nor Deep Leap removes buffs
 
 - weapon: 2H_MACE            # Heavy Mace — disruption tank
@@ -25,9 +25,9 @@
     - {cap: root, evidence: CHARGE_ROOT}
     - {cap: peel, evidence: GUARDRUNE}
   capabilities:
-    - {cap: tankiness,  score: 3, evidence: WEAPON_STATS}
-    - {cap: silence,    score: 3, evidence: SHRIEKMACE}    # Battle Howl: AoE silence
-    - {cap: purge,      score: 3, evidence: SHRIEKMACE}    # Battle Howl purges before silencing
-    - {cap: peel,       score: 3, evidence: SHRIEKMACE}
-    - {cap: engage,     score: 2, evidence: CHARGE_ROOT}   # Snare Charge: 11m charge
-    - {cap: zone_control, score: 2, evidence: SACRED_GROUND}
+    - {cap: tankiness,  score: 6, evidence: WEAPON_STATS}
+    - {cap: silence,    score: 6, evidence: SHRIEKMACE}    # Battle Howl: AoE silence
+    - {cap: purge,      score: 6, evidence: SHRIEKMACE}    # Battle Howl purges before silencing
+    - {cap: peel,       score: 6, evidence: SHRIEKMACE}
+    - {cap: engage,     score: 4, evidence: CHARGE_ROOT}   # Snare Charge: 11m charge
+    - {cap: zone_control, score: 4, evidence: SACRED_GROUND}

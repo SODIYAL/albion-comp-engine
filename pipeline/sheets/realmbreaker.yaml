@@ -20,11 +20,11 @@
     - {cap: engage, evidence: AXE_CHARGE}
     - {cap: mobility, evidence: RENDINGCOMBO}
   capabilities:
-    - {cap: burst_aoe,      score: 2, evidence: LETHAL_CLEAVER}   # E: 212 AoE slam + cone follow-up
-    - {cap: knockback_displace, score: 1, evidence: LETHAL_CLEAVER}  # E: cone air-THROW — no travel (magnitude pass 2026-08-13)
-    - {cap: engage,         score: 2, evidence: LETHAL_CLEAVER}   # leap in, slam the clump
-    - {cap: mobility,       score: 2, evidence: LETHAL_CLEAVER}   # E leap; Q3: Raging Leap
-    - {cap: execute,        score: 1, evidence: LETHAL_CLEAVER}   # -15% Max Health for 5s amplifies the focus window
-    - {cap: peel,           score: 1, evidence: LETHAL_CLEAVER}   # air-throw divers off the backline
-    - {cap: catch,          score: 1, evidence: LETHAL_CLEAVER}   # leap range is modest
-    - {cap: disengage,      score: 1, evidence: LETHAL_CLEAVER}   # leap out — no CD refund unlike Bear Paws
+    - {cap: burst_aoe,      score: 4, evidence: LETHAL_CLEAVER}   # E: 212 AoE slam + cone follow-up
+    - {cap: knockback_displace, score: 2, evidence: LETHAL_CLEAVER}  # E: cone air-THROW — no travel (magnitude pass 2026-08-13)
+    - {cap: engage,         score: 4, evidence: LETHAL_CLEAVER}   # leap in, slam the clump
+    - {cap: mobility,       score: 4, evidence: LETHAL_CLEAVER}   # E leap; Q3: Raging Leap
+    - {cap: execute,        score: 2, evidence: LETHAL_CLEAVER}   # -15% Max Health for 5s amplifies the focus window
+    - {cap: peel,           score: 2, evidence: LETHAL_CLEAVER}   # air-throw divers off the backline
+    - {cap: catch,          score: 2, evidence: LETHAL_CLEAVER}   # leap range is modest
+    - {cap: disengage,      score: 2, evidence: LETHAL_CLEAVER}   # leap out — no CD refund unlike Bear Paws

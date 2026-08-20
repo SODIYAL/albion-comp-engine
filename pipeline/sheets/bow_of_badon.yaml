@@ -10,5 +10,5 @@
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: range
   capabilities:
-    - {cap: zone_control,  score: 2, evidence: LIGHTNING_ARROW}    # E: 5s stormcloud, DoT on leavers (Longbow zone parity)
-    - {cap: burst_aoe,     score: 1, evidence: LIGHTNING_ARROW}    # 21 every 0.3 in the cloud — pressure, not a bomb
+    - {cap: zone_control,  score: 4, evidence: LIGHTNING_ARROW}    # E: 5s stormcloud, DoT on leavers (Longbow zone parity)
+    - {cap: burst_aoe,     score: 2, evidence: LIGHTNING_ARROW}    # 21 every 0.3 in the cloud — pressure, not a bomb

@@ -7,8 +7,8 @@
 # adjudication — or lists the pair under `except:`.
 subcategory: firestaff
 capabilities:
-  - {cap: knockback_displace, score: 1, evidence: FIRECONE}          # W: Fire Wave — enemy knockback (QW)
-  - {cap: peel, score: 1, evidence: FIRECONE}                        # push a diver off the backline (QW)
-  - {cap: buff_allies, score: 1, evidence: FIRESTAFFIGNITE2_SPREAD}  # W: +60% ally MS for 1.6s — marginal (QW)
-  - {cap: zone_control, score: 1, evidence: FIREWALL}                # (QW)
-  - {cap: sustained_dps, score: 2, evidence: WEAPON_STATS}           # ignite DoT stacking + artillery channel
+  - {cap: knockback_displace, score: 2, evidence: FIRECONE}          # W: Fire Wave — enemy knockback (QW)
+  - {cap: peel, score: 2, evidence: FIRECONE}                        # push a diver off the backline (QW)
+  - {cap: buff_allies, score: 2, evidence: FIRESTAFFIGNITE2_SPREAD}  # W: +60% ally MS for 1.6s — marginal (QW)
+  - {cap: zone_control, score: 2, evidence: FIREWALL}                # (QW)
+  - {cap: sustained_dps, score: 4, evidence: WEAPON_STATS}           # ignite DoT stacking + artillery channel

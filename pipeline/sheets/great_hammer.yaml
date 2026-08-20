@@ -39,11 +39,11 @@
     - {cap: mobility, evidence: CHARGESLOWAE}
     - {cap: knockback_displace, evidence: GEYSER}
   capabilities:
-    - {cap: engage,        score: 3, evidence: HAMMERTACKLE}     # E: dash-through, CD refund per player hit
+    - {cap: engage,        score: 6, evidence: HAMMERTACKLE}     # E: dash-through, CD refund per player hit
     # clump_create removed 2026-08-13 (expert): knockback != pull — see header
-    - {cap: stun,          score: 2, evidence: HAMMERTACKLE}     # 2.35s on everyone tackled; Stunning Strike passive
-    - {cap: knockback_displace, score: 1, evidence: HAMMERTACKLE}  # dumps: knockback "by 2" (meters) — minor; W: Geyser knock-up (magnitude pass 2026-08-13)
-    - {cap: peel,          score: 2, evidence: HAMMERTACKLE}     # tackle a diver; W: Knockout, Geyser, ring
-    - {cap: catch,         score: 2, evidence: HAMMERTACKLE}     # dash + stun = caught
-    - {cap: mobility,      score: 2, evidence: HAMMERTACKLE}     # the E is a real dash; W: Slowing Charge
-    - {cap: disengage,     score: 2, evidence: HAMMERTACKLE}     # tackle OUT through the line, stunning pursuit
+    - {cap: stun,          score: 4, evidence: HAMMERTACKLE}     # 2.35s on everyone tackled; Stunning Strike passive
+    - {cap: knockback_displace, score: 2, evidence: HAMMERTACKLE}  # dumps: knockback "by 2" (meters) — minor; W: Geyser knock-up (magnitude pass 2026-08-13)
+    - {cap: peel,          score: 4, evidence: HAMMERTACKLE}     # tackle a diver; W: Knockout, Geyser, ring
+    - {cap: catch,         score: 4, evidence: HAMMERTACKLE}     # dash + stun = caught
+    - {cap: mobility,      score: 4, evidence: HAMMERTACKLE}     # the E is a real dash; W: Slowing Charge
+    - {cap: disengage,     score: 4, evidence: HAMMERTACKLE}     # tackle OUT through the line, stunning pursuit

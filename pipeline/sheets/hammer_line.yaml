@@ -5,22 +5,22 @@
   curated_as_of: 2026-08-12
   role_hint: tank
   capabilities:
-    - {cap: stun,          score: 2, evidence: CRYSTALWAVE}      # E: Static stacks stun on damage taken
-    - {cap: buff_allies,   score: 1, evidence: CRYSTALWAVE}      # 350 group absorb shield (via override)
-    - {cap: peel,          score: 2, evidence: GEYSER}           # W pool: Geyser / Knockout / ring (QW)
+    - {cap: stun,          score: 4, evidence: CRYSTALWAVE}      # E: Static stacks stun on damage taken
+    - {cap: buff_allies,   score: 2, evidence: CRYSTALWAVE}      # 350 group absorb shield (via override)
+    - {cap: peel,          score: 4, evidence: GEYSER}           # W pool: Geyser / Knockout / ring (QW)
 
 - weapon: 2H_HAMMER_UNDEAD           # Tombhammer — delayed-stun focus tank
   curated_as_of: 2026-08-12
   role_hint: tank
   capabilities:
-    - {cap: stun,          score: 2, evidence: UNDEADHAND}       # E: 2.48s AoE stun after 0.35 delay
-    - {cap: execute,       score: 1, evidence: UNDEADHAND}       # -10% max/current Health for the focus window
-    - {cap: catch,         score: 2, evidence: UNDEADHAND}       # 2.48s ranged AoE stun = caught
-    - {cap: peel,          score: 2, evidence: UNDEADHAND}       # drop the hand on divers; W pool
+    - {cap: stun,          score: 4, evidence: UNDEADHAND}       # E: 2.48s AoE stun after 0.35 delay
+    - {cap: execute,       score: 2, evidence: UNDEADHAND}       # -10% max/current Health for the focus window
+    - {cap: catch,         score: 4, evidence: UNDEADHAND}       # 2.48s ranged AoE stun = caught
+    - {cap: peel,          score: 4, evidence: UNDEADHAND}       # drop the hand on divers; W pool
 
 - weapon: MAIN_HAMMER                # Hammer (1H) — self-AoE stun tank
   curated_as_of: 2026-08-12
   role_hint: tank
   capabilities:
-    - {cap: stun,          score: 2, evidence: HAMMERWHIRLWIND2} # E: 2.25s stun in 5.5m around you
-    - {cap: peel,          score: 2, evidence: HAMMERWHIRLWIND2} # stand on your backline, spin
+    - {cap: stun,          score: 4, evidence: HAMMERWHIRLWIND2} # E: 2.25s stun in 5.5m around you
+    - {cap: peel,          score: 4, evidence: HAMMERWHIRLWIND2} # stand on your backline, spin

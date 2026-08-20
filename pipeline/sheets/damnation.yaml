@@ -16,5 +16,5 @@
   except:
     - {cap: resist_shred, evidence: ARMORPIERCER}
   capabilities:
-    - {cap: burst_aoe,     score: 3, evidence: CURSEULTIMATE}    # E: large-radius curse, DoT-delivered payload
-    - {cap: resist_shred,  score: 2, evidence: CURSEULTIMATE}    # E: -18% while cursed; W: Armor Piercer -17% (QW)
+    - {cap: burst_aoe,     score: 6, evidence: CURSEULTIMATE}    # E: large-radius curse, DoT-delivered payload
+    - {cap: resist_shred,  score: 4, evidence: CURSEULTIMATE}    # E: -18% while cursed; W: Armor Piercer -17% (QW)

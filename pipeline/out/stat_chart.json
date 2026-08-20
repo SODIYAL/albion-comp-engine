@@ -11,7 +11,7 @@
     "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 27.5s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "PRIMALSLAM",
     "unit": "m",
@@ -25,7 +25,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 29s CD",
     "group": "displacement (m)",
     "scores": [
-     2
+     4
     ],
     "spell": "QSWHIRLWIND",
     "unit": "m",
@@ -39,8 +39,8 @@
     "facts": "self/contact \u00b7 18s CD",
     "group": "displacement (m)",
     "scores": [
-     1,
-     2
+     2,
+     4
     ],
     "spell": "QS_WHIRLWIND2",
     "unit": "m",
@@ -60,7 +60,7 @@
     "facts": "ground-cast @14m \u00b7 ignores CCR \u00b7 72s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "TIME_FREEZE",
     "unit": "s",
@@ -74,7 +74,7 @@
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "FROSTNOVA",
     "unit": "s",
@@ -88,7 +88,7 @@
     "facts": "self/contact \u00b7 ignores CCR \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "GIANTSTEPS",
     "unit": "slow%\u00b7s",
@@ -102,7 +102,7 @@
     "facts": "persists 5s \u00b7 self/contact \u00b7 ignores CCR \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "TAR_RING",
     "unit": "slow%\u00b7s",
@@ -124,7 +124,7 @@
     "facts": "ground-cast @12m \u00b7 65s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "HOLY_DISPEL",
     "unit": "",
@@ -140,7 +140,7 @@
     "facts": "persists 6s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "TRIDENTTHROW",
     "unit": "value\u00b7s",
@@ -154,7 +154,7 @@
     "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 44s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "ARCANECORRIDOR",
     "unit": "value\u00b7s",
@@ -168,8 +168,8 @@
     "facts": "targeted friendother @9m \u00b7 channeled \u00b7 ignores CCR \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1,
-     2
+     2,
+     4
     ],
     "spell": "EMPOWERBEAM",
     "unit": "value\u00b7s",
@@ -188,7 +188,7 @@
     "facts": "targeted friendall @11m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "NATURERESILIENCE",
     "unit": "value\u00b7s",
@@ -207,7 +207,7 @@
     "facts": "persists 6.5s \u00b7 ground-cast @12m \u00b7 16s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "ICE_SCULPTURE",
     "unit": "value\u00b7s",
@@ -228,7 +228,7 @@
     "facts": "targeted friendother @14m \u00b7 channeled \u00b7 ignores CCR \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "INVULNERABILITY",
     "unit": "value\u00b7s",
@@ -242,7 +242,7 @@
     "facts": "persists 3s \u00b7 ground-cast @2m \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "BLESSED_MACES",
     "unit": "value\u00b7s",
@@ -256,8 +256,8 @@
     "facts": "targeted friendall @13m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1,
-     2
+     2,
+     4
     ],
     "spell": "HOLYHOT",
     "unit": "value\u00b7s",
@@ -274,7 +274,7 @@
     "facts": "self/contact \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "DUAL_NATURE",
     "unit": "value\u00b7s",
@@ -288,7 +288,7 @@
     "facts": "targeted all @11m \u00b7 12s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "FIRESTAFFIGNITE2_SPREAD",
     "unit": "value\u00b7s",
@@ -309,7 +309,7 @@
     "facts": "ground-cast @12m \u00b7 18s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "AXE_CHARGE",
     "unit": "value\u00b7s",
@@ -330,7 +330,7 @@
     "facts": "ground-cast @12m \u00b7 65s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "HOLY_DISPEL",
     "unit": "value\u00b7s",
@@ -344,7 +344,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 18s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "HOLYEXPLOSION",
     "unit": "value\u00b7s",
@@ -358,7 +358,7 @@
     "facts": "targeted friendall @11m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "BRIEROFLIFE",
     "unit": "value\u00b7s",
@@ -372,7 +372,7 @@
     "facts": "ground-cast @13m \u00b7 7s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPE_Q_DAMAGE_AND_SHIELD",
     "unit": "value\u00b7s",
@@ -392,7 +392,7 @@
     "facts": "targeted friendall @11m \u00b7 channeled \u00b7 20s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "HOLYTOUCH",
     "unit": "value\u00b7s",
@@ -406,7 +406,7 @@
     "facts": "targeted friendall @8m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "CURSEDHANDS_STACKUP",
     "unit": "value\u00b7s",
@@ -427,7 +427,7 @@
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "CRYSTALWAVE",
     "unit": "value\u00b7s",
@@ -441,7 +441,7 @@
     "facts": "targeted friendall @13m",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "HOLYSHIELD",
     "unit": "value\u00b7s",
@@ -455,7 +455,7 @@
     "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "MAJESTIC_SMASH",
     "unit": "value\u00b7s",
@@ -469,7 +469,7 @@
     "facts": "self/contact \u00b7 5s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHAPESHIFT_ENT",
     "unit": "value\u00b7s",
@@ -485,7 +485,7 @@
     "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "MAJESTIC_SMASH",
     "unit": "dmg/cast",
@@ -499,7 +499,7 @@
     "facts": "self/contact \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     3
+     6
     ],
     "spell": "BLADE_AREA",
     "unit": "dmg/cast",
@@ -513,7 +513,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "GROWING_PUNCH",
     "unit": "dmg/cast",
@@ -527,7 +527,7 @@
     "facts": "persists 1s \u00b7 ground-cast @13m \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "IMPULSE_PUNCH",
     "unit": "dmg/cast",
@@ -541,7 +541,7 @@
     "facts": "ground-cast @24m \u00b7 25s CD",
     "group": "damage per cast",
     "scores": [
-     3
+     6
     ],
     "spell": "HELL_ARROW",
     "unit": "dmg/cast",
@@ -555,7 +555,7 @@
     "facts": "ground-cast @15m \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     3
+     6
     ],
     "spell": "METEOR",
     "unit": "dmg/cast",
@@ -569,7 +569,7 @@
     "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     3
+     6
     ],
     "spell": "FROST_ULTIMATE",
     "unit": "dmg/cast",
@@ -583,7 +583,7 @@
     "facts": "persists 1.6s \u00b7 ground-cast @10m \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "BOULDER_TOSS",
     "unit": "dmg/cast",
@@ -597,7 +597,7 @@
     "facts": "persists 5.2s \u00b7 targeted allplayers @15m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "DYNAMIC_CURSE",
     "unit": "dmg/cast",
@@ -611,7 +611,7 @@
     "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "ICEROCK_EXPLODE",
     "unit": "dmg/cast",
@@ -625,7 +625,7 @@
     "facts": "persists 12s \u00b7 ground-cast @15m \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "GROUNDMINE",
     "unit": "dmg/cast",
@@ -639,7 +639,7 @@
     "facts": "persists 2s \u00b7 ground-cast @25m \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "MAGMASPHERE",
     "unit": "dmg/cast",
@@ -653,7 +653,7 @@
     "facts": "targeted enemy @11m \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "EXPLODING_SHOT",
     "unit": "dmg/cast",
@@ -667,7 +667,7 @@
     "facts": "self/contact \u00b7 ignores CCR \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "SCYTHESWING",
     "unit": "dmg/cast",
@@ -681,7 +681,7 @@
     "facts": "persists 1s \u00b7 ground-cast @22m \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "SKILLSHOT_FIREBALL",
     "unit": "dmg/cast",
@@ -695,7 +695,7 @@
     "facts": "ground-cast @24m \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "CROSSBOW_ARMORPIERCER",
     "unit": "dmg/cast",
@@ -709,7 +709,7 @@
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "LETHAL_CLEAVER",
     "unit": "dmg/cast",
@@ -723,7 +723,7 @@
     "facts": "persists 6.5s \u00b7 ground-cast @15m \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     3
+     6
     ],
     "spell": "FIREPHOENIX",
     "unit": "dmg/cast",
@@ -737,7 +737,7 @@
     "facts": "persists 1s \u00b7 ground-cast @22m \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "SPEARTHROW",
     "unit": "dmg/cast",
@@ -751,7 +751,7 @@
     "facts": "ground-cast @15m \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "FLAMEPILLAR",
     "unit": "dmg/cast",
@@ -765,7 +765,7 @@
     "facts": "persists 2s \u00b7 ground-cast @12m \u00b7 18s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "FREEZINGWIND",
     "unit": "dmg/cast",
@@ -779,7 +779,7 @@
     "facts": "ground-cast @14m \u00b7 40s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "FLAMEDASH",
     "unit": "dmg/cast",
@@ -793,7 +793,7 @@
     "facts": "persists 12s \u00b7 ground-cast @3m \u00b7 3s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "CRYSTAL_SCYTHE_DASH_ZONE",
     "unit": "dmg/cast",
@@ -807,7 +807,7 @@
     "facts": "persists 2s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "BLAZING_GEYSER",
     "unit": "dmg/cast",
@@ -821,7 +821,7 @@
     "facts": "ground-cast @8m \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "DUALAXE_CRAWLER",
     "unit": "dmg/cast",
@@ -835,7 +835,7 @@
     "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "BLACKHOLE",
     "unit": "dmg/cast",
@@ -849,7 +849,7 @@
     "facts": "ground-cast @13m \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "VAULT_ATTACK",
     "unit": "dmg/cast",
@@ -863,7 +863,7 @@
     "facts": "persists 2.6s \u00b7 ground-cast @22m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "CURSED_WALL",
     "unit": "dmg/cast",
@@ -877,7 +877,7 @@
     "facts": "persists 2s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "SPINATTACK",
     "unit": "dmg/cast",
@@ -891,7 +891,7 @@
     "facts": "ground-cast @15m \u00b7 1s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "HAIL_MULTI_1",
     "unit": "dmg/cast",
@@ -905,7 +905,7 @@
     "facts": "ground-cast @12m \u00b7 12s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "GROUNDSPEAR",
     "unit": "dmg/cast",
@@ -919,7 +919,7 @@
     "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "TORNADO",
     "unit": "dmg/cast",
@@ -933,7 +933,7 @@
     "facts": "targeted enemy @15m \u00b7 channeled \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "PYROBLAST_SKILLSHOT",
     "unit": "dmg/cast",
@@ -947,7 +947,7 @@
     "facts": "ground-cast @17m \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "SPEAR_AOE_FINISHER",
     "unit": "dmg/cast",
@@ -961,7 +961,7 @@
     "facts": "persists 1.05s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "SHOCKWAVE",
     "unit": "dmg/cast",
@@ -975,8 +975,8 @@
     "facts": "ground-cast @13m \u00b7 2s CD",
     "group": "damage per cast",
     "scores": [
-     1,
-     2
+     2,
+     4
     ],
     "spell": "BOLTSHOT",
     "unit": "dmg/cast",
@@ -993,7 +993,7 @@
     "facts": "persists 6s \u00b7 self/contact \u00b7 1s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "CRYSTAL_DAGGER_BLADE_RING",
     "unit": "dmg/cast",
@@ -1007,7 +1007,7 @@
     "facts": "self/contact \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "RENDINGSWING",
     "unit": "dmg/cast",
@@ -1021,7 +1021,7 @@
     "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "SOULSHAKER",
     "unit": "dmg/cast",
@@ -1035,7 +1035,7 @@
     "facts": "ground-cast @15m \u00b7 channeled \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "ARROWRAIN",
     "unit": "dmg/cast",
@@ -1049,7 +1049,7 @@
     "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 38s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "ARCANE_METEOR",
     "unit": "dmg/cast",
@@ -1063,7 +1063,7 @@
     "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "ICESTORM2",
     "unit": "dmg/cast",
@@ -1077,7 +1077,7 @@
     "facts": "ground-cast @8m \u00b7 10s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "CRYSTALXBOW",
     "unit": "dmg/cast",
@@ -1091,7 +1091,7 @@
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "DASH_KNOCKBACK",
     "unit": "dmg/cast",
@@ -1105,7 +1105,7 @@
     "facts": "persists 3s \u00b7 ground-cast @15m \u00b7 26.8s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "COMBATSTAFF_SLASH",
     "unit": "dmg/cast",
@@ -1119,7 +1119,7 @@
     "facts": "persists 5s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 63s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "ENFEEBLEBLADES",
     "unit": "dmg/cast",
@@ -1133,7 +1133,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "STARFALL_DOT",
     "unit": "dmg/cast",
@@ -1147,7 +1147,7 @@
     "facts": "persists 5s \u00b7 ground-cast @11m \u00b7 channeled \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "PUMMELING_STRIKES",
     "unit": "dmg/cast",
@@ -1161,7 +1161,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 25s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "AXEWHIRLWIND2",
     "unit": "dmg/cast",
@@ -1175,7 +1175,7 @@
     "facts": "ground-cast @3m \u00b7 1.5s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "MACE_CRYSTAL_FRAGMENT_STORM",
     "unit": "dmg/cast",
@@ -1189,7 +1189,7 @@
     "facts": "persists 2s \u00b7 ground-cast @9m \u00b7 1s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "QS_CRYSTAL_COMBO",
     "unit": "dmg/cast",
@@ -1203,7 +1203,7 @@
     "facts": "persists 5s \u00b7 ground-cast @15m \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "SKULLCURSE",
     "unit": "dmg/cast",
@@ -1217,7 +1217,7 @@
     "facts": "ground-cast @12m \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     3
+     6
     ],
     "spell": "CURSEULTIMATE",
     "unit": "dmg/cast",
@@ -1231,7 +1231,7 @@
     "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "GLACIALFIELD",
     "unit": "dmg/cast",
@@ -1245,7 +1245,7 @@
     "facts": "persists 5s \u00b7 ground-cast @26m \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "LIGHTNING_ARROW",
     "unit": "dmg/cast",
@@ -1259,7 +1259,7 @@
     "facts": "persists 1.2s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "AREAOFDECAY",
     "unit": "dmg/cast",
@@ -1273,7 +1273,7 @@
     "facts": "persists 3.5s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "AIR_RAID",
     "unit": "dmg/cast",
@@ -1287,7 +1287,7 @@
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "CLAYMORESLASH",
     "unit": "dmg/cast",
@@ -1301,7 +1301,7 @@
     "facts": "ground-cast @3m",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "BLOOD_BLADE",
     "unit": "dmg/cast",
@@ -1315,7 +1315,7 @@
     "facts": "ground-cast @22m \u00b7 channeled \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "FROST_TARGETED_CHANNEL",
     "unit": "dmg/cast",
@@ -1329,7 +1329,7 @@
     "facts": "self/contact \u00b7 8s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHAPESHIFT_IMP",
     "unit": "dmg/cast",
@@ -1343,7 +1343,7 @@
     "facts": "persists 2s \u00b7 ground-cast @24m",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "HAWK_SHOT_MULTI1",
     "unit": "dmg/cast",
@@ -1357,7 +1357,7 @@
     "facts": "self/contact \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHAPESHIFT_AVALONIAN_EAGLE",
     "unit": "dmg/cast",
@@ -1371,7 +1371,7 @@
     "facts": "self/contact \u00b7 10s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPESHIFT_BEAR",
     "unit": "dmg/cast",
@@ -1385,7 +1385,7 @@
     "facts": "persists 1s \u00b7 self/contact \u00b7 channeled",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SWORD_BERSERK_RUN_RE",
     "unit": "dmg/cast",
@@ -1401,7 +1401,7 @@
     "facts": "persists 1.3s \u00b7 ground-cast @26m \u00b7 10s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "SKILLSHOT_STUN",
     "unit": "dmg/cast",
@@ -1415,7 +1415,7 @@
     "facts": "targeted enemy @3m \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     3
+     6
     ],
     "spell": "EXECUTEDAGGER",
     "unit": "dmg/cast",
@@ -1429,7 +1429,7 @@
     "facts": "ground-cast @11m \u00b7 35s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "RAPIERSTAB",
     "unit": "dmg/cast",
@@ -1443,7 +1443,7 @@
     "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "CLAYMORECHARGE",
     "unit": "dmg/cast",
@@ -1457,7 +1457,7 @@
     "facts": "persists 2s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "BACK_SLASH",
     "unit": "dmg/cast",
@@ -1471,7 +1471,7 @@
     "facts": "targeted enemy @8m \u00b7 12s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "MIGHTYBLOW",
     "unit": "dmg/cast",
@@ -1485,7 +1485,7 @@
     "facts": "targeted enemy @16m \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "SNIPESHOT_CROSSBOW",
     "unit": "dmg/cast",
@@ -1499,7 +1499,7 @@
     "facts": "persists 2s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "MIGHTYSWING",
     "unit": "dmg/cast",
@@ -1513,7 +1513,7 @@
     "facts": "ground-cast @18m \u00b7 10s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "AXETHROW",
     "unit": "dmg/cast",
@@ -1527,7 +1527,7 @@
     "facts": "ground-cast @24m \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "CROSSBOW_ARMORPIERCER",
     "unit": "dmg/cast",
@@ -1541,7 +1541,7 @@
     "facts": "ground-cast @16m \u00b7 25s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "LANCE_CHARGE",
     "unit": "dmg/cast",
@@ -1555,7 +1555,7 @@
     "facts": "targeted enemy @7m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "GHOSTSTRIKE",
     "unit": "dmg/cast",
@@ -1569,7 +1569,7 @@
     "facts": "targeted enemy @11m \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "DEATHCURSE2",
     "unit": "dmg/cast",
@@ -1583,7 +1583,7 @@
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "PUNCHCOMBO",
     "unit": "dmg/cast",
@@ -1597,7 +1597,7 @@
     "facts": "targeted enemy @15m \u00b7 channeled \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "PYROBLAST_SKILLSHOT",
     "unit": "dmg/cast",
@@ -1611,7 +1611,7 @@
     "facts": "ground-cast @10m \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "SHRINKINGSMASH",
     "unit": "dmg/cast",
@@ -1625,7 +1625,7 @@
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "DISEMBOWEL",
     "unit": "dmg/cast",
@@ -1639,7 +1639,7 @@
     "facts": "persists 1.4s \u00b7 ground-cast @25m \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "ARCANEORB2",
     "unit": "dmg/cast",
@@ -1653,7 +1653,7 @@
     "facts": "persists 5s \u00b7 ground-cast @11m \u00b7 channeled \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "PUMMELING_STRIKES",
     "unit": "dmg/cast",
@@ -1667,7 +1667,7 @@
     "facts": "targeted enemy @13m \u00b7 channeled \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "DUAL_RAPIDFIRE",
     "unit": "dmg/cast",
@@ -1681,8 +1681,8 @@
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     1,
-     2
+     2,
+     4
     ],
     "spell": "KNUCKLECOMBO",
     "unit": "dmg/cast",
@@ -1701,7 +1701,7 @@
     "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "HUMAN_TORCH",
     "unit": "dmg/cast",
@@ -1715,7 +1715,7 @@
     "facts": "self/contact",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SPEEDARCHER_KITE",
     "unit": "dmg/cast",
@@ -1729,7 +1729,7 @@
     "facts": "ground-cast @3m",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "BLOOD_BLADE",
     "unit": "dmg/cast",
@@ -1743,7 +1743,7 @@
     "facts": "targeted enemy @9m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CONEPUNCH2",
     "unit": "dmg/cast",
@@ -1757,7 +1757,7 @@
     "facts": "persists 2s \u00b7 ground-cast @24m",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "HAWK_SHOT_MULTI1",
     "unit": "dmg/cast",
@@ -1771,7 +1771,7 @@
     "facts": "self/contact \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHAPESHIFT_CRYSTAL_COBRA",
     "unit": "dmg/cast",
@@ -1785,7 +1785,7 @@
     "facts": "self/contact \u00b7 8s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHAPESHIFT_WEREWOLF",
     "unit": "dmg/cast",
@@ -1799,7 +1799,7 @@
     "facts": "self/contact \u00b7 5s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHAPESHIFT_PANTHER",
     "unit": "dmg/cast",
@@ -1813,7 +1813,7 @@
     "facts": "persists 1s \u00b7 self/contact \u00b7 channeled",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SWORD_BERSERK_RUN_RE",
     "unit": "dmg/cast",
@@ -1829,7 +1829,7 @@
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "LETHAL_CLEAVER",
     "unit": "m",
@@ -1843,7 +1843,7 @@
     "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "SOULSHAKER",
     "unit": "s",
@@ -1857,7 +1857,7 @@
     "facts": "targeted enemy @5.5m \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "HALBERDSMASH",
     "unit": "s",
@@ -1871,7 +1871,7 @@
     "facts": "persists 1.2s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "GROUNDBREAKER2",
     "unit": "s",
@@ -1885,7 +1885,7 @@
     "facts": "persists 2s \u00b7 ground-cast @12m \u00b7 18s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "FREEZINGWIND",
     "unit": "s",
@@ -1899,7 +1899,7 @@
     "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "RAM_CHARGE",
     "unit": "s",
@@ -1913,7 +1913,7 @@
     "facts": "ground-cast @12m \u00b7 14s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "UNDEADHAND",
     "unit": "s",
@@ -1927,7 +1927,7 @@
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "HAMMERTACKLE",
     "unit": "s",
@@ -1941,7 +1941,7 @@
     "facts": "self/contact \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "STUNRUN",
     "unit": "s",
@@ -1955,7 +1955,7 @@
     "facts": "ground-cast @15m \u00b7 10s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "GROUNDARROW",
     "unit": "s",
@@ -1975,7 +1975,7 @@
     "facts": "persists 1s \u00b7 ground-cast @22m \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "SPEARTHROW",
     "unit": "s",
@@ -1989,7 +1989,7 @@
     "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "ROOTFIELD",
     "unit": "s",
@@ -2003,7 +2003,7 @@
     "facts": "ground-cast @12m \u00b7 ignores CCR \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPE_W_AREA_PULL",
     "unit": "s",
@@ -2023,8 +2023,8 @@
     "facts": "ground-cast @22m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     1,
-     2
+     2,
+     4
     ],
     "spell": "SKILLSHOT_TELEPORT",
     "unit": "s",
@@ -2044,7 +2044,7 @@
     "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "FROST_ULTIMATE",
     "unit": "s",
@@ -2058,7 +2058,7 @@
     "facts": "ground-cast @18m \u00b7 1.2s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "FROST_BITE",
     "unit": "s",
@@ -2072,7 +2072,7 @@
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "SPINNING_SMASH",
     "unit": "s",
@@ -2086,7 +2086,7 @@
     "facts": "ground-cast @25m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "VACUUMSLASH",
     "unit": "s",
@@ -2100,7 +2100,7 @@
     "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "CLAYMORECHARGE",
     "unit": "s",
@@ -2114,7 +2114,7 @@
     "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "TORNADO",
     "unit": "slow%\u00b7s",
@@ -2128,7 +2128,7 @@
     "facts": "ground-cast @3m \u00b7 1.5s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "MACE_CRYSTAL_FRAGMENT_STORM",
     "unit": "slow%\u00b7s",
@@ -2142,7 +2142,7 @@
     "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "ICESTORM2",
     "unit": "slow%\u00b7s",
@@ -2156,7 +2156,7 @@
     "facts": "self/contact \u00b7 ignores CCR \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "GIANTSTEPS",
     "unit": "slow%\u00b7s",
@@ -2170,7 +2170,7 @@
     "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "GLACIALFIELD",
     "unit": "slow%\u00b7s",
@@ -2184,7 +2184,7 @@
     "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "ICEROCK_EXPLODE",
     "unit": "slow%\u00b7s",
@@ -2198,7 +2198,7 @@
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "DASH_KNOCKBACK",
     "unit": "slow%\u00b7s",
@@ -2212,7 +2212,7 @@
     "facts": "persists 1s \u00b7 ground-cast @13m \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "IMPULSE_PUNCH",
     "unit": "slow%\u00b7s",
@@ -2226,7 +2226,7 @@
     "facts": "targeted enemy @3m \u00b7 6s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "HAMSTRINGSWORD",
     "unit": "slow%\u00b7s",
@@ -2242,7 +2242,7 @@
     "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "FROZEN_CRYSTAL",
     "unit": "slow%\u00b7s",
@@ -2256,7 +2256,7 @@
     "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "BLACKHOLE",
     "unit": "slow%\u00b7s",
@@ -2270,7 +2270,7 @@
     "facts": "persists 2s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "MIGHTYSWING",
     "unit": "slow%\u00b7s",
@@ -2284,8 +2284,8 @@
     "facts": "targeted enemy @4m \u00b7 ignores CCR \u00b7 18s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1,
-     2
+     2,
+     4
     ],
     "spell": "LEGBREAKER",
     "unit": "slow%\u00b7s",
@@ -2302,7 +2302,7 @@
     "facts": "ground-cast @15m \u00b7 1s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "HAIL_MULTI_1",
     "unit": "slow%\u00b7s",
@@ -2316,7 +2316,7 @@
     "facts": "self/contact \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "AXEBOOST",
     "unit": "m",
@@ -2334,7 +2334,7 @@
     "facts": "self/contact",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DIVEPUNCH_RISE",
     "unit": "m",
@@ -2348,7 +2348,7 @@
     "facts": "ground-cast @8m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DUALAXE_CRAWLER",
     "unit": "m",
@@ -2362,7 +2362,7 @@
     "facts": "ground-cast @11m \u00b7 35s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "RAPIERSTAB",
     "unit": "m",
@@ -2376,7 +2376,7 @@
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CLAYMORESLASH",
     "unit": "m",
@@ -2390,7 +2390,7 @@
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DISEMBOWEL",
     "unit": "m",
@@ -2404,7 +2404,7 @@
     "facts": "persists 2s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SPINATTACK",
     "unit": "m",
@@ -2418,7 +2418,7 @@
     "facts": "ground-cast @4m \u00b7 4s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "DASHKICK",
     "unit": "m",
@@ -2437,7 +2437,7 @@
     "facts": "self/contact \u00b7 8s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHAPESHIFT_WEREWOLF",
     "unit": "m",
@@ -2451,7 +2451,7 @@
     "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHOVEL",
     "unit": "m",
@@ -2465,7 +2465,7 @@
     "facts": "persists 6s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "TRIDENTTHROW",
     "unit": "m",
@@ -2479,7 +2479,7 @@
     "facts": "targeted enemy @8m \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "MIGHTYBLOW",
     "unit": "m",
@@ -2495,7 +2495,7 @@
     "facts": "ground-cast @11m \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CLEANSESPEED2",
     "unit": "",
@@ -2515,7 +2515,7 @@
     "facts": "persists 5s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 62s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "VOID",
     "unit": "",
@@ -2529,7 +2529,7 @@
     "facts": "ground-cast @14m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "HOLY_ULTIMATE",
     "unit": "",
@@ -2543,7 +2543,7 @@
     "facts": "targeted friendall @11m \u00b7 channeled \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "HOLYTOUCH",
     "unit": "",
@@ -2557,7 +2557,7 @@
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CLEANSEHEAL",
     "unit": "",
@@ -2580,7 +2580,7 @@
     "facts": "ground-cast @11m \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "TRIPLE_KICK",
     "unit": "",
@@ -2601,7 +2601,7 @@
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "SPINNING_SMASH",
     "unit": "",
@@ -2615,7 +2615,7 @@
     "facts": "ground-cast @12m \u00b7 ignores CCR \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPE_W_AREA_PULL",
     "unit": "",
@@ -2636,7 +2636,7 @@
     "facts": "ground-cast @25m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "VACUUMSLASH",
     "unit": "",
@@ -2650,7 +2650,7 @@
     "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "BLACKHOLE",
     "unit": "",
@@ -2666,7 +2666,7 @@
     "facts": "targeted enemy @4m \u00b7 ignores CCR \u00b7 18s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "LEGBREAKER",
     "unit": "value\u00b7s",
@@ -2680,7 +2680,7 @@
     "facts": "ground-cast @10m \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "SHRINKINGSMASH",
     "unit": "value\u00b7s",
@@ -2694,7 +2694,7 @@
     "facts": "self/contact \u00b7 18s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "QS_WHIRLWIND2",
     "unit": "value\u00b7s",
@@ -2709,7 +2709,7 @@
     "facts": "persists 3s \u00b7 ground-cast @15m \u00b7 26.8s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "COMBATSTAFF_SLASH",
     "unit": "value\u00b7s",
@@ -2723,7 +2723,7 @@
     "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 38s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "ARCANE_METEOR",
     "unit": "value\u00b7s",
@@ -2739,7 +2739,7 @@
     "facts": "persists 12s \u00b7 ground-cast @3m \u00b7 3s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "CRYSTAL_SCYTHE_DASH_ZONE",
     "unit": "",
@@ -2753,7 +2753,7 @@
     "facts": "self/contact",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DIVEPUNCH_RISE",
     "unit": "",
@@ -2767,7 +2767,7 @@
     "facts": "ground-cast @8m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DUALAXE_CRAWLER",
     "unit": "",
@@ -2781,8 +2781,8 @@
     "facts": "ground-cast @8m \u00b7 23.5s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1,
-     2
+     2,
+     4
     ],
     "spell": "GROUNDDASH",
     "unit": "",
@@ -2802,7 +2802,7 @@
     "facts": "self/contact",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SPEEDARCHER_KITE",
     "unit": "",
@@ -2816,7 +2816,7 @@
     "facts": "persists 3.5s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "AIR_RAID",
     "unit": "",
@@ -2830,7 +2830,7 @@
     "facts": "ground-cast @2m \u00b7 ignores CCR \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "JUMPSHOT2",
     "unit": "",
@@ -2848,7 +2848,7 @@
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CLAYMORESLASH",
     "unit": "",
@@ -2862,7 +2862,7 @@
     "facts": "ground-cast @8m \u00b7 10s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CRYSTALXBOW",
     "unit": "",
@@ -2876,7 +2876,7 @@
     "facts": "persists 2s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "BACK_SLASH",
     "unit": "",
@@ -2890,7 +2890,7 @@
     "facts": "targeted enemy @7m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "GHOSTSTRIKE",
     "unit": "",
@@ -2904,7 +2904,7 @@
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DASH_KNOCKBACK",
     "unit": "",
@@ -2918,7 +2918,7 @@
     "facts": "persists 2s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SPINATTACK",
     "unit": "",
@@ -2932,7 +2932,7 @@
     "facts": "ground-cast @14m \u00b7 40s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "FLAMEDASH",
     "unit": "",
@@ -2946,7 +2946,7 @@
     "facts": "ground-cast @12m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "CHARGESLOWAE",
     "unit": "",
@@ -2964,7 +2964,7 @@
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "FROSTNOVA",
     "unit": "",
@@ -2985,7 +2985,7 @@
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "HAMMERTACKLE",
     "unit": "",
@@ -2999,7 +2999,7 @@
     "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "RAM_CHARGE",
     "unit": "",
@@ -3013,7 +3013,7 @@
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SPINNING_SMASH",
     "unit": "",
@@ -3027,7 +3027,7 @@
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DIVINE_JUMP",
     "unit": "",
@@ -3041,7 +3041,7 @@
     "facts": "self/contact \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "DEFENSERUN",
     "unit": "",
@@ -3060,7 +3060,7 @@
     "facts": "ground-cast @12m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "TRIPLECOMBO_DIVEKICK",
     "unit": "",
@@ -3074,7 +3074,7 @@
     "facts": "ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "VAULT_ATTACK",
     "unit": "",
@@ -3088,7 +3088,7 @@
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "LETHAL_CLEAVER",
     "unit": "",
@@ -3102,7 +3102,7 @@
     "facts": "self/contact \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHAPESHIFT_AVALONIAN_EAGLE",
     "unit": "",
@@ -3116,7 +3116,7 @@
     "facts": "self/contact \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPESHIFT_CRYSTAL_COBRA",
     "unit": "",
@@ -3130,7 +3130,7 @@
     "facts": "self/contact \u00b7 5s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHAPESHIFT_PANTHER",
     "unit": "",
@@ -3144,7 +3144,7 @@
     "facts": "persists 6s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "TRIDENTTHROW",
     "unit": "",
@@ -3158,7 +3158,7 @@
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "DASHDMG",
     "unit": "",
@@ -3174,7 +3174,7 @@
     "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 44s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "ARCANECORRIDOR",
     "unit": "",
@@ -3188,7 +3188,7 @@
     "facts": "ground-cast @12m \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "AXE_CHARGE",
     "unit": "",
@@ -3206,7 +3206,7 @@
     "facts": "persists 12s \u00b7 ground-cast @3m \u00b7 3s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CRYSTAL_SCYTHE_DASH_ZONE",
     "unit": "",
@@ -3220,7 +3220,7 @@
     "facts": "self/contact",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DIVEPUNCH_RISE",
     "unit": "",
@@ -3234,7 +3234,7 @@
     "facts": "ground-cast @8m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DUALAXE_CRAWLER",
     "unit": "",
@@ -3248,7 +3248,7 @@
     "facts": "ground-cast @11m \u00b7 35s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "RAPIERSTAB",
     "unit": "",
@@ -3262,7 +3262,7 @@
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CLAYMORESLASH",
     "unit": "",
@@ -3276,7 +3276,7 @@
     "facts": "ground-cast @4.5m \u00b7 4s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "QDASH",
     "unit": "",
@@ -3296,7 +3296,7 @@
     "facts": "ground-cast @8m \u00b7 10s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "CRYSTALXBOW",
     "unit": "",
@@ -3310,7 +3310,7 @@
     "facts": "targeted enemy @7m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "GHOSTSTRIKE",
     "unit": "",
@@ -3324,7 +3324,7 @@
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DASH_KNOCKBACK",
     "unit": "",
@@ -3338,7 +3338,7 @@
     "facts": "persists 2s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SPINATTACK",
     "unit": "",
@@ -3352,7 +3352,7 @@
     "facts": "ground-cast @14m \u00b7 40s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "FLAMEDASH",
     "unit": "",
@@ -3366,8 +3366,8 @@
     "facts": "ground-cast @12m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1,
-     3
+     2,
+     6
     ],
     "spell": "CHARGESLOWAE",
     "unit": "",
@@ -3385,7 +3385,7 @@
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "HAMMERTACKLE",
     "unit": "",
@@ -3399,7 +3399,7 @@
     "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "RAM_CHARGE",
     "unit": "",
@@ -3413,7 +3413,7 @@
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "SPINNING_SMASH",
     "unit": "",
@@ -3427,7 +3427,7 @@
     "facts": "targeted enemy @3.5m \u00b7 3s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "HEROICSTRIKE2",
     "unit": "",
@@ -3441,7 +3441,7 @@
     "facts": "ground-cast @12m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "TRIPLECOMBO_DIVEKICK",
     "unit": "",
@@ -3455,7 +3455,7 @@
     "facts": "targeted enemy @9m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "CONEPUNCH2",
     "unit": "",
@@ -3469,7 +3469,7 @@
     "facts": "ground-cast @4m \u00b7 4s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "DASHKICK",
     "unit": "",
@@ -3487,7 +3487,7 @@
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "MACELEAP",
     "unit": "",
@@ -3501,8 +3501,8 @@
     "facts": "ground-cast @11m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1,
-     2
+     2,
+     4
     ],
     "spell": "CHARGE_ROOT",
     "unit": "",
@@ -3520,7 +3520,7 @@
     "facts": "persists 3s \u00b7 ground-cast @2m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "BLESSED_MACES",
     "unit": "",
@@ -3534,7 +3534,7 @@
     "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "ROOTFIELD",
     "unit": "",
@@ -3548,7 +3548,7 @@
     "facts": "ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "VAULT_ATTACK",
     "unit": "",
@@ -3562,7 +3562,7 @@
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "LETHAL_CLEAVER",
     "unit": "",
@@ -3576,7 +3576,7 @@
     "facts": "self/contact \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPESHIFT_AVALONIAN_EAGLE",
     "unit": "",
@@ -3590,7 +3590,7 @@
     "facts": "self/contact \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPESHIFT_ROCK_ELEMENTAL",
     "unit": "",
@@ -3604,7 +3604,7 @@
     "facts": "self/contact \u00b7 5s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHAPESHIFT_PANTHER",
     "unit": "",
@@ -3618,7 +3618,7 @@
     "facts": "persists 6s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "TRIDENTTHROW",
     "unit": "",
@@ -3632,7 +3632,7 @@
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DASHDMG",
     "unit": "",
@@ -3646,7 +3646,7 @@
     "facts": "ground-cast @16m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "LANCE_CHARGE",
     "unit": "",
@@ -3660,7 +3660,7 @@
     "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "CLAYMORECHARGE",
     "unit": "",
@@ -3674,7 +3674,7 @@
     "facts": "targeted enemy @8m \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "MIGHTYBLOW",
     "unit": "",
@@ -3690,7 +3690,7 @@
     "facts": "targeted enemy @3m \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "EXECUTEDAGGER",
     "unit": "dmg/cast",
@@ -3704,7 +3704,7 @@
     "facts": "ground-cast @11m \u00b7 35s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "RAPIERSTAB",
     "unit": "dmg/cast",
@@ -3718,7 +3718,7 @@
     "facts": "self/contact \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "BLADE_AREA",
     "unit": "dmg/cast",
@@ -3732,7 +3732,7 @@
     "facts": "self/contact \u00b7 ignores CCR \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "SCYTHESWING",
     "unit": "dmg/cast",
@@ -3746,7 +3746,7 @@
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "LETHAL_CLEAVER",
     "unit": "dmg/cast",
@@ -3760,7 +3760,7 @@
     "facts": "ground-cast @12m \u00b7 14s CD",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "UNDEADHAND",
     "unit": "dmg/cast",
@@ -3774,7 +3774,7 @@
     "facts": "ground-cast @10m \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "SHRINKINGSMASH",
     "unit": "dmg/cast",
@@ -3788,7 +3788,7 @@
     "facts": "targeted enemy @9m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "CONEPUNCH2",
     "unit": "dmg/cast",
@@ -3804,7 +3804,7 @@
     "facts": "self/contact \u00b7 18s CD",
     "group": "healing per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "CIRCLEOFLIFE",
     "unit": "heal/cast",
@@ -3818,7 +3818,7 @@
     "facts": "targeted friendall @13m \u00b7 10s CD",
     "group": "healing per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "HOLYDESPERATEPRAYER2",
     "unit": "heal/cast",
@@ -3832,7 +3832,7 @@
     "facts": "ground-cast @14m \u00b7 30s CD",
     "group": "healing per cast",
     "scores": [
-     3
+     6
     ],
     "spell": "HOLY_ULTIMATE",
     "unit": "heal/cast",
@@ -3846,7 +3846,7 @@
     "facts": "targeted friendall @13m",
     "group": "healing per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "HOLYSHIELD",
     "unit": "heal/cast",
@@ -3860,7 +3860,7 @@
     "facts": "ground-cast @12m \u00b7 65s CD",
     "group": "healing per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "HOLY_DISPEL",
     "unit": "heal/cast",
@@ -3874,7 +3874,7 @@
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "healing per cast",
     "scores": [
-     3
+     6
     ],
     "spell": "DIVINE_JUMP",
     "unit": "heal/cast",
@@ -3888,7 +3888,7 @@
     "facts": "persists 9s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "healing per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "SPIRITANIMAL",
     "unit": "heal/cast",
@@ -3902,7 +3902,7 @@
     "facts": "ground-cast @13m \u00b7 3.5s CD",
     "group": "healing per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "HOLYFLASH",
     "unit": "heal/cast",
@@ -3918,7 +3918,7 @@
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "healing per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "CLEANSEHEAL",
     "unit": "heal/cast",
@@ -3936,7 +3936,7 @@
     "facts": "targeted friendall @11m",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "NATURE_ULTIMATE_SINGLE",
     "unit": "heal/cast",
@@ -3952,7 +3952,7 @@
     "facts": "self/contact \u00b7 ignores CCR \u00b7 37.5s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "QS_SLOWROPE",
     "unit": "value\u00b7s",
@@ -3966,7 +3966,7 @@
     "facts": "ground-cast @10m \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "SHRINKINGSMASH",
     "unit": "value\u00b7s",
@@ -3980,7 +3980,7 @@
     "facts": "persists 6.5s \u00b7 ground-cast @15m \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "FIREPHOENIX",
     "unit": "value\u00b7s",
@@ -3994,7 +3994,7 @@
     "facts": "persists 1.05s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "SHOCKWAVE",
     "unit": "value\u00b7s",
@@ -4008,7 +4008,7 @@
     "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 38s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "ARCANE_METEOR",
     "unit": "value\u00b7s",
@@ -4022,7 +4022,7 @@
     "facts": "self/contact \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "RENDINGSWING",
     "unit": "value\u00b7s",
@@ -4036,7 +4036,7 @@
     "facts": "ground-cast @12m \u00b7 18s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "AXE_CHARGE",
     "unit": "value\u00b7s",
@@ -4050,7 +4050,7 @@
     "facts": "targeted enemy @3m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "EXECUTEDAGGER",
     "unit": "value\u00b7s",
@@ -4064,7 +4064,7 @@
     "facts": "persists 1.6s \u00b7 ground-cast @10m \u00b7 20s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "BOULDER_TOSS",
     "unit": "value\u00b7s",
@@ -4078,7 +4078,7 @@
     "facts": "targeted enemy @3m \u00b7 2s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "RENDINGSTRIKE",
     "unit": "value\u00b7s",
@@ -4096,7 +4096,7 @@
     "facts": "targeted enemy @2m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "DEEPCUTS",
     "unit": "value\u00b7s",
@@ -4117,7 +4117,7 @@
     "facts": "persists 1.2s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "AREAOFDECAY",
     "unit": "value\u00b7s",
@@ -4131,7 +4131,7 @@
     "facts": "persists 3s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CURSE_SKELETON_BARF_FDHR",
     "unit": "value\u00b7s",
@@ -4147,7 +4147,7 @@
     "facts": "self/contact \u00b7 18s CD",
     "group": "healing per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "CIRCLEOFLIFE",
     "unit": "heal/cast",
@@ -4161,7 +4161,7 @@
     "facts": "persists 9s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "healing per cast",
     "scores": [
-     3
+     6
     ],
     "spell": "SPIRITANIMAL",
     "unit": "heal/cast",
@@ -4175,7 +4175,7 @@
     "facts": "targeted friendall @11m \u00b7 15s CD",
     "group": "healing per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "BRIEROFLIFE",
     "unit": "heal/cast",
@@ -4189,7 +4189,7 @@
     "facts": "targeted friendall @10m \u00b7 25s CD",
     "group": "healing per cast",
     "scores": [
-     3
+     6
     ],
     "spell": "CELESTIAL_SPHERE",
     "unit": "heal/cast",
@@ -4203,7 +4203,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 25s CD",
     "group": "healing per cast",
     "scores": [
-     3
+     6
     ],
     "spell": "ROTTENVINES",
     "unit": "heal/cast",
@@ -4217,7 +4217,7 @@
     "facts": "persists 4s \u00b7 ground-cast @15m \u00b7 20s CD",
     "group": "healing per cast",
     "scores": [
-     3
+     6
     ],
     "spell": "WELLOFLIFE2",
     "unit": "heal/cast",
@@ -4231,7 +4231,7 @@
     "facts": "targeted friendall @11m \u00b7 channeled \u00b7 20s CD",
     "group": "healing per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "HOLYTOUCH",
     "unit": "heal/cast",
@@ -4245,7 +4245,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 18s CD",
     "group": "healing per cast",
     "scores": [
-     3
+     6
     ],
     "spell": "HOLYEXPLOSION",
     "unit": "heal/cast",
@@ -4259,7 +4259,7 @@
     "facts": "targeted friendother @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 12s CD",
     "group": "healing per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "HEALINGBEAM",
     "unit": "heal/cast",
@@ -4277,7 +4277,7 @@
     "facts": "persists 3s \u00b7 ground-cast @2m \u00b7 30s CD",
     "group": "healing per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "BLESSED_MACES",
     "unit": "heal/cast",
@@ -4291,7 +4291,7 @@
     "facts": "targeted allunmounted @11m",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SOUL_LINK",
     "unit": "heal/cast",
@@ -4305,7 +4305,7 @@
     "facts": "self/contact \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DUAL_NATURE",
     "unit": "heal/cast",
@@ -4319,7 +4319,7 @@
     "facts": "targeted friendall @11m",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "NATURE_ULTIMATE_SINGLE",
     "unit": "heal/cast",
@@ -4333,7 +4333,7 @@
     "facts": "self/contact \u00b7 5s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPESHIFT_ENT",
     "unit": "heal/cast",
@@ -4349,7 +4349,7 @@
     "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 27.5s CD",
     "group": "displacement (m)",
     "scores": [
-     3
+     6
     ],
     "spell": "PRIMALSLAM",
     "unit": "m",
@@ -4363,7 +4363,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 29s CD",
     "group": "displacement (m)",
     "scores": [
-     3
+     6
     ],
     "spell": "QSWHIRLWIND",
     "unit": "m",
@@ -4377,7 +4377,7 @@
     "facts": "ground-cast @14m \u00b7 12s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "KNOCKBACKSHOT2",
     "unit": "m",
@@ -4398,7 +4398,7 @@
     "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "displacement (m)",
     "scores": [
-     2
+     4
     ],
     "spell": "ICEROCK_EXPLODE",
     "unit": "m",
@@ -4412,7 +4412,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 18s CD",
     "group": "displacement (m)",
     "scores": [
-     2
+     4
     ],
     "spell": "HOLYEXPLOSION",
     "unit": "m",
@@ -4426,7 +4426,7 @@
     "facts": "ground-cast @6m \u00b7 15s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "BACKHAND_KNOCKBACK",
     "unit": "m",
@@ -4444,7 +4444,7 @@
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 10s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "GEYSER",
     "unit": "m",
@@ -4462,7 +4462,7 @@
     "facts": "persists 3s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
-     2
+     4
     ],
     "spell": "CURSE_SKELETON_BARF_FDHR",
     "unit": "m",
@@ -4476,7 +4476,7 @@
     "facts": "persists 1s \u00b7 ground-cast @12m \u00b7 12s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "FIRECONE",
     "unit": "m",
@@ -4494,7 +4494,7 @@
     "facts": "ground-cast @17m \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "SPEAR_AOE_FINISHER",
     "unit": "m",
@@ -4508,7 +4508,7 @@
     "facts": "ground-cast @15m \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "METEOR",
     "unit": "m",
@@ -4522,7 +4522,7 @@
     "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "TORNADO",
     "unit": "m",
@@ -4536,7 +4536,7 @@
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "HAMMERTACKLE",
     "unit": "m",
@@ -4550,7 +4550,7 @@
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "LETHAL_CLEAVER",
     "unit": "m",
@@ -4564,7 +4564,7 @@
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "DASHDMG",
     "unit": "m",
@@ -4578,7 +4578,7 @@
     "facts": "ground-cast @10m \u00b7 ignores CCR \u00b7 15s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "LAUNCHER",
     "unit": "m",
@@ -4595,7 +4595,7 @@
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "SPINNING_SMASH",
     "unit": "m",
@@ -4609,7 +4609,7 @@
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "DIVINE_JUMP",
     "unit": "m",
@@ -4623,7 +4623,7 @@
     "facts": "persists 2s \u00b7 ground-cast @16m \u00b7 10s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "BRAMBLESEED",
     "unit": "m",
@@ -4644,7 +4644,7 @@
     "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "RAM_CHARGE",
     "unit": "m",
@@ -4658,7 +4658,7 @@
     "facts": "persists 2s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 15s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "BLAZING_GEYSER",
     "unit": "m",
@@ -4672,7 +4672,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
-     2
+     4
     ],
     "spell": "GROWING_PUNCH",
     "unit": "m",
@@ -4686,7 +4686,7 @@
     "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "MAJESTIC_SMASH",
     "unit": "m",
@@ -4700,7 +4700,7 @@
     "facts": "persists 2.6s \u00b7 ground-cast @22m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CURSED_WALL",
     "unit": "m",
@@ -4714,7 +4714,7 @@
     "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "HUMAN_TORCH",
     "unit": "m",
@@ -4728,7 +4728,7 @@
     "facts": "ground-cast @12m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "TRIPLECOMBO_DIVEKICK",
     "unit": "m",
@@ -4742,7 +4742,7 @@
     "facts": "ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "VAULT_ATTACK",
     "unit": "m",
@@ -4756,7 +4756,7 @@
     "facts": "persists 2s \u00b7 ground-cast @9m \u00b7 1s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "QS_CRYSTAL_COMBO",
     "unit": "m",
@@ -4770,7 +4770,7 @@
     "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHOVEL",
     "unit": "m",
@@ -4786,7 +4786,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "AXEWHIRLWIND2",
     "unit": "",
@@ -4800,7 +4800,7 @@
     "facts": "ground-cast @3m",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "RENDINGCOMBO",
     "unit": "",
@@ -4817,7 +4817,7 @@
     "facts": "persists 12s \u00b7 ground-cast @3m \u00b7 3s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CRYSTAL_SCYTHE_DASH_ZONE",
     "unit": "",
@@ -4831,7 +4831,7 @@
     "facts": "self/contact",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "DIVEPUNCH_RISE",
     "unit": "",
@@ -4845,7 +4845,7 @@
     "facts": "ground-cast @8m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "DUALAXE_CRAWLER",
     "unit": "",
@@ -4859,7 +4859,7 @@
     "facts": "ground-cast @11m \u00b7 35s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "RAPIERSTAB",
     "unit": "",
@@ -4873,7 +4873,7 @@
     "facts": "self/contact",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SPEEDARCHER_KITE",
     "unit": "",
@@ -4887,7 +4887,7 @@
     "facts": "persists 3.5s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "AIR_RAID",
     "unit": "",
@@ -4901,7 +4901,7 @@
     "facts": "targeted enemy @15m \u00b7 10s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SPEEDSHOT2",
     "unit": "",
@@ -4919,7 +4919,7 @@
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CLAYMORESLASH",
     "unit": "",
@@ -4933,7 +4933,7 @@
     "facts": "ground-cast @4.5m \u00b7 4s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "QDASH",
     "unit": "",
@@ -4950,7 +4950,7 @@
     "facts": "ground-cast @8m \u00b7 10s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CRYSTALXBOW",
     "unit": "",
@@ -4964,7 +4964,7 @@
     "facts": "persists 6s \u00b7 self/contact \u00b7 1s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CRYSTAL_DAGGER_BLADE_RING",
     "unit": "",
@@ -4978,7 +4978,7 @@
     "facts": "persists 2s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "BACK_SLASH",
     "unit": "",
@@ -4992,7 +4992,7 @@
     "facts": "self/contact \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "BLOODTHIRSTYBLADE",
     "unit": "",
@@ -5006,7 +5006,7 @@
     "facts": "ground-cast @8m \u00b7 23.5s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "GROUNDDASH",
     "unit": "",
@@ -5020,7 +5020,7 @@
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DASH_KNOCKBACK",
     "unit": "",
@@ -5034,7 +5034,7 @@
     "facts": "persists 2s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "SPINATTACK",
     "unit": "",
@@ -5048,7 +5048,7 @@
     "facts": "ground-cast @14m \u00b7 40s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "FLAMEDASH",
     "unit": "",
@@ -5062,7 +5062,7 @@
     "facts": "ground-cast @12m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "CHARGESLOWAE",
     "unit": "",
@@ -5080,7 +5080,7 @@
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "HAMMERTACKLE",
     "unit": "",
@@ -5094,7 +5094,7 @@
     "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "RAM_CHARGE",
     "unit": "",
@@ -5108,7 +5108,7 @@
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SPINNING_SMASH",
     "unit": "",
@@ -5122,7 +5122,7 @@
     "facts": "targeted other @13m \u00b7 ignores CCR \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPE_W_TETHERBEAM",
     "unit": "",
@@ -5138,7 +5138,7 @@
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "DIVINE_JUMP",
     "unit": "",
@@ -5152,7 +5152,7 @@
     "facts": "targeted enemy @3.5m \u00b7 3s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "HEROICSTRIKE2",
     "unit": "",
@@ -5168,7 +5168,7 @@
     "facts": "ground-cast @12m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "TRIPLECOMBO_DIVEKICK",
     "unit": "",
@@ -5182,7 +5182,7 @@
     "facts": "targeted enemy @9m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CONEPUNCH2",
     "unit": "",
@@ -5196,7 +5196,7 @@
     "facts": "ground-cast @4m \u00b7 4s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DASHKICK",
     "unit": "",
@@ -5214,7 +5214,7 @@
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "MACELEAP",
     "unit": "",
@@ -5228,7 +5228,7 @@
     "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "ROOTFIELD",
     "unit": "",
@@ -5242,7 +5242,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "ROTTENVINES",
     "unit": "",
@@ -5256,7 +5256,7 @@
     "facts": "ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "VAULT_ATTACK",
     "unit": "",
@@ -5270,7 +5270,7 @@
     "facts": "ground-cast @8m \u00b7 ignores CCR \u00b7 6s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "CARTWHEEL",
     "unit": "",
@@ -5287,7 +5287,7 @@
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "LETHAL_CLEAVER",
     "unit": "",
@@ -5301,7 +5301,7 @@
     "facts": "self/contact \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHAPESHIFT_AVALONIAN_EAGLE",
     "unit": "",
@@ -5315,7 +5315,7 @@
     "facts": "self/contact \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPESHIFT_CRYSTAL_COBRA",
     "unit": "",
@@ -5329,7 +5329,7 @@
     "facts": "self/contact \u00b7 8s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHAPESHIFT_WEREWOLF",
     "unit": "",
@@ -5343,7 +5343,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "CHARGINGBLADE",
     "unit": "",
@@ -5361,7 +5361,7 @@
     "facts": "persists 6s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "TRIDENTTHROW",
     "unit": "",
@@ -5375,7 +5375,7 @@
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DASHDMG",
     "unit": "",
@@ -5389,7 +5389,7 @@
     "facts": "ground-cast @16m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "LANCE_CHARGE",
     "unit": "",
@@ -5403,7 +5403,7 @@
     "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CLAYMORECHARGE",
     "unit": "",
@@ -5417,7 +5417,7 @@
     "facts": "targeted enemy @8m \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "MIGHTYBLOW",
     "unit": "",
@@ -5431,7 +5431,7 @@
     "facts": "persists 1s \u00b7 self/contact \u00b7 channeled",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SWORD_BERSERK_RUN_RE",
     "unit": "",
@@ -5447,7 +5447,7 @@
     "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 27.5s CD",
     "group": "displacement (m)",
     "scores": [
-     2
+     4
     ],
     "spell": "PRIMALSLAM",
     "unit": "m",
@@ -5461,7 +5461,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 29s CD",
     "group": "displacement (m)",
     "scores": [
-     2
+     4
     ],
     "spell": "QSWHIRLWIND",
     "unit": "m",
@@ -5475,7 +5475,7 @@
     "facts": "ground-cast @14m \u00b7 12s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "KNOCKBACKSHOT2",
     "unit": "m",
@@ -5496,7 +5496,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 18s CD",
     "group": "displacement (m)",
     "scores": [
-     2
+     4
     ],
     "spell": "HOLYEXPLOSION",
     "unit": "m",
@@ -5510,7 +5510,7 @@
     "facts": "ground-cast @6m \u00b7 15s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "BACKHAND_KNOCKBACK",
     "unit": "m",
@@ -5528,7 +5528,7 @@
     "facts": "targeted friendall @13m \u00b7 12s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "PULSINGHEAL",
     "unit": "m",
@@ -5545,7 +5545,7 @@
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 10s CD",
     "group": "displacement (m)",
     "scores": [
-     2
+     4
     ],
     "spell": "GEYSER",
     "unit": "m",
@@ -5559,7 +5559,7 @@
     "facts": "persists 3s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
-     2
+     4
     ],
     "spell": "CURSE_SKELETON_BARF_FDHR",
     "unit": "m",
@@ -5573,7 +5573,7 @@
     "facts": "persists 1s \u00b7 ground-cast @12m \u00b7 12s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "FIRECONE",
     "unit": "m",
@@ -5593,7 +5593,7 @@
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "LETHAL_CLEAVER",
     "unit": "m",
@@ -5607,7 +5607,7 @@
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "DASHDMG",
     "unit": "m",
@@ -5621,7 +5621,7 @@
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
-     3
+     6
     ],
     "spell": "DIVINE_JUMP",
     "unit": "m",
@@ -5635,7 +5635,7 @@
     "facts": "persists 2s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 15s CD",
     "group": "displacement (m)",
     "scores": [
-     1
+     2
     ],
     "spell": "BLAZING_GEYSER",
     "unit": "m",
@@ -5649,7 +5649,7 @@
     "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "displacement (m)",
     "scores": [
-     2
+     4
     ],
     "spell": "MAJESTIC_SMASH",
     "unit": "m",
@@ -5663,7 +5663,7 @@
     "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "SOULSHAKER",
     "unit": "s",
@@ -5677,7 +5677,7 @@
     "facts": "targeted enemy @5.5m \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "HALBERDSMASH",
     "unit": "s",
@@ -5691,7 +5691,7 @@
     "facts": "persists 1.2s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "GROUNDBREAKER2",
     "unit": "s",
@@ -5705,7 +5705,7 @@
     "facts": "ground-cast @14m \u00b7 ignores CCR \u00b7 72s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "TIME_FREEZE",
     "unit": "s",
@@ -5719,7 +5719,7 @@
     "facts": "persists 2s \u00b7 ground-cast @12m \u00b7 18s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "FREEZINGWIND",
     "unit": "s",
@@ -5733,7 +5733,7 @@
     "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "RAM_CHARGE",
     "unit": "s",
@@ -5747,7 +5747,7 @@
     "facts": "ground-cast @12m \u00b7 14s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "UNDEADHAND",
     "unit": "s",
@@ -5761,7 +5761,7 @@
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "HAMMERTACKLE",
     "unit": "s",
@@ -5775,7 +5775,7 @@
     "facts": "self/contact \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     3
+     6
     ],
     "spell": "SHRIEKMACE",
     "unit": "s",
@@ -5789,7 +5789,7 @@
     "facts": "self/contact \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "HAMMERWHIRLWIND2",
     "unit": "s",
@@ -5803,9 +5803,9 @@
     "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     1,
      2,
-     3
+     4,
+     6
     ],
     "spell": "SEPARATING_SLAM",
     "unit": "s",
@@ -5823,7 +5823,7 @@
     "facts": "ground-cast @15m \u00b7 10s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "GROUNDARROW",
     "unit": "s",
@@ -5843,7 +5843,7 @@
     "facts": "persists 1s \u00b7 ground-cast @22m \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "SPEARTHROW",
     "unit": "s",
@@ -5857,7 +5857,7 @@
     "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "ROOTFIELD",
     "unit": "s",
@@ -5871,7 +5871,7 @@
     "facts": "persists 1.3s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "SPLITTINGSLASH",
     "unit": "s",
@@ -5891,7 +5891,7 @@
     "facts": "ground-cast @22m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "SKILLSHOT_TELEPORT",
     "unit": "s",
@@ -5913,7 +5913,7 @@
     "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "FROST_ULTIMATE",
     "unit": "s",
@@ -5927,7 +5927,7 @@
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "SPINNING_SMASH",
     "unit": "s",
@@ -5941,7 +5941,7 @@
     "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "TORNADO",
     "unit": "slow%\u00b7s",
@@ -5955,7 +5955,7 @@
     "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "ICESTORM2",
     "unit": "slow%\u00b7s",
@@ -5969,7 +5969,7 @@
     "facts": "self/contact \u00b7 ignores CCR \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "GIANTSTEPS",
     "unit": "slow%\u00b7s",
@@ -5983,7 +5983,7 @@
     "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "GLACIALFIELD",
     "unit": "slow%\u00b7s",
@@ -5997,7 +5997,7 @@
     "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "ICEROCK_EXPLODE",
     "unit": "slow%\u00b7s",
@@ -6011,7 +6011,7 @@
     "facts": "persists 1s \u00b7 ground-cast @13m \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "IMPULSE_PUNCH",
     "unit": "slow%\u00b7s",
@@ -6025,7 +6025,7 @@
     "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "FROZEN_CRYSTAL",
     "unit": "slow%\u00b7s",
@@ -6039,7 +6039,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "GROWING_PUNCH",
     "unit": "slow%\u00b7s",
@@ -6053,7 +6053,7 @@
     "facts": "targeted enemy @4m \u00b7 ignores CCR \u00b7 18s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "LEGBREAKER",
     "unit": "slow%\u00b7s",
@@ -6069,7 +6069,7 @@
     "facts": "ground-cast @15m \u00b7 1s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "HAIL_MULTI_1",
     "unit": "slow%\u00b7s",
@@ -6083,8 +6083,8 @@
     "facts": "targeted friendall @11m \u00b7 6s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1,
-     2
+     2,
+     4
     ],
     "spell": "SHIELDFRIENDLY",
     "unit": "m",
@@ -6103,7 +6103,7 @@
     "facts": "persists 5s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 62s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "VOID",
     "unit": "m",
@@ -6117,7 +6117,7 @@
     "facts": "persists 2.6s \u00b7 ground-cast @22m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CURSED_WALL",
     "unit": "m",
@@ -6131,7 +6131,7 @@
     "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "HUMAN_TORCH",
     "unit": "m",
@@ -6145,7 +6145,7 @@
     "facts": "targeted other @13m \u00b7 ignores CCR \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPE_W_TETHERBEAM",
     "unit": "m",
@@ -6166,7 +6166,7 @@
     "facts": "ground-cast @14m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "HOLY_ULTIMATE",
     "unit": "m",
@@ -6180,7 +6180,7 @@
     "facts": "targeted friendall @11m \u00b7 channeled \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "HOLYTOUCH",
     "unit": "m",
@@ -6194,7 +6194,7 @@
     "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "GUARDRUNE",
     "unit": "m",
@@ -6212,7 +6212,7 @@
     "facts": "targeted friendall @11m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "BRIEROFLIFE",
     "unit": "m",
@@ -6226,7 +6226,7 @@
     "facts": "targeted allunmounted @11m",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SOUL_LINK",
     "unit": "m",
@@ -6240,7 +6240,7 @@
     "facts": "persists 6s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "TRIDENTTHROW",
     "unit": "m",
@@ -6256,7 +6256,7 @@
     "facts": "persists 1.4s \u00b7 ground-cast @25m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "ARCANEORB2",
     "unit": "",
@@ -6270,7 +6270,7 @@
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "DISEMBOWEL",
     "unit": "",
@@ -6284,7 +6284,7 @@
     "facts": "persists 5s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 63s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "ENFEEBLEBLADES",
     "unit": "",
@@ -6298,7 +6298,7 @@
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "PUNCHCOMBO",
     "unit": "",
@@ -6312,7 +6312,7 @@
     "facts": "ground-cast @3m \u00b7 6s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "IRONBREAKER",
     "unit": "",
@@ -6333,7 +6333,7 @@
     "facts": "ground-cast @12m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "TRIPLECOMBO_DIVEKICK",
     "unit": "",
@@ -6347,7 +6347,7 @@
     "facts": "self/contact \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "SHRIEKMACE",
     "unit": "",
@@ -6361,7 +6361,7 @@
     "facts": "persists 3s \u00b7 ground-cast @15m \u00b7 26.8s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "COMBATSTAFF_SLASH",
     "unit": "",
@@ -6375,7 +6375,7 @@
     "facts": "ground-cast @16m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "LANCE_CHARGE",
     "unit": "",
@@ -6391,7 +6391,7 @@
     "facts": "ground-cast @3m \u00b7 1.5s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "MACE_CRYSTAL_FRAGMENT_STORM",
     "unit": "value\u00b7s",
@@ -6405,7 +6405,7 @@
     "facts": "targeted enemy @3m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "AXESMASH",
     "unit": "value\u00b7s",
@@ -6426,7 +6426,7 @@
     "facts": "targeted enemy @15m \u00b7 12s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "FRAZZLE2",
     "unit": "value\u00b7s",
@@ -6447,7 +6447,7 @@
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "CLAYMORESLASH",
     "unit": "value\u00b7s",
@@ -6461,7 +6461,7 @@
     "facts": "ground-cast @12m \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "CURSEULTIMATE",
     "unit": "value\u00b7s",
@@ -6475,7 +6475,7 @@
     "facts": "ground-cast @6m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "BACKHAND_KNOCKBACK",
     "unit": "value\u00b7s",
@@ -6496,7 +6496,7 @@
     "facts": "ground-cast @22m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "ARMORPIERCER",
     "unit": "value\u00b7s",
@@ -6516,7 +6516,7 @@
     "facts": "targeted enemy @16m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "SNIPESHOT_CROSSBOW",
     "unit": "value\u00b7s",
@@ -6530,7 +6530,7 @@
     "facts": "targeted enemy @2m \u00b7 2s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "SUNDERARMOR2",
     "unit": "value\u00b7s",
@@ -6552,7 +6552,7 @@
     "facts": "ground-cast @3m \u00b7 6s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "IRONBREAKER",
     "unit": "value\u00b7s",
@@ -6573,7 +6573,7 @@
     "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "TAINTED_STEEL",
     "unit": "value\u00b7s",
@@ -6587,7 +6587,7 @@
     "facts": "ground-cast @9m \u00b7 8s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "FROST_LANCE",
     "unit": "value\u00b7s",
@@ -6608,7 +6608,7 @@
     "facts": "ground-cast @10m \u00b7 4s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPE_Q_CONE_MELEE",
     "unit": "value\u00b7s",
@@ -6629,7 +6629,7 @@
     "facts": "targeted enemy @11m \u00b7 7s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "SUNDERSHOT",
     "unit": "value\u00b7s",
@@ -6649,7 +6649,7 @@
     "facts": "persists 1s \u00b7 ground-cast @18m \u00b7 2s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "DEADLYSHOT",
     "unit": "value\u00b7s",
@@ -6669,7 +6669,7 @@
     "facts": "",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "PASSIVE_ARMOR_PIERCE_STACK",
     "unit": "value\u00b7s",
@@ -6685,7 +6685,7 @@
     "facts": "ground-cast @11m \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "CHARGE_ROOT",
     "unit": "s",
@@ -6704,7 +6704,7 @@
     "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "SOULSHAKER",
     "unit": "s",
@@ -6718,7 +6718,7 @@
     "facts": "targeted enemy @5.5m \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "HALBERDSMASH",
     "unit": "s",
@@ -6732,7 +6732,7 @@
     "facts": "ground-cast @13m \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "CURSENOVA",
     "unit": "s",
@@ -6753,7 +6753,7 @@
     "facts": "persists 2s \u00b7 ground-cast @12m \u00b7 18s CD",
     "group": "hard CC (s)",
     "scores": [
-     3
+     6
     ],
     "spell": "FREEZINGWIND",
     "unit": "s",
@@ -6767,7 +6767,7 @@
     "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "SEPARATING_SLAM",
     "unit": "s",
@@ -6787,7 +6787,7 @@
     "facts": "ground-cast @20m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "SKILLSHOT_PULL",
     "unit": "s",
@@ -6806,7 +6806,7 @@
     "facts": "self/contact \u00b7 18s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "CIRCLEOFLIFE",
     "unit": "s",
@@ -6820,7 +6820,7 @@
     "facts": "ground-cast @15m \u00b7 10s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "GROUNDARROW",
     "unit": "s",
@@ -6841,7 +6841,7 @@
     "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR",
     "group": "hard CC (s)",
     "scores": [
-     3
+     6
     ],
     "spell": "ROOTFIELD",
     "unit": "s",
@@ -6855,7 +6855,7 @@
     "facts": "ground-cast @12m \u00b7 ignores CCR \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPE_W_AREA_PULL",
     "unit": "s",
@@ -6876,7 +6876,7 @@
     "facts": "persists 1.3s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "SPLITTINGSLASH",
     "unit": "s",
@@ -6897,7 +6897,7 @@
     "facts": "",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "PASSIVE_FROST",
     "unit": "s",
@@ -6917,7 +6917,7 @@
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "DISEMBOWEL",
     "unit": "s",
@@ -6931,7 +6931,7 @@
     "facts": "ground-cast @3m",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "RENDINGCOMBO",
     "unit": "s",
@@ -6952,7 +6952,7 @@
     "facts": "self/contact \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "DUAL_NATURE",
     "unit": "s",
@@ -6966,7 +6966,7 @@
     "facts": "persists 6s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "TRIDENTTHROW",
     "unit": "s",
@@ -6982,7 +6982,7 @@
     "facts": "targeted friendall @13m \u00b7 10s CD",
     "group": "healing per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "HOLYDESPERATEPRAYER2",
     "unit": "heal/cast",
@@ -6996,7 +6996,7 @@
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "healing per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "DIVINE_JUMP",
     "unit": "heal/cast",
@@ -7010,7 +7010,7 @@
     "facts": "ground-cast @18m \u00b7 10s CD",
     "group": "healing per cast",
     "scores": [
-     2
+     4
     ],
     "spell": "AXETHROW",
     "unit": "heal/cast",
@@ -7024,7 +7024,7 @@
     "facts": "",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "PASSIVE_HEALTHCHANCE_AXE",
     "unit": "heal/cast",
@@ -7043,7 +7043,7 @@
     "facts": "ground-cast @8m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "DUALAXE_CRAWLER",
     "unit": "heal/cast",
@@ -7057,7 +7057,7 @@
     "facts": "",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "PASSIVE_HEALTHCHANCE_DAGGER",
     "unit": "heal/cast",
@@ -7078,7 +7078,7 @@
     "facts": "",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "PASSIVE_ARMORCHANCE_SWORD",
     "unit": "heal/cast",
@@ -7099,7 +7099,7 @@
     "facts": "self/contact \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "BLOODTHIRSTYBLADE",
     "unit": "heal/cast",
@@ -7113,7 +7113,7 @@
     "facts": "",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "PASSIVE_HEALTHCHANCE_QUARTERSTAFF",
     "unit": "heal/cast",
@@ -7134,7 +7134,7 @@
     "facts": "",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "PASSIVE_HEALTHCHANCE_HAMMER",
     "unit": "heal/cast",
@@ -7155,7 +7155,7 @@
     "facts": "self/contact \u00b7 8s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHAPESHIFT_IMP",
     "unit": "heal/cast",
@@ -7169,7 +7169,7 @@
     "facts": "",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "PASSIVE_ARMOR_CASTER_NATURESTAFF",
     "unit": "heal/cast",
@@ -7190,7 +7190,7 @@
     "facts": "",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "PASSIVE_SHAPESHIFT_ATTACK_BUFF",
     "unit": "heal/cast",
@@ -7207,7 +7207,7 @@
     "facts": "self/contact \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SHAPESHIFT_ROCK_ELEMENTAL",
     "unit": "heal/cast",
@@ -7221,7 +7221,7 @@
     "facts": "self/contact \u00b7 8s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPESHIFT_WEREWOLF",
     "unit": "heal/cast",
@@ -7235,7 +7235,7 @@
     "facts": "self/contact \u00b7 10s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPESHIFT_BEAR",
     "unit": "heal/cast",
@@ -7249,7 +7249,7 @@
     "facts": "",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "PASSIVE_HEALTHCHANCE_SPEAR",
     "unit": "heal/cast",
@@ -7272,7 +7272,7 @@
     "facts": "ground-cast @20m \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "SILENCINGBOLT",
     "unit": "s",
@@ -7293,7 +7293,7 @@
     "facts": "persists 1.4s \u00b7 ground-cast @25m \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "ARCANEORB2",
     "unit": "s",
@@ -7307,7 +7307,7 @@
     "facts": "self/contact \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     3
+     6
     ],
     "spell": "SHRIEKMACE",
     "unit": "s",
@@ -7321,7 +7321,7 @@
     "facts": "persists 2s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "MIGHTYSWING",
     "unit": "s",
@@ -7335,7 +7335,7 @@
     "facts": "ground-cast @14m \u00b7 5s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "MAGICSHOCK",
     "unit": "s",
@@ -7357,7 +7357,7 @@
     "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "TORNADO",
     "unit": "slow%\u00b7s",
@@ -7371,7 +7371,7 @@
     "facts": "ground-cast @3m \u00b7 1.5s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "MACE_CRYSTAL_FRAGMENT_STORM",
     "unit": "slow%\u00b7s",
@@ -7385,7 +7385,7 @@
     "facts": "self/contact \u00b7 ignores CCR \u00b7 37.5s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "QS_SLOWROPE",
     "unit": "slow%\u00b7s",
@@ -7399,7 +7399,7 @@
     "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "ICESTORM2",
     "unit": "slow%\u00b7s",
@@ -7413,7 +7413,7 @@
     "facts": "self/contact \u00b7 ignores CCR \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "GIANTSTEPS",
     "unit": "slow%\u00b7s",
@@ -7427,7 +7427,7 @@
     "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "GLACIALFIELD",
     "unit": "slow%\u00b7s",
@@ -7441,7 +7441,7 @@
     "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 44s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "ARCANECORRIDOR",
     "unit": "slow%\u00b7s",
@@ -7455,7 +7455,7 @@
     "facts": "persists 5s \u00b7 self/contact \u00b7 ignores CCR \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "TAR_RING",
     "unit": "slow%\u00b7s",
@@ -7475,7 +7475,7 @@
     "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "ICEROCK_EXPLODE",
     "unit": "slow%\u00b7s",
@@ -7489,7 +7489,7 @@
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "DASH_KNOCKBACK",
     "unit": "slow%\u00b7s",
@@ -7503,7 +7503,7 @@
     "facts": "persists 1s \u00b7 ground-cast @13m \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "IMPULSE_PUNCH",
     "unit": "slow%\u00b7s",
@@ -7517,7 +7517,7 @@
     "facts": "ground-cast @12m \u00b7 12s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "GROUNDSPEAR",
     "unit": "slow%\u00b7s",
@@ -7538,7 +7538,7 @@
     "facts": "persists 3s \u00b7 ground-cast @2m \u00b7 ignores CCR \u00b7 7s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "SACRED_GROUND",
     "unit": "slow%\u00b7s",
@@ -7557,7 +7557,7 @@
     "facts": "targeted enemy @3m \u00b7 6s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "HAMSTRINGSWORD",
     "unit": "slow%\u00b7s",
@@ -7577,7 +7577,7 @@
     "facts": "persists 1.8s \u00b7 ground-cast @11m \u00b7 ignores CCR \u00b7 10s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "FROSTBOMB_CASTSLOW",
     "unit": "slow%\u00b7s",
@@ -7593,7 +7593,7 @@
     "facts": "persists 12s \u00b7 ground-cast @13m \u00b7 5s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "CALTROPS",
     "unit": "slow%\u00b7s",
@@ -7614,7 +7614,7 @@
     "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "FROZEN_CRYSTAL",
     "unit": "slow%\u00b7s",
@@ -7628,7 +7628,7 @@
     "facts": "persists 5.2s \u00b7 targeted allplayers @15m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "DYNAMIC_CURSE",
     "unit": "slow%\u00b7s",
@@ -7642,7 +7642,7 @@
     "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "BLACKHOLE",
     "unit": "slow%\u00b7s",
@@ -7656,7 +7656,7 @@
     "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 38s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "ARCANE_METEOR",
     "unit": "slow%\u00b7s",
@@ -7670,7 +7670,7 @@
     "facts": "persists 2s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "MIGHTYSWING",
     "unit": "slow%\u00b7s",
@@ -7684,7 +7684,7 @@
     "facts": "persists 4.2s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 5s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "CURSED_SPLAT",
     "unit": "slow%\u00b7s",
@@ -7704,7 +7704,7 @@
     "facts": "",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "PASSIVE_SLOWPOISON",
     "unit": "slow%\u00b7s",
@@ -7724,7 +7724,7 @@
     "facts": "ground-cast @15m \u00b7 channeled \u00b7 15s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "ARROWRAIN",
     "unit": "slow%\u00b7s",
@@ -7738,7 +7738,7 @@
     "facts": "persists 3s \u00b7 ground-cast @12m \u00b7 ignores CCR \u00b7 8s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPE_W_DAMAGE_AOE",
     "unit": "slow%\u00b7s",
@@ -7759,7 +7759,7 @@
     "facts": "persists 2s \u00b7 ground-cast @9m \u00b7 1s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "QS_CRYSTAL_COMBO",
     "unit": "slow%\u00b7s",
@@ -7773,7 +7773,7 @@
     "facts": "ground-cast @22m \u00b7 channeled \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "FROST_TARGETED_CHANNEL",
     "unit": "m",
@@ -7787,7 +7787,7 @@
     "facts": "persists 4s \u00b7 ground-cast @12m",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "THORNSAREA",
     "unit": "m",
@@ -7810,7 +7810,7 @@
     "facts": "targeted enemy @1.5m \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "KNOCKOUT",
     "unit": "s",
@@ -7824,7 +7824,7 @@
     "facts": "persists 1.2s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     3
+     6
     ],
     "spell": "GROUNDBREAKER2",
     "unit": "s",
@@ -7838,7 +7838,7 @@
     "facts": "ground-cast @14m \u00b7 ignores CCR \u00b7 72s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "TIME_FREEZE",
     "unit": "s",
@@ -7852,7 +7852,7 @@
     "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "RAM_CHARGE",
     "unit": "s",
@@ -7866,7 +7866,7 @@
     "facts": "ground-cast @12m \u00b7 14s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "UNDEADHAND",
     "unit": "s",
@@ -7880,7 +7880,7 @@
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "HAMMERTACKLE",
     "unit": "s",
@@ -7894,7 +7894,7 @@
     "facts": "self/contact \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "HAMMERWHIRLWIND2",
     "unit": "s",
@@ -7908,7 +7908,7 @@
     "facts": "self/contact \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "STUNRUN",
     "unit": "s",
@@ -7929,7 +7929,7 @@
     "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "FROZEN_CRYSTAL",
     "unit": "s",
@@ -7943,7 +7943,7 @@
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "MACELEAP",
     "unit": "s",
@@ -7957,7 +7957,7 @@
     "facts": "persists 1s \u00b7 ground-cast @22m \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "SPEARTHROW",
     "unit": "s",
@@ -7971,7 +7971,7 @@
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "KNUCKLECOMBO",
     "unit": "s",
@@ -7992,7 +7992,7 @@
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "PUNCHCOMBO",
     "unit": "s",
@@ -8006,7 +8006,7 @@
     "facts": "ground-cast @22m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "SKILLSHOT_TELEPORT",
     "unit": "s",
@@ -8027,7 +8027,7 @@
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "FROSTNOVA",
     "unit": "s",
@@ -8046,7 +8046,7 @@
     "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "FROST_ULTIMATE",
     "unit": "s",
@@ -8060,7 +8060,7 @@
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
-     2
+     4
     ],
     "spell": "SPINNING_SMASH",
     "unit": "s",
@@ -8074,7 +8074,7 @@
     "facts": "ground-cast @25m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "VACUUMSLASH",
     "unit": "s",
@@ -8088,7 +8088,7 @@
     "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
-     1
+     2
     ],
     "spell": "CLAYMORECHARGE",
     "unit": "s",
@@ -8102,7 +8102,7 @@
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "CRYSTALWAVE",
     "unit": "s",
@@ -8118,7 +8118,7 @@
     "facts": "persists 4s \u00b7 ground-cast @12m",
     "group": "damage per cast",
     "scores": [
-     1
+     2
     ],
     "spell": "THORNSAREA",
     "unit": "dmg/cast",
@@ -8135,7 +8135,7 @@
     "facts": "targeted enemy @3m \u00b7 2s CD",
     "group": "damage per second",
     "scores": [
-     2
+     4
     ],
     "spell": "RENDINGSTRIKE",
     "unit": "dmg/s",
@@ -8156,7 +8156,7 @@
     "facts": "targeted enemy @3.5m \u00b7 3s CD",
     "group": "damage per second",
     "scores": [
-     2
+     4
     ],
     "spell": "HEROICSTRIKE2",
     "unit": "dmg/s",
@@ -8175,8 +8175,8 @@
     "facts": "targeted enemy @9m \u00b7 2.4s CD",
     "group": "damage per second",
     "scores": [
-     1,
-     2
+     2,
+     4
     ],
     "spell": "CURSEDOT",
     "unit": "dmg/s",
@@ -8196,7 +8196,7 @@
     "facts": "persists 2s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "damage per second",
     "scores": [
-     2
+     4
     ],
     "spell": "SPINATTACK",
     "unit": "dmg/s",
@@ -8210,7 +8210,7 @@
     "facts": "persists 5.2s \u00b7 targeted allplayers @15m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "damage per second",
     "scores": [
-     2
+     4
     ],
     "spell": "DYNAMIC_CURSE",
     "unit": "dmg/s",
@@ -8224,7 +8224,7 @@
     "facts": "ground-cast @10m \u00b7 channeled \u00b7 12s CD",
     "group": "damage per second",
     "scores": [
-     1
+     2
     ],
     "spell": "QSTAFF_COMBO",
     "unit": "dmg/s",
@@ -8244,7 +8244,7 @@
     "facts": "self/contact \u00b7 10s CD",
     "group": "damage per second",
     "scores": [
-     3
+     6
     ],
     "spell": "UNDEADARROWS",
     "unit": "dmg/s",
@@ -8258,7 +8258,7 @@
     "facts": "persists 5s \u00b7 ground-cast @26m \u00b7 channeled \u00b7 35s CD",
     "group": "damage per second",
     "scores": [
-     2
+     4
     ],
     "spell": "CROSSBOW_DIVINE_SHOT",
     "unit": "dmg/s",
@@ -8272,7 +8272,7 @@
     "facts": "self/contact \u00b7 ignores CCR \u00b7 30s CD",
     "group": "damage per second",
     "scores": [
-     1
+     2
     ],
     "spell": "GIANTSTEPS",
     "unit": "dmg/s",
@@ -8286,7 +8286,7 @@
     "facts": "self/contact \u00b7 20s CD",
     "group": "damage per second",
     "scores": [
-     2
+     4
     ],
     "spell": "BLOODTHIRSTYBLADE",
     "unit": "dmg/s",
@@ -8300,7 +8300,7 @@
     "facts": "ground-cast @20m \u00b7 channeled \u00b7 30s CD",
     "group": "damage per second",
     "scores": [
-     2
+     4
     ],
     "spell": "CROSSBOW_CONE_ULTIMATE",
     "unit": "dmg/s",
@@ -8314,7 +8314,7 @@
     "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "damage per second",
     "scores": [
-     1
+     2
     ],
     "spell": "ICESTORM2",
     "unit": "dmg/s",
@@ -8328,7 +8328,7 @@
     "facts": "persists 5s \u00b7 ground-cast @11m \u00b7 channeled \u00b7 20s CD",
     "group": "damage per second",
     "scores": [
-     2
+     4
     ],
     "spell": "PUMMELING_STRIKES",
     "unit": "dmg/s",
@@ -8342,7 +8342,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 30s CD",
     "group": "damage per second",
     "scores": [
-     2
+     4
     ],
     "spell": "STARFALL_DOT",
     "unit": "dmg/s",
@@ -8356,7 +8356,7 @@
     "facts": "targeted enemy @13m \u00b7 channeled \u00b7 20s CD",
     "group": "damage per second",
     "scores": [
-     2
+     4
     ],
     "spell": "DUAL_RAPIDFIRE",
     "unit": "dmg/s",
@@ -8370,7 +8370,7 @@
     "facts": "",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "PASSIVE_ATTACKBUFF_ARCANESTAFF",
     "unit": "dmg/cast",
@@ -8390,7 +8390,7 @@
     "facts": "",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "PASSIVE_KNUCKLE_BRAWLER_SPEED",
     "unit": "dmg/cast",
@@ -8407,7 +8407,7 @@
     "facts": "persists 5.3s \u00b7 ground-cast @15m \u00b7 35s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "FLAMETORNADO",
     "unit": "dmg/cast",
@@ -8421,8 +8421,8 @@
     "facts": "",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1,
-     2
+     2,
+     4
     ],
     "spell": "WEAPON_STATS",
     "unit": "",
@@ -8459,7 +8459,7 @@
     "facts": "self/contact",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "SPEEDARCHER_KITE",
     "unit": "dmg/cast",
@@ -8473,8 +8473,8 @@
     "facts": "",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1,
-     2
+     2,
+     4
     ],
     "spell": "PASSIVE_AASPEEDCHANCE_DAGGER",
     "unit": "dmg/cast",
@@ -8493,7 +8493,7 @@
     "facts": "ground-cast @22m \u00b7 channeled \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "FROST_TARGETED_CHANNEL",
     "unit": "dmg/cast",
@@ -8507,7 +8507,7 @@
     "facts": "",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "PASSIVE_KNUCKLE_BRAWLER",
     "unit": "dmg/cast",
@@ -8523,7 +8523,7 @@
     "facts": "self/contact \u00b7 10s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPESHIFT_BEAR",
     "unit": "dmg/cast",
@@ -8537,7 +8537,7 @@
     "facts": "self/contact \u00b7 2s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SPIRITSPEAR",
     "unit": "dmg/cast",
@@ -8558,7 +8558,7 @@
     "facts": "persists 1s \u00b7 self/contact \u00b7 channeled",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SWORD_BERSERK_RUN_RE",
     "unit": "dmg/cast",
@@ -8574,7 +8574,7 @@
     "facts": "self/contact \u00b7 ignores CCR \u00b7 37.5s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "QS_SLOWROPE",
     "unit": "value\u00b7s",
@@ -8588,7 +8588,7 @@
     "facts": "self/contact \u00b7 ignores CCR \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     2
+     4
     ],
     "spell": "GIANTSTEPS",
     "unit": "value\u00b7s",
@@ -8602,7 +8602,7 @@
     "facts": "self/contact \u00b7 25s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     3
+     6
     ],
     "spell": "SHAPESHIFT_ROCK_ELEMENTAL",
     "unit": "value\u00b7s",
@@ -8616,7 +8616,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 29s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
-     1
+     2
     ],
     "spell": "QSWHIRLWIND",
     "unit": "value\u00b7s",
@@ -8630,8 +8630,8 @@
     "facts": "",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2,
-     3
+     4,
+     6
     ],
     "spell": "WEAPON_STATS",
     "unit": "",
@@ -8663,7 +8663,7 @@
     "facts": "self/contact \u00b7 channeled \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "STARFALL_DOT",
     "unit": "",
@@ -8677,7 +8677,7 @@
     "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 44s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "ARCANECORRIDOR",
     "unit": "",
@@ -8691,7 +8691,7 @@
     "facts": "persists 12s \u00b7 ground-cast @3m \u00b7 3s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "CRYSTAL_SCYTHE_DASH_ZONE",
     "unit": "",
@@ -8705,7 +8705,7 @@
     "facts": "persists 5.3s \u00b7 ground-cast @15m \u00b7 35s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "FLAMETORNADO",
     "unit": "",
@@ -8719,7 +8719,7 @@
     "facts": "persists 12s \u00b7 ground-cast @13m \u00b7 5s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "CALTROPS",
     "unit": "",
@@ -8738,7 +8738,7 @@
     "facts": "persists 5s \u00b7 ground-cast @26m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "LIGHTNING_ARROW",
     "unit": "",
@@ -8752,7 +8752,7 @@
     "facts": "persists 12s \u00b7 ground-cast @15m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "GROUNDMINE",
     "unit": "",
@@ -8766,7 +8766,7 @@
     "facts": "persists 1.2s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "AREAOFDECAY",
     "unit": "",
@@ -8780,7 +8780,7 @@
     "facts": "persists 5s \u00b7 ground-cast @15m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SKULLCURSE",
     "unit": "",
@@ -8794,7 +8794,7 @@
     "facts": "persists 4.2s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 5s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "CURSED_SPLAT",
     "unit": "",
@@ -8811,7 +8811,7 @@
     "facts": "persists 5s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 63s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "ENFEEBLEBLADES",
     "unit": "",
@@ -8825,7 +8825,7 @@
     "facts": "persists 6.5s \u00b7 ground-cast @15m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "FIREPHOENIX",
     "unit": "",
@@ -8839,7 +8839,7 @@
     "facts": "persists 5s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "FIREWALL",
     "unit": "",
@@ -8857,7 +8857,7 @@
     "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "HUMAN_TORCH",
     "unit": "",
@@ -8871,7 +8871,7 @@
     "facts": "self/contact \u00b7 ignores CCR \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "GIANTSTEPS",
     "unit": "",
@@ -8885,9 +8885,9 @@
     "facts": "persists 1.8s \u00b7 ground-cast @11m \u00b7 ignores CCR \u00b7 10s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1,
      2,
-     3
+     4,
+     6
     ],
     "spell": "FROSTBOMB_CASTSLOW",
     "unit": "",
@@ -8905,7 +8905,7 @@
     "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     3
+     6
     ],
     "spell": "ICESTORM2",
     "unit": "",
@@ -8919,7 +8919,7 @@
     "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "GLACIALFIELD",
     "unit": "",
@@ -8933,7 +8933,7 @@
     "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "ICEROCK_EXPLODE",
     "unit": "",
@@ -8947,7 +8947,7 @@
     "facts": "persists 5s \u00b7 self/contact \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "TAR_RING",
     "unit": "",
@@ -8967,7 +8967,7 @@
     "facts": "persists 3s \u00b7 ground-cast @12m \u00b7 ignores CCR \u00b7 8s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "SHAPE_W_DAMAGE_AOE",
     "unit": "",
@@ -8987,7 +8987,7 @@
     "facts": "ground-cast @15m \u00b7 channeled \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "ARROWRAIN",
     "unit": "",
@@ -9001,8 +9001,8 @@
     "facts": "persists 3s \u00b7 ground-cast @2m \u00b7 ignores CCR \u00b7 7s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1,
-     2
+     2,
+     4
     ],
     "spell": "SACRED_GROUND",
     "unit": "",
@@ -9020,7 +9020,7 @@
     "facts": "ground-cast @3m \u00b7 1.5s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "MACE_CRYSTAL_FRAGMENT_STORM",
     "unit": "",
@@ -9034,7 +9034,7 @@
     "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 27.5s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "PRIMALSLAM",
     "unit": "",
@@ -9048,7 +9048,7 @@
     "facts": "persists 4s \u00b7 ground-cast @12m",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "THORNSAREA",
     "unit": "",
@@ -9069,7 +9069,7 @@
     "facts": "persists 3s \u00b7 ground-cast @15m \u00b7 26.8s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "COMBATSTAFF_SLASH",
     "unit": "",
@@ -9083,7 +9083,7 @@
     "facts": "persists 2s \u00b7 ground-cast @9m \u00b7 1s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "QS_CRYSTAL_COMBO",
     "unit": "",
@@ -9097,7 +9097,7 @@
     "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "SOULSHAKER",
     "unit": "",
@@ -9111,7 +9111,7 @@
     "facts": "self/contact \u00b7 ignores CCR \u00b7 37.5s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     2
+     4
     ],
     "spell": "QS_SLOWROPE",
     "unit": "",
@@ -9125,7 +9125,7 @@
     "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
-     1
+     2
     ],
     "spell": "BLACKHOLE",
     "unit": "",

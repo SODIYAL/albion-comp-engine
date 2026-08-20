@@ -9,9 +9,9 @@
     - {cap: disengage, evidence: JUMPSHOT2}
     - {cap: mobility, evidence: SPEEDSHOT2}
   capabilities:
-    - {cap: disengage,     score: 2, evidence: AIR_RAID}          # E: leap to an air foothold, UNTARGETABLE 3.75s
-    - {cap: burst_aoe,     score: 2, evidence: AIR_RAID}          # 123 AoE bolts, recastable x3
-    - {cap: mobility,      score: 2, evidence: AIR_RAID}          # the leap repositions; W: Speed Shot
+    - {cap: disengage,     score: 4, evidence: AIR_RAID}          # E: leap to an air foothold, UNTARGETABLE 3.75s
+    - {cap: burst_aoe,     score: 4, evidence: AIR_RAID}          # 123 AoE bolts, recastable x3
+    - {cap: mobility,      score: 4, evidence: AIR_RAID}          # the leap repositions; W: Speed Shot
 
 - weapon: 2H_LONGBOW_UNDEAD          # Whispering Bow — glass-cannon AA bow
   curated_as_of: 2026-08-12
@@ -20,11 +20,11 @@
   except:
     - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
-    - {cap: sustained_dps, score: 3, evidence: UNDEADARROWS}      # E: +35% AA range/speed +50 bonus damage per AA
+    - {cap: sustained_dps, score: 6, evidence: UNDEADARROWS}      # E: +35% AA range/speed +50 bonus damage per AA
     # E costs -35% own Defense: the glass side of the cannon, unscoreable
 
 - weapon: 2H_WARBOW                  # Warbow — skillshot nuke bow
   curated_as_of: 2026-08-12
   role_hint: range
   capabilities:
-    - {cap: burst_st,      score: 2, evidence: SKILLSHOT_STUN}    # E: Magic Arrow 232, CD refund on hit
+    - {cap: burst_st,      score: 4, evidence: SKILLSHOT_STUN}    # E: Magic Arrow 232, CD refund on hit

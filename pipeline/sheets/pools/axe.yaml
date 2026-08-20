@@ -7,12 +7,12 @@
 # adjudication — or lists the pair under `except:`.
 subcategory: axe
 capabilities:
-  - {cap: catch, score: 1, evidence: AXEBOOST}                         # (QW)
-  - {cap: resist_shred, score: 1, evidence: AXESMASH}                  # (QW)
-  - {cap: buff_allies, score: 1, evidence: AXE_CHARGE}                 # (QW)
-  - {cap: engage, score: 1, evidence: AXE_CHARGE}                      # (QW)
-  - {cap: self_sustain, score: 1, evidence: PASSIVE_HEALTHCHANCE_AXE}  # PASSIVE: Life Leech
-  - {cap: mobility, score: 1, evidence: RENDINGCOMBO}                  # (QW)
-  - {cap: root, score: 1, evidence: RENDINGCOMBO}                      # (QW)
-  - {cap: heal_reduction, score: 1, evidence: RENDINGSTRIKE}           # bleed cap (QW)
-  - {cap: sustained_dps, score: 2, evidence: RENDINGSTRIKE}            # bleeds (QW)
+  - {cap: catch, score: 2, evidence: AXEBOOST}                         # (QW)
+  - {cap: resist_shred, score: 2, evidence: AXESMASH}                  # (QW)
+  - {cap: buff_allies, score: 2, evidence: AXE_CHARGE}                 # (QW)
+  - {cap: engage, score: 2, evidence: AXE_CHARGE}                      # (QW)
+  - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_AXE}  # PASSIVE: Life Leech
+  - {cap: mobility, score: 2, evidence: RENDINGCOMBO}                  # (QW)
+  - {cap: root, score: 2, evidence: RENDINGCOMBO}                      # (QW)
+  - {cap: heal_reduction, score: 2, evidence: RENDINGSTRIKE}           # bleed cap (QW)
+  - {cap: sustained_dps, score: 4, evidence: RENDINGSTRIKE}            # bleeds (QW)

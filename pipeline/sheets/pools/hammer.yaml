@@ -7,14 +7,14 @@
 # adjudication — or lists the pair under `except:`.
 subcategory: hammer
 capabilities:
-  - {cap: disengage, score: 1, evidence: CHARGESLOWAE}                    # (QW)
-  - {cap: engage, score: 1, evidence: CHARGESLOWAE}                       # W: Slowing Charge dash (QW)
-  - {cap: mobility, score: 1, evidence: CHARGESLOWAE}                     # (QW)
-  - {cap: knockback_displace, score: 1, evidence: GEYSER}                 # W: knock-up (QW)
-  - {cap: purge, score: 1, evidence: IRONBREAKER}                         # Q: shield break only (QW)
-  - {cap: resist_shred, score: 1, evidence: IRONBREAKER}                  # Q: -12% AoE (QW)
-  - {cap: self_sustain, score: 1, evidence: PASSIVE_HEALTHCHANCE_HAMMER}  # PASSIVE: Life Leech
-  - {cap: anti_dive, score: 2, evidence: TAR_RING}                        # the ring punishes walkers (QW)
-  - {cap: slow, score: 2, evidence: TAR_RING}                             # W: 0.8 slow ring, ignores CC resistance (QW)
-  - {cap: zone_control, score: 1, evidence: TAR_RING}                     # brief self-centred denial (QW)
-  - {cap: tankiness, score: 2, evidence: WEAPON_STATS}                    # tank-line weapon, played frontline
+  - {cap: disengage, score: 2, evidence: CHARGESLOWAE}                    # (QW)
+  - {cap: engage, score: 2, evidence: CHARGESLOWAE}                       # W: Slowing Charge dash (QW)
+  - {cap: mobility, score: 2, evidence: CHARGESLOWAE}                     # (QW)
+  - {cap: knockback_displace, score: 2, evidence: GEYSER}                 # W: knock-up (QW)
+  - {cap: purge, score: 2, evidence: IRONBREAKER}                         # Q: shield break only (QW)
+  - {cap: resist_shred, score: 2, evidence: IRONBREAKER}                  # Q: -12% AoE (QW)
+  - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_HAMMER}  # PASSIVE: Life Leech
+  - {cap: anti_dive, score: 4, evidence: TAR_RING}                        # the ring punishes walkers (QW)
+  - {cap: slow, score: 4, evidence: TAR_RING}                             # W: 0.8 slow ring, ignores CC resistance (QW)
+  - {cap: zone_control, score: 2, evidence: TAR_RING}                     # brief self-centred denial (QW)
+  - {cap: tankiness, score: 4, evidence: WEAPON_STATS}                    # tank-line weapon, played frontline

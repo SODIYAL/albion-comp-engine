@@ -20,12 +20,12 @@
     - {cap: knockback_displace, evidence: LAUNCHER}
     - {cap: sustained_dps, evidence: QSTAFF_COMBO}
   capabilities:
-    - {cap: knockback_displace, score: 3, evidence: VAULT_ATTACK}  # E air-throw; W: Rising Blow / Separator / Forceful Swing
-    - {cap: peel,          score: 3, evidence: SEPARATING_SLAM}  # W: 12m CC-resist-ignoring shove off a target (QW)
-    - {cap: engage,        score: 2, evidence: VAULT_ATTACK}     # CC+damage-immune leap in
-    - {cap: mobility,      score: 2, evidence: VAULT_ATTACK}     # E leap; Q: Cartwheel dash
-    - {cap: disengage,     score: 2, evidence: VAULT_ATTACK}     # immune leap out; Q: Cartwheel
-    - {cap: catch,         score: 2, evidence: STUNRUN}          # W: Stun Run 2.11s opener + leap (QW)
-    - {cap: anti_dive,     score: 2, evidence: QS_WHIRLWIND2}    # W: divers get shoved, damage-halved, AA-disabled (QW)
-    - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}     # tank-role bruiser; Q: Cartwheel +20% resists
-    - {cap: burst_aoe,     score: 1, evidence: VAULT_ATTACK}     # 161 on impact — modest
+    - {cap: knockback_displace, score: 6, evidence: VAULT_ATTACK}  # E air-throw; W: Rising Blow / Separator / Forceful Swing
+    - {cap: peel,          score: 6, evidence: SEPARATING_SLAM}  # W: 12m CC-resist-ignoring shove off a target (QW)
+    - {cap: engage,        score: 4, evidence: VAULT_ATTACK}     # CC+damage-immune leap in
+    - {cap: mobility,      score: 4, evidence: VAULT_ATTACK}     # E leap; Q: Cartwheel dash
+    - {cap: disengage,     score: 4, evidence: VAULT_ATTACK}     # immune leap out; Q: Cartwheel
+    - {cap: catch,         score: 4, evidence: STUNRUN}          # W: Stun Run 2.11s opener + leap (QW)
+    - {cap: anti_dive,     score: 4, evidence: QS_WHIRLWIND2}    # W: divers get shoved, damage-halved, AA-disabled (QW)
+    - {cap: tankiness,     score: 4, evidence: WEAPON_STATS}     # tank-role bruiser; Q: Cartwheel +20% resists
+    - {cap: burst_aoe,     score: 2, evidence: VAULT_ATTACK}     # 161 on impact — modest

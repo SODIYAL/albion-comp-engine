@@ -17,7 +17,7 @@
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: melee
   capabilities:
-    - {cap: resist_shred,  score: 2, evidence: TAINTED_STEEL}   # E: -12% AoE pierce + trail stacking magical shred
+    - {cap: resist_shred,  score: 4, evidence: TAINTED_STEEL}   # E: -12% AoE pierce + trail stacking magical shred
                                                                 # W: Harpoon pull (QW)
-    - {cap: damage_debuff, score: 1, evidence: LEGBREAKER}      # W: Cripple -25% ALL damage dealt, 4s (QW)
-    - {cap: burst_aoe,     score: 1, evidence: GROUNDSPEAR}     # W: Impaler 155 in 2.5m; E pierce line (QW)
+    - {cap: damage_debuff, score: 2, evidence: LEGBREAKER}      # W: Cripple -25% ALL damage dealt, 4s (QW)
+    - {cap: burst_aoe,     score: 2, evidence: GROUNDSPEAR}     # W: Impaler 155 in 2.5m; E pierce line (QW)

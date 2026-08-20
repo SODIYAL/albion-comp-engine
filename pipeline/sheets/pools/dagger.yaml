@@ -7,14 +7,14 @@
 # adjudication — or lists the pair under `except:`.
 subcategory: dagger
 capabilities:
-  - {cap: heal_reduction, score: 1, evidence: DEEPCUTS}                     # W: Forbidden Stab — "Negates the target's Healing
-  - {cap: disengage, score: 1, evidence: GROUNDDASH}                        # W: Dash out; Chain Slash iframes (QW)
-  - {cap: sustained_dps, score: 1, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # AA-speed dagger passives
-  - {cap: self_sustain, score: 1, evidence: PASSIVE_HEALTHCHANCE_DAGGER}    # PASSIVE: Life Leech
-  - {cap: engage, score: 1, evidence: QDASH}                                # leap in (QW)
-  - {cap: mobility, score: 2, evidence: QDASH}                              # Q: Deadly Swipe; W: Dash / Chain Slash (QW)
-  - {cap: catch, score: 1, evidence: SKILLSHOT_TELEPORT}                    # (QW)
-  - {cap: peel, score: 1, evidence: SKILLSHOT_TELEPORT}                     # the stun works defensively too (QW)
-  - {cap: stun, score: 1, evidence: SKILLSHOT_TELEPORT}                     # W: Shadow Edge — 1s skillshot stun (QW)
-  - {cap: resist_shred, score: 1, evidence: SUNDERARMOR2}                   # Q: stacking -4% x3 (QW)
-  - {cap: sustained_dps, score: 1, evidence: WEAPON_STATS}                  # stacking damage buffs, single-target melee pattern
+  - {cap: heal_reduction, score: 2, evidence: DEEPCUTS}                     # W: Forbidden Stab — "Negates the target's Healing
+  - {cap: disengage, score: 2, evidence: GROUNDDASH}                        # W: Dash out; Chain Slash iframes (QW)
+  - {cap: sustained_dps, score: 2, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # AA-speed dagger passives
+  - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_DAGGER}    # PASSIVE: Life Leech
+  - {cap: engage, score: 2, evidence: QDASH}                                # leap in (QW)
+  - {cap: mobility, score: 4, evidence: QDASH}                              # Q: Deadly Swipe; W: Dash / Chain Slash (QW)
+  - {cap: catch, score: 2, evidence: SKILLSHOT_TELEPORT}                    # (QW)
+  - {cap: peel, score: 2, evidence: SKILLSHOT_TELEPORT}                     # the stun works defensively too (QW)
+  - {cap: stun, score: 2, evidence: SKILLSHOT_TELEPORT}                     # W: Shadow Edge — 1s skillshot stun (QW)
+  - {cap: resist_shred, score: 2, evidence: SUNDERARMOR2}                   # Q: stacking -4% x3 (QW)
+  - {cap: sustained_dps, score: 2, evidence: WEAPON_STATS}                  # stacking damage buffs, single-target melee pattern

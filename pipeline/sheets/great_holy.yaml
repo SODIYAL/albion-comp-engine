@@ -25,9 +25,9 @@
     - {cap: buff_allies, evidence: HOLYHOT}
     - {cap: peel, evidence: PULSINGHEAL}
   capabilities:
-    - {cap: heal_sustain, score: 3, evidence: HOLYEXPLOSION}   # E: 10-ally channel; W: Beam / Orb pool
-    - {cap: knockback_displace, score: 2, evidence: HOLYEXPLOSION}  # E: 10m AoE, ignores CC resistance
-    - {cap: peel,         score: 2, evidence: HOLYEXPLOSION}   # the shove clears divers off the party
-    - {cap: buff_allies,  score: 2, evidence: HOLYEXPLOSION}   # E: +16% ally resistances; W: Holy Blessing
+    - {cap: heal_sustain, score: 6, evidence: HOLYEXPLOSION}   # E: 10-ally channel; W: Beam / Orb pool
+    - {cap: knockback_displace, score: 4, evidence: HOLYEXPLOSION}  # E: 10m AoE, ignores CC resistance
+    - {cap: peel,         score: 4, evidence: HOLYEXPLOSION}   # the shove clears divers off the party
+    - {cap: buff_allies,  score: 4, evidence: HOLYEXPLOSION}   # E: +16% ally resistances; W: Holy Blessing
     # NO cleanse (settled holy finding). NO mobility — stationary anchor,
     # the deliberate contrast with Hallowfall.

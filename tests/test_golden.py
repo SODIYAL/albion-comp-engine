@@ -191,10 +191,11 @@ def run():
     aoe_party = [PERMAFROST, WITCHWORK, "2H_FIRE_RINGPAIR_AVALON"]
     raw = e_clap.supply(aoe_party).get("burst_aoe", 0)
     eff = e_clap.effective_supply(aoe_party).get("burst_aoe", 0)
-    check("T11c effective supply applies the multiplier (clap AoE > raw)",
-          raw > 0 and abs(eff - raw * e_clap.mech_mults["burst_aoe"]) < 1e-9
-          and eff > raw,
-          f"raw={raw:.1f} eff={eff:.2f}")
+    check("T11c effective supply applies the multiplier (clap AoE > raw units)",
+          raw > 0 and abs(eff - raw / e_clap.score_unit
+                          * e_clap.mech_mults["burst_aoe"]) < 1e-9
+          and eff > raw / e_clap.score_unit,
+          f"raw={raw:.1f}pts eff={eff:.2f}u unit={e_clap.score_unit:g}")
 
     # T12 — expert correction 2026-08-13: knockback is NOT clump creation.
     # Great Hammer's Tackle ("knocking back all enemies you pass through")
@@ -203,9 +204,9 @@ def run():
     # Camlann's Vendetta (8m vacuum), Witchwork's Black Hole (radius pull).
     gh = E.caps_of(GREAT_HAMMER)
     check("T12 Great Hammer supplies no clump_create; true pulls still do",
-          "clump_create" not in gh and gh.get("knockback_displace", 0) >= 1
-          and E.caps_of("2H_MACE_MORGANA").get("clump_create", 0) >= 3
-          and E.caps_of(WITCHWORK).get("clump_create", 0) >= 2,
+          "clump_create" not in gh and gh.get("knockback_displace", 0) >= 2
+          and E.caps_of("2H_MACE_MORGANA").get("clump_create", 0) >= 6
+          and E.caps_of(WITCHWORK).get("clump_create", 0) >= 4,
           f"GH caps={sorted(gh)}; camlann={E.caps_of('2H_MACE_MORGANA').get('clump_create', 0)}")
 
     # T13 — expert magnitude pass 2026-08-13: knockback_displace scores
@@ -216,8 +217,8 @@ def run():
     # passive) = absent.
     kd = lambda w: E.caps_of(w).get("knockback_displace", 0)
     check("T13 displacement magnitude ladder holds",
-          kd("2H_QUARTERSTAFF") == 3 and kd("2H_HOLYSTAFF") == 2
-          and kd(HALLOWFALL) == 1
+          kd("2H_QUARTERSTAFF") == 6 and kd("2H_HOLYSTAFF") == 4
+          and kd(HALLOWFALL) == 2
           and all("knockback_displace" not in E.caps_of(w)
                   for w in ("MAIN_HOLYSTAFF", "MAIN_HOLYSTAFF_MORGANA",
                             "2H_HOLYSTAFF_UNDEAD")),
@@ -341,7 +342,7 @@ def run():
     bed = E.caps_of("MAIN_ROCKMACE_KEEPER").get("anti_dive", 0)
     iron = E.caps_of("2H_IRONCLADEDSTAFF").get("anti_dive", 0)
     check("T19 Bedrock wall > Iron-clad contact-spin for anti_dive",
-          bed == 3 and iron == 1,
+          bed == 6 and iron == 2,
           f"bedrock={bed} ironclad={iron} (mastersheet override)")
 
     print("=" * 74)

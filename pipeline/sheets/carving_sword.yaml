@@ -26,9 +26,9 @@
     - {cap: catch, evidence: HAMSTRINGSWORD}
     - {cap: mobility, evidence: HEROICSTRIKE2}
   capabilities:
-    - {cap: resist_shred,  score: 2, evidence: CLAYMORESLASH}    # E: up to -20% AoE on the dash path — the signature
-    - {cap: engage,        score: 2, evidence: CLAYMORESLASH}    # shred-by-initiation
-    - {cap: mobility,      score: 2, evidence: CLAYMORESLASH}    # E dash; Q: Heroic Strike; W: Blade Cyclone / Heroic Leap
-    - {cap: catch,         score: 2, evidence: CLAYMORESLASH}    # dash + W: Hamstring slow-into-leap
-    - {cap: disengage,     score: 2, evidence: CLAYMORESLASH}    # same dash out; W: Iron Will sprint
-    - {cap: burst_aoe,     score: 1, evidence: CLAYMORESLASH}    # 135 on the path; modest
+    - {cap: resist_shred,  score: 4, evidence: CLAYMORESLASH}    # E: up to -20% AoE on the dash path — the signature
+    - {cap: engage,        score: 4, evidence: CLAYMORESLASH}    # shred-by-initiation
+    - {cap: mobility,      score: 4, evidence: CLAYMORESLASH}    # E dash; Q: Heroic Strike; W: Blade Cyclone / Heroic Leap
+    - {cap: catch,         score: 4, evidence: CLAYMORESLASH}    # dash + W: Hamstring slow-into-leap
+    - {cap: disengage,     score: 4, evidence: CLAYMORESLASH}    # same dash out; W: Iron Will sprint
+    - {cap: burst_aoe,     score: 2, evidence: CLAYMORESLASH}    # 135 on the path; modest

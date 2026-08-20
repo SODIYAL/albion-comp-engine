@@ -17,6 +17,6 @@
   except:
     - {cap: buff_allies, evidence: SHAPE_Q_DAMAGE_AND_SHIELD}
   capabilities:
-    - {cap: buff_allies,   score: 2, evidence: SHAPESHIFT_ENT}   # E: Growth +8% Max/Current HP, 11m (via override);
+    - {cap: buff_allies,   score: 4, evidence: SHAPESHIFT_ENT}   # E: Growth +8% Max/Current HP, 11m (via override);
                                                                  # Q: Adapting Matter ally shields
-    - {cap: heal_sustain,  score: 1, evidence: SHAPESHIFT_ENT}   # the Current-Health grant; form heals beyond it
+    - {cap: heal_sustain,  score: 2, evidence: SHAPESHIFT_ENT}   # the Current-Health grant; form heals beyond it

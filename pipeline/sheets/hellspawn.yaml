@@ -28,5 +28,5 @@
   except:
     - {cap: self_sustain, evidence: PASSIVE_SHAPESHIFT_ATTACK_BUFF}
   capabilities:
-    - {cap: burst_aoe,     score: 2, evidence: SHAPESHIFT_IMP}   # E: imp-form fire AoE is the payload
-    - {cap: self_sustain,  score: 2, evidence: SHAPESHIFT_IMP}   # cheat-death heal + Altered Beast health stacks
+    - {cap: burst_aoe,     score: 4, evidence: SHAPESHIFT_IMP}   # E: imp-form fire AoE is the payload
+    - {cap: self_sustain,  score: 4, evidence: SHAPESHIFT_IMP}   # cheat-death heal + Altered Beast health stacks

@@ -26,10 +26,10 @@
     - {cap: mobility, evidence: CHARGESLOWAE}
     - {cap: knockback_displace, evidence: GEYSER}
   capabilities:
-    - {cap: engage,        score: 3, evidence: RAM_CHARGE}      # E: CC+damage-immune leap into the stun
-    - {cap: stun,          score: 2, evidence: RAM_CHARGE}      # 2.5s in 5.5m; Stunning Strike passive
-    - {cap: knockback_displace, score: 1, evidence: RAM_CHARGE} # scaling air-THROW — no travel; hold value is peel/stun (magnitude pass 2026-08-13)
-    - {cap: peel,          score: 2, evidence: RAM_CHARGE}      # pound the divers; W: Geyser / Knockout (QW)
-    - {cap: catch,         score: 2, evidence: RAM_CHARGE}      # leap + 2.5s stun = caught
-    - {cap: mobility,      score: 2, evidence: RAM_CHARGE}      # the E moves you; W: Slowing Charge
-    - {cap: disengage,     score: 2, evidence: RAM_CHARGE}      # immune leap OUT
+    - {cap: engage,        score: 6, evidence: RAM_CHARGE}      # E: CC+damage-immune leap into the stun
+    - {cap: stun,          score: 4, evidence: RAM_CHARGE}      # 2.5s in 5.5m; Stunning Strike passive
+    - {cap: knockback_displace, score: 2, evidence: RAM_CHARGE} # scaling air-THROW — no travel; hold value is peel/stun (magnitude pass 2026-08-13)
+    - {cap: peel,          score: 4, evidence: RAM_CHARGE}      # pound the divers; W: Geyser / Knockout (QW)
+    - {cap: catch,         score: 4, evidence: RAM_CHARGE}      # leap + 2.5s stun = caught
+    - {cap: mobility,      score: 4, evidence: RAM_CHARGE}      # the E moves you; W: Slowing Charge
+    - {cap: disengage,     score: 4, evidence: RAM_CHARGE}      # immune leap OUT

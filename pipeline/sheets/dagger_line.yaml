@@ -9,8 +9,8 @@
     - {cap: mobility, evidence: QDASH}
     - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
-    - {cap: burst_aoe,     score: 2, evidence: CRYSTAL_DAGGER_BLADE_RING}  # E: 6-dagger ring, pierce + DoT ring
-    - {cap: mobility,      score: 2, evidence: CRYSTAL_DAGGER_BLADE_RING}  # MS on cast + dagger pool dashes
+    - {cap: burst_aoe,     score: 4, evidence: CRYSTAL_DAGGER_BLADE_RING}  # E: 6-dagger ring, pierce + DoT ring
+    - {cap: mobility,      score: 4, evidence: CRYSTAL_DAGGER_BLADE_RING}  # MS on cast + dagger pool dashes
 
 - weapon: 2H_DAGGER_KATAR_AVALON     # Bridled Fury — hit-and-fade burster
   curated_as_of: 2026-08-12
@@ -21,9 +21,9 @@
     - {cap: mobility, evidence: QDASH}
     - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
-    - {cap: burst_st,      score: 2, evidence: BACK_SLASH}        # E: charge-scaled cone up to 238
-    - {cap: disengage,     score: 2, evidence: BACK_SLASH}        # the E LEAPS YOU BACKWARDS 8m as it hits
-    - {cap: mobility,      score: 2, evidence: BACK_SLASH}        # back-leap + dagger pool dashes
+    - {cap: burst_st,      score: 4, evidence: BACK_SLASH}        # E: charge-scaled cone up to 238
+    - {cap: disengage,     score: 4, evidence: BACK_SLASH}        # the E LEAPS YOU BACKWARDS 8m as it hits
+    - {cap: mobility,      score: 4, evidence: BACK_SLASH}        # back-leap + dagger pool dashes
 
 - weapon: 2H_IRONGAUNTLETS_HELL      # Black Hands — combo striker
   curated_as_of: 2026-08-12
@@ -46,18 +46,18 @@
   # The 2nd-hit knockback has NO structured candidate and stays unscored
   # (would need an effect_overrides add: entry — expert's call).
   capabilities:
-    - {cap: burst_st,      score: 2, evidence: PUNCHCOMBO}        # E: Devastating Strike combo
-    - {cap: stun,          score: 1, evidence: PUNCHCOMBO}        # structured stun, enemy-directed
-    - {cap: purge,         score: 1, evidence: PUNCHCOMBO}        # structured buff removal
-    - {cap: mobility,      score: 2, evidence: QDASH}             # dagger pool dashes (QW)
-    - {cap: catch,         score: 1, evidence: SKILLSHOT_TELEPORT}  # (QW)
-    - {cap: peel,          score: 1, evidence: SKILLSHOT_TELEPORT}  # (QW)
-    - {cap: engage,        score: 1, evidence: QDASH}             # (QW)
-    - {cap: disengage,     score: 1, evidence: GROUNDDASH}        # (QW)
-    - {cap: heal_reduction, score: 1, evidence: DEEPCUTS}         # (QW)
-    - {cap: resist_shred,  score: 1, evidence: SUNDERARMOR2}      # (QW)
-    - {cap: sustained_dps, score: 1, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_DAGGER}
+    - {cap: burst_st,      score: 4, evidence: PUNCHCOMBO}        # E: Devastating Strike combo
+    - {cap: stun,          score: 2, evidence: PUNCHCOMBO}        # structured stun, enemy-directed
+    - {cap: purge,         score: 2, evidence: PUNCHCOMBO}        # structured buff removal
+    - {cap: mobility,      score: 4, evidence: QDASH}             # dagger pool dashes (QW)
+    - {cap: catch,         score: 2, evidence: SKILLSHOT_TELEPORT}  # (QW)
+    - {cap: peel,          score: 2, evidence: SKILLSHOT_TELEPORT}  # (QW)
+    - {cap: engage,        score: 2, evidence: QDASH}             # (QW)
+    - {cap: disengage,     score: 2, evidence: GROUNDDASH}        # (QW)
+    - {cap: heal_reduction, score: 2, evidence: DEEPCUTS}         # (QW)
+    - {cap: resist_shred,  score: 2, evidence: SUNDERARMOR2}      # (QW)
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}
+    - {cap: self_sustain,  score: 2, evidence: PASSIVE_HEALTHCHANCE_DAGGER}
 
 - weapon: MAIN_DAGGER                # Dagger (1H) — lifesteal AA skirmisher
   curated_as_of: 2026-08-12
@@ -69,9 +69,9 @@
     - {cap: mobility, evidence: QDASH}
     - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
-    - {cap: sustained_dps, score: 2, evidence: BLOODTHIRSTYBLADE}  # E: +50 bonus damage per AA steroid
-    - {cap: self_sustain,  score: 2, evidence: BLOODTHIRSTYBLADE}  # steals health via bonus damage (self-only)
-    - {cap: mobility,      score: 2, evidence: BLOODTHIRSTYBLADE}  # +30% MS while active + pool dashes
+    - {cap: sustained_dps, score: 4, evidence: BLOODTHIRSTYBLADE}  # E: +50 bonus damage per AA steroid
+    - {cap: self_sustain,  score: 4, evidence: BLOODTHIRSTYBLADE}  # steals health via bonus damage (self-only)
+    - {cap: mobility,      score: 4, evidence: BLOODTHIRSTYBLADE}  # +30% MS while active + pool dashes
 
 - weapon: MAIN_DAGGER_HELL           # Demonfang — blood-cone caster dagger
   curated_as_of: 2026-08-12
@@ -80,5 +80,5 @@
   except:
     - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
-    - {cap: burst_aoe,     score: 2, evidence: BLOOD_BLADE}       # E: 130 cone, recastable x3 (self max-HP cost)
-    - {cap: burst_st,      score: 1, evidence: BLOOD_BLADE}       # three cones into one target
+    - {cap: burst_aoe,     score: 4, evidence: BLOOD_BLADE}       # E: 130 cone, recastable x3 (self max-HP cost)
+    - {cap: burst_st,      score: 2, evidence: BLOOD_BLADE}       # three cones into one target

@@ -11,10 +11,10 @@
   except:
     - {cap: mobility, evidence: SHAPE_W_TETHERBEAM}
   capabilities:
-    - {cap: burst_aoe,     score: 2, evidence: SHAPESHIFT_AVALONIAN_EAGLE}  # Dawnbird: "Offensive: high" aerial bombs
-    - {cap: mobility,      score: 2, evidence: SHAPESHIFT_AVALONIAN_EAGLE}  # airborne, root-immune, +60% MS
-    - {cap: disengage,     score: 2, evidence: SHAPESHIFT_AVALONIAN_EAGLE}  # fly out over what melee can't cross
-    - {cap: engage,        score: 1, evidence: SHAPESHIFT_AVALONIAN_EAGLE}
+    - {cap: burst_aoe,     score: 4, evidence: SHAPESHIFT_AVALONIAN_EAGLE}  # Dawnbird: "Offensive: high" aerial bombs
+    - {cap: mobility,      score: 4, evidence: SHAPESHIFT_AVALONIAN_EAGLE}  # airborne, root-immune, +60% MS
+    - {cap: disengage,     score: 4, evidence: SHAPESHIFT_AVALONIAN_EAGLE}  # fly out over what melee can't cross
+    - {cap: engage,        score: 2, evidence: SHAPESHIFT_AVALONIAN_EAGLE}
 
 - weapon: 2H_SHAPESHIFTER_CRYSTAL    # Stillgaze Staff — cobra skirmisher
   curated_as_of: 2026-08-12
@@ -23,9 +23,9 @@
   except:
     - {cap: mobility, evidence: SHAPE_W_TETHERBEAM}
   capabilities:
-    - {cap: burst_st,      score: 2, evidence: SHAPESHIFT_CRYSTAL_COBRA}  # Cobra strikes
-    - {cap: disengage,     score: 1, evidence: SHAPESHIFT_CRYSTAL_COBRA}  # Slippery: self-cleanse + MS on CC
-    - {cap: mobility,      score: 1, evidence: SHAPESHIFT_CRYSTAL_COBRA}
+    - {cap: burst_st,      score: 4, evidence: SHAPESHIFT_CRYSTAL_COBRA}  # Cobra strikes
+    - {cap: disengage,     score: 2, evidence: SHAPESHIFT_CRYSTAL_COBRA}  # Slippery: self-cleanse + MS on CC
+    - {cap: mobility,      score: 2, evidence: SHAPESHIFT_CRYSTAL_COBRA}
     # Slippery is a SELF-cleanse — never scored as the ally-cleanse capability
 
 - weapon: 2H_SHAPESHIFTER_KEEPER     # Earthrune Staff — the golem tank
@@ -36,10 +36,10 @@
     - {cap: self_sustain, evidence: PASSIVE_SHAPESHIFT_ATTACK_BUFF}
     - {cap: mobility, evidence: SHAPE_W_TETHERBEAM}
   capabilities:
-    - {cap: tankiness,     score: 3, evidence: SHAPESHIFT_ROCK_ELEMENTAL}  # Golem: "Defensive: high", forced-movement
+    - {cap: tankiness,     score: 6, evidence: SHAPESHIFT_ROCK_ELEMENTAL}  # Golem: "Defensive: high", forced-movement
                                                                            # immune, charge-scaled Max Health
-    - {cap: self_sustain,  score: 2, evidence: SHAPESHIFT_ROCK_ELEMENTAL}  # max/current Health grant on transform
-    - {cap: engage,        score: 1, evidence: SHAPESHIFT_ROCK_ELEMENTAL}  # the golem walks in and cannot be moved
+    - {cap: self_sustain,  score: 4, evidence: SHAPESHIFT_ROCK_ELEMENTAL}  # max/current Health grant on transform
+    - {cap: engage,        score: 2, evidence: SHAPESHIFT_ROCK_ELEMENTAL}  # the golem walks in and cannot be moved
 
 - weapon: 2H_SHAPESHIFTER_MORGANA    # Bloodmoon Staff — the werewolf
   curated_as_of: 2026-08-12
@@ -50,10 +50,10 @@
     - {cap: catch, evidence: SHAPE_W_AREA_PULL}
     - {cap: mobility, evidence: SHAPE_W_TETHERBEAM}
   capabilities:
-    - {cap: burst_st,      score: 2, evidence: SHAPESHIFT_WEREWOLF}  # wolf melee combos
-    - {cap: catch,         score: 2, evidence: SHAPESHIFT_WEREWOLF}  # wolf lunges run targets down
-    - {cap: mobility,      score: 2, evidence: SHAPESHIFT_WEREWOLF}
-    - {cap: self_sustain,  score: 1, evidence: SHAPESHIFT_WEREWOLF}  # Bloody Roar lifesteal below 40%
+    - {cap: burst_st,      score: 4, evidence: SHAPESHIFT_WEREWOLF}  # wolf melee combos
+    - {cap: catch,         score: 4, evidence: SHAPESHIFT_WEREWOLF}  # wolf lunges run targets down
+    - {cap: mobility,      score: 4, evidence: SHAPESHIFT_WEREWOLF}
+    - {cap: self_sustain,  score: 2, evidence: SHAPESHIFT_WEREWOLF}  # Bloody Roar lifesteal below 40%
 
 - weapon: 2H_SHAPESHIFTER_SET1       # Prowling Staff — the stealth panther
   curated_as_of: 2026-08-12
@@ -62,9 +62,9 @@
   except:
     - {cap: zone_control, evidence: SHAPE_W_DAMAGE_AOE}
   capabilities:
-    - {cap: burst_st,      score: 2, evidence: SHAPESHIFT_PANTHER}  # pounce out of stealth
-    - {cap: engage,        score: 2, evidence: SHAPESHIFT_PANTHER}  # On the Prowl invisibility opener (via override)
-    - {cap: disengage,     score: 2, evidence: SHAPESHIFT_PANTHER}  # restealth and leave (via override)
+    - {cap: burst_st,      score: 4, evidence: SHAPESHIFT_PANTHER}  # pounce out of stealth
+    - {cap: engage,        score: 4, evidence: SHAPESHIFT_PANTHER}  # On the Prowl invisibility opener (via override)
+    - {cap: disengage,     score: 4, evidence: SHAPESHIFT_PANTHER}  # restealth and leave (via override)
 
 - weapon: 2H_SHAPESHIFTER_SET3       # Primal Staff — the enrage bear
   curated_as_of: 2026-08-12
@@ -74,7 +74,7 @@
     - {cap: self_sustain, evidence: PASSIVE_SHAPESHIFT_ATTACK_BUFF}
     - {cap: mobility, evidence: SHAPE_W_TETHERBEAM}
   capabilities:
-    - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}   # Bear: "Defensive: high" bruiser frame
-    - {cap: burst_aoe,     score: 1, evidence: SHAPESHIFT_BEAR}  # bear swipes
-    - {cap: sustained_dps, score: 1, evidence: SHAPESHIFT_BEAR}  # Enrage ramps below 40% Health
-    - {cap: self_sustain,  score: 1, evidence: SHAPESHIFT_BEAR}
+    - {cap: tankiness,     score: 4, evidence: WEAPON_STATS}   # Bear: "Defensive: high" bruiser frame
+    - {cap: burst_aoe,     score: 2, evidence: SHAPESHIFT_BEAR}  # bear swipes
+    - {cap: sustained_dps, score: 2, evidence: SHAPESHIFT_BEAR}  # Enrage ramps below 40% Health
+    - {cap: self_sustain,  score: 2, evidence: SHAPESHIFT_BEAR}

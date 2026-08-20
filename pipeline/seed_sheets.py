@@ -64,7 +64,7 @@ def propose(line):
             if not cands:
                 continue
             # an E defines a weapon; everything else is a build choice
-            score = 2 if slot == "e" else 1
+            score = 4 if slot == "e" else 2   # 1-7 scale
             for cap, reasons in cands.items():
                 if cap in HUMAN_ONLY:
                     continue

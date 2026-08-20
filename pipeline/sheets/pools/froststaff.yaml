@@ -7,11 +7,11 @@
 # adjudication — or lists the pair under `except:`.
 subcategory: froststaff
 capabilities:
-  - {cap: slow, score: 2, evidence: FROSTBOMB_CASTSLOW}          # (QW)
-  - {cap: zone_control, score: 2, evidence: FROSTBOMB_CASTSLOW}  # frost QW ground slows (QW)
-  - {cap: disengage, score: 1, evidence: FROSTNOVA}              # (QW)
-  - {cap: stun, score: 1, evidence: FROSTNOVA}                   # (QW)
-  - {cap: resist_shred, score: 1, evidence: FROST_LANCE}         # (QW)
-  - {cap: buff_allies, score: 1, evidence: ICE_SCULPTURE}        # (QW)
-  - {cap: root, score: 1, evidence: PASSIVE_FROST}               # PASSIVE: every 4th cast, next AA roots
-  - {cap: sustained_dps, score: 1, evidence: WEAPON_STATS}       # kite-and-poke pattern
+  - {cap: slow, score: 4, evidence: FROSTBOMB_CASTSLOW}          # (QW)
+  - {cap: zone_control, score: 4, evidence: FROSTBOMB_CASTSLOW}  # frost QW ground slows (QW)
+  - {cap: disengage, score: 2, evidence: FROSTNOVA}              # (QW)
+  - {cap: stun, score: 2, evidence: FROSTNOVA}                   # (QW)
+  - {cap: resist_shred, score: 2, evidence: FROST_LANCE}         # (QW)
+  - {cap: buff_allies, score: 2, evidence: ICE_SCULPTURE}        # (QW)
+  - {cap: root, score: 2, evidence: PASSIVE_FROST}               # PASSIVE: every 4th cast, next AA roots
+  - {cap: sustained_dps, score: 2, evidence: WEAPON_STATS}       # kite-and-poke pattern

@@ -12,8 +12,8 @@
     - {cap: heal_burst, evidence: HOLYFLASH}
     - {cap: buff_allies, evidence: HOLYHOT}
   capabilities:
-    - {cap: buff_allies,  score: 2, evidence: HOLYSHIELD}    # E: 456 ally absorb shield (via override); W: Blessing
-    - {cap: heal_burst,   score: 2, evidence: HOLYSHIELD}    # E: Divinity's Grace detonation pulse; Q: Holy Flash
+    - {cap: buff_allies,  score: 4, evidence: HOLYSHIELD}    # E: 456 ally absorb shield (via override); W: Blessing
+    - {cap: heal_burst,   score: 4, evidence: HOLYSHIELD}    # E: Divinity's Grace detonation pulse; Q: Holy Flash
     # NO cleanse (settled holy finding), NO mobility.
 
 - weapon: 2H_HOLYSTAFF_CRYSTAL       # Exalted Staff — the anti-zone healer
@@ -24,9 +24,9 @@
     - {cap: heal_burst, evidence: HOLYFLASH}
     - {cap: buff_allies, evidence: HOLYHOT}
   capabilities:
-    - {cap: anti_zone,    score: 2, evidence: HOLY_DISPEL}   # E: removes enemy-placed ground areas — sole supplier
-    - {cap: heal_burst,   score: 2, evidence: HOLY_DISPEL}   # E: 138 instant to 20 allies; Q: Holy Flash
-    - {cap: buff_allies,  score: 1, evidence: HOLY_DISPEL}   # +20% max/current Health on healed allies, 3s
+    - {cap: anti_zone,    score: 4, evidence: HOLY_DISPEL}   # E: removes enemy-placed ground areas — sole supplier
+    - {cap: heal_burst,   score: 4, evidence: HOLY_DISPEL}   # E: 138 instant to 20 allies; Q: Holy Flash
+    - {cap: buff_allies,  score: 2, evidence: HOLY_DISPEL}   # +20% max/current Health on healed allies, 3s
     # NO cleanse (settled holy finding), NO mobility.
 
 - weapon: 2H_HOLYSTAFF_HELL          # Fallen Staff — the immunity-cleanse healer
@@ -37,7 +37,7 @@
     - {cap: heal_burst, evidence: HOLYFLASH}
     - {cap: peel, evidence: PULSINGHEAL}
   capabilities:
-    - {cap: heal_burst,   score: 3, evidence: HOLY_ULTIMATE} # E: Salvation — 270 to 20 allies in one pulse
-    - {cap: cleanse,      score: 2, evidence: HOLY_ULTIMATE} # inherent E cleanse incl. DoTs (settled finding)
-    - {cap: peel,         score: 2, evidence: HOLY_ULTIMATE} # 2s damage IMMUNITY for everyone in the circle
+    - {cap: heal_burst,   score: 6, evidence: HOLY_ULTIMATE} # E: Salvation — 270 to 20 allies in one pulse
+    - {cap: cleanse,      score: 4, evidence: HOLY_ULTIMATE} # inherent E cleanse incl. DoTs (settled finding)
+    - {cap: peel,         score: 4, evidence: HOLY_ULTIMATE} # 2s damage IMMUNITY for everyone in the circle
     # NO mobility — the 2s charge-up makes it the anchor healer's anchor.

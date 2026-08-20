@@ -20,9 +20,9 @@
     - {cap: buff_allies, evidence: HOLYHOT}
     - {cap: peel, evidence: PULSINGHEAL}
   capabilities:
-    - {cap: cleanse,      score: 2, evidence: HOLYTOUCH}    # E: strips all CC + debuffs off the ally, inherent
-    - {cap: heal_sustain, score: 2, evidence: HOLYTOUCH}    # E: 55 every 0.5 channel; W: Holy Beam (QW)
-    - {cap: peel,         score: 2, evidence: HOLYTOUCH}    # E: group CC immunity while channeling; W: Sacred Pulse
-    - {cap: buff_allies,  score: 2, evidence: HOLYTOUCH}    # E: +15% damage to the target; W: Holy Blessing
+    - {cap: cleanse,      score: 4, evidence: HOLYTOUCH}    # E: strips all CC + debuffs off the ally, inherent
+    - {cap: heal_sustain, score: 4, evidence: HOLYTOUCH}    # E: 55 every 0.5 channel; W: Holy Beam (QW)
+    - {cap: peel,         score: 4, evidence: HOLYTOUCH}    # E: group CC immunity while channeling; W: Sacred Pulse
+    - {cap: buff_allies,  score: 4, evidence: HOLYTOUCH}    # E: +15% damage to the target; W: Holy Blessing
     # knockback_displace REMOVED 2026-08-13 (expert magnitude pass): Sacred
     # Pulse = healer self-peel, already scored as peel — line-wide ruling. (QW)

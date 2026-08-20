@@ -305,11 +305,11 @@ def derive_ranged_presence(weapons, spell_index, overrides):
                     rec["granted"] = False
                 decisions.append(rec)
                 if rec["granted"]:
-                    bundle["ranged_presence"] = 1
+                    bundle["ranged_presence"] = 2   # 1-7 scale: 2 = one unit
                     granted = True
                     tagged += 1
         if granted:
-            w["capabilities"]["ranged_presence"] = 1
+            w["capabilities"]["ranged_presence"] = 2
             w.setdefault("evidence", {})["ranged_presence"] = sorted(
                 {d["spell"] for d in decisions if d["granted"]})
         if decisions:

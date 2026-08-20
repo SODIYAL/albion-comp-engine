@@ -26,13 +26,13 @@
   except:
     - {cap: stun, evidence: FROSTNOVA}
   capabilities:
-    - {cap: burst_aoe,     score: 3, evidence: FROST_ULTIMATE}      # E: Ice Crystal — AoE stun, then 173 AoE explosion
-    - {cap: stun,          score: 2, evidence: FROST_ULTIMATE}      # E: 1s AoE stun, large radius (W: Frost Nova stuns too)
-    - {cap: peel,          score: 1, evidence: FROST_ULTIMATE}      # E on divers is real but OPPORTUNISTIC — it competes
+    - {cap: burst_aoe,     score: 6, evidence: FROST_ULTIMATE}      # E: Ice Crystal — AoE stun, then 173 AoE explosion
+    - {cap: stun,          score: 4, evidence: FROST_ULTIMATE}      # E: 1s AoE stun, large radius (W: Frost Nova stuns too)
+    - {cap: peel,          score: 2, evidence: FROST_ULTIMATE}      # E on divers is real but OPPORTUNISTIC — it competes
                                                                     # with the offensive use; dedicated peel tools (Guard
                                                                     # Rune, Divine Jump) sit at 2-3 on this ladder
-    - {cap: catch,         score: 2, evidence: FROST_ULTIMATE}      # ranged AoE lockdown; Q: Frostbite stacks to a stun
-    - {cap: zone_control,  score: 3, evidence: FROSTBOMB_CASTSLOW}  # W: Frost Bomb + Q: Frozen Surge + W: Obelisk + E area (QW)
+    - {cap: catch,         score: 4, evidence: FROST_ULTIMATE}      # ranged AoE lockdown; Q: Frostbite stacks to a stun
+    - {cap: zone_control,  score: 6, evidence: FROSTBOMB_CASTSLOW}  # W: Frost Bomb + Q: Frozen Surge + W: Obelisk + E area (QW)
     # mobility DROPPED (illustrative had 1): the only movement in the kit is
     # Frost Nova's teleport, which the effect map classes as engage/disengage
     # repositioning, not sustained mobility — disengage 1 above covers it.

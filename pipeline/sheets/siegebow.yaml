@@ -18,5 +18,5 @@
   except:
     - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
-    - {cap: sustained_dps, score: 2, evidence: CROSSBOW_CONE_ULTIMATE}  # E: repeating volleys + %HP true damage
-    - {cap: burst_aoe,     score: 2, evidence: BOLTSHOT}          # Q: 130 in 3m; W: Explosive Salvo (crossbow pool)
+    - {cap: sustained_dps, score: 4, evidence: CROSSBOW_CONE_ULTIMATE}  # E: repeating volleys + %HP true damage
+    - {cap: burst_aoe,     score: 4, evidence: BOLTSHOT}          # Q: 130 in 3m; W: Explosive Salvo (crossbow pool)

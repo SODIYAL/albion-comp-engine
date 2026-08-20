@@ -34,7 +34,8 @@ predicates:
   # bundle, from the curated burst_aoe claim + the spell's own delivery and
   # cast range, with cited overrides (build_dataset.derive_ranged_presence;
   # audit trail in out/ranged_presence_report.json).
-  ranged_aoe_core: {burst_aoe: 2, ranged_presence: 1}
+  # thresholds in 1-7 sheet points (scale migration 2026-08-20: old 2 -> 4)
+  ranged_aoe_core: {burst_aoe: 4, ranged_presence: 2}
 
 # ---------------------------------------------------------------------------
 # Role-count bands by GENERATED party size. Rows sit on the breakpoints the

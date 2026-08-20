@@ -43,6 +43,11 @@ class Engine:
             self.data = json.load(f)
         self.weapons = self.data["weapons"]
         self.scoring = self.data["scoring"]
+        # 1-7 scale (2026-08-20): score_unit converts sheet points to supply
+        # units (2 points = 1 unit) — templates/floors/synergies stay in the
+        # units they were calibrated in. Older datasets (0-3 sheets) carry no
+        # score_unit and divide by 1.
+        self.score_unit = float(self.scoring.get("score_unit", 1))
         w = self.scoring["weights"]
         self.alpha, self.beta = w["alpha"], w["beta"]
         self.delta, self.gamma = w["delta"], w["gamma"]
@@ -420,9 +425,11 @@ class Engine:
 
     def _eff(self, caps, delivery=None):
         """Apply mechanics multipliers (AoE escalation / Resilience) and the
-        per-spell geometric transform to a bundle."""
+        per-spell geometric transform to a bundle; sheet points convert to
+        supply units through score_unit (1-7 scale, 2 points = 1 unit)."""
         out = {}
         for c, v in caps.items():
+            v /= self.score_unit
             v *= self.mech_mults.get(c, 1.0)
             if delivery is not None and c in self._geo_caps:
                 v *= self._geo_mult(c, delivery.get(c))

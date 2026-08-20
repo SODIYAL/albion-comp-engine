@@ -17,7 +17,7 @@
     - {cap: mobility, evidence: SPEEDSHOT2}
     - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
-    - {cap: sustained_dps, score: 3, evidence: SPEEDARCHER_KITE}  # E: AA steroid, anti-proximity kite design
-    - {cap: mobility,      score: 2, evidence: SPEEDARCHER_KITE}  # E recast dash; W: Speed Shot (QW)
-    - {cap: burst_st,      score: 1, evidence: SPEEDARCHER_KITE}  # 280% arrows front-load the window
-    - {cap: disengage,     score: 1, evidence: SPEEDARCHER_KITE}  # the dash resets kite distance; W: Frost Shot
+    - {cap: sustained_dps, score: 6, evidence: SPEEDARCHER_KITE}  # E: AA steroid, anti-proximity kite design
+    - {cap: mobility,      score: 4, evidence: SPEEDARCHER_KITE}  # E recast dash; W: Speed Shot (QW)
+    - {cap: burst_st,      score: 2, evidence: SPEEDARCHER_KITE}  # 280% arrows front-load the window
+    - {cap: disengage,     score: 2, evidence: SPEEDARCHER_KITE}  # the dash resets kite distance; W: Frost Shot

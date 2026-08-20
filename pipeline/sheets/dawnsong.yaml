@@ -22,6 +22,6 @@
   except:
     - {cap: zone_control, evidence: FIREWALL}
   capabilities:
-    - {cap: burst_aoe,      score: 3, evidence: FIREPHOENIX}     # E: 200 line AoE; W: Raging Flare 205 in 5m
-    - {cap: heal_reduction, score: 2, evidence: FIREPHOENIX}     # E: -40% Healing Received inside the fire
-    - {cap: zone_control,   score: 2, evidence: FIREPHOENIX}     # 6.5s ground fire; W: Wall of Flames, Q: Burning Field
+    - {cap: burst_aoe,      score: 6, evidence: FIREPHOENIX}     # E: 200 line AoE; W: Raging Flare 205 in 5m
+    - {cap: heal_reduction, score: 4, evidence: FIREPHOENIX}     # E: -40% Healing Received inside the fire
+    - {cap: zone_control,   score: 4, evidence: FIREPHOENIX}     # 6.5s ground fire; W: Wall of Flames, Q: Burning Field

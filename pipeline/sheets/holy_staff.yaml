@@ -19,8 +19,8 @@
   except:
     - {cap: heal_burst, evidence: HOLYFLASH}
   capabilities:
-    - {cap: heal_burst,   score: 2, evidence: HOLYDESPERATEPRAYER2}  # E: 220 below 40% — the save button; Q: Holy Flash
+    - {cap: heal_burst,   score: 4, evidence: HOLYDESPERATEPRAYER2}  # E: 220 below 40% — the save button; Q: Holy Flash
     # knockback_displace REMOVED 2026-08-13 (expert magnitude pass): Sacred
     # Pulse's shove is a healer self-peel, not a repositioning tool in group
     # fights — its value is already scored as peel. Applies line-wide. (QW)
-    - {cap: self_sustain, score: 1, evidence: HOLYDESPERATEPRAYER2}  # E's stacking Healing-Cast self buff
+    - {cap: self_sustain, score: 2, evidence: HOLYDESPERATEPRAYER2}  # E's stacking Healing-Cast self buff

@@ -24,8 +24,8 @@
     - {cap: heal_reduction, evidence: DEEPCUTS}
     - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
-    - {cap: burst_st,       score: 3, evidence: EXECUTEDAGGER}      # E: charge-scaled devastating blow + bleed
-    - {cap: sustained_dps,  score: 2, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # dagger AA passives + spirit stacks
-    - {cap: catch,          score: 2, evidence: SKILLSHOT_TELEPORT} # W: Shadow Edge; dashes (QW)
-    - {cap: heal_reduction, score: 1, evidence: EXECUTEDAGGER}      # E: reduces Healing Received; W: Forbidden Stab
-    - {cap: execute,        score: 1, evidence: EXECUTEDAGGER}      # kill-confirm role; charge-scaled, not health-scaled
+    - {cap: burst_st,       score: 6, evidence: EXECUTEDAGGER}      # E: charge-scaled devastating blow + bleed
+    - {cap: sustained_dps,  score: 4, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # dagger AA passives + spirit stacks
+    - {cap: catch,          score: 4, evidence: SKILLSHOT_TELEPORT} # W: Shadow Edge; dashes (QW)
+    - {cap: heal_reduction, score: 2, evidence: EXECUTEDAGGER}      # E: reduces Healing Received; W: Forbidden Stab
+    - {cap: execute,        score: 2, evidence: EXECUTEDAGGER}      # kill-confirm role; charge-scaled, not health-scaled

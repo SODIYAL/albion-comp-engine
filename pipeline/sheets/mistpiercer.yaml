@@ -19,5 +19,5 @@
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: range
   capabilities:
-    - {cap: burst_st,      score: 2, evidence: HAWK_SHOT_MULTI1}   # E: 178 x5 recasts into one target
-    - {cap: burst_aoe,     score: 2, evidence: HAWK_SHOT_MULTI1}   # hawks pierce every enemy on the line
+    - {cap: burst_st,      score: 4, evidence: HAWK_SHOT_MULTI1}   # E: 178 x5 recasts into one target
+    - {cap: burst_aoe,     score: 4, evidence: HAWK_SHOT_MULTI1}   # hawks pierce every enemy on the line

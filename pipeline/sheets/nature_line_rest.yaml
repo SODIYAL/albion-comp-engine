@@ -9,9 +9,9 @@
   except:
     - {cap: buff_allies, evidence: NATURERESILIENCE}
   capabilities:
-    - {cap: heal_sustain, score: 2, evidence: BRIEROFLIFE}     # E: heal + heal-on-damage-taken armor
-    - {cap: buff_allies,  score: 2, evidence: BRIEROFLIFE}     # +13% resistances on the target; W: Protection (QW)
-    - {cap: peel,         score: 1, evidence: BRIEROFLIFE}     # armor on the focused ally
+    - {cap: heal_sustain, score: 4, evidence: BRIEROFLIFE}     # E: heal + heal-on-damage-taken armor
+    - {cap: buff_allies,  score: 4, evidence: BRIEROFLIFE}     # +13% resistances on the target; W: Protection (QW)
+    - {cap: peel,         score: 2, evidence: BRIEROFLIFE}     # armor on the focused ally
 
 - weapon: 2H_NATURESTAFF_KEEPER      # Rampant Staff — trail healer
   curated_as_of: 2026-08-12
@@ -20,14 +20,14 @@
   except:
     - {cap: heal_burst, evidence: CLEANSEHEAL}
   capabilities:
-    - {cap: heal_sustain, score: 3, evidence: SPIRITANIMAL}    # E: healing trail, 14/s for allies standing on it
-    - {cap: heal_burst,   score: 1, evidence: SPIRITANIMAL}    # 110 on touch
+    - {cap: heal_sustain, score: 6, evidence: SPIRITANIMAL}    # E: healing trail, 14/s for allies standing on it
+    - {cap: heal_burst,   score: 2, evidence: SPIRITANIMAL}    # 110 on touch
 
 - weapon: 2H_WILDSTAFF               # Wild Staff — the well healer
   curated_as_of: 2026-08-12
   role_hint: healer
   capabilities:
-    - {cap: heal_sustain, score: 3, evidence: WELLOFLIFE2}     # E: 69/s to 20 allies inside the well
+    - {cap: heal_sustain, score: 6, evidence: WELLOFLIFE2}     # E: 69/s to 20 allies inside the well
 
 - weapon: MAIN_NATURESTAFF           # Nature Staff (1H) — self-centred group healer
   curated_as_of: 2026-08-12
@@ -37,9 +37,9 @@
     - {cap: heal_burst, evidence: CLEANSEHEAL}
     - {cap: sustained_dps, evidence: THORNSAREA}
   capabilities:
-    - {cap: heal_burst,   score: 2, evidence: CIRCLEOFLIFE}    # E: 107 instant to 15 allies around you
-    - {cap: heal_sustain, score: 2, evidence: CIRCLEOFLIFE}    # rejuvenation charge engine
-    - {cap: root,         score: 1, evidence: CIRCLEOFLIFE}    # thorn-charged enemies get rooted
+    - {cap: heal_burst,   score: 4, evidence: CIRCLEOFLIFE}    # E: 107 instant to 15 allies around you
+    - {cap: heal_sustain, score: 4, evidence: CIRCLEOFLIFE}    # rejuvenation charge engine
+    - {cap: root,         score: 2, evidence: CIRCLEOFLIFE}    # thorn-charged enemies get rooted
 
 - weapon: MAIN_NATURESTAFF_AVALON    # Ironroot Staff — the soul-link peeler
   curated_as_of: 2026-08-12
@@ -48,8 +48,8 @@
   except:
     - {cap: sustained_dps, evidence: THORNSAREA}
   capabilities:
-    - {cap: peel,         score: 2, evidence: SOUL_LINK}       # E: redirects HALF the focus damage off an ally (override)
-    - {cap: heal_sustain, score: 2, evidence: SOUL_LINK}       # link also transfers 75% of healing; W pool
+    - {cap: peel,         score: 4, evidence: SOUL_LINK}       # E: redirects HALF the focus damage off an ally (override)
+    - {cap: heal_sustain, score: 4, evidence: SOUL_LINK}       # link also transfers 75% of healing; W pool
 
 - weapon: MAIN_NATURESTAFF_CRYSTAL   # Forgebark Staff — toggle shield/root healer
   curated_as_of: 2026-08-12
@@ -59,9 +59,9 @@
     - {cap: buff_allies, evidence: NATURERESILIENCE}
     - {cap: sustained_dps, evidence: THORNSAREA}
   capabilities:
-    - {cap: heal_sustain, score: 2, evidence: DUAL_NATURE}     # E: Fortify — shields + 32/0.85s to 10 targets
-    - {cap: buff_allies,  score: 1, evidence: DUAL_NATURE}     # 171 damage shields
-    - {cap: root,         score: 1, evidence: DUAL_NATURE}     # E: Ensnare toggle — 2.25s AoE root
+    - {cap: heal_sustain, score: 4, evidence: DUAL_NATURE}     # E: Fortify — shields + 32/0.85s to 10 targets
+    - {cap: buff_allies,  score: 2, evidence: DUAL_NATURE}     # 171 damage shields
+    - {cap: root,         score: 2, evidence: DUAL_NATURE}     # E: Ensnare toggle — 2.25s AoE root
 
 - weapon: MAIN_NATURESTAFF_KEEPER    # Druidic Staff — seed-burst healer
   curated_as_of: 2026-08-12
@@ -71,5 +71,5 @@
     - {cap: heal_burst, evidence: CLEANSEHEAL}
     - {cap: sustained_dps, evidence: THORNSAREA}
   capabilities:
-    - {cap: heal_burst,   score: 2, evidence: NATURE_ULTIMATE_SINGLE}  # E: 208 delayed seed, recastable
-    - {cap: heal_sustain, score: 2, evidence: NATURE_ULTIMATE_SINGLE}  # seeds woven into HoT rotation
+    - {cap: heal_burst,   score: 4, evidence: NATURE_ULTIMATE_SINGLE}  # E: 208 delayed seed, recastable
+    - {cap: heal_sustain, score: 4, evidence: NATURE_ULTIMATE_SINGLE}  # seeds woven into HoT rotation

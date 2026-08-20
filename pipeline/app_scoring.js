@@ -23,6 +23,9 @@
     this.data = data;
     this.weapons = data.weapons;
     this.scoring = data.scoring;
+    /* 1-7 scale: score_unit converts sheet points to supply units
+       (mirrors engine.py; older 0-3 datasets divide by 1). */
+    this.scoreUnit = this.scoring.score_unit || 1.0;
     var w = this.scoring.weights;
     this.alpha = w.alpha; this.beta = w.beta;
     this.delta = w.delta; this.gamma = w.gamma;
@@ -385,8 +388,9 @@
   CompEngine.prototype._eff = function (caps, delivery) {
     var out = {}, m, v;
     for (var c in caps) {
+      v = caps[c] / this.scoreUnit;
       m = this.mechMults[c];
-      v = caps[c] * (m === undefined ? 1.0 : m);
+      v = v * (m === undefined ? 1.0 : m);
       if (delivery !== undefined && delivery !== null && this._geoCaps[c])
         v *= this._geoMult(c, delivery[c]);
       out[c] = v;

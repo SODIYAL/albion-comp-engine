@@ -11,4 +11,4 @@
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: range
   capabilities:
-    - {cap: burst_aoe,     score: 3, evidence: HELL_ARROW}        # E: ramping line pierce — anti-clump payload
+    - {cap: burst_aoe,     score: 6, evidence: HELL_ARROW}        # E: ramping line pierce — anti-clump payload

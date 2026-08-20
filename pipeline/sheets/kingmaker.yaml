@@ -16,8 +16,8 @@
   except:
     - {cap: peel, evidence: SPLITTINGSLASH}
   capabilities:
-    - {cap: knockback_displace, score: 1, evidence: MAJESTIC_SMASH}  # E: 6m AoE air-THROW — no travel (magnitude pass 2026-08-13)
-    - {cap: peel,          score: 2, evidence: MAJESTIC_SMASH}   # everything diving you goes airborne
-    - {cap: burst_aoe,     score: 2, evidence: MAJESTIC_SMASH}   # charge-scaled smash up to 312 in a line
-    - {cap: buff_allies,   score: 1, evidence: MAJESTIC_SMASH}   # on-kill ally damage buff, 11m
-    - {cap: engage,        score: 1, evidence: HEROICSTRIKE2}    # dash in, then swing — two-step initiation
+    - {cap: knockback_displace, score: 2, evidence: MAJESTIC_SMASH}  # E: 6m AoE air-THROW — no travel (magnitude pass 2026-08-13)
+    - {cap: peel,          score: 4, evidence: MAJESTIC_SMASH}   # everything diving you goes airborne
+    - {cap: burst_aoe,     score: 4, evidence: MAJESTIC_SMASH}   # charge-scaled smash up to 312 in a line
+    - {cap: buff_allies,   score: 2, evidence: MAJESTIC_SMASH}   # on-kill ally damage buff, 11m
+    - {cap: engage,        score: 2, evidence: HEROICSTRIKE2}    # dash in, then swing — two-step initiation

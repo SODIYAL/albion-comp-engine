@@ -7,11 +7,11 @@
 # adjudication — or lists the pair under `except:`.
 subcategory: naturestaff
 capabilities:
-  - {cap: knockback_displace, score: 1, evidence: BRAMBLESEED}                 # W: enemy-directed line knockback
-  - {cap: cleanse, score: 2, evidence: CLEANSEHEAL}                            # W: AoE removes all CC + debuffs (QW — conditional)
-  - {cap: heal_burst, score: 1, evidence: CLEANSEHEAL}                         # W: heals on cleanse, scales with charges
-  - {cap: buff_allies, score: 2, evidence: NATURERESILIENCE}                   # W: resistances + healing received
-  - {cap: self_sustain, score: 1, evidence: PASSIVE_ARMOR_CASTER_NATURESTAFF}  # PASSIVE: Calmness
-  - {cap: slow, score: 1, evidence: THORNSAREA}                                # Q: Thorn Growth
-  - {cap: sustained_dps, score: 1, evidence: THORNSAREA}                       # (QW)
-  - {cap: zone_control, score: 1, evidence: THORNSAREA}                        # Q: persistent damaging area
+  - {cap: knockback_displace, score: 2, evidence: BRAMBLESEED}                 # W: enemy-directed line knockback
+  - {cap: cleanse, score: 4, evidence: CLEANSEHEAL}                            # W: AoE removes all CC + debuffs (QW — conditional)
+  - {cap: heal_burst, score: 2, evidence: CLEANSEHEAL}                         # W: heals on cleanse, scales with charges
+  - {cap: buff_allies, score: 4, evidence: NATURERESILIENCE}                   # W: resistances + healing received
+  - {cap: self_sustain, score: 2, evidence: PASSIVE_ARMOR_CASTER_NATURESTAFF}  # PASSIVE: Calmness
+  - {cap: slow, score: 2, evidence: THORNSAREA}                                # Q: Thorn Growth
+  - {cap: sustained_dps, score: 2, evidence: THORNSAREA}                       # (QW)
+  - {cap: zone_control, score: 2, evidence: THORNSAREA}                        # Q: persistent damaging area
