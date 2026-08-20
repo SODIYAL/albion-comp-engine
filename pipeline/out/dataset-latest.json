@@ -3,6 +3,7 @@
   "illustrative_weapons": [],
   "lint_passed": true,
   "mastersheet": [
+   "guild_builds: present (shipped verbatim)",
    "mechanics: aoe_geometry",
    "scoring: capability_synergies, meta_prior, weights"
   ],
@@ -331,7 +332,250 @@
    ]
   }
  },
- "guild_builds": {},
+ "guild_builds": {
+  "battlemounts": {
+   "build": "Same on all: Mace or Bloodletter, offhand Aegis or Mistcaller, chest Judicator or Guardian as high tier as affordable (T9 ideal, best defence per silver), helmet Soldier or Mistwalker (Soldier = more health), Feyscale Sandals 4.4 (cheapest optimal, no real alternative; 4.3 fine).\n",
+   "priority": [
+    "Chariot",
+    "Behemoth / Beetle",
+    "Eagle / Bastion / Ballista"
+   ],
+   "status": "not running them until we get better"
+  },
+  "bomb_weapons": [
+   "Brimstone",
+   "Blazing",
+   "Wildfire",
+   "Infernal",
+   "Energy Shaper (most common)",
+   "Weeping Repeater",
+   "Siegebow",
+   "Heavy Crossbow",
+   "Arclight Blasters"
+  ],
+  "comp_rules": [
+   "Under 10: at least 1 healer, at least 1 tank; don't stack all-melee or all-range; everything approved at larger sizes is approved here.",
+   "10-man: minimum 2 healers, 3-4 tanks, rest DPS. Unusual picks genuinely work here (Primal Staff as a main is fine).",
+   "10-20 FILL ORDER: healer first, tanky support second, DPS last. Do not bring the 5th DPS while the 3rd healer slot is open \u2014 support needs grow faster than damage needs. Most common way comps go wrong.",
+   "20+: caller declares clap/kite or brawl. 6 tanks minimum, 4 healers minimum, then DPS.",
+   "Kite comps need at least 1 Occult Staff.",
+   "Brawl zergs always, always run a Carving (as pierce tank).",
+   "Kite zergs practically never run Carving \u2014 Spirit Hunter or Damnation.",
+   "Royal armor: minimum 2 Royals per 10 people for mana; can cut if there's a Chariot.",
+   "Bomb squad is a separate group, spec-gated (~100 spec floor, often the whole tree). Join when the caller asks, not because it looks fun."
+  ],
+  "gear_sets": {
+   "dps_brawl": "Head almost always Cleric (Soldier occasionally, Cleric just better). Chest Hellion almost always; Soldier for specific roles; Royal for mana with no Chariot. Stalker shoes for damage (Boots of Valor okay, Stalker almost always better). Smugglers 4.3, Beef Stew 8.1+, Gigantify.\n",
+   "dps_clap_kite": "Head mostly Assassin for the reset, some swap to cleanse; 1 Knight Helmet; Mistwalker for melee DPS. Chest Scholar, Feyscale, Robe of Purity, or Royal Jacket. Blink shoes, sometimes Feyscale. Smugglers 4.3, Gigantify, food Beef Stew or Ava Pork Omelette \u2014 check with caller.\n",
+   "healers_brawl": "Same as clap/kite except: Judicator chest, Lymhurst cape priority, offhand Shield or Blueflame Torch.\n",
+   "healers_clap_kite": "Head depends on battlemounts \u2014 with Chariot at least 1 Assassin + 1 Guardian; without, at least 2 Druid Cowls. Chest Robe of Purity or Feyscale, no real alternative (Cleric Robe under 10). Blink shoes (Merc/Stalker/Cleric/Royal). Smugglers 4.3, swap Lymhurst if no Chariot. Ava Pork Omelette, Gigantify.\n",
+   "supports_not_support_tanks": "Usually Occult. Assassin Hood, Royal Jacket (no swaps allowed), blink shoes, Smugglers 4.3.\n"
+  },
+  "legend": {
+   "APPROVED": "regear-eligible, but don't bring it while a CORE slot is open",
+   "CORE": "first choice \u2014 if you don't know what to play, play this",
+   "size_tags": {
+    "10": "comes online at 10+",
+    "20": "needs 20+ to matter",
+    "5": "best small-scale (5-10)",
+    "bomb": "bomb squad \u2014 spec-gated, not main zerg",
+    "untagged": "works at any size"
+   }
+  },
+  "recorded": "2026-08-20",
+  "roles_20plus": {
+   "clump_tank": {
+    "core": [
+     "Hand of Justice",
+     "Earthrune (Golem)",
+     "1H Mace"
+    ],
+    "count": 1
+   },
+   "dps_brawl": {
+    "approved": [
+     "Carving Sword (fine as straight damage, but pierce tank is the better use)",
+     "Kingmaker",
+     "Dual Swords",
+     "Infinity Blade",
+     "Clarent Blade",
+     "Great Axe",
+     "Brawler Gloves",
+     "Spear",
+     "Heron Spear",
+     "Daybreaker",
+     "Hellspawn Staff",
+     "Quarterstaff",
+     "Blood Moon (5)",
+     "Demonic (5)"
+    ],
+    "core": [
+     "Battle Bracers",
+     "Infernal Scythe",
+     "Realm Breaker",
+     "Ursine Maulers",
+     "Astral",
+     "Bloodletter",
+     "Demonfang",
+     "Galatine Pair",
+     "Bear Paws",
+     "Spiked Gauntlets",
+     "Hellfire Hands"
+    ],
+    "note": "Demonfang is extremely strong right now \u2014 many brawl zergs run 2, 3, or more. Don't treat it as a niche pick.",
+    "scaling": "As the party grows: more of the above; possibly a Witchwork, Wailing, Permafrost, or a small kite/clap pocket for burst."
+   },
+   "dps_clap_kite": {
+    "approved": [
+     "Dawnsong (the one common zerg fire staff)",
+     "Astral",
+     "Evensong",
+     "Icicle",
+     "Hoarfrost",
+     "Arctic",
+     "Glacial",
+     "Mistpiercer",
+     "Badon",
+     "Skystrider",
+     "Lightcaller",
+     "Hellfire Staff",
+     "Wailing (20+)"
+    ],
+    "core": [
+     "Permafrost",
+     "Spirit Hunter",
+     "Rift Glaive",
+     "Realm Breaker",
+     "Spiked Gauntlets",
+     "Damnation",
+     "Rotcaller",
+     "Witchwork"
+    ],
+    "requirement": "at least 1 Occult Staff in kite comps",
+    "scaling": "As the party grows: add Wailing and more Rift Glaives; possibly an off-timer Spiked for extra pierce."
+   },
+   "healers": {
+    "approved": [
+     "Exalted (20+, required in some larger comps)",
+     "Forgebark",
+     "Fallen",
+     "Wild Staff",
+     "1H Nature (5)",
+     "Divine (5)",
+     "Great Holy (5)"
+    ],
+    "core_holy": [
+     "Hallowfall",
+     "Redemption"
+    ],
+    "core_nature": [
+     "Blight",
+     "Rampant"
+    ],
+    "filled_first": true,
+    "minimum": 4,
+    "never": [
+     "1H Holy",
+     "Lifetouch",
+     "Druidic Staff",
+     "Ironroot",
+     "Great Nature"
+    ]
+   },
+   "support_tanks_brawl": {
+    "approved": [
+     "Grail Seeker",
+     "1H Hammer",
+     "Bedrock Mace",
+     "Polehammer",
+     "Black Monk Stave",
+     "Camlann Mace",
+     "Dreadstorm Monarch",
+     "Truebolt Hammer",
+     "Grovekeeper",
+     "Soulscythe",
+     "Icicle",
+     "Stillgaze",
+     "Primal Staff",
+     "Forge Hammer (5, disrupt)"
+    ],
+    "armor_split": "THE RULE, not a suggestion: roughly 50/50 Hellion Hoods and Judicator Helms, leaning toward extra Hellion Hoods. Most Hellion Hood tanks run Duskweaver armor; other tanks Judicator or Guardian. Blink shoes standard, Stalker usually favored. Unsure? Cleric Cowl.\n",
+    "core": [
+     "1H Mace (offhand Kaitiff Shield or Astral Aegis)",
+     "Heavy Mace",
+     "Great Hammer",
+     "Staff of Balance"
+    ],
+    "count": 5
+   },
+   "support_tanks_clap_kite": {
+    "approved": [
+     "Grail Seeker",
+     "1H Hammer",
+     "1H Arcane",
+     "Icicle",
+     "Stillgaze",
+     "Black Monk Stave",
+     "Camlann Mace",
+     "Dreadstorm Monarch",
+     "Truebolt Hammer",
+     "Grovekeeper",
+     "Soulscythe",
+     "Primal Staff",
+     "Forge Hammer (5, disrupt)"
+    ],
+    "armor": "Head Judicator Helm or Cleric Cowl; chest Knight, Demon, or Duskweaver; blink shoes (some zergs GG Boots or Boots of Valor).\n",
+    "core": [
+     "Bedrock Mace x2 (Guard Rune, now hits 10)",
+     "Polehammer (Groundbreaker, 20m \u2014 longest-reach hard CC in the game)",
+     "Great Arcane (silence)"
+    ],
+    "count": 5
+   },
+   "tanky_support_pierce_brawl": {
+    "approved": [
+     "Life Curse",
+     "Rootbound",
+     "Shadowcaller",
+     "Hoarfrost",
+     "Locus",
+     "Occult (20+)"
+    ],
+    "armor": "Support tank weapons run Judicator or Demon armor almost without exception (Oathkeepers, Life Curse, Rootbound, Shadowcaller, Hoarfrost, Locus).\n",
+    "core": [
+     "Carving Sword",
+     "Oathkeepers"
+    ],
+    "count": 2
+   },
+   "tanky_support_pierce_clap_kite": {
+    "approved": [
+     "Oathkeepers",
+     "Life Curse",
+     "Rootbound (midline \u2014 keeps the frontline topped, opens a retreat path)",
+     "Shadowcaller",
+     "Hoarfrost",
+     "Locus (backline tank / cleanse bot)",
+     "Occult (20+)"
+    ],
+    "core": [
+     "Spirit Hunter",
+     "Damnation"
+    ],
+    "count": 2
+   }
+  },
+  "scope": "castle/outpost content, everything listed is regear-eligible",
+  "source": "guild announcement \u2014 approved builds, group content",
+  "standard_kit": {
+   "cape": "Smugglers 4.3 always; Lymhurst on healers with no Chariot",
+   "fallback_helm": "Melee and unsure? Cleric Cowl. Not always ideal, never wrong.\n",
+   "food": "Ava Pork Omelette 7.1 default; Ava Beef Sandwich acceptable; brawl DPS run Beef Stew 8.1+; support tanks on Demon may run regular Beef Sandwich. 7.1 food / 4.3 cape is the cost-efficient line.\n",
+   "potions": "Gigantify \u2014 no choice, no substitutes",
+   "shoes": "Blink shoes standard in brawl and clap, Stalker usually favored. Exceptions: healers and some tanks run Royal Shoes (NOT Sandals).\n"
+  },
+  "status": "guideline, not hard rules \u2014 \"if your build isn't listed, ask\""
+ },
  "interactions": {
   "BLACKHOLE": {
    "as_of": "2026-08-19",

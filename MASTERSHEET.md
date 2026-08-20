@@ -193,12 +193,179 @@ boards in `review/magnitude.html` become the judging instrument.
 
 ## 8. Guild-approved builds
 
-Paste the guild announcement here as data (any structure — weapon names,
-armor, roles, notes). It ships into the dataset verbatim as a **guideline
-layer**: visible in tooling, usable as a validation reference, never a
-hard rule the scorer enforces. Empty until provided:
+The guild announcement, recorded 2026-08-20, structured but in the guild's
+own words and weapon names. It ships into the dataset verbatim as a
+**guideline layer**: visible in tooling, usable as a validation reference,
+never a hard rule the scorer enforces. (Mapping the guild's weapon names to
+game ids is a separate wiring step.)
 
 ```yaml tune:guild_builds
+source: guild announcement — approved builds, group content
+recorded: 2026-08-20
+scope: castle/outpost content, everything listed is regear-eligible
+status: guideline, not hard rules — "if your build isn't listed, ask"
+
+legend:
+  CORE: first choice — if you don't know what to play, play this
+  APPROVED: regear-eligible, but don't bring it while a CORE slot is open
+  size_tags:
+    "5": best small-scale (5-10)
+    "10": comes online at 10+
+    "20": needs 20+ to matter
+    bomb: bomb squad — spec-gated, not main zerg
+    untagged: works at any size
+
+standard_kit:
+  cape: Smugglers 4.3 always; Lymhurst on healers with no Chariot
+  potions: Gigantify — no choice, no substitutes
+  food: >
+    Ava Pork Omelette 7.1 default; Ava Beef Sandwich acceptable; brawl DPS
+    run Beef Stew 8.1+; support tanks on Demon may run regular Beef Sandwich.
+    7.1 food / 4.3 cape is the cost-efficient line.
+  shoes: >
+    Blink shoes standard in brawl and clap, Stalker usually favored.
+    Exceptions: healers and some tanks run Royal Shoes (NOT Sandals).
+  fallback_helm: >
+    Melee and unsure? Cleric Cowl. Not always ideal, never wrong.
+
+comp_rules:
+  - "Under 10: at least 1 healer, at least 1 tank; don't stack all-melee or
+    all-range; everything approved at larger sizes is approved here."
+  - "10-man: minimum 2 healers, 3-4 tanks, rest DPS. Unusual picks genuinely
+    work here (Primal Staff as a main is fine)."
+  - "10-20 FILL ORDER: healer first, tanky support second, DPS last. Do not
+    bring the 5th DPS while the 3rd healer slot is open — support needs grow
+    faster than damage needs. Most common way comps go wrong."
+  - "20+: caller declares clap/kite or brawl. 6 tanks minimum, 4 healers
+    minimum, then DPS."
+  - "Kite comps need at least 1 Occult Staff."
+  - "Brawl zergs always, always run a Carving (as pierce tank)."
+  - "Kite zergs practically never run Carving — Spirit Hunter or Damnation."
+  - "Royal armor: minimum 2 Royals per 10 people for mana; can cut if
+    there's a Chariot."
+  - "Bomb squad is a separate group, spec-gated (~100 spec floor, often the
+    whole tree). Join when the caller asks, not because it looks fun."
+
+bomb_weapons: [Brimstone, Blazing, Wildfire, Infernal, Energy Shaper (most
+  common), Weeping Repeater, Siegebow, Heavy Crossbow, Arclight Blasters]
+
+roles_20plus:
+  clump_tank:
+    count: 1
+    core: [Hand of Justice, Earthrune (Golem), 1H Mace]
+
+  support_tanks_clap_kite:
+    count: 5
+    core:
+      - Bedrock Mace x2 (Guard Rune, now hits 10)
+      - Polehammer (Groundbreaker, 20m — longest-reach hard CC in the game)
+      - Great Arcane (silence)
+    armor: >
+      Head Judicator Helm or Cleric Cowl; chest Knight, Demon, or
+      Duskweaver; blink shoes (some zergs GG Boots or Boots of Valor).
+    approved: [Grail Seeker, 1H Hammer, 1H Arcane, Icicle, Stillgaze,
+      Black Monk Stave, Camlann Mace, Dreadstorm Monarch, Truebolt Hammer,
+      Grovekeeper, Soulscythe, Primal Staff, "Forge Hammer (5, disrupt)"]
+
+  tanky_support_pierce_clap_kite:
+    count: 2
+    core: [Spirit Hunter, Damnation]
+    approved: [Oathkeepers, Life Curse, "Rootbound (midline — keeps the
+      frontline topped, opens a retreat path)", Shadowcaller, Hoarfrost,
+      "Locus (backline tank / cleanse bot)", "Occult (20+)"]
+
+  support_tanks_brawl:
+    count: 5
+    core: ["1H Mace (offhand Kaitiff Shield or Astral Aegis)", Heavy Mace,
+      Great Hammer, Staff of Balance]
+    armor_split: >
+      THE RULE, not a suggestion: roughly 50/50 Hellion Hoods and Judicator
+      Helms, leaning toward extra Hellion Hoods. Most Hellion Hood tanks run
+      Duskweaver armor; other tanks Judicator or Guardian. Blink shoes
+      standard, Stalker usually favored. Unsure? Cleric Cowl.
+    approved: [Grail Seeker, 1H Hammer, Bedrock Mace, Polehammer,
+      Black Monk Stave, Camlann Mace, Dreadstorm Monarch, Truebolt Hammer,
+      Grovekeeper, Soulscythe, Icicle, Stillgaze, Primal Staff,
+      "Forge Hammer (5, disrupt)"]
+
+  tanky_support_pierce_brawl:
+    count: 2
+    core: [Carving Sword, Oathkeepers]
+    armor: >
+      Support tank weapons run Judicator or Demon armor almost without
+      exception (Oathkeepers, Life Curse, Rootbound, Shadowcaller,
+      Hoarfrost, Locus).
+    approved: [Life Curse, Rootbound, Shadowcaller, Hoarfrost, Locus,
+      "Occult (20+)"]
+
+  healers:
+    minimum: 4
+    filled_first: true
+    core_holy: [Hallowfall, Redemption]
+    core_nature: [Blight, Rampant]
+    approved: ["Exalted (20+, required in some larger comps)", Forgebark,
+      Fallen, Wild Staff, "1H Nature (5)", "Divine (5)", "Great Holy (5)"]
+    never: [1H Holy, Lifetouch, Druidic Staff, Ironroot, Great Nature]
+
+  dps_clap_kite:
+    requirement: at least 1 Occult Staff in kite comps
+    core: [Permafrost, Spirit Hunter, Rift Glaive, Realm Breaker,
+      Spiked Gauntlets, Damnation, Rotcaller, Witchwork]
+    scaling: "As the party grows: add Wailing and more Rift Glaives;
+      possibly an off-timer Spiked for extra pierce."
+    approved: ["Dawnsong (the one common zerg fire staff)", Astral,
+      Evensong, Icicle, Hoarfrost, Arctic, Glacial, Mistpiercer, Badon,
+      Skystrider, Lightcaller, Hellfire Staff, "Wailing (20+)"]
+
+  dps_brawl:
+    core: [Battle Bracers, Infernal Scythe, Realm Breaker, Ursine Maulers,
+      Astral, Bloodletter, Demonfang, Galatine Pair, Bear Paws,
+      Spiked Gauntlets, Hellfire Hands]
+    note: "Demonfang is extremely strong right now — many brawl zergs run
+      2, 3, or more. Don't treat it as a niche pick."
+    scaling: "As the party grows: more of the above; possibly a Witchwork,
+      Wailing, Permafrost, or a small kite/clap pocket for burst."
+    approved: ["Carving Sword (fine as straight damage, but pierce tank is
+      the better use)", Kingmaker, Dual Swords, Infinity Blade,
+      Clarent Blade, Great Axe, Brawler Gloves, Spear, Heron Spear,
+      Daybreaker, Hellspawn Staff, Quarterstaff, "Blood Moon (5)",
+      "Demonic (5)"]
+
+gear_sets:
+  supports_not_support_tanks: >
+    Usually Occult. Assassin Hood, Royal Jacket (no swaps allowed), blink
+    shoes, Smugglers 4.3.
+  healers_clap_kite: >
+    Head depends on battlemounts — with Chariot at least 1 Assassin + 1
+    Guardian; without, at least 2 Druid Cowls. Chest Robe of Purity or
+    Feyscale, no real alternative (Cleric Robe under 10). Blink shoes
+    (Merc/Stalker/Cleric/Royal). Smugglers 4.3, swap Lymhurst if no
+    Chariot. Ava Pork Omelette, Gigantify.
+  healers_brawl: >
+    Same as clap/kite except: Judicator chest, Lymhurst cape priority,
+    offhand Shield or Blueflame Torch.
+  dps_clap_kite: >
+    Head mostly Assassin for the reset, some swap to cleanse; 1 Knight
+    Helmet; Mistwalker for melee DPS. Chest Scholar, Feyscale, Robe of
+    Purity, or Royal Jacket. Blink shoes, sometimes Feyscale. Smugglers
+    4.3, Gigantify, food Beef Stew or Ava Pork Omelette — check with
+    caller.
+  dps_brawl: >
+    Head almost always Cleric (Soldier occasionally, Cleric just better).
+    Chest Hellion almost always; Soldier for specific roles; Royal for
+    mana with no Chariot. Stalker shoes for damage (Boots of Valor okay,
+    Stalker almost always better). Smugglers 4.3, Beef Stew 8.1+,
+    Gigantify.
+
+battlemounts:
+  status: not running them until we get better
+  priority: [Chariot, Behemoth / Beetle, Eagle / Bastion / Ballista]
+  build: >
+    Same on all: Mace or Bloodletter, offhand Aegis or Mistcaller, chest
+    Judicator or Guardian as high tier as affordable (T9 ideal, best
+    defence per silver), helmet Soldier or Mistwalker (Soldier = more
+    health), Feyscale Sandals 4.4 (cheapest optimal, no real alternative;
+    4.3 fine).
 ```
 
 ---

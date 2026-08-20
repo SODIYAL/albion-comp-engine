@@ -27,6 +27,7 @@ non-dict block is a build ERROR (exit 2) — a typo must never silently do
 nothing. build_dataset prints what was overridden and stamps the counts
 into _meta.mastersheet.
 """
+import datetime
 import os
 import re
 
@@ -68,8 +69,23 @@ def load(path=PATH):
         if not isinstance(data, dict):
             raise ValueError(
                 f"MASTERSHEET.md tune:{section}: block must be a mapping")
-        out[section] = deep_merge(out.get(section, {}), data)
+        out[section] = deep_merge(out.get(section, {}), _jsonify(data))
     return out
+
+
+def _jsonify(node):
+    """yaml parses bare dates (2026-08-20) into datetime objects, which
+    json.dump rejects — normalize them (and any other non-JSON scalar) to
+    strings so a mastersheet edit can never crash the dataset write."""
+    if isinstance(node, dict):
+        return {k: _jsonify(v) for k, v in node.items()}
+    if isinstance(node, list):
+        return [_jsonify(v) for v in node]
+    if isinstance(node, (datetime.date, datetime.datetime)):
+        return node.isoformat()
+    if node is None or isinstance(node, (str, int, float, bool)):
+        return node
+    return str(node)
 
 
 def deep_merge(base, over):
