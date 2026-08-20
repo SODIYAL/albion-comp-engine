@@ -333,6 +333,1494 @@
    ]
   }
  },
+ "gear": {
+  "ARMOR_CLOTH_AVALON": {
+   "capabilities": {
+    "knockback_displace": 3,
+    "peel": 3,
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Robe of Purity",
+   "evidence": {
+    "knockback_displace": [
+     "CASTBUBBLE"
+    ],
+    "peel": [
+     "CASTBUBBLE"
+    ],
+    "tankiness": [
+     "FROSTSHIELD"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "CASTBUBBLE",
+      "FROSTSHIELD"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "knockback_displace": 3,
+       "peel": 3
+      },
+      {
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "slot": "armor",
+   "unique_name": "ARMOR_CLOTH_AVALON"
+  },
+  "ARMOR_CLOTH_FEY": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "WILD_MAGIC"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "WILD_MAGIC"
+    }
+   },
+   "capabilities": {
+    "burst_aoe": 2,
+    "zone_control": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Feyscale Robe",
+   "evidence": {
+    "burst_aoe": [
+     "WILD_MAGIC"
+    ],
+    "zone_control": [
+     "WILD_MAGIC"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "WILD_MAGIC"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "burst_aoe": 2,
+       "zone_control": 2
+      }
+     ]
+    ]
+   },
+   "slot": "armor",
+   "unique_name": "ARMOR_CLOTH_FEY"
+  },
+  "ARMOR_CLOTH_SET1": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Scholar Robe",
+   "evidence": {
+    "sustained_dps": [
+     "SPEEDCASTER"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "SPEEDCASTER"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "slot": "armor",
+   "unique_name": "ARMOR_CLOTH_SET1"
+  },
+  "ARMOR_LEATHER_FEY": {
+   "capabilities": {
+    "disengage": 3,
+    "tankiness": 3
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Mistwalker Jacket",
+   "evidence": {
+    "disengage": [
+     "MIST_WALKER"
+    ],
+    "tankiness": [
+     "MIST_WALKER"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "MIST_WALKER"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "disengage": 3,
+       "tankiness": 3
+      }
+     ]
+    ]
+   },
+   "slot": "armor",
+   "unique_name": "ARMOR_LEATHER_FEY"
+  },
+  "ARMOR_LEATHER_HELL": {
+   "capabilities": {
+    "self_sustain": 3,
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Hellion Jacket",
+   "evidence": {
+    "self_sustain": [
+     "LIFESTEALAURA"
+    ],
+    "sustained_dps": [
+     "LIFESTEALAURA"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "LIFESTEALAURA"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "self_sustain": 3,
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "slot": "armor",
+   "unique_name": "ARMOR_LEATHER_HELL"
+  },
+  "ARMOR_LEATHER_ROYAL": {
+   "capabilities": {
+    "buff_allies": 4
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Royal Jacket",
+   "evidence": {
+    "buff_allies": [
+     "ROYAL_BANNER"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "ROYAL_BANNER"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "buff_allies": 4
+      }
+     ]
+    ]
+   },
+   "slot": "armor",
+   "unique_name": "ARMOR_LEATHER_ROYAL"
+  },
+  "ARMOR_PLATE_FEY": {
+   "capabilities": {
+    "anti_dive": 2,
+    "slow": 3,
+    "zone_control": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Duskweaver Armor",
+   "evidence": {
+    "anti_dive": [
+     "ARMOR_WEB"
+    ],
+    "slow": [
+     "ARMOR_WEB"
+    ],
+    "zone_control": [
+     "ARMOR_WEB"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "ARMOR_WEB"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "anti_dive": 2,
+       "slow": 3,
+       "zone_control": 2
+      }
+     ]
+    ]
+   },
+   "slot": "armor",
+   "unique_name": "ARMOR_PLATE_FEY"
+  },
+  "ARMOR_PLATE_HELL": {
+   "capabilities": {
+    "tankiness": 3
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Demon Armor",
+   "evidence": {
+    "tankiness": [
+     "REFLECTAREA"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "REFLECTAREA"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "tankiness": 3
+      }
+     ]
+    ]
+   },
+   "slot": "armor",
+   "unique_name": "ARMOR_PLATE_HELL"
+  },
+  "ARMOR_PLATE_KEEPER": {
+   "cap_delivery": {
+    "buff_allies": {
+     "max_targets": 10,
+     "radius": 7.0,
+     "spell": "FORCESHIELD"
+    },
+    "peel": {
+     "max_targets": 10,
+     "radius": 7.0,
+     "spell": "FORCESHIELD"
+    },
+    "zone_control": {
+     "max_targets": 10,
+     "radius": 7.0,
+     "spell": "FORCESHIELD"
+    }
+   },
+   "capabilities": {
+    "buff_allies": 3,
+    "peel": 4,
+    "zone_control": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Judicator Armor",
+   "evidence": {
+    "buff_allies": [
+     "FORCESHIELD"
+    ],
+    "peel": [
+     "FORCESHIELD"
+    ],
+    "zone_control": [
+     "FORCESHIELD"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "FORCESHIELD"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "buff_allies": 3,
+       "peel": 4,
+       "zone_control": 2
+      }
+     ]
+    ]
+   },
+   "slot": "armor",
+   "unique_name": "ARMOR_PLATE_KEEPER"
+  },
+  "ARMOR_PLATE_SET2": {
+   "cap_delivery": {
+    "anti_dive": {
+     "radius": 6.0,
+     "spell": "WINDWALL"
+    },
+    "peel": {
+     "radius": 6.0,
+     "spell": "WINDWALL"
+    },
+    "purge": {
+     "radius": 6.0,
+     "spell": "WINDWALL"
+    }
+   },
+   "capabilities": {
+    "anti_dive": 3,
+    "peel": 3,
+    "purge": 4
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Knight Armor",
+   "evidence": {
+    "anti_dive": [
+     "WINDWALL"
+    ],
+    "peel": [
+     "WINDWALL"
+    ],
+    "purge": [
+     "WINDWALL"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "WINDWALL"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "anti_dive": 3,
+       "peel": 3,
+       "purge": 4
+      }
+     ]
+    ]
+   },
+   "slot": "armor",
+   "unique_name": "ARMOR_PLATE_SET2"
+  },
+  "ARMOR_PLATE_SET3": {
+   "capabilities": {
+    "damage_debuff": 5,
+    "peel": 3
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Guardian Armor",
+   "evidence": {
+    "damage_debuff": [
+     "ENFEEBLEAURA"
+    ],
+    "peel": [
+     "ENFEEBLEAURA"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "ENFEEBLEAURA"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "damage_debuff": 5,
+       "peel": 3
+      }
+     ]
+    ]
+   },
+   "slot": "armor",
+   "unique_name": "ARMOR_PLATE_SET3"
+  },
+  "CAPEITEM_FW_LYMHURST": {
+   "capabilities": {
+    "buff_allies": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Lymhurst Cape",
+   "evidence": {
+    "buff_allies": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "buff_allies": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "cape",
+   "unique_name": "CAPEITEM_FW_LYMHURST"
+  },
+  "CAPEITEM_SMUGGLER": {
+   "capabilities": {
+    "tankiness": 1
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Smuggler Cape",
+   "evidence": {
+    "tankiness": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "tankiness": 1
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "cape",
+   "unique_name": "CAPEITEM_SMUGGLER"
+  },
+  "HEAD_CLOTH_KEEPER": {
+   "cap_delivery": {
+    "buff_allies": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "ENERGYFIELD"
+    }
+   },
+   "capabilities": {
+    "buff_allies": 3
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Druid Cowl",
+   "evidence": {
+    "buff_allies": [
+     "ENERGYFIELD"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "ENERGYFIELD"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "buff_allies": 3
+      }
+     ]
+    ]
+   },
+   "slot": "head",
+   "unique_name": "HEAD_CLOTH_KEEPER"
+  },
+  "HEAD_CLOTH_SET2": {
+   "cap_delivery": {
+    "anti_dive": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "PBAOE_KNOCKBACK"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "PBAOE_KNOCKBACK"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "PBAOE_KNOCKBACK"
+    }
+   },
+   "capabilities": {
+    "anti_dive": 2,
+    "knockback_displace": 3,
+    "peel": 3,
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Cleric Cowl",
+   "evidence": {
+    "anti_dive": [
+     "PBAOE_KNOCKBACK"
+    ],
+    "knockback_displace": [
+     "PBAOE_KNOCKBACK"
+    ],
+    "peel": [
+     "PBAOE_KNOCKBACK"
+    ],
+    "tankiness": [
+     "ICEBLOCK2"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "PBAOE_KNOCKBACK",
+      "ICEBLOCK2"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "anti_dive": 2,
+       "knockback_displace": 3,
+       "peel": 3
+      },
+      {
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "slot": "head",
+   "unique_name": "HEAD_CLOTH_SET2"
+  },
+  "HEAD_LEATHER_FEY": {
+   "capabilities": {
+    "tankiness": 3
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Mistwalker Hood",
+   "evidence": {
+    "tankiness": [
+     "IMMORTAL"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "IMMORTAL"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "tankiness": 3
+      }
+     ]
+    ]
+   },
+   "slot": "head",
+   "unique_name": "HEAD_LEATHER_FEY"
+  },
+  "HEAD_LEATHER_HELL": {
+   "cap_delivery": {
+    "silence": {
+     "radius": 6.0,
+     "spell": "SMOKEBOMB"
+    },
+    "tankiness": {
+     "radius": 4.0,
+     "spell": "SELF_CLEANSE"
+    },
+    "zone_control": {
+     "radius": 6.0,
+     "spell": "SMOKEBOMB"
+    }
+   },
+   "capabilities": {
+    "silence": 3,
+    "tankiness": 2,
+    "zone_control": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Hellion Hood",
+   "evidence": {
+    "silence": [
+     "SMOKEBOMB"
+    ],
+    "tankiness": [
+     "SELF_CLEANSE"
+    ],
+    "zone_control": [
+     "SMOKEBOMB"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "SMOKEBOMB",
+      "SELF_CLEANSE"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "silence": 3,
+       "zone_control": 2
+      },
+      {
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "slot": "head",
+   "unique_name": "HEAD_LEATHER_HELL"
+  },
+  "HEAD_LEATHER_SET3": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Assassin Hood",
+   "evidence": {
+    "sustained_dps": [
+     "SUMMONER_CD_REDUCTION"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "SUMMONER_CD_REDUCTION"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "slot": "head",
+   "unique_name": "HEAD_LEATHER_SET3"
+  },
+  "HEAD_PLATE_KEEPER": {
+   "cap_delivery": {
+    "anti_dive": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "ELECTRICSHOCK"
+    },
+    "stun": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "ELECTRICSHOCK"
+    }
+   },
+   "capabilities": {
+    "anti_dive": 2,
+    "stun": 3,
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Judicator Helmet",
+   "evidence": {
+    "anti_dive": [
+     "ELECTRICSHOCK"
+    ],
+    "stun": [
+     "ELECTRICSHOCK"
+    ],
+    "tankiness": [
+     "STONESKIN"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "ELECTRICSHOCK",
+      "STONESKIN"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "anti_dive": 2,
+       "stun": 3
+      },
+      {
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "slot": "head",
+   "unique_name": "HEAD_PLATE_KEEPER"
+  },
+  "HEAD_PLATE_SET2": {
+   "cap_delivery": {
+    "buff_allies": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "DISRUPTIONIMMUNITY"
+    },
+    "peel": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "DISRUPTIONIMMUNITY"
+    }
+   },
+   "capabilities": {
+    "buff_allies": 2,
+    "peel": 3
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Knight Helmet",
+   "evidence": {
+    "buff_allies": [
+     "DISRUPTIONIMMUNITY"
+    ],
+    "peel": [
+     "DISRUPTIONIMMUNITY"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "DISRUPTIONIMMUNITY"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "buff_allies": 2,
+       "peel": 3
+      }
+     ]
+    ]
+   },
+   "slot": "head",
+   "unique_name": "HEAD_PLATE_SET2"
+  },
+  "HEAD_PLATE_SET3": {
+   "cap_delivery": {
+    "buff_allies": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "EMERGENCY_SHIELD"
+    },
+    "peel": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "EMERGENCY_SHIELD"
+    }
+   },
+   "capabilities": {
+    "buff_allies": 2,
+    "peel": 2,
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Guardian Helmet",
+   "evidence": {
+    "buff_allies": [
+     "EMERGENCY_SHIELD"
+    ],
+    "peel": [
+     "EMERGENCY_SHIELD"
+    ],
+    "tankiness": [
+     "STONESKIN"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "EMERGENCY_SHIELD",
+      "STONESKIN"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "buff_allies": 2,
+       "peel": 2
+      },
+      {
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "slot": "head",
+   "unique_name": "HEAD_PLATE_SET3"
+  },
+  "OFF_HORN_KEEPER": {
+   "capabilities": {
+    "buff_allies": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Mistcaller",
+   "evidence": {
+    "buff_allies": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "buff_allies": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "offhand",
+   "unique_name": "OFF_HORN_KEEPER"
+  },
+  "OFF_SHIELD": {
+   "capabilities": {
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Shield",
+   "evidence": {
+    "tankiness": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "offhand",
+   "unique_name": "OFF_SHIELD"
+  },
+  "OFF_SHIELD_AVALON": {
+   "capabilities": {
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Astral Aegis",
+   "evidence": {
+    "tankiness": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "offhand",
+   "unique_name": "OFF_SHIELD_AVALON"
+  },
+  "OFF_SHIELD_HELL": {
+   "capabilities": {
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Caitiff Shield",
+   "evidence": {
+    "tankiness": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "offhand",
+   "unique_name": "OFF_SHIELD_HELL"
+  },
+  "OFF_TORCH_CRYSTAL": {
+   "capabilities": {
+    "heal_sustain": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Blueflame Torch",
+   "evidence": {
+    "heal_sustain": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "heal_sustain": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "offhand",
+   "unique_name": "OFF_TORCH_CRYSTAL"
+  },
+  "OFF_TOWERSHIELD_UNDEAD": {
+   "capabilities": {
+    "tankiness": 3
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Sarcophagus",
+   "evidence": {
+    "tankiness": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "tankiness": 3
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "offhand",
+   "unique_name": "OFF_TOWERSHIELD_UNDEAD"
+  },
+  "SHOES_LEATHER_FEY": {
+   "cap_delivery": {
+    "disengage": {
+     "radius": 1.0,
+     "spell": "AFTER_IMAGE"
+    },
+    "mobility": {
+     "radius": 1.0,
+     "spell": "AFTER_IMAGE"
+    }
+   },
+   "capabilities": {
+    "disengage": 3,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Mistwalker Shoes",
+   "evidence": {
+    "disengage": [
+     "AFTER_IMAGE"
+    ],
+    "mobility": [
+     "AFTER_IMAGE"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "AFTER_IMAGE"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "disengage": 3,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "slot": "shoes",
+   "unique_name": "SHOES_LEATHER_FEY"
+  },
+  "SHOES_LEATHER_MORGANA": {
+   "capabilities": {
+    "engage": 2,
+    "mobility": 3,
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Stalker Shoes",
+   "evidence": {
+    "engage": [
+     "DMG_BLINK"
+    ],
+    "mobility": [
+     "DMG_BLINK"
+    ],
+    "sustained_dps": [
+     "DMG_BLINK"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "DMG_BLINK"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "engage": 2,
+       "mobility": 3,
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "slot": "shoes",
+   "unique_name": "SHOES_LEATHER_MORGANA"
+  },
+  "SHOES_LEATHER_ROYAL": {
+   "capabilities": {
+    "disengage": 3,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Royal Shoes",
+   "evidence": {
+    "disengage": [
+     "JUMP"
+    ],
+    "mobility": [
+     "JUMP"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "JUMP"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "disengage": 3,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "slot": "shoes",
+   "unique_name": "SHOES_LEATHER_ROYAL"
+  },
+  "SHOES_LEATHER_SET1": {
+   "cap_delivery": {
+    "disengage": {
+     "radius": 1.0,
+     "spell": "CLEANSE_DASH"
+    },
+    "mobility": {
+     "radius": 1.0,
+     "spell": "CLEANSE_DASH"
+    }
+   },
+   "capabilities": {
+    "disengage": 3,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Mercenary Shoes",
+   "evidence": {
+    "disengage": [
+     "CLEANSE_DASH"
+    ],
+    "mobility": [
+     "CLEANSE_DASH"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "CLEANSE_DASH"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "disengage": 3,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "slot": "shoes",
+   "unique_name": "SHOES_LEATHER_SET1"
+  },
+  "SHOES_PLATE_FEY": {
+   "cap_delivery": {
+    "engage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CHARGE_IN"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CHARGE_IN"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CHARGE_IN"
+    }
+   },
+   "capabilities": {
+    "engage": 3,
+    "knockback_displace": 2,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Duskweaver Boots",
+   "evidence": {
+    "engage": [
+     "CHARGE_IN"
+    ],
+    "knockback_displace": [
+     "CHARGE_IN"
+    ],
+    "mobility": [
+     "CHARGE_IN"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "CHARGE_IN"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "engage": 3,
+       "knockback_displace": 2,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "slot": "shoes",
+   "unique_name": "SHOES_PLATE_FEY"
+  },
+  "SHOES_PLATE_SET1": {
+   "capabilities": {
+    "mobility": 2,
+    "self_sustain": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Soldier Boots",
+   "evidence": {
+    "mobility": [
+     "SPRINTHOT"
+    ],
+    "self_sustain": [
+     "SPRINTHOT"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "SPRINTHOT"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "mobility": 2,
+       "self_sustain": 2
+      }
+     ]
+    ]
+   },
+   "slot": "shoes",
+   "unique_name": "SHOES_PLATE_SET1"
+  },
+  "T6_POTION_HEAL": {
+   "capabilities": {
+    "self_sustain": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Healing Potion",
+   "evidence": {
+    "self_sustain": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "self_sustain": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "potion",
+   "unique_name": "T6_POTION_HEAL"
+  },
+  "T7_MEAL_OMELETTE": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Pork Omelette",
+   "evidence": {
+    "sustained_dps": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "food",
+   "unique_name": "T7_MEAL_OMELETTE"
+  },
+  "T7_MEAL_OMELETTE_AVALON": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Avalonian Pork Omelette",
+   "evidence": {
+    "sustained_dps": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "food",
+   "unique_name": "T7_MEAL_OMELETTE_AVALON"
+  },
+  "T7_POTION_REVIVE": {
+   "capabilities": {
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Gigantify Potion",
+   "evidence": {
+    "tankiness": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "potion",
+   "unique_name": "T7_POTION_REVIVE"
+  },
+  "T7_POTION_SLOWFIELD": {
+   "capabilities": {
+    "slow": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Sticky Potion",
+   "evidence": {
+    "slow": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "slow": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "potion",
+   "unique_name": "T7_POTION_SLOWFIELD"
+  },
+  "T7_POTION_STONESKIN": {
+   "capabilities": {
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Resistance Potion",
+   "evidence": {
+    "tankiness": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "potion",
+   "unique_name": "T7_POTION_STONESKIN"
+  },
+  "T8_MEAL_SANDWICH_AVALON": {
+   "capabilities": {
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Avalonian Beef Sandwich",
+   "evidence": {
+    "tankiness": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "food",
+   "unique_name": "T8_MEAL_SANDWICH_AVALON"
+  },
+  "T8_MEAL_STEW": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-20",
+   "display_name": "Beef Stew",
+   "evidence": {
+    "sustained_dps": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "food",
+   "unique_name": "T8_MEAL_STEW"
+  }
+ },
  "guild_builds": {
   "battlemounts": {
    "build": "Same on all: Mace or Bloodletter, offhand Aegis or Mistcaller, chest Judicator or Guardian as high tier as affordable (T9 ideal, best defence per silver), helmet Soldier or Mistwalker (Soldier = more health), Feyscale Sandals 4.4 (cheapest optimal, no real alternative; 4.3 fine).\n",

@@ -45,6 +45,8 @@
       return [s.a, s.b, s.bonus];
     });
     this.mechanics = data.mechanics || {};
+    /* Gear capability sheets — full-build members (mirrors engine.py). */
+    this.gear = data.gear || {};
     /* PvP interaction records (build_interactions.py), spell-keyed. Scoring
        coupling: VERIFIED records' nonstacking_caps — party supply counts
        those caps once across members equipping the same spell. unknown/
@@ -253,6 +255,7 @@
       }
     }
     this._extrasCache = {};
+    this._gearCache = {};
     this._defaultCache = {};
     this._nsCache = {};
   };
@@ -538,6 +541,80 @@
     return bestI;
   };
 
+  /* ---- gear (full-build members, 2026-08-20; mirrors engine.py) ---- */
+  CompEngine.prototype.gearExtras = function (key) {
+    var extras = this._gearCache[key];
+    if (extras !== undefined) return extras;
+    var g = this.gear[key];
+    if (!g) { extras = [{}]; this._gearCache[key] = extras; return extras; }
+    var dl = g.cap_delivery || {};
+    var lo = g.loadout || {};
+    var always = this._eff(lo.always || {}, dl);
+    var slots = [];
+    var raw = lo.slots || [];
+    for (var i = 0; i < raw.length; i++) {
+      if (!raw[i].length) continue;
+      var eff = [];
+      for (var j = 0; j < raw[i].length; j++) eff.push(this._eff(raw[i][j], dl));
+      slots.push(eff);
+    }
+    extras = [];
+    var self = this;
+    (function walk(si, acc) {
+      if (si === slots.length) {
+        var extra = {}, c;
+        for (c in always) extra[c] = always[c];
+        for (var k = 0; k < acc.length; k++)
+          for (c in acc[k]) extra[c] = (extra[c] || 0.0) + acc[k][c];
+        extras.push(extra);
+        return;
+      }
+      for (var j2 = 0; j2 < slots[si].length; j2++)
+        walk(si + 1, acc.concat([slots[si][j2]]));
+    })(0, []);
+    this._gearCache[key] = extras;
+    return extras;
+  };
+
+  CompEngine.prototype.defaultGearChoice = function (key) {
+    var extras = this.gearExtras(key);
+    var bestI = 0, bestVal = null, bestUnits = null;
+    for (var i = 0; i < extras.length; i++) {
+      var val = 0.0, units = 0.0;
+      for (var c in extras[i]) {
+        val += (this._weights[c] || 0.0) * extras[i][c];
+        units += extras[i][c];
+      }
+      if (bestVal === null || val > bestVal
+          || (val === bestVal && units > bestUnits)) {
+        bestI = i; bestVal = val; bestUnits = units;
+      }
+    }
+    return bestI;
+  };
+
+  CompEngine.prototype.gearExtra = function (key, choice) {
+    var extras = this.gearExtras(key);
+    if (choice === null || choice === undefined || choice < 0
+        || choice >= extras.length)
+      choice = this.defaultGearChoice(key);
+    return extras[choice];
+  };
+
+  CompEngine.prototype.buildExtra = function (weapon, combo, gear) {
+    var out = {}, c;
+    var base = this.memberExtra(weapon, combo);
+    for (c in base) out[c] = base[c];
+    for (var i = 0; i < (gear || []).length; i++) {
+      var item = gear[i];
+      var key = Array.isArray(item) ? item[0] : item;
+      var choice = Array.isArray(item) ? item[1] : null;
+      var extra = this.gearExtra(key, choice);
+      for (c in extra) out[c] = (out[c] || 0.0) + extra[c];
+    }
+    return out;
+  };
+
   CompEngine.prototype.memberExtra = function (weapon, combo) {
     /* One member's effective caps for a combo (null -> static default). */
     var extras = this._comboExtras(weapon);
@@ -593,12 +670,14 @@
     return s;
   };
 
-  CompEngine.prototype.effectiveSupply = function (party, combos) {
+  CompEngine.prototype.effectiveSupply = function (party, combos, gears) {
     /* Supply after physics AND the one-spell-per-slot rule; ALL scoring
        reads this (mirrors engine.py effective_supply). */
     var s = {}, c;
     for (var i = 0; i < party.length; i++) {
-      var extra = this.memberExtra(party[i], combos ? combos[i] : null);
+      var extra = (gears && gears[i] && gears[i].length)
+        ? this.buildExtra(party[i], combos ? combos[i] : null, gears[i])
+        : this.memberExtra(party[i], combos ? combos[i] : null);
       for (c in extra) s[c] = (s[c] || 0.0) + extra[c];
     }
     if (this.hasNonstack) this._applyNonstack(s, party, combos);
@@ -678,8 +757,8 @@
   };
 
   /* ---------------------------------------------------------------- fitness */
-  CompEngine.prototype.fitness = function (party, combos) {
-    var s = this.effectiveSupply(party, combos), total = 0.0;
+  CompEngine.prototype.fitness = function (party, combos, gears) {
+    var s = this.effectiveSupply(party, combos, gears), total = 0.0;
     for (var cap in this.reqs) {
       var have = s[cap] || 0.0, target = this.target(cap), soft = this.softCap(cap);
       total += this.weight(cap) * Math.pow(Math.min(1.0, have / target), this.gamma);
@@ -779,14 +858,14 @@
   };
 
   /* ---------------------------------------------------- comp-level score */
-  CompEngine.prototype.compScore = function (party, combos) {
+  CompEngine.prototype.compScore = function (party, combos, gears) {
     /* THE party-level objective (mirrors engine.py comp_score). */
     var meta = 0.0, viab = 0.0;
     for (var i = 0; i < party.length; i++) {
       meta += this.metaOf(party[i]);
       viab += this.viabilityOf(party[i]);
     }
-    return this.alpha * this.fitness(party, combos)
+    return this.alpha * this.fitness(party, combos, gears)
          + this.beta * this.synergy(party, combos)
          + this.delta * meta
          + this.viabilityW * viab

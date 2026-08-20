@@ -67,9 +67,17 @@ def make_cases(data):
         # index — the archetype path must agree between engines too
         combos = [rng.randrange(_combo_count(data, w))
                   if rng.random() < 0.5 else None for w in party]
+        # full-build members (2026-08-20): a deterministic gear list per
+        # member so the gear composition path is parity-tested too
+        gear_keys = sorted(data.get("gear") or {})
+        gears = None
+        if gear_keys:
+            gears = [[gear_keys[(i + j + k) % len(gear_keys)]
+                      for k in range(3)] if j % 2 == 0 else []
+                     for j in range(n)]
         cases.append({"content": content, "size": size,
                       "style": styles[i % len(styles)],
-                      "party": party, "combos": combos,
+                      "party": party, "combos": combos, "gears": gears,
                       "refine_pool": pool})
     return cases
 
@@ -141,6 +149,10 @@ def py_results(cases):
                              for o in m["options"]]}
                 for m in e.swap_review(sp)],
             "fitness": e.fitness(c["party"]),
+            "fitness_build": (None if not c.get("gears") else
+                              e.fitness(c["party"], None, c["gears"])),
+            "comp_score_build": (None if not c.get("gears") else
+                                 e.comp_score(c["party"], None, c["gears"])),
             "fitness_locked": e.fitness(c["party"], c["combos"]),
             "synergy": e.synergy(c["party"]),
             "synergy_locked": e.synergy(c["party"], c["combos"]),
@@ -189,8 +201,10 @@ def main():
             errs.append(f"refine: py={a['refine']} js={b['refine']}")
         for k in ("fitness", "synergy", "max_fitness", "comp_score",
                   "comp_score_locked", "fitness_locked", "synergy_locked",
-                  "redundancy"):
-            if abs(a[k] - b[k]) > EPS:
+                  "redundancy", "fitness_build", "comp_score_build"):
+            if a[k] is None and b.get(k) is None:
+                continue
+            if a[k] is None or b.get(k) is None or abs(a[k] - b[k]) > EPS:
                 errs.append(f"{k}: py={a[k]!r} js={b[k]!r}")
         if a["size_bucket"] != b["size_bucket"]:
             errs.append(f"size_bucket: py={a['size_bucket']} js={b['size_bucket']}")

@@ -345,6 +345,30 @@ def run():
           bed == 6 and iron == 2,
           f"bedrock={bed} ironclad={iron} (mastersheet override)")
 
+    # T20 — full-build members (2026-08-20): person contribution = weapon
+    # loadout + helmet/armor/shoes ability + cape + offhand + potion + food.
+    # A guild-doctrine brawl support-tank build (1H Mace + Cleric Cowl +
+    # Duskweaver Armor + Stalker Shoes + Caitiff Shield + Smuggler Cape +
+    # Gigantify + Beef Stew) must add real supply on top of the bare weapon,
+    # and the gear layer must flow through the same physics (Cleric Cowl's
+    # Force Field carries delivery facts like any weapon AoE).
+    BUILD = ["HEAD_CLOTH_SET2", "ARMOR_PLATE_FEY", "SHOES_LEATHER_MORGANA",
+             "OFF_SHIELD_HELL", "CAPEITEM_SMUGGLER", "T7_POTION_REVIVE",
+             "T8_MEAL_STEW"]
+    bare = E.member_extra("MAIN_MACE")
+    full = E.build_extra("MAIN_MACE", None, BUILD)
+    gained = {c: round(full.get(c, 0) - bare.get(c, 0), 2)
+              for c in full if full.get(c, 0) > bare.get(c, 0) + 1e-9}
+    f_bare = E.fitness(["MAIN_MACE", HALLOWFALL])
+    f_full = E.fitness(["MAIN_MACE", HALLOWFALL], None, [BUILD, None])
+    check("T20 full-build member: gear adds supply and fitness",
+          full.get("knockback_displace", 0) > bare.get("knockback_displace", 0)
+          and full.get("tankiness", 0) > bare.get("tankiness", 0)
+          and len(gained) >= 4 and f_full > f_bare + 1e-9
+          and E.gear["HEAD_CLOTH_SET2"].get("cap_delivery", {})
+                .get("knockback_displace") is not None,
+          f"gained={gained} fitness {f_bare:.2f}->{f_full:.2f}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

@@ -1,0 +1,290 @@
+# GEAR capability sheets — the full-build member model (2026-08-20).
+# Same rules as weapon sheets: 1-7 scale (2 points = one supply unit), no
+# score without evidence. Evidence = the item's ACTIVE ability id
+# (gear_spells.json menu; a player equips ONE active per piece), or the
+# GEAR_STATS sentinel for statless items (capes, offhands, potions, food)
+# whose contribution is always-on. Starter set = the items the guild
+# doctrine names (MASTERSHEET §8); curated from the dumps descriptions.
+
+# ----------------------------------------------------------------- heads
+- gear: HEAD_CLOTH_SET2              # Cleric Cowl — "fallback, never wrong"
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: knockback_displace, score: 3, evidence: PBAOE_KNOCKBACK}  # Force Field: 9m AoE shove, 6m radius, ignores CCR
+    - {cap: peel,          score: 3, evidence: PBAOE_KNOCKBACK}
+    - {cap: anti_dive,     score: 2, evidence: PBAOE_KNOCKBACK}
+    - {cap: tankiness,     score: 2, evidence: ICEBLOCK2}        # Ice Block: damage-immune channel, usable while CC'd
+
+- gear: HEAD_LEATHER_HELL            # Hellion Hood
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: silence,       score: 3, evidence: SMOKEBOMB}        # 5s cloud silences all inside (self too)
+    - {cap: zone_control,  score: 2, evidence: SMOKEBOMB}
+    - {cap: tankiness,     score: 2, evidence: SELF_CLEANSE}     # self CC/debuff cleanse, usable while CC'd
+
+- gear: HEAD_PLATE_KEEPER            # Judicator Helmet
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: stun,          score: 3, evidence: ELECTRICSHOCK}    # expanding AoE 1.5s stun, duration-escalates
+    - {cap: anti_dive,     score: 2, evidence: ELECTRICSHOCK}
+    - {cap: tankiness,     score: 2, evidence: STONESKIN}        # +50% defense 4s
+
+- gear: HEAD_PLATE_SET2              # Knight Helmet — the anti-clump tech
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: peel,          score: 3, evidence: DISRUPTIONIMMUNITY}  # 10 allies immune to forced movement 6s
+    - {cap: buff_allies,   score: 2, evidence: DISRUPTIONIMMUNITY}
+
+- gear: HEAD_PLATE_SET3              # Guardian Helmet
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: peel,          score: 2, evidence: EMERGENCY_SHIELD} # 10-ally shield
+    - {cap: buff_allies,   score: 2, evidence: EMERGENCY_SHIELD}
+    - {cap: tankiness,     score: 2, evidence: STONESKIN}
+
+- gear: HEAD_LEATHER_SET3            # Assassin Hood — "the reset"
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: SUMMONER_CD_REDUCTION}  # +80% cooldown rate channel
+
+- gear: HEAD_LEATHER_FEY             # Mistwalker Hood
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: tankiness,     score: 3, evidence: IMMORTAL}         # cannot drop below 1 HP
+
+- gear: HEAD_CLOTH_KEEPER            # Druid Cowl — the no-Chariot mana battery
+  slot: head
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: buff_allies,   score: 3, evidence: ENERGYFIELD}      # energy for 10 allies, 5s circle
+
+# ----------------------------------------------------------------- armors
+- gear: ARMOR_PLATE_KEEPER           # Judicator Armor
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: peel,          score: 4, evidence: FORCESHIELD}      # zone: +25% resists for allies inside, 8s
+    - {cap: buff_allies,   score: 3, evidence: FORCESHIELD}
+    - {cap: zone_control,  score: 2, evidence: FORCESHIELD}
+
+- gear: ARMOR_PLATE_SET2             # Knight Armor
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: purge,         score: 4, evidence: WINDWALL}         # wall purges all buffs from enemies
+    - {cap: peel,          score: 3, evidence: WINDWALL}         # knocks back to wall edge
+    - {cap: anti_dive,     score: 3, evidence: WINDWALL}
+
+- gear: ARMOR_PLATE_HELL             # Demon Armor
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: tankiness,     score: 3, evidence: REFLECTAREA}      # mobile reflect aura, uninterruptible
+
+- gear: ARMOR_PLATE_SET3             # Guardian Armor
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: damage_debuff, score: 5, evidence: ENFEEBLEAURA}     # -60% damage dealt, 7m aura, 5s — the biggest debuff in the game
+    - {cap: peel,          score: 3, evidence: ENFEEBLEAURA}
+
+- gear: ARMOR_PLATE_FEY              # Duskweaver Armor
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: slow,          score: 3, evidence: ARMOR_WEB}        # 5s web zone under your feet
+    - {cap: zone_control,  score: 2, evidence: ARMOR_WEB}
+    - {cap: anti_dive,     score: 2, evidence: ARMOR_WEB}
+
+- gear: ARMOR_LEATHER_HELL           # Hellion Jacket
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: self_sustain,  score: 3, evidence: LIFESTEALAURA}    # health-scaled AoE drain, "brawl sustain"
+    - {cap: sustained_dps, score: 2, evidence: LIFESTEALAURA}
+
+- gear: ARMOR_LEATHER_ROYAL          # Royal Jacket — "no swaps allowed"
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: buff_allies,   score: 4, evidence: ROYAL_BANNER}     # +30% AS, +30% CDR aura for allies
+
+- gear: ARMOR_LEATHER_FEY            # Mistwalker Jacket — "single most important brawl piece"
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: tankiness,     score: 3, evidence: MIST_WALKER}      # mist: immune to ALL effects
+    - {cap: disengage,     score: 3, evidence: MIST_WALKER}      # allies inside turn to mist too
+
+- gear: ARMOR_CLOTH_AVALON           # Robe of Purity
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: knockback_displace, score: 3, evidence: CASTBUBBLE}  # bubble knocks back 12m
+    - {cap: peel,          score: 3, evidence: CASTBUBBLE}
+    - {cap: tankiness,     score: 2, evidence: FROSTSHIELD}      # +30% resists 8s, reflects + slows
+
+- gear: ARMOR_CLOTH_FEY              # Feyscale Robe
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: WILD_MAGIC}       # rotating ring of fire / magical effects
+    - {cap: zone_control,  score: 2, evidence: WILD_MAGIC}
+
+- gear: ARMOR_CLOTH_SET1             # Scholar Robe
+  slot: armor
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: SPEEDCASTER}      # -50% cast time, -50% energy cost 8s
+
+# ----------------------------------------------------------------- shoes
+- gear: SHOES_LEATHER_MORGANA        # Stalker Shoes — "usually favored"
+  slot: shoes
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: mobility,      score: 3, evidence: DMG_BLINK}        # Raging Blink: teleport + stacking damage buff
+    - {cap: engage,        score: 2, evidence: DMG_BLINK}
+    - {cap: sustained_dps, score: 2, evidence: DMG_BLINK}
+
+- gear: SHOES_LEATHER_ROYAL          # Royal Shoes — the healer/tank pick
+  slot: shoes
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: disengage,     score: 3, evidence: JUMP}             # Evasive Jump: immune-while-airborne leap
+    - {cap: mobility,      score: 2, evidence: JUMP}
+
+- gear: SHOES_PLATE_FEY              # Duskweaver Boots
+  slot: shoes
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: engage,        score: 3, evidence: CHARGE_IN}        # uninterruptible dash, knocks all passed 15m
+    - {cap: knockback_displace, score: 2, evidence: CHARGE_IN}
+    - {cap: mobility,      score: 2, evidence: CHARGE_IN}
+
+- gear: SHOES_LEATHER_SET1           # Mercenary Shoes
+  slot: shoes
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: disengage,     score: 3, evidence: CLEANSE_DASH}     # dash + full CC cleanse, usable while CC'd
+    - {cap: mobility,      score: 2, evidence: CLEANSE_DASH}
+
+- gear: SHOES_LEATHER_FEY            # Mistwalker Shoes
+  slot: shoes
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: disengage,     score: 3, evidence: AFTER_IMAGE}      # dash + decoy swap combo
+    - {cap: mobility,      score: 2, evidence: AFTER_IMAGE}
+
+- gear: SHOES_PLATE_SET1             # Soldier Boots
+  slot: shoes
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: mobility,      score: 2, evidence: SPRINTHOT}        # sprint + heal over 5s
+    - {cap: self_sustain,  score: 2, evidence: SPRINTHOT}
+
+# --------------------------------------------------- offhands (stat items)
+- gear: OFF_SHIELD                   # Shield
+  slot: offhand
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}
+
+- gear: OFF_SHIELD_HELL              # Caitiff Shield
+  slot: offhand
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}
+
+- gear: OFF_SHIELD_AVALON            # Astral Aegis
+  slot: offhand
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}
+
+- gear: OFF_TOWERSHIELD_UNDEAD       # Sarcophagus
+  slot: offhand
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: tankiness,     score: 3, evidence: GEAR_STATS}
+
+- gear: OFF_TORCH_CRYSTAL            # Blueflame Torch — healer offhand
+  slot: offhand
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: heal_sustain,  score: 2, evidence: GEAR_STATS}
+
+- gear: OFF_HORN_KEEPER              # Mistcaller
+  slot: offhand
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: buff_allies,   score: 2, evidence: GEAR_STATS}
+
+# ------------------------------------------------------------------ capes
+- gear: CAPEITEM_SMUGGLER            # Smuggler Cape — guild standard
+  slot: cape
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: tankiness,     score: 1, evidence: GEAR_STATS}
+
+- gear: CAPEITEM_FW_LYMHURST         # Lymhurst Cape — healer mana proc
+  slot: cape
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: buff_allies,   score: 2, evidence: GEAR_STATS}
+
+# ---------------------------------------------------------------- potions
+- gear: T7_POTION_REVIVE             # Major Gigantify — "no choice, no substitutes"
+  slot: potion
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}       # max HP + CC resistance while giant
+
+- gear: T7_POTION_STONESKIN          # Major Resistance Potion
+  slot: potion
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}
+
+- gear: T7_POTION_SLOWFIELD          # Major Sticky Potion
+  slot: potion
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: slow,          score: 2, evidence: GEAR_STATS}
+
+- gear: T6_POTION_HEAL               # Major Healing Potion
+  slot: potion
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: self_sustain,  score: 2, evidence: GEAR_STATS}
+
+# ------------------------------------------------------------------- food
+- gear: T7_MEAL_OMELETTE_AVALON      # Ava Pork Omelette — guild default
+  slot: food
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # cooldown rate + cast speed
+
+- gear: T7_MEAL_OMELETTE             # Pork Omelette
+  slot: food
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}
+
+- gear: T8_MEAL_STEW                 # Beef Stew — brawl DPS food
+  slot: food
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # attack damage + healing received
+
+- gear: T8_MEAL_SANDWICH_AVALON      # Ava Beef Sandwich
+  slot: food
+  curated_as_of: 2026-08-20
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}       # max health + regen

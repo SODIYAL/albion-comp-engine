@@ -108,6 +108,48 @@ add:
   SHAPESHIFT_WEREWOLF:                # wolf form's lunge/chase abilities are the form payload
     catch: "form abilities (Tear Open / Rip Through lunges) are not separately equippable spells"
     mobility: "same — the wolf's movement kit lives inside the form"
+  # ---- gear actives (full-build member model, 2026-08-20). Same misfire
+  # classes on armor/shoe abilities: teleports/dashes not in the node vocab,
+  # ally-immunity and absorb shields outside it, self-centered AoE direction.
+  PBAOE_KNOCKBACK:                    # Force Field — "knocking back all enemies within a 6 radius around you by 9 (ignoring CCR)"
+    peel: "a self-centered CCR-ignoring shove IS the dive-peel button"
+    anti_dive: "same shove, thrown at the divers on you"
+  ICEBLOCK2:                          # Ice Block — "immune to damage for {0} (can be used while stunned or silenced)"
+    tankiness: "a damage-immune channel usable under CC; immunity windows are outside the vocab"
+  SELF_CLEANSE:                       # Cleanse — "cleansing all Crowd Control effects and debuffs"
+    tankiness: "self CC/debuff removal under fire is survivability; self-cleanse has no vocab entry"
+  IMMORTAL:                           # Immortal — "impossible to drop below 1 Health"
+    tankiness: "a cannot-die window is the purest tankiness; health floors are outside the vocab"
+  ELECTRICSHOCK:                      # Electric Discharge — expanding AoE stun around self
+    anti_dive: "a self-centered AoE stun is fired at the divers on you"
+  EMERGENCY_SHIELD:                   # "Emergency Shield for up to 10 allies... absorbing damage"
+    peel: "group absorb shield on the focused allies; absorb shields are outside the vocab"
+    buff_allies: "10-ally shield grant; same class as HOLYSHIELD/CRYSTALWAVE"
+  FORCESHIELD:                        # Force Shield — "Increases damage resistances by 0.25" zone for allies
+    peel: "ally-resist zone dropped on the focused clump functions as peel (ally-armor rule)"
+    buff_allies: "group resist grant inside the zone"
+  WINDWALL:                           # Wind Wall — "Purges... Knocks back all enemies to the wall's edge"
+    peel: "the wall shoves divers out and blocks the follow-up"
+    anti_dive: "same wall, cast on your backline"
+  ENFEEBLEAURA:                       # Enfeeble Aura — "Decreases all damage affected enemies deal by 0.6"
+    damage_debuff: "-60% damage dealt IS the damage debuff; parser captured only the slow"
+    peel: "gutting the divers' damage output protects the focused ally"
+  ARMOR_WEB:                          # Mythical Web — web zone under your feet, slows attackers
+    anti_dive: "a slow zone at your own feet punishes melee divers specifically"
+  CASTBUBBLE:                         # Energy Emission — "Enemies touching the bubble will get knocked back by 12"
+    peel: "a 12m bubble shove off the carried ally/self is peel"
+  DMG_BLINK:                          # Raging Blink — "Teleport towards the targeted position"
+    mobility: "a teleport is movement; 'teleport' is not an effect node the vocab knows"
+    engage: "blink in + stacking damage buff is a commit tool"
+  CHARGE_IN:                          # Crush Charge — "Dash... knocking all enemies you pass through 15"
+    engage: "an uninterruptible frontline dash is the commit button; parser captured only the stun"
+    knockback_displace: "15m mass knock along the charge line"
+    mobility: "the dash itself"
+  CLEANSE_DASH:                       # Break Free — "Dash... Removes all Crowd Control Effects"
+    disengage: "a CC-breaking dash is the escape button"
+    mobility: "the dash itself"
+  SPRINTHOT:                          # Rejuvenating Sprint — "increasing your Move Speed by 0.8"
+    mobility: "the sprint half; parser captured only the heal-over-time"
 
 # ---------------------------------------------------------------------------
 # What a spell's prose `heal` flag actually means. The heal regex fires on any

@@ -313,7 +313,31 @@ commit:
   saturation artifact already dominates those misses — MECHANICS_TODO
   Q18).
 
-## 8. Guild-approved builds
+## 8. The full-build member model (gear layer, 2026-08-20)
+
+A member is no longer just weapon + weapon spells. The engine now models:
+
+> **person contribution** = weapon loadout + helmet ability + armor ability
+> + shoes ability + cape + offhand + potion + food — every slot's
+> capabilities, through the same physics (a Force Field's 6m AoE shove
+> scales geometrically like any weapon AoE; gear abilities carry the same
+> delivery facts and rank on the same stat-chart boards).
+
+- **Gear sheets**: `pipeline/sheets/gear/*.yaml` — same rules as weapon
+  sheets (1–7 scale, no score without evidence; the evidence is the item's
+  ability id, or `GEAR_STATS` for statless items like capes/potions/food).
+  Starter set = the items your doctrine names in §9; ~40 items curated
+  from the dumps descriptions. Add items by copying an entry.
+- **One ability per piece** — the loadout rule applies to gear too; the
+  engine scores the chosen (or best) ability per slot.
+- **Engine**: `build_extra(weapon, combo, gear)` is a full member;
+  `fitness/comp_score(party, combos, gears)` price full builds. Weapon-only
+  calls are unchanged — gear is additive. Both engines verified identical
+  (parity includes full-build cases); golden T20 pins a doctrine build.
+- **Not yet**: gear in the forge/recommend loops and the dashboard UI —
+  the scoring core accepts builds today; the pickers come next.
+
+## 9. Guild-approved builds
 
 The guild announcement, recorded 2026-08-20, structured but in the guild's
 own words and weapon names. It ships into the dataset verbatim as a

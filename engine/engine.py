@@ -72,6 +72,8 @@ class Engine:
         self.synergies = [(s["a"], s["b"], s["bonus"])
                           for s in self.scoring.get("capability_synergies", [])]
         self.mechanics = self.data.get("mechanics", {}) or {}
+        # Gear capability sheets (full-build members, 2026-08-20)
+        self.gear = self.data.get("gear", {}) or {}
         # PvP interaction records (build_interactions.py, 2026-08-19),
         # spell-keyed. The scoring coupling is deliberately narrow: a
         # VERIFIED record may declare nonstacking_caps — capability names
@@ -272,6 +274,7 @@ class Engine:
                 break
         self._extras_cache = {}
         self._default_cache = {}
+        self._gear_cache = {}
         self._ns_cache = {}
 
     @staticmethod
@@ -550,6 +553,68 @@ class Engine:
         self._default_cache[weapon] = best_i
         return best_i
 
+    # ------------------------------------------------------- gear (full build)
+    # A member is no longer just weapon + weapon spells (2026-08-20): the
+    # full build is weapon + helmet/armor/shoes (one chosen ability each) +
+    # cape + offhand + potion + food. person contribution = combined
+    # effective capabilities of the whole build. Gear items come from the
+    # dataset's `gear` section (sheets/gear/), carry cap_delivery, and go
+    # through the SAME _eff physics (a Force Field's 6m AoE shove scales
+    # geometrically like any weapon AoE).
+    def gear_extras(self, key):
+        """Every ability-choice loadout of one gear item as effective-caps
+        dicts (cached per set_content). Statless items have one entry."""
+        extras = self._gear_cache.get(key)
+        if extras is None:
+            g = self.gear.get(key)
+            if g is None:
+                extras = [{}]
+            else:
+                dl = g.get("cap_delivery") or {}
+                lo = g.get("loadout") or {}
+                always = self._eff(lo.get("always", {}), dl)
+                slots = [[self._eff(b, dl) for b in slot]
+                         for slot in (lo.get("slots") or []) if slot]
+                extras = []
+                for combo in (itertools.product(*slots) if slots else [()]):
+                    extra = dict(always)
+                    for b in combo:
+                        for cap, v in b.items():
+                            extra[cap] = extra.get(cap, 0.0) + v
+                    extras.append(extra)
+            self._gear_cache[key] = extras
+        return extras
+
+    def default_gear_choice(self, key):
+        """The static ability pick under the current template weights —
+        same argmax rule as default_combo."""
+        best_i, best_key = 0, None
+        for i, extra in enumerate(self.gear_extras(key)):
+            val = units = 0.0
+            for c, v in extra.items():
+                val += self._weights.get(c, 0.0) * v
+                units += v
+            if best_key is None or (val, units) > best_key:
+                best_i, best_key = i, (val, units)
+        return best_i
+
+    def gear_extra(self, key, choice=None):
+        """One gear item's effective contribution with the chosen ability."""
+        extras = self.gear_extras(key)
+        if choice is None or choice < 0 or choice >= len(extras):
+            choice = self.default_gear_choice(key)
+        return extras[choice]
+
+    def build_extra(self, weapon, combo=None, gear=None):
+        """A FULL-BUILD member's effective caps: weapon loadout + every gear
+        item. `gear` is a list of gear keys or (key, choice) pairs."""
+        out = dict(self.member_extra(weapon, combo))
+        for item in (gear or []):
+            key, choice = item if isinstance(item, (list, tuple)) else (item, None)
+            for cap, v in self.gear_extra(key, choice).items():
+                out[cap] = out.get(cap, 0.0) + v
+        return out
+
     def member_extra(self, weapon, combo=None):
         """What ONE party member actually brings: the combo's effective caps
         (mechanics applied). combo None -> the static default."""
@@ -645,12 +710,18 @@ class Engine:
                 s[cap] = s.get(cap, 0) + v
         return s
 
-    def effective_supply(self, party, combos=None):
+    def effective_supply(self, party, combos=None, gears=None):
         """Supply after style-delivery physics AND the one-spell-per-slot
-        loadout rule. ALL scoring — floors included — reads THIS."""
+        loadout rule. ALL scoring — floors included — reads THIS.
+
+        gears (optional, full-build members): per-member list of gear keys
+        or (key, choice) pairs; None = weapon-only (unchanged behavior)."""
         s = {}
         for i, w in enumerate(party):
-            extra = self.member_extra(w, combos[i] if combos else None)
+            extra = (self.build_extra(w, combos[i] if combos else None,
+                                      gears[i] if gears else None)
+                     if gears and gears[i] else
+                     self.member_extra(w, combos[i] if combos else None))
             for cap, v in extra.items():
                 s[cap] = s.get(cap, 0.0) + v
         if self.nonstack:
@@ -739,8 +810,8 @@ class Engine:
         return cov, self._floor_penalty(cap, have) - self._floor_penalty(cap, have + gain)
 
     # ---------------------------------------------------------------- fitness
-    def fitness(self, party, combos=None):
-        s, total = self.effective_supply(party, combos), 0.0
+    def fitness(self, party, combos=None, gears=None):
+        s, total = self.effective_supply(party, combos, gears), 0.0
         for cap in self.reqs:
             have, target, soft = s.get(cap, 0.0), self.target(cap), self.soft_cap(cap)
             # style multiplies the VALUE of coverage; over-stack economics and
@@ -845,15 +916,17 @@ class Engine:
         return self._viability.get(weapon, 0.0)
 
     # -------------------------------------------------------- comp-level score
-    def comp_score(self, party, combos=None):
+    def comp_score(self, party, combos=None, gears=None):
         """THE party-level objective. Every suggestion path reports exact
-        marginals of this same blend — see _eval_pick."""
+        marginals of this same blend — see _eval_pick. `gears` (optional,
+        full-build members) adds each member's gear contributions to the
+        fitness supply; synergy/meta/dup stay weapon-keyed for now."""
         meta = 0.0
         viab = 0.0
         for w in party:
             meta += self.meta_of(w)
             viab += self.viability_of(w)
-        return (self.alpha * self.fitness(party, combos)
+        return (self.alpha * self.fitness(party, combos, gears)
                 + self.beta * self.synergy(party, combos)
                 + self.delta * meta
                 + self.viability_w * viab

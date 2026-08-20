@@ -71,10 +71,55 @@ def display_name(line, key):
     """Game data names are tier-prefixed ("Adept's Heavy Mace"); strip it."""
     name = (line or {}).get("name", key)
     for prefix in ("Adept's ", "Novice's ", "Journeyman's ", "Expert's ",
-                   "Master's ", "Grandmaster's ", "Elder's "):
+                   "Master's ", "Grandmaster's ", "Elder's ", "Beginner's ",
+                   "Minor ", "Major "):
         if name.startswith(prefix):
             return name[len(prefix):]
     return name
+
+
+def load_gear_sheets(gear_lines, gear_spells):
+    """The FULL-BUILD member model's gear layer (2026-08-20): curated gear
+    capability sheets (sheets/gear/*.yaml), same evidence discipline as
+    weapons. A gear item's loadout has ONE active-ability slot (the player
+    picks one D/R/F per piece); GEAR_STATS-evidenced rows are always-on
+    (capes, offhands, potions, food). Composed by the engine into
+    person contribution = weapon build + every gear slot's contribution."""
+    gear = {}
+    for path in sorted(glob.glob(os.path.join(HERE, "sheets", "gear", "*.yaml"))):
+        for entry in _load_yaml(path):
+            key = entry.get("gear")
+            if not key:
+                continue
+            caps, evidence, uses = {}, {}, {}
+            for c in entry.get("capabilities", []):
+                if not isinstance(c, dict):
+                    continue
+                cap, score = c.get("cap"), c.get("score", 0)
+                if not cap or not score:
+                    continue
+                caps[cap] = max(caps.get(cap, 0), score)
+                if c.get("evidence"):
+                    evidence.setdefault(cap, [])
+                    if c["evidence"] not in evidence[cap]:
+                        evidence[cap].append(c["evidence"])
+                if c.get("use"):
+                    uses[cap] = c["use"]
+            menu = gear_spells.get(key) or {}
+            pseudo_line = {"spells": {"active": menu.get("actives") or [],
+                                      "passive": menu.get("passives") or []}}
+            gl = gear_lines.get(key) or {}
+            gear[key] = {
+                "unique_name": key,
+                "display_name": display_name(gl, key),
+                "slot": entry.get("slot") or gl.get("slot"),
+                "curated_as_of": (str(entry["curated_as_of"])
+                                  if entry.get("curated_as_of") else None),
+                "capabilities": caps,
+                "evidence": evidence,
+                "loadout": build_loadout(caps, evidence, pseudo_line, uses),
+            }
+    return gear
 
 
 def build_loadout(caps, evidence, line, uses=None):
@@ -441,13 +486,26 @@ def main():
     if os.path.exists(inter_path):
         with open(inter_path, encoding="utf-8") as f:
             interactions = json.load(f).get("spells", {})
+    # Gear layer (full-build members). Loaded before delivery stamping so
+    # gear items get cap_delivery from their ability spells too.
+    gear_spells, gear_lines_db = {}, {}
+    for name, target in (("gear_spells.json", "gs"), ("gear_lines.json", "gl")):
+        p = os.path.join(OUT, name)
+        if os.path.exists(p):
+            with open(p, encoding="utf-8") as f:
+                if target == "gs":
+                    gear_spells = json.load(f)
+                else:
+                    gear_lines_db = json.load(f)
+    gear = load_gear_sheets(gear_lines_db, gear_spells)
+
     # Per-capability DELIVERY facts (2026-08-20, geometric-AoE step 3):
     # from each capability's evidence spell, the structural area geometry and
     # the game's own per-effect escalation factors (parse_dumps v4). Absent =
     # the spell tree carries no area — "unknown", never "not AoE". This is
     # display + physics INPUT data; the engine's geometric transform (step 1)
     # is what turns it into supply scaling.
-    for w in weapons.values():
+    for w in list(weapons.values()) + list(gear.values()):
         delivery = {}
         for cap, spells in (w.get("evidence") or {}).items():
             for sid in spells:
@@ -540,6 +598,10 @@ def main():
             },
         },
         "weapons": weapons,
+        # Gear capability sheets (sheets/gear/) — the full-build member
+        # model's non-weapon slots. The engine composes a person's
+        # contribution as weapon loadout + every gear slot's contribution.
+        "gear": gear,
         # Item stats bank (fetch_item_stats.py) — the game's own numbers for
         # every weapon and worn item. Optional so a checkout without it still
         # builds. REFERENCE DATA: nothing in the scoring path reads it, the

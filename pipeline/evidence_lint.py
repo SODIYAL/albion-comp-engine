@@ -45,8 +45,9 @@ WEAPONS = json.load(open(os.path.join(HERE, "out", "weapon_lines.json"), encodin
 POOLS = sheets_lib.load_pools()
 
 # Evidence values that are not spells (base item stats, e.g. tankiness from
-# armour value). Exempt from rule 3 — there is no spell to check.
-NON_SPELL_EVIDENCE = {"WEAPON_STATS"}
+# armour value; GEAR_STATS = statless gear items — capes, offhands,
+# potions, food). Exempt from rule 3 — there is no spell to check.
+NON_SPELL_EVIDENCE = {"WEAPON_STATS", "GEAR_STATS"}
 
 LOOKUP = EffectLookup()
 
@@ -212,16 +213,63 @@ def lint_pools():
     return errors, warnings
 
 
+GEAR_SPELLS = {}
+_gs_path = os.path.join(HERE, "out", "gear_spells.json")
+if os.path.exists(_gs_path):
+    GEAR_SPELLS = json.load(open(_gs_path, encoding="utf-8"))
+
+
+def lint_gear():
+    """Gear sheets (sheets/gear/): every nonzero score cites either the
+    GEAR_STATS sentinel or an ability actually ON the item's menu, and the
+    cited ability must be able to ground the claimed capability."""
+    errors, warnings = [], []
+    for path in sorted(glob.glob(os.path.join(HERE, "sheets", "gear", "*.yaml"))):
+        for entry in (yaml.safe_load(open(path, encoding="utf-8")) or []):
+            gkey = entry.get("gear")
+            if not gkey:
+                continue
+            menu = GEAR_SPELLS.get(gkey) or {}
+            equippable = set(menu.get("actives") or []) | set(menu.get("passives") or [])
+            for c in entry.get("capabilities", []):
+                cap, score, ev = c.get("cap"), c.get("score", 0), c.get("evidence")
+                where = f"gear/{gkey}.{cap}"
+                if not score:
+                    continue
+                if not ev:
+                    errors.append(f"{where}: nonzero score with no evidence")
+                    continue
+                if ev in NON_SPELL_EVIDENCE:
+                    continue
+                if ev not in equippable:
+                    errors.append(
+                        f"{where}: ability '{ev}' is NOT on this item's menu")
+                    continue
+                if cap in CHECKABLE and cap not in LOOKUP.candidates(ev):
+                    name = LOOKUP.spells.get(ev, {}).get("name", ev)
+                    if not LOOKUP.has_structured(ev) and not LOOKUP.spells.get(ev, {}).get("flags"):
+                        warnings.append(
+                            f"{where}: '{name}' has no structured effects and "
+                            f"no prose flags — cannot verify, review by hand")
+                    else:
+                        offer = ", ".join(sorted(LOOKUP.candidates(ev))) or "nothing"
+                        errors.append(
+                            f"{where}: '{name}' cannot ground {cap}. "
+                            f"Its effects support: {offer}")
+    return errors, warnings
+
+
 def main(paths):
     total_err = 0
-    errors, warnings = lint_pools()
-    status = "FAIL" if errors else "OK"
-    print(f"[{status}] sheets/pools/  ({len(errors)} errors, {len(warnings)} warnings)")
-    for e in errors:
-        print(f"   ERROR  {e}")
-    for w in warnings:
-        print(f"   warn   {w}")
-    total_err += len(errors)
+    for label, fn in (("sheets/pools/", lint_pools), ("sheets/gear/", lint_gear)):
+        errors, warnings = fn()
+        status = "FAIL" if errors else "OK"
+        print(f"[{status}] {label}  ({len(errors)} errors, {len(warnings)} warnings)")
+        for e in errors:
+            print(f"   ERROR  {e}")
+        for w in warnings:
+            print(f"   warn   {w}")
+        total_err += len(errors)
     for path in paths:
         errors, warnings = lint_sheet(path)
         status = "FAIL" if errors else "OK"

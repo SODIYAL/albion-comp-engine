@@ -38,6 +38,8 @@ const out = cases.map((c, i) => {
       options: m.options.map((o) => ({ weapon: o.weapon, score: o.score })),
     })),
     fitness: e.fitness(c.party),
+    fitness_build: ((!c.gears || !c.gears.length) ? null : e.fitness(c.party, null, c.gears)),
+    comp_score_build: ((!c.gears || !c.gears.length) ? null : e.compScore(c.party, null, c.gears)),
     fitness_locked: e.fitness(c.party, c.combos),
     synergy: e.synergy(c.party),
     synergy_locked: e.synergy(c.party, c.combos),

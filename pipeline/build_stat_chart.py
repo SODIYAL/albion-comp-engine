@@ -382,6 +382,21 @@ def main():
                 if score:
                     rows.append((c["cap"], wk, c["evidence"], score))
 
+    # gear sheets (full-build member model): gear abilities rank on the
+    # same boards as weapon spells — a Force Field shove beside the
+    # crossbow shove, judged by the same rubric
+    gear_names = {k: f"{g['display_name']} [{g.get('slot','gear')}]"
+                  for k, g in (dataset.get("gear") or {}).items()}
+    for path in sorted(glob.glob(os.path.join(HERE, "sheets", "gear", "*.yaml"))):
+        for entry in (yaml.safe_load(open(path, encoding="utf-8")) or []):
+            gk = entry.get("gear")
+            if not gk:
+                continue
+            for c in entry.get("capabilities", []):
+                if isinstance(c, dict) and c.get("cap") and c.get("evidence") and c.get("score"):
+                    rows.append((c["cap"], gk, c["evidence"], c["score"]))
+    names.update(gear_names)
+
     spells = sorted({sid for _, _, sid, _ in rows})
     extracted = {sid: extract(sid, reg) for sid in spells}
     n_ok = sum(1 for v in extracted.values() if v)

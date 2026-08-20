@@ -140,8 +140,8 @@
    "MAIN_SWORD_CRYSTAL": 138
   },
   "note": "base dump numbers \u2014 the same IP reference for every weapon; equal-IP comparison equals base comparison",
-  "spells_cited": 231,
-  "spells_extracted": 230,
+  "spells_cited": 261,
+  "spells_extracted": 259,
   "tier_model": {
    "does_not_scale": "percentage effects, durations, distances, and records flagged ignoreabilitypowerscaling (tier-flat in the fact line)",
    "formula": "effective ~ base * (family_ap/100) * 1.0918^((IP-700)/100)",
@@ -183,6 +183,22 @@
     ]
    },
    {
+    "casts_min": 2.0,
+    "detail": "knockback 9.0m",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
+    "group": "displacement (m)",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "PBAOE_KNOCKBACK",
+    "unit": "m",
+    "value": 9.0,
+    "weapons": [
+     "Cleric Cowl [head]"
+    ]
+   },
+   {
     "casts_min": 3.3,
     "detail": "knockback 4.26m",
     "facts": "self/contact \u00b7 18s CD",
@@ -219,6 +235,22 @@
     "value": 2.5,
     "weapons": [
      "Great Arcane Staff"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "hard CC 1.5s",
+    "facts": "persists 1.33s \u00b7 self/contact \u00b7 45s CD",
+    "group": "hard CC (s)",
+    "per_min": 2.0,
+    "scores": [
+     2
+    ],
+    "spell": "ELECTRICSHOCK",
+    "unit": "s",
+    "value": 1.5,
+    "weapons": [
+     "Judicator Helmet [head]"
     ]
    },
    {
@@ -273,6 +305,38 @@
      "Polehammer",
      "Tombhammer",
      "Truebolt Hammer"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "slow-power 1.75",
+    "facts": "persists 5s \u00b7 self/contact \u00b7 ignores CCR \u00b7 tier-flat \u00b7 40s CD",
+    "group": "slows (strength \u00d7 duration)",
+    "per_min": 2.6,
+    "scores": [
+     2
+    ],
+    "spell": "ARMOR_WEB",
+    "unit": "slow%\u00b7s",
+    "value": 1.75,
+    "weapons": [
+     "Duskweaver Armor [armor]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "persists 6s \u00b7 ground-cast @3m \u00b7 channeled \u00b7 40s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "WINDWALL",
+    "unit": "m",
+    "value": null,
+    "weapons": [
+     "Knight Armor [armor]"
     ]
    }
   ],
@@ -329,6 +393,22 @@
    },
    {
     "casts_min": null,
+    "detail": "magiccooldownreduction +0.5 for 7s",
+    "facts": "self/contact \u00b7 50s CD",
+    "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 4.2,
+    "scores": [
+     4
+    ],
+    "spell": "ROYAL_BANNER",
+    "unit": "value\u00b7s",
+    "value": 3.5,
+    "weapons": [
+     "Royal Jacket [armor]"
+    ]
+   },
+   {
+    "casts_min": null,
     "detail": "movespeedbonus -0.5 for 5s",
     "facts": "targeted friendother @9m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
@@ -368,6 +448,22 @@
      "Nature Staff",
      "Rampant Staff",
      "Wild Staff"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "physicalarmor +0.25 for 8s",
+    "facts": "persists 8s \u00b7 self/contact \u00b7 50s CD",
+    "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 2.4,
+    "scores": [
+     3
+    ],
+    "spell": "FORCESHIELD",
+    "unit": "value\u00b7s",
+    "value": 2.0,
+    "weapons": [
+     "Judicator Armor [armor]"
     ]
    },
    {
@@ -678,6 +774,71 @@
     "value": null,
     "weapons": [
      "Rootbound Staff"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "self/contact \u00b7 25s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "DISRUPTIONIMMUNITY",
+    "unit": "value\u00b7s",
+    "value": null,
+    "weapons": [
+     "Knight Helmet [head]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "self/contact \u00b7 30s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "EMERGENCY_SHIELD",
+    "unit": "value\u00b7s",
+    "value": null,
+    "weapons": [
+     "Guardian Helmet [head]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "persists 8s \u00b7 self/contact \u00b7 30s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "ENERGYFIELD",
+    "unit": "value\u00b7s",
+    "value": null,
+    "weapons": [
+     "Druid Cowl [head]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "GEAR_STATS",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Lymhurst Cape [cape]",
+     "Mistcaller [offhand]"
     ]
    }
   ],
@@ -1724,6 +1885,22 @@
     "value": null,
     "weapons": [
      "Lightcaller"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "persists 3s \u00b7 self/contact",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "WILD_MAGIC",
+    "unit": "dmg/cast",
+    "value": null,
+    "weapons": [
+     "Feyscale Robe [armor]"
     ]
    }
   ],
@@ -3197,6 +3374,22 @@
    },
    {
     "casts_min": null,
+    "detail": "physicalattackdamagebonus -0.6 for 5s",
+    "facts": "self/contact \u00b7 30s CD",
+    "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 6.0,
+    "scores": [
+     5
+    ],
+    "spell": "ENFEEBLEAURA",
+    "unit": "value\u00b7s",
+    "value": 3.0,
+    "weapons": [
+     "Guardian Armor [armor]"
+    ]
+   },
+   {
+    "casts_min": null,
     "detail": "attackspeedbonus -0.5 for 5s",
     "facts": "self/contact \u00b7 18s CD",
     "group": "stat modifiers (value \u00d7 duration)",
@@ -3735,6 +3928,70 @@
     "value": null,
     "weapons": [
      "Spear [AP138]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "persists 6s \u00b7 self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 50s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "MIST_WALKER",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Mistwalker Jacket [armor]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "ground-cast @14m \u00b7 20s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "JUMP",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Royal Shoes [shoes]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "ground-cast @12m \u00b7 30s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "CLEANSE_DASH",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Mercenary Shoes [shoes]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "persists 6s \u00b7 ground-cast @10m \u00b7 12s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "AFTER_IMAGE",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Mistwalker Shoes [shoes]"
     ]
    }
   ],
@@ -4321,6 +4578,38 @@
     "value": null,
     "weapons": [
      "Broadsword [AP138]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "ground-cast @7m \u00b7 25s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "DMG_BLINK",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Stalker Shoes [shoes]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "ground-cast @12m \u00b7 25s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "CHARGE_IN",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Duskweaver Boots [shoes]"
     ]
    }
   ],
@@ -5071,6 +5360,22 @@
     "weapons": [
      "Rootbound Staff"
     ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "GEAR_STATS",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Blueflame Torch [offhand]"
+    ]
    }
   ],
   "knockback_displace": [
@@ -5091,6 +5396,22 @@
     ]
    },
    {
+    "casts_min": 2.4,
+    "detail": "",
+    "facts": "ground-cast @12m \u00b7 25s CD",
+    "group": "displacement (m)",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "CHARGE_IN",
+    "unit": "m",
+    "value": 15.0,
+    "weapons": [
+     "Duskweaver Boots [shoes]"
+    ]
+   },
+   {
     "casts_min": 2.1,
     "detail": "ignores CC resistance",
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 29s CD",
@@ -5104,6 +5425,22 @@
     "value": 12.0,
     "weapons": [
      "Iron-clad Staff [AP126]"
+    ]
+   },
+   {
+    "casts_min": 1.5,
+    "detail": "ignores CC resistance",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 40s CD",
+    "group": "displacement (m)",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "CASTBUBBLE",
+    "unit": "m",
+    "value": 12.0,
+    "weapons": [
+     "Robe of Purity [armor]"
     ]
    },
    {
@@ -5179,6 +5516,22 @@
      "Hellfire Hands [AP138]",
      "Spiked Gauntlets [AP138]",
      "Ursine Maulers [AP138]"
+    ]
+   },
+   {
+    "casts_min": 2.0,
+    "detail": "ignores CC resistance",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
+    "group": "displacement (m)",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "PBAOE_KNOCKBACK",
+    "unit": "m",
+    "value": 9.0,
+    "weapons": [
+     "Cleric Cowl [head]"
     ]
    },
    {
@@ -6317,6 +6670,102 @@
     "weapons": [
      "Infinity Blade [AP138]"
     ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "ground-cast @7m \u00b7 25s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "DMG_BLINK",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Stalker Shoes [shoes]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "ground-cast @14m \u00b7 20s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "JUMP",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Royal Shoes [shoes]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "ground-cast @12m \u00b7 25s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "CHARGE_IN",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Duskweaver Boots [shoes]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "ground-cast @12m \u00b7 30s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "CLEANSE_DASH",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Mercenary Shoes [shoes]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "persists 6s \u00b7 ground-cast @10m \u00b7 12s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "AFTER_IMAGE",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Mistwalker Shoes [shoes]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "self/contact \u00b7 30s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "SPRINTHOT",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Soldier Boots [shoes]"
+    ]
    }
   ],
   "peel": [
@@ -6350,6 +6799,22 @@
     "value": 12.0,
     "weapons": [
      "Iron-clad Staff [AP126]"
+    ]
+   },
+   {
+    "casts_min": 1.5,
+    "detail": "knockback 12.0m",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 40s CD",
+    "group": "displacement (m)",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "CASTBUBBLE",
+    "unit": "m",
+    "value": 12.0,
+    "weapons": [
+     "Robe of Purity [armor]"
     ]
    },
    {
@@ -6428,6 +6893,22 @@
      "Exalted Staff",
      "Holy Staff",
      "Redemption Staff"
+    ]
+   },
+   {
+    "casts_min": 2.0,
+    "detail": "knockback 9.0m",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
+    "group": "displacement (m)",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "PBAOE_KNOCKBACK",
+    "unit": "m",
+    "value": 9.0,
+    "weapons": [
+     "Cleric Cowl [head]"
     ]
    },
    {
@@ -7008,6 +7489,22 @@
    },
    {
     "casts_min": null,
+    "detail": "slow-power 0.75",
+    "facts": "self/contact \u00b7 30s CD",
+    "group": "slows (strength \u00d7 duration)",
+    "per_min": 1.5,
+    "scores": [
+     3
+    ],
+    "spell": "ENFEEBLEAURA",
+    "unit": "slow%\u00b7s",
+    "value": 0.75,
+    "weapons": [
+     "Guardian Armor [armor]"
+    ]
+   },
+   {
+    "casts_min": null,
     "detail": "slow-power 0.6",
     "facts": "targeted enemy @4m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 18s CD",
     "group": "slows (strength \u00d7 duration)",
@@ -7232,6 +7729,70 @@
     "weapons": [
      "Trinity Spear [AP138]"
     ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "self/contact \u00b7 25s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "DISRUPTIONIMMUNITY",
+    "unit": "m",
+    "value": null,
+    "weapons": [
+     "Knight Helmet [head]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "self/contact \u00b7 30s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "EMERGENCY_SHIELD",
+    "unit": "m",
+    "value": null,
+    "weapons": [
+     "Guardian Helmet [head]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "persists 8s \u00b7 self/contact \u00b7 50s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     4
+    ],
+    "spell": "FORCESHIELD",
+    "unit": "m",
+    "value": null,
+    "weapons": [
+     "Judicator Armor [armor]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "persists 6s \u00b7 ground-cast @3m \u00b7 channeled \u00b7 40s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "WINDWALL",
+    "unit": "m",
+    "value": null,
+    "weapons": [
+     "Knight Armor [armor]"
+    ]
    }
   ],
   "purge": [
@@ -7384,6 +7945,22 @@
     "value": null,
     "weapons": [
      "Daybreaker [AP138]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "persists 6s \u00b7 ground-cast @3m \u00b7 channeled \u00b7 40s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     4
+    ],
+    "spell": "WINDWALL",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Knight Armor [armor]"
     ]
    }
   ],
@@ -8095,6 +8672,22 @@
    },
    {
     "casts_min": null,
+    "detail": "0.5/s over 30s CD",
+    "facts": "self/contact \u00b7 30s CD",
+    "group": "healing per cast",
+    "per_min": 28.8,
+    "scores": [
+     2
+    ],
+    "spell": "SPRINTHOT",
+    "unit": "heal/cast",
+    "value": 14.4,
+    "weapons": [
+     "Soldier Boots [shoes]"
+    ]
+   },
+   {
+    "casts_min": null,
     "detail": "",
     "facts": "",
     "group": "not measurable \u2014 human judgment",
@@ -8366,9 +8959,57 @@
      "Spirithunter [AP138]",
      "Trinity Spear [AP138]"
     ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "self/contact \u00b7 40s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "LIFESTEALAURA",
+    "unit": "heal/cast",
+    "value": null,
+    "weapons": [
+     "Hellion Jacket [armor]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "GEAR_STATS",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Healing Potion [potion]"
+    ]
    }
   ],
   "silence": [
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "persists 7s \u00b7 self/contact \u00b7 ignores CCR \u00b7 tier-flat \u00b7 40s CD",
+    "group": "hard CC (s)",
+    "per_min": 7.5,
+    "scores": [
+     3
+    ],
+    "spell": "SMOKEBOMB",
+    "unit": "s",
+    "value": 5.0,
+    "weapons": [
+     "Hellion Hood [head]"
+    ]
+   },
    {
     "casts_min": null,
     "detail": "",
@@ -8596,6 +9237,22 @@
      "Polehammer",
      "Tombhammer",
      "Truebolt Hammer"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "slow-power 1.75",
+    "facts": "persists 5s \u00b7 self/contact \u00b7 ignores CCR \u00b7 tier-flat \u00b7 40s CD",
+    "group": "slows (strength \u00d7 duration)",
+    "per_min": 2.6,
+    "scores": [
+     3
+    ],
+    "spell": "ARMOR_WEB",
+    "unit": "slow%\u00b7s",
+    "value": 1.75,
+    "weapons": [
+     "Duskweaver Armor [armor]"
     ]
    },
    {
@@ -8970,6 +9627,22 @@
      "Rampant Staff",
      "Wild Staff"
     ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "GEAR_STATS",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Sticky Potion [potion]"
+    ]
    }
   ],
   "stun": [
@@ -9154,6 +9827,22 @@
     "value": 1.75,
     "weapons": [
      "Heron Spear [AP138]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "persists 1.33s \u00b7 self/contact \u00b7 45s CD",
+    "group": "hard CC (s)",
+    "per_min": 2.0,
+    "scores": [
+     3
+    ],
+    "spell": "ELECTRICSHOCK",
+    "unit": "s",
+    "value": 1.5,
+    "weapons": [
+     "Judicator Helmet [head]"
     ]
    },
    {
@@ -9464,6 +10153,22 @@
    {
     "casts_min": null,
     "detail": "",
+    "facts": "self/contact \u00b7 40s CD",
+    "group": "damage per second",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "LIFESTEALAURA",
+    "unit": "dmg/s",
+    "value": 6.0,
+    "weapons": [
+     "Hellion Jacket [armor]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
     "facts": "self/contact \u00b7 10s CD",
     "group": "damage per second",
     "per_min": null,
@@ -9678,6 +10383,22 @@
    },
    {
     "casts_min": null,
+    "detail": "+8% AA dmg for 4.5s",
+    "facts": "ground-cast @7m \u00b7 25s CD",
+    "group": "auto-attack amplifiers (multiplier)",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "DMG_BLINK",
+    "unit": "\u00d7AA",
+    "value": 0.08,
+    "weapons": [
+     "Stalker Shoes [shoes]"
+    ]
+   },
+   {
+    "casts_min": null,
     "detail": "+2% AA dmg for 3s",
     "facts": "",
     "group": "auto-attack amplifiers (multiplier)",
@@ -9828,9 +10549,75 @@
     "weapons": [
      "Arctic Staff"
     ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "self/contact \u00b7 channeled \u00b7 40s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "SUMMONER_CD_REDUCTION",
+    "unit": "dmg/cast",
+    "value": null,
+    "weapons": [
+     "Assassin Hood [head]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "self/contact \u00b7 30s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "SPEEDCASTER",
+    "unit": "dmg/cast",
+    "value": null,
+    "weapons": [
+     "Scholar Robe [armor]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "GEAR_STATS",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Avalonian Pork Omelette [food]",
+     "Beef Stew [food]",
+     "Pork Omelette [food]"
+    ]
    }
   ],
   "tankiness": [
+   {
+    "casts_min": null,
+    "detail": "crowdcontrolresistance +9999 for 4s",
+    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 90s CD",
+    "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 26664.0,
+    "scores": [
+     2
+    ],
+    "spell": "ICEBLOCK2",
+    "unit": "value\u00b7s",
+    "value": 39996.0,
+    "weapons": [
+     "Cleric Cowl [head]"
+    ]
+   },
    {
     "casts_min": null,
     "detail": "movespeedbonus -0.5 for 15s",
@@ -9861,6 +10648,71 @@
     "value": 5.0,
     "weapons": [
      "Forge Hammers"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "physicalarmor +0.43 for 6s",
+    "facts": "self/contact \u00b7 channeled \u00b7 40s CD",
+    "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 3.9,
+    "scores": [
+     3
+    ],
+    "spell": "REFLECTAREA",
+    "unit": "value\u00b7s",
+    "value": 2.6,
+    "weapons": [
+     "Demon Armor [armor]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "physicalarmor +0.3 for 8s",
+    "facts": "self/contact \u00b7 40s CD",
+    "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 3.6,
+    "scores": [
+     2
+    ],
+    "spell": "FROSTSHIELD",
+    "unit": "value\u00b7s",
+    "value": 2.4,
+    "weapons": [
+     "Robe of Purity [armor]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "bonusdefensevsplayers +0.5 for 4s",
+    "facts": "self/contact \u00b7 30s CD",
+    "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 4.0,
+    "scores": [
+     2
+    ],
+    "spell": "STONESKIN",
+    "unit": "value\u00b7s",
+    "value": 2.0,
+    "weapons": [
+     "Guardian Helmet [head]",
+     "Judicator Helmet [head]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "movespeedbonus -0.3 for 5s",
+    "facts": "persists 6s \u00b7 self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 50s CD",
+    "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 1.8,
+    "scores": [
+     3
+    ],
+    "spell": "MIST_WALKER",
+    "unit": "value\u00b7s",
+    "value": 1.5,
+    "weapons": [
+     "Mistwalker Jacket [armor]"
     ]
    },
    {
@@ -9926,6 +10778,63 @@
      "Quarterstaff [AP126]",
      "Tombhammer",
      "Truebolt Hammer"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "self/contact \u00b7 20s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "SELF_CLEANSE",
+    "unit": "value\u00b7s",
+    "value": null,
+    "weapons": [
+     "Hellion Hood [head]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "self/contact \u00b7 25s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     3
+    ],
+    "spell": "IMMORTAL",
+    "unit": "value\u00b7s",
+    "value": null,
+    "weapons": [
+     "Mistwalker Hood [head]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     1,
+     2,
+     3
+    ],
+    "spell": "GEAR_STATS",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Astral Aegis [offhand]",
+     "Avalonian Beef Sandwich [food]",
+     "Caitiff Shield [offhand]",
+     "Gigantify Potion [potion]",
+     "Resistance Potion [potion]",
+     "Sarcophagus [offhand]",
+     "Shield [offhand]",
+     "Smuggler Cape [cape]"
     ]
    }
   ],
@@ -10467,10 +11376,89 @@
     "weapons": [
      "Witchwork Staff"
     ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "persists 7s \u00b7 self/contact \u00b7 ignores CCR \u00b7 tier-flat \u00b7 40s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "SMOKEBOMB",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Hellion Hood [head]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "persists 8s \u00b7 self/contact \u00b7 50s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "FORCESHIELD",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Judicator Armor [armor]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "persists 5s \u00b7 self/contact \u00b7 ignores CCR \u00b7 tier-flat \u00b7 40s CD",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "ARMOR_WEB",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Duskweaver Armor [armor]"
+    ]
+   },
+   {
+    "casts_min": null,
+    "detail": "",
+    "facts": "persists 3s \u00b7 self/contact",
+    "group": "not measurable \u2014 human judgment",
+    "per_min": null,
+    "scores": [
+     2
+    ],
+    "spell": "WILD_MAGIC",
+    "unit": "",
+    "value": null,
+    "weapons": [
+     "Feyscale Robe [armor]"
+    ]
    }
   ]
  },
  "spells": {
+  "AFTER_IMAGE": {
+   "cast_range": 10.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 12.0,
+   "damage": [],
+   "delivery": "ground",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [],
+   "persist_s": 6.0,
+   "stand_time": 0.0
+  },
   "AIR_RAID": {
    "cast_range": 10.0,
    "cast_time": 0.0,
@@ -10701,6 +11689,28 @@
    ],
    "persist_s": 0.7,
    "stand_time": 0.7
+  },
+  "ARMOR_WEB": {
+   "cast_range": 0.0,
+   "cast_time": 0.4,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 40.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": true,
+   "ignores_ccr": true,
+   "mods": [
+    {
+     "duration": 5.0,
+     "target": "enemy",
+     "type": "movespeedbonus",
+     "value": -0.35
+    }
+   ],
+   "persist_s": 5.0,
+   "stand_time": 0.0
   },
   "ARROWRAIN": {
    "cast_range": 15.0,
@@ -11445,6 +12455,33 @@
    "persist_s": null,
    "stand_time": 0.0
   },
+  "CASTBUBBLE": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [
+    {
+     "distance": 12.0,
+     "ignores_ccr": true,
+     "target": "enemy",
+     "type": "knockback"
+    }
+   ],
+   "channeled": false,
+   "cooldown": 40.0,
+   "damage": [
+    {
+     "target": "enemy",
+     "value": 25.0
+    }
+   ],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": true,
+   "ignores_ccr": true,
+   "mods": [],
+   "persist_s": null,
+   "stand_time": 0.0
+  },
   "CELESTIAL_SPHERE": {
    "cast_range": 10.0,
    "cast_time": 0.5,
@@ -11492,6 +12529,39 @@
    ],
    "persist_s": null,
    "stand_time": 0.1
+  },
+  "CHARGE_IN": {
+   "cast_range": 12.0,
+   "cast_time": 0.6,
+   "cc": [
+    {
+     "distance": 15.0,
+     "ignores_ccr": false,
+     "target": "enemy",
+     "type": "knockback"
+    },
+    {
+     "duration": 2.5,
+     "target": "enemy",
+     "type": "stun"
+    }
+   ],
+   "channeled": false,
+   "cooldown": 25.0,
+   "damage": [
+    {
+     "escalates": true,
+     "target": "enemy",
+     "value": 60.0
+    }
+   ],
+   "delivery": "ground",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [],
+   "persist_s": null,
+   "stand_time": 0.0
   },
   "CHARGE_ROOT": {
    "cast_range": 11.0,
@@ -11802,6 +12872,21 @@
      "value": 0.4
     }
    ],
+   "persist_s": null,
+   "stand_time": 0.0
+  },
+  "CLEANSE_DASH": {
+   "cast_range": 12.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 30.0,
+   "damage": [],
+   "delivery": "ground",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [],
    "persist_s": null,
    "stand_time": 0.0
   },
@@ -12555,6 +13640,21 @@
    "persist_s": null,
    "stand_time": 0.2
   },
+  "DISRUPTIONIMMUNITY": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 25.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [],
+   "persist_s": null,
+   "stand_time": 0.0
+  },
   "DIVEPUNCH_RISE": {
    "cast_range": 0.0,
    "cast_time": 0.0,
@@ -12594,6 +13694,52 @@
    "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
+   "persist_s": null,
+   "stand_time": 0.0
+  },
+  "DMG_BLINK": {
+   "cast_range": 7.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 25.0,
+   "damage": [],
+   "delivery": "ground",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [
+    {
+     "duration": 4.5,
+     "target": "self",
+     "type": "physicalattackdamagebonus",
+     "value": 0.08
+    },
+    {
+     "duration": 4.5,
+     "target": "self",
+     "type": "magicattackdamagebonus",
+     "value": 0.08
+    },
+    {
+     "duration": 4.5,
+     "target": "self",
+     "type": "physicalspelldamagebonus",
+     "value": 0.08
+    },
+    {
+     "duration": 4.5,
+     "target": "self",
+     "type": "magicspelldamagebonus",
+     "value": 0.08
+    },
+    {
+     "duration": 4.5,
+     "target": "self",
+     "type": "healbonus",
+     "value": 0.08
+    }
+   ],
    "persist_s": null,
    "stand_time": 0.0
   },
@@ -12720,6 +13866,53 @@
    "persist_s": 5.2,
    "stand_time": 0.2
   },
+  "ELECTRICSHOCK": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [
+    {
+     "duration": 1.5,
+     "target": "enemy",
+     "type": "stun"
+    }
+   ],
+   "channeled": false,
+   "cooldown": 45.0,
+   "damage": [
+    {
+     "escalates": true,
+     "target": "enemy",
+     "value": 26.0
+    },
+    {
+     "escalates": true,
+     "target": "enemy",
+     "value": 20.18
+    }
+   ],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [],
+   "persist_s": 1.33,
+   "stand_time": 0.0
+  },
+  "EMERGENCY_SHIELD": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 30.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [],
+   "persist_s": null,
+   "stand_time": 0.0
+  },
   "EMPOWERBEAM": {
    "cast_range": 9.0,
    "cast_time": 0.0,
@@ -12765,6 +13958,91 @@
    ],
    "persist_s": null,
    "stand_time": 0.2
+  },
+  "ENERGYFIELD": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 30.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [],
+   "persist_s": 8.0,
+   "stand_time": 0.0
+  },
+  "ENFEEBLEAURA": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 30.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [
+    {
+     "duration": 5.0,
+     "target": "enemy",
+     "type": "movespeedbonus",
+     "value": -0.15
+    },
+    {
+     "duration": 5.0,
+     "target": "enemy",
+     "type": "physicalattackdamagebonus",
+     "value": -0.6
+    },
+    {
+     "duration": 5.0,
+     "target": "enemy",
+     "type": "magicattackdamagebonus",
+     "value": -0.6
+    },
+    {
+     "duration": 5.0,
+     "target": "enemy",
+     "type": "physicalspelldamagebonus",
+     "value": -0.6
+    },
+    {
+     "duration": 5.0,
+     "target": "enemy",
+     "type": "magicspelldamagebonus",
+     "value": -0.6
+    },
+    {
+     "duration": 5.0,
+     "target": "self",
+     "type": "physicalattackdamagebonus",
+     "value": -0.15
+    },
+    {
+     "duration": 5.0,
+     "target": "self",
+     "type": "magicattackdamagebonus",
+     "value": -0.15
+    },
+    {
+     "duration": 5.0,
+     "target": "self",
+     "type": "physicalspelldamagebonus",
+     "value": -0.15
+    },
+    {
+     "duration": 5.0,
+     "target": "self",
+     "type": "magicspelldamagebonus",
+     "value": -0.15
+    }
+   ],
+   "persist_s": null,
+   "stand_time": 0.6
   },
   "ENFEEBLEBLADES": {
    "cast_range": 15.0,
@@ -13099,6 +14377,40 @@
    "persist_s": 5.3,
    "stand_time": 0.4
   },
+  "FORCESHIELD": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 50.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [
+    {
+     "duration": 8.0,
+     "target": "friendall",
+     "type": "physicalarmor",
+     "value": 0.25
+    },
+    {
+     "duration": 8.0,
+     "target": "friendall",
+     "type": "magicresistance",
+     "value": 0.25
+    },
+    {
+     "duration": 8.0,
+     "target": "friendall",
+     "type": "healmodifier",
+     "value": 0.25
+    }
+   ],
+   "persist_s": 8.0,
+   "stand_time": 0.4
+  },
   "FRAZZLE2": {
    "cast_range": 15.0,
    "cast_time": 0.5,
@@ -13219,6 +14531,40 @@
    "mods": [],
    "persist_s": 0.1,
    "stand_time": 0.2
+  },
+  "FROSTSHIELD": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 40.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [
+    {
+     "duration": 2.0,
+     "target": "enemy",
+     "type": "movespeedbonus",
+     "value": -0.4
+    },
+    {
+     "duration": 8.0,
+     "target": "self",
+     "type": "physicalarmor",
+     "value": 0.3
+    },
+    {
+     "duration": 8.0,
+     "target": "self",
+     "type": "magicresistance",
+     "value": 0.3
+    }
+   ],
+   "persist_s": null,
+   "stand_time": 0.0
   },
   "FROST_BITE": {
    "cast_range": 18.0,
@@ -13372,6 +14718,7 @@
    "persist_s": 3.0,
    "stand_time": 0.2
   },
+  "GEAR_STATS": null,
   "GEYSER": {
    "cast_range": 11.0,
    "cast_time": 0.0,
@@ -14292,6 +15639,34 @@
    "persist_s": null,
    "stand_time": 0.1
   },
+  "ICEBLOCK2": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [
+    {
+     "duration": 4.0,
+     "target": "self",
+     "type": "stun"
+    }
+   ],
+   "channeled": true,
+   "cooldown": 90.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": true,
+   "ignores_ccr": true,
+   "mods": [
+    {
+     "duration": 4.0,
+     "target": "self",
+     "type": "crowdcontrolresistance",
+     "value": 9999.0
+    }
+   ],
+   "persist_s": null,
+   "stand_time": 0.0
+  },
   "ICEROCK_EXPLODE": {
    "cast_range": 26.0,
    "cast_time": 0.0,
@@ -14423,6 +15798,21 @@
    "persist_s": 6.5,
    "stand_time": 0.2
   },
+  "IMMORTAL": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 25.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [],
+   "persist_s": null,
+   "stand_time": 0.0
+  },
   "IMPULSE_PUNCH": {
    "cast_range": 13.0,
    "cast_time": 0.6,
@@ -14533,6 +15923,28 @@
    ],
    "persist_s": 0.25,
    "stand_time": 0.5
+  },
+  "JUMP": {
+   "cast_range": 14.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 20.0,
+   "damage": [],
+   "delivery": "ground",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [
+    {
+     "duration": 5.0,
+     "target": "self",
+     "type": "movespeedbonus",
+     "value": 0.4
+    }
+   ],
+   "persist_s": null,
+   "stand_time": 0.0
   },
   "JUMPSHOT2": {
    "cast_range": 2.0,
@@ -14804,6 +16216,62 @@
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 1.3,
+   "stand_time": 0.0
+  },
+  "LIFESTEALAURA": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 40.0,
+   "damage": [
+    {
+     "target": "enemy",
+     "value": 16.0
+    },
+    {
+     "target": "enemy",
+     "value": 16.0
+    },
+    {
+     "target": "enemy",
+     "value": 20.0
+    },
+    {
+     "target": "enemy",
+     "value": 20.0
+    },
+    {
+     "target": "enemy",
+     "value": 24.0
+    },
+    {
+     "target": "enemy",
+     "value": 24.0
+    },
+    {
+     "target": "enemy",
+     "value": 28.0
+    },
+    {
+     "target": "enemy",
+     "value": 28.0
+    },
+    {
+     "target": "enemy",
+     "value": 32.0
+    },
+    {
+     "target": "enemy",
+     "value": 32.0
+    }
+   ],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [],
+   "persist_s": null,
    "stand_time": 0.0
   },
   "LIGHTNING_ARROW": {
@@ -15126,6 +16594,28 @@
    ],
    "persist_s": 2.0,
    "stand_time": 0.3
+  },
+  "MIST_WALKER": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": true,
+   "cooldown": 50.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": true,
+   "ignores_ccr": true,
+   "mods": [
+    {
+     "duration": 5.0,
+     "target": "self",
+     "type": "movespeedbonus",
+     "value": -0.3
+    }
+   ],
+   "persist_s": 6.0,
+   "stand_time": 0.0
   },
   "NATURERESILIENCE": {
    "cast_range": 11.0,
@@ -15551,6 +17041,34 @@
    ],
    "persist_s": null,
    "stand_time": null
+  },
+  "PBAOE_KNOCKBACK": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [
+    {
+     "distance": 9.0,
+     "ignores_ccr": true,
+     "target": "enemy",
+     "type": "knockback"
+    }
+   ],
+   "channeled": false,
+   "cooldown": 30.0,
+   "damage": [
+    {
+     "escalates": true,
+     "target": "enemy",
+     "value": 67.42
+    }
+   ],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": true,
+   "ignores_ccr": true,
+   "mods": [],
+   "persist_s": null,
+   "stand_time": 0.5
   },
   "PRIMALSLAM": {
    "cast_range": 18.0,
@@ -16005,6 +17523,46 @@
    "persist_s": null,
    "stand_time": null
   },
+  "REFLECTAREA": {
+   "cast_range": 15.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": true,
+   "cooldown": 40.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [
+    {
+     "duration": 6.0,
+     "target": "friendotherplayers",
+     "type": "physicalarmor",
+     "value": 0.43
+    },
+    {
+     "duration": 6.0,
+     "target": "friendotherplayers",
+     "type": "magicresistance",
+     "value": 0.43
+    },
+    {
+     "duration": 1.0,
+     "target": "self",
+     "type": "physicalarmor",
+     "value": -0.37
+    },
+    {
+     "duration": 1.0,
+     "target": "self",
+     "type": "magicresistance",
+     "value": -0.37
+    }
+   ],
+   "persist_s": null,
+   "stand_time": 0.0
+  },
   "RENDINGCOMBO": {
    "cast_range": 3.0,
    "cast_time": 0.0,
@@ -16138,6 +17696,46 @@
    "persist_s": null,
    "stand_time": 0.0
   },
+  "ROYAL_BANNER": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 50.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [
+    {
+     "duration": 7.0,
+     "target": "friendother",
+     "type": "attackspeedbonus",
+     "value": 0.3
+    },
+    {
+     "duration": 7.0,
+     "target": "friendother",
+     "type": "magiccooldownreduction",
+     "value": 0.5
+    },
+    {
+     "duration": 7.0,
+     "target": "self",
+     "type": "attackspeedbonus",
+     "value": 0.3
+    },
+    {
+     "duration": 7.0,
+     "target": "self",
+     "type": "magiccooldownreduction",
+     "value": 0.3
+    }
+   ],
+   "persist_s": null,
+   "stand_time": 0.2
+  },
   "SACRED_GROUND": {
    "cast_range": 2.0,
    "cast_time": 0.6,
@@ -16204,6 +17802,21 @@
    "heals": [],
    "ignores_ap": false,
    "ignores_ccr": true,
+   "mods": [],
+   "persist_s": null,
+   "stand_time": 0.0
+  },
+  "SELF_CLEANSE": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 20.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
    "stand_time": 0.0
@@ -16953,6 +18566,32 @@
    "persist_s": 5.0,
    "stand_time": 0.0
   },
+  "SMOKEBOMB": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [
+    {
+     "duration": 5.0,
+     "target": "self",
+     "type": "silence"
+    },
+    {
+     "duration": 5.0,
+     "target": "enemy",
+     "type": "silence"
+    }
+   ],
+   "channeled": false,
+   "cooldown": 40.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": true,
+   "ignores_ccr": true,
+   "mods": [],
+   "persist_s": 7.0,
+   "stand_time": 0.0
+  },
   "SNIPESHOT_CROSSBOW": {
    "cast_range": 16.0,
    "cast_time": 2.0,
@@ -17111,6 +18750,34 @@
      "target": "self",
      "type": "physicalattackdamagebonus",
      "value": 2.8
+    }
+   ],
+   "persist_s": null,
+   "stand_time": 0.0
+  },
+  "SPEEDCASTER": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 30.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [
+    {
+     "duration": 8.0,
+     "target": "self",
+     "type": "magiccasttimereduction",
+     "value": 0.5
+    },
+    {
+     "duration": 8.0,
+     "target": "self",
+     "type": "energycostreduction",
+     "value": 0.7
     }
    ],
    "persist_s": null,
@@ -17297,6 +18964,33 @@
    "persist_s": 1.3,
    "stand_time": 0.3
   },
+  "SPRINTHOT": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 30.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [
+    {
+     "target": "self",
+     "value": 14.4
+    }
+   ],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [
+    {
+     "duration": 5.0,
+     "target": "self",
+     "type": "movespeedbonus",
+     "value": 0.8
+    }
+   ],
+   "persist_s": null,
+   "stand_time": 0.0
+  },
   "STARFALL_DOT": {
    "cast_range": 0.0,
    "cast_time": 0.0,
@@ -17325,6 +19019,34 @@
    "persist_s": null,
    "stand_time": 0.0
   },
+  "STONESKIN": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 30.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [
+    {
+     "duration": 4.0,
+     "target": "self",
+     "type": "bonusdefensevsplayers",
+     "value": 0.5
+    },
+    {
+     "duration": 4.0,
+     "target": "self",
+     "type": "bonusdefensevsmobs",
+     "value": 0.5
+    }
+   ],
+   "persist_s": null,
+   "stand_time": 0.0
+  },
   "STUNRUN": {
    "cast_range": 0.0,
    "cast_time": 0.0,
@@ -17348,6 +19070,28 @@
      "target": "self",
      "type": "movespeedbonus",
      "value": 0.3
+    }
+   ],
+   "persist_s": null,
+   "stand_time": 0.0
+  },
+  "SUMMONER_CD_REDUCTION": {
+   "cast_range": 11.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": true,
+   "cooldown": 40.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [
+    {
+     "duration": 0.25,
+     "target": "self",
+     "type": "magiccooldownreduction",
+     "value": 0.8
     }
    ],
    "persist_s": null,
@@ -17919,6 +19663,49 @@
    "mods": [],
    "persist_s": 4.0,
    "stand_time": 0.2
+  },
+  "WILD_MAGIC": {
+   "cast_range": 0.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": false,
+   "cooldown": 0.0,
+   "damage": [],
+   "delivery": "self",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [
+    {
+     "duration": 5.0,
+     "target": "self",
+     "type": "physicalarmor",
+     "value": 0.22
+    },
+    {
+     "duration": 5.0,
+     "target": "self",
+     "type": "magicresistance",
+     "value": 0.22
+    }
+   ],
+   "persist_s": 3.0,
+   "stand_time": 0.0
+  },
+  "WINDWALL": {
+   "cast_range": 3.0,
+   "cast_time": 0.0,
+   "cc": [],
+   "channeled": true,
+   "cooldown": 40.0,
+   "damage": [],
+   "delivery": "ground",
+   "heals": [],
+   "ignores_ap": false,
+   "ignores_ccr": false,
+   "mods": [],
+   "persist_s": 6.0,
+   "stand_time": 0.8
   }
  }
 }
