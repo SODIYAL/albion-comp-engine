@@ -110,6 +110,9 @@ def load_gear_sheets(gear_lines, gear_spells):
                                       "passive": menu.get("passives") or []}}
             gl = gear_lines.get(key) or {}
             gear[key] = {
+                # filled after loading: the item's combat stats (item_stats
+                # bank) — the engine's build-stat channel reads these
+                "stats": {},
                 "unique_name": key,
                 "display_name": display_name(gl, key),
                 "slot": entry.get("slot") or gl.get("slot"),
@@ -498,6 +501,17 @@ def main():
                 else:
                     gear_lines_db = json.load(f)
     gear = load_gear_sheets(gear_lines_db, gear_spells)
+    # Build-stat channel: copy each gear item's combat-relevant base stats
+    # from the item bank (T4-flat reference; IP scales them in game). The
+    # engine turns absolute defense into tankiness units and % stats into
+    # capability multipliers (mechanics.yaml build_stats).
+    BUILD_STAT_KEYS = ("physicalarmor", "magicresistance",
+                       "crowdcontrolresistance", "physicalspelldamagebonus",
+                       "magicspelldamagebonus", "physicalattackdamagebonus",
+                       "magicattackdamagebonus", "healbonus")
+    for gk, g in gear.items():
+        bank = (item_stats.get(gk) or {}).get("stats") or {}
+        g["stats"] = {s: bank[s] for s in BUILD_STAT_KEYS if bank.get(s)}
 
     # Per-capability DELIVERY facts (2026-08-20, geometric-AoE step 3):
     # from each capability's evidence spell, the structural area geometry and

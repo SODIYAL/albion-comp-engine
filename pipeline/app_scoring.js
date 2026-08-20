@@ -602,15 +602,40 @@
   };
 
   CompEngine.prototype.buildExtra = function (weapon, combo, gear) {
+    /* Full-build member: weapon loadout + gear abilities + the STAT
+       channel (mirrors engine.py build_extra — same float order). */
     var out = {}, c;
     var base = this.memberExtra(weapon, combo);
     for (c in base) out[c] = base[c];
+    var armorPts = 0.0, ccrPts = 0.0, dmgPct = 0.0, healPct = 0.0;
     for (var i = 0; i < (gear || []).length; i++) {
       var item = gear[i];
       var key = Array.isArray(item) ? item[0] : item;
       var choice = Array.isArray(item) ? item[1] : null;
       var extra = this.gearExtra(key, choice);
       for (c in extra) out[c] = (out[c] || 0.0) + extra[c];
+      var st = (this.gear[key] || {}).stats || {};
+      armorPts += (st.physicalarmor || 0.0) + (st.magicresistance || 0.0);
+      ccrPts += st.crowdcontrolresistance || 0.0;
+      dmgPct += (st.magicspelldamagebonus !== undefined
+                 ? st.magicspelldamagebonus
+                 : (st.physicalspelldamagebonus || 0.0));
+      healPct += st.healbonus || 0.0;
+    }
+    var bs = this.mechanics.build_stats || {};
+    var tank = armorPts * (bs.tankiness_per_armor_point || 0.0)
+             + ccrPts * (bs.tankiness_per_ccr_point || 0.0);
+    if (tank > 0.0) out.tankiness = (out.tankiness || 0.0) + tank;
+    var j;
+    if (dmgPct > 0.0) {
+      var dc = bs.damage_mult_caps || [];
+      for (j = 0; j < dc.length; j++)
+        if (dc[j] in out) out[dc[j]] *= 1.0 + dmgPct;
+    }
+    if (healPct > 0.0) {
+      var hc = bs.heal_mult_caps || [];
+      for (j = 0; j < hc.length; j++)
+        if (hc[j] in out) out[hc[j]] *= 1.0 + healPct;
     }
     return out;
   };

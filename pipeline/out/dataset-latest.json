@@ -377,6 +377,16 @@
     ]
    },
    "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 20,
+    "healbonus": 0.5,
+    "magicattackdamagebonus": 0.5,
+    "magicresistance": 69,
+    "magicspelldamagebonus": 0.5,
+    "physicalarmor": 54,
+    "physicalattackdamagebonus": 0.5,
+    "physicalspelldamagebonus": 0.5
+   },
    "unique_name": "ARMOR_CLOTH_AVALON"
   },
   "ARMOR_CLOTH_FEY": {
@@ -428,6 +438,16 @@
     ]
    },
    "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 20,
+    "healbonus": 0.5,
+    "magicattackdamagebonus": 0.5,
+    "magicresistance": 69,
+    "magicspelldamagebonus": 0.5,
+    "physicalarmor": 54,
+    "physicalattackdamagebonus": 0.5,
+    "physicalspelldamagebonus": 0.5
+   },
    "unique_name": "ARMOR_CLOTH_FEY"
   },
   "ARMOR_CLOTH_SET1": {
@@ -460,6 +480,16 @@
     ]
    },
    "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 24,
+    "healbonus": 0.4,
+    "magicattackdamagebonus": 0.4,
+    "magicresistance": 87,
+    "magicspelldamagebonus": 0.4,
+    "physicalarmor": 68,
+    "physicalattackdamagebonus": 0.4,
+    "physicalspelldamagebonus": 0.4
+   },
    "unique_name": "ARMOR_CLOTH_SET1"
   },
   "ARMOR_LEATHER_FEY": {
@@ -497,6 +527,16 @@
     ]
    },
    "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 26,
+    "healbonus": 0.3,
+    "magicattackdamagebonus": 0.3,
+    "magicresistance": 92,
+    "magicspelldamagebonus": 0.3,
+    "physicalarmor": 92,
+    "physicalattackdamagebonus": 0.3,
+    "physicalspelldamagebonus": 0.3
+   },
    "unique_name": "ARMOR_LEATHER_FEY"
   },
   "ARMOR_LEATHER_HELL": {
@@ -534,6 +574,16 @@
     ]
    },
    "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 28,
+    "healbonus": 0.25,
+    "magicattackdamagebonus": 0.25,
+    "magicresistance": 100,
+    "magicspelldamagebonus": 0.25,
+    "physicalarmor": 100,
+    "physicalattackdamagebonus": 0.25,
+    "physicalspelldamagebonus": 0.25
+   },
    "unique_name": "ARMOR_LEATHER_HELL"
   },
   "ARMOR_LEATHER_ROYAL": {
@@ -566,6 +616,16 @@
     ]
    },
    "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 28,
+    "healbonus": 0.25,
+    "magicattackdamagebonus": 0.25,
+    "magicresistance": 100,
+    "magicspelldamagebonus": 0.25,
+    "physicalarmor": 100,
+    "physicalattackdamagebonus": 0.25,
+    "physicalspelldamagebonus": 0.25
+   },
    "unique_name": "ARMOR_LEATHER_ROYAL"
   },
   "ARMOR_PLATE_FEY": {
@@ -608,6 +668,11 @@
     ]
    },
    "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 50,
+    "magicresistance": 126,
+    "physicalarmor": 161
+   },
    "unique_name": "ARMOR_PLATE_FEY"
   },
   "ARMOR_PLATE_HELL": {
@@ -640,6 +705,16 @@
     ]
    },
    "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 45,
+    "healbonus": 0.05,
+    "magicattackdamagebonus": 0.05,
+    "magicresistance": 119,
+    "magicspelldamagebonus": 0.05,
+    "physicalarmor": 152,
+    "physicalattackdamagebonus": 0.05,
+    "physicalspelldamagebonus": 0.05
+   },
    "unique_name": "ARMOR_PLATE_HELL"
   },
   "ARMOR_PLATE_KEEPER": {
@@ -699,6 +774,11 @@
     ]
    },
    "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 50,
+    "magicresistance": 126,
+    "physicalarmor": 161
+   },
    "unique_name": "ARMOR_PLATE_KEEPER"
   },
   "ARMOR_PLATE_SET2": {
@@ -755,6 +835,16 @@
     ]
    },
    "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 45,
+    "healbonus": 0.05,
+    "magicattackdamagebonus": 0.05,
+    "magicresistance": 119,
+    "magicspelldamagebonus": 0.05,
+    "physicalarmor": 152,
+    "physicalattackdamagebonus": 0.05,
+    "physicalspelldamagebonus": 0.05
+   },
    "unique_name": "ARMOR_PLATE_SET2"
   },
   "ARMOR_PLATE_SET3": {
@@ -792,6 +882,11 @@
     ]
    },
    "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 50,
+    "magicresistance": 126,
+    "physicalarmor": 161
+   },
    "unique_name": "ARMOR_PLATE_SET3"
   },
   "CAPEITEM_FW_LYMHURST": {
@@ -814,6 +909,7 @@
     "slots": []
    },
    "slot": "cape",
+   "stats": {},
    "unique_name": "CAPEITEM_FW_LYMHURST"
   },
   "CAPEITEM_SMUGGLER": {
@@ -836,6 +932,7 @@
     "slots": []
    },
    "slot": "cape",
+   "stats": {},
    "unique_name": "CAPEITEM_SMUGGLER"
   },
   "HEAD_CLOTH_KEEPER": {
@@ -875,6 +972,7 @@
     ]
    },
    "slot": "head",
+   "stats": {},
    "unique_name": "HEAD_CLOTH_KEEPER"
   },
   "HEAD_CLOTH_SET2": {
@@ -948,6 +1046,7 @@
     ]
    },
    "slot": "head",
+   "stats": {},
    "unique_name": "HEAD_CLOTH_SET2"
   },
   "HEAD_LEATHER_FEY": {
@@ -980,6 +1079,7 @@
     ]
    },
    "slot": "head",
+   "stats": {},
    "unique_name": "HEAD_LEATHER_FEY"
   },
   "HEAD_LEATHER_HELL": {
@@ -1039,6 +1139,7 @@
     ]
    },
    "slot": "head",
+   "stats": {},
    "unique_name": "HEAD_LEATHER_HELL"
   },
   "HEAD_LEATHER_SET3": {
@@ -1071,6 +1172,7 @@
     ]
    },
    "slot": "head",
+   "stats": {},
    "unique_name": "HEAD_LEATHER_SET3"
   },
   "HEAD_PLATE_KEEPER": {
@@ -1132,6 +1234,7 @@
     ]
    },
    "slot": "head",
+   "stats": {},
    "unique_name": "HEAD_PLATE_KEEPER"
   },
   "HEAD_PLATE_SET2": {
@@ -1181,6 +1284,7 @@
     ]
    },
    "slot": "head",
+   "stats": {},
    "unique_name": "HEAD_PLATE_SET2"
   },
   "HEAD_PLATE_SET3": {
@@ -1238,6 +1342,7 @@
     ]
    },
    "slot": "head",
+   "stats": {},
    "unique_name": "HEAD_PLATE_SET3"
   },
   "OFF_HORN_KEEPER": {
@@ -1260,6 +1365,7 @@
     "slots": []
    },
    "slot": "offhand",
+   "stats": {},
    "unique_name": "OFF_HORN_KEEPER"
   },
   "OFF_SHIELD": {
@@ -1282,6 +1388,7 @@
     "slots": []
    },
    "slot": "offhand",
+   "stats": {},
    "unique_name": "OFF_SHIELD"
   },
   "OFF_SHIELD_AVALON": {
@@ -1304,6 +1411,7 @@
     "slots": []
    },
    "slot": "offhand",
+   "stats": {},
    "unique_name": "OFF_SHIELD_AVALON"
   },
   "OFF_SHIELD_HELL": {
@@ -1326,6 +1434,7 @@
     "slots": []
    },
    "slot": "offhand",
+   "stats": {},
    "unique_name": "OFF_SHIELD_HELL"
   },
   "OFF_TORCH_CRYSTAL": {
@@ -1348,6 +1457,13 @@
     "slots": []
    },
    "slot": "offhand",
+   "stats": {
+    "healbonus": 0.0177,
+    "magicattackdamagebonus": 0.0177,
+    "magicspelldamagebonus": 0.0177,
+    "physicalattackdamagebonus": 0.0177,
+    "physicalspelldamagebonus": 0.0177
+   },
    "unique_name": "OFF_TORCH_CRYSTAL"
   },
   "OFF_TOWERSHIELD_UNDEAD": {
@@ -1370,6 +1486,7 @@
     "slots": []
    },
    "slot": "offhand",
+   "stats": {},
    "unique_name": "OFF_TOWERSHIELD_UNDEAD"
   },
   "SHOES_LEATHER_FEY": {
@@ -1417,6 +1534,7 @@
     ]
    },
    "slot": "shoes",
+   "stats": {},
    "unique_name": "SHOES_LEATHER_FEY"
   },
   "SHOES_LEATHER_MORGANA": {
@@ -1459,6 +1577,7 @@
     ]
    },
    "slot": "shoes",
+   "stats": {},
    "unique_name": "SHOES_LEATHER_MORGANA"
   },
   "SHOES_LEATHER_ROYAL": {
@@ -1496,6 +1615,7 @@
     ]
    },
    "slot": "shoes",
+   "stats": {},
    "unique_name": "SHOES_LEATHER_ROYAL"
   },
   "SHOES_LEATHER_SET1": {
@@ -1543,6 +1663,7 @@
     ]
    },
    "slot": "shoes",
+   "stats": {},
    "unique_name": "SHOES_LEATHER_SET1"
   },
   "SHOES_PLATE_FEY": {
@@ -1605,6 +1726,7 @@
     ]
    },
    "slot": "shoes",
+   "stats": {},
    "unique_name": "SHOES_PLATE_FEY"
   },
   "SHOES_PLATE_SET1": {
@@ -1642,6 +1764,7 @@
     ]
    },
    "slot": "shoes",
+   "stats": {},
    "unique_name": "SHOES_PLATE_SET1"
   },
   "T6_POTION_HEAL": {
@@ -1664,6 +1787,7 @@
     "slots": []
    },
    "slot": "potion",
+   "stats": {},
    "unique_name": "T6_POTION_HEAL"
   },
   "T7_MEAL_OMELETTE": {
@@ -1686,6 +1810,7 @@
     "slots": []
    },
    "slot": "food",
+   "stats": {},
    "unique_name": "T7_MEAL_OMELETTE"
   },
   "T7_MEAL_OMELETTE_AVALON": {
@@ -1708,6 +1833,7 @@
     "slots": []
    },
    "slot": "food",
+   "stats": {},
    "unique_name": "T7_MEAL_OMELETTE_AVALON"
   },
   "T7_POTION_REVIVE": {
@@ -1730,6 +1856,7 @@
     "slots": []
    },
    "slot": "potion",
+   "stats": {},
    "unique_name": "T7_POTION_REVIVE"
   },
   "T7_POTION_SLOWFIELD": {
@@ -1752,6 +1879,7 @@
     "slots": []
    },
    "slot": "potion",
+   "stats": {},
    "unique_name": "T7_POTION_SLOWFIELD"
   },
   "T7_POTION_STONESKIN": {
@@ -1774,6 +1902,7 @@
     "slots": []
    },
    "slot": "potion",
+   "stats": {},
    "unique_name": "T7_POTION_STONESKIN"
   },
   "T8_MEAL_SANDWICH_AVALON": {
@@ -1796,6 +1925,7 @@
     "slots": []
    },
    "slot": "food",
+   "stats": {},
    "unique_name": "T8_MEAL_SANDWICH_AVALON"
   },
   "T8_MEAL_STEW": {
@@ -1818,6 +1948,7 @@
     "slots": []
    },
    "slot": "food",
+   "stats": {},
    "unique_name": "T8_MEAL_STEW"
   }
  },
@@ -31498,6 +31629,20 @@
     "8": 8
    },
    "reference_clump": 2
+  },
+  "build_stats": {
+   "damage_mult_caps": [
+    "burst_st",
+    "burst_aoe",
+    "sustained_dps",
+    "execute"
+   ],
+   "heal_mult_caps": [
+    "heal_sustain",
+    "heal_burst"
+   ],
+   "tankiness_per_armor_point": 0.004,
+   "tankiness_per_ccr_point": 0.003
   },
   "cc_diminishing_returns": null,
   "disarray": {

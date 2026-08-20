@@ -330,6 +330,13 @@ A member is no longer just weapon + weapon spells. The engine now models:
   from the dumps descriptions. Add items by copying an entry.
 - **One ability per piece** — the loadout rule applies to gear too; the
   engine scores the chosen (or best) ability per slot.
+- **Item stats modify the person** (`build_stats` in the §4 mechanics
+  dial): absolute defense (armor+MR, CC-resist) adds tankiness units;
+  percentage stats MULTIPLY the member's own capabilities — Robe of
+  Purity's +50% damage turns a DPS's damage supply ×1.5 and gives a
+  control tank with no damage caps nothing, while plate's 287 armor
+  points add tankiness either way. "Heavy Mace on cloth defeats its
+  purpose" is now a computable statement (golden T21 pins it).
 - **Engine**: `build_extra(weapon, combo, gear)` is a full member;
   `fitness/comp_score(party, combos, gears)` price full builds. Weapon-only
   calls are unchanged — gear is additive. Both engines verified identical

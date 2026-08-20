@@ -607,12 +607,40 @@ class Engine:
 
     def build_extra(self, weapon, combo=None, gear=None):
         """A FULL-BUILD member's effective caps: weapon loadout + every gear
-        item. `gear` is a list of gear keys or (key, choice) pairs."""
+        item's ABILITY contribution + the build's STAT channel. `gear` is a
+        list of gear keys or (key, choice) pairs.
+
+        Stat channel (mechanics.yaml build_stats — the expert's model:
+        item stats MODIFY the person): absolute defense (armor+MR, CCR)
+        adds tankiness units; % damage/heal stats MULTIPLY the member's
+        damage/heal capability supply. A +50% damage chest is worth 50%
+        of whatever damage the build actually has — nearly nothing on a
+        control tank, which is exactly the coherence the model wants."""
         out = dict(self.member_extra(weapon, combo))
+        armor_pts = ccr_pts = dmg_pct = heal_pct = 0.0
         for item in (gear or []):
             key, choice = item if isinstance(item, (list, tuple)) else (item, None)
             for cap, v in self.gear_extra(key, choice).items():
                 out[cap] = out.get(cap, 0.0) + v
+            st = (self.gear.get(key) or {}).get("stats") or {}
+            armor_pts += st.get("physicalarmor", 0.0) + st.get("magicresistance", 0.0)
+            ccr_pts += st.get("crowdcontrolresistance", 0.0)
+            dmg_pct += st.get("magicspelldamagebonus",
+                              st.get("physicalspelldamagebonus", 0.0))
+            heal_pct += st.get("healbonus", 0.0)
+        bs = self.mechanics.get("build_stats") or {}
+        tank = (armor_pts * bs.get("tankiness_per_armor_point", 0.0)
+                + ccr_pts * bs.get("tankiness_per_ccr_point", 0.0))
+        if tank > 0.0:
+            out["tankiness"] = out.get("tankiness", 0.0) + tank
+        if dmg_pct > 0.0:
+            for cap in bs.get("damage_mult_caps") or []:
+                if cap in out:
+                    out[cap] *= 1.0 + dmg_pct
+        if heal_pct > 0.0:
+            for cap in bs.get("heal_mult_caps") or []:
+                if cap in out:
+                    out[cap] *= 1.0 + heal_pct
         return out
 
     def member_extra(self, weapon, combo=None):

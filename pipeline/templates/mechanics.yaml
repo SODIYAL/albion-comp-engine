@@ -151,6 +151,24 @@ aoe_geometry:
   reference_clump: 2
 
 # ---------------------------------------------------------------------------
+# BUILD STATS (full-build members, 2026-08-20): item base stats modify the
+# PERSON, exactly as the expert framed it — a +50% damage chest multiplies
+# the weapon's damage capabilities (it adds nothing on a control tank with
+# no damage caps: "Heavy Mace on cloth defeats its purpose" is now a
+# computable statement), while absolute defensive stats add tankiness.
+# Values come from item_stats.json (the game's own numbers, T4-flat
+# reference; tier scaling rides the IP curve like everything else).
+build_stats:
+  # armor + magic resistance -> tankiness units. PROVISIONAL calibration:
+  # a plate chest (161+126 = 287 points) ~ 1.15 units; cloth (123) ~ 0.5.
+  tankiness_per_armor_point: 0.004
+  # crowd-control resistance -> tankiness units (plate 50 ccr ~ 0.15 units)
+  tankiness_per_ccr_point: 0.003
+  # % item stats MULTIPLY the member's capability supply
+  damage_mult_caps: [burst_st, burst_aoe, sustained_dps, execute]
+  heal_mult_caps: [heal_sustain, heal_burst]
+
+# ---------------------------------------------------------------------------
 # CC diminishing returns (PvP interaction layer, 2026-08-19): repeated
 # crowd control on one target within a window is reduced in duration.
 # PLACEHOLDER — the curve, window and which CC classes share a DR bucket are

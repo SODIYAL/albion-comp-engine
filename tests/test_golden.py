@@ -369,6 +369,30 @@ def run():
                 .get("knockback_displace") is not None,
           f"gained={gained} fitness {f_bare:.2f}->{f_full:.2f}")
 
+    # T21 — build-stat coherence (the expert's founding gear example): item
+    # stats MODIFY the person. Robe of Purity (+50% damage/heal, thin armor)
+    # multiplies a DPS's damage supply by ~1.5x but gives a control tank
+    # with no damage caps almost nothing, while Judicator Armor's 287
+    # armor+MR adds tankiness either way — "Heavy Mace on cloth defeats its
+    # purpose" is now a computable statement.
+    CLOTH, PLATE = ["ARMOR_CLOTH_AVALON"], ["ARMOR_PLATE_KEEPER"]
+    km = "2H_CLAYMORE_AVALON"
+    km_bare = E.member_extra(km).get("burst_aoe", 0.0)
+    km_cloth = E.build_extra(km, None, CLOTH).get("burst_aoe", 0.0)
+    hm_bare = E.member_extra(HEAVY_MACE)
+    hm_cloth = E.build_extra(HEAVY_MACE, None, CLOTH)
+    hm_plate = E.build_extra(HEAVY_MACE, None, PLATE)
+    dps_gain_cloth = km_cloth - km_bare
+    tank_gain_cloth = sum(hm_cloth.get(c, 0) for c in ("burst_aoe", "burst_st"))
+    check("T21 build stats modify the person: cloth multiplies DPS, not tanks",
+          km_cloth > km_bare * 1.4
+          and hm_plate.get("tankiness", 0) > hm_bare.get("tankiness", 0) + 0.5
+          and dps_gain_cloth > 0.9 and tank_gain_cloth < 0.5,
+          f"Kingmaker burst_aoe {km_bare:.2f}->{km_cloth:.2f} (cloth); "
+          f"HeavyMace tankiness {hm_bare.get('tankiness', 0):.2f}->"
+          f"{hm_plate.get('tankiness', 0):.2f} (plate), cloth dmg gain "
+          f"{tank_gain_cloth:.2f}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:
