@@ -188,8 +188,12 @@ kit/role fit · purpose fit · payload/follow-up · **team enablement** (does
 it make everyone else's damage land — the Soulscythe question). Targets
 count and content-fit are deliberately NOT in the rubric: geometry and
 templates already compute those, and scoring them twice would double-count.
-When this lands, question 1 is pre-filled from the game files and the
-boards in `review/magnitude.html` become the judging instrument.
+When this lands, question 1 is pre-filled from the game files. The judging
+instruments already exist: `review/stat_chart.html` (the REAL numbers —
+damage, CC durations, knockback distances, slow-power — per capability,
+sorted, with the current score beside each row) and
+`review/magnitude.html` (score-vs-dumps-text audit boards). Rebuild the
+chart after sheet edits with `py -3 pipeline/build_stat_chart.py`.
 
 ## 8. Guild-approved builds
 
