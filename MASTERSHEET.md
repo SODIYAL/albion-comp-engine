@@ -170,6 +170,18 @@ row with spell evidence, which keeps the no-score-without-proof rule
 intact. Empty = no overrides. Example:
 
 ```yaml tune:sheets
+# Expert ruling 2026-08-20 (pinned by golden T19): Bedrock Mace is THE
+# anti-dive pick at scale — Primal Slam's 18m CC-resist-ignoring throw
+# leaves a PERSISTENT WALL (an extra peel layer, fire-and-forget), on a
+# support-tank kit with Guard Rune; guild runs it double-CORE. Iron-clad's
+# whirlwind must physically contact the diver while channeling — in large
+# fights nobody uses it for this. The raw numbers alone (18m vs 12m) hid
+# the delivery nuance; this is rubric Q2 reliability + Q8 kit fit.
+MAIN_ROCKMACE_KEEPER:          # Bedrock Mace
+  anti_dive: 3
+2H_IRONCLADEDSTAFF:            # Iron-clad Staff
+  anti_dive: 1
+
 # 2H_TWINSCYTHE_HELL:          # Soulscythe
 #   knockback_displace: 2      # the line knockup is undervalued at 1
 # 2H_DOUBLEBLADEDSTAFF:

@@ -5,7 +5,8 @@
   "mastersheet": [
    "guild_builds: present (shipped verbatim)",
    "mechanics: aoe_geometry",
-   "scoring: capability_synergies, meta_prior, weights"
+   "scoring: capability_synergies, meta_prior, weights",
+   "sheets: 2 score override(s) on 2 weapon(s)"
   ],
   "note": "release candidate",
   "provenance": {
@@ -40872,7 +40873,7 @@
     }
    },
    "capabilities": {
-    "anti_dive": 2,
+    "anti_dive": 1,
     "knockback_displace": 3,
     "mobility": 1,
     "peel": 2,
@@ -40941,7 +40942,7 @@
     "slots": [
      [
       {
-       "anti_dive": 2,
+       "anti_dive": 1,
        "knockback_displace": 3,
        "peel": 2,
        "tankiness": 1
@@ -51071,7 +51072,7 @@
     }
    },
    "capabilities": {
-    "anti_dive": 1,
+    "anti_dive": 3,
     "engage": 1,
     "knockback_displace": 3,
     "peel": 2,
@@ -51132,7 +51133,7 @@
     "slots": [
      [
       {
-       "anti_dive": 1,
+       "anti_dive": 3,
        "knockback_displace": 3,
        "peel": 2,
        "zone_control": 1

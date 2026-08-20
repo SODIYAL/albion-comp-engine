@@ -332,6 +332,18 @@ def run():
           f"bow={bow_root} wide={e_big._geo_mult('root', wide):.3f} "
           f"geo_only={e_big._geo_mult('root', {'radius': 7.0}):.3f}")
 
+    # T19 — expert ruling 2026-08-20 (applied via MASTERSHEET tune:sheets):
+    # Bedrock Mace over Iron-clad for anti_dive. Primal Slam's 18m
+    # CC-resist-ignoring throw leaves a PERSISTENT WALL — fire-and-forget
+    # peel on a support-tank kit — while Iron-clad's whirlwind must
+    # physically contact the diver while channeling. Raw magnitude alone
+    # (18m vs 12m) missed the delivery nuance; the ruling pins it.
+    bed = E.caps_of("MAIN_ROCKMACE_KEEPER").get("anti_dive", 0)
+    iron = E.caps_of("2H_IRONCLADEDSTAFF").get("anti_dive", 0)
+    check("T19 Bedrock wall > Iron-clad contact-spin for anti_dive",
+          bed == 3 and iron == 1,
+          f"bedrock={bed} ironclad={iron} (mastersheet override)")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:
