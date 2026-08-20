@@ -80,8 +80,15 @@ def fnum(v):
 
 
 def extract(sid, reg):
-    """Structured magnitude records for one spell, following references."""
-    rec = {"damage": [], "heals": [], "cc": [], "mods": []}
+    """Structured magnitude records for one spell, following references.
+
+    Beyond magnitudes, the rubric's ◆ facts (MASTERSHEET §7) are read
+    here: persistence (longest ground-area lifetime — Primal Slam's wall
+    is spelleffectarea @time 4), delivery (root target kind + channel),
+    cast position (cast range), and counter-immunity flags
+    (@ignorecrowdcontrolresistance anywhere in the tree)."""
+    rec = {"damage": [], "heals": [], "cc": [], "mods": [],
+           "persist_s": None, "ignores_ccr": False, "channeled": False}
     visited = set()
 
     def health_record(node, out_pos, out_neg):
@@ -111,6 +118,14 @@ def extract(sid, reg):
         if key and CONDITION_PREFIX.match(key):
             return                          # predicate context, not an effect
         guarded = GUARD_NODES.get(key, guarded)
+        if node.get("@ignorecrowdcontrolresistance") == "true":
+            rec["ignores_ccr"] = True
+        if key == "channelingspell":
+            rec["channeled"] = True
+        if key == "spelleffectarea":
+            t = fnum(node.get("@time"))
+            if t and (rec["persist_s"] is None or t > rec["persist_s"]):
+                rec["persist_s"] = t
         if not guarded:
             if node.get("@attribute") == "health":
                 health_record(node, rec["heals"], rec["damage"])
@@ -157,7 +172,33 @@ def extract(sid, reg):
     rec["cast_time"] = fnum(node.get("@castingtime"))
     rec["stand_time"] = fnum(node.get("@standtime"))
     rec["cast_range"] = fnum(node.get("@castrange"))
+    rec["delivery"] = node.get("@target")     # ground / enemy / self / ...
     return rec
+
+
+def fact_line(rec):
+    """The rubric's ◆ facts, one compact string per spell (S2-S6 inputs)."""
+    if rec is None:
+        return ""
+    bits = []
+    if rec.get("persist_s") and rec["persist_s"] >= 1:
+        bits.append(f"persists {rec['persist_s']:g}s")
+    d = rec.get("delivery")
+    if d == "ground":
+        r = rec.get("cast_range")
+        bits.append(f"ground-cast @{r:g}m" if r else "ground-cast")
+    elif d == "self":
+        bits.append("self/contact")
+    elif d:
+        r = rec.get("cast_range")
+        bits.append(f"targeted {d}" + (f" @{r:g}m" if r else ""))
+    if rec.get("channeled"):
+        bits.append("channeled")
+    if rec.get("ignores_ccr"):
+        bits.append("ignores CCR")
+    if rec.get("cooldown"):
+        bits.append(f"{rec['cooldown']:g}s CD")
+    return " · ".join(bits)
 
 
 # --------------------------------------------------- capability board metrics
@@ -291,6 +332,7 @@ def main():
         val, unit, detail = metric_for(cap, extracted.get(sid))
         boards.setdefault(cap, []).append({
             "spell": sid, "value": val, "unit": unit, "detail": detail,
+            "facts": fact_line(extracted.get(sid)),
             "group": (UNIT_GROUP.get(unit, unit) if val is not None
                       else "not measurable — human judgment"),
             "weapons": sorted(g["weapons"]),
@@ -345,6 +387,7 @@ stays).</p>"""]
         parts.append("<table><tr><th>spell</th>"
                      "<th class='n'>measured</th><th>unit</th>"
                      "<th class='n'>curated</th><th>detail</th>"
+                     "<th>rubric facts (S2–S6)</th>"
                      "<th>weapons citing it</th></tr>")
         last_group = None
         for r in rows_c:
@@ -365,6 +408,7 @@ stays).</p>"""]
                 f"<td class='{cls} n'>{v}</td><td class='d'>{esc(r['unit'])}</td>"
                 f"<td class='n'>{sc}</td>"
                 f"<td class='d'>{esc(r['detail'])}</td>"
+                f"<td class='d'>{esc(r['facts'])}</td>"
                 f"<td class='d'>{esc(weapons)}</td></tr>")
         parts.append("</table>")
     out_html = os.path.join(ROOT, "review", "stat_chart.html")

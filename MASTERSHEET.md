@@ -191,21 +191,69 @@ MAIN_ROCKMACE_KEEPER:          # Bedrock Mace
 Weapon keys are the game's unique names — see any weapon's dossier in the
 dashboard, or `pipeline/sheets/*.yaml`.
 
-## 7. The 1–7 ability rubric (designed, not yet wired)
+## 7. The 1–7 ability rubric (canonical, 2026-08-20)
 
 The 0–3 scale is being replaced by a 1–7 score per (spell, capability),
-judged on eleven questions: raw magnitude · reliability · controllability ·
-ease of execution · uptime economy · cost of use · counterability ·
-kit/role fit · purpose fit · payload/follow-up · **team enablement** (does
-it make everyone else's damage land — the Soulscythe question). Targets
-count and content-fit are deliberately NOT in the rubric: geometry and
-templates already compute those, and scoring them twice would double-count.
-When this lands, question 1 is pre-filled from the game files. The judging
-instruments already exist: `review/stat_chart.html` (the REAL numbers —
-damage, CC durations, knockback distances, slow-power — per capability,
-sorted, with the current score beside each row) and
-`review/magnitude.html` (score-vs-dumps-text audit boards). Rebuild the
-chart after sheet edits with `py -3 pipeline/build_stat_chart.py`.
+refined against the worked case that proved raw magnitude alone misleads:
+Bedrock's Primal Slam (18m throw + a wall that persists 4s, ground-cast
+from 18m, ignores CC resistance, on a kit with Guard Rune / Snare Charge /
+Defensive Slam) vs Iron-clad's whirlwind (12m, but the caster must
+physically contact the diver while channeling). Every line of that
+contrast is its own question.
+
+Markers: ◆ pre-filled from the game files · ◇ data-assisted · ● judgment.
+
+**Spell × capability (eight questions, 1–7 each):**
+
+1. **S1 ◆ Raw magnitude** — size per application, ranked WITHIN its own
+   effect type's ladder (meters vs meters, seconds vs seconds — never
+   across units; the cross-type exchange is S7's judgment).
+2. **S2 ◆ Persistence** — does it keep working after the cast with no
+   further input? 1 = only during contact/channel · 4 = one instant
+   application · 7 = leaves a lasting structure or zone (the 4s wall).
+3. **S3 ◇ Delivery demand** — 1 = must physically touch a moving enemy
+   while channeling · 3 = skillshot · 5 = targeted click · 7 =
+   ground-cast fire-and-forget.
+4. **S4 ◆ Cast position** — 1 = must stand inside enemy threat range,
+   out of formation · 7 = castable from your own line (18m cast range).
+5. **S5 ◆ Counter-immunity** — the flags are in the data: ignores CC
+   resistance / ignores DR / purge- and cleanse-exposure. 1 = negated by
+   standard kit · 7 = all-flags (Primal Slam class).
+6. **S6 ◆ Economy vs job cadence** — cooldown measured against how often
+   THIS capability's job recurs (27.5s CD vs a dive window every ~30s =
+   always available; the same CD can mean one chance per fight for a
+   different job). Numbers auto, cadence judgment.
+7. **S7 ● Purpose fit** — does the effect's SHAPE do this capability's
+   job (a knockback that pushes divers out is ideal anti_dive, mediocre
+   catch; stasis denies a dive but also protects the target from damage).
+8. **S8 ● Team enablement** — does it make teammates' damage/CC land
+   (Soulscythe's line knockup) or deny the enemy team's follow-up (the
+   wall splitting a dive from its support)?
+
+**Weapon × role (three questions):**
+
+1. **W1 ◇ Kit reinforcement** — do the slot-mates the role actually
+   equips amplify the same job? (Bedrock: Defensive Slam Q + Guard Rune /
+   Snare Charge W + CC-duration passive — every slot serves anti-dive
+   support tanking. The loadout model supplies the candidates.)
+2. **W2 ● Identity density** — how many capabilities does the E cover AT
+   QUALITY in one button? (Primal Slam: displacement + zone + peel
+   simultaneously.)
+3. **W3 ◇ Role placement & practice** — does the role's position/build
+   put the spell where its job happens, and does reality agree (guild
+   CORE lists, usage data)?
+
+Targets-hit and content-fit are deliberately NOT in the rubric: the
+geometric layer and the templates already compute those — scoring them
+here would double-count. Combining: S1/S3/S7 are gates (a huge, reliable
+effect with the wrong shape is still wrong for the job); the rest are
+weighted modifiers with capability-specific weights.
+
+The judging instruments: `review/stat_chart.html` (real numbers per
+capability, spell-keyed, typed sub-groups, plus the per-spell fact line —
+persistence, delivery, cast range, counter-immunity flags) and
+`review/magnitude.html` (score-vs-dumps-text audit boards). Rebuild after
+sheet edits: `py -3 pipeline/build_stat_chart.py`.
 
 ## 8. Guild-approved builds
 
