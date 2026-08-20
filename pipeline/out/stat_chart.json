@@ -154,6 +154,7 @@
     "detail": "knockback 18.0m",
     "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 27.5s CD",
     "group": "displacement (m)",
+    "per_min": 39.3,
     "scores": [
      2
     ],
@@ -168,6 +169,7 @@
     "detail": "knockback 12.0m",
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 29s CD",
     "group": "displacement (m)",
+    "per_min": 24.8,
     "scores": [
      4
     ],
@@ -182,6 +184,7 @@
     "detail": "knockback 4.26m",
     "facts": "self/contact \u00b7 18s CD",
     "group": "displacement (m)",
+    "per_min": 14.2,
     "scores": [
      2,
      4
@@ -203,6 +206,7 @@
     "detail": "hard CC 2.5s",
     "facts": "ground-cast @14m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 72s CD",
     "group": "hard CC (s)",
+    "per_min": 2.1,
     "scores": [
      2
     ],
@@ -217,6 +221,7 @@
     "detail": "hard CC 1.0s",
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 3.0,
     "scores": [
      2
     ],
@@ -231,6 +236,7 @@
     "detail": "slow-power 3.5",
     "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 7.0,
     "scores": [
      4
     ],
@@ -245,6 +251,7 @@
     "detail": "slow-power 2.4; knockback 1.8m",
     "facts": "persists 5s \u00b7 self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 7.2,
     "scores": [
      4
     ],
@@ -267,6 +274,7 @@
     "detail": "",
     "facts": "ground-cast @12m \u00b7 65s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -283,6 +291,7 @@
     "detail": "attackspeedbonus +0.85 for 6s",
     "facts": "persists 6s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 10.2,
     "scores": [
      2
     ],
@@ -297,6 +306,7 @@
     "detail": "movespeedbonus +0.6 for 8s",
     "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 44s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 6.5,
     "scores": [
      4
     ],
@@ -311,6 +321,7 @@
     "detail": "movespeedbonus -0.5 for 5s",
     "facts": "targeted friendother @9m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 10.0,
     "scores": [
      2,
      4
@@ -331,6 +342,7 @@
     "detail": "healmodifier +0.4 for 6s",
     "facts": "targeted friendall @11m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 9.6,
     "scores": [
      4
     ],
@@ -350,6 +362,7 @@
     "detail": "movespeedbonus -0.4 for 4s",
     "facts": "persists 6.5s \u00b7 ground-cast @12m \u00b7 16s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 6.0,
     "scores": [
      2
     ],
@@ -371,6 +384,7 @@
     "detail": "movespeedbonus -0.3 for 5s",
     "facts": "targeted friendother @14m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 3.0,
     "scores": [
      4
     ],
@@ -385,6 +399,7 @@
     "detail": "movespeedbonus +0.3 for 5s",
     "facts": "persists 3s \u00b7 ground-cast @2m \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 3.0,
     "scores": [
      4
     ],
@@ -399,6 +414,7 @@
     "detail": "physicalarmor +0.3 for 4s",
     "facts": "targeted friendall @13m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 4.8,
     "scores": [
      2,
      4
@@ -417,6 +433,7 @@
     "detail": "healbonus +0.15 for 8s",
     "facts": "self/contact \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 2.4,
     "scores": [
      2
     ],
@@ -431,6 +448,7 @@
     "detail": "movespeedbonus +0.6 for 1.6s",
     "facts": "targeted all @11m \u00b7 12s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 5.0,
     "scores": [
      2
     ],
@@ -452,6 +470,7 @@
     "detail": "healmodifier +0.2 for 4s",
     "facts": "ground-cast @12m \u00b7 18s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 2.7,
     "scores": [
      2
     ],
@@ -473,6 +492,7 @@
     "detail": "hitpointsmaxbonus +0.2 for 3s",
     "facts": "ground-cast @12m \u00b7 65s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 0.6,
     "scores": [
      2
     ],
@@ -487,6 +507,7 @@
     "detail": "physicalarmor +0.16 for 3s",
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 18s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 1.7,
     "scores": [
      4
     ],
@@ -501,6 +522,7 @@
     "detail": "magicresistance +0.13 for 4s",
     "facts": "targeted friendall @11m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 2.0,
     "scores": [
      4
     ],
@@ -515,6 +537,7 @@
     "detail": "magicspelldamagebonus -0.03 for 7s",
     "facts": "ground-cast @13m \u00b7 7s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 1.7,
     "scores": [
      2
     ],
@@ -535,6 +558,7 @@
     "detail": "magicspelldamagebonus +0.15 for 1s",
     "facts": "targeted friendall @11m \u00b7 channeled \u00b7 20s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 0.3,
     "scores": [
      4
     ],
@@ -549,6 +573,7 @@
     "detail": "",
     "facts": "targeted friendall @8m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -570,6 +595,7 @@
     "detail": "",
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -584,6 +610,7 @@
     "detail": "",
     "facts": "targeted friendall @13m",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -598,6 +625,7 @@
     "detail": "",
     "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -612,6 +640,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 5s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -628,6 +657,7 @@
     "detail": "81.5/s over 20s CD",
     "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 4888.2,
     "scores": [
      4
     ],
@@ -642,6 +672,7 @@
     "detail": "26.4/s over 30s CD",
     "facts": "self/contact \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 1586.0,
     "scores": [
      6
     ],
@@ -656,6 +687,7 @@
     "detail": "24.0/s over 30s CD",
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 1440.0,
     "scores": [
      4
     ],
@@ -670,6 +702,7 @@
     "detail": "32.3/s over 20s CD",
     "facts": "persists 1s \u00b7 ground-cast @13m \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 1938.0,
     "scores": [
      4
     ],
@@ -684,6 +717,7 @@
     "detail": "23.2/s over 25s CD",
     "facts": "ground-cast @24m \u00b7 25s CD",
     "group": "damage per cast",
+    "per_min": 1392.0,
     "scores": [
      6
     ],
@@ -698,6 +732,7 @@
     "detail": "14.5/s over 30s CD",
     "facts": "ground-cast @15m \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 868.2,
     "scores": [
      6
     ],
@@ -712,6 +747,7 @@
     "detail": "14.2/s over 30s CD",
     "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 853.4,
     "scores": [
      6
     ],
@@ -726,6 +762,7 @@
     "detail": "19.9/s over 20s CD",
     "facts": "persists 1.6s \u00b7 ground-cast @10m \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 1191.0,
     "scores": [
      4
     ],
@@ -740,6 +777,7 @@
     "detail": "9.9/s over 30s CD",
     "facts": "persists 5.2s \u00b7 targeted allplayers @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 597.0,
     "scores": [
      4
     ],
@@ -754,6 +792,7 @@
     "detail": "14.0/s over 20s CD",
     "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 840.0,
     "scores": [
      2
     ],
@@ -768,6 +807,7 @@
     "detail": "13.5/s over 20s CD",
     "facts": "persists 12s \u00b7 ground-cast @15m \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 810.0,
     "scores": [
      4
     ],
@@ -782,6 +822,7 @@
     "detail": "8.0/s over 30s CD",
     "facts": "persists 2s \u00b7 ground-cast @25m \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 480.0,
     "scores": [
      4
     ],
@@ -796,6 +837,7 @@
     "detail": "15.4/s over 15s CD",
     "facts": "targeted enemy @11m \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 923.6,
     "scores": [
      4
     ],
@@ -810,6 +852,7 @@
     "detail": "11.5/s over 20s CD",
     "facts": "self/contact \u00b7 ignores CCR \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 690.0,
     "scores": [
      4
     ],
@@ -824,6 +867,7 @@
     "detail": "11.3/s over 20s CD",
     "facts": "persists 1s \u00b7 ground-cast @22m \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 679.2,
     "scores": [
      4
     ],
@@ -838,6 +882,7 @@
     "detail": "11.2/s over 20s CD",
     "facts": "ground-cast @24m \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 675.0,
     "scores": [
      4
     ],
@@ -852,6 +897,7 @@
     "detail": "8.5/s over 25s CD",
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "damage per cast",
+    "per_min": 508.8,
     "scores": [
      4
     ],
@@ -866,6 +912,7 @@
     "detail": "7.0/s over 30s CD",
     "facts": "persists 6.5s \u00b7 ground-cast @15m \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 422.0,
     "scores": [
      6
     ],
@@ -880,6 +927,7 @@
     "detail": "10.5/s over 20s CD",
     "facts": "persists 1s \u00b7 ground-cast @22m \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 630.0,
     "scores": [
      2
     ],
@@ -894,6 +942,7 @@
     "detail": "13.3/s over 15s CD",
     "facts": "ground-cast @15m \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 800.0,
     "scores": [
      4
     ],
@@ -908,6 +957,7 @@
     "detail": "11.1/s over 18s CD",
     "facts": "persists 2s \u00b7 ground-cast @12m \u00b7 18s CD",
     "group": "damage per cast",
+    "per_min": 666.7,
     "scores": [
      2
     ],
@@ -922,6 +972,7 @@
     "detail": "5.0/s over 40s CD",
     "facts": "ground-cast @14m \u00b7 40s CD",
     "group": "damage per cast",
+    "per_min": 298.5,
     "scores": [
      2
     ],
@@ -936,6 +987,7 @@
     "detail": "63.7/s over 3s CD",
     "facts": "persists 12s \u00b7 ground-cast @3m \u00b7 3s CD",
     "group": "damage per cast",
+    "per_min": 3820.0,
     "scores": [
      2
     ],
@@ -950,6 +1002,7 @@
     "detail": "12.5/s over 15s CD",
     "facts": "persists 2s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 752.0,
     "scores": [
      4
     ],
@@ -964,6 +1017,7 @@
     "detail": "8.5/s over 20s CD",
     "facts": "ground-cast @8m \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 510.0,
     "scores": [
      4
     ],
@@ -978,6 +1032,7 @@
     "detail": "8.1/s over 20s CD",
     "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 483.6,
     "scores": [
      4
     ],
@@ -992,6 +1047,7 @@
     "detail": "10.7/s over 15s CD",
     "facts": "ground-cast @13m \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 644.0,
     "scores": [
      2
     ],
@@ -1006,6 +1062,7 @@
     "detail": "6.4/s over 25s CD",
     "facts": "persists 2.6s \u00b7 ground-cast @22m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "damage per cast",
+    "per_min": 384.0,
     "scores": [
      2
     ],
@@ -1020,6 +1077,7 @@
     "detail": "10.7/s over 15s CD",
     "facts": "persists 2s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 640.0,
     "scores": [
      2
     ],
@@ -1034,6 +1092,7 @@
     "detail": "160.0/s over 1s CD",
     "facts": "ground-cast @15m \u00b7 1s CD",
     "group": "damage per cast",
+    "per_min": 9600.0,
     "scores": [
      4
     ],
@@ -1048,6 +1107,7 @@
     "detail": "12.9/s over 12s CD",
     "facts": "ground-cast @12m \u00b7 12s CD",
     "group": "damage per cast",
+    "per_min": 775.0,
     "scores": [
      2
     ],
@@ -1062,6 +1122,7 @@
     "detail": "5.1/s over 30s CD",
     "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 305.0,
     "scores": [
      4
     ],
@@ -1076,6 +1137,7 @@
     "detail": "9.3/s over 15s CD",
     "facts": "targeted enemy @15m \u00b7 channeled \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 560.0,
     "scores": [
      4
     ],
@@ -1090,6 +1152,7 @@
     "detail": "4.7/s over 30s CD",
     "facts": "ground-cast @17m \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 280.0,
     "scores": [
      4
     ],
@@ -1104,6 +1167,7 @@
     "detail": "9.1/s over 15s CD",
     "facts": "persists 1.05s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 547.2,
     "scores": [
      2
     ],
@@ -1118,6 +1182,7 @@
     "detail": "65.0/s over 2s CD",
     "facts": "ground-cast @13m \u00b7 2s CD",
     "group": "damage per cast",
+    "per_min": 3900.0,
     "scores": [
      2,
      4
@@ -1136,6 +1201,7 @@
     "detail": "129.0/s over 1s CD",
     "facts": "persists 6s \u00b7 self/contact \u00b7 1s CD",
     "group": "damage per cast",
+    "per_min": 7740.0,
     "scores": [
      4
     ],
@@ -1150,6 +1216,7 @@
     "detail": "8.3/s over 15s CD",
     "facts": "self/contact \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 500.0,
     "scores": [
      4
     ],
@@ -1164,6 +1231,7 @@
     "detail": "6.2/s over 20s CD",
     "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 375.0,
     "scores": [
      2
     ],
@@ -1178,6 +1246,7 @@
     "detail": "8.1/s over 15s CD",
     "facts": "ground-cast @15m \u00b7 channeled \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 488.0,
     "scores": [
      4
     ],
@@ -1192,6 +1261,7 @@
     "detail": "2.9/s over 38s CD",
     "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 38s CD",
     "group": "damage per cast",
+    "per_min": 176.8,
     "scores": [
      4
     ],
@@ -1206,6 +1276,7 @@
     "detail": "3.2/s over 30s CD",
     "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 194.0,
     "scores": [
      2
     ],
@@ -1220,6 +1291,7 @@
     "detail": "8.1/s over 10s CD",
     "facts": "ground-cast @8m \u00b7 10s CD",
     "group": "damage per cast",
+    "per_min": 486.0,
     "scores": [
      4
     ],
@@ -1234,6 +1306,7 @@
     "detail": "3.2/s over 25s CD",
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "damage per cast",
+    "per_min": 192.0,
     "scores": [
      2
     ],
@@ -1248,6 +1321,7 @@
     "detail": "3.0/s over 27s CD",
     "facts": "persists 3s \u00b7 ground-cast @15m \u00b7 26.8s CD",
     "group": "damage per cast",
+    "per_min": 179.1,
     "scores": [
      2
     ],
@@ -1262,6 +1336,7 @@
     "detail": "1.1/s over 63s CD",
     "facts": "persists 5s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 63s CD",
     "group": "damage per cast",
+    "per_min": 66.7,
     "scores": [
      2
     ],
@@ -1276,6 +1351,7 @@
     "detail": "2.1/s over 30s CD",
     "facts": "self/contact \u00b7 channeled \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 126.0,
     "scores": [
      4
     ],
@@ -1290,6 +1366,7 @@
     "detail": "3.0/s over 20s CD",
     "facts": "persists 5s \u00b7 ground-cast @11m \u00b7 channeled \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 180.0,
     "scores": [
      2
     ],
@@ -1304,6 +1381,7 @@
     "detail": "2.2/s over 25s CD",
     "facts": "self/contact \u00b7 channeled \u00b7 25s CD",
     "group": "damage per cast",
+    "per_min": 134.4,
     "scores": [
      4
     ],
@@ -1318,6 +1396,7 @@
     "detail": "33.3/s over 2s CD",
     "facts": "ground-cast @3m \u00b7 1.5s CD",
     "group": "damage per cast",
+    "per_min": 2000.0,
     "scores": [
      2
     ],
@@ -1332,6 +1411,7 @@
     "detail": "46.0/s over 1s CD",
     "facts": "persists 2s \u00b7 ground-cast @9m \u00b7 1s CD",
     "group": "damage per cast",
+    "per_min": 2760.0,
     "scores": [
      2
     ],
@@ -1346,6 +1426,7 @@
     "detail": "1.0/s over 30s CD",
     "facts": "persists 5s \u00b7 ground-cast @15m \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 62.0,
     "scores": [
      4
     ],
@@ -1360,6 +1441,7 @@
     "detail": "0.8/s over 30s CD",
     "facts": "ground-cast @12m \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 48.0,
     "scores": [
      6
     ],
@@ -1374,6 +1456,7 @@
     "detail": "0.7/s over 30s CD",
     "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 44.0,
     "scores": [
      2
     ],
@@ -1388,6 +1471,7 @@
     "detail": "0.7/s over 30s CD",
     "facts": "persists 5s \u00b7 ground-cast @26m \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 42.0,
     "scores": [
      2
     ],
@@ -1402,6 +1486,7 @@
     "detail": "0.8/s over 20s CD",
     "facts": "persists 1.2s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 50.7,
     "scores": [
      2
     ],
@@ -1416,6 +1501,7 @@
     "detail": "+35% AA dmg for 6s",
     "facts": "persists 1s \u00b7 self/contact \u00b7 channeled",
     "group": "auto-attack amplifiers (multiplier)",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -1430,6 +1516,7 @@
     "detail": "+20% AA dmg for 30s",
     "facts": "self/contact \u00b7 10s CD",
     "group": "auto-attack amplifiers (multiplier)",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -1444,6 +1531,7 @@
     "detail": "",
     "facts": "persists 3.5s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -1458,6 +1546,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -1472,6 +1561,7 @@
     "detail": "",
     "facts": "ground-cast @3m",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -1486,6 +1576,7 @@
     "detail": "",
     "facts": "ground-cast @22m \u00b7 channeled \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -1500,6 +1591,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 8s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -1514,6 +1606,7 @@
     "detail": "",
     "facts": "persists 2s \u00b7 ground-cast @24m",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -1528,6 +1621,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -1544,6 +1638,7 @@
     "detail": "88.9/s over 10s CD",
     "facts": "persists 1.3s \u00b7 ground-cast @26m \u00b7 10s CD",
     "group": "damage per cast",
+    "per_min": 5334.0,
     "scores": [
      4
     ],
@@ -1558,6 +1653,7 @@
     "detail": "57.5/s over 15s CD",
     "facts": "targeted enemy @3m \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 3450.0,
     "scores": [
      6
     ],
@@ -1572,6 +1668,7 @@
     "detail": "23.2/s over 35s CD",
     "facts": "ground-cast @11m \u00b7 35s CD",
     "group": "damage per cast",
+    "per_min": 1394.2,
     "scores": [
      4
     ],
@@ -1586,6 +1683,7 @@
     "detail": "35.8/s over 20s CD",
     "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 2148.0,
     "scores": [
      2
     ],
@@ -1600,6 +1698,7 @@
     "detail": "34.0/s over 20s CD",
     "facts": "persists 2s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 2039.1,
     "scores": [
      4
     ],
@@ -1614,6 +1713,7 @@
     "detail": "55.9/s over 12s CD",
     "facts": "targeted enemy @8m \u00b7 12s CD",
     "group": "damage per cast",
+    "per_min": 3355.0,
     "scores": [
      4
     ],
@@ -1628,6 +1728,7 @@
     "detail": "25.7/s over 15s CD",
     "facts": "targeted enemy @16m \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 1544.0,
     "scores": [
      4
     ],
@@ -1642,6 +1743,7 @@
     "detail": "22.7/s over 15s CD",
     "facts": "persists 2s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 1360.0,
     "scores": [
      4
     ],
@@ -1656,6 +1758,7 @@
     "detail": "27.0/s over 10s CD",
     "facts": "ground-cast @18m \u00b7 10s CD",
     "group": "damage per cast",
+    "per_min": 1620.0,
     "scores": [
      2
     ],
@@ -1670,6 +1773,7 @@
     "detail": "11.2/s over 20s CD",
     "facts": "ground-cast @24m \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 675.0,
     "scores": [
      2
     ],
@@ -1684,6 +1788,7 @@
     "detail": "8.9/s over 25s CD",
     "facts": "ground-cast @16m \u00b7 25s CD",
     "group": "damage per cast",
+    "per_min": 532.8,
     "scores": [
      2
     ],
@@ -1698,6 +1803,7 @@
     "detail": "8.8/s over 25s CD",
     "facts": "targeted enemy @7m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "damage per cast",
+    "per_min": 527.3,
     "scores": [
      4
     ],
@@ -1712,6 +1818,7 @@
     "detail": "11.7/s over 15s CD",
     "facts": "targeted enemy @11m \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 699.6,
     "scores": [
      4
     ],
@@ -1726,6 +1833,7 @@
     "detail": "7.5/s over 20s CD",
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 450.0,
     "scores": [
      4
     ],
@@ -1740,6 +1848,7 @@
     "detail": "9.3/s over 15s CD",
     "facts": "targeted enemy @15m \u00b7 channeled \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 560.0,
     "scores": [
      2
     ],
@@ -1754,6 +1863,7 @@
     "detail": "3.3/s over 30s CD",
     "facts": "ground-cast @10m \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 196.6,
     "scores": [
      2
     ],
@@ -1768,6 +1878,7 @@
     "detail": "3.6/s over 25s CD",
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "damage per cast",
+    "per_min": 213.6,
     "scores": [
      4
     ],
@@ -1782,6 +1893,7 @@
     "detail": "3.6/s over 20s CD",
     "facts": "persists 1.4s \u00b7 ground-cast @25m \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 219.0,
     "scores": [
      2
     ],
@@ -1796,6 +1908,7 @@
     "detail": "3.0/s over 20s CD",
     "facts": "persists 5s \u00b7 ground-cast @11m \u00b7 channeled \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 180.0,
     "scores": [
      4
     ],
@@ -1810,6 +1923,7 @@
     "detail": "1.5/s over 20s CD",
     "facts": "targeted enemy @13m \u00b7 channeled \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 90.3,
     "scores": [
      4
     ],
@@ -1824,6 +1938,7 @@
     "detail": "2.0/s over 15s CD",
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 120.0,
     "scores": [
      2,
      4
@@ -1844,6 +1959,7 @@
     "detail": "0.8/s over 20s CD",
     "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 48.0,
     "scores": [
      2
     ],
@@ -1858,6 +1974,7 @@
     "detail": "+280% AA dmg for 8s, +50% attack speed",
     "facts": "self/contact",
     "group": "auto-attack amplifiers (multiplier)",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -1872,6 +1989,7 @@
     "detail": "+35% AA dmg for 6s",
     "facts": "persists 1s \u00b7 self/contact \u00b7 channeled",
     "group": "auto-attack amplifiers (multiplier)",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -1886,6 +2004,7 @@
     "detail": "",
     "facts": "ground-cast @3m",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -1900,6 +2019,7 @@
     "detail": "",
     "facts": "targeted enemy @9m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -1914,6 +2034,7 @@
     "detail": "",
     "facts": "persists 2s \u00b7 ground-cast @24m",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -1928,6 +2049,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -1942,6 +2064,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 8s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -1956,6 +2079,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 5s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -1972,6 +2096,7 @@
     "detail": "knockback 1.25m",
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "displacement (m)",
+    "per_min": 3.0,
     "scores": [
      2
     ],
@@ -1986,6 +2111,7 @@
     "detail": "hard CC 3.5s",
     "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 10.5,
     "scores": [
      2
     ],
@@ -2000,6 +2126,7 @@
     "detail": "hard CC 2.79s",
     "facts": "targeted enemy @5.5m \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 11.2,
     "scores": [
      4
     ],
@@ -2014,6 +2141,7 @@
     "detail": "hard CC 2.7s",
     "facts": "persists 1.2s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 10.8,
     "scores": [
      4
     ],
@@ -2028,6 +2156,7 @@
     "detail": "hard CC 2.5s",
     "facts": "persists 2s \u00b7 ground-cast @12m \u00b7 18s CD",
     "group": "hard CC (s)",
+    "per_min": 8.3,
     "scores": [
      4
     ],
@@ -2042,6 +2171,7 @@
     "detail": "hard CC 2.5s; knockback 0.9m",
     "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
+    "per_min": 5.0,
     "scores": [
      4
     ],
@@ -2056,6 +2186,7 @@
     "detail": "hard CC 2.48s",
     "facts": "ground-cast @12m \u00b7 14s CD",
     "group": "hard CC (s)",
+    "per_min": 10.6,
     "scores": [
      4
     ],
@@ -2070,6 +2201,7 @@
     "detail": "hard CC 2.35s; knockback 2.0m",
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 7.0,
     "scores": [
      4
     ],
@@ -2084,6 +2216,7 @@
     "detail": "hard CC 2.11s",
     "facts": "self/contact \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 8.4,
     "scores": [
      4
     ],
@@ -2098,6 +2231,7 @@
     "detail": "hard CC 1.8s",
     "facts": "ground-cast @15m \u00b7 10s CD",
     "group": "hard CC (s)",
+    "per_min": 10.8,
     "scores": [
      2
     ],
@@ -2118,6 +2252,7 @@
     "detail": "hard CC 1.75s",
     "facts": "persists 1s \u00b7 ground-cast @22m \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 5.2,
     "scores": [
      4
     ],
@@ -2132,6 +2267,7 @@
     "detail": "hard CC 1.5s",
     "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat",
     "group": "hard CC (s)",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2146,6 +2282,7 @@
     "detail": "hard CC 1.35s",
     "facts": "ground-cast @12m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 5.4,
     "scores": [
      2
     ],
@@ -2166,6 +2303,7 @@
     "detail": "hard CC 1.0s",
     "facts": "ground-cast @22m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 3.0,
     "scores": [
      2,
      4
@@ -2187,6 +2325,7 @@
     "detail": "hard CC 1.0s",
     "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
+    "per_min": 2.0,
     "scores": [
      4
     ],
@@ -2201,6 +2340,7 @@
     "detail": "hard CC 0.8s",
     "facts": "ground-cast @18m \u00b7 1.2s CD",
     "group": "hard CC (s)",
+    "per_min": 40.0,
     "scores": [
      2
     ],
@@ -2215,6 +2355,7 @@
     "detail": "hard CC 0.8s; knockback 1.0m",
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
+    "per_min": 1.6,
     "scores": [
      4
     ],
@@ -2229,6 +2370,7 @@
     "detail": "hard CC 0.8s",
     "facts": "ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "hard CC (s)",
+    "per_min": 1.9,
     "scores": [
      2
     ],
@@ -2243,6 +2385,7 @@
     "detail": "hard CC 0.8s",
     "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 2.4,
     "scores": [
      4
     ],
@@ -2257,6 +2400,7 @@
     "detail": "slow-power 8.0; knockback 2.1m",
     "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 16.0,
     "scores": [
      2
     ],
@@ -2271,6 +2415,7 @@
     "detail": "slow-power 7.5",
     "facts": "ground-cast @3m \u00b7 1.5s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 300.0,
     "scores": [
      2
     ],
@@ -2285,6 +2430,7 @@
     "detail": "slow-power 4.5",
     "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 9.0,
     "scores": [
      2
     ],
@@ -2299,6 +2445,7 @@
     "detail": "slow-power 3.5",
     "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 7.0,
     "scores": [
      2
     ],
@@ -2313,6 +2460,7 @@
     "detail": "slow-power 2.5",
     "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 5.0,
     "scores": [
      2
     ],
@@ -2327,6 +2475,7 @@
     "detail": "slow-power 1.6; knockback 10.0m",
     "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 4.8,
     "scores": [
      2
     ],
@@ -2341,6 +2490,7 @@
     "detail": "slow-power 1.5",
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 3.6,
     "scores": [
      4
     ],
@@ -2355,6 +2505,7 @@
     "detail": "slow-power 1.5",
     "facts": "persists 1s \u00b7 ground-cast @13m \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 4.5,
     "scores": [
      2
     ],
@@ -2369,6 +2520,7 @@
     "detail": "slow-power 1.0",
     "facts": "targeted enemy @3m \u00b7 6s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 10.0,
     "scores": [
      2
     ],
@@ -2385,6 +2537,7 @@
     "detail": "slow-power 0.9; hard CC 2.0s",
     "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 2.2,
     "scores": [
      2
     ],
@@ -2399,6 +2552,7 @@
     "detail": "slow-power 0.8",
     "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 2.4,
     "scores": [
      2
     ],
@@ -2413,6 +2567,7 @@
     "detail": "slow-power 0.67; hard CC 2.25s",
     "facts": "persists 2s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 2.7,
     "scores": [
      2
     ],
@@ -2427,6 +2582,7 @@
     "detail": "slow-power 0.6",
     "facts": "targeted enemy @4m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 18s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 2.0,
     "scores": [
      2,
      4
@@ -2445,6 +2601,7 @@
     "detail": "slow-power 0.2",
     "facts": "ground-cast @15m \u00b7 1s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 12.0,
     "scores": [
      2
     ],
@@ -2459,6 +2616,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -2477,6 +2635,7 @@
     "detail": "",
     "facts": "self/contact",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2491,6 +2650,7 @@
     "detail": "",
     "facts": "ground-cast @8m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2505,6 +2665,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 35s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2519,6 +2680,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2533,6 +2695,7 @@
     "detail": "",
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2547,6 +2710,7 @@
     "detail": "",
     "facts": "persists 2s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2561,6 +2725,7 @@
     "detail": "",
     "facts": "ground-cast @4m \u00b7 4s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -2580,6 +2745,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 8s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2594,6 +2760,7 @@
     "detail": "",
     "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2608,6 +2775,7 @@
     "detail": "",
     "facts": "persists 6s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2622,6 +2790,7 @@
     "detail": "",
     "facts": "targeted enemy @8m \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -2638,6 +2807,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2658,6 +2828,7 @@
     "detail": "",
     "facts": "persists 5s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 62s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2672,6 +2843,7 @@
     "detail": "",
     "facts": "ground-cast @14m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2686,6 +2858,7 @@
     "detail": "",
     "facts": "targeted friendall @11m \u00b7 channeled \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2700,6 +2873,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2723,6 +2897,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -2744,6 +2919,7 @@
     "detail": "",
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -2758,6 +2934,7 @@
     "detail": "",
     "facts": "ground-cast @12m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -2779,6 +2956,7 @@
     "detail": "",
     "facts": "ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -2793,6 +2971,7 @@
     "detail": "",
     "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2809,6 +2988,7 @@
     "detail": "movespeedbonus +0.8 for 5s",
     "facts": "targeted enemy @4m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 18s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 13.3,
     "scores": [
      2
     ],
@@ -2823,6 +3003,7 @@
     "detail": "physicalattackdamagebonus -0.4 for 8s",
     "facts": "ground-cast @10m \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 6.4,
     "scores": [
      4
     ],
@@ -2837,6 +3018,7 @@
     "detail": "attackspeedbonus -0.5 for 5s",
     "facts": "self/contact \u00b7 18s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 8.3,
     "scores": [
      2
     ],
@@ -2852,6 +3034,7 @@
     "detail": "physicalattackdamagebonus -0.4 for 5s",
     "facts": "persists 3s \u00b7 ground-cast @15m \u00b7 26.8s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 4.5,
     "scores": [
      4
     ],
@@ -2866,6 +3049,7 @@
     "detail": "magicspelldamagebonus -0.25 for 5s",
     "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 38s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 1.9,
     "scores": [
      2
     ],
@@ -2882,6 +3066,7 @@
     "detail": "",
     "facts": "persists 12s \u00b7 ground-cast @3m \u00b7 3s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -2896,6 +3081,7 @@
     "detail": "",
     "facts": "self/contact",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2910,6 +3096,7 @@
     "detail": "",
     "facts": "ground-cast @8m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2924,6 +3111,7 @@
     "detail": "",
     "facts": "ground-cast @8m \u00b7 23.5s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2,
      4
@@ -2945,6 +3133,7 @@
     "detail": "",
     "facts": "self/contact",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -2959,6 +3148,7 @@
     "detail": "",
     "facts": "persists 3.5s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -2973,6 +3163,7 @@
     "detail": "",
     "facts": "ground-cast @2m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -2991,6 +3182,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3005,6 +3197,7 @@
     "detail": "",
     "facts": "ground-cast @8m \u00b7 10s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3019,6 +3212,7 @@
     "detail": "",
     "facts": "persists 2s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3033,6 +3227,7 @@
     "detail": "",
     "facts": "targeted enemy @7m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3047,6 +3242,7 @@
     "detail": "",
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3061,6 +3257,7 @@
     "detail": "",
     "facts": "persists 2s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3075,6 +3272,7 @@
     "detail": "",
     "facts": "ground-cast @14m \u00b7 40s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3089,6 +3287,7 @@
     "detail": "",
     "facts": "ground-cast @12m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3107,6 +3306,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3128,6 +3328,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3142,6 +3343,7 @@
     "detail": "",
     "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3156,6 +3358,7 @@
     "detail": "",
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3170,6 +3373,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3184,6 +3388,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3203,6 +3408,7 @@
     "detail": "",
     "facts": "ground-cast @12m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3217,6 +3423,7 @@
     "detail": "",
     "facts": "ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3231,6 +3438,7 @@
     "detail": "",
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3245,6 +3453,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3259,6 +3468,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3273,6 +3483,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 5s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3287,6 +3498,7 @@
     "detail": "",
     "facts": "persists 6s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3301,6 +3513,7 @@
     "detail": "",
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3317,6 +3530,7 @@
     "detail": "",
     "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 44s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3331,6 +3545,7 @@
     "detail": "",
     "facts": "ground-cast @12m \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3349,6 +3564,7 @@
     "detail": "",
     "facts": "persists 12s \u00b7 ground-cast @3m \u00b7 3s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3363,6 +3579,7 @@
     "detail": "",
     "facts": "self/contact",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3377,6 +3594,7 @@
     "detail": "",
     "facts": "ground-cast @8m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3391,6 +3609,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 35s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3405,6 +3624,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3419,6 +3639,7 @@
     "detail": "",
     "facts": "ground-cast @4.5m \u00b7 4s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3439,6 +3660,7 @@
     "detail": "",
     "facts": "ground-cast @8m \u00b7 10s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3453,6 +3675,7 @@
     "detail": "",
     "facts": "targeted enemy @7m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3467,6 +3690,7 @@
     "detail": "",
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3481,6 +3705,7 @@
     "detail": "",
     "facts": "persists 2s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3495,6 +3720,7 @@
     "detail": "",
     "facts": "ground-cast @14m \u00b7 40s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3509,6 +3735,7 @@
     "detail": "",
     "facts": "ground-cast @12m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2,
      6
@@ -3528,6 +3755,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -3542,6 +3770,7 @@
     "detail": "",
     "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -3556,6 +3785,7 @@
     "detail": "",
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -3570,6 +3800,7 @@
     "detail": "",
     "facts": "targeted enemy @3.5m \u00b7 3s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3584,6 +3815,7 @@
     "detail": "",
     "facts": "ground-cast @12m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3598,6 +3830,7 @@
     "detail": "",
     "facts": "targeted enemy @9m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3612,6 +3845,7 @@
     "detail": "",
     "facts": "ground-cast @4m \u00b7 4s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3630,6 +3864,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3644,6 +3879,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2,
      4
@@ -3663,6 +3899,7 @@
     "detail": "",
     "facts": "persists 3s \u00b7 ground-cast @2m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3677,6 +3914,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3691,6 +3929,7 @@
     "detail": "",
     "facts": "ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3705,6 +3944,7 @@
     "detail": "",
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3719,6 +3959,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3733,6 +3974,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3747,6 +3989,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 5s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3761,6 +4004,7 @@
     "detail": "",
     "facts": "persists 6s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3775,6 +4019,7 @@
     "detail": "",
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3789,6 +4034,7 @@
     "detail": "",
     "facts": "ground-cast @16m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -3803,6 +4049,7 @@
     "detail": "",
     "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -3817,6 +4064,7 @@
     "detail": "",
     "facts": "targeted enemy @8m \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3833,6 +4081,7 @@
     "detail": "57.5/s over 15s CD",
     "facts": "targeted enemy @3m \u00b7 15s CD",
     "group": "damage per cast",
+    "per_min": 3450.0,
     "scores": [
      2
     ],
@@ -3847,6 +4096,7 @@
     "detail": "23.2/s over 35s CD",
     "facts": "ground-cast @11m \u00b7 35s CD",
     "group": "damage per cast",
+    "per_min": 1394.2,
     "scores": [
      4
     ],
@@ -3861,6 +4111,7 @@
     "detail": "26.4/s over 30s CD",
     "facts": "self/contact \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 1586.0,
     "scores": [
      2
     ],
@@ -3875,6 +4126,7 @@
     "detail": "11.5/s over 20s CD",
     "facts": "self/contact \u00b7 ignores CCR \u00b7 20s CD",
     "group": "damage per cast",
+    "per_min": 690.0,
     "scores": [
      2
     ],
@@ -3889,6 +4141,7 @@
     "detail": "8.5/s over 25s CD",
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "damage per cast",
+    "per_min": 508.8,
     "scores": [
      2
     ],
@@ -3903,6 +4156,7 @@
     "detail": "7.1/s over 14s CD",
     "facts": "ground-cast @12m \u00b7 14s CD",
     "group": "damage per cast",
+    "per_min": 428.6,
     "scores": [
      2
     ],
@@ -3917,6 +4171,7 @@
     "detail": "3.3/s over 30s CD",
     "facts": "ground-cast @10m \u00b7 30s CD",
     "group": "damage per cast",
+    "per_min": 196.6,
     "scores": [
      4
     ],
@@ -3931,6 +4186,7 @@
     "detail": "",
     "facts": "targeted enemy @9m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -3947,6 +4203,7 @@
     "detail": "35.6/s over 18s CD",
     "facts": "self/contact \u00b7 18s CD",
     "group": "healing per cast",
+    "per_min": 2133.3,
     "scores": [
      4
     ],
@@ -3961,6 +4218,7 @@
     "detail": "32.0/s over 10s CD",
     "facts": "targeted friendall @13m \u00b7 10s CD",
     "group": "healing per cast",
+    "per_min": 1920.0,
     "scores": [
      4
     ],
@@ -3975,6 +4233,7 @@
     "detail": "9.0/s over 30s CD",
     "facts": "ground-cast @14m \u00b7 30s CD",
     "group": "healing per cast",
+    "per_min": 540.0,
     "scores": [
      6
     ],
@@ -3989,6 +4248,7 @@
     "detail": "",
     "facts": "targeted friendall @13m",
     "group": "healing per cast",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -4003,6 +4263,7 @@
     "detail": "2.1/s over 65s CD",
     "facts": "ground-cast @12m \u00b7 65s CD",
     "group": "healing per cast",
+    "per_min": 127.4,
     "scores": [
      4
     ],
@@ -4017,6 +4278,7 @@
     "detail": "4.5/s over 30s CD",
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 30s CD",
     "group": "healing per cast",
+    "per_min": 270.0,
     "scores": [
      6
     ],
@@ -4031,6 +4293,7 @@
     "detail": "4.1/s over 30s CD",
     "facts": "persists 9s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "healing per cast",
+    "per_min": 248.0,
     "scores": [
      2
     ],
@@ -4045,6 +4308,7 @@
     "detail": "33.4/s over 4s CD",
     "facts": "ground-cast @13m \u00b7 3.5s CD",
     "group": "healing per cast",
+    "per_min": 2005.7,
     "scores": [
      4
     ],
@@ -4061,6 +4325,7 @@
     "detail": "3.2/s over 20s CD",
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "healing per cast",
+    "per_min": 195.0,
     "scores": [
      2
     ],
@@ -4079,6 +4344,7 @@
     "detail": "",
     "facts": "targeted friendall @11m",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -4095,6 +4361,7 @@
     "detail": "movespeedbonus -0.5 for 15s",
     "facts": "self/contact \u00b7 ignores CCR \u00b7 tier-flat \u00b7 37.5s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 12.0,
     "scores": [
      4
     ],
@@ -4109,6 +4376,7 @@
     "detail": "physicalattackdamagebonus -0.4 for 8s",
     "facts": "ground-cast @10m \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 6.4,
     "scores": [
      2
     ],
@@ -4123,6 +4391,7 @@
     "detail": "healmodifier -0.4 for 6s",
     "facts": "persists 6.5s \u00b7 ground-cast @15m \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 4.8,
     "scores": [
      4
     ],
@@ -4137,6 +4406,7 @@
     "detail": "healmodifier -0.4 for 4s",
     "facts": "persists 1.05s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 6.4,
     "scores": [
      4
     ],
@@ -4151,6 +4421,7 @@
     "detail": "magicspelldamagebonus -0.25 for 5s",
     "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 38s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 1.9,
     "scores": [
      4
     ],
@@ -4165,6 +4436,7 @@
     "detail": "crowdcontrolresistance -0.2 for 4s",
     "facts": "self/contact \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 3.2,
     "scores": [
      2
     ],
@@ -4179,6 +4451,7 @@
     "detail": "healmodifier +0.2 for 4s",
     "facts": "ground-cast @12m \u00b7 18s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 2.7,
     "scores": [
      2
     ],
@@ -4193,6 +4466,7 @@
     "detail": "healmodifier -0.2 for 4s",
     "facts": "targeted enemy @3m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 3.2,
     "scores": [
      2
     ],
@@ -4207,6 +4481,7 @@
     "detail": "healmodifier -0.2 for 4s",
     "facts": "persists 1.6s \u00b7 ground-cast @10m \u00b7 20s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 2.4,
     "scores": [
      2
     ],
@@ -4221,6 +4496,7 @@
     "detail": "healmodifier -0.12 for 5s",
     "facts": "targeted enemy @3m \u00b7 2s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 18.0,
     "scores": [
      2
     ],
@@ -4239,6 +4515,7 @@
     "detail": "",
     "facts": "targeted enemy @2m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -4260,6 +4537,7 @@
     "detail": "",
     "facts": "persists 1.2s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -4274,6 +4552,7 @@
     "detail": "",
     "facts": "persists 3s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -4290,6 +4569,7 @@
     "detail": "35.6/s over 18s CD",
     "facts": "self/contact \u00b7 18s CD",
     "group": "healing per cast",
+    "per_min": 2133.3,
     "scores": [
      4
     ],
@@ -4304,6 +4584,7 @@
     "detail": "4.1/s over 30s CD",
     "facts": "persists 9s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "healing per cast",
+    "per_min": 248.0,
     "scores": [
      6
     ],
@@ -4318,6 +4599,7 @@
     "detail": "7.1/s over 15s CD",
     "facts": "targeted friendall @11m \u00b7 15s CD",
     "group": "healing per cast",
+    "per_min": 424.0,
     "scores": [
      4
     ],
@@ -4332,6 +4614,7 @@
     "detail": "3.1/s over 25s CD",
     "facts": "targeted friendall @10m \u00b7 25s CD",
     "group": "healing per cast",
+    "per_min": 184.8,
     "scores": [
      6
     ],
@@ -4346,6 +4629,7 @@
     "detail": "2.9/s over 25s CD",
     "facts": "self/contact \u00b7 channeled \u00b7 25s CD",
     "group": "healing per cast",
+    "per_min": 172.8,
     "scores": [
      6
     ],
@@ -4360,6 +4644,7 @@
     "detail": "3.5/s over 20s CD",
     "facts": "persists 4s \u00b7 ground-cast @15m \u00b7 20s CD",
     "group": "healing per cast",
+    "per_min": 207.0,
     "scores": [
      6
     ],
@@ -4374,6 +4659,7 @@
     "detail": "2.8/s over 20s CD",
     "facts": "targeted friendall @11m \u00b7 channeled \u00b7 20s CD",
     "group": "healing per cast",
+    "per_min": 165.0,
     "scores": [
      4
     ],
@@ -4388,6 +4674,7 @@
     "detail": "2.8/s over 18s CD",
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 18s CD",
     "group": "healing per cast",
+    "per_min": 166.7,
     "scores": [
      6
     ],
@@ -4402,6 +4689,7 @@
     "detail": "4.2/s over 12s CD",
     "facts": "targeted friendother @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 12s CD",
     "group": "healing per cast",
+    "per_min": 250.0,
     "scores": [
      4
     ],
@@ -4420,6 +4708,7 @@
     "detail": "1.0/s over 30s CD",
     "facts": "persists 3s \u00b7 ground-cast @2m \u00b7 30s CD",
     "group": "healing per cast",
+    "per_min": 60.0,
     "scores": [
      2
     ],
@@ -4434,6 +4723,7 @@
     "detail": "",
     "facts": "targeted allunmounted @11m",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -4448,6 +4738,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -4462,6 +4753,7 @@
     "detail": "",
     "facts": "targeted friendall @11m",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -4476,6 +4768,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 5s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -4492,6 +4785,7 @@
     "detail": "ignores CC resistance",
     "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 27.5s CD",
     "group": "displacement (m)",
+    "per_min": 39.3,
     "scores": [
      6
     ],
@@ -4506,6 +4800,7 @@
     "detail": "ignores CC resistance",
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 29s CD",
     "group": "displacement (m)",
+    "per_min": 24.8,
     "scores": [
      6
     ],
@@ -4520,6 +4815,7 @@
     "detail": "",
     "facts": "ground-cast @14m \u00b7 12s CD",
     "group": "displacement (m)",
+    "per_min": 50.0,
     "scores": [
      2
     ],
@@ -4541,6 +4837,7 @@
     "detail": "ignores CC resistance",
     "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "displacement (m)",
+    "per_min": 30.0,
     "scores": [
      4
     ],
@@ -4555,6 +4852,7 @@
     "detail": "ignores CC resistance",
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 18s CD",
     "group": "displacement (m)",
+    "per_min": 33.3,
     "scores": [
      4
     ],
@@ -4569,6 +4867,7 @@
     "detail": "",
     "facts": "ground-cast @6m \u00b7 15s CD",
     "group": "displacement (m)",
+    "per_min": 36.0,
     "scores": [
      2
     ],
@@ -4587,6 +4886,7 @@
     "detail": "ignores CC resistance",
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 10s CD",
     "group": "displacement (m)",
+    "per_min": 48.0,
     "scores": [
      2
     ],
@@ -4605,6 +4905,7 @@
     "detail": "ignores CC resistance",
     "facts": "persists 3s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
+    "per_min": 12.0,
     "scores": [
      4
     ],
@@ -4619,6 +4920,7 @@
     "detail": "",
     "facts": "persists 1s \u00b7 ground-cast @12m \u00b7 12s CD",
     "group": "displacement (m)",
+    "per_min": 20.0,
     "scores": [
      2
     ],
@@ -4637,6 +4939,7 @@
     "detail": "",
     "facts": "ground-cast @17m \u00b7 30s CD",
     "group": "displacement (m)",
+    "per_min": 8.0,
     "scores": [
      2
     ],
@@ -4651,6 +4954,7 @@
     "detail": "",
     "facts": "ground-cast @15m \u00b7 30s CD",
     "group": "displacement (m)",
+    "per_min": 6.0,
     "scores": [
      2
     ],
@@ -4665,6 +4969,7 @@
     "detail": "ignores CC resistance",
     "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
+    "per_min": 4.2,
     "scores": [
      2
     ],
@@ -4679,6 +4984,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "displacement (m)",
+    "per_min": 6.0,
     "scores": [
      2
     ],
@@ -4693,6 +4999,7 @@
     "detail": "ignores CC resistance",
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "displacement (m)",
+    "per_min": 3.0,
     "scores": [
      2
     ],
@@ -4707,6 +5014,7 @@
     "detail": "ignores CC resistance",
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "displacement (m)",
+    "per_min": 3.8,
     "scores": [
      2
     ],
@@ -4721,6 +5029,7 @@
     "detail": "ignores CC resistance",
     "facts": "ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "displacement (m)",
+    "per_min": 4.0,
     "scores": [
      2
     ],
@@ -4738,6 +5047,7 @@
     "detail": "ignores CC resistance",
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
+    "per_min": 2.0,
     "scores": [
      2
     ],
@@ -4752,6 +5062,7 @@
     "detail": "ignores CC resistance",
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
+    "per_min": 2.0,
     "scores": [
      2
     ],
@@ -4766,6 +5077,7 @@
     "detail": "",
     "facts": "persists 2s \u00b7 ground-cast @16m \u00b7 10s CD",
     "group": "displacement (m)",
+    "per_min": 6.0,
     "scores": [
      2
     ],
@@ -4787,6 +5099,7 @@
     "detail": "ignores CC resistance",
     "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
+    "per_min": 1.8,
     "scores": [
      2
     ],
@@ -4801,6 +5114,7 @@
     "detail": "ignores CC resistance",
     "facts": "persists 2s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "displacement (m)",
+    "per_min": 3.6,
     "scores": [
      2
     ],
@@ -4815,6 +5129,7 @@
     "detail": "ignores CC resistance",
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
+    "per_min": 0.6,
     "scores": [
      4
     ],
@@ -4829,6 +5144,7 @@
     "detail": "ignores CC resistance",
     "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "displacement (m)",
+    "per_min": 0.8,
     "scores": [
      2
     ],
@@ -4843,6 +5159,7 @@
     "detail": "",
     "facts": "persists 2.6s \u00b7 ground-cast @22m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -4857,6 +5174,7 @@
     "detail": "",
     "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -4871,6 +5189,7 @@
     "detail": "",
     "facts": "ground-cast @12m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -4885,6 +5204,7 @@
     "detail": "",
     "facts": "ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -4899,6 +5219,7 @@
     "detail": "",
     "facts": "persists 2s \u00b7 ground-cast @9m \u00b7 1s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -4913,6 +5234,7 @@
     "detail": "",
     "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -4929,6 +5251,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 channeled \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -4943,6 +5266,7 @@
     "detail": "",
     "facts": "ground-cast @3m",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -4960,6 +5284,7 @@
     "detail": "",
     "facts": "persists 12s \u00b7 ground-cast @3m \u00b7 3s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -4974,6 +5299,7 @@
     "detail": "",
     "facts": "self/contact",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -4988,6 +5314,7 @@
     "detail": "",
     "facts": "ground-cast @8m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -5002,6 +5329,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 35s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -5016,6 +5344,7 @@
     "detail": "",
     "facts": "self/contact",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5030,6 +5359,7 @@
     "detail": "",
     "facts": "persists 3.5s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5044,6 +5374,7 @@
     "detail": "",
     "facts": "targeted enemy @15m \u00b7 10s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -5062,6 +5393,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5076,6 +5408,7 @@
     "detail": "",
     "facts": "ground-cast @4.5m \u00b7 4s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5093,6 +5426,7 @@
     "detail": "",
     "facts": "ground-cast @8m \u00b7 10s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5107,6 +5441,7 @@
     "detail": "",
     "facts": "persists 6s \u00b7 self/contact \u00b7 1s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5121,6 +5456,7 @@
     "detail": "",
     "facts": "persists 2s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5135,6 +5471,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5149,6 +5486,7 @@
     "detail": "",
     "facts": "ground-cast @8m \u00b7 23.5s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5163,6 +5501,7 @@
     "detail": "",
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5177,6 +5516,7 @@
     "detail": "",
     "facts": "persists 2s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -5191,6 +5531,7 @@
     "detail": "",
     "facts": "ground-cast @14m \u00b7 40s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5205,6 +5546,7 @@
     "detail": "",
     "facts": "ground-cast @12m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -5223,6 +5565,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5237,6 +5580,7 @@
     "detail": "",
     "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5251,6 +5595,7 @@
     "detail": "",
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5265,6 +5610,7 @@
     "detail": "",
     "facts": "targeted other @13m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -5281,6 +5627,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -5295,6 +5642,7 @@
     "detail": "",
     "facts": "targeted enemy @3.5m \u00b7 3s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5311,6 +5659,7 @@
     "detail": "",
     "facts": "ground-cast @12m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5325,6 +5674,7 @@
     "detail": "",
     "facts": "targeted enemy @9m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5339,6 +5689,7 @@
     "detail": "",
     "facts": "ground-cast @4m \u00b7 4s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5357,6 +5708,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5371,6 +5723,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -5385,6 +5738,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 channeled \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -5399,6 +5753,7 @@
     "detail": "",
     "facts": "ground-cast @13m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5413,6 +5768,7 @@
     "detail": "",
     "facts": "ground-cast @8m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 6s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -5430,6 +5786,7 @@
     "detail": "",
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5444,6 +5801,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5458,6 +5816,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -5472,6 +5831,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 8s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5486,6 +5846,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 channeled \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -5504,6 +5865,7 @@
     "detail": "",
     "facts": "persists 6s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5518,6 +5880,7 @@
     "detail": "",
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5532,6 +5895,7 @@
     "detail": "",
     "facts": "ground-cast @16m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5546,6 +5910,7 @@
     "detail": "",
     "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5560,6 +5925,7 @@
     "detail": "",
     "facts": "targeted enemy @8m \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5574,6 +5940,7 @@
     "detail": "",
     "facts": "persists 1s \u00b7 self/contact \u00b7 channeled",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -5590,6 +5957,7 @@
     "detail": "knockback 18.0m",
     "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 27.5s CD",
     "group": "displacement (m)",
+    "per_min": 39.3,
     "scores": [
      4
     ],
@@ -5604,6 +5972,7 @@
     "detail": "knockback 12.0m",
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 29s CD",
     "group": "displacement (m)",
+    "per_min": 24.8,
     "scores": [
      4
     ],
@@ -5618,6 +5987,7 @@
     "detail": "knockback 10.0m",
     "facts": "ground-cast @14m \u00b7 12s CD",
     "group": "displacement (m)",
+    "per_min": 50.0,
     "scores": [
      2
     ],
@@ -5639,6 +6009,7 @@
     "detail": "knockback 10.0m",
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 18s CD",
     "group": "displacement (m)",
+    "per_min": 33.3,
     "scores": [
      4
     ],
@@ -5653,6 +6024,7 @@
     "detail": "knockback 9.0m",
     "facts": "ground-cast @6m \u00b7 15s CD",
     "group": "displacement (m)",
+    "per_min": 36.0,
     "scores": [
      2
     ],
@@ -5671,6 +6043,7 @@
     "detail": "knockback 9.0m",
     "facts": "targeted friendall @13m \u00b7 12s CD",
     "group": "displacement (m)",
+    "per_min": 45.0,
     "scores": [
      2
     ],
@@ -5688,6 +6061,7 @@
     "detail": "knockback 8.0m",
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 10s CD",
     "group": "displacement (m)",
+    "per_min": 48.0,
     "scores": [
      4
     ],
@@ -5702,6 +6076,7 @@
     "detail": "knockback 6.0m",
     "facts": "persists 3s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
+    "per_min": 12.0,
     "scores": [
      4
     ],
@@ -5716,6 +6091,7 @@
     "detail": "knockback 4.0m",
     "facts": "persists 1s \u00b7 ground-cast @12m \u00b7 12s CD",
     "group": "displacement (m)",
+    "per_min": 20.0,
     "scores": [
      2
     ],
@@ -5736,6 +6112,7 @@
     "detail": "knockback 1.25m",
     "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "displacement (m)",
+    "per_min": 3.0,
     "scores": [
      2
     ],
@@ -5750,6 +6127,7 @@
     "detail": "knockback 1.25m",
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "displacement (m)",
+    "per_min": 3.8,
     "scores": [
      2
     ],
@@ -5764,6 +6142,7 @@
     "detail": "knockback 1.0m",
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
+    "per_min": 2.0,
     "scores": [
      6
     ],
@@ -5778,6 +6157,7 @@
     "detail": "knockback 0.9m",
     "facts": "persists 2s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "displacement (m)",
+    "per_min": 3.6,
     "scores": [
      2
     ],
@@ -5792,6 +6172,7 @@
     "detail": "knockback 0.25m",
     "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "displacement (m)",
+    "per_min": 0.8,
     "scores": [
      4
     ],
@@ -5806,6 +6187,7 @@
     "detail": "hard CC 3.5s",
     "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 10.5,
     "scores": [
      4
     ],
@@ -5820,6 +6202,7 @@
     "detail": "hard CC 2.79s",
     "facts": "targeted enemy @5.5m \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 11.2,
     "scores": [
      2
     ],
@@ -5834,6 +6217,7 @@
     "detail": "hard CC 2.7s",
     "facts": "persists 1.2s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 10.8,
     "scores": [
      4
     ],
@@ -5848,6 +6232,7 @@
     "detail": "hard CC 2.5s",
     "facts": "ground-cast @14m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 72s CD",
     "group": "hard CC (s)",
+    "per_min": 2.1,
     "scores": [
      4
     ],
@@ -5862,6 +6247,7 @@
     "detail": "hard CC 2.5s",
     "facts": "persists 2s \u00b7 ground-cast @12m \u00b7 18s CD",
     "group": "hard CC (s)",
+    "per_min": 8.3,
     "scores": [
      4
     ],
@@ -5876,6 +6262,7 @@
     "detail": "hard CC 2.5s; knockback 0.9m",
     "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
+    "per_min": 5.0,
     "scores": [
      4
     ],
@@ -5890,6 +6277,7 @@
     "detail": "hard CC 2.48s",
     "facts": "ground-cast @12m \u00b7 14s CD",
     "group": "hard CC (s)",
+    "per_min": 10.6,
     "scores": [
      4
     ],
@@ -5904,6 +6292,7 @@
     "detail": "hard CC 2.35s; knockback 2.0m",
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 7.0,
     "scores": [
      4
     ],
@@ -5918,6 +6307,7 @@
     "detail": "hard CC 2.33s",
     "facts": "self/contact \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 7.0,
     "scores": [
      6
     ],
@@ -5932,6 +6322,7 @@
     "detail": "hard CC 2.25s",
     "facts": "self/contact \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 9.0,
     "scores": [
      4
     ],
@@ -5946,6 +6337,7 @@
     "detail": "hard CC 2.2s",
     "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 6.6,
     "scores": [
      2,
      4,
@@ -5966,6 +6358,7 @@
     "detail": "hard CC 1.8s",
     "facts": "ground-cast @15m \u00b7 10s CD",
     "group": "hard CC (s)",
+    "per_min": 10.8,
     "scores": [
      2
     ],
@@ -5986,6 +6379,7 @@
     "detail": "hard CC 1.75s",
     "facts": "persists 1s \u00b7 ground-cast @22m \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 5.2,
     "scores": [
      2
     ],
@@ -6000,6 +6394,7 @@
     "detail": "hard CC 1.5s",
     "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat",
     "group": "hard CC (s)",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -6014,6 +6409,7 @@
     "detail": "hard CC 1.25s",
     "facts": "persists 1.3s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 5.0,
     "scores": [
      2
     ],
@@ -6034,6 +6430,7 @@
     "detail": "hard CC 1.0s",
     "facts": "ground-cast @22m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 3.0,
     "scores": [
      2
     ],
@@ -6056,6 +6453,7 @@
     "detail": "hard CC 1.0s",
     "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
+    "per_min": 2.0,
     "scores": [
      2
     ],
@@ -6070,6 +6468,7 @@
     "detail": "hard CC 0.8s; knockback 1.0m",
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
+    "per_min": 1.6,
     "scores": [
      4
     ],
@@ -6084,6 +6483,7 @@
     "detail": "slow-power 8.0; knockback 2.1m",
     "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 16.0,
     "scores": [
      2
     ],
@@ -6098,6 +6498,7 @@
     "detail": "slow-power 4.5",
     "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 9.0,
     "scores": [
      2
     ],
@@ -6112,6 +6513,7 @@
     "detail": "slow-power 3.5",
     "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 7.0,
     "scores": [
      4
     ],
@@ -6126,6 +6528,7 @@
     "detail": "slow-power 2.5",
     "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 5.0,
     "scores": [
      2
     ],
@@ -6140,6 +6543,7 @@
     "detail": "slow-power 1.6; knockback 10.0m",
     "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 4.8,
     "scores": [
      2
     ],
@@ -6154,6 +6558,7 @@
     "detail": "slow-power 1.5",
     "facts": "persists 1s \u00b7 ground-cast @13m \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 4.5,
     "scores": [
      2
     ],
@@ -6168,6 +6573,7 @@
     "detail": "slow-power 0.9; hard CC 2.0s",
     "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 2.2,
     "scores": [
      4
     ],
@@ -6182,6 +6588,7 @@
     "detail": "slow-power 0.88; knockback 0.28m",
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 1.8,
     "scores": [
      2
     ],
@@ -6196,6 +6603,7 @@
     "detail": "slow-power 0.6",
     "facts": "targeted enemy @4m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 18s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 2.0,
     "scores": [
      2
     ],
@@ -6212,6 +6620,7 @@
     "detail": "slow-power 0.2",
     "facts": "ground-cast @15m \u00b7 1s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 12.0,
     "scores": [
      2
     ],
@@ -6226,6 +6635,7 @@
     "detail": "",
     "facts": "targeted friendall @11m \u00b7 6s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2,
      4
@@ -6246,6 +6656,7 @@
     "detail": "",
     "facts": "persists 5s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 62s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -6260,6 +6671,7 @@
     "detail": "",
     "facts": "persists 2.6s \u00b7 ground-cast @22m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -6274,6 +6686,7 @@
     "detail": "",
     "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -6288,6 +6701,7 @@
     "detail": "",
     "facts": "targeted other @13m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -6309,6 +6723,7 @@
     "detail": "",
     "facts": "ground-cast @14m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -6323,6 +6738,7 @@
     "detail": "",
     "facts": "targeted friendall @11m \u00b7 channeled \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -6337,6 +6753,7 @@
     "detail": "",
     "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -6355,6 +6772,7 @@
     "detail": "",
     "facts": "targeted friendall @11m \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -6369,6 +6787,7 @@
     "detail": "",
     "facts": "targeted allunmounted @11m",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -6383,6 +6802,7 @@
     "detail": "",
     "facts": "persists 6s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -6399,6 +6819,7 @@
     "detail": "",
     "facts": "persists 1.4s \u00b7 ground-cast @25m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -6413,6 +6834,7 @@
     "detail": "",
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -6427,6 +6849,7 @@
     "detail": "",
     "facts": "persists 5s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 63s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -6441,6 +6864,7 @@
     "detail": "",
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -6455,6 +6879,7 @@
     "detail": "",
     "facts": "ground-cast @3m \u00b7 6s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -6476,6 +6901,7 @@
     "detail": "",
     "facts": "ground-cast @12m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -6490,6 +6916,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -6504,6 +6931,7 @@
     "detail": "",
     "facts": "persists 3s \u00b7 ground-cast @15m \u00b7 26.8s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -6518,6 +6946,7 @@
     "detail": "",
     "facts": "ground-cast @16m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -6534,6 +6963,7 @@
     "detail": "movespeedbonus -0.25 for 30s",
     "facts": "ground-cast @3m \u00b7 1.5s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 300.0,
     "scores": [
      2
     ],
@@ -6548,6 +6978,7 @@
     "detail": "physicalarmor -0.16 for 8s",
     "facts": "targeted enemy @3m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 5.2,
     "scores": [
      2
     ],
@@ -6569,6 +7000,7 @@
     "detail": "bonusdefensevsplayers -0.3 for 4s",
     "facts": "targeted enemy @15m \u00b7 12s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 6.0,
     "scores": [
      2
     ],
@@ -6590,6 +7022,7 @@
     "detail": "magicresistance -0.2 for 6s",
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 2.9,
     "scores": [
      4
     ],
@@ -6604,6 +7037,7 @@
     "detail": "physicalarmor -0.18 for 6s",
     "facts": "ground-cast @12m \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 2.2,
     "scores": [
      4
     ],
@@ -6618,6 +7052,7 @@
     "detail": "physicalarmor -0.2 for 5s",
     "facts": "ground-cast @6m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 4.0,
     "scores": [
      2
     ],
@@ -6639,6 +7074,7 @@
     "detail": "physicalarmor -0.17 for 4s",
     "facts": "ground-cast @22m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 2.8,
     "scores": [
      2
     ],
@@ -6659,6 +7095,7 @@
     "detail": "physicalarmor -0.15 for 4s",
     "facts": "targeted enemy @16m \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 2.4,
     "scores": [
      4
     ],
@@ -6673,6 +7110,7 @@
     "detail": "physicalarmor -0.06 for 8s",
     "facts": "targeted enemy @2m \u00b7 2s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 15.0,
     "scores": [
      2
     ],
@@ -6695,6 +7133,7 @@
     "detail": "physicalarmor -0.12 for 4s",
     "facts": "ground-cast @3m \u00b7 6s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 5.0,
     "scores": [
      2
     ],
@@ -6716,6 +7155,7 @@
     "detail": "magicresistance -0.12 for 4s",
     "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 1.0,
     "scores": [
      4
     ],
@@ -6730,6 +7170,7 @@
     "detail": "physicalarmor -0.12 for 3s",
     "facts": "ground-cast @9m \u00b7 8s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 3.0,
     "scores": [
      2
     ],
@@ -6751,6 +7192,7 @@
     "detail": "magicspelldamagebonus -0.03 for 7s",
     "facts": "ground-cast @10m \u00b7 4s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 3.0,
     "scores": [
      2
     ],
@@ -6772,6 +7214,7 @@
     "detail": "magicresistance -0.027 for 4s",
     "facts": "targeted enemy @11m \u00b7 7s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 0.9,
     "scores": [
      2
     ],
@@ -6792,6 +7235,7 @@
     "detail": "magicresistance -0.03 for 5s",
     "facts": "persists 1s \u00b7 ground-cast @18m \u00b7 2s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 3.0,
     "scores": [
      2
     ],
@@ -6812,6 +7256,7 @@
     "detail": "bonusdefensevsplayers -0.02 for 3s",
     "facts": "",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -6828,6 +7273,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 20.4,
     "scores": [
      2
     ],
@@ -6847,6 +7293,7 @@
     "detail": "",
     "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 10.5,
     "scores": [
      4
     ],
@@ -6861,6 +7308,7 @@
     "detail": "",
     "facts": "targeted enemy @5.5m \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 11.2,
     "scores": [
      4
     ],
@@ -6875,6 +7323,7 @@
     "detail": "",
     "facts": "ground-cast @13m \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 10.4,
     "scores": [
      2
     ],
@@ -6896,6 +7345,7 @@
     "detail": "",
     "facts": "persists 2s \u00b7 ground-cast @12m \u00b7 18s CD",
     "group": "hard CC (s)",
+    "per_min": 8.3,
     "scores": [
      6
     ],
@@ -6910,6 +7360,7 @@
     "detail": "",
     "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 6.6,
     "scores": [
      2
     ],
@@ -6930,6 +7381,7 @@
     "detail": "",
     "facts": "ground-cast @20m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 6.6,
     "scores": [
      2
     ],
@@ -6949,6 +7401,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 18s CD",
     "group": "hard CC (s)",
+    "per_min": 6.7,
     "scores": [
      2
     ],
@@ -6963,6 +7416,7 @@
     "detail": "",
     "facts": "ground-cast @15m \u00b7 10s CD",
     "group": "hard CC (s)",
+    "per_min": 10.8,
     "scores": [
      2
     ],
@@ -6984,6 +7438,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat",
     "group": "hard CC (s)",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -6998,6 +7453,7 @@
     "detail": "",
     "facts": "ground-cast @12m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 5.4,
     "scores": [
      2
     ],
@@ -7019,6 +7475,7 @@
     "detail": "",
     "facts": "persists 1.3s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 5.0,
     "scores": [
      2
     ],
@@ -7040,6 +7497,7 @@
     "detail": "",
     "facts": "",
     "group": "hard CC (s)",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -7060,6 +7518,7 @@
     "detail": "",
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "hard CC (s)",
+    "per_min": 0.0,
     "scores": [
      4
     ],
@@ -7074,6 +7533,7 @@
     "detail": "",
     "facts": "ground-cast @3m",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -7095,6 +7555,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -7109,6 +7570,7 @@
     "detail": "",
     "facts": "persists 6s \u00b7 ground-cast @12m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -7125,6 +7587,7 @@
     "detail": "32.0/s over 10s CD",
     "facts": "targeted friendall @13m \u00b7 10s CD",
     "group": "healing per cast",
+    "per_min": 1920.0,
     "scores": [
      2
     ],
@@ -7139,6 +7602,7 @@
     "detail": "4.5/s over 30s CD",
     "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 30s CD",
     "group": "healing per cast",
+    "per_min": 270.0,
     "scores": [
      2
     ],
@@ -7153,6 +7617,7 @@
     "detail": "5.0/s over 10s CD",
     "facts": "ground-cast @18m \u00b7 10s CD",
     "group": "healing per cast",
+    "per_min": 300.0,
     "scores": [
      4
     ],
@@ -7167,6 +7632,7 @@
     "detail": "",
     "facts": "",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -7186,6 +7652,7 @@
     "detail": "",
     "facts": "ground-cast @8m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -7200,6 +7667,7 @@
     "detail": "",
     "facts": "",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -7221,6 +7689,7 @@
     "detail": "",
     "facts": "",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -7242,6 +7711,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -7256,6 +7726,7 @@
     "detail": "",
     "facts": "",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -7277,6 +7748,7 @@
     "detail": "",
     "facts": "",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -7298,6 +7770,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 8s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -7312,6 +7785,7 @@
     "detail": "",
     "facts": "",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -7333,6 +7807,7 @@
     "detail": "",
     "facts": "",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -7350,6 +7825,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -7364,6 +7840,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 8s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -7378,6 +7855,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 10s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -7392,6 +7870,7 @@
     "detail": "",
     "facts": "",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -7415,6 +7894,7 @@
     "detail": "",
     "facts": "ground-cast @20m \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 15.3,
     "scores": [
      2
     ],
@@ -7436,6 +7916,7 @@
     "detail": "",
     "facts": "persists 1.4s \u00b7 ground-cast @25m \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 10.1,
     "scores": [
      2
     ],
@@ -7450,6 +7931,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 7.0,
     "scores": [
      6
     ],
@@ -7464,6 +7946,7 @@
     "detail": "",
     "facts": "persists 2s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 9.0,
     "scores": [
      2
     ],
@@ -7478,6 +7961,7 @@
     "detail": "",
     "facts": "ground-cast @14m \u00b7 5s CD",
     "group": "hard CC (s)",
+    "per_min": 10.2,
     "scores": [
      2
     ],
@@ -7500,6 +7984,7 @@
     "detail": "slow-power 8.0; knockback 2.1m",
     "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 16.0,
     "scores": [
      4
     ],
@@ -7514,6 +7999,7 @@
     "detail": "slow-power 7.5",
     "facts": "ground-cast @3m \u00b7 1.5s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 300.0,
     "scores": [
      2
     ],
@@ -7528,6 +8014,7 @@
     "detail": "slow-power 7.5",
     "facts": "self/contact \u00b7 ignores CCR \u00b7 tier-flat \u00b7 37.5s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 12.0,
     "scores": [
      4
     ],
@@ -7542,6 +8029,7 @@
     "detail": "slow-power 4.5",
     "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 9.0,
     "scores": [
      4
     ],
@@ -7556,6 +8044,7 @@
     "detail": "slow-power 3.5",
     "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 7.0,
     "scores": [
      4
     ],
@@ -7570,6 +8059,7 @@
     "detail": "slow-power 2.5",
     "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 5.0,
     "scores": [
      4
     ],
@@ -7584,6 +8074,7 @@
     "detail": "slow-power 2.4",
     "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 44s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 3.3,
     "scores": [
      2
     ],
@@ -7598,6 +8089,7 @@
     "detail": "slow-power 2.4; knockback 1.8m",
     "facts": "persists 5s \u00b7 self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 7.2,
     "scores": [
      4
     ],
@@ -7618,6 +8110,7 @@
     "detail": "slow-power 1.6; knockback 10.0m",
     "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 4.8,
     "scores": [
      4
     ],
@@ -7632,6 +8125,7 @@
     "detail": "slow-power 1.5",
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 3.6,
     "scores": [
      4
     ],
@@ -7646,6 +8140,7 @@
     "detail": "slow-power 1.5",
     "facts": "persists 1s \u00b7 ground-cast @13m \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 4.5,
     "scores": [
      4
     ],
@@ -7660,6 +8155,7 @@
     "detail": "slow-power 1.5",
     "facts": "ground-cast @12m \u00b7 12s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 7.5,
     "scores": [
      2
     ],
@@ -7681,6 +8177,7 @@
     "detail": "slow-power 1.2; hard CC 5.0s",
     "facts": "persists 3s \u00b7 ground-cast @2m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 7s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 10.3,
     "scores": [
      2
     ],
@@ -7700,6 +8197,7 @@
     "detail": "slow-power 1.0",
     "facts": "targeted enemy @3m \u00b7 6s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 10.0,
     "scores": [
      2
     ],
@@ -7720,6 +8218,7 @@
     "detail": "slow-power 1.0",
     "facts": "persists 1.8s \u00b7 ground-cast @11m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 10s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 6.0,
     "scores": [
      4
     ],
@@ -7736,6 +8235,7 @@
     "detail": "slow-power 0.9",
     "facts": "persists 12s \u00b7 ground-cast @13m \u00b7 5s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 10.8,
     "scores": [
      2
     ],
@@ -7757,6 +8257,7 @@
     "detail": "slow-power 0.9; hard CC 2.0s",
     "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 2.2,
     "scores": [
      4
     ],
@@ -7771,6 +8272,7 @@
     "detail": "slow-power 0.88",
     "facts": "persists 5.2s \u00b7 targeted allplayers @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 1.8,
     "scores": [
      2
     ],
@@ -7785,6 +8287,7 @@
     "detail": "slow-power 0.8",
     "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 2.4,
     "scores": [
      2
     ],
@@ -7799,6 +8302,7 @@
     "detail": "slow-power 0.75",
     "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 38s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 1.2,
     "scores": [
      2
     ],
@@ -7813,6 +8317,7 @@
     "detail": "slow-power 0.67; hard CC 2.25s",
     "facts": "persists 2s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 2.7,
     "scores": [
      2
     ],
@@ -7827,6 +8332,7 @@
     "detail": "slow-power 0.6",
     "facts": "persists 4.2s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 5s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 7.2,
     "scores": [
      2
     ],
@@ -7847,6 +8353,7 @@
     "detail": "slow-power 0.4",
     "facts": "",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -7867,6 +8374,7 @@
     "detail": "slow-power 0.4",
     "facts": "ground-cast @15m \u00b7 channeled \u00b7 15s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 1.6,
     "scores": [
      4
     ],
@@ -7881,6 +8389,7 @@
     "detail": "slow-power 0.3",
     "facts": "persists 3s \u00b7 ground-cast @12m \u00b7 ignores CCR \u00b7 8s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 2.2,
     "scores": [
      2
     ],
@@ -7902,6 +8411,7 @@
     "detail": "slow-power 0.3",
     "facts": "persists 2s \u00b7 ground-cast @9m \u00b7 1s CD",
     "group": "slows (strength \u00d7 duration)",
+    "per_min": 18.0,
     "scores": [
      2
     ],
@@ -7916,6 +8426,7 @@
     "detail": "",
     "facts": "ground-cast @22m \u00b7 channeled \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -7930,6 +8441,7 @@
     "detail": "",
     "facts": "persists 4s \u00b7 ground-cast @12m",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -7953,6 +8465,7 @@
     "detail": "",
     "facts": "targeted enemy @1.5m \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 40.0,
     "scores": [
      2
     ],
@@ -7967,6 +8480,7 @@
     "detail": "",
     "facts": "persists 1.2s \u00b7 ground-cast @20m \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 10.8,
     "scores": [
      6
     ],
@@ -7981,6 +8495,7 @@
     "detail": "",
     "facts": "ground-cast @14m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 72s CD",
     "group": "hard CC (s)",
+    "per_min": 2.1,
     "scores": [
      4
     ],
@@ -7995,6 +8510,7 @@
     "detail": "",
     "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
+    "per_min": 5.0,
     "scores": [
      4
     ],
@@ -8009,6 +8525,7 @@
     "detail": "",
     "facts": "ground-cast @12m \u00b7 14s CD",
     "group": "hard CC (s)",
+    "per_min": 10.6,
     "scores": [
      4
     ],
@@ -8023,6 +8540,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 7.0,
     "scores": [
      4
     ],
@@ -8037,6 +8555,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 9.0,
     "scores": [
      4
     ],
@@ -8051,6 +8570,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 8.4,
     "scores": [
      2
     ],
@@ -8072,6 +8592,7 @@
     "detail": "",
     "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "hard CC (s)",
+    "per_min": 4.8,
     "scores": [
      2
     ],
@@ -8086,6 +8607,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 25s CD",
     "group": "hard CC (s)",
+    "per_min": 4.3,
     "scores": [
      4
     ],
@@ -8100,6 +8622,7 @@
     "detail": "",
     "facts": "persists 1s \u00b7 ground-cast @22m \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 5.2,
     "scores": [
      4
     ],
@@ -8114,6 +8637,7 @@
     "detail": "",
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "hard CC (s)",
+    "per_min": 4.4,
     "scores": [
      2
     ],
@@ -8135,6 +8659,7 @@
     "detail": "",
     "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 3.3,
     "scores": [
      2
     ],
@@ -8149,6 +8674,7 @@
     "detail": "",
     "facts": "ground-cast @22m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 3.0,
     "scores": [
      2
     ],
@@ -8170,6 +8696,7 @@
     "detail": "",
     "facts": "ground-cast @11m \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 3.0,
     "scores": [
      2
     ],
@@ -8189,6 +8716,7 @@
     "detail": "",
     "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
+    "per_min": 2.0,
     "scores": [
      4
     ],
@@ -8203,6 +8731,7 @@
     "detail": "",
     "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
+    "per_min": 1.6,
     "scores": [
      4
     ],
@@ -8217,6 +8746,7 @@
     "detail": "",
     "facts": "ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "hard CC (s)",
+    "per_min": 1.9,
     "scores": [
      2
     ],
@@ -8231,6 +8761,7 @@
     "detail": "",
     "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
+    "per_min": 2.4,
     "scores": [
      2
     ],
@@ -8245,6 +8776,7 @@
     "detail": "",
     "facts": "ground-cast @15m \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8261,6 +8793,7 @@
     "detail": "",
     "facts": "persists 4s \u00b7 ground-cast @12m",
     "group": "damage per cast",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -8278,6 +8811,7 @@
     "detail": "",
     "facts": "targeted enemy @3m \u00b7 2s CD",
     "group": "damage per second",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8299,6 +8833,7 @@
     "detail": "",
     "facts": "targeted enemy @3.5m \u00b7 3s CD",
     "group": "damage per second",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8318,6 +8853,7 @@
     "detail": "",
     "facts": "targeted enemy @9m \u00b7 2.4s CD",
     "group": "damage per second",
+    "per_min": null,
     "scores": [
      2,
      4
@@ -8339,6 +8875,7 @@
     "detail": "",
     "facts": "persists 2s \u00b7 ground-cast @13m \u00b7 15s CD",
     "group": "damage per second",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8353,6 +8890,7 @@
     "detail": "",
     "facts": "persists 5.2s \u00b7 targeted allplayers @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per second",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8367,6 +8905,7 @@
     "detail": "",
     "facts": "ground-cast @10m \u00b7 channeled \u00b7 12s CD",
     "group": "damage per second",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -8387,6 +8926,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 10s CD",
     "group": "damage per second",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -8401,6 +8941,7 @@
     "detail": "",
     "facts": "persists 5s \u00b7 ground-cast @26m \u00b7 channeled \u00b7 35s CD",
     "group": "damage per second",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8415,6 +8956,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per second",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -8429,6 +8971,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per second",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8443,6 +8986,7 @@
     "detail": "",
     "facts": "ground-cast @20m \u00b7 channeled \u00b7 30s CD",
     "group": "damage per second",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8457,6 +9001,7 @@
     "detail": "",
     "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per second",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -8471,6 +9016,7 @@
     "detail": "",
     "facts": "persists 5s \u00b7 ground-cast @11m \u00b7 channeled \u00b7 20s CD",
     "group": "damage per second",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8485,6 +9031,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 channeled \u00b7 30s CD",
     "group": "damage per second",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8499,6 +9046,7 @@
     "detail": "",
     "facts": "targeted enemy @13m \u00b7 channeled \u00b7 20s CD",
     "group": "damage per second",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8513,6 +9061,7 @@
     "detail": "+280% AA dmg for 8s, +50% attack speed",
     "facts": "self/contact",
     "group": "auto-attack amplifiers (multiplier)",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -8527,6 +9076,7 @@
     "detail": "+35% AA dmg for 6s",
     "facts": "persists 1s \u00b7 self/contact \u00b7 channeled",
     "group": "auto-attack amplifiers (multiplier)",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8541,6 +9091,7 @@
     "detail": "+28% AA dmg for 8s",
     "facts": "self/contact \u00b7 2s CD",
     "group": "auto-attack amplifiers (multiplier)",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8562,6 +9113,7 @@
     "detail": "+20% AA dmg for 30s",
     "facts": "self/contact \u00b7 10s CD",
     "group": "auto-attack amplifiers (multiplier)",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -8576,6 +9128,7 @@
     "detail": "+2% AA dmg for 3s",
     "facts": "",
     "group": "auto-attack amplifiers (multiplier)",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8592,6 +9145,7 @@
     "detail": "+2% AA dmg for 3s",
     "facts": "",
     "group": "auto-attack amplifiers (multiplier)",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8609,6 +9163,7 @@
     "detail": "",
     "facts": "",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -8629,6 +9184,7 @@
     "detail": "",
     "facts": "persists 5.3s \u00b7 ground-cast @15m \u00b7 35s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8643,6 +9199,7 @@
     "detail": "",
     "facts": "",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2,
      4
@@ -8681,6 +9238,7 @@
     "detail": "",
     "facts": "",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2,
      4
@@ -8701,6 +9259,7 @@
     "detail": "",
     "facts": "ground-cast @22m \u00b7 channeled \u00b7 12s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8717,6 +9276,7 @@
     "detail": "movespeedbonus -0.5 for 15s",
     "facts": "self/contact \u00b7 ignores CCR \u00b7 tier-flat \u00b7 37.5s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 12.0,
     "scores": [
      2
     ],
@@ -8731,6 +9291,7 @@
     "detail": "attackrangebonus +0.5 for 10s",
     "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 10.0,
     "scores": [
      4
     ],
@@ -8745,6 +9306,7 @@
     "detail": "hitpointsmaxbonus +0.3 for 3s",
     "facts": "self/contact \u00b7 25s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 2.2,
     "scores": [
      6
     ],
@@ -8759,6 +9321,7 @@
     "detail": "physicalarmor +0.15 for 5s",
     "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 29s CD",
     "group": "stat modifiers (value \u00d7 duration)",
+    "per_min": 1.7,
     "scores": [
      2
     ],
@@ -8773,6 +9336,7 @@
     "detail": "",
     "facts": "",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4,
      6
@@ -8806,6 +9370,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 channeled \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -8820,6 +9385,7 @@
     "detail": "",
     "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 44s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -8834,6 +9400,7 @@
     "detail": "",
     "facts": "persists 12s \u00b7 ground-cast @3m \u00b7 3s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -8848,6 +9415,7 @@
     "detail": "",
     "facts": "persists 5.3s \u00b7 ground-cast @15m \u00b7 35s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -8862,6 +9430,7 @@
     "detail": "",
     "facts": "persists 12s \u00b7 ground-cast @13m \u00b7 5s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -8881,6 +9450,7 @@
     "detail": "",
     "facts": "persists 5s \u00b7 ground-cast @26m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8895,6 +9465,7 @@
     "detail": "",
     "facts": "persists 12s \u00b7 ground-cast @15m \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8909,6 +9480,7 @@
     "detail": "",
     "facts": "persists 1.2s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8923,6 +9495,7 @@
     "detail": "",
     "facts": "persists 5s \u00b7 ground-cast @15m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8937,6 +9510,7 @@
     "detail": "",
     "facts": "persists 4.2s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 5s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -8954,6 +9528,7 @@
     "detail": "",
     "facts": "persists 5s \u00b7 ground-cast @15m \u00b7 channeled \u00b7 63s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8968,6 +9543,7 @@
     "detail": "",
     "facts": "persists 6.5s \u00b7 ground-cast @15m \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -8982,6 +9558,7 @@
     "detail": "",
     "facts": "persists 5s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -9000,6 +9577,7 @@
     "detail": "",
     "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -9014,6 +9592,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -9028,6 +9607,7 @@
     "detail": "",
     "facts": "persists 1.8s \u00b7 ground-cast @11m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 10s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2,
      4,
@@ -9048,6 +9628,7 @@
     "detail": "",
     "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      6
     ],
@@ -9062,6 +9643,7 @@
     "detail": "",
     "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -9076,6 +9658,7 @@
     "detail": "",
     "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -9090,6 +9673,7 @@
     "detail": "",
     "facts": "persists 5s \u00b7 self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -9110,6 +9694,7 @@
     "detail": "",
     "facts": "persists 3s \u00b7 ground-cast @12m \u00b7 ignores CCR \u00b7 8s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -9130,6 +9715,7 @@
     "detail": "",
     "facts": "ground-cast @15m \u00b7 channeled \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -9144,6 +9730,7 @@
     "detail": "",
     "facts": "persists 3s \u00b7 ground-cast @2m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 7s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2,
      4
@@ -9163,6 +9750,7 @@
     "detail": "",
     "facts": "ground-cast @3m \u00b7 1.5s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -9177,6 +9765,7 @@
     "detail": "",
     "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 27.5s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -9191,6 +9780,7 @@
     "detail": "",
     "facts": "persists 4s \u00b7 ground-cast @12m",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -9212,6 +9802,7 @@
     "detail": "",
     "facts": "persists 3s \u00b7 ground-cast @15m \u00b7 26.8s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -9226,6 +9817,7 @@
     "detail": "",
     "facts": "persists 2s \u00b7 ground-cast @9m \u00b7 1s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],
@@ -9240,6 +9832,7 @@
     "detail": "",
     "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -9254,6 +9847,7 @@
     "detail": "",
     "facts": "self/contact \u00b7 ignores CCR \u00b7 tier-flat \u00b7 37.5s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      4
     ],
@@ -9268,6 +9862,7 @@
     "detail": "",
     "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
+    "per_min": null,
     "scores": [
      2
     ],

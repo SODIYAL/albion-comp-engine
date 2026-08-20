@@ -398,12 +398,25 @@ def main():
                   "×AA": "auto-attack amplifiers (multiplier)",
                   "heal/cast": "healing per cast",
                   "value·s": "stat modifiers (value × duration)"}
+    # Cooldown as a first-class factor (expert, 2026-08-20): every per-cast
+    # measurement also shows THROUGHPUT — value x 60/CD, "how much of this
+    # effect one player supplies per minute". A 2.5s stasis on a 72s CD is
+    # 2.1 s/min; a 1s stun on 20s CD is 3 s/min — the ranking question S6
+    # judges. Rows still sort by per-cast within their group (the burst
+    # window is real); the rate column sits beside it.
+    PER_CAST_UNITS = {"m", "s", "slow%·s", "dmg/cast", "heal/cast", "value·s"}
     boards = {}
     for (cap, sid), g in grouped.items():
-        val, unit, detail = metric_for(cap, extracted.get(sid))
+        rec = extracted.get(sid)
+        val, unit, detail = metric_for(cap, rec)
+        per_min = None
+        if (val is not None and unit in PER_CAST_UNITS
+                and rec and rec.get("cooldown")):
+            per_min = round(val * 60.0 / rec["cooldown"], 1)
         boards.setdefault(cap, []).append({
             "spell": sid, "value": val, "unit": unit, "detail": detail,
-            "facts": fact_line(extracted.get(sid)),
+            "per_min": per_min,
+            "facts": fact_line(rec),
             "group": (UNIT_GROUP.get(unit, unit) if val is not None
                       else "not measurable — human judgment"),
             "weapons": sorted(g["weapons"]),
@@ -474,6 +487,7 @@ family converts item power unusually well carry an [AP&nbsp;] tag (most are
         parts.append(f"<h2>{esc(cap)} <span class='d'>({measured}/{len(rows_c)} spells measured)</span></h2>")
         parts.append("<table><tr><th>spell</th>"
                      "<th class='n'>measured</th><th>unit</th>"
+                     "<th class='n'>/min</th>"
                      "<th class='n'>curated</th><th>detail</th>"
                      "<th>rubric facts (S2–S6)</th>"
                      "<th>weapons citing it</th></tr>")
@@ -481,7 +495,7 @@ family converts item power unusually well carry an [AP&nbsp;] tag (most are
         for r in rows_c:
             if r["group"] != last_group:
                 last_group = r["group"]
-                parts.append(f"<tr><td colspan='6' class='grp'>{esc(last_group)}</td></tr>")
+                parts.append(f"<tr><td colspan='7' class='grp'>{esc(last_group)}</td></tr>")
             v = "—" if r["value"] is None else f"{r['value']:g}"
             cls = "none" if r["value"] is None else "n"
             scores = r["scores"]
@@ -491,9 +505,11 @@ family converts item power unusually well carry an [AP&nbsp;] tag (most are
                 sc = ("<span class='drift'>"
                       + "–".join(str(s) for s in scores) + " drift</span>")
             weapons = ", ".join(r["weapons"])
+            pm = "" if r.get("per_min") is None else f"{r['per_min']:g}"
             parts.append(
                 f"<tr><td>{esc(r['spell'])}</td>"
                 f"<td class='{cls} n'>{v}</td><td class='d'>{esc(r['unit'])}</td>"
+                f"<td class='d n'>{pm}</td>"
                 f"<td class='n'>{sc}</td>"
                 f"<td class='d'>{esc(r['detail'])}</td>"
                 f"<td class='d'>{esc(r['facts'])}</td>"
