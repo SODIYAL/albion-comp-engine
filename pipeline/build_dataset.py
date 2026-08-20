@@ -36,6 +36,7 @@ DEFAULT_VERSION = "2026.08.1"
 
 sys.path.insert(0, HERE)
 from provenance import load_manifest, verify_derived  # noqa: E402
+import mastersheet  # noqa: E402  (MASTERSHEET.md override layer)
 import sheets_lib  # noqa: E402  (tree-pool composition)
 import build_interactions as _inter_mod  # noqa: E402  (adapter versions)
 import fetch_gear_lines as _gear_mod  # noqa: E402
@@ -120,13 +121,23 @@ def build_loadout(caps, evidence, line, uses=None):
             "slot_names": names, "slot_spells": [spells[n] for n in names]}
 
 
-def load_sheets(weapon_lines):
+def load_sheets(weapon_lines, tune_sheets=None):
     """Curated sheets win over illustrative ones for the same weapon key.
 
     Rows are COMPOSED (sheets_lib): the weapon's own rows plus the shared
-    tree-pool rows from sheets/pools/<subcategory>.yaml that apply to it."""
+    tree-pool rows from sheets/pools/<subcategory>.yaml that apply to it.
+
+    tune_sheets (MASTERSHEET.md tune:sheets): {WEAPON: {cap: score}} expert
+    score overrides, applied at the ROW level so they flow into caps AND
+    loadout bundles. An override may re-rank or remove (score 0) a
+    capability the composed sheet already grounds — it may NOT invent a new
+    one (that needs a sheet row with evidence); unmatched overrides fail
+    the build."""
     weapons, sources = {}, {}
     pools = sheets_lib.load_pools()
+    overrides = tune_sheets or {}
+    unmatched = {(w, c) for w, m in overrides.items()
+                 for c in (m or {})}
 
     def ingest(path, status):
         for entry in _load_yaml(path):
@@ -141,6 +152,10 @@ def load_sheets(weapon_lines):
                 if not isinstance(c, dict):
                     continue
                 cap, score = c.get("cap"), c.get("score", 0)
+                ov = overrides.get(key)
+                if ov and cap in ov:
+                    score = ov[cap]
+                    unmatched.discard((key, cap))
                 if not cap or not score:
                     continue
                 # a sheet may cite several spells for one capability; the score
@@ -180,6 +195,13 @@ def load_sheets(weapon_lines):
         ingest(path, "illustrative")
     for path in sorted(glob.glob(os.path.join(HERE, "sheets", "*.yaml"))):
         ingest(path, "curated")
+
+    if unmatched:
+        sys.exit("MASTERSHEET.md tune:sheets — override(s) matched nothing "
+                 "(unknown weapon, or a capability the composed sheet does "
+                 "not ground; adding a NEW capability needs a sheet row with "
+                 "evidence): "
+                 + ", ".join(f"{w}.{c}" for w, c in sorted(unmatched)))
 
     for key, src in sources.items():
         weapons[key]["source"] = src
@@ -317,7 +339,7 @@ def derive_ranged_presence(weapons, spell_index, overrides):
     return tagged, report, problems
 
 
-def load_templates():
+def load_templates(tune=None):
     templates, scoring, styles, mechanics, composition = {}, {}, {}, {}, {}
     for path in sorted(glob.glob(os.path.join(HERE, "templates", "*.yaml"))):
         doc = _load_yaml(path)
@@ -334,6 +356,22 @@ def load_templates():
             composition = doc
         else:
             templates[doc["content"]] = doc
+    # MASTERSHEET overrides (the expert's single control surface): scoring
+    # and mechanics deep-merge; template overrides address one content's
+    # requirement caps. Unknown keys fail the build — never silent.
+    tune = tune or {}
+    scoring = mastersheet.deep_merge(scoring, tune.get("scoring", {}))
+    mechanics = mastersheet.deep_merge(mechanics, tune.get("mechanics", {}))
+    for content, caps in (tune.get("templates") or {}).items():
+        if content not in templates:
+            sys.exit(f"MASTERSHEET.md tune:templates: unknown content "
+                     f"'{content}' (known: {', '.join(sorted(templates))})")
+        reqs = templates[content].setdefault("requirements", {})
+        for cap, fields in (caps or {}).items():
+            if cap not in reqs:
+                sys.exit(f"MASTERSHEET.md tune:templates: {content} has no "
+                         f"requirement '{cap}'")
+            reqs[cap] = mastersheet.deep_merge(reqs[cap], fields or {})
     return templates, scoring, styles, mechanics, composition
 
 
@@ -377,9 +415,18 @@ def main():
                          "exit 0 (release_clean still goes false)")
     args = ap.parse_args()
 
+    # MASTERSHEET.md — the expert's single control surface. Parse errors and
+    # unknown keys fail the build (never silent).
+    try:
+        tune = mastersheet.load()
+    except ValueError as exc:
+        sys.exit(str(exc))
+    for line in mastersheet.describe(tune):
+        print(f"  mastersheet   : {line}")
+
     weapon_lines = load_weapon_lines()
-    weapons = load_sheets(weapon_lines)
-    templates, scoring, styles, mechanics, composition = load_templates()
+    weapons = load_sheets(weapon_lines, tune.get("sheets"))
+    templates, scoring, styles, mechanics, composition = load_templates(tune)
     stats_path = os.path.join(OUT, "item_stats.json")
     item_stats, stats_meta = {}, {}
     if os.path.exists(stats_path):
@@ -471,6 +518,10 @@ def main():
                      if not provenance_ok else "release candidate"),
             "illustrative_weapons": illustrative,
             "unknown_to_game_data": unknown,
+            # MASTERSHEET.md override layer — what the expert's control
+            # surface changed in THIS build (human summary; the values
+            # themselves are already merged into the sections below).
+            "mastersheet": mastersheet.describe(tune),
             # Source provenance (§A): the one pinned snapshot every game-data
             # input came from, plus the verified hash of each input. No fetch
             # timestamp here — the dataset must be deterministic; timestamps
@@ -507,6 +558,11 @@ def main():
         # Composition constraints + viability + size physics (composition.yaml)
         # — what the FORGE may generate; never a bar to scoring a manual party.
         "composition": composition,
+        # Guild-approved builds (MASTERSHEET.md tune:guild_builds) — the
+        # expert's guild guideline layer, shipped VERBATIM for display and
+        # future prior/validation layers. A guideline, never a hard rule:
+        # nothing in the scoring path reads it.
+        "guild_builds": tune.get("guild_builds") or {},
     }
 
     os.makedirs(OUT, exist_ok=True)
