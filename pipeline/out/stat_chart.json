@@ -1269,6 +1269,34 @@
     ]
    },
    {
+    "detail": "+35% AA dmg for 6s",
+    "facts": "persists 1s \u00b7 self/contact \u00b7 channeled",
+    "group": "auto-attack amplifiers (multiplier)",
+    "scores": [
+     2
+    ],
+    "spell": "SWORD_BERSERK_RUN_RE",
+    "unit": "\u00d7AA",
+    "value": 0.35,
+    "weapons": [
+     "Infinity Blade"
+    ]
+   },
+   {
+    "detail": "+20% AA dmg for 30s",
+    "facts": "self/contact \u00b7 10s CD",
+    "group": "auto-attack amplifiers (multiplier)",
+    "scores": [
+     2
+    ],
+    "spell": "SHAPESHIFT_BEAR",
+    "unit": "\u00d7AA",
+    "value": 0.2,
+    "weapons": [
+     "Primal Staff"
+    ]
+   },
+   {
     "detail": "",
     "facts": "persists 3.5s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
@@ -1364,34 +1392,6 @@
     "value": null,
     "weapons": [
      "Lightcaller"
-    ]
-   },
-   {
-    "detail": "",
-    "facts": "self/contact \u00b7 10s CD",
-    "group": "not measurable \u2014 human judgment",
-    "scores": [
-     2
-    ],
-    "spell": "SHAPESHIFT_BEAR",
-    "unit": "dmg/cast",
-    "value": null,
-    "weapons": [
-     "Primal Staff"
-    ]
-   },
-   {
-    "detail": "",
-    "facts": "persists 1s \u00b7 self/contact \u00b7 channeled",
-    "group": "not measurable \u2014 human judgment",
-    "scores": [
-     2
-    ],
-    "spell": "SWORD_BERSERK_RUN_RE",
-    "unit": "dmg/cast",
-    "value": null,
-    "weapons": [
-     "Infinity Blade"
     ]
    }
   ],
@@ -1711,17 +1711,31 @@
     ]
    },
    {
-    "detail": "",
+    "detail": "+280% AA dmg for 8s, +50% attack speed",
     "facts": "self/contact",
-    "group": "not measurable \u2014 human judgment",
+    "group": "auto-attack amplifiers (multiplier)",
     "scores": [
      2
     ],
     "spell": "SPEEDARCHER_KITE",
-    "unit": "dmg/cast",
-    "value": null,
+    "unit": "\u00d7AA",
+    "value": 2.8,
     "weapons": [
      "Bow"
+    ]
+   },
+   {
+    "detail": "+35% AA dmg for 6s",
+    "facts": "persists 1s \u00b7 self/contact \u00b7 channeled",
+    "group": "auto-attack amplifiers (multiplier)",
+    "scores": [
+     4
+    ],
+    "spell": "SWORD_BERSERK_RUN_RE",
+    "unit": "\u00d7AA",
+    "value": 0.35,
+    "weapons": [
+     "Infinity Blade"
     ]
    },
    {
@@ -1806,20 +1820,6 @@
     "value": null,
     "weapons": [
      "Prowling Staff"
-    ]
-   },
-   {
-    "detail": "",
-    "facts": "persists 1s \u00b7 self/contact \u00b7 channeled",
-    "group": "not measurable \u2014 human judgment",
-    "scores": [
-     4
-    ],
-    "spell": "SWORD_BERSERK_RUN_RE",
-    "unit": "dmg/cast",
-    "value": null,
-    "weapons": [
-     "Infinity Blade"
     ]
    }
   ],
@@ -8366,6 +8366,102 @@
     ]
    },
    {
+    "detail": "+280% AA dmg for 8s, +50% attack speed",
+    "facts": "self/contact",
+    "group": "auto-attack amplifiers (multiplier)",
+    "scores": [
+     6
+    ],
+    "spell": "SPEEDARCHER_KITE",
+    "unit": "\u00d7AA",
+    "value": 2.8,
+    "weapons": [
+     "Bow"
+    ]
+   },
+   {
+    "detail": "+35% AA dmg for 6s",
+    "facts": "persists 1s \u00b7 self/contact \u00b7 channeled",
+    "group": "auto-attack amplifiers (multiplier)",
+    "scores": [
+     4
+    ],
+    "spell": "SWORD_BERSERK_RUN_RE",
+    "unit": "\u00d7AA",
+    "value": 0.35,
+    "weapons": [
+     "Infinity Blade"
+    ]
+   },
+   {
+    "detail": "+28% AA dmg for 8s",
+    "facts": "self/contact \u00b7 2s CD",
+    "group": "auto-attack amplifiers (multiplier)",
+    "scores": [
+     4
+    ],
+    "spell": "SPIRITSPEAR",
+    "unit": "\u00d7AA",
+    "value": 0.28,
+    "weapons": [
+     "Daybreaker",
+     "Glaive",
+     "Heron Spear",
+     "Pike",
+     "Rift Glaive",
+     "Spear",
+     "Spirithunter",
+     "Trinity Spear"
+    ]
+   },
+   {
+    "detail": "+20% AA dmg for 30s",
+    "facts": "self/contact \u00b7 10s CD",
+    "group": "auto-attack amplifiers (multiplier)",
+    "scores": [
+     2
+    ],
+    "spell": "SHAPESHIFT_BEAR",
+    "unit": "\u00d7AA",
+    "value": 0.2,
+    "weapons": [
+     "Primal Staff"
+    ]
+   },
+   {
+    "detail": "+2% AA dmg for 3s",
+    "facts": "",
+    "group": "auto-attack amplifiers (multiplier)",
+    "scores": [
+     4
+    ],
+    "spell": "PASSIVE_KNUCKLE_BRAWLER",
+    "unit": "\u00d7AA",
+    "value": 0.02,
+    "weapons": [
+     "Brawler Gloves",
+     "Hellfire Hands",
+     "Spiked Gauntlets"
+    ]
+   },
+   {
+    "detail": "+2% AA dmg for 3s",
+    "facts": "",
+    "group": "auto-attack amplifiers (multiplier)",
+    "scores": [
+     4
+    ],
+    "spell": "PASSIVE_KNUCKLE_BRAWLER_SPEED",
+    "unit": "\u00d7AA",
+    "value": 0.015,
+    "weapons": [
+     "Battle Bracers",
+     "Fists of Avalon",
+     "Forcepulse Bracers",
+     "Ravenstrike Cestus"
+    ]
+   },
+   {
     "detail": "",
     "facts": "",
     "group": "not measurable \u2014 human judgment",
@@ -8383,23 +8479,6 @@
      "Malevolent Locus",
      "Occult Staff",
      "Witchwork Staff"
-    ]
-   },
-   {
-    "detail": "",
-    "facts": "",
-    "group": "not measurable \u2014 human judgment",
-    "scores": [
-     4
-    ],
-    "spell": "PASSIVE_KNUCKLE_BRAWLER_SPEED",
-    "unit": "dmg/cast",
-    "value": null,
-    "weapons": [
-     "Battle Bracers",
-     "Fists of Avalon",
-     "Forcepulse Bracers",
-     "Ravenstrike Cestus"
     ]
    },
    {
@@ -8456,20 +8535,6 @@
    },
    {
     "detail": "",
-    "facts": "self/contact",
-    "group": "not measurable \u2014 human judgment",
-    "scores": [
-     6
-    ],
-    "spell": "SPEEDARCHER_KITE",
-    "unit": "dmg/cast",
-    "value": null,
-    "weapons": [
-     "Bow"
-    ]
-   },
-   {
-    "detail": "",
     "facts": "",
     "group": "not measurable \u2014 human judgment",
     "scores": [
@@ -8500,71 +8565,6 @@
     "value": null,
     "weapons": [
      "Arctic Staff"
-    ]
-   },
-   {
-    "detail": "",
-    "facts": "",
-    "group": "not measurable \u2014 human judgment",
-    "scores": [
-     4
-    ],
-    "spell": "PASSIVE_KNUCKLE_BRAWLER",
-    "unit": "dmg/cast",
-    "value": null,
-    "weapons": [
-     "Brawler Gloves",
-     "Hellfire Hands",
-     "Spiked Gauntlets"
-    ]
-   },
-   {
-    "detail": "",
-    "facts": "self/contact \u00b7 10s CD",
-    "group": "not measurable \u2014 human judgment",
-    "scores": [
-     2
-    ],
-    "spell": "SHAPESHIFT_BEAR",
-    "unit": "dmg/cast",
-    "value": null,
-    "weapons": [
-     "Primal Staff"
-    ]
-   },
-   {
-    "detail": "",
-    "facts": "self/contact \u00b7 2s CD",
-    "group": "not measurable \u2014 human judgment",
-    "scores": [
-     4
-    ],
-    "spell": "SPIRITSPEAR",
-    "unit": "dmg/cast",
-    "value": null,
-    "weapons": [
-     "Daybreaker",
-     "Glaive",
-     "Heron Spear",
-     "Pike",
-     "Rift Glaive",
-     "Spear",
-     "Spirithunter",
-     "Trinity Spear"
-    ]
-   },
-   {
-    "detail": "",
-    "facts": "persists 1s \u00b7 self/contact \u00b7 channeled",
-    "group": "not measurable \u2014 human judgment",
-    "scores": [
-     4
-    ],
-    "spell": "SWORD_BERSERK_RUN_RE",
-    "unit": "dmg/cast",
-    "value": null,
-    "weapons": [
-     "Infinity Blade"
     ]
    }
   ],

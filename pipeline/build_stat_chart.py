@@ -14,6 +14,13 @@ IP note: dump values are every spell's BASE numbers — the same reference
 for all weapons, and ability scaling by item power applies one global curve
 on top. Comparing base numbers IS comparing at equal IP.
 
+KNOWN EXTRACTION GAPS (honest under-measurement, never over):
+  - area-pulse ticks: a channel that re-applies its area damage every N
+    seconds (Rain of Arrows) is counted ONCE — multi-tick totals need the
+    spelleffectarea pulse encoding, not yet parsed
+  - auto-attack amplifier windows are ranked as their own type (xAA) but
+    not converted to expected damage (needs item_stats AA DPS x uptime)
+
 What is extracted per spell (walking the full reference chain, same
 registry discipline as effect_catalogue.py; absent = the data doesn't
 state it, never a guess):
@@ -241,12 +248,36 @@ def metric_for(cap, rec):
         return None, "", ""
     per = dmg_per_cast(rec)
     cd = rec.get("cooldown") or 0
-    if cap in ("burst_aoe", "burst_st", "execute"):
+    def aa_amp():
+        """Auto-attack amplifier payload (Bow's Enchanted Quiver: +280% AA
+        damage for 8s) — a damage PROFILE direct cast damage misses; ranked
+        as its own type, never against dmg/cast."""
+        dmg = spd = dur = None
+        for m in rec["mods"]:
+            if m["value"] <= 0:
+                continue
+            if m["type"] in ("physicalattackdamagebonus",
+                             "magicattackdamagebonus"):
+                if dmg is None or m["value"] > dmg:
+                    dmg, dur = m["value"], m.get("duration")
+            elif m["type"] == "attackspeedbonus":
+                spd = m["value"]
+        if dmg is None:
+            return None, ""
+        det = f"+{dmg * 100:.0f}% AA dmg" + (f" for {dur:g}s" if dur else "")
+        if spd:
+            det += f", +{spd * 100:.0f}% attack speed"
+        return dmg, det
+
+    if cap in ("burst_aoe", "burst_st", "execute", "sustained_dps"):
+        if not per:
+            amp, det = aa_amp()
+            if amp is not None:
+                return amp, "×AA", det
         dps = round(per / cd, 1) if per and cd else None
+        if cap == "sustained_dps":
+            return (dps or per or None), ("dmg/s" if dps else "dmg/cast"), ""
         return (per or None), "dmg/cast", (f"{dps}/s over {cd:.0f}s CD" if dps else "")
-    if cap == "sustained_dps":
-        dps = round(per / cd, 1) if per and cd else None
-        return (dps or per or None), ("dmg/s" if dps else "dmg/cast"), ""
     if cap in ("stun", "silence", "root"):
         d = cc_duration(rec, (cap,))
         return d, "s", ""
@@ -325,6 +356,7 @@ def main():
     UNIT_GROUP = {"m": "displacement (m)", "s": "hard CC (s)",
                   "slow%·s": "slows (strength × duration)",
                   "dmg/cast": "damage per cast", "dmg/s": "damage per second",
+                  "×AA": "auto-attack amplifiers (multiplier)",
                   "heal/cast": "healing per cast",
                   "value·s": "stat modifiers (value × duration)"}
     boards = {}

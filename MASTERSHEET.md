@@ -220,9 +220,12 @@ Markers: ◆ pre-filled from the game files · ◇ data-assisted · ● judgment
 2. **S2 ◆ Persistence** — does it keep working after the cast with no
    further input? 1 = only during contact/channel · 4 = one instant
    application · 7 = leaves a lasting structure or zone (the 4s wall).
-3. **S3 ◇ Delivery demand** — 1 = must physically touch a moving enemy
-   while channeling · 3 = skillshot · 5 = targeted click · 7 =
-   ground-cast fire-and-forget.
+3. **S3 ◇ Delivery demand & pilot dependence** — 1 = must physically
+   touch a moving enemy while channeling, or full value only under
+   exceptional piloting (Bow's +280% AA window is huge on paper; landing
+   sustained single-target autos on a priority target through a ZvZ is a
+   skill few bring — score the value an AVERAGE competent player gets) ·
+   3 = skillshot · 5 = targeted click · 7 = ground-cast fire-and-forget.
 4. **S4 ◆ Cast position** — 1 = must stand inside enemy threat range,
    out of formation · 7 = castable from your own line (18m cast range).
 5. **S5 ◆ Counter-immunity** — the flags are in the data: ignores CC
@@ -241,10 +244,15 @@ Markers: ◆ pre-filled from the game files · ◇ data-assisted · ● judgment
 
 **Weapon × role (three questions):**
 
-1. **W1 ◇ Kit reinforcement** — do the slot-mates the role actually
-   equips amplify the same job? (Bedrock: Defensive Slam Q + Guard Rune /
-   Snare Charge W + CC-duration passive — every slot serves anti-dive
-   support tanking. The loadout model supplies the candidates.)
+1. **W1 ◇ Kit reinforcement & cross-slot combos** — do the slot-mates the
+   role actually equips amplify the same job, or MULTIPLY the E?
+   (Bedrock: Defensive Slam Q + Guard Rune / Snare Charge W — every slot
+   serves anti-dive tanking. Longbow: Rain of Arrows E × Explosive Arrows
+   W — the W makes the E's clump damage bigger, and the 15s E cycles the
+   combo fast. Bow: the same W cannot turn a single-target AA window into
+   AoE — same tree, no combo.) 1H weapons add the OFFHAND as a free
+   amplifier slot (Hallowfall + healing offhand) — judged coarsely until
+   gear sheets land. The loadout model supplies the candidates.
 2. **W2 ● Identity density** — how many capabilities does the E cover AT
    QUALITY in one button? (Primal Slam: displacement + zone + peel
    simultaneously.)
