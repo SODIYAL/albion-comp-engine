@@ -1,0 +1,15 @@
+# arcanestaff tree — shared Q/W/passive pool (8 weapons), extracted
+# 2026-08-20 from the per-weapon sheets (semantic-identity
+# restructure; every score unchanged). A row applies to every
+# arcanestaff weapon that can equip its evidence spell (WEAPON_STATS:
+# tree-wide), unless the weapon's sheet keeps its own row for the
+# same (cap, evidence) — a score override pending expert
+# adjudication — or lists the pair under `except:`.
+subcategory: arcanestaff
+capabilities:
+  - {cap: cleanse, score: 2, evidence: CLEANSESPEED2}                         # W: 10-ally cleanse + MS (QW)
+  - {cap: buff_allies, score: 1, evidence: EMPOWERBEAM}                       # (QW)
+  - {cap: resist_shred, score: 1, evidence: FRAZZLE2}                         # (QW)
+  - {cap: silence, score: 1, evidence: MAGICSHOCK}                            # (QW)
+  - {cap: sustained_dps, score: 1, evidence: PASSIVE_ATTACKBUFF_ARCANESTAFF}  # Lingering Power AA weave
+  - {cap: peel, score: 1, evidence: SHIELDFRIENDLY}                           # (QW)

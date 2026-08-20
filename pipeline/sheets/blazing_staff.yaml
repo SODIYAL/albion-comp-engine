@@ -17,10 +17,11 @@
 - weapon: 2H_INFERNOSTAFF_MORGANA    # Blazing Staff — standing-zone DoT artillery
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: range
+  # deliberate non-takes of tree-pool spells (see sheets/pools/firestaff.yaml)
+  except:
+    - {cap: zone_control, evidence: FIREWALL}
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: zone_control,   score: 3, evidence: FLAMETORNADO}    # E: persistent 5m tornado; W: firewall; Q: burning field
     - {cap: sustained_dps,  score: 2, evidence: FLAMETORNADO}    # tornado ticks + ignite stacks + Burn passive
     - {cap: burst_aoe,      score: 2, evidence: SKILLSHOT_FIREBALL}  # W: Raging Flare 205 in 5m; tornado on a clump (QW)
-    - {cap: knockback_displace, score: 1, evidence: FIRECONE}    # W: Fire Wave — enemy knockback (QW)
-    - {cap: peel,           score: 1, evidence: FIRECONE}        # push a diver off the backline (QW)
-    - {cap: buff_allies,    score: 1, evidence: FIRESTAFFIGNITE2_SPREAD}  # W: +60% ally MS for 1.6s — marginal (QW)

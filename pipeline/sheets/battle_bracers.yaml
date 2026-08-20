@@ -11,15 +11,14 @@
 - weapon: 2H_KNUCKLES_SET2           # Battle Bracers — combo brawler
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/knuckles.yaml)
+  except:
+    - {cap: catch, evidence: DASHKICK}
+    - {cap: engage, evidence: DASHKICK}
+    - {cap: mobility, evidence: DASHKICK}
   capabilities:
     - {cap: mobility,      score: 3, evidence: DIVEPUNCH_RISE}   # E float-dive; every Q is a dash; W: Triple Kick
     - {cap: engage,        score: 2, evidence: DIVEPUNCH_RISE}   # CC-immune float into a dive
     - {cap: disengage,     score: 2, evidence: DIVEPUNCH_RISE}   # the float IS the escape window
     - {cap: catch,         score: 2, evidence: DIVEPUNCH_RISE}   # Q: Dragon Leap; W: Triple Kick drag
-    - {cap: clump_create,  score: 1, evidence: TRIPLE_KICK}      # W: pulls 1 enemy player along the dash — the kidnap (QW)
     - {cap: burst_st,      score: 2, evidence: KNUCKLECOMBO}     # W: 30+153 punch combo; Q: Create Opening (QW)
-    - {cap: sustained_dps, score: 2, evidence: PASSIVE_KNUCKLE_BRAWLER_SPEED}  # Fatal Fury stacks + AA brawl
-    - {cap: knockback_displace, score: 1, evidence: BACKHAND_KNOCKBACK}  # W: 9m single-target shove (QW) — unified with line-mates (magnitude pass 2026-08-13)
-    - {cap: peel,          score: 1, evidence: BACKHAND_KNOCKBACK}  # shove a diver into a wall (QW)
-    - {cap: stun,          score: 1, evidence: KNUCKLECOMBO}     # W: 1.1s in the combo (QW)
-    - {cap: resist_shred,  score: 1, evidence: BACKHAND_KNOCKBACK}  # W: -20% for 5s; Q: Create Opening -12% (QW)

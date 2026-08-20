@@ -5,19 +5,25 @@
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: tank             # was missing (2026-08-18): frontline bruiser-tank,
                               # fielded as "Tank" in Timothy's blap (data/published_comps)
+  # deliberate non-takes of tree-pool spells (see sheets/pools/mace.yaml)
+  except:
+    - {cap: engage, evidence: CHARGE_ROOT}
+    - {cap: slow, evidence: SACRED_GROUND}
+    - {cap: zone_control, evidence: SACRED_GROUND}
   capabilities:
-    - {cap: tankiness,  score: 2, evidence: WEAPON_STATS}
     - {cap: engage,     score: 2, evidence: MACELEAP}      # Deep Leap: gap-close
     - {cap: stun,       score: 2, evidence: MACELEAP}
     - {cap: mobility,   score: 2, evidence: MACELEAP}
-    - {cap: peel,       score: 2, evidence: GUARDRUNE}     # ally stun/knockback immunity
-    - {cap: root,       score: 1, evidence: CHARGE_ROOT}   # Snare Charge
     # NOTE: no purge — nothing in the mace Q/W kit nor Deep Leap removes buffs
 
 - weapon: 2H_MACE            # Heavy Mace — disruption tank
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: tank             # was missing (2026-08-18): the archetypal
                               # disruption tank, "Tank" in Timothy's blap
+  # deliberate non-takes of tree-pool spells (see sheets/pools/mace.yaml)
+  except:
+    - {cap: root, evidence: CHARGE_ROOT}
+    - {cap: peel, evidence: GUARDRUNE}
   capabilities:
     - {cap: tankiness,  score: 3, evidence: WEAPON_STATS}
     - {cap: silence,    score: 3, evidence: SHRIEKMACE}    # Battle Howl: AoE silence
@@ -25,4 +31,3 @@
     - {cap: peel,       score: 3, evidence: SHRIEKMACE}
     - {cap: engage,     score: 2, evidence: CHARGE_ROOT}   # Snare Charge: 11m charge
     - {cap: zone_control, score: 2, evidence: SACRED_GROUND}
-    - {cap: slow,       score: 1, evidence: SACRED_GROUND}

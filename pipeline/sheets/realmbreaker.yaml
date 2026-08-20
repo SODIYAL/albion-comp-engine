@@ -14,18 +14,17 @@
 - weapon: 2H_AXE_AVALON              # Realmbreaker — max-HP-cut slam axe
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/axe.yaml)
+  except:
+    - {cap: catch, evidence: AXEBOOST}
+    - {cap: engage, evidence: AXE_CHARGE}
+    - {cap: mobility, evidence: RENDINGCOMBO}
   capabilities:
     - {cap: burst_aoe,      score: 2, evidence: LETHAL_CLEAVER}   # E: 212 AoE slam + cone follow-up
     - {cap: knockback_displace, score: 1, evidence: LETHAL_CLEAVER}  # E: cone air-THROW — no travel (magnitude pass 2026-08-13)
     - {cap: engage,         score: 2, evidence: LETHAL_CLEAVER}   # leap in, slam the clump
     - {cap: mobility,       score: 2, evidence: LETHAL_CLEAVER}   # E leap; Q3: Raging Leap
-    - {cap: sustained_dps,  score: 2, evidence: RENDINGSTRIKE}    # Q: stacking Rending bleeds
     - {cap: execute,        score: 1, evidence: LETHAL_CLEAVER}   # -15% Max Health for 5s amplifies the focus window
     - {cap: peel,           score: 1, evidence: LETHAL_CLEAVER}   # air-throw divers off the backline
     - {cap: catch,          score: 1, evidence: LETHAL_CLEAVER}   # leap range is modest
     - {cap: disengage,      score: 1, evidence: LETHAL_CLEAVER}   # leap out — no CD refund unlike Bear Paws
-    - {cap: heal_reduction, score: 1, evidence: RENDINGSTRIKE}    # Q: bleed cap -12% Healing Received (QW)
-    - {cap: resist_shred,   score: 1, evidence: AXESMASH}         # W: -16% single target (QW)
-    - {cap: root,           score: 1, evidence: RENDINGCOMBO}     # Q3: Raging Leap root (QW)
-    - {cap: buff_allies,    score: 1, evidence: AXE_CHARGE}       # W: +20% Healing Received to allies (QW)
-    - {cap: self_sustain,   score: 1, evidence: PASSIVE_HEALTHCHANCE_AXE}  # PASSIVE: Life Leech

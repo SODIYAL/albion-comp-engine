@@ -23,6 +23,12 @@
 - weapon: 2H_DUALSWORD               # Dual Swords — heroic-charge skirmisher
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/sword.yaml)
+  except:
+    - {cap: disengage, evidence: DEFENSERUN}
+    - {cap: catch, evidence: HAMSTRINGSWORD}
+    - {cap: mobility, evidence: HEROICSTRIKE2}
+    - {cap: sustained_dps, evidence: HEROICSTRIKE2}
   capabilities:
     - {cap: mobility,      score: 3, evidence: SPINATTACK}       # E leap; Q: dash-to-target; W: Blade Cyclone / Heroic Leap
     - {cap: engage,        score: 2, evidence: SPINATTACK}       # CC-immune leap in
@@ -30,7 +36,3 @@
     - {cap: catch,         score: 2, evidence: SPINATTACK}       # Q: Heroic Strike dash; W: Hamstring slow-into-leap
     - {cap: sustained_dps, score: 2, evidence: SPINATTACK}       # E: +30% AA speed +65% AA damage; heroic charges stack
     - {cap: burst_aoe,     score: 1, evidence: SPINATTACK}       # 160 on impact in 5m; Q: Cleave — modest
-    - {cap: root,          score: 1, evidence: SPLITTINGSLASH}   # W: 1.25s line root (QW)
-    - {cap: peel,          score: 1, evidence: SPLITTINGSLASH}   # the root defensively; W: Interrupt stops a caster (QW)
-    - {cap: slow,          score: 1, evidence: HAMSTRINGSWORD}   # W: Hamstring -25% for 4s (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_ARMORCHANCE_SWORD}  # PASSIVE: armor proc every 5 AAs

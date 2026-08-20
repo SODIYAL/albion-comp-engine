@@ -10,14 +10,9 @@
 - weapon: MAIN_AXE                   # Battleaxe — bleed-and-drain skirmisher
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/axe.yaml)
+  except:
+    - {cap: self_sustain, evidence: PASSIVE_HEALTHCHANCE_AXE}
   capabilities:
-    - {cap: sustained_dps,  score: 2, evidence: RENDINGSTRIKE}   # Q: stacking Rending bleeds feed everything
     - {cap: self_sustain,   score: 2, evidence: AXETHROW}        # E: heals per bleed charge; Life Leech passive
     - {cap: burst_st,       score: 1, evidence: AXETHROW}        # E: charge-scaled axe throws — 1H budget
-    - {cap: heal_reduction, score: 1, evidence: RENDINGSTRIKE}   # Q: bleed cap -12% Healing Received (QW)
-    - {cap: resist_shred,   score: 1, evidence: AXESMASH}        # W: -16% single target (QW)
-    - {cap: root,           score: 1, evidence: RENDINGCOMBO}    # Q3: Raging Leap root (QW)
-    - {cap: mobility,       score: 1, evidence: RENDINGCOMBO}    # Q3 leap; W: Adrenaline Boost MS (QW)
-    - {cap: catch,          score: 1, evidence: AXEBOOST}        # W: +40% MS while damaging (QW)
-    - {cap: engage,         score: 1, evidence: AXE_CHARGE}      # W: Battle Rush charge (QW)
-    - {cap: buff_allies,    score: 1, evidence: AXE_CHARGE}      # W: +20% Healing Received to allies (QW)

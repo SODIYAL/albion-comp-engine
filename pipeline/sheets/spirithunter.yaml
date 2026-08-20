@@ -18,13 +18,6 @@
   role_hint: melee
   capabilities:
     - {cap: resist_shred,  score: 2, evidence: TAINTED_STEEL}   # E: -12% AoE pierce + trail stacking magical shred
-    - {cap: catch,         score: 2, evidence: LEGBREAKER}      # W: Cripple strips MS buffs + self MS vs sprinters;
                                                                 # W: Harpoon pull (QW)
     - {cap: damage_debuff, score: 1, evidence: LEGBREAKER}      # W: Cripple -25% ALL damage dealt, 4s (QW)
-    - {cap: sustained_dps, score: 2, evidence: SPIRITSPEAR}     # Q: Spirit Spear charges, +28% AA damage x3
     - {cap: burst_aoe,     score: 1, evidence: GROUNDSPEAR}     # W: Impaler 155 in 2.5m; E pierce line (QW)
-    - {cap: root,          score: 1, evidence: SKILLSHOT_PULL}  # W: Harpoon — pull + 2.2s root with charges (QW)
-    - {cap: peel,          score: 1, evidence: LEGBREAKER}      # strip a diver's sprint; Harpoon a peeled pick (QW)
-    - {cap: slow,          score: 1, evidence: GROUNDSPEAR}     # W + Q slows + Slow Poison passive (QW)
-    - {cap: mobility,      score: 1, evidence: CHARGINGBLADE}   # W: Inner Focus release — +30% MS, CC immune 2s (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_SPEAR}  # PASSIVE: Life Leech

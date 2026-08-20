@@ -23,13 +23,3 @@
                                                                  # (effect map derives engage from dashes only, not enemy CC)
     - {cap: peel,          score: 2, evidence: GROUNDBREAKER2}   # same tool defensively; W: Knockout, Power Geyser
     - {cap: catch,         score: 2, evidence: GROUNDBREAKER2}   # 20m lockdown line
-    - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}     # tank-line weapon, played frontline
-    - {cap: slow,          score: 2, evidence: TAR_RING}         # W: Inertia Ring — 0.8 slow, IGNORES CC resistance (QW)
-    - {cap: anti_dive,     score: 2, evidence: TAR_RING}         # the ring punishes anyone who walks through it (QW)
-    - {cap: zone_control,  score: 1, evidence: TAR_RING}         # brief self-centred denial ring (QW)
-    - {cap: knockback_displace, score: 1, evidence: GEYSER}      # W: Power Geyser knock-up — enemy-directed (QW)
-    - {cap: mobility,      score: 1, evidence: CHARGESLOWAE}     # W: Slowing Charge dash (QW)
-    - {cap: disengage,     score: 1, evidence: CHARGESLOWAE}     # dash out through the gap (QW)
-    - {cap: purge,         score: 1, evidence: IRONBREAKER}      # Q: breaks active shields only — narrow purge
-    - {cap: resist_shred,  score: 1, evidence: IRONBREAKER}      # Q: -12% AoE for 4s
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_HAMMER}  # PASSIVE: Life Leech

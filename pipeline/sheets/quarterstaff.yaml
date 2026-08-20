@@ -14,6 +14,11 @@
 - weapon: 2H_QUARTERSTAFF            # Quarterstaff — the displacement line
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: tank
+  # deliberate non-takes of tree-pool spells (see sheets/pools/quarterstaff.yaml)
+  except:
+    - {cap: mobility, evidence: CARTWHEEL}
+    - {cap: knockback_displace, evidence: LAUNCHER}
+    - {cap: sustained_dps, evidence: QSTAFF_COMBO}
   capabilities:
     - {cap: knockback_displace, score: 3, evidence: VAULT_ATTACK}  # E air-throw; W: Rising Blow / Separator / Forceful Swing
     - {cap: peel,          score: 3, evidence: SEPARATING_SLAM}  # W: 12m CC-resist-ignoring shove off a target (QW)
@@ -22,9 +27,5 @@
     - {cap: disengage,     score: 2, evidence: VAULT_ATTACK}     # immune leap out; Q: Cartwheel
     - {cap: catch,         score: 2, evidence: STUNRUN}          # W: Stun Run 2.11s opener + leap (QW)
     - {cap: anti_dive,     score: 2, evidence: QS_WHIRLWIND2}    # W: divers get shoved, damage-halved, AA-disabled (QW)
-    - {cap: damage_debuff, score: 1, evidence: QS_WHIRLWIND2}    # W: -50% damage dealt + AA disable, 5s AoE (QW)
     - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}     # tank-role bruiser; Q: Cartwheel +20% resists
-    - {cap: stun,          score: 1, evidence: STUNRUN}          # W option; Q3: Concussive Blow; passive (QW)
-    - {cap: root,          score: 1, evidence: SEPARATING_SLAM}  # W: 2.2s single-target (QW)
     - {cap: burst_aoe,     score: 1, evidence: VAULT_ATTACK}     # 161 on impact — modest
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_QUARTERSTAFF}  # PASSIVE: Life Leech

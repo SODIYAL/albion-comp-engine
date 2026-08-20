@@ -15,11 +15,11 @@
 - weapon: MAIN_HOLYSTAFF             # Holy Staff — clutch single-target healer
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: healer
+  # deliberate non-takes of tree-pool spells (see sheets/pools/holystaff.yaml)
+  except:
+    - {cap: heal_burst, evidence: HOLYFLASH}
   capabilities:
     - {cap: heal_burst,   score: 2, evidence: HOLYDESPERATEPRAYER2}  # E: 220 below 40% — the save button; Q: Holy Flash
-    - {cap: heal_sustain, score: 2, evidence: HEALINGBEAM}     # W: Holy Beam channel; Q: Generous Heal (QW)
-    - {cap: buff_allies,  score: 1, evidence: HOLYHOT}         # W: Holy Blessing armor + healing received (QW)
-    - {cap: peel,         score: 1, evidence: PULSINGHEAL}     # W: Sacred Pulse knocks enemies off an ally (QW)
     # knockback_displace REMOVED 2026-08-13 (expert magnitude pass): Sacred
     # Pulse's shove is a healer self-peel, not a repositioning tool in group
     # fights — its value is already scored as peel. Applies line-wide. (QW)

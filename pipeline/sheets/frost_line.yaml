@@ -7,35 +7,30 @@
   role_hint: range
   capabilities:
     - {cap: burst_aoe,     score: 2, evidence: HAIL_MULTI_1}   # E: 160 AoE, recastable
-    - {cap: zone_control,  score: 2, evidence: FROSTBOMB_CASTSLOW}  # frost QW ground slows (QW)
-    - {cap: slow,          score: 2, evidence: FROSTBOMB_CASTSLOW}  # (QW)
     - {cap: catch,         score: 1, evidence: HAIL_MULTI_1}
     - {cap: peel,          score: 1, evidence: HAIL_MULTI_1}
-    - {cap: stun,          score: 1, evidence: FROSTNOVA}      # (QW)
-    - {cap: disengage,     score: 1, evidence: FROSTNOVA}      # (QW)
-    - {cap: resist_shred,  score: 1, evidence: FROST_LANCE}    # (QW)
-    - {cap: buff_allies,   score: 1, evidence: ICE_SCULPTURE}  # (QW)
-    - {cap: root,          score: 1, evidence: PASSIVE_FROST}
-    - {cap: sustained_dps, score: 1, evidence: WEAPON_STATS}
 
 - weapon: 2H_FROSTSTAFF_CRYSTAL      # Arctic Staff — volley channel mage
   curated_as_of: 2026-08-12
   role_hint: range
+  # deliberate non-takes of tree-pool spells (see sheets/pools/froststaff.yaml)
+  except:
+    - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: sustained_dps, score: 2, evidence: FROST_TARGETED_CHANNEL}  # E: mobile volley channel
     - {cap: slow,          score: 2, evidence: FROST_TARGETED_CHANNEL}  # stacks up to 6 times
     - {cap: burst_aoe,     score: 1, evidence: FROST_TARGETED_CHANNEL}
-    - {cap: zone_control,  score: 2, evidence: FROSTBOMB_CASTSLOW}  # (QW)
     - {cap: catch,         score: 1, evidence: FROST_BITE}     # Q: Frostbite stacks to a stun (QW)
-    - {cap: stun,          score: 1, evidence: FROSTNOVA}      # (QW)
-    - {cap: disengage,     score: 1, evidence: FROSTNOVA}      # (QW)
-    - {cap: resist_shred,  score: 1, evidence: FROST_LANCE}    # (QW)
-    - {cap: buff_allies,   score: 1, evidence: ICE_SCULPTURE}  # (QW)
-    - {cap: root,          score: 1, evidence: PASSIVE_FROST}
 
 - weapon: 2H_GLACIALSTAFF            # Glacial Staff — the roaming storm
   curated_as_of: 2026-08-12
   role_hint: range
+  # deliberate non-takes of tree-pool spells (see sheets/pools/froststaff.yaml)
+  except:
+    - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
+    - {cap: zone_control, evidence: FROSTBOMB_CASTSLOW}
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: zone_control,  score: 3, evidence: ICESTORM2}      # E: 15-SECOND moving storm — the longest zone curated
     - {cap: slow,          score: 2, evidence: ICESTORM2}      # storm + frost QW pool
@@ -43,15 +38,14 @@
     - {cap: sustained_dps, score: 1, evidence: ICESTORM2}
     - {cap: catch,         score: 1, evidence: ICESTORM2}
     - {cap: peel,          score: 1, evidence: ICESTORM2}
-    - {cap: stun,          score: 1, evidence: FROSTNOVA}      # (QW)
-    - {cap: disengage,     score: 1, evidence: FROSTNOVA}      # (QW)
-    - {cap: resist_shred,  score: 1, evidence: FROST_LANCE}    # (QW)
-    - {cap: buff_allies,   score: 1, evidence: ICE_SCULPTURE}  # (QW)
-    - {cap: root,          score: 1, evidence: PASSIVE_FROST}
 
 - weapon: 2H_ICEGAUNTLETS_HELL       # Icicle Staff — the hard-slow blizzard
   curated_as_of: 2026-08-12
   role_hint: range
+  # deliberate non-takes of tree-pool spells (see sheets/pools/froststaff.yaml)
+  except:
+    - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
+    - {cap: zone_control, evidence: FROSTBOMB_CASTSLOW}
   capabilities:
     - {cap: slow,          score: 2, evidence: GLACIALFIELD}   # E: 50%+30% center, IGNORES CC resistance
     - {cap: zone_control,  score: 2, evidence: GLACIALFIELD}   # 5s blizzard
@@ -59,16 +53,15 @@
     - {cap: catch,         score: 1, evidence: GLACIALFIELD}
     - {cap: peel,          score: 1, evidence: GLACIALFIELD}
     - {cap: burst_aoe,     score: 1, evidence: GLACIALFIELD}
-    - {cap: stun,          score: 1, evidence: FROSTNOVA}      # (QW)
-    - {cap: disengage,     score: 1, evidence: FROSTNOVA}      # (QW)
-    - {cap: resist_shred,  score: 1, evidence: FROST_LANCE}    # (QW)
-    - {cap: buff_allies,   score: 1, evidence: ICE_SCULPTURE}  # (QW)
-    - {cap: root,          score: 1, evidence: PASSIVE_FROST}
-    - {cap: sustained_dps, score: 1, evidence: WEAPON_STATS}
 
 - weapon: MAIN_FROSTSTAFF_AVALON     # Chillhowl — the crystal-save support
   curated_as_of: 2026-08-12
   role_hint: support
+  # deliberate non-takes of tree-pool spells (see sheets/pools/froststaff.yaml)
+  except:
+    - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
+    - {cap: stun, evidence: FROSTNOVA}
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     # Frozen Crystal is ONE cast with two mutually exclusive uses — freeze
     # the focused ALLY (2s invulnerable save) OR freeze a diving ENEMY.
@@ -80,14 +73,15 @@
     - {cap: slow,          score: 2, evidence: FROZEN_CRYSTAL, use: enemy_control} # shatter field slow ignores CC resistance
     - {cap: catch,         score: 1, evidence: FROZEN_CRYSTAL, use: enemy_control}
     - {cap: zone_control,  score: 1, evidence: FROSTBOMB_CASTSLOW}  # (QW)
-    - {cap: disengage,     score: 1, evidence: FROSTNOVA}      # (QW)
-    - {cap: resist_shred,  score: 1, evidence: FROST_LANCE}    # (QW)
-    - {cap: buff_allies,   score: 1, evidence: ICE_SCULPTURE}  # (QW)
-    - {cap: root,          score: 1, evidence: PASSIVE_FROST}
 
 - weapon: MAIN_FROSTSTAFF_KEEPER     # Hoarfrost Staff — snowball displacer
   curated_as_of: 2026-08-12
   role_hint: range
+  # deliberate non-takes of tree-pool spells (see sheets/pools/froststaff.yaml)
+  except:
+    - {cap: slow, evidence: FROSTBOMB_CASTSLOW}
+    - {cap: zone_control, evidence: FROSTBOMB_CASTSLOW}
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: knockback_displace, score: 2, evidence: ICEROCK_EXPLODE}  # E: rolling 10m knockback + wall explosion
     - {cap: slow,          score: 2, evidence: ICEROCK_EXPLODE}  # freezing trail + QW pool
@@ -95,8 +89,3 @@
     - {cap: zone_control,  score: 1, evidence: ICEROCK_EXPLODE}  # the trail
     - {cap: burst_aoe,     score: 1, evidence: ICEROCK_EXPLODE}
     - {cap: catch,         score: 1, evidence: ICEROCK_EXPLODE}
-    - {cap: stun,          score: 1, evidence: FROSTNOVA}      # (QW)
-    - {cap: disengage,     score: 1, evidence: FROSTNOVA}      # (QW)
-    - {cap: resist_shred,  score: 1, evidence: FROST_LANCE}    # (QW)
-    - {cap: buff_allies,   score: 1, evidence: ICE_SCULPTURE}  # (QW)
-    - {cap: root,          score: 1, evidence: PASSIVE_FROST}

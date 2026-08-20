@@ -12,16 +12,12 @@
 - weapon: 2H_CLAYMORE_AVALON         # Kingmaker — AoE knock-up wombo sword
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/sword.yaml)
+  except:
+    - {cap: peel, evidence: SPLITTINGSLASH}
   capabilities:
     - {cap: knockback_displace, score: 1, evidence: MAJESTIC_SMASH}  # E: 6m AoE air-THROW — no travel (magnitude pass 2026-08-13)
     - {cap: peel,          score: 2, evidence: MAJESTIC_SMASH}   # everything diving you goes airborne
     - {cap: burst_aoe,     score: 2, evidence: MAJESTIC_SMASH}   # charge-scaled smash up to 312 in a line
-    - {cap: sustained_dps, score: 2, evidence: HEROICSTRIKE2}    # heroic-charge AA engine (sword pool)
-    - {cap: mobility,      score: 2, evidence: HEROICSTRIKE2}    # Q dash; W: Blade Cyclone / Heroic Leap
     - {cap: buff_allies,   score: 1, evidence: MAJESTIC_SMASH}   # on-kill ally damage buff, 11m
     - {cap: engage,        score: 1, evidence: HEROICSTRIKE2}    # dash in, then swing — two-step initiation
-    - {cap: catch,         score: 1, evidence: HAMSTRINGSWORD}   # W: slow-into-leap combo (QW)
-    - {cap: root,          score: 1, evidence: SPLITTINGSLASH}   # W: 1.25s line root (QW)
-    - {cap: slow,          score: 1, evidence: HAMSTRINGSWORD}   # (QW)
-    - {cap: disengage,     score: 1, evidence: DEFENSERUN}       # W: Iron Will sprint (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_ARMORCHANCE_SWORD}  # PASSIVE: armor proc

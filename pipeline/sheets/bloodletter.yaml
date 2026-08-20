@@ -19,6 +19,12 @@
 - weapon: MAIN_RAPIER_MORGANA        # Bloodletter — mobile executioner
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/dagger.yaml)
+  except:
+    - {cap: sustained_dps, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}
+    - {cap: engage, evidence: QDASH}
+    - {cap: mobility, evidence: QDASH}
+    - {cap: catch, evidence: SKILLSHOT_TELEPORT}
   capabilities:
     - {cap: mobility,       score: 3, evidence: RAPIERSTAB}         # E dash; Q: Deadly Swipe; W: Dash / Chain Slash / Shadow Edge
     - {cap: execute,        score: 2, evidence: RAPIERSTAB}         # E: damage keyed to target health threshold
@@ -26,11 +32,5 @@
     - {cap: catch,          score: 2, evidence: RAPIERSTAB}         # W: Chain Slash / Shadow Edge close anything (QW)
     - {cap: disengage,      score: 2, evidence: GROUNDDASH}         # W: Dash; Chain Slash grants immunity while charging (QW)
     - {cap: engage,         score: 1, evidence: RAPIERSTAB}         # dives for itself, not a group initiation
-    - {cap: stun,           score: 1, evidence: SKILLSHOT_TELEPORT} # W: Shadow Edge — 1s skillshot stun (QW)
-    - {cap: peel,           score: 1, evidence: SKILLSHOT_TELEPORT} # the stun works defensively too (QW)
-    - {cap: resist_shred,   score: 1, evidence: SUNDERARMOR2}       # Q: stacking -4% x3 (QW)
-    - {cap: heal_reduction, score: 1, evidence: DEEPCUTS}           # W: Forbidden Stab — "Negates the target's Healing
                                                                     # Received for 1.5" + interrupt (QW). Grounded via the
                                                                     # heal_flag_meaning: negate override (effect_overrides.yaml)
-    - {cap: self_sustain,   score: 1, evidence: PASSIVE_HEALTHCHANCE_DAGGER}  # PASSIVE: Life Leech
-    - {cap: sustained_dps,  score: 1, evidence: WEAPON_STATS}       # stacking damage buffs, single-target melee pattern

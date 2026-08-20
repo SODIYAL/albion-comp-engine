@@ -12,6 +12,12 @@
 - weapon: 2H_DUALHAMMER_HELL         # Forge Hammers — the walking zone
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: tank
+  # deliberate non-takes of tree-pool spells (see sheets/pools/hammer.yaml)
+  except:
+    - {cap: anti_dive, evidence: TAR_RING}
+    - {cap: slow, evidence: TAR_RING}
+    - {cap: zone_control, evidence: TAR_RING}
+    - {cap: tankiness, evidence: WEAPON_STATS}
   capabilities:
     - {cap: tankiness,     score: 2, evidence: GIANTSTEPS}       # E: +30% resistances for 10s; tank line
     - {cap: zone_control,  score: 2, evidence: GIANTSTEPS}       # the 7m slow aura moves with you
@@ -21,10 +27,3 @@
     - {cap: catch,         score: 1, evidence: GIANTSTEPS}       # the aura shears escape speed
     - {cap: sustained_dps, score: 1, evidence: GIANTSTEPS}       # repeatable Giant Smashes — modest
     - {cap: stun,          score: 1, evidence: KNOCKOUT}         # W: 5s sleep, breaks on damage; Stunning Strike passive (QW)
-    - {cap: knockback_displace, score: 1, evidence: GEYSER}      # W: knock-up (QW)
-    - {cap: engage,        score: 1, evidence: CHARGESLOWAE}     # W: Slowing Charge dash (QW)
-    - {cap: mobility,      score: 1, evidence: CHARGESLOWAE}     # (QW)
-    - {cap: disengage,     score: 1, evidence: CHARGESLOWAE}     # (QW)
-    - {cap: purge,         score: 1, evidence: IRONBREAKER}      # Q: shield break only (QW)
-    - {cap: resist_shred,  score: 1, evidence: IRONBREAKER}      # Q: -12% AoE (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_HAMMER}  # PASSIVE: Life Leech

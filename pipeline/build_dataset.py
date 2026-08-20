@@ -36,6 +36,7 @@ DEFAULT_VERSION = "2026.08.1"
 
 sys.path.insert(0, HERE)
 from provenance import load_manifest, verify_derived  # noqa: E402
+import sheets_lib  # noqa: E402  (tree-pool composition)
 import build_interactions as _inter_mod  # noqa: E402  (adapter versions)
 import fetch_gear_lines as _gear_mod  # noqa: E402
 import fetch_item_stats as _stats_mod  # noqa: E402
@@ -120,8 +121,12 @@ def build_loadout(caps, evidence, line, uses=None):
 
 
 def load_sheets(weapon_lines):
-    """Curated sheets win over illustrative ones for the same weapon key."""
+    """Curated sheets win over illustrative ones for the same weapon key.
+
+    Rows are COMPOSED (sheets_lib): the weapon's own rows plus the shared
+    tree-pool rows from sheets/pools/<subcategory>.yaml that apply to it."""
     weapons, sources = {}, {}
+    pools = sheets_lib.load_pools()
 
     def ingest(path, status):
         for entry in _load_yaml(path):
@@ -132,7 +137,7 @@ def load_sheets(weapon_lines):
             if weapons.get(key, {}).get("status") == "curated" and status != "curated":
                 continue
             caps, evidence, uses = {}, {}, {}
-            for c in entry.get("capabilities", []):
+            for c in sheets_lib.compose(entry, weapon_lines.get(key), pools):
                 if not isinstance(c, dict):
                     continue
                 cap, score = c.get("cap"), c.get("score", 0)

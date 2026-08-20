@@ -21,12 +21,8 @@
   capabilities:
     - {cap: clump_create, score: 2, evidence: BLACKHOLE}      # E: pulls everything in radius to center
     - {cap: burst_aoe,    score: 2, evidence: BLACKHOLE}      # 161 on the pull; Q: Chain Missile bounces
-    - {cap: cleanse,      score: 2, evidence: CLEANSESPEED2}  # W: Motivating Cleanse — 10-ally AoE cleanse + MS (QW)
     - {cap: buff_allies,  score: 2, evidence: EMPOWERBEAM}    # W: stacking +8%x10 ally damage channel (QW)
     - {cap: peel,         score: 2, evidence: SHIELDFRIENDLY} # Q: ally shield + forced-movement immunity; Magic Shock
-    - {cap: silence,      score: 1, evidence: MAGICSHOCK}     # Q: 0.85s AoE; Hush passive adds 1.25s on AA (QW)
     - {cap: slow,         score: 1, evidence: BLACKHOLE}      # E: 16% for 5s
     - {cap: catch,        score: 1, evidence: BLACKHOLE}      # the pull is the catch
     - {cap: zone_control, score: 1, evidence: BLACKHOLE}      # brief area threat — modest
-    - {cap: resist_shred, score: 1, evidence: FRAZZLE2}       # W: -30% Defense single target, 4s (QW)
-    - {cap: sustained_dps, score: 1, evidence: PASSIVE_ATTACKBUFF_ARCANESTAFF}  # Lingering Power AA weave

@@ -11,6 +11,12 @@
 - weapon: 2H_HAMMER_AVALON           # Hand of Justice — drag-clump tank
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: tank
+  # deliberate non-takes of tree-pool spells (see sheets/pools/hammer.yaml)
+  except:
+    - {cap: disengage, evidence: CHARGESLOWAE}
+    - {cap: engage, evidence: CHARGESLOWAE}
+    - {cap: mobility, evidence: CHARGESLOWAE}
+    - {cap: knockback_displace, evidence: GEYSER}
   capabilities:
     - {cap: engage,        score: 3, evidence: SPINNING_SMASH}   # E: spin INTO them, dragging the line with you
     - {cap: clump_create,  score: 3, evidence: SPINNING_SMASH}   # pulls up to 10 enemies into the slam point
@@ -20,10 +26,3 @@
     - {cap: catch,         score: 2, evidence: SPINNING_SMASH}   # spin onto runners, they come along
     - {cap: mobility,      score: 2, evidence: SPINNING_SMASH}   # the E moves you; W: Slowing Charge
     - {cap: disengage,     score: 2, evidence: SPINNING_SMASH}   # spin OUT through the line
-    - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}     # tank-line weapon, played frontline
-    - {cap: slow,          score: 2, evidence: TAR_RING}         # W: 0.8 slow ring, ignores CC resistance (QW)
-    - {cap: anti_dive,     score: 2, evidence: TAR_RING}         # (QW)
-    - {cap: zone_control,  score: 1, evidence: TAR_RING}         # (QW)
-    - {cap: purge,         score: 1, evidence: IRONBREAKER}      # Q: shield break only (QW)
-    - {cap: resist_shred,  score: 1, evidence: IRONBREAKER}      # Q: -12% AoE (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_HAMMER}  # PASSIVE: Life Leech

@@ -1,0 +1,13 @@
+# holystaff tree — shared Q/W/passive pool (8 weapons), extracted
+# 2026-08-20 from the per-weapon sheets (semantic-identity
+# restructure; every score unchanged). A row applies to every
+# holystaff weapon that can equip its evidence spell (WEAPON_STATS:
+# tree-wide), unless the weapon's sheet keeps its own row for the
+# same (cap, evidence) — a score override pending expert
+# adjudication — or lists the pair under `except:`.
+subcategory: holystaff
+capabilities:
+  - {cap: heal_sustain, score: 2, evidence: HEALINGBEAM}  # W: Holy Beam — channeled single-target sustain
+  - {cap: heal_burst, score: 2, evidence: HOLYFLASH}      # Q: 117 AoE; W: Holy Orb 135 (QW)
+  - {cap: buff_allies, score: 1, evidence: HOLYHOT}       # (QW)
+  - {cap: peel, score: 1, evidence: PULSINGHEAL}          # W: Sacred Pulse knocks enemies off an ally

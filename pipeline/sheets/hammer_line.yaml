@@ -7,18 +7,7 @@
   capabilities:
     - {cap: stun,          score: 2, evidence: CRYSTALWAVE}      # E: Static stacks stun on damage taken
     - {cap: buff_allies,   score: 1, evidence: CRYSTALWAVE}      # 350 group absorb shield (via override)
-    - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}     # tank line
     - {cap: peel,          score: 2, evidence: GEYSER}           # W pool: Geyser / Knockout / ring (QW)
-    - {cap: slow,          score: 2, evidence: TAR_RING}         # (QW)
-    - {cap: anti_dive,     score: 2, evidence: TAR_RING}         # (QW)
-    - {cap: zone_control,  score: 1, evidence: TAR_RING}         # (QW)
-    - {cap: knockback_displace, score: 1, evidence: GEYSER}      # (QW)
-    - {cap: engage,        score: 1, evidence: CHARGESLOWAE}     # (QW)
-    - {cap: mobility,      score: 1, evidence: CHARGESLOWAE}     # (QW)
-    - {cap: disengage,     score: 1, evidence: CHARGESLOWAE}     # (QW)
-    - {cap: purge,         score: 1, evidence: IRONBREAKER}      # (QW)
-    - {cap: resist_shred,  score: 1, evidence: IRONBREAKER}      # (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_HAMMER}
 
 - weapon: 2H_HAMMER_UNDEAD           # Tombhammer — delayed-stun focus tank
   curated_as_of: 2026-08-12
@@ -28,17 +17,6 @@
     - {cap: execute,       score: 1, evidence: UNDEADHAND}       # -10% max/current Health for the focus window
     - {cap: catch,         score: 2, evidence: UNDEADHAND}       # 2.48s ranged AoE stun = caught
     - {cap: peel,          score: 2, evidence: UNDEADHAND}       # drop the hand on divers; W pool
-    - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}     # tank line
-    - {cap: slow,          score: 2, evidence: TAR_RING}         # (QW)
-    - {cap: anti_dive,     score: 2, evidence: TAR_RING}         # (QW)
-    - {cap: zone_control,  score: 1, evidence: TAR_RING}         # (QW)
-    - {cap: knockback_displace, score: 1, evidence: GEYSER}      # (QW)
-    - {cap: engage,        score: 1, evidence: CHARGESLOWAE}     # (QW)
-    - {cap: mobility,      score: 1, evidence: CHARGESLOWAE}     # (QW)
-    - {cap: disengage,     score: 1, evidence: CHARGESLOWAE}     # (QW)
-    - {cap: purge,         score: 1, evidence: IRONBREAKER}      # (QW)
-    - {cap: resist_shred,  score: 1, evidence: IRONBREAKER}      # (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_HAMMER}
 
 - weapon: MAIN_HAMMER                # Hammer (1H) — self-AoE stun tank
   curated_as_of: 2026-08-12
@@ -46,14 +24,3 @@
   capabilities:
     - {cap: stun,          score: 2, evidence: HAMMERWHIRLWIND2} # E: 2.25s stun in 5.5m around you
     - {cap: peel,          score: 2, evidence: HAMMERWHIRLWIND2} # stand on your backline, spin
-    - {cap: engage,        score: 1, evidence: CHARGESLOWAE}     # dash in, then shatter (QW)
-    - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}     # tank line
-    - {cap: slow,          score: 2, evidence: TAR_RING}         # (QW)
-    - {cap: anti_dive,     score: 2, evidence: TAR_RING}         # (QW)
-    - {cap: zone_control,  score: 1, evidence: TAR_RING}         # (QW)
-    - {cap: knockback_displace, score: 1, evidence: GEYSER}      # (QW)
-    - {cap: mobility,      score: 1, evidence: CHARGESLOWAE}     # (QW)
-    - {cap: disengage,     score: 1, evidence: CHARGESLOWAE}     # (QW)
-    - {cap: purge,         score: 1, evidence: IRONBREAKER}      # (QW)
-    - {cap: resist_shred,  score: 1, evidence: IRONBREAKER}      # (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_HAMMER}

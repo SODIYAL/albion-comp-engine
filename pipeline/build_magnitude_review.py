@@ -41,7 +41,14 @@ WEAPON_RE = re.compile(r"^-\s*weapon:\s*(\w+)")
 
 
 def parse_sheets():
-    """Raw-text parse so the inline # comments (the curation 'why') survive."""
+    """Raw-text parse so the inline # comments (the curation 'why') survive.
+
+    Tree-pool rows (sheets/pools/) are EXPANDED to every weapon they apply to
+    via sheets_lib.compose, so the boards still show the full per-weapon
+    picture; their comments come from the pool file."""
+    sys.path.insert(0, HERE)
+    import yaml
+    import sheets_lib
     rows = []
     for path in sorted(glob.glob(os.path.join(HERE, "sheets", "*.yaml"))):
         weapon = None
@@ -59,6 +66,35 @@ def parse_sheets():
                 rows.append({"weapon": weapon, "cap": cap, "score": int(score),
                              "evidence": evidence, "comment": (comment or "").strip(),
                              "sheet": os.path.basename(path)})
+    # pool comments, keyed (subcategory, cap, evidence)
+    pool_comment = {}
+    for path in sorted(glob.glob(os.path.join(HERE, "sheets", "pools", "*.yaml"))):
+        sub = os.path.splitext(os.path.basename(path))[0]
+        for line in open(path, encoding="utf-8"):
+            m = CAP_RE.search(line.strip())
+            if m:
+                cap, _, evidence, comment = m.groups()
+                pool_comment[(sub, cap, evidence)] = (comment or "").strip()
+    lines_db = sheets_lib.load_weapon_lines(OUT)
+    pools = sheets_lib.load_pools()
+    for path in sorted(glob.glob(os.path.join(HERE, "sheets", "*.yaml"))):
+        for entry in (yaml.safe_load(open(path, encoding="utf-8")) or []):
+            wkey = entry.get("weapon")
+            if not wkey:
+                continue
+            own = {(c.get("cap"), c.get("evidence"))
+                   for c in entry.get("capabilities", []) if isinstance(c, dict)}
+            line = lines_db.get(wkey)
+            sub = (line or {}).get("subcategory")
+            for c in sheets_lib.compose(entry, line, pools):
+                key = (c.get("cap"), c.get("evidence"))
+                if key in own:
+                    continue                       # already parsed with comment
+                rows.append({"weapon": wkey, "cap": c["cap"],
+                             "score": int(c.get("score", 0)),
+                             "evidence": c.get("evidence"),
+                             "comment": pool_comment.get((sub,) + key, ""),
+                             "sheet": f"pools/{sub}.yaml"})
     return rows
 
 

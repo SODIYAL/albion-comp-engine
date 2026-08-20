@@ -5,15 +5,12 @@
 - weapon: 2H_GLAIVE                  # Glaive — the pick weapon
   curated_as_of: 2026-08-12
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/spear.yaml)
+  except:
+    - {cap: catch, evidence: LEGBREAKER}
   capabilities:
     - {cap: catch,         score: 2, evidence: SHOVEL}           # E: Fling — pulls the target 10m BEHIND you (override)
     - {cap: knockback_displace, score: 2, evidence: SHOVEL}      # enemy-directed forced repositioning
-    - {cap: sustained_dps, score: 2, evidence: SPIRITSPEAR}      # spear charge engine (QW)
-    - {cap: peel,          score: 1, evidence: LEGBREAKER}       # (QW)
-    - {cap: root,          score: 1, evidence: SKILLSHOT_PULL}   # (QW)
-    - {cap: slow,          score: 1, evidence: GROUNDSPEAR}      # (QW)
-    - {cap: mobility,      score: 1, evidence: CHARGINGBLADE}    # (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_SPEAR}
 
 - weapon: 2H_GLAIVE_CRYSTAL          # Rift Glaive — charge-dump line burster
   curated_as_of: 2026-08-12
@@ -21,29 +18,29 @@
   capabilities:
     - {cap: burst_aoe,     score: 2, evidence: SPEAR_AOE_FINISHER}  # E: charge-scaled line blast
     - {cap: knockback_displace, score: 1, evidence: SPEAR_AOE_FINISHER}  # 4m shove on the line
-    - {cap: sustained_dps, score: 2, evidence: SPIRITSPEAR}      # (QW)
-    - {cap: catch,         score: 2, evidence: LEGBREAKER}       # (QW)
-    - {cap: peel,          score: 1, evidence: LEGBREAKER}       # (QW)
-    - {cap: root,          score: 1, evidence: SKILLSHOT_PULL}   # (QW)
-    - {cap: slow,          score: 1, evidence: GROUNDSPEAR}      # (QW)
-    - {cap: mobility,      score: 1, evidence: CHARGINGBLADE}    # (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_SPEAR}
 
 - weapon: 2H_SPEAR                   # Pike — single-target root lancer
   curated_as_of: 2026-08-12
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/spear.yaml)
+  except:
+    - {cap: catch, evidence: LEGBREAKER}
+    - {cap: peel, evidence: LEGBREAKER}
+    - {cap: root, evidence: SKILLSHOT_PULL}
   capabilities:
     - {cap: root,          score: 2, evidence: HALBERDSMASH}     # E: 2.79s single-target root
     - {cap: catch,         score: 2, evidence: HALBERDSMASH}     # root + Cripple anti-kite (QW)
-    - {cap: sustained_dps, score: 2, evidence: SPIRITSPEAR}      # (QW)
     - {cap: peel,          score: 1, evidence: HALBERDSMASH}     # root the diver
-    - {cap: slow,          score: 1, evidence: GROUNDSPEAR}      # (QW)
-    - {cap: mobility,      score: 1, evidence: CHARGINGBLADE}    # (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_SPEAR}
 
 - weapon: 2H_TRIDENT_UNDEAD          # Trinity Spear — immune-leap AoE rooter
   curated_as_of: 2026-08-12
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/spear.yaml)
+  except:
+    - {cap: mobility, evidence: CHARGINGBLADE}
+    - {cap: catch, evidence: LEGBREAKER}
+    - {cap: peel, evidence: LEGBREAKER}
+    - {cap: root, evidence: SKILLSHOT_PULL}
   capabilities:
     - {cap: engage,        score: 2, evidence: TRIDENTTHROW}     # E: CC+debuff+damage-immune leap
     - {cap: root,          score: 2, evidence: TRIDENTTHROW}     # 2.65s AoE root on impact
@@ -52,42 +49,41 @@
     - {cap: buff_allies,   score: 1, evidence: TRIDENTTHROW}     # soul mist buffs allies inside
     - {cap: peel,          score: 1, evidence: TRIDENTTHROW}     # root the divers
     - {cap: disengage,     score: 1, evidence: TRIDENTTHROW}     # immune leap out
-    - {cap: sustained_dps, score: 2, evidence: SPIRITSPEAR}      # (QW)
-    - {cap: slow,          score: 1, evidence: GROUNDSPEAR}      # (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_SPEAR}
 
 - weapon: MAIN_SPEAR                 # Spear (1H) — dash-through skirmisher
   curated_as_of: 2026-08-12
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/spear.yaml)
+  except:
+    - {cap: mobility, evidence: CHARGINGBLADE}
+    - {cap: peel, evidence: LEGBREAKER}
   capabilities:
     - {cap: engage,        score: 2, evidence: DASHDMG}          # E: dash-through air-throw
     - {cap: knockback_displace, score: 1, evidence: DASHDMG}     # path air-throw — no travel (magnitude pass 2026-08-13)
     - {cap: mobility,      score: 2, evidence: DASHDMG}          # the dash; Inner Focus (QW)
-    - {cap: catch,         score: 2, evidence: LEGBREAKER}       # Cripple anti-kite (QW)
     - {cap: peel,          score: 1, evidence: DASHDMG}          # dash through the divers
     - {cap: disengage,     score: 1, evidence: DASHDMG}          # dash out
-    - {cap: sustained_dps, score: 2, evidence: SPIRITSPEAR}      # (QW)
-    - {cap: root,          score: 1, evidence: SKILLSHOT_PULL}   # (QW)
-    - {cap: slow,          score: 1, evidence: GROUNDSPEAR}      # (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_SPEAR}
 
 - weapon: MAIN_SPEAR_KEEPER          # Heron Spear — stun-skillshot skirmisher
   curated_as_of: 2026-08-12
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/spear.yaml)
+  except:
+    - {cap: catch, evidence: LEGBREAKER}
+    - {cap: peel, evidence: LEGBREAKER}
   capabilities:
     - {cap: stun,          score: 2, evidence: SPEARTHROW}       # E: 1.75s AoE shock on impact
     - {cap: catch,         score: 2, evidence: SPEARTHROW}       # ranged stun + Cripple (QW)
     - {cap: burst_aoe,     score: 1, evidence: SPEARTHROW}       # 210 in 4m
     - {cap: peel,          score: 1, evidence: SPEARTHROW}       # stun the diver
-    - {cap: sustained_dps, score: 2, evidence: SPIRITSPEAR}      # (QW)
-    - {cap: root,          score: 1, evidence: SKILLSHOT_PULL}   # (QW)
-    - {cap: slow,          score: 1, evidence: GROUNDSPEAR}      # (QW)
-    - {cap: mobility,      score: 1, evidence: CHARGINGBLADE}    # (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_SPEAR}
 
 - weapon: MAIN_SPEAR_LANCE_AVALON    # Daybreaker — the purge lance
   curated_as_of: 2026-08-12
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/spear.yaml)
+  except:
+    - {cap: mobility, evidence: CHARGINGBLADE}
+    - {cap: peel, evidence: LEGBREAKER}
   capabilities:
     - {cap: purge,         score: 2, evidence: LANCE_CHARGE}     # E: strips ALL buffs on the dash path — held at 2:
                                                                  # line geometry reaches fewer targets than Heavy
@@ -96,7 +92,3 @@
     - {cap: mobility,      score: 2, evidence: LANCE_CHARGE}     # the dash; Inner Focus (QW)
     - {cap: burst_st,      score: 1, evidence: LANCE_CHARGE}     # 222 on the target
     - {cap: catch,         score: 1, evidence: LEGBREAKER}       # (QW)
-    - {cap: sustained_dps, score: 2, evidence: SPIRITSPEAR}      # (QW)
-    - {cap: root,          score: 1, evidence: SKILLSHOT_PULL}   # (QW)
-    - {cap: slow,          score: 1, evidence: GROUNDSPEAR}      # (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_SPEAR}

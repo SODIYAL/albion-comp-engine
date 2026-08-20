@@ -18,11 +18,10 @@
 - weapon: 2H_FIRE_RINGPAIR_AVALON    # Dawnsong — anti-heal AoE artillery
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: range
+  # deliberate non-takes of tree-pool spells (see sheets/pools/firestaff.yaml)
+  except:
+    - {cap: zone_control, evidence: FIREWALL}
   capabilities:
     - {cap: burst_aoe,      score: 3, evidence: FIREPHOENIX}     # E: 200 line AoE; W: Raging Flare 205 in 5m
     - {cap: heal_reduction, score: 2, evidence: FIREPHOENIX}     # E: -40% Healing Received inside the fire
     - {cap: zone_control,   score: 2, evidence: FIREPHOENIX}     # 6.5s ground fire; W: Wall of Flames, Q: Burning Field
-    - {cap: sustained_dps,  score: 2, evidence: WEAPON_STATS}    # ignite DoT stacking + artillery channel
-    - {cap: knockback_displace, score: 1, evidence: FIRECONE}    # W: Fire Wave — enemy knockback (QW)
-    - {cap: peel,           score: 1, evidence: FIRECONE}        # the same wave defensively (QW)
-    - {cap: buff_allies,    score: 1, evidence: FIRESTAFFIGNITE2_SPREAD}  # W: +60% ally MS for 1.6s — marginal (QW)

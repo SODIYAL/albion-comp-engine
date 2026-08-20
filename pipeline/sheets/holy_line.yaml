@@ -14,9 +14,12 @@
 - weapon: MAIN_HOLYSTAFF_AVALON      # Hallowfall — mobile peeling healer
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: healer
+  # deliberate non-takes of tree-pool spells (see sheets/pools/holystaff.yaml)
+  except:
+    - {cap: heal_burst, evidence: HOLYFLASH}
+    - {cap: peel, evidence: PULSINGHEAL}
   capabilities:
     - {cap: heal_burst,         score: 3, evidence: DIVINE_JUMP}   # E: Divine Intervention — burst heal on impact
-    - {cap: heal_sustain,       score: 2, evidence: HEALINGBEAM}   # W: Holy Beam — channeled single-target sustain
     - {cap: mobility,           score: 3, evidence: DIVINE_JUMP}   # E: leap, immune to dmg/debuff/CC until impact
     - {cap: disengage,          score: 2, evidence: DIVINE_JUMP}   # E: the immunity window is the escape
     - {cap: peel,               score: 3, evidence: DIVINE_JUMP}   # E: throws all enemies in radius into the air
@@ -28,11 +31,12 @@
 - weapon: 2H_HOLYSTAFF_UNDEAD        # Redemption Staff — stationary group healer
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: healer
+  # deliberate non-takes of tree-pool spells (see sheets/pools/holystaff.yaml)
+  except:
+    - {cap: heal_sustain, evidence: HEALINGBEAM}
   capabilities:
     - {cap: heal_sustain,       score: 3, evidence: CELESTIAL_SPHERE}  # E: bouncing multi-ally sphere
-    - {cap: heal_burst,         score: 2, evidence: HOLYFLASH}         # Q: AoE burst heal
     - {cap: buff_allies,        score: 2, evidence: HOLYHOT}           # W: Holy Blessing
-    - {cap: peel,               score: 1, evidence: PULSINGHEAL}       # W: Sacred Pulse knocks enemies off an ally
     # knockback_displace REMOVED 2026-08-13 (expert magnitude pass): an
     # auto-attack passive knockback is trivial in group fights.
     # NO mobility — this is the deliberate contrast with Hallowfall (design doc

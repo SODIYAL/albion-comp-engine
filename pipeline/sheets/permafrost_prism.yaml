@@ -22,6 +22,9 @@
 - weapon: 2H_ICECRYSTAL_UNDEAD       # Permafrost Prism — AoE stun-bomb mage
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: range
+  # deliberate non-takes of tree-pool spells (see sheets/pools/froststaff.yaml)
+  except:
+    - {cap: stun, evidence: FROSTNOVA}
   capabilities:
     - {cap: burst_aoe,     score: 3, evidence: FROST_ULTIMATE}      # E: Ice Crystal — AoE stun, then 173 AoE explosion
     - {cap: stun,          score: 2, evidence: FROST_ULTIMATE}      # E: 1s AoE stun, large radius (W: Frost Nova stuns too)
@@ -30,12 +33,6 @@
                                                                     # Rune, Divine Jump) sit at 2-3 on this ladder
     - {cap: catch,         score: 2, evidence: FROST_ULTIMATE}      # ranged AoE lockdown; Q: Frostbite stacks to a stun
     - {cap: zone_control,  score: 3, evidence: FROSTBOMB_CASTSLOW}  # W: Frost Bomb + Q: Frozen Surge + W: Obelisk + E area (QW)
-    - {cap: slow,          score: 2, evidence: FROSTBOMB_CASTSLOW}  # nearly every Q/W in the kit slows (QW)
-    - {cap: root,          score: 1, evidence: PASSIVE_FROST}       # PASSIVE: every 4th cast, next AA roots
-    - {cap: disengage,     score: 1, evidence: FROSTNOVA}           # W: Frost Nova teleport + brief damage immunity (QW)
     # mobility DROPPED (illustrative had 1): the only movement in the kit is
     # Frost Nova's teleport, which the effect map classes as engage/disengage
     # repositioning, not sustained mobility — disengage 1 above covers it.
-    - {cap: resist_shred,  score: 1, evidence: FROST_LANCE}         # W: -12% resistances for 3s (QW)
-    - {cap: buff_allies,   score: 1, evidence: ICE_SCULPTURE}       # W: Obelisk +20% dmg & CDR to 10 allies (QW)
-    - {cap: sustained_dps, score: 1, evidence: WEAPON_STATS}        # burst-oriented kit; modest between-E pressure

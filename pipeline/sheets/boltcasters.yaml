@@ -9,13 +9,9 @@
 - weapon: 2H_DUALCROSSBOW_HELL       # Boltcasters — single-target melter
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: range
+  # deliberate non-takes of tree-pool spells (see sheets/pools/crossbow.yaml)
+  except:
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: burst_st,      score: 2, evidence: DUAL_RAPIDFIRE}    # E: ramping barrage into one target
     - {cap: sustained_dps, score: 2, evidence: DUAL_RAPIDFIRE}    # E + Q: Auto Fire channel pattern
-    - {cap: burst_aoe,     score: 1, evidence: BOLTSHOT}          # Q: 130 in 3m; W: Explosive Salvo (QW)
-    - {cap: silence,       score: 1, evidence: SILENCINGBOLT}     # W: 3.83s skillshot silence (QW)
-    - {cap: resist_shred,  score: 1, evidence: SUNDERSHOT}        # W: stacking shred; Salvo fumes (QW)
-    - {cap: knockback_displace, score: 1, evidence: KNOCKBACKSHOT2}  # W: 10m bolt; Forceful Bolts passive (QW)
-    - {cap: peel,          score: 1, evidence: KNOCKBACKSHOT2}    # (QW)
-    - {cap: slow,          score: 1, evidence: CALTROPS}          # W: trap (QW)
-    - {cap: zone_control,  score: 1, evidence: CALTROPS}          # 12s trap + fume field (QW)

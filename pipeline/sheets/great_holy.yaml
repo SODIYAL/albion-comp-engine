@@ -19,9 +19,13 @@
 - weapon: 2H_HOLYSTAFF               # Great Holy Staff — group-heal anchor
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: healer
+  # deliberate non-takes of tree-pool spells (see sheets/pools/holystaff.yaml)
+  except:
+    - {cap: heal_sustain, evidence: HEALINGBEAM}
+    - {cap: buff_allies, evidence: HOLYHOT}
+    - {cap: peel, evidence: PULSINGHEAL}
   capabilities:
     - {cap: heal_sustain, score: 3, evidence: HOLYEXPLOSION}   # E: 10-ally channel; W: Beam / Orb pool
-    - {cap: heal_burst,   score: 2, evidence: HOLYFLASH}       # Q: 117 AoE; W: Holy Orb 135 (QW)
     - {cap: knockback_displace, score: 2, evidence: HOLYEXPLOSION}  # E: 10m AoE, ignores CC resistance
     - {cap: peel,         score: 2, evidence: HOLYEXPLOSION}   # the shove clears divers off the party
     - {cap: buff_allies,  score: 2, evidence: HOLYEXPLOSION}   # E: +16% ally resistances; W: Holy Blessing

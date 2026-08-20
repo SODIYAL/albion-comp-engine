@@ -1,0 +1,17 @@
+# sword tree — shared Q/W/passive pool (8 weapons), extracted
+# 2026-08-20 from the per-weapon sheets (semantic-identity
+# restructure; every score unchanged). A row applies to every
+# sword weapon that can equip its evidence spell (WEAPON_STATS:
+# tree-wide), unless the weapon's sheet keeps its own row for the
+# same (cap, evidence) — a score override pending expert
+# adjudication — or lists the pair under `except:`.
+subcategory: sword
+capabilities:
+  - {cap: disengage, score: 1, evidence: DEFENSERUN}                    # W: Iron Will sprint (QW)
+  - {cap: catch, score: 1, evidence: HAMSTRINGSWORD}                    # W: slow-into-leap combo (QW)
+  - {cap: slow, score: 1, evidence: HAMSTRINGSWORD}                     # W: -25% for 4s (QW)
+  - {cap: mobility, score: 2, evidence: HEROICSTRIKE2}                  # Q dash; W: Blade Cyclone / Heroic Leap
+  - {cap: sustained_dps, score: 2, evidence: HEROICSTRIKE2}             # heroic-charge AA stacking, same engine as Dual Swords
+  - {cap: self_sustain, score: 1, evidence: PASSIVE_ARMORCHANCE_SWORD}  # PASSIVE: armor proc
+  - {cap: peel, score: 1, evidence: SPLITTINGSLASH}                     # the root defensively; W: Interrupt (QW)
+  - {cap: root, score: 1, evidence: SPLITTINGSLASH}                     # W: 1.25s line root (QW)

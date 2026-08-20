@@ -14,12 +14,9 @@
 - weapon: 2H_CROSSBOWLARGE_MORGANA   # Siegebow — anti-tank channel artillery
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: range
+  # deliberate non-takes of tree-pool spells (see sheets/pools/crossbow.yaml)
+  except:
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: sustained_dps, score: 2, evidence: CROSSBOW_CONE_ULTIMATE}  # E: repeating volleys + %HP true damage
     - {cap: burst_aoe,     score: 2, evidence: BOLTSHOT}          # Q: 130 in 3m; W: Explosive Salvo (crossbow pool)
-    - {cap: silence,       score: 1, evidence: SILENCINGBOLT}     # W: 3.83s skillshot silence (QW)
-    - {cap: resist_shred,  score: 1, evidence: SUNDERSHOT}        # W: stacking shred; Salvo fumes (QW)
-    - {cap: knockback_displace, score: 1, evidence: KNOCKBACKSHOT2}  # W: 10m bolt; Forceful Bolts passive (QW)
-    - {cap: peel,          score: 1, evidence: KNOCKBACKSHOT2}    # (QW)
-    - {cap: slow,          score: 1, evidence: CALTROPS}          # W: trap (QW)
-    - {cap: zone_control,  score: 1, evidence: CALTROPS}          # 12s trap + fume field (QW)

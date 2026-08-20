@@ -19,15 +19,15 @@
 - weapon: 2H_DUALSICKLE_UNDEAD       # Deathgivers — stealth burst assassin
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/dagger.yaml)
+  except:
+    - {cap: disengage, evidence: GROUNDDASH}
+    - {cap: sustained_dps, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}
+    - {cap: engage, evidence: QDASH}
+    - {cap: mobility, evidence: QDASH}
   capabilities:
     - {cap: burst_st,      score: 2, evidence: GHOSTSTRIKE}         # E: 153 + repeatable at 3 Sunder charges
     - {cap: engage,        score: 2, evidence: GHOSTSTRIKE}         # charge-through opener, stealth reset
     - {cap: disengage,     score: 2, evidence: GHOSTSTRIKE}         # 1s invisibility out; W: Chain Slash iframes
     - {cap: mobility,      score: 2, evidence: GROUNDDASH}          # W: Dash; E charge; Q: Deadly Swipe leap (QW)
     - {cap: catch,         score: 2, evidence: SKILLSHOT_TELEPORT}  # W: Shadow Edge stun-teleport; Chain Slash multi-charge (QW)
-    - {cap: resist_shred,  score: 1, evidence: SUNDERARMOR2}        # Q: stacking -4% x3 — feeds the E reset (QW)
-    - {cap: stun,          score: 1, evidence: SKILLSHOT_TELEPORT}  # W: Shadow Edge — 1s skillshot stun (QW)
-    - {cap: peel,          score: 1, evidence: SKILLSHOT_TELEPORT}  # the stun defensively (QW)
-    - {cap: heal_reduction, score: 1, evidence: DEEPCUTS}           # W: Forbidden Stab — negate 1.5s (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_DAGGER}  # PASSIVE: Life Leech
-    - {cap: sustained_dps, score: 1, evidence: WEAPON_STATS}        # AA-speed dagger passives

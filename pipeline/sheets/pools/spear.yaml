@@ -1,0 +1,16 @@
+# spear tree — shared Q/W/passive pool (8 weapons), extracted
+# 2026-08-20 from the per-weapon sheets (semantic-identity
+# restructure; every score unchanged). A row applies to every
+# spear weapon that can equip its evidence spell (WEAPON_STATS:
+# tree-wide), unless the weapon's sheet keeps its own row for the
+# same (cap, evidence) — a score override pending expert
+# adjudication — or lists the pair under `except:`.
+subcategory: spear
+capabilities:
+  - {cap: mobility, score: 1, evidence: CHARGINGBLADE}                   # (QW)
+  - {cap: slow, score: 1, evidence: GROUNDSPEAR}                         # (QW)
+  - {cap: catch, score: 2, evidence: LEGBREAKER}                         # (QW)
+  - {cap: peel, score: 1, evidence: LEGBREAKER}                          # (QW)
+  - {cap: self_sustain, score: 1, evidence: PASSIVE_HEALTHCHANCE_SPEAR}  # PASSIVE: Life Leech
+  - {cap: root, score: 1, evidence: SKILLSHOT_PULL}                      # (QW)
+  - {cap: sustained_dps, score: 2, evidence: SPIRITSPEAR}                # spear charge engine (QW)

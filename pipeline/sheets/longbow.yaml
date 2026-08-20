@@ -6,12 +6,18 @@
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: range            # was missing (2026-08-18): ranged AoE/zone DPS,
                               # attackrange 13 in the item stats bank
+  # deliberate non-takes of tree-pool spells (see sheets/pools/bow.yaml)
+  except:
+    - {cap: resist_shred, evidence: DEADLYSHOT}
+    - {cap: catch, evidence: GROUNDARROW}
+    - {cap: peel, evidence: GROUNDARROW}
+    - {cap: disengage, evidence: JUMPSHOT2}
+    - {cap: slow, evidence: PASSIVE_SLOWPOISON}
+    - {cap: mobility, evidence: SPEEDSHOT2}
   capabilities:
     - {cap: burst_aoe,     score: 2, evidence: ARROWRAIN}   # Rain of Arrows (E)
     - {cap: zone_control,  score: 2, evidence: ARROWRAIN}   # channeled AoE slow zone
     - {cap: slow,          score: 2, evidence: ARROWRAIN}
-    - {cap: sustained_dps, score: 2, evidence: WEAPON_STATS}
-    - {cap: root,          score: 1, evidence: GROUNDARROW} # Ray of Light (W)
     # resist_shred survives at score 1: NOT from any Q/W (earlier draft's error)
     # but from the Piercing Arrows passive — auto-attacks stack a Defense debuff
     - {cap: resist_shred,  score: 1, evidence: PASSIVE_ARMOR_PIERCE_STACK}

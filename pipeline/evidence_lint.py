@@ -39,8 +39,10 @@ except ImportError:
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from effect_lookup import EffectLookup  # noqa: E402
+import sheets_lib  # noqa: E402
 
 WEAPONS = json.load(open(os.path.join(HERE, "out", "weapon_lines.json"), encoding="utf-8"))
+POOLS = sheets_lib.load_pools()
 
 # Evidence values that are not spells (base item stats, e.g. tankiness from
 # armour value). Exempt from rule 3 — there is no spell to check.
@@ -121,7 +123,9 @@ def lint_sheet(path):
             continue
         equippable = {s for slot in line["spells"].values() for s in slot}
         cited = set()
-        for c in entry.get("capabilities", []):
+        # composed rows: the weapon's own + applicable tree-pool rows, so a
+        # pool row that stops being equippable after a patch still FAILS here
+        for c in sheets_lib.compose(entry, line, POOLS):
             cap, score, ev = c.get("cap"), c.get("score", 0), c.get("evidence")
             where = f"{wkey}.{cap}"
             if not score:
@@ -160,8 +164,64 @@ def lint_sheet(path):
     return errors, warnings
 
 
+def lint_pools():
+    """Pool files: every row must actually APPLY somewhere and ground its cap.
+
+    compose() applies a pool row only where the evidence spell is equippable,
+    so a typo'd or patch-removed spell would silently apply to NOBODY — this
+    check makes that an ERROR instead."""
+    errors, warnings = [], []
+    tree = {}
+    for wk, line in WEAPONS.items():
+        tree.setdefault(line.get("subcategory"), []).append(wk)
+    for sub, rows in sorted(POOLS.items()):
+        members = tree.get(sub, [])
+        if not members:
+            errors.append(f"pools/{sub}: no weapon line has this subcategory")
+            continue
+        for r in rows:
+            cap, score, ev = r.get("cap"), r.get("score", 0), r.get("evidence")
+            where = f"pools/{sub}.{cap}"
+            if not score:
+                errors.append(f"{where}: pool row without a nonzero score")
+                continue
+            if not ev:
+                errors.append(f"{where}: pool row without evidence")
+                continue
+            if ev in NON_SPELL_EVIDENCE:
+                continue
+            holders = [w for w in members
+                       if ev in {s for sl in WEAPONS[w]["spells"].values()
+                                 for s in sl}]
+            if not holders:
+                errors.append(
+                    f"{where}: evidence spell '{ev}' is equippable on NO "
+                    f"{sub} weapon — the row applies to nobody")
+                continue
+            if cap in CHECKABLE and cap not in LOOKUP.candidates(ev):
+                name = LOOKUP.spells.get(ev, {}).get("name", ev)
+                if not LOOKUP.has_structured(ev) and not LOOKUP.spells.get(ev, {}).get("flags"):
+                    warnings.append(
+                        f"{where}: '{name}' has no structured effects and no "
+                        f"prose flags — cannot verify, review by hand")
+                else:
+                    offer = ", ".join(sorted(LOOKUP.candidates(ev))) or "nothing"
+                    errors.append(
+                        f"{where}: '{name}' cannot ground {cap}. "
+                        f"Its effects support: {offer}")
+    return errors, warnings
+
+
 def main(paths):
     total_err = 0
+    errors, warnings = lint_pools()
+    status = "FAIL" if errors else "OK"
+    print(f"[{status}] sheets/pools/  ({len(errors)} errors, {len(warnings)} warnings)")
+    for e in errors:
+        print(f"   ERROR  {e}")
+    for w in warnings:
+        print(f"   warn   {w}")
+    total_err += len(errors)
     for path in paths:
         errors, warnings = lint_sheet(path)
         status = "FAIL" if errors else "OK"

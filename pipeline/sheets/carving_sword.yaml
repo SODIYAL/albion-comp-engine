@@ -20,15 +20,15 @@
 - weapon: 2H_CLEAVER_HELL            # Carving Sword — shred-on-dash bruiser
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/sword.yaml)
+  except:
+    - {cap: disengage, evidence: DEFENSERUN}
+    - {cap: catch, evidence: HAMSTRINGSWORD}
+    - {cap: mobility, evidence: HEROICSTRIKE2}
   capabilities:
     - {cap: resist_shred,  score: 2, evidence: CLAYMORESLASH}    # E: up to -20% AoE on the dash path — the signature
     - {cap: engage,        score: 2, evidence: CLAYMORESLASH}    # shred-by-initiation
     - {cap: mobility,      score: 2, evidence: CLAYMORESLASH}    # E dash; Q: Heroic Strike; W: Blade Cyclone / Heroic Leap
     - {cap: catch,         score: 2, evidence: CLAYMORESLASH}    # dash + W: Hamstring slow-into-leap
     - {cap: disengage,     score: 2, evidence: CLAYMORESLASH}    # same dash out; W: Iron Will sprint
-    - {cap: sustained_dps, score: 2, evidence: HEROICSTRIKE2}    # heroic-charge AA stacking, same engine as Dual Swords
     - {cap: burst_aoe,     score: 1, evidence: CLAYMORESLASH}    # 135 on the path; modest
-    - {cap: root,          score: 1, evidence: SPLITTINGSLASH}   # W: 1.25s line root (QW)
-    - {cap: peel,          score: 1, evidence: SPLITTINGSLASH}   # the root defensively; W: Interrupt (QW)
-    - {cap: slow,          score: 1, evidence: HAMSTRINGSWORD}   # W: -25% for 4s (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_ARMORCHANCE_SWORD}  # PASSIVE: armor proc

@@ -19,18 +19,17 @@
 - weapon: 2H_RAM_KEEPER              # Grovekeeper — immune-leap engage tank
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: tank
+  # deliberate non-takes of tree-pool spells (see sheets/pools/hammer.yaml)
+  except:
+    - {cap: disengage, evidence: CHARGESLOWAE}
+    - {cap: engage, evidence: CHARGESLOWAE}
+    - {cap: mobility, evidence: CHARGESLOWAE}
+    - {cap: knockback_displace, evidence: GEYSER}
   capabilities:
     - {cap: engage,        score: 3, evidence: RAM_CHARGE}      # E: CC+damage-immune leap into the stun
     - {cap: stun,          score: 2, evidence: RAM_CHARGE}      # 2.5s in 5.5m; Stunning Strike passive
     - {cap: knockback_displace, score: 1, evidence: RAM_CHARGE} # scaling air-THROW — no travel; hold value is peel/stun (magnitude pass 2026-08-13)
     - {cap: peel,          score: 2, evidence: RAM_CHARGE}      # pound the divers; W: Geyser / Knockout (QW)
     - {cap: catch,         score: 2, evidence: RAM_CHARGE}      # leap + 2.5s stun = caught
-    - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}    # tank-line weapon, played frontline
     - {cap: mobility,      score: 2, evidence: RAM_CHARGE}      # the E moves you; W: Slowing Charge
     - {cap: disengage,     score: 2, evidence: RAM_CHARGE}      # immune leap OUT
-    - {cap: slow,          score: 2, evidence: TAR_RING}        # W: 0.8 CC-resist-ignoring ring (QW)
-    - {cap: anti_dive,     score: 2, evidence: TAR_RING}        # (QW)
-    - {cap: zone_control,  score: 1, evidence: TAR_RING}        # (QW)
-    - {cap: purge,         score: 1, evidence: IRONBREAKER}     # Q: shield break only (QW)
-    - {cap: resist_shred,  score: 1, evidence: IRONBREAKER}     # Q: -12% AoE (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_HAMMER}  # PASSIVE: Life Leech

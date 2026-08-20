@@ -7,102 +7,74 @@
 - weapon: 2H_SHAPESHIFTER_AVALON     # Lightcaller — flying bomber
   curated_as_of: 2026-08-12
   role_hint: range
+  # deliberate non-takes of tree-pool spells (see sheets/pools/shapeshifterstaff.yaml)
+  except:
+    - {cap: mobility, evidence: SHAPE_W_TETHERBEAM}
   capabilities:
     - {cap: burst_aoe,     score: 2, evidence: SHAPESHIFT_AVALONIAN_EAGLE}  # Dawnbird: "Offensive: high" aerial bombs
     - {cap: mobility,      score: 2, evidence: SHAPESHIFT_AVALONIAN_EAGLE}  # airborne, root-immune, +60% MS
     - {cap: disengage,     score: 2, evidence: SHAPESHIFT_AVALONIAN_EAGLE}  # fly out over what melee can't cross
     - {cap: engage,        score: 1, evidence: SHAPESHIFT_AVALONIAN_EAGLE}
-    - {cap: clump_create,  score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: root,          score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: catch,         score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: peel,          score: 1, evidence: SHAPE_W_TETHERBEAM} # (QW)
-    - {cap: buff_allies,   score: 1, evidence: SHAPE_Q_DAMAGE_AND_SHIELD}  # (QW)
-    - {cap: zone_control,  score: 1, evidence: SHAPE_W_DAMAGE_AOE} # (QW)
-    - {cap: slow,          score: 1, evidence: SHAPE_W_DAMAGE_AOE} # (QW)
-    - {cap: resist_shred,  score: 1, evidence: SHAPE_Q_CONE_MELEE} # (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_SHAPESHIFT_ATTACK_BUFF}
 
 - weapon: 2H_SHAPESHIFTER_CRYSTAL    # Stillgaze Staff — cobra skirmisher
   curated_as_of: 2026-08-12
   role_hint: range
+  # deliberate non-takes of tree-pool spells (see sheets/pools/shapeshifterstaff.yaml)
+  except:
+    - {cap: mobility, evidence: SHAPE_W_TETHERBEAM}
   capabilities:
     - {cap: burst_st,      score: 2, evidence: SHAPESHIFT_CRYSTAL_COBRA}  # Cobra strikes
     - {cap: disengage,     score: 1, evidence: SHAPESHIFT_CRYSTAL_COBRA}  # Slippery: self-cleanse + MS on CC
     - {cap: mobility,      score: 1, evidence: SHAPESHIFT_CRYSTAL_COBRA}
     # Slippery is a SELF-cleanse — never scored as the ally-cleanse capability
-    - {cap: clump_create,  score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: root,          score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: catch,         score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: peel,          score: 1, evidence: SHAPE_W_TETHERBEAM} # (QW)
-    - {cap: buff_allies,   score: 1, evidence: SHAPE_Q_DAMAGE_AND_SHIELD}  # (QW)
-    - {cap: zone_control,  score: 1, evidence: SHAPE_W_DAMAGE_AOE} # (QW)
-    - {cap: slow,          score: 1, evidence: SHAPE_W_DAMAGE_AOE} # (QW)
-    - {cap: resist_shred,  score: 1, evidence: SHAPE_Q_CONE_MELEE} # (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_SHAPESHIFT_ATTACK_BUFF}
 
 - weapon: 2H_SHAPESHIFTER_KEEPER     # Earthrune Staff — the golem tank
   curated_as_of: 2026-08-12
   role_hint: tank
+  # deliberate non-takes of tree-pool spells (see sheets/pools/shapeshifterstaff.yaml)
+  except:
+    - {cap: self_sustain, evidence: PASSIVE_SHAPESHIFT_ATTACK_BUFF}
+    - {cap: mobility, evidence: SHAPE_W_TETHERBEAM}
   capabilities:
     - {cap: tankiness,     score: 3, evidence: SHAPESHIFT_ROCK_ELEMENTAL}  # Golem: "Defensive: high", forced-movement
                                                                            # immune, charge-scaled Max Health
     - {cap: self_sustain,  score: 2, evidence: SHAPESHIFT_ROCK_ELEMENTAL}  # max/current Health grant on transform
     - {cap: engage,        score: 1, evidence: SHAPESHIFT_ROCK_ELEMENTAL}  # the golem walks in and cannot be moved
-    - {cap: clump_create,  score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: root,          score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: catch,         score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: peel,          score: 1, evidence: SHAPE_W_TETHERBEAM} # (QW)
-    - {cap: buff_allies,   score: 1, evidence: SHAPE_Q_DAMAGE_AND_SHIELD}  # (QW)
-    - {cap: zone_control,  score: 1, evidence: SHAPE_W_DAMAGE_AOE} # (QW)
-    - {cap: slow,          score: 1, evidence: SHAPE_W_DAMAGE_AOE} # (QW)
-    - {cap: resist_shred,  score: 1, evidence: SHAPE_Q_CONE_MELEE} # (QW)
 
 - weapon: 2H_SHAPESHIFTER_MORGANA    # Bloodmoon Staff — the werewolf
   curated_as_of: 2026-08-12
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/shapeshifterstaff.yaml)
+  except:
+    - {cap: self_sustain, evidence: PASSIVE_SHAPESHIFT_ATTACK_BUFF}
+    - {cap: catch, evidence: SHAPE_W_AREA_PULL}
+    - {cap: mobility, evidence: SHAPE_W_TETHERBEAM}
   capabilities:
     - {cap: burst_st,      score: 2, evidence: SHAPESHIFT_WEREWOLF}  # wolf melee combos
     - {cap: catch,         score: 2, evidence: SHAPESHIFT_WEREWOLF}  # wolf lunges run targets down
     - {cap: mobility,      score: 2, evidence: SHAPESHIFT_WEREWOLF}
     - {cap: self_sustain,  score: 1, evidence: SHAPESHIFT_WEREWOLF}  # Bloody Roar lifesteal below 40%
-    - {cap: clump_create,  score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: root,          score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: peel,          score: 1, evidence: SHAPE_W_TETHERBEAM} # (QW)
-    - {cap: buff_allies,   score: 1, evidence: SHAPE_Q_DAMAGE_AND_SHIELD}  # (QW)
-    - {cap: zone_control,  score: 1, evidence: SHAPE_W_DAMAGE_AOE} # (QW)
-    - {cap: slow,          score: 1, evidence: SHAPE_W_DAMAGE_AOE} # (QW)
-    - {cap: resist_shred,  score: 1, evidence: SHAPE_Q_CONE_MELEE} # (QW)
 
 - weapon: 2H_SHAPESHIFTER_SET1       # Prowling Staff — the stealth panther
   curated_as_of: 2026-08-12
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/shapeshifterstaff.yaml)
+  except:
+    - {cap: zone_control, evidence: SHAPE_W_DAMAGE_AOE}
   capabilities:
     - {cap: burst_st,      score: 2, evidence: SHAPESHIFT_PANTHER}  # pounce out of stealth
     - {cap: engage,        score: 2, evidence: SHAPESHIFT_PANTHER}  # On the Prowl invisibility opener (via override)
     - {cap: disengage,     score: 2, evidence: SHAPESHIFT_PANTHER}  # restealth and leave (via override)
-    - {cap: mobility,      score: 1, evidence: SHAPE_W_TETHERBEAM}  # (QW)
-    - {cap: clump_create,  score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: root,          score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: catch,         score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: peel,          score: 1, evidence: SHAPE_W_TETHERBEAM} # (QW)
-    - {cap: buff_allies,   score: 1, evidence: SHAPE_Q_DAMAGE_AND_SHIELD}  # (QW)
-    - {cap: slow,          score: 1, evidence: SHAPE_W_DAMAGE_AOE} # (QW)
-    - {cap: resist_shred,  score: 1, evidence: SHAPE_Q_CONE_MELEE} # (QW)
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_SHAPESHIFT_ATTACK_BUFF}
 
 - weapon: 2H_SHAPESHIFTER_SET3       # Primal Staff — the enrage bear
   curated_as_of: 2026-08-12
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/shapeshifterstaff.yaml)
+  except:
+    - {cap: self_sustain, evidence: PASSIVE_SHAPESHIFT_ATTACK_BUFF}
+    - {cap: mobility, evidence: SHAPE_W_TETHERBEAM}
   capabilities:
     - {cap: tankiness,     score: 2, evidence: WEAPON_STATS}   # Bear: "Defensive: high" bruiser frame
     - {cap: burst_aoe,     score: 1, evidence: SHAPESHIFT_BEAR}  # bear swipes
     - {cap: sustained_dps, score: 1, evidence: SHAPESHIFT_BEAR}  # Enrage ramps below 40% Health
     - {cap: self_sustain,  score: 1, evidence: SHAPESHIFT_BEAR}
-    - {cap: clump_create,  score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: root,          score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: catch,         score: 1, evidence: SHAPE_W_AREA_PULL}  # (QW)
-    - {cap: peel,          score: 1, evidence: SHAPE_W_TETHERBEAM} # (QW)
-    - {cap: buff_allies,   score: 1, evidence: SHAPE_Q_DAMAGE_AND_SHIELD}  # (QW)
-    - {cap: zone_control,  score: 1, evidence: SHAPE_W_DAMAGE_AOE} # (QW)
-    - {cap: slow,          score: 1, evidence: SHAPE_W_DAMAGE_AOE} # (QW)
-    - {cap: resist_shred,  score: 1, evidence: SHAPE_Q_CONE_MELEE} # (QW)

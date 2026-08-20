@@ -1,0 +1,17 @@
+# bow tree — shared Q/W/passive pool (8 weapons), extracted
+# 2026-08-20 from the per-weapon sheets (semantic-identity
+# restructure; every score unchanged). A row applies to every
+# bow weapon that can equip its evidence spell (WEAPON_STATS:
+# tree-wide), unless the weapon's sheet keeps its own row for the
+# same (cap, evidence) — a score override pending expert
+# adjudication — or lists the pair under `except:`.
+subcategory: bow
+capabilities:
+  - {cap: resist_shred, score: 1, evidence: DEADLYSHOT}     # Q: stacking -3% x3; Piercing Arrows passive (QW)
+  - {cap: catch, score: 1, evidence: GROUNDARROW}           # (QW)
+  - {cap: peel, score: 1, evidence: GROUNDARROW}            # (QW)
+  - {cap: root, score: 1, evidence: GROUNDARROW}            # W: Ray of Light (QW)
+  - {cap: disengage, score: 1, evidence: JUMPSHOT2}         # (QW)
+  - {cap: slow, score: 1, evidence: PASSIVE_SLOWPOISON}     # every AA slows; Q: Multishot
+  - {cap: mobility, score: 1, evidence: SPEEDSHOT2}         # (QW)
+  - {cap: sustained_dps, score: 2, evidence: WEAPON_STATS}  # bow AA pattern

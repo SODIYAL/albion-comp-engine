@@ -5,97 +5,71 @@
 - weapon: 2H_NATURESTAFF             # Great Nature Staff — reactive-armor healer
   curated_as_of: 2026-08-12
   role_hint: healer
+  # deliberate non-takes of tree-pool spells (see sheets/pools/naturestaff.yaml)
+  except:
+    - {cap: buff_allies, evidence: NATURERESILIENCE}
   capabilities:
     - {cap: heal_sustain, score: 2, evidence: BRIEROFLIFE}     # E: heal + heal-on-damage-taken armor
     - {cap: buff_allies,  score: 2, evidence: BRIEROFLIFE}     # +13% resistances on the target; W: Protection (QW)
     - {cap: peel,         score: 1, evidence: BRIEROFLIFE}     # armor on the focused ally
-    - {cap: cleanse,      score: 2, evidence: CLEANSEHEAL}     # (QW — conditional)
-    - {cap: heal_burst,   score: 1, evidence: CLEANSEHEAL}     # (QW)
-    - {cap: slow,         score: 1, evidence: THORNSAREA}      # (QW)
-    - {cap: zone_control, score: 1, evidence: THORNSAREA}      # (QW)
-    - {cap: knockback_displace, score: 1, evidence: BRAMBLESEED}  # (QW)
-    - {cap: sustained_dps, score: 1, evidence: THORNSAREA}     # (QW)
-    - {cap: self_sustain, score: 1, evidence: PASSIVE_ARMOR_CASTER_NATURESTAFF}
 
 - weapon: 2H_NATURESTAFF_KEEPER      # Rampant Staff — trail healer
   curated_as_of: 2026-08-12
   role_hint: healer
+  # deliberate non-takes of tree-pool spells (see sheets/pools/naturestaff.yaml)
+  except:
+    - {cap: heal_burst, evidence: CLEANSEHEAL}
   capabilities:
     - {cap: heal_sustain, score: 3, evidence: SPIRITANIMAL}    # E: healing trail, 14/s for allies standing on it
-    - {cap: cleanse,      score: 2, evidence: CLEANSEHEAL}     # (QW); E also cleanses DoTs on touch
     - {cap: heal_burst,   score: 1, evidence: SPIRITANIMAL}    # 110 on touch
-    - {cap: buff_allies,  score: 2, evidence: NATURERESILIENCE}  # (QW)
-    - {cap: slow,         score: 1, evidence: THORNSAREA}      # (QW)
-    - {cap: zone_control, score: 1, evidence: THORNSAREA}      # (QW)
-    - {cap: knockback_displace, score: 1, evidence: BRAMBLESEED}  # (QW)
-    - {cap: sustained_dps, score: 1, evidence: THORNSAREA}     # (QW)
-    - {cap: self_sustain, score: 1, evidence: PASSIVE_ARMOR_CASTER_NATURESTAFF}
 
 - weapon: 2H_WILDSTAFF               # Wild Staff — the well healer
   curated_as_of: 2026-08-12
   role_hint: healer
   capabilities:
     - {cap: heal_sustain, score: 3, evidence: WELLOFLIFE2}     # E: 69/s to 20 allies inside the well
-    - {cap: heal_burst,   score: 1, evidence: CLEANSEHEAL}     # (QW)
-    - {cap: cleanse,      score: 2, evidence: CLEANSEHEAL}     # (QW — conditional)
-    - {cap: buff_allies,  score: 2, evidence: NATURERESILIENCE}  # (QW)
-    - {cap: slow,         score: 1, evidence: THORNSAREA}      # (QW)
-    - {cap: zone_control, score: 1, evidence: THORNSAREA}      # (QW)
-    - {cap: knockback_displace, score: 1, evidence: BRAMBLESEED}  # (QW)
-    - {cap: sustained_dps, score: 1, evidence: THORNSAREA}     # (QW)
-    - {cap: self_sustain, score: 1, evidence: PASSIVE_ARMOR_CASTER_NATURESTAFF}
 
 - weapon: MAIN_NATURESTAFF           # Nature Staff (1H) — self-centred group healer
   curated_as_of: 2026-08-12
   role_hint: healer
+  # deliberate non-takes of tree-pool spells (see sheets/pools/naturestaff.yaml)
+  except:
+    - {cap: heal_burst, evidence: CLEANSEHEAL}
+    - {cap: sustained_dps, evidence: THORNSAREA}
   capabilities:
     - {cap: heal_burst,   score: 2, evidence: CIRCLEOFLIFE}    # E: 107 instant to 15 allies around you
     - {cap: heal_sustain, score: 2, evidence: CIRCLEOFLIFE}    # rejuvenation charge engine
     - {cap: root,         score: 1, evidence: CIRCLEOFLIFE}    # thorn-charged enemies get rooted
-    - {cap: cleanse,      score: 2, evidence: CLEANSEHEAL}     # (QW — conditional)
-    - {cap: buff_allies,  score: 2, evidence: NATURERESILIENCE}  # (QW)
-    - {cap: slow,         score: 1, evidence: THORNSAREA}      # (QW)
-    - {cap: zone_control, score: 1, evidence: THORNSAREA}      # (QW)
-    - {cap: knockback_displace, score: 1, evidence: BRAMBLESEED}  # (QW)
-    - {cap: self_sustain, score: 1, evidence: PASSIVE_ARMOR_CASTER_NATURESTAFF}
 
 - weapon: MAIN_NATURESTAFF_AVALON    # Ironroot Staff — the soul-link peeler
   curated_as_of: 2026-08-12
   role_hint: healer
+  # deliberate non-takes of tree-pool spells (see sheets/pools/naturestaff.yaml)
+  except:
+    - {cap: sustained_dps, evidence: THORNSAREA}
   capabilities:
     - {cap: peel,         score: 2, evidence: SOUL_LINK}       # E: redirects HALF the focus damage off an ally (override)
     - {cap: heal_sustain, score: 2, evidence: SOUL_LINK}       # link also transfers 75% of healing; W pool
-    - {cap: cleanse,      score: 2, evidence: CLEANSEHEAL}     # (QW — conditional)
-    - {cap: heal_burst,   score: 1, evidence: CLEANSEHEAL}     # (QW)
-    - {cap: buff_allies,  score: 2, evidence: NATURERESILIENCE}  # (QW)
-    - {cap: slow,         score: 1, evidence: THORNSAREA}      # (QW)
-    - {cap: zone_control, score: 1, evidence: THORNSAREA}      # (QW)
-    - {cap: knockback_displace, score: 1, evidence: BRAMBLESEED}  # (QW)
-    - {cap: self_sustain, score: 1, evidence: PASSIVE_ARMOR_CASTER_NATURESTAFF}
 
 - weapon: MAIN_NATURESTAFF_CRYSTAL   # Forgebark Staff — toggle shield/root healer
   curated_as_of: 2026-08-12
   role_hint: healer
+  # deliberate non-takes of tree-pool spells (see sheets/pools/naturestaff.yaml)
+  except:
+    - {cap: buff_allies, evidence: NATURERESILIENCE}
+    - {cap: sustained_dps, evidence: THORNSAREA}
   capabilities:
     - {cap: heal_sustain, score: 2, evidence: DUAL_NATURE}     # E: Fortify — shields + 32/0.85s to 10 targets
     - {cap: buff_allies,  score: 1, evidence: DUAL_NATURE}     # 171 damage shields
     - {cap: root,         score: 1, evidence: DUAL_NATURE}     # E: Ensnare toggle — 2.25s AoE root
-    - {cap: heal_burst,   score: 1, evidence: CLEANSEHEAL}     # (QW)
-    - {cap: cleanse,      score: 2, evidence: CLEANSEHEAL}     # (QW — conditional)
-    - {cap: slow,         score: 1, evidence: THORNSAREA}      # (QW)
-    - {cap: zone_control, score: 1, evidence: THORNSAREA}      # (QW)
-    - {cap: knockback_displace, score: 1, evidence: BRAMBLESEED}  # (QW)
-    - {cap: self_sustain, score: 1, evidence: PASSIVE_ARMOR_CASTER_NATURESTAFF}
 
 - weapon: MAIN_NATURESTAFF_KEEPER    # Druidic Staff — seed-burst healer
   curated_as_of: 2026-08-12
   role_hint: healer
+  # deliberate non-takes of tree-pool spells (see sheets/pools/naturestaff.yaml)
+  except:
+    - {cap: heal_burst, evidence: CLEANSEHEAL}
+    - {cap: sustained_dps, evidence: THORNSAREA}
   capabilities:
     - {cap: heal_burst,   score: 2, evidence: NATURE_ULTIMATE_SINGLE}  # E: 208 delayed seed, recastable
     - {cap: heal_sustain, score: 2, evidence: NATURE_ULTIMATE_SINGLE}  # seeds woven into HoT rotation
-    - {cap: cleanse,      score: 2, evidence: CLEANSEHEAL}     # (QW — conditional)
-    - {cap: buff_allies,  score: 2, evidence: NATURERESILIENCE}  # (QW)
-    - {cap: slow,         score: 1, evidence: THORNSAREA}      # (QW)
-    - {cap: zone_control, score: 1, evidence: THORNSAREA}      # (QW)
-    - {cap: knockback_displace, score: 1, evidence: BRAMBLESEED}  # (QW)
-    - {cap: self_sustain, score: 1, evidence: PASSIVE_ARMOR_CASTER_NATURESTAFF}

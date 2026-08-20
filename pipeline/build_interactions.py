@@ -101,6 +101,12 @@ def main():
             for c in entry.get("capabilities", []):
                 if isinstance(c, dict) and c.get("evidence") and c.get("cap"):
                     caps_by_spell.setdefault(c["evidence"], set()).add(c["cap"])
+    # tree-pool rows (sheets/pools/) — same spell->cap evidence, shared per line
+    for path in glob.glob(os.path.join(HERE, "sheets", "pools", "*.yaml")):
+        doc = yaml.safe_load(open(path, encoding="utf-8")) or {}
+        for c in doc.get("capabilities", []):
+            if isinstance(c, dict) and c.get("evidence") and c.get("cap"):
+                caps_by_spell.setdefault(c["evidence"], set()).add(c["cap"])
 
     equippable_on = {}
     for wk, line in weapon_lines.items():

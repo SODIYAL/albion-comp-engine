@@ -209,6 +209,41 @@ snippets only); albionfreemarket unreachable from this network today.
   targets, cap 56% at 8 targets, applied after buffs, bypasses the ~150%
   damage soft cap. What remains per-spell is only eligibility (→ Q9).
 
+## Expert ruling (2026-08-20) — geometric AoE utility scaling
+
+Trigger: Soulscythe (catch 1, from Tornado's 80% AoE slow) ranked level with
+Battleaxe (catch 1, from a self-haste W) as a catch alternative in a large
+comp. The cheap fix (bump Soulscythe to catch 2) was REJECTED as papering
+over the structural gap: **the engine has no multi-target term for utility
+capabilities at all** — an AoE slow/stun/peel counts identically to a
+single-target one at every fight size.
+
+Four decisions, all confirmed by the expert:
+
+1. **Model = geometric + escalation.** An AoE effect's supply scales with
+   expected targets hit (slowing 8 people is 8 targets' worth of work —
+   independent of any in-game bonus); escalation-eligible spells get the
+   in-game bonus ON TOP. Single-target effects stay flat. Note the in-game
+   CC Escalation covers only AoE root/stun/silence DURATION — slows and
+   knockbacks get no in-game bonus, but still scale geometrically.
+2. **Expected targets = style clump × spell radius.** The style/size clump
+   physics we already have (expected_aoe_targets × count_mult) capped by
+   what the spell's actual area can plausibly hit — per-spell shape/radius
+   already extracted in out/spell_index.json (Tornado: 7m circle, 25m line,
+   max_targets null).
+3. **Catch quality has four factors, ALL count** (magnitude-ladder rebuild):
+   AoE CC on the clump, CC-resist-ignoring displacement (Tornado air-throw),
+   dismount potential (mounted Resilience column; forced-dismount immunity
+   gone at 21+), self gap-close/speed (the axe-line kind — real but flat,
+   does not scale with fight size).
+4. **Q9 approved: extract per-spell escalation eligibility from ao-bin-dumps**
+   (wiki lists are explicitly non-exhaustive); wiki 23.000.1 lists serve as
+   validation, not source of truth.
+
+Wiki verification (2026-08-20): damage curve confirmed 8%/target cap 56%@8;
+CC Escalation duration curve is NOT published anywhere on the wiki — Q8 needs
+dumps or in-game measurement, not more searching.
+
 ## Questions — still open
 
 - [ ] **Q2 — Enemy model.** Resilience needs "how many of OUR players focus

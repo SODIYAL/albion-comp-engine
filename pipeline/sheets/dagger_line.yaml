@@ -4,34 +4,26 @@
 - weapon: 2H_DAGGERPAIR_CRYSTAL      # Twin Slayers — dagger-ring AoE assassin
   curated_as_of: 2026-08-12
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/dagger.yaml)
+  except:
+    - {cap: mobility, evidence: QDASH}
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: burst_aoe,     score: 2, evidence: CRYSTAL_DAGGER_BLADE_RING}  # E: 6-dagger ring, pierce + DoT ring
     - {cap: mobility,      score: 2, evidence: CRYSTAL_DAGGER_BLADE_RING}  # MS on cast + dagger pool dashes
-    - {cap: catch,         score: 1, evidence: SKILLSHOT_TELEPORT}  # (QW)
-    - {cap: stun,          score: 1, evidence: SKILLSHOT_TELEPORT}  # (QW)
-    - {cap: peel,          score: 1, evidence: SKILLSHOT_TELEPORT}  # (QW)
-    - {cap: engage,        score: 1, evidence: QDASH}             # (QW)
-    - {cap: disengage,     score: 1, evidence: GROUNDDASH}        # (QW)
-    - {cap: heal_reduction, score: 1, evidence: DEEPCUTS}         # (QW)
-    - {cap: resist_shred,  score: 1, evidence: SUNDERARMOR2}      # (QW)
-    - {cap: sustained_dps, score: 1, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_DAGGER}
 
 - weapon: 2H_DAGGER_KATAR_AVALON     # Bridled Fury — hit-and-fade burster
   curated_as_of: 2026-08-12
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/dagger.yaml)
+  except:
+    - {cap: disengage, evidence: GROUNDDASH}
+    - {cap: mobility, evidence: QDASH}
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: burst_st,      score: 2, evidence: BACK_SLASH}        # E: charge-scaled cone up to 238
     - {cap: disengage,     score: 2, evidence: BACK_SLASH}        # the E LEAPS YOU BACKWARDS 8m as it hits
     - {cap: mobility,      score: 2, evidence: BACK_SLASH}        # back-leap + dagger pool dashes
-    - {cap: catch,         score: 1, evidence: SKILLSHOT_TELEPORT}  # (QW)
-    - {cap: stun,          score: 1, evidence: SKILLSHOT_TELEPORT}  # (QW)
-    - {cap: peel,          score: 1, evidence: SKILLSHOT_TELEPORT}  # (QW)
-    - {cap: engage,        score: 1, evidence: QDASH}             # (QW)
-    - {cap: heal_reduction, score: 1, evidence: DEEPCUTS}         # (QW)
-    - {cap: resist_shred,  score: 1, evidence: SUNDERARMOR2}      # (QW)
-    - {cap: sustained_dps, score: 1, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_DAGGER}
 
 - weapon: 2H_IRONGAUNTLETS_HELL      # Black Hands — combo striker
   curated_as_of: 2026-08-12
@@ -70,31 +62,23 @@
 - weapon: MAIN_DAGGER                # Dagger (1H) — lifesteal AA skirmisher
   curated_as_of: 2026-08-12
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/dagger.yaml)
+  except:
+    - {cap: sustained_dps, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}
+    - {cap: self_sustain, evidence: PASSIVE_HEALTHCHANCE_DAGGER}
+    - {cap: mobility, evidence: QDASH}
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: sustained_dps, score: 2, evidence: BLOODTHIRSTYBLADE}  # E: +50 bonus damage per AA steroid
     - {cap: self_sustain,  score: 2, evidence: BLOODTHIRSTYBLADE}  # steals health via bonus damage (self-only)
     - {cap: mobility,      score: 2, evidence: BLOODTHIRSTYBLADE}  # +30% MS while active + pool dashes
-    - {cap: catch,         score: 1, evidence: SKILLSHOT_TELEPORT}  # (QW)
-    - {cap: stun,          score: 1, evidence: SKILLSHOT_TELEPORT}  # (QW)
-    - {cap: peel,          score: 1, evidence: SKILLSHOT_TELEPORT}  # (QW)
-    - {cap: engage,        score: 1, evidence: QDASH}             # (QW)
-    - {cap: disengage,     score: 1, evidence: GROUNDDASH}        # (QW)
-    - {cap: heal_reduction, score: 1, evidence: DEEPCUTS}         # (QW)
-    - {cap: resist_shred,  score: 1, evidence: SUNDERARMOR2}      # (QW)
 
 - weapon: MAIN_DAGGER_HELL           # Demonfang — blood-cone caster dagger
   curated_as_of: 2026-08-12
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/dagger.yaml)
+  except:
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: burst_aoe,     score: 2, evidence: BLOOD_BLADE}       # E: 130 cone, recastable x3 (self max-HP cost)
     - {cap: burst_st,      score: 1, evidence: BLOOD_BLADE}       # three cones into one target
-    - {cap: mobility,      score: 2, evidence: QDASH}             # dagger pool dashes (QW)
-    - {cap: catch,         score: 1, evidence: SKILLSHOT_TELEPORT}  # (QW)
-    - {cap: stun,          score: 1, evidence: SKILLSHOT_TELEPORT}  # (QW)
-    - {cap: peel,          score: 1, evidence: SKILLSHOT_TELEPORT}  # (QW)
-    - {cap: engage,        score: 1, evidence: QDASH}             # (QW)
-    - {cap: disengage,     score: 1, evidence: GROUNDDASH}        # (QW)
-    - {cap: heal_reduction, score: 1, evidence: DEEPCUTS}         # (QW)
-    - {cap: resist_shred,  score: 1, evidence: SUNDERARMOR2}      # (QW)
-    - {cap: sustained_dps, score: 1, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}
-    - {cap: self_sustain,  score: 1, evidence: PASSIVE_HEALTHCHANCE_DAGGER}

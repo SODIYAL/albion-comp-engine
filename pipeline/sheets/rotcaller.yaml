@@ -24,9 +24,4 @@
     - {cap: heal_reduction, score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # E: negates Healing Received 2s, AoE
     - {cap: knockback_displace, score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # E: 6m AoE, ignores CC resistance
     - {cap: peel,           score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # the CC-resist-ignoring shove IS the peel
-    - {cap: root,           score: 1, evidence: CURSENOVA}          # W: Desecrate — 2.6s AoE root (QW)
-    - {cap: slow,           score: 1, evidence: CURSED_SPLAT}       # Q: Cursed Tar puddle (QW)
-    - {cap: zone_control,   score: 1, evidence: CURSED_SPLAT}       # tar puddle + Desecrate wave — modest (QW)
-    - {cap: resist_shred,   score: 1, evidence: ARMORPIERCER}       # W: -17% for 4s — strongest shred yet, W option (QW)
-    - {cap: buff_allies,    score: 1, evidence: CURSEDHANDS_STACKUP}  # W: Grudge — ally AA enchant (QW, via override)
     - {cap: sustained_dps,  score: 1, evidence: CURSEDOT}           # Q: stacking Vile Curse DoTs; 1H damage budget

@@ -20,15 +20,11 @@
 - weapon: MAIN_FROSTSTAFF            # Frost Staff — AoE root mage
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: range
+  # deliberate non-takes of tree-pool spells (see sheets/pools/froststaff.yaml)
+  except:
+    - {cap: root, evidence: PASSIVE_FROST}
   capabilities:
     - {cap: root,          score: 3, evidence: FREEZINGWIND}        # E: 2.5s AoE root cone — the signature
     - {cap: peel,          score: 2, evidence: FREEZINGWIND}        # root divers off the backline; enemy-directed
     - {cap: catch,         score: 2, evidence: FREEZINGWIND}        # 2.5s root = a caught runner; Q: Frostbite stacks
-    - {cap: zone_control,  score: 2, evidence: FROSTBOMB_CASTSLOW}  # W: Frost Bomb + Q: Frozen Surge ground slows (QW)
-    - {cap: slow,          score: 2, evidence: FROSTBOMB_CASTSLOW}  # nearly every Q/W in the pool slows (QW)
     - {cap: burst_aoe,     score: 1, evidence: FREEZINGWIND}        # 200 cone + Q: Ice Shard; 1H damage budget
-    - {cap: stun,          score: 1, evidence: FROSTNOVA}           # W: Frost Nova AoE stun; Q: Frostbite stacks (QW)
-    - {cap: disengage,     score: 1, evidence: FROSTNOVA}           # W: teleport + brief immunity (QW)
-    - {cap: resist_shred,  score: 1, evidence: FROST_LANCE}         # W: -12% resistances for 3s (QW)
-    - {cap: buff_allies,   score: 1, evidence: ICE_SCULPTURE}       # W: Obelisk +20% dmg & CDR to 10 allies (QW)
-    - {cap: sustained_dps, score: 1, evidence: WEAPON_STATS}        # kite-and-poke pattern

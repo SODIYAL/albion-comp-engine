@@ -12,12 +12,4 @@
   role_hint: healer
   capabilities:
     - {cap: heal_sustain,       score: 3, evidence: ROTTENVINES}    # E: Elevated Nature — channeled group heal aura
-    - {cap: heal_burst,         score: 1, evidence: CLEANSEHEAL}    # W: heals on cleanse, scales with charges
-    - {cap: cleanse,            score: 2, evidence: CLEANSEHEAL}    # W: AoE removes all CC + debuffs (QW — conditional)
-    - {cap: buff_allies,        score: 2, evidence: NATURERESILIENCE}  # W: resistances + healing received
     - {cap: mobility,           score: 1, evidence: ROTTENVINES}    # E: self move-speed while channeling
-    - {cap: slow,               score: 1, evidence: THORNSAREA}     # Q: Thorn Growth
-    - {cap: zone_control,       score: 1, evidence: THORNSAREA}     # Q: persistent damaging area
-    - {cap: knockback_displace, score: 1, evidence: BRAMBLESEED}    # W: enemy-directed line knockback
-    - {cap: sustained_dps,      score: 1, evidence: THORNSAREA}
-    - {cap: self_sustain,       score: 1, evidence: PASSIVE_ARMOR_CASTER_NATURESTAFF}  # PASSIVE: Calmness

@@ -1,0 +1,19 @@
+# shapeshifterstaff tree — shared Q/W/passive pool (8 weapons), extracted
+# 2026-08-20 from the per-weapon sheets (semantic-identity
+# restructure; every score unchanged). A row applies to every
+# shapeshifterstaff weapon that can equip its evidence spell (WEAPON_STATS:
+# tree-wide), unless the weapon's sheet keeps its own row for the
+# same (cap, evidence) — a score override pending expert
+# adjudication — or lists the pair under `except:`.
+subcategory: shapeshifterstaff
+capabilities:
+  - {cap: self_sustain, score: 1, evidence: PASSIVE_SHAPESHIFT_ATTACK_BUFF}  # Altered Beast HP stacks
+  - {cap: resist_shred, score: 1, evidence: SHAPE_Q_CONE_MELEE}              # Q: -2% x3 stacks (QW)
+  - {cap: buff_allies, score: 1, evidence: SHAPE_Q_DAMAGE_AND_SHIELD}        # Q: 150 absorb shield on 5 allies (QW)
+  - {cap: catch, score: 1, evidence: SHAPE_W_AREA_PULL}                      # pull + root = a caught runner (QW)
+  - {cap: clump_create, score: 1, evidence: SHAPE_W_AREA_PULL}               # W: tendrils pull up to 5 enemies to you (QW)
+  - {cap: root, score: 1, evidence: SHAPE_W_AREA_PULL}                       # same cast: 1.35s root (QW)
+  - {cap: slow, score: 1, evidence: SHAPE_W_DAMAGE_AOE}                      # -10% inside the cloud — weak (QW)
+  - {cap: zone_control, score: 1, evidence: SHAPE_W_DAMAGE_AOE}              # W: Distortion cloud, 3s DoT + slow (QW)
+  - {cap: mobility, score: 1, evidence: SHAPE_W_TETHERBEAM}                  # W: dash-to-enemy tether (QW)
+  - {cap: peel, score: 1, evidence: SHAPE_W_TETHERBEAM}                      # W: tether-pull a party ally OUT; Polymorph a diver (QW)

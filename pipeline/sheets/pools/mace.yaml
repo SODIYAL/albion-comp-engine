@@ -1,0 +1,15 @@
+# mace tree — shared Q/W/passive pool (8 weapons), extracted
+# 2026-08-20 from the per-weapon sheets (semantic-identity
+# restructure; every score unchanged). A row applies to every
+# mace weapon that can equip its evidence spell (WEAPON_STATS:
+# tree-wide), unless the weapon's sheet keeps its own row for the
+# same (cap, evidence) — a score override pending expert
+# adjudication — or lists the pair under `except:`.
+subcategory: mace
+capabilities:
+  - {cap: engage, score: 1, evidence: CHARGE_ROOT}          # W: Snare Charge (QW)
+  - {cap: root, score: 1, evidence: CHARGE_ROOT}            # Snare Charge
+  - {cap: peel, score: 2, evidence: GUARDRUNE}              # ally stun/knockback immunity
+  - {cap: slow, score: 1, evidence: SACRED_GROUND}          # (QW)
+  - {cap: zone_control, score: 1, evidence: SACRED_GROUND}  # (QW)
+  - {cap: tankiness, score: 2, evidence: WEAPON_STATS}

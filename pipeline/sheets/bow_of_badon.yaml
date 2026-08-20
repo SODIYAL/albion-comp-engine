@@ -11,12 +11,4 @@
   role_hint: range
   capabilities:
     - {cap: zone_control,  score: 2, evidence: LIGHTNING_ARROW}    # E: 5s stormcloud, DoT on leavers (Longbow zone parity)
-    - {cap: sustained_dps, score: 2, evidence: WEAPON_STATS}       # bow AA pattern + zone ticks
     - {cap: burst_aoe,     score: 1, evidence: LIGHTNING_ARROW}    # 21 every 0.3 in the cloud — pressure, not a bomb
-    - {cap: root,          score: 1, evidence: GROUNDARROW}        # W: Ray of Light (QW)
-    - {cap: catch,         score: 1, evidence: GROUNDARROW}        # (QW)
-    - {cap: peel,          score: 1, evidence: GROUNDARROW}        # (QW)
-    - {cap: slow,          score: 1, evidence: PASSIVE_SLOWPOISON} # every AA slows; Q: Multishot, W: Frost Shot
-    - {cap: resist_shred,  score: 1, evidence: DEADLYSHOT}         # Q: stacking -3% x3; Piercing Arrows passive (QW)
-    - {cap: mobility,      score: 1, evidence: SPEEDSHOT2}         # W: +30% MS (QW)
-    - {cap: disengage,     score: 1, evidence: JUMPSHOT2}          # W: Frost Shot self-knockback escape (QW)

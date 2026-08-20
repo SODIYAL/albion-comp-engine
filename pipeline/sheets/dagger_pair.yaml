@@ -19,16 +19,13 @@
 - weapon: 2H_DAGGERPAIR              # Dagger Pair — charge-burst assassin
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: melee
+  # deliberate non-takes of tree-pool spells (see sheets/pools/dagger.yaml)
+  except:
+    - {cap: heal_reduction, evidence: DEEPCUTS}
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: burst_st,       score: 3, evidence: EXECUTEDAGGER}      # E: charge-scaled devastating blow + bleed
     - {cap: sustained_dps,  score: 2, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # dagger AA passives + spirit stacks
-    - {cap: mobility,       score: 2, evidence: QDASH}              # Q: Deadly Swipe; W: Dash / Chain Slash (QW)
     - {cap: catch,          score: 2, evidence: SKILLSHOT_TELEPORT} # W: Shadow Edge; dashes (QW)
     - {cap: heal_reduction, score: 1, evidence: EXECUTEDAGGER}      # E: reduces Healing Received; W: Forbidden Stab
     - {cap: execute,        score: 1, evidence: EXECUTEDAGGER}      # kill-confirm role; charge-scaled, not health-scaled
-    - {cap: resist_shred,   score: 1, evidence: SUNDERARMOR2}       # Q: stacking -4% x3 — feeds the E (QW)
-    - {cap: engage,         score: 1, evidence: QDASH}              # leap in (QW)
-    - {cap: disengage,      score: 1, evidence: GROUNDDASH}         # W: Dash; Chain Slash iframes (QW)
-    - {cap: stun,           score: 1, evidence: SKILLSHOT_TELEPORT} # W: 1s skillshot (QW)
-    - {cap: peel,           score: 1, evidence: SKILLSHOT_TELEPORT} # (QW)
-    - {cap: self_sustain,   score: 1, evidence: PASSIVE_HEALTHCHANCE_DAGGER}  # PASSIVE: Life Leech

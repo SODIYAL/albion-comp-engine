@@ -4,29 +4,23 @@
 - weapon: 2H_BOW_CRYSTAL             # Skystrider Bow — untargetable perch artillery
   curated_as_of: 2026-08-12
   role_hint: range
+  # deliberate non-takes of tree-pool spells (see sheets/pools/bow.yaml)
+  except:
+    - {cap: disengage, evidence: JUMPSHOT2}
+    - {cap: mobility, evidence: SPEEDSHOT2}
   capabilities:
     - {cap: disengage,     score: 2, evidence: AIR_RAID}          # E: leap to an air foothold, UNTARGETABLE 3.75s
     - {cap: burst_aoe,     score: 2, evidence: AIR_RAID}          # 123 AoE bolts, recastable x3
     - {cap: mobility,      score: 2, evidence: AIR_RAID}          # the leap repositions; W: Speed Shot
-    - {cap: sustained_dps, score: 2, evidence: WEAPON_STATS}      # bow AA pattern
-    - {cap: root,          score: 1, evidence: GROUNDARROW}       # (QW)
-    - {cap: catch,         score: 1, evidence: GROUNDARROW}       # (QW)
-    - {cap: peel,          score: 1, evidence: GROUNDARROW}       # (QW)
-    - {cap: slow,          score: 1, evidence: PASSIVE_SLOWPOISON}
-    - {cap: resist_shred,  score: 1, evidence: DEADLYSHOT}        # (QW)
 
 - weapon: 2H_LONGBOW_UNDEAD          # Whispering Bow — glass-cannon AA bow
   curated_as_of: 2026-08-12
   role_hint: range
+  # deliberate non-takes of tree-pool spells (see sheets/pools/bow.yaml)
+  except:
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: sustained_dps, score: 3, evidence: UNDEADARROWS}      # E: +35% AA range/speed +50 bonus damage per AA
-    - {cap: root,          score: 1, evidence: GROUNDARROW}       # (QW)
-    - {cap: catch,         score: 1, evidence: GROUNDARROW}       # (QW)
-    - {cap: peel,          score: 1, evidence: GROUNDARROW}       # (QW)
-    - {cap: slow,          score: 1, evidence: PASSIVE_SLOWPOISON}
-    - {cap: resist_shred,  score: 1, evidence: DEADLYSHOT}        # (QW)
-    - {cap: mobility,      score: 1, evidence: SPEEDSHOT2}        # (QW)
-    - {cap: disengage,     score: 1, evidence: JUMPSHOT2}         # (QW)
     # E costs -35% own Defense: the glass side of the cannon, unscoreable
 
 - weapon: 2H_WARBOW                  # Warbow — skillshot nuke bow
@@ -34,11 +28,3 @@
   role_hint: range
   capabilities:
     - {cap: burst_st,      score: 2, evidence: SKILLSHOT_STUN}    # E: Magic Arrow 232, CD refund on hit
-    - {cap: sustained_dps, score: 2, evidence: WEAPON_STATS}      # bow AA pattern between arrows
-    - {cap: root,          score: 1, evidence: GROUNDARROW}       # (QW)
-    - {cap: catch,         score: 1, evidence: GROUNDARROW}       # (QW)
-    - {cap: peel,          score: 1, evidence: GROUNDARROW}       # (QW)
-    - {cap: slow,          score: 1, evidence: PASSIVE_SLOWPOISON}
-    - {cap: resist_shred,  score: 1, evidence: DEADLYSHOT}        # (QW)
-    - {cap: mobility,      score: 1, evidence: SPEEDSHOT2}        # (QW)
-    - {cap: disengage,     score: 1, evidence: JUMPSHOT2}         # (QW)

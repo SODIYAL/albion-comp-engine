@@ -11,13 +11,13 @@
 - weapon: 2H_BOW                     # Bow — the pure kiter
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
   role_hint: range
+  # deliberate non-takes of tree-pool spells (see sheets/pools/bow.yaml)
+  except:
+    - {cap: disengage, evidence: JUMPSHOT2}
+    - {cap: mobility, evidence: SPEEDSHOT2}
+    - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
     - {cap: sustained_dps, score: 3, evidence: SPEEDARCHER_KITE}  # E: AA steroid, anti-proximity kite design
     - {cap: mobility,      score: 2, evidence: SPEEDARCHER_KITE}  # E recast dash; W: Speed Shot (QW)
     - {cap: burst_st,      score: 1, evidence: SPEEDARCHER_KITE}  # 280% arrows front-load the window
     - {cap: disengage,     score: 1, evidence: SPEEDARCHER_KITE}  # the dash resets kite distance; W: Frost Shot
-    - {cap: root,          score: 1, evidence: GROUNDARROW}       # W: Ray of Light (QW)
-    - {cap: catch,         score: 1, evidence: GROUNDARROW}       # (QW)
-    - {cap: peel,          score: 1, evidence: GROUNDARROW}       # (QW)
-    - {cap: slow,          score: 1, evidence: PASSIVE_SLOWPOISON}  # every AA slows; Q: Multishot
-    - {cap: resist_shred,  score: 1, evidence: DEADLYSHOT}        # Q: stacking -3% x3; Piercing Arrows passive (QW)

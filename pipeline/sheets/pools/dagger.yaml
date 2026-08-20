@@ -1,0 +1,20 @@
+# dagger tree — shared Q/W/passive pool (8 weapons), extracted
+# 2026-08-20 from the per-weapon sheets (semantic-identity
+# restructure; every score unchanged). A row applies to every
+# dagger weapon that can equip its evidence spell (WEAPON_STATS:
+# tree-wide), unless the weapon's sheet keeps its own row for the
+# same (cap, evidence) — a score override pending expert
+# adjudication — or lists the pair under `except:`.
+subcategory: dagger
+capabilities:
+  - {cap: heal_reduction, score: 1, evidence: DEEPCUTS}                     # W: Forbidden Stab — "Negates the target's Healing
+  - {cap: disengage, score: 1, evidence: GROUNDDASH}                        # W: Dash out; Chain Slash iframes (QW)
+  - {cap: sustained_dps, score: 1, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # AA-speed dagger passives
+  - {cap: self_sustain, score: 1, evidence: PASSIVE_HEALTHCHANCE_DAGGER}    # PASSIVE: Life Leech
+  - {cap: engage, score: 1, evidence: QDASH}                                # leap in (QW)
+  - {cap: mobility, score: 2, evidence: QDASH}                              # Q: Deadly Swipe; W: Dash / Chain Slash (QW)
+  - {cap: catch, score: 1, evidence: SKILLSHOT_TELEPORT}                    # (QW)
+  - {cap: peel, score: 1, evidence: SKILLSHOT_TELEPORT}                     # the stun works defensively too (QW)
+  - {cap: stun, score: 1, evidence: SKILLSHOT_TELEPORT}                     # W: Shadow Edge — 1s skillshot stun (QW)
+  - {cap: resist_shred, score: 1, evidence: SUNDERARMOR2}                   # Q: stacking -4% x3 (QW)
+  - {cap: sustained_dps, score: 1, evidence: WEAPON_STATS}                  # stacking damage buffs, single-target melee pattern

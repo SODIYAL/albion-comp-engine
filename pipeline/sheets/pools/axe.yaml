@@ -1,0 +1,18 @@
+# axe tree — shared Q/W/passive pool (8 weapons), extracted
+# 2026-08-20 from the per-weapon sheets (semantic-identity
+# restructure; every score unchanged). A row applies to every
+# axe weapon that can equip its evidence spell (WEAPON_STATS:
+# tree-wide), unless the weapon's sheet keeps its own row for the
+# same (cap, evidence) — a score override pending expert
+# adjudication — or lists the pair under `except:`.
+subcategory: axe
+capabilities:
+  - {cap: catch, score: 1, evidence: AXEBOOST}                         # (QW)
+  - {cap: resist_shred, score: 1, evidence: AXESMASH}                  # (QW)
+  - {cap: buff_allies, score: 1, evidence: AXE_CHARGE}                 # (QW)
+  - {cap: engage, score: 1, evidence: AXE_CHARGE}                      # (QW)
+  - {cap: self_sustain, score: 1, evidence: PASSIVE_HEALTHCHANCE_AXE}  # PASSIVE: Life Leech
+  - {cap: mobility, score: 1, evidence: RENDINGCOMBO}                  # (QW)
+  - {cap: root, score: 1, evidence: RENDINGCOMBO}                      # (QW)
+  - {cap: heal_reduction, score: 1, evidence: RENDINGSTRIKE}           # bleed cap (QW)
+  - {cap: sustained_dps, score: 2, evidence: RENDINGSTRIKE}            # bleeds (QW)
