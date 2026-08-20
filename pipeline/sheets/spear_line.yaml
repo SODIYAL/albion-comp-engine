@@ -30,7 +30,7 @@
   capabilities:
     - {cap: root,          score: 4, evidence: HALBERDSMASH}     # E: 2.79s single-target root
     - {cap: catch,         score: 4, evidence: HALBERDSMASH}     # root + Cripple anti-kite (QW)
-    - {cap: peel,          score: 2, evidence: HALBERDSMASH}     # root the diver
+    - {cap: peel,          score: 3, evidence: HALBERDSMASH}     # root the diver
 
 - weapon: 2H_TRIDENT_UNDEAD          # Trinity Spear — immune-leap AoE rooter
   curated_as_of: 2026-08-12
@@ -46,7 +46,7 @@
     - {cap: root,          score: 4, evidence: TRIDENTTHROW}     # 2.65s AoE root on impact
     - {cap: mobility,      score: 4, evidence: TRIDENTTHROW}     # the leap; Inner Focus (QW)
     - {cap: catch,         score: 4, evidence: TRIDENTTHROW}     # leap + root
-    - {cap: buff_allies,   score: 2, evidence: TRIDENTTHROW}     # soul mist buffs allies inside
+    - {cap: buff_allies,   score: 3, evidence: TRIDENTTHROW}     # soul mist buffs allies inside
     - {cap: peel,          score: 2, evidence: TRIDENTTHROW}     # root the divers
     - {cap: disengage,     score: 2, evidence: TRIDENTTHROW}     # immune leap out
 
@@ -74,7 +74,7 @@
   capabilities:
     - {cap: stun,          score: 4, evidence: SPEARTHROW}       # E: 1.75s AoE shock on impact
     - {cap: catch,         score: 4, evidence: SPEARTHROW}       # ranged stun + Cripple (QW)
-    - {cap: burst_aoe,     score: 2, evidence: SPEARTHROW}       # 210 in 4m
+    - {cap: burst_aoe,     score: 3, evidence: SPEARTHROW}       # 210 in 4m
     - {cap: peel,          score: 2, evidence: SPEARTHROW}       # stun the diver
 
 - weapon: MAIN_SPEAR_LANCE_AVALON    # Daybreaker — the purge lance

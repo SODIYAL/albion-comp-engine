@@ -8,7 +8,7 @@
 subcategory: mace
 capabilities:
   - {cap: engage, score: 2, evidence: CHARGE_ROOT}          # W: Snare Charge (QW)
-  - {cap: root, score: 2, evidence: CHARGE_ROOT}            # Snare Charge
+  - {cap: root, score: 5, evidence: CHARGE_ROOT}            # Snare Charge
   - {cap: peel, score: 4, evidence: GUARDRUNE}              # ally stun/knockback immunity
   - {cap: slow, score: 2, evidence: SACRED_GROUND}          # (QW)
   - {cap: zone_control, score: 2, evidence: SACRED_GROUND}  # (QW)

@@ -31458,7 +31458,7 @@
     "buff_allies": 4,
     "cleanse": 4,
     "peel": 4,
-    "resist_shred": 2,
+    "resist_shred": 3,
     "silence": 2,
     "stun": 4,
     "sustained_dps": 2
@@ -31532,7 +31532,7 @@
        "cleanse": 4
       },
       {
-       "resist_shred": 2
+       "resist_shred": 3
       }
      ],
      [
@@ -31595,7 +31595,7 @@
     "burst_aoe": 4,
     "cleanse": 4,
     "peel": 2,
-    "resist_shred": 2,
+    "resist_shred": 3,
     "silence": 2,
     "sustained_dps": 4,
     "zone_control": 2
@@ -31666,7 +31666,7 @@
        "buff_allies": 2
       },
       {
-       "resist_shred": 2
+       "resist_shred": 3
       }
      ],
      [
@@ -31722,9 +31722,9 @@
     "cleanse": 4,
     "engage": 4,
     "peel": 2,
-    "resist_shred": 2,
+    "resist_shred": 3,
     "silence": 2,
-    "slow": 2,
+    "slow": 4,
     "sustained_dps": 2,
     "zone_control": 2
    },
@@ -31789,7 +31789,7 @@
       {
        "buff_allies": 4,
        "engage": 4,
-       "slow": 2,
+       "slow": 4,
        "zone_control": 2
       }
      ],
@@ -31798,7 +31798,7 @@
        "cleanse": 4
       },
       {
-       "resist_shred": 2
+       "resist_shred": 3
       }
      ],
      [
@@ -31878,7 +31878,7 @@
     "heal_reduction": 4,
     "peel": 2,
     "ranged_presence": 2,
-    "resist_shred": 2,
+    "resist_shred": 3,
     "silence": 2,
     "slow": 2,
     "sustained_dps": 2
@@ -31964,7 +31964,7 @@
        "buff_allies": 2
       },
       {
-       "resist_shred": 2
+       "resist_shred": 3
       }
      ],
      [
@@ -32038,7 +32038,7 @@
     "engage": 2,
     "heal_reduction": 2,
     "mobility": 2,
-    "resist_shred": 2,
+    "resist_shred": 3,
     "root": 2,
     "self_sustain": 2,
     "sustained_dps": 4
@@ -32115,7 +32115,7 @@
        "catch": 2
       },
       {
-       "resist_shred": 2
+       "resist_shred": 3
       },
       {
        "buff_allies": 2,
@@ -32212,7 +32212,7 @@
     "knockback_displace": 2,
     "mobility": 4,
     "peel": 2,
-    "resist_shred": 2,
+    "resist_shred": 3,
     "root": 2,
     "self_sustain": 2,
     "sustained_dps": 4
@@ -32303,7 +32303,7 @@
      ],
      [
       {
-       "resist_shred": 2
+       "resist_shred": 3
       },
       {
        "buff_allies": 2
@@ -33318,7 +33318,7 @@
     }
    },
    "capabilities": {
-    "burst_st": 2,
+    "burst_st": 4,
     "catch": 4,
     "disengage": 2,
     "engage": 6,
@@ -33395,7 +33395,7 @@
     "slots": [
      [
       {
-       "burst_st": 2,
+       "burst_st": 4,
        "catch": 4,
        "engage": 6,
        "mobility": 4,
@@ -33987,11 +33987,11 @@
    "capabilities": {
     "burst_aoe": 2,
     "burst_st": 4,
-    "knockback_displace": 2,
-    "peel": 2,
+    "knockback_displace": 4,
+    "peel": 4,
     "ranged_presence": 2,
     "resist_shred": 4,
-    "silence": 2,
+    "silence": 4,
     "slow": 2,
     "sustained_dps": 2,
     "zone_control": 2
@@ -34072,11 +34072,11 @@
        "zone_control": 2
       },
       {
-       "knockback_displace": 2,
-       "peel": 2
+       "knockback_displace": 4,
+       "peel": 4
       },
       {
-       "silence": 2
+       "silence": 4
       }
      ]
     ]
@@ -34140,11 +34140,11 @@
    "capabilities": {
     "burst_aoe": 4,
     "burst_st": 2,
-    "knockback_displace": 2,
-    "peel": 2,
+    "knockback_displace": 4,
+    "peel": 4,
     "ranged_presence": 2,
     "resist_shred": 2,
-    "silence": 2,
+    "silence": 4,
     "slow": 2,
     "sustained_dps": 2,
     "zone_control": 2
@@ -34217,11 +34217,11 @@
        "zone_control": 2
       },
       {
-       "knockback_displace": 2,
-       "peel": 2
+       "knockback_displace": 4,
+       "peel": 4
       },
       {
-       "silence": 2
+       "silence": 4
       },
       {
        "resist_shred": 2
@@ -34286,11 +34286,11 @@
    },
    "capabilities": {
     "burst_aoe": 4,
-    "knockback_displace": 2,
-    "peel": 2,
+    "knockback_displace": 4,
+    "peel": 4,
     "ranged_presence": 2,
     "resist_shred": 2,
-    "silence": 2,
+    "silence": 4,
     "slow": 2,
     "sustained_dps": 4,
     "zone_control": 2
@@ -34366,11 +34366,11 @@
        "zone_control": 2
       },
       {
-       "knockback_displace": 2,
-       "peel": 2
+       "knockback_displace": 4,
+       "peel": 4
       },
       {
-       "silence": 2
+       "silence": 4
       },
       {
        "resist_shred": 2
@@ -34436,11 +34436,11 @@
    },
    "capabilities": {
     "burst_aoe": 4,
-    "knockback_displace": 2,
-    "peel": 2,
+    "knockback_displace": 4,
+    "peel": 4,
     "ranged_presence": 2,
     "resist_shred": 2,
-    "silence": 2,
+    "silence": 4,
     "slow": 2,
     "sustained_dps": 4,
     "zone_control": 2
@@ -34516,11 +34516,11 @@
        "zone_control": 2
       },
       {
-       "knockback_displace": 2,
-       "peel": 2
+       "knockback_displace": 4,
+       "peel": 4
       },
       {
-       "silence": 2
+       "silence": 4
       },
       {
        "resist_shred": 2
@@ -34592,7 +34592,7 @@
     "heal_reduction": 2,
     "ranged_presence": 2,
     "resist_shred": 2,
-    "root": 2,
+    "root": 3,
     "slow": 2,
     "sustained_dps": 4,
     "zone_control": 4
@@ -34667,7 +34667,7 @@
        "buff_allies": 2
       },
       {
-       "root": 2
+       "root": 3
       }
      ],
      [
@@ -34736,7 +34736,7 @@
     "burst_aoe": 6,
     "ranged_presence": 2,
     "resist_shred": 4,
-    "root": 2,
+    "root": 3,
     "slow": 2,
     "sustained_dps": 4,
     "zone_control": 2
@@ -34803,7 +34803,7 @@
        "buff_allies": 2
       },
       {
-       "root": 2
+       "root": 3
       }
      ],
      [
@@ -34846,7 +34846,7 @@
     "catch": 4,
     "disengage": 2,
     "engage": 2,
-    "execute": 2,
+    "execute": 4,
     "heal_reduction": 2,
     "mobility": 4,
     "peel": 2,
@@ -34925,7 +34925,7 @@
      [
       {
        "burst_st": 6,
-       "execute": 2,
+       "execute": 4,
        "heal_reduction": 2
       }
      ],
@@ -35328,7 +35328,7 @@
     "peel": 4,
     "ranged_presence": 2,
     "resist_shred": 2,
-    "root": 2,
+    "root": 3,
     "slow": 2,
     "sustained_dps": 4
    },
@@ -35402,7 +35402,7 @@
        "buff_allies": 2
       },
       {
-       "root": 2
+       "root": 3
       }
      ],
      [
@@ -35539,7 +35539,7 @@
    "capabilities": {
     "anti_dive": 2,
     "burst_aoe": 2,
-    "catch": 4,
+    "catch": 2,
     "damage_debuff": 2,
     "disengage": 4,
     "engage": 4,
@@ -35625,7 +35625,7 @@
      [
       {
        "burst_aoe": 2,
-       "catch": 4,
+       "catch": 2,
        "disengage": 4,
        "engage": 4,
        "mobility": 4,
@@ -35907,7 +35907,7 @@
     "engage": 4,
     "heal_reduction": 2,
     "mobility": 6,
-    "resist_shred": 2,
+    "resist_shred": 3,
     "root": 2,
     "self_sustain": 4,
     "sustained_dps": 4
@@ -35987,7 +35987,7 @@
        "heal_reduction": 2
       },
       {
-       "resist_shred": 2
+       "resist_shred": 3
       }
      ],
      [
@@ -36061,11 +36061,11 @@
     "burst_aoe": 4,
     "disengage": 4,
     "engage": 2,
-    "knockback_displace": 2,
+    "knockback_displace": 4,
     "mobility": 4,
-    "peel": 2,
+    "peel": 4,
     "resist_shred": 2,
-    "silence": 2,
+    "silence": 4,
     "slow": 2,
     "sustained_dps": 2
    },
@@ -36137,11 +36137,11 @@
        "slow": 2
       },
       {
-       "knockback_displace": 2,
-       "peel": 2
+       "knockback_displace": 4,
+       "peel": 4
       },
       {
-       "silence": 2
+       "silence": 4
       },
       {
        "resist_shred": 2
@@ -36201,11 +36201,11 @@
    "capabilities": {
     "burst_aoe": 2,
     "burst_st": 4,
-    "knockback_displace": 2,
-    "peel": 2,
+    "knockback_displace": 4,
+    "peel": 4,
     "ranged_presence": 2,
     "resist_shred": 2,
-    "silence": 2,
+    "silence": 4,
     "slow": 2,
     "sustained_dps": 4,
     "zone_control": 2
@@ -36285,11 +36285,11 @@
        "zone_control": 2
       },
       {
-       "knockback_displace": 2,
-       "peel": 2
+       "knockback_displace": 4,
+       "peel": 4
       },
       {
-       "silence": 2
+       "silence": 4
       },
       {
        "resist_shred": 2
@@ -36392,10 +36392,10 @@
    },
    "capabilities": {
     "anti_dive": 4,
-    "catch": 2,
+    "catch": 3,
     "disengage": 2,
     "engage": 2,
-    "knockback_displace": 2,
+    "knockback_displace": 3,
     "mobility": 2,
     "peel": 4,
     "purge": 2,
@@ -36485,7 +36485,7 @@
      [
       {
        "anti_dive": 4,
-       "catch": 2,
+       "catch": 3,
        "peel": 4,
        "slow": 4,
        "sustained_dps": 2,
@@ -36503,7 +36503,7 @@
        "mobility": 2
       },
       {
-       "knockback_displace": 2
+       "knockback_displace": 3
       }
      ],
      [
@@ -36565,7 +36565,7 @@
     "engage": 2,
     "heal_sustain": 2,
     "peel": 4,
-    "root": 2,
+    "root": 5,
     "slow": 2,
     "tankiness": 4,
     "zone_control": 2
@@ -36630,7 +36630,7 @@
      ],
      [
       {
-       "root": 2
+       "root": 5
       },
       {
        "peel": 4
@@ -37092,7 +37092,7 @@
     "buff_allies": 2,
     "cleanse": 4,
     "peel": 2,
-    "resist_shred": 2,
+    "resist_shred": 3,
     "silence": 2,
     "sustained_dps": 2
    },
@@ -37154,7 +37154,7 @@
        "buff_allies": 2
       },
       {
-       "resist_shred": 2
+       "resist_shred": 3
       }
      ],
      [
@@ -37199,7 +37199,7 @@
     "buff_allies": 4,
     "cleanse": 4,
     "peel": 2,
-    "resist_shred": 2,
+    "resist_shred": 3,
     "silence": 2,
     "sustained_dps": 2
    },
@@ -37261,7 +37261,7 @@
        "cleanse": 4
       },
       {
-       "resist_shred": 2
+       "resist_shred": 3
       }
      ],
      [
@@ -38222,9 +38222,9 @@
    "capabilities": {
     "buff_allies": 2,
     "burst_aoe": 2,
-    "catch": 2,
+    "catch": 4,
     "disengage": 2,
-    "peel": 2,
+    "peel": 4,
     "ranged_presence": 2,
     "resist_shred": 2,
     "root": 2,
@@ -38298,8 +38298,8 @@
      [
       {
        "burst_aoe": 2,
-       "catch": 2,
-       "peel": 2,
+       "catch": 4,
+       "peel": 4,
        "ranged_presence": 2,
        "slow": 4,
        "sustained_dps": 2,
@@ -38641,7 +38641,7 @@
     "engage": 2,
     "heal_reduction": 2,
     "mobility": 2,
-    "resist_shred": 2,
+    "resist_shred": 3,
     "root": 2,
     "self_sustain": 2,
     "sustained_dps": 4
@@ -38718,7 +38718,7 @@
        "catch": 2
       },
       {
-       "resist_shred": 2
+       "resist_shred": 3
       },
       {
        "buff_allies": 2,
@@ -38798,7 +38798,7 @@
     "heal_reduction": 4,
     "mobility": 2,
     "ranged_presence": 2,
-    "resist_shred": 2,
+    "resist_shred": 3,
     "root": 2,
     "self_sustain": 2,
     "sustained_dps": 4
@@ -38879,7 +38879,7 @@
        "catch": 2
       },
       {
-       "resist_shred": 2
+       "resist_shred": 3
       },
       {
        "buff_allies": 2,
@@ -39373,7 +39373,7 @@
     "buff_allies": 2,
     "disengage": 2,
     "engage": 2,
-    "knockback_displace": 2,
+    "knockback_displace": 3,
     "mobility": 2,
     "peel": 4,
     "purge": 2,
@@ -39466,7 +39466,7 @@
      ],
      [
       {
-       "knockback_displace": 2,
+       "knockback_displace": 3,
        "peel": 4
       },
       {
@@ -39578,7 +39578,7 @@
     "disengage": 2,
     "engage": 2,
     "execute": 2,
-    "knockback_displace": 2,
+    "knockback_displace": 3,
     "mobility": 2,
     "peel": 4,
     "purge": 2,
@@ -39681,7 +39681,7 @@
        "mobility": 2
       },
       {
-       "knockback_displace": 2
+       "knockback_displace": 3
       },
       {
        "anti_dive": 4,
@@ -39740,7 +39740,7 @@
    "capabilities": {
     "burst_aoe": 2,
     "catch": 4,
-    "damage_debuff": 2,
+    "damage_debuff": 4,
     "mobility": 2,
     "peel": 2,
     "ranged_presence": 2,
@@ -39822,7 +39822,7 @@
      [
       {
        "catch": 4,
-       "damage_debuff": 2,
+       "damage_debuff": 4,
        "peel": 2
       },
       {
@@ -40476,9 +40476,9 @@
     "anti_dive": 2,
     "buff_allies": 2,
     "burst_aoe": 2,
-    "catch": 2,
+    "catch": 3,
     "disengage": 2,
-    "peel": 2,
+    "peel": 3,
     "ranged_presence": 2,
     "resist_shred": 2,
     "root": 2,
@@ -40557,8 +40557,8 @@
      [
       {
        "burst_aoe": 2,
-       "catch": 2,
-       "peel": 2,
+       "catch": 3,
+       "peel": 3,
        "ranged_presence": 2,
        "slow": 4,
        "zone_control": 4
@@ -41200,7 +41200,7 @@
     "engage": 4,
     "knockback_displace": 2,
     "mobility": 4,
-    "peel": 2,
+    "peel": 3,
     "purge": 2,
     "resist_shred": 2,
     "stun": 2,
@@ -41283,7 +41283,7 @@
      ],
      [
       {
-       "peel": 2,
+       "peel": 3,
        "resist_shred": 2
       },
       {
@@ -41364,9 +41364,9 @@
     "clump_create": 2,
     "engage": 2,
     "execute": 2,
-    "knockback_displace": 2,
+    "knockback_displace": 3,
     "mobility": 4,
-    "peel": 2,
+    "peel": 3,
     "resist_shred": 2,
     "stun": 2,
     "sustained_dps": 4
@@ -41444,8 +41444,8 @@
      ],
      [
       {
-       "knockback_displace": 2,
-       "peel": 2,
+       "knockback_displace": 3,
+       "peel": 3,
        "resist_shred": 2
       },
       {
@@ -41555,9 +41555,9 @@
     "clump_create": 2,
     "engage": 2,
     "heal_reduction": 2,
-    "knockback_displace": 2,
+    "knockback_displace": 3,
     "mobility": 4,
-    "peel": 2,
+    "peel": 3,
     "ranged_presence": 2,
     "resist_shred": 2,
     "stun": 2,
@@ -41641,8 +41641,8 @@
      ],
      [
       {
-       "knockback_displace": 2,
-       "peel": 2,
+       "knockback_displace": 3,
+       "peel": 3,
        "resist_shred": 2
       },
       {
@@ -41751,9 +41751,9 @@
     "catch": 2,
     "clump_create": 2,
     "engage": 2,
-    "knockback_displace": 2,
+    "knockback_displace": 3,
     "mobility": 4,
-    "peel": 2,
+    "peel": 3,
     "resist_shred": 2,
     "stun": 2,
     "sustained_dps": 4
@@ -41826,8 +41826,8 @@
      ],
      [
       {
-       "knockback_displace": 2,
-       "peel": 2,
+       "knockback_displace": 3,
+       "peel": 3,
        "resist_shred": 2
       },
       {
@@ -42248,9 +42248,9 @@
     "clump_create": 2,
     "disengage": 4,
     "engage": 4,
-    "knockback_displace": 2,
+    "knockback_displace": 3,
     "mobility": 6,
-    "peel": 2,
+    "peel": 3,
     "resist_shred": 2,
     "stun": 2,
     "sustained_dps": 4
@@ -42328,8 +42328,8 @@
        "stun": 2
       },
       {
-       "knockback_displace": 2,
-       "peel": 2,
+       "knockback_displace": 3,
+       "peel": 3,
        "resist_shred": 2
       },
       {
@@ -42432,7 +42432,7 @@
     "catch": 2,
     "clump_create": 2,
     "engage": 2,
-    "knockback_displace": 2,
+    "knockback_displace": 3,
     "mobility": 4,
     "peel": 2,
     "ranged_presence": 2,
@@ -42521,7 +42521,7 @@
      ],
      [
       {
-       "knockback_displace": 2,
+       "knockback_displace": 3,
        "resist_shred": 2
       },
       {
@@ -42987,7 +42987,7 @@
     "clump_create": 6,
     "engage": 2,
     "peel": 4,
-    "root": 2,
+    "root": 5,
     "slow": 2,
     "stun": 2,
     "tankiness": 4,
@@ -43057,7 +43057,7 @@
      [
       {
        "engage": 2,
-       "root": 2
+       "root": 5
       },
       {
        "peel": 4
@@ -43617,7 +43617,7 @@
     "catch": 4,
     "disengage": 2,
     "engage": 6,
-    "knockback_displace": 2,
+    "knockback_displace": 3,
     "mobility": 2,
     "peel": 4,
     "purge": 2,
@@ -43716,7 +43716,7 @@
        "mobility": 2
       },
       {
-       "knockback_displace": 2
+       "knockback_displace": 3
       },
       {
        "anti_dive": 4,
@@ -43979,7 +43979,7 @@
    "capabilities": {
     "anti_dive": 2,
     "burst_aoe": 2,
-    "catch": 2,
+    "catch": 4,
     "knockback_displace": 2,
     "mobility": 2,
     "peel": 4,
@@ -44060,7 +44060,7 @@
      [
       {
        "burst_aoe": 2,
-       "catch": 2,
+       "catch": 4,
        "peel": 4,
        "ranged_presence": 2,
        "root": 4,
@@ -44314,11 +44314,11 @@
    },
    "capabilities": {
     "burst_aoe": 4,
-    "knockback_displace": 2,
-    "peel": 2,
+    "knockback_displace": 4,
+    "peel": 4,
     "ranged_presence": 2,
     "resist_shred": 2,
-    "silence": 2,
+    "silence": 4,
     "slow": 2,
     "sustained_dps": 4,
     "zone_control": 4
@@ -44387,11 +44387,11 @@
        "slow": 2
       },
       {
-       "knockback_displace": 2,
-       "peel": 2
+       "knockback_displace": 4,
+       "peel": 4
       },
       {
-       "silence": 2
+       "silence": 4
       },
       {
        "resist_shred": 2
@@ -44587,7 +44587,7 @@
     "engage": 4,
     "heal_reduction": 2,
     "mobility": 4,
-    "resist_shred": 2,
+    "resist_shred": 3,
     "root": 2,
     "self_sustain": 2,
     "sustained_dps": 4,
@@ -44667,7 +44667,7 @@
      ],
      [
       {
-       "resist_shred": 2
+       "resist_shred": 3
       },
       {
        "buff_allies": 2
@@ -44752,7 +44752,7 @@
     "execute": 2,
     "heal_reduction": 2,
     "mobility": 2,
-    "resist_shred": 2,
+    "resist_shred": 3,
     "root": 2,
     "self_sustain": 2,
     "sustained_dps": 4
@@ -44832,7 +44832,7 @@
        "catch": 2
       },
       {
-       "resist_shred": 2
+       "resist_shred": 3
       },
       {
        "buff_allies": 2,
@@ -46287,7 +46287,7 @@
     "burst_aoe": 4,
     "ranged_presence": 2,
     "resist_shred": 2,
-    "root": 2,
+    "root": 3,
     "slow": 2,
     "sustained_dps": 4,
     "zone_control": 4
@@ -46358,7 +46358,7 @@
        "buff_allies": 2
       },
       {
-       "root": 2
+       "root": 3
       }
      ],
      [
@@ -46390,7 +46390,7 @@
    "capabilities": {
     "catch": 4,
     "mobility": 2,
-    "peel": 2,
+    "peel": 3,
     "root": 4,
     "self_sustain": 2,
     "slow": 2,
@@ -46449,7 +46449,7 @@
      [
       {
        "catch": 4,
-       "peel": 2,
+       "peel": 3,
        "root": 4
       }
      ],
@@ -46518,7 +46518,7 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
+    "buff_allies": 3,
     "catch": 4,
     "disengage": 2,
     "engage": 4,
@@ -46589,7 +46589,7 @@
     "slots": [
      [
       {
-       "buff_allies": 2,
+       "buff_allies": 3,
        "catch": 4,
        "disengage": 2,
        "engage": 4,
@@ -46689,10 +46689,10 @@
    "capabilities": {
     "anti_dive": 2,
     "burst_aoe": 4,
-    "catch": 2,
-    "knockback_displace": 2,
+    "catch": 4,
+    "knockback_displace": 4,
     "mobility": 2,
-    "peel": 2,
+    "peel": 4,
     "ranged_presence": 2,
     "root": 2,
     "self_sustain": 2,
@@ -46770,9 +46770,9 @@
      [
       {
        "burst_aoe": 4,
-       "catch": 2,
-       "knockback_displace": 2,
-       "peel": 2,
+       "catch": 4,
+       "knockback_displace": 4,
+       "peel": 4,
        "ranged_presence": 2,
        "slow": 4
       }
@@ -47160,11 +47160,11 @@
    },
    "capabilities": {
     "burst_aoe": 4,
-    "knockback_displace": 2,
-    "peel": 2,
+    "knockback_displace": 4,
+    "peel": 4,
     "ranged_presence": 2,
     "resist_shred": 2,
-    "silence": 2,
+    "silence": 4,
     "slow": 2,
     "sustained_dps": 2,
     "zone_control": 2
@@ -47233,11 +47233,11 @@
        "zone_control": 2
       },
       {
-       "knockback_displace": 2,
-       "peel": 2
+       "knockback_displace": 4,
+       "peel": 4
       },
       {
-       "silence": 2
+       "silence": 4
       },
       {
        "resist_shred": 2
@@ -47292,8 +47292,8 @@
     "cleanse": 4,
     "peel": 2,
     "purge": 4,
-    "resist_shred": 2,
-    "silence": 2,
+    "resist_shred": 3,
+    "silence": 4,
     "sustained_dps": 2
    },
    "curated_as_of": "2026-08-12",
@@ -47354,7 +47354,7 @@
       {
        "burst_st": 2,
        "purge": 4,
-       "silence": 2
+       "silence": 4
       }
      ],
      [
@@ -47365,7 +47365,7 @@
        "buff_allies": 2
       },
       {
-       "resist_shred": 2
+       "resist_shred": 3
       }
      ],
      [
@@ -47445,7 +47445,7 @@
     "clump_create": 4,
     "peel": 4,
     "ranged_presence": 2,
-    "resist_shred": 2,
+    "resist_shred": 3,
     "silence": 2,
     "slow": 2,
     "sustained_dps": 2,
@@ -47536,7 +47536,7 @@
        "cleanse": 4
       },
       {
-       "resist_shred": 2
+       "resist_shred": 3
       }
      ],
      [
@@ -47616,7 +47616,7 @@
     "engage": 2,
     "heal_reduction": 2,
     "mobility": 2,
-    "resist_shred": 2,
+    "resist_shred": 3,
     "root": 2,
     "self_sustain": 4,
     "sustained_dps": 4
@@ -47689,7 +47689,7 @@
        "catch": 2
       },
       {
-       "resist_shred": 2
+       "resist_shred": 3
       },
       {
        "buff_allies": 2,
@@ -47762,7 +47762,7 @@
     "buff_allies": 2,
     "burst_st": 4,
     "resist_shred": 2,
-    "root": 2,
+    "root": 3,
     "slow": 2,
     "sustained_dps": 4,
     "zone_control": 2
@@ -47828,7 +47828,7 @@
        "buff_allies": 2
       },
       {
-       "root": 2
+       "root": 3
       }
      ],
      [
@@ -47898,7 +47898,7 @@
     "buff_allies": 2,
     "burst_aoe": 4,
     "resist_shred": 2,
-    "root": 2,
+    "root": 3,
     "slow": 2,
     "sustained_dps": 4,
     "zone_control": 2
@@ -47965,7 +47965,7 @@
        "buff_allies": 2
       },
       {
-       "root": 2
+       "root": 3
       }
      ],
      [
@@ -48046,7 +48046,7 @@
     "knockback_displace": 4,
     "peel": 4,
     "resist_shred": 2,
-    "root": 2,
+    "root": 3,
     "slow": 2,
     "sustained_dps": 2,
     "zone_control": 2
@@ -48129,7 +48129,7 @@
        "buff_allies": 2
       },
       {
-       "root": 2
+       "root": 3
       }
      ]
     ]
@@ -48198,7 +48198,7 @@
     "purge": 4,
     "ranged_presence": 2,
     "resist_shred": 2,
-    "root": 2,
+    "root": 3,
     "slow": 2,
     "sustained_dps": 4,
     "zone_control": 4
@@ -48273,7 +48273,7 @@
        "buff_allies": 2
       },
       {
-       "root": 2
+       "root": 3
       }
      ],
      [
@@ -49377,7 +49377,7 @@
    },
    "capabilities": {
     "buff_allies": 2,
-    "burst_aoe": 3,
+    "burst_aoe": 2,
     "catch": 2,
     "disengage": 2,
     "knockback_displace": 4,
@@ -49453,7 +49453,7 @@
     "slots": [
      [
       {
-       "burst_aoe": 3,
+       "burst_aoe": 2,
        "catch": 2,
        "knockback_displace": 4,
        "peel": 2,
@@ -49552,7 +49552,7 @@
     "anti_dive": 4,
     "disengage": 2,
     "engage": 2,
-    "knockback_displace": 2,
+    "knockback_displace": 3,
     "mobility": 2,
     "peel": 4,
     "purge": 2,
@@ -49647,7 +49647,7 @@
        "mobility": 2
       },
       {
-       "knockback_displace": 2
+       "knockback_displace": 3
       },
       {
        "anti_dive": 4,
@@ -49934,7 +49934,7 @@
     "engage": 4,
     "mobility": 4,
     "peel": 4,
-    "root": 2,
+    "root": 5,
     "stun": 4,
     "tankiness": 4
    },
@@ -49988,7 +49988,7 @@
      ],
      [
       {
-       "root": 2
+       "root": 5
       },
       {
        "peel": 4
@@ -50055,12 +50055,12 @@
    },
    "capabilities": {
     "burst_aoe": 2,
-    "catch": 2,
+    "catch": 4,
     "engage": 2,
     "peel": 4,
-    "resist_shred": 2,
-    "root": 2,
-    "slow": 2,
+    "resist_shred": 4,
+    "root": 5,
+    "slow": 4,
     "tankiness": 4,
     "zone_control": 2
    },
@@ -50117,16 +50117,16 @@
      [
       {
        "burst_aoe": 2,
-       "catch": 2,
-       "resist_shred": 2,
-       "slow": 2,
+       "catch": 4,
+       "resist_shred": 4,
+       "slow": 4,
        "zone_control": 2
       }
      ],
      [
       {
        "engage": 2,
-       "root": 2
+       "root": 5
       },
       {
        "peel": 4
@@ -50195,7 +50195,7 @@
     "execute": 4,
     "heal_reduction": 4,
     "peel": 4,
-    "root": 2,
+    "root": 5,
     "slow": 2,
     "tankiness": 4,
     "zone_control": 2
@@ -50268,7 +50268,7 @@
      [
       {
        "engage": 2,
-       "root": 2
+       "root": 5
       },
       {
        "peel": 4
@@ -51077,7 +51077,7 @@
     "engage": 2,
     "knockback_displace": 6,
     "peel": 4,
-    "root": 2,
+    "root": 5,
     "slow": 2,
     "tankiness": 4,
     "zone_control": 2
@@ -51143,7 +51143,7 @@
      [
       {
        "engage": 2,
-       "root": 2
+       "root": 5
       }
      ],
      [
@@ -51528,7 +51528,7 @@
     }
    },
    "capabilities": {
-    "burst_aoe": 2,
+    "burst_aoe": 3,
     "catch": 4,
     "mobility": 2,
     "peel": 2,
@@ -51601,7 +51601,7 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
+       "burst_aoe": 3,
        "catch": 4,
        "peel": 2,
        "ranged_presence": 2,

@@ -36,8 +36,8 @@
     - {cap: slow,          score: 4, evidence: ICESTORM2}      # storm + frost QW pool
     - {cap: burst_aoe,     score: 2, evidence: ICESTORM2}      # tick damage
     - {cap: sustained_dps, score: 2, evidence: ICESTORM2}
-    - {cap: catch,         score: 2, evidence: ICESTORM2}
-    - {cap: peel,          score: 2, evidence: ICESTORM2}
+    - {cap: catch,         score: 4, evidence: ICESTORM2}
+    - {cap: peel,          score: 4, evidence: ICESTORM2}
 
 - weapon: 2H_ICEGAUNTLETS_HELL       # Icicle Staff — the hard-slow blizzard
   curated_as_of: 2026-08-12
@@ -50,8 +50,8 @@
     - {cap: slow,          score: 4, evidence: GLACIALFIELD}   # E: 50%+30% center, IGNORES CC resistance
     - {cap: zone_control,  score: 4, evidence: GLACIALFIELD}   # 5s blizzard
     - {cap: anti_dive,     score: 2, evidence: FROSTNOVA}      # divers crawl in the blizzard; Nova punishes (QW)
-    - {cap: catch,         score: 2, evidence: GLACIALFIELD}
-    - {cap: peel,          score: 2, evidence: GLACIALFIELD}
+    - {cap: catch,         score: 3, evidence: GLACIALFIELD}
+    - {cap: peel,          score: 3, evidence: GLACIALFIELD}
     - {cap: burst_aoe,     score: 2, evidence: GLACIALFIELD}
 
 - weapon: MAIN_FROSTSTAFF_AVALON     # Chillhowl — the crystal-save support
@@ -87,5 +87,5 @@
     - {cap: slow,          score: 4, evidence: ICEROCK_EXPLODE}  # freezing trail + QW pool
     - {cap: peel,          score: 2, evidence: ICEROCK_EXPLODE}
     - {cap: zone_control,  score: 2, evidence: ICEROCK_EXPLODE}  # the trail
-    - {cap: burst_aoe,     score: 3, evidence: ICEROCK_EXPLODE}
+    - {cap: burst_aoe,     score: 2, evidence: ICEROCK_EXPLODE}  # rescore HELD at 2: measured 280/cast top-20% argues 3, but +0.5u tips the blap tank slot in V4 (69%) - revisit with V4b/win-lift
     - {cap: catch,         score: 2, evidence: ICEROCK_EXPLODE}

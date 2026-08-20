@@ -61,7 +61,7 @@
     - {cap: root,          score: 4, evidence: SOULSHAKER}        # E: energy wall roots everyone touching it, 3.5s
     - {cap: zone_control,  score: 4, evidence: SOULSHAKER}        # the wall denies the line it stands on
     - {cap: peel,          score: 4, evidence: SOULSHAKER}        # wall between divers and backline; W pool
-    - {cap: catch,         score: 2, evidence: SOULSHAKER}        # cast it ahead of runners
+    - {cap: catch,         score: 4, evidence: SOULSHAKER}        # cast it ahead of runners
     - {cap: burst_aoe,     score: 2, evidence: SOULSHAKER}        # 125 line
 
 - weapon: 2H_ROCKSTAFF_KEEPER        # Staff of Balance — anti-heal aura bruiser
@@ -87,8 +87,8 @@
     - {cap: damage_debuff, evidence: QS_WHIRLWIND2}
     - {cap: peel, evidence: SEPARATING_SLAM}
   capabilities:
-    - {cap: knockback_displace, score: 2, evidence: TORNADO}      # E: line air-THROW, ignores CC resistance — no travel (magnitude pass 2026-08-13)
+    - {cap: knockback_displace, score: 4, evidence: TORNADO}      # E: line air-THROW, ignores CC resistance — no travel (magnitude pass 2026-08-13)
     - {cap: burst_aoe,     score: 4, evidence: TORNADO}           # 152 through the line
     - {cap: slow,          score: 4, evidence: TORNADO}           # 80% around the tornado
-    - {cap: peel,          score: 2, evidence: TORNADO}           # send it through the divers
-    - {cap: catch,         score: 2, evidence: TORNADO}           # the 80% slow shears escapes
+    - {cap: peel,          score: 4, evidence: TORNADO}           # send it through the divers
+    - {cap: catch,         score: 4, evidence: TORNADO}           # the 80% slow shears escapes

@@ -13,7 +13,7 @@
     - {cap: catch,         score: 4, evidence: CLAYMORECHARGE}    # charge + 0.8s CC-resist-ignoring stun
     - {cap: mobility,      score: 4, evidence: CLAYMORECHARGE}    # charge + Q dash
     - {cap: stun,          score: 2, evidence: CLAYMORECHARGE}    # 0.8s on impact
-    - {cap: burst_st,      score: 2, evidence: CLAYMORECHARGE}    # charge-scaled impact
+    - {cap: burst_st,      score: 4, evidence: CLAYMORECHARGE}    # charge-scaled impact
 
 - weapon: 2H_DUALSCIMITAR_UNDEAD     # Galatine Pair — max-HP-cut AoE bomber
   curated_as_of: 2026-08-12

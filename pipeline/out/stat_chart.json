@@ -302,7 +302,7 @@
     "group": "stat modifiers (value \u00d7 duration)",
     "per_min": 10.2,
     "scores": [
-     2
+     3
     ],
     "spell": "TRIDENTTHROW",
     "unit": "value\u00b7s",
@@ -833,7 +833,7 @@
     "group": "damage per cast",
     "per_min": 840.0,
     "scores": [
-     3
+     2
     ],
     "spell": "ICEROCK_EXPLODE",
     "unit": "dmg/cast",
@@ -977,7 +977,7 @@
     "group": "damage per cast",
     "per_min": 630.0,
     "scores": [
-     2
+     3
     ],
     "spell": "SPEARTHROW",
     "unit": "dmg/cast",
@@ -1783,7 +1783,7 @@
     "group": "damage per cast",
     "per_min": 2148.0,
     "scores": [
-     2
+     4
     ],
     "spell": "CLAYMORECHARGE",
     "unit": "dmg/cast",
@@ -2239,7 +2239,7 @@
     "group": "hard CC (s)",
     "per_min": 10.5,
     "scores": [
-     2
+     4
     ],
     "spell": "SOULSHAKER",
     "unit": "s",
@@ -2546,7 +2546,7 @@
     "group": "slows (strength \u00d7 duration)",
     "per_min": 16.0,
     "scores": [
-     2
+     4
     ],
     "spell": "TORNADO",
     "unit": "slow%\u00b7s",
@@ -2562,7 +2562,7 @@
     "group": "slows (strength \u00d7 duration)",
     "per_min": 300.0,
     "scores": [
-     2
+     4
     ],
     "spell": "MACE_CRYSTAL_FRAGMENT_STORM",
     "unit": "slow%\u00b7s",
@@ -2578,7 +2578,7 @@
     "group": "slows (strength \u00d7 duration)",
     "per_min": 9.0,
     "scores": [
-     2
+     4
     ],
     "spell": "ICESTORM2",
     "unit": "slow%\u00b7s",
@@ -2594,7 +2594,7 @@
     "group": "slows (strength \u00d7 duration)",
     "per_min": 7.0,
     "scores": [
-     2
+     3
     ],
     "spell": "GIANTSTEPS",
     "unit": "slow%\u00b7s",
@@ -2610,7 +2610,7 @@
     "group": "slows (strength \u00d7 duration)",
     "per_min": 5.0,
     "scores": [
-     2
+     3
     ],
     "spell": "GLACIALFIELD",
     "unit": "slow%\u00b7s",
@@ -2642,7 +2642,7 @@
     "group": "slows (strength \u00d7 duration)",
     "per_min": 3.6,
     "scores": [
-     4
+     2
     ],
     "spell": "DASH_KNOCKBACK",
     "unit": "slow%\u00b7s",
@@ -3170,7 +3170,7 @@
     "group": "stat modifiers (value \u00d7 duration)",
     "per_min": 13.3,
     "scores": [
-     2
+     4
     ],
     "spell": "LEGBREAKER",
     "unit": "value\u00b7s",
@@ -4332,7 +4332,7 @@
     "group": "damage per cast",
     "per_min": 3450.0,
     "scores": [
-     2
+     4
     ],
     "spell": "EXECUTEDAGGER",
     "unit": "dmg/cast",
@@ -5113,7 +5113,7 @@
     "group": "displacement (m)",
     "per_min": null,
     "scores": [
-     2
+     4
     ],
     "spell": "KNOCKBACKSHOT2",
     "unit": "m",
@@ -5168,7 +5168,7 @@
     "group": "displacement (m)",
     "per_min": null,
     "scores": [
-     2
+     3
     ],
     "spell": "BACKHAND_KNOCKBACK",
     "unit": "m",
@@ -5188,7 +5188,7 @@
     "group": "displacement (m)",
     "per_min": null,
     "scores": [
-     2
+     3
     ],
     "spell": "GEYSER",
     "unit": "m",
@@ -5276,7 +5276,7 @@
     "group": "displacement (m)",
     "per_min": null,
     "scores": [
-     2
+     4
     ],
     "spell": "TORNADO",
     "unit": "m",
@@ -6359,7 +6359,7 @@
     "group": "displacement (m)",
     "per_min": null,
     "scores": [
-     2
+     4
     ],
     "spell": "KNOCKBACKSHOT2",
     "unit": "m",
@@ -6398,7 +6398,7 @@
     "group": "displacement (m)",
     "per_min": null,
     "scores": [
-     2
+     3
     ],
     "spell": "BACKHAND_KNOCKBACK",
     "unit": "m",
@@ -6587,7 +6587,7 @@
     "group": "hard CC (s)",
     "per_min": 11.2,
     "scores": [
-     2
+     3
     ],
     "spell": "HALBERDSMASH",
     "unit": "s",
@@ -6885,7 +6885,7 @@
     "group": "slows (strength \u00d7 duration)",
     "per_min": 16.0,
     "scores": [
-     2
+     4
     ],
     "spell": "TORNADO",
     "unit": "slow%\u00b7s",
@@ -6901,7 +6901,7 @@
     "group": "slows (strength \u00d7 duration)",
     "per_min": 9.0,
     "scores": [
-     2
+     4
     ],
     "spell": "ICESTORM2",
     "unit": "slow%\u00b7s",
@@ -6933,7 +6933,7 @@
     "group": "slows (strength \u00d7 duration)",
     "per_min": 5.0,
     "scores": [
-     2
+     3
     ],
     "spell": "GLACIALFIELD",
     "unit": "slow%\u00b7s",
@@ -7395,7 +7395,7 @@
     "group": "stat modifiers (value \u00d7 duration)",
     "per_min": 300.0,
     "scores": [
-     2
+     4
     ],
     "spell": "MACE_CRYSTAL_FRAGMENT_STORM",
     "unit": "value\u00b7s",
@@ -7411,7 +7411,7 @@
     "group": "stat modifiers (value \u00d7 duration)",
     "per_min": 5.2,
     "scores": [
-     2
+     3
     ],
     "spell": "AXESMASH",
     "unit": "value\u00b7s",
@@ -7434,7 +7434,7 @@
     "group": "stat modifiers (value \u00d7 duration)",
     "per_min": 6.0,
     "scores": [
-     2
+     3
     ],
     "spell": "FRAZZLE2",
     "unit": "value\u00b7s",
@@ -7721,7 +7721,7 @@
     "group": "hard CC (s)",
     "per_min": 20.4,
     "scores": [
-     2
+     5
     ],
     "spell": "CHARGE_ROOT",
     "unit": "s",
@@ -7774,7 +7774,7 @@
     "group": "hard CC (s)",
     "per_min": 10.4,
     "scores": [
-     2
+     3
     ],
     "spell": "CURSENOVA",
     "unit": "s",
@@ -8376,7 +8376,7 @@
     "group": "hard CC (s)",
     "per_min": 15.3,
     "scores": [
-     2
+     4
     ],
     "spell": "SILENCINGBOLT",
     "unit": "s",
@@ -8399,7 +8399,7 @@
     "group": "hard CC (s)",
     "per_min": 10.1,
     "scores": [
-     2
+     4
     ],
     "spell": "ARCANEORB2",
     "unit": "s",
@@ -8487,7 +8487,7 @@
     "group": "slows (strength \u00d7 duration)",
     "per_min": 300.0,
     "scores": [
-     2
+     4
     ],
     "spell": "MACE_CRYSTAL_FRAGMENT_STORM",
     "unit": "slow%\u00b7s",
@@ -8567,7 +8567,7 @@
     "group": "slows (strength \u00d7 duration)",
     "per_min": 3.3,
     "scores": [
-     2
+     4
     ],
     "spell": "ARCANECORRIDOR",
     "unit": "slow%\u00b7s",

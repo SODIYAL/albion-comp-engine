@@ -24,6 +24,6 @@
     - {cap: slow,          score: 4, evidence: GIANTSTEPS}       # 35% aura; W: Inertia Ring (QW)
     - {cap: anti_dive,     score: 4, evidence: GIANTSTEPS}       # divers stand in the aura; W: ring (QW)
     - {cap: peel,          score: 4, evidence: GIANTSTEPS}       # aura + W: Geyser / Knockout (QW)
-    - {cap: catch,         score: 2, evidence: GIANTSTEPS}       # the aura shears escape speed
+    - {cap: catch,         score: 3, evidence: GIANTSTEPS}       # the aura shears escape speed
     - {cap: sustained_dps, score: 2, evidence: GIANTSTEPS}       # repeatable Giant Smashes — modest
     - {cap: stun,          score: 2, evidence: KNOCKOUT}         # W: 5s sleep, breaks on damage; Stunning Strike passive (QW)

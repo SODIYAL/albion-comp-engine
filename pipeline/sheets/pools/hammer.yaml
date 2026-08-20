@@ -10,7 +10,7 @@ capabilities:
   - {cap: disengage, score: 2, evidence: CHARGESLOWAE}                    # (QW)
   - {cap: engage, score: 2, evidence: CHARGESLOWAE}                       # W: Slowing Charge dash (QW)
   - {cap: mobility, score: 2, evidence: CHARGESLOWAE}                     # (QW)
-  - {cap: knockback_displace, score: 2, evidence: GEYSER}                 # W: knock-up (QW)
+  - {cap: knockback_displace, score: 3, evidence: GEYSER}                 # W: knock-up (QW)
   - {cap: purge, score: 2, evidence: IRONBREAKER}                         # Q: shield break only (QW)
   - {cap: resist_shred, score: 2, evidence: IRONBREAKER}                  # Q: -12% AoE (QW)
   - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_HAMMER}  # PASSIVE: Life Leech

@@ -7,8 +7,8 @@
 # adjudication — or lists the pair under `except:`.
 subcategory: knuckles
 capabilities:
-  - {cap: knockback_displace, score: 2, evidence: BACKHAND_KNOCKBACK}        # W: 9m single-target shove (QW) — unified with line-mates (magnitude pass 2026-08-13)
-  - {cap: peel, score: 2, evidence: BACKHAND_KNOCKBACK}                      # shove a diver into a wall (QW)
+  - {cap: knockback_displace, score: 3, evidence: BACKHAND_KNOCKBACK}        # W: 9m single-target shove (QW) — unified with line-mates (magnitude pass 2026-08-13)
+  - {cap: peel, score: 3, evidence: BACKHAND_KNOCKBACK}                      # shove a diver into a wall (QW)
   - {cap: resist_shred, score: 2, evidence: BACKHAND_KNOCKBACK}              # W: -20% for 5s; Q: Create Opening -12% (QW)
   - {cap: catch, score: 2, evidence: DASHKICK}                               # (QW)
   - {cap: engage, score: 2, evidence: DASHKICK}                              # (QW)

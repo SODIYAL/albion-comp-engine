@@ -44,11 +44,11 @@
     - {cap: slow, evidence: SACRED_GROUND}
     - {cap: zone_control, evidence: SACRED_GROUND}
   capabilities:
-    - {cap: slow,         score: 2, evidence: MACE_CRYSTAL_FRAGMENT_STORM}  # E: Dreadstorm Surge storm
-    - {cap: resist_shred, score: 2, evidence: MACE_CRYSTAL_FRAGMENT_STORM}
+    - {cap: slow,         score: 4, evidence: MACE_CRYSTAL_FRAGMENT_STORM}  # E: Dreadstorm Surge storm
+    - {cap: resist_shred, score: 4, evidence: MACE_CRYSTAL_FRAGMENT_STORM}
     - {cap: burst_aoe,    score: 2, evidence: MACE_CRYSTAL_FRAGMENT_STORM}
     - {cap: zone_control, score: 2, evidence: MACE_CRYSTAL_FRAGMENT_STORM}  # the surge storm + Sacred Ground
-    - {cap: catch,        score: 2, evidence: MACE_CRYSTAL_FRAGMENT_STORM}
+    - {cap: catch,        score: 4, evidence: MACE_CRYSTAL_FRAGMENT_STORM}
 
 - weapon: MAIN_MACE_HELL             # Incubus Mace — the shrinking curse
   curated_as_of: 2026-08-12

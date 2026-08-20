@@ -9,7 +9,7 @@ subcategory: arcanestaff
 capabilities:
   - {cap: cleanse, score: 4, evidence: CLEANSESPEED2}                         # W: 10-ally cleanse + MS (QW)
   - {cap: buff_allies, score: 2, evidence: EMPOWERBEAM}                       # (QW)
-  - {cap: resist_shred, score: 2, evidence: FRAZZLE2}                         # (QW)
+  - {cap: resist_shred, score: 3, evidence: FRAZZLE2}                         # (QW)
   - {cap: silence, score: 2, evidence: MAGICSHOCK}                            # (QW)
   - {cap: sustained_dps, score: 2, evidence: PASSIVE_ATTACKBUFF_ARCANESTAFF}  # Lingering Power AA weave
   - {cap: peel, score: 2, evidence: SHIELDFRIENDLY}                           # (QW)

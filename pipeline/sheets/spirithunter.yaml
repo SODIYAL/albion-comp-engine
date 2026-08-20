@@ -19,5 +19,5 @@
   capabilities:
     - {cap: resist_shred,  score: 4, evidence: TAINTED_STEEL}   # E: -12% AoE pierce + trail stacking magical shred
                                                                 # W: Harpoon pull (QW)
-    - {cap: damage_debuff, score: 2, evidence: LEGBREAKER}      # W: Cripple -25% ALL damage dealt, 4s (QW)
+    - {cap: damage_debuff, score: 4, evidence: LEGBREAKER}      # W: Cripple -25% ALL damage dealt, 4s (QW)
     - {cap: burst_aoe,     score: 2, evidence: GROUNDSPEAR}     # W: Impaler 155 in 2.5m; E pierce line (QW)

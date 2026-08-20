@@ -12,4 +12,4 @@ capabilities:
   - {cap: sustained_dps, score: 4, evidence: CURSEDOT}           # curse DoT engine (QW)
   - {cap: slow, score: 2, evidence: CURSED_SPLAT}                # (QW)
   - {cap: zone_control, score: 2, evidence: CURSED_SPLAT}        # (QW)
-  - {cap: root, score: 2, evidence: CURSENOVA}                   # (QW)
+  - {cap: root, score: 3, evidence: CURSENOVA}                   # (QW)

@@ -28,4 +28,4 @@
     - {cap: sustained_dps,  score: 4, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # dagger AA passives + spirit stacks
     - {cap: catch,          score: 4, evidence: SKILLSHOT_TELEPORT} # W: Shadow Edge; dashes (QW)
     - {cap: heal_reduction, score: 2, evidence: EXECUTEDAGGER}      # E: reduces Healing Received; W: Forbidden Stab
-    - {cap: execute,        score: 2, evidence: EXECUTEDAGGER}      # kill-confirm role; charge-scaled, not health-scaled
+    - {cap: execute,        score: 4, evidence: EXECUTEDAGGER}      # kill-confirm role; charge-scaled, not health-scaled

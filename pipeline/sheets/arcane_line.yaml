@@ -35,7 +35,7 @@
   capabilities:
     - {cap: buff_allies,  score: 4, evidence: ARCANECORRIDOR} # E: +60% MS/AA speed corridor for the group, 8s
     - {cap: engage,       score: 4, evidence: ARCANECORRIDOR} # the corridor IS how the comp commits
-    - {cap: slow,         score: 2, evidence: ARCANECORRIDOR} # -30% on enemies inside
+    - {cap: slow,         score: 4, evidence: ARCANECORRIDOR} # -30% on enemies inside
     - {cap: zone_control, score: 2, evidence: ARCANECORRIDOR}
 
 - weapon: 2H_ARCANE_RINGPAIR_AVALON  # Evensong — aura-debuff artillery
@@ -75,5 +75,5 @@
     - {cap: silence, evidence: MAGICSHOCK}
   capabilities:
     - {cap: purge,        score: 4, evidence: ARCANEORB2}     # E: AoE purge on a 6m skillshot orb
-    - {cap: silence,      score: 2, evidence: ARCANEORB2}     # 1.68s AoE on the same orb; Q: Magic Shock (QW)
+    - {cap: silence,      score: 4, evidence: ARCANEORB2}     # 1.68s AoE on the same orb; Q: Magic Shock (QW)
     - {cap: burst_st,     score: 2, evidence: ARCANEORB2}     # modest orb damage

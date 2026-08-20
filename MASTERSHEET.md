@@ -303,12 +303,15 @@ commit:
   ladder-consistent with Great Holy's 10m rung).
 - Damage boards: Clarent charge burst_st 4, Dagger Pair execute 4, Heron
   throw 3; shreds (axe W, arcane Frazzle) 3.
-- **Trimmed by measurement**: Hoarfrost burst_aoe 4→3 — at 4 it pushed
-  the frontline pick out of a brawl comp's tank slot in the V4 blind
-  test (the only new role miss); at 3 the gate holds at 73%. Healer
-  boards deliberately untouched this pass (V4 measures healer slots and
-  the saturation artifact already dominates those misses — see
-  MECHANICS_TODO Q18).
+- **One ruling HELD by the validation gate**: Hoarfrost's Avalanche
+  measures 280/cast (top-20% of the burst_aoe board) and argues for 3 —
+  but even +0.5 unit pushes the frontline pick out of a brawl comp's
+  tank slot in the V4 blind test (69% vs the 70% gate; verified by
+  isolating the single ruling). Held at 2 with the tension noted in the
+  sheet — revisit when V4b/win-lift can adjudicate. Healer boards
+  deliberately untouched this pass (V4 measures healer slots and the
+  saturation artifact already dominates those misses — MECHANICS_TODO
+  Q18).
 
 ## 8. Guild-approved builds
 
