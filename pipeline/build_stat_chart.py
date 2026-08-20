@@ -404,18 +404,26 @@ def main():
     # 2.1 s/min; a 1s stun on 20s CD is 3 s/min — the ranking question S6
     # judges. Rows still sort by per-cast within their group (the burst
     # window is real); the rate column sits beside it.
-    PER_CAST_UNITS = {"m", "s", "slow%·s", "dmg/cast", "heal/cast", "value·s"}
+    # /min is only meaningful where the effect ACCUMULATES over a fight:
+    # damage, healing, seconds-of-CC, slow-time, buff-time. Displacement
+    # does not accumulate (39 "meters per minute" is a nonsense unit — the
+    # expert caught it): event-answer effects show CASTS/min instead, i.e.
+    # how often the spell can answer its job.
+    PER_CAST_UNITS = {"s", "slow%·s", "dmg/cast", "heal/cast", "value·s"}
+    CASTS_PER_MIN_UNITS = {"m"}
     boards = {}
     for (cap, sid), g in grouped.items():
         rec = extracted.get(sid)
         val, unit, detail = metric_for(cap, rec)
-        per_min = None
-        if (val is not None and unit in PER_CAST_UNITS
-                and rec and rec.get("cooldown")):
-            per_min = round(val * 60.0 / rec["cooldown"], 1)
+        per_min = casts_min = None
+        if val is not None and rec and rec.get("cooldown"):
+            if unit in PER_CAST_UNITS:
+                per_min = round(val * 60.0 / rec["cooldown"], 1)
+            elif unit in CASTS_PER_MIN_UNITS:
+                casts_min = round(60.0 / rec["cooldown"], 1)
         boards.setdefault(cap, []).append({
             "spell": sid, "value": val, "unit": unit, "detail": detail,
-            "per_min": per_min,
+            "per_min": per_min, "casts_min": casts_min,
             "facts": fact_line(rec),
             "group": (UNIT_GROUP.get(unit, unit) if val is not None
                       else "not measurable — human judgment"),
@@ -505,7 +513,9 @@ family converts item power unusually well carry an [AP&nbsp;] tag (most are
                 sc = ("<span class='drift'>"
                       + "–".join(str(s) for s in scores) + " drift</span>")
             weapons = ", ".join(r["weapons"])
-            pm = "" if r.get("per_min") is None else f"{r['per_min']:g}"
+            pm = ("" if r.get("per_min") is None else f"{r['per_min']:g}")
+            if not pm and r.get("casts_min") is not None:
+                pm = f"{r['casts_min']:g} casts"
             parts.append(
                 f"<tr><td>{esc(r['spell'])}</td>"
                 f"<td class='{cls} n'>{v}</td><td class='d'>{esc(r['unit'])}</td>"
