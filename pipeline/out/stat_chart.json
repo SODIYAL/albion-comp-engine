@@ -1,14 +1,158 @@
 {
  "_meta": {
+  "family_ability_power": {
+   "2H_ARCANESTAFF": 120,
+   "2H_ARCANESTAFF_CRYSTAL": 120,
+   "2H_ARCANESTAFF_HELL": 120,
+   "2H_ARCANE_RINGPAIR_AVALON": 120,
+   "2H_AXE": 138,
+   "2H_AXE_AVALON": 138,
+   "2H_BOW": 120,
+   "2H_BOW_AVALON": 120,
+   "2H_BOW_CRYSTAL": 120,
+   "2H_BOW_HELL": 120,
+   "2H_BOW_KEEPER": 120,
+   "2H_CLAWPAIR": 144,
+   "2H_CLAYMORE": 138,
+   "2H_CLAYMORE_AVALON": 138,
+   "2H_CLEAVER_HELL": 138,
+   "2H_COMBATSTAFF_MORGANA": 126,
+   "2H_CROSSBOW": 120,
+   "2H_CROSSBOWLARGE": 120,
+   "2H_CROSSBOWLARGE_MORGANA": 120,
+   "2H_CROSSBOW_CANNON_AVALON": 120,
+   "2H_CURSEDSTAFF": 120,
+   "2H_CURSEDSTAFF_MORGANA": 120,
+   "2H_DAGGERPAIR": 144,
+   "2H_DAGGERPAIR_CRYSTAL": 144,
+   "2H_DAGGER_KATAR_AVALON": 144,
+   "2H_DEMONICSTAFF": 120,
+   "2H_DIVINESTAFF": 120,
+   "2H_DOUBLEBLADEDSTAFF": 126,
+   "2H_DOUBLEBLADEDSTAFF_CRYSTAL": 126,
+   "2H_DUALAXE_KEEPER": 138,
+   "2H_DUALCROSSBOW_CRYSTAL": 120,
+   "2H_DUALCROSSBOW_HELL": 120,
+   "2H_DUALHAMMER_HELL": 120,
+   "2H_DUALMACE_AVALON": 126,
+   "2H_DUALSCIMITAR_UNDEAD": 138,
+   "2H_DUALSICKLE_UNDEAD": 144,
+   "2H_DUALSWORD": 138,
+   "2H_ENIGMATICORB_MORGANA": 120,
+   "2H_ENIGMATICSTAFF": 120,
+   "2H_FIRESTAFF": 120,
+   "2H_FIRESTAFF_HELL": 120,
+   "2H_FIRE_RINGPAIR_AVALON": 120,
+   "2H_FLAIL": 120,
+   "2H_FROSTSTAFF": 120,
+   "2H_FROSTSTAFF_CRYSTAL": 120,
+   "2H_GLACIALSTAFF": 120,
+   "2H_GLAIVE": 138,
+   "2H_GLAIVE_CRYSTAL": 138,
+   "2H_HALBERD": 138,
+   "2H_HALBERD_MORGANA": 138,
+   "2H_HAMMER": 120,
+   "2H_HAMMER_AVALON": 120,
+   "2H_HAMMER_CRYSTAL": 120,
+   "2H_HAMMER_UNDEAD": 120,
+   "2H_HARPOON_HELL": 138,
+   "2H_HOLYSTAFF": 120,
+   "2H_HOLYSTAFF_CRYSTAL": 120,
+   "2H_HOLYSTAFF_HELL": 120,
+   "2H_HOLYSTAFF_UNDEAD": 120,
+   "2H_ICECRYSTAL_UNDEAD": 120,
+   "2H_ICEGAUNTLETS_HELL": 120,
+   "2H_INFERNOSTAFF": 120,
+   "2H_INFERNOSTAFF_MORGANA": 120,
+   "2H_IRONCLADEDSTAFF": 126,
+   "2H_IRONGAUNTLETS_HELL": 144,
+   "2H_KNUCKLES_AVALON": 138,
+   "2H_KNUCKLES_CRYSTAL": 138,
+   "2H_KNUCKLES_HELL": 138,
+   "2H_KNUCKLES_KEEPER": 138,
+   "2H_KNUCKLES_MORGANA": 138,
+   "2H_KNUCKLES_SET1": 138,
+   "2H_KNUCKLES_SET2": 138,
+   "2H_KNUCKLES_SET3": 138,
+   "2H_LONGBOW": 120,
+   "2H_LONGBOW_UNDEAD": 120,
+   "2H_MACE": 120,
+   "2H_MACE_MORGANA": 120,
+   "2H_NATURESTAFF": 120,
+   "2H_NATURESTAFF_HELL": 120,
+   "2H_NATURESTAFF_KEEPER": 120,
+   "2H_POLEHAMMER": 120,
+   "2H_QUARTERSTAFF": 126,
+   "2H_QUARTERSTAFF_AVALON": 126,
+   "2H_RAM_KEEPER": 120,
+   "2H_REPEATINGCROSSBOW_UNDEAD": 120,
+   "2H_ROCKSTAFF_KEEPER": 126,
+   "2H_SCYTHE_CRYSTAL": 138,
+   "2H_SCYTHE_HELL": 138,
+   "2H_SHAPESHIFTER_AVALON": 120,
+   "2H_SHAPESHIFTER_CRYSTAL": 120,
+   "2H_SHAPESHIFTER_HELL": 120,
+   "2H_SHAPESHIFTER_KEEPER": 120,
+   "2H_SHAPESHIFTER_MORGANA": 120,
+   "2H_SHAPESHIFTER_SET1": 120,
+   "2H_SHAPESHIFTER_SET2": 120,
+   "2H_SHAPESHIFTER_SET3": 120,
+   "2H_SKULLORB_HELL": 120,
+   "2H_SPEAR": 138,
+   "2H_TRIDENT_UNDEAD": 138,
+   "2H_TWINSCYTHE_HELL": 126,
+   "2H_WARBOW": 120,
+   "2H_WILDSTAFF": 120,
+   "MAIN_1HCROSSBOW": 120,
+   "MAIN_ARCANESTAFF": 120,
+   "MAIN_ARCANESTAFF_UNDEAD": 120,
+   "MAIN_AXE": 138,
+   "MAIN_CURSEDSTAFF": 120,
+   "MAIN_CURSEDSTAFF_AVALON": 120,
+   "MAIN_CURSEDSTAFF_CRYSTAL": 120,
+   "MAIN_CURSEDSTAFF_UNDEAD": 120,
+   "MAIN_DAGGER": 144,
+   "MAIN_DAGGER_HELL": 144,
+   "MAIN_FIRESTAFF": 120,
+   "MAIN_FIRESTAFF_CRYSTAL": 120,
+   "MAIN_FIRESTAFF_KEEPER": 120,
+   "MAIN_FROSTSTAFF": 120,
+   "MAIN_FROSTSTAFF_AVALON": 120,
+   "MAIN_FROSTSTAFF_KEEPER": 120,
+   "MAIN_HAMMER": 120,
+   "MAIN_HOLYSTAFF": 120,
+   "MAIN_HOLYSTAFF_AVALON": 120,
+   "MAIN_HOLYSTAFF_MORGANA": 120,
+   "MAIN_MACE": 120,
+   "MAIN_MACE_CRYSTAL": 120,
+   "MAIN_MACE_HELL": 120,
+   "MAIN_NATURESTAFF": 120,
+   "MAIN_NATURESTAFF_AVALON": 120,
+   "MAIN_NATURESTAFF_CRYSTAL": 120,
+   "MAIN_NATURESTAFF_KEEPER": 120,
+   "MAIN_RAPIER_MORGANA": 138,
+   "MAIN_ROCKMACE_KEEPER": 120,
+   "MAIN_SCIMITAR_MORGANA": 138,
+   "MAIN_SPEAR": 138,
+   "MAIN_SPEAR_KEEPER": 138,
+   "MAIN_SPEAR_LANCE_AVALON": 138,
+   "MAIN_SWORD": 138,
+   "MAIN_SWORD_CRYSTAL": 138
+  },
   "note": "base dump numbers \u2014 the same IP reference for every weapon; equal-IP comparison equals base comparison",
   "spells_cited": 231,
-  "spells_extracted": 230
+  "spells_extracted": 230,
+  "tier_model": {
+   "does_not_scale": "percentage effects, durations, distances, and records flagged ignoreabilitypowerscaling (tier-flat in the fact line)",
+   "formula": "effective ~ base * (family_ap/100) * 1.0918^((IP-700)/100)",
+   "source": "community-documented (wiki/forum); the dumps carry the per-effect ignoreabilitypowerscaling flags and per-family ability power"
+  }
  },
  "boards": {
   "anti_dive": [
    {
     "detail": "knockback 18.0m",
-    "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 27.5s CD",
+    "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 27.5s CD",
     "group": "displacement (m)",
     "scores": [
      2
@@ -22,7 +166,7 @@
    },
    {
     "detail": "knockback 12.0m",
-    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 29s CD",
+    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 29s CD",
     "group": "displacement (m)",
     "scores": [
      4
@@ -31,7 +175,7 @@
     "unit": "m",
     "value": 12.0,
     "weapons": [
-     "Iron-clad Staff"
+     "Iron-clad Staff [AP126]"
     ]
    },
    {
@@ -46,18 +190,18 @@
     "unit": "m",
     "value": 4.26,
     "weapons": [
-     "Black Monk Staff",
-     "Double Bladed Staff",
-     "Grailseeker",
-     "Phantom Twinblade",
-     "Quarterstaff",
-     "Soulscythe",
-     "Staff of Balance"
+     "Black Monk Staff [AP126]",
+     "Double Bladed Staff [AP126]",
+     "Grailseeker [AP126]",
+     "Phantom Twinblade [AP126]",
+     "Quarterstaff [AP126]",
+     "Soulscythe [AP126]",
+     "Staff of Balance [AP126]"
     ]
    },
    {
     "detail": "hard CC 2.5s",
-    "facts": "ground-cast @14m \u00b7 ignores CCR \u00b7 72s CD",
+    "facts": "ground-cast @14m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 72s CD",
     "group": "hard CC (s)",
     "scores": [
      2
@@ -85,7 +229,7 @@
    },
    {
     "detail": "slow-power 3.5",
-    "facts": "self/contact \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      4
@@ -99,7 +243,7 @@
    },
    {
     "detail": "slow-power 2.4; knockback 1.8m",
-    "facts": "persists 5s \u00b7 self/contact \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 5s \u00b7 self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      4
@@ -146,12 +290,12 @@
     "unit": "value\u00b7s",
     "value": 5.1,
     "weapons": [
-     "Trinity Spear"
+     "Trinity Spear [AP138]"
     ]
    },
    {
     "detail": "movespeedbonus +0.6 for 8s",
-    "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 44s CD",
+    "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 44s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      4
@@ -165,7 +309,7 @@
    },
    {
     "detail": "movespeedbonus -0.5 for 5s",
-    "facts": "targeted friendother @9m \u00b7 channeled \u00b7 ignores CCR \u00b7 15s CD",
+    "facts": "targeted friendother @9m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 15s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2,
@@ -225,7 +369,7 @@
    },
    {
     "detail": "movespeedbonus -0.3 for 5s",
-    "facts": "targeted friendother @14m \u00b7 channeled \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "targeted friendother @14m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      4
@@ -248,7 +392,7 @@
     "unit": "value\u00b7s",
     "value": 1.5,
     "weapons": [
-     "Oathkeepers"
+     "Oathkeepers [AP126]"
     ]
    },
    {
@@ -315,14 +459,14 @@
     "unit": "value\u00b7s",
     "value": 0.8,
     "weapons": [
-     "Battleaxe",
-     "Bear Paws",
-     "Carrioncaller",
-     "Crystal Reaper",
-     "Greataxe",
-     "Halberd",
-     "Infernal Scythe",
-     "Realmbreaker"
+     "Battleaxe [AP138]",
+     "Bear Paws [AP138]",
+     "Carrioncaller [AP138]",
+     "Crystal Reaper [AP138]",
+     "Greataxe [AP138]",
+     "Halberd [AP138]",
+     "Infernal Scythe [AP138]",
+     "Realmbreaker [AP138]"
     ]
    },
    {
@@ -341,7 +485,7 @@
    },
    {
     "detail": "physicalarmor +0.16 for 3s",
-    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 18s CD",
+    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 18s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      4
@@ -452,7 +596,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -461,7 +605,7 @@
     "unit": "value\u00b7s",
     "value": null,
     "weapons": [
-     "Kingmaker"
+     "Kingmaker [AP138]"
     ]
    },
    {
@@ -482,7 +626,7 @@
   "burst_aoe": [
    {
     "detail": "81.5/s over 20s CD",
-    "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
      4
@@ -491,7 +635,7 @@
     "unit": "dmg/cast",
     "value": 1629.4,
     "weapons": [
-     "Kingmaker"
+     "Kingmaker [AP138]"
     ]
    },
    {
@@ -505,12 +649,12 @@
     "unit": "dmg/cast",
     "value": 793.0,
     "weapons": [
-     "Galatine Pair"
+     "Galatine Pair [AP138]"
     ]
    },
    {
     "detail": "24.0/s over 30s CD",
-    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
      4
@@ -519,7 +663,7 @@
     "unit": "dmg/cast",
     "value": 720.0,
     "weapons": [
-     "Ravenstrike Cestus"
+     "Ravenstrike Cestus [AP138]"
     ]
    },
    {
@@ -533,7 +677,7 @@
     "unit": "dmg/cast",
     "value": 646.0,
     "weapons": [
-     "Spiked Gauntlets"
+     "Spiked Gauntlets [AP138]"
     ]
    },
    {
@@ -566,7 +710,7 @@
    },
    {
     "detail": "14.2/s over 30s CD",
-    "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
      6
@@ -589,12 +733,12 @@
     "unit": "dmg/cast",
     "value": 397.0,
     "weapons": [
-     "Hellfire Hands"
+     "Hellfire Hands [AP138]"
     ]
    },
    {
     "detail": "9.9/s over 30s CD",
-    "facts": "persists 5.2s \u00b7 targeted allplayers @15m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 5.2s \u00b7 targeted allplayers @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
      4
@@ -608,7 +752,7 @@
    },
    {
     "detail": "14.0/s over 20s CD",
-    "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
      2
@@ -673,7 +817,7 @@
     "unit": "dmg/cast",
     "value": 230.0,
     "weapons": [
-     "Infernal Scythe"
+     "Infernal Scythe [AP138]"
     ]
    },
    {
@@ -706,7 +850,7 @@
    },
    {
     "detail": "8.5/s over 25s CD",
-    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "damage per cast",
     "scores": [
      4
@@ -715,7 +859,7 @@
     "unit": "dmg/cast",
     "value": 212.0,
     "weapons": [
-     "Realmbreaker"
+     "Realmbreaker [AP138]"
     ]
    },
    {
@@ -743,7 +887,7 @@
     "unit": "dmg/cast",
     "value": 210.0,
     "weapons": [
-     "Heron Spear"
+     "Heron Spear [AP138]"
     ]
    },
    {
@@ -799,12 +943,12 @@
     "unit": "dmg/cast",
     "value": 191.0,
     "weapons": [
-     "Crystal Reaper"
+     "Crystal Reaper [AP138]"
     ]
    },
    {
     "detail": "12.5/s over 15s CD",
-    "facts": "persists 2s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 15s CD",
+    "facts": "persists 2s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
      4
@@ -813,7 +957,7 @@
     "unit": "dmg/cast",
     "value": 188.0,
     "weapons": [
-     "Brawler Gloves"
+     "Brawler Gloves [AP138]"
     ]
    },
    {
@@ -827,12 +971,12 @@
     "unit": "dmg/cast",
     "value": 170.0,
     "weapons": [
-     "Bear Paws"
+     "Bear Paws [AP138]"
     ]
    },
    {
     "detail": "8.1/s over 20s CD",
-    "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
      4
@@ -855,12 +999,12 @@
     "unit": "dmg/cast",
     "value": 161.0,
     "weapons": [
-     "Quarterstaff"
+     "Quarterstaff [AP126]"
     ]
    },
    {
     "detail": "6.4/s over 25s CD",
-    "facts": "persists 2.6s \u00b7 ground-cast @22m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 2.6s \u00b7 ground-cast @22m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "damage per cast",
     "scores": [
      2
@@ -883,7 +1027,7 @@
     "unit": "dmg/cast",
     "value": 160.0,
     "weapons": [
-     "Dual Swords"
+     "Dual Swords [AP138]"
     ]
    },
    {
@@ -911,12 +1055,12 @@
     "unit": "dmg/cast",
     "value": 155.0,
     "weapons": [
-     "Spirithunter"
+     "Spirithunter [AP138]"
     ]
    },
    {
     "detail": "5.1/s over 30s CD",
-    "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
      4
@@ -925,7 +1069,7 @@
     "unit": "dmg/cast",
     "value": 152.5,
     "weapons": [
-     "Soulscythe"
+     "Soulscythe [AP126]"
     ]
    },
    {
@@ -953,7 +1097,7 @@
     "unit": "dmg/cast",
     "value": 140.0,
     "weapons": [
-     "Rift Glaive"
+     "Rift Glaive [AP138]"
     ]
    },
    {
@@ -967,7 +1111,7 @@
     "unit": "dmg/cast",
     "value": 136.8,
     "weapons": [
-     "Carrioncaller"
+     "Carrioncaller [AP138]"
     ]
    },
    {
@@ -999,7 +1143,7 @@
     "unit": "dmg/cast",
     "value": 129.0,
     "weapons": [
-     "Twin Slayers"
+     "Twin Slayers [AP144]"
     ]
    },
    {
@@ -1013,12 +1157,12 @@
     "unit": "dmg/cast",
     "value": 125.0,
     "weapons": [
-     "Halberd"
+     "Halberd [AP138]"
     ]
    },
    {
     "detail": "6.2/s over 20s CD",
-    "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
      2
@@ -1027,7 +1171,7 @@
     "unit": "dmg/cast",
     "value": 125.0,
     "weapons": [
-     "Grailseeker"
+     "Grailseeker [AP126]"
     ]
    },
    {
@@ -1046,7 +1190,7 @@
    },
    {
     "detail": "2.9/s over 38s CD",
-    "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 38s CD",
+    "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 38s CD",
     "group": "damage per cast",
     "scores": [
      4
@@ -1060,7 +1204,7 @@
    },
    {
     "detail": "3.2/s over 30s CD",
-    "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
      2
@@ -1097,7 +1241,7 @@
     "unit": "dmg/cast",
     "value": 80.0,
     "weapons": [
-     "Double Bladed Staff"
+     "Double Bladed Staff [AP126]"
     ]
    },
    {
@@ -1111,7 +1255,7 @@
     "unit": "dmg/cast",
     "value": 80.0,
     "weapons": [
-     "Black Monk Staff"
+     "Black Monk Staff [AP126]"
     ]
    },
    {
@@ -1153,7 +1297,7 @@
     "unit": "dmg/cast",
     "value": 60.0,
     "weapons": [
-     "Ursine Maulers"
+     "Ursine Maulers [AP138]"
     ]
    },
    {
@@ -1167,7 +1311,7 @@
     "unit": "dmg/cast",
     "value": 56.0,
     "weapons": [
-     "Greataxe"
+     "Greataxe [AP138]"
     ]
    },
    {
@@ -1195,7 +1339,7 @@
     "unit": "dmg/cast",
     "value": 46.0,
     "weapons": [
-     "Phantom Twinblade"
+     "Phantom Twinblade [AP126]"
     ]
    },
    {
@@ -1228,7 +1372,7 @@
    },
    {
     "detail": "0.7/s over 30s CD",
-    "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per cast",
     "scores": [
      2
@@ -1279,7 +1423,7 @@
     "unit": "\u00d7AA",
     "value": 0.35,
     "weapons": [
-     "Infinity Blade"
+     "Infinity Blade [AP138]"
     ]
    },
    {
@@ -1298,7 +1442,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 3.5s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 3.5s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -1321,7 +1465,7 @@
     "unit": "dmg/cast",
     "value": null,
     "weapons": [
-     "Carving Sword"
+     "Carving Sword [AP138]"
     ]
    },
    {
@@ -1335,7 +1479,7 @@
     "unit": "dmg/cast",
     "value": null,
     "weapons": [
-     "Demonfang"
+     "Demonfang [AP144]"
     ]
    },
    {
@@ -1421,7 +1565,7 @@
     "unit": "dmg/cast",
     "value": 862.5,
     "weapons": [
-     "Dagger Pair"
+     "Dagger Pair [AP144]"
     ]
    },
    {
@@ -1435,12 +1579,12 @@
     "unit": "dmg/cast",
     "value": 813.3,
     "weapons": [
-     "Bloodletter"
+     "Bloodletter [AP138]"
     ]
    },
    {
     "detail": "35.8/s over 20s CD",
-    "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
      2
@@ -1449,12 +1593,12 @@
     "unit": "dmg/cast",
     "value": 716.0,
     "weapons": [
-     "Claymore"
+     "Claymore [AP138]"
     ]
    },
    {
     "detail": "34.0/s over 20s CD",
-    "facts": "persists 2s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 2s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
      4
@@ -1463,7 +1607,7 @@
     "unit": "dmg/cast",
     "value": 679.7,
     "weapons": [
-     "Bridled Fury"
+     "Bridled Fury [AP144]"
     ]
    },
    {
@@ -1477,7 +1621,7 @@
     "unit": "dmg/cast",
     "value": 671.0,
     "weapons": [
-     "Broadsword"
+     "Broadsword [AP138]"
     ]
    },
    {
@@ -1505,7 +1649,7 @@
     "unit": "dmg/cast",
     "value": 340.0,
     "weapons": [
-     "Clarent Blade"
+     "Clarent Blade [AP138]"
     ]
    },
    {
@@ -1519,7 +1663,7 @@
     "unit": "dmg/cast",
     "value": 270.0,
     "weapons": [
-     "Battleaxe"
+     "Battleaxe [AP138]"
     ]
    },
    {
@@ -1547,12 +1691,12 @@
     "unit": "dmg/cast",
     "value": 222.0,
     "weapons": [
-     "Daybreaker"
+     "Daybreaker [AP138]"
     ]
    },
    {
     "detail": "8.8/s over 25s CD",
-    "facts": "targeted enemy @7m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "targeted enemy @7m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "damage per cast",
     "scores": [
      4
@@ -1561,7 +1705,7 @@
     "unit": "dmg/cast",
     "value": 219.7,
     "weapons": [
-     "Deathgivers"
+     "Deathgivers [AP144]"
     ]
    },
    {
@@ -1580,7 +1724,7 @@
    },
    {
     "detail": "7.5/s over 20s CD",
-    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
      4
@@ -1589,7 +1733,7 @@
     "unit": "dmg/cast",
     "value": 150.0,
     "weapons": [
-     "Black Hands"
+     "Black Hands [AP144]"
     ]
    },
    {
@@ -1622,7 +1766,7 @@
    },
    {
     "detail": "3.6/s over 25s CD",
-    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "damage per cast",
     "scores": [
      4
@@ -1631,7 +1775,7 @@
     "unit": "dmg/cast",
     "value": 89.0,
     "weapons": [
-     "Claws"
+     "Claws [AP144]"
     ]
    },
    {
@@ -1659,7 +1803,7 @@
     "unit": "dmg/cast",
     "value": 60.0,
     "weapons": [
-     "Ursine Maulers"
+     "Ursine Maulers [AP138]"
     ]
    },
    {
@@ -1678,7 +1822,7 @@
    },
    {
     "detail": "2.0/s over 15s CD",
-    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 15s CD",
+    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "damage per cast",
     "scores": [
      2,
@@ -1688,17 +1832,17 @@
     "unit": "dmg/cast",
     "value": 30.0,
     "weapons": [
-     "Battle Bracers",
-     "Brawler Gloves",
-     "Fists of Avalon",
-     "Hellfire Hands",
-     "Ravenstrike Cestus",
-     "Spiked Gauntlets"
+     "Battle Bracers [AP138]",
+     "Brawler Gloves [AP138]",
+     "Fists of Avalon [AP138]",
+     "Hellfire Hands [AP138]",
+     "Ravenstrike Cestus [AP138]",
+     "Spiked Gauntlets [AP138]"
     ]
    },
    {
     "detail": "0.8/s over 20s CD",
-    "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per cast",
     "scores": [
      2
@@ -1735,7 +1879,7 @@
     "unit": "\u00d7AA",
     "value": 0.35,
     "weapons": [
-     "Infinity Blade"
+     "Infinity Blade [AP138]"
     ]
    },
    {
@@ -1749,7 +1893,7 @@
     "unit": "dmg/cast",
     "value": null,
     "weapons": [
-     "Demonfang"
+     "Demonfang [AP144]"
     ]
    },
    {
@@ -1763,7 +1907,7 @@
     "unit": "dmg/cast",
     "value": null,
     "weapons": [
-     "Forcepulse Bracers"
+     "Forcepulse Bracers [AP138]"
     ]
    },
    {
@@ -1826,7 +1970,7 @@
   "catch": [
    {
     "detail": "knockback 1.25m",
-    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "displacement (m)",
     "scores": [
      2
@@ -1835,12 +1979,12 @@
     "unit": "m",
     "value": 1.25,
     "weapons": [
-     "Realmbreaker"
+     "Realmbreaker [AP138]"
     ]
    },
    {
     "detail": "hard CC 3.5s",
-    "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
      2
@@ -1849,7 +1993,7 @@
     "unit": "s",
     "value": 3.5,
     "weapons": [
-     "Grailseeker"
+     "Grailseeker [AP126]"
     ]
    },
    {
@@ -1863,7 +2007,7 @@
     "unit": "s",
     "value": 2.79,
     "weapons": [
-     "Pike"
+     "Pike [AP138]"
     ]
    },
    {
@@ -1896,7 +2040,7 @@
    },
    {
     "detail": "hard CC 2.5s; knockback 0.9m",
-    "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -1947,7 +2091,7 @@
     "unit": "s",
     "value": 2.11,
     "weapons": [
-     "Quarterstaff"
+     "Quarterstaff [AP126]"
     ]
    },
    {
@@ -1981,12 +2125,12 @@
     "unit": "s",
     "value": 1.75,
     "weapons": [
-     "Heron Spear"
+     "Heron Spear [AP138]"
     ]
    },
    {
     "detail": "hard CC 1.5s",
-    "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR",
+    "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -2000,7 +2144,7 @@
    },
    {
     "detail": "hard CC 1.35s",
-    "facts": "ground-cast @12m \u00b7 ignores CCR \u00b7 15s CD",
+    "facts": "ground-cast @12m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
      2
@@ -2020,7 +2164,7 @@
    },
    {
     "detail": "hard CC 1.0s",
-    "facts": "ground-cast @22m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "ground-cast @22m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
      2,
@@ -2030,18 +2174,18 @@
     "unit": "s",
     "value": 1.0,
     "weapons": [
-     "Black Hands",
-     "Bridled Fury",
-     "Dagger",
-     "Dagger Pair",
-     "Deathgivers",
-     "Demonfang",
-     "Twin Slayers"
+     "Black Hands [AP144]",
+     "Bridled Fury [AP144]",
+     "Dagger Pair [AP144]",
+     "Dagger [AP144]",
+     "Deathgivers [AP144]",
+     "Demonfang [AP144]",
+     "Twin Slayers [AP144]"
     ]
    },
    {
     "detail": "hard CC 1.0s",
-    "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -2069,7 +2213,7 @@
    },
    {
     "detail": "hard CC 0.8s; knockback 1.0m",
-    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -2083,7 +2227,7 @@
    },
    {
     "detail": "hard CC 0.8s",
-    "facts": "ground-cast @25m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "hard CC (s)",
     "scores": [
      2
@@ -2097,7 +2241,7 @@
    },
    {
     "detail": "hard CC 0.8s",
-    "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -2106,12 +2250,12 @@
     "unit": "s",
     "value": 0.8,
     "weapons": [
-     "Claymore"
+     "Claymore [AP138]"
     ]
    },
    {
     "detail": "slow-power 8.0; knockback 2.1m",
-    "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -2120,7 +2264,7 @@
     "unit": "slow%\u00b7s",
     "value": 8.0,
     "weapons": [
-     "Soulscythe"
+     "Soulscythe [AP126]"
     ]
    },
    {
@@ -2139,7 +2283,7 @@
    },
    {
     "detail": "slow-power 4.5",
-    "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -2153,7 +2297,7 @@
    },
    {
     "detail": "slow-power 3.5",
-    "facts": "self/contact \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -2167,7 +2311,7 @@
    },
    {
     "detail": "slow-power 2.5",
-    "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -2181,7 +2325,7 @@
    },
    {
     "detail": "slow-power 1.6; knockback 10.0m",
-    "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -2204,7 +2348,7 @@
     "unit": "slow%\u00b7s",
     "value": 1.5,
     "weapons": [
-     "Double Bladed Staff"
+     "Double Bladed Staff [AP126]"
     ]
    },
    {
@@ -2218,7 +2362,7 @@
     "unit": "slow%\u00b7s",
     "value": 1.5,
     "weapons": [
-     "Spiked Gauntlets"
+     "Spiked Gauntlets [AP138]"
     ]
    },
    {
@@ -2232,14 +2376,14 @@
     "unit": "slow%\u00b7s",
     "value": 1.0,
     "weapons": [
-     "Galatine Pair",
-     "Infinity Blade",
-     "Kingmaker"
+     "Galatine Pair [AP138]",
+     "Infinity Blade [AP138]",
+     "Kingmaker [AP138]"
     ]
    },
    {
     "detail": "slow-power 0.9; hard CC 2.0s",
-    "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -2253,7 +2397,7 @@
    },
    {
     "detail": "slow-power 0.8",
-    "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -2276,12 +2420,12 @@
     "unit": "slow%\u00b7s",
     "value": 0.67,
     "weapons": [
-     "Clarent Blade"
+     "Clarent Blade [AP138]"
     ]
    },
    {
     "detail": "slow-power 0.6",
-    "facts": "targeted enemy @4m \u00b7 ignores CCR \u00b7 18s CD",
+    "facts": "targeted enemy @4m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 18s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2,
@@ -2291,10 +2435,10 @@
     "unit": "slow%\u00b7s",
     "value": 0.6,
     "weapons": [
-     "Daybreaker",
-     "Rift Glaive",
-     "Spear",
-     "Spirithunter"
+     "Daybreaker [AP138]",
+     "Rift Glaive [AP138]",
+     "Spear [AP138]",
+     "Spirithunter [AP138]"
     ]
    },
    {
@@ -2322,11 +2466,11 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Battleaxe",
-     "Carrioncaller",
-     "Greataxe",
-     "Halberd",
-     "Infernal Scythe"
+     "Battleaxe [AP138]",
+     "Carrioncaller [AP138]",
+     "Greataxe [AP138]",
+     "Halberd [AP138]",
+     "Infernal Scythe [AP138]"
     ]
    },
    {
@@ -2340,7 +2484,7 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Battle Bracers"
+     "Battle Bracers [AP138]"
     ]
    },
    {
@@ -2354,7 +2498,7 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Bear Paws"
+     "Bear Paws [AP138]"
     ]
    },
    {
@@ -2368,7 +2512,7 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Bloodletter"
+     "Bloodletter [AP138]"
     ]
    },
    {
@@ -2382,12 +2526,12 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Carving Sword"
+     "Carving Sword [AP138]"
     ]
    },
    {
     "detail": "",
-    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -2396,7 +2540,7 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Claws"
+     "Claws [AP144]"
     ]
    },
    {
@@ -2410,7 +2554,7 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Dual Swords"
+     "Dual Swords [AP138]"
     ]
    },
    {
@@ -2424,12 +2568,12 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Brawler Gloves",
-     "Fists of Avalon",
-     "Forcepulse Bracers",
-     "Hellfire Hands",
-     "Ravenstrike Cestus",
-     "Ursine Maulers"
+     "Brawler Gloves [AP138]",
+     "Fists of Avalon [AP138]",
+     "Forcepulse Bracers [AP138]",
+     "Hellfire Hands [AP138]",
+     "Ravenstrike Cestus [AP138]",
+     "Ursine Maulers [AP138]"
     ]
    },
    {
@@ -2448,7 +2592,7 @@
    },
    {
     "detail": "",
-    "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 18s CD",
+    "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -2457,7 +2601,7 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Glaive"
+     "Glaive [AP138]"
     ]
    },
    {
@@ -2471,7 +2615,7 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Trinity Spear"
+     "Trinity Spear [AP138]"
     ]
    },
    {
@@ -2485,7 +2629,7 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Broadsword"
+     "Broadsword [AP138]"
     ]
    }
   ],
@@ -2586,19 +2730,19 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Battle Bracers",
-     "Brawler Gloves",
-     "Fists of Avalon",
-     "Forcepulse Bracers",
-     "Hellfire Hands",
-     "Ravenstrike Cestus",
-     "Spiked Gauntlets",
-     "Ursine Maulers"
+     "Battle Bracers [AP138]",
+     "Brawler Gloves [AP138]",
+     "Fists of Avalon [AP138]",
+     "Forcepulse Bracers [AP138]",
+     "Hellfire Hands [AP138]",
+     "Ravenstrike Cestus [AP138]",
+     "Spiked Gauntlets [AP138]",
+     "Ursine Maulers [AP138]"
     ]
    },
    {
     "detail": "",
-    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      6
@@ -2612,7 +2756,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @12m \u00b7 ignores CCR \u00b7 15s CD",
+    "facts": "ground-cast @12m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -2633,7 +2777,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @25m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      6
@@ -2647,7 +2791,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -2663,7 +2807,7 @@
   "damage_debuff": [
    {
     "detail": "movespeedbonus +0.8 for 5s",
-    "facts": "targeted enemy @4m \u00b7 ignores CCR \u00b7 18s CD",
+    "facts": "targeted enemy @4m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 18s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
@@ -2672,7 +2816,7 @@
     "unit": "value\u00b7s",
     "value": 4.0,
     "weapons": [
-     "Spirithunter"
+     "Spirithunter [AP138]"
     ]
    },
    {
@@ -2700,8 +2844,8 @@
     "unit": "value\u00b7s",
     "value": 2.5,
     "weapons": [
-     "Double Bladed Staff",
-     "Quarterstaff"
+     "Double Bladed Staff [AP126]",
+     "Quarterstaff [AP126]"
     ]
    },
    {
@@ -2715,12 +2859,12 @@
     "unit": "value\u00b7s",
     "value": 2.0,
     "weapons": [
-     "Black Monk Staff"
+     "Black Monk Staff [AP126]"
     ]
    },
    {
     "detail": "magicspelldamagebonus -0.25 for 5s",
-    "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 38s CD",
+    "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 38s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
@@ -2745,7 +2889,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Crystal Reaper"
+     "Crystal Reaper [AP138]"
     ]
    },
    {
@@ -2759,7 +2903,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Battle Bracers"
+     "Battle Bracers [AP138]"
     ]
    },
    {
@@ -2773,7 +2917,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Bear Paws"
+     "Bear Paws [AP138]"
     ]
    },
    {
@@ -2788,13 +2932,13 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Black Hands",
-     "Bloodletter",
-     "Claws",
-     "Dagger",
-     "Dagger Pair",
-     "Demonfang",
-     "Twin Slayers"
+     "Black Hands [AP144]",
+     "Bloodletter [AP138]",
+     "Claws [AP144]",
+     "Dagger Pair [AP144]",
+     "Dagger [AP144]",
+     "Demonfang [AP144]",
+     "Twin Slayers [AP144]"
     ]
    },
    {
@@ -2813,7 +2957,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 3.5s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 3.5s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -2827,7 +2971,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @2m \u00b7 ignores CCR \u00b7 18s CD",
+    "facts": "ground-cast @2m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -2854,7 +2998,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Carving Sword"
+     "Carving Sword [AP138]"
     ]
    },
    {
@@ -2873,7 +3017,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 2s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 2s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -2882,12 +3026,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Bridled Fury"
+     "Bridled Fury [AP144]"
     ]
    },
    {
     "detail": "",
-    "facts": "targeted enemy @7m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "targeted enemy @7m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -2896,7 +3040,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Deathgivers"
+     "Deathgivers [AP144]"
     ]
    },
    {
@@ -2910,7 +3054,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Double Bladed Staff"
+     "Double Bladed Staff [AP126]"
     ]
    },
    {
@@ -2924,7 +3068,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Dual Swords"
+     "Dual Swords [AP138]"
     ]
    },
    {
@@ -2996,7 +3140,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -3010,7 +3154,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -3024,7 +3168,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -3047,12 +3191,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Broadsword",
-     "Clarent Blade",
-     "Claymore",
-     "Galatine Pair",
-     "Infinity Blade",
-     "Kingmaker"
+     "Broadsword [AP138]",
+     "Clarent Blade [AP138]",
+     "Claymore [AP138]",
+     "Galatine Pair [AP138]",
+     "Infinity Blade [AP138]",
+     "Kingmaker [AP138]"
     ]
    },
    {
@@ -3066,7 +3210,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Fists of Avalon"
+     "Fists of Avalon [AP138]"
     ]
    },
    {
@@ -3080,12 +3224,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Quarterstaff"
+     "Quarterstaff [AP126]"
     ]
    },
    {
     "detail": "",
-    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -3094,7 +3238,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Realmbreaker"
+     "Realmbreaker [AP138]"
     ]
    },
    {
@@ -3150,12 +3294,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Trinity Spear"
+     "Trinity Spear [AP138]"
     ]
    },
    {
     "detail": "",
-    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -3164,14 +3308,14 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Spear"
+     "Spear [AP138]"
     ]
    }
   ],
   "engage": [
    {
     "detail": "",
-    "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 44s CD",
+    "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 44s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -3194,11 +3338,11 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Battleaxe",
-     "Carrioncaller",
-     "Greataxe",
-     "Halberd",
-     "Infernal Scythe"
+     "Battleaxe [AP138]",
+     "Carrioncaller [AP138]",
+     "Greataxe [AP138]",
+     "Halberd [AP138]",
+     "Infernal Scythe [AP138]"
     ]
    },
    {
@@ -3212,7 +3356,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Crystal Reaper"
+     "Crystal Reaper [AP138]"
     ]
    },
    {
@@ -3226,7 +3370,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Battle Bracers"
+     "Battle Bracers [AP138]"
     ]
    },
    {
@@ -3240,7 +3384,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Bear Paws"
+     "Bear Paws [AP138]"
     ]
    },
    {
@@ -3254,7 +3398,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Bloodletter"
+     "Bloodletter [AP138]"
     ]
    },
    {
@@ -3268,7 +3412,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Carving Sword"
+     "Carving Sword [AP138]"
     ]
    },
    {
@@ -3282,13 +3426,13 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Black Hands",
-     "Bridled Fury",
-     "Claws",
-     "Dagger",
-     "Dagger Pair",
-     "Demonfang",
-     "Twin Slayers"
+     "Black Hands [AP144]",
+     "Bridled Fury [AP144]",
+     "Claws [AP144]",
+     "Dagger Pair [AP144]",
+     "Dagger [AP144]",
+     "Demonfang [AP144]",
+     "Twin Slayers [AP144]"
     ]
    },
    {
@@ -3307,7 +3451,7 @@
    },
    {
     "detail": "",
-    "facts": "targeted enemy @7m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "targeted enemy @7m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -3316,7 +3460,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Deathgivers"
+     "Deathgivers [AP144]"
     ]
    },
    {
@@ -3330,7 +3474,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Double Bladed Staff"
+     "Double Bladed Staff [AP126]"
     ]
    },
    {
@@ -3344,7 +3488,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Dual Swords"
+     "Dual Swords [AP138]"
     ]
    },
    {
@@ -3396,7 +3540,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      6
@@ -3410,7 +3554,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      6
@@ -3433,7 +3577,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Kingmaker"
+     "Kingmaker [AP138]"
     ]
    },
    {
@@ -3447,7 +3591,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Fists of Avalon"
+     "Fists of Avalon [AP138]"
     ]
    },
    {
@@ -3461,7 +3605,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Forcepulse Bracers"
+     "Forcepulse Bracers [AP138]"
     ]
    },
    {
@@ -3475,11 +3619,11 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Brawler Gloves",
-     "Hellfire Hands",
-     "Ravenstrike Cestus",
-     "Spiked Gauntlets",
-     "Ursine Maulers"
+     "Brawler Gloves [AP138]",
+     "Hellfire Hands [AP138]",
+     "Ravenstrike Cestus [AP138]",
+     "Spiked Gauntlets [AP138]",
+     "Ursine Maulers [AP138]"
     ]
    },
    {
@@ -3526,12 +3670,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Oathkeepers"
+     "Oathkeepers [AP126]"
     ]
    },
    {
     "detail": "",
-    "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR",
+    "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -3554,12 +3698,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Quarterstaff"
+     "Quarterstaff [AP126]"
     ]
    },
    {
     "detail": "",
-    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -3568,7 +3712,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Realmbreaker"
+     "Realmbreaker [AP138]"
     ]
    },
    {
@@ -3624,12 +3768,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Trinity Spear"
+     "Trinity Spear [AP138]"
     ]
    },
    {
     "detail": "",
-    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -3638,7 +3782,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Spear"
+     "Spear [AP138]"
     ]
    },
    {
@@ -3652,12 +3796,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Daybreaker"
+     "Daybreaker [AP138]"
     ]
    },
    {
     "detail": "",
-    "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      6
@@ -3666,7 +3810,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Claymore"
+     "Claymore [AP138]"
     ]
    },
    {
@@ -3680,7 +3824,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Broadsword"
+     "Broadsword [AP138]"
     ]
    }
   ],
@@ -3696,7 +3840,7 @@
     "unit": "dmg/cast",
     "value": 862.5,
     "weapons": [
-     "Dagger Pair"
+     "Dagger Pair [AP144]"
     ]
    },
    {
@@ -3710,7 +3854,7 @@
     "unit": "dmg/cast",
     "value": 813.3,
     "weapons": [
-     "Bloodletter"
+     "Bloodletter [AP138]"
     ]
    },
    {
@@ -3724,7 +3868,7 @@
     "unit": "dmg/cast",
     "value": 793.0,
     "weapons": [
-     "Galatine Pair"
+     "Galatine Pair [AP138]"
     ]
    },
    {
@@ -3738,12 +3882,12 @@
     "unit": "dmg/cast",
     "value": 230.0,
     "weapons": [
-     "Infernal Scythe"
+     "Infernal Scythe [AP138]"
     ]
    },
    {
     "detail": "8.5/s over 25s CD",
-    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "damage per cast",
     "scores": [
      2
@@ -3752,7 +3896,7 @@
     "unit": "dmg/cast",
     "value": 212.0,
     "weapons": [
-     "Realmbreaker"
+     "Realmbreaker [AP138]"
     ]
    },
    {
@@ -3794,7 +3938,7 @@
     "unit": "dmg/cast",
     "value": null,
     "weapons": [
-     "Forcepulse Bracers"
+     "Forcepulse Bracers [AP138]"
     ]
    }
   ],
@@ -3871,7 +4015,7 @@
    },
    {
     "detail": "4.5/s over 30s CD",
-    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 30s CD",
     "group": "healing per cast",
     "scores": [
      6
@@ -3949,7 +4093,7 @@
   "heal_reduction": [
    {
     "detail": "movespeedbonus -0.5 for 15s",
-    "facts": "self/contact \u00b7 ignores CCR \u00b7 37.5s CD",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 tier-flat \u00b7 37.5s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      4
@@ -3958,7 +4102,7 @@
     "unit": "value\u00b7s",
     "value": 7.5,
     "weapons": [
-     "Staff of Balance"
+     "Staff of Balance [AP126]"
     ]
    },
    {
@@ -4000,12 +4144,12 @@
     "unit": "value\u00b7s",
     "value": 1.6,
     "weapons": [
-     "Carrioncaller"
+     "Carrioncaller [AP138]"
     ]
    },
    {
     "detail": "magicspelldamagebonus -0.25 for 5s",
-    "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 38s CD",
+    "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 38s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      4
@@ -4028,7 +4172,7 @@
     "unit": "value\u00b7s",
     "value": 0.8,
     "weapons": [
-     "Halberd"
+     "Halberd [AP138]"
     ]
    },
    {
@@ -4042,7 +4186,7 @@
     "unit": "value\u00b7s",
     "value": 0.8,
     "weapons": [
-     "Bear Paws"
+     "Bear Paws [AP138]"
     ]
    },
    {
@@ -4056,7 +4200,7 @@
     "unit": "value\u00b7s",
     "value": 0.8,
     "weapons": [
-     "Dagger Pair"
+     "Dagger Pair [AP144]"
     ]
    },
    {
@@ -4070,7 +4214,7 @@
     "unit": "value\u00b7s",
     "value": 0.8,
     "weapons": [
-     "Hellfire Hands"
+     "Hellfire Hands [AP138]"
     ]
    },
    {
@@ -4084,11 +4228,11 @@
     "unit": "value\u00b7s",
     "value": 0.6,
     "weapons": [
-     "Battleaxe",
-     "Crystal Reaper",
-     "Greataxe",
-     "Infernal Scythe",
-     "Realmbreaker"
+     "Battleaxe [AP138]",
+     "Crystal Reaper [AP138]",
+     "Greataxe [AP138]",
+     "Infernal Scythe [AP138]",
+     "Realmbreaker [AP138]"
     ]
    },
    {
@@ -4102,14 +4246,14 @@
     "unit": "value\u00b7s",
     "value": null,
     "weapons": [
-     "Black Hands",
-     "Bloodletter",
-     "Bridled Fury",
-     "Claws",
-     "Dagger",
-     "Deathgivers",
-     "Demonfang",
-     "Twin Slayers"
+     "Black Hands [AP144]",
+     "Bloodletter [AP138]",
+     "Bridled Fury [AP144]",
+     "Claws [AP144]",
+     "Dagger [AP144]",
+     "Deathgivers [AP144]",
+     "Demonfang [AP144]",
+     "Twin Slayers [AP144]"
     ]
    },
    {
@@ -4128,7 +4272,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 3s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 3s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -4242,7 +4386,7 @@
    },
    {
     "detail": "2.8/s over 18s CD",
-    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 18s CD",
+    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 18s CD",
     "group": "healing per cast",
     "scores": [
      6
@@ -4256,7 +4400,7 @@
    },
    {
     "detail": "4.2/s over 12s CD",
-    "facts": "targeted friendother @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 12s CD",
+    "facts": "targeted friendother @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 12s CD",
     "group": "healing per cast",
     "scores": [
      4
@@ -4283,7 +4427,7 @@
     "unit": "heal/cast",
     "value": 30.0,
     "weapons": [
-     "Oathkeepers"
+     "Oathkeepers [AP126]"
     ]
    },
    {
@@ -4346,7 +4490,7 @@
   "knockback_displace": [
    {
     "detail": "ignores CC resistance",
-    "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 27.5s CD",
+    "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 27.5s CD",
     "group": "displacement (m)",
     "scores": [
      6
@@ -4360,7 +4504,7 @@
    },
    {
     "detail": "ignores CC resistance",
-    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 29s CD",
+    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 29s CD",
     "group": "displacement (m)",
     "scores": [
      6
@@ -4369,7 +4513,7 @@
     "unit": "m",
     "value": 12.0,
     "weapons": [
-     "Iron-clad Staff"
+     "Iron-clad Staff [AP126]"
     ]
    },
    {
@@ -4395,7 +4539,7 @@
    },
    {
     "detail": "ignores CC resistance",
-    "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "displacement (m)",
     "scores": [
      4
@@ -4409,7 +4553,7 @@
    },
    {
     "detail": "ignores CC resistance",
-    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 18s CD",
+    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 18s CD",
     "group": "displacement (m)",
     "scores": [
      4
@@ -4432,16 +4576,16 @@
     "unit": "m",
     "value": 9.0,
     "weapons": [
-     "Battle Bracers",
-     "Forcepulse Bracers",
-     "Hellfire Hands",
-     "Spiked Gauntlets",
-     "Ursine Maulers"
+     "Battle Bracers [AP138]",
+     "Forcepulse Bracers [AP138]",
+     "Hellfire Hands [AP138]",
+     "Spiked Gauntlets [AP138]",
+     "Ursine Maulers [AP138]"
     ]
    },
    {
     "detail": "ignores CC resistance",
-    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 10s CD",
+    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 10s CD",
     "group": "displacement (m)",
     "scores": [
      2
@@ -4459,7 +4603,7 @@
    },
    {
     "detail": "ignores CC resistance",
-    "facts": "persists 3s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 3s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
      4
@@ -4500,7 +4644,7 @@
     "unit": "m",
     "value": 4.0,
     "weapons": [
-     "Rift Glaive"
+     "Rift Glaive [AP138]"
     ]
    },
    {
@@ -4519,7 +4663,7 @@
    },
    {
     "detail": "ignores CC resistance",
-    "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
      2
@@ -4528,7 +4672,7 @@
     "unit": "m",
     "value": 2.1,
     "weapons": [
-     "Soulscythe"
+     "Soulscythe [AP126]"
     ]
    },
    {
@@ -4547,7 +4691,7 @@
    },
    {
     "detail": "ignores CC resistance",
-    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "displacement (m)",
     "scores": [
      2
@@ -4556,12 +4700,12 @@
     "unit": "m",
     "value": 1.25,
     "weapons": [
-     "Realmbreaker"
+     "Realmbreaker [AP138]"
     ]
    },
    {
     "detail": "ignores CC resistance",
-    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "displacement (m)",
     "scores": [
      2
@@ -4570,12 +4714,12 @@
     "unit": "m",
     "value": 1.25,
     "weapons": [
-     "Spear"
+     "Spear [AP138]"
     ]
    },
    {
     "detail": "ignores CC resistance",
-    "facts": "ground-cast @10m \u00b7 ignores CCR \u00b7 15s CD",
+    "facts": "ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "displacement (m)",
     "scores": [
      2
@@ -4584,15 +4728,15 @@
     "unit": "m",
     "value": 1.0,
     "weapons": [
-     "Black Monk Staff",
-     "Double Bladed Staff",
-     "Grailseeker",
-     "Staff of Balance"
+     "Black Monk Staff [AP126]",
+     "Double Bladed Staff [AP126]",
+     "Grailseeker [AP126]",
+     "Staff of Balance [AP126]"
     ]
    },
    {
     "detail": "ignores CC resistance",
-    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
      2
@@ -4606,7 +4750,7 @@
    },
    {
     "detail": "ignores CC resistance",
-    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
      2
@@ -4641,7 +4785,7 @@
    },
    {
     "detail": "ignores CC resistance",
-    "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
      2
@@ -4655,7 +4799,7 @@
    },
    {
     "detail": "ignores CC resistance",
-    "facts": "persists 2s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 15s CD",
+    "facts": "persists 2s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "displacement (m)",
     "scores": [
      2
@@ -4664,12 +4808,12 @@
     "unit": "m",
     "value": 0.9,
     "weapons": [
-     "Brawler Gloves"
+     "Brawler Gloves [AP138]"
     ]
    },
    {
     "detail": "ignores CC resistance",
-    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
      4
@@ -4678,12 +4822,12 @@
     "unit": "m",
     "value": 0.28,
     "weapons": [
-     "Ravenstrike Cestus"
+     "Ravenstrike Cestus [AP138]"
     ]
    },
    {
     "detail": "ignores CC resistance",
-    "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "displacement (m)",
     "scores": [
      2
@@ -4692,12 +4836,12 @@
     "unit": "m",
     "value": 0.25,
     "weapons": [
-     "Kingmaker"
+     "Kingmaker [AP138]"
     ]
    },
    {
     "detail": "",
-    "facts": "persists 2.6s \u00b7 ground-cast @22m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 2.6s \u00b7 ground-cast @22m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -4711,7 +4855,7 @@
    },
    {
     "detail": "",
-    "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -4734,7 +4878,7 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Fists of Avalon"
+     "Fists of Avalon [AP138]"
     ]
    },
    {
@@ -4748,7 +4892,7 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Quarterstaff"
+     "Quarterstaff [AP126]"
     ]
    },
    {
@@ -4762,12 +4906,12 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Phantom Twinblade"
+     "Phantom Twinblade [AP126]"
     ]
    },
    {
     "detail": "",
-    "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 18s CD",
+    "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -4776,7 +4920,7 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Glaive"
+     "Glaive [AP138]"
     ]
    }
   ],
@@ -4792,7 +4936,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Greataxe"
+     "Greataxe [AP138]"
     ]
    },
    {
@@ -4806,10 +4950,10 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Battleaxe",
-     "Carrioncaller",
-     "Halberd",
-     "Infernal Scythe"
+     "Battleaxe [AP138]",
+     "Carrioncaller [AP138]",
+     "Halberd [AP138]",
+     "Infernal Scythe [AP138]"
     ]
    },
    {
@@ -4823,7 +4967,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Crystal Reaper"
+     "Crystal Reaper [AP138]"
     ]
    },
    {
@@ -4837,7 +4981,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Battle Bracers"
+     "Battle Bracers [AP138]"
     ]
    },
    {
@@ -4851,7 +4995,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Bear Paws"
+     "Bear Paws [AP138]"
     ]
    },
    {
@@ -4865,7 +5009,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Bloodletter"
+     "Bloodletter [AP138]"
     ]
    },
    {
@@ -4884,7 +5028,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 3.5s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 3.5s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -4925,7 +5069,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Carving Sword"
+     "Carving Sword [AP138]"
     ]
    },
    {
@@ -4939,10 +5083,10 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Black Hands",
-     "Claws",
-     "Dagger Pair",
-     "Demonfang"
+     "Black Hands [AP144]",
+     "Claws [AP144]",
+     "Dagger Pair [AP144]",
+     "Demonfang [AP144]"
     ]
    },
    {
@@ -4970,12 +5114,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Twin Slayers"
+     "Twin Slayers [AP144]"
     ]
    },
    {
     "detail": "",
-    "facts": "persists 2s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 2s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -4984,12 +5128,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Bridled Fury"
+     "Bridled Fury [AP144]"
     ]
    },
    {
     "detail": "",
-    "facts": "self/contact \u00b7 20s CD",
+    "facts": "self/contact \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -4998,7 +5142,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Dagger"
+     "Dagger [AP144]"
     ]
    },
    {
@@ -5012,7 +5156,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Deathgivers"
+     "Deathgivers [AP144]"
     ]
    },
    {
@@ -5026,7 +5170,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Double Bladed Staff"
+     "Double Bladed Staff [AP126]"
     ]
    },
    {
@@ -5040,7 +5184,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Dual Swords"
+     "Dual Swords [AP138]"
     ]
    },
    {
@@ -5091,7 +5235,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -5105,7 +5249,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -5119,7 +5263,7 @@
    },
    {
     "detail": "",
-    "facts": "targeted other @13m \u00b7 ignores CCR \u00b7 18s CD",
+    "facts": "targeted other @13m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -5135,7 +5279,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      6
@@ -5158,9 +5302,9 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Clarent Blade",
-     "Galatine Pair",
-     "Kingmaker"
+     "Clarent Blade [AP138]",
+     "Galatine Pair [AP138]",
+     "Kingmaker [AP138]"
     ]
    },
    {
@@ -5174,7 +5318,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Fists of Avalon"
+     "Fists of Avalon [AP138]"
     ]
    },
    {
@@ -5188,7 +5332,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Forcepulse Bracers"
+     "Forcepulse Bracers [AP138]"
     ]
    },
    {
@@ -5202,11 +5346,11 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Brawler Gloves",
-     "Hellfire Hands",
-     "Ravenstrike Cestus",
-     "Spiked Gauntlets",
-     "Ursine Maulers"
+     "Brawler Gloves [AP138]",
+     "Hellfire Hands [AP138]",
+     "Ravenstrike Cestus [AP138]",
+     "Spiked Gauntlets [AP138]",
+     "Ursine Maulers [AP138]"
     ]
    },
    {
@@ -5225,7 +5369,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR",
+    "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -5262,12 +5406,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Quarterstaff"
+     "Quarterstaff [AP126]"
     ]
    },
    {
     "detail": "",
-    "facts": "ground-cast @8m \u00b7 ignores CCR \u00b7 6s CD",
+    "facts": "ground-cast @8m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 6s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -5276,15 +5420,15 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Grailseeker",
-     "Iron-clad Staff",
-     "Phantom Twinblade",
-     "Soulscythe"
+     "Grailseeker [AP126]",
+     "Iron-clad Staff [AP126]",
+     "Phantom Twinblade [AP126]",
+     "Soulscythe [AP126]"
     ]
    },
    {
     "detail": "",
-    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -5293,7 +5437,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Realmbreaker"
+     "Realmbreaker [AP138]"
     ]
    },
    {
@@ -5349,11 +5493,11 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Glaive",
-     "Heron Spear",
-     "Pike",
-     "Rift Glaive",
-     "Spirithunter"
+     "Glaive [AP138]",
+     "Heron Spear [AP138]",
+     "Pike [AP138]",
+     "Rift Glaive [AP138]",
+     "Spirithunter [AP138]"
     ]
    },
    {
@@ -5367,12 +5511,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Trinity Spear"
+     "Trinity Spear [AP138]"
     ]
    },
    {
     "detail": "",
-    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -5381,7 +5525,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Spear"
+     "Spear [AP138]"
     ]
    },
    {
@@ -5395,12 +5539,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Daybreaker"
+     "Daybreaker [AP138]"
     ]
    },
    {
     "detail": "",
-    "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -5409,7 +5553,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Claymore"
+     "Claymore [AP138]"
     ]
    },
    {
@@ -5423,7 +5567,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Broadsword"
+     "Broadsword [AP138]"
     ]
    },
    {
@@ -5437,14 +5581,14 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Infinity Blade"
+     "Infinity Blade [AP138]"
     ]
    }
   ],
   "peel": [
    {
     "detail": "knockback 18.0m",
-    "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 27.5s CD",
+    "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 27.5s CD",
     "group": "displacement (m)",
     "scores": [
      4
@@ -5458,7 +5602,7 @@
    },
    {
     "detail": "knockback 12.0m",
-    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 29s CD",
+    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 29s CD",
     "group": "displacement (m)",
     "scores": [
      4
@@ -5467,7 +5611,7 @@
     "unit": "m",
     "value": 12.0,
     "weapons": [
-     "Iron-clad Staff"
+     "Iron-clad Staff [AP126]"
     ]
    },
    {
@@ -5493,7 +5637,7 @@
    },
    {
     "detail": "knockback 10.0m",
-    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 18s CD",
+    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat \u00b7 18s CD",
     "group": "displacement (m)",
     "scores": [
      4
@@ -5516,11 +5660,11 @@
     "unit": "m",
     "value": 9.0,
     "weapons": [
-     "Battle Bracers",
-     "Fists of Avalon",
-     "Forcepulse Bracers",
-     "Hellfire Hands",
-     "Ursine Maulers"
+     "Battle Bracers [AP138]",
+     "Fists of Avalon [AP138]",
+     "Forcepulse Bracers [AP138]",
+     "Hellfire Hands [AP138]",
+     "Ursine Maulers [AP138]"
     ]
    },
    {
@@ -5542,7 +5686,7 @@
    },
    {
     "detail": "knockback 8.0m",
-    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 10s CD",
+    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 10s CD",
     "group": "displacement (m)",
     "scores": [
      4
@@ -5556,7 +5700,7 @@
    },
    {
     "detail": "knockback 6.0m",
-    "facts": "persists 3s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 3s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
      4
@@ -5590,7 +5734,7 @@
    },
    {
     "detail": "knockback 1.25m",
-    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 1.3s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "displacement (m)",
     "scores": [
      2
@@ -5599,12 +5743,12 @@
     "unit": "m",
     "value": 1.25,
     "weapons": [
-     "Realmbreaker"
+     "Realmbreaker [AP138]"
     ]
    },
    {
     "detail": "knockback 1.25m",
-    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "displacement (m)",
     "scores": [
      2
@@ -5613,12 +5757,12 @@
     "unit": "m",
     "value": 1.25,
     "weapons": [
-     "Spear"
+     "Spear [AP138]"
     ]
    },
    {
     "detail": "knockback 1.0m",
-    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 30s CD",
     "group": "displacement (m)",
     "scores": [
      6
@@ -5632,7 +5776,7 @@
    },
    {
     "detail": "knockback 0.9m",
-    "facts": "persists 2s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 15s CD",
+    "facts": "persists 2s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "displacement (m)",
     "scores": [
      2
@@ -5641,12 +5785,12 @@
     "unit": "m",
     "value": 0.9,
     "weapons": [
-     "Brawler Gloves"
+     "Brawler Gloves [AP138]"
     ]
    },
    {
     "detail": "knockback 0.25m",
-    "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 1s \u00b7 ground-cast @6m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "displacement (m)",
     "scores": [
      4
@@ -5655,12 +5799,12 @@
     "unit": "m",
     "value": 0.25,
     "weapons": [
-     "Kingmaker"
+     "Kingmaker [AP138]"
     ]
    },
    {
     "detail": "hard CC 3.5s",
-    "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -5669,7 +5813,7 @@
     "unit": "s",
     "value": 3.5,
     "weapons": [
-     "Grailseeker"
+     "Grailseeker [AP126]"
     ]
    },
    {
@@ -5683,7 +5827,7 @@
     "unit": "s",
     "value": 2.79,
     "weapons": [
-     "Pike"
+     "Pike [AP138]"
     ]
    },
    {
@@ -5702,7 +5846,7 @@
    },
    {
     "detail": "hard CC 2.5s",
-    "facts": "ground-cast @14m \u00b7 ignores CCR \u00b7 72s CD",
+    "facts": "ground-cast @14m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 72s CD",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -5730,7 +5874,7 @@
    },
    {
     "detail": "hard CC 2.5s; knockback 0.9m",
-    "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -5800,7 +5944,7 @@
    },
    {
     "detail": "hard CC 2.2s",
-    "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
      2,
@@ -5811,11 +5955,11 @@
     "unit": "s",
     "value": 2.2,
     "weapons": [
-     "Black Monk Staff",
-     "Double Bladed Staff",
-     "Phantom Twinblade",
-     "Quarterstaff",
-     "Staff of Balance"
+     "Black Monk Staff [AP126]",
+     "Double Bladed Staff [AP126]",
+     "Phantom Twinblade [AP126]",
+     "Quarterstaff [AP126]",
+     "Staff of Balance [AP126]"
     ]
    },
    {
@@ -5849,12 +5993,12 @@
     "unit": "s",
     "value": 1.75,
     "weapons": [
-     "Heron Spear"
+     "Heron Spear [AP138]"
     ]
    },
    {
     "detail": "hard CC 1.5s",
-    "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR",
+    "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -5877,18 +6021,18 @@
     "unit": "s",
     "value": 1.25,
     "weapons": [
-     "Broadsword",
-     "Carving Sword",
-     "Clarent Blade",
-     "Claymore",
-     "Dual Swords",
-     "Galatine Pair",
-     "Infinity Blade"
+     "Broadsword [AP138]",
+     "Carving Sword [AP138]",
+     "Clarent Blade [AP138]",
+     "Claymore [AP138]",
+     "Dual Swords [AP138]",
+     "Galatine Pair [AP138]",
+     "Infinity Blade [AP138]"
     ]
    },
    {
     "detail": "hard CC 1.0s",
-    "facts": "ground-cast @22m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "ground-cast @22m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
      2
@@ -5897,20 +6041,20 @@
     "unit": "s",
     "value": 1.0,
     "weapons": [
-     "Black Hands",
-     "Bloodletter",
-     "Bridled Fury",
-     "Claws",
-     "Dagger",
-     "Dagger Pair",
-     "Deathgivers",
-     "Demonfang",
-     "Twin Slayers"
+     "Black Hands [AP144]",
+     "Bloodletter [AP138]",
+     "Bridled Fury [AP144]",
+     "Claws [AP144]",
+     "Dagger Pair [AP144]",
+     "Dagger [AP144]",
+     "Deathgivers [AP144]",
+     "Demonfang [AP144]",
+     "Twin Slayers [AP144]"
     ]
    },
    {
     "detail": "hard CC 1.0s",
-    "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
      2
@@ -5924,7 +6068,7 @@
    },
    {
     "detail": "hard CC 0.8s; knockback 1.0m",
-    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -5938,7 +6082,7 @@
    },
    {
     "detail": "slow-power 8.0; knockback 2.1m",
-    "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -5947,12 +6091,12 @@
     "unit": "slow%\u00b7s",
     "value": 8.0,
     "weapons": [
-     "Soulscythe"
+     "Soulscythe [AP126]"
     ]
    },
    {
     "detail": "slow-power 4.5",
-    "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -5966,7 +6110,7 @@
    },
    {
     "detail": "slow-power 3.5",
-    "facts": "self/contact \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      4
@@ -5980,7 +6124,7 @@
    },
    {
     "detail": "slow-power 2.5",
-    "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -5994,7 +6138,7 @@
    },
    {
     "detail": "slow-power 1.6; knockback 10.0m",
-    "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -6017,12 +6161,12 @@
     "unit": "slow%\u00b7s",
     "value": 1.5,
     "weapons": [
-     "Spiked Gauntlets"
+     "Spiked Gauntlets [AP138]"
     ]
    },
    {
     "detail": "slow-power 0.9; hard CC 2.0s",
-    "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      4
@@ -6036,7 +6180,7 @@
    },
    {
     "detail": "slow-power 0.88; knockback 0.28m",
-    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -6045,12 +6189,12 @@
     "unit": "slow%\u00b7s",
     "value": 0.88,
     "weapons": [
-     "Ravenstrike Cestus"
+     "Ravenstrike Cestus [AP138]"
     ]
    },
    {
     "detail": "slow-power 0.6",
-    "facts": "targeted enemy @4m \u00b7 ignores CCR \u00b7 18s CD",
+    "facts": "targeted enemy @4m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 18s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -6059,9 +6203,9 @@
     "unit": "slow%\u00b7s",
     "value": 0.6,
     "weapons": [
-     "Glaive",
-     "Rift Glaive",
-     "Spirithunter"
+     "Glaive [AP138]",
+     "Rift Glaive [AP138]",
+     "Spirithunter [AP138]"
     ]
    },
    {
@@ -6114,7 +6258,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 2.6s \u00b7 ground-cast @22m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 2.6s \u00b7 ground-cast @22m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -6128,7 +6272,7 @@
    },
    {
     "detail": "",
-    "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -6142,7 +6286,7 @@
    },
    {
     "detail": "",
-    "facts": "targeted other @13m \u00b7 ignores CCR \u00b7 18s CD",
+    "facts": "targeted other @13m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 18s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -6204,7 +6348,7 @@
      "Dreadstorm Monarch",
      "Incubus Mace",
      "Mace",
-     "Oathkeepers"
+     "Oathkeepers [AP126]"
     ]
    },
    {
@@ -6246,7 +6390,7 @@
     "unit": "m",
     "value": null,
     "weapons": [
-     "Trinity Spear"
+     "Trinity Spear [AP138]"
     ]
    }
   ],
@@ -6267,7 +6411,7 @@
    },
    {
     "detail": "",
-    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -6276,7 +6420,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Claws"
+     "Claws [AP144]"
     ]
    },
    {
@@ -6295,7 +6439,7 @@
    },
    {
     "detail": "",
-    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -6304,7 +6448,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Black Hands"
+     "Black Hands [AP144]"
     ]
    },
    {
@@ -6339,7 +6483,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Fists of Avalon"
+     "Fists of Avalon [AP138]"
     ]
    },
    {
@@ -6367,7 +6511,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Black Monk Staff"
+     "Black Monk Staff [AP126]"
     ]
    },
    {
@@ -6381,7 +6525,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Daybreaker"
+     "Daybreaker [AP138]"
     ]
    }
   ],
@@ -6411,14 +6555,14 @@
     "unit": "value\u00b7s",
     "value": 1.3,
     "weapons": [
-     "Battleaxe",
-     "Bear Paws",
-     "Carrioncaller",
-     "Crystal Reaper",
-     "Greataxe",
-     "Halberd",
-     "Infernal Scythe",
-     "Realmbreaker"
+     "Battleaxe [AP138]",
+     "Bear Paws [AP138]",
+     "Carrioncaller [AP138]",
+     "Crystal Reaper [AP138]",
+     "Greataxe [AP138]",
+     "Halberd [AP138]",
+     "Infernal Scythe [AP138]",
+     "Realmbreaker [AP138]"
     ]
    },
    {
@@ -6453,7 +6597,7 @@
     "unit": "value\u00b7s",
     "value": 1.2,
     "weapons": [
-     "Carving Sword"
+     "Carving Sword [AP138]"
     ]
    },
    {
@@ -6481,14 +6625,14 @@
     "unit": "value\u00b7s",
     "value": 1.0,
     "weapons": [
-     "Battle Bracers",
-     "Brawler Gloves",
-     "Fists of Avalon",
-     "Forcepulse Bracers",
-     "Hellfire Hands",
-     "Ravenstrike Cestus",
-     "Spiked Gauntlets",
-     "Ursine Maulers"
+     "Battle Bracers [AP138]",
+     "Brawler Gloves [AP138]",
+     "Fists of Avalon [AP138]",
+     "Forcepulse Bracers [AP138]",
+     "Hellfire Hands [AP138]",
+     "Ravenstrike Cestus [AP138]",
+     "Spiked Gauntlets [AP138]",
+     "Ursine Maulers [AP138]"
     ]
    },
    {
@@ -6536,15 +6680,15 @@
     "unit": "value\u00b7s",
     "value": 0.5,
     "weapons": [
-     "Black Hands",
-     "Bloodletter",
-     "Bridled Fury",
-     "Claws",
-     "Dagger",
-     "Dagger Pair",
-     "Deathgivers",
-     "Demonfang",
-     "Twin Slayers"
+     "Black Hands [AP144]",
+     "Bloodletter [AP138]",
+     "Bridled Fury [AP144]",
+     "Claws [AP144]",
+     "Dagger Pair [AP144]",
+     "Dagger [AP144]",
+     "Deathgivers [AP144]",
+     "Demonfang [AP144]",
+     "Twin Slayers [AP144]"
     ]
    },
    {
@@ -6579,7 +6723,7 @@
     "unit": "value\u00b7s",
     "value": 0.5,
     "weapons": [
-     "Spirithunter"
+     "Spirithunter [AP138]"
     ]
    },
    {
@@ -6696,12 +6840,12 @@
      "Dreadstorm Monarch",
      "Incubus Mace",
      "Mace",
-     "Oathkeepers"
+     "Oathkeepers [AP126]"
     ]
    },
    {
     "detail": "",
-    "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -6710,7 +6854,7 @@
     "unit": "s",
     "value": 3.5,
     "weapons": [
-     "Grailseeker"
+     "Grailseeker [AP126]"
     ]
    },
    {
@@ -6724,7 +6868,7 @@
     "unit": "s",
     "value": 2.79,
     "weapons": [
-     "Pike"
+     "Pike [AP138]"
     ]
    },
    {
@@ -6764,7 +6908,7 @@
    },
    {
     "detail": "",
-    "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "targeted enemy @5m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
      2
@@ -6773,18 +6917,18 @@
     "unit": "s",
     "value": 2.2,
     "weapons": [
-     "Black Monk Staff",
-     "Double Bladed Staff",
-     "Iron-clad Staff",
-     "Phantom Twinblade",
-     "Quarterstaff",
-     "Soulscythe",
-     "Staff of Balance"
+     "Black Monk Staff [AP126]",
+     "Double Bladed Staff [AP126]",
+     "Iron-clad Staff [AP126]",
+     "Phantom Twinblade [AP126]",
+     "Quarterstaff [AP126]",
+     "Soulscythe [AP126]",
+     "Staff of Balance [AP126]"
     ]
    },
    {
     "detail": "",
-    "facts": "ground-cast @20m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "ground-cast @20m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
      2
@@ -6793,12 +6937,12 @@
     "unit": "s",
     "value": 2.2,
     "weapons": [
-     "Daybreaker",
-     "Glaive",
-     "Heron Spear",
-     "Rift Glaive",
-     "Spear",
-     "Spirithunter"
+     "Daybreaker [AP138]",
+     "Glaive [AP138]",
+     "Heron Spear [AP138]",
+     "Rift Glaive [AP138]",
+     "Spear [AP138]",
+     "Spirithunter [AP138]"
     ]
    },
    {
@@ -6838,7 +6982,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR",
+    "facts": "ground-cast @11m \u00b7 channeled \u00b7 ignores CCR \u00b7 tier-flat",
     "group": "hard CC (s)",
     "scores": [
      6
@@ -6852,7 +6996,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @12m \u00b7 ignores CCR \u00b7 15s CD",
+    "facts": "ground-cast @12m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
      2
@@ -6882,14 +7026,14 @@
     "unit": "s",
     "value": 1.25,
     "weapons": [
-     "Broadsword",
-     "Carving Sword",
-     "Clarent Blade",
-     "Claymore",
-     "Dual Swords",
-     "Galatine Pair",
-     "Infinity Blade",
-     "Kingmaker"
+     "Broadsword [AP138]",
+     "Carving Sword [AP138]",
+     "Clarent Blade [AP138]",
+     "Claymore [AP138]",
+     "Dual Swords [AP138]",
+     "Galatine Pair [AP138]",
+     "Infinity Blade [AP138]",
+     "Kingmaker [AP138]"
     ]
    },
    {
@@ -6914,7 +7058,7 @@
    },
    {
     "detail": "",
-    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -6923,7 +7067,7 @@
     "unit": "s",
     "value": 0,
     "weapons": [
-     "Claws"
+     "Claws [AP144]"
     ]
    },
    {
@@ -6937,14 +7081,14 @@
     "unit": "s",
     "value": null,
     "weapons": [
-     "Battleaxe",
-     "Bear Paws",
-     "Carrioncaller",
-     "Crystal Reaper",
-     "Greataxe",
-     "Halberd",
-     "Infernal Scythe",
-     "Realmbreaker"
+     "Battleaxe [AP138]",
+     "Bear Paws [AP138]",
+     "Carrioncaller [AP138]",
+     "Crystal Reaper [AP138]",
+     "Greataxe [AP138]",
+     "Halberd [AP138]",
+     "Infernal Scythe [AP138]",
+     "Realmbreaker [AP138]"
     ]
    },
    {
@@ -6972,7 +7116,7 @@
     "unit": "s",
     "value": null,
     "weapons": [
-     "Trinity Spear"
+     "Trinity Spear [AP138]"
     ]
    }
   ],
@@ -6993,7 +7137,7 @@
    },
    {
     "detail": "4.5/s over 30s CD",
-    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @11m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 30s CD",
     "group": "healing per cast",
     "scores": [
      2
@@ -7016,7 +7160,7 @@
     "unit": "heal/cast",
     "value": 50.0,
     "weapons": [
-     "Battleaxe"
+     "Battleaxe [AP138]"
     ]
    },
    {
@@ -7030,12 +7174,12 @@
     "unit": "heal/cast",
     "value": null,
     "weapons": [
-     "Carrioncaller",
-     "Crystal Reaper",
-     "Greataxe",
-     "Halberd",
-     "Infernal Scythe",
-     "Realmbreaker"
+     "Carrioncaller [AP138]",
+     "Crystal Reaper [AP138]",
+     "Greataxe [AP138]",
+     "Halberd [AP138]",
+     "Infernal Scythe [AP138]",
+     "Realmbreaker [AP138]"
     ]
    },
    {
@@ -7049,7 +7193,7 @@
     "unit": "heal/cast",
     "value": null,
     "weapons": [
-     "Bear Paws"
+     "Bear Paws [AP138]"
     ]
    },
    {
@@ -7063,14 +7207,14 @@
     "unit": "heal/cast",
     "value": null,
     "weapons": [
-     "Black Hands",
-     "Bloodletter",
-     "Bridled Fury",
-     "Claws",
-     "Dagger Pair",
-     "Deathgivers",
-     "Demonfang",
-     "Twin Slayers"
+     "Black Hands [AP144]",
+     "Bloodletter [AP138]",
+     "Bridled Fury [AP144]",
+     "Claws [AP144]",
+     "Dagger Pair [AP144]",
+     "Deathgivers [AP144]",
+     "Demonfang [AP144]",
+     "Twin Slayers [AP144]"
     ]
    },
    {
@@ -7084,19 +7228,19 @@
     "unit": "heal/cast",
     "value": null,
     "weapons": [
-     "Broadsword",
-     "Carving Sword",
-     "Clarent Blade",
-     "Claymore",
-     "Dual Swords",
-     "Galatine Pair",
-     "Infinity Blade",
-     "Kingmaker"
+     "Broadsword [AP138]",
+     "Carving Sword [AP138]",
+     "Clarent Blade [AP138]",
+     "Claymore [AP138]",
+     "Dual Swords [AP138]",
+     "Galatine Pair [AP138]",
+     "Infinity Blade [AP138]",
+     "Kingmaker [AP138]"
     ]
    },
    {
     "detail": "",
-    "facts": "self/contact \u00b7 20s CD",
+    "facts": "self/contact \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -7105,7 +7249,7 @@
     "unit": "heal/cast",
     "value": null,
     "weapons": [
-     "Dagger"
+     "Dagger [AP144]"
     ]
    },
    {
@@ -7119,14 +7263,14 @@
     "unit": "heal/cast",
     "value": null,
     "weapons": [
-     "Black Monk Staff",
-     "Double Bladed Staff",
-     "Grailseeker",
-     "Iron-clad Staff",
-     "Phantom Twinblade",
-     "Quarterstaff",
-     "Soulscythe",
-     "Staff of Balance"
+     "Black Monk Staff [AP126]",
+     "Double Bladed Staff [AP126]",
+     "Grailseeker [AP126]",
+     "Iron-clad Staff [AP126]",
+     "Phantom Twinblade [AP126]",
+     "Quarterstaff [AP126]",
+     "Soulscythe [AP126]",
+     "Staff of Balance [AP126]"
     ]
    },
    {
@@ -7255,14 +7399,14 @@
     "unit": "heal/cast",
     "value": null,
     "weapons": [
-     "Daybreaker",
-     "Glaive",
-     "Heron Spear",
-     "Pike",
-     "Rift Glaive",
-     "Spear",
-     "Spirithunter",
-     "Trinity Spear"
+     "Daybreaker [AP138]",
+     "Glaive [AP138]",
+     "Heron Spear [AP138]",
+     "Pike [AP138]",
+     "Rift Glaive [AP138]",
+     "Spear [AP138]",
+     "Spirithunter [AP138]",
+     "Trinity Spear [AP138]"
     ]
    }
   ],
@@ -7327,7 +7471,7 @@
     "unit": "s",
     "value": 2.25,
     "weapons": [
-     "Clarent Blade"
+     "Clarent Blade [AP138]"
     ]
    },
    {
@@ -7354,7 +7498,7 @@
   "slow": [
    {
     "detail": "slow-power 8.0; knockback 2.1m",
-    "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 2.6s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      4
@@ -7363,7 +7507,7 @@
     "unit": "slow%\u00b7s",
     "value": 8.0,
     "weapons": [
-     "Soulscythe"
+     "Soulscythe [AP126]"
     ]
    },
    {
@@ -7382,7 +7526,7 @@
    },
    {
     "detail": "slow-power 7.5",
-    "facts": "self/contact \u00b7 ignores CCR \u00b7 37.5s CD",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 tier-flat \u00b7 37.5s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      4
@@ -7391,12 +7535,12 @@
     "unit": "slow%\u00b7s",
     "value": 7.5,
     "weapons": [
-     "Staff of Balance"
+     "Staff of Balance [AP126]"
     ]
    },
    {
     "detail": "slow-power 4.5",
-    "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      4
@@ -7410,7 +7554,7 @@
    },
    {
     "detail": "slow-power 3.5",
-    "facts": "self/contact \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      4
@@ -7424,7 +7568,7 @@
    },
    {
     "detail": "slow-power 2.5",
-    "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      4
@@ -7438,7 +7582,7 @@
    },
    {
     "detail": "slow-power 2.4",
-    "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 44s CD",
+    "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 44s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -7452,7 +7596,7 @@
    },
    {
     "detail": "slow-power 2.4; knockback 1.8m",
-    "facts": "persists 5s \u00b7 self/contact \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 5s \u00b7 self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      4
@@ -7472,7 +7616,7 @@
    },
    {
     "detail": "slow-power 1.6; knockback 10.0m",
-    "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      4
@@ -7495,7 +7639,7 @@
     "unit": "slow%\u00b7s",
     "value": 1.5,
     "weapons": [
-     "Double Bladed Staff"
+     "Double Bladed Staff [AP126]"
     ]
    },
    {
@@ -7509,7 +7653,7 @@
     "unit": "slow%\u00b7s",
     "value": 1.5,
     "weapons": [
-     "Spiked Gauntlets"
+     "Spiked Gauntlets [AP138]"
     ]
    },
    {
@@ -7523,19 +7667,19 @@
     "unit": "slow%\u00b7s",
     "value": 1.5,
     "weapons": [
-     "Daybreaker",
-     "Glaive",
-     "Heron Spear",
-     "Pike",
-     "Rift Glaive",
-     "Spear",
-     "Spirithunter",
-     "Trinity Spear"
+     "Daybreaker [AP138]",
+     "Glaive [AP138]",
+     "Heron Spear [AP138]",
+     "Pike [AP138]",
+     "Rift Glaive [AP138]",
+     "Spear [AP138]",
+     "Spirithunter [AP138]",
+     "Trinity Spear [AP138]"
     ]
    },
    {
     "detail": "slow-power 1.2; hard CC 5.0s",
-    "facts": "persists 3s \u00b7 ground-cast @2m \u00b7 ignores CCR \u00b7 7s CD",
+    "facts": "persists 3s \u00b7 ground-cast @2m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 7s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -7549,7 +7693,7 @@
      "Heavy Mace",
      "Incubus Mace",
      "Morning Star",
-     "Oathkeepers"
+     "Oathkeepers [AP126]"
     ]
    },
    {
@@ -7563,18 +7707,18 @@
     "unit": "slow%\u00b7s",
     "value": 1.0,
     "weapons": [
-     "Broadsword",
-     "Carving Sword",
-     "Claymore",
-     "Dual Swords",
-     "Galatine Pair",
-     "Infinity Blade",
-     "Kingmaker"
+     "Broadsword [AP138]",
+     "Carving Sword [AP138]",
+     "Claymore [AP138]",
+     "Dual Swords [AP138]",
+     "Galatine Pair [AP138]",
+     "Infinity Blade [AP138]",
+     "Kingmaker [AP138]"
     ]
    },
    {
     "detail": "slow-power 1.0",
-    "facts": "persists 1.8s \u00b7 ground-cast @11m \u00b7 ignores CCR \u00b7 10s CD",
+    "facts": "persists 1.8s \u00b7 ground-cast @11m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 10s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      4
@@ -7611,7 +7755,7 @@
    },
    {
     "detail": "slow-power 0.9; hard CC 2.0s",
-    "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      4
@@ -7625,7 +7769,7 @@
    },
    {
     "detail": "slow-power 0.88",
-    "facts": "persists 5.2s \u00b7 targeted allplayers @15m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 5.2s \u00b7 targeted allplayers @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -7639,7 +7783,7 @@
    },
    {
     "detail": "slow-power 0.8",
-    "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -7653,7 +7797,7 @@
    },
    {
     "detail": "slow-power 0.75",
-    "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 38s CD",
+    "facts": "ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 38s CD",
     "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
@@ -7676,7 +7820,7 @@
     "unit": "slow%\u00b7s",
     "value": 0.67,
     "weapons": [
-     "Clarent Blade"
+     "Clarent Blade [AP138]"
     ]
    },
    {
@@ -7765,7 +7909,7 @@
     "unit": "slow%\u00b7s",
     "value": 0.3,
     "weapons": [
-     "Phantom Twinblade"
+     "Phantom Twinblade [AP126]"
     ]
    },
    {
@@ -7835,7 +7979,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @14m \u00b7 ignores CCR \u00b7 72s CD",
+    "facts": "ground-cast @14m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 72s CD",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -7849,7 +7993,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @16m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -7914,19 +8058,19 @@
     "unit": "s",
     "value": 2.11,
     "weapons": [
-     "Black Monk Staff",
-     "Double Bladed Staff",
-     "Grailseeker",
-     "Iron-clad Staff",
-     "Phantom Twinblade",
-     "Quarterstaff",
-     "Soulscythe",
-     "Staff of Balance"
+     "Black Monk Staff [AP126]",
+     "Double Bladed Staff [AP126]",
+     "Grailseeker [AP126]",
+     "Iron-clad Staff [AP126]",
+     "Phantom Twinblade [AP126]",
+     "Quarterstaff [AP126]",
+     "Soulscythe [AP126]",
+     "Staff of Balance [AP126]"
     ]
    },
    {
     "detail": "",
-    "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "persists 3s \u00b7 targeted all @12m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "hard CC (s)",
     "scores": [
      2
@@ -7963,12 +8107,12 @@
     "unit": "s",
     "value": 1.75,
     "weapons": [
-     "Heron Spear"
+     "Heron Spear [AP138]"
     ]
    },
    {
     "detail": "",
-    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 15s CD",
+    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "hard CC (s)",
     "scores": [
      2
@@ -7977,19 +8121,19 @@
     "unit": "s",
     "value": 1.1,
     "weapons": [
-     "Battle Bracers",
-     "Brawler Gloves",
-     "Fists of Avalon",
-     "Forcepulse Bracers",
-     "Hellfire Hands",
-     "Ravenstrike Cestus",
-     "Spiked Gauntlets",
-     "Ursine Maulers"
+     "Battle Bracers [AP138]",
+     "Brawler Gloves [AP138]",
+     "Fists of Avalon [AP138]",
+     "Forcepulse Bracers [AP138]",
+     "Hellfire Hands [AP138]",
+     "Ravenstrike Cestus [AP138]",
+     "Spiked Gauntlets [AP138]",
+     "Ursine Maulers [AP138]"
     ]
    },
    {
     "detail": "",
-    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "targeted enemy @2m \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
      2
@@ -7998,12 +8142,12 @@
     "unit": "s",
     "value": 1.1,
     "weapons": [
-     "Black Hands"
+     "Black Hands [AP144]"
     ]
    },
    {
     "detail": "",
-    "facts": "ground-cast @22m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "ground-cast @22m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
      2
@@ -8012,14 +8156,14 @@
     "unit": "s",
     "value": 1.0,
     "weapons": [
-     "Bloodletter",
-     "Bridled Fury",
-     "Claws",
-     "Dagger",
-     "Dagger Pair",
-     "Deathgivers",
-     "Demonfang",
-     "Twin Slayers"
+     "Bloodletter [AP138]",
+     "Bridled Fury [AP144]",
+     "Claws [AP144]",
+     "Dagger Pair [AP144]",
+     "Dagger [AP144]",
+     "Deathgivers [AP144]",
+     "Demonfang [AP144]",
+     "Twin Slayers [AP144]"
     ]
    },
    {
@@ -8043,7 +8187,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 1.75s \u00b7 ground-cast @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -8057,7 +8201,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "ground-cast @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "hard CC (s)",
     "scores": [
      4
@@ -8071,7 +8215,7 @@
    },
    {
     "detail": "",
-    "facts": "ground-cast @25m \u00b7 ignores CCR \u00b7 25s CD",
+    "facts": "ground-cast @25m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 25s CD",
     "group": "hard CC (s)",
     "scores": [
      2
@@ -8085,7 +8229,7 @@
    },
    {
     "detail": "",
-    "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "targeted enemy @13m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "hard CC (s)",
     "scores": [
      2
@@ -8094,7 +8238,7 @@
     "unit": "s",
     "value": 0.8,
     "weapons": [
-     "Claymore"
+     "Claymore [AP138]"
     ]
    },
    {
@@ -8141,14 +8285,14 @@
     "unit": "dmg/s",
     "value": 31.6,
     "weapons": [
-     "Battleaxe",
-     "Bear Paws",
-     "Carrioncaller",
-     "Crystal Reaper",
-     "Greataxe",
-     "Halberd",
-     "Infernal Scythe",
-     "Realmbreaker"
+     "Battleaxe [AP138]",
+     "Bear Paws [AP138]",
+     "Carrioncaller [AP138]",
+     "Crystal Reaper [AP138]",
+     "Greataxe [AP138]",
+     "Halberd [AP138]",
+     "Infernal Scythe [AP138]",
+     "Realmbreaker [AP138]"
     ]
    },
    {
@@ -8162,12 +8306,12 @@
     "unit": "dmg/s",
     "value": 25.9,
     "weapons": [
-     "Broadsword",
-     "Carving Sword",
-     "Clarent Blade",
-     "Claymore",
-     "Galatine Pair",
-     "Kingmaker"
+     "Broadsword [AP138]",
+     "Carving Sword [AP138]",
+     "Clarent Blade [AP138]",
+     "Claymore [AP138]",
+     "Galatine Pair [AP138]",
+     "Kingmaker [AP138]"
     ]
    },
    {
@@ -8202,12 +8346,12 @@
     "unit": "dmg/s",
     "value": 10.7,
     "weapons": [
-     "Dual Swords"
+     "Dual Swords [AP138]"
     ]
    },
    {
     "detail": "",
-    "facts": "persists 5.2s \u00b7 targeted allplayers @15m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 5.2s \u00b7 targeted allplayers @15m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per second",
     "scores": [
      4
@@ -8230,13 +8374,13 @@
     "unit": "dmg/s",
     "value": 6.7,
     "weapons": [
-     "Black Monk Staff",
-     "Double Bladed Staff",
-     "Grailseeker",
-     "Iron-clad Staff",
-     "Phantom Twinblade",
-     "Soulscythe",
-     "Staff of Balance"
+     "Black Monk Staff [AP126]",
+     "Double Bladed Staff [AP126]",
+     "Grailseeker [AP126]",
+     "Iron-clad Staff [AP126]",
+     "Phantom Twinblade [AP126]",
+     "Soulscythe [AP126]",
+     "Staff of Balance [AP126]"
     ]
    },
    {
@@ -8269,7 +8413,7 @@
    },
    {
     "detail": "",
-    "facts": "self/contact \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per second",
     "scores": [
      2
@@ -8283,7 +8427,7 @@
    },
    {
     "detail": "",
-    "facts": "self/contact \u00b7 20s CD",
+    "facts": "self/contact \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "damage per second",
     "scores": [
      4
@@ -8292,7 +8436,7 @@
     "unit": "dmg/s",
     "value": 4.0,
     "weapons": [
-     "Dagger"
+     "Dagger [AP144]"
     ]
    },
    {
@@ -8311,7 +8455,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "damage per second",
     "scores": [
      2
@@ -8334,7 +8478,7 @@
     "unit": "dmg/s",
     "value": 3.0,
     "weapons": [
-     "Ursine Maulers"
+     "Ursine Maulers [AP138]"
     ]
    },
    {
@@ -8390,7 +8534,7 @@
     "unit": "\u00d7AA",
     "value": 0.35,
     "weapons": [
-     "Infinity Blade"
+     "Infinity Blade [AP138]"
     ]
    },
    {
@@ -8404,14 +8548,14 @@
     "unit": "\u00d7AA",
     "value": 0.28,
     "weapons": [
-     "Daybreaker",
-     "Glaive",
-     "Heron Spear",
-     "Pike",
-     "Rift Glaive",
-     "Spear",
-     "Spirithunter",
-     "Trinity Spear"
+     "Daybreaker [AP138]",
+     "Glaive [AP138]",
+     "Heron Spear [AP138]",
+     "Pike [AP138]",
+     "Rift Glaive [AP138]",
+     "Spear [AP138]",
+     "Spirithunter [AP138]",
+     "Trinity Spear [AP138]"
     ]
    },
    {
@@ -8439,9 +8583,9 @@
     "unit": "\u00d7AA",
     "value": 0.02,
     "weapons": [
-     "Brawler Gloves",
-     "Hellfire Hands",
-     "Spiked Gauntlets"
+     "Brawler Gloves [AP138]",
+     "Hellfire Hands [AP138]",
+     "Spiked Gauntlets [AP138]"
     ]
    },
    {
@@ -8455,10 +8599,10 @@
     "unit": "\u00d7AA",
     "value": 0.015,
     "weapons": [
-     "Battle Bracers",
-     "Fists of Avalon",
-     "Forcepulse Bracers",
-     "Ravenstrike Cestus"
+     "Battle Bracers [AP138]",
+     "Fists of Avalon [AP138]",
+     "Forcepulse Bracers [AP138]",
+     "Ravenstrike Cestus [AP138]"
     ]
    },
    {
@@ -8508,12 +8652,12 @@
     "value": null,
     "weapons": [
      "Arclight Blasters",
-     "Bloodletter",
+     "Bloodletter [AP138]",
      "Bow of Badon",
      "Brimstone Staff",
      "Crossbow",
      "Dawnsong",
-     "Deathgivers",
+     "Deathgivers [AP144]",
      "Fire Staff",
      "Flamewalker Staff",
      "Frost Staff",
@@ -8545,12 +8689,12 @@
     "unit": "dmg/cast",
     "value": null,
     "weapons": [
-     "Black Hands",
-     "Bridled Fury",
-     "Claws",
-     "Dagger Pair",
-     "Demonfang",
-     "Twin Slayers"
+     "Black Hands [AP144]",
+     "Bridled Fury [AP144]",
+     "Claws [AP144]",
+     "Dagger Pair [AP144]",
+     "Demonfang [AP144]",
+     "Twin Slayers [AP144]"
     ]
    },
    {
@@ -8571,7 +8715,7 @@
   "tankiness": [
    {
     "detail": "movespeedbonus -0.5 for 15s",
-    "facts": "self/contact \u00b7 ignores CCR \u00b7 37.5s CD",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 tier-flat \u00b7 37.5s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
@@ -8580,12 +8724,12 @@
     "unit": "value\u00b7s",
     "value": 7.5,
     "weapons": [
-     "Staff of Balance"
+     "Staff of Balance [AP126]"
     ]
    },
    {
     "detail": "attackrangebonus +0.5 for 10s",
-    "facts": "self/contact \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      4
@@ -8613,7 +8757,7 @@
    },
    {
     "detail": "physicalarmor +0.15 for 5s",
-    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 29s CD",
+    "facts": "self/contact \u00b7 channeled \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 29s CD",
     "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
@@ -8622,7 +8766,7 @@
     "unit": "value\u00b7s",
     "value": 0.8,
     "weapons": [
-     "Iron-clad Staff"
+     "Iron-clad Staff [AP126]"
     ]
    },
    {
@@ -8648,10 +8792,10 @@
      "Incubus Mace",
      "Mace",
      "Morning Star",
-     "Oathkeepers",
+     "Oathkeepers [AP126]",
      "Polehammer",
      "Primal Staff",
-     "Quarterstaff",
+     "Quarterstaff [AP126]",
      "Tombhammer",
      "Truebolt Hammer"
     ]
@@ -8674,7 +8818,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 44s CD",
+    "facts": "persists 8s \u00b7 ground-cast @25m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 44s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -8697,7 +8841,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Crystal Reaper"
+     "Crystal Reaper [AP138]"
     ]
    },
    {
@@ -8836,7 +8980,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 5s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 15s CD",
+    "facts": "persists 5s \u00b7 ground-cast @3m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 15s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -8854,7 +8998,7 @@
    },
    {
     "detail": "",
-    "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "targeted enemy @12m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -8868,7 +9012,7 @@
    },
    {
     "detail": "",
-    "facts": "self/contact \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -8882,7 +9026,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 1.8s \u00b7 ground-cast @11m \u00b7 ignores CCR \u00b7 10s CD",
+    "facts": "persists 1.8s \u00b7 ground-cast @11m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 10s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2,
@@ -8902,7 +9046,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 15s \u00b7 ground-cast @10m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      6
@@ -8916,7 +9060,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 30s CD",
+    "facts": "persists 5s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 30s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -8930,7 +9074,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 4s \u00b7 ground-cast @26m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -8944,7 +9088,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 5s \u00b7 self/contact \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 5s \u00b7 self/contact \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -8998,7 +9142,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 3s \u00b7 ground-cast @2m \u00b7 ignores CCR \u00b7 7s CD",
+    "facts": "persists 3s \u00b7 ground-cast @2m \u00b7 ignores CCR \u00b7 tier-flat \u00b7 7s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2,
@@ -9012,7 +9156,7 @@
      "Heavy Mace",
      "Incubus Mace",
      "Morning Star",
-     "Oathkeepers"
+     "Oathkeepers [AP126]"
     ]
    },
    {
@@ -9031,7 +9175,7 @@
    },
    {
     "detail": "",
-    "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 27.5s CD",
+    "facts": "persists 4s \u00b7 ground-cast @18m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 27.5s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -9075,7 +9219,7 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Black Monk Staff"
+     "Black Monk Staff [AP126]"
     ]
    },
    {
@@ -9089,12 +9233,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Phantom Twinblade"
+     "Phantom Twinblade [AP126]"
     ]
    },
    {
     "detail": "",
-    "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 3.5s \u00b7 ground-cast @20m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -9103,12 +9247,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Grailseeker"
+     "Grailseeker [AP126]"
     ]
    },
    {
     "detail": "",
-    "facts": "self/contact \u00b7 ignores CCR \u00b7 37.5s CD",
+    "facts": "self/contact \u00b7 ignores CCR \u00b7 tier-flat \u00b7 37.5s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      4
@@ -9117,12 +9261,12 @@
     "unit": "",
     "value": null,
     "weapons": [
-     "Staff of Balance"
+     "Staff of Balance [AP126]"
     ]
    },
    {
     "detail": "",
-    "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 20s CD",
+    "facts": "persists 1.7s \u00b7 ground-cast @14m \u00b7 ignores CCR \u00b7 CC tier-flat \u00b7 20s CD",
     "group": "not measurable \u2014 human judgment",
     "scores": [
      2
@@ -9152,6 +9296,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -9173,6 +9318,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -9223,6 +9369,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 1.4,
@@ -9243,6 +9390,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -9324,6 +9472,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 1.2,
@@ -9344,6 +9493,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -9382,6 +9532,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -9403,6 +9554,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -9459,6 +9611,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -9502,6 +9655,7 @@
      "value": 50.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.71,
@@ -9522,6 +9676,7 @@
    ],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -9543,6 +9698,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -9588,6 +9744,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -9647,6 +9804,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -9716,6 +9874,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -9758,6 +9917,7 @@
    ],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -9798,6 +9958,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 2.0,
@@ -9817,6 +9978,7 @@
      "value": 30.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -9851,6 +10013,7 @@
    ],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": false,
    "mods": [
     {
@@ -9872,6 +10035,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -9892,6 +10056,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -9926,6 +10091,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -9965,6 +10131,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 2.0,
@@ -9988,6 +10155,7 @@
      "value": 40.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -10021,6 +10189,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -10067,6 +10236,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -10099,6 +10269,7 @@
      "value": 77.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -10119,6 +10290,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -10157,6 +10329,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -10171,6 +10344,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -10263,6 +10437,7 @@
      "value": 227.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -10315,6 +10490,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -10336,6 +10512,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -10410,6 +10587,7 @@
      "value": 65.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -10424,6 +10602,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -10451,6 +10630,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -10514,6 +10694,7 @@
    "damage": [],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.6,
@@ -10534,6 +10715,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.7,
@@ -10558,6 +10740,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -10596,6 +10779,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 5.0,
@@ -10616,6 +10800,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.7,
@@ -10636,6 +10821,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -10679,6 +10865,7 @@
    ],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -10709,6 +10896,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 12.0,
@@ -10728,6 +10916,7 @@
    ],
    "delivery": "friendall",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -10752,6 +10941,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -10772,6 +10962,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": true,
    "mods": [
     {
@@ -10820,6 +11011,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 2.6,
@@ -10846,6 +11038,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -10866,6 +11059,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -10906,6 +11100,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 3.0,
@@ -10948,6 +11143,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -10981,6 +11177,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.6,
@@ -11001,6 +11198,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -11033,6 +11231,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -11070,6 +11269,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -11089,6 +11289,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -11103,6 +11304,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -11157,6 +11359,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": null,
@@ -11171,6 +11374,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -11197,6 +11401,7 @@
      "value": 135.0
     }
    ],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": null,
@@ -11217,6 +11422,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.35,
@@ -11231,6 +11437,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -11257,6 +11464,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -11297,6 +11505,7 @@
    ],
    "delivery": "allplayers",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -11330,6 +11539,7 @@
    "damage": [],
    "delivery": "friendother",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -11381,6 +11591,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 5.0,
@@ -11432,6 +11643,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -11511,6 +11723,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -11542,6 +11755,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 1.0,
@@ -11567,6 +11781,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -11593,6 +11808,7 @@
    ],
    "delivery": "all",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -11625,6 +11841,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 5.0,
@@ -11650,6 +11867,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -11670,6 +11888,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -11684,6 +11903,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 5.3,
@@ -11703,6 +11923,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -11742,6 +11963,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 2.0,
@@ -11762,6 +11984,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -11801,6 +12024,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.1,
@@ -11826,6 +12050,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.7,
@@ -11846,6 +12071,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -11873,6 +12099,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.75,
@@ -11904,6 +12131,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 1.75,
@@ -11935,6 +12163,7 @@
    ],
    "delivery": "all",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -11981,6 +12210,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": null,
@@ -12004,6 +12234,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -12079,6 +12310,7 @@
    ],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -12124,6 +12356,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -12163,6 +12396,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -12189,6 +12423,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 1.2,
@@ -12203,6 +12438,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -12248,6 +12484,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 12.0,
@@ -12268,6 +12505,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -12317,6 +12555,7 @@
    ],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -12338,6 +12577,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -12371,6 +12611,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -12415,6 +12656,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -12447,6 +12689,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -12473,6 +12716,7 @@
    ],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -12492,6 +12736,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -12513,6 +12758,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 2.0,
@@ -12532,6 +12778,7 @@
      "value": 50.0
     }
    ],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -12562,6 +12809,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.85,
@@ -12581,6 +12829,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -12611,6 +12860,7 @@
      "value": 220.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -12644,6 +12894,7 @@
      "value": 50.0
     }
    ],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -12676,6 +12927,7 @@
      "value": 117.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -12690,6 +12942,7 @@
    "damage": [],
    "delivery": "friendall",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -12722,6 +12975,7 @@
      "value": 160.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -12741,6 +12995,7 @@
      "value": 55.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -12785,6 +13040,7 @@
      "value": 138.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -12811,6 +13067,7 @@
      "value": 270.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -12839,6 +13096,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": null,
@@ -12871,6 +13129,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -12903,6 +13162,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -12930,6 +13190,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -12997,6 +13258,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -13030,6 +13292,7 @@
    "damage": [],
    "delivery": "friendother",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -13062,6 +13325,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -13102,6 +13366,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -13135,6 +13400,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -13178,6 +13444,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -13203,6 +13470,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 0.6,
@@ -13223,6 +13491,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -13250,6 +13519,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 0.5,
@@ -13269,6 +13539,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -13339,6 +13610,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 1.3,
@@ -13359,6 +13631,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 5.0,
@@ -13385,6 +13658,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -13412,6 +13686,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -13457,6 +13732,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -13482,6 +13758,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 2.0,
@@ -13549,6 +13826,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 1.0,
@@ -13576,6 +13854,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -13607,6 +13886,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -13638,6 +13918,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -13665,6 +13946,7 @@
    "damage": [],
    "delivery": "friendall",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -13698,6 +13980,7 @@
    "damage": [],
    "delivery": "friendall",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -13712,6 +13995,7 @@
    "damage": [],
    "delivery": null,
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -13733,6 +14017,7 @@
    "damage": [],
    "delivery": null,
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -13760,6 +14045,7 @@
    "damage": [],
    "delivery": null,
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -13787,6 +14073,7 @@
    "damage": [],
    "delivery": null,
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -13814,6 +14101,7 @@
    "damage": [],
    "delivery": null,
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -13847,6 +14135,7 @@
    "damage": [],
    "delivery": null,
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -13861,6 +14150,7 @@
    "damage": [],
    "delivery": null,
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -13875,6 +14165,7 @@
    "damage": [],
    "delivery": null,
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -13889,6 +14180,7 @@
    "damage": [],
    "delivery": null,
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -13903,6 +14195,7 @@
    "damage": [],
    "delivery": null,
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -13917,6 +14210,7 @@
    "damage": [],
    "delivery": null,
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -13931,6 +14225,7 @@
    "damage": [],
    "delivery": null,
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -13970,6 +14265,7 @@
    "damage": [],
    "delivery": null,
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -14019,6 +14315,7 @@
    ],
    "delivery": null,
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -14046,6 +14343,7 @@
    "damage": [],
    "delivery": null,
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -14091,6 +14389,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 4.0,
@@ -14134,6 +14433,7 @@
      "value": 94.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -14158,6 +14458,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 5.0,
@@ -14183,6 +14484,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 0.5,
@@ -14203,6 +14505,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.55,
@@ -14223,6 +14526,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -14243,6 +14547,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -14289,6 +14594,7 @@
    ],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -14322,6 +14628,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -14343,6 +14650,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -14395,6 +14703,7 @@
    ],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -14470,6 +14779,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 0.5,
@@ -14499,6 +14809,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -14519,6 +14830,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.2,
@@ -14543,6 +14855,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -14570,6 +14883,7 @@
    ],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -14597,6 +14911,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": null,
@@ -14620,6 +14935,7 @@
      "value": 39.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -14652,6 +14968,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -14695,6 +15012,7 @@
    ],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": null,
@@ -14721,6 +15039,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": null,
@@ -14735,6 +15054,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -14756,6 +15076,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -14813,6 +15134,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -14827,6 +15149,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -14841,6 +15164,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -14855,6 +15179,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -14869,6 +15194,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -14914,6 +15240,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -14934,6 +15261,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -14991,6 +15319,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -15042,6 +15371,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 0.8,
@@ -15062,6 +15392,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": true,
    "mods": [
     {
@@ -15083,6 +15414,7 @@
    "damage": [],
    "delivery": "other",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": null,
@@ -15097,6 +15429,7 @@
    "damage": [],
    "delivery": "friendall",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -15122,6 +15455,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -15160,6 +15494,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": null,
@@ -15185,6 +15520,7 @@
    ],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -15218,6 +15554,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -15280,6 +15617,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.6,
@@ -15305,6 +15643,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 1.0,
@@ -15340,6 +15679,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 0.8,
@@ -15371,6 +15711,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 1.3,
@@ -15391,6 +15732,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 0.85,
@@ -15415,6 +15757,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 5.0,
@@ -15434,6 +15777,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -15478,6 +15822,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 3.5,
@@ -15492,6 +15837,7 @@
    "damage": [],
    "delivery": "allunmounted",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": null,
@@ -15518,6 +15864,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 1.0,
@@ -15545,6 +15892,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.9,
@@ -15559,6 +15907,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -15595,6 +15944,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -15628,6 +15978,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 2.0,
@@ -15664,6 +16015,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": null,
@@ -15688,6 +16040,7 @@
      "value": 14.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 9.0,
@@ -15702,6 +16055,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -15747,6 +16101,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 1.3,
@@ -15767,6 +16122,7 @@
    ],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -15794,6 +16150,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -15820,6 +16177,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -15864,6 +16222,7 @@
    ],
    "delivery": "enemy",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -15891,6 +16250,7 @@
    "damage": [],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -15971,6 +16331,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -16017,6 +16378,7 @@
    ],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -16043,6 +16405,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 4.0,
@@ -16063,6 +16426,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": null,
@@ -16090,6 +16454,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [
     {
@@ -16117,6 +16482,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -16156,6 +16522,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.5,
@@ -16181,6 +16548,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.6,
@@ -16200,6 +16568,7 @@
    ],
    "delivery": "self",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -16251,6 +16620,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -16284,6 +16654,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": true,
    "ignores_ccr": true,
    "mods": [],
    "persist_s": 0.88,
@@ -16304,6 +16675,7 @@
    ],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 0.1,
@@ -16318,6 +16690,7 @@
    "damage": [],
    "delivery": "ground",
    "heals": [],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [
     {
@@ -16351,6 +16724,7 @@
      "value": 69.0
     }
    ],
+   "ignores_ap": false,
    "ignores_ccr": false,
    "mods": [],
    "persist_s": 4.0,

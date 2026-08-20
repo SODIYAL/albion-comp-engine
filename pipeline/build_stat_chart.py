@@ -95,7 +95,8 @@ def extract(sid, reg):
     cast position (cast range), and counter-immunity flags
     (@ignorecrowdcontrolresistance anywhere in the tree)."""
     rec = {"damage": [], "heals": [], "cc": [], "mods": [],
-           "persist_s": None, "ignores_ccr": False, "channeled": False}
+           "persist_s": None, "ignores_ccr": False, "channeled": False,
+           "ignores_ap": False}
     visited = set()
 
     def health_record(node, out_pos, out_neg):
@@ -127,6 +128,8 @@ def extract(sid, reg):
         guarded = GUARD_NODES.get(key, guarded)
         if node.get("@ignorecrowdcontrolresistance") == "true":
             rec["ignores_ccr"] = True
+        if node.get("@ignoreabilitypowerscaling") == "true":
+            rec["ignores_ap"] = True
         if key == "channelingspell":
             rec["channeled"] = True
         if key == "spelleffectarea":
@@ -203,6 +206,11 @@ def fact_line(rec):
         bits.append("channeled")
     if rec.get("ignores_ccr"):
         bits.append("ignores CCR")
+    if rec.get("ignores_ap"):
+        # honest scoping: a mixed spell (Tornado: CC flagged, damage scales)
+        # is only PARTLY tier-flat
+        bits.append("tier-flat" if not rec.get("damage")
+                    else "CC tier-flat")   # same CC at 4.1 and 8.4
     if rec.get("cooldown"):
         bits.append(f"{rec['cooldown']:g}s CD")
     return " · ".join(bits)
@@ -316,6 +324,31 @@ def metric_for(cap, rec):
     return None, "", ""
 
 
+def family_ability_power(dump_dir, weapon_keys):
+    """{weapon_key: @abilitypower} from the T4 item entry — the FAMILY
+    COEFFICIENT (flat across tiers): how strongly the item converts item
+    power into spell magnitude. Axes 138, Iron-clad 126, most staves/bows
+    120, shields 100 — a real cross-weapon comparability factor."""
+    path = os.path.join(dump_dir, "items.json")
+    raw = json.load(open(path, encoding="utf-8"))
+    want = {f"T4_{k}": k for k in weapon_keys}
+    out = {}
+
+    def walk(node):
+        if isinstance(node, dict):
+            un = node.get("@uniquename")
+            if un in want and node.get("@abilitypower"):
+                out[want[un]] = int(float(node["@abilitypower"]))
+            for v in node.values():
+                walk(v)
+        elif isinstance(node, list):
+            for x in node:
+                walk(x)
+
+    walk(raw)
+    return out
+
+
 def main():
     reg = spell_registry(snapshot_dir())
     lines_db = sheets_lib.load_weapon_lines(OUT)
@@ -323,6 +356,12 @@ def main():
     dataset = json.load(open(os.path.join(OUT, "dataset-latest.json"),
                              encoding="utf-8"))
     names = {k: w["display_name"] for k, w in dataset["weapons"].items()}
+    fam_ap = family_ability_power(snapshot_dir(), list(dataset["weapons"]))
+    # display name + [AP coeff] when it differs from the modal 120
+    for k in names:
+        c = fam_ap.get(k)
+        if c and c != 120:
+            names[k] = f"{names[k]} [AP{c}]"
 
     rows = []                    # (cap, weapon, spell, score)
     for path in sorted(glob.glob(os.path.join(HERE, "sheets", "*.yaml"))):
@@ -381,7 +420,12 @@ def main():
         json.dump({"_meta": {
             "spells_extracted": n_ok, "spells_cited": len(spells),
             "note": ("base dump numbers — the same IP reference for every "
-                     "weapon; equal-IP comparison equals base comparison")},
+                     "weapon; equal-IP comparison equals base comparison"),
+            "tier_model": {
+                "formula": "effective ~ base * (family_ap/100) * 1.0918^((IP-700)/100)",
+                "source": "community-documented (wiki/forum); the dumps carry the per-effect ignoreabilitypowerscaling flags and per-family ability power",
+                "does_not_scale": "percentage effects, durations, distances, and records flagged ignoreabilitypowerscaling (tier-flat in the fact line)"},
+            "family_ability_power": fam_ap},
             "spells": extracted, "boards": boards},
             f, indent=1, sort_keys=True)
 
@@ -411,7 +455,19 @@ for every weapon — comparing them IS comparing at equal IP. The curated
 0&ndash;3 score sits beside each row: a low score above a high score is a
 magnitude outlier for the 1&ndash;7 rescore. &ldquo;&mdash;&rdquo; = the
 data states no measurable number for this capability (human judgment
-stays).</p>"""]
+stays).</p>
+<h2>Tier lens</h2>
+<p class="note">Magnitudes scale &times;1.0918 per 100 item power
+(compounding). Percentage effects, durations, distances, and rows tagged
+<b>tier-flat</b> do NOT scale &mdash; an 18m wall is 18m at 4.1 and at 8.4,
+which is what makes flagged utility the cost-efficient pick. Weapons whose
+family converts item power unusually well carry an [AP&nbsp;] tag (most are
+120; shields 100). Multiplier vs tier-4 flat (700 IP):</p>
+<table style="max-width:640px">
+<tr><th>IP</th><td class="n">700</td><td class="n">800</td><td class="n">900</td><td class="n">1000</td><td class="n">1100</td><td class="n">1200</td><td class="n">1300</td><td class="n">1400</td><td class="n">1500</td></tr>
+<tr><th>gear</th><td class="d">4.0</td><td class="d">4.1 / 5.0</td><td class="d">4.2 / 6.0</td><td class="d">4.3 / 7.0</td><td class="d">4.4 / 7.1 / 8.0</td><td class="d">7.2 / 8.1</td><td class="d">7.3 / 8.2</td><td class="d">7.4 / 8.3</td><td class="d">8.4</td></tr>
+<tr><th>&times;</th><td class="n">1.00</td><td class="n">1.09</td><td class="n">1.19</td><td class="n">1.30</td><td class="n">1.42</td><td class="n">1.55</td><td class="n">1.69</td><td class="n">1.85</td><td class="n">2.02</td></tr>
+</table>"""]
     for cap in sorted(boards):
         rows_c = boards[cap]
         measured = sum(1 for r in rows_c if r["value"] is not None)

@@ -44,6 +44,17 @@ No score exists without a cited spell (the evidence lint blocks the build
 otherwise), and no data ships unless its whole chain hash-verifies against
 the pinned snapshot.
 
+**Tiers and item power:** gear maps to item power exactly (T4 = 700; each
+tier step or enchant = +100). Magnitudes scale ×1.0918 per 100 IP,
+compounding (≈ ×1.42 at 4.4/7.1, ×2.02 at 8.4), further weighted by the
+weapon family's ability-power coefficient (most 120; axes 138, crossbows
+144 — shown as [AP n] tags on the chart). What does NOT scale with tier:
+percentage effects, durations, distances, and any record the game flags
+`ignoreabilitypowerscaling` — the chart tags those **tier-flat** (Primal
+Slam's 18m wall is 18m at 4.1 and at 8.4, which is exactly what makes
+flagged utility the cost-efficient pick and damage weapons tier-hungry).
+The stat chart's Tier lens table carries the full multiplier row.
+
 ## 2. Why a weapon ranks where it does
 
 A candidate's score is **exactly how much the party's total comp score
