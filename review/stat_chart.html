@@ -9,6 +9,7 @@ td,th{padding:3px 10px;text-align:left;border-bottom:1px solid #2a2a2a}
 th{color:#888;font-weight:normal} .n{text-align:right;font-variant-numeric:tabular-nums}
 .s3{color:#f0c674}.s2{color:#8abeb7}.s1{color:#777}
 .drift{color:#cc6666;font-weight:bold}
+.grp{color:#b294bb;font-size:12px;padding-top:12px;border-bottom:1px solid #444}
 .none{color:#555} .d{color:#888;font-size:12px}
 p.note{color:#999;font-size:13px}
 </style>
@@ -22,20 +23,25 @@ data states no measurable number for this capability (human judgment
 stays).</p>
 <h2>anti_dive <span class='d'>(7/7 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>displacement (m)</td></tr>
 <tr><td>PRIMALSLAM</td><td class='n n'>18</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'>knockback 18.0m</td><td class='d'>Bedrock Mace</td></tr>
 <tr><td>QSWHIRLWIND</td><td class='n n'>12</td><td class='d'>m</td><td class='n'><span class='s2'>2</span></td><td class='d'>knockback 12.0m</td><td class='d'>Iron-clad Staff</td></tr>
 <tr><td>QS_WHIRLWIND2</td><td class='n n'>4.26</td><td class='d'>m</td><td class='n'><span class='drift'>1–2 drift</span></td><td class='d'>knockback 4.26m</td><td class='d'>Black Monk Staff, Double Bladed Staff, Grailseeker, Phantom Twinblade, Quarterstaff, Soulscythe, Staff of Balance</td></tr>
-<tr><td>GIANTSTEPS</td><td class='n n'>3.5</td><td class='d'>slow%·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>slow-power 3.5</td><td class='d'>Forge Hammers</td></tr>
+<tr><td colspan='6' class='grp'>hard CC (s)</td></tr>
 <tr><td>TIME_FREEZE</td><td class='n n'>2.5</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'>hard CC 2.5s</td><td class='d'>Great Arcane Staff</td></tr>
-<tr><td>TAR_RING</td><td class='n n'>2.4</td><td class='d'>slow%·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>slow-power 2.4; knockback 1.8m</td><td class='d'>Great Hammer, Grovekeeper, Hammer, Hand of Justice, Polehammer, Tombhammer, Truebolt Hammer</td></tr>
 <tr><td>FROSTNOVA</td><td class='n n'>1</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'>hard CC 1.0s</td><td class='d'>Icicle Staff</td></tr>
+<tr><td colspan='6' class='grp'>slows (strength × duration)</td></tr>
+<tr><td>GIANTSTEPS</td><td class='n n'>3.5</td><td class='d'>slow%·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>slow-power 3.5</td><td class='d'>Forge Hammers</td></tr>
+<tr><td>TAR_RING</td><td class='n n'>2.4</td><td class='d'>slow%·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>slow-power 2.4; knockback 1.8m</td><td class='d'>Great Hammer, Grovekeeper, Hammer, Hand of Justice, Polehammer, Tombhammer, Truebolt Hammer</td></tr>
 </table>
 <h2>anti_zone <span class='d'>(0/1 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>HOLY_DISPEL</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Exalted Staff</td></tr>
 </table>
 <h2>buff_allies <span class='d'>(16/21 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>stat modifiers (value × duration)</td></tr>
 <tr><td>TRIDENTTHROW</td><td class='n n'>5.1</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>attackspeedbonus +0.85 for 6s</td><td class='d'>Trinity Spear</td></tr>
 <tr><td>ARCANECORRIDOR</td><td class='n n'>4.8</td><td class='d'>value·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>movespeedbonus +0.6 for 8s</td><td class='d'>Occult Staff</td></tr>
 <tr><td>EMPOWERBEAM</td><td class='n n'>2.5</td><td class='d'>value·s</td><td class='n'><span class='drift'>1–2 drift</span></td><td class='d'>movespeedbonus -0.5 for 5s</td><td class='d'>Arcane Staff, Astral Staff, Evensong, Great Arcane Staff, Malevolent Locus, Witchwork Staff</td></tr>
@@ -52,6 +58,7 @@ stays).</p>
 <tr><td>BRIEROFLIFE</td><td class='n n'>0.5</td><td class='d'>value·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>magicresistance +0.13 for 4s</td><td class='d'>Great Nature Staff</td></tr>
 <tr><td>SHAPE_Q_DAMAGE_AND_SHIELD</td><td class='n n'>0.2</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>magicspelldamagebonus -0.03 for 7s</td><td class='d'>Bloodmoon Staff, Earthrune Staff, Hellspawn Staff, Lightcaller, Primal Staff, Prowling Staff, Stillgaze Staff</td></tr>
 <tr><td>HOLYTOUCH</td><td class='n n'>0.1</td><td class='d'>value·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>magicspelldamagebonus +0.15 for 1s</td><td class='d'>Lifetouch Staff</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>CURSEDHANDS_STACKUP</td><td class='none n'>—</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Cursed Skull, Cursed Staff, Damnation Staff, Demonic Staff, Great Cursed Staff, Lifecurse Staff, Rotcaller Staff, Shadowcaller</td></tr>
 <tr><td>CRYSTALWAVE</td><td class='none n'>—</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Truebolt Hammer</td></tr>
 <tr><td>HOLYSHIELD</td><td class='none n'>—</td><td class='d'>value·s</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Divine Staff</td></tr>
@@ -60,6 +67,7 @@ stays).</p>
 </table>
 <h2>burst_aoe <span class='d'>(56/65 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>damage per cast</td></tr>
 <tr><td>MAJESTIC_SMASH</td><td class='n n'>1629.4</td><td class='d'>dmg/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'>81.5/s over 20s CD</td><td class='d'>Kingmaker</td></tr>
 <tr><td>BLADE_AREA</td><td class='n n'>793</td><td class='d'>dmg/cast</td><td class='n'><span class='s3'>3</span></td><td class='d'>26.4/s over 30s CD</td><td class='d'>Galatine Pair</td></tr>
 <tr><td>GROWING_PUNCH</td><td class='n n'>720</td><td class='d'>dmg/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'>24.0/s over 30s CD</td><td class='d'>Ravenstrike Cestus</td></tr>
@@ -116,6 +124,7 @@ stays).</p>
 <tr><td>GLACIALFIELD</td><td class='n n'>22</td><td class='d'>dmg/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'>0.7/s over 30s CD</td><td class='d'>Icicle Staff</td></tr>
 <tr><td>LIGHTNING_ARROW</td><td class='n n'>21</td><td class='d'>dmg/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'>0.7/s over 30s CD</td><td class='d'>Bow of Badon</td></tr>
 <tr><td>AREAOFDECAY</td><td class='n n'>16.9</td><td class='d'>dmg/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'>0.8/s over 20s CD</td><td class='d'>Great Cursed Staff</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>AIR_RAID</td><td class='none n'>—</td><td class='d'>dmg/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Skystrider Bow</td></tr>
 <tr><td>CLAYMORESLASH</td><td class='none n'>—</td><td class='d'>dmg/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Carving Sword</td></tr>
 <tr><td>BLOOD_BLADE</td><td class='none n'>—</td><td class='d'>dmg/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Demonfang</td></tr>
@@ -128,6 +137,7 @@ stays).</p>
 </table>
 <h2>burst_st <span class='d'>(22/30 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>damage per cast</td></tr>
 <tr><td>SKILLSHOT_STUN</td><td class='n n'>889</td><td class='d'>dmg/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'>88.9/s over 10s CD</td><td class='d'>Warbow</td></tr>
 <tr><td>EXECUTEDAGGER</td><td class='n n'>862.5</td><td class='d'>dmg/cast</td><td class='n'><span class='s3'>3</span></td><td class='d'>57.5/s over 15s CD</td><td class='d'>Dagger Pair</td></tr>
 <tr><td>RAPIERSTAB</td><td class='n n'>813.3</td><td class='d'>dmg/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'>23.2/s over 35s CD</td><td class='d'>Bloodletter</td></tr>
@@ -150,6 +160,7 @@ stays).</p>
 <tr><td>DUAL_RAPIDFIRE</td><td class='n n'>30.1</td><td class='d'>dmg/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'>1.5/s over 20s CD</td><td class='d'>Boltcasters</td></tr>
 <tr><td>KNUCKLECOMBO</td><td class='n n'>30</td><td class='d'>dmg/cast</td><td class='n'><span class='drift'>1–2 drift</span></td><td class='d'>2.0/s over 15s CD</td><td class='d'>Battle Bracers, Brawler Gloves, Fists of Avalon, Hellfire Hands, Ravenstrike Cestus, Spiked Gauntlets</td></tr>
 <tr><td>HUMAN_TORCH</td><td class='n n'>16</td><td class='d'>dmg/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'>0.8/s over 20s CD</td><td class='d'>Infernal Staff</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>SPEEDARCHER_KITE</td><td class='none n'>—</td><td class='d'>dmg/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Bow</td></tr>
 <tr><td>BLOOD_BLADE</td><td class='none n'>—</td><td class='d'>dmg/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Demonfang</td></tr>
 <tr><td>CONEPUNCH2</td><td class='none n'>—</td><td class='d'>dmg/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Forcepulse Bracers</td></tr>
@@ -161,14 +172,12 @@ stays).</p>
 </table>
 <h2>catch <span class='d'>(33/45 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
-<tr><td>TORNADO</td><td class='n n'>8</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 8.0; knockback 2.1m</td><td class='d'>Soulscythe</td></tr>
-<tr><td>MACE_CRYSTAL_FRAGMENT_STORM</td><td class='n n'>7.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 7.5</td><td class='d'>Dreadstorm Monarch</td></tr>
-<tr><td>ICESTORM2</td><td class='n n'>4.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 4.5</td><td class='d'>Glacial Staff</td></tr>
-<tr><td>GIANTSTEPS</td><td class='n n'>3.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 3.5</td><td class='d'>Forge Hammers</td></tr>
+<tr><td colspan='6' class='grp'>displacement (m)</td></tr>
+<tr><td>LETHAL_CLEAVER</td><td class='n n'>1.25</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'>knockback 1.25m</td><td class='d'>Realmbreaker</td></tr>
+<tr><td colspan='6' class='grp'>hard CC (s)</td></tr>
 <tr><td>SOULSHAKER</td><td class='n n'>3.5</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'>hard CC 3.5s</td><td class='d'>Grailseeker</td></tr>
 <tr><td>HALBERDSMASH</td><td class='n n'>2.79</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 2.79s</td><td class='d'>Pike</td></tr>
 <tr><td>GROUNDBREAKER2</td><td class='n n'>2.7</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 2.7s</td><td class='d'>Polehammer</td></tr>
-<tr><td>GLACIALFIELD</td><td class='n n'>2.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 2.5</td><td class='d'>Icicle Staff</td></tr>
 <tr><td>FREEZINGWIND</td><td class='n n'>2.5</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 2.5s</td><td class='d'>Frost Staff</td></tr>
 <tr><td>RAM_CHARGE</td><td class='n n'>2.5</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 2.5s; knockback 0.9m</td><td class='d'>Grovekeeper</td></tr>
 <tr><td>UNDEADHAND</td><td class='n n'>2.48</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 2.48s</td><td class='d'>Tombhammer</td></tr>
@@ -176,24 +185,30 @@ stays).</p>
 <tr><td>STUNRUN</td><td class='n n'>2.11</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 2.11s</td><td class='d'>Quarterstaff</td></tr>
 <tr><td>GROUNDARROW</td><td class='n n'>1.8</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'>hard CC 1.8s</td><td class='d'>Bow, Bow of Badon, Mistpiercer, Skystrider Bow, Wailing Bow, Warbow, Whispering Bow</td></tr>
 <tr><td>SPEARTHROW</td><td class='n n'>1.75</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 1.75s</td><td class='d'>Heron Spear</td></tr>
-<tr><td>ICEROCK_EXPLODE</td><td class='n n'>1.6</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 1.6; knockback 10.0m</td><td class='d'>Hoarfrost Staff</td></tr>
-<tr><td>DASH_KNOCKBACK</td><td class='n n'>1.5</td><td class='d'>slow%·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>slow-power 1.5</td><td class='d'>Double Bladed Staff</td></tr>
-<tr><td>IMPULSE_PUNCH</td><td class='n n'>1.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 1.5</td><td class='d'>Spiked Gauntlets</td></tr>
 <tr><td>ROOTFIELD</td><td class='n n'>1.5</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 1.5s</td><td class='d'>Morning Star</td></tr>
 <tr><td>SHAPE_W_AREA_PULL</td><td class='n n'>1.35</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'>hard CC 1.35s</td><td class='d'>Earthrune Staff, Hellspawn Staff, Lightcaller, Primal Staff, Prowling Staff, Rootbound Staff, Stillgaze Staff</td></tr>
-<tr><td>LETHAL_CLEAVER</td><td class='n n'>1.25</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'>knockback 1.25m</td><td class='d'>Realmbreaker</td></tr>
 <tr><td>SKILLSHOT_TELEPORT</td><td class='n n'>1</td><td class='d'>s</td><td class='n'><span class='drift'>1–2 drift</span></td><td class='d'>hard CC 1.0s</td><td class='d'>Black Hands, Bridled Fury, Dagger, Dagger Pair, Deathgivers, Demonfang, Twin Slayers</td></tr>
-<tr><td>HAMSTRINGSWORD</td><td class='n n'>1</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 1.0</td><td class='d'>Galatine Pair, Infinity Blade, Kingmaker</td></tr>
 <tr><td>FROST_ULTIMATE</td><td class='n n'>1</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 1.0s</td><td class='d'>Permafrost Prism</td></tr>
-<tr><td>FROZEN_CRYSTAL</td><td class='n n'>0.9</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 0.9; hard CC 2.0s</td><td class='d'>Chillhowl</td></tr>
 <tr><td>FROST_BITE</td><td class='n n'>0.8</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'>hard CC 0.8s</td><td class='d'>Arctic Staff</td></tr>
 <tr><td>SPINNING_SMASH</td><td class='n n'>0.8</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 0.8s; knockback 1.0m</td><td class='d'>Hand of Justice</td></tr>
 <tr><td>VACUUMSLASH</td><td class='n n'>0.8</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'>hard CC 0.8s</td><td class='d'>Camlann Mace</td></tr>
 <tr><td>CLAYMORECHARGE</td><td class='n n'>0.8</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 0.8s</td><td class='d'>Claymore</td></tr>
+<tr><td colspan='6' class='grp'>slows (strength × duration)</td></tr>
+<tr><td>TORNADO</td><td class='n n'>8</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 8.0; knockback 2.1m</td><td class='d'>Soulscythe</td></tr>
+<tr><td>MACE_CRYSTAL_FRAGMENT_STORM</td><td class='n n'>7.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 7.5</td><td class='d'>Dreadstorm Monarch</td></tr>
+<tr><td>ICESTORM2</td><td class='n n'>4.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 4.5</td><td class='d'>Glacial Staff</td></tr>
+<tr><td>GIANTSTEPS</td><td class='n n'>3.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 3.5</td><td class='d'>Forge Hammers</td></tr>
+<tr><td>GLACIALFIELD</td><td class='n n'>2.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 2.5</td><td class='d'>Icicle Staff</td></tr>
+<tr><td>ICEROCK_EXPLODE</td><td class='n n'>1.6</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 1.6; knockback 10.0m</td><td class='d'>Hoarfrost Staff</td></tr>
+<tr><td>DASH_KNOCKBACK</td><td class='n n'>1.5</td><td class='d'>slow%·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>slow-power 1.5</td><td class='d'>Double Bladed Staff</td></tr>
+<tr><td>IMPULSE_PUNCH</td><td class='n n'>1.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 1.5</td><td class='d'>Spiked Gauntlets</td></tr>
+<tr><td>HAMSTRINGSWORD</td><td class='n n'>1</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 1.0</td><td class='d'>Galatine Pair, Infinity Blade, Kingmaker</td></tr>
+<tr><td>FROZEN_CRYSTAL</td><td class='n n'>0.9</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 0.9; hard CC 2.0s</td><td class='d'>Chillhowl</td></tr>
 <tr><td>BLACKHOLE</td><td class='n n'>0.8</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 0.8</td><td class='d'>Witchwork Staff</td></tr>
 <tr><td>MIGHTYSWING</td><td class='n n'>0.67</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 0.67; hard CC 2.25s</td><td class='d'>Clarent Blade</td></tr>
 <tr><td>LEGBREAKER</td><td class='n n'>0.6</td><td class='d'>slow%·s</td><td class='n'><span class='drift'>1–2 drift</span></td><td class='d'>slow-power 0.6</td><td class='d'>Daybreaker, Rift Glaive, Spear, Spirithunter</td></tr>
 <tr><td>HAIL_MULTI_1</td><td class='n n'>0.2</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 0.2</td><td class='d'>Great Frost Staff</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>AXEBOOST</td><td class='none n'>—</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Battleaxe, Carrioncaller, Greataxe, Halberd, Infernal Scythe</td></tr>
 <tr><td>DIVEPUNCH_RISE</td><td class='none n'>—</td><td class='d'>m</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Battle Bracers</td></tr>
 <tr><td>DUALAXE_CRAWLER</td><td class='none n'>—</td><td class='d'>m</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Bear Paws</td></tr>
@@ -209,6 +224,7 @@ stays).</p>
 </table>
 <h2>cleanse <span class='d'>(0/5 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>CLEANSESPEED2</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Arcane Staff, Astral Staff, Enigmatic Staff, Evensong, Great Arcane Staff, Occult Staff, Witchwork Staff</td></tr>
 <tr><td>VOID</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Malevolent Locus</td></tr>
 <tr><td>HOLY_ULTIMATE</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Fallen Staff</td></tr>
@@ -217,6 +233,7 @@ stays).</p>
 </table>
 <h2>clump_create <span class='d'>(0/5 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>TRIPLE_KICK</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Battle Bracers, Brawler Gloves, Fists of Avalon, Forcepulse Bracers, Hellfire Hands, Ravenstrike Cestus, Spiked Gauntlets, Ursine Maulers</td></tr>
 <tr><td>SPINNING_SMASH</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s3'>3</span></td><td class='d'></td><td class='d'>Hand of Justice</td></tr>
 <tr><td>SHAPE_W_AREA_PULL</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Bloodmoon Staff, Earthrune Staff, Hellspawn Staff, Lightcaller, Primal Staff, Prowling Staff, Rootbound Staff, Stillgaze Staff</td></tr>
@@ -225,6 +242,7 @@ stays).</p>
 </table>
 <h2>damage_debuff <span class='d'>(5/5 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>stat modifiers (value × duration)</td></tr>
 <tr><td>LEGBREAKER</td><td class='n n'>4</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>movespeedbonus +0.8 for 5s</td><td class='d'>Spirithunter</td></tr>
 <tr><td>SHRINKINGSMASH</td><td class='n n'>3.2</td><td class='d'>value·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>physicalattackdamagebonus -0.4 for 8s</td><td class='d'>Incubus Mace</td></tr>
 <tr><td>QS_WHIRLWIND2</td><td class='n n'>2.5</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>attackspeedbonus -0.5 for 5s</td><td class='d'>Double Bladed Staff, Quarterstaff</td></tr>
@@ -233,6 +251,7 @@ stays).</p>
 </table>
 <h2>disengage <span class='d'>(0/29 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>CRYSTAL_SCYTHE_DASH_ZONE</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Crystal Reaper</td></tr>
 <tr><td>DIVEPUNCH_RISE</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Battle Bracers</td></tr>
 <tr><td>DUALAXE_CRAWLER</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Bear Paws</td></tr>
@@ -265,6 +284,7 @@ stays).</p>
 </table>
 <h2>engage <span class='d'>(0/35 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>ARCANECORRIDOR</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Occult Staff</td></tr>
 <tr><td>AXE_CHARGE</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Battleaxe, Carrioncaller, Greataxe, Halberd, Infernal Scythe</td></tr>
 <tr><td>CRYSTAL_SCYTHE_DASH_ZONE</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Crystal Reaper</td></tr>
@@ -303,6 +323,7 @@ stays).</p>
 </table>
 <h2>execute <span class='d'>(7/8 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>damage per cast</td></tr>
 <tr><td>EXECUTEDAGGER</td><td class='n n'>862.5</td><td class='d'>dmg/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'>57.5/s over 15s CD</td><td class='d'>Dagger Pair</td></tr>
 <tr><td>RAPIERSTAB</td><td class='n n'>813.3</td><td class='d'>dmg/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'>23.2/s over 35s CD</td><td class='d'>Bloodletter</td></tr>
 <tr><td>BLADE_AREA</td><td class='n n'>793</td><td class='d'>dmg/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'>26.4/s over 30s CD</td><td class='d'>Galatine Pair</td></tr>
@@ -310,10 +331,12 @@ stays).</p>
 <tr><td>LETHAL_CLEAVER</td><td class='n n'>212</td><td class='d'>dmg/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'>8.5/s over 25s CD</td><td class='d'>Realmbreaker</td></tr>
 <tr><td>UNDEADHAND</td><td class='n n'>100</td><td class='d'>dmg/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'>7.1/s over 14s CD</td><td class='d'>Tombhammer</td></tr>
 <tr><td>SHRINKINGSMASH</td><td class='n n'>98.3</td><td class='d'>dmg/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'>3.3/s over 30s CD</td><td class='d'>Incubus Mace</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>CONEPUNCH2</td><td class='none n'>—</td><td class='d'>dmg/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Forcepulse Bracers</td></tr>
 </table>
 <h2>heal_burst <span class='d'>(9/10 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>healing per cast</td></tr>
 <tr><td>CIRCLEOFLIFE</td><td class='n n'>640</td><td class='d'>heal/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'>35.6/s over 18s CD</td><td class='d'>Nature Staff</td></tr>
 <tr><td>HOLYDESPERATEPRAYER2</td><td class='n n'>320</td><td class='d'>heal/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'>32.0/s over 10s CD</td><td class='d'>Holy Staff</td></tr>
 <tr><td>HOLY_ULTIMATE</td><td class='n n'>270</td><td class='d'>heal/cast</td><td class='n'><span class='s3'>3</span></td><td class='d'>9.0/s over 30s CD</td><td class='d'>Fallen Staff</td></tr>
@@ -323,10 +346,12 @@ stays).</p>
 <tr><td>SPIRITANIMAL</td><td class='n n'>124</td><td class='d'>heal/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'>4.1/s over 30s CD</td><td class='d'>Rampant Staff</td></tr>
 <tr><td>HOLYFLASH</td><td class='n n'>117</td><td class='d'>heal/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'>33.4/s over 4s CD</td><td class='d'>Great Holy Staff, Lifetouch Staff, Redemption Staff</td></tr>
 <tr><td>CLEANSEHEAL</td><td class='n n'>65</td><td class='d'>heal/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'>3.2/s over 20s CD</td><td class='d'>Blight Staff, Forgebark Staff, Great Nature Staff, Ironroot Staff, Wild Staff</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>NATURE_ULTIMATE_SINGLE</td><td class='none n'>—</td><td class='d'>heal/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Druidic Staff</td></tr>
 </table>
 <h2>heal_reduction <span class='d'>(10/13 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>stat modifiers (value × duration)</td></tr>
 <tr><td>QS_SLOWROPE</td><td class='n n'>7.5</td><td class='d'>value·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>movespeedbonus -0.5 for 15s</td><td class='d'>Staff of Balance</td></tr>
 <tr><td>SHRINKINGSMASH</td><td class='n n'>3.2</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>physicalattackdamagebonus -0.4 for 8s</td><td class='d'>Incubus Mace</td></tr>
 <tr><td>FIREPHOENIX</td><td class='n n'>2.4</td><td class='d'>value·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>healmodifier -0.4 for 6s</td><td class='d'>Dawnsong</td></tr>
@@ -337,12 +362,14 @@ stays).</p>
 <tr><td>EXECUTEDAGGER</td><td class='n n'>0.8</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>healmodifier -0.2 for 4s</td><td class='d'>Dagger Pair</td></tr>
 <tr><td>BOULDER_TOSS</td><td class='n n'>0.8</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>healmodifier -0.2 for 4s</td><td class='d'>Hellfire Hands</td></tr>
 <tr><td>RENDINGSTRIKE</td><td class='n n'>0.6</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>healmodifier -0.12 for 5s</td><td class='d'>Battleaxe, Crystal Reaper, Greataxe, Infernal Scythe, Realmbreaker</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>DEEPCUTS</td><td class='none n'>—</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Black Hands, Bloodletter, Bridled Fury, Claws, Dagger, Deathgivers, Demonfang, Twin Slayers</td></tr>
 <tr><td>AREAOFDECAY</td><td class='none n'>—</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Great Cursed Staff</td></tr>
 <tr><td>CURSE_SKELETON_BARF_FDHR</td><td class='none n'>—</td><td class='d'>value·s</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Rotcaller Staff</td></tr>
 </table>
 <h2>heal_sustain <span class='d'>(10/14 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>healing per cast</td></tr>
 <tr><td>CIRCLEOFLIFE</td><td class='n n'>640</td><td class='d'>heal/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'>35.6/s over 18s CD</td><td class='d'>Nature Staff</td></tr>
 <tr><td>SPIRITANIMAL</td><td class='n n'>124</td><td class='d'>heal/cast</td><td class='n'><span class='s3'>3</span></td><td class='d'>4.1/s over 30s CD</td><td class='d'>Rampant Staff</td></tr>
 <tr><td>BRIEROFLIFE</td><td class='n n'>106</td><td class='d'>heal/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'>7.1/s over 15s CD</td><td class='d'>Great Nature Staff</td></tr>
@@ -353,6 +380,7 @@ stays).</p>
 <tr><td>HOLYEXPLOSION</td><td class='n n'>50</td><td class='d'>heal/cast</td><td class='n'><span class='s3'>3</span></td><td class='d'>2.8/s over 18s CD</td><td class='d'>Great Holy Staff</td></tr>
 <tr><td>HEALINGBEAM</td><td class='n n'>50</td><td class='d'>heal/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'>4.2/s over 12s CD</td><td class='d'>Divine Staff, Exalted Staff, Fallen Staff, Hallowfall, Holy Staff</td></tr>
 <tr><td>BLESSED_MACES</td><td class='n n'>30</td><td class='d'>heal/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'>1.0/s over 30s CD</td><td class='d'>Oathkeepers</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>SOUL_LINK</td><td class='none n'>—</td><td class='d'>heal/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Ironroot Staff</td></tr>
 <tr><td>DUAL_NATURE</td><td class='none n'>—</td><td class='d'>heal/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Forgebark Staff</td></tr>
 <tr><td>NATURE_ULTIMATE_SINGLE</td><td class='none n'>—</td><td class='d'>heal/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Druidic Staff</td></tr>
@@ -360,6 +388,7 @@ stays).</p>
 </table>
 <h2>knockback_displace <span class='d'>(23/29 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>displacement (m)</td></tr>
 <tr><td>PRIMALSLAM</td><td class='n n'>18</td><td class='d'>m</td><td class='n'><span class='s3'>3</span></td><td class='d'>ignores CC resistance</td><td class='d'>Bedrock Mace</td></tr>
 <tr><td>QSWHIRLWIND</td><td class='n n'>12</td><td class='d'>m</td><td class='n'><span class='s3'>3</span></td><td class='d'>ignores CC resistance</td><td class='d'>Iron-clad Staff</td></tr>
 <tr><td>KNOCKBACKSHOT2</td><td class='n n'>10</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Arclight Blasters, Boltcasters, Crossbow, Energy Shaper, Heavy Crossbow, Light Crossbow, Siegebow, Weeping Repeater</td></tr>
@@ -383,6 +412,7 @@ stays).</p>
 <tr><td>BLAZING_GEYSER</td><td class='n n'>0.9</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'>ignores CC resistance</td><td class='d'>Brawler Gloves</td></tr>
 <tr><td>GROWING_PUNCH</td><td class='n n'>0.28</td><td class='d'>m</td><td class='n'><span class='s2'>2</span></td><td class='d'>ignores CC resistance</td><td class='d'>Ravenstrike Cestus</td></tr>
 <tr><td>MAJESTIC_SMASH</td><td class='n n'>0.25</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'>ignores CC resistance</td><td class='d'>Kingmaker</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>CURSED_WALL</td><td class='none n'>—</td><td class='d'>m</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Demonic Staff</td></tr>
 <tr><td>HUMAN_TORCH</td><td class='none n'>—</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Infernal Staff</td></tr>
 <tr><td>TRIPLECOMBO_DIVEKICK</td><td class='none n'>—</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Fists of Avalon</td></tr>
@@ -392,6 +422,7 @@ stays).</p>
 </table>
 <h2>mobility <span class='d'>(0/45 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>AXEWHIRLWIND2</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Greataxe</td></tr>
 <tr><td>RENDINGCOMBO</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Battleaxe, Carrioncaller, Halberd, Infernal Scythe</td></tr>
 <tr><td>CRYSTAL_SCYTHE_DASH_ZONE</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Crystal Reaper</td></tr>
@@ -440,6 +471,7 @@ stays).</p>
 </table>
 <h2>peel <span class='d'>(42/53 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>displacement (m)</td></tr>
 <tr><td>PRIMALSLAM</td><td class='n n'>18</td><td class='d'>m</td><td class='n'><span class='s2'>2</span></td><td class='d'>knockback 18.0m</td><td class='d'>Bedrock Mace</td></tr>
 <tr><td>QSWHIRLWIND</td><td class='n n'>12</td><td class='d'>m</td><td class='n'><span class='s2'>2</span></td><td class='d'>knockback 12.0m</td><td class='d'>Iron-clad Staff</td></tr>
 <tr><td>KNOCKBACKSHOT2</td><td class='n n'>10</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'>knockback 10.0m</td><td class='d'>Arclight Blasters, Boltcasters, Crossbow, Energy Shaper, Heavy Crossbow, Light Crossbow, Siegebow, Weeping Repeater</td></tr>
@@ -447,16 +479,18 @@ stays).</p>
 <tr><td>BACKHAND_KNOCKBACK</td><td class='n n'>9</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'>knockback 9.0m</td><td class='d'>Battle Bracers, Fists of Avalon, Forcepulse Bracers, Hellfire Hands, Ursine Maulers</td></tr>
 <tr><td>PULSINGHEAL</td><td class='n n'>9</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'>knockback 9.0m</td><td class='d'>Divine Staff, Exalted Staff, Holy Staff, Redemption Staff</td></tr>
 <tr><td>GEYSER</td><td class='n n'>8</td><td class='d'>m</td><td class='n'><span class='s2'>2</span></td><td class='d'>knockback 8.0m</td><td class='d'>Truebolt Hammer</td></tr>
-<tr><td>TORNADO</td><td class='n n'>8</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 8.0; knockback 2.1m</td><td class='d'>Soulscythe</td></tr>
 <tr><td>CURSE_SKELETON_BARF_FDHR</td><td class='n n'>6</td><td class='d'>m</td><td class='n'><span class='s2'>2</span></td><td class='d'>knockback 6.0m</td><td class='d'>Rotcaller Staff</td></tr>
-<tr><td>ICESTORM2</td><td class='n n'>4.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 4.5</td><td class='d'>Glacial Staff</td></tr>
 <tr><td>FIRECONE</td><td class='n n'>4</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'>knockback 4.0m</td><td class='d'>Blazing Staff, Brimstone Staff, Dawnsong, Fire Staff, Flamewalker Staff, Great Fire Staff, Wildfire Staff</td></tr>
-<tr><td>GIANTSTEPS</td><td class='n n'>3.5</td><td class='d'>slow%·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>slow-power 3.5</td><td class='d'>Forge Hammers</td></tr>
+<tr><td>LETHAL_CLEAVER</td><td class='n n'>1.25</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'>knockback 1.25m</td><td class='d'>Realmbreaker</td></tr>
+<tr><td>DASHDMG</td><td class='n n'>1.25</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'>knockback 1.25m</td><td class='d'>Spear</td></tr>
+<tr><td>DIVINE_JUMP</td><td class='n n'>1</td><td class='d'>m</td><td class='n'><span class='s3'>3</span></td><td class='d'>knockback 1.0m</td><td class='d'>Hallowfall</td></tr>
+<tr><td>BLAZING_GEYSER</td><td class='n n'>0.9</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'>knockback 0.9m</td><td class='d'>Brawler Gloves</td></tr>
+<tr><td>MAJESTIC_SMASH</td><td class='n n'>0.25</td><td class='d'>m</td><td class='n'><span class='s2'>2</span></td><td class='d'>knockback 0.25m</td><td class='d'>Kingmaker</td></tr>
+<tr><td colspan='6' class='grp'>hard CC (s)</td></tr>
 <tr><td>SOULSHAKER</td><td class='n n'>3.5</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 3.5s</td><td class='d'>Grailseeker</td></tr>
 <tr><td>HALBERDSMASH</td><td class='n n'>2.79</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'>hard CC 2.79s</td><td class='d'>Pike</td></tr>
 <tr><td>GROUNDBREAKER2</td><td class='n n'>2.7</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 2.7s</td><td class='d'>Polehammer</td></tr>
 <tr><td>TIME_FREEZE</td><td class='n n'>2.5</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 2.5s</td><td class='d'>Great Arcane Staff</td></tr>
-<tr><td>GLACIALFIELD</td><td class='n n'>2.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 2.5</td><td class='d'>Icicle Staff</td></tr>
 <tr><td>FREEZINGWIND</td><td class='n n'>2.5</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 2.5s</td><td class='d'>Frost Staff</td></tr>
 <tr><td>RAM_CHARGE</td><td class='n n'>2.5</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 2.5s; knockback 0.9m</td><td class='d'>Grovekeeper</td></tr>
 <tr><td>UNDEADHAND</td><td class='n n'>2.48</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 2.48s</td><td class='d'>Tombhammer</td></tr>
@@ -466,22 +500,23 @@ stays).</p>
 <tr><td>SEPARATING_SLAM</td><td class='n n'>2.2</td><td class='d'>s</td><td class='n'><span class='drift'>1–2–3 drift</span></td><td class='d'>hard CC 2.2s</td><td class='d'>Black Monk Staff, Double Bladed Staff, Phantom Twinblade, Quarterstaff, Staff of Balance</td></tr>
 <tr><td>GROUNDARROW</td><td class='n n'>1.8</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'>hard CC 1.8s</td><td class='d'>Bow, Bow of Badon, Mistpiercer, Skystrider Bow, Wailing Bow, Warbow, Whispering Bow</td></tr>
 <tr><td>SPEARTHROW</td><td class='n n'>1.75</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'>hard CC 1.75s</td><td class='d'>Heron Spear</td></tr>
-<tr><td>ICEROCK_EXPLODE</td><td class='n n'>1.6</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 1.6; knockback 10.0m</td><td class='d'>Hoarfrost Staff</td></tr>
-<tr><td>IMPULSE_PUNCH</td><td class='n n'>1.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 1.5</td><td class='d'>Spiked Gauntlets</td></tr>
 <tr><td>ROOTFIELD</td><td class='n n'>1.5</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 1.5s</td><td class='d'>Morning Star</td></tr>
 <tr><td>SPLITTINGSLASH</td><td class='n n'>1.25</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'>hard CC 1.25s</td><td class='d'>Broadsword, Carving Sword, Clarent Blade, Claymore, Dual Swords, Galatine Pair, Infinity Blade</td></tr>
-<tr><td>LETHAL_CLEAVER</td><td class='n n'>1.25</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'>knockback 1.25m</td><td class='d'>Realmbreaker</td></tr>
-<tr><td>DASHDMG</td><td class='n n'>1.25</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'>knockback 1.25m</td><td class='d'>Spear</td></tr>
 <tr><td>SKILLSHOT_TELEPORT</td><td class='n n'>1</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'>hard CC 1.0s</td><td class='d'>Black Hands, Bloodletter, Bridled Fury, Claws, Dagger, Dagger Pair, Deathgivers, Demonfang, Twin Slayers</td></tr>
-<tr><td>DIVINE_JUMP</td><td class='n n'>1</td><td class='d'>m</td><td class='n'><span class='s3'>3</span></td><td class='d'>knockback 1.0m</td><td class='d'>Hallowfall</td></tr>
 <tr><td>FROST_ULTIMATE</td><td class='n n'>1</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'>hard CC 1.0s</td><td class='d'>Permafrost Prism</td></tr>
-<tr><td>FROZEN_CRYSTAL</td><td class='n n'>0.9</td><td class='d'>slow%·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>slow-power 0.9; hard CC 2.0s</td><td class='d'>Chillhowl</td></tr>
-<tr><td>BLAZING_GEYSER</td><td class='n n'>0.9</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'>knockback 0.9m</td><td class='d'>Brawler Gloves</td></tr>
-<tr><td>GROWING_PUNCH</td><td class='n n'>0.88</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 0.88; knockback 0.28m</td><td class='d'>Ravenstrike Cestus</td></tr>
 <tr><td>SPINNING_SMASH</td><td class='n n'>0.8</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'>hard CC 0.8s; knockback 1.0m</td><td class='d'>Hand of Justice</td></tr>
+<tr><td colspan='6' class='grp'>slows (strength × duration)</td></tr>
+<tr><td>TORNADO</td><td class='n n'>8</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 8.0; knockback 2.1m</td><td class='d'>Soulscythe</td></tr>
+<tr><td>ICESTORM2</td><td class='n n'>4.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 4.5</td><td class='d'>Glacial Staff</td></tr>
+<tr><td>GIANTSTEPS</td><td class='n n'>3.5</td><td class='d'>slow%·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>slow-power 3.5</td><td class='d'>Forge Hammers</td></tr>
+<tr><td>GLACIALFIELD</td><td class='n n'>2.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 2.5</td><td class='d'>Icicle Staff</td></tr>
+<tr><td>ICEROCK_EXPLODE</td><td class='n n'>1.6</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 1.6; knockback 10.0m</td><td class='d'>Hoarfrost Staff</td></tr>
+<tr><td>IMPULSE_PUNCH</td><td class='n n'>1.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 1.5</td><td class='d'>Spiked Gauntlets</td></tr>
+<tr><td>FROZEN_CRYSTAL</td><td class='n n'>0.9</td><td class='d'>slow%·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>slow-power 0.9; hard CC 2.0s</td><td class='d'>Chillhowl</td></tr>
+<tr><td>GROWING_PUNCH</td><td class='n n'>0.88</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 0.88; knockback 0.28m</td><td class='d'>Ravenstrike Cestus</td></tr>
 <tr><td>LEGBREAKER</td><td class='n n'>0.6</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 0.6</td><td class='d'>Glaive, Rift Glaive, Spirithunter</td></tr>
-<tr><td>MAJESTIC_SMASH</td><td class='n n'>0.25</td><td class='d'>m</td><td class='n'><span class='s2'>2</span></td><td class='d'>knockback 0.25m</td><td class='d'>Kingmaker</td></tr>
 <tr><td>HAIL_MULTI_1</td><td class='n n'>0.2</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 0.2</td><td class='d'>Great Frost Staff</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>SHIELDFRIENDLY</td><td class='none n'>—</td><td class='d'>m</td><td class='n'><span class='drift'>1–2 drift</span></td><td class='d'></td><td class='d'>Arcane Staff, Astral Staff, Enigmatic Staff, Evensong, Occult Staff, Witchwork Staff</td></tr>
 <tr><td>VOID</td><td class='none n'>—</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Malevolent Locus</td></tr>
 <tr><td>CURSED_WALL</td><td class='none n'>—</td><td class='d'>m</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Demonic Staff</td></tr>
@@ -496,6 +531,7 @@ stays).</p>
 </table>
 <h2>purge <span class='d'>(0/9 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>ARCANEORB2</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Arcane Staff</td></tr>
 <tr><td>DISEMBOWEL</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Claws</td></tr>
 <tr><td>ENFEEBLEBLADES</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Lifecurse Staff</td></tr>
@@ -508,6 +544,7 @@ stays).</p>
 </table>
 <h2>resist_shred <span class='d'>(16/16 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>stat modifiers (value × duration)</td></tr>
 <tr><td>MACE_CRYSTAL_FRAGMENT_STORM</td><td class='n n'>7.5</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>movespeedbonus -0.25 for 30s</td><td class='d'>Dreadstorm Monarch</td></tr>
 <tr><td>AXESMASH</td><td class='n n'>1.3</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>physicalarmor -0.16 for 8s</td><td class='d'>Battleaxe, Bear Paws, Carrioncaller, Crystal Reaper, Greataxe, Halberd, Infernal Scythe, Realmbreaker</td></tr>
 <tr><td>FRAZZLE2</td><td class='n n'>1.2</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>bonusdefensevsplayers -0.3 for 4s</td><td class='d'>Arcane Staff, Astral Staff, Enigmatic Staff, Evensong, Great Arcane Staff, Malevolent Locus, Occult Staff, Witchwork Staff</td></tr>
@@ -527,6 +564,7 @@ stays).</p>
 </table>
 <h2>root <span class='d'>(14/17 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>hard CC (s)</td></tr>
 <tr><td>CHARGE_ROOT</td><td class='n n'>5.11</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Bedrock Mace, Camlann Mace, Dreadstorm Monarch, Incubus Mace, Mace, Oathkeepers</td></tr>
 <tr><td>SOULSHAKER</td><td class='n n'>3.5</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Grailseeker</td></tr>
 <tr><td>HALBERDSMASH</td><td class='n n'>2.79</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Pike</td></tr>
@@ -541,15 +579,18 @@ stays).</p>
 <tr><td>SPLITTINGSLASH</td><td class='n n'>1.25</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Broadsword, Carving Sword, Clarent Blade, Claymore, Dual Swords, Galatine Pair, Infinity Blade, Kingmaker</td></tr>
 <tr><td>PASSIVE_FROST</td><td class='n n'>0.86</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Arctic Staff, Chillhowl, Glacial Staff, Great Frost Staff, Hoarfrost Staff, Icicle Staff, Permafrost Prism</td></tr>
 <tr><td>DISEMBOWEL</td><td class='n n'>0</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Claws</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>RENDINGCOMBO</td><td class='none n'>—</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Battleaxe, Bear Paws, Carrioncaller, Crystal Reaper, Greataxe, Halberd, Infernal Scythe, Realmbreaker</td></tr>
 <tr><td>DUAL_NATURE</td><td class='none n'>—</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Forgebark Staff</td></tr>
 <tr><td>TRIDENTTHROW</td><td class='none n'>—</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Trinity Spear</td></tr>
 </table>
 <h2>self_sustain <span class='d'>(3/17 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>healing per cast</td></tr>
 <tr><td>HOLYDESPERATEPRAYER2</td><td class='n n'>320</td><td class='d'>heal/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'>32.0/s over 10s CD</td><td class='d'>Holy Staff</td></tr>
 <tr><td>DIVINE_JUMP</td><td class='n n'>135</td><td class='d'>heal/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'>4.5/s over 30s CD</td><td class='d'>Hallowfall</td></tr>
 <tr><td>AXETHROW</td><td class='n n'>50</td><td class='d'>heal/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'>5.0/s over 10s CD</td><td class='d'>Battleaxe</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>PASSIVE_HEALTHCHANCE_AXE</td><td class='none n'>—</td><td class='d'>heal/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Carrioncaller, Crystal Reaper, Greataxe, Halberd, Infernal Scythe, Realmbreaker</td></tr>
 <tr><td>DUALAXE_CRAWLER</td><td class='none n'>—</td><td class='d'>heal/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Bear Paws</td></tr>
 <tr><td>PASSIVE_HEALTHCHANCE_DAGGER</td><td class='none n'>—</td><td class='d'>heal/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Black Hands, Bloodletter, Bridled Fury, Claws, Dagger Pair, Deathgivers, Demonfang, Twin Slayers</td></tr>
@@ -567,6 +608,7 @@ stays).</p>
 </table>
 <h2>silence <span class='d'>(5/5 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>hard CC (s)</td></tr>
 <tr><td>SILENCINGBOLT</td><td class='n n'>3.83</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Arclight Blasters, Boltcasters, Crossbow, Energy Shaper, Heavy Crossbow, Light Crossbow, Siegebow, Weeping Repeater</td></tr>
 <tr><td>ARCANEORB2</td><td class='n n'>3.36</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Arcane Staff</td></tr>
 <tr><td>SHRIEKMACE</td><td class='n n'>2.33</td><td class='d'>s</td><td class='n'><span class='s3'>3</span></td><td class='d'></td><td class='d'>Heavy Mace</td></tr>
@@ -575,6 +617,7 @@ stays).</p>
 </table>
 <h2>slow <span class='d'>(26/28 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>slows (strength × duration)</td></tr>
 <tr><td>TORNADO</td><td class='n n'>8</td><td class='d'>slow%·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>slow-power 8.0; knockback 2.1m</td><td class='d'>Soulscythe</td></tr>
 <tr><td>MACE_CRYSTAL_FRAGMENT_STORM</td><td class='n n'>7.5</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 7.5</td><td class='d'>Dreadstorm Monarch</td></tr>
 <tr><td>QS_SLOWROPE</td><td class='n n'>7.5</td><td class='d'>slow%·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>slow-power 7.5</td><td class='d'>Staff of Balance</td></tr>
@@ -601,11 +644,13 @@ stays).</p>
 <tr><td>ARROWRAIN</td><td class='n n'>0.4</td><td class='d'>slow%·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>slow-power 0.4</td><td class='d'>Longbow</td></tr>
 <tr><td>SHAPE_W_DAMAGE_AOE</td><td class='n n'>0.3</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 0.3</td><td class='d'>Bloodmoon Staff, Earthrune Staff, Hellspawn Staff, Lightcaller, Primal Staff, Prowling Staff, Rootbound Staff, Stillgaze Staff</td></tr>
 <tr><td>QS_CRYSTAL_COMBO</td><td class='n n'>0.3</td><td class='d'>slow%·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>slow-power 0.3</td><td class='d'>Phantom Twinblade</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>FROST_TARGETED_CHANNEL</td><td class='none n'>—</td><td class='d'>m</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Arctic Staff</td></tr>
 <tr><td>THORNSAREA</td><td class='none n'>—</td><td class='d'>m</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Blight Staff, Druidic Staff, Forgebark Staff, Great Nature Staff, Ironroot Staff, Nature Staff, Rampant Staff, Wild Staff</td></tr>
 </table>
 <h2>stun <span class='d'>(19/20 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>hard CC (s)</td></tr>
 <tr><td>KNOCKOUT</td><td class='n n'>10</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Forge Hammers</td></tr>
 <tr><td>GROUNDBREAKER2</td><td class='n n'>2.7</td><td class='d'>s</td><td class='n'><span class='s3'>3</span></td><td class='d'></td><td class='d'>Polehammer</td></tr>
 <tr><td>TIME_FREEZE</td><td class='n n'>2.5</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Great Arcane Staff</td></tr>
@@ -625,11 +670,14 @@ stays).</p>
 <tr><td>SPINNING_SMASH</td><td class='n n'>0.8</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Hand of Justice</td></tr>
 <tr><td>VACUUMSLASH</td><td class='n n'>0.8</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Camlann Mace</td></tr>
 <tr><td>CLAYMORECHARGE</td><td class='n n'>0.8</td><td class='d'>s</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Claymore</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>CRYSTALWAVE</td><td class='none n'>—</td><td class='d'>s</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Truebolt Hammer</td></tr>
 </table>
 <h2>sustained_dps <span class='d'>(16/27 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>damage per cast</td></tr>
 <tr><td>THORNSAREA</td><td class='n n'>35</td><td class='d'>dmg/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Blight Staff, Great Nature Staff, Rampant Staff, Wild Staff</td></tr>
+<tr><td colspan='6' class='grp'>damage per second</td></tr>
 <tr><td>RENDINGSTRIKE</td><td class='n n'>31.6</td><td class='d'>dmg/s</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Battleaxe, Bear Paws, Carrioncaller, Crystal Reaper, Greataxe, Halberd, Infernal Scythe, Realmbreaker</td></tr>
 <tr><td>HEROICSTRIKE2</td><td class='n n'>25.9</td><td class='d'>dmg/s</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Broadsword, Carving Sword, Clarent Blade, Claymore, Galatine Pair, Kingmaker</td></tr>
 <tr><td>CURSEDOT</td><td class='n n'>15.8</td><td class='d'>dmg/s</td><td class='n'><span class='drift'>1–2 drift</span></td><td class='d'></td><td class='d'>Cursed Skull, Cursed Staff, Damnation Staff, Demonic Staff, Great Cursed Staff, Lifecurse Staff, Rotcaller Staff</td></tr>
@@ -645,6 +693,7 @@ stays).</p>
 <tr><td>PUMMELING_STRIKES</td><td class='n n'>3</td><td class='d'>dmg/s</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Ursine Maulers</td></tr>
 <tr><td>STARFALL_DOT</td><td class='n n'>2.1</td><td class='d'>dmg/s</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Astral Staff</td></tr>
 <tr><td>DUAL_RAPIDFIRE</td><td class='n n'>1.5</td><td class='d'>dmg/s</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Boltcasters</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>PASSIVE_ATTACKBUFF_ARCANESTAFF</td><td class='none n'>—</td><td class='d'>dmg/cast</td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Arcane Staff, Enigmatic Staff, Evensong, Great Arcane Staff, Malevolent Locus, Occult Staff, Witchwork Staff</td></tr>
 <tr><td>PASSIVE_KNUCKLE_BRAWLER_SPEED</td><td class='none n'>—</td><td class='d'>dmg/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Battle Bracers, Fists of Avalon, Forcepulse Bracers, Ravenstrike Cestus</td></tr>
 <tr><td>FLAMETORNADO</td><td class='none n'>—</td><td class='d'>dmg/cast</td><td class='n'><span class='s2'>2</span></td><td class='d'></td><td class='d'>Blazing Staff</td></tr>
@@ -659,14 +708,17 @@ stays).</p>
 </table>
 <h2>tankiness <span class='d'>(4/5 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>stat modifiers (value × duration)</td></tr>
 <tr><td>QS_SLOWROPE</td><td class='n n'>7.5</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>movespeedbonus -0.5 for 15s</td><td class='d'>Staff of Balance</td></tr>
 <tr><td>GIANTSTEPS</td><td class='n n'>5</td><td class='d'>value·s</td><td class='n'><span class='s2'>2</span></td><td class='d'>attackrangebonus +0.5 for 10s</td><td class='d'>Forge Hammers</td></tr>
 <tr><td>SHAPESHIFT_ROCK_ELEMENTAL</td><td class='n n'>0.9</td><td class='d'>value·s</td><td class='n'><span class='s3'>3</span></td><td class='d'>hitpointsmaxbonus +0.3 for 3s</td><td class='d'>Earthrune Staff</td></tr>
 <tr><td>QSWHIRLWIND</td><td class='n n'>0.8</td><td class='d'>value·s</td><td class='n'><span class='s1'>1</span></td><td class='d'>physicalarmor +0.15 for 5s</td><td class='d'>Iron-clad Staff</td></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>WEAPON_STATS</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='drift'>2–3 drift</span></td><td class='d'></td><td class='d'>Bedrock Mace, Camlann Mace, Dreadstorm Monarch, Great Hammer, Grovekeeper, Hammer, Hand of Justice, Heavy Mace, Incubus Mace, Mace, Morning Star, Oathkeepers, Polehammer, Primal Staff, Quarterstaff, Tombhammer, Truebolt Hammer</td></tr>
 </table>
 <h2>zone_control <span class='d'>(0/31 spells measured)</span></h2>
 <table><tr><th>spell</th><th class='n'>measured</th><th>unit</th><th class='n'>curated</th><th>detail</th><th>weapons citing it</th></tr>
+<tr><td colspan='6' class='grp'>not measurable — human judgment</td></tr>
 <tr><td>STARFALL_DOT</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Astral Staff</td></tr>
 <tr><td>ARCANECORRIDOR</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Occult Staff</td></tr>
 <tr><td>CRYSTAL_SCYTHE_DASH_ZONE</td><td class='none n'>—</td><td class='d'></td><td class='n'><span class='s1'>1</span></td><td class='d'></td><td class='d'>Crystal Reaper</td></tr>

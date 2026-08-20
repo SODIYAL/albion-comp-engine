@@ -8,6 +8,7 @@
   "anti_dive": [
    {
     "detail": "knockback 18.0m",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -20,6 +21,7 @@
    },
    {
     "detail": "knockback 12.0m",
+    "group": "displacement (m)",
     "scores": [
      2
     ],
@@ -32,6 +34,7 @@
    },
    {
     "detail": "knockback 4.26m",
+    "group": "displacement (m)",
     "scores": [
      1,
      2
@@ -50,19 +53,8 @@
     ]
    },
    {
-    "detail": "slow-power 3.5",
-    "scores": [
-     2
-    ],
-    "spell": "GIANTSTEPS",
-    "unit": "slow%\u00b7s",
-    "value": 3.5,
-    "weapons": [
-     "Forge Hammers"
-    ]
-   },
-   {
     "detail": "hard CC 2.5s",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -74,7 +66,34 @@
     ]
    },
    {
+    "detail": "hard CC 1.0s",
+    "group": "hard CC (s)",
+    "scores": [
+     1
+    ],
+    "spell": "FROSTNOVA",
+    "unit": "s",
+    "value": 1.0,
+    "weapons": [
+     "Icicle Staff"
+    ]
+   },
+   {
+    "detail": "slow-power 3.5",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     2
+    ],
+    "spell": "GIANTSTEPS",
+    "unit": "slow%\u00b7s",
+    "value": 3.5,
+    "weapons": [
+     "Forge Hammers"
+    ]
+   },
+   {
     "detail": "slow-power 2.4; knockback 1.8m",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
     ],
@@ -90,23 +109,12 @@
      "Tombhammer",
      "Truebolt Hammer"
     ]
-   },
-   {
-    "detail": "hard CC 1.0s",
-    "scores": [
-     1
-    ],
-    "spell": "FROSTNOVA",
-    "unit": "s",
-    "value": 1.0,
-    "weapons": [
-     "Icicle Staff"
-    ]
    }
   ],
   "anti_zone": [
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -121,6 +129,7 @@
   "buff_allies": [
    {
     "detail": "attackspeedbonus +0.85 for 6s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -133,6 +142,7 @@
    },
    {
     "detail": "movespeedbonus +0.6 for 8s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -145,6 +155,7 @@
    },
    {
     "detail": "movespeedbonus -0.5 for 5s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1,
      2
@@ -163,6 +174,7 @@
    },
    {
     "detail": "healmodifier +0.4 for 6s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -180,6 +192,7 @@
    },
    {
     "detail": "movespeedbonus -0.4 for 4s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -199,6 +212,7 @@
    },
    {
     "detail": "movespeedbonus -0.3 for 5s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -211,6 +225,7 @@
    },
    {
     "detail": "movespeedbonus +0.3 for 5s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -223,6 +238,7 @@
    },
    {
     "detail": "physicalarmor +0.3 for 4s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1,
      2
@@ -239,6 +255,7 @@
    },
    {
     "detail": "healbonus +0.15 for 8s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -251,6 +268,7 @@
    },
    {
     "detail": "movespeedbonus +0.6 for 1.6s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -270,6 +288,7 @@
    },
    {
     "detail": "healmodifier +0.2 for 4s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -289,6 +308,7 @@
    },
    {
     "detail": "hitpointsmaxbonus +0.2 for 3s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -301,6 +321,7 @@
    },
    {
     "detail": "physicalarmor +0.16 for 3s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -313,6 +334,7 @@
    },
    {
     "detail": "magicresistance +0.13 for 4s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -325,6 +347,7 @@
    },
    {
     "detail": "magicspelldamagebonus -0.03 for 7s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -343,6 +366,7 @@
    },
    {
     "detail": "magicspelldamagebonus +0.15 for 1s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -355,6 +379,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -374,6 +399,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -386,6 +412,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -398,6 +425,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -410,6 +438,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -424,6 +453,7 @@
   "burst_aoe": [
    {
     "detail": "81.5/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -436,6 +466,7 @@
    },
    {
     "detail": "26.4/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      3
     ],
@@ -448,6 +479,7 @@
    },
    {
     "detail": "24.0/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -460,6 +492,7 @@
    },
    {
     "detail": "32.3/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -472,6 +505,7 @@
    },
    {
     "detail": "23.2/s over 25s CD",
+    "group": "damage per cast",
     "scores": [
      3
     ],
@@ -484,6 +518,7 @@
    },
    {
     "detail": "14.5/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      3
     ],
@@ -496,6 +531,7 @@
    },
    {
     "detail": "14.2/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      3
     ],
@@ -508,6 +544,7 @@
    },
    {
     "detail": "19.9/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -520,6 +557,7 @@
    },
    {
     "detail": "9.9/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -532,6 +570,7 @@
    },
    {
     "detail": "14.0/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -544,6 +583,7 @@
    },
    {
     "detail": "13.5/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -556,6 +596,7 @@
    },
    {
     "detail": "8.0/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -568,6 +609,7 @@
    },
    {
     "detail": "15.4/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -580,6 +622,7 @@
    },
    {
     "detail": "11.5/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -592,6 +635,7 @@
    },
    {
     "detail": "11.3/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -604,6 +648,7 @@
    },
    {
     "detail": "11.2/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -616,6 +661,7 @@
    },
    {
     "detail": "8.5/s over 25s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -628,6 +674,7 @@
    },
    {
     "detail": "7.0/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      3
     ],
@@ -640,6 +687,7 @@
    },
    {
     "detail": "10.5/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -652,6 +700,7 @@
    },
    {
     "detail": "13.3/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -664,6 +713,7 @@
    },
    {
     "detail": "11.1/s over 18s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -676,6 +726,7 @@
    },
    {
     "detail": "5.0/s over 40s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -688,6 +739,7 @@
    },
    {
     "detail": "63.7/s over 3s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -700,6 +752,7 @@
    },
    {
     "detail": "12.5/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -712,6 +765,7 @@
    },
    {
     "detail": "8.5/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -724,6 +778,7 @@
    },
    {
     "detail": "8.1/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -736,6 +791,7 @@
    },
    {
     "detail": "10.7/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -748,6 +804,7 @@
    },
    {
     "detail": "6.4/s over 25s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -760,6 +817,7 @@
    },
    {
     "detail": "10.7/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -772,6 +830,7 @@
    },
    {
     "detail": "160.0/s over 1s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -784,6 +843,7 @@
    },
    {
     "detail": "12.9/s over 12s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -796,6 +856,7 @@
    },
    {
     "detail": "5.1/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -808,6 +869,7 @@
    },
    {
     "detail": "9.3/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -820,6 +882,7 @@
    },
    {
     "detail": "4.7/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -832,6 +895,7 @@
    },
    {
     "detail": "9.1/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -844,6 +908,7 @@
    },
    {
     "detail": "65.0/s over 2s CD",
+    "group": "damage per cast",
     "scores": [
      1,
      2
@@ -860,6 +925,7 @@
    },
    {
     "detail": "129.0/s over 1s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -872,6 +938,7 @@
    },
    {
     "detail": "8.3/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -884,6 +951,7 @@
    },
    {
     "detail": "6.2/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -896,6 +964,7 @@
    },
    {
     "detail": "8.1/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -908,6 +977,7 @@
    },
    {
     "detail": "2.9/s over 38s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -920,6 +990,7 @@
    },
    {
     "detail": "3.2/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -932,6 +1003,7 @@
    },
    {
     "detail": "8.1/s over 10s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -944,6 +1016,7 @@
    },
    {
     "detail": "3.2/s over 25s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -956,6 +1029,7 @@
    },
    {
     "detail": "3.0/s over 27s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -968,6 +1042,7 @@
    },
    {
     "detail": "1.1/s over 63s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -980,6 +1055,7 @@
    },
    {
     "detail": "2.1/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -992,6 +1068,7 @@
    },
    {
     "detail": "3.0/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -1004,6 +1081,7 @@
    },
    {
     "detail": "2.2/s over 25s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -1016,6 +1094,7 @@
    },
    {
     "detail": "33.3/s over 2s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -1028,6 +1107,7 @@
    },
    {
     "detail": "46.0/s over 1s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -1040,6 +1120,7 @@
    },
    {
     "detail": "1.0/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -1052,6 +1133,7 @@
    },
    {
     "detail": "0.8/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      3
     ],
@@ -1064,6 +1146,7 @@
    },
    {
     "detail": "0.7/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -1076,6 +1159,7 @@
    },
    {
     "detail": "0.7/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -1088,6 +1172,7 @@
    },
    {
     "detail": "0.8/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -1100,6 +1185,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -1112,6 +1198,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -1124,6 +1211,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -1136,6 +1224,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -1148,6 +1237,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -1160,6 +1250,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -1172,6 +1263,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -1184,6 +1276,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -1196,6 +1289,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -1210,6 +1304,7 @@
   "burst_st": [
    {
     "detail": "88.9/s over 10s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -1222,6 +1317,7 @@
    },
    {
     "detail": "57.5/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      3
     ],
@@ -1234,6 +1330,7 @@
    },
    {
     "detail": "23.2/s over 35s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -1246,6 +1343,7 @@
    },
    {
     "detail": "35.8/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -1258,6 +1356,7 @@
    },
    {
     "detail": "34.0/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -1270,6 +1369,7 @@
    },
    {
     "detail": "55.9/s over 12s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -1282,6 +1382,7 @@
    },
    {
     "detail": "25.7/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -1294,6 +1395,7 @@
    },
    {
     "detail": "22.7/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -1306,6 +1408,7 @@
    },
    {
     "detail": "27.0/s over 10s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -1318,6 +1421,7 @@
    },
    {
     "detail": "11.2/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -1330,6 +1434,7 @@
    },
    {
     "detail": "8.9/s over 25s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -1342,6 +1447,7 @@
    },
    {
     "detail": "8.8/s over 25s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -1354,6 +1460,7 @@
    },
    {
     "detail": "11.7/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -1366,6 +1473,7 @@
    },
    {
     "detail": "7.5/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -1378,6 +1486,7 @@
    },
    {
     "detail": "9.3/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -1390,6 +1499,7 @@
    },
    {
     "detail": "3.3/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -1402,6 +1512,7 @@
    },
    {
     "detail": "3.6/s over 25s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -1414,6 +1525,7 @@
    },
    {
     "detail": "3.6/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -1426,6 +1538,7 @@
    },
    {
     "detail": "3.0/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -1438,6 +1551,7 @@
    },
    {
     "detail": "1.5/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -1450,6 +1564,7 @@
    },
    {
     "detail": "2.0/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      1,
      2
@@ -1468,6 +1583,7 @@
    },
    {
     "detail": "0.8/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -1480,6 +1596,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -1492,6 +1609,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -1504,6 +1622,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -1516,6 +1635,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -1528,6 +1648,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -1540,6 +1661,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -1552,6 +1674,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -1564,6 +1687,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -1577,55 +1701,21 @@
   ],
   "catch": [
    {
-    "detail": "slow-power 8.0; knockback 2.1m",
+    "detail": "knockback 1.25m",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
-    "spell": "TORNADO",
-    "unit": "slow%\u00b7s",
-    "value": 8.0,
+    "spell": "LETHAL_CLEAVER",
+    "unit": "m",
+    "value": 1.25,
     "weapons": [
-     "Soulscythe"
-    ]
-   },
-   {
-    "detail": "slow-power 7.5",
-    "scores": [
-     1
-    ],
-    "spell": "MACE_CRYSTAL_FRAGMENT_STORM",
-    "unit": "slow%\u00b7s",
-    "value": 7.5,
-    "weapons": [
-     "Dreadstorm Monarch"
-    ]
-   },
-   {
-    "detail": "slow-power 4.5",
-    "scores": [
-     1
-    ],
-    "spell": "ICESTORM2",
-    "unit": "slow%\u00b7s",
-    "value": 4.5,
-    "weapons": [
-     "Glacial Staff"
-    ]
-   },
-   {
-    "detail": "slow-power 3.5",
-    "scores": [
-     1
-    ],
-    "spell": "GIANTSTEPS",
-    "unit": "slow%\u00b7s",
-    "value": 3.5,
-    "weapons": [
-     "Forge Hammers"
+     "Realmbreaker"
     ]
    },
    {
     "detail": "hard CC 3.5s",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -1638,6 +1728,7 @@
    },
    {
     "detail": "hard CC 2.79s",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -1650,6 +1741,7 @@
    },
    {
     "detail": "hard CC 2.7s",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -1661,19 +1753,8 @@
     ]
    },
    {
-    "detail": "slow-power 2.5",
-    "scores": [
-     1
-    ],
-    "spell": "GLACIALFIELD",
-    "unit": "slow%\u00b7s",
-    "value": 2.5,
-    "weapons": [
-     "Icicle Staff"
-    ]
-   },
-   {
     "detail": "hard CC 2.5s",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -1686,6 +1767,7 @@
    },
    {
     "detail": "hard CC 2.5s; knockback 0.9m",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -1698,6 +1780,7 @@
    },
    {
     "detail": "hard CC 2.48s",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -1710,6 +1793,7 @@
    },
    {
     "detail": "hard CC 2.35s; knockback 2.0m",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -1722,6 +1806,7 @@
    },
    {
     "detail": "hard CC 2.11s",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -1734,6 +1819,7 @@
    },
    {
     "detail": "hard CC 1.8s",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -1752,6 +1838,7 @@
    },
    {
     "detail": "hard CC 1.75s",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -1763,43 +1850,8 @@
     ]
    },
    {
-    "detail": "slow-power 1.6; knockback 10.0m",
-    "scores": [
-     1
-    ],
-    "spell": "ICEROCK_EXPLODE",
-    "unit": "slow%\u00b7s",
-    "value": 1.6,
-    "weapons": [
-     "Hoarfrost Staff"
-    ]
-   },
-   {
-    "detail": "slow-power 1.5",
-    "scores": [
-     2
-    ],
-    "spell": "DASH_KNOCKBACK",
-    "unit": "slow%\u00b7s",
-    "value": 1.5,
-    "weapons": [
-     "Double Bladed Staff"
-    ]
-   },
-   {
-    "detail": "slow-power 1.5",
-    "scores": [
-     1
-    ],
-    "spell": "IMPULSE_PUNCH",
-    "unit": "slow%\u00b7s",
-    "value": 1.5,
-    "weapons": [
-     "Spiked Gauntlets"
-    ]
-   },
-   {
     "detail": "hard CC 1.5s",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -1812,6 +1864,7 @@
    },
    {
     "detail": "hard CC 1.35s",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -1829,19 +1882,8 @@
     ]
    },
    {
-    "detail": "knockback 1.25m",
-    "scores": [
-     1
-    ],
-    "spell": "LETHAL_CLEAVER",
-    "unit": "m",
-    "value": 1.25,
-    "weapons": [
-     "Realmbreaker"
-    ]
-   },
-   {
     "detail": "hard CC 1.0s",
+    "group": "hard CC (s)",
     "scores": [
      1,
      2
@@ -1860,7 +1902,177 @@
     ]
    },
    {
+    "detail": "hard CC 1.0s",
+    "group": "hard CC (s)",
+    "scores": [
+     2
+    ],
+    "spell": "FROST_ULTIMATE",
+    "unit": "s",
+    "value": 1.0,
+    "weapons": [
+     "Permafrost Prism"
+    ]
+   },
+   {
+    "detail": "hard CC 0.8s",
+    "group": "hard CC (s)",
+    "scores": [
+     1
+    ],
+    "spell": "FROST_BITE",
+    "unit": "s",
+    "value": 0.8,
+    "weapons": [
+     "Arctic Staff"
+    ]
+   },
+   {
+    "detail": "hard CC 0.8s; knockback 1.0m",
+    "group": "hard CC (s)",
+    "scores": [
+     2
+    ],
+    "spell": "SPINNING_SMASH",
+    "unit": "s",
+    "value": 0.8,
+    "weapons": [
+     "Hand of Justice"
+    ]
+   },
+   {
+    "detail": "hard CC 0.8s",
+    "group": "hard CC (s)",
+    "scores": [
+     1
+    ],
+    "spell": "VACUUMSLASH",
+    "unit": "s",
+    "value": 0.8,
+    "weapons": [
+     "Camlann Mace"
+    ]
+   },
+   {
+    "detail": "hard CC 0.8s",
+    "group": "hard CC (s)",
+    "scores": [
+     2
+    ],
+    "spell": "CLAYMORECHARGE",
+    "unit": "s",
+    "value": 0.8,
+    "weapons": [
+     "Claymore"
+    ]
+   },
+   {
+    "detail": "slow-power 8.0; knockback 2.1m",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     1
+    ],
+    "spell": "TORNADO",
+    "unit": "slow%\u00b7s",
+    "value": 8.0,
+    "weapons": [
+     "Soulscythe"
+    ]
+   },
+   {
+    "detail": "slow-power 7.5",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     1
+    ],
+    "spell": "MACE_CRYSTAL_FRAGMENT_STORM",
+    "unit": "slow%\u00b7s",
+    "value": 7.5,
+    "weapons": [
+     "Dreadstorm Monarch"
+    ]
+   },
+   {
+    "detail": "slow-power 4.5",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     1
+    ],
+    "spell": "ICESTORM2",
+    "unit": "slow%\u00b7s",
+    "value": 4.5,
+    "weapons": [
+     "Glacial Staff"
+    ]
+   },
+   {
+    "detail": "slow-power 3.5",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     1
+    ],
+    "spell": "GIANTSTEPS",
+    "unit": "slow%\u00b7s",
+    "value": 3.5,
+    "weapons": [
+     "Forge Hammers"
+    ]
+   },
+   {
+    "detail": "slow-power 2.5",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     1
+    ],
+    "spell": "GLACIALFIELD",
+    "unit": "slow%\u00b7s",
+    "value": 2.5,
+    "weapons": [
+     "Icicle Staff"
+    ]
+   },
+   {
+    "detail": "slow-power 1.6; knockback 10.0m",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     1
+    ],
+    "spell": "ICEROCK_EXPLODE",
+    "unit": "slow%\u00b7s",
+    "value": 1.6,
+    "weapons": [
+     "Hoarfrost Staff"
+    ]
+   },
+   {
+    "detail": "slow-power 1.5",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     2
+    ],
+    "spell": "DASH_KNOCKBACK",
+    "unit": "slow%\u00b7s",
+    "value": 1.5,
+    "weapons": [
+     "Double Bladed Staff"
+    ]
+   },
+   {
+    "detail": "slow-power 1.5",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     1
+    ],
+    "spell": "IMPULSE_PUNCH",
+    "unit": "slow%\u00b7s",
+    "value": 1.5,
+    "weapons": [
+     "Spiked Gauntlets"
+    ]
+   },
+   {
     "detail": "slow-power 1.0",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -1874,19 +2086,8 @@
     ]
    },
    {
-    "detail": "hard CC 1.0s",
-    "scores": [
-     2
-    ],
-    "spell": "FROST_ULTIMATE",
-    "unit": "s",
-    "value": 1.0,
-    "weapons": [
-     "Permafrost Prism"
-    ]
-   },
-   {
     "detail": "slow-power 0.9; hard CC 2.0s",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -1898,55 +2099,8 @@
     ]
    },
    {
-    "detail": "hard CC 0.8s",
-    "scores": [
-     1
-    ],
-    "spell": "FROST_BITE",
-    "unit": "s",
-    "value": 0.8,
-    "weapons": [
-     "Arctic Staff"
-    ]
-   },
-   {
-    "detail": "hard CC 0.8s; knockback 1.0m",
-    "scores": [
-     2
-    ],
-    "spell": "SPINNING_SMASH",
-    "unit": "s",
-    "value": 0.8,
-    "weapons": [
-     "Hand of Justice"
-    ]
-   },
-   {
-    "detail": "hard CC 0.8s",
-    "scores": [
-     1
-    ],
-    "spell": "VACUUMSLASH",
-    "unit": "s",
-    "value": 0.8,
-    "weapons": [
-     "Camlann Mace"
-    ]
-   },
-   {
-    "detail": "hard CC 0.8s",
-    "scores": [
-     2
-    ],
-    "spell": "CLAYMORECHARGE",
-    "unit": "s",
-    "value": 0.8,
-    "weapons": [
-     "Claymore"
-    ]
-   },
-   {
     "detail": "slow-power 0.8",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -1959,6 +2113,7 @@
    },
    {
     "detail": "slow-power 0.67; hard CC 2.25s",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -1971,6 +2126,7 @@
    },
    {
     "detail": "slow-power 0.6",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1,
      2
@@ -1987,6 +2143,7 @@
    },
    {
     "detail": "slow-power 0.2",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -1999,6 +2156,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2015,6 +2173,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2027,6 +2186,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2039,6 +2199,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2051,6 +2212,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2063,6 +2225,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2075,6 +2238,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2087,6 +2251,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2104,6 +2269,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2116,6 +2282,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2128,6 +2295,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2140,6 +2308,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2154,6 +2323,7 @@
   "cleanse": [
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2172,6 +2342,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2184,6 +2355,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2196,6 +2368,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2208,6 +2381,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2229,6 +2403,7 @@
   "clump_create": [
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2248,6 +2423,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -2260,6 +2436,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2279,6 +2456,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -2291,6 +2469,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2305,6 +2484,7 @@
   "damage_debuff": [
    {
     "detail": "movespeedbonus +0.8 for 5s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -2317,6 +2497,7 @@
    },
    {
     "detail": "physicalattackdamagebonus -0.4 for 8s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -2329,6 +2510,7 @@
    },
    {
     "detail": "attackspeedbonus -0.5 for 5s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -2342,6 +2524,7 @@
    },
    {
     "detail": "physicalattackdamagebonus -0.4 for 5s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -2354,6 +2537,7 @@
    },
    {
     "detail": "magicspelldamagebonus -0.25 for 5s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -2368,6 +2552,7 @@
   "disengage": [
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2380,6 +2565,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2392,6 +2578,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2404,6 +2591,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1,
      2
@@ -2423,6 +2611,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2435,6 +2624,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2447,6 +2637,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2463,6 +2654,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2475,6 +2667,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2487,6 +2680,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2499,6 +2693,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2511,6 +2706,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2523,6 +2719,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2535,6 +2732,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2547,6 +2745,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2563,6 +2762,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2582,6 +2782,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2594,6 +2795,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2606,6 +2808,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2618,6 +2821,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2630,6 +2834,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2647,6 +2852,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2659,6 +2865,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2671,6 +2878,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2683,6 +2891,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2695,6 +2904,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2707,6 +2917,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2719,6 +2930,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2731,6 +2943,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2745,6 +2958,7 @@
   "engage": [
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2757,6 +2971,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2773,6 +2988,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2785,6 +3001,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2797,6 +3014,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2809,6 +3027,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2821,6 +3040,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2833,6 +3053,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2851,6 +3072,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2863,6 +3085,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2875,6 +3098,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2887,6 +3111,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2899,6 +3124,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2911,6 +3137,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1,
      3
@@ -2928,6 +3155,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -2940,6 +3168,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -2952,6 +3181,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -2964,6 +3194,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -2976,6 +3207,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -2988,6 +3220,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -3000,6 +3233,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -3016,6 +3250,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -3028,6 +3263,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1,
      2
@@ -3045,6 +3281,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -3057,6 +3294,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -3069,6 +3307,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -3081,6 +3320,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -3093,6 +3333,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -3105,6 +3346,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -3117,6 +3359,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -3129,6 +3372,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -3141,6 +3385,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -3153,6 +3398,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -3165,6 +3411,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -3177,6 +3424,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -3191,6 +3439,7 @@
   "execute": [
    {
     "detail": "57.5/s over 15s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -3203,6 +3452,7 @@
    },
    {
     "detail": "23.2/s over 35s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -3215,6 +3465,7 @@
    },
    {
     "detail": "26.4/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -3227,6 +3478,7 @@
    },
    {
     "detail": "11.5/s over 20s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -3239,6 +3491,7 @@
    },
    {
     "detail": "8.5/s over 25s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -3251,6 +3504,7 @@
    },
    {
     "detail": "7.1/s over 14s CD",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -3263,6 +3517,7 @@
    },
    {
     "detail": "3.3/s over 30s CD",
+    "group": "damage per cast",
     "scores": [
      2
     ],
@@ -3275,6 +3530,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -3289,6 +3545,7 @@
   "heal_burst": [
    {
     "detail": "35.6/s over 18s CD",
+    "group": "healing per cast",
     "scores": [
      2
     ],
@@ -3301,6 +3558,7 @@
    },
    {
     "detail": "32.0/s over 10s CD",
+    "group": "healing per cast",
     "scores": [
      2
     ],
@@ -3313,6 +3571,7 @@
    },
    {
     "detail": "9.0/s over 30s CD",
+    "group": "healing per cast",
     "scores": [
      3
     ],
@@ -3325,6 +3584,7 @@
    },
    {
     "detail": "",
+    "group": "healing per cast",
     "scores": [
      2
     ],
@@ -3337,6 +3597,7 @@
    },
    {
     "detail": "2.1/s over 65s CD",
+    "group": "healing per cast",
     "scores": [
      2
     ],
@@ -3349,6 +3610,7 @@
    },
    {
     "detail": "4.5/s over 30s CD",
+    "group": "healing per cast",
     "scores": [
      3
     ],
@@ -3361,6 +3623,7 @@
    },
    {
     "detail": "4.1/s over 30s CD",
+    "group": "healing per cast",
     "scores": [
      1
     ],
@@ -3373,6 +3636,7 @@
    },
    {
     "detail": "33.4/s over 4s CD",
+    "group": "healing per cast",
     "scores": [
      2
     ],
@@ -3387,6 +3651,7 @@
    },
    {
     "detail": "3.2/s over 20s CD",
+    "group": "healing per cast",
     "scores": [
      1
     ],
@@ -3403,6 +3668,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -3417,6 +3683,7 @@
   "heal_reduction": [
    {
     "detail": "movespeedbonus -0.5 for 15s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -3429,6 +3696,7 @@
    },
    {
     "detail": "physicalattackdamagebonus -0.4 for 8s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -3441,6 +3709,7 @@
    },
    {
     "detail": "healmodifier -0.4 for 6s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -3453,6 +3722,7 @@
    },
    {
     "detail": "healmodifier -0.4 for 4s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -3465,6 +3735,7 @@
    },
    {
     "detail": "magicspelldamagebonus -0.25 for 5s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -3477,6 +3748,7 @@
    },
    {
     "detail": "crowdcontrolresistance -0.2 for 4s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -3489,6 +3761,7 @@
    },
    {
     "detail": "healmodifier +0.2 for 4s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -3501,6 +3774,7 @@
    },
    {
     "detail": "healmodifier -0.2 for 4s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -3513,6 +3787,7 @@
    },
    {
     "detail": "healmodifier -0.2 for 4s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -3525,6 +3800,7 @@
    },
    {
     "detail": "healmodifier -0.12 for 5s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -3541,6 +3817,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -3560,6 +3837,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -3572,6 +3850,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -3586,6 +3865,7 @@
   "heal_sustain": [
    {
     "detail": "35.6/s over 18s CD",
+    "group": "healing per cast",
     "scores": [
      2
     ],
@@ -3598,6 +3878,7 @@
    },
    {
     "detail": "4.1/s over 30s CD",
+    "group": "healing per cast",
     "scores": [
      3
     ],
@@ -3610,6 +3891,7 @@
    },
    {
     "detail": "7.1/s over 15s CD",
+    "group": "healing per cast",
     "scores": [
      2
     ],
@@ -3622,6 +3904,7 @@
    },
    {
     "detail": "3.1/s over 25s CD",
+    "group": "healing per cast",
     "scores": [
      3
     ],
@@ -3634,6 +3917,7 @@
    },
    {
     "detail": "2.9/s over 25s CD",
+    "group": "healing per cast",
     "scores": [
      3
     ],
@@ -3646,6 +3930,7 @@
    },
    {
     "detail": "3.5/s over 20s CD",
+    "group": "healing per cast",
     "scores": [
      3
     ],
@@ -3658,6 +3943,7 @@
    },
    {
     "detail": "2.8/s over 20s CD",
+    "group": "healing per cast",
     "scores": [
      2
     ],
@@ -3670,6 +3956,7 @@
    },
    {
     "detail": "2.8/s over 18s CD",
+    "group": "healing per cast",
     "scores": [
      3
     ],
@@ -3682,6 +3969,7 @@
    },
    {
     "detail": "4.2/s over 12s CD",
+    "group": "healing per cast",
     "scores": [
      2
     ],
@@ -3698,6 +3986,7 @@
    },
    {
     "detail": "1.0/s over 30s CD",
+    "group": "healing per cast",
     "scores": [
      1
     ],
@@ -3710,6 +3999,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -3722,6 +4012,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -3734,6 +4025,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -3746,6 +4038,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -3760,6 +4053,7 @@
   "knockback_displace": [
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      3
     ],
@@ -3772,6 +4066,7 @@
    },
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      3
     ],
@@ -3784,6 +4079,7 @@
    },
    {
     "detail": "",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -3803,6 +4099,7 @@
    },
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      2
     ],
@@ -3815,6 +4112,7 @@
    },
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      2
     ],
@@ -3827,6 +4125,7 @@
    },
    {
     "detail": "",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -3843,6 +4142,7 @@
    },
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -3859,6 +4159,7 @@
    },
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      2
     ],
@@ -3871,6 +4172,7 @@
    },
    {
     "detail": "",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -3887,6 +4189,7 @@
    },
    {
     "detail": "",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -3899,6 +4202,7 @@
    },
    {
     "detail": "",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -3911,6 +4215,7 @@
    },
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -3923,6 +4228,7 @@
    },
    {
     "detail": "",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -3935,6 +4241,7 @@
    },
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -3947,6 +4254,7 @@
    },
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -3959,6 +4267,7 @@
    },
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -3974,6 +4283,7 @@
    },
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -3986,6 +4296,7 @@
    },
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -3998,6 +4309,7 @@
    },
    {
     "detail": "",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -4017,6 +4329,7 @@
    },
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -4029,6 +4342,7 @@
    },
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -4041,6 +4355,7 @@
    },
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      2
     ],
@@ -4053,6 +4368,7 @@
    },
    {
     "detail": "ignores CC resistance",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -4065,6 +4381,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4077,6 +4394,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -4089,6 +4407,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -4101,6 +4420,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -4113,6 +4433,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -4125,6 +4446,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4139,6 +4461,7 @@
   "mobility": [
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -4151,6 +4474,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -4166,6 +4490,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4178,6 +4503,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -4190,6 +4516,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -4202,6 +4529,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -4214,6 +4542,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4226,6 +4555,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4238,6 +4568,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -4254,6 +4585,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4266,6 +4598,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4281,6 +4614,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4293,6 +4627,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4305,6 +4640,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4317,6 +4653,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4329,6 +4666,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4341,6 +4679,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4353,6 +4692,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -4365,6 +4705,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4377,6 +4718,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -4393,6 +4735,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4405,6 +4748,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4417,6 +4761,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4429,6 +4774,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -4443,6 +4789,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -4455,6 +4802,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4469,6 +4817,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4481,6 +4830,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4493,6 +4843,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4509,6 +4860,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4521,6 +4873,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -4533,6 +4886,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -4545,6 +4899,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4557,6 +4912,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -4572,6 +4928,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4584,6 +4941,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4596,6 +4954,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -4608,6 +4967,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4620,6 +4980,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -4636,6 +4997,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4648,6 +5010,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4660,6 +5023,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4672,6 +5036,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4684,6 +5049,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4696,6 +5062,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -4710,6 +5077,7 @@
   "peel": [
    {
     "detail": "knockback 18.0m",
+    "group": "displacement (m)",
     "scores": [
      2
     ],
@@ -4722,6 +5090,7 @@
    },
    {
     "detail": "knockback 12.0m",
+    "group": "displacement (m)",
     "scores": [
      2
     ],
@@ -4734,6 +5103,7 @@
    },
    {
     "detail": "knockback 10.0m",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -4753,6 +5123,7 @@
    },
    {
     "detail": "knockback 10.0m",
+    "group": "displacement (m)",
     "scores": [
      2
     ],
@@ -4765,6 +5136,7 @@
    },
    {
     "detail": "knockback 9.0m",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -4781,6 +5153,7 @@
    },
    {
     "detail": "knockback 9.0m",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -4796,6 +5169,7 @@
    },
    {
     "detail": "knockback 8.0m",
+    "group": "displacement (m)",
     "scores": [
      2
     ],
@@ -4807,19 +5181,8 @@
     ]
    },
    {
-    "detail": "slow-power 8.0; knockback 2.1m",
-    "scores": [
-     1
-    ],
-    "spell": "TORNADO",
-    "unit": "slow%\u00b7s",
-    "value": 8.0,
-    "weapons": [
-     "Soulscythe"
-    ]
-   },
-   {
     "detail": "knockback 6.0m",
+    "group": "displacement (m)",
     "scores": [
      2
     ],
@@ -4831,19 +5194,8 @@
     ]
    },
    {
-    "detail": "slow-power 4.5",
-    "scores": [
-     1
-    ],
-    "spell": "ICESTORM2",
-    "unit": "slow%\u00b7s",
-    "value": 4.5,
-    "weapons": [
-     "Glacial Staff"
-    ]
-   },
-   {
     "detail": "knockback 4.0m",
+    "group": "displacement (m)",
     "scores": [
      1
     ],
@@ -4861,19 +5213,73 @@
     ]
    },
    {
-    "detail": "slow-power 3.5",
+    "detail": "knockback 1.25m",
+    "group": "displacement (m)",
+    "scores": [
+     1
+    ],
+    "spell": "LETHAL_CLEAVER",
+    "unit": "m",
+    "value": 1.25,
+    "weapons": [
+     "Realmbreaker"
+    ]
+   },
+   {
+    "detail": "knockback 1.25m",
+    "group": "displacement (m)",
+    "scores": [
+     1
+    ],
+    "spell": "DASHDMG",
+    "unit": "m",
+    "value": 1.25,
+    "weapons": [
+     "Spear"
+    ]
+   },
+   {
+    "detail": "knockback 1.0m",
+    "group": "displacement (m)",
+    "scores": [
+     3
+    ],
+    "spell": "DIVINE_JUMP",
+    "unit": "m",
+    "value": 1.0,
+    "weapons": [
+     "Hallowfall"
+    ]
+   },
+   {
+    "detail": "knockback 0.9m",
+    "group": "displacement (m)",
+    "scores": [
+     1
+    ],
+    "spell": "BLAZING_GEYSER",
+    "unit": "m",
+    "value": 0.9,
+    "weapons": [
+     "Brawler Gloves"
+    ]
+   },
+   {
+    "detail": "knockback 0.25m",
+    "group": "displacement (m)",
     "scores": [
      2
     ],
-    "spell": "GIANTSTEPS",
-    "unit": "slow%\u00b7s",
-    "value": 3.5,
+    "spell": "MAJESTIC_SMASH",
+    "unit": "m",
+    "value": 0.25,
     "weapons": [
-     "Forge Hammers"
+     "Kingmaker"
     ]
    },
    {
     "detail": "hard CC 3.5s",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -4886,6 +5292,7 @@
    },
    {
     "detail": "hard CC 2.79s",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -4898,6 +5305,7 @@
    },
    {
     "detail": "hard CC 2.7s",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -4910,6 +5318,7 @@
    },
    {
     "detail": "hard CC 2.5s",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -4921,19 +5330,8 @@
     ]
    },
    {
-    "detail": "slow-power 2.5",
-    "scores": [
-     1
-    ],
-    "spell": "GLACIALFIELD",
-    "unit": "slow%\u00b7s",
-    "value": 2.5,
-    "weapons": [
-     "Icicle Staff"
-    ]
-   },
-   {
     "detail": "hard CC 2.5s",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -4946,6 +5344,7 @@
    },
    {
     "detail": "hard CC 2.5s; knockback 0.9m",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -4958,6 +5357,7 @@
    },
    {
     "detail": "hard CC 2.48s",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -4970,6 +5370,7 @@
    },
    {
     "detail": "hard CC 2.35s; knockback 2.0m",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -4982,6 +5383,7 @@
    },
    {
     "detail": "hard CC 2.33s",
+    "group": "hard CC (s)",
     "scores": [
      3
     ],
@@ -4994,6 +5396,7 @@
    },
    {
     "detail": "hard CC 2.25s",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -5006,6 +5409,7 @@
    },
    {
     "detail": "hard CC 2.2s",
+    "group": "hard CC (s)",
     "scores": [
      1,
      2,
@@ -5024,6 +5428,7 @@
    },
    {
     "detail": "hard CC 1.8s",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -5042,6 +5447,7 @@
    },
    {
     "detail": "hard CC 1.75s",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -5053,31 +5459,8 @@
     ]
    },
    {
-    "detail": "slow-power 1.6; knockback 10.0m",
-    "scores": [
-     1
-    ],
-    "spell": "ICEROCK_EXPLODE",
-    "unit": "slow%\u00b7s",
-    "value": 1.6,
-    "weapons": [
-     "Hoarfrost Staff"
-    ]
-   },
-   {
-    "detail": "slow-power 1.5",
-    "scores": [
-     1
-    ],
-    "spell": "IMPULSE_PUNCH",
-    "unit": "slow%\u00b7s",
-    "value": 1.5,
-    "weapons": [
-     "Spiked Gauntlets"
-    ]
-   },
-   {
     "detail": "hard CC 1.5s",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -5090,6 +5473,7 @@
    },
    {
     "detail": "hard CC 1.25s",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -5107,31 +5491,8 @@
     ]
    },
    {
-    "detail": "knockback 1.25m",
-    "scores": [
-     1
-    ],
-    "spell": "LETHAL_CLEAVER",
-    "unit": "m",
-    "value": 1.25,
-    "weapons": [
-     "Realmbreaker"
-    ]
-   },
-   {
-    "detail": "knockback 1.25m",
-    "scores": [
-     1
-    ],
-    "spell": "DASHDMG",
-    "unit": "m",
-    "value": 1.25,
-    "weapons": [
-     "Spear"
-    ]
-   },
-   {
     "detail": "hard CC 1.0s",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -5151,19 +5512,8 @@
     ]
    },
    {
-    "detail": "knockback 1.0m",
-    "scores": [
-     3
-    ],
-    "spell": "DIVINE_JUMP",
-    "unit": "m",
-    "value": 1.0,
-    "weapons": [
-     "Hallowfall"
-    ]
-   },
-   {
     "detail": "hard CC 1.0s",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -5175,43 +5525,8 @@
     ]
    },
    {
-    "detail": "slow-power 0.9; hard CC 2.0s",
-    "scores": [
-     2
-    ],
-    "spell": "FROZEN_CRYSTAL",
-    "unit": "slow%\u00b7s",
-    "value": 0.9,
-    "weapons": [
-     "Chillhowl"
-    ]
-   },
-   {
-    "detail": "knockback 0.9m",
-    "scores": [
-     1
-    ],
-    "spell": "BLAZING_GEYSER",
-    "unit": "m",
-    "value": 0.9,
-    "weapons": [
-     "Brawler Gloves"
-    ]
-   },
-   {
-    "detail": "slow-power 0.88; knockback 0.28m",
-    "scores": [
-     1
-    ],
-    "spell": "GROWING_PUNCH",
-    "unit": "slow%\u00b7s",
-    "value": 0.88,
-    "weapons": [
-     "Ravenstrike Cestus"
-    ]
-   },
-   {
     "detail": "hard CC 0.8s; knockback 1.0m",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -5223,7 +5538,112 @@
     ]
    },
    {
+    "detail": "slow-power 8.0; knockback 2.1m",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     1
+    ],
+    "spell": "TORNADO",
+    "unit": "slow%\u00b7s",
+    "value": 8.0,
+    "weapons": [
+     "Soulscythe"
+    ]
+   },
+   {
+    "detail": "slow-power 4.5",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     1
+    ],
+    "spell": "ICESTORM2",
+    "unit": "slow%\u00b7s",
+    "value": 4.5,
+    "weapons": [
+     "Glacial Staff"
+    ]
+   },
+   {
+    "detail": "slow-power 3.5",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     2
+    ],
+    "spell": "GIANTSTEPS",
+    "unit": "slow%\u00b7s",
+    "value": 3.5,
+    "weapons": [
+     "Forge Hammers"
+    ]
+   },
+   {
+    "detail": "slow-power 2.5",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     1
+    ],
+    "spell": "GLACIALFIELD",
+    "unit": "slow%\u00b7s",
+    "value": 2.5,
+    "weapons": [
+     "Icicle Staff"
+    ]
+   },
+   {
+    "detail": "slow-power 1.6; knockback 10.0m",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     1
+    ],
+    "spell": "ICEROCK_EXPLODE",
+    "unit": "slow%\u00b7s",
+    "value": 1.6,
+    "weapons": [
+     "Hoarfrost Staff"
+    ]
+   },
+   {
+    "detail": "slow-power 1.5",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     1
+    ],
+    "spell": "IMPULSE_PUNCH",
+    "unit": "slow%\u00b7s",
+    "value": 1.5,
+    "weapons": [
+     "Spiked Gauntlets"
+    ]
+   },
+   {
+    "detail": "slow-power 0.9; hard CC 2.0s",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     2
+    ],
+    "spell": "FROZEN_CRYSTAL",
+    "unit": "slow%\u00b7s",
+    "value": 0.9,
+    "weapons": [
+     "Chillhowl"
+    ]
+   },
+   {
+    "detail": "slow-power 0.88; knockback 0.28m",
+    "group": "slows (strength \u00d7 duration)",
+    "scores": [
+     1
+    ],
+    "spell": "GROWING_PUNCH",
+    "unit": "slow%\u00b7s",
+    "value": 0.88,
+    "weapons": [
+     "Ravenstrike Cestus"
+    ]
+   },
+   {
     "detail": "slow-power 0.6",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -5237,19 +5657,8 @@
     ]
    },
    {
-    "detail": "knockback 0.25m",
-    "scores": [
-     2
-    ],
-    "spell": "MAJESTIC_SMASH",
-    "unit": "m",
-    "value": 0.25,
-    "weapons": [
-     "Kingmaker"
-    ]
-   },
-   {
     "detail": "slow-power 0.2",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -5262,6 +5671,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1,
      2
@@ -5280,6 +5690,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -5292,6 +5703,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -5304,6 +5716,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -5316,6 +5729,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -5335,6 +5749,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -5347,6 +5762,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -5359,6 +5775,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -5375,6 +5792,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -5387,6 +5805,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -5399,6 +5818,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -5413,6 +5833,7 @@
   "purge": [
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -5425,6 +5846,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -5437,6 +5859,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -5449,6 +5872,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -5461,6 +5885,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -5480,6 +5905,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -5492,6 +5918,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -5504,6 +5931,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -5516,6 +5944,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -5530,6 +5959,7 @@
   "resist_shred": [
    {
     "detail": "movespeedbonus -0.25 for 30s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -5542,6 +5972,7 @@
    },
    {
     "detail": "physicalarmor -0.16 for 8s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -5561,6 +5992,7 @@
    },
    {
     "detail": "bonusdefensevsplayers -0.3 for 4s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -5580,6 +6012,7 @@
    },
    {
     "detail": "magicresistance -0.2 for 6s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -5592,6 +6025,7 @@
    },
    {
     "detail": "physicalarmor -0.18 for 6s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -5604,6 +6038,7 @@
    },
    {
     "detail": "physicalarmor -0.2 for 5s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -5623,6 +6058,7 @@
    },
    {
     "detail": "physicalarmor -0.17 for 4s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -5641,6 +6077,7 @@
    },
    {
     "detail": "physicalarmor -0.15 for 4s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -5653,6 +6090,7 @@
    },
    {
     "detail": "physicalarmor -0.06 for 8s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -5673,6 +6111,7 @@
    },
    {
     "detail": "physicalarmor -0.12 for 4s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -5692,6 +6131,7 @@
    },
    {
     "detail": "magicresistance -0.12 for 4s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -5704,6 +6144,7 @@
    },
    {
     "detail": "physicalarmor -0.12 for 3s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -5723,6 +6164,7 @@
    },
    {
     "detail": "magicspelldamagebonus -0.03 for 7s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -5742,6 +6184,7 @@
    },
    {
     "detail": "magicresistance -0.027 for 4s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -5760,6 +6203,7 @@
    },
    {
     "detail": "magicresistance -0.03 for 5s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -5778,6 +6222,7 @@
    },
    {
     "detail": "bonusdefensevsplayers -0.02 for 3s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -5792,6 +6237,7 @@
   "root": [
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -5809,6 +6255,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -5821,6 +6268,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -5833,6 +6281,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -5852,6 +6301,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      3
     ],
@@ -5864,6 +6314,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -5882,6 +6333,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -5899,6 +6351,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -5911,6 +6364,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -5930,6 +6384,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      3
     ],
@@ -5942,6 +6397,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -5961,6 +6417,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -5980,6 +6437,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -5998,6 +6456,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -6010,6 +6469,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -6029,6 +6489,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -6041,6 +6502,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -6055,6 +6517,7 @@
   "self_sustain": [
    {
     "detail": "32.0/s over 10s CD",
+    "group": "healing per cast",
     "scores": [
      1
     ],
@@ -6067,6 +6530,7 @@
    },
    {
     "detail": "4.5/s over 30s CD",
+    "group": "healing per cast",
     "scores": [
      1
     ],
@@ -6079,6 +6543,7 @@
    },
    {
     "detail": "5.0/s over 10s CD",
+    "group": "healing per cast",
     "scores": [
      2
     ],
@@ -6091,6 +6556,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -6108,6 +6574,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -6120,6 +6587,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -6139,6 +6607,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -6158,6 +6627,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -6170,6 +6640,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -6189,6 +6660,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -6208,6 +6680,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -6220,6 +6693,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -6239,6 +6713,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -6254,6 +6729,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -6266,6 +6742,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -6278,6 +6755,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -6290,6 +6768,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -6311,6 +6790,7 @@
   "silence": [
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -6330,6 +6810,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -6342,6 +6823,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      3
     ],
@@ -6354,6 +6836,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -6366,6 +6849,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -6386,6 +6870,7 @@
   "slow": [
    {
     "detail": "slow-power 8.0; knockback 2.1m",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
     ],
@@ -6398,6 +6883,7 @@
    },
    {
     "detail": "slow-power 7.5",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -6410,6 +6896,7 @@
    },
    {
     "detail": "slow-power 7.5",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
     ],
@@ -6422,6 +6909,7 @@
    },
    {
     "detail": "slow-power 4.5",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
     ],
@@ -6434,6 +6922,7 @@
    },
    {
     "detail": "slow-power 3.5",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
     ],
@@ -6446,6 +6935,7 @@
    },
    {
     "detail": "slow-power 2.5",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
     ],
@@ -6458,6 +6948,7 @@
    },
    {
     "detail": "slow-power 2.4",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -6470,6 +6961,7 @@
    },
    {
     "detail": "slow-power 2.4; knockback 1.8m",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
     ],
@@ -6488,6 +6980,7 @@
    },
    {
     "detail": "slow-power 1.6; knockback 10.0m",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
     ],
@@ -6500,6 +6993,7 @@
    },
    {
     "detail": "slow-power 1.5",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
     ],
@@ -6512,6 +7006,7 @@
    },
    {
     "detail": "slow-power 1.5",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
     ],
@@ -6524,6 +7019,7 @@
    },
    {
     "detail": "slow-power 1.5",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -6543,6 +7039,7 @@
    },
    {
     "detail": "slow-power 1.2; hard CC 5.0s",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -6560,6 +7057,7 @@
    },
    {
     "detail": "slow-power 1.0",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -6578,6 +7076,7 @@
    },
    {
     "detail": "slow-power 1.0",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
     ],
@@ -6592,6 +7091,7 @@
    },
    {
     "detail": "slow-power 0.9",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -6611,6 +7111,7 @@
    },
    {
     "detail": "slow-power 0.9; hard CC 2.0s",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
     ],
@@ -6623,6 +7124,7 @@
    },
    {
     "detail": "slow-power 0.88",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -6635,6 +7137,7 @@
    },
    {
     "detail": "slow-power 0.8",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -6647,6 +7150,7 @@
    },
    {
     "detail": "slow-power 0.75",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -6659,6 +7163,7 @@
    },
    {
     "detail": "slow-power 0.67; hard CC 2.25s",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -6671,6 +7176,7 @@
    },
    {
     "detail": "slow-power 0.6",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -6689,6 +7195,7 @@
    },
    {
     "detail": "slow-power 0.4",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -6707,6 +7214,7 @@
    },
    {
     "detail": "slow-power 0.4",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      2
     ],
@@ -6719,6 +7227,7 @@
    },
    {
     "detail": "slow-power 0.3",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -6738,6 +7247,7 @@
    },
    {
     "detail": "slow-power 0.3",
+    "group": "slows (strength \u00d7 duration)",
     "scores": [
      1
     ],
@@ -6750,6 +7260,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -6762,6 +7273,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -6783,6 +7295,7 @@
   "stun": [
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -6795,6 +7308,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      3
     ],
@@ -6807,6 +7321,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -6819,6 +7334,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -6831,6 +7347,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -6843,6 +7360,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -6855,6 +7373,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -6867,6 +7386,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -6886,6 +7406,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -6898,6 +7419,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -6910,6 +7432,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -6922,6 +7445,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -6941,6 +7465,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -6953,6 +7478,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -6972,6 +7498,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -6989,6 +7516,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -7001,6 +7529,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      2
     ],
@@ -7013,6 +7542,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -7025,6 +7555,7 @@
    },
    {
     "detail": "",
+    "group": "hard CC (s)",
     "scores": [
      1
     ],
@@ -7037,6 +7568,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7051,6 +7583,7 @@
   "sustained_dps": [
    {
     "detail": "",
+    "group": "damage per cast",
     "scores": [
      1
     ],
@@ -7066,6 +7599,7 @@
    },
    {
     "detail": "",
+    "group": "damage per second",
     "scores": [
      2
     ],
@@ -7085,6 +7619,7 @@
    },
    {
     "detail": "",
+    "group": "damage per second",
     "scores": [
      2
     ],
@@ -7102,6 +7637,7 @@
    },
    {
     "detail": "",
+    "group": "damage per second",
     "scores": [
      1,
      2
@@ -7121,6 +7657,7 @@
    },
    {
     "detail": "",
+    "group": "damage per second",
     "scores": [
      2
     ],
@@ -7133,6 +7670,7 @@
    },
    {
     "detail": "",
+    "group": "damage per second",
     "scores": [
      2
     ],
@@ -7145,6 +7683,7 @@
    },
    {
     "detail": "",
+    "group": "damage per second",
     "scores": [
      1
     ],
@@ -7163,6 +7702,7 @@
    },
    {
     "detail": "",
+    "group": "damage per second",
     "scores": [
      3
     ],
@@ -7175,6 +7715,7 @@
    },
    {
     "detail": "",
+    "group": "damage per second",
     "scores": [
      2
     ],
@@ -7187,6 +7728,7 @@
    },
    {
     "detail": "",
+    "group": "damage per second",
     "scores": [
      1
     ],
@@ -7199,6 +7741,7 @@
    },
    {
     "detail": "",
+    "group": "damage per second",
     "scores": [
      2
     ],
@@ -7211,6 +7754,7 @@
    },
    {
     "detail": "",
+    "group": "damage per second",
     "scores": [
      2
     ],
@@ -7223,6 +7767,7 @@
    },
    {
     "detail": "",
+    "group": "damage per second",
     "scores": [
      1
     ],
@@ -7235,6 +7780,7 @@
    },
    {
     "detail": "",
+    "group": "damage per second",
     "scores": [
      2
     ],
@@ -7247,6 +7793,7 @@
    },
    {
     "detail": "",
+    "group": "damage per second",
     "scores": [
      2
     ],
@@ -7259,6 +7806,7 @@
    },
    {
     "detail": "",
+    "group": "damage per second",
     "scores": [
      2
     ],
@@ -7271,6 +7819,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7289,6 +7838,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7304,6 +7854,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7316,6 +7867,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1,
      2
@@ -7352,6 +7904,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -7364,6 +7917,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1,
      2
@@ -7382,6 +7936,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7394,6 +7949,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7408,6 +7964,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7420,6 +7977,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7439,6 +7997,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7453,6 +8012,7 @@
   "tankiness": [
    {
     "detail": "movespeedbonus -0.5 for 15s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -7465,6 +8025,7 @@
    },
    {
     "detail": "attackrangebonus +0.5 for 10s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      2
     ],
@@ -7477,6 +8038,7 @@
    },
    {
     "detail": "hitpointsmaxbonus +0.3 for 3s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      3
     ],
@@ -7489,6 +8051,7 @@
    },
    {
     "detail": "physicalarmor +0.15 for 5s",
+    "group": "stat modifiers (value \u00d7 duration)",
     "scores": [
      1
     ],
@@ -7501,6 +8064,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2,
      3
@@ -7532,6 +8096,7 @@
   "zone_control": [
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7544,6 +8109,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7556,6 +8122,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7568,6 +8135,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -7580,6 +8148,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7597,6 +8166,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7609,6 +8179,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7621,6 +8192,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7633,6 +8205,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7645,6 +8218,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7660,6 +8234,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7672,6 +8247,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7684,6 +8260,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7700,6 +8277,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7712,6 +8290,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7724,6 +8303,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1,
      2,
@@ -7742,6 +8322,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      3
     ],
@@ -7754,6 +8335,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7766,6 +8348,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7778,6 +8361,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7796,6 +8380,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7814,6 +8399,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7826,6 +8412,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1,
      2
@@ -7843,6 +8430,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7855,6 +8443,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7867,6 +8456,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7886,6 +8476,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7898,6 +8489,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],
@@ -7910,6 +8502,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7922,6 +8515,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      2
     ],
@@ -7934,6 +8528,7 @@
    },
    {
     "detail": "",
+    "group": "not measurable \u2014 human judgment",
     "scores": [
      1
     ],

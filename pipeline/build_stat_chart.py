@@ -276,16 +276,31 @@ def main():
         g = grouped.setdefault((cap, sid), {"weapons": [], "scores": set()})
         g["weapons"].append(names.get(wk, wk))
         g["scores"].add(score)
+    # A measured number only ranks against the SAME KIND of effect — meters
+    # never sort against seconds (expert correction 2026-08-20: "how is 18m
+    # knockback vs 2.5s stasis decided?" — it isn't, by data; the cross-type
+    # exchange rate is exactly what the 1-7 rubric's judgment sets). Rows
+    # group by unit within each board, sorted within their group only.
+    UNIT_GROUP = {"m": "displacement (m)", "s": "hard CC (s)",
+                  "slow%·s": "slows (strength × duration)",
+                  "dmg/cast": "damage per cast", "dmg/s": "damage per second",
+                  "heal/cast": "healing per cast",
+                  "value·s": "stat modifiers (value × duration)"}
     boards = {}
     for (cap, sid), g in grouped.items():
         val, unit, detail = metric_for(cap, extracted.get(sid))
         boards.setdefault(cap, []).append({
             "spell": sid, "value": val, "unit": unit, "detail": detail,
+            "group": (UNIT_GROUP.get(unit, unit) if val is not None
+                      else "not measurable — human judgment"),
             "weapons": sorted(g["weapons"]),
             "scores": sorted(g["scores"])})
+    group_order = list(UNIT_GROUP.values()) + ["not measurable — human judgment"]
     for cap in boards:
-        boards[cap].sort(key=lambda r: (r["value"] is None,
-                                        -(r["value"] or 0)))
+        boards[cap].sort(key=lambda r: (
+            group_order.index(r["group"]) if r["group"] in group_order
+            else len(group_order),
+            -(r["value"] or 0)))
 
     with open(os.path.join(OUT, "stat_chart.json"), "w",
               encoding="utf-8") as f:
@@ -311,6 +326,7 @@ td,th{padding:3px 10px;text-align:left;border-bottom:1px solid #2a2a2a}
 th{color:#888;font-weight:normal} .n{text-align:right;font-variant-numeric:tabular-nums}
 .s3{color:#f0c674}.s2{color:#8abeb7}.s1{color:#777}
 .drift{color:#cc6666;font-weight:bold}
+.grp{color:#b294bb;font-size:12px;padding-top:12px;border-bottom:1px solid #444}
 .none{color:#555} .d{color:#888;font-size:12px}
 p.note{color:#999;font-size:13px}
 </style>
@@ -330,7 +346,11 @@ stays).</p>"""]
                      "<th class='n'>measured</th><th>unit</th>"
                      "<th class='n'>curated</th><th>detail</th>"
                      "<th>weapons citing it</th></tr>")
+        last_group = None
         for r in rows_c:
+            if r["group"] != last_group:
+                last_group = r["group"]
+                parts.append(f"<tr><td colspan='6' class='grp'>{esc(last_group)}</td></tr>")
             v = "—" if r["value"] is None else f"{r['value']:g}"
             cls = "none" if r["value"] is None else "n"
             scores = r["scores"]
