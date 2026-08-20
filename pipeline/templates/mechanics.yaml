@@ -93,12 +93,62 @@ aoe_escalation:
   # Applied after all other buffs; NOT reduced by the ~150% damage soft cap.
   applied_after_buffs: true
   bypasses_damage_soft_cap: true
-  # Escalation is per-ability ELIGIBILITY, global MAGNITUDE: which spells
-  # escalate is a per-spell flag (Wild Blood 23.000.1 fixed/improved ~40
-  # damage + 9 CC spells); the curve above is the same for all of them.
-  # Eligibility extraction from ao-bin-dumps: MECHANICS_TODO.md Q9.
-  # CC escalation duration curve values: NOT yet recorded — Q8.
-  cc_escalation_duration_curve: null
+  # Escalation is per-ability ELIGIBILITY, per-effect MAGNITUDE — both now
+  # extracted from ao-bin-dumps (Q9 answered 2026-08-20, parse_dumps v4):
+  # spell_index.json carries `escalation: {value, duration}` per spell
+  # (@targetcountvaluebonusfactor / @targetcountdurationbonusfactor).
+  # 174/559 weapon-reachable spells escalate; standard factor 0.08/target
+  # (Spirit Animal: 0.25). Q8 answered by the same extraction: CC DURATION
+  # escalation uses the same per-target factor as damage; the per-spell
+  # factor in the dataset is authoritative, this note is documentation.
+  cc_escalation_duration_curve: same_factor_per_target_as_damage
+
+# ---------------------------------------------------------------------------
+# AoE GEOMETRY (2026-08-20, geometric-AoE step 1 — expert ruling in
+# MECHANICS_TODO.md): an area effect does one target's worth of WORK per
+# enemy it actually affects. Utility supply delivered by an AoE spell
+# (weapon cap_delivery, from the evidence spell's structural footprint)
+# scales with expected targets affected — normalized to (balanced,
+# base_size), so template calibration at the anchor is untouched and only
+# bigger fights / clumpier styles diverge. Single-target and self-buff
+# supply stays flat: +40% self move speed catches ONE runner at any size.
+aoe_geometry:
+  # Expected enemies AFFECTED when an area of the given radius sweeps the
+  # style's clump: step table radius -> targets (largest breakpoint <= r).
+  # PROVISIONAL shape — expert to tune; travel-distance (Tornado's 25m line)
+  # deliberately not yet counted, radius only.
+  radius_targets:
+    0: 1
+    2: 2
+    3.5: 3
+    5: 4
+    6.5: 6
+    8: 8
+  # The utility capabilities that scale geometrically (the expert-ruled CC/
+  # utility family). Damage families keep the existing escalation/Resilience
+  # physics; zone_control is EXCLUDED (area is already its identity — scaling
+  # it by area would double-count).
+  geometric_caps: [catch, peel, slow, stun, root, silence, knockback_displace]
+  # Of those, the ones whose in-game CC Escalation (duration per target hit)
+  # composes ON TOP of the geometric term — applied only when the delivering
+  # spell carries a duration escalation factor in the dumps.
+  cc_duration_caps: [stun, root, silence]
+  escalation_cap_targets: 8
+  # The ANCHOR the geometric term is normalized against — where an AoE
+  # utility spell counts exactly its curated ordinal score:
+  #   null  -> (balanced, base_size) clump: calibration-preserving, but the
+  #            base clumps (6.4-7) already exceed every spell's reach, so AoE
+  #            utility can only be DE-rated at small sizes, never up-rated
+  #            at the calibrated scale — cannot express the expert's ruling.
+  #   N     -> a fixed reference clump: the ordinal unit is "one cast's worth
+  #            at a small gang of N-target clumps"; above it, AoE utility
+  #            supply grows toward min(clump, spell reach)/min(N, reach).
+  # 2 = the ordinal curation intuition (a skirmish where an AoE slow catches
+  # ~2). Measured 2026-08-20: V4 role 73% and all golden cases hold with 2.
+  # PROVISIONAL — expert may retune; template targets for the geometric caps
+  # were calibrated on flat supply and absorb the change via the same
+  # measurement gates.
+  reference_clump: 2
 
 # ---------------------------------------------------------------------------
 # CC diminishing returns (PvP interaction layer, 2026-08-19): repeated

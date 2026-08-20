@@ -170,6 +170,19 @@ class Engine:
         mult_now = self._count_mult(self.size)
         mult_base = self._count_mult(self.base_size)
         grown = lambda p, m: (p * m if p else p)
+        # Clump anchors for the GEOMETRIC transform (2026-08-20): how many
+        # enemies this style/size expects an AoE to reach, and the (balanced,
+        # base_size) anchor it is normalized against — the same inputs the
+        # escalation mult reads, kept so _geo_mult stays anchor-consistent.
+        self._clump_now = grown(style_mech.get("expected_aoe_targets"), mult_now)
+        self._clump_base = grown(base_mech.get("expected_aoe_targets"), mult_base)
+        geo = self.mechanics.get("aoe_geometry") or {}
+        self._geo_caps = set(geo.get("geometric_caps") or [])
+        self._geo_cc_caps = set(geo.get("cc_duration_caps") or [])
+        self._geo_cap_targets = geo.get("escalation_cap_targets", 8)
+        self._geo_ref = geo.get("reference_clump")   # null -> base-clump anchor
+        rt = geo.get("radius_targets") or {}
+        self._radius_targets_table = sorted((float(k), rt[k]) for k in rt)
         self.mech_mults = {}
         for cap in AOE_ESCALATION_CAPS:
             self.mech_mults[cap] = (
@@ -358,18 +371,73 @@ class Engine:
     # member's combo defaults to the static best under the current template
     # weights; the forge persists the combo it actually scored; the dashboard
     # pins combos from the player's real Q/W/passive picks.
-    def _eff(self, caps):
-        """Apply mechanics multipliers (AoE escalation / Resilience) to a bundle."""
-        return {c: v * self.mech_mults.get(c, 1.0) for c, v in caps.items()}
+    def _radius_targets(self, radius):
+        """Expected targets AFFECTED by an area of `radius` sweeping the
+        clump (mechanics.yaml aoe_geometry step table, PROVISIONAL)."""
+        if not self._radius_targets_table:
+            return 1.0
+        v = self._radius_targets_table[0][1]
+        for k, m in self._radius_targets_table:
+            if k <= radius:
+                v = m
+            else:
+                break
+        return v
+
+    def _geo_mult(self, cap, dent):
+        """GEOMETRIC multiplier (2026-08-20, expert ruling in MECHANICS_TODO):
+        an AoE effect does one target's worth of work per enemy it reaches, so
+        AoE-delivered utility supply scales with expected targets affected —
+        min(style clump, what the spell's footprint can plausibly cover) —
+        normalized to the (balanced, base_size) anchor, where this is exactly
+        1.0 by construction. No delivery facts (no structural area in the
+        dumps, self-buffs, single-target) = flat 1.0: +40% self move speed
+        catches ONE runner at any size. In-game CC Escalation (duration per
+        target, the spell's own dumps factor) composes on top for the CC caps
+        that have it."""
+        if not dent or not self._clump_now or not self._clump_base:
+            return 1.0
+        r = dent.get("radius")
+        if r is None:
+            return 1.0
+        reach = self._radius_targets(r)
+        mt = dent.get("max_targets")
+        if mt and mt < reach:
+            reach = mt
+        t_now = self._clump_now if self._clump_now < reach else reach
+        anchor = self._geo_ref if self._geo_ref else self._clump_base
+        t_base = anchor if anchor < reach else reach
+        if t_base <= 0:
+            return 1.0
+        m = t_now / t_base
+        f = (dent.get("escalation") or {}).get("duration")
+        if f and cap in self._geo_cc_caps:
+            cap8 = self._geo_cap_targets
+            e_now = 1.0 + f * (min(t_now, cap8) - 1.0)
+            e_base = 1.0 + f * (min(t_base, cap8) - 1.0)
+            m *= e_now / e_base
+        return m
+
+    def _eff(self, caps, delivery=None):
+        """Apply mechanics multipliers (AoE escalation / Resilience) and the
+        per-spell geometric transform to a bundle."""
+        out = {}
+        for c, v in caps.items():
+            v *= self.mech_mults.get(c, 1.0)
+            if delivery is not None and c in self._geo_caps:
+                v *= self._geo_mult(c, delivery.get(c))
+            out[c] = v
+        return out
 
     def _loadout_eff(self, weapon):
         """(always_eff, [[bundle_eff, ...], ...]) for a weapon; empty loadout
         (no game data) falls back to the flat capability union."""
         lo = self.weapons[weapon].get("loadout")
+        dl = self.weapons[weapon].get("cap_delivery") or {}
         if not lo or not lo.get("slots") and not lo.get("always"):
-            return self._eff(self.caps_of(weapon)), []
-        return (self._eff(lo.get("always", {})),
-                [[self._eff(b) for b in slot] for slot in lo.get("slots", [])])
+            return self._eff(self.caps_of(weapon), dl), []
+        return (self._eff(lo.get("always", {}), dl),
+                [[self._eff(b, dl) for b in slot] for slot in lo.get("slots", [])])
 
     def _combo_extras(self, weapon):
         """Every one-spell-per-slot loadout as a merged effective-caps dict,

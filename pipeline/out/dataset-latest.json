@@ -29721,7 +29721,7 @@
    "bonus_per_extra_target": 0.08,
    "bypasses_damage_soft_cap": true,
    "cap_targets": 8,
-   "cc_escalation_duration_curve": null,
+   "cc_escalation_duration_curve": "same_factor_per_target_as_damage",
    "damage_bonus_by_targets": {
     "1": 0.0,
     "2": 0.08,
@@ -29734,6 +29734,32 @@
    },
    "max_bonus": 0.56,
    "starts_at_targets": 2
+  },
+  "aoe_geometry": {
+   "cc_duration_caps": [
+    "stun",
+    "root",
+    "silence"
+   ],
+   "escalation_cap_targets": 8,
+   "geometric_caps": [
+    "catch",
+    "peel",
+    "slow",
+    "stun",
+    "root",
+    "silence",
+    "knockback_displace"
+   ],
+   "radius_targets": {
+    "0": 1,
+    "2": 2,
+    "3.5": 3,
+    "5": 4,
+    "6.5": 6,
+    "8": 8
+   },
+   "reference_clump": 2
   },
   "cc_diminishing_returns": null,
   "disarray": {

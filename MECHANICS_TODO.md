@@ -244,6 +244,38 @@ Wiki verification (2026-08-20): damage curve confirmed 8%/target cap 56%@8;
 CC Escalation duration curve is NOT published anywhere on the wiki — Q8 needs
 dumps or in-game measurement, not more searching.
 
+**SHIPPED 2026-08-20 (all three steps, committed):**
+
+1. **Spell-level sheets** — tree Q/W pools (sheets/pools/, 818 rows hoisted,
+   sheets_lib.py composition, 229 explicit `except:` non-takes, 25 drift
+   overrides preserved for the RULE queue). Dataset semantically identical.
+2. **Delivery physics from dumps** — parse_dumps v4 extracts per-spell
+   escalation (@targetcountvaluebonusfactor / @targetcountdurationbonusfactor)
+   through the full reference chain; build_dataset stamps per-cap
+   `cap_delivery` (radius, max_targets, escalation). **Q9 ANSWERED**: 174/559
+   spells escalate (168 value, 33 duration), per-spell from data; wiki Wild
+   Blood lists partially stale (Spinning Blades, Deadly Swipe, Snare Charge
+   carry no factor today; Avalanche value-only). **Q8 ANSWERED**: CC duration
+   escalation uses the same per-target factor as damage (0.08; Spirit Animal
+   0.25). **Q10 refuted**: eligibility is NOT uniform across the AoE class.
+3. **Geometric AoE utility transform** (engine + JS, parity 60/60, golden
+   26/26 incl. new T18/T18b, V4 role 73% unchanged) — AoE-delivered supply
+   for `geometric_caps` (catch/peel/slow/stun/root/silence/knockback_displace)
+   scales with min(style clump, spell reach) / min(reference_clump, reach);
+   CC-duration escalation composes where the spell carries a dumps factor.
+   `reference_clump: 2` (mechanics.yaml) anchors the ordinal unit at
+   small-gang scale — the (balanced, base_size) anchor was measured DEAD:
+   base clumps (6.4–7) exceed every spell's reach, so it could never
+   up-rate AoE at the calibrated sizes. Soulscythe catch: 1.5x@roads5 →
+   3.0x@20+ vs Battleaxe's flat self-haste 1.0 — the motivating failure.
+
+**Still deferred (needs expert sign-off):**
+- Per-spell gating of `burst_aoe` DAMAGE escalation (an AoE damage spell with
+  no value factor currently still gets the global style mult) — changes
+  styled balance in ways V4 cannot validate; wire after a styled expert pass.
+- `radius_targets` table + `reference_clump: 2` magnitudes are PROVISIONAL.
+- Travel-distance footprints (Tornado's 25m line) not counted — radius only.
+
 ## Questions — still open
 
 - [ ] **Q2 — Enemy model.** Resilience needs "how many of OUR players focus

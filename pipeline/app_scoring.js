@@ -146,6 +146,24 @@
     var multNow = this._countMult(this.size);
     var multBase = this._countMult(this.baseSize);
     var grown = function (p, m) { return p ? p * m : p; };
+    /* Clump anchors + AoE geometry config (2026-08-20, mirrors engine.py
+       set_content — the geometric utility transform). */
+    this._clumpNow = grown(styleMech.expected_aoe_targets, multNow);
+    this._clumpBase = grown(baseMech.expected_aoe_targets, multBase);
+    var geo = this.mechanics.aoe_geometry || {};
+    this._geoCaps = {};
+    this._geoCcCaps = {};
+    var gl = geo.geometric_caps || [];
+    for (var gi = 0; gi < gl.length; gi++) this._geoCaps[gl[gi]] = true;
+    gl = geo.cc_duration_caps || [];
+    for (gi = 0; gi < gl.length; gi++) this._geoCcCaps[gl[gi]] = true;
+    this._geoCapTargets = (geo.escalation_cap_targets === undefined)
+      ? 8 : geo.escalation_cap_targets;
+    this._geoRef = (geo.reference_clump === undefined) ? null : geo.reference_clump;
+    this._radiusTargetsTable = [];
+    var rtSrc = geo.radius_targets || {};
+    for (var rk in rtSrc) this._radiusTargetsTable.push([parseFloat(rk), rtSrc[rk]]);
+    this._radiusTargetsTable.sort(function (a, b) { return a[0] - b[0]; });
     this.mechMults = {};
     var i;
     for (i = 0; i < AOE_ESCALATION_CAPS.length; i++) {
@@ -328,23 +346,66 @@
      (weapon, combo) — one bundle per slot. The SAME machinery serves
      incumbents and candidates, so recommend() cannot disagree with
      compScore() about a member's loadout. */
-  CompEngine.prototype._eff = function (caps) {
-    var out = {}, m;
-    for (var c in caps) { m = this.mechMults[c]; out[c] = caps[c] * (m === undefined ? 1.0 : m); }
+  CompEngine.prototype._radiusTargets = function (radius) {
+    /* Expected targets AFFECTED by an area of `radius` sweeping the clump
+       (mirrors engine.py _radius_targets — mechanics.yaml step table). */
+    if (!this._radiusTargetsTable.length) return 1.0;
+    var v = this._radiusTargetsTable[0][1];
+    for (var i = 0; i < this._radiusTargetsTable.length; i++) {
+      if (this._radiusTargetsTable[i][0] <= radius) v = this._radiusTargetsTable[i][1];
+      else break;
+    }
+    return v;
+  };
+
+  CompEngine.prototype._geoMult = function (cap, dent) {
+    /* GEOMETRIC multiplier for AoE-delivered utility supply (mirrors
+       engine.py _geo_mult exactly — same operation order for parity). */
+    if (!dent || !this._clumpNow || !this._clumpBase) return 1.0;
+    var r = dent.radius;
+    if (r === undefined || r === null) return 1.0;
+    var reach = this._radiusTargets(r);
+    var mt = dent.max_targets;
+    if (mt && mt < reach) reach = mt;
+    var tNow = this._clumpNow < reach ? this._clumpNow : reach;
+    var anchor = this._geoRef ? this._geoRef : this._clumpBase;
+    var tBase = anchor < reach ? anchor : reach;
+    if (tBase <= 0) return 1.0;
+    var m = tNow / tBase;
+    var f = (dent.escalation || {}).duration;
+    if (f && this._geoCcCaps[cap]) {
+      var cap8 = this._geoCapTargets;
+      var eNow = 1.0 + f * ((tNow < cap8 ? tNow : cap8) - 1.0);
+      var eBase = 1.0 + f * ((tBase < cap8 ? tBase : cap8) - 1.0);
+      m *= eNow / eBase;
+    }
+    return m;
+  };
+
+  CompEngine.prototype._eff = function (caps, delivery) {
+    var out = {}, m, v;
+    for (var c in caps) {
+      m = this.mechMults[c];
+      v = caps[c] * (m === undefined ? 1.0 : m);
+      if (delivery !== undefined && delivery !== null && this._geoCaps[c])
+        v *= this._geoMult(c, delivery[c]);
+      out[c] = v;
+    }
     return out;
   };
 
   CompEngine.prototype._loadoutEff = function (weapon) {
     var lo = this.weapons[weapon].loadout;
+    var dl = this.weapons[weapon].cap_delivery || {};
     var hasSlots = lo && lo.slots && lo.slots.length;
     var hasAlways = lo && lo.always && Object.keys(lo.always).length;
     if (!lo || (!hasSlots && !hasAlways))
-      return { always: this._eff(this.capsOf(weapon)), slots: [] };
+      return { always: this._eff(this.capsOf(weapon), dl), slots: [] };
     var self = this;
     return {
-      always: this._eff(lo.always || {}),
+      always: this._eff(lo.always || {}, dl),
       slots: (lo.slots || []).map(function (slot) {
-        return slot.map(function (b) { return self._eff(b); });
+        return slot.map(function (b) { return self._eff(b, dl); });
       }),
     };
   };

@@ -295,6 +295,43 @@ def run():
           f"realmbreaker rank {rb['rank']} vs heavy mace {hm['rank']}; "
           f"options={[o['display_name'] for o in rb['options']]}")
 
+    # T18 — geometric AoE utility (2026-08-20 expert ruling, MECHANICS_TODO):
+    # an AoE effect does one target's worth of work PER ENEMY REACHED.
+    # Soulscythe's catch is Tornado's 80% slow in a 7m circle; Battleaxe's is
+    # a self-only +40% move speed (Adrenaline Boost). Identical ordinal
+    # scores (catch 1), so before this layer they tied at every size — the
+    # motivating failure. Pinned: at 20-man+, AoE-delivered catch counts
+    # ~3x a self-buff catch (reach-capped); in a small gang the gap nearly
+    # closes; the flat self-buff never scales.
+    SOULSCYTHE, BATTLEAXE = "2H_TWINSCYTHE_HELL", "MAIN_AXE"
+    e_big = Engine(content="blackzone_roam", size=20, style="balanced")
+    e_small = Engine(content="roads", size=5, style="balanced")
+    catch_of = lambda e, w: max(x.get("catch", 0.0) for x in e._combo_extras(w))
+    ss_big, ba_big = catch_of(e_big, SOULSCYTHE), catch_of(e_big, BATTLEAXE)
+    ss_small, ba_small = catch_of(e_small, SOULSCYTHE), catch_of(e_small, BATTLEAXE)
+    check("T18 geometric catch: AoE ~3x self-buff at 20, gap closes small",
+          ss_big > 2.5 * ba_big and abs(ba_big - 1.0) < 1e-9
+          and ss_small < 0.6 * ss_big and abs(ba_small - 1.0) < 1e-9,
+          f"soulscythe@20={ss_big:.2f} battleaxe@20={ba_big:.2f} "
+          f"soulscythe@5={ss_small:.2f} battleaxe@5={ba_small:.2f}")
+
+    # T18b — CC-duration escalation composes ON TOP of geometry exactly when
+    # the dumps carry a duration factor (extraction pin: Bow's Ray of Light /
+    # GROUNDARROW — on the wiki CC list — carries 0.08). The compose itself
+    # is pinned with a wide footprint (radius 7 -> reach past the anchor):
+    # with the factor the multiplier must exceed the same footprint without
+    # it; a small footprint (3m -> reach == anchor) must stay exactly 1.
+    bow_root = E.weapons["2H_BOW"].get("cap_delivery", {}).get("root")
+    wide = {"radius": 7.0, "escalation": {"duration": 0.08}}
+    check("T18b CC escalation: duration factor composes above pure geometry",
+          bow_root is not None
+          and (bow_root.get("escalation") or {}).get("duration", 0) > 0
+          and e_big._geo_mult("root", wide)
+          > e_big._geo_mult("root", {"radius": 7.0}) + 1e-9
+          and abs(e_big._geo_mult("root", bow_root) - 1.0) < 1e-9,
+          f"bow={bow_root} wide={e_big._geo_mult('root', wide):.3f} "
+          f"geo_only={e_big._geo_mult('root', {'radius': 7.0}):.3f}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:
