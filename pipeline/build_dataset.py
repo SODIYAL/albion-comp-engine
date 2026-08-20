@@ -394,6 +394,33 @@ def main():
     if os.path.exists(inter_path):
         with open(inter_path, encoding="utf-8") as f:
             interactions = json.load(f).get("spells", {})
+    # Per-capability DELIVERY facts (2026-08-20, geometric-AoE step 3):
+    # from each capability's evidence spell, the structural area geometry and
+    # the game's own per-effect escalation factors (parse_dumps v4). Absent =
+    # the spell tree carries no area — "unknown", never "not AoE". This is
+    # display + physics INPUT data; the engine's geometric transform (step 1)
+    # is what turns it into supply scaling.
+    for w in weapons.values():
+        delivery = {}
+        for cap, spells in (w.get("evidence") or {}).items():
+            for sid in spells:
+                sp = spell_index.get(sid)
+                if not sp:
+                    continue
+                d = {}
+                if sp.get("radius") is not None:
+                    d["radius"] = sp["radius"]
+                if sp.get("max_targets") is not None:
+                    d["max_targets"] = sp["max_targets"]
+                if sp.get("escalation"):
+                    d["escalation"] = sp["escalation"]
+                if d:
+                    d["spell"] = sid
+                    delivery[cap] = d
+                    break                      # one evidence spell per cap
+        if delivery:
+            w["cap_delivery"] = delivery
+
     n_ranged, ranged_report, ranged_problems = derive_ranged_presence(
         weapons, spell_index, load_ranged_overrides())
     with open(os.path.join(OUT, "ranged_presence_report.json"), "w",

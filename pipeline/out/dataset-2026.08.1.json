@@ -15,7 +15,7 @@
     "gear_spells.json": "201cc9fcb37a5de39d4677d0ff0e562c5498c9409a34a8350102ce96f2c042b4",
     "interactions.json": "ef1dcdfb270cb910dbe3629312908cc2a267603ec006593980858de43ea4186f",
     "item_stats.json": "544d293670e4f3adc6daa83e940af115186902b216add0f8fddb9880c882712a",
-    "spell_index.json": "63af6008ed9020228a4249d6a6ec0376f65a9a83d1bd15f439d795341c661236",
+    "spell_index.json": "e1314ca350b2e0838f7a5f505b0237331c2e3f312f08a76c26bf5fa9ca35d5d6",
     "weapon_lines.json": "3a5303c584f4bb7e4de4c372352948d1c0243d280e8b709cbd9942b13574fcc2"
    },
    "problems": [],
@@ -31149,6 +31149,33 @@
  },
  "weapons": {
   "2H_ARCANESTAFF": {
+   "cap_delivery": {
+    "anti_dive": {
+     "radius": 5.0,
+     "spell": "TIME_FREEZE"
+    },
+    "cleanse": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSESPEED2"
+    },
+    "peel": {
+     "radius": 5.0,
+     "spell": "TIME_FREEZE"
+    },
+    "silence": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "MAGICSHOCK"
+    },
+    "stun": {
+     "radius": 5.0,
+     "spell": "TIME_FREEZE"
+    }
+   },
    "capabilities": {
     "anti_dive": 1,
     "buff_allies": 2,
@@ -31250,6 +31277,42 @@
    "unique_name": "2H_ARCANESTAFF"
   },
   "2H_ARCANESTAFF_CRYSTAL": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "STARFALL_DOT"
+    },
+    "cleanse": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSESPEED2"
+    },
+    "silence": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "MAGICSHOCK"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "STARFALL_DOT"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "STARFALL_DOT"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -31346,6 +31409,37 @@
    "unique_name": "2H_ARCANESTAFF_CRYSTAL"
   },
   "2H_ARCANESTAFF_HELL": {
+   "cap_delivery": {
+    "buff_allies": {
+     "radius": 12.5,
+     "spell": "ARCANECORRIDOR"
+    },
+    "cleanse": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSESPEED2"
+    },
+    "engage": {
+     "radius": 12.5,
+     "spell": "ARCANECORRIDOR"
+    },
+    "silence": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "MAGICSHOCK"
+    },
+    "slow": {
+     "radius": 12.5,
+     "spell": "ARCANECORRIDOR"
+    },
+    "zone_control": {
+     "radius": 12.5,
+     "spell": "ARCANECORRIDOR"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "cleanse": 2,
@@ -31452,6 +31546,53 @@
    "unique_name": "2H_ARCANESTAFF_HELL"
   },
   "2H_ARCANE_RINGPAIR_AVALON": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 3,
+     "radius": 5.0,
+     "spell": "ARCANE_METEOR"
+    },
+    "cleanse": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSESPEED2"
+    },
+    "damage_debuff": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 3,
+     "radius": 5.0,
+     "spell": "ARCANE_METEOR"
+    },
+    "heal_reduction": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 3,
+     "radius": 5.0,
+     "spell": "ARCANE_METEOR"
+    },
+    "silence": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "MAGICSHOCK"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 3,
+     "radius": 5.0,
+     "spell": "ARCANE_METEOR"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -31571,6 +31712,48 @@
    "unique_name": "2H_ARCANE_RINGPAIR_AVALON"
   },
   "2H_AXE": {
+   "cap_delivery": {
+    "buff_allies": {
+     "radius": 5.0,
+     "spell": "AXE_CHARGE"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "AXEWHIRLWIND2"
+    },
+    "engage": {
+     "radius": 5.0,
+     "spell": "AXE_CHARGE"
+    },
+    "heal_reduction": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGSTRIKE"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "AXEWHIRLWIND2"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGCOMBO"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGSTRIKE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -31685,6 +31868,62 @@
    "unique_name": "2H_AXE"
   },
   "2H_AXE_AVALON": {
+   "cap_delivery": {
+    "buff_allies": {
+     "radius": 5.0,
+     "spell": "AXE_CHARGE"
+    },
+    "burst_aoe": {
+     "radius": 4.0,
+     "spell": "LETHAL_CLEAVER"
+    },
+    "catch": {
+     "radius": 4.0,
+     "spell": "LETHAL_CLEAVER"
+    },
+    "disengage": {
+     "radius": 4.0,
+     "spell": "LETHAL_CLEAVER"
+    },
+    "engage": {
+     "radius": 4.0,
+     "spell": "LETHAL_CLEAVER"
+    },
+    "execute": {
+     "radius": 4.0,
+     "spell": "LETHAL_CLEAVER"
+    },
+    "heal_reduction": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGSTRIKE"
+    },
+    "knockback_displace": {
+     "radius": 4.0,
+     "spell": "LETHAL_CLEAVER"
+    },
+    "mobility": {
+     "radius": 4.0,
+     "spell": "LETHAL_CLEAVER"
+    },
+    "peel": {
+     "radius": 4.0,
+     "spell": "LETHAL_CLEAVER"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGCOMBO"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGSTRIKE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -31816,6 +32055,40 @@
    "unique_name": "2H_AXE_AVALON"
   },
   "2H_BOW": {
+   "cap_delivery": {
+    "catch": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 9.0,
+     "spell": "DEADLYSHOT"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    }
+   },
    "capabilities": {
     "burst_st": 1,
     "catch": 1,
@@ -31916,6 +32189,61 @@
    "unique_name": "2H_BOW"
   },
   "2H_BOW_AVALON": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 12.0,
+     "spell": "HAWK_SHOT_MULTI1"
+    },
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 12.0,
+     "spell": "HAWK_SHOT_MULTI1"
+    },
+    "catch": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "disengage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "JUMPSHOT2"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 9.0,
+     "spell": "DEADLYSHOT"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "burst_st": 2,
@@ -32033,6 +32361,52 @@
    "unique_name": "2H_BOW_AVALON"
   },
   "2H_BOW_CRYSTAL": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "radius": 1.0,
+     "spell": "AIR_RAID"
+    },
+    "catch": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "disengage": {
+     "radius": 1.0,
+     "spell": "AIR_RAID"
+    },
+    "mobility": {
+     "radius": 1.0,
+     "spell": "AIR_RAID"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 9.0,
+     "spell": "DEADLYSHOT"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "catch": 1,
@@ -32139,6 +32513,55 @@
    "unique_name": "2H_BOW_CRYSTAL"
   },
   "2H_BOW_HELL": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 5.0,
+     "spell": "HELL_ARROW"
+    },
+    "catch": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "disengage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "JUMPSHOT2"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 9.0,
+     "spell": "DEADLYSHOT"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    }
+   },
    "capabilities": {
     "burst_aoe": 3,
     "catch": 1,
@@ -32251,6 +32674,63 @@
    "unique_name": "2H_BOW_HELL"
   },
   "2H_BOW_KEEPER": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 5.0,
+     "spell": "LIGHTNING_ARROW"
+    },
+    "catch": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "disengage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "JUMPSHOT2"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 9.0,
+     "spell": "DEADLYSHOT"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 5.0,
+     "spell": "LIGHTNING_ARROW"
+    }
+   },
    "capabilities": {
     "burst_aoe": 1,
     "catch": 1,
@@ -32368,6 +32848,18 @@
    "unique_name": "2H_BOW_KEEPER"
   },
   "2H_CLAWPAIR": {
+   "cap_delivery": {
+    "peel": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
+    "stun": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    }
+   },
    "capabilities": {
     "burst_st": 2,
     "catch": 2,
@@ -32500,6 +32992,54 @@
    "unique_name": "2H_CLAWPAIR"
   },
   "2H_CLAYMORE": {
+   "cap_delivery": {
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CLAYMORECHARGE"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CLAYMORECHARGE"
+    },
+    "engage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CLAYMORECHARGE"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CLAYMORECHARGE"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "SPLITTINGSLASH"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "SPLITTINGSLASH"
+    },
+    "stun": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CLAYMORECHARGE"
+    }
+   },
    "capabilities": {
     "burst_st": 1,
     "catch": 2,
@@ -32616,6 +33156,44 @@
    "unique_name": "2H_CLAYMORE"
   },
   "2H_CLAYMORE_AVALON": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "MAJESTIC_SMASH"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "MAJESTIC_SMASH"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "MAJESTIC_SMASH"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "MAJESTIC_SMASH"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "SPLITTINGSLASH"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -32737,6 +33315,60 @@
    "unique_name": "2H_CLAYMORE_AVALON"
   },
   "2H_CLEAVER_HELL": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CLAYMORESLASH"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CLAYMORESLASH"
+    },
+    "disengage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CLAYMORESLASH"
+    },
+    "engage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CLAYMORESLASH"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CLAYMORESLASH"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "SPLITTINGSLASH"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CLAYMORESLASH"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "SPLITTINGSLASH"
+    }
+   },
    "capabilities": {
     "burst_aoe": 1,
     "catch": 2,
@@ -32850,6 +33482,70 @@
    "unique_name": "2H_CLEAVER_HELL"
   },
   "2H_COMBATSTAFF_MORGANA": {
+   "cap_delivery": {
+    "anti_dive": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "QS_WHIRLWIND2"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "COMBATSTAFF_SLASH"
+    },
+    "damage_debuff": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "COMBATSTAFF_SLASH"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "LAUNCHER"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SEPARATING_SLAM"
+    },
+    "purge": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "COMBATSTAFF_SLASH"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SEPARATING_SLAM"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "QSTAFF_COMBO"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "COMBATSTAFF_SLASH"
+    }
+   },
    "capabilities": {
     "anti_dive": 1,
     "burst_aoe": 1,
@@ -32969,6 +33665,48 @@
    "unique_name": "2H_COMBATSTAFF_MORGANA"
   },
   "2H_CROSSBOW": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "BOLTSHOT"
+    },
+    "knockback_displace": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "silence": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "SILENCINGBOLT"
+    },
+    "slow": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "CALTROPS"
+    },
+    "zone_control": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "CALTROPS"
+    }
+   },
    "capabilities": {
     "burst_aoe": 1,
     "burst_st": 2,
@@ -33073,6 +33811,55 @@
    "unique_name": "2H_CROSSBOW"
   },
   "2H_CROSSBOWLARGE": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 11.75,
+     "spell": "CROSSBOW_ARMORPIERCER"
+    },
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 11.75,
+     "spell": "CROSSBOW_ARMORPIERCER"
+    },
+    "knockback_displace": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "silence": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "SILENCINGBOLT"
+    },
+    "slow": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "CALTROPS"
+    },
+    "zone_control": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "CALTROPS"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "burst_st": 1,
@@ -33172,6 +33959,54 @@
    "unique_name": "2H_CROSSBOWLARGE"
   },
   "2H_CROSSBOWLARGE_MORGANA": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "BOLTSHOT"
+    },
+    "knockback_displace": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "silence": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "SILENCINGBOLT"
+    },
+    "slow": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "CALTROPS"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CROSSBOW_CONE_ULTIMATE"
+    },
+    "zone_control": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "CALTROPS"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "knockback_displace": 1,
@@ -33273,6 +34108,55 @@
    "unique_name": "2H_CROSSBOWLARGE_MORGANA"
   },
   "2H_CROSSBOW_CANNON_AVALON": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "BOLTSHOT"
+    },
+    "knockback_displace": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "silence": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "SILENCINGBOLT"
+    },
+    "slow": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "CALTROPS"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 13.0,
+     "spell": "CROSSBOW_DIVINE_SHOT"
+    },
+    "zone_control": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "CALTROPS"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "knockback_displace": 1,
@@ -33374,6 +34258,57 @@
    "unique_name": "2H_CROSSBOW_CANNON_AVALON"
   },
   "2H_CURSEDSTAFF": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "AREAOFDECAY"
+    },
+    "heal_reduction": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "AREAOFDECAY"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 11.0,
+     "spell": "ARMORPIERCER"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "CURSENOVA"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "CURSED_SPLAT"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CURSEDOT"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "AREAOFDECAY"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 1,
@@ -33475,6 +34410,50 @@
    "unique_name": "2H_CURSEDSTAFF"
   },
   "2H_CURSEDSTAFF_MORGANA": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 13.0,
+     "spell": "CURSEULTIMATE"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 13.0,
+     "spell": "CURSEULTIMATE"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "CURSENOVA"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "CURSED_SPLAT"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CURSEDOT"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "CURSED_SPLAT"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 3,
@@ -33568,6 +34547,23 @@
    "unique_name": "2H_CURSEDSTAFF_MORGANA"
   },
   "2H_DAGGERPAIR": {
+   "cap_delivery": {
+    "catch": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
+    "stun": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    }
+   },
    "capabilities": {
     "burst_st": 3,
     "catch": 2,
@@ -33692,6 +34688,35 @@
    "unique_name": "2H_DAGGERPAIR"
   },
   "2H_DAGGERPAIR_CRYSTAL": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CRYSTAL_DAGGER_BLADE_RING"
+    },
+    "catch": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CRYSTAL_DAGGER_BLADE_RING"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
+    "stun": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "catch": 1,
@@ -33814,6 +34839,41 @@
    "unique_name": "2H_DAGGERPAIR_CRYSTAL"
   },
   "2H_DAGGER_KATAR_AVALON": {
+   "cap_delivery": {
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "BACK_SLASH"
+    },
+    "catch": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
+    "disengage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "BACK_SLASH"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "BACK_SLASH"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
+    "stun": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    }
+   },
    "capabilities": {
     "burst_st": 2,
     "catch": 1,
@@ -33933,6 +34993,57 @@
    "unique_name": "2H_DAGGER_KATAR_AVALON"
   },
   "2H_DEMONICSTAFF": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "CURSED_WALL"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "CURSED_WALL"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "CURSED_WALL"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 11.0,
+     "spell": "ARMORPIERCER"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "CURSENOVA"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "CURSED_SPLAT"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CURSEDOT"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 1,
@@ -34034,6 +35145,15 @@
    "unique_name": "2H_DEMONICSTAFF"
   },
   "2H_DIVINESTAFF": {
+   "cap_delivery": {
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "PULSINGHEAL"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "heal_burst": 2,
@@ -34096,6 +35216,49 @@
    "unique_name": "2H_DIVINESTAFF"
   },
   "2H_DOUBLEBLADEDSTAFF": {
+   "cap_delivery": {
+    "anti_dive": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "QS_WHIRLWIND2"
+    },
+    "damage_debuff": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "QS_WHIRLWIND2"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "LAUNCHER"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SEPARATING_SLAM"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SEPARATING_SLAM"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "QSTAFF_COMBO"
+    }
+   },
    "capabilities": {
     "anti_dive": 1,
     "burst_aoe": 1,
@@ -34225,6 +35388,70 @@
    "unique_name": "2H_DOUBLEBLADEDSTAFF"
   },
   "2H_DOUBLEBLADEDSTAFF_CRYSTAL": {
+   "cap_delivery": {
+    "anti_dive": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "QS_WHIRLWIND2"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "QS_CRYSTAL_COMBO"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "QS_CRYSTAL_COMBO"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CARTWHEEL"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SEPARATING_SLAM"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SEPARATING_SLAM"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "QS_CRYSTAL_COMBO"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "QSTAFF_COMBO"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "QS_CRYSTAL_COMBO"
+    }
+   },
    "capabilities": {
     "anti_dive": 1,
     "burst_aoe": 1,
@@ -34349,6 +35576,52 @@
    "unique_name": "2H_DOUBLEBLADEDSTAFF_CRYSTAL"
   },
   "2H_DUALAXE_KEEPER": {
+   "cap_delivery": {
+    "buff_allies": {
+     "radius": 5.0,
+     "spell": "AXE_CHARGE"
+    },
+    "burst_aoe": {
+     "radius": 1.0,
+     "spell": "DUALAXE_CRAWLER"
+    },
+    "catch": {
+     "radius": 1.0,
+     "spell": "DUALAXE_CRAWLER"
+    },
+    "disengage": {
+     "radius": 1.0,
+     "spell": "DUALAXE_CRAWLER"
+    },
+    "engage": {
+     "radius": 1.0,
+     "spell": "DUALAXE_CRAWLER"
+    },
+    "heal_reduction": {
+     "radius": 5.0,
+     "spell": "AXE_CHARGE"
+    },
+    "mobility": {
+     "radius": 1.0,
+     "spell": "DUALAXE_CRAWLER"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGCOMBO"
+    },
+    "self_sustain": {
+     "radius": 1.0,
+     "spell": "DUALAXE_CRAWLER"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGSTRIKE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -34457,6 +35730,56 @@
    "unique_name": "2H_DUALAXE_KEEPER"
   },
   "2H_DUALCROSSBOW_CRYSTAL": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CRYSTALXBOW"
+    },
+    "disengage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CRYSTALXBOW"
+    },
+    "engage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CRYSTALXBOW"
+    },
+    "knockback_displace": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CRYSTALXBOW"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "silence": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "SILENCINGBOLT"
+    },
+    "slow": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "CALTROPS"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "disengage": 2,
@@ -34556,6 +35879,48 @@
    "unique_name": "2H_DUALCROSSBOW_CRYSTAL"
   },
   "2H_DUALCROSSBOW_HELL": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "BOLTSHOT"
+    },
+    "knockback_displace": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "silence": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "SILENCINGBOLT"
+    },
+    "slow": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "CALTROPS"
+    },
+    "zone_control": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "CALTROPS"
+    }
+   },
    "capabilities": {
     "burst_aoe": 1,
     "burst_st": 2,
@@ -34662,6 +36027,92 @@
    "unique_name": "2H_DUALCROSSBOW_HELL"
   },
   "2H_DUALHAMMER_HELL": {
+   "cap_delivery": {
+    "anti_dive": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "GIANTSTEPS"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "GIANTSTEPS"
+    },
+    "disengage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CHARGESLOWAE"
+    },
+    "engage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CHARGESLOWAE"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GEYSER"
+    },
+    "mobility": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CHARGESLOWAE"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "GIANTSTEPS"
+    },
+    "purge": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "GIANTSTEPS"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "GIANTSTEPS"
+    },
+    "tankiness": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "GIANTSTEPS"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "GIANTSTEPS"
+    }
+   },
    "capabilities": {
     "anti_dive": 2,
     "catch": 1,
@@ -34798,6 +36249,40 @@
    "unique_name": "2H_DUALHAMMER_HELL"
   },
   "2H_DUALMACE_AVALON": {
+   "cap_delivery": {
+    "buff_allies": {
+     "max_targets": 20,
+     "radius": 1.25,
+     "spell": "BLESSED_MACES"
+    },
+    "engage": {
+     "max_targets": 20,
+     "radius": 1.25,
+     "spell": "BLESSED_MACES"
+    },
+    "heal_sustain": {
+     "max_targets": 20,
+     "radius": 1.25,
+     "spell": "BLESSED_MACES"
+    },
+    "peel": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "GUARDRUNE"
+    },
+    "root": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
+    "slow": {
+     "radius": 3.0,
+     "spell": "SACRED_GROUND"
+    },
+    "zone_control": {
+     "radius": 3.0,
+     "spell": "SACRED_GROUND"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "engage": 1,
@@ -34889,6 +36374,38 @@
    "unique_name": "2H_DUALMACE_AVALON"
   },
   "2H_DUALSCIMITAR_UNDEAD": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.5,
+     "spell": "BLADE_AREA"
+    },
+    "execute": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.5,
+     "spell": "BLADE_AREA"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "SPLITTINGSLASH"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "SPLITTINGSLASH"
+    }
+   },
    "capabilities": {
     "burst_aoe": 3,
     "catch": 1,
@@ -35000,6 +36517,23 @@
    "unique_name": "2H_DUALSCIMITAR_UNDEAD"
   },
   "2H_DUALSICKLE_UNDEAD": {
+   "cap_delivery": {
+    "catch": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
+    "stun": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    }
+   },
    "capabilities": {
     "burst_st": 2,
     "catch": 2,
@@ -35117,6 +36651,48 @@
    "unique_name": "2H_DUALSICKLE_UNDEAD"
   },
   "2H_DUALSWORD": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "radius": 5.0,
+     "spell": "SPINATTACK"
+    },
+    "catch": {
+     "radius": 5.0,
+     "spell": "SPINATTACK"
+    },
+    "disengage": {
+     "radius": 5.0,
+     "spell": "SPINATTACK"
+    },
+    "engage": {
+     "radius": 5.0,
+     "spell": "SPINATTACK"
+    },
+    "mobility": {
+     "radius": 5.0,
+     "spell": "SPINATTACK"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "SPLITTINGSLASH"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "SPLITTINGSLASH"
+    },
+    "sustained_dps": {
+     "radius": 5.0,
+     "spell": "SPINATTACK"
+    }
+   },
    "capabilities": {
     "burst_aoe": 1,
     "catch": 2,
@@ -35217,6 +36793,24 @@
    "unique_name": "2H_DUALSWORD"
   },
   "2H_ENIGMATICORB_MORGANA": {
+   "cap_delivery": {
+    "cleanse": {
+     "radius": 2.0,
+     "spell": "VOID"
+    },
+    "peel": {
+     "radius": 2.0,
+     "spell": "VOID"
+    },
+    "silence": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "MAGICSHOCK"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "cleanse": 2,
@@ -35305,6 +36899,25 @@
    "unique_name": "2H_ENIGMATICORB_MORGANA"
   },
   "2H_ENIGMATICSTAFF": {
+   "cap_delivery": {
+    "buff_allies": {
+     "radius": 6.5,
+     "spell": "INVULNERABILITY"
+    },
+    "cleanse": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSESPEED2"
+    },
+    "silence": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "MAGICSHOCK"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "cleanse": 2,
@@ -35396,6 +37009,43 @@
    "unique_name": "2H_ENIGMATICSTAFF"
   },
   "2H_FIRESTAFF": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRESTAFFIGNITE2_SPREAD"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "FLAMEPILLAR"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRECONE"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRECONE"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 7.0,
+     "spell": "FIREWALL"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -35477,6 +37127,43 @@
    "unique_name": "2H_FIRESTAFF"
   },
   "2H_FIRESTAFF_HELL": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRESTAFFIGNITE2_SPREAD"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "METEOR"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "METEOR"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRECONE"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 7.0,
+     "spell": "FIREWALL"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 3,
@@ -35558,6 +37245,50 @@
    "unique_name": "2H_FIRESTAFF_HELL"
   },
   "2H_FIRE_RINGPAIR_AVALON": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRESTAFFIGNITE2_SPREAD"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 9.0,
+     "spell": "FIREPHOENIX"
+    },
+    "heal_reduction": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 9.0,
+     "spell": "FIREPHOENIX"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRECONE"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRECONE"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 9.0,
+     "spell": "FIREPHOENIX"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 3,
@@ -35641,6 +37372,36 @@
    "unique_name": "2H_FIRE_RINGPAIR_AVALON"
   },
   "2H_FLAIL": {
+   "cap_delivery": {
+    "catch": {
+     "radius": 1.0,
+     "spell": "ROOTFIELD"
+    },
+    "engage": {
+     "radius": 1.0,
+     "spell": "ROOTFIELD"
+    },
+    "mobility": {
+     "radius": 1.0,
+     "spell": "ROOTFIELD"
+    },
+    "peel": {
+     "radius": 1.0,
+     "spell": "ROOTFIELD"
+    },
+    "root": {
+     "radius": 1.0,
+     "spell": "ROOTFIELD"
+    },
+    "slow": {
+     "radius": 3.0,
+     "spell": "SACRED_GROUND"
+    },
+    "zone_control": {
+     "radius": 3.0,
+     "spell": "SACRED_GROUND"
+    }
+   },
    "capabilities": {
     "catch": 2,
     "engage": 2,
@@ -35721,6 +37482,81 @@
    "unique_name": "2H_FLAIL"
   },
   "2H_FROSTSTAFF": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 6.0,
+     "spell": "ICE_SCULPTURE"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "HAIL_MULTI_1"
+    },
+    "catch": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "HAIL_MULTI_1"
+    },
+    "disengage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "FROSTNOVA"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "HAIL_MULTI_1"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "FROST_LANCE"
+    },
+    "slow": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FROSTBOMB_CASTSLOW"
+    },
+    "stun": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "FROSTNOVA"
+    },
+    "zone_control": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FROSTBOMB_CASTSLOW"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -35838,6 +37674,78 @@
    "unique_name": "2H_FROSTSTAFF"
   },
   "2H_FROSTSTAFF_CRYSTAL": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 6.0,
+     "spell": "ICE_SCULPTURE"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "FROST_TARGETED_CHANNEL"
+    },
+    "catch": {
+     "max_targets": 1,
+     "radius": 1.5,
+     "spell": "FROST_BITE"
+    },
+    "disengage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "FROSTNOVA"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "FROST_LANCE"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "FROST_TARGETED_CHANNEL"
+    },
+    "stun": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "FROSTNOVA"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "FROST_TARGETED_CHANNEL"
+    },
+    "zone_control": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FROSTBOMB_CASTSLOW"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 1,
@@ -35957,6 +37865,83 @@
    "unique_name": "2H_FROSTSTAFF_CRYSTAL"
   },
   "2H_GLACIALSTAFF": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 6.0,
+     "spell": "ICE_SCULPTURE"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "ICESTORM2"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "ICESTORM2"
+    },
+    "disengage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "FROSTNOVA"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "ICESTORM2"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "FROST_LANCE"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "ICESTORM2"
+    },
+    "stun": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "FROSTNOVA"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "ICESTORM2"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "ICESTORM2"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 1,
@@ -36070,6 +38055,20 @@
    "unique_name": "2H_GLACIALSTAFF"
   },
   "2H_GLAIVE": {
+   "cap_delivery": {
+    "root": {
+     "max_targets": 1,
+     "radius": 2.5,
+     "spell": "SKILLSHOT_PULL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "GROUNDSPEAR"
+    }
+   },
    "capabilities": {
     "catch": 2,
     "knockback_displace": 2,
@@ -36174,6 +38173,34 @@
    "unique_name": "2H_GLAIVE"
   },
   "2H_GLAIVE_CRYSTAL": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.5,
+     "spell": "SPEAR_AOE_FINISHER"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.5,
+     "spell": "SPEAR_AOE_FINISHER"
+    },
+    "root": {
+     "max_targets": 1,
+     "radius": 2.5,
+     "spell": "SKILLSHOT_PULL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "GROUNDSPEAR"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "catch": 2,
@@ -36288,6 +38315,48 @@
    "unique_name": "2H_GLAIVE_CRYSTAL"
   },
   "2H_HALBERD": {
+   "cap_delivery": {
+    "buff_allies": {
+     "radius": 5.0,
+     "spell": "AXE_CHARGE"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 15.0,
+     "spell": "RENDINGSWING"
+    },
+    "engage": {
+     "radius": 5.0,
+     "spell": "AXE_CHARGE"
+    },
+    "heal_reduction": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 15.0,
+     "spell": "RENDINGSWING"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGCOMBO"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGCOMBO"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGSTRIKE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -36402,6 +38471,48 @@
    "unique_name": "2H_HALBERD"
   },
   "2H_HALBERD_MORGANA": {
+   "cap_delivery": {
+    "buff_allies": {
+     "radius": 5.0,
+     "spell": "AXE_CHARGE"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "SHOCKWAVE"
+    },
+    "engage": {
+     "radius": 5.0,
+     "spell": "AXE_CHARGE"
+    },
+    "heal_reduction": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "SHOCKWAVE"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGCOMBO"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGCOMBO"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGSTRIKE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 1,
@@ -36521,6 +38632,71 @@
    "unique_name": "2H_HALBERD_MORGANA"
   },
   "2H_HAMMER": {
+   "cap_delivery": {
+    "catch": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "HAMMERTACKLE"
+    },
+    "disengage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "HAMMERTACKLE"
+    },
+    "engage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "HAMMERTACKLE"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "HAMMERTACKLE"
+    },
+    "mobility": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "HAMMERTACKLE"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "HAMMERTACKLE"
+    },
+    "purge": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "stun": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "HAMMERTACKLE"
+    }
+   },
    "capabilities": {
     "anti_dive": 2,
     "catch": 2,
@@ -36647,6 +38823,78 @@
    "unique_name": "2H_HAMMER"
   },
   "2H_HAMMER_AVALON": {
+   "cap_delivery": {
+    "catch": {
+     "escalation": {
+      "duration": 0.08
+     },
+     "radius": 5.0,
+     "spell": "SPINNING_SMASH"
+    },
+    "clump_create": {
+     "escalation": {
+      "duration": 0.08
+     },
+     "radius": 5.0,
+     "spell": "SPINNING_SMASH"
+    },
+    "disengage": {
+     "escalation": {
+      "duration": 0.08
+     },
+     "radius": 5.0,
+     "spell": "SPINNING_SMASH"
+    },
+    "engage": {
+     "escalation": {
+      "duration": 0.08
+     },
+     "radius": 5.0,
+     "spell": "SPINNING_SMASH"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "duration": 0.08
+     },
+     "radius": 5.0,
+     "spell": "SPINNING_SMASH"
+    },
+    "mobility": {
+     "escalation": {
+      "duration": 0.08
+     },
+     "radius": 5.0,
+     "spell": "SPINNING_SMASH"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08
+     },
+     "radius": 5.0,
+     "spell": "SPINNING_SMASH"
+    },
+    "purge": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "stun": {
+     "escalation": {
+      "duration": 0.08
+     },
+     "radius": 5.0,
+     "spell": "SPINNING_SMASH"
+    }
+   },
    "capabilities": {
     "anti_dive": 2,
     "catch": 2,
@@ -36778,6 +39026,71 @@
    "unique_name": "2H_HAMMER_AVALON"
   },
   "2H_HAMMER_CRYSTAL": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CRYSTALWAVE"
+    },
+    "disengage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CHARGESLOWAE"
+    },
+    "engage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CHARGESLOWAE"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GEYSER"
+    },
+    "mobility": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CHARGESLOWAE"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GEYSER"
+    },
+    "purge": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "stun": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CRYSTALWAVE"
+    }
+   },
    "capabilities": {
     "anti_dive": 2,
     "buff_allies": 1,
@@ -36910,6 +39223,78 @@
    "unique_name": "2H_HAMMER_CRYSTAL"
   },
   "2H_HAMMER_UNDEAD": {
+   "cap_delivery": {
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "UNDEADHAND"
+    },
+    "disengage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CHARGESLOWAE"
+    },
+    "engage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CHARGESLOWAE"
+    },
+    "execute": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "UNDEADHAND"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GEYSER"
+    },
+    "mobility": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CHARGESLOWAE"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "UNDEADHAND"
+    },
+    "purge": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "stun": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "UNDEADHAND"
+    }
+   },
    "capabilities": {
     "anti_dive": 2,
     "catch": 2,
@@ -37047,6 +39432,34 @@
    "unique_name": "2H_HAMMER_UNDEAD"
   },
   "2H_HARPOON_HELL": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "GROUNDSPEAR"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 13.0,
+     "spell": "TAINTED_STEEL"
+    },
+    "root": {
+     "max_targets": 1,
+     "radius": 2.5,
+     "spell": "SKILLSHOT_PULL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "GROUNDSPEAR"
+    }
+   },
    "capabilities": {
     "burst_aoe": 1,
     "catch": 2,
@@ -37166,6 +39579,33 @@
    "unique_name": "2H_HARPOON_HELL"
   },
   "2H_HOLYSTAFF": {
+   "cap_delivery": {
+    "buff_allies": {
+     "max_targets": 10,
+     "radius": 7.0,
+     "spell": "HOLYEXPLOSION"
+    },
+    "heal_burst": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "HOLYFLASH"
+    },
+    "heal_sustain": {
+     "max_targets": 10,
+     "radius": 7.0,
+     "spell": "HOLYEXPLOSION"
+    },
+    "knockback_displace": {
+     "max_targets": 10,
+     "radius": 7.0,
+     "spell": "HOLYEXPLOSION"
+    },
+    "peel": {
+     "max_targets": 10,
+     "radius": 7.0,
+     "spell": "HOLYEXPLOSION"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "heal_burst": 2,
@@ -37230,6 +39670,30 @@
    "unique_name": "2H_HOLYSTAFF"
   },
   "2H_HOLYSTAFF_CRYSTAL": {
+   "cap_delivery": {
+    "anti_zone": {
+     "max_targets": 20,
+     "radius": 5.0,
+     "spell": "HOLY_DISPEL"
+    },
+    "buff_allies": {
+     "max_targets": 20,
+     "radius": 5.0,
+     "spell": "HOLY_DISPEL"
+    },
+    "heal_burst": {
+     "max_targets": 20,
+     "radius": 5.0,
+     "spell": "HOLY_DISPEL"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "PULSINGHEAL"
+    }
+   },
    "capabilities": {
     "anti_zone": 2,
     "buff_allies": 1,
@@ -37297,6 +39761,23 @@
    "unique_name": "2H_HOLYSTAFF_CRYSTAL"
   },
   "2H_HOLYSTAFF_HELL": {
+   "cap_delivery": {
+    "cleanse": {
+     "max_targets": 20,
+     "radius": 5.5,
+     "spell": "HOLY_ULTIMATE"
+    },
+    "heal_burst": {
+     "max_targets": 20,
+     "radius": 5.5,
+     "spell": "HOLY_ULTIMATE"
+    },
+    "peel": {
+     "max_targets": 20,
+     "radius": 5.5,
+     "spell": "HOLY_ULTIMATE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "cleanse": 2,
@@ -37364,6 +39845,20 @@
    "unique_name": "2H_HOLYSTAFF_HELL"
   },
   "2H_HOLYSTAFF_UNDEAD": {
+   "cap_delivery": {
+    "heal_burst": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "HOLYFLASH"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "PULSINGHEAL"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "heal_burst": 2,
@@ -37434,6 +39929,77 @@
    "unique_name": "2H_HOLYSTAFF_UNDEAD"
   },
   "2H_ICECRYSTAL_UNDEAD": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 6.0,
+     "spell": "ICE_SCULPTURE"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "FROST_ULTIMATE"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "FROST_ULTIMATE"
+    },
+    "disengage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "FROSTNOVA"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "FROST_ULTIMATE"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "FROST_LANCE"
+    },
+    "slow": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FROSTBOMB_CASTSLOW"
+    },
+    "stun": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "FROST_ULTIMATE"
+    },
+    "zone_control": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FROSTBOMB_CASTSLOW"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 3,
@@ -37551,6 +40117,84 @@
    "unique_name": "2H_ICECRYSTAL_UNDEAD"
   },
   "2H_ICEGAUNTLETS_HELL": {
+   "cap_delivery": {
+    "anti_dive": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "FROSTNOVA"
+    },
+    "buff_allies": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 6.0,
+     "spell": "ICE_SCULPTURE"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "GLACIALFIELD"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "GLACIALFIELD"
+    },
+    "disengage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "FROSTNOVA"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "GLACIALFIELD"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "FROST_LANCE"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "GLACIALFIELD"
+    },
+    "stun": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "FROSTNOVA"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "GLACIALFIELD"
+    }
+   },
    "capabilities": {
     "anti_dive": 1,
     "buff_allies": 1,
@@ -37670,6 +40314,43 @@
    "unique_name": "2H_ICEGAUNTLETS_HELL"
   },
   "2H_INFERNOSTAFF": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRESTAFFIGNITE2_SPREAD"
+    },
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "HUMAN_TORCH"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "HUMAN_TORCH"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "HUMAN_TORCH"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "HUMAN_TORCH"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_st": 1,
@@ -37740,6 +40421,51 @@
    "unique_name": "2H_INFERNOSTAFF"
   },
   "2H_INFERNOSTAFF_MORGANA": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRESTAFFIGNITE2_SPREAD"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 5.0,
+     "spell": "SKILLSHOT_FIREBALL"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRECONE"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRECONE"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FLAMETORNADO"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FLAMETORNADO"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -37820,6 +40546,56 @@
    "unique_name": "2H_INFERNOSTAFF_MORGANA"
   },
   "2H_IRONCLADEDSTAFF": {
+   "cap_delivery": {
+    "anti_dive": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "QSWHIRLWIND"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "QSWHIRLWIND"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CARTWHEEL"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "QSWHIRLWIND"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SEPARATING_SLAM"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "QSTAFF_COMBO"
+    },
+    "tankiness": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "QSWHIRLWIND"
+    }
+   },
    "capabilities": {
     "anti_dive": 2,
     "knockback_displace": 3,
@@ -37926,6 +40702,18 @@
    "unique_name": "2H_IRONCLADEDSTAFF"
   },
   "2H_IRONGAUNTLETS_HELL": {
+   "cap_delivery": {
+    "catch": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    }
+   },
    "capabilities": {
     "burst_st": 2,
     "catch": 1,
@@ -38053,6 +40841,80 @@
    "unique_name": "2H_IRONGAUNTLETS_HELL"
   },
   "2H_KNUCKLES_AVALON": {
+   "cap_delivery": {
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "spell": "KNUCKLECOMBO"
+    },
+    "catch": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "TRIPLE_KICK"
+    },
+    "disengage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "TRIPLECOMBO_DIVEKICK"
+    },
+    "engage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "TRIPLECOMBO_DIVEKICK"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "TRIPLECOMBO_DIVEKICK"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "TRIPLECOMBO_DIVEKICK"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "purge": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "TRIPLECOMBO_DIVEKICK"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "stun": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "spell": "KNUCKLECOMBO"
+    }
+   },
    "capabilities": {
     "burst_st": 1,
     "catch": 1,
@@ -38174,6 +41036,51 @@
    "unique_name": "2H_KNUCKLES_AVALON"
   },
   "2H_KNUCKLES_CRYSTAL": {
+   "cap_delivery": {
+    "catch": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "TRIPLE_KICK"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "stun": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "spell": "KNUCKLECOMBO"
+    }
+   },
    "capabilities": {
     "burst_st": 2,
     "catch": 1,
@@ -38290,6 +41197,80 @@
    "unique_name": "2H_KNUCKLES_CRYSTAL"
   },
   "2H_KNUCKLES_HELL": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "BOULDER_TOSS"
+    },
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "spell": "KNUCKLECOMBO"
+    },
+    "catch": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "TRIPLE_KICK"
+    },
+    "engage": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "heal_reduction": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "BOULDER_TOSS"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "mobility": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "stun": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "spell": "KNUCKLECOMBO"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "burst_st": 1,
@@ -38416,6 +41397,77 @@
    "unique_name": "2H_KNUCKLES_HELL"
   },
   "2H_KNUCKLES_KEEPER": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "PUMMELING_STRIKES"
+    },
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "PUMMELING_STRIKES"
+    },
+    "catch": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "TRIPLE_KICK"
+    },
+    "engage": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "mobility": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "stun": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "spell": "KNUCKLECOMBO"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "PUMMELING_STRIKES"
+    }
+   },
    "capabilities": {
     "burst_aoe": 1,
     "burst_st": 2,
@@ -38524,6 +41576,50 @@
    "unique_name": "2H_KNUCKLES_KEEPER"
   },
   "2H_KNUCKLES_MORGANA": {
+   "cap_delivery": {
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "spell": "KNUCKLECOMBO"
+    },
+    "catch": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "TRIPLE_KICK"
+    },
+    "engage": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "mobility": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "stun": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "spell": "KNUCKLECOMBO"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "burst_st": 1,
@@ -38640,6 +41736,71 @@
    "unique_name": "2H_KNUCKLES_MORGANA"
   },
   "2H_KNUCKLES_SET1": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "BLAZING_GEYSER"
+    },
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "spell": "KNUCKLECOMBO"
+    },
+    "catch": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "TRIPLE_KICK"
+    },
+    "engage": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "BLAZING_GEYSER"
+    },
+    "mobility": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "BLAZING_GEYSER"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "stun": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "spell": "KNUCKLECOMBO"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "burst_st": 1,
@@ -38756,6 +41917,54 @@
    "unique_name": "2H_KNUCKLES_SET1"
   },
   "2H_KNUCKLES_SET2": {
+   "cap_delivery": {
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "spell": "KNUCKLECOMBO"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "TRIPLE_KICK"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "stun": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "spell": "KNUCKLECOMBO"
+    }
+   },
    "capabilities": {
     "burst_st": 2,
     "catch": 2,
@@ -38864,6 +42073,82 @@
    "unique_name": "2H_KNUCKLES_SET2"
   },
   "2H_KNUCKLES_SET3": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "IMPULSE_PUNCH"
+    },
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "spell": "KNUCKLECOMBO"
+    },
+    "catch": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "IMPULSE_PUNCH"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "TRIPLE_KICK"
+    },
+    "engage": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "mobility": {
+     "radius": 2.5,
+     "spell": "DASHKICK"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "IMPULSE_PUNCH"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 4.5,
+     "spell": "BACKHAND_KNOCKBACK"
+    },
+    "slow": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "IMPULSE_PUNCH"
+    },
+    "stun": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "spell": "KNUCKLECOMBO"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "burst_st": 1,
@@ -38990,6 +42275,43 @@
    "unique_name": "2H_KNUCKLES_SET3"
   },
   "2H_LONGBOW": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 5.0,
+     "spell": "ARROWRAIN"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "slow": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 5.0,
+     "spell": "ARROWRAIN"
+    },
+    "zone_control": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 5.0,
+     "spell": "ARROWRAIN"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "ranged_presence": 1,
@@ -39073,6 +42395,47 @@
    "unique_name": "2H_LONGBOW"
   },
   "2H_LONGBOW_UNDEAD": {
+   "cap_delivery": {
+    "catch": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "disengage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "JUMPSHOT2"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 9.0,
+     "spell": "DEADLYSHOT"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    }
+   },
    "capabilities": {
     "catch": 1,
     "disengage": 1,
@@ -39174,6 +42537,41 @@
    "unique_name": "2H_LONGBOW_UNDEAD"
   },
   "2H_MACE": {
+   "cap_delivery": {
+    "engage": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SHRIEKMACE"
+    },
+    "purge": {
+     "escalation": {
+      "duration": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SHRIEKMACE"
+    },
+    "silence": {
+     "escalation": {
+      "duration": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SHRIEKMACE"
+    },
+    "slow": {
+     "radius": 3.0,
+     "spell": "SACRED_GROUND"
+    },
+    "zone_control": {
+     "radius": 3.0,
+     "spell": "SACRED_GROUND"
+    }
+   },
    "capabilities": {
     "engage": 2,
     "peel": 3,
@@ -39257,6 +42655,56 @@
    "unique_name": "2H_MACE"
   },
   "2H_MACE_MORGANA": {
+   "cap_delivery": {
+    "catch": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 8.0,
+     "spell": "VACUUMSLASH"
+    },
+    "clump_create": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 8.0,
+     "spell": "VACUUMSLASH"
+    },
+    "engage": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
+    "peel": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "GUARDRUNE"
+    },
+    "root": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
+    "slow": {
+     "radius": 3.0,
+     "spell": "SACRED_GROUND"
+    },
+    "stun": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 8.0,
+     "spell": "VACUUMSLASH"
+    },
+    "zone_control": {
+     "radius": 3.0,
+     "spell": "SACRED_GROUND"
+    }
+   },
    "capabilities": {
     "catch": 1,
     "clump_create": 3,
@@ -39353,6 +42801,46 @@
    "unique_name": "2H_MACE_MORGANA"
   },
   "2H_NATURESTAFF": {
+   "cap_delivery": {
+    "cleanse": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSEHEAL"
+    },
+    "heal_burst": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSEHEAL"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "BRAMBLESEED"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "cleanse": 2,
@@ -39461,6 +42949,56 @@
    "unique_name": "2H_NATURESTAFF"
   },
   "2H_NATURESTAFF_HELL": {
+   "cap_delivery": {
+    "cleanse": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSEHEAL"
+    },
+    "heal_burst": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSEHEAL"
+    },
+    "heal_sustain": {
+     "max_targets": 10,
+     "radius": 9.0,
+     "spell": "ROTTENVINES"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "BRAMBLESEED"
+    },
+    "mobility": {
+     "max_targets": 10,
+     "radius": 9.0,
+     "spell": "ROTTENVINES"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "cleanse": 2,
@@ -39572,6 +43110,57 @@
    "unique_name": "2H_NATURESTAFF_HELL"
   },
   "2H_NATURESTAFF_KEEPER": {
+   "cap_delivery": {
+    "cleanse": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSEHEAL"
+    },
+    "heal_burst": {
+     "escalation": {
+      "value": 0.25
+     },
+     "max_targets": 20,
+     "radius": 2.5,
+     "spell": "SPIRITANIMAL"
+    },
+    "heal_sustain": {
+     "escalation": {
+      "value": 0.25
+     },
+     "max_targets": 20,
+     "radius": 2.5,
+     "spell": "SPIRITANIMAL"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "BRAMBLESEED"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "cleanse": 2,
@@ -39678,6 +43267,74 @@
    "unique_name": "2H_NATURESTAFF_KEEPER"
   },
   "2H_POLEHAMMER": {
+   "cap_delivery": {
+    "catch": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 10.0,
+     "spell": "GROUNDBREAKER2"
+    },
+    "disengage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CHARGESLOWAE"
+    },
+    "engage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CHARGESLOWAE"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GEYSER"
+    },
+    "mobility": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CHARGESLOWAE"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 10.0,
+     "spell": "GROUNDBREAKER2"
+    },
+    "purge": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "stun": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 10.0,
+     "spell": "GROUNDBREAKER2"
+    }
+   },
    "capabilities": {
     "anti_dive": 2,
     "catch": 2,
@@ -39810,6 +43467,56 @@
    "unique_name": "2H_POLEHAMMER"
   },
   "2H_QUARTERSTAFF": {
+   "cap_delivery": {
+    "anti_dive": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "QS_WHIRLWIND2"
+    },
+    "burst_aoe": {
+     "radius": 5.0,
+     "spell": "VAULT_ATTACK"
+    },
+    "damage_debuff": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "QS_WHIRLWIND2"
+    },
+    "disengage": {
+     "radius": 5.0,
+     "spell": "VAULT_ATTACK"
+    },
+    "engage": {
+     "radius": 5.0,
+     "spell": "VAULT_ATTACK"
+    },
+    "knockback_displace": {
+     "radius": 5.0,
+     "spell": "VAULT_ATTACK"
+    },
+    "mobility": {
+     "radius": 5.0,
+     "spell": "VAULT_ATTACK"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SEPARATING_SLAM"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SEPARATING_SLAM"
+    }
+   },
    "capabilities": {
     "anti_dive": 2,
     "burst_aoe": 1,
@@ -39929,6 +43636,69 @@
    "unique_name": "2H_QUARTERSTAFF"
   },
   "2H_QUARTERSTAFF_AVALON": {
+   "cap_delivery": {
+    "anti_dive": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "QS_WHIRLWIND2"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 10.0,
+     "spell": "SOULSHAKER"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 10.0,
+     "spell": "SOULSHAKER"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "LAUNCHER"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CARTWHEEL"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 10.0,
+     "spell": "SOULSHAKER"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 10.0,
+     "spell": "SOULSHAKER"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "QSTAFF_COMBO"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 10.0,
+     "spell": "SOULSHAKER"
+    }
+   },
    "capabilities": {
     "anti_dive": 1,
     "burst_aoe": 1,
@@ -40053,6 +43823,50 @@
    "unique_name": "2H_QUARTERSTAFF_AVALON"
   },
   "2H_RAM_KEEPER": {
+   "cap_delivery": {
+    "catch": {
+     "radius": 5.5,
+     "spell": "RAM_CHARGE"
+    },
+    "disengage": {
+     "radius": 5.5,
+     "spell": "RAM_CHARGE"
+    },
+    "engage": {
+     "radius": 5.5,
+     "spell": "RAM_CHARGE"
+    },
+    "knockback_displace": {
+     "radius": 5.5,
+     "spell": "RAM_CHARGE"
+    },
+    "mobility": {
+     "radius": 5.5,
+     "spell": "RAM_CHARGE"
+    },
+    "peel": {
+     "radius": 5.5,
+     "spell": "RAM_CHARGE"
+    },
+    "purge": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "stun": {
+     "radius": 5.5,
+     "spell": "RAM_CHARGE"
+    }
+   },
    "capabilities": {
     "anti_dive": 2,
     "catch": 2,
@@ -40179,6 +43993,48 @@
    "unique_name": "2H_RAM_KEEPER"
   },
   "2H_REPEATINGCROSSBOW_UNDEAD": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 7.0,
+     "spell": "GROUNDMINE"
+    },
+    "knockback_displace": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "silence": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "SILENCINGBOLT"
+    },
+    "slow": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "CALTROPS"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 7.0,
+     "spell": "GROUNDMINE"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "knockback_displace": 1,
@@ -40273,6 +44129,42 @@
    "unique_name": "2H_REPEATINGCROSSBOW_UNDEAD"
   },
   "2H_ROCKSTAFF_KEEPER": {
+   "cap_delivery": {
+    "anti_dive": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "QS_WHIRLWIND2"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "LAUNCHER"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SEPARATING_SLAM"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SEPARATING_SLAM"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "QSTAFF_COMBO"
+    }
+   },
    "capabilities": {
     "anti_dive": 2,
     "heal_reduction": 2,
@@ -40387,6 +44279,30 @@
    "unique_name": "2H_ROCKSTAFF_KEEPER"
   },
   "2H_SCYTHE_CRYSTAL": {
+   "cap_delivery": {
+    "buff_allies": {
+     "radius": 5.0,
+     "spell": "AXE_CHARGE"
+    },
+    "heal_reduction": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGSTRIKE"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGCOMBO"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGSTRIKE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 1,
@@ -40503,6 +44419,54 @@
    "unique_name": "2H_SCYTHE_CRYSTAL"
   },
   "2H_SCYTHE_HELL": {
+   "cap_delivery": {
+    "buff_allies": {
+     "radius": 5.0,
+     "spell": "AXE_CHARGE"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "SCYTHESWING"
+    },
+    "engage": {
+     "radius": 5.0,
+     "spell": "AXE_CHARGE"
+    },
+    "execute": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "SCYTHESWING"
+    },
+    "heal_reduction": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGSTRIKE"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGCOMBO"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGCOMBO"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGSTRIKE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -40622,6 +44586,63 @@
    "unique_name": "2H_SCYTHE_HELL"
   },
   "2H_SHAPESHIFTER_AVALON": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 3.0,
+     "spell": "SHAPE_Q_DAMAGE_AND_SHIELD"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "spell": "SHAPE_Q_CONE_MELEE"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -40751,6 +44772,63 @@
    "unique_name": "2H_SHAPESHIFTER_AVALON"
   },
   "2H_SHAPESHIFTER_CRYSTAL": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 3.0,
+     "spell": "SHAPE_Q_DAMAGE_AND_SHIELD"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "spell": "SHAPE_Q_CONE_MELEE"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_st": 2,
@@ -40875,6 +44953,63 @@
    "unique_name": "2H_SHAPESHIFTER_CRYSTAL"
   },
   "2H_SHAPESHIFTER_HELL": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 3.0,
+     "spell": "SHAPE_Q_DAMAGE_AND_SHIELD"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "spell": "SHAPE_Q_CONE_MELEE"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -40986,6 +45121,63 @@
    "unique_name": "2H_SHAPESHIFTER_HELL"
   },
   "2H_SHAPESHIFTER_KEEPER": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 3.0,
+     "spell": "SHAPE_Q_DAMAGE_AND_SHIELD"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "spell": "SHAPE_Q_CONE_MELEE"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "catch": 1,
@@ -41097,6 +45289,55 @@
    "unique_name": "2H_SHAPESHIFTER_KEEPER"
   },
   "2H_SHAPESHIFTER_MORGANA": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 3.0,
+     "spell": "SHAPE_Q_DAMAGE_AND_SHIELD"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "spell": "SHAPE_Q_CONE_MELEE"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_st": 2,
@@ -41208,6 +45449,55 @@
    "unique_name": "2H_SHAPESHIFTER_MORGANA"
   },
   "2H_SHAPESHIFTER_SET1": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 3.0,
+     "spell": "SHAPE_Q_DAMAGE_AND_SHIELD"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "spell": "SHAPE_Q_CONE_MELEE"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_st": 2,
@@ -41332,6 +45622,55 @@
    "unique_name": "2H_SHAPESHIFTER_SET1"
   },
   "2H_SHAPESHIFTER_SET2": {
+   "cap_delivery": {
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "spell": "SHAPE_Q_CONE_MELEE"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "catch": 1,
@@ -41448,6 +45787,63 @@
    "unique_name": "2H_SHAPESHIFTER_SET2"
   },
   "2H_SHAPESHIFTER_SET3": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 3.0,
+     "spell": "SHAPE_Q_DAMAGE_AND_SHIELD"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "spell": "SHAPE_Q_CONE_MELEE"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SHAPE_W_AREA_PULL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 2,
+     "radius": 4.0,
+     "spell": "SHAPE_W_DAMAGE_AOE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 1,
@@ -41565,6 +45961,50 @@
    "unique_name": "2H_SHAPESHIFTER_SET3"
   },
   "2H_SKULLORB_HELL": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SKULLCURSE"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 11.0,
+     "spell": "ARMORPIERCER"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "CURSENOVA"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "CURSED_SPLAT"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CURSEDOT"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SKULLCURSE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -41661,6 +46101,15 @@
    "unique_name": "2H_SKULLORB_HELL"
   },
   "2H_SPEAR": {
+   "cap_delivery": {
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "GROUNDSPEAR"
+    }
+   },
    "capabilities": {
     "catch": 2,
     "mobility": 1,
@@ -41754,6 +46203,43 @@
    "unique_name": "2H_SPEAR"
   },
   "2H_TRIDENT_UNDEAD": {
+   "cap_delivery": {
+    "buff_allies": {
+     "radius": 3.0,
+     "spell": "TRIDENTTHROW"
+    },
+    "catch": {
+     "radius": 3.0,
+     "spell": "TRIDENTTHROW"
+    },
+    "disengage": {
+     "radius": 3.0,
+     "spell": "TRIDENTTHROW"
+    },
+    "engage": {
+     "radius": 3.0,
+     "spell": "TRIDENTTHROW"
+    },
+    "mobility": {
+     "radius": 3.0,
+     "spell": "TRIDENTTHROW"
+    },
+    "peel": {
+     "radius": 3.0,
+     "spell": "TRIDENTTHROW"
+    },
+    "root": {
+     "radius": 3.0,
+     "spell": "TRIDENTTHROW"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "GROUNDSPEAR"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "catch": 2,
@@ -41859,6 +46345,70 @@
    "unique_name": "2H_TRIDENT_UNDEAD"
   },
   "2H_TWINSCYTHE_HELL": {
+   "cap_delivery": {
+    "anti_dive": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "QS_WHIRLWIND2"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 7.0,
+     "spell": "TORNADO"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 7.0,
+     "spell": "TORNADO"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 7.0,
+     "spell": "TORNADO"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CARTWHEEL"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 7.0,
+     "spell": "TORNADO"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "SEPARATING_SLAM"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 7.0,
+     "spell": "TORNADO"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "QSTAFF_COMBO"
+    }
+   },
    "capabilities": {
     "anti_dive": 1,
     "burst_aoe": 2,
@@ -41983,6 +46533,55 @@
    "unique_name": "2H_TWINSCYTHE_HELL"
   },
   "2H_WARBOW": {
+   "cap_delivery": {
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 6.0,
+     "spell": "SKILLSHOT_STUN"
+    },
+    "catch": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "disengage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "JUMPSHOT2"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 5,
+     "radius": 9.0,
+     "spell": "DEADLYSHOT"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GROUNDARROW"
+    }
+   },
    "capabilities": {
     "burst_st": 2,
     "catch": 1,
@@ -42090,6 +46689,51 @@
    "unique_name": "2H_WARBOW"
   },
   "2H_WILDSTAFF": {
+   "cap_delivery": {
+    "cleanse": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSEHEAL"
+    },
+    "heal_burst": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSEHEAL"
+    },
+    "heal_sustain": {
+     "max_targets": 20,
+     "radius": 7.0,
+     "spell": "WELLOFLIFE2"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "BRAMBLESEED"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "cleanse": 2,
@@ -42196,6 +46840,47 @@
    "unique_name": "2H_WILDSTAFF"
   },
   "MAIN_1HCROSSBOW": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "EXPLODING_SHOT"
+    },
+    "knockback_displace": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "KNOCKBACKSHOT2"
+    },
+    "silence": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "SILENCINGBOLT"
+    },
+    "slow": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "CALTROPS"
+    },
+    "zone_control": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "CALTROPS"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "knockback_displace": 1,
@@ -42290,6 +46975,40 @@
    "unique_name": "MAIN_1HCROSSBOW"
   },
   "MAIN_ARCANESTAFF": {
+   "cap_delivery": {
+    "burst_st": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 6.0,
+     "spell": "ARCANEORB2"
+    },
+    "cleanse": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSESPEED2"
+    },
+    "purge": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 6.0,
+     "spell": "ARCANEORB2"
+    },
+    "silence": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 6.0,
+     "spell": "ARCANEORB2"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_st": 1,
@@ -42391,6 +47110,56 @@
    "unique_name": "MAIN_ARCANESTAFF"
   },
   "MAIN_ARCANESTAFF_UNDEAD": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "BLACKHOLE"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "BLACKHOLE"
+    },
+    "cleanse": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSESPEED2"
+    },
+    "clump_create": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "BLACKHOLE"
+    },
+    "silence": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "MAGICSHOCK"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "BLACKHOLE"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "BLACKHOLE"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "burst_aoe": 2,
@@ -42515,6 +47284,54 @@
    "unique_name": "MAIN_ARCANESTAFF_UNDEAD"
   },
   "MAIN_AXE": {
+   "cap_delivery": {
+    "buff_allies": {
+     "radius": 5.0,
+     "spell": "AXE_CHARGE"
+    },
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 1.5,
+     "spell": "AXETHROW"
+    },
+    "engage": {
+     "radius": 5.0,
+     "spell": "AXE_CHARGE"
+    },
+    "heal_reduction": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGSTRIKE"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGCOMBO"
+    },
+    "root": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGCOMBO"
+    },
+    "self_sustain": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 1.5,
+     "spell": "AXETHROW"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RENDINGSTRIKE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_st": 1,
@@ -42621,6 +47438,49 @@
    "unique_name": "MAIN_AXE"
   },
   "MAIN_CURSEDSTAFF": {
+   "cap_delivery": {
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "DEATHCURSE2"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 11.0,
+     "spell": "ARMORPIERCER"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "CURSENOVA"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "CURSED_SPLAT"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CURSEDOT"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "CURSED_SPLAT"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_st": 2,
@@ -42712,6 +47572,51 @@
    "unique_name": "MAIN_CURSEDSTAFF"
   },
   "MAIN_CURSEDSTAFF_AVALON": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "DYNAMIC_CURSE"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 11.0,
+     "spell": "ARMORPIERCER"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "CURSENOVA"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "DYNAMIC_CURSE"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "DYNAMIC_CURSE"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "CURSED_SPLAT"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -42800,6 +47705,64 @@
    "unique_name": "MAIN_CURSEDSTAFF_AVALON"
   },
   "MAIN_CURSEDSTAFF_CRYSTAL": {
+   "cap_delivery": {
+    "heal_reduction": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 18.0,
+     "spell": "CURSE_SKELETON_BARF_FDHR"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 18.0,
+     "spell": "CURSE_SKELETON_BARF_FDHR"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 18.0,
+     "spell": "CURSE_SKELETON_BARF_FDHR"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 11.0,
+     "spell": "ARMORPIERCER"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "CURSENOVA"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "CURSED_SPLAT"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CURSEDOT"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "CURSED_SPLAT"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "heal_reduction": 2,
@@ -42901,6 +47864,57 @@
    "unique_name": "MAIN_CURSEDSTAFF_CRYSTAL"
   },
   "MAIN_CURSEDSTAFF_UNDEAD": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "ENFEEBLEBLADES"
+    },
+    "purge": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "ENFEEBLEBLADES"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 11.0,
+     "spell": "ARMORPIERCER"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 4.0,
+     "spell": "CURSENOVA"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "CURSED_SPLAT"
+    },
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "CURSEDOT"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "ENFEEBLEBLADES"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 1,
@@ -43002,6 +48016,23 @@
    "unique_name": "MAIN_CURSEDSTAFF_UNDEAD"
   },
   "MAIN_DAGGER": {
+   "cap_delivery": {
+    "catch": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
+    "stun": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    }
+   },
    "capabilities": {
     "catch": 1,
     "disengage": 1,
@@ -43108,6 +48139,35 @@
    "unique_name": "MAIN_DAGGER"
   },
   "MAIN_DAGGER_HELL": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "BLOOD_BLADE"
+    },
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "BLOOD_BLADE"
+    },
+    "catch": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
+    "stun": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    }
+   },
    "capabilities": {
     "burst_aoe": 2,
     "burst_st": 1,
@@ -43235,6 +48295,36 @@
    "unique_name": "MAIN_DAGGER_HELL"
   },
   "MAIN_FIRESTAFF": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRESTAFFIGNITE2_SPREAD"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRECONE"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRECONE"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 7.0,
+     "spell": "FIREWALL"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -43321,6 +48411,57 @@
    "unique_name": "MAIN_FIRESTAFF"
   },
   "MAIN_FIRESTAFF_CRYSTAL": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRESTAFFIGNITE2_SPREAD"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FLAMEDASH"
+    },
+    "disengage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FLAMEDASH"
+    },
+    "engage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FLAMEDASH"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FLAMEDASH"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRECONE"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 7.0,
+     "spell": "FIREWALL"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 1,
@@ -43407,6 +48548,43 @@
    "unique_name": "MAIN_FIRESTAFF_CRYSTAL"
   },
   "MAIN_FIRESTAFF_KEEPER": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRESTAFFIGNITE2_SPREAD"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.0,
+     "spell": "MAGMASPHERE"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRECONE"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FIRECONE"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 7.0,
+     "spell": "FIREWALL"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 2,
@@ -43488,6 +48666,85 @@
    "unique_name": "MAIN_FIRESTAFF_KEEPER"
   },
   "MAIN_FROSTSTAFF": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 6.0,
+     "spell": "ICE_SCULPTURE"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "FREEZINGWIND"
+    },
+    "catch": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "FREEZINGWIND"
+    },
+    "disengage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "FROSTNOVA"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "FREEZINGWIND"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "FROST_LANCE"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "FREEZINGWIND"
+    },
+    "slow": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FROSTBOMB_CASTSLOW"
+    },
+    "stun": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "FROSTNOVA"
+    },
+    "zone_control": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FROSTBOMB_CASTSLOW"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 1,
@@ -43597,6 +48854,69 @@
    "unique_name": "MAIN_FROSTSTAFF"
   },
   "MAIN_FROSTSTAFF_AVALON": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 6.0,
+     "spell": "ICE_SCULPTURE"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "FROZEN_CRYSTAL"
+    },
+    "disengage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "FROSTNOVA"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "FROZEN_CRYSTAL"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "FROST_LANCE"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "FROZEN_CRYSTAL"
+    },
+    "stun": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "FROZEN_CRYSTAL"
+    },
+    "zone_control": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "FROSTBOMB_CASTSLOW"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "catch": 1,
@@ -43701,6 +49021,83 @@
    "unique_name": "MAIN_FROSTSTAFF_AVALON"
   },
   "MAIN_FROSTSTAFF_KEEPER": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 10,
+     "radius": 6.0,
+     "spell": "ICE_SCULPTURE"
+    },
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "ICEROCK_EXPLODE"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "ICEROCK_EXPLODE"
+    },
+    "disengage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "FROSTNOVA"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "ICEROCK_EXPLODE"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "ICEROCK_EXPLODE"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 3.0,
+     "spell": "FROST_LANCE"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "ICEROCK_EXPLODE"
+    },
+    "stun": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "FROSTNOVA"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "ICEROCK_EXPLODE"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "burst_aoe": 1,
@@ -43814,6 +49211,66 @@
    "unique_name": "MAIN_FROSTSTAFF_KEEPER"
   },
   "MAIN_HAMMER": {
+   "cap_delivery": {
+    "disengage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CHARGESLOWAE"
+    },
+    "engage": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CHARGESLOWAE"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "GEYSER"
+    },
+    "mobility": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "spell": "CHARGESLOWAE"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 5.5,
+     "spell": "HAMMERWHIRLWIND2"
+    },
+    "purge": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "IRONBREAKER"
+    },
+    "stun": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 5.5,
+     "spell": "HAMMERWHIRLWIND2"
+    }
+   },
    "capabilities": {
     "anti_dive": 2,
     "disengage": 1,
@@ -43941,6 +49398,15 @@
    "unique_name": "MAIN_HAMMER"
   },
   "MAIN_HOLYSTAFF": {
+   "cap_delivery": {
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "PULSINGHEAL"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "heal_burst": 2,
@@ -44093,6 +49559,13 @@
    "unique_name": "MAIN_HOLYSTAFF_AVALON"
   },
   "MAIN_HOLYSTAFF_MORGANA": {
+   "cap_delivery": {
+    "heal_burst": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "HOLYFLASH"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "cleanse": 2,
@@ -44157,6 +49630,29 @@
    "unique_name": "MAIN_HOLYSTAFF_MORGANA"
   },
   "MAIN_MACE": {
+   "cap_delivery": {
+    "engage": {
+     "radius": 5.0,
+     "spell": "MACELEAP"
+    },
+    "mobility": {
+     "radius": 5.0,
+     "spell": "MACELEAP"
+    },
+    "peel": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "GUARDRUNE"
+    },
+    "root": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
+    "stun": {
+     "radius": 5.0,
+     "spell": "MACELEAP"
+    }
+   },
    "capabilities": {
     "engage": 2,
     "mobility": 2,
@@ -44230,6 +49726,56 @@
    "unique_name": "MAIN_MACE"
   },
   "MAIN_MACE_CRYSTAL": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "spell": "MACE_CRYSTAL_FRAGMENT_STORM"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "spell": "MACE_CRYSTAL_FRAGMENT_STORM"
+    },
+    "engage": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
+    "peel": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "GUARDRUNE"
+    },
+    "resist_shred": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "spell": "MACE_CRYSTAL_FRAGMENT_STORM"
+    },
+    "root": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "spell": "MACE_CRYSTAL_FRAGMENT_STORM"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "spell": "MACE_CRYSTAL_FRAGMENT_STORM"
+    }
+   },
    "capabilities": {
     "burst_aoe": 1,
     "catch": 1,
@@ -44318,6 +49864,53 @@
    "unique_name": "MAIN_MACE_CRYSTAL"
   },
   "MAIN_MACE_HELL": {
+   "cap_delivery": {
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "SHRINKINGSMASH"
+    },
+    "damage_debuff": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "SHRINKINGSMASH"
+    },
+    "engage": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
+    "execute": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "SHRINKINGSMASH"
+    },
+    "heal_reduction": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "SHRINKINGSMASH"
+    },
+    "peel": {
+     "max_targets": 10,
+     "radius": 5.0,
+     "spell": "GUARDRUNE"
+    },
+    "root": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
+    "slow": {
+     "radius": 3.0,
+     "spell": "SACRED_GROUND"
+    },
+    "zone_control": {
+     "radius": 3.0,
+     "spell": "SACRED_GROUND"
+    }
+   },
    "capabilities": {
     "burst_st": 1,
     "damage_debuff": 2,
@@ -44419,6 +50012,61 @@
    "unique_name": "MAIN_MACE_HELL"
   },
   "MAIN_NATURESTAFF": {
+   "cap_delivery": {
+    "cleanse": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSEHEAL"
+    },
+    "heal_burst": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 15,
+     "radius": 11.0,
+     "spell": "CIRCLEOFLIFE"
+    },
+    "heal_sustain": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 15,
+     "radius": 11.0,
+     "spell": "CIRCLEOFLIFE"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "BRAMBLESEED"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 15,
+     "radius": 11.0,
+     "spell": "CIRCLEOFLIFE"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "cleanse": 2,
@@ -44525,6 +50173,39 @@
    "unique_name": "MAIN_NATURESTAFF"
   },
   "MAIN_NATURESTAFF_AVALON": {
+   "cap_delivery": {
+    "cleanse": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSEHEAL"
+    },
+    "heal_burst": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSEHEAL"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "BRAMBLESEED"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "cleanse": 2,
@@ -44631,6 +50312,63 @@
    "unique_name": "MAIN_NATURESTAFF_AVALON"
   },
   "MAIN_NATURESTAFF_CRYSTAL": {
+   "cap_delivery": {
+    "buff_allies": {
+     "escalation": {
+      "duration": 0.08
+     },
+     "max_targets": 10,
+     "radius": 7.0,
+     "spell": "DUAL_NATURE"
+    },
+    "cleanse": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSEHEAL"
+    },
+    "heal_burst": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSEHEAL"
+    },
+    "heal_sustain": {
+     "escalation": {
+      "duration": 0.08
+     },
+     "max_targets": 10,
+     "radius": 7.0,
+     "spell": "DUAL_NATURE"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "BRAMBLESEED"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08
+     },
+     "max_targets": 10,
+     "radius": 7.0,
+     "spell": "DUAL_NATURE"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    }
+   },
    "capabilities": {
     "buff_allies": 1,
     "cleanse": 2,
@@ -44734,6 +50472,34 @@
    "unique_name": "MAIN_NATURESTAFF_CRYSTAL"
   },
   "MAIN_NATURESTAFF_KEEPER": {
+   "cap_delivery": {
+    "cleanse": {
+     "max_targets": 10,
+     "radius": 4.0,
+     "spell": "CLEANSEHEAL"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 8.0,
+     "spell": "BRAMBLESEED"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    },
+    "zone_control": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "THORNSAREA"
+    }
+   },
    "capabilities": {
     "buff_allies": 2,
     "cleanse": 2,
@@ -44835,6 +50601,48 @@
    "unique_name": "MAIN_NATURESTAFF_KEEPER"
   },
   "MAIN_RAPIER_MORGANA": {
+   "cap_delivery": {
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RAPIERSTAB"
+    },
+    "catch": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RAPIERSTAB"
+    },
+    "engage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RAPIERSTAB"
+    },
+    "execute": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RAPIERSTAB"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "RAPIERSTAB"
+    },
+    "peel": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    },
+    "stun": {
+     "max_targets": 1,
+     "radius": 40.0,
+     "spell": "SKILLSHOT_TELEPORT"
+    }
+   },
    "capabilities": {
     "burst_st": 2,
     "catch": 2,
@@ -44957,6 +50765,36 @@
    "unique_name": "MAIN_RAPIER_MORGANA"
   },
   "MAIN_ROCKMACE_KEEPER": {
+   "cap_delivery": {
+    "anti_dive": {
+     "radius": 9.0,
+     "spell": "PRIMALSLAM"
+    },
+    "engage": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
+    "knockback_displace": {
+     "radius": 9.0,
+     "spell": "PRIMALSLAM"
+    },
+    "peel": {
+     "radius": 9.0,
+     "spell": "PRIMALSLAM"
+    },
+    "root": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
+    "slow": {
+     "radius": 3.0,
+     "spell": "SACRED_GROUND"
+    },
+    "zone_control": {
+     "radius": 9.0,
+     "spell": "PRIMALSLAM"
+    }
+   },
    "capabilities": {
     "anti_dive": 1,
     "engage": 1,
@@ -45045,6 +50883,60 @@
    "unique_name": "MAIN_ROCKMACE_KEEPER"
   },
   "MAIN_SCIMITAR_MORGANA": {
+   "cap_delivery": {
+    "burst_st": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 25,
+     "radius": 2.25,
+     "spell": "MIGHTYSWING"
+    },
+    "catch": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 25,
+     "radius": 2.25,
+     "spell": "MIGHTYSWING"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "SPLITTINGSLASH"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "SPLITTINGSLASH"
+    },
+    "silence": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 25,
+     "radius": 2.25,
+     "spell": "MIGHTYSWING"
+    },
+    "slow": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 25,
+     "radius": 2.25,
+     "spell": "MIGHTYSWING"
+    }
+   },
    "capabilities": {
     "burst_st": 2,
     "catch": 1,
@@ -45153,6 +51045,50 @@
    "unique_name": "MAIN_SCIMITAR_MORGANA"
   },
   "MAIN_SPEAR": {
+   "cap_delivery": {
+    "disengage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "DASHDMG"
+    },
+    "engage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "DASHDMG"
+    },
+    "knockback_displace": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "DASHDMG"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "DASHDMG"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "DASHDMG"
+    },
+    "root": {
+     "max_targets": 1,
+     "radius": 2.5,
+     "spell": "SKILLSHOT_PULL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "GROUNDSPEAR"
+    }
+   },
    "capabilities": {
     "catch": 2,
     "disengage": 1,
@@ -45264,6 +51200,56 @@
    "unique_name": "MAIN_SPEAR"
   },
   "MAIN_SPEAR_KEEPER": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "SPEARTHROW"
+    },
+    "catch": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "SPEARTHROW"
+    },
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "SPEARTHROW"
+    },
+    "root": {
+     "max_targets": 1,
+     "radius": 2.5,
+     "spell": "SKILLSHOT_PULL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "GROUNDSPEAR"
+    },
+    "stun": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "SPEARTHROW"
+    }
+   },
    "capabilities": {
     "burst_aoe": 1,
     "catch": 2,
@@ -45375,6 +51361,44 @@
    "unique_name": "MAIN_SPEAR_KEEPER"
   },
   "MAIN_SPEAR_LANCE_AVALON": {
+   "cap_delivery": {
+    "burst_st": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "LANCE_CHARGE"
+    },
+    "engage": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "LANCE_CHARGE"
+    },
+    "mobility": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "LANCE_CHARGE"
+    },
+    "purge": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "LANCE_CHARGE"
+    },
+    "root": {
+     "max_targets": 1,
+     "radius": 2.5,
+     "spell": "SKILLSHOT_PULL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "GROUNDSPEAR"
+    }
+   },
    "capabilities": {
     "burst_st": 1,
     "catch": 1,
@@ -45481,6 +51505,24 @@
    "unique_name": "MAIN_SPEAR_LANCE_AVALON"
   },
   "MAIN_SWORD": {
+   "cap_delivery": {
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "SPLITTINGSLASH"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "SPLITTINGSLASH"
+    }
+   },
    "capabilities": {
     "burst_st": 2,
     "catch": 1,
@@ -45592,6 +51634,24 @@
    "unique_name": "MAIN_SWORD"
   },
   "MAIN_SWORD_CRYSTAL": {
+   "cap_delivery": {
+    "peel": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "SPLITTINGSLASH"
+    },
+    "root": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 6.5,
+     "spell": "SPLITTINGSLASH"
+    }
+   },
    "capabilities": {
     "burst_aoe": 1,
     "burst_st": 2,

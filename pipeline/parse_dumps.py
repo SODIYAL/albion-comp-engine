@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from provenance import record_derived, snapshot_commit, snapshot_dir  # noqa: E402
 
 ADAPTER = "parse_dumps"
-ADAPTER_VERSION = "3"
+ADAPTER_VERSION = "4"
 
 TAG_RE = re.compile(r"\[(dmg|heal|cc|debuff|buff|mobility|other)\]")
 
@@ -184,11 +184,19 @@ def kf_max(v):
 
 
 def spell_geometry(sid, registry, max_depth=8):
-    """{radius, max_targets, area:[{kind,...}]} for a spell, following
-    applyspell/spelleffectarea references through the full registry. `radius`
-    is the largest damage/zone footprint found; None means the tree carries
-    no structural area — 'unknown', never 'not AoE'."""
+    """{radius, max_targets, area:[{kind,...}], escalation:{...}} for a spell,
+    following applyspell/spelleffectarea references through the full registry.
+    `radius` is the largest damage/zone footprint found; None means the tree
+    carries no structural area — 'unknown', never 'not AoE'.
+
+    `escalation` (2026-08-20, Q9 answered from the dumps): the game marks AoE
+    Escalation PER EFFECT — `@targetcountvaluebonusfactor` (damage/value bonus
+    per target hit, the wiki's 8%) and `@targetcountdurationbonusfactor` (CC
+    duration bonus per target — the CC Escalation whose curve the wiki never
+    published). We record the max factor of each kind found in the spell tree;
+    absent key = the game gives this spell no escalation."""
     best = {"radius": None, "max_targets": None}
+    escal = {}
     shapes = []
     visited = {sid}
 
@@ -251,7 +259,55 @@ def spell_geometry(sid, registry, max_depth=8):
     out = dict(best)
     if shapes:
         out["area"] = shapes[:4]
+    escal = spell_escalation(sid, registry)
+    if escal:
+        out["escalation"] = escal
     return out
+
+
+def spell_escalation(sid, registry, max_depth=10):
+    """{value: f, duration: f} escalation factors for a spell, or {}.
+
+    Separate from the geometry walk on purpose: escalation factors live on
+    EFFECT entries reached through `@spell`/`@effect` references under ANY
+    container key (Avalanche: ICEROCK_EXPLODE -> ..._PASSTHROUGH_EFFECT),
+    while the geometry walk deliberately follows only applyspell/usespell/
+    spelleffectarea so stray references can never inflate a spell's verified
+    footprint. This walk follows every reference but reads ONLY the two
+    targetcount attributes."""
+    escal = {}
+    visited = set()
+
+    def bump(kind, v):
+        v = kf_max(v)
+        if v and v > escal.get(kind, 0):
+            escal[kind] = v
+
+    def walk(node, depth):
+        if depth > max_depth:
+            return
+        if isinstance(node, list):
+            for item in node:
+                walk(item, depth)
+            return
+        if not isinstance(node, dict):
+            return
+        bump("value", node.get("@targetcountvaluebonusfactor"))
+        bump("duration", node.get("@targetcountdurationbonusfactor"))
+        for ref_attr in ("@spell", "@effect"):
+            ref = node.get(ref_attr)
+            if isinstance(ref, str) and ref in registry and ref not in visited:
+                visited.add(ref)
+                walk(registry[ref], depth + 1)
+        for k, v in node.items():
+            if not k.startswith("@"):
+                walk(v, depth + 1)
+
+    node = registry.get(sid)
+    if node is not None:
+        visited.add(sid)
+        walk(node, 0)
+    return escal
 
 def en(tuv_list):
     for v in (tuv_list if isinstance(tuv_list, list) else [tuv_list]):
@@ -453,6 +509,9 @@ def main(dump_dir, source_commit):
             "radius": geom.get("radius"),
             "max_targets": geom.get("max_targets"),
             "area": geom.get("area"),
+            # per-spell AoE Escalation factors from the dumps (Q9): absent =
+            # the game gives this spell no escalation bonus
+            "escalation": geom.get("escalation"),
             # 700, not 400: the ability-detail view (2026-08-19) shows the
             # full resolved text — 400 cut 49 spells mid-fact (ramp tables,
             # multi-component Es)

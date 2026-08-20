@@ -15,7 +15,7 @@
   },
   "gear_spells.json": {
    "adapter": "parse_dumps",
-   "adapter_version": "3",
+   "adapter_version": "4",
    "sha256": "201cc9fcb37a5de39d4677d0ff0e562c5498c9409a34a8350102ce96f2c042b4",
    "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
    "source_files": [
@@ -47,8 +47,8 @@
   },
   "spell_index.json": {
    "adapter": "parse_dumps",
-   "adapter_version": "3",
-   "sha256": "63af6008ed9020228a4249d6a6ec0376f65a9a83d1bd15f439d795341c661236",
+   "adapter_version": "4",
+   "sha256": "e1314ca350b2e0838f7a5f505b0237331c2e3f312f08a76c26bf5fa9ca35d5d6",
    "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
    "source_files": [
     "formatted/items.json",
@@ -59,7 +59,7 @@
   },
   "weapon_lines.json": {
    "adapter": "parse_dumps",
-   "adapter_version": "3",
+   "adapter_version": "4",
    "sha256": "3a5303c584f4bb7e4de4c372352948d1c0243d280e8b709cbd9942b13574fcc2",
    "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
    "source_files": [
