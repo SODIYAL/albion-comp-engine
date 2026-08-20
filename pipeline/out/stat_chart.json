@@ -157,7 +157,7 @@
     "group": "displacement (m)",
     "per_min": null,
     "scores": [
-     2
+     6
     ],
     "spell": "PRIMALSLAM",
     "unit": "m",
@@ -173,7 +173,7 @@
     "group": "displacement (m)",
     "per_min": null,
     "scores": [
-     4
+     2
     ],
     "spell": "QSWHIRLWIND",
     "unit": "m",
@@ -833,7 +833,7 @@
     "group": "damage per cast",
     "per_min": 840.0,
     "scores": [
-     2
+     3
     ],
     "spell": "ICEROCK_EXPLODE",
     "unit": "dmg/cast",
@@ -4646,7 +4646,7 @@
     "group": "stat modifiers (value \u00d7 duration)",
     "per_min": 6.4,
     "scores": [
-     2
+     4
     ],
     "spell": "SHRINKINGSMASH",
     "unit": "value\u00b7s",
@@ -9838,7 +9838,7 @@
     "group": "stat modifiers (value \u00d7 duration)",
     "per_min": 12.0,
     "scores": [
-     2
+     4
     ],
     "spell": "QS_SLOWROPE",
     "unit": "value\u00b7s",

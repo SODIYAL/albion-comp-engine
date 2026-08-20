@@ -87,5 +87,5 @@
     - {cap: slow,          score: 4, evidence: ICEROCK_EXPLODE}  # freezing trail + QW pool
     - {cap: peel,          score: 2, evidence: ICEROCK_EXPLODE}
     - {cap: zone_control,  score: 2, evidence: ICEROCK_EXPLODE}  # the trail
-    - {cap: burst_aoe,     score: 2, evidence: ICEROCK_EXPLODE}
+    - {cap: burst_aoe,     score: 3, evidence: ICEROCK_EXPLODE}
     - {cap: catch,         score: 2, evidence: ICEROCK_EXPLODE}

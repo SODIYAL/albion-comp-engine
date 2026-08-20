@@ -44452,7 +44452,7 @@
     "slow": 4,
     "stun": 2,
     "sustained_dps": 2,
-    "tankiness": 2,
+    "tankiness": 4,
     "zone_control": 4
    },
    "curated_as_of": "2026-08-12",
@@ -44520,7 +44520,7 @@
       {
        "heal_reduction": 4,
        "slow": 4,
-       "tankiness": 2,
+       "tankiness": 4,
        "zone_control": 4
       }
      ],
@@ -49377,7 +49377,7 @@
    },
    "capabilities": {
     "buff_allies": 2,
-    "burst_aoe": 2,
+    "burst_aoe": 3,
     "catch": 2,
     "disengage": 2,
     "knockback_displace": 4,
@@ -49453,7 +49453,7 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
+       "burst_aoe": 3,
        "catch": 2,
        "knockback_displace": 4,
        "peel": 2,
@@ -50193,7 +50193,7 @@
     "damage_debuff": 4,
     "engage": 2,
     "execute": 4,
-    "heal_reduction": 2,
+    "heal_reduction": 4,
     "peel": 4,
     "root": 2,
     "slow": 2,
@@ -50262,7 +50262,7 @@
        "burst_st": 2,
        "damage_debuff": 4,
        "execute": 4,
-       "heal_reduction": 2
+       "heal_reduction": 4
       }
      ],
      [

@@ -55,7 +55,7 @@
   role_hint: tank
   capabilities:
     - {cap: execute,      score: 4, evidence: SHRINKINGSMASH}  # E: -40% max AND current Health for 8s — the focus call
-    - {cap: heal_reduction, score: 2, evidence: SHRINKINGSMASH}  # -40% Healing CAST hits enemy healers
+    - {cap: heal_reduction, score: 4, evidence: SHRINKINGSMASH}  # -40% Healing CAST hits enemy healers
     - {cap: burst_st,     score: 2, evidence: SHRINKINGSMASH}
     - {cap: damage_debuff, score: 4, evidence: SHRINKINGSMASH}  # E: -40% damage dealt for 8s, cone
 

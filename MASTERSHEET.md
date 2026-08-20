@@ -283,6 +283,33 @@ persistence, delivery, cast range, counter-immunity flags) and
 `review/magnitude.html` (score-vs-dumps-text audit boards). Rebuild after
 sheet edits: `py -3 pipeline/build_stat_chart.py`.
 
+### Rescore pass 1 — applied 2026-08-20 (34 rulings, in the sheets)
+
+First board-by-board pass over the outlier worklist (measured rank vs
+curated score within typed unit groups). Conservative movement: mostly
+into the odd slots; grounds = S1 ladder position + S2–S6 facts + guild
+doctrine (W3). Highlights — full list in the sheet diffs of the rescore
+commit:
+
+- **Soulscythe Tornado** catch/peel/displace 2→4 (80%×~3s slow on a 25m
+  line, ignores CCR, team-enabling hold — the session's founding case).
+- **Double Bladed** catch 4→2 (gap-close catches one target — gank kit).
+- **Snare Charge** root 2→5 (5.1s ranged ground root on 15s CD — the
+  strongest root in the game; guild names it on CORE builds).
+- **Occult's corridor** slow 2→4 (8s persistent zone @25m — the kite
+  requirement); **Grailseeker's Soulshaker** catch 2→4; **Dreadstorm's
+  fragment storm** catch/slow/shred 2→4 (1.5s CD spam).
+- **Crossbow-line ranged CC** up (Silencing Bolt 4, ranged knockback 4 —
+  ladder-consistent with Great Holy's 10m rung).
+- Damage boards: Clarent charge burst_st 4, Dagger Pair execute 4, Heron
+  throw 3; shreds (axe W, arcane Frazzle) 3.
+- **Trimmed by measurement**: Hoarfrost burst_aoe 4→3 — at 4 it pushed
+  the frontline pick out of a brawl comp's tank slot in the V4 blind
+  test (the only new role miss); at 3 the gate holds at 73%. Healer
+  boards deliberately untouched this pass (V4 measures healer slots and
+  the saturation artifact already dominates those misses — see
+  MECHANICS_TODO Q18).
+
 ## 8. Guild-approved builds
 
 The guild announcement, recorded 2026-08-20, structured but in the guild's

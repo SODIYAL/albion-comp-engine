@@ -55,6 +55,7 @@ ROOT = os.path.join(HERE, os.pardir)
 OUT = os.path.join(HERE, "out")
 
 sys.path.insert(0, HERE)
+import mastersheet  # noqa: E402
 import sheets_lib  # noqa: E402
 from effect_catalogue import (spell_registry, CONDITION_PREFIX,  # noqa: E402
                               GUARD_NODES, NON_EFFECT_TYPE)
@@ -363,15 +364,23 @@ def main():
         if c and c != 120:
             names[k] = f"{names[k]} [AP{c}]"
 
+    # MASTERSHEET tune:sheets overrides apply here too — the judging
+    # instrument must show the scores the ENGINE uses, or rulings look
+    # unapplied on the very board that motivated them.
+    tune_sheets = mastersheet.load().get("sheets", {})
     rows = []                    # (cap, weapon, spell, score)
     for path in sorted(glob.glob(os.path.join(HERE, "sheets", "*.yaml"))):
         for entry in (yaml.safe_load(open(path, encoding="utf-8")) or []):
             wk = entry.get("weapon")
             if not wk:
                 continue
+            ov = tune_sheets.get(wk) or {}
             for c in sheets_lib.compose(entry, lines_db.get(wk), pools):
-                if c.get("cap") and c.get("evidence") and c.get("score"):
-                    rows.append((c["cap"], wk, c["evidence"], c["score"]))
+                if not (c.get("cap") and c.get("evidence")):
+                    continue
+                score = ov.get(c["cap"], c.get("score"))
+                if score:
+                    rows.append((c["cap"], wk, c["evidence"], score))
 
     spells = sorted({sid for _, _, sid, _ in rows})
     extracted = {sid: extract(sid, reg) for sid in spells}

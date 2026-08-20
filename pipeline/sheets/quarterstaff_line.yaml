@@ -76,7 +76,7 @@
     - {cap: slow,          score: 4, evidence: QS_SLOWROPE}       # 50% aura slow
     - {cap: zone_control,  score: 4, evidence: QS_SLOWROPE}       # 6.5m walking denial zone, up to 15s
     - {cap: anti_dive,     score: 4, evidence: QS_WHIRLWIND2}     # divers stand in the aura; W: Forceful Swing (QW)
-    - {cap: tankiness,     score: 2, evidence: QS_SLOWROPE}       # +20% resists while active
+    - {cap: tankiness,     score: 4, evidence: QS_SLOWROPE}       # +20% resists while active
 
 - weapon: 2H_TWINSCYTHE_HELL         # Soulscythe — tornado displace skirmisher
   curated_as_of: 2026-08-12
