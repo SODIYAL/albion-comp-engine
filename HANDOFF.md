@@ -75,6 +75,43 @@ ao-bin-dumps commit, then `fetch_snapshot.py` -> `parse_dumps.py` ->
 Every derived input records its snapshot commit + adapter version in
 `out/source_manifest.json`; `build_dataset.py` fails closed on any mismatch.
 
+## Session 2026-08-21 (later) — the comp corpus + first evidence-driven retune
+
+Owner direction: the engine anchors to REAL comps; sheets flow in from
+online sources. Shipped, in order:
+
+- **11 comps ingested** (owner links + self-discovered): 8 from
+  albioncompo.com (`/api/compositions/{shareId}` — equipment/potions/food,
+  NO spell fields) and 3 from the official Character Builder
+  (`albiononline.com/characterbuilder/api/builds/?type=group` + `/{id}` —
+  FULL spell kits incl. gear actives, stored verbatim in `spells_verbatim`
+  blocks pending the adapter). All `manual_link`, SITE-LEVEL families
+  (albioncompo, albion_character_builder — per-author families auto-promoted
+  a canonical and were reverted; owner ruling open). Cloudflare on both
+  sites: browser UA + Referer + slow, single-request endpoints work.
+- **First independent V4 evidence**: Bist's "Roam 15" (albioncompo) mapped
+  to blackzone_roam dropped the role gate to 69% — all three healer
+  leave-one-out slots missed (heal targets met by the remaining healers).
+  Both real roam comps field 1 healer per 5 players; the template asked
+  ~2.5-per-20 (VALIDATION.md entry).
+- **Comp-fitted recalibration** (owner ruled: comps set the numbers): 31
+  target/soft rows re-fitted across blackzone_roam + territory_defense in
+  CURRENT engine units (fixes the audit's F1 geometric-unit mismatch, F3
+  Exalted-vs-anti_zone soft, F4 bundled-supply softs, F6 heal caps).
+  Guards kept: ranged_presence not lowered (brawl-only evidence, row is the
+  style carrier), burst_st/execute not raised (golden T15). **V4 role
+  25/32 = 78%** with Bist IN the gate; weapon 18%. T15 re-pinned to assert
+  the ruling directly; H20 accepts explicitly-null patch (H10 semantics).
+- **Board shows style emphasis**: capability rows carry ×N chips for the
+  active style's weight multiplier (styles move WEIGHTS, never targets —
+  the chip says so; targets changing with style is a future evidence
+  question, note the kite 20-man fielding ONE healer).
+- Owner gear rule recorded: equipment is picked for its unique LAST
+  ability — confirmed in CB data; default kit-inference prior.
+- Parked for owner: "Gang Open World" CB comp (fields basic Cursed Staff,
+  collides with H16's zero-records pin); the audit's Tuning Ledger
+  artifact holds the full number review.
+
 ## Session 2026-08-21 — provenance survives git checkout (CRLF trap defused)
 
 `git pull` broke the release gate on this machine: H1 reported

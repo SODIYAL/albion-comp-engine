@@ -202,8 +202,11 @@ check("H20 dataset provenance lists a verified hash per input",
               for v in prov["inputs"].values()))
 bi = load_json(bi_path)
 some = next(iter(bi["by_content"]["blackzone_roam"].values()))[0]
+# patch may be explicitly null — H10 pins that unknown fields are STORED,
+# never omitted (imported comps whose source states no patch, e.g. the
+# 2026-08-21 albioncompo ingests, record patch: null honestly).
 check("H20 build variants carry source, patch and approval provenance",
-      some.get("source", {}).get("kind") and some.get("patch")
+      some.get("source", {}).get("kind") and "patch" in some
       and some.get("approval"))
 
 # ---- offline fixture units: normalization stays structurally correct --------

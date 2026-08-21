@@ -242,16 +242,25 @@ def run():
 
     # T15 — expert ruling 2026-08-14: single-target damage is WEAK in 20-man
     # group content (enemy heals + Resilience overpower focused damage), so
-    # burst_st/execute are devalued in the 20-man templates. Consequence: a
-    # clump-damage dagger (Demonfang, burst_aoe) out-scores a pure single-
-    # target dagger (Dagger Pair) in a rounded party — the reverse of before.
+    # burst_st/execute are devalued in the 20-man templates.
+    # FIXTURE REVISED 2026-08-21 (comp-fitted recalibration, owner directive):
+    # the old proxy compared Demonfang's vs Dagger Pair's TOTAL scores. After
+    # the comp-fitted targets un-saturated catch/mobility, Dagger Pair's total
+    # legitimately leads — driven by its CATCH term (0.95), with its ST terms
+    # contributing ~14% — so the proxy stopped isolating the ruling it pinned.
+    # The pin now asserts the ruling itself: whatever a pure-ST dagger is
+    # worth in a rounded 20-man, its kill-damage terms (burst_st + execute)
+    # must stay a SMALL fraction of its value and below its utility terms.
     real20 = [HALLOWFALL, GREAT_HOLY, HEAVY_MACE, GREAT_HAMMER, "2H_QUARTERSTAFF",
               "MAIN_ROCKMACE_KEEPER", PERMAFROST, "2H_FIRE_RINGPAIR_AVALON",
               WITCHWORK, LONGBOW, "2H_WARBOW"]
     scored = {r["weapon"]: r["score"] for r in ez.recommend(real20, top_n=300)}
-    check("T15 single-target weak at scale: AoE dagger out-scores pure-ST dagger",
-          scored["MAIN_DAGGER_HELL"] > scored[DAGGERS],
-          f"Demonfang={scored['MAIN_DAGGER_HELL']:.3f} > DaggerPair={scored[DAGGERS]:.3f}")
+    dp_terms = {t["cap"]: t["delta"] for t in ez.explain(real20, DAGGERS)}
+    dp_st = dp_terms.get("burst_st", 0.0) + dp_terms.get("execute", 0.0)
+    dp_catch = dp_terms.get("catch", 0.0)
+    check("T15 single-target weak at scale: a pure-ST dagger's value is utility, not kill damage",
+          dp_st < 0.25 * scored[DAGGERS] and dp_st < dp_catch,
+          f"DaggerPair ST terms={dp_st:.2f} of {scored[DAGGERS]:.2f} total; catch term={dp_catch:.2f}")
 
     # T16 — Roads of Avalon size graduation (2026-08-15, the goal behavior):
     # a healer-less trio is a legitimate comp (floors silent, single-target

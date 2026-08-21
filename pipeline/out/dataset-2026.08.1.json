@@ -32131,13 +32131,13 @@
     },
     "catch": {
      "scales": true,
-     "soft_cap": 7.5,
-     "target": 4.2,
+     "soft_cap": 23.2,
+     "target": 12.2,
      "weight": 7
     },
     "cleanse": {
      "scales": false,
-     "soft_cap": 2.5,
+     "soft_cap": 4.6,
      "target": 0.8,
      "weight": 4
     },
@@ -32155,14 +32155,14 @@
     },
     "disengage": {
      "scales": false,
-     "soft_cap": 3.3,
-     "target": 1.7,
+     "soft_cap": 9.2,
+     "target": 6.3,
      "weight": 5
     },
     "engage": {
      "scales": true,
-     "soft_cap": 8.4,
-     "target": 5.0,
+     "soft_cap": 23.0,
+     "target": 11.7,
      "weight": 8
     },
     "execute": {
@@ -32173,8 +32173,8 @@
     },
     "heal_burst": {
      "scales": true,
-     "soft_cap": 6.7,
-     "target": 4.2,
+     "soft_cap": 10.7,
+     "target": 8.1,
      "weight": 6
     },
     "heal_reduction": {
@@ -32185,26 +32185,26 @@
     },
     "heal_sustain": {
      "scales": true,
-     "soft_cap": 10.9,
+     "soft_cap": 13.8,
      "target": 7.5,
      "weight": 10
     },
     "mobility": {
      "scales": true,
-     "soft_cap": 13.4,
-     "target": 6.7,
+     "soft_cap": 30.7,
+     "target": 19.8,
      "weight": 6
     },
     "peel": {
      "scales": true,
-     "soft_cap": 11.7,
-     "target": 6.7,
+     "soft_cap": 58.9,
+     "target": 40.3,
      "weight": 8
     },
     "purge": {
      "scales": false,
-     "soft_cap": 3.3,
-     "target": 1.7,
+     "soft_cap": 6.9,
+     "target": 4.5,
      "weight": 6
     },
     "ranged_presence": {
@@ -32215,26 +32215,26 @@
     },
     "resist_shred": {
      "scales": false,
-     "soft_cap": 5.0,
-     "target": 2.5,
+     "soft_cap": 12.6,
+     "target": 5.0,
      "weight": 5
     },
     "silence": {
      "scales": false,
-     "soft_cap": 2.5,
-     "target": 0.8,
+     "soft_cap": 10.2,
+     "target": 7.1,
      "weight": 4
     },
     "stun": {
      "scales": true,
-     "soft_cap": 8.4,
+     "soft_cap": 36.2,
      "target": 4.2,
      "weight": 4
     },
     "sustained_dps": {
      "scales": true,
-     "soft_cap": 13.4,
-     "target": 6.7,
+     "soft_cap": 19.9,
+     "target": 14.4,
      "weight": 5
     },
     "tankiness": {
@@ -32245,8 +32245,8 @@
     },
     "zone_control": {
      "scales": true,
-     "soft_cap": 6.7,
-     "target": 2.5,
+     "soft_cap": 13.8,
+     "target": 9.0,
      "weight": 3
     }
    },
@@ -32909,13 +32909,13 @@
    "requirements": {
     "anti_zone": {
      "scales": false,
-     "soft_cap": 1.7,
-     "target": 0.8,
+     "soft_cap": 2.3,
+     "target": 1.8,
      "weight": 2
     },
     "buff_allies": {
      "scales": false,
-     "soft_cap": 5.0,
+     "soft_cap": 6.9,
      "target": 2.5,
      "weight": 4
     },
@@ -32933,14 +32933,14 @@
     },
     "catch": {
      "scales": true,
-     "soft_cap": 5.0,
-     "target": 2.5,
+     "soft_cap": 26.3,
+     "target": 12.9,
      "weight": 4
     },
     "cleanse": {
      "scales": false,
-     "soft_cap": 3.3,
-     "target": 1.7,
+     "soft_cap": 9.2,
+     "target": 7.2,
      "weight": 5
     },
     "clump_create": {
@@ -32957,13 +32957,13 @@
     },
     "disengage": {
      "scales": false,
-     "soft_cap": 2.5,
-     "target": 0.8,
+     "soft_cap": 11.5,
+     "target": 6.3,
      "weight": 3
     },
     "engage": {
      "scales": true,
-     "soft_cap": 7.5,
+     "soft_cap": 16.1,
      "target": 4.2,
      "weight": 7
     },
@@ -32975,8 +32975,8 @@
     },
     "heal_burst": {
      "scales": true,
-     "soft_cap": 6.7,
-     "target": 4.2,
+     "soft_cap": 12.6,
+     "target": 7.7,
      "weight": 6
     },
     "heal_reduction": {
@@ -32987,26 +32987,26 @@
     },
     "heal_sustain": {
      "scales": true,
-     "soft_cap": 10.0,
+     "soft_cap": 13.1,
      "target": 6.7,
      "weight": 10
     },
     "mobility": {
      "scales": true,
-     "soft_cap": 10.0,
+     "soft_cap": 18.4,
      "target": 4.2,
      "weight": 3
     },
     "peel": {
      "scales": true,
-     "soft_cap": 11.7,
-     "target": 7.5,
+     "soft_cap": 60.6,
+     "target": 22.5,
      "weight": 8
     },
     "purge": {
      "scales": false,
-     "soft_cap": 3.3,
-     "target": 1.7,
+     "soft_cap": 5.8,
+     "target": 3.6,
      "weight": 6
     },
     "ranged_presence": {
@@ -33017,13 +33017,13 @@
     },
     "resist_shred": {
      "scales": false,
-     "soft_cap": 5.0,
-     "target": 2.5,
+     "soft_cap": 10.9,
+     "target": 5.0,
      "weight": 5
     },
     "silence": {
      "scales": false,
-     "soft_cap": 3.3,
+     "soft_cap": 5.8,
      "target": 1.7,
      "weight": 4
     },
@@ -33035,8 +33035,8 @@
     },
     "sustained_dps": {
      "scales": true,
-     "soft_cap": 11.7,
-     "target": 5.8,
+     "soft_cap": 19.7,
+     "target": 14.4,
      "weight": 4
     },
     "tankiness": {
@@ -33047,7 +33047,7 @@
     },
     "zone_control": {
      "scales": true,
-     "soft_cap": 11.7,
+     "soft_cap": 16.1,
      "target": 6.7,
      "weight": 6
     }

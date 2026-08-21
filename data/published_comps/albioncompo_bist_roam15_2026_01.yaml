@@ -28,7 +28,9 @@ snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved again
 # corroboration of the audit's F6 finding: both real roam comps field 1
 # healer per 5 players (Bist 3@15, blap 4@20); the template targets ~2.5@20.
 # To admit it to the gate: change the line below to `content: blackzone_roam`.
-content: zvz_roam15   # unmapped pending the owner's gate ruling (see above)
+content: blackzone_roam   # ADMITTED 2026-08-21 with the comp-fitted recalibration
+                          # (owner directive: comps set the numbers); the parking
+                          # note above records the pre-recalibration measurement.
 style: brawl   # owner's read 2026-08-21 (melee ball + single bomb corroborates)
 party_size:
   min: 15

@@ -12,19 +12,25 @@
  "problems": [],
  "promotions": [
   {
-   "basis": "explicit shotcaller approval",
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "blackzone_roam",
+   "weapon": "2H_ARCANESTAFF"
+  },
+  {
+   "basis": "2 independent source families agree",
    "build_id": "timothy_blap_blackzone_roam_2026_08:blap:11",
    "content": "blackzone_roam",
    "weapon": "2H_AXE_AVALON"
   },
   {
-   "basis": "explicit shotcaller approval",
+   "basis": "2 independent source families agree",
    "build_id": "timothy_blap_blackzone_roam_2026_08:blap:8",
    "content": "blackzone_roam",
    "weapon": "2H_CLEAVER_HELL"
   },
   {
-   "basis": "explicit shotcaller approval",
+   "basis": "2 independent source families agree",
    "build_id": "timothy_blap_blackzone_roam_2026_08:blap:6",
    "content": "blackzone_roam",
    "weapon": "2H_DUALMACE_AVALON"
@@ -48,13 +54,25 @@
    "weapon": "2H_HOLYSTAFF_UNDEAD"
   },
   {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "blackzone_roam",
+   "weapon": "2H_ICECRYSTAL_UNDEAD"
+  },
+  {
    "basis": "explicit shotcaller approval",
    "build_id": "timothy_blap_blackzone_roam_2026_08:blap:14",
    "content": "blackzone_roam",
    "weapon": "2H_KNUCKLES_KEEPER"
   },
   {
-   "basis": "explicit shotcaller approval",
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "blackzone_roam",
+   "weapon": "2H_KNUCKLES_SET3"
+  },
+  {
+   "basis": "2 independent source families agree",
    "build_id": "timothy_blap_blackzone_roam_2026_08:blap:1",
    "content": "blackzone_roam",
    "weapon": "2H_MACE"
@@ -66,10 +84,16 @@
    "weapon": "2H_MACE_MORGANA"
   },
   {
-   "basis": "explicit shotcaller approval",
+   "basis": "2 independent source families agree",
    "build_id": "timothy_blap_blackzone_roam_2026_08:blap:19",
    "content": "blackzone_roam",
    "weapon": "2H_NATURESTAFF_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "blackzone_roam",
+   "weapon": "2H_POLEHAMMER"
   },
   {
    "basis": "explicit shotcaller approval",
@@ -84,25 +108,25 @@
    "weapon": "2H_SHAPESHIFTER_SET2"
   },
   {
-   "basis": "explicit shotcaller approval",
+   "basis": "2 independent source families agree",
    "build_id": "timothy_blap_blackzone_roam_2026_08:blap:9",
    "content": "blackzone_roam",
    "weapon": "MAIN_CURSEDSTAFF_UNDEAD"
   },
   {
-   "basis": "explicit shotcaller approval",
+   "basis": "2 independent source families agree",
    "build_id": "timothy_blap_blackzone_roam_2026_08:blap:12",
    "content": "blackzone_roam",
    "weapon": "MAIN_DAGGER_HELL"
   },
   {
-   "basis": "explicit shotcaller approval",
+   "basis": "2 independent source families agree",
    "build_id": "timothy_blap_blackzone_roam_2026_08:blap:16",
    "content": "blackzone_roam",
    "weapon": "MAIN_HOLYSTAFF_AVALON"
   },
   {
-   "basis": "explicit shotcaller approval",
+   "basis": "2 independent source families agree",
    "build_id": "timothy_blap_blackzone_roam_2026_08:blap:4",
    "content": "blackzone_roam",
    "weapon": "MAIN_MACE"
@@ -982,84 +1006,6 @@
    "build_id": null,
    "content": "zvz_7man",
    "weapon": "MAIN_SPEAR_LANCE_AVALON"
-  },
-  {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_roam15",
-   "weapon": "2H_ARCANESTAFF"
-  },
-  {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_roam15",
-   "weapon": "2H_AXE_AVALON"
-  },
-  {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_roam15",
-   "weapon": "2H_CLEAVER_HELL"
-  },
-  {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_roam15",
-   "weapon": "2H_DUALMACE_AVALON"
-  },
-  {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_roam15",
-   "weapon": "2H_ICECRYSTAL_UNDEAD"
-  },
-  {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_roam15",
-   "weapon": "2H_KNUCKLES_SET3"
-  },
-  {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_roam15",
-   "weapon": "2H_MACE"
-  },
-  {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_roam15",
-   "weapon": "2H_NATURESTAFF_HELL"
-  },
-  {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_roam15",
-   "weapon": "2H_POLEHAMMER"
-  },
-  {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_roam15",
-   "weapon": "MAIN_CURSEDSTAFF_UNDEAD"
-  },
-  {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_roam15",
-   "weapon": "MAIN_DAGGER_HELL"
-  },
-  {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_roam15",
-   "weapon": "MAIN_HOLYSTAFF_AVALON"
-  },
-  {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_roam15",
-   "weapon": "MAIN_MACE"
   }
  ],
  "quarantined": [

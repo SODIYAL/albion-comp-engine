@@ -23,6 +23,67 @@
  },
  "by_content": {
   "blackzone_roam": {
+   "2H_ARCANESTAFF": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_bist_roam15_2026_01:comp:3",
+     "caller": "Bist (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: boot=SHOES_LEATHER_MORGANA, cape=CAPEITEM_SMUGGLER, secondhand=None",
+     "party_size": {
+      "max": 15,
+      "min": 15
+     },
+     "patch": null,
+     "published": "2026-01-03",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
+     "role": "support",
+     "source": {
+      "author": "Bist (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/2S582RBP"
+     },
+     "spells": {
+      "e": "TIME_FREEZE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
    "2H_AXE_AVALON": [
     {
      "alternatives": {
@@ -34,7 +95,7 @@
      "build_id": "timothy_blap_blackzone_roam_2026_08:blap:11",
      "caller": "Timothy",
      "canonical": true,
-     "canonical_basis": "explicit shotcaller approval",
+     "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
       "item_mapping": 0.67,
@@ -85,6 +146,65 @@
       "gear.offhand"
      ],
      "w": 1
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_bist_roam15_2026_01:comp:12",
+     "caller": "Bist (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_SET2, armor=ARMOR_LEATHER_HELL",
+     "party_size": {
+      "max": 15,
+      "min": 15
+     },
+     "patch": null,
+     "published": "2026-01-03",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_LEATHER_FEY",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_STEW_FISH",
+      "head": "HEAD_PLATE_SET1",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "role": "dps",
+     "source": {
+      "author": "Bist (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/2S582RBP"
+     },
+     "spells": {
+      "e": "LETHAL_CLEAVER",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
     }
    ],
    "2H_CLEAVER_HELL": [
@@ -98,7 +218,7 @@
      "build_id": "timothy_blap_blackzone_roam_2026_08:blap:8",
      "caller": "Timothy",
      "canonical": true,
-     "canonical_basis": "explicit shotcaller approval",
+     "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
       "item_mapping": 0.83,
@@ -149,6 +269,65 @@
       "gear.offhand"
      ],
      "w": 6
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_bist_roam15_2026_01:comp:10",
+     "caller": "Bist (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_SMUGGLER, food=MEAL_OMELETTE_AVALON, helm=HEAD_PLATE_SET1, armor=ARMOR_PLATE_ROYAL, secondhand=None",
+     "party_size": {
+      "max": 15,
+      "min": 15
+     },
+     "patch": null,
+     "published": "2026-01-03",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_STEW_FISH",
+      "head": "HEAD_PLATE_SET2",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "role": "dps",
+     "source": {
+      "author": "Bist (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/2S582RBP"
+     },
+     "spells": {
+      "e": "CLAYMORESLASH",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
     }
    ],
    "2H_DUALMACE_AVALON": [
@@ -162,7 +341,7 @@
      "build_id": "timothy_blap_blackzone_roam_2026_08:blap:6",
      "caller": "Timothy",
      "canonical": true,
-     "canonical_basis": "explicit shotcaller approval",
+     "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
       "item_mapping": 0.83,
@@ -213,6 +392,65 @@
       "gear.offhand"
      ],
      "w": 3
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_bist_roam15_2026_01:comp:4",
+     "caller": "Bist (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: boot=SHOES_PLATE_SET3, cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH, armor=ARMOR_PLATE_HELL, secondhand=None",
+     "party_size": {
+      "max": 15,
+      "min": 15
+     },
+     "patch": null,
+     "published": "2026-01-03",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
+     "role": "support",
+     "source": {
+      "author": "Bist (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/2S582RBP"
+     },
+     "spells": {
+      "e": "BLESSED_MACES",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
     }
    ],
    "2H_ENIGMATICORB_MORGANA": [
@@ -408,6 +646,67 @@
      "w": 2
     }
    ],
+   "2H_ICECRYSTAL_UNDEAD": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_bist_roam15_2026_01:comp:9",
+     "caller": "Bist (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: cape=CAPEITEM_SMUGGLER",
+     "party_size": {
+      "max": 15,
+      "min": 15
+     },
+     "patch": null,
+     "published": "2026-01-03",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_SET1",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_OMELETTE",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "role": "rdps",
+     "source": {
+      "author": "Bist (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/2S582RBP"
+     },
+     "spells": {
+      "e": "FROST_ULTIMATE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
    "2H_KNUCKLES_KEEPER": [
     {
      "alternatives": {
@@ -472,6 +771,67 @@
      "w": 1
     }
    ],
+   "2H_KNUCKLES_SET3": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_bist_roam15_2026_01:comp:11",
+     "caller": "Bist (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_SMUGGLER, helm=None, armor=ARMOR_LEATHER_HELL, secondhand=None",
+     "party_size": {
+      "max": 15,
+      "min": 15
+     },
+     "patch": null,
+     "published": "2026-01-03",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_LEATHER_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_STEW",
+      "head": "HEAD_LEATHER_FEY",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "role": "dps",
+     "source": {
+      "author": "Bist (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/2S582RBP"
+     },
+     "spells": {
+      "e": "IMPULSE_PUNCH",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
    "2H_MACE": [
     {
      "alternatives": {
@@ -483,7 +843,7 @@
      "build_id": "timothy_blap_blackzone_roam_2026_08:blap:1",
      "caller": "Timothy",
      "canonical": true,
-     "canonical_basis": "explicit shotcaller approval",
+     "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
       "item_mapping": 0.83,
@@ -534,6 +894,65 @@
       "gear.offhand"
      ],
      "w": 2
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_bist_roam15_2026_01:comp:1",
+     "caller": "Bist (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: boot=SHOES_CLOTH_FEY, cape=CAPEITEM_SMUGGLER, helm=HEAD_LEATHER_SET3, armor=ARMOR_PLATE_HELL",
+     "party_size": {
+      "max": 15,
+      "min": 15
+     },
+     "patch": null,
+     "published": "2026-01-03",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_SANDWICH",
+      "head": "HEAD_PLATE_KEEPER",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
+     "role": "tank",
+     "source": {
+      "author": "Bist (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/2S582RBP"
+     },
+     "spells": {
+      "e": "SHRIEKMACE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
     }
    ],
    "2H_MACE_MORGANA": [
@@ -610,7 +1029,7 @@
      "build_id": "timothy_blap_blackzone_roam_2026_08:blap:19",
      "caller": "Timothy",
      "canonical": true,
-     "canonical_basis": "explicit shotcaller approval",
+     "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
       "item_mapping": 1.0,
@@ -660,6 +1079,126 @@
       "gear.offhand"
      ],
      "w": 5
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_bist_roam15_2026_01:comp:7",
+     "caller": "Bist (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: boot=SHOES_LEATHER_ROYAL, armor=ARMOR_CLOTH_SET2, secondhand=None",
+     "party_size": {
+      "max": 15,
+      "min": 15
+     },
+     "patch": null,
+     "published": "2026-01-03",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
+     "role": "healer",
+     "source": {
+      "author": "Bist (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/2S582RBP"
+     },
+     "spells": {
+      "e": "ROTTENVINES",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_POLEHAMMER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_bist_roam15_2026_01:comp:5",
+     "caller": "Bist (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: boot=SHOES_LEATHER_SET2, cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_KEEPER, secondhand=None",
+     "party_size": {
+      "max": 15,
+      "min": 15
+     },
+     "patch": null,
+     "published": "2026-01-03",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_HELL",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
+     "role": "tank",
+     "source": {
+      "author": "Bist (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/2S582RBP"
+     },
+     "spells": {
+      "e": "GROUNDBREAKER2",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
     }
    ],
    "2H_ROCKSTAFF_KEEPER": [
@@ -800,7 +1339,7 @@
      "build_id": "timothy_blap_blackzone_roam_2026_08:blap:9",
      "caller": "Timothy",
      "canonical": true,
-     "canonical_basis": "explicit shotcaller approval",
+     "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
       "item_mapping": 0.86,
@@ -850,6 +1389,65 @@
      "style": "brawl",
      "unknowns": [],
      "w": 2
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_bist_roam15_2026_01:comp:2",
+     "caller": "Bist (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_SMUGGLER, food=None, helm=HEAD_PLATE_SET2, armor=ARMOR_PLATE_HELL, secondhand=None",
+     "party_size": {
+      "max": 15,
+      "min": 15
+     },
+     "patch": null,
+     "published": "2026-01-03",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SHIELD_AVALON",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "role": "support",
+     "source": {
+      "author": "Bist (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/2S582RBP"
+     },
+     "spells": {
+      "e": "ENFEEBLEBLADES",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
     }
    ],
    "MAIN_DAGGER_HELL": [
@@ -863,7 +1461,7 @@
      "build_id": "timothy_blap_blackzone_roam_2026_08:blap:12",
      "caller": "Timothy",
      "canonical": true,
-     "canonical_basis": "explicit shotcaller approval",
+     "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
       "item_mapping": 0.86,
@@ -913,6 +1511,124 @@
      "style": "brawl",
      "unknowns": [],
      "w": 1
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_bist_roam15_2026_01:comp:13",
+     "caller": "Bist (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: cape=CAPEITEM_SMUGGLER, armor=ARMOR_LEATHER_FEY",
+     "party_size": {
+      "max": 15,
+      "min": 15
+     },
+     "patch": null,
+     "published": "2026-01-03",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_STEW",
+      "head": "HEAD_PLATE_SET1",
+      "offhand": "OFF_DEMONSKULL_HELL",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
+     "role": "dps",
+     "source": {
+      "author": "Bist (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/2S582RBP"
+     },
+     "spells": {
+      "e": "BLOOD_BLADE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_bist_roam15_2026_01:comp:14",
+     "caller": "Bist (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_SET2, secondhand=None",
+     "party_size": {
+      "max": 15,
+      "min": 15
+     },
+     "patch": null,
+     "published": "2026-01-03",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_STEW",
+      "head": "HEAD_PLATE_SET1",
+      "offhand": "OFF_DEMONSKULL_HELL",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "role": "dps",
+     "source": {
+      "author": "Bist (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/2S582RBP"
+     },
+     "spells": {
+      "e": "BLOOD_BLADE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
     }
    ],
    "MAIN_HOLYSTAFF_AVALON": [
@@ -926,7 +1642,7 @@
      "build_id": "timothy_blap_blackzone_roam_2026_08:blap:16",
      "caller": "Timothy",
      "canonical": true,
-     "canonical_basis": "explicit shotcaller approval",
+     "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
       "item_mapping": 1.0,
@@ -1033,6 +1749,124 @@
      "style": "brawl",
      "unknowns": [],
      "w": 2
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_bist_roam15_2026_01:comp:6",
+     "caller": "Bist (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: helm=HEAD_PLATE_SET3, secondhand=OFF_HORN_KEEPER",
+     "party_size": {
+      "max": 15,
+      "min": 15
+     },
+     "patch": null,
+     "published": "2026-01-03",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_OMELETTE",
+      "head": "HEAD_LEATHER_SET1",
+      "offhand": "OFF_TOWERSHIELD_UNDEAD",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
+     "role": "healer",
+     "source": {
+      "author": "Bist (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/2S582RBP"
+     },
+     "spells": {
+      "e": "DIVINE_JUMP",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_bist_roam15_2026_01:comp:8",
+     "caller": "Bist (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: boot=SHOES_LEATHER_MORGANA, cape=None, helm=HEAD_LEATHER_SET1, secondhand=OFF_ORB_MORGANA",
+     "party_size": {
+      "max": 15,
+      "min": 15
+     },
+     "patch": null,
+     "published": "2026-01-03",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_PLATE_SET3",
+      "offhand": "OFF_TOWERSHIELD_UNDEAD",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
+     "role": "healer",
+     "source": {
+      "author": "Bist (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/2S582RBP"
+     },
+     "spells": {
+      "e": "DIVINE_JUMP",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
     }
    ],
    "MAIN_MACE": [
@@ -1046,7 +1880,7 @@
      "build_id": "timothy_blap_blackzone_roam_2026_08:blap:4",
      "caller": "Timothy",
      "canonical": true,
-     "canonical_basis": "explicit shotcaller approval",
+     "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
       "item_mapping": 0.86,
@@ -1096,6 +1930,65 @@
      "style": "brawl",
      "unknowns": [],
      "w": 2
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_bist_roam15_2026_01:comp:0",
+     "caller": "Bist (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: boot=SHOES_LEATHER_ROYAL, cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_KEEPER, potion=None",
+     "party_size": {
+      "max": 15,
+      "min": 15
+     },
+     "patch": null,
+     "published": "2026-01-03",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_SANDWICH_AVALON",
+      "head": "HEAD_CLOTH_SET2",
+      "offhand": "OFF_SHIELD",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
+     "role": "tank",
+     "source": {
+      "author": "Bist (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/2S582RBP"
+     },
+     "spells": {
+      "e": "MACELEAP",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
     }
    ],
    "MAIN_MACE_CRYSTAL": [
@@ -12744,919 +13637,6 @@
      },
      "spells": {
       "e": "LANCE_CHARGE",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": "brawl",
-     "unknowns": [
-      "passive",
-      "q",
-      "w"
-     ]
-    }
-   ]
-  },
-  "zvz_roam15": {
-   "2H_ARCANESTAFF": [
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "candidate",
-     "approval_basis": "publicly shared comp; no caller approval attached",
-     "build_id": "albioncompo_bist_roam15_2026_01:comp:3",
-     "caller": "Bist (albioncompo.com, legacy record)",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.0,
-      "loadout_completeness": 0.67,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 0.2,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "gear": {},
-     "note": "alts: boot=SHOES_LEATHER_MORGANA, cape=CAPEITEM_SMUGGLER, secondhand=None",
-     "party_size": {
-      "max": 15,
-      "min": 15
-     },
-     "patch": null,
-     "published": "2026-01-03",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "ARMOR_PLATE_SET2",
-      "cape": "CAPEITEM_FW_LYMHURST",
-      "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_AVALON"
-     },
-     "role": "support",
-     "source": {
-      "author": "Bist (albioncompo.com, legacy record)",
-      "family": "albioncompo",
-      "kind": "manual_link",
-      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
-      "url": "https://www.albioncompo.com/comp/2S582RBP"
-     },
-     "spells": {
-      "e": "TIME_FREEZE",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": "brawl",
-     "unknowns": [
-      "gear.offhand",
-      "passive",
-      "q",
-      "w"
-     ]
-    }
-   ],
-   "2H_AXE_AVALON": [
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "candidate",
-     "approval_basis": "publicly shared comp; no caller approval attached",
-     "build_id": "albioncompo_bist_roam15_2026_01:comp:12",
-     "caller": "Bist (albioncompo.com, legacy record)",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.0,
-      "loadout_completeness": 0.67,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 0.2,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "gear": {},
-     "note": "alts: cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_SET2, armor=ARMOR_LEATHER_HELL",
-     "party_size": {
-      "max": 15,
-      "min": 15
-     },
-     "patch": null,
-     "published": "2026-01-03",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "ARMOR_LEATHER_FEY",
-      "cape": "CAPEITEM_FW_LYMHURST",
-      "food": "MEAL_STEW_FISH",
-      "head": "HEAD_PLATE_SET1",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
-     },
-     "role": "dps",
-     "source": {
-      "author": "Bist (albioncompo.com, legacy record)",
-      "family": "albioncompo",
-      "kind": "manual_link",
-      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
-      "url": "https://www.albioncompo.com/comp/2S582RBP"
-     },
-     "spells": {
-      "e": "LETHAL_CLEAVER",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": "brawl",
-     "unknowns": [
-      "gear.offhand",
-      "passive",
-      "q",
-      "w"
-     ]
-    }
-   ],
-   "2H_CLEAVER_HELL": [
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "candidate",
-     "approval_basis": "publicly shared comp; no caller approval attached",
-     "build_id": "albioncompo_bist_roam15_2026_01:comp:10",
-     "caller": "Bist (albioncompo.com, legacy record)",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.0,
-      "loadout_completeness": 0.67,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 0.2,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "gear": {},
-     "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_SMUGGLER, food=MEAL_OMELETTE_AVALON, helm=HEAD_PLATE_SET1, armor=ARMOR_PLATE_ROYAL, secondhand=None",
-     "party_size": {
-      "max": 15,
-      "min": 15
-     },
-     "patch": null,
-     "published": "2026-01-03",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "ARMOR_LEATHER_HELL",
-      "cape": "CAPEITEM_FW_LYMHURST",
-      "food": "MEAL_STEW_FISH",
-      "head": "HEAD_PLATE_SET2",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
-     },
-     "role": "dps",
-     "source": {
-      "author": "Bist (albioncompo.com, legacy record)",
-      "family": "albioncompo",
-      "kind": "manual_link",
-      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
-      "url": "https://www.albioncompo.com/comp/2S582RBP"
-     },
-     "spells": {
-      "e": "CLAYMORESLASH",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": "brawl",
-     "unknowns": [
-      "gear.offhand",
-      "passive",
-      "q",
-      "w"
-     ]
-    }
-   ],
-   "2H_DUALMACE_AVALON": [
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "candidate",
-     "approval_basis": "publicly shared comp; no caller approval attached",
-     "build_id": "albioncompo_bist_roam15_2026_01:comp:4",
-     "caller": "Bist (albioncompo.com, legacy record)",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.0,
-      "loadout_completeness": 0.67,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 0.2,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "gear": {},
-     "note": "alts: boot=SHOES_PLATE_SET3, cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH, armor=ARMOR_PLATE_HELL, secondhand=None",
-     "party_size": {
-      "max": 15,
-      "min": 15
-     },
-     "patch": null,
-     "published": "2026-01-03",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
-      "cape": "CAPEITEM_FW_LYMHURST",
-      "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_AVALON"
-     },
-     "role": "support",
-     "source": {
-      "author": "Bist (albioncompo.com, legacy record)",
-      "family": "albioncompo",
-      "kind": "manual_link",
-      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
-      "url": "https://www.albioncompo.com/comp/2S582RBP"
-     },
-     "spells": {
-      "e": "BLESSED_MACES",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": "brawl",
-     "unknowns": [
-      "gear.offhand",
-      "passive",
-      "q",
-      "w"
-     ]
-    }
-   ],
-   "2H_ICECRYSTAL_UNDEAD": [
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "candidate",
-     "approval_basis": "publicly shared comp; no caller approval attached",
-     "build_id": "albioncompo_bist_roam15_2026_01:comp:9",
-     "caller": "Bist (albioncompo.com, legacy record)",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.0,
-      "loadout_completeness": 0.67,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 0.2,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "gear": {},
-     "note": "alts: cape=CAPEITEM_SMUGGLER",
-     "party_size": {
-      "max": 15,
-      "min": 15
-     },
-     "patch": null,
-     "published": "2026-01-03",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "ARMOR_CLOTH_SET1",
-      "cape": "CAPEITEM_FW_LYMHURST",
-      "food": "MEAL_OMELETTE",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
-     },
-     "role": "rdps",
-     "source": {
-      "author": "Bist (albioncompo.com, legacy record)",
-      "family": "albioncompo",
-      "kind": "manual_link",
-      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
-      "url": "https://www.albioncompo.com/comp/2S582RBP"
-     },
-     "spells": {
-      "e": "FROST_ULTIMATE",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": "brawl",
-     "unknowns": [
-      "gear.offhand",
-      "passive",
-      "q",
-      "w"
-     ]
-    }
-   ],
-   "2H_KNUCKLES_SET3": [
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "candidate",
-     "approval_basis": "publicly shared comp; no caller approval attached",
-     "build_id": "albioncompo_bist_roam15_2026_01:comp:11",
-     "caller": "Bist (albioncompo.com, legacy record)",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.0,
-      "loadout_completeness": 0.67,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 0.2,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "gear": {},
-     "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_SMUGGLER, helm=None, armor=ARMOR_LEATHER_HELL, secondhand=None",
-     "party_size": {
-      "max": 15,
-      "min": 15
-     },
-     "patch": null,
-     "published": "2026-01-03",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "ARMOR_LEATHER_AVALON",
-      "cape": "CAPEITEM_FW_LYMHURST",
-      "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_FEY",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
-     },
-     "role": "dps",
-     "source": {
-      "author": "Bist (albioncompo.com, legacy record)",
-      "family": "albioncompo",
-      "kind": "manual_link",
-      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
-      "url": "https://www.albioncompo.com/comp/2S582RBP"
-     },
-     "spells": {
-      "e": "IMPULSE_PUNCH",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": "brawl",
-     "unknowns": [
-      "gear.offhand",
-      "passive",
-      "q",
-      "w"
-     ]
-    }
-   ],
-   "2H_MACE": [
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "candidate",
-     "approval_basis": "publicly shared comp; no caller approval attached",
-     "build_id": "albioncompo_bist_roam15_2026_01:comp:1",
-     "caller": "Bist (albioncompo.com, legacy record)",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.0,
-      "loadout_completeness": 0.67,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 0.2,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "gear": {},
-     "note": "alts: boot=SHOES_CLOTH_FEY, cape=CAPEITEM_SMUGGLER, helm=HEAD_LEATHER_SET3, armor=ARMOR_PLATE_HELL",
-     "party_size": {
-      "max": 15,
-      "min": 15
-     },
-     "patch": null,
-     "published": "2026-01-03",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "ARMOR_PLATE_SET2",
-      "cape": "CAPEITEM_FW_LYMHURST",
-      "food": "MEAL_SANDWICH",
-      "head": "HEAD_PLATE_KEEPER",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_ROYAL"
-     },
-     "role": "tank",
-     "source": {
-      "author": "Bist (albioncompo.com, legacy record)",
-      "family": "albioncompo",
-      "kind": "manual_link",
-      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
-      "url": "https://www.albioncompo.com/comp/2S582RBP"
-     },
-     "spells": {
-      "e": "SHRIEKMACE",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": "brawl",
-     "unknowns": [
-      "gear.offhand",
-      "passive",
-      "q",
-      "w"
-     ]
-    }
-   ],
-   "2H_NATURESTAFF_HELL": [
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "candidate",
-     "approval_basis": "publicly shared comp; no caller approval attached",
-     "build_id": "albioncompo_bist_roam15_2026_01:comp:7",
-     "caller": "Bist (albioncompo.com, legacy record)",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.0,
-      "loadout_completeness": 0.67,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 0.2,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "gear": {},
-     "note": "alts: boot=SHOES_LEATHER_ROYAL, armor=ARMOR_CLOTH_SET2, secondhand=None",
-     "party_size": {
-      "max": 15,
-      "min": 15
-     },
-     "patch": null,
-     "published": "2026-01-03",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_FW_LYMHURST",
-      "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_SET1"
-     },
-     "role": "healer",
-     "source": {
-      "author": "Bist (albioncompo.com, legacy record)",
-      "family": "albioncompo",
-      "kind": "manual_link",
-      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
-      "url": "https://www.albioncompo.com/comp/2S582RBP"
-     },
-     "spells": {
-      "e": "ROTTENVINES",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": "brawl",
-     "unknowns": [
-      "gear.offhand",
-      "passive",
-      "q",
-      "w"
-     ]
-    }
-   ],
-   "2H_POLEHAMMER": [
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "candidate",
-     "approval_basis": "publicly shared comp; no caller approval attached",
-     "build_id": "albioncompo_bist_roam15_2026_01:comp:5",
-     "caller": "Bist (albioncompo.com, legacy record)",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.0,
-      "loadout_completeness": 0.67,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 0.2,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "gear": {},
-     "note": "alts: boot=SHOES_LEATHER_SET2, cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_KEEPER, secondhand=None",
-     "party_size": {
-      "max": 15,
-      "min": 15
-     },
-     "patch": null,
-     "published": "2026-01-03",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "ARMOR_PLATE_SET2",
-      "cape": "CAPEITEM_FW_LYMHURST",
-      "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_HELL",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_ROYAL"
-     },
-     "role": "tank",
-     "source": {
-      "author": "Bist (albioncompo.com, legacy record)",
-      "family": "albioncompo",
-      "kind": "manual_link",
-      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
-      "url": "https://www.albioncompo.com/comp/2S582RBP"
-     },
-     "spells": {
-      "e": "GROUNDBREAKER2",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": "brawl",
-     "unknowns": [
-      "gear.offhand",
-      "passive",
-      "q",
-      "w"
-     ]
-    }
-   ],
-   "MAIN_CURSEDSTAFF_UNDEAD": [
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "candidate",
-     "approval_basis": "publicly shared comp; no caller approval attached",
-     "build_id": "albioncompo_bist_roam15_2026_01:comp:2",
-     "caller": "Bist (albioncompo.com, legacy record)",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.0,
-      "loadout_completeness": 0.75,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 0.2,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "gear": {},
-     "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_SMUGGLER, food=None, helm=HEAD_PLATE_SET2, armor=ARMOR_PLATE_HELL, secondhand=None",
-     "party_size": {
-      "max": 15,
-      "min": 15
-     },
-     "patch": null,
-     "published": "2026-01-03",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
-      "cape": "CAPEITEM_FW_LYMHURST",
-      "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_SHIELD_AVALON",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
-     },
-     "role": "support",
-     "source": {
-      "author": "Bist (albioncompo.com, legacy record)",
-      "family": "albioncompo",
-      "kind": "manual_link",
-      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
-      "url": "https://www.albioncompo.com/comp/2S582RBP"
-     },
-     "spells": {
-      "e": "ENFEEBLEBLADES",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": "brawl",
-     "unknowns": [
-      "passive",
-      "q",
-      "w"
-     ]
-    }
-   ],
-   "MAIN_DAGGER_HELL": [
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "candidate",
-     "approval_basis": "publicly shared comp; no caller approval attached",
-     "build_id": "albioncompo_bist_roam15_2026_01:comp:13",
-     "caller": "Bist (albioncompo.com, legacy record)",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.0,
-      "loadout_completeness": 0.75,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 0.2,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "gear": {},
-     "note": "alts: cape=CAPEITEM_SMUGGLER, armor=ARMOR_LEATHER_FEY",
-     "party_size": {
-      "max": 15,
-      "min": 15
-     },
-     "patch": null,
-     "published": "2026-01-03",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "ARMOR_LEATHER_HELL",
-      "cape": "CAPEITEM_FW_LYMHURST",
-      "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET1",
-      "offhand": "OFF_DEMONSKULL_HELL",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_AVALON"
-     },
-     "role": "dps",
-     "source": {
-      "author": "Bist (albioncompo.com, legacy record)",
-      "family": "albioncompo",
-      "kind": "manual_link",
-      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
-      "url": "https://www.albioncompo.com/comp/2S582RBP"
-     },
-     "spells": {
-      "e": "BLOOD_BLADE",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": "brawl",
-     "unknowns": [
-      "passive",
-      "q",
-      "w"
-     ]
-    },
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "candidate",
-     "approval_basis": "publicly shared comp; no caller approval attached",
-     "build_id": "albioncompo_bist_roam15_2026_01:comp:14",
-     "caller": "Bist (albioncompo.com, legacy record)",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.0,
-      "loadout_completeness": 0.75,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 0.2,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "gear": {},
-     "note": "alts: cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_SET2, secondhand=None",
-     "party_size": {
-      "max": 15,
-      "min": 15
-     },
-     "patch": null,
-     "published": "2026-01-03",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "ARMOR_LEATHER_HELL",
-      "cape": "CAPEITEM_FW_LYMHURST",
-      "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET1",
-      "offhand": "OFF_DEMONSKULL_HELL",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
-     },
-     "role": "dps",
-     "source": {
-      "author": "Bist (albioncompo.com, legacy record)",
-      "family": "albioncompo",
-      "kind": "manual_link",
-      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
-      "url": "https://www.albioncompo.com/comp/2S582RBP"
-     },
-     "spells": {
-      "e": "BLOOD_BLADE",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": "brawl",
-     "unknowns": [
-      "passive",
-      "q",
-      "w"
-     ]
-    }
-   ],
-   "MAIN_HOLYSTAFF_AVALON": [
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "candidate",
-     "approval_basis": "publicly shared comp; no caller approval attached",
-     "build_id": "albioncompo_bist_roam15_2026_01:comp:6",
-     "caller": "Bist (albioncompo.com, legacy record)",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.0,
-      "loadout_completeness": 0.75,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 0.2,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "gear": {},
-     "note": "alts: helm=HEAD_PLATE_SET3, secondhand=OFF_HORN_KEEPER",
-     "party_size": {
-      "max": 15,
-      "min": 15
-     },
-     "patch": null,
-     "published": "2026-01-03",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_FW_LYMHURST",
-      "food": "MEAL_OMELETTE",
-      "head": "HEAD_LEATHER_SET1",
-      "offhand": "OFF_TOWERSHIELD_UNDEAD",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_SET1"
-     },
-     "role": "healer",
-     "source": {
-      "author": "Bist (albioncompo.com, legacy record)",
-      "family": "albioncompo",
-      "kind": "manual_link",
-      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
-      "url": "https://www.albioncompo.com/comp/2S582RBP"
-     },
-     "spells": {
-      "e": "DIVINE_JUMP",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": "brawl",
-     "unknowns": [
-      "passive",
-      "q",
-      "w"
-     ]
-    },
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "candidate",
-     "approval_basis": "publicly shared comp; no caller approval attached",
-     "build_id": "albioncompo_bist_roam15_2026_01:comp:8",
-     "caller": "Bist (albioncompo.com, legacy record)",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.0,
-      "loadout_completeness": 0.75,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 0.2,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "gear": {},
-     "note": "alts: boot=SHOES_LEATHER_MORGANA, cape=None, helm=HEAD_LEATHER_SET1, secondhand=OFF_ORB_MORGANA",
-     "party_size": {
-      "max": 15,
-      "min": 15
-     },
-     "patch": null,
-     "published": "2026-01-03",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_FW_LYMHURST",
-      "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_PLATE_SET3",
-      "offhand": "OFF_TOWERSHIELD_UNDEAD",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_SET1"
-     },
-     "role": "healer",
-     "source": {
-      "author": "Bist (albioncompo.com, legacy record)",
-      "family": "albioncompo",
-      "kind": "manual_link",
-      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
-      "url": "https://www.albioncompo.com/comp/2S582RBP"
-     },
-     "spells": {
-      "e": "DIVINE_JUMP",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": "brawl",
-     "unknowns": [
-      "passive",
-      "q",
-      "w"
-     ]
-    }
-   ],
-   "MAIN_MACE": [
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "candidate",
-     "approval_basis": "publicly shared comp; no caller approval attached",
-     "build_id": "albioncompo_bist_roam15_2026_01:comp:0",
-     "caller": "Bist (albioncompo.com, legacy record)",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.0,
-      "loadout_completeness": 0.75,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 0.2,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "gear": {},
-     "note": "alts: boot=SHOES_LEATHER_ROYAL, cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_KEEPER, potion=None",
-     "party_size": {
-      "max": 15,
-      "min": 15
-     },
-     "patch": null,
-     "published": "2026-01-03",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
-      "cape": "CAPEITEM_FW_LYMHURST",
-      "food": "MEAL_SANDWICH_AVALON",
-      "head": "HEAD_CLOTH_SET2",
-      "offhand": "OFF_SHIELD",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_AVALON"
-     },
-     "role": "tank",
-     "source": {
-      "author": "Bist (albioncompo.com, legacy record)",
-      "family": "albioncompo",
-      "kind": "manual_link",
-      "record": "Public composition \"Roam 15\" by Bist (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
-      "url": "https://www.albioncompo.com/comp/2S582RBP"
-     },
-     "spells": {
-      "e": "MACELEAP",
       "passive": null,
       "q": null,
       "w": null

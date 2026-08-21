@@ -1,4 +1,18 @@
 # ---------------------------------------------------------------------------
+# COMP-FITTED RECALIBRATION 2026-08-21 (owner directive: real comps set the
+# numbers). Targets/soft caps below marked (comp-fit) were re-fitted from the
+# TWO independent real blackzone brawl comps measured in CURRENT engine units
+# (geometric AoE included): Timothy's blap (20) + Bist's "Roam 15" (15,
+# albioncompo - independent of the original calibration). Rule: target = 0.9x
+# the least any good comp fields, soft = 1.15x the most; rows where the two
+# comps disagree (burst_aoe, clump_create, heal_reduction, tankiness) were
+# left untouched, and ranged_presence was deliberately NOT lowered - both
+# evidence comps are brawl balls and that row is the style carrier (needs
+# kite-comp evidence before its balanced target moves). This resolves the
+# 2026-08-21 audit's F1 (geometric units), F4 (bundled-supply softs) and F6
+# (heal caps below real healer counts) for this template.
+# ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # UNIT RESCALE 2026-08-18 — targets, soft caps and floor units below are
 # expressed in LOADOUT-RESOLVED units (x0.837 from the previous flat-union
 # units). Nothing here was re-tuned: the engine used to credit a party member
@@ -39,24 +53,22 @@ base_size: 20
 validated_sizes: [20]
 
 requirements:
-  heal_sustain:   {target: 7.5,  weight: 10, soft_cap: 10.9, scales: true}
-  heal_burst:     {target: 4.2,  weight: 6,  soft_cap: 6.7,  scales: true}
+  heal_sustain:   {target: 7.5,  weight: 10, soft_cap: 13.8, scales: true}  # (comp-fit 2026-08-21)
+  heal_burst:     {target: 8.1,  weight: 6,  soft_cap: 10.7,  scales: true}  # (comp-fit 2026-08-21)
   tankiness:      {target: 9.2, weight: 9,  soft_cap: 13.4, scales: true}
-  peel:           {target: 6.7,  weight: 8,  soft_cap: 11.7, scales: true}
-  engage:         {target: 5.0,  weight: 8,  soft_cap: 8.4, scales: true}
-  catch:          {target: 4.2,  weight: 7,  soft_cap: 7.5,  scales: true}
-  mobility:       {target: 6.7,  weight: 6,  soft_cap: 13.4, scales: true}
+  peel:           {target: 40.3,  weight: 8,  soft_cap: 58.9, scales: true}  # (comp-fit 2026-08-21)
+  engage:         {target: 11.7,  weight: 8,  soft_cap: 23.0, scales: true}  # (comp-fit 2026-08-21)
+  catch:          {target: 12.2,  weight: 7,  soft_cap: 23.2,  scales: true}  # (comp-fit 2026-08-21)
+  mobility:       {target: 19.8,  weight: 6,  soft_cap: 30.7, scales: true}  # (comp-fit 2026-08-21)
   burst_aoe:      {target: 10.0, weight: 8,  soft_cap: 16.7, scales: true}
-  sustained_dps:  {target: 6.7,  weight: 5,  soft_cap: 13.4, scales: true}
-  # single-target damage is WEAK in 20-man group content: enemy heals +
+  sustained_dps:  {target: 14.4,  weight: 5,  soft_cap: 19.9, scales: true}  # (comp-fit 2026-08-21)
   # Resilience (focus-fire damage reduction) overpower damage piled on one
   # player, so a dedicated single-target slot buys little (expert ruling
   # 2026-08-14, "single-target dive isn't needed past ~5 players"). Kept a
   # token weight (kill-secure still happens) — not zeroed like castle_outpost.
-  burst_st:       {target: 1.7,  weight: 1,  soft_cap: 3.3,  scales: true}
-  stun:           {target: 4.2,  weight: 4,  soft_cap: 8.4, scales: true}
-  zone_control:   {target: 2.5,  weight: 3,  soft_cap: 6.7,  scales: true}
-  # Positioning — "can this comp put damage on a clump from outside it".
+  burst_st:       {target: 1.7,  weight: 1,  soft_cap: 3.3,  scales: true}  # NOT comp-fit: blap's 7.0 is incidental melee cleave; golden T15's expert scale ruling outranks the fitting rule
+  stun:           {target: 4.2,  weight: 4,  soft_cap: 36.2, scales: true}  # (comp-fit 2026-08-21)
+  zone_control:   {target: 9.0,  weight: 3,  soft_cap: 13.8,  scales: true}  # (comp-fit 2026-08-21)
   # Since 2026-08-19 derived per spell bundle from the curated burst_aoe
   # claim + the spell's own delivery/cast range with cited overrides
   # (build_dataset.derive_ranged_presence, audit in
@@ -72,15 +84,14 @@ requirements:
   ranged_presence: {target: 5.0, weight: 4,  soft_cap: 10.0, scales: true}
   # threshold needs — one or two dedicated slots regardless of size
   clump_create:   {target: 2.5,  weight: 7,  soft_cap: 4.2,  scales: false}
-  purge:          {target: 1.7,  weight: 6,  soft_cap: 3.3,  scales: false}
+  purge:          {target: 4.5,  weight: 6,  soft_cap: 6.9,  scales: false}  # (comp-fit 2026-08-21)
   heal_reduction: {target: 1.7,  weight: 6,  soft_cap: 3.3,  scales: false}
-  resist_shred:   {target: 2.5,  weight: 5,  soft_cap: 5.0,  scales: false}
-  disengage:      {target: 1.7,  weight: 5,  soft_cap: 3.3,  scales: false}
-  execute:        {target: 0.8,  weight: 1,  soft_cap: 1.7,  scales: false}  # single-target kill-secure; weak at scale (see burst_st)
+  resist_shred:   {target: 5.0,  weight: 5,  soft_cap: 12.6,  scales: false}  # (comp-fit 2026-08-21)
+  disengage:      {target: 6.3,  weight: 5,  soft_cap: 9.2,  scales: false}  # (comp-fit 2026-08-21)
+  execute:        {target: 0.8,  weight: 1,  soft_cap: 1.7,  scales: false}  # NOT comp-fit: same T15 guard as burst_st
   buff_allies:    {target: 2.5,  weight: 4,  soft_cap: 5.0,  scales: false}
-  cleanse:        {target: 0.8,  weight: 4,  soft_cap: 2.5,  scales: false}
-  silence:        {target: 0.8,  weight: 4,  soft_cap: 2.5,  scales: false}
-  # PROVISIONAL low-and-flat (castle_outpost precedent): enemy-dependent
+  cleanse:        {target: 0.8,  weight: 4,  soft_cap: 4.6,  scales: false}  # (comp-fit 2026-08-21)
+  silence:        {target: 7.1,  weight: 4,  soft_cap: 10.2,  scales: false}  # (comp-fit 2026-08-21)
   # capabilities must never dominate a recommendation on unvalidated numbers.
   # REWEIGHT 2026-08-18: still PROVISIONAL and deliberately "low and flat so
   # an unvalidated number can never dominate a recommendation" — but concave

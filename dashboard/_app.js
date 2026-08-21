@@ -831,8 +831,16 @@ function renderGroups(){
       const below = floorHit(c, have);
       const over = have > soft;
       const cls = over ? "over" : have === 0 ? "none" : have >= t ? "met" : "part";
+      /* styles multiply a capability's WEIGHT, never its target — surface
+         that emphasis here so switching playstyles visibly (and truthfully)
+         changes the board: ×1.6 = this style values the cap more, ×0.7 less */
+      const baseW = REQS()[c].weight || 0;
+      const styledW = ENG.weight(c);
+      const mult = baseW ? styledW / baseW : 1;
+      const styleTag = Math.abs(mult - 1) < 0.01 ? "" :
+        `<span class="tag ${mult > 1 ? "style-up" : "style-down"}" title="this playstyle ${mult > 1 ? "raises" : "lowers"} ${c}'s weight (${baseW} → ${styledW.toFixed(1)}); targets never change with style — style changes what the engine emphasises, not what keeps a party alive">×${mult.toFixed(mult >= 1 ? 1 : 2)}</span>`;
       return `<div class="cap ${below ? "floor-hit" : ""}">
-        <button class="cap-name" data-cap="${c}" title="${esc(prose(c))} — click for evidence">${c}${below ? '<span class="tag floor">below floor</span>' : ""}${over ? '<span class="tag over">overstacked</span>' : ""}</button>
+        <button class="cap-name" data-cap="${c}" title="${esc(prose(c))} — click for evidence">${c}${below ? '<span class="tag floor">below floor</span>' : ""}${over ? '<span class="tag over">overstacked</span>' : ""}${styleTag}</button>
         <span class="cap-val">${have.toFixed(0)} / ${t.toFixed(1)}</span>
         <span class="cap-bar"><i class="${cls}" style="width:${over ? 100 : Math.min(100, have/t*100)}%"></i></span>
       </div>`;
