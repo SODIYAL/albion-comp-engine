@@ -1,0 +1,285 @@
+# Official Albion Character Builder GROUP build, retrieved by hand from the
+# site's public JSON API (manual_link source; a dedicated adapter with its
+# own source kind is planned). UNLIKE the albioncompo docs, this source
+# carries SPELL SELECTIONS: each slot's spells_verbatim block records the
+# game's own spell UniqueNames per item slot number, verbatim. skills stays
+# null until the adapter converts them to the q/w/p index form the
+# normalizer resolves (H8 semantics) - captured now, consumed later.
+kind: published_comp
+id: cb_kroozlt19_bomb_squad_2026_01
+source:
+  kind: manual_link
+  family: albion_character_builder
+  author: Kroozlt19 (albiononline.com character builder)
+  url: https://albiononline.com/characterbuilder/group-builds/view/210164
+  record: >
+    Public group build "BOMB LAMENTACIONES PAPU" (likes 1,
+    group size 10, 8 member builds) on the official
+    Character Builder; found via the site's recent-group-builds listing and
+    retrieved from its public API 2026-08-21.
+  license: publicly published on albiononline.com's Character Builder
+published: '2026-01-12'
+ingested: '2026-08-21'
+observed: null
+patch: null   # the source does not state the game patch
+snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
+content: bomb_squad_10   # an invisible Wailing-Bow one-shot bomb squad; no content stated; UNMAPPED
+party_size:
+  min: 8
+  max: 10
+approval:
+  status: candidate
+  basis: publicly published group build; no caller approval attached
+  approved_by: null
+  as_of: '2026-08-21'
+parties:
+- name: comp
+  slots:
+  - raw: T4_2H_BOW_HELL
+    weapons:
+    - 2H_BOW_HELL
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': AMBUSH}
+        passives: {'1': PASSIVE_ARMOR_BALANCE}
+      food:
+        actives: {'1': FOOD_BUFF_DMG_P5}
+      head:
+        actives: {'1': BLOCK}
+        passives: {'1': PASSIVE_MR_AR}
+      mainhand:
+        actives: {'3': HELL_ARROW}
+      potion:
+        actives: {'1': POTION_MAXHP_P3}
+      shoes:
+        actives: {'1': BLINDSPOT}
+        passives: {'1': PASSIVE_BALANCE}
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET1
+      armor: ARMOR_LEATHER_SET3
+      boots: SHOES_LEATHER_AVALON
+      cape: null
+      note: "BOMB TSQ LAMENTACIONES INVI"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T4_MAIN_ARCANESTAFF_UNDEAD
+    weapons:
+    - MAIN_ARCANESTAFF_UNDEAD
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': AMBUSH}
+        passives: {'1': PASSIVE_ARMOR_BALANCE}
+      food:
+        actives: {'1': FOOD_BUFF_DMG_P5}
+      head:
+        actives: {'1': BLOCK}
+        passives: {'1': PASSIVE_MR_AR}
+      mainhand:
+        actives: {'3': BLACKHOLE}
+      potion:
+        actives: {'1': POTION_MAXHP_P3}
+      shoes:
+        actives: {'1': BLINDSPOT}
+        passives: {'1': PASSIVE_BALANCE}
+    gear:
+      offhand: OFF_HORN_KEEPER
+      helm: HEAD_PLATE_SET1
+      armor: ARMOR_LEATHER_SET3
+      boots: SHOES_LEATHER_AVALON
+      cape: null
+      note: "BOMB TSQ BRUJERIA"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T4_MAIN_CURSEDSTAFF_UNDEAD
+    weapons:
+    - MAIN_CURSEDSTAFF_UNDEAD
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': AMBUSH}
+        passives: {'1': PASSIVE_ARMOR_BALANCE}
+      food:
+        actives: {'1': FOOD_BUFF_DMG_P5}
+      head:
+        actives: {'1': BLOCK}
+        passives: {'1': PASSIVE_MR_AR}
+      mainhand:
+        actives: {'3': ENFEEBLEBLADES}
+      potion:
+        actives: {'1': POTION_MAXHP_P3}
+      shoes:
+        actives: {'1': BLINDSPOT}
+        passives: {'1': PASSIVE_BALANCE}
+    gear:
+      offhand: OFF_HORN_KEEPER
+      helm: HEAD_PLATE_SET1
+      armor: ARMOR_LEATHER_SET3
+      boots: SHOES_LEATHER_AVALON
+      cape: null
+      note: "BOMB TSQ MALDICIONES DE VIDA"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T4_2H_BOW_HELL
+    weapons:
+    - 2H_BOW_HELL
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': AMBUSH}
+        passives: {'1': PASSIVE_ARMOR_BALANCE}
+      food:
+        actives: {'1': FOOD_BUFF_DMG_P5}
+      head:
+        actives: {'1': BLOCK}
+        passives: {'1': PASSIVE_MR_AR}
+      mainhand:
+        actives: {'3': HELL_ARROW}
+      potion:
+        actives: {'1': POTION_MAXHP_P3}
+      shoes:
+        actives: {'1': BLINDSPOT}
+        passives: {'1': PASSIVE_BALANCE}
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET1
+      armor: ARMOR_LEATHER_SET3
+      boots: SHOES_LEATHER_AVALON
+      cape: null
+      note: "BOMB TSQ LAMENTACIONES INVI"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T4_2H_BOW_HELL
+    weapons:
+    - 2H_BOW_HELL
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': AMBUSH}
+        passives: {'1': PASSIVE_ARMOR_BALANCE}
+      food:
+        actives: {'1': FOOD_BUFF_DMG_P5}
+      head:
+        actives: {'1': BLOCK}
+        passives: {'1': PASSIVE_MR_AR}
+      mainhand:
+        actives: {'3': HELL_ARROW}
+      potion:
+        actives: {'1': POTION_MAXHP_P3}
+      shoes:
+        actives: {'1': BLINDSPOT}
+        passives: {'1': PASSIVE_BALANCE}
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET1
+      armor: ARMOR_LEATHER_SET3
+      boots: SHOES_LEATHER_AVALON
+      cape: null
+      note: "BOMB TSQ LAMENTACIONES INVI"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T4_2H_BOW_HELL
+    weapons:
+    - 2H_BOW_HELL
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': AMBUSH}
+        passives: {'1': PASSIVE_ARMOR_BALANCE}
+      food:
+        actives: {'1': FOOD_BUFF_DMG_P5}
+      head:
+        actives: {'1': BLOCK}
+        passives: {'1': PASSIVE_MR_AR}
+      mainhand:
+        actives: {'3': HELL_ARROW}
+      potion:
+        actives: {'1': POTION_MAXHP_P3}
+      shoes:
+        actives: {'1': BLINDSPOT}
+        passives: {'1': PASSIVE_BALANCE}
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET1
+      armor: ARMOR_LEATHER_SET3
+      boots: SHOES_LEATHER_AVALON
+      cape: null
+      note: "BOMB TSQ LAMENTACIONES INVI"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T4_2H_BOW_HELL
+    weapons:
+    - 2H_BOW_HELL
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': AMBUSH}
+        passives: {'1': PASSIVE_ARMOR_BALANCE}
+      food:
+        actives: {'1': FOOD_BUFF_DMG_P5}
+      head:
+        actives: {'1': BLOCK}
+        passives: {'1': PASSIVE_MR_AR}
+      mainhand:
+        actives: {'3': HELL_ARROW}
+      potion:
+        actives: {'1': POTION_MAXHP_P3}
+      shoes:
+        actives: {'1': BLINDSPOT}
+        passives: {'1': PASSIVE_BALANCE}
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET1
+      armor: ARMOR_LEATHER_SET3
+      boots: SHOES_LEATHER_AVALON
+      cape: null
+      note: "BOMB TSQ LAMENTACIONES INVI"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T4_2H_BOW_HELL
+    weapons:
+    - 2H_BOW_HELL
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': AMBUSH}
+        passives: {'1': PASSIVE_ARMOR_BALANCE}
+      food:
+        actives: {'1': FOOD_BUFF_DMG_P5}
+      head:
+        actives: {'1': BLOCK}
+        passives: {'1': PASSIVE_MR_AR}
+      mainhand:
+        actives: {'3': HELL_ARROW}
+      potion:
+        actives: {'1': POTION_MAXHP_P3}
+      shoes:
+        actives: {'1': BLINDSPOT}
+        passives: {'1': PASSIVE_BALANCE}
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET1
+      armor: ARMOR_LEATHER_SET3
+      boots: SHOES_LEATHER_AVALON
+      cape: null
+      note: "BOMB TSQ LAMENTACIONES INVI"
+    potion: POTION_REVIVE
+    food: MEAL_STEW

@@ -1,0 +1,673 @@
+# Official Albion Character Builder GROUP build, retrieved by hand from the
+# site's public JSON API (manual_link source; a dedicated adapter with its
+# own source kind is planned). UNLIKE the albioncompo docs, this source
+# carries SPELL SELECTIONS: each slot's spells_verbatim block records the
+# game's own spell UniqueNames per item slot number, verbatim. skills stays
+# null until the adapter converts them to the q/w/p index form the
+# normalizer resolves (H8 semantics) - captured now, consumed later.
+kind: published_comp
+id: cb_clonepeek_zvz20_2026_03
+source:
+  kind: manual_link
+  family: albion_character_builder
+  author: clonepeek (albiononline.com character builder)
+  url: https://albiononline.com/characterbuilder/group-builds/view/211312
+  record: >
+    Public group build "The build zvz was created by clonepeek." (likes 2,
+    group size 20, 20 member builds) on the official
+    Character Builder; found via the site's recent-group-builds listing and
+    retrieved from its public API 2026-08-21.
+  license: publicly published on albiononline.com's Character Builder
+published: '2026-03-29'
+ingested: '2026-08-21'
+observed: null
+patch: null   # the source does not state the game patch
+snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
+content: zvz_20man   # the author's description says only 'zvz' - kept UNMAPPED until the owner rules
+party_size:
+  min: 20
+  max: 20
+approval:
+  status: candidate
+  basis: publicly published group build; no caller approval attached
+  approved_by: null
+  as_of: '2026-08-21'
+parties:
+- name: comp
+  slots:
+  - raw: T8_2H_SHAPESHIFTER_KEEPER
+    weapons:
+    - 2H_SHAPESHIFTER_KEEPER
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': FORCESHIELD}
+        passives: {'1': PASSIVE_ARMOR_CCDURATION, '2': PASSIVE_PLATEARMOR_HEALTH_REDUCTION}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_AVALON_P5}
+      head:
+        actives: {'1': ICEBLOCK2}
+        passives: {'1': PASSIVE_CASTSPEED}
+      mainhand:
+        actives: {'1': SHAPE_Q_CONE_MELEE, '2': SHAPE_W_AREA_PULL, '3': SHAPESHIFT_ROCK_ELEMENTAL}
+        passives: {'1': PASSIVE_SHAPESHIFT_GATHER_CHARGES}
+      potion:
+        actives: {'1': POTION_MAXHP_P5}
+      shoes:
+        actives: {'1': OVERSPRINT}
+        passives: {'1': PASSIVE_CD_REDUCTION}
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_SET2
+      armor: ARMOR_PLATE_KEEPER
+      boots: SHOES_LEATHER_SET2
+      cape: null
+      note: "NeKso Build ZVZ Baston Terrunico [member build by NeKso]"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE_AVALON
+  - raw: T8_2H_MACE
+    weapons:
+    - 2H_MACE
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': ENFEEBLEAURA}
+        passives: {'1': PASSIVE_ARMOR_MR_AR, '2': PASSIVE_PLATEARMOR_HEALTH_REDUCTION}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_AVALON_P5}
+      head:
+        actives: {'1': SMOKEBOMB}
+        passives: {'1': PASSIVE_CD_REDUCTION}
+      mainhand:
+        actives: {'1': SACRED_GROUND, '2': CHARGE_ROOT, '3': SHRIEKMACE}
+        passives: {'1': PASSIVE_ENERGYCHANCE_MACE}
+      potion:
+        actives: {'1': POTION_MAXHP_P5}
+      shoes:
+        actives: {'1': CLEANSE_DASH}
+        passives: {'1': PASSIVE_CD_REDUCTION}
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_HELL
+      armor: ARMOR_PLATE_SET3
+      boots: SHOES_LEATHER_SET1
+      cape: null
+      note: "MA?A PESADA PYPELINE [member build by Robmalll]"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE_AVALON
+  - raw: T8_MAIN_ROCKMACE_KEEPER
+    weapons:
+    - MAIN_ROCKMACE_KEEPER
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': ARMOR_WEB}
+        passives: {'1': PASSIVE_ARMOR_MR_AR, '2': PASSIVE_PLATEARMOR_HEALTH_REDUCTION}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_AVALON_3}
+      head:
+        actives: {'1': SMOKEBOMB}
+        passives: {'1': PASSIVE_CD_REDUCTION}
+      mainhand:
+        actives: {'1': SACRED_GROUND, '2': CHARGE_ROOT, '3': PRIMALSLAM}
+        passives: {'1': PASSIVE_ENERGYCHANCE_MACE}
+      potion:
+        actives: {'1': POTION_MAXLOAD_3}
+      shoes:
+        actives: {'1': CLEANSE_DASH}
+        passives: {'1': PASSIVE_CD_REDUCTION}
+    gear:
+      offhand: OFF_HORN_KEEPER
+      helm: HEAD_LEATHER_HELL
+      armor: ARMOR_PLATE_FEY
+      boots: SHOES_LEATHER_SET1
+      cape: null
+      note: "Brawl bedrock [member build by Fliriya]"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE_AVALON
+  - raw: T8_2H_DUALMACE_AVALON
+    weapons:
+    - 2H_DUALMACE_AVALON
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': REFLECTAREA}
+        passives: {'1': PASSIVE_ARMOR_MR_AR, '2': PASSIVE_PLATEARMOR_HEALTH_REDUCTION}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_AVALON_P5}
+      head:
+        actives: {'1': SUMMONER_CD_REDUCTION}
+        passives: {'1': PASSIVE_CD_REDUCTION}
+      mainhand:
+        actives: {'1': SACRED_GROUND, '2': GUARDRUNE, '3': BLESSED_MACES}
+        passives: {'1': PASSIVE_ENERGYCHANCE_MACE}
+      potion:
+        actives: {'1': POTION_MAXHP_P5}
+      shoes:
+        actives: {'1': MAXHEALTHBUFF}
+        passives: {'1': PASSIVE_MR_AR}
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_HELL
+      boots: SHOES_PLATE_SET3
+      cape: null
+      note: "OathKeepers PvP [member build by Feniks360]"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE_AVALON
+  - raw: T8_2H_SHAPESHIFTER_SET2
+    weapons:
+    - 2H_SHAPESHIFTER_SET2
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': FORCESHIELD}
+        passives: {'1': PASSIVE_ARMOR_MR_AR, '2': PASSIVE_PLATEARMOR_HEALTH_REDUCTION}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_P5}
+      head:
+        actives: {'1': SUMMONER_CD_REDUCTION}
+        passives: {'1': PASSIVE_BALANCE}
+      mainhand:
+        actives: {'1': SHAPE_Q_DAMAGE_AND_SHIELD, '2': SHAPE_W_AREA_PULL, '3': SHAPESHIFT_ENT}
+        passives: {'1': PASSIVE_SHAPESHIFT_ATTACK_BUFF}
+      potion:
+        actives: {'1': POTION_MAXHP_P5}
+      shoes:
+        actives: {'1': CC_BLOCK}
+        passives: {'1': PASSIVE_MR_AR}
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_KEEPER
+      boots: SHOES_PLATE_AVALON
+      cape: null
+      note: "Enraizado ZvZ [member build by Jordyson888]"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE
+  - raw: T8_2H_ENIGMATICORB_MORGANA
+    weapons:
+    - 2H_ENIGMATICORB_MORGANA
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': REFLECTAREA}
+        passives: {'1': PASSIVE_ARMOR_MR_AR, '2': PASSIVE_PLATEARMOR_HEALTH_REDUCTION}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_P5}
+      head:
+        actives: {'1': SUMMONER_CD_REDUCTION}
+        passives: {'1': PASSIVE_BALANCE}
+      mainhand:
+        actives: {'1': SHIELDFRIENDLY, '2': CLEANSESPEED2, '3': VOID}
+        passives: {'1': PASSIVE_ENERGYCHANCE_ARCANESTAFF}
+      potion:
+        actives: {'1': POTION_MAXHP_P5}
+      shoes:
+        actives: {'1': CLEANSE_DASH}
+        passives: {'1': PASSIVE_BALANCE}
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_HELL
+      boots: SHOES_LEATHER_SET1
+      cape: null
+      note: "Locus ZVZ DOTH [member build by Artico6790]"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE
+  - raw: T8_2H_NATURESTAFF_HELL
+    weapons:
+    - 2H_NATURESTAFF_HELL
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': CASTBUBBLE}
+        passives: {'1': PASSIVE_ARMOR_INCREASED_CASTSPEED}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_AVALON_P5}
+      head:
+        actives: {'1': BLOCK}
+        passives: {'1': PASSIVE_MR_AR}
+      mainhand:
+        actives: {'1': REJUVMUSHROOM_GRENADE, '2': REJUVENATING_BREEZE, '3': ROTTENVINES}
+        passives: {'1': PASSIVE_HEALPOWERCHANCE}
+      potion:
+        actives: {'1': POTION_MAXHP_P5}
+      shoes:
+        actives: {'1': CLEANSE_DASH}
+        passives: {'1': PASSIVE_BALANCE}
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET1
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_LEATHER_SET1
+      cape: null
+      note: "Pustulento DOTH [member build by Artico6790]"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE_AVALON
+  - raw: T8_MAIN_HOLYSTAFF_AVALON
+    weapons:
+    - MAIN_HOLYSTAFF_AVALON
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': CASTBUBBLE}
+        passives: {'1': PASSIVE_ARMOR_INCREASED_DAMAGE}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_P5}
+      head:
+        actives: {'1': SELF_CLEANSE}
+        passives: {'1': PASSIVE_BALANCE}
+      mainhand:
+        actives: {'1': HOLYFLASH, '2': HEALINGBEAM, '3': DIVINE_JUMP}
+        passives: {'1': PASSIVE_HOLY_ASCENDED}
+      potion:
+        actives: {'1': POTION_RESISTANCE_P5}
+      shoes:
+        actives: {'1': CLEANSE_DASH}
+        passives: {'1': PASSIVE_MAXLOAD_SHOES}
+    gear:
+      offhand: OFF_HORN_KEEPER
+      helm: HEAD_LEATHER_AVALON
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_LEATHER_SET1
+      cape: null
+      note: "SANCTI KTB/PISTES [member build by Baheera]"
+    potion: POTION_STONESKIN
+    food: MEAL_OMELETTE
+  - raw: T8_2H_HOLYSTAFF_HELL
+    weapons:
+    - 2H_HOLYSTAFF_HELL
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': ROYAL_BANNER}
+        passives: {'1': PASSIVE_ARMOR_CD_REDUCTION}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_P5}
+      head:
+        actives: {'1': ENERGYFIELD}
+        passives: {'1': PASSIVE_INCREASED_DAMAGE}
+      mainhand:
+        actives: {'1': HOLYFLASH, '2': RESURRECTION, '3': HOLY_ULTIMATE}
+        passives: {'1': PASSIVE_HEALPOWERCHANCE}
+      potion:
+        actives: {'1': POTION_ENERGY_P5}
+      shoes:
+        actives: {'1': JUMP}
+        passives: {'1': PASSIVE_CD_REDUCTION}
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_KEEPER
+      armor: ARMOR_LEATHER_ROYAL
+      boots: SHOES_LEATHER_ROYAL
+      cape: null
+      note: "??? ??? (?? ???? ????? ? ??? ????) [member build by Ironforge]"
+    potion: POTION_ENERGY
+    food: MEAL_OMELETTE
+  - raw: T8_2H_HOLYSTAFF_UNDEAD
+    weapons:
+    - 2H_HOLYSTAFF_UNDEAD
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': CASTBUBBLE}
+        passives: {'1': PASSIVE_ARMOR_REDUCED_ENERGYCOST}
+      head:
+        actives: {'1': ENERGYFIELD}
+        passives: {'1': PASSIVE_REDUCED_ENERGYCOST}
+      mainhand:
+        actives: {'1': HOLYFLASH, '2': HOLYORB, '3': CELESTIAL_SPHERE}
+        passives: {'1': PASSIVE_HEALPOWERCHANCE}
+      shoes:
+        actives: {'1': CLEANSE_DASH}
+        passives: {'1': PASSIVE_CD_REDUCTION}
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_KEEPER
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_LEATHER_SET1
+      cape: null
+      note: "HEALER HG - MORS [member build by vhfoliveira]"
+    potion: POTION_STONESKIN
+    food: null
+  - raw: T8_2H_LONGBOW
+    weapons:
+    - 2H_LONGBOW
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': DYNAMIC_DEFENSE}
+        passives: {'1': PASSIVE_ARMOR_BALANCE}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_AVALON_P5}
+      head:
+        actives: {'1': DISRUPTIONIMMUNITY}
+        passives: {'1': PASSIVE_MR_AR}
+      mainhand:
+        actives: {'1': DEADLYSHOT, '2': GROUNDARROW, '3': ARROWRAIN}
+        passives: {'1': PASSIVE_ARMOR_PIERCE_STACK}
+      potion:
+        actives: {'1': POTION_MAXHP_P5}
+      shoes:
+        actives: {'1': BATTLEFRENZY}
+        passives: {'1': PASSIVE_MR_AR}
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET2
+      armor: ARMOR_LEATHER_AVALON
+      boots: SHOES_PLATE_UNDEAD
+      cape: null
+      note: "ATENEA S25 - ARCO LARGO [member build by Soulkiva]"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE_AVALON
+  - raw: T8_2H_ICECRYSTAL_UNDEAD
+    weapons:
+    - 2H_ICECRYSTAL_UNDEAD
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': SPEEDCASTER}
+        passives: {'1': PASSIVE_ARMOR_INCREASED_DAMAGE}
+      food:
+        actives: {'1': FOOD_FISH_BUFF_DMG_P5}
+      head:
+        actives: {'1': SUMMONER_CD_REDUCTION}
+        passives: {'1': PASSIVE_BALANCE}
+      mainhand:
+        actives: {'1': ICESHARD, '2': FROSTNOVA, '3': FROST_ULTIMATE}
+        passives: {'1': PASSIVE_CASTINGSPEED_CHANCE_FROSTSTAFF}
+      potion:
+        actives: {'1': POTION_RESISTANCE_P5}
+      shoes:
+        actives: {'1': CLEANSE_DASH}
+        passives: {'1': PASSIVE_BALANCE}
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_CLOTH_SET1
+      boots: SHOES_LEATHER_SET1
+      cape: null
+      note: "Permafrost DPS [member build by Andsy]"
+    potion: POTION_STONESKIN
+    food: MEAL_STEW_FISH
+  - raw: T8_2H_AXE_AVALON
+    weapons:
+    - 2H_AXE_AVALON
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': ROYAL_BANNER}
+        passives: {'1': PASSIVE_ARMOR_CD_REDUCTION}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_AVALON_P5}
+      head:
+        actives: {'1': DISRUPTIONIMMUNITY}
+        passives: {'1': PASSIVE_MR_AR}
+      mainhand:
+        actives: {'1': RENDINGCOMBO, '2': AXE_CHARGE, '3': LETHAL_CLEAVER}
+        passives: {'1': PASSIVE_ARMORCHANCE_AXE}
+      potion:
+        actives: {'1': POTION_MAXHP_P5}
+      shoes:
+        actives: {'1': BATTLEFRENZY}
+        passives: {'1': PASSIVE_MR_AR}
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET2
+      armor: ARMOR_LEATHER_ROYAL
+      boots: SHOES_PLATE_UNDEAD
+      cape: null
+      note: "DD | REALMBREAKER by Lunarus [member build by Lunarus]"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE_AVALON
+  - raw: T8_MAIN_CURSEDSTAFF_UNDEAD
+    weapons:
+    - MAIN_CURSEDSTAFF_UNDEAD
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': REFLECTAREA}
+        passives: {'1': PASSIVE_ARMOR_MR_AR, '2': PASSIVE_PLATEARMOR_HEALTH_REDUCTION}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_P5}
+      head:
+        actives: {'1': SUMMONER_CD_REDUCTION}
+        passives: {'1': PASSIVE_BALANCE}
+      mainhand:
+        actives: {'1': CURSED_SPLAT, '2': ARMORPIERCER, '3': ENFEEBLEBLADES}
+        passives: {'1': PASSIVE_SPELLPOWER_CASTER_CURSEDSTAFF}
+      potion:
+        actives: {'1': POTION_MAXHP_P5}
+      shoes:
+        actives: {'1': CC_BLOCK}
+        passives: {'1': PASSIVE_MR_AR}
+    gear:
+      offhand: OFF_SHIELD_AVALON
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_HELL
+      boots: SHOES_PLATE_AVALON
+      cape: null
+      note: "Maldici?n de Vida ZvZ [member build by Jordyson888]"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE
+  - raw: T8_2H_HARPOON_HELL
+    weapons:
+    - 2H_HARPOON_HELL
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': FORCESHIELD}
+        passives: {'1': PASSIVE_ARMOR_MR_AR, '2': PASSIVE_PLATEARMOR_THREATGENERATION}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_P5}
+      head:
+        actives: {'1': SUMMONER_CD_REDUCTION}
+        passives: {'1': PASSIVE_CD_REDUCTION}
+      mainhand:
+        actives: {'1': SPEAR_LUNGE, '2': GROUNDSPEAR, '3': TAINTED_STEEL}
+        passives: {'1': PASSIVE_SPELLPOWER_CHANCE_SPEAR}
+      potion:
+        actives: {'1': POTION_MAXHP_P5}
+      shoes:
+        actives: {'1': DMG_BLINK}
+        passives: {'1': PASSIVE_CD_REDUCTION}
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_KEEPER
+      boots: SHOES_LEATHER_MORGANA
+      cape: null
+      note: "CA?A-ESPIRITOS [member build by Artico6790]"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE
+  - raw: T8_2H_CLEAVER_HELL
+    weapons:
+    - 2H_CLEAVER_HELL
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': FORCESHIELD}
+        passives: {'1': PASSIVE_ARMOR_MR_AR, '2': PASSIVE_PLATEARMOR_HEALTH_REDUCTION}
+      food:
+        actives: {'1': FOOD_BUFF_DMG_P5}
+      head:
+        actives: {'1': DISRUPTIONIMMUNITY}
+        passives: {'1': PASSIVE_MR_AR}
+      mainhand:
+        actives: {'1': CLEAVE, '2': SPLITTINGSLASH, '3': CLAYMORESLASH}
+        passives: {'1': PASSIVE_REDUCE_DMG_SWORD}
+      potion:
+        actives: {'1': POTION_MAXHP_P5}
+      shoes:
+        actives: {'1': CC_BLOCK}
+        passives: {'1': PASSIVE_MR_AR}
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET2
+      armor: ARMOR_PLATE_KEEPER
+      boots: SHOES_PLATE_AVALON
+      cape: null
+      note: "Small Scale - Entalhada - Suporte [member build by Machadex]"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T8_2H_FIRE_RINGPAIR_AVALON
+    weapons:
+    - 2H_FIRE_RINGPAIR_AVALON
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': LIFESAVIOR}
+        passives: {'1': PASSIVE_ARMOR_INCREASED_DAMAGE}
+      food:
+        actives: {'1': FOOD_BUFF_DMG_P5}
+      head:
+        actives: {'1': SUMMONER_CD_REDUCTION}
+        passives: {'1': PASSIVE_BALANCE}
+      mainhand:
+        actives: {'1': FIRESTAFFBOLT_AOE, '2': FIREWALL, '3': FIREPHOENIX}
+        passives: {'1': PASSIVE_CASTINGSPEED_CHANCE_FIRESTAFF}
+      potion:
+        actives: {'1': POTION_MAXHP_P5}
+      shoes:
+        actives: {'1': DMG_BLINK}
+        passives: {'1': PASSIVE_BALANCE}
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_CLOTH_SET2
+      boots: SHOES_LEATHER_MORGANA
+      cape: null
+      note: "Alvorada Comp 1 [member build by xCisco]"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T8_2H_KNUCKLES_SET3
+    weapons:
+    - 2H_KNUCKLES_SET3
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': LIFESTEALAURA}
+        passives: {'1': PASSIVE_ARMOR_CD_REDUCTION}
+      food:
+        actives: {'1': FOOD_BUFF_DMG_P5}
+      head:
+        actives: {'1': BLOCK}
+        passives: {'1': PASSIVE_MR_AR}
+      mainhand:
+        actives: {'1': DASHKICK, '2': TRIPLE_KICK, '3': IMPULSE_PUNCH}
+        passives: {'1': PASSIVE_KNUCKLE_COMBOBREAKER}
+      potion:
+        actives: {'1': POTION_MAXHP_P5}
+      shoes:
+        actives: {'1': DMG_BLINK}
+        passives: {'1': PASSIVE_BALANCE}
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET1
+      armor: ARMOR_LEATHER_HELL
+      boots: SHOES_LEATHER_MORGANA
+      cape: null
+      note: "Brawl Spiked Gauntlets [member build by forenziec]"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T8_2H_ARCANESTAFF_CRYSTAL
+    weapons:
+    - 2H_ARCANESTAFF_CRYSTAL
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': LIFESTEALAURA}
+        passives: {'1': PASSIVE_ARMOR_BALANCE}
+      food:
+        actives: {'1': FOOD_BUFF_DMG_P5}
+      head:
+        actives: {'1': SUMMONER_CD_REDUCTION}
+        passives: {'1': PASSIVE_BALANCE}
+      mainhand:
+        actives: {'1': ARCANE_CHAIN_MISSILE, '2': ENIGMA_BLADE, '3': STARFALL_DOT}
+        passives: {'1': PASSIVE_ARMOR_CASTER_ARCANESTAFF}
+      potion:
+        actives: {'1': POTION_MAXHP_P5}
+      shoes:
+        actives: {'1': CC_BLOCK}
+        passives: {'1': PASSIVE_MR_AR}
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_LEATHER_HELL
+      boots: SHOES_PLATE_AVALON
+      cape: null
+      note: "Bast?n Astral Monkey-Brauleo [member build by Jordyson888]"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T8_2H_HAMMER_AVALON
+    weapons:
+    - 2H_HAMMER_AVALON
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': REFLECTAREA}
+        passives: {'1': PASSIVE_ARMOR_MR_AR, '2': PASSIVE_PLATEARMOR_HEALTH_REDUCTION}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_AVALON_P5}
+      head:
+        actives: {'1': SUMMONER_CD_REDUCTION}
+        passives: {'1': PASSIVE_CD_REDUCTION}
+      mainhand:
+        actives: {'1': IRONBREAKER, '2': CHARGESLOWAE, '3': SPINNING_SMASH}
+        passives: {'1': PASSIVE_ENERGYCHANCE_HAMMER}
+      potion:
+        actives: {'1': POTION_MAXHP_P5}
+      shoes:
+        actives: {'1': DMG_BLINK}
+        passives: {'1': PASSIVE_CD_REDUCTION}
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_HELL
+      boots: SHOES_LEATHER_MORGANA
+      cape: null
+      note: "Mano de justicia - kiteo [member build by TurnDark]"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE_AVALON

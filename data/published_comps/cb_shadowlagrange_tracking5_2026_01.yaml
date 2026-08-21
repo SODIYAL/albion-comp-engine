@@ -1,0 +1,192 @@
+# Official Albion Character Builder GROUP build, retrieved by hand from the
+# site's public JSON API (manual_link source; a dedicated adapter with its
+# own source kind is planned). UNLIKE the albioncompo docs, this source
+# carries SPELL SELECTIONS: each slot's spells_verbatim block records the
+# game's own spell UniqueNames per item slot number, verbatim. skills stays
+# null until the adapter converts them to the q/w/p index form the
+# normalizer resolves (H8 semantics) - captured now, consumed later.
+kind: published_comp
+id: cb_shadowlagrange_tracking5_2026_01
+source:
+  kind: manual_link
+  family: albion_character_builder
+  author: ShadowLagrange (albiononline.com character builder)
+  url: https://albiononline.com/characterbuilder/group-builds/view/210105
+  record: >
+    Public group build "4-5 Man Tracking" (likes 1,
+    group size 5, 5 member builds) on the official
+    Character Builder; found via the site's recent-group-builds listing and
+    retrieved from its public API 2026-08-21.
+  license: publicly published on albiononline.com's Character Builder
+published: '2026-01-09'
+ingested: '2026-08-21'
+observed: null
+patch: null   # the source does not state the game patch
+snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
+content: openworld_tracking_5   # title '4-5 Man Tracking' - open-world hunting; no engine template for it; UNMAPPED
+party_size:
+  min: 5
+  max: 5
+approval:
+  status: candidate
+  basis: publicly published group build; no caller approval attached
+  approved_by: null
+  as_of: '2026-08-21'
+parties:
+- name: comp
+  slots:
+  - raw: T4_MAIN_NATURESTAFF_CRYSTAL
+    weapons:
+    - MAIN_NATURESTAFF_CRYSTAL
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': ROYAL_BANNER}
+        passives: {'1': PASSIVE_ARMOR_BALANCE}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_P5}
+      head:
+        actives: {'1': ARMOR_CD_RESET}
+        passives: {'1': PASSIVE_BALANCE}
+      mainhand:
+        actives: {'3': DUAL_NATURE}
+      potion:
+        actives: {'1': POTION_MOB_RESET_P3}
+      shoes:
+        actives: {'1': DEMONWALK}
+        passives: {'1': PASSIVE_INCREASED_DAMAGE}
+    gear:
+      offhand: OFF_CENSER_AVALON
+      helm: HEAD_LEATHER_UNDEAD
+      armor: ARMOR_LEATHER_ROYAL
+      boots: SHOES_CLOTH_MORGANA
+      cape: null
+      note: "Forgebark Staff tracking"
+    potion: POTION_MOB_RESET
+    food: MEAL_OMELETTE
+  - raw: T4_2H_SHAPESHIFTER_KEEPER
+    weapons:
+    - 2H_SHAPESHIFTER_KEEPER
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': ENRAGE}
+        passives: {'1': PASSIVE_ARMOR_MR_AR, '2': PASSIVE_PLATEARMOR_THREATGENERATION}
+      food:
+        actives: {'1': FOOD_BUFF_CASTSPEED_CDR_P5}
+      head:
+        actives: {'1': BLOCK}
+        passives: {'1': PASSIVE_MR_AR}
+      mainhand:
+        actives: {'3': SHAPESHIFT_ROCK_ELEMENTAL}
+      potion:
+        actives: {'1': POTION_MOB_RESET_P3}
+      shoes:
+        actives: {'1': DEMONWALK}
+        passives: {'1': PASSIVE_INCREASED_DAMAGE}
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET1
+      armor: ARMOR_PLATE_SET1
+      boots: SHOES_CLOTH_MORGANA
+      cape: null
+      note: "EarthRune tracking"
+    potion: POTION_MOB_RESET
+    food: MEAL_OMELETTE
+  - raw: T4_MAIN_DAGGER_HELL
+    weapons:
+    - MAIN_DAGGER_HELL
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': SPELLRUSH}
+        passives: {'1': PASSIVE_ARMOR_INCREASED_DAMAGE}
+      food:
+        actives: {'1': FOOD_BUFF_DMG_P5}
+      head:
+        actives: {'1': SMELLOFBLOOD}
+        passives: {'1': PASSIVE_BALANCE}
+      mainhand:
+        actives: {'3': BLOOD_BLADE}
+      potion:
+        actives: {'1': POTION_MOB_RESET_P3}
+      shoes:
+        actives: {'1': GLASS_MOVESPEED}
+        passives: {'1': PASSIVE_INCREASED_DAMAGE}
+    gear:
+      offhand: OFF_LAMP_UNDEAD
+      helm: HEAD_LEATHER_MORGANA
+      armor: ARMOR_CLOTH_KEEPER
+      boots: SHOES_CLOTH_ROYAL
+      cape: null
+      note: "Demon Fang Tracking"
+    potion: POTION_MOB_RESET
+    food: MEAL_STEW
+  - raw: T4_2H_SCYTHE_CRYSTAL
+    weapons:
+    - 2H_SCYTHE_CRYSTAL
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': SPELLRUSH}
+        passives: {'1': PASSIVE_ARMOR_INCREASED_DAMAGE}
+      food:
+        actives: {'1': FOOD_BUFF_DMG_P5}
+      head:
+        actives: {'1': ENERGYFIELD}
+        passives: {'1': PASSIVE_INCREASED_DAMAGE}
+      mainhand:
+        actives: {'3': CRYSTAL_SCYTHE_DASH_ZONE}
+      potion:
+        actives: {'1': POTION_MOB_RESET_P3}
+      shoes:
+        actives: {'1': GLASS_MOVESPEED}
+        passives: {'1': PASSIVE_INCREASED_DAMAGE}
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_KEEPER
+      armor: ARMOR_CLOTH_KEEPER
+      boots: SHOES_CLOTH_ROYAL
+      cape: null
+      note: "Crystal Reaper tracking"
+    potion: POTION_MOB_RESET
+    food: MEAL_STEW
+  - raw: T4_2H_DAGGERPAIR
+    weapons:
+    - 2H_DAGGERPAIR
+    role: null   # the character builder has no role field
+    role_raw: null
+    skills: null   # spell UniqueNames captured verbatim below; index conversion is adapter work
+    spells_verbatim:
+      armor:
+        actives: {'1': SPELLRUSH}
+        passives: {'1': PASSIVE_ARMOR_INCREASED_DAMAGE}
+      food:
+        actives: {'1': FOOD_BUFF_DMG_P5}
+      head:
+        actives: {'1': SMELLOFBLOOD}
+        passives: {'1': PASSIVE_BALANCE}
+      mainhand:
+        actives: {'3': EXECUTEDAGGER}
+      potion:
+        actives: {'1': POTION_MOB_RESET_P3}
+      shoes:
+        actives: {'1': GLASS_MOVESPEED}
+        passives: {'1': PASSIVE_INCREASED_DAMAGE}
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_MORGANA
+      armor: ARMOR_CLOTH_KEEPER
+      boots: SHOES_CLOTH_ROYAL
+      cape: null
+      note: "Dagger Pair tracking"
+    potion: POTION_MOB_RESET
+    food: MEAL_STEW

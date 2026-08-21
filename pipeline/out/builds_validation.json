@@ -1,11 +1,11 @@
 {
  "counts": {
   "approved": 70,
-  "candidate": 119,
-  "canonical_defaults": 45,
+  "candidate": 152,
+  "canonical_defaults": 52,
   "quarantined_fields": 2,
   "quarantined_records": 2,
-  "records": 189
+  "records": 222
  },
  "exclusion_gate": [],
  "kind": "validation_result",
@@ -124,6 +124,24 @@
    "build_id": "timothy_blap_blackzone_roam_2026_08:blap:13",
    "content": "blackzone_roam",
    "weapon": "MAIN_SCIMITAR_MORGANA"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "bomb_squad_10",
+   "weapon": "2H_BOW_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "bomb_squad_10",
+   "weapon": "MAIN_ARCANESTAFF_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "bomb_squad_10",
+   "weapon": "MAIN_CURSEDSTAFF_UNDEAD"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
@@ -316,6 +334,36 @@
    "build_id": "deadlyhooker_large_scale_2026_08:party_1:2",
    "content": "large_scale_zvz",
    "weapon": "MAIN_ROCKMACE_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "openworld_tracking_5",
+   "weapon": "2H_DAGGERPAIR"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "openworld_tracking_5",
+   "weapon": "2H_SCYTHE_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "openworld_tracking_5",
+   "weapon": "2H_SHAPESHIFTER_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "openworld_tracking_5",
+   "weapon": "MAIN_DAGGER_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "openworld_tracking_5",
+   "weapon": "MAIN_NATURESTAFF_CRYSTAL"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
@@ -555,11 +603,17 @@
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
-   "weapon": "2H_ARCANESTAFF_HELL"
+   "weapon": "2H_ARCANESTAFF_CRYSTAL"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_ARCANESTAFF_HELL"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_ss_kite_20_2026_06:comp:16",
    "content": "zvz_20man",
    "weapon": "2H_AXE_AVALON"
   },
@@ -573,11 +627,41 @@
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
+   "weapon": "2H_CLEAVER_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_20man",
    "weapon": "2H_CURSEDSTAFF_MORGANA"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_DUALMACE_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_ENIGMATICORB_MORGANA"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_FIRE_RINGPAIR_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_HAMMER_AVALON"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_ss_kite_20_2026_06:comp:17",
    "content": "zvz_20man",
    "weapon": "2H_HARPOON_HELL"
   },
@@ -591,13 +675,43 @@
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
-   "weapon": "2H_ICECRYSTAL_UNDEAD"
+   "weapon": "2H_HOLYSTAFF_HELL"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
+   "weapon": "2H_HOLYSTAFF_UNDEAD"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_ss_kite_20_2026_06:comp:9",
+   "content": "zvz_20man",
+   "weapon": "2H_ICECRYSTAL_UNDEAD"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_ss_kite_20_2026_06:comp:11",
+   "content": "zvz_20man",
    "weapon": "2H_KNUCKLES_SET3"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_LONGBOW"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_MACE"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_NATURESTAFF_HELL"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
@@ -606,10 +720,16 @@
    "weapon": "2H_POLEHAMMER"
   },
   {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_ss_kite_20_2026_06:comp:0",
+   "content": "zvz_20man",
+   "weapon": "2H_SHAPESHIFTER_KEEPER"
+  },
+  {
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
-   "weapon": "2H_SHAPESHIFTER_KEEPER"
+   "weapon": "2H_SHAPESHIFTER_SET2"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
@@ -633,6 +753,12 @@
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
+   "weapon": "MAIN_CURSEDSTAFF_UNDEAD"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_ss_kite_20_2026_06:comp:19",
+   "content": "zvz_20man",
    "weapon": "MAIN_HOLYSTAFF_AVALON"
   },
   {
@@ -648,8 +774,8 @@
    "weapon": "MAIN_NATURESTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_ss_kite_20_2026_06:comp:10",
    "content": "zvz_20man",
    "weapon": "MAIN_ROCKMACE_KEEPER"
   },
