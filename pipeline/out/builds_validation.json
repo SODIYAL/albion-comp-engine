@@ -1,11 +1,11 @@
 {
  "counts": {
   "approved": 70,
-  "candidate": 51,
+  "candidate": 58,
   "canonical_defaults": 45,
   "quarantined_fields": 2,
   "quarantined_records": 2,
-  "records": 121
+  "records": 128
  },
  "exclusion_gate": [],
  "kind": "validation_result",
@@ -285,6 +285,48 @@
    "basis": "explicit shotcaller approval",
    "build_id": "deadlyhooker_large_scale_2026_08:party_1:2",
    "content": "large_scale_zvz",
+   "weapon": "MAIN_ROCKMACE_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "roads",
+   "weapon": "2H_ARCANESTAFF"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "roads",
+   "weapon": "2H_BOW_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "roads",
+   "weapon": "2H_FROSTSTAFF_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "roads",
+   "weapon": "2H_HAMMER_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "roads",
+   "weapon": "2H_HOLYSTAFF_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "roads",
+   "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "roads",
    "weapon": "MAIN_ROCKMACE_KEEPER"
   },
   {

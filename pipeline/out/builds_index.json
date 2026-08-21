@@ -14,11 +14,11 @@
   },
   "counts": {
    "approved": 70,
-   "candidate": 51,
+   "candidate": 58,
    "canonical_defaults": 45,
    "quarantined_fields": 2,
    "quarantined_records": 2,
-   "records": 121
+   "records": 128
   }
  },
  "by_content": {
@@ -4560,6 +4560,445 @@
      "unknowns": [
       "gear.food",
       "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ]
+  },
+  "roads": {
+   "2H_ARCANESTAFF": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_roads_oneshot_2026_07:comp:2",
+     "caller": "anonymous albioncompo.com user (5c73a3cf)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: potion=POTION_CLEANSE2",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-07-02",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_TORNADO",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5c73a3cf)",
+      "family": "albioncompo:5c73a3cf",
+      "kind": "manual_link",
+      "record": "Public composition \"Roads 1 shot, with 15s hit\" (site activity tag: zvz; 133 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/HMEC3XFK"
+     },
+     "spells": {
+      "e": "TIME_FREEZE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_BOW_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_roads_oneshot_2026_07:comp:5",
+     "caller": "anonymous albioncompo.com user (5c73a3cf)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "GO-MORGANA-IF-CAPE-T10; alts: cape=CAPEITEM_MORGANA, armor=ARMOR_CLOTH_AVALON, potion=POTION_CLEANSE2",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-07-02",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_SET1",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_STEW",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_STONESKIN",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5c73a3cf)",
+      "family": "albioncompo:5c73a3cf",
+      "kind": "manual_link",
+      "record": "Public composition \"Roads 1 shot, with 15s hit\" (site activity tag: zvz; 133 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/HMEC3XFK"
+     },
+     "spells": {
+      "e": "HAWK_SHOT_MULTI1",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_FROSTSTAFF_CRYSTAL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "2H_FROSTSTAFF"
+       }
+      ]
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_roads_oneshot_2026_07:comp:4",
+     "caller": "anonymous albioncompo.com user (5c73a3cf)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: armor=ARMOR_CLOTH_FEY, potion=POTION_STONESKIN",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-07-02",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_STEW",
+      "head": "HEAD_CLOTH_KEEPER",
+      "potion": "POTION_CLEANSE2",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5c73a3cf)",
+      "family": "albioncompo:5c73a3cf",
+      "kind": "manual_link",
+      "record": "Public composition \"Roads 1 shot, with 15s hit\" (site activity tag: zvz; 133 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/HMEC3XFK"
+     },
+     "spells": {
+      "e": "FROST_TARGETED_CHANNEL",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_HAMMER_UNDEAD": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_roads_oneshot_2026_07:comp:0",
+     "caller": "anonymous albioncompo.com user (5c73a3cf)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": null,
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-07-02",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_SANDWICH_AVALON",
+      "head": "HEAD_LEATHER_HELL",
+      "potion": "POTION_ACID",
+      "shoes": "SHOES_PLATE_KEEPER"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5c73a3cf)",
+      "family": "albioncompo:5c73a3cf",
+      "kind": "manual_link",
+      "record": "Public composition \"Roads 1 shot, with 15s hit\" (site activity tag: zvz; 133 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/HMEC3XFK"
+     },
+     "spells": {
+      "e": "UNDEADHAND",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_HOLYSTAFF_UNDEAD": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_roads_oneshot_2026_07:comp:6",
+     "caller": "anonymous albioncompo.com user (5c73a3cf)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: helm=HEAD_CLOTH_ROYAL, potion=POTION_CLEANSE2",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-07-02",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_OMELETTE_FISH",
+      "head": "HEAD_LEATHER_AVALON",
+      "potion": "POTION_STONESKIN",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5c73a3cf)",
+      "family": "albioncompo:5c73a3cf",
+      "kind": "manual_link",
+      "record": "Public composition \"Roads 1 shot, with 15s hit\" (site activity tag: zvz; 133 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/HMEC3XFK"
+     },
+     "spells": {
+      "e": "CELESTIAL_SPHERE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_CURSEDSTAFF_CRYSTAL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_roads_oneshot_2026_07:comp:3",
+     "caller": "anonymous albioncompo.com user (5c73a3cf)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: armor=ARMOR_CLOTH_FEY, potion=POTION_CLEANSE2",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-07-02",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_STEW_FISH",
+      "head": "HEAD_LEATHER_SET2",
+      "offhand": "OFF_DEMONSKULL_HELL",
+      "potion": "POTION_STONESKIN",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5c73a3cf)",
+      "family": "albioncompo:5c73a3cf",
+      "kind": "manual_link",
+      "record": "Public composition \"Roads 1 shot, with 15s hit\" (site activity tag: zvz; 133 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/HMEC3XFK"
+     },
+     "spells": {
+      "e": "CURSE_SKELETON_BARF_FDHR",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_ROCKMACE_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "MAIN_FROSTSTAFF_KEEPER"
+       }
+      ]
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_roads_oneshot_2026_07:comp:1",
+     "caller": "anonymous albioncompo.com user (5c73a3cf)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: helm=HEAD_LEATHER_SET3, potion=POTION_SLOWFIELD, secondhand=OFF_SHIELD_AVALON",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-07-02",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_PLATE_KEEPER",
+      "offhand": "OFF_HORN_KEEPER",
+      "potion": "POTION_TORNADO",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5c73a3cf)",
+      "family": "albioncompo:5c73a3cf",
+      "kind": "manual_link",
+      "record": "Public composition \"Roads 1 shot, with 15s hit\" (site activity tag: zvz; 133 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/HMEC3XFK"
+     },
+     "spells": {
+      "e": "PRIMALSLAM",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
       "passive",
       "q",
       "w"
