@@ -11,17 +11,31 @@ const WEAPONS = DATASET.weapons;
 
 let CONTENT = Object.keys(DATASET.templates)[0];
 const ENG = new CompEngine(DATASET, CONTENT);
-/* There is no fixed party size in open-world content: PLANNED is what you
-   expect to field, but the roster is reality — the effective SIZE (targets,
-   floors, scaling) is whichever is larger. Bring 4 or bring 40. */
+/* There is no fixed party size in open-world content, and attendance is
+   FLUID (owner ruling 2026-08-21): the party is judged at the ROSTER you
+   actually have — targets, floors and scaling follow whoever showed up.
+   PLANNED is what you expect to field: it drives how many slots the forge
+   fills and the cap warnings, never the judgment. Next-pick advice runs
+   ONE AHEAD (roster+1), so a threshold that arms at the next body — the
+   roads heal floor at 5 — is anticipated while you are choosing, not
+   after the 5th DPS already joined. */
 let PLANNED = ENG.size;
 let SIZE = PLANNED;
 let STYLE = "balanced";
 const HARD_CAP = 60;
 const STYLE_ORDER = ["balanced", "brawl", "clap", "kite", "brawl_clap"];
 
+const PLAN = () => Math.max(PLANNED, party.length);
+const pickSize = () => Math.min(Math.max(party.length + 1, 1), HARD_CAP);
+/* run fn under the ONE-AHEAD context (candidate evaluation), then restore
+   the roster-judged context — every board number stays roster-sized */
+function inPickContext(fn){
+  ENG.setContent(CONTENT, pickSize(), STYLE);
+  try { return fn(); } finally { ENG.setContent(CONTENT, SIZE, STYLE); }
+}
+
 function syncEngine(){
-  SIZE = Math.max(PLANNED, party.length);
+  SIZE = Math.max(party.length, 1);
   ENG.setContent(CONTENT, SIZE, STYLE);
   /* member combos re-resolve after every context change: the default
      loadout depends on the styled weights, and pick-derived combos map
@@ -59,9 +73,11 @@ const maxFitness = () => ENG.maxFitness();
 const uncoveredCaps = p => ENG.uncoveredCaps(p, p === party ? COMBOS_CUR : null);
 const weaknesses = (p, n = 3) => ENG.weaknesses(p, n, p === party ? COMBOS_CUR : null);
 /* app_scoring.js term/rec field names -> the short ones this file renders */
-const explain = (p, cand) => ENG.explain(p, cand, p === party ? COMBOS_CUR : null)
+const explain = (p, cand) => inPickContext(() =>
+  ENG.explain(p, cand, p === party ? COMBOS_CUR : null))
   .map(t => ({d: t.delta, ...t}));
-const recommend = (p, n = 4) => ENG.recommend(p, n, null, p === party ? COMBOS_CUR : null)
+const recommend = (p, n = 4) => inPickContext(() =>
+  ENG.recommend(p, n, null, p === party ? COMBOS_CUR : null))
   .map(r => ({w: r.weapon, dFit: r.d_fitness, dSyn: r.d_synergy, meta: r.meta_prior,
               viab: r.viability, combo: r.combo, score: r.score}));
 /* swapReview is a full-pool sweep per member (~40-100ms at 20-40 members) —
@@ -428,12 +444,12 @@ function renderSetup(){
   const presets = [...new Set(validatedSizes().concat([baseSize()]))].sort((a,b) => a-b);
   $("size-presets").innerHTML = presets.map(n =>
     `<button class="size-btn" data-size="${n}" aria-pressed="${n===PLANNED}">${n}</button>`).join("");
-  $("size-hint").textContent = party.length > PLANNED
-    ? `Roster is ${party.length} — targets and floors now scale to ${SIZE}, not the planned ${PLANNED}.`
-    : `Targets and floors scale to whoever shows up — ${SIZE} right now.`;
+  $("size-hint").textContent = party.length
+    ? `Judged as the ${SIZE} you actually have — the forge fills toward ${PLAN()}.`
+    : `Targets and floors scale to whoever actually shows up; the forge fills toward ${PLAN()}.`;
   $("size-notice").innerHTML =
-    (tpl().max_size && SIZE > tpl().max_size
-      ? `<div class="notice"><b>Over the in-game cap.</b> ${esc(tpl().name)} parties are capped at ${tpl().max_size} players in game — ${SIZE} cannot actually field. The advice below still computes, but treat it as hypothetical.</div>`
+    (tpl().max_size && Math.max(SIZE, PLAN()) > tpl().max_size
+      ? `<div class="notice"><b>Over the in-game cap.</b> ${esc(tpl().name)} parties are capped at ${tpl().max_size} players in game — ${Math.max(SIZE, PLAN())} cannot actually field. The advice below still computes, but treat it as hypothetical.</div>`
       : "")
     + (!ENG.extrapolated() ? "" :
     `<div class="notice"><b>Extrapolated.</b> This template is fitted and validated at size ${validatedSizes().join(", ")} only. Per-player targets are scaled linearly to ${SIZE}; flat threshold targets are unchanged. Tier-2 validation must confirm each size before this is trustworthy.</div>`);
@@ -445,7 +461,7 @@ function renderTally(){
            aria-pressed="${PARTY_FACET === r}"
            aria-label="${n} ${esc(roleLabel(r))} slots. Filter the roster"
            title="${esc(roleLabel(r))}: ${n} — click to filter the roster">${semanticIcon(r)}<b>${n}</b><span class="sr-only"> ${esc(roleLabel(r))}</span></span>`).join("")
-      + `<span class="t"><b>${SIZE - party.length}</b> open</span>`
+      + `<span class="t"><b>${Math.max(0, PLAN() - party.length)}</b> open</span>`
     : "";
 }
 /* Per-member swap advice (engine swapReview): a member's weapon is valued as
@@ -551,7 +567,7 @@ function renderRoster(){
     cards.push(`<div class="dock-note">${idxs.length} of ${party.length} — ${esc(PARTY_FACET)} only · click the chip again for all</div>`);
   } else {
     /* open slots collapse: one dashed "next" card, one "+N more" note */
-    const open = SIZE - party.length;
+    const open = Math.max(0, PLAN() - party.length);
     if (party.length < HARD_CAP)
       cards.push(`<div class="dm next"><div class="dm-card next" title="next slot — pick on the wheel">
         <span class="n mono">${String(party.length+1).padStart(2,"0")}</span><span class="dm-plus">+</span></div></div>`);
@@ -699,7 +715,7 @@ function renderWheelRing(keys, idx){
    minima for this content + size (the constraint band — a display-only read;
    scoring paths never come through here). No band, no role rings. */
 function hubRingData(){
-  const rings = [{label:"party", have:party.length, want:SIZE, color:"var(--brass)"}];
+  const rings = [{label:"party", have:party.length, want:PLAN(), color:"var(--brass)"}];
   const band = ENG._band;
   if (band){
     const counts = {};
@@ -744,7 +760,7 @@ function renderHub(keys, idx, recs){
      pool eval, so any card on the rim carries its true marginal score */
   let r = (recs || []).find(x => x.w === w);
   if (!r){
-    const rr = ENG.recommend(party, 1, [w], COMBOS_CUR);
+    const rr = inPickContext(() => ENG.recommend(party, 1, [w], COMBOS_CUR));
     r = rr.length ? {w, score: rr[0].score} : null;
   }
   const isTop = !!(recs && recs.length && recs[0].w === w);
@@ -764,10 +780,10 @@ function renderWheelFoot(keys, recs, rings){
     ? `roster cap — ${HARD_CAP}`
     : party.length + 1 > PLANNED
       ? `slot ${party.length + 1} — beyond planned ${PLANNED}`
-      : `slot ${party.length + 1} of ${SIZE}`;
+      : `slot ${party.length + 1} of ${PLAN()}`;
   /* same commands as ever: "forge the rest" locks current members,
      "reforge all" rebuilds only the generated slots (2026-08-18) */
-  const forge = recs === null ? "" : (party.length < SIZE
+  const forge = recs === null ? "" : (party.length < PLAN()
     ? `<button class="cb-forge" id="forge">${party.length ? "forge the rest" : "forge a full comp"}</button>`
     : "") + (PROV.some(x => x === "f")
     ? `<button class="cb-forge" id="reforge" title="rebuild every forged slot for the current content, style and size — manual picks stay">reforge all</button>`
@@ -886,7 +902,7 @@ function renderWeaknesses(){
                    + nice.slice(0,3).map((x,i) => row(x,i,"nice")).join("") : "");
 }
 function renderWarning(){
-  const unc = uncoveredCaps(party), left = SIZE - party.length;
+  const unc = uncoveredCaps(party), left = Math.max(0, PLAN() - party.length);
   const greedy = (party.length && left > 0 && left <= 2 && unc.length >= 3)
     ? `<div class="warn"><span class="t">Lookahead</span>
        <span class="b"><b>Greedy trap.</b> ${left} slot${left>1?"s":""} left but ${unc.length} high-weight capabilities still uncovered
@@ -903,7 +919,7 @@ function renderWarning(){
         <span class="b"><b>Infeasible.</b> The composition constraints for this content and size could not all be met from the allowed weapon pool — the roster below is partial/provisional. Loosen the locked picks or change the size.</span></div>`;
     if (FORGE_NOTE.filler && FORGE_NOTE.filler.length)
       forgeBits += `<div class="warn"><span class="t">Forge</span>
-        <span class="b"><b>Saturated tail.</b> Slot${FORGE_NOTE.filler.length > 1 ? "s" : ""} ${slotNames(FORGE_NOTE.filler)} reduce${FORGE_NOTE.filler.length > 1 ? "" : "s"} the comp score and no allowed replacement does better — the template is fully covered before size ${SIZE}. Treat ${FORGE_NOTE.filler.length > 1 ? "these slots" : "this slot"} as provisional.</span></div>`;
+        <span class="b"><b>Saturated tail.</b> Slot${FORGE_NOTE.filler.length > 1 ? "s" : ""} ${slotNames(FORGE_NOTE.filler)} reduce${FORGE_NOTE.filler.length > 1 ? "" : "s"} the comp score and no allowed replacement does better — the template is fully covered before size ${PLAN()}. Treat ${FORGE_NOTE.filler.length > 1 ? "these slots" : "this slot"} as provisional.</span></div>`;
     if (FORGE_NOTE.held && FORGE_NOTE.held.length)
       forgeBits += `<div class="warn"><span class="t">Forge</span>
         <span class="b"><b>Constraint-held.</b> Slot${FORGE_NOTE.held.length > 1 ? "s" : ""} ${slotNames(FORGE_NOTE.held)} score${FORGE_NOTE.held.length > 1 ? "" : "s"} slightly negative but ${FORGE_NOTE.held.length > 1 ? "are" : "is"} required by the composition minimums (healers/frontline/ranged core) — expert structure the capability score alone does not see.</span></div>`;
@@ -1547,7 +1563,7 @@ document.addEventListener("click", e => {
        only the manual/live slots and rebuilds the rest for the CURRENT
        content, style and size. The rail's "forge full comp" fills open
        slots, and on a fully forged roster acts as a reforge. */
-    const goal = Math.min(SIZE, HARD_CAP);
+    const goal = Math.min(PLAN(), HARD_CAP);
     const reforgeAll = forgeBtn.id === "reforge"
       || ((forgeBtn.id === "forge-rail" || forgeBtn.id === "forge-rail-mini")
           && party.length >= goal && PROV.some(x => x === "f"));

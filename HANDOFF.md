@@ -106,6 +106,13 @@ online sources. Shipped, in order:
   active style's weight multiplier (styles move WEIGHTS, never targets —
   the chip says so; targets changing with style is a future evidence
   question, note the kite 20-man fielding ONE healer).
+- **Judged at ROSTER size** (owner ruling: attendance is fluid — inventory
+  what we have): the dashboard's effective size is now the roster you
+  actually have, not max(planned, roster). PLANNED only drives forge fill
+  count + cap warnings. Next-pick advice runs ONE AHEAD (roster+1,
+  `inPickContext`), so a floor arming at the next body — roads heal at 5 —
+  is anticipated while choosing. Empty roster shows "—" instead of the
+  armed-floor negative. Dashboard-layer only; engine/tests untouched.
 - Owner gear rule recorded: equipment is picked for its unique LAST
   ability — confirmed in CB data; default kit-inference prior.
 - Parked for owner: "Gang Open World" CB comp (fields basic Cursed Staff,
