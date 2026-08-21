@@ -890,10 +890,25 @@ function renderWeaknesses(){
     if (below || (ENG.weight(x.cap) >= 6 && ratio < 0.5)) needed.push({...x, floorHit: below});
     else nice.push(x);
   }
-  const row = (x, i, cls) =>
-    `<div class="weak ${cls}"><span class="rank">${String(i+1).padStart(2,"0")}</span>
-      <span class="txt">You have <b>${(s[x.cap]||0).toFixed(0)}</b> of <b>${target(x.cap).toFixed(1)}</b> units of <b>${x.cap}</b> — ${prose(x.cap)}${x.floorHit ? " <b>(below the hard floor)</b>" : ""}.</span>
-      <span class="sc">−${x.gap.toFixed(1)}</span></div>`;
+  /* the fix, not the units (owner 2026-08-21): each gap leads with the
+     weapons that close it — click to add. Ranked by the flat sheet score
+     for that capability (the same display layer the dossier shows);
+     excluded weapons never suggested; duplicates allowed (real comps
+     stack healers). Numbers demoted to a small have/target aside. */
+  const capSuppliers = (cap, k = 3) => Object.entries(DATASET.weapons)
+    .filter(([w, d]) => d.status === "curated" && !d.removed
+                        && (d.capabilities || {})[cap] && !ENG.isExcluded(w))
+    .sort((a, b) => (b[1].capabilities[cap] - a[1].capabilities[cap])
+                    || a[0].localeCompare(b[0]))
+    .slice(0, k).map(([w]) => w);
+  const row = (x, i, cls) => {
+    const picks = capSuppliers(x.cap).map(w =>
+      `<button class="weak-add" data-add="${w}" title="${esc(DATASET.weapons[w].display_name)} — ${DATASET.weapons[w].capabilities[x.cap]}/7 ${x.cap} · click to add">${icon(w, 26)}</button>`).join("");
+    return `<div class="weak ${cls}"><span class="rank">${String(i+1).padStart(2,"0")}</span>
+      <span class="txt"><b>${x.cap}</b> — ${prose(x.cap)}${x.floorHit ? " <b>(below the hard floor)</b>" : ""}
+        <span class="weak-have">${(s[x.cap]||0).toFixed(0)} / ${target(x.cap).toFixed(1)}</span></span>
+      <span class="weak-picks" title="best ${x.cap} weapons — click to add">${picks}</span></div>`;
+  };
   $("weaknesses").innerHTML =
     `<div class="weak-sub">Needed now</div>`
     + (needed.length ? needed.slice(0,4).map((x,i) => row(x,i,"")).join("")
