@@ -8,31 +8,33 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9876;</text></svg>">
 <title>Comp Forge</title>
 <style>
-/* ============================================================ THE WAR TABLE
-   Comp Forge's committed single look: an iron table lit by forge light.
-   Deep charcoal surfaces with a warm undertone, one ember-brass accent for
-   the machine's own voice (recommendations, actions, evidence), and the
-   game's colorful item renders doing the decorative heavy lifting.
+/* ============================================================ NEON FORGE
+   Comp Forge's committed single look (2026-08-21 reskin, owner-directed):
+   the dashboard-kit language — near-black borderless cards, vivid neon
+   data hues, rounded geometry — with the forge's soul kept as one hot
+   gold accent for the machine's own voice (recommendations, actions,
+   evidence) and the serif/mono type voice unchanged.
 
    Data colors are VALIDATED, not eyeballed (dataviz six-checks, dark
-   surface): role palette #3987e5 / #d95926 / #199e70 / #c98500 / #d55181
-   passes CVD + normal-vision + contrast gates in this order; bar status
-   colors always ship beside text labels, never color-alone.            */
+   surface): role palette #4D8DFF / #E85D12 / #1FAE58 / #C08800 /
+   #E00063 / #189FC4 / #9D5CFF passes lightness-band + CVD +
+   normal-vision + contrast gates in chip-row adjacency order; bar
+   status colors always ship beside text labels, never color-alone. */
 :root{
   color-scheme:dark;
-  --bg:#0B0D12; --bg-deep:#07080C;
-  --surface:#12151C; --surface-2:#1A1E28; --sunk:#080A0F;
-  --panel-hi:#181C25; --panel-lo:#10131A;
-  --ink:#ECE7DB; --ink-2:#B0AB9D; --ink-3:#847F74;
-  --rule:#232834; --rule-2:#343B4A;
-  --brass:#D9A44E; --brass-bright:#F0C274; --brass-deep:#8A6420;
-  --brass-wash:rgba(217,164,78,.09);
-  --gap:#E66767; --gap-wash:rgba(230,103,103,.10);
-  --ok:#199E70; --ok-bright:#2BBd8B;
-  --over:#9085E9;
-  --amber:#C98500;
-  --role-tank:#3987E5; --role-range:#D95926; --role-healer:#199E70;
-  --role-support:#C98500; --role-melee:#D55181; --role-peel:#4FA3C2;
+  --bg:#08080D; --bg-deep:#050508;
+  --surface:#101018; --surface-2:#191926; --sunk:#060609;
+  --panel-hi:#15151F; --panel-lo:#0E0E16;
+  --ink:#EDEFF7; --ink-2:#A9ADC4; --ink-3:#757A92;
+  --rule:#1E1E2B; --rule-2:#2E2E42;
+  --brass:#FFC93A; --brass-bright:#FFDF7A; --brass-deep:#B8860E;
+  --brass-wash:rgba(255,201,58,.08);
+  --gap:#FF5470; --gap-wash:rgba(255,84,112,.10);
+  --ok:#23BF6E; --ok-bright:#35E68A;
+  --over:#9D5CFF;
+  --amber:#E8A013;
+  --role-tank:#4D8DFF; --role-range:#E85D12; --role-healer:#1FAE58;
+  --role-support:#C08800; --role-melee:#E00063; --role-peel:#189FC4;
   --shadow:0 1px 2px rgba(0,0,0,.5), 0 12px 32px -16px rgba(0,0,0,.8);
   --shadow-lift:0 2px 4px rgba(0,0,0,.5), 0 18px 44px -18px rgba(0,0,0,.85);
   --ease:cubic-bezier(.4,0,.2,1);
@@ -45,19 +47,20 @@
 }
 
 *{box-sizing:border-box}
-html{scrollbar-color:#2C313D var(--bg-deep)}
+html{scrollbar-color:#272736 var(--bg-deep)}
 body{
   margin:0; background:var(--bg); color:var(--ink);
   font-family:var(--sans); font-size:15px; line-height:1.5;
   -webkit-font-smoothing:antialiased;
 }
-/* the forge light: a warm ember bloom top-left, a cold steel wash right,
-   and a film-grain layer so the dark fields never read as dead pixels */
+/* the forge light, neon edition: a hot gold bloom top-left, a violet-blue
+   wash right, and a film-grain layer so the dark fields never read as
+   dead pixels */
 body::before{
   content:""; position:fixed; inset:0; z-index:-2; pointer-events:none;
   background:
-    radial-gradient(1100px 700px at 12% -8%, rgba(217,164,78,.10), transparent 60%),
-    radial-gradient(900px 700px at 105% 12%, rgba(74,104,168,.08), transparent 55%),
+    radial-gradient(1100px 700px at 12% -8%, rgba(255,201,58,.07), transparent 60%),
+    radial-gradient(900px 700px at 105% 12%, rgba(125,92,255,.09), transparent 55%),
     radial-gradient(1400px 900px at 50% 115%, rgba(0,0,0,.55), transparent 60%),
     var(--bg);
 }
@@ -68,7 +71,7 @@ body::after{
 h1,h2,h3{font-family:var(--serif); font-weight:600; text-wrap:balance; margin:0}
 .mono{font-family:var(--mono); font-variant-numeric:tabular-nums}
 button{font:inherit; color:inherit; cursor:pointer}
-::selection{background:rgba(217,164,78,.32); color:var(--ink)}
+::selection{background:rgba(255,201,58,.32); color:var(--ink)}
 :focus-visible{outline:2px solid var(--brass-bright); outline-offset:2px; border-radius:3px}
 .sr-only{
   position:absolute!important; width:1px!important; height:1px!important;
@@ -82,8 +85,8 @@ button{font:inherit; color:inherit; cursor:pointer}
 }
 ::-webkit-scrollbar{width:10px; height:10px}
 ::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:#2C313D; border-radius:5px; border:2px solid var(--bg)}
-::-webkit-scrollbar-thumb:hover{background:#3A4150}
+::-webkit-scrollbar-thumb{background:#272736; border-radius:5px; border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:#35354C}
 
 /* ---------- masthead: an engraved plate with an ember seam ---------- */
 .masthead{
@@ -93,18 +96,18 @@ button{font:inherit; color:inherit; cursor:pointer}
 }
 .masthead::after{
   content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
-  background:linear-gradient(90deg, transparent, rgba(217,164,78,.55) 18%, rgba(217,164,78,.55) 42%, var(--rule) 70%, transparent);
+  background:linear-gradient(90deg, transparent, rgba(255,201,58,.55) 18%, rgba(255,201,58,.55) 42%, var(--rule) 70%, transparent);
 }
 .brandmark{display:flex; align-items:center; gap:13px}
 .brandmark .sigil{
   width:34px; height:34px; flex:none; display:grid; place-items:center;
-  font-size:17px; border:1px solid rgba(217,164,78,.45); border-radius:7px;
-  background:linear-gradient(160deg, rgba(217,164,78,.16), rgba(217,164,78,.03));
-  box-shadow:inset 0 1px 0 rgba(240,194,116,.18), 0 0 18px -6px rgba(217,164,78,.5);
+  font-size:17px; border:1px solid rgba(255,201,58,.45); border-radius:9px;
+  background:linear-gradient(160deg, rgba(255,201,58,.16), rgba(255,201,58,.03));
+  box-shadow:inset 0 1px 0 rgba(255,223,122,.18), 0 0 18px -6px rgba(255,201,58,.5);
 }
 .brandmark h1{
   font-size:21px; letter-spacing:.02em;
-  background:linear-gradient(180deg, #F5EBD6, #CBB98E);
+  background:linear-gradient(180deg, #FFF6DC, #F2C75C);
   -webkit-background-clip:text; background-clip:text; color:transparent;
 }
 .brandmark .sub{
@@ -159,7 +162,7 @@ button{font:inherit; color:inherit; cursor:pointer}
   transition:color .18s var(--ease), border-color .18s var(--ease);
 }
 .rs-btn:hover{color:var(--brass); border-color:var(--brass-deep)}
-.rs-forge{color:var(--brass); border-color:rgba(217,164,78,.5)}
+.rs-forge{color:var(--brass); border-color:rgba(255,201,58,.5)}
 .rs-forge:hover{background:var(--brass-wash); border-color:var(--brass)}
 .shell[data-rail="min"]{grid-template-columns:56px minmax(0,1fr)}
 .shell[data-rail="min"] .rail{padding:16px 10px 30px}
@@ -189,7 +192,7 @@ button{font:inherit; color:inherit; cursor:pointer}
 select, .text-input{
   font:inherit; font-family:var(--mono); font-size:13px; padding:8px 10px;
   background:var(--sunk); color:var(--ink);
-  border:1px solid var(--rule-2); border-radius:6px; width:100%;
+  border:1px solid var(--rule-2); border-radius:10px; width:100%;
   transition:border-color .18s var(--ease);
 }
 select:hover, .text-input:hover{border-color:#414a5c}
@@ -199,47 +202,46 @@ select:focus, .text-input:focus{border-color:var(--brass-deep)}
   font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
   width:100%; padding:9px; margin-top:10px;
   background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
-  border:1px solid var(--rule-2); border-radius:6px; color:var(--ink-2);
+  border:1px solid var(--rule-2); border-radius:10px; color:var(--ink-2);
   transition:border-color .18s var(--ease), color .18s var(--ease);
 }
 .share-btn:hover{border-color:var(--brass-deep); color:var(--brass)}
 /* the rail's forge button — same command as the forge in the next-pick bar,
    dressed in the forge accent so it reads as the rail's primary action */
-.share-btn.forge-rail{color:var(--brass); border-color:rgba(217,164,78,.5)}
+.share-btn.forge-rail{color:var(--brass); border-color:rgba(255,201,58,.5)}
 .share-btn.forge-rail:hover{background:var(--brass-wash); border-color:var(--brass)}
 .clear-btn:hover{border-color:var(--gap); color:var(--gap)}
 .clear-btn[data-armed="1"]{border-color:var(--gap); color:var(--gap); background:var(--gap-wash)}
 .size-row{display:flex; gap:5px; flex-wrap:wrap; align-items:center}
 .size-btn{
   font-family:var(--mono); font-size:13px; min-width:32px; height:32px; padding:0 6px;
-  background:var(--sunk); border:1px solid var(--rule-2); border-radius:6px;
+  background:var(--sunk); border:1px solid var(--rule-2); border-radius:8px;
   color:var(--ink-2); transition:border-color .18s var(--ease), color .18s var(--ease);
 }
 .size-btn:hover{border-color:var(--brass-deep); color:var(--brass)}
 .size-btn[aria-pressed="true"]{
   background:linear-gradient(180deg, var(--brass-bright), var(--brass));
   border-color:var(--brass); color:#1A1206; font-weight:700;
-  box-shadow:0 0 14px -4px rgba(217,164,78,.55);
+  box-shadow:0 0 14px -4px rgba(255,201,58,.55);
 }
 .size-input{
   font-family:var(--mono); font-size:14px; width:58px; height:32px; text-align:center;
-  background:var(--sunk); color:var(--ink); border:1px solid var(--rule-2); border-radius:6px;
+  background:var(--sunk); color:var(--ink); border:1px solid var(--rule-2); border-radius:8px;
 }
 .size-hint{font-size:11px; color:var(--ink-3); margin-top:5px; line-height:1.5}
 .btn-row{display:flex; gap:8px; margin-top:10px}
 .btn-row .share-btn{margin-top:0; flex:1}
 .notice{
   font-size:11.5px; line-height:1.5; color:var(--ink-2);
-  background:var(--gap-wash); border:1px solid rgba(230,103,103,.25);
+  background:var(--gap-wash); border:1px solid rgba(255,84,112,.25);
   border-left:2px solid var(--gap);
-  padding:8px 11px; margin-top:8px; border-radius:0 6px 6px 0;
+  padding:8px 11px; margin-top:8px; border-radius:0 10px 10px 0;
 }
 
-/* ---------- party dock — the roster as a fish-eye row under the wheel.
+/* ---------- party dock — the roster on the wheel's left flank.
    Hover (or keyboard focus) swells a card like a macOS dock icon and opens
    its popover: role, fit contribution, swap advice, and the kit / dossier /
    remove actions. Wraps to more rows for big parties. ---------- */
-.dock-sec{margin-top:26px}
 .roster{
   display:flex; flex-wrap:wrap; gap:12px 9px; align-items:flex-end;
   padding:6px 2px 2px; min-height:70px;
@@ -251,7 +253,7 @@ select:focus, .text-input:focus{border-color:var(--brass-deep)}
   background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
   --role:var(--rule-2);
   border:1px solid var(--rule); border-bottom:3px solid var(--role);
-  border-radius:9px; cursor:pointer; padding:0;
+  border-radius:11px; cursor:pointer; padding:0;
   box-shadow:0 1px 3px rgba(0,0,0,.4), 0 4px 10px -6px var(--role);
   transform-origin:50% 100%;
   transition:transform .18s var(--ease), border-color .18s var(--ease),
@@ -269,7 +271,7 @@ select:focus, .text-input:focus{border-color:var(--brass-deep)}
 }
 .dm:hover + .dm .dm-card, .dm:has(+ .dm:hover) .dm-card{transform:scale(1.16)}
 .dm-card.next{
-  border:1px dashed rgba(217,164,78,.4); background:transparent; box-shadow:none;
+  border:1px dashed rgba(255,201,58,.4); background:transparent; box-shadow:none;
   color:var(--brass); cursor:default;
 }
 .dm-card.next .n{color:var(--brass)}
@@ -284,7 +286,7 @@ select:focus, .text-input:focus{border-color:var(--brass-deep)}
   position:absolute; bottom:calc(100% + 12px); left:50%; transform:translateX(-50%);
   width:256px; z-index:30; visibility:hidden; opacity:0;
   transition:opacity .16s var(--ease), visibility .16s;
-  background:rgba(16,19,26,.97); border:1px solid var(--rule-2); border-radius:10px;
+  background:rgba(13,13,20,.97); border:1px solid var(--rule-2); border-radius:14px;
   padding:11px 13px 12px; text-align:left; box-shadow:var(--shadow-lift);
 }
 .dm-pop::after{ /* hover bridge so the pointer can travel into the popover */
@@ -304,6 +306,36 @@ select:focus, .text-input:focus{border-color:var(--brass-deep)}
 }
 .dm-act:hover{color:var(--brass); border-color:var(--brass-deep)}
 .dm-act.dm-x:hover{color:var(--gap); border-color:var(--gap)}
+/* popovers follow the dock's placement:
+   — left flank (three-column stage): open sideways toward the wheel —
+     they can never leave the viewport past the top of the page
+   — hero strip (961-1560px, party above the picker): open downward
+   — phones (≤960, party back under the wheel): stock upward popover */
+@media (min-width:1561px){
+  .ws-party .roster{align-items:flex-start; padding:4px 0 0}
+  .ws-party .dm .dm-pop{
+    left:calc(100% + 12px); right:auto; bottom:auto; top:50%;
+    transform:translateY(-50%);
+  }
+  .ws-party .dm .dm-pop::after{top:0; bottom:0; left:-14px; right:100%; height:auto}
+  .ws-party .dm-card{transform-origin:0 50%}
+}
+@media (min-width:961px) and (max-width:1560px){
+  .ws-party .dm .dm-pop{bottom:auto; top:calc(100% + 12px)}
+  .ws-party .dm .dm-pop::after{top:auto; bottom:100%}
+}
+/* the rail-collapsed three-column stage (1251-1560) needs the sideways
+   popovers too; [data-rail] outranks the strip rules above */
+@media (min-width:1251px) and (max-width:1560px){
+  .shell[data-rail="min"] .ws-party .roster{align-items:flex-start; padding:4px 0 0}
+  .shell[data-rail="min"] .ws-party .dm .dm-pop{
+    left:calc(100% + 12px); right:auto; bottom:auto; top:50%;
+    transform:translateY(-50%);
+  }
+  .shell[data-rail="min"] .ws-party .dm .dm-pop::after{
+    top:0; bottom:0; left:-14px; right:100%; height:auto}
+  .shell[data-rail="min"] .ws-party .dm-card{transform-origin:0 50%}
+}
 .roster-notes .lo-panel{margin:8px 0 0; border-top:1px solid var(--rule); border-radius:8px}
 .kit-head{margin:12px 0 0; color:var(--brass)}
 .tally{display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px}
@@ -326,19 +358,57 @@ select:focus, .text-input:focus{border-color:var(--brass-deep)}
 .tally .t-support{color:var(--role-support)}
 .tally .t[data-pfilter] b{color:inherit}
 
-/* Add-weapon chip bar: the picker's own facet chips (role + provides) */
-.pchips{display:flex; flex-wrap:wrap; gap:4px; margin-bottom:9px; align-items:center}
-.pchips .lbl2{font-family:var(--mono); font-size:9px; letter-spacing:.14em;
-  text-transform:uppercase; color:var(--ink-3); margin-right:2px}
+/* Add-weapon chip bar: three collapsed groups. The trigger row costs one
+   line of hero height; the labeled chips fly out over the wheel on
+   hover / focus. Every chip still wears its name — the icon is
+   reinforcement, not the message. */
+.pgroup{position:relative}
+.pgroup-t{
+  font-family:var(--mono); font-size:10px; font-weight:600; letter-spacing:.14em;
+  text-transform:uppercase; padding:7px 13px; background:transparent;
+  border:1px solid var(--rule-2); border-radius:99px; color:var(--ink-3);
+  display:inline-flex; align-items:center; gap:7px;
+  transition:border-color .18s var(--ease), color .18s var(--ease);
+}
+.pgroup-t:hover, .pgroup:focus-within .pgroup-t{color:var(--brass); border-color:var(--brass-deep)}
+.pgroup-t[aria-pressed="true"]{
+  color:var(--brass); border-color:var(--brass-deep);
+  box-shadow:inset 0 0 0 1px var(--brass-deep), 0 0 10px -4px var(--brass);
+}
+.pg-caret{font-size:8px; opacity:.7}
+.pc-fly{
+  position:absolute; top:calc(100% + 8px); left:0; z-index:45;
+  width:max-content; max-width:min(520px, calc(100vw - 48px));
+  background:rgba(13,13,20,.97); border:1px solid var(--rule-2); border-radius:14px;
+  padding:10px 11px; box-shadow:var(--shadow-lift);
+  visibility:hidden; opacity:0; transform:translateY(-4px);
+  transition:opacity .16s var(--ease), visibility .16s, transform .16s var(--ease);
+}
+.pc-fly::before{ /* hover bridge so the pointer can travel into the panel */
+  content:""; position:absolute; bottom:100%; left:0; right:0; height:10px;
+}
+.pgroup:hover .pc-fly, .pgroup:focus-within .pc-fly{
+  visibility:visible; opacity:1; transform:none;
+}
+.pc-row{display:flex; flex-wrap:wrap; gap:6px}
+/* touch / small screens: hover is unreliable — groups stay expanded */
+@media (max-width:960px){
+  .pgroup-t{pointer-events:none; border-style:dashed}
+  .pg-caret{display:none}
+  .pc-fly{
+    position:static; visibility:visible; opacity:1; transform:none;
+    width:auto; max-width:none; background:transparent; border:0;
+    box-shadow:none; padding:8px 0 2px;
+  }
+}
 .pchip{
-  font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.08em;
-  text-transform:uppercase; padding:2.5px 8px; background:transparent;
+  font-family:var(--mono); font-size:10.5px; font-weight:600; letter-spacing:.07em;
+  text-transform:uppercase; padding:5px 12px; background:transparent;
   border:1px solid var(--rule-2); border-radius:99px; color:var(--ink-2);
   transition:border-color .18s var(--ease), background .18s var(--ease);
-  display:inline-flex; align-items:center; justify-content:center;
+  display:inline-flex; align-items:center; justify-content:center; gap:7px;
 }
-.pchip.icon-chip{width:32px; height:29px; padding:3px}
-.pchip.icon-chip .sem-icon{width:22px; height:22px}
+.pchip .sem-icon{width:17px; height:17px; margin:-3px 0}
 .pchip:hover{border-color:currentColor}
 .pchip[aria-pressed="true"]{
   border-color:currentColor; background:rgba(255,255,255,.035);
@@ -376,8 +446,8 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .hero-art{
   position:relative; flex:none; display:grid; place-items:center;
   border-radius:12px; overflow:hidden;
-  background:radial-gradient(closest-side, rgba(217,164,78,.16), rgba(217,164,78,.02) 75%);
-  box-shadow:inset 0 0 0 1px rgba(217,164,78,.25), 0 8px 24px -10px rgba(0,0,0,.7);
+  background:radial-gradient(closest-side, rgba(255,201,58,.16), rgba(255,201,58,.02) 75%);
+  box-shadow:inset 0 0 0 1px rgba(255,201,58,.25), 0 8px 24px -10px rgba(0,0,0,.7);
 }
 .hero-art > *{grid-area:1/1}
 .hero-art img{width:100%; height:100%; object-fit:contain;
@@ -391,7 +461,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   align-items:baseline; padding:6px 9px; border-radius:7px;
   border:1px solid transparent;
 }
-.aff.here{border-color:rgba(217,164,78,.35); background:var(--brass-wash)}
+.aff.here{border-color:rgba(255,201,58,.35); background:var(--brass-wash)}
 .aff-name{font-size:12.5px; color:var(--ink-2)}
 .aff.here .aff-name{color:var(--ink)}
 .aff-rank{font-size:11.5px; color:var(--ink); font-weight:600}
@@ -406,7 +476,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .aff-bar{grid-column:1/-1; height:3px; background:#1B202B; border-radius:99px; overflow:hidden}
 .aff-bar i{display:block; height:100%; border-radius:99px;
   background:linear-gradient(90deg, var(--brass-deep), var(--brass-bright))}
-.aff.here .aff-bar i{box-shadow:0 0 8px rgba(217,164,78,.5)}
+.aff.here .aff-bar i{box-shadow:0 0 8px rgba(255,201,58,.5)}
 /* field reports per fight-size bucket */
 .ub-rows{display:flex; flex-direction:column; gap:5px; margin:2px 0 4px}
 .ub{display:grid; grid-template-columns:64px 1fr auto; gap:10px; align-items:center}
@@ -426,7 +496,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .sp-list .idx{font-family:var(--mono); font-size:9.5px; color:var(--ink-3); min-width:20px; flex:none; letter-spacing:.05em}
 .sp-list li.pick, .sp-list li.pick .idx{color:var(--brass); font-weight:600}
 .lo-box{
-  border:1px solid rgba(217,164,78,.4); border-radius:8px; background:var(--brass-wash);
+  border:1px solid rgba(255,201,58,.4); border-radius:12px; background:var(--brass-wash);
   padding:9px 13px; font-size:12.5px; margin-top:10px; line-height:1.7;
 }
 .lo-box .who{font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--brass)}
@@ -454,7 +524,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
    under the dock */
 .inote{
   font-size:12px; line-height:1.5; padding:8px 12px; margin-top:8px;
-  color:var(--ink-2); border:1px dashed var(--rule-2); border-radius:8px;
+  color:var(--ink-2); border:1px dashed var(--rule-2); border-radius:12px;
 }
 .inote .fn{display:block}
 .inote.int-high b{color:var(--gap)}
@@ -489,7 +559,8 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .wf-filter-row{display:flex; gap:8px}
 .wf-filter-row select{width:auto; flex:0 1 190px}
 .wf-filter-row .text-input{flex:1; min-width:0}
-.wheel-filters .pchips{margin-bottom:0; justify-content:center}
+.wheel-filters #picker-chips{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+@media (max-width:960px){ .wheel-filters #picker-chips{flex-direction:column; align-items:stretch} }
 .wheel-filters .facet{margin:0; justify-content:center}
 .prov{
   font-family:var(--mono); font-size:9px; letter-spacing:.06em; padding:2px 6px;
@@ -537,25 +608,57 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
    the engine's reasoning right. */
 .lbl{font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-3)}
 .wheelstage{
-  display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,360px);
+  display:grid;
+  grid-template-columns:minmax(196px,220px) minmax(0,1fr) minmax(280px,320px);
   gap:30px; align-items:start;
 }
-@media (max-width:1250px){ .wheelstage{grid-template-columns:1fr} }
+/* mid widths (≤1560 = the shell's max — three columns beside an expanded
+   rail would starve the wheel): the party NEVER leaves the hero view.
+   It rides as a strip ABOVE the picker, first thing on the stage;
+   analysis keeps the right flank */
+@media (max-width:1560px){
+  .wheelstage{grid-template-columns:minmax(0,1fr) minmax(280px,360px)}
+  .ws-party{grid-column:1; grid-row:1}
+  .ws-center{grid-column:1; grid-row:2}
+  .ws-right{grid-column:2; grid-row:1 / span 2}
+}
+/* a collapsed rail refunds ~300px — enough for the full three-column
+   stage again, so the party gets its flank back */
+@media (min-width:1251px) and (max-width:1560px){
+  .shell[data-rail="min"] .wheelstage{
+    grid-template-columns:minmax(196px,220px) minmax(0,1fr) minmax(280px,320px)}
+  .shell[data-rail="min"] .ws-party{grid-column:auto; grid-row:auto}
+  .shell[data-rail="min"] .ws-center{grid-column:auto; grid-row:auto}
+  .shell[data-rail="min"] .ws-right{grid-column:auto; grid-row:auto}
+}
+@media (max-width:1250px){
+  .wheelstage{grid-template-columns:1fr}
+  .ws-party{grid-column:auto; grid-row:auto; order:1}
+  .ws-center{grid-column:auto; grid-row:auto; order:2}
+  .ws-right{grid-column:auto; grid-row:auto; order:3}
+}
+/* phones: the picker leads again — a full-width party strip would push
+   the wheel a screen down */
+@media (max-width:960px){
+  .ws-party{order:2}
+  .ws-center{order:1}
+}
 .ws-flank{display:flex; flex-direction:column; gap:12px; min-width:0}
 .ws-fit{margin-bottom:14px}
 .ws-fit .num{
   font-family:var(--mono); font-size:40px; font-weight:700; line-height:1; letter-spacing:-.03em;
-  background:linear-gradient(180deg, #F5EBD6, #C9B283);
+  background:linear-gradient(180deg, #FFFFFF, #B9BFDC);
   -webkit-background-clip:text; background-clip:text; color:transparent;
 }
 .ws-fit .of{font-family:var(--mono); font-size:13px; color:var(--ink-3)}
 .ws-fit .meter-track{margin-top:8px}
 .meter-track{height:8px; background:var(--sunk); border-radius:99px; overflow:hidden;
   box-shadow:inset 0 1px 3px rgba(0,0,0,.6)}
+/* the kit's signature: fitness fills as a cool→hot neon sweep */
 .meter-fill{height:100%;
-  background:linear-gradient(90deg, var(--brass-deep), var(--brass) 60%, var(--brass-bright));
+  background:linear-gradient(90deg, #189FC4, #4D8DFF 36%, #9D5CFF 68%, #E00063);
   border-radius:99px; transition:width .45s var(--ease);
-  box-shadow:0 0 10px rgba(217,164,78,.45)}
+  box-shadow:0 0 12px rgba(157,92,255,.5)}
 .ws-center{min-width:0; container-type:inline-size}
 
 /* the wheel proper — all rim geometry derives from --wd so the whole
@@ -568,6 +671,14 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   --card-h:clamp(68px, calc(var(--wd)*.165), 92px);
   --wr:calc(var(--wd)/2 - var(--card-h)/2 - 8px);
   width:var(--wd); height:var(--wd);
+  /* semicircle stage: cards only ever ride the top arc, so the bottom
+     of the instrument fades into the table and hands its height to the
+     next-pick bar. The box stays square — rim geometry and the
+     drag-to-rotate center math are untouched; only paint and layout
+     flow change. */
+  -webkit-mask-image:linear-gradient(180deg, #000 68%, rgba(0,0,0,.5) 76%, transparent 85%);
+  mask-image:linear-gradient(180deg, #000 68%, rgba(0,0,0,.5) 76%, transparent 85%);
+  margin-bottom:calc(var(--wd)*-0.15);
 }
 .wheel:focus-visible{outline:2px solid var(--brass-bright); outline-offset:4px; border-radius:50%}
 .wheel-track{
@@ -575,14 +686,14 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   border:1px solid var(--rule);
   background:radial-gradient(closest-side,
     transparent 60%, rgba(18,21,28,.55) 62%, rgba(8,10,15,.6) 82%,
-    rgba(217,164,78,.10) 96%, transparent);
+    rgba(255,201,58,.10) 96%, transparent);
   box-shadow:inset 0 0 30px rgba(0,0,0,.5);
 }
 .wheel-notch{
   position:absolute; top:-4px; left:50%; z-index:3;
   width:12px; height:12px; transform:translateX(-50%) rotate(45deg);
   background:linear-gradient(135deg, var(--brass-bright), var(--brass-deep));
-  border-radius:2px; box-shadow:0 0 14px rgba(217,164,78,.65);
+  border-radius:2px; box-shadow:0 0 14px rgba(255,201,58,.65);
 }
 .wheel-ring{position:absolute; inset:0; transform-origin:50% 50%}
 .wheel.spun .wheel-ring{animation:wheel-spin 1.15s cubic-bezier(.16,.7,.25,1)}
@@ -599,13 +710,13 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
     border-color .18s var(--ease), box-shadow .18s var(--ease);
   display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
   padding:5px 3px; background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
-  border:1px solid var(--rule); border-radius:10px;
+  border:1px solid var(--rule); border-radius:12px;
   box-shadow:0 2px 8px rgba(0,0,0,.45);
 }
 .wseg:hover{border-color:var(--rule-2)}
 .wseg.on{
-  border-color:rgba(217,164,78,.65); opacity:1;
-  box-shadow:0 0 20px -6px rgba(217,164,78,.6), 0 2px 8px rgba(0,0,0,.45);
+  border-color:rgba(255,201,58,.65); opacity:1;
+  box-shadow:0 0 20px -6px rgba(255,201,58,.6), 0 2px 8px rgba(0,0,0,.45);
 }
 .wseg .icon{filter:drop-shadow(0 2px 6px rgba(0,0,0,.5)) saturate(1.1)}
 .wseg .ws-nm{
@@ -615,12 +726,15 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 }
 .wseg.on .ws-nm{color:var(--ink)}
 
-/* the hub: party role rings closing around the focused weapon */
+/* the hub: party role rings closing around the focused weapon.
+   Every fixed size in here is min()-capped against --wd so a narrower
+   center column (setup rail open, three-column stage) shrinks the
+   contents with the circle instead of cropping the weapon's name */
 .wheel-hub{
-  position:absolute; inset:calc(var(--card-h) + 14px); border-radius:50%;
+  position:absolute; inset:calc(var(--card-h) + min(14px, var(--wd)*0.022)); border-radius:50%;
   background:radial-gradient(closest-side, rgba(24,28,37,.94), rgba(13,16,22,.97));
   border:1px solid var(--rule-2);
-  box-shadow:inset 0 0 42px rgba(0,0,0,.55), 0 0 34px -14px rgba(217,164,78,.3);
+  box-shadow:inset 0 0 42px rgba(0,0,0,.55), 0 0 34px -14px rgba(255,201,58,.3);
 }
 .hub-rings{position:absolute; inset:5px; width:calc(100% - 10px); height:calc(100% - 10px)}
 .hub-rings circle{fill:none; stroke-width:6.5;
@@ -630,41 +744,88 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .hub-rings .ring-fill.empty{opacity:0}
 .hub-rings .ring-fill.done{filter:drop-shadow(0 0 4px currentColor)}
 .hub-body{
-  position:absolute; inset:26%; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; gap:3px; text-align:center; min-width:0;
+  /* 23%: the packed rings gave the body back ~10% of the hub's radius */
+  position:absolute; inset:23%; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:min(3px, calc(var(--wd)*0.006));
+  text-align:center; min-width:0;
 }
-.hub-body .icon{filter:drop-shadow(0 6px 14px rgba(0,0,0,.6)) saturate(1.15)}
+.hub-body .icon{filter:drop-shadow(0 6px 14px rgba(0,0,0,.6)) saturate(1.15);
+  width:min(54px, calc(var(--wd)*0.1)); height:min(54px, calc(var(--wd)*0.1))}
+/* the elemental aura: a breathing glow behind the weapon art, keyed to
+   its tree by renderHub via data-aura on the hub */
+.hub-art-slot{position:relative; display:grid; place-items:center}
+.hub-art-slot::before{
+  content:""; position:absolute; inset:-105%; border-radius:50%; z-index:0;
+  /* the halo overlays its siblings in hit-testing (z-index:0 vs their
+     static auto) — without this, it eats the caps row's hover/tooltips */
+  pointer-events:none;
+  background:radial-gradient(closest-side,
+    var(--aura, transparent), var(--aura, transparent) 22%, transparent 80%);
+  filter:blur(6px);
+  animation:aura-breathe 3s var(--ease) infinite alternate;
+}
+.hub-art-slot .icon{position:relative; z-index:1}
+@keyframes aura-breathe{
+  from{opacity:.75; transform:scale(.94)}
+  to{opacity:1; transform:scale(1.1)}
+}
+.wheel-hub[data-aura="fire"]{--aura:rgba(255,122,47,.9)}
+.wheel-hub[data-aura="fire"] .hub-art-slot::before{animation-duration:1.5s} /* flicker */
+.wheel-hub[data-aura="frost"]{--aura:rgba(77,205,255,.8)}
+.wheel-hub[data-aura="holy"]{--aura:rgba(255,223,122,.85)}
+.wheel-hub[data-aura="nature"]{--aura:rgba(53,230,138,.75)}
+.wheel-hub[data-aura="shadow"]{--aura:rgba(157,92,255,.85)}
+.wheel-hub[data-aura="arcane"]{--aura:rgba(125,92,255,.8)}
+.wheel-hub[data-aura="steel"]{--aura:rgba(170,180,205,.35)}
 .hub-nm{
-  font-family:var(--serif); font-size:15px; line-height:1.15; max-width:100%;
+  font-family:var(--serif); font-size:min(15px, calc(var(--wd)*0.028));
+  line-height:1.15; max-width:100%; flex:none;
   overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
 }
-.hub-role{
-  font-family:var(--mono); font-size:9px; color:var(--ink-2); max-width:92%;
-  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+/* the glance row: the scored kit's top capabilities as icons — prose
+   used to truncate here ("sustained dam…"); glyphs never do */
+.hub-caps{display:flex; gap:5px; align-items:center; justify-content:center; margin:2px 0}
+.hub-cap{
+  display:inline-flex; align-items:center; justify-content:center; flex:none;
+  width:min(24px, calc(var(--wd)*0.046)); height:min(24px, calc(var(--wd)*0.046));
+  border:1px solid var(--rule-2); border-radius:7px; background:rgba(255,255,255,.03);
+  cursor:help; transition:border-color .15s var(--ease);
 }
-.hub-score{font-size:10.5px; color:var(--brass)}
+.hub-cap:hover{border-color:var(--brass-deep)}
+.hub-cap .sem-icon{width:74%; height:74%}
+.hub-cap.hub-cap-txt{
+  width:auto; padding:0 8px; font-family:var(--mono);
+  font-size:min(9px, calc(var(--wd)*0.017)); letter-spacing:.06em;
+  text-transform:uppercase; color:var(--ink-2); white-space:nowrap;
+}
+.hub-score{font-size:min(10.5px, calc(var(--wd)*0.02)); color:var(--brass)}
 .hub-score .offcomp{font-style:normal}
 .hub-empty{font-size:12px; line-height:1.5; color:var(--ink-2); padding:0 6px}
 .cb-add{
   padding:10px 18px;
   background:linear-gradient(180deg, var(--brass-bright), var(--brass));
-  color:#1A1206; border:0; border-radius:8px; font-size:13.5px; font-weight:700; white-space:nowrap;
-  box-shadow:0 2px 14px -4px rgba(217,164,78,.55), inset 0 1px 0 rgba(255,255,255,.35);
+  color:#1A1206; border:0; border-radius:11px; font-size:13.5px; font-weight:700; white-space:nowrap;
+  box-shadow:0 2px 14px -4px rgba(255,201,58,.55), inset 0 1px 0 rgba(255,255,255,.35);
   transition:transform .15s var(--ease), box-shadow .15s var(--ease), filter .15s var(--ease);
 }
 .cb-add:hover{filter:brightness(1.07); transform:translateY(-1px);
-  box-shadow:0 4px 20px -4px rgba(217,164,78,.65), inset 0 1px 0 rgba(255,255,255,.35)}
+  box-shadow:0 4px 20px -4px rgba(255,201,58,.65), inset 0 1px 0 rgba(255,255,255,.35)}
 .cb-add:active{transform:translateY(0)}
-.hub-add{padding:7px 15px; font-size:11.5px; margin-top:4px}
+.hub-add{
+  padding:min(7px, calc(var(--wd)*0.013)) min(15px, calc(var(--wd)*0.028));
+  font-size:min(11.5px, calc(var(--wd)*0.022)); margin-top:min(4px, calc(var(--wd)*0.007));
+}
 .cb-forge{
   padding:9px 14px; background:transparent; color:var(--brass);
-  border:1px solid rgba(217,164,78,.5); border-radius:8px; font-size:12px; white-space:nowrap;
+  border:1px solid rgba(255,201,58,.5); border-radius:11px; font-size:12px; white-space:nowrap;
   transition:background .15s var(--ease), border-color .15s var(--ease);
 }
 .cb-forge:hover{background:var(--brass-wash); border-color:var(--brass)}
 
-/* beneath the wheel: next-pick eyebrow, ring tallies, forge actions */
-.wheel-foot{display:flex; flex-direction:column; gap:9px; margin-top:16px}
+/* beneath the wheel: next-pick eyebrow, ring tallies, forge actions —
+   layered above the wheel's faded bottom arc, in the space it gave up */
+.wheel-foot{display:flex; flex-direction:column; gap:9px; margin-top:0;
+  position:relative; z-index:5}
 .wheel-foot .wf-row{
   display:flex; align-items:center; justify-content:center; gap:10px 16px; flex-wrap:wrap;
 }
@@ -702,7 +863,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .cap.floor-hit .cap-name{color:var(--gap); font-weight:600}
 .tag{font-family:var(--mono); font-size:9px; letter-spacing:.05em; padding:1px 5px; border-radius:3px; margin-left:5px}
 .tag.floor{background:var(--gap-wash); color:var(--gap)}
-.tag.over{background:rgba(144,133,233,.14); color:var(--over)}
+.tag.over{background:rgba(157,92,255,.14); color:var(--over)}
 .tag.style-up{background:rgba(224,166,61,.14); color:var(--brand, #E0A63D)}
 .tag.style-down{background:rgba(122,135,165,.14); color:#8FA7CF}
 
@@ -717,7 +878,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   display:flex; align-items:baseline; gap:12px; padding:12px 15px;
   background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
   border:1px solid var(--rule);
-  border-left:3px solid var(--gap); border-radius:0 8px 8px 0;
+  border-left:3px solid var(--gap); border-radius:0 12px 12px 0;
   box-shadow:0 1px 3px rgba(0,0,0,.3);
 }
 .weak.nice{border-left-color:var(--brass-deep); padding:9px 15px}
@@ -741,8 +902,8 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 /* ---------- recommendation ---------- */
 .rec{
   background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
-  border:1px solid rgba(217,164,78,.42); border-radius:12px;
-  overflow:hidden; box-shadow:var(--shadow), 0 0 40px -18px rgba(217,164,78,.35);
+  border:1px solid rgba(255,201,58,.42); border-radius:16px;
+  overflow:hidden; box-shadow:var(--shadow), 0 0 40px -18px rgba(255,201,58,.35);
 }
 .rec-body{padding:18px 22px; display:flex; flex-direction:column; gap:16px}
 .why{font-size:14px; line-height:1.65; margin:0}
@@ -760,26 +921,44 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   border-top:1px solid var(--rule); padding-top:12px;
 }
 .formula .k{color:var(--ink-2)}
+/* the deep math folds away so the alternatives sit above the fold;
+   the disclosure keeps its open state across re-renders */
+.rec-math{border-top:1px solid var(--rule); padding-top:11px}
+.rec-math > summary{
+  font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-3); cursor:pointer; list-style:none; user-select:none;
+  display:flex; align-items:center; gap:8px;
+  transition:color .18s var(--ease);
+}
+.rec-math > summary::-webkit-details-marker{display:none}
+.rec-math > summary::before{
+  content:"\25B8"; font-size:9px; color:var(--brass-deep);
+  transition:transform .18s var(--ease);
+}
+.rec-math[open] > summary::before{transform:rotate(90deg)}
+.rec-math > summary:hover{color:var(--brass)}
+.rec-math .math-body{display:flex; flex-direction:column; gap:14px; margin-top:13px}
+.rec-math .formula{border-top:0; padding-top:0}
 .alts{display:flex; flex-direction:column; gap:5px}
 .alt{
   display:flex; align-items:center; gap:11px; width:100%; text-align:left;
-  padding:9px 13px; background:transparent; border:1px solid var(--rule); border-radius:8px;
+  padding:9px 13px; background:transparent; border:1px solid var(--rule); border-radius:12px;
   transition:border-color .15s var(--ease), background .15s var(--ease), transform .15s var(--ease);
 }
-.alt:hover{border-color:rgba(217,164,78,.5); background:var(--surface-2); transform:translateX(2px)}
+.alt:hover{border-color:rgba(255,201,58,.5); background:var(--surface-2); transform:translateX(2px)}
 .alt .sc{font-family:var(--mono); font-size:12px; color:var(--brass); width:44px; flex:none; font-weight:600}
 .alt .nm{flex:1; font-size:13.5px}
 .alt .rz{font-family:var(--mono); font-size:10.5px; color:var(--ink-3); text-align:right}
 .add{
   width:100%; padding:12px;
   background:linear-gradient(180deg, var(--brass-bright), var(--brass));
-  color:#1A1206; border:0; border-radius:8px; font-size:14px; font-weight:700; letter-spacing:.01em;
-  box-shadow:0 2px 14px -4px rgba(217,164,78,.55), inset 0 1px 0 rgba(255,255,255,.35);
+  color:#1A1206; border:0; border-radius:12px; font-size:14px; font-weight:700; letter-spacing:.01em;
+  box-shadow:0 2px 14px -4px rgba(255,201,58,.55), inset 0 1px 0 rgba(255,255,255,.35);
 }
 .add:hover{filter:brightness(1.07)}
 
 .warn{
-  background:var(--gap-wash); border:1px solid rgba(230,103,103,.35); border-radius:10px;
+  background:var(--gap-wash); border:1px solid rgba(255,84,112,.35); border-radius:14px;
   padding:14px 16px; display:flex; gap:12px; align-items:flex-start;
   flex-direction:column; margin-top:12px;
 }
@@ -806,7 +985,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   display:flex; flex-direction:column; align-items:flex-start; gap:5px; font-size:12px;
   padding:10px 12px; min-width:150px; max-width:220px; position:relative;
   background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
-  border:1px solid var(--rule); border-radius:8px;
+  border:1px solid var(--rule); border-radius:12px;
   box-shadow:0 1px 3px rgba(0,0,0,.35);
 }
 .comp-m .cm-role{position:absolute; top:11px; right:11px;
@@ -825,9 +1004,9 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .livefeed .load-btn{
   padding:10px 16px;
   background:linear-gradient(180deg, var(--brass-bright), var(--brass));
-  color:#1A1206; border:0; border-radius:8px; font-family:var(--mono); font-size:11.5px;
+  color:#1A1206; border:0; border-radius:11px; font-family:var(--mono); font-size:11.5px;
   letter-spacing:.08em; text-transform:uppercase; font-weight:700;
-  box-shadow:0 2px 14px -4px rgba(217,164,78,.55), inset 0 1px 0 rgba(255,255,255,.35);
+  box-shadow:0 2px 14px -4px rgba(255,201,58,.55), inset 0 1px 0 rgba(255,255,255,.35);
 }
 .livefeed .load-btn:hover{filter:brightness(1.07)}
 .livefeed .load-btn:disabled{opacity:.4; cursor:not-allowed; filter:none}
@@ -836,7 +1015,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .drawer{
   position:fixed; inset:auto 0 0 0;
   background:rgba(13,16,22,.94); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-  border-top:1px solid rgba(217,164,78,.5);
+  border-top:1px solid rgba(255,201,58,.5);
   box-shadow:0 -12px 48px -12px rgba(0,0,0,.8);
   padding:18px 26px 24px; max-height:52vh; overflow-y:auto; z-index:20;
   transform:translateY(101%); transition:transform .32s var(--ease);
@@ -1041,6 +1220,15 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
     <!-- The forge wheel stage: analysis flanks left, the wheel centers,
          reasoning flanks right. The wheel replaces the old rail picker. -->
     <section class="wheelstage">
+      <!-- the party dock: the roster at the wheel's left hand — on screen
+           from the first paint, no scrolling to find who's in -->
+      <div class="ws-flank ws-party">
+        <div class="sec-label">Party</div>
+        <div class="tally" id="tally"></div>
+        <div class="roster" id="roster"></div>
+        <div class="roster-notes" id="roster-notes"></div>
+      </div>
+
       <div class="ws-center">
         <div class="sec-label">Add weapon</div>
         <div class="wheel-filters">
@@ -1062,13 +1250,6 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
           </div>
         </div>
         <div class="wheel-foot" id="wheel-foot"></div>
-        <!-- the party dock: the roster as a fish-eye row under the wheel -->
-        <div class="dock-sec">
-          <div class="sec-label">Party</div>
-          <div class="tally" id="tally"></div>
-          <div class="roster" id="roster"></div>
-          <div class="roster-notes" id="roster-notes"></div>
-        </div>
       </div>
 
       <div class="ws-flank ws-right">

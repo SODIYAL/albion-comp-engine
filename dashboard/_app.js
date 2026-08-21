@@ -182,8 +182,8 @@ function semanticIcon(key, extraClass = ""){
 const GROUPS = {
   Sustain:   ["heal_burst","heal_sustain","cleanse","self_sustain"],
   Frontline: ["tankiness","engage","disengage","anti_dive","zone_control"],
-  Control:   ["stun","root","silence","knockback_displace","slow","clump_create","peel"],
-  Denial:    ["purge","anti_zone","heal_reduction","resist_shred","energy_drain","damage_debuff"],
+  Control:   ["stun","root","silence","interrupt","knockback_displace","slow","clump_create","peel"],
+  Denial:    ["purge","anti_zone","heal_reduction","resist_shred","energy_drain","damage_debuff","max_health_cut"],
   Damage:    ["burst_st","burst_aoe","sustained_dps","execute"],
   Tempo:     ["mobility","catch","buff_allies"],
 };
@@ -201,6 +201,12 @@ const CAP_PROSE = {
   burst_st:"single-target burst", burst_aoe:"AoE burst", sustained_dps:"sustained damage",
   execute:"execute pressure", mobility:"mobility", catch:"chase-down", buff_allies:"ally buffs",
   self_sustain:"self-sustain", anti_dive:"anti-dive", knockback_displace:"enemy displacement",
+  /* taxonomy ruling 2026-08-21: %-max-health cuts are their own capability —
+     an enabler, not damage; execute stays for low-HP payoffs / kill rewards */
+  max_health_cut:"max-health cut",
+  /* interrupt taxonomy 2026-08-21: stopping a cast mid-channel is its own
+     thing, not silence — Badon's cloud, Snare Charge, Forbidden Stab */
+  interrupt:"cast interrupts",
 };
 const prose = c => CAP_PROSE[c] || c.replace(/_/g," ");
 
@@ -219,14 +225,16 @@ function roleOf(w, combo){
    only at defining strength (score >= 2): score-1 effects are minor by the
    magnitude rule (HANDOFF) and would drown the signal. Tooltip carries the
    component scores. */
+/* chip: the short name worn on the picker's filter chips — label stays the
+   full name for tooltips, badges and screen readers */
 const BADGE_DEFS = [
-  {id:"tank", label:"Tankiness",              icon:"tank",   caps:["tankiness"]},
-  {id:"heal", label:"Healing",                icon:"healer", caps:["heal_sustain", "heal_burst"]},
-  {id:"peel", label:"Peel / ally protection", icon:"peel",   caps:["peel"]},
-  {id:"cc",   label:"Crowd control",           icon:"cc",     caps:["stun", "root", "silence", "slow", "clump_create", "knockback_displace"]},
-  {id:"aoe",  label:"Area damage",             icon:"aoe",    caps:["burst_aoe"]},
-  {id:"st",   label:"Single-target burst",     icon:"st",     caps:["burst_st", "execute"]},
-  {id:"dps",  label:"Sustained damage",        icon:"dps",    caps:["sustained_dps"]},
+  {id:"tank", label:"Tankiness",              chip:"tanky",    icon:"tank",   caps:["tankiness"]},
+  {id:"heal", label:"Healing",                chip:"healing",  icon:"healer", caps:["heal_sustain", "heal_burst"]},
+  {id:"peel", label:"Peel / ally protection", chip:"peel",     icon:"peel",   caps:["peel"]},
+  {id:"cc",   label:"Crowd control",           chip:"cc",       icon:"cc",     caps:["stun", "root", "silence", "slow", "clump_create", "knockback_displace"]},
+  {id:"aoe",  label:"Area damage",             chip:"aoe",      icon:"aoe",    caps:["burst_aoe"]},
+  {id:"st",   label:"Single-target burst",     chip:"burst",    icon:"st",     caps:["burst_st", "execute"]},
+  {id:"dps",  label:"Sustained damage",        chip:"dps",      icon:"dps",    caps:["sustained_dps"]},
 ];
 const BADGE_BY_ID = Object.fromEntries(BADGE_DEFS.map(d => [d.id, d]));
 function badgeHtml(w){
@@ -630,21 +638,23 @@ function renderPickerChips(){
      node mid-click would let a double-click toggle the facet back off */
   const holder = $("picker-chips");
   if (!holder.dataset.built){
+    /* collapsed filter groups: a compact trigger per group, chips fly out
+       on hover / focus so the rows stop spending hero-section height */
+    const fly = (label, type, chips) =>
+      `<div class="pgroup"><button class="pgroup-t" data-pg="${type}" type="button"
+        aria-haspopup="true" title="${label} filters">${label}<span class="pg-caret">&#9662;</span></button>
+        <div class="pc-fly"><div class="pc-row">${chips}</div></div></div>`;
     holder.innerHTML =
-      `<div class="pchips"><span class="lbl2">role</span>` +
-      PICKER_ROLES.map(r => {
+      fly("role", "role", PICKER_ROLES.map(r => {
         const label = roleLabel(r);
-        return `<button class="pchip icon-chip t-${r}" data-rfilter="${r}"
-          aria-label="${esc(label)} role" title="${esc(label)} role">${semanticIcon(r)}<span class="sr-only">${esc(label)}</span></button>`;
-      }).join("") +
-      `</div><div class="pchips"><span class="lbl2">provides</span>` +
-      BADGE_DEFS.map(({id, label, icon}) =>
-        `<button class="pchip icon-chip b-${id}" data-bfilter="${id}"
-          aria-label="${esc(label)}" title="${esc(label)}">${semanticIcon(icon)}<span class="sr-only">${esc(label)}</span></button>`).join("") +
-      `</div><div class="pchips"><span class="lbl2">utility</span>` +
-      UTIL_DEFS.map(([cls]) =>
-        `<button class="pchip u-chip" data-ufilter="${cls}">${cls}</button>`).join("") +
-      `</div>`;
+        return `<button class="pchip t-${r}" data-rfilter="${r}"
+          aria-label="${esc(label)} role" title="${esc(label)} role">${semanticIcon(r)}${esc(label)}</button>`;
+      }).join("")) +
+      fly("provides", "badge", BADGE_DEFS.map(({id, label, chip, icon}) =>
+        `<button class="pchip b-${id}" data-bfilter="${id}"
+          aria-label="${esc(label)}" title="${esc(label)}">${semanticIcon(icon)}${esc(chip)}</button>`).join("")) +
+      fly("utility", "util", UTIL_DEFS.map(([cls]) =>
+        `<button class="pchip u-chip" data-ufilter="${cls}">${cls}</button>`).join(""));
     holder.dataset.built = "1";
   }
   holder.querySelectorAll("[data-rfilter]").forEach(el => el.setAttribute("aria-pressed",
@@ -653,6 +663,10 @@ function renderPickerChips(){
     String(!!FACET && FACET.type === "badge" && FACET.v === el.dataset.bfilter)));
   holder.querySelectorAll("[data-ufilter]").forEach(el => el.setAttribute("aria-pressed",
     String(!!FACET && FACET.type === "util" && FACET.v === el.dataset.ufilter)));
+  /* the trigger glows while its group holds the active facet, so the
+     collapsed row still tells you a filter is on */
+  holder.querySelectorAll(".pgroup-t").forEach(t => t.setAttribute("aria-pressed",
+    String(!!FACET && FACET.type === t.dataset.pg)));
 }
 /* ------------------------------------------------------- the forge wheel
    The picker as a wheel: filtered weapons ride the rim, the focused one
@@ -741,21 +755,98 @@ function renderHubRings(rings){
         stroke-dasharray="${v.toFixed(2)} ${(100 - v).toFixed(2)}"
         style="stroke:${g.color}; color:${g.color}">
         <title>${esc(g.label)}: ${g.have} of ${g.want}</title></circle>`;
-    r -= 11;
+    /* rings pack edge-to-edge (stroke 6.5 + hairline) — the saved radial
+       depth widens the hub body for the name, cap icons and actions */
+    r -= 7;
     return seg;
   }).join("");
 }
+/* capability → semantic icon for the hub's glance row. Caps without a
+   glyph fall back to a small text chip so nothing is silently dropped;
+   the full prose stays in the tooltip either way. */
+const CAP_ICON = {
+  tankiness:"tank",
+  heal_burst:"healer", heal_sustain:"healer", self_sustain:"healer", cleanse:"healer",
+  peel:"peel", buff_allies:"support",
+  stun:"cc", root:"cc", silence:"cc", slow:"cc", clump_create:"cc",
+  knockback_displace:"cc",
+  burst_aoe:"aoe", zone_control:"aoe", anti_zone:"aoe",
+  burst_st:"st", execute:"st", catch:"st",
+  sustained_dps:"dps",
+  engage:"melee",
+};
+function hubCapsHtml(w){
+  /* Ordered the way the owner reads a weapon (2026-08-21 ruling): what
+     the E does comes first, then Q, then W — within one slot, the
+     biggest effect leads. Sub-unit slot contributions (< 1.0 effective)
+     don't claim a slot, so an E's incidental dribble can't outrank a
+     Q's real job; caps granted only by always-on bundles trail. Weapons
+     without loadout slots fall back to pure magnitude order. Values and
+     units come from the same effective caps roleOf read — display only.
+     Two caps sharing a glyph (zone_control + anti_zone → ripples) merge
+     into one chip whose tooltip lists both; tooltips name the slot. */
+  const eff = ENG.memberExtra(w, null);
+  const PRI = { e:0, q:1, w:2, r:3, passive:4 };
+  const claim = {};                 /* cap → {p, slot} best claiming slot */
+  const le = ENG._loadoutEff(w);
+  const ch = ENG.comboChoices(w, null);
+  const sp = ENG.comboSpells(w, null);
+  ch.forEach(([oi, bi], i) => {
+    const slot = (sp[i] || [])[0];
+    const p = PRI[slot] !== undefined ? PRI[slot] : 5;
+    const bundle = (le.slots[oi] || [])[bi] || {};
+    for (const c in bundle)
+      if (bundle[c] >= 1.0 && (!(c in claim) || p < claim[c].p))
+        claim[c] = { p, slot };
+  });
+  const top = Object.entries(eff).filter(([, v]) => v > 0)
+    .sort((a, b) => {
+      const pa = claim[a[0]] ? claim[a[0]].p : 6;
+      const pb = claim[b[0]] ? claim[b[0]].p : 6;
+      return pa - pb || b[1] - a[1];
+    }).slice(0, 3);
+  const label = k => prose(k) + (claim[k] && claim[k].slot !== "passive"
+    ? ` · ${claim[k].slot.toUpperCase()}` : "");
+  const byIcon = new Map();   /* icon key → [cap labels], insertion-ordered */
+  const out = [];
+  for (const [k] of top){
+    const ic = CAP_ICON[k];
+    if (!ic){ out.push({txt:prose(k), tip:label(k)}); continue; }
+    if (byIcon.has(ic)) byIcon.get(ic).push(label(k));
+    else { const caps = [label(k)]; byIcon.set(ic, caps); out.push({ic, caps}); }
+  }
+  return out.map(e => e.txt !== undefined
+    ? `<span class="hub-cap hub-cap-txt" title="${esc(e.tip)}">${esc(e.txt)}</span>`
+    : `<span class="hub-cap" title="${esc(e.caps.join(" · "))}">${semanticIcon(e.ic)}</span>`
+  ).join("");
+}
+/* the hub wears its weapon's element: tree name → aura key, painted by
+   CSS as a breathing glow behind the art */
+function auraOf(w){
+  const t = (TREES[w] || "").toLowerCase();
+  if (t.includes("fire")) return "fire";
+  if (t.includes("frost")) return "frost";
+  if (t.includes("holy")) return "holy";
+  if (t.includes("nature")) return "nature";
+  if (t.includes("cursed")) return "shadow";
+  if (t.includes("arcane")) return "arcane";
+  return "steel";
+}
 function renderHub(keys, idx, recs){
   const body = $("hub-body");
+  const hub = body.parentElement;   /* .wheel-hub — carries the aura */
   if (recs === null){
+    delete hub.dataset.aura;
     body.innerHTML = `<div class="hub-empty">That is ${HARD_CAP} people — beyond even a castle blob. Remove someone to explore swaps.</div>`;
     return;
   }
   if (idx === -1){
+    delete hub.dataset.aura;
     body.innerHTML = `<div class="hub-empty">Nothing matches${treeFilter ? " in this tree" : ""}${pickFilter.trim() ? ` — “${esc(pickFilter)}”` : ""}. Clear a filter to respin.</div>`;
     return;
   }
   const w = keys[idx];
+  hub.dataset.aura = auraOf(w);
   /* score the focused weapon exactly as recommend() would — a one-candidate
      pool eval, so any card on the rim carries its true marginal score */
   let r = (recs || []).find(x => x.w === w);
@@ -770,7 +861,7 @@ function renderHub(keys, idx, recs){
   body.innerHTML = `
     <div class="hub-art-slot">${icon(w, 54)}</div>
     <button class="nm-btn hub-nm" data-detail="${w}" title="open the dossier">${nameOf(w)}</button>
-    <span class="hub-role">${roleOf(w)}</span>
+    <span class="hub-caps">${hubCapsHtml(w)}</span>
     <span class="hub-score mono">${r ? (r.score >= 0 ? "+" : "−") + Math.abs(r.score).toFixed(2) : "—"}${marks}</span>
     <button class="cb-add hub-add" data-add="${w}">Add to comp</button>`;
 }
@@ -955,6 +1046,9 @@ function scoredKitLine(w, combo){
     ? `<div class="fieldnote">scored loadout: ${parts.join(" · ")} — the marginal terms below are THIS kit, one spell per slot</div>`
     : "";
 }
+/* the math disclosure keeps its state across re-renders — a reader who
+   opened it mid-comparison shouldn't have it snap shut on every pick */
+let MATH_OPEN = false;
 function renderRecDetail(recs){
   if (!recs){
     $("rec-label").textContent = "Recommendation";
@@ -968,6 +1062,17 @@ function renderRecDetail(recs){
     <div class="rec">
       <div class="rec-body">
         <p class="why">${whySentence(party, top.w)}</p>
+        <div><div class="sec-label" style="margin-bottom:8px">Alternatives — click to add instead</div>
+          <div class="alts">${recs.slice(1).map(r => {
+            const t0 = explain(party, r.w)[0];
+            return `<button class="alt" data-add="${r.w}"><span class="sc">${r.score.toFixed(2)}</span>
+              ${icon(r.w, 24)}<span class="nm">${nameOf(r.w)}${badgeHtml(r.w)}</span>
+              <span class="rz">${t0 ? `+${t0.d.toFixed(1)} ${t0.cap}` : "no template gain"}</span></button>`;
+          }).join("")}</div>
+        </div>
+        <details class="rec-math"${MATH_OPEN ? " open" : ""}>
+          <summary>the math — scored loadout, marginal terms, formula</summary>
+          <div class="math-body">
         ${scoredKitLine(top.w, top.combo)}
         ${usageLine(top.w)}
         ${(() => {
@@ -996,16 +1101,12 @@ function renderRecDetail(recs){
           <span class="k">score</span> is the exact change to the party's comp score if this pick joins with the loadout above. <span class="k">metaPrior</span> and the viability tier are hand-curated guard values — real win-lift arrives in Phase 3 from battle data.
         </div>`;
         })()}
-        <div><div class="sec-label" style="margin-bottom:8px">Alternatives — click to add instead</div>
-          <div class="alts">${recs.slice(1).map(r => {
-            const t0 = explain(party, r.w)[0];
-            return `<button class="alt" data-add="${r.w}"><span class="sc">${r.score.toFixed(2)}</span>
-              ${icon(r.w, 24)}<span class="nm">${nameOf(r.w)}${badgeHtml(r.w)}</span>
-              <span class="rz">${t0 ? `+${t0.d.toFixed(1)} ${t0.cap}` : "no template gain"}</span></button>`;
-          }).join("")}</div>
-        </div>
+          </div>
+        </details>
       </div>
     </div>`;
+  const mathEl = $("rec-slot").querySelector(".rec-math");
+  if (mathEl) mathEl.addEventListener("toggle", () => { MATH_OPEN = mathEl.open; });
 }
 function renderFootnote(){
   const c = party.filter(w => WEAPONS[w].status === "curated").length;

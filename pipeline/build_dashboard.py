@@ -26,20 +26,21 @@ ROOT = os.path.join(HERE, os.pardir)
 DASH = os.path.join(ROOT, "dashboard")
 DATASET = os.path.join(HERE, "out", "dataset-latest.json")
 
-# Original role/effect art generated for the dashboard.  The production-sized
-# PNGs stay in the repo, while the builder embeds them as data URIs so the
-# generated page keeps its file:// / strict-artifact-host guarantee.
+# Role/effect glyphs drawn for the dashboard: flat geometric SVGs (2026-08-21
+# neon reskin; the retired painterly *-96.png renders remain beside them).
+# The builder embeds them as data URIs so the generated page keeps its
+# file:// / strict-artifact-host guarantee; SVG stays crisp at every chip size.
 SEMANTIC_ICON_FILES = {
-    "tank": "tank-96.png",
-    "healer": "healer-96.png",
-    "melee": "melee-96.png",
-    "range": "range-96.png",
-    "support": "support-96.png",
-    "peel": "peel-96.png",
-    "cc": "cc-96.png",
-    "aoe": "aoe-96.png",
-    "st": "st-96.png",
-    "dps": "dps-96.png",
+    "tank": "tank.svg",
+    "healer": "healer.svg",
+    "melee": "melee.svg",
+    "range": "range.svg",
+    "support": "support.svg",
+    "peel": "peel.svg",
+    "cc": "cc.svg",
+    "aoe": "aoe.svg",
+    "st": "st.svg",
+    "dps": "dps.svg",
 }
 
 
@@ -50,9 +51,10 @@ def load_semantic_icons():
         path = os.path.join(icon_dir, filename)
         if not os.path.exists(path):
             sys.exit(f"semantic icon missing: {path}")
+        mime = "image/svg+xml" if filename.endswith(".svg") else "image/png"
         with open(path, "rb") as f:
             encoded = base64.b64encode(f.read()).decode("ascii")
-        icons[key] = f"data:image/png;base64,{encoded}"
+        icons[key] = f"data:{mime};base64,{encoded}"
     return icons
 
 
