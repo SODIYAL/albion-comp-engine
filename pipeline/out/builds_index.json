@@ -14,11 +14,11 @@
   },
   "counts": {
    "approved": 70,
-   "candidate": 58,
+   "candidate": 65,
    "canonical_defaults": 45,
    "quarantined_fields": 2,
    "quarantined_records": 2,
-   "records": 128
+   "records": 135
   }
  },
  "by_content": {
@@ -7876,6 +7876,435 @@
      },
      "status": "normalized",
      "style": "kite",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ]
+  },
+  "zvz_7man": {
+   "2H_ARCANESTAFF": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_sob_blaze_os_2026_06:comp:1",
+     "caller": "anonymous albioncompo.com user (c834f5c8)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": null,
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-06-20",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_ACID",
+      "shoes": "SHOES_CLOTH_KEEPER"
+     },
+     "role": "support",
+     "source": {
+      "author": "anonymous albioncompo.com user (c834f5c8)",
+      "family": "albioncompo:c834f5c8",
+      "kind": "manual_link",
+      "record": "Public composition \"SOB BLAZE OS\" (site activity tag: zvz; 74 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/43UG37MG"
+     },
+     "spells": {
+      "e": "TIME_FREEZE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_CROSSBOW_CANNON_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_sob_blaze_os_2026_06:comp:5",
+     "caller": "anonymous albioncompo.com user (c834f5c8)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: potion=POTION_STONESKIN",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-06-20",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_MORGANA",
+      "food": "MEAL_STEW",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_CLEANSE2",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "role": "rdps",
+     "source": {
+      "author": "anonymous albioncompo.com user (c834f5c8)",
+      "family": "albioncompo:c834f5c8",
+      "kind": "manual_link",
+      "record": "Public composition \"SOB BLAZE OS\" (site activity tag: zvz; 74 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/43UG37MG"
+     },
+     "spells": {
+      "e": "CROSSBOW_DIVINE_SHOT",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_GLACIALSTAFF": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_sob_blaze_os_2026_06:comp:3",
+     "caller": "anonymous albioncompo.com user (c834f5c8)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: potion=POTION_STONESKIN",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-06-20",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_SET1",
+      "cape": "CAPEITEM_MORGANA",
+      "food": "MEAL_STEW",
+      "head": "HEAD_CLOTH_KEEPER",
+      "potion": "POTION_CLEANSE2",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "role": "rdps",
+     "source": {
+      "author": "anonymous albioncompo.com user (c834f5c8)",
+      "family": "albioncompo:c834f5c8",
+      "kind": "manual_link",
+      "record": "Public composition \"SOB BLAZE OS\" (site activity tag: zvz; 74 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/43UG37MG"
+     },
+     "spells": {
+      "e": "ICESTORM2",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_HOLYSTAFF_UNDEAD": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_sob_blaze_os_2026_06:comp:6",
+     "caller": "anonymous albioncompo.com user (c834f5c8)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: potion=POTION_CLEANSE2",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-06-20",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_STONESKIN",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
+     "role": "healer",
+     "source": {
+      "author": "anonymous albioncompo.com user (c834f5c8)",
+      "family": "albioncompo:c834f5c8",
+      "kind": "manual_link",
+      "record": "Public composition \"SOB BLAZE OS\" (site activity tag: zvz; 74 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/43UG37MG"
+     },
+     "spells": {
+      "e": "CELESTIAL_SPHERE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_INFERNOSTAFF_MORGANA": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_sob_blaze_os_2026_06:comp:4",
+     "caller": "anonymous albioncompo.com user (c834f5c8)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: potion=POTION_STONESKIN",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-06-20",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_MORGANA",
+      "food": "MEAL_STEW",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_CLEANSE2",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "role": "rdps",
+     "source": {
+      "author": "anonymous albioncompo.com user (c834f5c8)",
+      "family": "albioncompo:c834f5c8",
+      "kind": "manual_link",
+      "record": "Public composition \"SOB BLAZE OS\" (site activity tag: zvz; 74 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/43UG37MG"
+     },
+     "spells": {
+      "e": "FLAMETORNADO",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_ROCKSTAFF_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_sob_blaze_os_2026_06:comp:0",
+     "caller": "anonymous albioncompo.com user (c834f5c8)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": null,
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-06-20",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_AVALON",
+      "cape": "CAPEITEM_FW_BRIDGEWATCH",
+      "food": "MEAL_SANDWICH_FISH",
+      "head": "HEAD_LEATHER_HELL",
+      "potion": "POTION_TORNADO",
+      "shoes": "SHOES_PLATE_KEEPER"
+     },
+     "role": "support",
+     "source": {
+      "author": "anonymous albioncompo.com user (c834f5c8)",
+      "family": "albioncompo:c834f5c8",
+      "kind": "manual_link",
+      "record": "Public composition \"SOB BLAZE OS\" (site activity tag: zvz; 74 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/43UG37MG"
+     },
+     "spells": {
+      "e": "QS_SLOWROPE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_ROCKMACE_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_sob_blaze_os_2026_06:comp:2",
+     "caller": "anonymous albioncompo.com user (c834f5c8)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: helm=HEAD_LEATHER_SET3, armor=ARMOR_PLATE_FEY",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-06-20",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_SANDWICH_FISH",
+      "head": "HEAD_PLATE_KEEPER",
+      "offhand": "OFF_SHIELD_AVALON",
+      "potion": "POTION_LAVA",
+      "shoes": "SHOES_CLOTH_HELL"
+     },
+     "role": "tank",
+     "source": {
+      "author": "anonymous albioncompo.com user (c834f5c8)",
+      "family": "albioncompo:c834f5c8",
+      "kind": "manual_link",
+      "record": "Public composition \"SOB BLAZE OS\" (site activity tag: zvz; 74 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/43UG37MG"
+     },
+     "spells": {
+      "e": "PRIMALSLAM",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
      "unknowns": [
       "passive",
       "q",

@@ -1,0 +1,143 @@
+# AlbionCompo public comp, ingested from the share link the owner supplied
+# (manual_link source, same procedure as the other albioncompo_* docs).
+# The source table has 14 rows; rows 8-14 are entirely empty (every field
+# blank) and are dropped - the comp is the 7 filled slots (owner confirmed
+# 2026-08-21). The site has NO spell fields, so skills are null.
+kind: published_comp
+id: albioncompo_sob_blaze_os_2026_06
+source:
+  kind: manual_link
+  family: albioncompo:c834f5c8
+  author: anonymous albioncompo.com user (c834f5c8)
+  url: https://www.albioncompo.com/comp/43UG37MG
+  record: >
+    Public composition "SOB BLAZE OS" (site activity tag: zvz; 74 views)
+    on albioncompo.com, shared via link by the project owner 2026-08-21;
+    retrieved from the site's compositions API that day.
+  license: publicly shared on albioncompo.com (is_public true); author pseudonymous
+published: '2026-06-20'
+ingested: '2026-08-21'
+observed: null
+patch: null   # the source does not state the game patch
+snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
+content: zvz_7man   # the source states only its coarse activity tag (zvz) and no
+                    # content in the title; the owner reads it as roads OR
+                    # castle_outpost (undecided 2026-08-21) - kept UNMAPPED until
+                    # ruled, so the V4 gate skips it. When mapped, its labeled
+                    # tank/healer slots will join the V4 role gate.
+party_size:
+  min: 7
+  max: 7
+approval:
+  status: candidate
+  basis: publicly shared comp by a pseudonymous author; no caller approval attached
+  approved_by: null
+  as_of: '2026-08-21'
+parties:
+- name: comp
+  slots:
+  - raw: T8_2H_ROCKSTAFF_KEEPER
+    weapons:
+    - 2H_ROCKSTAFF_KEEPER
+    role: support
+    role_raw: support
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_HELL
+      armor: ARMOR_PLATE_AVALON
+      boots: SHOES_PLATE_KEEPER
+      cape: CAPEITEM_FW_BRIDGEWATCH
+      note: null
+    potion: POTION_TORNADO
+    food: MEAL_SANDWICH_FISH
+  - raw: T8_2H_ARCANESTAFF
+    weapons:
+    - 2H_ARCANESTAFF
+    role: support
+    role_raw: support
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_SET2
+      boots: SHOES_CLOTH_KEEPER
+      cape: CAPEITEM_SMUGGLER
+      note: null
+    potion: POTION_ACID
+    food: MEAL_OMELETTE_AVALON
+  - raw: T8_MAIN_ROCKMACE_KEEPER
+    weapons:
+    - MAIN_ROCKMACE_KEEPER
+    role: tank
+    role_raw: tank
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_SHIELD_AVALON
+      helm: HEAD_PLATE_KEEPER
+      armor: ARMOR_PLATE_KEEPER
+      boots: SHOES_CLOTH_HELL
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: helm=HEAD_LEATHER_SET3, armor=ARMOR_PLATE_FEY"
+    potion: POTION_LAVA
+    food: MEAL_SANDWICH_FISH
+  - raw: T8_2H_GLACIALSTAFF
+    weapons:
+    - 2H_GLACIALSTAFF
+    role: rdps
+    role_raw: rdps
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_KEEPER
+      armor: ARMOR_CLOTH_SET1
+      boots: SHOES_CLOTH_ROYAL
+      cape: CAPEITEM_MORGANA
+      note: "alts: potion=POTION_STONESKIN"
+    potion: POTION_CLEANSE2
+    food: MEAL_STEW
+  - raw: T8_2H_INFERNOSTAFF_MORGANA
+    weapons:
+    - 2H_INFERNOSTAFF_MORGANA
+    role: rdps
+    role_raw: rdps
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_CLOTH_FEY
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_MORGANA
+      note: "alts: potion=POTION_STONESKIN"
+    potion: POTION_CLEANSE2
+    food: MEAL_STEW
+  - raw: T8_2H_CROSSBOW_CANNON_AVALON
+    weapons:
+    - 2H_CROSSBOW_CANNON_AVALON
+    role: rdps
+    role_raw: rdps
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_CLOTH_FEY
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_MORGANA
+      note: "alts: potion=POTION_STONESKIN"
+    potion: POTION_CLEANSE2
+    food: MEAL_STEW
+  - raw: T8_2H_HOLYSTAFF_UNDEAD
+    weapons:
+    - 2H_HOLYSTAFF_UNDEAD
+    role: healer
+    role_raw: healer
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_LEATHER_ROYAL
+      cape: CAPEITEM_FW_LYMHURST
+      note: "alts: potion=POTION_CLEANSE2"
+    potion: POTION_STONESKIN
+    food: MEAL_OMELETTE_AVALON
