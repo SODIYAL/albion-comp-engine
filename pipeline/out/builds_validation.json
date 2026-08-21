@@ -1,11 +1,11 @@
 {
  "counts": {
   "approved": 70,
-  "candidate": 112,
+  "candidate": 119,
   "canonical_defaults": 45,
   "quarantined_fields": 2,
   "quarantined_records": 2,
-  "records": 182
+  "records": 189
  },
  "exclusion_gate": [],
  "kind": "validation_result",
@@ -759,7 +759,25 @@
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
+   "weapon": "2H_COMBATSTAFF_MORGANA"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_7man",
    "weapon": "2H_CROSSBOW_CANNON_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_7man",
+   "weapon": "2H_DUALAXE_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_7man",
+   "weapon": "2H_DUALHAMMER_HELL"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
@@ -825,7 +843,19 @@
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
+   "weapon": "MAIN_MACE_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_7man",
    "weapon": "MAIN_ROCKMACE_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_7man",
+   "weapon": "MAIN_SPEAR_LANCE_AVALON"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",

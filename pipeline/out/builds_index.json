@@ -14,11 +14,11 @@
   },
   "counts": {
    "approved": 70,
-   "candidate": 112,
+   "candidate": 119,
    "canonical_defaults": 45,
    "quarantined_fields": 2,
    "quarantined_records": 2,
-   "records": 182
+   "records": 189
   }
  },
  "by_content": {
@@ -9491,6 +9491,67 @@
      ]
     }
    ],
+   "2H_COMBATSTAFF_MORGANA": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_push_monkey_7_2026_05:comp:0",
+     "caller": "anonymous albioncompo.com user (b4882719)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: potion=POTION_SLOWFIELD",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-05-15",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "role": "SUPPORT",
+     "source": {
+      "author": "anonymous albioncompo.com user (b4882719)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"full push monkey\" (site activity tag: zvz; 79 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/C5KGKKRK"
+     },
+     "spells": {
+      "e": "COMBATSTAFF_SLASH",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
    "2H_CROSSBOW_CANNON_AVALON": [
     {
      "alternatives": {
@@ -9544,6 +9605,133 @@
      },
      "status": "normalized",
      "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_DUALAXE_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_push_monkey_7_2026_05:comp:4",
+     "caller": "anonymous albioncompo.com user (b4882719)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: helm=HEAD_LEATHER_MORGANA",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-05-15",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_STEW",
+      "head": "HEAD_PLATE_SET1",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "role": "dps",
+     "source": {
+      "author": "anonymous albioncompo.com user (b4882719)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"full push monkey\" (site activity tag: zvz; 79 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/C5KGKKRK"
+     },
+     "spells": {
+      "e": "DUALAXE_CRAWLER",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_DUALHAMMER_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "2H_ARCANESTAFF_CRYSTAL"
+       }
+      ]
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_push_monkey_7_2026_05:comp:3",
+     "caller": "anonymous albioncompo.com user (b4882719)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: cape=CAPEITEM_SMUGGLER, armor=ARMOR_PLATE_SET1",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-05-15",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_KEEPER",
+      "cape": "CAPEITEM_FW_CAERLEON",
+      "food": "MEAL_STEW",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
+     "role": "DPS",
+     "source": {
+      "author": "anonymous albioncompo.com user (b4882719)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"full push monkey\" (site activity tag: zvz; 79 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/C5KGKKRK"
+     },
+     "spells": {
+      "e": "GIANTSTEPS",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
      "unknowns": [
       "gear.offhand",
       "passive",
@@ -9746,6 +9934,70 @@
     }
    ],
    "2H_HOLYSTAFF_UNDEAD": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "2H_NATURESTAFF_HELL"
+       }
+      ]
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_push_monkey_7_2026_05:comp:6",
+     "caller": "anonymous albioncompo.com user (b4882719)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: armor=ARMOR_CLOTH_SET2",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-05-15",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_LEATHER_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_OMELETTE_FISH",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "role": "healer",
+     "source": {
+      "author": "anonymous albioncompo.com user (b4882719)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"full push monkey\" (site activity tag: zvz; 79 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/C5KGKKRK"
+     },
+     "spells": {
+      "e": "CELESTIAL_SPHERE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
     {
      "alternatives": {
       "gear": {},
@@ -10192,6 +10444,70 @@
       "weapons": [
        {
         "condition": null,
+        "weapon": "2H_SHAPESHIFTER_AVALON"
+       }
+      ]
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_push_monkey_7_2026_05:comp:2",
+     "caller": "anonymous albioncompo.com user (b4882719)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: cape=CAPEITEM_FW_CAERLEON",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-05-15",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_STEW_FISH",
+      "head": "HEAD_PLATE_SET3",
+      "offhand": "OFF_HORN_KEEPER",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "role": "rdps",
+     "source": {
+      "author": "anonymous albioncompo.com user (b4882719)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"full push monkey\" (site activity tag: zvz; 79 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/C5KGKKRK"
+     },
+     "spells": {
+      "e": "CURSE_SKELETON_BARF_FDHR",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
         "weapon": "2H_ARCANE_RINGPAIR_AVALON"
        }
       ]
@@ -10244,6 +10560,67 @@
      },
      "status": "normalized",
      "style": null,
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_MACE_CRYSTAL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_push_monkey_7_2026_05:comp:1",
+     "caller": "anonymous albioncompo.com user (b4882719)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: boot=SHOES_CLOTH_KEEPER, cape=CAPEITEM_FW_BRIDGEWATCH",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-05-15",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_ROYAL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_PLATE_KEEPER",
+      "offhand": "OFF_JESTERCANE_HELL",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "role": "tank",
+     "source": {
+      "author": "anonymous albioncompo.com user (b4882719)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"full push monkey\" (site activity tag: zvz; 79 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/C5KGKKRK"
+     },
+     "spells": {
+      "e": "MACE_CRYSTAL_FRAGMENT_STORM",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
      "unknowns": [
       "passive",
       "q",
@@ -10305,6 +10682,67 @@
      },
      "status": "normalized",
      "style": null,
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_SPEAR_LANCE_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_push_monkey_7_2026_05:comp:5",
+     "caller": "anonymous albioncompo.com user (b4882719)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: boot=SHOES_CLOTH_KEEPER, secondhand=OFF_SPIKEDSHIELD_MORGANA",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-05-15",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_STEW_FISH",
+      "head": "HEAD_PLATE_SET2",
+      "offhand": "OFF_DEMONSKULL_HELL",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "role": "dps",
+     "source": {
+      "author": "anonymous albioncompo.com user (b4882719)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"full push monkey\" (site activity tag: zvz; 79 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/C5KGKKRK"
+     },
+     "spells": {
+      "e": "LANCE_CHARGE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "brawl",
      "unknowns": [
       "passive",
       "q",

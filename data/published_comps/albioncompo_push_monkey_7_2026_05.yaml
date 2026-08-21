@@ -1,0 +1,143 @@
+# AlbionCompo public comp, ingested from the share link the owner supplied
+# (manual_link source). The site has NO spell fields, so skills are null,
+# never invented.
+kind: published_comp
+id: albioncompo_push_monkey_7_2026_05
+source:
+  kind: manual_link
+  family: albioncompo
+  author: anonymous albioncompo.com user (b4882719)
+  url: https://www.albioncompo.com/comp/C5KGKKRK
+  record: >
+    Public composition "full push monkey" (site activity tag: zvz; 79
+    views) on albioncompo.com, shared via link by the project owner
+    2026-08-21; retrieved from the site's compositions API that day.
+  license: publicly shared on albioncompo.com (is_public true); author pseudonymous
+published: '2026-05-15'
+ingested: '2026-08-21'
+observed: null
+patch: null   # the source does not state the game patch
+snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
+content: zvz_7man   # the source states only its coarse activity tag (zvz); title
+                    # names a style, not a content - kept UNMAPPED until ruled.
+style: brawl   # owner's read 2026-08-21; the author's title ('full push monkey',
+               # every slot on Revive potions) corroborates the all-in brawl read
+party_size:
+  min: 7
+  max: 7
+approval:
+  status: candidate
+  basis: publicly shared comp by a pseudonymous author; no caller approval attached
+  approved_by: null
+  as_of: '2026-08-21'
+parties:
+- name: comp
+  slots:
+  - raw: T8_2H_COMBATSTAFF_MORGANA
+    weapons:
+    - 2H_COMBATSTAFF_MORGANA
+    role: support
+    role_raw: SUPPORT
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_KEEPER
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: potion=POTION_SLOWFIELD"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE_AVALON
+  - raw: T8_MAIN_MACE_CRYSTAL
+    weapons:
+    - MAIN_MACE_CRYSTAL
+    role: tank
+    role_raw: tank
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_JESTERCANE_HELL
+      helm: HEAD_PLATE_KEEPER
+      armor: ARMOR_PLATE_ROYAL
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: boot=SHOES_CLOTH_KEEPER, cape=CAPEITEM_FW_BRIDGEWATCH"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE_AVALON
+  - raw: T8_MAIN_CURSEDSTAFF_CRYSTAL
+    weapons:
+    - MAIN_CURSEDSTAFF_CRYSTAL
+    - 2H_SHAPESHIFTER_AVALON
+    role: rdps
+    role_raw: rdps
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_HORN_KEEPER
+      helm: HEAD_PLATE_SET3
+      armor: ARMOR_PLATE_KEEPER
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: cape=CAPEITEM_FW_CAERLEON"
+    potion: POTION_REVIVE
+    food: MEAL_STEW_FISH
+  - raw: T8_2H_DUALHAMMER_HELL
+    weapons:
+    - 2H_DUALHAMMER_HELL
+    - 2H_ARCANESTAFF_CRYSTAL
+    role: dps
+    role_raw: DPS
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_CLOTH_KEEPER
+      boots: SHOES_PLATE_AVALON
+      cape: CAPEITEM_FW_CAERLEON
+      note: "alts: cape=CAPEITEM_SMUGGLER, armor=ARMOR_PLATE_SET1"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T8_2H_DUALAXE_KEEPER
+    weapons:
+    - 2H_DUALAXE_KEEPER
+    role: dps
+    role_raw: dps
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET1
+      armor: ARMOR_LEATHER_HELL
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: helm=HEAD_LEATHER_MORGANA"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T8_MAIN_SPEAR_LANCE_AVALON
+    weapons:
+    - MAIN_SPEAR_LANCE_AVALON
+    role: dps
+    role_raw: dps
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_DEMONSKULL_HELL
+      helm: HEAD_PLATE_SET2
+      armor: ARMOR_LEATHER_HELL
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: boot=SHOES_CLOTH_KEEPER, secondhand=OFF_SPIKEDSHIELD_MORGANA"
+    potion: POTION_REVIVE
+    food: MEAL_STEW_FISH
+  - raw: T8_2H_HOLYSTAFF_UNDEAD
+    weapons:
+    - 2H_HOLYSTAFF_UNDEAD
+    - 2H_NATURESTAFF_HELL
+    role: healer
+    role_raw: healer
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_LEATHER_AVALON
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_FW_LYMHURST
+      note: "alts: armor=ARMOR_CLOTH_SET2"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE_FISH
