@@ -643,6 +643,61 @@ class Engine:
                     out[cap] *= 1.0 + heal_pct
         return out
 
+    def kit_options(self, weapon, combo=None, party=None, top_n=3):
+        """IDEAL KIT per weapon, per content/style, per comp (2026-08-20):
+        ranked gear options for every slot, for the player of `weapon`.
+
+        No party -> context-free: each item valued by its weighted
+        capability delta to this member's build under the CURRENT template
+        weights (the same rule default_combo uses). With `party` (the REST
+        of the comp, without this member) -> comp-aware: each item valued
+        by the exact fitness delta of this member joining with that item,
+        so the kit answers what THIS comp still needs.
+
+        Role adaptation is emergent, not configured: the stat channel makes
+        a +50% damage chest worth 1.5x the member's actual damage caps and
+        a +heal chest worth 1.5x its healing — so the same advisor puts
+        cloth on Hallowfall and plate on Heavy Mace.
+
+        Returns {"kit": {slot: choice}, "options": {slot: [ranked choices]}}
+        where a choice is {gear, display_name, value, why: [(cap, delta)]}.
+        Greedy per slot (v1): cross-slot stat stacking is additive in the
+        model, so per-slot ranking against the bare member is faithful."""
+        by_slot = {}
+        for k, g in self.gear.items():
+            by_slot.setdefault(g.get("slot") or "other", []).append(k)
+        bare = self.member_extra(weapon, combo)
+        if party is not None:
+            joined = list(party) + [weapon]
+            base_gears = [None] * len(party)
+            f_bare = self.fitness(joined, None, base_gears + [None])
+        options = {}
+        for slot in sorted(by_slot):
+            ranked = []
+            for k in sorted(by_slot[slot]):
+                built = self.build_extra(weapon, combo, [k])
+                deltas = sorted(
+                    ((c, built.get(c, 0.0) - bare.get(c, 0.0))
+                     for c in built
+                     if built.get(c, 0.0) - bare.get(c, 0.0) > 1e-9),
+                    key=lambda t: -self._weights.get(t[0], 0.0) * t[1])
+                if party is None:
+                    value = 0.0
+                    for c, d in deltas:
+                        value += self._weights.get(c, 0.0) * d
+                else:
+                    value = self.fitness(joined, None,
+                                         base_gears + [[k]]) - f_bare
+                ranked.append({
+                    "gear": k,
+                    "display_name": self.gear[k]["display_name"],
+                    "value": value,
+                    "why": [(c, round(d, 2)) for c, d in deltas[:3]]})
+            ranked.sort(key=lambda r: (-r["value"], r["gear"]))
+            options[slot] = ranked[:top_n]
+        kit = {slot: opts[0] for slot, opts in options.items() if opts}
+        return {"kit": kit, "options": options}
+
     def member_extra(self, weapon, combo=None):
         """What ONE party member actually brings: the combo's effective caps
         (mechanics applied). combo None -> the static default."""

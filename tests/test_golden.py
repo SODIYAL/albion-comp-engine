@@ -393,6 +393,32 @@ def run():
           f"{hm_plate.get('tankiness', 0):.2f} (plate), cloth dmg gain "
           f"{tank_gain_cloth:.2f}")
 
+    # T22 — kit advisor (2026-08-20): comp-aware kits must differentiate by
+    # role. In a rounded castle-brawl 24-man, the control tank's best head
+    # is a team piece (peel/buff: Guardian or Knight Helmet or Cleric Cowl)
+    # while every slot returns ranked options with finite values for any
+    # weapon. (Deeper doctrine checks wait on the healing-throughput model —
+    # see MASTERSHEET §8.)
+    e_kit = Engine(content="castle", size=25, style="brawl")
+    kit_party = (["2H_MACE", "2H_HAMMER", "MAIN_ROCKMACE_KEEPER",
+                  "2H_POLEHAMMER", "MAIN_MACE", "2H_QUARTERSTAFF",
+                  HALLOWFALL, "2H_HOLYSTAFF_UNDEAD", "2H_NATURESTAFF_HELL",
+                  "2H_NATURESTAFF_KEEPER", "2H_CLEAVER_HELL",
+                  "MAIN_SPEAR_KEEPER", "2H_ROCKSTAFF_KEEPER", PERMAFROST,
+                  "2H_ARCANESTAFF_HELL", WITCHWORK, "2H_GLAIVE",
+                  "2H_DUALAXE_KEEPER", "2H_KNUCKLES_KEEPER",
+                  "2H_DUALSICKLE_UNDEAD", BLOODLETTER, "2H_SCYTHE_HELL",
+                  LONGBOW, "2H_FIRE_RINGPAIR_AVALON"])
+    tank_kit = e_kit.kit_options(HEAVY_MACE, party=kit_party)
+    team_heads = {"HEAD_PLATE_SET3", "HEAD_PLATE_SET2", "HEAD_CLOTH_SET2"}
+    slots_ok = all(tank_kit["options"].get(s)
+                   for s in ("head", "armor", "shoes", "offhand",
+                             "cape", "potion", "food"))
+    check("T22 kit advisor: comp-aware tank head is a team piece; all slots ranked",
+          tank_kit["kit"]["head"]["gear"] in team_heads and slots_ok,
+          f"tank head={tank_kit['kit']['head']['display_name']}; "
+          f"slots={sorted(tank_kit['options'])}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

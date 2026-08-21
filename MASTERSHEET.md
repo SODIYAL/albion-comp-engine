@@ -341,8 +341,23 @@ A member is no longer just weapon + weapon spells. The engine now models:
   `fitness/comp_score(party, combos, gears)` price full builds. Weapon-only
   calls are unchanged — gear is additive. Both engines verified identical
   (parity includes full-build cases); golden T20 pins a doctrine build.
-- **Not yet**: gear in the forge/recommend loops and the dashboard UI —
-  the scoring core accepts builds today; the pickers come next.
+- **The kit advisor** — `engine.kit_options(weapon, party=...)` returns
+  the ideal kit and ranked alternatives PER SLOT for the player of that
+  weapon in this content/style. Without a party it ranks by template
+  weights; with the rest of the comp it ranks by exact fitness deltas, so
+  the kit answers what THIS comp still needs, and role adaptation is
+  emergent (the stat channel makes cloth worth 1.5x a DPS's damage and
+  ~nothing on a control tank). Golden T22 pins the role differentiation.
+- **Known model-vs-doctrine tension** (recorded, not hidden): in a
+  4-healer comp the advisor does NOT surface Robe of Purity for healers,
+  because template healing is COVERAGE-based and covered — while the
+  doctrine runs Purity for healing THROUGHPUT beyond coverage. Deciding
+  whether raw throughput deserves value past the target is an expert
+  call for the templates (a `heal_throughput` capability or a softer
+  heal soft-cap), queued for the next tuning pass.
+- **Not yet**: gear in the forge/recommend loops, the dashboard kit
+  picker UI, and the JS mirror of kit_options (scoring paths ARE
+  mirrored; the advisor is Python-side until the UI lands).
 
 ## 9. Guild-approved builds
 
