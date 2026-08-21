@@ -1,11 +1,11 @@
 {
  "counts": {
   "approved": 70,
-  "candidate": 70,
+  "candidate": 77,
   "canonical_defaults": 45,
   "quarantined_fields": 2,
   "quarantined_records": 2,
-  "records": 140
+  "records": 147
  },
  "exclusion_gate": [],
  "kind": "validation_result",
@@ -657,6 +657,18 @@
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
+   "weapon": "2H_FIRE_RINGPAIR_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_7man",
+   "weapon": "2H_FROSTSTAFF_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_7man",
    "weapon": "2H_GLACIALSTAFF"
   },
   {
@@ -675,7 +687,31 @@
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_7man",
+   "weapon": "2H_MACE"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_7man",
+   "weapon": "2H_POLEHAMMER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_7man",
    "weapon": "2H_ROCKSTAFF_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_7man",
+   "weapon": "2H_SHAPESHIFTER_SET3"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_7man",
+   "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",

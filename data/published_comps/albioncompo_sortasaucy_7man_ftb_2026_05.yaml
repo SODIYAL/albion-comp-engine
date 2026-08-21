@@ -1,0 +1,148 @@
+# AlbionCompo public comp, ingested from the share link the owner supplied
+# (manual_link source, same procedure as the other albioncompo_* docs).
+# Legacy record with a NAMED author (author_name field). The site has NO
+# spell fields, so skills are null, never invented.
+kind: published_comp
+id: albioncompo_sortasaucy_7man_ftb_2026_05
+source:
+  kind: manual_link
+  family: albioncompo
+  author: SortaSaucy (albioncompo.com, legacy record)
+  url: https://www.albioncompo.com/comp/LYNWLBGC
+  record: >
+    Public composition "7 man FTB" by SortaSaucy (site activity tag: zvz)
+    on albioncompo.com, shared via link by the project owner 2026-08-21;
+    retrieved from the site's compositions API that day. Slot notes and
+    per-slot alternatives are the author's own.
+  license: publicly shared on albioncompo.com (is_public true)
+published: '2026-05-26'
+ingested: '2026-08-21'
+observed: null
+patch: null   # the source does not state the game patch
+snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
+content: zvz_7man   # the source states only its coarse activity tag (zvz); the
+                    # title 'FTB' names no known content - kept UNMAPPED until the
+                    # owner rules, so the V4 gate skips it. Its tank/healer labels
+                    # join the role gate when mapped.
+party_size:
+  min: 7
+  max: 7
+approval:
+  status: candidate
+  basis: publicly shared comp; no caller approval attached
+  approved_by: null
+  as_of: '2026-08-21'
+parties:
+- name: comp
+  slots:
+  - raw: T8_2H_POLEHAMMER
+    weapons:
+    - 2H_POLEHAMMER
+    - 2H_HAMMER
+    role: tank
+    role_raw: tank
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_MORGANA
+      armor: ARMOR_PLATE_KEEPER
+      boots: SHOES_CLOTH_HELL
+      cape: CAPEITEM_SMUGGLER
+      note: "BRING-LURCHER-GIG-SWAP; alts: cape=CAPEITEM_FW_BRIDGEWATCH, food=MEAL_SANDWICH_FISH, helm=HEAD_LEATHER_SET3, potion=POTION_REVIVE"
+    potion: POTION_LAVA
+    food: MEAL_SANDWICH_AVALON
+  - raw: T8_2H_MACE
+    weapons:
+    - 2H_MACE
+    role: tank
+    role_raw: tank
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_AVALON
+      armor: ARMOR_PLATE_AVALON
+      boots: SHOES_PLATE_FEY
+      cape: CAPEITEM_FW_BRIDGEWATCH
+      note: "BRING-LURCHER-GIG-SWAP; alts: cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH_FISH, helm=HEAD_LEATHER_SET3, potion=POTION_REVIVE"
+    potion: POTION_LAVA
+    food: MEAL_SANDWICH_AVALON
+  - raw: T8_2H_SHAPESHIFTER_SET3
+    weapons:
+    - 2H_SHAPESHIFTER_SET3
+    - 2H_SHAPESHIFTER_KEEPER
+    role: tank
+    role_raw: tank
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_AVALON
+      armor: ARMOR_PLATE_KEEPER
+      boots: SHOES_LEATHER_ROYAL
+      cape: CAPEITEM_FW_CAERLEON
+      note: "BRING-LURCHER-GIG-SWAP; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_SANDWICH_FISH, helm=HEAD_PLATE_AVALON, potion=POTION_REVIVE"
+    potion: POTION_LAVA
+    food: MEAL_OMELETTE_AVALON
+  - raw: T8_2H_FIRE_RINGPAIR_AVALON
+    weapons:
+    - 2H_FIRE_RINGPAIR_AVALON
+    - 2H_FIRESTAFF
+    role: rdps
+    role_raw: rdps
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_AVALON
+      armor: ARMOR_CLOTH_SET2
+      boots: SHOES_LEATHER_ROYAL
+      cape: CAPEITEM_FW_THETFORD
+      note: "ARTILLERY-FIRE; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_STEW_FISH, armor=ARMOR_CLOTH_FEY, potion=POTION_CLEANSE2"
+    potion: POTION_STONESKIN
+    food: MEAL_STEW
+  - raw: T8_2H_FROSTSTAFF_CRYSTAL
+    weapons:
+    - 2H_FROSTSTAFF_CRYSTAL
+    - 2H_FROSTSTAFF
+    role: rdps
+    role_raw: rdps
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_AVALON
+      armor: ARMOR_CLOTH_SET2
+      boots: SHOES_LEATHER_ROYAL
+      cape: CAPEITEM_FW_THETFORD
+      note: "LANCE-FROST; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_STEW_FISH, armor=ARMOR_CLOTH_FEY, potion=POTION_CLEANSE2"
+    potion: POTION_STONESKIN
+    food: MEAL_STEW
+  - raw: T8_MAIN_CURSEDSTAFF_CRYSTAL
+    weapons:
+    - MAIN_CURSEDSTAFF_CRYSTAL
+    - 2H_ARCANE_RINGPAIR_AVALON
+    role: rdps
+    role_raw: RDPS
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_HORN_KEEPER
+      helm: HEAD_CLOTH_KEEPER
+      armor: ARMOR_CLOTH_SET2
+      boots: SHOES_LEATHER_ROYAL
+      cape: CAPEITEM_SMUGGLER
+      note: "PIERCE/SUPPORT/MANA; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_STEW_FISH, armor=ARMOR_CLOTH_FEY, potion=POTION_STONESKIN"
+    potion: POTION_CLEANSE2
+    food: MEAL_OMELETTE
+  - raw: T8_2H_HOLYSTAFF_UNDEAD
+    weapons:
+    - 2H_HOLYSTAFF_UNDEAD
+    - 2H_NATURESTAFF_HELL
+    role: healer
+    role_raw: healer
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_ROYAL
+      armor: ARMOR_CLOTH_SET2
+      boots: SHOES_LEATHER_SET1
+      cape: CAPEITEM_FW_LYMHURST
+      note: "alts: boot=SHOES_LEATHER_ROYAL, cape=CAPEITEM_FW_FORTSTERLING, food=MEAL_OMELETTE_FISH, helm=HEAD_PLATE_UNDEAD, armor=ARMOR_CLOTH_AVALON, potion=POTION_ENERGY"
+    potion: POTION_STONESKIN
+    food: MEAL_OMELETTE_FISH

@@ -14,11 +14,11 @@
   },
   "counts": {
    "approved": 70,
-   "candidate": 70,
+   "candidate": 77,
    "canonical_defaults": 45,
    "quarantined_fields": 2,
    "quarantined_records": 2,
-   "records": 140
+   "records": 147
   }
  },
  "by_content": {
@@ -1329,7 +1329,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (2dfe60fa)",
-      "family": "albioncompo:2dfe60fa",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition (untitled - 'New composition'; site activity tag: hg5 = Hellgate 5v5; 40 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/4MMVPY7G"
@@ -1390,7 +1390,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (2dfe60fa)",
-      "family": "albioncompo:2dfe60fa",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition (untitled - 'New composition'; site activity tag: hg5 = Hellgate 5v5; 40 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/4MMVPY7G"
@@ -1451,7 +1451,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (2dfe60fa)",
-      "family": "albioncompo:2dfe60fa",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition (untitled - 'New composition'; site activity tag: hg5 = Hellgate 5v5; 40 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/4MMVPY7G"
@@ -1512,7 +1512,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (2dfe60fa)",
-      "family": "albioncompo:2dfe60fa",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition (untitled - 'New composition'; site activity tag: hg5 = Hellgate 5v5; 40 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/4MMVPY7G"
@@ -1574,7 +1574,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (2dfe60fa)",
-      "family": "albioncompo:2dfe60fa",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition (untitled - 'New composition'; site activity tag: hg5 = Hellgate 5v5; 40 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/4MMVPY7G"
@@ -4915,7 +4915,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (5c73a3cf)",
-      "family": "albioncompo:5c73a3cf",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"Roads 1 shot, with 15s hit\" (site activity tag: zvz; 133 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/HMEC3XFK"
@@ -4976,7 +4976,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (5c73a3cf)",
-      "family": "albioncompo:5c73a3cf",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"Roads 1 shot, with 15s hit\" (site activity tag: zvz; 133 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/HMEC3XFK"
@@ -5042,7 +5042,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (5c73a3cf)",
-      "family": "albioncompo:5c73a3cf",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"Roads 1 shot, with 15s hit\" (site activity tag: zvz; 133 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/HMEC3XFK"
@@ -5103,7 +5103,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (5c73a3cf)",
-      "family": "albioncompo:5c73a3cf",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"Roads 1 shot, with 15s hit\" (site activity tag: zvz; 133 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/HMEC3XFK"
@@ -5164,7 +5164,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (5c73a3cf)",
-      "family": "albioncompo:5c73a3cf",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"Roads 1 shot, with 15s hit\" (site activity tag: zvz; 133 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/HMEC3XFK"
@@ -5226,7 +5226,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (5c73a3cf)",
-      "family": "albioncompo:5c73a3cf",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"Roads 1 shot, with 15s hit\" (site activity tag: zvz; 133 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/HMEC3XFK"
@@ -5292,7 +5292,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (5c73a3cf)",
-      "family": "albioncompo:5c73a3cf",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"Roads 1 shot, with 15s hit\" (site activity tag: zvz; 133 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/HMEC3XFK"
@@ -7008,7 +7008,7 @@
      "role": "tank",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7069,7 +7069,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7130,7 +7130,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7191,7 +7191,7 @@
      "role": "support",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7252,7 +7252,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7313,7 +7313,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7374,7 +7374,7 @@
      "role": "rdps",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7435,7 +7435,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7496,7 +7496,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7555,7 +7555,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7616,7 +7616,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7677,7 +7677,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7744,7 +7744,7 @@
      "role": "tank",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7805,7 +7805,7 @@
      "role": "rdps",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7866,7 +7866,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7927,7 +7927,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -7986,7 +7986,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -8045,7 +8045,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -8106,7 +8106,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -8170,7 +8170,7 @@
      "role": "",
      "source": {
       "author": "anonymous albioncompo.com user (45a1ab1f)",
-      "family": "albioncompo:45a1ab1f",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"20v20 competitive\" (activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API the same day.\n",
       "url": "https://www.albioncompo.com/comp/AH323MW3"
@@ -8232,7 +8232,7 @@
      "role": "support",
      "source": {
       "author": "anonymous albioncompo.com user (c834f5c8)",
-      "family": "albioncompo:c834f5c8",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"SOB BLAZE OS\" (site activity tag: zvz; 74 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/43UG37MG"
@@ -8293,13 +8293,145 @@
      "role": "rdps",
      "source": {
       "author": "anonymous albioncompo.com user (c834f5c8)",
-      "family": "albioncompo:c834f5c8",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"SOB BLAZE OS\" (site activity tag: zvz; 74 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/43UG37MG"
      },
      "spells": {
       "e": "CROSSBOW_DIVINE_SHOT",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_FIRE_RINGPAIR_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "2H_FIRESTAFF"
+       }
+      ]
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_sortasaucy_7man_ftb_2026_05:comp:3",
+     "caller": "SortaSaucy (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "ARTILLERY-FIRE; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_STEW_FISH, armor=ARMOR_CLOTH_FEY, potion=POTION_CLEANSE2",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-05-26",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_FW_THETFORD",
+      "food": "MEAL_STEW",
+      "head": "HEAD_LEATHER_AVALON",
+      "potion": "POTION_STONESKIN",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
+     "role": "rdps",
+     "source": {
+      "author": "SortaSaucy (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"7 man FTB\" by SortaSaucy (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day. Slot notes and per-slot alternatives are the author's own.\n",
+      "url": "https://www.albioncompo.com/comp/LYNWLBGC"
+     },
+     "spells": {
+      "e": "FIREPHOENIX",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_FROSTSTAFF_CRYSTAL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "2H_FROSTSTAFF"
+       }
+      ]
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_sortasaucy_7man_ftb_2026_05:comp:4",
+     "caller": "SortaSaucy (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "LANCE-FROST; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_STEW_FISH, armor=ARMOR_CLOTH_FEY, potion=POTION_CLEANSE2",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-05-26",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_FW_THETFORD",
+      "food": "MEAL_STEW",
+      "head": "HEAD_LEATHER_AVALON",
+      "potion": "POTION_STONESKIN",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
+     "role": "rdps",
+     "source": {
+      "author": "SortaSaucy (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"7 man FTB\" by SortaSaucy (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day. Slot notes and per-slot alternatives are the author's own.\n",
+      "url": "https://www.albioncompo.com/comp/LYNWLBGC"
+     },
+     "spells": {
+      "e": "FROST_TARGETED_CHANNEL",
       "passive": null,
       "q": null,
       "w": null
@@ -8354,7 +8486,7 @@
      "role": "rdps",
      "source": {
       "author": "anonymous albioncompo.com user (c834f5c8)",
-      "family": "albioncompo:c834f5c8",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"SOB BLAZE OS\" (site activity tag: zvz; 74 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/43UG37MG"
@@ -8415,10 +8547,74 @@
      "role": "healer",
      "source": {
       "author": "anonymous albioncompo.com user (c834f5c8)",
-      "family": "albioncompo:c834f5c8",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"SOB BLAZE OS\" (site activity tag: zvz; 74 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/43UG37MG"
+     },
+     "spells": {
+      "e": "CELESTIAL_SPHERE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "2H_NATURESTAFF_HELL"
+       }
+      ]
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_sortasaucy_7man_ftb_2026_05:comp:6",
+     "caller": "SortaSaucy (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: boot=SHOES_LEATHER_ROYAL, cape=CAPEITEM_FW_FORTSTERLING, food=MEAL_OMELETTE_FISH, helm=HEAD_PLATE_UNDEAD, armor=ARMOR_CLOTH_AVALON, potion=POTION_ENERGY",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-05-26",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_OMELETTE_FISH",
+      "head": "HEAD_CLOTH_ROYAL",
+      "potion": "POTION_STONESKIN",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
+     "role": "healer",
+     "source": {
+      "author": "SortaSaucy (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"7 man FTB\" by SortaSaucy (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day. Slot notes and per-slot alternatives are the author's own.\n",
+      "url": "https://www.albioncompo.com/comp/LYNWLBGC"
      },
      "spells": {
       "e": "CELESTIAL_SPHERE",
@@ -8476,13 +8672,140 @@
      "role": "rdps",
      "source": {
       "author": "anonymous albioncompo.com user (c834f5c8)",
-      "family": "albioncompo:c834f5c8",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"SOB BLAZE OS\" (site activity tag: zvz; 74 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/43UG37MG"
      },
      "spells": {
       "e": "FLAMETORNADO",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_MACE": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_sortasaucy_7man_ftb_2026_05:comp:1",
+     "caller": "SortaSaucy (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "BRING-LURCHER-GIG-SWAP; alts: cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH_FISH, helm=HEAD_LEATHER_SET3, potion=POTION_REVIVE",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-05-26",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_AVALON",
+      "cape": "CAPEITEM_FW_BRIDGEWATCH",
+      "food": "MEAL_SANDWICH_AVALON",
+      "head": "HEAD_LEATHER_AVALON",
+      "potion": "POTION_LAVA",
+      "shoes": "SHOES_PLATE_FEY"
+     },
+     "role": "tank",
+     "source": {
+      "author": "SortaSaucy (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"7 man FTB\" by SortaSaucy (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day. Slot notes and per-slot alternatives are the author's own.\n",
+      "url": "https://www.albioncompo.com/comp/LYNWLBGC"
+     },
+     "spells": {
+      "e": "SHRIEKMACE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_POLEHAMMER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "2H_HAMMER"
+       }
+      ]
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_sortasaucy_7man_ftb_2026_05:comp:0",
+     "caller": "SortaSaucy (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "BRING-LURCHER-GIG-SWAP; alts: cape=CAPEITEM_FW_BRIDGEWATCH, food=MEAL_SANDWICH_FISH, helm=HEAD_LEATHER_SET3, potion=POTION_REVIVE",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-05-26",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_SANDWICH_AVALON",
+      "head": "HEAD_LEATHER_MORGANA",
+      "potion": "POTION_LAVA",
+      "shoes": "SHOES_CLOTH_HELL"
+     },
+     "role": "tank",
+     "source": {
+      "author": "SortaSaucy (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"7 man FTB\" by SortaSaucy (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day. Slot notes and per-slot alternatives are the author's own.\n",
+      "url": "https://www.albioncompo.com/comp/LYNWLBGC"
+     },
+     "spells": {
+      "e": "GROUNDBREAKER2",
       "passive": null,
       "q": null,
       "w": null
@@ -8537,7 +8860,7 @@
      "role": "support",
      "source": {
       "author": "anonymous albioncompo.com user (c834f5c8)",
-      "family": "albioncompo:c834f5c8",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"SOB BLAZE OS\" (site activity tag: zvz; 74 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/43UG37MG"
@@ -8552,6 +8875,138 @@
      "style": null,
      "unknowns": [
       "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_SHAPESHIFTER_SET3": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "2H_SHAPESHIFTER_KEEPER"
+       }
+      ]
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_sortasaucy_7man_ftb_2026_05:comp:2",
+     "caller": "SortaSaucy (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "BRING-LURCHER-GIG-SWAP; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_SANDWICH_FISH, helm=HEAD_PLATE_AVALON, potion=POTION_REVIVE",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-05-26",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_FW_CAERLEON",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_AVALON",
+      "potion": "POTION_LAVA",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
+     "role": "tank",
+     "source": {
+      "author": "SortaSaucy (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"7 man FTB\" by SortaSaucy (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day. Slot notes and per-slot alternatives are the author's own.\n",
+      "url": "https://www.albioncompo.com/comp/LYNWLBGC"
+     },
+     "spells": {
+      "e": "SHAPESHIFT_BEAR",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_CURSEDSTAFF_CRYSTAL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "2H_ARCANE_RINGPAIR_AVALON"
+       }
+      ]
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp; no caller approval attached",
+     "build_id": "albioncompo_sortasaucy_7man_ftb_2026_05:comp:5",
+     "caller": "SortaSaucy (albioncompo.com, legacy record)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "PIERCE/SUPPORT/MANA; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_STEW_FISH, armor=ARMOR_CLOTH_FEY, potion=POTION_STONESKIN",
+     "party_size": {
+      "max": 7,
+      "min": 7
+     },
+     "patch": null,
+     "published": "2026-05-26",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_OMELETTE",
+      "head": "HEAD_CLOTH_KEEPER",
+      "offhand": "OFF_HORN_KEEPER",
+      "potion": "POTION_CLEANSE2",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
+     "role": "RDPS",
+     "source": {
+      "author": "SortaSaucy (albioncompo.com, legacy record)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"7 man FTB\" by SortaSaucy (site activity tag: zvz) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day. Slot notes and per-slot alternatives are the author's own.\n",
+      "url": "https://www.albioncompo.com/comp/LYNWLBGC"
+     },
+     "spells": {
+      "e": "CURSE_SKELETON_BARF_FDHR",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
       "passive",
       "q",
       "w"
@@ -8599,7 +9054,7 @@
      "role": "tank",
      "source": {
       "author": "anonymous albioncompo.com user (c834f5c8)",
-      "family": "albioncompo:c834f5c8",
+      "family": "albioncompo",
       "kind": "manual_link",
       "record": "Public composition \"SOB BLAZE OS\" (site activity tag: zvz; 74 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
       "url": "https://www.albioncompo.com/comp/43UG37MG"
