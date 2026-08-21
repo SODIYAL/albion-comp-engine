@@ -4075,6 +4075,17 @@ function wheelStep(d){
   renderWheel(RECS_CUR);
 }
 function renderFitness(){
+  /* an EMPTY roster measures negative (the armed hard floors have nobody
+     covering them — engine math, golden T16), but showing a failing grade
+     for a comp that doesn't exist yet reads as a bug. Neutral display until
+     the first member; partial comps keep the negative number on purpose —
+     there it is the floor signal working. */
+  if (!party.length){
+    $("fit-num").textContent = "—";
+    $("fit-of").textContent = "add members";
+    $("fit-bar").style.width = "0%";
+    return;
+  }
   const f = fitness(party), max = maxFitness();
   $("fit-num").textContent = f.toFixed(1);
   $("fit-of").textContent = `/ ${Math.round(max)}`;
