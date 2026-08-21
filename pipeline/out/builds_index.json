@@ -14,11 +14,11 @@
   },
   "counts": {
    "approved": 70,
-   "candidate": 92,
+   "candidate": 112,
    "canonical_defaults": 45,
    "quarantined_fields": 2,
    "quarantined_records": 2,
-   "records": 162
+   "records": 182
   }
  },
  "by_content": {
@@ -6964,6 +6964,1244 @@
      "status": "candidate",
      "style": null,
      "unknowns": []
+    }
+   ]
+  },
+  "zvz_20man": {
+   "2H_ARCANESTAFF": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:2",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: armor=ARMOR_PLATE_SET2",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "TIME_FREEZE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:4",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "TIME_FREEZE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_ARCANESTAFF_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:3",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "cape": "CAPEITEM_FW_FORTSTERLING",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "ARCANECORRIDOR",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_AXE_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:16",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_STEW_FISH",
+      "head": "HEAD_PLATE_SET2",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "LETHAL_CLEAVER",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_BOW_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "2H_GLAIVE_CRYSTAL"
+       }
+      ]
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:18",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: helm=HEAD_LEATHER_SET3",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_SET3",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "MEAL_STEW",
+      "head": "HEAD_PLATE_SET3",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "HELL_ARROW",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_CURSEDSTAFF_MORGANA": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:13",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_SET1",
+      "cape": "CAPEITEM_MORGANA",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "CURSEULTIMATE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_HARPOON_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:17",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: armor=ARMOR_CLOTH_AVALON",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_STEW",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "TAINTED_STEEL",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_HOLYSTAFF_CRYSTAL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "MAIN_HOLYSTAFF_AVALON"
+       }
+      ]
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:5",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_CLOTH_KEEPER",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "HOLY_DISPEL",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_ICECRYSTAL_UNDEAD": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:9",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_MORGANA",
+      "food": "MEAL_STEW",
+      "head": "HEAD_LEATHER_SET3",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "FROST_ULTIMATE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_KNUCKLES_SET3": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:11",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_STEW",
+      "head": "HEAD_LEATHER_FEY",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "IMPULSE_PUNCH",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_POLEHAMMER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:1",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: food=MEAL_OMELETTE_AVALON, armor=ARMOR_PLATE_SET3",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "MEAL_SANDWICH",
+      "head": "HEAD_PLATE_KEEPER",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "GROUNDBREAKER2",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "2H_SHAPESHIFTER_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "2H_HAMMER_AVALON"
+       }
+      ]
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:0",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.67,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: boot=SHOES_CLOTH_SET2, cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH, helm=HEAD_LEATHER_SET3, armor=ARMOR_PLATE_AVALON, potion=POTION_REVIVE",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_AVALON",
+      "cape": "CAPEITEM_MORGANA",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_PLATE_KEEPER",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
+     "role": "tank",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "SHAPESHIFT_ROCK_ELEMENTAL",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "gear.offhand",
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_ARCANESTAFF": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:6",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: food=MEAL_OMELETTE_AVALON, helm=HEAD_LEATHER_HELL, armor=ARMOR_PLATE_SET2, secondhand=OFF_SHIELD_AVALON",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_SET3",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "MEAL_SANDWICH",
+      "head": "HEAD_PLATE_KEEPER",
+      "offhand": "OFF_TOTEM_KEEPER",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "ARCANEORB2",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_ARCANESTAFF_UNDEAD": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:15",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_STEW_FISH",
+      "head": "HEAD_LEATHER_AVALON",
+      "offhand": "OFF_SPIKEDSHIELD_MORGANA",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "BLACKHOLE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_CURSEDSTAFF_CRYSTAL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:14",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_STEW",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SPIKEDSHIELD_MORGANA",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "CURSE_SKELETON_BARF_FDHR",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_HOLYSTAFF_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": [
+       {
+        "condition": null,
+        "weapon": "2H_HOLYSTAFF_UNDEAD"
+       }
+      ]
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:19",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_CLOTH_KEEPER",
+      "offhand": "OFF_HORN_KEEPER",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "DIVINE_JUMP",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_MACE_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:12",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_TOME_CRYSTAL",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "SHRINKINGSMASH",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_NATURESTAFF_CRYSTAL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:7",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "MEAL_OMELETTE_AVALON",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_HORN_KEEPER",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "DUAL_NATURE",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
+    }
+   ],
+   "MAIN_ROCKMACE_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:10",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: food=MEAL_OMELETTE_AVALON",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "MEAL_SANDWICH",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_TOTEM_KEEPER",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "PRIMALSLAM",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "publicly shared comp by a pseudonymous author; no caller approval attached",
+     "build_id": "albioncompo_ss_kite_20_2026_06:comp:8",
+     "caller": "anonymous albioncompo.com user (5fa87240)",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 0.0,
+      "loadout_completeness": 0.75,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "gear": {},
+     "note": "alts: cape=CAPEITEM_SMUGGLER, food=MEAL_OMELETTE_AVALON, secondhand=OFF_SHIELD_AVALON",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": null,
+     "published": "2026-06-27",
+     "quarantined_fields": [],
+     "raw": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "MEAL_SANDWICH",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_TOTEM_KEEPER",
+      "potion": "POTION_REVIVE",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
+     "role": "",
+     "source": {
+      "author": "anonymous albioncompo.com user (5fa87240)",
+      "family": "albioncompo",
+      "kind": "manual_link",
+      "record": "Public composition \"ss kite\" (site activity tag: zvz; 37 views) on albioncompo.com, shared via link by the project owner 2026-08-21; retrieved from the site's compositions API that day.\n",
+      "url": "https://www.albioncompo.com/comp/4J6LUTA9"
+     },
+     "spells": {
+      "e": "PRIMALSLAM",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": "kite",
+     "unknowns": [
+      "passive",
+      "q",
+      "w"
+     ]
     }
    ]
   },
