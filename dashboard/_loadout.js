@@ -5,9 +5,10 @@
  * that file is rendering for the whole page already; the panel, the picker
  * and the permalink codec are a separable concern with its own state.
  *
- * DISPLAY ONLY. Gear does not reach the scoring engine — no gear capabilities
- * are curated, so scoring them would be scoring invented numbers. This layer
- * records and shows a loadout; fitness is still weapons alone.
+ * Display layer. Since 2026-08-20 gear IS curated and scored engine-side
+ * (dataset `gear`, engine build_extra/kit_options) — this panel's picks are
+ * not yet wired into the browser scoring calls; that wiring is the next
+ * step, and until then fitness shown here is weapons alone.
  *
  * Reads: GEAR, ICONS, SPELLS, LOADOUTS, CONTENT, party (from _app.js).
  */
@@ -45,8 +46,22 @@ function loAbilityTip(k){
    embedding it cost the page ~1.1 MB for a picker most sessions never open.
    Weapon art stays inlined in ICONS (on screen from the first paint, and has
    to survive file:// and offline). If ICONS happens to carry a gear key it
-   wins, so nothing breaks if that policy is reverted. `onerror` strips a
-   failed image rather than leaving a broken-image glyph. */
+   wins, so nothing breaks if that policy is reverted.
+
+   RETRY, don't remove (2026-08-20): opening a picker fires ~18 concurrent
+   render-service requests and the service drops some under burst — every
+   URL verified 200 individually. `onerror` used to delete the img
+   permanently on the FIRST failure, which is why half the picker showed no
+   art. Now it backs off and retries (0.4s/0.8s/1.6s) and only gives up
+   after the third miss. */
+function loArtRetry(img){
+  const n = +(img.dataset.r || 0);
+  if (n >= 3){ img.remove(); return; }
+  img.dataset.r = n + 1;
+  const src = img.src;
+  img.removeAttribute("src");
+  setTimeout(() => { img.src = src; }, 400 * Math.pow(2, n));
+}
 function loArt(key, px){
   if (typeof ICONS !== "undefined" && ICONS[key])
     return `<img src="${ICONS[key]}" width="${px}" height="${px}" alt="" loading="lazy">`;
@@ -55,7 +70,7 @@ function loArt(key, px){
   const base = (typeof RENDER_BASE !== "undefined") ? RENDER_BASE
                                                     : "https://render.albiononline.com/v1";
   return `<img src="${base}/item/${encodeURIComponent(item)}.png?size=96"
-    width="${px}" height="${px}" alt="" loading="lazy" onerror="this.remove()">`;
+    width="${px}" height="${px}" alt="" loading="lazy" onerror="loArtRetry(this)">`;
 }
 
 /* Items for one slot, name-sorted. Built once per slot on first use — the
