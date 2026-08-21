@@ -874,30 +874,33 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   color:var(--gap); margin:2px 0 -2px;
 }
 .weak-sub.nice{color:var(--brass)}
+/* image-first cards (owner 2026-08-21): the weapons that close the gap
+   lead at full size, the gap wears a short player-voiced title, order
+   alone carries priority */
 .weak{
-  display:flex; align-items:baseline; gap:12px; padding:12px 15px;
+  display:flex; align-items:center; gap:13px; padding:10px 13px;
   background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
   border:1px solid var(--rule);
   border-left:3px solid var(--gap); border-radius:0 12px 12px 0;
   box-shadow:0 1px 3px rgba(0,0,0,.3);
 }
-.weak.nice{border-left-color:var(--brass-deep); padding:9px 15px}
-.weak.nice .txt{font-size:12.5px; color:var(--ink-2)}
-.weak.nice .sc{color:var(--brass)}
-.weak .rank{font-family:var(--mono); font-size:10px; color:var(--ink-3); flex:none}
-.weak .txt{flex:1; font-size:13.5px; line-height:1.5}
-.weak .txt b{font-family:var(--mono); font-size:12.5px; font-weight:600}
-.weak .sc{font-family:var(--mono); font-size:12px; color:var(--gap); flex:none}
+.weak.nice{border-left-color:var(--brass-deep)}
+.weak.nice .weak-name{color:var(--ink-2)}
 .weak-none{font-size:12.5px; color:var(--ink-2); padding:4px 0}
-.weak{align-items:center}
-.weak .weak-have{font-family:var(--mono); font-size:10.5px; color:var(--ink-3); margin-left:8px; white-space:nowrap}
+.weak-main{flex:1; min-width:0; display:flex; flex-direction:column; gap:2px}
+.weak-name{font-size:13.5px; font-weight:600; line-height:1.25; cursor:help}
+.weak-have{font-family:var(--mono); font-size:11px; color:var(--ink-3); white-space:nowrap}
+.weak-floor{
+  font-family:var(--mono); font-size:9.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--gap);
+}
 .weak-picks{display:flex; gap:6px; flex:none; align-items:center}
 .weak-add{
-  background:none; border:1px solid var(--rule); border-radius:6px; padding:2px;
+  background:none; border:1px solid var(--rule); border-radius:9px; padding:2px;
   cursor:pointer; line-height:0; transition:border-color .12s, transform .12s;
 }
 .weak-add:hover, .weak-add:focus-visible{border-color:var(--brass); transform:translateY(-1px); outline:none}
-.weak-add .icon{border-radius:4px; display:block}
+.weak-add .icon{border-radius:7px; display:block}
 
 /* ---------- recommendation ---------- */
 .rec{
@@ -939,16 +942,30 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .rec-math > summary:hover{color:var(--brass)}
 .rec-math .math-body{display:flex; flex-direction:column; gap:14px; margin-top:13px}
 .rec-math .formula{border-top:0; padding-top:0}
-.alts{display:flex; flex-direction:column; gap:5px}
+.alts{display:flex; flex-direction:column; gap:6px}
+/* alternative cards: art leads at 40px, the name owns a full horizontal
+   line with the score at its right, badges flow in a row beneath with
+   the gain right-aligned — nothing stacks vertically in a narrow cell */
 .alt{
-  display:flex; align-items:center; gap:11px; width:100%; text-align:left;
-  padding:9px 13px; background:transparent; border:1px solid var(--rule); border-radius:12px;
+  display:flex; align-items:center; gap:12px; width:100%; text-align:left;
+  padding:10px 12px; background:transparent; border:1px solid var(--rule); border-radius:12px;
   transition:border-color .15s var(--ease), background .15s var(--ease), transform .15s var(--ease);
 }
 .alt:hover{border-color:rgba(255,201,58,.5); background:var(--surface-2); transform:translateX(2px)}
-.alt .sc{font-family:var(--mono); font-size:12px; color:var(--brass); width:44px; flex:none; font-weight:600}
-.alt .nm{flex:1; font-size:13.5px}
-.alt .rz{font-family:var(--mono); font-size:10.5px; color:var(--ink-3); text-align:right}
+.alt > .icon{flex:none}
+.alt-main{flex:1; min-width:0; display:flex; flex-direction:column; gap:5px}
+.alt-top{display:flex; align-items:baseline; gap:10px}
+.alt-top .nm{
+  flex:1; min-width:0; font-size:13.5px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.alt-top .sc{font-family:var(--mono); font-size:12px; color:var(--brass); font-weight:600; flex:none}
+.alt-sub{display:flex; align-items:center; gap:4px; flex-wrap:wrap; min-width:0}
+.alt-sub .bdg{margin-left:0}
+.alt-sub .rz{
+  margin-left:auto; padding-left:6px; font-family:var(--mono);
+  font-size:10.5px; color:var(--ink-3); white-space:nowrap;
+}
 .add{
   width:100%; padding:12px;
   background:linear-gradient(180deg, var(--brass-bright), var(--brass));

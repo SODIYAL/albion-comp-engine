@@ -209,6 +209,24 @@ const CAP_PROSE = {
   interrupt:"cast interrupts",
 };
 const prose = c => CAP_PROSE[c] || c.replace(/_/g," ");
+/* User-facing short titles (owner 2026-08-21): headline surfaces speak
+   player, never engine — no snake_case keys, no awkward wordings. The
+   full prose stays one hover away in tooltips. */
+const CAP_LABEL = {
+  tankiness:"Frontline", heal_sustain:"Sustain healing", heal_burst:"Burst healing",
+  cleanse:"Cleanse", self_sustain:"Self-sustain",
+  engage:"Engage", disengage:"Disengage", anti_dive:"Anti-dive",
+  zone_control:"Zone control", stun:"Stuns", root:"Roots", silence:"Silences",
+  slow:"Slows", clump_create:"Clump", knockback_displace:"Displace", peel:"Peel",
+  purge:"Purge", anti_zone:"Zone clear", heal_reduction:"Anti-heal",
+  resist_shred:"Shred", energy_drain:"Energy drain", damage_debuff:"Damage debuff",
+  max_health_cut:"Health cut", burst_st:"Single burst", burst_aoe:"AoE burst",
+  sustained_dps:"Sustained DPS", execute:"Execute", mobility:"Mobility",
+  catch:"Catch", buff_allies:"Ally buffs", interrupt:"Interrupts",
+  ranged_presence:"Ranged presence",
+};
+const capLabel = c => CAP_LABEL[c] ||
+  prose(c).replace(/^./, ch => ch.toUpperCase());
 
 function roleOf(w, combo){
   /* Role label from the SCORED loadout (2026-08-18): the top capabilities
@@ -992,13 +1010,19 @@ function renderWeaknesses(){
     .sort((a, b) => (b[1].capabilities[cap] - a[1].capabilities[cap])
                     || a[0].localeCompare(b[0]))
     .slice(0, k).map(([w]) => w);
+  /* image-first, player-voiced cards (owner 2026-08-21): the fix leads at
+     full size, the gap wears its short title (full prose in the tooltip),
+     and priority is carried by order alone — no rank numerals, no keys */
   const row = (x, i, cls) => {
     const picks = capSuppliers(x.cap).map(w =>
-      `<button class="weak-add" data-add="${w}" title="${esc(DATASET.weapons[w].display_name)} — ${DATASET.weapons[w].capabilities[x.cap]}/7 ${x.cap} · click to add">${icon(w, 26)}</button>`).join("");
-    return `<div class="weak ${cls}"><span class="rank">${String(i+1).padStart(2,"0")}</span>
-      <span class="txt"><b>${x.cap}</b> — ${prose(x.cap)}${x.floorHit ? " <b>(below the hard floor)</b>" : ""}
-        <span class="weak-have">${(s[x.cap]||0).toFixed(0)} / ${target(x.cap).toFixed(1)}</span></span>
-      <span class="weak-picks" title="best ${x.cap} weapons — click to add">${picks}</span></div>`;
+      `<button class="weak-add" data-add="${w}" title="Add ${esc(DATASET.weapons[w].display_name)} — ${esc(capLabel(x.cap))} ${DATASET.weapons[w].capabilities[x.cap]}/7">${icon(w, 40)}</button>`).join("");
+    return `<div class="weak ${cls}">
+      <span class="weak-picks">${picks}</span>
+      <span class="weak-main">
+        <span class="weak-name" title="${esc(prose(x.cap))}">${esc(capLabel(x.cap))}</span>
+        <span class="weak-have">${(s[x.cap]||0).toFixed(0)} / ${target(x.cap).toFixed(1)}</span>
+        ${x.floorHit ? `<span class="weak-floor">below the hard floor</span>` : ""}
+      </span></div>`;
   };
   $("weaknesses").innerHTML =
     `<div class="weak-sub">Needed now</div>`
@@ -1065,9 +1089,13 @@ function renderRecDetail(recs){
         <div><div class="sec-label" style="margin-bottom:8px">Alternatives — click to add instead</div>
           <div class="alts">${recs.slice(1).map(r => {
             const t0 = explain(party, r.w)[0];
-            return `<button class="alt" data-add="${r.w}"><span class="sc">${r.score.toFixed(2)}</span>
-              ${icon(r.w, 24)}<span class="nm">${nameOf(r.w)}${badgeHtml(r.w)}</span>
-              <span class="rz">${t0 ? `+${t0.d.toFixed(1)} ${t0.cap}` : "no template gain"}</span></button>`;
+            /* two-line card: the name owns a full row (score beside it),
+               badges flow horizontally beneath with the gain right-aligned */
+            return `<button class="alt" data-add="${r.w}">${icon(r.w, 40)}
+              <span class="alt-main">
+                <span class="alt-top"><span class="nm">${nameOf(r.w)}</span><span class="sc">${r.score.toFixed(2)}</span></span>
+                <span class="alt-sub">${badgeHtml(r.w)}<span class="rz" title="${t0 ? esc(prose(t0.cap)) : ""}">${t0 ? `+${t0.d.toFixed(1)} ${esc(capLabel(t0.cap))}` : "no template gain"}</span></span>
+              </span></button>`;
           }).join("")}</div>
         </div>
         <details class="rec-math"${MATH_OPEN ? " open" : ""}>
