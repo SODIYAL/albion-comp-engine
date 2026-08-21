@@ -1,11 +1,11 @@
 {
  "counts": {
   "approved": 70,
-  "candidate": 65,
+  "candidate": 70,
   "canonical_defaults": 45,
   "quarantined_fields": 2,
   "quarantined_records": 2,
-  "records": 135
+  "records": 140
  },
  "exclusion_gate": [],
  "kind": "validation_result",
@@ -124,6 +124,36 @@
    "build_id": "timothy_blap_blackzone_roam_2026_08:blap:13",
    "content": "blackzone_roam",
    "weapon": "MAIN_SCIMITAR_MORGANA"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "hellgate_5v5",
+   "weapon": "2H_FIRE_RINGPAIR_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "hellgate_5v5",
+   "weapon": "2H_HOLYSTAFF_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "hellgate_5v5",
+   "weapon": "2H_MACE"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "hellgate_5v5",
+   "weapon": "2H_SHAPESHIFTER_SET2"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "hellgate_5v5",
+   "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
   },
   {
    "basis": "explicit shotcaller approval",
