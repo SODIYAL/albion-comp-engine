@@ -11,7 +11,7 @@
     - {cap: mobility, evidence: CARTWHEEL}
     - {cap: damage_debuff, evidence: QS_WHIRLWIND2}
   capabilities:
-    - {cap: purge,         score: 4, evidence: COMBATSTAFF_SLASH}  # E: breaks shields AND prevents new ones, 3s zone
+    - {cap: purge,         score: 2, evidence: COMBATSTAFF_SLASH}  # E: breaks shields AND prevents new ones, 3s zone — shield-break only, ranked slightly below Fists of Avalon's true full purge (owner ruling 2026-08-21; was 4)
     - {cap: zone_control,  score: 2, evidence: COMBATSTAFF_SLASH}  # spinning blade zone
     - {cap: burst_aoe,     score: 2, evidence: COMBATSTAFF_SLASH}
     - {cap: damage_debuff, score: 4, evidence: COMBATSTAFF_SLASH}  # E: -40% damage dealt, stacking, in the blade zone
@@ -39,8 +39,8 @@
     - {cap: damage_debuff, evidence: QS_WHIRLWIND2}
     - {cap: peel, evidence: SEPARATING_SLAM}
   capabilities:
-    - {cap: knockback_displace, score: 6, evidence: QSWHIRLWIND}  # E: mobile channel, 12m shove IGNORING CC resistance
-    - {cap: peel,          score: 4, evidence: QSWHIRLWIND}       # walk the whirlwind over your backline
+    - {cap: knockback_displace, score: 2, evidence: QSWHIRLWIND}  # E: 12m shove IGNORING CC resistance — but self-centred: the user must commit their body, useless in the ranged fights (terry/castle) where displacement matters (owner ruling 2026-08-21; was 6)
+    - {cap: peel,          score: 2, evidence: QSWHIRLWIND}       # body-commit peel — "mostly useless for largescale peel; Bedrock just seems a lot better" (owner ruling 2026-08-21; was 4)
     - {cap: anti_dive,     score: 4, evidence: QSWHIRLWIND}       # divers get ejected; W: Forceful Swing (QW)
     # tankiness 2 -> 1 (2026-08-18 owner directive): the +15% resistance is
     # only up WHILE CHANNELING the E — a momentary, conditional buff, not

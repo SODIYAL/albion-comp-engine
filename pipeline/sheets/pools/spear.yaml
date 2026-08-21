@@ -9,8 +9,7 @@ subcategory: spear
 capabilities:
   - {cap: mobility, score: 2, evidence: CHARGINGBLADE}                   # (QW)
   - {cap: slow, score: 2, evidence: GROUNDSPEAR}                         # (QW)
-  - {cap: catch, score: 4, evidence: LEGBREAKER}                         # (QW)
-  - {cap: peel, score: 2, evidence: LEGBREAKER}                          # (QW)
+  - {cap: catch, score: 2, evidence: LEGBREAKER}                         # (QW) single-target snare — loses catch value in larger groups (owner ruling 2026-08-21; was 4, peel 2 dropped)
   - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_SPEAR}  # PASSIVE: Life Leech
   - {cap: root, score: 2, evidence: SKILLSHOT_PULL}                      # (QW)
   - {cap: sustained_dps, score: 4, evidence: SPIRITSPEAR}                # spear charge engine (QW)

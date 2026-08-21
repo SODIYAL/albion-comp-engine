@@ -33799,10 +33799,6 @@
      "radius": 4.0,
      "spell": "LETHAL_CLEAVER"
     },
-    "execute": {
-     "radius": 4.0,
-     "spell": "LETHAL_CLEAVER"
-    },
     "heal_reduction": {
      "escalation": {
       "value": 0.08
@@ -33810,6 +33806,10 @@
      "spell": "RENDINGSTRIKE"
     },
     "knockback_displace": {
+     "radius": 4.0,
+     "spell": "LETHAL_CLEAVER"
+    },
+    "max_health_cut": {
      "radius": 4.0,
      "spell": "LETHAL_CLEAVER"
     },
@@ -33840,9 +33840,9 @@
     "catch": 2,
     "disengage": 2,
     "engage": 4,
-    "execute": 2,
     "heal_reduction": 2,
     "knockback_displace": 2,
+    "max_health_cut": 2,
     "mobility": 4,
     "peel": 2,
     "resist_shred": 3,
@@ -33868,13 +33868,13 @@
     "engage": [
      "LETHAL_CLEAVER"
     ],
-    "execute": [
-     "LETHAL_CLEAVER"
-    ],
     "heal_reduction": [
      "RENDINGSTRIKE"
     ],
     "knockback_displace": [
+     "LETHAL_CLEAVER"
+    ],
+    "max_health_cut": [
      "LETHAL_CLEAVER"
     ],
     "mobility": [
@@ -33928,8 +33928,8 @@
        "catch": 2,
        "disengage": 2,
        "engage": 4,
-       "execute": 2,
        "knockback_displace": 2,
+       "max_health_cut": 2,
        "mobility": 4,
        "peel": 2
       }
@@ -34608,6 +34608,14 @@
      "radius": 4.0,
      "spell": "JUMPSHOT2"
     },
+    "interrupt": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 5.0,
+     "spell": "LIGHTNING_ARROW"
+    },
     "peel": {
      "escalation": {
       "duration": 0.08,
@@ -34645,6 +34653,7 @@
     "burst_aoe": 2,
     "catch": 2,
     "disengage": 2,
+    "interrupt": 4,
     "mobility": 2,
     "peel": 2,
     "ranged_presence": 2,
@@ -34665,6 +34674,9 @@
     ],
     "disengage": [
      "JUMPSHOT2"
+    ],
+    "interrupt": [
+     "LIGHTNING_ARROW"
     ],
     "mobility": [
      "SPEEDSHOT2"
@@ -34722,6 +34734,7 @@
      [
       {
        "burst_aoe": 2,
+       "interrupt": 4,
        "ranged_presence": 2,
        "zone_control": 4
       }
@@ -34776,6 +34789,7 @@
     "disengage": 2,
     "engage": 2,
     "heal_reduction": 2,
+    "interrupt": 2,
     "mobility": 4,
     "peel": 2,
     "purge": 2,
@@ -34801,6 +34815,10 @@
      "QDASH"
     ],
     "heal_reduction": [
+     "DEEPCUTS"
+    ],
+    "interrupt": [
+     "DISEMBOWEL",
      "DEEPCUTS"
     ],
     "mobility": [
@@ -34860,6 +34878,7 @@
       {
        "burst_st": 4,
        "catch": 4,
+       "interrupt": 2,
        "purge": 2,
        "root": 4
       }
@@ -35081,6 +35100,13 @@
      "radius": 6.0,
      "spell": "MAJESTIC_SMASH"
     },
+    "execute": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 6.0,
+     "spell": "MAJESTIC_SMASH"
+    },
     "knockback_displace": {
      "escalation": {
       "value": 0.08
@@ -35110,6 +35136,7 @@
     "catch": 2,
     "disengage": 2,
     "engage": 2,
+    "execute": 2,
     "knockback_displace": 2,
     "mobility": 4,
     "peel": 4,
@@ -35135,6 +35162,9 @@
     ],
     "engage": [
      "HEROICSTRIKE2"
+    ],
+    "execute": [
+     "MAJESTIC_SMASH"
     ],
     "knockback_displace": [
      "MAJESTIC_SMASH"
@@ -35188,6 +35218,7 @@
       {
        "buff_allies": 2,
        "burst_aoe": 4,
+       "execute": 2,
        "knockback_displace": 2,
        "peel": 4
       }
@@ -35462,7 +35493,7 @@
     "damage_debuff": 4,
     "knockback_displace": 2,
     "peel": 2,
-    "purge": 4,
+    "purge": 2,
     "ranged_presence": 2,
     "root": 2,
     "self_sustain": 2,
@@ -35538,7 +35569,7 @@
       {
        "burst_aoe": 2,
        "damage_debuff": 4,
-       "purge": 4,
+       "purge": 2,
        "ranged_presence": 2,
        "zone_control": 2
       }
@@ -35736,6 +35767,13 @@
      "radius": 11.75,
      "spell": "CROSSBOW_ARMORPIERCER"
     },
+    "interrupt": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 11.75,
+     "spell": "CROSSBOW_ARMORPIERCER"
+    },
     "knockback_displace": {
      "max_targets": 1,
      "radius": 2.0,
@@ -35773,6 +35811,7 @@
    "capabilities": {
     "burst_aoe": 4,
     "burst_st": 2,
+    "interrupt": 2,
     "knockback_displace": 4,
     "peel": 4,
     "ranged_presence": 2,
@@ -35789,6 +35828,9 @@
      "CROSSBOW_ARMORPIERCER"
     ],
     "burst_st": [
+     "CROSSBOW_ARMORPIERCER"
+    ],
+    "interrupt": [
      "CROSSBOW_ARMORPIERCER"
     ],
     "knockback_displace": [
@@ -35841,6 +35883,7 @@
       {
        "burst_aoe": 4,
        "burst_st": 2,
+       "interrupt": 2,
        "ranged_presence": 2
       }
      ],
@@ -36479,8 +36522,8 @@
     "catch": 4,
     "disengage": 2,
     "engage": 2,
-    "execute": 4,
     "heal_reduction": 2,
+    "interrupt": 2,
     "mobility": 4,
     "peel": 2,
     "resist_shred": 2,
@@ -36503,11 +36546,11 @@
     "engage": [
      "QDASH"
     ],
-    "execute": [
-     "EXECUTEDAGGER"
-    ],
     "heal_reduction": [
      "EXECUTEDAGGER"
+    ],
+    "interrupt": [
+     "DEEPCUTS"
     ],
     "mobility": [
      "QDASH"
@@ -36547,6 +36590,7 @@
      ],
      [
       "SKILLSHOT_TELEPORT",
+      "DEEPCUTS",
       "GROUNDDASH"
      ],
      [
@@ -36558,7 +36602,6 @@
      [
       {
        "burst_st": 6,
-       "execute": 4,
        "heal_reduction": 2
       }
      ],
@@ -36575,6 +36618,9 @@
        "catch": 4,
        "peel": 2,
        "stun": 2
+      },
+      {
+       "interrupt": 2
       },
       {
        "disengage": 2
@@ -36633,6 +36679,7 @@
     "disengage": 2,
     "engage": 2,
     "heal_reduction": 2,
+    "interrupt": 2,
     "mobility": 4,
     "peel": 2,
     "resist_shred": 2,
@@ -36656,6 +36703,9 @@
      "QDASH"
     ],
     "heal_reduction": [
+     "DEEPCUTS"
+    ],
+    "interrupt": [
      "DEEPCUTS"
     ],
     "mobility": [
@@ -36713,7 +36763,8 @@
      ],
      [
       {
-       "heal_reduction": 2
+       "heal_reduction": 2,
+       "interrupt": 2
       },
       {
        "disengage": 2
@@ -36790,6 +36841,7 @@
     "disengage": 4,
     "engage": 2,
     "heal_reduction": 2,
+    "interrupt": 2,
     "mobility": 4,
     "peel": 2,
     "resist_shred": 2,
@@ -36813,6 +36865,9 @@
      "QDASH"
     ],
     "heal_reduction": [
+     "DEEPCUTS"
+    ],
+    "interrupt": [
      "DEEPCUTS"
     ],
     "mobility": [
@@ -36870,7 +36925,8 @@
      ],
      [
       {
-       "heal_reduction": 2
+       "heal_reduction": 2,
+       "interrupt": 2
       },
       {
        "catch": 2,
@@ -38175,6 +38231,10 @@
      "radius": 1.25,
      "spell": "BLESSED_MACES"
     },
+    "interrupt": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
     "peel": {
      "max_targets": 10,
      "radius": 5.0,
@@ -38197,6 +38257,7 @@
     "buff_allies": 4,
     "engage": 2,
     "heal_sustain": 2,
+    "interrupt": 2,
     "peel": 4,
     "root": 5,
     "slow": 2,
@@ -38214,6 +38275,9 @@
     ],
     "heal_sustain": [
      "BLESSED_MACES"
+    ],
+    "interrupt": [
+     "CHARGE_ROOT"
     ],
     "peel": [
      "GUARDRUNE"
@@ -38263,6 +38327,7 @@
      ],
      [
       {
+       "interrupt": 2,
        "root": 5
       },
       {
@@ -38292,7 +38357,7 @@
      "radius": 8.5,
      "spell": "BLADE_AREA"
     },
-    "execute": {
+    "max_health_cut": {
      "escalation": {
       "value": 0.08
      },
@@ -38320,7 +38385,7 @@
     "burst_aoe": 6,
     "catch": 2,
     "disengage": 2,
-    "execute": 2,
+    "max_health_cut": 2,
     "mobility": 4,
     "peel": 2,
     "root": 2,
@@ -38340,7 +38405,7 @@
     "disengage": [
      "DEFENSERUN"
     ],
-    "execute": [
+    "max_health_cut": [
      "BLADE_AREA"
     ],
     "mobility": [
@@ -38391,7 +38456,7 @@
      [
       {
        "burst_aoe": 6,
-       "execute": 2
+       "max_health_cut": 2
       }
      ],
      [
@@ -38450,6 +38515,7 @@
     "disengage": 4,
     "engage": 4,
     "heal_reduction": 2,
+    "interrupt": 2,
     "mobility": 4,
     "peel": 2,
     "resist_shred": 2,
@@ -38473,6 +38539,9 @@
      "GHOSTSTRIKE"
     ],
     "heal_reduction": [
+     "DEEPCUTS"
+    ],
+    "interrupt": [
      "DEEPCUTS"
     ],
     "mobility": [
@@ -38539,7 +38608,8 @@
        "stun": 2
       },
       {
-       "heal_reduction": 2
+       "heal_reduction": 2,
+       "interrupt": 2
       }
      ],
      [
@@ -39291,6 +39361,10 @@
      "radius": 1.0,
      "spell": "ROOTFIELD"
     },
+    "interrupt": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
     "mobility": {
      "radius": 1.0,
      "spell": "ROOTFIELD"
@@ -39315,6 +39389,7 @@
    "capabilities": {
     "catch": 4,
     "engage": 4,
+    "interrupt": 2,
     "mobility": 2,
     "peel": 4,
     "root": 6,
@@ -39330,6 +39405,9 @@
     ],
     "engage": [
      "ROOTFIELD"
+    ],
+    "interrupt": [
+     "CHARGE_ROOT"
     ],
     "mobility": [
      "ROOTFIELD"
@@ -39357,11 +39435,15 @@
     },
     "slot_names": [
      "e",
+     "w",
      "q"
     ],
     "slot_spells": [
      [
       "ROOTFIELD"
+     ],
+     [
+      "CHARGE_ROOT"
      ],
      [
       "SACRED_GROUND"
@@ -39375,6 +39457,11 @@
        "mobility": 2,
        "peel": 4,
        "root": 6
+      }
+     ],
+     [
+      {
+       "interrupt": 2
       }
      ],
      [
@@ -39983,7 +40070,6 @@
     "catch": 4,
     "knockback_displace": 4,
     "mobility": 2,
-    "peel": 2,
     "root": 2,
     "self_sustain": 2,
     "slow": 2,
@@ -40000,9 +40086,6 @@
     ],
     "mobility": [
      "CHARGINGBLADE"
-    ],
-    "peel": [
-     "LEGBREAKER"
     ],
     "root": [
      "SKILLSHOT_PULL"
@@ -40033,7 +40116,6 @@
      [
       "CHARGINGBLADE",
       "GROUNDSPEAR",
-      "LEGBREAKER",
       "SKILLSHOT_PULL"
      ],
      [
@@ -40056,9 +40138,6 @@
       },
       {
        "slow": 2
-      },
-      {
-       "peel": 2
       },
       {
        "root": 2
@@ -40091,7 +40170,7 @@
      "radius": 8.5,
      "spell": "SPEAR_AOE_FINISHER"
     },
-    "knockback_displace": {
+    "peel": {
      "escalation": {
       "value": 0.08
      },
@@ -40113,8 +40192,7 @@
    },
    "capabilities": {
     "burst_aoe": 4,
-    "catch": 4,
-    "knockback_displace": 2,
+    "catch": 2,
     "mobility": 2,
     "peel": 2,
     "ranged_presence": 2,
@@ -40132,14 +40210,11 @@
     "catch": [
      "LEGBREAKER"
     ],
-    "knockback_displace": [
-     "SPEAR_AOE_FINISHER"
-    ],
     "mobility": [
      "CHARGINGBLADE"
     ],
     "peel": [
-     "LEGBREAKER"
+     "SPEAR_AOE_FINISHER"
     ],
     "ranged_presence": [
      "SPEAR_AOE_FINISHER"
@@ -40187,7 +40262,7 @@
      [
       {
        "burst_aoe": 4,
-       "knockback_displace": 2,
+       "peel": 2,
        "ranged_presence": 2
       }
      ],
@@ -40199,8 +40274,7 @@
        "slow": 2
       },
       {
-       "catch": 4,
-       "peel": 2
+       "catch": 2
       },
       {
        "root": 2
@@ -41155,19 +41229,19 @@
      },
      "spell": "CHARGESLOWAE"
     },
-    "execute": {
-     "escalation": {
-      "value": 0.08
-     },
-     "radius": 2.5,
-     "spell": "UNDEADHAND"
-    },
     "knockback_displace": {
      "escalation": {
       "value": 0.08
      },
      "radius": 3.0,
      "spell": "GEYSER"
+    },
+    "max_health_cut": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 2.5,
+     "spell": "UNDEADHAND"
     },
     "mobility": {
      "escalation": {
@@ -41210,8 +41284,8 @@
     "catch": 4,
     "disengage": 2,
     "engage": 2,
-    "execute": 2,
     "knockback_displace": 3,
+    "max_health_cut": 2,
     "mobility": 2,
     "peel": 4,
     "purge": 2,
@@ -41237,11 +41311,11 @@
     "engage": [
      "CHARGESLOWAE"
     ],
-    "execute": [
-     "UNDEADHAND"
-    ],
     "knockback_displace": [
      "GEYSER"
+    ],
+    "max_health_cut": [
+     "UNDEADHAND"
     ],
     "mobility": [
      "CHARGESLOWAE"
@@ -41302,7 +41376,7 @@
      [
       {
        "catch": 4,
-       "execute": 2,
+       "max_health_cut": 2,
        "peel": 4,
        "stun": 4
       }
@@ -41372,10 +41446,9 @@
    },
    "capabilities": {
     "burst_aoe": 2,
-    "catch": 4,
+    "catch": 2,
     "damage_debuff": 4,
     "mobility": 2,
-    "peel": 2,
     "ranged_presence": 2,
     "resist_shred": 4,
     "root": 2,
@@ -41397,9 +41470,6 @@
     ],
     "mobility": [
      "CHARGINGBLADE"
-    ],
-    "peel": [
-     "LEGBREAKER"
     ],
     "ranged_presence": [
      "GROUNDSPEAR"
@@ -41454,9 +41524,8 @@
      ],
      [
       {
-       "catch": 4,
-       "damage_debuff": 4,
-       "peel": 2
+       "catch": 2,
+       "damage_debuff": 4
       },
       {
        "burst_aoe": 2,
@@ -41520,7 +41589,7 @@
     "buff_allies": 4,
     "heal_burst": 4,
     "heal_sustain": 6,
-    "knockback_displace": 4,
+    "knockback_displace": 2,
     "peel": 4
    },
    "curated_as_of": "2026-08-12",
@@ -41562,7 +41631,7 @@
       {
        "buff_allies": 4,
        "heal_sustain": 6,
-       "knockback_displace": 4,
+       "knockback_displace": 2,
        "peel": 4
       }
      ],
@@ -42508,9 +42577,9 @@
    },
    "capabilities": {
     "anti_dive": 2,
-    "knockback_displace": 6,
+    "knockback_displace": 2,
     "mobility": 2,
-    "peel": 4,
+    "peel": 2,
     "root": 2,
     "self_sustain": 2,
     "stun": 2,
@@ -42577,8 +42646,8 @@
      [
       {
        "anti_dive": 2,
-       "knockback_displace": 6,
-       "peel": 4,
+       "knockback_displace": 2,
+       "peel": 2,
        "tankiness": 2
       }
      ],
@@ -42834,7 +42903,7 @@
     "knockback_displace": 2,
     "mobility": 4,
     "peel": 3,
-    "purge": 2,
+    "purge": 3,
     "resist_shred": 2,
     "stun": 2,
     "sustained_dps": 4
@@ -42911,7 +42980,7 @@
        "engage": 4,
        "knockback_displace": 2,
        "mobility": 4,
-       "purge": 2
+       "purge": 3
       }
      ],
      [
@@ -42996,8 +43065,8 @@
     "catch": 2,
     "clump_create": 2,
     "engage": 2,
-    "execute": 2,
     "knockback_displace": 3,
+    "max_health_cut": 2,
     "mobility": 4,
     "peel": 3,
     "resist_shred": 2,
@@ -43019,11 +43088,11 @@
     "engage": [
      "CONEPUNCH2"
     ],
-    "execute": [
-     "CONEPUNCH2"
-    ],
     "knockback_displace": [
      "BACKHAND_KNOCKBACK"
+    ],
+    "max_health_cut": [
+     "CONEPUNCH2"
     ],
     "mobility": [
      "CONEPUNCH2"
@@ -43071,7 +43140,7 @@
       {
        "burst_st": 4,
        "engage": 2,
-       "execute": 2,
+       "max_health_cut": 2,
        "mobility": 4
       }
      ],
@@ -44452,6 +44521,10 @@
      "radius": 6.0,
      "spell": "CHARGE_ROOT"
     },
+    "interrupt": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
     "peel": {
      "escalation": {
       "duration": 0.08
@@ -44484,6 +44557,7 @@
    },
    "capabilities": {
     "engage": 4,
+    "interrupt": 2,
     "peel": 6,
     "purge": 6,
     "silence": 6,
@@ -44495,6 +44569,9 @@
    "display_name": "Heavy Mace",
    "evidence": {
     "engage": [
+     "CHARGE_ROOT"
+    ],
+    "interrupt": [
      "CHARGE_ROOT"
     ],
     "peel": [
@@ -44547,7 +44624,8 @@
      ],
      [
       {
-       "engage": 4
+       "engage": 4,
+       "interrupt": 2
       }
      ],
      [
@@ -44588,6 +44666,10 @@
      "radius": 6.0,
      "spell": "CHARGE_ROOT"
     },
+    "interrupt": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
     "peel": {
      "max_targets": 10,
      "radius": 5.0,
@@ -44619,6 +44701,7 @@
     "catch": 2,
     "clump_create": 6,
     "engage": 2,
+    "interrupt": 2,
     "peel": 4,
     "root": 5,
     "slow": 2,
@@ -44636,6 +44719,9 @@
      "VACUUMSLASH"
     ],
     "engage": [
+     "CHARGE_ROOT"
+    ],
+    "interrupt": [
      "CHARGE_ROOT"
     ],
     "peel": [
@@ -44690,6 +44776,7 @@
      [
       {
        "engage": 2,
+       "interrupt": 2,
        "root": 5
       },
       {
@@ -47415,6 +47502,7 @@
     "clump_create": 2,
     "disengage": 4,
     "engage": 4,
+    "execute": 2,
     "mobility": 2,
     "peel": 2,
     "resist_shred": 2,
@@ -47441,6 +47529,9 @@
      "SHAPESHIFT_PANTHER"
     ],
     "engage": [
+     "SHAPESHIFT_PANTHER"
+    ],
+    "execute": [
      "SHAPESHIFT_PANTHER"
     ],
     "mobility": [
@@ -47493,7 +47584,8 @@
       {
        "burst_st": 4,
        "disengage": 4,
-       "engage": 4
+       "engage": 4,
+       "execute": 2
       }
      ],
      [
@@ -49616,14 +49708,14 @@
   },
   "MAIN_CURSEDSTAFF_CRYSTAL": {
    "cap_delivery": {
-    "heal_reduction": {
+    "burst_aoe": {
      "escalation": {
       "value": 0.08
      },
      "radius": 18.0,
      "spell": "CURSE_SKELETON_BARF_FDHR"
     },
-    "knockback_displace": {
+    "heal_reduction": {
      "escalation": {
       "value": 0.08
      },
@@ -49675,9 +49767,9 @@
    },
    "capabilities": {
     "buff_allies": 2,
+    "burst_aoe": 2,
     "heal_reduction": 4,
-    "knockback_displace": 4,
-    "peel": 4,
+    "peel": 2,
     "resist_shred": 2,
     "root": 3,
     "slow": 2,
@@ -49690,10 +49782,10 @@
     "buff_allies": [
      "CURSEDHANDS_STACKUP"
     ],
-    "heal_reduction": [
+    "burst_aoe": [
      "CURSE_SKELETON_BARF_FDHR"
     ],
-    "knockback_displace": [
+    "heal_reduction": [
      "CURSE_SKELETON_BARF_FDHR"
     ],
     "peel": [
@@ -49740,9 +49832,9 @@
     "slots": [
      [
       {
+       "burst_aoe": 2,
        "heal_reduction": 4,
-       "knockback_displace": 4,
-       "peel": 4
+       "peel": 2
       }
      ],
      [
@@ -49948,6 +50040,7 @@
     "disengage": 2,
     "engage": 2,
     "heal_reduction": 2,
+    "interrupt": 2,
     "mobility": 4,
     "peel": 2,
     "resist_shred": 2,
@@ -49968,6 +50061,9 @@
      "QDASH"
     ],
     "heal_reduction": [
+     "DEEPCUTS"
+    ],
+    "interrupt": [
      "DEEPCUTS"
     ],
     "mobility": [
@@ -50021,7 +50117,8 @@
      ],
      [
       {
-       "heal_reduction": 2
+       "heal_reduction": 2,
+       "interrupt": 2
       },
       {
        "disengage": 2
@@ -50085,6 +50182,7 @@
     "disengage": 2,
     "engage": 2,
     "heal_reduction": 2,
+    "interrupt": 2,
     "mobility": 4,
     "peel": 2,
     "resist_shred": 2,
@@ -50111,6 +50209,9 @@
      "QDASH"
     ],
     "heal_reduction": [
+     "DEEPCUTS"
+    ],
+    "interrupt": [
      "DEEPCUTS"
     ],
     "mobility": [
@@ -50168,7 +50269,8 @@
      ],
      [
       {
-       "heal_reduction": 2
+       "heal_reduction": 2,
+       "interrupt": 2
       },
       {
        "disengage": 2
@@ -51013,8 +51115,8 @@
     "burst_aoe": 2,
     "catch": 2,
     "disengage": 2,
-    "knockback_displace": 4,
-    "peel": 2,
+    "knockback_displace": 2,
+    "peel": 4,
     "ranged_presence": 2,
     "resist_shred": 2,
     "root": 2,
@@ -51088,8 +51190,8 @@
       {
        "burst_aoe": 2,
        "catch": 2,
-       "knockback_displace": 4,
-       "peel": 2,
+       "knockback_displace": 2,
+       "peel": 4,
        "ranged_presence": 2,
        "slow": 4,
        "zone_control": 2
@@ -51545,6 +51647,10 @@
      "radius": 5.0,
      "spell": "MACELEAP"
     },
+    "interrupt": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
     "mobility": {
      "radius": 5.0,
      "spell": "MACELEAP"
@@ -51565,6 +51671,7 @@
    },
    "capabilities": {
     "engage": 4,
+    "interrupt": 2,
     "mobility": 4,
     "peel": 4,
     "root": 5,
@@ -51576,6 +51683,9 @@
    "evidence": {
     "engage": [
      "MACELEAP"
+    ],
+    "interrupt": [
+     "CHARGE_ROOT"
     ],
     "mobility": [
      "MACELEAP"
@@ -51621,6 +51731,7 @@
      ],
      [
       {
+       "interrupt": 2,
        "root": 5
       },
       {
@@ -51652,6 +51763,10 @@
      "spell": "MACE_CRYSTAL_FRAGMENT_STORM"
     },
     "engage": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
+    "interrupt": {
      "radius": 6.0,
      "spell": "CHARGE_ROOT"
     },
@@ -51690,6 +51805,7 @@
     "burst_aoe": 2,
     "catch": 4,
     "engage": 2,
+    "interrupt": 2,
     "peel": 4,
     "resist_shred": 4,
     "root": 5,
@@ -51707,6 +51823,9 @@
      "MACE_CRYSTAL_FRAGMENT_STORM"
     ],
     "engage": [
+     "CHARGE_ROOT"
+    ],
+    "interrupt": [
      "CHARGE_ROOT"
     ],
     "peel": [
@@ -51759,6 +51878,7 @@
      [
       {
        "engage": 2,
+       "interrupt": 2,
        "root": 5
       },
       {
@@ -51791,13 +51911,17 @@
      "radius": 6.0,
      "spell": "CHARGE_ROOT"
     },
-    "execute": {
+    "heal_reduction": {
      "escalation": {
       "value": 0.08
      },
      "spell": "SHRINKINGSMASH"
     },
-    "heal_reduction": {
+    "interrupt": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
+    "max_health_cut": {
      "escalation": {
       "value": 0.08
      },
@@ -51825,8 +51949,9 @@
     "burst_st": 2,
     "damage_debuff": 4,
     "engage": 2,
-    "execute": 4,
     "heal_reduction": 4,
+    "interrupt": 2,
+    "max_health_cut": 4,
     "peel": 4,
     "root": 5,
     "slow": 2,
@@ -51845,10 +51970,13 @@
     "engage": [
      "CHARGE_ROOT"
     ],
-    "execute": [
+    "heal_reduction": [
      "SHRINKINGSMASH"
     ],
-    "heal_reduction": [
+    "interrupt": [
+     "CHARGE_ROOT"
+    ],
+    "max_health_cut": [
      "SHRINKINGSMASH"
     ],
     "peel": [
@@ -51894,13 +52022,14 @@
       {
        "burst_st": 2,
        "damage_debuff": 4,
-       "execute": 4,
-       "heal_reduction": 4
+       "heal_reduction": 4,
+       "max_health_cut": 4
       }
      ],
      [
       {
        "engage": 2,
+       "interrupt": 2,
        "root": 5
       },
       {
@@ -52560,6 +52689,7 @@
     "engage": 2,
     "execute": 4,
     "heal_reduction": 2,
+    "interrupt": 2,
     "mobility": 6,
     "peel": 2,
     "resist_shred": 2,
@@ -52586,6 +52716,9 @@
      "RAPIERSTAB"
     ],
     "heal_reduction": [
+     "DEEPCUTS"
+    ],
+    "interrupt": [
      "DEEPCUTS"
     ],
     "mobility": [
@@ -52649,7 +52782,8 @@
        "disengage": 4
       },
       {
-       "heal_reduction": 2
+       "heal_reduction": 2,
+       "interrupt": 2
       },
       {
        "peel": 2,
@@ -52684,6 +52818,10 @@
      "radius": 6.0,
      "spell": "CHARGE_ROOT"
     },
+    "interrupt": {
+     "radius": 6.0,
+     "spell": "CHARGE_ROOT"
+    },
     "knockback_displace": {
      "radius": 9.0,
      "spell": "PRIMALSLAM"
@@ -52708,8 +52846,9 @@
    "capabilities": {
     "anti_dive": 6,
     "engage": 2,
-    "knockback_displace": 6,
-    "peel": 4,
+    "interrupt": 2,
+    "knockback_displace": 2,
+    "peel": 6,
     "root": 5,
     "slow": 2,
     "tankiness": 4,
@@ -52722,6 +52861,9 @@
      "PRIMALSLAM"
     ],
     "engage": [
+     "CHARGE_ROOT"
+    ],
+    "interrupt": [
      "CHARGE_ROOT"
     ],
     "knockback_displace": [
@@ -52768,14 +52910,15 @@
      [
       {
        "anti_dive": 6,
-       "knockback_displace": 6,
-       "peel": 4,
+       "knockback_displace": 2,
+       "peel": 6,
        "zone_control": 2
       }
      ],
      [
       {
        "engage": 2,
+       "interrupt": 2,
        "root": 5
       }
      ],
@@ -53000,7 +53143,7 @@
     }
    },
    "capabilities": {
-    "catch": 4,
+    "catch": 2,
     "disengage": 2,
     "engage": 4,
     "knockback_displace": 2,
@@ -53085,7 +53228,7 @@
        "slow": 2
       },
       {
-       "catch": 4
+       "catch": 2
       },
       {
        "root": 2
@@ -53272,7 +53415,7 @@
   },
   "MAIN_SPEAR_LANCE_AVALON": {
    "cap_delivery": {
-    "burst_st": {
+    "burst_aoe": {
      "escalation": {
       "value": 0.08
      },
@@ -53310,7 +53453,7 @@
     }
    },
    "capabilities": {
-    "burst_st": 2,
+    "burst_aoe": 2,
     "catch": 2,
     "engage": 4,
     "mobility": 4,
@@ -53323,7 +53466,7 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Daybreaker",
    "evidence": {
-    "burst_st": [
+    "burst_aoe": [
      "LANCE_CHARGE"
     ],
     "catch": [
@@ -53379,7 +53522,7 @@
     "slots": [
      [
       {
-       "burst_st": 2,
+       "burst_aoe": 2,
        "engage": 4,
        "mobility": 4,
        "purge": 4
@@ -53438,6 +53581,8 @@
     "catch": 2,
     "disengage": 2,
     "engage": 2,
+    "execute": 2,
+    "interrupt": 2,
     "mobility": 4,
     "peel": 2,
     "root": 2,
@@ -53458,6 +53603,12 @@
      "DEFENSERUN"
     ],
     "engage": [
+     "MIGHTYBLOW"
+    ],
+    "execute": [
+     "MIGHTYBLOW"
+    ],
+    "interrupt": [
      "MIGHTYBLOW"
     ],
     "mobility": [
@@ -53510,6 +53661,8 @@
        "burst_st": 4,
        "catch": 2,
        "engage": 2,
+       "execute": 2,
+       "interrupt": 2,
        "mobility": 4
       }
      ],

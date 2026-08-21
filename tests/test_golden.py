@@ -211,13 +211,15 @@ def run():
 
     # T13 — expert magnitude pass 2026-08-13: knockback_displace scores
     # repositioning power, not existence. Ladder pinned within one role
-    # family: Quarterstaff (12m CC-resist-ignoring kit) = 3 > Great Holy
-    # (10m real AoE shove) = 2 > Hallowfall (air-throw, no travel) = 1 >
-    # Holy Staff / Lifetouch / Redemption (Sacred Pulse self-peel, AA
-    # passive) = absent.
+    # family: Quarterstaff (12m CC-resist-ignoring knock-UP kit) = top >
+    # Great Holy = Hallowfall = small > Holy Staff / Lifetouch / Redemption
+    # (Sacred Pulse self-peel, AA passive) = absent. Owner ruling 2026-08-21:
+    # Great Holy's 10m radial shove is self-centred — it only matters when
+    # enemies are already on top, so it is peel, not offensive displacement;
+    # its knockback_displace dropped 4 -> 2 (the peel 4 carries the E's job).
     kd = lambda w: E.caps_of(w).get("knockback_displace", 0)
     check("T13 displacement magnitude ladder holds",
-          kd("2H_QUARTERSTAFF") == 6 and kd("2H_HOLYSTAFF") == 4
+          kd("2H_QUARTERSTAFF") == 6 and kd("2H_HOLYSTAFF") == 2
           and kd(HALLOWFALL) == 2
           and all("knockback_displace" not in E.caps_of(w)
                   for w in ("MAIN_HOLYSTAFF", "MAIN_HOLYSTAFF_MORGANA",

@@ -83,9 +83,9 @@
     - {cap: zone_control, evidence: FROSTBOMB_CASTSLOW}
     - {cap: sustained_dps, evidence: WEAPON_STATS}
   capabilities:
-    - {cap: knockback_displace, score: 4, evidence: ICEROCK_EXPLODE}  # E: rolling 10m knockback + wall explosion
+    - {cap: knockback_displace, score: 2, evidence: ICEROCK_EXPLODE}  # E: rolling 10m knock-AWAY — Bedrock-pattern, not offensive repositioning (owner ruling 2026-08-21; was 4)
     - {cap: slow,          score: 4, evidence: ICEROCK_EXPLODE}  # freezing trail + QW pool
-    - {cap: peel,          score: 2, evidence: ICEROCK_EXPLODE}
+    - {cap: peel,          score: 4, evidence: ICEROCK_EXPLODE}  # wide ball knocks back MULTIPLE enemies + trail slows pursuit — "not as good as Bedrock in peel but not terrible" (owner band 4-5, held at 4 for separation from Bedrock's 6; ruling 2026-08-21)
     - {cap: zone_control,  score: 2, evidence: ICEROCK_EXPLODE}  # the trail
     - {cap: burst_aoe,     score: 2, evidence: ICEROCK_EXPLODE}  # rescore HELD at 2: measured 280/cast top-20% argues 3, but +0.5u tips the blap tank slot in V4 (69%) - revisit with V4b/win-lift
     - {cap: catch,         score: 2, evidence: ICEROCK_EXPLODE}

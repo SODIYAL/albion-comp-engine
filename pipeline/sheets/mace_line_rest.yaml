@@ -54,7 +54,7 @@
   curated_as_of: 2026-08-12
   role_hint: tank
   capabilities:
-    - {cap: execute,      score: 4, evidence: SHRINKINGSMASH}  # E: -40% max AND current Health for 8s — the focus call
+    - {cap: max_health_cut, score: 4, evidence: SHRINKINGSMASH}  # E: -40% max AND current Health for 8s — the focus call (was execute; taxonomy ruling 2026-08-21)
     - {cap: heal_reduction, score: 4, evidence: SHRINKINGSMASH}  # -40% Healing CAST hits enemy healers
     - {cap: burst_st,     score: 2, evidence: SHRINKINGSMASH}
     - {cap: damage_debuff, score: 4, evidence: SHRINKINGSMASH}  # E: -40% damage dealt for 8s, cone
@@ -67,7 +67,7 @@
     - {cap: peel, evidence: GUARDRUNE}
     - {cap: zone_control, evidence: SACRED_GROUND}
   capabilities:
-    - {cap: knockback_displace, score: 6, evidence: PRIMALSLAM}  # E: 18m knockback jets on a 4s line
-    - {cap: peel,         score: 4, evidence: PRIMALSLAM}      # the wall between them and your backline
+    - {cap: knockback_displace, score: 2, evidence: PRIMALSLAM}  # E: 18m knockback jets — a knock-AWAY wall, not offensive repositioning (owner ruling 2026-08-21; was 6)
+    - {cap: peel,         score: 6, evidence: PRIMALSLAM}      # the wall between them and your backline — "good for disengage: it knocks enemies away" covering the retreat; the model's cap for that job is peel, and the E is elite at it (owner ruling 2026-08-21; was 4; lint grounds knockbacks as peel, not disengage=self-escape)
     - {cap: zone_control, score: 2, evidence: PRIMALSLAM}      # the jets hold the line they occupy
     - {cap: anti_dive,    score: 2, evidence: PRIMALSLAM}      # divers get launched 18m home

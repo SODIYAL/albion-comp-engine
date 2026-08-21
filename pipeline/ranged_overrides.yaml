@@ -27,6 +27,20 @@
     Realmbreaker as melee dps — "Press E on engage, chop people" (2026-08).
   as_of: 2026-08-19
 
+- weapon: MAIN_SPEAR_LANCE_AVALON
+  spell: LANCE_CHARGE
+  decision: deny
+  reason: >
+    "Dash toward the targeted position ... Deals 222 physical damage" to all
+    enemies passed through — the line AoE is the wielder's own dash path, a
+    gap-close that ends inside the enemy clump, not ranged pressure from
+    outside it. (burst_st reclassified to burst_aoe in the 2026-08-21
+    taxonomy pass; this entry keeps that edit from granting ranged_presence.)
+  source: >
+    Spell description (ao-bin-dumps 5cf2e8e9); owner ruling 2026-08-21 —
+    Daybreaker is fielded as a leather-archetype melee purge lance.
+  as_of: 2026-08-21
+
 - weapon: 2H_CLEAVER_HELL
   spell: CLAYMORESLASH
   decision: deny

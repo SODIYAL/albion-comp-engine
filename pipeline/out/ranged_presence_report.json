@@ -1006,6 +1006,22 @@
    ],
    "status": "not_granted"
   },
+  "MAIN_CURSEDSTAFF_CRYSTAL": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 3.0,
+     "cooldown": "30",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": null,
+     "radius": 18.0,
+     "slot": "e",
+     "spell": "CURSE_SKELETON_BARF_FDHR"
+    }
+   ],
+   "status": "not_granted"
+  },
   "MAIN_CURSEDSTAFF_UNDEAD": {
    "decisions": [
     {
@@ -1154,6 +1170,27 @@
     }
    ],
    "status": "granted"
+  },
+  "MAIN_SPEAR_LANCE_AVALON": {
+   "decisions": [
+    {
+     "basis": "curated_override_deny",
+     "cast_range": 16.0,
+     "cooldown": "25",
+     "delivery": "ground",
+     "granted": false,
+     "max_targets": null,
+     "override": {
+      "as_of": "2026-08-21",
+      "reason": "\"Dash toward the targeted position ... Deals 222 physical damage\" to all enemies passed through \u2014 the line AoE is the wielder's own dash path, a gap-close that ends inside the enemy clump, not ranged pressure from outside it. (burst_st reclassified to burst_aoe in the 2026-08-21 taxonomy pass; this entry keeps that edit from granting ranged_presence.)",
+      "source": "Spell description (ao-bin-dumps 5cf2e8e9); owner ruling 2026-08-21 \u2014 Daybreaker is fielded as a leather-archetype melee purge lance."
+     },
+     "radius": null,
+     "slot": "e",
+     "spell": "LANCE_CHARGE"
+    }
+   ],
+   "status": "not_granted"
   },
   "MAIN_SWORD_CRYSTAL": {
    "decisions": [

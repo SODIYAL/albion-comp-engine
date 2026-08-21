@@ -22,6 +22,6 @@
   role_hint: support
   capabilities:
     - {cap: heal_reduction, score: 4, evidence: CURSE_SKELETON_BARF_FDHR}  # E: negates Healing Received 2s, AoE
-    - {cap: knockback_displace, score: 4, evidence: CURSE_SKELETON_BARF_FDHR}  # E: 6m AoE, ignores CC resistance
-    - {cap: peel,           score: 4, evidence: CURSE_SKELETON_BARF_FDHR}  # the CC-resist-ignoring shove IS the peel
+    - {cap: burst_aoe,      score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # 161 magical across the miasma cone — "mostly used for its damage" (owner ruling 2026-08-21)
+    - {cap: peel,           score: 2, evidence: CURSE_SKELETON_BARF_FDHR}  # Rift Glaive-pattern: slight knock-AWAY = self-peel, displace dropped (owner ruling 2026-08-21; was displace 4 + peel 4)
     - {cap: sustained_dps,  score: 2, evidence: CURSEDOT}           # Q: stacking Vile Curse DoTs; 1H damage budget

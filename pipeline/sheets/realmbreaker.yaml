@@ -3,9 +3,10 @@
 #
 # Identity: max-HP-cut slam axe. The E (Aftershock) leaps, slams for 212 AoE,
 # throws the cone in front into the air, and cuts Max AND current Health by
-# 15% for 5s — a focus-fire amplifier scored as execute (hitpointsmaxbonus-
-# per the map). Shares the axe Q/W pool with Bear Paws; QW-conditional scores
-# mirror that sheet.
+# 15% for 5s — a focus-fire amplifier scored as max_health_cut (taxonomy
+# ruling 2026-08-21: %-max-health cuts are their own capability; execute is
+# reserved for low-HP payoffs and killing-blow rewards). Shares the axe Q/W
+# pool with Bear Paws; QW-conditional scores mirror that sheet.
 #
 # DRAFT CORRECTION: the E's heal flag ("Decreases Max and current Health")
 # is regex noise, suppressed. heal_reduction re-grounds on the Rending bleed
@@ -24,7 +25,7 @@
     - {cap: knockback_displace, score: 2, evidence: LETHAL_CLEAVER}  # E: cone air-THROW — no travel (magnitude pass 2026-08-13)
     - {cap: engage,         score: 4, evidence: LETHAL_CLEAVER}   # leap in, slam the clump
     - {cap: mobility,       score: 4, evidence: LETHAL_CLEAVER}   # E leap; Q3: Raging Leap
-    - {cap: execute,        score: 2, evidence: LETHAL_CLEAVER}   # -15% Max Health for 5s amplifies the focus window
+    - {cap: max_health_cut, score: 2, evidence: LETHAL_CLEAVER}   # -15% Max Health for 5s amplifies the focus window (was execute; taxonomy ruling 2026-08-21)
     - {cap: peel,           score: 2, evidence: LETHAL_CLEAVER}   # air-throw divers off the backline
     - {cap: catch,          score: 2, evidence: LETHAL_CLEAVER}   # leap range is modest
     - {cap: disengage,      score: 2, evidence: LETHAL_CLEAVER}   # leap out — no CD refund unlike Bear Paws

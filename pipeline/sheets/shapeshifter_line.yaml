@@ -65,6 +65,7 @@
     - {cap: burst_st,      score: 4, evidence: SHAPESHIFT_PANTHER}  # pounce out of stealth
     - {cap: engage,        score: 4, evidence: SHAPESHIFT_PANTHER}  # On the Prowl invisibility opener (via override)
     - {cap: disengage,     score: 4, evidence: SHAPESHIFT_PANTHER}  # restealth and leave (via override)
+    - {cap: execute,       score: 2, evidence: SHAPESHIFT_PANTHER}  # panther-form low-HP hunter kit (owner ruling 2026-08-21)
 
 - weapon: 2H_SHAPESHIFTER_SET3       # Primal Staff — the enrage bear
   curated_as_of: 2026-08-12

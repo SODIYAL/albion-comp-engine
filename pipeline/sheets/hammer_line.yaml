@@ -14,7 +14,7 @@
   role_hint: tank
   capabilities:
     - {cap: stun,          score: 4, evidence: UNDEADHAND}       # E: 2.48s AoE stun after 0.35 delay
-    - {cap: execute,       score: 2, evidence: UNDEADHAND}       # -10% max/current Health for the focus window
+    - {cap: max_health_cut, score: 2, evidence: UNDEADHAND}      # -10% max/current Health for the focus window (was execute; taxonomy ruling 2026-08-21)
     - {cap: catch,         score: 4, evidence: UNDEADHAND}       # 2.48s ranged AoE stun = caught
     - {cap: peel,          score: 4, evidence: UNDEADHAND}       # drop the hand on divers; W pool
 

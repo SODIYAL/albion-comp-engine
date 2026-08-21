@@ -12,3 +12,4 @@
   capabilities:
     - {cap: zone_control,  score: 4, evidence: LIGHTNING_ARROW}    # E: 5s stormcloud, DoT on leavers (Longbow zone parity)
     - {cap: burst_aoe,     score: 2, evidence: LIGHTNING_ARROW}    # 21 every 0.3 in the cloud — pressure, not a bomb
+    - {cap: interrupt,     score: 4, evidence: LIGHTNING_ARROW}    # every damage tick interrupts casting — nothing channels inside the cloud for 5s (interrupt taxonomy, owner ruling 2026-08-21)

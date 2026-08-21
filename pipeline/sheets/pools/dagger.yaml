@@ -7,6 +7,7 @@
 # adjudication — or lists the pair under `except:`.
 subcategory: dagger
 capabilities:
+  - {cap: interrupt, score: 2, evidence: DEEPCUTS}                          # W: Forbidden Stab — "interrupting the target's spell casting" (interrupt taxonomy 2026-08-21)
   - {cap: heal_reduction, score: 2, evidence: DEEPCUTS}                     # W: Forbidden Stab — "Negates the target's Healing
   - {cap: disengage, score: 2, evidence: GROUNDDASH}                        # W: Dash out; Chain Slash iframes (QW)
   - {cap: sustained_dps, score: 2, evidence: PASSIVE_AASPEEDCHANCE_DAGGER}  # AA-speed dagger passives

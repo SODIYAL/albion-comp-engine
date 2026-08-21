@@ -20,3 +20,4 @@
     - {cap: catch,         score: 4, evidence: DISEMBOWEL}          # the pin IS the catch; W: Shadow Edge
     - {cap: burst_st,      score: 4, evidence: DISEMBOWEL}          # 45 every 0.3 + exit bleed + dagger stacking
     - {cap: purge,         score: 2, evidence: DISEMBOWEL}          # E: breaks active shields — narrow purge
+    - {cap: interrupt,     score: 2, evidence: DISEMBOWEL}          # repeatedly interrupts the pinned target's casting (interrupt taxonomy 2026-08-21)

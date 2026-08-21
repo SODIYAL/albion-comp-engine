@@ -20,7 +20,7 @@
   capabilities:
     - {cap: engage,        score: 4, evidence: TRIPLECOMBO_DIVEKICK}  # E: CC-immune dive kick
     - {cap: knockback_displace, score: 2, evidence: TRIPLECOMBO_DIVEKICK}  # air-throw — no travel; Backhand is single-target (QW) (magnitude pass 2026-08-13)
-    - {cap: purge,         score: 2, evidence: TRIPLECOMBO_DIVEKICK}  # Purifying Fist strips buffs
+    - {cap: purge,         score: 3, evidence: TRIPLECOMBO_DIVEKICK}  # Purifying Fist strips ALL buffs — the true-purge benchmark above shield-break (owner ruling 2026-08-21; was 2)
     - {cap: mobility,      score: 4, evidence: TRIPLECOMBO_DIVEKICK}  # dive + Q dashes
     - {cap: disengage,     score: 2, evidence: TRIPLECOMBO_DIVEKICK}
 
@@ -34,7 +34,7 @@
     - {cap: burst_st, evidence: KNUCKLECOMBO}
   capabilities:
     - {cap: burst_st,      score: 4, evidence: CONEPUNCH2}     # E: dash + pulse charges on everything you do
-    - {cap: execute,       score: 2, evidence: CONEPUNCH2}     # -3% max/current Health x5 stacks
+    - {cap: max_health_cut, score: 2, evidence: CONEPUNCH2}    # -3% max/current Health x5 stacks (was execute; taxonomy ruling 2026-08-21)
     - {cap: mobility,      score: 4, evidence: CONEPUNCH2}     # recastable dash + Q dashes
     - {cap: engage,        score: 2, evidence: CONEPUNCH2}
 

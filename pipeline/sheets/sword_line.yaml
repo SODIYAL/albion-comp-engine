@@ -20,7 +20,7 @@
   role_hint: melee
   capabilities:
     - {cap: burst_aoe,     score: 6, evidence: BLADE_AREA}        # E: 8.5m waves, charge-scaled to 320
-    - {cap: execute,       score: 2, evidence: BLADE_AREA}        # -10% max/current Health for 7s amplifies focus
+    - {cap: max_health_cut, score: 2, evidence: BLADE_AREA}       # -10% max/current Health for 7s amplifies focus (was execute; taxonomy ruling 2026-08-21)
 
 - weapon: MAIN_SCIMITAR_MORGANA      # Clarent Blade — charge-fork wave slicer
   curated_as_of: 2026-08-12
@@ -47,6 +47,8 @@
     - {cap: mobility,      score: 4, evidence: MIGHTYBLOW}        # E leap + Q dash
     - {cap: engage,        score: 2, evidence: MIGHTYBLOW}        # leap-to-target with interrupt
     - {cap: catch,         score: 2, evidence: MIGHTYBLOW}
+    - {cap: execute,       score: 2, evidence: MIGHTYBLOW}        # finishing blow refunds 1s cooldown — kill reward (taxonomy ruling 2026-08-21)
+    - {cap: interrupt,     score: 2, evidence: MIGHTYBLOW}        # the leap interrupts the target's cast (interrupt taxonomy 2026-08-21)
 
 - weapon: MAIN_SWORD_CRYSTAL         # Infinity Blade — ramp-and-swipe duellist
   curated_as_of: 2026-08-12

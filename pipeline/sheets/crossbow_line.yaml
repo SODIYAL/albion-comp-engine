@@ -20,6 +20,7 @@
   capabilities:
     - {cap: burst_aoe,     score: 4, evidence: CROSSBOW_ARMORPIERCER}  # E: 225 pierce through the line
     - {cap: burst_st,      score: 2, evidence: CROSSBOW_ARMORPIERCER}
+    - {cap: interrupt,     score: 2, evidence: CROSSBOW_ARMORPIERCER}  # the pierce interrupts every caster on the line (interrupt taxonomy 2026-08-21)
 
 - weapon: 2H_DUALCROSSBOW_CRYSTAL    # Arclight Blasters — dash-blast skirmisher
   curated_as_of: 2026-08-12
