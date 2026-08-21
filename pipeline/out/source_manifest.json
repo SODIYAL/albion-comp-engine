@@ -6,7 +6,7 @@
   "gear_lines.json": {
    "adapter": "fetch_gear_lines",
    "adapter_version": "2",
-   "sha256": "6e828e960ae879b0610eccac2d56dcb020f9667895fd5f4af7699c88c8e8c0d1",
+   "sha256": "2117d3c8234f6e26799e4b1c43b5b587b7325e0173f1d59315b1c240083916d4",
    "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
    "source_files": [
     "formatted/items.txt",
@@ -16,7 +16,7 @@
   "gear_spells.json": {
    "adapter": "parse_dumps",
    "adapter_version": "4",
-   "sha256": "201cc9fcb37a5de39d4677d0ff0e562c5498c9409a34a8350102ce96f2c042b4",
+   "sha256": "ff7e2302a8a87fbbcd1fa5edf83dbbd6c8071f3b4e87f1ade178513116682dd1",
    "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
    "source_files": [
     "formatted/items.json",
@@ -28,7 +28,7 @@
   "interactions.json": {
    "adapter": "build_interactions",
    "adapter_version": "1",
-   "sha256": "ef1dcdfb270cb910dbe3629312908cc2a267603ec006593980858de43ea4186f",
+   "sha256": "8d02f9d844210e71ef9b42e1f60c878d618a87429f1675e6c690cc88de507a35",
    "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
    "source_files": [
     "interactions.yaml",
@@ -48,7 +48,7 @@
   "spell_index.json": {
    "adapter": "parse_dumps",
    "adapter_version": "4",
-   "sha256": "e1314ca350b2e0838f7a5f505b0237331c2e3f312f08a76c26bf5fa9ca35d5d6",
+   "sha256": "65e34fa64cac5410c91e68ab3c2295baf8b62ed5d07c857761cc50c9b7618b17",
    "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
    "source_files": [
     "formatted/items.json",
@@ -60,7 +60,7 @@
   "weapon_lines.json": {
    "adapter": "parse_dumps",
    "adapter_version": "4",
-   "sha256": "3a5303c584f4bb7e4de4c372352948d1c0243d280e8b709cbd9942b13574fcc2",
+   "sha256": "7487230bd2a923f0881daab390d7e924ce7137236b9f73a496e3609b641ac5e1",
    "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
    "source_files": [
     "formatted/items.json",

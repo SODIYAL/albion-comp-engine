@@ -275,7 +275,7 @@ def main():
         },
         "items": dict(sorted(out.items())),
     }
-    with open(DEST, "w", encoding="utf-8") as f:
+    with open(DEST, "w", encoding="utf-8", newline="\n") as f:
         json.dump(payload, f, separators=(",", ":"), sort_keys=True)
     record_derived("item_stats.json", DEST, ADAPTER, ADAPTER_VERSION, commit,
                    ["items.json", "formatted/items.txt"])

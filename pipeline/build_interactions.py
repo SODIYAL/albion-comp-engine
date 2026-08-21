@@ -265,7 +265,7 @@ def main():
         },
         "spells": dict(sorted(spells.items())),
     }
-    with open(DEST, "w", encoding="utf-8") as f:
+    with open(DEST, "w", encoding="utf-8", newline="\n") as f:
         json.dump(payload, f, indent=1, sort_keys=True)
     record_derived("interactions.json", DEST, ADAPTER, ADAPTER_VERSION,
                    snapshot_commit() or "local-override",

@@ -53,7 +53,7 @@ def load_manifest(required=False):
 def save_manifest(manifest):
     manifest["schema_version"] = MANIFEST_SCHEMA_VERSION
     os.makedirs(os.path.dirname(MANIFEST_PATH), exist_ok=True)
-    with open(MANIFEST_PATH, "w", encoding="utf-8") as f:
+    with open(MANIFEST_PATH, "w", encoding="utf-8", newline="\n") as f:
         json.dump(manifest, f, indent=1, sort_keys=True)
         f.write("\n")
 

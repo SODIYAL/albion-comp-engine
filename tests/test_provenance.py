@@ -75,6 +75,15 @@ check("H1 manifest records repository, commit timestamp, fetch timestamp, "
       all(MANIFEST["sources"].get(k) for k in
           ("repository", "commit_timestamp", "fetch_timestamp_utc",
            "environment", "game_patch")))
+# The manifest hashes raw bytes, and .gitattributes normalizes the repo to
+# LF — so a CRLF artifact hashes differently on disk than the checkout any
+# other machine gets, and H1 breaks everywhere but the generating machine
+# (bitten 2026-08-21: git pull rewrote spell_index.json to LF, manifest
+# held the Windows CRLF hash, release blocked).
+crlf = [name for name in INPUTS + ["source_manifest.json"]
+        if b"\r\n" in open(os.path.join(OUT, name), "rb").read()]
+check("H1 hashed artifacts are LF-only (byte-stable across git checkout)",
+      crlf == [], str(crlf))
 
 # ---- H.3 release fails closed on missing / mixed / stale inputs -------------
 real_path = provenance.MANIFEST_PATH

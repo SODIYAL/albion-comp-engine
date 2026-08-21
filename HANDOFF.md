@@ -43,7 +43,7 @@ py -3 pipeline/evidence_lint.py        # CI gate — exit 1 blocks release
 py -3 pipeline/build_builds.py         # data/ evidence layer -> out/builds_index.json + validation
 py -3 pipeline/build_dataset.py        # sheets + templates + styles + composition -> out/dataset-latest.json
                                        # (verifies snapshot provenance; exit 2 = release blocked)
-py -3 tests/test_golden.py             # must stay 24/24
+py -3 tests/test_golden.py             # must stay 30/30
 py -3 tests/test_forge.py              # forge rework contracts: invariant, synergy rules,
                                        # redundancy, size-11 matrix, exclusions, combo-aware minima (14/14)
 py -3 tests/tier2_blindtest.py v4      # role gate >= 70% (73% since the ranged rework)
@@ -52,7 +52,8 @@ py -3 tests/test_js_parity.py          # browser scoring == engine.py incl. forg
 node tests/test_loadout_codec.js       # permalink codec + provenance + pick bridges
 py -3 tests/test_patch_history.py      # patch-diff + staleness units, no clone needed
 py -3 tests/test_provenance.py         # chapter-2 §A gates: pinned snapshot, hashes,
-                                       # determinism, fail-closed release, coverage (24/24)
+                                       # determinism, fail-closed release, coverage,
+                                       # LF-only hashed artifacts (25/25)
 py -3 tests/test_builds.py             # chapter-2 §B-§F gates: ranged evidence, builds schema,
                                        # equippability, independence, 1v1 bar, semantics,
                                        # quarantine-never-canonical (46/46)
@@ -73,6 +74,24 @@ ao-bin-dumps commit, then `fetch_snapshot.py` -> `parse_dumps.py` ->
 `fetch_item_stats.py` -> `fetch_gear_lines.py` -> the full gate list above.
 Every derived input records its snapshot commit + adapter version in
 `out/source_manifest.json`; `build_dataset.py` fails closed on any mismatch.
+
+## Session 2026-08-21 — provenance survives git checkout (CRLF trap defused)
+
+`git pull` broke the release gate on this machine: H1 reported
+`spell_index.json` hash drift and `build_dataset` failed closed. Root cause
+was NOT stale data — every pipeline writer opened outputs in text mode, so
+Windows wrote CRLF and the manifest recorded CRLF hashes, while
+`.gitattributes` (`* text=auto eol=lf`) stores LF in the repo. Any hashed
+artifact git rewrites on pull/checkout (here: the pull touched
+spell_index.json) comes back LF and stops matching the manifest — the gates
+only ever passed locally because git had never rewritten those files.
+Fix: `newline="\n"` on every hashed-artifact writer (parse_dumps ×3,
+fetch_item_stats, fetch_gear_lines, build_interactions, provenance
+manifest), full adapter chain re-run so the manifest now records LF hashes
+(disk == repo blob — checkouts are no-ops byte-wise), and a new H1 gate
+pins it: hashed artifacts must be LF-only (25/25). All gates green
+(golden 30/30, forge 14/14, V4 role 73%, parity 60/60, codec 24/24,
+patch-history 14/14, builds 46/46, interactions 31/31, lint clean).
 
 ## Session 2026-08-20 (the measurement layer) — geometric AoE, MASTERSHEET, 1–7 scale
 

@@ -81,7 +81,7 @@ def main():
     if not gear:
         sys.exit("no gear lines found — item_stats.json may be malformed")
 
-    with open(DEST, "w", encoding="utf-8") as f:
+    with open(DEST, "w", encoding="utf-8", newline="\n") as f:
         json.dump(gear, f, indent=1, sort_keys=True)
     # gear_lines derives from item_stats.json — inherit its snapshot commit
     # so the release check can prove the whole chain is one snapshot

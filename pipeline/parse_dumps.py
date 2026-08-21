@@ -524,13 +524,16 @@ def main(dump_dir, source_commit):
     wl_path = os.path.join(out_dir, "weapon_lines.json")
     si_path = os.path.join(out_dir, "spell_index.json")
     gs_path = os.path.join(out_dir, "gear_spells.json")
-    with open(wl_path, "w", encoding="utf-8") as f:
+    # newline="\n" everywhere a hashed artifact is written: the manifest
+    # hashes raw bytes and git normalizes the repo to LF, so a CRLF file
+    # would stop verifying on any fresh checkout.
+    with open(wl_path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(lines, f, indent=1, sort_keys=True)
-    with open(si_path, "w", encoding="utf-8") as f:
+    with open(si_path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(spell_index, f, indent=1, sort_keys=True)
     for G in gear_spells.values():
         G.pop("_n", None)
-    with open(gs_path, "w", encoding="utf-8") as f:
+    with open(gs_path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(gear_spells, f, indent=1, sort_keys=True)
 
     src_files = ["items.json", "spells.json", "localization.json",
