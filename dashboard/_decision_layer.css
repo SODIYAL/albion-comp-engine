@@ -12,15 +12,16 @@
 .dl-weapon{display:flex;align-items:center;gap:14px;margin:10px 0 8px}.dl-weapon .nm-btn{font-family:var(--serif);font-size:27px;font-weight:600}.dl-weapon>div>span{display:block;color:var(--ink-3);font-size:11px;margin-top:2px}.dl-weapon .icon{filter:drop-shadow(0 7px 15px rgba(0,0,0,.55)) saturate(1.12)}
 .dl-pick p{font-size:13px;line-height:1.55;color:var(--ink-2);margin:7px 0 10px}.dl-pick p em{color:var(--brass-bright);font-style:normal;font-weight:600}
 .dl-gains{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.dl-gains li{background:var(--sunk);border:1px solid var(--rule);border-radius:9px;padding:7px 8px;font-size:11px;color:var(--ink-2)}.dl-gains b{color:var(--ok-bright);font-family:var(--mono);margin-right:4px}.dl-gains span{display:block;color:var(--ink-3);font-family:var(--mono);font-size:9.5px;margin-top:2px}
+.dl-observed{margin-top:9px;padding:9px 10px;border:1px solid rgba(105,168,255,.22);border-radius:9px;background:rgba(105,168,255,.055);font-size:11px;line-height:1.45;color:var(--ink-2)}
+.dl-observed b{color:#a9c9ff;font-family:var(--mono);font-size:10.5px}.dl-observed small{display:block;margin-top:3px;color:var(--ink-3);font-size:9.5px}.dl-observed .dl-kicker{margin-bottom:4px;color:#8fa7cf}
 .dl-remain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px}.dl-remain>span:not(.dl-kicker){font-family:var(--mono);font-size:9.5px;padding:3px 7px;border-radius:99px;border:1px solid rgba(255,84,112,.28);color:var(--gap);background:var(--gap-wash)}.dl-remain .dl-kicker{width:100%}.dl-remain.clear>span:not(.dl-kicker){color:var(--ok-bright);border-color:rgba(35,191,110,.25);background:rgba(35,191,110,.07)}
 .dl-add{width:100%;margin-top:12px}
 .dl-empty{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px}.dl-empty p{margin:4px 0 0;color:var(--ink-2);font-size:12.5px}
-/* The old right flank duplicated the exact questions answered above. Keep its
-   underlying renderers alive, but remove that duplicate surface on this pass. */
+.meta-aff .pct{min-width:150px;text-align:right}.ka-note{grid-column:1/-1;font-family:var(--mono);font-size:9px;line-height:1.5;color:var(--ink-3);padding:7px 2px 0;border-top:1px solid var(--rule);margin-top:3px}
+/* The old right flank duplicated the exact questions answered above. Keep its underlying renderers alive, but remove that duplicate surface. */
 .ws-right{display:none!important}
 .wheelstage{grid-template-columns:minmax(196px,220px) minmax(0,1fr)!important;gap:30px}
 .ws-party,.ws-center{grid-column:auto!important;grid-row:auto!important;order:initial!important}
-/* Deep diagnostics remain below the hero, but their heading says what they are. */
 #groups{margin-top:-4px}
 @media(max-width:1250px){.decision-layer{grid-template-columns:1fr 1fr}.dl-pick{grid-column:1/-1}.wheelstage{grid-template-columns:1fr!important}.ws-party{order:1!important}.ws-center{order:2!important}}
-@media(max-width:720px){.decision-layer{grid-template-columns:1fr}.dl-pick{grid-column:auto}.dl-gains{grid-template-columns:1fr}.dl-status strong,.dl-need strong{font-size:18px}.dl-empty{display:block}.wheelstage{gap:20px}}
+@media(max-width:720px){.decision-layer{grid-template-columns:1fr}.dl-pick{grid-column:auto}.dl-gains{grid-template-columns:1fr}.dl-status strong,.dl-need strong{font-size:18px}.dl-empty{display:block}.wheelstage{gap:20px}.meta-aff .pct{min-width:0}}
