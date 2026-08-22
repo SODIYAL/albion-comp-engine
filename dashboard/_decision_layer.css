@@ -1,12 +1,25 @@
-/* Decision-first surface: diagnosis and next action lead; the wheel becomes exploration. */
-.decision-layer{display:grid;grid-template-columns:minmax(190px,.72fr) minmax(200px,.86fr) minmax(360px,1.7fr);gap:14px;align-items:stretch;margin:0 0 6px}
+/* Decision-first surface: diagnosis and next action lead; the wheel becomes exploration.
+   Status + need stack in a slim left rail; the pick card owns the right
+   (owner 2026-08-22: the old 3-across row stretched the two small cards to
+   the pick card's height — mostly empty panel). */
+.decision-layer{display:grid;grid-template-columns:minmax(230px,.9fr) minmax(360px,2.1fr);grid-template-rows:auto 1fr;gap:14px;align-items:stretch;margin:0 0 6px}
+.dl-status{grid-column:1;grid-row:1}
+.dl-need{grid-column:1;grid-row:2}
+.dl-pick{grid-column:2;grid-row:1/3}
 .dl-status,.dl-need,.dl-pick{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
 .dl-status{display:flex;justify-content:space-between;gap:18px;align-items:center;border-top:2px solid var(--amber)}
 .dl-status.critical{border-top-color:var(--gap)}.dl-status.warning{border-top-color:var(--amber)}.dl-status.ready{border-top-color:var(--ok-bright)}
 .dl-status strong,.dl-need strong{display:block;font-family:var(--serif);font-size:21px;line-height:1.15;margin:4px 0}
 .dl-status small{color:var(--ink-3);font-family:var(--mono);font-size:10px}.dl-fit{font-family:var(--mono);font-size:25px;font-weight:700;white-space:nowrap}.dl-fit small{display:block;text-align:right;text-transform:uppercase;letter-spacing:.12em}
 .dl-kicker{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
-.dl-need{border-left:3px solid var(--amber);display:flex;flex-direction:column;justify-content:center}.dl-need.critical{border-left-color:var(--gap)}.dl-need.ready{border-left-color:var(--ok-bright)}.dl-need>span:last-child{font-size:12px;color:var(--ink-2)}
+.dl-need{border-left:3px solid var(--amber);display:flex;flex-direction:column;justify-content:center}.dl-need.critical{border-left-color:var(--gap)}.dl-need.ready{border-left-color:var(--ok-bright)}.dl-nd-sub{font-size:12px;color:var(--ink-2)}
+.dl-need-more{margin-top:14px;border-top:1px solid var(--rule);padding-top:11px;display:flex;flex-direction:column;gap:7px}
+.dl-nm-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:11.5px;color:var(--ink-2)}
+.dl-nm-row i{font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dl-nm-row b{font-family:var(--mono);font-size:10px;color:var(--ink-3);font-weight:400;flex:none}
+.dl-nm-row.floor i{color:var(--gap)}
+.dl-nm-row.ok b{color:var(--ok-bright)}
+.dl-nm-rest{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .dl-pick{border-color:rgba(255,201,58,.5);box-shadow:var(--shadow),0 0 38px -20px rgba(255,201,58,.55)}
 .dl-pick-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.dl-score{font-family:var(--mono);font-size:10px;color:var(--brass)}
 .dl-weapon{display:flex;align-items:center;gap:14px;margin:10px 0 8px}.dl-weapon .nm-btn{font-family:var(--serif);font-size:27px;font-weight:600}.dl-weapon>div>span{display:block;color:var(--ink-3);font-size:11px;margin-top:2px}.dl-weapon .icon{filter:drop-shadow(0 7px 15px rgba(0,0,0,.55)) saturate(1.12)}
@@ -14,7 +27,7 @@
 .dl-gains{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.dl-gains li{background:var(--sunk);border:1px solid var(--rule);border-radius:9px;padding:7px 8px;font-size:11px;color:var(--ink-2)}.dl-gains b{color:var(--ok-bright);font-family:var(--mono);margin-right:4px}.dl-gains span{display:block;color:var(--ink-3);font-family:var(--mono);font-size:9.5px;margin-top:2px}
 .dl-remain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px}.dl-remain>span:not(.dl-kicker){font-family:var(--mono);font-size:9.5px;padding:3px 7px;border-radius:99px;border:1px solid rgba(255,84,112,.28);color:var(--gap);background:var(--gap-wash)}.dl-remain .dl-kicker{width:100%}.dl-remain.clear>span:not(.dl-kicker){color:var(--ok-bright);border-color:rgba(35,191,110,.25);background:rgba(35,191,110,.07)}
 .dl-add{width:100%;margin-top:12px}
-.dl-empty{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px}.dl-empty p{margin:4px 0 0;color:var(--ink-2);font-size:12.5px}
+.dl-empty{grid-column:1/-1;grid-row:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px}.dl-empty p{margin:4px 0 0;color:var(--ink-2);font-size:12.5px}
 /* The old right flank duplicated the exact questions answered above. Keep its
    underlying renderers alive, but remove that duplicate surface on this pass.
    Reconciled 2026-08-22: no !important, and the wheelstage follows the
@@ -104,6 +117,11 @@
 .dl-swap-actions>b.up{color:var(--ok-bright)}.dl-swap-actions>b.down{color:var(--gap)}
 .dl-swap-actions button{background:transparent;border:1px solid var(--rule);color:var(--ink-2);border-radius:7px;padding:5px 7px;font-size:9.5px}
 .dl-swap-actions button:hover{border-color:var(--brass);color:var(--brass)}
-@media(max-width:1250px){.decision-layer{grid-template-columns:1fr 1fr}.dl-pick{grid-column:1/-1}}
+@media(max-width:1250px){
+  .decision-layer{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .dl-status{grid-column:1;grid-row:auto}
+  .dl-need{grid-column:2;grid-row:auto}
+  .dl-pick{grid-column:1/-1;grid-row:auto}
+}
 @media(max-width:900px){.dl-tools{grid-template-columns:1fr}}
-@media(max-width:720px){.decision-layer{grid-template-columns:1fr}.dl-pick{grid-column:auto}.dl-gains{grid-template-columns:1fr}.dl-status strong,.dl-need strong{font-size:18px}.dl-empty{display:block}.wheelstage{gap:20px}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
+@media(max-width:720px){.decision-layer{grid-template-columns:1fr}.dl-status,.dl-need,.dl-pick{grid-column:auto;grid-row:auto}.dl-gains{grid-template-columns:1fr}.dl-status strong,.dl-need strong{font-size:18px}.dl-empty{display:block}.wheelstage{gap:20px}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}

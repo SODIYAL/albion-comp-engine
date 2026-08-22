@@ -220,11 +220,29 @@
 
     const terms = explain(party, top.w).slice(0,3);
     const remaining = afterPickGaps(top);
+    /* the rail's need card lists the runner-up gaps (or, when clean, the
+       strongest covered lines) so its height carries information instead
+       of stretched empty panel (owner 2026-08-22) */
+    const more = needs.slice(1, 5);
+    const moreHtml = more.length ? `<div class="dl-need-more"><span class="dl-kicker">also thin</span>${
+      more.map(x => `<span class="dl-nm-row${x.floor ? " floor" : ""}"><i>${esc(capLabel(x.cap))}</i><b>${+x.have.toFixed(1)} / ${x.want.toFixed(1)}</b></span>`).join("")}${
+      needs.length > 5 ? `<span class="dl-nm-rest">+${needs.length - 5} more in the board below</span>` : ""}</div>` : "";
+    let coveredHtml = "";
+    if (!need){
+      const sup = supply(party);
+      const covered = Object.keys(REQS()).filter(c => (target(c) || 0) > 0)
+        .map(c => ({cap:c, have:sup[c] || 0, want:target(c)}))
+        .filter(x => x.have / Math.max(.001, x.want) >= 1)
+        .sort((a,b) => ENG.weight(b.cap) - ENG.weight(a.cap)).slice(0, 4);
+      coveredHtml = covered.length ? `<div class="dl-need-more"><span class="dl-kicker">holding strong</span>${
+        covered.map(x => `<span class="dl-nm-row ok"><i>${esc(capLabel(x.cap))}</i><b>${+x.have.toFixed(1)} / ${x.want.toFixed(1)}</b></span>`).join("")}</div>` : "";
+    }
     const needHtml = need ? `<div class="dl-need ${need.floor ? "critical" : ""}">
       <span class="dl-kicker">Biggest need${need.floor ? " · hard floor" : ""}</span>
       <strong>${esc(capLabel(need.cap))}</strong>
-      <span>${need.have.toFixed(0)} / ${need.want.toFixed(1)} covered${needs.length > 1 ? ` · ${needs.length - 1} other gap${needs.length > 2 ? "s" : ""}` : ""}</span>
-    </div>` : `<div class="dl-need ready"><span class="dl-kicker">Diagnosis</span><strong>Core requirements covered</strong><span>The next slot improves depth instead of repairing a load-bearing hole.</span></div>`;
+      <span class="dl-nd-sub">${+need.have.toFixed(1)} / ${need.want.toFixed(1)} covered</span>
+      ${moreHtml}
+    </div>` : `<div class="dl-need ready"><span class="dl-kicker">Diagnosis</span><strong>Core requirements covered</strong><span class="dl-nd-sub">The next slot improves depth instead of repairing a load-bearing hole.</span>${coveredHtml}</div>`;
 
     const gains = terms.map(t => `<li><b>+${t.d.toFixed(1)}</b> ${esc(capLabel(t.cap))}<span>${t.before.toFixed(0)} → ${t.after.toFixed(0)} / ${t.target.toFixed(1)}</span></li>`).join("");
     const remain = remaining.length ? `<div class="dl-remain"><span class="dl-kicker">Still weak after this pick</span>${remaining.map(x => `<span title="${x.have.toFixed(0)} / ${x.want.toFixed(1)}">${esc(capLabel(x.cap))}</span>`).join("")}</div>` : `<div class="dl-remain clear"><span class="dl-kicker">After this pick</span><span>Core gaps are covered.</span></div>`;
