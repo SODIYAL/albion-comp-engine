@@ -1,0 +1,20 @@
+/* Decision-first overlay: the recommendation is the headline; diagnostics remain below. */
+.decision-layer{display:grid;grid-template-columns:minmax(180px,.72fr) minmax(180px,.82fr) minmax(320px,1.65fr);gap:14px;align-items:stretch;margin-bottom:4px}
+.dl-status,.dl-need,.dl-pick{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.dl-status{display:flex;justify-content:space-between;gap:18px;align-items:center;border-top:2px solid var(--amber)}
+.dl-status.critical{border-top-color:var(--gap)}.dl-status.ready{border-top-color:var(--ok-bright)}
+.dl-status strong,.dl-need strong{display:block;font-family:var(--serif);font-size:20px;line-height:1.15;margin:4px 0}
+.dl-status small{color:var(--ink-3);font-family:var(--mono);font-size:10px}.dl-fit{font-family:var(--mono);font-size:25px;font-weight:700;white-space:nowrap}.dl-fit small{display:block;text-align:right;text-transform:uppercase;letter-spacing:.12em}
+.dl-kicker{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.dl-need{border-left:3px solid var(--amber);display:flex;flex-direction:column;justify-content:center}.dl-need.critical{border-left-color:var(--gap)}.dl-need.ready{border-left-color:var(--ok-bright)}.dl-need>span:last-child{font-size:12px;color:var(--ink-2)}
+.dl-pick{border-color:rgba(255,201,58,.5);box-shadow:var(--shadow),0 0 38px -20px rgba(255,201,58,.55)}
+.dl-pick-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.dl-score{font-family:var(--mono);font-size:10px;color:var(--brass)}
+.dl-weapon{display:flex;align-items:center;gap:14px;margin:10px 0 8px}.dl-weapon .nm-btn{font-family:var(--serif);font-size:25px;font-weight:600}.dl-weapon>div>span{display:block;color:var(--ink-3);font-size:11px;margin-top:2px}.dl-weapon .icon{filter:drop-shadow(0 7px 15px rgba(0,0,0,.55)) saturate(1.12)}
+.dl-pick p{font-size:13px;line-height:1.55;color:var(--ink-2);margin:7px 0 10px}.dl-pick p em{color:var(--brass-bright);font-style:normal;font-weight:600}
+.dl-gains{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.dl-gains li{background:var(--sunk);border:1px solid var(--rule);border-radius:9px;padding:7px 8px;font-size:11px;color:var(--ink-2)}.dl-gains b{color:var(--ok-bright);font-family:var(--mono);margin-right:4px}.dl-gains span{display:block;color:var(--ink-3);font-family:var(--mono);font-size:9.5px;margin-top:2px}
+.dl-remain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px}.dl-remain>span:not(.dl-kicker){font-family:var(--mono);font-size:9.5px;padding:3px 7px;border-radius:99px;border:1px solid rgba(255,84,112,.28);color:var(--gap);background:var(--gap-wash)}.dl-remain .dl-kicker{width:100%}.dl-remain.clear>span:not(.dl-kicker){color:var(--ok-bright);border-color:rgba(35,191,110,.25);background:rgba(35,191,110,.07)}
+.dl-add{width:100%;margin-top:12px}
+/* Existing right flank becomes supporting analysis instead of the hero. */
+.ws-right .ws-fit{opacity:.76}.ws-right>.sec-label#rec-label{margin-top:5px}
+@media(max-width:1250px){.decision-layer{grid-template-columns:1fr 1fr}.dl-pick{grid-column:1/-1}}
+@media(max-width:720px){.decision-layer{grid-template-columns:1fr}.dl-pick{grid-column:auto}.dl-gains{grid-template-columns:1fr}.dl-status strong,.dl-need strong{font-size:18px}}
