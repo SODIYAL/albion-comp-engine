@@ -3,239 +3,10 @@
  "battles": [
   {
    "attributed": 6,
-   "battle_id": 1435188619,
-   "fight_size": 8,
-   "observed_roster": 6,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435188210,
-   "fight_size": 6,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435188207,
-   "fight_size": 8,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435188067,
-   "fight_size": 10,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435187898,
-   "fight_size": 6,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435187760,
-   "fight_size": 7,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 10,
-   "battle_id": 1435187702,
-   "fight_size": 13,
-   "observed_roster": 10,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 9,
-   "battle_id": 1435187552,
-   "fight_size": 10,
-   "observed_roster": 9,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435187531,
-   "fight_size": 16,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435187514,
-   "fight_size": 7,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435187334,
-   "fight_size": 19,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 6,
-   "battle_id": 1435187191,
-   "fight_size": 14,
-   "observed_roster": 6,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 4,
-   "battle_id": 1435187049,
-   "fight_size": 6,
-   "observed_roster": 4,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 9,
-   "battle_id": 1435186902,
-   "fight_size": 10,
-   "observed_roster": 9,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435186863,
-   "fight_size": 19,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435186753,
-   "fight_size": 16,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435186601,
-   "fight_size": 6,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 6,
-   "battle_id": 1435186258,
-   "fight_size": 12,
-   "observed_roster": 6,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 8,
-   "battle_id": 1435186256,
-   "fight_size": 10,
-   "observed_roster": 8,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 8,
-   "battle_id": 1435186192,
-   "fight_size": 9,
-   "observed_roster": 8,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 6,
-   "battle_id": 1435186134,
-   "fight_size": 16,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 9,
-   "battle_id": 1435186006,
-   "fight_size": 14,
-   "observed_roster": 9,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435185938,
-   "fight_size": 6,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435185880,
+   "battle_id": 1436271897,
    "fight_size": 11,
-   "observed_roster": 7,
+   "observed_roster": 6,
+   "organization_cohorts": 5,
    "party_size": null,
    "server": "us",
    "side_size": null,
@@ -243,19 +14,109 @@
   },
   {
    "attributed": 5,
-   "battle_id": 1435185687,
-   "fight_size": 6,
+   "battle_id": 1436271859,
+   "fight_size": 16,
    "observed_roster": 5,
+   "organization_cohorts": 2,
    "party_size": null,
    "server": "us",
    "side_size": null,
    "start_time": null
   },
   {
-   "attributed": 20,
-   "battle_id": 1435185680,
-   "fight_size": 34,
-   "observed_roster": 20,
+   "attributed": 0,
+   "battle_id": 1436271418,
+   "fight_size": 8,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436271206,
+   "fight_size": 7,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 3,
+   "battle_id": 1436270952,
+   "fight_size": 6,
+   "observed_roster": 3,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 2,
+   "battle_id": 1436270912,
+   "fight_size": 9,
+   "observed_roster": 2,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 3,
+   "battle_id": 1436270872,
+   "fight_size": 15,
+   "observed_roster": 3,
+   "organization_cohorts": 1,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436270654,
+   "fight_size": 6,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 2,
+   "battle_id": 1436270624,
+   "fight_size": 6,
+   "observed_roster": 2,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436270622,
+   "fight_size": 9,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436270618,
+   "fight_size": 7,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
    "party_size": null,
    "server": "us",
    "side_size": null,
@@ -263,19 +124,10 @@
   },
   {
    "attributed": 6,
-   "battle_id": 1435185261,
-   "fight_size": 7,
+   "battle_id": 1436270596,
+   "fight_size": 14,
    "observed_roster": 6,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435185195,
-   "fight_size": 12,
-   "observed_roster": 7,
+   "organization_cohorts": 3,
    "party_size": null,
    "server": "us",
    "side_size": null,
@@ -283,49 +135,21 @@
   },
   {
    "attributed": 5,
-   "battle_id": 1435184915,
-   "fight_size": 6,
+   "battle_id": 1436270494,
+   "fight_size": 8,
    "observed_roster": 5,
+   "organization_cohorts": 4,
    "party_size": null,
    "server": "us",
    "side_size": null,
    "start_time": null
   },
   {
-   "attributed": 11,
-   "battle_id": 1435184903,
-   "fight_size": 18,
-   "observed_roster": 11,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435184835,
-   "fight_size": 7,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 11,
-   "battle_id": 1435184661,
-   "fight_size": 12,
-   "observed_roster": 10,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 10,
-   "battle_id": 1435184508,
-   "fight_size": 12,
-   "observed_roster": 9,
+   "attributed": 6,
+   "battle_id": 1436270483,
+   "fight_size": 9,
+   "observed_roster": 6,
+   "organization_cohorts": 6,
    "party_size": null,
    "server": "us",
    "side_size": null,
@@ -333,39 +157,10 @@
   },
   {
    "attributed": 9,
-   "battle_id": 1435184348,
-   "fight_size": 9,
+   "battle_id": 1436270365,
+   "fight_size": 52,
    "observed_roster": 9,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 8,
-   "battle_id": 1435184288,
-   "fight_size": 9,
-   "observed_roster": 8,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435184197,
-   "fight_size": 6,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 8,
-   "battle_id": 1435184038,
-   "fight_size": 14,
-   "observed_roster": 8,
+   "organization_cohorts": 2,
    "party_size": null,
    "server": "us",
    "side_size": null,
@@ -373,79 +168,10 @@
   },
   {
    "attributed": 4,
-   "battle_id": 1435184036,
-   "fight_size": 6,
+   "battle_id": 1436270236,
+   "fight_size": 8,
    "observed_roster": 4,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 11,
-   "battle_id": 1435183792,
-   "fight_size": 15,
-   "observed_roster": 11,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 9,
-   "battle_id": 1435183633,
-   "fight_size": 8,
-   "observed_roster": 8,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 13,
-   "battle_id": 1435183564,
-   "fight_size": 18,
-   "observed_roster": 13,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 12,
-   "battle_id": 1435183356,
-   "fight_size": 15,
-   "observed_roster": 12,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435183338,
-   "fight_size": 8,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 8,
-   "battle_id": 1435183199,
-   "fight_size": 10,
-   "observed_roster": 8,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435183190,
-   "fight_size": 6,
-   "observed_roster": 5,
+   "organization_cohorts": 3,
    "party_size": null,
    "server": "us",
    "side_size": null,
@@ -453,19 +179,10 @@
   },
   {
    "attributed": 6,
-   "battle_id": 1435183160,
-   "fight_size": 16,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435183152,
+   "battle_id": 1436270127,
    "fight_size": 12,
-   "observed_roster": 7,
+   "observed_roster": 6,
+   "organization_cohorts": 4,
    "party_size": null,
    "server": "us",
    "side_size": null,
@@ -473,9 +190,10 @@
   },
   {
    "attributed": 6,
-   "battle_id": 1435183142,
-   "fight_size": 6,
+   "battle_id": 1436270106,
+   "fight_size": 8,
    "observed_roster": 6,
+   "organization_cohorts": 4,
    "party_size": null,
    "server": "us",
    "side_size": null,
@@ -483,199 +201,131 @@
   },
   {
    "attributed": 5,
-   "battle_id": 1435182931,
-   "fight_size": 6,
+   "battle_id": 1436270011,
+   "fight_size": 7,
    "observed_roster": 5,
+   "organization_cohorts": 2,
    "party_size": null,
    "server": "us",
    "side_size": null,
    "start_time": null
   },
   {
-   "attributed": 15,
-   "battle_id": 1435182839,
+   "attributed": 6,
+   "battle_id": 1436269878,
    "fight_size": 20,
-   "observed_roster": 15,
+   "observed_roster": 6,
+   "organization_cohorts": 3,
    "party_size": null,
    "server": "us",
    "side_size": null,
    "start_time": null
   },
   {
-   "attributed": 26,
-   "battle_id": 1435182217,
+   "attributed": 0,
+   "battle_id": 1436269788,
+   "fight_size": 9,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 2,
+   "battle_id": 1436269774,
+   "fight_size": 11,
+   "observed_roster": 2,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436269632,
+   "fight_size": 7,
+   "observed_roster": 6,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436269581,
+   "fight_size": 6,
+   "observed_roster": 4,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 3,
+   "battle_id": 1436269475,
+   "fight_size": 6,
+   "observed_roster": 3,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 3,
+   "battle_id": 1436269371,
+   "fight_size": 6,
+   "observed_roster": 3,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 2,
+   "battle_id": 1436269313,
+   "fight_size": 7,
+   "observed_roster": 2,
+   "organization_cohorts": 1,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436269266,
+   "fight_size": 6,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436269151,
    "fight_size": 34,
-   "observed_roster": 26,
+   "observed_roster": 4,
+   "organization_cohorts": 3,
    "party_size": null,
    "server": "us",
    "side_size": null,
    "start_time": null
   },
   {
-   "attributed": 5,
-   "battle_id": 1435182193,
-   "fight_size": 6,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435182064,
-   "fight_size": 10,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 9,
-   "battle_id": 1435181902,
-   "fight_size": 19,
-   "observed_roster": 9,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 16,
-   "battle_id": 1435181825,
-   "fight_size": 25,
-   "observed_roster": 16,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 11,
-   "battle_id": 1435181817,
-   "fight_size": 12,
-   "observed_roster": 11,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435181780,
-   "fight_size": 11,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 10,
-   "battle_id": 1435181692,
-   "fight_size": 13,
-   "observed_roster": 10,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 14,
-   "battle_id": 1435181567,
-   "fight_size": 16,
-   "observed_roster": 14,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 9,
-   "battle_id": 1435181517,
-   "fight_size": 11,
-   "observed_roster": 9,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 10,
-   "battle_id": 1435181511,
-   "fight_size": 14,
-   "observed_roster": 10,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 6,
-   "battle_id": 1435181398,
-   "fight_size": 10,
-   "observed_roster": 6,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435181302,
-   "fight_size": 8,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435181270,
-   "fight_size": 16,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435181084,
-   "fight_size": 6,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 10,
-   "battle_id": 1435181080,
-   "fight_size": 13,
-   "observed_roster": 10,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 55,
-   "battle_id": 1435180940,
-   "fight_size": 125,
-   "observed_roster": 55,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435180863,
-   "fight_size": 6,
-   "observed_roster": 5,
+   "attributed": 2,
+   "battle_id": 1436268898,
+   "fight_size": 48,
+   "observed_roster": 2,
+   "organization_cohorts": 2,
    "party_size": null,
    "server": "us",
    "side_size": null,
@@ -683,9 +333,10 @@
   },
   {
    "attributed": 4,
-   "battle_id": 1435180831,
+   "battle_id": 1436268759,
    "fight_size": 6,
    "observed_roster": 4,
+   "organization_cohorts": 3,
    "party_size": null,
    "server": "us",
    "side_size": null,
@@ -693,459 +344,10 @@
   },
   {
    "attributed": 5,
-   "battle_id": 1435180793,
-   "fight_size": 10,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435180771,
-   "fight_size": 16,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 48,
-   "battle_id": 1435180535,
-   "fight_size": 78,
-   "observed_roster": 48,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 15,
-   "battle_id": 1435180302,
-   "fight_size": 23,
-   "observed_roster": 15,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 8,
-   "battle_id": 1435179931,
-   "fight_size": 9,
-   "observed_roster": 8,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435179874,
-   "fight_size": 8,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 55,
-   "battle_id": 1435179819,
-   "fight_size": 69,
-   "observed_roster": 47,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 6,
-   "battle_id": 1435179706,
-   "fight_size": 14,
-   "observed_roster": 6,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435179091,
+   "battle_id": 1436268709,
    "fight_size": 8,
    "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 6,
-   "battle_id": 1435178857,
-   "fight_size": 6,
-   "observed_roster": 6,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 6,
-   "battle_id": 1435178721,
-   "fight_size": 40,
-   "observed_roster": 6,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435178693,
-   "fight_size": 10,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 15,
-   "battle_id": 1435178672,
-   "fight_size": 30,
-   "observed_roster": 16,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 10,
-   "battle_id": 1435178576,
-   "fight_size": 10,
-   "observed_roster": 10,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435178491,
-   "fight_size": 10,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 39,
-   "battle_id": 1435178394,
-   "fight_size": 80,
-   "observed_roster": 39,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435178202,
-   "fight_size": 14,
-   "observed_roster": 8,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435178029,
-   "fight_size": 7,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 4,
-   "battle_id": 1435177913,
-   "fight_size": 11,
-   "observed_roster": 4,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435177552,
-   "fight_size": 10,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 6,
-   "battle_id": 1435177548,
-   "fight_size": 13,
-   "observed_roster": 6,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 18,
-   "battle_id": 1435177437,
-   "fight_size": 25,
-   "observed_roster": 18,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 29,
-   "battle_id": 1435177235,
-   "fight_size": 51,
-   "observed_roster": 29,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 8,
-   "battle_id": 1435177090,
-   "fight_size": 14,
-   "observed_roster": 8,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 4,
-   "battle_id": 1435176830,
-   "fight_size": 7,
-   "observed_roster": 4,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 6,
-   "battle_id": 1435176771,
-   "fight_size": 10,
-   "observed_roster": 6,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 25,
-   "battle_id": 1435176732,
-   "fight_size": 56,
-   "observed_roster": 24,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 25,
-   "battle_id": 1435176491,
-   "fight_size": 82,
-   "observed_roster": 25,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 8,
-   "battle_id": 1435176434,
-   "fight_size": 8,
-   "observed_roster": 8,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435176337,
-   "fight_size": 9,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 6,
-   "battle_id": 1435176305,
-   "fight_size": 19,
-   "observed_roster": 6,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 6,
-   "battle_id": 1435176050,
-   "fight_size": 12,
-   "observed_roster": 6,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435175858,
-   "fight_size": 6,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435175796,
-   "fight_size": 12,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 8,
-   "battle_id": 1435175717,
-   "fight_size": 10,
-   "observed_roster": 8,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 6,
-   "battle_id": 1435175597,
-   "fight_size": 7,
-   "observed_roster": 6,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 8,
-   "battle_id": 1435175282,
-   "fight_size": 9,
-   "observed_roster": 8,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 8,
-   "battle_id": 1435175269,
-   "fight_size": 11,
-   "observed_roster": 8,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435174967,
-   "fight_size": 6,
-   "observed_roster": 5,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 40,
-   "battle_id": 1435174653,
-   "fight_size": 74,
-   "observed_roster": 40,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435174597,
-   "fight_size": 7,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 8,
-   "battle_id": 1435174251,
-   "fight_size": 21,
-   "observed_roster": 8,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 6,
-   "battle_id": 1435174249,
-   "fight_size": 6,
-   "observed_roster": 6,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 7,
-   "battle_id": 1435174140,
-   "fight_size": 11,
-   "observed_roster": 7,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 25,
-   "battle_id": 1435174056,
-   "fight_size": 38,
-   "observed_roster": 26,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 25,
-   "battle_id": 1435173579,
-   "fight_size": 67,
-   "observed_roster": 24,
+   "organization_cohorts": 2,
    "party_size": null,
    "server": "us",
    "side_size": null,
@@ -1153,249 +355,109 @@
   },
   {
    "attributed": 24,
-   "battle_id": 1435173492,
-   "fight_size": 40,
+   "battle_id": 1436268626,
+   "fight_size": 57,
    "observed_roster": 24,
+   "organization_cohorts": 5,
    "party_size": null,
    "server": "us",
    "side_size": null,
    "start_time": null
   },
   {
-   "attributed": 12,
-   "battle_id": 1435173293,
-   "fight_size": 13,
-   "observed_roster": 12,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 11,
-   "battle_id": 1435173139,
-   "fight_size": 12,
-   "observed_roster": 11,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 5,
-   "battle_id": 1435173123,
+   "attributed": 3,
+   "battle_id": 1436268606,
    "fight_size": 6,
-   "observed_roster": 5,
+   "observed_roster": 3,
+   "organization_cohorts": 1,
    "party_size": null,
    "server": "us",
    "side_size": null,
    "start_time": null
   },
   {
-   "attributed": 8,
-   "battle_id": 1435172887,
+   "attributed": 2,
+   "battle_id": 1436268586,
+   "fight_size": 6,
+   "observed_roster": 2,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 2,
+   "battle_id": 1436268567,
+   "fight_size": 67,
+   "observed_roster": 2,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436268502,
+   "fight_size": 7,
+   "observed_roster": 4,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 2,
+   "battle_id": 1436268496,
+   "fight_size": 14,
+   "observed_roster": 2,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436268446,
+   "fight_size": 9,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436268415,
+   "fight_size": 28,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 15,
+   "battle_id": 1436268365,
+   "fight_size": 30,
+   "observed_roster": 15,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436268313,
    "fight_size": 11,
-   "observed_roster": 8,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 19,
-   "battle_id": 1435172425,
-   "fight_size": 45,
-   "observed_roster": 18,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 50,
-   "battle_id": 1435169684,
-   "fight_size": 81,
-   "observed_roster": 50,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 22,
-   "battle_id": 1435167343,
-   "fight_size": 37,
-   "observed_roster": 22,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 14,
-   "battle_id": 1435166527,
-   "fight_size": 33,
-   "observed_roster": 14,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 39,
-   "battle_id": 1435164377,
-   "fight_size": 50,
-   "observed_roster": 39,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 69,
-   "battle_id": 1435160542,
-   "fight_size": 79,
-   "observed_roster": 67,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 33,
-   "battle_id": 1435153556,
-   "fight_size": 76,
-   "observed_roster": 33,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 35,
-   "battle_id": 1435153516,
-   "fight_size": 65,
-   "observed_roster": 35,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 62,
-   "battle_id": 1435149110,
-   "fight_size": 103,
-   "observed_roster": 62,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 78,
-   "battle_id": 1435146632,
-   "fight_size": 95,
-   "observed_roster": 74,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 93,
-   "battle_id": 1435146535,
-   "fight_size": 115,
-   "observed_roster": 81,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 63,
-   "battle_id": 1435145093,
-   "fight_size": 91,
-   "observed_roster": 63,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 13,
-   "battle_id": 1435144823,
-   "fight_size": 33,
-   "observed_roster": 13,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 25,
-   "battle_id": 1435143712,
-   "fight_size": 38,
-   "observed_roster": 24,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 12,
-   "battle_id": 1435143569,
-   "fight_size": 40,
-   "observed_roster": 12,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 52,
-   "battle_id": 1435143175,
-   "fight_size": 50,
-   "observed_roster": 40,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 11,
-   "battle_id": 1435135524,
-   "fight_size": 42,
-   "observed_roster": 11,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 21,
-   "battle_id": 1435133254,
-   "fight_size": 31,
-   "observed_roster": 21,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 26,
-   "battle_id": 1435130961,
-   "fight_size": 42,
-   "observed_roster": 26,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 19,
-   "battle_id": 1435130045,
-   "fight_size": 31,
-   "observed_roster": 19,
+   "observed_roster": 4,
+   "organization_cohorts": 3,
    "party_size": null,
    "server": "us",
    "side_size": null,
@@ -1403,29 +465,10 @@
   },
   {
    "attributed": 6,
-   "battle_id": 1435129519,
-   "fight_size": 32,
+   "battle_id": 1436268261,
+   "fight_size": 9,
    "observed_roster": 6,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 18,
-   "battle_id": 1435129503,
-   "fight_size": 42,
-   "observed_roster": 18,
-   "party_size": null,
-   "server": "us",
-   "side_size": null,
-   "start_time": null
-  },
-  {
-   "attributed": 13,
-   "battle_id": 1435128011,
-   "fight_size": 36,
-   "observed_roster": 13,
+   "organization_cohorts": 2,
    "party_size": null,
    "server": "us",
    "side_size": null,
@@ -1433,19 +476,1341 @@
   },
   {
    "attributed": 5,
-   "battle_id": 1435124958,
-   "fight_size": 35,
+   "battle_id": 1436268176,
+   "fight_size": 9,
    "observed_roster": 5,
+   "organization_cohorts": 3,
    "party_size": null,
    "server": "us",
    "side_size": null,
    "start_time": null
   },
   {
-   "attributed": 51,
-   "battle_id": 1435124251,
-   "fight_size": 65,
-   "observed_roster": 50,
+   "attributed": 0,
+   "battle_id": 1436267746,
+   "fight_size": 11,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436267665,
+   "fight_size": 10,
+   "observed_roster": 6,
+   "organization_cohorts": 5,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436267584,
+   "fight_size": 25,
+   "observed_roster": 4,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436267522,
+   "fight_size": 9,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 11,
+   "battle_id": 1436267444,
+   "fight_size": 18,
+   "observed_roster": 11,
+   "organization_cohorts": 5,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 15,
+   "battle_id": 1436267438,
+   "fight_size": 54,
+   "observed_roster": 15,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436267371,
+   "fight_size": 6,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436267366,
+   "fight_size": 10,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436267316,
+   "fight_size": 11,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436267276,
+   "fight_size": 8,
+   "observed_roster": 4,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 7,
+   "battle_id": 1436267212,
+   "fight_size": 21,
+   "observed_roster": 7,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 3,
+   "battle_id": 1436266959,
+   "fight_size": 12,
+   "observed_roster": 3,
+   "organization_cohorts": 1,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 23,
+   "battle_id": 1436266865,
+   "fight_size": 126,
+   "observed_roster": 23,
+   "organization_cohorts": 6,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436266805,
+   "fight_size": 36,
+   "observed_roster": 4,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 2,
+   "battle_id": 1436266580,
+   "fight_size": 10,
+   "observed_roster": 2,
+   "organization_cohorts": 1,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436266553,
+   "fight_size": 9,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436266383,
+   "fight_size": 38,
+   "observed_roster": 4,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 2,
+   "battle_id": 1436266251,
+   "fight_size": 15,
+   "observed_roster": 2,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436266223,
+   "fight_size": 13,
+   "observed_roster": 4,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 3,
+   "battle_id": 1436266159,
+   "fight_size": 6,
+   "observed_roster": 3,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 17,
+   "battle_id": 1436266058,
+   "fight_size": 73,
+   "observed_roster": 17,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436265829,
+   "fight_size": 9,
+   "observed_roster": 5,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 10,
+   "battle_id": 1436265826,
+   "fight_size": 14,
+   "observed_roster": 10,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 8,
+   "battle_id": 1436265807,
+   "fight_size": 27,
+   "observed_roster": 8,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 2,
+   "battle_id": 1436265773,
+   "fight_size": 6,
+   "observed_roster": 2,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436265623,
+   "fight_size": 9,
+   "observed_roster": 4,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436265538,
+   "fight_size": 16,
+   "observed_roster": 4,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 31,
+   "battle_id": 1436265496,
+   "fight_size": 67,
+   "observed_roster": 31,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 2,
+   "battle_id": 1436265488,
+   "fight_size": 47,
+   "observed_roster": 2,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436265401,
+   "fight_size": 10,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436265228,
+   "fight_size": 9,
+   "observed_roster": 4,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436265104,
+   "fight_size": 6,
+   "observed_roster": 4,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436264991,
+   "fight_size": 6,
+   "observed_roster": 4,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 2,
+   "battle_id": 1436264928,
+   "fight_size": 8,
+   "observed_roster": 3,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436264861,
+   "fight_size": 11,
+   "observed_roster": 6,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 107,
+   "battle_id": 1436264815,
+   "fight_size": 301,
+   "observed_roster": 107,
+   "organization_cohorts": 5,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 7,
+   "battle_id": 1436264684,
+   "fight_size": 7,
+   "observed_roster": 7,
+   "organization_cohorts": 5,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436264657,
+   "fight_size": 15,
+   "observed_roster": 4,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 11,
+   "battle_id": 1436264572,
+   "fight_size": 15,
+   "observed_roster": 11,
+   "organization_cohorts": 8,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 12,
+   "battle_id": 1436264491,
+   "fight_size": 21,
+   "observed_roster": 12,
+   "organization_cohorts": 5,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 7,
+   "battle_id": 1436264379,
+   "fight_size": 8,
+   "observed_roster": 7,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436264210,
+   "fight_size": 9,
+   "observed_roster": 6,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 8,
+   "battle_id": 1436264112,
+   "fight_size": 46,
+   "observed_roster": 8,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436264087,
+   "fight_size": 15,
+   "observed_roster": 6,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436263900,
+   "fight_size": 9,
+   "observed_roster": 6,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 2,
+   "battle_id": 1436263862,
+   "fight_size": 10,
+   "observed_roster": 2,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 7,
+   "battle_id": 1436263815,
+   "fight_size": 17,
+   "observed_roster": 6,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436263707,
+   "fight_size": 14,
+   "observed_roster": 5,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436263585,
+   "fight_size": 11,
+   "observed_roster": 5,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436263514,
+   "fight_size": 10,
+   "observed_roster": 5,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436263444,
+   "fight_size": 10,
+   "observed_roster": 6,
+   "organization_cohorts": 6,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 8,
+   "battle_id": 1436263309,
+   "fight_size": 9,
+   "observed_roster": 8,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436263221,
+   "fight_size": 10,
+   "observed_roster": 6,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 8,
+   "battle_id": 1436263061,
+   "fight_size": 9,
+   "observed_roster": 8,
+   "organization_cohorts": 6,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436262929,
+   "fight_size": 12,
+   "observed_roster": 4,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 8,
+   "battle_id": 1436262912,
+   "fight_size": 14,
+   "observed_roster": 8,
+   "organization_cohorts": 6,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436262880,
+   "fight_size": 6,
+   "observed_roster": 4,
+   "organization_cohorts": 1,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 83,
+   "battle_id": 1436262824,
+   "fight_size": 122,
+   "observed_roster": 78,
+   "organization_cohorts": 5,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 7,
+   "battle_id": 1436262757,
+   "fight_size": 7,
+   "observed_roster": 7,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436262721,
+   "fight_size": 6,
+   "observed_roster": 6,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 29,
+   "battle_id": 1436262686,
+   "fight_size": 31,
+   "observed_roster": 28,
+   "organization_cohorts": 8,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436262641,
+   "fight_size": 10,
+   "observed_roster": 5,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 8,
+   "battle_id": 1436262517,
+   "fight_size": 45,
+   "observed_roster": 8,
+   "organization_cohorts": 6,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 2,
+   "battle_id": 1436262514,
+   "fight_size": 10,
+   "observed_roster": 2,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436262480,
+   "fight_size": 23,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436262459,
+   "fight_size": 7,
+   "observed_roster": 6,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 3,
+   "battle_id": 1436262267,
+   "fight_size": 8,
+   "observed_roster": 3,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436262190,
+   "fight_size": 6,
+   "observed_roster": 5,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436262156,
+   "fight_size": 14,
+   "observed_roster": 6,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 20,
+   "battle_id": 1436262098,
+   "fight_size": 50,
+   "observed_roster": 20,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436262025,
+   "fight_size": 10,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 2,
+   "battle_id": 1436261977,
+   "fight_size": 8,
+   "observed_roster": 2,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 3,
+   "battle_id": 1436261944,
+   "fight_size": 8,
+   "observed_roster": 3,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436261899,
+   "fight_size": 6,
+   "observed_roster": 4,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 2,
+   "battle_id": 1436261824,
+   "fight_size": 9,
+   "observed_roster": 2,
+   "organization_cohorts": 1,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 3,
+   "battle_id": 1436261591,
+   "fight_size": 9,
+   "observed_roster": 3,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 8,
+   "battle_id": 1436261558,
+   "fight_size": 10,
+   "observed_roster": 8,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 12,
+   "battle_id": 1436261545,
+   "fight_size": 29,
+   "observed_roster": 12,
+   "organization_cohorts": 11,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 7,
+   "battle_id": 1436261248,
+   "fight_size": 29,
+   "observed_roster": 7,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436261224,
+   "fight_size": 8,
+   "observed_roster": 4,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436261221,
+   "fight_size": 8,
+   "observed_roster": 6,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436261170,
+   "fight_size": 7,
+   "observed_roster": 5,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436261155,
+   "fight_size": 12,
+   "observed_roster": 4,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436261053,
+   "fight_size": 8,
+   "observed_roster": 5,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 7,
+   "battle_id": 1436261008,
+   "fight_size": 10,
+   "observed_roster": 7,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436260971,
+   "fight_size": 6,
+   "observed_roster": 6,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 126,
+   "battle_id": 1436260870,
+   "fight_size": 203,
+   "observed_roster": 125,
+   "organization_cohorts": 62,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 7,
+   "battle_id": 1436260862,
+   "fight_size": 10,
+   "observed_roster": 7,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 27,
+   "battle_id": 1436260802,
+   "fight_size": 41,
+   "observed_roster": 27,
+   "organization_cohorts": 6,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 12,
+   "battle_id": 1436260716,
+   "fight_size": 20,
+   "observed_roster": 12,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436260714,
+   "fight_size": 6,
+   "observed_roster": 4,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436260702,
+   "fight_size": 10,
+   "observed_roster": 4,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436260592,
+   "fight_size": 6,
+   "observed_roster": 5,
+   "organization_cohorts": 1,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 12,
+   "battle_id": 1436260507,
+   "fight_size": 29,
+   "observed_roster": 12,
+   "organization_cohorts": 5,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 10,
+   "battle_id": 1436260500,
+   "fight_size": 12,
+   "observed_roster": 10,
+   "organization_cohorts": 6,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436260483,
+   "fight_size": 6,
+   "observed_roster": 5,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436260375,
+   "fight_size": 9,
+   "observed_roster": 5,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436260347,
+   "fight_size": 6,
+   "observed_roster": 6,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436260263,
+   "fight_size": 10,
+   "observed_roster": 5,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 13,
+   "battle_id": 1436260157,
+   "fight_size": 33,
+   "observed_roster": 13,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436260091,
+   "fight_size": 8,
+   "observed_roster": 5,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436260083,
+   "fight_size": 6,
+   "observed_roster": 6,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 8,
+   "battle_id": 1436259983,
+   "fight_size": 10,
+   "observed_roster": 8,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436259849,
+   "fight_size": 6,
+   "observed_roster": 6,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436259841,
+   "fight_size": 16,
+   "observed_roster": 5,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436259810,
+   "fight_size": 10,
+   "observed_roster": 5,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 19,
+   "battle_id": 1436259586,
+   "fight_size": 25,
+   "observed_roster": 19,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 9,
+   "battle_id": 1436259539,
+   "fight_size": 23,
+   "observed_roster": 9,
+   "organization_cohorts": 7,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 7,
+   "battle_id": 1436259512,
+   "fight_size": 11,
+   "observed_roster": 6,
+   "organization_cohorts": 6,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436259462,
+   "fight_size": 6,
+   "observed_roster": 6,
+   "organization_cohorts": 6,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436259426,
+   "fight_size": 8,
+   "observed_roster": 6,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436259393,
+   "fight_size": 8,
+   "observed_roster": 6,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436259315,
+   "fight_size": 12,
+   "observed_roster": 5,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 14,
+   "battle_id": 1436259312,
+   "fight_size": 15,
+   "observed_roster": 14,
+   "organization_cohorts": 10,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436259307,
+   "fight_size": 24,
+   "observed_roster": 6,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 12,
+   "battle_id": 1436259304,
+   "fight_size": 15,
+   "observed_roster": 12,
+   "organization_cohorts": 7,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 8,
+   "battle_id": 1436259227,
+   "fight_size": 10,
+   "observed_roster": 8,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436259195,
+   "fight_size": 7,
+   "observed_roster": 6,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 19,
+   "battle_id": 1436259024,
+   "fight_size": 25,
+   "observed_roster": 19,
+   "organization_cohorts": 10,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 10,
+   "battle_id": 1436258966,
+   "fight_size": 12,
+   "observed_roster": 10,
+   "organization_cohorts": 5,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436258910,
+   "fight_size": 7,
+   "observed_roster": 6,
+   "organization_cohorts": 3,
    "party_size": null,
    "server": "us",
    "side_size": null,
@@ -1453,657 +1818,4583 @@
   },
   {
    "attributed": 53,
-   "battle_id": 1435118830,
-   "fight_size": 68,
-   "observed_roster": 52,
+   "battle_id": 1436258895,
+   "fight_size": 186,
+   "observed_roster": 53,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 8,
+   "battle_id": 1436258886,
+   "fight_size": 8,
+   "observed_roster": 8,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 18,
+   "battle_id": 1436258797,
+   "fight_size": 20,
+   "observed_roster": 18,
+   "organization_cohorts": 7,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 8,
+   "battle_id": 1436258548,
+   "fight_size": 12,
+   "observed_roster": 8,
+   "organization_cohorts": 6,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 9,
+   "battle_id": 1436258545,
+   "fight_size": 23,
+   "observed_roster": 9,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436258433,
+   "fight_size": 12,
+   "observed_roster": 5,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436258375,
+   "fight_size": 6,
+   "observed_roster": 5,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436258338,
+   "fight_size": 6,
+   "observed_roster": 5,
+   "organization_cohorts": 1,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 0,
+   "battle_id": 1436258200,
+   "fight_size": 9,
+   "observed_roster": 0,
+   "organization_cohorts": 0,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 8,
+   "battle_id": 1436258161,
+   "fight_size": 13,
+   "observed_roster": 8,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436258149,
+   "fight_size": 12,
+   "observed_roster": 6,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436258125,
+   "fight_size": 12,
+   "observed_roster": 6,
+   "organization_cohorts": 5,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 68,
+   "battle_id": 1436258040,
+   "fight_size": 88,
+   "observed_roster": 65,
+   "organization_cohorts": 43,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436257951,
+   "fight_size": 7,
+   "observed_roster": 4,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 18,
+   "battle_id": 1436257916,
+   "fight_size": 26,
+   "observed_roster": 17,
+   "organization_cohorts": 7,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 11,
+   "battle_id": 1436257862,
+   "fight_size": 14,
+   "observed_roster": 11,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436257691,
+   "fight_size": 7,
+   "observed_roster": 6,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 7,
+   "battle_id": 1436257677,
+   "fight_size": 9,
+   "observed_roster": 7,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436257561,
+   "fight_size": 7,
+   "observed_roster": 4,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436257526,
+   "fight_size": 6,
+   "observed_roster": 5,
+   "organization_cohorts": 1,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 74,
+   "battle_id": 1436257503,
+   "fight_size": 201,
+   "observed_roster": 74,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436257484,
+   "fight_size": 13,
+   "observed_roster": 3,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436257368,
+   "fight_size": 7,
+   "observed_roster": 6,
+   "organization_cohorts": 5,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436257324,
+   "fight_size": 19,
+   "observed_roster": 6,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 11,
+   "battle_id": 1436257157,
+   "fight_size": 33,
+   "observed_roster": 11,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436257074,
+   "fight_size": 10,
+   "observed_roster": 4,
+   "organization_cohorts": 1,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 12,
+   "battle_id": 1436257051,
+   "fight_size": 14,
+   "observed_roster": 12,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 7,
+   "battle_id": 1436257017,
+   "fight_size": 31,
+   "observed_roster": 8,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436256961,
+   "fight_size": 7,
+   "observed_roster": 5,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436256841,
+   "fight_size": 8,
+   "observed_roster": 5,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 10,
+   "battle_id": 1436256651,
+   "fight_size": 28,
+   "observed_roster": 10,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 11,
+   "battle_id": 1436256570,
+   "fight_size": 29,
+   "observed_roster": 11,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 3,
+   "battle_id": 1436256550,
+   "fight_size": 16,
+   "observed_roster": 3,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 5,
+   "battle_id": 1436256518,
+   "fight_size": 6,
+   "observed_roster": 5,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436256364,
+   "fight_size": 6,
+   "observed_roster": 4,
+   "organization_cohorts": 1,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 4,
+   "battle_id": 1436271866,
+   "fight_size": 38,
+   "observed_roster": 4,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 38,
+   "battle_id": 1436256236,
+   "fight_size": 87,
+   "observed_roster": 40,
+   "organization_cohorts": 11,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 25,
+   "battle_id": 1436255870,
+   "fight_size": 46,
+   "observed_roster": 25,
+   "organization_cohorts": 16,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 23,
+   "battle_id": 1436255673,
+   "fight_size": 49,
+   "observed_roster": 23,
+   "organization_cohorts": 7,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 19,
+   "battle_id": 1436255502,
+   "fight_size": 35,
+   "observed_roster": 19,
+   "organization_cohorts": 16,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 40,
+   "battle_id": 1436254818,
+   "fight_size": 69,
+   "observed_roster": 40,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 23,
+   "battle_id": 1436254485,
+   "fight_size": 39,
+   "observed_roster": 23,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 35,
+   "battle_id": 1436254458,
+   "fight_size": 87,
+   "observed_roster": 35,
+   "organization_cohorts": 5,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 6,
+   "battle_id": 1436254297,
+   "fight_size": 83,
+   "observed_roster": 6,
+   "organization_cohorts": 2,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 14,
+   "battle_id": 1436253980,
+   "fight_size": 44,
+   "observed_roster": 14,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 14,
+   "battle_id": 1436252406,
+   "fight_size": 31,
+   "observed_roster": 14,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 93,
+   "battle_id": 1436251940,
+   "fight_size": 114,
+   "observed_roster": 92,
+   "organization_cohorts": 4,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 61,
+   "battle_id": 1436250503,
+   "fight_size": 115,
+   "observed_roster": 60,
+   "organization_cohorts": 3,
+   "party_size": null,
+   "server": "us",
+   "side_size": null,
+   "start_time": null
+  },
+  {
+   "attributed": 9,
+   "battle_id": 1436249724,
+   "fight_size": 45,
+   "observed_roster": 11,
+   "organization_cohorts": 4,
    "party_size": null,
    "server": "us",
    "side_size": null,
    "start_time": null
   }
  ],
- "battles_sampled": 146,
+ "battles_sampled": 214,
  "buckets": {
   "large": {
-   "2H_ARCANESTAFF": 16,
-   "2H_ARCANESTAFF_CRYSTAL": 3,
+   "2H_ARCANESTAFF": 8,
+   "2H_ARCANESTAFF_CRYSTAL": 5,
    "2H_ARCANESTAFF_HELL": 10,
-   "2H_AXE": 6,
-   "2H_AXE_AVALON": 45,
-   "2H_BOW": 3,
-   "2H_BOW_AVALON": 11,
-   "2H_BOW_HELL": 31,
-   "2H_BOW_KEEPER": 11,
-   "2H_CLAWPAIR": 1,
-   "2H_CLAYMORE": 2,
-   "2H_CLAYMORE_AVALON": 4,
-   "2H_CLEAVER_HELL": 9,
-   "2H_CROSSBOW": 6,
-   "2H_CROSSBOWLARGE": 5,
-   "2H_CROSSBOWLARGE_MORGANA": 3,
-   "2H_CROSSBOW_CANNON_AVALON": 34,
-   "2H_CURSEDSTAFF_MORGANA": 27,
-   "2H_DAGGERPAIR": 4,
-   "2H_DAGGER_KATAR_AVALON": 5,
-   "2H_DEMONICSTAFF": 2,
-   "2H_DIVINESTAFF": 1,
-   "2H_DOUBLEBLADEDSTAFF": 4,
-   "2H_DUALAXE_KEEPER": 30,
-   "2H_DUALCROSSBOW_HELL": 2,
-   "2H_DUALHAMMER_HELL": 5,
-   "2H_DUALMACE_AVALON": 16,
-   "2H_DUALSCIMITAR_UNDEAD": 20,
-   "2H_DUALSICKLE_UNDEAD": 4,
-   "2H_DUALSWORD": 6,
-   "2H_ENIGMATICORB_MORGANA": 1,
-   "2H_ENIGMATICSTAFF": 9,
-   "2H_FIRESTAFF": 5,
-   "2H_FIRESTAFF_HELL": 6,
-   "2H_FIRE_RINGPAIR_AVALON": 38,
-   "2H_FLAIL": 1,
-   "2H_FROSTSTAFF": 3,
-   "2H_GLACIALSTAFF": 4,
-   "2H_GLAIVE": 7,
-   "2H_GLAIVE_CRYSTAL": 26,
-   "2H_HALBERD": 2,
-   "2H_HALBERD_MORGANA": 1,
-   "2H_HAMMER_AVALON": 4,
-   "2H_HAMMER_CRYSTAL": 1,
-   "2H_HAMMER_UNDEAD": 5,
-   "2H_HARPOON_HELL": 36,
-   "2H_HOLYSTAFF": 7,
-   "2H_HOLYSTAFF_CRYSTAL": 2,
-   "2H_HOLYSTAFF_HELL": 12,
-   "2H_HOLYSTAFF_UNDEAD": 6,
-   "2H_ICECRYSTAL_UNDEAD": 60,
-   "2H_ICEGAUNTLETS_HELL": 4,
-   "2H_INFERNOSTAFF": 1,
-   "2H_INFERNOSTAFF_MORGANA": 10,
-   "2H_IRONCLADEDSTAFF": 12,
-   "2H_KNUCKLES_AVALON": 4,
-   "2H_KNUCKLES_HELL": 10,
-   "2H_KNUCKLES_KEEPER": 13,
-   "2H_KNUCKLES_MORGANA": 3,
-   "2H_KNUCKLES_SET1": 5,
-   "2H_KNUCKLES_SET2": 61,
-   "2H_KNUCKLES_SET3": 36,
-   "2H_LONGBOW": 94,
-   "2H_LONGBOW_UNDEAD": 1,
-   "2H_MACE": 27,
-   "2H_MACE_MORGANA": 2,
-   "2H_NATURESTAFF": 4,
-   "2H_NATURESTAFF_HELL": 29,
-   "2H_NATURESTAFF_KEEPER": 7,
-   "2H_POLEHAMMER": 22,
-   "2H_QUARTERSTAFF": 12,
-   "2H_QUARTERSTAFF_AVALON": 1,
-   "2H_RAM_KEEPER": 5,
-   "2H_ROCKSTAFF_KEEPER": 1,
-   "2H_SCYTHE_CRYSTAL": 2,
-   "2H_SCYTHE_HELL": 3,
-   "2H_SHAPESHIFTER_AVALON": 6,
-   "2H_SHAPESHIFTER_CRYSTAL": 2,
-   "2H_SHAPESHIFTER_KEEPER": 24,
-   "2H_SHAPESHIFTER_MORGANA": 2,
-   "2H_SHAPESHIFTER_SET2": 17,
-   "2H_SHAPESHIFTER_SET3": 1,
-   "2H_SKULLORB_HELL": 3,
-   "2H_TRIDENT_UNDEAD": 1,
-   "2H_WARBOW": 11,
-   "2H_WILDSTAFF": 3,
-   "MAIN_1HCROSSBOW": 3,
-   "MAIN_ARCANESTAFF": 17,
-   "MAIN_ARCANESTAFF_UNDEAD": 28,
-   "MAIN_AXE": 15,
-   "MAIN_CURSEDSTAFF": 6,
-   "MAIN_CURSEDSTAFF_AVALON": 4,
-   "MAIN_CURSEDSTAFF_CRYSTAL": 15,
-   "MAIN_CURSEDSTAFF_UNDEAD": 30,
-   "MAIN_DAGGER": 4,
-   "MAIN_DAGGER_HELL": 6,
-   "MAIN_FIRESTAFF": 9,
-   "MAIN_FIRESTAFF_KEEPER": 2,
-   "MAIN_FROSTSTAFF": 7,
-   "MAIN_FROSTSTAFF_KEEPER": 3,
-   "MAIN_HAMMER": 7,
-   "MAIN_HOLYSTAFF": 2,
-   "MAIN_HOLYSTAFF_AVALON": 63,
-   "MAIN_HOLYSTAFF_MORGANA": 4,
-   "MAIN_MACE": 29,
-   "MAIN_MACE_HELL": 9,
-   "MAIN_NATURESTAFF": 7,
-   "MAIN_NATURESTAFF_CRYSTAL": 1,
-   "MAIN_NATURESTAFF_KEEPER": 5,
-   "MAIN_RAPIER_MORGANA": 35,
-   "MAIN_ROCKMACE_KEEPER": 24,
-   "MAIN_SPEAR": 2,
-   "MAIN_SPEAR_KEEPER": 3,
-   "MAIN_SPEAR_LANCE_AVALON": 1,
-   "MAIN_SWORD": 1,
-   "MAIN_SWORD_CRYSTAL": 1
-  },
-  "mid": {
-   "2H_ARCANESTAFF": 3,
-   "2H_ARCANESTAFF_CRYSTAL": 3,
-   "2H_ARCANESTAFF_HELL": 3,
-   "2H_AXE": 13,
-   "2H_AXE_AVALON": 10,
-   "2H_BOW": 1,
-   "2H_BOW_AVALON": 9,
-   "2H_BOW_CRYSTAL": 1,
-   "2H_BOW_KEEPER": 9,
+   "2H_ARCANE_RINGPAIR_AVALON": 1,
+   "2H_AXE": 12,
+   "2H_AXE_AVALON": 75,
+   "2H_BOW": 7,
+   "2H_BOW_AVALON": 6,
+   "2H_BOW_HELL": 19,
+   "2H_BOW_KEEPER": 2,
    "2H_CLAWPAIR": 2,
-   "2H_CLAYMORE": 4,
-   "2H_CLAYMORE_AVALON": 5,
-   "2H_CLEAVER_HELL": 8,
-   "2H_CROSSBOW": 4,
-   "2H_CROSSBOWLARGE": 2,
-   "2H_CROSSBOW_CANNON_AVALON": 4,
-   "2H_CURSEDSTAFF_MORGANA": 2,
-   "2H_DAGGERPAIR": 8,
-   "2H_DAGGERPAIR_CRYSTAL": 2,
-   "2H_DAGGER_KATAR_AVALON": 1,
-   "2H_DOUBLEBLADEDSTAFF": 2,
-   "2H_DUALAXE_KEEPER": 11,
+   "2H_CLAYMORE": 1,
+   "2H_CLAYMORE_AVALON": 6,
+   "2H_CLEAVER_HELL": 19,
+   "2H_COMBATSTAFF_MORGANA": 7,
+   "2H_CROSSBOW": 3,
+   "2H_CROSSBOWLARGE": 1,
+   "2H_CROSSBOW_CANNON_AVALON": 19,
+   "2H_CURSEDSTAFF": 1,
+   "2H_CURSEDSTAFF_MORGANA": 10,
+   "2H_DAGGERPAIR": 2,
+   "2H_DAGGER_KATAR_AVALON": 16,
+   "2H_DEMONICSTAFF": 1,
+   "2H_DOUBLEBLADEDSTAFF": 3,
+   "2H_DUALAXE_KEEPER": 14,
    "2H_DUALCROSSBOW_CRYSTAL": 1,
    "2H_DUALCROSSBOW_HELL": 3,
    "2H_DUALHAMMER_HELL": 3,
+   "2H_DUALMACE_AVALON": 19,
+   "2H_DUALSCIMITAR_UNDEAD": 37,
+   "2H_DUALSICKLE_UNDEAD": 2,
+   "2H_DUALSWORD": 6,
+   "2H_ENIGMATICORB_MORGANA": 11,
+   "2H_ENIGMATICSTAFF": 8,
+   "2H_FIRESTAFF": 2,
+   "2H_FIRESTAFF_HELL": 3,
+   "2H_FIRE_RINGPAIR_AVALON": 27,
+   "2H_FLAIL": 1,
+   "2H_FROSTSTAFF": 4,
+   "2H_GLACIALSTAFF": 2,
+   "2H_GLAIVE": 2,
+   "2H_GLAIVE_CRYSTAL": 19,
+   "2H_HALBERD": 6,
+   "2H_HALBERD_MORGANA": 2,
+   "2H_HAMMER": 6,
+   "2H_HAMMER_AVALON": 7,
+   "2H_HAMMER_CRYSTAL": 7,
+   "2H_HARPOON_HELL": 29,
+   "2H_HOLYSTAFF": 2,
+   "2H_HOLYSTAFF_CRYSTAL": 5,
+   "2H_HOLYSTAFF_HELL": 10,
+   "2H_HOLYSTAFF_UNDEAD": 9,
+   "2H_ICECRYSTAL_UNDEAD": 45,
+   "2H_ICEGAUNTLETS_HELL": 6,
+   "2H_INFERNOSTAFF": 2,
+   "2H_INFERNOSTAFF_MORGANA": 13,
+   "2H_KNUCKLES_AVALON": 4,
+   "2H_KNUCKLES_HELL": 8,
+   "2H_KNUCKLES_KEEPER": 11,
+   "2H_KNUCKLES_SET2": 88,
+   "2H_KNUCKLES_SET3": 41,
+   "2H_LONGBOW": 44,
+   "2H_LONGBOW_UNDEAD": 2,
+   "2H_MACE": 27,
+   "2H_MACE_MORGANA": 4,
+   "2H_NATURESTAFF": 1,
+   "2H_NATURESTAFF_HELL": 14,
+   "2H_NATURESTAFF_KEEPER": 8,
+   "2H_POLEHAMMER": 14,
+   "2H_QUARTERSTAFF": 2,
+   "2H_QUARTERSTAFF_AVALON": 2,
+   "2H_REPEATINGCROSSBOW_UNDEAD": 1,
+   "2H_ROCKSTAFF_KEEPER": 4,
+   "2H_SCYTHE_HELL": 4,
+   "2H_SHAPESHIFTER_AVALON": 6,
+   "2H_SHAPESHIFTER_CRYSTAL": 1,
+   "2H_SHAPESHIFTER_HELL": 2,
+   "2H_SHAPESHIFTER_KEEPER": 16,
+   "2H_SHAPESHIFTER_SET2": 14,
+   "2H_SKULLORB_HELL": 1,
+   "2H_TRIDENT_UNDEAD": 1,
+   "2H_TWINSCYTHE_HELL": 4,
+   "2H_WILDSTAFF": 1,
+   "MAIN_ARCANESTAFF": 9,
+   "MAIN_ARCANESTAFF_UNDEAD": 19,
+   "MAIN_AXE": 5,
+   "MAIN_CURSEDSTAFF": 4,
+   "MAIN_CURSEDSTAFF_AVALON": 16,
+   "MAIN_CURSEDSTAFF_CRYSTAL": 12,
+   "MAIN_CURSEDSTAFF_UNDEAD": 13,
+   "MAIN_DAGGER": 1,
+   "MAIN_DAGGER_HELL": 11,
+   "MAIN_FIRESTAFF": 2,
+   "MAIN_FIRESTAFF_KEEPER": 3,
+   "MAIN_FROSTSTAFF": 6,
+   "MAIN_HAMMER": 12,
+   "MAIN_HOLYSTAFF": 3,
+   "MAIN_HOLYSTAFF_AVALON": 66,
+   "MAIN_HOLYSTAFF_MORGANA": 1,
+   "MAIN_MACE": 35,
+   "MAIN_MACE_CRYSTAL": 2,
+   "MAIN_MACE_HELL": 1,
+   "MAIN_NATURESTAFF": 3,
+   "MAIN_NATURESTAFF_CRYSTAL": 2,
+   "MAIN_NATURESTAFF_KEEPER": 2,
+   "MAIN_RAPIER_MORGANA": 41,
+   "MAIN_ROCKMACE_KEEPER": 19,
+   "MAIN_SCIMITAR_MORGANA": 1,
+   "MAIN_SPEAR_KEEPER": 3,
+   "MAIN_SPEAR_LANCE_AVALON": 4,
+   "MAIN_SWORD": 1,
+   "MAIN_SWORD_CRYSTAL": 4
+  },
+  "mid": {
+   "2H_ARCANESTAFF": 2,
+   "2H_ARCANESTAFF_CRYSTAL": 1,
+   "2H_ARCANESTAFF_HELL": 1,
+   "2H_AXE": 11,
+   "2H_AXE_AVALON": 11,
+   "2H_BOW": 6,
+   "2H_BOW_AVALON": 11,
+   "2H_BOW_HELL": 1,
+   "2H_BOW_KEEPER": 9,
+   "2H_CLAWPAIR": 3,
+   "2H_CLAYMORE": 4,
+   "2H_CLAYMORE_AVALON": 4,
+   "2H_CLEAVER_HELL": 7,
+   "2H_CROSSBOW": 9,
+   "2H_CROSSBOWLARGE": 2,
+   "2H_CROSSBOW_CANNON_AVALON": 6,
+   "2H_CURSEDSTAFF_MORGANA": 1,
+   "2H_DAGGERPAIR": 9,
+   "2H_DAGGERPAIR_CRYSTAL": 3,
+   "2H_DAGGER_KATAR_AVALON": 1,
+   "2H_DEMONICSTAFF": 2,
+   "2H_DOUBLEBLADEDSTAFF": 3,
+   "2H_DOUBLEBLADEDSTAFF_CRYSTAL": 1,
+   "2H_DUALAXE_KEEPER": 20,
+   "2H_DUALCROSSBOW_CRYSTAL": 1,
+   "2H_DUALCROSSBOW_HELL": 6,
+   "2H_DUALHAMMER_HELL": 4,
    "2H_DUALMACE_AVALON": 1,
    "2H_DUALSCIMITAR_UNDEAD": 1,
-   "2H_DUALSICKLE_UNDEAD": 4,
+   "2H_DUALSICKLE_UNDEAD": 3,
    "2H_DUALSWORD": 6,
-   "2H_ENIGMATICSTAFF": 1,
-   "2H_FIRESTAFF_HELL": 2,
-   "2H_FIRE_RINGPAIR_AVALON": 3,
-   "2H_HALBERD": 1,
-   "2H_HALBERD_MORGANA": 2,
+   "2H_FIRESTAFF": 1,
+   "2H_FIRE_RINGPAIR_AVALON": 11,
+   "2H_FROSTSTAFF_CRYSTAL": 1,
+   "2H_GLAIVE_CRYSTAL": 3,
    "2H_HAMMER": 1,
+   "2H_HAMMER_AVALON": 5,
    "2H_HAMMER_CRYSTAL": 1,
-   "2H_HAMMER_UNDEAD": 3,
-   "2H_HARPOON_HELL": 7,
+   "2H_HAMMER_UNDEAD": 2,
+   "2H_HARPOON_HELL": 4,
    "2H_HOLYSTAFF": 2,
-   "2H_HOLYSTAFF_HELL": 1,
-   "2H_HOLYSTAFF_UNDEAD": 4,
-   "2H_ICECRYSTAL_UNDEAD": 9,
-   "2H_ICEGAUNTLETS_HELL": 3,
-   "2H_INFERNOSTAFF": 5,
-   "2H_INFERNOSTAFF_MORGANA": 12,
-   "2H_IRONCLADEDSTAFF": 3,
-   "2H_KNUCKLES_AVALON": 2,
-   "2H_KNUCKLES_HELL": 2,
-   "2H_KNUCKLES_KEEPER": 4,
-   "2H_KNUCKLES_MORGANA": 1,
-   "2H_KNUCKLES_SET1": 1,
-   "2H_KNUCKLES_SET2": 7,
-   "2H_KNUCKLES_SET3": 3,
-   "2H_LONGBOW": 24,
-   "2H_LONGBOW_UNDEAD": 2,
-   "2H_MACE": 2,
-   "2H_NATURESTAFF": 4,
-   "2H_NATURESTAFF_HELL": 11,
-   "2H_NATURESTAFF_KEEPER": 1,
+   "2H_HOLYSTAFF_HELL": 2,
+   "2H_HOLYSTAFF_UNDEAD": 9,
+   "2H_ICECRYSTAL_UNDEAD": 16,
+   "2H_ICEGAUNTLETS_HELL": 1,
+   "2H_INFERNOSTAFF_MORGANA": 6,
+   "2H_IRONCLADEDSTAFF": 2,
+   "2H_KNUCKLES_AVALON": 6,
+   "2H_KNUCKLES_CRYSTAL": 1,
+   "2H_KNUCKLES_HELL": 3,
+   "2H_KNUCKLES_KEEPER": 3,
+   "2H_KNUCKLES_SET1": 2,
+   "2H_KNUCKLES_SET2": 13,
+   "2H_KNUCKLES_SET3": 4,
+   "2H_LONGBOW": 23,
+   "2H_LONGBOW_UNDEAD": 4,
+   "2H_MACE": 6,
+   "2H_MACE_MORGANA": 2,
+   "2H_NATURESTAFF": 2,
+   "2H_NATURESTAFF_HELL": 4,
    "2H_POLEHAMMER": 5,
-   "2H_QUARTERSTAFF": 5,
-   "2H_QUARTERSTAFF_AVALON": 6,
+   "2H_QUARTERSTAFF": 1,
+   "2H_QUARTERSTAFF_AVALON": 5,
+   "2H_RAM_KEEPER": 1,
+   "2H_REPEATINGCROSSBOW_UNDEAD": 1,
    "2H_SCYTHE_CRYSTAL": 1,
-   "2H_SCYTHE_HELL": 2,
-   "2H_SHAPESHIFTER_HELL": 1,
+   "2H_SCYTHE_HELL": 3,
+   "2H_SHAPESHIFTER_HELL": 3,
    "2H_SHAPESHIFTER_KEEPER": 1,
-   "2H_SHAPESHIFTER_MORGANA": 3,
+   "2H_SHAPESHIFTER_MORGANA": 4,
    "2H_SHAPESHIFTER_SET1": 1,
-   "2H_SHAPESHIFTER_SET2": 2,
-   "2H_SHAPESHIFTER_SET3": 1,
-   "2H_SPEAR": 3,
-   "2H_TWINSCYTHE_HELL": 1,
-   "2H_WARBOW": 2,
-   "MAIN_1HCROSSBOW": 1,
-   "MAIN_ARCANESTAFF_UNDEAD": 4,
-   "MAIN_AXE": 10,
-   "MAIN_CURSEDSTAFF": 7,
-   "MAIN_CURSEDSTAFF_AVALON": 4,
-   "MAIN_CURSEDSTAFF_CRYSTAL": 1,
-   "MAIN_DAGGER": 3,
-   "MAIN_DAGGER_HELL": 5,
+   "2H_SHAPESHIFTER_SET2": 1,
+   "2H_SKULLORB_HELL": 1,
+   "2H_TWINSCYTHE_HELL": 2,
+   "2H_WARBOW": 1,
+   "MAIN_ARCANESTAFF": 1,
+   "MAIN_ARCANESTAFF_UNDEAD": 6,
+   "MAIN_AXE": 13,
+   "MAIN_CURSEDSTAFF": 6,
+   "MAIN_CURSEDSTAFF_AVALON": 3,
+   "MAIN_CURSEDSTAFF_CRYSTAL": 2,
+   "MAIN_CURSEDSTAFF_UNDEAD": 3,
+   "MAIN_DAGGER": 1,
+   "MAIN_DAGGER_HELL": 4,
    "MAIN_FIRESTAFF": 3,
-   "MAIN_FROSTSTAFF": 4,
-   "MAIN_FROSTSTAFF_KEEPER": 1,
-   "MAIN_HAMMER": 2,
-   "MAIN_HOLYSTAFF": 3,
+   "MAIN_FROSTSTAFF": 9,
+   "MAIN_HAMMER": 5,
+   "MAIN_HOLYSTAFF": 9,
    "MAIN_HOLYSTAFF_AVALON": 15,
-   "MAIN_HOLYSTAFF_MORGANA": 2,
-   "MAIN_MACE": 6,
-   "MAIN_MACE_CRYSTAL": 2,
-   "MAIN_MACE_HELL": 6,
+   "MAIN_MACE": 13,
+   "MAIN_MACE_CRYSTAL": 1,
+   "MAIN_MACE_HELL": 4,
    "MAIN_NATURESTAFF": 1,
-   "MAIN_NATURESTAFF_KEEPER": 1,
-   "MAIN_RAPIER_MORGANA": 10,
-   "MAIN_ROCKMACE_KEEPER": 1,
+   "MAIN_RAPIER_MORGANA": 14,
+   "MAIN_ROCKMACE_KEEPER": 3,
    "MAIN_SCIMITAR_MORGANA": 1,
-   "MAIN_SPEAR_KEEPER": 7,
-   "MAIN_SPEAR_LANCE_AVALON": 1,
-   "MAIN_SWORD": 3,
-   "MAIN_SWORD_CRYSTAL": 1
+   "MAIN_SPEAR_KEEPER": 9,
+   "MAIN_SPEAR_LANCE_AVALON": 3
   },
   "small": {
    "2H_ARCANESTAFF": 1,
-   "2H_ARCANESTAFF_CRYSTAL": 3,
-   "2H_ARCANESTAFF_HELL": 1,
+   "2H_ARCANESTAFF_CRYSTAL": 1,
+   "2H_ARCANE_RINGPAIR_AVALON": 1,
    "2H_AXE": 16,
-   "2H_AXE_AVALON": 3,
-   "2H_BOW": 1,
-   "2H_BOW_AVALON": 7,
-   "2H_BOW_CRYSTAL": 3,
+   "2H_AXE_AVALON": 7,
+   "2H_BOW": 15,
+   "2H_BOW_AVALON": 10,
+   "2H_BOW_CRYSTAL": 2,
    "2H_BOW_HELL": 1,
-   "2H_BOW_KEEPER": 12,
-   "2H_CLAWPAIR": 3,
-   "2H_CLAYMORE": 5,
-   "2H_CLAYMORE_AVALON": 3,
-   "2H_CLEAVER_HELL": 5,
-   "2H_CROSSBOW": 4,
-   "2H_CROSSBOWLARGE": 4,
-   "2H_CROSSBOW_CANNON_AVALON": 7,
-   "2H_CURSEDSTAFF_MORGANA": 1,
-   "2H_DAGGERPAIR": 4,
-   "2H_DAGGERPAIR_CRYSTAL": 2,
-   "2H_DAGGER_KATAR_AVALON": 1,
-   "2H_DEMONICSTAFF": 1,
-   "2H_DIVINESTAFF": 1,
-   "2H_DOUBLEBLADEDSTAFF": 2,
-   "2H_DOUBLEBLADEDSTAFF_CRYSTAL": 3,
-   "2H_DUALAXE_KEEPER": 13,
-   "2H_DUALCROSSBOW_CRYSTAL": 3,
-   "2H_DUALCROSSBOW_HELL": 2,
-   "2H_DUALHAMMER_HELL": 6,
-   "2H_DUALSICKLE_UNDEAD": 2,
-   "2H_DUALSWORD": 9,
-   "2H_FIRESTAFF": 7,
-   "2H_FIRE_RINGPAIR_AVALON": 6,
-   "2H_FROSTSTAFF_CRYSTAL": 6,
+   "2H_BOW_KEEPER": 17,
+   "2H_CLAWPAIR": 8,
+   "2H_CLAYMORE": 11,
+   "2H_CLAYMORE_AVALON": 2,
+   "2H_CLEAVER_HELL": 8,
+   "2H_CROSSBOW": 5,
+   "2H_CROSSBOWLARGE": 3,
+   "2H_CROSSBOW_CANNON_AVALON": 4,
+   "2H_DAGGERPAIR": 8,
+   "2H_DAGGERPAIR_CRYSTAL": 1,
+   "2H_DEMONICSTAFF": 4,
+   "2H_DOUBLEBLADEDSTAFF": 6,
+   "2H_DOUBLEBLADEDSTAFF_CRYSTAL": 2,
+   "2H_DUALAXE_KEEPER": 21,
+   "2H_DUALCROSSBOW_CRYSTAL": 2,
+   "2H_DUALCROSSBOW_HELL": 4,
+   "2H_DUALHAMMER_HELL": 3,
+   "2H_DUALSCIMITAR_UNDEAD": 1,
+   "2H_DUALSICKLE_UNDEAD": 6,
+   "2H_DUALSWORD": 8,
+   "2H_FIRESTAFF": 2,
+   "2H_FIRE_RINGPAIR_AVALON": 5,
+   "2H_FROSTSTAFF": 4,
+   "2H_FROSTSTAFF_CRYSTAL": 5,
+   "2H_GLACIALSTAFF": 1,
+   "2H_GLAIVE": 1,
    "2H_HALBERD": 1,
-   "2H_HALBERD_MORGANA": 6,
-   "2H_HAMMER": 3,
-   "2H_HAMMER_CRYSTAL": 2,
-   "2H_HARPOON_HELL": 3,
-   "2H_HOLYSTAFF": 3,
-   "2H_HOLYSTAFF_HELL": 5,
-   "2H_HOLYSTAFF_UNDEAD": 10,
+   "2H_HALBERD_MORGANA": 10,
+   "2H_HAMMER": 4,
+   "2H_HAMMER_UNDEAD": 2,
+   "2H_HARPOON_HELL": 1,
+   "2H_HOLYSTAFF": 4,
+   "2H_HOLYSTAFF_HELL": 4,
+   "2H_HOLYSTAFF_UNDEAD": 4,
    "2H_ICECRYSTAL_UNDEAD": 4,
-   "2H_INFERNOSTAFF": 1,
-   "2H_INFERNOSTAFF_MORGANA": 6,
-   "2H_KNUCKLES_AVALON": 4,
-   "2H_KNUCKLES_CRYSTAL": 1,
-   "2H_KNUCKLES_HELL": 1,
-   "2H_KNUCKLES_KEEPER": 3,
-   "2H_KNUCKLES_SET1": 1,
-   "2H_KNUCKLES_SET2": 2,
-   "2H_LONGBOW": 34,
-   "2H_LONGBOW_UNDEAD": 1,
-   "2H_MACE": 2,
+   "2H_INFERNOSTAFF": 2,
+   "2H_INFERNOSTAFF_MORGANA": 8,
+   "2H_IRONCLADEDSTAFF": 6,
+   "2H_KNUCKLES_AVALON": 2,
+   "2H_KNUCKLES_CRYSTAL": 2,
+   "2H_KNUCKLES_HELL": 3,
+   "2H_KNUCKLES_SET1": 5,
+   "2H_KNUCKLES_SET2": 11,
+   "2H_KNUCKLES_SET3": 2,
+   "2H_LONGBOW": 18,
+   "2H_LONGBOW_UNDEAD": 5,
+   "2H_MACE": 3,
    "2H_NATURESTAFF": 5,
-   "2H_NATURESTAFF_HELL": 2,
-   "2H_POLEHAMMER": 6,
-   "2H_QUARTERSTAFF": 8,
-   "2H_QUARTERSTAFF_AVALON": 3,
-   "2H_SCYTHE_CRYSTAL": 1,
+   "2H_NATURESTAFF_HELL": 3,
+   "2H_POLEHAMMER": 7,
+   "2H_QUARTERSTAFF": 3,
+   "2H_QUARTERSTAFF_AVALON": 5,
+   "2H_ROCKSTAFF_KEEPER": 1,
+   "2H_SCYTHE_CRYSTAL": 4,
+   "2H_SCYTHE_HELL": 3,
    "2H_SHAPESHIFTER_AVALON": 2,
-   "2H_SHAPESHIFTER_HELL": 9,
-   "2H_SHAPESHIFTER_KEEPER": 2,
-   "2H_SHAPESHIFTER_MORGANA": 7,
-   "2H_SHAPESHIFTER_SET3": 1,
-   "2H_SKULLORB_HELL": 2,
-   "2H_WARBOW": 5,
-   "MAIN_1HCROSSBOW": 3,
-   "MAIN_AXE": 14,
-   "MAIN_CURSEDSTAFF": 6,
-   "MAIN_CURSEDSTAFF_AVALON": 7,
+   "2H_SHAPESHIFTER_HELL": 4,
+   "2H_SHAPESHIFTER_MORGANA": 4,
+   "2H_SHAPESHIFTER_SET1": 2,
+   "2H_SHAPESHIFTER_SET2": 6,
+   "2H_SKULLORB_HELL": 1,
+   "2H_TRIDENT_UNDEAD": 3,
+   "2H_TWINSCYTHE_HELL": 1,
+   "2H_WARBOW": 2,
+   "2H_WILDSTAFF": 1,
+   "MAIN_1HCROSSBOW": 1,
+   "MAIN_ARCANESTAFF": 1,
+   "MAIN_AXE": 23,
+   "MAIN_CURSEDSTAFF": 9,
+   "MAIN_CURSEDSTAFF_AVALON": 4,
+   "MAIN_CURSEDSTAFF_CRYSTAL": 8,
+   "MAIN_CURSEDSTAFF_UNDEAD": 1,
    "MAIN_DAGGER": 1,
+   "MAIN_DAGGER_HELL": 2,
    "MAIN_FIRESTAFF": 7,
-   "MAIN_FIRESTAFF_KEEPER": 2,
-   "MAIN_FROSTSTAFF": 8,
-   "MAIN_HAMMER": 1,
-   "MAIN_HOLYSTAFF": 15,
-   "MAIN_HOLYSTAFF_AVALON": 6,
-   "MAIN_HOLYSTAFF_MORGANA": 1,
-   "MAIN_MACE": 7,
-   "MAIN_MACE_CRYSTAL": 1,
-   "MAIN_MACE_HELL": 8,
-   "MAIN_NATURESTAFF_CRYSTAL": 2,
-   "MAIN_NATURESTAFF_KEEPER": 4,
-   "MAIN_RAPIER_MORGANA": 4,
-   "MAIN_SCIMITAR_MORGANA": 4,
-   "MAIN_SPEAR_KEEPER": 6,
-   "MAIN_SPEAR_LANCE_AVALON": 1
+   "MAIN_FROSTSTAFF": 9,
+   "MAIN_HOLYSTAFF": 16,
+   "MAIN_HOLYSTAFF_AVALON": 9,
+   "MAIN_HOLYSTAFF_MORGANA": 6,
+   "MAIN_MACE": 4,
+   "MAIN_MACE_HELL": 2,
+   "MAIN_NATURESTAFF_KEEPER": 1,
+   "MAIN_RAPIER_MORGANA": 12,
+   "MAIN_SCIMITAR_MORGANA": 1,
+   "MAIN_SPEAR": 2,
+   "MAIN_SPEAR_KEEPER": 7,
+   "MAIN_SPEAR_LANCE_AVALON": 1,
+   "MAIN_SWORD": 3,
+   "MAIN_SWORD_CRYSTAL": 2
   }
  },
  "buckets_battles": {
   "large": {
-   "2H_ARCANESTAFF": 12,
-   "2H_ARCANESTAFF_CRYSTAL": 3,
+   "2H_ARCANESTAFF": 7,
+   "2H_ARCANESTAFF_CRYSTAL": 5,
    "2H_ARCANESTAFF_HELL": 9,
-   "2H_AXE": 6,
+   "2H_ARCANE_RINGPAIR_AVALON": 1,
+   "2H_AXE": 9,
    "2H_AXE_AVALON": 25,
-   "2H_BOW": 3,
-   "2H_BOW_AVALON": 9,
-   "2H_BOW_HELL": 16,
-   "2H_BOW_KEEPER": 8,
-   "2H_CLAWPAIR": 1,
-   "2H_CLAYMORE": 2,
-   "2H_CLAYMORE_AVALON": 4,
-   "2H_CLEAVER_HELL": 8,
-   "2H_CROSSBOW": 5,
-   "2H_CROSSBOWLARGE": 5,
-   "2H_CROSSBOWLARGE_MORGANA": 2,
-   "2H_CROSSBOW_CANNON_AVALON": 21,
-   "2H_CURSEDSTAFF_MORGANA": 22,
-   "2H_DAGGERPAIR": 3,
-   "2H_DAGGER_KATAR_AVALON": 5,
-   "2H_DEMONICSTAFF": 2,
-   "2H_DIVINESTAFF": 1,
-   "2H_DOUBLEBLADEDSTAFF": 4,
-   "2H_DUALAXE_KEEPER": 15,
-   "2H_DUALCROSSBOW_HELL": 2,
-   "2H_DUALHAMMER_HELL": 5,
-   "2H_DUALMACE_AVALON": 10,
-   "2H_DUALSCIMITAR_UNDEAD": 12,
-   "2H_DUALSICKLE_UNDEAD": 4,
-   "2H_DUALSWORD": 5,
-   "2H_ENIGMATICORB_MORGANA": 1,
-   "2H_ENIGMATICSTAFF": 9,
-   "2H_FIRESTAFF": 4,
-   "2H_FIRESTAFF_HELL": 5,
-   "2H_FIRE_RINGPAIR_AVALON": 23,
-   "2H_FLAIL": 1,
-   "2H_FROSTSTAFF": 3,
-   "2H_GLACIALSTAFF": 3,
-   "2H_GLAIVE": 4,
-   "2H_GLAIVE_CRYSTAL": 12,
-   "2H_HALBERD": 2,
-   "2H_HALBERD_MORGANA": 1,
-   "2H_HAMMER_AVALON": 4,
-   "2H_HAMMER_CRYSTAL": 1,
-   "2H_HAMMER_UNDEAD": 5,
-   "2H_HARPOON_HELL": 22,
-   "2H_HOLYSTAFF": 5,
-   "2H_HOLYSTAFF_CRYSTAL": 2,
-   "2H_HOLYSTAFF_HELL": 9,
-   "2H_HOLYSTAFF_UNDEAD": 6,
-   "2H_ICECRYSTAL_UNDEAD": 28,
-   "2H_ICEGAUNTLETS_HELL": 3,
-   "2H_INFERNOSTAFF": 1,
-   "2H_INFERNOSTAFF_MORGANA": 7,
-   "2H_IRONCLADEDSTAFF": 2,
-   "2H_KNUCKLES_AVALON": 4,
-   "2H_KNUCKLES_HELL": 9,
-   "2H_KNUCKLES_KEEPER": 11,
-   "2H_KNUCKLES_MORGANA": 3,
-   "2H_KNUCKLES_SET1": 5,
-   "2H_KNUCKLES_SET2": 16,
-   "2H_KNUCKLES_SET3": 23,
-   "2H_LONGBOW": 28,
-   "2H_LONGBOW_UNDEAD": 1,
-   "2H_MACE": 18,
-   "2H_MACE_MORGANA": 2,
-   "2H_NATURESTAFF": 4,
-   "2H_NATURESTAFF_HELL": 16,
-   "2H_NATURESTAFF_KEEPER": 6,
-   "2H_POLEHAMMER": 17,
-   "2H_QUARTERSTAFF": 9,
-   "2H_QUARTERSTAFF_AVALON": 1,
-   "2H_RAM_KEEPER": 4,
-   "2H_ROCKSTAFF_KEEPER": 1,
-   "2H_SCYTHE_CRYSTAL": 2,
-   "2H_SCYTHE_HELL": 2,
-   "2H_SHAPESHIFTER_AVALON": 6,
-   "2H_SHAPESHIFTER_CRYSTAL": 2,
-   "2H_SHAPESHIFTER_KEEPER": 19,
-   "2H_SHAPESHIFTER_MORGANA": 2,
-   "2H_SHAPESHIFTER_SET2": 15,
-   "2H_SHAPESHIFTER_SET3": 1,
-   "2H_SKULLORB_HELL": 2,
-   "2H_TRIDENT_UNDEAD": 1,
-   "2H_WARBOW": 5,
-   "2H_WILDSTAFF": 3,
-   "MAIN_1HCROSSBOW": 2,
-   "MAIN_ARCANESTAFF": 9,
-   "MAIN_ARCANESTAFF_UNDEAD": 19,
-   "MAIN_AXE": 8,
-   "MAIN_CURSEDSTAFF": 4,
-   "MAIN_CURSEDSTAFF_AVALON": 4,
-   "MAIN_CURSEDSTAFF_CRYSTAL": 13,
-   "MAIN_CURSEDSTAFF_UNDEAD": 21,
-   "MAIN_DAGGER": 4,
-   "MAIN_DAGGER_HELL": 5,
-   "MAIN_FIRESTAFF": 4,
-   "MAIN_FIRESTAFF_KEEPER": 2,
-   "MAIN_FROSTSTAFF": 6,
-   "MAIN_FROSTSTAFF_KEEPER": 2,
-   "MAIN_HAMMER": 6,
-   "MAIN_HOLYSTAFF": 2,
-   "MAIN_HOLYSTAFF_AVALON": 29,
-   "MAIN_HOLYSTAFF_MORGANA": 3,
-   "MAIN_MACE": 17,
-   "MAIN_MACE_HELL": 7,
-   "MAIN_NATURESTAFF": 4,
-   "MAIN_NATURESTAFF_CRYSTAL": 1,
-   "MAIN_NATURESTAFF_KEEPER": 4,
-   "MAIN_RAPIER_MORGANA": 18,
-   "MAIN_ROCKMACE_KEEPER": 15,
-   "MAIN_SPEAR": 2,
-   "MAIN_SPEAR_KEEPER": 3,
-   "MAIN_SPEAR_LANCE_AVALON": 1,
-   "MAIN_SWORD": 1,
-   "MAIN_SWORD_CRYSTAL": 1
-  },
-  "mid": {
-   "2H_ARCANESTAFF": 3,
-   "2H_ARCANESTAFF_CRYSTAL": 3,
-   "2H_ARCANESTAFF_HELL": 2,
-   "2H_AXE": 12,
-   "2H_AXE_AVALON": 7,
-   "2H_BOW": 1,
+   "2H_BOW": 4,
    "2H_BOW_AVALON": 6,
-   "2H_BOW_CRYSTAL": 1,
-   "2H_BOW_KEEPER": 7,
+   "2H_BOW_HELL": 9,
+   "2H_BOW_KEEPER": 2,
    "2H_CLAWPAIR": 2,
-   "2H_CLAYMORE": 3,
-   "2H_CLAYMORE_AVALON": 5,
-   "2H_CLEAVER_HELL": 6,
-   "2H_CROSSBOW": 4,
-   "2H_CROSSBOWLARGE": 2,
-   "2H_CROSSBOW_CANNON_AVALON": 4,
-   "2H_CURSEDSTAFF_MORGANA": 2,
-   "2H_DAGGERPAIR": 8,
-   "2H_DAGGERPAIR_CRYSTAL": 2,
-   "2H_DAGGER_KATAR_AVALON": 1,
-   "2H_DOUBLEBLADEDSTAFF": 2,
-   "2H_DUALAXE_KEEPER": 10,
+   "2H_CLAYMORE": 1,
+   "2H_CLAYMORE_AVALON": 3,
+   "2H_CLEAVER_HELL": 11,
+   "2H_COMBATSTAFF_MORGANA": 4,
+   "2H_CROSSBOW": 3,
+   "2H_CROSSBOWLARGE": 1,
+   "2H_CROSSBOW_CANNON_AVALON": 13,
+   "2H_CURSEDSTAFF": 1,
+   "2H_CURSEDSTAFF_MORGANA": 9,
+   "2H_DAGGERPAIR": 1,
+   "2H_DAGGER_KATAR_AVALON": 8,
+   "2H_DEMONICSTAFF": 1,
+   "2H_DOUBLEBLADEDSTAFF": 3,
+   "2H_DUALAXE_KEEPER": 8,
    "2H_DUALCROSSBOW_CRYSTAL": 1,
    "2H_DUALCROSSBOW_HELL": 3,
    "2H_DUALHAMMER_HELL": 3,
-   "2H_DUALMACE_AVALON": 1,
-   "2H_DUALSCIMITAR_UNDEAD": 1,
-   "2H_DUALSICKLE_UNDEAD": 4,
+   "2H_DUALMACE_AVALON": 14,
+   "2H_DUALSCIMITAR_UNDEAD": 11,
+   "2H_DUALSICKLE_UNDEAD": 1,
    "2H_DUALSWORD": 5,
-   "2H_ENIGMATICSTAFF": 1,
+   "2H_ENIGMATICORB_MORGANA": 7,
+   "2H_ENIGMATICSTAFF": 5,
+   "2H_FIRESTAFF": 2,
    "2H_FIRESTAFF_HELL": 2,
-   "2H_FIRE_RINGPAIR_AVALON": 3,
-   "2H_HALBERD": 1,
+   "2H_FIRE_RINGPAIR_AVALON": 16,
+   "2H_FLAIL": 1,
+   "2H_FROSTSTAFF": 4,
+   "2H_GLACIALSTAFF": 2,
+   "2H_GLAIVE": 2,
+   "2H_GLAIVE_CRYSTAL": 12,
+   "2H_HALBERD": 5,
    "2H_HALBERD_MORGANA": 2,
-   "2H_HAMMER": 1,
-   "2H_HAMMER_CRYSTAL": 1,
-   "2H_HAMMER_UNDEAD": 3,
-   "2H_HARPOON_HELL": 7,
+   "2H_HAMMER": 5,
+   "2H_HAMMER_AVALON": 4,
+   "2H_HAMMER_CRYSTAL": 7,
+   "2H_HARPOON_HELL": 19,
    "2H_HOLYSTAFF": 2,
-   "2H_HOLYSTAFF_HELL": 1,
-   "2H_HOLYSTAFF_UNDEAD": 4,
-   "2H_ICECRYSTAL_UNDEAD": 7,
-   "2H_ICEGAUNTLETS_HELL": 3,
-   "2H_INFERNOSTAFF": 5,
-   "2H_INFERNOSTAFF_MORGANA": 11,
-   "2H_IRONCLADEDSTAFF": 2,
-   "2H_KNUCKLES_AVALON": 2,
-   "2H_KNUCKLES_HELL": 2,
-   "2H_KNUCKLES_KEEPER": 3,
-   "2H_KNUCKLES_MORGANA": 1,
-   "2H_KNUCKLES_SET1": 1,
-   "2H_KNUCKLES_SET2": 7,
-   "2H_KNUCKLES_SET3": 3,
+   "2H_HOLYSTAFF_CRYSTAL": 4,
+   "2H_HOLYSTAFF_HELL": 8,
+   "2H_HOLYSTAFF_UNDEAD": 6,
+   "2H_ICECRYSTAL_UNDEAD": 23,
+   "2H_ICEGAUNTLETS_HELL": 6,
+   "2H_INFERNOSTAFF": 2,
+   "2H_INFERNOSTAFF_MORGANA": 10,
+   "2H_KNUCKLES_AVALON": 4,
+   "2H_KNUCKLES_HELL": 6,
+   "2H_KNUCKLES_KEEPER": 9,
+   "2H_KNUCKLES_SET2": 22,
+   "2H_KNUCKLES_SET3": 21,
    "2H_LONGBOW": 19,
    "2H_LONGBOW_UNDEAD": 2,
-   "2H_MACE": 1,
-   "2H_NATURESTAFF": 3,
+   "2H_MACE": 16,
+   "2H_MACE_MORGANA": 4,
+   "2H_NATURESTAFF": 1,
    "2H_NATURESTAFF_HELL": 10,
-   "2H_NATURESTAFF_KEEPER": 1,
+   "2H_NATURESTAFF_KEEPER": 5,
+   "2H_POLEHAMMER": 11,
+   "2H_QUARTERSTAFF": 2,
+   "2H_QUARTERSTAFF_AVALON": 2,
+   "2H_REPEATINGCROSSBOW_UNDEAD": 1,
+   "2H_ROCKSTAFF_KEEPER": 4,
+   "2H_SCYTHE_HELL": 4,
+   "2H_SHAPESHIFTER_AVALON": 4,
+   "2H_SHAPESHIFTER_CRYSTAL": 1,
+   "2H_SHAPESHIFTER_HELL": 2,
+   "2H_SHAPESHIFTER_KEEPER": 11,
+   "2H_SHAPESHIFTER_SET2": 11,
+   "2H_SKULLORB_HELL": 1,
+   "2H_TRIDENT_UNDEAD": 1,
+   "2H_TWINSCYTHE_HELL": 4,
+   "2H_WILDSTAFF": 1,
+   "MAIN_ARCANESTAFF": 9,
+   "MAIN_ARCANESTAFF_UNDEAD": 11,
+   "MAIN_AXE": 4,
+   "MAIN_CURSEDSTAFF": 3,
+   "MAIN_CURSEDSTAFF_AVALON": 12,
+   "MAIN_CURSEDSTAFF_CRYSTAL": 9,
+   "MAIN_CURSEDSTAFF_UNDEAD": 11,
+   "MAIN_DAGGER": 1,
+   "MAIN_DAGGER_HELL": 8,
+   "MAIN_FIRESTAFF": 2,
+   "MAIN_FIRESTAFF_KEEPER": 3,
+   "MAIN_FROSTSTAFF": 5,
+   "MAIN_HAMMER": 9,
+   "MAIN_HOLYSTAFF": 3,
+   "MAIN_HOLYSTAFF_AVALON": 24,
+   "MAIN_HOLYSTAFF_MORGANA": 1,
+   "MAIN_MACE": 16,
+   "MAIN_MACE_CRYSTAL": 2,
+   "MAIN_MACE_HELL": 1,
+   "MAIN_NATURESTAFF": 3,
+   "MAIN_NATURESTAFF_CRYSTAL": 2,
+   "MAIN_NATURESTAFF_KEEPER": 2,
+   "MAIN_RAPIER_MORGANA": 20,
+   "MAIN_ROCKMACE_KEEPER": 10,
+   "MAIN_SCIMITAR_MORGANA": 1,
+   "MAIN_SPEAR_KEEPER": 2,
+   "MAIN_SPEAR_LANCE_AVALON": 4,
+   "MAIN_SWORD": 1,
+   "MAIN_SWORD_CRYSTAL": 3
+  },
+  "mid": {
+   "2H_ARCANESTAFF": 2,
+   "2H_ARCANESTAFF_CRYSTAL": 1,
+   "2H_ARCANESTAFF_HELL": 1,
+   "2H_AXE": 10,
+   "2H_AXE_AVALON": 9,
+   "2H_BOW": 4,
+   "2H_BOW_AVALON": 9,
+   "2H_BOW_HELL": 1,
+   "2H_BOW_KEEPER": 9,
+   "2H_CLAWPAIR": 3,
+   "2H_CLAYMORE": 4,
+   "2H_CLAYMORE_AVALON": 4,
+   "2H_CLEAVER_HELL": 6,
+   "2H_CROSSBOW": 8,
+   "2H_CROSSBOWLARGE": 2,
+   "2H_CROSSBOW_CANNON_AVALON": 6,
+   "2H_CURSEDSTAFF_MORGANA": 1,
+   "2H_DAGGERPAIR": 9,
+   "2H_DAGGERPAIR_CRYSTAL": 3,
+   "2H_DAGGER_KATAR_AVALON": 1,
+   "2H_DEMONICSTAFF": 2,
+   "2H_DOUBLEBLADEDSTAFF": 3,
+   "2H_DOUBLEBLADEDSTAFF_CRYSTAL": 1,
+   "2H_DUALAXE_KEEPER": 16,
+   "2H_DUALCROSSBOW_CRYSTAL": 1,
+   "2H_DUALCROSSBOW_HELL": 6,
+   "2H_DUALHAMMER_HELL": 4,
+   "2H_DUALMACE_AVALON": 1,
+   "2H_DUALSCIMITAR_UNDEAD": 1,
+   "2H_DUALSICKLE_UNDEAD": 3,
+   "2H_DUALSWORD": 6,
+   "2H_FIRESTAFF": 1,
+   "2H_FIRE_RINGPAIR_AVALON": 10,
+   "2H_FROSTSTAFF_CRYSTAL": 1,
+   "2H_GLAIVE_CRYSTAL": 3,
+   "2H_HAMMER": 1,
+   "2H_HAMMER_AVALON": 5,
+   "2H_HAMMER_CRYSTAL": 1,
+   "2H_HAMMER_UNDEAD": 2,
+   "2H_HARPOON_HELL": 4,
+   "2H_HOLYSTAFF": 2,
+   "2H_HOLYSTAFF_HELL": 2,
+   "2H_HOLYSTAFF_UNDEAD": 8,
+   "2H_ICECRYSTAL_UNDEAD": 15,
+   "2H_ICEGAUNTLETS_HELL": 1,
+   "2H_INFERNOSTAFF_MORGANA": 6,
+   "2H_IRONCLADEDSTAFF": 2,
+   "2H_KNUCKLES_AVALON": 6,
+   "2H_KNUCKLES_CRYSTAL": 1,
+   "2H_KNUCKLES_HELL": 3,
+   "2H_KNUCKLES_KEEPER": 3,
+   "2H_KNUCKLES_SET1": 2,
+   "2H_KNUCKLES_SET2": 8,
+   "2H_KNUCKLES_SET3": 3,
+   "2H_LONGBOW": 18,
+   "2H_LONGBOW_UNDEAD": 4,
+   "2H_MACE": 6,
+   "2H_MACE_MORGANA": 2,
+   "2H_NATURESTAFF": 2,
+   "2H_NATURESTAFF_HELL": 4,
    "2H_POLEHAMMER": 5,
-   "2H_QUARTERSTAFF": 5,
-   "2H_QUARTERSTAFF_AVALON": 6,
+   "2H_QUARTERSTAFF": 1,
+   "2H_QUARTERSTAFF_AVALON": 5,
+   "2H_RAM_KEEPER": 1,
+   "2H_REPEATINGCROSSBOW_UNDEAD": 1,
    "2H_SCYTHE_CRYSTAL": 1,
-   "2H_SCYTHE_HELL": 2,
-   "2H_SHAPESHIFTER_HELL": 1,
+   "2H_SCYTHE_HELL": 3,
+   "2H_SHAPESHIFTER_HELL": 3,
    "2H_SHAPESHIFTER_KEEPER": 1,
-   "2H_SHAPESHIFTER_MORGANA": 3,
+   "2H_SHAPESHIFTER_MORGANA": 4,
    "2H_SHAPESHIFTER_SET1": 1,
-   "2H_SHAPESHIFTER_SET2": 2,
-   "2H_SHAPESHIFTER_SET3": 1,
-   "2H_SPEAR": 3,
-   "2H_TWINSCYTHE_HELL": 1,
-   "2H_WARBOW": 2,
-   "MAIN_1HCROSSBOW": 1,
-   "MAIN_ARCANESTAFF_UNDEAD": 4,
-   "MAIN_AXE": 9,
-   "MAIN_CURSEDSTAFF": 7,
-   "MAIN_CURSEDSTAFF_AVALON": 3,
-   "MAIN_CURSEDSTAFF_CRYSTAL": 1,
-   "MAIN_DAGGER": 3,
+   "2H_SHAPESHIFTER_SET2": 1,
+   "2H_SKULLORB_HELL": 1,
+   "2H_TWINSCYTHE_HELL": 2,
+   "2H_WARBOW": 1,
+   "MAIN_ARCANESTAFF": 1,
+   "MAIN_ARCANESTAFF_UNDEAD": 5,
+   "MAIN_AXE": 12,
+   "MAIN_CURSEDSTAFF": 6,
+   "MAIN_CURSEDSTAFF_AVALON": 2,
+   "MAIN_CURSEDSTAFF_CRYSTAL": 2,
+   "MAIN_CURSEDSTAFF_UNDEAD": 3,
+   "MAIN_DAGGER": 1,
    "MAIN_DAGGER_HELL": 4,
    "MAIN_FIRESTAFF": 3,
-   "MAIN_FROSTSTAFF": 4,
-   "MAIN_FROSTSTAFF_KEEPER": 1,
-   "MAIN_HAMMER": 2,
-   "MAIN_HOLYSTAFF": 3,
-   "MAIN_HOLYSTAFF_AVALON": 10,
-   "MAIN_HOLYSTAFF_MORGANA": 2,
-   "MAIN_MACE": 6,
-   "MAIN_MACE_CRYSTAL": 2,
-   "MAIN_MACE_HELL": 6,
+   "MAIN_FROSTSTAFF": 9,
+   "MAIN_HAMMER": 5,
+   "MAIN_HOLYSTAFF": 5,
+   "MAIN_HOLYSTAFF_AVALON": 11,
+   "MAIN_MACE": 10,
+   "MAIN_MACE_CRYSTAL": 1,
+   "MAIN_MACE_HELL": 4,
    "MAIN_NATURESTAFF": 1,
-   "MAIN_NATURESTAFF_KEEPER": 1,
-   "MAIN_RAPIER_MORGANA": 8,
-   "MAIN_ROCKMACE_KEEPER": 1,
+   "MAIN_RAPIER_MORGANA": 11,
+   "MAIN_ROCKMACE_KEEPER": 3,
    "MAIN_SCIMITAR_MORGANA": 1,
    "MAIN_SPEAR_KEEPER": 7,
-   "MAIN_SPEAR_LANCE_AVALON": 1,
-   "MAIN_SWORD": 3,
-   "MAIN_SWORD_CRYSTAL": 1
+   "MAIN_SPEAR_LANCE_AVALON": 3
   },
   "small": {
    "2H_ARCANESTAFF": 1,
-   "2H_ARCANESTAFF_CRYSTAL": 3,
-   "2H_ARCANESTAFF_HELL": 1,
-   "2H_AXE": 14,
-   "2H_AXE_AVALON": 3,
-   "2H_BOW": 1,
-   "2H_BOW_AVALON": 5,
-   "2H_BOW_CRYSTAL": 3,
+   "2H_ARCANESTAFF_CRYSTAL": 1,
+   "2H_ARCANE_RINGPAIR_AVALON": 1,
+   "2H_AXE": 16,
+   "2H_AXE_AVALON": 7,
+   "2H_BOW": 12,
+   "2H_BOW_AVALON": 9,
+   "2H_BOW_CRYSTAL": 2,
    "2H_BOW_HELL": 1,
-   "2H_BOW_KEEPER": 11,
-   "2H_CLAWPAIR": 3,
-   "2H_CLAYMORE": 5,
-   "2H_CLAYMORE_AVALON": 3,
-   "2H_CLEAVER_HELL": 5,
-   "2H_CROSSBOW": 4,
-   "2H_CROSSBOWLARGE": 4,
-   "2H_CROSSBOW_CANNON_AVALON": 7,
-   "2H_CURSEDSTAFF_MORGANA": 1,
-   "2H_DAGGERPAIR": 3,
-   "2H_DAGGERPAIR_CRYSTAL": 2,
-   "2H_DAGGER_KATAR_AVALON": 1,
-   "2H_DEMONICSTAFF": 1,
-   "2H_DIVINESTAFF": 1,
-   "2H_DOUBLEBLADEDSTAFF": 2,
-   "2H_DOUBLEBLADEDSTAFF_CRYSTAL": 3,
-   "2H_DUALAXE_KEEPER": 13,
-   "2H_DUALCROSSBOW_CRYSTAL": 3,
-   "2H_DUALCROSSBOW_HELL": 2,
-   "2H_DUALHAMMER_HELL": 6,
-   "2H_DUALSICKLE_UNDEAD": 2,
-   "2H_DUALSWORD": 7,
-   "2H_FIRESTAFF": 7,
-   "2H_FIRE_RINGPAIR_AVALON": 6,
-   "2H_FROSTSTAFF_CRYSTAL": 6,
+   "2H_BOW_KEEPER": 15,
+   "2H_CLAWPAIR": 8,
+   "2H_CLAYMORE": 11,
+   "2H_CLAYMORE_AVALON": 2,
+   "2H_CLEAVER_HELL": 7,
+   "2H_CROSSBOW": 5,
+   "2H_CROSSBOWLARGE": 3,
+   "2H_CROSSBOW_CANNON_AVALON": 4,
+   "2H_DAGGERPAIR": 8,
+   "2H_DAGGERPAIR_CRYSTAL": 1,
+   "2H_DEMONICSTAFF": 4,
+   "2H_DOUBLEBLADEDSTAFF": 6,
+   "2H_DOUBLEBLADEDSTAFF_CRYSTAL": 2,
+   "2H_DUALAXE_KEEPER": 19,
+   "2H_DUALCROSSBOW_CRYSTAL": 2,
+   "2H_DUALCROSSBOW_HELL": 4,
+   "2H_DUALHAMMER_HELL": 3,
+   "2H_DUALSCIMITAR_UNDEAD": 1,
+   "2H_DUALSICKLE_UNDEAD": 6,
+   "2H_DUALSWORD": 8,
+   "2H_FIRESTAFF": 2,
+   "2H_FIRE_RINGPAIR_AVALON": 4,
+   "2H_FROSTSTAFF": 4,
+   "2H_FROSTSTAFF_CRYSTAL": 5,
+   "2H_GLACIALSTAFF": 1,
+   "2H_GLAIVE": 1,
    "2H_HALBERD": 1,
-   "2H_HALBERD_MORGANA": 6,
-   "2H_HAMMER": 3,
-   "2H_HAMMER_CRYSTAL": 2,
-   "2H_HARPOON_HELL": 3,
-   "2H_HOLYSTAFF": 3,
-   "2H_HOLYSTAFF_HELL": 5,
-   "2H_HOLYSTAFF_UNDEAD": 10,
+   "2H_HALBERD_MORGANA": 8,
+   "2H_HAMMER": 4,
+   "2H_HAMMER_UNDEAD": 2,
+   "2H_HARPOON_HELL": 1,
+   "2H_HOLYSTAFF": 4,
+   "2H_HOLYSTAFF_HELL": 4,
+   "2H_HOLYSTAFF_UNDEAD": 4,
    "2H_ICECRYSTAL_UNDEAD": 4,
-   "2H_INFERNOSTAFF": 1,
-   "2H_INFERNOSTAFF_MORGANA": 6,
-   "2H_KNUCKLES_AVALON": 4,
-   "2H_KNUCKLES_CRYSTAL": 1,
-   "2H_KNUCKLES_HELL": 1,
-   "2H_KNUCKLES_KEEPER": 3,
-   "2H_KNUCKLES_SET1": 1,
-   "2H_KNUCKLES_SET2": 2,
-   "2H_LONGBOW": 21,
-   "2H_LONGBOW_UNDEAD": 1,
+   "2H_INFERNOSTAFF": 2,
+   "2H_INFERNOSTAFF_MORGANA": 7,
+   "2H_IRONCLADEDSTAFF": 2,
+   "2H_KNUCKLES_AVALON": 2,
+   "2H_KNUCKLES_CRYSTAL": 2,
+   "2H_KNUCKLES_HELL": 3,
+   "2H_KNUCKLES_SET1": 5,
+   "2H_KNUCKLES_SET2": 10,
+   "2H_KNUCKLES_SET3": 2,
+   "2H_LONGBOW": 15,
+   "2H_LONGBOW_UNDEAD": 5,
    "2H_MACE": 2,
    "2H_NATURESTAFF": 5,
-   "2H_NATURESTAFF_HELL": 2,
-   "2H_POLEHAMMER": 6,
-   "2H_QUARTERSTAFF": 7,
-   "2H_QUARTERSTAFF_AVALON": 3,
-   "2H_SCYTHE_CRYSTAL": 1,
+   "2H_NATURESTAFF_HELL": 3,
+   "2H_POLEHAMMER": 7,
+   "2H_QUARTERSTAFF": 3,
+   "2H_QUARTERSTAFF_AVALON": 5,
+   "2H_ROCKSTAFF_KEEPER": 1,
+   "2H_SCYTHE_CRYSTAL": 4,
+   "2H_SCYTHE_HELL": 3,
    "2H_SHAPESHIFTER_AVALON": 2,
-   "2H_SHAPESHIFTER_HELL": 8,
-   "2H_SHAPESHIFTER_KEEPER": 1,
-   "2H_SHAPESHIFTER_MORGANA": 7,
-   "2H_SHAPESHIFTER_SET3": 1,
-   "2H_SKULLORB_HELL": 2,
-   "2H_WARBOW": 4,
-   "MAIN_1HCROSSBOW": 3,
-   "MAIN_AXE": 12,
-   "MAIN_CURSEDSTAFF": 6,
-   "MAIN_CURSEDSTAFF_AVALON": 7,
+   "2H_SHAPESHIFTER_HELL": 4,
+   "2H_SHAPESHIFTER_MORGANA": 4,
+   "2H_SHAPESHIFTER_SET1": 2,
+   "2H_SHAPESHIFTER_SET2": 3,
+   "2H_SKULLORB_HELL": 1,
+   "2H_TRIDENT_UNDEAD": 3,
+   "2H_TWINSCYTHE_HELL": 1,
+   "2H_WARBOW": 2,
+   "2H_WILDSTAFF": 1,
+   "MAIN_1HCROSSBOW": 1,
+   "MAIN_ARCANESTAFF": 1,
+   "MAIN_AXE": 19,
+   "MAIN_CURSEDSTAFF": 9,
+   "MAIN_CURSEDSTAFF_AVALON": 4,
+   "MAIN_CURSEDSTAFF_CRYSTAL": 7,
+   "MAIN_CURSEDSTAFF_UNDEAD": 1,
    "MAIN_DAGGER": 1,
-   "MAIN_FIRESTAFF": 6,
-   "MAIN_FIRESTAFF_KEEPER": 2,
-   "MAIN_FROSTSTAFF": 6,
-   "MAIN_HAMMER": 1,
-   "MAIN_HOLYSTAFF": 15,
-   "MAIN_HOLYSTAFF_AVALON": 6,
-   "MAIN_HOLYSTAFF_MORGANA": 1,
-   "MAIN_MACE": 7,
-   "MAIN_MACE_CRYSTAL": 1,
-   "MAIN_MACE_HELL": 8,
-   "MAIN_NATURESTAFF_CRYSTAL": 2,
-   "MAIN_NATURESTAFF_KEEPER": 3,
-   "MAIN_RAPIER_MORGANA": 3,
-   "MAIN_SCIMITAR_MORGANA": 4,
-   "MAIN_SPEAR_KEEPER": 6,
-   "MAIN_SPEAR_LANCE_AVALON": 1
+   "MAIN_DAGGER_HELL": 1,
+   "MAIN_FIRESTAFF": 7,
+   "MAIN_FROSTSTAFF": 9,
+   "MAIN_HOLYSTAFF": 16,
+   "MAIN_HOLYSTAFF_AVALON": 9,
+   "MAIN_HOLYSTAFF_MORGANA": 5,
+   "MAIN_MACE": 4,
+   "MAIN_MACE_HELL": 2,
+   "MAIN_NATURESTAFF_KEEPER": 1,
+   "MAIN_RAPIER_MORGANA": 12,
+   "MAIN_SCIMITAR_MORGANA": 1,
+   "MAIN_SPEAR": 2,
+   "MAIN_SPEAR_KEEPER": 7,
+   "MAIN_SPEAR_LANCE_AVALON": 1,
+   "MAIN_SWORD": 3,
+   "MAIN_SWORD_CRYSTAL": 2
   }
  },
- "coverage": 0.998,
- "generated_utc": "2026-08-19 19:34 UTC",
+ "cohort_meta": {
+  "large": {
+   "cohorts": 111,
+   "players_observed": 955
+  },
+  "mid": {
+   "cohorts": 96,
+   "players_observed": 298
+  },
+  "small": {
+   "cohorts": 98,
+   "players_observed": 237
+  }
+ },
+ "cohort_semantics": "Same stated AllianceId/AllianceName, else GuildId/GuildName, within ONE battle; players with ambiguous identity excluded; minimum 2 observed players and 2 distinct known weapons. An organization-level co-occurrence proxy \u2014 never party reconstruction.",
+ "cohorts": {
+  "large": [
+   {
+    "battle_id": 1436270365,
+    "cohort": "alliance:1v5",
+    "observed_players": 4,
+    "weapons": [
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_LONGBOW",
+     "2H_POLEHAMMER",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436270365,
+    "cohort": "alliance:GOOP",
+    "observed_players": 5,
+    "weapons": [
+     "2H_ARCANESTAFF_HELL",
+     "2H_HARPOON_HELL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_KNUCKLES_SET3",
+     "MAIN_ARCANESTAFF_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436269151,
+    "cohort": "alliance:STIFF",
+    "observed_players": 2,
+    "weapons": [
+     "2H_KNUCKLES_SET3",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436268626,
+    "cohort": "alliance:Dere",
+    "observed_players": 8,
+    "weapons": [
+     "2H_CLEAVER_HELL",
+     "2H_DUALAXE_KEEPER",
+     "2H_KNUCKLES_KEEPER",
+     "2H_MACE",
+     "2H_ROCKSTAFF_KEEPER",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436268626,
+    "cohort": "alliance:LCSNR",
+    "observed_players": 7,
+    "weapons": [
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_ENIGMATICSTAFF",
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_SHAPESHIFTER_KEEPER",
+     "MAIN_ROCKMACE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436268626,
+    "cohort": "alliance:Lutti",
+    "observed_players": 6,
+    "weapons": [
+     "2H_ARCANESTAFF_CRYSTAL",
+     "2H_AXE",
+     "2H_ENIGMATICSTAFF",
+     "2H_KNUCKLES_SET2",
+     "2H_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436268626,
+    "cohort": "alliance:STIFF",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CLAYMORE_AVALON",
+     "MAIN_FROSTSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436267438,
+    "cohort": "alliance:HITA",
+    "observed_players": 6,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_BOW_HELL",
+     "2H_HAMMER_AVALON",
+     "2H_HOLYSTAFF_UNDEAD",
+     "2H_LONGBOW"
+    ]
+   },
+   {
+    "battle_id": 1436267438,
+    "cohort": "alliance:QLOL",
+    "observed_players": 4,
+    "weapons": [
+     "2H_BOW_HELL",
+     "2H_GLAIVE_CRYSTAL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_KNUCKLES_SET3"
+    ]
+   },
+   {
+    "battle_id": 1436267438,
+    "cohort": "guild:KR SEED",
+    "observed_players": 3,
+    "weapons": [
+     "2H_HARPOON_HELL",
+     "2H_MACE",
+     "MAIN_CURSEDSTAFF_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436266865,
+    "cohort": "alliance:H3XA",
+    "observed_players": 9,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_KNUCKLES_SET2",
+     "MAIN_ARCANESTAFF",
+     "MAIN_CURSEDSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436266865,
+    "cohort": "alliance:KETA",
+    "observed_players": 3,
+    "weapons": [
+     "2H_FLAIL",
+     "MAIN_MACE",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436266865,
+    "cohort": "alliance:STIFF",
+    "observed_players": 8,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_CLEAVER_HELL",
+     "2H_DUALMACE_AVALON",
+     "2H_FIRE_RINGPAIR_AVALON",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_NATURESTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436266805,
+    "cohort": "alliance:1v5",
+    "observed_players": 2,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_KNUCKLES_SET3"
+    ]
+   },
+   {
+    "battle_id": 1436266805,
+    "cohort": "alliance:GOOP",
+    "observed_players": 2,
+    "weapons": [
+     "2H_ICECRYSTAL_UNDEAD",
+     "MAIN_ARCANESTAFF_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436266383,
+    "cohort": "alliance:B0LA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_INFERNOSTAFF_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436266058,
+    "cohort": "alliance:B0LA",
+    "observed_players": 6,
+    "weapons": [
+     "2H_AXE",
+     "2H_LONGBOW",
+     "2H_POLEHAMMER",
+     "MAIN_CURSEDSTAFF_AVALON",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436266058,
+    "cohort": "alliance:CHAIR",
+    "observed_players": 2,
+    "weapons": [
+     "2H_GLAIVE_CRYSTAL",
+     "2H_KNUCKLES_SET2"
+    ]
+   },
+   {
+    "battle_id": 1436266058,
+    "cohort": "alliance:STIFF",
+    "observed_players": 8,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_DAGGER_KATAR_AVALON",
+     "2H_FROSTSTAFF",
+     "2H_HOLYSTAFF_HELL",
+     "2H_KNUCKLES_AVALON",
+     "2H_KNUCKLES_SET2",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436265496,
+    "cohort": "alliance:D0GZ",
+    "observed_players": 17,
+    "weapons": [
+     "2H_ARCANE_RINGPAIR_AVALON",
+     "2H_AXE_AVALON",
+     "2H_ENIGMATICORB_MORGANA",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "2H_MACE",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436265496,
+    "cohort": "alliance:Pinwy",
+    "observed_players": 14,
+    "weapons": [
+     "2H_ARCANESTAFF",
+     "2H_AXE_AVALON",
+     "2H_BOW_AVALON",
+     "2H_COMBATSTAFF_MORGANA",
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_LONGBOW",
+     "2H_SHAPESHIFTER_AVALON",
+     "MAIN_ARCANESTAFF",
+     "MAIN_ARCANESTAFF_UNDEAD",
+     "MAIN_CURSEDSTAFF_CRYSTAL",
+     "MAIN_CURSEDSTAFF_UNDEAD",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436264815,
+    "cohort": "alliance:FLCRP",
+    "observed_players": 53,
+    "weapons": [
+     "2H_ARCANESTAFF_HELL",
+     "2H_AXE_AVALON",
+     "2H_COMBATSTAFF_MORGANA",
+     "2H_CURSEDSTAFF_MORGANA",
+     "2H_DAGGER_KATAR_AVALON",
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_ENIGMATICORB_MORGANA",
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_GLAIVE_CRYSTAL",
+     "2H_HAMMER_CRYSTAL",
+     "2H_HARPOON_HELL",
+     "2H_HOLYSTAFF_CRYSTAL",
+     "2H_HOLYSTAFF_HELL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_INFERNOSTAFF_MORGANA",
+     "2H_KNUCKLES_KEEPER",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "2H_LONGBOW",
+     "2H_MACE",
+     "2H_ROCKSTAFF_KEEPER",
+     "2H_SHAPESHIFTER_KEEPER",
+     "2H_SKULLORB_HELL",
+     "MAIN_ARCANESTAFF_UNDEAD",
+     "MAIN_CURSEDSTAFF_AVALON",
+     "MAIN_CURSEDSTAFF_UNDEAD",
+     "MAIN_DAGGER_HELL",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436264815,
+    "cohort": "alliance:GAMPI",
+    "observed_players": 22,
+    "weapons": [
+     "2H_ARCANESTAFF",
+     "2H_AXE_AVALON",
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_CURSEDSTAFF_MORGANA",
+     "2H_ENIGMATICORB_MORGANA",
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_HARPOON_HELL",
+     "2H_HOLYSTAFF_HELL",
+     "2H_KNUCKLES_HELL",
+     "2H_KNUCKLES_KEEPER",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "2H_LONGBOW",
+     "2H_WILDSTAFF",
+     "MAIN_CURSEDSTAFF_CRYSTAL",
+     "MAIN_DAGGER_HELL",
+     "MAIN_FROSTSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436264815,
+    "cohort": "alliance:QCHU",
+    "observed_players": 30,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_COMBATSTAFF_MORGANA",
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_GLAIVE_CRYSTAL",
+     "2H_HARPOON_HELL",
+     "2H_HOLYSTAFF_CRYSTAL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "2H_LONGBOW",
+     "2H_MACE",
+     "MAIN_ARCANESTAFF_UNDEAD",
+     "MAIN_CURSEDSTAFF_CRYSTAL",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436264112,
+    "cohort": "alliance:EG0",
+    "observed_players": 2,
+    "weapons": [
+     "2H_GLACIALSTAFF",
+     "MAIN_ARCANESTAFF_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436264112,
+    "cohort": "alliance:H3XA",
+    "observed_players": 4,
+    "weapons": [
+     "2H_HAMMER_CRYSTAL",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3"
+    ]
+   },
+   {
+    "battle_id": 1436264112,
+    "cohort": "alliance:STIFF",
+    "observed_players": 2,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "MAIN_ARCANESTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436262824,
+    "cohort": "alliance:EG0",
+    "observed_players": 31,
+    "weapons": [
+     "2H_ARCANESTAFF_CRYSTAL",
+     "2H_AXE_AVALON",
+     "2H_CLEAVER_HELL",
+     "2H_COMBATSTAFF_MORGANA",
+     "2H_CURSEDSTAFF_MORGANA",
+     "2H_DAGGER_KATAR_AVALON",
+     "2H_DUALAXE_KEEPER",
+     "2H_DUALCROSSBOW_HELL",
+     "2H_DUALMACE_AVALON",
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_HAMMER_AVALON",
+     "2H_HARPOON_HELL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "2H_POLEHAMMER",
+     "2H_SHAPESHIFTER_KEEPER",
+     "2H_SHAPESHIFTER_SET2",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436262824,
+    "cohort": "alliance:S1GR",
+    "observed_players": 43,
+    "weapons": [
+     "2H_AXE",
+     "2H_AXE_AVALON",
+     "2H_BOW",
+     "2H_CLAYMORE_AVALON",
+     "2H_CLEAVER_HELL",
+     "2H_COMBATSTAFF_MORGANA",
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_DUALHAMMER_HELL",
+     "2H_DUALMACE_AVALON",
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_GLAIVE_CRYSTAL",
+     "2H_HALBERD",
+     "2H_HALBERD_MORGANA",
+     "2H_HAMMER",
+     "2H_HAMMER_AVALON",
+     "2H_HOLYSTAFF_UNDEAD",
+     "2H_ICEGAUNTLETS_HELL",
+     "2H_KNUCKLES_KEEPER",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "2H_LONGBOW",
+     "2H_MACE",
+     "2H_NATURESTAFF_HELL",
+     "2H_SHAPESHIFTER_SET2",
+     "2H_TWINSCYTHE_HELL",
+     "MAIN_CURSEDSTAFF_CRYSTAL",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_MACE",
+     "MAIN_RAPIER_MORGANA",
+     "MAIN_SPEAR_LANCE_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436262686,
+    "cohort": "alliance:FLOTA",
+    "observed_players": 4,
+    "weapons": [
+     "2H_AXE",
+     "2H_MACE",
+     "2H_NATURESTAFF_HELL",
+     "2H_SHAPESHIFTER_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436262686,
+    "cohort": "alliance:FURIX",
+    "observed_players": 8,
+    "weapons": [
+     "2H_ARCANESTAFF",
+     "2H_GLAIVE_CRYSTAL",
+     "2H_HARPOON_HELL",
+     "2H_HOLYSTAFF",
+     "2H_INFERNOSTAFF_MORGANA",
+     "2H_KNUCKLES_HELL",
+     "2H_KNUCKLES_SET2",
+     "MAIN_ARCANESTAFF_UNDEAD",
+     "MAIN_MACE_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436262686,
+    "cohort": "alliance:GunS",
+    "observed_players": 2,
+    "weapons": [
+     "2H_AXE",
+     "2H_LONGBOW",
+     "MAIN_AXE"
+    ]
+   },
+   {
+    "battle_id": 1436262686,
+    "cohort": "alliance:MTGA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_LONGBOW",
+     "2H_POLEHAMMER"
+    ]
+   },
+   {
+    "battle_id": 1436262686,
+    "cohort": "alliance:TKCHE",
+    "observed_players": 6,
+    "weapons": [
+     "2H_AXE",
+     "2H_BOW",
+     "2H_KNUCKLES_KEEPER",
+     "2H_LONGBOW",
+     "2H_POLEHAMMER"
+    ]
+   },
+   {
+    "battle_id": 1436262686,
+    "cohort": "guild:DARK SOUL STAR",
+    "observed_players": 2,
+    "weapons": [
+     "2H_LONGBOW",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436262517,
+    "cohort": "alliance:MaNe",
+    "observed_players": 2,
+    "weapons": [
+     "2H_KNUCKLES_HELL",
+     "2H_LONGBOW"
+    ]
+   },
+   {
+    "battle_id": 1436262098,
+    "cohort": "alliance:C4USA",
+    "observed_players": 11,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_BOW_AVALON",
+     "2H_HAMMER_CRYSTAL",
+     "2H_HARPOON_HELL",
+     "2H_HOLYSTAFF_HELL",
+     "2H_INFERNOSTAFF_MORGANA",
+     "MAIN_CURSEDSTAFF_UNDEAD",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_ROCKMACE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436262098,
+    "cohort": "alliance:SLDG",
+    "observed_players": 9,
+    "weapons": [
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_FROSTSTAFF",
+     "2H_KNUCKLES_KEEPER",
+     "MAIN_DAGGER_HELL",
+     "MAIN_FIRESTAFF_KEEPER",
+     "MAIN_HAMMER"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "alliance:B0LA",
+    "observed_players": 5,
+    "weapons": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_NATURESTAFF_HELL",
+     "2H_NATURESTAFF_KEEPER",
+     "2H_SHAPESHIFTER_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "alliance:DDLT",
+    "observed_players": 4,
+    "weapons": [
+     "2H_LONGBOW",
+     "2H_MACE",
+     "MAIN_ARCANESTAFF",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "alliance:EG0",
+    "observed_players": 2,
+    "weapons": [
+     "2H_QUARTERSTAFF",
+     "MAIN_ARCANESTAFF_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "alliance:EXD",
+    "observed_players": 2,
+    "weapons": [
+     "2H_LONGBOW",
+     "2H_POLEHAMMER"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "alliance:GAMPI",
+    "observed_players": 2,
+    "weapons": [
+     "2H_SHAPESHIFTER_AVALON",
+     "MAIN_FIRESTAFF_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "alliance:MTGA",
+    "observed_players": 16,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_BOW_HELL",
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_ENIGMATICSTAFF",
+     "2H_FIRESTAFF_HELL",
+     "2H_HOLYSTAFF_UNDEAD",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_LONGBOW",
+     "2H_NATURESTAFF_KEEPER",
+     "2H_POLEHAMMER",
+     "2H_SHAPESHIFTER_KEEPER",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "alliance:MaNe",
+    "observed_players": 5,
+    "weapons": [
+     "2H_HARPOON_HELL",
+     "2H_KNUCKLES_HELL",
+     "2H_KNUCKLES_SET2",
+     "2H_LONGBOW",
+     "2H_SHAPESHIFTER_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "alliance:N0V",
+    "observed_players": 3,
+    "weapons": [
+     "2H_ARCANESTAFF",
+     "2H_KNUCKLES_SET2",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "alliance:NSFW1",
+    "observed_players": 2,
+    "weapons": [
+     "MAIN_MACE",
+     "MAIN_SCIMITAR_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "alliance:PVP10",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_TWINSCYTHE_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "alliance:QCHU",
+    "observed_players": 5,
+    "weapons": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_MACE",
+     "MAIN_CURSEDSTAFF",
+     "MAIN_CURSEDSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "alliance:SKOLL",
+    "observed_players": 2,
+    "weapons": [
+     "2H_HAMMER_AVALON",
+     "2H_ICEGAUNTLETS_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "alliance:Sho",
+    "observed_players": 6,
+    "weapons": [
+     "2H_CLAWPAIR",
+     "2H_DUALMACE_AVALON",
+     "2H_HOLYSTAFF_HELL",
+     "2H_MACE",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_ROCKMACE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "alliance:T5",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW",
+     "MAIN_FROSTSTAFF",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "alliance:WIMD",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALAXE_KEEPER",
+     "2H_FIRE_RINGPAIR_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "guild:B_L_A_C_K",
+    "observed_players": 2,
+    "weapons": [
+     "2H_KNUCKLES_HELL",
+     "MAIN_ROCKMACE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436260870,
+    "cohort": "guild:Nomads of the Mist",
+    "observed_players": 2,
+    "weapons": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_POLEHAMMER"
+    ]
+   },
+   {
+    "battle_id": 1436260802,
+    "cohort": "alliance:3000",
+    "observed_players": 2,
+    "weapons": [
+     "2H_ARCANESTAFF_HELL",
+     "MAIN_CURSEDSTAFF_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436260802,
+    "cohort": "alliance:Lutti",
+    "observed_players": 10,
+    "weapons": [
+     "2H_AXE",
+     "2H_AXE_AVALON",
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_HARPOON_HELL",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "MAIN_CURSEDSTAFF_AVALON",
+     "MAIN_DAGGER_HELL",
+     "MAIN_HAMMER"
+    ]
+   },
+   {
+    "battle_id": 1436260802,
+    "cohort": "alliance:QCHU",
+    "observed_players": 7,
+    "weapons": [
+     "2H_KNUCKLES_SET2",
+     "2H_LONGBOW",
+     "2H_MACE",
+     "2H_SCYTHE_HELL",
+     "MAIN_HAMMER",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436260802,
+    "cohort": "alliance:THY",
+    "observed_players": 6,
+    "weapons": [
+     "2H_ARCANESTAFF_CRYSTAL",
+     "2H_CLEAVER_HELL",
+     "2H_DUALAXE_KEEPER",
+     "MAIN_HAMMER",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436260157,
+    "cohort": "alliance:C4USA",
+    "observed_players": 6,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_HAMMER_CRYSTAL",
+     "2H_HARPOON_HELL",
+     "2H_INFERNOSTAFF_MORGANA",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436260157,
+    "cohort": "alliance:MaNe",
+    "observed_players": 7,
+    "weapons": [
+     "2H_BOW_AVALON",
+     "2H_DUALHAMMER_HELL",
+     "2H_MACE",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_SPEAR_LANCE_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436258895,
+    "cohort": "alliance:CHAIR",
+    "observed_players": 23,
+    "weapons": [
+     "2H_ARCANESTAFF",
+     "2H_AXE_AVALON",
+     "2H_BOW_HELL",
+     "2H_DUALMACE_AVALON",
+     "2H_GLAIVE_CRYSTAL",
+     "2H_HARPOON_HELL",
+     "2H_HOLYSTAFF_CRYSTAL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_KNUCKLES_SET3",
+     "2H_POLEHAMMER",
+     "2H_SHAPESHIFTER_KEEPER",
+     "2H_SHAPESHIFTER_SET2",
+     "MAIN_ARCANESTAFF",
+     "MAIN_ARCANESTAFF_UNDEAD",
+     "MAIN_DAGGER_HELL",
+     "MAIN_HAMMER",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436258895,
+    "cohort": "alliance:STIFF",
+    "observed_players": 30,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_ENIGMATICSTAFF",
+     "2H_HARPOON_HELL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_KNUCKLES_AVALON",
+     "2H_KNUCKLES_HELL",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "2H_NATURESTAFF_KEEPER",
+     "2H_SHAPESHIFTER_KEEPER",
+     "MAIN_ARCANESTAFF_UNDEAD",
+     "MAIN_CURSEDSTAFF_CRYSTAL",
+     "MAIN_CURSEDSTAFF_UNDEAD",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_NATURESTAFF_CRYSTAL",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436258040,
+    "cohort": "alliance:Edenn",
+    "observed_players": 4,
+    "weapons": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_HOLYSTAFF_HELL",
+     "2H_NATURESTAFF_KEEPER",
+     "2H_SHAPESHIFTER_SET2"
+    ]
+   },
+   {
+    "battle_id": 1436258040,
+    "cohort": "alliance:IVISA",
+    "observed_players": 4,
+    "weapons": [
+     "2H_FIRESTAFF",
+     "2H_KNUCKLES_SET2",
+     "MAIN_ARCANESTAFF_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436258040,
+    "cohort": "alliance:KROWN",
+    "observed_players": 2,
+    "weapons": [
+     "2H_LONGBOW",
+     "MAIN_ARCANESTAFF",
+     "MAIN_AXE"
+    ]
+   },
+   {
+    "battle_id": 1436258040,
+    "cohort": "alliance:P30",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CLEAVER_HELL",
+     "MAIN_DAGGER_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436258040,
+    "cohort": "alliance:QCHU",
+    "observed_players": 2,
+    "weapons": [
+     "2H_KNUCKLES_SET3",
+     "2H_SHAPESHIFTER_SET2"
+    ]
+   },
+   {
+    "battle_id": 1436258040,
+    "cohort": "alliance:SKOLL",
+    "observed_players": 3,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_MACE",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436257503,
+    "cohort": "alliance:FLCRP",
+    "observed_players": 31,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_DAGGER_KATAR_AVALON",
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_GLAIVE_CRYSTAL",
+     "2H_HAMMER_CRYSTAL",
+     "2H_HARPOON_HELL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_ICEGAUNTLETS_HELL",
+     "2H_INFERNOSTAFF_MORGANA",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "2H_SHAPESHIFTER_KEEPER",
+     "2H_SHAPESHIFTER_SET2",
+     "MAIN_CURSEDSTAFF_CRYSTAL",
+     "MAIN_CURSEDSTAFF_UNDEAD",
+     "MAIN_DAGGER_HELL",
+     "MAIN_HAMMER",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436257503,
+    "cohort": "alliance:QCHU",
+    "observed_players": 43,
+    "weapons": [
+     "2H_ARCANESTAFF_HELL",
+     "2H_AXE_AVALON",
+     "2H_CLEAVER_HELL",
+     "2H_COMBATSTAFF_MORGANA",
+     "2H_DAGGER_KATAR_AVALON",
+     "2H_DUALMACE_AVALON",
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_ENIGMATICORB_MORGANA",
+     "2H_HARPOON_HELL",
+     "2H_HOLYSTAFF_CRYSTAL",
+     "2H_HOLYSTAFF_HELL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "2H_MACE",
+     "2H_NATURESTAFF_KEEPER",
+     "2H_SHAPESHIFTER_KEEPER",
+     "2H_TWINSCYTHE_HELL",
+     "MAIN_HAMMER",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_MACE",
+     "MAIN_ROCKMACE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436257157,
+    "cohort": "alliance:PARIS",
+    "observed_players": 5,
+    "weapons": [
+     "2H_CLAWPAIR",
+     "2H_DUALSWORD",
+     "2H_LONGBOW",
+     "2H_NATURESTAFF_HELL",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436257157,
+    "cohort": "guild:HORA _DE _AVENTURA",
+    "observed_players": 5,
+    "weapons": [
+     "2H_DAGGERPAIR",
+     "2H_DOUBLEBLADEDSTAFF",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436257017,
+    "cohort": "alliance:H3XA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_KNUCKLES_SET2",
+     "MAIN_CURSEDSTAFF_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436257017,
+    "cohort": "alliance:STIFF",
+    "observed_players": 4,
+    "weapons": [
+     "2H_FROSTSTAFF",
+     "2H_ICECRYSTAL_UNDEAD",
+     "MAIN_CURSEDSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436271866,
+    "cohort": "alliance:KETA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CURSEDSTAFF_MORGANA",
+     "2H_SHAPESHIFTER_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436271866,
+    "cohort": "alliance:Lutti",
+    "observed_players": 2,
+    "weapons": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_KNUCKLES_SET2"
+    ]
+   },
+   {
+    "battle_id": 1436256236,
+    "cohort": "alliance:1v5",
+    "observed_players": 10,
+    "weapons": [
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_DAGGER_KATAR_AVALON",
+     "2H_DUALMACE_AVALON",
+     "2H_HARPOON_HELL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_LONGBOW",
+     "MAIN_ARCANESTAFF_UNDEAD",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436256236,
+    "cohort": "alliance:ARMAG",
+    "observed_players": 8,
+    "weapons": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_GLAIVE_CRYSTAL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_KNUCKLES_SET3",
+     "2H_SHAPESHIFTER_KEEPER",
+     "2H_SHAPESHIFTER_SET2",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436256236,
+    "cohort": "alliance:ARZ",
+    "observed_players": 2,
+    "weapons": [
+     "2H_LONGBOW",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436256236,
+    "cohort": "alliance:D3A",
+    "observed_players": 9,
+    "weapons": [
+     "2H_ARCANESTAFF_HELL",
+     "2H_BOW_HELL",
+     "MAIN_ARCANESTAFF_UNDEAD",
+     "MAIN_CURSEDSTAFF_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436256236,
+    "cohort": "alliance:Dere",
+    "observed_players": 2,
+    "weapons": [
+     "2H_NATURESTAFF",
+     "2H_SCYTHE_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436256236,
+    "cohort": "guild:PENllS BLACK",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALSCIMITAR_UNDEAD",
+     "MAIN_CURSEDSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436255870,
+    "cohort": "alliance:B0LA",
+    "observed_players": 4,
+    "weapons": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_GLAIVE_CRYSTAL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_POLEHAMMER"
+    ]
+   },
+   {
+    "battle_id": 1436255673,
+    "cohort": "alliance:ARMAG",
+    "observed_players": 11,
+    "weapons": [
+     "2H_ARCANESTAFF_HELL",
+     "2H_AXE_AVALON",
+     "2H_CURSEDSTAFF_MORGANA",
+     "2H_DUALMACE_AVALON",
+     "2H_HOLYSTAFF_HELL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_MACE_MORGANA",
+     "2H_SHAPESHIFTER_KEEPER",
+     "2H_SHAPESHIFTER_SET2",
+     "MAIN_ROCKMACE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436255673,
+    "cohort": "alliance:ARZ",
+    "observed_players": 7,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_LONGBOW",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436255502,
+    "cohort": "alliance:IVISA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_FIRESTAFF",
+     "MAIN_CURSEDSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436255502,
+    "cohort": "alliance:QCHU",
+    "observed_players": 2,
+    "weapons": [
+     "2H_KNUCKLES_SET3",
+     "2H_SHAPESHIFTER_SET2"
+    ]
+   },
+   {
+    "battle_id": 1436254818,
+    "cohort": "alliance:D0GZ",
+    "observed_players": 19,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_DUALMACE_AVALON",
+     "2H_ENIGMATICORB_MORGANA",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "2H_MACE",
+     "MAIN_CURSEDSTAFF_AVALON",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_MACE",
+     "MAIN_NATURESTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436254818,
+    "cohort": "alliance:Pinwy",
+    "observed_players": 21,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_BOW_AVALON",
+     "2H_BOW_HELL",
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_DUALMACE_AVALON",
+     "2H_HARPOON_HELL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_KNUCKLES_SET3",
+     "2H_MACE",
+     "2H_NATURESTAFF_HELL",
+     "2H_REPEATINGCROSSBOW_UNDEAD",
+     "2H_SHAPESHIFTER_AVALON",
+     "2H_SHAPESHIFTER_CRYSTAL",
+     "MAIN_ARCANESTAFF",
+     "MAIN_CURSEDSTAFF_CRYSTAL",
+     "MAIN_HAMMER",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_ROCKMACE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436254485,
+    "cohort": "alliance:CIRKO",
+    "observed_players": 10,
+    "weapons": [
+     "2H_DUALMACE_AVALON",
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_KNUCKLES_SET2",
+     "2H_NATURESTAFF_HELL",
+     "2H_SHAPESHIFTER_SET2",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_MACE",
+     "MAIN_SWORD_CRYSTAL"
+    ]
+   },
+   {
+    "battle_id": 1436254485,
+    "cohort": "alliance:Lutti",
+    "observed_players": 10,
+    "weapons": [
+     "2H_ARCANESTAFF_CRYSTAL",
+     "2H_AXE",
+     "2H_AXE_AVALON",
+     "2H_HALBERD",
+     "2H_HARPOON_HELL",
+     "2H_KNUCKLES_AVALON",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "2H_NATURESTAFF_HELL",
+     "MAIN_CURSEDSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436254485,
+    "cohort": "alliance:THY",
+    "observed_players": 3,
+    "weapons": [
+     "2H_CLEAVER_HELL",
+     "MAIN_HAMMER",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436254458,
+    "cohort": "alliance:B0LA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_HAMMER",
+     "2H_POLEHAMMER"
+    ]
+   },
+   {
+    "battle_id": 1436254458,
+    "cohort": "alliance:C4USA",
+    "observed_players": 6,
+    "weapons": [
+     "2H_DUALAXE_KEEPER",
+     "2H_LONGBOW_UNDEAD",
+     "2H_QUARTERSTAFF_AVALON",
+     "MAIN_FROSTSTAFF",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436254458,
+    "cohort": "alliance:GAMPI",
+    "observed_players": 16,
+    "weapons": [
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_CURSEDSTAFF_MORGANA",
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_HARPOON_HELL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_ICEGAUNTLETS_HELL",
+     "2H_INFERNOSTAFF_MORGANA",
+     "2H_KNUCKLES_HELL",
+     "2H_KNUCKLES_KEEPER",
+     "2H_KNUCKLES_SET2",
+     "2H_LONGBOW",
+     "MAIN_ARCANESTAFF",
+     "MAIN_CURSEDSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436254458,
+    "cohort": "alliance:GOOFY",
+    "observed_players": 2,
+    "weapons": [
+     "2H_ROCKSTAFF_KEEPER",
+     "MAIN_FROSTSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436254297,
+    "cohort": "alliance:FLCRP",
+    "observed_players": 3,
+    "weapons": [
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_INFERNOSTAFF_MORGANA",
+     "2H_KNUCKLES_SET3"
+    ]
+   },
+   {
+    "battle_id": 1436254297,
+    "cohort": "alliance:QCHU",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CLEAVER_HELL",
+     "2H_POLEHAMMER"
+    ]
+   },
+   {
+    "battle_id": 1436253980,
+    "cohort": "alliance:MTGA",
+    "observed_players": 9,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_CLEAVER_HELL",
+     "2H_HOLYSTAFF_UNDEAD",
+     "2H_LONGBOW",
+     "2H_SCYTHE_HELL",
+     "2H_SHAPESHIFTER_SET2",
+     "MAIN_ARCANESTAFF",
+     "MAIN_SWORD_CRYSTAL"
+    ]
+   },
+   {
+    "battle_id": 1436253980,
+    "cohort": "alliance:VlH",
+    "observed_players": 4,
+    "weapons": [
+     "2H_GLAIVE_CRYSTAL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_LONGBOW",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436252406,
+    "cohort": "alliance:Lutti",
+    "observed_players": 7,
+    "weapons": [
+     "2H_ARCANESTAFF_CRYSTAL",
+     "2H_AXE",
+     "2H_HALBERD",
+     "2H_HARPOON_HELL",
+     "2H_KNUCKLES_SET2",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436252406,
+    "cohort": "alliance:THY",
+    "observed_players": 5,
+    "weapons": [
+     "2H_DUALAXE_KEEPER",
+     "2H_DUALMACE_AVALON",
+     "2H_MACE",
+     "MAIN_HAMMER",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436252406,
+    "cohort": "alliance:W4NT",
+    "observed_players": 2,
+    "weapons": [
+     "2H_KNUCKLES_SET2",
+     "MAIN_DAGGER_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436251940,
+    "cohort": "alliance:EG0",
+    "observed_players": 45,
+    "weapons": [
+     "2H_ARCANESTAFF",
+     "2H_AXE_AVALON",
+     "2H_CLEAVER_HELL",
+     "2H_CURSEDSTAFF_MORGANA",
+     "2H_DUALAXE_KEEPER",
+     "2H_DUALMACE_AVALON",
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_HARPOON_HELL",
+     "2H_HOLYSTAFF_UNDEAD",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "2H_SHAPESHIFTER_SET2",
+     "MAIN_CURSEDSTAFF_AVALON",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_MACE",
+     "MAIN_MACE_CRYSTAL",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436251940,
+    "cohort": "alliance:S1GR",
+    "observed_players": 35,
+    "weapons": [
+     "2H_AXE",
+     "2H_AXE_AVALON",
+     "2H_BOW",
+     "2H_CLAYMORE",
+     "2H_CLAYMORE_AVALON",
+     "2H_CLEAVER_HELL",
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_DUALSWORD",
+     "2H_GLAIVE_CRYSTAL",
+     "2H_HALBERD",
+     "2H_HAMMER",
+     "2H_HARPOON_HELL",
+     "2H_HOLYSTAFF_UNDEAD",
+     "2H_ICEGAUNTLETS_HELL",
+     "2H_KNUCKLES_KEEPER",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "2H_NATURESTAFF_HELL",
+     "2H_TWINSCYTHE_HELL",
+     "MAIN_CURSEDSTAFF_CRYSTAL",
+     "MAIN_FIRESTAFF_KEEPER",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_MACE",
+     "MAIN_RAPIER_MORGANA",
+     "MAIN_SPEAR_LANCE_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436251940,
+    "cohort": "guild:F Pal Que Lee",
+    "observed_players": 5,
+    "weapons": [
+     "2H_DEMONICSTAFF",
+     "2H_HOLYSTAFF_HELL",
+     "2H_MACE",
+     "2H_MACE_MORGANA",
+     "2H_NATURESTAFF_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436251940,
+    "cohort": "guild:OVERSIZE V",
+    "observed_players": 7,
+    "weapons": [
+     "2H_BOW_HELL",
+     "2H_ENIGMATICORB_MORGANA",
+     "2H_GLAIVE_CRYSTAL",
+     "2H_LONGBOW",
+     "2H_SHAPESHIFTER_KEEPER",
+     "MAIN_MACE",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436250503,
+    "cohort": "alliance:4L",
+    "observed_players": 29,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_DUALHAMMER_HELL",
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_HALBERD",
+     "2H_HAMMER_AVALON",
+     "2H_HOLYSTAFF_CRYSTAL",
+     "2H_KNUCKLES_KEEPER",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "2H_MACE",
+     "2H_ROCKSTAFF_KEEPER",
+     "2H_SCYTHE_HELL",
+     "2H_SHAPESHIFTER_AVALON",
+     "MAIN_HAMMER",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_MACE",
+     "MAIN_RAPIER_MORGANA",
+     "MAIN_SWORD_CRYSTAL"
+    ]
+   },
+   {
+    "battle_id": 1436250503,
+    "cohort": "alliance:NSFW1",
+    "observed_players": 30,
+    "weapons": [
+     "2H_ARCANESTAFF_HELL",
+     "2H_AXE_AVALON",
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_DAGGER_KATAR_AVALON",
+     "2H_DUALMACE_AVALON",
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_ENIGMATICORB_MORGANA",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_ICEGAUNTLETS_HELL",
+     "2H_KNUCKLES_KEEPER",
+     "2H_KNUCKLES_SET2",
+     "2H_KNUCKLES_SET3",
+     "2H_POLEHAMMER",
+     "2H_SHAPESHIFTER_KEEPER",
+     "MAIN_CURSEDSTAFF_AVALON",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_MACE",
+     "MAIN_MACE_CRYSTAL",
+     "MAIN_NATURESTAFF_CRYSTAL",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436249724,
+    "cohort": "alliance:STIFF",
+    "observed_players": 5,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_KNUCKLES_SET2",
+     "2H_MACE",
+     "2H_POLEHAMMER"
+    ]
+   }
+  ],
+  "mid": [
+   {
+    "battle_id": 1436271859,
+    "cohort": "alliance:D3A",
+    "observed_players": 3,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_DUALAXE_KEEPER",
+     "2H_LONGBOW"
+    ]
+   },
+   {
+    "battle_id": 1436271859,
+    "cohort": "guild:Beyond Limits",
+    "observed_players": 2,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "MAIN_DAGGER_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436270596,
+    "cohort": "guild:Pura - Sangre",
+    "observed_players": 3,
+    "weapons": [
+     "2H_AXE",
+     "2H_BOW_KEEPER",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436270127,
+    "cohort": "alliance:PROTA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW_AVALON",
+     "2H_POLEHAMMER"
+    ]
+   },
+   {
+    "battle_id": 1436270127,
+    "cohort": "guild:P e r r i t o -- P a n z o n",
+    "observed_players": 2,
+    "weapons": [
+     "2H_HOLYSTAFF_UNDEAD",
+     "MAIN_CURSEDSTAFF_CRYSTAL"
+    ]
+   },
+   {
+    "battle_id": 1436269878,
+    "cohort": "alliance:DLTA",
+    "observed_players": 3,
+    "weapons": [
+     "2H_CROSSBOW",
+     "2H_DUALCROSSBOW_HELL",
+     "2H_HOLYSTAFF_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436268365,
+    "cohort": "alliance:LCDM",
+    "observed_players": 5,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_BOW_HELL",
+     "MAIN_CURSEDSTAFF_AVALON",
+     "MAIN_RAPIER_MORGANA",
+     "MAIN_SPEAR_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436268365,
+    "cohort": "alliance:QCHU",
+    "observed_players": 6,
+    "weapons": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_HOLYSTAFF_UNDEAD",
+     "2H_LONGBOW",
+     "2H_SCYTHE_HELL",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436268365,
+    "cohort": "alliance:RmTTT",
+    "observed_players": 4,
+    "weapons": [
+     "2H_DUALAXE_KEEPER",
+     "2H_KNUCKLES_KEEPER",
+     "MAIN_HAMMER",
+     "MAIN_SPEAR_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436267444,
+    "cohort": "alliance:Dere",
+    "observed_players": 2,
+    "weapons": [
+     "2H_AXE",
+     "MAIN_HOLYSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436267444,
+    "cohort": "alliance:PTE",
+    "observed_players": 6,
+    "weapons": [
+     "2H_CLAWPAIR",
+     "2H_DUALAXE_KEEPER",
+     "2H_LONGBOW",
+     "2H_POLEHAMMER",
+     "MAIN_CURSEDSTAFF",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436267212,
+    "cohort": "alliance:EAZYY",
+    "observed_players": 3,
+    "weapons": [
+     "2H_ICECRYSTAL_UNDEAD",
+     "MAIN_MACE",
+     "MAIN_ROCKMACE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436267212,
+    "cohort": "alliance:MOZZY",
+    "observed_players": 3,
+    "weapons": [
+     "2H_DAGGERPAIR",
+     "2H_DUALAXE_KEEPER",
+     "2H_QUARTERSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436266223,
+    "cohort": "alliance:PIOR",
+    "observed_players": 2,
+    "weapons": [
+     "MAIN_CURSEDSTAFF",
+     "MAIN_FROSTSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436265826,
+    "cohort": "alliance:XI",
+    "observed_players": 7,
+    "weapons": [
+     "2H_BOW_AVALON",
+     "2H_TWINSCYTHE_HELL",
+     "MAIN_ARCANESTAFF_UNDEAD",
+     "MAIN_HOLYSTAFF",
+     "MAIN_MACE",
+     "MAIN_RAPIER_MORGANA",
+     "MAIN_SPEAR_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436265807,
+    "cohort": "alliance:CIRKO",
+    "observed_players": 4,
+    "weapons": [
+     "2H_INFERNOSTAFF_MORGANA",
+     "2H_KNUCKLES_AVALON",
+     "2H_KNUCKLES_SET2",
+     "MAIN_MACE_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436265807,
+    "cohort": "alliance:R0J0",
+    "observed_players": 4,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_LONGBOW",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436265538,
+    "cohort": "alliance:EAZYY",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_DUALAXE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436265538,
+    "cohort": "alliance:MOZZY",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DAGGERPAIR",
+     "2H_QUARTERSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436264657,
+    "cohort": "alliance:STIFF",
+    "observed_players": 2,
+    "weapons": [
+     "2H_KNUCKLES_SET2",
+     "MAIN_DAGGER_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436264572,
+    "cohort": "alliance:MOIX",
+    "observed_players": 3,
+    "weapons": [
+     "2H_DUALCROSSBOW_HELL",
+     "2H_KNUCKLES_SET2",
+     "2H_NATURESTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436264572,
+    "cohort": "alliance:STIFF",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CLAYMORE_AVALON",
+     "MAIN_FROSTSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436264491,
+    "cohort": "alliance:ARZ",
+    "observed_players": 3,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_KNUCKLES_SET3"
+    ]
+   },
+   {
+    "battle_id": 1436264491,
+    "cohort": "alliance:JRT",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CLAWPAIR",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436264491,
+    "cohort": "alliance:STARZ",
+    "observed_players": 5,
+    "weapons": [
+     "2H_DUALAXE_KEEPER",
+     "2H_DUALHAMMER_HELL",
+     "2H_HOLYSTAFF_UNDEAD",
+     "2H_ICECRYSTAL_UNDEAD",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436264087,
+    "cohort": "alliance:3000",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALMACE_AVALON",
+     "2H_ICECRYSTAL_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436264087,
+    "cohort": "alliance:W4NT",
+    "observed_players": 3,
+    "weapons": [
+     "2H_ARCANESTAFF_HELL",
+     "2H_FIRE_RINGPAIR_AVALON",
+     "MAIN_FIRESTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436263815,
+    "cohort": "alliance:EAZYY",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DAGGERPAIR",
+     "2H_KNUCKLES_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436263707,
+    "cohort": "alliance:C4USA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_LONGBOW_UNDEAD",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436262929,
+    "cohort": "alliance:ESPVE",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CLEAVER_HELL",
+     "2H_CROSSBOW"
+    ]
+   },
+   {
+    "battle_id": 1436262912,
+    "cohort": "alliance:RLost",
+    "observed_players": 3,
+    "weapons": [
+     "2H_HOLYSTAFF",
+     "2H_INFERNOSTAFF_MORGANA",
+     "2H_QUARTERSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436262156,
+    "cohort": "alliance:BRIGA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     "MAIN_CURSEDSTAFF_CRYSTAL"
+    ]
+   },
+   {
+    "battle_id": 1436262156,
+    "cohort": "alliance:CIRKO",
+    "observed_players": 4,
+    "weapons": [
+     "2H_BOW_AVALON",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_INFERNOSTAFF_MORGANA",
+     "MAIN_ROCKMACE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436261545,
+    "cohort": "alliance:KITEO",
+    "observed_players": 2,
+    "weapons": [
+     "MAIN_FROSTSTAFF",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436261248,
+    "cohort": "alliance:B0LA",
+    "observed_players": 3,
+    "weapons": [
+     "2H_CROSSBOW",
+     "2H_LONGBOW",
+     "2H_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436261248,
+    "cohort": "alliance:iMurk",
+    "observed_players": 3,
+    "weapons": [
+     "2H_DEMONICSTAFF",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_ICEGAUNTLETS_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436261155,
+    "cohort": "alliance:SHINU",
+    "observed_players": 2,
+    "weapons": [
+     "2H_AXE",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436260716,
+    "cohort": "alliance:40oz",
+    "observed_players": 6,
+    "weapons": [
+     "2H_ARCANESTAFF",
+     "2H_DUALAXE_KEEPER",
+     "2H_DUALCROSSBOW_HELL",
+     "2H_DUALSWORD",
+     "2H_HOLYSTAFF_UNDEAD",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436260716,
+    "cohort": "alliance:G108",
+    "observed_players": 5,
+    "weapons": [
+     "2H_AXE",
+     "2H_DUALAXE_KEEPER",
+     "2H_KNUCKLES_SET3",
+     "MAIN_MACE_CRYSTAL"
+    ]
+   },
+   {
+    "battle_id": 1436260507,
+    "cohort": "alliance:QCHU",
+    "observed_players": 6,
+    "weapons": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_KNUCKLES_SET2",
+     "2H_LONGBOW",
+     "2H_SCYTHE_HELL",
+     "MAIN_HAMMER",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436260507,
+    "cohort": "alliance:THY",
+    "observed_players": 3,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436260500,
+    "cohort": "alliance:CHAIR",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DAGGERPAIR",
+     "2H_DUALAXE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436260500,
+    "cohort": "alliance:W4NT",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALHAMMER_HELL",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436259841,
+    "cohort": "alliance:COSM0",
+    "observed_players": 3,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_HARPOON_HELL",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436259841,
+    "cohort": "alliance:GunS",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DAGGERPAIR",
+     "2H_SHAPESHIFTER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436259586,
+    "cohort": "alliance:LCSNR",
+    "observed_players": 9,
+    "weapons": [
+     "2H_BOW_AVALON",
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_HAMMER_AVALON",
+     "2H_HARPOON_HELL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_LONGBOW"
+    ]
+   },
+   {
+    "battle_id": 1436259586,
+    "cohort": "alliance:RmTTT",
+    "observed_players": 9,
+    "weapons": [
+     "2H_CLEAVER_HELL",
+     "2H_CURSEDSTAFF_MORGANA",
+     "2H_DAGGERPAIR",
+     "2H_KNUCKLES_KEEPER",
+     "2H_MACE",
+     "2H_NATURESTAFF_HELL",
+     "2H_SHAPESHIFTER_SET2",
+     "MAIN_HAMMER",
+     "MAIN_SPEAR_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436259539,
+    "cohort": "alliance:LiO",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALCROSSBOW_HELL",
+     "MAIN_NATURESTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436259539,
+    "cohort": "alliance:WIMD",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CLEAVER_HELL",
+     "2H_HAMMER_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436259315,
+    "cohort": "alliance:MOZZY",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DAGGERPAIR",
+     "2H_NATURESTAFF_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436259312,
+    "cohort": "alliance:LDBS",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW",
+     "2H_CLAYMORE"
+    ]
+   },
+   {
+    "battle_id": 1436259312,
+    "cohort": "guild:B E A R C L A W",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW",
+     "MAIN_HOLYSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436259307,
+    "cohort": "alliance:IMPE",
+    "observed_players": 3,
+    "weapons": [
+     "2H_CLEAVER_HELL",
+     "2H_KNUCKLES_SET2",
+     "MAIN_CURSEDSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436259307,
+    "cohort": "alliance:VlH",
+    "observed_players": 3,
+    "weapons": [
+     "2H_ICECRYSTAL_UNDEAD",
+     "2H_KNUCKLES_SET2"
+    ]
+   },
+   {
+    "battle_id": 1436259304,
+    "cohort": "guild:Pim Pum Pam",
+    "observed_players": 2,
+    "weapons": [
+     "MAIN_DAGGER_HELL",
+     "MAIN_HAMMER"
+    ]
+   },
+   {
+    "battle_id": 1436259304,
+    "cohort": "guild:The Great Recursor",
+    "observed_players": 4,
+    "weapons": [
+     "2H_DUALCROSSBOW_HELL",
+     "2H_LONGBOW",
+     "MAIN_FIRESTAFF",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436259024,
+    "cohort": "alliance:CHAIR",
+    "observed_players": 3,
+    "weapons": [
+     "2H_CLEAVER_HELL",
+     "2H_DUALHAMMER_HELL",
+     "2H_HOLYSTAFF_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436259024,
+    "cohort": "alliance:Lutti",
+    "observed_players": 3,
+    "weapons": [
+     "2H_HOLYSTAFF_UNDEAD",
+     "MAIN_AXE",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436259024,
+    "cohort": "alliance:ROTA",
+    "observed_players": 3,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_BOW_KEEPER",
+     "2H_CLAYMORE"
+    ]
+   },
+   {
+    "battle_id": 1436259024,
+    "cohort": "alliance:S1GR",
+    "observed_players": 2,
+    "weapons": [
+     "MAIN_HOLYSTAFF",
+     "MAIN_SPEAR_LANCE_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436258966,
+    "cohort": "alliance:ROTA",
+    "observed_players": 5,
+    "weapons": [
+     "2H_DAGGERPAIR_CRYSTAL",
+     "2H_DOUBLEBLADEDSTAFF",
+     "2H_FROSTSTAFF_CRYSTAL",
+     "2H_ICECRYSTAL_UNDEAD",
+     "MAIN_FIRESTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436258966,
+    "cohort": "guild:FALCON - VERDE",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_HAMMER_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436258797,
+    "cohort": "alliance:3000",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+     "2H_DUALAXE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436258797,
+    "cohort": "alliance:CIRKO",
+    "observed_players": 3,
+    "weapons": [
+     "2H_BOW_AVALON",
+     "2H_HOLYSTAFF_HELL",
+     "MAIN_AXE"
+    ]
+   },
+   {
+    "battle_id": 1436258797,
+    "cohort": "alliance:KETA",
+    "observed_players": 3,
+    "weapons": [
+     "2H_BOW_KEEPER",
+     "2H_HAMMER",
+     "2H_KNUCKLES_SET3"
+    ]
+   },
+   {
+    "battle_id": 1436258797,
+    "cohort": "alliance:NSFW",
+    "observed_players": 2,
+    "weapons": [
+     "2H_LONGBOW",
+     "MAIN_SPEAR_LANCE_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436258797,
+    "cohort": "alliance:PAURA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CLAYMORE",
+     "2H_CROSSBOWLARGE"
+    ]
+   },
+   {
+    "battle_id": 1436258797,
+    "cohort": "alliance:PRlME",
+    "observed_players": 3,
+    "weapons": [
+     "2H_LONGBOW_UNDEAD",
+     "2H_MACE",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436258797,
+    "cohort": "alliance:UoT",
+    "observed_players": 3,
+    "weapons": [
+     "2H_KNUCKLES_SET2",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_SPEAR_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436258548,
+    "cohort": "alliance:Deck",
+    "observed_players": 2,
+    "weapons": [
+     "2H_HAMMER_UNDEAD",
+     "2H_KNUCKLES_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436258548,
+    "cohort": "alliance:R4AL",
+    "observed_players": 2,
+    "weapons": [
+     "2H_QUARTERSTAFF_AVALON",
+     "MAIN_CURSEDSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436258545,
+    "cohort": "alliance:3000",
+    "observed_players": 4,
+    "weapons": [
+     "2H_GLAIVE_CRYSTAL",
+     "2H_HAMMER_AVALON",
+     "2H_ICECRYSTAL_UNDEAD",
+     "MAIN_CURSEDSTAFF_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436258545,
+    "cohort": "alliance:QCHU",
+    "observed_players": 4,
+    "weapons": [
+     "2H_KNUCKLES_SET2",
+     "2H_LONGBOW",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436258433,
+    "cohort": "alliance:LCSNR",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CLAYMORE",
+     "2H_DUALCROSSBOW_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436258433,
+    "cohort": "guild:INICIO Y FIN",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW_KEEPER",
+     "2H_DOUBLEBLADEDSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436258161,
+    "cohort": "alliance:GunS",
+    "observed_players": 2,
+    "weapons": [
+     "2H_AXE",
+     "2H_DUALSWORD"
+    ]
+   },
+   {
+    "battle_id": 1436258161,
+    "cohort": "guild:Hiyoko gakkou",
+    "observed_players": 4,
+    "weapons": [
+     "2H_DAGGERPAIR",
+     "2H_DUALAXE_KEEPER",
+     "2H_QUARTERSTAFF_AVALON",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436258149,
+    "cohort": "alliance:EAZYY",
+    "observed_players": 3,
+    "weapons": [
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_ICECRYSTAL_UNDEAD",
+     "MAIN_ROCKMACE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436258149,
+    "cohort": "alliance:HITA",
+    "observed_players": 3,
+    "weapons": [
+     "2H_BOW",
+     "2H_BOW_KEEPER",
+     "MAIN_MACE_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436258125,
+    "cohort": "alliance:MaNe",
+    "observed_players": 2,
+    "weapons": [
+     "2H_HAMMER_AVALON",
+     "2H_KNUCKLES_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436257916,
+    "cohort": "alliance:FURIX",
+    "observed_players": 2,
+    "weapons": [
+     "2H_GLAIVE_CRYSTAL",
+     "MAIN_ARCANESTAFF_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436257916,
+    "cohort": "alliance:MTGA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_LONGBOW",
+     "MAIN_AXE"
+    ]
+   },
+   {
+    "battle_id": 1436257916,
+    "cohort": "alliance:TKCHE",
+    "observed_players": 3,
+    "weapons": [
+     "2H_BOW",
+     "2H_CROSSBOWLARGE",
+     "2H_LONGBOW"
+    ]
+   },
+   {
+    "battle_id": 1436257916,
+    "cohort": "guild:DARK SOUL STAR",
+    "observed_players": 2,
+    "weapons": [
+     "2H_LONGBOW",
+     "2H_WARBOW"
+    ]
+   },
+   {
+    "battle_id": 1436257916,
+    "cohort": "guild:SHADOWCAT HUNTERS",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW",
+     "MAIN_AXE"
+    ]
+   },
+   {
+    "battle_id": 1436257862,
+    "cohort": "guild:E_T_E_R_N_O _S",
+    "observed_players": 5,
+    "weapons": [
+     "2H_AXE",
+     "2H_CROSSBOW",
+     "MAIN_CURSEDSTAFF_UNDEAD",
+     "MAIN_FROSTSTAFF",
+     "MAIN_HOLYSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436257862,
+    "cohort": "guild:Zor Crux",
+    "observed_players": 4,
+    "weapons": [
+     "2H_CLAYMORE_AVALON",
+     "2H_DUALHAMMER_HELL",
+     "2H_LONGBOW",
+     "2H_SKULLORB_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436257324,
+    "cohort": "alliance:30DAY",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CLEAVER_HELL",
+     "2H_DUALSICKLE_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436257324,
+    "cohort": "alliance:PTE",
+    "observed_players": 2,
+    "weapons": [
+     "MAIN_CURSEDSTAFF",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436257051,
+    "cohort": "alliance:LOCOS",
+    "observed_players": 4,
+    "weapons": [
+     "2H_CROSSBOW_CANNON_AVALON",
+     "2H_HOLYSTAFF_UNDEAD",
+     "MAIN_CURSEDSTAFF_AVALON",
+     "MAIN_MACE_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436257051,
+    "cohort": "alliance:PUNGA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW_AVALON",
+     "2H_ICECRYSTAL_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436257051,
+    "cohort": "guild:Volta de Calcinha",
+    "observed_players": 5,
+    "weapons": [
+     "2H_AXE",
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_KNUCKLES_CRYSTAL",
+     "2H_MACE",
+     "MAIN_CURSEDSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436256651,
+    "cohort": "alliance:ARCH",
+    "observed_players": 3,
+    "weapons": [
+     "2H_DUALAXE_KEEPER",
+     "2H_SHAPESHIFTER_SET1"
+    ]
+   },
+   {
+    "battle_id": 1436256651,
+    "cohort": "alliance:C4USA",
+    "observed_players": 4,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_HOLYSTAFF_HELL",
+     "2H_INFERNOSTAFF_MORGANA",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436256570,
+    "cohort": "alliance:B0LA",
+    "observed_players": 3,
+    "weapons": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_LONGBOW"
+    ]
+   },
+   {
+    "battle_id": 1436256570,
+    "cohort": "alliance:iMurk",
+    "observed_players": 6,
+    "weapons": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_HAMMER_AVALON",
+     "2H_HARPOON_HELL",
+     "2H_POLEHAMMER",
+     "MAIN_ARCANESTAFF",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   }
+  ],
+  "small": [
+   {
+    "battle_id": 1436270494,
+    "cohort": "guild:THE GATEWATCH",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW_AVALON",
+     "MAIN_CURSEDSTAFF_CRYSTAL"
+    ]
+   },
+   {
+    "battle_id": 1436270011,
+    "cohort": "alliance:QCHU",
+    "observed_players": 3,
+    "weapons": [
+     "2H_GLAIVE",
+     "2H_HOLYSTAFF_HELL",
+     "2H_KNUCKLES_SET2"
+    ]
+   },
+   {
+    "battle_id": 1436270011,
+    "cohort": "guild:The Wolf Company",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALAXE_KEEPER",
+     "MAIN_SPEAR_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436269632,
+    "cohort": "alliance:DEPTH",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW",
+     "MAIN_HOLYSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436269581,
+    "cohort": "guild:churejones",
+    "observed_players": 2,
+    "weapons": [
+     "2H_AXE",
+     "MAIN_FIRESTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436269371,
+    "cohort": "guild:Anaru Sekkusu",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DAGGERPAIR",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436268759,
+    "cohort": "alliance:ROTA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALHAMMER_HELL",
+     "2H_FROSTSTAFF_CRYSTAL"
+    ]
+   },
+   {
+    "battle_id": 1436268709,
+    "cohort": "alliance:ROTA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW_KEEPER",
+     "2H_CLAYMORE"
+    ]
+   },
+   {
+    "battle_id": 1436268709,
+    "cohort": "guild:BKB WEEEEEEEEEEEEE",
+    "observed_players": 3,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_DUALAXE_KEEPER",
+     "2H_DUALSWORD"
+    ]
+   },
+   {
+    "battle_id": 1436268606,
+    "cohort": "alliance:HDTPM",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CROSSBOW",
+     "2H_DUALCROSSBOW_CRYSTAL"
+    ]
+   },
+   {
+    "battle_id": 1436268502,
+    "cohort": "alliance:MaNe",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALAXE_KEEPER",
+     "MAIN_AXE"
+    ]
+   },
+   {
+    "battle_id": 1436268313,
+    "cohort": "alliance:hssnd",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW",
+     "2H_DUALAXE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436268261,
+    "cohort": "alliance:ARCH",
+    "observed_players": 4,
+    "weapons": [
+     "2H_BOW_KEEPER",
+     "2H_HOLYSTAFF_HELL",
+     "2H_INFERNOSTAFF_MORGANA",
+     "MAIN_CURSEDSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436268176,
+    "cohort": "guild:gImMe DeM fIsHiEs",
+    "observed_players": 3,
+    "weapons": [
+     "2H_BOW_KEEPER",
+     "2H_CROSSBOWLARGE",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436267665,
+    "cohort": "alliance:Panel",
+    "observed_players": 2,
+    "weapons": [
+     "2H_HOLYSTAFF_UNDEAD",
+     "2H_LONGBOW"
+    ]
+   },
+   {
+    "battle_id": 1436267276,
+    "cohort": "alliance:QQM",
+    "observed_players": 2,
+    "weapons": [
+     "MAIN_HOLYSTAFF",
+     "MAIN_SWORD"
+    ]
+   },
+   {
+    "battle_id": 1436265829,
+    "cohort": "alliance:3000",
+    "observed_players": 3,
+    "weapons": [
+     "2H_BOW_AVALON",
+     "2H_HOLYSTAFF",
+     "MAIN_AXE"
+    ]
+   },
+   {
+    "battle_id": 1436265829,
+    "cohort": "alliance:30DAY",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DAGGERPAIR",
+     "MAIN_FIRESTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436265623,
+    "cohort": "guild:Gente Mala Muy Mala",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+     "2H_KNUCKLES_SET1"
+    ]
+   },
+   {
+    "battle_id": 1436265104,
+    "cohort": "alliance:FLCRP",
+    "observed_players": 2,
+    "weapons": [
+     "2H_AXE",
+     "MAIN_HOLYSTAFF_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436264991,
+    "cohort": "guild:CL4N-DEST1N0",
+    "observed_players": 2,
+    "weapons": [
+     "MAIN_CURSEDSTAFF",
+     "MAIN_HOLYSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436264991,
+    "cohort": "guild:Os Executores",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CLAYMORE",
+     "MAIN_HOLYSTAFF_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436264861,
+    "cohort": "alliance:Deck",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CROSSBOWLARGE",
+     "MAIN_SPEAR_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436264684,
+    "cohort": "alliance:ROTA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALHAMMER_HELL",
+     "2H_FROSTSTAFF_CRYSTAL"
+    ]
+   },
+   {
+    "battle_id": 1436264379,
+    "cohort": "alliance:M0RI",
+    "observed_players": 5,
+    "weapons": [
+     "2H_HOLYSTAFF_HELL",
+     "2H_IRONCLADEDSTAFF",
+     "2H_KNUCKLES_SET2",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436264210,
+    "cohort": "alliance:CABA",
+    "observed_players": 3,
+    "weapons": [
+     "2H_CLAWPAIR",
+     "2H_DUALAXE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436263900,
+    "cohort": "alliance:LCSNR",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALCROSSBOW_HELL",
+     "2H_HAMMER"
+    ]
+   },
+   {
+    "battle_id": 1436263585,
+    "cohort": "guild:The Legion Of Asgard",
+    "observed_players": 3,
+    "weapons": [
+     "2H_DUALSWORD",
+     "2H_FROSTSTAFF_CRYSTAL",
+     "2H_HOLYSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436263514,
+    "cohort": "alliance:WIMD",
+    "observed_players": 2,
+    "weapons": [
+     "2H_ARCANESTAFF",
+     "2H_FIRE_RINGPAIR_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436263309,
+    "cohort": "alliance:HOM3",
+    "observed_players": 3,
+    "weapons": [
+     "2H_BOW",
+     "2H_SHAPESHIFTER_MORGANA",
+     "MAIN_HOLYSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436263309,
+    "cohort": "alliance:UoT",
+    "observed_players": 3,
+    "weapons": [
+     "2H_KNUCKLES_SET2",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_SPEAR_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436263221,
+    "cohort": "alliance:MOZZY",
+    "observed_players": 3,
+    "weapons": [
+     "2H_DUALAXE_KEEPER",
+     "2H_LONGBOW",
+     "2H_SCYTHE_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436263061,
+    "cohort": "guild:MonkeyPush",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW_KEEPER",
+     "2H_DUALAXE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436262880,
+    "cohort": "guild:gImMe DeM fIsHiEs",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW_KEEPER",
+     "2H_CROSSBOWLARGE"
+    ]
+   },
+   {
+    "battle_id": 1436262757,
+    "cohort": "guild:LOS TRINITARIOS RD",
+    "observed_players": 2,
+    "weapons": [
+     "2H_KNUCKLES_SET1",
+     "2H_LONGBOW_UNDEAD",
+     "2H_NATURESTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436262721,
+    "cohort": "guild:APM",
+    "observed_players": 3,
+    "weapons": [
+     "2H_BOW_CRYSTAL",
+     "2H_LONGBOW",
+     "2H_NATURESTAFF_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436262721,
+    "cohort": "guild:harbardcpp",
+    "observed_players": 3,
+    "weapons": [
+     "2H_AXE",
+     "2H_BOW_KEEPER",
+     "2H_DUALSWORD"
+    ]
+   },
+   {
+    "battle_id": 1436262641,
+    "cohort": "guild:NoxAeternus",
+    "observed_players": 2,
+    "weapons": [
+     "2H_POLEHAMMER",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436262459,
+    "cohort": "guild:Blessed Hermanos Eternal",
+    "observed_players": 2,
+    "weapons": [
+     "2H_QUARTERSTAFF_AVALON",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436262267,
+    "cohort": "guild:VATICANUM",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALAXE_KEEPER",
+     "MAIN_CURSEDSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436262190,
+    "cohort": "alliance:AvCa",
+    "observed_players": 2,
+    "weapons": [
+     "2H_QUARTERSTAFF_AVALON",
+     "MAIN_FIRESTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436262190,
+    "cohort": "guild:K-6",
+    "observed_players": 2,
+    "weapons": [
+     "MAIN_CURSEDSTAFF",
+     "MAIN_SPEAR_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436261944,
+    "cohort": "alliance:TN0",
+    "observed_players": 2,
+    "weapons": [
+     "2H_AXE",
+     "2H_SHAPESHIFTER_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436261899,
+    "cohort": "alliance:KETA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_SHAPESHIFTER_HELL",
+     "MAIN_HOLYSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436261591,
+    "cohort": "alliance:B0LA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_INFERNOSTAFF_MORGANA",
+     "MAIN_CURSEDSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436261558,
+    "cohort": "alliance:EG0",
+    "observed_players": 2,
+    "weapons": [
+     "2H_HALBERD_MORGANA",
+     "MAIN_CURSEDSTAFF_CRYSTAL"
+    ]
+   },
+   {
+    "battle_id": 1436261558,
+    "cohort": "alliance:H3XA",
+    "observed_players": 3,
+    "weapons": [
+     "2H_SHAPESHIFTER_MORGANA",
+     "2H_SHAPESHIFTER_SET2"
+    ]
+   },
+   {
+    "battle_id": 1436261558,
+    "cohort": "alliance:Keiko",
+    "observed_players": 2,
+    "weapons": [
+     "2H_NATURESTAFF_HELL",
+     "2H_POLEHAMMER"
+    ]
+   },
+   {
+    "battle_id": 1436261224,
+    "cohort": "guild:Los Narcisistas",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALAXE_KEEPER",
+     "MAIN_FROSTSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436261221,
+    "cohort": "alliance:SUED",
+    "observed_players": 3,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+     "2H_HAMMER"
+    ]
+   },
+   {
+    "battle_id": 1436261221,
+    "cohort": "guild:PENllS BLACK",
+    "observed_players": 3,
+    "weapons": [
+     "2H_BOW",
+     "2H_INFERNOSTAFF",
+     "MAIN_SWORD"
+    ]
+   },
+   {
+    "battle_id": 1436261170,
+    "cohort": "alliance:Dere",
+    "observed_players": 2,
+    "weapons": [
+     "2H_KNUCKLES_SET2",
+     "MAIN_HOLYSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436261053,
+    "cohort": "guild:Asado Vegano",
+    "observed_players": 2,
+    "weapons": [
+     "2H_LONGBOW",
+     "MAIN_SPEAR_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436261008,
+    "cohort": "guild:LA HERMANDAD DE LOS MANCOS",
+    "observed_players": 2,
+    "weapons": [
+     "2H_HAMMER",
+     "2H_LONGBOW"
+    ]
+   },
+   {
+    "battle_id": 1436261008,
+    "cohort": "guild:PENllS BLACK",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW",
+     "2H_DUALAXE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436260971,
+    "cohort": "guild:Blind Redemption",
+    "observed_players": 4,
+    "weapons": [
+     "2H_HOLYSTAFF",
+     "MAIN_AXE",
+     "MAIN_SPEAR",
+     "MAIN_SWORD_CRYSTAL"
+    ]
+   },
+   {
+    "battle_id": 1436260862,
+    "cohort": "alliance:CHAIR",
+    "observed_players": 3,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_QUARTERSTAFF",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436260862,
+    "cohort": "alliance:GOOFY",
+    "observed_players": 2,
+    "weapons": [
+     "2H_ROCKSTAFF_KEEPER",
+     "MAIN_CURSEDSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436260714,
+    "cohort": "alliance:ROTA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DOUBLEBLADEDSTAFF",
+     "2H_FROSTSTAFF_CRYSTAL"
+    ]
+   },
+   {
+    "battle_id": 1436260592,
+    "cohort": "guild:LIONS REBELION",
+    "observed_players": 2,
+    "weapons": [
+     "2H_SCYTHE_CRYSTAL",
+     "MAIN_HOLYSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436260483,
+    "cohort": "alliance:FURIX",
+    "observed_players": 2,
+    "weapons": [
+     "2H_HALBERD_MORGANA",
+     "MAIN_HOLYSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436260375,
+    "cohort": "alliance:UDP",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CLAWPAIR",
+     "MAIN_CURSEDSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436260347,
+    "cohort": "guild:Hijos del Xanaes",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALAXE_KEEPER",
+     "2H_LONGBOW"
+    ]
+   },
+   {
+    "battle_id": 1436260263,
+    "cohort": "alliance:QCHU",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW_KEEPER",
+     "MAIN_NATURESTAFF_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436260263,
+    "cohort": "guild:Os Horriveis",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CROSSBOW",
+     "2H_LONGBOW"
+    ]
+   },
+   {
+    "battle_id": 1436260091,
+    "cohort": "alliance:LAOL",
+    "observed_players": 2,
+    "weapons": [
+     "2H_AXE",
+     "2H_QUARTERSTAFF_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436260091,
+    "cohort": "guild:LA SEPTIMA LEGION",
+    "observed_players": 3,
+    "weapons": [
+     "2H_SCYTHE_CRYSTAL",
+     "MAIN_DAGGER_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436260083,
+    "cohort": "guild:Caballeros-eternos",
+    "observed_players": 3,
+    "weapons": [
+     "2H_HOLYSTAFF",
+     "2H_KNUCKLES_SET1",
+     "MAIN_SPEAR"
+    ]
+   },
+   {
+    "battle_id": 1436259983,
+    "cohort": "alliance:STARZ",
+    "observed_players": 3,
+    "weapons": [
+     "2H_DUALAXE_KEEPER",
+     "2H_DUALHAMMER_HELL",
+     "MAIN_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436259983,
+    "cohort": "alliance:xSOLx",
+    "observed_players": 5,
+    "weapons": [
+     "2H_DOUBLEBLADEDSTAFF",
+     "2H_HOLYSTAFF_UNDEAD",
+     "2H_LONGBOW",
+     "MAIN_CURSEDSTAFF_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436259849,
+    "cohort": "alliance:DISC",
+    "observed_players": 2,
+    "weapons": [
+     "2H_FROSTSTAFF",
+     "MAIN_FROSTSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436259849,
+    "cohort": "guild:Anaru Sekkusu",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DAGGERPAIR",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436259849,
+    "cohort": "guild:churejones",
+    "observed_players": 2,
+    "weapons": [
+     "2H_KNUCKLES_AVALON",
+     "2H_SHAPESHIFTER_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436259810,
+    "cohort": "alliance:LiO",
+    "observed_players": 3,
+    "weapons": [
+     "2H_DEMONICSTAFF",
+     "2H_LONGBOW",
+     "MAIN_CURSEDSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436259426,
+    "cohort": "alliance:CUYS",
+    "observed_players": 2,
+    "weapons": [
+     "2H_FROSTSTAFF",
+     "2H_SHAPESHIFTER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436259426,
+    "cohort": "guild:4_20",
+    "observed_players": 3,
+    "weapons": [
+     "2H_DAGGERPAIR_CRYSTAL",
+     "2H_DUALSICKLE_UNDEAD",
+     "2H_SCYTHE_CRYSTAL"
+    ]
+   },
+   {
+    "battle_id": 1436259227,
+    "cohort": "alliance:C0DE",
+    "observed_players": 2,
+    "weapons": [
+     "2H_NATURESTAFF_HELL",
+     "2H_SHAPESHIFTER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436259227,
+    "cohort": "alliance:EG0",
+    "observed_players": 2,
+    "weapons": [
+     "2H_HALBERD_MORGANA",
+     "2H_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436259195,
+    "cohort": "alliance:B0LA",
+    "observed_players": 3,
+    "weapons": [
+     "2H_INFERNOSTAFF",
+     "MAIN_AXE",
+     "MAIN_CURSEDSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436258910,
+    "cohort": "alliance:3000",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALSWORD",
+     "MAIN_AXE"
+    ]
+   },
+   {
+    "battle_id": 1436258910,
+    "cohort": "guild:OVELISK",
+    "observed_players": 3,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_INFERNOSTAFF_MORGANA",
+     "MAIN_MACE_HELL"
+    ]
+   },
+   {
+    "battle_id": 1436258886,
+    "cohort": "alliance:EONE",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CLEAVER_HELL",
+     "MAIN_FROSTSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436258886,
+    "cohort": "alliance:QCHU",
+    "observed_players": 4,
+    "weapons": [
+     "2H_AXE",
+     "2H_NATURESTAFF",
+     "MAIN_HOLYSTAFF_MORGANA",
+     "MAIN_SWORD"
+    ]
+   },
+   {
+    "battle_id": 1436258375,
+    "cohort": "guild:Legio 5 Macedonica",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALAXE_KEEPER",
+     "2H_QUARTERSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436258338,
+    "cohort": "guild:harbardcpp",
+    "observed_players": 2,
+    "weapons": [
+     "2H_BOW_KEEPER",
+     "2H_DUALSWORD"
+    ]
+   },
+   {
+    "battle_id": 1436257951,
+    "cohort": "alliance:B0LA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DOUBLEBLADEDSTAFF",
+     "2H_KNUCKLES_CRYSTAL"
+    ]
+   },
+   {
+    "battle_id": 1436257951,
+    "cohort": "guild:Somos Picsis",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CLEAVER_HELL",
+     "2H_DUALAXE_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436257691,
+    "cohort": "alliance:LCDM",
+    "observed_players": 3,
+    "weapons": [
+     "2H_KNUCKLES_SET2",
+     "MAIN_HOLYSTAFF_AVALON",
+     "MAIN_SPEAR_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436257691,
+    "cohort": "alliance:S1GR",
+    "observed_players": 3,
+    "weapons": [
+     "2H_AXE",
+     "2H_CROSSBOW_CANNON_AVALON",
+     "MAIN_RAPIER_MORGANA"
+    ]
+   },
+   {
+    "battle_id": 1436257677,
+    "cohort": "alliance:TKCHE",
+    "observed_players": 4,
+    "weapons": [
+     "2H_AXE_AVALON",
+     "2H_BOW_AVALON",
+     "2H_LONGBOW",
+     "MAIN_SPEAR_KEEPER"
+    ]
+   },
+   {
+    "battle_id": 1436257677,
+    "cohort": "guild:Las Abejitas",
+    "observed_players": 3,
+    "weapons": [
+     "2H_DUALSICKLE_UNDEAD",
+     "2H_KNUCKLES_AVALON",
+     "MAIN_CURSEDSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436257561,
+    "cohort": "alliance:WMC",
+    "observed_players": 3,
+    "weapons": [
+     "2H_AXE",
+     "MAIN_1HCROSSBOW",
+     "MAIN_HOLYSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436257526,
+    "cohort": "alliance:XH",
+    "observed_players": 2,
+    "weapons": [
+     "2H_CLEAVER_HELL",
+     "2H_DUALSICKLE_UNDEAD"
+    ]
+   },
+   {
+    "battle_id": 1436257368,
+    "cohort": "alliance:LDBS",
+    "observed_players": 2,
+    "weapons": [
+     "2H_LONGBOW",
+     "MAIN_FIRESTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436257074,
+    "cohort": "alliance:S1GR",
+    "observed_players": 2,
+    "weapons": [
+     "2H_KNUCKLES_SET3",
+     "MAIN_SPEAR_LANCE_AVALON"
+    ]
+   },
+   {
+    "battle_id": 1436256961,
+    "cohort": "alliance:ROTA",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALAXE_KEEPER",
+     "2H_MACE"
+    ]
+   },
+   {
+    "battle_id": 1436256841,
+    "cohort": "alliance:LAOL",
+    "observed_players": 3,
+    "weapons": [
+     "2H_QUARTERSTAFF_AVALON",
+     "MAIN_AXE",
+     "MAIN_HOLYSTAFF"
+    ]
+   },
+   {
+    "battle_id": 1436256518,
+    "cohort": "alliance:2wHoP",
+    "observed_players": 2,
+    "weapons": [
+     "2H_DUALSCIMITAR_UNDEAD",
+     "2H_LONGBOW_UNDEAD"
+    ]
+   }
+  ]
+ },
+ "coverage": 0.996,
+ "generated_utc": "2026-08-22 15:14 UTC",
  "meta": {
   "large": {
    "battles": 40,
-   "players_attributed": 1344
+   "players_attributed": 1175
   },
   "mid": {
-   "battles": 42,
-   "players_attributed": 389
+   "battles": 57,
+   "players_attributed": 450
   },
   "small": {
-   "battles": 64,
-   "players_attributed": 402
+   "battles": 117,
+   "players_attributed": 486
   }
  },
- "players_with_swaps": 43,
+ "players_with_swaps": 18,
  "sampling_frame": {
   "axis": "fight_size",
   "buckets": {
@@ -2114,7 +6405,7 @@
   "coverage_is": "combatants, not lurkers",
   "source": "albionbb kill events (killer+victim)"
  },
- "semantics": "FIGHT-SIZE EQUIPMENT PREVALENCE. Buckets are total fight size (both sides). Party size, side size and selected abilities are UNKNOWN \u2014 kill events carry equipment only. Prevalence is not effectiveness. Display evidence only; never feeds scoring.",
+ "semantics": "FIGHT-SIZE EQUIPMENT PREVALENCE plus OBSERVED ORGANIZATION COHORTS. Buckets are total fight size (both sides). Party size, side size and selected abilities are UNKNOWN \u2014 kill events carry equipment only. Cohorts group actors ONLY by the Alliance/Guild identity the feed itself states; they are NOT parties or authoritative sides. Prevalence is not effectiveness; no win/loss dimension exists here. Display evidence only; never feeds scoring.",
  "server": "us",
  "unknown_keys_top": {}
 }

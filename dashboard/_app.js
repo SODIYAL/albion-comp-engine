@@ -1102,11 +1102,26 @@ function renderRecDetail(recs){
     return;
   }
   const top = recs[0], terms = explain(party, top.w).slice(0,4);
+  /* one-ahead residual gaps (PR #5): what stays thin AFTER this pick joins,
+     in the same resolved-loadout context the recommendation used */
+  const after = inPickContext(() => {
+    const next = party.concat([top.w]);
+    const combos = COMBOS_CUR.concat([top.combo === undefined ? null : top.combo]);
+    const sup = ENG.effectiveSupply(next, combos);
+    return ENG.weaknesses(next, 8, combos).filter(x => x.gap >= 0.5).slice(0, 3)
+      .map(x => ({...x, have: sup[x.cap] || 0, want: ENG.target(x.cap)}));
+  });
+  const afterHtml = `<div class="after-pick"><span class="ap-k">after this pick</span>${
+    after.length
+      ? after.map(x => `<span class="ap-gap" title="${x.have.toFixed(0)} / ${x.want.toFixed(1)} covered">${esc(capLabel(x.cap))}</span>`).join("")
+      : `<span class="ap-ok">core gaps covered</span>`}</div>`;
   $("rec-label").textContent = `Why ${WEAPONS[top.w].display_name}`;
   $("rec-slot").innerHTML = `
     <div class="rec">
       <div class="rec-body">
         <p class="why">${whySentence(party, top.w)}</p>
+        ${observedLine(top.w)}
+        ${afterHtml}
         <div><div class="sec-label" style="margin-bottom:8px">Alternatives — click to add instead</div>
           <div class="alts">${recs.slice(1).map(r => {
             const t0 = explain(party, r.w)[0];
@@ -1190,6 +1205,73 @@ function usageOf(w){
            players: u.m.players_attributed, battles: u.m.battles,
            inBattles: ((USAGE.buckets_battles || {})[u.key] || {})[w] || 0,
            label: u.label };
+}
+/* ---------------- observed organization cohorts (PR #5, 2026-08-22) ----
+   sample_battles.py groups actors ONLY when the kill feed states the same
+   Alliance/Guild identity; ambiguous players are excluded. Cohorts are NOT
+   parties, sides, or win-rate samples — the copy says "observed together",
+   never "teammates" or "successful". The page embeds only the anonymous
+   weapon baskets (build_dashboard strips org ids and battle ids). Display
+   evidence only; nothing here can touch a score. */
+function cohortContext(){
+  if (typeof USAGE === "undefined" || !USAGE.cohort_baskets) return null;
+  const key = ENG.sizeBucket();
+  const rows = (USAGE.cohort_baskets[key] || [])
+    .filter(ws => Array.isArray(ws) && ws.length >= 2);
+  if (rows.length < 8) return null;   /* too thin to quote */
+  return { key, rows, label: USAGE_BUCKET_LABEL[key] || key };
+}
+function cohortAffinity(){
+  const ctx = cohortContext();
+  if (!ctx || !party.length) return null;
+  const selected = [...new Set(party)];
+  const selectedSet = new Set(selected);
+  const N = ctx.rows.length;
+  const baskets = ctx.rows.map(ws => new Set(ws.filter(w => WEAPONS[w])));
+  const count = {};
+  baskets.forEach(s => s.forEach(w => { count[w] = (count[w] || 0) + 1; }));
+  /* a one-weapon party matches on 1 overlap; from two unique weapons on,
+     require >=2 so a match means the cohort echoed a PAIR you field */
+  const minOverlap = Math.min(2, selected.length);
+  const matched = {};
+  baskets.forEach(s => {
+    const overlap = selected.reduce((n, w) => n + (s.has(w) ? 1 : 0), 0);
+    if (overlap < minOverlap) return;
+    s.forEach(w => {
+      if (selectedSet.has(w)) return;
+      const m = matched[w] || (matched[w] = {cohorts: 0, overlapSum: 0,
+                                             liftSum: 0, liftN: 0});
+      m.cohorts++; m.overlapSum += overlap;
+    });
+  });
+  Object.keys(matched).forEach(w => {
+    /* popularity-corrected pair lift: P(a&w) / (P(a)P(w)) averaged over
+       the selected weapons — 1.0 = pairs no more than chance */
+    selected.forEach(a => {
+      if (!count[a] || !count[w]) return;
+      let both = 0;
+      baskets.forEach(s => { if (s.has(a) && s.has(w)) both++; });
+      if (!both) return;
+      matched[w].liftSum += both * N / (count[a] * count[w]);
+      matched[w].liftN++;
+    });
+    matched[w].lift = matched[w].liftN ? matched[w].liftSum / matched[w].liftN : 0;
+    matched[w].base = count[w] || 0;
+  });
+  const candidates = Object.entries(matched).map(([w, m]) => ({w, ...m}))
+    .filter(x => x.cohorts >= 2)
+    .sort((a, b) => b.cohorts - a.cohorts || b.lift - a.lift);
+  return { ctx, selected, N, candidates, minOverlap };
+}
+function observedLine(w){
+  const a = cohortAffinity();
+  if (!a) return "";
+  const o = a.candidates.find(x => x.w === w);
+  if (!o) return "";
+  const lift = o.lift >= 1.15 ? `${o.lift.toFixed(1)}× pair affinity` : "no strong pair lift";
+  return `<div class="obs-note"><span class="obs-k">observed killboard context · display only</span>
+    <b>${o.cohorts}</b> organization cohort${o.cohorts === 1 ? "" : "s"} also fielded ${nameOf(w)} alongside ${a.minOverlap === 1 ? "your weapon" : "at least 2 of your weapons"} · ${lift}
+    <small>same stated Alliance/Guild in one ${esc(a.ctx.label)} fight — not party membership, win rate, or a scoring input</small></div>`;
 }
 function usageLine(w){
   const u = usageOf(w);
@@ -1511,6 +1593,23 @@ function renderEvidence(cap){
 }
 function renderMetaStrip(){
   const sec = $("meta-sec");
+  /* contextual mode (PR #5): with cohort data and a party, the strip shows
+     what was OBSERVED WITH the selected weapons instead of raw popularity;
+     old samples and thin data fall back to the prevalence strip below */
+  const a = cohortAffinity();
+  if (a && a.candidates.length){
+    const rows = a.candidates.slice(0, 12);
+    $("meta-label").textContent =
+      `Observed with your weapons — ${a.ctx.label} fights (${a.N} organization cohorts; display only)`;
+    $("meta-strip").innerHTML = rows.map((r, i) => {
+      const aff = r.lift >= 1.15 ? `${r.lift.toFixed(1)}× affinity` : "baseline pairing";
+      return `<div class="meta-row meta-aff"><span class="rk">${String(i+1).padStart(2,"0")}</span>${icon(r.w, 20)}
+        <button class="nm-btn" data-detail="${r.w}">${nameOf(r.w)}</button>
+        <span class="pct">${r.cohorts} cohorts · ${aff}</span></div>`;
+    }).join("") + `<div class="ka-note">Matches need ${a.minOverlap === 1 ? "your weapon" : "≥2 of your weapons"} in the same observed Alliance/Guild cohort. Not party reconstruction or effectiveness data; never changes a score.</div>`;
+    sec.hidden = false;
+    return;
+  }
   const u = usageStats();
   if (!u){ sec.hidden = true; return; }
   /* usage keys are filtered against the dataset at build time too, but a
@@ -1520,7 +1619,7 @@ function renderMetaStrip(){
     .filter(([w]) => WEAPONS[w])
     .sort((a,b) => b[1] - a[1]).slice(0, 12);
   $("meta-label").textContent =
-    `Killboard equipment prevalence — ${u.label}-size fights (${u.m.battles} battles, ${u.m.players_attributed} observed combatants; fight size, not party size)`;
+    `Killboard equipment prevalence — ${u.label} fights (${u.m.battles} battles, ${u.m.players_attributed} observed combatants; fight size, not party size)`;
   $("meta-strip").innerHTML = rows.map(([w, n], i) =>
     `<div class="meta-row"><span class="rk">${String(i+1).padStart(2,"0")}</span>${icon(w, 20)}
       <button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>

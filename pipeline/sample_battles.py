@@ -44,6 +44,18 @@ independent samples. Battles and events are deduplicated by id.
 MainHand Type "T5_2H_SHAPESHIFTER_MORGANA@4" -> catalog key
 "2H_SHAPESHIFTER_MORGANA". Unknown keys are tallied for the coverage stat.
 
+OBSERVED ORGANIZATION COHORTS (2026-08-22, from PR #5). For display-only
+co-occurrence evidence, actors are ADDITIONALLY grouped when the kill feed
+itself states the same AllianceId/AllianceName (preferred) or GuildId/
+GuildName. These are organization cohorts, NOT parties and NOT
+authoritative sides: pair/partial-roster statistics may say "these weapons
+were observed together among members of the same named organization in one
+fight" — never that the players were in one party, that the organization
+won, or that the pairing caused anything. Unguilded/anonymous or
+ambiguous-identity players are excluded rather than guessed; a cohort
+needs >=2 observed players and >=2 distinct known weapons. All §E limits
+above still hold, and nothing here feeds scoring.
+
 Usage:  py -3 pipeline/sample_battles.py [--battles 200] [--min-players 6]
                                          [--server us]
 """
@@ -87,6 +99,21 @@ def weapon_key(mh):
     return TIER_RE.sub("", t.split("@")[0]) if t else None
 
 
+def cohort_key(actor):
+    """Organization identity as STATED by the feed; never infer a party or
+    a side. Alliance preferred (guilds change alliances mid-season; the
+    fight-time label is what the feed observed)."""
+    if not actor:
+        return None
+    aid = actor.get("AllianceId") or actor.get("AllianceName")
+    if aid:
+        return "alliance:" + str(aid)
+    gid = actor.get("GuildId") or actor.get("GuildName")
+    if gid:
+        return "guild:" + str(gid)
+    return None
+
+
 def battle_kills(api, battle_id):
     path = os.path.join(CACHE, f"{battle_id}.json")
     if os.path.exists(path):
@@ -116,6 +143,8 @@ def main():
     buckets = {b: {} for b in ("small", "mid", "large")}
     battles_with = {b: {} for b in buckets}          # battle-level aggregation
     meta = {b: {"battles": 0, "players_attributed": 0} for b in buckets}
+    cohorts = {b: [] for b in buckets}               # org co-occurrence (PR #5)
+    cohort_meta = {b: {"cohorts": 0, "players_observed": 0} for b in buckets}
     battles_index = []
     unknown, no_weapon, sampled, swaps = {}, 0, 0, 0
     seen_battles, seen_events = set(), set()
@@ -128,7 +157,8 @@ def main():
             print(f"  battle {bid} kills failed: {e}")
             return
         # per player, EVERY weapon they were seen on — a swap counts for each
-        # kit fielded, instead of whichever sighting arrived first (§E)
+        # kit fielded, instead of whichever sighting arrived first (§E) —
+        # plus the organization labels the feed itself stated for them
         per_player = {}
         for ev in events:
             eid = ev.get("EventId") or ev.get("Id")
@@ -137,14 +167,20 @@ def main():
                     continue              # event dedup across battle overlaps
                 seen_events.add(eid)
             for a in (ev.get("Killer"), ev.get("Victim")):
-                if not a:
+                if not a or a.get("Id") is None:
                     continue
-                wk = weapon_key((a.get("Equipment") or {}).get("MainHand"))
-                per_player.setdefault(a.get("Id"), set()).add(wk)
+                rec = per_player.setdefault(
+                    a.get("Id"), {"weapons": set(), "cohorts": set()})
+                rec["weapons"].add(
+                    weapon_key((a.get("Equipment") or {}).get("MainHand")))
+                ck = cohort_key(a)
+                if ck:
+                    rec["cohorts"].add(ck)
         bucket = bucket_of(fight_size)
         attributed = 0
         weapons_here = set()
-        for kits in per_player.values():
+        for rec in per_player.values():
+            kits = rec["weapons"]
             kits.discard(None)
             if not kits:
                 no_weapon += 1
@@ -160,6 +196,29 @@ def main():
                     unknown[wk] = unknown.get(wk, 0) + 1
         for wk in weapons_here:
             battles_with[bucket][wk] = battles_with[bucket].get(wk, 0) + 1
+        # Organization cohorts (PR #5): the safest same-group proxy the kill
+        # feed offers. A player whose organization label was ambiguous
+        # across observations is EXCLUDED rather than assigned to one.
+        org = {}
+        for rec in per_player.values():
+            valid = {w for w in rec["weapons"] if w in known}
+            if not valid or len(rec["cohorts"]) != 1:
+                continue
+            ck = next(iter(rec["cohorts"]))
+            g = org.setdefault(ck, {"players": 0, "weapons": set()})
+            g["players"] += 1
+            g["weapons"].update(valid)
+        for ck, g in sorted(org.items()):
+            if g["players"] < 2 or len(g["weapons"]) < 2:
+                continue
+            cohorts[bucket].append({
+                "battle_id": bid,
+                "cohort": ck,
+                "observed_players": g["players"],
+                "weapons": sorted(g["weapons"]),
+            })
+            cohort_meta[bucket]["cohorts"] += 1
+            cohort_meta[bucket]["players_observed"] += g["players"]
         meta[bucket]["battles"] += 1
         meta[bucket]["players_attributed"] += attributed
         battles_index.append({
@@ -170,6 +229,7 @@ def main():
             "side_size": None,                   # unknown — not reconstructed
             "start_time": start_time,
             "attributed": attributed,
+            "organization_cohorts": len(org),    # stated-identity groups only
         })
         sampled += 1
         if sampled % 20 == 0:
@@ -210,16 +270,26 @@ def main():
     total_unknown = sum(unknown.values())
     coverage = total_attr / max(1, total_attr + no_weapon + total_unknown)
     out = {
-        "semantics": ("FIGHT-SIZE EQUIPMENT PREVALENCE. Buckets are total "
-                      "fight size (both sides). Party size, side size and "
-                      "selected abilities are UNKNOWN — kill events carry "
-                      "equipment only. Prevalence is not effectiveness. "
+        "semantics": ("FIGHT-SIZE EQUIPMENT PREVALENCE plus OBSERVED "
+                      "ORGANIZATION COHORTS. Buckets are total fight size "
+                      "(both sides). Party size, side size and selected "
+                      "abilities are UNKNOWN — kill events carry equipment "
+                      "only. Cohorts group actors ONLY by the Alliance/Guild "
+                      "identity the feed itself states; they are NOT parties "
+                      "or authoritative sides. Prevalence is not "
+                      "effectiveness; no win/loss dimension exists here. "
                       "Display evidence only; never feeds scoring."),
         "sampling_frame": {"axis": "fight_size",
                            "buckets": {"small": "<12", "mid": "12-30",
                                        "large": ">30"},
                            "source": "albionbb kill events (killer+victim)",
                            "coverage_is": "combatants, not lurkers"},
+        "cohort_semantics": ("Same stated AllianceId/AllianceName, else "
+                             "GuildId/GuildName, within ONE battle; players "
+                             "with ambiguous identity excluded; minimum 2 "
+                             "observed players and 2 distinct known weapons. "
+                             "An organization-level co-occurrence proxy — "
+                             "never party reconstruction."),
         "abilities": "unknown",
         "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
         "server": args.server, "battles_sampled": sampled,
@@ -227,6 +297,8 @@ def main():
         "buckets_battles": battles_with,     # distinct fights containing the
                                              # weapon — battle-level confidence
         "meta": meta,
+        "cohorts": cohorts,                  # org co-occurrence baskets (PR #5)
+        "cohort_meta": cohort_meta,
         "battles": battles_index,            # raw per-battle observation index
         "players_with_swaps": swaps,
         "coverage": round(coverage, 3),

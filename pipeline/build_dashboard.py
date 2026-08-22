@@ -203,6 +203,15 @@ def main():
             usage["buckets"] = {b: {w: n for w, n in m.items()
                                     if w in data["weapons"]}
                                 for b, m in usage["buckets"].items()}
+        # Organization cohorts (PR #5): the page needs only the WEAPON
+        # BASKETS per bucket — organization identifiers and battle ids
+        # stay in out/weapon_usage_v2.json for audit, never in the page.
+        if isinstance(usage.get("cohorts"), dict):
+            usage["cohort_baskets"] = {
+                b: [[w for w in (c.get("weapons") or []) if w in data["weapons"]]
+                    for c in rows]
+                for b, rows in usage["cohorts"].items()}
+            usage.pop("cohorts", None)
 
     # Parity fixture: run the Python engine over the dashboard's seed party and
     # inline its output, so the client asserts against the real engine on every
