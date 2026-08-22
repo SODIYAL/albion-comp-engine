@@ -352,7 +352,9 @@ function whySentence(party, cand){
   const lead = terms[0], rest = terms.slice(1,3).map(t => prose(t.cap));
   const floorClause = (lead && floorHit(lead.cap, s[lead.cap] || 0))
     ? ` — and at size ${SIZE} that is below the hard floor, not merely suboptimal` : "";
-  return `${strong.length ? `Your party already covers ${strong.join(" and ")}` : "Your party is thin across the board"}, but has <em>${lead ? prose(lead.cap) : "gaps"}</em> at ${lead ? lead.before : 0} of ${lead ? target(lead.cap).toFixed(1) : "0"} units${floorClause}. ${nameOf(cand)} closes that${rest.length ? `, and adds ${rest.join(" and ")}` : ""}.`;
+  /* +…toFixed(1): kit-effectiveness scaling makes supply fractional —
+     without rounding this printed "at 7.730833333333333 of 7.9 units" */
+  return `${strong.length ? `Your party already covers ${strong.join(" and ")}` : "Your party is thin across the board"}, but has <em>${lead ? prose(lead.cap) : "gaps"}</em> at ${lead ? +lead.before.toFixed(1) : 0} of ${lead ? target(lead.cap).toFixed(1) : "0"} units${floorClause}. ${nameOf(cand)} closes that${rest.length ? `, and adds ${rest.join(" and ")}` : ""}.`;
 }
 
 /* ------------------------------------------------------- shareable state */
