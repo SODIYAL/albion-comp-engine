@@ -2,16 +2,19 @@
 /* Decision-first UX layer.
    CompEngine remains the authority. This file translates its existing
    floors, weaknesses, recommendation ordering and marginal terms into the
-   order a caller needs them: status -> biggest need -> next pick -> why ->
-   what is still missing. */
+   order a caller needs them, then adds two workflow helpers on top:
+   - a player weapon pool that feeds CompEngine.recommend(pool)
+   - a swap lab that compares one exact roster replacement at a time.
+   Neither feature changes scoring. */
 (function(){
+  const PLAYER_POOL = new Set();
+  let POOL_QUERY = "";
+  let SWAP_SLOT = 0;
+
   function statusModel(){
     if (!party.length) return {tone:"empty", label:"Start your comp", critical:0, weak:0, excess:0};
     const s = supply(party);
     let critical = 0, weak = 0, excess = 0;
-    /* Display-only triage thresholds — these classify, they never score.
-       "Weak" = under 65% of target on a capability the template weights
-       at 4+; revisit if template weights are retuned. */
     for (const cap of Object.keys(REQS())){
       const have = s[cap] || 0;
       const want = Math.max(.001, target(cap) || 0);
@@ -28,11 +31,8 @@
     if (!party.length) return [];
     const s = supply(party);
     const rows = weaknesses(party, 12).filter(x => x.gap >= .5).map(x => ({
-      ...x,
-      have:s[x.cap] || 0,
-      want:target(x.cap),
-      floor:floorHit(x.cap, s[x.cap] || 0),
-      ratio:(s[x.cap] || 0) / Math.max(.001, target(x.cap))
+      ...x, have:s[x.cap] || 0, want:target(x.cap),
+      floor:floorHit(x.cap, s[x.cap] || 0)
     }));
     rows.sort((a,b) => Number(b.floor)-Number(a.floor)
       || b.gap-a.gap || ENG.weight(b.cap)-ENG.weight(a.cap));
@@ -41,14 +41,134 @@
 
   function afterPickGaps(rec){
     const next = party.concat([rec.w]);
-    /* Existing members keep their actual resolved kits. The candidate keeps
-       the combo CompEngine selected for this recommendation. */
     const combos = COMBOS_CUR.concat([rec.combo === undefined ? null : rec.combo]);
     return inPickContext(() => {
       const sup = ENG.effectiveSupply(next, combos);
       return ENG.weaknesses(next, 8, combos).filter(x => x.gap >= .5).slice(0,3)
         .map(x => ({...x, have:sup[x.cap] || 0, want:ENG.target(x.cap)}));
     });
+  }
+
+  function poolKeys(){
+    return Array.from(PLAYER_POOL).filter(w => WEAPONS[w] && !WEAPONS[w].removed);
+  }
+
+  function playerPoolRecs(){
+    const keys = poolKeys();
+    if (!keys.length || party.length >= HARD_CAP) return [];
+    return inPickContext(() => ENG.recommend(party, keys.length, keys, COMBOS_CUR))
+      .map(r => ({w:r.weapon, score:r.score, combo:r.combo,
+                  dFit:r.d_fitness, dSyn:r.d_synergy}));
+  }
+
+  function poolSearchResults(){
+    const q = POOL_QUERY.trim().toLowerCase();
+    if (!q) return [];
+    return Object.keys(WEAPONS)
+      .filter(w => !WEAPONS[w].removed && !PLAYER_POOL.has(w))
+      .filter(w => (WEAPONS[w].display_name || w).toLowerCase().includes(q)
+                || w.toLowerCase().includes(q))
+      .sort((a,b) => (WEAPONS[a].display_name || a).localeCompare(WEAPONS[b].display_name || b))
+      .slice(0,8);
+  }
+
+  function slotRanking(i){
+    if (!party.length || i < 0 || i >= party.length) return null;
+    const cur = party[i];
+    const rest = party.slice(0,i).concat(party.slice(i+1));
+    const restCombos = COMBOS_CUR.slice(0,i).concat(COMBOS_CUR.slice(i+1));
+    let keys = poolKeys().filter(w => w !== cur);
+    if (!keys.length){
+      const review = ENG.swapReview(party, 5, null, COMBOS_CUR)[i];
+      return {cur, curScore:review.score,
+              rows:review.options.map(x => ({w:x.weapon, score:x.score, gain:x.gain}))};
+    }
+    const current = ENG.recommend(rest, 1, [cur], restCombos)[0];
+    const ranked = ENG.recommend(rest, keys.length, keys, restCombos);
+    return {cur, curScore:current ? current.score : 0,
+            rows:ranked.map(r => ({w:r.weapon, score:r.score,
+              gain:r.score-(current ? current.score : 0), combo:r.combo}))};
+  }
+
+  function swapImpact(i, cand){
+    if (!party[i] || !WEAPONS[cand]) return null;
+    const rest = party.slice(0,i).concat(party.slice(i+1));
+    const restCombos = COMBOS_CUR.slice(0,i).concat(COMBOS_CUR.slice(i+1));
+    const rr = ENG.recommend(rest, 1, [cand], restCombos)[0];
+    if (!rr) return null;
+    const np = party.slice(); np[i] = cand;
+    const nc = COMBOS_CUR.slice(); nc[i] = rr.combo;
+    const before = supply(party);
+    const after = ENG.effectiveSupply(np, nc);
+    const capRows = Object.keys(REQS()).map(cap => ({
+      cap, d:(after[cap]||0)-(before[cap]||0),
+      before:before[cap]||0, after:after[cap]||0
+    })).filter(x => Math.abs(x.d) > .05)
+      .sort((a,b) => Math.abs(b.d)*ENG.weight(b.cap)-Math.abs(a.d)*ENG.weight(a.cap));
+    const oldFit = fitness(party), newFit = ENG.fitness(np, nc);
+    const oldWeak = weaknesses(party, 1)[0];
+    const newWeak = ENG.weaknesses(np, 1, nc)[0];
+    return {newFit, oldFit, delta:newFit-oldFit,
+            caps:capRows.slice(0,5), oldWeak, newWeak};
+  }
+
+  function renderPlayerTools(){
+    const host = document.getElementById("decision-layer");
+    if (!host) return;
+    const keys = poolKeys();
+    const search = poolSearchResults();
+    const recs = playerPoolRecs();
+    const best = recs[0] || null;
+    if (SWAP_SLOT >= party.length) SWAP_SLOT = Math.max(0, party.length-1);
+    const swap = party.length ? slotRanking(SWAP_SLOT) : null;
+
+    const chips = keys.length ? keys.map(w =>
+      `<button class="dl-pool-chip" data-pool-remove="${w}" title="remove from this player's pool">${icon(w,24)}<span>${nameOf(w)}</span><b>×</b></button>`).join("")
+      : `<span class="dl-tool-note">Add the weapons this player can actually play.</span>`;
+
+    const searchRows = search.map(w =>
+      `<button class="dl-search-row" data-pool-add="${w}">${icon(w,28)}<span>${nameOf(w)}</span><small>${esc(roleLabel(roleHint(w)))}</small></button>`).join("");
+
+    const poolRank = best ? `<div class="dl-pool-best">
+      <span class="dl-kicker">Best from this player's pool</span>
+      <div>${icon(best.w,44)}<strong>${nameOf(best.w)}</strong><b>+${best.score.toFixed(2)}</b></div>
+      <p>${whySentence(party,best.w)}</p>
+      <button class="cb-add" data-add="${best.w}">Add ${nameOf(best.w)}</button>
+      ${recs.length>1 ? `<div class="dl-mini-rank">${recs.slice(1,5).map((r,i)=>`<span>${i+2}. ${nameOf(r.w)} <b>${r.score>=0?"+":""}${r.score.toFixed(2)}</b></span>`).join("")}</div>`:""}
+    </div>` : `<div class="dl-pool-best empty"><span class="dl-kicker">Best available</span><strong>Build this player's pool first</strong><p>Once you select their weapons, Comp Forge ranks only those choices for the next slot.</p></div>`;
+
+    let swapHtml = `<div class="dl-tool-note">Add at least one party member to compare replacements.</div>`;
+    if (swap){
+      const slotOpts = party.map((w,i)=>`<option value="${i}" ${i===SWAP_SLOT?"selected":""}>${i+1}. ${esc(WEAPONS[w].display_name||w)}</option>`).join("");
+      const rows = swap.rows.slice(0,5).map(r => {
+        const imp = swapImpact(SWAP_SLOT,r.w);
+        const fit = imp ? `${imp.delta>=0?"+":""}${imp.delta.toFixed(1)} fitness` : "";
+        const cap = imp && imp.caps[0] ? `${imp.caps[0].d>=0?"+":""}${imp.caps[0].d.toFixed(1)} ${esc(capLabel(imp.caps[0].cap))}` : "";
+        const weak = imp && imp.newWeak ? `next gap: ${esc(capLabel(imp.newWeak.cap))}` : "core gaps covered";
+        return `<div class="dl-swap-row">
+          <div class="dl-swap-main">${icon(r.w,38)}<div><strong>${nameOf(r.w)}</strong><span>${fit}${cap?` · ${cap}`:""}</span><small>${weak}</small></div></div>
+          <div class="dl-swap-actions"><b class="${r.gain>=0?"up":"down"}">${r.gain>=0?"+":""}${r.gain.toFixed(2)} slot score</b>
+          <button data-swapat="${SWAP_SLOT}" data-swapto="${r.w}">Apply swap</button></div>
+        </div>`;
+      }).join("");
+      swapHtml = `<label class="dl-slot-label">Compare slot <select id="dl-swap-slot">${slotOpts}</select></label>
+        <div class="dl-current">Current: ${icon(swap.cur,28)} <strong>${nameOf(swap.cur)}</strong><span>slot score ${swap.curScore.toFixed(2)}</span></div>
+        <div class="dl-swap-list">${rows || `<span class="dl-tool-note">No alternatives in the selected pool.</span>`}</div>`;
+    }
+
+    const tools = document.createElement("section");
+    tools.className = "dl-tools";
+    tools.innerHTML = `<div class="dl-tool-card">
+      <div class="dl-tool-head"><div><span class="dl-kicker">Player weapon pool</span><h3>What can this player play?</h3></div>${keys.length?`<button class="dl-clear-pool" id="dl-clear-pool">clear ${keys.length}</button>`:""}</div>
+      <div class="dl-pool-chips">${chips}</div>
+      <div class="dl-pool-search"><input id="dl-pool-search" value="${esc(POOL_QUERY)}" placeholder="Search weapons to add…" autocomplete="off">${searchRows?`<div class="dl-search-results">${searchRows}</div>`:""}</div>
+      ${poolRank}
+    </div>
+    <div class="dl-tool-card">
+      <div class="dl-tool-head"><div><span class="dl-kicker">Swap impact</span><h3>What changes if this slot swaps?</h3></div></div>
+      ${swapHtml}
+    </div>`;
+    host.appendChild(tools);
   }
 
   function renderDecisionLayer(){
@@ -64,48 +184,42 @@
     const pct = f === null ? 0 : Math.max(0, Math.min(100, f / Math.max(1,max) * 100));
 
     if (!party.length){
-      host.innerHTML = `<div class="dl-status dl-empty">
-        <div><span class="dl-kicker">Build a party</span><strong>What should your next player bring?</strong>
-        <p>Choose the content and playstyle, then add the weapons you already have. Comp Forge will diagnose the gaps before suggesting the next slot.</p></div>
-        <span class="dl-fit">—<small>fitness</small></span>
-      </div>`;
-      return;
+      host.innerHTML = `<div class="dl-status dl-empty"><div><span class="dl-kicker">Build a party</span><strong>What should your next player bring?</strong><p>Choose the content and playstyle, then add the weapons you already have.</p></div><span class="dl-fit">—<small>fitness</small></span></div>`;
+      renderPlayerTools(); return;
     }
-
     if (!top){
-      host.innerHTML = `<div class="dl-status ${state.tone} dl-empty"><div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small></div><span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span></div>`;
-      return;
+      host.innerHTML = `<div class="dl-status ${state.tone} dl-empty"><div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess?` · ${state.excess} overstacked`:""}</small></div><span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span></div>`;
+      renderPlayerTools(); return;
     }
-
-    const terms = explain(party, top.w).slice(0,3);
+    const terms = explain(party,top.w).slice(0,3);
     const remaining = afterPickGaps(top);
-    const needHtml = need ? `<div class="dl-need ${need.floor ? "critical" : ""}">
-      <span class="dl-kicker">Biggest need${need.floor ? " · hard floor" : ""}</span>
-      <strong>${esc(capLabel(need.cap))}</strong>
-      <span>${need.have.toFixed(0)} / ${need.want.toFixed(1)} covered${needs.length > 1 ? ` · ${needs.length - 1} other gap${needs.length > 2 ? "s" : ""}` : ""}</span>
-    </div>` : `<div class="dl-need ready"><span class="dl-kicker">Diagnosis</span><strong>Core requirements covered</strong><span>The next slot improves depth instead of repairing a load-bearing hole.</span></div>`;
-
-    const gains = terms.map(t => `<li><b>+${t.d.toFixed(1)}</b> ${esc(capLabel(t.cap))}<span>${t.before.toFixed(0)} → ${t.after.toFixed(0)} / ${t.target.toFixed(1)}</span></li>`).join("");
-    const remain = remaining.length ? `<div class="dl-remain"><span class="dl-kicker">Still weak after this pick</span>${remaining.map(x => `<span title="${x.have.toFixed(0)} / ${x.want.toFixed(1)}">${esc(capLabel(x.cap))}</span>`).join("")}</div>` : `<div class="dl-remain clear"><span class="dl-kicker">After this pick</span><span>Core gaps are covered.</span></div>`;
-
-    host.innerHTML = `
-      <div class="dl-status ${state.tone}">
-        <div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small></div>
-        <span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span>
-      </div>
-      ${needHtml}
-      <div class="dl-pick">
-        <div class="dl-pick-head"><span class="dl-kicker">Best next pick · slot ${Math.min(party.length + 1, HARD_CAP)}</span><span class="dl-score">+${top.score.toFixed(2)} comp score</span></div>
-        <div class="dl-weapon">${icon(top.w,72)}<div><button class="nm-btn" data-detail="${top.w}">${nameOf(top.w)}</button><span>${esc(roleOf(top.w, top.combo))}</span></div></div>
-        <p>${whySentence(party, top.w)}</p>
-        <ul class="dl-gains">${gains}</ul>
-        ${remain}
-        <button class="cb-add dl-add" data-add="${top.w}">Add ${nameOf(top.w)}</button>
-      </div>`;
+    const needHtml = need ? `<div class="dl-need ${need.floor?"critical":""}"><span class="dl-kicker">Biggest need${need.floor?" · hard floor":""}</span><strong>${esc(capLabel(need.cap))}</strong><span>${need.have.toFixed(0)} / ${need.want.toFixed(1)} covered${needs.length>1?` · ${needs.length-1} other gap${needs.length>2?"s":""}`:""}</span></div>` : `<div class="dl-need ready"><span class="dl-kicker">Diagnosis</span><strong>Core requirements covered</strong><span>The next slot improves depth instead of repairing a load-bearing hole.</span></div>`;
+    const gains = terms.map(t=>`<li><b>+${t.d.toFixed(1)}</b> ${esc(capLabel(t.cap))}<span>${t.before.toFixed(0)} → ${t.after.toFixed(0)} / ${t.target.toFixed(1)}</span></li>`).join("");
+    const remain = remaining.length ? `<div class="dl-remain"><span class="dl-kicker">Still weak after this pick</span>${remaining.map(x=>`<span>${esc(capLabel(x.cap))}</span>`).join("")}</div>` : `<div class="dl-remain clear"><span class="dl-kicker">After this pick</span><span>Core gaps are covered.</span></div>`;
+    host.innerHTML = `<div class="dl-status ${state.tone}"><div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess?` · ${state.excess} overstacked`:""}</small></div><span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span></div>${needHtml}<div class="dl-pick"><div class="dl-pick-head"><span class="dl-kicker">Best next pick · slot ${Math.min(party.length+1,HARD_CAP)}</span><span class="dl-score">+${top.score.toFixed(2)} comp score</span></div><div class="dl-weapon">${icon(top.w,72)}<div><button class="nm-btn" data-detail="${top.w}">${nameOf(top.w)}</button><span>${esc(roleOf(top.w,top.combo))}</span></div></div><p>${whySentence(party,top.w)}</p><ul class="dl-gains">${gains}</ul>${remain}<button class="cb-add dl-add" data-add="${top.w}">Add ${nameOf(top.w)}</button></div>`;
+    renderPlayerTools();
   }
 
-  /* _app.js owns state and rendering. Wrap its render function so every real
-     roster/content/style/loadout change refreshes this surface too. */
+  document.addEventListener("input", e => {
+    if (e.target && e.target.id === "dl-pool-search"){
+      POOL_QUERY = e.target.value;
+      renderDecisionLayer();
+      const el = document.getElementById("dl-pool-search"); if (el){ el.focus(); el.setSelectionRange(el.value.length,el.value.length); }
+    }
+  });
+  document.addEventListener("change", e => {
+    if (e.target && e.target.id === "dl-swap-slot"){
+      SWAP_SLOT = +e.target.value; renderDecisionLayer();
+    }
+  });
+  document.addEventListener("click", e => {
+    const add = e.target.closest && e.target.closest("[data-pool-add]");
+    if (add){ PLAYER_POOL.add(add.dataset.poolAdd); POOL_QUERY=""; renderDecisionLayer(); return; }
+    const rm = e.target.closest && e.target.closest("[data-pool-remove]");
+    if (rm){ PLAYER_POOL.delete(rm.dataset.poolRemove); renderDecisionLayer(); return; }
+    if (e.target.closest && e.target.closest("#dl-clear-pool")){ PLAYER_POOL.clear(); renderDecisionLayer(); }
+  });
+
   const baseRender = render;
   render = function(){ baseRender(); renderDecisionLayer(); };
   renderDecisionLayer();
