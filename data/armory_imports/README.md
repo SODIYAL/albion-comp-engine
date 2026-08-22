@@ -35,4 +35,8 @@ the strongest source family but still needs independent validation.
 
 Run `py -3 pipeline/build_builds.py` after adding a file; it validates
 equippability against the pinned game snapshot and quarantines anything
-inconsistent.
+inconsistent. The `activity` field is additionally checked against the
+game's own Armory taxonomy (`pipeline/out/armory_activities.json`, built
+by `parse_armory.py` from the pinned `armory.json` — 25 official
+activities with tags and session-qualification rules); a label the Armory
+does not have is flagged as a mis-transcription.

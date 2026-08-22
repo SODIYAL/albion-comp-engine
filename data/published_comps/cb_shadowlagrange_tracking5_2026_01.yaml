@@ -9,7 +9,7 @@ kind: published_comp
 id: cb_shadowlagrange_tracking5_2026_01
 source:
   kind: manual_link
-  family: albion_character_builder
+  family: character_builder:shadowlagrange
   author: ShadowLagrange (albiononline.com character builder)
   url: https://albiononline.com/characterbuilder/group-builds/view/210105
   record: >

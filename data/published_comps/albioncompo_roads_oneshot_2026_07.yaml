@@ -6,7 +6,7 @@ kind: published_comp
 id: albioncompo_roads_oneshot_2026_07
 source:
   kind: manual_link
-  family: albioncompo
+  family: albioncompo:a5c73a3cf
   author: anonymous albioncompo.com user (5c73a3cf)
   url: https://www.albioncompo.com/comp/HMEC3XFK
   record: >

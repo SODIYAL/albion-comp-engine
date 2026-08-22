@@ -1,0 +1,520 @@
+{
+ "_meta": {
+  "note": "Official in-game Armory vocabulary (activity taxonomy, tag groups, session qualification rules). The suggested BUILDS are server-computed and not in the dumps; planner_content_hints are PROVISIONAL owner guidance, never an automatic mapping.",
+  "snapshot_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4"
+ },
+ "activities": [
+  {
+   "desc": "Casual objective matches designed as an accessible entry point into team combat.",
+   "image": "Gui/Armory/ARMORY_ARENA",
+   "name": "Arena",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    "(>=5min)"
+   ],
+   "tags": [
+    "medium_group",
+    "instanced",
+    "pvp",
+    "competitive"
+   ],
+   "uniquename": "arena"
+  },
+  {
+   "desc": "Instanced PvE for 15-20 player groups of well-coordinated tanks, healers, and damage-dealers.",
+   "image": "Gui/Armory/ARMORY_AVALONIAN_DUNGEON",
+   "name": "Avalonian Dungeons",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    ">=5min AND mobskilled>=20"
+   ],
+   "tags": [
+    "large_group",
+    "instanced",
+    "dungeons",
+    "pve"
+   ],
+   "uniquename": "avaloniandungeons"
+  },
+  {
+   "desc": "A shifting network of hidden regions connected by unstable portals.",
+   "image": "Gui/Armory/ARMORY_AVALONIAN_ROADS",
+   "name": "Roads of Avalon",
+   "planner_content_hints": [
+    "roads"
+   ],
+   "session_qualifies_when": [
+    "(>=5min)"
+   ],
+   "tags": [
+    "solo",
+    "small_group",
+    "medium_group",
+    "instanced",
+    "pvp",
+    "pve"
+   ],
+   "uniquename": "avalonianroads"
+  },
+  {
+   "desc": "Scheduled objectives that draw large groups competing for loot and season rewards.",
+   "image": "Gui/Armory/ARMORY_CASTLE",
+   "name": "Castles",
+   "planner_content_hints": [
+    "castle"
+   ],
+   "session_qualifies_when": [
+    "(>=5min)"
+   ],
+   "tags": [
+    "large_group",
+    "army",
+    "openworld",
+    "pvp",
+    "conquering"
+   ],
+   "uniquename": "castle"
+  },
+  {
+   "desc": "Face corrupted heretics and demons while preparing for the invasion of another player in a 1v1 encounter.",
+   "image": "Gui/Armory/ARMORY_CORRUPTED_DUNGEONS",
+   "name": "Corrupted Dungeons",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    "successwin>=1 AND kills>=1"
+   ],
+   "tags": [
+    "solo",
+    "instanced",
+    "pve",
+    "pvp",
+    "competitive"
+   ],
+   "uniquename": "corrupteddungeons"
+  },
+  {
+   "desc": "Ranked battles focused on controlling capture points against another team.",
+   "image": "Gui/Armory/ARMORY_CRYSTAL_ARENA",
+   "name": "Crystal Arena",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    "(>=5min)"
+   ],
+   "tags": [
+    "medium_group",
+    "instanced",
+    "pvp",
+    "competitive"
+   ],
+   "uniquename": "crystalarena"
+  },
+  {
+   "desc": "Competitive large-scale battles focused on controlling capture points against another team.",
+   "image": "Gui/Armory/ARMORY_CRYSTAL_LEAGUE_20v20",
+   "name": "Crystal League (20v20)",
+   "planner_content_hints": [
+    "territory_defense",
+    "faction_war"
+   ],
+   "session_qualifies_when": [
+    "(>=5min)"
+   ],
+   "tags": [
+    "large_group",
+    "instanced",
+    "pvp",
+    "competitive"
+   ],
+   "uniquename": "crystalleague20v20"
+  },
+  {
+   "desc": "Competitive battles focused on controlling capture points against another team. Clear roles, strong coordination, and reliable teamplay matter most.",
+   "image": "Gui/Armory/ARMORY_CRYSTAL_LEAGUE_5v5",
+   "name": "Crystal League (5v5)",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    "(>=5min)"
+   ],
+   "tags": [
+    "medium_group",
+    "instanced",
+    "pvp",
+    "competitive"
+   ],
+   "uniquename": "crystalleague5v5"
+  },
+  {
+   "desc": "Fight for a royal city by capturing Outposts and battling opposing Factions across the map.",
+   "image": "Gui/Armory/ARMORY_FACTION_WARFARE",
+   "name": "Faction Warfare",
+   "planner_content_hints": [
+    "faction_war"
+   ],
+   "session_qualifies_when": [
+    "(>=5min)"
+   ],
+   "tags": [
+    "medium_group",
+    "large_group",
+    "army",
+    "openworld",
+    "pvp",
+    "conquering"
+   ],
+   "uniquename": "factionwarfare"
+  },
+  {
+   "desc": "Strategic strongholds tied to guild territory control.",
+   "image": "Gui/Armory/ARMORY_FORTIFICATION",
+   "name": "Territory Fortifications",
+   "planner_content_hints": [
+    "territory_defense"
+   ],
+   "session_qualifies_when": [
+    "(>=5min)"
+   ],
+   "tags": [
+    "large_group",
+    "army",
+    "openworld",
+    "pvp",
+    "conquering"
+   ],
+   "uniquename": "fortification"
+  },
+  {
+   "desc": "Harvest valuable resources across the world of Albion.",
+   "image": "Gui/Armory/ARMORY_GATHERING",
+   "name": "Gathering",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    ">=15min"
+   ],
+   "tags": [
+    "solo",
+    "openworld",
+    "gathering"
+   ],
+   "uniquename": "gathering"
+  },
+  {
+   "desc": "Instanced PvE for small parties of tank, healer, and damage-dealers.",
+   "image": "Gui/Armory/ARMORY_GROUP_DUNGEON",
+   "name": "Group Dungeons",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    ">=3min AND mobskilled>=20"
+   ],
+   "tags": [
+    "small_group",
+    "medium_group",
+    "instanced",
+    "dungeons",
+    "pve"
+   ],
+   "uniquename": "groupdungeons"
+  },
+  {
+   "desc": "Scaling PvE challenges where difficulty increases with each level.",
+   "image": "Gui/Armory/ARMORY_HARDCORE_EXPEDITION",
+   "name": "Hardcore Expeditions",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    ">=5min AND mobskilled>=20"
+   ],
+   "tags": [
+    "medium_group",
+    "instanced",
+    "dungeons",
+    "pve"
+   ],
+   "uniquename": "hardcoreexpeditions"
+  },
+  {
+   "desc": "An extraction-style dungeon where two-player teams compete for loot and attempt to escape safely.",
+   "image": "Gui/Armory/ARMORY_HELL_DUNGEONS",
+   "name": "The Depths (Duos)",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    ">=5min"
+   ],
+   "tags": [
+    "small_group",
+    "instanced",
+    "dungeons",
+    "pvp",
+    "pve"
+   ],
+   "uniquename": "helldungeons2v2"
+  },
+  {
+   "desc": "An extraction-style dungeon where teams compete with enemies and rivals for treasure.",
+   "image": "Gui/Armory/ARMORY_HELL_DUNGEONS",
+   "name": "The Depths (Trios)",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    "(>=5min)"
+   ],
+   "tags": [
+    "small_group",
+    "instanced",
+    "dungeons",
+    "pvp",
+    "pve"
+   ],
+   "uniquename": "helldungeons3v3"
+  },
+  {
+   "desc": "Two duos clash in a demon-ridden hellscape.",
+   "image": "Gui/Armory/ARMORY_HELLGATE_2v2",
+   "name": "Hellgates (2v2)",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    "successwin>=1 AND kills>=1"
+   ],
+   "tags": [
+    "small_group",
+    "instanced",
+    "pve",
+    "pvp",
+    "competitive"
+   ],
+   "uniquename": "hellgate2v2"
+  },
+  {
+   "desc": "Two teams of five clash in a demon-ridden hellscape.",
+   "image": "Gui/Armory/ARMORY_HELLGATE_5v5",
+   "name": "Hellgates (5v5)",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    "successwin>=1 AND kills>=1"
+   ],
+   "tags": [
+    "medium_group",
+    "instanced",
+    "pve",
+    "pvp",
+    "competitive"
+   ],
+   "uniquename": "hellgate5v5"
+  },
+  {
+   "desc": "Powerful enemies in the open world that attract multiple competing groups.",
+   "image": "Gui/Armory/ARMORY_HOME_BASE",
+   "name": "World Bosses",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    "(>=5min AND pvefamegained>=500000)"
+   ],
+   "tags": [
+    "medium_group",
+    "openworld",
+    "pve"
+   ],
+   "uniquename": "homebase"
+  },
+  {
+   "desc": "Unpredictable regions designed for solo and duo adventurers competing for rare resources and opportunities.",
+   "image": "Gui/Armory/ARMORY_MIST",
+   "name": "The Mists",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    ">=5min AND pvpfamegained>=25000",
+    ">=5min"
+   ],
+   "tags": [
+    "small_group",
+    "instanced",
+    "pve",
+    "pvp",
+    "gathering"
+   ],
+   "uniquename": "mists"
+  },
+  {
+   "desc": "Roam for fights, gank isolated players, and clash with other groups over contested hotspots.",
+   "image": "Gui/Armory/ARMORY_OPEN_WORLD_GROUP",
+   "name": "Open World (Group)",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    ">=5min AND pvpfamegained>=50000",
+    ">=10min AND pvefamegained>=100000"
+   ],
+   "tags": [
+    "medium_group",
+    "openworld",
+    "pve",
+    "pvp"
+   ],
+   "uniquename": "openworldgroup"
+  },
+  {
+   "desc": "Take bigger fights, contest high-value objectives, and overpower smaller groups through coordination and numbers.",
+   "image": "Gui/Armory/ARMORY_OPEN_WORLD_LARGE_GROUP",
+   "name": "Open World (Large Group)",
+   "planner_content_hints": [
+    "blackzone_roam"
+   ],
+   "session_qualifies_when": [
+    ">=5min AND pvpfamegained>=50000",
+    ">=5min AND pvefamegained>=100000"
+   ],
+   "tags": [
+    "large_group",
+    "openworld",
+    "pve",
+    "pvp"
+   ],
+   "uniquename": "openworldlargegroup"
+  },
+  {
+   "desc": "Roam alone to gank, gather resources, or take small fights.",
+   "image": "Gui/Armory/ARMORY_OPEN_WORLD_SOLO",
+   "name": "Open World (Solo)",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    ">=5min AND pvpfamegained>=25000",
+    ">=5min AND pvefamegained>=100000"
+   ],
+   "tags": [
+    "solo",
+    "small_group",
+    "openworld",
+    "pve",
+    "pvp"
+   ],
+   "uniquename": "openworldsolo"
+  },
+  {
+   "desc": "Instanced PvE for solo players.",
+   "image": "Gui/Armory/ARMORY_SOLO_DUNGEON",
+   "name": "Solo Dungeons",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    "(>=5min AND mobskilled>=20)"
+   ],
+   "tags": [
+    "solo",
+    "small_group",
+    "instanced",
+    "dungeons",
+    "pve"
+   ],
+   "uniquename": "solodungeons"
+  },
+  {
+   "desc": "Track and hunt rare creatures across the open world for valuable resources.",
+   "image": "Gui/Armory/ARMORY_TRACKING",
+   "name": "Tracking",
+   "planner_content_hints": [],
+   "session_qualifies_when": [
+    "successwin>=1"
+   ],
+   "tags": [
+    "solo",
+    "small_group",
+    "medium_group",
+    "openworld",
+    "pve",
+    "gathering"
+   ],
+   "uniquename": "tracking"
+  },
+  {
+   "desc": "Massive coordinated armies battle over territories and dominance.",
+   "image": "Gui/Armory/ARMORY_ZvZ",
+   "name": "Open World (ZvZ)",
+   "planner_content_hints": [
+    "castle",
+    "territory_defense",
+    "faction_war"
+   ],
+   "session_qualifies_when": [
+    "(>=5min)"
+   ],
+   "tags": [
+    "army",
+    "openworld",
+    "pve",
+    "pvp",
+    "conquering"
+   ],
+   "uniquename": "zvz"
+  }
+ ],
+ "settings": {
+  "confidence_floor": 0.2,
+  "popularity_weight": 0.4
+ },
+ "taggroups": {
+  "activitytype": [
+   {
+    "id": "pve",
+    "name": "PvE",
+    "short": "PvE"
+   },
+   {
+    "id": "pvp",
+    "name": "PvP",
+    "short": "PvP"
+   },
+   {
+    "id": "gathering",
+    "name": "Gathering",
+    "short": "Gathering"
+   },
+   {
+    "id": "openworld",
+    "name": "Open World",
+    "short": "Open World"
+   },
+   {
+    "id": "instanced",
+    "name": "Instanced",
+    "short": "Instanced"
+   },
+   {
+    "id": "dungeons",
+    "name": "Dungeon",
+    "short": "Dungeons"
+   },
+   {
+    "id": "competitive",
+    "name": "Competitive",
+    "short": "Competitive"
+   },
+   {
+    "id": "conquering",
+    "name": "Conquest",
+    "short": "Conquest"
+   }
+  ],
+  "groupsize": [
+   {
+    "id": "solo",
+    "name": "Solo",
+    "short": "Solo"
+   },
+   {
+    "id": "small_group",
+    "name": "Small Group (1-3)",
+    "short": "Small Group"
+   },
+   {
+    "id": "medium_group",
+    "name": "Medium Group (4-10)",
+    "short": "Medium Group"
+   },
+   {
+    "id": "large_group",
+    "name": "Large Group (11-20)",
+    "short": "Large Group"
+   },
+   {
+    "id": "army",
+    "name": "ZvZ (>20)",
+    "short": "ZvZ"
+   }
+  ]
+ }
+}

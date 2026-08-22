@@ -2,7 +2,7 @@
  "counts": {
   "approved": 70,
   "candidate": 152,
-  "canonical_defaults": 52,
+  "canonical_defaults": 54,
   "quarantined_fields": 2,
   "quarantined_records": 2,
   "records": 222
@@ -948,8 +948,8 @@
    "weapon": "2H_GLACIALSTAFF"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
+   "basis": "3 independent source families agree",
+   "build_id": "albioncompo_push_monkey_7_2026_05:comp:6",
    "content": "zvz_7man",
    "weapon": "2H_HOLYSTAFF_UNDEAD"
   },
@@ -984,8 +984,8 @@
    "weapon": "2H_SHAPESHIFTER_SET3"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_push_monkey_7_2026_05:comp:2",
    "content": "zvz_7man",
    "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
   },

@@ -5,7 +5,7 @@ kind: published_comp
 id: albioncompo_bist_roam15_2026_01
 source:
   kind: manual_link
-  family: albioncompo
+  family: albioncompo:bist
   author: Bist (albioncompo.com, legacy record)
   url: https://www.albioncompo.com/comp/2S582RBP
   record: >

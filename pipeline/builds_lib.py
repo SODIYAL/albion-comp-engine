@@ -346,7 +346,11 @@ def validate_comp_doc(doc, weapon_lines, templates=None):
 
 def independent_families(records):
     """The set of genuinely independent source families across records.
-    Copied builds from the same author/site share a family and count once."""
+    Families are PER-AUTHOR (owner ruling 2026-08-21): `site:author` for
+    ingested comps (albioncompo:bist, character_builder:clonepeek),
+    `caller:<name>` for caller sheets. Two authors on the same site count
+    as two families; copies of one author's build still count once.
+    MetaBattle stays one family — a wiki is one editorial voice."""
     return {(r.get("source") or {}).get("family")
             for r in records if (r.get("source") or {}).get("family")}
 

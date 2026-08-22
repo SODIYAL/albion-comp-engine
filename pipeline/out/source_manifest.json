@@ -3,6 +3,16 @@
   "render_service": "https://render.albiononline.com/v1 (icons only, not pinned)"
  },
  "derived": {
+  "armory_activities.json": {
+   "adapter": "parse_armory",
+   "adapter_version": "1",
+   "sha256": "6414bf3f570a5ab4eeecba685efc7936967265c38b37ba63973d776e5c6d6178",
+   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
+   "source_files": [
+    "armory.json",
+    "localization.json"
+   ]
+  },
   "gear_lines.json": {
    "adapter": "fetch_gear_lines",
    "adapter_version": "2",
@@ -75,8 +85,12 @@
   "commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
   "commit_timestamp": "2026-07-27T11:31:41Z",
   "environment": "live",
-  "fetch_timestamp_utc": "2026-08-20T16:59:37Z",
+  "fetch_timestamp_utc": "2026-08-21T23:55:48Z",
   "files": {
+   "armory.json": {
+    "bytes": 44520,
+    "sha256": "f947d5a79ab6c90f7b569317da562c40b399de1ee6d111fd01e9d82185e3fd99"
+   },
    "formatted/items.json": {
     "bytes": 23954341,
     "sha256": "226a22be333c949f47021130eadce697f921bf55ad3cf740e86e254b0d89163f"

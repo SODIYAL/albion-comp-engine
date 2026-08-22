@@ -33,3 +33,8 @@ ao-bin-dumps:
     - localization.json
     - formatted/items.json
     - formatted/items.txt
+    # In-game Armory (Radiant Wilds) system config: activity taxonomy, tag
+    # groups, dataset requirements. The suggested BUILDS themselves are
+    # server-computed and never in the dumps — this file is the official
+    # vocabulary they hang on (parse_armory.py; owner 2026-08-21).
+    - armory.json

@@ -9,7 +9,7 @@ kind: published_comp
 id: cb_clonepeek_zvz20_2026_03
 source:
   kind: manual_link
-  family: albion_character_builder
+  family: character_builder:clonepeek
   author: clonepeek (albiononline.com character builder)
   url: https://albiononline.com/characterbuilder/group-builds/view/211312
   record: >
