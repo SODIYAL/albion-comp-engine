@@ -46,5 +46,64 @@
 .dl-alt-nm{flex:1; min-width:0; font-size:12.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .dl-alt-sc{font-family:var(--mono); font-size:11px; color:var(--brass); font-weight:600; flex:none}
 .dl-alt-rz{font-family:var(--mono); font-size:9.5px; color:var(--ink-3); flex:none}
+/* Caller tools (PR #6): player pool + swap lab. Folded shut by default —
+   the hero view keeps the party dock above the fold (standing owner rule);
+   the workflows are one click away, and opening is remembered per session. */
+.dl-tools-fold{grid-column:1/-1;margin-top:2px}
+.dl-tools-fold summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;
+  padding:9px 14px;background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));
+  border:1px solid var(--rule);border-radius:12px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.dl-tools-fold summary::-webkit-details-marker{display:none}
+.dl-tools-fold summary::before{content:"\25B8";color:var(--brass);font-size:11px}
+.dl-tools-fold[open] summary::before{content:"\25BE"}
+.dl-tools-fold summary:hover{border-color:rgba(255,201,58,.45);color:var(--ink-2)}
+.dl-tools-fold summary .cnt{margin-left:auto;color:var(--brass);letter-spacing:0;text-transform:none}
+.dl-tools{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-top:10px}
+.dl-tool-card{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);min-width:0}
+.dl-tool-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.dl-tool-head h3{font-family:var(--serif);font-size:20px;margin:3px 0 0}
+.dl-clear-pool{background:none;border:1px solid var(--rule);color:var(--ink-3);border-radius:8px;padding:5px 8px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.08em}
+.dl-clear-pool:hover{border-color:var(--brass);color:var(--brass)}
+.dl-pool-chips{display:flex;gap:6px;flex-wrap:wrap;min-height:34px;align-items:center}
+.dl-pool-chip{display:flex;align-items:center;gap:7px;background:var(--sunk);border:1px solid var(--rule);color:var(--ink-2);border-radius:9px;padding:4px 7px 4px 4px;font-size:11px}
+.dl-pool-chip:hover{border-color:rgba(255,201,58,.45)}
+.dl-pool-chip b{color:var(--ink-3);font-weight:400}.dl-pool-chip .icon{border-radius:6px}
+.dl-pool-search{position:relative;margin:10px 0}
+.dl-pool-search input{width:100%;box-sizing:border-box;background:var(--sunk);border:1px solid var(--rule);color:var(--ink);border-radius:10px;padding:10px 11px;font-size:12px;outline:none}
+.dl-pool-search input:focus{border-color:var(--brass-deep);box-shadow:0 0 0 2px rgba(224,166,61,.08)}
+.dl-search-results{position:absolute;z-index:8;left:0;right:0;top:calc(100% + 5px);background:var(--panel-hi);border:1px solid var(--rule);border-radius:10px;box-shadow:var(--shadow);padding:5px;max-height:250px;overflow:auto}
+.dl-search-row{width:100%;display:grid;grid-template-columns:28px 1fr auto;gap:9px;align-items:center;text-align:left;background:none;border:0;color:var(--ink-2);padding:7px;border-radius:7px}
+.dl-search-row:hover{background:var(--surface-2);color:var(--ink)}
+.dl-search-row small{font-family:var(--mono);font-size:9px;color:var(--ink-3)}
+.dl-pool-best{margin-top:12px;border-top:1px solid var(--rule);padding-top:12px}
+/* the hero row gets its own class — a bare `>div` selector would out-rank
+   .dl-mini-rank and squeeze it into the 44px icon column (the PR masked
+   exactly this with !important) */
+.dl-pool-hero{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;margin-top:7px}
+.dl-pool-best strong{font-family:var(--serif);font-size:19px}
+.dl-pool-hero>b{font-family:var(--mono);font-size:12px;color:var(--brass)}
+.dl-pool-best p{font-size:12px;line-height:1.5;color:var(--ink-2);margin:8px 0}
+.dl-pool-best>.cb-add{width:100%;margin-top:4px}
+.dl-pool-best.empty strong{display:block;margin-top:6px}
+.dl-mini-rank{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:8px}
+.dl-mini-rank span{font-family:var(--mono);font-size:9.5px;color:var(--ink-3);background:var(--sunk);padding:5px 7px;border-radius:6px}
+.dl-mini-rank b{float:right;color:var(--ink-2)}
+.dl-tool-note{font-size:11px;color:var(--ink-3)}
+.dl-slot-label{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--ink-2);font-size:11px}
+.dl-slot-label select{max-width:65%;background:var(--sunk);border:1px solid var(--rule);color:var(--ink);border-radius:8px;padding:7px 9px}
+.dl-current{display:flex;align-items:center;gap:8px;margin:10px 0;padding:8px 9px;background:var(--sunk);border-radius:9px;font-size:11px}
+.dl-current span{margin-left:auto;color:var(--ink-3);font-family:var(--mono);font-size:9.5px}
+.dl-swap-list{display:flex;flex-direction:column;gap:6px}
+.dl-swap-row{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--rule);border-radius:10px;padding:8px 9px}
+.dl-swap-main{display:flex;align-items:center;gap:9px;min-width:0}.dl-swap-main>div{min-width:0}
+.dl-swap-main strong{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dl-swap-main span,.dl-swap-main small{display:block;font-family:var(--mono);font-size:9px;color:var(--ink-3);margin-top:2px}
+.dl-swap-actions{text-align:right;flex:none}
+.dl-swap-actions>b{display:block;font-family:var(--mono);font-size:9.5px;margin-bottom:4px}
+.dl-swap-actions>b.up{color:var(--ok-bright)}.dl-swap-actions>b.down{color:var(--gap)}
+.dl-swap-actions button{background:transparent;border:1px solid var(--rule);color:var(--ink-2);border-radius:7px;padding:5px 7px;font-size:9.5px}
+.dl-swap-actions button:hover{border-color:var(--brass);color:var(--brass)}
 @media(max-width:1250px){.decision-layer{grid-template-columns:1fr 1fr}.dl-pick{grid-column:1/-1}}
-@media(max-width:720px){.decision-layer{grid-template-columns:1fr}.dl-pick{grid-column:auto}.dl-gains{grid-template-columns:1fr}.dl-status strong,.dl-need strong{font-size:18px}.dl-empty{display:block}.wheelstage{gap:20px}}
+@media(max-width:900px){.dl-tools{grid-template-columns:1fr}}
+@media(max-width:720px){.decision-layer{grid-template-columns:1fr}.dl-pick{grid-column:auto}.dl-gains{grid-template-columns:1fr}.dl-status strong,.dl-need strong{font-size:18px}.dl-empty{display:block}.wheelstage{gap:20px}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
