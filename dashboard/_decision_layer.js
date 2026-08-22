@@ -9,6 +9,9 @@
     if (!party.length) return {tone:"empty", label:"Start your comp", critical:0, weak:0, excess:0};
     const s = supply(party);
     let critical = 0, weak = 0, excess = 0;
+    /* Display-only triage thresholds — these classify, they never score.
+       "Weak" = under 65% of target on a capability the template weights
+       at 4+; revisit if template weights are retuned. */
     for (const cap of Object.keys(REQS())){
       const have = s[cap] || 0;
       const want = Math.max(.001, target(cap) || 0);
