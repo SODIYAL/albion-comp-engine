@@ -16,11 +16,35 @@
 .dl-add{width:100%;margin-top:12px}
 .dl-empty{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px}.dl-empty p{margin:4px 0 0;color:var(--ink-2);font-size:12.5px}
 /* The old right flank duplicated the exact questions answered above. Keep its
-   underlying renderers alive, but remove that duplicate surface on this pass. */
-.ws-right{display:none!important}
-.wheelstage{grid-template-columns:minmax(196px,220px) minmax(0,1fr)!important;gap:30px}
-.ws-party,.ws-center{grid-column:auto!important;grid-row:auto!important;order:initial!important}
+   underlying renderers alive, but remove that duplicate surface on this pass.
+   Reconciled 2026-08-22: no !important, and the wheelstage follows the
+   shell's own breakpoint system (1560/1250/960/640) — this sheet is
+   injected LAST, so equal-specificity overrides win by order. Forge
+   honesty warnings and the alternatives were rehomed (warn-slot above the
+   stage; runners-up inside the pick card), never hidden. */
+.ws-right{display:none}
+.wheelstage{grid-template-columns:minmax(196px,220px) minmax(0,1fr)}
+@media (max-width:1560px){
+  .wheelstage{grid-template-columns:1fr}
+  .ws-party{grid-column:auto; grid-row:auto}
+  .ws-center{grid-column:auto; grid-row:auto}
+  /* the collapsed-rail 3-column restore would leave an empty third track
+     with the flank hidden — two columns there too */
+  .shell[data-rail="min"] .wheelstage{grid-template-columns:minmax(196px,220px) minmax(0,1fr)}
+  .shell[data-rail="min"] .ws-party{grid-column:auto; grid-row:auto}
+  .shell[data-rail="min"] .ws-center{grid-column:auto; grid-row:auto}
+}
 /* Deep diagnostics remain below the hero, but their heading says what they are. */
 #groups{margin-top:-4px}
-@media(max-width:1250px){.decision-layer{grid-template-columns:1fr 1fr}.dl-pick{grid-column:1/-1}.wheelstage{grid-template-columns:1fr!important}.ws-party{order:1!important}.ws-center{order:2!important}}
+/* runners-up inside the pick card — the flank's click-to-add alternatives, rehomed */
+.dl-alts{margin-top:10px; display:flex; flex-direction:column; gap:5px}
+.dl-alt{display:flex; align-items:center; gap:9px; width:100%; text-align:left;
+  padding:7px 10px; background:transparent; border:1px solid var(--rule); border-radius:10px;
+  transition:border-color .15s var(--ease), background .15s var(--ease)}
+.dl-alt:hover{border-color:rgba(255,201,58,.5); background:var(--surface-2)}
+.dl-alt .icon{flex:none}
+.dl-alt-nm{flex:1; min-width:0; font-size:12.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.dl-alt-sc{font-family:var(--mono); font-size:11px; color:var(--brass); font-weight:600; flex:none}
+.dl-alt-rz{font-family:var(--mono); font-size:9.5px; color:var(--ink-3); flex:none}
+@media(max-width:1250px){.decision-layer{grid-template-columns:1fr 1fr}.dl-pick{grid-column:1/-1}}
 @media(max-width:720px){.decision-layer{grid-template-columns:1fr}.dl-pick{grid-column:auto}.dl-gains{grid-template-columns:1fr}.dl-status strong,.dl-need strong{font-size:18px}.dl-empty{display:block}.wheelstage{gap:20px}}

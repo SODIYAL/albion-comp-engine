@@ -87,6 +87,21 @@
 
     const gains = terms.map(t => `<li><b>+${t.d.toFixed(1)}</b> ${esc(capLabel(t.cap))}<span>${t.before.toFixed(0)} → ${t.after.toFixed(0)} / ${t.target.toFixed(1)}</span></li>`).join("");
     const remain = remaining.length ? `<div class="dl-remain"><span class="dl-kicker">Still weak after this pick</span>${remaining.map(x => `<span title="${x.have.toFixed(0)} / ${x.want.toFixed(1)}">${esc(capLabel(x.cap))}</span>`).join("")}</div>` : `<div class="dl-remain clear"><span class="dl-kicker">After this pick</span><span>Core gaps are covered.</span></div>`;
+    /* observed killboard context (PR #5 integration): _app.js owns the
+       cohort math; the note appears only when cohorts echo this pick */
+    const observed = (typeof observedLine === "function") ? observedLine(top.w) : "";
+    /* alternatives, rehomed (2026-08-22): the hidden flank carried the
+       click-to-add alternatives — a single take-it-or-leave-it pick is
+       not a recommendation surface, so the runners-up live here now */
+    const alts = (recs || []).slice(1, 4);
+    const altsHtml = alts.length ? `<div class="dl-alts"><span class="dl-kicker">instead — click to add</span>${
+      alts.map(r => {
+        const t0 = explain(party, r.w)[0];
+        return `<button class="dl-alt" data-add="${r.w}">${icon(r.w, 24)}
+          <span class="dl-alt-nm">${nameOf(r.w)}</span>
+          <span class="dl-alt-rz">${t0 ? `+${t0.d.toFixed(1)} ${esc(capLabel(t0.cap))}` : ""}</span>
+          <span class="dl-alt-sc">${r.score.toFixed(2)}</span></button>`;
+      }).join("")}</div>` : "";
 
     host.innerHTML = `
       <div class="dl-status ${state.tone}">
@@ -99,8 +114,10 @@
         <div class="dl-weapon">${icon(top.w,72)}<div><button class="nm-btn" data-detail="${top.w}">${nameOf(top.w)}</button><span>${esc(roleOf(top.w, top.combo))}</span></div></div>
         <p>${whySentence(party, top.w)}</p>
         <ul class="dl-gains">${gains}</ul>
+        ${observed}
         ${remain}
         <button class="cb-add dl-add" data-add="${top.w}">Add ${nameOf(top.w)}</button>
+        ${altsHtml}
       </div>`;
   }
 

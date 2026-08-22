@@ -1000,6 +1000,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 }
 .add:hover{filter:brightness(1.07)}
 
+#warn-slot:empty{display:none}  /* no phantom flex-gap slot when quiet */
 .warn{
   background:var(--gap-wash); border:1px solid rgba(255,84,112,.35); border-radius:14px;
   padding:14px 16px; display:flex; gap:12px; align-items:flex-start;
@@ -1379,6 +1380,12 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   </aside>
 
   <main class="main">
+    <!-- Forge honesty reports + lookahead warnings: full-width and never
+         hidden (rehomed from the analysis flank 2026-08-22 — the decision
+         layer hides that flank, and infeasible / saturated / constraint-held
+         must stay SAID, never silently absorbed). Empty when quiet. -->
+    <div id="warn-slot"></div>
+
     <!-- The forge wheel stage: analysis flanks left, the wheel centers,
          reasoning flanks right. The wheel replaces the old rail picker. -->
     <section class="wheelstage">
@@ -1422,7 +1429,6 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
         </div>
         <div class="sec-label">Biggest weaknesses</div>
         <div class="weak-list" id="weaknesses"></div>
-        <div id="warn-slot"></div>
         <div class="sec-label" id="rec-label">Why this pick</div>
         <div id="rec-slot"></div>
       </div>
