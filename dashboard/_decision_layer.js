@@ -172,8 +172,14 @@
         <div class="dl-swap-list">${rows || `<span class="dl-tool-note">Nothing in the pool beats keeping this slot as-is${keys.length ? "" : " — no better options at this content and size"}.</span>`}</div>`;
     }
 
+    /* the fold lives AFTER the wheel stage in the DOM: on the hero grid it
+       auto-places below the party strip (keeping the one-screen budget),
+       and on stacked layouts it reads as the section after the stage */
+    const old = document.getElementById("dl-tools-fold");
+    if (old) old.remove();
     const fold = document.createElement("details");
     fold.className = "dl-tools-fold";
+    fold.id = "dl-tools-fold";
     fold.dataset.toolsFold = "1";
     if (TOOLS_OPEN) fold.open = true;
     fold.innerHTML = `<summary>Caller tools — player pool · swap impact${keys.length ? `<span class="cnt">${keys.length} in pool</span>` : ""}</summary>
@@ -187,7 +193,8 @@
       <div class="dl-tool-head"><div><span class="dl-kicker">Swap impact</span><h3>What changes if this slot swaps?</h3></div></div>
       ${swapHtml}
     </div></div>`;
-    host.appendChild(fold);
+    const stage = document.querySelector(".wheelstage");
+    if (stage) stage.after(fold); else host.appendChild(fold);
   }
 
   function renderDecisionLayer(){
@@ -220,29 +227,23 @@
 
     const terms = explain(party, top.w).slice(0,3);
     const remaining = afterPickGaps(top);
-    /* the rail's need card lists the runner-up gaps (or, when clean, the
-       strongest covered lines) so its height carries information instead
-       of stretched empty panel (owner 2026-08-22) */
-    const more = needs.slice(1, 5);
-    const moreHtml = more.length ? `<div class="dl-need-more"><span class="dl-kicker">also thin</span>${
-      more.map(x => `<span class="dl-nm-row${x.floor ? " floor" : ""}"><i>${esc(capLabel(x.cap))}</i><b>${+x.have.toFixed(1)} / ${x.want.toFixed(1)}</b></span>`).join("")}${
-      needs.length > 5 ? `<span class="dl-nm-rest">+${needs.length - 5} more in the board below</span>` : ""}</div>` : "";
-    let coveredHtml = "";
-    if (!need){
-      const sup = supply(party);
-      const covered = Object.keys(REQS()).filter(c => (target(c) || 0) > 0)
-        .map(c => ({cap:c, have:sup[c] || 0, want:target(c)}))
-        .filter(x => x.have / Math.max(.001, x.want) >= 1)
-        .sort((a,b) => ENG.weight(b.cap) - ENG.weight(a.cap)).slice(0, 4);
-      coveredHtml = covered.length ? `<div class="dl-need-more"><span class="dl-kicker">holding strong</span>${
-        covered.map(x => `<span class="dl-nm-row ok"><i>${esc(capLabel(x.cap))}</i><b>${+x.have.toFixed(1)} / ${x.want.toFixed(1)}</b></span>`).join("")}</div>` : "";
-    }
-    const needHtml = need ? `<div class="dl-need ${need.floor ? "critical" : ""}">
-      <span class="dl-kicker">Biggest need${need.floor ? " · hard floor" : ""}</span>
-      <strong>${esc(capLabel(need.cap))}</strong>
-      <span class="dl-nd-sub">${+need.have.toFixed(1)} / ${need.want.toFixed(1)} covered</span>
-      ${moreHtml}
-    </div>` : `<div class="dl-need ready"><span class="dl-kicker">Diagnosis</span><strong>Core requirements covered</strong><span class="dl-nd-sub">The next slot improves depth instead of repairing a load-bearing hole.</span>${coveredHtml}</div>`;
+    /* need + pick are ONE card (owner 2026-08-22): the biggest need is the
+       question, the pick is the answer — the need renders as the card's
+       header line, runner-up gaps as inline chips. The reclaimed column
+       goes to the wheel. */
+    const alsoThin = needs.slice(1, 4);
+    const needline = need ? `<div class="dl-needline${need.floor ? " critical" : ""}">
+      <div class="dl-nl-main"><span class="dl-kicker">Biggest need${need.floor ? " · hard floor" : ""}</span>
+        <strong>${esc(capLabel(need.cap))}</strong>
+        <span class="dl-nd-sub">${+need.have.toFixed(1)} / ${need.want.toFixed(1)} covered</span></div>
+      ${alsoThin.length ? `<div class="dl-nd-chips"><span class="dl-kicker">also thin</span>${
+        alsoThin.map(x => `<span title="${+x.have.toFixed(1)} / ${x.want.toFixed(1)} covered">${esc(capLabel(x.cap))}</span>`).join("")}${
+        needs.length > 4 ? `<em>+${needs.length - 4} more</em>` : ""}</div>` : ""}
+    </div>` : `<div class="dl-needline ready">
+      <div class="dl-nl-main"><span class="dl-kicker">Diagnosis</span>
+        <strong>Core requirements covered</strong>
+        <span class="dl-nd-sub">The next slot improves depth instead of repairing a load-bearing hole.</span></div>
+    </div>`;
 
     const gains = terms.map(t => `<li><b>+${t.d.toFixed(1)}</b> ${esc(capLabel(t.cap))}<span>${t.before.toFixed(0)} → ${t.after.toFixed(0)} / ${t.target.toFixed(1)}</span></li>`).join("");
     const remain = remaining.length ? `<div class="dl-remain"><span class="dl-kicker">Still weak after this pick</span>${remaining.map(x => `<span title="${x.have.toFixed(0)} / ${x.want.toFixed(1)}">${esc(capLabel(x.cap))}</span>`).join("")}</div>` : `<div class="dl-remain clear"><span class="dl-kicker">After this pick</span><span>Core gaps are covered.</span></div>`;
@@ -253,22 +254,21 @@
        click-to-add alternatives — a single take-it-or-leave-it pick is
        not a recommendation surface, so the runners-up live here now */
     const alts = (recs || []).slice(1, 4);
-    const altsHtml = alts.length ? `<div class="dl-alts"><span class="dl-kicker">instead — click to add</span>${
+    const altsHtml = alts.length ? `<div class="dl-alts"><span class="dl-kicker">instead — click to add</span><div class="dl-alt-row">${
       alts.map(r => {
         const t0 = explain(party, r.w)[0];
-        return `<button class="dl-alt" data-add="${r.w}">${icon(r.w, 24)}
+        return `<button class="dl-alt" data-add="${r.w}" title="${t0 ? `+${t0.d.toFixed(1)} ${esc(capLabel(t0.cap))} — ` : ""}click to add">${icon(r.w, 24)}
           <span class="dl-alt-nm">${nameOf(r.w)}</span>
-          <span class="dl-alt-rz">${t0 ? `+${t0.d.toFixed(1)} ${esc(capLabel(t0.cap))}` : ""}</span>
           <span class="dl-alt-sc">${r.score.toFixed(2)}</span></button>`;
-      }).join("")}</div>` : "";
+      }).join("")}</div></div>` : "";
 
     host.innerHTML = `
       <div class="dl-status ${state.tone}">
         <div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small></div>
         <span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span>
       </div>
-      ${needHtml}
       <div class="dl-pick">
+        ${needline}
         <div class="dl-pick-head"><span class="dl-kicker">Best next pick · slot ${Math.min(party.length + 1, HARD_CAP)}</span><span class="dl-score">+${top.score.toFixed(2)} comp score</span></div>
         <div class="dl-weapon">${icon(top.w,72)}<div><button class="nm-btn" data-detail="${top.w}">${nameOf(top.w)}</button><span>${esc(roleOf(top.w, top.combo))}</span></div></div>
         <p>${whySentence(party, top.w)}</p>

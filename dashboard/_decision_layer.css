@@ -1,25 +1,26 @@
 /* Decision-first surface: diagnosis and next action lead; the wheel becomes exploration.
-   Status + need stack in a slim left rail; the pick card owns the right
-   (owner 2026-08-22: the old 3-across row stretched the two small cards to
-   the pick card's height — mostly empty panel). */
-.decision-layer{display:grid;grid-template-columns:minmax(230px,.9fr) minmax(360px,2.1fr);grid-template-rows:auto 1fr;gap:14px;align-items:stretch;margin:0 0 6px}
-.dl-status{grid-column:1;grid-row:1}
-.dl-need{grid-column:1;grid-row:2}
-.dl-pick{grid-column:2;grid-row:1/3}
+   One column (owner 2026-08-22): status compact on top, then the combined
+   need→pick card. The layer shares the hero band with the wheel — see the
+   .main hero grid below — and the party runs across the bottom. */
+.decision-layer{display:grid;grid-template-columns:1fr;gap:14px;align-content:start;margin:0}
 .dl-status,.dl-need,.dl-pick{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
 .dl-status{display:flex;justify-content:space-between;gap:18px;align-items:center;border-top:2px solid var(--amber)}
 .dl-status.critical{border-top-color:var(--gap)}.dl-status.warning{border-top-color:var(--amber)}.dl-status.ready{border-top-color:var(--ok-bright)}
 .dl-status strong,.dl-need strong{display:block;font-family:var(--serif);font-size:21px;line-height:1.15;margin:4px 0}
 .dl-status small{color:var(--ink-3);font-family:var(--mono);font-size:10px}.dl-fit{font-family:var(--mono);font-size:25px;font-weight:700;white-space:nowrap}.dl-fit small{display:block;text-align:right;text-transform:uppercase;letter-spacing:.12em}
 .dl-kicker{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
-.dl-need{border-left:3px solid var(--amber);display:flex;flex-direction:column;justify-content:center}.dl-need.critical{border-left-color:var(--gap)}.dl-need.ready{border-left-color:var(--ok-bright)}.dl-nd-sub{font-size:12px;color:var(--ink-2)}
-.dl-need-more{margin-top:14px;border-top:1px solid var(--rule);padding-top:11px;display:flex;flex-direction:column;gap:7px}
-.dl-nm-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:11.5px;color:var(--ink-2)}
-.dl-nm-row i{font-style:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dl-nm-row b{font-family:var(--mono);font-size:10px;color:var(--ink-3);font-weight:400;flex:none}
-.dl-nm-row.floor i{color:var(--gap)}
-.dl-nm-row.ok b{color:var(--ok-bright)}
-.dl-nm-rest{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+/* the need line: the combined card's header — question above the answer */
+.dl-needline{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;
+  padding:0 0 12px;margin:0 0 12px;border-bottom:1px solid var(--rule)}
+.dl-nl-main strong{display:block;font-family:var(--serif);font-size:20px;line-height:1.15;margin:3px 0 2px}
+.dl-needline.critical .dl-nl-main strong{color:var(--gap)}
+.dl-needline.ready .dl-nl-main strong{color:var(--ok-bright)}
+.dl-nd-sub{font-size:12px;color:var(--ink-2)}
+.dl-nd-chips{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end;align-content:flex-start;max-width:46%}
+.dl-nd-chips .dl-kicker{width:100%;text-align:right}
+.dl-nd-chips span:not(.dl-kicker){font-family:var(--mono);font-size:9.5px;padding:3px 7px;border-radius:99px;
+  border:1px solid rgba(255,84,112,.28);color:var(--gap);background:var(--gap-wash)}
+.dl-nd-chips em{font-style:normal;font-family:var(--mono);font-size:9px;color:var(--ink-3);align-self:center}
 .dl-pick{border-color:rgba(255,201,58,.5);box-shadow:var(--shadow),0 0 38px -20px rgba(255,201,58,.55)}
 .dl-pick-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.dl-score{font-family:var(--mono);font-size:10px;color:var(--brass)}
 .dl-weapon{display:flex;align-items:center;gap:14px;margin:10px 0 8px}.dl-weapon .nm-btn{font-family:var(--serif);font-size:27px;font-weight:600}.dl-weapon>div>span{display:block;color:var(--ink-3);font-size:11px;margin-top:2px}.dl-weapon .icon{filter:drop-shadow(0 7px 15px rgba(0,0,0,.55)) saturate(1.12)}
@@ -29,36 +30,86 @@
 .dl-add{width:100%;margin-top:12px}
 .dl-empty{grid-column:1/-1;grid-row:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px}.dl-empty p{margin:4px 0 0;color:var(--ink-2);font-size:12.5px}
 /* The old right flank duplicated the exact questions answered above. Keep its
-   underlying renderers alive, but remove that duplicate surface on this pass.
-   Reconciled 2026-08-22: no !important, and the wheelstage follows the
-   shell's own breakpoint system (1560/1250/960/640) — this sheet is
-   injected LAST, so equal-specificity overrides win by order. Forge
-   honesty warnings and the alternatives were rehomed (warn-slot above the
-   stage; runners-up inside the pick card), never hidden. */
+   underlying renderers alive, but remove that duplicate surface. */
 .ws-right{display:none}
-.wheelstage{grid-template-columns:minmax(196px,220px) minmax(0,1fr)}
-@media (max-width:1560px){
-  .wheelstage{grid-template-columns:1fr}
-  .ws-party{grid-column:auto; grid-row:auto}
-  .ws-center{grid-column:auto; grid-row:auto}
-  /* the collapsed-rail 3-column restore would leave an empty third track
-     with the flank hidden — two columns there too */
-  .shell[data-rail="min"] .wheelstage{grid-template-columns:minmax(196px,220px) minmax(0,1fr)}
-  .shell[data-rail="min"] .ws-party{grid-column:auto; grid-row:auto}
-  .shell[data-rail="min"] .ws-center{grid-column:auto; grid-row:auto}
+/* HERO GRID (owner 2026-08-22): one screen, no scrolling for the important
+   things. ≥1251px the main column becomes a grid — decision stack left,
+   wheel right (in the column the old pick card occupied), party strip
+   across the bottom, forge warnings full-width between. The wheelstage
+   dissolves (display:contents) so its children sit on the main grid;
+   below 1251px the shell's own single-column stage rules take over. */
+@media (min-width:1251px){
+  .main{display:grid;grid-template-columns:minmax(390px,1fr) minmax(0,1.5fr);gap:18px 24px;align-items:start}
+  .main>*{grid-column:1/-1;min-width:0}
+  /* both stage wrappers dissolve — their children sit on the main grid, so
+     the caller-tools fold can drop below the party strip and the wheel can
+     span the full left-column height */
+  .decision-layer{display:contents}
+  .wheelstage{display:contents}
+  /* explicit: the hero band. Everything after it (warn slot, party strip,
+     the relocated caller-tools fold, the deep boards) auto-places into
+     tight full-width rows in DOM order — no phantom row gaps. */
+  .dl-status{grid-column:1;grid-row:1}
+  .dl-pick{grid-column:1;grid-row:2}
+  .dl-empty{grid-column:1;grid-row:1/3}
+  /* explicit grid-row resets: the shell's ≤1560 stage rules pin ws-party
+     to row 1 of the (dissolved) wheelstage grid — through display:contents
+     that would land it on top of the hero row */
+  .ws-center{grid-column:2;grid-row:1/3;order:0}
+  .ws-party{grid-column:1/-1;grid-row:auto;order:0}
+  .dl-tools-fold{grid-column:1/-1;grid-row:auto}
+  .shell[data-rail="min"] .ws-center{grid-column:2;grid-row:1/3}
+  .shell[data-rail="min"] .ws-party{grid-column:1/-1;grid-row:auto}
+  /* the wheel cedes a little size to the one-screen budget */
+  .wheel{--wd:min(480px,100cqi)}
+  /* caller tools sit full-width below the strip */
+  .dl-tools{grid-template-columns:1fr 1fr}
+  /* one-screen density: the hero band must leave room for the party strip
+     on a ~940px viewport, so the decision stack sheds slack height */
+  .dl-status{padding:12px 16px}
+  .dl-pick{padding:14px 16px}
+  .dl-needline{padding-bottom:10px;margin-bottom:10px}
+  .dl-nl-main strong{font-size:19px}
+  .dl-weapon{margin:8px 0 6px;gap:12px}
+  .dl-weapon img.icon{width:56px;height:56px}
+  .dl-weapon .nm-btn{font-size:23px}
+  .dl-pick p{margin:6px 0 8px;font-size:12.5px}
+  .dl-gains li{padding:6px 7px}
+  .dl-remain{margin-top:8px}
+  .dl-add{margin-top:10px}
+  .dl-alts{margin-top:8px;gap:4px}
+  .dl-alt{padding:5px 9px}
+  /* the party strip reads as one shallow band: label, tallies and roster
+     flowing on a single line, wrapping only when the roster gets long */
+  .ws-party{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px 20px}
+  .ws-party .sec-label{flex:none}
+  .ws-party .tally{flex:none;margin:0;max-width:none}
+  .ws-party .roster{flex:1 1 460px;min-height:64px;padding:2px;align-items:flex-end}
+  .ws-party .roster-notes{flex-basis:100%;min-width:0}
+  /* bottom strip: stock upward popovers — the shell's sideways (>1560
+     flank) and downward (961-1560 strip-above) variants assumed the old
+     positions; this sheet is injected last, so order wins at ties */
+  .ws-party .roster{align-items:flex-end;padding:6px 2px 2px}
+  .ws-party .dm .dm-pop, .shell[data-rail="min"] .ws-party .dm .dm-pop{
+    left:50%;right:auto;top:auto;bottom:calc(100% + 12px);transform:translateX(-50%)}
+  .ws-party .dm:first-child .dm-pop{left:-6px;transform:none}
+  .ws-party .dm:last-child .dm-pop{left:auto;right:-6px;transform:none}
+  .ws-party .dm .dm-pop::after, .shell[data-rail="min"] .ws-party .dm .dm-pop::after{
+    top:100%;bottom:auto;left:0;right:0;height:14px}
+  .ws-party .dm-card, .shell[data-rail="min"] .ws-party .dm-card{transform-origin:50% 100%}
 }
 /* Deep diagnostics remain below the hero, but their heading says what they are. */
 #groups{margin-top:-4px}
-/* runners-up inside the pick card — the flank's click-to-add alternatives, rehomed */
-.dl-alts{margin-top:10px; display:flex; flex-direction:column; gap:5px}
-.dl-alt{display:flex; align-items:center; gap:9px; width:100%; text-align:left;
-  padding:7px 10px; background:transparent; border:1px solid var(--rule); border-radius:10px;
+/* runners-up inside the pick card — one compact chip row (gain in tooltip) */
+.dl-alts{margin-top:10px}
+.dl-alt-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin-top:5px}
+.dl-alt{display:flex; align-items:center; gap:7px; min-width:0; text-align:left;
+  padding:6px 8px; background:transparent; border:1px solid var(--rule); border-radius:10px;
   transition:border-color .15s var(--ease), background .15s var(--ease)}
 .dl-alt:hover{border-color:rgba(255,201,58,.5); background:var(--surface-2)}
 .dl-alt .icon{flex:none}
-.dl-alt-nm{flex:1; min-width:0; font-size:12.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-.dl-alt-sc{font-family:var(--mono); font-size:11px; color:var(--brass); font-weight:600; flex:none}
-.dl-alt-rz{font-family:var(--mono); font-size:9.5px; color:var(--ink-3); flex:none}
+.dl-alt-nm{flex:1; min-width:0; font-size:11.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.dl-alt-sc{font-family:var(--mono); font-size:10px; color:var(--brass); font-weight:600; flex:none}
 /* Caller tools (PR #6): player pool + swap lab. Folded shut by default —
    the hero view keeps the party dock above the fold (standing owner rule);
    the workflows are one click away, and opening is remembered per session. */
@@ -117,11 +168,5 @@
 .dl-swap-actions>b.up{color:var(--ok-bright)}.dl-swap-actions>b.down{color:var(--gap)}
 .dl-swap-actions button{background:transparent;border:1px solid var(--rule);color:var(--ink-2);border-radius:7px;padding:5px 7px;font-size:9.5px}
 .dl-swap-actions button:hover{border-color:var(--brass);color:var(--brass)}
-@media(max-width:1250px){
-  .decision-layer{grid-template-columns:1fr 1fr;grid-template-rows:auto}
-  .dl-status{grid-column:1;grid-row:auto}
-  .dl-need{grid-column:2;grid-row:auto}
-  .dl-pick{grid-column:1/-1;grid-row:auto}
-}
 @media(max-width:900px){.dl-tools{grid-template-columns:1fr}}
-@media(max-width:720px){.decision-layer{grid-template-columns:1fr}.dl-status,.dl-need,.dl-pick{grid-column:auto;grid-row:auto}.dl-gains{grid-template-columns:1fr}.dl-status strong,.dl-need strong{font-size:18px}.dl-empty{display:block}.wheelstage{gap:20px}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
+@media(max-width:720px){.dl-gains{grid-template-columns:1fr}.dl-status strong{font-size:18px}.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-alt-row{grid-template-columns:1fr}.dl-empty{display:block}.wheelstage{gap:20px}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
