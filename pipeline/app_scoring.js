@@ -640,6 +640,67 @@
     return out;
   };
 
+  CompEngine.prototype.kitOptions = function (weapon, combo, party, topN) {
+    /* IDEAL KIT per weapon, per content/style, per comp — mirrors
+       engine.py kit_options (2026-08-20; JS mirror 2026-08-21): ranked
+       gear options per slot. No party -> context-free weighted-delta
+       value (the default_combo rule); with `party` (the REST of the
+       comp) -> comp-aware exact fitness delta. Greedy per slot: stat
+       stacking is additive in the model, so per-slot ranking against
+       the bare member is faithful. `why` deltas are display-rounded. */
+    if (topN === undefined || topN === null) topN = 3;
+    var bySlot = {}, k;
+    for (k in this.gear) {
+      var slot0 = this.gear[k].slot || "other";
+      (bySlot[slot0] = bySlot[slot0] || []).push(k);
+    }
+    var bare = this.memberExtra(weapon, combo);
+    var joined = null, baseGears = null, fBare = 0.0;
+    if (party !== null && party !== undefined) {
+      joined = party.concat([weapon]);
+      baseGears = party.map(function () { return null; });
+      fBare = this.fitness(joined, null, baseGears.concat([null]));
+    }
+    var options = {}, slots = Object.keys(bySlot).sort();
+    for (var si = 0; si < slots.length; si++) {
+      var slot = slots[si], keys = bySlot[slot].slice().sort();
+      var ranked = [];
+      for (var ki = 0; ki < keys.length; ki++) {
+        k = keys[ki];
+        var built = this.buildExtra(weapon, combo, [k]);
+        var deltas = [], c;
+        for (c in built) {
+          var d = built[c] - (bare[c] || 0.0);
+          if (d > 1e-9) deltas.push([c, d]);
+        }
+        var self = this;
+        deltas.sort(function (a, b) {
+          return (self._weights[b[0]] || 0.0) * b[1]
+               - (self._weights[a[0]] || 0.0) * a[1];
+        });
+        var value = 0.0, di;
+        if (joined === null) {
+          for (di = 0; di < deltas.length; di++)
+            value += (this._weights[deltas[di][0]] || 0.0) * deltas[di][1];
+        } else {
+          value = this.fitness(joined, null, baseGears.concat([[k]])) - fBare;
+        }
+        var why = [];
+        for (di = 0; di < Math.min(3, deltas.length); di++)
+          why.push([deltas[di][0], Math.round(deltas[di][1] * 100) / 100]);
+        ranked.push({ gear: k, display_name: this.gear[k].display_name,
+                      value: value, why: why });
+      }
+      ranked.sort(function (a, b) {
+        return (b.value - a.value) || (a.gear < b.gear ? -1 : a.gear > b.gear ? 1 : 0);
+      });
+      options[slot] = ranked.slice(0, topN);
+    }
+    var kit = {};
+    for (var s2 in options) if (options[s2].length) kit[s2] = options[s2][0];
+    return { kit: kit, options: options };
+  };
+
   CompEngine.prototype.memberExtra = function (weapon, combo) {
     /* One member's effective caps for a combo (null -> static default). */
     var extras = this._comboExtras(weapon);

@@ -195,13 +195,30 @@ function loadoutPrefill(i){
       if (!(s in L) && Number.isInteger(ref[s]) && ref[s] > 0) L[s] = ref[s] - 1;
     });
   }
-  /* engine fallback (owner 2026-08-21): spell slots no promoted caller
-     build covers are prefilled from the engine's scored default combo for
-     the CURRENT content — the same combo scoring already assumes, so the
-     fitness number does not move. The kit wears the engine mark so it can
-     never be mistaken for a fielded build; gear stays empty (the engine
-     does not pick gear here). */
+  /* engine fallback (owner 2026-08-21): whatever no promoted caller build
+     covers is filled by the engine — spells from the scored combo, gear
+     from the comp-aware kit advisor. The kit wears the engine mark so it
+     can never be mistaken for a fielded build. */
   loadoutEngineSpells(i);
+  loadoutEngineGear(i);
+}
+
+/* On-open retro suggestion (owner 2026-08-21: "weapons should come with
+   suggested kits" — including members added before the feature or loaded
+   from share links). SAFE variant: merely looking at a kit must never
+   change the party's fitness, so ref SPELLS are not applied here (a
+   caller's picks could differ from the member's scored combo) — spells
+   seed from the member's OWN combo and gear picks are display-only. */
+function loadoutSuggest(i){
+  loadoutPrefillGear(i);
+  loadoutEngineSpells(i);
+  loadoutEngineGear(i);
+}
+
+/* the combo the engine actually scores for member i (null -> default) */
+function loComboOf(i){
+  return (typeof COMBO !== "undefined" && Number.isInteger(COMBO[i]))
+    ? COMBO[i] : null;
 }
 
 function loadoutEngineSpells(i){
@@ -210,7 +227,7 @@ function loadoutEngineSpells(i){
   const pools = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
   const L = LOADOUT[i] || (LOADOUT[i] = {});
   let used = false;
-  for (const [slot, sid] of ENG.comboSpells(w, null)){
+  for (const [slot, sid] of ENG.comboSpells(w, loComboOf(i))){
     const s = slot === "passive" ? "p" : slot;   /* pool name -> loadout key */
     if (!LO_SPELLS.includes(s) || s in L) continue;
     const pool = pools[slot] || [];
@@ -219,6 +236,29 @@ function loadoutEngineSpells(i){
   }
   /* _eng is display provenance only: the permalink codec walks the fixed
      slot lists, so the mark never enters a share link */
+  if (used) L._eng = 1;
+}
+
+function loadoutEngineGear(i){
+  /* comp-aware kit advisor (engine kit_options; JS mirror parity-checked
+     2026-08-21): each empty gear slot gets the top-ranked item for THIS
+     member in THIS comp. Display-only — gear picks do not feed browser
+     scoring yet. */
+  const w = party[i];
+  if (typeof ENG === "undefined" || !ENG.kitOptions) return;
+  const L = LOADOUT[i] || (LOADOUT[i] = {});
+  const empty = LO_SLOTS.filter(s => !(s in L)
+    && !(s === "offhand" && w.startsWith("2H_")));  /* 2H hands are full */
+  if (!empty.length) return;
+  let ko;
+  try {
+    ko = ENG.kitOptions(w, loComboOf(i), party.filter((_, j) => j !== i));
+  } catch (e) { return; }
+  let used = false;
+  empty.forEach(s => {
+    const top = (ko.kit || {})[s];
+    if (top && loGear(top.gear)){ L[s] = top.gear; used = true; }
+  });
   if (used) L._eng = 1;
 }
 
@@ -282,7 +322,7 @@ function loadoutPanel(i){
   return `<div class="lo-panel">
     <div class="lo-row">${LO_SLOTS.map(s => loTile(i, s)).join("")}</div>
     <div class="lo-row lo-spells">${LO_SPELLS.map(s => loSpellPicker(i, s)).join("")}</div>
-    ${(LOADOUT[i] || {})._eng ? `<div class="lo-ref lo-eng" title="the spell picks are the engine's scored defaults for this content — change any spell to make the kit your own">&#9881; engine kit — scored for this content, not a fielded build</div>` : ""}
+    ${(LOADOUT[i] || {})._eng ? `<div class="lo-ref lo-eng" title="spell and gear picks are the engine's scored suggestions for this content and comp — change anything to make the kit your own">&#9881; engine kit — scored for this comp, not a fielded build</div>` : ""}
     ${ref ? `<div class="lo-ref">reference: ${esc(ref.caller)}${ref.role ? " · " + esc(ref.role) : ""}
       ${raw.length ? " · wrote " + raw.map(([sl, t]) =>
         `<b>${esc(LO_SLOT_LABEL[sl] || sl)}</b> “${esc(t)}”`).join(", ") : ""}</div>` : ""}
@@ -297,10 +337,12 @@ function loadoutHandleClick(e){
     const i = +tog.dataset.loOpen;
     LO_OPEN = (LO_OPEN === i) ? null : i;
     LO_PICKING = null; LO_FILTER = "";
-    /* GEAR only: spell picks now feed scoring, and merely LOOKING at a kit
-       must never change the party's fitness (review 2026-08-18). Spell
-       prefill happens at add/forge time, where it is announced. */
-    if (LO_OPEN !== null) loadoutPrefillGear(LO_OPEN);
+    /* Opening a kit fills any empty slots with SAFE suggestions (owner
+       2026-08-21): ref gear + engine gear (display-only) + spells from
+       the member's OWN scored combo — so looking at a kit still never
+       changes the party's fitness (review 2026-08-18 holds). Caller-ref
+       SPELL prefill stays add/forge-time only, where it is announced. */
+    if (LO_OPEN !== null) loadoutSuggest(LO_OPEN);
     return true;
   }
   const pick = e.target.closest("[data-lo-pick]");
@@ -319,6 +361,7 @@ function loadoutHandleClick(e){
     const i = +raw.slice(0, a), slot = raw.slice(a + 1, b), key = raw.slice(b + 1);
     const L = LOADOUT[i] || (LOADOUT[i] = {});
     if (key) L[slot] = key; else delete L[slot];
+    delete L._eng;   /* a hand-picked item makes the kit the player's own */
     LO_PICKING = null; LO_FILTER = "";
     return true;
   }
