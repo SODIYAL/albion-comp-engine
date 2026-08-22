@@ -1,180 +1,221 @@
 # Albion Composition Engine
 
-**Live planner: <https://sodiyal.github.io/albion-comp-engine/>**
+**Live planner: <https://sodiyal.github.io/albion-comp-engine/>**  
+**How it works: <https://sodiyal.github.io/albion-comp-engine/how-it-works.html>**
 
-A recommendation engine for Albion Online party composition. Given the content
-type, the party size and who is already in the group, it proposes the next
-player — and explains why in terms of what the composition is actually missing.
+Comp Forge is an Albion Online party-composition recommendation engine. Give it the content, expected party size, playstyle, and the weapons already in the group; it diagnoses the composition and recommends what should join next.
 
-It is a **capability model**, not a role checklist. A weapon is a vector of
-functional scores (`peel`, `heal_sustain`, `clump_create`, `resist_shred`, …),
-a content type is a set of weighted targets for those capabilities, and the
-recommendation is the archetype with the highest marginal gain against the gap.
-Roles fall out of the vector rather than being assigned to it.
+The product is built around a simple question:
 
+> **What does this party need most right now, and which weapon fixes it best?**
+
+It is a **capability model**, not a role checklist. Each weapon contributes to functional capabilities such as `engage`, `peel`, `clump_create`, `heal_sustain`, `cleanse`, `resist_shred`, `anti_heal`, and damage pressure. Content templates define how important those capabilities are for a particular fight, while playstyles change their emphasis. The engine scores the current party against that requirement profile and evaluates the marginal value of possible additions.
+
+## What the live planner does
+
+The current interface is deliberately decision-first. Rather than making the caller interpret a large score board before getting an answer, Comp Forge surfaces:
+
+1. **Comp Status** — whether the roster has critical gaps, weaker areas, or excessive overlap.
+2. **Biggest Need** — the most important problem in the current composition, with hard floors taking priority over softer deficits.
+3. **Best Next Pick** — the weapon with the strongest marginal contribution to the party as it exists now.
+4. **What it fixes** — the capabilities improved by that addition.
+5. **What remains weak** — the next problem the party would still have after making the recommendation.
+6. **Deeper diagnostics** — the weapon wheel, capability board, loadouts, evidence, formulas, and detailed weapon information remain available underneath the decision layer.
+
+Recommendations are evaluated **one player ahead**. If the roster currently contains six players, the next-pick calculation asks what a seven-player composition requires so thresholds that become important at the next body can influence the recommendation before the player joins.
+
+The planner also supports full-comp forging, per-member swap advice, role-ordered rosters, selectable Q/W/E loadouts, equipment information, shareable URL state, Discord-ready comp text, and detailed weapon dossiers.
+
+## How recommendations work
+
+A weapon is represented as a vector of capabilities. A content template supplies targets, floors, weights, scaling rules, and other composition requirements. The selected playstyle modifies **weights**, not the underlying meaning of the capabilities.
+
+For a candidate weapon, the engine effectively asks:
+
+```text
+current party
+    ↓
+resolve selected weapon/spell contributions
+    ↓
+measure composition against the active content template
+    ↓
+identify hard failures and weighted deficits
+    ↓
+add candidate weapon
+    ↓
+recalculate the composition
+    ↓
+marginal gain = score after − score before
 ```
-Party: Longbow, Witchwork Staff, Permafrost Prism      Castle Outpost, size 7
-Fitness 25.0 / 107
 
-Biggest weaknesses
-  heal_sustain    0 / 3.0   −10.0
-  tankiness       0 / 4.0    −9.0
-  engage          0 / 2.0    −7.0
+The highest marginal gain is the recommendation, subject to the engine's feasibility and composition rules.
 
-Recommend: Hallowfall
-  +27.53  heal_sustain: 0 → 2 (target 3.0)
-  + 6.00  heal_burst:   0 → 3 (target 2.0)
-  + 3.00  mobility:     0 → 3 (target 2.0)
-Alternatives: Exalted Staff, Great Holy Staff, Redemption Staff
-```
+This means a weapon is not recommended simply because it is labelled "tank", "healer", or "DPS". It is recommended because its actual capability contribution addresses what the current composition is missing.
 
-## Status (2026-08-12)
+## Spell and loadout awareness
 
-**Fully curated, pre-validation. Do not trust the numbers yet.**
+Weapon identity alone is not enough in Albion Online. Q/W/E choices determine which capabilities a player actually brings.
 
-- **All 137 combat weapons have curated, evidence-linted capability sheets**
-  (`release_clean: True`; the other 24 catalog entries are vanity items and
-  gathering tools). Weapons in a line share their Q/W pool, so line-mates
-  carry identical pool scores and differ only in their E — sheets are
-  organized accordingly.
-- **Six content templates** — Blackzone Roam (20), Territory Defense (20),
-  Castle Fight (25), Faction War Red Zone (15), Castle Outpost (7), Roads of
-  Avalon (7, in-game party cap) — and
-  **five playstyles** (balanced / brawl / clap / kite / brawl-clap) that
-  reweight any template toward the caller's plan. The 2026-08-13 templates
-  and all style multipliers are PROVISIONAL until the expert pass; role
-  calibration for the 20-size pair came from two real shotcaller comps
-  (`data/published_comps/` — the evidence layer, chapter 2).
-- **`dashboard/index.html` (Comp Forge) is the product page** — pick the
-  content and playstyle, set the party size to however many actually show
-  up (targets, floors and scaling adapt from 2 to 60), build the party in
-  numbered slots or let **forge a full comp** greedy-build one, and read
-  fitness, floor alarms, needed-now vs nice-to-have gaps, and the
-  recommended next pick with its reasoning, formula, caller loadout and
-  evidence. Weapon detail drawer shows every weapon's real Q/W/E/passive
-  options by in-game name. Party state lives in the URL hash (copy share
-  link); "copy comp text" exports a Discord-ready roster. Self-contained;
-  open it directly. In-browser scoring is `pipeline/app_scoring.js`, a
-  line-for-line port of the Python engine held equal by
-  `tests/test_js_parity.py` (60/60 random parties across all templates and
-  styles, 1e-9) plus a build-time parity fixture checked on every load.
-- **Real-usage field reports**: `pipeline/sample_battles.py` samples recent
-  battles from the official gameinfo killboard API and counts weapons per
-  fight-size bucket; the page quotes "seen on X% of players in fights your
-  size". Display evidence only — it does not feed the scoring until
-  validation says it may.
-- **Per-member swap advisor** — each party member's weapon is valued exactly
-  as the recommender would value it as a pick into the rest of the party,
-  ranked against all 137 alternatives at the current content and size, and
-  members with markedly better options get multiple concrete suggestions
-  (click to swap in place). Rankings are size-aware: floors arm only above
-  their `min_party_size`, and the focus-fire physics boosts single-target
-  damage below a template's base size — so a 3-man missing a healer reads
-  as a gap, while a 7-man missing one reads as broken.
-- The scoring model passes 24/24 golden regression tests against the full
-  dataset — that validates its *shape*, not its recommendation quality.
-- Every score is a Claude proposal grounded in the game's own spell text and
-  passed through the evidence lint, plus the first owner corrections (glove
-  kidnap). The **full expert correction pass has not happened**, and several
-  template numbers are marked PROVISIONAL (`anti_zone`, `damage_debuff`
-  weights; heal-floor `penalty_mult`; both 20-size templates).
-- **Tier-2 validation has not run.** The real accuracy gate is a blind test
-  against experienced shotcallers (≥70% top-3 agreement); the form is
-  generated at `tests/tier2_form.md` against the full weapon pool. Until it
-  passes, treat output as a plausible hypothesis.
+The engine therefore tracks spell-level capability bundles and uses selected or resolved loadouts when evaluating compositions. Forge constraints that depend on capabilities are checked against the chosen spell kit rather than assuming every possible ability on the weapon is simultaneously available.
 
-## The two-layer design
+The planner also exposes equipment/build evidence where reliable records exist, while keeping weapon recommendation logic separate from unsupported assumptions about a complete gear set.
 
-| layer | what it holds | source | count |
-|---|---|---|---|
-| **effects** | game mechanics: `stun`, `movespeedbonus-`, `remove:buff` | derived from game data | 64 reachable from weapons |
-| **capabilities** | what a composition needs: `peel`, `engage`, `heal_sustain` | human taxonomy | 29 |
+## Evidence is separate from scoring
 
-They are deliberately not collapsed. The map between them is many-to-many and
-direction-aware: 1H Mace's Deep Leap resolves to `dash` + `invincibility` + five
-self-immunities, which together ground `engage`, `disengage`, `tankiness`,
-`mobility` and `catch` — while that same immunity granted to an *ally* is `peel`
-instead. Keeping the layers separate is what lets the capability taxonomy
-survive balance patches: a patch changes effects, not what a composition needs.
+Comp Forge intentionally separates three concepts:
 
-## The evidence rule
+| Layer | Purpose |
+|---|---|
+| **Game mechanics** | What abilities actually do: stun, purge, cleanse, displacement, damage, immunity, etc. |
+| **Capability model** | What those mechanics mean to a composition: engage, peel, anti-zone, sustain, burst, etc. |
+| **Observed evidence** | What builds, compositions, and weapons are seen in external or battle data. |
 
-Every nonzero capability score must cite the specific spell that provides it,
-and `pipeline/evidence_lint.py` mechanically verifies that the spell is
-equippable on that weapon and can actually ground the claim. Uncited scores are
-invalid by definition.
+Observed popularity is **not automatically treated as strength**.
 
-This exists because hand-curation produced real errors that all looked
-plausible: a purge attributed to a weapon whose kit has none; a knockback that
-displaces the *caster* filed as enemy displacement; a cleanse credited to a
-weapon line that has no cleanse anywhere in its kit. The full-coverage pass
-found the same class in the original hand-sketched sheets themselves — a
-dedicated anti-heal weapon whose kit contains no anti-heal, an energy drain
-that no spell provides. The lint catches that class of mistake without waiting
-for a human to notice; `pipeline/effect_overrides.yaml` documents the cases
-where the *parser* is the one that is wrong.
+For example, killboard/battle sampling can tell the UI that a weapon is frequently seen in fights of a similar size. That is useful supporting evidence, but it does not currently add hidden points to the mechanical recommendation score.
 
-## Running it
+Every nonzero curated capability score must also cite the spell/effect that supports it. `pipeline/evidence_lint.py` checks that the cited ability is actually equippable and can ground the claimed capability. This catches plausible-looking curation errors such as attributing purge, anti-heal, cleanse, or displacement to a weapon that cannot actually provide it.
 
-Requires Python 3 and `pyyaml`. On Windows use `py -3`.
+## Current state — August 2026
+
+The project has moved well beyond the original prototype described in early README versions.
+
+- Capability sheets cover the combat weapon catalogue used by the engine.
+- The dataset is provenance-aware and fails closed when pinned game-data inputs drift.
+- Browser scoring and the Python engine are parity-tested.
+- Golden, forge, interaction, provenance, build/evidence, patch-history, and loadout-codec test suites protect the current behaviour.
+- Real composition records are stored as an evidence/calibration layer rather than being silently converted into recommendation truth.
+- The public planner now uses the **decision-first** Comp Status → Biggest Need → Best Next Pick hierarchy.
+- Capability constraints are combo-aware: selected spell kits matter.
+- Composition targets are evaluated at the roster size actually present; next-pick advice evaluates one player ahead.
+- The recommendation engine and the evidence/usage layers remain intentionally separable so empirical data can be validated before it is allowed to influence scoring.
+
+The system should still be treated as a decision-support tool rather than an authoritative statement of the Albion meta. Capability grading, content calibration, and validation against experienced callers remain ongoing work.
+
+## Experimental work
+
+Two feature branches are currently being evaluated separately from the live planner:
+
+### Killboard affinity / partial-comp evidence — PR #5
+
+This work extends battle sampling beyond generic weapon prevalence. Because a kill feed does not reliably identify actual parties, it groups observed players conservatively by organization cohort (alliance, with guild fallback) rather than pretending everyone on the same battle record was on the same team.
+
+The goal is to calculate:
+
+- weapon co-occurrence counts,
+- conditional pairing frequency,
+- affinity/lift so globally popular weapons do not dominate merely because they appear everywhere,
+- partial-roster matches that can show weapons observed alongside several of the user's selected weapons.
+
+This remains **display/evidence only** until the data has been refreshed and validated. It does not modify mechanical recommendation scores.
+
+### Player weapon pools + swap impact — PR #6
+
+This work adds a caller-oriented constraint: instead of asking only "what is theoretically best?", a player can provide the weapons they actually play and the engine can rank recommendations inside that pool.
+
+It also adds before/after swap analysis so callers can evaluate a replacement before committing it, including fitness movement, capability changes, and the biggest weakness that would remain after the swap.
+
+This branch reuses the existing recommendation and swap scoring paths rather than introducing a second scoring model.
+
+## Validation philosophy
+
+There are several different things worth validating, and they should not be confused:
+
+- **Mechanical correctness** — does the weapon actually have the effect we claim?
+- **Implementation correctness** — do Python and browser scoring produce the same result?
+- **Regression safety** — do known compositions and engine behaviours remain stable when code changes?
+- **Recommendation quality** — do experienced Albion callers agree with the engine's choices?
+- **Empirical relevance** — do observed real-world compositions support, contradict, or add context to the model?
+
+A green unit test suite proves implementation behaviour, not that every recommendation is strategically correct. Expert blind testing and real-comp evidence are the important external checks.
+
+See `tests/VALIDATION.md` for the validation history and gates.
+
+## Rebuilding the project
+
+On Windows, use `py -3` rather than `python`/`python3`.
+
+The authoritative full command list is maintained in `HANDOFF.md` and `pipeline/README.md`. The main day-to-day gates include:
 
 ```bash
-py -3 pipeline/evidence_lint.py      # CI gate — exit 1 blocks a release
-py -3 pipeline/fetch_item_stats.py   # ao-bin-dumps -> out/item_stats.json (the numbers)
-py -3 pipeline/fetch_gear_lines.py   # item_stats -> out/gear_lines.json (loadout catalogue)
-py -3 pipeline/fetch_icons.py        # render service -> out/icon_data.json (weapon + gear art)
-py -3 pipeline/build_dataset.py      # sheets + templates + stats -> out/dataset-latest.json
-py -3 tests/test_golden.py           # golden regression cases (24)
-py -3 tests/test_js_parity.py        # JS scoring == Python engine (needs node)
-py -3 tests/test_patch_history.py    # patch-diff + staleness unit tests
-node tests/test_loadout_codec.js     # loadout permalink round-trip (12)
-py -3 pipeline/build_dashboard.py    # -> dashboard/index.html (the product page)
+py -3 pipeline/evidence_lint.py
+py -3 pipeline/build_builds.py
+py -3 pipeline/build_dataset.py
+py -3 tests/test_golden.py
+py -3 tests/test_forge.py
+py -3 tests/tier2_blindtest.py v4
+py -3 tests/test_js_parity.py
+node tests/test_loadout_codec.js
+py -3 tests/test_patch_history.py
+py -3 tests/test_provenance.py
+py -3 tests/test_builds.py
+py -3 pipeline/build_interactions.py
+py -3 tests/test_interactions.py
+py -3 pipeline/build_dashboard.py
 ```
 
-After a game patch, `pipeline/patch_history.py` diffs ao-bin-dumps git history
-into `out/patch_history.json`; the lint then warns when a sheet's cited
-evidence spell changed after the sheet's `curated_as_of` date, so curation
-staleness is detected mechanically instead of noticed by accident. See
-`pipeline/README.md` § *Patch history / staleness*.
+`pipeline/sample_battles.py` is optional and network-dependent. It refreshes observational battle evidence; it is not required for the mechanical scoring engine to function.
 
-`dashboard/index.html` and `review/effects.html` are generated, single-file
-pages — open them directly, no server needed.
+After a game patch, follow the pinned-snapshot procedure in `pipeline/README.md`: update the ao-bin-dumps source pin, rebuild the derived game-data layers, then run the complete release gates before shipping regenerated outputs.
 
-Regenerating the game data (only needed after a balance patch) additionally
-requires a clone of [ao-data/ao-bin-dumps](https://github.com/ao-data/ao-bin-dumps);
-see `pipeline/README.md`.
+## Repository map
 
-## Layout
+```text
+MASTERSHEET.md                 expert control surface / tuning rulings
+HANDOFF.md                     current project state + development handoff
+albion-comp-engine-design.md   research, architecture, taxonomy and design history
 
+engine/
+  engine.py                    canonical Python scoring engine
+
+pipeline/
+  sheets/                      capability sheets
+  templates/                   content requirements
+  app_scoring.js               browser scoring twin
+  build_dataset.py             builds the release dataset
+  build_dashboard.py           builds Comp Forge + Pages output
+  sample_battles.py            observational battle sampler
+  out/                         generated data/evidence artifacts
+
+tests/
+  test_golden.py               recommendation regression cases
+  test_forge.py                forge/constraint contracts
+  test_js_parity.py            Python ↔ browser scoring parity
+  VALIDATION.md                validation record and external-quality gates
+
+dashboard/
+  index.html                   generated local product page
+  _explainer.html              source for How It Works
+  how-it-works.html            generated/local explainer copy
+
+docs/
+  index.html                   GitHub Pages product output
+  how-it-works.html            GitHub Pages explainer
+
+review/                        generated audit/review boards
 ```
-albion-comp-engine-design.md   research + system design (data sources, taxonomy,
-                               scoring algorithm, architecture, MVP scope)
-engine/engine.py               scoring engine — consumes the built dataset
-pipeline/                      game data -> capability sheets -> dataset
-  sheets/                      curated capability sheets (the hand-made part)
-  effect_map.yaml              effect x direction -> capabilities
-  templates/                   content requirements + scoring weights, as data
-  app_scoring.js               JS port of the engine (parity-tested)
-tests/                         golden suite + Tier-2 harness + meta comps
-dashboard/                     Comp Forge, the product page (generated, single file)
-review/                        effects review page (generated)
-```
 
-`pipeline/README.md` covers the data pipeline in detail; `tests/VALIDATION.md`
-covers what has been tested and what has not.
+## Recommended roadmap
+
+Near-term product work is focused on making the engine more useful to an actual caller without prematurely teaching the score to imitate popularity:
+
+1. validate and ship player weapon pools + swap impact,
+2. add a fight-chain explanation such as Engage → Clump → Pierce → Burst → Secure → Reset,
+3. infer composition identity and detect internally conflicted rosters,
+4. surface negative recommendations and redundancy warnings,
+5. support locked players/slots and constrained reforging,
+6. save player/guild weapon profiles,
+7. validate killboard affinity and partial-composition neighbours,
+8. cluster recurring observed composition families,
+9. add enemy-comp / counter-drafting analysis,
+10. build expert blind-validation tooling before allowing empirical evidence to influence recommendation scoring.
 
 ## Attribution and data
 
-Game data is parsed from [ao-data/ao-bin-dumps](https://github.com/ao-data/ao-bin-dumps),
-a community mirror of Albion Online's client data files. Files under
-`pipeline/out/` are derived from it and include ability names and descriptions
-that are © Sandbox Interactive GmbH. Item icons are fetched once by
-`pipeline/fetch_icons.py` from the official Albion Online Render Service
-(render.albiononline.com) and embedded in the generated pages; the artwork is
-© Sandbox Interactive GmbH. This project is unofficial and not affiliated
-with or endorsed by Sandbox Interactive.
+Game data is parsed from the community-maintained `ao-data/ao-bin-dumps` mirror of Albion Online client data. Derived files may include ability names and descriptions owned by Sandbox Interactive GmbH. Item artwork comes from Albion Online's render service and is also owned by Sandbox Interactive GmbH.
 
-The capability sheets, effect map, content templates and scoring model are the
-original work of this repository.
+This project is unofficial and is not affiliated with or endorsed by Sandbox Interactive.
 
-*No license file yet — until one is added, default copyright applies.*
+The capability taxonomy, content templates, scoring model, evidence architecture, and application code are the work of this repository.
+
+*No license file is currently included; default copyright therefore applies.*

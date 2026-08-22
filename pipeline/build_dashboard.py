@@ -3,14 +3,16 @@
 Generate the dashboard as a single self-contained HTML file with the dataset
 inlined (design doc §6.1: static SPA, no backend, scoring in the client).
 
-    dashboard/_shell.html   markup + CSS
-    dashboard/_app.js       client (contains NO capability numbers)
-    dashboard/_loadout.js   per-member gear + spell picks (display only)
-    out/dataset-latest.json the single source of truth
+    dashboard/_shell.html          markup + core CSS
+    dashboard/_decision_layer.css decision-first surface CSS
+    dashboard/_app.js              client (contains NO capability numbers)
+    dashboard/_decision_layer.js  caller-first translation of engine output
+    dashboard/_loadout.js          per-member gear + spell picks (display only)
+    out/dataset-latest.json        the single source of truth
         │
         ▼
     dashboard/index.html
-    dashboard/how-it-works.html
+    docs/index.html
 
 Inlining rather than fetching is deliberate: the page must work from file://
 and inside a strict-CSP artifact host, neither of which can fetch a sibling
@@ -84,6 +86,21 @@ def main():
         data = json.load(f)
     with open(os.path.join(DASH, "_shell.html"), encoding="utf-8") as f:
         shell = f.read()
+    # Decision-first UX is part of the REAL dashboard build on this branch,
+    # not a preview page. It is deliberately a translation layer: scoring
+    # remains entirely inside app_scoring.js / CompEngine.
+    with open(os.path.join(DASH, "_decision_layer.css"), encoding="utf-8") as f:
+        decision_css = f.read()
+    with open(os.path.join(DASH, "_decision_layer.js"), encoding="utf-8") as f:
+        decision_js = f.read()
+    shell = shell.replace("</style>", decision_css + "\n</style>", 1)
+    shell = shell.replace(
+        '<main class="main">',
+        '<main class="main">\n'
+        '    <section class="decision-layer" id="decision-layer" '
+        'aria-label="Composition diagnosis and best next pick"></section>',
+        1,
+    )
     # The scoring engine is app_scoring.js — the same file node runs in
     # tests/test_js_parity.py. _app.js contains rendering only.
     with open(os.path.join(HERE, "app_scoring.js"), encoding="utf-8") as f:
@@ -261,7 +278,7 @@ def main():
            # inside DATASET; a second copy cost ~190 KB of page weight (§A)
            f"const ITEM_STATS = DATASET.item_stats || {{}};\n"
            f"const USAGE = {js(usage)};\n"
-           f"const PARITY_EXPECTED = {js(expected)};\n{loadout_js}\n{app}</script>\n"
+           f"const PARITY_EXPECTED = {js(expected)};\n{loadout_js}\n{app}\n{decision_js}</script>\n"
            f"</body>\n</html>\n")
     path = os.path.join(DASH, "index.html")
     with open(path, "w", encoding="utf-8") as f:
