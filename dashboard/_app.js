@@ -803,15 +803,18 @@ function renderHubRings(rings){
    glyph fall back to a small text chip so nothing is silently dropped;
    the full prose stays in the tooltip either way. */
 const CAP_ICON = {
-  tankiness:"tank",
+  tankiness:"tank", anti_dive:"antidive",
   heal_burst:"healer", heal_sustain:"healer", self_sustain:"healer", cleanse:"healer",
   peel:"peel", buff_allies:"support",
   stun:"cc", root:"cc", silence:"cc", slow:"cc", clump_create:"cc",
-  knockback_displace:"cc",
+  knockback_displace:"cc", interrupt:"interrupt",
   burst_aoe:"aoe", zone_control:"aoe", anti_zone:"aoe",
   burst_st:"st", execute:"st", catch:"st",
   sustained_dps:"dps",
-  engage:"melee",
+  engage:"melee", ranged_presence:"range",
+  mobility:"mobility", disengage:"disengage",
+  resist_shred:"shred", heal_reduction:"antiheal", purge:"purge",
+  damage_debuff:"weaken", max_health_cut:"hpcut",
 };
 function hubCapsHtml(w){
   /* Ordered the way the owner reads a weapon (2026-08-21 ruling): what

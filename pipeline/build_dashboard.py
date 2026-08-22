@@ -43,6 +43,19 @@ SEMANTIC_ICON_FILES = {
     "aoe": "aoe.svg",
     "st": "st.svg",
     "dps": "dps.svg",
+    # effect glyphs (2026-08-22): the caps CAP_ICON previously dropped to
+    # text chips; same flat style, hues stay in the established families
+    # (cyan movement, blue defense, violet enemy-manipulation, green heal,
+    # pink damage/health)
+    "mobility": "mobility.svg",
+    "disengage": "disengage.svg",
+    "antidive": "antidive.svg",
+    "shred": "shred.svg",
+    "antiheal": "antiheal.svg",
+    "interrupt": "interrupt.svg",
+    "purge": "purge.svg",
+    "weaken": "weaken.svg",
+    "hpcut": "hpcut.svg",
 }
 
 
