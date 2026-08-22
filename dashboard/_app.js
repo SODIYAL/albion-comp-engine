@@ -274,6 +274,9 @@ function badgeHtml(w){
                  only, never touches the engine */
 let FACET = null;
 let PARTY_FACET = null;
+/* mobile pass 2026-08-21: which member's popover is open as a bottom
+   sheet (touch has no hover) — display state only, never in the hash */
+let SHEET_OPEN = null;
 const BADGE_KEYS = Object.fromEntries(BADGE_DEFS.map(d => [d.id, d.caps]));
 
 /* ---- PvP interaction records (pipeline/build_interactions.py -> dataset).
@@ -479,6 +482,13 @@ function renderSetup(){
       : "")
     + (!ENG.extrapolated() ? "" :
     `<div class="notice"><b>Extrapolated.</b> This template is fitted and validated at size ${validatedSizes().join(", ")} only. Per-player targets are scaled linearly to ${SIZE}; flat threshold targets are unchanged. Tier-2 validation must confirm each size before this is trustworthy.</div>`);
+  /* phone setup summary bar: one line that says what's set */
+  const sumEl = $("msetup-sum");
+  if (sumEl){
+    const ct = content.selectedOptions[0]
+      ? content.selectedOptions[0].textContent : CONTENT;
+    sumEl.textContent = `${ct} · ${styleName() || STYLE} · ${PLAN()}`;
+  }
 }
 function renderTally(){
   $("tally").innerHTML = party.length
@@ -569,11 +579,14 @@ function renderRoster(){
       idxs = party.map((_, i) => i);
     }
   }
-  /* dock cards: the card is the hover/focus target, the popover carries
-     everything the old roster row said plus the kit/dossier/remove actions */
+  /* dock cards: the card is the hover/focus target (desktop) or the tap
+     target that opens the bottom sheet (≤960 — touch has no hover); the
+     popover carries everything the old roster row said plus the
+     kit/dossier/remove actions */
+  if (SHEET_OPEN !== null && !(SHEET_OPEN < party.length)) SHEET_OPEN = null;
   const cards = idxs.map(i => { const w = party[i]; return (
-    `<div class="dm ${roleCls(w)}">
-      <button class="dm-card" aria-label="${nameOf(w)} — slot ${i+1}, hover or focus for details">
+    `<div class="dm ${roleCls(w)}${SHEET_OPEN === i ? " sheet-open" : ""}">
+      <button class="dm-card" data-member="${i}" aria-label="${nameOf(w)} — slot ${i+1}, details">
         <span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 34)}
       </button>
       <div class="dm-pop" role="group" aria-label="Slot ${i+1} — ${nameOf(w)}">
@@ -600,6 +613,9 @@ function renderRoster(){
     if (open > 1)
       cards.push(`<div class="dock-note">+ ${open - 1} more open slot${open > 2 ? "s" : ""}</div>`);
   }
+  /* the sheet's scrim: fixed overlay behind the open member sheet (≤960) */
+  if (SHEET_OPEN !== null)
+    cards.push(`<button class="dm-scrim" data-sheet-close aria-label="Close member details"></button>`);
   $("roster").innerHTML = cards.join("");
   /* below the dock: duplicate-interaction notices (spec §7 — the message
      names the exact effect, and unknown says "verify", never a penalty)
@@ -692,7 +708,9 @@ function renderPickerChips(){
    party's role rings. Rim cards are DIFFED by weapon key, never rebuilt —
    updating each card's --a angle lets CSS transitions carry them around
    the rim instead of snapping. */
-const WHEEL_STEP = 26;     /* degrees between rim cards */
+/* degrees between rim cards — wider on phones so touch-sized cards never
+   overlap on the smaller radius (mobile pass 2026-08-21) */
+const wheelStepDeg = () => matchMedia("(max-width:640px)").matches ? 36 : 26;
 const WHEEL_WINDOW = 4;    /* cards rendered each side of the focus */
 
 function wheelFocusIdx(keys, recs){
@@ -729,12 +747,12 @@ function renderWheelRing(keys, idx){
       el.title = `${WEAPONS[w].display_name || w} — click to focus`;
       el.innerHTML = `${icon(w, 40)}<span class="ws-nm">${nameOf(w)}</span>`;
       /* spawn one step beyond the final angle so the entry animates inward */
-      el.style.setProperty("--a", `${(o + Math.sign(o || 1)) * WHEEL_STEP}deg`);
+      el.style.setProperty("--a", `${(o + Math.sign(o || 1)) * wheelStepDeg()}deg`);
       el.style.setProperty("--fade", "0");
       ring.appendChild(el);
       void el.offsetWidth;
     }
-    el.style.setProperty("--a", `${o * WHEEL_STEP}deg`);
+    el.style.setProperty("--a", `${o * wheelStepDeg()}deg`);
     el.style.setProperty("--fade", String(Math.max(.3, 1 - Math.abs(o) * .15)));
     el.classList.toggle("on", o === 0);
     el.setAttribute("aria-selected", String(o === 0));
@@ -898,6 +916,9 @@ function renderWheelFoot(keys, recs, rings){
     ? `<button class="cb-forge" id="reforge" title="rebuild every forged slot for the current content, style and size — manual picks stay">reforge all</button>`
     : "");
   $("wheel-foot").innerHTML = `
+    ${WHEEL_FOCUS_W && recs !== null && party.length < HARD_CAP
+      ? `<button class="cb-add wf-add-mobile" data-add="${WHEEL_FOCUS_W}">Add ${esc(nameOf(WHEEL_FOCUS_W))}</button>`
+      : ""}
     <div class="wf-row">
       <span class="eyebrow">Next pick — ${slotLabel}${sn ? " · " + esc(sn) : ""}</span>
       <span class="wf-count">${keys.length} weapon${keys.length === 1 ? "" : "s"} on the wheel</span>
@@ -1642,6 +1663,18 @@ document.addEventListener("click", e => {
   /* loadout layer first: its controls live inside party rows, so a later
      [data-remove]/[data-detail] match must not swallow them */
   if (loadoutHandleClick(e)){ render(); return; }
+  /* member bottom sheet (≤960 only — desktop keeps the hover popover).
+     data-member sits on the CARD; the popover is its sibling, so taps on
+     the sheet's own kit/dossier/remove buttons never re-toggle it */
+  const mem = e.target.closest("[data-member]");
+  if (mem && matchMedia("(max-width:960px)").matches){
+    const i = +mem.dataset.member;
+    SHEET_OPEN = SHEET_OPEN === i ? null : i;
+    renderRoster(); return;
+  }
+  if (e.target.closest("[data-sheet-close]")){
+    SHEET_OPEN = null; renderRoster(); return;
+  }
   /* chip facets first: badges/role chips nest inside add/detail buttons,
      so they must win the closest() race */
   const pf = e.target.closest("[data-pfilter]");
@@ -1753,12 +1786,19 @@ document.addEventListener("click", e => {
   if (rm){
     const ri = +rm.dataset.remove;
     party.splice(ri, 1); PROV.splice(ri, 1); COMBO.splice(ri, 1);
-    FORGE_NOTE = null;
+    FORGE_NOTE = null; SHEET_OPEN = null;
     loadoutRemove(ri); render(); return;
   }
   if (e.target.closest("#rail-toggle")){ setRail(true); return; }
   if (e.target.closest("#rail-expand") || e.target.closest("#rail-expand-setup")){
     setRail(false); return; }
+  if (e.target.closest("#msetup")){
+    /* phone setup summary bar: expands/collapses the full setup controls */
+    const s = $("shell"), open = s.dataset.msetup === "open";
+    if (open) delete s.dataset.msetup; else s.dataset.msetup = "open";
+    $("msetup").setAttribute("aria-expanded", String(!open));
+    return;
+  }
   if (e.target.closest("#companion-connect")){ toggleCompanion(); return; }
   if (e.target.closest("#companion-load")){ loadCompanionParty(); return; }
   if (e.target.closest("#clear")){
@@ -1903,8 +1943,9 @@ $("pick-filter").addEventListener("keydown", e => {
     let d = angleOf(e) - dragBase;
     if (d > 180) d -= 360;
     if (d < -180) d += 360;
-    const steps = Math.trunc(d / WHEEL_STEP);
-    if (steps){ dragBase += steps * WHEEL_STEP; wheelStep(-steps); }
+    const stepDeg = wheelStepDeg();
+    const steps = Math.trunc(d / stepDeg);
+    if (steps){ dragBase += steps * stepDeg; wheelStep(-steps); }
   });
   ["pointerup", "pointercancel"].forEach(t =>
     el.addEventListener(t, () => { dragBase = null; }));
