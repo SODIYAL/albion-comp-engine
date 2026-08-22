@@ -1,6 +1,6 @@
 # Decision-first UX pass
 
-This branch implements the first surface-level recommendation from the ChatGPT review without changing CompEngine scoring.
+This branch implements the surface-level recommendation from the ChatGPT review without changing CompEngine scoring.
 
 ## Goal
 
@@ -12,37 +12,41 @@ Make the first screen answer, in order:
 4. Why does that pick help?
 5. What remains weak afterwards?
 
-The existing wheel, weakness list, capability board, evidence drawer, killboard prevalence, loadouts and live-party tooling remain available as deeper analysis.
+The weapon wheel, capability board, evidence drawer, killboard prevalence, loadouts and live-party tooling remain available as deeper analysis.
 
 ## What is implemented
 
 - A **Comp status** summary derived from current hard floors, weighted deficits and overstacking.
 - A **Biggest need** card that promotes a hard-floor failure ahead of softer deficiencies.
 - A **Best next pick** hero card using the existing recommendation result, existing `whySentence()`, and existing marginal explanation terms.
-- A **Still weak after this pick** preview calculated in the one-ahead engine context.
-- Fitness is retained as a compact summary rather than the main headline.
+- A **Still weak after this pick** preview calculated in the same one-ahead context and with the same resolved loadouts used by the recommendation engine.
+- Fitness is retained as a compact supporting summary rather than the headline.
+- The previous right-hand fitness/weakness/recommendation flank is removed from the visible layout because it duplicated the new decision surface. Its underlying render code remains untouched.
+- The wheel is retained as the exploration tool beneath the caller-first answer.
+- The full capability board remains below as the deep diagnostic layer.
 - No scoring constants, capability values, templates, priors or recommendation ordering are changed.
 
-## Preview
+## This is now the real branch UI
 
-The normal production page is intentionally untouched while this UX direction is reviewed.
+There is no separate preview build anymore. The normal builder includes the decision layer:
 
 ```bash
 py -3 pipeline/build_dashboard.py
-py -3 pipeline/build_ux_preview.py
 ```
 
-Then open `dashboard/ux-preview.html`. The second command also writes `docs/ux-preview.html` for a branch deployment workflow.
+That generates the branch's normal `dashboard/index.html` and `docs/index.html` with the decision-first hierarchy included.
 
 ## Files
 
 - `dashboard/_decision_layer.js` — translation layer over existing engine/UI state.
-- `dashboard/_decision_layer.css` — decision-first presentation.
-- `pipeline/build_ux_preview.py` — injects the layer into the normal generated dashboard for review.
+- `dashboard/_decision_layer.css` — decision-first layout and hierarchy.
+- `pipeline/build_dashboard.py` — normal build path now injects both files into the generated dashboard and GitHub Pages output.
 
-## Next passes if approved
+## Intentionally deferred
 
-- Replace generic killboard prevalence with roster-contextual co-occurrence/affinity once battle-level composition data is available.
-- Add player weapon-pool candidate filtering.
-- Add swap-impact comparison (before/after capability deltas).
-- Add a playstyle-derived fight-chain visualization as explanation only, not a second scoring model.
+These are separate features rather than part of this hierarchy pass:
+
+- Roster-contextual killboard weapon co-occurrence / affinity.
+- Player weapon-pool candidate filtering.
+- Swap-impact comparison (before/after capability deltas).
+- Playstyle-derived fight-chain visualization as explanation only, not a second scoring model.
