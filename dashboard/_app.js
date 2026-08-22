@@ -583,7 +583,7 @@ function renderRoster(){
         <div class="dm-actions">
           <button class="lo-open${LO_OPEN === i ? " on" : ""}" data-lo-open="${i}"
             aria-expanded="${LO_OPEN === i}" aria-label="Loadout for ${nameOf(w)}"
-            >kit${loadoutCount(i) ? `<i>${loadoutCount(i)}</i>` : ""}</button>
+            >kit${(LOADOUT[i] || {})._eng ? '<span class="lo-eng-mark" title="engine kit — scored defaults, not a fielded build">&#9881;</span>' : ""}${loadoutCount(i) ? `<i>${loadoutCount(i)}</i>` : ""}</button>
           <button class="dm-act" data-detail="${w}">dossier</button>
           <button class="dm-act dm-x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">remove</button>
         </div>

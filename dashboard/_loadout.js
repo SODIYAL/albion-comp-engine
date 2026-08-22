@@ -185,15 +185,41 @@ function loadoutReference(w){
 
 function loadoutPrefill(i){
   const ref = loadoutReference(party[i]);
-  if (!ref) return;
   const L = LOADOUT[i] || (LOADOUT[i] = {});
-  Object.entries(ref.gear || {}).forEach(([slot, key]) => {
-    if (!(slot in L) && loGear(key)) L[slot] = key;
-  });
-  /* caller sheets are 1-based ("q3" = third option); the pools are 0-based */
-  LO_SPELLS.forEach(s => {
-    if (!(s in L) && Number.isInteger(ref[s]) && ref[s] > 0) L[s] = ref[s] - 1;
-  });
+  if (ref){
+    Object.entries(ref.gear || {}).forEach(([slot, key]) => {
+      if (!(slot in L) && loGear(key)) L[slot] = key;
+    });
+    /* caller sheets are 1-based ("q3" = third option); the pools are 0-based */
+    LO_SPELLS.forEach(s => {
+      if (!(s in L) && Number.isInteger(ref[s]) && ref[s] > 0) L[s] = ref[s] - 1;
+    });
+  }
+  /* engine fallback (owner 2026-08-21): spell slots no promoted caller
+     build covers are prefilled from the engine's scored default combo for
+     the CURRENT content — the same combo scoring already assumes, so the
+     fitness number does not move. The kit wears the engine mark so it can
+     never be mistaken for a fielded build; gear stays empty (the engine
+     does not pick gear here). */
+  loadoutEngineSpells(i);
+}
+
+function loadoutEngineSpells(i){
+  const w = party[i];
+  if (typeof ENG === "undefined" || !ENG.comboSpells) return;
+  const pools = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
+  const L = LOADOUT[i] || (LOADOUT[i] = {});
+  let used = false;
+  for (const [slot, sid] of ENG.comboSpells(w, null)){
+    const s = slot === "passive" ? "p" : slot;   /* pool name -> loadout key */
+    if (!LO_SPELLS.includes(s) || s in L) continue;
+    const pool = pools[slot] || [];
+    for (let j = 0; j < pool.length; j++)
+      if (pool[j][0] === sid){ L[s] = j; used = true; break; }
+  }
+  /* _eng is display provenance only: the permalink codec walks the fixed
+     slot lists, so the mark never enters a share link */
+  if (used) L._eng = 1;
 }
 
 /* Keep LOADOUT aligned with party across add/remove. Called by _app.js. */
@@ -256,6 +282,7 @@ function loadoutPanel(i){
   return `<div class="lo-panel">
     <div class="lo-row">${LO_SLOTS.map(s => loTile(i, s)).join("")}</div>
     <div class="lo-row lo-spells">${LO_SPELLS.map(s => loSpellPicker(i, s)).join("")}</div>
+    ${(LOADOUT[i] || {})._eng ? `<div class="lo-ref lo-eng" title="the spell picks are the engine's scored defaults for this content — change any spell to make the kit your own">&#9881; engine kit — scored for this content, not a fielded build</div>` : ""}
     ${ref ? `<div class="lo-ref">reference: ${esc(ref.caller)}${ref.role ? " · " + esc(ref.role) : ""}
       ${raw.length ? " · wrote " + raw.map(([sl, t]) =>
         `<b>${esc(LO_SLOT_LABEL[sl] || sl)}</b> “${esc(t)}”`).join(", ") : ""}</div>` : ""}
@@ -304,6 +331,7 @@ function loadoutHandleChange(e){
   const [i, s] = sel.dataset.loSpell.split(":");
   const L = LOADOUT[+i] || (LOADOUT[+i] = {});
   if (sel.value === "") delete L[s]; else L[s] = +sel.value;
+  delete L._eng;   /* a hand-picked spell makes the kit the player's own */
   return true;
 }
 
