@@ -1279,6 +1279,33 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 }
 /* desktop: the mobile add bar stays out of the way */
 @media (min-width:641px){ .wf-add-mobile{display:none} }
+/* Decision-first surface: diagnosis and next action lead; the wheel becomes exploration. */
+.decision-layer{display:grid;grid-template-columns:minmax(190px,.72fr) minmax(200px,.86fr) minmax(360px,1.7fr);gap:14px;align-items:stretch;margin:0 0 6px}
+.dl-status,.dl-need,.dl-pick{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.dl-status{display:flex;justify-content:space-between;gap:18px;align-items:center;border-top:2px solid var(--amber)}
+.dl-status.critical{border-top-color:var(--gap)}.dl-status.warning{border-top-color:var(--amber)}.dl-status.ready{border-top-color:var(--ok-bright)}
+.dl-status strong,.dl-need strong{display:block;font-family:var(--serif);font-size:21px;line-height:1.15;margin:4px 0}
+.dl-status small{color:var(--ink-3);font-family:var(--mono);font-size:10px}.dl-fit{font-family:var(--mono);font-size:25px;font-weight:700;white-space:nowrap}.dl-fit small{display:block;text-align:right;text-transform:uppercase;letter-spacing:.12em}
+.dl-kicker{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.dl-need{border-left:3px solid var(--amber);display:flex;flex-direction:column;justify-content:center}.dl-need.critical{border-left-color:var(--gap)}.dl-need.ready{border-left-color:var(--ok-bright)}.dl-need>span:last-child{font-size:12px;color:var(--ink-2)}
+.dl-pick{border-color:rgba(255,201,58,.5);box-shadow:var(--shadow),0 0 38px -20px rgba(255,201,58,.55)}
+.dl-pick-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.dl-score{font-family:var(--mono);font-size:10px;color:var(--brass)}
+.dl-weapon{display:flex;align-items:center;gap:14px;margin:10px 0 8px}.dl-weapon .nm-btn{font-family:var(--serif);font-size:27px;font-weight:600}.dl-weapon>div>span{display:block;color:var(--ink-3);font-size:11px;margin-top:2px}.dl-weapon .icon{filter:drop-shadow(0 7px 15px rgba(0,0,0,.55)) saturate(1.12)}
+.dl-pick p{font-size:13px;line-height:1.55;color:var(--ink-2);margin:7px 0 10px}.dl-pick p em{color:var(--brass-bright);font-style:normal;font-weight:600}
+.dl-gains{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.dl-gains li{background:var(--sunk);border:1px solid var(--rule);border-radius:9px;padding:7px 8px;font-size:11px;color:var(--ink-2)}.dl-gains b{color:var(--ok-bright);font-family:var(--mono);margin-right:4px}.dl-gains span{display:block;color:var(--ink-3);font-family:var(--mono);font-size:9.5px;margin-top:2px}
+.dl-remain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px}.dl-remain>span:not(.dl-kicker){font-family:var(--mono);font-size:9.5px;padding:3px 7px;border-radius:99px;border:1px solid rgba(255,84,112,.28);color:var(--gap);background:var(--gap-wash)}.dl-remain .dl-kicker{width:100%}.dl-remain.clear>span:not(.dl-kicker){color:var(--ok-bright);border-color:rgba(35,191,110,.25);background:rgba(35,191,110,.07)}
+.dl-add{width:100%;margin-top:12px}
+.dl-empty{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px}.dl-empty p{margin:4px 0 0;color:var(--ink-2);font-size:12.5px}
+/* The old right flank duplicated the exact questions answered above. Keep its
+   underlying renderers alive, but remove that duplicate surface on this pass. */
+.ws-right{display:none!important}
+.wheelstage{grid-template-columns:minmax(196px,220px) minmax(0,1fr)!important;gap:30px}
+.ws-party,.ws-center{grid-column:auto!important;grid-row:auto!important;order:initial!important}
+/* Deep diagnostics remain below the hero, but their heading says what they are. */
+#groups{margin-top:-4px}
+@media(max-width:1250px){.decision-layer{grid-template-columns:1fr 1fr}.dl-pick{grid-column:1/-1}.wheelstage{grid-template-columns:1fr!important}.ws-party{order:1!important}.ws-center{order:2!important}}
+@media(max-width:720px){.decision-layer{grid-template-columns:1fr}.dl-pick{grid-column:auto}.dl-gains{grid-template-columns:1fr}.dl-status strong,.dl-need strong{font-size:18px}.dl-empty{display:block}.wheelstage{gap:20px}}
+
 </style>
 </head>
 <body>
@@ -1353,6 +1380,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   </aside>
 
   <main class="main">
+    <section class="decision-layer" id="decision-layer" aria-label="Composition diagnosis and best next pick"></section>
     <!-- The forge wheel stage: analysis flanks left, the wheel centers,
          reasoning flanks right. The wheel replaces the old rail picker. -->
     <section class="wheelstage">
@@ -5670,6 +5698,116 @@ render();
   const chip = $("parity-chip"), dot = $("parity-dot");
   if (chip) chip.textContent = ok ? "parity vs engine.py — OK" : "PARITY MISMATCH — do not trust";
   if (dot && !ok) dot.style.background = "var(--gap)";
+})();
+
+"use strict";
+/* Decision-first UX layer.
+   CompEngine remains the authority. This file translates its existing
+   floors, weaknesses, recommendation ordering and marginal terms into the
+   order a caller needs them: status -> biggest need -> next pick -> why ->
+   what is still missing. */
+(function(){
+  function statusModel(){
+    if (!party.length) return {tone:"empty", label:"Start your comp", critical:0, weak:0, excess:0};
+    const s = supply(party);
+    let critical = 0, weak = 0, excess = 0;
+    for (const cap of Object.keys(REQS())){
+      const have = s[cap] || 0;
+      const want = Math.max(.001, target(cap) || 0);
+      if (floorHit(cap, have)) critical++;
+      else if (have / want < .65 && ENG.weight(cap) >= 4) weak++;
+      if (have > softCap(cap)) excess++;
+    }
+    const label = critical ? "Critical gaps" : weak >= 2 ? "Needs work" : weak ? "Nearly ready" : "Core covered";
+    const tone = critical ? "critical" : weak ? "warning" : "ready";
+    return {tone, label, critical, weak, excess};
+  }
+
+  function diagnosisRows(){
+    if (!party.length) return [];
+    const s = supply(party);
+    const rows = weaknesses(party, 12).filter(x => x.gap >= .5).map(x => ({
+      ...x,
+      have:s[x.cap] || 0,
+      want:target(x.cap),
+      floor:floorHit(x.cap, s[x.cap] || 0),
+      ratio:(s[x.cap] || 0) / Math.max(.001, target(x.cap))
+    }));
+    rows.sort((a,b) => Number(b.floor)-Number(a.floor)
+      || b.gap-a.gap || ENG.weight(b.cap)-ENG.weight(a.cap));
+    return rows;
+  }
+
+  function afterPickGaps(rec){
+    const next = party.concat([rec.w]);
+    /* Existing members keep their actual resolved kits. The candidate keeps
+       the combo CompEngine selected for this recommendation. */
+    const combos = COMBOS_CUR.concat([rec.combo === undefined ? null : rec.combo]);
+    return inPickContext(() => {
+      const sup = ENG.effectiveSupply(next, combos);
+      return ENG.weaknesses(next, 8, combos).filter(x => x.gap >= .5).slice(0,3)
+        .map(x => ({...x, have:sup[x.cap] || 0, want:ENG.target(x.cap)}));
+    });
+  }
+
+  function renderDecisionLayer(){
+    const host = document.getElementById("decision-layer");
+    if (!host) return;
+    const state = statusModel();
+    const needs = diagnosisRows();
+    const need = needs[0] || null;
+    const recs = RECS_CUR;
+    const top = recs && recs[0];
+    const f = party.length ? fitness(party) : null;
+    const max = maxFitness();
+    const pct = f === null ? 0 : Math.max(0, Math.min(100, f / Math.max(1,max) * 100));
+
+    if (!party.length){
+      host.innerHTML = `<div class="dl-status dl-empty">
+        <div><span class="dl-kicker">Build a party</span><strong>What should your next player bring?</strong>
+        <p>Choose the content and playstyle, then add the weapons you already have. Comp Forge will diagnose the gaps before suggesting the next slot.</p></div>
+        <span class="dl-fit">—<small>fitness</small></span>
+      </div>`;
+      return;
+    }
+
+    if (!top){
+      host.innerHTML = `<div class="dl-status ${state.tone} dl-empty"><div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small></div><span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span></div>`;
+      return;
+    }
+
+    const terms = explain(party, top.w).slice(0,3);
+    const remaining = afterPickGaps(top);
+    const needHtml = need ? `<div class="dl-need ${need.floor ? "critical" : ""}">
+      <span class="dl-kicker">Biggest need${need.floor ? " · hard floor" : ""}</span>
+      <strong>${esc(capLabel(need.cap))}</strong>
+      <span>${need.have.toFixed(0)} / ${need.want.toFixed(1)} covered${needs.length > 1 ? ` · ${needs.length - 1} other gap${needs.length > 2 ? "s" : ""}` : ""}</span>
+    </div>` : `<div class="dl-need ready"><span class="dl-kicker">Diagnosis</span><strong>Core requirements covered</strong><span>The next slot improves depth instead of repairing a load-bearing hole.</span></div>`;
+
+    const gains = terms.map(t => `<li><b>+${t.d.toFixed(1)}</b> ${esc(capLabel(t.cap))}<span>${t.before.toFixed(0)} → ${t.after.toFixed(0)} / ${t.target.toFixed(1)}</span></li>`).join("");
+    const remain = remaining.length ? `<div class="dl-remain"><span class="dl-kicker">Still weak after this pick</span>${remaining.map(x => `<span title="${x.have.toFixed(0)} / ${x.want.toFixed(1)}">${esc(capLabel(x.cap))}</span>`).join("")}</div>` : `<div class="dl-remain clear"><span class="dl-kicker">After this pick</span><span>Core gaps are covered.</span></div>`;
+
+    host.innerHTML = `
+      <div class="dl-status ${state.tone}">
+        <div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small></div>
+        <span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span>
+      </div>
+      ${needHtml}
+      <div class="dl-pick">
+        <div class="dl-pick-head"><span class="dl-kicker">Best next pick · slot ${Math.min(party.length + 1, HARD_CAP)}</span><span class="dl-score">+${top.score.toFixed(2)} comp score</span></div>
+        <div class="dl-weapon">${icon(top.w,72)}<div><button class="nm-btn" data-detail="${top.w}">${nameOf(top.w)}</button><span>${esc(roleOf(top.w, top.combo))}</span></div></div>
+        <p>${whySentence(party, top.w)}</p>
+        <ul class="dl-gains">${gains}</ul>
+        ${remain}
+        <button class="cb-add dl-add" data-add="${top.w}">Add ${nameOf(top.w)}</button>
+      </div>`;
+  }
+
+  /* _app.js owns state and rendering. Wrap its render function so every real
+     roster/content/style/loadout change refreshes this surface too. */
+  const baseRender = render;
+  render = function(){ baseRender(); renderDecisionLayer(); };
+  renderDecisionLayer();
 })();
 </script>
 </body>
