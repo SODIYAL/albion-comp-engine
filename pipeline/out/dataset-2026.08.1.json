@@ -42979,22 +42979,22 @@
     "fit": {
      "brawl": {
       "gang": "situational",
-      "group": "unfit",
+      "group": "situational",
       "trio": "fits"
      },
      "brawl_clap": {
       "gang": "situational",
-      "group": "unfit",
+      "group": "situational",
       "trio": "fits"
      },
      "clap": {
       "gang": "situational",
-      "group": "unfit",
+      "group": "situational",
       "trio": "fits"
      },
      "kite": {
       "gang": "situational",
-      "group": "unfit",
+      "group": "situational",
       "trio": "fits"
      }
     }

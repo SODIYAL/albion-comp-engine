@@ -502,6 +502,29 @@ def run():
                       for c in idr["conflicts"]),
           f"member={rb_m} conflicts={[c['display_name'] for c in idr['conflicts']]}")
 
+    # T23e — label round rulings (owner, 2026-08-23): a near-monoculture
+    # ranged burst comp is a BOMB SQUAD — "these guys are normally not part
+    # of main party but support main party by doing damage off timers" — a
+    # detachment archetype, not an ordinary clap (pinned on the real
+    # KroozLT19 6x-Wailing-Bow comp). And the Harpoon ruling: pierce +
+    # damage_debuff are group jobs in their own right, so the pierce-bot
+    # carries a group slot as 'situational', never 'unfit' — leaving
+    # Battleaxe (the explicit owner override) as the only weapon barred
+    # from every style at group scale.
+    bomb = ["2H_BOW_HELL", "MAIN_ARCANESTAFF_UNDEAD", "MAIN_CURSEDSTAFF_UNDEAD",
+            "2H_BOW_HELL", "2H_BOW_HELL", "2H_BOW_HELL", "2H_BOW_HELL",
+            "2H_BOW_HELL"]
+    id_bomb = Engine(content="blackzone_roam", size=8).comp_identity(bomb)
+    harpoon_fit = E.weapons["2H_HARPOON_HELL"]["style_fit"]["fit"]
+    check("T23e bomb-squad archetype + the Harpoon pierce ruling",
+          id_bomb.get("archetype") == "bomb_squad"
+          and id_bomb["style"] == "clap"
+          and "Bomb squad" in id_bomb["label"]
+          and all(harpoon_fit[s]["group"] == "situational"
+                  for s in ("brawl", "clap", "kite", "brawl_clap")),
+          f"label={id_bomb['label']} harpoon-group="
+          f"{harpoon_fit['clap']['group']}")
+
     # T25 — kill pressure (identity Phase D, owner checklist 2026-08-23):
     # "did we bring pierce on the clump, did we give heal cuts, did we do
     # enough damage within a short span to actually kill." The lights are

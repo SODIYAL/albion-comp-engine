@@ -1432,6 +1432,8 @@
     var melee = 0.0, ranged = 0.0, aoe = 0.0, sus = 0.0, st = 0.0,
         commit = 0.0, evade = 0.0;
     var carriers = { melee: [], ranged: [] };
+    var carrierCount = {};
+    var nCarrierMembers = 0;
     var flex = {};
     var sides = {};
     for (var i = 0; i < n; i++) {
@@ -1458,6 +1460,8 @@
       if (delivery === "flex") flex[w] = true;
       sides[i] = side;
       if (carriers[side].indexOf(w) === -1) carriers[side].push(w);
+      carrierCount[w] = (carrierCount[w] || 0) + 1;
+      nCarrierMembers += 1;
       if (side === "ranged") ranged += dmg; else melee += dmg;
     }
     var tot = melee + ranged;
@@ -1488,8 +1492,19 @@
       clap = mode.aoe >= IDENTITY_CLAP_AOE;
       out.style = clap ? "clap" : "kite";
       out.strength = mel <= 1.0 - IDENTITY_STRONG ? "strong" : "leaning";
-      out.label = clap ? sname("clap", "Clap") + " — ranged bomb"
-                       : sname("kite", "Kite") + " — ranged pressure";
+      /* Bomb-squad archetype (owner, blind label round 2026-08-23) —
+         mirrors engine.py comp_identity. */
+      var topCarrier = 0;
+      for (var tc in carrierCount) {
+        if (carrierCount[tc] > topCarrier) topCarrier = carrierCount[tc];
+      }
+      if (clap && topCarrier >= 3 && topCarrier * 2 >= nCarrierMembers) {
+        out.archetype = "bomb_squad";
+        out.label = "Bomb squad — off-timer artillery (clap detachment)";
+      } else {
+        out.label = clap ? sname("clap", "Clap") + " — ranged bomb"
+                         : sname("kite", "Kite") + " — ranged pressure";
+      }
     } else if (mode.aoe >= IDENTITY_BC_AOE && posture >= IDENTITY_BC_POSTURE) {
       out.style = "brawl_clap";
       out.strength = "leaning";

@@ -1436,6 +1436,8 @@ class Engine:
         n = len(party)
         melee = ranged = aoe = sus = st = commit = evade = 0.0
         carriers = {"melee": [], "ranged": []}
+        carrier_count = {}
+        n_carrier_members = 0
         flex = set()
         sides = {}
         for i, w in enumerate(party):
@@ -1461,6 +1463,8 @@ class Engine:
             sides[i] = side
             if w not in carriers[side]:
                 carriers[side].append(w)
+            carrier_count[w] = carrier_count.get(w, 0) + 1
+            n_carrier_members += 1
             if side == "ranged":
                 ranged += dmg
             else:
@@ -1493,9 +1497,21 @@ class Engine:
             out["strength"] = ("strong"
                               if mel <= 1.0 - self.IDENTITY_STRONG
                               else "leaning")
-            out["label"] = (f"{style_names.get('clap', 'Clap')} — ranged bomb"
-                            if clap else
-                            f"{style_names.get('kite', 'Kite')} — ranged pressure")
+            # Bomb-squad archetype (owner, blind label round 2026-08-23):
+            # a near-monoculture ranged burst comp is an off-timer artillery
+            # DETACHMENT supporting a main party — "a different play style
+            # for party" — not an ordinary clap. Signature: one weapon holds
+            # at least half of at least 3 damage-carrier bodies.
+            top_carrier = max(carrier_count.values()) if carrier_count else 0
+            if (clap and top_carrier >= 3
+                    and top_carrier * 2 >= n_carrier_members):
+                out["archetype"] = "bomb_squad"
+                out["label"] = ("Bomb squad — off-timer artillery "
+                                "(clap detachment)")
+            else:
+                out["label"] = (f"{style_names.get('clap', 'Clap')} — ranged bomb"
+                                if clap else
+                                f"{style_names.get('kite', 'Kite')} — ranged pressure")
         elif (mode["aoe"] >= self.IDENTITY_BC_AOE
               and posture >= self.IDENTITY_BC_POSTURE):
             out["style"] = "brawl_clap"

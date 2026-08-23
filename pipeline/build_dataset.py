@@ -402,9 +402,14 @@ DAMAGE_CAPS = ("burst_st", "burst_aoe", "sustained_dps", "execute")
 # does not scale (the Dagger Pair case — golden T15: its value at scale is
 # utility, not kill damage). A single-scale damage carrier with at least
 # UTILITY_EXEMPT_MIN of these points degrades to 'situational', not 'unfit'.
+# resist_shred + damage_debuff added by owner ruling 2026-08-23 (the
+# Harpoon review-queue case): pierce on the clump and damage amps are
+# group jobs in their own right — the exact tools the kill checklist
+# names — so a pierce-bot carries a slot without group-scale damage.
 UTILITY_EXEMPT_CAPS = ("catch", "clump_create", "engage", "peel", "purge",
                        "silence", "stun", "root", "knockback_displace",
-                       "heal_reduction", "max_health_cut", "anti_dive")
+                       "heal_reduction", "max_health_cut", "anti_dive",
+                       "resist_shred", "damage_debuff")
 UTILITY_EXEMPT_MIN = 6
 DMG_CARRIER_MIN = 4                              # flat damage points
 # An E damage spell with a real area footprint is group-scale even when the
