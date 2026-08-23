@@ -321,7 +321,7 @@ check("H18 no usage/observation payload is embedded in the dataset",
 
 # ---- H.21 weapon style-fit identity (owner-specified 2026-08-23) ---------------
 FIT_REPORT = load_json(os.path.join(OUT, "style_fit_report.json"))
-STYLES_ = ("brawl", "clap", "kite", "brawl_clap")
+STYLES_ = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
 BANDS_ = ("trio", "gang", "group")
 bad = []
 for k, w in WEAPONS.items():

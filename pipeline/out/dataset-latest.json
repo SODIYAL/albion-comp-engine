@@ -32077,6 +32077,29 @@
    },
    "name": "Clap"
   },
+  "clap_kite": {
+   "blurb": "bomb from range, reset on cooldowns \u2014 kite between windows",
+   "mechanics": {
+    "expected_aoe_targets": 6,
+    "focus_attackers": 3
+   },
+   "multipliers": {
+    "burst_aoe": 1.45,
+    "burst_st": 1.05,
+    "catch": 1.2,
+    "clump_create": 1.35,
+    "disengage": 1.3,
+    "engage": 0.95,
+    "heal_sustain": 0.95,
+    "mobility": 1.3,
+    "purge": 1.1,
+    "ranged_presence": 1.6,
+    "silence": 1.15,
+    "sustained_dps": 0.85,
+    "tankiness": 0.8
+   },
+   "name": "Clap-Kite"
+  },
   "kite": {
    "blurb": "never take the fight \u2014 range, tempo and chip damage",
    "mechanics": {
@@ -33217,6 +33240,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -33372,6 +33400,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -33536,6 +33569,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -33733,6 +33771,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -33912,6 +33955,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -34130,6 +34178,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -34287,6 +34340,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -34490,6 +34548,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -34665,6 +34728,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -34853,6 +34921,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -35071,6 +35144,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -35244,6 +35322,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -35435,6 +35518,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -35637,6 +35725,11 @@
       "group": "situational",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "unfit",
       "group": "unfit",
@@ -35827,6 +35920,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -36041,6 +36139,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -36210,6 +36313,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -36401,6 +36509,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -36573,6 +36686,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -36750,6 +36868,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -36933,6 +37056,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -37093,6 +37221,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -37264,6 +37397,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -37447,6 +37585,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -37637,6 +37780,11 @@
       "group": "situational",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "situational",
       "group": "situational",
@@ -37816,6 +37964,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -37910,6 +38063,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -38109,6 +38267,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -38328,6 +38491,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -38509,6 +38677,11 @@
       "group": "situational",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "unfit",
       "group": "unfit",
@@ -38685,6 +38858,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -38856,6 +39034,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -39109,6 +39292,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -39266,6 +39454,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -39440,6 +39633,11 @@
       "group": "situational",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "unfit",
       "group": "unfit",
@@ -39602,6 +39800,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -39775,6 +39978,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -39904,6 +40112,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -40041,6 +40254,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -40190,6 +40408,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -40331,6 +40554,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -40489,6 +40717,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -40639,6 +40872,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -40862,6 +41100,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -41076,6 +41319,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -41297,6 +41545,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -41430,6 +41683,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -41594,6 +41852,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -41777,6 +42040,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -41965,6 +42233,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -42183,6 +42456,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -42417,6 +42695,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -42637,6 +42920,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -42877,6 +43165,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -43046,6 +43339,11 @@
       "group": "situational",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "situational",
       "group": "situational",
@@ -43160,6 +43458,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -43282,6 +43585,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -43393,6 +43701,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -43500,6 +43813,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -43715,6 +44033,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -43943,6 +44266,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -44073,6 +44401,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -44225,6 +44558,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -44412,6 +44750,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -44574,6 +44917,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -44800,6 +45148,11 @@
       "group": "situational",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "situational",
       "group": "situational",
@@ -44984,6 +45337,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -45215,6 +45573,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -45421,6 +45784,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -45604,6 +45972,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -45816,6 +46189,11 @@
       "group": "situational",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "unfit",
       "group": "unfit",
@@ -45995,6 +46373,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -46228,6 +46611,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -46371,6 +46759,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -46544,6 +46937,11 @@
       "group": "situational",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "situational",
       "group": "situational",
@@ -46694,6 +47092,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -46880,6 +47283,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -47051,6 +47459,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -47243,6 +47656,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -47423,6 +47841,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -47654,6 +48077,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -47846,6 +48274,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -48064,6 +48497,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -48261,6 +48699,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -48420,6 +48863,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -48601,6 +49049,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -48764,6 +49217,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -48958,6 +49416,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -49175,6 +49638,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -49383,6 +49851,11 @@
       "group": "situational",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "situational",
       "group": "situational",
@@ -49574,6 +50047,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -49773,6 +50251,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -49956,6 +50439,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -50165,6 +50653,11 @@
       "group": "situational",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "situational",
       "group": "situational",
@@ -50353,6 +50846,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -50558,6 +51056,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -50725,6 +51228,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -50850,6 +51358,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -51019,6 +51532,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -51238,6 +51756,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -51421,6 +51944,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -51599,6 +52127,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -51761,6 +52294,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -51919,6 +52457,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -52124,6 +52667,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -52305,6 +52853,11 @@
       "group": "unfit",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "unfit",
       "group": "unfit",
@@ -52466,6 +53019,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -52622,6 +53180,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -52812,6 +53375,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -52991,6 +53559,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -53142,6 +53715,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -53334,6 +53912,11 @@
       "group": "situational",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "unfit",
       "group": "unfit",
@@ -53473,6 +54056,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -53641,6 +54229,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -53782,6 +54375,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -54001,6 +54599,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -54191,6 +54794,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -54412,6 +55020,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -54626,6 +55239,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -54728,6 +55346,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -54841,6 +55464,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -54935,6 +55563,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -55067,6 +55700,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -55241,6 +55879,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -55425,6 +56068,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -55617,6 +56265,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -55779,6 +56432,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -55970,6 +56628,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -56122,6 +56785,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -56322,6 +56990,11 @@
       "group": "situational",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "situational",
       "group": "situational",
@@ -56472,6 +57145,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "fits",
       "group": "fits",
       "trio": "fits"
@@ -56665,6 +57343,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -56843,6 +57526,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"
@@ -57035,6 +57723,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -57206,6 +57899,11 @@
       "group": "fits",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "fits",
       "group": "fits",
@@ -57372,6 +58070,11 @@
       "group": "situational",
       "trio": "fits"
      },
+     "clap_kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
      "kite": {
       "gang": "situational",
       "group": "situational",
@@ -57516,6 +58219,11 @@
       "trio": "fits"
      },
      "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap_kite": {
       "gang": "situational",
       "group": "situational",
       "trio": "fits"

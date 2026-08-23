@@ -271,11 +271,11 @@ class Engine:
         # declares no intent and gates nothing; datasets without
         # style_fit gate nothing.
         self._style_unfit = set()
-        if self.style in ("brawl", "clap", "kite", "brawl_clap"):
+        if self.style in self.IDENTITY_STYLES:
             band = self._fit_band()
             for wk in self.pool:
                 sf = self.weapons[wk].get("style_fit")
-                if sf and sf["fit"][self.style][band] == "unfit":
+                if sf and (sf["fit"].get(self.style) or {}).get(band) == "unfit":
                     self._style_unfit.add(wk)
             if self._style_unfit:
                 self._suggest = [w for w in self._suggest
@@ -1403,6 +1403,13 @@ class Engine:
     IDENTITY_CARRIER_MIN = 4       # raw damage points that make a damage carrier
     IDENTITY_MIN_MEMBERS = 3       # below this the comp is still "forming"
     IDENTITY_RANGED_ATTACK = 9.0   # attackrange at/above -> ranged delivery
+    # Clap-Kite hybrid (owner 2026-08-23): a ranged core with BOTH real
+    # bomb share and real reset mobility. Calibrated on the owner-labeled
+    # comps: DH P1 / 20v20 (aoe ~.53, evade ~2.6/member) read hybrid;
+    # pure clap10 (evade 1.8) and pure kite10 (aoe .26) do not.
+    IDENTITY_HYBRID_AOE = 0.40     # bomb share at/above -> clap half present
+    IDENTITY_HYBRID_EVADE = 2.0    # mobility+disengage pts/member -> kite half
+    IDENTITY_STYLES = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
 
     def _style_fit_of(self, weapon):
         """The weapon's derived style/size identity (build_dataset
@@ -1503,11 +1510,18 @@ class Engine:
             # for party" — not an ordinary clap. Signature: one weapon holds
             # at least half of at least 3 damage-carrier bodies.
             top_carrier = max(carrier_count.values()) if carrier_count else 0
+            evade_pm = evade / n if n else 0.0
             if (clap and top_carrier >= 3
                     and top_carrier * 2 >= n_carrier_members):
                 out["archetype"] = "bomb_squad"
                 out["label"] = ("Bomb squad — off-timer artillery "
                                 "(clap detachment)")
+            elif (mode["aoe"] >= self.IDENTITY_HYBRID_AOE
+                    and evade_pm >= self.IDENTITY_HYBRID_EVADE):
+                out["style"] = "clap_kite"
+                out["strength"] = "leaning"
+                out["label"] = (f"{style_names.get('clap_kite', 'Clap-Kite')}"
+                                " — bomb from range, reset on cooldowns")
             else:
                 out["label"] = (f"{style_names.get('clap', 'Clap')} — ranged bomb"
                                 if clap else
@@ -1542,11 +1556,19 @@ class Engine:
                                     " — melee ball")
                 else:
                     clap = mode["aoe"] >= self.IDENTITY_CLAP_AOE
-                    out["style"] = "clap" if clap else "kite"
-                    out["strength"] = "leaning"
-                    out["label"] = (f"{style_names.get('clap', 'Clap')} — ranged bomb"
-                                    if clap else
-                                    f"{style_names.get('kite', 'Kite')} — ranged pressure")
+                    evade_pm2 = evade / n if n else 0.0
+                    if (mode["aoe"] >= self.IDENTITY_HYBRID_AOE
+                            and evade_pm2 >= self.IDENTITY_HYBRID_EVADE):
+                        out["style"] = "clap_kite"
+                        out["strength"] = "leaning"
+                        out["label"] = (f"{style_names.get('clap_kite', 'Clap-Kite')}"
+                                        " — bomb from range, reset on cooldowns")
+                    else:
+                        out["style"] = "clap" if clap else "kite"
+                        out["strength"] = "leaning"
+                        out["label"] = (f"{style_names.get('clap', 'Clap')} — ranged bomb"
+                                        if clap else
+                                        f"{style_names.get('kite', 'Kite')} — ranged pressure")
             else:
                 out["label"] = ("split identity — melee and ranged damage "
                                 "pull apart")
@@ -1562,12 +1584,11 @@ class Engine:
         # ---- per-member fit verdicts (the declared style is the caller's
         # INTENT — owner ruling: picking brawl means asking for brawl
         # builds; balanced falls back to the detected lean) ----
-        fit_style = (self.style if self.style in ("brawl", "clap", "kite",
-                                                  "brawl_clap")
+        fit_style = (self.style if self.style in self.IDENTITY_STYLES
                      else out["style"])
         for i, w in enumerate(party):
             sf = self._style_fit_of(w)
-            verdict = (sf["fit"][fit_style][band]
+            verdict = ((sf["fit"].get(fit_style) or {}).get(band)
                        if sf and fit_style else None)
             m = {"weapon": w,
                  "display_name": self.weapons[w]["display_name"],

@@ -117,3 +117,30 @@ styles:
       mobility: 0.85
     # the hybrid: grind spreads damage until the clump forms, then bomb it
     mechanics: {expected_aoe_targets: 5, focus_attackers: 3}
+
+  clap_kite:
+    name: Clap-Kite
+    blurb: bomb from range, reset on cooldowns — kite between windows
+    # Owner-identified playstyle (2026-08-23, blind-label rounds): the
+    # ranged twin of brawl-clap. Both real 20-man comps the owner labeled
+    # (Deadlyhooker P1, albioncompo 20v20) "have both clap potential and
+    # kite potential" — bomb pieces AND the mobility to reset between
+    # windows. Multipliers are a PROVISIONAL clap/kite blend (weights not
+    # expert-adjudicated, same header rule as every style here).
+    multipliers:
+      burst_aoe: 1.45
+      clump_create: 1.35
+      ranged_presence: 1.6
+      mobility: 1.3
+      disengage: 1.3
+      catch: 1.2
+      silence: 1.15
+      purge: 1.1
+      burst_st: 1.05
+      engage: 0.95
+      heal_sustain: 0.95
+      sustained_dps: 0.85
+      tankiness: 0.8
+    # bombs on manufactured clumps between kite resets: escalation rides
+    # toward the cap in the windows; focus fire stays incidental
+    mechanics: {expected_aoe_targets: 6, focus_attackers: 3}

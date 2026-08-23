@@ -242,12 +242,14 @@
        never scoring; balanced gates nothing). */
     this._styleUnfit = {};
     if (this.style === "brawl" || this.style === "clap" ||
-        this.style === "kite" || this.style === "brawl_clap") {
+        this.style === "kite" || this.style === "brawl_clap" ||
+        this.style === "clap_kite") {
       var sBand = this._fitBand();
       var anyUnfit = false;
       for (i = 0; i < this.pool.length; i++) {
         var sfw = this.weapons[this.pool[i]].style_fit;
-        if (sfw && sfw.fit[this.style][sBand] === "unfit") {
+        if (sfw && sfw.fit[this.style] &&
+            sfw.fit[this.style][sBand] === "unfit") {
           this._styleUnfit[this.pool[i]] = true;
           anyUnfit = true;
         }
@@ -1409,7 +1411,10 @@
       IDENTITY_STRONG = 0.80, IDENTITY_CLAP_AOE = 0.50,
       IDENTITY_BC_AOE = 0.45, IDENTITY_BC_POSTURE = 0.45,
       IDENTITY_CARRIER_MIN = 4, IDENTITY_MIN_MEMBERS = 3,
-      IDENTITY_RANGED_ATTACK = 9.0;
+      IDENTITY_RANGED_ATTACK = 9.0,
+      IDENTITY_HYBRID_AOE = 0.40, IDENTITY_HYBRID_EVADE = 2.0;
+  var IDENTITY_STYLES = { brawl: true, clap: true, kite: true,
+                          brawl_clap: true, clap_kite: true };
 
   CompEngine.prototype._styleFitOf = function (weapon) {
     /* The weapon's derived style/size identity; null on pre-identity
@@ -1492,15 +1497,22 @@
       clap = mode.aoe >= IDENTITY_CLAP_AOE;
       out.style = clap ? "clap" : "kite";
       out.strength = mel <= 1.0 - IDENTITY_STRONG ? "strong" : "leaning";
-      /* Bomb-squad archetype (owner, blind label round 2026-08-23) —
-         mirrors engine.py comp_identity. */
+      /* Bomb-squad archetype + clap-kite hybrid (owner, blind label
+         rounds 2026-08-23) — mirrors engine.py comp_identity. */
       var topCarrier = 0;
       for (var tc in carrierCount) {
         if (carrierCount[tc] > topCarrier) topCarrier = carrierCount[tc];
       }
+      var evadePm = n ? evade / n : 0.0;
       if (clap && topCarrier >= 3 && topCarrier * 2 >= nCarrierMembers) {
         out.archetype = "bomb_squad";
         out.label = "Bomb squad — off-timer artillery (clap detachment)";
+      } else if (mode.aoe >= IDENTITY_HYBRID_AOE &&
+                 evadePm >= IDENTITY_HYBRID_EVADE) {
+        out.style = "clap_kite";
+        out.strength = "leaning";
+        out.label = sname("clap_kite", "Clap-Kite") +
+                    " — bomb from range, reset on cooldowns";
       } else {
         out.label = clap ? sname("clap", "Clap") + " — ranged bomb"
                          : sname("kite", "Kite") + " — ranged pressure";
@@ -1532,10 +1544,19 @@
           out.label = sname("brawl", "Brawl") + " — melee ball";
         } else {
           clap = mode.aoe >= IDENTITY_CLAP_AOE;
-          out.style = clap ? "clap" : "kite";
-          out.strength = "leaning";
-          out.label = clap ? sname("clap", "Clap") + " — ranged bomb"
-                           : sname("kite", "Kite") + " — ranged pressure";
+          var evadePm2 = n ? evade / n : 0.0;
+          if (mode.aoe >= IDENTITY_HYBRID_AOE &&
+              evadePm2 >= IDENTITY_HYBRID_EVADE) {
+            out.style = "clap_kite";
+            out.strength = "leaning";
+            out.label = sname("clap_kite", "Clap-Kite") +
+                        " — bomb from range, reset on cooldowns";
+          } else {
+            out.style = clap ? "clap" : "kite";
+            out.strength = "leaning";
+            out.label = clap ? sname("clap", "Clap") + " — ranged bomb"
+                             : sname("kite", "Kite") + " — ranged pressure";
+          }
         }
       } else {
         out.label = "split identity — melee and ranged damage pull apart";
@@ -1552,13 +1573,12 @@
     }
     /* per-member fit verdicts: the declared style is the caller's INTENT;
        balanced falls back to the detected lean */
-    var fitStyle = (this.style === "brawl" || this.style === "clap" ||
-                    this.style === "kite" || this.style === "brawl_clap")
-      ? this.style : out.style;
+    var fitStyle = IDENTITY_STYLES[this.style] ? this.style : out.style;
     for (var pi = 0; pi < n; pi++) {
       var pw = party[pi];
       var psf = this._styleFitOf(pw);
-      var verdict = (psf && fitStyle) ? psf.fit[fitStyle][band] : null;
+      var verdict = (psf && fitStyle && psf.fit[fitStyle])
+        ? psf.fit[fitStyle][band] : null;
       var m = { weapon: pw,
                 display_name: this.weapons[pw].display_name,
                 role: this.roleOf(pw),

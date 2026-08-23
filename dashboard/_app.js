@@ -23,7 +23,7 @@ let PLANNED = ENG.size;
 let SIZE = PLANNED;
 let STYLE = "balanced";
 const HARD_CAP = 60;
-const STYLE_ORDER = ["balanced", "brawl", "clap", "kite", "brawl_clap"];
+const STYLE_ORDER = ["balanced", "brawl", "clap", "kite", "brawl_clap", "clap_kite"];
 
 const PLAN = () => Math.max(PLANNED, party.length);
 const pickSize = () => Math.min(Math.max(party.length + 1, 1), HARD_CAP);

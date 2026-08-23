@@ -525,20 +525,24 @@ def run():
           f"label={id_bomb['label']} harpoon-group="
           f"{harpoon_fit['clap']['group']}")
 
-    # T23f — blind labels 3/4 (owner, 2026-08-23): both 20-man comps are
-    # CLAP. The engine agreed on Deadlyhooker P1 but misread the
-    # albioncompo 20v20 as "split" — its melee share (35.5%) sits a hair
-    # over the ranged-core line and the sole rigid minority carrier was
-    # Spirithunter, whose damage is incidental to its pierce-bot job
-    # (the owner's own Harpoon ruling). Fix pinned here: utility carriers
-    # never anchor a damage-identity split, so both real comps read clap.
+    # T23f — blind labels 3/4 + the owner's follow-up refinement
+    # (2026-08-23): both 20-man comps "have both clap potential and kite
+    # potential" — CLAP-KITE is its own playstyle (bomb from range, reset
+    # on cooldowns; the ranged twin of brawl-clap). Detection: real bomb
+    # share (>=0.40) AND real reset mobility (>=2 evade pts/member) in a
+    # ranged core. Also pinned from the round: a pierce-bot (Spirithunter,
+    # the Harpoon ruling) never anchors a damage-identity split — that
+    # miss is what exposed the 20v20's true read. The pure fixtures stay
+    # pure: clap10 has the bombs but not the legs (1.8 evade/m), kite10
+    # the legs but not the bombs.
     dh1_id = Engine(content="territory_defense", size=len(dh1)).comp_identity(dh1)
     c20 = _comp_party("albioncompo_20v20_competitive_2026_08", 0)
     c20_id = Engine(content="blackzone_roam", size=len(c20)).comp_identity(c20)
-    check("T23f both real 20-man comps read clap (owner blind labels); "
-          "a pierce-bot cannot anchor a split",
-          dh1_id["style"] == "clap" and c20_id["style"] == "clap"
-          and c20_id["conflicts"] == [],
+    check("T23f both real 20-man comps read clap-kite (owner refinement); "
+          "pure clap10/kite10 stay pure; no pierce-bot split",
+          dh1_id["style"] == "clap_kite" and c20_id["style"] == "clap_kite"
+          and c20_id["conflicts"] == []
+          and id_clap["style"] == "clap" and id_kite["style"] == "kite",
           f"DH={dh1_id['style']} 20v20={c20_id['style']} "
           f"({c20_id['melee_share']:.0%} melee)")
 

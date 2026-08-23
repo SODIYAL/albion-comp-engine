@@ -394,7 +394,7 @@ def derive_ranged_presence(weapons, spell_index, overrides):
 # Derived structurally, overridable with cited owner rulings
 # (style_overrides.yaml), audited in out/style_fit_report.json.
 # DESCRIPTIVE layer: comp_identity() reads it; no scoring path does.
-STYLE_FIT_STYLES = ("brawl", "clap", "kite", "brawl_clap")
+STYLE_FIT_STYLES = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
 STYLE_FIT_BANDS = ("trio", "gang", "group")      # <=3 / 4-9 / 10+
 STYLE_FIT_VERDICTS = ("fits", "situational", "unfit")
 DAMAGE_CAPS = ("burst_st", "burst_aoe", "sustained_dps", "execute")
@@ -518,6 +518,15 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides):
                 for s in STYLE_FIT_STYLES:
                     fit[s]["gang"] = "situational"
                     fit[s]["group"] = deep
+            # clap_kite serves whichever half a weapon serves: its verdict
+            # is the BEST of the weapon's clap and kite verdicts per band
+            # (owner 2026-08-23: the hybrid fields bomb pieces AND kite
+            # pieces). Overrides still win afterwards ('*' covers it).
+            rank = {"fits": 0, "situational": 1, "unfit": 2}
+            for b in STYLE_FIT_BANDS:
+                best = min((fit["clap"][b], fit["kite"][b]),
+                           key=lambda v: rank[v])
+                fit["clap_kite"][b] = best
 
         basis = "derived"
         ov = overrides.get(key)
