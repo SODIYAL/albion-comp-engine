@@ -32013,6 +32013,45 @@
   },
   "brawl": {
    "blurb": "stand and grind \u2014 sustain, stall and attrition win",
+   "chain": [
+    {
+     "caps": [
+      "engage",
+      "tankiness"
+     ],
+     "name": "Contact"
+    },
+    {
+     "caps": [
+      "sustained_dps",
+      "resist_shred"
+     ],
+     "name": "Pressure"
+    },
+    {
+     "caps": [
+      "heal_sustain",
+      "cleanse",
+      "self_sustain"
+     ],
+     "name": "Sustain"
+    },
+    {
+     "caps": [
+      "heal_reduction",
+      "purge",
+      "peel"
+     ],
+     "name": "Denial"
+    },
+    {
+     "caps": [
+      "execute",
+      "max_health_cut"
+     ],
+     "name": "Secure"
+    }
+   ],
    "mechanics": {
     "expected_aoe_targets": 3,
     "focus_attackers": 3
@@ -32037,6 +32076,42 @@
   },
   "brawl_clap": {
    "blurb": "grind until they clump, then bomb \u2014 the hybrid",
+   "chain": [
+    {
+     "caps": [
+      "engage",
+      "tankiness"
+     ],
+     "name": "Contact"
+    },
+    {
+     "caps": [
+      "sustained_dps",
+      "heal_sustain"
+     ],
+     "name": "Grind"
+    },
+    {
+     "caps": [
+      "clump_create"
+     ],
+     "name": "Clump"
+    },
+    {
+     "caps": [
+      "burst_aoe",
+      "resist_shred"
+     ],
+     "name": "Bomb"
+    },
+    {
+     "caps": [
+      "heal_reduction",
+      "execute"
+     ],
+     "name": "Secure"
+    }
+   ],
    "mechanics": {
     "expected_aoe_targets": 5,
     "focus_attackers": 3
@@ -32056,6 +32131,49 @@
   },
   "clap": {
    "blurb": "stack them and delete them \u2014 one engage, one bomb",
+   "chain": [
+    {
+     "caps": [
+      "engage",
+      "stun"
+     ],
+     "name": "Engage"
+    },
+    {
+     "caps": [
+      "clump_create",
+      "catch"
+     ],
+     "name": "Clump"
+    },
+    {
+     "caps": [
+      "resist_shred"
+     ],
+     "name": "Pierce"
+    },
+    {
+     "caps": [
+      "burst_aoe"
+     ],
+     "name": "Burst"
+    },
+    {
+     "caps": [
+      "heal_reduction",
+      "silence",
+      "execute"
+     ],
+     "name": "Secure"
+    },
+    {
+     "caps": [
+      "disengage",
+      "mobility"
+     ],
+     "name": "Reset"
+    }
+   ],
    "mechanics": {
     "expected_aoe_targets": 7,
     "focus_attackers": 3
@@ -32079,6 +32197,48 @@
   },
   "clap_kite": {
    "blurb": "bomb from range, reset on cooldowns \u2014 kite between windows",
+   "chain": [
+    {
+     "caps": [
+      "mobility",
+      "disengage"
+     ],
+     "name": "Kite window"
+    },
+    {
+     "caps": [
+      "catch",
+      "slow"
+     ],
+     "name": "Catch"
+    },
+    {
+     "caps": [
+      "clump_create",
+      "engage"
+     ],
+     "name": "Clump"
+    },
+    {
+     "caps": [
+      "resist_shred"
+     ],
+     "name": "Pierce"
+    },
+    {
+     "caps": [
+      "burst_aoe"
+     ],
+     "name": "Bomb"
+    },
+    {
+     "caps": [
+      "disengage",
+      "heal_sustain"
+     ],
+     "name": "Reset"
+    }
+   ],
    "mechanics": {
     "expected_aoe_targets": 6,
     "focus_attackers": 3
@@ -32102,6 +32262,44 @@
   },
   "kite": {
    "blurb": "never take the fight \u2014 range, tempo and chip damage",
+   "chain": [
+    {
+     "caps": [
+      "mobility",
+      "disengage"
+     ],
+     "name": "Space"
+    },
+    {
+     "caps": [
+      "slow",
+      "root"
+     ],
+     "name": "Slow"
+    },
+    {
+     "caps": [
+      "peel",
+      "anti_dive"
+     ],
+     "name": "Peel"
+    },
+    {
+     "caps": [
+      "sustained_dps",
+      "burst_st",
+      "ranged_presence"
+     ],
+     "name": "Ranged pressure"
+    },
+    {
+     "caps": [
+      "heal_sustain",
+      "cleanse"
+     ],
+     "name": "Reset"
+    }
+   ],
    "mechanics": {
     "expected_aoe_targets": 4,
     "focus_attackers": 4

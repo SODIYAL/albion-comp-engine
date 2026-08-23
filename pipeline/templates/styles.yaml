@@ -23,6 +23,16 @@
 # balanced stays the identity and template calibration is untouched; styles
 # diverge by RELATIVE physics only. Weight multipliers say what a style
 # VALUES; mechanics say what a style's delivery makes EFFECTIVE.
+#
+# `chain` blocks (fight-chain explanation, roadmap item 1, 2026-08-23):
+# the SEQUENCE a caller thinks this style in — each stage names the
+# capabilities that execute it. The engine's fight_chain() grades every
+# stage against the comp-fitted template targets (the same lens the kill-
+# pressure checklist uses; capabilities a content does not require are
+# skipped) — DESCRIPTIVE only, nothing here scores. Stage names and cap
+# groupings are PROVISIONAL owner vocabulary: reword or re-map freely,
+# the engine follows the data. Balanced carries no chain — it falls back
+# to the detected identity's chain.
 
 styles:
   balanced:
@@ -59,6 +69,13 @@ styles:
     # spread melee ball: cleaves clip ~3, damage split across whoever's in
     # reach, so few attackers stack on any one enemy
     mechanics: {expected_aoe_targets: 3, focus_attackers: 3}
+    # owner's brawl sequence: contact -> pressure -> sustain -> denial -> secure
+    chain:
+      - {name: Contact, caps: [engage, tankiness]}
+      - {name: Pressure, caps: [sustained_dps, resist_shred]}
+      - {name: Sustain, caps: [heal_sustain, cleanse, self_sustain]}
+      - {name: Denial, caps: [heal_reduction, purge, peel]}
+      - {name: Secure, caps: [execute, max_health_cut]}
 
   clap:
     name: Clap
@@ -81,6 +98,14 @@ styles:
     # synced bombs on a manufactured clump: AoE rides the escalation curve
     # toward its 8-target cap; ST damage is incidental (few attackers each)
     mechanics: {expected_aoe_targets: 7, focus_attackers: 3}
+    # owner's clap sequence: engage -> clump -> pierce -> burst -> secure -> reset
+    chain:
+      - {name: Engage, caps: [engage, stun]}
+      - {name: Clump, caps: [clump_create, catch]}
+      - {name: Pierce, caps: [resist_shred]}
+      - {name: Burst, caps: [burst_aoe]}
+      - {name: Secure, caps: [heal_reduction, silence, execute]}
+      - {name: Reset, caps: [disengage, mobility]}
 
   kite:
     name: Kite
@@ -101,6 +126,13 @@ styles:
       clump_create: 0.7
     # ranged poke on the advancing clump; focus fire only on caught divers
     mechanics: {expected_aoe_targets: 4, focus_attackers: 4}
+    # owner's kite sequence: space -> slow -> peel -> ranged pressure -> reset
+    chain:
+      - {name: Space, caps: [mobility, disengage]}
+      - {name: Slow, caps: [slow, root]}
+      - {name: Peel, caps: [peel, anti_dive]}
+      - {name: Ranged pressure, caps: [sustained_dps, burst_st, ranged_presence]}
+      - {name: Reset, caps: [heal_sustain, cleanse]}
 
   brawl_clap:
     name: Brawl-Clap
@@ -117,6 +149,12 @@ styles:
       mobility: 0.85
     # the hybrid: grind spreads damage until the clump forms, then bomb it
     mechanics: {expected_aoe_targets: 5, focus_attackers: 3}
+    chain:
+      - {name: Contact, caps: [engage, tankiness]}
+      - {name: Grind, caps: [sustained_dps, heal_sustain]}
+      - {name: Clump, caps: [clump_create]}
+      - {name: Bomb, caps: [burst_aoe, resist_shred]}
+      - {name: Secure, caps: [heal_reduction, execute]}
 
   clap_kite:
     name: Clap-Kite
@@ -144,3 +182,10 @@ styles:
     # bombs on manufactured clumps between kite resets: escalation rides
     # toward the cap in the windows; focus fire stays incidental
     mechanics: {expected_aoe_targets: 6, focus_attackers: 3}
+    chain:
+      - {name: Kite window, caps: [mobility, disengage]}
+      - {name: Catch, caps: [catch, slow]}
+      - {name: Clump, caps: [clump_create, engage]}
+      - {name: Pierce, caps: [resist_shred]}
+      - {name: Bomb, caps: [burst_aoe]}
+      - {name: Reset, caps: [disengage, heal_sustain]}

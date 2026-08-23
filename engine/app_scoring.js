@@ -1635,6 +1635,60 @@
     return out;
   };
 
+  var CHAIN_WEAK = 0.85, CHAIN_STRONG = 1.15;
+
+  CompEngine.prototype.fightChain = function (party, combos, gears, candidate) {
+    /* The comp as the caller's fight SEQUENCE, graded stage by stage —
+       DESCRIPTIVE only (mirrors engine.py fight_chain). */
+    var styles = this.data.styles || {};
+    var style = IDENTITY_STYLES[this.style]
+      ? this.style : this.compIdentity(party, combos).style;
+    var chain = style && styles[style] ? styles[style].chain : null;
+    if (!chain) return null;
+    var s = this.effectiveSupply(party, combos, gears);
+    var stages = [];
+    for (var i = 0; i < chain.length; i++) {
+      var caps = chain[i].caps || [];
+      var used = [], bar = 0.0, have = 0.0;
+      for (var ci = 0; ci < caps.length; ci++) {
+        if (!(caps[ci] in this.reqs)) continue;
+        used.push(caps[ci]);
+        bar += this.target(caps[ci]);
+        have += s[caps[ci]] || 0.0;
+      }
+      var verdict;
+      if (!used.length || bar <= 0) verdict = "quiet";
+      else if (have <= 0) verdict = "missing";
+      else if (have < CHAIN_WEAK * bar) verdict = "weak";
+      else if (have >= CHAIN_STRONG * bar) verdict = "strong";
+      else verdict = "ok";
+      stages.push({ name: chain[i].name, caps: used,
+                    have: have, bar: bar, verdict: verdict });
+    }
+    var out = { style: style, stages: stages, improves: null };
+    if (candidate && this.weapons[candidate]) {
+      /* explain() deltas are already weighted fitness terms */
+      var terms = this.explain(party, candidate, combos);
+      var deltas = {}, total = 0.0;
+      for (var ti = 0; ti < terms.length; ti++) {
+        deltas[terms[ti].cap] = terms[ti].delta;
+        total += terms[ti].delta;
+      }
+      var bestStage = null, bestGain = 0.0;
+      for (var si = 0; si < stages.length; si++) {
+        var gain = 0.0;
+        for (var gi = 0; gi < stages[si].caps.length; gi++)
+          gain += deltas[stages[si].caps[gi]] || 0.0;
+        if (gain > bestGain + 1e-9) { bestStage = stages[si].name; bestGain = gain; }
+      }
+      /* only claim the connection when that stage holds a real share of
+         the pick's explained value (mirrors the 0.3 rule) */
+      if (bestStage !== null && total > 0 && bestGain >= 0.3 * total)
+        out.improves = { stage: bestStage, gain: bestGain };
+    }
+    return out;
+  };
+
   /* ------------------------------------------------------------ local search */
   CompEngine.prototype.refine = function (party, maxPasses, pool, fixed) {
     /* Steepest-descent 1-opt over compScore, UNCONSTRAINED (mirrors

@@ -69,6 +69,26 @@
     return `<span class="dl-kill" title="can this comp actually kill? pierce the clump, cut the healing, burst hard enough — bars are the comp-fitted template targets; display only"><span class="dl-kicker">kill pressure</span>${chip("pierce", "pierce")}${chip("heal_cut", "heal-cut")}${chip("burst", "burst")}</span>`;
   }
 
+  /* Fight chain (roadmap item 1, 2026-08-23): the fight as the caller's
+     playstyle sequences it, stage by stage — ENG.fightChain rendered
+     verbatim, gradings from the comp-fitted targets, display only. */
+  function chainLine(top){
+    if (!party.length || typeof ENG.fightChain !== "function") return "";
+    const fc = ENG.fightChain(party, COMBOS_CUR, null, top ? top.w : null);
+    if (!fc) return "";
+    const styleNm = (DATASET.styles[fc.style] || {}).name || fc.style;
+    const seg = fc.stages.map(s =>
+      `<span class="dl-ch ${s.verdict}" title="${esc(s.name)}: ${s.verdict}${
+        s.bar > 0
+          ? ` — ${+s.have.toFixed(1)} of ${+s.bar.toFixed(1)} needed (${s.caps.map(c => esc(capLabel(c))).join(", ")})`
+          : " — not demanded by this content"}">${esc(s.name)}</span>`
+    ).join(`<span class="dl-ch-arrow">→</span>`);
+    const imp = (fc.improves && top)
+      ? `<span class="dl-ch-imp">this pick strengthens <b>${esc(fc.improves.stage)}</b></span>`
+      : "";
+    return `<div class="dl-chain"><span class="dl-kicker" title="the fight as ${esc(styleNm)} sequences it — graded against the comp-fitted targets; display only">fight chain · ${esc(styleNm)}</span><div class="dl-ch-row">${seg}</div>${imp}</div>`;
+  }
+
   function diagnosisRows(){
     if (!party.length) return [];
     const s = supply(party);
@@ -304,6 +324,7 @@
       </div>
       <div class="dl-pick">
         ${needline}
+        ${chainLine(top)}
         <div class="dl-pick-head"><span class="dl-kicker">Best next pick · slot ${Math.min(party.length + 1, HARD_CAP)}</span><span class="dl-score">+${top.score.toFixed(2)} comp score</span></div>
         <div class="dl-weapon">${icon(top.w,72)}<div><button class="nm-btn" data-detail="${top.w}">${nameOf(top.w)}</button><span>${esc(roleOf(top.w, top.combo))}</span></div></div>
         <p>${whySentence(party, top.w)}</p>

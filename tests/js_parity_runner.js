@@ -53,6 +53,8 @@ const out = cases.map((c, i) => {
     uncovered: e.uncoveredCaps(c.party).slice().sort(),
     identity: e.compIdentity(c.party, c.combos),
     kill_pressure: e.killPressure(c.party, c.combos),
+    fight_chain: e.fightChain(c.party, c.combos, null,
+                              c.party.length ? c.party[0] : null),
   };
 });
 process.stdout.write(JSON.stringify(out));

@@ -576,6 +576,40 @@ def run():
           f"'heal_cut': {kp_trio['heal_cut']['ok']}, "
           f"'burst': {kp_trio['burst']['ok']}}}")
 
+    # T26 — fight chain (roadmap item 1, owner vocabulary): the fight as
+    # the playstyle sequences it, graded against the comp-fitted targets.
+    # Pinned: the real blap ball reads STRONG on every brawl stage
+    # (contact -> pressure -> sustain -> denial -> secure); a healer-less
+    # pierce-less brawl five reads weak/missing and the pierce weapon
+    # (Carving) connects to the Pressure stage; a healer's value lies
+    # OUTSIDE the chain (survival, not a stage) so no connection is
+    # claimed; balanced falls back to the detected identity's chain; and
+    # computing chains never touches fitness.
+    e_brl20 = Engine(content="blackzone_roam", size=20, style="brawl")
+    fc_blap = e_brl20.fight_chain(blap)
+    brawl5 = [HEAVY_MACE, GREAT_HAMMER, "MAIN_HOLYSTAFF",
+              "2H_DUALSCIMITAR_UNDEAD", "2H_CLAYMORE"]
+    fc5 = e_brl20.fight_chain(brawl5, candidate="2H_CLEAVER_HELL")
+    fc_heal = E.fight_chain([LONGBOW, WITCHWORK, PERMAFROST],
+                            candidate=HALLOWFALL)
+    fc_bal = ez.fight_chain(clap10)
+    check("T26 fight chain: blap all-strong on the brawl sequence; a thin "
+          "brawl five grades weak; Carving connects to Pressure",
+          fc_blap["style"] == "brawl"
+          and all(s["verdict"] == "strong" for s in fc_blap["stages"])
+          and any(s["verdict"] in ("weak", "missing") for s in fc5["stages"])
+          and (fc5["improves"] or {}).get("stage") == "Pressure",
+          f"blap={[s['verdict'] for s in fc_blap['stages']]} "
+          f"five={[s['verdict'] for s in fc5['stages']]} "
+          f"carving->{(fc5['improves'] or {}).get('stage')}")
+    check("T26b chain honesty: a healer claims no chain stage (its value "
+          "is survival); balanced uses the detected identity's chain; "
+          "fitness untouched",
+          fc_heal is not None and fc_heal["improves"] is None
+          and fc_bal is not None and fc_bal["style"] == "clap"
+          and abs(e_bz.fitness(blap) - f_blap) < 1e-12,
+          f"heal_improves={fc_heal['improves']} bal_style={fc_bal['style']}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

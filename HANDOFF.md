@@ -191,13 +191,10 @@ The killboard strip, prevalence footnotes, and cohort affinity key their fight-s
 
 The preferred product sequence is:
 
-1. **Fight-chain explanation**
-   - derive a playstyle-specific sequence from existing capability state rather than creating new scoring
-   - examples:
-     - clap: engage → clump → pierce → burst → secure → reset
-     - brawl: contact → pressure → sustain → denial → secure
-     - kite: space → slow → peel → ranged pressure → reset
-   - show strong / weak / missing stages and connect the recommended weapon to the stage it improves
+1. **Fight-chain explanation** — SHIPPED (2026-08-23)
+   - `fight_chain()` in both engine ports: the declared style's stage sequence (chains are DATA in `styles.yaml` per style — clap: engage→clump→pierce→burst→secure→reset; brawl: contact→pressure→sustain→denial→secure; kite: space→slow→peel→ranged pressure→reset; hybrids have their own; balanced falls back to the detected identity's chain), every stage graded strong/ok/weak/missing/quiet against the comp-fitted template targets over effective supply — the same lens as kill-pressure, zero new scoring
+   - the recommended pick connects to the stage it improves most, from the same `explain()` terms the why-panel shows, and only when that stage holds a real share (≥30%) of the pick's value — a healer into a clap chain claims nothing (its value is survival, not a stage)
+   - rendered as a stage strip in the decision layer's pick card; golden T26/T26b pin blap all-strong on the brawl sequence, the weak-five grading, the Carving→Pressure connection, and that fitness is untouched
 
 2. **Composition identity detection** — SHIPPED descriptive v2 (2026-08-23, from V3 finding F-V3-2 + the owner's weapon-identity model)
    - identity builds UP from members (owner ruling: a weapon's identity = its E first, then chosen Q/W, equipment, team role). `derive_style_fit` in the dataset build derives per-weapon delivery (melee / flex / ranged — flex = melee stat line whose E damage lands at range, e.g. Realmbreaker the all-rounder, DERIVED not curated) and style × size-band fit verdicts; `pipeline/style_overrides.yaml` carries cited owner rulings (Battleaxe unfit as a group pick >3); `out/style_fit_report.json` is the audit + MetaBattle review queue (Q15 ANSWERED)

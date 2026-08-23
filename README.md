@@ -194,7 +194,7 @@ review/                        generated audit/review boards
 
 Near-term product work is focused on making the engine more useful to an actual caller without prematurely teaching the score to imitate popularity:
 
-1. add a fight-chain explanation such as Engage → Clump → Pierce → Burst → Secure → Reset,
+1. ~~add a fight-chain explanation such as Engage → Clump → Pierce → Burst → Secure → Reset~~ — shipped (August 2026): the planner grades the fight stage-by-stage in the playstyle's own sequence and ties the recommended pick to the stage it repairs,
 2. ~~infer composition identity and detect internally conflicted rosters~~ — shipped as a descriptive layer (August 2026): the planner names the playstyle a party is becoming and flags split identities; identity-aware *recommendations* wait on validation,
 3. surface negative recommendations and redundancy warnings,
 4. support locked players/slots and constrained reforging,

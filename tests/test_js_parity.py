@@ -168,6 +168,9 @@ def py_results(cases):
             "uncovered": sorted(e.uncovered_caps(c["party"])),
             "identity": e.comp_identity(c["party"], c["combos"]),
             "kill_pressure": e.kill_pressure(c["party"], c["combos"]),
+            "fight_chain": e.fight_chain(
+                c["party"], c["combos"],
+                candidate=(c["party"][0] if c["party"] else None)),
         })
     return out
 
@@ -262,6 +265,24 @@ def main():
               or any(abs(ia["mode"][k] - (ib.get("mode") or {}).get(k, 9)) > EPS
                      for k in ia["mode"])):
             errs.append(f"identity shares: py={ia} js={ib}")
+        fa, fb = a["fight_chain"], b.get("fight_chain")
+        if (fa is None) != (fb is None):
+            errs.append("fight_chain presence differs")
+        elif fa is not None:
+            sa = [(x["name"], x["verdict"], x["caps"]) for x in fa["stages"]]
+            sb = [(x.get("name"), x.get("verdict"), x.get("caps"))
+                  for x in (fb.get("stages") or [])]
+            ia_, ib_ = fa["improves"], fb.get("improves")
+            if (fa["style"] != fb.get("style") or sa != sb
+                    or (ia_ is None) != (ib_ is None)
+                    or (ia_ is not None
+                        and (ia_["stage"] != ib_.get("stage")
+                             or abs(ia_["gain"] - ib_.get("gain", 9e9)) > EPS))
+                    or any(abs(x["have"] - y.get("have", 9e9)) > EPS
+                           or abs(x["bar"] - y.get("bar", 9e9)) > EPS
+                           for x, y in zip(fa["stages"],
+                                           fb.get("stages") or []))):
+                errs.append(f"fight_chain: py={fa} js={fb}")
         ka, kb = a["kill_pressure"], b.get("kill_pressure")
         if (ka is None) != (kb is None):
             errs.append("kill_pressure presence differs")

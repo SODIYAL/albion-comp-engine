@@ -1643,6 +1643,73 @@ class Engine:
                           else "partial" if greens == 2 else "lacking")
         return out
 
+    # Fight-chain verdict thresholds (lens over the comp-fitted targets,
+    # like kill_pressure): a stage is weak under CHAIN_WEAK of its bar,
+    # strong at/above CHAIN_STRONG, missing at zero supply.
+    CHAIN_WEAK = 0.85
+    CHAIN_STRONG = 1.15
+
+    def fight_chain(self, party, combos=None, gears=None, candidate=None):
+        """The comp as the SEQUENCE a caller thinks the fight in (roadmap
+        item 1, owner vocabulary): the declared style's chain from
+        styles.yaml — balanced falls back to the detected identity's
+        chain — with every stage graded against the comp-fitted template
+        targets over effective supply. Verdicts: strong / ok / weak /
+        missing; stages whose capabilities this content does not require
+        read quiet (no bar to fail).
+
+        `candidate` (optional, a weapon key): also reports which stage
+        that pick improves most, from the same explain() terms the
+        recommendation shows — connecting the engine's pick to the stage
+        it repairs.
+
+        DESCRIPTIVE ONLY: nothing here feeds scoring. Returns None when
+        no chain applies (no declared style and no detected identity)."""
+        styles = self.data.get("styles") or {}
+        style = (self.style if self.style in self.IDENTITY_STYLES
+                 else self.comp_identity(party, combos)["style"])
+        chain = (styles.get(style) or {}).get("chain") if style else None
+        if not chain:
+            return None
+        s = self.effective_supply(party, combos, gears)
+        stages = []
+        for st in chain:
+            used = [c for c in (st.get("caps") or []) if c in self.reqs]
+            bar = sum(self.target(c) for c in used)
+            have = sum(s.get(c, 0.0) for c in used)
+            if not used or bar <= 0:
+                verdict = "quiet"
+            elif have <= 0:
+                verdict = "missing"
+            elif have < self.CHAIN_WEAK * bar:
+                verdict = "weak"
+            elif have >= self.CHAIN_STRONG * bar:
+                verdict = "strong"
+            else:
+                verdict = "ok"
+            stages.append({"name": st.get("name"), "caps": used,
+                           "have": have, "bar": bar, "verdict": verdict})
+        out = {"style": style, "stages": stages, "improves": None}
+        if candidate and candidate in self.weapons:
+            # explain() deltas are already weighted fitness terms —
+            # summed per stage, never re-weighted
+            deltas = {t["cap"]: t["delta"]
+                      for t in self.explain(party, candidate, combos)}
+            total = sum(deltas.values())
+            best_stage, best_gain = None, 0.0
+            for st in stages:
+                gain = sum(deltas.get(c, 0.0) for c in st["caps"])
+                if gain > best_gain + 1e-9:
+                    best_stage, best_gain = st["name"], gain
+            # claim the connection only when that stage holds a real share
+            # of the pick's explained value — a healer into a clap chain
+            # (which has no healing stage) improves SURVIVAL, not a stage,
+            # and saying "improves Reset" would mislead the caller
+            if (best_stage is not None and total > 0
+                    and best_gain >= 0.3 * total):
+                out["improves"] = {"stage": best_stage, "gain": best_gain}
+        return out
+
     # ------------------------------------------------------------ local search
     def refine(self, party, max_passes=8, pool=None, fixed=0):
         """1-opt local search over a built party: repeatedly apply the single
