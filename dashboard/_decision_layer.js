@@ -54,6 +54,21 @@
     return `<span class="dl-identity"><span class="dl-kicker">becoming</span>${esc(tag)}</span>${conf}`;
   }
 
+  /* Kill pressure (identity Phase D): the caller's checklist — pierce /
+     heal-cut / burst vs the comp-fitted targets. ENG.killPressure is
+     descriptive engine output rendered verbatim. */
+  function killLine(){
+    if (!party.length || typeof ENG.killPressure !== "function") return "";
+    const kp = ENG.killPressure(party, COMBOS_CUR);
+    if (!kp) return "";
+    const chip = (k, lbl) => {
+      const l = kp[k];
+      const pct = l.bar > 0 ? Math.round(100 * l.have / l.bar) : 100;
+      return `<span class="${l.ok ? "ok" : "bad"}" title="${lbl}: ${l.have.toFixed(1)} of ${l.bar.toFixed(1)} needed${l.caps.length ? ` (${l.caps.join(", ")})` : " — not demanded by this content"}">${l.ok ? "✓" : "✗"} ${lbl}${l.ok ? "" : ` ${pct}%`}</span>`;
+    };
+    return `<span class="dl-kill" title="can this comp actually kill? pierce the clump, cut the healing, burst hard enough — bars are the comp-fitted template targets; display only"><span class="dl-kicker">kill pressure</span>${chip("pierce", "pierce")}${chip("heal_cut", "heal-cut")}${chip("burst", "burst")}</span>`;
+  }
+
   function diagnosisRows(){
     if (!party.length) return [];
     const s = supply(party);
@@ -240,7 +255,7 @@
     }
 
     if (!top){
-      host.innerHTML = `<div class="dl-status ${state.tone} dl-empty"><div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small>${identityLine()}</div><span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span></div>`;
+      host.innerHTML = `<div class="dl-status ${state.tone} dl-empty"><div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small>${identityLine()}${killLine()}</div><span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span></div>`;
       renderPlayerTools(host);
       return;
     }
@@ -284,7 +299,7 @@
 
     host.innerHTML = `
       <div class="dl-status ${state.tone}">
-        <div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small>${identityLine()}</div>
+        <div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small>${identityLine()}${killLine()}</div>
         <span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span>
       </div>
       <div class="dl-pick">

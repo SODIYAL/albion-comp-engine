@@ -3,10 +3,10 @@
 # Source: Albion Online wiki ("Focus Fire", "AoE Escalation" pages), recorded
 # 2026-08-13; tables reflect the Realm Divided update (30.000.1, 2025-11-24).
 #
-# STATUS: NOT yet consumed by build_dataset.py or the engine. Wiring is
-# blocked on the open design questions in MECHANICS_TODO.md (supply-units to
-# attackers mapping, enemy clumping model, double-counting audit vs gamma /
-# soft caps / synergies). Numbers land here first so there is exactly ONE
+# STATUS: CONSUMED since 2026-08-13 — build_dataset.py embeds this file and
+# both engine ports apply focus_fire / aoe_escalation / aoe_geometry /
+# build_stats as supply-side effectiveness multipliers (MECHANICS_TODO.md
+# implementation checklist). Numbers land here so there is exactly ONE
 # place to correct them after a patch — same rule as the capability sheets.
 
 # ---------------------------------------------------------------------------
@@ -167,6 +167,29 @@ build_stats:
   # % item stats MULTIPLY the member's capability supply
   damage_mult_caps: [burst_st, burst_aoe, sustained_dps, execute]
   heal_mult_caps: [heal_sustain, heal_burst]
+
+# ---------------------------------------------------------------------------
+# KILL PRESSURE (identity Phase D, owner checklist 2026-08-23): "did we
+# bring pierce on the clump, did we give heal cuts so they don't heal up
+# instantly, did we do enough damage within a short span to actually kill."
+# The three lights are a LENS over the comp-fitted template targets — the
+# enemy-toughness baseline is deliberately NOT a new physics model: the
+# damage / pierce / heal-cut targets were fitted from what real comps field
+# to kill things (VALIDATION.md, 2026-08-21 recalibration ruling), so
+# "enough" is defined by the same evidence that calibrated everything else,
+# and the focus-fire / escalation physics are already inside
+# effective_supply. Deeper modeling (gear tier / IP, buffs, exact enemy
+# effective HP) is the recorded v2 question — it becomes computable when
+# the gear/companion layer supplies real item power per member.
+# DESCRIPTIVE ONLY — a verdict panel, never a score term.
+kill_pressure:
+  pierce_caps: [resist_shred]
+  heal_cut_caps: [heal_reduction]
+  burst_caps: [burst_aoe, burst_st, execute]
+  # a light is green at >= this share of its bar (the sum of the caps'
+  # size-scaled template targets, over caps the content actually requires;
+  # a content that demands none of a light's caps passes that light free)
+  pass_ratio: 0.85   # PROVISIONAL — owner-tunable via MASTERSHEET tune:mechanics
 
 # ---------------------------------------------------------------------------
 # CC diminishing returns (PvP interaction layer, 2026-08-19): repeated

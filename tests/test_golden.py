@@ -502,6 +502,36 @@ def run():
                       for c in idr["conflicts"]),
           f"member={rb_m} conflicts={[c['display_name'] for c in idr['conflicts']]}")
 
+    # T25 — kill pressure (identity Phase D, owner checklist 2026-08-23):
+    # "did we bring pierce on the clump, did we give heal cuts, did we do
+    # enough damage within a short span to actually kill." The lights are
+    # a lens over the comp-fitted targets. Pinned: the real blap comp is
+    # ready on all three; the owner's own counter-example — 20 tanks —
+    # is lacking on all three ("20 tanks hitting enemy tank will probably
+    # not be able to kill"); a burst-only trio shows burst green with
+    # pierce/heal-cut red (the checklist separates, not just sums).
+    kp_blap = e_bz.kill_pressure(blap)
+    kp_tanks = e_bz.kill_pressure([HEAVY_MACE] * 20)
+    kp_trio = E.kill_pressure([LONGBOW, WITCHWORK, PERMAFROST])
+    check("T25 kill pressure: blap ready on all three lights; 20 Heavy "
+          "Maces lacking on all three",
+          kp_blap["verdict"] == "ready"
+          and all(kp_blap[k]["ok"] for k in ("pierce", "heal_cut", "burst"))
+          and kp_tanks["verdict"] == "lacking"
+          and not any(kp_tanks[k]["ok"] for k in ("pierce", "heal_cut", "burst")),
+          f"blap={kp_blap['verdict']} tanks={kp_tanks['verdict']} "
+          f"(tank burst {kp_tanks['burst']['have']:.1f}/"
+          f"{kp_tanks['burst']['bar']:.1f})")
+    check("T25b kill pressure separates the lights: a burst trio is green "
+          "on burst, red on pierce and heal-cut — and none of it scores "
+          "(fitness unchanged)",
+          kp_trio["burst"]["ok"] and not kp_trio["pierce"]["ok"]
+          and not kp_trio["heal_cut"]["ok"]
+          and abs(e_bz.fitness(blap) - f_blap) < 1e-12,
+          f"trio={{'pierce': {kp_trio['pierce']['ok']}, "
+          f"'heal_cut': {kp_trio['heal_cut']['ok']}, "
+          f"'burst': {kp_trio['burst']['ok']}}}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

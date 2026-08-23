@@ -1564,6 +1564,38 @@
     return out;
   };
 
+  CompEngine.prototype.killPressure = function (party, combos, gears) {
+    /* The caller's kill checklist as a three-light verdict — pierce /
+       heal-cut / burst vs the comp-fitted template targets, over
+       effective supply. DESCRIPTIVE ONLY (mirrors engine.py
+       kill_pressure). */
+    var cfg = this.mechanics.kill_pressure;
+    if (!cfg) return null;
+    var ratio = cfg.pass_ratio === undefined ? 0.85 : cfg.pass_ratio;
+    var s = this.effectiveSupply(party, combos, gears);
+    var self = this;
+    var light = function (caps) {
+      var used = [], bar = 0.0, have = 0.0;
+      for (var i = 0; i < (caps || []).length; i++) {
+        var c = caps[i];
+        if (!(c in self.reqs)) continue;
+        used.push(c);
+        bar += self.target(c);
+        have += s[c] || 0.0;
+      }
+      return { caps: used, have: have, bar: bar,
+               ok: bar <= 0 || have >= ratio * bar };
+    };
+    var out = { pierce: light(cfg.pierce_caps),
+                heal_cut: light(cfg.heal_cut_caps),
+                burst: light(cfg.burst_caps),
+                pass_ratio: ratio };
+    var greens = (out.pierce.ok ? 1 : 0) + (out.heal_cut.ok ? 1 : 0) +
+                 (out.burst.ok ? 1 : 0);
+    out.verdict = greens === 3 ? "ready" : greens === 2 ? "partial" : "lacking";
+    return out;
+  };
+
   /* ------------------------------------------------------------ local search */
   CompEngine.prototype.refine = function (party, maxPasses, pool, fixed) {
     /* Steepest-descent 1-opt over compScore, UNCONSTRAINED (mirrors

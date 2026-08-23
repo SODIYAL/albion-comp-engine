@@ -167,6 +167,7 @@ def py_results(cases):
                            for g in e.weaknesses(c["party"], 5)],
             "uncovered": sorted(e.uncovered_caps(c["party"])),
             "identity": e.comp_identity(c["party"], c["combos"]),
+            "kill_pressure": e.kill_pressure(c["party"], c["combos"]),
         })
     return out
 
@@ -261,6 +262,16 @@ def main():
               or any(abs(ia["mode"][k] - (ib.get("mode") or {}).get(k, 9)) > EPS
                      for k in ia["mode"])):
             errs.append(f"identity shares: py={ia} js={ib}")
+        ka, kb = a["kill_pressure"], b.get("kill_pressure")
+        if (ka is None) != (kb is None):
+            errs.append("kill_pressure presence differs")
+        elif ka is not None:
+            if ka["verdict"] != kb.get("verdict") or any(
+                    ka[k]["ok"] != (kb.get(k) or {}).get("ok")
+                    or abs(ka[k]["have"] - (kb.get(k) or {}).get("have", 9e9)) > EPS
+                    or abs(ka[k]["bar"] - (kb.get(k) or {}).get("bar", 9e9)) > EPS
+                    for k in ("pierce", "heal_cut", "burst")):
+                errs.append(f"kill_pressure: py={ka} js={kb}")
         if a["swap"] is not None:
             for ma, mb in zip(a["swap"], b["swap"] or []):
                 if ma["rank"] != mb["rank"] or abs(ma["score"] - mb["score"]) > EPS \

@@ -31806,7 +31806,21 @@
    "lookback_seconds": 10,
    "resilience_penetration": null
   },
-  "healing_modifiers": null
+  "healing_modifiers": null,
+  "kill_pressure": {
+   "burst_caps": [
+    "burst_aoe",
+    "burst_st",
+    "execute"
+   ],
+   "heal_cut_caps": [
+    "heal_reduction"
+   ],
+   "pass_ratio": 0.85,
+   "pierce_caps": [
+    "resist_shred"
+   ]
+  }
  },
  "scoring": {
   "capability_synergies": [

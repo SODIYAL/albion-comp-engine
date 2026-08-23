@@ -1565,6 +1565,39 @@ class Engine:
             out["members"].append(m)
         return out
 
+    def kill_pressure(self, party, combos=None, gears=None):
+        """The caller's kill checklist as a three-light verdict (identity
+        Phase D, owner 2026-08-23): pierce on the clump (resist_shred),
+        heal-cut applied (heal_reduction), and enough burst to actually
+        kill. Each light's bar is the sum of its capabilities' size-scaled
+        template targets — the comp-fitted numbers real comps set
+        (VALIDATION.md 2026-08-21) — and `have` reads effective_supply, so
+        focus-fire tax and AoE escalation are already priced in.
+
+        DESCRIPTIVE ONLY: a verdict panel, never a score term. Returns
+        None when the dataset carries no kill_pressure block."""
+        cfg = self.mechanics.get("kill_pressure")
+        if not cfg:
+            return None
+        ratio = cfg.get("pass_ratio", 0.85)
+        s = self.effective_supply(party, combos, gears)
+
+        def light(caps):
+            used = [c for c in caps if c in self.reqs]
+            bar = sum(self.target(c) for c in used)
+            have = sum(s.get(c, 0.0) for c in used)
+            return {"caps": used, "have": have, "bar": bar,
+                    "ok": bar <= 0 or have >= ratio * bar}
+        out = {"pierce": light(cfg.get("pierce_caps") or []),
+               "heal_cut": light(cfg.get("heal_cut_caps") or []),
+               "burst": light(cfg.get("burst_caps") or []),
+               "pass_ratio": ratio}
+        greens = sum(1 for k in ("pierce", "heal_cut", "burst")
+                     if out[k]["ok"])
+        out["verdict"] = ("ready" if greens == 3
+                          else "partial" if greens == 2 else "lacking")
+        return out
+
     # ------------------------------------------------------------ local search
     def refine(self, party, max_passes=8, pool=None, fixed=0):
         """1-opt local search over a built party: repeatedly apply the single
