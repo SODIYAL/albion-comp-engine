@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-PvP interaction system gates ("new prompt" spec §16).
+PvP interaction system gates (duplicate / reflect / cleanse semantics —
+the 2026-08-19 interaction-system spec, implemented in interactions.yaml +
+build_interactions.py).
 
 The real seed data deliberately carries ZERO verified non-stacking scoring
 entries (nothing in the pinned game data states duplicate-caster utility

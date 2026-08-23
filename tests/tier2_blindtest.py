@@ -131,7 +131,7 @@ V4_CONTENT_MAP = {"large_scale_zvz": "territory_defense"}
 
 
 def v4(args):
-    """Meta-comp reproduction (leave-one-out) against tests/meta_comps.yaml.
+    """Meta-comp reproduction (leave-one-out) against data/published_comps/.
 
     For every weapon slot in every real comp party: remove it, ask the engine
     for its top-N at that party's size, and score two ways —
@@ -182,7 +182,7 @@ def v4(args):
             print(f"  skip {comp.get('id','?')}: no template for content "
                   f"{comp.get('content')!r}")
             continue
-        # A comp is evaluated under its own declared style (meta_comps.yaml
+        # A comp is evaluated under its own declared style (the comp doc's
         # `style:`, quoted from the comp's source — e.g. Timothy's blap is
         # "(brawl comp)"). Default balanced. Scoring a deliberate melee ball
         # under balanced misreads its missing ranged core as a deficiency.

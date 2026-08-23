@@ -39,6 +39,7 @@ py -3 tests/test_provenance.py    # pinned-snapshot hash chain, byte-identical r
 py -3 tests/test_patch_history.py # dumps-diff staleness detection
 py -3 tests/test_js_parity.py     # Python <-> browser scoring, 60 random parties at 1e-9 + embed check
 node tests/test_loadout_codec.js  # share-URL codec round-trips
+node tests/test_display_math.js   # killboard bucket + cohort-affinity math (display layer)
 py -3 tests/tier2_blindtest.py v4 # leave-one-out vs published comps (role-level gate: 70%)
 ```
 

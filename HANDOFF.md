@@ -241,6 +241,7 @@ py -3 tests/test_forge.py
 py -3 tests/tier2_blindtest.py v4
 py -3 tests/test_js_parity.py
 node tests/test_loadout_codec.js
+node tests/test_display_math.js
 py -3 tests/test_patch_history.py
 py -3 tests/test_provenance.py
 py -3 tests/test_builds.py

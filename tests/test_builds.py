@@ -171,10 +171,8 @@ check("H9 zero-to-nonzero tier transitions are preserved, not discarded",
       (axe.get("by_tier", {}).get("masterymodifier") or {}).get("4") == 0)
 check("H9 nested enchantment item power is preserved per tier and level",
       len((axe.get("ip_ench") or {}).get("4", {})) >= 3)
-some_variant = INDEX["by_content"]["blackzone_roam"]["2H_MACE_MORGANA"][0]
-rec_fields = load_json(os.path.join(OUT, "builds_validation.json"))
-check("H9 build records store tier, enchant, quality and IP as separate "
-      "fields (unknown allowed, merged never)",
+check("H9 the armory import schema stores tier, enchant, quality and IP as "
+      "separate fields (unknown allowed, merged never)",
       all(f in yaml.safe_load(open(os.path.join(
           ROOT, "data", "armory_imports", "example.yaml"),
           encoding="utf-8"))["builds"][0] for f in

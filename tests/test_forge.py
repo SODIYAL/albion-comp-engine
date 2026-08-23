@@ -28,6 +28,8 @@ Pins the structural contracts of the reworked engine:
       which stops growing at the soft cap.
   F10 loadout locks (user spell picks) change scoring consistently.
   F11 forge respects locked members and is deterministic.
+  F12 predicate minima are combo-aware: locked non-qualifying kits are kept
+      verbatim but never counted toward the ranged-AoE core.
 
 Run:  py -3 tests/test_forge.py
 """
