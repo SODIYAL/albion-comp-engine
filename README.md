@@ -87,6 +87,8 @@ The project has moved well beyond the original prototype described in early READ
 - Real composition records are stored as an evidence/calibration layer rather than being silently converted into recommendation truth.
 - The public planner now uses the **decision-first** Comp Status → Biggest Need → Best Next Pick hierarchy.
 - Observed-cohort affinity and the caller tools (player weapon pools, swap impact) shipped as display layers in August 2026.
+- The identity system (per-weapon style fit, comp identity, style-gated suggestions, kill-pressure lights, fight chain) shipped as descriptive layers in August 2026, built and validated through expert blind rounds — including a fifth playstyle (clap-kite) and a bomb-squad archetype the rounds surfaced.
+- The live-party companion is live-verified end to end, with live sync keeping the loaded comp current.
 - Capability constraints are combo-aware: selected spell kits matter.
 - Composition targets are evaluated at the roster size actually present; next-pick advice evaluates one player ahead.
 - The recommendation engine and the evidence/usage layers remain intentionally separable so empirical data can be validated before it is allowed to influence scoring.
@@ -108,6 +110,20 @@ All of it is **display/evidence only**; it does not modify mechanical recommenda
 Caller tools live in a collapsed fold under the planner. Instead of asking only "what is theoretically best?", a player can provide the weapons they actually play and the engine ranks recommendations inside that pool, beside the unrestricted pick.
 
 A swap-impact lab compares replacements for any roster slot before committing them — fitness movement, capability changes, and the biggest weakness that would remain after the swap — and applies through the planner's central swap handler. Both tools reuse the existing recommendation and swap scoring paths rather than introducing a second scoring model.
+
+### Composition identity, kill pressure, and the fight chain
+
+Built with the project's expert through blind validation rounds (August 2026), all descriptive — none of it moves a score:
+
+- **Weapon identity**: every weapon carries a derived style/size fit — its E spell first ("the E is the weapon's identity"), then delivery reach, damage scale, and utility — with the expert's cited rulings as overrides and a full audit report. A melee weapon whose E lands at range (Realmbreaker) derives as the all-rounder; a weapon whose E can't carry group damage (Battleaxe) is barred from group suggestion pools by ruling.
+- **Comp identity**: the planner names the playstyle a party is *becoming* — brawl, clap, kite, brawl-clap, **clap-kite** (a fifth playstyle the expert identified: bomb from range, reset on cooldowns), or a **bomb squad** detachment — with per-member fit verdicts and named misfits.
+- **Style selection is build intent**: declaring a playstyle gates suggestions — clap never offers Battleaxe, brawl kits never suggest cloth armor on damage carriers. Manual picks always still score, flagged off-style with replacement advice.
+- **Kill pressure**: the caller's checklist as three lights — pierce on the clump, heal-cut applied, enough burst to actually kill — judged against the same comp-fitted targets real comps calibrated ("20 tanks hitting an enemy tank will not kill it" is now a computable statement).
+- **Fight chain**: the fight as the playstyle sequences it (clap: engage → clump → pierce → burst → secure → reset), each stage graded strong/weak/missing, with the recommended pick connected to the stage it strengthens.
+
+### Live party (companion)
+
+The read-only Windows companion (`companion/`) feeds the planner a real in-game party — roster, weapons, tier+enchant gear, and each member's actual Q/W spell picks — over localhost. Live-verified end to end (August 2026), with **live sync**: after loading, weapon swaps update slots in place and newly visible members fill in automatically.
 
 ## Validation philosophy
 

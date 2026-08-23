@@ -78,11 +78,14 @@ The planner now leads with:
 - **Best Next Pick** — prominent weapon recommendation, score, role/function, and engine-derived explanation
 - **What it fixes** — strongest marginal capability gains
 - **Still weak after this pick** — recalculated one slot ahead using the candidate's scored combo
-- **Comp identity** — the status card names the playstyle the party is becoming (brawl/clap/kite/mixed) and flags split identities, descriptive only
+- **Comp identity** — the status card names the playstyle the party is becoming (brawl / clap / kite / brawl-clap / clap-kite / bomb squad / mixed), with per-member fit verdicts and named misfit conflicts, descriptive only
+- **Kill pressure** — the status card's three-light checklist (pierce · heal-cut · burst vs the comp-fitted targets), descriptive only
+- **Fight chain** — the pick card's stage strip (the fight as the playstyle sequences it, stages graded strong/ok/weak/missing) with the pick connected to the stage it strengthens
 - **Observed killboard context** — the contextual affinity strip and the pick card's observed-cohort note, display evidence only
-- **Caller tools** — the player-pool and swap-impact fold below the wheel stage, collapsed by default
+- **Caller tools** — the player-pool and swap-impact fold, collapsed by default
+- **Live party** — the companion feed (live-verified 2026-08-23) with **live sync**: after a load, weapon swaps update slots in place, newly visible weapons fill in, and members' real Q/W picks flow into the loadouts
 
-The old right-hand fitness / weakness / recommendation stack is intentionally hidden to avoid duplicating the same questions. The wheel remains an exploration surface and the full capability board remains the deep diagnostic layer.
+Layout (owner pass 2026-08-23): the forge honesty reports (`#warn-slot`) live **under the wheel** — the wheel column's next row on the hero grid, right after the stage on stacked layouts — still never hidden; the party strip runs label + role-filter tallies as a header line with the roster full-width below. The old right-hand fitness / weakness / recommendation stack is intentionally hidden to avoid duplicating the same questions. The wheel remains an exploration surface and the full capability board remains the deep diagnostic layer.
 
 Source files:
 
@@ -168,7 +171,7 @@ PRs #1–#6 are all merged or integrated and every feature branch has been delet
 
 ### PR #4 — decision-first UX (merged)
 
-The Comp Status → Biggest Need → Best Next Pick hierarchy is the headline surface. Its regressions were repaired on `main` afterwards: the forge honesty reports moved to a full-width slot above the wheel stage (never hidden), the click-to-add alternatives render inside the pick card, and layout overrides follow the shell's own breakpoints instead of `!important`.
+The Comp Status → Biggest Need → Best Next Pick hierarchy is the headline surface. Its regressions were repaired on `main` afterwards: the forge honesty reports moved to a full-width slot above the wheel stage (never hidden; rehomed again 2026-08-23 to live under the wheel), the click-to-add alternatives render inside the pick card, and layout overrides follow the shell's own breakpoints instead of `!important`.
 
 ### PR #5 — killboard affinity (closed; evidence layer cherry-picked into `main`)
 
@@ -280,6 +283,8 @@ For scoring/mechanics:
 - `engine/engine.py`
 - `engine/app_scoring.js`
 - `pipeline/templates/composition.yaml`
+- `pipeline/templates/styles.yaml` (playstyles, weights, mechanics params, fight-chain stage data)
+- `pipeline/style_overrides.yaml` (owner rulings on weapon style fit)
 - `tests/test_golden.py`
 - `tests/test_forge.py`
 - `tests/VALIDATION.md`

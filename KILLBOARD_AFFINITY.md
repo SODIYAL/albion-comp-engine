@@ -6,7 +6,8 @@ cohort sampler and observed-context surfaces were integrated into the
 mainline dashboard (2026-08-22). The decision-first surface itself
 landed separately via PR #4 and was kept as the headline UI, with its
 regressions repaired on main: the forge honesty reports moved to a
-full-width slot above the wheel stage (never hidden), the click-to-add
+full-width slot above the wheel stage (never hidden; since 2026-08-23 it
+lives under the wheel), the click-to-add
 alternatives live inside the pick card, the observed-context note and
 the after-pick preview render in both the pick card and the why-panel,
 and the layout overrides now follow the shell's own breakpoints instead
