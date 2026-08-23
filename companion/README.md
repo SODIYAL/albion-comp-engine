@@ -42,9 +42,16 @@ real 7-member party listed with 7/7 known weapons and loaded into the comp
 affinity strip firing on the loaded roster. Known friction, by design: it
 takes a load or two plus zoning for every member's weapon to populate,
 because weapons only arrive as members become VISIBLE (the visibility
-rule). Candidate future polish: the connect panel could auto-merge
-newly-visible weapons into already-loaded slots instead of needing a
-re-load.
+rule). SHIPPED same day as **live sync** (owner request: "as current as
+possible"): after a load, every companion poll auto-merges into the comp —
+newly visible weapons fill in, a member's weapon swap updates their slot in
+place, and their real Q/W picks flow into the loadouts. Toggle in the
+connect panel; no re-load, no re-zone. What still needs a zone/visibility
+event is the WIRE side (the companion can only report what the game
+broadcasts); the remaining wire-side option is parsing the inspect
+response (op 148) so a manual in-game inspect refreshes any member — needs
+a live /schema capture of that response's shape first (inspect someone with
+the companion running and check /schema responses).
 
 Everything below is the full run/troubleshooting reference.
 

@@ -1664,6 +1664,7 @@ async function companionPoll(){
     companionData = j;
     if (sig === companionSig) return;
     companionSig = sig;
+    syncLiveComp();
     renderCompanion(true);
   } catch (e) {
     companionData = null;
@@ -1707,21 +1708,102 @@ function renderCompanion(live, err){
       <span class="cm-wpn ${k ? "" : "unknown"}">${k ? icon(m.weapon, 26) : ""}<span>${wpn}</span></span></div>`;
   }).join("");
   load.hidden = false; load.disabled = known.length === 0;
+  const syncWrap = $("companion-sync-wrap");
+  if (syncWrap){
+    syncWrap.hidden = LIVE_GUIDS === null;   /* appears after the first load */
+    const cb = $("companion-sync");
+    if (cb) cb.checked = LIVE_SYNC;
+  }
 }
+/* ---- live sync (2026-08-23, owner: "it should be as current as possible")
+   After a load, companion updates keep flowing into the comp on every poll:
+   a member's weapon swap updates their slot in place, a newly visible
+   weapon fills in, and the member's REAL Q/W picks (spell UniqueNames off
+   the wire) map into the loadout picker so the comp scores their actual
+   kit. Members are tracked by guid -> what they last contributed, so the
+   role re-sort permutation needs no new parallel array, and a slot the
+   user manually removed simply stops matching and stays gone. */
+let LIVE_SYNC = false;
+let LIVE_GUIDS = null;   /* guid -> {w, q, w2}: weapon + q/w spell ids */
+
+function liveSpellPicks(w, spells){
+  /* companion spell names -> picker indices (q/w only: the passive is not
+     on the wire and the E rides the weapon). Unknown names map to nothing
+     — the engine's default combo covers the gap. */
+  if (!spells || typeof SPELLS === "undefined" || !SPELLS[w]) return null;
+  const out = {};
+  for (const slot of ["q", "w"]){
+    const sid = spells[slot];
+    const pool = SPELLS[w][slot] || [];
+    const idx = sid ? pool.findIndex(e => e[0] === sid) : -1;
+    if (idx >= 0) out[slot] = idx;
+  }
+  return Object.keys(out).length ? out : null;
+}
+const liveSig = m => ({ w: m.weapon,
+                        q: (m.spells || {}).q || null,
+                        w2: (m.spells || {}).w || null });
+
+function syncLiveComp(){
+  if (!LIVE_SYNC || !LIVE_GUIDS || !companionData) return;
+  let changed = false;
+  for (const m of (companionData.members || [])){
+    if (!m.guid || !m.weapon || !WEAPONS[m.weapon]) continue;
+    const sig = liveSig(m), prev = LIVE_GUIDS[m.guid];
+    if (prev && prev.w === sig.w && prev.q === sig.q && prev.w2 === sig.w2)
+      continue;
+    const picks = liveSpellPicks(m.weapon, m.spells);
+    if (prev && WEAPONS[prev.w]){
+      /* the member swapped weapons or picks: update their slot in place
+         (same state resets as the central data-swapat handler; no kit
+         prefill — the real kit is what just arrived) */
+      const i = party.findIndex((pw, ix) => pw === prev.w && PROV[ix] === "m");
+      if (i !== -1){
+        party[i] = m.weapon;
+        COMBO[i] = null;
+        LOADOUT[i] = picks || undefined;
+        changed = true;
+      }
+    } else if (party.length < HARD_CAP){
+      /* newly visible (or newly joined) member: fill them in */
+      party.push(m.weapon); PROV.push("m"); COMBO.push(null);
+      LOADOUT[party.length - 1] = picks || undefined;
+      changed = true;
+    }
+    LIVE_GUIDS[m.guid] = sig;
+  }
+  if (changed){
+    FORGE_NOTE = null; SHEET_OPEN = null;
+    sortPartyByRole();
+    PLANNED = Math.max(PLANNED, party.length);
+    render();
+  }
+}
+
 function loadCompanionParty(){
   if (!companionData) return;
-  const weapons = (companionData.members || []).map(m => m.weapon).filter(w => w && WEAPONS[w]);
-  if (!weapons.length) return;
-  party = weapons.slice(0, HARD_CAP);
+  const live = (companionData.members || [])
+    .filter(m => m.weapon && WEAPONS[m.weapon]).slice(0, HARD_CAP);
+  if (!live.length) return;
+  party = live.map(m => m.weapon);
   /* live-party members are the user's, never the forge's */
   PROV = party.map(() => "m");
   COMBO = party.map(() => null);
   FORGE_NOTE = null;
   loadoutClear();
+  /* the members' REAL q/w picks score the comp from the first render */
+  live.forEach((m, i) => {
+    const picks = liveSpellPicks(m.weapon, m.spells);
+    if (picks) LOADOUT[i] = picks;
+  });
+  LIVE_GUIDS = {};
+  live.forEach(m => { if (m.guid) LIVE_GUIDS[m.guid] = liveSig(m); });
+  LIVE_SYNC = true;
   sortPartyByRole();
   PLANNED = Math.max(PLANNED, party.length);
   PARTY_FACET = null;
   render();
+  renderCompanion(true);
 }
 function toggleCompanion(){
   companionOn = !companionOn;
@@ -1975,6 +2057,10 @@ document.addEventListener("change", e => {
     PARTY_FACET = null; render();
   }
   if (e.target.id === "style"){ STYLE = e.target.value; FORGE_NOTE = null; render(); }
+  if (e.target.id === "companion-sync"){
+    LIVE_SYNC = e.target.checked;
+    if (LIVE_SYNC) syncLiveComp();
+  }
   if (e.target.id === "tree-filter"){ treeFilter = e.target.value; renderWheel(RECS_CUR); }
   if (e.target.id === "size-input"){
     const v = Math.round(+e.target.value);

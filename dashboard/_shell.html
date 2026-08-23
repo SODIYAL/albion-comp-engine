@@ -1017,6 +1017,10 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .livefeed{border-top:1px solid var(--rule); padding-top:4px}
 .lf-bar{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
 .lf-btn{width:auto; margin-top:0}
+.lf-sync{display:inline-flex; align-items:center; gap:6px; font-family:var(--mono);
+  font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2);
+  cursor:pointer; user-select:none}
+.lf-sync input{accent-color:var(--brass)}
 .comp-dot{
   display:inline-block; width:7px; height:7px; border-radius:50%;
   background:var(--ink-3); margin-right:7px; vertical-align:1px;
@@ -1451,6 +1455,9 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
         <button class="share-btn lf-btn" id="companion-connect">connect live party</button>
         <div class="status" id="companion-status" hidden></div>
         <button class="load-btn lf-btn" id="companion-load" hidden>load party into comp</button>
+        <label class="lf-sync" id="companion-sync-wrap" hidden
+               title="keep the loaded comp following the live party: weapon swaps update their slot, newly visible weapons fill in, real Q/W picks flow into the loadouts — no re-load needed">
+          <input type="checkbox" id="companion-sync"> live sync</label>
       </div>
       <div class="comp-members" id="companion-members"></div>
     </section>
