@@ -1,5 +1,10 @@
 # Composition Engine — Data Pipeline
 
+This directory is the **engine domain's data layer**: it turns the pinned
+game-data snapshot plus human curation into `out/dataset-latest.json`, the
+single file both engine ports consume. It never renders UI (the frontend
+bundler is `dashboard/build.py`) and never scores (that's `engine/`).
+
 Windows note: use `py -3`, not `python`/`python3` — those resolve to the
 Microsoft Store stub. Requires `pyyaml` (`py -3 -m pip install pyyaml`).
 
@@ -42,9 +47,9 @@ out/dataset-<version>.json + dataset-latest.json    ← single source of truth
    │
    ├─ engine/engine.py            scoring engine (Python)
    ├─ tests/test_golden.py        golden regression cases (24)
-   └─ py -3 pipeline/build_dashboard.py → dashboard/index.html (Comp Forge,
+   └─ py -3 dashboard/build.py → dashboard/index.html (Comp Forge,
             the product page; dataset inlined, scoring runs in-browser via
-            app_scoring.js — a port of engine.py that tests/test_js_parity.py
+            engine/app_scoring.js — a port of engine.py that tests/test_js_parity.py
             holds equal. Change one, change both, rerun parity.)
 ```
 
@@ -52,7 +57,7 @@ out/dataset-<version>.json + dataset-latest.json    ← single source of truth
 engine, the golden tests and the dashboard all read the built dataset. Before
 this existed, the prototype kept its own inline copy and the two had already
 diverged (Longbow `resist_shred` was 2 in the prototype, 1 in the curated
-sheet). `build_dashboard.py` inlines the Python engine's own output as a parity
+sheet). `dashboard/build.py` inlines the Python engine's own output as a parity
 fixture, so the browser client asserts against `engine.py` on every build.
 
 Rules enforced by `evidence_lint.py` (all born from real curation errors):
@@ -80,7 +85,7 @@ never part of a normal build), manual Armory imports (`armory_imports/`).
 `py -3 pipeline/build_builds.py` validates + normalizes everything into
 `out/builds_index.json` (§F selection order, canonical flags) and
 `out/builds_validation.json` (problems, quarantines, promotion decisions).
-`build_dashboard.py` inlines the index; nothing in it feeds scoring.
+`dashboard/build.py` inlines the index; nothing in it feeds scoring.
 
 ## Moving to a new game patch
 

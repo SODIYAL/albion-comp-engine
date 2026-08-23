@@ -49,12 +49,18 @@ py -3 pipeline/evidence_lint.py      # CI gate: every nonzero score cites an equ
 py -3 pipeline/build_interactions.py # interactions.yaml -> out/interactions.json
 py -3 pipeline/build_builds.py       # data/ evidence -> out/builds_index.json (+ validation/quarantine)
 py -3 pipeline/build_dataset.py      # single source of truth: out/dataset-latest.json (fails closed)
-py -3 pipeline/build_dashboard.py    # regenerates dashboard/index.html + docs/ (GitHub Pages)
+py -3 dashboard/build.py             # regenerates dashboard/index.html + docs/ (GitHub Pages)
 ```
 
 After editing `MASTERSHEET.md`: rebuild dataset + dashboard, then run golden + parity. After moving the game-data snapshot (`data/source_pins.yaml`): follow `pipeline/README.md` (fetch_snapshot → parse_dumps → fetch_item_stats → fetch_gear_lines → builds → dataset → full gate list), and re-check every `pipeline/effect_overrides.yaml` entry against the fresh dumps. `pipeline/sample_battles.py` (usage/cohort refresh) and `pipeline/adapters/metabattle.py fetch` are the only network steps outside snapshot fetch — both explicit, never part of a normal build. `pipeline/curate_helper.py <WEAPON>` prints the evidence worksheet for curation.
 
 ## Architecture
+
+Three applications with explicit boundaries (each directory's README states its contract):
+
+- **The engine** — `engine/` (both scoring ports) + `pipeline/` (its data layer). Interface out: the `CompEngine` API. Interface in: `pipeline/out/dataset-latest.json`, its only input.
+- **The frontend** — `dashboard/` (sources + `build.py` bundler, generated pages, `docs/` copies). Display only: it calls the embedded `CompEngine` and translates; it never computes a score. If the UI needs a number the engine doesn't expose, extend the engine (both ports + parity), don't recompute it in the UI.
+- **The companion** — `companion/` (C# .NET photon sniffer). Talks to the page only over `localhost:53321`; zero build-time coupling.
 
 One-way data flow, provenance-checked end to end:
 
@@ -63,8 +69,8 @@ One-way data flow, provenance-checked end to end:
 3. **Curation** — capability sheets scored **1–7** (2 points = one supply unit; `score_unit: 2` in scoring.yaml — thresholds and predicates speak 1–7). Shared tree Q/W spells live once in `pipeline/sheets/pools/`; each weapon's sheet carries its E (the weapon's identity). Every nonzero score cites an evidence spell; `evidence_lint.py` verifies the spell is equippable on that weapon and can ground the claim with the right direction.
 4. **Templates** — `pipeline/templates/*.yaml`: six content templates (targets, hard floors, weights, validated sizes) + `styles.yaml` playstyle overlays + `composition.yaml` + `mechanics.yaml`. Comp-fitted numbers come from real published comps (see VALIDATION.md 2026-08-21 recalibration ruling).
 5. **Dataset** — `build_dataset.py` compiles all of the above plus MASTERSHEET rulings into `out/dataset-latest.json`, byte-identically reproducible.
-6. **Twin engines** — `engine/engine.py` is canonical; `pipeline/app_scoring.js` is its browser port. Change one, change both, rerun parity. Recommendation score = exact marginal comp-score delta (0.55 capability + 0.20 synergy + 0.15 meta prior ± viability/duplicates), evaluated **one player ahead** (roster+1), each candidate on its best single legal Q/W/E/passive combo.
-7. **Dashboard** — `build_dashboard.py` embeds the dataset, engine JS, and the `_`-prefixed sources (`dashboard/_shell.html`, `_app.js`, `_loadout.js`, `_decision_layer.js/.css`, `_explainer.html`) into generated single-file pages: `dashboard/index.html` and the `docs/` copies. **Never hand-edit generated pages** — edit the sources and rebuild. It also inlines a parity fixture so the browser asserts against engine.py on every build.
+6. **Twin engines** — `engine/engine.py` is canonical; `engine/app_scoring.js` is its browser port. Change one, change both, rerun parity. Recommendation score = exact marginal comp-score delta (0.55 capability + 0.20 synergy + 0.15 meta prior ± viability/duplicates), evaluated **one player ahead** (roster+1), each candidate on its best single legal Q/W/E/passive combo.
+7. **Dashboard** — `dashboard/build.py` embeds the dataset, engine JS, and the `_`-prefixed sources (`dashboard/_shell.html`, `_app.js`, `_loadout.js`, `_decision_layer.js/.css`, `_explainer.html`) into generated single-file pages: `dashboard/index.html` and the `docs/` copies. **Never hand-edit generated pages** — edit the sources and rebuild. It also inlines a parity fixture so the browser asserts against engine.py on every build.
 
 Side layers: `data/published_comps|published_builds|armory_imports` → `build_builds.py` → reference-build evidence (quarantine rules, canonical promotion gates — display only). `sample_battles.py` → `out/weapon_usage_v2.json` fight-size prevalence + observed organization cohorts (display only; the page embeds anonymous weapon baskets, org ids stay in the JSON). `review/` holds generated audit boards (`build_effect_review.py`, `build_magnitude_review.py`, `build_stat_chart.py`). `companion/` is a separate C# .NET photon-sniffer feeding the live-party feature over localhost.
 

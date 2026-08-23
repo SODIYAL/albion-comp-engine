@@ -19,14 +19,15 @@ and inside a strict-CSP artifact host, neither of which can fetch a sibling
 JSON file. The shell opens a complete HTML document; this builder appends the
 scripts and closes it so development servers can safely inject reload code.
 
-Usage:  py -3 pipeline/build_dashboard.py
+Usage:  py -3 dashboard/build.py
 """
 import base64, json, os, sys
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+HERE = os.path.dirname(os.path.abspath(__file__))   # dashboard/
 ROOT = os.path.join(HERE, os.pardir)
-DASH = os.path.join(ROOT, "dashboard")
-DATASET = os.path.join(HERE, "out", "dataset-latest.json")
+DASH = HERE
+PIPE = os.path.join(ROOT, "pipeline")               # data artifacts live there
+DATASET = os.path.join(PIPE, "out", "dataset-latest.json")
 
 # Role/effect glyphs drawn for the dashboard: flat geometric SVGs (2026-08-21
 # neon reskin; the retired painterly *-96.png renders remain beside them).
@@ -80,7 +81,7 @@ def load_loadouts(weapons):
     the dataset knows are inlined. Replaces the old direct meta_comps.yaml
     parse: production build data lives in data/, normalization is generated,
     and every variant carries its source, patch, approval and confidence."""
-    path = os.path.join(HERE, "out", "builds_index.json")
+    path = os.path.join(PIPE, "out", "builds_index.json")
     if not os.path.exists(path):
         return {}, {}
     with open(path, encoding="utf-8") as f:
@@ -116,7 +117,7 @@ def main():
     )
     # The scoring engine is app_scoring.js — the same file node runs in
     # tests/test_js_parity.py. _app.js contains rendering only.
-    with open(os.path.join(HERE, "app_scoring.js"), encoding="utf-8") as f:
+    with open(os.path.join(ROOT, "engine", "app_scoring.js"), encoding="utf-8") as f:
         scoring = f.read()
     # Loadout layer — inlined BEFORE _app.js, which calls into it.
     with open(os.path.join(DASH, "_loadout.js"), encoding="utf-8") as f:
@@ -126,13 +127,13 @@ def main():
     semantic_icons = load_semantic_icons()
     # Item icons (fetch_icons.py). Optional: the page renders placeholders
     # for any weapon missing from the manifest.
-    icons_path = os.path.join(HERE, "out", "icon_data.json")
+    icons_path = os.path.join(PIPE, "out", "icon_data.json")
     icons = {}
     if os.path.exists(icons_path):
         with open(icons_path, encoding="utf-8") as f:
             icons = json.load(f)
     # Weapon tree (subcategory) per weapon — powers the tree filter.
-    with open(os.path.join(HERE, "out", "weapon_lines.json"), encoding="utf-8") as f:
+    with open(os.path.join(PIPE, "out", "weapon_lines.json"), encoding="utf-8") as f:
         lines = json.load(f)
     trees = {k: (lines.get(k) or {}).get("subcategory", "other")
              for k in data["weapons"]}
@@ -144,7 +145,7 @@ def main():
              if (lines.get(k) or {}).get("example_item")}
     # Spell pools with display names — powers the weapon detail drawer and
     # resolves caller loadout indices (q3 = 3rd Q option, game-data order).
-    with open(os.path.join(HERE, "out", "spell_index.json"), encoding="utf-8") as f:
+    with open(os.path.join(PIPE, "out", "spell_index.json"), encoding="utf-8") as f:
         spell_index = json.load(f)
 
     def spell_name(sid):
@@ -157,7 +158,7 @@ def main():
                      for slot in ("q", "w", "e", "passive")}
     # Gear ability pools (parse_dumps gear_spells.json) — the equipment half
     # of the ability-detail view: actives/passives with display names.
-    gear_spells_path = os.path.join(HERE, "out", "gear_spells.json")
+    gear_spells_path = os.path.join(PIPE, "out", "gear_spells.json")
     gear_spells = {}
     if os.path.exists(gear_spells_path):
         with open(gear_spells_path, encoding="utf-8") as f:
@@ -170,7 +171,7 @@ def main():
     # that curve is not in the public dumps, which the UI says out loud),
     # cooldown/range/radius/cast time/max targets, and the typed effect list
     # from the structured effect layer (effect_catalogue.py).
-    fx_path = os.path.join(HERE, "out", "effect_catalogue.json")
+    fx_path = os.path.join(PIPE, "out", "effect_catalogue.json")
     spell_fx = {}
     if os.path.exists(fx_path):
         with open(fx_path, encoding="utf-8") as f:
@@ -202,7 +203,7 @@ def main():
     # no gear capabilities are curated yet, so the engine still scores weapons
     # alone. Shipping the catalogue + art first is what lets the loadout UI be
     # built against real items instead of placeholders.
-    gear_path = os.path.join(HERE, "out", "gear_lines.json")
+    gear_path = os.path.join(PIPE, "out", "gear_lines.json")
     gear_all = {}
     if os.path.exists(gear_path):
         with open(gear_path, encoding="utf-8") as f:
@@ -221,7 +222,7 @@ def main():
     # survive file:// and offline use.
     icons = {k: v for k, v in icons.items() if k in data["weapons"]}
     # Real-usage sample (sample_battles.py). Optional; display evidence only.
-    usage_path = os.path.join(HERE, "out", "weapon_usage_v2.json")
+    usage_path = os.path.join(PIPE, "out", "weapon_usage_v2.json")
     usage = {}
     if os.path.exists(usage_path):
         with open(usage_path, encoding="utf-8") as f:

@@ -3,7 +3,7 @@
 Goal: teach the engine real fight mechanics (Focus Fire / Resilience, AoE
 escalation, Disarray, …) via direct numbers supplied by the expert. These will
 modify **capability supply vs target** in `engine/engine.py` +
-`pipeline/app_scoring.js` (change one, change both, rerun parity).
+`engine/app_scoring.js` (change one, change both, rerun parity).
 
 Status: **All three ZvZ mechanics received (2026-08-13, wiki): Focus Fire /
 Resilience, AoE Escalation, Disarray. Canonical data home:
@@ -366,7 +366,7 @@ dumps or in-game measurement, not more searching.
   compose rather than double-count. The `resist_shred×burst_st` synergy
   kept as-is for now (resist shred ≈ resilience-pen analog — revisit with
   Q7 data).
-- [x] Implemented in `engine/engine.py` AND `pipeline/app_scoring.js`;
+- [x] Implemented in `engine/engine.py` AND `engine/app_scoring.js`;
   parity 60/60 at 1e-9 across all templates × styles.
 - [x] Golden: all previous cases pass unchanged (T10 clap-direction margin
   WIDENED — mechanics reinforce the style axis); new T11/T11b/T11c pin
@@ -482,7 +482,7 @@ trusted; disagreement → expert queue, never silently overridden.
   circularity); (b) base-party members still use flat-union supply, not a joint
   best-loadout — a future refinement; (c) `explain()`/dashboard now report the
   chosen loadout's caps, but the dashboard artifact under docs/ must be rebuilt
-  (`build_dashboard.py`) + deployed for the live site to reflect this.
+  (`dashboard/build.py`) + deployed for the live site to reflect this.
 - [~] **Q17 — usage-derived MetaPrior. BUILT + MEASURED 2026-08-14; NOT
   wired (deliberately).** `pipeline/build_meta_prior.py` produces a
   size-bucketed prior from `weapon_usage_v2.json` (share × n/(n+8) shrinkage,

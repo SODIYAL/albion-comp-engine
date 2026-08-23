@@ -50,7 +50,7 @@ Run:
 
 ```bash
 py -3 pipeline/sample_battles.py --battles 200 --server us
-py -3 pipeline/build_dashboard.py
+py -3 dashboard/build.py
 ```
 
 The first command rewrites `pipeline/out/weapon_usage_v2.json` with the new `cohorts` and `cohort_meta` fields. The second embeds it into the static dashboard.

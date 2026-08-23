@@ -31,7 +31,7 @@ The weapon wheel, capability board, evidence drawer, killboard prevalence, loado
 There is no separate preview build anymore. The normal builder includes the decision layer:
 
 ```bash
-py -3 pipeline/build_dashboard.py
+py -3 dashboard/build.py
 ```
 
 That generates the branch's normal `dashboard/index.html` and `docs/index.html` with the decision-first hierarchy included.
@@ -40,7 +40,7 @@ That generates the branch's normal `dashboard/index.html` and `docs/index.html` 
 
 - `dashboard/_decision_layer.js` — translation layer over existing engine/UI state.
 - `dashboard/_decision_layer.css` — decision-first layout and hierarchy.
-- `pipeline/build_dashboard.py` — normal build path now injects both files into the generated dashboard and GitHub Pages output.
+- `dashboard/build.py` — normal build path now injects both files into the generated dashboard and GitHub Pages output.
 
 ## Intentionally deferred
 

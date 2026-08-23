@@ -13,7 +13,7 @@ To apply your edits:
 
 ```
 py -3 pipeline/build_dataset.py
-py -3 pipeline/build_dashboard.py
+py -3 dashboard/build.py
 ```
 
 (Recommended after big edits: `py -3 tests/test_golden.py` and

@@ -2,9 +2,9 @@
 /* Dashboard client. Reads the injected DATASET — the same
    pipeline/out/dataset-latest.json that engine/engine.py consumes. No
    capability numbers live in this file, and no scoring math either: the
-   engine is pipeline/app_scoring.js (inlined by the build just before this
+   engine is engine/app_scoring.js (inlined by the build just before this
    file), the SAME code node runs in tests/test_js_parity.py. Regenerate:
-       py -3 pipeline/build_dashboard.py                                     */
+       py -3 dashboard/build.py                                              */
 
 const META = DATASET._meta;
 const WEAPONS = DATASET.weapons;
@@ -167,7 +167,7 @@ const ROLE_LABELS = {
   healer: "Healer", support: "Support",
 };
 const roleLabel = r => ROLE_LABELS[r] || r.replace(/_/g, " ");
-/* Generated role/effect art is injected by build_dashboard.py beside the
+/* Generated role/effect art is injected by dashboard/build.py beside the
    weapon icon manifest. Empty fallback is intentional: every icon-only
    control also carries an accessible text name, and the builder fails early
    if one of the committed assets is missing. */
@@ -1225,7 +1225,7 @@ function usageOf(w){
    Alliance/Guild identity; ambiguous players are excluded. Cohorts are NOT
    parties, sides, or win-rate samples — the copy says "observed together",
    never "teammates" or "successful". The page embeds only the anonymous
-   weapon baskets (build_dashboard strips org ids and battle ids). Display
+   weapon baskets (dashboard/build.py strips org ids and battle ids). Display
    evidence only; nothing here can touch a score. */
 function cohortContext(){
   if (typeof USAGE === "undefined" || !USAGE.cohort_baskets) return null;

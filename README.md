@@ -143,7 +143,7 @@ py -3 tests/test_provenance.py
 py -3 tests/test_builds.py
 py -3 pipeline/build_interactions.py
 py -3 tests/test_interactions.py
-py -3 pipeline/build_dashboard.py
+py -3 dashboard/build.py
 ```
 
 `pipeline/sample_battles.py` is optional and network-dependent. It refreshes observational battle evidence; it is not required for the mechanical scoring engine to function.
@@ -157,15 +157,14 @@ MASTERSHEET.md                 expert control surface / tuning rulings
 HANDOFF.md                     current project state + development handoff
 albion-comp-engine-design.md   research, architecture, taxonomy and design history
 
-engine/
+engine/                        THE ENGINE — scoring, in two parity-locked ports
   engine.py                    canonical Python scoring engine
+  app_scoring.js               browser scoring twin (change one, change both)
 
-pipeline/
+pipeline/                      the engine's data layer
   sheets/                      capability sheets
   templates/                   content requirements
-  app_scoring.js               browser scoring twin
   build_dataset.py             builds the release dataset
-  build_dashboard.py           builds Comp Forge + Pages output
   sample_battles.py            observational battle sampler
   out/                         generated data/evidence artifacts
 
@@ -175,7 +174,8 @@ tests/
   test_js_parity.py            Python ↔ browser scoring parity
   VALIDATION.md                validation record and external-quality gates
 
-dashboard/
+dashboard/                     THE FRONTEND — display only, never computes a score
+  build.py                     bundles dataset + engine + sources into the pages
   index.html                   generated local product page
   _explainer.html              source for How It Works
   how-it-works.html            generated/local explainer copy
@@ -183,6 +183,9 @@ dashboard/
 docs/
   index.html                   GitHub Pages product output
   how-it-works.html            GitHub Pages explainer
+
+companion/                     THE COMPANION — C# photon sniffer feeding the
+                               live-party feature over localhost only
 
 review/                        generated audit/review boards
 ```

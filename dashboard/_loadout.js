@@ -1,6 +1,6 @@
 /* Loadout layer — per-member gear and spell picks.
  *
- * Inlined into index.html by build_dashboard.py AFTER the data constants and
+ * Inlined into index.html by dashboard/build.py AFTER the data constants and
  * BEFORE _app.js, so _app.js can call into it. Kept out of _app.js because
  * that file is rendering for the whole page already; the panel, the picker
  * and the permalink codec are a separable concern with its own state.

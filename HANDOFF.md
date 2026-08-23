@@ -47,7 +47,7 @@ The production engine currently includes:
 - swap review
 - weapon dossiers, spell facts, PvP interaction evidence, reference builds, and suggested gear
 
-The JavaScript engine (`pipeline/app_scoring.js`) mirrors the Python engine and is parity-tested.
+The JavaScript engine (`engine/app_scoring.js`) mirrors the Python engine and is parity-tested.
 
 ## Important product principle
 
@@ -89,7 +89,7 @@ Source files:
 - `dashboard/_decision_layer.css`
 - `dashboard/_app.js`
 - `dashboard/_shell.html`
-- `pipeline/build_dashboard.py`
+- `dashboard/build.py`
 
 ## How recommendations are computed
 
@@ -159,7 +159,7 @@ The current page explains:
 - distinction between mechanical score and evidence
 - current live vs experimental roadmap
 
-`pipeline/build_dashboard.py` rewrites the two generated copies from `_explainer.html`, so keep the source authoritative.
+`dashboard/build.py` rewrites the two generated copies from `_explainer.html`, so keep the source authoritative.
 
 ## Recently integrated work (2026-08-22) — no open branches
 
@@ -246,7 +246,7 @@ py -3 tests/test_provenance.py
 py -3 tests/test_builds.py
 py -3 pipeline/build_interactions.py
 py -3 tests/test_interactions.py
-py -3 pipeline/build_dashboard.py
+py -3 dashboard/build.py
 ```
 
 Do not assume historical test counts in this handoff are permanent; read each test's current output. The important rule is that all required gates remain green before shipping mechanics/data changes.
@@ -276,7 +276,7 @@ For scoring/mechanics:
 - `MASTERSHEET.md`
 - `MECHANICS_TODO.md`
 - `engine/engine.py`
-- `pipeline/app_scoring.js`
+- `engine/app_scoring.js`
 - `pipeline/templates/composition.yaml`
 - `tests/test_golden.py`
 - `tests/test_forge.py`
@@ -299,7 +299,7 @@ For product/UI:
 - `dashboard/_decision_layer.js`
 - `dashboard/_decision_layer.css`
 - `dashboard/_explainer.html`
-- `pipeline/build_dashboard.py`
+- `dashboard/build.py`
 
 For the companion:
 

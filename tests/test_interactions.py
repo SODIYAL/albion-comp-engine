@@ -245,7 +245,7 @@ check("shared-stack duplicates read as synergy in the analyzer",
 
 # ---- twin-engine parity on the synthetic duplicate (1e-9) -----------------------
 node_script = f"""
-const E = require({json.dumps(os.path.join(PIPELINE, 'app_scoring.js'))});
+const E = require({json.dumps(os.path.join(ROOT, 'engine', 'app_scoring.js'))});
 const ds = require({json.dumps(tmp.name)});
 const e = new E(ds, {json.dumps(CONTENT)}, {SIZE}, {json.dumps(STYLE)});
 const party = {json.dumps(party)}, combos = {json.dumps(combos)};

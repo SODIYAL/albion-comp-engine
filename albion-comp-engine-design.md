@@ -317,7 +317,7 @@ Phase 1's React SPA and Phase 3 remain.*
 
 *Amendment 2026-08-13: Phase 1 shipped WITHOUT React — the "static SPA"
 became Comp Forge (`dashboard/index.html`), a generated single-file page
-whose in-browser engine (`pipeline/app_scoring.js`) is a parity-tested port
+whose in-browser engine (`engine/app_scoring.js`) is a parity-tested port
 of `engine/engine.py` (60/60 random parties at 1e-9 + a build-time fixture
 on every load). Scope grew past the MVP cut line: five content templates
 (blackzone roam 20 / territory defense 20 / castle 25 / faction war 15 /

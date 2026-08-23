@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-JS/Python engine parity — pipeline/app_scoring.js must produce the SAME
+JS/Python engine parity — engine/app_scoring.js must produce the SAME
 numbers and the SAME rankings as engine/engine.py, or the app is quietly
 lying to its users while the golden suite stays green.
 
@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.join(ROOT, "engine"))
 from engine import Engine  # noqa: E402
 
 DATASET = os.path.join(ROOT, "pipeline", "out", "dataset-latest.json")
-SCORING_JS = os.path.join(ROOT, "pipeline", "app_scoring.js")
+SCORING_JS = os.path.join(ROOT, "engine", "app_scoring.js")
 RUNNER = os.path.join(HERE, "js_parity_runner.js")
 EPS = 1e-9
 N_CASES = 60
@@ -272,9 +272,9 @@ def main():
         with open(page, encoding="utf-8") as f:
             if engine_src not in f.read():
                 print(f"FAIL: {os.path.relpath(page, ROOT)} does not embed the "
-                      "current app_scoring.js — rerun pipeline/build_dashboard.py")
+                      "current app_scoring.js — rerun dashboard/build.py")
                 bad += 1
-        # the check needs the raw source in the page; build_dashboard.py
+        # the check needs the raw source in the page; dashboard/build.py
         # inlines it unminified precisely so this comparison stays byte-exact
     if not bad:
         print("dashboard embed check: generated pages carry the verified engine")
