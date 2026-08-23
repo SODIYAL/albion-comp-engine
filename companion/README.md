@@ -35,11 +35,16 @@ Expected-by-design behavior seen in the run (not bugs):
 - `item_power` stays null: IP only rides the inspect operation (op 148),
   which the companion does not fire passively.
 
-**The last unchecked box:** the Comp Forge **connect live party** button
-end-to-end with the live companion (verified against a mock only). With the
-companion running: open Comp Forge, click connect in the rail, confirm the
-party lists, then **load party into comp** — best done in a zone with most
-of the party visible so their weapons populate.
+**End-to-end CONFIRMED same day (second run):** Comp Forge's **connect live
+party** → **load party into comp** worked against the live companion — a
+real 7-member party listed with 7/7 known weapons and loaded into the comp
+("This party: 7 curated, 0 illustrative"), with the observed-cohort
+affinity strip firing on the loaded roster. Known friction, by design: it
+takes a load or two plus zoning for every member's weapon to populate,
+because weapons only arrive as members become VISIBLE (the visibility
+rule). Candidate future polish: the connect panel could auto-merge
+newly-visible weapons into already-loaded slots instead of needing a
+re-load.
 
 Everything below is the full run/troubleshooting reference.
 
