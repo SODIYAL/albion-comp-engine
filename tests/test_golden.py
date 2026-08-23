@@ -525,6 +525,23 @@ def run():
           f"label={id_bomb['label']} harpoon-group="
           f"{harpoon_fit['clap']['group']}")
 
+    # T23f — blind labels 3/4 (owner, 2026-08-23): both 20-man comps are
+    # CLAP. The engine agreed on Deadlyhooker P1 but misread the
+    # albioncompo 20v20 as "split" — its melee share (35.5%) sits a hair
+    # over the ranged-core line and the sole rigid minority carrier was
+    # Spirithunter, whose damage is incidental to its pierce-bot job
+    # (the owner's own Harpoon ruling). Fix pinned here: utility carriers
+    # never anchor a damage-identity split, so both real comps read clap.
+    dh1_id = Engine(content="territory_defense", size=len(dh1)).comp_identity(dh1)
+    c20 = _comp_party("albioncompo_20v20_competitive_2026_08", 0)
+    c20_id = Engine(content="blackzone_roam", size=len(c20)).comp_identity(c20)
+    check("T23f both real 20-man comps read clap (owner blind labels); "
+          "a pierce-bot cannot anchor a split",
+          dh1_id["style"] == "clap" and c20_id["style"] == "clap"
+          and c20_id["conflicts"] == [],
+          f"DH={dh1_id['style']} 20v20={c20_id['style']} "
+          f"({c20_id['melee_share']:.0%} melee)")
+
     # T25 — kill pressure (identity Phase D, owner checklist 2026-08-23):
     # "did we bring pierce on the clump, did we give heal cuts, did we do
     # enough damage within a short span to actually kill." The lights are

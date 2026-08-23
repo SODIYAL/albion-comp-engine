@@ -48,6 +48,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 15
   },
   "2H_ARCANESTAFF_CRYSTAL": {
@@ -83,6 +84,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 7
   },
   "2H_ARCANESTAFF_HELL": {
@@ -116,6 +118,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 11
   },
   "2H_ARCANE_RINGPAIR_AVALON": {
@@ -151,6 +154,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 13
   },
   "2H_AXE": {
@@ -186,6 +190,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 11
   },
   "2H_AXE_AVALON": {
@@ -221,6 +226,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 19
   },
   "2H_BOW": {
@@ -256,6 +262,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 8
   },
   "2H_BOW_AVALON": {
@@ -291,6 +298,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 8
   },
   "2H_BOW_CRYSTAL": {
@@ -326,6 +334,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 8
   },
   "2H_BOW_HELL": {
@@ -361,6 +370,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 8
   },
   "2H_BOW_KEEPER": {
@@ -396,6 +406,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 8
   },
   "2H_CLAWPAIR": {
@@ -431,6 +442,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 20
   },
   "2H_CLAYMORE": {
@@ -466,6 +478,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 16
   },
   "2H_CLAYMORE_AVALON": {
@@ -501,6 +514,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 12
   },
   "2H_CLEAVER_HELL": {
@@ -536,6 +550,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 16
   },
   "2H_COMBATSTAFF_MORGANA": {
@@ -571,6 +586,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 16
   },
   "2H_CROSSBOW": {
@@ -606,6 +622,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 16
   },
   "2H_CROSSBOWLARGE": {
@@ -641,6 +658,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 14
   },
   "2H_CROSSBOWLARGE_MORGANA": {
@@ -676,6 +694,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 14
   },
   "2H_CROSSBOW_CANNON_AVALON": {
@@ -711,6 +730,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 14
   },
   "2H_CURSEDSTAFF": {
@@ -746,6 +766,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 7
   },
   "2H_CURSEDSTAFF_MORGANA": {
@@ -781,6 +802,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 7
   },
   "2H_DAGGERPAIR": {
@@ -816,6 +838,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 14
   },
   "2H_DAGGERPAIR_CRYSTAL": {
@@ -851,6 +874,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 12
   },
   "2H_DAGGER_KATAR_AVALON": {
@@ -886,6 +910,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 12
   },
   "2H_DEMONICSTAFF": {
@@ -921,6 +946,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 13
   },
   "2H_DIVINESTAFF": {
@@ -954,6 +980,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 2
   },
   "2H_DOUBLEBLADEDSTAFF": {
@@ -989,6 +1016,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 20
   },
   "2H_DOUBLEBLADEDSTAFF_CRYSTAL": {
@@ -1024,6 +1052,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 10
   },
   "2H_DUALAXE_KEEPER": {
@@ -1059,6 +1088,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 15
   },
   "2H_DUALCROSSBOW_CRYSTAL": {
@@ -1094,6 +1124,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 16
   },
   "2H_DUALCROSSBOW_HELL": {
@@ -1129,6 +1160,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 14
   },
   "2H_DUALHAMMER_HELL": {
@@ -1164,6 +1196,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 22
   },
   "2H_DUALMACE_AVALON": {
@@ -1197,6 +1230,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 11
   },
   "2H_DUALSCIMITAR_UNDEAD": {
@@ -1232,6 +1266,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 8
   },
   "2H_DUALSICKLE_UNDEAD": {
@@ -1267,6 +1302,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 16
   },
   "2H_DUALSWORD": {
@@ -1302,6 +1338,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 12
   },
   "2H_ENIGMATICORB_MORGANA": {
@@ -1335,6 +1372,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 7
   },
   "2H_ENIGMATICSTAFF": {
@@ -1368,6 +1406,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 7
   },
   "2H_FIRESTAFF": {
@@ -1403,6 +1442,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 4
   },
   "2H_FIRESTAFF_HELL": {
@@ -1438,6 +1478,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 4
   },
   "2H_FIRE_RINGPAIR_AVALON": {
@@ -1473,6 +1514,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 8
   },
   "2H_FLAIL": {
@@ -1506,6 +1548,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 18
   },
   "2H_FROSTSTAFF": {
@@ -1541,6 +1584,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 10
   },
   "2H_FROSTSTAFF_CRYSTAL": {
@@ -1576,6 +1620,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 8
   },
   "2H_GLACIALSTAFF": {
@@ -1611,6 +1656,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 14
   },
   "2H_GLAIVE": {
@@ -1644,6 +1690,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 10
   },
   "2H_GLAIVE_CRYSTAL": {
@@ -1679,6 +1726,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 6
   },
   "2H_HALBERD": {
@@ -1714,6 +1762,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 11
   },
   "2H_HALBERD_MORGANA": {
@@ -1749,6 +1798,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 13
   },
   "2H_HAMMER": {
@@ -1782,6 +1832,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 28
   },
   "2H_HAMMER_AVALON": {
@@ -1815,6 +1866,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 34
   },
   "2H_HAMMER_CRYSTAL": {
@@ -1848,6 +1900,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 21
   },
   "2H_HAMMER_UNDEAD": {
@@ -1881,6 +1934,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 27
   },
   "2H_HARPOON_HELL": {
@@ -1914,6 +1968,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 12
   },
   "2H_HOLYSTAFF": {
@@ -1947,6 +2002,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 6
   },
   "2H_HOLYSTAFF_CRYSTAL": {
@@ -1980,6 +2036,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 2
   },
   "2H_HOLYSTAFF_HELL": {
@@ -2013,6 +2070,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 4
   },
   "2H_HOLYSTAFF_UNDEAD": {
@@ -2046,6 +2104,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 2
   },
   "2H_ICECRYSTAL_UNDEAD": {
@@ -2081,6 +2140,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 14
   },
   "2H_ICEGAUNTLETS_HELL": {
@@ -2116,6 +2176,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 14
   },
   "2H_INFERNOSTAFF": {
@@ -2151,6 +2212,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 6
   },
   "2H_INFERNOSTAFF_MORGANA": {
@@ -2186,6 +2248,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 4
   },
   "2H_IRONCLADEDSTAFF": {
@@ -2219,6 +2282,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 10
   },
   "2H_IRONGAUNTLETS_HELL": {
@@ -2254,6 +2318,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 14
   },
   "2H_KNUCKLES_AVALON": {
@@ -2287,6 +2352,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 20
   },
   "2H_KNUCKLES_CRYSTAL": {
@@ -2322,6 +2388,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 18
   },
   "2H_KNUCKLES_HELL": {
@@ -2357,6 +2424,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 18
   },
   "2H_KNUCKLES_KEEPER": {
@@ -2392,6 +2460,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 16
   },
   "2H_KNUCKLES_MORGANA": {
@@ -2427,6 +2496,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 16
   },
   "2H_KNUCKLES_SET1": {
@@ -2462,6 +2532,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 14
   },
   "2H_KNUCKLES_SET2": {
@@ -2495,6 +2566,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 20
   },
   "2H_KNUCKLES_SET3": {
@@ -2530,6 +2602,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 15
   },
   "2H_LONGBOW": {
@@ -2565,6 +2638,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 4
   },
   "2H_LONGBOW_UNDEAD": {
@@ -2600,6 +2674,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 8
   },
   "2H_MACE": {
@@ -2633,6 +2708,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 22
   },
   "2H_MACE_MORGANA": {
@@ -2666,6 +2742,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 21
   },
   "2H_NATURESTAFF": {
@@ -2699,6 +2776,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 4
   },
   "2H_NATURESTAFF_HELL": {
@@ -2732,6 +2810,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 2
   },
   "2H_NATURESTAFF_KEEPER": {
@@ -2765,6 +2844,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 2
   },
   "2H_POLEHAMMER": {
@@ -2798,6 +2878,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 31
   },
   "2H_QUARTERSTAFF": {
@@ -2833,6 +2914,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 30
   },
   "2H_QUARTERSTAFF_AVALON": {
@@ -2868,6 +2950,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 18
   },
   "2H_RAM_KEEPER": {
@@ -2901,6 +2984,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 28
   },
   "2H_REPEATINGCROSSBOW_UNDEAD": {
@@ -2936,6 +3020,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 14
   },
   "2H_ROCKSTAFF_KEEPER": {
@@ -2969,6 +3054,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 16
   },
   "2H_SCYTHE_CRYSTAL": {
@@ -3004,6 +3090,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 11
   },
   "2H_SCYTHE_HELL": {
@@ -3039,6 +3126,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 11
   },
   "2H_SHAPESHIFTER_AVALON": {
@@ -3074,6 +3162,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 12
   },
   "2H_SHAPESHIFTER_CRYSTAL": {
@@ -3109,6 +3198,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 10
   },
   "2H_SHAPESHIFTER_HELL": {
@@ -3144,6 +3234,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 10
   },
   "2H_SHAPESHIFTER_KEEPER": {
@@ -3177,6 +3268,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 12
   },
   "2H_SHAPESHIFTER_MORGANA": {
@@ -3212,6 +3304,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 12
   },
   "2H_SHAPESHIFTER_SET1": {
@@ -3247,6 +3340,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 14
   },
   "2H_SHAPESHIFTER_SET2": {
@@ -3280,6 +3374,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 10
   },
   "2H_SHAPESHIFTER_SET3": {
@@ -3315,6 +3410,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 10
   },
   "2H_SKULLORB_HELL": {
@@ -3350,6 +3446,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 5
   },
   "2H_SPEAR": {
@@ -3383,6 +3480,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 11
   },
   "2H_TRIDENT_UNDEAD": {
@@ -3416,6 +3514,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 14
   },
   "2H_TWINSCYTHE_HELL": {
@@ -3451,6 +3550,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 18
   },
   "2H_WARBOW": {
@@ -3486,6 +3586,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 8
   },
   "2H_WILDSTAFF": {
@@ -3519,6 +3620,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 2
   },
   "MAIN_1HCROSSBOW": {
@@ -3554,6 +3656,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 14
   },
   "MAIN_ARCANESTAFF": {
@@ -3589,6 +3692,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 13
   },
   "MAIN_ARCANESTAFF_UNDEAD": {
@@ -3624,6 +3728,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 15
   },
   "MAIN_AXE": {
@@ -3664,6 +3769,7 @@
     "source": "Owner ruling 2026-08-23 (identity design session, in-chat)."
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 11
   },
   "MAIN_CURSEDSTAFF": {
@@ -3699,6 +3805,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 5
   },
   "MAIN_CURSEDSTAFF_AVALON": {
@@ -3734,6 +3841,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 5
   },
   "MAIN_CURSEDSTAFF_CRYSTAL": {
@@ -3769,6 +3877,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 11
   },
   "MAIN_CURSEDSTAFF_UNDEAD": {
@@ -3804,6 +3913,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 9
   },
   "MAIN_DAGGER": {
@@ -3839,6 +3949,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 12
   },
   "MAIN_DAGGER_HELL": {
@@ -3874,6 +3985,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 12
   },
   "MAIN_FIRESTAFF": {
@@ -3909,6 +4021,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 4
   },
   "MAIN_FIRESTAFF_CRYSTAL": {
@@ -3944,6 +4057,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 6
   },
   "MAIN_FIRESTAFF_KEEPER": {
@@ -3979,6 +4093,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 4
   },
   "MAIN_FROSTSTAFF": {
@@ -4014,6 +4129,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 18
   },
   "MAIN_FROSTSTAFF_AVALON": {
@@ -4047,6 +4163,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 12
   },
   "MAIN_FROSTSTAFF_KEEPER": {
@@ -4082,6 +4199,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 14
   },
   "MAIN_HAMMER": {
@@ -4115,6 +4233,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 21
   },
   "MAIN_HOLYSTAFF": {
@@ -4148,6 +4267,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 2
   },
   "MAIN_HOLYSTAFF_AVALON": {
@@ -4181,6 +4301,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 8
   },
   "MAIN_HOLYSTAFF_MORGANA": {
@@ -4214,6 +4335,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 4
   },
   "MAIN_MACE": {
@@ -4247,6 +4369,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 17
   },
   "MAIN_MACE_CRYSTAL": {
@@ -4282,6 +4405,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 19
   },
   "MAIN_MACE_HELL": {
@@ -4317,6 +4441,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 23
   },
   "MAIN_NATURESTAFF": {
@@ -4350,6 +4475,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 4
   },
   "MAIN_NATURESTAFF_AVALON": {
@@ -4383,6 +4509,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 6
   },
   "MAIN_NATURESTAFF_CRYSTAL": {
@@ -4416,6 +4543,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 4
   },
   "MAIN_NATURESTAFF_KEEPER": {
@@ -4449,6 +4577,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 2
   },
   "MAIN_RAPIER_MORGANA": {
@@ -4484,6 +4613,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 14
   },
   "MAIN_ROCKMACE_KEEPER": {
@@ -4517,6 +4647,7 @@
     }
    },
    "role_flexible": true,
+   "utility_carrier": false,
    "utility_pts": 21
   },
   "MAIN_SCIMITAR_MORGANA": {
@@ -4552,6 +4683,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 8
   },
   "MAIN_SPEAR": {
@@ -4585,6 +4717,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 12
   },
   "MAIN_SPEAR_KEEPER": {
@@ -4620,6 +4753,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 12
   },
   "MAIN_SPEAR_LANCE_AVALON": {
@@ -4655,6 +4789,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 12
   },
   "MAIN_SWORD": {
@@ -4690,6 +4825,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": true,
    "utility_pts": 8
   },
   "MAIN_SWORD_CRYSTAL": {
@@ -4725,6 +4861,7 @@
     }
    },
    "role_flexible": false,
+   "utility_carrier": false,
    "utility_pts": 6
   }
  }

@@ -494,6 +494,13 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides):
                     else "melee")
         scale = ("none" if not carrier
                  else "group" if e_group else "single")
+        # A single-scale carrier whose kit clears the utility exemption is
+        # a UTILITY CARRIER (Harpoon the pierce-bot, Dagger Pair the catch
+        # bot): its damage is incidental to its job, so it can hold a
+        # group slot — and (blind-label ruling 2026-08-23, the 20v20 comp)
+        # it never anchors a damage-identity split in comp_identity.
+        utility_carrier = (carrier and scale == "single"
+                          and util_pts >= UTILITY_EXEMPT_MIN)
 
         fit = {s: all_bands("fits") for s in STYLE_FIT_STYLES}
         if carrier:
@@ -543,8 +550,9 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides):
                             fit[s][b] = verdict
 
         w["style_fit"] = {"delivery": delivery, "damage_scale": scale,
-                          "fit": fit}
+                          "utility_carrier": utility_carrier, "fit": fit}
         rec = {"delivery": delivery, "damage_scale": scale,
+               "utility_carrier": utility_carrier,
                "damage_pts": dmg_pts, "utility_pts": util_pts,
                "role_flexible": flexible, "attackrange": attackrange,
                "e_damage_spells": e_spells, "e_reach": e_reach,

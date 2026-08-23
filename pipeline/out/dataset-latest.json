@@ -33222,7 +33222,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_ARCANESTAFF"
   },
@@ -33380,7 +33381,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_ARCANESTAFF_CRYSTAL"
   },
@@ -33543,7 +33545,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_ARCANESTAFF_HELL"
   },
@@ -33735,7 +33738,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_ARCANE_RINGPAIR_AVALON"
   },
@@ -33917,7 +33921,8 @@
       "group": "unfit",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_AXE"
   },
@@ -34130,7 +34135,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_AXE_AVALON"
   },
@@ -34290,7 +34296,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_BOW"
   },
@@ -34488,7 +34495,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_BOW_AVALON"
   },
@@ -34666,7 +34674,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_BOW_CRYSTAL"
   },
@@ -34853,7 +34862,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_BOW_HELL"
   },
@@ -35066,7 +35076,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_BOW_KEEPER"
   },
@@ -35242,7 +35253,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_CLAWPAIR"
   },
@@ -35432,7 +35444,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_CLAYMORE"
   },
@@ -35629,7 +35642,8 @@
       "group": "unfit",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_CLAYMORE_AVALON"
   },
@@ -35822,7 +35836,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_CLEAVER_HELL"
   },
@@ -36031,7 +36046,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_COMBATSTAFF_MORGANA"
   },
@@ -36203,7 +36219,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_CROSSBOW"
   },
@@ -36389,7 +36406,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_CROSSBOWLARGE"
   },
@@ -36564,7 +36582,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_CROSSBOWLARGE_MORGANA"
   },
@@ -36740,7 +36759,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_CROSSBOW_CANNON_AVALON"
   },
@@ -36918,7 +36938,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_CURSEDSTAFF"
   },
@@ -37081,7 +37102,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_CURSEDSTAFF_MORGANA"
   },
@@ -37251,7 +37273,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_DAGGERPAIR"
   },
@@ -37433,7 +37456,8 @@
       "group": "unfit",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_DAGGERPAIR_CRYSTAL"
   },
@@ -37618,7 +37642,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_DAGGER_KATAR_AVALON"
   },
@@ -37796,7 +37821,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_DEMONICSTAFF"
   },
@@ -37893,7 +37919,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_DIVINESTAFF"
   },
@@ -38091,7 +38118,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_DOUBLEBLADEDSTAFF"
   },
@@ -38305,7 +38333,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_DOUBLEBLADEDSTAFF_CRYSTAL"
   },
@@ -38485,7 +38514,8 @@
       "group": "unfit",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_DUALAXE_KEEPER"
   },
@@ -38660,7 +38690,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_DUALCROSSBOW_CRYSTAL"
   },
@@ -38834,7 +38865,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_DUALCROSSBOW_HELL"
   },
@@ -39082,7 +39114,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_DUALHAMMER_HELL"
   },
@@ -39242,7 +39275,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_DUALMACE_AVALON"
   },
@@ -39411,7 +39445,8 @@
       "group": "unfit",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_DUALSCIMITAR_UNDEAD"
   },
@@ -39576,7 +39611,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_DUALSICKLE_UNDEAD"
   },
@@ -39744,7 +39780,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_DUALSWORD"
   },
@@ -39876,7 +39913,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_ENIGMATICORB_MORGANA"
   },
@@ -40012,7 +40050,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_ENIGMATICSTAFF"
   },
@@ -40156,7 +40195,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_FIRESTAFF"
   },
@@ -40300,7 +40340,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_FIRESTAFF_HELL"
   },
@@ -40453,7 +40494,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_FIRE_RINGPAIR_AVALON"
   },
@@ -40606,7 +40648,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_FLAIL"
   },
@@ -40824,7 +40867,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_FROSTSTAFF"
   },
@@ -41041,7 +41085,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_FROSTSTAFF_CRYSTAL"
   },
@@ -41257,7 +41302,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_GLACIALSTAFF"
   },
@@ -41393,7 +41439,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_GLAIVE"
   },
@@ -41556,7 +41603,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_GLAIVE_CRYSTAL"
   },
@@ -41738,7 +41786,8 @@
       "group": "unfit",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_HALBERD"
   },
@@ -41925,7 +41974,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_HALBERD_MORGANA"
   },
@@ -42142,7 +42192,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_HAMMER"
   },
@@ -42371,7 +42422,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_HAMMER_AVALON"
   },
@@ -42594,7 +42646,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_HAMMER_CRYSTAL"
   },
@@ -42829,7 +42882,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_HAMMER_UNDEAD"
   },
@@ -42997,7 +43051,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_HARPOON_HELL"
   },
@@ -43114,7 +43169,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_HOLYSTAFF"
   },
@@ -43231,7 +43287,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_HOLYSTAFF_CRYSTAL"
   },
@@ -43341,7 +43398,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_HOLYSTAFF_HELL"
   },
@@ -43451,7 +43509,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_HOLYSTAFF_UNDEAD"
   },
@@ -43665,7 +43724,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_ICECRYSTAL_UNDEAD"
   },
@@ -43888,7 +43948,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_ICEGAUNTLETS_HELL"
   },
@@ -44021,7 +44082,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_INFERNOSTAFF"
   },
@@ -44172,7 +44234,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_INFERNOSTAFF_MORGANA"
   },
@@ -44354,7 +44417,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_IRONCLADEDSTAFF"
   },
@@ -44519,7 +44583,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_IRONGAUNTLETS_HELL"
   },
@@ -44740,7 +44805,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_KNUCKLES_AVALON"
   },
@@ -44927,7 +44993,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_KNUCKLES_CRYSTAL"
   },
@@ -45153,7 +45220,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_KNUCKLES_HELL"
   },
@@ -45358,7 +45426,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_KNUCKLES_KEEPER"
   },
@@ -45544,7 +45613,8 @@
       "group": "unfit",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_KNUCKLES_MORGANA"
   },
@@ -45751,7 +45821,8 @@
       "group": "unfit",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_KNUCKLES_SET1"
   },
@@ -45933,7 +46004,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_KNUCKLES_SET2"
   },
@@ -46161,7 +46233,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_KNUCKLES_SET3"
   },
@@ -46307,7 +46380,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_LONGBOW"
   },
@@ -46475,7 +46549,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_LONGBOW_UNDEAD"
   },
@@ -46628,7 +46703,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_MACE"
   },
@@ -46809,7 +46885,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_MACE_MORGANA"
   },
@@ -46983,7 +47060,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_NATURESTAFF"
   },
@@ -47170,7 +47248,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_NATURESTAFF_HELL"
   },
@@ -47353,7 +47432,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_NATURESTAFF_KEEPER"
   },
@@ -47579,7 +47659,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_POLEHAMMER"
   },
@@ -47774,7 +47855,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_QUARTERSTAFF"
   },
@@ -47987,7 +48069,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_QUARTERSTAFF_AVALON"
   },
@@ -48183,7 +48266,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_RAM_KEEPER"
   },
@@ -48345,7 +48429,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_REPEATINGCROSSBOW_UNDEAD"
   },
@@ -48521,7 +48606,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_ROCKSTAFF_KEEPER"
   },
@@ -48687,7 +48773,8 @@
       "group": "unfit",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_SCYTHE_CRYSTAL"
   },
@@ -48880,7 +48967,8 @@
       "group": "unfit",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_SCYTHE_HELL"
   },
@@ -49092,7 +49180,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_SHAPESHIFTER_AVALON"
   },
@@ -49299,7 +49388,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_SHAPESHIFTER_CRYSTAL"
   },
@@ -49493,7 +49583,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_SHAPESHIFTER_HELL"
   },
@@ -49687,7 +49778,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_SHAPESHIFTER_KEEPER"
   },
@@ -49873,7 +49965,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_SHAPESHIFTER_MORGANA"
   },
@@ -50077,7 +50170,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_SHAPESHIFTER_SET1"
   },
@@ -50268,7 +50362,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_SHAPESHIFTER_SET2"
   },
@@ -50468,7 +50563,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_SHAPESHIFTER_SET3"
   },
@@ -50634,7 +50730,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_SKULLORB_HELL"
   },
@@ -50762,7 +50859,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_SPEAR"
   },
@@ -50930,7 +51028,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "2H_TRIDENT_UNDEAD"
   },
@@ -51144,7 +51243,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_TWINSCYTHE_HELL"
   },
@@ -51326,7 +51426,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_WARBOW"
   },
@@ -51503,7 +51604,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "2H_WILDSTAFF"
   },
@@ -51664,7 +51766,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_1HCROSSBOW"
   },
@@ -51825,7 +51928,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_ARCANESTAFF"
   },
@@ -52025,7 +52129,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_ARCANESTAFF_UNDEAD"
   },
@@ -52205,7 +52310,8 @@
       "group": "unfit",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "MAIN_AXE"
   },
@@ -52365,7 +52471,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_CURSEDSTAFF"
   },
@@ -52524,7 +52631,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_CURSEDSTAFF_AVALON"
   },
@@ -52709,7 +52817,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_CURSEDSTAFF_CRYSTAL"
   },
@@ -52887,7 +52996,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_CURSEDSTAFF_UNDEAD"
   },
@@ -53041,7 +53151,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "MAIN_DAGGER"
   },
@@ -53228,7 +53339,8 @@
       "group": "unfit",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_DAGGER_HELL"
   },
@@ -53370,7 +53482,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_FIRESTAFF"
   },
@@ -53533,7 +53646,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_FIRESTAFF_CRYSTAL"
   },
@@ -53677,7 +53791,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_FIRESTAFF_KEEPER"
   },
@@ -53891,7 +54006,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_FROSTSTAFF"
   },
@@ -54084,7 +54200,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_FROSTSTAFF_AVALON"
   },
@@ -54300,7 +54417,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_FROSTSTAFF_KEEPER"
   },
@@ -54513,7 +54631,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_HAMMER"
   },
@@ -54618,7 +54737,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_HOLYSTAFF"
   },
@@ -54726,7 +54846,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_HOLYSTAFF_AVALON"
   },
@@ -54823,7 +54944,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_HOLYSTAFF_MORGANA"
   },
@@ -54954,7 +55076,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_MACE"
   },
@@ -55127,7 +55250,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_MACE_CRYSTAL"
   },
@@ -55310,7 +55434,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_MACE_HELL"
   },
@@ -55497,7 +55622,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_NATURESTAFF"
   },
@@ -55662,7 +55788,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_NATURESTAFF_AVALON"
   },
@@ -55848,7 +55975,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_NATURESTAFF_CRYSTAL"
   },
@@ -56003,7 +56131,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_NATURESTAFF_KEEPER"
   },
@@ -56198,7 +56327,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "MAIN_RAPIER_MORGANA"
   },
@@ -56351,7 +56481,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_ROCKMACE_KEEPER"
   },
@@ -56539,7 +56670,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_SCIMITAR_MORGANA"
   },
@@ -56720,7 +56852,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "MAIN_SPEAR"
   },
@@ -56907,7 +57040,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_SPEAR_KEEPER"
   },
@@ -57077,7 +57211,8 @@
       "group": "fits",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_SPEAR_LANCE_AVALON"
   },
@@ -57242,7 +57377,8 @@
       "group": "situational",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": true
    },
    "unique_name": "MAIN_SWORD"
   },
@@ -57389,7 +57525,8 @@
       "group": "unfit",
       "trio": "fits"
      }
-    }
+    },
+    "utility_carrier": false
    },
    "unique_name": "MAIN_SWORD_CRYSTAL"
   }

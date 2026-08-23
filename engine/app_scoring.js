@@ -1516,9 +1516,13 @@
                        carriers.melee.length < carriers.ranged.length))
         ? "melee" : "ranged";
       var majority = minority === "melee" ? "ranged" : "melee";
+      /* flex and utility-carrier weapons never anchor a damage-identity
+         split (mirrors engine.py — blind-label ruling 2026-08-23). */
       var rigid = [];
       for (var ri = 0; ri < carriers[minority].length; ri++) {
-        if (!flex[carriers[minority][ri]]) rigid.push(carriers[minority][ri]);
+        var rw = carriers[minority][ri];
+        var rsf = this._styleFitOf(rw);
+        if (!flex[rw] && !(rsf && rsf.utility_carrier)) rigid.push(rw);
       }
       if (!rigid.length) {
         /* every minority carrier is flex — the comp is NOT split */

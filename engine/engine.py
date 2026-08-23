@@ -1523,7 +1523,15 @@ class Engine:
                         < (1.0 - mel, len(carriers["ranged"]))
                         else "ranged")
             majority = "ranged" if minority == "melee" else "melee"
-            rigid = [w for w in carriers[minority] if w not in flex]
+            # flex weapons serve either fight; UTILITY CARRIERS (pierce/
+            # catch bots — Harpoon) have a utility identity, not a damage
+            # identity, so neither can anchor a damage-identity split
+            # (blind-label ruling 2026-08-23: the 20v20 comp is a clap,
+            # not a split, and Spirithunter is why it misread).
+            rigid = [w for w in carriers[minority]
+                     if w not in flex
+                     and not ((self._style_fit_of(w) or {})
+                              .get("utility_carrier"))]
             if not rigid:
                 # every minority carrier is flex — it can serve the
                 # majority's fight, so the comp is NOT split
