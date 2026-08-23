@@ -86,36 +86,28 @@ The project has moved well beyond the original prototype described in early READ
 - Golden, forge, interaction, provenance, build/evidence, patch-history, and loadout-codec test suites protect the current behaviour.
 - Real composition records are stored as an evidence/calibration layer rather than being silently converted into recommendation truth.
 - The public planner now uses the **decision-first** Comp Status → Biggest Need → Best Next Pick hierarchy.
+- Observed-cohort affinity and the caller tools (player weapon pools, swap impact) shipped as display layers in August 2026.
 - Capability constraints are combo-aware: selected spell kits matter.
 - Composition targets are evaluated at the roster size actually present; next-pick advice evaluates one player ahead.
 - The recommendation engine and the evidence/usage layers remain intentionally separable so empirical data can be validated before it is allowed to influence scoring.
 
 The system should still be treated as a decision-support tool rather than an authoritative statement of the Albion meta. Capability grading, content calibration, and validation against experienced callers remain ongoing work.
 
-## Experimental work
+## Observed evidence and caller tools (shipped August 2026)
 
-Two feature branches are currently being evaluated separately from the live planner:
+### Killboard affinity / observed cohorts
 
-### Killboard affinity / partial-comp evidence — PR #5
+Battle sampling goes beyond generic weapon prevalence. Because a kill feed does not reliably identify actual parties, observed players are grouped conservatively by **organization cohort** (same stated alliance, with guild fallback) rather than pretending everyone on the same battle record was on the same team.
 
-This work extends battle sampling beyond generic weapon prevalence. Because a kill feed does not reliably identify actual parties, it groups observed players conservatively by organization cohort (alliance, with guild fallback) rather than pretending everyone on the same battle record was on the same team.
+When cohort data matches the selected party, the planner's killboard strip turns contextual — "Observed with your weapons" ranks candidates by matching cohorts with popularity-corrected pair lift, so globally popular weapons do not dominate merely because they appear everywhere — and the best-pick card notes when cohorts echo the engine's recommendation. The evidence quotes the fight-size bucket of the party size you are **planning**, not the members added so far.
 
-The goal is to calculate:
+All of it is **display/evidence only**; it does not modify mechanical recommendation scores. Semantics and limitations: `KILLBOARD_AFFINITY.md`.
 
-- weapon co-occurrence counts,
-- conditional pairing frequency,
-- affinity/lift so globally popular weapons do not dominate merely because they appear everywhere,
-- partial-roster matches that can show weapons observed alongside several of the user's selected weapons.
+### Player weapon pools + swap impact
 
-This remains **display/evidence only** until the data has been refreshed and validated. It does not modify mechanical recommendation scores.
+Caller tools live in a collapsed fold under the planner. Instead of asking only "what is theoretically best?", a player can provide the weapons they actually play and the engine ranks recommendations inside that pool, beside the unrestricted pick.
 
-### Player weapon pools + swap impact — PR #6
-
-This work adds a caller-oriented constraint: instead of asking only "what is theoretically best?", a player can provide the weapons they actually play and the engine can rank recommendations inside that pool.
-
-It also adds before/after swap analysis so callers can evaluate a replacement before committing it, including fitness movement, capability changes, and the biggest weakness that would remain after the swap.
-
-This branch reuses the existing recommendation and swap scoring paths rather than introducing a second scoring model.
+A swap-impact lab compares replacements for any roster slot before committing them — fitness movement, capability changes, and the biggest weakness that would remain after the swap — and applies through the planner's central swap handler. Both tools reuse the existing recommendation and swap scoring paths rather than introducing a second scoring model.
 
 ## Validation philosophy
 
@@ -199,16 +191,15 @@ review/                        generated audit/review boards
 
 Near-term product work is focused on making the engine more useful to an actual caller without prematurely teaching the score to imitate popularity:
 
-1. validate and ship player weapon pools + swap impact,
-2. add a fight-chain explanation such as Engage → Clump → Pierce → Burst → Secure → Reset,
-3. infer composition identity and detect internally conflicted rosters,
-4. surface negative recommendations and redundancy warnings,
-5. support locked players/slots and constrained reforging,
-6. save player/guild weapon profiles,
-7. validate killboard affinity and partial-composition neighbours,
-8. cluster recurring observed composition families,
-9. add enemy-comp / counter-drafting analysis,
-10. build expert blind-validation tooling before allowing empirical evidence to influence recommendation scoring.
+1. add a fight-chain explanation such as Engage → Clump → Pierce → Burst → Secure → Reset,
+2. infer composition identity and detect internally conflicted rosters,
+3. surface negative recommendations and redundancy warnings,
+4. support locked players/slots and constrained reforging,
+5. save player/guild weapon profiles,
+6. build partial-composition neighbours from the committed cohort sample,
+7. cluster recurring observed composition families,
+8. add enemy-comp / counter-drafting analysis,
+9. build expert blind-validation tooling before allowing empirical evidence to influence recommendation scoring.
 
 ## Attribution and data
 

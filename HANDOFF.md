@@ -78,6 +78,8 @@ The planner now leads with:
 - **Best Next Pick** — prominent weapon recommendation, score, role/function, and engine-derived explanation
 - **What it fixes** — strongest marginal capability gains
 - **Still weak after this pick** — recalculated one slot ahead using the candidate's scored combo
+- **Observed killboard context** — the contextual affinity strip and the pick card's observed-cohort note, display evidence only
+- **Caller tools** — the player-pool and swap-impact fold below the wheel stage, collapsed by default
 
 The old right-hand fitness / weakness / recommendation stack is intentionally hidden to avoid duplicating the same questions. The wheel remains an exploration surface and the full capability board remains the deep diagnostic layer.
 
@@ -131,7 +133,7 @@ The dashboard tracks:
 
 Curated nonzero capability scores must cite equippable spells.
 
-Generated source artifacts are provenance-checked and release fails closed on mismatches. Hashed generated artifacts must remain LF-normalized so Windows checkout cannot invalidate recorded hashes.
+Generated source artifacts are provenance-checked and release fails closed on mismatches. Hashed generated artifacts must remain LF-normalized so Windows checkout cannot invalidate recorded hashes — and **every pipeline writer of a committed artifact opens with `newline="\n"`** (dataset/builds JSON and the generated dashboard pages included), so Windows rebuilds stay byte-clean instead of churning the tree with CRLF copies.
 
 Reference build records carry source/provenance/confidence and quarantined records must never become canonical defaults.
 
@@ -159,64 +161,32 @@ The current page explains:
 
 `pipeline/build_dashboard.py` rewrites the two generated copies from `_explainer.html`, so keep the source authoritative.
 
-## Active review branches / PRs
+## Recently integrated work (2026-08-22) — no open branches
 
-### PR #5 — killboard affinity
+PRs #1–#6 are all merged or integrated and every feature branch has been deleted (`archive/pr6-player-pools` is a local safety tag only). The last three landed as:
 
-Branch: `chatgpt/killboard-affinity`
+### PR #4 — decision-first UX (merged)
 
-Goal: add display-only empirical context for weapons observed together.
+The Comp Status → Biggest Need → Best Next Pick hierarchy is the headline surface. Its regressions were repaired on `main` afterwards: the forge honesty reports moved to a full-width slot above the wheel stage (never hidden), the click-to-add alternatives render inside the pick card, and layout overrides follow the shell's own breakpoints instead of `!important`.
 
-Important semantics:
+### PR #5 — killboard affinity (closed; evidence layer cherry-picked into `main`)
 
-- AlbionBB battle data does **not** provide authoritative party membership.
-- The branch therefore groups observed actors by stated Alliance identity, falling back to Guild identity, and calls these **organization cohorts**.
-- These are not reconstructed parties or sides.
-- Pair frequency / conditional co-occurrence / popularity-corrected affinity (lift) are evidence only.
-- Partial-roster matching is contextual display evidence and must not alter CompEngine ranking.
+`pipeline/sample_battles.py` preserves **observed organization cohorts**: actors grouped only when the kill feed states the same Alliance (or Guild) identity, ≥2 players and ≥2 known weapons per cohort. These are **not** parties, sides, or win-rate samples. The page embeds only anonymous weapon baskets per fight-size bucket; the killboard strip turns contextual ("Observed with your weapons", ranked by matching cohorts with popularity-corrected pair lift) when cohort data matches the selected party, and falls back to the prevalence strip otherwise. The best-pick card carries an observed-context note when cohorts echo the engine's pick. Semantics: `KILLBOARD_AFFINITY.md`. A fresh sample (214 battles, 305 usable cohorts) is committed. The PR's own decision layer was deliberately **not** taken (it hid the analysis flank and fought the layout).
 
-Remaining validation before merge:
+### PR #6 — player weapon pools + swap impact (closed; ported by hand onto the reconciled layer)
 
-```bash
-python3 pipeline/sample_battles.py --battles 200 --server us
-python3 pipeline/build_dashboard.py
-```
+Caller tools live in a collapsed `<details>` fold below the wheel stage (owner rule: the party dock stays above the fold):
 
-Then commit regenerated:
+- a per-player **weapon pool** feeding `CompEngine.recommend(..., pool)`, with a best-of-pool card and runner-up mini-rank
+- a **swap impact** lab comparing replacements per slot (pool-limited when a pool is set, the memoized engine swap sweep otherwise), applied through the existing `data-swapat`/`data-swapto` handler so loadout reset, provenance, prefill, and role re-sorting stay centralized
 
-- `pipeline/out/weapon_usage_v2.json`
-- `dashboard/index.html`
-- `docs/index.html`
+Display/workflow only; no scoring changes.
 
-The ChatGPT execution environment used during development could not reach AlbionBB, and temporary GitHub Actions attempts did not schedule, so the fresh sample still needs a normal networked checkout.
+### Killboard display-bucket rule (2026-08-22 fix)
 
-### PR #6 — player weapon pools + swap impact
+The killboard strip, prevalence footnotes, and cohort affinity key their fight-size bucket off `usageBucket()` in `dashboard/_app.js` — `2 × PLAN()`, the size the comp is **for** — not the judged roster size. A 20-man plan with 3 weapons picked must quote large-fight evidence, or the affinity strip stays invisible for the whole planning phase. Engine judgment still runs at roster size; nothing in scoring reads `sizeBucket()` anymore (H18 pins the shipped meta prior to the hand-set flat map).
 
-Branch: `chatgpt/player-pools-swap-impact`
-
-Goal: make recommendations practical for real party formation.
-
-The branch adds:
-
-- temporary **"this player can play"** weapon pools
-- restricted next-pick ranking using existing `CompEngine.recommend(..., pool)`
-- comparison with the global best pick
-- slot selection for existing roster members
-- replacement ranking, optionally constrained by the player's pool
-- swap impact preview: slot-score gain, composition fitness change, strongest capability delta, and resulting biggest gap
-- apply-swap through the existing `data-swapat` / `data-swapto` handler so loadout reset, provenance, prefill, and role re-sorting stay centralized
-
-No scoring changes are intended in this branch.
-
-Before merge, rebuild:
-
-```bash
-python3 pipeline/build_dashboard.py
-```
-
-and visually test empty pool, restricted pool, several roster swaps, desktop, and mobile.
-
-## Recommended next work after PR #6
+## Recommended next work
 
 The preferred product sequence is:
 
@@ -242,7 +212,7 @@ The preferred product sequence is:
    - persistent weapon pools for guild members rather than recreating candidate lists each session
 
 6. **Observed composition neighbours**
-   - after PR #5 data is validated, find observed cohorts similar to the current partial roster and show commonly observed completions
+   - the cohort sample is committed (214 battles, 305 cohorts); find observed cohorts similar to the current partial roster and show commonly observed completions — `KILLBOARD_AFFINITY.md` flags this as the next step and asks for review before any clustering or empirical scoring work
 
 7. **Composition clustering**
    - discover recurring observed roster families instead of assuming every archetype manually
