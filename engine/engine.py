@@ -1366,21 +1366,40 @@ class Engine:
     IDENTITY_MIN_MEMBERS = 3       # below this the comp is still "forming"
     IDENTITY_RANGED_ATTACK = 9.0   # attackrange at/above -> ranged delivery
 
+    def _style_fit_of(self, weapon):
+        """The weapon's derived style/size identity (build_dataset
+        derive_style_fit + style_overrides.yaml). Absent on pre-identity
+        datasets -> None, and every consumer degrades gracefully."""
+        return self.weapons[weapon].get("style_fit")
+
+    def _fit_band(self):
+        """Size band for style-fit verdicts: trio <=3, gang 4-9, group 10+
+        (the same breakpoints the derivation documents)."""
+        return ("trio" if self.size <= 3
+                else "gang" if self.size <= 9 else "group")
+
     def comp_identity(self, party, combos=None):
         """What this comp is BECOMING, in the caller's own playstyle
         vocabulary (styles.yaml): brawl / clap / kite / brawl_clap, plus
         'mixed' for split identities and 'forming' while too small to say.
 
-        DESCRIPTIVE ONLY (V3 round 1 finding F-V3-2): nothing here feeds
-        fitness, recommendation order, or the forge. The label is derived
-        from the party's raw capability fingerprint — which side of the
-        fight its damage is delivered from (melee ball vs ranged core),
-        whether that damage is one bomb or a grind (burst_aoe vs sustained
-        vs single-target shares), and whether its tools commit (engage,
-        clump) or evade (mobility, disengage)."""
+        v2 (owner-specified 2026-08-23): identity builds up from MEMBER
+        identities. Each member's side comes from the weapon's derived
+        style_fit delivery — a flex weapon (melee stat line whose E damage
+        lands at range, e.g. Realmbreaker) counts its damage on its home
+        melee side but never PULLS AGAINST a core, because it can serve
+        either fight. Each member also gets a fit verdict for the declared
+        (or detected) style at this party size, from the E-first
+        derivation + owner overrides; unfit members are named conflicts
+        (the Battleaxe rule).
+
+        DESCRIPTIVE ONLY (F-V3-2): nothing here feeds fitness,
+        recommendation order, or the forge."""
         n = len(party)
         melee = ranged = aoe = sus = st = commit = evade = 0.0
         carriers = {"melee": [], "ranged": []}
+        flex = set()
+        sides = {}
         for i, w in enumerate(party):
             caps = self._raw_member_caps(w, combos[i] if combos else None)
             dmg = sum(caps.get(c, 0) for c in self.DAMAGE_CAPS_PROFILE)
@@ -1391,9 +1410,19 @@ class Engine:
             evade += caps.get("mobility", 0) + caps.get("disengage", 0)
             if dmg < self.IDENTITY_CARRIER_MIN:
                 continue
-            ar = (self.stats_of(w).get("stats") or {}).get("attackrange", 0)
-            side = "ranged" if ar >= self.IDENTITY_RANGED_ATTACK else "melee"
-            carriers[side].append(w)
+            sf = self._style_fit_of(w)
+            if sf:
+                delivery = sf["delivery"]
+            else:
+                ar = (self.stats_of(w).get("stats") or {}).get("attackrange", 0)
+                delivery = ("ranged" if ar >= self.IDENTITY_RANGED_ATTACK
+                            else "melee")
+            side = "ranged" if delivery == "ranged" else "melee"
+            if delivery == "flex":
+                flex.add(w)
+            sides[i] = side
+            if w not in carriers[side]:
+                carriers[side].append(w)
             if side == "ranged":
                 ranged += dmg
             else:
@@ -1405,16 +1434,17 @@ class Engine:
                 "sustained": sus / dmg_tot if dmg_tot else 0.0,
                 "single_target": st / dmg_tot if dmg_tot else 0.0}
         posture = commit / (commit + evade) if commit + evade else 0.5
+        band = self._fit_band()
         out = {"style": None, "label": "", "strength": None,
                "melee_share": mel, "ranged_share": 1.0 - mel if tot else 0.5,
                "carriers": carriers, "mode": mode, "posture": posture,
-               "conflicts": []}
+               "band": band, "members": [], "conflicts": []}
         style_names = {k: (v.get("name") or k)
                        for k, v in (self.data.get("styles") or {}).items()}
-        if n < self.IDENTITY_MIN_MEMBERS or tot == 0:
+        forming = n < self.IDENTITY_MIN_MEMBERS or tot == 0
+        if forming:
             out["label"] = "still forming"
-            return out
-        if mel >= self.IDENTITY_MELEE_CORE:
+        elif mel >= self.IDENTITY_MELEE_CORE:
             out["style"] = "brawl"
             out["strength"] = ("strong" if mel >= self.IDENTITY_STRONG
                               else "leaning")
@@ -1435,19 +1465,66 @@ class Engine:
             out["label"] = (f"{style_names.get('brawl_clap', 'Brawl-Clap')}"
                             " — grind into the bomb")
         else:
-            out["label"] = "split identity — melee and ranged damage pull apart"
             minority = ("melee" if (mel, len(carriers["melee"]))
                         < (1.0 - mel, len(carriers["ranged"]))
                         else "ranged")
             majority = "ranged" if minority == "melee" else "melee"
-            for w in carriers[minority]:
+            rigid = [w for w in carriers[minority] if w not in flex]
+            if not rigid:
+                # every minority carrier is flex — it can serve the
+                # majority's fight, so the comp is NOT split
+                if majority == "melee":
+                    out["style"] = "brawl"
+                    out["strength"] = "leaning"
+                    out["label"] = (f"{style_names.get('brawl', 'Brawl')}"
+                                    " — melee ball")
+                else:
+                    clap = mode["aoe"] >= self.IDENTITY_CLAP_AOE
+                    out["style"] = "clap" if clap else "kite"
+                    out["strength"] = "leaning"
+                    out["label"] = (f"{style_names.get('clap', 'Clap')} — ranged bomb"
+                                    if clap else
+                                    f"{style_names.get('kite', 'Kite')} — ranged pressure")
+            else:
+                out["label"] = ("split identity — melee and ranged damage "
+                                "pull apart")
+                for w in rigid:
+                    out["conflicts"].append({
+                        "weapon": w,
+                        "display_name": self.weapons[w]["display_name"],
+                        "side": minority, "kind": "split",
+                        "note": (f"{minority} damage inside a {majority}-"
+                                 "leaning core — commit to one side or "
+                                 "cover the seam"),
+                    })
+        # ---- per-member fit verdicts (the declared style is the caller's
+        # INTENT — owner ruling: picking brawl means asking for brawl
+        # builds; balanced falls back to the detected lean) ----
+        fit_style = (self.style if self.style in ("brawl", "clap", "kite",
+                                                  "brawl_clap")
+                     else out["style"])
+        for i, w in enumerate(party):
+            sf = self._style_fit_of(w)
+            verdict = (sf["fit"][fit_style][band]
+                       if sf and fit_style else None)
+            m = {"weapon": w,
+                 "display_name": self.weapons[w]["display_name"],
+                 "role": self.role_of(w),
+                 "side": ("flex" if w in flex else sides.get(i)),
+                 "fit": verdict}
+            if verdict == "unfit" and not forming:
+                reason = ("its E is not a group-scale damage tool at this size"
+                          if sf and sf["damage_scale"] == "single"
+                          else f"off-{fit_style} at this size")
+                m["note"] = reason
                 out["conflicts"].append({
                     "weapon": w,
-                    "display_name": self.weapons[w]["display_name"],
-                    "side": minority,
-                    "note": (f"{minority} damage inside a {majority}-leaning "
-                             "core — commit to one side or cover the seam"),
+                    "display_name": m["display_name"],
+                    "side": m["side"], "kind": "unfit",
+                    "note": (f"unfit for {style_names.get(fit_style, fit_style)}"
+                             f" at {self.size} — {reason}"),
                 })
+            out["members"].append(m)
         return out
 
     # ------------------------------------------------------------ local search

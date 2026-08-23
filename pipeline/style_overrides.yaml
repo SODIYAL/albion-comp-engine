@@ -1,0 +1,41 @@
+# Curated overrides for the weapon style-fit derivation (identity system,
+# owner-specified 2026-08-23: a weapon's identity comes from its E first,
+# then chosen Q/W, equipment, and team role).
+#
+# The structural rule in build_dataset.py derives, per weapon, a fit verdict
+# (fits / situational / unfit) for every playstyle x size band from the E's
+# delivery facts (cast range, radius, burst_aoe claim), the weapon's
+# autoattack range, and its utility points. Structure cannot capture caller
+# judgment — an override is evidence, not taste: every entry needs a reason
+# and a source, exactly like ranged_overrides.yaml.
+#
+# Shape:
+#   - weapon: <key>
+#     set:                # style ('*' = all) -> band ('*' = all) -> verdict
+#       '*': {gang: unfit, group: unfit}
+#     reason: ...
+#     source: ...
+#     as_of: YYYY-MM-DD
+#
+# Styles: brawl, clap, kite, brawl_clap ('*' = all four)
+# Bands:  trio (<=3), gang (4-9), group (10+)   ('*' = all three)
+# Verdicts: fits, situational, unfit
+#
+# Validated at dataset build: unknown weapons, styles, bands or verdicts
+# fail the release.
+
+- weapon: MAIN_AXE
+  set:
+    "*": {gang: unfit, group: unfit}
+  reason: >
+    Owner ruling (V3-adjacent identity session): "although it's an axe and
+    provides healthcut and possibilities for mobility on its w spell, it
+    doesn't fit in most group play styles bigger than 3 because its e spell,
+    the primary identity, doesn't do as much damage as other options for a
+    group setting (5+)." The derivation reads its utility points (catch,
+    engage, healthcut, root) as exempting it to 'situational'; the E-first
+    identity rule overrules that — Axe Throw (burst_st 2, radius 1.5) is
+    not a group damage tool, and the utility pieces do not carry a group
+    slot on their own.
+  source: Owner ruling 2026-08-23 (identity design session, in-chat).
+  as_of: 2026-08-23

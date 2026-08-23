@@ -45,9 +45,11 @@
       ? `${id.label} · leaning` : id.label;
     const conf = id.conflicts.length
       ? `<small class="dl-id-conflict" title="${esc(id.conflicts[0].note)}">⚠ ${
-          id.conflicts.map(c => esc(c.display_name)).join(", ")} pull${
-          id.conflicts.length > 1 ? "" : "s"} against the ${
-          id.conflicts[0].side === "melee" ? "ranged" : "melee"} core</small>`
+          id.conflicts.map(c => esc(c.display_name)).join(", ")}: ${
+          id.conflicts[0].kind === "unfit"
+            ? "unfit for this playstyle at this size"
+            : `pull${id.conflicts.length > 1 ? "" : "s"} against the ${
+                id.conflicts[0].side === "melee" ? "ranged" : "melee"} core`}</small>`
       : "";
     return `<span class="dl-identity"><span class="dl-kicker">becoming</span>${esc(tag)}</span>${conf}`;
   }

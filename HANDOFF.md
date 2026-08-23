@@ -199,11 +199,11 @@ The preferred product sequence is:
      - kite: space → slow → peel → ranged pressure → reset
    - show strong / weak / missing stages and connect the recommended weapon to the stage it improves
 
-2. **Composition identity detection** — SHIPPED descriptive v1 (2026-08-23, from V3 finding F-V3-2)
-   - `comp_identity()` in both engine ports labels what the party is becoming in playstyle vocabulary (brawl / clap / kite / brawl-clap / mixed / forming), derived from the raw capability fingerprint: damage delivery side (melee ball vs ranged core), bomb-vs-grind mode, commit-vs-evade posture
-   - split identities flag the minority-side damage carriers ("Longbow pulls against the melee core"); shown in the decision layer's comp-status card
-   - DESCRIPTIVE ONLY, per the original rule — no scoring path reads it (golden T23c pins that); thresholds calibrated against every style-declared comp on file (T23/T23b pin the classifications)
-   - still open: identity-aware *recommendation* (the F-V3-2 misses) stays parked until the descriptive layer is validated by more expert rounds
+2. **Composition identity detection** — SHIPPED descriptive v2 (2026-08-23, from V3 finding F-V3-2 + the owner's weapon-identity model)
+   - identity builds UP from members (owner ruling: a weapon's identity = its E first, then chosen Q/W, equipment, team role). `derive_style_fit` in the dataset build derives per-weapon delivery (melee / flex / ranged — flex = melee stat line whose E damage lands at range, e.g. Realmbreaker the all-rounder, DERIVED not curated) and style × size-band fit verdicts; `pipeline/style_overrides.yaml` carries cited owner rulings (Battleaxe unfit as a group pick >3); `out/style_fit_report.json` is the audit + MetaBattle review queue (Q15 ANSWERED)
+   - `comp_identity()` v2 in both ports: comp label from the member fingerprint, per-member fit verdicts for the DECLARED style (style selection = build intent, owner ruling) at the current size band (trio ≤3 / gang 4–9 / group 10+); unfit members become named conflicts ("Battleaxe: its E is not a group-scale damage tool at this size"); flex weapons never read as split-identity conflicts
+   - DESCRIPTIVE ONLY — no scoring path reads it (golden T23c pins that); T23/T23b/T23d pin the classifications and the two owner rulings
+   - next per the approved identity plan: Phase C (style-aware builds + suggestion gating — the owner's explicit ask: brawl never suggests cloth ranged builds, clap never suggests Battleaxe) and Phase D (kill-pressure verdict: pierce + heal-cut + burst-in-window vs an enemy toughness baseline)
 
 3. **Negative recommendations / redundancy warnings**
    - explicitly say when another clump weapon, healer, engage tool, etc. adds little because the comp is already saturated

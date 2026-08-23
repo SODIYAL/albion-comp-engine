@@ -319,6 +319,55 @@ check("H18 no usage/observation payload is embedded in the dataset",
       "usage" not in DATASET and "weapon_usage" not in DATASET
       and "builds_index" not in DATASET and "buckets" not in DATASET)
 
+# ---- H.21 weapon style-fit identity (owner-specified 2026-08-23) ---------------
+FIT_REPORT = load_json(os.path.join(OUT, "style_fit_report.json"))
+STYLES_ = ("brawl", "clap", "kite", "brawl_clap")
+BANDS_ = ("trio", "gang", "group")
+bad = []
+for k, w in WEAPONS.items():
+    sf = w.get("style_fit") or {}
+    fit = sf.get("fit") or {}
+    if (sf.get("delivery") not in ("melee", "flex", "ranged")
+            or sf.get("damage_scale") not in ("none", "single", "group")
+            or set(fit) != set(STYLES_)
+            or any(set(fit[s]) != set(BANDS_) for s in fit)
+            or any(fit[s][b] not in ("fits", "situational", "unfit")
+                   for s in fit for b in fit[s])):
+        bad.append(k)
+check("H21 every weapon carries a well-formed style_fit "
+      "(delivery / scale / style x band verdicts)", not bad, str(bad[:3]))
+check("H21 the audit report and the dataset agree on every fit",
+      all(FIT_REPORT["weapons"][k]["fit"] == WEAPONS[k]["style_fit"]["fit"]
+          for k in WEAPONS))
+rb = WEAPONS["2H_AXE_AVALON"]["style_fit"]
+check("H21 Realmbreaker DERIVES as the all-rounder (flex delivery, group "
+      "scale, fits everywhere) — no override needed",
+      rb["delivery"] == "flex" and rb["damage_scale"] == "group"
+      and all(rb["fit"][s][b] == "fits" for s in STYLES_ for b in BANDS_)
+      and FIT_REPORT["weapons"]["2H_AXE_AVALON"]["basis"] == "derived",
+      str(rb))
+ba = FIT_REPORT["weapons"]["MAIN_AXE"]
+check("H21 the Battleaxe owner ruling is applied via a CITED override "
+      "(unfit as a group pick >3, trio untouched)",
+      ba["basis"] == "curated_override"
+      and (ba.get("override") or {}).get("reason")
+      and (ba.get("override") or {}).get("source")
+      and all(ba["fit"][s]["gang"] == "unfit"
+              and ba["fit"][s]["group"] == "unfit"
+              and ba["fit"][s]["trio"] == "fits" for s in STYLES_),
+      str({s: ba['fit'][s]['gang'] for s in STYLES_}))
+check("H21 utility exemption: Dagger Pair's single-scale damage degrades to "
+      "situational, never unfit (T15: its value at scale is utility)",
+      all(WEAPONS["2H_DAGGERPAIR"]["style_fit"]["fit"][s]["group"]
+          == "situational" for s in STYLES_))
+check("H21 style-flexible roles fit everywhere (Hallowfall)",
+      all(WEAPONS["MAIN_HOLYSTAFF_AVALON"]["style_fit"]["fit"][s][b] == "fits"
+          for s in STYLES_ for b in BANDS_))
+check("H21 the MetaBattle cross-check (Q15) publishes a review queue, "
+      "never silent fixes",
+      isinstance(FIT_REPORT["_meta"].get("metabattle_review_queue"), list),
+      str(FIT_REPORT["_meta"].get("metabattle_review_queue")))
+
 # ---- companion observations normalize into the same schema ---------------------
 party = load_json(os.path.join(PIPELINE, "tests", "fixtures",
                                "companion_party.json"))

@@ -387,6 +387,172 @@ def derive_ranged_presence(weapons, spell_index, overrides):
     return tagged, report, problems
 
 
+# ---------------------------------------------------------------- style fit
+# Per-weapon playstyle identity (owner-specified 2026-08-23): a weapon's
+# identity comes from its E spell FIRST (the E is the weapon's identity —
+# the same rule the sheets are structured around), then its kit and role.
+# Derived structurally, overridable with cited owner rulings
+# (style_overrides.yaml), audited in out/style_fit_report.json.
+# DESCRIPTIVE layer: comp_identity() reads it; no scoring path does.
+STYLE_FIT_STYLES = ("brawl", "clap", "kite", "brawl_clap")
+STYLE_FIT_BANDS = ("trio", "gang", "group")      # <=3 / 4-9 / 10+
+STYLE_FIT_VERDICTS = ("fits", "situational", "unfit")
+DAMAGE_CAPS = ("burst_st", "burst_aoe", "sustained_dps", "execute")
+# Utility that can carry a group slot even when the weapon's own damage
+# does not scale (the Dagger Pair case — golden T15: its value at scale is
+# utility, not kill damage). A single-scale damage carrier with at least
+# UTILITY_EXEMPT_MIN of these points degrades to 'situational', not 'unfit'.
+UTILITY_EXEMPT_CAPS = ("catch", "clump_create", "engage", "peel", "purge",
+                       "silence", "stun", "root", "knockback_displace",
+                       "heal_reduction", "max_health_cut", "anti_dive")
+UTILITY_EXEMPT_MIN = 6
+DMG_CARRIER_MIN = 4                              # flat damage points
+# An E damage spell with a real area footprint is group-scale even when the
+# sheet grades its damage sustained_dps rather than burst_aoe (Blazing
+# Staff's 5-radius Flame Tornado is a DoT zone — still a group tool).
+# Battleaxe's 1.5-radius Axe Throw stays single.
+GROUP_AOE_MIN_RADIUS = 3.0
+
+
+def load_style_overrides():
+    path = os.path.join(HERE, "style_overrides.yaml")
+    if not os.path.exists(path):
+        return {}
+    out = {}
+    for e in _load_yaml(path):
+        if isinstance(e, dict) and e.get("weapon"):
+            out[e["weapon"]] = e
+    return out
+
+
+def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides):
+    """Per-weapon style/size fit with an evidence trail. Returns
+    (report, problems) — problems block the release (an override naming an
+    unknown weapon/style/band/verdict).
+
+    Structural rules (all PROVISIONAL, reviewable in the audit report):
+    - delivery side: autoattack range >= RANGED_MIN_CASTRANGE -> ranged;
+      melee autoattack whose E damage still lands at that range -> flex
+      (Realmbreaker: the damage arrives at range even though the body
+      follows); otherwise melee.
+    - damage scale: the E decides (E-first identity) — an E bundle claiming
+      burst_aoe is group-scale; anything else is single-scale.
+    - healers / frontline / support are style-flexible (their identity is
+      their job, not a playstyle); damage carriers are where fit bites.
+    - trio (<=3): everything fits — small-scale content takes any comp.
+    """
+    healers = set(role_sets.get("healers") or [])
+    frontline = set(role_sets.get("frontline") or [])
+    pure_dps = set(role_sets.get("pure_dps") or [])
+    report, problems = {}, []
+
+    def all_bands(v):
+        return {b: v for b in STYLE_FIT_BANDS}
+
+    for key, w in sorted(weapons.items()):
+        caps = w.get("capabilities") or {}
+        dmg_pts = sum(caps.get(c, 0) for c in DAMAGE_CAPS)
+        util_pts = sum(caps.get(c, 0) for c in UTILITY_EXEMPT_CAPS)
+        flexible = (key in healers or key in frontline
+                    or key not in pure_dps)
+        carrier = dmg_pts >= DMG_CARRIER_MIN and not flexible
+        attackrange = ((item_stats.get(key) or {}).get("stats")
+                       or {}).get("attackrange") or 0
+        # E-slot damage facts
+        lo = w.get("loadout") or {}
+        names = lo.get("slot_names") or []
+        slots = lo.get("slots") or []
+        spells = lo.get("slot_spells") or []
+        e_spells, e_reach, e_group = [], 0.0, False
+        for i, slot in enumerate(slots):
+            if i >= len(names) or names[i] != "e":
+                continue
+            for j, bundle in enumerate(slot):
+                if not any(bundle.get(c) for c in DAMAGE_CAPS):
+                    continue
+                sid = spells[i][j]
+                facts = spell_index.get(sid) or {}
+                cr = facts.get("cast_range")
+                e_spells.append(sid)
+                if cr is not None:
+                    e_reach = max(e_reach, float(cr))
+                radius = facts.get("radius")
+                radius = float(radius) if radius is not None else 0.0
+                mts = facts.get("max_targets") or 0
+                if (bundle.get(AOE_CLAIM) or radius >= GROUP_AOE_MIN_RADIUS
+                        or mts >= 3):
+                    e_group = True
+        if not slots and caps.get(AOE_CLAIM):
+            e_group = True                       # flat-sheet fallback
+        delivery = ("ranged" if attackrange >= RANGED_MIN_CASTRANGE
+                    else "flex" if e_reach >= RANGED_MIN_CASTRANGE
+                    else "melee")
+        scale = ("none" if not carrier
+                 else "group" if e_group else "single")
+
+        fit = {s: all_bands("fits") for s in STYLE_FIT_STYLES}
+        if carrier:
+            if scale == "group":
+                if delivery == "ranged":
+                    for b in ("gang", "group"):
+                        fit["brawl"][b] = "situational"
+                elif delivery == "melee":
+                    for b in ("gang", "group"):
+                        fit["clap"][b] = "situational"
+                        fit["kite"][b] = "unfit"
+                # flex group-scale damage fits everywhere (the all-rounder)
+            else:
+                deep = "situational" if util_pts >= UTILITY_EXEMPT_MIN else "unfit"
+                for s in STYLE_FIT_STYLES:
+                    fit[s]["gang"] = "situational"
+                    fit[s]["group"] = deep
+
+        basis = "derived"
+        ov = overrides.get(key)
+        override_rec = None
+        if ov:
+            basis = "curated_override"
+            override_rec = {"reason": (ov.get("reason") or "").strip(),
+                            "source": (ov.get("source") or "").strip(),
+                            "as_of": str(ov.get("as_of") or "")}
+            if not (override_rec["reason"] and override_rec["source"]):
+                problems.append(f"style_overrides: {key} needs reason + source")
+            for s_key, bands in (ov.get("set") or {}).items():
+                s_list = STYLE_FIT_STYLES if s_key == "*" else (s_key,)
+                if s_key != "*" and s_key not in STYLE_FIT_STYLES:
+                    problems.append(f"style_overrides: {key}: unknown style "
+                                    f"'{s_key}'")
+                    continue
+                for b_key, verdict in (bands or {}).items():
+                    b_list = STYLE_FIT_BANDS if b_key == "*" else (b_key,)
+                    if b_key != "*" and b_key not in STYLE_FIT_BANDS:
+                        problems.append(f"style_overrides: {key}: unknown "
+                                        f"band '{b_key}'")
+                        continue
+                    if verdict not in STYLE_FIT_VERDICTS:
+                        problems.append(f"style_overrides: {key}: unknown "
+                                        f"verdict '{verdict}'")
+                        continue
+                    for s in s_list:
+                        for b in b_list:
+                            fit[s][b] = verdict
+
+        w["style_fit"] = {"delivery": delivery, "damage_scale": scale,
+                          "fit": fit}
+        rec = {"delivery": delivery, "damage_scale": scale,
+               "damage_pts": dmg_pts, "utility_pts": util_pts,
+               "role_flexible": flexible, "attackrange": attackrange,
+               "e_damage_spells": e_spells, "e_reach": e_reach,
+               "fit": fit, "basis": basis}
+        if override_rec:
+            rec["override"] = override_rec
+        report[key] = rec
+    for wk in sorted(overrides):
+        if wk not in weapons:
+            problems.append(f"style_overrides: unknown weapon {wk}")
+    return report, problems
+
+
 def load_templates(tune=None):
     templates, scoring, styles, mechanics, composition = {}, {}, {}, {}, {}
     for path in sorted(glob.glob(os.path.join(HERE, "templates", "*.yaml"))):
@@ -556,8 +722,45 @@ def main():
                               if r["status"] == "unknown"),
         }, "weapons": ranged_report}, f, indent=1, sort_keys=True)
 
+    fit_report, fit_problems = derive_style_fit(
+        weapons, spell_index, item_stats, scoring.get("role_sets") or {},
+        load_style_overrides())
+    # MetaBattle cross-check (MECHANICS_TODO Q15): weapons real ZvZ builds
+    # field must not derive group-band all-unfit — disagreements are the
+    # owner's review queue, never silent fixes.
+    review_queue = []
+    mb_path = os.path.join(HERE, os.pardir, "data", "published_builds",
+                           "metabattle_zvz.yaml")
+    if os.path.exists(mb_path):
+        mb = _load_yaml(mb_path) or {}
+        mb_weapons = {b.get("weapon") for b in mb.get("builds", [])
+                      if b.get("weapon")}
+        for wk in sorted(mb_weapons & set(weapons)):
+            f = weapons[wk]["style_fit"]["fit"]
+            if all(f[s]["group"] == "unfit" for s in STYLE_FIT_STYLES):
+                review_queue.append(wk)
+    with open(os.path.join(OUT, "style_fit_report.json"), "w",
+              encoding="utf-8", newline="\n") as f:
+        json.dump({"_meta": {
+            "rule": ("E-first identity: delivery side from autoattack range "
+                     f"(>= {RANGED_MIN_CASTRANGE} ranged) or the E damage's "
+                     "own reach (flex); damage scale from the E's burst_aoe "
+                     "claim; healers/frontline/support style-flexible; "
+                     "trio fits everything; style_overrides.yaml wins with "
+                     "citation. DESCRIPTIVE - no scoring path reads this."),
+            "bands": {"trio": "<=3", "gang": "4-9", "group": "10+"},
+            "delivery_counts": {
+                d: sum(1 for r in fit_report.values()
+                       if r["delivery"] == d)
+                for d in ("melee", "flex", "ranged")},
+            "overridden": sorted(k for k, r in fit_report.items()
+                                 if r["basis"] == "curated_override"),
+            "metabattle_review_queue": review_queue,
+        }, "weapons": fit_report}, f, indent=1, sort_keys=True)
+
     provenance_problems = check_provenance(weapons, item_stats, stats_meta)
     provenance_problems += ranged_problems
+    provenance_problems += fit_problems
     # every derived scoring capability must carry evidence (§B/H.6)
     for k, w in sorted(weapons.items()):
         if (w["capabilities"].get("ranged_presence")

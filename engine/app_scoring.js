@@ -1381,14 +1381,29 @@
       IDENTITY_CARRIER_MIN = 4, IDENTITY_MIN_MEMBERS = 3,
       IDENTITY_RANGED_ATTACK = 9.0;
 
+  CompEngine.prototype._styleFitOf = function (weapon) {
+    /* The weapon's derived style/size identity; null on pre-identity
+       datasets (mirrors engine.py _style_fit_of). */
+    return this.weapons[weapon].style_fit || null;
+  };
+
+  CompEngine.prototype._fitBand = function () {
+    /* trio <=3, gang 4-9, group 10+ (mirrors engine.py _fit_band). */
+    return this.size <= 3 ? "trio" : this.size <= 9 ? "gang" : "group";
+  };
+
   CompEngine.prototype.compIdentity = function (party, combos) {
-    /* What this comp is BECOMING, in playstyle vocabulary — DESCRIPTIVE
-       ONLY: nothing here feeds fitness, recommendation order, or the
-       forge (mirrors engine.py comp_identity). */
+    /* What this comp is BECOMING, in playstyle vocabulary — v2: built up
+       from MEMBER identities (weapon style_fit: E-first delivery + owner
+       overrides). DESCRIPTIVE ONLY: nothing here feeds fitness,
+       recommendation order, or the forge (mirrors engine.py
+       comp_identity). */
     var n = party.length;
     var melee = 0.0, ranged = 0.0, aoe = 0.0, sus = 0.0, st = 0.0,
         commit = 0.0, evade = 0.0;
     var carriers = { melee: [], ranged: [] };
+    var flex = {};
+    var sides = {};
     for (var i = 0; i < n; i++) {
       var w = party[i];
       var caps = this._rawMemberCaps(w, combos ? combos[i] : null);
@@ -1401,9 +1416,18 @@
       commit += (caps.engage || 0) + (caps.clump_create || 0);
       evade += (caps.mobility || 0) + (caps.disengage || 0);
       if (dmg < IDENTITY_CARRIER_MIN) continue;
-      var ar = ((this.statsOf(w).stats || {}).attackrange) || 0;
-      var side = ar >= IDENTITY_RANGED_ATTACK ? "ranged" : "melee";
-      carriers[side].push(w);
+      var sf = this._styleFitOf(w);
+      var delivery;
+      if (sf) {
+        delivery = sf.delivery;
+      } else {
+        var ar = ((this.statsOf(w).stats || {}).attackrange) || 0;
+        delivery = ar >= IDENTITY_RANGED_ATTACK ? "ranged" : "melee";
+      }
+      var side = delivery === "ranged" ? "ranged" : "melee";
+      if (delivery === "flex") flex[w] = true;
+      sides[i] = side;
+      if (carriers[side].indexOf(w) === -1) carriers[side].push(w);
       if (side === "ranged") ranged += dmg; else melee += dmg;
     }
     var tot = melee + ranged;
@@ -1413,24 +1437,25 @@
                  sustained: dmgTot ? sus / dmgTot : 0.0,
                  single_target: dmgTot ? st / dmgTot : 0.0 };
     var posture = (commit + evade) ? commit / (commit + evade) : 0.5;
+    var band = this._fitBand();
     var out = { style: null, label: "", strength: null,
                 melee_share: mel, ranged_share: tot ? 1.0 - mel : 0.5,
                 carriers: carriers, mode: mode, posture: posture,
-                conflicts: [] };
+                band: band, members: [], conflicts: [] };
     var styles = this.data.styles || {};
     var sname = function (k, fb) {
       return (styles[k] && styles[k].name) || fb;
     };
-    if (n < IDENTITY_MIN_MEMBERS || tot === 0) {
+    var forming = n < IDENTITY_MIN_MEMBERS || tot === 0;
+    var clap;
+    if (forming) {
       out.label = "still forming";
-      return out;
-    }
-    if (mel >= IDENTITY_MELEE_CORE) {
+    } else if (mel >= IDENTITY_MELEE_CORE) {
       out.style = "brawl";
       out.strength = mel >= IDENTITY_STRONG ? "strong" : "leaning";
       out.label = sname("brawl", "Brawl") + " — melee ball";
     } else if (mel <= IDENTITY_RANGED_CORE) {
-      var clap = mode.aoe >= IDENTITY_CLAP_AOE;
+      clap = mode.aoe >= IDENTITY_CLAP_AOE;
       out.style = clap ? "clap" : "kite";
       out.strength = mel <= 1.0 - IDENTITY_STRONG ? "strong" : "leaning";
       out.label = clap ? sname("clap", "Clap") + " — ranged bomb"
@@ -1440,23 +1465,71 @@
       out.strength = "leaning";
       out.label = sname("brawl_clap", "Brawl-Clap") + " — grind into the bomb";
     } else {
-      out.label = "split identity — melee and ranged damage pull apart";
       /* mirrors Python's tuple compare: (mel, nMelee) < (1-mel, nRanged) */
       var minority = (mel < 1.0 - mel ||
                       (mel === 1.0 - mel &&
                        carriers.melee.length < carriers.ranged.length))
         ? "melee" : "ranged";
       var majority = minority === "melee" ? "ranged" : "melee";
-      for (var mi = 0; mi < carriers[minority].length; mi++) {
-        var cw = carriers[minority][mi];
+      var rigid = [];
+      for (var ri = 0; ri < carriers[minority].length; ri++) {
+        if (!flex[carriers[minority][ri]]) rigid.push(carriers[minority][ri]);
+      }
+      if (!rigid.length) {
+        /* every minority carrier is flex — the comp is NOT split */
+        if (majority === "melee") {
+          out.style = "brawl";
+          out.strength = "leaning";
+          out.label = sname("brawl", "Brawl") + " — melee ball";
+        } else {
+          clap = mode.aoe >= IDENTITY_CLAP_AOE;
+          out.style = clap ? "clap" : "kite";
+          out.strength = "leaning";
+          out.label = clap ? sname("clap", "Clap") + " — ranged bomb"
+                           : sname("kite", "Kite") + " — ranged pressure";
+        }
+      } else {
+        out.label = "split identity — melee and ranged damage pull apart";
+        for (var mi = 0; mi < rigid.length; mi++) {
+          out.conflicts.push({
+            weapon: rigid[mi],
+            display_name: this.weapons[rigid[mi]].display_name,
+            side: minority, kind: "split",
+            note: minority + " damage inside a " + majority + "-leaning " +
+                  "core — commit to one side or cover the seam",
+          });
+        }
+      }
+    }
+    /* per-member fit verdicts: the declared style is the caller's INTENT;
+       balanced falls back to the detected lean */
+    var fitStyle = (this.style === "brawl" || this.style === "clap" ||
+                    this.style === "kite" || this.style === "brawl_clap")
+      ? this.style : out.style;
+    for (var pi = 0; pi < n; pi++) {
+      var pw = party[pi];
+      var psf = this._styleFitOf(pw);
+      var verdict = (psf && fitStyle) ? psf.fit[fitStyle][band] : null;
+      var m = { weapon: pw,
+                display_name: this.weapons[pw].display_name,
+                role: this.roleOf(pw),
+                side: flex[pw] ? "flex" :
+                      (sides[pi] === undefined ? null : sides[pi]),
+                fit: verdict };
+      if (verdict === "unfit" && !forming) {
+        var reason = (psf && psf.damage_scale === "single")
+          ? "its E is not a group-scale damage tool at this size"
+          : "off-" + fitStyle + " at this size";
+        m.note = reason;
         out.conflicts.push({
-          weapon: cw,
-          display_name: this.weapons[cw].display_name,
-          side: minority,
-          note: minority + " damage inside a " + majority + "-leaning " +
-                "core — commit to one side or cover the seam",
+          weapon: pw,
+          display_name: m.display_name,
+          side: m.side, kind: "unfit",
+          note: "unfit for " + sname(fitStyle, fitStyle) + " at " +
+                this.size + " — " + reason,
         });
       }
+      out.members.push(m);
     }
     return out;
   };

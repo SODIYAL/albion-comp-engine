@@ -297,11 +297,16 @@ dumps or in-game measurement, not more searching.
   `styles.yaml`. Also: should an `assassination/dive` style be added (the
   one archetype living deep in the Resilience curve), or is it out of scope
   for group comp forging?
-- [ ] **Q15 (new) — Weapon playstyle affinity: derive or curate?** Proposal:
-  DERIVE from existing capability sheets (no new per-weapon judgment data),
-  validate against Metabattle's 31 ZvZ role tags; only curate exceptions
-  where the derivation and the community tags disagree. Decide after the
-  mechanics wiring makes the derived affinity visible.
+- [x] **Q15 — Weapon playstyle affinity: derive or curate?** ANSWERED
+  (owner, 2026-08-23): derive + curate exceptions, exactly the proposal.
+  Implemented as `derive_style_fit` in build_dataset.py (E-first identity:
+  delivery side from the E damage's own reach, group scale from its area
+  footprint, style×size-band verdicts) + `style_overrides.yaml` for cited
+  owner rulings (seeded with the Battleaxe unfit->3 ruling; Realmbreaker's
+  all-rounder status DERIVES with no override). Audit:
+  `out/style_fit_report.json`; the MetaBattle cross-check publishes a
+  review queue (first entry: 2H_HARPOON_HELL fielded in ZvZ builds but
+  deriving group-unfit — awaiting owner review). Descriptive only.
 - [x] **Q4 — Disarray numbers**: ANSWERED, and it corrects the earlier guess
   (it does NOT inflate heal/tank needs). Disarray reduces the ATTACKER's
   damage and CC duration by 1% per level of Disarray difference vs the

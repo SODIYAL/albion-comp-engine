@@ -245,9 +245,15 @@ def main():
         ia, ib = a["identity"], b.get("identity") or {}
         if (ia["style"] != ib.get("style") or ia["label"] != ib.get("label")
                 or ia["strength"] != ib.get("strength")
+                or ia["band"] != ib.get("band")
                 or ia["carriers"] != ib.get("carriers")
-                or [x["weapon"] for x in ia["conflicts"]]
-                != [x["weapon"] for x in ib.get("conflicts") or []]):
+                or [(x["weapon"], x["kind"]) for x in ia["conflicts"]]
+                != [(x.get("weapon"), x.get("kind"))
+                    for x in ib.get("conflicts") or []]
+                or [(m["weapon"], m["role"], m["side"], m["fit"])
+                    for m in ia["members"]]
+                != [(m.get("weapon"), m.get("role"), m.get("side"),
+                     m.get("fit")) for m in ib.get("members") or []]):
             errs.append(f"identity: py={ia['label']}/{ia['carriers']} "
                         f"js={ib.get('label')}/{ib.get('carriers')}")
         elif (abs(ia["melee_share"] - ib.get("melee_share", 9)) > EPS

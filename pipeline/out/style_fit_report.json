@@ -1,0 +1,4733 @@
+{
+ "_meta": {
+  "bands": {
+   "gang": "4-9",
+   "group": "10+",
+   "trio": "<=3"
+  },
+  "delivery_counts": {
+   "flex": 22,
+   "melee": 43,
+   "ranged": 72
+  },
+  "metabattle_review_queue": [
+   "2H_HARPOON_HELL"
+  ],
+  "overridden": [
+   "MAIN_AXE"
+  ],
+  "rule": "E-first identity: delivery side from autoattack range (>= 9 ranged) or the E damage's own reach (flex); damage scale from the E's burst_aoe claim; healers/frontline/support style-flexible; trio fits everything; style_overrides.yaml wins with citation. DESCRIPTIVE - no scoring path reads this."
+ },
+ "weapons": {
+  "2H_ARCANESTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 2,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 12
+  },
+  "2H_ARCANESTAFF_CRYSTAL": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "STARFALL_DOT"
+   ],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 4
+  },
+  "2H_ARCANESTAFF_HELL": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 2,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 8
+  },
+  "2H_ARCANE_RINGPAIR_AVALON": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "ARCANE_METEOR"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 8
+  },
+  "2H_AXE": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "AXEWHIRLWIND2"
+   ],
+   "e_reach": 5.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 8
+  },
+  "2H_AXE_AVALON": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "LETHAL_CLEAVER"
+   ],
+   "e_reach": 10.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 16
+  },
+  "2H_BOW": {
+   "attackrange": 13,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "single",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "SPEEDARCHER_KITE"
+   ],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 6
+  },
+  "2H_BOW_AVALON": {
+   "attackrange": 13,
+   "basis": "derived",
+   "damage_pts": 12,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "HAWK_SHOT_MULTI1"
+   ],
+   "e_reach": 24.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 6
+  },
+  "2H_BOW_CRYSTAL": {
+   "attackrange": 13,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "AIR_RAID"
+   ],
+   "e_reach": 10.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 6
+  },
+  "2H_BOW_HELL": {
+   "attackrange": 13,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "HELL_ARROW"
+   ],
+   "e_reach": 24.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 6
+  },
+  "2H_BOW_KEEPER": {
+   "attackrange": 13,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "LIGHTNING_ARROW"
+   ],
+   "e_reach": 26.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 6
+  },
+  "2H_CLAWPAIR": {
+   "attackrange": 2,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "single",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "DISEMBOWEL"
+   ],
+   "e_reach": 2.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 18
+  },
+  "2H_CLAYMORE": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "single",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "CLAYMORECHARGE"
+   ],
+   "e_reach": 13.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 16
+  },
+  "2H_CLAYMORE_AVALON": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "group",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "MAJESTIC_SMASH"
+   ],
+   "e_reach": 6.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_CLEAVER_HELL": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "CLAYMORESLASH"
+   ],
+   "e_reach": 11.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_COMBATSTAFF_MORGANA": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "COMBATSTAFF_SLASH"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_CROSSBOW": {
+   "attackrange": 11,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "single",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "SNIPESHOT_CROSSBOW"
+   ],
+   "e_reach": 16.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_CROSSBOWLARGE": {
+   "attackrange": 11,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "CROSSBOW_ARMORPIERCER"
+   ],
+   "e_reach": 24.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_CROSSBOWLARGE_MORGANA": {
+   "attackrange": 11,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "single",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "CROSSBOW_CONE_ULTIMATE"
+   ],
+   "e_reach": 20.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_CROSSBOW_CANNON_AVALON": {
+   "attackrange": 11,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "CROSSBOW_DIVINE_SHOT"
+   ],
+   "e_reach": 26.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_CURSEDSTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "AREAOFDECAY"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 5
+  },
+  "2H_CURSEDSTAFF_MORGANA": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "CURSEULTIMATE"
+   ],
+   "e_reach": 12.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 3
+  },
+  "2H_DAGGERPAIR": {
+   "attackrange": 1.5,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "single",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "EXECUTEDAGGER"
+   ],
+   "e_reach": 3.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_DAGGERPAIR_CRYSTAL": {
+   "attackrange": 2,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "CRYSTAL_DAGGER_BLADE_RING"
+   ],
+   "e_reach": 7.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 10
+  },
+  "2H_DAGGER_KATAR_AVALON": {
+   "attackrange": 2,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "single",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "BACK_SLASH"
+   ],
+   "e_reach": 6.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 10
+  },
+  "2H_DEMONICSTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "CURSED_WALL"
+   ],
+   "e_reach": 22.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 11
+  },
+  "2H_DIVINESTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 2
+  },
+  "2H_DOUBLEBLADEDSTAFF": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "DASH_KNOCKBACK"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 18
+  },
+  "2H_DOUBLEBLADEDSTAFF_CRYSTAL": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "QS_CRYSTAL_COMBO"
+   ],
+   "e_reach": 9.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 10
+  },
+  "2H_DUALAXE_KEEPER": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "DUALAXE_CRAWLER"
+   ],
+   "e_reach": 8.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_DUALCROSSBOW_CRYSTAL": {
+   "attackrange": 11,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "CRYSTALXBOW"
+   ],
+   "e_reach": 8.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 14
+  },
+  "2H_DUALCROSSBOW_HELL": {
+   "attackrange": 11,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "single",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "DUAL_RAPIDFIRE"
+   ],
+   "e_reach": 13.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_DUALHAMMER_HELL": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 2,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "GIANTSTEPS"
+   ],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 20
+  },
+  "2H_DUALMACE_AVALON": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 11
+  },
+  "2H_DUALSCIMITAR_UNDEAD": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "group",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "BLADE_AREA"
+   ],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 8
+  },
+  "2H_DUALSICKLE_UNDEAD": {
+   "attackrange": 1.5,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "single",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "GHOSTSTRIKE"
+   ],
+   "e_reach": 7.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 14
+  },
+  "2H_DUALSWORD": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "SPINATTACK"
+   ],
+   "e_reach": 13.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_ENIGMATICORB_MORGANA": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 2,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 4
+  },
+  "2H_ENIGMATICSTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 2,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 4
+  },
+  "2H_FIRESTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "FLAMEPILLAR"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 4
+  },
+  "2H_FIRESTAFF_HELL": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "METEOR"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 4
+  },
+  "2H_FIRE_RINGPAIR_AVALON": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "FIREPHOENIX"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 8
+  },
+  "2H_FLAIL": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 18
+  },
+  "2H_FROSTSTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "HAIL_MULTI_1"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 8
+  },
+  "2H_FROSTSTAFF_CRYSTAL": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "FROST_TARGETED_CHANNEL"
+   ],
+   "e_reach": 22.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 6
+  },
+  "2H_GLACIALSTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "ICESTORM2"
+   ],
+   "e_reach": 10.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_GLAIVE": {
+   "attackrange": 4,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "single",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 10
+  },
+  "2H_GLAIVE_CRYSTAL": {
+   "attackrange": 4,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "SPEAR_AOE_FINISHER"
+   ],
+   "e_reach": 17.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 6
+  },
+  "2H_HALBERD": {
+   "attackrange": 4,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "RENDINGSWING"
+   ],
+   "e_reach": 7.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 8
+  },
+  "2H_HALBERD_MORGANA": {
+   "attackrange": 4,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "SHOCKWAVE"
+   ],
+   "e_reach": 20.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 10
+  },
+  "2H_HAMMER": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 26
+  },
+  "2H_HAMMER_AVALON": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 32
+  },
+  "2H_HAMMER_CRYSTAL": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 19
+  },
+  "2H_HAMMER_UNDEAD": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 25
+  },
+  "2H_HARPOON_HELL": {
+   "attackrange": 4,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "single",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "unfit",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "unfit",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "unfit",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "unfit",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 4
+  },
+  "2H_HOLYSTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 6
+  },
+  "2H_HOLYSTAFF_CRYSTAL": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 2
+  },
+  "2H_HOLYSTAFF_HELL": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 4
+  },
+  "2H_HOLYSTAFF_UNDEAD": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 2
+  },
+  "2H_ICECRYSTAL_UNDEAD": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "FROST_ULTIMATE"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_ICEGAUNTLETS_HELL": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "GLACIALFIELD"
+   ],
+   "e_reach": 14.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_INFERNOSTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "HUMAN_TORCH"
+   ],
+   "e_reach": 12.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 6
+  },
+  "2H_INFERNOSTAFF_MORGANA": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "FLAMETORNADO"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 4
+  },
+  "2H_IRONCLADEDSTAFF": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 2,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 10
+  },
+  "2H_IRONGAUNTLETS_HELL": {
+   "attackrange": 2,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "single",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "PUNCHCOMBO"
+   ],
+   "e_reach": 2.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_KNUCKLES_AVALON": {
+   "attackrange": 1.5,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "single",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 18
+  },
+  "2H_KNUCKLES_CRYSTAL": {
+   "attackrange": 1.5,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "single",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "CONEPUNCH2"
+   ],
+   "e_reach": 9.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 16
+  },
+  "2H_KNUCKLES_HELL": {
+   "attackrange": 1.5,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "BOULDER_TOSS"
+   ],
+   "e_reach": 10.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 16
+  },
+  "2H_KNUCKLES_KEEPER": {
+   "attackrange": 1.5,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "PUMMELING_STRIKES"
+   ],
+   "e_reach": 11.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 14
+  },
+  "2H_KNUCKLES_MORGANA": {
+   "attackrange": 1.5,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "group",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "GROWING_PUNCH"
+   ],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 14
+  },
+  "2H_KNUCKLES_SET1": {
+   "attackrange": 1.5,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "group",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "BLAZING_GEYSER"
+   ],
+   "e_reach": 3.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_KNUCKLES_SET2": {
+   "attackrange": 1.5,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "single",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 18
+  },
+  "2H_KNUCKLES_SET3": {
+   "attackrange": 1.5,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "IMPULSE_PUNCH"
+   ],
+   "e_reach": 13.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 13
+  },
+  "2H_LONGBOW": {
+   "attackrange": 13,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "ARROWRAIN"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 2
+  },
+  "2H_LONGBOW_UNDEAD": {
+   "attackrange": 13,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "single",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "UNDEADARROWS"
+   ],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 6
+  },
+  "2H_MACE": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 22
+  },
+  "2H_MACE_MORGANA": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 21
+  },
+  "2H_NATURESTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 2,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 4
+  },
+  "2H_NATURESTAFF_HELL": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 2,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 2
+  },
+  "2H_NATURESTAFF_KEEPER": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 2,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 2
+  },
+  "2H_POLEHAMMER": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 29
+  },
+  "2H_QUARTERSTAFF": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 2,
+   "damage_scale": "none",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "VAULT_ATTACK"
+   ],
+   "e_reach": 13.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 28
+  },
+  "2H_QUARTERSTAFF_AVALON": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "SOULSHAKER"
+   ],
+   "e_reach": 20.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 18
+  },
+  "2H_RAM_KEEPER": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 26
+  },
+  "2H_REPEATINGCROSSBOW_UNDEAD": {
+   "attackrange": 11,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "GROUNDMINE"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_ROCKSTAFF_KEEPER": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 2,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 16
+  },
+  "2H_SCYTHE_CRYSTAL": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "CRYSTAL_SCYTHE_DASH_ZONE"
+   ],
+   "e_reach": 3.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 8
+  },
+  "2H_SCYTHE_HELL": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "group",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "SCYTHESWING"
+   ],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 8
+  },
+  "2H_SHAPESHIFTER_AVALON": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "SHAPESHIFT_AVALONIAN_EAGLE"
+   ],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 10
+  },
+  "2H_SHAPESHIFTER_CRYSTAL": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "single",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "SHAPESHIFT_CRYSTAL_COBRA"
+   ],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 8
+  },
+  "2H_SHAPESHIFTER_HELL": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "SHAPESHIFT_IMP"
+   ],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 8
+  },
+  "2H_SHAPESHIFTER_KEEPER": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 10
+  },
+  "2H_SHAPESHIFTER_MORGANA": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "single",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "SHAPESHIFT_WEREWOLF"
+   ],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 10
+  },
+  "2H_SHAPESHIFTER_SET1": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "single",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "SHAPESHIFT_PANTHER"
+   ],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "2H_SHAPESHIFTER_SET2": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 8
+  },
+  "2H_SHAPESHIFTER_SET3": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "SHAPESHIFT_BEAR"
+   ],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 8
+  },
+  "2H_SKULLORB_HELL": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "SKULLCURSE"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 3
+  },
+  "2H_SPEAR": {
+   "attackrange": 4,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "single",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 11
+  },
+  "2H_TRIDENT_UNDEAD": {
+   "attackrange": 4,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "single",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 14
+  },
+  "2H_TWINSCYTHE_HELL": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "TORNADO"
+   ],
+   "e_reach": 25.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 18
+  },
+  "2H_WARBOW": {
+   "attackrange": 13,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "SKILLSHOT_STUN"
+   ],
+   "e_reach": 26.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 6
+  },
+  "2H_WILDSTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 2,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 2
+  },
+  "MAIN_1HCROSSBOW": {
+   "attackrange": 11,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "EXPLODING_SHOT"
+   ],
+   "e_reach": 11.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "MAIN_ARCANESTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "ARCANEORB2"
+   ],
+   "e_reach": 25.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 10
+  },
+  "MAIN_ARCANESTAFF_UNDEAD": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "BLACKHOLE"
+   ],
+   "e_reach": 14.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "MAIN_AXE": {
+   "attackrange": 3,
+   "basis": "curated_override",
+   "damage_pts": 6,
+   "damage_scale": "single",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "AXETHROW"
+   ],
+   "e_reach": 18.0,
+   "fit": {
+    "brawl": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    }
+   },
+   "override": {
+    "as_of": "2026-08-23",
+    "reason": "Owner ruling (V3-adjacent identity session): \"although it's an axe and provides healthcut and possibilities for mobility on its w spell, it doesn't fit in most group play styles bigger than 3 because its e spell, the primary identity, doesn't do as much damage as other options for a group setting (5+).\" The derivation reads its utility points (catch, engage, healthcut, root) as exempting it to 'situational'; the E-first identity rule overrules that \u2014 Axe Throw (burst_st 2, radius 1.5) is not a group damage tool, and the utility pieces do not carry a group slot on their own.",
+    "source": "Owner ruling 2026-08-23 (identity design session, in-chat)."
+   },
+   "role_flexible": false,
+   "utility_pts": 8
+  },
+  "MAIN_CURSEDSTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "DEATHCURSE2"
+   ],
+   "e_reach": 11.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 3
+  },
+  "MAIN_CURSEDSTAFF_AVALON": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "DYNAMIC_CURSE"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 3
+  },
+  "MAIN_CURSEDSTAFF_CRYSTAL": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "CURSE_SKELETON_BARF_FDHR"
+   ],
+   "e_reach": 3.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 9
+  },
+  "MAIN_CURSEDSTAFF_UNDEAD": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "ENFEEBLEBLADES"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 7
+  },
+  "MAIN_DAGGER": {
+   "attackrange": 2,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "single",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "BLOODTHIRSTYBLADE"
+   ],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 10
+  },
+  "MAIN_DAGGER_HELL": {
+   "attackrange": 2,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "BLOOD_BLADE"
+   ],
+   "e_reach": 3.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 10
+  },
+  "MAIN_FIRESTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "PYROBLAST_SKILLSHOT"
+   ],
+   "e_reach": 15.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 4
+  },
+  "MAIN_FIRESTAFF_CRYSTAL": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "FLAMEDASH"
+   ],
+   "e_reach": 14.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 6
+  },
+  "MAIN_FIRESTAFF_KEEPER": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "MAGMASPHERE"
+   ],
+   "e_reach": 25.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 4
+  },
+  "MAIN_FROSTSTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "group",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "FREEZINGWIND"
+   ],
+   "e_reach": 12.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 16
+  },
+  "MAIN_FROSTSTAFF_AVALON": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 10
+  },
+  "MAIN_FROSTSTAFF_KEEPER": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 2,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [
+    "ICEROCK_EXPLODE"
+   ],
+   "e_reach": 26.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "MAIN_HAMMER": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 19
+  },
+  "MAIN_HOLYSTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 2
+  },
+  "MAIN_HOLYSTAFF_AVALON": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 8
+  },
+  "MAIN_HOLYSTAFF_MORGANA": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 4
+  },
+  "MAIN_MACE": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 17
+  },
+  "MAIN_MACE_CRYSTAL": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 2,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "MACE_CRYSTAL_FRAGMENT_STORM"
+   ],
+   "e_reach": 3.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 15
+  },
+  "MAIN_MACE_HELL": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 2,
+   "damage_scale": "none",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "SHRINKINGSMASH"
+   ],
+   "e_reach": 10.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 19
+  },
+  "MAIN_NATURESTAFF": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 4
+  },
+  "MAIN_NATURESTAFF_AVALON": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 6
+  },
+  "MAIN_NATURESTAFF_CRYSTAL": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 4
+  },
+  "MAIN_NATURESTAFF_KEEPER": {
+   "attackrange": 9,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "ranged",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 2
+  },
+  "MAIN_RAPIER_MORGANA": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "single",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "RAPIERSTAB"
+   ],
+   "e_reach": 11.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "MAIN_ROCKMACE_KEEPER": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 0,
+   "damage_scale": "none",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": true,
+   "utility_pts": 21
+  },
+  "MAIN_SCIMITAR_MORGANA": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 8,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "MIGHTYSWING"
+   ],
+   "e_reach": 20.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 8
+  },
+  "MAIN_SPEAR": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 4,
+   "damage_scale": "single",
+   "delivery": "melee",
+   "e_damage_spells": [],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "MAIN_SPEAR_KEEPER": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 7,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "SPEARTHROW"
+   ],
+   "e_reach": 22.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "MAIN_SPEAR_LANCE_AVALON": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 6,
+   "damage_scale": "group",
+   "delivery": "flex",
+   "e_damage_spells": [
+    "LANCE_CHARGE"
+   ],
+   "e_reach": 16.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 12
+  },
+  "MAIN_SWORD": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "single",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "MIGHTYBLOW"
+   ],
+   "e_reach": 8.0,
+   "fit": {
+    "brawl": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 8
+  },
+  "MAIN_SWORD_CRYSTAL": {
+   "attackrange": 3,
+   "basis": "derived",
+   "damage_pts": 10,
+   "damage_scale": "group",
+   "delivery": "melee",
+   "e_damage_spells": [
+    "SWORD_BERSERK_RUN_RE"
+   ],
+   "e_reach": 0.0,
+   "fit": {
+    "brawl": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "brawl_clap": {
+     "gang": "fits",
+     "group": "fits",
+     "trio": "fits"
+    },
+    "clap": {
+     "gang": "situational",
+     "group": "situational",
+     "trio": "fits"
+    },
+    "kite": {
+     "gang": "unfit",
+     "group": "unfit",
+     "trio": "fits"
+    }
+   },
+   "role_flexible": false,
+   "utility_pts": 6
+  }
+ }
+}

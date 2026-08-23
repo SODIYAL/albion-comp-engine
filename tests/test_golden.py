@@ -445,20 +445,41 @@ def run():
           and id_clap["style"] == "clap" and id_kite["style"] == "kite",
           f"blap={id_blap['label']} ({id_blap['melee_share']:.0%} melee) "
           f"clap10={id_clap['label']} kite10={id_kite['label']}")
+    # v2 verdict for case 6 (2026-08-23, weapon-level identity): Battleaxe
+    # derives FLEX (Axe Throw reaches 18m), so the melee-vs-ranged split
+    # heuristic no longer fires — instead the comp resolves kite-leaning
+    # and Battleaxe is flagged UNFIT by the owner's own ruling ("doesn't
+    # fit group play styles bigger than 3"), which names the actual clash
+    # more precisely than the v1 split label did.
     case6 = ["MAIN_AXE", "2H_ENIGMATICSTAFF", "2H_SHAPESHIFTER_KEEPER",
              "2H_REPEATINGCROSSBOW_UNDEAD", "2H_DUALHAMMER_HELL"]
     id6 = Engine(content="castle_outpost", size=7).comp_identity(case6)
-    check("T23b identity: the expert's 'clashing' case-6 party reads split, "
-          "Battleaxe flagged as the seam",
-          id6["style"] is None and "split" in id6["label"]
-          and [c["weapon"] for c in id6["conflicts"]] == ["MAIN_AXE"],
+    check("T23b identity: the expert's 'clashing' case-6 party flags "
+          "Battleaxe as unfit at 7 (owner ruling), Battleaxe clean at 3",
+          [(c["weapon"], c["kind"]) for c in id6["conflicts"]]
+          == [("MAIN_AXE", "unfit")]
+          and Engine(content="castle_outpost", size=3).comp_identity(
+              case6[:3])["conflicts"] == [],
           f"label={id6['label']} conflicts="
-          f"{[c['display_name'] for c in id6['conflicts']]}")
+          f"{[(c['display_name'], c['kind']) for c in id6['conflicts']]}")
     check("T23c identity is descriptive only: tiny parties are 'forming', "
           "and computing it never touches fitness",
           Engine(content="roads", size=3).comp_identity(["2H_BOW_AVALON"])["style"] is None
           and abs(e_bz.fitness(blap) - f_blap) < 1e-12,
           f"fitness unchanged at {f_blap:.4f}")
+    # T23d — the all-rounder rule: Realmbreaker (melee stat line, E lands
+    # at range -> flex, group-scale) DERIVES as fitting every style and is
+    # never flagged inside a ranged core; its member record says so.
+    rng_core = ["2H_AXE_AVALON", "2H_LONGBOW", "2H_BOW", "MAIN_FROSTSTAFF",
+                HALLOWFALL]
+    idr = Engine(content="castle_outpost", size=7).comp_identity(rng_core)
+    rb_m = next(m for m in idr["members"] if m["weapon"] == "2H_AXE_AVALON")
+    check("T23d Realmbreaker is the all-rounder: flex side, fits, never a "
+          "conflict in a ranged core",
+          rb_m["side"] == "flex" and rb_m["fit"] == "fits"
+          and not any(c["weapon"] == "2H_AXE_AVALON"
+                      for c in idr["conflicts"]),
+          f"member={rb_m} conflicts={[c['display_name'] for c in idr['conflicts']]}")
 
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)

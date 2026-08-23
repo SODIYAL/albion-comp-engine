@@ -33184,6 +33184,32 @@
    "role_hint": "support",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_ARCANESTAFF"
   },
   "2H_ARCANESTAFF_CRYSTAL": {
@@ -33316,6 +33342,32 @@
    "role_hint": "range",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_ARCANESTAFF_CRYSTAL"
   },
   "2H_ARCANESTAFF_HELL": {
@@ -33453,6 +33505,32 @@
    "role_hint": "support",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_ARCANESTAFF_HELL"
   },
   "2H_ARCANE_RINGPAIR_AVALON": {
@@ -33619,6 +33697,32 @@
    "role_hint": "range",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_ARCANE_RINGPAIR_AVALON"
   },
   "2H_AXE": {
@@ -33775,6 +33879,32 @@
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_AXE"
   },
   "2H_AXE_AVALON": {
@@ -33962,6 +34092,32 @@
    "role_hint": "melee",
    "source": "sheets/realmbreaker.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_AXE_AVALON"
   },
   "2H_BOW": {
@@ -34096,6 +34252,32 @@
    "role_hint": "range",
    "source": "sheets/bow.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_BOW"
   },
   "2H_BOW_AVALON": {
@@ -34268,6 +34450,32 @@
    "role_hint": "range",
    "source": "sheets/mistpiercer.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_BOW_AVALON"
   },
   "2H_BOW_CRYSTAL": {
@@ -34420,6 +34628,32 @@
    "role_hint": "range",
    "source": "sheets/bow_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_BOW_CRYSTAL"
   },
   "2H_BOW_HELL": {
@@ -34581,6 +34815,32 @@
    "role_hint": "range",
    "source": "sheets/wailing_bow.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_BOW_HELL"
   },
   "2H_BOW_KEEPER": {
@@ -34768,6 +35028,32 @@
    "role_hint": "range",
    "source": "sheets/bow_of_badon.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_BOW_KEEPER"
   },
   "2H_CLAWPAIR": {
@@ -34918,6 +35204,32 @@
    "role_hint": "melee",
    "source": "sheets/claws.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_CLAWPAIR"
   },
   "2H_CLAYMORE": {
@@ -35082,6 +35394,32 @@
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_CLAYMORE"
   },
   "2H_CLAYMORE_AVALON": {
@@ -35253,6 +35591,32 @@
    "role_hint": "melee",
    "source": "sheets/kingmaker.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_CLAYMORE_AVALON"
   },
   "2H_CLEAVER_HELL": {
@@ -35420,6 +35784,32 @@
    "role_hint": "melee",
    "source": "sheets/carving_sword.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_CLEAVER_HELL"
   },
   "2H_COMBATSTAFF_MORGANA": {
@@ -35603,6 +35993,32 @@
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_COMBATSTAFF_MORGANA"
   },
   "2H_CROSSBOW": {
@@ -35749,6 +36165,32 @@
    "role_hint": "range",
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_CROSSBOW"
   },
   "2H_CROSSBOWLARGE": {
@@ -35909,6 +36351,32 @@
    "role_hint": "range",
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_CROSSBOWLARGE"
   },
   "2H_CROSSBOWLARGE_MORGANA": {
@@ -36058,6 +36526,32 @@
    "role_hint": "range",
    "source": "sheets/siegebow.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_CROSSBOWLARGE_MORGANA"
   },
   "2H_CROSSBOW_CANNON_AVALON": {
@@ -36208,6 +36702,32 @@
    "role_hint": "range",
    "source": "sheets/energy_shaper.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_CROSSBOW_CANNON_AVALON"
   },
   "2H_CURSEDSTAFF": {
@@ -36360,6 +36880,32 @@
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_CURSEDSTAFF"
   },
   "2H_CURSEDSTAFF_MORGANA": {
@@ -36497,6 +37043,32 @@
    "role_hint": "support",
    "source": "sheets/damnation.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_CURSEDSTAFF_MORGANA"
   },
   "2H_DAGGERPAIR": {
@@ -36641,6 +37213,32 @@
    "role_hint": "melee",
    "source": "sheets/dagger_pair.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_DAGGERPAIR"
   },
   "2H_DAGGERPAIR_CRYSTAL": {
@@ -36797,6 +37395,32 @@
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_DAGGERPAIR_CRYSTAL"
   },
   "2H_DAGGER_KATAR_AVALON": {
@@ -36956,6 +37580,32 @@
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_DAGGER_KATAR_AVALON"
   },
   "2H_DEMONICSTAFF": {
@@ -37108,6 +37758,32 @@
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_DEMONICSTAFF"
   },
   "2H_DIVINESTAFF": {
@@ -37179,6 +37855,32 @@
    "role_hint": "healer",
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_DIVINESTAFF"
   },
   "2H_DOUBLEBLADEDSTAFF": {
@@ -37351,6 +38053,32 @@
    "role_hint": "melee",
    "source": "sheets/double_bladed_staff.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_DOUBLEBLADEDSTAFF"
   },
   "2H_DOUBLEBLADEDSTAFF_CRYSTAL": {
@@ -37539,6 +38267,32 @@
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_DOUBLEBLADEDSTAFF_CRYSTAL"
   },
   "2H_DUALAXE_KEEPER": {
@@ -37693,6 +38447,32 @@
    "role_hint": "melee",
    "source": "sheets/bear_paws.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_DUALAXE_KEEPER"
   },
   "2H_DUALCROSSBOW_CRYSTAL": {
@@ -37842,6 +38622,32 @@
    "role_hint": "range",
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_DUALCROSSBOW_CRYSTAL"
   },
   "2H_DUALCROSSBOW_HELL": {
@@ -37990,6 +38796,32 @@
    "role_hint": "range",
    "source": "sheets/boltcasters.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_DUALCROSSBOW_HELL"
   },
   "2H_DUALHAMMER_HELL": {
@@ -38212,6 +39044,32 @@
    "role_hint": "tank",
    "source": "sheets/forge_hammers.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_DUALHAMMER_HELL"
   },
   "2H_DUALMACE_AVALON": {
@@ -38346,6 +39204,32 @@
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_DUALMACE_AVALON"
   },
   "2H_DUALSCIMITAR_UNDEAD": {
@@ -38489,6 +39373,32 @@
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_DUALSCIMITAR_UNDEAD"
   },
   "2H_DUALSICKLE_UNDEAD": {
@@ -38628,6 +39538,32 @@
    "role_hint": "melee",
    "source": "sheets/deathgivers.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_DUALSICKLE_UNDEAD"
   },
   "2H_DUALSWORD": {
@@ -38770,6 +39706,32 @@
    "role_hint": "melee",
    "source": "sheets/dualswords.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_DUALSWORD"
   },
   "2H_ENIGMATICORB_MORGANA": {
@@ -38876,6 +39838,32 @@
    "role_hint": "support",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_ENIGMATICORB_MORGANA"
   },
   "2H_ENIGMATICSTAFF": {
@@ -38986,6 +39974,32 @@
    "role_hint": "support",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_ENIGMATICSTAFF"
   },
   "2H_FIRESTAFF": {
@@ -39104,6 +40118,32 @@
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_FIRESTAFF"
   },
   "2H_FIRESTAFF_HELL": {
@@ -39222,6 +40262,32 @@
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_FIRESTAFF_HELL"
   },
   "2H_FIRE_RINGPAIR_AVALON": {
@@ -39349,6 +40415,32 @@
    "role_hint": "range",
    "source": "sheets/dawnsong.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_FIRE_RINGPAIR_AVALON"
   },
   "2H_FLAIL": {
@@ -39476,6 +40568,32 @@
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_FLAIL"
   },
   "2H_FROSTSTAFF": {
@@ -39668,6 +40786,32 @@
    "role_hint": "range",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_FROSTSTAFF"
   },
   "2H_FROSTSTAFF_CRYSTAL": {
@@ -39859,6 +41003,32 @@
    "role_hint": "range",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_FROSTSTAFF_CRYSTAL"
   },
   "2H_GLACIALSTAFF": {
@@ -40049,6 +41219,32 @@
    "role_hint": "range",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_GLACIALSTAFF"
   },
   "2H_GLAIVE": {
@@ -40159,6 +41355,32 @@
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_GLAIVE"
   },
   "2H_GLAIVE_CRYSTAL": {
@@ -40296,6 +41518,32 @@
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_GLAIVE_CRYSTAL"
   },
   "2H_HALBERD": {
@@ -40452,6 +41700,32 @@
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_HALBERD"
   },
   "2H_HALBERD_MORGANA": {
@@ -40613,6 +41887,32 @@
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_HALBERD_MORGANA"
   },
   "2H_HAMMER": {
@@ -40804,6 +42104,32 @@
    "role_hint": "tank",
    "source": "sheets/great_hammer.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_HAMMER"
   },
   "2H_HAMMER_AVALON": {
@@ -41007,6 +42333,32 @@
    "role_hint": "tank",
    "source": "sheets/hand_of_justice.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_HAMMER_AVALON"
   },
   "2H_HAMMER_CRYSTAL": {
@@ -41204,6 +42556,32 @@
    "role_hint": "tank",
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_HAMMER_CRYSTAL"
   },
   "2H_HAMMER_UNDEAD": {
@@ -41413,6 +42791,32 @@
    "role_hint": "tank",
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_HAMMER_UNDEAD"
   },
   "2H_HARPOON_HELL": {
@@ -41555,6 +42959,32 @@
    "role_hint": "melee",
    "source": "sheets/spirithunter.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "unfit",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "unfit",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "unfit",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "unfit",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_HARPOON_HELL"
   },
   "2H_HOLYSTAFF": {
@@ -41646,6 +43076,32 @@
    "role_hint": "healer",
    "source": "sheets/great_holy.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_HOLYSTAFF"
   },
   "2H_HOLYSTAFF_CRYSTAL": {
@@ -41737,6 +43193,32 @@
    "role_hint": "healer",
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_HOLYSTAFF_CRYSTAL"
   },
   "2H_HOLYSTAFF_HELL": {
@@ -41821,6 +43303,32 @@
    "role_hint": "healer",
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_HOLYSTAFF_HELL"
   },
   "2H_HOLYSTAFF_UNDEAD": {
@@ -41905,6 +43413,32 @@
    "role_hint": "healer",
    "source": "sheets/holy_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_HOLYSTAFF_UNDEAD"
   },
   "2H_ICECRYSTAL_UNDEAD": {
@@ -42093,6 +43627,32 @@
    "role_hint": "range",
    "source": "sheets/permafrost_prism.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_ICECRYSTAL_UNDEAD"
   },
   "2H_ICEGAUNTLETS_HELL": {
@@ -42290,6 +43850,32 @@
    "role_hint": "range",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_ICEGAUNTLETS_HELL"
   },
   "2H_INFERNOSTAFF": {
@@ -42397,6 +43983,32 @@
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_INFERNOSTAFF"
   },
   "2H_INFERNOSTAFF_MORGANA": {
@@ -42522,6 +44134,32 @@
    "role_hint": "range",
    "source": "sheets/blazing_staff.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_INFERNOSTAFF_MORGANA"
   },
   "2H_IRONCLADEDSTAFF": {
@@ -42678,6 +44316,32 @@
    "role_hint": "tank",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_IRONCLADEDSTAFF"
   },
   "2H_IRONGAUNTLETS_HELL": {
@@ -42817,6 +44481,32 @@
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_IRONGAUNTLETS_HELL"
   },
   "2H_KNUCKLES_AVALON": {
@@ -43012,6 +44702,32 @@
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_KNUCKLES_AVALON"
   },
   "2H_KNUCKLES_CRYSTAL": {
@@ -43173,6 +44889,32 @@
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_KNUCKLES_CRYSTAL"
   },
   "2H_KNUCKLES_HELL": {
@@ -43373,6 +45115,32 @@
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_KNUCKLES_HELL"
   },
   "2H_KNUCKLES_KEEPER": {
@@ -43552,6 +45320,32 @@
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_KNUCKLES_KEEPER"
   },
   "2H_KNUCKLES_MORGANA": {
@@ -43712,6 +45506,32 @@
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_KNUCKLES_MORGANA"
   },
   "2H_KNUCKLES_SET1": {
@@ -43893,6 +45713,32 @@
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_KNUCKLES_SET1"
   },
   "2H_KNUCKLES_SET2": {
@@ -44049,6 +45895,32 @@
    "role_hint": "melee",
    "source": "sheets/battle_bracers.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_KNUCKLES_SET2"
   },
   "2H_KNUCKLES_SET3": {
@@ -44251,6 +46123,32 @@
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_KNUCKLES_SET3"
   },
   "2H_LONGBOW": {
@@ -44371,6 +46269,32 @@
    "role_hint": "range",
    "source": "sheets/longbow.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_LONGBOW"
   },
   "2H_LONGBOW_UNDEAD": {
@@ -44513,6 +46437,32 @@
    "role_hint": "range",
    "source": "sheets/bow_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_LONGBOW_UNDEAD"
   },
   "2H_MACE": {
@@ -44640,6 +46590,32 @@
    "role_hint": "tank",
    "source": "sheets/mace_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_MACE"
   },
   "2H_MACE_MORGANA": {
@@ -44795,6 +46771,32 @@
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_MACE_MORGANA"
   },
   "2H_NATURESTAFF": {
@@ -44943,6 +46945,32 @@
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_NATURESTAFF"
   },
   "2H_NATURESTAFF_HELL": {
@@ -45104,6 +47132,32 @@
    "role_hint": "healer",
    "source": "sheets/nature_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_NATURESTAFF_HELL"
   },
   "2H_NATURESTAFF_KEEPER": {
@@ -45261,6 +47315,32 @@
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_NATURESTAFF_KEEPER"
   },
   "2H_POLEHAMMER": {
@@ -45461,6 +47541,32 @@
    "role_hint": "tank",
    "source": "sheets/polehammer.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_POLEHAMMER"
   },
   "2H_QUARTERSTAFF": {
@@ -45630,6 +47736,32 @@
    "role_hint": "tank",
    "source": "sheets/quarterstaff.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_QUARTERSTAFF"
   },
   "2H_QUARTERSTAFF_AVALON": {
@@ -45817,6 +47949,32 @@
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_QUARTERSTAFF_AVALON"
   },
   "2H_RAM_KEEPER": {
@@ -45987,6 +48145,32 @@
    "role_hint": "tank",
    "source": "sheets/grovekeeper.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_RAM_KEEPER"
   },
   "2H_REPEATINGCROSSBOW_UNDEAD": {
@@ -46123,6 +48307,32 @@
    "role_hint": "range",
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_REPEATINGCROSSBOW_UNDEAD"
   },
   "2H_ROCKSTAFF_KEEPER": {
@@ -46273,6 +48483,32 @@
    "role_hint": "tank",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_ROCKSTAFF_KEEPER"
   },
   "2H_SCYTHE_CRYSTAL": {
@@ -46413,6 +48649,32 @@
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_SCYTHE_CRYSTAL"
   },
   "2H_SCYTHE_HELL": {
@@ -46580,6 +48842,32 @@
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_SCYTHE_HELL"
   },
   "2H_SHAPESHIFTER_AVALON": {
@@ -46766,6 +49054,32 @@
    "role_hint": "range",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_SHAPESHIFTER_AVALON"
   },
   "2H_SHAPESHIFTER_CRYSTAL": {
@@ -46947,6 +49261,32 @@
    "role_hint": "range",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_SHAPESHIFTER_CRYSTAL"
   },
   "2H_SHAPESHIFTER_HELL": {
@@ -47115,6 +49455,32 @@
    "role_hint": "range",
    "source": "sheets/hellspawn.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_SHAPESHIFTER_HELL"
   },
   "2H_SHAPESHIFTER_KEEPER": {
@@ -47283,6 +49649,32 @@
    "role_hint": "tank",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_SHAPESHIFTER_KEEPER"
   },
   "2H_SHAPESHIFTER_MORGANA": {
@@ -47443,6 +49835,32 @@
    "role_hint": "melee",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_SHAPESHIFTER_MORGANA"
   },
   "2H_SHAPESHIFTER_SET1": {
@@ -47621,6 +50039,32 @@
    "role_hint": "melee",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_SHAPESHIFTER_SET1"
   },
   "2H_SHAPESHIFTER_SET2": {
@@ -47786,6 +50230,32 @@
    "role_hint": "support",
    "source": "sheets/rootbound.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_SHAPESHIFTER_SET2"
   },
   "2H_SHAPESHIFTER_SET3": {
@@ -47960,6 +50430,32 @@
    "role_hint": "melee",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_SHAPESHIFTER_SET3"
   },
   "2H_SKULLORB_HELL": {
@@ -48100,6 +50596,32 @@
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_SKULLORB_HELL"
   },
   "2H_SPEAR": {
@@ -48202,6 +50724,32 @@
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_SPEAR"
   },
   "2H_TRIDENT_UNDEAD": {
@@ -48344,6 +50892,32 @@
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_TRIDENT_UNDEAD"
   },
   "2H_TWINSCYTHE_HELL": {
@@ -48532,6 +51106,32 @@
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_TWINSCYTHE_HELL"
   },
   "2H_WARBOW": {
@@ -48688,6 +51288,32 @@
    "role_hint": "range",
    "source": "sheets/bow_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_WARBOW"
   },
   "2H_WILDSTAFF": {
@@ -48839,6 +51465,32 @@
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "2H_WILDSTAFF"
   },
   "MAIN_1HCROSSBOW": {
@@ -48974,6 +51626,32 @@
    "role_hint": "range",
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_1HCROSSBOW"
   },
   "MAIN_ARCANESTAFF": {
@@ -49109,6 +51787,32 @@
    "role_hint": "support",
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_ARCANESTAFF"
   },
   "MAIN_ARCANESTAFF_UNDEAD": {
@@ -49283,6 +51987,32 @@
    "role_hint": "support",
    "source": "sheets/witchwork.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_ARCANESTAFF_UNDEAD"
   },
   "MAIN_AXE": {
@@ -49437,6 +52167,32 @@
    "role_hint": "melee",
    "source": "sheets/battleaxe.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_AXE"
   },
   "MAIN_CURSEDSTAFF": {
@@ -49571,6 +52327,32 @@
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_CURSEDSTAFF"
   },
   "MAIN_CURSEDSTAFF_AVALON": {
@@ -49704,6 +52486,32 @@
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_CURSEDSTAFF_AVALON"
   },
   "MAIN_CURSEDSTAFF_CRYSTAL": {
@@ -49863,6 +52671,32 @@
    "role_hint": "support",
    "source": "sheets/rotcaller.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_CURSEDSTAFF_CRYSTAL"
   },
   "MAIN_CURSEDSTAFF_UNDEAD": {
@@ -50015,6 +52849,32 @@
    "role_hint": "support",
    "source": "sheets/curse_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_CURSEDSTAFF_UNDEAD"
   },
   "MAIN_DAGGER": {
@@ -50143,6 +53003,32 @@
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_DAGGER"
   },
   "MAIN_DAGGER_HELL": {
@@ -50304,6 +53190,32 @@
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_DAGGER_HELL"
   },
   "MAIN_FIRESTAFF": {
@@ -50420,6 +53332,32 @@
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_FIRESTAFF"
   },
   "MAIN_FIRESTAFF_CRYSTAL": {
@@ -50557,6 +53495,32 @@
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_FIRESTAFF_CRYSTAL"
   },
   "MAIN_FIRESTAFF_KEEPER": {
@@ -50675,6 +53639,32 @@
    "role_hint": "range",
    "source": "sheets/fire_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_FIRESTAFF_KEEPER"
   },
   "MAIN_FROSTSTAFF": {
@@ -50863,6 +53853,32 @@
    "role_hint": "range",
    "source": "sheets/froststaff.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_FROSTSTAFF"
   },
   "MAIN_FROSTSTAFF_AVALON": {
@@ -51030,6 +54046,32 @@
    "role_hint": "support",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_FROSTSTAFF_AVALON"
   },
   "MAIN_FROSTSTAFF_KEEPER": {
@@ -51220,6 +54262,32 @@
    "role_hint": "range",
    "source": "sheets/frost_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_FROSTSTAFF_KEEPER"
   },
   "MAIN_HAMMER": {
@@ -51407,6 +54475,32 @@
    "role_hint": "tank",
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_HAMMER"
   },
   "MAIN_HOLYSTAFF": {
@@ -51486,6 +54580,32 @@
    "role_hint": "healer",
    "source": "sheets/holy_staff.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_HOLYSTAFF"
   },
   "MAIN_HOLYSTAFF_AVALON": {
@@ -51568,6 +54688,32 @@
    "role_hint": "healer",
    "source": "sheets/holy_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_HOLYSTAFF_AVALON"
   },
   "MAIN_HOLYSTAFF_MORGANA": {
@@ -51639,6 +54785,32 @@
    "role_hint": "healer",
    "source": "sheets/lifetouch.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_HOLYSTAFF_MORGANA"
   },
   "MAIN_MACE": {
@@ -51744,6 +54916,32 @@
    "role_hint": "tank",
    "source": "sheets/mace_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_MACE"
   },
   "MAIN_MACE_CRYSTAL": {
@@ -51891,6 +55089,32 @@
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_MACE_CRYSTAL"
   },
   "MAIN_MACE_HELL": {
@@ -52048,6 +55272,32 @@
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_MACE_HELL"
   },
   "MAIN_NATURESTAFF": {
@@ -52209,6 +55459,32 @@
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_NATURESTAFF"
   },
   "MAIN_NATURESTAFF_AVALON": {
@@ -52348,6 +55624,32 @@
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_NATURESTAFF_AVALON"
   },
   "MAIN_NATURESTAFF_CRYSTAL": {
@@ -52508,6 +55810,32 @@
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_NATURESTAFF_CRYSTAL"
   },
   "MAIN_NATURESTAFF_KEEPER": {
@@ -52637,6 +55965,32 @@
    "role_hint": "healer",
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "ranged",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_NATURESTAFF_KEEPER"
   },
   "MAIN_RAPIER_MORGANA": {
@@ -52806,6 +56160,32 @@
    "role_hint": "melee",
    "source": "sheets/bloodletter.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_RAPIER_MORGANA"
   },
   "MAIN_ROCKMACE_KEEPER": {
@@ -52933,6 +56313,32 @@
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "none",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_ROCKMACE_KEEPER"
   },
   "MAIN_SCIMITAR_MORGANA": {
@@ -53095,6 +56501,32 @@
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_SCIMITAR_MORGANA"
   },
   "MAIN_SPEAR": {
@@ -53250,6 +56682,32 @@
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_SPEAR"
   },
   "MAIN_SPEAR_KEEPER": {
@@ -53411,6 +56869,32 @@
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_SPEAR_KEEPER"
   },
   "MAIN_SPEAR_LANCE_AVALON": {
@@ -53555,6 +57039,32 @@
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "flex",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_SPEAR_LANCE_AVALON"
   },
   "MAIN_SWORD": {
@@ -53694,6 +57204,32 @@
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "single",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_SWORD"
   },
   "MAIN_SWORD_CRYSTAL": {
@@ -53815,6 +57351,32 @@
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
+   "style_fit": {
+    "damage_scale": "group",
+    "delivery": "melee",
+    "fit": {
+     "brawl": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "brawl_clap": {
+      "gang": "fits",
+      "group": "fits",
+      "trio": "fits"
+     },
+     "clap": {
+      "gang": "situational",
+      "group": "situational",
+      "trio": "fits"
+     },
+     "kite": {
+      "gang": "unfit",
+      "group": "unfit",
+      "trio": "fits"
+     }
+    }
+   },
    "unique_name": "MAIN_SWORD_CRYSTAL"
   }
  }
