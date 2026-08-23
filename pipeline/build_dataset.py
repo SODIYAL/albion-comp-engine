@@ -543,7 +543,7 @@ def main():
     n_ranged, ranged_report, ranged_problems = derive_ranged_presence(
         weapons, spell_index, load_ranged_overrides())
     with open(os.path.join(OUT, "ranged_presence_report.json"), "w",
-              encoding="utf-8") as f:
+              encoding="utf-8", newline="\n") as f:
         json.dump({"_meta": {
             "rule": (f"bundle claims {AOE_CLAIM} (curated, evidence-linted) "
                      f"AND its spell is {'/'.join(RANGED_DELIVERY)}-delivered "
@@ -643,7 +643,8 @@ def main():
 
     os.makedirs(OUT, exist_ok=True)
     for name in (f"dataset-{args.version}.json", "dataset-latest.json"):
-        with open(os.path.join(OUT, name), "w", encoding="utf-8") as f:
+        with open(os.path.join(OUT, name), "w", encoding="utf-8",
+                  newline="\n") as f:
             json.dump(dataset, f, indent=1, sort_keys=True)
 
     print(f"dataset v{args.version}: {len(weapons)} weapons "

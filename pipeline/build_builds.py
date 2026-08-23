@@ -315,14 +315,15 @@ def main():
         "quarantined_fields": sum(len(q["fields"]) for q in quarantined),
         "canonical_defaults": sum(1 for p in promotions if p["build_id"]),
     }
-    with open(os.path.join(OUT, "builds_index.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(OUT, "builds_index.json"), "w", encoding="utf-8",
+              newline="\n") as f:
         json.dump({"_meta": {"counts": counts,
                              "content_covers": CONTENT_COVERS},
                    "by_content": {k: dict(sorted(v.items()))
                                   for k, v in sorted(index.items())}},
                   f, indent=1, sort_keys=True)
     with open(os.path.join(OUT, "builds_validation.json"), "w",
-              encoding="utf-8") as f:
+              encoding="utf-8", newline="\n") as f:
         json.dump({"kind": "validation_result",
                    "problems": sorted(problems),
                    "quarantined": sorted(quarantined,
