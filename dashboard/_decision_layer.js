@@ -248,8 +248,12 @@
       <div class="dl-tool-head"><div><span class="dl-kicker">Swap impact</span><h3>What changes if this slot swaps?</h3></div></div>
       ${swapHtml}
     </div></div>`;
-    const stage = document.querySelector(".wheelstage");
-    if (stage) stage.after(fold); else host.appendChild(fold);
+    /* anchor after the warn slot (which follows the stage since the
+       2026-08-23 under-the-wheel move) so stacked layouts keep the order
+       wheel -> forge reports -> caller tools */
+    const anchor = document.getElementById("warn-slot")
+      || document.querySelector(".wheelstage");
+    if (anchor) anchor.after(fold); else host.appendChild(fold);
   }
 
   function renderDecisionLayer(){

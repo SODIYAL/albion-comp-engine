@@ -1384,12 +1384,6 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   </aside>
 
   <main class="main">
-    <!-- Forge honesty reports + lookahead warnings: full-width and never
-         hidden (rehomed from the analysis flank 2026-08-22 — the decision
-         layer hides that flank, and infeasible / saturated / constraint-held
-         must stay SAID, never silently absorbed). Empty when quiet. -->
-    <div id="warn-slot"></div>
-
     <!-- The forge wheel stage: analysis flanks left, the wheel centers,
          reasoning flanks right. The wheel replaces the old rail picker. -->
     <section class="wheelstage">
@@ -1437,6 +1431,12 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
         <div id="rec-slot"></div>
       </div>
     </section>
+
+    <!-- Forge honesty reports + lookahead warnings: never hidden (rehomed
+         2026-08-22 from the analysis flank; owner 2026-08-23: it lives
+         UNDER THE WHEEL — the hero grid pins it to the wheel column, and
+         stacked layouts read it right after the stage). Empty when quiet. -->
+    <div id="warn-slot"></div>
 
     <section>
       <div class="sec-label">Capability supply vs. target</div>
