@@ -1190,14 +1190,23 @@ function renderFootnote(){
    fight size — party size, side size and selected abilities are UNKNOWN and
    never inferred; prevalence is not effectiveness, and none of this feeds
    the scoring. */
-/* One gate for the usage sample: the bucket key comes from the ENGINE's
-   size_bucket, so the display bucket is provably the bucket the meta prior
-   scores with; the min-sample rule lives here once (it was copy-pasted
-   between usageOf and renderMetaStrip). */
+/* One gate for the usage sample; the min-sample rule lives here once (it
+   was copy-pasted between usageOf and renderMetaStrip). The bucket keys to
+   the size this comp is FOR — PLAN(), not the roster judged so far: a
+   20-man plan with 3 members picked must quote large-fight evidence, not
+   small ganks, or the cohort strip stays invisible for the whole planning
+   phase. (The old rule displayed ENG.sizeBucket() to provably match the
+   meta prior's bucket — dead since H18: the shipped prior is the hand-set
+   flat map, never bucketed.) Participant axis = 2 x party size, mirroring
+   engine size_bucket. */
 const USAGE_BUCKET_LABEL = { small: "small", mid: "mid-size", large: "large" };
+function usageBucket(){
+  const n = 2 * PLAN();
+  return n < 12 ? "small" : n <= 30 ? "mid" : "large";
+}
 function usageStats(){
   if (typeof USAGE === "undefined" || !USAGE.buckets) return null;
-  const key = ENG.sizeBucket();
+  const key = usageBucket();
   const m = (USAGE.meta || {})[key];
   if (!m || m.players_attributed < 200) return null;   // not enough data to quote
   return { key, label: USAGE_BUCKET_LABEL[key], m };
@@ -1220,7 +1229,7 @@ function usageOf(w){
    evidence only; nothing here can touch a score. */
 function cohortContext(){
   if (typeof USAGE === "undefined" || !USAGE.cohort_baskets) return null;
-  const key = ENG.sizeBucket();
+  const key = usageBucket();
   const rows = (USAGE.cohort_baskets[key] || [])
     .filter(ws => Array.isArray(ws) && ws.length >= 2);
   if (rows.length < 8) return null;   /* too thin to quote */

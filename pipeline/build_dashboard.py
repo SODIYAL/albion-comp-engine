@@ -294,7 +294,10 @@ def main():
            f"const PARITY_EXPECTED = {js(expected)};\n{loadout_js}\n{app}\n{decision_js}</script>\n"
            f"</body>\n</html>\n")
     path = os.path.join(DASH, "index.html")
-    with open(path, "w", encoding="utf-8") as f:
+    # newline="\n" on every committed page: Windows' default text mode
+    # writes CRLF and churns the tree on each rebuild (same LF discipline
+    # as the hashed pipeline artifacts).
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(out)
     # The explainer is authored as a separate, self-contained source page so
     # the generated dashboard and GitHub Pages copies cannot drift apart.
@@ -302,15 +305,17 @@ def main():
     with open(explainer_src, encoding="utf-8") as f:
         explainer = f.read()
     explainer_path = os.path.join(DASH, "how-it-works.html")
-    with open(explainer_path, "w", encoding="utf-8") as f:
+    with open(explainer_path, "w", encoding="utf-8", newline="\n") as f:
         f.write(explainer)
     # GitHub Pages copy (Settings -> Pages -> main /docs): byte-for-byte the
     # same complete standards-mode document as the dashboard build.
     docs = os.path.join(ROOT, "docs")
     os.makedirs(docs, exist_ok=True)
-    with open(os.path.join(docs, "index.html"), "w", encoding="utf-8") as f:
+    with open(os.path.join(docs, "index.html"), "w", encoding="utf-8",
+              newline="\n") as f:
         f.write(out)
-    with open(os.path.join(docs, "how-it-works.html"), "w", encoding="utf-8") as f:
+    with open(os.path.join(docs, "how-it-works.html"), "w", encoding="utf-8",
+              newline="\n") as f:
         f.write(explainer)
     open(os.path.join(docs, ".nojekyll"), "w").close()
 
