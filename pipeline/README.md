@@ -46,7 +46,7 @@ sheets/illustrative/      design-doc §2.3 placeholders — NOT a release
 out/dataset-<version>.json + dataset-latest.json    ← single source of truth
    │
    ├─ engine/engine.py            scoring engine (Python)
-   ├─ tests/test_golden.py        golden regression cases (24)
+   ├─ tests/test_golden.py        golden regression cases
    └─ py -3 dashboard/build.py → dashboard/index.html (Comp Forge,
             the product page; dataset inlined, scoring runs in-browser via
             engine/app_scoring.js — a port of engine.py that tests/test_js_parity.py

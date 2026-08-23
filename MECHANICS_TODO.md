@@ -5,16 +5,19 @@ escalation, Disarray, …) via direct numbers supplied by the expert. These will
 modify **capability supply vs target** in `engine/engine.py` +
 `engine/app_scoring.js` (change one, change both, rerun parity).
 
-Status: **All three ZvZ mechanics received (2026-08-13, wiki): Focus Fire /
-Resilience, AoE Escalation, Disarray. Canonical data home:
-[pipeline/templates/mechanics.yaml](pipeline/templates/mechanics.yaml) — not
-yet consumed by the build/engine. Remaining number gaps: resil-pen per weapon
-(Q7), CC-escalation durations (Q8), escalation eligibility per spell (Q9),
-current Disarray level table (Q12). Playstyle research pass done 2026-08-13:
-attackers-per-target is a STYLE property — provisional per-style mechanics
-table awaits expert sign-off (Q14).**
+Status: **All three ZvZ mechanics received (2026-08-13, wiki) and WIRED:
+Focus Fire / Resilience, AoE Escalation, Disarray. Canonical data home:
+[pipeline/templates/mechanics.yaml](pipeline/templates/mechanics.yaml) —
+consumed by the build and applied by both engine ports as supply-side
+effectiveness multipliers since 2026-08-13 (implementation checklist below);
+the geometric AoE utility scaling ruling followed 2026-08-20. Remaining
+number gaps: resil-pen per weapon (Q7), CC-escalation durations (Q8),
+escalation eligibility per spell (Q9), current Disarray level table (Q12).
+Playstyle research pass done 2026-08-13: attackers-per-target is a STYLE
+property — provisional per-style mechanics table awaits expert sign-off
+(Q14).**
 
-## Where the gap lives (context)
+## Where the gap lived (pre-wiring context, closed 2026-08-13)
 
 - [engine.py:73-78](engine/engine.py#L73-L78) — supply is a flat linear sum;
   no interaction with fight size, clump size, or targets actually hit.

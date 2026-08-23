@@ -24,7 +24,7 @@ This is intentionally **not party reconstruction**. AlbionBB kill events do not 
 
 ## Metrics shown
 
-For the weapons already selected in the planner, the dashboard finds organization cohorts containing at least one selected weapon, or at least two once the user has selected two or more unique weapons. Candidate weapons are ranked by:
+The fight-size bucket quoted is the size the comp is **planned for** (`usageBucket()` = 2 × `PLAN()`, 2026-08-22 fix), not the roster count added so far — a 20-man plan quotes large-fight cohorts from its first pick. For the weapons already selected in the planner, the dashboard finds organization cohorts containing at least one selected weapon, or at least two once the user has selected two or more unique weapons. Candidate weapons are ranked by:
 
 1. number of matching cohorts;
 2. pair affinity (lift) as a tie-breaker;

@@ -1,3 +1,9 @@
+> STATUS: EXECUTED (2026-08-19). This spec was implemented in full — the
+> adaptation decisions are recorded in `changeschapter2-design-record.md`,
+> and the section numbers below (§A–§F) remain the reference the pipeline,
+> data layer, and evidence tests cite. Keep the text verbatim: it is the
+> requirements document those citations point into.
+
 You are working in my Albion Online composition-builder repository. Implement the next chapter: a trustworthy, reproducible system for real item stats and real weapon builds.
 
 Do not stop at an audit or plan. Implement the scoped changes, add tests, rebuild the appropriate generated artifacts, and report exactly what changed.

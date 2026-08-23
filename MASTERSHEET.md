@@ -538,7 +538,7 @@ battlemounts:
 
 ---
 
-## 9. House rules (how this stays trustworthy)
+## 10. House rules (how this stays trustworthy)
 
 - **No score without a cited spell.** The evidence lint fails the build on
   any capability score that can't point at an equippable spell.
