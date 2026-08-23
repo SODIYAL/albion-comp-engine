@@ -10,41 +10,36 @@ same data the party UI and the inspect window already render on your screen —
 the tolerated category (like Statistics Analysis Tool), not radar. Full scope,
 event map, and legality reasoning: [../COMPANION_SCOPE.md](../COMPANION_SCOPE.md).
 
-## Status — pick up here (2026-08-14, overnight build)
+## Status — LIVE-CONFIRMED (2026-08-23, owner's in-game run)
 
-Everything is BUILT and the tree is committed. What remains is **one live
-in-game run to confirm three things at once**, then it's done.
+The one live run happened, in an 11-member party on the current patch:
 
-**WORKING, live-verified earlier:** party roster, name/guild, weapon (engine
-`unique_name`), full tier+enchant equipment. Out-of-zone members show
-name-only (visibility rule).
+- **Capture + parsing**: 2,973 Albion packets, 5,909 Photon events, 339
+  handled, **0 parse errors** in 89s — the vendored Protocol18 parser is
+  current.
+- **Shape-based auto-calibration**: all four roles detected on the current
+  game version (`NewCharacter:29, SelfJoin:2, EquipmentChanged:90,
+  PartyRoster:231`) with no hand re-mapping after the patches since the
+  build — the self-healing design works.
+- **Spell-name resolution**: an in-zone member resolved to full names
+  matching the engine's sheet evidence IDs (`q: ARCANE_CHAIN_MISSILE,
+  w: ENIGMA_BLADE, e: BLACKHOLE, d: HASTE, r: ENERGY_BARRIER`), with full
+  tier+enchant equipment (`T6_MAIN_ARCANESTAFF_UNDEAD@1`).
+- **Roster**: all 11 members listed; self detected with weapon.
 
-**BUILT overnight, needs the one live run to confirm:**
+Expected-by-design behavior seen in the run (not bugs):
 
-- **Spell-name resolution** — `/party` spells resolve to UniqueNames
-  (`HOLYFLASH`, `CELESTIAL_SPHERE`) matching the sheet evidence IDs.
-- **Shape-based auto-calibration** — events are now dispatched by their
-  parameter SHAPE, not hardcoded code numbers, so a patch that renumbers
-  events self-heals. `/status` shows `detected_codes` (role → code this
-  session); a rebind logs `[calibrate] … patch shift`.
-- **Comp Forge "connect live party" button** — in the web app's left rail;
-  polls `http://localhost:53321/party`, lists the party with weapons, and
-  "load party into comp" drops them into slots. Verified against a mock;
-  needs the live companion running to confirm end-to-end.
+- Out-of-zone members are name-only until they come near (visibility rule).
+- Your OWN equipment shows empty until you swap any gear piece once —
+  self-gear arrives on the change event.
+- `item_power` stays null: IP only rides the inspect operation (op 148),
+  which the companion does not fire passively.
 
-**The one live run to finish it all:**
-
-1. Close any running companion window; double-click `run-companion.bat` → Yes.
-2. First launch downloads `items.txt` + `spells.xml` (~10 MB, once).
-3. In a zone with a party member visible, check `http://localhost:53321/status`
-   — `handled_events` climbing, `detected_codes` populated (e.g.
-   `NewCharacter:29`), `party_members` > 0.
-4. `http://localhost:53321/party` — spells show names (not numbers).
-5. Open Comp Forge (the deployed site or a local build), click **connect live
-   party** in the rail, confirm your party lists, then **load party into comp**.
-
-If any of that misbehaves, the troubleshooting below covers it (the `/schema`
-endpoint re-discovers event shapes; delete a cache file to re-pull indices).
+**The last unchecked box:** the Comp Forge **connect live party** button
+end-to-end with the live companion (verified against a mock only). With the
+companion running: open Comp Forge, click connect in the rail, confirm the
+party lists, then **load party into comp** — best done in a zone with most
+of the party visible so their weapons populate.
 
 Everything below is the full run/troubleshooting reference.
 
