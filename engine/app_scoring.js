@@ -237,6 +237,29 @@
     for (i = 0; i < this.pool.length; i++) {
       if (!excl[this.pool[i]]) this._suggest.push(this.pool[i]);
     }
+    /* Style-fit suggestion gate (identity Phase C — mirrors engine.py:
+       style selection IS build intent; unfit weapons leave suggestions,
+       never scoring; balanced gates nothing). */
+    this._styleUnfit = {};
+    if (this.style === "brawl" || this.style === "clap" ||
+        this.style === "kite" || this.style === "brawl_clap") {
+      var sBand = this._fitBand();
+      var anyUnfit = false;
+      for (i = 0; i < this.pool.length; i++) {
+        var sfw = this.weapons[this.pool[i]].style_fit;
+        if (sfw && sfw.fit[this.style][sBand] === "unfit") {
+          this._styleUnfit[this.pool[i]] = true;
+          anyUnfit = true;
+        }
+      }
+      if (anyUnfit) {
+        var kept = [];
+        for (i = 0; i < this._suggest.length; i++) {
+          if (!this._styleUnfit[this._suggest[i]]) kept.push(this._suggest[i]);
+        }
+        this._suggest = kept;
+      }
+    }
     this._viability = {};
     if (this.size >= ((via.core_min_size === undefined) ? 10 : via.core_min_size)) {
       var bonus = (via.core_bonus === undefined) ? 1.0 : via.core_bonus;
@@ -336,6 +359,12 @@
   CompEngine.prototype.roleOf = function (weapon) {
     /* Constraint role class: healer / frontline / support / dps. */
     return this.roleClass[weapon] === undefined ? "dps" : this.roleClass[weapon];
+  };
+
+  CompEngine.prototype.isStyleUnfit = function (weapon) {
+    /* Unfit for the DECLARED style at this size band — bars suggestions
+       only, never scoring (mirrors engine.py is_style_unfit). */
+    return !!this._styleUnfit[weapon];
   };
 
   CompEngine.prototype.isExcluded = function (weapon) {
@@ -1244,6 +1273,7 @@
         /* rank = strictly-better alternatives + 1 (ties never demote) */
         score: curScore, rank: better.length + 1,
         off_comp: this.isExcluded(cur),
+      off_style: this.isStyleUnfit(cur),
         options: better.slice(0, topN).map(function (t) {
           return { weapon: t[1],
                    display_name: self.weapons[t[1]].display_name,

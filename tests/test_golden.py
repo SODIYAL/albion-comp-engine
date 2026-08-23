@@ -467,6 +467,27 @@ def run():
           Engine(content="roads", size=3).comp_identity(["2H_BOW_AVALON"])["style"] is None
           and abs(e_bz.fitness(blap) - f_blap) < 1e-12,
           f"fitness unchanged at {f_blap:.4f}")
+    # T24 — style-aware kits (identity Phase C, owner ruling: "a siegebow
+    # or a great axe, or longbow etc playing in brawl comp don't work if
+    # they are on cloth armor"): under a DECLARED brawl the kit advisor
+    # never SUGGESTS cloth armor for a damage carrier; healers are exempt
+    # (their doctrine armor is cloth); balanced declares no intent and
+    # keeps the full catalogue.
+    e_brl = Engine(content="blackzone_roam", size=20, style="brawl")
+    lb_all = [o["gear"] for o in
+              e_brl.kit_options(LONGBOW, top_n=300)["options"]["armor"]]
+    heal_all = [o["gear"] for o in
+                e_brl.kit_options(HALLOWFALL, top_n=300)["options"]["armor"]]
+    bal_all = [o["gear"] for o in
+               ez.kit_options(LONGBOW, top_n=300)["options"]["armor"]]
+    check("T24 brawl kits: no cloth suggested for a ranged carrier; "
+          "healers exempt; balanced ungated",
+          all("_CLOTH_" not in g for g in lb_all)
+          and any("_CLOTH_" in g for g in heal_all)
+          and any("_CLOTH_" in g for g in bal_all),
+          f"brawl longbow armors={lb_all[:4]}...; healer has cloth="
+          f"{any('_CLOTH_' in g for g in heal_all)}")
+
     # T23d — the all-rounder rule: Realmbreaker (melee stat line, E lands
     # at range -> flex, group-scale) DERIVES as fitting every style and is
     # never flagged inside a ranged core; its member record says so.

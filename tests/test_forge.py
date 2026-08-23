@@ -340,6 +340,37 @@ def t_pred_combo_aware():
           preds.get("ranged_aoe_core", 0) == 0, str(preds))
 
 
+def t_style_gate():
+    """F13 (identity Phase C, owner ruling 2026-08-23): a weapon UNFIT for
+    the declared style at this size band leaves suggestions and generation
+    exactly like a viability exclusion — manual and locked picks still
+    score, swap_review flags off_style, and balanced / trio-size gate
+    nothing (Battleaxe fits <=3 by the same ruling)."""
+    e = Engine(content="blackzone_roam", size=20, style="clap")
+    barred = "MAIN_AXE" not in set(e.suggest_pool())
+    not_rec = all(r["weapon"] != "MAIN_AXE"
+                  for r in e.recommend([], top_n=300))
+    party = ["MAIN_AXE", "2H_MACE", "MAIN_HOLYSTAFF_AVALON"]
+    score = e.comp_score(party)
+    scoreable = score == score and score != 0.0
+    review = e.swap_review(party)
+    flagged = review[0]["off_style"] and not review[1]["off_style"]
+    forged = e.forge(11)
+    forge_clean = "MAIN_AXE" not in forged["party"]
+    locked = e.forge(11, locked=["MAIN_AXE"])
+    locked_kept = locked["party"][0] == "MAIN_AXE"
+    bal_open = "MAIN_AXE" in set(
+        Engine(content="blackzone_roam", size=20).suggest_pool())
+    trio_open = "MAIN_AXE" in set(
+        Engine(content="roads", size=3, style="clap").suggest_pool())
+    check("F13 style gate: unfit weapons leave suggestions/forge only; "
+          "manual+locked score; balanced and trio gate nothing",
+          barred and not_rec and scoreable and flagged and forge_clean
+          and locked_kept and bal_open and trio_open,
+          f"score={score:.3f}, off_style={[m['off_style'] for m in review]}, "
+          f"balanced_open={bal_open}, trio_open={trio_open}")
+
+
 if __name__ == "__main__":
     t_invariant()
     t_synergy_gating()
@@ -353,6 +384,7 @@ if __name__ == "__main__":
     t_locks()
     t_locked_forge()
     t_pred_combo_aware()
+    t_style_gate()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")

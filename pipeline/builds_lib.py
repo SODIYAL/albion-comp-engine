@@ -329,6 +329,12 @@ def validate_comp_doc(doc, weapon_lines, templates=None):
     ps = doc.get("party_size") or {}
     if ps and not (isinstance(ps, dict) and "min" in ps and "max" in ps):
         problems.append(f"{ident}: party_size must be {{min, max}}")
+    # style is optional (identity Phase C: styles key stored builds to the
+    # caller's declared intent) but when stated it must be a real style
+    style = doc.get("style")
+    if style and style not in ("balanced", "brawl", "clap", "kite",
+                               "brawl_clap"):
+        problems.append(f"{ident}: unknown style {style!r}")
     if src.get("kind") in ONE_V_ONE_KINDS and ps and \
             ps.get("max", 0) > ONE_V_ONE_MAX_SIZE:
         problems.append(

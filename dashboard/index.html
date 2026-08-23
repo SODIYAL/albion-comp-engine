@@ -1885,6 +1885,29 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
     for (i = 0; i < this.pool.length; i++) {
       if (!excl[this.pool[i]]) this._suggest.push(this.pool[i]);
     }
+    /* Style-fit suggestion gate (identity Phase C — mirrors engine.py:
+       style selection IS build intent; unfit weapons leave suggestions,
+       never scoring; balanced gates nothing). */
+    this._styleUnfit = {};
+    if (this.style === "brawl" || this.style === "clap" ||
+        this.style === "kite" || this.style === "brawl_clap") {
+      var sBand = this._fitBand();
+      var anyUnfit = false;
+      for (i = 0; i < this.pool.length; i++) {
+        var sfw = this.weapons[this.pool[i]].style_fit;
+        if (sfw && sfw.fit[this.style][sBand] === "unfit") {
+          this._styleUnfit[this.pool[i]] = true;
+          anyUnfit = true;
+        }
+      }
+      if (anyUnfit) {
+        var kept = [];
+        for (i = 0; i < this._suggest.length; i++) {
+          if (!this._styleUnfit[this._suggest[i]]) kept.push(this._suggest[i]);
+        }
+        this._suggest = kept;
+      }
+    }
     this._viability = {};
     if (this.size >= ((via.core_min_size === undefined) ? 10 : via.core_min_size)) {
       var bonus = (via.core_bonus === undefined) ? 1.0 : via.core_bonus;
@@ -1984,6 +2007,12 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   CompEngine.prototype.roleOf = function (weapon) {
     /* Constraint role class: healer / frontline / support / dps. */
     return this.roleClass[weapon] === undefined ? "dps" : this.roleClass[weapon];
+  };
+
+  CompEngine.prototype.isStyleUnfit = function (weapon) {
+    /* Unfit for the DECLARED style at this size band — bars suggestions
+       only, never scoring (mirrors engine.py is_style_unfit). */
+    return !!this._styleUnfit[weapon];
   };
 
   CompEngine.prototype.isExcluded = function (weapon) {
@@ -2892,6 +2921,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
         /* rank = strictly-better alternatives + 1 (ties never demote) */
         score: curScore, rank: better.length + 1,
         off_comp: this.isExcluded(cur),
+      off_style: this.isStyleUnfit(cur),
         options: better.slice(0, topN).map(function (t) {
           return { weapon: t[1],
                    display_name: self.weapons[t[1]].display_name,
@@ -4629,9 +4659,10 @@ function swapEligible(review){
   const ok = new Set();
   review.forEach((m, i) => {
     if (!m) return;
-    /* viability-excluded members always get their replacement advice —
-       the owner rule flags them regardless of rank (2026-08-18) */
-    if (m.off_comp && m.options.length){ ok.add(i); return; }
+    /* viability-excluded and style-unfit members always get their
+       replacement advice — owner rules flag them regardless of rank
+       (2026-08-18; style gate 2026-08-23) */
+    if ((m.off_comp || m.off_style) && m.options.length){ ok.add(i); return; }
     if (m.rank < SWAP_CFG.min_rank) return;
     const top = m.options.find(o => o.gain >= SWAP_CFG.min_gain);
     if (!top) return;
@@ -4643,7 +4674,7 @@ function swapEligible(review){
 }
 function swapHint(m, i){
   if (!m) return "";
-  const forced = m.off_comp && m.options.length;
+  const forced = (m.off_comp || m.off_style) && m.options.length;
   if (!forced && m.rank < SWAP_CFG.min_rank) return "";
   const opts = forced ? m.options
     : m.options.filter(o => o.gain >= SWAP_CFG.min_gain);
@@ -4651,7 +4682,9 @@ function swapHint(m, i){
   const pool = Object.keys(WEAPONS).length;
   const label = m.off_comp
     ? `<b class="offcomp">off-comp at this size (owner rule) — swap to</b>`
-    : m.rank >= SWAP_CFG.offcomp_rank
+    : m.off_style
+      ? `<b class="offcomp">off-style for ${esc(styleName() || STYLE)} at this size — swap to</b>`
+      : m.rank >= SWAP_CFG.offcomp_rank
       ? `<b class="offcomp">off-comp here — rank ${m.rank}/${pool}</b>`
       : `<span class="swap-lbl">better options</span>`;
   return `<span class="fn swap">${label} ${opts.map(o =>

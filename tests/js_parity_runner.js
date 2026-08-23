@@ -35,6 +35,7 @@ const out = cases.map((c, i) => {
     forge: forged,
     swap: sp === null ? null : e.swapReview(sp).map((m) => ({
       weapon: m.weapon, score: m.score, rank: m.rank, off_comp: m.off_comp,
+      off_style: m.off_style,
       options: m.options.map((o) => ({ weapon: o.weapon, score: o.score })),
     })),
     fitness: e.fitness(c.party),

@@ -261,6 +261,25 @@ class Engine:
                     excl.add(wk)
         self._excluded = excl
         self._suggest = [w for w in self.pool if w not in excl]
+        # Style-fit suggestion gate (identity Phase C — owner ruling
+        # 2026-08-23: style selection IS build intent; "clap comp should
+        # never get suggestions like battle-axe"). A weapon whose derived
+        # style_fit verdict is UNFIT for the DECLARED style at this size
+        # band leaves the suggestion pool exactly like a viability
+        # exclusion: barred from suggestions and generation, never from
+        # scoring; swap_review flags such members off_style. Balanced
+        # declares no intent and gates nothing; datasets without
+        # style_fit gate nothing.
+        self._style_unfit = set()
+        if self.style in ("brawl", "clap", "kite", "brawl_clap"):
+            band = self._fit_band()
+            for wk in self.pool:
+                sf = self.weapons[wk].get("style_fit")
+                if sf and sf["fit"][self.style][band] == "unfit":
+                    self._style_unfit.add(wk)
+            if self._style_unfit:
+                self._suggest = [w for w in self._suggest
+                                 if w not in self._style_unfit]
         self._viability = {}
         if self.size >= via.get("core_min_size", 10):
             bonus = via.get("core_bonus", 1.0)
@@ -364,6 +383,13 @@ class Engine:
         at the current content+size. Scoring is never blocked — the dashboard
         flags such members off-comp with replacement advice instead."""
         return weapon in self._excluded
+
+    def is_style_unfit(self, weapon):
+        """True when the weapon's derived style_fit is UNFIT for the
+        DECLARED style at this size band (identity Phase C). Bars
+        suggestions only — scoring is never blocked; the dashboard flags
+        such members off-style."""
+        return weapon in self._style_unfit
 
     def suggest_pool(self):
         """The default candidate pool for every suggestion/generation path:
@@ -666,6 +692,17 @@ class Engine:
         by_slot = {}
         for k, g in self.gear.items():
             by_slot.setdefault(g.get("slot") or "other", []).append(k)
+        # Style-fit gear gate (identity Phase C, owner ruling 2026-08-23):
+        # "a siegebow or a great axe, or longbow etc playing in brawl comp
+        # don't work if they are on cloth armor. The brawl comp requires by
+        # default that most people will be closely involved in the fight" —
+        # under a DECLARED brawl, cloth armor never gets SUGGESTED (manual
+        # picks still score; healers keep cloth — their doctrine armor).
+        # PROVISIONAL owner-taste rule, overridable per weapon later.
+        if (self.style in ("brawl", "brawl_clap")
+                and self.role_of(weapon) != "healer"):
+            by_slot["armor"] = [k for k in by_slot.get("armor", [])
+                                if "_CLOTH_" not in k]
         bare = self.member_extra(weapon, combo)
         if party is not None:
             joined = list(party) + [weapon]
@@ -1223,6 +1260,7 @@ class Engine:
                 # rank = strictly-better alternatives + 1 (ties never demote)
                 "score": cur_score, "rank": len(better) + 1,
                 "off_comp": self.is_excluded(cur),
+                "off_style": self.is_style_unfit(cur),
                 "options": [{"weapon": w,
                              "display_name": self.weapons[w]["display_name"],
                              "score": v, "gain": v - cur_score}

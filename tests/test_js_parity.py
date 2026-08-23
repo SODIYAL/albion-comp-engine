@@ -144,7 +144,7 @@ def py_results(cases):
             "forge": forged,
             "swap": None if sp is None else [
                 {"weapon": m["weapon"], "score": m["score"], "rank": m["rank"],
-                 "off_comp": m["off_comp"],
+                 "off_comp": m["off_comp"], "off_style": m["off_style"],
                  "options": [{"weapon": o["weapon"], "score": o["score"]}
                              for o in m["options"]]}
                 for m in e.swap_review(sp)],
@@ -264,7 +264,8 @@ def main():
         if a["swap"] is not None:
             for ma, mb in zip(a["swap"], b["swap"] or []):
                 if ma["rank"] != mb["rank"] or abs(ma["score"] - mb["score"]) > EPS \
-                        or ma["off_comp"] != mb.get("off_comp"):
+                        or ma["off_comp"] != mb.get("off_comp") \
+                        or ma["off_style"] != mb.get("off_style"):
                     errs.append(f"swap {ma['weapon']}: py rank {ma['rank']} "
                                 f"score {ma['score']!r} vs js rank {mb['rank']} "
                                 f"score {mb['score']!r}")
