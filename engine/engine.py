@@ -706,6 +706,25 @@ class Engine:
             combo = self.default_combo(weapon)
         return extras[combo]
 
+    def _raw_member_caps(self, weapon, combo=None):
+        """The member's RAW one-spell-per-slot capability points (loadout
+        always + the chosen bundles, sheet 1-7 scale) — content- and
+        style-independent. Weapons without loadout data fall back to the
+        flat sheet capabilities."""
+        extras = self._combo_extras(weapon)
+        if combo is None or combo < 0 or combo >= len(extras):
+            combo = self.default_combo(weapon)
+        lo = self.weapons[weapon].get("loadout") or {}
+        if not (lo.get("slots") or lo.get("always")):
+            return dict(self.weapons[weapon]["capabilities"])
+        caps = dict(lo.get("always") or {})
+        slots = lo.get("slots") or []
+        for oi, ci in self.combo_choices(weapon, combo):
+            if oi < len(slots) and ci < len(slots[oi]):
+                for c, v in slots[oi][ci].items():
+                    caps[c] = caps.get(c, 0) + v
+        return caps
+
     def _pred_contrib(self, weapon, combo=None):
         """frozenset of predicate names this member's SELECTED combo
         satisfies, from RAW loadout caps (always + chosen bundles — the
@@ -719,16 +738,7 @@ class Engine:
         hit = self._pred_cache.get(key)
         if hit is not None:
             return hit
-        lo = self.weapons[weapon].get("loadout") or {}
-        if lo.get("slots") or lo.get("always"):
-            caps = dict(lo.get("always") or {})
-            slots = lo.get("slots") or []
-            for oi, ci in self.combo_choices(weapon, combo):
-                if oi < len(slots) and ci < len(slots[oi]):
-                    for c, v in slots[oi][ci].items():
-                        caps[c] = caps.get(c, 0) + v
-        else:
-            caps = self.weapons[weapon]["capabilities"]
+        caps = self._raw_member_caps(weapon, combo)
         out = frozenset(
             pn for pn, mins in self.pred_defs.items()
             if all(caps.get(c, 0) >= v for c, v in mins.items()))
@@ -1338,6 +1348,107 @@ class Engine:
             "utility_coverage": profile(self.UTILITY_CAPS_PROFILE),
             "defensive_coverage": profile(self.DEFENSE_CAPS_PROFILE),
         }
+
+    # Identity thresholds (descriptive layer, F-V3-2). Calibrated 2026-08-23
+    # against every style-declared comp on file — blap / Bist roam 15 /
+    # push-monkey melee balls read brawl (73-90% melee damage), the
+    # albioncompo ss-kite 20 and the golden kite10 fixture read kite, the
+    # golden clap10 fixture reads clap (62% bomb share), and the V3 case-6
+    # party the expert called "clashing" lands in the split band (43:57
+    # across one carrier each). See VALIDATION.md, V3 round 1.
+    IDENTITY_MELEE_CORE = 0.65     # melee damage share at/above -> brawl ball
+    IDENTITY_RANGED_CORE = 0.35    # at/below -> ranged core (clap or kite)
+    IDENTITY_STRONG = 0.80         # a share past this reads "strong", not "leaning"
+    IDENTITY_CLAP_AOE = 0.50       # ranged core at/above this bomb share -> clap
+    IDENTITY_BC_AOE = 0.45         # mid band: bomb share half of brawl_clap
+    IDENTITY_BC_POSTURE = 0.45     # mid band: commit posture half of brawl_clap
+    IDENTITY_CARRIER_MIN = 4       # raw damage points that make a damage carrier
+    IDENTITY_MIN_MEMBERS = 3       # below this the comp is still "forming"
+    IDENTITY_RANGED_ATTACK = 9.0   # attackrange at/above -> ranged delivery
+
+    def comp_identity(self, party, combos=None):
+        """What this comp is BECOMING, in the caller's own playstyle
+        vocabulary (styles.yaml): brawl / clap / kite / brawl_clap, plus
+        'mixed' for split identities and 'forming' while too small to say.
+
+        DESCRIPTIVE ONLY (V3 round 1 finding F-V3-2): nothing here feeds
+        fitness, recommendation order, or the forge. The label is derived
+        from the party's raw capability fingerprint — which side of the
+        fight its damage is delivered from (melee ball vs ranged core),
+        whether that damage is one bomb or a grind (burst_aoe vs sustained
+        vs single-target shares), and whether its tools commit (engage,
+        clump) or evade (mobility, disengage)."""
+        n = len(party)
+        melee = ranged = aoe = sus = st = commit = evade = 0.0
+        carriers = {"melee": [], "ranged": []}
+        for i, w in enumerate(party):
+            caps = self._raw_member_caps(w, combos[i] if combos else None)
+            dmg = sum(caps.get(c, 0) for c in self.DAMAGE_CAPS_PROFILE)
+            aoe += caps.get("burst_aoe", 0)
+            sus += caps.get("sustained_dps", 0)
+            st += caps.get("burst_st", 0) + caps.get("execute", 0)
+            commit += caps.get("engage", 0) + caps.get("clump_create", 0)
+            evade += caps.get("mobility", 0) + caps.get("disengage", 0)
+            if dmg < self.IDENTITY_CARRIER_MIN:
+                continue
+            ar = (self.stats_of(w).get("stats") or {}).get("attackrange", 0)
+            side = "ranged" if ar >= self.IDENTITY_RANGED_ATTACK else "melee"
+            carriers[side].append(w)
+            if side == "ranged":
+                ranged += dmg
+            else:
+                melee += dmg
+        tot = melee + ranged
+        dmg_tot = aoe + sus + st
+        mel = melee / tot if tot else 0.5
+        mode = {"aoe": aoe / dmg_tot if dmg_tot else 0.0,
+                "sustained": sus / dmg_tot if dmg_tot else 0.0,
+                "single_target": st / dmg_tot if dmg_tot else 0.0}
+        posture = commit / (commit + evade) if commit + evade else 0.5
+        out = {"style": None, "label": "", "strength": None,
+               "melee_share": mel, "ranged_share": 1.0 - mel if tot else 0.5,
+               "carriers": carriers, "mode": mode, "posture": posture,
+               "conflicts": []}
+        style_names = {k: (v.get("name") or k)
+                       for k, v in (self.data.get("styles") or {}).items()}
+        if n < self.IDENTITY_MIN_MEMBERS or tot == 0:
+            out["label"] = "still forming"
+            return out
+        if mel >= self.IDENTITY_MELEE_CORE:
+            out["style"] = "brawl"
+            out["strength"] = ("strong" if mel >= self.IDENTITY_STRONG
+                              else "leaning")
+            out["label"] = f"{style_names.get('brawl', 'Brawl')} — melee ball"
+        elif mel <= self.IDENTITY_RANGED_CORE:
+            clap = mode["aoe"] >= self.IDENTITY_CLAP_AOE
+            out["style"] = "clap" if clap else "kite"
+            out["strength"] = ("strong"
+                              if mel <= 1.0 - self.IDENTITY_STRONG
+                              else "leaning")
+            out["label"] = (f"{style_names.get('clap', 'Clap')} — ranged bomb"
+                            if clap else
+                            f"{style_names.get('kite', 'Kite')} — ranged pressure")
+        elif (mode["aoe"] >= self.IDENTITY_BC_AOE
+              and posture >= self.IDENTITY_BC_POSTURE):
+            out["style"] = "brawl_clap"
+            out["strength"] = "leaning"
+            out["label"] = (f"{style_names.get('brawl_clap', 'Brawl-Clap')}"
+                            " — grind into the bomb")
+        else:
+            out["label"] = "split identity — melee and ranged damage pull apart"
+            minority = ("melee" if (mel, len(carriers["melee"]))
+                        < (1.0 - mel, len(carriers["ranged"]))
+                        else "ranged")
+            majority = "ranged" if minority == "melee" else "melee"
+            for w in carriers[minority]:
+                out["conflicts"].append({
+                    "weapon": w,
+                    "display_name": self.weapons[w]["display_name"],
+                    "side": minority,
+                    "note": (f"{minority} damage inside a {majority}-leaning "
+                             "core — commit to one side or cover the seam"),
+                })
+        return out
 
     # ------------------------------------------------------------ local search
     def refine(self, party, max_passes=8, pool=None, fixed=0):

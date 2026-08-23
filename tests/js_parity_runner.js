@@ -50,6 +50,7 @@ const out = cases.map((c, i) => {
       weapon: r.weapon, score: r.score })),
     weaknesses: e.weaknesses(c.party, 5).map((g) => ({ cap: g.cap, gap: g.gap })),
     uncovered: e.uncoveredCaps(c.party).slice().sort(),
+    identity: e.compIdentity(c.party, c.combos),
   };
 });
 process.stdout.write(JSON.stringify(out));

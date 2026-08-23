@@ -34,6 +34,24 @@
     return {tone, label, critical, weak, excess};
   }
 
+  /* Comp identity (F-V3-2, 2026-08-23): what the party is BECOMING, in
+     playstyle vocabulary. ENG.compIdentity is descriptive engine output —
+     this renders it verbatim and adds nothing. */
+  function identityLine(){
+    if (!party.length || typeof ENG.compIdentity !== "function") return "";
+    const id = ENG.compIdentity(party, COMBOS_CUR);
+    if (!id.label) return "";
+    const tag = id.style && id.strength === "leaning"
+      ? `${id.label} · leaning` : id.label;
+    const conf = id.conflicts.length
+      ? `<small class="dl-id-conflict" title="${esc(id.conflicts[0].note)}">⚠ ${
+          id.conflicts.map(c => esc(c.display_name)).join(", ")} pull${
+          id.conflicts.length > 1 ? "" : "s"} against the ${
+          id.conflicts[0].side === "melee" ? "ranged" : "melee"} core</small>`
+      : "";
+    return `<span class="dl-identity"><span class="dl-kicker">becoming</span>${esc(tag)}</span>${conf}`;
+  }
+
   function diagnosisRows(){
     if (!party.length) return [];
     const s = supply(party);
@@ -220,7 +238,7 @@
     }
 
     if (!top){
-      host.innerHTML = `<div class="dl-status ${state.tone} dl-empty"><div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small></div><span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span></div>`;
+      host.innerHTML = `<div class="dl-status ${state.tone} dl-empty"><div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small>${identityLine()}</div><span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span></div>`;
       renderPlayerTools(host);
       return;
     }
@@ -264,7 +282,7 @@
 
     host.innerHTML = `
       <div class="dl-status ${state.tone}">
-        <div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small></div>
+        <div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small>${identityLine()}</div>
         <span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span>
       </div>
       <div class="dl-pick">

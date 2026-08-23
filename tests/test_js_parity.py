@@ -166,6 +166,7 @@ def py_results(cases):
             "weaknesses": [{"cap": g["cap"], "gap": g["gap"]}
                            for g in e.weaknesses(c["party"], 5)],
             "uncovered": sorted(e.uncovered_caps(c["party"])),
+            "identity": e.comp_identity(c["party"], c["combos"]),
         })
     return out
 
@@ -181,8 +182,12 @@ def main():
         cases_path = tf.name
     try:
         try:
+            # encoding pinned: node writes UTF-8; text=True alone decodes
+            # with the Windows locale codepage and mangles any non-ASCII
+            # in the payload (the identity labels carry an em-dash)
             proc = subprocess.run(["node", RUNNER, SCORING_JS, DATASET, cases_path],
-                                  capture_output=True, text=True, timeout=120)
+                                  capture_output=True, text=True,
+                                  encoding="utf-8", timeout=120)
         except FileNotFoundError:
             print("SKIP: node not found — JS parity not verified on this machine")
             return 0
@@ -237,6 +242,19 @@ def main():
             errs.append("weakness order differs")
         if a["uncovered"] != b["uncovered"]:
             errs.append(f"uncovered: py={a['uncovered']} js={b['uncovered']}")
+        ia, ib = a["identity"], b.get("identity") or {}
+        if (ia["style"] != ib.get("style") or ia["label"] != ib.get("label")
+                or ia["strength"] != ib.get("strength")
+                or ia["carriers"] != ib.get("carriers")
+                or [x["weapon"] for x in ia["conflicts"]]
+                != [x["weapon"] for x in ib.get("conflicts") or []]):
+            errs.append(f"identity: py={ia['label']}/{ia['carriers']} "
+                        f"js={ib.get('label')}/{ib.get('carriers')}")
+        elif (abs(ia["melee_share"] - ib.get("melee_share", 9)) > EPS
+              or abs(ia["posture"] - ib.get("posture", 9)) > EPS
+              or any(abs(ia["mode"][k] - (ib.get("mode") or {}).get(k, 9)) > EPS
+                     for k in ia["mode"])):
+            errs.append(f"identity shares: py={ia} js={ib}")
         if a["swap"] is not None:
             for ma, mb in zip(a["swap"], b["swap"] or []):
                 if ma["rank"] != mb["rank"] or abs(ma["score"] - mb["score"]) > EPS \

@@ -1317,6 +1317,10 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .dl-status strong,.dl-need strong{display:block;font-family:var(--serif);font-size:21px;line-height:1.15;margin:4px 0}
 .dl-status small{color:var(--ink-3);font-family:var(--mono);font-size:10px}.dl-fit{font-family:var(--mono);font-size:25px;font-weight:700;white-space:nowrap}.dl-fit small{display:block;text-align:right;text-transform:uppercase;letter-spacing:.12em}
 .dl-kicker{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+/* comp identity (F-V3-2): the playstyle the party is becoming — display only */
+.dl-identity{display:block;margin-top:7px;font-size:12px;color:var(--ink-2)}
+.dl-identity .dl-kicker{display:inline;margin-right:7px}
+.dl-id-conflict{display:block;margin-top:3px;font-family:var(--mono);font-size:10px;color:var(--amber)}
 /* the need line: the combined card's header — question above the answer */
 .dl-needline{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;
   padding:0 0 12px;margin:0 0 12px;border-bottom:1px solid var(--rule)}
@@ -2722,6 +2726,32 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
     return this._pickTail(state, weapon, best);
   };
 
+  CompEngine.prototype._rawMemberCaps = function (weapon, combo) {
+    /* The member's RAW one-spell-per-slot capability points (loadout
+       always + chosen bundles, sheet 1-7 scale) — content- and style-
+       independent; flat sheet fallback (mirrors engine.py
+       _raw_member_caps). */
+    var extras = this._comboExtras(weapon);
+    if (combo === null || combo === undefined || combo < 0 || combo >= extras.length)
+      combo = this.defaultCombo(weapon);
+    var lo = this.weapons[weapon].loadout || {};
+    if (!((lo.slots && lo.slots.length) || lo.always))
+      return this.weapons[weapon].capabilities;
+    var caps = {};
+    var alw = lo.always || {};
+    for (var c in alw) caps[c] = alw[c];
+    var slots = lo.slots || [];
+    var choices = this.comboChoices(weapon, combo);
+    for (var ci = 0; ci < choices.length; ci++) {
+      var oi = choices[ci][0], bi = choices[ci][1];
+      if (oi < slots.length && bi < slots[oi].length) {
+        var b = slots[oi][bi];
+        for (var c2 in b) caps[c2] = (caps[c2] || 0) + b[c2];
+      }
+    }
+    return caps;
+  };
+
   CompEngine.prototype._predContrib = function (weapon, combo) {
     /* {pred name: true} the member's SELECTED combo satisfies, from RAW
        loadout caps (mirrors engine.py _pred_contrib). */
@@ -2731,24 +2761,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
     var key = weapon + " " + combo;
     var hit = this._predCache[key];
     if (hit !== undefined) return hit;
-    var lo = this.weapons[weapon].loadout || {};
-    var caps;
-    if ((lo.slots && lo.slots.length) || lo.always) {
-      caps = {};
-      var alw = lo.always || {};
-      for (var c in alw) caps[c] = alw[c];
-      var slots = lo.slots || [];
-      var choices = this.comboChoices(weapon, combo);
-      for (var ci = 0; ci < choices.length; ci++) {
-        var oi = choices[ci][0], bi = choices[ci][1];
-        if (oi < slots.length && bi < slots[oi].length) {
-          var b = slots[oi][bi];
-          for (var c2 in b) caps[c2] = (caps[c2] || 0) + b[c2];
-        }
-      }
-    } else {
-      caps = this.weapons[weapon].capabilities;
-    }
+    var caps = this._rawMemberCaps(weapon, combo);
     var out = {};
     for (var pn in this.predDefs) {
       var mins = this.predDefs[pn], okp = true;
@@ -3005,6 +3018,95 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
       utility_coverage: profile(UTILITY_CAPS_PROFILE),
       defensive_coverage: profile(DEFENSE_CAPS_PROFILE),
     };
+  };
+
+  /* Identity thresholds (descriptive layer, F-V3-2) — mirrors engine.py
+     comp_identity, thresholds calibrated 2026-08-23 against every
+     style-declared comp on file (see VALIDATION.md, V3 round 1). */
+  var IDENTITY_MELEE_CORE = 0.65, IDENTITY_RANGED_CORE = 0.35,
+      IDENTITY_STRONG = 0.80, IDENTITY_CLAP_AOE = 0.50,
+      IDENTITY_BC_AOE = 0.45, IDENTITY_BC_POSTURE = 0.45,
+      IDENTITY_CARRIER_MIN = 4, IDENTITY_MIN_MEMBERS = 3,
+      IDENTITY_RANGED_ATTACK = 9.0;
+
+  CompEngine.prototype.compIdentity = function (party, combos) {
+    /* What this comp is BECOMING, in playstyle vocabulary — DESCRIPTIVE
+       ONLY: nothing here feeds fitness, recommendation order, or the
+       forge (mirrors engine.py comp_identity). */
+    var n = party.length;
+    var melee = 0.0, ranged = 0.0, aoe = 0.0, sus = 0.0, st = 0.0,
+        commit = 0.0, evade = 0.0;
+    var carriers = { melee: [], ranged: [] };
+    for (var i = 0; i < n; i++) {
+      var w = party[i];
+      var caps = this._rawMemberCaps(w, combos ? combos[i] : null);
+      var dmg = 0;
+      for (var di = 0; di < DAMAGE_CAPS_PROFILE.length; di++)
+        dmg += caps[DAMAGE_CAPS_PROFILE[di]] || 0;
+      aoe += caps.burst_aoe || 0;
+      sus += caps.sustained_dps || 0;
+      st += (caps.burst_st || 0) + (caps.execute || 0);
+      commit += (caps.engage || 0) + (caps.clump_create || 0);
+      evade += (caps.mobility || 0) + (caps.disengage || 0);
+      if (dmg < IDENTITY_CARRIER_MIN) continue;
+      var ar = ((this.statsOf(w).stats || {}).attackrange) || 0;
+      var side = ar >= IDENTITY_RANGED_ATTACK ? "ranged" : "melee";
+      carriers[side].push(w);
+      if (side === "ranged") ranged += dmg; else melee += dmg;
+    }
+    var tot = melee + ranged;
+    var dmgTot = aoe + sus + st;
+    var mel = tot ? melee / tot : 0.5;
+    var mode = { aoe: dmgTot ? aoe / dmgTot : 0.0,
+                 sustained: dmgTot ? sus / dmgTot : 0.0,
+                 single_target: dmgTot ? st / dmgTot : 0.0 };
+    var posture = (commit + evade) ? commit / (commit + evade) : 0.5;
+    var out = { style: null, label: "", strength: null,
+                melee_share: mel, ranged_share: tot ? 1.0 - mel : 0.5,
+                carriers: carriers, mode: mode, posture: posture,
+                conflicts: [] };
+    var styles = this.data.styles || {};
+    var sname = function (k, fb) {
+      return (styles[k] && styles[k].name) || fb;
+    };
+    if (n < IDENTITY_MIN_MEMBERS || tot === 0) {
+      out.label = "still forming";
+      return out;
+    }
+    if (mel >= IDENTITY_MELEE_CORE) {
+      out.style = "brawl";
+      out.strength = mel >= IDENTITY_STRONG ? "strong" : "leaning";
+      out.label = sname("brawl", "Brawl") + " — melee ball";
+    } else if (mel <= IDENTITY_RANGED_CORE) {
+      var clap = mode.aoe >= IDENTITY_CLAP_AOE;
+      out.style = clap ? "clap" : "kite";
+      out.strength = mel <= 1.0 - IDENTITY_STRONG ? "strong" : "leaning";
+      out.label = clap ? sname("clap", "Clap") + " — ranged bomb"
+                       : sname("kite", "Kite") + " — ranged pressure";
+    } else if (mode.aoe >= IDENTITY_BC_AOE && posture >= IDENTITY_BC_POSTURE) {
+      out.style = "brawl_clap";
+      out.strength = "leaning";
+      out.label = sname("brawl_clap", "Brawl-Clap") + " — grind into the bomb";
+    } else {
+      out.label = "split identity — melee and ranged damage pull apart";
+      /* mirrors Python's tuple compare: (mel, nMelee) < (1-mel, nRanged) */
+      var minority = (mel < 1.0 - mel ||
+                      (mel === 1.0 - mel &&
+                       carriers.melee.length < carriers.ranged.length))
+        ? "melee" : "ranged";
+      var majority = minority === "melee" ? "ranged" : "melee";
+      for (var mi = 0; mi < carriers[minority].length; mi++) {
+        var cw = carriers[minority][mi];
+        out.conflicts.push({
+          weapon: cw,
+          display_name: this.weapons[cw].display_name,
+          side: minority,
+          note: minority + " damage inside a " + majority + "-leaning " +
+                "core — commit to one side or cover the seam",
+        });
+      }
+    }
+    return out;
   };
 
   /* ------------------------------------------------------------ local search */
@@ -6131,6 +6233,24 @@ render();
     return {tone, label, critical, weak, excess};
   }
 
+  /* Comp identity (F-V3-2, 2026-08-23): what the party is BECOMING, in
+     playstyle vocabulary. ENG.compIdentity is descriptive engine output —
+     this renders it verbatim and adds nothing. */
+  function identityLine(){
+    if (!party.length || typeof ENG.compIdentity !== "function") return "";
+    const id = ENG.compIdentity(party, COMBOS_CUR);
+    if (!id.label) return "";
+    const tag = id.style && id.strength === "leaning"
+      ? `${id.label} · leaning` : id.label;
+    const conf = id.conflicts.length
+      ? `<small class="dl-id-conflict" title="${esc(id.conflicts[0].note)}">⚠ ${
+          id.conflicts.map(c => esc(c.display_name)).join(", ")} pull${
+          id.conflicts.length > 1 ? "" : "s"} against the ${
+          id.conflicts[0].side === "melee" ? "ranged" : "melee"} core</small>`
+      : "";
+    return `<span class="dl-identity"><span class="dl-kicker">becoming</span>${esc(tag)}</span>${conf}`;
+  }
+
   function diagnosisRows(){
     if (!party.length) return [];
     const s = supply(party);
@@ -6317,7 +6437,7 @@ render();
     }
 
     if (!top){
-      host.innerHTML = `<div class="dl-status ${state.tone} dl-empty"><div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small></div><span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span></div>`;
+      host.innerHTML = `<div class="dl-status ${state.tone} dl-empty"><div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small>${identityLine()}</div><span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span></div>`;
       renderPlayerTools(host);
       return;
     }
@@ -6361,7 +6481,7 @@ render();
 
     host.innerHTML = `
       <div class="dl-status ${state.tone}">
-        <div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small></div>
+        <div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small>${identityLine()}</div>
         <span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span>
       </div>
       <div class="dl-pick">

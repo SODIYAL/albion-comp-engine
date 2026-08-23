@@ -78,6 +78,7 @@ The planner now leads with:
 - **Best Next Pick** — prominent weapon recommendation, score, role/function, and engine-derived explanation
 - **What it fixes** — strongest marginal capability gains
 - **Still weak after this pick** — recalculated one slot ahead using the candidate's scored combo
+- **Comp identity** — the status card names the playstyle the party is becoming (brawl/clap/kite/mixed) and flags split identities, descriptive only
 - **Observed killboard context** — the contextual affinity strip and the pick card's observed-cohort note, display evidence only
 - **Caller tools** — the player-pool and swap-impact fold below the wheel stage, collapsed by default
 
@@ -198,9 +199,11 @@ The preferred product sequence is:
      - kite: space → slow → peel → ranged pressure → reset
    - show strong / weak / missing stages and connect the recommended weapon to the stage it improves
 
-2. **Composition identity detection**
-   - infer what the current capability vector is becoming: clap-leaning, brawl-leaning, kite-leaning, dive-heavy, sustain-heavy, mixed
-   - descriptive first; do not create a parallel score until validated
+2. **Composition identity detection** — SHIPPED descriptive v1 (2026-08-23, from V3 finding F-V3-2)
+   - `comp_identity()` in both engine ports labels what the party is becoming in playstyle vocabulary (brawl / clap / kite / brawl-clap / mixed / forming), derived from the raw capability fingerprint: damage delivery side (melee ball vs ranged core), bomb-vs-grind mode, commit-vs-evade posture
+   - split identities flag the minority-side damage carriers ("Longbow pulls against the melee core"); shown in the decision layer's comp-status card
+   - DESCRIPTIVE ONLY, per the original rule — no scoring path reads it (golden T23c pins that); thresholds calibrated against every style-declared comp on file (T23/T23b pin the classifications)
+   - still open: identity-aware *recommendation* (the F-V3-2 misses) stays parked until the descriptive layer is validated by more expert rounds
 
 3. **Negative recommendations / redundancy warnings**
    - explicitly say when another clump weapon, healer, engage tool, etc. adds little because the comp is already saturated

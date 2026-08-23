@@ -430,6 +430,36 @@ def run():
           f"tank head={tank_kit['kit']['head']['display_name']}; "
           f"slots={sorted(tank_kit['options'])}")
 
+    # T23 — comp identity (V3 round 1 finding F-V3-2, 2026-08-23): what a
+    # party is BECOMING, in playstyle vocabulary — descriptive only, no
+    # scoring path reads it. Pinned to the style-DECLARED evidence: blap is
+    # a brawl ball (Timothy: "(brawl comp)", 90% melee damage); the golden
+    # clap10/kite10 fixtures read their own styles; and the V3 case-6 party
+    # the expert called "clashing playstyles" reads as a split identity
+    # with the melee-minority Battleaxe flagged as the seam.
+    id_blap = e_bz.comp_identity(blap)
+    id_clap = e_bz.comp_identity(clap10)
+    id_kite = e_bz.comp_identity(kite10)
+    check("T23 identity: blap reads brawl, clap10 reads clap, kite10 reads kite",
+          id_blap["style"] == "brawl" and id_blap["strength"] == "strong"
+          and id_clap["style"] == "clap" and id_kite["style"] == "kite",
+          f"blap={id_blap['label']} ({id_blap['melee_share']:.0%} melee) "
+          f"clap10={id_clap['label']} kite10={id_kite['label']}")
+    case6 = ["MAIN_AXE", "2H_ENIGMATICSTAFF", "2H_SHAPESHIFTER_KEEPER",
+             "2H_REPEATINGCROSSBOW_UNDEAD", "2H_DUALHAMMER_HELL"]
+    id6 = Engine(content="castle_outpost", size=7).comp_identity(case6)
+    check("T23b identity: the expert's 'clashing' case-6 party reads split, "
+          "Battleaxe flagged as the seam",
+          id6["style"] is None and "split" in id6["label"]
+          and [c["weapon"] for c in id6["conflicts"]] == ["MAIN_AXE"],
+          f"label={id6['label']} conflicts="
+          f"{[c['display_name'] for c in id6['conflicts']]}")
+    check("T23c identity is descriptive only: tiny parties are 'forming', "
+          "and computing it never touches fitness",
+          Engine(content="roads", size=3).comp_identity(["2H_BOW_AVALON"])["style"] is None
+          and abs(e_bz.fitness(blap) - f_blap) < 1e-12,
+          f"fitness unchanged at {f_blap:.4f}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:
