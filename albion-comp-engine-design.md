@@ -1,5 +1,19 @@
 # Albion Online Dynamic Composition Engine — Feasibility & Design
 
+> **STATUS: HISTORICAL (banner added 2026-08-24).** This is the project's
+> original feasibility/design document, last substantively amended
+> 2026-08-13. It is kept for design rationale and because code comments
+> cite its section numbers (`engine/engine.py` "design doc §3.2, §4.1",
+> `composition.yaml` "§4.1 rho", the greedy-trap §4.4.1) — **do not
+> renumber sections.** For current state read `HANDOFF.md` (product/engine
+> state), `CLAUDE.md` (architecture + invariants), and
+> `tests/VALIDATION.md` (rulings history). Known statements below that
+> LATER RULINGS OVERRULED are flagged inline with `[SUPERSEDED]` notes —
+> most importantly the `max(planned, roster)` sizing in §6.1 and the 0–3
+> score scale in §2.2. Not reflected here at all (by design): the forge
+> constraint rework (2026-08-18), the identity system and playstyle #5
+> (2026-08-23), and the forge-quality generation gates (2026-08-23/24).
+
 *Research date: 2026-08-12. All API claims below were verified by live requests on this date unless marked otherwise.*
 
 ---
@@ -13,7 +27,7 @@ Undocumented but tolerated by Sandbox Interactive ("SBI tolerates the use of thi
 Base URLs (one per game server):
 
 | Server | Base |
-|---|---|
+| --- | --- |
 | Americas | `https://gameinfo.albiononline.com/api/gameinfo/` |
 | Europe | `https://gameinfo-ams.albiononline.com/api/gameinfo/` |
 | Asia | `https://gameinfo-sgp.albiononline.com/api/gameinfo/` |
@@ -33,7 +47,7 @@ Key endpoints (all verified returning JSON):
 **What this enables:**
 
 | Question | Answer |
-|---|---|
+| --- | --- |
 | Can complete team comps be reconstructed? | Mostly. Join `battles/{id}` roster with `events/battle/{id}` equipment. Players who never killed, died, or assisted on a kill have no equipment record (in practice a small minority in real fights). |
 | Can content type be identified? | Partially, heuristically. `KillArea` distinguishes some contexts (open world, hellgate, corrupted dungeon); Crystal League has its own endpoint; the rest must be inferred from cluster names, party sizes, and time windows (e.g. castle/outpost fights occur at fixed spawn times in known clusters). No explicit "this was a castle fight" label exists. |
 | Can win/loss be associated with comps? | Yes for 1v1/2v2 (clean kill outcomes — MurderLedger proves this). For group fights, "winning" must be derived heuristically (kill/death differential, fame differential, wipe detection). Noisy but usable at volume. |
@@ -66,7 +80,7 @@ Actively maintained per patch (last push 2026-06-30). No license (dumped game da
 ### 1.5 Supporting sources
 
 | Source | Verdict |
-|---|---|
+| --- | --- |
 | **Albion Data Project** (albion-online-data.com) | Market/gold prices only — nothing combat-related. Verified live. Rate limits 180 req/min. Only relevant later for a "cost of this build" feature. |
 | **OpenAlbion** (api.openalbion.com) | Structured weapon→spells API (`/api/v3/spells/weapon/{id}`, grouped Q/W/E/passive with cooldown/range/description). Docs verified; live calls returned empty from this environment — retest or self-host (open source, Laravel). Wiki-derived data. |
 | **Official wiki** (wiki.albiononline.com) | One page per weapon line documenting all Q/W options + each weapon's unique E with numbers ("reduces healing received by 20% for 5s"). Consistent MediaWiki HTML, scrapeable. No explicit reuse license — fine as internal reference, don't republish verbatim. |
@@ -93,7 +107,7 @@ Battle data tells us *what* people wear and *whether* they won — it cannot tel
 
 1. **Capabilities, not roles.** A weapon is a vector of functional scores, not a "tank/healer/DPS" label. Roles fall out of the vector (a "tank" is anything scoring high on Frontline + Engage/Peel).
 2. **Provenance on every score.** Each nonzero score is tagged with *where it comes from*: `E` (inherent to the weapon's unique E), `QW` (available via a common Q/W choice), `GEAR` (typically supplied by standard armor pairing), `PASSIVE`. Since killboard data can't see ability choices, provenance encodes confidence: `E` scores are certain; `QW`/`GEAR` scores are "available if built for."
-3. **Scores are 0–3**, not booleans: 0 = none, 1 = minor/situational, 2 = solid, 3 = defining strength. Coarse on purpose — finer granularity is false precision and makes curation contentious.
+3. **Scores are 0–3**, not booleans: 0 = none, 1 = minor/situational, 2 = solid, 3 = defining strength. Coarse on purpose — finer granularity is false precision and makes curation contentious. *[SUPERSEDED 2026-08-20: the scale migrated to **1–7** with `score_unit: 2` (2 sheet points = 1 supply unit) so magnitude rulings fit between the old integers; thresholds and predicates speak 1–7. The coarseness philosophy stands, the numbers here don't.]*
 4. **Evidence rule (added after review caught two fabricated scores).** Every nonzero score must cite the specific ability that provides it — the spell's UniqueName from ao-bin-dumps (or the gear item, see below). A *weapon's* sheet may only contain capabilities delivered by the weapon's own Q/W/E/passives (its `craftingspelllist`). Capabilities provided by helmets, armor, boots, capes, potions or food live on *those items'* sheets — never smuggled onto a weapon. The two error classes this kills, both found in review: attributing a gear capability to a weapon (1H Mace "purge" — no mace Q/W/E removes buffs), and misattributing effect direction (Longbow "knockback" — bow Frost Shot displaces the *user*, not enemies). An uncited score is invalid by definition; the pipeline enforces this mechanically (§6.3).
 
 ### 2.2 The capability set (v1: 27 capabilities, 6 groups — now 29 after the two amendments below)
@@ -119,7 +133,7 @@ and flat, like `anti_zone`, until the expert tunes it. The map's remaining
 proposed capability (`reveal`) stays unpromoted.*
 
 | Group | Capabilities |
-|---|---|
+| --- | --- |
 | **Sustain** | `heal_burst`, `heal_sustain`, `cleanse` (remove CC/debuffs from allies), `self_sustain` |
 | **Frontline** | `tankiness` (survive focus), `engage` (initiate/dive), `disengage` (get the group out), `anti_dive` (punish divers), `zone_control` (deny/hold space) |
 | **Control** | `stun`, `root`, `silence`, `knockback_displace`, `slow`, `clump_create` (stack enemies for AoE), `peel` (protect own backline) |
@@ -143,7 +157,7 @@ Scores shown as `value(provenance)`; omitted = 0.
 **Witchwork Staff** — burst_aoe 2(E), clump_create 2(E), energy_drain 2(QW), sustained_dps 2, heal_reduction 1(GEAR), zone_control 1.
 **Great Holy** — heal_burst 3(E), heal_sustain 3, cleanse 2(QW), buff_allies 1, mobility 0 — contrast with Hallowfall: same "healer" role, opposite mobility profile, which is exactly why roles alone are insufficient.
 
-*(Illustrative, not final — final numbers come from the curation pass in Phase 1.)*
+(Illustrative, not final — final numbers come from the curation pass in Phase 1.)
 
 *Status 2026-08-12: the curation pass is COMPLETE — all 137 combat weapons
 have evidence-linted sheets and every illustrative block above has been
@@ -204,7 +218,7 @@ antisynergies:
 
 For each capability `c`, satisfaction is a concave function of supply:
 
-```
+```text
 U_c(s) = weight_c × min(1, s / target_c)^γ,  γ ≈ 0.6–0.8
        − overcap penalty if s > soft_cap_c (linear beyond cap)
 ```
@@ -225,7 +239,7 @@ Templates are seeded from community knowledge (guild shotcaller conventions, met
 
 Recommending "the next player" is a greedy step in a set-function optimization:
 
-```
+```text
 For each candidate weapon w (with its default kit for this content):
   Δ(w) = Fitness(party ∪ {w}) − Fitness(party)          # marginal capability gain
   Score(w) = α·Δ(w) + β·Synergy(w, party) + δ·MetaPrior(w, content) − ρ·Redundancy(w, party)
@@ -296,7 +310,7 @@ sheets and the default-kit harvest (§2.4).*
 
 ### 6.1 Phases
 
-```
+```text
 Phase 1 (MVP)        Phase 2                     Phase 3
 ─────────────        ─────────────               ─────────────
 Static SPA           + Data pipeline (offline)   + Stats service
@@ -324,7 +338,11 @@ on every load). Scope grew past the MVP cut line: five content templates
 castle outpost 7), playstyle overlays (`templates/styles.yaml` — brawl /
 clap / kite / brawl-clap as weight multipliers; floors and over-stack stay
 on base weight), free-form adaptive party size (effective size =
-max(planned, roster), 2–60), greedy auto-forge, weapon detail drawer with
+max(planned, roster), 2–60) *[SUPERSEDED — owner ruling, attendance is
+fluid: the roster is judged at its ACTUAL size and PLANNED only steers
+forge fill and warnings; `max(planned, roster)` scoring is now a
+forbidden pattern, see CLAUDE.md invariants and HANDOFF.md]*, greedy
+auto-forge *[superseded 2026-08-18 by the constraint-aware beam forge]*, weapon detail drawer with
 real spell pools and caller loadouts, embedded item renders, Discord
 export, and share-link/localStorage state. The "OUT: ZvZ-scale templates"
 line is obsolete — real 20-man caller comps arrived (tests/meta_comps.yaml)
@@ -451,4 +469,3 @@ Suggested order of work:
 3. Implement scoring + the worked-example test cases as unit tests (§4.3 is test #1). *Update 2026-08-12: a throwaway prototype of the scoring model now exists and passes 9/9 golden cases — see `tests/VALIDATION.md` and `tests/prototype_engine.py`. Note: hard floors (§3.1) proved load-bearing; without them, breadth weapons out-rank critical healers.*
 4. Ship the static SPA MVP.
 5. Then, and only then, the stats pipeline.
-
