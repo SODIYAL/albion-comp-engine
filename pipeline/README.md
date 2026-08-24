@@ -8,7 +8,7 @@ bundler is `dashboard/build.py`) and never scores (that's `engine/`).
 Windows note: use `py -3`, not `python`/`python3` — those resolve to the
 Microsoft Store stub. Requires `pyyaml` (`py -3 -m pip install pyyaml`).
 
-```
+```text
 data/source_pins.yaml     the ONE pinned ao-bin-dumps commit (chapter 2, §A)
    │  py -3 pipeline/fetch_snapshot.py     ← the only network step for dumps
    ▼
@@ -92,7 +92,7 @@ never part of a normal build), manual Armory imports (`armory_imports/`).
 Update `data/source_pins.yaml` to the new ao-bin-dumps commit
 (`https://api.github.com/repos/ao-data/ao-bin-dumps/commits/master`), then:
 
-```
+```text
 py -3 pipeline/fetch_snapshot.py
 py -3 pipeline/parse_dumps.py
 py -3 pipeline/fetch_item_stats.py
@@ -128,7 +128,7 @@ to 4 times" wording it cites).
 
 `patch_history.py` needs a clone WITH HISTORY:
 
-```
+```text
 git clone --filter=blob:none --no-checkout https://github.com/ao-data/ao-bin-dumps.git
 ```
 
@@ -137,7 +137,7 @@ on demand, so `--patches N` downloads N+1 blobs.)
 
 ## Patch history / staleness
 
-```
+```text
 py -3 pipeline/patch_history.py <ao-bin-dumps clone> [--patches 8]
    -> out/patch_history.json
 ```
@@ -183,7 +183,7 @@ the full checkout (as above) or use `sparse-checkout set --no-cone /items.json
 
 ## The effect layer
 
-```
+```text
 py -3 pipeline/effect_catalogue.py <ao-bin-dumps path> --report
    -> out/effect_catalogue.json          64 effects reachable from weapons
 pipeline/effect_map.yaml                 effect x direction -> capabilities
@@ -194,7 +194,7 @@ py -3 pipeline/build_effect_review.py    -> review/effects.html
 Two layers, deliberately not collapsed:
 
 | layer | what | count | role |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | effects | game mechanics (`stun`, `movespeedbonus-`, `remove:buff`) | 64 reachable from weapons | evidence |
 | capabilities | comp-level needs (design doc §2.2) | 28 | scoring |
 
@@ -304,7 +304,7 @@ not needed as a source.
   **E**, where it is guaranteed rather than optional:
 
   | Weapon | Cleanse | Source |
-  |---|---|---|
+  | --- | --- | --- |
   | Hallowfall `MAIN_HOLYSTAFF_AVALON` | no | — |
   | Redemption `2H_HOLYSTAFF_UNDEAD` | no | — |
   | Great Holy `2H_HOLYSTAFF` | no | — |

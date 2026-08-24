@@ -8,7 +8,7 @@ How we test the design *before* building it, what already ran (2026-08-12), and 
 A ~250-line throwaway implementation of the scoring model (13 hand-scored weapons, 1 content template) against 9 assertions encoding what any experienced player knows to be true:
 
 | # | Case | Result |
-|---|---|---|
+| --- | --- | --- |
 | T1 | Longbow+Witchwork+Permafrost → recommends a healer | PASS |
 | T1b | Weakness list leads with healing | PASS |
 | T2 | After healer joins → recommendation flips to frontline | PASS |
@@ -40,7 +40,7 @@ there produced two more load-bearing findings of the V1 class:
 **V2. Live data spikes** — real albionbb battle `1431808107` (22 players, 2-sided):
 
 | Claim from design doc | Measured | Verdict |
-|---|---|---|
+| --- | --- | --- |
 | Weapon attribution >85% of players | 20/22 (91%) had weapon + role | PASS |
 | Win/loss decidable for clean fights | 8–0 kills, 2.0M–0 fame → unambiguous | PASS |
 | Full comps reconstructable | Winning side fully legible: 2× Avalon Holy healers, mace+quarterstaff frontline, dual-axe/dagger/frost core | PASS |

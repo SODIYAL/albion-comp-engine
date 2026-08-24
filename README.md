@@ -65,7 +65,7 @@ The planner also exposes equipment/build evidence where reliable records exist, 
 Comp Forge intentionally separates three concepts:
 
 | Layer | Purpose |
-|---|---|
+| --- | --- |
 | **Game mechanics** | What abilities actually do: stun, purge, cleanse, displacement, damage, immunity, etc. |
 | **Capability model** | What those mechanics mean to a composition: engage, peel, anti-zone, sustain, burst, etc. |
 | **Observed evidence** | What builds, compositions, and weapons are seen in external or battle data. |
