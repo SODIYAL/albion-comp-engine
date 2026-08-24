@@ -256,13 +256,16 @@ def run():
     real20 = [HALLOWFALL, GREAT_HOLY, HEAVY_MACE, GREAT_HAMMER, "2H_QUARTERSTAFF",
               "MAIN_ROCKMACE_KEEPER", PERMAFROST, "2H_FIRE_RINGPAIR_AVALON",
               WITCHWORK, LONGBOW, "2H_WARBOW"]
-    scored = {r["weapon"]: r["score"] for r in ez.recommend(real20, top_n=300)}
+    # (2026-08-23 round 3: the generation-fit gate removed Dagger Pair from
+    # the DEFAULT pool at 20 — exactly the ruling's spirit — so its score is
+    # read through an explicit candidate pool, the manual-pick path.)
+    dp_score = ez.recommend(real20, top_n=1, pool=[DAGGERS])[0]["score"]
     dp_terms = {t["cap"]: t["delta"] for t in ez.explain(real20, DAGGERS)}
     dp_st = dp_terms.get("burst_st", 0.0) + dp_terms.get("execute", 0.0)
     dp_catch = dp_terms.get("catch", 0.0)
     check("T15 single-target weak at scale: a pure-ST dagger's value is utility, not kill damage",
-          dp_st < 0.25 * scored[DAGGERS] and dp_st < dp_catch,
-          f"DaggerPair ST terms={dp_st:.2f} of {scored[DAGGERS]:.2f} total; catch term={dp_catch:.2f}")
+          dp_st < 0.25 * dp_score and dp_st < dp_catch,
+          f"DaggerPair ST terms={dp_st:.2f} of {dp_score:.2f} total; catch term={dp_catch:.2f}")
 
     # T16 — Roads of Avalon size graduation (2026-08-15, the goal behavior):
     # a healer-less trio is a legitimate comp (floors silent, single-target
@@ -609,6 +612,119 @@ def run():
           and fc_bal is not None and fc_bal["style"] == "clap"
           and abs(e_bz.fitness(blap) - f_blap) < 1e-12,
           f"heal_improves={fc_heal['improves']} bal_style={fc_bal['style']}")
+
+    # T27 — forge-quality blind round (owner rulings 2026-08-23). The
+    # engine's darlings were overruled on ECONOMICS and E-identity, with
+    # the killboard sample corroborating (Exalted 0/0/5, Forgebark 0/0/2
+    # observed small/mid/large): crystal weapons leave the default pools
+    # below 30 players ("I wouldn't run it unless there were 30+ people
+    # involved"); Great Holy is brawl-only ("it has to stop moving and
+    # needs everyone to clump in place to heal with e — that's not good"
+    # for clap); a hybrid healer can never be the sole healing foundation
+    # ("too expensive to be the only healer ... the weapon needs to have
+    # high healing numbers on its e"). Contract details are pinned in
+    # tests/test_forge.py F14-F16; this golden pins the expert calls at
+    # the suggestion surface where the blind round saw them.
+    e_clap10 = Engine(content="blackzone_roam", size=10, style="clap")
+    clap_pool = set(e_clap10.suggest_pool())
+    e_brawl20 = Engine(content="blackzone_roam", size=20, style="brawl")
+    brawl_pool = set(e_brawl20.suggest_pool())
+    check("T27 owner rulings: no Exalted/Forgebark below 30, Great Holy "
+          "barred from clap suggestions yet kept for brawl",
+          "2H_HOLYSTAFF_CRYSTAL" not in clap_pool
+          and "MAIN_NATURESTAFF_CRYSTAL" not in clap_pool
+          and GREAT_HOLY not in clap_pool
+          and HALLOWFALL in clap_pool
+          and GREAT_HOLY in brawl_pool
+          and "2H_HOLYSTAFF_CRYSTAL" not in brawl_pool,
+          f"clap10 has GH={GREAT_HOLY in clap_pool} "
+          f"brawl20 has GH={GREAT_HOLY in brawl_pool}")
+    check("T27b full-healer split matches the owner's named cases "
+          "(Forgebark/Exalted hybrids, Great Holy/Redemption full)",
+          E.weapons[GREAT_HOLY]["full_healer"]
+          and E.weapons["2H_HOLYSTAFF_UNDEAD"]["full_healer"]
+          and E.weapons[HALLOWFALL]["full_healer"]
+          and not E.weapons["MAIN_NATURESTAFF_CRYSTAL"]["full_healer"]
+          and not E.weapons["2H_HOLYSTAFF_CRYSTAL"]["full_healer"],
+          f"full={sorted(k for k, w in E.weapons.items() if w.get('full_healer'))}")
+    # T27c — round 2 refinement (owner 2026-08-23): "1 hand holy is full
+    # healer but it's not a good group healer for anything larger than 5
+    # people. I would use it at 3 people and very rarely at 5 but never
+    # above that ... it should all be based on what the weapon does and its
+    # effect — I don't want to set custom rules for individual weapons."
+    # STRUCTURAL: the E heal's own area facts split group from single
+    # (Desperate Prayer heals one ally; Divine Jump / Celestial Sphere heal
+    # areas — cited sub-effect fact-corrections in heal_overrides.yaml).
+    # Single-scale dedicated heal Es grade gang situational / group unfit
+    # — the same E-first ladder as single-scale damage. Druidic's single-
+    # target ultimate moves it out of the foundation set by structure alone.
+    holy1 = "MAIN_HOLYSTAFF"
+    sf_holy = E.weapons[holy1]["style_fit"]["fit"]
+    check("T27c heal scale is structural: 1H Holy single (trio fine, group "
+          "unfit), Hallowfall/Redemption group via cited fact-override, "
+          "Druidic out of the foundation set",
+          E.weapons[holy1]["heal_scale"] == "single"
+          and not E.weapons[holy1]["full_healer"]
+          and all(sf_holy[s]["trio"] == "fits"
+                  and sf_holy[s]["gang"] == "situational"
+                  and sf_holy[s]["group"] == "unfit"
+                  for s in ("brawl", "clap", "kite"))
+          and E.weapons[HALLOWFALL]["heal_scale"] == "group"
+          and E.weapons["2H_HOLYSTAFF_UNDEAD"]["heal_scale"] == "group"
+          and E.weapons["MAIN_NATURESTAFF_KEEPER"]["heal_scale"] == "single"
+          and not E.weapons["MAIN_NATURESTAFF_KEEPER"]["full_healer"],
+          f"1H_Holy scale={E.weapons[holy1]['heal_scale']} "
+          f"group_verdict={sf_holy['brawl']['group']} "
+          f"druidic_scale={E.weapons['MAIN_NATURESTAFF_KEEPER']['heal_scale']}")
+
+    # T28 — round 3 gradings (owner 2026-08-23): "faction war comp is bad
+    # because it has dagger and boltcaster, both of which can only damage 1
+    # person at a time with e and that's not good for anything higher than
+    # 3v3, heavy crossbow at least can do damage through people with e."
+    # Every weapon the owner killed derived SITUATIONAL for its context;
+    # every weapon passed derived FITS — the generation-fit gate makes the
+    # forge honor the derivation (F17 pins the mechanics; this pins the
+    # expert case at the suggestion surface).
+    e_fw = Engine(content="faction_war", size=15)
+    fw_pool = set(e_fw.suggest_pool())
+    fw_names = {e_fw.weapons[k]["display_name"] for k in fw_pool}
+    check("T28 owner ruling: single-target-E dps (Dagger, Boltcasters) "
+          "leave 15-man suggestions; Heavy Crossbow's pierce stays",
+          "Dagger" not in fw_names and "Boltcasters" not in fw_names
+          and "Heavy Crossbow" in fw_names,
+          f"dagger_in={'Dagger' in fw_names} bolt_in={'Boltcasters' in fw_names} "
+          f"hxbow_in={'Heavy Crossbow' in fw_names}")
+    # T28b — round 4 (owner 2026-08-23): "there is no way 1hand holy
+    # healer should be in a 15 man party when I said no way above 5 and
+    # there is no chance above 9." Single-ally-heal-E healers leave
+    # GENERATION at group sizes even under balanced; gang stays open (the
+    # Druidic ruling) and trio is untouched.
+    e7g = Engine(content="castle_outpost", size=7)
+    check("T28b owner ruling: 1H Holy never generated at 10+ (balanced "
+          "included); still open at gang sizes",
+          "Holy Staff" not in fw_names
+          and "Druidic Staff" not in fw_names
+          and "MAIN_HOLYSTAFF" in set(e7g.suggest_pool()),
+          f"holy_in_15={'Holy Staff' in fw_names} "
+          f"holy_at_7={'MAIN_HOLYSTAFF' in set(e7g.suggest_pool())}")
+
+    # T29 — round 4 (owner 2026-08-24): "flex bomber like hellfire, it's
+    # usually a brawl-clap weapon and not a clap option. realmbreaker gives
+    # multiple things like health cut, range e, easy way to engage followup
+    # — that's why it can work in clap." Cited override drops Hellfire's
+    # clap verdict to situational; the generation-fit gate keeps it out of
+    # DEFAULT clap comps while brawl-clap (its home) and manual picks keep
+    # it; Realmbreaker stays a derived clap fit.
+    e_c15 = Engine(content="blackzone_roam", size=15, style="clap")
+    e_bc15 = Engine(content="blackzone_roam", size=15, style="brawl_clap")
+    hell = "2H_KNUCKLES_HELL"
+    check("T29 owner ruling: Hellfire out of clap generation, home in "
+          "brawl-clap; Realmbreaker keeps its clap slot",
+          hell not in set(e_c15.suggest_pool())
+          and hell in set(e_bc15.suggest_pool())
+          and "2H_AXE_AVALON" in set(e_c15.suggest_pool()),
+          f"hell_clap={hell in set(e_c15.suggest_pool())} "
+          f"hell_bc={hell in set(e_bc15.suggest_pool())}")
 
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)

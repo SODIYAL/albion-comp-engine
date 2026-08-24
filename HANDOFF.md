@@ -44,6 +44,11 @@ The production engine currently includes:
 - one-spell-per-slot loadout resolution
 - combo-aware forge constraints
 - constrained composition generation / forge
+- forge-quality generation gates (2026-08-23/24 expert rounds): crystal
+  economics gate, primary-healer foundation minima, style-aware role bands,
+  the generation-fit gate (only "fits" damage picks generate), duplicates
+  that must earn their place, derived job budgets (clump core, curse
+  pressure), and the first verified non-stacking scoring record (CURSEDOT)
 - swap review
 - weapon dossiers, spell facts, PvP interaction evidence, reference builds, and suggested gear
 
@@ -124,6 +129,20 @@ This distinction is important and should not be collapsed back to `max(planned, 
 
 Forge constraints are combo-aware: a weapon does not satisfy a minimum just because its flat sheet theoretically can; the selected/resolved spell combination must satisfy it.
 
+### Forge-quality rounds (2026-08-23/24) — six expert gradings, every miss now a mechanism
+
+Five blind grading rounds with the owner converted every complaint into a structural rule (full log + verbatim rulings: `tests/VALIDATION.md`; pins F14–F18b, T27–T29):
+
+- **Economics** (`viability.cost_gate` + derived `cost_tier`): crystal weapons leave suggestions/generation below 30 players — regear cost makes them rich-group picks. Manual picks score, flagged `off_budget`.
+- **Healing foundation** (`primary_healer` + derived `full_healer`/`heal_scale`): band minima require healers whose E heals BIG and heals a GROUP — both derived from the E bundle + the spell's own area facts (`heal_overrides.yaml` carries two cited sub-effect fact-corrections: Divine Jump, Celestial Sphere). Single-ally-heal-E healers (1H Holy, Druidic…) grade gang situational / group unfit and never generate at 10+; gang slots stay open by ruling.
+- **Style-aware role bands** (`styles.yaml constraint_overrides`): owner-ruled healer/frontline counts per style (20-man healers: brawl 3-4 / clap 2-3 / kite 2 / clap_kite 3-4; kite@7 = 1; brawl frontline capped at blap's 5).
+- **Generation-fit gate** (engine, both ports): a DEFAULT generated comp fields damage picks whose derived verdict is **fits** — declared style's verdict, or fits-for-at-least-one-style under balanced. "Situational" is caller territory: manual picks score, never flagged. Trio gates nothing; a fits-nothing weapon (Battleaxe) now leaves balanced too.
+- **Duplicates earn their place** (`duplication`): generation default is 1 copy at every size; a second copy only through a per-weapon allowance citing a real comp.
+- **Derived job budgets** (`composition.yaml derived_groups` → build-time membership, no hand lists): `clump_core` (flat clump_create ≥ 4 — HoJ/Camlann/Witchwork) max 2; `curse_pressure` (the cursed line via its shared Q pool) max 2.
+- **First verified non-stacking scoring record**: CURSEDOT (`pipeline/interactions.yaml`) — the target-side Vile-Curse pool caps at 4 across wielders, so the curse Q's sustained_dps counts once per party.
+
+Audit artifacts: `out/economics_report.json` (cost tiers, heal scales, full healers), derived group membership printed at dataset build. OPEN ruling for next session (recorded in VALIDATION.md): in brawl, a curse slot must be earned by the E's utility (Damnation, Lifecurse) — derive utility-E vs damage-E within the cursed line.
+
 The dashboard tracks:
 
 - `party`
@@ -191,6 +210,8 @@ Display/workflow only; no scoring changes.
 The killboard strip, prevalence footnotes, and cohort affinity key their fight-size bucket off `usageBucket()` in `dashboard/_app.js` — `2 × PLAN()`, the size the comp is **for** — not the judged roster size. A 20-man plan with 3 weapons picked must quote large-fight evidence, or the affinity strip stays invisible for the whole planning phase. Engine judgment still runs at roster size; nothing in scoring reads `sizeBucket()` anymore (H18 pins the shipped meta prior to the hand-set flat map).
 
 ## Recommended next work
+
+**First: the open round-6 ruling (2026-08-24, VALIDATION.md)** — in brawl, curse slots must be earned by E utility (Damnation/Lifecurse, not damage-E cursed staffs); derive the utility-E vs damage-E split from the sheets' E bundles, no hand list. Also watch items from the rounds: Evensong (possibly undervalued, owner not against), Hellfire under clap_kite (kept via its kite half), castle-25's saturated tail quality.
 
 The preferred product sequence is:
 

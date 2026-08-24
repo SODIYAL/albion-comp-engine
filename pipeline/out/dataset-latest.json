@@ -19,7 +19,7 @@
    "inputs": {
     "gear_lines.json": "2117d3c8234f6e26799e4b1c43b5b587b7325e0173f1d59315b1c240083916d4",
     "gear_spells.json": "ff7e2302a8a87fbbcd1fa5edf83dbbd6c8071f3b4e87f1ade178513116682dd1",
-    "interactions.json": "8d02f9d844210e71ef9b42e1f60c878d618a87429f1675e6c690cc88de507a35",
+    "interactions.json": "7b16f1923bbbb3c76e5db5f1a8844699d4f25b91a580177a1012a09d60ec526e",
     "item_stats.json": "544d293670e4f3adc6daa83e940af115186902b216add0f8fddb9880c882712a",
     "spell_index.json": "65e34fa64cac5410c91e68ab3c2295baf8b62ed5d07c857761cc50c9b7618b17",
     "weapon_lines.json": "7487230bd2a923f0881daab390d7e924ce7137236b9f73a496e3609b641ac5e1"
@@ -70,6 +70,9 @@
     },
     "max_size": 7,
     "min_size": 5,
+    "primary_heal": {
+     "min": 1
+    },
     "support": {
      "max": 2
     }
@@ -85,6 +88,9 @@
     },
     "max_size": 9,
     "min_size": 8,
+    "primary_heal": {
+     "min": 1
+    },
     "support": {
      "max": 3
     }
@@ -100,6 +106,9 @@
     },
     "max_size": 14,
     "min_size": 10,
+    "primary_heal": {
+     "min": 1
+    },
     "ranged_aoe_core": {
      "min": 2
     },
@@ -118,6 +127,9 @@
     },
     "max_size": 19,
     "min_size": 15,
+    "primary_heal": {
+     "min": 2
+    },
     "ranged_aoe_core": {
      "min": 3
     },
@@ -136,6 +148,9 @@
     },
     "max_size": 29,
     "min_size": 20,
+    "primary_heal": {
+     "min": 2
+    },
     "ranged_aoe_core": {
      "min": 4
     },
@@ -154,6 +169,9 @@
     },
     "max_size": 44,
     "min_size": 30,
+    "primary_heal": {
+     "min": 3
+    },
     "ranged_aoe_core": {
      "min": 6
     },
@@ -172,6 +190,9 @@
     },
     "max_size": 60,
     "min_size": 45,
+    "primary_heal": {
+     "min": 5
+    },
     "ranged_aoe_core": {
      "min": 9
     },
@@ -180,9 +201,23 @@
     }
    }
   ],
+  "derived_groups": {
+   "clump_core": {
+    "capability": "clump_create",
+    "max": 2,
+    "min_points": 4
+   },
+   "curse_pressure": {
+    "evidence_spells": [
+     "CURSEDOT",
+     "CURSED_SPLAT"
+    ],
+    "max": 2
+   }
+  },
   "duplication": {
    "free_copies_default": 1,
-   "max_copies_default_large": 2,
+   "max_copies_default_large": 1,
    "max_copies_default_small": 1,
    "per_weapon": {
     "2H_ARCANESTAFF": {
@@ -219,6 +254,33 @@
     "weapons": [
      "2H_HOLYSTAFF_CRYSTAL"
     ]
+   },
+   {
+    "derived": true,
+    "max": 2,
+    "name": "clump_core",
+    "rule": "clump_create >= 4 (flat sheet points)",
+    "weapons": [
+     "2H_HAMMER_AVALON",
+     "2H_MACE_MORGANA",
+     "MAIN_ARCANESTAFF_UNDEAD"
+    ]
+   },
+   {
+    "derived": true,
+    "max": 2,
+    "name": "curse_pressure",
+    "rule": "kit cites CURSEDOT/CURSED_SPLAT",
+    "weapons": [
+     "2H_CURSEDSTAFF",
+     "2H_CURSEDSTAFF_MORGANA",
+     "2H_DEMONICSTAFF",
+     "2H_SKULLORB_HELL",
+     "MAIN_CURSEDSTAFF",
+     "MAIN_CURSEDSTAFF_AVALON",
+     "MAIN_CURSEDSTAFF_CRYSTAL",
+     "MAIN_CURSEDSTAFF_UNDEAD"
+    ]
    }
   ],
   "predicates": {
@@ -226,6 +288,12 @@
     "burst_aoe": 4,
     "ranged_presence": 2
    }
+  },
+  "primary_healer": {
+   "e_heal_dedicated_min": 4,
+   "e_heal_min": 6,
+   "group_min_radius": 3.0,
+   "group_min_targets": 5
   },
   "roles": {
    "by_hint": {
@@ -314,6 +382,16 @@
    },
    "core_bonus": 1.0,
    "core_min_size": 10,
+   "cost_gate": {
+    "crystal": {
+     "evidence": {
+      "as_of": "2026-08-23",
+      "reason": "crystal regear economics \u2014 a default comp cannot assume it",
+      "source": "owner ruling 2026-08-23 (forge-quality session, in-chat)"
+     },
+     "min_size": 30
+    }
+   },
    "exclusions": [
     {
      "allow": {},
@@ -2248,6 +2326,59 @@
    "verified_patch": "2026-07-21",
    "weapons": [
     "MAIN_ARCANESTAFF_UNDEAD"
+   ]
+  },
+  "CURSEDOT": {
+   "as_of": "2026-08-24",
+   "badges": [
+    "CURSE CHARGES",
+    "DUPLICATE:SHARED_STACK"
+   ],
+   "cc_types": [],
+   "components": [
+    {
+     "duplicate": "full",
+     "id": "direct_hit",
+     "kind": "damage",
+     "notes": "the flat on-cast hit is per-cast, independent per caster",
+     "reflect": "unknown"
+    },
+    {
+     "cleanse": "unknown",
+     "duplicate": "shared_stack",
+     "id": "vile_curse_charges",
+     "kind": "dot",
+     "notes": "target-side charge pool, capped at 4 across all sources",
+     "reflect": "unknown"
+    }
+   ],
+   "confidence": "verified",
+   "duplicate": "shared_stack",
+   "effect_name": "Vile Curse (target-side charge pool, stacks up to 4)",
+   "interrupt": {
+    "can_interrupt": null,
+    "uninterruptible": null
+   },
+   "name": "Vile Curse",
+   "nonstacking_caps": [
+    "sustained_dps"
+   ],
+   "notes": null,
+   "reflect": "unknown",
+   "scoring_note": "Multiple cursed wielders feed one 4-charge pool per target, so the Q's DoT supply does not multiply with wielders \u2014 party supply counts CURSEDOT's sustained_dps once across all members equipping it (largest single contribution), which is what let a forged 25-man stack six curse weapons at full value before this record landed.",
+   "source": "Spell description @ ao-bin-dumps 5cf2e8e9: \"Applies one Vile Curse Charge ... Each Vile Curse Charge deals \u2026 magical damage over \u2026 (stacks up to 4 times)\" \u2014 the charges live ON THE TARGET and cap at 4 regardless of who applied them (DEATHCURSE2's verified record reads the same pool: \"damage based on the amount of Vile Curse Charges on the target\"). Owner ruling 2026-08-24, forge-quality round 4: \"the q spells \u2026 stack but don't do extra damage from more people.\"",
+   "structural_interrupt_statements": [],
+   "structural_reflect_statements": [],
+   "verified_patch": "2026-07-21",
+   "weapons": [
+    "2H_CURSEDSTAFF",
+    "2H_CURSEDSTAFF_MORGANA",
+    "2H_DEMONICSTAFF",
+    "2H_SKULLORB_HELL",
+    "MAIN_CURSEDSTAFF",
+    "MAIN_CURSEDSTAFF_AVALON",
+    "MAIN_CURSEDSTAFF_CRYSTAL",
+    "MAIN_CURSEDSTAFF_UNDEAD"
    ]
   },
   "DEATHCURSE2": {
@@ -32052,6 +32183,20 @@
      "name": "Secure"
     }
    ],
+   "constraint_overrides": [
+    {
+     "frontline": {
+      "max": 5,
+      "min": 4
+     },
+     "healer": {
+      "max": 4,
+      "min": 3
+     },
+     "max_size": 29,
+     "min_size": 20
+    }
+   ],
    "mechanics": {
     "expected_aoe_targets": 3,
     "focus_attackers": 3
@@ -32174,6 +32319,40 @@
      "name": "Reset"
     }
    ],
+   "constraint_overrides": [
+    {
+     "frontline": {
+      "max": 2,
+      "min": 2
+     },
+     "max_size": 14,
+     "min_size": 10
+    },
+    {
+     "frontline": {
+      "max": 4,
+      "min": 3
+     },
+     "healer": {
+      "max": 3,
+      "min": 2
+     },
+     "max_size": 19,
+     "min_size": 15
+    },
+    {
+     "frontline": {
+      "max": 5,
+      "min": 3
+     },
+     "healer": {
+      "max": 3,
+      "min": 2
+     },
+     "max_size": 29,
+     "min_size": 20
+    }
+   ],
    "mechanics": {
     "expected_aoe_targets": 7,
     "focus_attackers": 3
@@ -32239,6 +32418,16 @@
      "name": "Reset"
     }
    ],
+   "constraint_overrides": [
+    {
+     "healer": {
+      "max": 4,
+      "min": 3
+     },
+     "max_size": 29,
+     "min_size": 20
+    }
+   ],
    "mechanics": {
     "expected_aoe_targets": 6,
     "focus_attackers": 3
@@ -32298,6 +32487,52 @@
       "cleanse"
      ],
      "name": "Reset"
+    }
+   ],
+   "constraint_overrides": [
+    {
+     "healer": {
+      "max": 1,
+      "min": 1
+     },
+     "max_size": 9,
+     "min_size": 5
+    },
+    {
+     "frontline": {
+      "max": 3,
+      "min": 1
+     },
+     "healer": {
+      "max": 2,
+      "min": 1
+     },
+     "max_size": 14,
+     "min_size": 10
+    },
+    {
+     "frontline": {
+      "max": 4,
+      "min": 2
+     },
+     "healer": {
+      "max": 2,
+      "min": 2
+     },
+     "max_size": 19,
+     "min_size": 15
+    },
+    {
+     "frontline": {
+      "max": 5,
+      "min": 2
+     },
+     "healer": {
+      "max": 2,
+      "min": 2
+     },
+     "max_size": 29,
+     "min_size": 20
     }
    ],
    "mechanics": {
@@ -33331,6 +33566,7 @@
     "stun": 4,
     "sustained_dps": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Great Arcane Staff",
    "evidence": {
@@ -33359,6 +33595,8 @@
      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -33500,6 +33738,7 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Astral Staff",
    "evidence": {
@@ -33528,6 +33767,8 @@
      "STARFALL_DOT"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -33660,6 +33901,7 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Occult Staff",
    "evidence": {
@@ -33691,6 +33933,8 @@
      "ARCANECORRIDOR"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -33847,6 +34091,7 @@
     "slow": 2,
     "sustained_dps": 2
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Evensong",
    "evidence": {
@@ -33884,6 +34129,8 @@
      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -34039,6 +34286,7 @@
     "self_sustain": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Greataxe",
    "evidence": {
@@ -34073,6 +34321,8 @@
      "RENDINGSTRIKE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -34245,6 +34495,7 @@
     "self_sustain": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Realmbreaker",
    "evidence": {
@@ -34291,6 +34542,8 @@
      "RENDINGSTRIKE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -34437,6 +34690,7 @@
     "slow": 2,
     "sustained_dps": 6
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Bow",
    "evidence": {
@@ -34468,6 +34722,8 @@
      "SPEEDARCHER_KITE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -34626,6 +34882,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Mistpiercer",
    "evidence": {
@@ -34663,6 +34920,8 @@
      "WEAPON_STATS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -34820,6 +35079,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Skystrider Bow",
    "evidence": {
@@ -34854,6 +35114,8 @@
      "WEAPON_STATS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -35007,6 +35269,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Wailing Bow",
    "evidence": {
@@ -35041,6 +35304,8 @@
      "WEAPON_STATS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -35218,6 +35483,7 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Bow of Badon",
    "evidence": {
@@ -35258,6 +35524,8 @@
      "LIGHTNING_ARROW"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -35386,6 +35654,7 @@
     "stun": 2,
     "sustained_dps": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Claws",
    "evidence": {
@@ -35433,6 +35702,8 @@
      "PASSIVE_AASPEEDCHANCE_DAGGER"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -35601,6 +35872,7 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Claymore",
    "evidence": {
@@ -35638,6 +35910,8 @@
      "HEROICSTRIKE2"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -35796,6 +36070,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Kingmaker",
    "evidence": {
@@ -35839,6 +36114,8 @@
      "HEROICSTRIKE2"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -36006,6 +36283,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Carving Sword",
    "evidence": {
@@ -36043,6 +36321,8 @@
      "HEROICSTRIKE2"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -36216,6 +36496,7 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Black Monk Staff",
    "evidence": {
@@ -36256,6 +36537,8 @@
      "COMBATSTAFF_SLASH"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -36407,6 +36690,7 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Crossbow",
    "evidence": {
@@ -36441,6 +36725,8 @@
      "CALTROPS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -36600,6 +36886,7 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Heavy Crossbow",
    "evidence": {
@@ -36637,6 +36924,8 @@
      "CALTROPS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -36782,6 +37071,7 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Siegebow",
    "evidence": {
@@ -36813,6 +37103,8 @@
      "CALTROPS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -36964,6 +37256,7 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Energy Shaper",
    "evidence": {
@@ -36995,6 +37288,8 @@
      "CALTROPS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -37148,6 +37443,7 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Great Cursed Staff",
    "evidence": {
@@ -37179,6 +37475,8 @@
      "AREAOFDECAY"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -37324,6 +37622,7 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Damnation Staff",
    "evidence": {
@@ -37352,6 +37651,8 @@
      "CURSED_SPLAT"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -37470,6 +37771,7 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Dagger Pair",
    "evidence": {
@@ -37510,6 +37812,8 @@
      "PASSIVE_AASPEEDCHANCE_DAGGER"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -37658,6 +37962,7 @@
     "stun": 2,
     "sustained_dps": 2
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Twin Slayers",
    "evidence": {
@@ -37698,6 +38003,8 @@
      "PASSIVE_AASPEEDCHANCE_DAGGER"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -37852,6 +38159,7 @@
     "stun": 2,
     "sustained_dps": 2
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Bridled Fury",
    "evidence": {
@@ -37892,6 +38200,8 @@
      "PASSIVE_AASPEEDCHANCE_DAGGER"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -38056,6 +38366,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Demonic Staff",
    "evidence": {
@@ -38087,6 +38398,8 @@
      "CURSEDOT"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -38193,6 +38506,7 @@
     "heal_sustain": 4,
     "peel": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Divine Staff",
    "evidence": {
@@ -38209,6 +38523,8 @@
      "PULSINGHEAL"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "single",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -38251,28 +38567,28 @@
     "delivery": "ranged",
     "fit": {
      "brawl": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "brawl_clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      }
     },
@@ -38340,6 +38656,7 @@
     "stun": 2,
     "sustained_dps": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Double Bladed Staff",
    "evidence": {
@@ -38386,6 +38703,8 @@
      "QSTAFF_COMBO"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -38563,6 +38882,7 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Phantom Twinblade",
    "evidence": {
@@ -38603,6 +38923,8 @@
      "QS_CRYSTAL_COMBO"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -38764,6 +39086,7 @@
     "self_sustain": 4,
     "sustained_dps": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Bear Paws",
    "evidence": {
@@ -38801,6 +39124,8 @@
      "RENDINGSTRIKE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -38953,6 +39278,7 @@
     "slow": 2,
     "sustained_dps": 2
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Arclight Blasters",
    "evidence": {
@@ -38987,6 +39313,8 @@
      "WEAPON_STATS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -39126,6 +39454,7 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Boltcasters",
    "evidence": {
@@ -39160,6 +39489,8 @@
      "CALTROPS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -39355,6 +39686,7 @@
     "tankiness": 4,
     "zone_control": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Forge Hammers",
    "evidence": {
@@ -39404,6 +39736,8 @@
      "GIANTSTEPS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -39555,6 +39889,7 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Oathkeepers",
    "evidence": {
@@ -39586,6 +39921,8 @@
      "SACRED_GROUND"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "group",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -39716,6 +40053,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Galatine Pair",
    "evidence": {
@@ -39750,6 +40088,8 @@
      "HEROICSTRIKE2"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -39878,6 +40218,7 @@
     "stun": 2,
     "sustained_dps": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Deathgivers",
    "evidence": {
@@ -39918,6 +40259,8 @@
      "WEAPON_STATS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -40072,6 +40415,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Dual Swords",
    "evidence": {
@@ -40106,6 +40450,8 @@
      "SPINATTACK"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -40218,6 +40564,7 @@
     "silence": 2,
     "sustained_dps": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Malevolent Locus",
    "evidence": {
@@ -40240,6 +40587,8 @@
      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -40357,6 +40706,7 @@
     "silence": 2,
     "sustained_dps": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Enigmatic Staff",
    "evidence": {
@@ -40379,6 +40729,8 @@
      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -40518,6 +40870,7 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Great Fire Staff",
    "evidence": {
@@ -40543,6 +40896,8 @@
      "FIREWALL"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -40668,6 +41023,7 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Brimstone Staff",
    "evidence": {
@@ -40693,6 +41049,8 @@
      "FIREWALL"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -40826,6 +41184,7 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Dawnsong",
    "evidence": {
@@ -40854,6 +41213,8 @@
      "FIREPHOENIX"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -40976,6 +41337,7 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Morning Star",
    "evidence": {
@@ -41007,6 +41369,8 @@
      "SACRED_GROUND"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -41179,6 +41543,7 @@
     "sustained_dps": 2,
     "zone_control": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Great Frost Staff",
    "evidence": {
@@ -41219,6 +41584,8 @@
      "FROSTBOMB_CASTSLOW"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -41399,6 +41766,7 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Arctic Staff",
    "evidence": {
@@ -41436,6 +41804,8 @@
      "FROSTBOMB_CASTSLOW"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -41628,6 +41998,7 @@
     "sustained_dps": 2,
     "zone_control": 6
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Glacial Staff",
    "evidence": {
@@ -41668,6 +42039,8 @@
      "ICESTORM2"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -41782,6 +42155,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Glaive",
    "evidence": {
@@ -41807,6 +42181,8 @@
      "SPIRITSPEAR"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -41940,6 +42316,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Rift Glaive",
    "evidence": {
@@ -41971,6 +42348,8 @@
      "SPIRITSPEAR"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -42124,6 +42503,7 @@
     "self_sustain": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Halberd",
    "evidence": {
@@ -42158,6 +42538,8 @@
      "RENDINGSTRIKE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -42313,6 +42695,7 @@
     "self_sustain": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Carrioncaller",
    "evidence": {
@@ -42350,6 +42733,8 @@
      "RENDINGSTRIKE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -42532,6 +42917,7 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Great Hammer",
    "evidence": {
@@ -42578,6 +42964,8 @@
      "TAR_RING"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -42763,6 +43151,7 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Hand of Justice",
    "evidence": {
@@ -42812,6 +43201,8 @@
      "TAR_RING"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -42990,6 +43381,7 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Truebolt Hammer",
    "evidence": {
@@ -43036,6 +43428,8 @@
      "TAR_RING"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -43227,6 +43621,7 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Tombhammer",
    "evidence": {
@@ -43276,6 +43671,8 @@
      "TAR_RING"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -43419,6 +43816,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Spirithunter",
    "evidence": {
@@ -43453,6 +43851,8 @@
      "SPIRITSPEAR"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -43587,6 +43987,7 @@
     "knockback_displace": 2,
     "peel": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Great Holy Staff",
    "evidence": {
@@ -43606,6 +44007,8 @@
      "HOLYEXPLOSION"
     ]
    },
+   "full_healer": true,
+   "heal_scale": "group",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -43656,18 +44059,18 @@
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "unfit",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "unfit",
+      "group": "unfit",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "unfit",
+      "group": "unfit",
       "trio": "fits"
      }
     },
@@ -43707,6 +44110,7 @@
     "heal_sustain": 4,
     "peel": 2
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Exalted Staff",
    "evidence": {
@@ -43726,6 +44130,8 @@
      "PULSINGHEAL"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "group",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -43823,6 +44229,7 @@
     "heal_sustain": 4,
     "peel": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Fallen Staff",
    "evidence": {
@@ -43842,6 +44249,8 @@
      "HOLY_ULTIMATE"
     ]
    },
+   "full_healer": true,
+   "heal_scale": "group",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -43935,6 +44344,7 @@
     "heal_sustain": 6,
     "peel": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Redemption Staff",
    "evidence": {
@@ -43951,6 +44361,8 @@
      "PULSINGHEAL"
     ]
    },
+   "full_healer": true,
+   "heal_scale": "group",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -44116,6 +44528,7 @@
     "sustained_dps": 2,
     "zone_control": 6
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Permafrost Prism",
    "evidence": {
@@ -44156,6 +44569,8 @@
      "FROSTBOMB_CASTSLOW"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -44344,6 +44759,7 @@
     "sustained_dps": 2,
     "zone_control": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Icicle Staff",
    "evidence": {
@@ -44387,6 +44803,8 @@
      "GLACIALFIELD"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -44525,6 +44943,7 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Infernal Staff",
    "evidence": {
@@ -44547,6 +44966,8 @@
      "HUMAN_TORCH"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -44673,6 +45094,7 @@
     "sustained_dps": 4,
     "zone_control": 6
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Blazing Staff",
    "evidence": {
@@ -44698,6 +45120,8 @@
      "FLAMETORNADO"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -44837,6 +45261,7 @@
     "sustained_dps": 2,
     "tankiness": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Iron-clad Staff",
    "evidence": {
@@ -44868,6 +45293,8 @@
      "QSWHIRLWIND"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -44990,6 +45417,7 @@
     "stun": 2,
     "sustained_dps": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Black Hands",
    "evidence": {
@@ -45030,6 +45458,8 @@
      "PASSIVE_AASPEEDCHANCE_DAGGER"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -45223,6 +45653,7 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Fists of Avalon",
    "evidence": {
@@ -45263,6 +45694,8 @@
      "PASSIVE_KNUCKLE_BRAWLER_SPEED"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -45420,6 +45853,7 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Forcepulse Bracers",
    "evidence": {
@@ -45457,6 +45891,8 @@
      "PASSIVE_KNUCKLE_BRAWLER_SPEED"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -45644,6 +46080,7 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Hellfire Hands",
    "evidence": {
@@ -45687,6 +46124,8 @@
      "PASSIVE_KNUCKLE_BRAWLER"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -45767,8 +46206,8 @@
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "clap_kite": {
@@ -45871,6 +46310,7 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Ursine Maulers",
    "evidence": {
@@ -45908,6 +46348,8 @@
      "PUMMELING_STRIKES"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -46055,6 +46497,7 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Ravenstrike Cestus",
    "evidence": {
@@ -46092,6 +46535,8 @@
      "PASSIVE_KNUCKLE_BRAWLER_SPEED"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -46268,6 +46713,7 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Brawler Gloves",
    "evidence": {
@@ -46305,6 +46751,8 @@
      "PASSIVE_KNUCKLE_BRAWLER"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -46464,6 +46912,7 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Battle Bracers",
    "evidence": {
@@ -46501,6 +46950,8 @@
      "PASSIVE_KNUCKLE_BRAWLER_SPEED"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -46682,6 +47133,7 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Spiked Gauntlets",
    "evidence": {
@@ -46725,6 +47177,8 @@
      "PASSIVE_KNUCKLE_BRAWLER"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -46871,6 +47325,7 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Longbow",
    "evidence": {
@@ -46896,6 +47351,8 @@
      "ARROWRAIN"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -47028,6 +47485,7 @@
     "slow": 2,
     "sustained_dps": 6
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Whispering Bow",
    "evidence": {
@@ -47056,6 +47514,8 @@
      "UNDEADARROWS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -47200,6 +47660,7 @@
     "tankiness": 6,
     "zone_control": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Heavy Mace",
    "evidence": {
@@ -47228,6 +47689,8 @@
      "SACRED_GROUND"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -47376,6 +47839,7 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Camlann Mace",
    "evidence": {
@@ -47410,6 +47874,8 @@
      "SACRED_GROUND"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -47549,6 +48015,7 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Great Nature Staff",
    "evidence": {
@@ -47583,6 +48050,8 @@
      "THORNSAREA"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "single",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -47647,28 +48116,28 @@
     "delivery": "ranged",
     "fit": {
      "brawl": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "brawl_clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      }
     },
@@ -47739,6 +48208,7 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Blight Staff",
    "evidence": {
@@ -47773,6 +48243,8 @@
      "THORNSAREA"
     ]
    },
+   "full_healer": true,
+   "heal_scale": "group",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -47932,6 +48404,7 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Rampant Staff",
    "evidence": {
@@ -47963,6 +48436,8 @@
      "THORNSAREA"
     ]
    },
+   "full_healer": true,
+   "heal_scale": "group",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -48143,6 +48618,7 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Polehammer",
    "evidence": {
@@ -48189,6 +48665,8 @@
      "TAR_RING"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -48356,6 +48834,7 @@
     "stun": 2,
     "tankiness": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Quarterstaff",
    "evidence": {
@@ -48399,6 +48878,8 @@
      "WEAPON_STATS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -48569,6 +49050,7 @@
     "sustained_dps": 2,
     "zone_control": 4
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Grailseeker",
    "evidence": {
@@ -48609,6 +49091,8 @@
      "SOULSHAKER"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -48771,6 +49255,7 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Grovekeeper",
    "evidence": {
@@ -48817,6 +49302,8 @@
      "TAR_RING"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -48966,6 +49453,7 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Weeping Repeater",
    "evidence": {
@@ -48997,6 +49485,8 @@
      "GROUNDMINE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -49130,6 +49620,7 @@
     "tankiness": 4,
     "zone_control": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Staff of Balance",
    "evidence": {
@@ -49167,6 +49658,8 @@
      "QS_SLOWROPE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -49300,6 +49793,7 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Crystal Reaper",
    "evidence": {
@@ -49337,6 +49831,8 @@
      "CRYSTAL_SCYTHE_DASH_ZONE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -49496,6 +49992,7 @@
     "self_sustain": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Infernal Scythe",
    "evidence": {
@@ -49533,6 +50030,8 @@
      "RENDINGSTRIKE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -49706,6 +50205,7 @@
     "slow": 2,
     "zone_control": 2
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Lightcaller",
    "evidence": {
@@ -49749,6 +50249,8 @@
      "SHAPE_W_DAMAGE_AOE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -49923,6 +50425,7 @@
     "slow": 2,
     "zone_control": 2
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Stillgaze Staff",
    "evidence": {
@@ -49963,6 +50466,8 @@
      "SHAPE_W_DAMAGE_AOE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -50135,6 +50640,7 @@
     "slow": 2,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Hellspawn Staff",
    "evidence": {
@@ -50172,6 +50678,8 @@
      "SHAPE_W_DAMAGE_AOE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -50335,6 +50843,7 @@
     "tankiness": 6,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Earthrune Staff",
    "evidence": {
@@ -50372,6 +50881,8 @@
      "SHAPE_W_DAMAGE_AOE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -50527,6 +51038,7 @@
     "slow": 2,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Bloodmoon Staff",
    "evidence": {
@@ -50564,6 +51076,8 @@
      "SHAPE_W_DAMAGE_AOE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -50721,6 +51235,7 @@
     "self_sustain": 2,
     "slow": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Prowling Staff",
    "evidence": {
@@ -50764,6 +51279,8 @@
      "SHAPE_W_DAMAGE_AOE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -50929,6 +51446,7 @@
     "slow": 2,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Rootbound Staff",
    "evidence": {
@@ -50966,6 +51484,8 @@
      "SHAPE_W_DAMAGE_AOE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "single",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -51135,6 +51655,7 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Primal Staff",
    "evidence": {
@@ -51175,6 +51696,8 @@
      "SHAPE_W_DAMAGE_AOE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -51324,6 +51847,7 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Cursed Skull",
    "evidence": {
@@ -51352,6 +51876,8 @@
      "SKULLCURSE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -51460,6 +51986,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Pike",
    "evidence": {
@@ -51485,6 +52012,8 @@
      "SPIRITSPEAR"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -51625,6 +52154,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Trinity Spear",
    "evidence": {
@@ -51659,6 +52189,8 @@
      "SPIRITSPEAR"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -51828,6 +52360,7 @@
     "stun": 2,
     "sustained_dps": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Soulscythe",
    "evidence": {
@@ -51868,6 +52401,8 @@
      "QSTAFF_COMBO"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -52030,6 +52565,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Warbow",
    "evidence": {
@@ -52061,6 +52597,8 @@
      "WEAPON_STATS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -52214,6 +52752,7 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Wild Staff",
    "evidence": {
@@ -52245,6 +52784,8 @@
      "THORNSAREA"
     ]
    },
+   "full_healer": true,
+   "heal_scale": "group",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -52393,6 +52934,7 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Light Crossbow",
    "evidence": {
@@ -52424,6 +52966,8 @@
      "CALTROPS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -52552,6 +53096,7 @@
     "silence": 4,
     "sustained_dps": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Arcane Staff",
    "evidence": {
@@ -52580,6 +53125,8 @@
      "PASSIVE_ATTACKBUFF_ARCANESTAFF"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -52739,6 +53286,7 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Witchwork Staff",
    "evidence": {
@@ -52779,6 +53327,8 @@
      "BLACKHOLE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -52941,6 +53491,7 @@
     "self_sustain": 4,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Battleaxe",
    "evidence": {
@@ -52975,6 +53526,8 @@
      "RENDINGSTRIKE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -53119,6 +53672,7 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Cursed Staff",
    "evidence": {
@@ -53144,6 +53698,8 @@
      "CURSED_SPLAT"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -53287,6 +53843,7 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Shadowcaller",
    "evidence": {
@@ -53312,6 +53869,8 @@
      "CURSED_SPLAT"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -53467,6 +54026,7 @@
     "sustained_dps": 2,
     "zone_control": 2
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Rotcaller Staff",
    "evidence": {
@@ -53498,6 +54058,8 @@
      "CURSED_SPLAT"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -53651,6 +54213,7 @@
     "sustained_dps": 4,
     "zone_control": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Lifecurse Staff",
    "evidence": {
@@ -53682,6 +54245,8 @@
      "ENFEEBLEBLADES"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -53803,6 +54368,7 @@
     "stun": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Dagger",
    "evidence": {
@@ -53840,6 +54406,8 @@
      "BLOODTHIRSTYBLADE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -53977,6 +54545,7 @@
     "stun": 2,
     "sustained_dps": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Demonfang",
    "evidence": {
@@ -54020,6 +54589,8 @@
      "PASSIVE_AASPEEDCHANCE_DAGGER"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -54166,6 +54737,7 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Fire Staff",
    "evidence": {
@@ -54194,6 +54766,8 @@
      "FIREWALL"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -54335,6 +54909,7 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Flamewalker Staff",
    "evidence": {
@@ -54363,6 +54938,8 @@
      "FIREWALL"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -54489,6 +55066,7 @@
     "sustained_dps": 4,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Wildfire Staff",
    "evidence": {
@@ -54514,6 +55092,8 @@
      "FIREWALL"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -54686,6 +55266,7 @@
     "sustained_dps": 2,
     "zone_control": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Frost Staff",
    "evidence": {
@@ -54726,6 +55307,8 @@
      "FROSTBOMB_CASTSLOW"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -54887,6 +55470,7 @@
     "stun": 2,
     "zone_control": 2
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Chillhowl",
    "evidence": {
@@ -54918,6 +55502,8 @@
      "FROSTBOMB_CASTSLOW"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -55103,6 +55689,7 @@
     "stun": 2,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Hoarfrost Staff",
    "evidence": {
@@ -55143,6 +55730,8 @@
      "ICEROCK_EXPLODE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -55309,6 +55898,7 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Hammer",
    "evidence": {
@@ -55352,6 +55942,8 @@
      "TAR_RING"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -55469,6 +56061,7 @@
     "peel": 2,
     "self_sustain": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Holy Staff",
    "evidence": {
@@ -55488,6 +56081,8 @@
      "HOLYDESPERATEPRAYER2"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "single",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -55534,28 +56129,28 @@
     "delivery": "ranged",
     "fit": {
      "brawl": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "brawl_clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      }
     },
@@ -55574,6 +56169,7 @@
     "peel": 6,
     "self_sustain": 2
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Hallowfall",
    "evidence": {
@@ -55602,6 +56198,8 @@
      "DIVINE_JUMP"
     ]
    },
+   "full_healer": true,
+   "heal_scale": "group",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -55692,6 +56290,7 @@
     "heal_sustain": 4,
     "peel": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Lifetouch Staff",
    "evidence": {
@@ -55711,6 +56310,8 @@
      "HOLYTOUCH"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "single",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -55751,28 +56352,28 @@
     "delivery": "ranged",
     "fit": {
      "brawl": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "brawl_clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      }
     },
@@ -55817,6 +56418,7 @@
     "stun": 4,
     "tankiness": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Mace",
    "evidence": {
@@ -55842,6 +56444,8 @@
      "WEAPON_STATS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -55984,6 +56588,7 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Dreadstorm Monarch",
    "evidence": {
@@ -56018,6 +56623,8 @@
      "MACE_CRYSTAL_FRAGMENT_STORM"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -56161,6 +56768,7 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Incubus Mace",
    "evidence": {
@@ -56198,6 +56806,8 @@
      "SACRED_GROUND"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -56352,6 +56962,7 @@
     "slow": 2,
     "zone_control": 2
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Nature Staff",
    "evidence": {
@@ -56383,6 +56994,8 @@
      "THORNSAREA"
     ]
    },
+   "full_healer": true,
+   "heal_scale": "group",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -56523,6 +57136,7 @@
     "slow": 2,
     "zone_control": 2
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Ironroot Staff",
    "evidence": {
@@ -56554,6 +57168,8 @@
      "THORNSAREA"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "single",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -56620,28 +57236,28 @@
     "delivery": "ranged",
     "fit": {
      "brawl": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "brawl_clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      }
     },
@@ -56718,6 +57334,7 @@
     "slow": 2,
     "zone_control": 2
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Forgebark Staff",
    "evidence": {
@@ -56749,6 +57366,8 @@
      "THORNSAREA"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "group",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -56880,6 +57499,7 @@
     "slow": 2,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Druidic Staff",
    "evidence": {
@@ -56908,6 +57528,8 @@
      "THORNSAREA"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "single",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -56973,28 +57595,28 @@
     "delivery": "ranged",
     "fit": {
      "brawl": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "brawl_clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      }
     },
@@ -57060,6 +57682,7 @@
     "stun": 2,
     "sustained_dps": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Bloodletter",
    "evidence": {
@@ -57103,6 +57726,8 @@
      "WEAPON_STATS"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -57249,6 +57874,7 @@
     "tankiness": 4,
     "zone_control": 2
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Bedrock Mace",
    "evidence": {
@@ -57280,6 +57906,8 @@
      "PRIMALSLAM"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {
@@ -57429,6 +58057,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Clarent Blade",
    "evidence": {
@@ -57463,6 +58092,8 @@
      "HEROICSTRIKE2"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -57613,6 +58244,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Spear",
    "evidence": {
@@ -57647,6 +58279,8 @@
      "SPIRITSPEAR"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -57806,6 +58440,7 @@
     "stun": 4,
     "sustained_dps": 4
    },
+   "cost_tier": "artifact",
    "curated_as_of": "2026-08-12",
    "display_name": "Heron Spear",
    "evidence": {
@@ -57840,6 +58475,8 @@
      "SPIRITSPEAR"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -57986,6 +58623,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "avalonian",
    "curated_as_of": "2026-08-12",
    "display_name": "Daybreaker",
    "evidence": {
@@ -58017,6 +58655,8 @@
      "SPIRITSPEAR"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -58145,6 +58785,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "base",
    "curated_as_of": "2026-08-12",
    "display_name": "Broadsword",
    "evidence": {
@@ -58185,6 +58826,8 @@
      "HEROICSTRIKE2"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},
@@ -58314,6 +58957,7 @@
     "slow": 2,
     "sustained_dps": 4
    },
+   "cost_tier": "crystal",
    "curated_as_of": "2026-08-12",
    "display_name": "Infinity Blade",
    "evidence": {
@@ -58348,6 +58992,8 @@
      "SWORD_BERSERK_RUN_RE"
     ]
    },
+   "full_healer": false,
+   "heal_scale": "none",
    "in_game_data": true,
    "loadout": {
     "always": {},

@@ -12,6 +12,8 @@
   },
   "metabattle_review_queue": [],
   "overridden": [
+   "2H_HOLYSTAFF",
+   "2H_KNUCKLES_HELL",
    "MAIN_AXE"
   ],
   "rule": "E-first identity: delivery side from autoattack range (>= 9 ranged) or the E damage's own reach (flex); damage scale from the E's burst_aoe claim; healers/frontline/support style-flexible; trio fits everything; style_overrides.yaml wins with citation. DESCRIPTIVE - no scoring path reads this."
@@ -1089,28 +1091,28 @@
    "e_reach": 0.0,
    "fit": {
     "brawl": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "brawl_clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "clap_kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     }
    },
@@ -2248,7 +2250,7 @@
   },
   "2H_HOLYSTAFF": {
    "attackrange": 9,
-   "basis": "derived",
+   "basis": "curated_override",
    "damage_pts": 0,
    "damage_scale": "none",
    "delivery": "ranged",
@@ -2266,20 +2268,25 @@
      "trio": "fits"
     },
     "clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "unfit",
+     "group": "unfit",
      "trio": "fits"
     },
     "clap_kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "unfit",
+     "group": "unfit",
      "trio": "fits"
     },
     "kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "unfit",
+     "group": "unfit",
      "trio": "fits"
     }
+   },
+   "override": {
+    "as_of": "2026-08-23",
+    "reason": "Owner ruling (forge-quality blind round): \"great holy is not a good fit for clap, it has to stop moving and needs everyone to clump in place to heal with e. that's not good\" and \"great holy I feel isn't really that good of a weapon in general but I only see it being useful in like brawl situations.\" The derivation grades healers style-flexible; the E-first rule overrules that here \u2014 Holy Explosion anchors the party in place, the opposite of what clap's engage-bomb-reset and kite's never-take-the-fight delivery need. Brawl (and brawl_clap's grind half) keep it; trio bands gate nothing by the standing Phase C rule.",
+    "source": "Owner ruling 2026-08-23 (forge-quality session, in-chat)."
    },
    "role_flexible": true,
    "utility_carrier": false,
@@ -2728,7 +2735,7 @@
   },
   "2H_KNUCKLES_HELL": {
    "attackrange": 1.5,
-   "basis": "derived",
+   "basis": "curated_override",
    "damage_pts": 10,
    "damage_scale": "group",
    "delivery": "flex",
@@ -2748,8 +2755,8 @@
      "trio": "fits"
     },
     "clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "situational",
      "trio": "fits"
     },
     "clap_kite": {
@@ -2762,6 +2769,11 @@
      "group": "fits",
      "trio": "fits"
     }
+   },
+   "override": {
+    "as_of": "2026-08-24",
+    "reason": "Owner ruling (forge-quality round 4): \"flex bomber like hellfire, it's usually a brawl-clap weapon and not a clap option. realmbreaker gives multiple things like health cut, range e, easy way to engage followup \u2014 that's why it can work in clap.\" The flex all-rounder derivation grades both as clap-fits; the owner splits them: Hellfire's Boulder Toss is a brawler's ranged tool, not a clap bomb core, so clap drops to situational (the generation-fit gate then keeps it out of DEFAULT clap comps while brawl-clap \u2014 its home \u2014 keeps it, and a caller can always pick it manually). Realmbreaker stays as derived.",
+    "source": "Owner ruling 2026-08-24 (forge-quality session, in-chat)."
    },
    "role_flexible": false,
    "utility_carrier": false,
@@ -3140,28 +3152,28 @@
    "e_reach": 0.0,
    "fit": {
     "brawl": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "brawl_clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "clap_kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     }
    },
@@ -4841,28 +4853,28 @@
    "e_reach": 0.0,
    "fit": {
     "brawl": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "brawl_clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "clap_kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     }
    },
@@ -4919,28 +4931,28 @@
    "e_reach": 0.0,
    "fit": {
     "brawl": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "brawl_clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "clap_kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     }
    },
@@ -5118,28 +5130,28 @@
    "e_reach": 0.0,
    "fit": {
     "brawl": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "brawl_clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "clap_kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     }
    },
@@ -5196,28 +5208,28 @@
    "e_reach": 0.0,
    "fit": {
     "brawl": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "brawl_clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "clap_kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     },
     "kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "unfit",
      "trio": "fits"
     }
    },

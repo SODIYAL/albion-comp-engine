@@ -26,6 +26,40 @@ roles:
     # healer would let a forged 11-man treat Exalted as one of its 2-3 heals.
     2H_HOLYSTAFF_CRYSTAL: support
 
+# Primary-healer rule (owner rulings 2026-08-23, forge-quality rounds 1+2):
+# "[a hybrid like Forgebark] is too expensive to be the only healer in the
+# party ... it's not which line but which weapon — the weapon needs to have
+# high healing numbers on its E" and "1 hand holy is full healer but it's
+# not a good group healer for anything larger than 5 people ... things that
+# heal group are better. I don't want to set custom rules for individual
+# weapons to influence author bias."
+#
+# So the flag is STRUCTURAL, E-first, two requirements (derive_economics in
+# build_dataset.py, audit in out/economics_report.json):
+#   1. MAGNITUDE — an E bundle supplying >= e_heal_min summed heal points
+#      (heal_sustain + heal_burst, 1-7 sheet scale). Excludes hybrid Es
+#      (Forgebark 4) and utility heals.
+#   2. SCALE — the heal spell's own area facts say it heals a GROUP
+#      (radius >= group_min_radius or max_targets >= group_min_targets).
+#      Excludes single-ally heal Es (1H Holy's Desperate Prayer, Druidic's
+#      single-target ultimate) — full healers in the owner's vocabulary,
+#      but never the healing FOUNDATION of a 5+ comp. Spells whose area
+#      lives in a sub-effect the dumps don't surface are corrected in
+#      heal_overrides.yaml (cited fact corrections, the ranged_overrides
+#      pattern — Divine Jump, Celestial Sphere). Unknown facts never grant.
+# The constraint bands below then require `primary_heal` minima — a hybrid
+# or single-scale healer still counts toward the healer role band, it just
+# can never be the comp's healing foundation on its own. derive_style_fit
+# additionally grades a dedicated single-scale heal E like single-scale
+# damage: situational at gang, unfit at group (the E-first ladder).
+# Thresholds PROVISIONAL; e_heal_dedicated_min is where the single-scale
+# healer ladder starts (a real heal E, not a utility dab).
+primary_healer:
+  e_heal_min: 6
+  e_heal_dedicated_min: 4
+  group_min_radius: 3.0
+  group_min_targets: 5
+
 # Capability predicates used by constraint rows below. A weapon satisfies a
 # predicate when its flat capability score meets every listed minimum.
 predicates:
@@ -50,15 +84,20 @@ predicates:
 # Healers cluster at 15-20% of slots, frontline at 15-25% (P3 excepted),
 # support at 20-30% (P2/P3 up to ~40% — the generous max reflects that),
 # and every large party fields a multi-weapon ranged AoE bomb core.
+# `primary_heal` minima (2026-08-23 owner ruling, see primary_healer above):
+# how many of the healers must be FULL healers (high-healing E). Counted like
+# a predicate minimum; the values scale ~2/3 of the healer minimum and are
+# PROVISIONAL beyond the ruled sizes (the ruling itself: a hybrid may never
+# be the sole healer).
 constraint_bands:
   - {min_size: 2,  max_size: 4,  healer: {max: 1}, frontline: {max: 2}, support: {max: 1}}
-  - {min_size: 5,  max_size: 7,  healer: {min: 1, max: 2}, frontline: {min: 1, max: 3}, support: {max: 2}}
-  - {min_size: 8,  max_size: 9,  healer: {min: 1, max: 2}, frontline: {min: 1, max: 4}, support: {max: 3}}
-  - {min_size: 10, max_size: 14, healer: {min: 2, max: 3}, frontline: {min: 2, max: 5}, support: {max: 4}, ranged_aoe_core: {min: 2}}
-  - {min_size: 15, max_size: 19, healer: {min: 2, max: 4}, frontline: {min: 3, max: 7}, support: {max: 6}, ranged_aoe_core: {min: 3}}
-  - {min_size: 20, max_size: 29, healer: {min: 3, max: 5}, frontline: {min: 4, max: 9}, support: {max: 8}, ranged_aoe_core: {min: 4}}
-  - {min_size: 30, max_size: 44, healer: {min: 5, max: 8}, frontline: {min: 6, max: 13}, support: {max: 11}, ranged_aoe_core: {min: 6}}
-  - {min_size: 45, max_size: 60, healer: {min: 7, max: 12}, frontline: {min: 9, max: 20}, support: {max: 15}, ranged_aoe_core: {min: 9}}
+  - {min_size: 5,  max_size: 7,  healer: {min: 1, max: 2}, frontline: {min: 1, max: 3}, support: {max: 2}, primary_heal: {min: 1}}
+  - {min_size: 8,  max_size: 9,  healer: {min: 1, max: 2}, frontline: {min: 1, max: 4}, support: {max: 3}, primary_heal: {min: 1}}
+  - {min_size: 10, max_size: 14, healer: {min: 2, max: 3}, frontline: {min: 2, max: 5}, support: {max: 4}, ranged_aoe_core: {min: 2}, primary_heal: {min: 1}}
+  - {min_size: 15, max_size: 19, healer: {min: 2, max: 4}, frontline: {min: 3, max: 7}, support: {max: 6}, ranged_aoe_core: {min: 3}, primary_heal: {min: 2}}
+  - {min_size: 20, max_size: 29, healer: {min: 3, max: 5}, frontline: {min: 4, max: 9}, support: {max: 8}, ranged_aoe_core: {min: 4}, primary_heal: {min: 2}}
+  - {min_size: 30, max_size: 44, healer: {min: 5, max: 8}, frontline: {min: 6, max: 13}, support: {max: 11}, ranged_aoe_core: {min: 6}, primary_heal: {min: 3}}
+  - {min_size: 45, max_size: 60, healer: {min: 7, max: 12}, frontline: {min: 9, max: 20}, support: {max: 15}, ranged_aoe_core: {min: 9}, primary_heal: {min: 5}}
 
 # ---------------------------------------------------------------------------
 # Exact-weapon duplication.
@@ -71,7 +110,12 @@ constraint_bands:
 # per_weapon entries cite the real comps that field legitimate duplicates.
 duplication:
   max_copies_default_small: 1
-  max_copies_default_large: 2
+  # 2 -> 1 (owner ruling 2026-08-24, forge-quality round 4): "I don't see
+  # the value in adding 2 earthrunes along with hand of justice." A
+  # duplicate must EARN its place: the forge generates a second copy only
+  # through a per_weapon allowance below, each citing a real comp. Manual
+  # rosters still stack whatever they like — this caps GENERATION only.
+  max_copies_default_large: 1
   free_copies_default: 1
   # per_weapon allowances below are seeded EXCLUSIVELY from 20-man comps —
   # they apply only at party size >= this (review 2026-08-18): two
@@ -95,6 +139,31 @@ groups:
     # Exalted appears EXACTLY once in every one of the four real parties —
     # a standing utility slot, never stacked (data/published_comps/).
 
+# Derived non-stacking groups (owner ruling 2026-08-24): membership is
+# computed at dataset build from the capability sheets — structural, never a
+# hand-kept weapon list — and appended to `groups` above in the built
+# dataset. clump_core: a comp fields one primary clump tool plus at most one
+# backup ("I don't see the value in adding 2 earthrunes along with hand of
+# justice, a better secondary clump might be witchwork and 1 earthrune could
+# work too if we are lacking on clumps"). Membership = flat clump_create >=
+# min_points (currently Hand of Justice, Camlann, Witchwork — the real
+# clump tools; Earthrune's W pull sits at 2 and is handled by the duplicate
+# default instead).
+derived_groups:
+  clump_core:
+    capability: clump_create
+    min_points: 4
+    max: 2
+  # Owner ruling 2026-08-24 round 5: "there are so many weapons which can
+  # dps, why stack so many curse. usually 2 curse is max in a 25 man party,
+  # that would normally be like damnation and lifecurse and maybe
+  # rotcaller." Membership is the cursed LINE, derived structurally: any
+  # weapon whose kit cites the line's shared Q pool (the same spells the
+  # CURSEDOT non-stacking record prices) — never a hand-kept list.
+  curse_pressure:
+    evidence_spells: [CURSEDOT, CURSED_SPLAT]
+    max: 2
+
 # ---------------------------------------------------------------------------
 # Viability layer (expert-curated, content/size-aware). PERMISSIVE BY DESIGN:
 # a weapon absent from every list below is still fully eligible — absence
@@ -102,6 +171,29 @@ groups:
 # (that sample stays display-only). Only `exclusions` remove weapons from
 # the DEFAULT generation/suggestion pool; `core` adds a small prior bonus.
 viability:
+  # Economics gate (owner ruling 2026-08-23, forge-quality blind round):
+  # "crystal artifact weapons are quite expensive and are not in many small
+  # scale or even 20 man parties because of it. the utility they provide
+  # with their e is undeniable but it's hard to regear this weapon often ...
+  # I wouldn't run it unless there were 30+ people involved I think but
+  # others might use it if they are rich rich." build_dataset.py derives a
+  # `cost_tier` per weapon from its line suffix (crystal / avalonian /
+  # artifact / base); crystal is the only gated tier — Avalonian carries no
+  # penalty (the owner endorses Hand of Justice at 7). Killboard support
+  # (214-battle sample, display evidence for the ruling, never a scoring
+  # input): Exalted 0/0/5 and Forgebark 0/0/2 observed small/mid/large vs
+  # Mace 35 and Permafrost 45 large. Gates GENERATION/suggestions exactly
+  # like an exclusion: manual and locked picks always score, flagged
+  # off_budget in swap review. NOTE the tension this ruling accepts: the
+  # Deadlyhooker 20-man reference comps DO field Exalted — the owner calls
+  # that a rich-group choice, not a default the forge should produce.
+  cost_gate:
+    crystal:
+      min_size: 30
+      evidence:
+        reason: crystal regear economics — a default comp cannot assume it
+        source: "owner ruling 2026-08-23 (forge-quality session, in-chat)"
+        as_of: "2026-08-23"
   exclusions:
     # EVIDENCE-GATED ELIGIBILITY, not a permanent hardcoded ban (chapter-2
     # §F). Context attaches to the EXACT weapon: family-level evidence (a

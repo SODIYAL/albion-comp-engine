@@ -119,6 +119,13 @@ silently redundant — or wrong, if the spell was redesigned. Diff each entry's
 spell against the fresh dumps text and delete entries the rebuild made
 unnecessary.
 
+The same re-check applies to the other cited-override files whose entries
+quote dumps text or spell behavior: `ranged_overrides.yaml` (gap-closer
+denies), `heal_overrides.yaml` (heal-scale sub-effect corrections — Divine
+Jump, Celestial Sphere), `style_overrides.yaml` (owner style rulings), and
+the `CURSEDOT` non-stacking record in `interactions.yaml` (the "stacks up
+to 4 times" wording it cites).
+
 `patch_history.py` needs a clone WITH HISTORY:
 
 ```

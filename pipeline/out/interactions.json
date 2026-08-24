@@ -2,7 +2,7 @@
  "_meta": {
   "adapter": "build_interactions",
   "adapter_version": "1",
-  "entries": 29,
+  "entries": 30,
   "note": "Spell-keyed PvP interaction records. Scoring reads ONLY verified nonstacking_caps; everything else is display/analysis. unknown is a stored answer, never a guess.",
   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
   "structural_unclaimed": [],
@@ -10,8 +10,8 @@
    "INNER_CORRUPTION",
    "NASTY_WOUNDS"
   ],
-  "verified": 28,
-  "with_nonstacking_caps": 0
+  "verified": 29,
+  "with_nonstacking_caps": 1
  },
  "spells": {
   "BLACKHOLE": {
@@ -65,6 +65,59 @@
    "verified_patch": "2026-07-21",
    "weapons": [
     "MAIN_ARCANESTAFF_UNDEAD"
+   ]
+  },
+  "CURSEDOT": {
+   "as_of": "2026-08-24",
+   "badges": [
+    "CURSE CHARGES",
+    "DUPLICATE:SHARED_STACK"
+   ],
+   "cc_types": [],
+   "components": [
+    {
+     "duplicate": "full",
+     "id": "direct_hit",
+     "kind": "damage",
+     "notes": "the flat on-cast hit is per-cast, independent per caster",
+     "reflect": "unknown"
+    },
+    {
+     "cleanse": "unknown",
+     "duplicate": "shared_stack",
+     "id": "vile_curse_charges",
+     "kind": "dot",
+     "notes": "target-side charge pool, capped at 4 across all sources",
+     "reflect": "unknown"
+    }
+   ],
+   "confidence": "verified",
+   "duplicate": "shared_stack",
+   "effect_name": "Vile Curse (target-side charge pool, stacks up to 4)",
+   "interrupt": {
+    "can_interrupt": null,
+    "uninterruptible": null
+   },
+   "name": "Vile Curse",
+   "nonstacking_caps": [
+    "sustained_dps"
+   ],
+   "notes": null,
+   "reflect": "unknown",
+   "scoring_note": "Multiple cursed wielders feed one 4-charge pool per target, so the Q's DoT supply does not multiply with wielders \u2014 party supply counts CURSEDOT's sustained_dps once across all members equipping it (largest single contribution), which is what let a forged 25-man stack six curse weapons at full value before this record landed.",
+   "source": "Spell description @ ao-bin-dumps 5cf2e8e9: \"Applies one Vile Curse Charge ... Each Vile Curse Charge deals \u2026 magical damage over \u2026 (stacks up to 4 times)\" \u2014 the charges live ON THE TARGET and cap at 4 regardless of who applied them (DEATHCURSE2's verified record reads the same pool: \"damage based on the amount of Vile Curse Charges on the target\"). Owner ruling 2026-08-24, forge-quality round 4: \"the q spells \u2026 stack but don't do extra damage from more people.\"",
+   "structural_interrupt_statements": [],
+   "structural_reflect_statements": [],
+   "verified_patch": "2026-07-21",
+   "weapons": [
+    "2H_CURSEDSTAFF",
+    "2H_CURSEDSTAFF_MORGANA",
+    "2H_DEMONICSTAFF",
+    "2H_SKULLORB_HELL",
+    "MAIN_CURSEDSTAFF",
+    "MAIN_CURSEDSTAFF_AVALON",
+    "MAIN_CURSEDSTAFF_CRYSTAL",
+    "MAIN_CURSEDSTAFF_UNDEAD"
    ]
   },
   "DEATHCURSE2": {

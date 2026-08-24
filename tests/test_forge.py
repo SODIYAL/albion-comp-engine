@@ -30,6 +30,16 @@ Pins the structural contracts of the reworked engine:
   F11 forge respects locked members and is deterministic.
   F12 predicate minima are combo-aware: locked non-qualifying kits are kept
       verbatim but never counted toward the ranged-AoE core.
+  F13 style gate: unfit weapons leave suggestions/forge only.
+  F14 cost gate (owner ruling 2026-08-23): crystal weapons leave suggestions
+      and generation below 30 players; manual/locked picks score, flagged
+      off_budget; avalonian is never gated.
+  F15 primary-heal minimum (owner ruling 2026-08-23): a hybrid healer can
+      never be the comp's sole healing foundation — every forge fields the
+      band's full-healer minimum in addition to the healer role band.
+  F16 style role bands (owner ruling 2026-08-23): the declared style
+      overrides the brawl-calibrated bands — at 20, brawl 3-4 healers,
+      clap 2-3, kite exactly 2; kite at 7 runs 1.
 
 Run:  py -3 tests/test_forge.py
 """
@@ -165,23 +175,29 @@ def t_size11_matrix():
             hit = [w for w in party if w in EXCLUDED_TRIO]
             if hit:
                 problems.append(f"excluded weapon {hit}")
+            # Validate against the engine's EFFECTIVE band — the base
+            # composition.yaml row merged with the declared style's
+            # constraint_overrides (2026-08-23: bands are style-aware, so
+            # the old hardcoded 2-3 healers no longer holds for every
+            # style; F16 pins the owner-ruled style values explicitly).
             roles = {}
             for w in party:
                 roles[e.role_of(w)] = roles.get(e.role_of(w), 0) + 1
-            if not (2 <= roles.get("healer", 0) <= 3):
-                problems.append(f"healers {roles.get('healer', 0)}")
-            if not (2 <= roles.get("frontline", 0) <= 5):
-                problems.append(f"frontline {roles.get('frontline', 0)}")
-            if roles.get("support", 0) > 4:
-                problems.append(f"support {roles.get('support', 0)}")
-            # COMBO-AWARE (review 2026-08-19): a member counts toward the
-            # ranged-AoE core only if the spell combination the forge
-            # actually SELECTED supplies the minima — the flat sheet count
-            # marked comps legal while the equipped kits supplied less.
-            core = sum(1 for w, c in zip(party, r["combos"])
-                       if "ranged_aoe_core" in e._pred_contrib(w, c))
-            if core < 2:
-                problems.append(f"ranged core {core} (selected combos)")
+            for key, rule in (e._band or {}).items():
+                if key in ("min_size", "max_size") or not isinstance(rule, dict):
+                    continue
+                if key in e.pred_defs or key == e.PRIMARY_HEAL:
+                    # COMBO-AWARE (review 2026-08-19): a member counts only
+                    # if the spell combination the forge actually SELECTED
+                    # supplies the minima.
+                    have = sum(1 for w, c in zip(party, r["combos"])
+                               if key in e._pred_contrib(w, c))
+                else:
+                    have = roles.get(key, 0)
+                if "min" in rule and have < rule["min"]:
+                    problems.append(f"{key} {have} < min {rule['min']}")
+                if "max" in rule and have > rule["max"]:
+                    problems.append(f"{key} {have} > max {rule['max']}")
             counts = {}
             for w in party:
                 counts[w] = counts.get(w, 0) + 1
@@ -344,8 +360,12 @@ def t_style_gate():
     """F13 (identity Phase C, owner ruling 2026-08-23): a weapon UNFIT for
     the declared style at this size band leaves suggestions and generation
     exactly like a viability exclusion — manual and locked picks still
-    score, swap_review flags off_style, and balanced / trio-size gate
-    nothing (Battleaxe fits <=3 by the same ruling)."""
+    score, swap_review flags off_style, and trio sizes gate nothing.
+    REVISED same day (round 3, generation-fit gate): balanced still
+    declares no style intent, but a dps weapon that fits NOTHING at this
+    band (Battleaxe at 20 — "doesn't fit in most group play styles bigger
+    than 3") now leaves balanced generation too: that is size fitness,
+    not style intent. Trio remains fully open."""
     e = Engine(content="blackzone_roam", size=20, style="clap")
     barred = "MAIN_AXE" not in set(e.suggest_pool())
     not_rec = all(r["weapon"] != "MAIN_AXE"
@@ -359,16 +379,208 @@ def t_style_gate():
     forge_clean = "MAIN_AXE" not in forged["party"]
     locked = e.forge(11, locked=["MAIN_AXE"])
     locked_kept = locked["party"][0] == "MAIN_AXE"
-    bal_open = "MAIN_AXE" in set(
+    bal_gated = "MAIN_AXE" not in set(
         Engine(content="blackzone_roam", size=20).suggest_pool())
     trio_open = "MAIN_AXE" in set(
         Engine(content="roads", size=3, style="clap").suggest_pool())
     check("F13 style gate: unfit weapons leave suggestions/forge only; "
-          "manual+locked score; balanced and trio gate nothing",
+          "manual+locked score; fits-nothing gates balanced too; trio open",
           barred and not_rec and scoreable and flagged and forge_clean
-          and locked_kept and bal_open and trio_open,
+          and locked_kept and bal_gated and trio_open,
           f"score={score:.3f}, off_style={[m['off_style'] for m in review]}, "
-          f"balanced_open={bal_open}, trio_open={trio_open}")
+          f"balanced_gated={bal_gated}, trio_open={trio_open}")
+
+
+def t_cost_gate():
+    """F14 (owner ruling 2026-08-23, forge-quality blind round): crystal
+    weapons are a rich-group choice, not a default — "I wouldn't run it
+    unless there were 30+ people involved". Barred from suggestions and
+    generation below 30 exactly like an exclusion; manual and locked picks
+    still score, flagged off_budget; avalonian is never gated (Hand of
+    Justice at 7 is fine by the same ruling)."""
+    CRYSTAL = ("2H_HOLYSTAFF_CRYSTAL", "MAIN_NATURESTAFF_CRYSTAL")
+    e = Engine(content="blackzone_roam", size=20, style="brawl")
+    barred = all(w not in set(e.suggest_pool()) for w in CRYSTAL)
+    not_rec = all(r["weapon"] not in CRYSTAL
+                  for r in e.recommend([], top_n=300))
+    r = e.forge(20)
+    forge_clean = all(e.weapons[w].get("cost_tier") != "crystal"
+                      for w in r["party"])
+    party = ["2H_HOLYSTAFF_CRYSTAL", "2H_MACE", "MAIN_HOLYSTAFF_AVALON"]
+    score = e.comp_score(party)
+    scoreable = score == score and score != 0.0
+    review = e.swap_review(party)
+    flagged = review[0]["off_budget"] and not review[1]["off_budget"]
+    locked = e.forge(20, locked=["2H_HOLYSTAFF_CRYSTAL"])
+    locked_kept = locked["party"][0] == "2H_HOLYSTAFF_CRYSTAL"
+    e30 = Engine(content="castle", size=30)
+    open30 = all(w in set(e30.suggest_pool()) for w in CRYSTAL)
+    avalon_open = "2H_HAMMER_AVALON" in set(
+        Engine(content="castle_outpost", size=7).suggest_pool())
+    check("F14 cost gate: crystal barred below 30 (suggest+forge), scores "
+          "when manual/locked, flagged off_budget; open at 30; avalonian free",
+          barred and not_rec and forge_clean and scoreable and flagged
+          and locked_kept and open30 and avalon_open,
+          f"score={score:.3f}, off_budget={[m['off_budget'] for m in review]}, "
+          f"open30={open30}, avalon_open={avalon_open}")
+
+
+def t_primary_heal():
+    """F15 (owner ruling 2026-08-23): "[Forgebark] is too expensive to be
+    the only healer ... it's not which line but which weapon — the weapon
+    needs to have high healing numbers on its E." The primary_heal band
+    minimum counts only full healers (dataset full_healer flag); a locked
+    hybrid healer is kept verbatim but never satisfies it alone."""
+    e = Engine(content="castle_outpost", size=7)
+    ironroot = next(k for k, w in e.weapons.items()
+                    if w["display_name"] == "Ironroot Staff")
+    fixture_ok = (not e.weapons[ironroot].get("full_healer")
+                  and e.role_of(ironroot) == "healer"
+                  and e.weapons["2H_HOLYSTAFF"].get("full_healer"))
+    r = e.forge(7)
+    full = sum(1 for w in r["party"] if e.weapons[w].get("full_healer"))
+    r2 = e.forge(7, locked=[ironroot])
+    full2 = sum(1 for w in r2["party"] if e.weapons[w].get("full_healer"))
+    healers2 = sum(1 for w in r2["party"] if e.role_of(w) == "healer")
+    check("F15 primary-heal: every forge fields a full healer; a locked "
+          "hybrid healer never satisfies the minimum alone",
+          fixture_ok and r["feasible"] and full >= 1
+          and r2["feasible"] and r2["party"][0] == ironroot and full2 >= 1
+          and healers2 <= 2,
+          f"full={full}, locked-hybrid forge: full={full2}, "
+          f"healers={healers2}, feasible={r2['feasible']}")
+
+
+def t_style_bands():
+    """F16 (owner ruling 2026-08-23): style-aware role bands — "having 5
+    healers in a party of 20 feels like too much, especially in clap and
+    kite". At 20: brawl 3-4 healers (frontline capped at blap's 5), clap
+    2-3, kite exactly 2; kite at 7 runs a single healer."""
+    ok = True
+    lines = []
+    for style, lo, hi in (("brawl", 3, 4), ("clap", 2, 3), ("kite", 2, 2),
+                          ("clap_kite", 3, 4)):
+        e = Engine(content="blackzone_roam", size=20, style=style)
+        r = e.forge(20)
+        healers = sum(1 for w in r["party"] if e.role_of(w) == "healer")
+        front = sum(1 for w in r["party"] if e.role_of(w) == "frontline")
+        if not r["feasible"]:
+            ok = False
+            lines.append(f"{style}: infeasible")
+        if not (lo <= healers <= hi):
+            ok = False
+            lines.append(f"{style}: healers {healers} not in {lo}-{hi}")
+        if style == "brawl" and front > 5:
+            ok = False
+            lines.append(f"brawl frontline {front} > 5")
+        lines.append(f"{style}: {healers}h/{front}f")
+    ek = Engine(content="roads", size=7, style="kite")
+    rk = ek.forge(7)
+    kite7 = sum(1 for w in rk["party"] if ek.role_of(w) == "healer")
+    if kite7 != 1 or not rk["feasible"]:
+        ok = False
+        lines.append(f"kite@7 healers {kite7}")
+    check("F16 style bands at 20: brawl 3-4h/<=5f, clap 2-3h, kite 2h, "
+          "clap_kite 3-4h (round 5); kite@7 1h", ok, "; ".join(lines))
+
+
+def t_generation_fit():
+    """F17 (owner ruling 2026-08-23, round 3 gradings): a DEFAULT generated
+    comp fields damage picks the derivation says FIT. "faction war comp is
+    bad because it has dagger and boltcaster, both of which can only damage
+    1 person at a time with e and that's not good for anything higher than
+    3v3, heavy crossbow at least can do damage through people with e" —
+    and the 25-brawl's Permafrost/Wailing/single-target tail. Situational
+    damage picks stay manual (score normally, never flagged off_style);
+    healers/frontline/support keep their standing rules; trio gates
+    nothing."""
+    def by_name(e, name):
+        return next(k for k, w in e.weapons.items()
+                    if w["display_name"] == name)
+    e = Engine(content="faction_war", size=15)
+    dagger, bolt = by_name(e, "Dagger"), by_name(e, "Boltcasters")
+    hxbow = by_name(e, "Heavy Crossbow")
+    pool = set(e.suggest_pool())
+    bal_ok = dagger not in pool and bolt not in pool and hxbow in pool
+    # situational is manual territory: scores, and is NOT flagged off_style
+    party = [dagger, "2H_MACE", "MAIN_HOLYSTAFF_AVALON"]
+    score = e.comp_score(party)
+    review = e.swap_review(party)
+    manual_ok = score != 0.0 and not review[0]["off_style"]
+    # declared brawl: ranged bombs are situational -> out of generation;
+    # the same weapons FIT clap and stay in a clap pool
+    eb = Engine(content="castle", size=25, style="brawl")
+    perma, wail = "2H_ICECRYSTAL_UNDEAD", by_name(eb, "Wailing Bow")
+    brawl_pool = set(eb.suggest_pool())
+    ec = Engine(content="blackzone_roam", size=15, style="clap")
+    clap_pool = set(ec.suggest_pool())
+    style_ok = (perma not in brawl_pool and wail not in brawl_pool
+                and perma in clap_pool and wail in clap_pool)
+    r = eb.forge(25)
+    named_bad = {dagger, bolt, perma, wail, by_name(eb, "Whispering Bow"),
+                 by_name(eb, "Light Crossbow"), by_name(eb, "Glaive")}
+    forge_ok = not (named_bad & set(r["party"]))
+    # trio open; healers untouched (Druidic keeps its gang slot — the
+    # "leave it, keep everything consistent" ruling)
+    trio_ok = dagger in set(Engine(content="roads", size=3).suggest_pool())
+    e7 = Engine(content="castle_outpost", size=7)
+    druidic_ok = by_name(e7, "Druidic Staff") in set(e7.suggest_pool())
+    check("F17 generation-fit gate: situational dps leave generation "
+          "(balanced needs fits-somewhere), manual scores unflagged, "
+          "style-fits kept, trio + healers untouched",
+          bal_ok and manual_ok and style_ok and forge_ok and trio_ok
+          and druidic_ok,
+          f"bal_ok={bal_ok} manual_ok={manual_ok} style_ok={style_ok} "
+          f"forge_ok={forge_ok} trio_ok={trio_ok} druidic_ok={druidic_ok}")
+
+
+def t_dup_and_clump():
+    """F18 (owner ruling 2026-08-24, round 4): "I don't see the value in
+    adding 2 earthrunes along with hand of justice." A duplicate must EARN
+    its place — the generation default is 1 copy at every size; a second
+    copy comes only from a per-weapon allowance citing a real comp. And
+    the derived clump_core group (clump_create >= 4 on the flat sheet:
+    HoJ, Camlann, Witchwork) caps generated clump tools at 2 — one
+    primary plus at most one backup."""
+    e = Engine(content="faction_war", size=15)
+    dup_ok = (e._dup_gen_max("2H_SHAPESHIFTER_KEEPER") == 1
+              and e._dup_gen_max("2H_ICECRYSTAL_UNDEAD") == 3)
+    r = e.forge(15)
+    allowed = set(e.dup_per_weapon)
+    counts = {}
+    for w in r["party"]:
+        counts[w] = counts.get(w, 0) + 1
+    dupes = {w: c for w, c in counts.items() if c > 1 and w not in allowed}
+    grp = next((g for g in e.groups if g.get("name") == "clump_core"), None)
+    grp_ok = (grp is not None and grp.get("max") == 2
+              and set(grp.get("weapons", [])) == {
+                  "2H_HAMMER_AVALON", "2H_MACE_MORGANA",
+                  "MAIN_ARCANESTAFF_UNDEAD"})
+    e20 = Engine(content="blackzone_roam", size=20, style="brawl")
+    r2 = e20.forge(20, locked=["2H_HAMMER_AVALON", "2H_MACE_MORGANA"])
+    gen_clump = [w for w in r2["party"][2:]
+                 if w in set(grp["weapons"])] if grp else ["?"]
+    check("F18 duplicates earn their place (default 1, allowances cited); "
+          "clump_core capped at 2 (locked pair blocks a generated third)",
+          dup_ok and not dupes and grp_ok and r2["party"][:2] ==
+          ["2H_HAMMER_AVALON", "2H_MACE_MORGANA"] and not gen_clump,
+          f"dupes={dupes}, group={grp and grp['weapons']}, "
+          f"generated_clump={gen_clump}")
+    # F18b (round 5): "usually 2 curse is max in a 25 man party" — the
+    # curse_pressure group is the whole cursed line, derived from the
+    # shared Q pool the CURSEDOT record prices, capped at 2 generated.
+    cg = next((g for g in e.groups if g.get("name") == "curse_pressure"),
+              None)
+    e25 = Engine(content="castle", size=25, style="brawl")
+    r25 = e25.forge(25)
+    curse_ct = sum(1 for w in r25["party"]
+                   if cg and w in set(cg["weapons"]))
+    check("F18b curse budget: cursed line derived (8 members), max 2 "
+          "generated at castle 25",
+          cg is not None and cg.get("max") == 2
+          and len(cg.get("weapons", [])) == 8 and curse_ct <= 2,
+          f"members={len(cg['weapons']) if cg else 0}, "
+          f"forged_curse={curse_ct}")
 
 
 if __name__ == "__main__":
@@ -385,6 +597,11 @@ if __name__ == "__main__":
     t_locked_forge()
     t_pred_combo_aware()
     t_style_gate()
+    t_cost_gate()
+    t_primary_heal()
+    t_style_bands()
+    t_generation_fit()
+    t_dup_and_clump()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")

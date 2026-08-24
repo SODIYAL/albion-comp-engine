@@ -92,6 +92,17 @@
       }
       this.predMembers[pn] = members;
     }
+    /* Flag predicate `primary_heal` (owner ruling 2026-08-23, mirrors
+       engine.py): band minima counted from the static per-weapon
+       full_healer flag (high healing on the E; the E is combo-independent,
+       so every combo of a full healer qualifies). Routed through the same
+       pred machinery so the forge needs no special case. */
+    this.PRIMARY_HEAL = "primary_heal";
+    var phMembers = {};
+    for (k in this.weapons) {
+      if (this.weapons[k].full_healer) phMembers[k] = true;
+    }
+    this.predMembers[this.PRIMARY_HEAL] = phMembers;
     this._predCache = {};
     this._predPossibleCache = {};
     var dup = comp.duplication || {};
@@ -233,9 +244,25 @@
       }
     }
     this._excluded = excl;
+    /* Economics gate (owner ruling 2026-08-23, mirrors engine.py): a cost
+       tier may be barred from SUGGESTIONS/generation below a party size
+       (crystal regear economics). Manual/locked picks always score;
+       swap_review flags them off_budget. */
+    this._costGated = {};
+    var cg = via.cost_gate || {};
+    for (var tier in cg) {
+      var cgMin = (cg[tier] || {}).min_size;
+      if (cgMin && this.size < cgMin) {
+        for (i = 0; i < this.pool.length; i++) {
+          if (this.weapons[this.pool[i]].cost_tier === tier)
+            this._costGated[this.pool[i]] = true;
+        }
+      }
+    }
     this._suggest = [];
     for (i = 0; i < this.pool.length; i++) {
-      if (!excl[this.pool[i]]) this._suggest.push(this.pool[i]);
+      if (!excl[this.pool[i]] && !this._costGated[this.pool[i]])
+        this._suggest.push(this.pool[i]);
     }
     /* Style-fit suggestion gate (identity Phase C — mirrors engine.py:
        style selection IS build intent; unfit weapons leave suggestions,
@@ -262,6 +289,58 @@
         this._suggest = kept;
       }
     }
+    /* Generation-fit gate (owner ruling 2026-08-23 round 3, mirrors
+       engine.py): a DEFAULT generated comp fields damage picks the
+       derivation says FIT — "situational" stays a manual pick (scores
+       normally, never flagged). DPS role only; balanced requires fits for
+       at least one style at the band; trio gates nothing. */
+    this._genSituational = {};
+    var IDS = ["brawl", "clap", "kite", "brawl_clap", "clap_kite"];
+    var gBand = this._fitBand();
+    if (gBand !== "trio") {
+      var anySit = false;
+      for (i = 0; i < this.pool.length; i++) {
+        var gw = this.pool[i];
+        var gRole = this.roleOf(gw);
+        var gsf = this.weapons[gw].style_fit;
+        if (!gsf) continue;
+        var gOk;
+        if (gRole === "dps") {
+          if (IDS.indexOf(this.style) >= 0) {
+            gOk = gsf.fit[this.style] && gsf.fit[this.style][gBand] === "fits";
+          } else {
+            gOk = false;
+            for (var si2 = 0; si2 < IDS.length; si2++) {
+              if (gsf.fit[IDS[si2]] && gsf.fit[IDS[si2]][gBand] === "fits") {
+                gOk = true;
+                break;
+              }
+            }
+          }
+        } else if (gRole === "healer" && gBand === "group") {
+          /* owner round 4: a healer unfit at group for EVERY style (the
+             single-ally-heal-E class) never generates, balanced included;
+             gang slots stay open (mirrors engine.py). */
+          gOk = false;
+          for (var si3 = 0; si3 < IDS.length; si3++) {
+            if (!gsf.fit[IDS[si3]] || gsf.fit[IDS[si3]][gBand] !== "unfit") {
+              gOk = true;
+              break;
+            }
+          }
+        } else {
+          continue;
+        }
+        if (!gOk) { this._genSituational[gw] = true; anySit = true; }
+      }
+      if (anySit) {
+        var kept2 = [];
+        for (i = 0; i < this._suggest.length; i++) {
+          if (!this._genSituational[this._suggest[i]]) kept2.push(this._suggest[i]);
+        }
+        this._suggest = kept2;
+      }
+    }
     this._viability = {};
     if (this.size >= ((via.core_min_size === undefined) ? 10 : via.core_min_size)) {
       var bonus = (via.core_bonus === undefined) ? 1.0 : via.core_bonus;
@@ -277,6 +356,26 @@
           this.size <= ((row.max_size === undefined) ? 1e9 : row.max_size)) {
         this._band = row;
         break;
+      }
+    }
+    /* Style role-band overrides (owner ruling 2026-08-23, styles.yaml
+       constraint_overrides — mirrors engine.py): a listed key REPLACES the
+       base band's entry; unlisted keys keep the base band. First matching
+       row wins. */
+    if (this._band !== null) {
+      var sOv = (styles[this.style] || {}).constraint_overrides || [];
+      for (i = 0; i < sOv.length; i++) {
+        var oRow = sOv[i];
+        if ((oRow.min_size || 0) <= this.size &&
+            this.size <= ((oRow.max_size === undefined) ? 1e9 : oRow.max_size)) {
+          var merged = {};
+          for (var bk in this._band) merged[bk] = this._band[bk];
+          for (var ok2 in oRow) {
+            if (ok2 !== "min_size" && ok2 !== "max_size") merged[ok2] = oRow[ok2];
+          }
+          this._band = merged;
+          break;
+        }
       }
     }
     this._extrasCache = {};
@@ -373,6 +472,13 @@
     /* Viability bar for GENERATED comps at this content+size — scoring is
        never blocked (mirrors engine.py is_excluded). */
     return !!this._excluded[weapon];
+  };
+
+  CompEngine.prototype.isCostGated = function (weapon) {
+    /* Cost-tier bar for GENERATED comps at this size (crystal regear
+       economics, owner ruling 2026-08-23) — suggestions only, scoring is
+       never blocked (mirrors engine.py is_cost_gated). */
+    return !!this._costGated[weapon];
   };
 
   CompEngine.prototype.suggestPool = function () {
@@ -1153,6 +1259,9 @@
       }
       if (okp) out[pn] = true;
     }
+    /* flag predicate: a full healer qualifies with EVERY combo (the E,
+       which carries the heal, is fixed per weapon — mirrors engine.py) */
+    if (this.weapons[weapon].full_healer) out[this.PRIMARY_HEAL] = true;
     this._predCache[key] = out;
     return out;
   };
@@ -1275,7 +1384,8 @@
         /* rank = strictly-better alternatives + 1 (ties never demote) */
         score: curScore, rank: better.length + 1,
         off_comp: this.isExcluded(cur),
-      off_style: this.isStyleUnfit(cur),
+        off_style: this.isStyleUnfit(cur),
+        off_budget: this.isCostGated(cur),
         options: better.slice(0, topN).map(function (t) {
           return { weapon: t[1],
                    display_name: self.weapons[t[1]].display_name,
@@ -1731,7 +1841,7 @@
       if (key === "min_size" || key === "max_size") continue;
       var rule = band[key];
       if (typeof rule !== "object" || rule === null) continue;
-      if (key in this.predDefs) {
+      if (key in this.predDefs || key === this.PRIMARY_HEAL) {
         if (rule.min !== undefined) predMin[key] = rule.min;
         continue;
       }

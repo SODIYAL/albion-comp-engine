@@ -88,6 +88,7 @@ The project has moved well beyond the original prototype described in early READ
 - The public planner now uses the **decision-first** Comp Status → Biggest Need → Best Next Pick hierarchy.
 - Observed-cohort affinity and the caller tools (player weapon pools, swap impact) shipped as display layers in August 2026.
 - The identity system (per-weapon style fit, comp identity, style-gated suggestions, kill-pressure lights, fight chain) shipped as descriptive layers in August 2026, built and validated through expert blind rounds — including a fifth playstyle (clap-kite) and a bomb-squad archetype the rounds surfaced.
+- The forge-quality expert rounds (late August 2026) turned six blind comp gradings into structural generation rules: a weapon-economics gate (crystal regear cost), a primary-healer foundation rule (the E must heal big **and** heal a group — both derived from the spell's own facts), style-aware role bands, a generation-fit gate (default comps field damage picks that *fit*, not merely "situational" ones), duplicates that must cite a real comp to repeat, derived job budgets (clump tools, curse pressure), and the first verified non-stacking effect priced into scoring (the cursed line's shared Vile-Curse pool).
 - The live-party companion is live-verified end to end, with live sync keeping the loaded comp current.
 - Capability constraints are combo-aware: selected spell kits matter.
 - Composition targets are evaluated at the roster size actually present; next-pick advice evaluates one player ahead.

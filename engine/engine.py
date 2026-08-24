@@ -37,6 +37,9 @@ RESILIENCE_CAPS = ("burst_st", "execute")
 
 
 class Engine:
+    # Flag predicate name (2026-08-23): satisfied by the dataset's static
+    # full_healer flag, not capability thresholds — see __init__.
+    PRIMARY_HEAL = "primary_heal"
     def __init__(self, dataset_path=DATASET, content="castle_outpost", size=7,
                  style="balanced"):
         with open(dataset_path, encoding="utf-8") as f:
@@ -113,6 +116,14 @@ class Engine:
             self.pred_members[name] = set(
                 k for k, d in self.weapons.items()
                 if all(d["capabilities"].get(c, 0) >= v for c, v in mins.items()))
+        # Flag predicate `primary_heal` (owner ruling 2026-08-23): band
+        # minima counted from the static per-weapon full_healer flag
+        # (build_dataset derive_economics — high healing on the E; the E is
+        # combo-independent, so unlike capability predicates every combo of
+        # a full healer qualifies). Routed through the same pred machinery
+        # so the forge's feasibility/eval/audit paths need no special case.
+        self.pred_members[self.PRIMARY_HEAL] = set(
+            k for k, d in self.weapons.items() if d.get("full_healer"))
         # raw-caps predicate caches — content-independent (raw loadout numbers)
         self._pred_cache = {}
         self._pred_possible_cache = {}
@@ -260,7 +271,21 @@ class Engine:
                 if wk not in allowed:
                     excl.add(wk)
         self._excluded = excl
-        self._suggest = [w for w in self.pool if w not in excl]
+        # Economics gate (owner ruling 2026-08-23, composition.yaml
+        # viability.cost_gate): a cost tier may be barred from SUGGESTIONS
+        # and generation below a party size — crystal regear economics make
+        # it a rich-group choice, not a default the forge should produce.
+        # Exactly like an exclusion: manual/locked picks always score;
+        # swap_review flags them off_budget.
+        self._cost_gated = set()
+        for tier, rule in (via.get("cost_gate", {}) or {}).items():
+            mn = (rule or {}).get("min_size")
+            if mn and self.size < mn:
+                for wk in self.pool:
+                    if self.weapons[wk].get("cost_tier") == tier:
+                        self._cost_gated.add(wk)
+        self._suggest = [w for w in self.pool
+                         if w not in excl and w not in self._cost_gated]
         # Style-fit suggestion gate (identity Phase C — owner ruling
         # 2026-08-23: style selection IS build intent; "clap comp should
         # never get suggestions like battle-axe"). A weapon whose derived
@@ -280,6 +305,50 @@ class Engine:
             if self._style_unfit:
                 self._suggest = [w for w in self._suggest
                                  if w not in self._style_unfit]
+        # Generation-fit gate (owner ruling 2026-08-23, forge-quality round
+        # 3): the graded misses — Dagger/Boltcasters at 15 ("can only
+        # damage 1 person at a time with e and that's not good for
+        # anything higher than 3v3"), ranged bombs and single-target
+        # fillers in a 25 brawl — all derive SITUATIONAL for their
+        # context, and situational never gated. The rule the gradings
+        # imply: a DEFAULT generated comp fields damage picks the
+        # derivation says FIT — "situational" means the caller knows a
+        # situation the engine cannot, so it stays a manual pick (scores
+        # normally, never flagged). DPS role only: healers, frontline and
+        # support keep their standing rules (a single-scale healer may
+        # still take a non-foundation gang slot — owner ruling, same
+        # session). Balanced requires fits for at least ONE style at the
+        # band; trio sizes gate nothing (standing Phase C rule).
+        self._gen_situational = set()
+        band = self._fit_band()
+        if band != "trio":
+            for wk in self.pool:
+                role = self.role_of(wk)
+                sf = self.weapons[wk].get("style_fit")
+                if not sf:
+                    continue
+                if role == "dps":
+                    if self.style in self.IDENTITY_STYLES:
+                        ok = (sf["fit"].get(self.style) or {}) \
+                            .get(band) == "fits"
+                    else:
+                        ok = any((sf["fit"].get(s) or {}).get(band) == "fits"
+                                 for s in self.IDENTITY_STYLES)
+                elif role == "healer" and band == "group":
+                    # owner round 4 (2026-08-23): "there is no way 1hand
+                    # holy should be in a 15 man party ... no chance above
+                    # 9" — a healer unfit at group for EVERY style (the
+                    # single-ally-heal-E class) never generates, balanced
+                    # included. Gang slots stay open (the Druidic ruling).
+                    ok = not all((sf["fit"].get(s) or {}).get(band) == "unfit"
+                                 for s in self.IDENTITY_STYLES)
+                else:
+                    continue
+                if not ok:
+                    self._gen_situational.add(wk)
+            if self._gen_situational:
+                self._suggest = [w for w in self._suggest
+                                 if w not in self._gen_situational]
         self._viability = {}
         if self.size >= via.get("core_min_size", 10):
             bonus = via.get("core_bonus", 1.0)
@@ -291,6 +360,21 @@ class Engine:
             if row.get("min_size", 0) <= self.size <= row.get("max_size", 10 ** 9):
                 self._band = row
                 break
+        # Style role-band overrides (owner ruling 2026-08-23, styles.yaml
+        # constraint_overrides): the base bands were calibrated on brawl
+        # evidence and were style-blind — kite/clap forged brawl-shaped
+        # rosters. A listed key REPLACES the base band's entry; unlisted
+        # keys keep the base band. First matching row wins, like the base.
+        if self._band is not None:
+            for row in (styles.get(self.style, {}) or {}) \
+                    .get("constraint_overrides", []) or []:
+                if row.get("min_size", 0) <= self.size <= row.get("max_size", 10 ** 9):
+                    merged = dict(self._band)
+                    for key, rule in row.items():
+                        if key not in ("min_size", "max_size"):
+                            merged[key] = rule
+                    self._band = merged
+                    break
         self._extras_cache = {}
         self._default_cache = {}
         self._gear_cache = {}
@@ -390,6 +474,13 @@ class Engine:
         suggestions only — scoring is never blocked; the dashboard flags
         such members off-style."""
         return weapon in self._style_unfit
+
+    def is_cost_gated(self, weapon):
+        """True when the weapon's cost tier bars it from GENERATED comps at
+        this size (crystal regear economics, owner ruling 2026-08-23).
+        Suggestions only — a manual/locked pick always scores; the
+        dashboard flags such members off-budget."""
+        return weapon in self._cost_gated
 
     def suggest_pool(self):
         """The default candidate pool for every suggestion/generation path:
@@ -776,9 +867,14 @@ class Engine:
         if hit is not None:
             return hit
         caps = self._raw_member_caps(weapon, combo)
-        out = frozenset(
+        out = set(
             pn for pn, mins in self.pred_defs.items()
             if all(caps.get(c, 0) >= v for c, v in mins.items()))
+        # flag predicate: a full healer qualifies with EVERY combo (the E,
+        # which carries the heal, is fixed per weapon)
+        if self.weapons[weapon].get("full_healer"):
+            out.add(self.PRIMARY_HEAL)
+        out = frozenset(out)
         self._pred_cache[key] = out
         return out
 
@@ -1261,6 +1357,7 @@ class Engine:
                 "score": cur_score, "rank": len(better) + 1,
                 "off_comp": self.is_excluded(cur),
                 "off_style": self.is_style_unfit(cur),
+                "off_budget": self.is_cost_gated(cur),
                 "options": [{"weapon": w,
                              "display_name": self.weapons[w]["display_name"],
                              "score": v, "gain": v - cur_score}
@@ -1752,7 +1849,7 @@ class Engine:
         for key, rule in band.items():
             if key in ("min_size", "max_size") or not isinstance(rule, dict):
                 continue
-            if key in self.pred_defs:
+            if key in self.pred_defs or key == self.PRIMARY_HEAL:
                 if "min" in rule:
                     pred_min[key] = rule["min"]
                 continue

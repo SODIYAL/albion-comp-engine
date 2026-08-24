@@ -150,6 +150,41 @@
       cleanse: unknown
       duplicate: full
 
+- spell: CURSEDOT
+  effect_name: "Vile Curse (target-side charge pool, stacks up to 4)"
+  duplicate: shared_stack
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: "Applies one Vile Curse
+    Charge ... Each Vile Curse Charge deals … magical damage over …
+    (stacks up to 4 times)" — the charges live ON THE TARGET and cap at 4
+    regardless of who applied them (DEATHCURSE2's verified record reads
+    the same pool: "damage based on the amount of Vile Curse Charges on
+    the target"). Owner ruling 2026-08-24, forge-quality round 4: "the q
+    spells … stack but don't do extra damage from more people."
+  as_of: 2026-08-24
+  verified_patch: "2026-07-21"
+  nonstacking_caps: [sustained_dps]
+  scoring_note: >
+    Multiple cursed wielders feed one 4-charge pool per target, so the
+    Q's DoT supply does not multiply with wielders — party supply counts
+    CURSEDOT's sustained_dps once across all members equipping it
+    (largest single contribution), which is what let a forged 25-man
+    stack six curse weapons at full value before this record landed.
+  badges: [CURSE CHARGES]
+  components:
+    - id: direct_hit
+      kind: damage
+      reflect: unknown
+      duplicate: full
+      notes: the flat on-cast hit is per-cast, independent per caster
+    - id: vile_curse_charges
+      kind: dot
+      reflect: unknown
+      cleanse: unknown
+      duplicate: shared_stack
+      notes: target-side charge pool, capped at 4 across all sources
+
 - spell: DEATHCURSE2
   effect_name: "Death Curse (consumes shared Vile Curse Charges)"
   duplicate: shared_stack

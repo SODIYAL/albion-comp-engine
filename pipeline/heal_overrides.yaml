@@ -1,0 +1,47 @@
+# Curated overrides for the heal-scale derivation (owner ruling 2026-08-23,
+# forge-quality round 2: "it's not which line but which weapon ... it should
+# all be based on what the weapon does and its effect. I don't want to set
+# custom rules for individual weapons to influence author bias").
+#
+# The structural rule in build_dataset.py reads the full-heal E spell's own
+# area facts: radius >= group_min_radius or max_targets >= group_min_targets
+# -> the E heals a GROUP; facts without area -> it heals a SINGLE ally; no
+# facts -> unknown, never inferred. Structure goes blind when the heal's
+# area lives in a landing/impact SUB-EFFECT the dumps do not surface at the
+# spell's top level — corrected here PER SPELL, each citing how the effect
+# actually lands in game. An override is a fact correction, never taste —
+# exactly the ranged_overrides.yaml pattern.
+#
+# scale: group | single
+# Validated at dataset build: the weapon must exist and the spell must be
+# the weapon's E heal spell, or the release fails.
+
+- weapon: MAIN_HOLYSTAFF_AVALON
+  spell: DIVINE_JUMP
+  scale: group
+  reason: >
+    Hallowfall's E leaps to a target position and delivers its burst heal
+    to allies AROUND the landing point — the heal is an area effect on
+    impact. The dumps surface the jump's cast facts (ground, cast_range 11)
+    but not the landing heal's radius, so the structural rule misreads it
+    as area-less.
+  source: >
+    In-game spell behavior; owner 2026-08-23 — "hallowfall is better,
+    redemption is better, fallen staff etc, things that heal group are
+    better"; Timothy's blap fields Hallowfall x2 and Deadlyhooker P1 x3 as
+    the core group healing.
+  as_of: 2026-08-23
+
+- weapon: 2H_HOLYSTAFF_UNDEAD
+  spell: CELESTIAL_SPHERE
+  scale: group
+  reason: >
+    Redemption's E sends a sphere that delivers its heal to allies in an
+    area around the target on arrival — an impact-area heal. The dumps
+    surface the cast facts (friendall, cast_range 10) but not the impact
+    effect's radius, so the structural rule misreads it as single-ally.
+  source: >
+    In-game spell behavior; owner 2026-08-23 — "hallowfall is better,
+    redemption is better ... things that heal group are better"; blap
+    fields Redemption as a core group healer.
+  as_of: 2026-08-23

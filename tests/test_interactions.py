@@ -182,10 +182,10 @@ check("analyzer reports strengths, cc coverage and profiles",
 inter = BASE["interactions"]
 check("all curated spells are embedded in the dataset (9 seeds + the "
       "reflect backlog incl. PUMMELING_STRIKES surfaced by the fuller "
-      "descriptions)",
-      len(inter) == 29 and "DEATHCURSE2" in inter and "SPEEDARCHER_KITE" in inter
+      "descriptions + CURSEDOT, 2026-08-24)",
+      len(inter) == 30 and "DEATHCURSE2" in inter and "SPEEDARCHER_KITE" in inter
       and "METEOR" in inter and "THORNSAREA" in inter
-      and "PUMMELING_STRIKES" in inter)
+      and "PUMMELING_STRIKES" in inter and "CURSEDOT" in inter)
 check("the structural-reflect curation backlog is empty",
       json.load(open(os.path.join(PIPELINE, "out", "interactions.json"),
                      encoding="utf-8"))["_meta"]["structural_unclaimed"] == [])
@@ -235,10 +235,29 @@ check("Enchanted Quiver corrected to a verified full-value self-buff",
 check("verified non-reflect badges come from the game's own descriptions",
       "NON-REFLECTABLE" in inter["FROST_ULTIMATE"]["badges"]
       and inter["FROST_ULTIMATE"]["structural_reflect_statements"])
-check("shipped seeds contain NO verified non-stacking scoring caps (nothing "
-      "in the game data verifies one yet)",
-      all(not (s.get("nonstacking_caps") and s.get("confidence") == "verified")
-          for s in inter.values()))
+# REVISED 2026-08-24 (forge-quality round 4): the first verified
+# non-stacking scoring record exists — CURSEDOT. Its description states the
+# target-side 4-charge cap ("stacks up to 4 times"), DEATHCURSE2's verified
+# record reads the same pool, and the owner ruled: "the q spells … stack
+# but don't do extra damage from more people." CURSEDOT must be the ONLY
+# such record (any new one needs its own citation + a pin here), and the
+# count-once machinery must actually collapse the party's curse-Q supply.
+check("CURSEDOT is the one verified non-stacking scoring record "
+      "(sustained_dps counts once across cursed wielders)",
+      [s for s, r in sorted(inter.items())
+       if r.get("nonstacking_caps") and r.get("confidence") == "verified"]
+      == ["CURSEDOT"]
+      and inter["CURSEDOT"]["nonstacking_caps"] == ["sustained_dps"]
+      and (inter["CURSEDOT"]["scoring_note"] or "").strip() != "")
+_c1 = combo_with(base_e, "MAIN_CURSEDSTAFF", "CURSEDOT")
+_s1 = base_e.effective_supply(["MAIN_CURSEDSTAFF"], [_c1])
+_s3 = base_e.effective_supply(["MAIN_CURSEDSTAFF"] * 3, [_c1] * 3)
+check("three cursed Qs supply strictly less than 3x one cursed Q's "
+      "sustained DoT (count-once bites; non-CURSEDOT sources still add)",
+      _s1.get("sustained_dps", 0) > 0
+      and _s1.get("sustained_dps", 0) - 1e-9
+      <= _s3.get("sustained_dps", 0)
+      < 3 * _s1.get("sustained_dps", 0) - 1e-9)
 check("shared-stack duplicates read as synergy in the analyzer",
       next(x for x in base_e.duplicate_conflicts(
           ["MAIN_CURSEDSTAFF", "MAIN_CURSEDSTAFF"],

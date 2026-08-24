@@ -430,7 +430,8 @@ def load_style_overrides():
     return out
 
 
-def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides):
+def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
+                     econ=None, heal_dedicated_min=4):
     """Per-weapon style/size fit with an evidence trail. Returns
     (report, problems) — problems block the release (an override naming an
     unknown weapon/style/band/verdict).
@@ -528,6 +529,24 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides):
                            key=lambda v: rank[v])
                 fit["clap_kite"][b] = best
 
+        # E-first for HEALERS too (owner ruling 2026-08-23 round 2: "it's
+        # not which line but which weapon ... it should all be based on
+        # what the weapon does and its effect"): a dedicated heal E that
+        # heals a SINGLE ally does not scale to group play any more than
+        # single-scale damage does — "1 hand holy is full healer but it's
+        # not a good group healer for anything larger than 5 people. I
+        # would use it at 3 people and very rarely at 5 but never above
+        # that." Same ladder as the single-scale damage carrier:
+        # situational at gang, unfit at group. Derived facts only — an
+        # unknown heal scale never degrades anything (heal_scale semantics
+        # in derive_economics; overrides below still win).
+        ec = (econ or {}).get(key) or {}
+        if (key in healers and ec.get("heal_scale") == "single"
+                and ec.get("e_heal_points", 0) >= heal_dedicated_min):
+            for s in STYLE_FIT_STYLES:
+                fit[s]["gang"] = "situational"
+                fit[s]["group"] = "unfit"
+
         basis = "derived"
         ov = overrides.get(key)
         override_rec = None
@@ -572,6 +591,136 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides):
     for wk in sorted(overrides):
         if wk not in weapons:
             problems.append(f"style_overrides: unknown weapon {wk}")
+    return report, problems
+
+
+# ---------------------------------------------------------------------------
+# Weapon economics + primary-healer derivation (owner rulings 2026-08-23,
+# forge-quality blind round; config and the rulings' own words live in
+# composition.yaml — `viability.cost_gate` and `primary_healer`).
+#
+# cost_tier reads the unique_name's line suffix — the game's own naming:
+# ..._CRYSTAL crystal-artifact, ..._AVALON avalonian, the four faction
+# artifact lines, everything else base. Only `crystal` is gated anywhere
+# (regear economics); avalonian/artifact/base ship for display and audit.
+# NOTE the suffix rule is safe against family names: Permafrost Prism is
+# 2H_ICECRYSTAL_UNDEAD — "CRYSTAL" in the family, _UNDEAD the suffix.
+#
+# full_healer: a weapon whose E-slot bundle supplies >= e_heal_min summed
+# heal points (owner: "the weapon needs to have high healing numbers on its
+# e"). The E is combo-independent (E-first identity), so the flag is static.
+COST_TIER_SUFFIXES = (("_CRYSTAL", "crystal"), ("_AVALON", "avalonian"),
+                      ("_UNDEAD", "artifact"), ("_KEEPER", "artifact"),
+                      ("_HELL", "artifact"), ("_MORGANA", "artifact"))
+PRIMARY_HEAL_CAPS = ("heal_sustain", "heal_burst")
+
+
+def load_heal_overrides():
+    path = os.path.join(HERE, "heal_overrides.yaml")
+    if not os.path.exists(path):
+        return {}
+    out = {}
+    for e in _load_yaml(path):
+        if isinstance(e, dict) and e.get("weapon") and e.get("spell"):
+            out[(e["weapon"], e["spell"])] = e
+    return out
+
+
+def derive_economics(weapons, composition, spell_index, overrides):
+    """Stamp cost_tier + heal identity (heal_scale, full_healer) on every
+    weapon. Returns (report, problems); problems block the release (a
+    malformed override, or one naming a weapon/spell that is not that
+    weapon's E heal).
+
+    Heal identity is STRUCTURAL, E-first (owner ruling 2026-08-23 round 2:
+    no per-weapon taste rules): the E bundle with the highest summed heal
+    points names the heal spell; the spell's own area facts decide the
+    scale (area -> group; facts without area -> single; no facts ->
+    unknown, never inferred). heal_overrides.yaml corrects spells whose
+    area lives in a landing/impact sub-effect the dumps do not surface —
+    cited FACT corrections, the ranged_overrides.yaml pattern.
+    full_healer — the healing-FOUNDATION flag the forge's primary_heal
+    minima count — requires magnitude (e_heal_min) AND group scale."""
+    ph = composition.get("primary_healer", {}) or {}
+    e_min = ph.get("e_heal_min", 6)
+    r_min = ph.get("group_min_radius", 3.0)
+    t_min = ph.get("group_min_targets", 5)
+    problems, used, report = [], set(), {}
+    for e in overrides.values():
+        if e.get("scale") not in ("group", "single"):
+            problems.append(f"heal_overrides: {e.get('weapon')}: scale must "
+                            "be group|single")
+        if not ((e.get("reason") or "").strip()
+                and (e.get("source") or "").strip()):
+            problems.append(f"heal_overrides: {e.get('weapon')} needs "
+                            "reason + source")
+    for key, w in sorted(weapons.items()):
+        tier = "base"
+        for suf, t in COST_TIER_SUFFIXES:
+            if key.endswith(suf):
+                tier = t
+                break
+        lo = w.get("loadout") or {}
+        names = lo.get("slot_names") or []
+        slots = lo.get("slots") or []
+        spells = lo.get("slot_spells") or []
+        e_heal, heal_spell = 0, None
+        for i, slot in enumerate(slots):
+            if i >= len(names) or names[i] != "e":
+                continue
+            for j, bundle in enumerate(slot):
+                h = sum(bundle.get(c, 0) for c in PRIMARY_HEAL_CAPS)
+                if h > e_heal:
+                    e_heal = h
+                    heal_spell = (spells[i][j]
+                                  if i < len(spells) and spells[i]
+                                  and j < len(spells[i]) else None)
+        if not slots:
+            # flat-sheet fallback (illustrative entries without a loadout
+            # decomposition): the flat map is all we can read; scale stays
+            # unknown — never inferred
+            caps = w.get("capabilities") or {}
+            e_heal = max((caps.get(c, 0) for c in PRIMARY_HEAL_CAPS),
+                         default=0)
+        basis = "derived"
+        if not e_heal:
+            scale = "none"
+        else:
+            ov = overrides.get((key, heal_spell)) if heal_spell else None
+            facts = (spell_index.get(heal_spell) or None) if heal_spell else None
+            if ov:
+                used.add((key, heal_spell))
+                scale = ov["scale"]
+                basis = "curated_override"
+                report_ov = {"reason": (ov.get("reason") or "").strip(),
+                             "source": (ov.get("source") or "").strip(),
+                             "as_of": str(ov.get("as_of") or "")}
+            elif not facts:
+                scale = "unknown"
+            else:
+                radius = facts.get("radius")
+                mts = facts.get("max_targets") or 0
+                scale = ("group"
+                         if ((radius is not None and float(radius) >= r_min)
+                             or mts >= t_min) else "single")
+        full = e_heal >= e_min and scale == "group"
+        w["cost_tier"] = tier
+        w["heal_scale"] = scale
+        w["full_healer"] = full
+        rec = {"cost_tier": tier, "e_heal_points": e_heal,
+               "heal_spell": heal_spell, "heal_scale": scale,
+               "full_healer": full, "basis": basis}
+        if basis == "curated_override":
+            rec["override"] = report_ov
+        report[key] = rec
+    for (wk, sid), _ov in sorted(overrides.items()):
+        if (wk, sid) in used:
+            continue
+        if wk not in weapons:
+            problems.append(f"heal_overrides: unknown weapon {wk}")
+        else:
+            problems.append(f"heal_overrides: {sid} is not {wk}'s E heal "
+                            "spell")
     return report, problems
 
 
@@ -744,9 +893,45 @@ def main():
                               if r["status"] == "unknown"),
         }, "weapons": ranged_report}, f, indent=1, sort_keys=True)
 
+    # Derived non-stacking groups (owner ruling 2026-08-24): membership
+    # computed from the sheets per composition.yaml `derived_groups` —
+    # structural, never a hand list — appended to the groups the forge
+    # already enforces. Both engine ports read groups from the dataset, so
+    # no engine change is involved.
+    for g_name, g_cfg in sorted((composition.get("derived_groups") or {})
+                                .items()):
+        members, rules = set(), []
+        cap = g_cfg.get("capability")
+        if cap:
+            min_pts = g_cfg.get("min_points", 4)
+            members |= {k for k, w in weapons.items()
+                        if (w.get("capabilities") or {}).get(cap, 0) >= min_pts
+                        and not w.get("removed")}
+            rules.append(f"{cap} >= {min_pts} (flat sheet points)")
+        ev_spells = g_cfg.get("evidence_spells") or []
+        if ev_spells:
+            for k, w in weapons.items():
+                if w.get("removed"):
+                    continue
+                kit = {s for sl in (w.get("loadout") or {})
+                       .get("slot_spells", []) for s in (sl or [])}
+                if kit & set(ev_spells):
+                    members.add(k)
+            rules.append("kit cites " + "/".join(ev_spells))
+        members = sorted(members)
+        composition.setdefault("groups", []).append({
+            "name": g_name, "max": g_cfg.get("max", 2), "weapons": members,
+            "derived": True, "rule": "; ".join(rules)})
+        print(f"  derived group : {g_name} (max {g_cfg.get('max', 2)}): "
+              + ", ".join(members))
+
+    econ_report, econ_problems = derive_economics(
+        weapons, composition, spell_index, load_heal_overrides())
     fit_report, fit_problems = derive_style_fit(
         weapons, spell_index, item_stats, scoring.get("role_sets") or {},
-        load_style_overrides())
+        load_style_overrides(), econ_report,
+        (composition.get("primary_healer", {}) or {})
+        .get("e_heal_dedicated_min", 4))
     # MetaBattle cross-check (MECHANICS_TODO Q15): weapons real ZvZ builds
     # field must not derive group-band all-unfit — disagreements are the
     # owner's review queue, never silent fixes.
@@ -780,9 +965,38 @@ def main():
             "metabattle_review_queue": review_queue,
         }, "weapons": fit_report}, f, indent=1, sort_keys=True)
 
+    with open(os.path.join(OUT, "economics_report.json"), "w",
+              encoding="utf-8", newline="\n") as f:
+        json.dump({"_meta": {
+            "rule": ("cost_tier from the unique_name's line suffix "
+                     "(crystal/avalonian/artifact/base; only crystal is "
+                     "gated — viability.cost_gate). full_healer (healing "
+                     "FOUNDATION) requires an E bundle with >= "
+                     "primary_healer.e_heal_min summed heal points AND a "
+                     "GROUP-scale heal (the spell's own radius/max_targets "
+                     "facts; heal_overrides.yaml corrects sub-effect areas "
+                     "the dumps do not surface, with citation; unknown "
+                     "never grants). Single-scale dedicated heal Es grade "
+                     "gang situational / group unfit in style_fit — the "
+                     "E-first ladder. Owner rulings 2026-08-23."),
+            "crystal": sorted(k for k, r in econ_report.items()
+                              if r["cost_tier"] == "crystal"),
+            "full_healers": sorted(k for k, r in econ_report.items()
+                                   if r["full_healer"]),
+            "single_scale_healers": sorted(
+                k for k, r in econ_report.items()
+                if r["heal_scale"] == "single" and r["e_heal_points"] >= 4),
+            "unknown_heal_scale": sorted(
+                k for k, r in econ_report.items()
+                if r["heal_scale"] == "unknown"),
+            "overridden": sorted(k for k, r in econ_report.items()
+                                 if r["basis"] == "curated_override"),
+        }, "weapons": econ_report}, f, indent=1, sort_keys=True)
+
     provenance_problems = check_provenance(weapons, item_stats, stats_meta)
     provenance_problems += ranged_problems
     provenance_problems += fit_problems
+    provenance_problems += econ_problems
     # every derived scoring capability must carry evidence (§B/H.6)
     for k, w in sorted(weapons.items()):
         if (w["capabilities"].get("ranged_presence")

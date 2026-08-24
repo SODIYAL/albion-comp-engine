@@ -24,6 +24,40 @@
 # Validated at dataset build: unknown weapons, styles, bands or verdicts
 # fail the release.
 
+- weapon: 2H_HOLYSTAFF
+  set:
+    clap: {gang: unfit, group: unfit}
+    kite: {gang: unfit, group: unfit}
+    clap_kite: {gang: unfit, group: unfit}
+  reason: >
+    Owner ruling (forge-quality blind round): "great holy is not a good fit
+    for clap, it has to stop moving and needs everyone to clump in place to
+    heal with e. that's not good" and "great holy I feel isn't really that
+    good of a weapon in general but I only see it being useful in like
+    brawl situations." The derivation grades healers style-flexible; the
+    E-first rule overrules that here — Holy Explosion anchors the party in
+    place, the opposite of what clap's engage-bomb-reset and kite's
+    never-take-the-fight delivery need. Brawl (and brawl_clap's grind half)
+    keep it; trio bands gate nothing by the standing Phase C rule.
+  source: Owner ruling 2026-08-23 (forge-quality session, in-chat).
+  as_of: 2026-08-23
+
+- weapon: 2H_KNUCKLES_HELL
+  set:
+    clap: {gang: situational, group: situational}
+  reason: >
+    Owner ruling (forge-quality round 4): "flex bomber like hellfire, it's
+    usually a brawl-clap weapon and not a clap option. realmbreaker gives
+    multiple things like health cut, range e, easy way to engage followup —
+    that's why it can work in clap." The flex all-rounder derivation grades
+    both as clap-fits; the owner splits them: Hellfire's Boulder Toss is a
+    brawler's ranged tool, not a clap bomb core, so clap drops to
+    situational (the generation-fit gate then keeps it out of DEFAULT clap
+    comps while brawl-clap — its home — keeps it, and a caller can always
+    pick it manually). Realmbreaker stays as derived.
+  source: Owner ruling 2026-08-24 (forge-quality session, in-chat).
+  as_of: 2026-08-24
+
 - weapon: MAIN_AXE
   set:
     "*": {gang: unfit, group: unfit}

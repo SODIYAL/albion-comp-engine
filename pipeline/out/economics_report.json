@@ -1,0 +1,1155 @@
+{
+ "_meta": {
+  "crystal": [
+   "2H_ARCANESTAFF_CRYSTAL",
+   "2H_BOW_CRYSTAL",
+   "2H_DAGGERPAIR_CRYSTAL",
+   "2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+   "2H_DUALCROSSBOW_CRYSTAL",
+   "2H_FROSTSTAFF_CRYSTAL",
+   "2H_GLAIVE_CRYSTAL",
+   "2H_HAMMER_CRYSTAL",
+   "2H_HOLYSTAFF_CRYSTAL",
+   "2H_KNUCKLES_CRYSTAL",
+   "2H_SCYTHE_CRYSTAL",
+   "2H_SHAPESHIFTER_CRYSTAL",
+   "MAIN_CURSEDSTAFF_CRYSTAL",
+   "MAIN_FIRESTAFF_CRYSTAL",
+   "MAIN_MACE_CRYSTAL",
+   "MAIN_NATURESTAFF_CRYSTAL",
+   "MAIN_SWORD_CRYSTAL"
+  ],
+  "full_healers": [
+   "2H_HOLYSTAFF",
+   "2H_HOLYSTAFF_HELL",
+   "2H_HOLYSTAFF_UNDEAD",
+   "2H_NATURESTAFF_HELL",
+   "2H_NATURESTAFF_KEEPER",
+   "2H_WILDSTAFF",
+   "MAIN_HOLYSTAFF_AVALON",
+   "MAIN_NATURESTAFF"
+  ],
+  "overridden": [
+   "2H_HOLYSTAFF_UNDEAD",
+   "MAIN_HOLYSTAFF_AVALON"
+  ],
+  "rule": "cost_tier from the unique_name's line suffix (crystal/avalonian/artifact/base; only crystal is gated \u2014 viability.cost_gate). full_healer (healing FOUNDATION) requires an E bundle with >= primary_healer.e_heal_min summed heal points AND a GROUP-scale heal (the spell's own radius/max_targets facts; heal_overrides.yaml corrects sub-effect areas the dumps do not surface, with citation; unknown never grants). Single-scale dedicated heal Es grade gang situational / group unfit in style_fit \u2014 the E-first ladder. Owner rulings 2026-08-23.",
+  "single_scale_healers": [
+   "2H_DIVINESTAFF",
+   "2H_NATURESTAFF",
+   "MAIN_HOLYSTAFF",
+   "MAIN_HOLYSTAFF_MORGANA",
+   "MAIN_NATURESTAFF_AVALON",
+   "MAIN_NATURESTAFF_KEEPER"
+  ],
+  "unknown_heal_scale": []
+ },
+ "weapons": {
+  "2H_ARCANESTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_ARCANESTAFF_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_ARCANESTAFF_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_ARCANE_RINGPAIR_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_AXE": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_AXE_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_BOW": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_BOW_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_BOW_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_BOW_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_BOW_KEEPER": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_CLAWPAIR": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_CLAYMORE": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_CLAYMORE_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_CLEAVER_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_COMBATSTAFF_MORGANA": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_CROSSBOW": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_CROSSBOWLARGE": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_CROSSBOWLARGE_MORGANA": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_CROSSBOW_CANNON_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_CURSEDSTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_CURSEDSTAFF_MORGANA": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_DAGGERPAIR": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_DAGGERPAIR_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_DAGGER_KATAR_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_DEMONICSTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_DIVINESTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 4,
+   "full_healer": false,
+   "heal_scale": "single",
+   "heal_spell": "HOLYSHIELD"
+  },
+  "2H_DOUBLEBLADEDSTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_DOUBLEBLADEDSTAFF_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_DUALAXE_KEEPER": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_DUALCROSSBOW_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_DUALCROSSBOW_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_DUALHAMMER_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_DUALMACE_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 2,
+   "full_healer": false,
+   "heal_scale": "group",
+   "heal_spell": "BLESSED_MACES"
+  },
+  "2H_DUALSCIMITAR_UNDEAD": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_DUALSICKLE_UNDEAD": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_DUALSWORD": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_ENIGMATICORB_MORGANA": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_ENIGMATICSTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_FIRESTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_FIRESTAFF_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_FIRE_RINGPAIR_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_FLAIL": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_FROSTSTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_FROSTSTAFF_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_GLACIALSTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_GLAIVE": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_GLAIVE_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_HALBERD": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_HALBERD_MORGANA": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_HAMMER": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_HAMMER_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_HAMMER_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_HAMMER_UNDEAD": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_HARPOON_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_HOLYSTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 6,
+   "full_healer": true,
+   "heal_scale": "group",
+   "heal_spell": "HOLYEXPLOSION"
+  },
+  "2H_HOLYSTAFF_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 4,
+   "full_healer": false,
+   "heal_scale": "group",
+   "heal_spell": "HOLY_DISPEL"
+  },
+  "2H_HOLYSTAFF_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 6,
+   "full_healer": true,
+   "heal_scale": "group",
+   "heal_spell": "HOLY_ULTIMATE"
+  },
+  "2H_HOLYSTAFF_UNDEAD": {
+   "basis": "curated_override",
+   "cost_tier": "artifact",
+   "e_heal_points": 6,
+   "full_healer": true,
+   "heal_scale": "group",
+   "heal_spell": "CELESTIAL_SPHERE",
+   "override": {
+    "as_of": "2026-08-23",
+    "reason": "Redemption's E sends a sphere that delivers its heal to allies in an area around the target on arrival \u2014 an impact-area heal. The dumps surface the cast facts (friendall, cast_range 10) but not the impact effect's radius, so the structural rule misreads it as single-ally.",
+    "source": "In-game spell behavior; owner 2026-08-23 \u2014 \"hallowfall is better, redemption is better ... things that heal group are better\"; blap fields Redemption as a core group healer."
+   }
+  },
+  "2H_ICECRYSTAL_UNDEAD": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_ICEGAUNTLETS_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_INFERNOSTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_INFERNOSTAFF_MORGANA": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_IRONCLADEDSTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_IRONGAUNTLETS_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_KNUCKLES_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_KNUCKLES_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_KNUCKLES_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_KNUCKLES_KEEPER": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_KNUCKLES_MORGANA": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_KNUCKLES_SET1": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_KNUCKLES_SET2": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_KNUCKLES_SET3": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_LONGBOW": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_LONGBOW_UNDEAD": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_MACE": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_MACE_MORGANA": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_NATURESTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 4,
+   "full_healer": false,
+   "heal_scale": "single",
+   "heal_spell": "BRIEROFLIFE"
+  },
+  "2H_NATURESTAFF_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 6,
+   "full_healer": true,
+   "heal_scale": "group",
+   "heal_spell": "ROTTENVINES"
+  },
+  "2H_NATURESTAFF_KEEPER": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 8,
+   "full_healer": true,
+   "heal_scale": "group",
+   "heal_spell": "SPIRITANIMAL"
+  },
+  "2H_POLEHAMMER": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_QUARTERSTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_QUARTERSTAFF_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_RAM_KEEPER": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_REPEATINGCROSSBOW_UNDEAD": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_ROCKSTAFF_KEEPER": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_SCYTHE_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_SCYTHE_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_SHAPESHIFTER_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_SHAPESHIFTER_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_SHAPESHIFTER_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_SHAPESHIFTER_KEEPER": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_SHAPESHIFTER_MORGANA": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_SHAPESHIFTER_SET1": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_SHAPESHIFTER_SET2": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 2,
+   "full_healer": false,
+   "heal_scale": "single",
+   "heal_spell": "SHAPESHIFT_ENT"
+  },
+  "2H_SHAPESHIFTER_SET3": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_SKULLORB_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_SPEAR": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_TRIDENT_UNDEAD": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_TWINSCYTHE_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_WARBOW": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "2H_WILDSTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 6,
+   "full_healer": true,
+   "heal_scale": "group",
+   "heal_spell": "WELLOFLIFE2"
+  },
+  "MAIN_1HCROSSBOW": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_ARCANESTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_ARCANESTAFF_UNDEAD": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_AXE": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_CURSEDSTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_CURSEDSTAFF_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_CURSEDSTAFF_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_CURSEDSTAFF_UNDEAD": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_DAGGER": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_DAGGER_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_FIRESTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_FIRESTAFF_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_FIRESTAFF_KEEPER": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_FROSTSTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_FROSTSTAFF_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_FROSTSTAFF_KEEPER": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_HAMMER": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_HOLYSTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 4,
+   "full_healer": false,
+   "heal_scale": "single",
+   "heal_spell": "HOLYDESPERATEPRAYER2"
+  },
+  "MAIN_HOLYSTAFF_AVALON": {
+   "basis": "curated_override",
+   "cost_tier": "avalonian",
+   "e_heal_points": 6,
+   "full_healer": true,
+   "heal_scale": "group",
+   "heal_spell": "DIVINE_JUMP",
+   "override": {
+    "as_of": "2026-08-23",
+    "reason": "Hallowfall's E leaps to a target position and delivers its burst heal to allies AROUND the landing point \u2014 the heal is an area effect on impact. The dumps surface the jump's cast facts (ground, cast_range 11) but not the landing heal's radius, so the structural rule misreads it as area-less.",
+    "source": "In-game spell behavior; owner 2026-08-23 \u2014 \"hallowfall is better, redemption is better, fallen staff etc, things that heal group are better\"; Timothy's blap fields Hallowfall x2 and Deadlyhooker P1 x3 as the core group healing."
+   }
+  },
+  "MAIN_HOLYSTAFF_MORGANA": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 4,
+   "full_healer": false,
+   "heal_scale": "single",
+   "heal_spell": "HOLYTOUCH"
+  },
+  "MAIN_MACE": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_MACE_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_MACE_HELL": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_NATURESTAFF": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 8,
+   "full_healer": true,
+   "heal_scale": "group",
+   "heal_spell": "CIRCLEOFLIFE"
+  },
+  "MAIN_NATURESTAFF_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 4,
+   "full_healer": false,
+   "heal_scale": "single",
+   "heal_spell": "SOUL_LINK"
+  },
+  "MAIN_NATURESTAFF_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 4,
+   "full_healer": false,
+   "heal_scale": "group",
+   "heal_spell": "DUAL_NATURE"
+  },
+  "MAIN_NATURESTAFF_KEEPER": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 8,
+   "full_healer": false,
+   "heal_scale": "single",
+   "heal_spell": "NATURE_ULTIMATE_SINGLE"
+  },
+  "MAIN_RAPIER_MORGANA": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_ROCKMACE_KEEPER": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_SCIMITAR_MORGANA": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_SPEAR": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_SPEAR_KEEPER": {
+   "basis": "derived",
+   "cost_tier": "artifact",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_SPEAR_LANCE_AVALON": {
+   "basis": "derived",
+   "cost_tier": "avalonian",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_SWORD": {
+   "basis": "derived",
+   "cost_tier": "base",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  },
+  "MAIN_SWORD_CRYSTAL": {
+   "basis": "derived",
+   "cost_tier": "crystal",
+   "e_heal_points": 0,
+   "full_healer": false,
+   "heal_scale": "none",
+   "heal_spell": null
+  }
+ }
+}

@@ -24,6 +24,26 @@
 # diverge by RELATIVE physics only. Weight multipliers say what a style
 # VALUES; mechanics say what a style's delivery makes EFFECTIVE.
 #
+# `constraint_overrides` blocks (2026-08-23 owner ruling, forge-quality
+# blind round): per-style ROLE-BAND overrides on top of composition.yaml's
+# constraint_bands — the bands were calibrated on BRAWL evidence (blap) and
+# were style-blind, so every style forged toward brawl-shaped rosters
+# ("having 5 healers in a party of 20 feels like too much, especially in
+# clap and kite. for kite you are mostly kiting so don't need as many
+# healers usually and would rather get teammates that facilitate movement").
+# Owner-ruled healer counts: at 20 brawl 3-4 / clap 2-3 / kite 2; at 7
+# kite 1, brawl 1-2 (base). Rows follow constraint_bands semantics (first
+# matching min_size/max_size row wins; a listed role key REPLACES the base
+# band's entry for that role; unlisted keys keep the base band). Frontline
+# tightenings come from the same round (20-brawl forged 6 frontline — "too
+# many tanks ... not enough damage"; blap runs 5. 10-clap kept 3 hammers —
+# "instead of a great hammer, there are better options ... more movement
+# like occult or a half tank half damage like icicle"). Values at sizes the
+# owner did not explicitly grade are PROVISIONAL interpolations awaiting
+# the next grading round. Hybrids (brawl_clap, clap_kite) deliberately
+# carry no overrides yet — un-ruled. Like every constraint, this shapes
+# GENERATION only; manual rosters always score.
+#
 # `chain` blocks (fight-chain explanation, roadmap item 1, 2026-08-23):
 # the SEQUENCE a caller thinks this style in — each stage names the
 # capabilities that execute it. The engine's fight_chain() grades every
@@ -69,6 +89,10 @@ styles:
     # spread melee ball: cleaves clip ~3, damage split across whoever's in
     # reach, so few attackers stack on any one enemy
     mechanics: {expected_aoe_targets: 3, focus_attackers: 3}
+    # owner-ruled 2026-08-23: at 20, brawl runs 3-4 healers and ~5 frontline
+    # (blap's count; the style-blind band let 6 through — "too many tanks")
+    constraint_overrides:
+      - {min_size: 20, max_size: 29, healer: {min: 3, max: 4}, frontline: {min: 4, max: 5}}
     # owner's brawl sequence: contact -> pressure -> sustain -> denial -> secure
     chain:
       - {name: Contact, caps: [engage, tankiness]}
@@ -98,6 +122,14 @@ styles:
     # synced bombs on a manufactured clump: AoE rides the escalation curve
     # toward its 8-target cap; ST damage is incidental (few attackers each)
     mechanics: {expected_aoe_targets: 7, focus_attackers: 3}
+    # owner-ruled 2026-08-23: "clap requires extreme damage and movement" —
+    # healers 2-3 at 20; the 10-man clap forge kept three hammers, ruled one
+    # too many (engage tank + one, then damage/movement bodies). 15-19 rows
+    # are PROVISIONAL interpolation.
+    constraint_overrides:
+      - {min_size: 10, max_size: 14, frontline: {min: 2, max: 2}}
+      - {min_size: 15, max_size: 19, healer: {min: 2, max: 3}, frontline: {min: 3, max: 4}}
+      - {min_size: 20, max_size: 29, healer: {min: 2, max: 3}, frontline: {min: 3, max: 5}}
     # owner's clap sequence: engage -> clump -> pierce -> burst -> secure -> reset
     chain:
       - {name: Engage, caps: [engage, stun]}
@@ -126,6 +158,16 @@ styles:
       clump_create: 0.7
     # ranged poke on the advancing clump; focus fire only on caught divers
     mechanics: {expected_aoe_targets: 4, focus_attackers: 4}
+    # owner-ruled 2026-08-23: kite runs 1 healer at 7 and 2 at 20 ("mostly
+    # kiting so don't need as many healers usually and would rather get
+    # teammates that facilitate movement like occult staff or bedrock for
+    # safety"). Frontline tightenings + 10-19 healer rows are PROVISIONAL
+    # interpolation in the same spirit.
+    constraint_overrides:
+      - {min_size: 5,  max_size: 9,  healer: {min: 1, max: 1}}
+      - {min_size: 10, max_size: 14, healer: {min: 1, max: 2}, frontline: {min: 1, max: 3}}
+      - {min_size: 15, max_size: 19, healer: {min: 2, max: 2}, frontline: {min: 2, max: 4}}
+      - {min_size: 20, max_size: 29, healer: {min: 2, max: 2}, frontline: {min: 2, max: 5}}
     # owner's kite sequence: space -> slow -> peel -> ranged pressure -> reset
     chain:
       - {name: Space, caps: [mobility, disengage]}
@@ -182,6 +224,10 @@ styles:
     # bombs on manufactured clumps between kite resets: escalation rides
     # toward the cap in the windows; focus fire stays incidental
     mechanics: {expected_aoe_targets: 6, focus_attackers: 3}
+    # owner-ruled 2026-08-24 (round 5): "clap kite at 20 doesn't need 5
+    # healers, maybe 3 or 4 max"
+    constraint_overrides:
+      - {min_size: 20, max_size: 29, healer: {min: 3, max: 4}}
     chain:
       - {name: Kite window, caps: [mobility, disengage]}
       - {name: Catch, caps: [catch, slow]}
