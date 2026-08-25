@@ -39,13 +39,13 @@
     - {cap: zone_control, score: 2, evidence: ARCANECORRIDOR}
 
 - weapon: 2H_ARCANE_RINGPAIR_AVALON  # Evensong — aura-debuff artillery
-  curated_as_of: 2026-08-12
+  curated_as_of: 2026-08-25
   role_hint: range
   capabilities:
-    - {cap: heal_reduction, score: 4, evidence: ARCANE_METEOR}  # E: Dark Aura -15% Healing Received around 3 enemies
-    - {cap: burst_aoe,    score: 4, evidence: ARCANE_METEOR}  # 112 in 5m
-    - {cap: slow,         score: 2, evidence: ARCANE_METEOR}  # aura slow
-    - {cap: damage_debuff, score: 2, evidence: ARCANE_METEOR}  # Dark Aura: -15% damage dealt around 3 enemies
+    - {cap: heal_reduction, score: 3, evidence: ARCANE_METEOR}  # E: Dark Auras -15% Healing Received, 5r around 3 enemies, 5s — stacks 3x to -45% on overlap. Was 4; owner ruling 2026-08-25: "evensong heal-cut should be weaker than rotcaller" (Rotcaller's 100% negate + the -40/-50% one-shot class hold 4)
+    - {cap: burst_aoe,    score: 2, evidence: ARCANE_METEOR}  # 112 in 5r — BELOW the E-damage ladder's 2-anchor (Trinity Spear 191/r3 = 2; Bracers/Fists 264/232 = 4). Was 4 — the C7-E/round-1 watch-item number check (2026-08-25, owner directive "look at the actual damage") found the overscore; the weapon's identity is the aura blanket, not the hit
+    - {cap: slow,         score: 2, evidence: ARCANE_METEOR}  # aura slow 15%, stacks 3x
+    - {cap: damage_debuff, score: 2, evidence: ARCANE_METEOR}  # Dark Aura: -15% damage dealt around 3 enemies, stacks 3x
 
 - weapon: 2H_ENIGMATICORB_MORGANA    # Malevolent Locus — the cleanse bubble
   curated_as_of: 2026-08-12

@@ -30,7 +30,7 @@
     - {cap: catch, evidence: HAMSTRINGSWORD}
     - {cap: slow, evidence: HAMSTRINGSWORD}
   capabilities:
-    - {cap: burst_st,      score: 4, evidence: MIGHTYSWING}       # E: 170 pierce wave, charge-scaled bonus
+    - {cap: burst_aoe,     score: 4, evidence: MIGHTYSWING}       # E: 170 wave "piercing through all enemies" — line-delivered AREA damage, rebucketed from burst_st (owner ruling 2026-08-25: "clarent blade e is aoe damage"); charge-scaled bonus
     - {cap: silence,       score: 2, evidence: MIGHTYSWING}       # 2.25s at 2 Heroic Charges — a build choice
     - {cap: slow,          score: 2, evidence: MIGHTYSWING}       # 1-charge fork; W: Hamstring (QW)
     - {cap: catch,         score: 2, evidence: MIGHTYSWING}       # slow/silence forks stop escapes

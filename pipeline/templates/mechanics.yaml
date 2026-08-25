@@ -13,6 +13,9 @@
 # Focus Fire (aka Resilience): percentage damage reduction applied to a
 # player being attacked by multiple enemy players. Diminishing returns on
 # stacked single-target damage.
+# OWNER-CONFIRMED CURRENT 2026-08-25: the owner pasted the live wiki table
+# (post-Realm-Divided) and every cell below matches it exactly — both
+# columns, both caps, lookback and buff durations.
 focus_fire:
   lookback_seconds: 10      # window used to count attackers on the target
   buff_duration_seconds: 5
@@ -76,6 +79,9 @@ focus_fire:
 # AoE Escalation: AoE damage spells (designed to hit 3+ players) deal bonus
 # damage per player hit. AoE root/stun/silence spells get increased CC
 # duration instead ("CC Escalation").
+# OWNER-CONFIRMED CURRENT 2026-08-25: the owner pasted the live wiki table
+# and every value below matches it exactly (8%/target from 2, 56% cap at
+# 8+, applied after buffs, bypasses the ~150% soft cap).
 aoe_escalation:
   starts_at_targets: 2
   bonus_per_extra_target: 0.08   # bonus = 0.08 * (targets_hit - 1)

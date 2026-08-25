@@ -169,7 +169,26 @@ def t_size11_matrix():
             if len(party) != 11:
                 problems.append(f"size {len(party)}")
             if r["filler"]:
-                problems.append(f"unheld negative filler {r['filler']}")
+                # Saturation filler is legal ONLY when irreducible: the
+                # owner rulings that shrink group-band pools (F19) can
+                # leave a matrix cell where EVERY remaining candidate is
+                # negative — the forge must field the least-bad body and
+                # surface it (the docstring's "structural saturation").
+                # A filler slot with a strictly better legal replacement
+                # is still a refinement failure.
+                for fi in r["filler"]:
+                    sub = party[:fi] + party[fi + 1:]
+                    sub_c = r["combos"][:fi] + r["combos"][fi + 1:]
+                    held_val = e.comp_score(party, r["combos"]) \
+                        - e.comp_score(sub, sub_c)
+                    st = e.party_state(sub, sub_c)
+                    best = max(e._eval_pick(st, w)[0]
+                               for w in e.suggest_pool())
+                    if best > held_val + 1e-9:
+                        problems.append(
+                            f"reducible filler slot {fi} "
+                            f"({party[fi]} {held_val:+.4f}, "
+                            f"better pick available {best:+.4f})")
             if [tuple(x) for x in (r2["party"],)] != [tuple(party)]:
                 problems.append("nondeterministic")
             hit = [w for w in party if w in EXCLUDED_TRIO]
@@ -583,6 +602,90 @@ def t_dup_and_clump():
           f"forged_curse={curse_ct}")
 
 
+# ---------------------------------------------- F19 curse slots are earned
+def t_curse_slot_earned():
+    # Owner ruling 2026-08-25: "the only weapon i see in any party bigger
+    # than 15 people is the lifecurse, damnation, or rotcaller" — within a
+    # non-stacking budget (the cursed line, its shared Q priced count-once)
+    # a GROUP-band slot is earned by the E's enemy-DEBUFF tool
+    # (pierce/purge/heal-cut at the tool bar). Fear is displacement, not a
+    # debuff: "demonic staff is not a true brawl weapon at larger than 7
+    # people". Derived structurally from the sheets — no hand list.
+    DEBUFF_E = {"2H_CURSEDSTAFF_MORGANA",      # Damnation — pierce aura
+                "MAIN_CURSEDSTAFF_UNDEAD",     # Lifecurse — purge blades
+                "MAIN_CURSEDSTAFF_CRYSTAL"}    # Rotcaller — heal negate
+    DAMAGE_E = {"2H_CURSEDSTAFF", "2H_DEMONICSTAFF", "2H_SKULLORB_HELL",
+                "MAIN_CURSEDSTAFF", "MAIN_CURSEDSTAFF_AVALON"}
+    e = Engine(content="blackzone_roam", size=20, style="brawl")
+    sf = {w: (e.weapons[w].get("style_fit") or {}) for w in DEBUFF_E | DAMAGE_E}
+    demoted = all(((sf[w].get("fit") or {}).get(s) or {}).get("group")
+                  == "situational"
+                  for w in DAMAGE_E for s in ("brawl", "clap", "kite"))
+    earned = all(((sf[w].get("fit") or {}).get("brawl") or {}).get("group")
+                 == "fits" for w in DEBUFF_E)
+    pool20 = set(e.suggest_pool())
+    barred20 = not (DAMAGE_E & pool20)
+    offered20 = ("2H_CURSEDSTAFF_MORGANA" in pool20
+                 and "MAIN_CURSEDSTAFF_UNDEAD" in pool20)
+    barred_bal = not (DAMAGE_E & set(
+        Engine(content="blackzone_roam", size=20).suggest_pool()))
+    gang = set(Engine(content="blackzone_roam", size=7,
+                      style="brawl").suggest_pool())
+    open_gang = ("2H_SKULLORB_HELL" in gang
+                 and "MAIN_CURSEDSTAFF_AVALON" in gang)
+    # a damage-E curse stays a legitimate MANUAL pick: scores, never flagged
+    s = e.comp_score(["2H_SKULLORB_HELL", "MAIN_HOLYSTAFF", "2H_MACE"])
+    scores = s == s and s != 0.0 and not e.is_style_unfit("2H_SKULLORB_HELL")
+    e25 = Engine(content="castle", size=25, style="brawl")
+    cg = next((g for g in e25.groups if g.get("name") == "curse_pressure"),
+              None)
+    gen_curse = [w for w in e25.forge(25)["party"]
+                 if cg and w in set(cg["weapons"])]
+    forged_ok = bool(gen_curse) and all(w in DEBUFF_E for w in gen_curse)
+    check("F19 curse slots are earned: damage-E curses situational at group "
+          "(all styles), out of 10+ pools (balanced included), gang and "
+          "manual intact; castle 25 brawl fields only debuff-E curses",
+          demoted and earned and barred20 and offered20 and barred_bal
+          and open_gang and scores and forged_ok,
+          f"demoted={demoted} earned={earned} barred20={barred20} "
+          f"offered20={offered20} bal={barred_bal} gang={open_gang} "
+          f"scores={scores} forged={gen_curse}")
+
+
+# ---------------------------------------------- F20 resilience penetration
+def t_resil_pen():
+    # Owner ruling 2026-08-25: "single target is just a non pick at 20+
+    # usually because enemy will have too many defensives ... you can wire
+    # it as partial rebate" — per-weapon Resilience Penetration (wiki
+    # post-Realm-Divided table, cited in pipeline/resilience_penetration
+    # .yaml; a melee-only stat, ranged/magic weapons carry none) rebates
+    # the weapon's burst_st/execute SUPPLY by the physics ratio
+    # (1 - DR*(1-pen)) / (1 - DR) at the style's grown focus count. The
+    # global st_value weight devaluation still applies — high-pen ST is
+    # less taxed, never good.
+    e = Engine(content="blackzone_roam", size=20)
+    pen_dp = e.weapons["2H_DAGGERPAIR"].get("resil_pen")
+    pen_hm = e.weapons["2H_MACE"].get("resil_pen")
+    pen_gh = e.weapons["2H_HOLYSTAFF"].get("resil_pen", 0.0)
+    stamped = pen_dp == 0.40 and pen_hm == 0.10 and not pen_gh
+    bundle = {"burst_st": 4}
+    dp20 = e._eff(bundle, None, pen_dp or 0.0)["burst_st"]
+    hm20 = e._eff(bundle, None, pen_hm or 0.0)["burst_st"]
+    z20 = e._eff(bundle, None, 0.0)["burst_st"]
+    ordered = dp20 > hm20 > z20      # more pen -> more ST survives at 20
+    e7 = Engine(content="castle_outpost", size=7)
+    dp7 = e7._eff(bundle, None, 0.40)["burst_st"]
+    z7 = e7._eff(bundle, None, 0.0)["burst_st"]
+    # the rebate grows with scale (deeper Resilience -> more to ignore)
+    monotone = (dp20 / z20) > (dp7 / z7) > 1.0
+    check("F20 resilience penetration: cited per-weapon stat (dagger .40 / "
+          "mace .10 / staff none) rebates ST supply, growing with scale",
+          stamped and ordered and monotone,
+          f"pens=({pen_dp},{pen_hm},{pen_gh}) "
+          f"rebate20={dp20 / z20 if z20 else 0:.4f} "
+          f"rebate7={dp7 / z7 if z7 else 0:.4f}")
+
+
 if __name__ == "__main__":
     t_invariant()
     t_synergy_gating()
@@ -602,6 +705,8 @@ if __name__ == "__main__":
     t_style_bands()
     t_generation_fit()
     t_dup_and_clump()
+    t_curse_slot_earned()
+    t_resil_pen()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")

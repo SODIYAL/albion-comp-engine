@@ -13,8 +13,13 @@
 # brawl-clap (grind until they clump, then bomb). "Balanced" is the
 # identity — free mode, no thumb on the scale.
 #
-# `mechanics` blocks (added 2026-08-13, PROVISIONAL — MECHANICS_TODO.md Q14,
-# research-derived, awaiting expert numbers): how the style DELIVERS damage.
+# `mechanics` blocks (added 2026-08-13; Q14 CLOSED 2026-08-25): how the
+# style DELIVERS damage. The owner delegated the magnitudes — "i cant give
+# you numbers for that you have to use logic to figure that out" — under
+# one confirmed ORDERING constraint: "for clap and kite and clap kite and
+# brawl clap, the number will usually be higher than brawl" (the values
+# below satisfy it: brawl 3 is the floor). Adjust by reasoning + gate
+# evidence, keep the ordering.
 #   expected_aoe_targets — enemies a typical AoE hits under this style;
 #     feeds the AoE Escalation curve (mechanics.yaml) into burst_aoe supply.
 #   focus_attackers — players concentrating on one called target; feeds the

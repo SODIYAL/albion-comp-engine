@@ -138,6 +138,12 @@ class Engine:
         for gi, g in enumerate(self.groups):
             for wk in g.get("weapons", []):
                 self.groups_of.setdefault(wk, []).append(gi)
+        # members of derived NON-STACKING groups (shared kit priced
+        # count-once — the cursed line): their group-band slots are
+        # EARNED (owner ruling 2026-08-25; see the generation-fit gate)
+        self.nonstack_members = {wk for g in self.groups
+                                 if g.get("nonstacking")
+                                 for wk in g.get("weapons", [])}
         # size-physics table: {size: mult}, JSON string keys -> sorted int list
         sp = comp.get("size_physics", {}) or {}
         cm = sp.get("count_mult", {}) or {}
@@ -221,6 +227,19 @@ class Engine:
             if self.size > self.st_boost_max_size and size_factor > 1.0:
                 size_factor = 1.0
             self.mech_mults[cap] = style_factor * size_factor
+        # Resilience-Penetration context (owner ruling 2026-08-25: "you can
+        # wire it as partial rebate"): the Focus-Fire damage reduction at
+        # THIS style's grown focus count. A weapon with `resil_pen` p
+        # ignores that fraction of the reduction, so its ST supply is
+        # rebated by (1 - DR*(1-p)) / (1 - DR) in _eff — pure physics from
+        # the owner-confirmed mechanics table, per weapon, on top of the
+        # global (weapon-blind) style/size multipliers and the st_value
+        # weight devaluation, which stay untouched: high-pen ST is taxed
+        # less, never made good.
+        self._pen_dr = 0.0
+        focus_now = grown(style_mech.get("focus_attackers"), mult_now)
+        if focus_now:
+            self._pen_dr = 1.0 - self._resilience_eff(focus_now)
         # Per-context caches — constant until the next set_content: scaled
         # targets/soft caps, styled weights, per-weapon loadout combos.
         self._targets = {c: (r["target"] * self.size / self.base_size
@@ -341,6 +360,22 @@ class Engine:
                     # single-ally-heal-E class) never generates, balanced
                     # included. Gang slots stay open (the Druidic ruling).
                     ok = not all((sf["fit"].get(s) or {}).get(band) == "unfit"
+                                 for s in self.IDENTITY_STYLES)
+                elif wk in self.nonstack_members and band == "group":
+                    # owner ruling 2026-08-25: a non-stacking budget slot
+                    # (the cursed line — its shared Q priced count-once)
+                    # is EARNED at group scale: "the only weapon i see in
+                    # any party bigger than 15 people is the lifecurse,
+                    # damnation, or rotcaller." The derivation demotes
+                    # debuff-less members to situational at group for
+                    # every style; the dps fits-rule then bars them from
+                    # DEFAULT generation, balanced included. Manual picks
+                    # score normally, never flagged.
+                    if self.style in self.IDENTITY_STYLES:
+                        ok = (sf["fit"].get(self.style) or {}) \
+                            .get(band) == "fits"
+                    else:
+                        ok = any((sf["fit"].get(s) or {}).get(band) == "fits"
                                  for s in self.IDENTITY_STYLES)
                 else:
                     continue
@@ -543,14 +578,19 @@ class Engine:
             m *= e_now / e_base
         return m
 
-    def _eff(self, caps, delivery=None):
+    def _eff(self, caps, delivery=None, pen=0.0):
         """Apply mechanics multipliers (AoE escalation / Resilience) and the
         per-spell geometric transform to a bundle; sheet points convert to
-        supply units through score_unit (1-7 scale, 2 points = 1 unit)."""
+        supply units through score_unit (1-7 scale, 2 points = 1 unit).
+        `pen` is the wielder's Resilience Penetration: its burst_st/execute
+        supply is rebated by the fraction of Focus-Fire reduction the stat
+        ignores at this context's focus count (owner ruling 2026-08-25)."""
         out = {}
         for c, v in caps.items():
             v /= self.score_unit
             v *= self.mech_mults.get(c, 1.0)
+            if pen and self._pen_dr > 0.0 and c in RESILIENCE_CAPS:
+                v *= (1.0 - self._pen_dr * (1.0 - pen)) / (1.0 - self._pen_dr)
             if delivery is not None and c in self._geo_caps:
                 v *= self._geo_mult(c, delivery.get(c))
             out[c] = v
@@ -561,10 +601,12 @@ class Engine:
         (no game data) falls back to the flat capability union."""
         lo = self.weapons[weapon].get("loadout")
         dl = self.weapons[weapon].get("cap_delivery") or {}
+        pen = self.weapons[weapon].get("resil_pen") or 0.0
         if not lo or not lo.get("slots") and not lo.get("always"):
-            return self._eff(self.caps_of(weapon), dl), []
-        return (self._eff(lo.get("always", {}), dl),
-                [[self._eff(b, dl) for b in slot] for slot in lo.get("slots", [])])
+            return self._eff(self.caps_of(weapon), dl, pen), []
+        return (self._eff(lo.get("always", {}), dl, pen),
+                [[self._eff(b, dl, pen) for b in slot]
+                 for slot in lo.get("slots", [])])
 
     def _combo_extras(self, weapon):
         """Every one-spell-per-slot loadout as a merged effective-caps dict,

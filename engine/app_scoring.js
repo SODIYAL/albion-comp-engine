@@ -113,10 +113,15 @@
     this.dupPwMinSize = (dup.per_weapon_min_size === undefined) ? 10 : dup.per_weapon_min_size;
     this.groups = comp.groups || [];
     this.groupsOf = {};
+    /* members of derived NON-STACKING groups (shared kit priced
+       count-once — the cursed line): their group-band slots are EARNED
+       (owner ruling 2026-08-25; see the generation-fit gate) */
+    this.nonstackMembers = {};
     for (var gi = 0; gi < this.groups.length; gi++) {
       var gw = this.groups[gi].weapons || [];
       for (var gj = 0; gj < gw.length; gj++) {
         (this.groupsOf[gw[gj]] = this.groupsOf[gw[gj]] || []).push(gi);
+        if (this.groups[gi].nonstacking) this.nonstackMembers[gw[gj]] = true;
       }
     }
     var sp = comp.size_physics || {};
@@ -196,6 +201,13 @@
       if (this.size > this.stBoostMaxSize && sizeFactor > 1.0) sizeFactor = 1.0;
       this.mechMults[RESILIENCE_CAPS[i]] = styleFactor * sizeFactor;
     }
+    /* Resilience-Penetration context (owner ruling 2026-08-25, mirrors
+       engine.py): the Focus-Fire DR at this style's grown focus count; a
+       weapon with resil_pen p is rebated (1 - DR*(1-p)) / (1 - DR) on its
+       burst_st/execute supply in _eff. */
+    this._penDr = 0.0;
+    var focusNow = grown(styleMech.focus_attackers, multNow);
+    if (focusNow) this._penDr = 1.0 - this._resilienceEff(focusNow);
     /* Scaled targets/soft caps, styled weights (mirrors engine.py). */
     this._targets = {}; this._softs = {}; this._weights = {};
     for (var cap2 in this.reqs) {
@@ -326,6 +338,26 @@
             if (!gsf.fit[IDS[si3]] || gsf.fit[IDS[si3]][gBand] !== "unfit") {
               gOk = true;
               break;
+            }
+          }
+        } else if (this.nonstackMembers[gw] && gBand === "group") {
+          /* owner ruling 2026-08-25: a non-stacking budget slot (the
+             cursed line — its shared Q priced count-once) is EARNED at
+             group scale: "the only weapon i see in any party bigger than
+             15 people is the lifecurse, damnation, or rotcaller." The
+             derivation demotes debuff-less members to situational at
+             group for every style; the dps fits-rule then bars them from
+             DEFAULT generation, balanced included. Manual picks score
+             normally, never flagged (mirrors engine.py). */
+          if (IDS.indexOf(this.style) >= 0) {
+            gOk = gsf.fit[this.style] && gsf.fit[this.style][gBand] === "fits";
+          } else {
+            gOk = false;
+            for (var si4 = 0; si4 < IDS.length; si4++) {
+              if (gsf.fit[IDS[si4]] && gsf.fit[IDS[si4]][gBand] === "fits") {
+                gOk = true;
+                break;
+              }
             }
           }
         } else {
@@ -525,12 +557,14 @@
     return m;
   };
 
-  CompEngine.prototype._eff = function (caps, delivery) {
+  CompEngine.prototype._eff = function (caps, delivery, pen) {
     var out = {}, m, v;
     for (var c in caps) {
       v = caps[c] / this.scoreUnit;
       m = this.mechMults[c];
       v = v * (m === undefined ? 1.0 : m);
+      if (pen && this._penDr > 0.0 && RESILIENCE_CAPS.indexOf(c) >= 0)
+        v *= (1.0 - this._penDr * (1.0 - pen)) / (1.0 - this._penDr);
       if (delivery !== undefined && delivery !== null && this._geoCaps[c])
         v *= this._geoMult(c, delivery[c]);
       out[c] = v;
@@ -541,15 +575,16 @@
   CompEngine.prototype._loadoutEff = function (weapon) {
     var lo = this.weapons[weapon].loadout;
     var dl = this.weapons[weapon].cap_delivery || {};
+    var pen = this.weapons[weapon].resil_pen || 0.0;
     var hasSlots = lo && lo.slots && lo.slots.length;
     var hasAlways = lo && lo.always && Object.keys(lo.always).length;
     if (!lo || (!hasSlots && !hasAlways))
-      return { always: this._eff(this.capsOf(weapon), dl), slots: [] };
+      return { always: this._eff(this.capsOf(weapon), dl, pen), slots: [] };
     var self = this;
     return {
-      always: this._eff(lo.always || {}, dl),
+      always: this._eff(lo.always || {}, dl, pen),
       slots: (lo.slots || []).map(function (slot) {
-        return slot.map(function (b) { return self._eff(b, dl); });
+        return slot.map(function (b) { return self._eff(b, dl, pen); });
       }),
     };
   };

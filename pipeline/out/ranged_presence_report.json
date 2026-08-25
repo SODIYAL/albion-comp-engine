@@ -44,6 +44,7 @@
    "MAIN_FIRESTAFF_KEEPER",
    "MAIN_FROSTSTAFF",
    "MAIN_FROSTSTAFF_KEEPER",
+   "MAIN_SCIMITAR_MORGANA",
    "MAIN_SPEAR_KEEPER"
   ],
   "rule": "bundle claims burst_aoe (curated, evidence-linted) AND its spell is ground/enemy-delivered with cast_range >= 9; ranged_overrides.yaml wins with citation; missing structural facts = unknown, never inferred",
@@ -1204,6 +1205,22 @@
     }
    ],
    "status": "not_granted"
+  },
+  "MAIN_SCIMITAR_MORGANA": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 20.0,
+     "cooldown": "15",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": 25,
+     "radius": 2.25,
+     "slot": "e",
+     "spell": "MIGHTYSWING"
+    }
+   ],
+   "status": "granted"
   },
   "MAIN_SPEAR_KEEPER": {
    "decisions": [

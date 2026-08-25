@@ -1,0 +1,98 @@
+# Resilience Penetration — per-weapon % of Focus Fire damage reduction the
+# attacker ignores. A MELEE-ONLY stat: the wiki states it is "unique to
+# melee weapons", so every ranged/magic weapon absent from this table is
+# confidently 0 (the five shapeshifter staffs below are the only magic
+# exceptions, active only while transformed).
+#
+# Source: https://wiki.albiononline.com/wiki/Resilience_Penetration
+# (revision oldid=84609, page last edited 2026-08-25; values are
+# post-Realm-Divided 30.000.1 — the general resil-pen reduction pass —
+# unchanged through 31.030.1). Retrieved 2026-08-25, transcribed verbatim,
+# nothing interpolated. Owner ruling wiring these (2026-08-25): "single
+# target is just a non pick at 20+ usually because enemy will have too
+# many defensives to protect that one person, you can wire it as partial
+# rebate."
+#
+# `name` matches the catalog display_name; build_dataset resolves to ids
+# and prints unmatched rows (a wiki weapon outside our combat catalog is
+# skipped with a warning, never guessed).
+
+rows:
+  # Swords
+  - {name: "Broadsword", pen: 0.30}
+  - {name: "Claymore", pen: 0.30}
+  - {name: "Dual Swords", pen: 0.25}
+  - {name: "Clarent Blade", pen: 0.05}
+  - {name: "Carving Sword", pen: 0.25}
+  - {name: "Galatine Pair", pen: 0.20}
+  - {name: "Kingmaker", pen: 0.20}
+  - {name: "Infinity Blade", pen: 0.15}
+  # Axes
+  - {name: "Battleaxe", pen: 0.20}
+  - {name: "Greataxe", pen: 0.20}
+  - {name: "Halberd", pen: 0.15}
+  - {name: "Carrioncaller", pen: 0.15}
+  - {name: "Infernal Scythe", pen: 0.15}
+  - {name: "Bear Paws", pen: 0.20}
+  - {name: "Realmbreaker", pen: 0.15}
+  - {name: "Crystal Reaper", pen: 0.15}
+  # Maces
+  - {name: "Mace", pen: 0.10}
+  - {name: "Heavy Mace", pen: 0.10}
+  - {name: "Morning Star", pen: 0.10}
+  - {name: "Bedrock Mace", pen: 0.10}
+  - {name: "Incubus Mace", pen: 0.10}
+  - {name: "Camlann Mace", pen: 0.10}
+  - {name: "Oathkeepers", pen: 0.10}
+  - {name: "Dreadstorm Monarch", pen: 0.10}
+  # Hammers
+  - {name: "Hammer", pen: 0.10}
+  - {name: "Polehammer", pen: 0.10}
+  - {name: "Great Hammer", pen: 0.10}
+  - {name: "Tombhammer", pen: 0.10}
+  - {name: "Forge Hammers", pen: 0.20}
+  - {name: "Grovekeeper", pen: 0.10}
+  - {name: "Hand of Justice", pen: 0.10}
+  - {name: "Truebolt Hammer", pen: 0.10}
+  # War Gloves
+  - {name: "Brawler Gloves", pen: 0.25}
+  - {name: "Battle Bracers", pen: 0.20}
+  - {name: "Spiked Gauntlets", pen: 0.10}
+  - {name: "Ursine Maulers", pen: 0.20}
+  - {name: "Hellfire Hands", pen: 0.10}
+  - {name: "Ravenstrike Cestus", pen: 0.20}
+  - {name: "Fists of Avalon", pen: 0.20}
+  - {name: "Forcepulse Bracers", pen: 0.20}
+  # Daggers
+  - {name: "Dagger", pen: 0.40}
+  - {name: "Dagger Pair", pen: 0.40}
+  - {name: "Claws", pen: 0.40}
+  - {name: "Bloodletter", pen: 0.40}
+  - {name: "Demonfang", pen: 0.25}
+  - {name: "Deathgivers", pen: 0.40}
+  - {name: "Bridled Fury", pen: 0.25}
+  - {name: "Twin Slayers", pen: 0.20}
+  # Spears
+  - {name: "Spear", pen: 0.25}
+  - {name: "Pike", pen: 0.30}
+  - {name: "Glaive", pen: 0.30}
+  - {name: "Heron Spear", pen: 0.10}
+  - {name: "Spirithunter", pen: 0.05}
+  - {name: "Trinity Spear", pen: 0.25}
+  - {name: "Daybreaker", pen: 0.25}
+  - {name: "Rift Glaive", pen: 0.05}
+  # Quarterstaffs
+  - {name: "Quarterstaff", pen: 0.10}
+  - {name: "Iron-clad Staff", pen: 0.10}
+  - {name: "Double Bladed Staff", pen: 0.10}
+  - {name: "Black Monk Staff", pen: 0.10}
+  - {name: "Soulscythe", pen: 0.10}
+  - {name: "Staff of Balance", pen: 0.10}
+  - {name: "Grailseeker", pen: 0.10}
+  - {name: "Phantom Twinblade", pen: 0.10}
+  # Shapeshifter staffs (pen applies while transformed — the combat form)
+  - {name: "Prowling Staff", pen: 0.40}
+  - {name: "Primal Staff", pen: 0.10}
+  - {name: "Bloodmoon Staff", pen: 0.20}
+  - {name: "Earthrune Staff", pen: 0.10}
+  - {name: "Stillgaze Staff", pen: 0.10}

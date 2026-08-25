@@ -32,6 +32,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -61,6 +62,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 15,
@@ -76,6 +78,7 @@
    "e_damage_spells": [
     "STARFALL_DOT"
    ],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -105,6 +108,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 7,
@@ -118,6 +122,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -147,6 +152,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 11,
@@ -155,15 +161,16 @@
   "2H_ARCANE_RINGPAIR_AVALON": {
    "attackrange": 9,
    "basis": "derived",
-   "damage_pts": 6,
+   "damage_pts": 4,
    "damage_scale": "group",
    "delivery": "ranged",
-   "e_damage_pts": 4,
+   "e_damage_pts": 2,
    "e_damage_spells": [
     "ARCANE_METEOR"
    ],
+   "e_debuff_max": 3,
    "e_reach": 15.0,
-   "e_utility_max": 4,
+   "e_utility_max": 3,
    "fit": {
     "brawl": {
      "gang": "situational",
@@ -171,30 +178,31 @@
      "trio": "fits"
     },
     "brawl_clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "situational",
      "trio": "fits"
     },
     "clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "situational",
      "trio": "fits"
     },
     "clap_kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "situational",
      "trio": "fits"
     },
     "kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "situational",
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
-   "utility_pts": 13,
-   "weak_group_e": false
+   "utility_pts": 12,
+   "weak_group_e": true
   },
   "2H_AXE": {
    "attackrange": 3,
@@ -206,6 +214,7 @@
    "e_damage_spells": [
     "AXEWHIRLWIND2"
    ],
+   "e_debuff_max": 0,
    "e_reach": 5.0,
    "e_utility_max": 0,
    "fit": {
@@ -235,6 +244,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 11,
@@ -250,6 +260,7 @@
    "e_damage_spells": [
     "LETHAL_CLEAVER"
    ],
+   "e_debuff_max": 2,
    "e_reach": 10.0,
    "e_utility_max": 4,
    "fit": {
@@ -279,6 +290,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 19,
@@ -294,6 +306,7 @@
    "e_damage_spells": [
     "SPEEDARCHER_KITE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -323,6 +336,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 8,
@@ -338,6 +352,7 @@
    "e_damage_spells": [
     "HAWK_SHOT_MULTI1"
    ],
+   "e_debuff_max": 0,
    "e_reach": 24.0,
    "e_utility_max": 0,
    "fit": {
@@ -367,6 +382,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 8,
@@ -382,6 +398,7 @@
    "e_damage_spells": [
     "AIR_RAID"
    ],
+   "e_debuff_max": 0,
    "e_reach": 10.0,
    "e_utility_max": 0,
    "fit": {
@@ -411,6 +428,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 8,
@@ -426,6 +444,7 @@
    "e_damage_spells": [
     "HELL_ARROW"
    ],
+   "e_debuff_max": 0,
    "e_reach": 24.0,
    "e_utility_max": 0,
    "fit": {
@@ -455,6 +474,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 8,
@@ -470,6 +490,7 @@
    "e_damage_spells": [
     "LIGHTNING_ARROW"
    ],
+   "e_debuff_max": 0,
    "e_reach": 26.0,
    "e_utility_max": 4,
    "fit": {
@@ -499,6 +520,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 8,
@@ -514,6 +536,7 @@
    "e_damage_spells": [
     "DISEMBOWEL"
    ],
+   "e_debuff_max": 2,
    "e_reach": 2.0,
    "e_utility_max": 4,
    "fit": {
@@ -543,6 +566,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 20,
@@ -558,6 +582,7 @@
    "e_damage_spells": [
     "CLAYMORECHARGE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 13.0,
    "e_utility_max": 6,
    "fit": {
@@ -587,6 +612,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 16,
@@ -602,6 +628,7 @@
    "e_damage_spells": [
     "MAJESTIC_SMASH"
    ],
+   "e_debuff_max": 0,
    "e_reach": 6.0,
    "e_utility_max": 4,
    "fit": {
@@ -631,6 +658,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 12,
@@ -646,6 +674,7 @@
    "e_damage_spells": [
     "CLAYMORESLASH"
    ],
+   "e_debuff_max": 4,
    "e_reach": 11.0,
    "e_utility_max": 4,
    "fit": {
@@ -675,6 +704,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 16,
@@ -690,6 +720,7 @@
    "e_damage_spells": [
     "COMBATSTAFF_SLASH"
    ],
+   "e_debuff_max": 4,
    "e_reach": 15.0,
    "e_utility_max": 4,
    "fit": {
@@ -719,6 +750,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 16,
@@ -734,6 +766,7 @@
    "e_damage_spells": [
     "SNIPESHOT_CROSSBOW"
    ],
+   "e_debuff_max": 4,
    "e_reach": 16.0,
    "e_utility_max": 4,
    "fit": {
@@ -763,6 +796,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 16,
@@ -778,6 +812,7 @@
    "e_damage_spells": [
     "CROSSBOW_ARMORPIERCER"
    ],
+   "e_debuff_max": 0,
    "e_reach": 24.0,
    "e_utility_max": 2,
    "fit": {
@@ -807,6 +842,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 14,
@@ -822,6 +858,7 @@
    "e_damage_spells": [
     "CROSSBOW_CONE_ULTIMATE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 20.0,
    "e_utility_max": 0,
    "fit": {
@@ -851,6 +888,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 14,
@@ -866,6 +904,7 @@
    "e_damage_spells": [
     "CROSSBOW_DIVINE_SHOT"
    ],
+   "e_debuff_max": 0,
    "e_reach": 26.0,
    "e_utility_max": 0,
    "fit": {
@@ -895,6 +934,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 14,
@@ -910,35 +950,37 @@
    "e_damage_spells": [
     "AREAOFDECAY"
    ],
+   "e_debuff_max": 2,
    "e_reach": 15.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "brawl_clap": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "clap": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "clap_kite": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "kite": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     }
    },
+   "nonstack_member": true,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 7,
@@ -947,13 +989,14 @@
   "2H_CURSEDSTAFF_MORGANA": {
    "attackrange": 9,
    "basis": "derived",
-   "damage_pts": 10,
+   "damage_pts": 6,
    "damage_scale": "none",
    "delivery": "ranged",
-   "e_damage_pts": 6,
+   "e_damage_pts": 2,
    "e_damage_spells": [
     "CURSEULTIMATE"
    ],
+   "e_debuff_max": 4,
    "e_reach": 12.0,
    "e_utility_max": 4,
    "fit": {
@@ -983,6 +1026,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": true,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 7,
@@ -998,6 +1042,7 @@
    "e_damage_spells": [
     "EXECUTEDAGGER"
    ],
+   "e_debuff_max": 2,
    "e_reach": 3.0,
    "e_utility_max": 2,
    "fit": {
@@ -1027,6 +1072,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 14,
@@ -1042,6 +1088,7 @@
    "e_damage_spells": [
     "CRYSTAL_DAGGER_BLADE_RING"
    ],
+   "e_debuff_max": 0,
    "e_reach": 7.0,
    "e_utility_max": 0,
    "fit": {
@@ -1071,6 +1118,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 12,
@@ -1086,6 +1134,7 @@
    "e_damage_spells": [
     "BACK_SLASH"
    ],
+   "e_debuff_max": 0,
    "e_reach": 6.0,
    "e_utility_max": 0,
    "fit": {
@@ -1115,6 +1164,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 12,
@@ -1130,35 +1180,37 @@
    "e_damage_spells": [
     "CURSED_WALL"
    ],
+   "e_debuff_max": 0,
    "e_reach": 22.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "brawl_clap": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "clap": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "clap_kite": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "kite": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     }
    },
+   "nonstack_member": true,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 13,
@@ -1172,6 +1224,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -1201,6 +1254,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 2,
@@ -1216,6 +1270,7 @@
    "e_damage_spells": [
     "DASH_KNOCKBACK"
    ],
+   "e_debuff_max": 0,
    "e_reach": 15.0,
    "e_utility_max": 4,
    "fit": {
@@ -1245,6 +1300,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 20,
@@ -1260,6 +1316,7 @@
    "e_damage_spells": [
     "QS_CRYSTAL_COMBO"
    ],
+   "e_debuff_max": 0,
    "e_reach": 9.0,
    "e_utility_max": 2,
    "fit": {
@@ -1289,6 +1346,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 10,
@@ -1304,6 +1362,7 @@
    "e_damage_spells": [
     "DUALAXE_CRAWLER"
    ],
+   "e_debuff_max": 0,
    "e_reach": 8.0,
    "e_utility_max": 4,
    "fit": {
@@ -1333,6 +1392,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 15,
@@ -1348,6 +1408,7 @@
    "e_damage_spells": [
     "CRYSTALXBOW"
    ],
+   "e_debuff_max": 0,
    "e_reach": 8.0,
    "e_utility_max": 2,
    "fit": {
@@ -1377,6 +1438,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 16,
@@ -1392,6 +1454,7 @@
    "e_damage_spells": [
     "DUAL_RAPIDFIRE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 13.0,
    "e_utility_max": 0,
    "fit": {
@@ -1421,6 +1484,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 14,
@@ -1436,6 +1500,7 @@
    "e_damage_spells": [
     "GIANTSTEPS"
    ],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -1465,6 +1530,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 22,
@@ -1478,6 +1544,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 2,
    "fit": {
@@ -1507,6 +1574,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 11,
@@ -1522,6 +1590,7 @@
    "e_damage_spells": [
     "BLADE_AREA"
    ],
+   "e_debuff_max": 2,
    "e_reach": 0.0,
    "e_utility_max": 2,
    "fit": {
@@ -1551,6 +1620,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 8,
@@ -1566,6 +1636,7 @@
    "e_damage_spells": [
     "GHOSTSTRIKE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 7.0,
    "e_utility_max": 4,
    "fit": {
@@ -1595,6 +1666,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 16,
@@ -1610,6 +1682,7 @@
    "e_damage_spells": [
     "SPINATTACK"
    ],
+   "e_debuff_max": 0,
    "e_reach": 13.0,
    "e_utility_max": 4,
    "fit": {
@@ -1639,6 +1712,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 12,
@@ -1652,6 +1726,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 2,
    "fit": {
@@ -1681,6 +1756,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 7,
@@ -1694,6 +1770,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -1723,6 +1800,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 7,
@@ -1738,6 +1816,7 @@
    "e_damage_spells": [
     "FLAMEPILLAR"
    ],
+   "e_debuff_max": 0,
    "e_reach": 15.0,
    "e_utility_max": 0,
    "fit": {
@@ -1767,6 +1846,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 4,
@@ -1782,6 +1862,7 @@
    "e_damage_spells": [
     "METEOR"
    ],
+   "e_debuff_max": 0,
    "e_reach": 15.0,
    "e_utility_max": 2,
    "fit": {
@@ -1811,6 +1892,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 4,
@@ -1826,6 +1908,7 @@
    "e_damage_spells": [
     "FIREPHOENIX"
    ],
+   "e_debuff_max": 4,
    "e_reach": 15.0,
    "e_utility_max": 4,
    "fit": {
@@ -1855,6 +1938,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 8,
@@ -1868,6 +1952,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 6,
    "fit": {
@@ -1897,6 +1982,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 18,
@@ -1912,6 +1998,7 @@
    "e_damage_spells": [
     "HAIL_MULTI_1"
    ],
+   "e_debuff_max": 0,
    "e_reach": 15.0,
    "e_utility_max": 2,
    "fit": {
@@ -1941,6 +2028,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 10,
@@ -1956,6 +2044,7 @@
    "e_damage_spells": [
     "FROST_TARGETED_CHANNEL"
    ],
+   "e_debuff_max": 0,
    "e_reach": 22.0,
    "e_utility_max": 0,
    "fit": {
@@ -1985,6 +2074,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 8,
@@ -2000,6 +2090,7 @@
    "e_damage_spells": [
     "ICESTORM2"
    ],
+   "e_debuff_max": 0,
    "e_reach": 10.0,
    "e_utility_max": 4,
    "fit": {
@@ -2029,6 +2120,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 14,
@@ -2042,6 +2134,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -2071,6 +2164,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 10,
@@ -2086,6 +2180,7 @@
    "e_damage_spells": [
     "SPEAR_AOE_FINISHER"
    ],
+   "e_debuff_max": 0,
    "e_reach": 17.0,
    "e_utility_max": 2,
    "fit": {
@@ -2115,6 +2210,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 6,
@@ -2130,6 +2226,7 @@
    "e_damage_spells": [
     "RENDINGSWING"
    ],
+   "e_debuff_max": 2,
    "e_reach": 7.0,
    "e_utility_max": 2,
    "fit": {
@@ -2159,6 +2256,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 11,
@@ -2174,6 +2272,7 @@
    "e_damage_spells": [
     "SHOCKWAVE"
    ],
+   "e_debuff_max": 4,
    "e_reach": 20.0,
    "e_utility_max": 4,
    "fit": {
@@ -2203,6 +2302,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 13,
@@ -2216,6 +2316,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 6,
    "fit": {
@@ -2245,6 +2346,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 28,
@@ -2258,6 +2360,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 6,
    "fit": {
@@ -2287,6 +2390,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 34,
@@ -2300,6 +2404,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -2329,6 +2434,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 21,
@@ -2342,6 +2448,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 2,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -2371,6 +2478,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 27,
@@ -2384,6 +2492,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 4,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -2413,6 +2522,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "override": {
     "as_of": "2026-08-24",
     "reason": "Owner ruling (round 7, refining the 2026-08-23 situational grade): \"spirithunter is great in clap and clap kite, just read the e ability, it has a massive pierce that enables the whole dps line.\" The dump text agrees: Corrupting Steel pierces THROUGH all enemies, cuts damage resistances of every enemy hit, and its trail cuts magical resistance further \u2014 the pierce lens's own capability, delivered line-wide. The derivation grades the weapon single-scale because the E's damage (80) is incidental; the E's JOB is the Pierce stage of the CLAP chain (engage-clump-pierce-burst), so clap and its clap_kite hybrid take it as a fit. Brawl/kite keep the derived situational grade \u2014 the killboard fields it inside the brawl-ball family too (68% of F1's cohorts), but the owner promoted only the clap halves.",
@@ -2431,6 +2541,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -2460,6 +2571,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "override": {
     "as_of": "2026-08-23",
     "reason": "Owner ruling (forge-quality blind round): \"great holy is not a good fit for clap, it has to stop moving and needs everyone to clump in place to heal with e. that's not good\" and \"great holy I feel isn't really that good of a weapon in general but I only see it being useful in like brawl situations.\" The derivation grades healers style-flexible; the E-first rule overrules that here \u2014 Holy Explosion anchors the party in place, the opposite of what clap's engage-bomb-reset and kite's never-take-the-fight delivery need. Brawl (and brawl_clap's grind half) keep it; trio bands gate nothing by the standing Phase C rule.",
@@ -2478,6 +2590,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -2507,6 +2620,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 2,
@@ -2520,6 +2634,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -2549,6 +2664,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 4,
@@ -2562,6 +2678,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -2591,6 +2708,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 2,
@@ -2606,6 +2724,7 @@
    "e_damage_spells": [
     "FROST_ULTIMATE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 15.0,
    "e_utility_max": 4,
    "fit": {
@@ -2635,6 +2754,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 14,
@@ -2650,6 +2770,7 @@
    "e_damage_spells": [
     "GLACIALFIELD"
    ],
+   "e_debuff_max": 0,
    "e_reach": 14.0,
    "e_utility_max": 3,
    "fit": {
@@ -2679,6 +2800,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 14,
@@ -2694,6 +2816,7 @@
    "e_damage_spells": [
     "HUMAN_TORCH"
    ],
+   "e_debuff_max": 0,
    "e_reach": 12.0,
    "e_utility_max": 4,
    "fit": {
@@ -2723,6 +2846,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 6,
@@ -2738,6 +2862,7 @@
    "e_damage_spells": [
     "FLAMETORNADO"
    ],
+   "e_debuff_max": 0,
    "e_reach": 15.0,
    "e_utility_max": 0,
    "fit": {
@@ -2767,6 +2892,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 4,
@@ -2780,6 +2906,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 2,
    "fit": {
@@ -2809,6 +2936,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 10,
@@ -2824,6 +2952,7 @@
    "e_damage_spells": [
     "PUNCHCOMBO"
    ],
+   "e_debuff_max": 2,
    "e_reach": 2.0,
    "e_utility_max": 2,
    "fit": {
@@ -2853,6 +2982,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 14,
@@ -2868,6 +2998,7 @@
    "e_damage_spells": [
     "TRIPLECOMBO_DIVEKICK"
    ],
+   "e_debuff_max": 4,
    "e_reach": 12.0,
    "e_utility_max": 4,
    "fit": {
@@ -2897,6 +3028,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 21,
@@ -2912,6 +3044,7 @@
    "e_damage_spells": [
     "CONEPUNCH2"
    ],
+   "e_debuff_max": 2,
    "e_reach": 9.0,
    "e_utility_max": 2,
    "fit": {
@@ -2941,6 +3074,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 18,
@@ -2956,6 +3090,7 @@
    "e_damage_spells": [
     "BOULDER_TOSS"
    ],
+   "e_debuff_max": 2,
    "e_reach": 10.0,
    "e_utility_max": 2,
    "fit": {
@@ -2985,6 +3120,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "override": {
     "as_of": "2026-08-24",
     "reason": "Owner ruling (forge-quality round 4): \"flex bomber like hellfire, it's usually a brawl-clap weapon and not a clap option. realmbreaker gives multiple things like health cut, range e, easy way to engage followup \u2014 that's why it can work in clap.\" The flex all-rounder derivation grades both as clap-fits; the owner splits them: Hellfire's Boulder Toss is a brawler's ranged tool, not a clap bomb core, so clap drops to situational (the generation-fit gate then keeps it out of DEFAULT clap comps while brawl-clap \u2014 its home \u2014 keeps it, and a caller can always pick it manually). Realmbreaker stays as derived.",
@@ -3005,6 +3141,7 @@
    "e_damage_spells": [
     "PUMMELING_STRIKES"
    ],
+   "e_debuff_max": 0,
    "e_reach": 11.0,
    "e_utility_max": 0,
    "fit": {
@@ -3034,6 +3171,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 16,
@@ -3049,6 +3187,7 @@
    "e_damage_spells": [
     "GROWING_PUNCH"
    ],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -3078,6 +3217,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 16,
@@ -3093,6 +3233,7 @@
    "e_damage_spells": [
     "BLAZING_GEYSER"
    ],
+   "e_debuff_max": 0,
    "e_reach": 3.0,
    "e_utility_max": 2,
    "fit": {
@@ -3122,6 +3263,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 14,
@@ -3137,6 +3279,7 @@
    "e_damage_spells": [
     "DIVEPUNCH_RISE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -3166,6 +3309,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 20,
@@ -3181,6 +3325,7 @@
    "e_damage_spells": [
     "IMPULSE_PUNCH"
    ],
+   "e_debuff_max": 0,
    "e_reach": 13.0,
    "e_utility_max": 2,
    "fit": {
@@ -3210,6 +3355,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 15,
@@ -3225,6 +3371,7 @@
    "e_damage_spells": [
     "ARROWRAIN"
    ],
+   "e_debuff_max": 0,
    "e_reach": 15.0,
    "e_utility_max": 0,
    "fit": {
@@ -3254,6 +3401,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 4,
@@ -3269,6 +3417,7 @@
    "e_damage_spells": [
     "UNDEADARROWS"
    ],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -3298,6 +3447,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 8,
@@ -3311,6 +3461,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 6,
    "e_reach": 0.0,
    "e_utility_max": 6,
    "fit": {
@@ -3340,6 +3491,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 22,
@@ -3353,6 +3505,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 6,
    "fit": {
@@ -3382,6 +3535,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 21,
@@ -3395,6 +3549,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 2,
    "fit": {
@@ -3424,6 +3579,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 4,
@@ -3437,6 +3593,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -3466,6 +3623,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 2,
@@ -3479,6 +3637,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -3508,6 +3667,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 2,
@@ -3521,6 +3681,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 6,
    "fit": {
@@ -3550,6 +3711,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 31,
@@ -3565,6 +3727,7 @@
    "e_damage_spells": [
     "VAULT_ATTACK"
    ],
+   "e_debuff_max": 0,
    "e_reach": 13.0,
    "e_utility_max": 6,
    "fit": {
@@ -3594,6 +3757,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 30,
@@ -3609,6 +3773,7 @@
    "e_damage_spells": [
     "SOULSHAKER"
    ],
+   "e_debuff_max": 0,
    "e_reach": 20.0,
    "e_utility_max": 4,
    "fit": {
@@ -3638,6 +3803,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 18,
@@ -3651,6 +3817,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 6,
    "fit": {
@@ -3680,6 +3847,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 28,
@@ -3695,6 +3863,7 @@
    "e_damage_spells": [
     "GROUNDMINE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 15.0,
    "e_utility_max": 0,
    "fit": {
@@ -3724,6 +3893,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 14,
@@ -3737,6 +3907,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 4,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -3766,6 +3937,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 16,
@@ -3781,6 +3953,7 @@
    "e_damage_spells": [
     "CRYSTAL_SCYTHE_DASH_ZONE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 3.0,
    "e_utility_max": 4,
    "fit": {
@@ -3810,6 +3983,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 11,
@@ -3825,6 +3999,7 @@
    "e_damage_spells": [
     "SCYTHESWING"
    ],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -3854,6 +4029,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 11,
@@ -3869,6 +4045,7 @@
    "e_damage_spells": [
     "SHAPESHIFT_AVALONIAN_EAGLE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 2,
    "fit": {
@@ -3898,6 +4075,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 12,
@@ -3913,6 +4091,7 @@
    "e_damage_spells": [
     "SHAPESHIFT_CRYSTAL_COBRA"
    ],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -3942,6 +4121,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 10,
@@ -3957,6 +4137,7 @@
    "e_damage_spells": [
     "SHAPESHIFT_IMP"
    ],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -3986,6 +4167,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "override": {
     "as_of": "2026-08-24",
     "reason": "Owner ruling (round 7): \"hellspawn staff is another staff which is primarily single target damage and therefore not good in above 5 member parties normally.\" The E is the Hellfire Imp transformation (self-target, very high single-target offense) \u2014 the form's damage is solo-target; the derivation had graded the weapon group-scale through its sheet caps.",
@@ -4004,6 +4186,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 2,
    "fit": {
@@ -4033,6 +4216,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 12,
@@ -4048,6 +4232,7 @@
    "e_damage_spells": [
     "SHAPESHIFT_WEREWOLF"
    ],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -4077,6 +4262,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 12,
@@ -4092,6 +4278,7 @@
    "e_damage_spells": [
     "SHAPESHIFT_PANTHER"
    ],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -4121,6 +4308,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 14,
@@ -4134,6 +4322,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -4163,6 +4352,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 10,
@@ -4178,6 +4368,7 @@
    "e_damage_spells": [
     "SHAPESHIFT_BEAR"
    ],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -4207,6 +4398,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 10,
@@ -4222,35 +4414,37 @@
    "e_damage_spells": [
     "SKULLCURSE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 15.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "brawl_clap": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "clap": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "clap_kite": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "kite": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     }
    },
+   "nonstack_member": true,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 5,
@@ -4264,6 +4458,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -4293,6 +4488,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 11,
@@ -4308,6 +4504,7 @@
    "e_damage_spells": [
     "TRIDENTTHROW"
    ],
+   "e_debuff_max": 0,
    "e_reach": 12.0,
    "e_utility_max": 4,
    "fit": {
@@ -4337,6 +4534,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "override": {
     "as_of": "2026-08-24",
     "reason": "Owner ruling (round 7 E-audit follow-up): \"trinity spear seems like a group tool but no one is doing auto attack damage usually so its never used in large scale. only time its used is for a swap for hitting castle gates or terry walls. to get the attack speed and start taking walls faster.. but never as the main weapon in party.\" The E derives group-fits (root-all + area impact + ally mist), but its headline buff is an AUTO-ATTACK steroid \u2014 worthless in large fights where nobody auto-attacks; the real large-scale use is a structure-siege weapon SWAP, not a comp slot. Gang keeps the derived verdict (the ruling names large scale only); manual picks score as always.",
@@ -4357,6 +4555,7 @@
    "e_damage_spells": [
     "TORNADO"
    ],
+   "e_debuff_max": 0,
    "e_reach": 25.0,
    "e_utility_max": 4,
    "fit": {
@@ -4386,6 +4585,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 18,
@@ -4401,6 +4601,7 @@
    "e_damage_spells": [
     "SKILLSHOT_STUN"
    ],
+   "e_debuff_max": 0,
    "e_reach": 26.0,
    "e_utility_max": 0,
    "fit": {
@@ -4430,6 +4631,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "override": {
     "as_of": "2026-08-24",
     "reason": "Owner ruling (round 7, observed-family reconciliation): \"warbow on the other hand would be terrible in a group setting because its e is single target damage and it can get easily blocked.\" The derivation read Magic Arrow's max_targets 5 as group-scale, but its footprint is a 3.0 x 2.5 line \u2014 in practice the first body eats it, exactly the blockable solo-arrow class the owner names. The E-first rule stands: max effective at 3, okay at 5, falls off hard beyond.",
@@ -4448,6 +4650,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -4477,6 +4680,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 2,
@@ -4492,6 +4696,7 @@
    "e_damage_spells": [
     "EXPLODING_SHOT"
    ],
+   "e_debuff_max": 0,
    "e_reach": 11.0,
    "e_utility_max": 0,
    "fit": {
@@ -4521,6 +4726,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 14,
@@ -4536,6 +4742,7 @@
    "e_damage_spells": [
     "ARCANEORB2"
    ],
+   "e_debuff_max": 4,
    "e_reach": 25.0,
    "e_utility_max": 4,
    "fit": {
@@ -4565,6 +4772,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 13,
@@ -4580,6 +4788,7 @@
    "e_damage_spells": [
     "BLACKHOLE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 14.0,
    "e_utility_max": 4,
    "fit": {
@@ -4609,6 +4818,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 15,
@@ -4624,6 +4834,7 @@
    "e_damage_spells": [
     "AXETHROW"
    ],
+   "e_debuff_max": 0,
    "e_reach": 18.0,
    "e_utility_max": 0,
    "fit": {
@@ -4653,6 +4864,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "override": {
     "as_of": "2026-08-23",
     "reason": "Owner ruling (V3-adjacent identity session): \"although it's an axe and provides healthcut and possibilities for mobility on its w spell, it doesn't fit in most group play styles bigger than 3 because its e spell, the primary identity, doesn't do as much damage as other options for a group setting (5+).\" The derivation reads its utility points (catch, engage, healthcut, root) as exempting it to 'situational'; the E-first identity rule overrules that \u2014 Axe Throw (burst_st 2, radius 1.5) is not a group damage tool, and the utility pieces do not carry a group slot on their own.",
@@ -4673,35 +4885,37 @@
    "e_damage_spells": [
     "DEATHCURSE2"
    ],
+   "e_debuff_max": 0,
    "e_reach": 11.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "brawl_clap": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "clap": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "clap_kite": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "kite": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     }
    },
+   "nonstack_member": true,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 5,
@@ -4717,35 +4931,37 @@
    "e_damage_spells": [
     "DYNAMIC_CURSE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 15.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "brawl_clap": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "clap": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "clap_kite": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     },
     "kite": {
      "gang": "fits",
-     "group": "fits",
+     "group": "situational",
      "trio": "fits"
     }
    },
+   "nonstack_member": true,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 5,
@@ -4754,13 +4970,14 @@
   "MAIN_CURSEDSTAFF_CRYSTAL": {
    "attackrange": 9,
    "basis": "derived",
-   "damage_pts": 4,
+   "damage_pts": 6,
    "damage_scale": "none",
    "delivery": "ranged",
    "e_damage_pts": 2,
    "e_damage_spells": [
     "CURSE_SKELETON_BARF_FDHR"
    ],
+   "e_debuff_max": 4,
    "e_reach": 3.0,
    "e_utility_max": 4,
    "fit": {
@@ -4790,6 +5007,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": true,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 11,
@@ -4805,6 +5023,7 @@
    "e_damage_spells": [
     "ENFEEBLEBLADES"
    ],
+   "e_debuff_max": 4,
    "e_reach": 15.0,
    "e_utility_max": 4,
    "fit": {
@@ -4834,6 +5053,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": true,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 9,
@@ -4849,6 +5069,7 @@
    "e_damage_spells": [
     "BLOODTHIRSTYBLADE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -4878,6 +5099,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 12,
@@ -4893,6 +5115,7 @@
    "e_damage_spells": [
     "BLOOD_BLADE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 3.0,
    "e_utility_max": 0,
    "fit": {
@@ -4922,6 +5145,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 12,
@@ -4937,6 +5161,7 @@
    "e_damage_spells": [
     "PYROBLAST_SKILLSHOT"
    ],
+   "e_debuff_max": 0,
    "e_reach": 15.0,
    "e_utility_max": 0,
    "fit": {
@@ -4966,6 +5191,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "override": {
     "as_of": "2026-08-24",
     "reason": "Owner ruling (round 7): \"any primarily solo target abilities, like dagger pair 1 hand fire etc are max affective in 3 man situations and then good/okay at 5 man and then start falling off hard if party grows.\" Pyroblast is a channeled projectile that detonates on the FIRST enemy hit (dump text: \"upon impact with an enemy\") \u2014 a blockable solo nuke the derivation graded group-scale from its impact radius.",
@@ -4986,6 +5212,7 @@
    "e_damage_spells": [
     "FLAMEDASH"
    ],
+   "e_debuff_max": 0,
    "e_reach": 14.0,
    "e_utility_max": 4,
    "fit": {
@@ -5015,6 +5242,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 6,
@@ -5030,6 +5258,7 @@
    "e_damage_spells": [
     "MAGMASPHERE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 25.0,
    "e_utility_max": 0,
    "fit": {
@@ -5059,6 +5288,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 4,
@@ -5074,6 +5304,7 @@
    "e_damage_spells": [
     "FREEZINGWIND"
    ],
+   "e_debuff_max": 0,
    "e_reach": 12.0,
    "e_utility_max": 6,
    "fit": {
@@ -5103,6 +5334,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 18,
@@ -5116,6 +5348,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -5145,6 +5378,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 12,
@@ -5160,6 +5394,7 @@
    "e_damage_spells": [
     "ICEROCK_EXPLODE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 26.0,
    "e_utility_max": 4,
    "fit": {
@@ -5189,6 +5424,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 14,
@@ -5202,6 +5438,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -5231,6 +5468,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 21,
@@ -5244,6 +5482,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -5273,6 +5512,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 2,
@@ -5286,6 +5526,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 6,
    "fit": {
@@ -5315,6 +5556,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 8,
@@ -5328,6 +5570,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -5357,6 +5600,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 4,
@@ -5370,6 +5614,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -5399,6 +5644,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 17,
@@ -5414,6 +5660,7 @@
    "e_damage_spells": [
     "MACE_CRYSTAL_FRAGMENT_STORM"
    ],
+   "e_debuff_max": 4,
    "e_reach": 3.0,
    "e_utility_max": 4,
    "fit": {
@@ -5443,6 +5690,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 19,
@@ -5458,6 +5706,7 @@
    "e_damage_spells": [
     "SHRINKINGSMASH"
    ],
+   "e_debuff_max": 4,
    "e_reach": 10.0,
    "e_utility_max": 4,
    "fit": {
@@ -5487,6 +5736,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 23,
@@ -5500,6 +5750,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 2,
    "fit": {
@@ -5529,6 +5780,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 4,
@@ -5542,6 +5794,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -5571,6 +5824,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 6,
@@ -5584,6 +5838,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 2,
    "fit": {
@@ -5613,6 +5868,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 4,
@@ -5626,6 +5882,7 @@
    "delivery": "ranged",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -5655,6 +5912,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 2,
@@ -5670,6 +5928,7 @@
    "e_damage_spells": [
     "RAPIERSTAB"
    ],
+   "e_debuff_max": 0,
    "e_reach": 11.0,
    "e_utility_max": 4,
    "fit": {
@@ -5699,6 +5958,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 14,
@@ -5712,6 +5972,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 6,
    "fit": {
@@ -5741,6 +6002,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
    "utility_pts": 21,
@@ -5756,6 +6018,7 @@
    "e_damage_spells": [
     "MIGHTYSWING"
    ],
+   "e_debuff_max": 0,
    "e_reach": 20.0,
    "e_utility_max": 2,
    "fit": {
@@ -5785,6 +6048,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 8,
@@ -5798,6 +6062,7 @@
    "delivery": "melee",
    "e_damage_pts": 0,
    "e_damage_spells": [],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 4,
    "fit": {
@@ -5827,6 +6092,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 12,
@@ -5842,6 +6108,7 @@
    "e_damage_spells": [
     "SPEARTHROW"
    ],
+   "e_debuff_max": 0,
    "e_reach": 22.0,
    "e_utility_max": 4,
    "fit": {
@@ -5871,6 +6138,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 12,
@@ -5886,6 +6154,7 @@
    "e_damage_spells": [
     "LANCE_CHARGE"
    ],
+   "e_debuff_max": 4,
    "e_reach": 16.0,
    "e_utility_max": 4,
    "fit": {
@@ -5915,6 +6184,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 12,
@@ -5930,6 +6200,7 @@
    "e_damage_spells": [
     "MIGHTYBLOW"
    ],
+   "e_debuff_max": 0,
    "e_reach": 8.0,
    "e_utility_max": 2,
    "fit": {
@@ -5959,6 +6230,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": true,
    "utility_pts": 8,
@@ -5974,6 +6246,7 @@
    "e_damage_spells": [
     "SWORD_BERSERK_RUN_RE"
    ],
+   "e_debuff_max": 0,
    "e_reach": 0.0,
    "e_utility_max": 0,
    "fit": {
@@ -6003,6 +6276,7 @@
      "trio": "fits"
     }
    },
+   "nonstack_member": false,
    "role_flexible": false,
    "utility_carrier": false,
    "utility_pts": 6,

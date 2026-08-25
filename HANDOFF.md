@@ -40,15 +40,20 @@ The production engine currently includes:
 - duplicate handling
 - viability exclusions / priors
 - Focus Fire / Resilience mechanics where modeled
+- per-weapon Resilience Penetration (2026-08-25: cited wiki table wired as
+  a supply-side rebate on the single-target Focus-Fire tax — dagger-class
+  pen keeps more ST value at scale, never enough to make ST good)
 - geometric AoE escalation for relevant utility
 - one-spell-per-slot loadout resolution
 - combo-aware forge constraints
 - constrained composition generation / forge
-- forge-quality generation gates (2026-08-23/24 expert rounds): crystal
+- forge-quality generation gates (2026-08-23/25 expert rounds): crystal
   economics gate, primary-healer foundation minima, style-aware role bands,
   the generation-fit gate (only "fits" damage picks generate), duplicates
   that must earn their place, derived job budgets (clump core, curse
-  pressure), and the first verified non-stacking scoring record (CURSEDOT)
+  pressure), the first verified non-stacking scoring record (CURSEDOT),
+  and earned non-stacking slots (a group-band curse slot needs a debuff-E:
+  Damnation / Lifecurse / Rotcaller)
 - swap review
 - weapon dossiers, spell facts, PvP interaction evidence, reference builds, and suggested gear
 
@@ -140,8 +145,9 @@ Five blind grading rounds with the owner converted every complaint into a struct
 - **Duplicates earn their place** (`duplication`): generation default is 1 copy at every size; a second copy only through a per-weapon allowance citing a real comp.
 - **Derived job budgets** (`composition.yaml derived_groups` → build-time membership, no hand lists): `clump_core` (flat clump_create ≥ 4 — HoJ/Camlann/Witchwork) max 2; `curse_pressure` (the cursed line via its shared Q pool) max 2.
 - **First verified non-stacking scoring record**: CURSEDOT (`pipeline/interactions.yaml`) — the target-side Vile-Curse pool caps at 4 across wielders, so the curse Q's sustained_dps counts once per party.
+- **Non-stacking slots are earned** (round 8, 2026-08-25 — the round-6 derivation landed): a member of a derived non-stacking group (today the cursed line) earns a group-band (10+) slot only with an E enemy-DEBUFF tool ≥ 4 (purge / pierce / heal-cut class — `E_DEBUFF_CAPS` in build_dataset). Damnation, Lifecurse and Rotcaller earn ("the only curse weapons in any party bigger than 15"); Cursed Skull, Shadowcaller, Great Cursed, 1H Cursed and Demonic (fear = displacement, not a debuff) demote to situational at group for every style and leave 10+ generation, balanced included. Manual picks score, never flagged. F19 pins it; F5 was strengthened to allow only IRREDUCIBLE saturation filler (a filler slot with a better legal replacement still fails).
 
-Audit artifacts: `out/economics_report.json` (cost tiers, heal scales, full healers), derived group membership printed at dataset build. OPEN ruling for next session (recorded in VALIDATION.md): in brawl, a curse slot must be earned by the E's utility (Damnation, Lifecurse) — derive utility-E vs damage-E within the cursed line.
+Audit artifacts: `out/economics_report.json` (cost tiers, heal scales, full healers), `out/style_fit_report.json` (`e_debuff_max` / `nonstack_member` per weapon), derived group membership printed at dataset build. The round-6 open ruling (utility-E vs damage-E within the cursed line) is CLOSED by round 8.
 
 The dashboard tracks:
 
@@ -211,7 +217,7 @@ The killboard strip, prevalence footnotes, and cohort affinity key their fight-s
 
 ## Recommended next work
 
-**The E-audit RAN (2026-08-24, owner's check-first directive — VALIDATION.md).** Round 6's curse reading is WITHDRAWN as a rule (it was an explanation of a general principle: don't stack a tree when its shared mechanics don't stack — the CURSEDOT count-once + derived curse_pressure group already embody it). The first full sweep of all 137 Es (description damage vs scored caps, radius/pierce wording vs scale, candidates vs curation) flagged 17, resolved 13 on inspection, and fixed two Battle-Bracers-class gaps with dump citations: **Fists of Avalon** (232 area purge-punch → burst_aoe 4, now group pools) and **Trinity Spear** (191/r3 impact beside the root → burst_aoe 2, now group pools). Both open items ruled same session: Fists' purge → 4 (MASTERSHEET); Trinity Spear OUT of large-scale generation (cited override — "never the main weapon in party", its large-scale use is a structure-siege swap; general principle recorded: auto-attack steroids are not large-scale utility). T31d pins both, 56/56 golden. Roadmap items 4/5 (slot locks, player profiles) owner-deprioritized until comp quality satisfies. Watch items: Evensong (possibly undervalued — killboard now argues against), Hellfire under clap_kite, castle-25's saturated tail quality.
+**The E-audit RAN (2026-08-24, owner's check-first directive — VALIDATION.md).** Round 6's curse reading is WITHDRAWN as a rule (it was an explanation of a general principle: don't stack a tree when its shared mechanics don't stack — the CURSEDOT count-once + derived curse_pressure group already embody it). The first full sweep of all 137 Es (description damage vs scored caps, radius/pierce wording vs scale, candidates vs curation) flagged 17, resolved 13 on inspection, and fixed two Battle-Bracers-class gaps with dump citations: **Fists of Avalon** (232 area purge-punch → burst_aoe 4, now group pools) and **Trinity Spear** (191/r3 impact beside the root → burst_aoe 2, now group pools). Both open items ruled same session: Fists' purge → 4 (MASTERSHEET); Trinity Spear OUT of large-scale generation (cited override — "never the main weapon in party", its large-scale use is a structure-siege swap; general principle recorded: auto-attack steroids are not large-scale utility). T31d pins both, 56/56 golden. Roadmap items 4/5 (slot locks, player profiles) owner-deprioritized until comp quality satisfies. Watch items: Hellfire under clap_kite, castle-25's saturated tail quality. Evensong RESOLVED 2026-08-25 (round 8's C7-E number check: the E's 112 damage was scored like a 264-class bomb — burst_aoe trimmed 4→2 with citation; the stacking aura debuff identity stands) and the rest of the C7-E watch list is CLOSED as owner-accepted with numbers verified (VALIDATION.md).
 
 **Round 7 RULED + SHIPPED (2026-08-24, VALIDATION.md)** — the two-prong E rule: prong-1 fact fixes (Battle Bracers' unscored Falcon Smash AoE damage restored with dump citation → back in group pools, killboard-corroborated; Warbow / 1H Fire / Hellspawn owner-ruled solo-class via cited style overrides) + the derived `weak_group_e` demotion (low E damage AND no real E tool → trio-class; the AND protects Heavy-Mace-style utility Es). Golden T31/T31b pin it. Same-session follow-up closed the rest: Spirithunter PROMOTED to clap/clap_kite fits (cited override; T23e refined, T31c pins pools — "massive pierce that enables the whole dps line"), Bloodletter resolved as a battlemount-pilot killboard artifact (no gate change; mount-carrier bias caveat added to KILLBOARD_AFFINITY.md), Galatine Pair confirmed a solo-bomb specialist (stays pooled, forge correctly passes). Round 7 fully closed at 55/55 golden.
 

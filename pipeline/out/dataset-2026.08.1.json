@@ -259,6 +259,7 @@
     "derived": true,
     "max": 2,
     "name": "clump_core",
+    "nonstacking": false,
     "rule": "clump_create >= 4 (flat sheet points)",
     "weapons": [
      "2H_HAMMER_AVALON",
@@ -270,6 +271,7 @@
     "derived": true,
     "max": 2,
     "name": "curse_pressure",
+    "nonstacking": true,
     "rule": "kit cites CURSEDOT/CURSED_SPLAT",
     "weapons": [
      "2H_CURSEDSTAFF",
@@ -34083,10 +34085,10 @@
    },
    "capabilities": {
     "buff_allies": 2,
-    "burst_aoe": 4,
+    "burst_aoe": 2,
     "cleanse": 4,
     "damage_debuff": 2,
-    "heal_reduction": 4,
+    "heal_reduction": 3,
     "peel": 2,
     "ranged_presence": 2,
     "resist_shred": 3,
@@ -34095,7 +34097,7 @@
     "sustained_dps": 2
    },
    "cost_tier": "avalonian",
-   "curated_as_of": "2026-08-12",
+   "curated_as_of": "2026-08-25",
    "display_name": "Evensong",
    "evidence": {
     "buff_allies": [
@@ -34163,9 +34165,9 @@
     "slots": [
      [
       {
-       "burst_aoe": 4,
+       "burst_aoe": 2,
        "damage_debuff": 2,
-       "heal_reduction": 4,
+       "heal_reduction": 3,
        "ranged_presence": 2,
        "slow": 2
       }
@@ -34210,23 +34212,23 @@
       "trio": "fits"
      },
      "brawl_clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      }
     },
@@ -34388,6 +34390,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.2,
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
@@ -34610,6 +34613,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.15,
    "role_hint": "melee",
    "source": "sheets/realmbreaker.yaml",
    "status": "curated",
@@ -35776,6 +35780,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.4,
    "role_hint": "melee",
    "source": "sheets/claws.yaml",
    "status": "curated",
@@ -35975,6 +35980,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.3,
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
@@ -36181,6 +36187,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.2,
    "role_hint": "melee",
    "source": "sheets/kingmaker.yaml",
    "status": "curated",
@@ -36383,6 +36390,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.25,
    "role_hint": "melee",
    "source": "sheets/carving_sword.yaml",
    "status": "curated",
@@ -36601,6 +36609,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -37542,27 +37551,27 @@
     "fit": {
      "brawl": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "brawl_clap": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "clap": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "clap_kite": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "kite": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      }
     },
@@ -37617,7 +37626,7 @@
    },
    "capabilities": {
     "buff_allies": 2,
-    "burst_aoe": 6,
+    "burst_aoe": 2,
     "ranged_presence": 2,
     "resist_shred": 4,
     "root": 3,
@@ -37680,7 +37689,7 @@
     "slots": [
      [
       {
-       "burst_aoe": 6,
+       "burst_aoe": 2,
        "ranged_presence": 2,
        "resist_shred": 4
       }
@@ -37884,6 +37893,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.4,
    "role_hint": "melee",
    "source": "sheets/dagger_pair.yaml",
    "status": "curated",
@@ -38075,6 +38085,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.2,
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
@@ -38269,6 +38280,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.25,
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
@@ -38465,27 +38477,27 @@
     "fit": {
      "brawl": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "brawl_clap": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "clap": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "clap_kite": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "kite": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      }
     },
@@ -38769,6 +38781,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "melee",
    "source": "sheets/double_bladed_staff.yaml",
    "status": "curated",
@@ -38992,6 +39005,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -39181,6 +39195,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.2,
    "role_hint": "melee",
    "source": "sheets/bear_paws.yaml",
    "status": "curated",
@@ -39805,6 +39820,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.2,
    "role_hint": "tank",
    "source": "sheets/forge_hammers.yaml",
    "status": "curated",
@@ -39974,6 +39990,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -40152,6 +40169,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.2,
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
@@ -40326,6 +40344,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.4,
    "role_hint": "melee",
    "source": "sheets/deathgivers.yaml",
    "status": "curated",
@@ -40503,6 +40522,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.25,
    "role_hint": "melee",
    "source": "sheets/dualswords.yaml",
    "status": "curated",
@@ -41419,6 +41439,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -42242,6 +42263,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.3,
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -42414,6 +42436,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.05,
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -42605,6 +42628,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.15,
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
@@ -42801,6 +42825,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.15,
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
@@ -43027,6 +43052,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/great_hammer.yaml",
    "status": "curated",
@@ -43265,6 +43291,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/hand_of_justice.yaml",
    "status": "curated",
@@ -43497,6 +43524,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
@@ -43741,6 +43769,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
@@ -43918,6 +43947,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.05,
    "role_hint": "melee",
    "source": "sheets/spirithunter.yaml",
    "status": "curated",
@@ -45356,6 +45386,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -45776,6 +45807,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.2,
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -45972,6 +46004,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.2,
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -46207,6 +46240,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -46421,6 +46455,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.2,
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -46616,6 +46651,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.2,
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -46832,6 +46868,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.25,
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -47028,6 +47065,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.2,
    "role_hint": "melee",
    "source": "sheets/battle_bracers.yaml",
    "status": "curated",
@@ -47265,6 +47303,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "melee",
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
@@ -47759,6 +47798,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/mace_line.yaml",
    "status": "curated",
@@ -47949,6 +47989,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -48755,6 +48796,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/polehammer.yaml",
    "status": "curated",
@@ -48959,6 +49001,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/quarterstaff.yaml",
    "status": "curated",
@@ -49181,6 +49224,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -49386,6 +49430,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/grovekeeper.yaml",
    "status": "curated",
@@ -49742,6 +49787,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -49917,6 +49963,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.15,
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
@@ -50119,6 +50166,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.15,
    "role_hint": "melee",
    "source": "sheets/axe_line.yaml",
    "status": "curated",
@@ -50556,6 +50604,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "range",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -50962,6 +51011,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -51157,6 +51207,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.2,
    "role_hint": "melee",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -51370,6 +51421,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.4,
    "role_hint": "melee",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -51779,6 +51831,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "melee",
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
@@ -51963,27 +52016,27 @@
     "fit": {
      "brawl": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "brawl_clap": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "clap": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "clap_kite": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "kite": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      }
     },
@@ -52091,6 +52144,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.3,
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -52282,6 +52336,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.25,
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -52505,6 +52560,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "melee",
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
@@ -53620,6 +53676,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.2,
    "role_hint": "melee",
    "source": "sheets/battleaxe.yaml",
    "status": "curated",
@@ -53798,27 +53855,27 @@
     "fit": {
      "brawl": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "brawl_clap": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "clap": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "clap_kite": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "kite": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      }
     },
@@ -53966,27 +54023,27 @@
     "fit": {
      "brawl": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "brawl_clap": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "clap": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "clap_kite": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      },
      "kite": {
       "gang": "fits",
-      "group": "fits",
+      "group": "situational",
       "trio": "fits"
      }
     },
@@ -54061,7 +54118,7 @@
     "resist_shred": 2,
     "root": 3,
     "slow": 2,
-    "sustained_dps": 2,
+    "sustained_dps": 4,
     "zone_control": 2
    },
    "cost_tier": "crystal",
@@ -54130,7 +54187,7 @@
      ],
      [
       {
-       "sustained_dps": 2
+       "sustained_dps": 4
       },
       {
        "slow": 2,
@@ -54501,6 +54558,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.4,
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
@@ -54697,6 +54755,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.25,
    "role_hint": "melee",
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
@@ -56045,6 +56104,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
@@ -56522,6 +56582,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/mace_line.yaml",
    "status": "curated",
@@ -56704,6 +56765,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -56896,6 +56958,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -57829,6 +57892,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.4,
    "role_hint": "melee",
    "source": "sheets/bloodletter.yaml",
    "status": "curated",
@@ -57991,6 +58055,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "tank",
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
@@ -58030,7 +58095,7 @@
   },
   "MAIN_SCIMITAR_MORGANA": {
    "cap_delivery": {
-    "burst_st": {
+    "burst_aoe": {
      "escalation": {
       "duration": 0.08,
       "value": 0.08
@@ -58084,11 +58149,12 @@
     }
    },
    "capabilities": {
-    "burst_st": 4,
+    "burst_aoe": 4,
     "catch": 2,
     "disengage": 2,
     "mobility": 4,
     "peel": 2,
+    "ranged_presence": 2,
     "root": 2,
     "self_sustain": 2,
     "silence": 2,
@@ -58099,7 +58165,7 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Clarent Blade",
    "evidence": {
-    "burst_st": [
+    "burst_aoe": [
      "MIGHTYSWING"
     ],
     "catch": [
@@ -58113,6 +58179,9 @@
     ],
     "peel": [
      "SPLITTINGSLASH"
+    ],
+    "ranged_presence": [
+     "MIGHTYSWING"
     ],
     "root": [
      "SPLITTINGSLASH"
@@ -58159,8 +58228,9 @@
     "slots": [
      [
       {
-       "burst_st": 4,
+       "burst_aoe": 4,
        "catch": 2,
+       "ranged_presence": 2,
        "silence": 2,
        "slow": 2
       }
@@ -58188,6 +58258,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.05,
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
@@ -58378,6 +58449,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.25,
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -58574,6 +58646,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.1,
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -58753,6 +58826,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.25,
    "role_hint": "melee",
    "source": "sheets/spear_line.yaml",
    "status": "curated",
@@ -58927,6 +59001,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.3,
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",
@@ -59083,6 +59158,7 @@
     ]
    },
    "removed": false,
+   "resil_pen": 0.15,
    "role_hint": "melee",
    "source": "sheets/sword_line.yaml",
    "status": "curated",

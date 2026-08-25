@@ -434,6 +434,20 @@ GROUP_AOE_MIN_RADIUS = 3.0
 E_DMG_JOB_MIN = 4
 E_UTILITY_TOOL_MIN = 4
 E_GROUP_UTILITY_CAPS = UTILITY_EXEMPT_CAPS + ("interrupt",)
+# Non-stacking budget slots are EARNED (owner rulings 2026-08-24/25): a
+# member of a derived NON-STACKING group (the cursed line — its shared Q
+# pool is priced count-once by the CURSEDOT record) brings damage the
+# budget already discounts, so a GROUP-band (10+) slot is earned by the
+# E's enemy-DEBUFF tool: "the only weapon i see in any party bigger than
+# 15 people is the lifecurse, damnation, or rotcaller" — purge, pierce,
+# heal-cut. Displacement/CC is NOT a debuff and does not earn the slot
+# ("demonic staff is not a true brawl weapon at larger than 7 people" —
+# its fear peels but denies nothing). Members whose best E debuff sits
+# below E_UTILITY_TOOL_MIN demote to situational at group for EVERY
+# style — a legitimate manual pick, never generated. Trio/gang untouched
+# (Shadowcaller stays a real small-gang pick).
+E_DEBUFF_CAPS = ("purge", "resist_shred", "heal_reduction",
+                 "max_health_cut", "damage_debuff")
 
 
 def load_style_overrides():
@@ -448,7 +462,7 @@ def load_style_overrides():
 
 
 def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
-                     econ=None, heal_dedicated_min=4):
+                     econ=None, heal_dedicated_min=4, nonstack_members=None):
     """Per-weapon style/size fit with an evidence trail. Returns
     (report, problems) — problems block the release (an override naming an
     unknown weapon/style/band/verdict).
@@ -487,7 +501,7 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
         slots = lo.get("slots") or []
         spells = lo.get("slot_spells") or []
         e_spells, e_reach, e_group = [], 0.0, False
-        e_dmg_pts, e_util_max = 0, 0
+        e_dmg_pts, e_util_max, e_debuff_max = 0, 0, 0
         for i, slot in enumerate(slots):
             if i >= len(names) or names[i] != "e":
                 continue
@@ -499,6 +513,10 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                     v = bundle.get(c, 0)
                     if v > e_util_max:
                         e_util_max = v
+                for c in E_DEBUFF_CAPS:
+                    v = bundle.get(c, 0)
+                    if v > e_debuff_max:
+                        e_debuff_max = v
                 if not any(bundle.get(c) for c in DAMAGE_CAPS):
                     continue
                 bd = sum(bundle.get(c, 0) for c in DAMAGE_CAPS)
@@ -583,6 +601,17 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                 fit[s]["gang"] = "situational"
                 fit[s]["group"] = "unfit"
 
+        # Non-stacking budget slots are EARNED (owner ruling 2026-08-25,
+        # see E_DEBUFF_CAPS): a non-stacking-group member whose E carries
+        # no real enemy-debuff tool demotes to situational at GROUP for
+        # every style — never unfit (manual picks stay legitimate), never
+        # below group band. Overrides below still win.
+        nonstack = key in (nonstack_members or ())
+        if nonstack and e_debuff_max < E_UTILITY_TOOL_MIN:
+            for s in STYLE_FIT_STYLES:
+                if fit[s]["group"] == "fits":
+                    fit[s]["group"] = "situational"
+
         basis = "derived"
         ov = overrides.get(key)
         override_rec = None
@@ -622,6 +651,7 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                "e_damage_spells": e_spells, "e_reach": e_reach,
                "e_damage_pts": e_dmg_pts, "e_utility_max": e_util_max,
                "weak_group_e": weak_group_e,
+               "e_debuff_max": e_debuff_max, "nonstack_member": nonstack,
                "fit": fit, "basis": basis}
         if override_rec:
             rec["override"] = override_rec
@@ -662,6 +692,35 @@ def load_heal_overrides():
         if isinstance(e, dict) and e.get("weapon") and e.get("spell"):
             out[(e["weapon"], e["spell"])] = e
     return out
+
+
+def apply_resilience_penetration(weapons):
+    """Stamp per-weapon `resil_pen` from pipeline/resilience_penetration.yaml
+    (cited wiki table, post-Realm-Divided; a MELEE-ONLY stat — weapons
+    absent from the table carry none, which the wiki states categorically
+    for ranged/magic lines). Owner ruling 2026-08-25 wires it as a partial
+    rebate on the Focus-Fire ST tax (engine `_eff`); both ports read the
+    stamped field. Wiki rows outside the combat catalog are reported,
+    never guessed."""
+    path = os.path.join(HERE, "resilience_penetration.yaml")
+    if not os.path.exists(path):
+        return
+    rows = (_load_yaml(path) or {}).get("rows") or []
+    by_name = {}
+    for k, w in weapons.items():
+        dn = (w.get("display_name") or "").strip().lower()
+        if dn and not w.get("removed"):
+            by_name[dn] = k
+    matched, unmatched = 0, []
+    for r in rows:
+        key = by_name.get(str(r.get("name", "")).strip().lower())
+        if key is None:
+            unmatched.append(str(r.get("name")))
+            continue
+        weapons[key]["resil_pen"] = float(r["pen"])
+        matched += 1
+    note = f"; not in catalog: {', '.join(unmatched)}" if unmatched else ""
+    print(f"  resil_pen     : {matched} weapon(s) stamped{note}")
 
 
 def derive_economics(weapons, composition, spell_index, overrides):
@@ -957,19 +1016,27 @@ def main():
                     members.add(k)
             rules.append("kit cites " + "/".join(ev_spells))
         members = sorted(members)
+        # evidence_spells membership == a shared NON-STACKING kit (the
+        # pool a verified count-once interaction record prices): flagged
+        # so the style-fit derivation and the engines' generation gate can
+        # require such a slot to be EARNED (owner ruling 2026-08-25).
         composition.setdefault("groups", []).append({
             "name": g_name, "max": g_cfg.get("max", 2), "weapons": members,
-            "derived": True, "rule": "; ".join(rules)})
+            "derived": True, "nonstacking": bool(ev_spells),
+            "rule": "; ".join(rules)})
         print(f"  derived group : {g_name} (max {g_cfg.get('max', 2)}): "
               + ", ".join(members))
 
+    apply_resilience_penetration(weapons)
     econ_report, econ_problems = derive_economics(
         weapons, composition, spell_index, load_heal_overrides())
+    nonstack_members = {w for g in composition.get("groups", []) or []
+                        if g.get("nonstacking") for w in g.get("weapons", [])}
     fit_report, fit_problems = derive_style_fit(
         weapons, spell_index, item_stats, scoring.get("role_sets") or {},
         load_style_overrides(), econ_report,
         (composition.get("primary_healer", {}) or {})
-        .get("e_heal_dedicated_min", 4))
+        .get("e_heal_dedicated_min", 4), nonstack_members)
     # MetaBattle cross-check (MECHANICS_TODO Q15): weapons real ZvZ builds
     # field must not derive group-band all-unfit — disagreements are the
     # owner's review queue, never silent fixes.

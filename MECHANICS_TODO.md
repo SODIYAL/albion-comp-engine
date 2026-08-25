@@ -10,12 +10,62 @@ Focus Fire / Resilience, AoE Escalation, Disarray. Canonical data home:
 [pipeline/templates/mechanics.yaml](pipeline/templates/mechanics.yaml) —
 consumed by the build and applied by both engine ports as supply-side
 effectiveness multipliers since 2026-08-13 (implementation checklist below);
-the geometric AoE utility scaling ruling followed 2026-08-20. Remaining
-number gaps: resil-pen per weapon (Q7), CC-escalation durations (Q8),
-escalation eligibility per spell (Q9), current Disarray level table (Q12).
-Playstyle research pass done 2026-08-13: attackers-per-target is a STYLE
-property — provisional per-style mechanics table awaits expert sign-off
-(Q14).**
+the geometric AoE utility scaling ruling followed 2026-08-20. 2026-08-25
+closed the number gaps: resil-pen per weapon WIRED as a supply-side
+rebate (Q7), CC-escalation durations answered from dumps (Q8),
+escalation eligibility per spell extracted (Q9), Disarray table verified
+current (Q12), the per-style mechanics table owner-delegated with a
+confirmed ordering (Q14), and both global physics tables owner-confirmed
+against the live wiki.**
+
+## Priority list — open gaps, ordered (owner-requested 2026-08-25)
+
+Online research pass ran 2026-08-25 (wiki via reader proxy, patch notes
+through 31.030.1, community guides); findings folded into the entries
+below. Patches after Radiant Wilds: 31.010.1 / 31.020.1 / 31.030.1 —
+none touch Resilience, Focus Fire, or AoE Escalation, so the wired
+`mechanics.yaml` numbers are CURRENT (small residual uncertainty:
+31.030.1's full combat thread was unreadable; summaries list only
+weapon-level changes).
+
+1. **Q16 — content-absolute physics: CLOSED 2026-08-25.** The shipped
+   `size_physics` tables (composition.yaml; live in both ports since
+   2026-08-18, pinned by F8/T15/T16) received owner sign-off — "ok that
+   seems fair" on both tables as presented: `st_value_mult` (100% ≤5 /
+   80%@7 / 50%@10 / 35%@15 / 25%@20 / 20%@30+, roads restores full
+   value) and `count_mult` (×1.0@7 anchor → ×1.6@20 → ×2.0@40+). Same
+   session the owner independently pasted both wiki physics pages
+   (Resilience, AoE Escalation — exact matches) and stated the reading
+   the tables encode: "single target damage is punished in large groups
+   and aoe damage is rewarded in larger groups."
+2. **Q14 — CLOSED 2026-08-25 (owner-delegated with an ordering rule).**
+   Owner: "i cant give you numbers for that you have to use logic to
+   figure that out. for clap and kite and clap kite and brawl clap, the
+   number will usually be higher than brawl." The styles.yaml values
+   satisfy the ordering (brawl 3 is the floor); adjust by reasoning +
+   gate evidence, keep the ordering. Dive/assassination style: "sure but
+   only if we have more than 20 people" — deferred; if ever added, it is
+   a 20+-size style only. This delegation also subsumes the Q2b
+   unit-scale and Q5 expected-targets estimation questions.
+3. **Q7 — CLOSED 2026-08-25: WIRED.** The complete 69-row wiki table
+   (post-Realm-Divided, revision oldid=84609) lives in
+   `pipeline/resilience_penetration.yaml` (cited; melee-only stat,
+   ranged/magic categorically 0), `build_dataset` stamps per-weapon
+   `resil_pen`, and both engine ports rebate burst_st/execute SUPPLY by
+   (1 − DR·(1−pen)) / (1 − DR) at the style's grown focus count — the
+   owner-approved "partial rebate" ("single target is just a non pick at
+   20+ usually ... you can wire it as partial rebate"). The global
+   st_value weight devaluation is untouched: high-pen ST is taxed less,
+   never made good. F20 pins it; F1 invariant + 60/60 parity hold.
+   Optional follow-up: dumps cross-check of the wiki values.
+4. **Per-spell `burst_aoe` escalation gating** (deferred 2026-08-20):
+   dumps factors already extracted; wire after a styled expert pass.
+5. **Q12 — Disarray table**: ANSWERED by research (see entry) — recorded
+   only, stays unwired (mirror-fight no-op, Q11 stands).
+6. **Q11/Q13 — asymmetric numbers + CC netting at 21+**: design decisions,
+   parked until templates gain an enemy-size field.
+7. **Q17 — usage MetaPrior**: stays display-only until win-lift (V8)
+   evidence exists (standing rule).
 
 ## Where the gap lived (pre-wiring context, closed 2026-08-13)
 
@@ -80,6 +130,23 @@ ranged +18.8%, melee −2.8% avg. Unmounted cap moved 80%@25+ → 75%@26+.
 
 **Mob HP bonus** (+10% max HP per player over threshold, up to +100%): PvE
 mechanic — OUT OF SCOPE for the PvP comp engine; recorded for completeness.
+Owner-pasted wiki detail (2026-08-25): the threshold is per mob type —
+Normal/Roaming 2, Veteran 7, Elite 20 — and counts ANY in-combat player
+(damaging, debuffing, or supporting), clearing only on reset or kill.
+
+**OWNER CONFIRMATION 2026-08-25**: the owner pasted the current wiki
+Focus Fire page; every cell of the wired `mechanics.yaml` tables matches
+it exactly (unmounted through the 75%@26+ cap, mounted through 80%@18+,
+lookback 10s, buff 5s, melee = ranged). The Resilience table is no longer
+merely wiki-sourced — it is owner-verified current. Same session, the
+owner pasted the AoE Escalation page — also an exact match (8%/target
+from 2, 56% cap at 8+, after buffs, bypasses the soft cap) — and added
+the reading: "from this you can see that single target damage is
+punished in large groups and aoe damage is rewarded in larger groups."
+That is a DIRECTIONAL owner endorsement of the Q16 size physics (the
+shipped `size_physics` tables encode exactly that punishment/reward);
+the specific table magnitudes remain provisional pending the Q16
+sign-off in the priority list.
 
 ## Received numbers — AoE Escalation (wiki + Wild Blood 23.000.1)
 
@@ -296,7 +363,11 @@ dumps or in-game measurement, not more searching.
   research-derived; confirm or replace with your numbers before it enters
   `styles.yaml`. Also: should an `assassination/dive` style be added (the
   one archetype living deep in the Resilience curve), or is it out of scope
-  for group comp forging?
+  for group comp forging? 2026-08-25 research: NO public numeric source
+  exists to corroborate or refute the table (qualitative only — bomb
+  squads "2–5 players" diving a clump; the 8-target escalation cap and the
+  resilience ramp indirectly support small focus counts). Owner numbers
+  are the only path.
 - [x] **Q15 — Weapon playstyle affinity: derive or curate?** ANSWERED
   (owner, 2026-08-23): derive + curate exceptions, exactly the proposal.
   Implemented as `derive_style_fit` in build_dataset.py (E-first identity:
@@ -319,13 +390,21 @@ dumps or in-game measurement, not more searching.
   for AoE escalation: expected-targets-hit per content size (ties into Q2 —
   escalation caps at 8 targets, so clump-size assumptions matter most in the
   2–8 range).
-- [ ] **Q7 — Resilience Penetration values.** Post-Realm-Divided per-weapon
-  values (dumps). Model as new capability, sheet attribute, or fold into
-  ST-damage effectiveness?
-- [ ] **Q8 (new) — CC Escalation duration curve.** AoE root/stun/silence get
-  increased duration per target hit — same 8%/target shape or different?
-  Numbers not in the wiki table. Matters for `stun`/`zone_control`/
-  `clump_create` value at scale, not just damage.
+- [~] **Q7 — Resilience Penetration values.** VALUES FOUND (2026-08-25
+  research; wiki, labeled current to 30.000.1, unchanged through 31.020.1):
+  Realm Divided cut all melee resil-pen by 10pp (Battle Bracers −15).
+  Current tiers: Daggers 40% (Demonfang/Bridled Fury 25, Twin Slayers 20),
+  Prowling Staff 40%, Broadsword/Claymore/Pike/Glaive 30%, Dual Swords/
+  Carving/Spear line/Brawler Gloves 25%, most axes/war gloves 15–20%,
+  Maces/Hammers/Quarterstaffs 10% (Forge Hammers 20), Clarent/Spirithunter/
+  Rift Glaive 5%. Source: wiki Resilience_Penetration page + Realm Divided
+  combat thread. REMAINING: cross-check vs dumps, then the modeling
+  decision — sheet attribute vs fold into ST-damage effectiveness.
+- [x] **Q8 — CC Escalation duration curve.** ANSWERED 2026-08-20 from the
+  dumps (same per-target factor as damage, 0.08; Spirit Animal 0.25 —
+  see the SHIPPED block above). 2026-08-25 research confirms the curve is
+  published NOWHERE (wiki states the mechanic exists, no numbers) — the
+  dumps extraction is the only source and stands.
 - [ ] **Q9 (new) — Per-spell escalation eligibility.** Which of our curated
   spells escalate? Wild Blood lists ~40 damage + 9 CC spells (fixed/improved,
   possibly not exhaustive). Extraction pass over ao-bin-dumps needed to map
@@ -348,11 +427,17 @@ dumps or in-game measurement, not more searching.
   Recommendation: (a) or (c) now, (b) only if content templates gain an
   enemy-size field. Note our templates: only `castle` (25) crosses the
   21-player threshold at base size, but free-form sizes go to 60 (~−26%).
-- [ ] **Q12 (new) — Disarray level table staleness.** The wiki group-size
-  table is labeled Version 22.090.1 and tops out at level 67 (445 players);
-  Radiant Wilds (31.000.1, 2026-04) extended max level to 99 and added
-  battle-mount contributions. Verify the current level-vs-size mapping from
-  dumps/forum before wiring anything that reads it.
+- [x] **Q12 — Disarray level table staleness.** ANSWERED (2026-08-25
+  research, wiki current through 31.000.1): the player table is essentially
+  our stale one — L1=21, L2=22 … L14=34 (1/player), then widening: L15=36,
+  L20=46, L26=58 (not 60), L30=70, L40=119, L50=192, L60=290, L67=445 top.
+  Radiant Wilds' max-level-99 extension exists SOLELY for battle-mount
+  contributions: each battle mount adds fixed Disarray points per alliance
+  per region (Ent/Rhino/Phalanx Beetle/Ballista 2, Goliath Horseeater 3,
+  Battle Eagle/Behemoth/Juggernaut 4, Colossus Beetle/Command Mammoth/
+  Flame Basilisk/Roving Bastion/Tower Chariot/Venom Basilisk 5); only the
+  excess above 15 total points adds on top of player-based Disarray.
+  Recorded only — Disarray stays unwired (Q11 mirror-fight no-op stands).
 - [ ] **Q13 (new) — CC value at 21+ sizes.** Two received mechanics touch CC
   in opposite directions: CC Escalation (duration UP per target hit, Q8) vs
   Disarray (duration DOWN when outnumbering, Q11). Also forced-dismount
@@ -418,7 +503,9 @@ capability-derived role (sheets) × albionbb's pre-classified per-player
 `role` field (real battles) × Metabattle tags (community). 3/3 agree →
 trusted; disagreement → expert queue, never silently overridden.
 
-- [~] **Q16 — content-absolute mechanics physics. BUILT + MEASURED
+- [x] **Q16 — content-absolute mechanics physics. CLOSED 2026-08-25:
+  the successor `size_physics` tables received owner sign-off (see the
+  priority list). Historical entry below. BUILT + MEASURED
   2026-08-14; UNCOMMITTED, pending sign-off.** The physics is now ABSOLUTE by
   size, anchored to (balanced style, base_size): at base size nothing changes
   (calibration untouched, golden 20/20 + parity 60/60 green), but ABOVE base
@@ -427,6 +514,15 @@ trusted; disagreement → expert queue, never silently overridden.
   0.5*(scale-1)))`, `scale = size/base_size` (the "capped/realistic" curve the
   user chose). Verified: `burst_st` mult drops x1.000@20 → x0.896@30 →
   x0.825@40 → x0.736@60; `burst_aoe` rises to x1.258@60.
+  **STATUS CORRECTION (2026-08-25): this entry describes the SUPERSEDED
+  2026-08-14 linear build. On 2026-08-18 the forge rework replaced the
+  `grow()` extrapolation with the piecewise absolute `size_physics`
+  tables (composition.yaml: `count_mult`, `st_value_mult`,
+  `st_boost_max_size`) — SHIPPED in both ports and pinned by F8/T15/T16.
+  What remains of Q16 is owner sign-off on those table values (see the
+  priority list). The Dagger-Pair case itself was fixed by Q19's loadout
+  model + ST recalibration; the historical measurement below stands as
+  context.**
   **KEY FINDING — Q16 is correct physics but is NOT the Dagger-Pair fix.**
   It taxes DAMAGE caps only (`burst_st`/`execute`, boosts `burst_aoe`), but DP
   ranks high on UTILITY BREADTH (catch/mobility/peel/stun/…), which Q16 doesn't
@@ -584,9 +680,20 @@ Tooling: `py -3 pipeline/build_magnitude_review.py` → `review/magnitude.html`
   removed line-wide, AA-passive removed, all air-throws/knock-ups → 1 (no
   travel), Tackle → 1 (dumps: 2m), Backhand + Launcher line-unified. Golden
   T13 pins the ladder.
-- [ ] **RULE queue — 16 same-spell-different-score groups (89 rows).** Each
-  is either a real line-rule violation or a legitimate E-supplement missing
-  its mandatory comment. Expert adjudication needed per group:
+- [x] **RULE queue — ADJUDICATED 2026-08-25 (owner batch ruling).** The
+  E-supplement pattern confirmed wholesale — "the batch is fine, just
+  test it internally" — covering the twelve specialist upgrades (dive
+  daggers' Shadow Edge 4, Dagger Pair AA-passives 4, Bloodletter Dash 4,
+  Polehammer Slowing Charge 6, Heavy Mace Snare Charge + Sacred Ground 4,
+  Energy Shaper/Siegebow Explosive Bolt 4, Battle Bracers punch combo 4,
+  Hallowfall/Redemption Holy Blessing 4, Enigmatic/Witchwork Empowering
+  Beam 4, Witchwork Arcane Protection 4, Quarterstaff/Balance Whirlwind
+  anti-dive 4). Both three-level ladders confirmed ("6 is fine"; peel
+  ranking commentary logged in VALIDATION.md round 8). ONE reversal:
+  sustained_dps/CURSEDOT — the Rotcaller 1H-budget discount was REJECTED
+  ("1 hand allows for adding an offhand, which can INCREASE damage");
+  Rotcaller now carries the line's 4. catch/LEGBREAKER had already been
+  unified by the 2026-08-21 spear ruling. Historical queue below:
   anti_dive/QS_WHIRLWIND2 [1,2] · buff_allies/EMPOWERBEAM [1,2] ·
   buff_allies/HOLYHOT [1,2] · burst_aoe/BOLTSHOT [1,2] ·
   burst_st/KNUCKLECOMBO [1,2] · catch/LEGBREAKER [1,2] ·
@@ -664,6 +771,7 @@ recent-loadout history. CAVEAT: no `access-control-allow-origin` header
   (Q11); revisit if templates gain an expected-enemy-size field.
 - CC Escalation: no duration numbers yet (Q8) — `stun`/`clump_create`
   untouched by mechanics for now.
-- Resilience Penetration: no per-weapon values yet (Q7).
+- Resilience Penetration: WIRED 2026-08-25 (see Q7 in the priority list) —
+  no longer in this list.
 - Per-spell escalation eligibility: global multiplier assumes the AoE class
   escalates uniformly until Q9's dumps extraction says otherwise.

@@ -16,5 +16,5 @@
   except:
     - {cap: resist_shred, evidence: ARMORPIERCER}
   capabilities:
-    - {cap: burst_aoe,     score: 6, evidence: CURSEULTIMATE}    # E: large-radius curse, DoT-delivered payload
-    - {cap: resist_shred,  score: 4, evidence: CURSEULTIMATE}    # E: -18% while cursed; W: Armor Piercer -17% (QW)
+    - {cap: burst_aoe,     score: 2, evidence: CURSEULTIMATE}    # E: 24/tick x6 = 144 total over ~6s (dumps) — below the 191=2 ladder anchor; was 6. Owner rule 2026-08-25: "if the numbers say high damage then ok keep at 6" — they don't; "its mostly for its capability of a massive aoe pierce". The r13 blanket + escalation live in cap_delivery
+    - {cap: resist_shred,  score: 4, evidence: CURSEULTIMATE}    # E: -18% while cursed, 13m radius — the identity; W: Armor Piercer -17% (QW)
