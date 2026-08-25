@@ -307,6 +307,48 @@ roles:
     weapons: []
 
 # ---------------------------------------------------------------------------
+# KIT DOCTRINE (increment 2, owner-approved 2026-08-25: "yes its the
+# whole build. infact we might even need to include food, potion and
+# capes and you are right about passive defaults"). Two parts:
+#
+# 1. PASSIVE DEFAULTS below — the tree-passive PICK per gear class,
+#    keyed by the wearer's seat class where the tree splits. Values name
+#    the passive FAMILY (an id substring); the build resolves each
+#    piece's actual passive id from its own dumps menu
+#    (gear_spells.json) and parses the magnitude from the spell
+#    description — no hand numbers. Resolution failure on an armor tree
+#    blocks the release (fail closed).
+# 2. Per-seat kit POOLS are DERIVED at build time from observed
+#    reference builds (builds_index — the seat's member weapons' real
+#    kits, cited by build_id) and shipped as each role's `kit:`; the
+#    chest is additionally hard-gated by the seat uniform. Derived,
+#    never hand-listed (out/roles_report.json `kit_doctrine` is the
+#    audit board).
+kit_doctrine:
+  passives:
+    cloth:
+      default: INCREASED_DAMAGE
+      source: >
+        owner:2026-08-25 ("most cloth users will take the damage passive
+        on equipment to increase damage even higher"; confirmed as the
+        default); dumps Aggression: +8% damage AND Healing Cast — one
+        passive covers both cloth dps and cloth healers.
+    leather:
+      default: CD_REDUCTION
+      source: >
+        owner:2026-08-25 (confirmed defaults); dumps Quick Thinker: +5%
+        Cooldown Rate. No cooldown channel exists in build_stats, so the
+        pick is doctrine-display only — it never invents score.
+    plate:
+      frontline: CCDURATION
+      default: INCREASED_CCR
+      source: >
+        owner:2026-08-25 ("plate = CC-duration for tanks" confirmed);
+        dumps Authority: +10% Crowd Control duration (feeds
+        cc_mult_caps); Tenacity: +20% Crowd Control Resistance (feeds
+        the tankiness-per-CCR channel) for plate off the frontline.
+
+# ---------------------------------------------------------------------------
 # GEAR EFFECTS (owner correction 2026-08-25: "the aura support i feel
 # should be broken down in individual type of auras/effects. for example
 # there is also the demon armor aura, judicator armor aura, guardian armor

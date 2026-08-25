@@ -23,6 +23,29 @@ Role layer contracts (increment 1 of roles-design.md, owner-approved
   R6  the original bug case: Incubus Mace / Grailseeker wearing Hellion
       Jacket (leather) flag off-role kit — their menu roles wear plate.
 
+Increment 2 (kit doctrine, owner-approved 2026-08-25: "yes its the whole
+build. infact we might even need to include food, potion and capes and
+you are right about passive defaults"):
+
+  R12 generated kits wear the seat's uniform: Incubus/Grailseeker chest
+      options are plate only under role="auto" (the everyone-gets-Hellion
+      bug is dead); role=None keeps the ungated back-compat pool; manual
+      scoring is never blocked.
+  R13 the Leering Cane pairing is EMERGENT physics, not a hand list: the
+      CC-duration stat ships in the dataset and multiplies the wearer's
+      own CC caps, so the cane is worth something on Incubus (root 5)
+      and exactly nothing on Great Fire (no CC).
+  R14 passive doctrine (owner defaults): cloth pieces resolve the damage
+      passive for every seat class, plate resolves CC-duration for
+      frontline and CCR otherwise — dumps-cited ids and magnitudes
+      stamped per piece; build_extra(role=) applies the stat channel.
+  R15 kit doctrine pools derive from observed reference builds (cited
+      build ids) and ship per role; chest doctrine never leaves the
+      uniform.
+  R16 options carry doctrine/carries annotations: Realmbreaker's chest
+      options include Royal Jacket flagged as the cooldown_banner
+      carrier; when a slot has doctrine evidence the kit picks from it.
+
 Run:  py -3 tests/test_roles.py
 """
 import os, sys
@@ -311,6 +334,160 @@ def t_offhand_profiles():
           f"horn={horn} horn_aff={horn_aff}")
 
 
+def t_kit_uniform_gate():
+    # R12 — increment 2's kill shot for the original bug: a GENERATED kit
+    # starts from the seat's uniform; the comp-marginal only ranks within
+    # it. Manual picks still score anything (role_advisory flags them).
+    e = Engine(content="blackzone_roam", size=20, style="brawl")
+    classes = lambda ko: {e.gear[o["gear"]].get("gear_class")
+                          for o in ko["options"].get("armor", [])}
+    inc = e.kit_options("MAIN_MACE_HELL", top_n=300)
+    grail = e.kit_options("2H_QUARTERSTAFF_AVALON", top_n=300)
+    inc_ids = [o["gear"] for o in inc["options"]["armor"]]
+    gated = (classes(inc) == {"plate"} and classes(grail) == {"plate"}
+             and "ARMOR_LEATHER_HELL" not in inc_ids)
+    unc = e.kit_options("MAIN_MACE_HELL", top_n=300, role=None)
+    back_compat = "ARMOR_LEATHER_HELL" in [
+        o["gear"] for o in unc["options"]["armor"]]
+    # manual scoring untouched: a Hellion-Jacket Incubus build still
+    # evaluates (build_extra never gates)
+    manual = e.build_extra("MAIN_MACE_HELL", None, ["ARMOR_LEATHER_HELL"])
+    check("R12 uniform-gated kits: Incubus + Grailseeker chests are plate "
+          "only; role=None keeps the ungated pool; manual builds score",
+          gated and back_compat and bool(manual),
+          f"incubus classes={sorted(str(c) for c in classes(inc))} "
+          f"armor={inc_ids[:3]}")
+
+
+def t_cc_duration_pairing():
+    # R13 — the owner's Leering Cane ruling ("incubus is mostly paired
+    # with leering cane for its +cc duration"), wired as PHYSICS: the
+    # stat multiplies the wearer's own CC caps, so the pairing emerges
+    # for every CC weapon and never for a CC-less one. No hand list.
+    e = Engine()
+    cane = e.gear["OFF_JESTERCANE_HELL"].get("stats") or {}
+    shipped = cane.get("bonusccdurationvsplayers", 0) > 0
+    cc = ("stun", "root", "slow", "silence")
+    gain = lambda w: sum(
+        e.build_extra(w, None, ["OFF_JESTERCANE_HELL"]).get(c, 0.0)
+        - e.member_extra(w).get(c, 0.0) for c in cc)
+    inc_gain, fire_gain = gain("MAIN_MACE_HELL"), gain("2H_FIRESTAFF")
+    check("R13 emergent CC-duration pairing: Leering Cane's stat ships "
+          "and multiplies Incubus's CC caps; Great Fire (no CC) gains 0",
+          shipped and inc_gain > 1e-9 and abs(fire_gain) < 1e-9,
+          f"cane stats={cane} incubus_gain={inc_gain:.3f} "
+          f"fire_gain={fire_gain:.3f}")
+
+
+def t_passive_doctrine():
+    # R14 — owner-confirmed defaults (2026-08-25): cloth = the damage
+    # passive (Aggression, +8% damage & healing cast), plate = CC
+    # duration for tanks (Authority) and CCR otherwise (Tenacity),
+    # leather = cooldown rate (Quick Thinker, display-only channel).
+    # Ids resolve from each piece's own dumps passive menu; magnitudes
+    # parse from the spell descriptions — nothing hand-numbered.
+    e = Engine()
+    cloth = (e.gear["ARMOR_CLOTH_SET1"].get("doctrine_passives") or {})
+    plate = (e.gear["ARMOR_PLATE_KEEPER"].get("doctrine_passives") or {})
+    leather = (e.gear["ARMOR_LEATHER_HELL"].get("doctrine_passives") or {})
+    cloth_ok = all(
+        (cloth.get(sc) or {}).get("id") == "PASSIVE_ARMOR_INCREASED_DAMAGE"
+        and abs((cloth.get(sc) or {}).get("value", 0) - 0.08) < 1e-9
+        for sc in ("dps", "healer", "support", "frontline"))
+    plate_ok = ((plate.get("frontline") or {}).get("id")
+                == "PASSIVE_ARMOR_CCDURATION"
+                and (plate.get("dps") or {}).get("id")
+                == "PASSIVE_ARMOR_INCREASED_CCR")
+    leather_ok = ((leather.get("dps") or {}).get("id")
+                  == "PASSIVE_ARMOR_CD_REDUCTION")
+    # the stat channel: a cloth chest on a ranged_aoe seat multiplies
+    # damage caps by the passive on top of the chest's own % stat
+    with_role = e.build_extra("2H_FIRESTAFF", None, ["ARMOR_CLOTH_SET1"],
+                              role="ranged_aoe")
+    without = e.build_extra("2H_FIRESTAFF", None, ["ARMOR_CLOTH_SET1"])
+    dmg = lambda x: x.get("burst_aoe", 0.0) + x.get("sustained_dps", 0.0)
+    channel = dmg(with_role) > dmg(without) + 1e-9
+    # frontline plate: Authority multiplies the wearer's own CC caps —
+    # Incubus's DEFAULT combo carries slow (Snare Charge, the owner's
+    # doctrine pick), so slow is the cap the channel must move
+    tank_role = e.build_extra("MAIN_MACE_HELL", None, ["ARMOR_PLATE_KEEPER"],
+                              role="stopper_tank")
+    tank_bare = e.build_extra("MAIN_MACE_HELL", None, ["ARMOR_PLATE_KEEPER"])
+    cc_channel = (tank_role.get("slow", 0.0) > tank_bare.get("slow", 0.0)
+                  + 1e-9)
+    check("R14 passive doctrine: dumps-resolved ids + magnitudes per seat "
+          "class; damage passive and Authority feed the stat channels",
+          cloth_ok and plate_ok and leather_ok and channel and cc_channel,
+          f"cloth={cloth.get('dps')} plate_fl={plate.get('frontline')} "
+          f"dmg {dmg(without):.2f}->{dmg(with_role):.2f}")
+
+
+def t_kit_doctrine_evidence():
+    # R15 — doctrine pools are evidence-led (roles-design.md increment 2:
+    # "kit = the assigned role's uniform, evidence-led — reference builds
+    # first"): observed kits of a seat's member weapons, cited by
+    # build_id, shipped per role; chest doctrine never leaves the
+    # uniform.
+    import json as _json
+    e = Engine()
+    rep = _json.load(open(os.path.join(ROOT, "pipeline", "out",
+                                       "roles_report.json"),
+                          encoding="utf-8"))
+    kd = rep.get("kit_doctrine") or {}
+    roles = {r["id"]: r for r in (e.data.get("roles") or [])}
+    seats = [rid for rid, r in roles.items()
+             if ((r.get("uniform") or {}).get("chest"))]
+    shipped = any((roles[rid].get("kit") or {}) for rid in seats)
+    cited = all(
+        ent.get("sources")
+        for rid in kd for slot in (kd[rid].get("slots") or {})
+        for ent in (kd[rid]["slots"][slot] or []))
+    uniform_ok = True
+    for rid in seats:
+        uni = set((roles[rid].get("uniform") or {}).get("chest") or [])
+        for gid in (roles[rid].get("kit") or {}).get("armor", []):
+            if (e.gear.get(gid) or {}).get("gear_class") not in uni:
+                uniform_ok = False
+    in_catalog = all(gid in e.gear
+                     for rid in seats
+                     for slot, ids in (roles[rid].get("kit") or {}).items()
+                     for gid in ids)
+    check("R15 kit doctrine: observed-build pools ship per seat with "
+          "build-id citations; chest doctrine stays inside the uniform",
+          shipped and cited and uniform_ok and in_catalog and bool(kd),
+          f"seats with doctrine="
+          f"{[r for r in seats if roles[r].get('kit')][:5]}")
+
+
+def t_kit_annotations():
+    # R16 — variants surface where the evidence says they live: Royal
+    # Jacket (leather, uniform-legal for the brawler seat) appears in
+    # Realmbreaker's chest options carrying cooldown_banner — the
+    # owner's "royal jacket for extra cooldowns if team needs" example.
+    # Options carry doctrine/carries keys; a slot with doctrine evidence
+    # picks its kit from the doctrine tier.
+    e = Engine(content="blackzone_roam", size=20, style="brawl")
+    ko = e.kit_options("2H_AXE_AVALON", top_n=300)
+    armor = ko["options"]["armor"]
+    royal = next((o for o in armor if o["gear"] == "ARMOR_LEATHER_ROYAL"),
+                 None)
+    carries = royal is not None and "cooldown_banner" in (
+        royal.get("carries") or [])
+    annotated = all("doctrine" in o and "carries" in o
+                    for slot in ko["options"] for o in ko["options"][slot])
+    tiered = True
+    for slot, opts in ko["options"].items():
+        if any(o["doctrine"] for o in opts):
+            if not ko["kit"][slot]["doctrine"]:
+                tiered = False
+    check("R16 kit annotations: Royal Jacket surfaces on Realmbreaker "
+          "carrying cooldown_banner; options annotated; doctrine tier "
+          "wins the pick",
+          carries and annotated and tiered,
+          f"royal={royal and {k: royal[k] for k in ('doctrine', 'carries')}} "
+          f"slots={sorted(ko['options'])}")
+
+
 if __name__ == "__main__":
     t_role_book()
     t_ruled_memberships()
@@ -323,6 +500,11 @@ if __name__ == "__main__":
     t_shield_break_split()
     t_gear_classification()
     t_offhand_profiles()
+    t_kit_uniform_gate()
+    t_cc_duration_pairing()
+    t_passive_doctrine()
+    t_kit_doctrine_evidence()
+    t_kit_annotations()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")

@@ -173,6 +173,12 @@ build_stats:
   # % item stats MULTIPLY the member's capability supply
   damage_mult_caps: [burst_st, burst_aoe, sustained_dps, execute]
   heal_mult_caps: [heal_sustain, heal_burst]
+  # CC-duration % (increment 2, owner 2026-08-25: "incubus is mostly
+  # paired with leering cane for its +cc duration") multiplies the
+  # wearer's own DURATION-BEARING CC — the pairing emerges from physics
+  # for every CC carrier and never for a CC-less build. Knockbacks are
+  # instantaneous displacement and stay out.
+  cc_mult_caps: [stun, root, slow, silence]
 
 # ---------------------------------------------------------------------------
 # KILL PRESSURE (identity Phase D, owner checklist 2026-08-23): "did we

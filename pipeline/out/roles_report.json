@@ -1052,6 +1052,2694 @@
    ]
   }
  ],
+ "kit_doctrine": {
+  "bomb_aoe": {
+   "off_uniform": [
+    {
+     "build": "albioncompo_20v20_competitive_2026_08:comp:5",
+     "id": "ARMOR_PLATE_FEY",
+     "weapon": "2H_ARCANESTAFF"
+    },
+    {
+     "build": "albioncompo_ss_kite_20_2026_06:comp:2",
+     "id": "ARMOR_PLATE_FEY",
+     "weapon": "2H_ARCANESTAFF"
+    },
+    {
+     "build": "albioncompo_ss_kite_20_2026_06:comp:4",
+     "id": "ARMOR_PLATE_FEY",
+     "weapon": "2H_ARCANESTAFF"
+    },
+    {
+     "build": "deadlyhooker_large_scale_2026_08:party_2:1",
+     "id": "ARMOR_PLATE_FEY",
+     "weapon": "2H_ARCANESTAFF"
+    },
+    {
+     "build": "albioncompo_bist_roam15_2026_01:comp:3",
+     "id": "ARMOR_PLATE_SET2",
+     "weapon": "2H_ARCANESTAFF"
+    },
+    {
+     "build": "albioncompo_roads_oneshot_2026_07:comp:2",
+     "id": "ARMOR_PLATE_SET2",
+     "weapon": "2H_ARCANESTAFF"
+    },
+    {
+     "build": "albioncompo_sob_blaze_os_2026_06:comp:1",
+     "id": "ARMOR_PLATE_SET2",
+     "weapon": "2H_ARCANESTAFF"
+    },
+    {
+     "build": "deadlyhooker_large_scale_2026_08:party_1:4",
+     "id": "ARMOR_PLATE_SET2",
+     "weapon": "2H_ARCANESTAFF"
+    },
+    {
+     "build": "deadlyhooker_large_scale_2026_08:party_2:0",
+     "id": "ARMOR_PLATE_SET2",
+     "weapon": "2H_ARCANESTAFF"
+    }
+   ],
+   "slots": {
+    "cape": [
+     {
+      "count": 10,
+      "id": "CAPEITEM_SMUGGLER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:5",
+       "albioncompo_roads_oneshot_2026_07:comp:2",
+       "albioncompo_sob_blaze_os_2026_06:comp:1",
+       "albioncompo_ss_kite_20_2026_06:comp:2",
+       "albioncompo_ss_kite_20_2026_06:comp:4",
+       "deadlyhooker_large_scale_2026_08:party_1:4",
+       "deadlyhooker_large_scale_2026_08:party_2:0",
+       "deadlyhooker_large_scale_2026_08:party_2:1",
+       "deadlyhooker_large_scale_2026_08:party_2:14",
+       "deadlyhooker_large_scale_2026_08:party_2:15"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "CAPEITEM_FW_LYMHURST",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:3",
+       "metabattle:7766:8995"
+      ]
+     }
+    ],
+    "food": [
+     {
+      "count": 6,
+      "id": "T7_MEAL_OMELETTE_AVALON",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:5",
+       "albioncompo_bist_roam15_2026_01:comp:3",
+       "albioncompo_roads_oneshot_2026_07:comp:2",
+       "albioncompo_sob_blaze_os_2026_06:comp:1",
+       "albioncompo_ss_kite_20_2026_06:comp:2",
+       "albioncompo_ss_kite_20_2026_06:comp:4"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "T8_MEAL_STEW",
+      "sources": [
+       "metabattle:7766:8995"
+      ]
+     }
+    ],
+    "head": [
+     {
+      "count": 11,
+      "id": "HEAD_LEATHER_SET3",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:5",
+       "albioncompo_bist_roam15_2026_01:comp:3",
+       "albioncompo_roads_oneshot_2026_07:comp:2",
+       "albioncompo_sob_blaze_os_2026_06:comp:1",
+       "albioncompo_ss_kite_20_2026_06:comp:2",
+       "albioncompo_ss_kite_20_2026_06:comp:4",
+       "deadlyhooker_large_scale_2026_08:party_1:4",
+       "deadlyhooker_large_scale_2026_08:party_2:0",
+       "deadlyhooker_large_scale_2026_08:party_2:1",
+       "deadlyhooker_large_scale_2026_08:party_2:14",
+       "deadlyhooker_large_scale_2026_08:party_2:15"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_LEATHER_FEY",
+      "sources": [
+       "metabattle:7766:8995"
+      ]
+     }
+    ],
+    "potion": [
+     {
+      "count": 4,
+      "id": "T7_POTION_REVIVE",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:5",
+       "albioncompo_bist_roam15_2026_01:comp:3",
+       "albioncompo_ss_kite_20_2026_06:comp:2",
+       "albioncompo_ss_kite_20_2026_06:comp:4"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "T7_POTION_STONESKIN",
+      "sources": [
+       "metabattle:7766:8995"
+      ]
+     }
+    ],
+    "shoes": [
+     {
+      "count": 4,
+      "id": "SHOES_LEATHER_MORGANA",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:5",
+       "albioncompo_roads_oneshot_2026_07:comp:2",
+       "deadlyhooker_large_scale_2026_08:party_2:14",
+       "deadlyhooker_large_scale_2026_08:party_2:15"
+      ]
+     }
+    ]
+   }
+  },
+  "brawl_healer": {
+   "off_uniform": [
+    {
+     "build": "albioncompo_bist_roam15_2026_01:comp:6",
+     "id": "ARMOR_CLOTH_AVALON",
+     "weapon": "MAIN_HOLYSTAFF_AVALON"
+    },
+    {
+     "build": "albioncompo_bist_roam15_2026_01:comp:8",
+     "id": "ARMOR_CLOTH_AVALON",
+     "weapon": "MAIN_HOLYSTAFF_AVALON"
+    },
+    {
+     "build": "albioncompo_ss_kite_20_2026_06:comp:19",
+     "id": "ARMOR_CLOTH_AVALON",
+     "weapon": "MAIN_HOLYSTAFF_AVALON"
+    },
+    {
+     "build": "cb_clonepeek_zvz20_2026_03:comp:7",
+     "id": "ARMOR_CLOTH_AVALON",
+     "weapon": "MAIN_HOLYSTAFF_AVALON"
+    },
+    {
+     "build": "albioncompo_20v20_competitive_2026_08:comp:10",
+     "id": "ARMOR_CLOTH_FEY",
+     "weapon": "MAIN_HOLYSTAFF_AVALON"
+    },
+    {
+     "build": "albioncompo_20v20_competitive_2026_08:comp:8",
+     "id": "ARMOR_CLOTH_FEY",
+     "weapon": "MAIN_HOLYSTAFF_AVALON"
+    },
+    {
+     "build": "albioncompo_20v20_competitive_2026_08:comp:9",
+     "id": "ARMOR_CLOTH_FEY",
+     "weapon": "MAIN_HOLYSTAFF_AVALON"
+    },
+    {
+     "build": "deadlyhooker_large_scale_2026_08:party_1:6",
+     "id": "ARMOR_CLOTH_FEY",
+     "weapon": "MAIN_HOLYSTAFF_AVALON"
+    },
+    {
+     "build": "deadlyhooker_large_scale_2026_08:party_1:7",
+     "id": "ARMOR_CLOTH_FEY",
+     "weapon": "MAIN_HOLYSTAFF_AVALON"
+    },
+    {
+     "build": "deadlyhooker_large_scale_2026_08:party_1:8",
+     "id": "ARMOR_CLOTH_FEY",
+     "weapon": "MAIN_HOLYSTAFF_AVALON"
+    },
+    {
+     "build": "deadlyhooker_large_scale_2026_08:party_2:5",
+     "id": "ARMOR_CLOTH_FEY",
+     "weapon": "MAIN_HOLYSTAFF_AVALON"
+    },
+    {
+     "build": "deadlyhooker_large_scale_2026_08:party_3:5",
+     "id": "ARMOR_CLOTH_FEY",
+     "weapon": "MAIN_HOLYSTAFF_AVALON"
+    }
+   ],
+   "slots": {
+    "armor": [
+     {
+      "count": 1,
+      "id": "ARMOR_PLATE_KEEPER",
+      "sources": [
+       "timothy_blap_blackzone_roam_2026_08:blap:17"
+      ]
+     }
+    ],
+    "cape": [
+     {
+      "count": 8,
+      "id": "CAPEITEM_SMUGGLER",
+      "sources": [
+       "deadlyhooker_large_scale_2026_08:party_1:6",
+       "deadlyhooker_large_scale_2026_08:party_1:7",
+       "deadlyhooker_large_scale_2026_08:party_1:8",
+       "deadlyhooker_large_scale_2026_08:party_2:5",
+       "deadlyhooker_large_scale_2026_08:party_2:7",
+       "deadlyhooker_large_scale_2026_08:party_3:5",
+       "timothy_blap_blackzone_roam_2026_08:blap:16",
+       "timothy_blap_blackzone_roam_2026_08:blap:17"
+      ]
+     },
+     {
+      "count": 6,
+      "id": "CAPEITEM_FW_LYMHURST",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "albioncompo_ss_kite_20_2026_06:comp:19"
+      ]
+     }
+    ],
+    "food": [
+     {
+      "count": 5,
+      "id": "T7_MEAL_OMELETTE_AVALON",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "albioncompo_ss_kite_20_2026_06:comp:19"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "T7_MEAL_OMELETTE",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "cb_clonepeek_zvz20_2026_03:comp:7"
+      ]
+     }
+    ],
+    "head": [
+     {
+      "count": 5,
+      "id": "HEAD_PLATE_SET3",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "deadlyhooker_large_scale_2026_08:party_1:6",
+       "deadlyhooker_large_scale_2026_08:party_2:5",
+       "deadlyhooker_large_scale_2026_08:party_3:5",
+       "timothy_blap_blackzone_roam_2026_08:blap:17"
+      ]
+     },
+     {
+      "count": 3,
+      "id": "HEAD_LEATHER_SET3",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "deadlyhooker_large_scale_2026_08:party_2:7"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "HEAD_CLOTH_KEEPER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_ss_kite_20_2026_06:comp:19"
+      ]
+     }
+    ],
+    "offhand": [
+     {
+      "count": 11,
+      "id": "OFF_HORN_KEEPER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_ss_kite_20_2026_06:comp:19",
+       "cb_clonepeek_zvz20_2026_03:comp:7",
+       "deadlyhooker_large_scale_2026_08:party_1:6",
+       "deadlyhooker_large_scale_2026_08:party_1:7",
+       "deadlyhooker_large_scale_2026_08:party_1:8",
+       "deadlyhooker_large_scale_2026_08:party_2:5",
+       "deadlyhooker_large_scale_2026_08:party_2:7",
+       "deadlyhooker_large_scale_2026_08:party_3:5",
+       "timothy_blap_blackzone_roam_2026_08:blap:16",
+       "timothy_blap_blackzone_roam_2026_08:blap:17"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "OFF_SHIELD",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "OFF_TOWERSHIELD_UNDEAD",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:8"
+      ]
+     }
+    ],
+    "potion": [
+     {
+      "count": 5,
+      "id": "T7_POTION_REVIVE",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "albioncompo_ss_kite_20_2026_06:comp:19"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "T7_POTION_STONESKIN",
+      "sources": [
+       "cb_clonepeek_zvz20_2026_03:comp:7"
+      ]
+     }
+    ],
+    "shoes": [
+     {
+      "count": 4,
+      "id": "SHOES_LEATHER_ROYAL",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "albioncompo_ss_kite_20_2026_06:comp:19"
+      ]
+     },
+     {
+      "count": 3,
+      "id": "SHOES_LEATHER_SET1",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "cb_clonepeek_zvz20_2026_03:comp:7"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "SHOES_LEATHER_MORGANA",
+      "sources": [
+       "timothy_blap_blackzone_roam_2026_08:blap:16",
+       "timothy_blap_blackzone_roam_2026_08:blap:17"
+      ]
+     }
+    ]
+   }
+  },
+  "dive_cleanup": {
+   "slots": {
+    "armor": [
+     {
+      "count": 4,
+      "id": "ARMOR_LEATHER_HELL",
+      "sources": [
+       "metabattle:7645:8952",
+       "metabattle:7658:8999",
+       "timothy_blap_blackzone_roam_2026_08:blap:13",
+       "timothy_blap_blackzone_roam_2026_08:blap:15"
+      ]
+     }
+    ],
+    "cape": [
+     {
+      "count": 2,
+      "id": "CAPEITEM_SMUGGLER",
+      "sources": [
+       "timothy_blap_blackzone_roam_2026_08:blap:13",
+       "timothy_blap_blackzone_roam_2026_08:blap:15"
+      ]
+     }
+    ],
+    "food": [
+     {
+      "count": 3,
+      "id": "T8_MEAL_STEW",
+      "sources": [
+       "cb_shadowlagrange_tracking5_2026_01:comp:4",
+       "metabattle:7645:8952",
+       "metabattle:7658:8999"
+      ]
+     }
+    ],
+    "head": [
+     {
+      "count": 1,
+      "id": "HEAD_LEATHER_SET3",
+      "sources": [
+       "metabattle:7645:8952"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_PLATE_SET2",
+      "sources": [
+       "metabattle:7658:8999"
+      ]
+     }
+    ],
+    "offhand": [
+     {
+      "count": 1,
+      "id": "OFF_DEMONSKULL_HELL",
+      "sources": [
+       "metabattle:7658:8999"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "OFF_HORN_KEEPER",
+      "sources": [
+       "timothy_blap_blackzone_roam_2026_08:blap:13"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "OFF_SPIKEDSHIELD_MORGANA",
+      "sources": [
+       "timothy_blap_blackzone_roam_2026_08:blap:15"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "OFF_TOTEM_KEEPER",
+      "sources": [
+       "metabattle:7645:8952"
+      ]
+     }
+    ],
+    "potion": [
+     {
+      "count": 2,
+      "id": "T7_POTION_STONESKIN",
+      "sources": [
+       "metabattle:7645:8952",
+       "metabattle:7658:8999"
+      ]
+     }
+    ],
+    "shoes": [
+     {
+      "count": 3,
+      "id": "SHOES_LEATHER_MORGANA",
+      "sources": [
+       "metabattle:7658:8999",
+       "timothy_blap_blackzone_roam_2026_08:blap:13",
+       "timothy_blap_blackzone_roam_2026_08:blap:15"
+      ]
+     }
+    ]
+   }
+  },
+  "engage_tank": {
+   "off_uniform": [
+    {
+     "build": "albioncompo_ss_kite_20_2026_06:comp:15",
+     "id": "ARMOR_CLOTH_AVALON",
+     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
+    },
+    {
+     "build": "albioncompo_20v20_competitive_2026_08:comp:12",
+     "id": "ARMOR_CLOTH_FEY",
+     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
+    },
+    {
+     "build": "metabattle:7755:8913",
+     "id": "ARMOR_LEATHER_ROYAL",
+     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
+    }
+   ],
+   "slots": {
+    "armor": [
+     {
+      "count": 6,
+      "id": "ARMOR_PLATE_KEEPER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:0",
+       "albioncompo_bist_roam15_2026_01:comp:0",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:0",
+       "cb_clonepeek_zvz20_2026_03:comp:0",
+       "metabattle:7679:8332",
+       "timothy_blap_blackzone_roam_2026_08:blap:0"
+      ]
+     },
+     {
+      "count": 6,
+      "id": "ARMOR_PLATE_SET2",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:3",
+       "albioncompo_bist_roam15_2026_01:comp:5",
+       "albioncompo_ss_kite_20_2026_06:comp:1",
+       "deadlyhooker_large_scale_2026_08:party_1:0",
+       "deadlyhooker_large_scale_2026_08:party_1:5",
+       "deadlyhooker_large_scale_2026_08:party_2:4"
+      ]
+     },
+     {
+      "count": 4,
+      "id": "ARMOR_PLATE_FEY",
+      "sources": [
+       "deadlyhooker_large_scale_2026_08:party_3:0",
+       "metabattle:7757:8974",
+       "timothy_blap_blackzone_roam_2026_08:blap:3",
+       "timothy_blap_blackzone_roam_2026_08:blap:4"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "ARMOR_PLATE_HELL",
+      "sources": [
+       "cb_clonepeek_zvz20_2026_03:comp:19"
+      ]
+     }
+    ],
+    "cape": [
+     {
+      "count": 14,
+      "id": "CAPEITEM_SMUGGLER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:0",
+       "albioncompo_20v20_competitive_2026_08:comp:12",
+       "albioncompo_20v20_competitive_2026_08:comp:3",
+       "albioncompo_push_monkey_7_2026_05:comp:1",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:0",
+       "albioncompo_ss_kite_20_2026_06:comp:15",
+       "deadlyhooker_large_scale_2026_08:party_1:0",
+       "deadlyhooker_large_scale_2026_08:party_1:17",
+       "deadlyhooker_large_scale_2026_08:party_1:5",
+       "deadlyhooker_large_scale_2026_08:party_2:4",
+       "deadlyhooker_large_scale_2026_08:party_3:0",
+       "timothy_blap_blackzone_roam_2026_08:blap:0",
+       "timothy_blap_blackzone_roam_2026_08:blap:3",
+       "timothy_blap_blackzone_roam_2026_08:blap:4"
+      ]
+     },
+     {
+      "count": 3,
+      "id": "CAPEITEM_FW_LYMHURST",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:0",
+       "albioncompo_bist_roam15_2026_01:comp:5",
+       "metabattle:7755:8913"
+      ]
+     }
+    ],
+    "food": [
+     {
+      "count": 12,
+      "id": "T7_MEAL_OMELETTE_AVALON",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:0",
+       "albioncompo_20v20_competitive_2026_08:comp:3",
+       "albioncompo_bist_roam15_2026_01:comp:5",
+       "albioncompo_push_monkey_7_2026_05:comp:1",
+       "albioncompo_ss_kite_20_2026_06:comp:0",
+       "cb_clonepeek_zvz20_2026_03:comp:0",
+       "cb_clonepeek_zvz20_2026_03:comp:19",
+       "metabattle:7679:8332",
+       "metabattle:7757:8974",
+       "timothy_blap_blackzone_roam_2026_08:blap:0",
+       "timothy_blap_blackzone_roam_2026_08:blap:3",
+       "timothy_blap_blackzone_roam_2026_08:blap:4"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "T7_MEAL_OMELETTE",
+      "sources": [
+       "cb_shadowlagrange_tracking5_2026_01:comp:1",
+       "metabattle:7755:8913"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "T8_MEAL_SANDWICH_AVALON",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:0",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:0"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "T8_MEAL_STEW",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:12",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:1"
+      ]
+     }
+    ],
+    "head": [
+     {
+      "count": 7,
+      "id": "HEAD_PLATE_KEEPER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:3",
+       "albioncompo_push_monkey_7_2026_05:comp:1",
+       "albioncompo_ss_kite_20_2026_06:comp:0",
+       "albioncompo_ss_kite_20_2026_06:comp:1",
+       "deadlyhooker_large_scale_2026_08:party_1:5",
+       "deadlyhooker_large_scale_2026_08:party_2:4",
+       "metabattle:7757:8974"
+      ]
+     },
+     {
+      "count": 4,
+      "id": "HEAD_LEATHER_HELL",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:5",
+       "deadlyhooker_large_scale_2026_08:party_3:0",
+       "timothy_blap_blackzone_roam_2026_08:blap:3",
+       "timothy_blap_blackzone_roam_2026_08:blap:4"
+      ]
+     },
+     {
+      "count": 4,
+      "id": "HEAD_LEATHER_SET3",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:0",
+       "cb_clonepeek_zvz20_2026_03:comp:19",
+       "deadlyhooker_large_scale_2026_08:party_1:0",
+       "deadlyhooker_large_scale_2026_08:party_1:17"
+      ]
+     },
+     {
+      "count": 3,
+      "id": "HEAD_CLOTH_SET2",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:0",
+       "cb_clonepeek_zvz20_2026_03:comp:0",
+       "metabattle:7755:8913"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "HEAD_PLATE_SET2",
+      "sources": [
+       "metabattle:7679:8332",
+       "timothy_blap_blackzone_roam_2026_08:blap:0"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_CLOTH_KEEPER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:12"
+      ]
+     }
+    ],
+    "offhand": [
+     {
+      "count": 2,
+      "id": "OFF_DEMONSKULL_HELL",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:12",
+       "deadlyhooker_large_scale_2026_08:party_1:17"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "OFF_JESTERCANE_HELL",
+      "sources": [
+       "albioncompo_push_monkey_7_2026_05:comp:1",
+       "metabattle:7679:8332"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "OFF_HORN_KEEPER",
+      "sources": [
+       "cb_kroozlt19_bomb_squad_2026_01:comp:1"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "OFF_LAMP_UNDEAD",
+      "sources": [
+       "metabattle:7755:8913"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "OFF_SHIELD",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:0"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "OFF_SPIKEDSHIELD_MORGANA",
+      "sources": [
+       "albioncompo_ss_kite_20_2026_06:comp:15"
+      ]
+     }
+    ],
+    "potion": [
+     {
+      "count": 11,
+      "id": "T7_POTION_REVIVE",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:0",
+       "albioncompo_bist_roam15_2026_01:comp:5",
+       "albioncompo_push_monkey_7_2026_05:comp:1",
+       "albioncompo_ss_kite_20_2026_06:comp:0",
+       "albioncompo_ss_kite_20_2026_06:comp:1",
+       "albioncompo_ss_kite_20_2026_06:comp:15",
+       "cb_clonepeek_zvz20_2026_03:comp:0",
+       "cb_clonepeek_zvz20_2026_03:comp:19",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:1",
+       "metabattle:7755:8913",
+       "metabattle:7757:8974"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "T7_POTION_STONESKIN",
+      "sources": [
+       "metabattle:7679:8332"
+      ]
+     }
+    ],
+    "shoes": [
+     {
+      "count": 6,
+      "id": "SHOES_LEATHER_MORGANA",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:12",
+       "albioncompo_push_monkey_7_2026_05:comp:1",
+       "cb_clonepeek_zvz20_2026_03:comp:19",
+       "timothy_blap_blackzone_roam_2026_08:blap:0",
+       "timothy_blap_blackzone_roam_2026_08:blap:3",
+       "timothy_blap_blackzone_roam_2026_08:blap:4"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "SHOES_LEATHER_FEY",
+      "sources": [
+       "albioncompo_ss_kite_20_2026_06:comp:15",
+       "deadlyhooker_large_scale_2026_08:party_1:17"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_LEATHER_ROYAL",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:5"
+      ]
+     }
+    ]
+   }
+  },
+  "kite_healer": {
+   "off_uniform": [
+    {
+     "build": "timothy_blap_blackzone_roam_2026_08:blap:17",
+     "id": "ARMOR_PLATE_KEEPER",
+     "weapon": "MAIN_HOLYSTAFF_AVALON"
+    }
+   ],
+   "slots": {
+    "armor": [
+     {
+      "count": 8,
+      "id": "ARMOR_CLOTH_FEY",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "deadlyhooker_large_scale_2026_08:party_1:6",
+       "deadlyhooker_large_scale_2026_08:party_1:7",
+       "deadlyhooker_large_scale_2026_08:party_1:8",
+       "deadlyhooker_large_scale_2026_08:party_2:5",
+       "deadlyhooker_large_scale_2026_08:party_3:5"
+      ]
+     },
+     {
+      "count": 4,
+      "id": "ARMOR_CLOTH_AVALON",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "albioncompo_ss_kite_20_2026_06:comp:19",
+       "cb_clonepeek_zvz20_2026_03:comp:7"
+      ]
+     }
+    ],
+    "cape": [
+     {
+      "count": 8,
+      "id": "CAPEITEM_SMUGGLER",
+      "sources": [
+       "deadlyhooker_large_scale_2026_08:party_1:6",
+       "deadlyhooker_large_scale_2026_08:party_1:7",
+       "deadlyhooker_large_scale_2026_08:party_1:8",
+       "deadlyhooker_large_scale_2026_08:party_2:5",
+       "deadlyhooker_large_scale_2026_08:party_2:7",
+       "deadlyhooker_large_scale_2026_08:party_3:5",
+       "timothy_blap_blackzone_roam_2026_08:blap:16",
+       "timothy_blap_blackzone_roam_2026_08:blap:17"
+      ]
+     },
+     {
+      "count": 6,
+      "id": "CAPEITEM_FW_LYMHURST",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "albioncompo_ss_kite_20_2026_06:comp:19"
+      ]
+     }
+    ],
+    "food": [
+     {
+      "count": 5,
+      "id": "T7_MEAL_OMELETTE_AVALON",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "albioncompo_ss_kite_20_2026_06:comp:19"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "T7_MEAL_OMELETTE",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "cb_clonepeek_zvz20_2026_03:comp:7"
+      ]
+     }
+    ],
+    "head": [
+     {
+      "count": 5,
+      "id": "HEAD_PLATE_SET3",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "deadlyhooker_large_scale_2026_08:party_1:6",
+       "deadlyhooker_large_scale_2026_08:party_2:5",
+       "deadlyhooker_large_scale_2026_08:party_3:5",
+       "timothy_blap_blackzone_roam_2026_08:blap:17"
+      ]
+     },
+     {
+      "count": 3,
+      "id": "HEAD_LEATHER_SET3",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "deadlyhooker_large_scale_2026_08:party_2:7"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "HEAD_CLOTH_KEEPER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_ss_kite_20_2026_06:comp:19"
+      ]
+     }
+    ],
+    "offhand": [
+     {
+      "count": 11,
+      "id": "OFF_HORN_KEEPER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_ss_kite_20_2026_06:comp:19",
+       "cb_clonepeek_zvz20_2026_03:comp:7",
+       "deadlyhooker_large_scale_2026_08:party_1:6",
+       "deadlyhooker_large_scale_2026_08:party_1:7",
+       "deadlyhooker_large_scale_2026_08:party_1:8",
+       "deadlyhooker_large_scale_2026_08:party_2:5",
+       "deadlyhooker_large_scale_2026_08:party_2:7",
+       "deadlyhooker_large_scale_2026_08:party_3:5",
+       "timothy_blap_blackzone_roam_2026_08:blap:16",
+       "timothy_blap_blackzone_roam_2026_08:blap:17"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "OFF_SHIELD",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "OFF_TOWERSHIELD_UNDEAD",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:8"
+      ]
+     }
+    ],
+    "potion": [
+     {
+      "count": 5,
+      "id": "T7_POTION_REVIVE",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "albioncompo_ss_kite_20_2026_06:comp:19"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "T7_POTION_STONESKIN",
+      "sources": [
+       "cb_clonepeek_zvz20_2026_03:comp:7"
+      ]
+     }
+    ],
+    "shoes": [
+     {
+      "count": 4,
+      "id": "SHOES_LEATHER_ROYAL",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "albioncompo_ss_kite_20_2026_06:comp:19"
+      ]
+     },
+     {
+      "count": 3,
+      "id": "SHOES_LEATHER_SET1",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "cb_clonepeek_zvz20_2026_03:comp:7"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "SHOES_LEATHER_MORGANA",
+      "sources": [
+       "timothy_blap_blackzone_roam_2026_08:blap:16",
+       "timothy_blap_blackzone_roam_2026_08:blap:17"
+      ]
+     }
+    ]
+   }
+  },
+  "main_healer": {
+   "off_uniform": [
+    {
+     "build": "cb_clonepeek_zvz20_2026_03:comp:8",
+     "id": "ARMOR_LEATHER_ROYAL",
+     "weapon": "2H_HOLYSTAFF_HELL"
+    },
+    {
+     "build": "timothy_blap_blackzone_roam_2026_08:blap:17",
+     "id": "ARMOR_PLATE_KEEPER",
+     "weapon": "MAIN_HOLYSTAFF_AVALON"
+    },
+    {
+     "build": "timothy_blap_blackzone_roam_2026_08:blap:18",
+     "id": "ARMOR_PLATE_KEEPER",
+     "weapon": "2H_HOLYSTAFF_UNDEAD"
+    }
+   ],
+   "slots": {
+    "armor": [
+     {
+      "count": 10,
+      "id": "ARMOR_CLOTH_AVALON",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:7",
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "albioncompo_roads_oneshot_2026_07:comp:6",
+       "albioncompo_sob_blaze_os_2026_06:comp:6",
+       "albioncompo_ss_kite_20_2026_06:comp:19",
+       "cb_clonepeek_zvz20_2026_03:comp:6",
+       "cb_clonepeek_zvz20_2026_03:comp:7",
+       "cb_clonepeek_zvz20_2026_03:comp:9",
+       "metabattle:7667:8978"
+      ]
+     },
+     {
+      "count": 8,
+      "id": "ARMOR_CLOTH_FEY",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "deadlyhooker_large_scale_2026_08:party_1:6",
+       "deadlyhooker_large_scale_2026_08:party_1:7",
+       "deadlyhooker_large_scale_2026_08:party_1:8",
+       "deadlyhooker_large_scale_2026_08:party_2:5",
+       "deadlyhooker_large_scale_2026_08:party_3:5"
+      ]
+     }
+    ],
+    "cape": [
+     {
+      "count": 14,
+      "id": "CAPEITEM_FW_LYMHURST",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:7",
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "albioncompo_push_monkey_7_2026_05:comp:6",
+       "albioncompo_roads_oneshot_2026_07:comp:6",
+       "albioncompo_sob_blaze_os_2026_06:comp:6",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:6",
+       "albioncompo_ss_kite_20_2026_06:comp:19",
+       "metabattle:7641:8979",
+       "metabattle:7662:8977",
+       "metabattle:7667:8978"
+      ]
+     },
+     {
+      "count": 11,
+      "id": "CAPEITEM_SMUGGLER",
+      "sources": [
+       "deadlyhooker_large_scale_2026_08:party_1:6",
+       "deadlyhooker_large_scale_2026_08:party_1:7",
+       "deadlyhooker_large_scale_2026_08:party_1:8",
+       "deadlyhooker_large_scale_2026_08:party_2:5",
+       "deadlyhooker_large_scale_2026_08:party_2:7",
+       "deadlyhooker_large_scale_2026_08:party_3:4",
+       "deadlyhooker_large_scale_2026_08:party_3:5",
+       "timothy_blap_blackzone_roam_2026_08:blap:16",
+       "timothy_blap_blackzone_roam_2026_08:blap:17",
+       "timothy_blap_blackzone_roam_2026_08:blap:18",
+       "timothy_blap_blackzone_roam_2026_08:blap:19"
+      ]
+     }
+    ],
+    "food": [
+     {
+      "count": 8,
+      "id": "T7_MEAL_OMELETTE_AVALON",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "albioncompo_bist_roam15_2026_01:comp:7",
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "albioncompo_sob_blaze_os_2026_06:comp:6",
+       "albioncompo_ss_kite_20_2026_06:comp:19",
+       "cb_clonepeek_zvz20_2026_03:comp:6"
+      ]
+     },
+     {
+      "count": 7,
+      "id": "T7_MEAL_OMELETTE",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "albioncompo_hellgate5_2026_07:comp:1",
+       "cb_clonepeek_zvz20_2026_03:comp:7",
+       "cb_clonepeek_zvz20_2026_03:comp:8",
+       "metabattle:7641:8979",
+       "metabattle:7662:8977",
+       "metabattle:7667:8978"
+      ]
+     }
+    ],
+    "head": [
+     {
+      "count": 9,
+      "id": "HEAD_LEATHER_SET3",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "albioncompo_bist_roam15_2026_01:comp:7",
+       "albioncompo_push_monkey_7_2026_05:comp:6",
+       "albioncompo_sob_blaze_os_2026_06:comp:6",
+       "deadlyhooker_large_scale_2026_08:party_2:7",
+       "deadlyhooker_large_scale_2026_08:party_3:4",
+       "metabattle:7662:8977",
+       "metabattle:7667:8978"
+      ]
+     },
+     {
+      "count": 5,
+      "id": "HEAD_PLATE_SET3",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "deadlyhooker_large_scale_2026_08:party_1:6",
+       "deadlyhooker_large_scale_2026_08:party_2:5",
+       "deadlyhooker_large_scale_2026_08:party_3:5",
+       "timothy_blap_blackzone_roam_2026_08:blap:17"
+      ]
+     },
+     {
+      "count": 4,
+      "id": "HEAD_CLOTH_KEEPER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_ss_kite_20_2026_06:comp:19",
+       "cb_clonepeek_zvz20_2026_03:comp:8",
+       "cb_clonepeek_zvz20_2026_03:comp:9"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_PLATE_SET2",
+      "sources": [
+       "metabattle:7641:8979"
+      ]
+     }
+    ],
+    "offhand": [
+     {
+      "count": 11,
+      "id": "OFF_HORN_KEEPER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_ss_kite_20_2026_06:comp:19",
+       "cb_clonepeek_zvz20_2026_03:comp:7",
+       "deadlyhooker_large_scale_2026_08:party_1:6",
+       "deadlyhooker_large_scale_2026_08:party_1:7",
+       "deadlyhooker_large_scale_2026_08:party_1:8",
+       "deadlyhooker_large_scale_2026_08:party_2:5",
+       "deadlyhooker_large_scale_2026_08:party_2:7",
+       "deadlyhooker_large_scale_2026_08:party_3:5",
+       "timothy_blap_blackzone_roam_2026_08:blap:16",
+       "timothy_blap_blackzone_roam_2026_08:blap:17"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "OFF_SHIELD",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "OFF_TOWERSHIELD_UNDEAD",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:8"
+      ]
+     }
+    ],
+    "potion": [
+     {
+      "count": 8,
+      "id": "T7_POTION_REVIVE",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:7",
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "albioncompo_push_monkey_7_2026_05:comp:6",
+       "albioncompo_ss_kite_20_2026_06:comp:19",
+       "cb_clonepeek_zvz20_2026_03:comp:6"
+      ]
+     },
+     {
+      "count": 8,
+      "id": "T7_POTION_STONESKIN",
+      "sources": [
+       "albioncompo_roads_oneshot_2026_07:comp:6",
+       "albioncompo_sob_blaze_os_2026_06:comp:6",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:6",
+       "cb_clonepeek_zvz20_2026_03:comp:7",
+       "cb_clonepeek_zvz20_2026_03:comp:9",
+       "metabattle:7641:8979",
+       "metabattle:7662:8977",
+       "metabattle:7667:8978"
+      ]
+     }
+    ],
+    "shoes": [
+     {
+      "count": 8,
+      "id": "SHOES_LEATHER_ROYAL",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:10",
+       "albioncompo_20v20_competitive_2026_08:comp:8",
+       "albioncompo_20v20_competitive_2026_08:comp:9",
+       "albioncompo_hellgate5_2026_07:comp:1",
+       "albioncompo_roads_oneshot_2026_07:comp:6",
+       "albioncompo_sob_blaze_os_2026_06:comp:6",
+       "albioncompo_ss_kite_20_2026_06:comp:19",
+       "cb_clonepeek_zvz20_2026_03:comp:8"
+      ]
+     },
+     {
+      "count": 7,
+      "id": "SHOES_LEATHER_SET1",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:7",
+       "albioncompo_bist_roam15_2026_01:comp:8",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:6",
+       "cb_clonepeek_zvz20_2026_03:comp:6",
+       "cb_clonepeek_zvz20_2026_03:comp:7",
+       "cb_clonepeek_zvz20_2026_03:comp:9"
+      ]
+     },
+     {
+      "count": 5,
+      "id": "SHOES_LEATHER_MORGANA",
+      "sources": [
+       "albioncompo_push_monkey_7_2026_05:comp:6",
+       "timothy_blap_blackzone_roam_2026_08:blap:16",
+       "timothy_blap_blackzone_roam_2026_08:blap:17",
+       "timothy_blap_blackzone_roam_2026_08:blap:18",
+       "timothy_blap_blackzone_roam_2026_08:blap:19"
+      ]
+     }
+    ]
+   }
+  },
+  "off_tank": {
+   "slots": {
+    "armor": [
+     {
+      "count": 5,
+      "id": "ARMOR_PLATE_HELL",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:6",
+       "cb_clonepeek_zvz20_2026_03:comp:3",
+       "deadlyhooker_large_scale_2026_08:party_1:10",
+       "deadlyhooker_large_scale_2026_08:party_2:10",
+       "timothy_blap_blackzone_roam_2026_08:blap:6"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "ARMOR_LEATHER_ROYAL",
+      "sources": [
+       "metabattle:7758:8614"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "ARMOR_PLATE_KEEPER",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:4"
+      ]
+     }
+    ],
+    "cape": [
+     {
+      "count": 4,
+      "id": "CAPEITEM_SMUGGLER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:6",
+       "deadlyhooker_large_scale_2026_08:party_1:10",
+       "deadlyhooker_large_scale_2026_08:party_2:10",
+       "timothy_blap_blackzone_roam_2026_08:blap:6"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "CAPEITEM_FW_LYMHURST",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:4",
+       "metabattle:7758:8614"
+      ]
+     }
+    ],
+    "food": [
+     {
+      "count": 3,
+      "id": "T7_MEAL_OMELETTE_AVALON",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:4",
+       "cb_clonepeek_zvz20_2026_03:comp:3"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "T7_MEAL_OMELETTE",
+      "sources": [
+       "metabattle:7758:8614"
+      ]
+     }
+    ],
+    "head": [
+     {
+      "count": 6,
+      "id": "HEAD_LEATHER_SET3",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:4",
+       "cb_clonepeek_zvz20_2026_03:comp:3",
+       "deadlyhooker_large_scale_2026_08:party_1:10",
+       "deadlyhooker_large_scale_2026_08:party_2:10",
+       "timothy_blap_blackzone_roam_2026_08:blap:6"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_CLOTH_SET2",
+      "sources": [
+       "metabattle:7758:8614"
+      ]
+     }
+    ],
+    "offhand": [
+     {
+      "count": 1,
+      "id": "OFF_SHIELD_AVALON",
+      "sources": [
+       "deadlyhooker_large_scale_2026_08:party_1:10"
+      ]
+     }
+    ],
+    "potion": [
+     {
+      "count": 4,
+      "id": "T7_POTION_REVIVE",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:6",
+       "albioncompo_bist_roam15_2026_01:comp:4",
+       "cb_clonepeek_zvz20_2026_03:comp:3",
+       "metabattle:7758:8614"
+      ]
+     }
+    ],
+    "shoes": [
+     {
+      "count": 1,
+      "id": "SHOES_LEATHER_MORGANA",
+      "sources": [
+       "timothy_blap_blackzone_roam_2026_08:blap:6"
+      ]
+     }
+    ]
+   }
+  },
+  "ranged_aoe": {
+   "off_uniform": [
+    {
+     "build": "albioncompo_push_monkey_7_2026_05:comp:2",
+     "id": "ARMOR_PLATE_KEEPER",
+     "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
+    }
+   ],
+   "slots": {
+    "armor": [
+     {
+      "count": 6,
+      "id": "ARMOR_CLOTH_AVALON",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:18",
+       "albioncompo_20v20_competitive_2026_08:comp:19",
+       "albioncompo_roads_oneshot_2026_07:comp:3",
+       "albioncompo_roads_oneshot_2026_07:comp:4",
+       "albioncompo_ss_kite_20_2026_06:comp:14",
+       "albioncompo_ss_kite_20_2026_06:comp:9"
+      ]
+     },
+     {
+      "count": 6,
+      "id": "ARMOR_CLOTH_SET1",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:9",
+       "albioncompo_sob_blaze_os_2026_06:comp:3",
+       "cb_clonepeek_zvz20_2026_03:comp:11",
+       "deadlyhooker_large_scale_2026_08:party_1:12",
+       "deadlyhooker_large_scale_2026_08:party_1:13",
+       "metabattle:7698:8971"
+      ]
+     },
+     {
+      "count": 5,
+      "id": "ARMOR_CLOTH_FEY",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:13",
+       "albioncompo_20v20_competitive_2026_08:comp:14",
+       "albioncompo_sob_blaze_os_2026_06:comp:4",
+       "albioncompo_sob_blaze_os_2026_06:comp:5",
+       "deadlyhooker_large_scale_2026_08:party_1:19"
+      ]
+     }
+    ],
+    "cape": [
+     {
+      "count": 12,
+      "id": "CAPEITEM_SMUGGLER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:18",
+       "albioncompo_push_monkey_7_2026_05:comp:2",
+       "albioncompo_roads_oneshot_2026_07:comp:3",
+       "albioncompo_roads_oneshot_2026_07:comp:4",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:5",
+       "albioncompo_ss_kite_20_2026_06:comp:14",
+       "deadlyhooker_large_scale_2026_08:party_1:12",
+       "deadlyhooker_large_scale_2026_08:party_1:13",
+       "deadlyhooker_large_scale_2026_08:party_1:19",
+       "deadlyhooker_large_scale_2026_08:party_2:13",
+       "deadlyhooker_large_scale_2026_08:party_3:12",
+       "deadlyhooker_large_scale_2026_08:party_3:13"
+      ]
+     },
+     {
+      "count": 7,
+      "id": "CAPEITEM_FW_LYMHURST",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:19",
+       "albioncompo_bist_roam15_2026_01:comp:9",
+       "albioncompo_hellgate5_2026_07:comp:2",
+       "metabattle:7698:8971",
+       "metabattle:7712:8935",
+       "metabattle:7725:8930",
+       "metabattle:7780:8938"
+      ]
+     }
+    ],
+    "food": [
+     {
+      "count": 24,
+      "id": "T8_MEAL_STEW",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:13",
+       "albioncompo_20v20_competitive_2026_08:comp:14",
+       "albioncompo_20v20_competitive_2026_08:comp:18",
+       "albioncompo_20v20_competitive_2026_08:comp:19",
+       "albioncompo_roads_oneshot_2026_07:comp:4",
+       "albioncompo_sob_blaze_os_2026_06:comp:3",
+       "albioncompo_sob_blaze_os_2026_06:comp:4",
+       "albioncompo_sob_blaze_os_2026_06:comp:5",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:3",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:4",
+       "albioncompo_ss_kite_20_2026_06:comp:14",
+       "albioncompo_ss_kite_20_2026_06:comp:18",
+       "albioncompo_ss_kite_20_2026_06:comp:9",
+       "cb_clonepeek_zvz20_2026_03:comp:16",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:0",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:3",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:4",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:5",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:6",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:7",
+       "metabattle:7699:8928",
+       "metabattle:7712:8935",
+       "metabattle:7725:8930",
+       "metabattle:7780:8938"
+      ]
+     },
+     {
+      "count": 4,
+      "id": "T7_MEAL_OMELETTE",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:9",
+       "albioncompo_hellgate5_2026_07:comp:2",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:5",
+       "metabattle:7698:8971"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "T7_MEAL_OMELETTE_AVALON",
+      "sources": [
+       "cb_clonepeek_zvz20_2026_03:comp:10"
+      ]
+     }
+    ],
+    "head": [
+     {
+      "count": 18,
+      "id": "HEAD_LEATHER_SET3",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:13",
+       "albioncompo_20v20_competitive_2026_08:comp:14",
+       "albioncompo_20v20_competitive_2026_08:comp:18",
+       "albioncompo_20v20_competitive_2026_08:comp:19",
+       "albioncompo_bist_roam15_2026_01:comp:9",
+       "albioncompo_hellgate5_2026_07:comp:3",
+       "albioncompo_sob_blaze_os_2026_06:comp:4",
+       "albioncompo_sob_blaze_os_2026_06:comp:5",
+       "albioncompo_ss_kite_20_2026_06:comp:14",
+       "albioncompo_ss_kite_20_2026_06:comp:9",
+       "cb_clonepeek_zvz20_2026_03:comp:11",
+       "cb_clonepeek_zvz20_2026_03:comp:16",
+       "deadlyhooker_large_scale_2026_08:party_1:12",
+       "deadlyhooker_large_scale_2026_08:party_1:13",
+       "deadlyhooker_large_scale_2026_08:party_1:19",
+       "deadlyhooker_large_scale_2026_08:party_2:13",
+       "metabattle:7698:8971",
+       "metabattle:7699:8928"
+      ]
+     },
+     {
+      "count": 3,
+      "id": "HEAD_CLOTH_KEEPER",
+      "sources": [
+       "albioncompo_roads_oneshot_2026_07:comp:4",
+       "albioncompo_sob_blaze_os_2026_06:comp:3",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:5"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "HEAD_PLATE_SET3",
+      "sources": [
+       "albioncompo_push_monkey_7_2026_05:comp:2",
+       "albioncompo_ss_kite_20_2026_06:comp:18"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_LEATHER_FEY",
+      "sources": [
+       "metabattle:7780:8938"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_PLATE_SET2",
+      "sources": [
+       "cb_clonepeek_zvz20_2026_03:comp:10"
+      ]
+     }
+    ],
+    "offhand": [
+     {
+      "count": 3,
+      "id": "OFF_HORN_KEEPER",
+      "sources": [
+       "albioncompo_hellgate5_2026_07:comp:3",
+       "albioncompo_push_monkey_7_2026_05:comp:2",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:5"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "OFF_DEMONSKULL_HELL",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:18",
+       "albioncompo_roads_oneshot_2026_07:comp:3"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "OFF_SPIKEDSHIELD_MORGANA",
+      "sources": [
+       "albioncompo_ss_kite_20_2026_06:comp:14"
+      ]
+     }
+    ],
+    "potion": [
+     {
+      "count": 18,
+      "id": "T7_POTION_REVIVE",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:19",
+       "albioncompo_bist_roam15_2026_01:comp:9",
+       "albioncompo_push_monkey_7_2026_05:comp:2",
+       "albioncompo_ss_kite_20_2026_06:comp:14",
+       "albioncompo_ss_kite_20_2026_06:comp:18",
+       "albioncompo_ss_kite_20_2026_06:comp:9",
+       "cb_clonepeek_zvz20_2026_03:comp:10",
+       "cb_clonepeek_zvz20_2026_03:comp:16",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:0",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:3",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:4",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:5",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:6",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:7",
+       "metabattle:7699:8928",
+       "metabattle:7712:8935",
+       "metabattle:7725:8930",
+       "metabattle:7780:8938"
+      ]
+     },
+     {
+      "count": 7,
+      "id": "T7_POTION_STONESKIN",
+      "sources": [
+       "albioncompo_hellgate5_2026_07:comp:2",
+       "albioncompo_hellgate5_2026_07:comp:3",
+       "albioncompo_roads_oneshot_2026_07:comp:3",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:3",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:4",
+       "cb_clonepeek_zvz20_2026_03:comp:11",
+       "metabattle:7698:8971"
+      ]
+     }
+    ],
+    "shoes": [
+     {
+      "count": 13,
+      "id": "SHOES_LEATHER_MORGANA",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:13",
+       "albioncompo_20v20_competitive_2026_08:comp:14",
+       "albioncompo_bist_roam15_2026_01:comp:9",
+       "albioncompo_push_monkey_7_2026_05:comp:2",
+       "albioncompo_sob_blaze_os_2026_06:comp:4",
+       "albioncompo_sob_blaze_os_2026_06:comp:5",
+       "cb_clonepeek_zvz20_2026_03:comp:16",
+       "deadlyhooker_large_scale_2026_08:party_1:12",
+       "deadlyhooker_large_scale_2026_08:party_1:13",
+       "deadlyhooker_large_scale_2026_08:party_1:19",
+       "deadlyhooker_large_scale_2026_08:party_2:13",
+       "deadlyhooker_large_scale_2026_08:party_3:12",
+       "deadlyhooker_large_scale_2026_08:party_3:13"
+      ]
+     },
+     {
+      "count": 5,
+      "id": "SHOES_LEATHER_FEY",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:18",
+       "albioncompo_20v20_competitive_2026_08:comp:19",
+       "albioncompo_ss_kite_20_2026_06:comp:14",
+       "albioncompo_ss_kite_20_2026_06:comp:18",
+       "albioncompo_ss_kite_20_2026_06:comp:9"
+      ]
+     },
+     {
+      "count": 5,
+      "id": "SHOES_LEATHER_ROYAL",
+      "sources": [
+       "albioncompo_roads_oneshot_2026_07:comp:3",
+       "albioncompo_roads_oneshot_2026_07:comp:4",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:3",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:4",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:5"
+      ]
+     },
+     {
+      "count": 3,
+      "id": "SHOES_LEATHER_SET1",
+      "sources": [
+       "albioncompo_hellgate5_2026_07:comp:2",
+       "albioncompo_hellgate5_2026_07:comp:3",
+       "cb_clonepeek_zvz20_2026_03:comp:11"
+      ]
+     }
+    ]
+   }
+  },
+  "shield_support": {
+   "off_uniform": [
+    {
+     "build": "metabattle:7755:8913",
+     "id": "ARMOR_LEATHER_ROYAL",
+     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
+    }
+   ],
+   "slots": {
+    "armor": [
+     {
+      "count": 8,
+      "id": "ARMOR_PLATE_KEEPER",
+      "sources": [
+       "albioncompo_push_monkey_7_2026_05:comp:0",
+       "cb_clonepeek_zvz20_2026_03:comp:4",
+       "deadlyhooker_large_scale_2026_08:party_2:12",
+       "deadlyhooker_large_scale_2026_08:party_2:8",
+       "deadlyhooker_large_scale_2026_08:party_3:10",
+       "deadlyhooker_large_scale_2026_08:party_3:7",
+       "metabattle:7661:8910",
+       "timothy_blap_blackzone_roam_2026_08:blap:7"
+      ]
+     },
+     {
+      "count": 8,
+      "id": "ARMOR_PLATE_SET2",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:3",
+       "albioncompo_roads_oneshot_2026_07:comp:2",
+       "albioncompo_sob_blaze_os_2026_06:comp:1",
+       "deadlyhooker_large_scale_2026_08:party_1:1",
+       "deadlyhooker_large_scale_2026_08:party_1:4",
+       "deadlyhooker_large_scale_2026_08:party_2:0",
+       "deadlyhooker_large_scale_2026_08:party_2:3",
+       "deadlyhooker_large_scale_2026_08:party_3:1"
+      ]
+     },
+     {
+      "count": 4,
+      "id": "ARMOR_PLATE_FEY",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:5",
+       "albioncompo_ss_kite_20_2026_06:comp:2",
+       "albioncompo_ss_kite_20_2026_06:comp:4",
+       "deadlyhooker_large_scale_2026_08:party_2:1"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "ARMOR_CLOTH_AVALON",
+      "sources": [
+       "albioncompo_ss_kite_20_2026_06:comp:15",
+       "albioncompo_ss_kite_20_2026_06:comp:5"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "ARMOR_CLOTH_FEY",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:11",
+       "albioncompo_20v20_competitive_2026_08:comp:12"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "ARMOR_PLATE_HELL",
+      "sources": [
+       "cb_clonepeek_zvz20_2026_03:comp:5",
+       "timothy_blap_blackzone_roam_2026_08:blap:5"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "ARMOR_PLATE_SET3",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:4",
+       "albioncompo_ss_kite_20_2026_06:comp:6"
+      ]
+     }
+    ],
+    "cape": [
+     {
+      "count": 26,
+      "id": "CAPEITEM_SMUGGLER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:12",
+       "albioncompo_20v20_competitive_2026_08:comp:4",
+       "albioncompo_20v20_competitive_2026_08:comp:5",
+       "albioncompo_hellgate5_2026_07:comp:4",
+       "albioncompo_push_monkey_7_2026_05:comp:0",
+       "albioncompo_roads_oneshot_2026_07:comp:2",
+       "albioncompo_sob_blaze_os_2026_06:comp:1",
+       "albioncompo_ss_kite_20_2026_06:comp:15",
+       "albioncompo_ss_kite_20_2026_06:comp:2",
+       "albioncompo_ss_kite_20_2026_06:comp:4",
+       "deadlyhooker_large_scale_2026_08:party_1:1",
+       "deadlyhooker_large_scale_2026_08:party_1:17",
+       "deadlyhooker_large_scale_2026_08:party_1:4",
+       "deadlyhooker_large_scale_2026_08:party_1:9",
+       "deadlyhooker_large_scale_2026_08:party_2:0",
+       "deadlyhooker_large_scale_2026_08:party_2:1",
+       "deadlyhooker_large_scale_2026_08:party_2:12",
+       "deadlyhooker_large_scale_2026_08:party_2:3",
+       "deadlyhooker_large_scale_2026_08:party_2:6",
+       "deadlyhooker_large_scale_2026_08:party_2:8",
+       "deadlyhooker_large_scale_2026_08:party_3:1",
+       "deadlyhooker_large_scale_2026_08:party_3:10",
+       "deadlyhooker_large_scale_2026_08:party_3:6",
+       "deadlyhooker_large_scale_2026_08:party_3:7",
+       "timothy_blap_blackzone_roam_2026_08:blap:5",
+       "timothy_blap_blackzone_roam_2026_08:blap:7"
+      ]
+     },
+     {
+      "count": 4,
+      "id": "CAPEITEM_FW_LYMHURST",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:11",
+       "albioncompo_bist_roam15_2026_01:comp:3",
+       "albioncompo_ss_kite_20_2026_06:comp:5",
+       "metabattle:7755:8913"
+      ]
+     }
+    ],
+    "food": [
+     {
+      "count": 10,
+      "id": "T7_MEAL_OMELETTE_AVALON",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:11",
+       "albioncompo_20v20_competitive_2026_08:comp:4",
+       "albioncompo_20v20_competitive_2026_08:comp:5",
+       "albioncompo_bist_roam15_2026_01:comp:3",
+       "albioncompo_push_monkey_7_2026_05:comp:0",
+       "albioncompo_roads_oneshot_2026_07:comp:2",
+       "albioncompo_sob_blaze_os_2026_06:comp:1",
+       "albioncompo_ss_kite_20_2026_06:comp:2",
+       "albioncompo_ss_kite_20_2026_06:comp:4",
+       "albioncompo_ss_kite_20_2026_06:comp:5"
+      ]
+     },
+     {
+      "count": 4,
+      "id": "T7_MEAL_OMELETTE",
+      "sources": [
+       "cb_clonepeek_zvz20_2026_03:comp:4",
+       "cb_clonepeek_zvz20_2026_03:comp:5",
+       "metabattle:7661:8910",
+       "metabattle:7755:8913"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "T8_MEAL_STEW",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:12",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:1"
+      ]
+     }
+    ],
+    "head": [
+     {
+      "count": 25,
+      "id": "HEAD_LEATHER_SET3",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:11",
+       "albioncompo_20v20_competitive_2026_08:comp:5",
+       "albioncompo_bist_roam15_2026_01:comp:3",
+       "albioncompo_push_monkey_7_2026_05:comp:0",
+       "albioncompo_roads_oneshot_2026_07:comp:2",
+       "albioncompo_sob_blaze_os_2026_06:comp:1",
+       "albioncompo_ss_kite_20_2026_06:comp:2",
+       "albioncompo_ss_kite_20_2026_06:comp:4",
+       "cb_clonepeek_zvz20_2026_03:comp:4",
+       "cb_clonepeek_zvz20_2026_03:comp:5",
+       "deadlyhooker_large_scale_2026_08:party_1:17",
+       "deadlyhooker_large_scale_2026_08:party_1:4",
+       "deadlyhooker_large_scale_2026_08:party_2:0",
+       "deadlyhooker_large_scale_2026_08:party_2:1",
+       "deadlyhooker_large_scale_2026_08:party_2:12",
+       "deadlyhooker_large_scale_2026_08:party_2:3",
+       "deadlyhooker_large_scale_2026_08:party_2:6",
+       "deadlyhooker_large_scale_2026_08:party_2:8",
+       "deadlyhooker_large_scale_2026_08:party_3:1",
+       "deadlyhooker_large_scale_2026_08:party_3:10",
+       "deadlyhooker_large_scale_2026_08:party_3:6",
+       "deadlyhooker_large_scale_2026_08:party_3:7",
+       "metabattle:7661:8910",
+       "timothy_blap_blackzone_roam_2026_08:blap:5",
+       "timothy_blap_blackzone_roam_2026_08:blap:7"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "HEAD_CLOTH_KEEPER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:12",
+       "albioncompo_ss_kite_20_2026_06:comp:5"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "HEAD_PLATE_KEEPER",
+      "sources": [
+       "albioncompo_ss_kite_20_2026_06:comp:6",
+       "deadlyhooker_large_scale_2026_08:party_1:1"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_CLOTH_SET2",
+      "sources": [
+       "metabattle:7755:8913"
+      ]
+     }
+    ],
+    "offhand": [
+     {
+      "count": 3,
+      "id": "OFF_SHIELD_AVALON",
+      "sources": [
+       "deadlyhooker_large_scale_2026_08:party_1:1",
+       "deadlyhooker_large_scale_2026_08:party_2:3",
+       "deadlyhooker_large_scale_2026_08:party_3:1"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "OFF_DEMONSKULL_HELL",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:12",
+       "deadlyhooker_large_scale_2026_08:party_1:17"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "OFF_HORN_KEEPER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:4",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:1"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "OFF_LAMP_UNDEAD",
+      "sources": [
+       "metabattle:7755:8913"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "OFF_SPIKEDSHIELD_MORGANA",
+      "sources": [
+       "albioncompo_ss_kite_20_2026_06:comp:15"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "OFF_TOTEM_KEEPER",
+      "sources": [
+       "albioncompo_ss_kite_20_2026_06:comp:6"
+      ]
+     }
+    ],
+    "potion": [
+     {
+      "count": 13,
+      "id": "T7_POTION_REVIVE",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:4",
+       "albioncompo_20v20_competitive_2026_08:comp:5",
+       "albioncompo_bist_roam15_2026_01:comp:3",
+       "albioncompo_push_monkey_7_2026_05:comp:0",
+       "albioncompo_ss_kite_20_2026_06:comp:15",
+       "albioncompo_ss_kite_20_2026_06:comp:2",
+       "albioncompo_ss_kite_20_2026_06:comp:4",
+       "albioncompo_ss_kite_20_2026_06:comp:5",
+       "albioncompo_ss_kite_20_2026_06:comp:6",
+       "cb_clonepeek_zvz20_2026_03:comp:4",
+       "cb_clonepeek_zvz20_2026_03:comp:5",
+       "cb_kroozlt19_bomb_squad_2026_01:comp:1",
+       "metabattle:7755:8913"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "T7_POTION_STONESKIN",
+      "sources": [
+       "metabattle:7661:8910"
+      ]
+     }
+    ],
+    "shoes": [
+     {
+      "count": 6,
+      "id": "SHOES_LEATHER_MORGANA",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:12",
+       "albioncompo_20v20_competitive_2026_08:comp:5",
+       "albioncompo_push_monkey_7_2026_05:comp:0",
+       "albioncompo_roads_oneshot_2026_07:comp:2",
+       "timothy_blap_blackzone_roam_2026_08:blap:5",
+       "timothy_blap_blackzone_roam_2026_08:blap:7"
+      ]
+     },
+     {
+      "count": 3,
+      "id": "SHOES_LEATHER_ROYAL",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:11",
+       "albioncompo_hellgate5_2026_07:comp:4",
+       "albioncompo_ss_kite_20_2026_06:comp:5"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "SHOES_LEATHER_FEY",
+      "sources": [
+       "albioncompo_ss_kite_20_2026_06:comp:15",
+       "deadlyhooker_large_scale_2026_08:party_1:17"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_LEATHER_SET1",
+      "sources": [
+       "cb_clonepeek_zvz20_2026_03:comp:5"
+      ]
+     }
+    ]
+   }
+  },
+  "stopper_tank": {
+   "slots": {
+    "armor": [
+     {
+      "count": 8,
+      "id": "ARMOR_PLATE_HELL",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:1",
+       "albioncompo_20v20_competitive_2026_08:comp:2",
+       "albioncompo_ss_kite_20_2026_06:comp:10",
+       "albioncompo_ss_kite_20_2026_06:comp:12",
+       "albioncompo_ss_kite_20_2026_06:comp:8",
+       "deadlyhooker_large_scale_2026_08:party_1:2",
+       "deadlyhooker_large_scale_2026_08:party_1:3",
+       "deadlyhooker_large_scale_2026_08:party_3:2"
+      ]
+     },
+     {
+      "count": 4,
+      "id": "ARMOR_PLATE_KEEPER",
+      "sources": [
+       "albioncompo_hellgate5_2026_07:comp:0",
+       "albioncompo_roads_oneshot_2026_07:comp:1",
+       "albioncompo_sob_blaze_os_2026_06:comp:2",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:2"
+      ]
+     },
+     {
+      "count": 3,
+      "id": "ARMOR_PLATE_FEY",
+      "sources": [
+       "cb_clonepeek_zvz20_2026_03:comp:2",
+       "metabattle:7700:8988",
+       "timothy_blap_blackzone_roam_2026_08:blap:2"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "ARMOR_PLATE_SET3",
+      "sources": [
+       "cb_clonepeek_zvz20_2026_03:comp:1",
+       "timothy_blap_blackzone_roam_2026_08:blap:1"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "ARMOR_PLATE_SET2",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:1"
+      ]
+     }
+    ],
+    "cape": [
+     {
+      "count": 8,
+      "id": "CAPEITEM_SMUGGLER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:1",
+       "albioncompo_20v20_competitive_2026_08:comp:2",
+       "albioncompo_roads_oneshot_2026_07:comp:1",
+       "albioncompo_sob_blaze_os_2026_06:comp:2",
+       "deadlyhooker_large_scale_2026_08:party_1:2",
+       "deadlyhooker_large_scale_2026_08:party_1:3",
+       "deadlyhooker_large_scale_2026_08:party_3:2",
+       "timothy_blap_blackzone_roam_2026_08:blap:2"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "CAPEITEM_FW_LYMHURST",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:1"
+      ]
+     }
+    ],
+    "food": [
+     {
+      "count": 10,
+      "id": "T7_MEAL_OMELETTE_AVALON",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:1",
+       "albioncompo_20v20_competitive_2026_08:comp:2",
+       "albioncompo_roads_oneshot_2026_07:comp:1",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:2",
+       "albioncompo_ss_kite_20_2026_06:comp:12",
+       "cb_clonepeek_zvz20_2026_03:comp:1",
+       "cb_clonepeek_zvz20_2026_03:comp:2",
+       "metabattle:7700:8988",
+       "timothy_blap_blackzone_roam_2026_08:blap:1",
+       "timothy_blap_blackzone_roam_2026_08:blap:2"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "T7_MEAL_OMELETTE",
+      "sources": [
+       "albioncompo_hellgate5_2026_07:comp:0"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "T8_MEAL_SANDWICH_AVALON",
+      "sources": [
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:1"
+      ]
+     }
+    ],
+    "head": [
+     {
+      "count": 10,
+      "id": "HEAD_LEATHER_SET3",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:1",
+       "albioncompo_20v20_competitive_2026_08:comp:2",
+       "albioncompo_hellgate5_2026_07:comp:0",
+       "albioncompo_ss_kite_20_2026_06:comp:10",
+       "albioncompo_ss_kite_20_2026_06:comp:12",
+       "albioncompo_ss_kite_20_2026_06:comp:8",
+       "deadlyhooker_large_scale_2026_08:party_1:2",
+       "deadlyhooker_large_scale_2026_08:party_1:3",
+       "deadlyhooker_large_scale_2026_08:party_3:2",
+       "metabattle:7700:8988"
+      ]
+     },
+     {
+      "count": 5,
+      "id": "HEAD_LEATHER_HELL",
+      "sources": [
+       "albioncompo_sob_blaze_os_2026_06:comp:0",
+       "cb_clonepeek_zvz20_2026_03:comp:1",
+       "cb_clonepeek_zvz20_2026_03:comp:2",
+       "timothy_blap_blackzone_roam_2026_08:blap:1",
+       "timothy_blap_blackzone_roam_2026_08:blap:2"
+      ]
+     },
+     {
+      "count": 3,
+      "id": "HEAD_PLATE_KEEPER",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:1",
+       "albioncompo_roads_oneshot_2026_07:comp:1",
+       "albioncompo_sob_blaze_os_2026_06:comp:2"
+      ]
+     }
+    ],
+    "offhand": [
+     {
+      "count": 4,
+      "id": "OFF_SHIELD_AVALON",
+      "sources": [
+       "albioncompo_sob_blaze_os_2026_06:comp:2",
+       "deadlyhooker_large_scale_2026_08:party_1:2",
+       "deadlyhooker_large_scale_2026_08:party_1:3",
+       "deadlyhooker_large_scale_2026_08:party_3:2"
+      ]
+     },
+     {
+      "count": 3,
+      "id": "OFF_TOME_CRYSTAL",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:1",
+       "albioncompo_20v20_competitive_2026_08:comp:2",
+       "albioncompo_ss_kite_20_2026_06:comp:12"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "OFF_HORN_KEEPER",
+      "sources": [
+       "albioncompo_roads_oneshot_2026_07:comp:1",
+       "cb_clonepeek_zvz20_2026_03:comp:2"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "OFF_TOTEM_KEEPER",
+      "sources": [
+       "albioncompo_ss_kite_20_2026_06:comp:10",
+       "albioncompo_ss_kite_20_2026_06:comp:8"
+      ]
+     }
+    ],
+    "potion": [
+     {
+      "count": 9,
+      "id": "T7_POTION_REVIVE",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:1",
+       "albioncompo_20v20_competitive_2026_08:comp:2",
+       "albioncompo_bist_roam15_2026_01:comp:1",
+       "albioncompo_ss_kite_20_2026_06:comp:10",
+       "albioncompo_ss_kite_20_2026_06:comp:12",
+       "albioncompo_ss_kite_20_2026_06:comp:8",
+       "cb_clonepeek_zvz20_2026_03:comp:1",
+       "cb_clonepeek_zvz20_2026_03:comp:2",
+       "metabattle:7700:8988"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "T7_POTION_SLOWFIELD",
+      "sources": [
+       "albioncompo_hellgate5_2026_07:comp:0"
+      ]
+     }
+    ],
+    "shoes": [
+     {
+      "count": 3,
+      "id": "SHOES_LEATHER_ROYAL",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:1",
+       "albioncompo_roads_oneshot_2026_07:comp:1",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:2"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "SHOES_LEATHER_MORGANA",
+      "sources": [
+       "timothy_blap_blackzone_roam_2026_08:blap:1",
+       "timothy_blap_blackzone_roam_2026_08:blap:2"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "SHOES_LEATHER_SET1",
+      "sources": [
+       "cb_clonepeek_zvz20_2026_03:comp:1",
+       "cb_clonepeek_zvz20_2026_03:comp:2"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "SHOES_PLATE_FEY",
+      "sources": [
+       "albioncompo_hellgate5_2026_07:comp:0",
+       "albioncompo_sortasaucy_7man_ftb_2026_05:comp:1"
+      ]
+     }
+    ]
+   }
+  },
+  "sustained_brawler": {
+   "off_uniform": [
+    {
+     "build": "albioncompo_20v20_competitive_2026_08:comp:16",
+     "id": "ARMOR_CLOTH_AVALON",
+     "weapon": "2H_KNUCKLES_SET3"
+    },
+    {
+     "build": "albioncompo_ss_kite_20_2026_06:comp:11",
+     "id": "ARMOR_CLOTH_AVALON",
+     "weapon": "2H_KNUCKLES_SET3"
+    }
+   ],
+   "slots": {
+    "armor": [
+     {
+      "count": 10,
+      "id": "ARMOR_LEATHER_HELL",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:10",
+       "albioncompo_push_monkey_7_2026_05:comp:4",
+       "cb_clonepeek_zvz20_2026_03:comp:17",
+       "metabattle:7513:9008",
+       "metabattle:7657:9009",
+       "metabattle:7658:8999",
+       "metabattle:7659:8921",
+       "metabattle:7691:8998",
+       "timothy_blap_blackzone_roam_2026_08:blap:13",
+       "timothy_blap_blackzone_roam_2026_08:blap:14"
+      ]
+     },
+     {
+      "count": 4,
+      "id": "ARMOR_LEATHER_ROYAL",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:17",
+       "albioncompo_ss_kite_20_2026_06:comp:16",
+       "cb_clonepeek_zvz20_2026_03:comp:12",
+       "deadlyhooker_large_scale_2026_08:party_1:15"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "ARMOR_PLATE_KEEPER",
+      "sources": [
+       "cb_clonepeek_zvz20_2026_03:comp:15",
+       "deadlyhooker_large_scale_2026_08:party_3:11"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "ARMOR_LEATHER_FEY",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:12"
+      ]
+     }
+    ],
+    "cape": [
+     {
+      "count": 12,
+      "id": "CAPEITEM_SMUGGLER",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:16",
+       "albioncompo_20v20_competitive_2026_08:comp:17",
+       "albioncompo_push_monkey_7_2026_05:comp:4",
+       "albioncompo_ss_kite_20_2026_06:comp:11",
+       "albioncompo_ss_kite_20_2026_06:comp:16",
+       "deadlyhooker_large_scale_2026_08:party_1:14",
+       "deadlyhooker_large_scale_2026_08:party_1:15",
+       "deadlyhooker_large_scale_2026_08:party_3:11",
+       "timothy_blap_blackzone_roam_2026_08:blap:10",
+       "timothy_blap_blackzone_roam_2026_08:blap:13",
+       "timothy_blap_blackzone_roam_2026_08:blap:14",
+       "timothy_blap_blackzone_roam_2026_08:blap:8"
+      ]
+     },
+     {
+      "count": 4,
+      "id": "CAPEITEM_FW_LYMHURST",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:10",
+       "albioncompo_bist_roam15_2026_01:comp:11",
+       "albioncompo_bist_roam15_2026_01:comp:12",
+       "metabattle:7513:9008"
+      ]
+     }
+    ],
+    "food": [
+     {
+      "count": 11,
+      "id": "T8_MEAL_STEW",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:16",
+       "albioncompo_20v20_competitive_2026_08:comp:17",
+       "albioncompo_bist_roam15_2026_01:comp:11",
+       "albioncompo_push_monkey_7_2026_05:comp:3",
+       "albioncompo_push_monkey_7_2026_05:comp:4",
+       "albioncompo_ss_kite_20_2026_06:comp:11",
+       "cb_clonepeek_zvz20_2026_03:comp:15",
+       "cb_clonepeek_zvz20_2026_03:comp:17",
+       "metabattle:7513:9008",
+       "metabattle:7657:9009",
+       "metabattle:7658:8999"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "T7_MEAL_OMELETTE",
+      "sources": [
+       "metabattle:7655:8917",
+       "metabattle:7691:8998"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "T7_MEAL_OMELETTE_AVALON",
+      "sources": [
+       "cb_clonepeek_zvz20_2026_03:comp:12"
+      ]
+     }
+    ],
+    "head": [
+     {
+      "count": 11,
+      "id": "HEAD_PLATE_SET2",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:17",
+       "albioncompo_bist_roam15_2026_01:comp:10",
+       "albioncompo_ss_kite_20_2026_06:comp:16",
+       "cb_clonepeek_zvz20_2026_03:comp:12",
+       "cb_clonepeek_zvz20_2026_03:comp:15",
+       "deadlyhooker_large_scale_2026_08:party_1:15",
+       "deadlyhooker_large_scale_2026_08:party_3:11",
+       "metabattle:7658:8999",
+       "metabattle:7659:8921",
+       "timothy_blap_blackzone_roam_2026_08:blap:11",
+       "timothy_blap_blackzone_roam_2026_08:blap:8"
+      ]
+     },
+     {
+      "count": 4,
+      "id": "HEAD_LEATHER_FEY",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:16",
+       "albioncompo_bist_roam15_2026_01:comp:11",
+       "albioncompo_ss_kite_20_2026_06:comp:11",
+       "deadlyhooker_large_scale_2026_08:party_1:14"
+      ]
+     },
+     {
+      "count": 4,
+      "id": "HEAD_LEATHER_SET3",
+      "sources": [
+       "albioncompo_push_monkey_7_2026_05:comp:3",
+       "metabattle:7513:9008",
+       "metabattle:7655:8917",
+       "metabattle:7657:9009"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_PLATE_KEEPER",
+      "sources": [
+       "metabattle:7691:8998"
+      ]
+     }
+    ],
+    "offhand": [
+     {
+      "count": 1,
+      "id": "OFF_DEMONSKULL_HELL",
+      "sources": [
+       "metabattle:7658:8999"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "OFF_HORN_KEEPER",
+      "sources": [
+       "timothy_blap_blackzone_roam_2026_08:blap:13"
+      ]
+     }
+    ],
+    "potion": [
+     {
+      "count": 11,
+      "id": "T7_POTION_REVIVE",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:10",
+       "albioncompo_bist_roam15_2026_01:comp:11",
+       "albioncompo_bist_roam15_2026_01:comp:12",
+       "albioncompo_push_monkey_7_2026_05:comp:3",
+       "albioncompo_push_monkey_7_2026_05:comp:4",
+       "albioncompo_ss_kite_20_2026_06:comp:11",
+       "albioncompo_ss_kite_20_2026_06:comp:16",
+       "cb_clonepeek_zvz20_2026_03:comp:12",
+       "cb_clonepeek_zvz20_2026_03:comp:15",
+       "cb_clonepeek_zvz20_2026_03:comp:17",
+       "metabattle:7513:9008"
+      ]
+     },
+     {
+      "count": 5,
+      "id": "T7_POTION_STONESKIN",
+      "sources": [
+       "metabattle:7655:8917",
+       "metabattle:7657:9009",
+       "metabattle:7658:8999",
+       "metabattle:7659:8921",
+       "metabattle:7691:8998"
+      ]
+     }
+    ],
+    "shoes": [
+     {
+      "count": 11,
+      "id": "SHOES_LEATHER_MORGANA",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:10",
+       "albioncompo_bist_roam15_2026_01:comp:11",
+       "albioncompo_bist_roam15_2026_01:comp:12",
+       "albioncompo_push_monkey_7_2026_05:comp:4",
+       "cb_clonepeek_zvz20_2026_03:comp:17",
+       "metabattle:7658:8999",
+       "timothy_blap_blackzone_roam_2026_08:blap:10",
+       "timothy_blap_blackzone_roam_2026_08:blap:11",
+       "timothy_blap_blackzone_roam_2026_08:blap:13",
+       "timothy_blap_blackzone_roam_2026_08:blap:14",
+       "timothy_blap_blackzone_roam_2026_08:blap:8"
+      ]
+     },
+     {
+      "count": 6,
+      "id": "SHOES_LEATHER_FEY",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:16",
+       "albioncompo_20v20_competitive_2026_08:comp:17",
+       "albioncompo_ss_kite_20_2026_06:comp:11",
+       "albioncompo_ss_kite_20_2026_06:comp:16",
+       "deadlyhooker_large_scale_2026_08:party_1:14",
+       "deadlyhooker_large_scale_2026_08:party_1:15"
+      ]
+     }
+    ]
+   }
+  },
+  "zone_support": {
+   "slots": {
+    "armor": [
+     {
+      "count": 6,
+      "id": "ARMOR_CLOTH_SET1",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:9",
+       "albioncompo_sob_blaze_os_2026_06:comp:3",
+       "cb_clonepeek_zvz20_2026_03:comp:11",
+       "deadlyhooker_large_scale_2026_08:party_1:12",
+       "deadlyhooker_large_scale_2026_08:party_1:13",
+       "metabattle:7698:8971"
+      ]
+     },
+     {
+      "count": 3,
+      "id": "ARMOR_PLATE_FEY",
+      "sources": [
+       "deadlyhooker_large_scale_2026_08:party_2:2",
+       "deadlyhooker_large_scale_2026_08:party_3:3",
+       "metabattle:7642:8970"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "ARMOR_CLOTH_FEY",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:13",
+       "albioncompo_20v20_competitive_2026_08:comp:14"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "ARMOR_CLOTH_AVALON",
+      "sources": [
+       "albioncompo_ss_kite_20_2026_06:comp:9"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "ARMOR_PLATE_HELL",
+      "sources": [
+       "deadlyhooker_large_scale_2026_08:party_2:11"
+      ]
+     }
+    ],
+    "cape": [
+     {
+      "count": 5,
+      "id": "CAPEITEM_SMUGGLER",
+      "sources": [
+       "deadlyhooker_large_scale_2026_08:party_1:12",
+       "deadlyhooker_large_scale_2026_08:party_1:13",
+       "deadlyhooker_large_scale_2026_08:party_2:11",
+       "deadlyhooker_large_scale_2026_08:party_2:2",
+       "deadlyhooker_large_scale_2026_08:party_3:3"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "CAPEITEM_FW_LYMHURST",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:9",
+       "metabattle:7698:8971"
+      ]
+     }
+    ],
+    "food": [
+     {
+      "count": 4,
+      "id": "T8_MEAL_STEW",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:13",
+       "albioncompo_20v20_competitive_2026_08:comp:14",
+       "albioncompo_sob_blaze_os_2026_06:comp:3",
+       "albioncompo_ss_kite_20_2026_06:comp:9"
+      ]
+     },
+     {
+      "count": 3,
+      "id": "T7_MEAL_OMELETTE",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:9",
+       "metabattle:7642:8970",
+       "metabattle:7698:8971"
+      ]
+     }
+    ],
+    "head": [
+     {
+      "count": 12,
+      "id": "HEAD_LEATHER_SET3",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:13",
+       "albioncompo_20v20_competitive_2026_08:comp:14",
+       "albioncompo_bist_roam15_2026_01:comp:9",
+       "albioncompo_ss_kite_20_2026_06:comp:9",
+       "cb_clonepeek_zvz20_2026_03:comp:11",
+       "deadlyhooker_large_scale_2026_08:party_1:12",
+       "deadlyhooker_large_scale_2026_08:party_1:13",
+       "deadlyhooker_large_scale_2026_08:party_2:11",
+       "deadlyhooker_large_scale_2026_08:party_2:2",
+       "deadlyhooker_large_scale_2026_08:party_3:3",
+       "metabattle:7642:8970",
+       "metabattle:7698:8971"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_CLOTH_KEEPER",
+      "sources": [
+       "albioncompo_sob_blaze_os_2026_06:comp:3"
+      ]
+     }
+    ],
+    "offhand": [
+     {
+      "count": 1,
+      "id": "OFF_SHIELD_AVALON",
+      "sources": [
+       "deadlyhooker_large_scale_2026_08:party_2:11"
+      ]
+     }
+    ],
+    "potion": [
+     {
+      "count": 3,
+      "id": "T7_POTION_STONESKIN",
+      "sources": [
+       "cb_clonepeek_zvz20_2026_03:comp:11",
+       "metabattle:7642:8970",
+       "metabattle:7698:8971"
+      ]
+     },
+     {
+      "count": 2,
+      "id": "T7_POTION_REVIVE",
+      "sources": [
+       "albioncompo_bist_roam15_2026_01:comp:9",
+       "albioncompo_ss_kite_20_2026_06:comp:9"
+      ]
+     }
+    ],
+    "shoes": [
+     {
+      "count": 5,
+      "id": "SHOES_LEATHER_MORGANA",
+      "sources": [
+       "albioncompo_20v20_competitive_2026_08:comp:13",
+       "albioncompo_20v20_competitive_2026_08:comp:14",
+       "albioncompo_bist_roam15_2026_01:comp:9",
+       "deadlyhooker_large_scale_2026_08:party_1:12",
+       "deadlyhooker_large_scale_2026_08:party_1:13"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_LEATHER_FEY",
+      "sources": [
+       "albioncompo_ss_kite_20_2026_06:comp:9"
+      ]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_LEATHER_SET1",
+      "sources": [
+       "cb_clonepeek_zvz20_2026_03:comp:11"
+      ]
+     }
+    ]
+   }
+  }
+ },
  "menus": {
   "2H_ARCANESTAFF": [
    "shield_support",

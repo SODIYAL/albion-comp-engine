@@ -862,6 +862,167 @@ def classify_gear(gear, book):
     return board, problems
 
 
+KIT_SEAT_CLASSES = ("frontline", "healer", "support", "dps")
+# passive FAMILY (id substring) -> the build_stats channel it feeds.
+# None = doctrine-display only (no channel exists; never invents score).
+PASSIVE_FAMILY_STATS = {"INCREASED_DAMAGE": "damage_heal_pct",
+                        "CD_REDUCTION": None,
+                        "CCDURATION": "cc_duration_pct",
+                        "INCREASED_CCR": "ccr_pct"}
+# raw build-record slot names -> gear catalog slots
+KIT_SLOT_MAP = {"armor": "armor", "head": "head", "shoes": "shoes",
+                "boot": "shoes", "cape": "cape", "food": "food",
+                "potion": "potion", "offhand": "offhand",
+                "secondhand": "offhand"}
+
+
+def resolve_passive_doctrine(doc, gear, problems):
+    """Increment 2 (owner 2026-08-25: 'you are right about passive
+    defaults'): stamp each armor/head/shoes piece with its doctrine
+    passive PICK per wearer seat class. roles.yaml names only the
+    FAMILY (an id substring) per gear class; the actual passive id
+    resolves from the piece's OWN dumps menu (gear_spells.json) and the
+    magnitude parses from the spell description (spell_index) — no hand
+    numbers anywhere. An armor-tree family that fails to resolve blocks
+    the release; head/shoes trees lacking the family simply carry no
+    doctrine pick (their menus differ — recorded, not invented)."""
+    passives = (doc or {}).get("passives") or {}
+    for cls, spec in passives.items():
+        if cls not in ("cloth", "leather", "plate"):
+            problems.append(f"kit_doctrine: unknown gear class '{cls}'")
+        for k, fam in (spec or {}).items():
+            if k == "source":
+                continue
+            if k not in KIT_SEAT_CLASSES + ("default",):
+                problems.append(f"kit_doctrine: {cls}: unknown seat "
+                                f"class '{k}'")
+            if fam not in PASSIVE_FAMILY_STATS:
+                problems.append(f"kit_doctrine: {cls}: unknown passive "
+                                f"family '{fam}'")
+        if not (spec or {}).get("source", "").strip():
+            problems.append(f"kit_doctrine: {cls}: no source")
+    gs_path = os.path.join(OUT, "gear_spells.json")
+    si_path = os.path.join(OUT, "spell_index.json")
+    gear_spells, spell_index = {}, {}
+    if os.path.exists(gs_path):
+        with open(gs_path, encoding="utf-8") as f:
+            gear_spells = json.load(f)
+    if os.path.exists(si_path):
+        with open(si_path, encoding="utf-8") as f:
+            si = json.load(f)
+            spell_index = si.get("spells", si)
+    import re as _re
+    for k, g in sorted((gear or {}).items()):
+        if g.get("slot") not in ("armor", "head", "shoes"):
+            continue
+        cls = g.get("gear_class")
+        spec = passives.get(cls) or {}
+        menu = (gear_spells.get(k) or {}).get("passives") or []
+        picks = {}
+        for sc in KIT_SEAT_CLASSES:
+            fam = spec.get(sc, spec.get("default"))
+            if not fam:
+                continue
+            pid = next((p for p in menu if fam in p), None)
+            if pid is None:
+                if g.get("slot") == "armor" and menu:
+                    problems.append(f"kit_doctrine: {k}: family '{fam}' "
+                                    f"not in passive menu {menu}")
+                continue
+            desc = (spell_index.get(pid) or {}).get("description") or ""
+            m = _re.search(r"by (\d+(?:\.\d+)?)", desc)
+            if m is None:
+                if g.get("slot") == "armor":
+                    problems.append(f"kit_doctrine: {k}: {pid}: no "
+                                    f"magnitude in '{desc[:60]}'")
+                continue
+            picks[sc] = {"id": pid,
+                         "name": (spell_index.get(pid) or {}).get("name"),
+                         "stat": PASSIVE_FAMILY_STATS[fam],
+                         "value": float(m.group(1))}
+        if picks:
+            g["doctrine_passives"] = picks
+
+
+def derive_kit_doctrine(book, gear, problems):
+    """Increment 2 kit POOLS, evidence-led (roles-design.md: 'kit = the
+    assigned role's uniform, evidence-led — reference builds first'):
+    each seat role's observed per-slot items, mined from the reference
+    builds of its member weapons (builds_index) and cited by build_id.
+    Ships as each seat's `kit:` {slot: [ids]}; the audit detail (counts
+    + citations + off-uniform sightings) goes to roles_report. The
+    CHEST admits only uniform classes — an observed off-uniform chest
+    is reported, never admitted. Derived, never hand-listed."""
+    bi_path = os.path.join(OUT, "builds_index.json")
+    if not os.path.exists(bi_path):
+        problems.append("kit_doctrine: builds_index.json missing — run "
+                        "build_builds.py first")
+        return {}
+    with open(bi_path, encoding="utf-8") as f:
+        by_content = (json.load(f) or {}).get("by_content") or {}
+
+    def normalize(v):
+        """Conservative raw-id -> catalog-id: exact, else a unique tier
+        prefix away. Anything else stays unknown (never guessed)."""
+        v = (v or "").split("@")[0].strip()
+        if not v:
+            return None
+        if v in gear:
+            return v
+        cands = {k for k in gear
+                 for n in (4, 5, 6, 7, 8) if k == f"T{n}_{v}"}
+        return cands.pop() if len(cands) == 1 else None
+
+    recs_by_weapon = {}
+    for by_w in by_content.values():
+        for wk, recs in by_w.items():
+            recs_by_weapon.setdefault(wk, []).extend(recs or [])
+    detail = {}
+    for r in book:
+        uni = set((r.get("uniform") or {}).get("chest") or [])
+        if not uni:
+            continue  # function/meta roles have no seat kit
+        pools, off_uniform = {}, []
+        for m in (r.get("weapons") or []):
+            for rec in recs_by_weapon.get(m.get("id")) or []:
+                slots = dict(rec.get("raw") or {})
+                slots.update({k: v for k, v in (rec.get("gear") or {})
+                              .items() if v})
+                bid = rec.get("build_id") or "?"
+                for rk, v in slots.items():
+                    slot = KIT_SLOT_MAP.get(rk)
+                    gid = normalize(v) if slot else None
+                    if gid is None:
+                        continue
+                    if slot == "armor" and \
+                            (gear[gid].get("gear_class") or "") not in uni:
+                        off_uniform.append(
+                            {"id": gid, "build": bid,
+                             "weapon": m.get("id")})
+                        continue
+                    ent = pools.setdefault(slot, {}).setdefault(
+                        gid, {"id": gid, "count": 0, "sources": set()})
+                    ent["count"] += 1
+                    ent["sources"].add(bid)
+        kit = {}
+        det = {}
+        for slot, ents in sorted(pools.items()):
+            ordered = sorted(ents.values(),
+                             key=lambda e: (-e["count"], e["id"]))
+            kit[slot] = [e["id"] for e in ordered]
+            det[slot] = [{"id": e["id"], "count": e["count"],
+                          "sources": sorted(e["sources"])}
+                         for e in ordered]
+        if kit:
+            r["kit"] = kit
+        if det or off_uniform:
+            detail[r["id"]] = {"slots": det}
+            if off_uniform:
+                detail[r["id"]]["off_uniform"] = sorted(
+                    off_uniform, key=lambda o: (o["id"], o["build"]))
+    return detail
+
+
 def apply_roles(weapons, gear):
     """The ROLE BOOK (pipeline/roles.yaml, roles-design.md): validate it,
     stamp each weapon's `role_menu` (the inverse index, primary first in
@@ -973,6 +1134,11 @@ def apply_roles(weapons, gear):
                 weapons[wk].setdefault(key, []).append(r["id"])
     gear_board, gear_problems = classify_gear(gear, book)
     problems += gear_problems
+    # increment 2 (owner 2026-08-25): passive doctrine picks per piece,
+    # and evidence-led per-seat kit pools — both AFTER classify_gear
+    # (they read the stamped gear_class)
+    resolve_passive_doctrine(doc.get("kit_doctrine"), gear, problems)
+    kit_detail = derive_kit_doctrine(book, gear, problems)
     # unique actives that buff allies but sit in no gear_effect yet —
     # candidates for the effects catalog (owner grading)
     effect_items = {it.get("id") for ge in effects
@@ -991,6 +1157,7 @@ def apply_roles(weapons, gear):
                     for m in (r.get("weapons") or [])]} for r in book],
         "gear_effects": effects,
         "items": gear_board,
+        "kit_doctrine": kit_detail,
         "effect_candidates": effect_candidates,
         "menus": {k: w.get("role_menu", []) for k, w in sorted(weapons.items())
                   if w.get("role_menu")},
@@ -1236,7 +1403,12 @@ def main():
                        "attackspeedbonus", "movespeedbonus",
                        "energymax", "energyregenerationbonus",
                        "energycostreduction", "hitpointsmax",
-                       "hitpointsregenerationbonus", "healmodifier")
+                       "hitpointsregenerationbonus", "healmodifier",
+                       # increment 2 (owner 2026-08-25): CC duration is an
+                       # identity stat — Leering Cane's whole reason to
+                       # exist; feeds the cc_mult_caps build channel so
+                       # CC-offhand pairing is physics, not a hand list
+                       "bonusccdurationvsplayers")
     for gk, g in gear.items():
         bank = (item_stats.get(gk) or {}).get("stats") or {}
         g["stats"] = {s: bank[s] for s in BUILD_STAT_KEYS if bank.get(s)}

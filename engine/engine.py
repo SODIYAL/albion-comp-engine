@@ -878,7 +878,7 @@ class Engine:
             choice = self.default_gear_choice(key)
         return extras[choice]
 
-    def build_extra(self, weapon, combo=None, gear=None):
+    def build_extra(self, weapon, combo=None, gear=None, role=None):
         """A FULL-BUILD member's effective caps: weapon loadout + every gear
         item's ABILITY contribution + the build's STAT channel. `gear` is a
         list of gear keys or (key, choice) pairs.
@@ -888,9 +888,16 @@ class Engine:
         adds tankiness units; % damage/heal stats MULTIPLY the member's
         damage/heal capability supply. A +50% damage chest is worth 50%
         of whatever damage the build actually has — nearly nothing on a
-        control tank, which is exactly the coherence the model wants."""
+        control tank, which is exactly the coherence the model wants.
+        CC-duration % (increment 2, owner 2026-08-25) multiplies the
+        wearer's own duration-bearing CC the same way — the Leering-Cane
+        pairing as physics. `role` (a seat id) additionally applies each
+        piece's DOCTRINE PASSIVE pick (kit_doctrine, dumps-resolved) —
+        generation/display only; comp scoring never passes a role."""
         out = dict(self.member_extra(weapon, combo))
         armor_pts = ccr_pts = dmg_pct = heal_pct = 0.0
+        ccdur_pct = ccr_mult = 0.0
+        seat_class = (self.roles.get(role) or {}).get("class") if role else None
         for item in (gear or []):
             key, choice = item if isinstance(item, (list, tuple)) else (item, None)
             for cap, v in self.gear_extra(key, choice).items():
@@ -901,9 +908,23 @@ class Engine:
             dmg_pct += st.get("magicspelldamagebonus",
                               st.get("physicalspelldamagebonus", 0.0))
             heal_pct += st.get("healbonus", 0.0)
+            ccdur_pct += st.get("bonusccdurationvsplayers", 0.0)
+            if seat_class:
+                p = ((self.gear.get(key) or {}).get("doctrine_passives")
+                     or {}).get(seat_class)
+                if p:
+                    stat, v = p.get("stat"), p.get("value") or 0.0
+                    if stat == "damage_heal_pct":
+                        dmg_pct += v
+                        heal_pct += v
+                    elif stat == "cc_duration_pct":
+                        ccdur_pct += v
+                    elif stat == "ccr_pct":
+                        ccr_mult += v
         bs = self.mechanics.get("build_stats") or {}
         tank = (armor_pts * bs.get("tankiness_per_armor_point", 0.0)
-                + ccr_pts * bs.get("tankiness_per_ccr_point", 0.0))
+                + ccr_pts * (1.0 + ccr_mult)
+                * bs.get("tankiness_per_ccr_point", 0.0))
         if tank > 0.0:
             out["tankiness"] = out.get("tankiness", 0.0) + tank
         if dmg_pct > 0.0:
@@ -914,11 +935,29 @@ class Engine:
             for cap in bs.get("heal_mult_caps") or []:
                 if cap in out:
                     out[cap] *= 1.0 + heal_pct
+        if ccdur_pct > 0.0:
+            for cap in bs.get("cc_mult_caps") or []:
+                if cap in out:
+                    out[cap] *= 1.0 + ccdur_pct
         return out
 
-    def kit_options(self, weapon, combo=None, party=None, top_n=3):
-        """IDEAL KIT per weapon, per content/style, per comp (2026-08-20):
-        ranked gear options for every slot, for the player of `weapon`.
+    def primary_seat(self, weapon):
+        """The weapon's default SEAT role: the first uniform-carrying role
+        on its menu (book order = evidence-preference order). Function
+        roles (no uniform) never seat; weapons off every menu return
+        None and keep the pre-doctrine kit behavior."""
+        for rid in self.weapons[weapon].get("role_menu") or []:
+            if ((self.roles.get(rid) or {}).get("uniform")
+                    or {}).get("chest"):
+                return rid
+        return None
+
+    def kit_options(self, weapon, combo=None, party=None, top_n=3,
+                    role="auto"):
+        """IDEAL KIT per weapon, per content/style, per comp (2026-08-20;
+        DOCTRINE-LED since increment 2, owner 2026-08-25 "yes its the
+        whole build"): ranked gear options for every slot, for the
+        player of `weapon`.
 
         No party -> context-free: each item valued by its weighted
         capability delta to this member's build under the CURRENT template
@@ -927,18 +966,36 @@ class Engine:
         by the exact fitness delta of this member joining with that item,
         so the kit answers what THIS comp still needs.
 
-        Role adaptation is emergent, not configured: the stat channel makes
-        a +50% damage chest worth 1.5x the member's actual damage caps and
-        a +heal chest worth 1.5x its healing — so the same advisor puts
-        cloth on Hallowfall and plate on Heavy Mace.
+        THE ROLE GATE (`role`): "auto" resolves the weapon's primary
+        seat, an explicit seat id uses that seat, None keeps the old
+        ungated pool. With a seat: the CHEST pool hard-gates to the
+        uniform classes (a stopper tank can never be handed a dps
+        jacket — the everyone-gets-Hellion fix), every other slot ranks
+        its DOCTRINE tier first (items observed in the seat's reference
+        builds, cited in roles_report kit_doctrine) with the full
+        catalog behind it, and each option carries `doctrine`,
+        `carries` (typed gear effects) and `passive` (the seat's
+        doctrine passive pick for that piece). Suggestion-layer only —
+        manual builds score anything, role_advisory flags mismatches.
 
         Returns {"kit": {slot: choice}, "options": {slot: [ranked choices]}}
-        where a choice is {gear, display_name, value, why: [(cap, delta)]}.
-        Greedy per slot (v1): cross-slot stat stacking is additive in the
-        model, so per-slot ranking against the bare member is faithful."""
+        where a choice is {gear, display_name, value, why: [(cap, delta)],
+        doctrine, carries, passive}. Greedy per slot (v1): cross-slot stat
+        stacking is additive in the model, so per-slot ranking against the
+        bare member is faithful."""
+        seat = self.primary_seat(weapon) if role == "auto" else role
+        seat_rec = self.roles.get(seat) or {}
+        uniform = (seat_rec.get("uniform") or {}).get("chest") or []
+        doctrine = seat_rec.get("kit") or {}
+        seat_class = seat_rec.get("class")
         by_slot = {}
         for k, g in self.gear.items():
             by_slot.setdefault(g.get("slot") or "other", []).append(k)
+        if uniform:
+            gated = [k for k in by_slot.get("armor", [])
+                     if (self.gear[k].get("gear_class") or "") in uniform]
+            if gated:
+                by_slot["armor"] = gated
         # Style-fit gear gate (identity Phase C, owner ruling 2026-08-23):
         # "a siegebow or a great axe, or longbow etc playing in brawl comp
         # don't work if they are on cloth armor. The brawl comp requires by
@@ -948,8 +1005,10 @@ class Engine:
         # PROVISIONAL owner-taste rule, overridable per weapon later.
         if (self.style in ("brawl", "brawl_clap")
                 and self.role_of(weapon) != "healer"):
-            by_slot["armor"] = [k for k in by_slot.get("armor", [])
-                                if "_CLOTH_" not in k]
+            unclothed = [k for k in by_slot.get("armor", [])
+                         if "_CLOTH_" not in k]
+            if unclothed:
+                by_slot["armor"] = unclothed
         bare = self.member_extra(weapon, combo)
         if party is not None:
             joined = list(party) + [weapon]
@@ -957,9 +1016,10 @@ class Engine:
             f_bare = self.fitness(joined, None, base_gears + [None])
         options = {}
         for slot in sorted(by_slot):
+            doc_pool = set(doctrine.get(slot) or [])
             ranked = []
             for k in sorted(by_slot[slot]):
-                built = self.build_extra(weapon, combo, [k])
+                built = self.build_extra(weapon, combo, [k], role=seat)
                 deltas = sorted(
                     ((c, built.get(c, 0.0) - bare.get(c, 0.0))
                      for c in built
@@ -972,12 +1032,33 @@ class Engine:
                 else:
                     value = self.fitness(joined, None,
                                          base_gears + [[k]]) - f_bare
+                passive = None
+                if seat_class:
+                    p = ((self.gear[k].get("doctrine_passives") or {})
+                         .get(seat_class))
+                    if p:
+                        passive = {"id": p.get("id"), "name": p.get("name")}
                 ranked.append({
                     "gear": k,
                     "display_name": self.gear[k]["display_name"],
                     "value": value,
+                    "doctrine": k in doc_pool,
+                    "carries": list(self._item_effects.get(k) or []),
+                    "passive": passive,
                     "why": [(c, round(d, 2)) for c, d in deltas[:3]]})
-            ranked.sort(key=lambda r: (-r["value"], r["gear"]))
+            # Context-free: the doctrine tier (observed in this seat's
+            # real builds) is the prior — it ranks first, each tier by
+            # weighted value. Comp-aware: the EXACT marginal is the
+            # engine's own physics of what this comp needs and outranks
+            # tier membership (T22 — the tank's team head must win);
+            # doctrine stays as annotation + tie-break. The chest is
+            # pool-gated either way — the Hellion bug can't return.
+            if party is None:
+                ranked.sort(key=lambda r: (not r["doctrine"], -r["value"],
+                                           r["gear"]))
+            else:
+                ranked.sort(key=lambda r: (-r["value"], not r["doctrine"],
+                                           r["gear"]))
             options[slot] = ranked[:top_n]
         kit = {slot: opts[0] for slot, opts in options.items() if opts}
         return {"kit": kit, "options": options}

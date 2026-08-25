@@ -23,12 +23,42 @@ owner grading passes (all recorded in tests/VALIDATION.md round 10):
   descriptive, parity-carried, rendered in the status card
 - contracts: tests/test_roles.py R1–R11
 
-**Pending**: increment 2 (kit-doctrine advisor: role uniforms,
-tree-shared gear actives, the per-role passive pick, pairing rules like
-CC-duration-offhands-on-CC-weapons), increment 3 (forge role assignment
-+ owner-graded fine-role need profiles), increment 4 (uptime economics).
-The seat-role membership board awaits owner grading in
-out/roles_report.json.
+**Increment 2 SHIPPED** (same day; owner ruling: "yes its the whole
+build. infact we might even need to include food, potion and capes and
+you are right about passive defaults"):
+
+- generated kits are DOCTRINE-LED (`kit_options`, both ports, parity +
+  the R12–R16 contracts): the chest pool hard-gates to the seat's
+  uniform (the everyone-gets-Hellion bug is dead — R12); every other
+  slot (head/shoes/cape/offhand/food/potion) carries a doctrine tier
+  mined from the seat's OBSERVED reference builds (builds_index,
+  build-id cited, audited in roles_report `kit_doctrine`) — tier-first
+  in context-free mode, exact-marginal-first in comp-aware mode (T22:
+  the engine's own physics outranks a sparse observation). Manual
+  builds still score anything; role_advisory flags them.
+- PASSIVE DOCTRINE (owner-confirmed defaults): cloth → Aggression (+8%
+  damage & healing cast), leather → Quick Thinker (+5% CDR,
+  display-only — no invented channel), plate → Authority (+10% CC
+  duration) on the frontline and Tenacity (+20% CCR) elsewhere.
+  roles.yaml names only the FAMILY; ids resolve from each piece's own
+  dumps menu, magnitudes parse from the spell descriptions
+  (`doctrine_passives` per piece), and the resolved stats feed the
+  build channels.
+- the Leering-Cane pairing is EMERGENT PHYSICS, not a hand list: the
+  CC-duration stat (`bonusccdurationvsplayers`, now in the dataset)
+  multiplies the wearer's own duration-bearing CC via the new
+  `cc_mult_caps` build channel — worth something on Incubus, exactly
+  nothing on Great Fire (R13).
+- kit options annotate `doctrine` / `carries` (typed gear effects — the
+  Royal-Jacket-on-Realmbreaker variant surfaces cited, R16) /
+  `passive`; the loadout panel shows the seat + passive + carried
+  effect line.
+
+**Pending**: increment 3 (forge role assignment + owner-graded
+fine-role need profiles), increment 4 (uptime economics). The
+seat-role membership board awaits owner grading in
+out/roles_report.json — its `kit_doctrine` section (observed per-seat
+kit pools with citations) is part of the same grading pass.
 
 ## The problem (owner observations, both verified)
 

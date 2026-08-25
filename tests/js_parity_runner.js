@@ -12,6 +12,17 @@ const SWAP_EVERY = 6, SWAP_MAX_PARTY = 6;
 const REFINE_EVERY = 6, REFINE_MAX_PARTY = 6, REFINE_PASSES = 2;
 // mirrors FORGE_* in test_js_parity.py
 const FORGE_EVERY = 10, FORGE_SIZE = 8;
+// mirrors KIT_* in test_js_parity.py (increment 2 kit doctrine)
+const KIT_EVERY = 6, KIT_OFFSET = 3, KIT_MAX_REST = 5;
+const kitSer = (ko) => {
+  const out = {};
+  for (const s of Object.keys(ko.options)) {
+    out[s] = ko.options[s].map((o) => ({
+      gear: o.gear, value: o.value, doctrine: o.doctrine,
+      carries: o.carries, passive: o.passive ? o.passive.id : null }));
+  }
+  return out;
+};
 
 const out = cases.map((c, i) => {
   const e = new CompEngine(dataset, c.content, c.size, c.style);
@@ -77,6 +88,11 @@ const out = cases.map((c, i) => {
       });
       return e.roleAdvisory(c.party, chests);
     })(),
+    kit: (i % KIT_EVERY !== KIT_OFFSET || !c.party.length) ? null : {
+      comp: kitSer(e.kitOptions(c.party[0], null,
+                                c.party.slice(1, 1 + KIT_MAX_REST))),
+      free: kitSer(e.kitOptions(c.party[0])),
+    },
   };
 });
 process.stdout.write(JSON.stringify(out));

@@ -120,6 +120,21 @@ def forge_case(i, c):
             "locked_combos": combos, "pool": c["refine_pool"]}
 
 
+# kit_options is a full-catalog sweep (comp-aware = one fitness call per
+# item) — cover it on every 6th case, offset from the swap/refine cadence,
+# with the rest-of-party capped. Both modes ride: comp-aware (exact
+# marginal first) and context-free (doctrine tier first) — increment 2.
+KIT_EVERY, KIT_OFFSET, KIT_MAX_REST = 6, 3, 5
+
+
+def _kit_ser(ko):
+    return {s: [{"gear": o["gear"], "value": o["value"],
+                 "doctrine": o["doctrine"], "carries": o["carries"],
+                 "passive": o["passive"]["id"] if o["passive"] else None}
+                for o in opts]
+            for s, opts in ko["options"].items()}
+
+
 def py_results(cases):
     out = []
     for i, c in enumerate(cases):
@@ -192,6 +207,11 @@ def py_results(cases):
                          if str(x).startswith("ARMOR_")), None)
                 for j, g in enumerate(c.get("gears") or [])
                 if any(str(x).startswith("ARMOR_") for x in (g or []))}),
+            "kit": (None if (i % KIT_EVERY != KIT_OFFSET
+                             or not c["party"]) else {
+                "comp": _kit_ser(e.kit_options(
+                    c["party"][0], party=c["party"][1:1 + KIT_MAX_REST])),
+                "free": _kit_ser(e.kit_options(c["party"][0]))}),
         })
     return out
 

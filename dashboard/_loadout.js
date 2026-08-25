@@ -315,6 +315,24 @@ function loPickerGrid(){
 }
 
 /* The panel under an expanded party row. */
+function loDoctrineLine(i){
+  /* Increment 2 (kit doctrine): the member's seat + the doctrine passive
+     for the equipped chest + any typed gear effect it carries.
+     Translation-only — every fact comes straight off the engine. */
+  if (typeof ENG === "undefined" || !ENG.primarySeat) return "";
+  const seat = ENG.primarySeat(party[i]);
+  if (!seat) return "";
+  const rec = (ENG.rolesBook || {})[seat] || {};
+  const chest = (LOADOUT[i] || {}).armor;
+  const dp = chest ? (((ENG.gear[chest] || {}).doctrine_passives || {})[rec["class"]] || null) : null;
+  const fx = chest ? ((ENG.itemEffects || {})[chest] || []) : [];
+  const bits = [`seat: <b>${esc(rec.name || seat)}</b>`];
+  if (dp) bits.push(`passive: <b>${esc(dp.name || dp.id)}</b>`);
+  fx.forEach(id => bits.push(
+    `carries: <b>${esc(((ENG.gearEffects || {})[id] || {}).name || id)}</b>`));
+  return `<div class="lo-ref" title="the role book's doctrine read of this kit — the seat this weapon defaults to, the tree passive that seat takes on this chest, and any team effect the chest carries">${bits.join(" · ")}</div>`;
+}
+
 function loadoutPanel(i){
   if (LO_OPEN !== i) return "";
   const ref = loadoutReference(party[i]);
@@ -323,6 +341,7 @@ function loadoutPanel(i){
     <div class="lo-row">${LO_SLOTS.map(s => loTile(i, s)).join("")}</div>
     <div class="lo-row lo-spells">${LO_SPELLS.map(s => loSpellPicker(i, s)).join("")}</div>
     ${(LOADOUT[i] || {})._eng ? `<div class="lo-ref lo-eng" title="spell and gear picks are the engine's scored suggestions for this content and comp — change anything to make the kit your own">&#9881; engine kit — scored for this comp, not a fielded build</div>` : ""}
+    ${loDoctrineLine(i)}
     ${ref ? `<div class="lo-ref">reference: ${esc(ref.caller)}${ref.role ? " · " + esc(ref.role) : ""}
       ${raw.length ? " · wrote " + raw.map(([sl, t]) =>
         `<b>${esc(LO_SLOT_LABEL[sl] || sl)}</b> “${esc(t)}”`).join(", ") : ""}</div>` : ""}

@@ -895,13 +895,21 @@
     return extras[choice];
   };
 
-  CompEngine.prototype.buildExtra = function (weapon, combo, gear) {
+  CompEngine.prototype.buildExtra = function (weapon, combo, gear, role) {
     /* Full-build member: weapon loadout + gear abilities + the STAT
-       channel (mirrors engine.py build_extra — same float order). */
+       channel (mirrors engine.py build_extra — same float order).
+       CC-duration % (increment 2, owner 2026-08-25) multiplies the
+       wearer's own duration-bearing CC — the Leering-Cane pairing as
+       physics. `role` (a seat id) additionally applies the DOCTRINE
+       PASSIVE picks — generation/display only; scoring never passes
+       a role. */
     var out = {}, c;
     var base = this.memberExtra(weapon, combo);
     for (c in base) out[c] = base[c];
     var armorPts = 0.0, ccrPts = 0.0, dmgPct = 0.0, healPct = 0.0;
+    var ccdurPct = 0.0, ccrMult = 0.0;
+    var seatClass = role ? ((this.rolesBook[role] || {})["class"] || null)
+                         : null;
     for (var i = 0; i < (gear || []).length; i++) {
       var item = gear[i];
       var key = Array.isArray(item) ? item[0] : item;
@@ -915,10 +923,20 @@
                  ? st.magicspelldamagebonus
                  : (st.physicalspelldamagebonus || 0.0));
       healPct += st.healbonus || 0.0;
+      ccdurPct += st.bonusccdurationvsplayers || 0.0;
+      if (seatClass) {
+        var p = (((this.gear[key] || {}).doctrine_passives) || {})[seatClass];
+        if (p) {
+          var pv = p.value || 0.0;
+          if (p.stat === "damage_heal_pct") { dmgPct += pv; healPct += pv; }
+          else if (p.stat === "cc_duration_pct") ccdurPct += pv;
+          else if (p.stat === "ccr_pct") ccrMult += pv;
+        }
+      }
     }
     var bs = this.mechanics.build_stats || {};
     var tank = armorPts * (bs.tankiness_per_armor_point || 0.0)
-             + ccrPts * (bs.tankiness_per_ccr_point || 0.0);
+             + ccrPts * (1.0 + ccrMult) * (bs.tankiness_per_ccr_point || 0.0);
     if (tank > 0.0) out.tankiness = (out.tankiness || 0.0) + tank;
     var j;
     if (dmgPct > 0.0) {
@@ -931,22 +949,68 @@
       for (j = 0; j < hc.length; j++)
         if (hc[j] in out) out[hc[j]] *= 1.0 + healPct;
     }
+    if (ccdurPct > 0.0) {
+      var cc = bs.cc_mult_caps || [];
+      for (j = 0; j < cc.length; j++)
+        if (cc[j] in out) out[cc[j]] *= 1.0 + ccdurPct;
+    }
     return out;
   };
 
-  CompEngine.prototype.kitOptions = function (weapon, combo, party, topN) {
+  CompEngine.prototype.primarySeat = function (weapon) {
+    /* The weapon's default SEAT: first uniform-carrying role on its
+       menu (mirrors engine.py primary_seat). */
+    var menu = this.weapons[weapon].role_menu || [];
+    for (var i = 0; i < menu.length; i++) {
+      var uni = (((this.rolesBook[menu[i]] || {}).uniform) || {}).chest || [];
+      if (uni.length) return menu[i];
+    }
+    return null;
+  };
+
+  CompEngine.prototype.kitOptions = function (weapon, combo, party, topN,
+                                              role) {
     /* IDEAL KIT per weapon, per content/style, per comp — mirrors
-       engine.py kit_options (2026-08-20; JS mirror 2026-08-21): ranked
-       gear options per slot. No party -> context-free weighted-delta
-       value (the default_combo rule); with `party` (the REST of the
-       comp) -> comp-aware exact fitness delta. Greedy per slot: stat
-       stacking is additive in the model, so per-slot ranking against
-       the bare member is faithful. `why` deltas are display-rounded. */
+       engine.py kit_options (2026-08-20; JS mirror 2026-08-21;
+       DOCTRINE-LED since increment 2, owner 2026-08-25 "yes its the
+       whole build"): ranked gear options per slot. No party ->
+       context-free weighted-delta value with the DOCTRINE TIER first;
+       with `party` -> comp-aware exact fitness delta outranks tier
+       membership (doctrine stays annotation + tie-break). `role`:
+       undefined/"auto" resolves the weapon's primary seat, null keeps
+       the old ungated pool, a seat id uses that seat. With a seat the
+       CHEST pool hard-gates to the uniform classes; options carry
+       doctrine/carries/passive. Suggestion-layer only — manual builds
+       score anything. `why` deltas are display-rounded. */
     if (topN === undefined || topN === null) topN = 3;
+    if (role === undefined) role = "auto";
+    var seat = role === "auto" ? this.primarySeat(weapon) : role;
+    var seatRec = this.rolesBook[seat] || {};
+    var uniform = (seatRec.uniform || {}).chest || [];
+    var doctrine = seatRec.kit || {};
+    var seatClass = seatRec["class"] || null;
     var bySlot = {}, k;
     for (k in this.gear) {
       var slot0 = this.gear[k].slot || "other";
       (bySlot[slot0] = bySlot[slot0] || []).push(k);
+    }
+    var self = this;
+    if (uniform.length) {
+      var gated = (bySlot.armor || []).filter(function (g) {
+        return uniform.indexOf((self.gear[g].gear_class || "")) >= 0;
+      });
+      if (gated.length) bySlot.armor = gated;
+    }
+    /* Style-fit gear gate (identity Phase C, owner 2026-08-23): under a
+       DECLARED brawl, cloth never gets SUGGESTED for a non-healer —
+       mirrors engine.py (drift closed 2026-08-25: the JS port had
+       skipped this gate). */
+    if ((this.style === "brawl" || this.style === "brawl_clap")
+        && this.roleOf(weapon) !== "healer") {
+      var unclothed = (bySlot.armor || []).filter(function (g) {
+        return g.indexOf("_CLOTH_") < 0;
+      });
+      if (unclothed.length) bySlot.armor = unclothed;
     }
     var bare = this.memberExtra(weapon, combo);
     var joined = null, baseGears = null, fBare = 0.0;
@@ -958,16 +1022,16 @@
     var options = {}, slots = Object.keys(bySlot).sort();
     for (var si = 0; si < slots.length; si++) {
       var slot = slots[si], keys = bySlot[slot].slice().sort();
+      var docPool = doctrine[slot] || [];
       var ranked = [];
       for (var ki = 0; ki < keys.length; ki++) {
         k = keys[ki];
-        var built = this.buildExtra(weapon, combo, [k]);
+        var built = this.buildExtra(weapon, combo, [k], seat);
         var deltas = [], c;
         for (c in built) {
           var d = built[c] - (bare[c] || 0.0);
           if (d > 1e-9) deltas.push([c, d]);
         }
-        var self = this;
         deltas.sort(function (a, b) {
           return (self._weights[b[0]] || 0.0) * b[1]
                - (self._weights[a[0]] || 0.0) * a[1];
@@ -979,15 +1043,36 @@
         } else {
           value = this.fitness(joined, null, baseGears.concat([[k]])) - fBare;
         }
+        var passive = null;
+        if (seatClass) {
+          var p = ((this.gear[k].doctrine_passives) || {})[seatClass];
+          if (p) passive = { id: p.id, name: p.name };
+        }
         var why = [];
         for (di = 0; di < Math.min(3, deltas.length); di++)
           why.push([deltas[di][0], Math.round(deltas[di][1] * 100) / 100]);
         ranked.push({ gear: k, display_name: this.gear[k].display_name,
-                      value: value, why: why });
+                      value: value, doctrine: docPool.indexOf(k) >= 0,
+                      carries: (this.itemEffects[k] || []).slice(),
+                      passive: passive, why: why });
       }
-      ranked.sort(function (a, b) {
-        return (b.value - a.value) || (a.gear < b.gear ? -1 : a.gear > b.gear ? 1 : 0);
-      });
+      /* Context-free: doctrine tier first. Comp-aware: exact marginal
+         first (T22) — mirrors engine.py ordering. */
+      var gearCmp = function (a, b) {
+        return a.gear < b.gear ? -1 : a.gear > b.gear ? 1 : 0;
+      };
+      if (joined === null) {
+        ranked.sort(function (a, b) {
+          return ((a.doctrine ? 0 : 1) - (b.doctrine ? 0 : 1))
+              || (b.value - a.value) || gearCmp(a, b);
+        });
+      } else {
+        ranked.sort(function (a, b) {
+          return (b.value - a.value)
+              || ((a.doctrine ? 0 : 1) - (b.doctrine ? 0 : 1))
+              || gearCmp(a, b);
+        });
+      }
       options[slot] = ranked.slice(0, topN);
     }
     var kit = {};
