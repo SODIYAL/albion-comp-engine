@@ -35,7 +35,8 @@ const out = cases.map((c, i) => {
     forge: forged,
     swap: sp === null ? null : e.swapReview(sp).map((m) => ({
       weapon: m.weapon, score: m.score, rank: m.rank, off_comp: m.off_comp,
-      off_style: m.off_style,
+      off_style: m.off_style, caps_gain: m.caps_gain, verdict: m.verdict,
+      redundant: m.redundant,
       options: m.options.map((o) => ({ weapon: o.weapon, score: o.score })),
     })),
     fitness: e.fitness(c.party),
@@ -46,7 +47,17 @@ const out = cases.map((c, i) => {
     synergy_locked: e.synergy(c.party, c.combos),
     max_fitness: e.maxFitness(),
     recommend: e.recommend(c.party, 5).map((r) => ({
-      weapon: r.weapon, score: r.score, combo: r.combo })),
+      weapon: r.weapon, score: r.score, combo: r.combo,
+      caps_gain: r.caps_gain, verdict: r.verdict })),
+    pick_report: c.refine_pool.length
+      ? e.pickReport(c.party, c.refine_pool[0], c.combos) : null,
+    analyze_bands: (() => {
+      const a = e.analyze(c.party, c.combos);
+      const row = (x) => ({ cap: x.cap, have: x.have, band: x.band,
+                            soft_cap: x.soft_cap });
+      return { strengths: a.strengths.map(row),
+               missing: a.missing_capabilities.map(row) };
+    })(),
     recommend_locked: e.recommend(c.party, 5, null, c.combos).map((r) => ({
       weapon: r.weapon, score: r.score })),
     weaknesses: e.weaknesses(c.party, 5).map((g) => ({ cap: g.cap, gap: g.gap })),

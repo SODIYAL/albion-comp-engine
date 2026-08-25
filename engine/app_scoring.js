@@ -1324,6 +1324,100 @@
     return terms.sort(function (x, y) { return y.delta - x.delta; });
   };
 
+  /* ------------------------------------- negative recs / redundancy lens
+     (roadmap item 3, 2026-08-24 — mirrors engine.py.) A DESCRIPTIVE
+     decomposition of the same exact marginal _evalPick scores — the
+     "why not" counterpart of explain(). A scoring-side redundancy penalty
+     was investigated and REJECTED (MECHANICS_TODO Q18); nothing here
+     feeds a score. */
+  CompEngine.prototype._nrGainMax = function () {
+    /* Redundancy verdict threshold (mechanics.yaml negative_recs,
+       PROVISIONAL, MASTERSHEET-tunable). */
+    var cfg = this.mechanics.negative_recs || {};
+    return (cfg.redundant_gain_max === undefined) ? 0.05 : cfg.redundant_gain_max;
+  };
+
+  CompEngine.prototype._pickCaps = function (state, weapon, combo) {
+    /* [rows, capsGain] — signed per-capability terms of the fitness
+       marginal (rows sum to _evalPick's dFit); capsGain is the
+       GAP-CLOSING part alone: below-target coverage + floor lift,
+       headroom-band depth excluded (mirrors engine.py _pick_caps). */
+    var extra = this.memberExtra(weapon, combo);
+    var adj = this._nonstackAdjust(state, weapon, combo, extra);
+    var s = state.s, rows = [], capsGain = 0.0;
+    for (var cap in adj) {
+      var gain = adj[cap];
+      if (!(cap in this.reqs) || !gain) continue;
+      var have = s[cap] || 0.0, target = this.target(cap), soft = this.softCap(cap);
+      var ct = this._coverTerms(cap, have, gain, target);
+      var cov = ct[0], floorD = ct[1];
+      var over = (this._overstack(cap, have + gain, target, soft)
+                  - this._overstack(cap, have, target, soft));
+      var head = (this._headroomBonus(cap, have + gain, target, soft)
+                  - this._headroomBonus(cap, have, target, soft));
+      capsGain += cov + floorD - head;
+      rows.push({ cap: cap, gain: gain, before: have, after: have + gain,
+                  target: target, soft_cap: soft,
+                  coverage: cov, floor_lift: floorD, overstack_cost: over,
+                  delta: cov + floorD - over, saturated: have >= target });
+    }
+    rows.sort(function (x, y) {
+      if (x.delta !== y.delta) return y.delta - x.delta;
+      return x.cap < y.cap ? -1 : x.cap > y.cap ? 1 : 0;
+    });
+    return [rows, capsGain];
+  };
+
+  CompEngine.prototype._pickVerdict = function (score, capsGain) {
+    /* One rule, every surface (mirrors engine.py _pick_verdict). */
+    if (score <= 0.0) return "negative";
+    if (capsGain <= this._nrGainMax()) return "redundant";
+    return "ok";
+  };
+
+  CompEngine.prototype.pickReport = function (party, candidate, combos) {
+    /* Full SIGNED decomposition of the candidate's pick score — the
+       'why / why not' panel (mirrors engine.py pick_report). caps rows sum
+       to d_fitness; alpha*d_fitness + beta*d_synergy + delta*meta
+       + viability*viab - dup_penalty reconstructs the score.
+       DESCRIPTIVE ONLY — computing it never changes a score. */
+    var state = this.partyState(party, combos);
+    var pick = this._evalPick(state, candidate);
+    var pc = this._pickCaps(state, candidate, pick.combo);
+    var rows = pc[0], capsGain = pc[1];
+    var dup = (state.counts[candidate] || 0) + 1 - this._dupFree(candidate);
+    var dupPenalty = dup > 0 ? this.rho * dup : 0.0;
+    var nsLines = [];
+    var nsMax = state.nsMax || {};
+    var contrib = this._nonstackContrib(candidate, pick.combo);
+    var sids = Object.keys(contrib).sort();
+    for (var si = 0; si < sids.length; si++) {
+      var sid = sids[si], pmax = nsMax[sid];
+      if (!pmax) continue;
+      var caps = this.nonstack[sid], lost = {}, any = false;
+      for (var cj = 0; cj < caps.length; cj++) {
+        var cap = caps[cj], v = contrib[sid][cap] || 0.0;
+        var cut = v < (pmax[cap] || 0.0) ? v : (pmax[cap] || 0.0);
+        if (v && cut > 0.0) { lost[cap] = cut; any = true; }
+      }
+      if (any) {
+        var rec = this.interactions[sid] || {};
+        nsLines.push({ spell: sid, name: rec.name || sid, lost: lost });
+      }
+    }
+    return {
+      weapon: candidate,
+      display_name: this.weapons[candidate].display_name,
+      combo: pick.combo, score: pick.score,
+      d_fitness: pick.dFit, d_synergy: pick.dSyn,
+      meta_prior: pick.meta, viability: this.viabilityOf(candidate),
+      dup_penalty: dupPenalty,
+      caps: rows, caps_gain: capsGain,
+      nonstack: nsLines,
+      verdict: this._pickVerdict(pick.score, capsGain),
+    };
+  };
+
   CompEngine.prototype._pool = function (pool) {
     /* mirrors Python's `pool or self.suggest_pool()`: default excludes both
        game-retired weapons and the viability exclusions for this context. */
@@ -1349,7 +1443,16 @@
         score: ps.score,
       });
     }
-    return out.sort(function (x, y) { return y.score - x.score; }).slice(0, topN);
+    out = out.sort(function (x, y) { return y.score - x.score; }).slice(0, topN);
+    /* verdict lens on the returned rows only (mirrors engine.py): a
+       suggestion that survives ranking can still be a depth pick in a
+       saturated comp — say so instead of implying it fills a gap */
+    for (i = 0; i < out.length; i++) {
+      var pc = this._pickCaps(state, out[i].weapon, out[i].combo);
+      out[i].caps_gain = pc[1];
+      out[i].verdict = this._pickVerdict(out[i].score, pc[1]);
+    }
+    return out;
   };
 
   CompEngine.prototype.swapReview = function (party, topN, pool, combos) {
@@ -1365,7 +1468,13 @@
         ? combos.slice(0, i).concat(combos.slice(i + 1)) : null;
       var state = this.partyState(rest, restCombos);
       var self = this;
-      var curScore = this._evalPick(state, cur).score;
+      var curPick = this._evalPick(state, cur);
+      var curScore = curPick.score;
+      /* redundancy lens (roadmap item 3, mirrors engine.py): the member
+         valued exactly as a pick into the rest — does it still close any
+         gap, or are its jobs already covered without it? Flag only. */
+      var curPc = this._pickCaps(state, cur, curPick.combo);
+      var curVerdict = this._pickVerdict(curScore, curPc[1]);
       var better = [];
       var keys = this._pool(pool);
       for (var j = 0; j < keys.length; j++) {
@@ -1386,6 +1495,9 @@
         off_comp: this.isExcluded(cur),
         off_style: this.isStyleUnfit(cur),
         off_budget: this.isCostGated(cur),
+        caps_gain: curPc[1],
+        verdict: curVerdict,
+        redundant: curVerdict !== "ok",
         options: better.slice(0, topN).map(function (t) {
           return { weapon: t[1],
                    display_name: self.weapons[t[1]].display_name,
@@ -1479,10 +1591,17 @@
     var strengths = [], missing = [];
     for (var cap in this.reqs) {
       var have = s[cap] || 0.0, target = this.target(cap);
+      var soft = this.softCap(cap);
+      /* saturation band (roadmap item 3, mirrors engine.py analyze):
+         gap below target, headroom to soft cap, overstacked past it */
+      var band = have < target ? "gap"
+               : have <= soft ? "headroom" : "overstacked";
       if (have >= target) {
-        strengths.push({ cap: cap, have: have, target: target });
+        strengths.push({ cap: cap, have: have, target: target,
+                         soft_cap: soft, band: band });
       } else if (this.weight(cap) > 0) {
         missing.push({ cap: cap, have: have, target: target,
+                       soft_cap: soft, band: band,
                        gap: target - have,
                        weighted_gap: this.weight(cap) * (target - have) / target });
       }
@@ -1756,6 +1875,30 @@
     var chain = style && styles[style] ? styles[style].chain : null;
     if (!chain) return null;
     var s = this.effectiveSupply(party, combos, gears);
+    /* spell-level sources (2026-08-24, mirrors engine.py): which equipped
+       buttons ARE each stage — resolved loadouts attributed back to the
+       slot/spell carrying each stage capability; spell null = the weapon's
+       always-on kit. Units are per-member, before the party-level
+       count-once rule; gear is not attributed. Display only. */
+    var members = [];
+    for (var mi = 0; mi < party.length; mi++) {
+      var mw = party[mi];
+      var lo = this.weapons[mw].loadout || {};
+      var slotNames = lo.slot_names || [];
+      var slotSpells = lo.slot_spells || [];
+      var le = this._loadoutEff(mw);
+      var picks = [];
+      var choices = this.comboChoices(mw, combos ? combos[mi] : null);
+      for (var pi = 0; pi < choices.length; pi++) {
+        var oi = choices[pi][0], bi = choices[pi][1];
+        if (oi >= le.slots.length || bi >= le.slots[oi].length) continue;
+        var sid = (oi < slotSpells.length && bi < slotSpells[oi].length)
+          ? slotSpells[oi][bi] : null;
+        picks.push([oi < slotNames.length ? slotNames[oi] : null,
+                    sid, le.slots[oi][bi]]);
+      }
+      members.push([mi, mw, le.always, picks]);
+    }
     var stages = [];
     for (var i = 0; i < chain.length; i++) {
       var caps = chain[i].caps || [];
@@ -1772,8 +1915,26 @@
       else if (have < CHAIN_WEAK * bar) verdict = "weak";
       else if (have >= CHAIN_STRONG * bar) verdict = "strong";
       else verdict = "ok";
+      var sources = [];
+      for (var ui = 0; ui < used.length; ui++) {
+        var cap = used[ui];
+        for (var mj = 0; mj < members.length; mj++) {
+          var m = members[mj], v = m[2][cap] || 0.0;
+          if (v) sources.push({ cap: cap, member: m[0], weapon: m[1],
+                                display_name: this.weapons[m[1]].display_name,
+                                slot: null, spell: null, units: v });
+          for (var pj = 0; pj < m[3].length; pj++) {
+            var pk = m[3][pj];
+            v = pk[2][cap] || 0.0;
+            if (v) sources.push({ cap: cap, member: m[0], weapon: m[1],
+                                  display_name: this.weapons[m[1]].display_name,
+                                  slot: pk[0], spell: pk[1], units: v });
+          }
+        }
+      }
       stages.push({ name: chain[i].name, caps: used,
-                    have: have, bar: bar, verdict: verdict });
+                    have: have, bar: bar, verdict: verdict,
+                    sources: sources });
     }
     var out = { style: style, stages: stages, improves: null };
     if (candidate && this.weapons[candidate]) {
@@ -1784,17 +1945,29 @@
         deltas[terms[ti].cap] = terms[ti].delta;
         total += terms[ti].delta;
       }
-      var bestStage = null, bestGain = 0.0;
+      var bestStage = null, bestGain = 0.0, bestCaps = [];
       for (var si = 0; si < stages.length; si++) {
         var gain = 0.0;
         for (var gi = 0; gi < stages[si].caps.length; gi++)
           gain += deltas[stages[si].caps[gi]] || 0.0;
-        if (gain > bestGain + 1e-9) { bestStage = stages[si].name; bestGain = gain; }
+        if (gain > bestGain + 1e-9) {
+          bestStage = stages[si].name; bestGain = gain;
+          bestCaps = stages[si].caps;
+        }
       }
       /* only claim the connection when that stage holds a real share of
          the pick's explained value (mirrors the 0.3 rule) */
-      if (bestStage !== null && total > 0 && bestGain >= 0.3 * total)
-        out.improves = { stage: bestStage, gain: bestGain };
+      if (bestStage !== null && total > 0 && bestGain >= 0.3 * total) {
+        /* name the terms behind the claim (2026-08-24, mirrors engine.py):
+           a stage can win on SUMMED caps none of which is the pick's
+           single top term */
+        var impTerms = [];
+        for (var bi2 = 0; bi2 < bestCaps.length; bi2++) {
+          if ((deltas[bestCaps[bi2]] || 0.0) > 0)
+            impTerms.push({ cap: bestCaps[bi2], gain: deltas[bestCaps[bi2]] });
+        }
+        out.improves = { stage: bestStage, gain: bestGain, terms: impTerms };
+      }
     }
     return out;
   };

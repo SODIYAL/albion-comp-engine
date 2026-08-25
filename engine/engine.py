@@ -1314,6 +1314,110 @@ class Engine:
                               "before": have, "after": have + gain, "target": target})
         return sorted(terms, key=lambda t: -t["delta"])
 
+    # ------------------------------------- negative recs / redundancy lens
+    # (roadmap item 3, 2026-08-24.) A DESCRIPTIVE decomposition of the same
+    # exact marginal _eval_pick scores — the "why not" counterpart of
+    # explain(), which only ever reported the positive terms. A scoring-side
+    # redundancy penalty was investigated and REJECTED (MECHANICS_TODO Q18):
+    # concavity + supply already collapse a redundant pick's marginal; this
+    # layer surfaces the collapse instead of re-modeling it. Nothing here
+    # feeds a score.
+    def _nr_gain_max(self):
+        """Redundancy verdict threshold (mechanics.yaml negative_recs,
+        PROVISIONAL, MASTERSHEET-tunable). Default matches the 0.05 term
+        floor explain() has always used."""
+        return (self.mechanics.get("negative_recs") or {}).get(
+            "redundant_gain_max", 0.05)
+
+    def _pick_caps(self, state, weapon, combo):
+        """(rows, caps_gain) for the candidate's chosen combo against a
+        party state. Each row carries the SIGNED per-capability terms of
+        the fitness marginal — coverage, floor lift, over-stack cost — so
+        rows sum to _eval_pick's d_fitness (test-pinned at 1e-9).
+        caps_gain is the GAP-CLOSING part alone: below-target coverage +
+        floor lift, headroom-band depth deliberately excluded — the small
+        headroom bonus is what the engine pays a saturated depth pick, and
+        counting it here would make 'redundant' unreachable exactly where
+        the warning matters."""
+        extra = self.member_extra(weapon, combo)
+        adj = self._nonstack_adjust(state, weapon, combo, extra)
+        s = state["s"]
+        rows, caps_gain = [], 0.0
+        for cap, gain in adj.items():
+            if cap not in self.reqs or not gain:
+                continue
+            have, target, soft = s.get(cap, 0.0), self.target(cap), self.soft_cap(cap)
+            cov, floor_d = self._cover_terms(cap, have, gain, target)
+            over = (self._overstack(cap, have + gain, target, soft)
+                    - self._overstack(cap, have, target, soft))
+            head = (self._headroom_bonus(cap, have + gain, target, soft)
+                    - self._headroom_bonus(cap, have, target, soft))
+            caps_gain += cov + floor_d - head
+            rows.append({"cap": cap, "gain": gain,
+                         "before": have, "after": have + gain,
+                         "target": target, "soft_cap": soft,
+                         "coverage": cov, "floor_lift": floor_d,
+                         "overstack_cost": over,
+                         "delta": cov + floor_d - over,
+                         "saturated": have >= target})
+        rows.sort(key=lambda r: (-r["delta"], r["cap"]))
+        return rows, caps_gain
+
+    def _pick_verdict(self, score, caps_gain):
+        """One rule, every surface: 'negative' when the exact marginal is
+        not positive; 'redundant' when the pick closes no real gap (its
+        value is meta prior / viability, not coverage); else 'ok'."""
+        if score <= 0.0:
+            return "negative"
+        if caps_gain <= self._nr_gain_max():
+            return "redundant"
+        return "ok"
+
+    def pick_report(self, party, candidate, combos=None):
+        """Full SIGNED decomposition of the candidate's pick score — the
+        'why / why not' panel behind a recommendation or a manual add.
+        Every number is a term of the exact _eval_pick marginal for the
+        candidate's chosen loadout: caps rows sum to d_fitness, and
+        alpha*d_fitness + beta*d_synergy + delta*meta + viability*viab
+        - dup_penalty reconstructs the score (both pinned at 1e-9).
+        `nonstack` names verified count-once spells the party already
+        carries and the units the duplicate loses to them.
+        DESCRIPTIVE ONLY — computing it never changes a score."""
+        state = self.party_state(party, combos)
+        score, d_fit, d_syn, meta, combo = self._eval_pick(state, candidate)
+        rows, caps_gain = self._pick_caps(state, candidate, combo)
+        dup = state["counts"].get(candidate, 0) + 1 - self._dup_free(candidate)
+        dup_penalty = self.rho * dup if dup > 0 else 0.0
+        ns_lines = []
+        ns_max = state.get("ns_max") or {}
+        contrib = self._nonstack_contrib(candidate, combo)
+        for sid in sorted(contrib):
+            pmax = ns_max.get(sid)
+            if not pmax:
+                continue
+            lost = {}
+            for cap in self.nonstack[sid]:
+                v = contrib[sid].get(cap, 0.0)
+                cut = v if v < pmax.get(cap, 0.0) else pmax.get(cap, 0.0)
+                if v and cut > 0.0:
+                    lost[cap] = cut
+            if lost:
+                rec = self.interactions.get(sid) or {}
+                ns_lines.append({"spell": sid,
+                                 "name": rec.get("name") or sid,
+                                 "lost": lost})
+        return {
+            "weapon": candidate,
+            "display_name": self.weapons[candidate]["display_name"],
+            "combo": combo, "score": score,
+            "d_fitness": d_fit, "d_synergy": d_syn,
+            "meta_prior": meta, "viability": self.viability_of(candidate),
+            "dup_penalty": dup_penalty,
+            "caps": rows, "caps_gain": caps_gain,
+            "nonstack": ns_lines,
+            "verdict": self._pick_verdict(score, caps_gain),
+        }
+
     def recommend(self, party, top_n=4, pool=None, combos=None):
         state = self.party_state(party, combos)
         out = []
@@ -1328,7 +1432,15 @@ class Engine:
                 "combo": combo,
                 "score": score,
             })
-        return sorted(out, key=lambda r: -r["score"])[:top_n]
+        out = sorted(out, key=lambda r: -r["score"])[:top_n]
+        # verdict lens on the returned rows only (the sweep stays lean):
+        # a suggestion that survives ranking can still be a depth pick in
+        # a saturated comp — say so instead of implying it fills a gap
+        for r in out:
+            _rows, caps_gain = self._pick_caps(state, r["weapon"], r["combo"])
+            r["caps_gain"] = caps_gain
+            r["verdict"] = self._pick_verdict(r["score"], caps_gain)
+        return out
 
     def swap_review(self, party, top_n=3, pool=None, combos=None):
         """Per-member swap advisor. Each member's CURRENT weapon is valued
@@ -1341,7 +1453,12 @@ class Engine:
             rest = party[:i] + party[i + 1:]
             rest_combos = (combos[:i] + combos[i + 1:]) if combos else None
             state = self.party_state(rest, rest_combos)
-            cur_score = self._eval_pick(state, cur)[0]
+            cur_pick = self._eval_pick(state, cur)
+            cur_score = cur_pick[0]
+            # redundancy lens (roadmap item 3): the member valued exactly as
+            # a pick into the rest — does it still close any gap, or are its
+            # jobs already covered without it? Descriptive flag only.
+            _rows, caps_gain = self._pick_caps(state, cur, cur_pick[4])
             better = []
             for w in (pool or self.suggest_pool()):
                 if w == cur:
@@ -1358,6 +1475,9 @@ class Engine:
                 "off_comp": self.is_excluded(cur),
                 "off_style": self.is_style_unfit(cur),
                 "off_budget": self.is_cost_gated(cur),
+                "caps_gain": caps_gain,
+                "verdict": self._pick_verdict(cur_score, caps_gain),
+                "redundant": self._pick_verdict(cur_score, caps_gain) != "ok",
                 "options": [{"weapon": w,
                              "display_name": self.weapons[w]["display_name"],
                              "score": v, "gain": v - cur_score}
@@ -1455,7 +1575,14 @@ class Engine:
         strengths, missing = [], []
         for cap in self.reqs:
             have, target = s.get(cap, 0.0), self.target(cap)
-            row = {"cap": cap, "have": have, "target": target}
+            soft = self.soft_cap(cap)
+            # saturation band (roadmap item 3): the engine's own economics —
+            # below target a unit earns coverage; target..soft earns only the
+            # small headroom bonus; past soft it pays the over-stack penalty.
+            band = ("gap" if have < target
+                    else "headroom" if have <= soft else "overstacked")
+            row = {"cap": cap, "have": have, "target": target,
+                   "soft_cap": soft, "band": band}
             if have >= target:
                 strengths.append(row)
             elif self.weight(cap) > 0:
@@ -1769,11 +1896,50 @@ class Engine:
         if not chain:
             return None
         s = self.effective_supply(party, combos, gears)
+        # spell-level sources (2026-08-24): which equipped buttons ARE each
+        # stage — every member's resolved loadout (always + chosen bundles,
+        # mechanics applied: the same numbers scoring sums) attributed back
+        # to the slot/spell that carries each stage capability. `spell` None
+        # = the weapon's always-on kit (passives/stats). Units are
+        # per-member contributions BEFORE the party-level count-once rule;
+        # the stage's `have` stays the authoritative total. Gear
+        # contributions are not attributed. Display only.
+        members = []
+        for mi, w in enumerate(party):
+            lo = self.weapons[w].get("loadout") or {}
+            names = lo.get("slot_names") or []
+            spells = lo.get("slot_spells") or []
+            always_eff, slots_eff = self._loadout_eff(w)
+            picks = []
+            for oi, ci in self.combo_choices(w, combos[mi] if combos else None):
+                if oi >= len(slots_eff) or ci >= len(slots_eff[oi]):
+                    continue
+                sid = (spells[oi][ci]
+                       if oi < len(spells) and ci < len(spells[oi]) else None)
+                picks.append((names[oi] if oi < len(names) else None,
+                              sid, slots_eff[oi][ci]))
+            members.append((mi, w, always_eff, picks))
         stages = []
         for st in chain:
             used = [c for c in (st.get("caps") or []) if c in self.reqs]
             bar = sum(self.target(c) for c in used)
             have = sum(s.get(c, 0.0) for c in used)
+            sources = []
+            for cap in used:
+                for mi, w, always_eff, picks in members:
+                    v = always_eff.get(cap, 0.0)
+                    if v:
+                        sources.append({
+                            "cap": cap, "member": mi, "weapon": w,
+                            "display_name": self.weapons[w]["display_name"],
+                            "slot": None, "spell": None, "units": v})
+                    for slot_nm, sid, bundle in picks:
+                        v = bundle.get(cap, 0.0)
+                        if v:
+                            sources.append({
+                                "cap": cap, "member": mi, "weapon": w,
+                                "display_name": self.weapons[w]["display_name"],
+                                "slot": slot_nm, "spell": sid, "units": v})
             if not used or bar <= 0:
                 verdict = "quiet"
             elif have <= 0:
@@ -1785,7 +1951,8 @@ class Engine:
             else:
                 verdict = "ok"
             stages.append({"name": st.get("name"), "caps": used,
-                           "have": have, "bar": bar, "verdict": verdict})
+                           "have": have, "bar": bar, "verdict": verdict,
+                           "sources": sources})
         out = {"style": style, "stages": stages, "improves": None}
         if candidate and candidate in self.weapons:
             # explain() deltas are already weighted fitness terms —
@@ -1793,18 +1960,25 @@ class Engine:
             deltas = {t["cap"]: t["delta"]
                       for t in self.explain(party, candidate, combos)}
             total = sum(deltas.values())
-            best_stage, best_gain = None, 0.0
+            best_stage, best_gain, best_caps = None, 0.0, []
             for st in stages:
                 gain = sum(deltas.get(c, 0.0) for c in st["caps"])
                 if gain > best_gain + 1e-9:
-                    best_stage, best_gain = st["name"], gain
+                    best_stage, best_gain, best_caps = st["name"], gain, st["caps"]
             # claim the connection only when that stage holds a real share
             # of the pick's explained value — a healer into a clap chain
             # (which has no healing stage) improves SURVIVAL, not a stage,
             # and saying "improves Reset" would mislead the caller
             if (best_stage is not None and total > 0
                     and best_gain >= 0.3 * total):
-                out["improves"] = {"stage": best_stage, "gain": best_gain}
+                # name the terms behind the claim (2026-08-24): a stage can
+                # win on SUMMED caps none of which is the pick's single top
+                # term — "Reset (+1.7 mobility, +1.6 disengage)" over a
+                # bare "Reset" the caller cannot reconcile with the tiles
+                out["improves"] = {"stage": best_stage, "gain": best_gain,
+                                   "terms": [{"cap": c, "gain": deltas[c]}
+                                             for c in best_caps
+                                             if deltas.get(c, 0.0) > 0]}
         return out
 
     # ------------------------------------------------------------ local search

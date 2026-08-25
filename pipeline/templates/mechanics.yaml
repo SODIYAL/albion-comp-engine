@@ -192,6 +192,23 @@ kill_pressure:
   pass_ratio: 0.85   # PROVISIONAL — owner-tunable via MASTERSHEET tune:mechanics
 
 # ---------------------------------------------------------------------------
+# NEGATIVE RECOMMENDATIONS / REDUNDANCY WARNINGS (roadmap item 3,
+# 2026-08-24): verdict thresholds for pick_report / swap_review /
+# recommend annotations. The verdicts are a LENS over the exact pick
+# marginal every suggestion path already computes (_eval_pick) — a
+# scoring-side redundancy penalty was investigated and REJECTED
+# (MECHANICS_TODO Q18, 2026-08-14); concavity + supply already collapse a
+# redundant pick's marginal, this layer just SAYS so.
+# DESCRIPTIVE ONLY — verdict text, never a score term.
+negative_recs:
+  # a pick whose summed coverage + floor-lift gain is at or under this is
+  # "redundant": every capability it supplies is already covered — its
+  # remaining score is meta prior / viability, not gap-closing value.
+  # 0.05 is the same term floor explain() has always used to drop
+  # negligible why-lines.
+  redundant_gain_max: 0.05   # PROVISIONAL — owner-tunable via MASTERSHEET tune:mechanics
+
+# ---------------------------------------------------------------------------
 # CC diminishing returns (PvP interaction layer, 2026-08-19): repeated
 # crowd control on one target within a window is reduced in duration.
 # PLACEHOLDER — the curve, window and which CC classes share a DR bucket are

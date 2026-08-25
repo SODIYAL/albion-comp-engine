@@ -145,6 +145,8 @@ def py_results(cases):
             "swap": None if sp is None else [
                 {"weapon": m["weapon"], "score": m["score"], "rank": m["rank"],
                  "off_comp": m["off_comp"], "off_style": m["off_style"],
+                 "caps_gain": m["caps_gain"], "verdict": m["verdict"],
+                 "redundant": m["redundant"],
                  "options": [{"weapon": o["weapon"], "score": o["score"]}
                              for o in m["options"]]}
                 for m in e.swap_review(sp)],
@@ -158,8 +160,20 @@ def py_results(cases):
             "synergy_locked": e.synergy(c["party"], c["combos"]),
             "max_fitness": e.max_fitness(),
             "recommend": [{"weapon": r["weapon"], "score": r["score"],
-                           "combo": r["combo"]}
+                           "combo": r["combo"], "caps_gain": r["caps_gain"],
+                           "verdict": r["verdict"]}
                           for r in e.recommend(c["party"], 5)],
+            "pick_report": (e.pick_report(c["party"], c["refine_pool"][0],
+                                          c["combos"])
+                            if c["refine_pool"] else None),
+            "analyze_bands": (lambda a: {
+                "strengths": [{"cap": x["cap"], "have": x["have"],
+                               "band": x["band"], "soft_cap": x["soft_cap"]}
+                              for x in a["strengths"]],
+                "missing": [{"cap": x["cap"], "have": x["have"],
+                             "band": x["band"], "soft_cap": x["soft_cap"]}
+                            for x in a["missing_capabilities"]],
+            })(e.analyze(c["party"], c["combos"])),
             "recommend_locked": [{"weapon": r["weapon"], "score": r["score"]}
                                  for r in e.recommend(c["party"], 5,
                                                       combos=c["combos"])],
@@ -234,6 +248,62 @@ def main():
                 if abs(ra["score"] - rb["score"]) > EPS or ra["combo"] != rb["combo"]:
                     errs.append(f"score {ra['weapon']}: py={ra['score']!r}/{ra['combo']} "
                                 f"js={rb['score']!r}/{rb['combo']}")
+                elif ra["verdict"] != rb.get("verdict") \
+                        or abs(ra["caps_gain"] - rb.get("caps_gain", 9e9)) > EPS:
+                    errs.append(f"rec verdict {ra['weapon']}: "
+                                f"py={ra['verdict']}/{ra['caps_gain']!r} "
+                                f"js={rb.get('verdict')}/{rb.get('caps_gain')!r}")
+        pa, pb = a["pick_report"], b.get("pick_report")
+        if (pa is None) != (pb is None):
+            errs.append("pick_report presence differs")
+        elif pa is not None:
+            pb = pb or {}
+            if (pa["verdict"] != pb.get("verdict") or pa["combo"] != pb.get("combo")
+                    or any(abs(pa[k] - pb.get(k, 9e9)) > EPS
+                           for k in ("score", "d_fitness", "d_synergy",
+                                     "meta_prior", "viability", "dup_penalty",
+                                     "caps_gain"))):
+                errs.append(f"pick_report head: py={pa['verdict']}/{pa['score']!r} "
+                            f"js={pb.get('verdict')}/{pb.get('score')!r}")
+            elif ([(r["cap"], r["saturated"]) for r in pa["caps"]]
+                    != [(r.get("cap"), r.get("saturated"))
+                        for r in pb.get("caps") or []]
+                    or any(abs(ra[k] - rb.get(k, 9e9)) > EPS
+                           for ra, rb in zip(pa["caps"], pb.get("caps") or [])
+                           for k in ("gain", "before", "coverage", "floor_lift",
+                                     "overstack_cost", "delta"))):
+                errs.append("pick_report caps rows differ")
+            elif [(n["spell"], n["lost"]) for n in pa["nonstack"]] \
+                    != [(n.get("spell"), n.get("lost"))
+                        for n in pb.get("nonstack") or []]:
+                errs.append("pick_report nonstack lines differ")
+            else:
+                # the decomposition must reconstruct the score EXACTLY —
+                # the report is the same math that ranked the pick, or the
+                # why-not panel is a second scoring system in disguise
+                # (the blend weights are dataset-global, any engine serves)
+                w = data["scoring"]["weights"]
+                recon = (w["alpha"] * pa["d_fitness"] + w["beta"] * pa["d_synergy"]
+                         + w["delta"] * pa["meta_prior"]
+                         + w.get("viability", 0.0) * pa["viability"]
+                         - pa["dup_penalty"])
+                rowsum = sum(r["coverage"] + r["floor_lift"] - r["overstack_cost"]
+                             for r in pa["caps"])
+                if abs(recon - pa["score"]) > EPS:
+                    errs.append(f"pick_report terms do not sum to score: "
+                                f"{recon!r} vs {pa['score']!r}")
+                if abs(rowsum - pa["d_fitness"]) > EPS:
+                    errs.append(f"pick_report caps do not sum to d_fitness: "
+                                f"{rowsum!r} vs {pa['d_fitness']!r}")
+        ba, bb = a["analyze_bands"], b.get("analyze_bands") or {}
+        for sec in ("strengths", "missing"):
+            if [(x["cap"], x["band"]) for x in ba[sec]] \
+                    != [(x.get("cap"), x.get("band")) for x in bb.get(sec) or []]:
+                errs.append(f"analyze {sec} bands: py={ba[sec]} js={bb.get(sec)}")
+            elif any(abs(x["have"] - y.get("have", 9e9)) > EPS
+                     or abs(x["soft_cap"] - y.get("soft_cap", 9e9)) > EPS
+                     for x, y in zip(ba[sec], bb.get(sec) or [])):
+                errs.append(f"analyze {sec} numbers differ")
         if [r["weapon"] for r in a["recommend_locked"]] != \
                 [r["weapon"] for r in b["recommend_locked"]]:
             errs.append("locked recommend order differs")
@@ -277,12 +347,32 @@ def main():
                     or (ia_ is None) != (ib_ is None)
                     or (ia_ is not None
                         and (ia_["stage"] != ib_.get("stage")
-                             or abs(ia_["gain"] - ib_.get("gain", 9e9)) > EPS))
+                             or abs(ia_["gain"] - ib_.get("gain", 9e9)) > EPS
+                             or [(t["cap"],) for t in ia_["terms"]]
+                             != [(t.get("cap"),)
+                                 for t in ib_.get("terms") or []]
+                             or any(abs(ta["gain"] - tb.get("gain", 9e9)) > EPS
+                                    for ta, tb in zip(ia_["terms"],
+                                                      ib_.get("terms") or []))))
                     or any(abs(x["have"] - y.get("have", 9e9)) > EPS
                            or abs(x["bar"] - y.get("bar", 9e9)) > EPS
                            for x, y in zip(fa["stages"],
                                            fb.get("stages") or []))):
                 errs.append(f"fight_chain: py={fa} js={fb}")
+            else:
+                for x, y in zip(fa["stages"], fb.get("stages") or []):
+                    xs = [(r["cap"], r["member"], r["weapon"], r["slot"],
+                           r["spell"]) for r in x["sources"]]
+                    ys = [(r.get("cap"), r.get("member"), r.get("weapon"),
+                           r.get("slot"), r.get("spell"))
+                          for r in y.get("sources") or []]
+                    if xs != ys or any(
+                            abs(ra["units"] - rb.get("units", 9e9)) > EPS
+                            for ra, rb in zip(x["sources"],
+                                              y.get("sources") or [])):
+                        errs.append(f"fight_chain sources ({x['name']}): "
+                                    f"py={xs[:4]} js={ys[:4]}")
+                        break
         ka, kb = a["kill_pressure"], b.get("kill_pressure")
         if (ka is None) != (kb is None):
             errs.append("kill_pressure presence differs")
