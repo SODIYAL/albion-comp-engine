@@ -220,11 +220,34 @@
   capabilities:
     - {cap: heal_sustain,  score: 2, evidence: GEAR_STATS}
 
-- gear: OFF_HORN_KEEPER              # Mistcaller
+- gear: OFF_HORN_KEEPER              # Mistcaller — SELF stat stick
   slot: offhand
-  curated_as_of: 2026-08-20
-  capabilities:
-    - {cap: buff_allies,   score: 2, evidence: GEAR_STATS}
+  curated_as_of: 2026-08-25
+  # buff_allies 2 REMOVED (owner ruling 2026-08-25: "i dont think
+  # mistcaller and lymhurst capes are ally buffing effects, they are
+  # self buffing"). Dumps agree: no active, no ally-targeted spell —
+  # its identity is the wielder's own output stats (directionality
+  # rule, V5 catch #1 class). Caps return via the stat channel once
+  # the offhand stats-bank gap is filled.
+  capabilities: []
+
+# ---- full offhand roster (owner 2026-08-25: "their usefulness comes
+# from the stats ... you have to get the stats for all offhands") —
+# the 12 bank offhands the catalog was missing. NO capabilities by
+# design: an offhand has no active; the stats bank supplies the
+# identity profile and classify_gear derives the role affinity.
+- {gear: OFF_BOOK, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}            # Tome of Spells — cast-time reduction
+- {gear: OFF_CENSER_AVALON, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}   # Celestial Censer — +heal output, -defense
+- {gear: OFF_DEMONSKULL_HELL, slot: offhand, curated_as_of: "2026-08-25", capabilities: []} # Muisak — +damage +heal output, energy tax
+- {gear: OFF_JESTERCANE_HELL, slot: offhand, curated_as_of: "2026-08-25", capabilities: []} # Leering Cane — +CC duration vs players + CDR; pairs with CC-delivery weapons (owner 2026-08-25 + verified: metabattle 1H Mace ZvZ lists it PRIMARY offhand; freemarket Incubus Tank pairs it; the CC-duration-stack pattern)
+- {gear: OFF_LAMP_UNDEAD, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}     # Cryptcandle — +spell damage, -defense
+- {gear: OFF_ORB_MORGANA, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}     # Eye of Secrets — book class: raw item power (725 vs 700 baseline at T4)
+- {gear: OFF_SHIELD_CRYSTAL, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}  # Unbreakable Ward — defense + threat (crystal shield)
+- {gear: OFF_SPIKEDSHIELD_MORGANA, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}  # Facebreaker — defense + damage hybrid shield
+- {gear: OFF_TALISMAN_AVALON, slot: offhand, curated_as_of: "2026-08-25", capabilities: []} # Sacred Scepter — book class: highest raw item power (800 at T4)
+- {gear: OFF_TOME_CRYSTAL, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}    # Timelocked Grimoire — cast time + cooldowns (A cited Incubus support build runs it; Incubus ZvZ evidence splits Aegis/Timelocked/Leering — owner check 2026-08-25)
+- {gear: OFF_TORCH, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}           # Torch — attack speed + cooldowns
+- {gear: OFF_TOTEM_KEEPER, slot: offhand, curated_as_of: "2026-08-25", capabilities: []}    # Taproot — book class: raw item power (775 at T4), small heal-output tax
 
 # ------------------------------------------------------------------ capes
 - gear: CAPEITEM_SMUGGLER            # Smuggler Cape — guild standard
@@ -233,11 +256,14 @@
   capabilities:
     - {cap: tankiness,     score: 1, evidence: GEAR_STATS}
 
-- gear: CAPEITEM_FW_LYMHURST         # Lymhurst Cape — healer mana proc
+- gear: CAPEITEM_FW_LYMHURST         # Lymhurst Cape — SELF energy proc
   slot: cape
-  curated_as_of: 2026-08-20
-  capabilities:
-    - {cap: buff_allies,   score: 2, evidence: GEAR_STATS}
+  curated_as_of: 2026-08-25
+  # buff_allies 2 REMOVED (owner ruling 2026-08-25, with Mistcaller):
+  # the cape's ability is PASSIVE_CAPE_LYMHURST, a SELF proc — nothing
+  # ally-targeted in the dumps. Directionality rule: self-buffs never
+  # ground buff_allies.
+  capabilities: []
 
 # ---------------------------------------------------------------- potions
 - gear: T7_POTION_REVIVE             # Major Gigantify — "no choice, no substitutes"

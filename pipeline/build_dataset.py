@@ -723,6 +723,287 @@ def apply_resilience_penetration(weapons):
     print(f"  resil_pen     : {matched} weapon(s) stamped{note}")
 
 
+ROLE_CLASSES = ("frontline", "healer", "support", "dps", "meta")
+# E-first tiered function sweep (owner 2026-08-25: "the primary roles for
+# a weapon should come from its e spell ... certain weapons have these
+# abilities on their q, or w ... but it would be a secondary level role").
+# Membership in the FUNCTION roles derives from the sheets' own slot
+# structure across ALL weapons: an E-slot cap at PRIMARY_MIN+ makes the
+# function a primary role (Carving Sword's E cuts resistances 20% —
+# resist_shred 4); a Q/W/passive/always cap at SECONDARY_MIN+ makes it
+# secondary (the axe bleed's heal-cut, the curse Armor Piercer W).
+# Hand-cited entries in roles.yaml stay authoritative; derivation fills
+# the rest. Thresholds PROVISIONAL, auditable in out/roles_report.json.
+FUNCTION_ROLE_CAPS = {"pierce": "resist_shred", "purge": "purge",
+                      "shield_break": "purge",
+                      "anti_heal": "heal_reduction"}
+FUNCTION_PRIMARY_MIN = 3
+FUNCTION_SECONDARY_MIN = 2
+
+
+def _slot_cap_values(w, cap, only=None, exclude=None):
+    """(e_val, qw_val): the cap's best E-slot bundle value vs its best
+    Q/W ABILITY value. Passive procs and always-on stats are deliberately
+    excluded from the secondary read — the owner's rule names "abilities
+    on their q, or w" (a 2-point passive proc is a token, not a role);
+    weapons without loadout data derive nothing (hand entries only).
+    `only`/`exclude` filter by the bundle's evidence spell — the
+    spell-classified split (a role may claim specific spells, e.g.
+    shield-break claiming Iron Breaker away from purge)."""
+    lo = w.get("loadout") or {}
+    names, slots = lo.get("slot_names") or [], lo.get("slots") or []
+    spells = lo.get("slot_spells") or []
+    e_val, qw_val = 0, 0
+    for i, slot in enumerate(slots):
+        name = names[i] if i < len(names) else None
+        for j, b in enumerate(slot):
+            sid = (spells[i][j] if i < len(spells) and j < len(spells[i])
+                   else None)
+            if only is not None and sid not in only:
+                continue
+            if exclude and sid in exclude:
+                continue
+            v = b.get(cap, 0)
+            if name == "e":
+                e_val = max(e_val, v)
+            elif name in ("q", "w"):
+                qw_val = max(qw_val, v)
+    return e_val, qw_val
+
+
+def classify_gear(gear, book):
+    """Equipment-role classification under the UNIQUE-ABILITY-FIRST law
+    (owner 2026-08-25 — the general form of the weapons' E-first rule:
+    gear actives sit on D/F/R, so 'it should be something like unique
+    ability first law'): 'just like weapons, the identity of the
+    equipment is derived from its unique spell' and 'damage and
+    tankiness is based on which tree the equipment belongs to. you need
+    to pull numbers to classify'. The tree's PASSIVE choices count too
+    (owner: 'most cloth users will take the damage passive on equipment
+    to increase damage even higher') — per-item `tree_passives` come
+    from gear_spells.json (dumps): cloth +8% damage/heal / cast speed /
+    energy; leather balance / AA speed / CD reduction; plate resists /
+    CC duration / CCR / threat.
+    Chest class derives from the item's own STAT NUMBERS (cloth 54-68
+    armor / +40-50% damage-heal; leather 92-100 / +25-30%; plate 152-161
+    / +0-5% — measured 2026-08-25) with the tree id as cross-check;
+    statless slots (head/shoes/offhand — the stats bank carries zeros, a
+    recorded gap) fall back to the tree id. `role_affinity` = the seat
+    roles whose uniform admits the item's class. Items whose unique
+    active buffs allies but sit in no gear_effect yet are reported as
+    effect candidates. DESCRIPTIVE — the grading board's items section;
+    problems block the release."""
+    problems, board = [], []
+    gs_path = os.path.join(OUT, "gear_spells.json")
+    gear_spells = {}
+    if os.path.exists(gs_path):
+        with open(gs_path, encoding="utf-8") as f:
+            gear_spells = json.load(f)
+    for k, g in sorted((gear or {}).items()):
+        if g.get("slot") not in ("armor", "head", "shoes", "offhand"):
+            continue
+        s = g.get("stats") or {}
+        tank_pts = (s.get("physicalarmor", 0) or 0) \
+            + (s.get("magicresistance", 0) or 0)
+        by_id = next((c.lower() for c in ("PLATE", "LEATHER", "CLOTH")
+                      if c in k.split("_")), None)
+        by_num = None
+        if tank_pts:
+            by_num = ("plate" if tank_pts >= 240
+                      else "leather" if tank_pts >= 160 else "cloth")
+        cls = by_num or by_id
+        if by_num and by_id and by_num != by_id:
+            problems.append(f"gear class: {k}: stats say {by_num}, "
+                            f"tree id says {by_id}")
+        g["gear_class"] = cls
+        affinity = sorted(r["id"] for r in book
+                          if cls and cls in ((r.get("uniform") or {})
+                                             .get("chest") or []))
+        if g.get("slot") == "offhand":
+            # Offhands have no active — identity is the STAT PROFILE
+            # (owner 2026-08-25: "their usefulness comes from the stats
+            # ... to properly classify them, you have to get the stats").
+            # Structural mapping, PROVISIONAL: defense/threat -> tank
+            # seats; heal output -> healer seats; damage output -> dps
+            # seats; cooldown/cast/energy utility -> the caster-support
+            # families.
+            aff = set()
+            # sign matters: Celestial Censer/Cryptcandle carry a defense
+            # PENALTY — a negative modifier is the opposite of tank kit
+            if (s.get("bonusdefensevsplayers") or 0) > 0 \
+                    or (s.get("threatbonus") or 0) > 0 \
+                    or (s.get("crowdcontrolresistance") or 0) > 0:
+                aff |= {"engage_tank", "stopper_tank", "off_tank"}
+            if s.get("healbonus") or (s.get("healmodifier") or 0) > 0:
+                aff |= {"main_healer", "kite_healer", "brawl_healer"}
+            if any(s.get(x) for x in ("physicalspelldamagebonus",
+                                      "magicspelldamagebonus",
+                                      "physicalattackdamagebonus",
+                                      "magicattackdamagebonus")):
+                aff |= {"ranged_aoe", "sustained_brawler", "bomb_aoe",
+                        "dive_cleanup"}
+            if any(s.get(x) for x in ("magiccooldownreduction",
+                                      "magiccasttimereduction",
+                                      "energycostreduction", "energymax",
+                                      "energyregenerationbonus")):
+                aff |= {"shield_support", "zone_support", "main_healer",
+                        "kite_healer", "brawl_healer"}
+            affinity = sorted(aff)
+        g["role_affinity"] = affinity
+        g["tree_passives"] = (gear_spells.get(k) or {}).get("passives") or []
+        board.append({"id": k, "name": g.get("display_name"),
+                      "slot": g.get("slot"), "class": cls,
+                      "class_basis": ("stats" if by_num else
+                                      "tree id (stats missing)"),
+                      "tank_pts": tank_pts,
+                      "active_caps": g.get("capabilities") or {},
+                      "tree_passives": g["tree_passives"],
+                      "role_affinity": affinity})
+    return board, problems
+
+
+def apply_roles(weapons, gear):
+    """The ROLE BOOK (pipeline/roles.yaml, roles-design.md): validate it,
+    stamp each weapon's `role_menu` (the inverse index, primary first in
+    role-file order), and ship the book + an audit board. Membership is
+    EVIDENCE-CITED per entry; problems block the release (fail closed,
+    loudly). Weapons off every menu keep coarse role_class behavior.
+    Returns (roles_book, report, problems)."""
+    path = os.path.join(HERE, "roles.yaml")
+    if not os.path.exists(path):
+        return [], [], {}, []
+    doc = _load_yaml(path) or {}
+    book = doc.get("roles") or []
+    effects = doc.get("gear_effects") or []
+    problems, seen = [], set()
+    # gear effects (owner 2026-08-25): typed gear-carried auras/actives —
+    # items grant them (id = catalog-modeled, named = documented but not
+    # yet curated); carriers are weapons evidenced to take that seat.
+    for ge in effects:
+        gid = ge.get("id")
+        if not gid:
+            problems.append("gear_effects: entry with no id")
+        for it in (ge.get("items") or []):
+            if it.get("id") is not None and it["id"] not in (gear or {}):
+                problems.append(f"gear_effects: {gid}: unknown item "
+                                f"'{it.get('id')}'")
+            if it.get("id") is None and not (it.get("named") or "").strip():
+                problems.append(f"gear_effects: {gid}: item needs id or named")
+            if not (it.get("source") or "").strip():
+                problems.append(f"gear_effects: {gid}: item has no source")
+        for c in (ge.get("carriers") or []):
+            if c.get("id") not in weapons:
+                problems.append(f"gear_effects: {gid}: unknown carrier "
+                                f"'{c.get('id')}'")
+            if not (c.get("source") or "").strip():
+                problems.append(f"gear_effects: {gid}: carrier "
+                                f"{c.get('id')} has no source")
+    for r in book:
+        rid = r.get("id")
+        if not rid or rid in seen:
+            problems.append(f"roles: missing/duplicate id '{rid}'")
+        seen.add(rid)
+        if r.get("class") not in ROLE_CLASSES:
+            problems.append(f"roles: {rid}: unknown class '{r.get('class')}'")
+        for ch in ((r.get("uniform") or {}).get("chest") or []):
+            if ch not in ("plate", "leather", "cloth"):
+                problems.append(f"roles: {rid}: unknown chest class '{ch}'")
+        for m in (r.get("weapons") or []):
+            if m.get("id") not in weapons:
+                problems.append(f"roles: {rid}: unknown weapon '{m.get('id')}'")
+            if not (m.get("source") or "").strip():
+                problems.append(f"roles: {rid}: {m.get('id')} has no source")
+        for m in (r.get("items") or []):
+            if m.get("id") not in (gear or {}):
+                problems.append(f"roles: {rid}: unknown item '{m.get('id')}'")
+            if not (m.get("source") or "").strip():
+                problems.append(f"roles: {rid}: item {m.get('id')} no source")
+    # E-first tiered sweep over every weapon (see FUNCTION_ROLE_CAPS).
+    # Spell-classified split (owner 2026-08-25: hammers "only break
+    # shields on q, it isnt really a purge"): a role's `spells:` list
+    # claims those evidence spells for ITSELF; the unfiltered role on
+    # the same cap never counts them.
+    all_spells = set()
+    for w in weapons.values():
+        for sl in (w.get("loadout") or {}).get("slot_spells") or []:
+            all_spells.update(s for s in (sl or []) if s)
+    cap_claims = {}
+    for r in book:
+        cap = FUNCTION_ROLE_CAPS.get(r.get("id"))
+        if cap and r.get("spells"):
+            for sid in r["spells"]:
+                if sid not in all_spells:
+                    problems.append(f"roles: {r.get('id')}: unknown "
+                                    f"spell '{sid}'")
+            cap_claims.setdefault(cap, set()).update(r["spells"])
+    for r in book:
+        cap = FUNCTION_ROLE_CAPS.get(r.get("id"))
+        for m in (r.get("weapons") or []):
+            m.setdefault("tier", "primary")
+        if not cap:
+            continue
+        have = {m.get("id") for m in (r.get("weapons") or [])}
+        prim_min = r.get("primary_min", FUNCTION_PRIMARY_MIN)
+        sec_min = r.get("secondary_min", FUNCTION_SECONDARY_MIN)
+        only = set(r.get("spells") or []) or None
+        exclude = None if only else cap_claims.get(cap)
+        for wk, w in sorted(weapons.items()):
+            if wk in have or w.get("removed"):
+                continue
+            e_val, qw_val = _slot_cap_values(w, cap, only, exclude)
+            if e_val >= prim_min:
+                r.setdefault("weapons", []).append(
+                    {"id": wk, "tier": "primary",
+                     "source": f"derived:E-slot {cap} {e_val}"
+                     + (" (spell-classified)" if only else "")})
+            elif max(e_val, qw_val) >= sec_min:
+                r.setdefault("weapons", []).append(
+                    {"id": wk, "tier": "secondary",
+                     "source": f"derived:kit {cap} {max(e_val, qw_val)}"
+                     + (" (spell-classified)" if only else "")})
+    for w in weapons.values():
+        w.pop("role_menu", None)
+        w.pop("role_menu_secondary", None)
+    for r in book:
+        for m in (r.get("weapons") or []):
+            wk = m.get("id")
+            if wk in weapons:
+                key = ("role_menu" if m.get("tier", "primary") == "primary"
+                       else "role_menu_secondary")
+                weapons[wk].setdefault(key, []).append(r["id"])
+    gear_board, gear_problems = classify_gear(gear, book)
+    problems += gear_problems
+    # unique actives that buff allies but sit in no gear_effect yet —
+    # candidates for the effects catalog (owner grading)
+    effect_items = {it.get("id") for ge in effects
+                    for it in (ge.get("items") or []) if it.get("id")}
+    effect_candidates = sorted(
+        k for k, g in (gear or {}).items()
+        if (g.get("capabilities") or {}).get("buff_allies", 0) >= 2
+        and k not in effect_items)
+    report = {"roles": [{
+        "id": r.get("id"), "class": r.get("class"), "name": r.get("name"),
+        "weapons": [{"id": m.get("id"),
+                     "name": (weapons.get(m.get("id"), {}) or {})
+                     .get("display_name"),
+                     "tier": m.get("tier", "primary"),
+                     "source": m.get("source")}
+                    for m in (r.get("weapons") or [])]} for r in book],
+        "gear_effects": effects,
+        "items": gear_board,
+        "effect_candidates": effect_candidates,
+        "menus": {k: w.get("role_menu", []) for k, w in sorted(weapons.items())
+                  if w.get("role_menu")},
+        "menus_secondary": {k: w.get("role_menu_secondary", [])
+                            for k, w in sorted(weapons.items())
+                            if w.get("role_menu_secondary")}}
+    print(f"  roles         : {len(book)} role(s), "
+          f"{len(report['menus'])} weapon(s) on menus, "
+          f"{len(effects)} gear effect(s)"
+          + (f"; {len(problems)} PROBLEM(S)" if problems else ""))
+    return book, effects, report, problems
+
+
 def derive_economics(weapons, composition, spell_index, overrides):
     """Stamp cost_tier + heal identity (heal_scale, full_healer) on every
     weapon. Returns (report, problems); problems block the release (a
@@ -939,10 +1220,23 @@ def main():
     # from the item bank (T4-flat reference; IP scales them in game). The
     # engine turns absolute defense into tankiness units and % stats into
     # capability multipliers (mechanics.yaml build_stats).
+    # 2026-08-25 (owner: "for offhands, they have no active ability,
+    # their usefulness comes from the stats"): the copy list widened
+    # beyond the chest-centric eight — offhand identity lives in the
+    # percent-modifier fields (defense bonus, threat, cooldown/cast-time
+    # reduction, energy, HP). The engine's build_stats channel still
+    # reads only its documented keys; the extra fields feed
+    # classification and display.
     BUILD_STAT_KEYS = ("physicalarmor", "magicresistance",
                        "crowdcontrolresistance", "physicalspelldamagebonus",
                        "magicspelldamagebonus", "physicalattackdamagebonus",
-                       "magicattackdamagebonus", "healbonus")
+                       "magicattackdamagebonus", "healbonus",
+                       "bonusdefensevsplayers", "threatbonus",
+                       "magiccooldownreduction", "magiccasttimereduction",
+                       "attackspeedbonus", "movespeedbonus",
+                       "energymax", "energyregenerationbonus",
+                       "energycostreduction", "hitpointsmax",
+                       "hitpointsregenerationbonus", "healmodifier")
     for gk, g in gear.items():
         bank = (item_stats.get(gk) or {}).get("stats") or {}
         g["stats"] = {s: bank[s] for s in BUILD_STAT_KEYS if bank.get(s)}
@@ -1037,6 +1331,11 @@ def main():
         load_style_overrides(), econ_report,
         (composition.get("primary_healer", {}) or {})
         .get("e_heal_dedicated_min", 4), nonstack_members)
+    roles_book, gear_effects, roles_report, roles_problems = \
+        apply_roles(weapons, gear)
+    with open(os.path.join(OUT, "roles_report.json"), "w",
+              encoding="utf-8", newline="\n") as f:
+        json.dump(roles_report, f, indent=1, sort_keys=True)
     # MetaBattle cross-check (MECHANICS_TODO Q15): weapons real ZvZ builds
     # field must not derive group-band all-unfit — disagreements are the
     # owner's review queue, never silent fixes.
@@ -1102,6 +1401,7 @@ def main():
     provenance_problems += ranged_problems
     provenance_problems += fit_problems
     provenance_problems += econ_problems
+    provenance_problems += roles_problems
     # every derived scoring capability must carry evidence (§B/H.6)
     for k, w in sorted(weapons.items()):
         if (w["capabilities"].get("ranged_presence")
@@ -1183,6 +1483,15 @@ def main():
         # future prior/validation layers. A guideline, never a hard rule:
         # nothing in the scoring path reads it.
         "guild_builds": tune.get("guild_builds") or {},
+        # The ROLE BOOK (pipeline/roles.yaml, roles-design.md): fine roles
+        # with evidence-cited weapon/item membership; weapons carry the
+        # derived `role_menu` inverse index. Detection/advisory layer —
+        # DESCRIPTIVE; nothing in the scoring path reads it.
+        "roles": roles_book,
+        # Typed gear-carried effects (owner 2026-08-25): auras/actives
+        # attach to whatever role wears them; detection reports
+        # "role + carrying". Display layer only.
+        "gear_effects": gear_effects,
     }
 
     os.makedirs(OUT, exist_ok=True)

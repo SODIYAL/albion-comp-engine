@@ -433,6 +433,7 @@
      "FROSTSHIELD"
     ]
    },
+   "gear_class": "cloth",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -456,10 +457,20 @@
      ]
     ]
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
    "slot": "armor",
    "stats": {
     "crowdcontrolresistance": 20,
+    "energyregenerationbonus": 0.16,
     "healbonus": 0.5,
+    "hitpointsregenerationbonus": 1.5,
     "magicattackdamagebonus": 0.5,
     "magicresistance": 69,
     "magicspelldamagebonus": 0.5,
@@ -467,6 +478,11 @@
     "physicalattackdamagebonus": 0.5,
     "physicalspelldamagebonus": 0.5
    },
+   "tree_passives": [
+    "PASSIVE_ARMOR_INCREASED_DAMAGE",
+    "PASSIVE_ARMOR_INCREASED_CASTSPEED",
+    "PASSIVE_ARMOR_REDUCED_ENERGYCOST"
+   ],
    "unique_name": "ARMOR_CLOTH_AVALON"
   },
   "ARMOR_CLOTH_FEY": {
@@ -498,6 +514,7 @@
      "WILD_MAGIC"
     ]
    },
+   "gear_class": "cloth",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -517,10 +534,20 @@
      ]
     ]
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
    "slot": "armor",
    "stats": {
     "crowdcontrolresistance": 20,
+    "energyregenerationbonus": 0.16,
     "healbonus": 0.5,
+    "hitpointsregenerationbonus": 1.5,
     "magicattackdamagebonus": 0.5,
     "magicresistance": 69,
     "magicspelldamagebonus": 0.5,
@@ -528,6 +555,11 @@
     "physicalattackdamagebonus": 0.5,
     "physicalspelldamagebonus": 0.5
    },
+   "tree_passives": [
+    "PASSIVE_ARMOR_INCREASED_DAMAGE",
+    "PASSIVE_ARMOR_INCREASED_CASTSPEED",
+    "PASSIVE_ARMOR_REDUCED_ENERGYCOST"
+   ],
    "unique_name": "ARMOR_CLOTH_FEY"
   },
   "ARMOR_CLOTH_SET1": {
@@ -541,6 +573,7 @@
      "SPEEDCASTER"
     ]
    },
+   "gear_class": "cloth",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -559,10 +592,20 @@
      ]
     ]
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
    "slot": "armor",
    "stats": {
     "crowdcontrolresistance": 24,
+    "energyregenerationbonus": 0.12,
     "healbonus": 0.4,
+    "hitpointsregenerationbonus": 1.5,
     "magicattackdamagebonus": 0.4,
     "magicresistance": 87,
     "magicspelldamagebonus": 0.4,
@@ -570,6 +613,11 @@
     "physicalattackdamagebonus": 0.4,
     "physicalspelldamagebonus": 0.4
    },
+   "tree_passives": [
+    "PASSIVE_ARMOR_INCREASED_DAMAGE",
+    "PASSIVE_ARMOR_INCREASED_CASTSPEED",
+    "PASSIVE_ARMOR_REDUCED_ENERGYCOST"
+   ],
    "unique_name": "ARMOR_CLOTH_SET1"
   },
   "ARMOR_LEATHER_FEY": {
@@ -587,6 +635,7 @@
      "MIST_WALKER"
     ]
    },
+   "gear_class": "leather",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -606,10 +655,20 @@
      ]
     ]
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
    "slot": "armor",
    "stats": {
     "crowdcontrolresistance": 26,
+    "energyregenerationbonus": 0.1,
     "healbonus": 0.3,
+    "hitpointsregenerationbonus": 1.5,
     "magicattackdamagebonus": 0.3,
     "magicresistance": 92,
     "magicspelldamagebonus": 0.3,
@@ -617,6 +676,11 @@
     "physicalattackdamagebonus": 0.3,
     "physicalspelldamagebonus": 0.3
    },
+   "tree_passives": [
+    "PASSIVE_ARMOR_BALANCE",
+    "PASSIVE_ARMOR_INCREASED_AASPEED",
+    "PASSIVE_ARMOR_CD_REDUCTION"
+   ],
    "unique_name": "ARMOR_LEATHER_FEY"
   },
   "ARMOR_LEATHER_HELL": {
@@ -634,6 +698,7 @@
      "LIFESTEALAURA"
     ]
    },
+   "gear_class": "leather",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -653,10 +718,20 @@
      ]
     ]
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
    "slot": "armor",
    "stats": {
     "crowdcontrolresistance": 28,
+    "energyregenerationbonus": 0.08,
     "healbonus": 0.25,
+    "hitpointsregenerationbonus": 1.5,
     "magicattackdamagebonus": 0.25,
     "magicresistance": 100,
     "magicspelldamagebonus": 0.25,
@@ -664,6 +739,11 @@
     "physicalattackdamagebonus": 0.25,
     "physicalspelldamagebonus": 0.25
    },
+   "tree_passives": [
+    "PASSIVE_ARMOR_BALANCE",
+    "PASSIVE_ARMOR_INCREASED_AASPEED",
+    "PASSIVE_ARMOR_CD_REDUCTION"
+   ],
    "unique_name": "ARMOR_LEATHER_HELL"
   },
   "ARMOR_LEATHER_ROYAL": {
@@ -677,6 +757,7 @@
      "ROYAL_BANNER"
     ]
    },
+   "gear_class": "leather",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -695,10 +776,20 @@
      ]
     ]
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
    "slot": "armor",
    "stats": {
     "crowdcontrolresistance": 28,
+    "energyregenerationbonus": 0.08,
     "healbonus": 0.25,
+    "hitpointsregenerationbonus": 1.5,
     "magicattackdamagebonus": 0.25,
     "magicresistance": 100,
     "magicspelldamagebonus": 0.25,
@@ -706,6 +797,11 @@
     "physicalattackdamagebonus": 0.25,
     "physicalspelldamagebonus": 0.25
    },
+   "tree_passives": [
+    "PASSIVE_ARMOR_BALANCE",
+    "PASSIVE_ARMOR_INCREASED_AASPEED",
+    "PASSIVE_ARMOR_CD_REDUCTION"
+   ],
    "unique_name": "ARMOR_LEATHER_ROYAL"
   },
   "ARMOR_PLATE_FEY": {
@@ -727,6 +823,7 @@
      "ARMOR_WEB"
     ]
    },
+   "gear_class": "plate",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -747,12 +844,29 @@
      ]
     ]
    },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
    "slot": "armor",
    "stats": {
     "crowdcontrolresistance": 50,
+    "hitpointsregenerationbonus": 1.5,
     "magicresistance": 126,
     "physicalarmor": 161
    },
+   "tree_passives": [
+    "PASSIVE_ARMOR_MR_AR",
+    "PASSIVE_ARMOR_CCDURATION",
+    "PASSIVE_ARMOR_INCREASED_CCR",
+    "PASSIVE_PLATEARMOR_HEALTH_REDUCTION",
+    "PASSIVE_PLATEARMOR_THREATGENERATION"
+   ],
    "unique_name": "ARMOR_PLATE_FEY"
   },
   "ARMOR_PLATE_HELL": {
@@ -766,6 +880,7 @@
      "REFLECTAREA"
     ]
    },
+   "gear_class": "plate",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -784,10 +899,21 @@
      ]
     ]
    },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
    "slot": "armor",
    "stats": {
     "crowdcontrolresistance": 45,
+    "energyregenerationbonus": 0.02,
     "healbonus": 0.05,
+    "hitpointsregenerationbonus": 1.5,
     "magicattackdamagebonus": 0.05,
     "magicresistance": 119,
     "magicspelldamagebonus": 0.05,
@@ -795,6 +921,13 @@
     "physicalattackdamagebonus": 0.05,
     "physicalspelldamagebonus": 0.05
    },
+   "tree_passives": [
+    "PASSIVE_ARMOR_MR_AR",
+    "PASSIVE_ARMOR_CCDURATION",
+    "PASSIVE_ARMOR_INCREASED_CCR",
+    "PASSIVE_PLATEARMOR_HEALTH_REDUCTION",
+    "PASSIVE_PLATEARMOR_THREATGENERATION"
+   ],
    "unique_name": "ARMOR_PLATE_HELL"
   },
   "ARMOR_PLATE_KEEPER": {
@@ -833,6 +966,7 @@
      "FORCESHIELD"
     ]
    },
+   "gear_class": "plate",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -853,12 +987,29 @@
      ]
     ]
    },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
    "slot": "armor",
    "stats": {
     "crowdcontrolresistance": 50,
+    "hitpointsregenerationbonus": 1.5,
     "magicresistance": 126,
     "physicalarmor": 161
    },
+   "tree_passives": [
+    "PASSIVE_ARMOR_MR_AR",
+    "PASSIVE_ARMOR_CCDURATION",
+    "PASSIVE_ARMOR_INCREASED_CCR",
+    "PASSIVE_PLATEARMOR_HEALTH_REDUCTION",
+    "PASSIVE_PLATEARMOR_THREATGENERATION"
+   ],
    "unique_name": "ARMOR_PLATE_KEEPER"
   },
   "ARMOR_PLATE_SET2": {
@@ -894,6 +1045,7 @@
      "WINDWALL"
     ]
    },
+   "gear_class": "plate",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -914,10 +1066,21 @@
      ]
     ]
    },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
    "slot": "armor",
    "stats": {
     "crowdcontrolresistance": 45,
+    "energyregenerationbonus": 0.02,
     "healbonus": 0.05,
+    "hitpointsregenerationbonus": 1.5,
     "magicattackdamagebonus": 0.05,
     "magicresistance": 119,
     "magicspelldamagebonus": 0.05,
@@ -925,6 +1088,13 @@
     "physicalattackdamagebonus": 0.05,
     "physicalspelldamagebonus": 0.05
    },
+   "tree_passives": [
+    "PASSIVE_ARMOR_MR_AR",
+    "PASSIVE_ARMOR_CCDURATION",
+    "PASSIVE_ARMOR_INCREASED_CCR",
+    "PASSIVE_PLATEARMOR_HEALTH_REDUCTION",
+    "PASSIVE_PLATEARMOR_THREATGENERATION"
+   ],
    "unique_name": "ARMOR_PLATE_SET2"
   },
   "ARMOR_PLATE_SET3": {
@@ -942,6 +1112,7 @@
      "ENFEEBLEAURA"
     ]
    },
+   "gear_class": "plate",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -961,29 +1132,38 @@
      ]
     ]
    },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
    "slot": "armor",
    "stats": {
     "crowdcontrolresistance": 50,
+    "hitpointsregenerationbonus": 1.5,
     "magicresistance": 126,
     "physicalarmor": 161
    },
+   "tree_passives": [
+    "PASSIVE_ARMOR_MR_AR",
+    "PASSIVE_ARMOR_CCDURATION",
+    "PASSIVE_ARMOR_INCREASED_CCR",
+    "PASSIVE_PLATEARMOR_HEALTH_REDUCTION",
+    "PASSIVE_PLATEARMOR_THREATGENERATION"
+   ],
    "unique_name": "ARMOR_PLATE_SET3"
   },
   "CAPEITEM_FW_LYMHURST": {
-   "capabilities": {
-    "buff_allies": 2
-   },
-   "curated_as_of": "2026-08-20",
+   "capabilities": {},
+   "curated_as_of": "2026-08-25",
    "display_name": "Lymhurst Cape",
-   "evidence": {
-    "buff_allies": [
-     "GEAR_STATS"
-    ]
-   },
+   "evidence": {},
    "loadout": {
-    "always": {
-     "buff_allies": 2
-    },
+    "always": {},
     "slot_names": [],
     "slot_spells": [],
     "slots": []
@@ -1033,6 +1213,7 @@
      "ENERGYFIELD"
     ]
    },
+   "gear_class": "cloth",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -1051,8 +1232,21 @@
      ]
     ]
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
    "slot": "head",
    "stats": {},
+   "tree_passives": [
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
    "unique_name": "HEAD_CLOTH_KEEPER"
   },
   "HEAD_CLOTH_SET2": {
@@ -1101,6 +1295,7 @@
      "ICEBLOCK2"
     ]
    },
+   "gear_class": "cloth",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -1125,8 +1320,21 @@
      ]
     ]
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
    "slot": "head",
    "stats": {},
+   "tree_passives": [
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
    "unique_name": "HEAD_CLOTH_SET2"
   },
   "HEAD_LEATHER_FEY": {
@@ -1140,6 +1348,7 @@
      "IMMORTAL"
     ]
    },
+   "gear_class": "leather",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -1158,8 +1367,21 @@
      ]
     ]
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
    "slot": "head",
    "stats": {},
+   "tree_passives": [
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
    "unique_name": "HEAD_LEATHER_FEY"
   },
   "HEAD_LEATHER_HELL": {
@@ -1195,6 +1417,7 @@
      "SMOKEBOMB"
     ]
    },
+   "gear_class": "leather",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -1218,8 +1441,21 @@
      ]
     ]
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
    "slot": "head",
    "stats": {},
+   "tree_passives": [
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
    "unique_name": "HEAD_LEATHER_HELL"
   },
   "HEAD_LEATHER_SET3": {
@@ -1233,6 +1469,7 @@
      "SUMMONER_CD_REDUCTION"
     ]
    },
+   "gear_class": "leather",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -1251,8 +1488,21 @@
      ]
     ]
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
    "slot": "head",
    "stats": {},
+   "tree_passives": [
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
    "unique_name": "HEAD_LEATHER_SET3"
   },
   "HEAD_PLATE_KEEPER": {
@@ -1290,6 +1540,7 @@
      "STONESKIN"
     ]
    },
+   "gear_class": "plate",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -1313,8 +1564,22 @@
      ]
     ]
    },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
    "slot": "head",
    "stats": {},
+   "tree_passives": [
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
    "unique_name": "HEAD_PLATE_KEEPER"
   },
   "HEAD_PLATE_SET2": {
@@ -1344,6 +1609,7 @@
      "DISRUPTIONIMMUNITY"
     ]
    },
+   "gear_class": "plate",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -1363,8 +1629,22 @@
      ]
     ]
    },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
    "slot": "head",
    "stats": {},
+   "tree_passives": [
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
    "unique_name": "HEAD_PLATE_SET2"
   },
   "HEAD_PLATE_SET3": {
@@ -1398,6 +1678,7 @@
      "STONESKIN"
     ]
    },
+   "gear_class": "plate",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -1421,32 +1702,206 @@
      ]
     ]
    },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
    "slot": "head",
    "stats": {},
+   "tree_passives": [
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
    "unique_name": "HEAD_PLATE_SET3"
   },
-  "OFF_HORN_KEEPER": {
-   "capabilities": {
-    "buff_allies": 2
-   },
-   "curated_as_of": "2026-08-20",
-   "display_name": "Mistcaller",
-   "evidence": {
-    "buff_allies": [
-     "GEAR_STATS"
-    ]
-   },
+  "OFF_BOOK": {
+   "capabilities": {},
+   "curated_as_of": "2026-08-25",
+   "display_name": "Tome of Spells",
+   "evidence": {},
+   "gear_class": null,
    "loadout": {
-    "always": {
-     "buff_allies": 2
-    },
+    "always": {},
     "slot_names": [],
     "slot_spells": [],
     "slots": []
    },
+   "role_affinity": [
+    "brawl_healer",
+    "kite_healer",
+    "main_healer",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "offhand",
+   "stats": {
+    "magiccasttimereduction": 0.0208
+   },
+   "tree_passives": [],
+   "unique_name": "OFF_BOOK"
+  },
+  "OFF_CENSER_AVALON": {
+   "capabilities": {},
+   "curated_as_of": "2026-08-25",
+   "display_name": "Celestial Censer",
+   "evidence": {},
+   "gear_class": null,
+   "loadout": {
+    "always": {},
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "kite_healer",
+    "main_healer"
+   ],
+   "slot": "offhand",
+   "stats": {
+    "bonusdefensevsplayers": -0.0128,
+    "healbonus": 0.0241
+   },
+   "tree_passives": [],
+   "unique_name": "OFF_CENSER_AVALON"
+  },
+  "OFF_DEMONSKULL_HELL": {
+   "capabilities": {},
+   "curated_as_of": "2026-08-25",
+   "display_name": "Muisak",
+   "evidence": {},
+   "gear_class": null,
+   "loadout": {
+    "always": {},
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "offhand",
+   "stats": {
+    "energycostreduction": -0.02,
+    "healbonus": 0.0161,
+    "magicattackdamagebonus": 0.0161,
+    "magicspelldamagebonus": 0.0161,
+    "physicalattackdamagebonus": 0.0161,
+    "physicalspelldamagebonus": 0.0161
+   },
+   "tree_passives": [],
+   "unique_name": "OFF_DEMONSKULL_HELL"
+  },
+  "OFF_HORN_KEEPER": {
+   "capabilities": {},
+   "curated_as_of": "2026-08-25",
+   "display_name": "Mistcaller",
+   "evidence": {},
+   "gear_class": null,
+   "loadout": {
+    "always": {},
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "kite_healer",
+    "main_healer",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "offhand",
+   "stats": {
+    "magiccooldownreduction": 0.0096
+   },
+   "tree_passives": [],
+   "unique_name": "OFF_HORN_KEEPER"
+  },
+  "OFF_JESTERCANE_HELL": {
+   "capabilities": {},
+   "curated_as_of": "2026-08-25",
+   "display_name": "Leering Cane",
+   "evidence": {},
+   "gear_class": null,
+   "loadout": {
+    "always": {},
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "kite_healer",
+    "main_healer",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "offhand",
+   "stats": {
+    "magiccooldownreduction": 0.0048
+   },
+   "tree_passives": [],
+   "unique_name": "OFF_JESTERCANE_HELL"
+  },
+  "OFF_LAMP_UNDEAD": {
+   "capabilities": {},
+   "curated_as_of": "2026-08-25",
+   "display_name": "Cryptcandle",
+   "evidence": {},
+   "gear_class": null,
+   "loadout": {
+    "always": {},
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "dive_cleanup",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "offhand",
+   "stats": {
+    "bonusdefensevsplayers": -0.0128,
+    "magicspelldamagebonus": 0.0241,
+    "physicalspelldamagebonus": 0.0241
+   },
+   "tree_passives": [],
+   "unique_name": "OFF_LAMP_UNDEAD"
+  },
+  "OFF_ORB_MORGANA": {
+   "capabilities": {},
+   "curated_as_of": "2026-08-25",
+   "display_name": "Eye of Secrets",
+   "evidence": {},
+   "gear_class": null,
+   "loadout": {
+    "always": {},
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "role_affinity": [],
    "slot": "offhand",
    "stats": {},
-   "unique_name": "OFF_HORN_KEEPER"
+   "tree_passives": [],
+   "unique_name": "OFF_ORB_MORGANA"
   },
   "OFF_SHIELD": {
    "capabilities": {
@@ -1459,6 +1914,7 @@
      "GEAR_STATS"
     ]
    },
+   "gear_class": null,
    "loadout": {
     "always": {
      "tankiness": 2
@@ -1467,8 +1923,17 @@
     "slot_spells": [],
     "slots": []
    },
+   "role_affinity": [
+    "engage_tank",
+    "off_tank",
+    "stopper_tank"
+   ],
    "slot": "offhand",
-   "stats": {},
+   "stats": {
+    "bonusdefensevsplayers": 0.0108,
+    "threatbonus": 0.04
+   },
+   "tree_passives": [],
    "unique_name": "OFF_SHIELD"
   },
   "OFF_SHIELD_AVALON": {
@@ -1482,6 +1947,7 @@
      "GEAR_STATS"
     ]
    },
+   "gear_class": null,
    "loadout": {
     "always": {
      "tankiness": 2
@@ -1490,9 +1956,49 @@
     "slot_spells": [],
     "slots": []
    },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "kite_healer",
+    "main_healer",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "zone_support"
+   ],
    "slot": "offhand",
-   "stats": {},
+   "stats": {
+    "bonusdefensevsplayers": 0.0161,
+    "energycostreduction": -0.02,
+    "threatbonus": 0.04
+   },
+   "tree_passives": [],
    "unique_name": "OFF_SHIELD_AVALON"
+  },
+  "OFF_SHIELD_CRYSTAL": {
+   "capabilities": {},
+   "curated_as_of": "2026-08-25",
+   "display_name": "Unbreakable Ward",
+   "evidence": {},
+   "gear_class": null,
+   "loadout": {
+    "always": {},
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "role_affinity": [
+    "engage_tank",
+    "off_tank",
+    "stopper_tank"
+   ],
+   "slot": "offhand",
+   "stats": {
+    "bonusdefensevsplayers": 0.0048,
+    "threatbonus": 0.04
+   },
+   "tree_passives": [],
+   "unique_name": "OFF_SHIELD_CRYSTAL"
   },
   "OFF_SHIELD_HELL": {
    "capabilities": {
@@ -1505,6 +2011,7 @@
      "GEAR_STATS"
     ]
    },
+   "gear_class": null,
    "loadout": {
     "always": {
      "tankiness": 2
@@ -1513,9 +2020,123 @@
     "slot_spells": [],
     "slots": []
    },
+   "role_affinity": [
+    "engage_tank",
+    "off_tank",
+    "stopper_tank"
+   ],
+   "slot": "offhand",
+   "stats": {
+    "bonusdefensevsplayers": 0.0096,
+    "threatbonus": 0.04
+   },
+   "tree_passives": [],
+   "unique_name": "OFF_SHIELD_HELL"
+  },
+  "OFF_SPIKEDSHIELD_MORGANA": {
+   "capabilities": {},
+   "curated_as_of": "2026-08-25",
+   "display_name": "Facebreaker",
+   "evidence": {},
+   "gear_class": null,
+   "loadout": {
+    "always": {},
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "dive_cleanup",
+    "engage_tank",
+    "off_tank",
+    "ranged_aoe",
+    "stopper_tank",
+    "sustained_brawler"
+   ],
+   "slot": "offhand",
+   "stats": {
+    "bonusdefensevsplayers": 0.0072,
+    "magicattackdamagebonus": 0.0064,
+    "magicspelldamagebonus": 0.0064,
+    "physicalattackdamagebonus": 0.0064,
+    "physicalspelldamagebonus": 0.0064,
+    "threatbonus": 0.04
+   },
+   "tree_passives": [],
+   "unique_name": "OFF_SPIKEDSHIELD_MORGANA"
+  },
+  "OFF_TALISMAN_AVALON": {
+   "capabilities": {},
+   "curated_as_of": "2026-08-25",
+   "display_name": "Sacred Scepter",
+   "evidence": {},
+   "gear_class": null,
+   "loadout": {
+    "always": {},
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "role_affinity": [],
    "slot": "offhand",
    "stats": {},
-   "unique_name": "OFF_SHIELD_HELL"
+   "tree_passives": [],
+   "unique_name": "OFF_TALISMAN_AVALON"
+  },
+  "OFF_TOME_CRYSTAL": {
+   "capabilities": {},
+   "curated_as_of": "2026-08-25",
+   "display_name": "Timelocked Grimoire",
+   "evidence": {},
+   "gear_class": null,
+   "loadout": {
+    "always": {},
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "kite_healer",
+    "main_healer",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "offhand",
+   "stats": {
+    "magiccasttimereduction": 0.0177,
+    "magiccooldownreduction": 0.0048
+   },
+   "tree_passives": [],
+   "unique_name": "OFF_TOME_CRYSTAL"
+  },
+  "OFF_TORCH": {
+   "capabilities": {},
+   "curated_as_of": "2026-08-25",
+   "display_name": "Torch",
+   "evidence": {},
+   "gear_class": null,
+   "loadout": {
+    "always": {},
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "kite_healer",
+    "main_healer",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "offhand",
+   "stats": {
+    "attackspeedbonus": 0.0241,
+    "magiccooldownreduction": 0.0062
+   },
+   "tree_passives": [],
+   "unique_name": "OFF_TORCH"
   },
   "OFF_TORCH_CRYSTAL": {
    "capabilities": {
@@ -1528,6 +2149,7 @@
      "GEAR_STATS"
     ]
    },
+   "gear_class": null,
    "loadout": {
     "always": {
      "heal_sustain": 2
@@ -1536,6 +2158,15 @@
     "slot_spells": [],
     "slots": []
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
    "slot": "offhand",
    "stats": {
     "healbonus": 0.0177,
@@ -1544,7 +2175,26 @@
     "physicalattackdamagebonus": 0.0177,
     "physicalspelldamagebonus": 0.0177
    },
+   "tree_passives": [],
    "unique_name": "OFF_TORCH_CRYSTAL"
+  },
+  "OFF_TOTEM_KEEPER": {
+   "capabilities": {},
+   "curated_as_of": "2026-08-25",
+   "display_name": "Taproot",
+   "evidence": {},
+   "gear_class": null,
+   "loadout": {
+    "always": {},
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "role_affinity": [],
+   "slot": "offhand",
+   "stats": {},
+   "tree_passives": [],
+   "unique_name": "OFF_TOTEM_KEEPER"
   },
   "OFF_TOWERSHIELD_UNDEAD": {
    "capabilities": {
@@ -1557,6 +2207,7 @@
      "GEAR_STATS"
     ]
    },
+   "gear_class": null,
    "loadout": {
     "always": {
      "tankiness": 3
@@ -1565,8 +2216,17 @@
     "slot_spells": [],
     "slots": []
    },
+   "role_affinity": [
+    "engage_tank",
+    "off_tank",
+    "stopper_tank"
+   ],
    "slot": "offhand",
-   "stats": {},
+   "stats": {
+    "bonusdefensevsplayers": 0.0135,
+    "threatbonus": 0.04
+   },
+   "tree_passives": [],
    "unique_name": "OFF_TOWERSHIELD_UNDEAD"
   },
   "SHOES_LEATHER_FEY": {
@@ -1594,6 +2254,7 @@
      "AFTER_IMAGE"
     ]
    },
+   "gear_class": "leather",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -1613,8 +2274,22 @@
      ]
     ]
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
    "slot": "shoes",
    "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
    "unique_name": "SHOES_LEATHER_FEY"
   },
   "SHOES_LEATHER_MORGANA": {
@@ -1636,6 +2311,7 @@
      "DMG_BLINK"
     ]
    },
+   "gear_class": "leather",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -1656,8 +2332,22 @@
      ]
     ]
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
    "slot": "shoes",
    "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
    "unique_name": "SHOES_LEATHER_MORGANA"
   },
   "SHOES_LEATHER_ROYAL": {
@@ -1675,6 +2365,7 @@
      "JUMP"
     ]
    },
+   "gear_class": "leather",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -1694,8 +2385,22 @@
      ]
     ]
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
    "slot": "shoes",
    "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
    "unique_name": "SHOES_LEATHER_ROYAL"
   },
   "SHOES_LEATHER_SET1": {
@@ -1723,6 +2428,7 @@
      "CLEANSE_DASH"
     ]
    },
+   "gear_class": "leather",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -1742,8 +2448,22 @@
      ]
     ]
    },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
    "slot": "shoes",
    "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
    "unique_name": "SHOES_LEATHER_SET1"
   },
   "SHOES_PLATE_FEY": {
@@ -1785,6 +2505,7 @@
      "CHARGE_IN"
     ]
    },
+   "gear_class": "plate",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -1805,8 +2526,23 @@
      ]
     ]
    },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
    "slot": "shoes",
    "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
    "unique_name": "SHOES_PLATE_FEY"
   },
   "SHOES_PLATE_SET1": {
@@ -1824,6 +2560,7 @@
      "SPRINTHOT"
     ]
    },
+   "gear_class": "plate",
    "loadout": {
     "always": {},
     "slot_names": [
@@ -1843,8 +2580,23 @@
      ]
     ]
    },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
    "slot": "shoes",
    "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
    "unique_name": "SHOES_PLATE_SET1"
   },
   "T6_POTION_HEAL": {
@@ -2032,6 +2784,98 @@
    "unique_name": "T8_MEAL_STEW"
   }
  },
+ "gear_effects": [
+  {
+   "carriers": [
+    {
+     "id": "2H_AXE_AVALON",
+     "source": "owner:2026-08-25 (the Realmbreaker royal-armor example); guide:albiononlinegrind clap-kite comp 'Realmbreaker Support' slot"
+    }
+   ],
+   "id": "energy_font",
+   "items": [
+    {
+     "named": "Royal Armor (plate) \u2014 Energy Source: 13 energy/1s to 10 allies within 15m; wiki /wiki/Energy_Source; NOT yet in the gear catalog",
+     "source": "guide:wiki Energy_Source; owner:2026-08-25 ('royal armor to give team that extra needed mana')"
+    }
+   ],
+   "kind": "team_aura",
+   "name": "Energy aura"
+  },
+  {
+   "carriers": [
+    {
+     "id": "2H_AXE_AVALON",
+     "source": "owner:2026-08-25 ('royal jacket for extra cooldowns if team needs')"
+    },
+    {
+     "id": "2H_DUALMACE_AVALON",
+     "source": "guide:metabattle Oathkeepers Support ZvZ ('the perfect support for Bomb Squads', Royal Jacket)"
+    },
+    {
+     "id": "2H_ARCANESTAFF_HELL",
+     "source": "guide:metabattle Occult Staff ZvZ Support ('good CD reduction for your group', Royal Jacket)"
+    }
+   ],
+   "id": "cooldown_banner",
+   "items": [
+    {
+     "id": "ARMOR_LEATHER_ROYAL",
+     "source": "gear catalog: Royal Banner (+50% ally Cooldown Rate; wiki /wiki/Royal_Banner)"
+    }
+   ],
+   "kind": "team_aura",
+   "name": "Cooldown aura"
+  },
+  {
+   "carriers": [],
+   "id": "weaken_aura",
+   "items": [
+    {
+     "id": "ARMOR_PLATE_SET3",
+     "source": "gear catalog: Guardian Armor Enfeeble Aura (damage_debuff 5 + peel 3)"
+    }
+   ],
+   "kind": "enemy_aura",
+   "name": "Enemy-weaken aura"
+  },
+  {
+   "carriers": [],
+   "id": "force_shield",
+   "items": [
+    {
+     "id": "ARMOR_PLATE_KEEPER",
+     "source": "gear catalog: Judicator Armor Force Shield (buff_allies 3 + peel 4 + zone 2)"
+    }
+   ],
+   "kind": "ally_shield",
+   "name": "Ally force shield"
+  },
+  {
+   "carriers": [],
+   "id": "reflect_shell",
+   "items": [
+    {
+     "id": "ARMOR_PLATE_HELL",
+     "source": "gear catalog: Demon Armor Reflect Area (owner-named 'demon armor aura')"
+    }
+   ],
+   "kind": "enemy_aura",
+   "name": "Reflect area"
+  },
+  {
+   "carriers": [],
+   "id": "lifesteal_aura",
+   "items": [
+    {
+     "id": "ARMOR_LEATHER_HELL",
+     "source": "gear catalog: Hellion Jacket Life Steal Aura (self_sustain 3 + sustained_dps 2)"
+    }
+   ],
+   "kind": "steroid",
+   "name": "Lifesteal aura (personal steroid)"
+  }
+ ],
  "guild_builds": {
   "battlemounts": {
    "build": "Same on all: Mace or Bloodletter, offhand Aegis or Mistcaller, chest Judicator or Guardian as high tier as affordable (T9 ideal, best defence per silver), helmet Soldier or Mistwalker (Soldier = more health), Feyscale Sandals 4.4 (cheapest optimal, no real alternative; 4.3 fine).\n",
@@ -31958,6 +32802,1240 @@
    "redundant_gain_max": 0.05
   }
  },
+ "roles": [
+  {
+   "class": "frontline",
+   "id": "engage_tank",
+   "job": "Creates hittable clumps and commits the fight \u2014 pulls, chained CC, the shotcaller's opener (\"create hittable clumps\", albionzvzmanual.github.io/roles/).\n",
+   "name": "Engage / Clump Tank",
+   "uniform": {
+    "chest": [
+     "plate"
+    ]
+   },
+   "weapons": [
+    {
+     "id": "2H_HAMMER_AVALON",
+     "source": "derived:clump_core (flat clump_create >= 4); guide:metabattle Hand of Justice ZvZ ('a great choice for a shotcaller')",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_MACE_MORGANA",
+     "source": "derived:clump_core; comp:timothy_blap_blackzone_roam_2026_08 (main_tank)",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_ARCANESTAFF_UNDEAD",
+     "source": "derived:clump_core (Witchwork pull)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_KEEPER",
+     "source": "comp:deadlyhooker_large_scale_2026_08 (main_tank); guide:albiononlinegrind 'Engage Tank (Earthrune Staff)'",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_MACE",
+     "source": "comp:albioncompo_bist_roam15_2026_01 + timothy_blap (tank); guide:albiononlinegrind clap-kite comp 'Engage Tank (1H Mace + Mistcaller)'",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_POLEHAMMER",
+     "source": "comp:tank x4 (bist, sortasaucy, deadlyhooker); sheet engage 6 (Slowing Charge identity)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_HAMMER",
+     "source": "comp:deadlyhooker (main_tank) + sortasaucy_7man (tank)",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_MACE_CRYSTAL",
+     "source": "comp:albioncompo_push_monkey_7 + timothy_blap (tank); crystal cost gate composes",
+     "tier": "primary"
+    }
+   ]
+  },
+  {
+   "class": "frontline",
+   "doctrine": {
+    "MAIN_MACE_HELL": "Sacred Ground Q + Snare Charge W (owner:2026-08-25 \u2014 'incubus usually has sacred ground and snare charge not guard rune')"
+   },
+   "id": "stopper_tank",
+   "job": "Stops enemy paths, peels divers, covers exits, denies ground \u2014 the d-tank (\"stopping enemy paths, covering exits\", albionzvzmanual.github.io/roles/).\n",
+   "name": "Defensive / Stopper Tank",
+   "uniform": {
+    "chest": [
+     "plate"
+    ]
+   },
+   "weapons": [
+    {
+     "id": "2H_MACE",
+     "source": "owner:2026-08-25 ('3 heavy maces in party and 0 engage tanks would be an obvious flag' \u2014 Heavy Mace is the stopper archetype); guide:albiononlinegrind 'Defensive Tank (Heavy Mace)'; comp:tank x3",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_ROCKMACE_KEEPER",
+     "source": "comp:tank x4 (sob_blaze, deadlyhooker); sheet peel 6 (the air-jet wall)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_QUARTERSTAFF_AVALON",
+     "source": "owner:2026-08-25 ('grailseeker is primarily a d-tank weapon which helps stop or catch enemies'); dumps: E deals 125, root wall",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_MACE_HELL",
+     "source": "owner:2026-08-25 ('the support or tank'); guide:albiononlinegrind 'Inncubus ZvZ Support' (Judicator Armor)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_IRONCLADEDSTAFF",
+     "source": "guide:albiontopbuilds 'viable tank', metabattle defensive-mobility (medium); owner:2026-08-21 knock-away-wall reading",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_ROCKSTAFF_KEEPER",
+     "source": "comp:timothy_blap (tank) + sob_blaze (support); anti-heal aura wall",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_SET3",
+     "source": "owner:2026-08-24 ('an alright d-tank especially for zoning'); comp:sortasaucy_7man (tank)",
+     "tier": "primary"
+    }
+   ]
+  },
+  {
+   "class": "frontline",
+   "id": "off_tank",
+   "job": "Second-line frontliner: soaks pressure and brawls without owning engage or stopping duty.\n",
+   "name": "Off-Tank / Bruiser",
+   "uniform": {
+    "chest": [
+     "plate",
+     "leather"
+    ]
+   },
+   "weapons": [
+    {
+     "id": "2H_HAMMER_CRYSTAL",
+     "source": "guide:albiononlinegrind 'Off-Tank (Truebolt Hammer, Soldier Helmet + Duskweaver)'",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_DUALMACE_AVALON",
+     "source": "comp:deadlyhooker (tank x2)",
+     "tier": "primary"
+    }
+   ]
+  },
+  {
+   "class": "healer",
+   "id": "main_healer",
+   "job": "The party's healing foundation: big group heals on the clump; the primary_heal minimum is their seat.\n",
+   "name": "Main / Clump Healer",
+   "uniform": {
+    "chest": [
+     "cloth"
+    ]
+   },
+   "weapons": [
+    {
+     "id": "MAIN_HOLYSTAFF_AVALON",
+     "source": "derived:foundation set (full_healer + group scale, round 2); comp:healer x10",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_HOLYSTAFF_UNDEAD",
+     "source": "derived:foundation set; comp:healer x4",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_NATURESTAFF_HELL",
+     "source": "derived:foundation set; comp:healer x4",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_NATURESTAFF_KEEPER",
+     "source": "derived:foundation set; comp:deadlyhooker (healer)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_HOLYSTAFF",
+     "source": "derived:foundation set; owner:2026-08-23 (brawl-only suggestion note stands)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_HOLYSTAFF_HELL",
+     "source": "derived:foundation set; guide:albiononlinegrind Fallen Healer",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_NATURESTAFF",
+     "source": "derived:foundation set (heal_scale group + full_healer; Great Nature is the ruled single-scale sibling and stays OFF)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_WILDSTAFF",
+     "source": "derived:foundation set",
+     "tier": "primary"
+    }
+   ]
+  },
+  {
+   "class": "healer",
+   "id": "kite_healer",
+   "job": "Heals on the move from range; the kite comp's healing seat \u2014 mostly a kit-flavor of the same weapons (owner: healers split \"just depending on their equipment and composition\").\n",
+   "name": "Backline / Kite Healer",
+   "uniform": {
+    "chest": [
+     "cloth"
+    ]
+   },
+   "weapons": [
+    {
+     "id": "MAIN_HOLYSTAFF_AVALON",
+     "source": "sheet identity 'mobile peeling healer'",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_WILDSTAFF",
+     "source": "derived:foundation set; kite doctrine (mobility kit)",
+     "tier": "primary"
+    }
+   ]
+  },
+  {
+   "class": "healer",
+   "id": "brawl_healer",
+   "job": "Heals from inside the melee ball in heavier gear \u2014 the owner's \"tanky brawl heal\" flavor.\n",
+   "name": "Tanky Brawl Healer",
+   "uniform": {
+    "chest": [
+     "plate",
+     "leather"
+    ]
+   },
+   "weapons": [
+    {
+     "id": "2H_HOLYSTAFF",
+     "source": "owner:2026-08-23 (Great Holy brawl-only for suggestions \u2014 the stationary anchor)",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_HOLYSTAFF_AVALON",
+     "source": "comp:timothy_blap (brawl comp healer x2)",
+     "tier": "primary"
+    }
+   ]
+  },
+  {
+   "class": "support",
+   "id": "shield_support",
+   "job": "Owns the danger lane \u2014 cleanse, shields, resistance, protection (albionzvzmanual.github.io/roles/ 'Supports').\n",
+   "name": "Shield / Cleanse Support",
+   "uniform": {
+    "chest": [
+     "plate",
+     "cloth"
+    ]
+   },
+   "weapons": [
+    {
+     "id": "2H_ARCANESTAFF",
+     "source": "comp:support x5 (bist, sob_blaze, deadlyhooker)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_ENIGMATICORB_MORGANA",
+     "source": "comp:support x3 (deadlyhooker, timothy_blap); sheet: continuous group cleanse bubble",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_ENIGMATICSTAFF",
+     "source": "guide:heaven-guardian shield support; sheet bubble-shield",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_ARCANESTAFF",
+     "source": "comp:deadlyhooker (support x3)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_HOLYSTAFF_CRYSTAL",
+     "source": "comp:deadlyhooker (support x3); composition.roles.overrides precedent (fielded as the cleanse/zone-denial slot)",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_ARCANESTAFF_UNDEAD",
+     "source": "sheet: ally shield Q + Empowering Beam W (Witchwork)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_SET2",
+     "source": "comp:support x3; guide:albiononlinegrind 'Nature (Rootbound) Support'",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_COMBATSTAFF_MORGANA",
+     "source": "comp:albioncompo_push_monkey_7 (support)",
+     "tier": "primary"
+    }
+   ]
+  },
+  {
+   "class": "support",
+   "id": "pierce",
+   "job": "Cuts the enemy clump's resistances so the whole damage line lands \u2014 the \"armor shredder\" function, whatever tree carries it. FUNCTION role: no uniform of its own \u2014 it rides along with the member's seat (Incubus cuts heals in tank plate, Carrioncaller in brawler leather), so kits are judged against seat roles only.\n",
+   "name": "Pierce (resistance cut)",
+   "uniform": {
+    "chest": []
+   },
+   "weapons": [
+    {
+     "id": "2H_CURSEDSTAFF_MORGANA",
+     "source": "owner:2026-08-25 ('damnation adds an amazing pierce on a huge size'); comp:deadlyhooker (dps)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_HARPOON_HELL",
+     "source": "owner:2026-08-24 (Spirithunter 'massive pierce that enables the whole dps line'); guide:yt role guide 'armor shredder'; comp:deadlyhooker (dps) + albioncompo_20v20 (rdps)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_ARCANESTAFF",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_ARCANESTAFF_CRYSTAL",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_ARCANESTAFF_HELL",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_ARCANE_RINGPAIR_AVALON",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_AXE",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_AXE_AVALON",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_BOW",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_BOW_AVALON",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_BOW_CRYSTAL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_BOW_HELL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_BOW_KEEPER",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_CLAWPAIR",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_CLEAVER_HELL",
+     "source": "derived:E-slot resist_shred 4",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_CROSSBOW",
+     "source": "derived:E-slot resist_shred 4",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_CROSSBOWLARGE",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_CROSSBOWLARGE_MORGANA",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_CROSSBOW_CANNON_AVALON",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_CURSEDSTAFF",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_DAGGERPAIR",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_DAGGERPAIR_CRYSTAL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_DAGGER_KATAR_AVALON",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_DEMONICSTAFF",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_DUALAXE_KEEPER",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_DUALCROSSBOW_CRYSTAL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_DUALCROSSBOW_HELL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_DUALHAMMER_HELL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_DUALSICKLE_UNDEAD",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_ENIGMATICORB_MORGANA",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_ENIGMATICSTAFF",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_FROSTSTAFF",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_FROSTSTAFF_CRYSTAL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_GLACIALSTAFF",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_HALBERD",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_HALBERD_MORGANA",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_HAMMER",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_HAMMER_AVALON",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_HAMMER_CRYSTAL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_HAMMER_UNDEAD",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_ICECRYSTAL_UNDEAD",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_ICEGAUNTLETS_HELL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_KNUCKLES_AVALON",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_KNUCKLES_CRYSTAL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_KNUCKLES_HELL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_KNUCKLES_KEEPER",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_KNUCKLES_MORGANA",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_KNUCKLES_SET1",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_KNUCKLES_SET2",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_KNUCKLES_SET3",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_LONGBOW_UNDEAD",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_POLEHAMMER",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_RAM_KEEPER",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_REPEATINGCROSSBOW_UNDEAD",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_SCYTHE_CRYSTAL",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_SCYTHE_HELL",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_AVALON",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_CRYSTAL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_HELL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_KEEPER",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_MORGANA",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_SET1",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_SET2",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_SET3",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_SKULLORB_HELL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_WARBOW",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_1HCROSSBOW",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_ARCANESTAFF",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_ARCANESTAFF_UNDEAD",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_AXE",
+     "source": "derived:kit resist_shred 3",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_CURSEDSTAFF",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_CURSEDSTAFF_AVALON",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_CURSEDSTAFF_UNDEAD",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_DAGGER",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_DAGGER_HELL",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_FROSTSTAFF",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_FROSTSTAFF_AVALON",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_FROSTSTAFF_KEEPER",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_HAMMER",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_MACE_CRYSTAL",
+     "source": "derived:E-slot resist_shred 4",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_RAPIER_MORGANA",
+     "source": "derived:kit resist_shred 2",
+     "tier": "secondary"
+    }
+   ]
+  },
+  {
+   "class": "support",
+   "id": "purge",
+   "job": "Strips enemy buffs off the clump \u2014 defensive stances, damage steroids, auras. FUNCTION role (no uniform; rides with the seat). TRUE purge only \u2014 shield breaking is its own role below (owner 2026-08-25: \"hammers i think only break shield on q, it isnt really a purge\").\n",
+   "name": "Purge (buff removal)",
+   "uniform": {
+    "chest": []
+   },
+   "weapons": [
+    {
+     "id": "MAIN_CURSEDSTAFF_UNDEAD",
+     "source": "comp:support x3 (bist, deadlyhooker, timothy_blap); owner:2026-08-25 ('lifecurse purges enemy buffs, a good all round weapon')",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_KNUCKLES_AVALON",
+     "source": "sheet: Purifying Fist purges all buffs from all enemies hit (purge 4, E-audit 2026-08-24, owner-bumped)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_MACE",
+     "source": "derived:E-slot purge 6",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_ARCANESTAFF",
+     "source": "derived:E-slot purge 4",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_SPEAR_LANCE_AVALON",
+     "source": "derived:E-slot purge 4",
+     "tier": "primary"
+    }
+   ]
+  },
+  {
+   "class": "support",
+   "id": "shield_break",
+   "job": "Breaks active shields (and blocks new ones) without touching other buffs \u2014 narrower than purge by the 2026-08-21 ruling (shield-break < true full purge). FUNCTION role; owner 2026-08-25: \"shield break is like the primary role of black monk\". The `spells` list claims the shield-break evidence spells so the sweep routes them here instead of purge; primary_min 2 because the shield-break ladder is deliberately held below the purge ladder.\n",
+   "name": "Shield break",
+   "primary_min": 2,
+   "spells": [
+    "COMBATSTAFF_SLASH",
+    "DISEMBOWEL",
+    "IRONBREAKER"
+   ],
+   "uniform": {
+    "chest": []
+   },
+   "weapons": [
+    {
+     "id": "2H_CLAWPAIR",
+     "source": "derived:E-slot purge 2 (spell-classified)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_COMBATSTAFF_MORGANA",
+     "source": "derived:E-slot purge 2 (spell-classified)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_DUALHAMMER_HELL",
+     "source": "derived:kit purge 2 (spell-classified)",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_HAMMER",
+     "source": "derived:kit purge 2 (spell-classified)",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_HAMMER_AVALON",
+     "source": "derived:kit purge 2 (spell-classified)",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_HAMMER_CRYSTAL",
+     "source": "derived:kit purge 2 (spell-classified)",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_HAMMER_UNDEAD",
+     "source": "derived:kit purge 2 (spell-classified)",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_POLEHAMMER",
+     "source": "derived:kit purge 2 (spell-classified)",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_RAM_KEEPER",
+     "source": "derived:kit purge 2 (spell-classified)",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_HAMMER",
+     "source": "derived:kit purge 2 (spell-classified)",
+     "tier": "secondary"
+    }
+   ]
+  },
+  {
+   "class": "support",
+   "id": "anti_heal",
+   "job": "Denies or reduces enemy healing on the kill window \u2014 the heal-cut function across every tree (round-9 ladder: the 100%-negate and -40%/-50% class hold 4). FUNCTION role (no uniform; rides with the seat).\n",
+   "name": "Anti-heal (heal cut)",
+   "uniform": {
+    "chest": []
+   },
+   "weapons": [
+    {
+     "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+     "source": "owner:2026-08-25 (2s heal NEGATE, 'great for a clap and clap kite comp')",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_HALBERD_MORGANA",
+     "source": "sheet: Shockwave -40% Healing Received on a piercing line (heal_reduction 4)",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_MACE_HELL",
+     "source": "sheet: Shrinking Curse -40% Healing CAST, 8s cone (heal_reduction 4)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_FIRE_RINGPAIR_AVALON",
+     "source": "sheet: Dawnsong -40% Healing Received inside the fire (heal_reduction 4)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_ROCKSTAFF_KEEPER",
+     "source": "sheet: -50% Healing Received aura (heal_reduction 4)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_ARCANE_RINGPAIR_AVALON",
+     "source": "sheet: Dark Auras -15% Healing Received stacking 3x (heal_reduction 3, round-9 owner trim \u2014 weaker than the negate class)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_AXE",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_AXE_AVALON",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_CLAWPAIR",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_CURSEDSTAFF",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_DAGGERPAIR",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_DAGGERPAIR_CRYSTAL",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_DAGGER_KATAR_AVALON",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_DUALAXE_KEEPER",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_DUALSICKLE_UNDEAD",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_HALBERD",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_KNUCKLES_HELL",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_SCYTHE_CRYSTAL",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "2H_SCYTHE_HELL",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_AXE",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_DAGGER",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_DAGGER_HELL",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    },
+    {
+     "id": "MAIN_RAPIER_MORGANA",
+     "source": "derived:kit heal_reduction 2",
+     "tier": "secondary"
+    }
+   ]
+  },
+  {
+   "class": "support",
+   "id": "zone_support",
+   "job": "Ground denial and mass slows \u2014 the ice support seat (albiononlinegrind 'Ice (Icicle) Support').\n",
+   "name": "Zone / Slow Support",
+   "uniform": {
+    "chest": [
+     "cloth",
+     "plate"
+    ]
+   },
+   "weapons": [
+    {
+     "id": "2H_ICEGAUNTLETS_HELL",
+     "source": "guide:albiononlinegrind 'Ice (Icicle) Support'; comp:deadlyhooker (tank)",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_FROSTSTAFF_KEEPER",
+     "source": "comp:deadlyhooker (support) + albioncompo_20v20 (tank)",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_FROSTSTAFF_AVALON",
+     "source": "sheet: the crystal-save support (Frozen Crystal ally save)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_GLACIALSTAFF",
+     "source": "derived:zone_control 6 (the 15s roaming storm); comp:sob_blaze (rdps)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_ICECRYSTAL_UNDEAD",
+     "source": "derived:zone_control 6 (Frost Bomb + Surge + Obelisk + E stack zones)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_CRYSTAL",
+     "source": "comp:deadlyhooker (support)",
+     "tier": "primary"
+    }
+   ]
+  },
+  {
+   "class": "dps",
+   "id": "ranged_aoe",
+   "job": "The ranged damage core \u2014 AoE pressure on the clump from distance (RDPS in comp sheets).\n",
+   "name": "Ranged AoE DPS",
+   "uniform": {
+    "chest": [
+     "cloth",
+     "leather"
+    ]
+   },
+   "weapons": [
+    {
+     "id": "2H_LONGBOW",
+     "source": "guide:metabattle Longbow ZvZ ('hit as many targets as possible'); guide:albiononlinegrind Longbow Brawl",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_BOW_HELL",
+     "source": "comp:deadlyhooker (dps x3)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_CROSSBOW_CANNON_AVALON",
+     "source": "comp:sob_blaze (rdps); sheet AoE artillery",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_CROSSBOWLARGE_MORGANA",
+     "source": "owner:2026-08-23 (the siegebow-in-brawl cloth example \u2014 a ranged artillery piece); sheet",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_FIRESTAFF",
+     "source": "comp:sortasaucy_7man (rdps)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_INFERNOSTAFF_MORGANA",
+     "source": "comp:sob_blaze (rdps)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_FROSTSTAFF",
+     "source": "comp:sortasaucy_7man (rdps)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_FROSTSTAFF_CRYSTAL",
+     "source": "comp:sortasaucy_7man (rdps)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_GLACIALSTAFF",
+     "source": "comp:sob_blaze (rdps)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_ICECRYSTAL_UNDEAD",
+     "source": "comp:bist (rdps) + deadlyhooker (dps x2)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_FIRE_RINGPAIR_AVALON",
+     "source": "comp:sortasaucy_7man (rdps) + deadlyhooker (dps)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_ARCANE_RINGPAIR_AVALON",
+     "source": "comp:sortasaucy_7man (rdps)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_AVALON",
+     "source": "comp:albioncompo_push_monkey_7 (rdps)",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_CURSEDSTAFF_CRYSTAL",
+     "source": "comp:rdps x2 (push_monkey, sortasaucy) \u2014 the damage flavor beside its curse_support seat",
+     "tier": "primary"
+    }
+   ]
+  },
+  {
+   "class": "dps",
+   "id": "sustained_brawler",
+   "job": "The melee ball's grinding damage \u2014 cleaves and pressure in contact (\"Melee Pressure\", albionzvzmanual.github.io/roles/).\n",
+   "name": "Sustained Melee DPS",
+   "uniform": {
+    "chest": [
+     "leather",
+     "plate"
+    ]
+   },
+   "weapons": [
+    {
+     "id": "2H_AXE_AVALON",
+     "source": "comp:dps x3 (bist, deadlyhooker, timothy_blap); guide:albiononlinegrind Realmbreaker ZvZ DPS",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_CLEAVER_HELL",
+     "source": "comp:dps x3 (bist, deadlyhooker, timothy_blap)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_KNUCKLES_SET3",
+     "source": "comp:dps x2 (bist, deadlyhooker)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_KNUCKLES_KEEPER",
+     "source": "comp:timothy_blap (dps)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_HALBERD_MORGANA",
+     "source": "comp:timothy_blap (dps)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_DUALAXE_KEEPER",
+     "source": "comp:albioncompo_push_monkey_7 (dps)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_DUALHAMMER_HELL",
+     "source": "comp:albioncompo_push_monkey_7 (dps)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_AXE",
+     "source": "owner:2026-08-24 ('its e can hit everyone in its vicinity ... it's okay')",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_SCIMITAR_MORGANA",
+     "source": "comp:timothy_blap (dps); owner:2026-08-25 ('clarent blade e is aoe damage')",
+     "tier": "primary"
+    }
+   ]
+  },
+  {
+   "class": "dps",
+   "id": "bomb_aoe",
+   "job": "Synced burst on the clump \u2014 the bomb-squad seat (fiend/mage-robe uniform, bananatools bomb-squad guide).\n",
+   "name": "Bomb / One-shot AoE",
+   "uniform": {
+    "chest": [
+     "cloth",
+     "leather"
+    ]
+   },
+   "weapons": [
+    {
+     "id": "2H_GLAIVE_CRYSTAL",
+     "source": "guide:metabattle Rift Glaive ZvZ Bombing Build; comp:deadlyhooker (dps x4)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_DAGGER_KATAR_AVALON",
+     "source": "guide:albiononlinegrind 'Solo Bomb (Bridled Fury, Royal Hood + Assassin Jacket)'",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_DUALSCIMITAR_UNDEAD",
+     "source": "owner:2026-08-24 ('galatine pair is great for solo bombs')",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_ARCANESTAFF",
+     "source": "guide:albiononlinegrind clap-kite comp 'Arcane DPS (oneshot oriented Great Arcane)'",
+     "tier": "primary"
+    }
+   ]
+  },
+  {
+   "class": "dps",
+   "id": "dive_cleanup",
+   "job": "Chases, secures and finishes \u2014 the \"cleanup crew\" (mobile single-target finishers; max-effective small-scale, owner 2026-08-24 two-prong ruling).\n",
+   "name": "Dive / Cleanup",
+   "uniform": {
+    "chest": [
+     "leather"
+    ]
+   },
+   "weapons": [
+    {
+     "id": "MAIN_RAPIER_MORGANA",
+     "source": "guide:yt role guide 'cleanup crew'; comp:timothy_blap (dps); owner:2026-08-24 (high mobility)",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_SCIMITAR_MORGANA",
+     "source": "guide:yt role guide 'cleanup crew'",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_DUALSICKLE_UNDEAD",
+     "source": "RULE-queue adjudication 2026-08-25 (the dive daggers: Shadow Edge 4)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_DAGGERPAIR",
+     "source": "RULE-queue adjudication 2026-08-25 (dive catch: Shadow Edge 4, AA-stack identity)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_DAGGER_KATAR_AVALON",
+     "source": "guide:yt role guide (cleanup mention)",
+     "tier": "primary"
+    }
+   ]
+  },
+  {
+   "class": "meta",
+   "id": "battlemount_pilot",
+   "job": "Rides the battle mount; the weapon is carried for mobility, not the comp's capability supply. Recorded for detection/advisory only \u2014 NEVER forged.\n",
+   "name": "Battlemount Pilot",
+   "uniform": {
+    "chest": []
+   },
+   "weapons": [
+    {
+     "id": "MAIN_MACE",
+     "source": "comp:deadlyhooker (battlemount x9)",
+     "tier": "primary"
+    },
+    {
+     "id": "MAIN_RAPIER_MORGANA",
+     "source": "comp:deadlyhooker (battlemount x9); owner:2026-08-24 (the killboard mount-carrier artifact ruling)",
+     "tier": "primary"
+    }
+   ]
+  },
+  {
+   "class": "meta",
+   "id": "caller",
+   "job": "Leads the fight; any weapon. Recorded so comp sheets can name it \u2014 never forged, never gated.\n",
+   "name": "Caller / Shotcaller",
+   "uniform": {
+    "chest": []
+   },
+   "weapons": []
+  },
+  {
+   "class": "meta",
+   "id": "scout",
+   "job": "Eyes on the map (\"Scouts / Info\", albionzvzmanual.github.io) \u2014 outside the comp model; never forged.\n",
+   "name": "Scout / Info",
+   "uniform": {
+    "chest": []
+   },
+   "weapons": []
+  }
+ ],
  "scoring": {
   "capability_synergies": [
    {
@@ -33660,6 +35738,13 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu": [
+    "shield_support",
+    "bomb_aoe"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -33827,6 +35912,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -33999,6 +36087,9 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -34200,6 +36291,13 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "anti_heal",
+    "ranged_aoe"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -34392,6 +36490,13 @@
    "removed": false,
    "resil_pen": 0.2,
    "role_hint": "melee",
+   "role_menu": [
+    "sustained_brawler"
+   ],
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/axe_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -34615,6 +36720,13 @@
    "removed": false,
    "resil_pen": 0.15,
    "role_hint": "melee",
+   "role_menu": [
+    "sustained_brawler"
+   ],
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/realmbreaker.yaml",
    "status": "curated",
    "style_fit": {
@@ -34784,6 +36896,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/bow.yaml",
    "status": "curated",
    "style_fit": {
@@ -34991,6 +37106,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/mistpiercer.yaml",
    "status": "curated",
    "style_fit": {
@@ -35178,6 +37296,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/bow_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -35374,6 +37495,12 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "ranged_aoe"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/wailing_bow.yaml",
    "status": "curated",
    "style_fit": {
@@ -35596,6 +37723,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/bow_of_badon.yaml",
    "status": "curated",
    "style_fit": {
@@ -35782,6 +37912,13 @@
    "removed": false,
    "resil_pen": 0.4,
    "role_hint": "melee",
+   "role_menu": [
+    "shield_break"
+   ],
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/claws.yaml",
    "status": "curated",
    "style_fit": {
@@ -36392,6 +38529,10 @@
    "removed": false,
    "resil_pen": 0.25,
    "role_hint": "melee",
+   "role_menu": [
+    "pierce",
+    "sustained_brawler"
+   ],
    "source": "sheets/carving_sword.yaml",
    "status": "curated",
    "style_fit": {
@@ -36611,6 +38752,10 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "melee",
+   "role_menu": [
+    "shield_support",
+    "shield_break"
+   ],
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -36792,6 +38937,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "pierce"
+   ],
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -36987,6 +39135,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -37171,6 +39322,12 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "ranged_aoe"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/siegebow.yaml",
    "status": "curated",
    "style_fit": {
@@ -37356,6 +39513,12 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "ranged_aoe"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/energy_shaper.yaml",
    "status": "curated",
    "style_fit": {
@@ -37543,6 +39706,10 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -37715,6 +39882,9 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu": [
+    "pierce"
+   ],
    "source": "sheets/damnation.yaml",
    "status": "curated",
    "style_fit": {
@@ -37895,6 +40065,13 @@
    "removed": false,
    "resil_pen": 0.4,
    "role_hint": "melee",
+   "role_menu": [
+    "dive_cleanup"
+   ],
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/dagger_pair.yaml",
    "status": "curated",
    "style_fit": {
@@ -38087,6 +40264,10 @@
    "removed": false,
    "resil_pen": 0.2,
    "role_hint": "melee",
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -38282,6 +40463,14 @@
    "removed": false,
    "resil_pen": 0.25,
    "role_hint": "melee",
+   "role_menu": [
+    "bomb_aoe",
+    "dive_cleanup"
+   ],
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -38469,6 +40658,9 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -39197,6 +41389,13 @@
    "removed": false,
    "resil_pen": 0.2,
    "role_hint": "melee",
+   "role_menu": [
+    "sustained_brawler"
+   ],
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/bear_paws.yaml",
    "status": "curated",
    "style_fit": {
@@ -39381,6 +41580,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -39564,6 +41766,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/boltcasters.yaml",
    "status": "curated",
    "style_fit": {
@@ -39822,6 +42027,13 @@
    "removed": false,
    "resil_pen": 0.2,
    "role_hint": "tank",
+   "role_menu": [
+    "sustained_brawler"
+   ],
+   "role_menu_secondary": [
+    "pierce",
+    "shield_break"
+   ],
    "source": "sheets/forge_hammers.yaml",
    "status": "curated",
    "style_fit": {
@@ -39992,6 +42204,9 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu": [
+    "off_tank"
+   ],
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
@@ -40171,6 +42386,9 @@
    "removed": false,
    "resil_pen": 0.2,
    "role_hint": "melee",
+   "role_menu": [
+    "bomb_aoe"
+   ],
    "source": "sheets/sword_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -40346,6 +42564,13 @@
    "removed": false,
    "resil_pen": 0.4,
    "role_hint": "melee",
+   "role_menu": [
+    "dive_cleanup"
+   ],
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/deathgivers.yaml",
    "status": "curated",
    "style_fit": {
@@ -40665,6 +42890,12 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu": [
+    "shield_support"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -40810,6 +43041,12 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu": [
+    "shield_support"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -40963,6 +43200,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "ranged_aoe"
+   ],
    "source": "sheets/fire_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -41278,6 +43518,10 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "anti_heal",
+    "ranged_aoe"
+   ],
    "source": "sheets/dawnsong.yaml",
    "status": "curated",
    "style_fit": {
@@ -41668,6 +43912,12 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "ranged_aoe"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -41894,6 +44144,12 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "ranged_aoe"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -42119,6 +44375,13 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "zone_support",
+    "ranged_aoe"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -42438,6 +44701,9 @@
    "removed": false,
    "resil_pen": 0.05,
    "role_hint": "melee",
+   "role_menu": [
+    "bomb_aoe"
+   ],
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -42630,6 +44896,10 @@
    "removed": false,
    "resil_pen": 0.15,
    "role_hint": "melee",
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/axe_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -42827,6 +45097,13 @@
    "removed": false,
    "resil_pen": 0.15,
    "role_hint": "melee",
+   "role_menu": [
+    "anti_heal",
+    "sustained_brawler"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/axe_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -43054,6 +45331,13 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu": [
+    "engage_tank"
+   ],
+   "role_menu_secondary": [
+    "pierce",
+    "shield_break"
+   ],
    "source": "sheets/great_hammer.yaml",
    "status": "curated",
    "style_fit": {
@@ -43293,6 +45577,13 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu": [
+    "engage_tank"
+   ],
+   "role_menu_secondary": [
+    "pierce",
+    "shield_break"
+   ],
    "source": "sheets/hand_of_justice.yaml",
    "status": "curated",
    "style_fit": {
@@ -43526,6 +45817,13 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu": [
+    "off_tank"
+   ],
+   "role_menu_secondary": [
+    "pierce",
+    "shield_break"
+   ],
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -43771,6 +46069,10 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu_secondary": [
+    "pierce",
+    "shield_break"
+   ],
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -43949,6 +46251,9 @@
    "removed": false,
    "resil_pen": 0.05,
    "role_hint": "melee",
+   "role_menu": [
+    "pierce"
+   ],
    "source": "sheets/spirithunter.yaml",
    "status": "curated",
    "style_fit": {
@@ -44075,6 +46380,10 @@
    },
    "removed": false,
    "role_hint": "healer",
+   "role_menu": [
+    "main_healer",
+    "brawl_healer"
+   ],
    "source": "sheets/great_holy.yaml",
    "status": "curated",
    "style_fit": {
@@ -44201,6 +46510,9 @@
    },
    "removed": false,
    "role_hint": "healer",
+   "role_menu": [
+    "shield_support"
+   ],
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
    "style_fit": {
@@ -44320,6 +46632,9 @@
    },
    "removed": false,
    "role_hint": "healer",
+   "role_menu": [
+    "main_healer"
+   ],
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
    "style_fit": {
@@ -44439,6 +46754,9 @@
    },
    "removed": false,
    "role_hint": "healer",
+   "role_menu": [
+    "main_healer"
+   ],
    "source": "sheets/holy_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -44662,6 +46980,13 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "zone_support",
+    "ranged_aoe"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/permafrost_prism.yaml",
    "status": "curated",
    "style_fit": {
@@ -44894,6 +47219,12 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "zone_support"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -45196,6 +47527,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "ranged_aoe"
+   ],
    "source": "sheets/blazing_staff.yaml",
    "status": "curated",
    "style_fit": {
@@ -45388,6 +47722,9 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu": [
+    "stopper_tank"
+   ],
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -45809,6 +48146,12 @@
    "removed": false,
    "resil_pen": 0.2,
    "role_hint": "melee",
+   "role_menu": [
+    "purge"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -46006,6 +48349,9 @@
    "removed": false,
    "resil_pen": 0.2,
    "role_hint": "melee",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -46242,6 +48588,10 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "melee",
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -46457,6 +48807,12 @@
    "removed": false,
    "resil_pen": 0.2,
    "role_hint": "melee",
+   "role_menu": [
+    "sustained_brawler"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -46653,6 +49009,9 @@
    "removed": false,
    "resil_pen": 0.2,
    "role_hint": "melee",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -46870,6 +49229,9 @@
    "removed": false,
    "resil_pen": 0.25,
    "role_hint": "melee",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -47067,6 +49429,9 @@
    "removed": false,
    "resil_pen": 0.2,
    "role_hint": "melee",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/battle_bracers.yaml",
    "status": "curated",
    "style_fit": {
@@ -47305,6 +49670,12 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "melee",
+   "role_menu": [
+    "sustained_brawler"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -47460,6 +49831,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "ranged_aoe"
+   ],
    "source": "sheets/longbow.yaml",
    "status": "curated",
    "style_fit": {
@@ -47637,6 +50011,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/bow_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -47800,6 +50177,10 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu": [
+    "stopper_tank",
+    "purge"
+   ],
    "source": "sheets/mace_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -47991,6 +50372,9 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu": [
+    "engage_tank"
+   ],
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
@@ -48370,6 +50754,9 @@
    },
    "removed": false,
    "role_hint": "healer",
+   "role_menu": [
+    "main_healer"
+   ],
    "source": "sheets/nature_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -48562,6 +50949,9 @@
    },
    "removed": false,
    "role_hint": "healer",
+   "role_menu": [
+    "main_healer"
+   ],
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
@@ -48798,6 +51188,13 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu": [
+    "engage_tank"
+   ],
+   "role_menu_secondary": [
+    "pierce",
+    "shield_break"
+   ],
    "source": "sheets/polehammer.yaml",
    "status": "curated",
    "style_fit": {
@@ -49226,6 +51623,9 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "melee",
+   "role_menu": [
+    "stopper_tank"
+   ],
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -49432,6 +51832,10 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu_secondary": [
+    "pierce",
+    "shield_break"
+   ],
    "source": "sheets/grovekeeper.yaml",
    "status": "curated",
    "style_fit": {
@@ -49603,6 +52007,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -49789,6 +52196,10 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu": [
+    "stopper_tank",
+    "anti_heal"
+   ],
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -49965,6 +52376,10 @@
    "removed": false,
    "resil_pen": 0.15,
    "role_hint": "melee",
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/axe_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -50168,6 +52583,10 @@
    "removed": false,
    "resil_pen": 0.15,
    "role_hint": "melee",
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/axe_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -50389,6 +52808,12 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "ranged_aoe"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -50606,6 +53031,12 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "range",
+   "role_menu": [
+    "zone_support"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -50809,6 +53240,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/hellspawn.yaml",
    "status": "curated",
    "style_fit": {
@@ -51013,6 +53447,12 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu": [
+    "engage_tank"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -51209,6 +53649,9 @@
    "removed": false,
    "resil_pen": 0.2,
    "role_hint": "melee",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -51423,6 +53866,9 @@
    "removed": false,
    "resil_pen": 0.4,
    "role_hint": "melee",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -51623,6 +54069,12 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu": [
+    "shield_support"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/rootbound.yaml",
    "status": "curated",
    "style_fit": {
@@ -51833,6 +54285,12 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "melee",
+   "role_menu": [
+    "stopper_tank"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -52008,6 +54466,9 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -52753,6 +55214,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/bow_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -52939,6 +55403,10 @@
    },
    "removed": false,
    "role_hint": "healer",
+   "role_menu": [
+    "main_healer",
+    "kite_healer"
+   ],
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
@@ -53109,6 +55577,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -53279,6 +55750,13 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu": [
+    "shield_support",
+    "purge"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -53488,6 +55966,13 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu": [
+    "engage_tank",
+    "shield_support"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/witchwork.yaml",
    "status": "curated",
    "style_fit": {
@@ -53678,6 +56163,10 @@
    "removed": false,
    "resil_pen": 0.2,
    "role_hint": "melee",
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/battleaxe.yaml",
    "status": "curated",
    "style_fit": {
@@ -53847,6 +56336,9 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -54015,6 +56507,9 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -54209,6 +56704,13 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu": [
+    "anti_heal",
+    "ranged_aoe"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/rotcaller.yaml",
    "status": "curated",
    "style_fit": {
@@ -54396,6 +56898,12 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu": [
+    "purge"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -54560,6 +57068,10 @@
    "removed": false,
    "resil_pen": 0.4,
    "role_hint": "melee",
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -54757,6 +57269,10 @@
    "removed": false,
    "resil_pen": 0.25,
    "role_hint": "melee",
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -55456,6 +57972,9 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/froststaff.yaml",
    "status": "curated",
    "style_fit": {
@@ -55658,6 +58177,12 @@
    },
    "removed": false,
    "role_hint": "support",
+   "role_menu": [
+    "zone_support"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -55883,6 +58408,12 @@
    },
    "removed": false,
    "role_hint": "range",
+   "role_menu": [
+    "zone_support"
+   ],
+   "role_menu_secondary": [
+    "pierce"
+   ],
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -56106,6 +58637,10 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu_secondary": [
+    "pierce",
+    "shield_break"
+   ],
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -56337,6 +58872,11 @@
    },
    "removed": false,
    "role_hint": "healer",
+   "role_menu": [
+    "main_healer",
+    "kite_healer",
+    "brawl_healer"
+   ],
    "source": "sheets/holy_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -56584,6 +59124,10 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu": [
+    "engage_tank",
+    "battlemount_pilot"
+   ],
    "source": "sheets/mace_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -56767,6 +59311,10 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu": [
+    "engage_tank",
+    "pierce"
+   ],
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
@@ -56960,6 +59508,10 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu": [
+    "stopper_tank",
+    "anti_heal"
+   ],
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
@@ -57156,6 +59708,9 @@
    },
    "removed": false,
    "role_hint": "healer",
+   "role_menu": [
+    "main_healer"
+   ],
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
@@ -57894,6 +60449,14 @@
    "removed": false,
    "resil_pen": 0.4,
    "role_hint": "melee",
+   "role_menu": [
+    "dive_cleanup",
+    "battlemount_pilot"
+   ],
+   "role_menu_secondary": [
+    "pierce",
+    "anti_heal"
+   ],
    "source": "sheets/bloodletter.yaml",
    "status": "curated",
    "style_fit": {
@@ -58057,6 +60620,9 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
+   "role_menu": [
+    "stopper_tank"
+   ],
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
@@ -58260,6 +60826,10 @@
    "removed": false,
    "resil_pen": 0.05,
    "role_hint": "melee",
+   "role_menu": [
+    "sustained_brawler",
+    "dive_cleanup"
+   ],
    "source": "sheets/sword_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -58828,6 +61398,9 @@
    "removed": false,
    "resil_pen": 0.25,
    "role_hint": "melee",
+   "role_menu": [
+    "purge"
+   ],
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {

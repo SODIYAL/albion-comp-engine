@@ -76,6 +76,28 @@
         : (byHint[this.weapons[k].role_hint] !== undefined
            ? byHint[this.weapons[k].role_hint] : "dps");
     }
+    /* The ROLE BOOK (roles-design.md, mirrors engine.py): fine roles with
+       evidence-cited membership; weapons carry role_menu. Feeds
+       detectRole/roleAdvisory only — DESCRIPTIVE, never scoring. */
+    this.rolesBook = {};
+    var rb = data.roles || [];
+    for (var ri = 0; ri < rb.length; ri++) this.rolesBook[rb[ri].id] = rb[ri];
+    /* Typed gear-carried effects: item id -> effect ids (mirrors
+       engine.py _item_effects); gearEffects keeps the records for
+       display-name lookup. */
+    this.itemEffects = {};
+    this.gearEffects = {};
+    var ge = data.gear_effects || [];
+    for (var gi2 = 0; gi2 < ge.length; gi2++) {
+      this.gearEffects[ge[gi2].id] = ge[gi2];
+      var its = ge[gi2].items || [];
+      for (var ii = 0; ii < its.length; ii++) {
+        if (its[ii].id) {
+          (this.itemEffects[its[ii].id] = this.itemEffects[its[ii].id] || [])
+            .push(ge[gi2].id);
+        }
+      }
+    }
     /* Capability predicates — COMBO-AWARE since 2026-08-19 (mirrors
        engine.py): predMembers keeps the flat could-qualify view; every
        forge constraint counts through _predContrib(weapon, combo). */
@@ -492,6 +514,106 @@
   CompEngine.prototype.roleOf = function (weapon) {
     /* Constraint role class: healer / frontline / support / dps. */
     return this.roleClass[weapon] === undefined ? "dps" : this.roleClass[weapon];
+  };
+
+  /* Role layer (roles-design.md increment 1; mirrors engine.py) —
+     DESCRIPTIVE: no scoring or generation path reads it. */
+  CompEngine.prototype._chestClass = function (gearId) {
+    if (!gearId) return null;
+    var parts = String(gearId).split("_");
+    if (parts.indexOf("PLATE") >= 0) return "plate";
+    if (parts.indexOf("LEATHER") >= 0) return "leather";
+    if (parts.indexOf("CLOTH") >= 0) return "cloth";
+    return null;
+  };
+
+  CompEngine.prototype.detectRole = function (weapon, chest) {
+    /* SEAT roles carry a chest uniform; FUNCTION roles (pierce / purge /
+       anti_heal) have none and ride along in `functions` — kits are
+       judged against seats only (mirrors engine.py detect_role,
+       identical keys; parity carries the advisory). */
+    var menu = this.weapons[weapon].role_menu || [];
+    var menu2 = (this.weapons[weapon].role_menu_secondary || []).slice();
+    if (!menu.length)
+      return { role: null, "class": this.roleOf(weapon), kit_match: null,
+               functions: [], secondary: menu2 };
+    var self = this;
+    var uniOf = function (rid) {
+      return (((self.rolesBook[rid] || {}).uniform) || {}).chest || [];
+    };
+    var seats = menu.filter(function (r) { return uniOf(r).length > 0; });
+    var functions = menu.filter(function (r) { return !uniOf(r).length; });
+    var rid, rec;
+    if (!seats.length) {
+      rid = menu[0];
+      rec = this.rolesBook[rid] || {};
+      return { role: rid, "class": rec["class"] || this.roleOf(weapon),
+               kit_match: null,
+               functions: functions.filter(function (r) { return r !== rid; }),
+               secondary: menu2 };
+    }
+    var cc = this._chestClass(chest);
+    if (cc === null) {
+      rid = seats[0];
+      rec = this.rolesBook[rid] || {};
+      return { role: rid, "class": rec["class"] || this.roleOf(weapon),
+               kit_match: null, functions: functions, secondary: menu2 };
+    }
+    for (var i = 0; i < seats.length; i++) {
+      if (uniOf(seats[i]).indexOf(cc) >= 0) {
+        rec = this.rolesBook[seats[i]] || {};
+        return { role: seats[i], "class": rec["class"], kit_match: true,
+                 functions: functions, secondary: menu2 };
+      }
+    }
+    rid = seats[0];
+    rec = this.rolesBook[rid] || {};
+    return { role: rid, "class": rec["class"], kit_match: false,
+             functions: functions, secondary: menu2 };
+  };
+
+  CompEngine.prototype.roleAdvisory = function (party, chests) {
+    /* Descriptive roster role read: members + tally + flags
+       (off_role_kit per member; no_engage_tank at group sizes with 2+
+       frontliners and no clump maker). Mirrors engine.py role_advisory. */
+    chests = chests || {};
+    var members = [], tally = {}, flags = [], i, m;
+    for (i = 0; i < party.length; i++) {
+      m = this.detectRole(party[i], chests[i]);
+      m = { role: m.role, "class": m["class"], kit_match: m.kit_match,
+            functions: m.functions, secondary: m.secondary,
+            weapon: party[i],
+            carrying: (this.itemEffects[chests[i]] || []).slice() };
+      members.push(m);
+      var key = m.role || m["class"];
+      tally[key] = (tally[key] || 0) + 1;
+    }
+    for (i = 0; i < members.length; i++) {
+      m = members[i];
+      if (m.kit_match === false) {
+        var uni = (((this.rolesBook[m.role] || {}).uniform) || {}).chest || [];
+        flags.push({ kind: "off_role_kit", weapon: m.weapon, role: m.role,
+                     detail: "no role this weapon plays wears that chest; " +
+                             "its " + m.role + " uniform is " +
+                             uni.join("/") });
+      }
+    }
+    if (this.size >= 10) {
+      var front = 0, engage = 0;
+      for (i = 0; i < members.length; i++) {
+        m = members[i];
+        var cls = m.role ? (this.rolesBook[m.role] || {})["class"]
+          : m["class"];
+        if (cls === "frontline") front++;
+        var menu = this.weapons[m.weapon].role_menu || [];
+        if (menu.indexOf("engage_tank") >= 0) engage++;
+      }
+      if (front >= 2 && !engage)
+        flags.push({ kind: "no_engage_tank",
+                     detail: front + " frontliner(s), none can make a " +
+                             "clump — no engage tank" });
+    }
+    return { members: members, tally: tally, flags: flags };
   };
 
   CompEngine.prototype.isStyleUnfit = function (weapon) {

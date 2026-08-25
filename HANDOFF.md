@@ -55,6 +55,18 @@ The production engine currently includes:
   and earned non-stacking slots (a group-band curse slot needs a debuff-E:
   Damnation / Lifecurse / Rotcaller)
 - swap review
+- the role layer (2026-08-25, roles-design.md — increment 1 shipped
+  through eight owner passes): an evidence-cited role book (19 roles:
+  SEAT roles with gear uniforms, FUNCTION roles — pierce / purge /
+  shield_break / anti_heal — that ride along with any seat, and a typed
+  gear_effects catalog), per-weapon role MENUS derived E-first across
+  all 137 weapons (E = primary, Q/W ability = secondary tier, spell-
+  classified splits), equipment classified by the unique-ability-first
+  law (chests by tree stat numbers, all 18 offhands by stat profile,
+  tree passives recorded), kit-aware role detection and the descriptive
+  role advisory (off-role kits, no-engage-tank flags) in both ports and
+  the status card; increments pending: role-doctrine kit advisor, forge
+  role assignment + graded need profiles, uptime economics
 - weapon dossiers, spell facts, PvP interaction evidence, reference builds, and suggested gear
 
 The JavaScript engine (`engine/app_scoring.js`) mirrors the Python engine and is parity-tested.
@@ -91,6 +103,7 @@ The planner now leads with:
 - **Comp identity** — the status card names the playstyle the party is becoming (brawl / clap / kite / brawl-clap / clap-kite / bomb squad / mixed), with per-member fit verdicts and named misfit conflicts, descriptive only
 - **Kill pressure** — the status card's three-light checklist (pierce · heal-cut · burst vs the comp-fitted targets), descriptive only
 - **Fight chain** — the pick card's stage strip (the fight as the playstyle sequences it, stages graded strong/ok/weak/missing) with the pick connected to the stage it strengthens
+- **Role check** — the status card's roles line (2026-08-25): the fine-role tally read from weapons + worn kits, primary-function and carried-aura chips, and the advisory flags ("no engage tank — nobody makes a clump"; a member whose chest fights their role's uniform), descriptive only
 - **Observed killboard context** — the contextual affinity strip and the pick card's observed-cohort note, display evidence only
 - **Caller tools** — the player-pool and swap-impact fold, collapsed by default
 - **Live party** — the companion feed (live-verified 2026-08-23) with **live sync**: after a load, weapon swaps update slots in place, newly visible weapons fill in, and members' real Q/W picks flow into the loadouts
@@ -265,6 +278,8 @@ The preferred product sequence is:
      - **Observed-core loader** — "add core" button on family rows loads the anchor pair as MANUAL picks through the standard `data-add` mutation path (engine flags/scoring apply as usual; forge completes the rest); hidden once the anchor is in the roster
      - **Forge-context bug FIXED in `_app.js`** (pre-existing, surfaced by the loader): the engine is judged at roster size (owner ruling 2026-08-21) but the forge handler ran `ENG.forge(goal)` under that roster-size context — a 2-member roster forging to 20 searched under TRIO rules, so single-target-E dps and gang-only picks generated into ZvZ comps. Every Python/test forge constructs the engine at target size, which is why 21/21 forge + parity never caught it. The handler now wraps the forge in a target-size `setContent` (restore mirrors `inPickContext`); browser-verified end to end (core → forge → sane 20-man, zero gate violations)
 
+**ACTIVE TRACK — the ROLE LAYER (2026-08-25, roles-design.md; increment 1 SHIPPED).** The owner's kit-quality observations (everyone getting the same damage jacket; Grailseeker as dps) became the role architecture: roles are member-in-comp properties selected by kit, never 1:1 weapon labels. Shipped: the role book (seats / functions / gear effects), the E-first tiered sweep, equipment classification by the unique-ability-first law, detection + advisory in both ports. NEXT INCREMENTS, in order: (2) the kit-doctrine advisor — kits become role uniforms with comp-need variants (royal-energy vs royal-CDR vs hellion on the same Realmbreaker), tree-shared gear actives + per-role passive picks curated, pairing rules (CC-duration offhands on CC-delivery weapons); (3) forge role assignment with fine-role need profiles derived from real comp mixes and owner-graded blind before gating anything; (4) uptime economics (gear survivability multiplies the wearer's own delivery). The seat-membership board awaits owner grading (out/roles_report.json).
+
 8. **Enemy-comp counter drafting**
    - enter/observe an enemy roster and change the *target problem* (peel, purge, cleanse, anti-heal, displacement, etc.) without hardcoding weapon counters
 
@@ -329,8 +344,10 @@ For scoring/mechanics:
 - `pipeline/templates/composition.yaml`
 - `pipeline/templates/styles.yaml` (playstyles, weights, mechanics params, fight-chain stage data)
 - `pipeline/style_overrides.yaml` (owner rulings on weapon style fit)
+- `roles-design.md` + `pipeline/roles.yaml` (the role layer: seats, functions, gear effects)
 - `tests/test_golden.py`
 - `tests/test_forge.py`
+- `tests/test_roles.py`
 - `tests/VALIDATION.md`
 
 For data/provenance:

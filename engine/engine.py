@@ -102,6 +102,19 @@ class Engine:
         for k, d in self.weapons.items():
             self.role_class[k] = overrides.get(
                 k, by_hint.get(d.get("role_hint"), "dps"))
+        # The ROLE BOOK (roles-design.md, owner-approved 2026-08-25):
+        # fine roles with evidence-cited membership; weapons carry the
+        # derived role_menu. Feeds detect_role/role_advisory only —
+        # DESCRIPTIVE, nothing in the scoring path reads it.
+        self.roles = {r.get("id"): r for r in (self.data.get("roles") or [])}
+        # Typed gear-carried effects (owner 2026-08-25): item id -> the
+        # effect ids it grants; role_advisory reports "role + carrying".
+        self._item_effects = {}
+        for ge in (self.data.get("gear_effects") or []):
+            for it in (ge.get("items") or []):
+                if it.get("id"):
+                    self._item_effects.setdefault(it["id"], []) \
+                        .append(ge.get("id"))
         # Capability predicates (composition.yaml). Membership is COMBO-AWARE
         # since 2026-08-19: the §B rework put ranged_presence in spell
         # bundles, so a member counts toward ranged_aoe_core only when the
@@ -521,6 +534,107 @@ class Engine:
         """The default candidate pool for every suggestion/generation path:
         non-retired weapons minus the viability exclusions for this context."""
         return self._suggest
+
+    # ------------------------------------------------------------ role layer
+    # roles-design.md increment 1 (owner-approved 2026-08-25): a role is a
+    # property of the member-in-comp — weapon x kit x what the team needs —
+    # never 1:1 with the weapon. Everything here is DESCRIPTIVE: no scoring
+    # or generation path reads it (test_roles R5 pins that).
+    @staticmethod
+    def _chest_class(gear_id):
+        """Armor class of a chest gear id (ARMOR_<CLASS>_...), or None."""
+        for c in ("PLATE", "LEATHER", "CLOTH"):
+            if gear_id and c in gear_id.split("_"):
+                return c.lower()
+        return None
+
+    def detect_role(self, weapon, chest=None):
+        """The fine role a member is PLAYING: the weapon's role_menu read
+        against the equipped chest's armor class. SEAT roles carry a chest
+        uniform; FUNCTION roles (pierce/purge/anti_heal — owner correction
+        2026-08-25: the function is the role, never the tree) have none
+        and ride along in `functions` — kits are judged against seat
+        roles only (Incubus cuts heals in tank plate, Carrioncaller in
+        brawler leather). kit_match None = nothing to judge; True = the
+        chest fits a seat's uniform; False = no seat this weapon plays
+        wears that chest class."""
+        menu = self.weapons[weapon].get("role_menu") or []
+        menu2 = list(self.weapons[weapon].get("role_menu_secondary") or [])
+        if not menu:
+            return {"role": None, "class": self.role_of(weapon),
+                    "kit_match": None, "functions": [],
+                    "secondary": menu2}
+        uni_of = lambda rid: ((self.roles.get(rid) or {}).get("uniform")
+                              or {}).get("chest") or []
+        seats = [rid for rid in menu if uni_of(rid)]
+        functions = [rid for rid in menu if not uni_of(rid)]
+        if not seats:
+            rid = menu[0]
+            return {"role": rid,
+                    "class": (self.roles.get(rid) or {}).get("class")
+                    or self.role_of(weapon), "kit_match": None,
+                    "functions": [r for r in functions if r != rid],
+                    "secondary": menu2}
+        cls = self._chest_class(chest)
+        if cls is None:
+            rid = seats[0]
+            return {"role": rid,
+                    "class": (self.roles.get(rid) or {}).get("class")
+                    or self.role_of(weapon), "kit_match": None,
+                    "functions": functions, "secondary": menu2}
+        for rid in seats:
+            if cls in uni_of(rid):
+                return {"role": rid,
+                        "class": (self.roles.get(rid) or {}).get("class"),
+                        "kit_match": True, "functions": functions,
+                        "secondary": menu2}
+        rid = seats[0]
+        return {"role": rid,
+                "class": (self.roles.get(rid) or {}).get("class"),
+                "kit_match": False, "functions": functions,
+                "secondary": menu2}
+
+    def role_advisory(self, party, chests=None):
+        """Descriptive role read of a roster: per-member played role +
+        kit_match, a fine-role tally, and comp-level flags. v1 flags:
+        `off_role_kit` per member (no role this weapon plays wears that
+        chest) and `no_engage_tank` (group sizes, 2+ frontliners, nobody
+        who can make a clump — the owner's "3 heavy maces in party and 0
+        engage tanks would be an obvious flag"). NEVER a scoring or
+        generation input."""
+        chests = chests or {}
+        members, tally = [], {}
+        for i, w in enumerate(party):
+            d = dict(self.detect_role(w, chests.get(i)))
+            d["weapon"] = w
+            d["carrying"] = list(self._item_effects.get(chests.get(i)) or [])
+            members.append(d)
+            key = d["role"] or d["class"]
+            tally[key] = tally.get(key, 0) + 1
+        flags = []
+        for m in members:
+            if m["kit_match"] is False:
+                uni = ((self.roles.get(m["role"]) or {}).get("uniform")
+                       or {}).get("chest") or []
+                flags.append({
+                    "kind": "off_role_kit", "weapon": m["weapon"],
+                    "role": m["role"],
+                    "detail": (f"no role this weapon plays wears that "
+                               f"chest; its {m['role']} uniform is "
+                               + "/".join(uni))})
+        if self.size >= 10:
+            front = [m for m in members
+                     if ((self.roles.get(m["role"]) or {}).get("class")
+                         if m["role"] else m["class"]) == "frontline"]
+            engage = [m for m in members
+                      if "engage_tank"
+                      in (self.weapons[m["weapon"]].get("role_menu") or [])]
+            if len(front) >= 2 and not engage:
+                flags.append({
+                    "kind": "no_engage_tank",
+                    "detail": (f"{len(front)} frontliner(s), none can make "
+                               "a clump — no engage tank")})
+        return {"members": members, "tally": tally, "flags": flags}
 
     # ---------------------------------------------------------- loadout model
     # A weapon's sheet lists capabilities across ALL its Q/W/E/passive spell

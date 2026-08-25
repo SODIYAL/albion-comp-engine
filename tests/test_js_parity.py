@@ -185,6 +185,13 @@ def py_results(cases):
             "fight_chain": e.fight_chain(
                 c["party"], c["combos"],
                 candidate=(c["party"][0] if c["party"] else None)),
+            # role layer (roles-design.md): chest per member = first
+            # ARMOR_ item in the case's gear list (mirrors the runner)
+            "role_advisory": e.role_advisory(c["party"], {
+                j: next((x for x in (g or [])
+                         if str(x).startswith("ARMOR_")), None)
+                for j, g in enumerate(c.get("gears") or [])
+                if any(str(x).startswith("ARMOR_") for x in (g or []))}),
         })
     return out
 

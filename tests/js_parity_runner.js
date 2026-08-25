@@ -66,6 +66,17 @@ const out = cases.map((c, i) => {
     kill_pressure: e.killPressure(c.party, c.combos),
     fight_chain: e.fightChain(c.party, c.combos, null,
                               c.party.length ? c.party[0] : null),
+    role_advisory: (() => {
+      // chest per member: first ARMOR_ item in the case's gear list
+      // (mirrors test_js_parity.py)
+      const chests = {};
+      (c.gears || []).forEach((g, j) => {
+        for (const x of (g || [])) {
+          if (String(x).indexOf("ARMOR_") === 0) { chests[j] = x; break; }
+        }
+      });
+      return e.roleAdvisory(c.party, chests);
+    })(),
   };
 });
 process.stdout.write(JSON.stringify(out));

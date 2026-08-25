@@ -1,0 +1,360 @@
+# The ROLE BOOK (roles-design.md, owner-approved 2026-08-25).
+#
+# Roles are the PRIMARY objects ("i dont think we build the 137 role menu.
+# different items and weapons fall into different roles" — owner). Each
+# record: id, class (frontline/healer/support/dps; `meta` roles are
+# recorded but NEVER forged), the job, the gear uniform (chest classes;
+# item ids where the gear catalog models them), spell doctrine where
+# ruled, and MEMBERSHIP with an evidence source per entry:
+#   comp:<id>      slot label in data/published_comps (curated evidence)
+#   guide:<src>    2026-08-25 online research (albiononlinegrind builds +
+#                  its 18-slot clap-kite comp, albionzvzmanual.github.io,
+#                  metabattle, bananatools; urls in the research record,
+#                  tests/VALIDATION.md round 10)
+#   owner:<date>   owner ruling, quoted in VALIDATION.md
+#   derived:<sig>  structural signature (clump_core group, foundation
+#                  healer set, zone supply)
+# NO GUESSED MEMBERSHIPS: a weapon with no evidence stays off every menu
+# and falls back to its coarse role_hint class. The membership board
+# (out/roles_report.json) goes to the owner for grading; corrections land
+# here as cited rulings. Menu order within a weapon follows list order
+# below per role — the build derives role_menu (primary first by the
+# role-record order in this file).
+
+roles:
+  # ------------------------------------------------------------ frontline
+  - id: engage_tank
+    class: frontline
+    name: Engage / Clump Tank
+    job: >
+      Creates hittable clumps and commits the fight — pulls, chained CC,
+      the shotcaller's opener ("create hittable clumps",
+      albionzvzmanual.github.io/roles/).
+    uniform: {chest: [plate]}
+    weapons:
+      - {id: 2H_HAMMER_AVALON, source: "derived:clump_core (flat clump_create >= 4); guide:metabattle Hand of Justice ZvZ ('a great choice for a shotcaller')"}
+      - {id: 2H_MACE_MORGANA, source: "derived:clump_core; comp:timothy_blap_blackzone_roam_2026_08 (main_tank)"}
+      - {id: MAIN_ARCANESTAFF_UNDEAD, source: "derived:clump_core (Witchwork pull)"}
+      - {id: 2H_SHAPESHIFTER_KEEPER, source: "comp:deadlyhooker_large_scale_2026_08 (main_tank); guide:albiononlinegrind 'Engage Tank (Earthrune Staff)'"}
+      - {id: MAIN_MACE, source: "comp:albioncompo_bist_roam15_2026_01 + timothy_blap (tank); guide:albiononlinegrind clap-kite comp 'Engage Tank (1H Mace + Mistcaller)'"}
+      - {id: 2H_POLEHAMMER, source: "comp:tank x4 (bist, sortasaucy, deadlyhooker); sheet engage 6 (Slowing Charge identity)"}
+      - {id: 2H_HAMMER, source: "comp:deadlyhooker (main_tank) + sortasaucy_7man (tank)"}
+      - {id: MAIN_MACE_CRYSTAL, source: "comp:albioncompo_push_monkey_7 + timothy_blap (tank); crystal cost gate composes"}
+  - id: stopper_tank
+    class: frontline
+    name: Defensive / Stopper Tank
+    job: >
+      Stops enemy paths, peels divers, covers exits, denies ground — the
+      d-tank ("stopping enemy paths, covering exits",
+      albionzvzmanual.github.io/roles/).
+    uniform: {chest: [plate]}
+    weapons:
+      - {id: 2H_MACE, source: "owner:2026-08-25 ('3 heavy maces in party and 0 engage tanks would be an obvious flag' — Heavy Mace is the stopper archetype); guide:albiononlinegrind 'Defensive Tank (Heavy Mace)'; comp:tank x3"}
+      - {id: MAIN_ROCKMACE_KEEPER, source: "comp:tank x4 (sob_blaze, deadlyhooker); sheet peel 6 (the air-jet wall)"}
+      - {id: 2H_QUARTERSTAFF_AVALON, source: "owner:2026-08-25 ('grailseeker is primarily a d-tank weapon which helps stop or catch enemies'); dumps: E deals 125, root wall"}
+      - {id: MAIN_MACE_HELL, source: "owner:2026-08-25 ('the support or tank'); guide:albiononlinegrind 'Inncubus ZvZ Support' (Judicator Armor)"}
+      - {id: 2H_IRONCLADEDSTAFF, source: "guide:albiontopbuilds 'viable tank', metabattle defensive-mobility (medium); owner:2026-08-21 knock-away-wall reading"}
+      - {id: 2H_ROCKSTAFF_KEEPER, source: "comp:timothy_blap (tank) + sob_blaze (support); anti-heal aura wall"}
+      - {id: 2H_SHAPESHIFTER_SET3, source: "owner:2026-08-24 ('an alright d-tank especially for zoning'); comp:sortasaucy_7man (tank)"}
+    doctrine:
+      MAIN_MACE_HELL: "Sacred Ground Q + Snare Charge W (owner:2026-08-25 — 'incubus usually has sacred ground and snare charge not guard rune')"
+  - id: off_tank
+    class: frontline
+    name: Off-Tank / Bruiser
+    job: >
+      Second-line frontliner: soaks pressure and brawls without owning
+      engage or stopping duty.
+    uniform: {chest: [plate, leather]}
+    weapons:
+      - {id: 2H_HAMMER_CRYSTAL, source: "guide:albiononlinegrind 'Off-Tank (Truebolt Hammer, Soldier Helmet + Duskweaver)'"}
+      - {id: 2H_DUALMACE_AVALON, source: "comp:deadlyhooker (tank x2)"}
+
+  # --------------------------------------------------------------- healer
+  - id: main_healer
+    class: healer
+    name: Main / Clump Healer
+    job: >
+      The party's healing foundation: big group heals on the clump; the
+      primary_heal minimum is their seat.
+    uniform: {chest: [cloth]}
+    weapons:
+      - {id: MAIN_HOLYSTAFF_AVALON, source: "derived:foundation set (full_healer + group scale, round 2); comp:healer x10"}
+      - {id: 2H_HOLYSTAFF_UNDEAD, source: "derived:foundation set; comp:healer x4"}
+      - {id: 2H_NATURESTAFF_HELL, source: "derived:foundation set; comp:healer x4"}
+      - {id: 2H_NATURESTAFF_KEEPER, source: "derived:foundation set; comp:deadlyhooker (healer)"}
+      - {id: 2H_HOLYSTAFF, source: "derived:foundation set; owner:2026-08-23 (brawl-only suggestion note stands)"}
+      - {id: 2H_HOLYSTAFF_HELL, source: "derived:foundation set; guide:albiononlinegrind Fallen Healer"}
+      - {id: MAIN_NATURESTAFF, source: "derived:foundation set (heal_scale group + full_healer; Great Nature is the ruled single-scale sibling and stays OFF)"}
+      - {id: 2H_WILDSTAFF, source: "derived:foundation set"}
+  - id: kite_healer
+    class: healer
+    name: Backline / Kite Healer
+    job: >
+      Heals on the move from range; the kite comp's healing seat — mostly
+      a kit-flavor of the same weapons (owner: healers split "just
+      depending on their equipment and composition").
+    uniform: {chest: [cloth]}
+    weapons:
+      - {id: MAIN_HOLYSTAFF_AVALON, source: "sheet identity 'mobile peeling healer'"}
+      - {id: 2H_WILDSTAFF, source: "derived:foundation set; kite doctrine (mobility kit)"}
+  - id: brawl_healer
+    class: healer
+    name: Tanky Brawl Healer
+    job: >
+      Heals from inside the melee ball in heavier gear — the owner's
+      "tanky brawl heal" flavor.
+    uniform: {chest: [plate, leather]}
+    weapons:
+      - {id: 2H_HOLYSTAFF, source: "owner:2026-08-23 (Great Holy brawl-only for suggestions — the stationary anchor)"}
+      - {id: MAIN_HOLYSTAFF_AVALON, source: "comp:timothy_blap (brawl comp healer x2)"}
+
+  # -------------------------------------------------------------- support
+  # Function-named (owner correction 2026-08-25: "shouldnt those weapons
+  # be in like the pierce, purge, healcut role/category" — the FUNCTION is
+  # the role, never the weapon tree). The `class` on these cross-tree
+  # function roles is the TYPICAL seat for display; band counting always
+  # uses the weapon's own coarse role_class. Team auras are NOT roles —
+  # they are gear-carried effects (see `gear_effects` below) attached to
+  # whatever role wears them.
+  - id: shield_support
+    class: support
+    name: Shield / Cleanse Support
+    job: >
+      Owns the danger lane — cleanse, shields, resistance, protection
+      (albionzvzmanual.github.io/roles/ 'Supports').
+    uniform: {chest: [plate, cloth]}
+    weapons:
+      - {id: 2H_ARCANESTAFF, source: "comp:support x5 (bist, sob_blaze, deadlyhooker)"}
+      - {id: 2H_ENIGMATICORB_MORGANA, source: "comp:support x3 (deadlyhooker, timothy_blap); sheet: continuous group cleanse bubble"}
+      - {id: 2H_ENIGMATICSTAFF, source: "guide:heaven-guardian shield support; sheet bubble-shield"}
+      - {id: MAIN_ARCANESTAFF, source: "comp:deadlyhooker (support x3)"}
+      - {id: 2H_HOLYSTAFF_CRYSTAL, source: "comp:deadlyhooker (support x3); composition.roles.overrides precedent (fielded as the cleanse/zone-denial slot)"}
+      - {id: MAIN_ARCANESTAFF_UNDEAD, source: "sheet: ally shield Q + Empowering Beam W (Witchwork)"}
+      - {id: 2H_SHAPESHIFTER_SET2, source: "comp:support x3; guide:albiononlinegrind 'Nature (Rootbound) Support'"}
+      - {id: 2H_COMBATSTAFF_MORGANA, source: "comp:albioncompo_push_monkey_7 (support)"}
+  - id: pierce
+    class: support
+    name: Pierce (resistance cut)
+    job: >
+      Cuts the enemy clump's resistances so the whole damage line lands —
+      the "armor shredder" function, whatever tree carries it. FUNCTION
+      role: no uniform of its own — it rides along with the member's seat
+      (Incubus cuts heals in tank plate, Carrioncaller in brawler
+      leather), so kits are judged against seat roles only.
+    # NOTE: secondary pierce is NEAR-UNIVERSAL — shred Q/Ws at the
+    # 2-point rung exist on ~77/137 weapons (Iron Breaker, Sunder Armor,
+    # Frazzle, Piercing Arrow, Frost Lance, the curse Armor Piercer ...).
+    # Kept at the standard bar because the owner's own example (curse
+    # pierce W, ladder 2) lives there; a per-role `secondary_min` knob
+    # exists if the owner ever wants this tier to discriminate harder.
+    uniform: {chest: []}
+    weapons:
+      - {id: 2H_CURSEDSTAFF_MORGANA, source: "owner:2026-08-25 ('damnation adds an amazing pierce on a huge size'); comp:deadlyhooker (dps)"}
+      - {id: 2H_HARPOON_HELL, source: "owner:2026-08-24 (Spirithunter 'massive pierce that enables the whole dps line'); guide:yt role guide 'armor shredder'; comp:deadlyhooker (dps) + albioncompo_20v20 (rdps)"}
+  - id: purge
+    class: support
+    name: Purge (buff removal)
+    job: >
+      Strips enemy buffs off the clump — defensive stances, damage
+      steroids, auras. FUNCTION role (no uniform; rides with the seat).
+      TRUE purge only — shield breaking is its own role below (owner
+      2026-08-25: "hammers i think only break shield on q, it isnt
+      really a purge").
+    uniform: {chest: []}
+    weapons:
+      - {id: MAIN_CURSEDSTAFF_UNDEAD, source: "comp:support x3 (bist, deadlyhooker, timothy_blap); owner:2026-08-25 ('lifecurse purges enemy buffs, a good all round weapon')"}
+      - {id: 2H_KNUCKLES_AVALON, source: "sheet: Purifying Fist purges all buffs from all enemies hit (purge 4, E-audit 2026-08-24, owner-bumped)"}
+  - id: shield_break
+    class: support
+    name: Shield break
+    job: >
+      Breaks active shields (and blocks new ones) without touching other
+      buffs — narrower than purge by the 2026-08-21 ruling
+      (shield-break < true full purge). FUNCTION role; owner 2026-08-25:
+      "shield break is like the primary role of black monk". The
+      `spells` list claims the shield-break evidence spells so the sweep
+      routes them here instead of purge; primary_min 2 because the
+      shield-break ladder is deliberately held below the purge ladder.
+    uniform: {chest: []}
+    primary_min: 2
+    spells: [COMBATSTAFF_SLASH, DISEMBOWEL, IRONBREAKER]
+    weapons: []
+  - id: anti_heal
+    class: support
+    name: Anti-heal (heal cut)
+    job: >
+      Denies or reduces enemy healing on the kill window — the heal-cut
+      function across every tree (round-9 ladder: the 100%-negate and
+      -40%/-50% class hold 4). FUNCTION role (no uniform; rides with the
+      seat).
+    uniform: {chest: []}
+    weapons:
+      - {id: MAIN_CURSEDSTAFF_CRYSTAL, source: "owner:2026-08-25 (2s heal NEGATE, 'great for a clap and clap kite comp')"}
+      - {id: 2H_HALBERD_MORGANA, source: "sheet: Shockwave -40% Healing Received on a piercing line (heal_reduction 4)"}
+      - {id: MAIN_MACE_HELL, source: "sheet: Shrinking Curse -40% Healing CAST, 8s cone (heal_reduction 4)"}
+      - {id: 2H_FIRE_RINGPAIR_AVALON, source: "sheet: Dawnsong -40% Healing Received inside the fire (heal_reduction 4)"}
+      - {id: 2H_ROCKSTAFF_KEEPER, source: "sheet: -50% Healing Received aura (heal_reduction 4)"}
+      - {id: 2H_ARCANE_RINGPAIR_AVALON, source: "sheet: Dark Auras -15% Healing Received stacking 3x (heal_reduction 3, round-9 owner trim — weaker than the negate class)"}
+  - id: zone_support
+    class: support
+    name: Zone / Slow Support
+    job: >
+      Ground denial and mass slows — the ice support seat
+      (albiononlinegrind 'Ice (Icicle) Support').
+    uniform: {chest: [cloth, plate]}
+    weapons:
+      - {id: 2H_ICEGAUNTLETS_HELL, source: "guide:albiononlinegrind 'Ice (Icicle) Support'; comp:deadlyhooker (tank)"}
+      - {id: MAIN_FROSTSTAFF_KEEPER, source: "comp:deadlyhooker (support) + albioncompo_20v20 (tank)"}
+      - {id: MAIN_FROSTSTAFF_AVALON, source: "sheet: the crystal-save support (Frozen Crystal ally save)"}
+      - {id: 2H_GLACIALSTAFF, source: "derived:zone_control 6 (the 15s roaming storm); comp:sob_blaze (rdps)"}
+      - {id: 2H_ICECRYSTAL_UNDEAD, source: "derived:zone_control 6 (Frost Bomb + Surge + Obelisk + E stack zones)"}
+      - {id: 2H_SHAPESHIFTER_CRYSTAL, source: "comp:deadlyhooker (support)"}
+
+  # ------------------------------------------------------------------ dps
+  - id: ranged_aoe
+    class: dps
+    name: Ranged AoE DPS
+    job: >
+      The ranged damage core — AoE pressure on the clump from distance
+      (RDPS in comp sheets).
+    uniform: {chest: [cloth, leather]}
+    weapons:
+      - {id: 2H_LONGBOW, source: "guide:metabattle Longbow ZvZ ('hit as many targets as possible'); guide:albiononlinegrind Longbow Brawl"}
+      - {id: 2H_BOW_HELL, source: "comp:deadlyhooker (dps x3)"}
+      - {id: 2H_CROSSBOW_CANNON_AVALON, source: "comp:sob_blaze (rdps); sheet AoE artillery"}
+      - {id: 2H_CROSSBOWLARGE_MORGANA, source: "owner:2026-08-23 (the siegebow-in-brawl cloth example — a ranged artillery piece); sheet"}
+      - {id: 2H_FIRESTAFF, source: "comp:sortasaucy_7man (rdps)"}
+      - {id: 2H_INFERNOSTAFF_MORGANA, source: "comp:sob_blaze (rdps)"}
+      - {id: 2H_FROSTSTAFF, source: "comp:sortasaucy_7man (rdps)"}
+      - {id: 2H_FROSTSTAFF_CRYSTAL, source: "comp:sortasaucy_7man (rdps)"}
+      - {id: 2H_GLACIALSTAFF, source: "comp:sob_blaze (rdps)"}
+      - {id: 2H_ICECRYSTAL_UNDEAD, source: "comp:bist (rdps) + deadlyhooker (dps x2)"}
+      - {id: 2H_FIRE_RINGPAIR_AVALON, source: "comp:sortasaucy_7man (rdps) + deadlyhooker (dps)"}
+      - {id: 2H_ARCANE_RINGPAIR_AVALON, source: "comp:sortasaucy_7man (rdps)"}
+      - {id: 2H_SHAPESHIFTER_AVALON, source: "comp:albioncompo_push_monkey_7 (rdps)"}
+      - {id: MAIN_CURSEDSTAFF_CRYSTAL, source: "comp:rdps x2 (push_monkey, sortasaucy) — the damage flavor beside its curse_support seat"}
+  - id: sustained_brawler
+    class: dps
+    name: Sustained Melee DPS
+    job: >
+      The melee ball's grinding damage — cleaves and pressure in contact
+      ("Melee Pressure", albionzvzmanual.github.io/roles/).
+    uniform: {chest: [leather, plate]}
+    weapons:
+      - {id: 2H_AXE_AVALON, source: "comp:dps x3 (bist, deadlyhooker, timothy_blap); guide:albiononlinegrind Realmbreaker ZvZ DPS"}
+      - {id: 2H_CLEAVER_HELL, source: "comp:dps x3 (bist, deadlyhooker, timothy_blap)"}
+      - {id: 2H_KNUCKLES_SET3, source: "comp:dps x2 (bist, deadlyhooker)"}
+      - {id: 2H_KNUCKLES_KEEPER, source: "comp:timothy_blap (dps)"}
+      - {id: 2H_HALBERD_MORGANA, source: "comp:timothy_blap (dps)"}
+      - {id: 2H_DUALAXE_KEEPER, source: "comp:albioncompo_push_monkey_7 (dps)"}
+      - {id: 2H_DUALHAMMER_HELL, source: "comp:albioncompo_push_monkey_7 (dps)"}
+      - {id: 2H_AXE, source: "owner:2026-08-24 ('its e can hit everyone in its vicinity ... it's okay')"}
+      - {id: MAIN_SCIMITAR_MORGANA, source: "comp:timothy_blap (dps); owner:2026-08-25 ('clarent blade e is aoe damage')"}
+  - id: bomb_aoe
+    class: dps
+    name: Bomb / One-shot AoE
+    job: >
+      Synced burst on the clump — the bomb-squad seat (fiend/mage-robe
+      uniform, bananatools bomb-squad guide).
+    uniform: {chest: [cloth, leather]}
+    weapons:
+      - {id: 2H_GLAIVE_CRYSTAL, source: "guide:metabattle Rift Glaive ZvZ Bombing Build; comp:deadlyhooker (dps x4)"}
+      - {id: 2H_DAGGER_KATAR_AVALON, source: "guide:albiononlinegrind 'Solo Bomb (Bridled Fury, Royal Hood + Assassin Jacket)'"}
+      - {id: 2H_DUALSCIMITAR_UNDEAD, source: "owner:2026-08-24 ('galatine pair is great for solo bombs')"}
+      - {id: 2H_ARCANESTAFF, source: "guide:albiononlinegrind clap-kite comp 'Arcane DPS (oneshot oriented Great Arcane)'"}
+  - id: dive_cleanup
+    class: dps
+    name: Dive / Cleanup
+    job: >
+      Chases, secures and finishes — the "cleanup crew" (mobile
+      single-target finishers; max-effective small-scale, owner
+      2026-08-24 two-prong ruling).
+    uniform: {chest: [leather]}
+    weapons:
+      - {id: MAIN_RAPIER_MORGANA, source: "guide:yt role guide 'cleanup crew'; comp:timothy_blap (dps); owner:2026-08-24 (high mobility)"}
+      - {id: MAIN_SCIMITAR_MORGANA, source: "guide:yt role guide 'cleanup crew'"}
+      - {id: 2H_DUALSICKLE_UNDEAD, source: "RULE-queue adjudication 2026-08-25 (the dive daggers: Shadow Edge 4)"}
+      - {id: 2H_DAGGERPAIR, source: "RULE-queue adjudication 2026-08-25 (dive catch: Shadow Edge 4, AA-stack identity)"}
+      - {id: 2H_DAGGER_KATAR_AVALON, source: "guide:yt role guide (cleanup mention)"}
+
+  # ----------------------------------------------------------------- meta
+  - id: battlemount_pilot
+    class: meta
+    name: Battlemount Pilot
+    job: >
+      Rides the battle mount; the weapon is carried for mobility, not the
+      comp's capability supply. Recorded for detection/advisory only —
+      NEVER forged.
+    uniform: {chest: []}
+    weapons:
+      - {id: MAIN_MACE, source: "comp:deadlyhooker (battlemount x9)"}
+      - {id: MAIN_RAPIER_MORGANA, source: "comp:deadlyhooker (battlemount x9); owner:2026-08-24 (the killboard mount-carrier artifact ruling)"}
+  - id: caller
+    class: meta
+    name: Caller / Shotcaller
+    job: >
+      Leads the fight; any weapon. Recorded so comp sheets can name it —
+      never forged, never gated.
+    uniform: {chest: []}
+    weapons: []
+  - id: scout
+    class: meta
+    name: Scout / Info
+    job: >
+      Eyes on the map ("Scouts / Info", albionzvzmanual.github.io) —
+      outside the comp model; never forged.
+    uniform: {chest: []}
+    weapons: []
+
+# ---------------------------------------------------------------------------
+# GEAR EFFECTS (owner correction 2026-08-25: "the aura support i feel
+# should be broken down in individual type of auras/effects. for example
+# there is also the demon armor aura, judicator armor aura, guardian armor
+# aura"). Team auras and signature actives are GEAR-CARRIED effects, typed
+# individually — they attach to whatever role wears them (a Guardian-Armor
+# engage tank stays an engage tank CARRYING the weaken aura); "aura
+# support" as a lumped seat is dissolved. `items` grant the effect (`id`
+# when the gear catalog models it, `named` when it does not yet);
+# `carriers` are weapons EVIDENCED to take a dedicated carrier seat with
+# that effect. Detection reports "role + carrying".
+gear_effects:
+  - id: energy_font
+    name: Energy aura
+    kind: team_aura
+    items:
+      - {named: "Royal Armor (plate) — Energy Source: 13 energy/1s to 10 allies within 15m; wiki /wiki/Energy_Source; NOT yet in the gear catalog", source: "guide:wiki Energy_Source; owner:2026-08-25 ('royal armor to give team that extra needed mana')"}
+    carriers:
+      - {id: 2H_AXE_AVALON, source: "owner:2026-08-25 (the Realmbreaker royal-armor example); guide:albiononlinegrind clap-kite comp 'Realmbreaker Support' slot"}
+  - id: cooldown_banner
+    name: Cooldown aura
+    kind: team_aura
+    items:
+      - {id: ARMOR_LEATHER_ROYAL, source: "gear catalog: Royal Banner (+50% ally Cooldown Rate; wiki /wiki/Royal_Banner)"}
+    carriers:
+      - {id: 2H_AXE_AVALON, source: "owner:2026-08-25 ('royal jacket for extra cooldowns if team needs')"}
+      - {id: 2H_DUALMACE_AVALON, source: "guide:metabattle Oathkeepers Support ZvZ ('the perfect support for Bomb Squads', Royal Jacket)"}
+      - {id: 2H_ARCANESTAFF_HELL, source: "guide:metabattle Occult Staff ZvZ Support ('good CD reduction for your group', Royal Jacket)"}
+  - id: weaken_aura
+    name: Enemy-weaken aura
+    kind: enemy_aura
+    items:
+      - {id: ARMOR_PLATE_SET3, source: "gear catalog: Guardian Armor Enfeeble Aura (damage_debuff 5 + peel 3)"}
+    carriers: []
+  - id: force_shield
+    name: Ally force shield
+    kind: ally_shield
+    items:
+      - {id: ARMOR_PLATE_KEEPER, source: "gear catalog: Judicator Armor Force Shield (buff_allies 3 + peel 4 + zone 2)"}
+    carriers: []
+  - id: reflect_shell
+    name: Reflect area
+    kind: enemy_aura
+    items:
+      - {id: ARMOR_PLATE_HELL, source: "gear catalog: Demon Armor Reflect Area (owner-named 'demon armor aura')"}
+    carriers: []
+  - id: lifesteal_aura
+    name: Lifesteal aura (personal steroid)
+    kind: steroid
+    items:
+      - {id: ARMOR_LEATHER_HELL, source: "gear catalog: Hellion Jacket Life Steal Aura (self_sustain 3 + sustained_dps 2)"}
+    carriers: []

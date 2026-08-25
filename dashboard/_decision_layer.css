@@ -43,6 +43,14 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-kill span:not(.dl-kicker){font-family:var(--mono);font-size:9.5px;padding:2px 7px;border-radius:99px}
 .dl-kill .ok{color:var(--ok-bright);border:1px solid rgba(35,191,110,.25);background:rgba(35,191,110,.07)}
 .dl-kill .bad{color:var(--gap);border:1px solid rgba(255,84,112,.28);background:var(--gap-wash)}
+/* role check (roles-design.md): fine-role tally + balance/kit flags */
+.dl-role{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:6px}
+.dl-role .dl-kicker{display:inline;margin-right:2px}
+.dl-role span:not(.dl-kicker){font-family:var(--mono);font-size:9.5px;padding:2px 7px;border-radius:99px;color:var(--ink-2);border:1px solid rgba(255,255,255,.12)}
+.dl-role-flag{display:block;margin-top:3px;font-family:var(--mono);font-size:10px;color:var(--amber)}
+.dl-role .dl-role-carry{color:var(--gold, #FFC93A);border-color:rgba(255,201,58,.3)}
+.dl-role .dl-role-fn{color:var(--violet, #9D5CFF);border-color:rgba(157,92,255,.3)}
+.dl-role .dl-role-fn2{color:var(--ink-3, #8a8fa3);border-color:rgba(157,92,255,.15);opacity:.75}
 /* the need line: the combined card's header — question above the answer */
 .dl-needline{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;
   padding:0 0 12px;margin:0 0 12px;border-bottom:1px solid var(--rule)}

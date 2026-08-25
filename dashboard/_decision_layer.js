@@ -69,6 +69,58 @@
     return `<span class="dl-kill" title="can this comp actually kill? pierce the clump, cut the healing, burst hard enough — bars are the comp-fitted template targets; display only"><span class="dl-kicker">kill pressure</span>${chip("pierce", "pierce")}${chip("heal_cut", "heal-cut")}${chip("burst", "burst")}</span>`;
   }
 
+  /* Role check (roles-design.md increment 1, 2026-08-25): who is playing
+     what — the fine-role tally plus the owner's balance flags ("we have
+     too many tanks or healer or stoppers etc and need something else";
+     "3 heavy maces in party and 0 engage tanks would be an obvious
+     flag"). ENG.roleAdvisory is descriptive engine output rendered
+     verbatim; chests come from each member's own LOADOUT kit, so the
+     read follows what the players actually wear. Display only. */
+  function roleLine(){
+    if (!party.length || typeof ENG.roleAdvisory !== "function") return "";
+    const chests = {};
+    party.forEach((w, i) => {
+      const L = (typeof LOADOUT !== "undefined" && LOADOUT[i]) || null;
+      if (L && L.armor) chests[i] = L.armor;
+    });
+    const adv = ENG.roleAdvisory(party, chests);
+    if (!adv || (!adv.flags.length && !Object.keys(adv.tally).length)) return "";
+    const label = id => (((ENG.rolesBook || {})[id]) || {}).name || id;
+    const tally = Object.entries(adv.tally)
+      .map(([k, n]) => `<span title="${esc(label(k))}">${n}× ${esc(label(k).split(" / ")[0].split(" (")[0])}</span>`)
+      .join("");
+    /* function roles (pierce/purge/anti-heal ride along with the seat)
+       and carried gear effects (owner 2026-08-25: every aura typed
+       individually) — aggregated as their own chips */
+    const fns = {};
+    adv.members.forEach(m => (m.functions || []).forEach(c => { fns[c] = (fns[c] || 0) + 1; }));
+    const fnChips = Object.entries(fns)
+      .map(([k, n]) => `<span class="dl-role-fn" title="PRIMARY function — on the E spell (owner rule: primary roles come from the E)">${n}× ${esc(label(k).split(" (")[0])}</span>`)
+      .join("");
+    /* secondary functions ride on Q/W picks (axe bleeds, curse Armor
+       Piercer) — shown dimmer, second-level by owner rule */
+    const fns2 = {};
+    adv.members.forEach(m => (m.secondary || []).forEach(c => { fns2[c] = (fns2[c] || 0) + 1; }));
+    const fn2Chips = Object.entries(fns2)
+      .map(([k, n]) => `<span class="dl-role-fn2" title="secondary function — lives on a Q/W pick, not the E">${n}× ${esc(label(k).split(" (")[0])}</span>`)
+      .join("");
+    const carry = {};
+    adv.members.forEach(m => (m.carrying || []).forEach(c => { carry[c] = (carry[c] || 0) + 1; }));
+    const carryChips = Object.entries(carry)
+      .map(([k, n]) => `<span class="dl-role-carry" title="carried by worn gear">${n}× ${esc((((ENG.gearEffects || {})[k]) || {}).name || k)}</span>`)
+      .join("");
+    const flags = adv.flags.map(f => {
+      let txt;
+      if (f.kind === "no_engage_tank") txt = "no engage tank — nobody makes a clump";
+      else {
+        const uni = ((((ENG.rolesBook || {})[f.role] || {}).uniform || {}).chest || []).join("/");
+        txt = `${nameOf(f.weapon)}: worn chest fights its ${label(f.role).toLowerCase()} job${uni ? ` (that role wears ${uni})` : ""}`;
+      }
+      return `<small class="dl-role-flag" title="${esc(f.detail)}">⚠ ${txt}</small>`;
+    }).join("");
+    return `<span class="dl-role" title="who is playing what — read from the weapons and the kits they actually wear (roles-design.md); display only"><span class="dl-kicker">roles</span>${tally}${fnChips}${fn2Chips}${carryChips}</span>${flags}`;
+  }
+
   /* Fight chain (roadmap item 1, 2026-08-23): the fight as the caller's
      playstyle sequences it, stage by stage — ENG.fightChain rendered
      verbatim, gradings from the comp-fitted targets, display only.
@@ -355,7 +407,7 @@
     }
 
     if (!top){
-      host.innerHTML = `<div class="dl-status ${state.tone} dl-empty"><div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small>${identityLine()}${killLine()}</div><span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span></div>`;
+      host.innerHTML = `<div class="dl-status ${state.tone} dl-empty"><div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small>${identityLine()}${killLine()}${roleLine()}</div><span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span></div>`;
       renderPlayerTools(host);
       return;
     }
@@ -400,7 +452,7 @@
 
     host.innerHTML = `
       <div class="dl-status ${state.tone}">
-        <div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small>${identityLine()}${killLine()}</div>
+        <div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small>${identityLine()}${killLine()}${roleLine()}</div>
         <span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span>
       </div>
       <div class="dl-pick">
