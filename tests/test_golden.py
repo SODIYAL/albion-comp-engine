@@ -511,22 +511,28 @@ def run():
     # detachment archetype, not an ordinary clap (pinned on the real
     # KroozLT19 6x-Wailing-Bow comp). And the Harpoon ruling: pierce +
     # damage_debuff are group jobs in their own right, so the pierce-bot
-    # carries a group slot as 'situational', never 'unfit' — leaving
-    # Battleaxe (the explicit owner override) as the only weapon barred
+    # carries a group slot as 'situational', never 'unfit'. REFINED round 7
+    # (owner 2026-08-24): "spirithunter is great in clap and clap kite ...
+    # it has a massive pierce that enables the whole dps line" — the clap
+    # halves promote to FITS (cited override); brawl/kite keep situational.
+    # Battleaxe (the explicit owner override) stays the only weapon barred
     # from every style at group scale.
     bomb = ["2H_BOW_HELL", "MAIN_ARCANESTAFF_UNDEAD", "MAIN_CURSEDSTAFF_UNDEAD",
             "2H_BOW_HELL", "2H_BOW_HELL", "2H_BOW_HELL", "2H_BOW_HELL",
             "2H_BOW_HELL"]
     id_bomb = Engine(content="blackzone_roam", size=8).comp_identity(bomb)
     harpoon_fit = E.weapons["2H_HARPOON_HELL"]["style_fit"]["fit"]
-    check("T23e bomb-squad archetype + the Harpoon pierce ruling",
+    check("T23e bomb-squad archetype + the Harpoon pierce ruling "
+          "(round-7 refinement: clap halves fit, brawl/kite situational)",
           id_bomb.get("archetype") == "bomb_squad"
           and id_bomb["style"] == "clap"
           and "Bomb squad" in id_bomb["label"]
           and all(harpoon_fit[s]["group"] == "situational"
-                  for s in ("brawl", "clap", "kite", "brawl_clap")),
-          f"label={id_bomb['label']} harpoon-group="
-          f"{harpoon_fit['clap']['group']}")
+                  for s in ("brawl", "kite", "brawl_clap"))
+          and harpoon_fit["clap"]["group"] == "fits"
+          and harpoon_fit["clap_kite"]["group"] == "fits",
+          f"label={id_bomb['label']} harpoon clap="
+          f"{harpoon_fit['clap']['group']} brawl={harpoon_fit['brawl']['group']}")
 
     # T23f — blind labels 3/4 + the owner's follow-up refinement
     # (2026-08-23): both 20-man comps "have both clap potential and kite
@@ -612,6 +618,37 @@ def run():
           and fc_bal is not None and fc_bal["style"] == "clap"
           and abs(e_bz.fitness(blap) - f_blap) < 1e-12,
           f"heal_improves={fc_heal['improves']} bal_style={fc_bal['style']}")
+
+    # T26c — stage sources + named improves terms (2026-08-24, from a user
+    # not being able to reconcile "strengthens Reset" with gain tiles that
+    # led with other capabilities): every graded stage lists the equipped
+    # spells that ARE it, each source citing a real spell of that weapon's
+    # loadout (or its always-on kit), and the improves claim names the
+    # per-cap terms behind its sum.
+    con = next(s for s in fc_blap["stages"] if s["name"] == "Contact")
+
+    def cites_real_spell(r):
+        if r["spell"] is None:
+            return r["slot"] is None   # the weapon's always-on kit
+        lo = e_brl20.weapons[r["weapon"]].get("loadout") or {}
+        names = lo.get("slot_names") or []
+        spells = lo.get("slot_spells") or []
+        return r["slot"] in names and \
+            r["spell"] in spells[names.index(r["slot"])]
+    src_ok = bool(con["sources"]) and all(
+        cites_real_spell(r) and r["cap"] in con["caps"] and r["units"] > 0
+        for r in con["sources"])
+    imp = fc5["improves"] or {}
+    check("T26c chain sources: Contact lists the blap ball's real engage/"
+          "tank spells; improves names its terms (Carving -> Pressure = "
+          "its shred + dps, summed)",
+          src_ok and imp.get("terms")
+          and set(t["cap"] for t in imp["terms"])
+          <= set(next(s["caps"] for s in fc5["stages"]
+                      if s["name"] == "Pressure"))
+          and abs(sum(t["gain"] for t in imp["terms"]) - imp["gain"]) < 1e-9,
+          f"contact_sources={len(con['sources'])} "
+          f"imp_terms={[(t['cap'], t['gain']) for t in imp.get('terms') or []]}")
 
     # T27 — forge-quality blind round (owner rulings 2026-08-23). The
     # engine's darlings were overruled on ECONOMICS and E-identity, with
@@ -725,6 +762,163 @@ def run():
           and "2H_AXE_AVALON" in set(e_c15.suggest_pool()),
           f"hell_clap={hell in set(e_c15.suggest_pool())} "
           f"hell_bc={hell in set(e_bc15.suggest_pool())}")
+
+    # T30 — negative recommendations / redundancy warnings (roadmap item 3,
+    # 2026-08-24). The verdict layer is a DESCRIPTIVE lens over the exact
+    # pick marginal — a scoring-side redundancy penalty was tried and
+    # REJECTED (MECHANICS_TODO Q18), so these pins hold the lens honest:
+    # the report's terms ARE the score, and computing it changes nothing.
+    heal_sat = [HALLOWFALL, GREAT_HOLY, HEAVY_MACE, PERMAFROST]
+    rep = E.pick_report(heal_sat, "MAIN_HOLYSTAFF")
+    w = E.scoring["weights"]
+    recon = (w["alpha"] * rep["d_fitness"] + w["beta"] * rep["d_synergy"]
+             + w["delta"] * rep["meta_prior"]
+             + w.get("viability", 0.0) * rep["viability"] - rep["dup_penalty"])
+    rowsum = sum(r["coverage"] + r["floor_lift"] - r["overstack_cost"]
+                 for r in rep["caps"])
+    check("T30 pick_report terms reconstruct the exact pick score (1e-9)",
+          abs(recon - rep["score"]) < 1e-9
+          and abs(rowsum - rep["d_fitness"]) < 1e-9,
+          f"score={rep['score']:.4f} recon_err={abs(recon - rep['score']):.1e} "
+          f"dfit_err={abs(rowsum - rep['d_fitness']):.1e}")
+
+    # a third healer into a heal-saturated party warns; the same healer into
+    # 3 DPS is the engine's own top advice and reads clean
+    rep_ok = E.pick_report([LONGBOW, WITCHWORK, PERMAFROST], HALLOWFALL)
+    check("T30b verdicts: third healer into saturated heals warns (closes "
+          "no gap); healer into 3 DPS reads ok",
+          rep["verdict"] in ("redundant", "negative") and rep["caps_gain"] < 0.5
+          and rep_ok["verdict"] == "ok" and rep_ok["caps_gain"] > 5
+          and any(r["saturated"] for r in rep["caps"]),
+          f"sat3rd={rep['verdict']}/{rep['caps_gain']:.2f} "
+          f"gapfill={rep_ok['verdict']}/{rep_ok['caps_gain']:.1f}")
+
+    # exact duplicates past the free allowance price in and go negative
+    rep_dup = E.pick_report([LONGBOW, LONGBOW, LONGBOW, LONGBOW], LONGBOW)
+    check("T30c a 5th Longbow is a negative recommendation (dup penalty "
+          "priced, zero gap-closing)",
+          rep_dup["verdict"] == "negative" and rep_dup["score"] <= 0
+          and rep_dup["dup_penalty"] > 0 and rep_dup["caps_gain"] < 0.05,
+          f"score={rep_dup['score']:.3f} dup_pen={rep_dup['dup_penalty']:.2f} "
+          f"caps_gain={rep_dup['caps_gain']:.3f}")
+
+    # swap review carries the same lens per member — but its question is
+    # "does the REST cover this member's jobs without it?", so with TWO
+    # healers neither is redundant (dropping either reopens the gap); a
+    # THIRD healer is. analyze carries the saturation band; and none of it
+    # touches fitness (descriptive only).
+    three_heal = [HALLOWFALL, GREAT_HOLY, "MAIN_HOLYSTAFF", HEAVY_MACE]
+    f_before = E.fitness(three_heal)
+    sr2 = {m["weapon"]: m for m in E.swap_review(heal_sat)}
+    sr3 = {m["weapon"]: m for m in E.swap_review(three_heal)}
+    an = E.analyze(heal_sat)
+    bands = {x["cap"]: x["band"] for x in an["strengths"]}
+    check("T30d swap review: both of 2 healers load-bearing, a 3rd flagged "
+          "redundant, the tank clean; analyze bands mark heals overstacked; "
+          "fitness untouched by all of it",
+          not sr2[GREAT_HOLY]["redundant"]
+          and sr3["MAIN_HOLYSTAFF"]["redundant"]
+          and not sr3[HEAVY_MACE]["redundant"]
+          and bands.get("heal_sustain") == "overstacked"
+          and E.fitness(three_heal) == f_before,
+          f"2-healer greatholy={sr2[GREAT_HOLY]['verdict']} "
+          f"3rd-healer={sr3['MAIN_HOLYSTAFF']['verdict']} "
+          f"heavymace={sr3[HEAVY_MACE]['verdict']} "
+          f"heal_band={bands.get('heal_sustain')} "
+          f"fitness stable at {f_before:.4f}")
+
+    # T31 — round 7 (owner 2026-08-24): the two-prong E rule. Prong facts:
+    # Battle Bracers' Falcon Smash DOES damage everyone it lands on (dump
+    # text: 264 phys in a 4 radius — the sheet had never scored it; owner:
+    # "battle bracers is not single target") -> group scale, back in group
+    # pools, matching its 84% share of the observed ZvZ family. Warbow /
+    # 1H Fire / Hellspawn are owner-ruled solo-class ("max effective at 3,
+    # good/okay at 5, falls off hard"): out of 5+ generation, open at trio.
+    # Energy Shaper ("super high damage ... great in large group fights")
+    # and Greataxe ("its e can hit everyone in its vicinity ... okay")
+    # stay. The weak-group-E derivation (low E damage AND no real E tool)
+    # demotes only the scattered-utility class; Heavy-Mace-style utility
+    # Es are protected by the AND.
+    e20 = Engine(content="blackzone_roam", size=20)
+    e5 = Engine(content="blackzone_roam", size=5)
+    e3 = Engine(content="blackzone_roam", size=3)
+    p20, p5, p3 = (set(e20.suggest_pool()), set(e5.suggest_pool()),
+                   set(e3.suggest_pool()))
+    solo = ("2H_WARBOW", "MAIN_FIRESTAFF", "2H_SHAPESHIFTER_HELL")
+    bb = "2H_KNUCKLES_SET2"
+    check("T31 round-7 E rule: Battle Bracers rejoins group pools (group-"
+          "scale E, killboard-corroborated); Warbow/1H Fire/Hellspawn "
+          "solo-class leave 5+; all open at trio; Energy Shaper/Greataxe "
+          "stay",
+          bb in p20 and e20.weapons[bb]["style_fit"]["damage_scale"] == "group"
+          and all(w not in p20 and w not in p5 and w in p3 for w in solo)
+          and "2H_CROSSBOW_CANNON_AVALON" in p20 and "2H_AXE" in p20,
+          f"bb_in20={bb in p20} solo_out20={[w not in p20 for w in solo]} "
+          f"solo_in3={[w in p3 for w in solo]}")
+
+    # the AND protects utility Es: Heavy Mace (low-damage silence E) and
+    # Carrioncaller (heal-cut E) keep their group verdicts; the demotion
+    # catches only the no-tool class, and computing any of it never moved
+    # a score the goldens above already pinned
+    cc = "2H_HALBERD_MORGANA"
+    hm_fit = e20.weapons[HEAVY_MACE]["style_fit"]["fit"]["brawl"]["group"]
+    cc_fit = e20.weapons[cc]["style_fit"]["fit"]["brawl"]["group"]
+    ice = e20.weapons["2H_ICEGAUNTLETS_HELL"]["style_fit"]  # Icicle: caught class
+    check("T31b the AND rescues real tools: Heavy Mace + Carrioncaller "
+          "keep group slots; the scattered-utility class (Icicle) demotes "
+          "to situational, never unfit",
+          hm_fit == "fits" and cc_fit == "fits"
+          and ice["fit"]["brawl"]["group"] == "situational"
+          and ice["fit"]["brawl"]["trio"] == "fits",
+          f"heavy_mace={hm_fit} carrioncaller={cc_fit} "
+          f"icicle={ice['fit']['brawl']}")
+
+    # T31c — round-7 killboard cases closed (owner 2026-08-24): Spirithunter
+    # generates for clap + clap_kite at 20 ("great in clap and clap kite ...
+    # massive pierce that enables the whole dps line") while brawl stays
+    # gated; Bloodletter stays OUT of group generation — its killboard
+    # prominence is battlemount piloting + mobility, not a comp slot
+    # ("isn't really used as fighting but as a mounted weapon"), the
+    # recorded kill-event sampling bias made real; Galatine Pair stays IN
+    # the pools with no special treatment ("great for solo bombs" — a
+    # specialist play the templates don't demand, so the forge passing on
+    # it is correct, not a gate).
+    sp = "2H_HARPOON_HELL"
+    e_c20 = Engine(content="blackzone_roam", size=20, style="clap")
+    e_ck20 = Engine(content="blackzone_roam", size=20, style="clap_kite")
+    e_b20 = Engine(content="blackzone_roam", size=20, style="brawl")
+    check("T31c Spirithunter in clap/clap_kite pools at 20, out of brawl; "
+          "Bloodletter out (mount-carrier artifact); Galatine Pair pooled",
+          sp in set(e_c20.suggest_pool()) and sp in set(e_ck20.suggest_pool())
+          and sp not in set(e_b20.suggest_pool())
+          and BLOODLETTER not in set(e20.suggest_pool())
+          and "2H_DUALSCIMITAR_UNDEAD" in set(e20.suggest_pool()),
+          f"sp_clap={sp in set(e_c20.suggest_pool())} "
+          f"sp_brawl={sp in set(e_b20.suggest_pool())} "
+          f"bloodletter={BLOODLETTER in set(e20.suggest_pool())}")
+
+    # T31d — E-audit follow-up rulings (owner 2026-08-24): Fists of Avalon's
+    # purge raised to 4 via MASTERSHEET ("fist of ava purge can be a 4")
+    # and it generates at 20 (the 232 area purge-punch, Battle Bracers'
+    # sibling fix); Trinity Spear ruled OUT of large-scale generation —
+    # "no one is doing auto attack damage usually so its never used in
+    # large scale ... only a swap for hitting castle gates or terry
+    # walls ... never as the main weapon in party" — group unfit by cited
+    # override, gang keeps the derived verdict (the ruling names large
+    # scale only), manual picks score as always.
+    fists, trident = "2H_KNUCKLES_AVALON", "2H_TRIDENT_UNDEAD"
+    e7bz = Engine(content="blackzone_roam", size=7)
+    check("T31d E-audit rulings: Fists of Avalon purge 4 + in 20-man pools; "
+          "Trinity Spear out of 20-man generation, open at gang",
+          E.weapons[fists]["capabilities"].get("purge") == 4
+          and fists in set(e20.suggest_pool())
+          and trident not in set(e20.suggest_pool())
+          and trident in set(e7bz.suggest_pool())
+          and e20.weapons[trident]["style_fit"]["fit"]["brawl"]["group"] == "unfit",
+          f"purge={E.weapons[fists]['capabilities'].get('purge')} "
+          f"fists@20={fists in set(e20.suggest_pool())} "
+          f"trident@20={trident in set(e20.suggest_pool())} "
+          f"trident@7={trident in set(e7bz.suggest_pool())}")
 
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)

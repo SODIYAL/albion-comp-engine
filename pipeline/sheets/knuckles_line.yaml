@@ -23,6 +23,11 @@
     - {cap: purge,         score: 3, evidence: TRIPLECOMBO_DIVEKICK}  # Purifying Fist strips ALL buffs — the true-purge benchmark above shield-break (owner ruling 2026-08-21; was 2)
     - {cap: mobility,      score: 4, evidence: TRIPLECOMBO_DIVEKICK}  # dive + Q dashes
     - {cap: disengage,     score: 2, evidence: TRIPLECOMBO_DIVEKICK}
+    # 2026-08-24 E-audit (round 7 method: read the E, score what it states):
+    # Purifying Fist "deals 232 physical damage ... all enemies hit" — the
+    # E's AREA damage was never scored, same gap as its sibling Battle
+    # Bracers (Falcon Smash 264/r4 -> burst_aoe 4). 232 area punch = 4.
+    - {cap: burst_aoe,     score: 4, evidence: TRIPLECOMBO_DIVEKICK}  # 2nd combo: 232 phys, area punch, all enemies hit
 
 - weapon: 2H_KNUCKLES_CRYSTAL        # Forcepulse Bracers — pulse-stack burster
   curated_as_of: 2026-08-12

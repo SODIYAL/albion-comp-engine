@@ -49,6 +49,11 @@
     - {cap: buff_allies,   score: 3, evidence: TRIDENTTHROW}     # soul mist buffs allies inside
     - {cap: peel,          score: 2, evidence: TRIDENTTHROW}     # root the divers
     - {cap: disengage,     score: 2, evidence: TRIDENTTHROW}     # immune leap out
+    # 2026-08-24 E-audit (round 7 method): the impact's own damage was
+    # never scored — "Roots all enemies in a 3.0 radius on impact ...
+    # Deals 191.65 physical damage." Modest area burst beside the root:
+    # 191/r3 = 2 (Battle Bracers 264/r4 = 4 is the calibration point).
+    - {cap: burst_aoe,     score: 2, evidence: TRIDENTTHROW}     # 191.65 phys to the rooted radius on impact
 
 - weapon: MAIN_SPEAR                 # Spear (1H) — dash-through skirmisher
   curated_as_of: 2026-08-12

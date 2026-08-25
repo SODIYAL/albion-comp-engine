@@ -6,7 +6,7 @@
    "guild_builds: present (shipped verbatim)",
    "mechanics: aoe_geometry",
    "scoring: capability_synergies, meta_prior, score_unit, weights",
-   "sheets: 2 score override(s) on 2 weapon(s)"
+   "sheets: 3 score override(s) on 3 weapon(s)"
   ],
   "note": "release candidate",
   "provenance": {
@@ -31951,6 +31951,9 @@
    "pierce_caps": [
     "resist_shred"
    ]
+  },
+  "negative_recs": {
+   "redundant_gain_max": 0.05
   }
  },
  "scoring": {
@@ -38997,28 +39000,28 @@
     "delivery": "flex",
     "fit": {
      "brawl": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "brawl_clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      }
     },
@@ -43933,13 +43936,13 @@
       "trio": "fits"
      },
      "clap": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "fits",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "fits",
       "trio": "fits"
      },
      "kite": {
@@ -44873,23 +44876,23 @@
       "trio": "fits"
      },
      "brawl_clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      }
     },
@@ -45566,6 +45569,12 @@
   },
   "2H_KNUCKLES_AVALON": {
    "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "TRIPLECOMBO_DIVEKICK"
+    },
     "burst_st": {
      "escalation": {
       "value": 0.08
@@ -45640,6 +45649,7 @@
     }
    },
    "capabilities": {
+    "burst_aoe": 4,
     "burst_st": 2,
     "catch": 2,
     "clump_create": 2,
@@ -45648,7 +45658,8 @@
     "knockback_displace": 2,
     "mobility": 4,
     "peel": 3,
-    "purge": 3,
+    "purge": 4,
+    "ranged_presence": 2,
     "resist_shred": 2,
     "stun": 2,
     "sustained_dps": 4
@@ -45657,6 +45668,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Fists of Avalon",
    "evidence": {
+    "burst_aoe": [
+     "TRIPLECOMBO_DIVEKICK"
+    ],
     "burst_st": [
      "KNUCKLECOMBO"
     ],
@@ -45682,6 +45696,9 @@
      "BACKHAND_KNOCKBACK"
     ],
     "purge": [
+     "TRIPLECOMBO_DIVEKICK"
+    ],
+    "ranged_presence": [
      "TRIPLECOMBO_DIVEKICK"
     ],
     "resist_shred": [
@@ -45724,11 +45741,13 @@
     "slots": [
      [
       {
+       "burst_aoe": 4,
        "disengage": 2,
        "engage": 4,
        "knockback_displace": 2,
        "mobility": 4,
-       "purge": 3
+       "purge": 4,
+       "ranged_presence": 2
       }
      ],
      [
@@ -45761,36 +45780,36 @@
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
-    "damage_scale": "single",
-    "delivery": "melee",
+    "damage_scale": "group",
+    "delivery": "flex",
     "fit": {
      "brawl": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "fits",
       "trio": "fits"
      },
      "brawl_clap": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "fits",
       "trio": "fits"
      },
      "clap": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "fits",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "fits",
       "trio": "fits"
      },
      "kite": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "fits",
       "trio": "fits"
      }
     },
-    "utility_carrier": true
+    "utility_carrier": false
    },
    "unique_name": "2H_KNUCKLES_AVALON"
   },
@@ -46900,6 +46919,7 @@
     }
    },
    "capabilities": {
+    "burst_aoe": 4,
     "burst_st": 4,
     "catch": 4,
     "clump_create": 2,
@@ -46916,6 +46936,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Battle Bracers",
    "evidence": {
+    "burst_aoe": [
+     "DIVEPUNCH_RISE"
+    ],
     "burst_st": [
      "KNUCKLECOMBO"
     ],
@@ -46976,6 +46999,7 @@
     "slots": [
      [
       {
+       "burst_aoe": 4,
        "catch": 4,
        "disengage": 4,
        "engage": 4,
@@ -47008,17 +47032,17 @@
    "source": "sheets/battle_bracers.yaml",
    "status": "curated",
    "style_fit": {
-    "damage_scale": "single",
+    "damage_scale": "group",
     "delivery": "melee",
     "fit": {
      "brawl": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "fits",
       "trio": "fits"
      },
      "brawl_clap": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "fits",
       "trio": "fits"
      },
      "clap": {
@@ -47032,12 +47056,12 @@
       "trio": "fits"
      },
      "kite": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "unfit",
+      "group": "unfit",
       "trio": "fits"
      }
     },
-    "utility_carrier": true
+    "utility_carrier": false
    },
    "unique_name": "2H_KNUCKLES_SET2"
   },
@@ -50744,27 +50768,27 @@
     "fit": {
      "brawl": {
       "gang": "situational",
-      "group": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "brawl_clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      }
     },
@@ -52110,6 +52134,10 @@
      "radius": 3.0,
      "spell": "TRIDENTTHROW"
     },
+    "burst_aoe": {
+     "radius": 3.0,
+     "spell": "TRIDENTTHROW"
+    },
     "catch": {
      "radius": 3.0,
      "spell": "TRIDENTTHROW"
@@ -52144,11 +52172,13 @@
    },
    "capabilities": {
     "buff_allies": 3,
+    "burst_aoe": 2,
     "catch": 4,
     "disengage": 2,
     "engage": 4,
     "mobility": 4,
     "peel": 2,
+    "ranged_presence": 2,
     "root": 4,
     "self_sustain": 2,
     "slow": 2,
@@ -52159,6 +52189,9 @@
    "display_name": "Trinity Spear",
    "evidence": {
     "buff_allies": [
+     "TRIDENTTHROW"
+    ],
+    "burst_aoe": [
      "TRIDENTTHROW"
     ],
     "catch": [
@@ -52174,6 +52207,9 @@
      "TRIDENTTHROW"
     ],
     "peel": [
+     "TRIDENTTHROW"
+    ],
+    "ranged_presence": [
      "TRIDENTTHROW"
     ],
     "root": [
@@ -52218,11 +52254,13 @@
      [
       {
        "buff_allies": 3,
+       "burst_aoe": 2,
        "catch": 4,
        "disengage": 2,
        "engage": 4,
        "mobility": 4,
        "peel": 2,
+       "ranged_presence": 2,
        "root": 4
       }
      ],
@@ -52248,36 +52286,36 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
-    "damage_scale": "single",
-    "delivery": "melee",
+    "damage_scale": "group",
+    "delivery": "flex",
     "fit": {
      "brawl": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "unfit",
       "trio": "fits"
      },
      "brawl_clap": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "unfit",
       "trio": "fits"
      },
      "kite": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "unfit",
       "trio": "fits"
      }
     },
-    "utility_carrier": true
+    "utility_carrier": false
    },
    "unique_name": "2H_TRIDENT_UNDEAD"
   },
@@ -52667,27 +52705,27 @@
     "fit": {
      "brawl": {
       "gang": "situational",
-      "group": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "brawl_clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      }
     },
@@ -54819,27 +54857,27 @@
     "fit": {
      "brawl": {
       "gang": "situational",
-      "group": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "brawl_clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "unfit",
       "trio": "fits"
      }
     },

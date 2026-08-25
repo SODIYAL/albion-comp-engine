@@ -7,6 +7,15 @@
 # and a stun-punch combo. The most mobile melee kit curated so far.
 # Backhand Strike's wall-slam bonus damage and Counter's reflect have no
 # capability axis — noted, unscored.
+#
+# 2026-08-24 (round 7, observed-family reconciliation): the E's IMPACT
+# DAMAGE was never scored — DIVEPUNCH_RISE's own text: "Deals physical
+# damage within a 4 radius upon impact" (264 vs players). Owner: "battle
+# bracers is not single target, it damages all people it lands on."
+# The gap cascaded: no E damage -> derive_style_fit read the weapon as a
+# single-scale carrier -> generation-barred at 10+, contradicting the
+# killboard (fielded in 84% of the observed ZvZ family's cohorts, 13
+# orgs). burst_aoe 4 = moderate AoE burst, the Realmbreaker-E class.
 
 - weapon: 2H_KNUCKLES_SET2           # Battle Bracers — combo brawler
   curated_as_of: 2026-08-12   # staleness check vs out/patch_history.json
@@ -22,3 +31,4 @@
     - {cap: disengage,     score: 4, evidence: DIVEPUNCH_RISE}   # the float IS the escape window
     - {cap: catch,         score: 4, evidence: DIVEPUNCH_RISE}   # Q: Dragon Leap; W: Triple Kick drag
     - {cap: burst_st,      score: 4, evidence: KNUCKLECOMBO}     # W: 30+153 punch combo; Q: Create Opening (QW)
+    - {cap: burst_aoe,     score: 4, evidence: DIVEPUNCH_RISE}   # E impact: 264 phys in a 4 radius (round 7 fix)

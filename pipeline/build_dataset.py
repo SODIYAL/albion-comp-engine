@@ -417,6 +417,23 @@ DMG_CARRIER_MIN = 4                              # flat damage points
 # Staff's 5-radius Flame Tornado is a DoT zone — still a group tool).
 # Battleaxe's 1.5-radius Axe Throw stays single.
 GROUP_AOE_MIN_RADIUS = 3.0
+# Weak-group-E rule (owner ruling 2026-08-24, round 7): "dps weapons that
+# have low damage AND add nothing to the group" are trio-class even when
+# the E's footprint is technically an area — "the AND is important, like
+# heavy mace has low damage on its e but it silences enemy group so is
+# really useful in group setting." A group-scale dps E does its job when
+# its damage reaches E_DMG_JOB_MIN sheet points (owner-calibrated:
+# Energy Shaper "super high damage ... great in large group fights" and
+# Greataxe "its e can hit everyone in its vicinity ... it's okay" both sit
+# at 4 and stay), OR when the E carries one REAL group tool — a
+# UTILITY_EXEMPT/interrupt cap at E_UTILITY_TOOL_MIN+ (Carrioncaller's
+# heal cut 4, Frost Staff's root 6; scattered 2-point dabs do not rescue,
+# the Double-Bladed-Staff class the owner graded below the mace standard).
+# Self-only effects (mobility, disengage, self_sustain) never rescue.
+# PROVISIONAL — both constants reviewable in out/style_fit_report.json.
+E_DMG_JOB_MIN = 4
+E_UTILITY_TOOL_MIN = 4
+E_GROUP_UTILITY_CAPS = UTILITY_EXEMPT_CAPS + ("interrupt",)
 
 
 def load_style_overrides():
@@ -470,12 +487,23 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
         slots = lo.get("slots") or []
         spells = lo.get("slot_spells") or []
         e_spells, e_reach, e_group = [], 0.0, False
+        e_dmg_pts, e_util_max = 0, 0
         for i, slot in enumerate(slots):
             if i >= len(names) or names[i] != "e":
                 continue
             for j, bundle in enumerate(slot):
+                # E group utility reads EVERY e bundle (a utility-only E
+                # still carries its tool); the damage facts below only the
+                # damage-bearing ones
+                for c in E_GROUP_UTILITY_CAPS:
+                    v = bundle.get(c, 0)
+                    if v > e_util_max:
+                        e_util_max = v
                 if not any(bundle.get(c) for c in DAMAGE_CAPS):
                     continue
+                bd = sum(bundle.get(c, 0) for c in DAMAGE_CAPS)
+                if bd > e_dmg_pts:
+                    e_dmg_pts = bd
                 sid = spells[i][j]
                 facts = spell_index.get(sid) or {}
                 cr = facts.get("cast_range")
@@ -503,9 +531,17 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
         utility_carrier = (carrier and scale == "single"
                           and util_pts >= UTILITY_EXEMPT_MIN)
 
+        # Weak-group-E (round 7): technically-area E, but its damage is
+        # below the job bar AND no single E tool reaches the rescue bar —
+        # trio-class like a single-scale carrier ("low damage and adds
+        # nothing to the group"; the AND protects Heavy-Mace-style
+        # utility Es and every real tool carrier)
+        weak_group_e = (scale == "group"
+                        and e_dmg_pts < E_DMG_JOB_MIN
+                        and e_util_max < E_UTILITY_TOOL_MIN)
         fit = {s: all_bands("fits") for s in STYLE_FIT_STYLES}
         if carrier:
-            if scale == "group":
+            if scale == "group" and not weak_group_e:
                 if delivery == "ranged":
                     for b in ("gang", "group"):
                         fit["brawl"][b] = "situational"
@@ -584,6 +620,8 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                "damage_pts": dmg_pts, "utility_pts": util_pts,
                "role_flexible": flexible, "attackrange": attackrange,
                "e_damage_spells": e_spells, "e_reach": e_reach,
+               "e_damage_pts": e_dmg_pts, "e_utility_max": e_util_max,
+               "weak_group_e": weak_group_e,
                "fit": fit, "basis": basis}
         if override_rec:
             rec["override"] = override_rec

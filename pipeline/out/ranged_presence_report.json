@@ -28,12 +28,14 @@
    "2H_ICECRYSTAL_UNDEAD",
    "2H_ICEGAUNTLETS_HELL",
    "2H_INFERNOSTAFF_MORGANA",
+   "2H_KNUCKLES_AVALON",
    "2H_KNUCKLES_HELL",
    "2H_KNUCKLES_SET3",
    "2H_LONGBOW",
    "2H_QUARTERSTAFF_AVALON",
    "2H_REPEATINGCROSSBOW_UNDEAD",
    "2H_SKULLORB_HELL",
+   "2H_TRIDENT_UNDEAD",
    "2H_TWINSCYTHE_HELL",
    "MAIN_1HCROSSBOW",
    "MAIN_ARCANESTAFF_UNDEAD",
@@ -692,6 +694,22 @@
    ],
    "status": "granted"
   },
+  "2H_KNUCKLES_AVALON": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 12.0,
+     "cooldown": "25",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": null,
+     "slot": "e",
+     "spell": "TRIPLECOMBO_DIVEKICK"
+    }
+   ],
+   "status": "granted"
+  },
   "2H_KNUCKLES_HELL": {
    "decisions": [
     {
@@ -757,6 +775,22 @@
      "radius": 4.0,
      "slot": "e",
      "spell": "BLAZING_GEYSER"
+    }
+   ],
+   "status": "not_granted"
+  },
+  "2H_KNUCKLES_SET2": {
+   "decisions": [
+    {
+     "basis": "structural_below_threshold",
+     "cast_range": 0.0,
+     "cooldown": "0",
+     "delivery": "self",
+     "granted": false,
+     "max_targets": null,
+     "radius": null,
+     "slot": "e",
+     "spell": "DIVEPUNCH_RISE"
     }
    ],
    "status": "not_granted"
@@ -938,6 +972,22 @@
      "radius": 6.0,
      "slot": "e",
      "spell": "SKULLCURSE"
+    }
+   ],
+   "status": "granted"
+  },
+  "2H_TRIDENT_UNDEAD": {
+   "decisions": [
+    {
+     "basis": "curated_burst_aoe+structural_range",
+     "cast_range": 12.0,
+     "cooldown": "30",
+     "delivery": "ground",
+     "granted": true,
+     "max_targets": null,
+     "radius": 3.0,
+     "slot": "e",
+     "spell": "TRIDENTTHROW"
     }
    ],
    "status": "granted"

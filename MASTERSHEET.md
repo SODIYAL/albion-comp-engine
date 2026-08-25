@@ -200,6 +200,13 @@ MAIN_ROCKMACE_KEEPER:          # Bedrock Mace  (1-7 scale)
 2H_IRONCLADEDSTAFF:            # Iron-clad Staff
   anti_dive: 2
 
+# Expert ruling 2026-08-24 (round 7 E-audit follow-up): "fist of ava purge
+# can be a 4." Purifying Fist strips ALL buffs from ALL enemies hit inside
+# a 232-damage area punch — the true-purge benchmark delivered as a dive
+# bomb, above the sheet's 3.
+2H_KNUCKLES_AVALON:            # Fists of Avalon
+  purge: 4
+
 # 2H_TWINSCYTHE_HELL:          # Soulscythe
 #   knockback_displace: 4      # the line knockup is undervalued at 2
 # 2H_DOUBLEBLADEDSTAFF:
