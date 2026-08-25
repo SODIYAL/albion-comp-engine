@@ -64,8 +64,19 @@ The first command rewrites `pipeline/out/weapon_usage_v2.json` with the new `coh
 - selected abilities remain unknown;
 - no win/loss or causal effectiveness claim is made;
 - affinity is suppressed until the current bucket has at least eight usable cohorts;
+- **mount-carrier bias** (owner-confirmed 2026-08-24, the Bloodletter case): battlemount pilots hold a high-mobility weapon they never fight with, so such weapons ride into cohort baskets without being comp slots — weapon presence in a cohort is "was held by an observed combatant", not "was a fielded comp pick";
 - all killboard information remains display-only.
 
-## Next step after validation
+## Partial-roster neighbours — shipped 2026-08-24
 
-Once the cohort sample is large enough, the same baskets can support a stronger **partial-roster neighbour** view: show a few anonymized observed organization rosters that overlap the user's selected weapons, rather than only aggregating the candidate weapons across those neighbours. That should be reviewed before any clustering or empirical scoring work.
+The neighbour view described below is now live (`cohortNeighbours()` in `dashboard/_app.js`, covered by `tests/test_display_math.js`): the contextual strip shows up to three anonymized observed organization baskets that share at least two of the selected unique weapons, ranked by shared count, then Jaccard similarity over unique weapons (a huge alliance basket ranks below an exact roster echo), then original basket order. Shared picks are highlighted, the remaining weapons render as muted dossier links (capped at 14 icons with a "+N more" tail), and the full matched-cohort count is stated. All the limitations above apply verbatim; the copy still says "observed rosters", never "party" or "winning comp".
+
+## Recurring observed families — shipped 2026-08-24 (owner-directed)
+
+The owner directed the clustering step in-chat on 2026-08-24; it shipped display-only as **anchor-pair families** (`pipeline/build_cohort_families.py` → `out/cohort_families.json`, embedded as `FAMILIES`, rendered as "Recurring observed cores" in both killboard-strip modes).
+
+Whole-roster clustering was measured and rejected for this sample: the baskets are partial observations (most carry 2–5 weapons of a full lineup), cross-org basket Jaccard has median 0.0 / p90 0.17, and the lift-gated co-occurrence graph collapses into one connected component at every threshold tried — distance clusters here would separate observation coverage, not compositions. Pairs are the largest itemset with real support, so a family is the strongest recurring pair (≥5 cohorts, ≥3 distinct organizations, ≥3 distinct battles, pair lift ≥1.2), its cohorts (removed from the pool — families are disjoint, counts never double-count), and the weapons observed in ≥40% of those cohorts with their shares. All thresholds are PROVISIONAL constants in the builder; revisit them with a larger sample, not by loosening gates until families appear (the small bucket yields zero families and must stay empty-handed until the data says otherwise).
+
+The artifact carries counts only — organization and battle identifiers stay in `weapon_usage_v2.json` — and `tests/test_cohort_families.py` pins determinism, disjointness, the gates, and the no-identifier rule.
+
+**Still parked behind review**: ANY empirical/scoring integration. Neighbours and families aggregate nothing into a score, a suggestion pool, or the forge, and must stay that way without an explicit owner ruling.

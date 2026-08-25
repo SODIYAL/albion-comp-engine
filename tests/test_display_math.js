@@ -37,6 +37,7 @@ const ctx = {
   party: [],
   PLAN: null,           // assigned below, mirrors _app.js semantics
   USAGE: {},
+  FAMILIES: {},
   WEAPONS: {},
   console,
 };
@@ -46,6 +47,8 @@ vm.runInContext(label[0], ctx);
 vm.runInContext(extract("usageBucket"), ctx);
 vm.runInContext(extract("cohortContext"), ctx);
 vm.runInContext(extract("cohortAffinity"), ctx);
+vm.runInContext(extract("cohortNeighbours"), ctx);
+vm.runInContext(extract("familyRows"), ctx);
 
 let pass = 0, fail = 0;
 function check(name, cond, detail) {
@@ -150,6 +153,78 @@ function setUsage(baskets) {
   check("empty party or missing cohort data yields null",
         empty === null && noData === null,
         `empty=${JSON.stringify(empty)} noData=${JSON.stringify(noData)}`);
+}
+
+/* 7 — partial-roster neighbours (roadmap item 6): baskets sharing >=2 of
+   the selected weapons, ranked shared desc then Jaccard desc then basket
+   order. Party [A,B]: r1 [A,B] and r2 [A,B] are exact echoes (Jaccard 1),
+   r5 [A,B,C] shares both but adds C (Jaccard 2/3) and its `others` names
+   the completion. Hand-computed against BASKETS. */
+{
+  setUsage(BASKETS);
+  ctx.PLANNED = 20; ctx.party = ["A", "B"];
+  const nb = run("cohortNeighbours()");
+  check("neighbours: three >=2-overlap baskets, exact echoes first, then r5",
+        nb && nb.matched === 3 && nb.rows.length === 3
+        && nb.rows[0].shared === 2 && nb.rows[0].jaccard === 1
+        && nb.rows[1].jaccard === 1
+        && Math.abs(nb.rows[2].jaccard - 2 / 3) < 1e-12
+        && nb.rows[2].others.join(",") === "C",
+        JSON.stringify(nb && nb.rows));
+}
+
+/* 8 — a single-weapon party has no roster shape to echo; unknown weapon
+   keys are stripped BEFORE the overlap count (a basket [A, ZZZ] must not
+   match a pair through a retired key) */
+{
+  ctx.party = ["A"];
+  const single = run("cohortNeighbours()");
+  ctx.party = ["A", "ZZZ"];
+  const ghost = run("cohortNeighbours()");
+  check("pairs only: 1 selected weapon -> null; unknown keys never match",
+        single === null && ghost === null,
+        `single=${JSON.stringify(single)} ghost=${JSON.stringify(ghost)}`);
+}
+
+/* 9 — the view caps at 3 rows but reports the full match count, and the
+   duplicate-weapon roster dedupes before matching (2x A + B is the pair
+   A,B — duplicates must not inflate overlap or the shared denominator) */
+{
+  setUsage(BASKETS.concat([["A", "B", "D"]]));   // a 4th >=2-overlap basket
+  ctx.party = ["A", "A", "B"];
+  const nb = run("cohortNeighbours()");
+  check("top-3 slice with full matched count; duplicates dedupe",
+        nb && nb.matched === 4 && nb.rows.length === 3
+        && nb.selected.length === 2
+        && nb.rows.every(r => r.shared === 2),
+        JSON.stringify(nb && {matched: nb.matched, n: nb.rows.length}));
+}
+
+/* 10 — recurring observed families (roadmap item 7): rows key to the
+   planned bucket; `anchored` demands BOTH anchor weapons in the roster;
+   `mine` marks the family pieces the roster carries (catalog-filtered) */
+{
+  ctx.FAMILIES = { large: [
+    { anchor: ["A", "B"], cohorts: 9, orgs: 5, battles: 6, lift: 2.1,
+      cast: [{ weapon: "C", share: 0.6 }, { weapon: "D", share: 0.4 }] },
+    { anchor: ["D", "E"], cohorts: 5, orgs: 3, battles: 4, lift: 1.5, cast: [] },
+  ], mid: [], small: [] };
+  setUsage(BASKETS);   // resets WEAPONS to A..E
+  ctx.PLANNED = 20; ctx.party = ["A", "B", "C", "ZZZ"];
+  const fr = run("familyRows()");
+  check("family match: anchored when both anchors held; mine lists carried "
+        + "pieces; unknown roster keys ignored",
+        fr && fr.length === 2
+        && fr[0].anchored === true && fr[0].mine.join(",") === "A,B,C"
+        && fr[1].anchored === false && fr[1].mine.length === 0,
+        JSON.stringify(fr));
+  ctx.PLANNED = 8;   // mid bucket -> empty family list -> null
+  const empty = run("familyRows()");
+  ctx.PLANNED = 20; ctx.FAMILIES = undefined;
+  const missing = run("typeof FAMILIES === 'undefined' ? familyRows() : 'x'");
+  check("empty bucket or missing FAMILIES embed yields null, never a throw",
+        empty === null && missing === null,
+        `empty=${JSON.stringify(empty)} missing=${JSON.stringify(missing)}`);
 }
 
 console.log(`\n${pass}/${pass + fail} display-math tests passed`);

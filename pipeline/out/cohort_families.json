@@ -1,0 +1,158 @@
+{
+ "buckets": {
+  "large": [
+   {
+    "anchor": [
+     "2H_AXE_AVALON",
+     "2H_KNUCKLES_SET3"
+    ],
+    "battles": 11,
+    "cast": [
+     {
+      "share": 0.842,
+      "weapon": "2H_KNUCKLES_SET2"
+     },
+     {
+      "share": 0.737,
+      "weapon": "MAIN_HOLYSTAFF_AVALON"
+     },
+     {
+      "share": 0.684,
+      "weapon": "2H_HARPOON_HELL"
+     },
+     {
+      "share": 0.632,
+      "weapon": "2H_ICECRYSTAL_UNDEAD"
+     },
+     {
+      "share": 0.526,
+      "weapon": "2H_DUALSCIMITAR_UNDEAD"
+     },
+     {
+      "share": 0.421,
+      "weapon": "2H_DUALMACE_AVALON"
+     },
+     {
+      "share": 0.421,
+      "weapon": "2H_MACE"
+     },
+     {
+      "share": 0.421,
+      "weapon": "MAIN_MACE"
+     },
+     {
+      "share": 0.421,
+      "weapon": "MAIN_RAPIER_MORGANA"
+     }
+    ],
+    "cohorts": 19,
+    "lift": 2.37,
+    "orgs": 13
+   },
+   {
+    "anchor": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     "2H_ICECRYSTAL_UNDEAD"
+    ],
+    "battles": 6,
+    "cast": [
+     {
+      "share": 0.429,
+      "weapon": "2H_SHAPESHIFTER_KEEPER"
+     }
+    ],
+    "cohorts": 7,
+    "lift": 2.71,
+    "orgs": 6
+   },
+   {
+    "anchor": [
+     "2H_LONGBOW",
+     "MAIN_MACE"
+    ],
+    "battles": 6,
+    "cast": [],
+    "cohorts": 6,
+    "lift": 1.87,
+    "orgs": 6
+   },
+   {
+    "anchor": [
+     "2H_LONGBOW",
+     "2H_POLEHAMMER"
+    ],
+    "battles": 4,
+    "cast": [],
+    "cohorts": 6,
+    "lift": 3.16,
+    "orgs": 5
+   },
+   {
+    "anchor": [
+     "2H_MACE",
+     "MAIN_HOLYSTAFF_AVALON"
+    ],
+    "battles": 5,
+    "cast": [
+     {
+      "share": 0.4,
+      "weapon": "2H_DUALAXE_KEEPER"
+     },
+     {
+      "share": 0.4,
+      "weapon": "2H_DUALMACE_AVALON"
+     },
+     {
+      "share": 0.4,
+      "weapon": "MAIN_HAMMER"
+     }
+    ],
+    "cohorts": 5,
+    "lift": 2.21,
+    "orgs": 5
+   }
+  ],
+  "mid": [
+   {
+    "anchor": [
+     "2H_LONGBOW",
+     "MAIN_HOLYSTAFF_AVALON"
+    ],
+    "battles": 5,
+    "cast": [
+     {
+      "share": 0.4,
+      "weapon": "2H_FIRE_RINGPAIR_AVALON"
+     },
+     {
+      "share": 0.4,
+      "weapon": "2H_KNUCKLES_SET2"
+     },
+     {
+      "share": 0.4,
+      "weapon": "2H_SCYTHE_HELL"
+     }
+    ],
+    "cohorts": 5,
+    "lift": 2.67,
+    "orgs": 3
+   }
+  ],
+  "small": []
+ },
+ "generated_from": "2026-08-22 15:14 UTC",
+ "params": {
+  "cast_share": 0.4,
+  "min_battles": 3,
+  "min_cohorts": 5,
+  "min_lift": 1.2,
+  "min_orgs": 3
+ },
+ "semantics": "Recurring observed cores mined from organization cohorts: an anchor pair seen together across multiple orgs and battles, with the weapons frequently observed alongside. Cohorts are Alliance/Guild kill-feed observations, NOT parties; counts only, no identifiers; display evidence only \u2014 never a scoring input.",
+ "server": "us",
+ "unassigned": {
+  "large": 68,
+  "mid": 91,
+  "small": 98
+ }
+}

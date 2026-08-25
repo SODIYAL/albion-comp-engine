@@ -243,6 +243,24 @@ def main():
                     for c in rows]
                 for b, rows in usage["cohorts"].items()}
             usage.pop("cohorts", None)
+    # Recurring observed families (roadmap item 7, build_cohort_families.py).
+    # The artifact already carries counts only — no org or battle ids — so
+    # the whole bucket table inlines; same stale-key rule as the strip: a
+    # family whose anchor the catalog cannot render is dropped, cast rows
+    # with unknown keys are filtered. Display evidence only.
+    families = {}
+    fam_path = os.path.join(PIPE, "out", "cohort_families.json")
+    if os.path.exists(fam_path):
+        with open(fam_path, encoding="utf-8") as f:
+            fam_doc = json.load(f)
+        if isinstance(fam_doc.get("buckets"), dict):
+            families = {
+                b: [dict(fam, cast=[c for c in (fam.get("cast") or [])
+                                    if c.get("weapon") in data["weapons"]])
+                    for fam in fams
+                    if all(w in data["weapons"]
+                           for w in (fam.get("anchor") or []))]
+                for b, fams in fam_doc["buckets"].items()}
 
     # Parity fixture: run the Python engine over the dashboard's seed party and
     # inline its output, so the client asserts against the real engine on every
@@ -292,6 +310,7 @@ def main():
            # inside DATASET; a second copy cost ~190 KB of page weight (§A)
            f"const ITEM_STATS = DATASET.item_stats || {{}};\n"
            f"const USAGE = {js(usage)};\n"
+           f"const FAMILIES = {js(families)};\n"
            f"const PARITY_EXPECTED = {js(expected)};\n{loadout_js}\n{app}\n{decision_js}</script>\n"
            f"</body>\n</html>\n")
     path = os.path.join(DASH, "index.html")
