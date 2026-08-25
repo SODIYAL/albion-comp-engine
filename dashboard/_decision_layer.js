@@ -71,22 +71,98 @@
 
   /* Fight chain (roadmap item 1, 2026-08-23): the fight as the caller's
      playstyle sequences it, stage by stage — ENG.fightChain rendered
-     verbatim, gradings from the comp-fitted targets, display only. */
+     verbatim, gradings from the comp-fitted targets, display only.
+     2026-08-24: stages are clickable — the fold lists WHICH equipped
+     spells supply each stage (engine `sources`, the same resolved
+     loadouts scoring sums), and the improves line names its terms so a
+     stage that wins on summed caps is reconcilable with the gain tiles. */
+  let CHAIN_OPEN = null;
+  function chainSpellName(src){
+    if (!src.spell) return "kit";
+    const pool = ((typeof SPELLS !== "undefined" && SPELLS[src.weapon]) || {})[src.slot] || [];
+    for (const e of pool) if (e[0] === src.spell) return e[1];
+    return src.spell;
+  }
+  function chainSources(stage){
+    if (!stage.sources || !stage.sources.length)
+      return `<div class="dl-ch-fold"><span class="dl-kicker">${esc(stage.name)}</span><em>no equipped spell supplies this stage yet</em></div>`;
+    /* group identical (cap, weapon, slot, spell) rows — a 20-man line of
+       Heavy Maces reads "8× Shriek", not eight rows */
+    const byCap = new Map();
+    stage.sources.forEach(s => {
+      const key = `${s.cap}|${s.weapon}|${s.slot}|${s.spell}`;
+      const m = byCap.get(s.cap) || byCap.set(s.cap, new Map()).get(s.cap);
+      const g = m.get(key);
+      if (g) g.n++; else m.set(key, {n: 1, src: s});
+    });
+    const capLines = stage.caps.map(cap => {
+      const m = byCap.get(cap);
+      if (!m) return `<div class="dl-ch-src"><b>${esc(capLabel(cap))}</b><em>nothing equipped supplies this</em></div>`;
+      const parts = Array.from(m.values()).map(({n, src}) => {
+        const slot = src.slot === null ? "kit" : src.slot === "passive" ? "P" : src.slot.toUpperCase();
+        return `<span title="${esc(nameOf(src.weapon))} — ${slot} ${esc(chainSpellName(src))}: ${+src.units.toFixed(1)} unit${src.units.toFixed(1) === "1.0" ? "" : "s"} each">${n > 1 ? n + "× " : ""}${icon(src.weapon, 16)}${slot === "kit" ? "" : ` ${slot}`} ${esc(chainSpellName(src))}</span>`;
+      });
+      return `<div class="dl-ch-src"><b>${esc(capLabel(cap))}</b>${parts.join('<i class="dl-ch-dot">·</i>')}</div>`;
+    });
+    return `<div class="dl-ch-fold"><span class="dl-kicker">${esc(stage.name)} — the buttons this stage is made of</span>${capLines.join("")}</div>`;
+  }
   function chainLine(top){
     if (!party.length || typeof ENG.fightChain !== "function") return "";
     const fc = ENG.fightChain(party, COMBOS_CUR, null, top ? top.w : null);
     if (!fc) return "";
     const styleNm = (DATASET.styles[fc.style] || {}).name || fc.style;
     const seg = fc.stages.map(s =>
-      `<span class="dl-ch ${s.verdict}" title="${esc(s.name)}: ${s.verdict}${
+      `<button class="dl-ch ${s.verdict}${CHAIN_OPEN === s.name ? " open" : ""}" data-chain-stage="${esc(s.name)}" title="${esc(s.name)}: ${s.verdict}${
         s.bar > 0
           ? ` — ${+s.have.toFixed(1)} of ${+s.bar.toFixed(1)} needed (${s.caps.map(c => esc(capLabel(c))).join(", ")})`
-          : " — not demanded by this content"}">${esc(s.name)}</span>`
+          : " — not demanded by this content"} — click to see which spells">${esc(s.name)}</button>`
     ).join(`<span class="dl-ch-arrow">→</span>`);
-    const imp = (fc.improves && top)
-      ? `<span class="dl-ch-imp">this pick strengthens <b>${esc(fc.improves.stage)}</b></span>`
+    const openStage = CHAIN_OPEN !== null
+      ? fc.stages.find(s => s.name === CHAIN_OPEN) : null;
+    /* name the terms only when they add information — a single term whose
+       label echoes the stage name ("Clump (+12.1 Clump)") says nothing */
+    const it = (fc.improves && fc.improves.terms) || [];
+    const impTerms = (it.length > 1
+        || (it.length === 1 && capLabel(it[0].cap).toLowerCase()
+            !== String(fc.improves.stage).toLowerCase()))
+      ? ` <small>(${it.map(t => `+${t.gain.toFixed(1)} ${esc(capLabel(t.cap))}`).join(", ")})</small>`
       : "";
-    return `<div class="dl-chain"><span class="dl-kicker" title="the fight as ${esc(styleNm)} sequences it — graded against the comp-fitted targets; display only">fight chain · ${esc(styleNm)}</span><div class="dl-ch-row">${seg}</div>${imp}</div>`;
+    const imp = (fc.improves && top)
+      ? `<span class="dl-ch-imp">this pick strengthens <b>${esc(fc.improves.stage)}</b>${impTerms}</span>`
+      : "";
+    return `<div class="dl-chain"><span class="dl-kicker" title="the fight as ${esc(styleNm)} sequences it — graded against the comp-fitted targets; display only">fight chain · ${esc(styleNm)}</span><div class="dl-ch-row">${seg}</div>${openStage ? chainSources(openStage) : ""}${imp}</div>`;
+  }
+
+  /* Negative recommendations / redundancy warnings (roadmap item 3,
+     2026-08-24): the "why not" behind the pick — ENG.pickReport is the
+     SIGNED decomposition of the same exact marginal the score already is
+     (its terms reconstruct the score at 1e-9, parity-pinned). This
+     renders it verbatim: saturated capabilities, over-stack costs, the
+     duplicate-copy penalty, verified count-once spell losses. Display
+     only — the engine's Q18 investigation rejected a scoring-side
+     redundancy penalty; the marginal already collapses, this SAYS so. */
+  function whyNotBlock(rec){
+    if (!rec || typeof ENG.pickReport !== "function") return "";
+    const r = pickReport(party, rec.w);
+    const lines = [];
+    if (r.verdict !== "ok")
+      r.caps.filter(x => x.saturated).slice(0, 3).forEach(x => {
+        lines.push(`<li>${esc(capLabel(x.cap))} already ${+x.before.toFixed(1)} / ${x.target.toFixed(1)} — this adds ${x.delta > 0.05 ? "depth, not coverage" : "nothing"}</li>`);
+      });
+    const over = r.caps.reduce((t, x) => t + x.overstack_cost, 0);
+    if (over > 0.05) lines.push(`<li>−${over.toFixed(1)} over-stack cost past the soft cap</li>`);
+    if (r.dup_penalty > 0) lines.push(`<li>−${r.dup_penalty.toFixed(1)} duplicate-copy penalty (free allowance used)</li>`);
+    r.nonstack.forEach(n => {
+      const lost = Object.keys(n.lost).map(c => `${esc(capLabel(c))} ${n.lost[c].toFixed(1)}`).join(", ");
+      lines.push(`<li>${esc(n.name)} counts once for the party — a duplicate loses ${lost}</li>`);
+    });
+    if (!lines.length) return "";
+    const head = r.verdict === "negative"
+      ? "Warning — this pick costs more than it adds"
+      : r.verdict === "redundant"
+        ? "Depth pick — the comp is saturated, it closes no gap"
+        : "What it does not add";
+    return `<div class="dl-whynot ${r.verdict}"><span class="dl-kicker">${head}</span><ul>${lines.join("")}</ul></div>`;
   }
 
   function diagnosisRows(){
@@ -316,9 +392,10 @@
     const altsHtml = alts.length ? `<div class="dl-alts"><span class="dl-kicker">instead — click to add</span><div class="dl-alt-row">${
       alts.map(r => {
         const t0 = explain(party, r.w)[0];
-        return `<button class="dl-alt" data-add="${r.w}" title="${t0 ? `+${t0.d.toFixed(1)} ${esc(capLabel(t0.cap))} — ` : ""}click to add">${icon(r.w, 24)}
+        const dim = r.verdict && r.verdict !== "ok";
+        return `<button class="dl-alt${dim ? " dl-alt-dim" : ""}" data-add="${r.w}" title="${dim ? (r.verdict === "negative" ? "warning: costs more than it adds — " : "depth only, closes no gap — ") : ""}${t0 ? `+${t0.d.toFixed(1)} ${esc(capLabel(t0.cap))} — ` : ""}click to add">${icon(r.w, 24)}
           <span class="dl-alt-nm">${nameOf(r.w)}</span>
-          <span class="dl-alt-sc">${r.score.toFixed(2)}</span></button>`;
+          <span class="dl-alt-sc">${dim ? "◦ " : ""}${r.score.toFixed(2)}</span></button>`;
       }).join("")}</div></div>` : "";
 
     host.innerHTML = `
@@ -329,12 +406,13 @@
       <div class="dl-pick">
         ${needline}
         ${chainLine(top)}
-        <div class="dl-pick-head"><span class="dl-kicker">Best next pick · slot ${Math.min(party.length + 1, HARD_CAP)}</span><span class="dl-score">+${top.score.toFixed(2)} comp score</span></div>
+        <div class="dl-pick-head"><span class="dl-kicker">Best next pick · slot ${Math.min(party.length + 1, HARD_CAP)}</span><span class="dl-score${top.verdict && top.verdict !== "ok" ? " dl-score-dim" : ""}">${top.score >= 0 ? "+" : ""}${top.score.toFixed(2)} comp score${top.verdict === "redundant" ? " · depth only" : top.verdict === "negative" ? " · net cost" : ""}</span></div>
         <div class="dl-weapon">${icon(top.w,72)}<div><button class="nm-btn" data-detail="${top.w}">${nameOf(top.w)}</button><span>${esc(roleOf(top.w, top.combo))}</span></div></div>
         <p>${whySentence(party, top.w)}</p>
         <ul class="dl-gains">${gains}</ul>
         ${observed}
         ${remain}
+        ${whyNotBlock(top)}
         <button class="cb-add dl-add" data-add="${top.w}">Add ${nameOf(top.w)}</button>
         ${altsHtml}
       </div>`;
@@ -357,6 +435,11 @@
     }
   });
   document.addEventListener("click", e => {
+    const ch = e.target.closest && e.target.closest("[data-chain-stage]");
+    if (ch){
+      CHAIN_OPEN = CHAIN_OPEN === ch.dataset.chainStage ? null : ch.dataset.chainStage;
+      renderDecisionLayer(); return;
+    }
     const add = e.target.closest && e.target.closest("[data-pool-add]");
     if (add){ PLAYER_POOL.add(add.dataset.poolAdd); POOL_QUERY = ""; renderDecisionLayer(); return; }
     const rm = e.target.closest && e.target.closest("[data-pool-remove]");

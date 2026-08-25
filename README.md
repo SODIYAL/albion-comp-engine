@@ -213,11 +213,11 @@ Near-term product work is focused on making the engine more useful to an actual 
 
 1. ~~add a fight-chain explanation such as Engage → Clump → Pierce → Burst → Secure → Reset~~ — shipped (August 2026): the planner grades the fight stage-by-stage in the playstyle's own sequence and ties the recommended pick to the stage it repairs,
 2. ~~infer composition identity and detect internally conflicted rosters~~ — shipped as a descriptive layer (August 2026): the planner names the playstyle a party is becoming and flags split identities; identity-aware *recommendations* wait on validation,
-3. surface negative recommendations and redundancy warnings,
+3. ~~surface negative recommendations and redundancy warnings~~ — shipped (August 2026): every suggestion surface now carries a negative/redundant verdict from a signed decomposition of the exact pick marginal (the score's own terms, not a new penalty — a scoring-side redundancy term was tried and rejected), and the planner says when a pick or member closes no gap because the comp is saturated,
 4. support locked players/slots and constrained reforging,
 5. save player/guild weapon profiles,
-6. build partial-composition neighbours from the committed cohort sample,
-7. cluster recurring observed composition families,
+6. ~~build partial-composition neighbours from the committed cohort sample~~ — shipped (August 2026): the killboard strip shows the observed organization rosters most like the current selection, shared picks highlighted, display only,
+7. ~~cluster recurring observed composition families~~ — shipped (August 2026) as recurring observed cores: anchor pairs that repeat across organizations and battles, with their frequently observed supporting cast, mined deterministically and shown display-only (whole-roster clustering was measured and rejected — the kill-feed baskets are partial observations, so distance clusters would reflect coverage, not comps),
 8. add enemy-comp / counter-drafting analysis,
 9. build expert blind-validation tooling before allowing empirical evidence to influence recommendation scoring.
 

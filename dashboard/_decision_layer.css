@@ -25,6 +25,18 @@
 .dl-ch-arrow{color:var(--ink-3);font-size:10px}
 .dl-ch-imp{display:block;margin-top:6px;font-family:var(--mono);font-size:10px;color:var(--brass)}
 .dl-ch-imp b{color:var(--brass-bright)}
+.dl-ch-imp small{color:var(--ink-3);font-size:9.5px}
+/* stage chips are buttons since 2026-08-24 (click -> spell sources fold);
+   the verdict classes above carry the visuals, this resets button chrome */
+button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;line-height:inherit}
+.dl-ch.open{outline:1px solid var(--brass);outline-offset:1px}
+.dl-ch-fold{margin-top:8px;padding:8px 10px;border-radius:9px;border:1px solid var(--rule-2);background:var(--sunk)}
+.dl-ch-fold em{display:block;font-style:normal;font-size:10.5px;color:var(--ink-3);margin-top:3px}
+.dl-ch-src{display:flex;align-items:center;flex-wrap:wrap;gap:4px 6px;margin-top:5px;font-size:11px;color:var(--ink-2)}
+.dl-ch-src b{color:var(--ink-1);font-weight:600;margin-right:2px}
+.dl-ch-src>span{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:9.5px;white-space:nowrap}
+.dl-ch-src .icon{vertical-align:middle}
+.dl-ch-dot{font-style:normal;color:var(--ink-3)}
 /* kill pressure (identity Phase D): the caller's three-light checklist */
 .dl-kill{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:6px}
 .dl-kill .dl-kicker{display:inline;margin-right:2px}
@@ -49,6 +61,17 @@
 .dl-pick p{font-size:13px;line-height:1.55;color:var(--ink-2);margin:7px 0 10px}.dl-pick p em{color:var(--brass-bright);font-style:normal;font-weight:600}
 .dl-gains{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.dl-gains li{background:var(--sunk);border:1px solid var(--rule);border-radius:9px;padding:7px 8px;font-size:11px;color:var(--ink-2)}.dl-gains b{color:var(--ok-bright);font-family:var(--mono);margin-right:4px}.dl-gains span{display:block;color:var(--ink-3);font-family:var(--mono);font-size:9.5px;margin-top:2px}
 .dl-remain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px}.dl-remain>span:not(.dl-kicker){font-family:var(--mono);font-size:9.5px;padding:3px 7px;border-radius:99px;border:1px solid rgba(255,84,112,.28);color:var(--gap);background:var(--gap-wash)}.dl-remain .dl-kicker{width:100%}.dl-remain.clear>span:not(.dl-kicker){color:var(--ok-bright);border-color:rgba(35,191,110,.25);background:rgba(35,191,110,.07)}
+/* why-not block (roadmap item 3): the signed decomposition's negative and
+   saturated terms — amber for a depth pick, red when the pick nets a cost */
+.dl-whynot{margin-top:10px;padding:8px 10px;border-radius:9px;border:1px solid rgba(232,160,19,.30);background:rgba(232,160,19,.06)}
+.dl-whynot .dl-kicker{color:var(--amber)}
+.dl-whynot ul{list-style:none;margin:5px 0 0;padding:0}
+.dl-whynot li{font-size:11px;color:var(--ink-2);line-height:1.5;padding-left:12px;position:relative}
+.dl-whynot li::before{content:"–";position:absolute;left:0;color:var(--amber)}
+.dl-whynot.negative{border-color:rgba(255,84,112,.32);background:var(--gap-wash)}
+.dl-whynot.negative .dl-kicker,.dl-whynot.negative li::before{color:var(--gap)}
+.dl-score-dim{color:var(--amber)}
+.dl-alt-dim{opacity:.62}.dl-alt-dim .dl-alt-sc{color:var(--amber)}
 .dl-add{width:100%;margin-top:12px}
 .dl-empty{grid-column:1/-1;grid-row:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px}.dl-empty p{margin:4px 0 0;color:var(--ink-2);font-size:12.5px}
 /* The old right flank duplicated the exact questions answered above. Keep its
