@@ -37,6 +37,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
 sys.path.insert(0, HERE)
 from parse_dumps import FLAG_PATTERNS, load  # reuse the prose layer verbatim
+import jsonfmt  # noqa: E402
 
 MAX_DEPTH = 3          # applyspell recursion limit
 APPLY_KEYS = ("applyspell", "pulsingspell", "channelingspell", "spelleffectarea")
@@ -418,8 +419,7 @@ def main():
         "spell_effects": spell_effects,
     }
     os.makedirs(OUT, exist_ok=True)
-    with open(os.path.join(OUT, "effect_catalogue.json"), "w", encoding="utf-8") as f:
-        json.dump(catalogue, f, indent=1, sort_keys=True)
+    jsonfmt.dump(catalogue, os.path.join(OUT, "effect_catalogue.json"))
 
     m = catalogue["_meta"]
     print(f"scanned {m['spells_scanned']} spells "

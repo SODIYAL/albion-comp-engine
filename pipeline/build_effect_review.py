@@ -109,7 +109,7 @@ def main():
 
     os.makedirs(os.path.join(ROOT, "review"), exist_ok=True)
     path = os.path.join(ROOT, "review", "effects.html")
-    with open(path, "w", encoding="utf-8") as f:
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(PAGE.replace("/*__DATA__*/", data))
 
     total_caps = sum(len(d["caps"]) for r in rows for d in r["dirs"])

@@ -40,6 +40,7 @@ spells.json blob on demand, so --patches N downloads N+1 blobs.)
 Usage:  py -3 pipeline/patch_history.py <ao-bin-dumps clone> [--patches 8]
 """
 import json, os, re, subprocess, sys, argparse
+import jsonfmt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
@@ -244,8 +245,7 @@ def main():
         "patches": patches,
     }
     os.makedirs(OUT, exist_ok=True)
-    with open(os.path.join(OUT, "patch_history.json"), "w", encoding="utf-8") as f:
-        json.dump(result, f, indent=1, sort_keys=True)
+    jsonfmt.dump(result, os.path.join(OUT, "patch_history.json"))
     print("wrote out/patch_history.json")
 
 

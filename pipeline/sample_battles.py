@@ -62,6 +62,8 @@ Usage:  py -3 pipeline/sample_battles.py [--battles 200] [--min-players 6]
 import argparse, json, os, re, sys, time, urllib.request, urllib.error
 from datetime import datetime, timezone
 
+import jsonfmt
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
 CACHE = os.path.join(OUT, "battles_cache")
@@ -304,8 +306,7 @@ def main():
         "coverage": round(coverage, 3),
         "unknown_keys_top": dict(sorted(unknown.items(), key=lambda kv: -kv[1])[:20]),
     }
-    with open(os.path.join(OUT, "weapon_usage_v2.json"), "w", encoding="utf-8") as f:
-        json.dump(out, f, indent=1, sort_keys=True)
+    jsonfmt.dump(out, os.path.join(OUT, "weapon_usage_v2.json"))
     print(f"sampled {sampled} battles; weapon attribution {coverage:.0%} "
           f"({total_attr} player-weapon pairs, {swaps} players swapped kits, "
           f"{total_unknown} unknown key, {no_weapon} no weapon)")

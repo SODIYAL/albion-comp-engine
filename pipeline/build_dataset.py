@@ -36,6 +36,7 @@ DEFAULT_VERSION = "2026.08.1"
 
 sys.path.insert(0, HERE)
 from provenance import load_manifest, verify_derived  # noqa: E402
+import jsonfmt  # noqa: E402  (leaf-inline report serializer)
 import mastersheet  # noqa: E402  (MASTERSHEET.md override layer)
 import sheets_lib  # noqa: E402  (tree-pool composition)
 import build_interactions as _inter_mod  # noqa: E402  (adapter versions)
@@ -944,6 +945,35 @@ def resolve_passive_doctrine(doc, gear, problems):
             g["doctrine_passives"] = picks
 
 
+def _fold_sources(bids):
+    """Collapse seat-level build ids ('guide:comp:5', 'guide:party_2:14')
+    into one citation per guide with the seats folded in
+    ('guide (comp:2,5; party_2:14)') — same traceability, one line."""
+    by_guide = {}
+    for bid in sorted(bids):
+        guide, _, rest = bid.partition(":")
+        by_guide.setdefault(guide, []).append(rest)
+    out = []
+    for guide, rests in sorted(by_guide.items()):
+        by_rec = {}
+        for r in rests:
+            if not r:
+                continue
+            rec, _, seat = r.rpartition(":")
+            if rec and seat.isdigit():
+                by_rec.setdefault(rec, []).append(seat)
+            else:
+                by_rec.setdefault(r, [])
+        if not by_rec:
+            out.append(guide)
+            continue
+        parts = [rec + (":" + ",".join(sorted(seats, key=int))
+                        if seats else "")
+                 for rec, seats in sorted(by_rec.items())]
+        out.append(f"{guide} ({'; '.join(parts)})")
+    return out
+
+
 def derive_kit_doctrine(book, gear, problems):
     """Increment 2 kit POOLS, evidence-led (roles-design.md: 'kit = the
     assigned role's uniform, evidence-led — reference builds first'):
@@ -1011,7 +1041,7 @@ def derive_kit_doctrine(book, gear, problems):
                              key=lambda e: (-e["count"], e["id"]))
             kit[slot] = [e["id"] for e in ordered]
             det[slot] = [{"id": e["id"], "count": e["count"],
-                          "sources": sorted(e["sources"])}
+                          "sources": _fold_sources(e["sources"])}
                          for e in ordered]
         if kit:
             r["kit"] = kit
@@ -1505,9 +1535,7 @@ def main():
         .get("e_heal_dedicated_min", 4), nonstack_members)
     roles_book, gear_effects, roles_report, roles_problems = \
         apply_roles(weapons, gear)
-    with open(os.path.join(OUT, "roles_report.json"), "w",
-              encoding="utf-8", newline="\n") as f:
-        json.dump(roles_report, f, indent=1, sort_keys=True)
+    jsonfmt.dump(roles_report, os.path.join(OUT, "roles_report.json"))
     # MetaBattle cross-check (MECHANICS_TODO Q15): weapons real ZvZ builds
     # field must not derive group-band all-unfit — disagreements are the
     # owner's review queue, never silent fixes.

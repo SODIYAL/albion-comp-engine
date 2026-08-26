@@ -35,6 +35,8 @@ import json
 import os
 import sys
 
+import jsonfmt
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
 BUCKETS = ("small", "mid", "large")
@@ -69,12 +71,11 @@ def main():
 
     prior, meta, weapons = build(args.k, args.min)
     out_path = os.path.join(OUT, "meta_prior_usage.json")
-    with open(out_path, "w", encoding="utf-8") as f:
-        json.dump({"meta_prior": prior,
-                   "_source": "weapon_usage_v2.json",
-                   "_shrinkage_k": args.k, "_min_prior": args.min,
-                   "_note": "size-bucketed; NOT auto-wired — see build_meta_prior.py"},
-                  f, indent=1, sort_keys=True)
+    jsonfmt.dump({"meta_prior": prior,
+                  "_source": "weapon_usage_v2.json",
+                  "_shrinkage_k": args.k, "_min_prior": args.min,
+                  "_note": "size-bucketed; NOT auto-wired — see build_meta_prior.py"},
+                 out_path)
 
     for b in BUCKETS:
         p = prior[b]

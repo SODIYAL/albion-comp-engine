@@ -207,7 +207,7 @@ review first). Corrections go through the sheets, never this page.</p>
     outdir = os.path.join(ROOT, "review")
     os.makedirs(outdir, exist_ok=True)
     out = os.path.join(outdir, "magnitude.html")
-    with open(out, "w", encoding="utf-8") as f:
+    with open(out, "w", encoding="utf-8", newline="\n") as f:
         f.write(page)
 
     print("wrote review/magnitude.html — %d rows across %d capabilities" %

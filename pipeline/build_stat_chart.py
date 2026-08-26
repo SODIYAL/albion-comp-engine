@@ -60,6 +60,7 @@ import sheets_lib  # noqa: E402
 from effect_catalogue import (spell_registry, CONDITION_PREFIX,  # noqa: E402
                               GUARD_NODES, NON_EFFECT_TYPE)
 from provenance import snapshot_dir  # noqa: E402
+import jsonfmt  # noqa: E402
 
 MAX_DEPTH = 6
 
@@ -460,19 +461,17 @@ def main():
             else len(group_order),
             -(r["value"] or 0)))
 
-    with open(os.path.join(OUT, "stat_chart.json"), "w",
-              encoding="utf-8") as f:
-        json.dump({"_meta": {
-            "spells_extracted": n_ok, "spells_cited": len(spells),
-            "note": ("base dump numbers — the same IP reference for every "
-                     "weapon; equal-IP comparison equals base comparison"),
-            "tier_model": {
-                "formula": "effective ~ base * (family_ap/100) * 1.0918^((IP-700)/100)",
-                "source": "community-documented (wiki/forum); the dumps carry the per-effect ignoreabilitypowerscaling flags and per-family ability power",
-                "does_not_scale": "percentage effects, durations, distances, and records flagged ignoreabilitypowerscaling (tier-flat in the fact line)"},
-            "family_ability_power": fam_ap},
-            "spells": extracted, "boards": boards},
-            f, indent=1, sort_keys=True)
+    jsonfmt.dump({"_meta": {
+        "spells_extracted": n_ok, "spells_cited": len(spells),
+        "note": ("base dump numbers — the same IP reference for every "
+                 "weapon; equal-IP comparison equals base comparison"),
+        "tier_model": {
+            "formula": "effective ~ base * (family_ap/100) * 1.0918^((IP-700)/100)",
+            "source": "community-documented (wiki/forum); the dumps carry the per-effect ignoreabilitypowerscaling flags and per-family ability power",
+            "does_not_scale": "percentage effects, durations, distances, and records flagged ignoreabilitypowerscaling (tier-flat in the fact line)"},
+        "family_ability_power": fam_ap},
+        "spells": extracted, "boards": boards},
+        os.path.join(OUT, "stat_chart.json"))
 
     # ------------------------------------------------------------- HTML chart
     def esc(s):
@@ -550,7 +549,7 @@ family converts item power unusually well carry an [AP&nbsp;] tag (most are
                 f"<td class='d'>{esc(weapons)}</td></tr>")
         parts.append("</table>")
     out_html = os.path.join(ROOT, "review", "stat_chart.html")
-    with open(out_html, "w", encoding="utf-8") as f:
+    with open(out_html, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(parts))
 
     print(f"extracted {n_ok}/{len(spells)} cited spells; "
