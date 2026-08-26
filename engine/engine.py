@@ -292,6 +292,25 @@ class Engine:
         # burst_st, so resist_shred x burst_st must pay nothing there.
         self._active_syn = [(a, b, bonus) for (a, b, bonus) in self.synergies
                             if a in self.reqs and b in self.reqs]
+        # Hot-path tables (forge profile 2026-08-26): per-cap scoring
+        # constants and per-pair synergy constants resolved once per
+        # context. Pure lookup elimination for _marg_fit_pre/_marg_syn_pre
+        # — every float op keeps the exact operands and order of
+        # _cover_terms/_floor_penalty/_overstack/_pair_value.
+        self._cap_tab = {}
+        for c in self.reqs:
+            f = self.floors.get(c)
+            armed = f is not None and self.size >= f["min_party_size"]
+            self._cap_tab[c] = (
+                self._targets[c], self._softs[c], self._weights[c],
+                self.reqs[c]["weight"],
+                (self._floors_eff[c], f["penalty_mult"]) if armed else None)
+        self._syn_tab = [(a, b, bonus, self._targets[a], self._targets[b])
+                         for (a, b, bonus) in self._active_syn]
+        self._syn_by_cap = {}
+        for p, (a, b, _bonus) in enumerate(self._active_syn):
+            self._syn_by_cap.setdefault(a, []).append(p)
+            self._syn_by_cap.setdefault(b, []).append(p)
         # Viability layer resolved for this content+size (composition.yaml).
         via = self.comp_cfg.get("viability", {}) or {}
         excl = set()
@@ -424,6 +443,7 @@ class Engine:
                     self._band = merged
                     break
         self._extras_cache = {}
+        self._pre_cache = {}
         self._default_cache = {}
         self._gear_cache = {}
         self._ns_cache = {}
@@ -741,6 +761,28 @@ class Engine:
                 extras.append(extra)
             self._extras_cache[weapon] = extras
         return extras
+
+    def _combo_pre(self, weapon):
+        """Precomputed hot-path views of _combo_extras (cached per
+        set_content): per combo, the (cap, gain, cap-table row) items of
+        its in-template nonzero gains, and the sorted active-synergy pair
+        indices the combo can touch. Skipped caps/pairs contribute an
+        exact 0.0 in the originals, so reading these views is
+        value-identical to iterating the full dicts."""
+        pre = self._pre_cache.get(weapon)
+        if pre is None:
+            pre = []
+            for extra in self._combo_extras(weapon):
+                items = [(cap, gain, self._cap_tab[cap])
+                         for cap, gain in extra.items()
+                         if gain and cap in self._cap_tab]
+                ps = set()
+                for cap, gain in extra.items():
+                    if gain:
+                        ps.update(self._syn_by_cap.get(cap) or ())
+                pre.append((items, sorted(ps)))
+            self._pre_cache[weapon] = pre
+        return pre
 
     def _combo_dims(self, weapon):
         """Option count per non-empty slot plus each slot's original index —
@@ -1479,13 +1521,83 @@ class Engine:
                 adj[cap] = adj.get(cap, 0.0) - v + (gain if gain > 0.0 else 0.0)
         return adj if adj is not None else extra
 
+    def _marg_fit_pre(self, s, items):
+        """_marg_fit_from over a _combo_pre item list: the same terms with
+        _cover_terms/_floor_penalty/_overstack inlined against the per-cap
+        table — identical operands in identical order, no per-call
+        target/weight/floor lookups (forge profile 2026-08-26)."""
+        gamma, headroom, omax = self.gamma, self.headroom, self.overstack_max
+        total = 0.0
+        for cap, gain, (target, soft, w, w_base, floor) in items:
+            have = s.get(cap, 0.0)
+            hg = have + gain
+            cov = w * (min(1.0, hg / target) ** gamma
+                       - min(1.0, have / target) ** gamma)
+            hb1 = hb0 = 0.0
+            if headroom > 0.0 and soft > target:
+                span = soft - target
+                if hg > target:
+                    e = hg - target
+                    if e > span:
+                        e = span
+                    hb1 = headroom * w * e / span
+                if have > target:
+                    e = have - target
+                    if e > span:
+                        e = span
+                    hb0 = headroom * w * e / span
+            cov += hb1 - hb0
+            total += cov
+            if floor is not None:
+                fu, pm = floor
+                p0 = pm * w_base * (fu - have) / fu if have < fu else 0.0
+                p1 = pm * w_base * (fu - hg) / fu if hg < fu else 0.0
+                total += p0 - p1
+            if hg > soft or have > soft:
+                scale = soft if soft > 0 else target
+                o1 = o0 = 0.0
+                if hg > soft:
+                    x = (hg - soft) / scale
+                    o1 = omax * w_base * x / (1.0 + x)
+                if have > soft:
+                    x = (have - soft) / scale
+                    o0 = omax * w_base * x / (1.0 + x)
+                total -= o1 - o0
+        return total
+
+    def _marg_syn_pre(self, state, extra, pairs):
+        """_marg_syn_from with extra_j == extra, walking only the pairs the
+        combo touches (_combo_pre): an untouched pair's term is exactly
+        pair_vals[p] - pair_vals[p] == 0.0, so the sum is identical."""
+        total = 0.0
+        s, J, pv = state["s"], state["J"], state["pair_vals"]
+        tab = self._syn_tab
+        for p in pairs:
+            a, b, bonus, ta, tb = tab[p]
+            ea = extra.get(a, 0.0)
+            eb = extra.get(b, 0.0)
+            j = min(ea, eb)
+            j2 = J[p] if J[p] > j else j
+            va = min(s.get(a, 0.0) + ea, ta)
+            vb = min(s.get(b, 0.0) + eb, tb)
+            v = (va if va < vb else vb) - j2
+            total += (bonus * v if v > 0 else 0.0) - pv[p]
+        return total
+
     def _combo_score(self, state, weapon, i, extra):
         """(value, d_fit, d_syn) of ONE combo against a party state — the
         shared inner term of _eval_pick and the forge's constraint-aware
-        variant. Identical float-op order to the original inline loop."""
+        variant. Identical float-op order to the original inline loop; when
+        no non-stacking adjustment applies (adj is extra — the common case)
+        the precomputed _pre views evaluate the same numbers faster."""
         adj = self._nonstack_adjust(state, weapon, i, extra)
-        d_fit = self._marg_fit_from(state["s"], adj)
-        d_syn = self._marg_syn_from(state, adj, extra)
+        if adj is extra:
+            items, pairs = self._combo_pre(weapon)[i]
+            d_fit = self._marg_fit_pre(state["s"], items)
+            d_syn = self._marg_syn_pre(state, extra, pairs)
+        else:
+            d_fit = self._marg_fit_from(state["s"], adj)
+            d_syn = self._marg_syn_from(state, adj, extra)
         return self.alpha * d_fit + self.beta * d_syn, d_fit, d_syn
 
     def _pick_tail(self, state, weapon, best):
