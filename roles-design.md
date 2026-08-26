@@ -82,10 +82,27 @@ owner-graded — reflect shells: 7 of 8 rosters, typically 3 copies);
 and seat-level drops cascade into per-weapon pools. R18 pins it;
 60/60 parity carries the tier strings through both ports.
 
-**Pending**: increment 3 (forge role assignment + owner-graded
-fine-role need profiles — plus grading of the effect-quota table and
-mechanism pairing rules for effect carriers), increment 4 (uptime
-economics).
+**Increment 3 SHIPPED 2026-08-26 — NEED PROFILES gate the forge.**
+The blind round ran first (owner calls collected before any reveal),
+then the owner's directive "what matters is what the data says" drove
+the evidence pass: 8 curated rosters, 139 near-complete killboard
+fight rosters (new sanctioned sampler `pipeline/sample_rosters.py` →
+`out/roster_mixes.json`; wiped sides = least-biased roster snapshots)
+and Wardergrip's guide. Owner-ruled profiles in roles.yaml
+`need_profiles`: engage 2-3 / stopper 1-2 (engage-leaning default —
+the data overruled the owner's stopper-heavy blind call, which
+survives as the territory-defense override 2-4), off-tank <=1, shield
+support 1-3, zone <=1, pierce >=1 and heal-cut >=1 (fielded by 100% /
+92% of live party rosters). Wired in BOTH ports as generation
+constraints riding the predicate channel (seat minima in `pred_min`,
+membership contributions in `_forge_counts`, seat maxima as ctx
+`seat_max`) — armed at 15+, scaled by size/20 half-up, locked members
+count, manual parties always score. F21 pins it; both ports forge
+identical profile-constrained 20-mans.
+
+**Pending**: increment 3b (grading of the effect-quota table +
+mechanism pairing rules for effect carriers, then quota-aware kit
+allocation), increment 4 (uptime economics).
 
 ## The problem (owner observations, both verified)
 

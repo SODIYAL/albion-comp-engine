@@ -432,10 +432,70 @@
         }
       }
     }
+    /* NEED PROFILES (increment 3, owner-ruled 2026-08-26) — mirrors
+       engine.py: fine-seat bands + function coverage minima for the
+       FORGE, scaled by size/reference_size (half-up, the pinned
+       rounding rule) and armed at min_size. SEAT keys count a weapon's
+       PRIMARY menu seat; FUNCTION keys count any primary/secondary
+       membership. Generation-only: manual parties always score. */
+    this._profileMin = {}; this._profileMax = {};
+    this._profileMembers = {}; this._profilePrimary = {};
+    var prof = this.data.need_profiles || {};
+    var hasProf = false;
+    for (var pk0 in prof) { hasProf = true; break; }
+    if (hasProf &&
+        this.size >= ((prof.min_size === undefined) ? 15 : prof.min_size)) {
+      var pRef = (prof.reference_size === undefined) ? 20 : prof.reference_size;
+      var pRules = {}, rk;
+      var pDef = prof.defaults || {};
+      for (rk in pDef) pRules[rk] = pDef[rk];
+      var pOvr = ((prof.overrides || {})[this.content]) || {};
+      for (rk in pOvr) pRules[rk] = pOvr[rk];
+      for (rk in pRules) {
+        var pRule = pRules[rk];
+        if (pRule.min !== undefined) {
+          var pMn = Math.round(pRule.min * this.size / pRef);
+          if (pMn > 0) this._profileMin[rk] = pMn;
+        }
+        if (pRule.max !== undefined)
+          this._profileMax[rk] = Math.round(pRule.max * this.size / pRef);
+      }
+      var PROF_FUNCS = ["pierce", "anti_heal", "purge", "shield_break"];
+      for (var pwk in this.weapons) {
+        var pRec = this.weapons[pwk];
+        var pMenu = pRec.role_menu || [];
+        var pSec = pRec.role_menu_secondary || [];
+        var pContrib = {}, pAny = false;
+        if (pMenu.length && (pMenu[0] in this._profileMin ||
+                             pMenu[0] in this._profileMax)) {
+          pContrib[pMenu[0]] = true; pAny = true;
+        }
+        for (var pfi = 0; pfi < PROF_FUNCS.length; pfi++) {
+          var pf = PROF_FUNCS[pfi];
+          if (!(pf in this._profileMin) && !(pf in this._profileMax)) continue;
+          if (pMenu.indexOf(pf) >= 0 || pSec.indexOf(pf) >= 0) {
+            pContrib[pf] = true; pAny = true;
+          }
+        }
+        if (pAny) this._profileMembers[pwk] = pContrib;
+        if (pMenu.length) this._profilePrimary[pwk] = pMenu[0];
+      }
+    }
     this._extrasCache = {};
     this._gearCache = {};
     this._defaultCache = {};
     this._nsCache = {};
+  };
+
+  CompEngine.prototype._withProfile = function (w, contrib) {
+    /* predicate contribution merged with the weapon's need-profile
+       memberships (mirrors the engine.py frozenset unions). */
+    var pm = this._profileMembers[w];
+    if (!pm) return contrib;
+    var out = {}, k;
+    for (k in contrib) out[k] = true;
+    for (k in pm) out[k] = true;
+    return out;
   };
 
   CompEngine.prototype._stepTable = function (table, size) {
@@ -2284,7 +2344,13 @@
       if (rule.min !== undefined) roleMin[key] = rule.min;
       if (rule.max !== undefined) roleMax[key] = rule.max;
     }
-    return { pool: pool, roleMin: roleMin, roleMax: roleMax, predMin: predMin };
+    /* need-profile minima ride the predicate channel; seat maxima get
+       their own key (mirrors engine.py) */
+    var pk, seatMax = {};
+    for (pk in this._profileMin) predMin[pk] = this._profileMin[pk];
+    for (pk in this._profileMax) seatMax[pk] = this._profileMax[pk];
+    return { pool: pool, roleMin: roleMin, roleMax: roleMax,
+             predMin: predMin, seatMax: seatMax };
   };
 
   CompEngine.prototype._forgeCounts = function (party, combos) {
@@ -2299,6 +2365,8 @@
       roles[r] = (roles[r] || 0) + 1;
       var contrib = this._predContrib(w, combos ? combos[i] : null);
       for (var pn in contrib) preds[pn] = (preds[pn] || 0) + 1;
+      var pmC = this._profileMembers[w];
+      if (pmC) for (var pk2 in pmC) preds[pk2] = (preds[pk2] || 0) + 1;
       var gs = this.groupsOf[w] || [];
       for (var g = 0; g < gs.length; g++) groups[gs[g]] = (groups[gs[g]] || 0) + 1;
     }
@@ -2334,7 +2402,11 @@
     var r = this.roleOf(w);
     var mx = ctx.roleMax[r];
     if (mx !== undefined && (roles[r] || 0) >= mx) return false;
-    return this._forgeMinNeed(ctx, roles, preds, w, this._predPossible(w))
+    var p0 = this._profilePrimary[w];
+    if (p0 !== undefined && ctx.seatMax[p0] !== undefined &&
+        (preds[p0] || 0) >= ctx.seatMax[p0]) return false;
+    return this._forgeMinNeed(ctx, roles, preds, w,
+                              this._withProfile(w, this._predPossible(w)))
            <= slotsLeftAfter;
   };
 
@@ -2350,7 +2422,8 @@
     for (var i = 0; i < extras.length; i++) {
       if (hasPred) {
         var need = this._forgeMinNeed(ctx, beam.roles, beam.preds, w,
-                                      this._predContrib(w, i));
+                                      this._withProfile(
+                                        w, this._predContrib(w, i)));
         if (need > slotsLeftAfter) continue;
       }
       var cs = this._comboScore(state, w, i, extras[i]);
@@ -2489,10 +2562,10 @@
              feasible: feasible, filler: filler, held: held, locked: fixed };
   };
 
-  CompEngine.prototype._addOk = function (ctx, counts, roles, groups, w) {
-    /* Copy/group/role-MAX check for adding `w` to a roster whose counts
-       exclude the slot being replaced (mirrors engine.py _add_ok). Minima
-       are enforced through _forgeEvalPick's exact per-combo need. */
+  CompEngine.prototype._addOk = function (ctx, counts, roles, preds, groups, w) {
+    /* Copy/group/role-MAX/seat-MAX check for adding `w` to a roster whose
+       counts exclude the slot being replaced (mirrors engine.py _add_ok).
+       Minima are enforced through _forgeEvalPick's exact per-combo need. */
     if ((counts[w] || 0) + 1 > this._dupGenMax(w)) return false;
     var gs = this.groupsOf[w] || [];
     for (var g = 0; g < gs.length; g++) {
@@ -2502,6 +2575,9 @@
     var r = this.roleOf(w);
     var mx = ctx.roleMax[r];
     if (mx !== undefined && (roles[r] || 0) + 1 > mx) return false;
+    var p0 = this._profilePrimary[w];
+    if (p0 !== undefined && ctx.seatMax[p0] !== undefined &&
+        (preds[p0] || 0) + 1 > ctx.seatMax[p0]) return false;
     return true;
   };
 
@@ -2527,7 +2603,7 @@
         for (var j = 0; j < ctx.pool.length; j++) {
           var w = ctx.pool[j];
           if (w === orig) continue;
-          if (!this._addOk(ctx, fcr[0], fcr[1], fcr[3], w)) continue;
+          if (!this._addOk(ctx, fcr[0], fcr[1], fcr[2], fcr[3], w)) continue;
           var pick = this._forgeEvalPick(ctx, beam, w, 0);
           if (pick === null) continue;
           var d = pick.score - contrib;
@@ -2610,6 +2686,11 @@
               if (ok) {
                 for (var rmx in ctx.roleMax) {
                   if ((roles[rmx] || 0) > ctx.roleMax[rmx]) { ok = false; break; }
+                }
+              }
+              if (ok) {
+                for (var smx in ctx.seatMax) {
+                  if ((preds[smx] || 0) > ctx.seatMax[smx]) { ok = false; break; }
                 }
               }
               if (ok) {

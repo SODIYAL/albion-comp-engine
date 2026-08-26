@@ -4986,6 +4986,48 @@
   "MAIN_HAMMER": ["pierce", "shield_break"],
   "MAIN_RAPIER_MORGANA": ["pierce", "anti_heal"]
  },
+ "need_profiles": {
+  "defaults": {
+   "anti_heal": {
+    "min": 1
+   },
+   "engage_tank": {
+    "max": 3,
+    "min": 2
+   },
+   "off_tank": {
+    "max": 1
+   },
+   "pierce": {
+    "min": 1
+   },
+   "shield_support": {
+    "max": 3,
+    "min": 1
+   },
+   "stopper_tank": {
+    "max": 2,
+    "min": 1
+   },
+   "zone_support": {
+    "max": 1
+   }
+  },
+  "min_size": 15,
+  "overrides": {
+   "territory_defense": {
+    "engage_tank": {
+     "max": 3,
+     "min": 1
+    },
+    "stopper_tank": {
+     "max": 4,
+     "min": 2
+    }
+   }
+  },
+  "reference_size": 20
+ },
  "roles": [
   {
    "class": "frontline",

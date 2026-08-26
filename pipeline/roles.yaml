@@ -385,6 +385,40 @@ kit_doctrine:
         the tankiness-per-CCR channel) for plate off the frontline.
 
 # ---------------------------------------------------------------------------
+# NEED PROFILES (increment 3, owner-ruled 2026-08-26). Fine-seat bands +
+# function coverage the forge must field, on top of the coarse
+# composition/style bands (healers and dps totals stay THERE — never
+# duplicated here). Derived from the blind round + the evidence:
+#   - owner blind calls (VALIDATION.md 2026-08-26 blind round)
+#   - 8 curated near-complete rosters (roles_report kit evidence layer)
+#   - 139 near-complete killboard fight rosters (out/roster_mixes.json,
+#     sample_rosters.py): healer mode 4/20; engage > stopper everywhere
+#     (live 1.95 vs 1.09, curated 2.6 vs 1.8); pierce fielded by 100%
+#     of party rosters, heal-cut 92%, purge 71% (not gated — soft)
+#   - Wardergrip ZvZ guide ("4-5 tanks, 3-4 supports, 4 healers")
+# Owner ruling: engage-leaning default; stopper-heavy is the
+# territory-defense shape ("add more stop tanks to really control
+# people in the terry"). Counts scale by size/reference_size
+# (half-up), arm at min_size. SEAT keys count a weapon's PRIMARY menu
+# seat; FUNCTION keys (pierce/anti_heal/purge/shield_break) count any
+# primary or secondary membership and take `min` only.
+need_profiles:
+  min_size: 15
+  reference_size: 20
+  defaults:
+    engage_tank: {min: 2, max: 3}
+    stopper_tank: {min: 1, max: 2}
+    off_tank: {max: 1}
+    shield_support: {min: 1, max: 3}
+    zone_support: {max: 1}
+    pierce: {min: 1}
+    anti_heal: {min: 1}
+  overrides:
+    territory_defense:
+      engage_tank: {min: 1, max: 3}
+      stopper_tank: {min: 2, max: 4}
+
+# ---------------------------------------------------------------------------
 # GEAR AFFINITY OVERRIDES (owner rulings on the items board). The
 # structural stat-profile mapping in classify_gear stays the default;
 # an entry here replaces one item's derived role_affinity with the

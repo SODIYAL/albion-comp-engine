@@ -262,6 +262,35 @@ def main():
                            for w in (fam.get("anchor") or []))]
                 for b, fams in fam_doc["buckets"].items()}
 
+    # Observed effect quotas (increment 3b, owner-ruled 2026-08-26 "yes —
+    # advise quotas"): per typed gear effect, the carriers near-complete
+    # observed rosters field per 20 (roles_report effect_quotas — the
+    # reference-build evidence layer). typical = median across rosters
+    # that field it at all; fielded = share of rosters with >= 1.
+    # Display evidence only — the page compares it to the loadout chests.
+    effect_quotas = {}
+    rep_path = os.path.join(PIPE, "out", "roles_report.json")
+    if os.path.exists(rep_path):
+        with open(rep_path, encoding="utf-8") as f:
+            rep = json.load(f)
+        comps = (rep.get("effect_quotas") or {}).get("comps") or []
+        ge = {g["id"]: g for g in data.get("gear_effects") or []}
+        effs = {}
+        for eid, g in sorted(ge.items()):
+            items = [it["id"] for it in g.get("items") or [] if it.get("id")]
+            per20 = sorted(r["copies"].get(eid, 0) * 20.0 / r["seats"]
+                           for r in comps)
+            nz = [c for c in per20 if c]
+            if not items or not nz:
+                continue
+            mid = (nz[(len(nz) - 1) // 2] + nz[len(nz) // 2]) / 2.0
+            effs[eid] = {"name": g.get("name"), "items": items,
+                         "typical": round(mid, 1),
+                         "fielded": round(len(nz) / len(comps), 2)}
+        if effs:
+            effect_quotas = {"min_size": 15, "rosters": len(comps),
+                             "effects": effs}
+
     # Parity fixture: run the Python engine over the dashboard's seed party and
     # inline its output, so the client asserts against the real engine on every
     # build instead of a hardcoded expectation that goes stale after curation.
@@ -311,6 +340,7 @@ def main():
            f"const ITEM_STATS = DATASET.item_stats || {{}};\n"
            f"const USAGE = {js(usage)};\n"
            f"const FAMILIES = {js(families)};\n"
+           f"const EFFECT_QUOTAS = {js(effect_quotas)};\n"
            f"const PARITY_EXPECTED = {js(expected)};\n{loadout_js}\n{app}\n{decision_js}</script>\n"
            f"</body>\n</html>\n")
     path = os.path.join(DASH, "index.html")

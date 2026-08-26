@@ -33478,6 +33478,48 @@
    "redundant_gain_max": 0.05
   }
  },
+ "need_profiles": {
+  "defaults": {
+   "anti_heal": {
+    "min": 1
+   },
+   "engage_tank": {
+    "max": 3,
+    "min": 2
+   },
+   "off_tank": {
+    "max": 1
+   },
+   "pierce": {
+    "min": 1
+   },
+   "shield_support": {
+    "max": 3,
+    "min": 1
+   },
+   "stopper_tank": {
+    "max": 2,
+    "min": 1
+   },
+   "zone_support": {
+    "max": 1
+   }
+  },
+  "min_size": 15,
+  "overrides": {
+   "territory_defense": {
+    "engage_tank": {
+     "max": 3,
+     "min": 1
+    },
+    "stopper_tank": {
+     "max": 4,
+     "min": 2
+    }
+   }
+  },
+  "reference_size": 20
+ },
  "roles": [
   {
    "class": "frontline",
@@ -37702,7 +37744,10 @@
       "min": 2
      },
      "max_size": 19,
-     "min_size": 15
+     "min_size": 15,
+     "ranged_aoe_core": {
+      "min": 5
+     }
     },
     {
      "frontline": {
@@ -37714,7 +37759,10 @@
       "min": 2
      },
      "max_size": 29,
-     "min_size": 20
+     "min_size": 20,
+     "ranged_aoe_core": {
+      "min": 7
+     }
     }
    ],
    "mechanics": {
@@ -37784,12 +37832,22 @@
    ],
    "constraint_overrides": [
     {
+     "max_size": 19,
+     "min_size": 15,
+     "ranged_aoe_core": {
+      "min": 5
+     }
+    },
+    {
      "healer": {
       "max": 4,
       "min": 3
      },
      "max_size": 29,
-     "min_size": 20
+     "min_size": 20,
+     "ranged_aoe_core": {
+      "min": 7
+     }
     }
    ],
    "mechanics": {

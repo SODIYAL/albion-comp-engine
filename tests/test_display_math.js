@@ -227,5 +227,42 @@ function setUsage(baskets) {
         `empty=${JSON.stringify(empty)} missing=${JSON.stringify(missing)}`);
 }
 
+/* 14 — observed effect quotas (increment 3b, owner-ruled 2026-08-26):
+   carried counts come from the LOADOUT chests only, quotas scale to
+   PLAN, unknown gear blocks any shortfall claim, and the panel arms at
+   15+ only. */
+{
+  vm.runInContext(extract("effectQuotaRows"), ctx);
+  ctx.FAMILIES = {};
+  ctx.PLANNED = 20;
+  ctx.party = ["W1", "W2", "W3"];
+  ctx.EFFECT_QUOTAS = { min_size: 15, rosters: 8, effects: {
+    reflect_shell: { name: "Reflect area", items: ["ARMOR_PLATE_HELL"],
+                     typical: 3.0, fielded: 0.88 } } };
+  ctx.LOADOUT = [{ armor: "ARMOR_PLATE_HELL" }, { armor: "ARMOR_PLATE_SET2" },
+                 { armor: "ARMOR_PLATE_HELL" }];
+  let rows = run("effectQuotaRows()");
+  const counted = rows && rows.length === 1 && rows[0].have === 2
+    && rows[0].want === 3 && rows[0].unset === 0 && rows[0].short === true;
+  ctx.LOADOUT = [{ armor: "ARMOR_PLATE_HELL" }, {}, undefined];
+  rows = run("effectQuotaRows()");
+  const unknownSafe = rows && rows[0].have === 1 && rows[0].unset === 2
+    && rows[0].short === false;   // unknown chests never claim a shortfall
+  ctx.PLANNED = 10; ctx.party = [];
+  const below = run("effectQuotaRows()");
+  ctx.PLANNED = 30; ctx.party = []; ctx.LOADOUT = [];
+  rows = run("effectQuotaRows()");
+  const scaled = rows && rows[0].want === 4.5;   // 3.0 * 30/20
+  ctx.EFFECT_QUOTAS = undefined; ctx.PLANNED = 20;
+  const missing = run(
+    "typeof EFFECT_QUOTAS === 'undefined' ? effectQuotaRows() : 'x'");
+  check("effect quotas: chest-counted, PLAN-scaled, unknown-gear-honest, "
+        + "armed at 15+, missing embed yields null",
+        counted && unknownSafe && below === null && scaled
+        && missing === null,
+        `counted=${counted} unknownSafe=${unknownSafe} `
+        + `below=${JSON.stringify(below)} scaled=${scaled}`);
+}
+
 console.log(`\n${pass}/${pass + fail} display-math tests passed`);
 process.exit(fail ? 1 : 0);

@@ -1413,11 +1413,33 @@ def apply_roles(weapons, gear):
         "menus_secondary": {k: w.get("role_menu_secondary", [])
                             for k, w in sorted(weapons.items())
                             if w.get("role_menu_secondary")}}
+    # NEED PROFILES (increment 3, owner-ruled 2026-08-26): fine-seat
+    # bands + function coverage minima for the forge. Validated
+    # fail-closed: keys must be role ids, function roles take min only,
+    # min <= max. Shipped verbatim; the engine scales by size at
+    # set_content.
+    profiles = doc.get("need_profiles") or {}
+    role_ids = {r["id"] for r in book}
+    func_ids = {"pierce", "anti_heal", "purge", "shield_break"}
+    rule_sets = [("defaults", profiles.get("defaults") or {})]
+    rule_sets += [(f"overrides.{c}", v) for c, v in
+                  sorted((profiles.get("overrides") or {}).items())]
+    for where, rules in rule_sets:
+        for k, rule in sorted((rules or {}).items()):
+            if k not in role_ids:
+                problems.append(f"need_profiles: {where}: unknown role {k}")
+                continue
+            if k in func_ids and "max" in rule:
+                problems.append(f"need_profiles: {where}: {k} is a "
+                                f"function role — coverage takes min only")
+            if "min" in rule and "max" in rule and rule["min"] > rule["max"]:
+                problems.append(f"need_profiles: {where}: {k} min > max")
+    report["need_profiles"] = profiles
     print(f"  roles         : {len(book)} role(s), "
           f"{len(report['menus'])} weapon(s) on menus, "
           f"{len(effects)} gear effect(s)"
           + (f"; {len(problems)} PROBLEM(S)" if problems else ""))
-    return book, effects, report, problems
+    return book, effects, report, profiles, problems
 
 
 def derive_economics(weapons, composition, spell_index, overrides):
@@ -1752,8 +1774,12 @@ def main():
         load_style_overrides(), econ_report,
         (composition.get("primary_healer", {}) or {})
         .get("e_heal_dedicated_min", 4), nonstack_members)
-    roles_book, gear_effects, roles_report, roles_problems = \
+    roles_book, gear_effects, roles_report, need_profiles, roles_problems = \
         apply_roles(weapons, gear)
+    for c in sorted((need_profiles.get("overrides") or {})):
+        if c not in templates:
+            roles_problems.append(f"need_profiles: overrides names "
+                                  f"unknown content {c}")
     jsonfmt.dump(roles_report, os.path.join(OUT, "roles_report.json"))
     # MetaBattle cross-check (MECHANICS_TODO Q15): weapons real ZvZ builds
     # field must not derive group-band all-unfit — disagreements are the
@@ -1913,6 +1939,12 @@ def main():
         # attach to whatever role wears them; detection reports
         # "role + carrying". Display layer only.
         "gear_effects": gear_effects,
+        # NEED PROFILES (increment 3, owner-ruled 2026-08-26): fine-seat
+        # bands + function coverage the FORGE must field — a generation
+        # constraint like the composition bands, never a bar to scoring
+        # a manual party. Counts scale by size/reference_size, arm at
+        # min_size.
+        "need_profiles": need_profiles,
     }
 
     os.makedirs(OUT, exist_ok=True)

@@ -1,0 +1,2111 @@
+{
+ "_meta": {
+  "battles_cached": 118,
+  "newest_event": "2026-08-25T06:07:00.062Z",
+  "note": "near-complete = deaths seen for >= 80% of the side's attributed players (wiped sides \u2014 least-biased roster snapshots); winners reported separately, never merged (healers/supports under-attribute on winning sides); sides are alliance-level; mount carriers show carried weapons. DISPLAY/EVIDENCE ONLY \u2014 the need profiles it informed are owner-ruled constants in roles.yaml.",
+  "source": "api.albionbb.com kill events (sanctioned endpoint)"
+ },
+ "gang_near_complete": {
+  "function_coverage": {
+   "anti_heal": 0.76,
+   "pierce": 0.99,
+   "purge": 0.2,
+   "shield_break": 0.25
+  },
+  "healers_per20_hist": {
+   "0": 22,
+   "2": 8,
+   "3": 13,
+   "4": 24,
+   "5": 1,
+   "6": 1,
+   "7": 5,
+   "8": 2
+  },
+  "per20": {
+   "anti_heal": 0.46,
+   "bomb_aoe": 0.21,
+   "brawl_healer": 0.29,
+   "dive_cleanup": 1.05,
+   "engage_tank": 1.55,
+   "main_healer": 1.89,
+   "off_tank": 0.13,
+   "pierce": 0.67,
+   "purge": 0.34,
+   "ranged_aoe": 3.27,
+   "shield_break": 0.08,
+   "shield_support": 0.38,
+   "stopper_tank": 1.05,
+   "sustained_brawler": 1.59,
+   "unseated_healer": 0.63,
+   "unseated_melee": 3.19,
+   "unseated_range": 2.31,
+   "unseated_support": 0.29,
+   "unseated_tank": 0.59,
+   "zone_support": 0.04
+  },
+  "players": 477,
+  "rosters": 76,
+  "rows": [
+   {
+    "battle": 1435008605,
+    "mix": {
+     "main_healer": 1,
+     "pierce": 1,
+     "shield_break": 1,
+     "stopper_tank": 1,
+     "sustained_brawler": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1435160542,
+    "mix": {
+     "brawl_healer": 1,
+     "main_healer": 2,
+     "pierce": 1,
+     "ranged_aoe": 1,
+     "unseated_melee": 1,
+     "unseated_range": 1,
+     "unseated_tank": 2
+    },
+    "n": 9
+   },
+   {
+    "battle": 1435164377,
+    "mix": {
+     "engage_tank": 1,
+     "main_healer": 1,
+     "purge": 1,
+     "ranged_aoe": 2,
+     "stopper_tank": 1
+    },
+    "n": 6
+   },
+   {
+    "battle": 1435195648,
+    "mix": {
+     "dive_cleanup": 2,
+     "stopper_tank": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 1,
+     "unseated_range": 1
+    },
+    "n": 6
+   },
+   {
+    "battle": 1435195648,
+    "mix": {
+     "anti_heal": 1,
+     "main_healer": 1,
+     "ranged_aoe": 1,
+     "unseated_melee": 1,
+     "unseated_support": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1435237721,
+    "mix": {
+     "engage_tank": 1,
+     "main_healer": 1,
+     "ranged_aoe": 2,
+     "unseated_melee": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1435274000,
+    "mix": {
+     "anti_heal": 1,
+     "bomb_aoe": 1,
+     "engage_tank": 1,
+     "ranged_aoe": 3,
+     "sustained_brawler": 1,
+     "unseated_range": 1
+    },
+    "n": 8
+   },
+   {
+    "battle": 1435328325,
+    "mix": {
+     "ranged_aoe": 2,
+     "stopper_tank": 1,
+     "sustained_brawler": 1,
+     "unseated_healer": 1,
+     "unseated_melee": 2
+    },
+    "n": 7
+   },
+   {
+    "battle": 1435349443,
+    "mix": {
+     "bomb_aoe": 1,
+     "pierce": 1,
+     "ranged_aoe": 1,
+     "unseated_melee": 2,
+     "unseated_range": 1
+    },
+    "n": 6
+   },
+   {
+    "battle": 1435363030,
+    "mix": {
+     "engage_tank": 2,
+     "ranged_aoe": 1,
+     "sustained_brawler": 1,
+     "unseated_range": 3
+    },
+    "n": 7
+   },
+   {
+    "battle": 1435363030,
+    "mix": {
+     "engage_tank": 1,
+     "ranged_aoe": 1,
+     "stopper_tank": 2,
+     "sustained_brawler": 1,
+     "unseated_melee": 1
+    },
+    "n": 6
+   },
+   {
+    "battle": 1435430648,
+    "mix": {
+     "brawl_healer": 1,
+     "dive_cleanup": 1,
+     "engage_tank": 1,
+     "ranged_aoe": 2,
+     "unseated_melee": 1,
+     "unseated_range": 2,
+     "unseated_tank": 1
+    },
+    "n": 9
+   },
+   {
+    "battle": 1435653537,
+    "mix": {
+     "engage_tank": 1,
+     "main_healer": 1,
+     "pierce": 1,
+     "ranged_aoe": 2,
+     "unseated_melee": 1
+    },
+    "n": 6
+   },
+   {
+    "battle": 1435710048,
+    "mix": {
+     "dive_cleanup": 1,
+     "main_healer": 1,
+     "stopper_tank": 1,
+     "unseated_melee": 3
+    },
+    "n": 6
+   },
+   {
+    "battle": 1435718693,
+    "mix": {
+     "main_healer": 1,
+     "pierce": 2,
+     "unseated_melee": 2,
+     "unseated_range": 1,
+     "unseated_tank": 2
+    },
+    "n": 8
+   },
+   {
+    "battle": 1435723074,
+    "mix": {
+     "anti_heal": 1,
+     "engage_tank": 1,
+     "ranged_aoe": 1,
+     "shield_support": 1,
+     "stopper_tank": 1,
+     "unseated_range": 1,
+     "unseated_support": 1
+    },
+    "n": 7
+   },
+   {
+    "battle": 1435786184,
+    "mix": {
+     "brawl_healer": 1,
+     "unseated_melee": 2,
+     "unseated_tank": 6
+    },
+    "n": 9
+   },
+   {
+    "battle": 1435790881,
+    "mix": {
+     "ranged_aoe": 3,
+     "unseated_healer": 1,
+     "unseated_range": 3
+    },
+    "n": 7
+   },
+   {
+    "battle": 1435808317,
+    "mix": {
+     "main_healer": 1,
+     "purge": 1,
+     "shield_support": 1,
+     "stopper_tank": 1,
+     "sustained_brawler": 2,
+     "unseated_melee": 1
+    },
+    "n": 7
+   },
+   {
+    "battle": 1435862949,
+    "mix": {
+     "main_healer": 1,
+     "off_tank": 1,
+     "stopper_tank": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 1,
+     "unseated_range": 1
+    },
+    "n": 6
+   },
+   {
+    "battle": 1436153679,
+    "mix": {
+     "main_healer": 1,
+     "ranged_aoe": 2,
+     "shield_support": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 2,
+     "unseated_range": 1,
+     "unseated_tank": 1
+    },
+    "n": 9
+   },
+   {
+    "battle": 1436153679,
+    "mix": {
+     "anti_heal": 1,
+     "engage_tank": 1,
+     "purge": 1,
+     "ranged_aoe": 2
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436183713,
+    "mix": {
+     "engage_tank": 2,
+     "ranged_aoe": 2,
+     "shield_support": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436183713,
+    "mix": {
+     "engage_tank": 1,
+     "main_healer": 1,
+     "off_tank": 1,
+     "purge": 1,
+     "ranged_aoe": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 2
+    },
+    "n": 8
+   },
+   {
+    "battle": 1436185276,
+    "mix": {
+     "unseated_healer": 1,
+     "unseated_melee": 2,
+     "unseated_range": 2
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436192204,
+    "mix": {
+     "shield_support": 1,
+     "stopper_tank": 2,
+     "sustained_brawler": 1,
+     "unseated_melee": 1,
+     "unseated_range": 1
+    },
+    "n": 6
+   },
+   {
+    "battle": 1436192204,
+    "mix": {
+     "brawl_healer": 1,
+     "unseated_melee": 3,
+     "unseated_range": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436205397,
+    "mix": {
+     "brawl_healer": 1,
+     "dive_cleanup": 1,
+     "engage_tank": 2,
+     "sustained_brawler": 1,
+     "unseated_melee": 2
+    },
+    "n": 7
+   },
+   {
+    "battle": 1436214585,
+    "mix": {
+     "main_healer": 2,
+     "stopper_tank": 1,
+     "unseated_range": 2
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436225685,
+    "mix": {
+     "ranged_aoe": 2,
+     "sustained_brawler": 2,
+     "unseated_melee": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436241669,
+    "mix": {
+     "anti_heal": 1,
+     "engage_tank": 1,
+     "main_healer": 1,
+     "ranged_aoe": 1,
+     "unseated_range": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436251940,
+    "mix": {
+     "bomb_aoe": 1,
+     "dive_cleanup": 1,
+     "engage_tank": 2,
+     "ranged_aoe": 2,
+     "shield_support": 1
+    },
+    "n": 7
+   },
+   {
+    "battle": 1436251940,
+    "mix": {
+     "engage_tank": 1,
+     "main_healer": 2,
+     "stopper_tank": 1,
+     "unseated_support": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436268626,
+    "mix": {
+     "anti_heal": 1,
+     "bomb_aoe": 1,
+     "engage_tank": 1,
+     "ranged_aoe": 2,
+     "shield_support": 1,
+     "stopper_tank": 1
+    },
+    "n": 7
+   },
+   {
+    "battle": 1436461777,
+    "mix": {
+     "main_healer": 1,
+     "purge": 1,
+     "ranged_aoe": 3,
+     "shield_support": 1,
+     "unseated_range": 1,
+     "unseated_support": 1,
+     "zone_support": 1
+    },
+    "n": 9
+   },
+   {
+    "battle": 1436461777,
+    "mix": {
+     "engage_tank": 1,
+     "main_healer": 1,
+     "ranged_aoe": 1,
+     "sustained_brawler": 2,
+     "unseated_range": 1
+    },
+    "n": 6
+   },
+   {
+    "battle": 1436501563,
+    "mix": {
+     "dive_cleanup": 2,
+     "main_healer": 1,
+     "ranged_aoe": 1,
+     "unseated_melee": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436570076,
+    "mix": {
+     "engage_tank": 1,
+     "ranged_aoe": 1,
+     "unseated_melee": 2,
+     "unseated_tank": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436585803,
+    "mix": {
+     "sustained_brawler": 2,
+     "unseated_healer": 1,
+     "unseated_melee": 2
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436585803,
+    "mix": {
+     "pierce": 1,
+     "ranged_aoe": 1,
+     "stopper_tank": 1,
+     "unseated_healer": 1,
+     "unseated_melee": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436585803,
+    "mix": {
+     "dive_cleanup": 1,
+     "main_healer": 1,
+     "purge": 1,
+     "unseated_healer": 1,
+     "unseated_melee": 2
+    },
+    "n": 6
+   },
+   {
+    "battle": 1436590740,
+    "mix": {
+     "main_healer": 1,
+     "pierce": 1,
+     "unseated_range": 3
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436600612,
+    "mix": {
+     "bomb_aoe": 1,
+     "dive_cleanup": 1,
+     "purge": 1,
+     "ranged_aoe": 1,
+     "unseated_healer": 2,
+     "unseated_melee": 2,
+     "unseated_range": 1
+    },
+    "n": 9
+   },
+   {
+    "battle": 1436600612,
+    "mix": {
+     "engage_tank": 1,
+     "main_healer": 2,
+     "pierce": 1,
+     "ranged_aoe": 1,
+     "stopper_tank": 1,
+     "unseated_healer": 1,
+     "unseated_melee": 2
+    },
+    "n": 9
+   },
+   {
+    "battle": 1436603157,
+    "mix": {
+     "brawl_healer": 1,
+     "dive_cleanup": 1,
+     "engage_tank": 1,
+     "main_healer": 1,
+     "ranged_aoe": 2,
+     "sustained_brawler": 1,
+     "unseated_range": 1
+    },
+    "n": 8
+   },
+   {
+    "battle": 1436669253,
+    "mix": {
+     "dive_cleanup": 1,
+     "main_healer": 2,
+     "purge": 1,
+     "sustained_brawler": 3,
+     "unseated_melee": 2
+    },
+    "n": 9
+   },
+   {
+    "battle": 1436669253,
+    "mix": {
+     "anti_heal": 1,
+     "main_healer": 1,
+     "ranged_aoe": 1,
+     "stopper_tank": 1,
+     "sustained_brawler": 1,
+     "unseated_healer": 1
+    },
+    "n": 6
+   },
+   {
+    "battle": 1436722653,
+    "mix": {
+     "brawl_healer": 1,
+     "ranged_aoe": 2,
+     "unseated_range": 1,
+     "unseated_tank": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436722653,
+    "mix": {
+     "ranged_aoe": 1,
+     "unseated_healer": 1,
+     "unseated_melee": 1,
+     "unseated_range": 2
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436735022,
+    "mix": {
+     "anti_heal": 1,
+     "main_healer": 1,
+     "ranged_aoe": 1,
+     "shield_break": 1,
+     "unseated_melee": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1436739253,
+    "mix": {
+     "engage_tank": 2,
+     "main_healer": 1,
+     "ranged_aoe": 1,
+     "unseated_melee": 1,
+     "unseated_range": 1
+    },
+    "n": 6
+   },
+   {
+    "battle": 1437024076,
+    "mix": {
+     "dive_cleanup": 1,
+     "engage_tank": 1,
+     "main_healer": 1,
+     "unseated_healer": 1,
+     "unseated_melee": 1,
+     "unseated_range": 1
+    },
+    "n": 6
+   },
+   {
+    "battle": 1437069630,
+    "mix": {
+     "engage_tank": 1,
+     "ranged_aoe": 2,
+     "sustained_brawler": 3,
+     "unseated_healer": 1,
+     "unseated_range": 1
+    },
+    "n": 8
+   },
+   {
+    "battle": 1437111057,
+    "mix": {
+     "pierce": 1,
+     "ranged_aoe": 2,
+     "stopper_tank": 1,
+     "unseated_range": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1437111057,
+    "mix": {
+     "main_healer": 1,
+     "pierce": 1,
+     "unseated_healer": 1,
+     "unseated_melee": 2,
+     "unseated_range": 2
+    },
+    "n": 7
+   },
+   {
+    "battle": 1437111057,
+    "mix": {
+     "anti_heal": 1,
+     "engage_tank": 1,
+     "main_healer": 1,
+     "ranged_aoe": 4,
+     "stopper_tank": 1,
+     "sustained_brawler": 1
+    },
+    "n": 9
+   },
+   {
+    "battle": 1437111925,
+    "mix": {
+     "dive_cleanup": 1,
+     "ranged_aoe": 1,
+     "unseated_healer": 1,
+     "unseated_melee": 1,
+     "unseated_support": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1437133223,
+    "mix": {
+     "main_healer": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 2,
+     "unseated_range": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1437139458,
+    "mix": {
+     "main_healer": 1,
+     "off_tank": 1,
+     "ranged_aoe": 1,
+     "sustained_brawler": 2,
+     "unseated_range": 1
+    },
+    "n": 6
+   },
+   {
+    "battle": 1437139458,
+    "mix": {
+     "dive_cleanup": 1,
+     "ranged_aoe": 2,
+     "stopper_tank": 1,
+     "sustained_brawler": 1,
+     "unseated_range": 1
+    },
+    "n": 6
+   },
+   {
+    "battle": 1437149176,
+    "mix": {
+     "anti_heal": 1,
+     "dive_cleanup": 1,
+     "pierce": 1,
+     "unseated_melee": 2,
+     "unseated_range": 2
+    },
+    "n": 7
+   },
+   {
+    "battle": 1437161198,
+    "mix": {
+     "engage_tank": 1,
+     "main_healer": 1,
+     "ranged_aoe": 2,
+     "unseated_range": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1437198588,
+    "mix": {
+     "engage_tank": 1,
+     "ranged_aoe": 1,
+     "unseated_melee": 2,
+     "unseated_range": 3
+    },
+    "n": 7
+   },
+   {
+    "battle": 1437209992,
+    "mix": {
+     "unseated_melee": 3,
+     "unseated_range": 2
+    },
+    "n": 5
+   },
+   {
+    "battle": 1437500882,
+    "mix": {
+     "dive_cleanup": 1,
+     "main_healer": 1,
+     "pierce": 1,
+     "ranged_aoe": 1,
+     "unseated_melee": 1,
+     "unseated_range": 2
+    },
+    "n": 7
+   },
+   {
+    "battle": 1437500882,
+    "mix": {
+     "dive_cleanup": 1,
+     "ranged_aoe": 2,
+     "stopper_tank": 1,
+     "unseated_melee": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1437605762,
+    "mix": {
+     "dive_cleanup": 1,
+     "main_healer": 1,
+     "pierce": 1,
+     "sustained_brawler": 2,
+     "unseated_melee": 1
+    },
+    "n": 6
+   },
+   {
+    "battle": 1437605762,
+    "mix": {
+     "dive_cleanup": 1,
+     "main_healer": 1,
+     "unseated_melee": 2,
+     "unseated_support": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1437605762,
+    "mix": {
+     "dive_cleanup": 2,
+     "stopper_tank": 1,
+     "unseated_melee": 3,
+     "unseated_support": 1
+    },
+    "n": 7
+   },
+   {
+    "battle": 1437605762,
+    "mix": {
+     "engage_tank": 2,
+     "main_healer": 1,
+     "ranged_aoe": 2
+    },
+    "n": 5
+   },
+   {
+    "battle": 1437605762,
+    "mix": {
+     "anti_heal": 1,
+     "dive_cleanup": 1,
+     "engage_tank": 1,
+     "main_healer": 1,
+     "stopper_tank": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1437638639,
+    "mix": {
+     "dive_cleanup": 1,
+     "engage_tank": 2,
+     "unseated_range": 2
+    },
+    "n": 5
+   },
+   {
+    "battle": 1437638639,
+    "mix": {
+     "dive_cleanup": 1,
+     "main_healer": 1,
+     "ranged_aoe": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1437653216,
+    "mix": {
+     "engage_tank": 1,
+     "pierce": 2,
+     "ranged_aoe": 1,
+     "sustained_brawler": 2,
+     "unseated_melee": 3
+    },
+    "n": 9
+   },
+   {
+    "battle": 1437653216,
+    "mix": {
+     "main_healer": 1,
+     "ranged_aoe": 1,
+     "shield_support": 1,
+     "sustained_brawler": 1,
+     "unseated_range": 1
+    },
+    "n": 5
+   },
+   {
+    "battle": 1437660247,
+    "mix": {
+     "main_healer": 1,
+     "ranged_aoe": 2,
+     "stopper_tank": 1,
+     "unseated_melee": 1
+    },
+    "n": 5
+   }
+  ]
+ },
+ "mid_near_complete": {
+  "function_coverage": {
+   "anti_heal": 0.92,
+   "pierce": 0.97,
+   "purge": 0.31,
+   "shield_break": 0.49
+  },
+  "healers_per20_hist": {
+   "0": 2,
+   "2": 13,
+   "3": 8,
+   "4": 9,
+   "5": 5,
+   "6": 2
+  },
+  "per20": {
+   "anti_heal": 0.63,
+   "bomb_aoe": 0.4,
+   "brawl_healer": 0.13,
+   "dive_cleanup": 0.67,
+   "engage_tank": 2.77,
+   "main_healer": 2.77,
+   "off_tank": 0.27,
+   "pierce": 1.16,
+   "purge": 0.31,
+   "ranged_aoe": 2.82,
+   "shield_support": 1.03,
+   "stopper_tank": 0.63,
+   "sustained_brawler": 2.42,
+   "unseated_healer": 0.18,
+   "unseated_melee": 1.97,
+   "unseated_range": 0.94,
+   "unseated_support": 0.49,
+   "unseated_tank": 0.31,
+   "zone_support": 0.09
+  },
+  "players": 447,
+  "rosters": 39,
+  "rows": [
+   {
+    "battle": 1435187622,
+    "mix": {
+     "anti_heal": 1,
+     "dive_cleanup": 1,
+     "engage_tank": 1,
+     "pierce": 1,
+     "ranged_aoe": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 2,
+     "unseated_range": 2
+    },
+    "n": 10
+   },
+   {
+    "battle": 1435237721,
+    "mix": {
+     "dive_cleanup": 1,
+     "engage_tank": 2,
+     "main_healer": 1,
+     "pierce": 1,
+     "ranged_aoe": 5,
+     "stopper_tank": 1,
+     "unseated_range": 1
+    },
+    "n": 12
+   },
+   {
+    "battle": 1435274000,
+    "mix": {
+     "engage_tank": 3,
+     "main_healer": 1,
+     "pierce": 1,
+     "ranged_aoe": 1,
+     "stopper_tank": 1,
+     "sustained_brawler": 2,
+     "unseated_support": 1
+    },
+    "n": 10
+   },
+   {
+    "battle": 1435325283,
+    "mix": {
+     "dive_cleanup": 1,
+     "engage_tank": 1,
+     "main_healer": 2,
+     "ranged_aoe": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 3,
+     "unseated_range": 1,
+     "unseated_tank": 1
+    },
+    "n": 11
+   },
+   {
+    "battle": 1435328325,
+    "mix": {
+     "engage_tank": 1,
+     "main_healer": 3,
+     "off_tank": 1,
+     "pierce": 1,
+     "ranged_aoe": 2,
+     "stopper_tank": 2,
+     "sustained_brawler": 2,
+     "unseated_support": 1
+    },
+    "n": 13
+   },
+   {
+    "battle": 1435372446,
+    "mix": {
+     "anti_heal": 1,
+     "bomb_aoe": 2,
+     "engage_tank": 3,
+     "off_tank": 1,
+     "purge": 1,
+     "ranged_aoe": 2,
+     "sustained_brawler": 2,
+     "unseated_healer": 1
+    },
+    "n": 13
+   },
+   {
+    "battle": 1435710048,
+    "mix": {
+     "engage_tank": 1,
+     "main_healer": 2,
+     "pierce": 2,
+     "ranged_aoe": 2,
+     "stopper_tank": 1,
+     "sustained_brawler": 3,
+     "unseated_melee": 1
+    },
+    "n": 12
+   },
+   {
+    "battle": 1435734174,
+    "mix": {
+     "anti_heal": 2,
+     "engage_tank": 1,
+     "main_healer": 2,
+     "pierce": 1,
+     "ranged_aoe": 1,
+     "shield_support": 1,
+     "stopper_tank": 1,
+     "sustained_brawler": 2
+    },
+    "n": 11
+   },
+   {
+    "battle": 1435795737,
+    "mix": {
+     "bomb_aoe": 1,
+     "engage_tank": 1,
+     "main_healer": 3,
+     "off_tank": 1,
+     "pierce": 1,
+     "ranged_aoe": 1,
+     "stopper_tank": 1,
+     "sustained_brawler": 1,
+     "zone_support": 1
+    },
+    "n": 11
+   },
+   {
+    "battle": 1435808317,
+    "mix": {
+     "engage_tank": 1,
+     "main_healer": 3,
+     "ranged_aoe": 1,
+     "shield_support": 1,
+     "stopper_tank": 1,
+     "sustained_brawler": 2,
+     "unseated_range": 1
+    },
+    "n": 10
+   },
+   {
+    "battle": 1435978485,
+    "mix": {
+     "anti_heal": 1,
+     "engage_tank": 2,
+     "main_healer": 1,
+     "ranged_aoe": 2,
+     "shield_support": 1,
+     "sustained_brawler": 2,
+     "unseated_healer": 1,
+     "unseated_melee": 2
+    },
+    "n": 12
+   },
+   {
+    "battle": 1435978485,
+    "mix": {
+     "anti_heal": 1,
+     "engage_tank": 2,
+     "main_healer": 4,
+     "pierce": 2,
+     "ranged_aoe": 1,
+     "shield_support": 2,
+     "sustained_brawler": 1,
+     "unseated_support": 1
+    },
+    "n": 14
+   },
+   {
+    "battle": 1436183713,
+    "mix": {
+     "engage_tank": 2,
+     "main_healer": 2,
+     "ranged_aoe": 3,
+     "sustained_brawler": 3,
+     "unseated_melee": 1
+    },
+    "n": 11
+   },
+   {
+    "battle": 1436185221,
+    "mix": {
+     "engage_tank": 1,
+     "main_healer": 2,
+     "pierce": 1,
+     "purge": 1,
+     "sustained_brawler": 2,
+     "unseated_melee": 3,
+     "unseated_support": 1
+    },
+    "n": 11
+   },
+   {
+    "battle": 1436185276,
+    "mix": {
+     "engage_tank": 9,
+     "main_healer": 1,
+     "unseated_melee": 1
+    },
+    "n": 11
+   },
+   {
+    "battle": 1436205397,
+    "mix": {
+     "brawl_healer": 1,
+     "engage_tank": 1,
+     "pierce": 1,
+     "ranged_aoe": 2,
+     "stopper_tank": 1,
+     "sustained_brawler": 2,
+     "unseated_melee": 1,
+     "unseated_range": 2
+    },
+    "n": 11
+   },
+   {
+    "battle": 1436225685,
+    "mix": {
+     "engage_tank": 3,
+     "main_healer": 3,
+     "pierce": 2,
+     "purge": 1,
+     "shield_support": 1,
+     "unseated_melee": 3
+    },
+    "n": 13
+   },
+   {
+    "battle": 1436258040,
+    "mix": {
+     "main_healer": 1,
+     "ranged_aoe": 3,
+     "stopper_tank": 1,
+     "unseated_healer": 1,
+     "unseated_melee": 3,
+     "unseated_range": 1,
+     "unseated_support": 1
+    },
+    "n": 11
+   },
+   {
+    "battle": 1436461777,
+    "mix": {
+     "bomb_aoe": 1,
+     "engage_tank": 2,
+     "main_healer": 1,
+     "pierce": 2,
+     "shield_support": 2,
+     "sustained_brawler": 2,
+     "unseated_melee": 1
+    },
+    "n": 11
+   },
+   {
+    "battle": 1436516986,
+    "mix": {
+     "anti_heal": 2,
+     "engage_tank": 1,
+     "main_healer": 2,
+     "pierce": 1,
+     "ranged_aoe": 4,
+     "stopper_tank": 2,
+     "sustained_brawler": 2
+    },
+    "n": 14
+   },
+   {
+    "battle": 1436544747,
+    "mix": {
+     "bomb_aoe": 1,
+     "engage_tank": 1,
+     "main_healer": 2,
+     "pierce": 1,
+     "shield_support": 2,
+     "sustained_brawler": 3
+    },
+    "n": 10
+   },
+   {
+    "battle": 1436617833,
+    "mix": {
+     "anti_heal": 1,
+     "engage_tank": 1,
+     "main_healer": 1,
+     "ranged_aoe": 2,
+     "shield_support": 4,
+     "stopper_tank": 1,
+     "sustained_brawler": 1,
+     "unseated_healer": 1
+    },
+    "n": 12
+   },
+   {
+    "battle": 1436664172,
+    "mix": {
+     "dive_cleanup": 2,
+     "engage_tank": 1,
+     "main_healer": 1,
+     "pierce": 1,
+     "ranged_aoe": 2,
+     "unseated_melee": 1,
+     "unseated_range": 2,
+     "unseated_support": 1
+    },
+    "n": 11
+   },
+   {
+    "battle": 1436691741,
+    "mix": {
+     "main_healer": 3,
+     "off_tank": 1,
+     "shield_support": 2,
+     "stopper_tank": 1,
+     "sustained_brawler": 2,
+     "unseated_melee": 2
+    },
+    "n": 11
+   },
+   {
+    "battle": 1436722653,
+    "mix": {
+     "anti_heal": 2,
+     "brawl_healer": 1,
+     "dive_cleanup": 1,
+     "engage_tank": 2,
+     "main_healer": 1,
+     "pierce": 1,
+     "ranged_aoe": 3,
+     "sustained_brawler": 1
+    },
+    "n": 12
+   },
+   {
+    "battle": 1436722653,
+    "mix": {
+     "dive_cleanup": 1,
+     "engage_tank": 2,
+     "main_healer": 1,
+     "purge": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 3,
+     "unseated_range": 1
+    },
+    "n": 10
+   },
+   {
+    "battle": 1436778018,
+    "mix": {
+     "dive_cleanup": 1,
+     "engage_tank": 3,
+     "main_healer": 2,
+     "pierce": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 1,
+     "unseated_range": 1
+    },
+    "n": 10
+   },
+   {
+    "battle": 1436920009,
+    "mix": {
+     "anti_heal": 1,
+     "dive_cleanup": 1,
+     "main_healer": 2,
+     "off_tank": 1,
+     "ranged_aoe": 2,
+     "shield_support": 1,
+     "sustained_brawler": 3,
+     "unseated_melee": 2
+    },
+    "n": 13
+   },
+   {
+    "battle": 1437024076,
+    "mix": {
+     "brawl_healer": 1,
+     "dive_cleanup": 1,
+     "engage_tank": 1,
+     "ranged_aoe": 1,
+     "unseated_melee": 1,
+     "unseated_range": 4,
+     "unseated_tank": 1
+    },
+    "n": 10
+   },
+   {
+    "battle": 1437133223,
+    "mix": {
+     "engage_tank": 2,
+     "main_healer": 2,
+     "pierce": 1,
+     "ranged_aoe": 1,
+     "shield_support": 2,
+     "sustained_brawler": 2,
+     "unseated_melee": 1,
+     "unseated_tank": 1
+    },
+    "n": 12
+   },
+   {
+    "battle": 1437139458,
+    "mix": {
+     "dive_cleanup": 2,
+     "engage_tank": 2,
+     "main_healer": 1,
+     "pierce": 1,
+     "ranged_aoe": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 2,
+     "unseated_range": 1,
+     "unseated_support": 1
+    },
+    "n": 12
+   },
+   {
+    "battle": 1437203592,
+    "mix": {
+     "engage_tank": 2,
+     "main_healer": 2,
+     "pierce": 2,
+     "ranged_aoe": 3,
+     "shield_support": 1,
+     "unseated_range": 1,
+     "zone_support": 1
+    },
+    "n": 12
+   },
+   {
+    "battle": 1437399249,
+    "mix": {
+     "dive_cleanup": 2,
+     "main_healer": 1,
+     "purge": 1,
+     "ranged_aoe": 3,
+     "sustained_brawler": 2,
+     "unseated_melee": 3,
+     "unseated_tank": 1
+    },
+    "n": 13
+   },
+   {
+    "battle": 1437499849,
+    "mix": {
+     "anti_heal": 2,
+     "bomb_aoe": 3,
+     "engage_tank": 1,
+     "purge": 1,
+     "ranged_aoe": 1,
+     "shield_support": 3,
+     "sustained_brawler": 1,
+     "unseated_support": 1
+    },
+    "n": 13
+   },
+   {
+    "battle": 1437638639,
+    "mix": {
+     "engage_tank": 1,
+     "main_healer": 1,
+     "ranged_aoe": 4,
+     "sustained_brawler": 2,
+     "unseated_melee": 1,
+     "unseated_tank": 1
+    },
+    "n": 10
+   },
+   {
+    "battle": 1437660247,
+    "mix": {
+     "engage_tank": 2,
+     "main_healer": 2,
+     "ranged_aoe": 4,
+     "sustained_brawler": 1,
+     "unseated_range": 1,
+     "unseated_support": 1
+    },
+    "n": 11
+   },
+   {
+    "battle": 1437660247,
+    "mix": {
+     "bomb_aoe": 1,
+     "engage_tank": 2,
+     "main_healer": 2,
+     "pierce": 1,
+     "ranged_aoe": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 2
+    },
+    "n": 10
+   },
+   {
+    "battle": 1437667465,
+    "mix": {
+     "dive_cleanup": 1,
+     "main_healer": 1,
+     "purge": 1,
+     "ranged_aoe": 2,
+     "sustained_brawler": 1,
+     "unseated_melee": 1,
+     "unseated_range": 1,
+     "unseated_support": 1,
+     "unseated_tank": 2
+    },
+    "n": 11
+   },
+   {
+    "battle": 1437692304,
+    "mix": {
+     "engage_tank": 1,
+     "main_healer": 3,
+     "off_tank": 1,
+     "ranged_aoe": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 3,
+     "unseated_range": 1,
+     "unseated_support": 1
+    },
+    "n": 12
+   }
+  ]
+ },
+ "party_near_complete": {
+  "function_coverage": {
+   "anti_heal": 0.92,
+   "pierce": 1.0,
+   "purge": 0.71,
+   "shield_break": 0.54
+  },
+  "healers_per20_hist": {
+   "1": 3,
+   "2": 4,
+   "3": 5,
+   "4": 11,
+   "5": 1
+  },
+  "per20": {
+   "anti_heal": 1.23,
+   "bomb_aoe": 0.41,
+   "brawl_healer": 0.14,
+   "dive_cleanup": 0.45,
+   "engage_tank": 1.95,
+   "main_healer": 2.91,
+   "off_tank": 0.59,
+   "pierce": 1.05,
+   "purge": 0.32,
+   "ranged_aoe": 2.32,
+   "shield_support": 1.5,
+   "stopper_tank": 1.09,
+   "sustained_brawler": 2.14,
+   "unseated_healer": 0.09,
+   "unseated_melee": 1.36,
+   "unseated_range": 1.05,
+   "unseated_support": 0.91,
+   "unseated_tank": 0.36,
+   "zone_support": 0.14
+  },
+  "players": 440,
+  "rosters": 24,
+  "rows": [
+   {
+    "battle": 1435008605,
+    "mix": {
+     "anti_heal": 1,
+     "bomb_aoe": 2,
+     "engage_tank": 2,
+     "main_healer": 1,
+     "off_tank": 1,
+     "pierce": 2,
+     "purge": 1,
+     "ranged_aoe": 2,
+     "shield_support": 2,
+     "stopper_tank": 1,
+     "sustained_brawler": 1,
+     "unseated_range": 1
+    },
+    "n": 17
+   },
+   {
+    "battle": 1435019519,
+    "mix": {
+     "anti_heal": 2,
+     "engage_tank": 1,
+     "main_healer": 1,
+     "off_tank": 1,
+     "ranged_aoe": 1,
+     "shield_support": 3,
+     "sustained_brawler": 5,
+     "unseated_support": 1
+    },
+    "n": 15
+   },
+   {
+    "battle": 1435146632,
+    "mix": {
+     "brawl_healer": 1,
+     "dive_cleanup": 3,
+     "engage_tank": 1,
+     "main_healer": 3,
+     "ranged_aoe": 2,
+     "shield_support": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 1,
+     "unseated_range": 3,
+     "unseated_support": 1,
+     "unseated_tank": 2
+    },
+    "n": 19
+   },
+   {
+    "battle": 1435164377,
+    "mix": {
+     "anti_heal": 4,
+     "bomb_aoe": 1,
+     "engage_tank": 1,
+     "main_healer": 3,
+     "off_tank": 2,
+     "pierce": 1,
+     "ranged_aoe": 5,
+     "shield_support": 1,
+     "stopper_tank": 2,
+     "sustained_brawler": 2,
+     "unseated_healer": 1
+    },
+    "n": 23
+   },
+   {
+    "battle": 1435187622,
+    "mix": {
+     "anti_heal": 2,
+     "bomb_aoe": 1,
+     "engage_tank": 5,
+     "main_healer": 3,
+     "off_tank": 1,
+     "pierce": 2,
+     "ranged_aoe": 2,
+     "shield_support": 1,
+     "stopper_tank": 2,
+     "sustained_brawler": 2,
+     "unseated_range": 1,
+     "unseated_support": 1
+    },
+    "n": 23
+   },
+   {
+    "battle": 1435274000,
+    "mix": {
+     "dive_cleanup": 2,
+     "engage_tank": 2,
+     "main_healer": 2,
+     "ranged_aoe": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 3,
+     "unseated_range": 2,
+     "unseated_support": 2
+    },
+    "n": 15
+   },
+   {
+    "battle": 1435320002,
+    "mix": {
+     "anti_heal": 1,
+     "engage_tank": 1,
+     "main_healer": 4,
+     "off_tank": 1,
+     "pierce": 1,
+     "ranged_aoe": 2,
+     "shield_support": 1,
+     "stopper_tank": 1,
+     "sustained_brawler": 2,
+     "unseated_melee": 2,
+     "unseated_support": 1,
+     "unseated_tank": 1
+    },
+    "n": 18
+   },
+   {
+    "battle": 1435320002,
+    "mix": {
+     "anti_heal": 2,
+     "bomb_aoe": 1,
+     "engage_tank": 1,
+     "main_healer": 3,
+     "off_tank": 1,
+     "pierce": 3,
+     "shield_support": 1,
+     "stopper_tank": 1,
+     "sustained_brawler": 2,
+     "unseated_support": 1
+    },
+    "n": 16
+   },
+   {
+    "battle": 1435372446,
+    "mix": {
+     "anti_heal": 2,
+     "bomb_aoe": 1,
+     "engage_tank": 1,
+     "main_healer": 3,
+     "pierce": 2,
+     "ranged_aoe": 3,
+     "shield_support": 2,
+     "stopper_tank": 1,
+     "sustained_brawler": 2,
+     "unseated_range": 1,
+     "unseated_support": 2
+    },
+    "n": 20
+   },
+   {
+    "battle": 1435382492,
+    "mix": {
+     "engage_tank": 3,
+     "main_healer": 1,
+     "purge": 1,
+     "shield_support": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 3,
+     "unseated_range": 1,
+     "unseated_support": 1,
+     "unseated_tank": 3
+    },
+    "n": 15
+   },
+   {
+    "battle": 1435592866,
+    "mix": {
+     "anti_heal": 1,
+     "engage_tank": 1,
+     "main_healer": 2,
+     "off_tank": 1,
+     "pierce": 1,
+     "ranged_aoe": 3,
+     "shield_support": 1,
+     "stopper_tank": 2,
+     "sustained_brawler": 1,
+     "unseated_melee": 1,
+     "unseated_range": 1
+    },
+    "n": 15
+   },
+   {
+    "battle": 1435723074,
+    "mix": {
+     "anti_heal": 2,
+     "engage_tank": 1,
+     "main_healer": 2,
+     "off_tank": 1,
+     "pierce": 2,
+     "ranged_aoe": 2,
+     "shield_support": 3,
+     "stopper_tank": 2,
+     "sustained_brawler": 2,
+     "unseated_range": 1,
+     "unseated_support": 2
+    },
+    "n": 20
+   },
+   {
+    "battle": 1435788478,
+    "mix": {
+     "anti_heal": 2,
+     "engage_tank": 2,
+     "main_healer": 2,
+     "purge": 2,
+     "ranged_aoe": 7,
+     "shield_support": 2,
+     "sustained_brawler": 2,
+     "unseated_melee": 1,
+     "unseated_range": 2
+    },
+    "n": 22
+   },
+   {
+    "battle": 1435793760,
+    "mix": {
+     "anti_heal": 1,
+     "bomb_aoe": 1,
+     "engage_tank": 2,
+     "main_healer": 5,
+     "off_tank": 2,
+     "pierce": 1,
+     "purge": 1,
+     "shield_support": 3,
+     "sustained_brawler": 2,
+     "unseated_melee": 6,
+     "unseated_range": 1
+    },
+    "n": 25
+   },
+   {
+    "battle": 1435817153,
+    "mix": {
+     "anti_heal": 1,
+     "engage_tank": 2,
+     "main_healer": 3,
+     "pierce": 2,
+     "ranged_aoe": 2,
+     "shield_support": 2,
+     "stopper_tank": 1,
+     "sustained_brawler": 2,
+     "unseated_melee": 1
+    },
+    "n": 16
+   },
+   {
+    "battle": 1436132394,
+    "mix": {
+     "bomb_aoe": 1,
+     "dive_cleanup": 2,
+     "engage_tank": 3,
+     "main_healer": 6,
+     "off_tank": 1,
+     "ranged_aoe": 1,
+     "shield_support": 2,
+     "stopper_tank": 1,
+     "sustained_brawler": 4,
+     "unseated_melee": 2,
+     "unseated_support": 1,
+     "zone_support": 1
+    },
+    "n": 25
+   },
+   {
+    "battle": 1436187591,
+    "mix": {
+     "anti_heal": 1,
+     "brawl_healer": 1,
+     "dive_cleanup": 1,
+     "engage_tank": 2,
+     "main_healer": 3,
+     "off_tank": 1,
+     "pierce": 2,
+     "purge": 1,
+     "ranged_aoe": 3,
+     "shield_support": 1,
+     "stopper_tank": 2,
+     "sustained_brawler": 3,
+     "unseated_support": 1
+    },
+    "n": 22
+   },
+   {
+    "battle": 1436194380,
+    "mix": {
+     "brawl_healer": 1,
+     "engage_tank": 1,
+     "pierce": 1,
+     "purge": 1,
+     "ranged_aoe": 4,
+     "shield_support": 2,
+     "stopper_tank": 1,
+     "sustained_brawler": 1,
+     "unseated_healer": 1,
+     "unseated_range": 4,
+     "unseated_support": 1
+    },
+    "n": 18
+   },
+   {
+    "battle": 1436461777,
+    "mix": {
+     "anti_heal": 1,
+     "engage_tank": 1,
+     "main_healer": 3,
+     "pierce": 1,
+     "shield_support": 2,
+     "stopper_tank": 1,
+     "sustained_brawler": 3,
+     "unseated_melee": 2,
+     "unseated_support": 1
+    },
+    "n": 15
+   },
+   {
+    "battle": 1436691741,
+    "mix": {
+     "anti_heal": 2,
+     "engage_tank": 3,
+     "main_healer": 3,
+     "pierce": 1,
+     "ranged_aoe": 2,
+     "unseated_range": 1,
+     "unseated_support": 1,
+     "unseated_tank": 1,
+     "zone_support": 1
+    },
+    "n": 15
+   },
+   {
+    "battle": 1436740290,
+    "mix": {
+     "anti_heal": 2,
+     "engage_tank": 2,
+     "main_healer": 3,
+     "ranged_aoe": 2,
+     "stopper_tank": 2,
+     "sustained_brawler": 1,
+     "unseated_melee": 1,
+     "unseated_range": 1,
+     "unseated_support": 1
+    },
+    "n": 15
+   },
+   {
+    "battle": 1436741534,
+    "mix": {
+     "bomb_aoe": 1,
+     "engage_tank": 1,
+     "main_healer": 3,
+     "pierce": 1,
+     "sustained_brawler": 4,
+     "unseated_melee": 3,
+     "unseated_range": 1,
+     "unseated_tank": 1
+    },
+    "n": 15
+   },
+   {
+    "battle": 1437139352,
+    "mix": {
+     "engage_tank": 2,
+     "main_healer": 3,
+     "ranged_aoe": 3,
+     "shield_support": 2,
+     "stopper_tank": 3,
+     "unseated_melee": 1,
+     "unseated_range": 1,
+     "unseated_support": 1,
+     "zone_support": 1
+    },
+    "n": 17
+   },
+   {
+    "battle": 1437139458,
+    "mix": {
+     "dive_cleanup": 2,
+     "engage_tank": 2,
+     "main_healer": 2,
+     "ranged_aoe": 4,
+     "stopper_tank": 1,
+     "sustained_brawler": 3,
+     "unseated_melee": 3,
+     "unseated_range": 1,
+     "unseated_support": 1
+    },
+    "n": 19
+   }
+  ]
+ },
+ "party_winners_biased": {
+  "function_coverage": {
+   "anti_heal": 0.86,
+   "pierce": 1.0,
+   "purge": 0.64,
+   "shield_break": 0.64
+  },
+  "healers_per20_hist": {
+   "0": 2,
+   "1": 3,
+   "2": 2,
+   "3": 6,
+   "4": 1
+  },
+  "per20": {
+   "anti_heal": 0.68,
+   "bomb_aoe": 1.13,
+   "brawl_healer": 0.3,
+   "dive_cleanup": 0.15,
+   "engage_tank": 2.11,
+   "main_healer": 1.8,
+   "off_tank": 0.23,
+   "pierce": 1.2,
+   "purge": 0.38,
+   "ranged_aoe": 2.93,
+   "shield_support": 1.13,
+   "stopper_tank": 0.9,
+   "sustained_brawler": 2.78,
+   "unseated_melee": 2.03,
+   "unseated_range": 1.28,
+   "unseated_support": 0.3,
+   "unseated_tank": 0.68
+  },
+  "players": 266,
+  "rosters": 14,
+  "rows": [
+   {
+    "battle": 1435325283,
+    "mix": {
+     "anti_heal": 1,
+     "engage_tank": 1,
+     "main_healer": 3,
+     "pierce": 1,
+     "ranged_aoe": 1,
+     "shield_support": 1,
+     "sustained_brawler": 4,
+     "unseated_melee": 2,
+     "unseated_support": 1
+    },
+    "n": 15
+   },
+   {
+    "battle": 1435723074,
+    "mix": {
+     "anti_heal": 1,
+     "dive_cleanup": 1,
+     "engage_tank": 1,
+     "main_healer": 3,
+     "pierce": 1,
+     "ranged_aoe": 1,
+     "shield_support": 1,
+     "stopper_tank": 1,
+     "sustained_brawler": 6,
+     "unseated_melee": 3
+    },
+    "n": 19
+   },
+   {
+    "battle": 1435734174,
+    "mix": {
+     "anti_heal": 2,
+     "engage_tank": 3,
+     "main_healer": 3,
+     "pierce": 1,
+     "purge": 1,
+     "ranged_aoe": 2,
+     "shield_support": 3,
+     "stopper_tank": 1,
+     "sustained_brawler": 2,
+     "unseated_range": 2
+    },
+    "n": 20
+   },
+   {
+    "battle": 1435786184,
+    "mix": {
+     "brawl_healer": 2,
+     "engage_tank": 1,
+     "main_healer": 1,
+     "ranged_aoe": 1,
+     "stopper_tank": 4,
+     "unseated_melee": 3,
+     "unseated_range": 3,
+     "unseated_tank": 8
+    },
+    "n": 23
+   },
+   {
+    "battle": 1435788478,
+    "mix": {
+     "anti_heal": 3,
+     "bomb_aoe": 2,
+     "engage_tank": 2,
+     "main_healer": 2,
+     "pierce": 3,
+     "ranged_aoe": 3,
+     "shield_support": 2,
+     "stopper_tank": 1,
+     "sustained_brawler": 3,
+     "unseated_melee": 1,
+     "unseated_support": 1
+    },
+    "n": 23
+   },
+   {
+    "battle": 1435793760,
+    "mix": {
+     "bomb_aoe": 3,
+     "engage_tank": 2,
+     "main_healer": 1,
+     "pierce": 1,
+     "ranged_aoe": 2,
+     "shield_support": 1,
+     "stopper_tank": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 3
+    },
+    "n": 15
+   },
+   {
+    "battle": 1436132394,
+    "mix": {
+     "bomb_aoe": 1,
+     "engage_tank": 1,
+     "main_healer": 3,
+     "pierce": 1,
+     "purge": 2,
+     "ranged_aoe": 4,
+     "sustained_brawler": 3,
+     "unseated_melee": 5,
+     "unseated_range": 2
+    },
+    "n": 22
+   },
+   {
+    "battle": 1436452862,
+    "mix": {
+     "bomb_aoe": 1,
+     "brawl_healer": 2,
+     "engage_tank": 1,
+     "main_healer": 1,
+     "ranged_aoe": 5,
+     "stopper_tank": 1,
+     "sustained_brawler": 1,
+     "unseated_melee": 1,
+     "unseated_range": 4,
+     "unseated_tank": 1
+    },
+    "n": 18
+   },
+   {
+    "battle": 1436739253,
+    "mix": {
+     "bomb_aoe": 1,
+     "engage_tank": 5,
+     "pierce": 1,
+     "purge": 1,
+     "ranged_aoe": 7,
+     "shield_support": 2,
+     "sustained_brawler": 1,
+     "unseated_range": 2
+    },
+    "n": 20
+   },
+   {
+    "battle": 1437000128,
+    "mix": {
+     "anti_heal": 1,
+     "engage_tank": 1,
+     "main_healer": 1,
+     "off_tank": 1,
+     "pierce": 1,
+     "purge": 1,
+     "ranged_aoe": 2,
+     "shield_support": 3,
+     "sustained_brawler": 4,
+     "unseated_melee": 4,
+     "unseated_range": 3
+    },
+    "n": 22
+   },
+   {
+    "battle": 1437253161,
+    "mix": {
+     "anti_heal": 1,
+     "bomb_aoe": 2,
+     "engage_tank": 3,
+     "main_healer": 1,
+     "off_tank": 1,
+     "pierce": 2,
+     "ranged_aoe": 7,
+     "sustained_brawler": 1,
+     "unseated_support": 1
+    },
+    "n": 19
+   },
+   {
+    "battle": 1437256713,
+    "mix": {
+     "bomb_aoe": 1,
+     "engage_tank": 2,
+     "main_healer": 3,
+     "pierce": 1,
+     "ranged_aoe": 3,
+     "shield_support": 2,
+     "stopper_tank": 1,
+     "sustained_brawler": 2,
+     "unseated_melee": 3
+    },
+    "n": 18
+   },
+   {
+    "battle": 1437411076,
+    "mix": {
+     "bomb_aoe": 3,
+     "engage_tank": 3,
+     "pierce": 1,
+     "stopper_tank": 1,
+     "sustained_brawler": 4,
+     "unseated_melee": 1,
+     "unseated_range": 1,
+     "unseated_support": 1
+    },
+    "n": 15
+   },
+   {
+    "battle": 1437506788,
+    "mix": {
+     "bomb_aoe": 1,
+     "dive_cleanup": 1,
+     "engage_tank": 2,
+     "main_healer": 2,
+     "off_tank": 1,
+     "pierce": 2,
+     "ranged_aoe": 1,
+     "stopper_tank": 1,
+     "sustained_brawler": 5,
+     "unseated_melee": 1
+    },
+    "n": 17
+   }
+  ]
+ }
+}

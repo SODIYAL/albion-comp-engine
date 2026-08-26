@@ -686,6 +686,64 @@ def t_resil_pen():
           f"rebate7={dp7 / z7 if z7 else 0:.4f}")
 
 
+# ---------------------------------------------- F21 need profiles (incr. 3)
+def t_need_profiles():
+    # Owner-ruled 2026-08-26 (blind round + 139 killboard rosters +
+    # 8 curated comps + Wardergrip): fine-seat bands + function coverage
+    # gate GENERATION at 15+ — engage-leaning default (engage 2-3 /
+    # stopper 1-2), stopper-heavy is the territory-defense shape, zone
+    # and off-tank capped, pierce + heal-cut always fielded. Below
+    # min_size nothing arms; manual parties always score.
+    def mix(e, party):
+        seats, funcs = {}, {"pierce": 0, "anti_heal": 0}
+        for w in party:
+            menu = e.weapons[w].get("role_menu") or []
+            sec = e.weapons[w].get("role_menu_secondary") or []
+            if menu:
+                seats[menu[0]] = seats.get(menu[0], 0) + 1
+            for f in funcs:
+                if f in menu or f in sec:
+                    funcs[f] += 1
+        return seats, funcs
+
+    e = Engine(content="blackzone_roam", size=20, style="brawl")
+    f = e.forge(20)
+    s, fn = mix(e, f["party"])
+    bz_ok = (f["feasible"]
+             and 2 <= s.get("engage_tank", 0) <= 3
+             and 1 <= s.get("stopper_tank", 0) <= 2
+             and s.get("off_tank", 0) <= 1
+             and 1 <= s.get("shield_support", 0) <= 3
+             and s.get("zone_support", 0) <= 1
+             and fn["pierce"] >= 1 and fn["anti_heal"] >= 1)
+    et = Engine(content="territory_defense", size=20, style="brawl")
+    ft = et.forge(20)
+    st, _fnt = mix(et, ft["party"])
+    terry_ok = ft["feasible"] and 2 <= st.get("stopper_tank", 0) <= 4
+    # owner-ruled 2026-08-26 follow-up: ranged styles at 20 field a
+    # 7-strong ranged-AoE core (combo-aware — the members' SELECTED
+    # spells deliver it), killing the melee-heavy clap_kite defect
+    ek = Engine(content="blackzone_roam", size=20, style="clap_kite")
+    fk = ek.forge(20)
+    _c, _r, pk, _g = ek._forge_counts(fk["party"], fk["combos"])
+    ranged_ok = fk["feasible"] and pk.get("ranged_aoe_core", 0) >= 7
+    e7 = Engine(content="blackzone_roam", size=7)
+    unarmed = not e7._profile_min and not e7._profile_max \
+        and e7.forge(7)["feasible"]
+    # a locked engage tank counts toward the minimum like any member
+    fl = e.forge(20, locked=["2H_HAMMER_AVALON"])
+    sl, _ = mix(e, fl["party"])
+    locked_ok = fl["party"][0] == "2H_HAMMER_AVALON" \
+        and 2 <= sl.get("engage_tank", 0) <= 3
+    check("F21 need profiles: engage-leaning default bands + function "
+          "coverage at 20, stopper-heavy terry, clap_kite ranged core 7, "
+          "unarmed below 15, locked members count",
+          bz_ok and terry_ok and ranged_ok and unarmed and locked_ok,
+          f"bz={s} funcs={fn} terry_stoppers={st.get('stopper_tank', 0)} "
+          f"ck_ranged_core={pk.get('ranged_aoe_core', 0)} "
+          f"locked_engage={sl.get('engage_tank', 0)}")
+
+
 if __name__ == "__main__":
     t_invariant()
     t_synergy_gating()
@@ -707,6 +765,7 @@ if __name__ == "__main__":
     t_dup_and_clump()
     t_curse_slot_earned()
     t_resil_pen()
+    t_need_profiles()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")

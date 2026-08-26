@@ -1353,6 +1353,52 @@ function familiesHtml(withNote){
         `<button class="nb-w${f.mine.includes(c.weapon) ? " match" : ""}" data-detail="${c.weapon}" title="${esc(nameOf(c.weapon))} — observed with this core in ${Math.round(100 * c.share)}% of its cohorts">${icon(c.weapon, 20)}</button>`).join("")}</span>` : ""}
     </div>`).join("")}${note}</div>`;
 }
+/* Observed effect quotas (increment 3b, owner-ruled 2026-08-26: "yes —
+   advise quotas"). EFFECT_QUOTAS carries how many carriers of each typed
+   gear effect (Demon/Judicator/Guardian/Royal/Hellion chests) the
+   near-complete observed rosters field per 20 — mined from the
+   reference-build evidence layer, scaled to PLAN(). Rows compare against
+   the chests this roster's loadouts actually carry; members without gear
+   set are counted honestly as unknown, and no shortfall is claimed while
+   any chest is unknown. Observed evidence: advice only, never a score. */
+function effectQuotaRows(){
+  if (typeof EFFECT_QUOTAS === "undefined" || !EFFECT_QUOTAS) return null;
+  const plan = PLAN();
+  if (plan < (EFFECT_QUOTAS.min_size || 15)) return null;
+  const effs = EFFECT_QUOTAS.effects || {};
+  const keys = Object.keys(effs).sort();
+  if (!keys.length) return null;
+  let unset = 0;
+  const carried = {};
+  (party || []).forEach((_, i) => {
+    const L = (typeof LOADOUT !== "undefined" && LOADOUT[i]) || null;
+    if (!L || !L.armor){ unset++; return; }
+    for (const k of keys){
+      if ((effs[k].items || []).indexOf(L.armor) >= 0)
+        carried[k] = (carried[k] || 0) + 1;
+    }
+  });
+  return keys.map(k => {
+    const e = effs[k];
+    const want = Math.round(e.typical * plan / 2) / 10;
+    return { effect: k, name: e.name, have: carried[k] || 0,
+             want, fielded: e.fielded, unset,
+             short: unset === 0 && (carried[k] || 0) < Math.floor(want) };
+  });
+}
+function effectQuotasHtml(){
+  const rows = effectQuotaRows();
+  if (!rows) return "";
+  const unset = rows[0].unset;
+  return `<div class="ka-fam"><span class="ka-nb-label">Observed effect quotas — carriers per ${PLAN()}</span>
+    <div class="fam-row"><span class="fam-meta">${rows.map(r => {
+      const line = `${esc(r.name)}: yours ×${r.have} · observed ~${r.want}`;
+      return `<span title="${esc(r.name)} — near-complete observed rosters field ~${r.want} carrier${r.want === 1 ? "" : "s"} at this size (fielded in ${Math.round(100 * r.fielded)}% of rosters)">${
+        r.short ? `<b class="offcomp">${line}</b>` : line}</span>`;
+    }).join(" · ")}</span></div>
+    ${unset ? `<div class="ka-note">${unset} member${unset === 1 ? "" : "s"} without gear set — their chests are unknown, not counted as missing.</div>` : ""}
+    <div class="ka-note">Carrier counts from near-complete observed rosters (reference-build evidence). Advice only; never changes a score.</div></div>`;
+}
 function observedLine(w){
   const a = cohortAffinity();
   if (!a) return "";
@@ -1715,7 +1761,7 @@ function renderMetaStrip(){
       return `<div class="meta-row meta-aff"><span class="rk">${String(i+1).padStart(2,"0")}</span>${icon(r.w, 20)}
         <button class="nm-btn" data-detail="${r.w}">${nameOf(r.w)}</button>
         <span class="pct">${r.cohorts} cohorts · ${aff}</span></div>`;
-    }).join("") + nbHtml + familiesHtml(false) + `<div class="ka-note">Matches need ${a.minOverlap === 1 ? "your weapon" : "≥2 of your weapons"} in the same observed Alliance/Guild cohort. Family percentages are observation shares. Not party reconstruction or effectiveness data; never changes a score.</div>`;
+    }).join("") + nbHtml + familiesHtml(false) + effectQuotasHtml() + `<div class="ka-note">Matches need ${a.minOverlap === 1 ? "your weapon" : "≥2 of your weapons"} in the same observed Alliance/Guild cohort. Family percentages are observation shares. Not party reconstruction or effectiveness data; never changes a score.</div>`;
     sec.hidden = false;
     return;
   }
@@ -1733,7 +1779,7 @@ function renderMetaStrip(){
     `<div class="meta-row"><span class="rk">${String(i+1).padStart(2,"0")}</span>${icon(w, 20)}
       <button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>
       <span class="pct">${(100 * n / u.m.players_attributed).toFixed(1)}%</span></div>`).join("")
-    + familiesHtml(true);
+    + familiesHtml(true) + effectQuotasHtml();
   sec.hidden = false;
 }
 /* ------------------------------------------------ live party (companion)

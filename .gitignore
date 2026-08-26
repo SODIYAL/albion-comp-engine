@@ -27,4 +27,5 @@ tests/*_responses.md
 .playwright-mcp/
 pipeline/out/icons/
 pipeline/out/battles_cache/
+pipeline/out/roster_cache/
 pipeline/out/dumps_cache/

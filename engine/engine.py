@@ -442,6 +442,43 @@ class Engine:
                             merged[key] = rule
                     self._band = merged
                     break
+        # NEED PROFILES (increment 3, owner-ruled 2026-08-26): fine-seat
+        # bands + function coverage minima for the FORGE, scaled by
+        # size/reference_size (half-up, the pinned rounding rule) and
+        # armed at min_size. SEAT keys count a weapon's PRIMARY menu
+        # seat; FUNCTION keys count any primary/secondary membership.
+        # Generation-only: manual parties always score.
+        self._profile_min, self._profile_max = {}, {}
+        self._profile_members, self._profile_primary = {}, {}
+        prof = self.data.get("need_profiles") or {}
+        if prof and self.size >= prof.get("min_size", 15):
+            ref = prof.get("reference_size", 20)
+            rules = dict(prof.get("defaults") or {})
+            for k, v in (((prof.get("overrides") or {})
+                          .get(self.content)) or {}).items():
+                rules[k] = v
+            for k, rule in rules.items():
+                if "min" in rule:
+                    mn = self._half_up(rule["min"] * self.size / ref)
+                    if mn > 0:
+                        self._profile_min[k] = mn
+                if "max" in rule:
+                    self._profile_max[k] = self._half_up(
+                        rule["max"] * self.size / ref)
+            keys = set(self._profile_min) | set(self._profile_max)
+            for wk, w in self.weapons.items():
+                menu = w.get("role_menu") or []
+                sec = w.get("role_menu_secondary") or []
+                contrib = set()
+                if menu and menu[0] in keys:
+                    contrib.add(menu[0])
+                for f in ("pierce", "anti_heal", "purge", "shield_break"):
+                    if f in keys and (f in menu or f in sec):
+                        contrib.add(f)
+                if contrib:
+                    self._profile_members[wk] = frozenset(contrib)
+                if menu:
+                    self._profile_primary[wk] = menu[0]
         self._extras_cache = {}
         self._pre_cache = {}
         self._default_cache = {}
@@ -2397,8 +2434,13 @@ class Engine:
                 role_min[key] = rule["min"]
             if "max" in rule:
                 role_max[key] = rule["max"]
+        # need-profile minima ride the predicate channel (membership-based
+        # contributions are added in _forge_counts / unions at the eval
+        # sites); seat maxima get their own key
+        for k, mn in self._profile_min.items():
+            pred_min[k] = mn
         return {"pool": pool, "role_min": role_min, "role_max": role_max,
-                "pred_min": pred_min}
+                "pred_min": pred_min, "seat_max": dict(self._profile_max)}
 
     def _forge_counts(self, party, combos=None):
         """(weapon counts, role counts, predicate counts, group counts).
@@ -2412,6 +2454,8 @@ class Engine:
             r = self.role_of(w)
             roles[r] = roles.get(r, 0) + 1
             for pn in self._pred_contrib(w, combos[i] if combos else None):
+                preds[pn] = preds.get(pn, 0) + 1
+            for pn in self._profile_members.get(w) or ():
                 preds[pn] = preds.get(pn, 0) + 1
             for gi in self.groups_of.get(w, []):
                 groups[gi] = groups.get(gi, 0) + 1
@@ -2448,8 +2492,14 @@ class Engine:
         mx = ctx["role_max"].get(r)
         if mx is not None and roles.get(r, 0) >= mx:
             return False
+        p0 = self._profile_primary.get(w)
+        smx = ctx["seat_max"].get(p0) if p0 else None
+        if smx is not None and preds.get(p0, 0) >= smx:
+            return False
         need = self._forge_min_need(ctx, roles, preds, w,
-                                    self._pred_possible(w))
+                                    self._pred_possible(w)
+                                    | (self._profile_members.get(w)
+                                       or frozenset()))
         return need <= slots_left_after
 
     def _forge_eval_pick(self, ctx, beam, w, slots_left_after):
@@ -2463,8 +2513,10 @@ class Engine:
         extras = self._combo_extras(w)
         for i in range(len(extras)):
             if ctx["pred_min"]:
-                need = self._forge_min_need(ctx, beam["roles"], beam["preds"],
-                                            w, self._pred_contrib(w, i))
+                need = self._forge_min_need(
+                    ctx, beam["roles"], beam["preds"], w,
+                    self._pred_contrib(w, i)
+                    | (self._profile_members.get(w) or frozenset()))
                 if need > slots_left_after:
                     continue
             val, d_fit, d_syn = self._combo_score(state, w, i, extras[i])
@@ -2623,12 +2675,13 @@ class Engine:
                 "feasible": feasible, "filler": filler, "held": held,
                 "locked": fixed}
 
-    def _add_ok(self, ctx, counts, roles, groups, w):
-        """Copy/group/role-MAX check for adding `w` to a roster whose counts
-        exclude the slot being replaced. Minima (roles AND combo-aware
-        predicates) are enforced through _forge_eval_pick's exact per-combo
-        need — the old flat pred delta let a swap replace a member whose
-        SELECTED spells filled a minimum (review 2026-08-19)."""
+    def _add_ok(self, ctx, counts, roles, preds, groups, w):
+        """Copy/group/role-MAX/seat-MAX check for adding `w` to a roster
+        whose counts exclude the slot being replaced. Minima (roles AND
+        combo-aware predicates) are enforced through _forge_eval_pick's
+        exact per-combo need — the old flat pred delta let a swap replace
+        a member whose SELECTED spells filled a minimum (review
+        2026-08-19)."""
         if counts.get(w, 0) + 1 > self._dup_gen_max(w):
             return False
         for gi in self.groups_of.get(w, []):
@@ -2636,6 +2689,10 @@ class Engine:
                 return False
         mx = ctx["role_max"].get(self.role_of(w))
         if mx is not None and roles.get(self.role_of(w), 0) + 1 > mx:
+            return False
+        p0 = self._profile_primary.get(w)
+        smx = ctx["seat_max"].get(p0) if p0 else None
+        if smx is not None and preds.get(p0, 0) + 1 > smx:
             return False
         return True
 
@@ -2662,7 +2719,8 @@ class Engine:
                 for w in ctx["pool"]:
                     if w == orig:
                         continue
-                    if not self._add_ok(ctx, counts_r, roles_r, groups_r, w):
+                    if not self._add_ok(ctx, counts_r, roles_r, preds_r,
+                                        groups_r, w):
                         continue
                     pick = self._forge_eval_pick(ctx, beam, w, 0)
                     if pick is None:
@@ -2745,6 +2803,11 @@ class Engine:
                             if ok:
                                 for r, mx in ctx["role_max"].items():
                                     if roles.get(r, 0) > mx:
+                                        ok = False
+                                        break
+                            if ok:
+                                for s, mx in ctx["seat_max"].items():
+                                    if preds.get(s, 0) > mx:
                                         ok = False
                                         break
                             if ok:

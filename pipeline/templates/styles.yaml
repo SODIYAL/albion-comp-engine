@@ -130,11 +130,14 @@ styles:
     # owner-ruled 2026-08-23: "clap requires extreme damage and movement" —
     # healers 2-3 at 20; the 10-man clap forge kept three hammers, ruled one
     # too many (engage tank + one, then damage/movement bodies). 15-19 rows
-    # are PROVISIONAL interpolation.
+    # are PROVISIONAL interpolation. ranged_aoe_core 7 at 20 owner-ruled
+    # 2026-08-26 (increment-3 round: the melee-heavy clap forge defect;
+    # "range large aoe damage dealers instead of melee") — the 15-19 value
+    # is the scaled interpolation (7 * 15/20, half-up).
     constraint_overrides:
       - {min_size: 10, max_size: 14, frontline: {min: 2, max: 2}}
-      - {min_size: 15, max_size: 19, healer: {min: 2, max: 3}, frontline: {min: 3, max: 4}}
-      - {min_size: 20, max_size: 29, healer: {min: 2, max: 3}, frontline: {min: 3, max: 5}}
+      - {min_size: 15, max_size: 19, healer: {min: 2, max: 3}, frontline: {min: 3, max: 4}, ranged_aoe_core: {min: 5}}
+      - {min_size: 20, max_size: 29, healer: {min: 2, max: 3}, frontline: {min: 3, max: 5}, ranged_aoe_core: {min: 7}}
     # owner's clap sequence: engage -> clump -> pierce -> burst -> secure -> reset
     chain:
       - {name: Engage, caps: [engage, stun]}
@@ -230,9 +233,12 @@ styles:
     # toward the cap in the windows; focus fire stays incidental
     mechanics: {expected_aoe_targets: 6, focus_attackers: 3}
     # owner-ruled 2026-08-24 (round 5): "clap kite at 20 doesn't need 5
-    # healers, maybe 3 or 4 max"
+    # healers, maybe 3 or 4 max". ranged_aoe_core 7 at 20 owner-ruled
+    # 2026-08-26 (the melee-heavy clap_kite forge was the increment-3
+    # motivating defect); 15-19 is the scaled interpolation.
     constraint_overrides:
-      - {min_size: 20, max_size: 29, healer: {min: 3, max: 4}}
+      - {min_size: 15, max_size: 19, ranged_aoe_core: {min: 5}}
+      - {min_size: 20, max_size: 29, healer: {min: 3, max: 4}, ranged_aoe_core: {min: 7}}
     chain:
       - {name: Kite window, caps: [mobility, disengage]}
       - {name: Catch, caps: [catch, slow]}

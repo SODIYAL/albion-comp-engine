@@ -59,7 +59,7 @@ py -3 pipeline/build_cohort_families.py # cohort sample -> out/cohort_families.j
 py -3 dashboard/build.py             # regenerates dashboard/index.html + docs/ (GitHub Pages)
 ```
 
-After editing `MASTERSHEET.md`: rebuild dataset + dashboard, then run golden + parity. After moving the game-data snapshot (`data/source_pins.yaml`): follow `pipeline/README.md` (fetch_snapshot → parse_dumps → fetch_item_stats → fetch_gear_lines → builds → dataset → full gate list), and re-check every `pipeline/effect_overrides.yaml` entry against the fresh dumps. `pipeline/sample_battles.py` (usage/cohort refresh) and `pipeline/adapters/metabattle.py fetch` are the only network steps outside snapshot fetch — both explicit, never part of a normal build. `pipeline/curate_helper.py <WEAPON>` prints the evidence worksheet for curation.
+After editing `MASTERSHEET.md`: rebuild dataset + dashboard, then run golden + parity. After moving the game-data snapshot (`data/source_pins.yaml`): follow `pipeline/README.md` (fetch_snapshot → parse_dumps → fetch_item_stats → fetch_gear_lines → builds → dataset → full gate list), and re-check every `pipeline/effect_overrides.yaml` entry against the fresh dumps. `pipeline/sample_battles.py` (usage/cohort refresh), `pipeline/sample_rosters.py` (near-complete fight-roster mixes behind the need profiles; `--pages 0` re-analyzes offline) and `pipeline/adapters/metabattle.py fetch` are the only network steps outside snapshot fetch — all explicit, never part of a normal build. `pipeline/curate_helper.py <WEAPON>` prints the evidence worksheet for curation.
 
 ## Architecture
 
