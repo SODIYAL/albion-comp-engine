@@ -34,91 +34,224 @@
     return {tone, label, critical, weak, excess};
   }
 
-  /* Comp identity (F-V3-2, 2026-08-23): what the party is BECOMING, in
-     playstyle vocabulary. ENG.compIdentity is descriptive engine output —
-     this renders it verbatim and adds nothing. */
-  function identityLine(){
-    if (!party.length || typeof ENG.compIdentity !== "function") return "";
-    const id = ENG.compIdentity(party, COMBOS_CUR);
-    if (!id.label) return "";
-    const tag = id.style && id.strength === "leaning"
-      ? `${id.label} · leaning` : id.label;
-    const conf = id.conflicts.length
-      ? `<small class="dl-id-conflict" title="${esc(id.conflicts[0].note)}">⚠ ${
-          id.conflicts.map(c => esc(c.display_name)).join(", ")}: ${
-          id.conflicts[0].kind === "unfit"
-            ? "unfit for this playstyle at this size"
-            : `pull${id.conflicts.length > 1 ? "" : "s"} against the ${
-                id.conflicts[0].side === "melee" ? "ranged" : "melee"} core`}</small>`
-      : "";
-    return `<span class="dl-identity"><span class="dl-kicker">becoming</span>${esc(tag)}</span>${conf}`;
+  /* ================= COMP-STATUS RADAR (owner 2026-08-26) =================
+     The status card IS the diagram: one axis per capability GROUP (the same
+     taxonomy the deep board's renderGroups uses, "Other" guard included),
+     plotted as supply vs template target, with everything textual living in
+     hover popups. The center shows what the comp is BECOMING (comp_identity
+     verbatim: playstyle glyph, dashed ring while "leaning", solid when
+     strong); its popup carries status triage, fitness, kill pressure, and
+     the role advisory. Pure display translation of existing engine output —
+     nothing here scores (F-V3-2, R5). */
+  const DL_ICONS = {
+    plus:      "M12 4v16M4 12h16",
+    shield:    "M12 3l7 3v5.5c0 4.8-3.2 7.8-7 9.5-3.8-1.7-7-4.7-7-9.5V6z",
+    link:      "M10.5 13.5a4.5 4.5 0 0 0 6.4.4l2.6-2.6a4.5 4.5 0 0 0-6.4-6.4l-1.5 1.5M13.5 10.5a4.5 4.5 0 0 0-6.4-.4l-2.6 2.6a4.5 4.5 0 0 0 6.4 6.4l1.5-1.5",
+    ban:       "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM5.8 5.8l12.4 12.4",
+    crosshair: "M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16zM12 1v5M12 18v5M1 12h5M18 12h5",
+    bolt:      "M13 2L4.5 13.5H10L9 22l8.5-11.5H12z",
+    dot:       "M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z",
+    /* playstyle glyphs for the identity center */
+    brawl:     "M2 12h8M6.5 8.5L10 12l-3.5 3.5M22 12h-8M17.5 8.5L14 12l3.5 3.5",
+    clap:      "M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.8 2.8M18 6l-2.8 2.8M6 18l2.8-2.8M18 18l-2.8 2.8",
+    kite:      "M4 20c6-1 12-7 14-14M18 6l.7-3.3L15.4 3M13 13l5 5",
+    brawl_clap:"M2 12h7M6 9l3 3-3 3M17 6v3M17 15v3M11 12h3M20 12h3M13.5 8.5l2 2M20.5 8.5l-2 2M13.5 15.5l2-2M20.5 15.5l-2-2",
+    clap_kite: "M4 20c5-1 10-5.5 12.5-11M8 7v3M8 16v3M2 11.5h3M11 11.5h3M4.2 7.7l2 2M11.8 7.7l-2 2",
+    split:     "M10 12H2M5.5 8.5L2 12l3.5 3.5M14 12h8M18.5 8.5L22 12l-3.5 3.5",
+    forming:   "M5 12h.01M12 12h.01M19 12h.01",
+    bomb:      "M14 10a7 7 0 1 1-8 8 7 7 0 0 1 8-8zM14 10l3-3M17 7l-1-1M17 7l1 1M19 3l.01.01M22 6l.01.01",
+  };
+  const DL_ICON_FILL = {bolt: true, dot: true};
+  /* Categorical group colors: the app's role palette re-stepped where the
+     colorblind validator demanded (Control teal, not peel-cyan — too close
+     to Frontline blue), validated on the panel surface incl. the wrap pair.
+     Fixed assignment, never cycled. */
+  const DL_GROUP_META = {
+    Sustain:   {col: "#1FAE58", icon: "plus"},
+    Frontline: {col: "#4D8DFF", icon: "shield"},
+    Control:   {col: "#17A386", icon: "link"},
+    Denial:    {col: "#C08800", icon: "ban"},
+    Damage:    {col: "#E00063", icon: "crosshair"},
+    Tempo:     {col: "#E85D12", icon: "bolt"},
+    Other:     {col: "#757A92", icon: "dot"},
+  };
+  const DL_SCALE_MAX = 1.25;   // 125% of target = full radius (display cap)
+
+  /* shared popup: content lives in DL_TIPS (rebuilt every render —
+     indices are re-stamped with the markup), elements carry data-dltip */
+  let DL_TIPS = [];
+  function dlTip(){
+    let t = document.getElementById("dl-tip");
+    if (!t){ t = document.createElement("div"); t.id = "dl-tip"; document.body.appendChild(t); }
+    return t;
+  }
+  function dlTipMove(ev){
+    const t = dlTip(), pad = 14, w = t.offsetWidth, h = t.offsetHeight;
+    let x = ev.clientX + pad, y = ev.clientY + pad;
+    if (x + w > innerWidth - 8)  x = ev.clientX - w - pad;
+    if (y + h > innerHeight - 8) y = ev.clientY - h - pad;
+    t.style.left = x + "px"; t.style.top = y + "px";
+  }
+  document.addEventListener("pointerover", e => {
+    const h = e.target.closest && e.target.closest("[data-dltip]");
+    const t = dlTip();
+    if (h && DL_TIPS[+h.dataset.dltip]){
+      t.innerHTML = DL_TIPS[+h.dataset.dltip];
+      t.style.display = "block"; dlTipMove(e);
+    } else t.style.display = "none";
+  });
+  document.addEventListener("pointermove", e => {
+    if (dlTip().style.display === "block") dlTipMove(e);
+  });
+  function tipRef(html){ DL_TIPS.push(html); return DL_TIPS.length - 1; }
+
+  function dlIcon(x, y, size, key, col){
+    return `<g transform="translate(${x - size/2},${y - size/2}) scale(${size/24})"><path d="${DL_ICONS[key]}" fill="${DL_ICON_FILL[key] ? col : "none"}" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>`;
   }
 
-  /* Kill pressure (identity Phase D): the caller's checklist — pierce /
-     heal-cut / burst vs the comp-fitted targets. ENG.killPressure is
-     descriptive engine output rendered verbatim. */
-  function killLine(){
-    if (!party.length || typeof ENG.killPressure !== "function") return "";
-    const kp = ENG.killPressure(party, COMBOS_CUR);
-    if (!kp) return "";
-    const chip = (k, lbl) => {
-      const l = kp[k];
-      const pct = l.bar > 0 ? Math.round(100 * l.have / l.bar) : 100;
-      return `<span class="${l.ok ? "ok" : "bad"}" title="${lbl}: ${l.have.toFixed(1)} of ${l.bar.toFixed(1)} needed${l.caps.length ? ` (${l.caps.join(", ")})` : " — not demanded by this content"}">${l.ok ? "✓" : "✗"} ${lbl}${l.ok ? "" : ` ${pct}%`}</span>`;
-    };
-    return `<span class="dl-kill" title="can this comp actually kill? pierce the clump, cut the healing, burst hard enough — bars are the comp-fitted template targets; display only"><span class="dl-kicker">kill pressure</span>${chip("pierce", "pierce")}${chip("heal_cut", "heal-cut")}${chip("burst", "burst")}</span>`;
+  /* one axis per group: coverage = Σ min(have, soft) / Σ target — supply is
+     counted up to the point the engine stops crediting it, so one wildly
+     overstacked capability can't mask its siblings' gaps. Markers carry the
+     truth per capability in the popup. */
+  function radarAxes(){
+    const s = supply(party);
+    const grouped = new Set(Object.values(GROUPS).flat());
+    const other = Object.keys(REQS()).filter(c => !grouped.has(c));
+    const groups = other.length ? {...GROUPS, Other: other} : GROUPS;
+    const axes = [];
+    for (const [g, caps] of Object.entries(groups)){
+      const rows = caps.filter(c => REQS()[c]).map(c => {
+        const have = s[c] || 0, t = target(c), soft = softCap(c);
+        return {cap: c, have, t, soft, floor: floorHit(c, have), over: have > soft};
+      });
+      if (!rows.length) continue;
+      const tSum = rows.reduce((a, r) => a + Math.max(0, r.t), 0);
+      if (tSum <= 0) continue;
+      const hSum = rows.reduce((a, r) => a + Math.min(r.have, r.soft), 0);
+      axes.push({g, rows, cov: hSum / tSum,
+                 floor: rows.some(r => r.floor), over: rows.some(r => r.over),
+                 meta: DL_GROUP_META[g] || DL_GROUP_META.Other});
+    }
+    return axes;
   }
-
-  /* Role check (roles-design.md increment 1, 2026-08-25): who is playing
-     what — the fine-role tally plus the owner's balance flags ("we have
-     too many tanks or healer or stoppers etc and need something else";
-     "3 heavy maces in party and 0 engage tanks would be an obvious
-     flag"). ENG.roleAdvisory is descriptive engine output rendered
-     verbatim; chests come from each member's own LOADOUT kit, so the
-     read follows what the players actually wear. Display only. */
-  function roleLine(){
-    if (!party.length || typeof ENG.roleAdvisory !== "function") return "";
+  function groupTipHtml(a){
+    const st = a.floor ? '<span class="dlt-bad">below a hard floor</span>'
+      : a.over ? '<span class="dlt-over">overstacked</span>'
+      : a.cov >= 1 ? '<span class="dlt-ok">target met</span>'
+      : '<span class="dlt-dim">below target</span>';
+    const rows = a.rows.map(r =>
+      `<div class="dlt-line"><span>${esc(capLabel(r.cap))}${r.floor ? ' <b class="dlt-bad">⚑ floor</b>' : r.over ? ' <b class="dlt-over">▲</b>' : ""}</span><span>${r.have.toFixed(1)} / ${r.t.toFixed(1)}</span></div>`).join("");
+    return `<div class="dlt-head">${esc(a.g)} — ${Math.round(a.cov * 100)}% of target</div>${st}${rows}`;
+  }
+  function centerTipHtml(state, id, pct, f, max){
+    let h = `<div class="dlt-head">${esc(state.label)}</div>`
+      + `<div class="dlt-line"><span>triage</span><span>${state.critical} critical · ${state.weak} weak · ${state.excess} overstacked</span></div>`
+      + `<div class="dlt-line"><span>fitness</span><span>${pct.toFixed(0)}% · ${f.toFixed(1)} / ${max.toFixed(0)}</span></div>`;
+    if (id && id.label)
+      h += `<div class="dlt-line"><span>becoming</span><span>${esc(id.label)}${id.strength ? ` · ${id.strength}` : ""}</span></div>`;
+    if (id) id.conflicts.forEach(c => {
+      h += `<div class="dlt-warn">⚠ ${esc(c.display_name)}: ${c.kind === "unfit"
+        ? "unfit for this playstyle at this size"
+        : `pulls against the ${c.side === "melee" ? "ranged" : "melee"} core`}</div>`;
+    });
+    if (typeof ENG.killPressure === "function"){
+      const kp = ENG.killPressure(party, COMBOS_CUR);
+      if (kp){
+        const bit = (k, lbl) => {
+          const l = kp[k];
+          const p = l.bar > 0 ? Math.round(100 * l.have / l.bar) : 100;
+          return l.ok ? `<b class="dlt-ok">✓ ${lbl}</b>` : `<b class="dlt-bad">✗ ${lbl} ${p}%</b>`;
+        };
+        h += `<div class="dlt-line"><span>kill pressure</span><span>${bit("pierce", "pierce")} ${bit("heal_cut", "heal-cut")} ${bit("burst", "burst")}</span></div>`;
+      }
+    }
+    const adv = roleAdvisory();
+    if (adv){
+      const label = k => (((ENG.rolesBook || {})[k]) || {}).name || k;
+      const short = k => label(k).split(" / ")[0].split(" (")[0];
+      const tally = Object.entries(adv.tally).map(([k, n]) => `${n}× ${esc(short(k))}`).join(" · ");
+      if (tally) h += `<div class="dlt-line"><span>roles</span><span>${tally}</span></div>`;
+      const fns = {};
+      adv.members.forEach(m => (m.functions || []).forEach(c => { fns[c] = (fns[c] || 0) + 1; }));
+      const fnTxt = Object.entries(fns).map(([k, n]) => `${n}× ${esc(short(k))}`).join(" · ");
+      if (fnTxt) h += `<div class="dlt-line"><span>functions</span><span>${fnTxt}</span></div>`;
+      adv.flags.forEach(f2 => {
+        h += `<div class="dlt-warn">⚠ ${f2.kind === "no_engage_tank"
+          ? "no engage tank — nobody makes a clump"
+          : `${esc(nameOf(f2.weapon))}: worn chest fights its ${esc(label(f2.role).toLowerCase())} job`}</div>`;
+      });
+    }
+    h += `<div class="dlt-note">descriptive — identity, kill pressure and roles never score</div>`;
+    return h;
+  }
+  function roleAdvisory(){
+    if (!party.length || typeof ENG.roleAdvisory !== "function") return null;
     const chests = {};
     party.forEach((w, i) => {
       const L = (typeof LOADOUT !== "undefined" && LOADOUT[i]) || null;
       if (L && L.armor) chests[i] = L.armor;
     });
     const adv = ENG.roleAdvisory(party, chests);
-    if (!adv || (!adv.flags.length && !Object.keys(adv.tally).length)) return "";
-    const label = id => (((ENG.rolesBook || {})[id]) || {}).name || id;
-    const tally = Object.entries(adv.tally)
-      .map(([k, n]) => `<span title="${esc(label(k))}">${n}× ${esc(label(k).split(" / ")[0].split(" (")[0])}</span>`)
-      .join("");
-    /* function roles (pierce/purge/anti-heal ride along with the seat)
-       and carried gear effects (owner 2026-08-25: every aura typed
-       individually) — aggregated as their own chips */
-    const fns = {};
-    adv.members.forEach(m => (m.functions || []).forEach(c => { fns[c] = (fns[c] || 0) + 1; }));
-    const fnChips = Object.entries(fns)
-      .map(([k, n]) => `<span class="dl-role-fn" title="PRIMARY function — on the E spell (owner rule: primary roles come from the E)">${n}× ${esc(label(k).split(" (")[0])}</span>`)
-      .join("");
-    /* secondary functions ride on Q/W picks (axe bleeds, curse Armor
-       Piercer) — shown dimmer, second-level by owner rule */
-    const fns2 = {};
-    adv.members.forEach(m => (m.secondary || []).forEach(c => { fns2[c] = (fns2[c] || 0) + 1; }));
-    const fn2Chips = Object.entries(fns2)
-      .map(([k, n]) => `<span class="dl-role-fn2" title="secondary function — lives on a Q/W pick, not the E">${n}× ${esc(label(k).split(" (")[0])}</span>`)
-      .join("");
-    const carry = {};
-    adv.members.forEach(m => (m.carrying || []).forEach(c => { carry[c] = (carry[c] || 0) + 1; }));
-    const carryChips = Object.entries(carry)
-      .map(([k, n]) => `<span class="dl-role-carry" title="carried by worn gear">${n}× ${esc((((ENG.gearEffects || {})[k]) || {}).name || k)}</span>`)
-      .join("");
-    const flags = adv.flags.map(f => {
-      let txt;
-      if (f.kind === "no_engage_tank") txt = "no engage tank — nobody makes a clump";
-      else {
-        const uni = ((((ENG.rolesBook || {})[f.role] || {}).uniform || {}).chest || []).join("/");
-        txt = `${nameOf(f.weapon)}: worn chest fights its ${label(f.role).toLowerCase()} job${uni ? ` (that role wears ${uni})` : ""}`;
-      }
-      return `<small class="dl-role-flag" title="${esc(f.detail)}">⚠ ${txt}</small>`;
-    }).join("");
-    return `<span class="dl-role" title="who is playing what — read from the weapons and the kits they actually wear (roles-design.md); display only"><span class="dl-kicker">roles</span>${tally}${fnChips}${fn2Chips}${carryChips}</span>${flags}`;
+    return adv && (adv.flags.length || Object.keys(adv.tally).length) ? adv : null;
+  }
+  function identityCenter(id){
+    /* glyph + short label for the hollow center */
+    if (!id || !id.label) return {glyph: "forming", name: "FORMING", sub: "", firm: false};
+    if (id.archetype === "bomb_squad") return {glyph: "bomb", name: "BOMB SQUAD", sub: id.strength || "", firm: id.strength === "strong"};
+    if (id.style){
+      const nm = ((DATASET.styles || {})[id.style] || {}).name || id.style;
+      return {glyph: DL_ICONS[id.style] ? id.style : "dot", name: nm.toUpperCase(),
+              sub: id.strength || "", firm: id.strength === "strong"};
+    }
+    if (id.label.indexOf("split") === 0) return {glyph: "split", name: "SPLIT", sub: "", firm: false};
+    return {glyph: "forming", name: "FORMING", sub: "", firm: false};
+  }
+  function statusRadar(state){
+    DL_TIPS = [];
+    const axes = radarAxes();
+    const N = axes.length;
+    if (!N) return "";
+    const W = 320, H = 252, cx = 160, cy = 126, R = 82;
+    const ang = i => -Math.PI / 2 + i * 2 * Math.PI / N;
+    const px = (a, r) => (cx + r * Math.cos(a)).toFixed(1);
+    const py = (a, r) => (cy + r * Math.sin(a)).toFixed(1);
+    const rOf = cov => R * Math.min(cov, DL_SCALE_MAX) / DL_SCALE_MAX;
+    const ringPts = f => axes.map((_, i) => `${px(ang(i), rOf(f))},${py(ang(i), rOf(f))}`).join(" ");
+    let s = `<svg class="dl-radar" viewBox="0 0 ${W} ${H}" role="img" aria-label="Capability-group coverage versus template targets — hover the icons for detail">`;
+    for (const f of [0.25, 0.5, 0.75])
+      s += `<polygon points="${ringPts(f)}" fill="none" stroke="var(--rule)"/>`;
+    s += `<polygon points="${ringPts(1)}" fill="none" stroke="var(--brass-deep)" stroke-width="1.3" stroke-dasharray="3 4" opacity=".9"/>`;
+    axes.forEach((a, i) => {
+      s += `<line x1="${cx}" y1="${cy}" x2="${px(ang(i), R)}" y2="${py(ang(i), R)}" stroke="var(--rule)" opacity=".7"/>`;
+    });
+    const pts = axes.map((a, i) => [px(ang(i), rOf(a.cov)), py(ang(i), rOf(a.cov))]);
+    s += `<polygon points="${pts.map(p => p.join(",")).join(" ")}" fill="rgba(35,191,110,.20)" stroke="var(--ok)" stroke-width="1.8" stroke-linejoin="round"/>`;
+    axes.forEach((a, i) => {
+      const tip = tipRef(groupTipHtml(a));
+      const vc = a.floor ? "var(--gap)" : a.over ? "var(--over)" : "var(--ok-bright)";
+      s += `<circle cx="${pts[i][0]}" cy="${pts[i][1]}" r="4" fill="${vc}" stroke="var(--panel-lo)" stroke-width="2" data-dltip="${tip}"/>`;
+      const ix = +px(ang(i), R + 24), iy = +py(ang(i), R + 24) - 3;
+      s += `<g data-dltip="${tip}" class="dl-radar-hit">${dlIcon(ix, iy, 17, a.meta.icon, a.meta.col)}`
+        + `<text x="${ix}" y="${iy + 17}" text-anchor="middle" class="dlr-pct"${a.floor ? ' fill="var(--gap)"' : a.over ? ' fill="var(--over)"' : ""}>${Math.round(a.cov * 100)}%</text></g>`;
+    });
+    /* identity center */
+    const id = (typeof ENG.compIdentity === "function") ? ENG.compIdentity(party, COMBOS_CUR) : null;
+    const c = identityCenter(id);
+    const f = fitness(party), max = maxFitness();
+    const pct = Math.max(0, Math.min(100, f / Math.max(1, max) * 100));
+    const ctip = tipRef(centerTipHtml(state, id, pct, f, max));
+    const adv = roleAdvisory();
+    const hasWarn = (id && id.conflicts.length) || (adv && adv.flags.length);
+    const nameSize = c.name.length > 7 ? 7 : 8.5;
+    s += `<g data-dltip="${ctip}" class="dl-radar-hit">`
+      + `<circle cx="${cx}" cy="${cy}" r="33" fill="var(--panel-lo)" stroke="var(--brass-deep)" stroke-width="1.3"${c.firm ? "" : ' stroke-dasharray="4 4"'}/>`
+      + dlIcon(cx, cy - 9, 17, c.glyph, "var(--brass)")
+      + `<text x="${cx}" y="${cy + 12}" text-anchor="middle" class="dlr-id" font-size="${nameSize}">${esc(c.name)}</text>`
+      + (c.sub ? `<text x="${cx}" y="${cy + 22}" text-anchor="middle" class="dlr-sub">${esc(c.sub.toUpperCase())}</text>` : "")
+      + (hasWarn ? `<text x="${cx + 25}" y="${cy - 22}" text-anchor="middle" class="dlr-warn">⚠</text>` : "")
+      + `</g>`;
+    s += `</svg>`;
+    return s;
   }
 
   /* Fight chain (roadmap item 1, 2026-08-23): the fight as the caller's
@@ -392,22 +525,18 @@
     const need = needs[0] || null;
     const recs = RECS_CUR;
     const top = recs && recs[0];
-    const f = party.length ? fitness(party) : null;
-    const max = maxFitness();
-    const pct = f === null ? 0 : Math.max(0, Math.min(100, f / Math.max(1,max) * 100));
 
     if (!party.length){
       host.innerHTML = `<div class="dl-status dl-empty">
         <div><span class="dl-kicker">Build a party</span><strong>What should your next player bring?</strong>
         <p>Choose the content and playstyle, then add the weapons you already have. Comp Forge will diagnose the gaps before suggesting the next slot.</p></div>
-        <span class="dl-fit">—<small>fitness</small></span>
       </div>`;
       renderPlayerTools(host);
       return;
     }
 
     if (!top){
-      host.innerHTML = `<div class="dl-status ${state.tone} dl-empty"><div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small>${identityLine()}${killLine()}${roleLine()}</div><span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span></div>`;
+      host.innerHTML = `<div class="dl-status ${state.tone}">${statusRadar(state)}</div>`;
       renderPlayerTools(host);
       return;
     }
@@ -451,10 +580,7 @@
       }).join("")}</div></div>` : "";
 
     host.innerHTML = `
-      <div class="dl-status ${state.tone}">
-        <div><span class="dl-kicker">Comp status</span><strong>${state.label}</strong><small>${state.critical} critical · ${state.weak} weak${state.excess ? ` · ${state.excess} overstacked` : ""}</small>${identityLine()}${killLine()}${roleLine()}</div>
-        <span class="dl-fit">${pct.toFixed(0)}%<small>fitness</small></span>
-      </div>
+      <div class="dl-status ${state.tone}">${statusRadar(state)}</div>
       <div class="dl-pick">
         ${needline}
         ${chainLine(top)}
