@@ -988,6 +988,12 @@
     var seatRec = this.rolesBook[seat] || {};
     var uniform = (seatRec.uniform || {}).chest || [];
     var doctrine = seatRec.kit || {};
+    /* Per-weapon doctrine tier (owner design 2026-08-26): this weapon's
+       own observed items (effect carriers excluded at the build) outrank
+       the seat aggregate; `doctrine` is "weapon" / "seat" / false and
+       weapon-tier options carry doctrine_n = [count, slot total].
+       Mirrors engine.py. */
+    var wdoc = (seatRec.kit_weapon || {})[weapon] || {};
     var seatClass = seatRec["class"] || null;
     var bySlot = {}, k;
     for (k in this.gear) {
@@ -1023,6 +1029,11 @@
     for (var si = 0; si < slots.length; si++) {
       var slot = slots[si], keys = bySlot[slot].slice().sort();
       var docPool = doctrine[slot] || [];
+      var wslot = {}, wtotal = 0, wp = wdoc[slot] || [];
+      for (var wi = 0; wi < wp.length; wi++) {
+        wslot[wp[wi][0]] = wp[wi][1];
+        wtotal += wp[wi][1];
+      }
       var ranked = [];
       for (var ki = 0; ki < keys.length; ki++) {
         k = keys[ki];
@@ -1051,8 +1062,12 @@
         var why = [];
         for (di = 0; di < Math.min(3, deltas.length); di++)
           why.push([deltas[di][0], Math.round(deltas[di][1] * 100) / 100]);
+        var tier = Object.prototype.hasOwnProperty.call(wslot, k)
+          ? "weapon" : (docPool.indexOf(k) >= 0 ? "seat" : false);
         ranked.push({ gear: k, display_name: this.gear[k].display_name,
-                      value: value, doctrine: docPool.indexOf(k) >= 0,
+                      value: value, doctrine: tier,
+                      doctrine_n: tier === "weapon"
+                        ? [wslot[k], wtotal] : null,
                       carries: (this.itemEffects[k] || []).slice(),
                       passive: passive, why: why });
       }
@@ -1061,15 +1076,21 @@
       var gearCmp = function (a, b) {
         return a.gear < b.gear ? -1 : a.gear > b.gear ? 1 : 0;
       };
+      var tierRank = function (r) {
+        return r.doctrine === "weapon" ? 0 : r.doctrine === "seat" ? 1 : 2;
+      };
+      var wCount = function (r) { return wslot[r.gear] || 0; };
       if (joined === null) {
         ranked.sort(function (a, b) {
-          return ((a.doctrine ? 0 : 1) - (b.doctrine ? 0 : 1))
+          return (tierRank(a) - tierRank(b))
+              || (wCount(b) - wCount(a))
               || (b.value - a.value) || gearCmp(a, b);
         });
       } else {
         ranked.sort(function (a, b) {
           return (b.value - a.value)
-              || ((a.doctrine ? 0 : 1) - (b.doctrine ? 0 : 1))
+              || (tierRank(a) - tierRank(b))
+              || (wCount(b) - wCount(a))
               || gearCmp(a, b);
         });
       }

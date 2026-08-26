@@ -772,7 +772,7 @@ def _slot_cap_values(w, cap, only=None, exclude=None):
     return e_val, qw_val
 
 
-def classify_gear(gear, book):
+def classify_gear(gear, book, aff_overrides=None):
     """Equipment-role classification under the UNIQUE-ABILITY-FIRST law
     (owner 2026-08-25 — the general form of the weapons' E-first rule:
     gear actives sit on D/F/R, so 'it should be something like unique
@@ -850,16 +850,39 @@ def classify_gear(gear, book):
                 aff |= {"shield_support", "zone_support", "main_healer",
                         "kite_healer", "brawl_healer"}
             affinity = sorted(aff)
+        aff_src = None
+        ov = (aff_overrides or {}).get(k)
+        if ov is not None:
+            role_ids = {r["id"] for r in book}
+            bad = [x for x in (ov.get("affinity") or [])
+                   if x not in role_ids]
+            if bad or not ov.get("affinity"):
+                problems.append(f"gear affinity override: {k}: unknown "
+                                f"or empty role list {bad}")
+            else:
+                affinity = sorted(ov["affinity"])
+                aff_src = " ".join((ov.get("source") or "owner").split())
         g["role_affinity"] = affinity
         g["tree_passives"] = (gear_spells.get(k) or {}).get("passives") or []
-        board.append({"id": k, "name": g.get("display_name"),
-                      "slot": g.get("slot"), "class": cls,
-                      "class_basis": ("stats" if by_num else
-                                      "tree id (stats missing)"),
-                      "tank_pts": tank_pts,
-                      "active_caps": g.get("capabilities") or {},
-                      "tree_passives": g["tree_passives"],
-                      "role_affinity": affinity})
+        entry = {"id": k, "name": g.get("display_name"),
+                 "slot": g.get("slot"), "class": cls,
+                 "class_basis": ("stats" if by_num else
+                                 "tree id (stats missing)"),
+                 "tank_pts": tank_pts,
+                 "active_caps": g.get("capabilities") or {},
+                 "tree_passives": g["tree_passives"],
+                 "role_affinity": affinity}
+        if aff_src:
+            entry["affinity_override"] = aff_src
+        board.append(entry)
+    for k in sorted(aff_overrides or {}):
+        if k not in gear:
+            problems.append(f"gear affinity override: unknown item {k}")
+        elif (gear[k].get("slot") or "") not in ("armor", "head",
+                                                 "shoes", "offhand"):
+            problems.append(f"gear affinity override: {k}: slot "
+                            f"{gear[k].get('slot')} is not classified — "
+                            f"override cannot apply")
     return board, problems
 
 
@@ -974,7 +997,21 @@ def _fold_sources(bids):
     return out
 
 
-def derive_kit_doctrine(book, gear, problems):
+def _normalize_gear_id(v, gear):
+    """Conservative raw-id -> catalog-id: exact, else a unique tier
+    prefix away. Anything else stays unknown (never guessed)."""
+    v = (v or "").split("@")[0].strip()
+    if not v:
+        return None
+    if v in gear:
+        return v
+    cands = {k for k in gear
+             for n in (4, 5, 6, 7, 8) if k == f"T{n}_{v}"}
+    return cands.pop() if len(cands) == 1 else None
+
+
+def derive_kit_doctrine(book, gear, problems, overrides=None,
+                        effect_map=None):
     """Increment 2 kit POOLS, evidence-led (roles-design.md: 'kit = the
     assigned role's uniform, evidence-led — reference builds first'):
     each seat role's observed per-slot items, mined from the reference
@@ -982,7 +1019,23 @@ def derive_kit_doctrine(book, gear, problems):
     Ships as each seat's `kit:` {slot: [ids]}; the audit detail (counts
     + citations + off-uniform sightings) goes to roles_report. The
     CHEST admits only uniform classes — an observed off-uniform chest
-    is reported, never admitted. Derived, never hand-listed."""
+    is reported, never admitted. Derived, never hand-listed — except
+    `overrides` (roles.yaml kit_doctrine.overrides, the 2026-08-26
+    grading rulings): cited drop/add per seat+slot — or per
+    seat+weapon+slot under a `weapons:` key — applied on top of the
+    mined pools. A drop must name a mined item and an add a cataloged,
+    uniform-legal, not-already-observed one — anything else is a stale
+    ruling and blocks the release.
+
+    2026-08-26 (owner design, the Demon-Armor-on-Hand-of-Justice case):
+    pools also ship PER WEAPON (`kit_weapon`, report `by_weapon`) so a
+    weapon's own observed kit ranks ahead of the seat aggregate — but
+    items granting a typed gear effect (`effect_map`) are EXCLUDED from
+    the per-weapon tier: effect carriers are comp-level allocations
+    ('maybe the composition didnt have enough demon armors so the
+    engage tank has to take one'), tagged `effect:` in the seat pool
+    and quota-mined separately (mine_effect_quotas)."""
+    effect_map = effect_map or {}
     bi_path = os.path.join(OUT, "builds_index.json")
     if not os.path.exists(bi_path):
         problems.append("kit_doctrine: builds_index.json missing — run "
@@ -992,29 +1045,22 @@ def derive_kit_doctrine(book, gear, problems):
         by_content = (json.load(f) or {}).get("by_content") or {}
 
     def normalize(v):
-        """Conservative raw-id -> catalog-id: exact, else a unique tier
-        prefix away. Anything else stays unknown (never guessed)."""
-        v = (v or "").split("@")[0].strip()
-        if not v:
-            return None
-        if v in gear:
-            return v
-        cands = {k for k in gear
-                 for n in (4, 5, 6, 7, 8) if k == f"T{n}_{v}"}
-        return cands.pop() if len(cands) == 1 else None
+        return _normalize_gear_id(v, gear)
 
     recs_by_weapon = {}
     for by_w in by_content.values():
         for wk, recs in by_w.items():
             recs_by_weapon.setdefault(wk, []).extend(recs or [])
     detail = {}
+    seats_seen = set()
     for r in book:
         uni = set((r.get("uniform") or {}).get("chest") or [])
         if not uni:
             continue  # function/meta roles have no seat kit
-        pools, off_uniform = {}, []
+        pools, off_uniform, wpools = {}, [], {}
         for m in (r.get("weapons") or []):
-            for rec in recs_by_weapon.get(m.get("id")) or []:
+            wk_id = m.get("id")
+            for rec in recs_by_weapon.get(wk_id) or []:
                 slots = dict(rec.get("raw") or {})
                 slots.update({k: v for k, v in (rec.get("gear") or {})
                               .items() if v})
@@ -1028,29 +1074,194 @@ def derive_kit_doctrine(book, gear, problems):
                             (gear[gid].get("gear_class") or "") not in uni:
                         off_uniform.append(
                             {"id": gid, "build": bid,
-                             "weapon": m.get("id")})
+                             "weapon": wk_id})
                         continue
                     ent = pools.setdefault(slot, {}).setdefault(
                         gid, {"id": gid, "count": 0, "sources": set()})
                     ent["count"] += 1
                     ent["sources"].add(bid)
+                    if gid not in effect_map:
+                        went = wpools.setdefault(wk_id, {}).setdefault(
+                            slot, {}).setdefault(
+                            gid, {"id": gid, "count": 0, "sources": set()})
+                        went["count"] += 1
+                        went["sources"].add(bid)
         kit = {}
         det = {}
         for slot, ents in sorted(pools.items()):
             ordered = sorted(ents.values(),
                              key=lambda e: (-e["count"], e["id"]))
             kit[slot] = [e["id"] for e in ordered]
-            det[slot] = [{"id": e["id"], "count": e["count"],
-                          "sources": _fold_sources(e["sources"])}
-                         for e in ordered]
+            rows = []
+            for e in ordered:
+                row = {"id": e["id"], "count": e["count"],
+                       "sources": _fold_sources(e["sources"])}
+                if e["id"] in effect_map:
+                    row["effect"] = effect_map[e["id"]]
+                rows.append(row)
+            det[slot] = rows
+        w_det, kit_weapon = {}, {}
+        for wk_id, wslots in sorted(wpools.items()):
+            for slot, ents in sorted(wslots.items()):
+                ordered = sorted(ents.values(),
+                                 key=lambda e: (-e["count"], e["id"]))
+                w_det.setdefault(wk_id, {})[slot] = [
+                    {"id": e["id"], "count": e["count"],
+                     "sources": _fold_sources(e["sources"])}
+                    for e in ordered]
+                kit_weapon.setdefault(wk_id, {})[slot] = [
+                    [e["id"], e["count"]] for e in ordered]
+        applied = _apply_kit_overrides(
+            r["id"], uni, kit, det, w_det, kit_weapon, gear,
+            (overrides or {}).get(r["id"]) or {}, problems)
+        seats_seen.add(r["id"])
         if kit:
             r["kit"] = kit
-        if det or off_uniform:
+        if kit_weapon:
+            r["kit_weapon"] = kit_weapon
+        if det or off_uniform or applied:
             detail[r["id"]] = {"slots": det}
+            if w_det:
+                detail[r["id"]]["by_weapon"] = w_det
+            if applied:
+                detail[r["id"]]["overrides"] = applied
             if off_uniform:
                 detail[r["id"]]["off_uniform"] = sorted(
                     off_uniform, key=lambda o: (o["id"], o["build"]))
+    for rid in sorted(set(overrides or {}) - seats_seen):
+        problems.append(f"kit override: {rid} is not a seat role with a "
+                        f"chest uniform — ruling cannot apply")
     return detail
+
+
+def _apply_kit_overrides(rid, uni, kit, det, w_det, kit_weapon, gear,
+                         rules, problems):
+    """Apply one seat's cited drop/add rulings to its mined kit pools.
+    Seat-slot rules mutate kit/det (a drop cascades into every member
+    weapon's pool — a seat-wide ruling can't be resurrected by the
+    per-weapon tier); `weapons:` rules target one member's pool. Returns
+    the audit list for roles_report."""
+    applied = []
+
+    def _add_ok(slot, gid, tag, det_rows):
+        """Validate one add ruling; True when it may apply."""
+        if gid not in gear:
+            problems.append(f"kit override: {rid}/{tag}: add of "
+                            f"unknown item {gid}")
+        elif gid in [e["id"] for e in det_rows.get(slot) or []]:
+            problems.append(f"kit override: {rid}/{tag}: add of "
+                            f"{gid} already observed — redundant ruling")
+        elif slot == "armor" and \
+                (gear[gid].get("gear_class") or "") not in uni:
+            problems.append(f"kit override: {rid}/{tag}: add of "
+                            f"{gid} violates the chest uniform")
+        else:
+            return True
+        return False
+
+    for slot, ov in sorted(rules.items()):
+        if slot == "weapons":
+            continue
+        for d in (ov.get("drop") or []):
+            gid = d.get("id")
+            if gid not in [e["id"] for e in det.get(slot) or []]:
+                problems.append(f"kit override: {rid}/{slot}: drop of "
+                                f"{gid} not in the mined pool (stale "
+                                f"ruling — re-check against the board)")
+                continue
+            det[slot] = [e for e in det[slot] if e["id"] != gid]
+            kit[slot] = [i for i in kit[slot] if i != gid]
+            for wk_id in list(w_det):
+                if gid in [e["id"] for e in w_det[wk_id].get(slot) or []]:
+                    w_det[wk_id][slot] = [e for e in w_det[wk_id][slot]
+                                          if e["id"] != gid]
+                    kit_weapon[wk_id][slot] = [
+                        p for p in kit_weapon[wk_id][slot] if p[0] != gid]
+            applied.append({"slot": slot, "op": "drop", "id": gid,
+                            "source": d.get("source")})
+        for a in (ov.get("add") or []):
+            gid = a.get("id")
+            if _add_ok(slot, gid, slot, det):
+                det.setdefault(slot, []).append(
+                    {"id": gid, "count": 0,
+                     "sources": [a.get("source") or "owner"]})
+                kit.setdefault(slot, []).append(gid)
+                applied.append({"slot": slot, "op": "add", "id": gid,
+                                "source": a.get("source")})
+    for wk_id, wrules in sorted((rules.get("weapons") or {}).items()):
+        wd = w_det.setdefault(wk_id, {})
+        kw = kit_weapon.setdefault(wk_id, {})
+        for slot, ov in sorted(wrules.items()):
+            for d in (ov.get("drop") or []):
+                gid = d.get("id")
+                if gid not in [e["id"] for e in wd.get(slot) or []]:
+                    problems.append(f"kit override: {rid}/{wk_id}/{slot}: "
+                                    f"drop of {gid} not in the weapon's "
+                                    f"mined pool (stale ruling)")
+                    continue
+                wd[slot] = [e for e in wd[slot] if e["id"] != gid]
+                kw[slot] = [p for p in kw[slot] if p[0] != gid]
+                applied.append({"weapon": wk_id, "slot": slot,
+                                "op": "drop", "id": gid,
+                                "source": d.get("source")})
+            for a in (ov.get("add") or []):
+                gid = a.get("id")
+                if _add_ok(slot, gid, f"{wk_id}/{slot}", wd):
+                    wd.setdefault(slot, []).append(
+                        {"id": gid, "count": 0,
+                         "sources": [a.get("source") or "owner"]})
+                    kw.setdefault(slot, []).append([gid, 0])
+                    applied.append({"weapon": wk_id, "slot": slot,
+                                    "op": "add", "id": gid,
+                                    "source": a.get("source")})
+    return applied
+
+
+def mine_effect_quotas(gear, effect_map, problems):
+    """Observed per-comp COPIES of each typed gear effect (owner design
+    2026-08-26, the Demon-Armor-on-Hand-of-Justice case: 'maybe the
+    composition didnt have enough demon armors so the engage tank has
+    to take one' — effect-carrier chests are comp-level allocations,
+    not weapon doctrine). Groups builds_index records by their comp
+    prefix; only near-complete rosters (>= 10 recorded seats) evidence
+    a quota. DISPLAY-ONLY: ships on the grading board and never
+    advises until the owner grades it."""
+    bi_path = os.path.join(OUT, "builds_index.json")
+    if not os.path.exists(bi_path) or not effect_map:
+        return {}
+    with open(bi_path, encoding="utf-8") as f:
+        by_content = (json.load(f) or {}).get("by_content") or {}
+    groups = {}
+    for content, by_w in sorted(by_content.items()):
+        for wk, recs in sorted(by_w.items()):
+            for rec in recs or []:
+                bid = rec.get("build_id") or ""
+                if ":" not in bid:
+                    continue
+                g = groups.setdefault(bid.rsplit(":", 1)[0],
+                                      {"content": content, "n": 0,
+                                       "copies": {}})
+                g["n"] += 1
+                slots = dict(rec.get("raw") or {})
+                slots.update({k: v for k, v in (rec.get("gear") or {})
+                              .items() if v})
+                for v in slots.values():
+                    eff = effect_map.get(_normalize_gear_id(v, gear))
+                    if eff:
+                        g["copies"][eff] = g["copies"].get(eff, 0) + 1
+    rows = [{"comp": comp, "content": g["content"], "seats": g["n"],
+             "copies": dict(sorted(g["copies"].items()))}
+            for comp, g in sorted(groups.items()) if g["n"] >= 10]
+    summary = {}
+    for eff in sorted(set(effect_map.values())):
+        counts = sorted(r["copies"].get(eff, 0) for r in rows)
+        summary[eff] = {"rosters": len(rows),
+                        "with_any": sum(1 for c in counts if c),
+                        "copies": counts}
+    return {"note": ("copies of each typed gear effect per observed "
+                     "near-complete roster (>= 10 recorded seats); "
+                     "display-only until owner-graded"),
+            "comps": rows, "summary": summary}
 
 
 def apply_roles(weapons, gear):
@@ -1162,13 +1373,20 @@ def apply_roles(weapons, gear):
                 key = ("role_menu" if m.get("tier", "primary") == "primary"
                        else "role_menu_secondary")
                 weapons[wk].setdefault(key, []).append(r["id"])
-    gear_board, gear_problems = classify_gear(gear, book)
+    gear_board, gear_problems = classify_gear(
+        gear, book, doc.get("gear_affinity_overrides") or {})
     problems += gear_problems
     # increment 2 (owner 2026-08-25): passive doctrine picks per piece,
     # and evidence-led per-seat kit pools — both AFTER classify_gear
     # (they read the stamped gear_class)
     resolve_passive_doctrine(doc.get("kit_doctrine"), gear, problems)
-    kit_detail = derive_kit_doctrine(book, gear, problems)
+    effect_map = {it["id"]: ge["id"] for ge in effects
+                  for it in (ge.get("items") or []) if it.get("id")}
+    kit_detail = derive_kit_doctrine(
+        book, gear, problems,
+        (doc.get("kit_doctrine") or {}).get("overrides") or {},
+        effect_map)
+    effect_quotas = mine_effect_quotas(gear, effect_map, problems)
     # unique actives that buff allies but sit in no gear_effect yet —
     # candidates for the effects catalog (owner grading)
     effect_items = {it.get("id") for ge in effects
@@ -1188,6 +1406,7 @@ def apply_roles(weapons, gear):
         "gear_effects": effects,
         "items": gear_board,
         "kit_doctrine": kit_detail,
+        "effect_quotas": effect_quotas,
         "effect_candidates": effect_candidates,
         "menus": {k: w.get("role_menu", []) for k, w in sorted(weapons.items())
                   if w.get("role_menu")},
@@ -1541,11 +1760,13 @@ def main():
     # owner's review queue, never silent fixes.
     review_queue = []
     mb_path = os.path.join(HERE, os.pardir, "data", "published_builds",
-                           "metabattle_zvz.yaml")
+                           "metabattle.yaml")
     if os.path.exists(mb_path):
         mb = _load_yaml(mb_path) or {}
+        # the batch now spans every group-PvP mode (adapter v2) — this
+        # cross-check is a ZvZ claim, so only ZvZ records vouch here
         mb_weapons = {b.get("weapon") for b in mb.get("builds", [])
-                      if b.get("weapon")}
+                      if b.get("weapon") and b.get("content") == "zvz"}
         for wk in sorted(mb_weapons & set(weapons)):
             f = weapons[wk]["style_fit"]["fit"]
             if all(f[s]["group"] == "unfit" for s in STYLE_FIT_STYLES):

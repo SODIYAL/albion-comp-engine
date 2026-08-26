@@ -5,20 +5,24 @@ automated adapter, built on MetaBattle's MediaWiki Action API, never HTML
 scraping.
 
     fetch   EXPLICIT network step (never part of normal builds or CI):
-            capture the Category:ZvZ builds member list, the wiki's license
-            info, and every build page's wikitext + revision id/timestamp,
-            as raw API responses under pipeline/tests/fixtures/metabattle/.
-            The captures are committed — they are both the import's source
-            snapshot and the offline test fixtures.
+            capture the member lists of every group-PvP build category
+            (CATEGORIES — ZvZ, Hellgate 5v5/10v10, Crystal League/Arena,
+            Ganking; owner sample-growth request 2026-08-26), the wiki's
+            license info, and every build page's wikitext + revision
+            id/timestamp, as raw API responses under
+            pipeline/tests/fixtures/metabattle/. The captures are
+            committed — they are both the import's source snapshot and
+            the offline test fixtures.
 
     parse   OFFLINE: read the captured responses, parse the {{Build}} and
             {{Build equipment}} templates, map display names to exact Albion
             UniqueNames against the pinned game snapshot, and write
-            data/published_builds/metabattle_zvz.yaml — every record starts
-            as `candidate`, never `approved` (§F). Names that cannot be
-            resolved unambiguously land in the record's unknowns/quarantine
-            fields and in the printed review report — nothing silently
-            resolves to the first match.
+            data/published_builds/metabattle.yaml — every record starts
+            as `candidate`, never `approved` (§F); `content` derives from
+            the page's own mode category (MODE_CONTENT priority). Names
+            that cannot be resolved unambiguously land in the record's
+            unknowns/quarantine fields and in the printed review report —
+            nothing silently resolves to the first match.
 
 MetaBattle content is CC BY-SA; each record carries attribution metadata
 (page URL, revision, license, credit).
@@ -40,18 +44,36 @@ PIPELINE = os.path.join(HERE, os.pardir)
 ROOT = os.path.join(PIPELINE, os.pardir)
 OUT = os.path.join(PIPELINE, "out")
 FIXTURES = os.path.join(PIPELINE, "tests", "fixtures", "metabattle")
-DEST = os.path.join(ROOT, "data", "published_builds", "metabattle_zvz.yaml")
+DEST = os.path.join(ROOT, "data", "published_builds", "metabattle.yaml")
 
 sys.path.insert(0, PIPELINE)
 import builds_lib as bl  # noqa: E402
 
 API = "https://metabattle.com/albion/api.php"
-CATEGORY = "Category:ZvZ builds"
+# Group-PvP build categories (owner 2026-08-26: "increasing the sample
+# even more so we get more accurate stats"). Solo/PvE categories
+# (Corrupted, Mists, Dungeons, Gathering) stay out — the engine models
+# party composition.
+CATEGORIES = ["Category:ZvZ builds",
+              "Category:Hellgate 10v10 builds",
+              "Category:Hellgate 5v5 builds",
+              "Category:Crystal League builds",
+              "Category:Crystal Arena builds",
+              "Category:Ganking builds"]
+# page mode-category -> evidence content bucket; FIRST match wins when a
+# page sits in several modes (largest scale first — its kit evidence is
+# then judged under the stricter context).
+MODE_CONTENT = [("ZvZ_builds", "zvz"),
+                ("Hellgate_10v10_builds", "hellgate_10v10"),
+                ("Hellgate_5v5_builds", "hellgate_5v5"),
+                ("Crystal_League_builds", "crystal_5v5"),
+                ("Crystal_Arena_builds", "crystal_arena_5v5"),
+                ("Ganking_builds", "ganking_smallscale")]
 PAGE_URL = "https://metabattle.com/albion/{title}"
 UA = {"User-Agent": "albion-comp-engine build adapter "
                     "(github.com/SODIYAL/albion-comp-engine)"}
 ADAPTER = "metabattle"
-ADAPTER_VERSION = "1"
+ADAPTER_VERSION = "2"
 
 ROLE_BY_CATEGORY = {
     "Healer_builds": "healer", "Melee_DPS_builds": "dps",
@@ -78,10 +100,23 @@ def save(name, obj):
 
 
 def fetch(_args):
-    print(f"capturing {CATEGORY} via the MediaWiki Action API …")
-    members = api({"action": "query", "list": "categorymembers",
-                   "cmtitle": CATEGORY, "cmlimit": "500"})
-    save("category.json", members)
+    # clear stale captures so removed pages/categories can't linger
+    if os.path.isdir(FIXTURES):
+        for name in os.listdir(FIXTURES):
+            if name.startswith(("page_", "category")):
+                os.remove(os.path.join(FIXTURES, name))
+    pages, seen = [], set()
+    for cat in CATEGORIES:
+        print(f"capturing {cat} via the MediaWiki Action API …")
+        members = api({"action": "query", "list": "categorymembers",
+                       "cmtitle": cat, "cmlimit": "500"})
+        slug = cat.split(":", 1)[1].lower().replace(" ", "_")
+        save(f"category_{slug}.json", members)
+        for m in members["query"]["categorymembers"]:
+            if m["pageid"] not in seen:
+                seen.add(m["pageid"])
+                pages.append(m)
+        time.sleep(0.5)
     rights = api({"action": "query", "meta": "siteinfo",
                   "siprop": "rightsinfo|general"})
     save("rightsinfo.json", rights)
@@ -90,7 +125,6 @@ def fetch(_args):
     save("copyright.json", api({"action": "parse",
                                 "page": "MediaWiki:Copyright",
                                 "prop": "wikitext"}))
-    pages = members["query"]["categorymembers"]
     for m in pages:
         pid = m["pageid"]
         parsed = api({"action": "parse", "pageid": pid,
@@ -227,6 +261,12 @@ def parse(_args):
         cats = [c["*"] for c in p.get("categories", [])]
         role = next((ROLE_BY_CATEGORY[c] for c in cats
                      if c in ROLE_BY_CATEGORY), None)
+        content = next((c for cat_name, c in MODE_CONTENT
+                        if cat_name in cats), None)
+        if content is None:
+            review.append(f"{title}: no recognized group-PvP mode "
+                          f"category — skipped")
+            continue
 
         eq = template_params(wikitext, "Build equipment")
         info = template_params(wikitext, "Build") or {}
@@ -279,7 +319,7 @@ def parse(_args):
             "weapon_alternatives": [],
             "role": role,
             "role_raw": info.get("focus"),
-            "content": "zvz",
+            "content": content,
             "style": None,
             "party_size": None,           # the source states no group size
             "spells": spells,
@@ -328,10 +368,10 @@ def parse(_args):
 
     batch = {
         "kind": "published_build_batch",
-        "id": "metabattle_zvz",
+        "id": "metabattle",
         "source": {"kind": "metabattle", "family": "metabattle",
                    "author": "MetaBattle contributors",
-                   "url": "https://metabattle.com/albion/ZvZ_Builds",
+                   "url": "https://metabattle.com/albion/Builds",
                    "license": license_text},
         "snapshot_commit": snapshot,
         "fetched_fixtures": os.path.relpath(FIXTURES, ROOT).replace("\\", "/"),

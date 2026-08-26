@@ -1,0 +1,53 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Quarter_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "Ganking_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Open_World_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Depth_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7690,
+   "revid": 9142,
+   "title": "Grailseeker Ganking PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Quarter Staff\n| mode = Ganking, Open World, Depths\n| focus = Melee DPS\n| strengths = High Mobility, Great CC, Versatile\n| weaknesses = No Self-healing, Squishy\n}}\n==Overview==\nThe Grailseeker shines in ganking groups as it provides incredible CC while maintaining great mobility through the use of {{Skill|Cartwheel}} and {{Skill|Stun Run}}. It can lock down roads on its own and offers fantastic support while remaining a very oppressive build. While it takes a bit of time to get used to, the build isn't too difficult to pull off!\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Grailseeker\n| main hand weapon skills = Cartwheel, Stun Run, Soul Shaker, Energetic\n| head = Elder's Skinner Cap\n| head skills = Bear Trap, Skinning Skills\n| cape = Elder's Demon Cape\n| cape alternatives = Elder's Undead Cape\n| cape skills = Opening to Hell\n| armor = Elder's Graveguard Armor\n| armor alternatives = Elder's Assassin Jacket\n| armor skills = Soul Chain, Authority, Spirit Crush\n| shoes = Elder's Hunter Shoes\n| shoes skills = Rush, Quick Thinker\n| potion = Major Poison Potion\n| food = Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Grailseeker|45}}===\n{{Skill|Cartwheel}} — This ability offers great versatility. The low cooldown lets you use it as a movement skill while hitting enemies with it knocks them back and interrupts spell casting. Try to use this whenever you have the chance against enemies that can be caught casting! getting attacked during {{Skill|Cartwheel}} will also give you a boost to movement speed and damage resistance which helps a bit.\n\nAnother option is the {{Skill|Whirling Strikes}} as it offers good damage on a short cooldown.\n\n{{Skill|Stun Run}} — This is fantastic when coupled with {{Skill|Rush}} as the first auto-attack you land will also stun the target and keep them locked in place for a short duration so you can follow up with {{Skill|Soul Shaker}}.\n\n{{Skill|Soul Shaker}} — One of the most oppressive abilities in the game. Not only does it do damage on the initial hit, this creates a wall of energy that roots enemies that are caught by it for the duration the wall stays up. When used in front of a bridge or tight spaces, it lets you stop multiple enemies with ease. Keep in mind that you can use this ability twice but it will also increases the cooldown of the ability.\n\n{{Skill|Energetic}} — Due to the good auto-attack speed of the weapon, this passive will help a lot with keeping your energy reserves up.\n\n\n==={{Item|Elder's Graveguard Armor|45}}===\n{{Skill|Soul Chain}} — This pairs perfectly with {{Skill|Bear Trap}} as it attaches a chain to the target and then pulls them back to your location where they are forced to talk into the {{Skill|Bear Trap}}.\n\nAnother option is {{Item|Elder's Assassin Jacket}}, offering you access to stealth that can be used to surprise enemies or retreat from lost fights before mounting.\n\n{{Skill|Authority}} — This passive will increases the duration of your CCs and pairs well with all your abilities as your main role remains to CC targets.\n\n{{Skill|Spirit Crush}} - This is a PVE only ability but it will lower the max HP of mobs.\n\n\n==={{Item|Elder's Skinner Cap|45}}===\n{{Skill|Bear Trap}} — While it requires you to level up skinning, this is a main part of your build. You can place down this trap right after using {{Skill|Soul Chain}} in order to pull enemies straight into it and deal damage with the trap while also lowering their movement speed by 90% for a few seconds. This allows you to follow up with either {{Skill|Stun Run}} or {{Skill|Soul Shaker}}.\n\n{{Skill|Skinning Skills}} — The skill doesn't do anything for PVP but it comes by default with the {{Item|Elder's Skinner Cap}}.\n\n\n==={{Item|Elder's Hunter Shoes|45}}===\n{{Skill|Rush}} — The {{Skill|Rush}} increases the duration of all your CC skills used during the run. It pairs perfectly with {{Skill|Stun Run}} for a quick burst of speed and a longer CC.\n\n{{Skill|Quick Thinker}} — With the need for quick cooldowns, this passive works great!\n\n\n==={{Item|Elder's Demon Cape|45}}===\n{{Skill|Opening to Hell}} — This cape spawns a pool of lava below the feet of whatever enemy you hit with your auto-attack. With the combo of {{Skill|Stun Run}} and {{Skill|Soul Shaker}}, the enemy will be exposed to the entire duration of the {{Skill|Opening to Hell}}. \n\nAnother good option remains the {{Item|Elder's Undead Cape}}, providing more versatility with stealth but your damage will be lowered a lot.\n\n\n==Rotations==\n{{Rotation|CC Rotation|Rush, Stun Run, Opening to Hell, Poison Potion, Soul Shaker, Cartwheel, Soul Shaker}}\n* You want to start off with the combination of {{Skill|Rush}} and {{Skill|Stun Run}} to catch your target and stun so you can keep them on top of {{Skill|Opening to Hell}}. Make sure to use your {{Skill|Poison Potion}} before following up with {{Skill|Soul Shaker}} and {{Skill|Cartwheel}} for extra damage. Cast {{Skill|Soul Shaker}} a second time to deal extra damage and keep the target locked down until your team reaches your location. \n\nYou can also easily transition into the Pool Rotation:\n\n{{Rotation|Pull Rotation|Soul Chain, Bear Trap, Cartwheel, Stun Run}}\n* Assuming that you've already caught up to your target, you want to use {{Skill|Soul Chain}} to attach the enemy to you. Use {{Skill|Bear Trap}} to place the trap down and then stand on top of it so the enemy is instantly slowed down. Use {{Skill|Cartwheel}} while they are slowed and then use {{Skill|Stun Run}} to transition into the CC rotation if you didn't already use that.\n\n\n==Consumables==\n{{Item|Major Poison Potion}} — The main potion you'd want to use when ganking as it deals high damage and also slows down enemies that are hit while under the poison effect.\n\n{{Item|Pork Omelette}} — With the damage of the build being not as important, you should use {{Item|Pork Omelette}} instead to lower CDs. Try to always use a 7.1 version as the cost is quite low.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7690": {
+     "ns": 0,
+     "pageid": 7690,
+     "revisions": [
+      {
+       "parentid": 8983,
+       "revid": 9142,
+       "timestamp": "2025-07-29T19:32:25Z"
+      }
+     ],
+     "title": "Grailseeker Ganking PvP Build"
+    }
+   }
+  }
+ }
+}

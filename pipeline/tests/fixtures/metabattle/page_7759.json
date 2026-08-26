@@ -1,0 +1,57 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Spear_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "Open_World_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Crystal_Arena_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Hellgate_5v5_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Hellgate_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7759,
+   "revid": 8992,
+   "title": "Heron Spear Group PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Spear\n| mode = Open World, Crystal Arena, Hellgate (5v5)\n| focus = Melee DPS\n| strengths = Good Burst Damage, Versatile, High Self-Healing\n| weaknesses = Low Mobility\n}}\n==Overview==\nThis PvP build focuses on the {{Item|Elder's Heron Spear}} being used in group PvP where you are fighting outnumbered or against equal numbers. It's versatility makes it easy to adjust to all small group PvP like Crystal Arena, Hellgates or open world PvP like faction warfare and static diving. The {{Item|Elder's Heron Spear}} is capable of dealing significant damage and offers great AOE DPS during fights while also having access to CC skills like the {{Skill|Spear Throw}}.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Heron Spear\n| main hand weapon skills = Lunging Strike, Forest of Spears, Spear Throw, Life Leech\n| off hand weapon = Elder's Muisak\n| off hand weapon alternatives = Elder's Mistcaller, Elder's Cryptcandle\n| head = Elder's Scholar Cowl\n| head alternatives = Elder's Stalker Hood\n| head skills = Energy Shield, Aggression\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Hellion Jacket\n| armor skills = Life Steal Aura, Balanced Mind\n| shoes = Elder's Stalker Shoes\n| shoes skills = Raging Blink, Balanced Mind\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Heron Spear|45}}===\n{{Skill|Lunging Strike}} — This is the ability you will be using the most and the way you can gain Spirit Spear Charges. This medium ranged ability not only does good damage but also slows down enemies hit while every Spirit Spear Charges increases your auto-attack damage and stacks up to 3. This makes it important to always try and use auto-attacks between uses of {{Skill|Lunging Strike}}. Because of this being an AOE attack, you should try to hit as many enemies as possible when you use it so try to line enemies up before making use of the skill.\n\n{{Skill|Forest of Spears}} — This AOE ability is a great follow-up for a successful hit of {{Skill|Spear Throw}}. Try to angle this skill so it blocks the path of enemies that might come to assist those hit by your {{Skill|Spear Throw}}, dealing extra damage to them and everyone caught by the stun.\n\n{{Skill|Spear Throw}} — Being a skill that deals high damage without the need for stacking anything else beforehand, the {{Skill|Spear Throw}} is important to hit as it stuns the enemies and deals its damage to all enemies hit. You can use this skill from point-blank or try to hit it from a distance as the range is quite generous and the cooldown is rather low.\n\n{{Skill|Life Leech}} — Each auto-attack will heal you for a small amount based on how much HP the target lost. This helps a bit with your sustain as you brawl enemy groups.\n\n\n==={{Item|Elder's Hellion Jacket|45}}===\n{{Skill|Life Steal Aura}} — Use this skill during fights to heal yourself by touching as many enemies as possible with the large AOE effect that appears after you've used the skill. The more targets hit by this, the better the heal you receive. Try to communicate with your group's healer to know if they cannot heal you and if you need to use this instead. Also keep in mind that this effect can be purged so be careful when using it.\n\n{{Skill|Balanced Mind}} — This passive increases your damage by quite a bit which is nice to have for brawling.\n\n\n==={{Item|Elder's Scholar Cowl|45}}===\n{{Skill|Energy Shield}} — The shield isn't only a great resistance increasing skill but it also restores a lot of your mana if you need it. With how mana hungry this build, the {{Skill|Energy Shield}} is an important part. Try to activate this when you foresee enemy damage pressure on you or if you simply need your mana restored. Its good to walk through an AOE skill like the {{Skill|Burning Field}} with this active to get your mana back, otherwise you will rely on enemies auto-attacking or using skills on you.\n\n{{Skill|Aggression}} — This passive just increases your raw damage.\n\n\n==={{Item|Elder's Stalker Shoes|45}}===\n{{Skill|Raging Blink}} — Stacking up to 2 times, this ability allows you to teleport twice and increases the damage you do for a short while, it is a perfect choice for the build as it allows you to quickly position past skills like the {{Skill|Wall of Flames}} or simply reposition into enemy backline for a good angle to use {{Skill|Spear Throw}}.\n\n{{Skill|Balanced Mind}} — Just another damage increasing passive.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — The build remains very mana hungry and this is where the {{Item|Elder's Lymhurst Cape}} comes into play, offering you 80% of your maximum mana back once your mana went down to 40%. You should use multiple skills while your mana regenerates so you still make use of the extra 20% of mana you get.\n\n\n==Rotations==\n{{Rotation|High Damage Combo|Lunging Strike, Raging Blink, Spear Throw, Forest of Spears}}\n*You should start the fight slowly, settle into the brawl and using a mix of {{Skill|Lunging Strike}} and auto-attacks. Once you've noticed an opening, you should use the {{Skill|Raging Blink}} to boost your damage and also reposition in the perfect place to use {{Skill|Spear Throw}} then transition into {{Skill|Forest of Spears}}, hopefully hitting multiple players.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — You want to make sure that you're always healed by your healer but the enemy team might pressure you a lot during a fight which is why you should use a resistance potion, giving your healer plenty of time to heal you while you tank damage. You can use this in combination with {{Skill|Energy Shield}} to maximize your tankiness for a short while.\n\n{{Item|Beef Stew}} — Use this to increase your overall damage! This will help a lot with bursting enemies, especially when using the {{Skill|Spear Throw}} & {{Skill|Forest of Spears}} combo. Try to use a 8.1 or even the 8.2 version to maximize the damage gain if you can afford it.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7759": {
+     "ns": 0,
+     "pageid": 7759,
+     "revisions": [
+      {
+       "parentid": 8858,
+       "revid": 8992,
+       "timestamp": "2025-04-01T23:27:50Z"
+      }
+     ],
+     "title": "Heron Spear Group PvP Build"
+    }
+   }
+  }
+ }
+}

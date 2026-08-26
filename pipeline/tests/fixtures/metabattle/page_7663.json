@@ -1,0 +1,49 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Axe_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "Ganking_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Open_World_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7663,
+   "revid": 8916,
+   "title": "Bear Paws Ganking PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Axe\n| mode = Ganking, Open World\n| focus = Melee DPS\n| strengths = High Mobility, High Burst Damage, Versatile\n| weaknesses = High Skill Floor, No Self-healing\n}}\n==Overview==\nThis Bear Paws ganking build focuses on the incredible solo ganking potential of the Bear Paws. While this build can be played perfectly fine in ganking groups, this build will give you all the information you need to try your hand and succeed at ganking on your own. Keep in mind that the build isn't very cheap as even the {{Item|Elder's Bear Paws}} themselves are quite expensive and the rest of the build isn't too cheap. Once mastered, this build will perform incredibly while remaining very exciting to play every time.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Bear Paws\n| main hand weapon skills = Rending Rage, Adrenaline Boost, Razor Cut, Deep Cuts\n| head = Elder's Fiend Cowl\n| head skills = Purge, Aggression\n| cape = Elder's Thetford Cape\n| cape alternatives = Elder's Undead Cape\n| cape skills = Chain Lightning\n| armor = Elder's Assassin Jacket\n| armor skills = Ambush, Balanced Mind\n| shoes = Elder's Royal Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Poison Potion\n| potion alternatives = Major Healing Potion\n| food = Deadwater Eel Stew\n| food alternatives = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Bear Paws|45}}===\n{{Skill|Rending Rage}} — This is your main damaging ability and the one you will use most to catch targets. Use the first two casts of the ability to deal damage while the third cast can be used to root targets. Keep in mind that every hit will also apply a Rending Bleed that will constantly do damage to the target and lower the healing received.\n\n{{Skill|Adrenaline Boost}} — A great damage and movement speed increase comes from this ability, use it in pair with {{Skill|Defenseless Rush}} to boost your {{Skill|Razor Cut}} damage!\n\n{{Skill|Razor Cut}} — This leap is the most difficult ability to use correctly, a true high risk high reward ability. The damage it deals is incredible and its also one of the few abilities that do true damage through it's bleed. The cooldown is also decreased by almost half once you hit at least one enemy. Try to always predict where your enemy will be before using this, it takes a lot of practice though!\n\n{{Skill|Deep Cuts}} — As you will be staying on top of your targets, the bleeds provided by this passive are invaluable.\n\n\n==={{Item|Elder's Assassin Jacket|45}}===\n{{Skill|Ambush}} — This ability offers you much needed stealth and allows you to camp bridges or spots. It also increases your damage with every moment spent in stealth and increases the damage of your {{Skill|Razor Cut}} once you come out of stealth.\n\n{{Skill|Balanced Mind}} — Straight up increases your damage, very good for the build.\n\n\n==={{Item|Elder's Fiend Cowl|45}}===\n{{Skill|Purge}} — Your main ability to use whenever enemies try to get away using their runs. It also offers incredible versatility and you can use this to purge skills like {{Skill|Life Steal Aura}}. The main use however remains purging runs in order to overwhelm enemies with your superior mobility.\n\n{{Skill|Aggression}} — A good damage increase for the weapon.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — Stay aware that this skill not only increases your damage but also increases the damage you take, further adding to the high-risk high-reward aspect of the build.\n\n{{Skill|Aggression}} — The standard choice for DPS builds. Remember that you can always switch to {{Skill|Courier}} to carry more weight when you loot items off corpses.\n\n\n==={{Item|Elder's Thetford Cape|45}}===\n{{Skill|Chain Lightning}} — Your cape activates on itself and deals damage to whatever target you hit with your auto-attack every time the cooldown is up. The lightning spreads out to other targets though so be aware of mobs that might be drawn in.\n\n\n==Rotations==\n{{Rotation|Damage Combo|Ambush, Defenseless Rush, Razor Cut, Poison Potion, Adrenaline Boost, Purge, Rending Rage, Rending Rage, Rending Rage}}\n* Start off with {{Skill|Ambush}} from a stationary position with incoming traffic only when you spot an enemy on the edge of the screen. Wait for them to come into range before using {{Skill|Defenseless Rush}} and {{Skill|Razor Cut}} on their mounts. Follow up quickly by throwing your poison and using {{Skill|Adrenaline Boost}} to keep up. Use {{Skill|Purge}} if they try to run and then spam {{Skill|Rending Rage}} while burning them down using your auto-attacks and procs of your {{Skill|Chain Lightning}}.\n\n\n==Consumables==\n{{Item|Major Poison Potion}} — The main potion you'd want to use when ganking as it deals high damage and also slows down enemies that are hit while under the poison effect.\n\n{{Item|Deadwater Eel Stew}} — This food offers a good combination of damage and cooldown reduction much needed during ganks. Another good option is {{Item|Beef Stew}} for flat damage increase.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7663": {
+     "ns": 0,
+     "pageid": 7663,
+     "revisions": [
+      {
+       "parentid": 8200,
+       "revid": 8916,
+       "timestamp": "2025-04-01T23:17:24Z"
+      }
+     ],
+     "title": "Bear Paws Ganking PvP Build"
+    }
+   }
+  }
+ }
+}

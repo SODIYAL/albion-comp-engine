@@ -409,6 +409,20 @@
       "2H_IRONCLADEDSTAFF",
       "MAIN_FROSTSTAFF_AVALON"
      ]
+    },
+    {
+     "allow": {},
+     "evidence": {
+      "as_of": "2026-08-26",
+      "clears_when": "an approved canonical build for the exact weapon at party size >= 7",
+      "reason": "Dive/cleanup daggers are small-scale finishers; their dive_cleanup seat stands at gang sizes below this gate.\n",
+      "source": "owner ruling 2026-08-26 (roles grading board: 'never in medium-large scale (7+)')"
+     },
+     "min_size": 7,
+     "weapons": [
+      "2H_DAGGERPAIR",
+      "2H_DUALSICKLE_UNDEAD"
+     ]
     }
    ]
   }
@@ -2347,11 +2361,7 @@
     "slots": []
    },
    "role_affinity": [
-    "brawl_healer",
-    "kite_healer",
-    "main_healer",
-    "shield_support",
-    "zone_support"
+    "stopper_tank"
    ],
    "slot": "offhand",
    "stats": {
@@ -33507,14 +33517,367 @@
      "OFF_SPIKEDSHIELD_MORGANA"
     ],
     "potion": [
-     "T7_POTION_REVIVE",
-     "T7_POTION_STONESKIN"
+     "T7_POTION_REVIVE"
     ],
     "shoes": [
      "SHOES_LEATHER_MORGANA",
      "SHOES_LEATHER_FEY",
      "SHOES_LEATHER_ROYAL"
     ]
+   },
+   "kit_weapon": {
+    "2H_HAMMER": {
+     "armor": [
+      [
+       "ARMOR_PLATE_FEY",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_HELL",
+       1
+      ]
+     ]
+    },
+    "2H_HAMMER_AVALON": {
+     "armor": [
+      [
+       "ARMOR_PLATE_FEY",
+       1
+      ],
+      [
+       "ARMOR_PLATE_SET2",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       2
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       3
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       3
+      ],
+      [
+       "HEAD_PLATE_KEEPER",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       2
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ]
+     ]
+    },
+    "2H_MACE_MORGANA": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_PLATE_SET2",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ]
+     ]
+    },
+    "2H_POLEHAMMER": {
+     "armor": [
+      [
+       "ARMOR_PLATE_SET2",
+       5
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       4
+      ],
+      [
+       "CAPEITEM_FW_LYMHURST",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       2
+      ],
+      [
+       "T8_MEAL_SANDWICH_AVALON",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_PLATE_KEEPER",
+       4
+      ],
+      [
+       "HEAD_LEATHER_HELL",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       2
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_ROYAL",
+       1
+      ]
+     ]
+    },
+    "2H_SHAPESHIFTER_KEEPER": {
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       2
+      ],
+      [
+       "T7_MEAL_OMELETTE",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_CLOTH_SET2",
+       1
+      ],
+      [
+       "HEAD_PLATE_KEEPER",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       2
+      ]
+     ]
+    },
+    "MAIN_ARCANESTAFF_UNDEAD": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       3
+      ],
+      [
+       "CAPEITEM_FW_LYMHURST",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       2
+      ],
+      [
+       "T7_MEAL_OMELETTE",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_CLOTH_KEEPER",
+       1
+      ],
+      [
+       "HEAD_CLOTH_SET2",
+       1
+      ],
+      [
+       "HEAD_LEATHER_SET3",
+       1
+      ]
+     ],
+     "offhand": [
+      [
+       "OFF_DEMONSKULL_HELL",
+       2
+      ],
+      [
+       "OFF_HORN_KEEPER",
+       1
+      ],
+      [
+       "OFF_LAMP_UNDEAD",
+       1
+      ],
+      [
+       "OFF_SPIKEDSHIELD_MORGANA",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       3
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_FEY",
+       2
+      ],
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ]
+     ]
+    },
+    "MAIN_MACE": {
+     "armor": [
+      [
+       "ARMOR_PLATE_FEY",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_FW_LYMHURST",
+       1
+      ],
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       2
+      ],
+      [
+       "T8_MEAL_SANDWICH_AVALON",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_CLOTH_SET2",
+       1
+      ],
+      [
+       "HEAD_LEATHER_HELL",
+       1
+      ],
+      [
+       "HEAD_PLATE_SET2",
+       1
+      ]
+     ],
+     "offhand": [
+      [
+       "OFF_JESTERCANE_HELL",
+       1
+      ],
+      [
+       "OFF_SHIELD",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ]
+     ]
+    },
+    "MAIN_MACE_CRYSTAL": {
+     "armor": [
+      [
+       "ARMOR_PLATE_FEY",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       2
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       2
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_HELL",
+       1
+      ],
+      [
+       "HEAD_PLATE_KEEPER",
+       1
+      ]
+     ],
+     "offhand": [
+      [
+       "OFF_JESTERCANE_HELL",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       2
+      ]
+     ]
+    }
    },
    "name": "Engage / Clump Tank",
    "uniform": {
@@ -33581,8 +33944,7 @@
      "ARMOR_PLATE_SET2"
     ],
     "cape": [
-     "CAPEITEM_SMUGGLER",
-     "CAPEITEM_FW_LYMHURST"
+     "CAPEITEM_SMUGGLER"
     ],
     "food": [
      "T7_MEAL_OMELETTE_AVALON",
@@ -33596,13 +33958,14 @@
     ],
     "offhand": [
      "OFF_SHIELD_AVALON",
-     "OFF_TOME_CRYSTAL",
      "OFF_HORN_KEEPER",
-     "OFF_TOTEM_KEEPER"
+     "OFF_TOTEM_KEEPER",
+     "OFF_JESTERCANE_HELL"
     ],
     "potion": [
      "T7_POTION_REVIVE",
-     "T7_POTION_SLOWFIELD"
+     "T7_POTION_SLOWFIELD",
+     "T7_POTION_STONESKIN"
     ],
     "shoes": [
      "SHOES_LEATHER_ROYAL",
@@ -33610,6 +33973,233 @@
      "SHOES_LEATHER_SET1",
      "SHOES_PLATE_FEY"
     ]
+   },
+   "kit_weapon": {
+    "2H_MACE": {
+     "armor": [
+      [
+       "ARMOR_PLATE_SET2",
+       1
+      ]
+     ],
+     "cape": [],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       2
+      ],
+      [
+       "T7_MEAL_OMELETTE",
+       1
+      ],
+      [
+       "T8_MEAL_SANDWICH_AVALON",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_HELL",
+       2
+      ],
+      [
+       "HEAD_LEATHER_SET3",
+       1
+      ],
+      [
+       "HEAD_PLATE_KEEPER",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       2
+      ],
+      [
+       "T7_POTION_SLOWFIELD",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_PLATE_FEY",
+       2
+      ],
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ],
+      [
+       "SHOES_LEATHER_ROYAL",
+       1
+      ],
+      [
+       "SHOES_LEATHER_SET1",
+       1
+      ]
+     ]
+    },
+    "2H_QUARTERSTAFF_AVALON": {
+     "food": [
+      [
+       "T7_MEAL_OMELETTE",
+       1
+      ]
+     ]
+    },
+    "2H_ROCKSTAFF_KEEPER": {
+     "armor": [
+      [
+       "ARMOR_PLATE_FEY",
+       2
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       2
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_HELL",
+       2
+      ],
+      [
+       "HEAD_LEATHER_SET3",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ]
+     ]
+    },
+    "2H_SHAPESHIFTER_SET3": {
+     "cape": [],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE",
+       1
+      ],
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_ROYAL",
+       1
+      ]
+     ]
+    },
+    "MAIN_MACE_HELL": {
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       1
+      ]
+     ],
+     "offhand": [],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       1
+      ]
+     ]
+    },
+    "MAIN_ROCKMACE_KEEPER": {
+     "armor": [
+      [
+       "ARMOR_PLATE_FEY",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       7
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       4
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       7
+      ],
+      [
+       "HEAD_PLATE_KEEPER",
+       2
+      ],
+      [
+       "HEAD_LEATHER_HELL",
+       1
+      ]
+     ],
+     "offhand": [
+      [
+       "OFF_SHIELD_AVALON",
+       4
+      ],
+      [
+       "OFF_HORN_KEEPER",
+       2
+      ],
+      [
+       "OFF_TOTEM_KEEPER",
+       2
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       5
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_ROYAL",
+       1
+      ],
+      [
+       "SHOES_LEATHER_SET1",
+       1
+      ]
+     ]
+    }
    },
    "name": "Defensive / Stopper Tank",
    "uniform": {
@@ -33636,11 +34226,6 @@
     {
      "id": "MAIN_MACE_HELL",
      "source": "owner:2026-08-25 ('the support or tank'); guide:albiononlinegrind 'Inncubus ZvZ Support' (Judicator Armor)",
-     "tier": "primary"
-    },
-    {
-     "id": "2H_IRONCLADEDSTAFF",
-     "source": "guide:albiontopbuilds 'viable tank', metabattle defensive-mobility (medium); owner:2026-08-21 knock-away-wall reading",
      "tier": "primary"
     },
     {
@@ -33687,6 +34272,58 @@
      "SHOES_LEATHER_MORGANA"
     ]
    },
+   "kit_weapon": {
+    "2H_DUALMACE_AVALON": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       4
+      ],
+      [
+       "CAPEITEM_FW_LYMHURST",
+       2
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       3
+      ],
+      [
+       "T7_MEAL_OMELETTE",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       6
+      ],
+      [
+       "HEAD_CLOTH_SET2",
+       1
+      ]
+     ],
+     "offhand": [
+      [
+       "OFF_SHIELD_AVALON",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       4
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ]
+     ]
+    }
+   },
    "name": "Off-Tank / Bruiser",
    "uniform": {
     "chest": [
@@ -33721,8 +34358,8 @@
      "CAPEITEM_SMUGGLER"
     ],
     "food": [
-     "T7_MEAL_OMELETTE_AVALON",
-     "T7_MEAL_OMELETTE"
+     "T7_MEAL_OMELETTE",
+     "T7_MEAL_OMELETTE_AVALON"
     ],
     "head": [
      "HEAD_LEATHER_SET3",
@@ -33740,10 +34377,288 @@
      "T7_POTION_STONESKIN"
     ],
     "shoes": [
-     "SHOES_LEATHER_ROYAL",
      "SHOES_LEATHER_SET1",
+     "SHOES_LEATHER_ROYAL",
      "SHOES_LEATHER_MORGANA"
     ]
+   },
+   "kit_weapon": {
+    "2H_HOLYSTAFF_HELL": {
+     "cape": [
+      [
+       "CAPEITEM_FW_LYMHURST",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE",
+       2
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_CLOTH_KEEPER",
+       1
+      ],
+      [
+       "HEAD_PLATE_SET2",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_ROYAL",
+       1
+      ]
+     ]
+    },
+    "2H_HOLYSTAFF_UNDEAD": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_AVALON",
+       3
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_FW_LYMHURST",
+       4
+      ],
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE",
+       1
+      ],
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       2
+      ],
+      [
+       "HEAD_CLOTH_KEEPER",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_STONESKIN",
+       4
+      ],
+      [
+       "T7_POTION_REVIVE",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_ROYAL",
+       3
+      ],
+      [
+       "SHOES_LEATHER_MORGANA",
+       2
+      ],
+      [
+       "SHOES_LEATHER_SET1",
+       2
+      ]
+     ]
+    },
+    "2H_NATURESTAFF_HELL": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_AVALON",
+       3
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_FW_LYMHURST",
+       3
+      ],
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE",
+       2
+      ],
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       2
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       2
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       3
+      ],
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_SET1",
+       3
+      ],
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ]
+     ]
+    },
+    "2H_NATURESTAFF_KEEPER": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_AVALON",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_FW_LYMHURST",
+       1
+      ],
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       2
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ]
+    },
+    "MAIN_HOLYSTAFF_AVALON": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_FEY",
+       8
+      ],
+      [
+       "ARMOR_CLOTH_AVALON",
+       5
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       8
+      ],
+      [
+       "CAPEITEM_FW_LYMHURST",
+       7
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       5
+      ],
+      [
+       "T7_MEAL_OMELETTE",
+       3
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_PLATE_SET3",
+       5
+      ],
+      [
+       "HEAD_LEATHER_SET3",
+       3
+      ],
+      [
+       "HEAD_CLOTH_KEEPER",
+       2
+      ],
+      [
+       "HEAD_PLATE_SET2",
+       1
+      ]
+     ],
+     "offhand": [
+      [
+       "OFF_HORN_KEEPER",
+       12
+      ],
+      [
+       "OFF_SHIELD",
+       2
+      ],
+      [
+       "OFF_TOWERSHIELD_UNDEAD",
+       2
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       6
+      ],
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_ROYAL",
+       4
+      ],
+      [
+       "SHOES_LEATHER_SET1",
+       4
+      ],
+      [
+       "SHOES_LEATHER_MORGANA",
+       2
+      ]
+     ]
+    }
    },
    "name": "Main / Clump Healer",
    "uniform": {
@@ -33770,11 +34685,6 @@
     {
      "id": "2H_NATURESTAFF_KEEPER",
      "source": "derived:foundation set; comp:deadlyhooker (healer)",
-     "tier": "primary"
-    },
-    {
-     "id": "2H_HOLYSTAFF",
-     "source": "derived:foundation set; owner:2026-08-23 (brawl-only suggestion note stands)",
      "tier": "primary"
     },
     {
@@ -33814,7 +34724,8 @@
     "head": [
      "HEAD_PLATE_SET3",
      "HEAD_LEATHER_SET3",
-     "HEAD_CLOTH_KEEPER"
+     "HEAD_CLOTH_KEEPER",
+     "HEAD_PLATE_SET2"
     ],
     "offhand": [
      "OFF_HORN_KEEPER",
@@ -33830,6 +34741,96 @@
      "SHOES_LEATHER_SET1",
      "SHOES_LEATHER_MORGANA"
     ]
+   },
+   "kit_weapon": {
+    "MAIN_HOLYSTAFF_AVALON": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_FEY",
+       8
+      ],
+      [
+       "ARMOR_CLOTH_AVALON",
+       5
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       8
+      ],
+      [
+       "CAPEITEM_FW_LYMHURST",
+       7
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       5
+      ],
+      [
+       "T7_MEAL_OMELETTE",
+       3
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_PLATE_SET3",
+       5
+      ],
+      [
+       "HEAD_LEATHER_SET3",
+       3
+      ],
+      [
+       "HEAD_CLOTH_KEEPER",
+       2
+      ],
+      [
+       "HEAD_PLATE_SET2",
+       1
+      ]
+     ],
+     "offhand": [
+      [
+       "OFF_HORN_KEEPER",
+       12
+      ],
+      [
+       "OFF_SHIELD",
+       2
+      ],
+      [
+       "OFF_TOWERSHIELD_UNDEAD",
+       2
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       6
+      ],
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_ROYAL",
+       4
+      ],
+      [
+       "SHOES_LEATHER_SET1",
+       4
+      ],
+      [
+       "SHOES_LEATHER_MORGANA",
+       2
+      ]
+     ]
+    }
    },
    "name": "Backline / Kite Healer",
    "uniform": {
@@ -33869,12 +34870,13 @@
     "head": [
      "HEAD_PLATE_SET3",
      "HEAD_LEATHER_SET3",
-     "HEAD_CLOTH_KEEPER"
+     "HEAD_CLOTH_KEEPER",
+     "HEAD_PLATE_SET2"
     ],
     "offhand": [
      "OFF_HORN_KEEPER",
      "OFF_SHIELD",
-     "OFF_TOWERSHIELD_UNDEAD"
+     "OFF_TORCH_CRYSTAL"
     ],
     "potion": [
      "T7_POTION_REVIVE",
@@ -33885,6 +34887,82 @@
      "SHOES_LEATHER_SET1",
      "SHOES_LEATHER_MORGANA"
     ]
+   },
+   "kit_weapon": {
+    "MAIN_HOLYSTAFF_AVALON": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       8
+      ],
+      [
+       "CAPEITEM_FW_LYMHURST",
+       7
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       5
+      ],
+      [
+       "T7_MEAL_OMELETTE",
+       3
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_PLATE_SET3",
+       5
+      ],
+      [
+       "HEAD_LEATHER_SET3",
+       3
+      ],
+      [
+       "HEAD_CLOTH_KEEPER",
+       2
+      ],
+      [
+       "HEAD_PLATE_SET2",
+       1
+      ]
+     ],
+     "offhand": [
+      [
+       "OFF_HORN_KEEPER",
+       12
+      ],
+      [
+       "OFF_SHIELD",
+       2
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       6
+      ],
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_ROYAL",
+       4
+      ],
+      [
+       "SHOES_LEATHER_SET1",
+       4
+      ],
+      [
+       "SHOES_LEATHER_MORGANA",
+       2
+      ]
+     ]
+    }
    },
    "name": "Tanky Brawl Healer",
    "uniform": {
@@ -33912,13 +34990,13 @@
    "job": "Owns the danger lane \u2014 cleanse, shields, resistance, protection (albionzvzmanual.github.io/roles/ 'Supports').\n",
    "kit": {
     "armor": [
-     "ARMOR_PLATE_KEEPER",
      "ARMOR_PLATE_SET2",
+     "ARMOR_PLATE_KEEPER",
      "ARMOR_PLATE_FEY",
-     "ARMOR_CLOTH_AVALON",
-     "ARMOR_CLOTH_FEY",
      "ARMOR_PLATE_HELL",
-     "ARMOR_PLATE_SET3"
+     "ARMOR_PLATE_SET3",
+     "ARMOR_CLOTH_AVALON",
+     "ARMOR_CLOTH_FEY"
     ],
     "cape": [
      "CAPEITEM_SMUGGLER",
@@ -33926,21 +35004,16 @@
     ],
     "food": [
      "T7_MEAL_OMELETTE_AVALON",
-     "T7_MEAL_OMELETTE",
-     "T8_MEAL_STEW"
+     "T7_MEAL_OMELETTE"
     ],
     "head": [
      "HEAD_LEATHER_SET3",
-     "HEAD_CLOTH_KEEPER",
      "HEAD_PLATE_KEEPER",
-     "HEAD_CLOTH_SET2"
+     "HEAD_CLOTH_KEEPER"
     ],
     "offhand": [
      "OFF_SHIELD_AVALON",
-     "OFF_DEMONSKULL_HELL",
      "OFF_HORN_KEEPER",
-     "OFF_LAMP_UNDEAD",
-     "OFF_SPIKEDSHIELD_MORGANA",
      "OFF_TOTEM_KEEPER"
     ],
     "potion": [
@@ -33950,9 +35023,232 @@
     "shoes": [
      "SHOES_LEATHER_MORGANA",
      "SHOES_LEATHER_ROYAL",
-     "SHOES_LEATHER_FEY",
      "SHOES_LEATHER_SET1"
     ]
+   },
+   "kit_weapon": {
+    "2H_ARCANESTAFF": {
+     "armor": [
+      [
+       "ARMOR_PLATE_SET2",
+       5
+      ],
+      [
+       "ARMOR_PLATE_FEY",
+       4
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       8
+      ],
+      [
+       "CAPEITEM_FW_LYMHURST",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       6
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       9
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       4
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       2
+      ]
+     ]
+    },
+    "2H_ENIGMATICORB_MORGANA": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       3
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE",
+       2
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       5
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       1
+      ],
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ],
+      [
+       "SHOES_LEATHER_SET1",
+       1
+      ]
+     ]
+    },
+    "2H_HOLYSTAFF_CRYSTAL": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_AVALON",
+       1
+      ],
+      [
+       "ARMOR_CLOTH_FEY",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       3
+      ],
+      [
+       "CAPEITEM_FW_LYMHURST",
+       2
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       2
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       3
+      ],
+      [
+       "HEAD_CLOTH_KEEPER",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_ROYAL",
+       2
+      ]
+     ]
+    },
+    "2H_SHAPESHIFTER_SET2": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       4
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       4
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ],
+      [
+       "SHOES_LEATHER_ROYAL",
+       1
+      ]
+     ]
+    },
+    "MAIN_ARCANESTAFF": {
+     "armor": [
+      [
+       "ARMOR_PLATE_SET2",
+       3
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       4
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       2
+      ],
+      [
+       "HEAD_PLATE_KEEPER",
+       2
+      ]
+     ],
+     "offhand": [
+      [
+       "OFF_SHIELD_AVALON",
+       3
+      ],
+      [
+       "OFF_HORN_KEEPER",
+       1
+      ],
+      [
+       "OFF_TOTEM_KEEPER",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       2
+      ]
+     ]
+    }
    },
    "name": "Shield / Cleanse Support",
    "uniform": {
@@ -33988,18 +35284,8 @@
      "tier": "primary"
     },
     {
-     "id": "MAIN_ARCANESTAFF_UNDEAD",
-     "source": "sheet: ally shield Q + Empowering Beam W (Witchwork)",
-     "tier": "primary"
-    },
-    {
      "id": "2H_SHAPESHIFTER_SET2",
      "source": "comp:support x3; guide:albiononlinegrind 'Nature (Rootbound) Support'",
-     "tier": "primary"
-    },
-    {
-     "id": "2H_COMBATSTAFF_MORGANA",
-     "source": "comp:albioncompo_push_monkey_7 (support)",
      "tier": "primary"
     }
    ]
@@ -34660,36 +35946,78 @@
    "job": "Ground denial and mass slows \u2014 the ice support seat (albiononlinegrind 'Ice (Icicle) Support').\n",
    "kit": {
     "armor": [
-     "ARMOR_CLOTH_SET1",
      "ARMOR_PLATE_FEY",
-     "ARMOR_CLOTH_FEY",
-     "ARMOR_CLOTH_AVALON",
      "ARMOR_PLATE_HELL"
     ],
     "cape": [
-     "CAPEITEM_SMUGGLER",
-     "CAPEITEM_FW_LYMHURST"
+     "CAPEITEM_SMUGGLER"
     ],
     "food": [
-     "T8_MEAL_STEW",
      "T7_MEAL_OMELETTE"
     ],
     "head": [
-     "HEAD_LEATHER_SET3",
-     "HEAD_CLOTH_KEEPER"
+     "HEAD_LEATHER_SET3"
     ],
     "offhand": [
      "OFF_SHIELD_AVALON"
     ],
     "potion": [
-     "T7_POTION_STONESKIN",
-     "T7_POTION_REVIVE"
-    ],
-    "shoes": [
-     "SHOES_LEATHER_MORGANA",
-     "SHOES_LEATHER_FEY",
-     "SHOES_LEATHER_SET1"
+     "T7_POTION_STONESKIN"
     ]
+   },
+   "kit_weapon": {
+    "2H_ICEGAUNTLETS_HELL": {
+     "armor": [
+      [
+       "ARMOR_PLATE_FEY",
+       2
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       2
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ]
+    },
+    "MAIN_FROSTSTAFF_KEEPER": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       1
+      ]
+     ],
+     "offhand": [
+      [
+       "OFF_SHIELD_AVALON",
+       1
+      ]
+     ]
+    }
    },
    "name": "Zone / Slow Support",
    "uniform": {
@@ -34713,21 +36041,6 @@
      "id": "MAIN_FROSTSTAFF_AVALON",
      "source": "sheet: the crystal-save support (Frozen Crystal ally save)",
      "tier": "primary"
-    },
-    {
-     "id": "2H_GLACIALSTAFF",
-     "source": "derived:zone_control 6 (the 15s roaming storm); comp:sob_blaze (rdps)",
-     "tier": "primary"
-    },
-    {
-     "id": "2H_ICECRYSTAL_UNDEAD",
-     "source": "derived:zone_control 6 (Frost Bomb + Surge + Obelisk + E stack zones)",
-     "tier": "primary"
-    },
-    {
-     "id": "2H_SHAPESHIFTER_CRYSTAL",
-     "source": "comp:deadlyhooker (support)",
-     "tier": "primary"
     }
    ]
   },
@@ -34737,9 +36050,9 @@
    "job": "The ranged damage core \u2014 AoE pressure on the clump from distance (RDPS in comp sheets).\n",
    "kit": {
     "armor": [
+     "ARMOR_CLOTH_FEY",
      "ARMOR_CLOTH_AVALON",
-     "ARMOR_CLOTH_SET1",
-     "ARMOR_CLOTH_FEY"
+     "ARMOR_CLOTH_SET1"
     ],
     "cape": [
      "CAPEITEM_SMUGGLER",
@@ -34772,6 +36085,472 @@
      "SHOES_LEATHER_ROYAL",
      "SHOES_LEATHER_SET1"
     ]
+   },
+   "kit_weapon": {
+    "2H_BOW_HELL": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       3
+      ],
+      [
+       "CAPEITEM_FW_LYMHURST",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       8
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       1
+      ],
+      [
+       "HEAD_PLATE_SET3",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       8
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       3
+      ],
+      [
+       "SHOES_LEATHER_FEY",
+       1
+      ]
+     ]
+    },
+    "2H_CROSSBOWLARGE_MORGANA": {
+     "cape": [
+      [
+       "CAPEITEM_FW_LYMHURST",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_FEY",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       1
+      ]
+     ]
+    },
+    "2H_CROSSBOW_CANNON_AVALON": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_FEY",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_FW_LYMHURST",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       2
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ]
+     ]
+    },
+    "2H_FIRE_RINGPAIR_AVALON": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_FEY",
+       2
+      ],
+      [
+       "ARMOR_CLOTH_AVALON",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_FW_LYMHURST",
+       3
+      ],
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       3
+      ],
+      [
+       "T7_MEAL_OMELETTE",
+       2
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       3
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_STONESKIN",
+       3
+      ],
+      [
+       "T7_POTION_REVIVE",
+       2
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       2
+      ],
+      [
+       "SHOES_LEATHER_FEY",
+       1
+      ],
+      [
+       "SHOES_LEATHER_ROYAL",
+       1
+      ],
+      [
+       "SHOES_LEATHER_SET1",
+       1
+      ]
+     ]
+    },
+    "2H_FROSTSTAFF": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_FEY",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_FW_LYMHURST",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ]
+     ]
+    },
+    "2H_FROSTSTAFF_CRYSTAL": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_AVALON",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       2
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_CLOTH_KEEPER",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_ROYAL",
+       2
+      ]
+     ]
+    },
+    "2H_GLACIALSTAFF": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_SET1",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_CLOTH_KEEPER",
+       1
+      ]
+     ]
+    },
+    "2H_ICECRYSTAL_UNDEAD": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_SET1",
+       5
+      ],
+      [
+       "ARMOR_CLOTH_FEY",
+       2
+      ],
+      [
+       "ARMOR_CLOTH_AVALON",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_FW_LYMHURST",
+       2
+      ],
+      [
+       "CAPEITEM_SMUGGLER",
+       2
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       3
+      ],
+      [
+       "T7_MEAL_OMELETTE",
+       2
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       8
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       2
+      ],
+      [
+       "T7_POTION_STONESKIN",
+       2
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       5
+      ],
+      [
+       "SHOES_LEATHER_FEY",
+       1
+      ],
+      [
+       "SHOES_LEATHER_SET1",
+       1
+      ]
+     ]
+    },
+    "2H_INFERNOSTAFF_MORGANA": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_FEY",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ]
+     ]
+    },
+    "2H_LONGBOW": {
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       1
+      ],
+      [
+       "T8_MEAL_STEW",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       1
+      ],
+      [
+       "HEAD_PLATE_SET2",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       2
+      ]
+     ]
+    },
+    "MAIN_CURSEDSTAFF_CRYSTAL": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_AVALON",
+       3
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       5
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       2
+      ],
+      [
+       "T7_MEAL_OMELETTE",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       3
+      ],
+      [
+       "HEAD_CLOTH_KEEPER",
+       1
+      ],
+      [
+       "HEAD_PLATE_SET3",
+       1
+      ]
+     ],
+     "offhand": [
+      [
+       "OFF_HORN_KEEPER",
+       3
+      ],
+      [
+       "OFF_DEMONSKULL_HELL",
+       2
+      ],
+      [
+       "OFF_SPIKEDSHIELD_MORGANA",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       2
+      ],
+      [
+       "T7_POTION_STONESKIN",
+       2
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_FEY",
+       2
+      ],
+      [
+       "SHOES_LEATHER_ROYAL",
+       2
+      ],
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ],
+      [
+       "SHOES_LEATHER_SET1",
+       1
+      ]
+     ]
+    }
    },
    "name": "Ranged AoE DPS",
    "uniform": {
@@ -34892,6 +36671,306 @@
      "SHOES_LEATHER_FEY"
     ]
    },
+   "kit_weapon": {
+    "2H_AXE_AVALON": {
+     "armor": [
+      [
+       "ARMOR_LEATHER_FEY",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       3
+      ],
+      [
+       "CAPEITEM_FW_LYMHURST",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       1
+      ],
+      [
+       "T8_MEAL_STEW",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_PLATE_SET2",
+       6
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       3
+      ],
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_FEY",
+       3
+      ],
+      [
+       "SHOES_LEATHER_MORGANA",
+       2
+      ]
+     ]
+    },
+    "2H_CLEAVER_HELL": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       2
+      ],
+      [
+       "CAPEITEM_FW_LYMHURST",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE",
+       1
+      ],
+      [
+       "T8_MEAL_STEW",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_PLATE_SET2",
+       4
+      ],
+      [
+       "HEAD_PLATE_KEEPER",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       2
+      ],
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       2
+      ]
+     ]
+    },
+    "2H_DUALAXE_KEEPER": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ]
+     ]
+    },
+    "2H_DUALHAMMER_HELL": {
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       1
+      ]
+     ]
+    },
+    "2H_HALBERD_MORGANA": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ]
+     ]
+    },
+    "2H_KNUCKLES_KEEPER": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ]
+     ]
+    },
+    "2H_KNUCKLES_SET3": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       3
+      ],
+      [
+       "CAPEITEM_FW_LYMHURST",
+       2
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       5
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_FEY",
+       4
+      ],
+      [
+       "HEAD_LEATHER_SET3",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       4
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_FEY",
+       3
+      ],
+      [
+       "SHOES_LEATHER_MORGANA",
+       2
+      ]
+     ]
+    },
+    "MAIN_SCIMITAR_MORGANA": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_PLATE_SET2",
+       1
+      ]
+     ],
+     "offhand": [
+      [
+       "OFF_DEMONSKULL_HELL",
+       1
+      ],
+      [
+       "OFF_HORN_KEEPER",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       2
+      ]
+     ]
+    }
+   },
    "name": "Sustained Melee DPS",
    "uniform": {
     "chest": [
@@ -34957,7 +37036,6 @@
      "CAPEITEM_FW_LYMHURST"
     ],
     "food": [
-     "T7_MEAL_OMELETTE_AVALON",
      "T8_MEAL_STEW"
     ],
     "head": [
@@ -34965,12 +37043,53 @@
      "HEAD_LEATHER_FEY"
     ],
     "potion": [
-     "T7_POTION_REVIVE",
      "T7_POTION_STONESKIN"
     ],
     "shoes": [
      "SHOES_LEATHER_MORGANA"
     ]
+   },
+   "kit_weapon": {
+    "2H_GLAIVE_CRYSTAL": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       2
+      ],
+      [
+       "CAPEITEM_FW_LYMHURST",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       2
+      ],
+      [
+       "HEAD_LEATHER_FEY",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       2
+      ]
+     ]
+    }
    },
    "name": "Bomb / One-shot AoE",
    "uniform": {
@@ -34993,11 +37112,6 @@
     {
      "id": "2H_DUALSCIMITAR_UNDEAD",
      "source": "owner:2026-08-24 ('galatine pair is great for solo bombs')",
-     "tier": "primary"
-    },
-    {
-     "id": "2H_ARCANESTAFF",
-     "source": "guide:albiononlinegrind clap-kite comp 'Arcane DPS (oneshot oriented Great Arcane)'",
      "tier": "primary"
     }
    ]
@@ -35033,6 +37147,100 @@
      "SHOES_LEATHER_MORGANA"
     ]
    },
+   "kit_weapon": {
+    "2H_DAGGERPAIR": {
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       1
+      ]
+     ]
+    },
+    "MAIN_RAPIER_MORGANA": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       1
+      ]
+     ],
+     "offhand": [
+      [
+       "OFF_SPIKEDSHIELD_MORGANA",
+       1
+      ],
+      [
+       "OFF_TOTEM_KEEPER",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
+      ]
+     ]
+    },
+    "MAIN_SCIMITAR_MORGANA": {
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       1
+      ]
+     ],
+     "food": [
+      [
+       "T8_MEAL_STEW",
+       1
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_PLATE_SET2",
+       1
+      ]
+     ],
+     "offhand": [
+      [
+       "OFF_DEMONSKULL_HELL",
+       1
+      ],
+      [
+       "OFF_HORN_KEEPER",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       2
+      ]
+     ]
+    }
+   },
    "name": "Dive / Cleanup",
    "uniform": {
     "chest": [
@@ -35052,12 +37260,12 @@
     },
     {
      "id": "2H_DUALSICKLE_UNDEAD",
-     "source": "RULE-queue adjudication 2026-08-25 (the dive daggers: Shadow Edge 4)",
+     "source": "RULE-queue adjudication 2026-08-25 (the dive daggers: Shadow Edge 4); owner:2026-08-26 ('never in medium-large scale (7+)' \u2014 viability exclusion at >=7, small-scale seat only)",
      "tier": "primary"
     },
     {
      "id": "2H_DAGGERPAIR",
-     "source": "RULE-queue adjudication 2026-08-25 (dive catch: Shadow Edge 4, AA-stack identity)",
+     "source": "RULE-queue adjudication 2026-08-25 (dive catch: Shadow Edge 4, AA-stack identity); owner:2026-08-26 ('never in medium-large scale (7+)' \u2014 viability exclusion at >=7, small-scale seat only)",
      "tier": "primary"
     },
     {
@@ -36812,8 +39020,7 @@
    "removed": false,
    "role_hint": "support",
    "role_menu": [
-    "shield_support",
-    "bomb_aoe"
+    "shield_support"
    ],
    "role_menu_secondary": [
     "pierce"
@@ -39826,7 +42033,6 @@
    "resil_pen": 0.1,
    "role_hint": "melee",
    "role_menu": [
-    "shield_support",
     "shield_break"
    ],
    "source": "sheets/quarterstaff_line.yaml",
@@ -45449,7 +47655,6 @@
    "removed": false,
    "role_hint": "range",
    "role_menu": [
-    "zone_support",
     "ranged_aoe"
    ],
    "role_menu_secondary": [
@@ -47454,7 +49659,6 @@
    "removed": false,
    "role_hint": "healer",
    "role_menu": [
-    "main_healer",
     "brawl_healer"
    ],
    "source": "sheets/great_holy.yaml",
@@ -48054,7 +50258,6 @@
    "removed": false,
    "role_hint": "range",
    "role_menu": [
-    "zone_support",
     "ranged_aoe"
    ],
    "role_menu_secondary": [
@@ -48795,9 +50998,6 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "tank",
-   "role_menu": [
-    "stopper_tank"
-   ],
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
@@ -54104,9 +56304,6 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "range",
-   "role_menu": [
-    "zone_support"
-   ],
    "role_menu_secondary": [
     "pierce"
    ],
@@ -57040,8 +59237,7 @@
    "removed": false,
    "role_hint": "support",
    "role_menu": [
-    "engage_tank",
-    "shield_support"
+    "engage_tank"
    ],
    "role_menu_secondary": [
     "pierce"

@@ -3,12 +3,12 @@
 # CANDIDATES until reviewed (changeschapter2.md §D.1/§F).
 # Content is CC BY-SA — attribution travels on every record.
 kind: published_build_batch
-id: metabattle_zvz
+id: metabattle
 source:
   kind: metabattle
   family: metabattle
   author: MetaBattle contributors
-  url: https://metabattle.com/albion/ZvZ_Builds
+  url: https://metabattle.com/albion/Builds
   license: Content is available under the Creative Commons Attribution-ShareAlike License.
 snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4
 fetched_fixtures: pipeline/tests/fixtures/metabattle
@@ -1103,6 +1103,74 @@ builds:
     source_independence: null
     loadout_completeness: 1.0
     outcome: null
+- build_id: metabattle:7663:8916
+  weapon: 2H_DUALAXE_KEEPER
+  weapon_raw: Elder's Bear Paws
+  weapon_alternatives: []
+  role: dps
+  role_raw: Melee DPS
+  content: ganking_smallscale
+  style: null
+  party_size: null
+  spells:
+    q: RENDINGCOMBO
+    w: AXEBOOST
+    e: DUALAXE_CRAWLER
+    passive: PASSIVE_BLEEDCHANCE
+  spells_raw: Rending Rage, Adrenaline Boost, Razor Cut, Deep Cuts
+  gear_spells:
+    head: null
+    armor: null
+    shoes: null
+  gear_spells_raw:
+    head: Purge, Aggression
+    armor: Ambush, Balanced Mind
+    shoes: Defenseless Rush, Aggression
+    cape: Chain Lightning
+  gear:
+    offhand: null
+    head: HEAD_CLOTH_HELL
+    cape: CAPEITEM_FW_THETFORD
+    armor: ARMOR_LEATHER_SET3
+    shoes: SHOES_CLOTH_ROYAL
+    potion: T8_POTION_COOLDOWN
+    food: T8_MEAL_STEW_FISH
+  gear_raw: {}
+  gear_alternatives: {}
+  tier: null
+  enchant: null
+  quality: null
+  ip: null
+  membership: core
+  unknowns: []
+  quarantined_fields: []
+  status: candidate
+  approval:
+    status: candidate
+    basis: automated import — awaiting review
+  source:
+    kind: metabattle
+    family: metabattle
+    author: MetaBattle contributors
+    url: https://metabattle.com/albion/Bear_Paws_Ganking_PvP_Build
+    record: pageid 7663, revision 8916
+  published: '2025-04-01T23:17:24Z'
+  ingested: null
+  patch: null
+  claimed_freshness: Ganking, Open World
+  attribution:
+    license: Content is available under the Creative Commons Attribution-ShareAlike License.
+    license_url: https://metabattle.com/albion/MediaWiki:Copyright
+    credit: MetaBattle contributors
+  confidence:
+    item_mapping: 1.0
+    spell_mapping: 1.0
+    patch: 0.2
+    content_context: 0.6
+    party_size: 0.2
+    source_independence: null
+    loadout_completeness: 1.0
+    outcome: null
 - build_id: metabattle:7667:8978
   weapon: 2H_NATURESTAFF_KEEPER
   weapon_raw: Elder's Rampant Staff
@@ -1239,6 +1307,142 @@ builds:
     source_independence: null
     loadout_completeness: 1.0
     outcome: null
+- build_id: metabattle:7689:8953
+  weapon: 2H_CLAWPAIR
+  weapon_raw: Elder's Claws
+  weapon_alternatives: []
+  role: dps
+  role_raw: Melee DPS
+  content: ganking_smallscale
+  style: null
+  party_size: null
+  spells:
+    q: QDASH
+    w: GROUNDDASH
+    e: DISEMBOWEL
+    passive: PASSIVE_BLEEDCHANCE
+  spells_raw: Deadly Swipe, Dash, Disembowel, Deep Cuts
+  gear_spells:
+    head: null
+    armor: null
+    shoes: null
+  gear_spells_raw:
+    head: Purge, Aggression
+    armor: Ambush, Balanced Mind
+    shoes: Defenseless Rush, Aggression
+    cape: Opening to Hell
+  gear:
+    offhand: null
+    head: HEAD_CLOTH_HELL
+    cape: CAPEITEM_DEMON
+    armor: ARMOR_LEATHER_SET3
+    shoes: SHOES_CLOTH_ROYAL
+    potion: T8_POTION_COOLDOWN
+    food: T8_MEAL_STEW_FISH
+  gear_raw: {}
+  gear_alternatives: {}
+  tier: null
+  enchant: null
+  quality: null
+  ip: null
+  membership: core
+  unknowns: []
+  quarantined_fields: []
+  status: candidate
+  approval:
+    status: candidate
+    basis: automated import — awaiting review
+  source:
+    kind: metabattle
+    family: metabattle
+    author: MetaBattle contributors
+    url: https://metabattle.com/albion/Claws_Ganking_PvP_Build
+    record: pageid 7689, revision 8953
+  published: '2025-04-01T23:21:00Z'
+  ingested: null
+  patch: null
+  claimed_freshness: Ganking, Open World
+  attribution:
+    license: Content is available under the Creative Commons Attribution-ShareAlike License.
+    license_url: https://metabattle.com/albion/MediaWiki:Copyright
+    credit: MetaBattle contributors
+  confidence:
+    item_mapping: 1.0
+    spell_mapping: 1.0
+    patch: 0.2
+    content_context: 0.6
+    party_size: 0.2
+    source_independence: null
+    loadout_completeness: 1.0
+    outcome: null
+- build_id: metabattle:7690:9142
+  weapon: 2H_QUARTERSTAFF_AVALON
+  weapon_raw: Elder's Grailseeker
+  weapon_alternatives: []
+  role: dps
+  role_raw: Melee DPS
+  content: ganking_smallscale
+  style: null
+  party_size: null
+  spells:
+    q: CARTWHEEL
+    w: STUNRUN
+    e: SOULSHAKER
+    passive: PASSIVE_ENERGYCHANCE_QUARTERSTAFF
+  spells_raw: Cartwheel, Stun Run, Soul Shaker, Energetic
+  gear_spells:
+    head: null
+    armor: null
+    shoes: null
+  gear_spells_raw:
+    head: Bear Trap, Skinning Skills
+    armor: Soul Chain, Authority, Spirit Crush
+    shoes: Rush, Quick Thinker
+    cape: Opening to Hell
+  gear:
+    offhand: null
+    head: HEAD_GATHERER_HIDE
+    cape: CAPEITEM_DEMON
+    armor: ARMOR_PLATE_UNDEAD
+    shoes: SHOES_LEATHER_SET2
+    potion: T8_POTION_COOLDOWN
+    food: T7_MEAL_OMELETTE
+  gear_raw: {}
+  gear_alternatives: {}
+  tier: null
+  enchant: null
+  quality: null
+  ip: null
+  membership: core
+  unknowns: []
+  quarantined_fields: []
+  status: candidate
+  approval:
+    status: candidate
+    basis: automated import — awaiting review
+  source:
+    kind: metabattle
+    family: metabattle
+    author: MetaBattle contributors
+    url: https://metabattle.com/albion/Grailseeker_Ganking_PvP_Build
+    record: pageid 7690, revision 9142
+  published: '2025-07-29T19:32:25Z'
+  ingested: null
+  patch: null
+  claimed_freshness: Ganking, Open World, Depths
+  attribution:
+    license: Content is available under the Creative Commons Attribution-ShareAlike License.
+    license_url: https://metabattle.com/albion/MediaWiki:Copyright
+    credit: MetaBattle contributors
+  confidence:
+    item_mapping: 1.0
+    spell_mapping: 1.0
+    patch: 0.2
+    content_context: 0.6
+    party_size: 0.2
+    source_independence: null
+    loadout_completeness: 1.0
+    outcome: null
 - build_id: metabattle:7691:8998
   weapon: 2H_CLEAVER_HELL
   weapon_raw: Elder's Carving Sword
@@ -1294,6 +1498,142 @@ builds:
   ingested: null
   patch: null
   claimed_freshness: ZvZ
+  attribution:
+    license: Content is available under the Creative Commons Attribution-ShareAlike License.
+    license_url: https://metabattle.com/albion/MediaWiki:Copyright
+    credit: MetaBattle contributors
+  confidence:
+    item_mapping: 1.0
+    spell_mapping: 1.0
+    patch: 0.2
+    content_context: 0.6
+    party_size: 0.2
+    source_independence: null
+    loadout_completeness: 1.0
+    outcome: null
+- build_id: metabattle:7694:8922
+  weapon: 2H_SCYTHE_HELL
+  weapon_raw: Elder's Infernal Scythe
+  weapon_alternatives: []
+  role: dps
+  role_raw: Melee DPS
+  content: hellgate_5v5
+  style: null
+  party_size: null
+  spells:
+    q: RENDINGCOMBO
+    w: AXEBOOST
+    e: SCYTHESWING
+    passive: PASSIVE_SPELLPOWER_CHANCE_AXE
+  spells_raw: Rending Rage, Adrenaline Boost, Bloody Reap, Aggressive Rush
+  gear_spells:
+    head: null
+    armor: null
+    shoes: null
+  gear_spells_raw:
+    head: Energy Shield, Aggression
+    armor: Life Steal Aura, Balanced Mind
+    shoes: Premonition, Toughness
+    cape: Shield of Protection
+  gear:
+    offhand: null
+    head: HEAD_CLOTH_SET1
+    cape: CAPEITEM_FW_MARTLOCK
+    armor: ARMOR_LEATHER_HELL
+    shoes: SHOES_PLATE_AVALON
+    potion: T7_POTION_STONESKIN
+    food: T8_MEAL_STEW
+  gear_raw: {}
+  gear_alternatives: {}
+  tier: null
+  enchant: null
+  quality: null
+  ip: null
+  membership: core
+  unknowns: []
+  quarantined_fields: []
+  status: candidate
+  approval:
+    status: candidate
+    basis: automated import — awaiting review
+  source:
+    kind: metabattle
+    family: metabattle
+    author: MetaBattle contributors
+    url: https://metabattle.com/albion/Small_Scale_Infernal_Scythe_PvP_Build
+    record: pageid 7694, revision 8922
+  published: '2025-04-01T23:17:47Z'
+  ingested: null
+  patch: null
+  claimed_freshness: Hellgate (5v5), Open World
+  attribution:
+    license: Content is available under the Creative Commons Attribution-ShareAlike License.
+    license_url: https://metabattle.com/albion/MediaWiki:Copyright
+    credit: MetaBattle contributors
+  confidence:
+    item_mapping: 1.0
+    spell_mapping: 1.0
+    patch: 0.2
+    content_context: 0.6
+    party_size: 0.2
+    source_independence: null
+    loadout_completeness: 1.0
+    outcome: null
+- build_id: metabattle:7695:8941
+  weapon: 2H_SKULLORB_HELL
+  weapon_raw: Elder's Cursed Skull
+  weapon_alternatives: []
+  role: dps
+  role_raw: Range DPS
+  content: hellgate_5v5
+  style: null
+  party_size: null
+  spells:
+    q: CURSEBLADE
+    w: CURSENOVA
+    e: SKULLCURSE
+    passive: PASSIVE_SPELLPOWER_CASTER_CURSEDSTAFF
+  spells_raw: Cursed Sickle, Desecrate, Haunting Screams, Furious
+  gear_spells:
+    head: null
+    armor: null
+    shoes: null
+  gear_spells_raw:
+    head: Purifying Smoke, Toughness
+    armor: Wild Magic, Aggression
+    shoes: Focused Run, Aggression
+    cape: Energy Reserve
+  gear:
+    offhand: null
+    head: HEAD_PLATE_AVALON
+    cape: CAPEITEM_FW_LYMHURST
+    armor: ARMOR_CLOTH_FEY
+    shoes: SHOES_CLOTH_SET1
+    potion: T7_POTION_STONESKIN
+    food: T8_MEAL_STEW
+  gear_raw: {}
+  gear_alternatives: {}
+  tier: null
+  enchant: null
+  quality: null
+  ip: null
+  membership: core
+  unknowns: []
+  quarantined_fields: []
+  status: candidate
+  approval:
+    status: candidate
+    basis: automated import — awaiting review
+  source:
+    kind: metabattle
+    family: metabattle
+    author: MetaBattle contributors
+    url: https://metabattle.com/albion/Cursed_Skull_Group_PvP_Build
+    record: pageid 7695, revision 8941
+  published: '2025-04-01T23:19:55Z'
+  ingested: null
+  patch: null
+  claimed_freshness: Open World, Hellgate (5v5), Crystal Arena
   attribution:
     license: Content is available under the Creative Commons Attribution-ShareAlike License.
     license_url: https://metabattle.com/albion/MediaWiki:Copyright
@@ -1715,6 +2055,278 @@ builds:
     source_independence: null
     loadout_completeness: 1.0
     outcome: null
+- build_id: metabattle:7726:8960
+  weapon: 2H_FIRE_RINGPAIR_AVALON
+  weapon_raw: Elder's Dawnsong
+  weapon_alternatives: []
+  role: dps
+  role_raw: Range DPS
+  content: hellgate_5v5
+  style: null
+  party_size: null
+  spells:
+    q: SEARING_FLAME
+    w: FIREARTILLERY
+    e: FIREPHOENIX
+    passive: PASSIVE_SPELLPOWER_CASTER_FIRESTAFF
+  spells_raw: Searing Flame, Fire Artillery, Flaming Phoenix, Furious
+  gear_spells:
+    head: null
+    armor: null
+    shoes: null
+  gear_spells_raw:
+    head: Purifying Smoke, Toughness
+    armor: Wild Magic, Aggression
+    shoes: Focused Run, Aggression
+    cape: Energy Reserve
+  gear:
+    offhand: null
+    head: HEAD_PLATE_AVALON
+    cape: CAPEITEM_FW_LYMHURST
+    armor: ARMOR_CLOTH_FEY
+    shoes: SHOES_CLOTH_SET1
+    potion: T7_POTION_STONESKIN
+    food: T7_MEAL_OMELETTE
+  gear_raw: {}
+  gear_alternatives: {}
+  tier: null
+  enchant: null
+  quality: null
+  ip: null
+  membership: core
+  unknowns: []
+  quarantined_fields: []
+  status: candidate
+  approval:
+    status: candidate
+    basis: automated import — awaiting review
+  source:
+    kind: metabattle
+    family: metabattle
+    author: MetaBattle contributors
+    url: https://metabattle.com/albion/Dawnsong_Group_PvP_Build
+    record: pageid 7726, revision 8960
+  published: '2025-04-01T23:21:48Z'
+  ingested: null
+  patch: null
+  claimed_freshness: Open World, Hellgate (5v5)
+  attribution:
+    license: Content is available under the Creative Commons Attribution-ShareAlike License.
+    license_url: https://metabattle.com/albion/MediaWiki:Copyright
+    credit: MetaBattle contributors
+  confidence:
+    item_mapping: 1.0
+    spell_mapping: 1.0
+    patch: 0.2
+    content_context: 0.6
+    party_size: 0.2
+    source_independence: null
+    loadout_completeness: 1.0
+    outcome: null
+- build_id: metabattle:7741:9075
+  weapon: MAIN_HOLYSTAFF_AVALON
+  weapon_raw: Elder's Hallowfall
+  weapon_alternatives: []
+  role: healer
+  role_raw: Healer
+  content: hellgate_5v5
+  style: null
+  party_size: null
+  spells:
+    q: HOLYFLASH
+    w: HOLYORB
+    e: DIVINE_JUMP
+    passive: PASSIVE_HEALPOWERCHANCE
+  spells_raw: Holy Flash, Holy Orb, Divine Intervention, Adrenaline Driven Charity
+  gear_spells:
+    head: null
+    armor: null
+    shoes: null
+  gear_spells_raw:
+    head: Displacement Immunity, Toughness
+    armor: Energy Emission, Aggression
+    shoes: Break Free, Balanced Mind
+    cape: Energy Reserve
+  gear:
+    offhand: OFF_HORN_KEEPER
+    head: HEAD_PLATE_SET2
+    cape: CAPEITEM_FW_LYMHURST
+    armor: ARMOR_CLOTH_AVALON
+    shoes: SHOES_LEATHER_SET1
+    potion: T7_POTION_REVIVE
+    food: T7_MEAL_OMELETTE
+  gear_raw: {}
+  gear_alternatives: {}
+  tier: null
+  enchant: null
+  quality: null
+  ip: null
+  membership: core
+  unknowns: []
+  quarantined_fields: []
+  status: candidate
+  approval:
+    status: candidate
+    basis: automated import — awaiting review
+  source:
+    kind: metabattle
+    family: metabattle
+    author: MetaBattle contributors
+    url: https://metabattle.com/albion/Hallowfall_Healer_Group_PvP_Build
+    record: pageid 7741, revision 9075
+  published: '2025-07-07T18:49:16Z'
+  ingested: null
+  patch: null
+  claimed_freshness: Open World, Hellgate (5v5), Crystal Arena, Depth
+  attribution:
+    license: Content is available under the Creative Commons Attribution-ShareAlike License.
+    license_url: https://metabattle.com/albion/MediaWiki:Copyright
+    credit: MetaBattle contributors
+  confidence:
+    item_mapping: 1.0
+    spell_mapping: 1.0
+    patch: 0.2
+    content_context: 0.6
+    party_size: 0.2
+    source_independence: null
+    loadout_completeness: 1.0
+    outcome: null
+- build_id: metabattle:7748:8932
+  weapon: 2H_CROSSBOW
+  weapon_raw: Elder's Crossbow
+  weapon_alternatives: []
+  role: dps
+  role_raw: Range DPS
+  content: ganking_smallscale
+  style: null
+  party_size: null
+  spells:
+    q: AUTOFIRE2
+    w: SUNDERSHOT
+    e: SNIPESHOT_CROSSBOW
+    passive: PASSIVE_CD_RESET_Q
+  spells_raw: Auto Fire, Sunder Shot, Snipe Shot, Well-Prepared
+  gear_spells:
+    head: null
+    armor: null
+    shoes: null
+  gear_spells_raw:
+    head: Hush, Toughness
+    armor: Speed Caster, Aggression
+    shoes: Defenseless Rush, Aggression
+    cape: Mark of the Raven
+  gear:
+    offhand: null
+    head: HEAD_PLATE_HELL
+    cape: CAPEITEM_MORGANA
+    armor: ARMOR_CLOTH_SET1
+    shoes: SHOES_CLOTH_ROYAL
+    potion: T8_POTION_COOLDOWN
+    food: T8_MEAL_STEW
+  gear_raw: {}
+  gear_alternatives: {}
+  tier: null
+  enchant: null
+  quality: null
+  ip: null
+  membership: core
+  unknowns: []
+  quarantined_fields: []
+  status: candidate
+  approval:
+    status: candidate
+    basis: automated import — awaiting review
+  source:
+    kind: metabattle
+    family: metabattle
+    author: MetaBattle contributors
+    url: https://metabattle.com/albion/2H_Crossbow_Ganking_PvP_Build
+    record: pageid 7748, revision 8932
+  published: '2025-04-01T23:18:58Z'
+  ingested: null
+  patch: null
+  claimed_freshness: Open World, Ganking
+  attribution:
+    license: Content is available under the Creative Commons Attribution-ShareAlike License.
+    license_url: https://metabattle.com/albion/MediaWiki:Copyright
+    credit: MetaBattle contributors
+  confidence:
+    item_mapping: 1.0
+    spell_mapping: 1.0
+    patch: 0.2
+    content_context: 0.6
+    party_size: 0.2
+    source_independence: null
+    loadout_completeness: 1.0
+    outcome: null
+- build_id: metabattle:7754:8968
+  weapon: 2H_FROSTSTAFF
+  weapon_raw: Elder's Great Frost Staff
+  weapon_alternatives: []
+  role: dps
+  role_raw: Range DPS
+  content: hellgate_5v5
+  style: null
+  party_size: null
+  spells:
+    q: ICESHARD
+    w: FROSTNOVA
+    e: HAIL_MULTI_1
+    passive: PASSIVE_CASTINGSPEED_CHANCE_FROSTSTAFF
+  spells_raw: Ice Shard, Frost Nova, Hail, Aggressive Caster
+  gear_spells:
+    head: null
+    armor: null
+    shoes: null
+  gear_spells_raw:
+    head: Purifying Smoke, Toughness
+    armor: Wild Magic, Aggression
+    shoes: Raging Blink, Balanced Mind
+    cape: Energy Reserve
+  gear:
+    offhand: null
+    head: HEAD_PLATE_AVALON
+    cape: CAPEITEM_FW_LYMHURST
+    armor: ARMOR_CLOTH_FEY
+    shoes: SHOES_LEATHER_MORGANA
+    potion: T7_POTION_STONESKIN
+    food: T7_MEAL_OMELETTE
+  gear_raw: {}
+  gear_alternatives: {}
+  tier: null
+  enchant: null
+  quality: null
+  ip: null
+  membership: core
+  unknowns: []
+  quarantined_fields: []
+  status: candidate
+  approval:
+    status: candidate
+    basis: automated import — awaiting review
+  source:
+    kind: metabattle
+    family: metabattle
+    author: MetaBattle contributors
+    url: https://metabattle.com/albion/Great_Frost_Staff_Group_PvP_Build
+    record: pageid 7754, revision 8968
+  published: '2025-04-01T23:22:43Z'
+  ingested: null
+  patch: null
+  claimed_freshness: Open World, Hellgate (5v5), Crystal Arena
+  attribution:
+    license: Content is available under the Creative Commons Attribution-ShareAlike License.
+    license_url: https://metabattle.com/albion/MediaWiki:Copyright
+    credit: MetaBattle contributors
+  confidence:
+    item_mapping: 1.0
+    spell_mapping: 1.0
+    patch: 0.2
+    content_context: 0.6
+    party_size: 0.2
+    source_independence: null
+    loadout_completeness: 1.0
+    outcome: null
 - build_id: metabattle:7755:8913
   weapon: MAIN_ARCANESTAFF_UNDEAD
   weapon_raw: Elder's Witchwork Staff
@@ -1919,6 +2531,74 @@ builds:
     source_independence: null
     loadout_completeness: 1.0
     outcome: null
+- build_id: metabattle:7759:8992
+  weapon: MAIN_SPEAR_KEEPER
+  weapon_raw: Elder's Heron Spear
+  weapon_alternatives: []
+  role: dps
+  role_raw: Melee DPS
+  content: hellgate_5v5
+  style: null
+  party_size: null
+  spells:
+    q: SPEAR_LUNGE
+    w: FORESTOFSPEARS
+    e: SPEARTHROW
+    passive: PASSIVE_HEALTHCHANCE_SPEAR
+  spells_raw: Lunging Strike, Forest of Spears, Spear Throw, Life Leech
+  gear_spells:
+    head: null
+    armor: null
+    shoes: null
+  gear_spells_raw:
+    head: Energy Shield, Aggression
+    armor: Life Steal Aura, Balanced Mind
+    shoes: Raging Blink, Balanced Mind
+    cape: Energy Reserve
+  gear:
+    offhand: OFF_DEMONSKULL_HELL
+    head: HEAD_CLOTH_SET1
+    cape: CAPEITEM_FW_LYMHURST
+    armor: ARMOR_LEATHER_HELL
+    shoes: SHOES_LEATHER_MORGANA
+    potion: T7_POTION_STONESKIN
+    food: T8_MEAL_STEW
+  gear_raw: {}
+  gear_alternatives: {}
+  tier: null
+  enchant: null
+  quality: null
+  ip: null
+  membership: core
+  unknowns: []
+  quarantined_fields: []
+  status: candidate
+  approval:
+    status: candidate
+    basis: automated import — awaiting review
+  source:
+    kind: metabattle
+    family: metabattle
+    author: MetaBattle contributors
+    url: https://metabattle.com/albion/Heron_Spear_Group_PvP_Build
+    record: pageid 7759, revision 8992
+  published: '2025-04-01T23:27:50Z'
+  ingested: null
+  patch: null
+  claimed_freshness: Open World, Crystal Arena, Hellgate (5v5)
+  attribution:
+    license: Content is available under the Creative Commons Attribution-ShareAlike License.
+    license_url: https://metabattle.com/albion/MediaWiki:Copyright
+    credit: MetaBattle contributors
+  confidence:
+    item_mapping: 1.0
+    spell_mapping: 1.0
+    patch: 0.2
+    content_context: 0.6
+    party_size: 0.2
+    source_independence: null
+    loadout_completeness: 1.0
+    outcome: null
 - build_id: metabattle:7760:8911
   weapon: 2H_ARCANESTAFF_HELL
   weapon_raw: Elder's Occult Staff
@@ -1974,6 +2654,74 @@ builds:
   ingested: null
   patch: null
   claimed_freshness: ZvZ
+  attribution:
+    license: Content is available under the Creative Commons Attribution-ShareAlike License.
+    license_url: https://metabattle.com/albion/MediaWiki:Copyright
+    credit: MetaBattle contributors
+  confidence:
+    item_mapping: 1.0
+    spell_mapping: 1.0
+    patch: 0.2
+    content_context: 0.6
+    party_size: 0.2
+    source_independence: null
+    loadout_completeness: 1.0
+    outcome: null
+- build_id: metabattle:7765:8944
+  weapon: 2H_DEMONICSTAFF
+  weapon_raw: Elder's Demonic Staff
+  weapon_alternatives: []
+  role: dps
+  role_raw: Range DPS
+  content: hellgate_5v5
+  style: null
+  party_size: null
+  spells:
+    q: CURSEBLADE
+    w: CURSENOVA
+    e: CURSED_WALL
+    passive: PASSIVE_SPELLPOWER_CASTER_CURSEDSTAFF
+  spells_raw: Cursed Sickle, Desecrate, Anguished Soul, Furious
+  gear_spells:
+    head: null
+    armor: null
+    shoes: null
+  gear_spells_raw:
+    head: Ice Block, Aggression
+    armor: Wild Magic, Aggression
+    shoes: Focused Run, Aggression
+    cape: Energy Reserve
+  gear:
+    offhand: null
+    head: HEAD_CLOTH_SET2
+    cape: CAPEITEM_FW_LYMHURST
+    armor: ARMOR_CLOTH_FEY
+    shoes: SHOES_CLOTH_SET1
+    potion: T7_POTION_STONESKIN
+    food: T8_MEAL_STEW
+  gear_raw: {}
+  gear_alternatives: {}
+  tier: null
+  enchant: null
+  quality: null
+  ip: null
+  membership: core
+  unknowns: []
+  quarantined_fields: []
+  status: candidate
+  approval:
+    status: candidate
+    basis: automated import — awaiting review
+  source:
+    kind: metabattle
+    family: metabattle
+    author: MetaBattle contributors
+    url: https://metabattle.com/albion/Demonic_Staff_Group_PvP_Build
+    record: pageid 7765, revision 8944
+  published: '2025-04-01T23:20:06Z'
+  ingested: null
+  patch: null
+  claimed_freshness: Open World, Hellgate (5v5), Crystal Arena
   attribution:
     license: Content is available under the Creative Commons Attribution-ShareAlike License.
     license_url: https://metabattle.com/albion/MediaWiki:Copyright
@@ -2055,6 +2803,212 @@ builds:
     source_independence: null
     loadout_completeness: 1.0
     outcome: null
+- build_id: metabattle:7767:8989
+  weapon: 2H_SHAPESHIFTER_SET3
+  weapon_raw: Elder's Primal Staff
+  weapon_alternatives: []
+  role: support
+  role_raw: Support
+  content: hellgate_5v5
+  style: null
+  party_size: null
+  spells:
+    q: SHAPE_Q_CONE_MELEE
+    w: SHAPE_W_DAMAGE_AOE
+    e: SHAPESHIFT_BEAR
+    passive: PASSIVE_SHAPESHIFT_GATHER_CHARGES
+  spells_raw: Pulse Shock, Distortion, Spirit Bear Transformation, Innate Power
+  gear_spells:
+    head: null
+    armor: null
+    shoes: null
+  gear_spells_raw:
+    head: Purifying Smoke, Toughness
+    armor: Force Shield, Toughness, Spirit Crush
+    shoes: Battle Frenzy, Toughness
+    cape: Energy Reserve
+  gear:
+    offhand: null
+    head: HEAD_PLATE_AVALON
+    cape: CAPEITEM_FW_LYMHURST
+    armor: ARMOR_PLATE_KEEPER
+    shoes: SHOES_PLATE_UNDEAD
+    potion: T7_POTION_STONESKIN
+    food: T7_MEAL_OMELETTE
+  gear_raw: {}
+  gear_alternatives: {}
+  tier: null
+  enchant: null
+  quality: null
+  ip: null
+  membership: core
+  unknowns: []
+  quarantined_fields: []
+  status: candidate
+  approval:
+    status: candidate
+    basis: automated import — awaiting review
+  source:
+    kind: metabattle
+    family: metabattle
+    author: MetaBattle contributors
+    url: https://metabattle.com/albion/Primal_Staff_Support_Group_PvP_Build
+    record: pageid 7767, revision 8989
+  published: '2025-04-01T23:27:06Z'
+  ingested: null
+  patch: null
+  claimed_freshness: Open World, Hellgate (5v5), Crystal Arena
+  attribution:
+    license: Content is available under the Creative Commons Attribution-ShareAlike License.
+    license_url: https://metabattle.com/albion/MediaWiki:Copyright
+    credit: MetaBattle contributors
+  confidence:
+    item_mapping: 1.0
+    spell_mapping: 1.0
+    patch: 0.2
+    content_context: 0.6
+    party_size: 0.2
+    source_independence: null
+    loadout_completeness: 1.0
+    outcome: null
+- build_id: metabattle:7771:8976
+  weapon: 2H_NATURESTAFF_HELL
+  weapon_raw: Elder's Blight Staff
+  weapon_alternatives: []
+  role: healer
+  role_raw: Healer
+  content: hellgate_5v5
+  style: null
+  party_size: null
+  spells:
+    q: REJUVENATION
+    w: REJUVENATING_BREEZE
+    e: ROTTENVINES
+    passive: PASSIVE_HEALPOWERCHANCE
+  spells_raw: Rejuvenation, Rejuvenating Breeze, Elevated Nature, Adrenaline Driven Charity
+  gear_spells:
+    head: null
+    armor: null
+    shoes: null
+  gear_spells_raw:
+    head: Energy Shield, Aggression
+    armor: Energy Emission, Aggression
+    shoes: Break Free, Balanced Mind
+    cape: Energy Reserve
+  gear:
+    offhand: null
+    head: HEAD_CLOTH_SET1
+    cape: CAPEITEM_FW_LYMHURST
+    armor: ARMOR_CLOTH_AVALON
+    shoes: SHOES_LEATHER_SET1
+    potion: T7_POTION_REVIVE
+    food: T7_MEAL_OMELETTE
+  gear_raw: {}
+  gear_alternatives: {}
+  tier: null
+  enchant: null
+  quality: null
+  ip: null
+  membership: core
+  unknowns: []
+  quarantined_fields: []
+  status: candidate
+  approval:
+    status: candidate
+    basis: automated import — awaiting review
+  source:
+    kind: metabattle
+    family: metabattle
+    author: MetaBattle contributors
+    url: https://metabattle.com/albion/Blight_Staff_Group_PvP_Healer_Build
+    record: pageid 7771, revision 8976
+  published: '2025-04-01T23:24:23Z'
+  ingested: null
+  patch: null
+  claimed_freshness: Open World, Hellgate (5v5), Crystal Arena
+  attribution:
+    license: Content is available under the Creative Commons Attribution-ShareAlike License.
+    license_url: https://metabattle.com/albion/MediaWiki:Copyright
+    credit: MetaBattle contributors
+  confidence:
+    item_mapping: 1.0
+    spell_mapping: 1.0
+    patch: 0.2
+    content_context: 0.6
+    party_size: 0.2
+    source_independence: null
+    loadout_completeness: 1.0
+    outcome: null
+- build_id: metabattle:7778:8966
+  weapon: MAIN_FROSTSTAFF
+  weapon_raw: Elder's Frost Staff
+  weapon_alternatives: []
+  role: dps
+  role_raw: Range DPS
+  content: ganking_smallscale
+  style: null
+  party_size: null
+  spells:
+    q: SHATTER_Q
+    w: FROSTNOVA
+    e: FREEZINGWIND
+    passive: null
+  spells_raw: Frozen Surge, Frost Nova, Freezing Wind, Frost
+  gear_spells:
+    head: null
+    armor: null
+    shoes: null
+  gear_spells_raw:
+    head: Purge, Aggression
+    armor: Soul Chain, Authority, Spirit Crush
+    shoes: Rejuvenating Sprint, Authority
+    cape: Vanisher
+  gear:
+    offhand: OFF_HORN_KEEPER
+    head: HEAD_CLOTH_HELL
+    cape: CAPEITEM_UNDEAD
+    armor: ARMOR_PLATE_UNDEAD
+    shoes: SHOES_PLATE_SET1
+    potion: T8_POTION_COOLDOWN
+    food: T7_MEAL_OMELETTE
+  gear_raw: {}
+  gear_alternatives: {}
+  tier: null
+  enchant: null
+  quality: null
+  ip: null
+  membership: core
+  unknowns:
+  - passive
+  quarantined_fields:
+  - 'spell: unresolved ''Frost'''
+  status: quarantined
+  approval:
+    status: candidate
+    basis: automated import — awaiting review
+  source:
+    kind: metabattle
+    family: metabattle
+    author: MetaBattle contributors
+    url: https://metabattle.com/albion/1H_Frost_Staff_Ganking_Build
+    record: pageid 7778, revision 8966
+  published: '2025-04-01T23:22:35Z'
+  ingested: null
+  patch: null
+  claimed_freshness: Open World, Ganking
+  attribution:
+    license: Content is available under the Creative Commons Attribution-ShareAlike License.
+    license_url: https://metabattle.com/albion/MediaWiki:Copyright
+    credit: MetaBattle contributors
+  confidence:
+    item_mapping: 1.0
+    spell_mapping: 0.75
+    patch: 0.2
+    content_context: 0.6
+    party_size: 0.2
+    source_independence: null
+    loadout_completeness: 0.92
+    outcome: null
 - build_id: metabattle:7780:8938
   weapon: 2H_CROSSBOWLARGE_MORGANA
   weapon_raw: Elder's Siegebow
@@ -2110,6 +3064,74 @@ builds:
   ingested: null
   patch: null
   claimed_freshness: ZvZ
+  attribution:
+    license: Content is available under the Creative Commons Attribution-ShareAlike License.
+    license_url: https://metabattle.com/albion/MediaWiki:Copyright
+    credit: MetaBattle contributors
+  confidence:
+    item_mapping: 1.0
+    spell_mapping: 1.0
+    patch: 0.2
+    content_context: 0.6
+    party_size: 0.2
+    source_independence: null
+    loadout_completeness: 1.0
+    outcome: null
+- build_id: metabattle:7863:9132
+  weapon: 2H_DUALCROSSBOW_CRYSTAL
+  weapon_raw: Elder's Arclight Blasters
+  weapon_alternatives: []
+  role: dps
+  role_raw: Range DPS
+  content: ganking_smallscale
+  style: null
+  party_size: null
+  spells:
+    q: BOLTSHOT
+    w: CALTROPS
+    e: CRYSTALXBOW
+    passive: PASSIVE_CD_RESET_Q
+  spells_raw: Explosive Bolt, Caltrops, Flickershots, Well-Prepared
+  gear_spells:
+    head: null
+    armor: null
+    shoes: null
+  gear_spells_raw:
+    head: Retaliate, Balanced Mind
+    armor: Wild Magic, Aggression
+    shoes: Rejuvenating Sprint, Toughness
+    cape: Vanisher
+  gear:
+    offhand: null
+    head: HEAD_LEATHER_SET2
+    cape: CAPEITEM_UNDEAD
+    armor: ARMOR_CLOTH_FEY
+    shoes: SHOES_PLATE_SET1
+    potion: T7_POTION_REVIVE
+    food: T8_MEAL_STEW
+  gear_raw: {}
+  gear_alternatives: {}
+  tier: null
+  enchant: null
+  quality: null
+  ip: null
+  membership: core
+  unknowns: []
+  quarantined_fields: []
+  status: candidate
+  approval:
+    status: candidate
+    basis: automated import — awaiting review
+  source:
+    kind: metabattle
+    family: metabattle
+    author: MetaBattle contributors
+    url: https://metabattle.com/albion/Arclight_Blasters_PvP_Build
+    record: pageid 7863, revision 9132
+  published: '2025-07-21T13:37:51Z'
+  ingested: null
+  patch: null
+  claimed_freshness: Open World, Ganking, Mist (solo), Depth, Corrupt Dungeon,
   attribution:
     license: Content is available under the Creative Commons Attribution-ShareAlike License.
     license_url: https://metabattle.com/albion/MediaWiki:Copyright

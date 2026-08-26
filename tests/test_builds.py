@@ -153,7 +153,7 @@ check("H8 the quarantined Enigmatic p5 build lost its canonical promotion",
       locus["build_id"] is None
       and "quarantine" in locus["basis"].lower(), str(locus))
 mb = yaml.safe_load(open(os.path.join(ROOT, "data", "published_builds",
-                                      "metabattle_zvz.yaml"), encoding="utf-8"))
+                                      "metabattle.yaml"), encoding="utf-8"))
 bad = []
 for b in mb["builds"]:
     if not b["weapon"]:

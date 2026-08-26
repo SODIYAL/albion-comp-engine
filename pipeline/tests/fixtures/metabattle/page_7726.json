@@ -1,0 +1,53 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Fire_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Range_DPS_builds",
+     "sortkey": "Range DPS"
+    },
+    {
+     "*": "Open_World_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Hellgate_5v5_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Hellgate_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7726,
+   "revid": 8960,
+   "title": "Dawnsong Group PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Fire Staff\n| mode = Open World, Hellgate (5v5)\n| focus = Range DPS\n| strengths = High Damage, Versatile\n| weaknesses = Low Mobility, High Skill Ceiling\n}}\n==Overview==\nThe {{Item|Elder's Dawnsong}} focuses on delivering high burst and burn damage while also providing great utility by decreasing the healing received by enemies caught in the {{Skill|Flaming Phoenix}}. This build performs incredibly well in small group PvP like Avalonian Road PvP, Arena or even certain Hellgate comps.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Dawnsong\n| main hand weapon skills = Searing Flame, Fire Artillery, Flaming Phoenix, Furious\n| head = Elder's Helmet of Valor\n| head skills = Purifying Smoke, Toughness\n| head alternatives = Elder's Cleric Cowl\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Feyscale Robe\n| armor skills = Wild Magic, Aggression\n| shoes = Elder's Scholar Sandals\n| shoes alternatives = Elder's Cultist Sandals\n| shoes skills = Focused Run, Aggression\n| potion = Major Resistance Potion\n| food = Pork Omelette\n| food alternatives = Deadwater Eel Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Dawnsong|45}}===\n{{Skill|Searing Flame}} — This is your bread and butter skill that allows you remain mobile at all times. Hitting this 3 times will buff your 4th cast of the ability and increase its damage. Keep in mind however that even though this isn't a targeted ability, it is a single target ability and it doesn't do any AOE damage.\n\n{{Skill|Fire Artillery}} — One of the best area of denial in the game. Use this long ranged ability whenever it is off cooldown and try to target either the enemy healer or the frontline in order to maximize damage as the AOE fire left on the ground deals high damage and makes it difficult for enemies to play around.\n\n{{Skill|Flaming Phoenix}} — This is your main damaging ability and one of the most obnoxious abilities in the game as it covers a large area in fire and does high initial damage. You should always try to use this as enemy players are pushing in or focus on hitting the enemy healer with the large AOE and forcing them to take damage as they kite, lowering their healing by 40%. Naturally you should always look to try and hit this on top of a group of stacked players if possible if you have a {{Item|Elder's Hand of Justice}} in your group.\n\n{{Skill|Furious}} — This passive will grant you extra damage every time you cast 5 spells.\n\n\n==={{Item|Elder's Feyscale Robe|45}}===\n{{Skill|Wild Magic}} — You can use the Frozen Fragments part of this skill with your auto-attacks as it improves your damage and allows you to deal some good extra damage while you spam your {{Skill|Searing Flame}}. The second use of {{Skill|Wild Magic}} is Ring of Fire as a defensive ability to keep enemies off you while you move away. It works a lot like {{Skill|Wall of Flames}} but the fire wall it creates is made into a circle around you. The third option is the Storm Shield which can be used whenever you are being focused as it boosts your damage resistance and also stuns attackers. \n\n{{Skill|Aggression}} — This is your only relevant choice as it increases your flat damage and is perfect for the build.\n\n\n==={{Item|Elder's Helmet of Valor|45}}===\n{{Skill|Purifying Smoke}} — This is your main utility skill that can purge buffs off enemies or purge CCs from your team. The AOE is quite large and you should usually look to use this defensively, helping your team. However, try to keep an eye out on the enemy team and purge {{Skill|Life Steal Aura}} from enemy bruisers.\n\n{{Skill|Toughness}} — You want to take this for the extra defense it provides.\n\n\n==={{Item|Elder's Scholar Sandals|45}}===\n{{Skill|Focused Run}} — This run will let you move through CCs without issues while channeling the ability. The extra damage from the passive is also nice and the main reason of choosing cloth shoes.\n\nHowever, you can also use {{Item|Elder's Graveguard Boots}} for a similar result but this will also lower your damage by a little bit.\n\nAnother utility choice would be {{Item|Elder's Cultist Sandals}}, decreasing the defense of your enemies that walk through the trail left behind when you use {{Skill|Rotten Ground}}. This will also decrease healing received so it's a good match with your {{Skill|Flaming Phoenix}}.\n\n{{Skill|Aggression}} — Straight up damage increase, perfect for the build.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — This is a great choice as it helps a lot with mana sustain. It will activate on its own when your mana goes below 40% and it restores 80% of the max mana. You want to use a few abilities to make up for the extra mana once it triggers so you don't end up wasting 20% of your mana.\n\n\n==Rotations==\n{{Rotation|Damage|Searing Flame, Fire Artillery, Flaming Phoenix}}\n*This build doesn't have a real rotation. Most of the time you will want to be spamming {{Skill|Searing Flame}} to do damage while remaining on the move so you don't appear as an easy target. However, once focus is elsewhere, you should target the enemy healer and use {{Skill|Fire Artillery}} to apply pressure on them and also their team. Use {{Skill|Flaming Phoenix}} whenever the enemies stack or if they are in a tight spot where they are forced to take damage!\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — This comes in use whenever you want to soak up burst damage or you need to give your healer time to heal you and its a great defensive cooldown.\n\n{{Item|Pork Omelette}} — Because of your heavy reliance on your abilities, you want to have great cooldown reduction and this is what the {{Item|Pork Omelette}} offers. You should try to use atleast a 7.1 as the {{Item|Elder's Dawnsong}} is a rather expensive weapon and you should maximize everything. You can also use a {{Item|Deadwater Eel Stew}} for a mix of damage boost and cooldown rate.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7726": {
+     "ns": 0,
+     "pageid": 7726,
+     "revisions": [
+      {
+       "parentid": 8390,
+       "revid": 8960,
+       "timestamp": "2025-04-01T23:21:48Z"
+      }
+     ],
+     "title": "Dawnsong Group PvP Build"
+    }
+   }
+  }
+ }
+}

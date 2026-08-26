@@ -1,0 +1,52 @@
+{
+ "batchcomplete": "",
+ "query": {
+  "categorymembers": [
+   {
+    "ns": 0,
+    "pageid": 7771,
+    "title": "Blight Staff Group PvP Healer Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7695,
+    "title": "Cursed Skull Group PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7726,
+    "title": "Dawnsong Group PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7765,
+    "title": "Demonic Staff Group PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7754,
+    "title": "Great Frost Staff Group PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7741,
+    "title": "Hallowfall Healer Group PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7759,
+    "title": "Heron Spear Group PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7767,
+    "title": "Primal Staff Support Group PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7694,
+    "title": "Small Scale Infernal Scythe PvP Build"
+   }
+  ]
+ }
+}

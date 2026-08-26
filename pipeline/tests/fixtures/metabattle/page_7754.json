@@ -1,0 +1,57 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Frost_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Range_DPS_builds",
+     "sortkey": "Range DPS"
+    },
+    {
+     "*": "Open_World_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Hellgate_5v5_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Hellgate_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Crystal_Arena_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7754,
+   "revid": 8968,
+   "title": "Great Frost Staff Group PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Frost Staff\n| mode = Open World, Hellgate (5v5), Crystal Arena\n| focus = Range DPS\n| strengths = High Damage, Good Mobility\n| weaknesses = Squishy, High Skill Floor\n}}\n==Overview==\nThe {{Item|Elder's Great Frost Staff}} focuses on delivering high burst and burn damage while also providing utility to any group by stunning enemies with  {{Skill|Frost Nova}}. This is the perfect build for anyone wanting to play the mage type character and it performs very well in group PvP like Avalonian Road trips or small scale PvP during tracking. It can also perform well in Crystal Arena but the skill floor is quite steep as the build isn't too newbie friendly.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Great Frost Staff\n| main hand weapon skills = Ice Shard, Frost Nova, Hail, Aggressive Caster\n| head = Elder's Helmet of Valor\n| head skills = Purifying Smoke, Toughness\n| head alternatives = Elder's Cleric Cowl, Elder's Scholar Cowl\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Feyscale Robe\n| armor skills = Wild Magic, Aggression\n| shoes = Elder's Stalker Shoes\n| shoes alternatives = Elder's Graveguard Boots, Elder's Boots of Valor\n| shoes skills = Raging Blink, Balanced Mind\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Pork Omelette\n| food alternatives = Deadwater Eel Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Great Frost Staff|45}}===\n{{Skill|Ice Shard}} — This is your main damage ability besides {{Skill|Hail}} and you should make use of its AOE to damage as many enemies as possible while remaining safe away from the frontline. This skill cast time is also decreased by {{Skill|Aggressive Caster}}.\n\n{{Skill|Frost Nova}} — Use this to setup picks for your team but also as a mobility tool. Wait for enemies to get close to you before using this to stun them and deal damage before you follow up with either {{Skill|Ice Shard}} or {{Skill|Hail}}. This skill helps a lot with CC as your team can also follow-up on your stun with their own CCs.\n\n{{Skill|Hail}} — Keep in mind that while the damage on this skill is high, there is a small delay before the damage is applied so try to anticipate where your enemies will be before using the skill. The large AOE makes it easy to land the skill on multiple enemies even if they aren't caught by CC.\n\n{{Skill|Aggressive Caster}} — This will increase your cast speed for a few seconds every time you cast any 4 skills (doesn't have to be weapon skills).\n\n\n==={{Item|Elder's Feyscale Robe|45}}===\n{{Skill|Wild Magic}} — You can use the Frozen Fragments part of this skill with your auto-attacks as it improves your damage and allows you to deal some good extra damage between casts of {{Skill|Ice Shard}}. The second use of {{Skill|Wild Magic}} is Ring of Fire as a defensive ability to keep enemies off you while you move away. It works a lot like {{Skill|Wall of Flames}} but the fire wall it creates is a circle around you. The third option is the Storm Shield which can be used whenever you are being focused as it boosts your damage resistance and also stuns attackers and can act as a secondary CC alongside {{Skill|Frost Nova}}.\n\n{{Skill|Aggression}} — This is the best choice as it increases your flat damage.\n\n\n==={{Item|Elder's Helmet of Valor|45}}===\n{{Skill|Purifying Smoke}} — Use this to purge buffs off enemies or purge CCs from your team. The AOE is quite large and you should usually look to use this defensively, helping your team. However, try to keep an eye out on the enemy team and purge {{Skill|Life Steal Aura}} from enemy bruisers or other useful abilities they rely on.\n\n{{Skill|Toughness}} — You want to take this for the extra defense it provides as 5% CC duration doesn't do a whole lot.\n\n\n==={{Item|Elder's Stalker Shoes|45}}===\n{{Skill|Raging Blink}} — This blink has 2 charges and you are immune to damage and purge during the blink. It allows you to reposition during a fight and run away from melee enemies that try to pin you down. Keep in mind that your damage is also increased after the blink and using it two times will make the effect stack for 16% extra damage.\n\nAlternatively, you can also use {{Item|Elder's Graveguard Boots}} but you won't benefit from the extra damage. {{Item|Elder's Boots of Valor}} are another really good choice but considerably more expensive.\n\n{{Skill|Balanced Mind}} — Straight up damage increase, perfect for the build.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — This is a great choice as it helps a lot with mana sustain. It will activate on its own when your mana goes below 40% and it restores 80% of the max mana. You want to use a few abilities to make up for the extra mana once it triggers so you don't end up wasting 20% of your mana.\n\n\n==Rotations==\n{{Rotation|DPS|Ice Shard, Ice Shard, Frost Nova, Hail, Hail, Ice Shard}}\n*While the build doesn't have a real combo, you want to position yourself in range to use {{Skill|Ice Shard}} to do damage while remaining on the move. If melee enemies try to engage you, use {{Skill|Frost Nova}} before making use of {{Skill|Hail}} in quick succession while the enemy is stunned. Follow up with {{Skill|Ice Shard}} and use {{Skill|Raging Blink}} to catch up to enemies or reposition constantly if you find yourself overwhelmed.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — This comes in use whenever you want to soak up burst damage or you need to give your healer time to heal you as i it one of the best defensive choices. An alternative is the {{Item|Major Gigantify Potion}}.\n\n{{Item|Pork Omelette}} — Because of your heavy reliance on your abilities, you want to have great cooldown reduction and this is what the {{Item|Pork Omelette}} offers. You should try to use atleast a 7.1 though. You can also use a {{Item|Deadwater Eel Stew}} for a mix of damage boost and cooldown rate but keep in mind that it is quite expensive. A 6.1 offers similar benefits for cheaper.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7754": {
+     "ns": 0,
+     "pageid": 7754,
+     "revisions": [
+      {
+       "parentid": 8714,
+       "revid": 8968,
+       "timestamp": "2025-04-01T23:22:43Z"
+      }
+     ],
+     "title": "Great Frost Staff Group PvP Build"
+    }
+   }
+  }
+ }
+}

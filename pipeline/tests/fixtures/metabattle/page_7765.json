@@ -1,0 +1,57 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Cursed_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Range_DPS_builds",
+     "sortkey": "Range DPS"
+    },
+    {
+     "*": "Open_World_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Hellgate_5v5_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Hellgate_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Crystal_Arena_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7765,
+   "revid": 8944,
+   "title": "Demonic Staff Group PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Cursed Staff\n| mode = Open World, Hellgate (5v5), Crystal Arena\n| focus = Range DPS\n| strengths = High DoT Damage, Great CC, Versatile\n| weaknesses = Low Mobility, High Skill Ceiling\n}}\n==Overview==\nThe {{Item|Elder's Demonic Staff}} offers great CC for any small group PVP while also dealing good AOE damage with {{Skill|Anguished Soul}} coupled with constant DoT damage from {{Skill|Cursed Sickle}}. The build does well in Open World Roaming, Avalonian Road PvP or Crystal Arena and remains relatively easy to play, making it a great choice even for newer players while also offering plenty of options to improve.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Demonic Staff\n| main hand weapon skills = Cursed Sickle, Desecrate, Anguished Soul, Furious\n| head = Elder's Cleric Cowl\n| head skills = Ice Block, Aggression\n| head alternatives = Elder's Scholar Cowl\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Feyscale Robe\n| armor skills = Wild Magic, Aggression\n| shoes = Elder's Scholar Sandals\n| shoes alternatives = Elder's Druid Sandals, Elder's Graveguard Boots\n| shoes skills = Focused Run, Aggression\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Beef Stew\n| food alternatives = Deadwater Eel Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Demonic Staff|45}}===\n{{Skill|Cursed Sickle}} — It applies a Vile Curse stack that deals damage over time. You should use this ability to poke enemies and maintain a high amount of Vile Curses on your enemies. Try to always account for the fact that the sickle returns to you and can also apply another stack of Vile Curse. Another reason why you should maximize the amount of Vile Curses on your targets is because {{Skill|Anguished Soul}} fear lasts longer when your target has more Vile Curses on them.\n\n{{Skill|Desecrate}} — This is your main CC ability and the way you can lock down a target and keep kiting. It creates an AOE explosion and roots targets while also applying a charge of {{Skill|Vile Curse}}. Use {{Skill|Cursed Sickle}} right after catching your enemies and force them to get hit by {{Skill|Cursed Sickle}} twice!\n\nYou can also use the {{Skill|Armor Piercer}} for the extra defense pierce but the utility of {{Skill|Desecrate}} is usually better to have.\n\n{{Skill|Anguished Soul}} — This skill lets loose a ghost that will do damage to anyone it hits. Depending on the amount of Vile Curses the target has when this hit, the target will also be feared for a few seconds. Use this skill whenever you spot enemies being stacked close together in order to CC them and also force them off. Due to its low cooldown and depending on how a fight goes, you should also consider using this skill defensively to peel for your party.\n\n{{Skill|Furious}} — This passive will increase your extra damage every time you cast 5 spells.\n\n\n==={{Item|Elder's Feyscale Robe|45}}===\n{{Skill|Wild Magic}} — You can use the Frozen Fragments part of this skill with your auto-attacks as it improves your damage and allows you to deal some good extra damage between casts of {{Skill|Cursed Sickle}}. Useful if you team is particularly offensive and you have the time to do this while kiting without being pressured.\n\nThe second use of {{Skill|Wild Magic}} is Ring of Fire as a defensive ability to keep enemies off you while you move away. It works a lot like {{Skill|Wall of Flames}} but the fire wall it creates is made into a circle around you. This is the skill you will use most and works as a great defensive skill for both you and your party.\n\nThe third option is the Storm Shield which can be used whenever you are being focused as it boosts your damage resistance and also stuns attackers. It is a great choice if you are being hard focused by melee enemies that are right on top of you where the Ring of Fire would be useless. \n\n{{Skill|Aggression}} — This is your only relevant choice as it increases your flat damage and is great to have for the build.\n\n\n==={{Item|Elder's Cleric Cowl|45}}===\n{{Skill|Ice Block}} — Use this as your main defensive skill whenever enemies engage and you are being hard focused or they are trying to combo you into a quick early kill. Make sure not to move after you use this skill as it will cancel the ice block, you can still move to cancel the effect early if needed though.\n\n{{Skill|Aggression}} — A bit of extra damage which can go a long way.\n\n\n==={{Item|Elder's Scholar Sandals|45}}===\n{{Skill|Focused Run}} — This run will let you move through CCs without issues while channeling the ability. You can cancel this skill early by pressing it again but you will lose the remaining time and return to your normal movement speed.\n\nAnother good choice is {{Item|Elder's Graveguard Boots}} for a similar result. If you want to add extra utility for your team, then use {{Item|Elder's Druid Sandals}} as it doesn't only boost your speed, it leaves behind a trail of frost that heavily slows enemies that walk into it.\n\n{{Skill|Aggression}} — Straight up damage increase, perfect for improving your DPS.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — This is a great choice as it helps a lot with mana sustain. It will activate on its own when your mana goes below 40% and it restores 80% of the max mana. It becomes very useful in long fights like in Crystal Arena or Hellgates in particular so its a must have for the build.\n\n\n==Rotations==\n{{Rotation|Damage Pressure|Cursed Sickle, Desecrate, Cursed Sickle, Anguished Soul, Cursed Sickle}}\n*You should always use {{Skill|Cursed Sickle}} to poke enemies while maintaining range and reading the fight. Try to use {{Skill|Desecrate}} whenever you have the opportunity and allow for an easy hit of your {{Skill|Cursed Sickle}}. Follow up with {{Skill|Anguished Soul}} whenever you see an opportunity or caught multiple enemies in your {{Skill|Desecrate}} so you can maximize the overall damage you deal.\n\n==Consumables==\n{{Item|Major Resistance Potion}} — This comes in use whenever you want to soak up burst damage or you need to give your healer time to heal you and its a great defensive cooldown. If your group isn't rolling with a healer, you can also use {{Item|Major Gigantify Potion}}, especially if the enemy team is trying to combo you into a quick kill.\n\n{{Item|Beef Stew}} — This is the best food to use as it improves your overall damage. Always try to use an 8.2 or 8.1 version because of the great value for minimum price. You can also use a {{Item|Deadwater Eel Stew}} for a mix of damage boost and cooldown rate.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7765": {
+     "ns": 0,
+     "pageid": 7765,
+     "revisions": [
+      {
+       "parentid": 8646,
+       "revid": 8944,
+       "timestamp": "2025-04-01T23:20:06Z"
+      }
+     ],
+     "title": "Demonic Staff Group PvP Build"
+    }
+   }
+  }
+ }
+}

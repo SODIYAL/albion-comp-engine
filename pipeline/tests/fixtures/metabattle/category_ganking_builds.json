@@ -1,0 +1,37 @@
+{
+ "batchcomplete": "",
+ "query": {
+  "categorymembers": [
+   {
+    "ns": 0,
+    "pageid": 7778,
+    "title": "1H Frost Staff Ganking Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7748,
+    "title": "2H Crossbow Ganking PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7863,
+    "title": "Arclight Blasters PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7663,
+    "title": "Bear Paws Ganking PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7689,
+    "title": "Claws Ganking PvP Build"
+   },
+   {
+    "ns": 0,
+    "pageid": 7690,
+    "title": "Grailseeker Ganking PvP Build"
+   }
+  ]
+ }
+}

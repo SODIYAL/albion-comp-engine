@@ -1,0 +1,49 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Crossbow_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Range_DPS_builds",
+     "sortkey": "Range DPS"
+    },
+    {
+     "*": "Open_World_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Ganking_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7748,
+   "revid": 8932,
+   "title": "2H Crossbow Ganking PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Crossbow\n| mode = Open World, Ganking\n| focus = Range DPS\n| strengths = High Burst Damage, Great CC, Easy to Play\n| weaknesses = Difficult to pull off correctly, Low Mobility\n}}\n==Overview==\nThis 2H {{Item|Elder's Crossbow}} build focuses on high burst damage delivered quickly enough and focusing on dismounting players for your group of gankers to catch and CC them to hold them down. Your job is rather simple and this build is a great choice for new players looking into getting involved into ganking.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Crossbow\n| main hand weapon skills = Auto Fire, Sunder Shot, Snipe Shot, Well-Prepared\n| head = Elder's Demon Helmet\n| head skills = Hush, Toughness\n| cape = Elder's Morgana Cape\n| cape skills = Mark of the Raven\n| armor = Elder's Scholar Robe\n| armor skills = Speed Caster, Aggression\n| shoes = Elder's Royal Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Poison Potion\n| food = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Crossbow|45}}===\n{{Skill|Explosive Bolt}} — This skill does great AOE damage quickly without any cast time, allowing you to keep moving while dealing damage. Use this as you kite and manoeuvre during a fight.\n\n{{Skill|Sunder Shot}} — Always apply this debuff before using {{Skill|Snipe Shot}} as it decreases enemy defenses by a lot based on how high the HP of an enemy is. The higher the current HP, the higher the decrease in defenses!\n\n{{Skill|Snipe Shot}} — This is your main damage. It tracks a target regardless of their movement and fires a high damage shot while having a rather long range. You need to keep in mind that any damage invulnerability can entirely counter this but your main intention is to dismount people using this!\n\n{{Skill|Well-Prepared}} — Due to the low cooldowns on {{Skill|Explosive Bolt}} and the few skills you use in quick succession, this passive is triggered quite often and helps with your overall DPS.\n\n\n==={{Item|Elder's Scholar Robe|45}}===\n{{Skill|Speed Caster}} — This skill allows you to use both {{Skill|Snipe Shot}} and {{Skill|Sunder Shot}} very quickly, especially when paired with tactical use of {{Skill|Mark of the Raven}}.\n\n{{Skill|Aggression}} — This is your only good choice as it increases your flat damage and is great to have.\n\n\n==={{Item|Elder's Demon Helmet|45}}===\n{{Skill|Hush}} — You want to always use this once enemies are dismounted as it applies a long lasting silence on any enemy you hit after activating the ability and landing an auto-attack on your target. A purple icon appears over the head of an enemy that was successfully silenced, that is how you should keep track of them and see when they are no longer silenced.\n\n{{Skill|Toughness}} — This defensive option is preferred over {{Skill|Authority}} as the 5% CC duration increase doesn't do much for {{Skill|Caltrops}}.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — This is a key part of the build as its boosting your {{Skill|Snipe Shot}} damage and allowing you to do even more damage, capable of dismounting players off high HP mounts with the sheer damage you deal coupled with the defense decrease applied by {{Skill|Sunder Shot}}.\n\n{{Skill|Aggression}} — This passive offers more damage which is great to have as high damage bursts is the goal of the build.\n\n\n==={{Item|Elder's Morgana Cape|45}}===\n{{Skill|Mark of the Raven}} — You want to trigger this before you do your combo. The {{Skill|Mark of the Raven}} boosts your cast time speed alongside {{Skill|Speed Caster}}. This allows you to cast both {{Skill|Sunder Shot}} and {{Skill|Snipe Shot}} in quick succession and make it easier for you to catch moving players.\n\n\n==Rotations==\n{{Rotation|Dismount Burst Combo|Defenseless Rush, Speed Caster, Snipe Shot, Mark of the Raven, Sunder Shot, Snipe Shot, Hush, Explosive Bolt}}\n*You want to communicate with your group while ganking so you can position yourself in front of targets' path. Once you know that a target is coming your way, use {{Skill|Defenseless Rush}} to boost your damage and movement speed. Use {{Skill|Speed Caster}} to lower your cast speed before activating {{Skill|Snipe Shot}} to trigger {{Skill|Mark of the Raven}} but make sure to cancel the channel after the cloak was triggered.\n\nUse {{Skill|Sunder Shot}} on the target to lower their defenses and increase the damage you do even further. Quickly use {{Skill|Snipe Shot}} to deal the burst damage. If the target gets dismounted, you should use {{Skill|Hush}} to silence them and stop them from using a sprint and getting away. Keep chasing them and while using {{Skill|Explosive Bolt}} and {{Skill|Major Poison Potion}} to deal damage as your ganking group shows up to help with the kill.\n\n\n==Consumables==\n{{Item|Major Poison Potion}} — You can use this instead of {{Skill|Sunder Shot}} whenever your combo is on cooldown or you simply want to stop a mount's gallop and deal some damage.\n\n{{Item|Beef Stew}} — This is the best food to use as it improves your overall damage. Always try to use an 8.2 or 8.1 version as it as it offers great value for minimum price.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7748": {
+     "ns": 0,
+     "pageid": 7748,
+     "revisions": [
+      {
+       "parentid": 8860,
+       "revid": 8932,
+       "timestamp": "2025-04-01T23:18:58Z"
+      }
+     ],
+     "title": "2H Crossbow Ganking PvP Build"
+    }
+   }
+  }
+ }
+}

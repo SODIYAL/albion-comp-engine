@@ -1,0 +1,49 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Dagger_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "Ganking_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Open_World_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7689,
+   "revid": 8953,
+   "title": "Claws Ganking PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Dagger\n| mode = Ganking, Open World\n| focus = Melee DPS\n| strengths = High Mobility, High Single Target Damage, Versatile\n| weaknesses = No Self-healing, Squishy\n}}\n==Overview==\nThis Claws build is one of the top builds to use in ganking, especially when you are part of a group. The versatility provided by the build is hard to match while remaining quite easy to play even for new players and performing well in Open World Ganking scenarios and decently well in solo mists. It is great in duo mists when you have another player to rely on for extra damage while you use {{Skill|Disembowel}} to lock them down.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Claws\n| main hand weapon skills = Deadly Swipe, Dash, Disembowel, Deep Cuts\n| head = Elder's Fiend Cowl\n| head skills = Purge, Aggression\n| cape = Elder's Demon Cape\n| cape alternatives = Elder's Undead Cape\n| cape skills = Opening to Hell\n| armor = Elder's Assassin Jacket\n| armor alternatives = Elder's Stalker Jacket, Elder's Fiend Robe\n| armor skills = Ambush, Balanced Mind\n| shoes = Elder's Royal Sandals\n| shoes skills = Defenseless Rush, Aggression\n| potion = Major Poison Potion\n| potion alternatives = Major Healing Potion\n| food = Deadwater Eel Stew\n| food alternatives = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Claws|45}}===\n{{Skill|Deadly Swipe}} — You should use {{Skill|Deadly Swipe}} for the mobility it provides but also keep in mind that every time you hit an enemy with this, you will gain an Assassin Spirit Charge that will increase your damage. \n\nAnother option would be using the {{Skill|Sunder Armor}} as it also lowers enemy resistance, boosting your follow-up damage when you use {{Skill|Disembowel}}.\n\n{{Skill|Dash}} — This is a fantastic movement ability, letting you catch up to enemies while also kite away easier if you want to retreat from a fight and remain mobile.\n\nIf you are fighting a healer, you should switch {{Skill|Dash}} to {{Skill|Forbidden Stab}} to negate their healing. Another option would be {{Skill|Shadow Edge}} providing you with a good way to catch targets.\n\n{{Skill|Disembowel}} — This is your main damaging ability and locks down a target for a few seconds while you do damage to them. This pairs perfectly with {{Skill|Opening to Hell}} and forces targets to take damage from both!\n\n{{Skill|Deep Cuts}} — As you will be staying on top of your targets, the bleeds provided by this passive are great.\n\n\n==={{Item|Elder's Assassin Jacket|45}}===\n{{Skill|Ambush}} — This ability offers you much needed stealth and allows you to camp bridges or spots. It also increases your damage with every moment spent in stealth and increases the damage of all your abilities.\n\nAnother option is the {{Item|Elder's Stalker Jacket}} for extra damage if you are playing with a group or even the {{Item|Elder's Fiend Robe}} as it provides great fear CC, giving you a nice defensive cooldown to use until your group catches up.\n\n{{Skill|Balanced Mind}} — This is a flat increase of your damage, very good for the build.\n\n\n==={{Item|Elder's Fiend Cowl|45}}===\n{{Skill|Purge}} — Your main ability to use whenever enemies try to get away using their runs. It also offers incredible versatility and you can use this to purge skills like {{Skill|Life Steal Aura}}. The main use however remains purging runs in order to overwhelm enemies with your superior mobility.\n\n{{Skill|Aggression}} — A good damage increase for the weapon.\n\n\n==={{Item|Elder's Royal Sandals|45}}===\n{{Skill|Defenseless Rush}} — Stay aware that this skill not only increases your damage but also increases the damage you take. The damage increase makes it a top choice though as you can use any extra damage for your {{Skill|Disembowel}}.\n\n{{Skill|Aggression}} — The standard choice for DPS builds. Remember that you can always switch to {{Skill|Courier}} to carry more weight when you loot items off corpses.\n\n\n==={{Item|Elder's Demon Cape|45}}===\n{{Skill|Opening to Hell}} — This cape spawns a pool of lava below the feet of whatever enemy you hit with your auto-attack. You can also use the {{Item|Elder's Undead Cape}} as it provides a little more versatility with the stealth but your damage will be lowered considerably.\n\n\n==Rotations==\n{{Rotation|Lockdown Rotation|Ambush, Defenseless Rush, Dash, Poison Potion, Disembowel, Opening to Hell, Purge, Deadly Swipe}}\n* Your goal is to catch targets out of stealth as that is when your damage is highest. This works best against transporting players using oxes in red zone or tunnels but the same can be used on any travelers. \n\nPop your {{Skill|Defenseless Rush}} to boost your damage and then {{Skill|Dash}} to get in a good position for {{Skill|Disembowel}} but make sure to use your {{Skill|Poison Potion}} to help with burning down your target. Once you use {{Skill|Disembowel}}, your cape will proc with {{Skill|Opening to Hell}} and create the lava pool below your target. The whole combo will deal high damage and should be enough to dismount any ox or almost kill most players. You should use {{Skill|Purge}} on the target if they use a run skill before continuing to brawl them using {{Skill|Deadly Swipe}} and staying on top of them using Dash as you wait for your allies.\n\n\n==Consumables==\n{{Item|Major Poison Potion}} — The main potion you'd want to use when ganking as it deals high damage and also slows down enemies that are hit while under the poison effect.\n\n{{Item|Deadwater Eel Stew}} — This food offers a good combination of damage and cooldown reduction much needed during ganks. Another good option is {{Item|Beef Stew}} for flat damage increase.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7689": {
+     "ns": 0,
+     "pageid": 7689,
+     "revisions": [
+      {
+       "parentid": 8280,
+       "revid": 8953,
+       "timestamp": "2025-04-01T23:21:00Z"
+      }
+     ],
+     "title": "Claws Ganking PvP Build"
+    }
+   }
+  }
+ }
+}

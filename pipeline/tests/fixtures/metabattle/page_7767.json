@@ -1,0 +1,57 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Shapeshifter_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Support_builds",
+     "sortkey": "Support"
+    },
+    {
+     "*": "Open_World_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Hellgate_5v5_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Hellgate_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Crystal_Arena_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7767,
+   "revid": 8989,
+   "title": "Primal Staff Support Group PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Shapeshifter Staff\n| mode = Open World, Hellgate (5v5), Crystal Arena\n| focus = Support\n| strengths = Great Support, Versatile, Tanky\n| weaknesses = Low Damage, High Skill Ceiling\n}}\n==Overview==\nThis {{Item|Elder's Primal Staff}} PvP build offers incredible utility to all group sizes but performs best in small scale PvP. It offers important  constant CC that is very oppressive to all enemies, capable of acting as a secondary or even primary tank. The build isn't difficult to play and many new players can do well when using this weapon but it definitely has a high skill ceiling and experienced players can excel when running this build.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Primal Staff\n| main hand weapon skills = Pulse Shock, Distortion, Spirit Bear Transformation, Innate Power\n| head = Elder's Helmet of Valor\n| head skills = Purifying Smoke, Toughness\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Judicator Armor\n| armor skills = Force Shield, Toughness, Spirit Crush\n| shoes = Elder's Graveguard Boots\n| shoes alternatives = Elder's Boots of Valor, \n| shoes skills = Battle Frenzy, Toughness\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Primal Staff|45}}===\n{{Skill|Pulse Shock}} — Use this to gain Shift Charges. While it does great damage, you shouldn't rely on this skill for that but you should definitely use this as often as possible.\n\n{{Skill|Feral Bash}} - Use this skill to on groups of enemies that are stacked together if possible and make sure to use this skill when you have at least 1 Shift Charge in order to also stun whenever you hit someone with it. As this is your main damaging skill on a relatively low cooldown, try to use it as often as possible and remain in melee range during fights so you can make great use of this.\n\n{{Skill|Distortion}} — Use this skill as an Area Denial ability as you get a Shift Charge every time enemies get hit by this. Try to put it roughly in the middle of an area where the fight is happening so enemies walk in and out of it, granting you charges.\n\n{{Skill|Wild Onslaught}} — This bear skill is perfect for interrupting and applying pressure and piercing enemy defenses. You want to use the dash to lower enemy defenses and follow up with the roar in order to CC them and setup the perfect opportunity for your team to deal damage on the CC'd players.\n\n{{Skill|Spirit Bear Transformation}} - You should use this to transform into your bear form and use your other abilities only after you already have a few spirit charges as your skills have different effects whenever you use these charges but you should revert back to your human form whenever you run out of shift charges so you can keep accumulating these charges.\n\n{{Skill|Innate Power}} — This passive will regularly apply Shift Charges on you so it makes it easier to gain the few charges you need for your combos.\n\n\n==={{Item|Elder's Judicator Armor|45}}===\n{{Skill|Force Shield}} — This ability creates a bubble that increases the healing received by any allies and also offers damage resistance while the friendly players remain within the bubble. It helps a great deal with resetting your group's HPs. Use this during the fight and try to place it roughly in the center of the fight where your team is fighting, always call it whenever you are about to use it so people can look for it and get inside.\n\n{{Skill|Toughness}} — A good increase to your defense which is good to have.\n\n{{Skill|Spirit Crush}} — This is irrelevant for PvP but it lowers max HP on mobs in PVE when you auto-attack them.\n\n\n==={{Item|Elder's Helmet of Valor|45}}===\n{{Skill|Purifying Smoke}} — This is your main utility skill that can purge buffs off enemies or purge CCs from your team. And so, it can be used for both offensive and defensive plays. The AOE is quite large and you should usually look to use this defensively, helping your team if they are being combo'd. However, try to keep an eye out on the enemy team and purge important abilities if you have the chance to do so early. \n\n{{Skill|Toughness}} — This passive makes you more tanky which is perfect as your role remains to be a mix of support and bruiser.\n\n\n==={{Item|Elder's Graveguard Boots|45}}===\n{{Skill|Battle Frenzy}} — This is a great, relatively cheap choice as it offers your CC immunity and allows you to move deep into the enemy backline or escape without being locked down by CCs. An alternative is the more expensive {{Item|Elder's Boots of Valor}}!\n\n{{Skill|Toughness}} — Another passive giving you extra survivability.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — As the fights can last a long time, this passively regenerates your mana allowing you to stay in long fights without being entirely disabled by mana issues. You can keep track of this passive at the top left of your screen under your character's HP. A cape effect will appear if the skill was triggered.\n\n\n==Rotations==\n{{Rotation|General Rotation|Distortion, Pulse Shock, Pulse Shock, Wild Onslaught, Feral Bash, Wild Onslaught}}\n* This rotation focuses on maxing out your Shift Charges before moving into bear form to deal damage and CC opponents. There isn't any rotation in particular you should follow though, instead, you should adapt to how the fight is going but this should offer you a good idea on how to move.\n\nStart off by building charges with a combination of {{Skill|Distortion}} and {{Skill|Pulse Shock}}. You should get 4 charges before swapping into your bear form. Once you've acquired the charges, you can look to engage on enemies with the dash part of {{Skill|Wild Onslaught}}, piercing enemy defenses before following up with {{Skill|Feral Bash}} and roar part of {{Skill|Wild Onslaught}}. Once you've done your combo, revert back to your human form and build charges again. If you initially built up 5 charges, you can wait for the {{Skill|Feral Bash}} cooldown and do it again with your last charge for another stun.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Use this potion as a general damage reduction cooldown if you anticipate taking damage or if you are caught out of position. You can also use the alternative {{Item|Major Gigantify Potion}} but it will make it more difficult for your healer to heal you while under that effect.\n\n{{Item|Pork Omelette}} — This is the best food you should use as it decreases your cooldowns and allows you to use skills much more often. Due to the {{Item|Pork Omelette}} being rather cheap, you can also opt for a 7.1 or 7.2\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7767": {
+     "ns": 0,
+     "pageid": 7767,
+     "revisions": [
+      {
+       "parentid": 8652,
+       "revid": 8989,
+       "timestamp": "2025-04-01T23:27:06Z"
+      }
+     ],
+     "title": "Primal Staff Support Group PvP Build"
+    }
+   }
+  }
+ }
+}

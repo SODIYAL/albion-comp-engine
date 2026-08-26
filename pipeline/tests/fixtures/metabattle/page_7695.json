@@ -1,0 +1,57 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Cursed_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Range_DPS_builds",
+     "sortkey": "Range DPS"
+    },
+    {
+     "*": "Open_World_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Hellgate_5v5_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Hellgate_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Crystal_Arena_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7695,
+   "revid": 8941,
+   "title": "Cursed Skull Group PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Cursed Staff\n| mode = Open World, Hellgate (5v5), Crystal Arena\n| focus = Range DPS\n| strengths = High DoT Damage, Versatile\n| weaknesses = Low Mobility, High Skill Ceiling\n}}\n==Overview==\nThe {{Item|Elder's Cursed Skull}} focuses on delivering DoTs to enemies through AOE skills while also dealing true damage. This build performs incredibly well in small group PvP like Hellgates, Avalonian Road PvP or Arena. Playing this build will allow you to offer great damage for your team and it works even better in the brawl meta when fighting against mostly melee DPS.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Cursed Skull\n| main hand weapon skills = Cursed Sickle, Desecrate, Haunting Screams, Furious\n| head = Elder's Helmet of Valor\n| head skills = Purifying Smoke, Toughness\n| head alternatives = Elder's Cleric Cowl\n| cape = Elder's Lymhurst Cape\n| cape skills = Energy Reserve\n| armor = Elder's Feyscale Robe\n| armor skills = Wild Magic, Aggression\n| shoes = Elder's Scholar Sandals\n| shoes alternatives = Elder's Druid Sandals\n| shoes skills = Focused Run, Aggression\n| potion = Major Resistance Potion\n| food = Beef Stew\n| food alternatives = Deadwater Eel Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Cursed Skull|45}}===\n{{Skill|Cursed Sickle}} — It applies a Vile Curse stack that deals damage over time. This is your main poke ability and should be used every time you get the chance. Try to always account for the fact that the sickle returns to you and can also apply another stack of Vile Curse. You want to maximize the amount of Vile Curses on your targets as the DoT deals high damage over time and puts massive pressure your enemies.\n\n{{Skill|Desecrate}} — This is your main CC ability and the way you can lock down a target and keep kiting. It creates an AOE explosion and roots targets while also applying a charge of {{Skill|Vile Curse}}. You want to combo this with {{Skill|Haunting Screams}} as much as possible but it is also used simply for the root it provides to catch enemies and help your group.\n\nYou can also use the {{Skill|Armor Piercer}} for the extra defense pierce but the utility of {{Skill|Desecrate}} is usually better to have.\n\n{{Skill|Haunting Screams}} — This E ability launches a large AOE effect that moves forward in the direction you cast it while dealing true damage to anyone caught in it based on enemy max HP. You want to make sure that this will hit as many enemies as possible so the best use is to have it casted on CC'd enemies, following the pushes of your tanks and bruisers.\n\n{{Skill|Furious}} — This passive will grant you extra damage every time you cast 5 spells.\n\n\n==={{Item|Elder's Feyscale Robe|45}}===\n{{Skill|Wild Magic}} — You can use the Frozen Fragments part of this skill with your auto-attacks as it improves your damage and allows you to deal some good extra damage between casts of {{Skill|Cursed Sickle}}. The second use of {{Skill|Wild Magic}} is Ring of Fire as a defensive ability to keep enemies off you while you move away. It works a lot like {{Skill|Wall of Flames}} but the fire wall it creates is made into a circle around you. The third option is the Storm Shield which can be used whenever you are being focused as it boosts your damage resistance and also stuns attackers. \n\n{{Skill|Aggression}} — This is your only relevant choice as it increases your flat damage and is perfect for the build.\n\n\n==={{Item|Elder's Helmet of Valor|45}}===\n{{Skill|Purifying Smoke}} — This is your main utility skill that can purge buffs off enemies or purge CCs from your team. The AOE is quite large and you should usually look to use this defensively, helping your team. However, try to keep an eye out on the enemy team and purge {{Skill|Life Steal Aura}} from enemy bruisers.\n\n{{Skill|Toughness}} — You want to take this for the extra defense it provides.\n\n\n==={{Item|Elder's Scholar Sandals|45}}===\n{{Skill|Focused Run}} — This run will let you move through CCs without issues while channeling the ability. The extra damage from the passive is also nice and the main reason of choosing cloth shoes.\n\nHowever, you can also use {{Item|Elder's Graveguard Boots}} for a similar result. If you want to add extra utility for your team, then use {{Item|Elder's Druid Sandals}} as it doesn't only boost your speed, it leaves behind a trail of frost that heavily slows enemies that walk into it.\n\n{{Skill|Aggression}} — Straight up damage increase, perfect for the build.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — This is a great choice as it helps a lot with mana sustain. It will activate on its own when your mana goes below 40% and it restores 80% of the max mana. You can keep track of the cooldown on the top left of your screen under your name and HP bar.\n\n\n==Rotations==\n{{Rotation|Damage Combo|Cursed Sickle, Desecrate, Haunting Screams, Cursed Sickle}}\n*You should always use {{Skill|Cursed Sickle}} Try to use {{Skill|Desecrate}} whenever you have the opportunity to both help your team lock down enemies and also making it easier for you to land a good {{Skill|Haunting Screams}}. You should then follow up with more casts of {{Skill|Cursed Sickle}} and even use {{Skill|Wild Magic}} for the auto-attack damage boost gained with Frozen Fragments.\n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — This comes in use whenever you want to soak up burst damage or you need to give your healer time to heal you and its a great defensive cooldown.\n\n{{Item|Beef Stew}} — This is the best food to use as it improves your overall damage. Always try to use an 8.2 or 8.1 version as it as it offers great value for minimum price. You can also use a {{Item|Deadwater Eel Stew}} for a mix of damage boost and cooldown rate!\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7695": {
+     "ns": 0,
+     "pageid": 7695,
+     "revisions": [
+      {
+       "parentid": 8645,
+       "revid": 8941,
+       "timestamp": "2025-04-01T23:19:55Z"
+      }
+     ],
+     "title": "Cursed Skull Group PvP Build"
+    }
+   }
+  }
+ }
+}

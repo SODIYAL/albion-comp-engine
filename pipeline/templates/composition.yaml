@@ -218,6 +218,16 @@ viability:
         source: "owner ruling 2026-08-18; re-grounded against the evidence layer 2026-08-19"
         as_of: "2026-08-19"
         clears_when: "an approved canonical build for the exact weapon at party size >= 10"
+    - weapons: [2H_DAGGERPAIR, 2H_DUALSICKLE_UNDEAD]
+      min_size: 7
+      allow: {}
+      evidence:
+        reason: >
+          Dive/cleanup daggers are small-scale finishers; their dive_cleanup
+          seat stands at gang sizes below this gate.
+        source: "owner ruling 2026-08-26 (roles grading board: 'never in medium-large scale (7+)')"
+        as_of: "2026-08-26"
+        clears_when: "an approved canonical build for the exact weapon at party size >= 7"
   # Additive prior (scoring.weights.viability x core_bonus) for weapons a
   # real caller has fielded in this size class. Large list = the union of
   # the four data/published_comps/ parties' weapon slots (battlemounts excluded).

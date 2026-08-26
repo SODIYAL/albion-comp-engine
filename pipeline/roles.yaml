@@ -53,7 +53,8 @@ roles:
       - {id: MAIN_ROCKMACE_KEEPER, source: "comp:tank x4 (sob_blaze, deadlyhooker); sheet peel 6 (the air-jet wall)"}
       - {id: 2H_QUARTERSTAFF_AVALON, source: "owner:2026-08-25 ('grailseeker is primarily a d-tank weapon which helps stop or catch enemies'); dumps: E deals 125, root wall"}
       - {id: MAIN_MACE_HELL, source: "owner:2026-08-25 ('the support or tank'); guide:albiononlinegrind 'Inncubus ZvZ Support' (Judicator Armor)"}
-      - {id: 2H_IRONCLADEDSTAFF, source: "guide:albiontopbuilds 'viable tank', metabattle defensive-mobility (medium); owner:2026-08-21 knock-away-wall reading"}
+      # 2H_IRONCLADEDSTAFF removed owner:2026-08-26 (grading board) —
+      # consistent with its standing >=10 viability exclusion
       - {id: 2H_ROCKSTAFF_KEEPER, source: "comp:timothy_blap (tank) + sob_blaze (support); anti-heal aura wall"}
       - {id: 2H_SHAPESHIFTER_SET3, source: "owner:2026-08-24 ('an alright d-tank especially for zoning'); comp:sortasaucy_7man (tank)"}
     doctrine:
@@ -82,7 +83,8 @@ roles:
       - {id: 2H_HOLYSTAFF_UNDEAD, source: "derived:foundation set; comp:healer x4"}
       - {id: 2H_NATURESTAFF_HELL, source: "derived:foundation set; comp:healer x4"}
       - {id: 2H_NATURESTAFF_KEEPER, source: "derived:foundation set; comp:deadlyhooker (healer)"}
-      - {id: 2H_HOLYSTAFF, source: "derived:foundation set; owner:2026-08-23 (brawl-only suggestion note stands)"}
+      # 2H_HOLYSTAFF removed owner:2026-08-26 (grading board) — Great Holy
+      # is the brawl anchor, not a main/clump seat; brawl_healer entry stands
       - {id: 2H_HOLYSTAFF_HELL, source: "derived:foundation set; guide:albiononlinegrind Fallen Healer"}
       - {id: MAIN_NATURESTAFF, source: "derived:foundation set (heal_scale group + full_healer; Great Nature is the ruled single-scale sibling and stays OFF)"}
       - {id: 2H_WILDSTAFF, source: "derived:foundation set"}
@@ -129,9 +131,13 @@ roles:
       - {id: 2H_ENIGMATICSTAFF, source: "guide:heaven-guardian shield support; sheet bubble-shield"}
       - {id: MAIN_ARCANESTAFF, source: "comp:deadlyhooker (support x3)"}
       - {id: 2H_HOLYSTAFF_CRYSTAL, source: "comp:deadlyhooker (support x3); composition.roles.overrides precedent (fielded as the cleanse/zone-denial slot)"}
-      - {id: MAIN_ARCANESTAFF_UNDEAD, source: "sheet: ally shield Q + Empowering Beam W (Witchwork)"}
+      # MAIN_ARCANESTAFF_UNDEAD removed owner:2026-08-26 (grading board:
+      # "witchwork does not play for cleanse, its a clump and damage
+      # weapon" — its engage_tank seat stands)
       - {id: 2H_SHAPESHIFTER_SET2, source: "comp:support x3; guide:albiononlinegrind 'Nature (Rootbound) Support'"}
-      - {id: 2H_COMBATSTAFF_MORGANA, source: "comp:albioncompo_push_monkey_7 (support)"}
+      # 2H_COMBATSTAFF_MORGANA removed owner:2026-08-26 (grading board:
+      # "blackmonk staff does not shield team, it purges shields from
+      # enemy" — shield_break stays its primary function role)
   - id: pierce
     class: support
     name: Pierce (resistance cut)
@@ -206,9 +212,10 @@ roles:
       - {id: 2H_ICEGAUNTLETS_HELL, source: "guide:albiononlinegrind 'Ice (Icicle) Support'; comp:deadlyhooker (tank)"}
       - {id: MAIN_FROSTSTAFF_KEEPER, source: "comp:deadlyhooker (support) + albioncompo_20v20 (tank)"}
       - {id: MAIN_FROSTSTAFF_AVALON, source: "sheet: the crystal-save support (Frozen Crystal ally save)"}
-      - {id: 2H_GLACIALSTAFF, source: "derived:zone_control 6 (the 15s roaming storm); comp:sob_blaze (rdps)"}
-      - {id: 2H_ICECRYSTAL_UNDEAD, source: "derived:zone_control 6 (Frost Bomb + Surge + Obelisk + E stack zones)"}
-      - {id: 2H_SHAPESHIFTER_CRYSTAL, source: "comp:deadlyhooker (support)"}
+      # owner:2026-08-26 (grading board) — three removals: Glacial "is
+      # more DPS than a support" and Permafrost "is dps and engage dps"
+      # (both keep their ranged_aoe seats), Chillhowl "not good for
+      # group content" (off every menu)
 
   # ------------------------------------------------------------------ dps
   - id: ranged_aoe
@@ -261,7 +268,10 @@ roles:
       - {id: 2H_GLAIVE_CRYSTAL, source: "guide:metabattle Rift Glaive ZvZ Bombing Build; comp:deadlyhooker (dps x4)"}
       - {id: 2H_DAGGER_KATAR_AVALON, source: "guide:albiononlinegrind 'Solo Bomb (Bridled Fury, Royal Hood + Assassin Jacket)'"}
       - {id: 2H_DUALSCIMITAR_UNDEAD, source: "owner:2026-08-24 ('galatine pair is great for solo bombs')"}
-      - {id: 2H_ARCANESTAFF, source: "guide:albiononlinegrind clap-kite comp 'Arcane DPS (oneshot oriented Great Arcane)'"}
+      # 2H_ARCANESTAFF removed owner:2026-08-26 (grading board: "role of
+      # great arcane staff is to stop enemies, its not a one shot aoe
+      # weapon. it can work with the one shot dps to set them up" — its
+      # shield_support seat stands as the setup role)
   - id: dive_cleanup
     class: dps
     name: Dive / Cleanup
@@ -273,8 +283,8 @@ roles:
     weapons:
       - {id: MAIN_RAPIER_MORGANA, source: "guide:yt role guide 'cleanup crew'; comp:timothy_blap (dps); owner:2026-08-24 (high mobility)"}
       - {id: MAIN_SCIMITAR_MORGANA, source: "guide:yt role guide 'cleanup crew'"}
-      - {id: 2H_DUALSICKLE_UNDEAD, source: "RULE-queue adjudication 2026-08-25 (the dive daggers: Shadow Edge 4)"}
-      - {id: 2H_DAGGERPAIR, source: "RULE-queue adjudication 2026-08-25 (dive catch: Shadow Edge 4, AA-stack identity)"}
+      - {id: 2H_DUALSICKLE_UNDEAD, source: "RULE-queue adjudication 2026-08-25 (the dive daggers: Shadow Edge 4); owner:2026-08-26 ('never in medium-large scale (7+)' — viability exclusion at >=7, small-scale seat only)"}
+      - {id: 2H_DAGGERPAIR, source: "RULE-queue adjudication 2026-08-25 (dive catch: Shadow Edge 4, AA-stack identity); owner:2026-08-26 ('never in medium-large scale (7+)' — viability exclusion at >=7, small-scale seat only)"}
       - {id: 2H_DAGGER_KATAR_AVALON, source: "guide:yt role guide (cleanup mention)"}
 
   # ----------------------------------------------------------------- meta
@@ -325,6 +335,32 @@ roles:
 #    never hand-listed (out/roles_report.json `kit_doctrine` is the
 #    audit board).
 kit_doctrine:
+  # OWNER OVERRIDES on the mined pools (grading board 2026-08-26): the
+  # pools stay derived, these are cited rulings applied on top. `drop`
+  # must name an item the mining actually produced for that seat+slot
+  # (else the ruling is stale and the build blocks); `add` must name a
+  # cataloged item (count 0 — owner-ruled, not observed). Audit trail in
+  # out/roles_report.json kit_doctrine `overrides`.
+  overrides:
+    engage_tank:
+      potion:
+        drop:
+          - {id: T7_POTION_STONESKIN, source: "owner:2026-08-26 (grading board: Resistance Potion wrong for the engage seat)"}
+    stopper_tank:
+      cape:
+        drop:
+          - {id: CAPEITEM_FW_LYMHURST, source: "owner:2026-08-26 (grading board: Lymhurst Cape wrong for the stopper seat)"}
+      offhand:
+        drop:
+          - {id: OFF_TOME_CRYSTAL, source: "owner:2026-08-26 (grading board: 'leering cane' — Timelocked Grimoire out)"}
+        add:
+          - {id: OFF_JESTERCANE_HELL, source: "owner:2026-08-26 ('leering cane is not for brawl healer, its mostly for stop tanks that are one hand')"}
+    brawl_healer:
+      offhand:
+        drop:
+          - {id: OFF_TOWERSHIELD_UNDEAD, source: "owner:2026-08-26 (grading board: Sarcophagus wrong for the brawl-heal seat)"}
+        add:
+          - {id: OFF_TORCH_CRYSTAL, source: "owner:2026-08-26 ('blueflame torch if user is on judicator armor too' — conditional on the Judicator pairing, recorded verbatim)"}
   passives:
     cloth:
       default: INCREASED_DAMAGE
@@ -347,6 +383,20 @@ kit_doctrine:
         dumps Authority: +10% Crowd Control duration (feeds
         cc_mult_caps); Tenacity: +20% Crowd Control Resistance (feeds
         the tankiness-per-CCR channel) for plate off the frontline.
+
+# ---------------------------------------------------------------------------
+# GEAR AFFINITY OVERRIDES (owner rulings on the items board). The
+# structural stat-profile mapping in classify_gear stays the default;
+# an entry here replaces one item's derived role_affinity with the
+# owner's cited call. Unknown item or role ids block the release.
+gear_affinity_overrides:
+  OFF_JESTERCANE_HELL:
+    affinity: [stopper_tank]
+    source: >
+      owner:2026-08-26 ("leering cane is not for brawl healer, its
+      mostly for stop tanks that are one hand" — the CC-duration stat
+      pairs with a 1H stopper kit, not the caster-support families its
+      small cooldown stat structurally matched).
 
 # ---------------------------------------------------------------------------
 # GEAR EFFECTS (owner correction 2026-08-25: "the aura support i feel

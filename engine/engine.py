@@ -1029,6 +1029,12 @@ class Engine:
         seat_rec = self.roles.get(seat) or {}
         uniform = (seat_rec.get("uniform") or {}).get("chest") or []
         doctrine = seat_rec.get("kit") or {}
+        # Per-weapon doctrine tier (owner design 2026-08-26): THIS
+        # weapon's own observed items (effect carriers excluded at the
+        # build — those are comp-level allocations) outrank the seat
+        # aggregate; `doctrine` becomes "weapon" / "seat" / False and
+        # weapon-tier options carry doctrine_n = [count, slot total].
+        wdoc = (seat_rec.get("kit_weapon") or {}).get(weapon) or {}
         seat_class = seat_rec.get("class")
         by_slot = {}
         for k, g in self.gear.items():
@@ -1059,6 +1065,8 @@ class Engine:
         options = {}
         for slot in sorted(by_slot):
             doc_pool = set(doctrine.get(slot) or [])
+            wslot = {p[0]: p[1] for p in (wdoc.get(slot) or [])}
+            wtotal = sum(wslot.values())
             ranked = []
             for k in sorted(by_slot[slot]):
                 built = self.build_extra(weapon, combo, [k], role=seat)
@@ -1080,11 +1088,15 @@ class Engine:
                          .get(seat_class))
                     if p:
                         passive = {"id": p.get("id"), "name": p.get("name")}
+                tier = ("weapon" if k in wslot
+                        else "seat" if k in doc_pool else False)
                 ranked.append({
                     "gear": k,
                     "display_name": self.gear[k]["display_name"],
                     "value": value,
-                    "doctrine": k in doc_pool,
+                    "doctrine": tier,
+                    "doctrine_n": ([wslot[k], wtotal]
+                                   if tier == "weapon" else None),
                     "carries": list(self._item_effects.get(k) or []),
                     "passive": passive,
                     "why": [(c, round(d, 2)) for c, d in deltas[:3]]})
@@ -1095,12 +1107,17 @@ class Engine:
             # tier membership (T22 — the tank's team head must win);
             # doctrine stays as annotation + tie-break. The chest is
             # pool-gated either way — the Hellion bug can't return.
+            def tier_rank(r):
+                return (0 if r["doctrine"] == "weapon"
+                        else 1 if r["doctrine"] == "seat" else 2)
             if party is None:
-                ranked.sort(key=lambda r: (not r["doctrine"], -r["value"],
-                                           r["gear"]))
+                ranked.sort(key=lambda r: (
+                    tier_rank(r), -wslot.get(r["gear"], 0), -r["value"],
+                    r["gear"]))
             else:
-                ranked.sort(key=lambda r: (-r["value"], not r["doctrine"],
-                                           r["gear"]))
+                ranked.sort(key=lambda r: (
+                    -r["value"], tier_rank(r), -wslot.get(r["gear"], 0),
+                    r["gear"]))
             options[slot] = ranked[:top_n]
         kit = {slot: opts[0] for slot, opts in options.items() if opts}
         return {"kit": kit, "options": options}

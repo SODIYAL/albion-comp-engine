@@ -26,11 +26,11 @@
   },
   "counts": {
    "approved": 70,
-   "candidate": 152,
-   "canonical_defaults": 54,
-   "quarantined_fields": 2,
-   "quarantined_records": 2,
-   "records": 222
+   "candidate": 167,
+   "canonical_defaults": 55,
+   "quarantined_fields": 3,
+   "quarantined_records": 3,
+   "records": 237
   }
  },
  "by_content": {
@@ -2673,8 +2673,439 @@
     }
    ]
   },
+  "ganking_smallscale": {
+   "2H_CLAWPAIR": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7689:8953",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_SET3",
+      "cape": "CAPEITEM_DEMON",
+      "food": "T8_MEAL_STEW_FISH",
+      "head": "HEAD_CLOTH_HELL",
+      "potion": "T8_POTION_COOLDOWN",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:21:00Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7689, revision 8953",
+      "url": "https://metabattle.com/albion/Claws_Ganking_PvP_Build"
+     },
+     "spells": {
+      "e": "DISEMBOWEL",
+      "passive": "PASSIVE_BLEEDCHANCE",
+      "q": "QDASH",
+      "w": "GROUNDDASH"
+     },
+     "status": "candidate",
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_CROSSBOW": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7748:8932",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET1",
+      "cape": "CAPEITEM_MORGANA",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_PLATE_HELL",
+      "potion": "T8_POTION_COOLDOWN",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:18:58Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Range DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7748, revision 8932",
+      "url": "https://metabattle.com/albion/2H_Crossbow_Ganking_PvP_Build"
+     },
+     "spells": {
+      "e": "SNIPESHOT_CROSSBOW",
+      "passive": "PASSIVE_CD_RESET_Q",
+      "q": "AUTOFIRE2",
+      "w": "SUNDERSHOT"
+     },
+     "status": "candidate",
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_DUALAXE_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7663:8916",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_SET3",
+      "cape": "CAPEITEM_FW_THETFORD",
+      "food": "T8_MEAL_STEW_FISH",
+      "head": "HEAD_CLOTH_HELL",
+      "potion": "T8_POTION_COOLDOWN",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:17:24Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7663, revision 8916",
+      "url": "https://metabattle.com/albion/Bear_Paws_Ganking_PvP_Build"
+     },
+     "spells": {
+      "e": "DUALAXE_CRAWLER",
+      "passive": "PASSIVE_BLEEDCHANCE",
+      "q": "RENDINGCOMBO",
+      "w": "AXEBOOST"
+     },
+     "status": "candidate",
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_DUALCROSSBOW_CRYSTAL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7863:9132",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_UNDEAD",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_LEATHER_SET2",
+      "potion": "T7_POTION_REVIVE",
+      "shoes": "SHOES_PLATE_SET1"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-07-21T13:37:51Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Range DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7863, revision 9132",
+      "url": "https://metabattle.com/albion/Arclight_Blasters_PvP_Build"
+     },
+     "spells": {
+      "e": "CRYSTALXBOW",
+      "passive": "PASSIVE_CD_RESET_Q",
+      "q": "BOLTSHOT",
+      "w": "CALTROPS"
+     },
+     "status": "candidate",
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_QUARTERSTAFF_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7690:9142",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_UNDEAD",
+      "cape": "CAPEITEM_DEMON",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_GATHERER_HIDE",
+      "potion": "T8_POTION_COOLDOWN",
+      "shoes": "SHOES_LEATHER_SET2"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-07-29T19:32:25Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7690, revision 9142",
+      "url": "https://metabattle.com/albion/Grailseeker_Ganking_PvP_Build"
+     },
+     "spells": {
+      "e": "SOULSHAKER",
+      "passive": "PASSIVE_ENERGYCHANCE_QUARTERSTAFF",
+      "q": "CARTWHEEL",
+      "w": "STUNRUN"
+     },
+     "status": "candidate",
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "MAIN_FROSTSTAFF": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7778:8966",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.92,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 0.75
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_UNDEAD",
+      "cape": "CAPEITEM_UNDEAD",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_CLOTH_HELL",
+      "offhand": "OFF_HORN_KEEPER",
+      "potion": "T8_POTION_COOLDOWN",
+      "shoes": "SHOES_PLATE_SET1"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:22:35Z",
+     "quarantined_fields": [
+      "spell: unresolved 'Frost'"
+     ],
+     "raw": {},
+     "role": "Range DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7778, revision 8966",
+      "url": "https://metabattle.com/albion/1H_Frost_Staff_Ganking_Build"
+     },
+     "spells": {
+      "e": "FREEZINGWIND",
+      "passive": null,
+      "q": "SHATTER_Q",
+      "w": "FROSTNOVA"
+     },
+     "status": "quarantined",
+     "style": null,
+     "unknowns": [
+      "passive"
+     ]
+    }
+   ]
+  },
   "hellgate_5v5": {
+   "2H_DEMONICSTAFF": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7765:8944",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_CLOTH_SET2",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_SET1"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:20:06Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Range DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7765, revision 8944",
+      "url": "https://metabattle.com/albion/Demonic_Staff_Group_PvP_Build"
+     },
+     "spells": {
+      "e": "CURSED_WALL",
+      "passive": "PASSIVE_SPELLPOWER_CASTER_CURSEDSTAFF",
+      "q": "CURSEBLADE",
+      "w": "CURSENOVA"
+     },
+     "status": "candidate",
+     "style": null,
+     "unknowns": []
+    }
+   ],
    "2H_FIRE_RINGPAIR_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7726:8960",
+     "caller": "MetaBattle contributors",
+     "canonical": true,
+     "canonical_basis": "2 independent source families agree",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_PLATE_AVALON",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_SET1"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:21:48Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Range DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7726, revision 8960",
+      "url": "https://metabattle.com/albion/Dawnsong_Group_PvP_Build"
+     },
+     "spells": {
+      "e": "FIREPHOENIX",
+      "passive": "PASSIVE_SPELLPOWER_CASTER_FIRESTAFF",
+      "q": "SEARING_FLAME",
+      "w": "FIREARTILLERY"
+     },
+     "status": "candidate",
+     "style": null,
+     "unknowns": []
+    },
     {
      "alternatives": {
       "gear": {},
@@ -2733,6 +3164,59 @@
       "q",
       "w"
      ]
+    }
+   ],
+   "2H_FROSTSTAFF": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7754:8968",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_PLATE_AVALON",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:22:43Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Range DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7754, revision 8968",
+      "url": "https://metabattle.com/albion/Great_Frost_Staff_Group_PvP_Build"
+     },
+     "spells": {
+      "e": "HAIL_MULTI_1",
+      "passive": "PASSIVE_CASTINGSPEED_CHANCE_FROSTSTAFF",
+      "q": "ICESHARD",
+      "w": "FROSTNOVA"
+     },
+     "status": "candidate",
+     "style": null,
+     "unknowns": []
     }
    ],
    "2H_HOLYSTAFF_UNDEAD": [
@@ -2857,6 +3341,112 @@
      ]
     }
    ],
+   "2H_NATURESTAFF_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7771:8976",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_CLOTH_SET1",
+      "potion": "T7_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:24:23Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Healer",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7771, revision 8976",
+      "url": "https://metabattle.com/albion/Blight_Staff_Group_PvP_Healer_Build"
+     },
+     "spells": {
+      "e": "ROTTENVINES",
+      "passive": "PASSIVE_HEALPOWERCHANCE",
+      "q": "REJUVENATION",
+      "w": "REJUVENATING_BREEZE"
+     },
+     "status": "candidate",
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_SCYTHE_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7694:8922",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_CLOTH_SET1",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:17:47Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7694, revision 8922",
+      "url": "https://metabattle.com/albion/Small_Scale_Infernal_Scythe_PvP_Build"
+     },
+     "spells": {
+      "e": "SCYTHESWING",
+      "passive": "PASSIVE_SPELLPOWER_CHANCE_AXE",
+      "q": "RENDINGCOMBO",
+      "w": "AXEBOOST"
+     },
+     "status": "candidate",
+     "style": null,
+     "unknowns": []
+    }
+   ],
    "2H_SHAPESHIFTER_SET2": [
     {
      "alternatives": {
@@ -2918,6 +3508,112 @@
      ]
     }
    ],
+   "2H_SHAPESHIFTER_SET3": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7767:8989",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_PLATE_AVALON",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_PLATE_UNDEAD"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:27:06Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Support",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7767, revision 8989",
+      "url": "https://metabattle.com/albion/Primal_Staff_Support_Group_PvP_Build"
+     },
+     "spells": {
+      "e": "SHAPESHIFT_BEAR",
+      "passive": "PASSIVE_SHAPESHIFT_GATHER_CHARGES",
+      "q": "SHAPE_Q_CONE_MELEE",
+      "w": "SHAPE_W_DAMAGE_AOE"
+     },
+     "status": "candidate",
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "2H_SKULLORB_HELL": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7695:8941",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_PLATE_AVALON",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_CLOTH_SET1"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:19:55Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Range DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7695, revision 8941",
+      "url": "https://metabattle.com/albion/Cursed_Skull_Group_PvP_Build"
+     },
+     "spells": {
+      "e": "SKULLCURSE",
+      "passive": "PASSIVE_SPELLPOWER_CASTER_CURSEDSTAFF",
+      "q": "CURSEBLADE",
+      "w": "CURSENOVA"
+     },
+     "status": "candidate",
+     "style": null,
+     "unknowns": []
+    }
+   ],
    "MAIN_CURSEDSTAFF_CRYSTAL": [
     {
      "alternatives": {
@@ -2977,6 +3673,114 @@
       "q",
       "w"
      ]
+    }
+   ],
+   "MAIN_HOLYSTAFF_AVALON": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7741:9075",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T7_MEAL_OMELETTE",
+      "head": "HEAD_PLATE_SET2",
+      "offhand": "OFF_HORN_KEEPER",
+      "potion": "T7_POTION_REVIVE",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-07-07T18:49:16Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Healer",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7741, revision 9075",
+      "url": "https://metabattle.com/albion/Hallowfall_Healer_Group_PvP_Build"
+     },
+     "spells": {
+      "e": "DIVINE_JUMP",
+      "passive": "PASSIVE_HEALPOWERCHANCE",
+      "q": "HOLYFLASH",
+      "w": "HOLYORB"
+     },
+     "status": "candidate",
+     "style": null,
+     "unknowns": []
+    }
+   ],
+   "MAIN_SPEAR_KEEPER": [
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "candidate",
+     "approval_basis": "automated import \u2014 awaiting review",
+     "build_id": "metabattle:7759:8992",
+     "caller": "MetaBattle contributors",
+     "confidence": {
+      "content_context": 0.6,
+      "item_mapping": 1.0,
+      "loadout_completeness": 1.0,
+      "outcome": null,
+      "party_size": 0.2,
+      "patch": 0.2,
+      "source_independence": null,
+      "spell_mapping": 1.0
+     },
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_CLOTH_SET1",
+      "offhand": "OFF_DEMONSKULL_HELL",
+      "potion": "T7_POTION_STONESKIN",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": null,
+     "party_size": null,
+     "patch": null,
+     "published": "2025-04-01T23:27:50Z",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "Melee DPS",
+     "source": {
+      "author": "MetaBattle contributors",
+      "family": "metabattle",
+      "kind": "metabattle",
+      "record": "pageid 7759, revision 8992",
+      "url": "https://metabattle.com/albion/Heron_Spear_Group_PvP_Build"
+     },
+     "spells": {
+      "e": "SPEARTHROW",
+      "passive": "PASSIVE_HEALTHCHANCE_SPEAR",
+      "q": "SPEAR_LUNGE",
+      "w": "FORESTOFSPEARS"
+     },
+     "status": "candidate",
+     "style": null,
+     "unknowns": []
     }
    ]
   },

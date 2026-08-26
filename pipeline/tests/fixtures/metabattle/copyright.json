@@ -1,1 +1,9 @@
-{"parse":{"title":"MediaWiki:Copyright","pageid":7053,"wikitext":{"*":"All trademarks and copyrights on this site are owned by their respective owners.<br/>Content is available under the Creative Commons Attribution-ShareAlike License. Additional terms may apply."}}}
+{
+ "parse": {
+  "pageid": 7053,
+  "title": "MediaWiki:Copyright",
+  "wikitext": {
+   "*": "All trademarks and copyrights on this site are owned by their respective owners.<br/>Content is available under the Creative Commons Attribution-ShareAlike License. Additional terms may apply."
+  }
+ }
+}

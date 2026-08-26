@@ -488,6 +488,100 @@ def t_kit_annotations():
           f"slots={sorted(ko['options'])}")
 
 
+def t_grading_rulings():
+    # R17 — the 2026-08-26 owner grading pass (15 rulings, the first full
+    # roles_report board review): memberships corrected in roles.yaml,
+    # kit-doctrine drop/add overrides applied on the mined pools, the
+    # Leering Cane affinity override, and the dive-dagger 7+ viability
+    # exclusion. Pins the whole batch so a rebuild can never regress it.
+    import json as _json
+    e = Engine()
+    menus = {w: (e.weapons[w].get("role_menu") or []) for w in e.weapons}
+    memb = (
+        menus.get("MAIN_ARCANESTAFF_UNDEAD") == ["engage_tank"]        # Witchwork: clump, not cleanse
+        and menus.get("2H_COMBATSTAFF_MORGANA") == ["shield_break"]    # Black Monk: purges ENEMY shields
+        and menus.get("2H_HOLYSTAFF") == ["brawl_healer"]              # Great Holy: brawl anchor only
+        and menus.get("2H_GLACIALSTAFF") == ["ranged_aoe"]             # Glacial: dps, not support
+        and menus.get("2H_ICECRYSTAL_UNDEAD") == ["ranged_aoe"]        # Permafrost: dps
+        and not menus.get("2H_SHAPESHIFTER_CRYSTAL")                   # Chillhowl: off every menu
+        and menus.get("2H_ARCANESTAFF") == ["shield_support"]          # Great Arcane: the setup role
+        and not menus.get("2H_IRONCLADEDSTAFF"))                       # Iron-clad: off stopper menu
+    rep = _json.load(open(os.path.join(ROOT, "pipeline", "out",
+                                       "roles_report.json"),
+                          encoding="utf-8"))
+    kd = rep["kit_doctrine"]
+
+    def pool(rid, slot):
+        return [x["id"] for x in kd[rid]["slots"].get(slot) or []]
+    kits = (
+        "T7_POTION_STONESKIN" not in pool("engage_tank", "potion")
+        and "CAPEITEM_FW_LYMHURST" not in pool("stopper_tank", "cape")
+        and "OFF_TOME_CRYSTAL" not in pool("stopper_tank", "offhand")
+        and "OFF_JESTERCANE_HELL" in pool("stopper_tank", "offhand")
+        and "OFF_TOWERSHIELD_UNDEAD" not in pool("brawl_healer", "offhand")
+        and "OFF_TORCH_CRYSTAL" in pool("brawl_healer", "offhand")
+        and all("overrides" in kd[r] for r in ("engage_tank",
+                                               "stopper_tank",
+                                               "brawl_healer")))
+    cane = (e.gear.get("OFF_JESTERCANE_HELL") or {}).get("role_affinity")
+    e7 = Engine(content="blackzone_roam", size=7)
+    e3 = Engine(content="blackzone_roam", size=3)
+    daggers = {"2H_DAGGERPAIR", "2H_DUALSICKLE_UNDEAD"}
+    dag = (not (daggers & set(e7.suggest_pool()))
+           and daggers <= set(e3.suggest_pool())
+           and daggers <= e7._excluded)
+    check("R17 owner grading 2026-08-26: eight menu corrections, five "
+          "kit-doctrine overrides, Leering Cane is stopper kit, dive "
+          "daggers excluded at 7+ (trio stays open)",
+          memb and kits and cane == ["stopper_tank"] and dag,
+          f"monk={menus.get('2H_COMBATSTAFF_MORGANA')} "
+          f"stopper_offhand={pool('stopper_tank', 'offhand')} "
+          f"cane={cane} daggers@7={not (daggers & set(e7.suggest_pool()))}")
+
+
+def t_weapon_doctrine():
+    # R18 — per-weapon doctrine + effect quotas (owner design 2026-08-26,
+    # the Demon-Armor-on-Hand-of-Justice case): a weapon's OWN observed
+    # kit outranks the seat aggregate (Polehammer wears Knight in 5 of
+    # its 6 builds); chests granting a typed gear effect are comp-level
+    # allocations — excluded from the per-weapon tier, tagged in the
+    # seat pool, and quota-mined per observed roster (cb_clonepeek
+    # fields 4 reflect shells; that is why its HoJ wears Demon Armor).
+    import json as _json
+    e = Engine(content="blackzone_roam", size=20)
+    ko = e.kit_options("2H_POLEHAMMER", top_n=5)
+    top = ko["kit"]["armor"]
+    ph = (top["gear"] == "ARMOR_PLATE_SET2"
+          and top["doctrine"] == "weapon" and top["doctrine_n"] == [5, 5])
+    hoj = e.kit_options("2H_HAMMER_AVALON", top_n=10)
+    demon = next((o for o in hoj["options"]["armor"]
+                  if o["gear"] == "ARMOR_PLATE_HELL"), None)
+    dem = (demon is not None and demon["doctrine"] == "seat"
+           and "reflect_shell" in (demon["carries"] or []))
+    kw = ((e.roles.get("engage_tank") or {}).get("kit_weapon")
+          or {}).get("2H_HAMMER_AVALON") or {}
+    effect_items = {"ARMOR_PLATE_HELL", "ARMOR_PLATE_KEEPER",
+                    "ARMOR_PLATE_SET3", "ARMOR_LEATHER_ROYAL",
+                    "ARMOR_LEATHER_HELL"}
+    clean = not (effect_items
+                 & {p[0] for slot in kw for p in kw[slot]})
+    rep = _json.load(open(os.path.join(ROOT, "pipeline", "out",
+                                       "roles_report.json"),
+                          encoding="utf-8"))
+    q = rep.get("effect_quotas") or {}
+    cb = next((r for r in q.get("comps") or []
+               if r["comp"].startswith("cb_clonepeek")), None)
+    quota = (cb is not None and cb["copies"].get("reflect_shell") == 4
+             and (q["summary"]["reflect_shell"]["with_any"] or 0) >= 6)
+    check("R18 per-weapon doctrine: Polehammer wears its own observed "
+          "Knight (5/5); Demon Armor on HoJ reads as seat-pool reflect "
+          "carrier, never weapon identity; quotas mined per roster",
+          ph and dem and clean and quota,
+          f"pole_top={top['gear']}/{top['doctrine']}/{top['doctrine_n']} "
+          f"demon={demon and (demon['doctrine'], demon['carries'])} "
+          f"cb_reflect={cb and cb['copies'].get('reflect_shell')}")
+
+
 if __name__ == "__main__":
     t_role_book()
     t_ruled_memberships()
@@ -505,6 +599,8 @@ if __name__ == "__main__":
     t_passive_doctrine()
     t_kit_doctrine_evidence()
     t_kit_annotations()
+    t_grading_rulings()
+    t_weapon_doctrine()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")

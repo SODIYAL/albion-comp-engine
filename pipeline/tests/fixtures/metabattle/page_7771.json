@@ -1,0 +1,57 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Nature_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Healer_builds",
+     "sortkey": "Healer"
+    },
+    {
+     "*": "Open_World_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Hellgate_5v5_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Hellgate_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Crystal_Arena_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7771,
+   "revid": 8976,
+   "title": "Blight Staff Group PvP Healer Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Nature Staff\n| mode = Open World, Hellgate (5v5), Crystal Arena\n| focus = Healer\n| strengths = Great Healing, Good Utility, Good Mobility\n| weaknesses = High Skill Floor, Boring to play\n}}\n==Overview==\nThe {{Item|Elder's Blight Staff}} build offers great healing in small scale PvP and is one of the best supports for your team. It remains very mobile and allows you to constantly move without having to channel abilities, making it tough to pin down this healer. It does great in a variety of content and performs particularly well in Open World, 5vs5 Hellgates and Crystal Arena but can also be used in Tracking groups or Roads PVP.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Blight Staff\n| main hand weapon skills = Rejuvenation, Rejuvenating Breeze, Elevated Nature, Adrenaline Driven Charity\n| head = Elder's Scholar Cowl\n| head skills = Energy Shield, Aggression\n| cape = Elder's Lymhurst Cape\n| cape alternatives = Elder's Martlock Cape\n| cape skills = Energy Reserve\n| armor = Elder's Robe of Purity\n| armor skills = Energy Emission, Aggression\n| shoes = Elder's Mercenary Shoes\n| shoes alternatives = Elder's Graveguard Boots, Elder's Boots of Valor\n| shoes skills = Break Free, Balanced Mind\n| potion = Major Gigantify Potion\n| potion alternatives = Major Resistance Potion\n| food = Pork Omelette\n}}\n\n\n==Usage==\n==={{Item|Elder's Blight Staff|45}}===\n{{Skill|Rejuvenation}} — This single target skill applies a Rejuvenation Charge that heals the target over time and also stacks up to 3, allowing you to provide great healing over time. You want to always use this skill on your team and prioritize the frontline, putting up 3 stacks on your tank before you'd use {{Skill|Rejuvenating Breeze}} to spread it to your other allies.\n\n{{Skill|Rejuvenating Breeze}} — The skill you will use most at the start of fights as it spreads all Rejuvenation Charges present onto a friendly target to up to 10 allies near that target. It also increases the defense of the friendly target, helping with their survival if they find themselves in danger.\n\n{{Skill|Elevated Nature}} — Use this ability to rapidly heal allies around you as you move. Your movement speed is increased while you channel this and you can move to follow your team into engages or heal up while your team is retreating. You should always try to call out before you use this skill so friendly players can come together and receive the healing, otherwise they might kite away or chase too deep into the enemy group.\n\n{{Skill|Adrenaline Driven Charity}} — This passive will increase your healing every 4th time you cast a spell.\n\n\n==={{Item|Elder's Robe of Purity|45}}===\n{{Skill|Energy Emission}} — This spell creates a barrier around you that pushes away nearby enemies. You can use it to shove enemies out of position during a fight, separating them from their healers or interrupting their spells. There are many ways to use this skill, so experiment with it but try to keep this skill mostly for defensive plays.\n\n{{Skill|Aggression}} — The perfect passive choice as it increases the healing you do.\n\n\n==={{Item|Elder's Scholar Cowl|45}}===\n{{Skill|Energy Shield}} — As this is your main defensive skill, you can use this when you are being focused to increase your defenses and lower the damage received. This skill also quickly recharges your mana based on the amount of hits you receive while its active so you can also use {{Skill|Energy Shield}} before walking into an AOE to regain your lost mana in case your {{Skill|Energy Reserve}} is on cooldown.\n\n{{Skill|Aggression}} — This passive increases your healing and is an obvious choice.\n\n\n==={{Item|Elder's Mercenary Shoes|45}}===\n{{Skill|Break Free}} — Use this ability in order to dash wherever you point your cursor and free yourself from all crowd control effects. You can even use it while silenced or stunned. It's a very powerful skill, so use it smart as the cooldown isn't very short. Save it for when the enemy team closes in on you or when you're out of position and need to regroup with your team once you've already been CC'd and before the enemy team can pull off a combo on you.\n\n{{Skill|Balanced Mind}} — Just another healing increasing passive.\n\n\n==={{Item|Elder's Lymhurst Cape|45}}===\n{{Skill|Energy Reserve}} — This cape helps a lot with your mana sustain. It triggers whenever your mana reaches 40% and will regenerate 80% of your max mana over a few seconds so keep healing throughout the duration. \n\nYou can also use the {{Item|Elder's Martlock Cape}} as an alternative if you know how to use your {{Skill|Energy Shield}} well but that should come only after you've already mastered the build.\n\n\n==Rotations==\n{{Rotation|AOE Pre-healing + Fight Healing|Rejuvenation, Rejuvenation, Rejuvenation, Rejuvenating Breeze, Rejuvenation, Elevated Nature}}\n*You generally want to always start off a fight by using {{Skill|Rejuvenation}} 3 times on either your main tank or one of your frontline players as they are the first to take damage in a fight and usually require a bit of healing to negate poke damage. Once your team moved together and you are decently in range to each other, use {{Skill|Rejuvenating Breeze}} to spread 3 stacks of {{Skill|Rejuvenation}} from your previous target to your entire group. Once this is done, you want to use {{Skill|Rejuvenation}} if any of your allies doesn't have any stacks but never use this on a friendly target that already has 3 stacks because that will remove all charges (but also restore some of your mana). \n\nUse {{Skill|Elevated Nature}} whenever your allies are close-by and you can get some healing done or as a counter in case your team got pushed into and are about to be combo'd. If you use this offensively, you can use {{Skill|Energy Emission}} before using {{Skill|Elevated Nature}} to also add the knockback effect on targets you touch, pushing them away and forcing them out of position.\n\n\n==Consumables==\n{{Item|Major Gigantify Potion}} — You can use this at the start of a fight or when the enemies start focusing you while you cannot spare any healing for yourself or you are caught out of position, it will soak enough damage for the enemy to switch targets or until you get time to heal yourself.\n\n{{Item|Pork Omelette}} — This is the best choice as the {{Item|Pork Omelette}} decreases your cooldowns and also increases your cast speed, its perfect for any healer! Use at least a 7.1 version if you do higher tier content.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7771": {
+     "ns": 0,
+     "pageid": 7771,
+     "revisions": [
+      {
+       "parentid": 8701,
+       "revid": 8976,
+       "timestamp": "2025-04-01T23:24:23Z"
+      }
+     ],
+     "title": "Blight Staff Group PvP Healer Build"
+    }
+   }
+  }
+ }
+}

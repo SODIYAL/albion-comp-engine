@@ -1,0 +1,49 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Frost_Staff_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Range_DPS_builds",
+     "sortkey": "Range DPS"
+    },
+    {
+     "*": "Open_World_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Ganking_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7778,
+   "revid": 8966,
+   "title": "1H Frost Staff Ganking Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Frost Staff\n| mode = Open World, Ganking\n| focus = Range DPS\n| strengths = Great CC, Good Mobility\n| weaknesses = Squishy, Low Defensives\n}}\n==Overview==\nThis {{Item|Elder's Frost Staff}} build is focused on catching onto and locking down enemies before they can run away from you or your ganking group. It performs very well in group ganking and remains one of the most popular builds to play in such scenarios. While it isn't particularly difficult to play, you still need a bit more game knowledge when compared to playing easier builds like {{Item|Elder's Claws}}.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Frost Staff\n| main hand weapon skills = Frozen Surge, Frost Nova, Freezing Wind, Frost\n| off hand weapon = Elder's Mistcaller\n| head = Elder's Fiend Cowl\n| head skills = Purge, Aggression\n| cape = Elder's Undead Cape\n| cape skills = Vanisher\n| armor = Elder's Graveguard Armor\n| armor skills = Soul Chain, Authority, Spirit Crush\n| shoes = Elder's Soldier Boots\n| shoes skills = Rejuvenating Sprint, Authority\n| potion = Major Poison Potion\n| food = Pork Omelette\n| food alternatives = Deadwater Eel Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Frost Staff|45}}===\n{{Skill|Frozen Surge}} — This is your main DPS skill but also the way you keep enemies slowed so they cannot get away before the rest of your group gets there to help secure the kill.\n\n{{Skill|Frost Nova}} — Use this to lock down an enemy but also as a mobility tool. Get close enough to an enemy to then use this and stun them or use this to close the distance quickly before using {{Skill|Freezing Wind}}.\n\n{{Skill|Freezing Wind}} — Use the skill to do high damage but also slow down and then root targets for a few seconds. This is usually best used after you've moved close enough with {{Skill|Frost Nova}} but is also used as part of a longer chain-CC rotation.\n\n{{Skill|Frost}} — Every 3 auto-attacks will root the target for a few seconds. This passive offers great CC and you should always weave auto-attacks into your regular rotation.\n\n\n==={{Item|Elder's Graveguard Armor|45}}===\n{{Skill|Soul Chain}} — This pairs perfectly with {{Skill|Freezing Wind}}. It attaches a chain to the target and pulls them back to your location, allowing you to root them with {{Skill|Freezing Wind}}.\n\n{{Skill|Authority}} — This passive increases the duration of your crowd control effects and pairs well with all your abilities, as your main role is to CC targets.\n\n{{Skill|Spirit Crush}} - This is a PVE only ability but it will lower the max HP of mobs.\n\n\n==={{Item|Elder's Fiend Cowl|45}}===\n{{Skill|Purge}} — This is your main ability to use when enemies try to escape using their mobility skills. It offers incredible versatility, allowing you to purge skills like {{Skill|Life Steal Aura}}. However, its primary use is to purge enemy runs, maintaining your superior mobility and keeping enemies locked down so they can't get away.\n\n{{Skill|Aggression}} — This passive is a good damage increasing passive, great to have!\n\n\n==={{Item|Elder's Soldier Boots|45}}===\n{{Skill|Rejuvenating Sprint}} — This is one of the best sprints, and {{Item|Elder's Soldier Boots}} are a popular choice for a lot of content. The boots regenerate some of your HP each time you use them and have a fairly low cooldown. Another option would be to use the {{Item|Elder's Hunter Shoes}} for the extra CC duration but a shorter (albeit faster) sprint.\n\n{{Skill|Authority}} — The 5% CC increase isn't big but its fine to use over the defensive provided by {{Skill|Toughness}}.\n\n\n==={{Item|Elder's Undead Cape|45}}===\n{{Skill|Vanisher}} — When your HP goes below 15%, you enter stealth, allowing you to use abilities but your damage is also reduced by 50%. Use this as a last resort to reposition or disengage from enemies if you are focused or if you bite more than you can chew engaging on multiple enemies. Check for a cloak icon under your character name to see if this stealth ability is available.\n\n\n==Rotations==\n{{Rotation|DPS|Rejuvenating Sprint, Poison Potion, Freezing Wind, Soul Chain, Frost Nova, Frozen Surge, Purge}}\n*The CC rotation for this starts with popping your {{Skill|Rejuvenating Sprint}} to chase after an enemy before using {{Skill|Poison Potion}} to deal damage. Use {{Skill|Freezing Wind}} to root them before following up with {{Skill|Soul Chain}} and staying where you are. After a few seconds, the enemy will be pulled back to where you are and you can use {{Skill|Frost Nova}} to stun them before using {{Skill|Frozen Surge}} to further slow them down. If the enemy uses a run, make sure to use your {{Skill|Purge}} to remove that.\n\n\n==Consumables==\n{{Item|Major Poison Potion}} — This is the best potion you'd want to use when ganking. It deals high damage and slows down enemies that are hit while under the poison effect.\n\n{{Item|Pork Omelette}} — Due to your heavy reliance on abilities, you need great cooldown reduction, which the {{Item|Pork Omelette}} provides. Aim to use at least a 7.1 quality omelette.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7778": {
+     "ns": 0,
+     "pageid": 7778,
+     "revisions": [
+      {
+       "parentid": 8748,
+       "revid": 8966,
+       "timestamp": "2025-04-01T23:22:35Z"
+      }
+     ],
+     "title": "1H Frost Staff Ganking Build"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,53 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Axe_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Melee_DPS_builds",
+     "sortkey": "Melee DPS"
+    },
+    {
+     "*": "Hellgate_5v5_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Hellgate_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Open_World_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7694,
+   "revid": 8922,
+   "title": "Small Scale Infernal Scythe PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Axe\n| mode = Hellgate (5v5), Open World\n| focus = Melee DPS\n| strengths = Great Sustain, Great Damage\n| weaknesses = High Skill Ceiling\n}}\n==Overview==\nThis {{Item|Elder's Infernal Scythe}} PvP build focuses on small scale PvP, Hellgates and Arenas, performing incredibly well as a bruiser but also offering high burst damage and execute potential with {{Skill|Bloody Reap}}. The build has a great potential in the hands of a good player but it takes a bit of practice before you could perform well using it as there is still a high skill ceiling for using this!\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Infernal Scythe\n| main hand weapon skills = Rending Rage, Adrenaline Boost, Bloody Reap, Aggressive Rush\n| head = Elder's Scholar Cowl\n| head skills = Energy Shield, Aggression\n| cape = Elder's Martlock Cape\n| cape skills = Shield of Protection\n| armor = Elder's Hellion Jacket\n| armor skills = Life Steal Aura, Balanced Mind\n| shoes = Elder's Boots of Valor\n| shoes alternatives = Elder's Graveguard Boots\n| shoes skills = Premonition, Toughness\n| potion = Major Resistance Potion\n| potion alternatives = Major Gigantify Potion\n| food = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Infernal Scythe|45}}===\n{{Skill|Rending Rage}} — Use this skill to apply stacks of bleed using the first two attacks and always try to put as many bleeds as possible on targets as you brawl. The ability doesn't go on cooldown until you use your third attack. You should use the third attack to root players as the small jump also roots whoever you land it on and that allows you to use {{Skill|Bloody Reap}} easier.\n\n{{Skill|Adrenaline Boost}} — This is not only a good damage increase for your abilities and auto-attacks, it also offers you great movement speed and helps you reposition. You should try to use this before using {{Skill|Bloody Reap}} to boost your execute damage.\n\nAnother good option would be using {{Skill|Internal Bleeding}} in heavy brawl comps where your healer doesn't have issues with keeping you alive. Applying this bleed to as many enemies is important, and they will take heavy damage if they move.\n\n{{Skill|Bloody Reap}} — This is your highest damage ability and works a lot like the Bloodletter {{Skill|Lunging Stabs}} as it does more damage to enemies below 40% HP but does this in an AOE around you instead of a line. \n\n{{Skill|Aggressive Rush}} — A nice damage buff as you will be auto-attacking a lot during long fights.\n\n\n==={{Item|Elder's Hellion Jacket|45}}===\n{{Skill|Life Steal Aura}} — Use this skill to heal yourself back up and become nearly invulnerable during group fights. Make sure you are hitting as many enemies as possible when you're using this ability because the more enemies you hit, the more healing you receive.\n\n{{Skill|Balanced Mind}} — Straight up increases your damage which is generally good and the obvious choice for any DPS.\n\n\n==={{Item|Elder's Scholar Cowl|45}}===\n{{Skill|Energy Shield}} — This is your defensive ability but also your way of getting mana back when you need it. You should use this whenever you expect damage to hit you. If in need of mana, use this when you have dots on you or if you can take some sort of damage as being attacked while under this effect will regenerate your mana.\n\n{{Skill|Aggression}} — Just another damage increasing passive.\n\n\n==={{Item|Elder's Boots of Valor|45}}===\n{{Skill|Premonition}} — While not particularly easy to play, this run allows you to ignore CCs, however, you want to use this BEFORE walking over a CC ability like {{Skill|Mythical Web}} to trigger the extra movement speed and ignore CCs. \n\nYou can also use {{Item|Elder's Graveguard Boots}} as you gain the CC immunity upon use, making it easier for new players to adapt.\n\n{{Skill|Toughness}} — This passive offers you a bit of extra defense which is nice to have even as a DPS.\n\n\n==={{Item|Elder's Martlock Cape|45}}===\n{{Skill|Shield of Protection}} — This will automatically trigger when your HP goes below 25% and it increases all your defenses by 50% for 5 seconds, plenty of time to survive enemy burst damage.\n\n\n==Rotations==\n{{Rotation|Execute Combo|Rending Rage, Rending Rage, Adrenaline Boost, Bloody Reap}}\n* As the fight starts, you want to use the first two casts of {{Skill|Rending Rage}} and apply bleeds to enemies while keeping an eye out for enemies that are being focused. Once you've spotted an enemy being brought to low HP, reposition with {{Skill|Adrenaline Boost}} to boost your damage and movement speed. If possible, also use your third cast of {{Skill|Rending Rage}} to root the enemy before using {{Skill|Bloody Reap}} to execute them. Make sure that the enemy you target is below 40% as that will increase your damage a lot. \n\n\n==Consumables==\n{{Item|Major Resistance Potion}} — Use this to keep yourself alive and give your healer/s the chance to heal you. Another option would be {{Item|Major Gigantify Potion}}!\n\n{{Item|Beef Stew}} — The standard DPS food choice for flat damage increase and to boost your overall damage. Always try to go for at least 8.1 though!\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7694": {
+     "ns": 0,
+     "pageid": 7694,
+     "revisions": [
+      {
+       "parentid": 8295,
+       "revid": 8922,
+       "timestamp": "2025-04-01T23:17:47Z"
+      }
+     ],
+     "title": "Small Scale Infernal Scythe PvP Build"
+    }
+   }
+  }
+ }
+}

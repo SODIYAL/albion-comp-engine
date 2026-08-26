@@ -54,11 +54,38 @@ you are right about passive defaults"):
   `passive`; the loadout panel shows the seat + passive + carried
   effect line.
 
+**Board GRADED 2026-08-26** — the owner reviewed all 465 rows of
+out/roles_report.json (seats, kit doctrine, gear effects, equipment)
+on the interactive grading artifact: 15 rulings, everything else
+accepted as shipped. Corrections landed same day (VALIDATION.md
+full-board entry): eight membership fixes in roles.yaml, the new cited
+`kit_doctrine.overrides` (drop/add on the mined pools, fail-closed)
+and `gear_affinity_overrides` layers, and the dive-dagger ≥7
+viability exclusion. R17 pins the batch.
+
+**Increment 2.5 SHIPPED 2026-08-26 — per-weapon doctrine + effect
+quotas** (owner design, from the Demon-Armor-on-Hand-of-Justice case:
+"its not likely that hand of justice would be using demon armor ...
+maybe the composition didnt have enough demon armors so the engage
+tank has to take one"). Verified on the data first: the sighting is
+cb_clonepeek seat 19, and that roster fields FOUR reflect shells —
+the chest is a comp allocation, not weapon doctrine. Shipped: (a)
+kit pools also mine PER WEAPON (`kit_weapon`, report `by_weapon`);
+the kit advisor's context-free ranking puts the weapon's own observed
+tier first (`doctrine`: weapon/seat/false, `doctrine_n` = [count,
+total] sample honesty); (b) chests granting a typed gear effect are
+EXCLUDED from the per-weapon tier, tagged `effect:` in seat pools,
+and quota-mined per near-complete observed roster
+(`mine_effect_quotas` → report `effect_quotas`, display-only until
+owner-graded — reflect shells: 7 of 8 rosters, typically 3 copies);
+(c) kit overrides extend to weapon scope (`overrides.<seat>.weapons`)
+and seat-level drops cascade into per-weapon pools. R18 pins it;
+60/60 parity carries the tier strings through both ports.
+
 **Pending**: increment 3 (forge role assignment + owner-graded
-fine-role need profiles), increment 4 (uptime economics). The
-seat-role membership board awaits owner grading in
-out/roles_report.json — its `kit_doctrine` section (observed per-seat
-kit pools with citations) is part of the same grading pass.
+fine-role need profiles — plus grading of the effect-quota table and
+mechanism pairing rules for effect carriers), increment 4 (uptime
+economics).
 
 ## The problem (owner observations, both verified)
 

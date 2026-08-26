@@ -1,0 +1,71 @@
+{
+ "parse": {
+  "parse": {
+   "categories": [
+    {
+     "*": "Crossbow_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Range_DPS_builds",
+     "sortkey": "Range DPS"
+    },
+    {
+     "*": "Open_World_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Ganking_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Solo_Mist_builds",
+     "missing": "",
+     "sortkey": ""
+    },
+    {
+     "*": "Mist_builds",
+     "missing": "",
+     "sortkey": ""
+    },
+    {
+     "*": "Depth_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Corrupt_Dungeon_builds",
+     "sortkey": ""
+    },
+    {
+     "*": "Dungeon_builds",
+     "sortkey": ""
+    }
+   ],
+   "pageid": 7863,
+   "revid": 9132,
+   "title": "Arclight Blasters PvP Build",
+   "wikitext": {
+    "*": "{{Build\n| weapon type = Crossbow\n| mode = Open World, Ganking, Mist (solo), Depth, Corrupt Dungeon,\n| focus = Range DPS\n| strengths = Very high DPS, High AOE Burst, Easy to play, No Mana Issues\n| weaknesses = High Skill Ceiling, Expensive\n}}\n==Overview==\nThis {{Item|Elder's Arclight Blasters}} is one of the top choices in Mists, Depths and even solo PVP in the open world as it offers great AOE burst damage and good single target DPS as well. {{Skill|Caltrops}} offers a great way to setup and dictate the range of the engagement, allowing you to keep away from melee players by slowing them down and increasing your own speed to make it easy kiting.\n\n\n==Equipment==\n{{Build equipment\n| main hand weapon = Elder's Arclight Blasters\n| main hand weapon skills = Explosive Bolt, Caltrops, Flickershots, Well-Prepared\n| head = Elder's Hunter Hood\n| head alternatives = Elder's Cultist Cowl, Elder's Guardian Helmet\n| head skills = Retaliate, Balanced Mind\n| cape = Elder's Undead Cape\n| cape skills = Vanisher\n| armor = Elder's Feyscale Robe\n| armor skills = Wild Magic, Aggression\n| armor alternatives = Elder's Cleric Robe\n| shoes = Elder's Soldier Boots\n| shoes alternatives = Elder's Knight Boots, Elder's Cleric Sandals\n| shoes skills = Rejuvenating Sprint, Toughness\n| potion = Major Gigantify Potion\n| potion alternatives = Major Healing Potion, Major Energy Potion\n| food = Beef Stew\n}}\n\n\n==Usage==\n==={{Item|Elder's Arclight Blasters|45}}===\n{{Skill|Explosive Bolt}} — This is one of your main damaging abilities with a nice medium range that delivers high AOE damage to all enemies hit with it. Thanks to not having a channel time, you can and should use this on the move without stopping to channel, helping you kite better. Through the use of {{Skill|Well-Prepared}}, it is constantly reset every 4th time you use it too! Make sure to use {{Skill|Explosive Bolt}} as your 4th ability so it resets its own cooldown and you can use it twice in quick succession.\n\n{{Skill|Caltrops}} — Use this ability to slow down enemies and boost your movement speed. This will help you kite a whole lot and you can also use this to build 2 stacks of {{Skill|Well-Prepared}} when comboing with {{Skill|Explosive Bolt}}.\n\n{{Skill|Flickershots}} — This is the main skill of the {{Item|Elder's Arclight Blasters}} as it deals incredible AOE damage and remains very difficult to dodge out of. Not only this, but you can use this to lower incoming damage when timing it well as it increases your resistances. You can use {{Skill|Flickershots}} 3 times and you should do so in order to burst down enemies quickly before they can react.\n\n{{Skill|Well-Prepared}} — Due to the low cooldowns on {{Skill|Explosive Bolt}} and {{Skill|Caltrops}}, you get to use abilities often to increase overall DPS by resetting {{Skill|Explosive Bolt}} cooldown.\n\n\n==={{Item|Elder's Feyscale Robe|45}}===\n{{Skill|Wild Magic}} — While PVEing mobs in Depths or Mists, you can use Frozen Fragments part of this skill with your auto-attacks as it improves your damage and allows you to deal some good extra damage between uses of {{Skill|Explosive Bolt}}. The main PVP use of {{Skill|Wild Magic}} is Ring of Fire as a defensive ability to keep enemies away or keep them inside with you, allowing you to use {{Skill|Flickershots}} quickly without the enemies getting away. The skill works essentially as {{Skill|Wall of Flames}} but the fire wall it creates is made into a circle around you. The third option is the Storm Shield which can be used whenever you are being focused as it boosts your damage resistance and also stuns enemies. This is usually better against melee enemies to keep them under control. \n\n{{Skill|Aggression}} — This is your only relevant choice as it increases your raw damage.\n\n\n==={{Item|Elder's Hunter Hood|45}}===\n{{Skill|Retaliate}} — Generally used as a defensive option before enemies get to apply burst damage to you, {{Skill|Retaliate}} increases your damage resistance for a short duration while it also returns 85% of incoming damage back to the attacker.\n\n{{Skill|Balanced Mind}} — This is another damage increasing passive, very good for the build.\n\n\n==={{Item|Elder's Soldier Boots|45}}===\n{{Skill|Rejuvenating Sprint}} — This remains one of the most popular runs in the game as it also recovers some of your HP during the run. However, don't underestimate {{Skill|Wanderlust}} either as it offers good movement speed and can let you run away from enemies, staying ahead if you don't want to take a fight. Switch to this one whenever you want to retreat from a fight instead of dying.\n\n{{Skill|Toughness}} — This defensive option is preferred over {{Skill|Authority}} as the 5% CC duration doesn't help at all with this build eventhough the {{Skill|Caltrops}} is considered a CC ability.\n\n\n==={{Item|Elder's Undead Cape|45}}===\n{{Skill|Vanisher}} — When your HP drops below 15%, you automatically enter stealth. While in this state, you can still use abilities, but your damage is reduced by 50%. Use this as a last resort to reposition or retreat if you're being targeted or overwhelmed by multiple enemies. Look for a cloak icon beneath your character’s name to confirm if the stealth ability is active. You can also tell by the fact your character turns transparent.\n\n\n==Rotations==\n{{Rotation|PVP Rotation|Explosive Bolt, Caltrops, Wild Magic, Flickershots, Flickershots, Flickershots}}\n* You should use {{Skill|Explosive Bolt}} as much as possible from a safe distance before the enemy can touch you, help landing {{Skill|Explosive Bolt}} by using {{Skill|Caltrops}} to control the enemy, slowing them down as needed. Once you are in a close enough position and the enemy is close to half HP, use {{Skill|Wild Magic}} to lock down enemies before using {{Skill|Flickershots}} to finish them off.\n\n\n==Consumables==\n{{Item|Major Gigantify Potion}} — This is your main defensive utility, use it before enemies use their burst damage to minimize the damage taken. You can also use it before using {{Skill|Flickershots}} to lower incoming damage further while dealing a lot of it.\n\n{{Item|Beef Stew}} — This is the best food to use as it improves your overall damage. Try to use an 8.2 version if you can afford it, but its not required.\n\n\n{{Build footer}}"
+   }
+  }
+ },
+ "revisions": {
+  "batchcomplete": "",
+  "query": {
+   "pages": {
+    "7863": {
+     "ns": 0,
+     "pageid": 7863,
+     "revisions": [
+      {
+       "parentid": 9131,
+       "revid": 9132,
+       "timestamp": "2025-07-21T13:37:51Z"
+      }
+     ],
+     "title": "Arclight Blasters PvP Build"
+    }
+   }
+  }
+ }
+}
