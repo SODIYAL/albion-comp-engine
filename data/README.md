@@ -29,6 +29,10 @@ author never counts twice.
 
 - **MetaBattle** — automated via their MediaWiki Action API
   (`pipeline/adapters/metabattle.py`), CC BY-SA attribution on every record.
+  Adapter v2 (2026-08-26) captures every group-PvP category (ZvZ, Hellgate
+  5v5/10v10, Crystal League/Arena, Ganking; solo/PvE modes stay out) into
+  `published_builds/metabattle.yaml`, each record's `content` derived from
+  the page's own mode category.
 - **Official Armory** — manual imports only (`armory_imports/README.md`);
   no reverse-engineering of game traffic or private endpoints.
 - **Albion Online Grind** (<https://albiononlinegrind.com/group-builds>) and

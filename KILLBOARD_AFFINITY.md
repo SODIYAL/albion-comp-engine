@@ -79,4 +79,10 @@ Whole-roster clustering was measured and rejected for this sample: the baskets a
 
 The artifact carries counts only — organization and battle identifiers stay in `weapon_usage_v2.json` — and `tests/test_cohort_families.py` pins determinism, disjointness, the gates, and the no-identifier rule.
 
-**Still parked behind review**: ANY empirical/scoring integration. Neighbours and families aggregate nothing into a score, a suggestion pool, or the forge, and must stay that way without an explicit owner ruling.
+## Near-complete roster mixes — shipped 2026-08-26 (increment-3 evidence)
+
+`pipeline/sample_rosters.py` (explicit network step, same sanctioned albionbb endpoint) mines KILL-DENSE battles and keeps only near-complete sides: a side whose deaths enumerate ≥80% of its attributed players has its whole roster visible with equipment — the least-biased roster snapshot kill events can give. Winner-side mixes are reported separately and never merged (healers/supports under-appear on winning sides — the standing support-undercount, now measured). Output: `out/roster_mixes.json` — per-band (gang/mid/party) seat mixes per 20, function coverage shares, healer distributions. All limitations above apply, plus: alliance-level sides can merge two parties (the band split discards >25 rows), and one sample = one meta window.
+
+**The sanctioned uses** (owner directives 2026-08-26): (1) the roster mixes are the cited EVIDENCE behind the owner-ruled `need_profiles` in `pipeline/roles.yaml` — the profiles are constants the owner ruled, the artifact is why; a re-sample never retunes them by itself. (2) "Observed effect quotas" renders in the killboard strip (`effectQuotaRows()` in `dashboard/_app.js`, display-math case 14): the roster's SET chests counted against the median effect carriers near-complete reference rosters field — quota medians come from the reference-build evidence layer (`roles_report` `effect_quotas`), PLAN-scaled, armed at 15+, and members without gear set are counted as unknown, never as missing. Advice language only; nothing scores.
+
+**Still parked behind review**: ANY empirical/scoring integration beyond the two owner-ruled uses above. Neighbours, families, roster mixes and quotas aggregate nothing into a score, a suggestion pool, or the forge's objective, and must stay that way without an explicit owner ruling.

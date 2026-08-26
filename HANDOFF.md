@@ -55,18 +55,36 @@ The production engine currently includes:
   and earned non-stacking slots (a group-band curse slot needs a debuff-E:
   Damnation / Lifecurse / Rotcaller)
 - swap review
-- the role layer (2026-08-25, roles-design.md — increment 1 shipped
-  through eight owner passes): an evidence-cited role book (19 roles:
-  SEAT roles with gear uniforms, FUNCTION roles — pierce / purge /
-  shield_break / anti_heal — that ride along with any seat, and a typed
-  gear_effects catalog), per-weapon role MENUS derived E-first across
-  all 137 weapons (E = primary, Q/W ability = secondary tier, spell-
-  classified splits), equipment classified by the unique-ability-first
-  law (chests by tree stat numbers, all 18 offhands by stat profile,
-  tree passives recorded), kit-aware role detection and the descriptive
-  role advisory (off-role kits, no-engage-tank flags) in both ports and
-  the status card; increments pending: role-doctrine kit advisor, forge
-  role assignment + graded need profiles, uptime economics
+- the role layer (2026-08-25/26, roles-design.md — increments 1, 2,
+  2.5 and 3 shipped): an evidence-cited role book (19 roles: SEAT roles
+  with gear uniforms, FUNCTION roles — pierce / purge / shield_break /
+  anti_heal — that ride along with any seat, and a typed gear_effects
+  catalog), per-weapon role MENUS derived E-first across all 137
+  weapons, equipment classified by the unique-ability-first law,
+  kit-aware role detection and the descriptive role advisory in both
+  ports and the status card. The kit advisor is DOCTRINE-LED (increment
+  2): chest hard-gated to the seat uniform, every other slot ranked
+  from pools mined out of the seat's real reference builds, passive
+  doctrine resolved from the dumps — and PER-WEAPON (increment 2.5):
+  a weapon's own observed kit outranks the seat aggregate with honest
+  sample sizes, while effect-carrier chests (Demon/Judicator/Guardian/
+  Royal/Hellion) are comp-level allocations, quota-mined per observed
+  roster and advised on the page, never counted as weapon identity.
+  The full board was owner-graded 2026-08-26 (15 rulings — R17) with
+  cited override layers for kit pools (`kit_doctrine.overrides`, seat
+  and weapon scope) and gear affinity (`gear_affinity_overrides`);
+  increments pending: 3b (effect-quota-aware kit allocation +
+  mechanism pairing rules), 4 (uptime economics)
+- NEED PROFILES gate the forge (increment 3, owner-ruled 2026-08-26
+  after a blind round + the evidence pass — 8 curated rosters, 139
+  near-complete killboard fight rosters via `pipeline/sample_rosters.py`
+  → `out/roster_mixes.json`, Wardergrip's guide): fine-seat bands
+  (engage 2-3 / stopper 1-2 default, stopper-heavy as the
+  territory-defense override, off-tank ≤1, shield support 1-3, zone ≤1)
+  plus function coverage (pierce ≥1, heal-cut ≥1), armed at 15+ and
+  scaled by size/20; clap/clap_kite additionally require a 7-strong
+  ranged-AoE core at 20. Generation-only — manual parties always
+  score; F21 pins the contract in both ports
 - weapon dossiers, spell facts, PvP interaction evidence, reference builds, and suggested gear
 
 The JavaScript engine (`engine/app_scoring.js`) mirrors the Python engine and is parity-tested.
@@ -104,7 +122,7 @@ The planner now leads with:
 - **Kill pressure** — the status card's three-light checklist (pierce · heal-cut · burst vs the comp-fitted targets), descriptive only
 - **Fight chain** — the pick card's stage strip (the fight as the playstyle sequences it, stages graded strong/ok/weak/missing) with the pick connected to the stage it strengthens
 - **Role check** — the status card's roles line (2026-08-25): the fine-role tally read from weapons + worn kits, primary-function and carried-aura chips, and the advisory flags ("no engage tank — nobody makes a clump"; a member whose chest fights their role's uniform), descriptive only
-- **Observed killboard context** — the contextual affinity strip and the pick card's observed-cohort note, display evidence only
+- **Observed killboard context** — the contextual affinity strip, the pick card's observed-cohort note, the recurring observed cores, and (2026-08-26) the **observed effect quotas** line — the roster's set chests counted against the median effect carriers near-complete observed rosters field (PLAN-scaled, armed 15+, unknown gear never claims a shortfall) — all display evidence only
 - **Caller tools** — the player-pool and swap-impact fold, collapsed by default
 - **Live party** — the companion feed (live-verified 2026-08-23) with **live sync**: after a load, weapon swaps update slots in place, newly visible weapons fill in, and members' real Q/W picks flow into the loadouts
 
@@ -160,7 +178,9 @@ Five blind grading rounds with the owner converted every complaint into a struct
 - **First verified non-stacking scoring record**: CURSEDOT (`pipeline/interactions.yaml`) — the target-side Vile-Curse pool caps at 4 across wielders, so the curse Q's sustained_dps counts once per party.
 - **Non-stacking slots are earned** (round 8, 2026-08-25 — the round-6 derivation landed): a member of a derived non-stacking group (today the cursed line) earns a group-band (10+) slot only with an E enemy-DEBUFF tool ≥ 4 (purge / pierce / heal-cut class — `E_DEBUFF_CAPS` in build_dataset). Damnation, Lifecurse and Rotcaller earn ("the only curse weapons in any party bigger than 15"); Cursed Skull, Shadowcaller, Great Cursed, 1H Cursed and Demonic (fear = displacement, not a debuff) demote to situational at group for every style and leave 10+ generation, balanced included. Manual picks score, never flagged. F19 pins it; F5 was strengthened to allow only IRREDUCIBLE saturation filler (a filler slot with a better legal replacement still fails).
 
-Audit artifacts: `out/economics_report.json` (cost tiers, heal scales, full healers), `out/style_fit_report.json` (`e_debuff_max` / `nonstack_member` per weapon), derived group membership printed at dataset build. The round-6 open ruling (utility-E vs damage-E within the cursed line) is CLOSED by round 8.
+- **Need profiles** (2026-08-26, increment 3 — see the engine-model bullet above): fine-seat bands + function coverage riding the same predicate machinery, owner-ruled from the blind round + the killboard roster evidence; ranged styles carry a 7-strong ranged-AoE core at 20 (F21).
+
+Audit artifacts: `out/economics_report.json` (cost tiers, heal scales, full healers), `out/style_fit_report.json` (`e_debuff_max` / `nonstack_member` per weapon), `out/roster_mixes.json` (the killboard roster-mix evidence behind the need profiles), derived group membership printed at dataset build. The round-6 open ruling (utility-E vs damage-E within the cursed line) is CLOSED by round 8.
 
 The dashboard tracks:
 
@@ -278,7 +298,7 @@ The preferred product sequence is:
      - **Observed-core loader** — "add core" button on family rows loads the anchor pair as MANUAL picks through the standard `data-add` mutation path (engine flags/scoring apply as usual; forge completes the rest); hidden once the anchor is in the roster
      - **Forge-context bug FIXED in `_app.js`** (pre-existing, surfaced by the loader): the engine is judged at roster size (owner ruling 2026-08-21) but the forge handler ran `ENG.forge(goal)` under that roster-size context — a 2-member roster forging to 20 searched under TRIO rules, so single-target-E dps and gang-only picks generated into ZvZ comps. Every Python/test forge constructs the engine at target size, which is why 21/21 forge + parity never caught it. The handler now wraps the forge in a target-size `setContent` (restore mirrors `inPickContext`); browser-verified end to end (core → forge → sane 20-man, zero gate violations)
 
-**ACTIVE TRACK — the ROLE LAYER (2026-08-25, roles-design.md; increments 1 AND 2 SHIPPED).** The owner's kit-quality observations (everyone getting the same damage jacket; Grailseeker as dps) became the role architecture: roles are member-in-comp properties selected by kit, never 1:1 weapon labels. Increment 1: the role book (seats / functions / gear effects), the E-first tiered sweep, equipment classification by the unique-ability-first law, detection + advisory in both ports. Increment 2 (same day, owner: "yes its the whole build ... include food, potion and capes and you are right about passive defaults"): `kit_options` is DOCTRINE-LED — the chest hard-gates to the seat uniform (R12 kills the Hellion bug), every other slot (through food/potion/cape) ranks a doctrine tier mined from the seat's observed reference builds (build-id cited, roles_report `kit_doctrine`; tier-first context-free, exact-marginal-first comp-aware per T22), passive doctrine resolves per piece from the dumps (cloth Aggression / leather Quick Thinker / plate Authority-or-Tenacity) into the build stat channels, and the Leering-Cane pairing is emergent physics via the new `cc_mult_caps` CC-duration channel (R13) — contracts R12–R16, kit parity carried per case. NEXT INCREMENTS, in order: (3) forge role assignment with fine-role need profiles derived from real comp mixes and owner-graded blind before gating anything; (4) uptime economics (gear survivability multiplies the wearer's own delivery). The seat-membership board — now including the observed kit-doctrine pools — awaits owner grading (out/roles_report.json).
+**ACTIVE TRACK — the ROLE LAYER (2026-08-25, roles-design.md; increments 1 AND 2 SHIPPED).** The owner's kit-quality observations (everyone getting the same damage jacket; Grailseeker as dps) became the role architecture: roles are member-in-comp properties selected by kit, never 1:1 weapon labels. Increment 1: the role book (seats / functions / gear effects), the E-first tiered sweep, equipment classification by the unique-ability-first law, detection + advisory in both ports. Increment 2 (same day, owner: "yes its the whole build ... include food, potion and capes and you are right about passive defaults"): `kit_options` is DOCTRINE-LED — the chest hard-gates to the seat uniform (R12 kills the Hellion bug), every other slot (through food/potion/cape) ranks a doctrine tier mined from the seat's observed reference builds (build-id cited, roles_report `kit_doctrine`; tier-first context-free, exact-marginal-first comp-aware per T22), passive doctrine resolves per piece from the dumps (cloth Aggression / leather Quick Thinker / plate Authority-or-Tenacity) into the build stat channels, and the Leering-Cane pairing is emergent physics via the new `cc_mult_caps` CC-duration channel (R13) — contracts R12–R16, kit parity carried per case. **2026-08-26, all in one day (VALIDATION.md carries every ruling verbatim):** the full board was owner-graded on an interactive artifact (465 rows, 15 rulings → eight membership corrections, the cited `kit_doctrine.overrides` + `gear_affinity_overrides` layers, the dive-dagger ≥7 exclusion — R17); increment 2.5 shipped per-weapon doctrine tiers + comp-level effect quotas (R18); the MetaBattle adapter grew to every group-PvP category (corpus 222 → 237 records, 74 weapons); and increment 3 shipped the NEED PROFILES (blind round first, then the owner's "what matters is what the data says" — the killboard roster miner `sample_rosters.py` delivered 139 near-complete fight rosters; the data's engage-leaning split overruled the owner's stopper-heavy blind call, preserved as the terry override) wired into both forge ports (F21), plus four follow-up rulings: clap/clap_kite ranged core 7 at 20, Icicle stays zone_support, healers 1-2 at 5-7 stand, and effect quotas GRADUATED to on-page advice. NEXT INCREMENTS: (3b) effect-quota-aware kit allocation + mechanism pairing rules for effect carriers (grading material on the board); (4) uptime economics (gear survivability multiplies the wearer's own delivery).
 
 8. **Enemy-comp counter drafting**
    - enter/observe an enemy roster and change the *target problem* (peel, purge, cleanse, anti-heal, displacement, etc.) without hardcoding weapon counters
@@ -301,6 +321,7 @@ py -3 pipeline/build_builds.py
 py -3 pipeline/build_dataset.py
 py -3 tests/test_golden.py
 py -3 tests/test_forge.py
+py -3 tests/test_roles.py
 py -3 tests/tier2_blindtest.py v4
 py -3 tests/test_js_parity.py
 node tests/test_loadout_codec.js
@@ -308,6 +329,7 @@ node tests/test_display_math.js
 py -3 tests/test_patch_history.py
 py -3 tests/test_provenance.py
 py -3 tests/test_builds.py
+py -3 tests/test_cohort_families.py
 py -3 pipeline/build_interactions.py
 py -3 tests/test_interactions.py
 py -3 dashboard/build.py

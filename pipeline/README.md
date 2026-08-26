@@ -79,9 +79,12 @@ none of them.
 ## The evidence layer (chapter 2)
 
 Build provenance lives in `data/` (see `data/README.md`): caller comps
-(`published_comps/`), MetaBattle imports (`published_builds/`, adapter:
-`py -3 pipeline/adapters/metabattle.py fetch|parse` — fetch is explicit and
-never part of a normal build), manual Armory imports (`armory_imports/`).
+(`published_comps/`), MetaBattle imports (`published_builds/metabattle.yaml`,
+adapter: `py -3 pipeline/adapters/metabattle.py fetch|parse` — fetch is
+explicit and never part of a normal build; v2 since 2026-08-26 captures
+every group-PvP category — ZvZ, Hellgate 5v5/10v10, Crystal League/Arena,
+Ganking — with `content` derived from each page's own mode category),
+manual Armory imports (`armory_imports/`).
 `py -3 pipeline/build_builds.py` validates + normalizes everything into
 `out/builds_index.json` (§F selection order, canonical flags) and
 `out/builds_validation.json` (problems, quarantines, promotion decisions).
@@ -260,6 +263,11 @@ not needed as a source.
   `sample_battles.py` (~200 battles from the albionbb API, size-bucketed,
   per-battle cache, V7 coverage stat in `out/weapon_usage_v2.json`).
   Display-only in the dashboard until validation admits it to scoring.
+  Joined 2026-08-26 by `sample_rosters.py` (same endpoint, also explicit):
+  kill-dense battles mined for NEAR-COMPLETE fight rosters (wiped sides
+  attribute the whole roster) → `out/roster_mixes.json`, the evidence
+  behind the owner-ruled `need_profiles`; `--pages 0` re-analyzes the
+  cache offline.
 - Structural capabilities (engage, peel, clump, tankiness…) are human-only by
   design; drafts contain effect capabilities only.
 - Six content templates exist (`blackzone_roam` 20, `territory_defense` 20,
@@ -267,10 +275,12 @@ not needed as a source.
   overlays in `templates/styles.yaml` — everything but castle_outpost is a
   2026-08-1x PROVISIONAL draft; sizes off the validated list are linear
   extrapolation and labelled as such in the UI.
-- Default-kit harvester not built: Metabattle (open MediaWiki API, CC BY-SA,
-  ~120 builds with per-slot spells) + Albion Free Market (4,478 builds,
-  game-native spell IDs, SSR-scrapeable — ask their Discord first). Two-source
-  agreement = high-confidence kit; see design doc §2.4.
+- ~~Default-kit harvester not built~~ — the MetaBattle adapter (46 pages,
+  all group-PvP categories) + the caller comps now feed the mined
+  kit-doctrine pools (`roles_report` `kit_doctrine`, per seat AND per
+  weapon). Albion Free Market (4,478 builds, game-native spell IDs,
+  SSR-scrapeable — ask their Discord first) remains the untapped
+  second source; two-source agreement = high-confidence kit (§2.4).
 
 ### Resolved
 

@@ -355,6 +355,14 @@ A member is no longer just weapon + weapon spells. The engine now models:
   the kit answers what THIS comp still needs, and role adaptation is
   emergent (the stat channel makes cloth worth 1.5x a DPS's damage and
   ~nothing on a control tank). Golden T22 pins the role differentiation.
+  Since the role layer (2026-08-25/26) it is DOCTRINE-LED: the chest
+  pool hard-gates to the weapon's seat uniform, every other slot ranks
+  what the seat's real reference builds actually wore — the weapon's
+  OWN observed kit first (with its honest sample size), the seat pool
+  behind it — and effect-carrier chests (Demon / Judicator / Guardian /
+  Royal / Hellion) are treated as comp-level allocations, never weapon
+  identity: the dashboard shows the observed per-roster quota for each
+  effect against the chests your roster has set.
 - **Known model-vs-doctrine tension** (recorded, not hidden): in a
   4-healer comp the advisor does NOT surface Robe of Purity for healers,
   because template healing is COVERAGE-based and covered — while the
@@ -362,9 +370,32 @@ A member is no longer just weapon + weapon spells. The engine now models:
   whether raw throughput deserves value past the target is an expert
   call for the templates (a `heal_throughput` capability or a softer
   heal soft-cap), queued for the next tuning pass.
-- **Not yet**: gear in the forge/recommend loops, the dashboard kit
-  picker UI, and the JS mirror of kit_options (scoring paths ARE
-  mirrored; the advisor is Python-side until the UI lands).
+- **Not yet**: gear inside the forge/recommend loops (the advisor and
+  the loadout panel are live in the page, and kit_options IS mirrored
+  and parity-checked in both engines — the remaining gap is the forge
+  pricing gear while it generates).
+
+### 8b. The role layer & forge structure — where those dials live
+
+The forge no longer builds from capability math alone; it builds toward
+an owner-ruled STRUCTURE. Those dials deliberately do NOT live in this
+file — they live beside the role book, and every entry is cited:
+
+| Dial | What it rules | Where |
+| --- | --- | --- |
+| Role book | seats, function roles, every weapon membership (evidence-cited) | `pipeline/roles.yaml` `roles:` |
+| Kit-pool rulings | drop/add on the mined kit pools, per seat or per weapon | `pipeline/roles.yaml` `kit_doctrine.overrides` |
+| Gear affinity rulings | replace a derived item-to-seat affinity | `pipeline/roles.yaml` `gear_affinity_overrides` |
+| **Need profiles** | fine-seat bands + function coverage the forge must field (engage 2-3 / stopper 1-2 default, terry stopper-heavy; pierce & heal-cut always) | `pipeline/roles.yaml` `need_profiles` |
+| Style role bands | healers/frontline/ranged-core per style & size (clap/clap_kite ranged core 7 at 20) | `pipeline/templates/styles.yaml` `constraint_overrides` |
+
+Same safety promise as this file: the build fails loudly on an unknown
+weapon, item, role or content id — a stale ruling never silently
+no-ops. The grading board (`out/roles_report.json`) audits every mined
+pool and override; `out/roster_mixes.json` holds the killboard roster
+evidence the profiles were ruled against. Like every generation
+constraint: these shape what the forge PRODUCES, never what a manual
+party may score.
 
 ## 9. Guild-approved builds
 

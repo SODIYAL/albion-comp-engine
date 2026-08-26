@@ -23,4 +23,8 @@ The scoring core of Comp Forge, in two parity-locked ports:
 
 Score semantics live in `MASTERSHEET.md` (the expert control surface — its
 `tune:` blocks override the underlying config at build time) and the design
-doc. Regression truth lives in `tests/test_golden.py` and `tests/test_forge.py`.
+doc. Forge STRUCTURE (role bands, need profiles, style bands) is owner-ruled
+data in `pipeline/roles.yaml` + `pipeline/templates/` — shipped inside the
+dataset, generation-only, never a bar to scoring a manual party. Regression
+truth lives in `tests/test_golden.py`, `tests/test_forge.py` and
+`tests/test_roles.py`.
