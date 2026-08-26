@@ -309,6 +309,39 @@ def spell_escalation(sid, registry, max_depth=10):
         walk(node, 0)
     return escal
 
+def spell_channel(sid, registry, max_depth=10):
+    """True when the spell's payload is delivered through a channel — a
+    `channelingspell` node anywhere in the spell tree (Rain of Arrows,
+    Hundred Striking Fists; Gravitas hides its channel in a sub-spell, so
+    the walk follows references like the escalation walk does). None =
+    no channel node found. Structural fact, read by the style-fit
+    conditional-payload rule (owner 2026-08-26)."""
+    visited = set()
+
+    def walk(node, depth):
+        if depth > max_depth or not isinstance(node, (dict, list)):
+            return False
+        if isinstance(node, list):
+            return any(walk(item, depth) for item in node)
+        for ref_attr in ("@spell", "@effect"):
+            ref = node.get(ref_attr)
+            if isinstance(ref, str) and ref in registry and ref not in visited:
+                visited.add(ref)
+                if walk(registry[ref], depth + 1):
+                    return True
+        for k, v in node.items():
+            if k == "channelingspell":
+                return True
+            if not k.startswith("@") and walk(v, depth + 1):
+                return True
+        return False
+
+    node = registry.get(sid)
+    if node is None:
+        return None
+    visited.add(sid)
+    return True if walk(node, 0) else None
+
 def en(tuv_list):
     for v in (tuv_list if isinstance(tuv_list, list) else [tuv_list]):
         if v.get("@xml:lang") == "EN-US":
@@ -512,6 +545,9 @@ def main(dump_dir, source_commit):
             # per-spell AoE Escalation factors from the dumps (Q9): absent =
             # the game gives this spell no escalation bonus
             "escalation": geom.get("escalation"),
+            # channel-delivered payload (structural: a channelingspell node
+            # anywhere in the spell tree). None = no channel found.
+            "channel": spell_channel(sid, full_registry),
             # 700, not 400: the ability-detail view (2026-08-19) shows the
             # full resolved text — 400 cut 49 spells mid-fact (ramp tables,
             # multi-component Es)

@@ -23,7 +23,7 @@ AND the evidence lint passes.
 
 Usage:  python3 build_dataset.py [--version 2026.08.1]
 """
-import json, os, glob, argparse, subprocess, sys
+import json, os, glob, argparse, re, subprocess, sys
 
 try:
     import yaml
@@ -449,6 +449,32 @@ E_GROUP_UTILITY_CAPS = UTILITY_EXEMPT_CAPS + ("interrupt",)
 # (Shadowcaller stays a real small-gang pick).
 E_DEBUFF_CAPS = ("purge", "resist_shred", "heal_reduction",
                  "max_health_cut", "damage_debuff")
+# Conditional-payload rule (owner rulings 2026-08-26, the melee-heavy clap
+# radar round): clap wants "naturally high damage that can be delivered
+# almost instantly" — damage that lands from ONE action. A GROUP damage
+# carrier whose every damage E is CONDITIONAL leaves clap/clap_kite
+# generation at gang/group (fits -> situational; manual picks always score):
+#   - ramp-dependent: the E consumes charges/stacks other spells must build
+#     first (Clarent "Consumes Heroic Charges" — "stacking q might not be so
+#     easy in a clap comp or if defending terry where enemy is over the
+#     wall"). Detected in the E's resolved dump description — the charge
+#     spend hides in a generic removeactivespell node, so no structural
+#     marker exists.
+#   - channel-delivered from a non-ranged weapon: the payload ticks over a
+#     held channel the body must stand through (Ursine Maulers' Hundred
+#     Striking Fists — structural `channel` fact from parse_dumps). RANGED
+#     channels stay: "Longbow is nice clap over wall because the dps it
+#     does"; Energy Shaper "is good damage" (26-range beam).
+# Support/utility/tank seats are untouched by construction — the rule reads
+# only group-scale DAMAGE carriers, so Earthrune ("very meta clump tank
+# weapon"), Malevolent Locus ("good support weapon") and Enigmatic/
+# Lifecurse/Blight ("all fine supportive weapons") never enter it
+# (damage_scale none). Brawl keeps the demoted weapons ("clarent and
+# ursine are both nice melee brawl weapons"); kite untouched pending a
+# ruling. style_overrides.yaml still wins.
+E_RAMP_RX = re.compile(
+    r"consum\w+[^.]{0,50}?(?:charge|stack)|requires?[^.]{0,30}(?:charge|stack)",
+    re.I)
 
 
 def load_style_overrides():
@@ -613,6 +639,28 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                 if fit[s]["group"] == "fits":
                     fit[s]["group"] = "situational"
 
+        # Conditional-payload rule (owner 2026-08-26, E_RAMP_RX block above):
+        # every damage-bearing E needs ramp or a held non-ranged channel ->
+        # not an instant bomb -> out of clap/clap_kite generation at
+        # gang/group. Only ever downgrades "fits"; overrides below still win.
+        e_ramp = e_channel_nonranged = False
+        e_conditional = bool(e_spells)
+        for sid in e_spells:
+            facts = spell_index.get(sid) or {}
+            ramp = bool(E_RAMP_RX.search(facts.get("description") or ""))
+            chan = bool(facts.get("channel")) and delivery != "ranged"
+            e_ramp = e_ramp or ramp
+            e_channel_nonranged = e_channel_nonranged or chan
+            if not (ramp or chan):
+                e_conditional = False
+        conditional_payload = (carrier and scale == "group"
+                               and not weak_group_e and e_conditional)
+        if conditional_payload:
+            for s in ("clap", "clap_kite"):
+                for b in ("gang", "group"):
+                    if fit[s][b] == "fits":
+                        fit[s][b] = "situational"
+
         basis = "derived"
         ov = overrides.get(key)
         override_rec = None
@@ -653,6 +701,9 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                "e_damage_pts": e_dmg_pts, "e_utility_max": e_util_max,
                "weak_group_e": weak_group_e,
                "e_debuff_max": e_debuff_max, "nonstack_member": nonstack,
+               "e_ramp": e_ramp,
+               "e_channel_nonranged": e_channel_nonranged,
+               "conditional_payload": conditional_payload,
                "fit": fit, "basis": basis}
         if override_rec:
             rec["override"] = override_rec

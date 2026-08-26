@@ -58,7 +58,7 @@
   "spell_index.json": {
    "adapter": "parse_dumps",
    "adapter_version": "4",
-   "sha256": "65e34fa64cac5410c91e68ab3c2295baf8b62ed5d07c857761cc50c9b7618b17",
+   "sha256": "f7ad7c47e49ab3b10673bb3428557f65987efd38ab7d98e1e1b8cae2aed4af90",
    "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
    "source_files": [
     "formatted/items.json",

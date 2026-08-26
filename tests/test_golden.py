@@ -920,6 +920,31 @@ def run():
           f"trident@20={trident in set(e20.suggest_pool())} "
           f"trident@7={trident in set(e7bz.suggest_pool())}")
 
+    # T32 — conditional-payload rule (owner rulings 2026-08-26, the
+    # melee-heavy clap radar round): clap wants damage delivered in ONE
+    # action. Damage carriers whose E needs ramp (Clarent/Carving consume
+    # Heroic Charges) or a held non-ranged channel (Ursine) leave clap
+    # generation at 20; RANGED channels stay ("Longbow is nice clap over
+    # wall", Energy Shaper "is good damage"), and support/tank seats are
+    # untouched (Earthrune "very meta clump tank", Malevolent Locus "good
+    # support weapon", Lifecurse/Blight/Enigmatic "fine supportive
+    # weapons" — all damage_scale none). Brawl keeps the demoted melee
+    # weapons ("clarent and ursine are both nice melee brawl weapons").
+    clarent, ursine, carving = ("MAIN_SCIMITAR_MORGANA", "2H_KNUCKLES_KEEPER",
+                                "2H_CLEAVER_HELL")
+    c_pool, b_pool = set(e_c20.suggest_pool()), set(e_b20.suggest_pool())
+    check("T32 conditional-payload: ramp/melee-channel damage Es leave clap-20 "
+          "generation; ranged channels and support seats stay; brawl keeps them",
+          clarent not in c_pool and ursine not in c_pool
+          and carving not in c_pool
+          and "2H_LONGBOW" in c_pool
+          and clarent in b_pool and ursine in b_pool and carving in b_pool
+          and E.weapons[clarent]["style_fit"]["fit"]["clap"]["group"] == "situational"
+          and E.weapons["2H_LONGBOW"]["style_fit"]["fit"]["clap"]["group"] == "fits",
+          f"clap20 clarent={clarent in c_pool} ursine={ursine in c_pool} "
+          f"carving={carving in c_pool} longbow={'2H_LONGBOW' in c_pool}; "
+          f"brawl20 keeps: {clarent in b_pool}/{ursine in b_pool}/{carving in b_pool}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

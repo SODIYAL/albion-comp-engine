@@ -21,7 +21,7 @@
     "gear_spells.json": "ff7e2302a8a87fbbcd1fa5edf83dbbd6c8071f3b4e87f1ade178513116682dd1",
     "interactions.json": "7b16f1923bbbb3c76e5db5f1a8844699d4f25b91a580177a1012a09d60ec526e",
     "item_stats.json": "544d293670e4f3adc6daa83e940af115186902b216add0f8fddb9880c882712a",
-    "spell_index.json": "65e34fa64cac5410c91e68ab3c2295baf8b62ed5d07c857761cc50c9b7618b17",
+    "spell_index.json": "f7ad7c47e49ab3b10673bb3428557f65987efd38ab7d98e1e1b8cae2aed4af90",
     "weapon_lines.json": "7487230bd2a923f0881daab390d7e924ce7137236b9f73a496e3609b641ac5e1"
    },
    "problems": [],
@@ -41888,13 +41888,13 @@
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "kite": {
@@ -48057,13 +48057,13 @@
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "kite": {
@@ -52161,13 +52161,13 @@
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "kite": {
@@ -64174,13 +64174,13 @@
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "kite": {
