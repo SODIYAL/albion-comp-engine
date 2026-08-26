@@ -945,6 +945,29 @@ def run():
           f"carving={carving in c_pool} longbow={'2H_LONGBOW' in c_pool}; "
           f"brawl20 keeps: {clarent in b_pool}/{ursine in b_pool}/{carving in b_pool}")
 
+    # T33 — kite extension (owner "ok" 2026-08-26, same session): the
+    # melee-heavy kite forge read "split identity" at 65% melee; the one
+    # real kite 20-man (ss_kite_20) fields zero ramp/channel bruisers and
+    # counts 5 ranged-AoE-core qualifiers. Conditional-payload now demotes
+    # at kite too, and kite carries ranged_aoe_core min 5 at 20 (4 at
+    # 15-19) — lower than clap's 7 because kite pressure includes curse/
+    # sustained ranged damage the burst-AoE predicate does not count.
+    e_k20 = Engine(content="blackzone_roam", size=20, style="kite")
+    k_pool = set(e_k20.suggest_pool())
+    k_rows = ((E.data["styles"].get("kite") or {}).get("constraint_overrides")
+              or [])
+    k20 = next((r for r in k_rows if r.get("min_size") == 20), {})
+    check("T33 kite: conditional-payload demotes there too; ranged-AoE core "
+          "min 5 armed at 20",
+          clarent not in k_pool and ursine not in k_pool
+          and carving not in k_pool
+          and "2H_LONGBOW" in k_pool
+          and E.weapons[ursine]["style_fit"]["fit"]["kite"]["group"] == "situational"
+          and (k20.get("ranged_aoe_core") or {}).get("min") == 5,
+          f"kite20 clarent={clarent in k_pool} ursine={ursine in k_pool} "
+          f"carving={carving in k_pool} longbow={'2H_LONGBOW' in k_pool} "
+          f"core_min={(k20.get('ranged_aoe_core') or {}).get('min')}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

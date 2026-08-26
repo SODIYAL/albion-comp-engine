@@ -470,8 +470,12 @@ E_DEBUFF_CAPS = ("purge", "resist_shred", "heal_reduction",
 # weapon"), Malevolent Locus ("good support weapon") and Enigmatic/
 # Lifecurse/Blight ("all fine supportive weapons") never enter it
 # (damage_scale none). Brawl keeps the demoted weapons ("clarent and
-# ursine are both nice melee brawl weapons"); kite untouched pending a
-# ruling. style_overrides.yaml still wins.
+# ursine are both nice melee brawl weapons"). Extended to KITE 2026-08-26
+# (same session, the kite-forge round): the melee-heavy kite forge read
+# "split identity" at 65% melee, and the one real kite 20-man (ss_kite_20)
+# fields ZERO ramp/channel bruisers — "never take the fight" is even less
+# compatible with stack-then-dive than clap is. style_overrides.yaml
+# still wins.
 E_RAMP_RX = re.compile(
     r"consum\w+[^.]{0,50}?(?:charge|stack)|requires?[^.]{0,30}(?:charge|stack)",
     re.I)
@@ -656,7 +660,7 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
         conditional_payload = (carrier and scale == "group"
                                and not weak_group_e and e_conditional)
         if conditional_payload:
-            for s in ("clap", "clap_kite"):
+            for s in ("clap", "kite", "clap_kite"):
                 for b in ("gang", "group"):
                     if fit[s][b] == "fits":
                         fit[s][b] = "situational"

@@ -37942,7 +37942,10 @@
       "min": 2
      },
      "max_size": 19,
-     "min_size": 15
+     "min_size": 15,
+     "ranged_aoe_core": {
+      "min": 4
+     }
     },
     {
      "frontline": {
@@ -37954,7 +37957,10 @@
       "min": 2
      },
      "max_size": 29,
-     "min_size": 20
+     "min_size": 20,
+     "ranged_aoe_core": {
+      "min": 5
+     }
     }
    ],
    "mechanics": {
@@ -41898,8 +41904,8 @@
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      }
     },
@@ -48067,8 +48073,8 @@
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      }
     },
@@ -52171,8 +52177,8 @@
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      }
     },
@@ -64184,8 +64190,8 @@
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      }
     },

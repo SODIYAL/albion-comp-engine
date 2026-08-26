@@ -744,8 +744,8 @@
      "trio": "fits"
     },
     "kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "situational",
      "trio": "fits"
     }
    },
@@ -2349,8 +2349,8 @@
      "trio": "fits"
     },
     "kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "situational",
      "trio": "fits"
     }
    },
@@ -3373,8 +3373,8 @@
      "trio": "fits"
     },
     "kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "situational",
      "trio": "fits"
     }
    },
@@ -6439,8 +6439,8 @@
      "trio": "fits"
     },
     "kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "situational",
      "trio": "fits"
     }
    },

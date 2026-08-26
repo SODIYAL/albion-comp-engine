@@ -170,12 +170,18 @@ styles:
     # kiting so don't need as many healers usually and would rather get
     # teammates that facilitate movement like occult staff or bedrock for
     # safety"). Frontline tightenings + 10-19 healer rows are PROVISIONAL
-    # interpolation in the same spirit.
+    # interpolation in the same spirit. ranged_aoe_core 5 at 20 owner-ruled
+    # 2026-08-26 (the kite-forge round: the melee-heavy kite forge read
+    # "split identity" at 65% melee; the one real kite 20-man, ss_kite_20,
+    # counts 5 predicate qualifiers — LOWER than clap's 7 because kite
+    # pressure legitimately includes curse/sustained ranged damage the
+    # burst-AoE predicate does not count). 15-19 is the scaled
+    # interpolation (5 * 15/20, half-up).
     constraint_overrides:
       - {min_size: 5,  max_size: 9,  healer: {min: 1, max: 1}}
       - {min_size: 10, max_size: 14, healer: {min: 1, max: 2}, frontline: {min: 1, max: 3}}
-      - {min_size: 15, max_size: 19, healer: {min: 2, max: 2}, frontline: {min: 2, max: 4}}
-      - {min_size: 20, max_size: 29, healer: {min: 2, max: 2}, frontline: {min: 2, max: 5}}
+      - {min_size: 15, max_size: 19, healer: {min: 2, max: 2}, frontline: {min: 2, max: 4}, ranged_aoe_core: {min: 4}}
+      - {min_size: 20, max_size: 29, healer: {min: 2, max: 2}, frontline: {min: 2, max: 5}, ranged_aoe_core: {min: 5}}
     # owner's kite sequence: space -> slow -> peel -> ranged pressure -> reset
     chain:
       - {name: Space, caps: [mobility, disengage]}
