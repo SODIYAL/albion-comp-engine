@@ -95,7 +95,7 @@ CONF_W = {"high": 1.0, "medium": 0.6, "low": 0.3}
 
 
 def generate(args):
-    e = Engine(size=args.size)
+    e = Engine(content=args.content, size=args.size, style=args.style)
     pool = sorted(e.weapons)
     rng = random.Random(args.seed)
 
@@ -124,6 +124,8 @@ def generate(args):
         "not shown. Use weapons' common names (e.g. `Heavy Mace`, `Hallowfall`).",
         "",
         f"Generated with seed {args.seed} — every expert must receive this same file.",
+        "",
+        f"- FORM_CONTEXT: {args.content} {args.size} {args.style} {args.seed}",
         "",
     ]
     for i, p in enumerate(parties, 1):
@@ -307,9 +309,19 @@ MODE_NAMES = {"w": "V3-W weapon-only (symmetric naked benchmark)",
 
 
 def score(args):
-    e = Engine(size=args.size)
     with open(args.form, encoding="utf-8") as f:
         text = f.read()
+    # A form generated since 2026-08-27 carries its own context — scoring
+    # under the wrong content/size/style silently invalidates a round.
+    m = re.search(r"^-[ \t]*FORM_CONTEXT:[ \t]*(\S+)[ \t]+(\d+)[ \t]+(\S+)",
+                  text, re.MULTILINE)
+    if m:
+        content, size, style = m.group(1), int(m.group(2)), m.group(3)
+        if args.size != 7 and args.size != size:
+            print(f"note: form declares size {size}; overriding --size")
+        e = Engine(content=content, size=size, style=style)
+    else:
+        e = Engine(size=args.size)
     cases = _parse_cases(text)
     if not cases:
         sys.exit("no cases found — is this a filled form from `generate`?")
@@ -558,6 +570,8 @@ if __name__ == "__main__":
     g.add_argument("--n", type=int, default=12)
     g.add_argument("--size", type=int, default=7)
     g.add_argument("--seed", type=int, default=20260812)
+    g.add_argument("--content", default="castle_outpost")
+    g.add_argument("--style", default="balanced")
     g.add_argument("--out", default="tier2_form.md")
 
     s = sub.add_parser("score"); s.set_defaults(fn=score)

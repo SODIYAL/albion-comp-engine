@@ -70,6 +70,15 @@ weights:
 #      teammate amplified); two members each covering one half pay in full.
 #      PROVISIONAL formulation — the subtraction (rather than a hard
 #      two-member gate) keeps partial credit for mixed parties.
+#   3. These pairs are WEAPON-INTERACTION SYNERGY (owner ruling
+#      2026-08-27, Model 2): synergy() prices WEAPON+loadout supply only.
+#      Worn-gear capabilities count in fitness, never in these bonuses —
+#      measured, gear participation under the J rule above would move
+#      real comps NEGATIVELY (docs/superpowers/findings/
+#      2026-08-27-gear-synergy-finding.md). Do not read this block as
+#      generic source-independent capability synergy; a Model-1 revisit
+#      requires redesigning J for dressed vectors plus calibration
+#      evidence (the Phase-9 discrimination cases).
 capability_synergies:
   - {a: clump_create,   b: burst_aoe,      bonus: 1.5}
   - {a: engage,         b: catch,          bonus: 0.8}

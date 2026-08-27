@@ -128,15 +128,21 @@ function swapReviewCached(){
 }
 
 /* fitness + effective supply for the CURRENT party, computed once per state
-   (renderers used to re-derive them 3-4x per render pass) */
-let calcCache = { key: null, fit: 0, sup: null };
+   (renderers used to re-derive them 3-4x per render pass). supFloor is the
+   WEAPON+LOADOUT supply — the basis Option C hard floors read (owner ruling
+   2026-08-27): floor tags must quote it or display would disagree with
+   scoring. */
+let calcCache = { key: null, fit: 0, sup: null, supFloor: null };
 function partyCalc(){
   const key = `${CONTENT}|${SIZE}|${STYLE}|${party.join(",")}|${comboSig()}|${gearSig()}`;
   if (calcCache.key !== key)
     calcCache = { key, fit: ENG.fitness(party, COMBOS_CUR, GEARS_CUR),
-                  sup: ENG.effectiveSupply(party, COMBOS_CUR, GEARS_CUR) };
+                  sup: ENG.effectiveSupply(party, COMBOS_CUR, GEARS_CUR),
+                  supFloor: ENG.effectiveSupply(party, COMBOS_CUR) };
   return calcCache;
 }
+/* ad-hoc parties are naked, so their dressed and floor supplies coincide */
+const supplyFloor = p => p === party ? partyCalc().supFloor : ENG.effectiveSupply(p);
 
 const capsOf = w => WEAPONS[w].capabilities || {};
 /* one home for the role-hint default and the below-floor predicate — the
@@ -385,7 +391,9 @@ function whySentence(party, cand){
   const strong = Object.keys(REQS()).filter(c => (s[c]||0)/target(c) >= 0.85)
     .sort((a,b) => REQS()[b].weight - REQS()[a].weight).slice(0,2).map(prose);
   const lead = terms[0], rest = terms.slice(1,3).map(t => prose(t.cap));
-  const floorClause = (lead && floorHit(lead.cap, s[lead.cap] || 0))
+  /* Option C: floor state reads the weapon+loadout supply, never gear */
+  const sfl = supplyFloor(party);
+  const floorClause = (lead && floorHit(lead.cap, sfl[lead.cap] || 0))
     ? ` — and at size ${SIZE} that is below the hard floor, not merely suboptimal` : "";
   /* +…toFixed(1): kit-effectiveness scaling makes supply fractional —
      without rounding this printed "at 7.730833333333333 of 7.9 units" */
@@ -1023,6 +1031,10 @@ function renderFitness(){
 }
 function renderGroups(){
   const s = supply(party);
+  /* Option C: the bars keep quoting the DRESSED supply (coverage), but
+     the below-floor predicate reads the weapon+loadout basis the engine's
+     structural floors use */
+  const sfl = supplyFloor(party);
   /* any requirement cap missing from the hardcoded GROUPS map lands in an
      "Other" group instead of silently vanishing from the board — the
      taxonomy grows (anti_zone, damage_debuff, self_sustain all post-date
@@ -1033,7 +1045,7 @@ function renderGroups(){
   $("groups").innerHTML = Object.entries(groups).map(([g, caps]) => {
     const rows = caps.filter(c => REQS()[c]).map(c => {
       const have = s[c] || 0, t = target(c), soft = softCap(c);
-      const below = floorHit(c, have);
+      const below = floorHit(c, sfl[c] || 0);
       const over = have > soft;
       const cls = over ? "over" : have === 0 ? "none" : have >= t ? "met" : "part";
       /* styles multiply a capability's WEIGHT, never its target — surface
@@ -1055,12 +1067,13 @@ function renderGroups(){
 }
 function renderWeaknesses(){
   const s = supply(party);
+  const sfl = supplyFloor(party);   /* Option C floor basis */
   /* Split the gap list: floors and heavy under-supplied capabilities are
      NEEDED; the rest are nice-to-haves. */
   const needed = [], nice = [];
   for (const x of weaknesses(party, 8)){
     if (x.gap < 0.5) continue;
-    const below = floorHit(x.cap, s[x.cap] || 0);
+    const below = floorHit(x.cap, sfl[x.cap] || 0);
     const ratio = (s[x.cap]||0) / target(x.cap);
     // styled weight (ENG.weight), same scale as the engine's own
     // uncovered-caps test — raw template weight silently disagreed with the

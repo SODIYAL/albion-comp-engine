@@ -1,6 +1,28 @@
 # Finding: ordinary worn armor satisfies the structural frontline requirement
 
-**Date:** 2026-08-27 · **Status:** MEASURED, awaiting owner ruling · **Owner ruling required before any implementation.**
+**Date:** 2026-08-27 · **Status: RULED AND IMPLEMENTED — Option C approved by the owner (same day) and shipped in both ports.**
+
+> **Implementation record (Ruling 1):** structural hard floors now read the
+> WEAPON+LOADOUT supply in `fitness`, every marginal path
+> (`_combo_score` / `_combo_score_dressed` / `_marg_fit_from` /
+> `_marg_fit_pre`), `pick_report`'s floor_lift rows and `explain` — in both
+> engine ports, parity 60/60 at 1e-9; the dashboard's floor tags read the
+> same basis (`supplyFloor`). Gear keeps counting toward coverage, headroom
+> and overstack. Contracts: `tests/test_validation_modes.py` V5a–V5f
+> (adversarial no-frontline party pays the full penalty dressed; one real
+> tank repairs it; all-plate never clears it; pick score == dressed
+> comp_score delta). Floor magnitudes untouched per the ruling. Measured
+> after: adversarial cases A/C keep penalty 9.0 dressed (old rule: 0.0);
+> V4 actual-gear role-level 41% → 47% (two Deadlyhooker tank drops
+> recovered); the REMAINING dressed-V4 shortfall vs the 78% naked metric
+> is the soft-cap/target saturation question (§3 rider 1) — a calibration
+> item for the expert rounds, not a floor issue. Implementation exposed a
+> pre-existing forge pruning blind spot (a pick could exhaust the healer
+> band while primary_heal was unmet, beam dying at 6/7) — fixed
+> structurally with per-predicate capacity gates in `_forge_feasible`,
+> both ports.
+
+The original finding follows, unchanged, as the decision record.
 
 Evidence artifacts: `pipeline/out/frontline_floor_audit.json` (adversarial cases), `pipeline/out/dressed_template_audit.json` (real-comp saturation), `pipeline/out/validation_asymmetry_probe.json` (V4 role-demand collapse). All report-only; nothing was tuned.
 

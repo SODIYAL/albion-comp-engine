@@ -31,9 +31,13 @@ const out = cases.map((c, i) => {
   let forged = null;
   if (i % FORGE_EVERY === 0) {
     // mirrors forge_case in test_js_parity.py incl. the empty-locked-combos
-    // alternation (the [] truthiness divergence shipped once)
-    const combos = Math.floor(i / FORGE_EVERY) % 2 === 0 ? c.combos.slice(0, 2) : [];
-    const r = e.forge(FORGE_SIZE, c.party.slice(0, 2), combos, c.refine_pool);
+    // alternation (the [] truthiness divergence shipped once) and the
+    // locked_gears alternation (2026-08-27)
+    const even = Math.floor(i / FORGE_EVERY) % 2 === 0;
+    const combos = even ? c.combos.slice(0, 2) : [];
+    const lgears = even ? c.gears.slice(0, 2) : null;
+    const r = e.forge(FORGE_SIZE, c.party.slice(0, 2), combos, c.refine_pool,
+                      undefined, lgears);
     forged = { party: r.party, combos: r.combos, gears: r.gears,
                score: r.score,
                feasible: r.feasible, filler: r.filler, held: r.held };
@@ -47,6 +51,10 @@ const out = cases.map((c, i) => {
   return {
     recommend_naked_cand: nakedRec,
     refine: rp === null ? null : e.refine(rp, REFINE_PASSES, c.refine_pool),
+    // gear-aware refine (owner ruling 2026-08-27; mirrors test_js_parity.py)
+    refine_dressed: rp === null ? null
+      : e.refine(rp, REFINE_PASSES, c.refine_pool, 0,
+                 c.gears.slice(0, rp.length)),
     comp_score: e.compScore(c.party),
     comp_score_locked: e.compScore(c.party, c.combos),
     redundancy: e.redundancy(c.party),

@@ -1312,26 +1312,45 @@
     return this.headroom * this.weight(cap) * extra / span;
   };
 
-  CompEngine.prototype._coverTerms = function (cap, have, gain, target) {
+  CompEngine.prototype._coverTerms = function (cap, have, gain, target,
+                                               haveFloor, gainFloor) {
     /* [coverage delta (incl. headroom), floor-lift delta] — two terms so
-       callers accumulate in their original order (mirrors engine.py). */
+       callers accumulate in their original order (mirrors engine.py).
+       Option C (owner ruling 2026-08-27): STRUCTURAL hard floors read the
+       weapon+loadout basis — dressed callers pass haveFloor/gainFloor so
+       worn gear never buys floor relief; defaults keep the naked path
+       bit-identical. */
     var soft = this.softCap(cap);
     var cov = this.weight(cap) * (Math.pow(Math.min(1.0, (have + gain) / target), this.gamma)
                                   - Math.pow(Math.min(1.0, have / target), this.gamma));
     cov += (this._headroomBonus(cap, have + gain, target, soft)
             - this._headroomBonus(cap, have, target, soft));
-    return [cov, this._floorPenalty(cap, have) - this._floorPenalty(cap, have + gain)];
+    var hf = (haveFloor === undefined || haveFloor === null) ? have : haveFloor;
+    var gf = (gainFloor === undefined || gainFloor === null) ? gain : gainFloor;
+    return [cov, this._floorPenalty(cap, hf) - this._floorPenalty(cap, hf + gf)];
   };
 
   /* ---------------------------------------------------------------- fitness */
   CompEngine.prototype.fitness = function (party, combos, gears) {
-    var s = this.effectiveSupply(party, combos, gears), total = 0.0;
+    var s = this.effectiveSupply(party, combos, gears);
+    /* Option C (owner ruling 2026-08-27): STRUCTURAL hard floors read the
+       weapon+loadout supply — worn gear improves coverage/headroom/
+       overstack but can never satisfy a structural floor (mirrors
+       engine.py fitness). Naked parties keep the single-supply path. */
+    var anyGear = false;
+    if (gears) {
+      for (var gi = 0; gi < gears.length; gi++) {
+        if (gears[gi] && gears[gi].length) { anyGear = true; break; }
+      }
+    }
+    var sf = anyGear ? this.effectiveSupply(party, combos) : s;
+    var total = 0.0;
     for (var cap in this.reqs) {
       var have = s[cap] || 0.0, target = this.target(cap), soft = this.softCap(cap);
       total += this.weight(cap) * Math.pow(Math.min(1.0, have / target), this.gamma);
       total += this._headroomBonus(cap, have, target, soft);
       total -= this._overstack(cap, have, target, soft);
-      total -= this._floorPenalty(cap, have);
+      total -= this._floorPenalty(cap, sf === s ? have : (sf[cap] || 0.0));
     }
     return total;
   };
@@ -1479,17 +1498,36 @@
              nsMax: nsMax };
   };
 
-  CompEngine.prototype._margFitFrom = function (s, extra) {
+  CompEngine.prototype._margFitFrom = function (s, extra, sFloor, extraFloor) {
+    /* Option C: dressed callers pass sFloor (the weapon+loadout party
+       supply) and extraFloor (the candidate's weapon-only adjusted caps)
+       so floor terms never see gear (mirrors engine.py _marg_fit_from);
+       defaults = legacy naked path, bit-identical. */
     var total = 0.0;
-    for (var cap in extra) {
-      var gain = extra[cap];
-      if (!(cap in this.reqs) || !gain) continue;
-      var have = s[cap] || 0.0, target = this.target(cap), soft = this.softCap(cap);
-      var ct = this._coverTerms(cap, have, gain, target);
-      total += ct[0];
-      total += ct[1];
-      total -= (this._overstack(cap, have + gain, target, soft)
-                - this._overstack(cap, have, target, soft));
+    if (sFloor === undefined || sFloor === null) {
+      for (var cap in extra) {
+        var gain = extra[cap];
+        if (!(cap in this.reqs) || !gain) continue;
+        var have = s[cap] || 0.0, target = this.target(cap), soft = this.softCap(cap);
+        var ct = this._coverTerms(cap, have, gain, target);
+        total += ct[0];
+        total += ct[1];
+        total -= (this._overstack(cap, have + gain, target, soft)
+                  - this._overstack(cap, have, target, soft));
+      }
+      return total;
+    }
+    var ef = extraFloor || {};
+    for (var cap2 in extra) {
+      var gain2 = extra[cap2];
+      if (!(cap2 in this.reqs) || !gain2) continue;
+      var have2 = s[cap2] || 0.0, target2 = this.target(cap2), soft2 = this.softCap(cap2);
+      var ct2 = this._coverTerms(cap2, have2, gain2, target2,
+                                 sFloor[cap2] || 0.0, ef[cap2] || 0.0);
+      total += ct2[0];
+      total += ct2[1];
+      total -= (this._overstack(cap2, have2 + gain2, target2, soft2)
+                - this._overstack(cap2, have2, target2, soft2));
     }
     return total;
   };
@@ -1539,9 +1577,13 @@
 
   CompEngine.prototype._comboScore = function (state, weapon, i, extra) {
     /* One combo's value against a party state (mirrors engine.py
-       _combo_score) — identical float-op order to the original loop. */
+       _combo_score) — identical float-op order to the original loop.
+       Option C: on a DRESSED party the floor terms read sSyn + the
+       candidate's own (naked) caps. */
     var adj = this._nonstackAdjust(state, weapon, i, extra);
-    var dFit = this._margFitFrom(state.s, adj);
+    var dFit = (state.s !== state.sSyn)
+      ? this._margFitFrom(state.s, adj, state.sSyn, adj)
+      : this._margFitFrom(state.s, adj);
     var dSyn = this._margSynFrom(state, adj, extra);
     return { val: this.alpha * dFit + this.beta * dSyn, dFit: dFit, dSyn: dSyn };
   };
@@ -1651,8 +1693,13 @@
        decomposition of compScore-with-gears (mirrors engine.py
        _combo_score_dressed). Same object -> exactly _comboScore. */
     if (dextra === wextra) return this._comboScore(state, weapon, i, wextra);
+    /* Option C: a DRESSED candidate's floor terms read the weapon-only
+       basis on BOTH sides — sSyn for the party and the candidate's
+       weapon-only adjusted gains — so its kit can never buy floor relief
+       the party's kits are denied (mirrors engine.py). */
     var adj = this._nonstackAdjust(state, weapon, i, dextra);
-    var dFit = this._margFitFrom(state.s, adj);
+    var adjW = this._nonstackAdjust(state, weapon, i, wextra);
+    var dFit = this._margFitFrom(state.s, adj, state.sSyn, adjW);
     var dSyn = this._margSynFrom(state, wextra);
     return { val: this.alpha * dFit + this.beta * dSyn,
              dFit: dFit, dSyn: dSyn };
@@ -1786,7 +1833,8 @@
       var gain = extra[cap];
       if (!(cap in this.reqs) || !gain) continue;
       var have = s[cap] || 0.0, target = this.target(cap);
-      var ct = this._coverTerms(cap, have, gain, target);
+      var ct = this._coverTerms(cap, have, gain, target,
+                                state.sSyn[cap] || 0.0);
       var d = ct[0] + ct[1];
       if (d > 0.05) {
         terms.push({ delta: Math.round(d * 100) / 100, cap: cap,
@@ -1819,12 +1867,20 @@
       ? this.buildExtra(weapon, combo, vgears)
       : this.memberExtra(weapon, combo);
     var adj = this._nonstackAdjust(state, weapon, combo, extra);
-    var s = state.s, rows = [], capsGain = 0.0;
+    /* Option C floor basis: floor_lift rows read the weapon-only party
+       supply and the candidate's weapon-only adjusted gains, exactly as
+       the marginal scored them (mirrors engine.py _pick_caps). */
+    var adjW = (vgears && vgears.length)
+      ? this._nonstackAdjust(state, weapon, combo,
+                             this.memberExtra(weapon, combo))
+      : adj;
+    var s = state.s, sf = state.sSyn, rows = [], capsGain = 0.0;
     for (var cap in adj) {
       var gain = adj[cap];
       if (!(cap in this.reqs) || !gain) continue;
       var have = s[cap] || 0.0, target = this.target(cap), soft = this.softCap(cap);
-      var ct = this._coverTerms(cap, have, gain, target);
+      var ct = this._coverTerms(cap, have, gain, target,
+                                sf[cap] || 0.0, adjW[cap] || 0.0);
       var cov = ct[0], floorD = ct[1];
       var over = (this._overstack(cap, have + gain, target, soft)
                   - this._overstack(cap, have, target, soft));
@@ -2454,36 +2510,77 @@
   };
 
   /* ------------------------------------------------------------ local search */
-  CompEngine.prototype.refine = function (party, maxPasses, pool, fixed) {
+  CompEngine.prototype.refine = function (party, maxPasses, pool, fixed,
+                                          gears) {
     /* Steepest-descent 1-opt over compScore, UNCONSTRAINED (mirrors
-       engine.py refine; the forge runs its own constraint-aware pass). */
+       engine.py refine; the forge runs its own constraint-aware pass).
+       gears (owner ruling 2026-08-27): with a parallel kit list the
+       search optimizes the SAME dressed compScore used everywhere else
+       — incumbent kits preserved, replacements tried in each doctrine
+       kit variant, result {party, gears}. gears null keeps the legacy
+       weapon-only list return bit-identically. */
     party = party.slice();
     fixed = fixed || 0;
-    if (!party.length) return party;
     var candidates;
     /* empty array falls back to the full pool like Python's `pool or
        self.pool` — [] is truthy in JS (review 2026-08-18) */
     if (pool && pool.length) { candidates = pool.slice(); }
     else { candidates = this.pool.slice(); }
     if (maxPasses === undefined || maxPasses === null) maxPasses = 8;
-    var best = this.compScore(party);
-    for (var pass = 0; pass < maxPasses; pass++) {
-      var moveIdx = -1, moveW = null, gain = 1e-9;   /* strictly-positive */
-      for (var i = fixed; i < party.length; i++) {
-        var orig = party[i];
-        for (var j = 0; j < candidates.length; j++) {
-          if (candidates[j] === orig) continue;
-          party[i] = candidates[j];
-          var d = this.compScore(party) - best;
-          if (d > gain) { moveIdx = i; moveW = candidates[j]; gain = d; }
+    if (gears === undefined || gears === null) {
+      if (!party.length) return party;
+      var best = this.compScore(party);
+      for (var pass = 0; pass < maxPasses; pass++) {
+        var moveIdx = -1, moveW = null, gain = 1e-9; /* strictly-positive */
+        for (var i = fixed; i < party.length; i++) {
+          var orig = party[i];
+          for (var j = 0; j < candidates.length; j++) {
+            if (candidates[j] === orig) continue;
+            party[i] = candidates[j];
+            var d = this.compScore(party) - best;
+            if (d > gain) { moveIdx = i; moveW = candidates[j]; gain = d; }
+          }
+          party[i] = orig;
         }
-        party[i] = orig;
+        if (moveIdx < 0) break;
+        party[moveIdx] = moveW;
+        best += gain;
       }
-      if (moveIdx < 0) break;
-      party[moveIdx] = moveW;
-      best += gain;
+      return party;
     }
-    return party;
+    var gl = [];
+    for (var k = 0; k < party.length; k++) {
+      var g = gears[k];
+      gl.push((g && g.length) ? g.slice() : null);
+    }
+    if (!party.length) return { party: party, gears: gl };
+    var bestD = this.compScore(party, null, gl);
+    for (var passD = 0; passD < maxPasses; passD++) {
+      var mIdx = -1, mW = null, mG = null, gainD = 1e-9;
+      for (var i2 = fixed; i2 < party.length; i2++) {
+        var origW = party[i2], origG = gl[i2];
+        for (var j2 = 0; j2 < candidates.length; j2++) {
+          if (candidates[j2] === origW) continue;
+          party[i2] = candidates[j2];
+          var variants = this.kitVariants(candidates[j2]);
+          for (var vi = 0; vi < variants.length; vi++) {
+            gl[i2] = variants[vi][1];
+            var dD = this.compScore(party, null, gl) - bestD;
+            if (dD > gainD) {
+              mIdx = i2; mW = candidates[j2];
+              mG = variants[vi][1]; gainD = dD;
+            }
+          }
+        }
+        party[i2] = origW;
+        gl[i2] = origG;
+      }
+      if (mIdx < 0) break;
+      party[mIdx] = mW;
+      gl[mIdx] = mG ? mG.slice() : null;
+      bestD += gainD;
+    }
+    return { party: party, gears: gl };
   };
 
   /* ------------------------------------------------------------------ forge */
@@ -2507,8 +2604,29 @@
     var pk, seatMax = {};
     for (pk in this._profileMin) predMin[pk] = this._profileMin[pk];
     for (pk in this._profileMax) seatMax[pk] = this._profileMax[pk];
+    /* Capacity gates per predicate minimum (deadlock guard, 2026-08-27;
+       mirrors engine.py _forge_ctx): the [role, seat] pairs of every pool
+       weapon that could satisfy the predicate — _forgeFeasible refuses a
+       pick that would strand an unmet minimum behind full bands. */
+    var predGates = {};
+    for (var pn2 in predMin) {
+      var gates = [], seen = {};
+      for (var wi = 0; wi < pool.length; wi++) {
+        var w2 = pool[wi];
+        var poss = this._predPossible(w2);
+        var prof = this._profileMembers[w2];
+        if (!poss[pn2] && !(prof && prof[pn2])) continue;
+        var role2 = this.roleOf(w2);
+        var seat2 = this._profilePrimary[w2];
+        var gkey = role2 + "|" + (seat2 === undefined ? "-" : seat2);
+        if (seen[gkey]) continue;
+        seen[gkey] = true;
+        gates.push([role2, seat2]);
+      }
+      predGates[pn2] = gates;
+    }
     return { pool: pool, roleMin: roleMin, roleMax: roleMax,
-             predMin: predMin, seatMax: seatMax };
+             predMin: predMin, seatMax: seatMax, predGates: predGates };
   };
 
   CompEngine.prototype._forgeCounts = function (party, combos) {
@@ -2563,9 +2681,33 @@
     var p0 = this._profilePrimary[w];
     if (p0 !== undefined && ctx.seatMax[p0] !== undefined &&
         (preds[p0] || 0) >= ctx.seatMax[p0]) return false;
-    return this._forgeMinNeed(ctx, roles, preds, w,
-                              this._withProfile(w, this._predPossible(w)))
-           <= slotsLeftAfter;
+    var contrib = this._withProfile(w, this._predPossible(w));
+    if (this._forgeMinNeed(ctx, roles, preds, w, contrib) > slotsLeftAfter)
+      return false;
+    /* Deadlock guard (2026-08-27; mirrors engine.py): after this pick,
+       every UNMET predicate minimum must keep a satisfier whose role band
+       AND fine seat still have capacity — else the pick strands the
+       minimum and the beam dies short. */
+    for (var pn in ctx.predMin) {
+      var have = (preds[pn] || 0) + (contrib[pn] ? 1 : 0);
+      if (have >= ctx.predMin[pn]) continue;
+      var gates = ctx.predGates[pn];
+      if (!gates || !gates.length) continue;
+      var open = false;
+      for (var gi = 0; gi < gates.length; gi++) {
+        var r2 = gates[gi][0], s2 = gates[gi][1];
+        var mx2 = ctx.roleMax[r2];
+        if (mx2 !== undefined &&
+            (roles[r2] || 0) + (r2 === r ? 1 : 0) >= mx2) continue;
+        if (s2 !== undefined && ctx.seatMax[s2] !== undefined &&
+            (preds[s2] || 0) + (s2 === p0 ? 1 : 0) >= ctx.seatMax[s2])
+          continue;
+        open = true;
+        break;
+      }
+      if (!open) return false;
+    }
+    return true;
   };
 
   CompEngine.prototype._forgeEvalPick = function (ctx, beam, w, slotsLeftAfter) {
@@ -2625,7 +2767,8 @@
     return out;
   };
 
-  CompEngine.prototype.forge = function (size, locked, lockedCombos, pool, beamWidth) {
+  CompEngine.prototype.forge = function (size, locked, lockedCombos, pool,
+                                         beamWidth, lockedGears) {
     /* Deterministic constrained beam search over complete rosters + 1-opt
        and bounded 2-opt refinement + filler audit (mirrors engine.py forge
        — see its docstring for the contract; returns {party, combos, score,
@@ -2644,8 +2787,16 @@
     var feasible = true;
 
     var fc = this._forgeCounts(locked, combos);
+    /* lockedGears (owner ruling 2026-08-27): a locked member supplied
+       with explicit gear is scored in EXACTLY that kit and never
+       re-dressed; one without stays naked — the forge never invents gear
+       for a lock (mirrors engine.py; normalized like lockedCombos). */
+    var lg = lockedGears || [];
     var gears0 = [];
-    for (var gi0 = 0; gi0 < locked.length; gi0++) gears0.push(null);
+    for (var gi0 = 0; gi0 < locked.length; gi0++) {
+      var g0 = gi0 < lg.length ? lg[gi0] : null;
+      gears0.push((g0 && g0.length) ? g0.slice() : null);
+    }
     var items0 = [];
     for (var li = 0; li < locked.length; li++)
       items0.push(this._memberTag(locked[li], combos[li]));

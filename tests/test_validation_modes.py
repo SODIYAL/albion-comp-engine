@@ -202,11 +202,96 @@ def t_gear_join():
           "")
 
 
+# ------------------------------------------- V5 Option C structural floors
+# Owner ruling 2026-08-27: STRUCTURAL hard floors read the weapon+loadout
+# supply only — ordinary worn gear improves coverage/headroom/overstack but
+# can never satisfy a structural floor (the 2026-08-12 pseudo-tankiness
+# ruling extended to the gear stat channel).
+CASE_A = ["MAIN_HOLYSTAFF_AVALON", "2H_LONGBOW", "2H_ICECRYSTAL_UNDEAD",
+          "2H_DUALSWORD", "2H_ARCANESTAFF_HELL", "MAIN_ARCANESTAFF",
+          "2H_AXE"]   # 7-man, zero frontline-seat weapons (audit case A)
+
+
+def _fitness_option_c(e, party, gears):
+    """Fitness recomputed from the engine's own primitives with Option C
+    semantics: coverage/headroom/overstack over the DRESSED supply, floor
+    penalties at the WEAPON+LOADOUT supply. The test's independent sum."""
+    s = e.effective_supply(party, None, gears)
+    sf = e.effective_supply(party)
+    want = 0.0
+    for c in e.reqs:
+        have, t, soft = s.get(c, 0.0), e.target(c), e.soft_cap(c)
+        want += e.weight(c) * min(1.0, have / t) ** e.gamma
+        want += e._headroom_bonus(c, have, t, soft)
+        want -= e._overstack(c, have, t, soft)
+        want -= e._floor_penalty(c, sf.get(c, 0.0))
+    return want
+
+
+def t_structural_floors():
+    sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+    import gear_join
+    e = Engine(content="castle_outpost", size=7)
+    cap = "tankiness"
+    doc = gear_join.doctrine_gears(e, CASE_A)
+    naked = e.effective_supply(CASE_A)
+    dressed = e.effective_supply(CASE_A, None, doc)
+    fl = e._floors_eff[cap]
+    check("V5a preconditions: no-frontline party below the floor naked, "
+          "gear-only supply would clear it",
+          naked.get(cap, 0.0) < fl <= dressed.get(cap, 0.0),
+          f"naked={naked.get(cap, 0.0):.2f} floor={fl} "
+          f"dressed={dressed.get(cap, 0.0):.2f}")
+
+    got = e.fitness(CASE_A, None, doc)
+    want = _fitness_option_c(e, CASE_A, doc)
+    check("V5b Option C: dressed fitness == dressed coverage minus "
+          "naked-basis floor penalties (armor never buys floor relief)",
+          abs(got - want) < EPS, f"got={got!r} want={want!r}")
+
+    pen = e._floor_penalty(cap, naked.get(cap, 0.0))
+    check("V5c the no-frontline party still pays the full tankiness floor "
+          "penalty when dressed", pen > 5.0, f"penalty={pen:.2f}")
+
+    # case C: every member in explicit full plate — same rule, harder case
+    plate = (sorted(k for k in e.gear if k.startswith("ARMOR_PLATE_"))[:1]
+             + sorted(k for k in e.gear if k.startswith("HEAD_PLATE_"))[:1]
+             + sorted(k for k in e.gear if k.startswith("SHOES_PLATE_"))[:1])
+    gears_c = [list(plate) for _ in CASE_A]
+    got_c = e.fitness(CASE_A, None, gears_c)
+    want_c = _fitness_option_c(e, CASE_A, gears_c)
+    check("V5d all-plate DPS never clear the structural floor either",
+          abs(got_c - want_c) < EPS
+          and e.floor_armed(cap, e.effective_supply(CASE_A).get(cap, 0.0)),
+          f"got={got_c!r} want={want_c!r}")
+
+    # case B: one genuine frontline weapon materially repairs the floor
+    case_b = CASE_A[:5] + [HEAVY_MACE] + CASE_A[6:]
+    naked_b = e.effective_supply(case_b)
+    check("V5e a genuine frontline weapon clears the structural floor",
+          not e.floor_armed(cap, naked_b.get(cap, 0.0))
+          and e._floor_penalty(cap, naked_b.get(cap, 0.0)) == 0.0,
+          f"naked_b={naked_b.get(cap, 0.0):.2f} floor={fl}")
+
+    # the exact-marginal invariant survives the split: a dressed pick's
+    # score == comp_score-with-gears delta on a DRESSED party (F1's
+    # gears twin, post-Option-C)
+    r = e.recommend(CASE_A, 1, gears=doc)[0]
+    combos = [None] * len(CASE_A) + [r["combo"]]
+    delta = (e.comp_score(CASE_A + [r["weapon"]], combos,
+                          doc + [r["kit"] or None])
+             - e.comp_score(CASE_A, None, doc))
+    check("V5f pick score == dressed comp_score delta at 1e-9 under "
+          "Option C floors", abs(delta - r["score"]) < EPS,
+          f"score={r['score']!r} delta={delta!r} pick={r['weapon']}")
+
+
 if __name__ == "__main__":
     t_dressing_switch()
     t_form_parser()
     t_metrics()
     t_gear_join()
+    t_structural_floors()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} validation-mode tests passed")

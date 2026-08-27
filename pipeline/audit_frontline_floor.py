@@ -105,10 +105,19 @@ def measure(e, label, party, gears, front):
             "floor_armed_at_size": bool(fl) and e.size >= fl.get(
                 "min_party_size", 10 ** 9),
             "naked": round(have_n, 4), "dressed": round(have_d, 4),
+            # Option C (owner ruling 2026-08-27): the ENGINE's structural
+            # floor reads the weapon+loadout supply — this is the penalty
+            # fitness actually applies, dressed or not.
+            "engine_floor_bites_dressed": e.floor_armed(cap, have_n),
+            "engine_floor_penalty_dressed": round(
+                e._floor_penalty(cap, have_n), 4),
+            # pre-Option-C view, kept for the before/after comparison:
+            # what a dressed-supply floor read WOULD say
+            "old_rule_below_floor_dressed": e.floor_armed(cap, have_d),
+            "old_rule_floor_penalty_dressed": round(
+                e._floor_penalty(cap, have_d), 4),
             "below_floor_naked": e.floor_armed(cap, have_n),
-            "below_floor_dressed": e.floor_armed(cap, have_d),
             "floor_penalty_naked": round(e._floor_penalty(cap, have_n), 4),
-            "floor_penalty_dressed": round(e._floor_penalty(cap, have_d), 4),
         },
         "weak_top3_naked": weak_n, "weak_top3_dressed": weak_d,
         "tankiness_in_weak_naked": cap in weak_n,
@@ -160,10 +169,12 @@ def main():
         print(f"  tankiness naked {t['naked']:.2f} -> dressed "
               f"{t['dressed']:.2f}  (target {t['target']}, floor "
               f"{t['floor_units_eff']}, armed={t['floor_armed_at_size']})")
-        print(f"  below floor: naked={t['below_floor_naked']} "
-              f"dressed={t['below_floor_dressed']}   penalty "
-              f"{t['floor_penalty_naked']:.2f} -> "
-              f"{t['floor_penalty_dressed']:.2f}")
+        print(f"  ENGINE floor (Option C, weapon+loadout basis): "
+              f"bites_dressed={t['engine_floor_bites_dressed']} penalty "
+              f"{t['engine_floor_penalty_dressed']:.2f}   [old dressed-"
+              f"supply rule would say: below="
+              f"{t['old_rule_below_floor_dressed']} penalty "
+              f"{t['old_rule_floor_penalty_dressed']:.2f}]")
         print(f"  tankiness in weakness top-3: naked="
               f"{c['tankiness_in_weak_naked']} dressed="
               f"{c['tankiness_in_weak_dressed']}")

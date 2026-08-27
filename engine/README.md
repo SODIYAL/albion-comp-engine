@@ -29,6 +29,15 @@ The scoring core of Comp Forge, in two parity-locked ports:
   `synergy()` deliberately prices weapons only — worn-gear capabilities
   count in fitness, never in the pair bonuses (finding:
   `docs/superpowers/findings/2026-08-27-gear-synergy-finding.md`).
+- **Structural floors are source-aware** (Option C, owner ruling
+  2026-08-27): hard floors read the weapon+loadout supply in `fitness`
+  and every marginal path — worn gear improves coverage/headroom/
+  overstack, never floor relief, on parties AND candidates alike.
+- **Locked gear is sacred** (owner ruling 2026-08-27):
+  `forge(locked_gears=)` scores a locked member in exactly the supplied
+  kit and never re-dresses it (naked when none — nothing is invented);
+  `refine(gears=)` runs the dressed local search and returns
+  `{party, gears}` (gears=None keeps the legacy weapon-only list).
 - **Never** reads UI state, killboard/usage evidence, or reference builds —
   those are display-only layers by standing rule (popularity is not
   effectiveness).

@@ -497,6 +497,7 @@ class Engine:
         self._variant_cache = {}
         self._dressed_cache = {}
         self._dressed_pre_cache = {}
+        self._floor_gain_cache = {}
 
     def set_dressing(self, enabled):
         """Validation affordance (V3-W, 2026-08-27): when OFF, every
@@ -1465,21 +1466,36 @@ class Engine:
             extra = span
         return self.headroom * self.weight(cap) * extra / span
 
-    def _cover_terms(self, cap, have, gain, target):
+    def _cover_terms(self, cap, have, gain, target, have_floor=None,
+                     gain_floor=None):
         """(coverage delta, floor-lift delta) for adding `gain` units. Kept
         as two terms so callers accumulate in their original order — float
         addition is not associative and parity pins the exact sums. Coverage
-        includes the headroom bonus so marginals stay exact."""
+        includes the headroom bonus so marginals stay exact.
+        Option C (owner ruling 2026-08-27): STRUCTURAL hard floors read the
+        weapon+loadout basis — dressed callers pass `have_floor`/`gain_floor`
+        (the naked supply and the candidate's weapon-only gain) so worn gear
+        never buys floor relief; defaults keep the naked path bit-identical."""
         soft = self.soft_cap(cap)
         cov = self.weight(cap) * (min(1.0, (have + gain) / target) ** self.gamma
                                   - min(1.0, have / target) ** self.gamma)
         cov += (self._headroom_bonus(cap, have + gain, target, soft)
                 - self._headroom_bonus(cap, have, target, soft))
-        return cov, self._floor_penalty(cap, have) - self._floor_penalty(cap, have + gain)
+        hf = have if have_floor is None else have_floor
+        gf = gain if gain_floor is None else gain_floor
+        return cov, self._floor_penalty(cap, hf) - self._floor_penalty(cap, hf + gf)
 
     # ---------------------------------------------------------------- fitness
     def fitness(self, party, combos=None, gears=None):
-        s, total = self.effective_supply(party, combos, gears), 0.0
+        s = self.effective_supply(party, combos, gears)
+        # Option C (owner ruling 2026-08-27): STRUCTURAL hard floors read
+        # the weapon+loadout supply — worn gear improves coverage/headroom/
+        # overstack but can never satisfy a structural floor (the
+        # 2026-08-12 pseudo-tankiness ruling extended to the gear stat
+        # channel). Naked parties keep the single-supply fast path.
+        sf = (self.effective_supply(party, combos)
+              if gears and any(gears) else s)
+        total = 0.0
         for cap in self.reqs:
             have, target, soft = s.get(cap, 0.0), self.target(cap), self.soft_cap(cap)
             # style multiplies the VALUE of coverage; over-stack economics and
@@ -1487,7 +1503,8 @@ class Engine:
             total += self.weight(cap) * min(1.0, have / target) ** self.gamma
             total += self._headroom_bonus(cap, have, target, soft)
             total -= self._overstack(cap, have, target, soft)
-            total -= self._floor_penalty(cap, have)
+            total -= self._floor_penalty(cap, have if sf is s
+                                         else sf.get(cap, 0.0))
         return total
 
     def max_fitness(self):
@@ -1636,15 +1653,34 @@ class Engine:
         return {"s": s, "s_syn": s_syn, "J": J, "pair_vals": pair_vals,
                 "counts": counts, "ns_max": ns_max}
 
-    def _marg_fit_from(self, s, extra):
+    def _marg_fit_from(self, s, extra, s_floor=None, extra_floor=None):
         """Marginal fitness of adding effective caps `extra` to effective
-        supply `s` — same coverage/floor/over-stack terms fitness() sums."""
+        supply `s` — same coverage/floor/over-stack terms fitness() sums.
+        Option C: dressed callers pass `s_floor` (the weapon+loadout party
+        supply) and `extra_floor` (the candidate's weapon-only adjusted
+        caps) so floor terms never see gear; the dressed vector holds every
+        weapon cap, so one loop covers both bases. Defaults = legacy naked
+        path, bit-identical."""
         total = 0.0
+        if s_floor is None:
+            for cap, gain in extra.items():
+                if cap not in self.reqs or not gain:
+                    continue
+                have, target, soft = s.get(cap, 0.0), self.target(cap), self.soft_cap(cap)
+                cov, floor_d = self._cover_terms(cap, have, gain, target)
+                total += cov
+                total += floor_d
+                total -= (self._overstack(cap, have + gain, target, soft)
+                          - self._overstack(cap, have, target, soft))
+            return total
+        ef = extra_floor if extra_floor is not None else {}
         for cap, gain in extra.items():
             if cap not in self.reqs or not gain:
                 continue
             have, target, soft = s.get(cap, 0.0), self.target(cap), self.soft_cap(cap)
-            cov, floor_d = self._cover_terms(cap, have, gain, target)
+            cov, floor_d = self._cover_terms(cap, have, gain, target,
+                                             s_floor.get(cap, 0.0),
+                                             ef.get(cap, 0.0))
             total += cov
             total += floor_d
             total -= (self._overstack(cap, have + gain, target, soft)
@@ -1694,11 +1730,34 @@ class Engine:
                 adj[cap] = adj.get(cap, 0.0) - v + (gain if gain > 0.0 else 0.0)
         return adj if adj is not None else extra
 
-    def _marg_fit_pre(self, s, items):
+    def _floor_gain(self, weapon):
+        """Per combo, the WEAPON+LOADOUT gains on hard-floored caps — the
+        Option C floor basis for dressed marginals (cached per
+        set_content; dressing-independent, so set_dressing need not clear
+        it)."""
+        out = self._floor_gain_cache.get(weapon)
+        if out is None:
+            out = []
+            for extra in self._combo_extras(weapon):
+                d = {}
+                for cap, v in extra.items():
+                    row = self._cap_tab.get(cap)
+                    if v and row is not None and row[4] is not None:
+                        d[cap] = v
+                out.append(d)
+            self._floor_gain_cache[weapon] = out
+        return out
+
+    def _marg_fit_pre(self, s, items, s_floor=None, floor_gains=None):
         """_marg_fit_from over a _combo_pre item list: the same terms with
         _cover_terms/_floor_penalty/_overstack inlined against the per-cap
         table — identical operands in identical order, no per-call
-        target/weight/floor lookups (forge profile 2026-08-26)."""
+        target/weight/floor lookups (forge profile 2026-08-26).
+        Option C: with `s_floor`, floor terms read that supply instead of
+        `s`; `floor_gains` (a {cap: weapon-only gain} dict) overrides the
+        row's gain for a DRESSED candidate — None means the row's own gain
+        already IS the weapon-only gain (naked candidate on a dressed
+        party)."""
         gamma, headroom, omax = self.gamma, self.headroom, self.overstack_max
         total = 0.0
         for cap, gain, (target, soft, w, w_base, floor) in items:
@@ -1723,8 +1782,14 @@ class Engine:
             total += cov
             if floor is not None:
                 fu, pm = floor
-                p0 = pm * w_base * (fu - have) / fu if have < fu else 0.0
-                p1 = pm * w_base * (fu - hg) / fu if hg < fu else 0.0
+                if s_floor is None:
+                    hf, hgf = have, hg
+                else:
+                    hf = s_floor.get(cap, 0.0)
+                    hgf = hf + (gain if floor_gains is None
+                                else floor_gains.get(cap, 0.0))
+                p0 = pm * w_base * (fu - hf) / fu if hf < fu else 0.0
+                p1 = pm * w_base * (fu - hgf) / fu if hgf < fu else 0.0
                 total += p0 - p1
             if hg > soft or have > soft:
                 scale = soft if soft > 0 else target
@@ -1764,12 +1829,19 @@ class Engine:
         no non-stacking adjustment applies (adj is extra — the common case)
         the precomputed _pre views evaluate the same numbers faster."""
         adj = self._nonstack_adjust(state, weapon, i, extra)
+        # Option C: on a DRESSED party (s is not the weapon-only supply)
+        # the floor terms read s_syn + the candidate's own weapon caps —
+        # the candidate here IS naked, so its gains are already the floor
+        # basis. Naked parties keep the legacy single-supply path.
+        split = state["s"] is not state["s_syn"]
         if adj is extra:
             items, pairs = self._combo_pre(weapon)[i]
-            d_fit = self._marg_fit_pre(state["s"], items)
+            d_fit = (self._marg_fit_pre(state["s"], items, state["s_syn"])
+                     if split else self._marg_fit_pre(state["s"], items))
             d_syn = self._marg_syn_pre(state, extra, pairs)
         else:
-            d_fit = self._marg_fit_from(state["s"], adj)
+            d_fit = (self._marg_fit_from(state["s"], adj, state["s_syn"], adj)
+                     if split else self._marg_fit_from(state["s"], adj))
             d_syn = self._marg_syn_from(state, adj, extra)
         return self.alpha * d_fit + self.beta * d_syn, d_fit, d_syn
 
@@ -1818,14 +1890,21 @@ class Engine:
         same numbers faster (F1/F22b pin the equality at 1e-9)."""
         if dextra is wextra:
             return self._combo_score(state, weapon, i, wextra)
+        # Option C: a DRESSED candidate's floor terms read the weapon-only
+        # basis on BOTH sides — s_syn for the party (== s when the party is
+        # naked) and the candidate's weapon-only gains — so its kit can
+        # never buy floor relief the party's kits are denied.
         adj = self._nonstack_adjust(state, weapon, i, dextra)
         if adj is dextra and vkey is not None:
             items = self._dressed_pre(weapon)[vkey][i]
             _wi, pairs = self._combo_pre(weapon)[i]
-            d_fit = self._marg_fit_pre(state["s"], items)
+            d_fit = self._marg_fit_pre(state["s"], items, state["s_syn"],
+                                       self._floor_gain(weapon)[i])
             d_syn = self._marg_syn_pre(state, wextra, pairs)
         else:
-            d_fit = self._marg_fit_from(state["s"], adj)
+            adj_w = self._nonstack_adjust(state, weapon, i, wextra)
+            d_fit = self._marg_fit_from(state["s"], adj, state["s_syn"],
+                                        adj_w)
             d_syn = self._marg_syn_from(state, wextra)
         return self.alpha * d_fit + self.beta * d_syn, d_fit, d_syn
 
@@ -1884,7 +1963,8 @@ class Engine:
             if cap not in self.reqs or not gain:
                 continue
             have, target = s.get(cap, 0.0), self.target(cap)
-            cov, floor_d = self._cover_terms(cap, have, gain, target)
+            cov, floor_d = self._cover_terms(cap, have, gain, target,
+                                             state["s_syn"].get(cap, 0.0))
             d = cov + floor_d
             if d > 0.05:
                 terms.append({"delta": round(d, 2), "cap": cap,
@@ -1921,13 +2001,21 @@ class Engine:
         extra = (self.build_extra(weapon, combo, vgears) if vgears
                  else self.member_extra(weapon, combo))
         adj = self._nonstack_adjust(state, weapon, combo, extra)
-        s = state["s"]
+        # Option C floor basis: floor_lift rows read the weapon-only party
+        # supply and the candidate's weapon-only adjusted gains, exactly as
+        # the marginal scored them (rows must still sum to d_fitness).
+        adj_w = (self._nonstack_adjust(
+                     state, weapon, combo, self.member_extra(weapon, combo))
+                 if vgears else adj)
+        s, sf = state["s"], state["s_syn"]
         rows, caps_gain = [], 0.0
         for cap, gain in adj.items():
             if cap not in self.reqs or not gain:
                 continue
             have, target, soft = s.get(cap, 0.0), self.target(cap), self.soft_cap(cap)
-            cov, floor_d = self._cover_terms(cap, have, gain, target)
+            cov, floor_d = self._cover_terms(cap, have, gain, target,
+                                             sf.get(cap, 0.0),
+                                             adj_w.get(cap, 0.0))
             over = (self._overstack(cap, have + gain, target, soft)
                     - self._overstack(cap, have, target, soft))
             head = (self._headroom_bonus(cap, have + gain, target, soft)
@@ -2567,36 +2655,74 @@ class Engine:
         return out
 
     # ------------------------------------------------------------ local search
-    def refine(self, party, max_passes=8, pool=None, fixed=0):
+    def refine(self, party, max_passes=8, pool=None, fixed=0, gears=None):
         """1-opt local search over a built party: repeatedly apply the single
         slot replacement that most improves comp_score, until none does.
         Steepest-descent (best move per pass, not first-improvement) so the
         result does not depend on slot or weapon iteration order. `fixed`
         locks the first N slots. Returns a NEW list; the input is not
         mutated. UNCONSTRAINED — the forge runs its own constraint-aware
-        refinement; this stays for parity and ad-hoc callers."""
+        refinement; this stays for parity and ad-hoc callers.
+
+        gears (owner ruling 2026-08-27): with a parallel per-member kit
+        list, refinement optimizes the SAME dressed comp_score used
+        everywhere else — incumbent kits are preserved, a replacement
+        candidate is tried in each of its doctrine kit variants (naked
+        when it has none or dressing is off; same-weapon re-kitting is
+        not searched, matching the legacy same-weapon skip), and the
+        result returns {"party", "gears"}. gears=None keeps the legacy
+        weapon-only search bit-identical, returning the plain list."""
         party = list(party)
-        if not party:
+        if gears is None:
+            if not party:
+                return party
+            candidates = list(pool or self.pool)
+            best = self.comp_score(party)
+            for _ in range(max_passes):
+                move, gain = None, 1e-9   # strictly-positive gain required
+                for i in range(fixed, len(party)):
+                    orig = party[i]
+                    for w in candidates:
+                        if w == orig:
+                            continue
+                        party[i] = w
+                        d = self.comp_score(party) - best
+                        if d > gain:
+                            move, gain = (i, w), d
+                    party[i] = orig
+                if move is None:
+                    break
+                party[move[0]] = move[1]
+                best += gain
             return party
+        gl = [(list(g) if g else None) for g in gears]
+        while len(gl) < len(party):
+            gl.append(None)
+        gl = gl[:len(party)]
+        if not party:
+            return {"party": party, "gears": gl}
         candidates = list(pool or self.pool)
-        best = self.comp_score(party)
+        best = self.comp_score(party, None, gl)
         for _ in range(max_passes):
             move, gain = None, 1e-9   # strictly-positive gain required
             for i in range(fixed, len(party)):
-                orig = party[i]
+                orig_w, orig_g = party[i], gl[i]
                 for w in candidates:
-                    if w == orig:
+                    if w == orig_w:
                         continue
                     party[i] = w
-                    d = self.comp_score(party) - best
-                    if d > gain:
-                        move, gain = (i, w), d
-                party[i] = orig
+                    for _vk, vg in self.kit_variants(w):
+                        gl[i] = vg
+                        d = self.comp_score(party, None, gl) - best
+                        if d > gain:
+                            move, gain = (i, w, vg), d
+                party[i], gl[i] = orig_w, orig_g
             if move is None:
                 break
             party[move[0]] = move[1]
+            gl[move[0]] = list(move[2]) if move[2] else None
             best += gain
-        return party
+        return {"party": party, "gears": gl}
 
     # ------------------------------------------------------------------ forge
     def _forge_ctx(self, pool):
@@ -2621,8 +2747,25 @@ class Engine:
         # sites); seat maxima get their own key
         for k, mn in self._profile_min.items():
             pred_min[k] = mn
+        # Capacity gates per predicate minimum (deadlock guard, 2026-08-27):
+        # the (role, seat) pairs of every pool weapon that could satisfy the
+        # predicate. A pick that fills the last band slot those satisfiers
+        # need would strand the minimum — _forge_feasible refuses it. Found
+        # when Option C floor re-pricing steered every beam into picking a
+        # band-capping non-full healer while primary_heal was unmet (the
+        # beam died at 6/7); the blind spot itself predates the re-pricing.
+        pred_gates = {}
+        for pn in pred_min:
+            gates = set()
+            for w2 in pool:
+                if pn in self._pred_possible(w2) \
+                        or pn in (self._profile_members.get(w2) or ()):
+                    gates.add((self.role_of(w2),
+                               self._profile_primary.get(w2)))
+            pred_gates[pn] = gates
         return {"pool": pool, "role_min": role_min, "role_max": role_max,
-                "pred_min": pred_min, "seat_max": dict(self._profile_max)}
+                "pred_min": pred_min, "seat_max": dict(self._profile_max),
+                "pred_gates": pred_gates}
 
     def _forge_counts(self, party, combos=None):
         """(weapon counts, role counts, predicate counts, group counts).
@@ -2678,11 +2821,39 @@ class Engine:
         smx = ctx["seat_max"].get(p0) if p0 else None
         if smx is not None and preds.get(p0, 0) >= smx:
             return False
-        need = self._forge_min_need(ctx, roles, preds, w,
-                                    self._pred_possible(w)
-                                    | (self._profile_members.get(w)
-                                       or frozenset()))
-        return need <= slots_left_after
+        contrib = (self._pred_possible(w)
+                   | (self._profile_members.get(w) or frozenset()))
+        need = self._forge_min_need(ctx, roles, preds, w, contrib)
+        if need > slots_left_after:
+            return False
+        # Deadlock guard (2026-08-27): after this pick, every UNMET
+        # predicate minimum must keep at least one satisfier whose role
+        # band AND fine seat still have capacity — otherwise the pick
+        # strands the minimum behind a full band and the beam dies short
+        # (a full healer can never join once the healer band is spent on
+        # hybrids). Gates precomputed per predicate in _forge_ctx.
+        for pn, mn in ctx["pred_min"].items():
+            have = preds.get(pn, 0) + (1 if pn in contrib else 0)
+            if have >= mn:
+                continue
+            gates = ctx["pred_gates"].get(pn)
+            if not gates:
+                continue    # no satisfier in pool at all: the old need
+            open_gate = False   # arithmetic already reports that honestly
+            for r2, s2 in gates:
+                mx2 = ctx["role_max"].get(r2)
+                if mx2 is not None \
+                        and roles.get(r2, 0) + (1 if r2 == r else 0) >= mx2:
+                    continue
+                smx2 = ctx["seat_max"].get(s2) if s2 else None
+                if smx2 is not None \
+                        and preds.get(s2, 0) + (1 if s2 == p0 else 0) >= smx2:
+                    continue
+                open_gate = True
+                break
+            if not open_gate:
+                return False
+        return True
 
     def _forge_eval_pick(self, ctx, beam, w, slots_left_after):
         """_eval_pick restricted to combos that keep the roster completable:
@@ -2742,7 +2913,8 @@ class Engine:
         out.insert(lo, item)
         return out
 
-    def forge(self, size, locked=None, locked_combos=None, pool=None, beam_width=8):
+    def forge(self, size, locked=None, locked_combos=None, pool=None,
+              beam_width=8, locked_gears=None):
         """Build the best N-player roster the constraints allow: deterministic
         beam search over complete rosters, then constraint-aware 1-opt and a
         bounded 2-opt refinement, then a filler audit.
@@ -2773,7 +2945,14 @@ class Engine:
         feasible = True
 
         counts, roles, preds, groups = self._forge_counts(locked, combos)
-        gears0 = [None] * len(locked)
+        # locked_gears (owner ruling 2026-08-27): a locked member supplied
+        # with explicit gear is scored in EXACTLY that kit and never
+        # re-dressed; one without stays naked — the forge never invents
+        # gear for a lock. Normalized like locked_combos (short list pads
+        # with None); legacy calls keep the all-naked seed bit-identically.
+        lg = locked_gears or []
+        gears0 = [(list(lg[i]) if i < len(lg) and lg[i] else None)
+                  for i in range(len(locked))]
         state = self.party_state(locked, combos, gears0)
         items0 = sorted(self._member_tag(w, c) for w, c in zip(locked, combos))
         beams = [{"party": locked, "combos": combos, "gears": gears0,

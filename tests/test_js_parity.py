@@ -114,10 +114,15 @@ def forge_case(i, c):
         return None
     # every second forge case passes an EMPTY locked_combos list — the
     # engines must both pad it to len(locked) with defaults (an empty array
-    # is truthy in JS and falsy in Python; that divergence shipped once)
+    # is truthy in JS and falsy in Python; that divergence shipped once).
+    # locked_gears (2026-08-27): the same alternation carries the case's
+    # gear for the first lock — supplied kits must be preserved verbatim
+    # and scored in both ports; [] entries normalize to naked.
     combos = c["combos"][:2] if (i // FORGE_EVERY) % 2 == 0 else []
+    lgears = (c["gears"][:2] if (i // FORGE_EVERY) % 2 == 0 else None)
     return {"size": FORGE_SIZE, "locked": c["party"][:2],
-            "locked_combos": combos, "pool": c["refine_pool"]}
+            "locked_combos": combos, "pool": c["refine_pool"],
+            "locked_gears": lgears}
 
 
 # kit_options is a full-catalog sweep (comp-aware = one fitness call per
@@ -145,7 +150,8 @@ def py_results(cases):
         forged = None
         if fc is not None:
             r = e.forge(fc["size"], locked=fc["locked"],
-                        locked_combos=fc["locked_combos"], pool=fc["pool"])
+                        locked_combos=fc["locked_combos"], pool=fc["pool"],
+                        locked_gears=fc["locked_gears"])
             forged = {"party": r["party"], "combos": r["combos"],
                       "gears": r["gears"],
                       "score": r["score"], "feasible": r["feasible"],
@@ -163,6 +169,11 @@ def py_results(cases):
             "recommend_naked_cand": naked_rec,
             "refine": None if rp is None else e.refine(
                 rp, max_passes=REFINE_PASSES, pool=c["refine_pool"]),
+            # gear-aware refine (owner ruling 2026-08-27): dressed local
+            # search returns {party, gears}; incumbent kits from the case
+            "refine_dressed": None if rp is None else e.refine(
+                rp, max_passes=REFINE_PASSES, pool=c["refine_pool"],
+                fixed=0, gears=c["gears"][:len(rp)]),
             "comp_score": e.comp_score(c["party"]),
             "comp_score_locked": e.comp_score(c["party"], c["combos"]),
             "redundancy": e.redundancy(c["party"]),
@@ -262,6 +273,10 @@ def main():
         errs = []
         if a["refine"] is not None and a["refine"] != b["refine"]:
             errs.append(f"refine: py={a['refine']} js={b['refine']}")
+        if a["refine_dressed"] is not None \
+                and a["refine_dressed"] != b.get("refine_dressed"):
+            errs.append(f"refine_dressed: py={a['refine_dressed']} "
+                        f"js={b.get('refine_dressed')}")
         for k in ("fitness", "synergy", "max_fitness", "comp_score",
                   "comp_score_locked", "fitness_locked", "synergy_locked",
                   "redundancy", "fitness_build", "comp_score_build"):

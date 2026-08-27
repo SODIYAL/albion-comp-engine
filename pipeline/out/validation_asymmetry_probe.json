@@ -12,14 +12,14 @@
    ],
    "top3": {
     "dressed": [
-     "MAIN_ARCANESTAFF_UNDEAD",
      "2H_HAMMER_AVALON",
-     "2H_QUARTERSTAFF_AVALON"
+     "2H_HAMMER",
+     "MAIN_ARCANESTAFF_UNDEAD"
     ],
     "legacy": [
-     "MAIN_ARCANESTAFF_UNDEAD",
      "2H_HAMMER_AVALON",
-     "2H_HAMMER"
+     "2H_HAMMER",
+     "2H_POLEHAMMER"
     ],
     "v3w": [
      "2H_HAMMER_AVALON",
@@ -89,7 +89,7 @@
   },
   {
    "case": 4,
-   "legacy_vs_dressed_differs": false,
+   "legacy_vs_dressed_differs": true,
    "legacy_vs_v3w_differs": true,
    "party": [
     "2H_KNUCKLES_KEEPER",
@@ -100,13 +100,13 @@
    "top3": {
     "dressed": [
      "MAIN_ARCANESTAFF_UNDEAD",
-     "2H_QUARTERSTAFF_AVALON",
-     "MAIN_MACE_HELL"
+     "MAIN_MACE_HELL",
+     "2H_SHAPESHIFTER_SET3"
     ],
     "legacy": [
-     "MAIN_ARCANESTAFF_UNDEAD",
-     "2H_QUARTERSTAFF_AVALON",
-     "MAIN_MACE_HELL"
+     "MAIN_MACE_HELL",
+     "2H_HAMMER_AVALON",
+     "MAIN_ARCANESTAFF_UNDEAD"
     ],
     "v3w": [
      "2H_HAMMER_AVALON",
@@ -346,7 +346,7 @@
   }
  ],
  "v3_summary": {
-  "legacy_vs_dressed_differs": 9,
+  "legacy_vs_dressed_differs": 10,
   "legacy_vs_v3w_differs": 12,
   "n": 12
  },
@@ -460,42 +460,6 @@
    "role": "tank"
   },
   {
-   "comp": "deadlyhooker_large_scale_2026_08",
-   "dressed_hit": false,
-   "dressed_top3": [
-    "MAIN_ARCANESTAFF_UNDEAD",
-    "2H_SHAPESHIFTER_SET2",
-    "2H_SHAPESHIFTER_SET3"
-   ],
-   "dropped": "Polehammer",
-   "naked_hit": true,
-   "naked_top3": [
-    "MAIN_MACE_HELL",
-    "2H_SHAPESHIFTER_KEEPER",
-    "2H_HAMMER_AVALON"
-   ],
-   "party": "party_2",
-   "role": "tank"
-  },
-  {
-   "comp": "deadlyhooker_large_scale_2026_08",
-   "dressed_hit": false,
-   "dressed_top3": [
-    "MAIN_ARCANESTAFF_UNDEAD",
-    "2H_SHAPESHIFTER_SET2",
-    "2H_QUARTERSTAFF_AVALON"
-   ],
-   "dropped": "Oathkeepers",
-   "naked_hit": true,
-   "naked_top3": [
-    "MAIN_MACE_HELL",
-    "2H_SHAPESHIFTER_KEEPER",
-    "2H_SHAPESHIFTER_SET3"
-   ],
-   "party": "party_2",
-   "role": "tank"
-  },
-  {
    "comp": "timothy_blap_blackzone_roam_2026_08",
    "dressed_hit": false,
    "dressed_top3": [
@@ -569,7 +533,7 @@
   }
  ],
  "v4_role_summary": {
-  "flip_hit_to_miss": 12,
+  "flip_hit_to_miss": 10,
   "flip_miss_to_hit": 0,
   "slots": 32
  }
