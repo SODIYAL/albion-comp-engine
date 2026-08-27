@@ -898,6 +898,18 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .wf-comp .dm .dm-pop{z-index:44}
 .wf-comp .dm:first-child .dm-pop{left:50%; transform:translateX(-50%)}
 .wf-comp .dm:last-child .dm-pop{left:50%; right:auto; transform:translateX(-50%)}
+/* the open-slots column: the strip's dashed next-slot card, rehomed */
+.wf-col-open{--rc:var(--brass-deep); border-style:dashed; background:transparent}
+.wf-col-open .wf-col-h{color:var(--brass)}
+.wf-mcard.next{border:0; background:transparent; box-shadow:none; cursor:default;
+  justify-content:center; gap:8px}
+.wf-mcard.next .n{margin-left:0; color:var(--brass)}
+.wf-mcard.next .dm-plus{font-size:20px; line-height:1; color:var(--brass); opacity:.8}
+/* notes rail under the board: duplicate-interaction notices + the open
+   kit editor (the strip's roster-notes, rehomed with its class kept so
+   the lo-panel rules still apply) */
+.wf-notes{width:100%; max-width:calc(var(--wd, 720px) + 40px); margin:2px auto 0;
+  text-align:left}
 
 /* ---------- capability readout ---------- */
 .groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:2px 34px}
@@ -1473,15 +1485,9 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
     <!-- The forge wheel stage: analysis flanks left, the wheel centers,
          reasoning flanks right. The wheel replaces the old rail picker. -->
     <section class="wheelstage">
-      <!-- the party dock: the roster at the wheel's left hand — on screen
-           from the first paint, no scrolling to find who's in -->
-      <div class="ws-flank ws-party">
-        <div class="sec-label">Party</div>
-        <div class="tally" id="tally"></div>
-        <div class="roster" id="roster"></div>
-        <div class="roster-notes" id="roster-notes"></div>
-      </div>
-
+      <!-- the party dock RETIRED 2026-08-27 (owner: the wheel's comp board
+           "is meant to replace the party section below") — the roster,
+           its notes and the kit editor all live in the wheel foot now -->
       <div class="ws-center">
         <div class="sec-label">Add weapon</div>
         <div class="wheel-filters">

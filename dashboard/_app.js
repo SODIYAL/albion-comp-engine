@@ -273,13 +273,10 @@ function badgeHtml(w){
   }).join("");
 }
 
-/* Two independent chip facets:
-   FACET       — filters the ADD-WEAPON picker (its own chip bar, plus any
-                 capability badge clicked on a weapon anywhere)
-   PARTY_FACET — filters the PARTY roster view (tally role chips); display
-                 only, never touches the engine */
+/* The ADD-WEAPON picker's chip facet (its own chip bar, plus any
+   capability badge clicked on a weapon anywhere). The old PARTY_FACET
+   roster filter retired with the party strip (2026-08-27). */
 let FACET = null;
-let PARTY_FACET = null;
 /* mobile pass 2026-08-21: which member's popover is open as a bottom
    sheet (touch has no hover) — display state only, never in the hash */
 let SHEET_OPEN = null;
@@ -498,16 +495,9 @@ function renderSetup(){
     sumEl.textContent = `${ct} · ${styleName() || STYLE} · ${PLAN()}`;
   }
 }
-function renderTally(){
-  $("tally").innerHTML = party.length
-    ? Object.entries(roleCounts()).sort((a,b) => b[1]-a[1])
-        .map(([r,n]) => `<span class="t t-${esc(r)}" data-pfilter="${esc(r)}" role="button" tabindex="0"
-           aria-pressed="${PARTY_FACET === r}"
-           aria-label="${n} ${esc(roleLabel(r))} slots. Filter the roster"
-           title="${esc(roleLabel(r))}: ${n} — click to filter the roster">${semanticIcon(r)}<b>${n}</b><span class="sr-only"> ${esc(roleLabel(r))}</span></span>`).join("")
-      + `<span class="t"><b>${Math.max(0, PLAN() - party.length)}</b> open</span>`
-    : "";
-}
+/* The old role-tally chip row (and its roster facet filter) retired with
+   the party strip (owner 2026-08-27) — the comp board's column headers
+   carry the same counts, permanently visible and grouped. */
 /* Per-member swap advice (engine swapReview): a member's weapon is valued as
    if being picked into the rest of the party and ranked against every
    alternative. Hints show only when they're worth acting on — a decent pick
@@ -593,7 +583,7 @@ function memberPop(i, ctx){
    the party strip — this board is on course to replace that strip. Built
    during renderRoster (the render that runs exactly when roster state
    changes) and cached, so wheel spins never pay for the roster analysis. */
-let BOARD_HTML = "";
+let BOARD_HTML = "", NOTES_HTML = "";
 function buildCompBoard(ctx){
   if (!party.length || typeof ENG.roleAdvisory !== "function") return "";
   const chests = {};
@@ -620,20 +610,36 @@ function buildCompBoard(ctx){
     c.ms.push({ i, role: fine(m.role) });
   });
   const sorted = [...cols.values()].sort((a, b) => a.ord - b.ord);
+  /* the strip's open-slot affordance lives on as its own dashed column */
+  const open = Math.max(0, PLAN() - party.length);
+  const openCol = party.length < HARD_CAP ? `
+    <div class="wf-col wf-col-open">
+      <span class="wf-col-h">${open} open</span>
+      <div class="dm-card wf-mcard next" title="next slot — pick on the wheel">
+        <span class="n mono">${String(party.length + 1).padStart(2, "0")}</span><span class="dm-plus">+</span>
+      </div>
+    </div>` : "";
+  /* the member sheet's scrim (≤960 — touch taps open a bottom sheet) */
+  const scrim = SHEET_OPEN !== null
+    ? `<button class="dm-scrim" data-sheet-close aria-label="Close member details"></button>` : "";
   return `<div class="wf-comp">${sorted.map(c => `
     <div class="wf-col" style="--rc:${c.color}">
       <span class="wf-col-h">${c.ms.length}× ${esc(c.name)}</span>
       ${c.ms.map(({ i, role }) =>
-        `<div class="dm wf-dm ${roleCls(party[i])}">
+        `<div class="dm wf-dm ${roleCls(party[i])}${SHEET_OPEN === i ? " sheet-open" : ""}">
           <button class="dm-card wf-mcard" data-member="${i}" aria-label="${esc(nameOf(party[i]))} — slot ${i + 1}, details">
             ${icon(party[i], 44)}<span class="wf-mnm">${esc(nameOf(party[i]))}${role ? `<small>${esc(role)}</small>` : ""}</span><span class="n mono">${String(i + 1).padStart(2, "0")}</span>
           </button>
           ${memberPop(i, ctx)}
         </div>`).join("")}
-    </div>`).join("")}</div>`;
+    </div>`).join("")}${openCol}${scrim}</div>`;
 }
 function renderRoster(){
-  /* contribution = fitness lost if this member left — the caller's
+  /* The party's ONE dock is the wheel's comp board (owner 2026-08-27: "this
+     is meant to replace the party section below" — the old strip is gone).
+     This render computes the roster analysis, caches the board, and caches
+     the notes rail; renderWheelFoot injects both.
+     contribution = fitness lost if this member left — the caller's
      "who is load-bearing" number. Lowest contributor gets flagged. */
   const base = fitness(party);
   const contrib = party.map((w, i) =>
@@ -642,49 +648,9 @@ function renderRoster(){
   const review = swapReviewCached();
   const hintable = swapEligible(review);
   const minI = party.length > 2 ? contrib.indexOf(Math.min(...contrib)) : -1;
-  /* party facet: a display filter over the roster — slot numbers and remove
-     buttons keep their true indices */
-  let idxs = party.map((_, i) => i);
-  if (PARTY_FACET){
-    idxs = idxs.filter(i => roleHint(party[i]) === PARTY_FACET);
-    if (!idxs.length){
-      /* removing the last member of the filtered role also removes the tally
-         chip that exits the filter — a dead end. Auto-clear instead. */
-      PARTY_FACET = null;
-      idxs = party.map((_, i) => i);
-    }
-  }
-  /* dock cards: the card is the hover/focus target (desktop) or the tap
-     target that opens the bottom sheet (≤960 — touch has no hover); the
-     popover carries everything the old roster row said plus the
-     kit/dossier/remove actions. memberPop is SHARED with the wheel's comp
-     board (owner 2026-08-27) so both docks say exactly the same things. */
   if (SHEET_OPEN !== null && !(SHEET_OPEN < party.length)) SHEET_OPEN = null;
-  const ctx = { contrib, review, hintable, minI };
-  const cards = idxs.map(i => { const w = party[i]; return (
-    `<div class="dm ${roleCls(w)}${SHEET_OPEN === i ? " sheet-open" : ""}">
-      <button class="dm-card" data-member="${i}" aria-label="${nameOf(w)} — slot ${i+1}, details">
-        <span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 34)}
-      </button>
-      ${memberPop(i, ctx)}
-    </div>`); });
-  BOARD_HTML = buildCompBoard(ctx);
-  if (PARTY_FACET){
-    cards.push(`<div class="dock-note">${idxs.length} of ${party.length} — ${esc(PARTY_FACET)} only · click the chip again for all</div>`);
-  } else {
-    /* open slots collapse: one dashed "next" card, one "+N more" note */
-    const open = Math.max(0, PLAN() - party.length);
-    if (party.length < HARD_CAP)
-      cards.push(`<div class="dm next"><div class="dm-card next" title="next slot — pick on the wheel">
-        <span class="n mono">${String(party.length+1).padStart(2,"0")}</span><span class="dm-plus">+</span></div></div>`);
-    if (open > 1)
-      cards.push(`<div class="dock-note">+ ${open - 1} more open slot${open > 2 ? "s" : ""}</div>`);
-  }
-  /* the sheet's scrim: fixed overlay behind the open member sheet (≤960) */
-  if (SHEET_OPEN !== null)
-    cards.push(`<button class="dm-scrim" data-sheet-close aria-label="Close member details"></button>`);
-  $("roster").innerHTML = cards.join("");
-  /* below the dock: duplicate-interaction notices (spec §7 — the message
+  BOARD_HTML = buildCompBoard({ contrib, review, hintable, minI });
+  /* below the board: duplicate-interaction notices (spec §7 — the message
      names the exact effect, and unknown says "verify", never a penalty)
      and the open kit editor, full width */
   const notes = [];
@@ -693,7 +659,7 @@ function renderRoster(){
   if (LO_OPEN !== null && party[LO_OPEN] !== undefined)
     notes.push(`<div class="kit-head fn">kit — ${nameOf(party[LO_OPEN])} · slot ${String(LO_OPEN + 1).padStart(2,"0")}</div>`
       + loadoutPanel(LO_OPEN));
-  $("roster-notes").innerHTML = notes.join("");
+  NOTES_HTML = notes.join("");
 }
 const INOTE_LABEL = {high: "duplicate utility wasted",
                      warning: "duplicate utility warning",
@@ -1002,6 +968,7 @@ function renderWheelFoot(keys, recs, rings){
     </div>
     ${board || `<div class="wf-row"><span class="wf-rings">${rings.map(g =>
       `<span class="wf-ring" style="color:${g.color}">${esc(g.label)} <b>${g.have}/${g.want}</b></span>`).join("")}</span></div>`}
+    ${NOTES_HTML ? `<div class="roster-notes wf-notes">${NOTES_HTML}</div>` : ""}
     ${forge ? `<div class="wf-row"><span class="wf-actions">${forge}</span></div>` : ""}`;
 }
 function renderWheel(recs){
@@ -1999,7 +1966,6 @@ function loadCompanionParty(){
   LIVE_SYNC = true;
   sortPartyByRole();
   PLANNED = Math.max(PLANNED, party.length);
-  PARTY_FACET = null;
   render();
   renderCompanion(true);
 }
@@ -2020,7 +1986,7 @@ function render(){
   /* every roster/context change re-aims the wheel at the engine's pick;
      browsing between changes belongs to the user (wheelStep) */
   if (recs && recs.length) WHEEL_FOCUS_W = recs[0].w;
-  renderSetup(); renderTally(); renderRoster(); renderFitness();
+  renderSetup(); renderRoster(); renderFitness();
   renderWheel(recs); renderGroups(); renderWeaknesses(); renderWarning();
   renderRecDetail(recs); renderMetaStrip(); renderFootnote();
 }
@@ -2066,21 +2032,11 @@ document.addEventListener("click", e => {
   if (mem && matchMedia("(max-width:960px)").matches){
     const i = +mem.dataset.member;
     SHEET_OPEN = SHEET_OPEN === i ? null : i;
-    renderRoster(); return;
+    /* the board lives in the wheel foot now — refresh it with cached recs */
+    renderRoster(); renderWheel(RECS_CUR); return;
   }
   if (e.target.closest("[data-sheet-close]")){
-    SHEET_OPEN = null; renderRoster(); return;
-  }
-  /* chip facets first: badges/role chips nest inside add/detail buttons,
-     so they must win the closest() race */
-  const pf = e.target.closest("[data-pfilter]");
-  if (pf){
-    PARTY_FACET = PARTY_FACET === pf.dataset.pfilter ? null : pf.dataset.pfilter;
-    /* update pressed states IN PLACE — rebuilding the tally would replace
-       the chip mid-click and a double-click would toggle straight back off */
-    document.querySelectorAll("#tally .t[data-pfilter]").forEach(el =>
-      el.setAttribute("aria-pressed", String(el.dataset.pfilter === PARTY_FACET)));
-    renderRoster(); return;
+    SHEET_OPEN = null; renderRoster(); renderWheel(RECS_CUR); return;
   }
   const bf = e.target.closest("[data-bfilter]");
   if (bf){ setFacet({type: "badge", v: bf.dataset.bfilter},
@@ -2124,7 +2080,6 @@ document.addEventListener("click", e => {
     PROV.push("m"); COMBO.push(null); FORGE_NOTE = null;
     loadoutInsert(party.length - 1);   /* prefill from the caller reference */
     sortPartyByRole();    /* the new member lands in its role group */
-    PARTY_FACET = null;   /* the new member must be visible */
     render(); } return; }
   const fl = e.target.closest("[data-family-load]");
   if (fl){
@@ -2142,7 +2097,7 @@ document.addEventListener("click", e => {
       added = true;
     });
     if (added){
-      FORGE_NOTE = null; sortPartyByRole(); PARTY_FACET = null; render();
+      FORGE_NOTE = null; sortPartyByRole(); render();
     }
     return;
   }
@@ -2202,7 +2157,6 @@ document.addEventListener("click", e => {
     FORGE_NOTE = { feasible: r.feasible, filler: r.filler, held: r.held };
     LO_OPEN = null; LO_PICKING = null;
     sortPartyByRole();    /* remaps the forge note's slot indexes too */
-    PARTY_FACET = null;   /* show the whole forged comp, not a filtered view */
     render();
     /* the forge flourish: the wheel spins and settles on the engine's next
        pick. Purely visual — reduced-motion kills it via the global rule. */
@@ -2238,7 +2192,7 @@ document.addEventListener("click", e => {
     if (b.dataset.armed === "1"){
       delete b.dataset.armed; b.textContent = "clear comp";
       party = []; PROV = []; COMBO = []; FORGE_NOTE = null;
-      loadoutClear(); PARTY_FACET = null; render();
+      loadoutClear(); render();
     } else {
       b.dataset.armed = "1"; b.textContent = "really clear? click again";
       setTimeout(() => { delete b.dataset.armed; b.textContent = "clear comp"; }, 2200);
@@ -2286,7 +2240,7 @@ document.addEventListener("change", e => {
     COMBO = keep.map(i => COMBO[i]);
     PROV = keep.map(() => "m");
     FORGE_NOTE = null; LO_OPEN = null; LO_PICKING = null;
-    PARTY_FACET = null; render();
+    render();
   }
   if (e.target.id === "style"){ STYLE = e.target.value; FORGE_NOTE = null; render(); }
   if (e.target.id === "companion-sync"){
@@ -2332,7 +2286,6 @@ $("pick-filter").addEventListener("keydown", e => {
   const keys = filteredWeapons();
   if (keys.length && party.length < HARD_CAP){
     party.push(keys[0]); PROV.push("m"); COMBO.push(null); FORGE_NOTE = null;
-    PARTY_FACET = null;   /* the new member must be visible (matches click-add) */
     loadoutInsert(party.length - 1); sortPartyByRole(); render(); }
 });
 /* ---- wheel inputs: scroll, arrow keys, and drag all rotate the rim ---- */
@@ -2444,7 +2397,7 @@ $("pick-filter").addEventListener("keydown", e => {
    replaceState, which never fires hashchange, so this cannot loop. The
    party view-filter resets — it described the previous comp. */
 window.addEventListener("hashchange", () => {
-  if (loadHash()){ PARTY_FACET = null; render(); }
+  if (loadHash()){ render(); }
 });
 
 $("build-stamp").textContent = `v${META.version} · ${META.weapons_curated}/${META.weapons_total} curated`;
