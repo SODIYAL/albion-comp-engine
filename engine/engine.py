@@ -484,6 +484,8 @@ class Engine:
         self._default_cache = {}
         self._gear_cache = {}
         self._ns_cache = {}
+        self._variant_cache = {}
+        self._dressed_cache = {}
 
     @staticmethod
     def _step_table(table, size):
@@ -1018,6 +1020,77 @@ class Engine:
             for cap in bs.get("cc_mult_caps") or []:
                 if cap in out:
                     out[cap] *= 1.0 + ccdur_pct
+        return out
+
+    def kit_variants(self, weapon):
+        """Doctrine kit variants for GENERATION (dressed forge 2026-08-27):
+        v0 = the seat's doctrine kit exactly as kit_options ranks it
+        context-free (doctrine-tier-first; a slot whose ranked top is
+        off-tier stays UNSET — the forge never guesses off-doctrine
+        gear); v1/v2 = v0 with the first/second DIVERGENT single-slot
+        swap (a tier piece whose top weighted capability differs from
+        v0's piece in that slot). [("v0", None)] for weapons with no
+        doctrine gear at all — dressed == naked. Deterministic (slot
+        order, then tier order); cached per set_content. NO doctrine
+        passives anywhere in this path (role stays out of build_extra —
+        generation must optimize the exact score the page displays)."""
+        out = self._variant_cache.get(weapon)
+        if out is not None:
+            return out
+
+        def top_cap(k):
+            extra = self.gear_extra(k)
+            best = None
+            for cap in sorted(extra):
+                v = self._weights.get(cap, 0.0) * extra[cap]
+                if best is None or v > best[1]:
+                    best = (cap, v)
+            return best[0] if best else None
+
+        ko = self.kit_options(weapon)
+        v0, divergent = {}, []
+        for slot in ("head", "armor", "shoes", "cape", "offhand",
+                     "potion", "food"):
+            opts = [o for o in (ko["options"].get(slot) or [])
+                    if o.get("doctrine")]
+            if not opts:
+                continue
+            v0[slot] = opts[0]["gear"]
+            t0 = top_cap(opts[0]["gear"])
+            for o in opts[1:]:
+                if top_cap(o["gear"]) != t0:
+                    divergent.append((slot, o["gear"]))
+                    break   # one divergent alternative per slot
+        if not v0:
+            out = [("v0", None)]
+        else:
+            slots = ("head", "armor", "shoes", "cape", "offhand",
+                     "potion", "food")
+            def gl(d):
+                return [d[s] for s in slots if s in d]
+            out = [("v0", gl(v0))]
+            for n, (slot, piece) in enumerate(divergent[:2]):
+                alt = dict(v0)
+                alt[slot] = piece
+                out.append((f"v{n + 1}", gl(alt)))
+        self._variant_cache[weapon] = out
+        return out
+
+    def _dressed_extras(self, weapon):
+        """Per variant, the member's effective caps per combo index — the
+        beam's dressed vectors, precomputed so evaluation never calls
+        build_extra inline. The naked variant reuses the combo-extras
+        objects THEMSELVES (identity keeps the _combo_pre fast path and
+        its exactness proofs intact)."""
+        out = self._dressed_cache.get(weapon)
+        if out is None:
+            extras = self._combo_extras(weapon)
+            out = {}
+            for vkey, gl in self.kit_variants(weapon):
+                out[vkey] = (extras if gl is None else
+                             [self.build_extra(weapon, i, gl)
+                              for i in range(len(extras))])
+            self._dressed_cache[weapon] = out
         return out
 
     def primary_seat(self, weapon):

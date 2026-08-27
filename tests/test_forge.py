@@ -764,6 +764,38 @@ def t_dressed_state():
           abs(d_fit - exact) < 1e-9, f"{d_fit} vs {exact}")
 
 
+def t_kit_variants():
+    """F24 — kit variants (dressed forge Task 3): deterministic, capped
+    at 3, doctrine-bounded, single naked variant for menu-less weapons,
+    dressed extras parallel to the combo extras per variant."""
+    e = Engine(content="castle", size=25, style="brawl")
+    v_mace = e.kit_variants("2H_MACE")
+    v_mace2 = e.kit_variants("2H_MACE")
+    check("F24 variants deterministic + capped at 3 + v0 first",
+          v_mace == v_mace2 and 1 <= len(v_mace) <= 3
+          and v_mace[0][0] == "v0", str(v_mace))
+    gear_keys = set(e.gear)
+    check("F24 every variant piece is curated gear",
+          all(k in gear_keys for _v, gl in v_mace for k in (gl or [])),
+          str(v_mace))
+    no_menu = next(w for w in sorted(e.weapons)
+                   if not (e.weapons[w].get("role_menu") or []))
+    check("F24 menu-less weapon -> single naked variant",
+          e.kit_variants(no_menu) == [("v0", None)],
+          f"{no_menu}: {e.kit_variants(no_menu)}")
+    de = e._dressed_extras("2H_MACE")
+    check("F24 dressed extras parallel combos per variant",
+          set(de) == {v for v, _g in v_mace}
+          and all(len(de[v]) == len(e._combo_extras("2H_MACE"))
+                  for v in de),
+          f"variants={sorted(de)}")
+    naked = e.kit_variants(no_menu)
+    dn = e._dressed_extras(no_menu)
+    check("F24 naked variant's dressed extras ARE the combo extras",
+          all(dn["v0"][i] is e._combo_extras(no_menu)[i]
+              for i in range(len(dn["v0"]))))
+
+
 if __name__ == "__main__":
     t_invariant()
     t_synergy_gating()
@@ -787,6 +819,7 @@ if __name__ == "__main__":
     t_resil_pen()
     t_need_profiles()
     t_dressed_state()
+    t_kit_variants()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")
