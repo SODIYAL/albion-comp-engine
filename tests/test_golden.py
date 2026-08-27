@@ -800,14 +800,27 @@ def run():
           f"sat3rd={rep['verdict']}/{rep['caps_gain']:.2f} "
           f"gapfill={rep_ok['verdict']}/{rep_ok['caps_gain']:.1f}")
 
-    # exact duplicates past the free allowance price in and go negative
-    rep_dup = E.pick_report([LONGBOW, LONGBOW, LONGBOW, LONGBOW], LONGBOW)
-    check("T30c a 5th Longbow is a negative recommendation (dup penalty "
-          "priced, zero gap-closing)",
+    # exact duplicates past the free allowance price in and go negative.
+    # RE-PINNED 2026-08-27 (dressed forge, owner ruling): the fixture
+    # party wears its own doctrine kits — the real-world case; against a
+    # NAKED four-stack the 5th Longbow's kit closes ~28 units of real
+    # gaps and the engine honestly says so (pinned below as the model's
+    # documented honesty, not a bug).
+    lb_kit = dict(E.kit_variants(LONGBOW))["v0"]
+    lb4 = [LONGBOW, LONGBOW, LONGBOW, LONGBOW]
+    rep_dup = E.pick_report(lb4, LONGBOW, None, [lb_kit] * 4)
+    check("T30c a 5th Longbow into a DRESSED four-stack is a negative "
+          "recommendation (dup penalty priced, zero gap-closing)",
           rep_dup["verdict"] == "negative" and rep_dup["score"] <= 0
           and rep_dup["dup_penalty"] > 0 and rep_dup["caps_gain"] < 0.05,
           f"score={rep_dup['score']:.3f} dup_pen={rep_dup['dup_penalty']:.2f} "
           f"caps_gain={rep_dup['caps_gain']:.3f}")
+    rep_naked = E.pick_report(lb4, LONGBOW)
+    check("T30c honesty rider: against a NAKED four-stack the 5th's KIT "
+          "closes real gaps and the verdict says so",
+          rep_naked["caps_gain"] > 5 and rep_naked["verdict"] != "negative",
+          f"score={rep_naked['score']:.3f} "
+          f"caps_gain={rep_naked['caps_gain']:.2f}")
 
     # swap review carries the same lens per member — but its question is
     # "does the REST cover this member's jobs without it?", so with TWO
