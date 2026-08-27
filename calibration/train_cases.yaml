@@ -1,0 +1,6 @@
+# TRAIN split — may be inspected while changing the model (README.md).
+# Every case here is train-contaminated forever.
+- v3r1-case2
+- v3r1-case4
+- v3r1-case7
+- v3r1-case8

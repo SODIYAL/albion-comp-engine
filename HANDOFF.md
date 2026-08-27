@@ -28,6 +28,8 @@ Roles remain useful player-facing labels, but scoring is capability-driven.
 
 **2026-08-27 — the DRESSED FORGE shipped** (spec `docs/superpowers/specs/2026-08-27-dressed-forge-design.md`): forge and recommend evaluate every candidate as a full build — weapon + combo + doctrine kit (v0 + one divergent variant) — priced by the exact comp_score-with-gears the page displays, and forged members arrive with their kits prefilled (`_eng`-marked). The same day closed two adjacent gaps: the page now passes equipped LOADOUT gear into every scoring/suggestion call (the engine had scored full builds since 2026-08-20; the UI never sent them), and the gear capability catalog was completed (129 curated pieces, `sheets/gear/combat_expansion.yaml`). Owner rulings: kit suggestions are doctrine-tier-first in both modes (evidence-first, T22 re-pin), T30c re-pinned dressed with a naked-party honesty rider. Locked members are never re-dressed; doctrine passives never enter evaluation.
 
+**2026-08-27 (same day, follow-up pass) — DRESSED VALIDATION & CALIBRATION HARDENING** (plan `docs/superpowers/plans/2026-08-27-dressed-validation-calibration.md`; findings `docs/superpowers/findings/2026-08-27-*.md`; VALIDATION.md carries the dated entry + open rulings): the validation/calibration layers were re-based onto the dressed engine BEFORE any tuning. The audit found every historical V3/V4 number was an asymmetric hybrid (naked incumbents vs dressed candidates). Shipped, with zero scoring changes: `Engine.set_dressing(False)` (both ports, parity-pinned — the V3-W symmetric weapon-only mode), V3-D production-dressed scoring with the richer expert form + full metric set, V4 in three incumbent-gear classes (legacy gate unchanged; actual-gear kits joined from builds_index — published comps carry gear on all 201 slots), the dressed template audit, the adversarial frontline-floor audit, the gear-synergy audit, 16 gear blind cards, and the `calibration/` train/validation/holdout layer + `pipeline/calibrate_scoring.py` sensitivity harness. HEADLINE MEASUREMENTS: dressed incumbents collapse V4 role-level 78%→34–41% (11 of 12 lost hits are tank drops); worn-armor tankiness adds +419–622% of target everywhere and ordinary doctrine kits alone clear the tankiness hard floor for a no-tank 7-man — the 2026-08-12 pseudo-tankiness failure recreated through the gear stat channel (representation problem; Options A–D written, Option C source-aware floors recommended, OWNER RULING PENDING). Synergy stays weapon-only by recommendation (gear participation would move real comps negatively under the current J rule). Every coefficient remains at its shipped value, PROVISIONAL — the calibration report is a sensitivity map (train n=4; validation/holdout empty until fresh expert rounds).
+
 The production engine currently includes:
 
 - 137 combat weapons
@@ -324,6 +326,7 @@ py -3 pipeline/build_dataset.py
 py -3 tests/test_golden.py
 py -3 tests/test_forge.py
 py -3 tests/test_roles.py
+py -3 tests/test_validation_modes.py
 py -3 tests/tier2_blindtest.py v4
 py -3 tests/test_js_parity.py
 node tests/test_loadout_codec.js

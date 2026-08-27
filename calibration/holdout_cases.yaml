@@ -1,0 +1,5 @@
+# HOLDOUT split — NEVER examined while tuning; scored only when a tuning
+# round is declared finished, then retired. EMPTY until fresh expert
+# rounds land — see README.md. Do not convert holdout misses into golden
+# tests until the evaluation round is complete.
+[]

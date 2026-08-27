@@ -1,0 +1,4 @@
+# VALIDATION split — compares candidate parameter settings during sweeps
+# (aggregate metrics only; individually-debugged cases move to train).
+# EMPTY until fresh expert rounds land — see README.md "Current state".
+[]

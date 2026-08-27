@@ -1,0 +1,171 @@
+{
+ "case_c_kit": [
+  "HEAD_PLATE_AVALON",
+  "ARMOR_PLATE_AVALON",
+  "SHOES_PLATE_AVALON"
+ ],
+ "cases": [
+  {
+   "case": "A_no_frontline_doctrine_gear",
+   "fitness_dressed": 86.6686,
+   "fitness_naked": 75.4441,
+   "frontline_in_top3_dressed": true,
+   "frontline_in_top3_naked": true,
+   "party": [
+    "MAIN_HOLYSTAFF_AVALON",
+    "2H_LONGBOW",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_DUALSWORD",
+    "2H_ARCANESTAFF_HELL",
+    "MAIN_ARCANESTAFF",
+    "2H_AXE"
+   ],
+   "recommend_top3_dressed": [
+    "2H_MACE_MORGANA",
+    "2H_SHAPESHIFTER_SET2",
+    "MAIN_ARCANESTAFF_UNDEAD"
+   ],
+   "recommend_top3_naked": [
+    "2H_SHAPESHIFTER_SET2",
+    "2H_MACE_MORGANA",
+    "2H_SHAPESHIFTER_KEEPER"
+   ],
+   "role_advisory_flags": [],
+   "tankiness": {
+    "below_floor_dressed": false,
+    "below_floor_naked": true,
+    "dressed": 15.883,
+    "floor_armed_at_size": true,
+    "floor_penalty_dressed": 0.0,
+    "floor_penalty_naked": 9.0,
+    "floor_units_eff": 1.7,
+    "naked": 0.0,
+    "target": 3.5
+   },
+   "tankiness_in_weak_dressed": false,
+   "tankiness_in_weak_naked": true,
+   "weak_top3_dressed": [
+    "clump_create",
+    "anti_zone",
+    "damage_debuff"
+   ],
+   "weak_top3_naked": [
+    "tankiness",
+    "clump_create",
+    "heal_sustain"
+   ]
+  },
+  {
+   "case": "B_one_real_tank",
+   "fitness_dressed": 83.9145,
+   "fitness_naked": 90.3426,
+   "frontline_in_top3_dressed": true,
+   "frontline_in_top3_naked": true,
+   "party": [
+    "MAIN_HOLYSTAFF_AVALON",
+    "2H_LONGBOW",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_DUALSWORD",
+    "2H_ARCANESTAFF_HELL",
+    "2H_MACE",
+    "2H_AXE"
+   ],
+   "recommend_top3_dressed": [
+    "2H_MACE_MORGANA",
+    "2H_SHAPESHIFTER_SET2",
+    "MAIN_ARCANESTAFF_UNDEAD"
+   ],
+   "recommend_top3_naked": [
+    "2H_SHAPESHIFTER_SET2",
+    "2H_MACE_MORGANA",
+    "MAIN_ARCANESTAFF_UNDEAD"
+   ],
+   "role_advisory_flags": [],
+   "tankiness": {
+    "below_floor_dressed": false,
+    "below_floor_naked": false,
+    "dressed": 17.383,
+    "floor_armed_at_size": true,
+    "floor_penalty_dressed": 0.0,
+    "floor_penalty_naked": 0.0,
+    "floor_units_eff": 1.7,
+    "naked": 3.0,
+    "target": 3.5
+   },
+   "tankiness_in_weak_dressed": false,
+   "tankiness_in_weak_naked": false,
+   "weak_top3_dressed": [
+    "clump_create",
+    "anti_zone",
+    "damage_debuff"
+   ],
+   "weak_top3_naked": [
+    "clump_create",
+    "heal_sustain",
+    "anti_zone"
+   ]
+  },
+  {
+   "case": "C_dps_in_full_plate",
+   "fitness_dressed": 87.3353,
+   "fitness_naked": 75.4441,
+   "frontline_in_top3_dressed": true,
+   "frontline_in_top3_naked": true,
+   "party": [
+    "MAIN_HOLYSTAFF_AVALON",
+    "2H_LONGBOW",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_DUALSWORD",
+    "2H_ARCANESTAFF_HELL",
+    "MAIN_ARCANESTAFF",
+    "2H_AXE"
+   ],
+   "recommend_top3_dressed": [
+    "2H_SHAPESHIFTER_SET2",
+    "2H_MACE_MORGANA",
+    "MAIN_ARCANESTAFF_UNDEAD"
+   ],
+   "recommend_top3_naked": [
+    "2H_SHAPESHIFTER_SET2",
+    "2H_MACE_MORGANA",
+    "2H_SHAPESHIFTER_KEEPER"
+   ],
+   "role_advisory_flags": [
+    "off_role_kit",
+    "off_role_kit"
+   ],
+   "tankiness": {
+    "below_floor_dressed": false,
+    "below_floor_naked": true,
+    "dressed": 23.086,
+    "floor_armed_at_size": true,
+    "floor_penalty_dressed": 0.0,
+    "floor_penalty_naked": 9.0,
+    "floor_units_eff": 1.7,
+    "naked": 0.0,
+    "target": 3.5
+   },
+   "tankiness_in_weak_dressed": false,
+   "tankiness_in_weak_naked": true,
+   "weak_top3_dressed": [
+    "clump_create",
+    "heal_sustain",
+    "anti_zone"
+   ],
+   "weak_top3_naked": [
+    "tankiness",
+    "clump_create",
+    "heal_sustain"
+   ]
+  }
+ ],
+ "content": "castle_outpost",
+ "kind": "frontline_floor_audit",
+ "size": 7,
+ "style": "balanced",
+ "tank_seats": [
+  "engage_tank",
+  "off_tank",
+  "stopper_tank"
+ ]
+}

@@ -1,0 +1,798 @@
+{
+ "1": {
+  "comp": "timothy_blap_blackzone_roam_2026_08",
+  "engine_rank": [
+   "HEAD_LEATHER_HELL",
+   "HEAD_CLOTH_SET2",
+   "HEAD_LEATHER_SET3",
+   "HEAD_LEATHER_MORGANA"
+  ],
+  "engine_top": "HEAD_LEATHER_HELL",
+  "id": "engage_tank_head_brawl",
+  "idx": 0,
+  "option_names": {
+   "A": "Stalker Hood",
+   "B": "Hellion Hood",
+   "C": "Assassin Hood",
+   "D": "Cleric Cowl"
+  },
+  "options": {
+   "A": "HEAD_LEATHER_MORGANA",
+   "B": "HEAD_LEATHER_HELL",
+   "C": "HEAD_LEATHER_SET3",
+   "D": "HEAD_CLOTH_SET2"
+  },
+  "party_names": [
+   "Camlann Mace",
+   "Heavy Mace",
+   "Staff of Balance",
+   "Dreadstorm Monarch",
+   "Mace",
+   "Malevolent Locus",
+   "Oathkeepers",
+   "Rootbound Staff",
+   "Carving Sword",
+   "Lifecurse Staff",
+   "Carrioncaller",
+   "Realmbreaker",
+   "Demonfang",
+   "Clarent Blade",
+   "Ursine Maulers",
+   "Bloodletter",
+   "Hallowfall",
+   "Hallowfall",
+   "Redemption Staff",
+   "Blight Staff"
+  ],
+  "seat_or_function": "engage_tank",
+  "slot": "head",
+  "style": "brawl",
+  "weapon": "2H_HAMMER",
+  "weapon_name": "Great Hammer"
+ },
+ "10": {
+  "comp": "albioncompo_ss_kite_20_2026_06",
+  "engine_rank": [
+   "SHOES_LEATHER_FEY",
+   "SHOES_LEATHER_ROYAL",
+   "SHOES_LEATHER_SET1",
+   "SHOES_CLOTH_SET1"
+  ],
+  "engine_top": "SHOES_LEATHER_FEY",
+  "id": "kite_dps_shoes",
+  "idx": 9,
+  "option_names": {
+   "A": "Mistwalker Shoes",
+   "B": "Scholar Sandals",
+   "C": "Royal Shoes",
+   "D": "Mercenary Shoes"
+  },
+  "options": {
+   "A": "SHOES_LEATHER_FEY",
+   "B": "SHOES_CLOTH_SET1",
+   "C": "SHOES_LEATHER_ROYAL",
+   "D": "SHOES_LEATHER_SET1"
+  },
+  "party_names": [
+   "Earthrune Staff",
+   "Polehammer",
+   "Great Arcane Staff",
+   "Occult Staff",
+   "Great Arcane Staff",
+   "Exalted Staff",
+   "Arcane Staff",
+   "Forgebark Staff",
+   "Bedrock Mace",
+   "Permafrost Prism",
+   "Bedrock Mace",
+   "Spiked Gauntlets",
+   "Incubus Mace",
+   "Damnation Staff",
+   "Rotcaller Staff",
+   "Witchwork Staff",
+   "Realmbreaker",
+   "Spirithunter",
+   "Wailing Bow",
+   "Hallowfall"
+  ],
+  "seat_or_function": "ranged_aoe",
+  "slot": "shoes",
+  "style": "kite",
+  "weapon": "2H_ARCANE_RINGPAIR_AVALON",
+  "weapon_name": "Evensong"
+ },
+ "11": {
+  "comp": "timothy_blap_blackzone_roam_2026_08",
+  "engine_rank": [
+   "HEAD_LEATHER_SET3",
+   "HEAD_PLATE_AVALON",
+   "HEAD_CLOTH_FEY",
+   "HEAD_CLOTH_AVALON"
+  ],
+  "engine_top": "HEAD_LEATHER_SET3",
+  "id": "anti_heal_head_brawl",
+  "idx": 10,
+  "option_names": {
+   "A": "Helmet of Valor",
+   "B": "Feyscale Hat",
+   "C": "Cowl of Purity",
+   "D": "Assassin Hood"
+  },
+  "options": {
+   "A": "HEAD_PLATE_AVALON",
+   "B": "HEAD_CLOTH_FEY",
+   "C": "HEAD_CLOTH_AVALON",
+   "D": "HEAD_LEATHER_SET3"
+  },
+  "party_names": [
+   "Camlann Mace",
+   "Heavy Mace",
+   "Staff of Balance",
+   "Dreadstorm Monarch",
+   "Mace",
+   "Malevolent Locus",
+   "Oathkeepers",
+   "Rootbound Staff",
+   "Carving Sword",
+   "Lifecurse Staff",
+   "Carrioncaller",
+   "Realmbreaker",
+   "Demonfang",
+   "Clarent Blade",
+   "Ursine Maulers",
+   "Bloodletter",
+   "Hallowfall",
+   "Hallowfall",
+   "Redemption Staff",
+   "Blight Staff"
+  ],
+  "seat_or_function": "anti_heal",
+  "slot": "head",
+  "style": "brawl",
+  "weapon": "2H_ARCANE_RINGPAIR_AVALON",
+  "weapon_name": "Evensong"
+ },
+ "12": {
+  "comp": "timothy_blap_blackzone_roam_2026_08",
+  "engine_rank": [
+   "ARMOR_LEATHER_SET2",
+   "ARMOR_LEATHER_SET3",
+   "ARMOR_LEATHER_AVALON",
+   "ARMOR_LEATHER_UNDEAD"
+  ],
+  "engine_top": "ARMOR_LEATHER_SET2",
+  "id": "anti_heal_chest_brawl",
+  "idx": 11,
+  "option_names": {
+   "A": "Assassin Jacket",
+   "B": "Hunter Jacket",
+   "C": "Specter Jacket",
+   "D": "Jacket of Tenacity"
+  },
+  "options": {
+   "A": "ARMOR_LEATHER_SET3",
+   "B": "ARMOR_LEATHER_SET2",
+   "C": "ARMOR_LEATHER_UNDEAD",
+   "D": "ARMOR_LEATHER_AVALON"
+  },
+  "party_names": [
+   "Camlann Mace",
+   "Heavy Mace",
+   "Staff of Balance",
+   "Dreadstorm Monarch",
+   "Mace",
+   "Malevolent Locus",
+   "Oathkeepers",
+   "Rootbound Staff",
+   "Carving Sword",
+   "Lifecurse Staff",
+   "Carrioncaller",
+   "Realmbreaker",
+   "Demonfang",
+   "Clarent Blade",
+   "Ursine Maulers",
+   "Bloodletter",
+   "Hallowfall",
+   "Hallowfall",
+   "Redemption Staff",
+   "Blight Staff"
+  ],
+  "seat_or_function": "anti_heal",
+  "slot": "armor",
+  "style": "brawl",
+  "weapon": "2H_ARCANE_RINGPAIR_AVALON",
+  "weapon_name": "Evensong"
+ },
+ "13": {
+  "comp": "albioncompo_20v20_competitive_2026_08",
+  "engine_rank": [
+   "HEAD_LEATHER_SET3",
+   "HEAD_PLATE_HELL",
+   "HEAD_PLATE_KEEPER",
+   "HEAD_CLOTH_KEEPER"
+  ],
+  "engine_top": "HEAD_LEATHER_SET3",
+  "id": "pierce_support_head_clap",
+  "idx": 12,
+  "option_names": {
+   "A": "Druid Cowl",
+   "B": "Demon Helmet",
+   "C": "Judicator Helmet",
+   "D": "Assassin Hood"
+  },
+  "options": {
+   "A": "HEAD_CLOTH_KEEPER",
+   "B": "HEAD_PLATE_HELL",
+   "C": "HEAD_PLATE_KEEPER",
+   "D": "HEAD_LEATHER_SET3"
+  },
+  "party_names": [
+   "Hand of Justice",
+   "Bedrock Mace",
+   "Bedrock Mace",
+   "Polehammer",
+   "Arcane Staff",
+   "Great Arcane Staff",
+   "Oathkeepers",
+   "Occult Staff",
+   "Hallowfall",
+   "Hallowfall",
+   "Hallowfall",
+   "Exalted Staff",
+   "Witchwork Staff",
+   "Permafrost Prism",
+   "Permafrost Prism",
+   "Spirithunter",
+   "Spiked Gauntlets",
+   "Realmbreaker",
+   "Rotcaller Staff",
+   "Dawnsong"
+  ],
+  "seat_or_function": "pierce",
+  "slot": "head",
+  "style": "clap",
+  "weapon": "2H_ARCANESTAFF",
+  "weapon_name": "Great Arcane Staff"
+ },
+ "14": {
+  "comp": "albioncompo_20v20_competitive_2026_08",
+  "engine_rank": [
+   "ARMOR_PLATE_SET2",
+   "ARMOR_PLATE_FEY",
+   "ARMOR_PLATE_SET3",
+   "ARMOR_PLATE_HELL"
+  ],
+  "engine_top": "ARMOR_PLATE_SET2",
+  "id": "pierce_support_chest_clap",
+  "idx": 13,
+  "option_names": {
+   "A": "Duskweaver Armor",
+   "B": "Demon Armor",
+   "C": "Knight Armor",
+   "D": "Guardian Armor"
+  },
+  "options": {
+   "A": "ARMOR_PLATE_FEY",
+   "B": "ARMOR_PLATE_HELL",
+   "C": "ARMOR_PLATE_SET2",
+   "D": "ARMOR_PLATE_SET3"
+  },
+  "party_names": [
+   "Hand of Justice",
+   "Bedrock Mace",
+   "Bedrock Mace",
+   "Polehammer",
+   "Arcane Staff",
+   "Great Arcane Staff",
+   "Oathkeepers",
+   "Occult Staff",
+   "Hallowfall",
+   "Hallowfall",
+   "Hallowfall",
+   "Exalted Staff",
+   "Witchwork Staff",
+   "Permafrost Prism",
+   "Permafrost Prism",
+   "Spirithunter",
+   "Spiked Gauntlets",
+   "Realmbreaker",
+   "Rotcaller Staff",
+   "Dawnsong"
+  ],
+  "seat_or_function": "pierce",
+  "slot": "armor",
+  "style": "clap",
+  "weapon": "2H_ARCANESTAFF",
+  "weapon_name": "Great Arcane Staff"
+ },
+ "15": {
+  "comp": "albioncompo_bist_roam15_2026_01",
+  "engine_rank": [
+   "HEAD_LEATHER_SET3",
+   "HEAD_LEATHER_AVALON",
+   "HEAD_PLATE_KEEPER",
+   "HEAD_PLATE_HELL"
+  ],
+  "engine_top": "HEAD_LEATHER_SET3",
+  "id": "defensive_support_head",
+  "idx": 14,
+  "option_names": {
+   "A": "Assassin Hood",
+   "B": "Judicator Helmet",
+   "C": "Demon Helmet",
+   "D": "Hood of Tenacity"
+  },
+  "options": {
+   "A": "HEAD_LEATHER_SET3",
+   "B": "HEAD_PLATE_KEEPER",
+   "C": "HEAD_PLATE_HELL",
+   "D": "HEAD_LEATHER_AVALON"
+  },
+  "party_names": [
+   "Mace",
+   "Heavy Mace",
+   "Lifecurse Staff",
+   "Great Arcane Staff",
+   "Oathkeepers",
+   "Polehammer",
+   "Hallowfall",
+   "Blight Staff",
+   "Hallowfall",
+   "Permafrost Prism",
+   "Carving Sword",
+   "Spiked Gauntlets",
+   "Realmbreaker",
+   "Demonfang",
+   "Demonfang"
+  ],
+  "seat_or_function": "shield_support",
+  "slot": "head",
+  "style": "balanced",
+  "weapon": "2H_ARCANESTAFF",
+  "weapon_name": "Great Arcane Staff"
+ },
+ "16": {
+  "comp": "albioncompo_bist_roam15_2026_01",
+  "engine_rank": [
+   "ARMOR_PLATE_FEY",
+   "ARMOR_PLATE_SET2",
+   "ARMOR_PLATE_SET3",
+   "ARMOR_PLATE_KEEPER"
+  ],
+  "engine_top": "ARMOR_PLATE_FEY",
+  "id": "defensive_support_chest",
+  "idx": 15,
+  "option_names": {
+   "A": "Duskweaver Armor",
+   "B": "Judicator Armor",
+   "C": "Guardian Armor",
+   "D": "Knight Armor"
+  },
+  "options": {
+   "A": "ARMOR_PLATE_FEY",
+   "B": "ARMOR_PLATE_KEEPER",
+   "C": "ARMOR_PLATE_SET3",
+   "D": "ARMOR_PLATE_SET2"
+  },
+  "party_names": [
+   "Mace",
+   "Heavy Mace",
+   "Lifecurse Staff",
+   "Great Arcane Staff",
+   "Oathkeepers",
+   "Polehammer",
+   "Hallowfall",
+   "Blight Staff",
+   "Hallowfall",
+   "Permafrost Prism",
+   "Carving Sword",
+   "Spiked Gauntlets",
+   "Realmbreaker",
+   "Demonfang",
+   "Demonfang"
+  ],
+  "seat_or_function": "shield_support",
+  "slot": "armor",
+  "style": "balanced",
+  "weapon": "2H_ARCANESTAFF",
+  "weapon_name": "Great Arcane Staff"
+ },
+ "2": {
+  "comp": "timothy_blap_blackzone_roam_2026_08",
+  "engine_rank": [
+   "SHOES_LEATHER_MORGANA",
+   "SHOES_LEATHER_SET2",
+   "SHOES_LEATHER_AVALON",
+   "SHOES_CLOTH_HELL"
+  ],
+  "engine_top": "SHOES_LEATHER_MORGANA",
+  "id": "engage_tank_shoes_brawl",
+  "idx": 1,
+  "option_names": {
+   "A": "Fiend Sandals",
+   "B": "Stalker Shoes",
+   "C": "Hunter Shoes",
+   "D": "Shoes of Tenacity"
+  },
+  "options": {
+   "A": "SHOES_CLOTH_HELL",
+   "B": "SHOES_LEATHER_MORGANA",
+   "C": "SHOES_LEATHER_SET2",
+   "D": "SHOES_LEATHER_AVALON"
+  },
+  "party_names": [
+   "Camlann Mace",
+   "Heavy Mace",
+   "Staff of Balance",
+   "Dreadstorm Monarch",
+   "Mace",
+   "Malevolent Locus",
+   "Oathkeepers",
+   "Rootbound Staff",
+   "Carving Sword",
+   "Lifecurse Staff",
+   "Carrioncaller",
+   "Realmbreaker",
+   "Demonfang",
+   "Clarent Blade",
+   "Ursine Maulers",
+   "Bloodletter",
+   "Hallowfall",
+   "Hallowfall",
+   "Redemption Staff",
+   "Blight Staff"
+  ],
+  "seat_or_function": "engage_tank",
+  "slot": "shoes",
+  "style": "brawl",
+  "weapon": "2H_HAMMER",
+  "weapon_name": "Great Hammer"
+ },
+ "3": {
+  "comp": "timothy_blap_blackzone_roam_2026_08",
+  "engine_rank": [
+   "CAPEITEM_FW_BRIDGEWATCH",
+   "CAPEITEM_FW_CAERLEON",
+   "CAPEITEM_SMUGGLER",
+   "CAPEITEM_DEMON"
+  ],
+  "engine_top": "CAPEITEM_FW_BRIDGEWATCH",
+  "id": "stopper_tank_cape_brawl",
+  "idx": 2,
+  "option_names": {
+   "A": "Smuggler Cape",
+   "B": "Bridgewatch Cape",
+   "C": "Caerleon Cape",
+   "D": "Demon Cape"
+  },
+  "options": {
+   "A": "CAPEITEM_SMUGGLER",
+   "B": "CAPEITEM_FW_BRIDGEWATCH",
+   "C": "CAPEITEM_FW_CAERLEON",
+   "D": "CAPEITEM_DEMON"
+  },
+  "party_names": [
+   "Camlann Mace",
+   "Heavy Mace",
+   "Staff of Balance",
+   "Dreadstorm Monarch",
+   "Mace",
+   "Malevolent Locus",
+   "Oathkeepers",
+   "Rootbound Staff",
+   "Carving Sword",
+   "Lifecurse Staff",
+   "Carrioncaller",
+   "Realmbreaker",
+   "Demonfang",
+   "Clarent Blade",
+   "Ursine Maulers",
+   "Bloodletter",
+   "Hallowfall",
+   "Hallowfall",
+   "Redemption Staff",
+   "Blight Staff"
+  ],
+  "seat_or_function": "stopper_tank",
+  "slot": "cape",
+  "style": "brawl",
+  "weapon": "2H_MACE",
+  "weapon_name": "Heavy Mace"
+ },
+ "4": {
+  "comp": "timothy_blap_blackzone_roam_2026_08",
+  "engine_rank": [
+   "OFF_JESTERCANE_HELL",
+   "OFF_HORN_KEEPER",
+   "OFF_TOTEM_KEEPER",
+   "OFF_SHIELD_AVALON"
+  ],
+  "engine_top": "OFF_JESTERCANE_HELL",
+  "id": "stopper_tank_offhand_brawl",
+  "idx": 3,
+  "option_names": {
+   "A": "Taproot",
+   "B": "Mistcaller",
+   "C": "Astral Aegis",
+   "D": "Leering Cane"
+  },
+  "options": {
+   "A": "OFF_TOTEM_KEEPER",
+   "B": "OFF_HORN_KEEPER",
+   "C": "OFF_SHIELD_AVALON",
+   "D": "OFF_JESTERCANE_HELL"
+  },
+  "party_names": [
+   "Camlann Mace",
+   "Heavy Mace",
+   "Staff of Balance",
+   "Dreadstorm Monarch",
+   "Mace",
+   "Malevolent Locus",
+   "Oathkeepers",
+   "Rootbound Staff",
+   "Carving Sword",
+   "Lifecurse Staff",
+   "Carrioncaller",
+   "Realmbreaker",
+   "Demonfang",
+   "Clarent Blade",
+   "Ursine Maulers",
+   "Bloodletter",
+   "Hallowfall",
+   "Hallowfall",
+   "Redemption Staff",
+   "Blight Staff"
+  ],
+  "seat_or_function": "stopper_tank",
+  "slot": "offhand",
+  "style": "brawl",
+  "weapon": "2H_MACE",
+  "weapon_name": "Heavy Mace"
+ },
+ "5": {
+  "comp": "albioncompo_bist_roam15_2026_01",
+  "engine_rank": [
+   "OFF_SHIELD",
+   "OFF_TOWERSHIELD_UNDEAD",
+   "OFF_HORN_KEEPER",
+   "OFF_SHIELD_AVALON"
+  ],
+  "engine_top": "OFF_SHIELD",
+  "id": "main_healer_offhand",
+  "idx": 4,
+  "option_names": {
+   "A": "Mistcaller",
+   "B": "Astral Aegis",
+   "C": "Shield",
+   "D": "Sarcophagus"
+  },
+  "options": {
+   "A": "OFF_HORN_KEEPER",
+   "B": "OFF_SHIELD_AVALON",
+   "C": "OFF_SHIELD",
+   "D": "OFF_TOWERSHIELD_UNDEAD"
+  },
+  "party_names": [
+   "Mace",
+   "Heavy Mace",
+   "Lifecurse Staff",
+   "Great Arcane Staff",
+   "Oathkeepers",
+   "Polehammer",
+   "Hallowfall",
+   "Blight Staff",
+   "Hallowfall",
+   "Permafrost Prism",
+   "Carving Sword",
+   "Spiked Gauntlets",
+   "Realmbreaker",
+   "Demonfang",
+   "Demonfang"
+  ],
+  "seat_or_function": "main_healer",
+  "slot": "offhand",
+  "style": "balanced",
+  "weapon": "2H_HOLYSTAFF_HELL",
+  "weapon_name": "Fallen Staff"
+ },
+ "6": {
+  "comp": "albioncompo_bist_roam15_2026_01",
+  "engine_rank": [
+   "T7_POTION_STONESKIN",
+   "T6_POTION_ENERGY",
+   "T7_POTION_CLEANSE2",
+   "T7_POTION_REVIVE"
+  ],
+  "engine_top": "T7_POTION_STONESKIN",
+  "id": "main_healer_potion",
+  "idx": 5,
+  "option_names": {
+   "A": "Gigantify Potion",
+   "B": "Cleansing Potion",
+   "C": "Resistance Potion",
+   "D": "Energy Potion"
+  },
+  "options": {
+   "A": "T7_POTION_REVIVE",
+   "B": "T7_POTION_CLEANSE2",
+   "C": "T7_POTION_STONESKIN",
+   "D": "T6_POTION_ENERGY"
+  },
+  "party_names": [
+   "Mace",
+   "Heavy Mace",
+   "Lifecurse Staff",
+   "Great Arcane Staff",
+   "Oathkeepers",
+   "Polehammer",
+   "Hallowfall",
+   "Blight Staff",
+   "Hallowfall",
+   "Permafrost Prism",
+   "Carving Sword",
+   "Spiked Gauntlets",
+   "Realmbreaker",
+   "Demonfang",
+   "Demonfang"
+  ],
+  "seat_or_function": "main_healer",
+  "slot": "potion",
+  "style": "balanced",
+  "weapon": "2H_HOLYSTAFF_HELL",
+  "weapon_name": "Fallen Staff"
+ },
+ "7": {
+  "comp": "albioncompo_20v20_competitive_2026_08",
+  "engine_rank": [
+   "ARMOR_CLOTH_SET3",
+   "ARMOR_CLOTH_SET2",
+   "ARMOR_LEATHER_AVALON",
+   "ARMOR_LEATHER_SET2"
+  ],
+  "engine_top": "ARMOR_CLOTH_SET3",
+  "id": "clap_ranged_dps_chest",
+  "idx": 6,
+  "option_names": {
+   "A": "Mage Robe",
+   "B": "Hunter Jacket",
+   "C": "Jacket of Tenacity",
+   "D": "Cleric Robe"
+  },
+  "options": {
+   "A": "ARMOR_CLOTH_SET3",
+   "B": "ARMOR_LEATHER_SET2",
+   "C": "ARMOR_LEATHER_AVALON",
+   "D": "ARMOR_CLOTH_SET2"
+  },
+  "party_names": [
+   "Hand of Justice",
+   "Bedrock Mace",
+   "Bedrock Mace",
+   "Polehammer",
+   "Arcane Staff",
+   "Great Arcane Staff",
+   "Oathkeepers",
+   "Occult Staff",
+   "Hallowfall",
+   "Hallowfall",
+   "Hallowfall",
+   "Exalted Staff",
+   "Witchwork Staff",
+   "Permafrost Prism",
+   "Permafrost Prism",
+   "Spirithunter",
+   "Spiked Gauntlets",
+   "Realmbreaker",
+   "Rotcaller Staff",
+   "Dawnsong"
+  ],
+  "seat_or_function": "ranged_aoe",
+  "slot": "armor",
+  "style": "clap",
+  "weapon": "2H_ARCANE_RINGPAIR_AVALON",
+  "weapon_name": "Evensong"
+ },
+ "8": {
+  "comp": "albioncompo_20v20_competitive_2026_08",
+  "engine_rank": [
+   "SHOES_LEATHER_MORGANA",
+   "SHOES_CLOTH_ROYAL",
+   "SHOES_LEATHER_AVALON",
+   "SHOES_PLATE_AVALON"
+  ],
+  "engine_top": "SHOES_LEATHER_MORGANA",
+  "id": "clap_ranged_dps_shoes",
+  "idx": 7,
+  "option_names": {
+   "A": "Royal Sandals",
+   "B": "Boots of Valor",
+   "C": "Shoes of Tenacity",
+   "D": "Stalker Shoes"
+  },
+  "options": {
+   "A": "SHOES_CLOTH_ROYAL",
+   "B": "SHOES_PLATE_AVALON",
+   "C": "SHOES_LEATHER_AVALON",
+   "D": "SHOES_LEATHER_MORGANA"
+  },
+  "party_names": [
+   "Hand of Justice",
+   "Bedrock Mace",
+   "Bedrock Mace",
+   "Polehammer",
+   "Arcane Staff",
+   "Great Arcane Staff",
+   "Oathkeepers",
+   "Occult Staff",
+   "Hallowfall",
+   "Hallowfall",
+   "Hallowfall",
+   "Exalted Staff",
+   "Witchwork Staff",
+   "Permafrost Prism",
+   "Permafrost Prism",
+   "Spirithunter",
+   "Spiked Gauntlets",
+   "Realmbreaker",
+   "Rotcaller Staff",
+   "Dawnsong"
+  ],
+  "seat_or_function": "ranged_aoe",
+  "slot": "shoes",
+  "style": "clap",
+  "weapon": "2H_ARCANE_RINGPAIR_AVALON",
+  "weapon_name": "Evensong"
+ },
+ "9": {
+  "comp": "timothy_blap_blackzone_roam_2026_08",
+  "engine_rank": [
+   "ARMOR_LEATHER_HELL",
+   "ARMOR_LEATHER_SET3",
+   "ARMOR_LEATHER_FEY",
+   "ARMOR_LEATHER_AVALON"
+  ],
+  "engine_top": "ARMOR_LEATHER_HELL",
+  "id": "brawl_dps_chest",
+  "idx": 8,
+  "option_names": {
+   "A": "Jacket of Tenacity",
+   "B": "Assassin Jacket",
+   "C": "Hellion Jacket",
+   "D": "Mistwalker Jacket"
+  },
+  "options": {
+   "A": "ARMOR_LEATHER_AVALON",
+   "B": "ARMOR_LEATHER_SET3",
+   "C": "ARMOR_LEATHER_HELL",
+   "D": "ARMOR_LEATHER_FEY"
+  },
+  "party_names": [
+   "Camlann Mace",
+   "Heavy Mace",
+   "Staff of Balance",
+   "Dreadstorm Monarch",
+   "Mace",
+   "Malevolent Locus",
+   "Oathkeepers",
+   "Rootbound Staff",
+   "Carving Sword",
+   "Lifecurse Staff",
+   "Carrioncaller",
+   "Realmbreaker",
+   "Demonfang",
+   "Clarent Blade",
+   "Ursine Maulers",
+   "Bloodletter",
+   "Hallowfall",
+   "Hallowfall",
+   "Redemption Staff",
+   "Blight Staff"
+  ],
+  "seat_or_function": "sustained_brawler",
+  "slot": "armor",
+  "style": "brawl",
+  "weapon": "2H_AXE",
+  "weapon_name": "Greataxe"
+ }
+}

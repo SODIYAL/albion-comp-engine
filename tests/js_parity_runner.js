@@ -38,7 +38,14 @@ const out = cases.map((c, i) => {
                score: r.score,
                feasible: r.feasible, filler: r.filler, held: r.held };
   }
+  // V3-W parity (2026-08-27): dressing OFF while incumbents keep their case
+  // gears — candidates must evaluate naked (mirrors test_js_parity.py).
+  e.setDressing(false);
+  const nakedRec = e.recommend(c.party, 5, null, c.combos, c.gears).map((r) => ({
+    weapon: r.weapon, score: r.score, combo: r.combo, kit: r.kit }));
+  e.setDressing(true);
   return {
+    recommend_naked_cand: nakedRec,
     refine: rp === null ? null : e.refine(rp, REFINE_PASSES, c.refine_pool),
     comp_score: e.compScore(c.party),
     comp_score_locked: e.compScore(c.party, c.combos),
@@ -72,7 +79,8 @@ const out = cases.map((c, i) => {
     })(),
     recommend_locked: e.recommend(c.party, 5, null, c.combos).map((r) => ({
       weapon: r.weapon, score: r.score })),
-    weaknesses: e.weaknesses(c.party, 5).map((g) => ({ cap: g.cap, gap: g.gap })),
+    weaknesses: e.weaknesses(c.party, 5, null, c.gears)
+      .map((g) => ({ cap: g.cap, gap: g.gap })),
     uncovered: e.uncoveredCaps(c.party).slice().sort(),
     identity: e.compIdentity(c.party, c.combos),
     kill_pressure: e.killPressure(c.party, c.combos),

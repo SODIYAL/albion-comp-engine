@@ -1,0 +1,379 @@
+{
+ "beta": 0.2,
+ "blap_practice_check": {
+  "beta": 0.2,
+  "comp": "timothy_blap_blackzone_roam_2026_08",
+  "engine_synergy": 12.07,
+  "pairs": [
+   {
+    "bonus": 1.5,
+    "forgone": 0.0,
+    "if_gear_counted": 3.75,
+    "pair": [
+     "clump_create",
+     "burst_aoe"
+    ],
+    "weapon_only": 3.75
+   },
+   {
+    "bonus": 0.8,
+    "forgone": 0.0,
+    "if_gear_counted": 7.76,
+    "pair": [
+     "engage",
+     "catch"
+    ],
+    "weapon_only": 7.76
+   },
+   {
+    "bonus": 0.8,
+    "forgone": -0.56,
+    "if_gear_counted": 0.0,
+    "pair": [
+     "resist_shred",
+     "burst_st"
+    ],
+    "weapon_only": 0.56
+   },
+   {
+    "bonus": 0.8,
+    "forgone": 0.0,
+    "if_gear_counted": 0.0,
+    "pair": [
+     "heal_reduction",
+     "sustained_dps"
+    ],
+    "weapon_only": 0.0
+   }
+  ],
+  "size": 20,
+  "total_forgone_pair_units": -0.56,
+  "total_forgone_score": -0.112
+ },
+ "content": "blackzone_roam",
+ "kind": "gear_synergy_audit",
+ "pairs": [
+  {
+   "bonus": 1.5,
+   "carriers": {
+    "gear_a": [
+     "ARMOR_PLATE_UNDEAD",
+     3
+    ],
+    "gear_b": [
+     "ARMOR_CLOTH_FEY",
+     2
+    ],
+    "neutral": "2H_ARCANESTAFF",
+    "weapon_a": [
+     "2H_HAMMER_AVALON",
+     3.0
+    ],
+    "weapon_b": [
+     "2H_BOW_HELL",
+     2.8285714285714287
+    ]
+   },
+   "cases": [
+    {
+     "comp_score_dressed": 15.543332,
+     "comp_score_naked": 15.543332,
+     "forgone": 0.0,
+     "gears": null,
+     "label": "1_weaponA_weaponB",
+     "pair_value_if_gear_counted": 3.75,
+     "pair_value_weapon_only": 3.75,
+     "party": [
+      "2H_HAMMER_AVALON",
+      "2H_BOW_HELL"
+     ],
+     "synergy_engine": 3.75
+    },
+    {
+     "comp_score_dressed": 5.402669,
+     "comp_score_naked": -1.746979,
+     "forgone": 2.25,
+     "gears": [
+      [
+       "ARMOR_PLATE_UNDEAD"
+      ],
+      null
+     ],
+     "label": "2_gearA_weaponB",
+     "pair_value_if_gear_counted": 2.25,
+     "pair_value_weapon_only": 0.0,
+     "party": [
+      "2H_ARCANESTAFF",
+      "2H_BOW_HELL"
+     ],
+     "synergy_engine": 0.0
+    },
+    {
+     "comp_score_dressed": 16.096464,
+     "comp_score_naked": 12.35043,
+     "forgone": 2.121429,
+     "gears": [
+      null,
+      [
+       "ARMOR_CLOTH_FEY"
+      ]
+     ],
+     "label": "3_weaponA_gearB",
+     "pair_value_if_gear_counted": 2.121429,
+     "pair_value_weapon_only": 0.0,
+     "party": [
+      "2H_HAMMER_AVALON",
+      "2H_ARCANESTAFF"
+     ],
+     "synergy_engine": 0.0
+    }
+   ],
+   "pair": [
+    "clump_create",
+    "burst_aoe"
+   ]
+  },
+  {
+   "bonus": 0.8,
+   "carriers": {
+    "gear_a": [
+     "SHOES_LEATHER_HELL",
+     3
+    ],
+    "gear_b": [
+     "ARMOR_PLATE_UNDEAD",
+     2
+    ],
+    "neutral": "2H_ARCANESTAFF",
+    "weapon_a": [
+     "2H_CLAYMORE",
+     3.0
+    ],
+    "weapon_b": [
+     "2H_POLEHAMMER",
+     4.6
+    ]
+   },
+   "cases": [
+    {
+     "comp_score_dressed": 8.795341,
+     "comp_score_naked": 8.795341,
+     "forgone": 0.0,
+     "gears": null,
+     "label": "1_weaponA_weaponB",
+     "pair_value_if_gear_counted": 2.28,
+     "pair_value_weapon_only": 2.28,
+     "party": [
+      "2H_CLAYMORE",
+      "2H_POLEHAMMER"
+     ],
+     "synergy_engine": 2.96
+    },
+    {
+     "comp_score_dressed": 8.706939,
+     "comp_score_naked": 7.388006,
+     "forgone": 1.2,
+     "gears": [
+      [
+       "SHOES_LEATHER_HELL"
+      ],
+      null
+     ],
+     "label": "2_gearA_weaponB",
+     "pair_value_if_gear_counted": 1.2,
+     "pair_value_weapon_only": 0.0,
+     "party": [
+      "2H_ARCANESTAFF",
+      "2H_POLEHAMMER"
+     ],
+     "synergy_engine": 0.0
+    },
+    {
+     "comp_score_dressed": 5.18174,
+     "comp_score_naked": -1.868735,
+     "forgone": 0.8,
+     "gears": [
+      null,
+      [
+       "ARMOR_PLATE_UNDEAD"
+      ]
+     ],
+     "label": "3_weaponA_gearB",
+     "pair_value_if_gear_counted": 0.8,
+     "pair_value_weapon_only": 0.0,
+     "party": [
+      "2H_CLAYMORE",
+      "2H_ARCANESTAFF"
+     ],
+     "synergy_engine": 0.0
+    }
+   ],
+   "pair": [
+    "engage",
+    "catch"
+   ]
+  },
+  {
+   "bonus": 0.8,
+   "carriers": {
+    "gear_a": [
+     "HEAD_LEATHER_MORGANA",
+     2
+    ],
+    "gear_b": [
+     "ARMOR_LEATHER_SET3",
+     2
+    ],
+    "neutral": "2H_ARCANESTAFF",
+    "weapon_a": [
+     "2H_CLEAVER_HELL",
+     2.0
+    ],
+    "weapon_b": [
+     "2H_DAGGERPAIR",
+     3.868965517241379
+    ]
+   },
+   "cases": [
+    {
+     "comp_score_dressed": 2.708628,
+     "comp_score_naked": 2.708628,
+     "forgone": 0.0,
+     "gears": null,
+     "label": "1_weaponA_weaponB",
+     "pair_value_if_gear_counted": 0.68,
+     "pair_value_weapon_only": 0.68,
+     "party": [
+      "2H_CLEAVER_HELL",
+      "2H_DAGGERPAIR"
+     ],
+     "synergy_engine": 1.48
+    },
+    {
+     "comp_score_dressed": -0.208389,
+     "comp_score_naked": -1.432148,
+     "forgone": 0.68,
+     "gears": [
+      [
+       "HEAD_LEATHER_MORGANA"
+      ],
+      null
+     ],
+     "label": "2_gearA_weaponB",
+     "pair_value_if_gear_counted": 0.68,
+     "pair_value_weapon_only": 0.0,
+     "party": [
+      "2H_ARCANESTAFF",
+      "2H_DAGGERPAIR"
+     ],
+     "synergy_engine": 0.0
+    },
+    {
+     "comp_score_dressed": 4.955967,
+     "comp_score_naked": 1.420762,
+     "forgone": 0.68,
+     "gears": [
+      null,
+      [
+       "ARMOR_LEATHER_SET3"
+      ]
+     ],
+     "label": "3_weaponA_gearB",
+     "pair_value_if_gear_counted": 0.68,
+     "pair_value_weapon_only": 0.0,
+     "party": [
+      "2H_CLEAVER_HELL",
+      "2H_ARCANESTAFF"
+     ],
+     "synergy_engine": 0.0
+    }
+   ],
+   "pair": [
+    "resist_shred",
+    "burst_st"
+   ]
+  },
+  {
+   "bonus": 0.8,
+   "carriers": {
+    "gear_a": [
+     "HEAD_LEATHER_AVALON",
+     3
+    ],
+    "gear_b": [
+     "ARMOR_CLOTH_KEEPER",
+     2
+    ],
+    "neutral": "2H_COMBATSTAFF_MORGANA",
+    "weapon_a": [
+     "2H_FIRE_RINGPAIR_AVALON",
+     2.0
+    ],
+    "weapon_b": [
+     "2H_BOW",
+     3.0
+    ]
+   },
+   "cases": [
+    {
+     "comp_score_dressed": -0.008225,
+     "comp_score_naked": -0.008225,
+     "forgone": 0.0,
+     "gears": null,
+     "label": "1_weaponA_weaponB",
+     "pair_value_if_gear_counted": 0.0,
+     "pair_value_weapon_only": 0.0,
+     "party": [
+      "2H_FIRE_RINGPAIR_AVALON",
+      "2H_BOW"
+     ],
+     "synergy_engine": 0.0
+    },
+    {
+     "comp_score_dressed": -1.366141,
+     "comp_score_naked": -4.389318,
+     "forgone": 1.2,
+     "gears": [
+      [
+       "HEAD_LEATHER_AVALON"
+      ],
+      null
+     ],
+     "label": "2_gearA_weaponB",
+     "pair_value_if_gear_counted": 1.2,
+     "pair_value_weapon_only": 0.0,
+     "party": [
+      "2H_COMBATSTAFF_MORGANA",
+      "2H_BOW"
+     ],
+     "synergy_engine": 0.0
+    },
+    {
+     "comp_score_dressed": 8.526087,
+     "comp_score_naked": -1.446351,
+     "forgone": 0.0,
+     "gears": [
+      null,
+      [
+       "ARMOR_CLOTH_KEEPER"
+      ]
+     ],
+     "label": "3_weaponA_gearB",
+     "pair_value_if_gear_counted": 0.0,
+     "pair_value_weapon_only": 0.0,
+     "party": [
+      "2H_FIRE_RINGPAIR_AVALON",
+      "2H_COMBATSTAFF_MORGANA"
+     ],
+     "synergy_engine": 0.0
+    }
+   ],
+   "pair": [
+    "heal_reduction",
+    "sustained_dps"
+   ]
+  }
+ ],
+ "size": 10,
+ "style": "balanced"
+}

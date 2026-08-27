@@ -1,0 +1,8754 @@
+{
+ "aggregate": [
+  {
+   "cap": "anti_zone",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 4,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "buff_allies",
+   "gear_breaks_soft": 3,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 4,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 4.95,
+   "parties": 4,
+   "soft_exceeded_dressed": 4,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "burst_aoe",
+   "gear_breaks_soft": 2,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.4721,
+   "parties": 4,
+   "soft_exceeded_dressed": 3,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "burst_st",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 2,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.3971,
+   "parties": 4,
+   "soft_exceeded_dressed": 2,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 3,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "catch",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0205,
+   "parties": 4,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "cleanse",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 4,
+   "soft_exceeded_dressed": 2,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "clump_create",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 4,
+   "soft_exceeded_dressed": 2,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 3,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "damage_debuff",
+   "gear_breaks_soft": 2,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 4,
+   "gear_flips_target": 3,
+   "mean_delta_vs_target": 2.6562,
+   "parties": 4,
+   "soft_exceeded_dressed": 3,
+   "suspicious": true,
+   "target_met_combo": 1,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "disengage",
+   "gear_breaks_soft": 3,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 3,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 2.4206,
+   "parties": 4,
+   "soft_exceeded_dressed": 4,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "engage",
+   "gear_breaks_soft": 2,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 2,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.6838,
+   "parties": 4,
+   "soft_exceeded_dressed": 2,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 3,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "execute",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.2245,
+   "parties": 4,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "heal_burst",
+   "gear_breaks_soft": 3,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 0.4002,
+   "parties": 4,
+   "soft_exceeded_dressed": 3,
+   "suspicious": true,
+   "target_met_combo": 3,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "heal_reduction",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 2,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.4412,
+   "parties": 4,
+   "soft_exceeded_dressed": 3,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 3,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "heal_sustain",
+   "gear_breaks_soft": 3,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 2,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 0.4672,
+   "parties": 4,
+   "soft_exceeded_dressed": 3,
+   "suspicious": true,
+   "target_met_combo": 3,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "mobility",
+   "gear_breaks_soft": 2,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 4,
+   "gear_flips_target": 2,
+   "mean_delta_vs_target": 1.0943,
+   "parties": 4,
+   "soft_exceeded_dressed": 2,
+   "suspicious": true,
+   "target_met_combo": 2,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "peel",
+   "gear_breaks_soft": 4,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 3,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 0.8838,
+   "parties": 4,
+   "soft_exceeded_dressed": 4,
+   "suspicious": true,
+   "target_met_combo": 3,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "purge",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 2,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 0.5,
+   "parties": 4,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "ranged_presence",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 4,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 2,
+   "target_met_dressed": 2,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "resist_shred",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.1,
+   "parties": 4,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "silence",
+   "gear_breaks_soft": 3,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 3,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 1.5789,
+   "parties": 4,
+   "soft_exceeded_dressed": 3,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 3,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "stun",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 3,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 1.4469,
+   "parties": 4,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "sustained_dps",
+   "gear_breaks_soft": 4,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 4,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 3.0786,
+   "parties": 4,
+   "soft_exceeded_dressed": 4,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "tankiness",
+   "gear_breaks_soft": 4,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 4,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 5.9721,
+   "parties": 4,
+   "soft_exceeded_dressed": 4,
+   "suspicious": true,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "zone_control",
+   "gear_breaks_soft": 2,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 3,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.7592,
+   "parties": 4,
+   "soft_exceeded_dressed": 3,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "blackzone_roam"
+  },
+  {
+   "cap": "anti_zone",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 3,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 0,
+   "target_met_dressed": 0,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "burst_aoe",
+   "gear_breaks_soft": 2,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 2,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 0.8847,
+   "parties": 3,
+   "soft_exceeded_dressed": 2,
+   "suspicious": false,
+   "target_met_combo": 2,
+   "target_met_dressed": 3,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "cleanse",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 3,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "clump_create",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 3,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 0,
+   "target_met_dressed": 0,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "damage_debuff",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 3,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "disengage",
+   "gear_breaks_soft": 2,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 3,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 4.4444,
+   "parties": 3,
+   "soft_exceeded_dressed": 3,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 3,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "engage",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 3,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 2.1569,
+   "parties": 3,
+   "soft_exceeded_dressed": 3,
+   "suspicious": false,
+   "target_met_combo": 2,
+   "target_met_dressed": 3,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "heal_burst",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 2,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.4902,
+   "parties": 3,
+   "soft_exceeded_dressed": 0,
+   "suspicious": true,
+   "target_met_combo": 3,
+   "target_met_dressed": 3,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "heal_reduction",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 2.2222,
+   "parties": 3,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 3,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "heal_sustain",
+   "gear_breaks_soft": 3,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 3,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.6602,
+   "parties": 3,
+   "soft_exceeded_dressed": 3,
+   "suspicious": true,
+   "target_met_combo": 3,
+   "target_met_dressed": 3,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "mobility",
+   "gear_breaks_soft": 2,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 3,
+   "gear_flips_target": 2,
+   "mean_delta_vs_target": 4.5098,
+   "parties": 3,
+   "soft_exceeded_dressed": 3,
+   "suspicious": true,
+   "target_met_combo": 1,
+   "target_met_dressed": 3,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "peel",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 3,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 3.3654,
+   "parties": 3,
+   "soft_exceeded_dressed": 3,
+   "suspicious": true,
+   "target_met_combo": 3,
+   "target_met_dressed": 3,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "purge",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 0.3922,
+   "parties": 3,
+   "soft_exceeded_dressed": 2,
+   "suspicious": false,
+   "target_met_combo": 2,
+   "target_met_dressed": 3,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "resist_shred",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 2,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.3921,
+   "parties": 3,
+   "soft_exceeded_dressed": 2,
+   "suspicious": true,
+   "target_met_combo": 2,
+   "target_met_dressed": 2,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "silence",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 2,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 3.1091,
+   "parties": 3,
+   "soft_exceeded_dressed": 2,
+   "suspicious": false,
+   "target_met_combo": 2,
+   "target_met_dressed": 2,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "stun",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 2,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 1.0283,
+   "parties": 3,
+   "soft_exceeded_dressed": 2,
+   "suspicious": false,
+   "target_met_combo": 2,
+   "target_met_dressed": 2,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "sustained_dps",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 3,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 7.8929,
+   "parties": 3,
+   "soft_exceeded_dressed": 3,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 3,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "tankiness",
+   "gear_breaks_soft": 2,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 3,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 5.2509,
+   "parties": 3,
+   "soft_exceeded_dressed": 3,
+   "suspicious": true,
+   "target_met_combo": 3,
+   "target_met_dressed": 3,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "zone_control",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 3,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 1.282,
+   "parties": 3,
+   "soft_exceeded_dressed": 2,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 3,
+   "template": "castle_outpost"
+  },
+  {
+   "cap": "anti_zone",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 1,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 0,
+   "target_met_dressed": 0,
+   "template": "roads"
+  },
+  {
+   "cap": "buff_allies",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 3.3333,
+   "parties": 1,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 0,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "burst_aoe",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.5341,
+   "parties": 1,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "burst_st",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.2353,
+   "parties": 1,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 0,
+   "target_met_dressed": 0,
+   "template": "roads"
+  },
+  {
+   "cap": "catch",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 1,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "cleanse",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 1,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "clump_create",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 1,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 0,
+   "target_met_dressed": 0,
+   "template": "roads"
+  },
+  {
+   "cap": "damage_debuff",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 1,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 0,
+   "target_met_dressed": 0,
+   "template": "roads"
+  },
+  {
+   "cap": "disengage",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 4.4118,
+   "parties": 1,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "engage",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 1.4706,
+   "parties": 1,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "execute",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 1,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 0,
+   "target_met_dressed": 0,
+   "template": "roads"
+  },
+  {
+   "cap": "heal_burst",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.7692,
+   "parties": 1,
+   "soft_exceeded_dressed": 1,
+   "suspicious": true,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "heal_reduction",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.8824,
+   "parties": 1,
+   "soft_exceeded_dressed": 1,
+   "suspicious": true,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "heal_sustain",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.5769,
+   "parties": 1,
+   "soft_exceeded_dressed": 1,
+   "suspicious": true,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "mobility",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 1.9118,
+   "parties": 1,
+   "soft_exceeded_dressed": 1,
+   "suspicious": true,
+   "target_met_combo": 0,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "peel",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 4.4231,
+   "parties": 1,
+   "soft_exceeded_dressed": 1,
+   "suspicious": true,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "purge",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 2.2222,
+   "parties": 1,
+   "soft_exceeded_dressed": 1,
+   "suspicious": true,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "resist_shred",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.7692,
+   "parties": 1,
+   "soft_exceeded_dressed": 1,
+   "suspicious": true,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "self_sustain",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 1,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 0,
+   "target_met_dressed": 0,
+   "template": "roads"
+  },
+  {
+   "cap": "silence",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 5.5,
+   "parties": 1,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "stun",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 2.9706,
+   "parties": 1,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "sustained_dps",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 4.897,
+   "parties": 1,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "tankiness",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 6.2165,
+   "parties": 1,
+   "soft_exceeded_dressed": 1,
+   "suspicious": true,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "zone_control",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 1.5385,
+   "parties": 1,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 0,
+   "target_met_dressed": 1,
+   "template": "roads"
+  },
+  {
+   "cap": "anti_zone",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 4,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "buff_allies",
+   "gear_breaks_soft": 4,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 4,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 2.8,
+   "parties": 4,
+   "soft_exceeded_dressed": 4,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "burst_aoe",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 2,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 0.804,
+   "parties": 4,
+   "soft_exceeded_dressed": 2,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "burst_st",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.027,
+   "parties": 4,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 1,
+   "target_met_dressed": 1,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "catch",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 4,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "cleanse",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 4,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "clump_create",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 4,
+   "soft_exceeded_dressed": 2,
+   "suspicious": false,
+   "target_met_combo": 2,
+   "target_met_dressed": 2,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "damage_debuff",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 1,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 0.7812,
+   "parties": 4,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 0,
+   "target_met_dressed": 1,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "disengage",
+   "gear_breaks_soft": 2,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 2,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 1.0913,
+   "parties": 4,
+   "soft_exceeded_dressed": 2,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "engage",
+   "gear_breaks_soft": 2,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 4,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.9885,
+   "parties": 4,
+   "soft_exceeded_dressed": 2,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "execute",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 4,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 0,
+   "target_met_dressed": 0,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "heal_burst",
+   "gear_breaks_soft": 2,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 2,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.476,
+   "parties": 4,
+   "soft_exceeded_dressed": 2,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "heal_reduction",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 4,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 2,
+   "target_met_dressed": 2,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "heal_sustain",
+   "gear_breaks_soft": 1,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 2,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.4392,
+   "parties": 4,
+   "soft_exceeded_dressed": 1,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "mobility",
+   "gear_breaks_soft": 2,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 4,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 2.4947,
+   "parties": 4,
+   "soft_exceeded_dressed": 2,
+   "suspicious": true,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "peel",
+   "gear_breaks_soft": 3,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 4,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 1.079,
+   "parties": 4,
+   "soft_exceeded_dressed": 4,
+   "suspicious": true,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "purge",
+   "gear_breaks_soft": 4,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 4,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 1.3195,
+   "parties": 4,
+   "soft_exceeded_dressed": 4,
+   "suspicious": true,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "ranged_presence",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 4,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 3,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "resist_shred",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 0,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 0.0,
+   "parties": 4,
+   "soft_exceeded_dressed": 0,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "silence",
+   "gear_breaks_soft": 3,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 4,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 2.1654,
+   "parties": 4,
+   "soft_exceeded_dressed": 3,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "stun",
+   "gear_breaks_soft": 0,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 3,
+   "gear_flips_target": 1,
+   "mean_delta_vs_target": 1.9625,
+   "parties": 4,
+   "soft_exceeded_dressed": 3,
+   "suspicious": false,
+   "target_met_combo": 3,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "sustained_dps",
+   "gear_breaks_soft": 4,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 4,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 2.2687,
+   "parties": 4,
+   "soft_exceeded_dressed": 4,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "tankiness",
+   "gear_breaks_soft": 4,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 4,
+   "gear_flips_target": 2,
+   "mean_delta_vs_target": 4.19,
+   "parties": 4,
+   "soft_exceeded_dressed": 4,
+   "suspicious": true,
+   "target_met_combo": 2,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  },
+  {
+   "cap": "zone_control",
+   "gear_breaks_soft": 3,
+   "gear_clears_floor": 0,
+   "gear_delta_large": 4,
+   "gear_flips_target": 0,
+   "mean_delta_vs_target": 1.0914,
+   "parties": 4,
+   "soft_exceeded_dressed": 3,
+   "suspicious": false,
+   "target_met_combo": 4,
+   "target_met_dressed": 4,
+   "template": "territory_defense"
+  }
+ ],
+ "kind": "dressed_template_audit",
+ "large_delta_threshold": 0.5,
+ "parties": [
+  {
+   "caps": [
+    {
+     "cap": "anti_zone",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 1.1111
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 2.3,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 0.8696
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 2.0,
+      "dressed": 2.0,
+      "weapon": 2.0
+     },
+     "target": 1.8
+    },
+    {
+     "cap": "buff_allies",
+     "coverage": {
+      "combo": 2.0,
+      "dressed": 5.8
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 9.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.8,
+     "gear_flips_target": false,
+     "soft_cap": 6.9,
+     "soft_coverage": {
+      "combo": 0.7246,
+      "dressed": 2.1014
+     },
+     "supply": {
+      "combo": 5.0,
+      "doctrine": 12.0,
+      "dressed": 14.5,
+      "weapon": 5.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "burst_aoe",
+     "coverage": {
+      "combo": 1.5741,
+      "dressed": 3.293
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 18.5644,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.7189,
+     "gear_flips_target": false,
+     "soft_cap": 16.7,
+     "soft_coverage": {
+      "combo": 1.018,
+      "dressed": 2.1296
+     },
+     "supply": {
+      "combo": 17.0,
+      "doctrine": 28.6915,
+      "dressed": 35.5644,
+      "weapon": 17.0
+     },
+     "target": 10.8
+    },
+    {
+     "cap": "burst_st",
+     "coverage": {
+      "combo": 0.5882,
+      "dressed": 0.5882
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 3.3,
+     "soft_coverage": {
+      "combo": 0.303,
+      "dressed": 0.303
+     },
+     "supply": {
+      "combo": 1.0,
+      "doctrine": 1.05,
+      "dressed": 1.0,
+      "weapon": 1.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "catch",
+     "coverage": {
+      "combo": 1.6202,
+      "dressed": 1.6202
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 26.3,
+     "soft_coverage": {
+      "combo": 0.7947,
+      "dressed": 0.7947
+     },
+     "supply": {
+      "combo": 20.9,
+      "doctrine": 20.9,
+      "dressed": 20.9,
+      "weapon": 20.9
+     },
+     "target": 12.9
+    },
+    {
+     "cap": "cleanse",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 1.1111
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 9.2,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 0.8696
+     },
+     "supply": {
+      "combo": 8.0,
+      "doctrine": 8.0,
+      "dressed": 8.0,
+      "weapon": 8.0
+     },
+     "target": 7.2
+    },
+    {
+     "cap": "clump_create",
+     "coverage": {
+      "combo": 2.4,
+      "dressed": 2.4
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 4.2,
+     "soft_coverage": {
+      "combo": 1.4286,
+      "dressed": 1.4286
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 6.0,
+      "dressed": 6.0,
+      "weapon": 6.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "damage_debuff",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 3.125
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 2.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.125,
+     "gear_flips_target": true,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 1.4706
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 2.5,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "disengage",
+     "coverage": {
+      "combo": 1.5873,
+      "dressed": 5.0
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 21.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.4127,
+     "gear_flips_target": false,
+     "soft_cap": 11.5,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 2.7391
+     },
+     "supply": {
+      "combo": 10.0,
+      "doctrine": 32.0,
+      "dressed": 31.5,
+      "weapon": 10.0
+     },
+     "target": 6.3
+    },
+    {
+     "cap": "engage",
+     "coverage": {
+      "combo": 3.3333,
+      "dressed": 4.5238
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 5.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.1905,
+     "gear_flips_target": false,
+     "soft_cap": 16.1,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 1.1801
+     },
+     "supply": {
+      "combo": 14.0,
+      "doctrine": 18.0,
+      "dressed": 19.0,
+      "weapon": 14.0
+     },
+     "target": 4.2
+    },
+    {
+     "cap": "execute",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "heal_burst",
+     "coverage": {
+      "combo": 1.4286,
+      "dressed": 2.1429
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 5.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.7143,
+     "gear_flips_target": false,
+     "soft_cap": 12.6,
+     "soft_coverage": {
+      "combo": 0.873,
+      "dressed": 1.3095
+     },
+     "supply": {
+      "combo": 11.0,
+      "doctrine": 16.5,
+      "dressed": 16.5,
+      "weapon": 11.0
+     },
+     "target": 7.7
+    },
+    {
+     "cap": "heal_reduction",
+     "coverage": {
+      "combo": 2.9412,
+      "dressed": 2.9412
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 3.3,
+     "soft_coverage": {
+      "combo": 1.5152,
+      "dressed": 1.5152
+     },
+     "supply": {
+      "combo": 5.0,
+      "doctrine": 5.0,
+      "dressed": 5.0,
+      "weapon": 5.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_sustain",
+     "coverage": {
+      "combo": 1.3433,
+      "dressed": 1.9478
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 2.0,
+      "units_eff": 4.2
+     },
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 4.05,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.6045,
+     "gear_flips_target": false,
+     "soft_cap": 13.1,
+     "soft_coverage": {
+      "combo": 0.687,
+      "dressed": 0.9962
+     },
+     "supply": {
+      "combo": 9.0,
+      "doctrine": 13.0,
+      "dressed": 13.05,
+      "weapon": 9.0
+     },
+     "target": 6.7
+    },
+    {
+     "cap": "mobility",
+     "coverage": {
+      "combo": 3.8095,
+      "dressed": 8.6905
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 20.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 4.881,
+     "gear_flips_target": false,
+     "soft_cap": 18.4,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 1.9837
+     },
+     "supply": {
+      "combo": 16.0,
+      "doctrine": 35.0,
+      "dressed": 36.5,
+      "weapon": 16.0
+     },
+     "target": 4.2
+    },
+    {
+     "cap": "peel",
+     "coverage": {
+      "combo": 2.7244,
+      "dressed": 3.5911
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 19.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.8667,
+     "gear_flips_target": false,
+     "soft_cap": 60.6,
+     "soft_coverage": {
+      "combo": 1.0116,
+      "dressed": 1.3333
+     },
+     "supply": {
+      "combo": 61.3,
+      "doctrine": 98.8,
+      "dressed": 80.8,
+      "weapon": 61.3
+     },
+     "target": 22.5
+    },
+    {
+     "cap": "purge",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 1.6667
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 2.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.5556,
+     "gear_flips_target": false,
+     "soft_cap": 5.8,
+     "soft_coverage": {
+      "combo": 0.6897,
+      "dressed": 1.0345
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 12.0,
+      "dressed": 6.0,
+      "weapon": 4.0
+     },
+     "target": 3.6
+    },
+    {
+     "cap": "ranged_presence",
+     "coverage": {
+      "combo": 1.2,
+      "dressed": 1.2
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 10.0,
+     "soft_coverage": {
+      "combo": 0.6,
+      "dressed": 0.6
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 6.0,
+      "dressed": 6.0,
+      "weapon": 6.0
+     },
+     "target": 5.0
+    },
+    {
+     "cap": "resist_shred",
+     "coverage": {
+      "combo": 1.3,
+      "dressed": 1.3
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 10.9,
+     "soft_coverage": {
+      "combo": 0.5963,
+      "dressed": 0.5963
+     },
+     "supply": {
+      "combo": 6.5,
+      "doctrine": 6.5,
+      "dressed": 6.5,
+      "weapon": 6.5
+     },
+     "target": 5.0
+    },
+    {
+     "cap": "silence",
+     "coverage": {
+      "combo": 1.7647,
+      "dressed": 4.7794
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 5.125,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.0147,
+     "gear_flips_target": false,
+     "soft_cap": 5.8,
+     "soft_coverage": {
+      "combo": 0.5172,
+      "dressed": 1.4009
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 4.35,
+      "dressed": 8.125,
+      "weapon": 3.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "stun",
+     "coverage": {
+      "combo": 6.5051,
+      "dressed": 8.8919
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 10.024296,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.3867,
+     "gear_flips_target": false,
+     "soft_cap": 8.3,
+     "soft_coverage": {
+      "combo": 3.2917,
+      "dressed": 4.4995
+     },
+     "supply": {
+      "combo": 27.321481,
+      "doctrine": 36.916148,
+      "dressed": 37.345778,
+      "weapon": 27.321481
+     },
+     "target": 4.2
+    },
+    {
+     "cap": "sustained_dps",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 5.3273
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 60.7127,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 4.2162,
+     "gear_flips_target": false,
+     "soft_cap": 19.7,
+     "soft_coverage": {
+      "combo": 0.8122,
+      "dressed": 3.894
+     },
+     "supply": {
+      "combo": 16.0,
+      "doctrine": 66.2025,
+      "dressed": 76.7127,
+      "weapon": 16.0
+     },
+     "target": 14.4
+    },
+    {
+     "cap": "tankiness",
+     "coverage": {
+      "combo": 1.0,
+      "dressed": 6.211
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 1.0,
+      "units_eff": 3.3
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 52.11,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 5.211,
+     "gear_flips_target": false,
+     "soft_cap": 14.2,
+     "soft_coverage": {
+      "combo": 0.7042,
+      "dressed": 4.3739
+     },
+     "supply": {
+      "combo": 10.0,
+      "doctrine": 68.462,
+      "dressed": 62.11,
+      "weapon": 10.0
+     },
+     "target": 10.0
+    },
+    {
+     "cap": "zone_control",
+     "coverage": {
+      "combo": 2.0896,
+      "dressed": 3.4328
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 9.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.3433,
+     "gear_flips_target": false,
+     "soft_cap": 16.1,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 1.4286
+     },
+     "supply": {
+      "combo": 14.0,
+      "doctrine": 22.0,
+      "dressed": 23.0,
+      "weapon": 14.0
+     },
+     "target": 6.7
+    }
+   ],
+   "comp": "albioncompo_20v20_competitive_2026_08",
+   "content": "territory_defense",
+   "fitness": {
+    "combo": 122.931958,
+    "doctrine": 111.605902,
+    "dressed": 113.132761,
+    "weapon": 122.931958
+   },
+   "gear_resolution": {
+    "members_dressed": 20,
+    "recorded": 128,
+    "resolved": 128
+   },
+   "mapped_from": "zvz_20v20",
+   "party": "comp",
+   "size": 20,
+   "style": "kite"
+  },
+  {
+   "caps": [
+    {
+     "cap": "anti_zone",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "buff_allies",
+     "coverage": {
+      "combo": 0.8,
+      "dressed": 3.4
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 6.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.6,
+     "gear_flips_target": true,
+     "soft_cap": 5.0,
+     "soft_coverage": {
+      "combo": 0.4,
+      "dressed": 1.7
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 10.0,
+      "dressed": 8.5,
+      "weapon": 2.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "burst_aoe",
+     "coverage": {
+      "combo": 1.5352,
+      "dressed": 1.9739
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 3.289897,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.4387,
+     "gear_flips_target": false,
+     "soft_cap": 12.525,
+     "soft_coverage": {
+      "combo": 0.9193,
+      "dressed": 1.182
+     },
+     "supply": {
+      "combo": 11.514286,
+      "doctrine": 16.189794,
+      "dressed": 14.804183,
+      "weapon": 11.514286
+     },
+     "target": 7.5
+    },
+    {
+     "cap": "burst_st",
+     "coverage": {
+      "combo": 2.1598,
+      "dressed": 2.7345
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.732772,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.5747,
+     "gear_flips_target": false,
+     "soft_cap": 2.475,
+     "soft_coverage": {
+      "combo": 1.1126,
+      "dressed": 1.4087
+     },
+     "supply": {
+      "combo": 2.753745,
+      "doctrine": 2.753745,
+      "dressed": 3.486517,
+      "weapon": 2.753745
+     },
+     "target": 1.275
+    },
+    {
+     "cap": "catch",
+     "coverage": {
+      "combo": 1.4973,
+      "dressed": 1.4973
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 17.4,
+     "soft_coverage": {
+      "combo": 0.7874,
+      "dressed": 0.7874
+     },
+     "supply": {
+      "combo": 13.7,
+      "doctrine": 13.7,
+      "dressed": 13.7,
+      "weapon": 13.7
+     },
+     "target": 9.15
+    },
+    {
+     "cap": "cleanse",
+     "coverage": {
+      "combo": 5.0,
+      "dressed": 5.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 4.6,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 0.8696
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 4.0,
+      "dressed": 4.0,
+      "weapon": 4.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "clump_create",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 4.2,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "damage_debuff",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 1.25
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.25,
+     "gear_flips_target": true,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.5882
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 1.0,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "disengage",
+     "coverage": {
+      "combo": 1.2698,
+      "dressed": 3.3333
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 13.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.0635,
+     "gear_flips_target": false,
+     "soft_cap": 9.2,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 2.2826
+     },
+     "supply": {
+      "combo": 8.0,
+      "doctrine": 19.5,
+      "dressed": 21.0,
+      "weapon": 8.0
+     },
+     "target": 6.3
+    },
+    {
+     "cap": "engage",
+     "coverage": {
+      "combo": 1.7094,
+      "dressed": 2.3932
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 6.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.6838,
+     "gear_flips_target": false,
+     "soft_cap": 17.25,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 1.2174
+     },
+     "supply": {
+      "combo": 15.0,
+      "doctrine": 20.5,
+      "dressed": 21.0,
+      "weapon": 15.0
+     },
+     "target": 8.775
+    },
+    {
+     "cap": "execute",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "heal_burst",
+     "coverage": {
+      "combo": 1.1523,
+      "dressed": 1.7284
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 3.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.5761,
+     "gear_flips_target": false,
+     "soft_cap": 8.025,
+     "soft_coverage": {
+      "combo": 0.8723,
+      "dressed": 1.3084
+     },
+     "supply": {
+      "combo": 7.0,
+      "doctrine": 10.5,
+      "dressed": 10.5,
+      "weapon": 7.0
+     },
+     "target": 6.075
+    },
+    {
+     "cap": "heal_reduction",
+     "coverage": {
+      "combo": 0.5882,
+      "dressed": 0.5882
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 3.3,
+     "soft_coverage": {
+      "combo": 0.303,
+      "dressed": 0.303
+     },
+     "supply": {
+      "combo": 1.0,
+      "doctrine": 1.0,
+      "dressed": 1.0,
+      "weapon": 1.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_sustain",
+     "coverage": {
+      "combo": 1.4222,
+      "dressed": 2.0444
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 2.0,
+      "units_eff": 4.2
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 3.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.6222,
+     "gear_flips_target": false,
+     "soft_cap": 10.35,
+     "soft_coverage": {
+      "combo": 0.7729,
+      "dressed": 1.1111
+     },
+     "supply": {
+      "combo": 8.0,
+      "doctrine": 11.5,
+      "dressed": 11.5,
+      "weapon": 8.0
+     },
+     "target": 5.625
+    },
+    {
+     "cap": "mobility",
+     "coverage": {
+      "combo": 1.3468,
+      "dressed": 2.2896
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 14.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.9428,
+     "gear_flips_target": false,
+     "soft_cap": 23.025,
+     "soft_coverage": {
+      "combo": 0.8686,
+      "dressed": 1.4767
+     },
+     "supply": {
+      "combo": 20.0,
+      "doctrine": 33.0,
+      "dressed": 34.0,
+      "weapon": 20.0
+     },
+     "target": 14.85
+    },
+    {
+     "cap": "peel",
+     "coverage": {
+      "combo": 1.201,
+      "dressed": 2.3292
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 34.1,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.1282,
+     "gear_flips_target": false,
+     "soft_cap": 44.175,
+     "soft_coverage": {
+      "combo": 0.8217,
+      "dressed": 1.5937
+     },
+     "supply": {
+      "combo": 36.3,
+      "doctrine": 64.0,
+      "dressed": 70.4,
+      "weapon": 36.3
+     },
+     "target": 30.225
+    },
+    {
+     "cap": "purge",
+     "coverage": {
+      "combo": 1.3333,
+      "dressed": 2.6667
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 6.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.3333,
+     "gear_flips_target": false,
+     "soft_cap": 6.9,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 1.7391
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 12.0,
+      "dressed": 12.0,
+      "weapon": 6.0
+     },
+     "target": 4.5
+    },
+    {
+     "cap": "ranged_presence",
+     "coverage": {
+      "combo": 0.8,
+      "dressed": 0.8
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 7.5,
+     "soft_coverage": {
+      "combo": 0.4,
+      "dressed": 0.4
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 3.0,
+      "dressed": 3.0,
+      "weapon": 3.0
+     },
+     "target": 3.75
+    },
+    {
+     "cap": "resist_shred",
+     "coverage": {
+      "combo": 1.3,
+      "dressed": 1.3
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 12.6,
+     "soft_coverage": {
+      "combo": 0.5159,
+      "dressed": 0.5159
+     },
+     "supply": {
+      "combo": 6.5,
+      "doctrine": 6.5,
+      "dressed": 6.5,
+      "weapon": 6.5
+     },
+     "target": 5.0
+    },
+    {
+     "cap": "silence",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 2.2238
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 7.9,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.1127,
+     "gear_flips_target": false,
+     "soft_cap": 10.2,
+     "soft_coverage": {
+      "combo": 0.7734,
+      "dressed": 1.5479
+     },
+     "supply": {
+      "combo": 7.888889,
+      "doctrine": 15.788889,
+      "dressed": 15.788889,
+      "weapon": 7.888889
+     },
+     "target": 7.1
+    },
+    {
+     "cap": "stun",
+     "coverage": {
+      "combo": 6.4529,
+      "dressed": 8.8012
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 7.397,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.3483,
+     "gear_flips_target": false,
+     "soft_cap": 27.15,
+     "soft_coverage": {
+      "combo": 0.7487,
+      "dressed": 1.0211
+     },
+     "supply": {
+      "combo": 20.326667,
+      "doctrine": 27.723667,
+      "dressed": 27.723667,
+      "weapon": 20.326667
+     },
+     "target": 3.15
+    },
+    {
+     "cap": "sustained_dps",
+     "coverage": {
+      "combo": 1.2037,
+      "dressed": 4.5058
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 35.6627,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.3021,
+     "gear_flips_target": false,
+     "soft_cap": 14.925,
+     "soft_coverage": {
+      "combo": 0.871,
+      "dressed": 3.2605
+     },
+     "supply": {
+      "combo": 13.0,
+      "doctrine": 39.0415,
+      "dressed": 48.6627,
+      "weapon": 13.0
+     },
+     "target": 10.8
+    },
+    {
+     "cap": "tankiness",
+     "coverage": {
+      "combo": 1.3043,
+      "dressed": 8.1419
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 1.0,
+      "units_eff": 3.3
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 47.179,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 6.8375,
+     "gear_flips_target": false,
+     "soft_cap": 10.05,
+     "soft_coverage": {
+      "combo": 0.8955,
+      "dressed": 5.59
+     },
+     "supply": {
+      "combo": 9.0,
+      "doctrine": 52.07,
+      "dressed": 56.179,
+      "weapon": 9.0
+     },
+     "target": 6.9
+    },
+    {
+     "cap": "zone_control",
+     "coverage": {
+      "combo": 1.3333,
+      "dressed": 1.9259
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 4.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.5926,
+     "gear_flips_target": false,
+     "soft_cap": 10.35,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 1.256
+     },
+     "supply": {
+      "combo": 9.0,
+      "doctrine": 15.0,
+      "dressed": 13.0,
+      "weapon": 9.0
+     },
+     "target": 6.75
+    }
+   ],
+   "comp": "albioncompo_bist_roam15_2026_01",
+   "content": "blackzone_roam",
+   "fitness": {
+    "combo": 119.348116,
+    "doctrine": 109.066476,
+    "dressed": 109.890158,
+    "weapon": 119.348116
+   },
+   "gear_resolution": {
+    "members_dressed": 15,
+    "recorded": 96,
+    "resolved": 93
+   },
+   "mapped_from": "blackzone_roam",
+   "party": "comp",
+   "size": 15,
+   "style": "brawl"
+  },
+  {
+   "caps": [
+    {
+     "cap": "anti_zone",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "burst_aoe",
+     "coverage": {
+      "combo": 1.3053,
+      "dressed": 1.4829
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.763448,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.1775,
+     "gear_flips_target": false,
+     "soft_cap": 7.8,
+     "soft_coverage": {
+      "combo": 0.7196,
+      "dressed": 0.8175
+     },
+     "supply": {
+      "combo": 5.612903,
+      "doctrine": 6.484961,
+      "dressed": 6.376352,
+      "weapon": 5.612903
+     },
+     "target": 4.3
+    },
+    {
+     "cap": "cleanse",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "clump_create",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 3.5,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "damage_debuff",
+     "coverage": {
+      "combo": 2.2222,
+      "dressed": 2.2222
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 1.1765,
+      "dressed": 1.1765
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 2.0,
+      "dressed": 2.0,
+      "weapon": 2.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "disengage",
+     "coverage": {
+      "combo": 3.3333,
+      "dressed": 4.4444
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.1111,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 1.1538,
+      "dressed": 1.5385
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 8.0,
+      "dressed": 4.0,
+      "weapon": 3.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "engage",
+     "coverage": {
+      "combo": 2.9412,
+      "dressed": 6.4706
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 6.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.5294,
+     "gear_flips_target": false,
+     "soft_cap": 4.3,
+     "soft_coverage": {
+      "combo": 1.1628,
+      "dressed": 2.5581
+     },
+     "supply": {
+      "combo": 5.0,
+      "doctrine": 7.0,
+      "dressed": 11.0,
+      "weapon": 5.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_burst",
+     "coverage": {
+      "combo": 1.1765,
+      "dressed": 1.5294
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.6,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.3529,
+     "gear_flips_target": false,
+     "soft_cap": 3.5,
+     "soft_coverage": {
+      "combo": 0.5714,
+      "dressed": 0.7429
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 3.0,
+      "dressed": 2.6,
+      "weapon": 2.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_reduction",
+     "coverage": {
+      "combo": 2.2222,
+      "dressed": 2.2222
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 0.7692,
+      "dressed": 0.7692
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 2.0,
+      "dressed": 2.0,
+      "weapon": 2.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "heal_sustain",
+     "coverage": {
+      "combo": 1.1538,
+      "dressed": 2.0385
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 2.0,
+      "units_eff": 1.7
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 2.3,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.8846,
+     "gear_flips_target": false,
+     "soft_cap": 4.3,
+     "soft_coverage": {
+      "combo": 0.6977,
+      "dressed": 1.2326
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 4.5,
+      "dressed": 5.3,
+      "weapon": 3.0
+     },
+     "target": 2.6
+    },
+    {
+     "cap": "mobility",
+     "coverage": {
+      "combo": 3.5294,
+      "dressed": 8.8235
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 9.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 5.2941,
+     "gear_flips_target": false,
+     "soft_cap": 5.2,
+     "soft_coverage": {
+      "combo": 1.1538,
+      "dressed": 2.8846
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 11.0,
+      "dressed": 15.0,
+      "weapon": 6.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "peel",
+     "coverage": {
+      "combo": 3.6538,
+      "dressed": 7.4038
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 9.75,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.75,
+     "gear_flips_target": false,
+     "soft_cap": 5.2,
+     "soft_coverage": {
+      "combo": 1.8269,
+      "dressed": 3.7019
+     },
+     "supply": {
+      "combo": 9.5,
+      "doctrine": 14.0,
+      "dressed": 19.25,
+      "weapon": 9.5
+     },
+     "target": 2.6
+    },
+    {
+     "cap": "purge",
+     "coverage": {
+      "combo": 2.3529,
+      "dressed": 2.3529
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 3.5,
+     "soft_coverage": {
+      "combo": 1.1429,
+      "dressed": 1.1429
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 4.0,
+      "dressed": 4.0,
+      "weapon": 4.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "resist_shred",
+     "coverage": {
+      "combo": 3.2353,
+      "dressed": 3.2353
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 3.5,
+     "soft_coverage": {
+      "combo": 1.5714,
+      "dressed": 1.5714
+     },
+     "supply": {
+      "combo": 5.5,
+      "doctrine": 5.5,
+      "dressed": 5.5,
+      "weapon": 5.5
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "silence",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 3.447225,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "stun",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 4.3,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "sustained_dps",
+     "coverage": {
+      "combo": 2.6923,
+      "dressed": 11.1594
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 22.0144,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 8.4671,
+     "gear_flips_target": false,
+     "soft_cap": 6.0,
+     "soft_coverage": {
+      "combo": 1.1667,
+      "dressed": 4.8357
+     },
+     "supply": {
+      "combo": 7.0,
+      "doctrine": 22.8449,
+      "dressed": 29.0144,
+      "weapon": 7.0
+     },
+     "target": 2.6
+    },
+    {
+     "cap": "tankiness",
+     "coverage": {
+      "combo": 1.1429,
+      "dressed": 7.0254
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 1.0,
+      "units_eff": 1.7
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 20.589,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 5.8826,
+     "gear_flips_target": false,
+     "soft_cap": 6.0,
+     "soft_coverage": {
+      "combo": 0.6667,
+      "dressed": 4.0982
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 19.276,
+      "dressed": 24.589,
+      "weapon": 4.0
+     },
+     "target": 3.5
+    },
+    {
+     "cap": "zone_control",
+     "coverage": {
+      "combo": 1.5385,
+      "dressed": 2.3077
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 2.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.7692,
+     "gear_flips_target": false,
+     "soft_cap": 6.0,
+     "soft_coverage": {
+      "combo": 0.6667,
+      "dressed": 1.0
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 7.0,
+      "dressed": 6.0,
+      "weapon": 4.0
+     },
+     "target": 2.6
+    }
+   ],
+   "comp": "albioncompo_push_monkey_7_2026_05",
+   "content": "castle_outpost",
+   "fitness": {
+    "combo": 91.03552,
+    "doctrine": 89.286766,
+    "dressed": 83.623761,
+    "weapon": 91.03552
+   },
+   "gear_resolution": {
+    "members_dressed": 7,
+    "recorded": 45,
+    "resolved": 42
+   },
+   "mapped_from": "zvz_7man",
+   "party": "comp",
+   "size": 7,
+   "style": "brawl"
+  },
+  {
+   "caps": [
+    {
+     "cap": "anti_zone",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "buff_allies",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 3.3333
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 3.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.3333,
+     "gear_flips_target": true,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 1.1538
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 3.0,
+      "weapon": 0.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "burst_aoe",
+     "coverage": {
+      "combo": 1.1765,
+      "dressed": 1.7106
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.8161,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.5341,
+     "gear_flips_target": false,
+     "soft_cap": 6.9,
+     "soft_coverage": {
+      "combo": 0.5797,
+      "dressed": 0.8429
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 5.0161,
+      "dressed": 5.8161,
+      "weapon": 4.0
+     },
+     "target": 3.4
+    },
+    {
+     "cap": "burst_st",
+     "coverage": {
+      "combo": 0.5882,
+      "dressed": 0.8235
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.8,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.2353,
+     "gear_flips_target": false,
+     "soft_cap": 6.0,
+     "soft_coverage": {
+      "combo": 0.3333,
+      "dressed": 0.4667
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 2.0,
+      "dressed": 2.8,
+      "weapon": 2.0
+     },
+     "target": 3.4
+    },
+    {
+     "cap": "catch",
+     "coverage": {
+      "combo": 1.5385,
+      "dressed": 1.5385
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 5.1,
+     "soft_coverage": {
+      "combo": 0.7843,
+      "dressed": 0.7843
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 4.0,
+      "dressed": 4.0,
+      "weapon": 4.0
+     },
+     "target": 2.6
+    },
+    {
+     "cap": "cleanse",
+     "coverage": {
+      "combo": 2.2222,
+      "dressed": 2.2222
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 0.7692,
+      "dressed": 0.7692
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 2.0,
+      "dressed": 2.0,
+      "weapon": 2.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "clump_create",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "damage_debuff",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "disengage",
+     "coverage": {
+      "combo": 1.1765,
+      "dressed": 5.5882
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 7.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 4.4118,
+     "gear_flips_target": false,
+     "soft_cap": 3.4,
+     "soft_coverage": {
+      "combo": 0.5882,
+      "dressed": 2.7941
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 8.0,
+      "dressed": 9.5,
+      "weapon": 2.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "engage",
+     "coverage": {
+      "combo": 1.1765,
+      "dressed": 2.6471
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 2.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.4706,
+     "gear_flips_target": false,
+     "soft_cap": 3.4,
+     "soft_coverage": {
+      "combo": 0.5882,
+      "dressed": 1.3235
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 3.0,
+      "dressed": 4.5,
+      "weapon": 2.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "execute",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 3.4,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_burst",
+     "coverage": {
+      "combo": 1.5385,
+      "dressed": 2.3077
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 1.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.7692,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 0.7692,
+      "dressed": 1.1538
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 3.0,
+      "dressed": 3.0,
+      "weapon": 2.0
+     },
+     "target": 1.3
+    },
+    {
+     "cap": "heal_reduction",
+     "coverage": {
+      "combo": 1.1765,
+      "dressed": 2.0588
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 1.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.8824,
+     "gear_flips_target": false,
+     "soft_cap": 3.4,
+     "soft_coverage": {
+      "combo": 0.5882,
+      "dressed": 1.0294
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 3.5,
+      "dressed": 3.5,
+      "weapon": 2.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_sustain",
+     "coverage": {
+      "combo": 1.1538,
+      "dressed": 1.7308
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 2.0,
+      "units_eff": 1.7
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 1.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.5769,
+     "gear_flips_target": false,
+     "soft_cap": 4.3,
+     "soft_coverage": {
+      "combo": 0.6977,
+      "dressed": 1.0465
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 4.5,
+      "dressed": 4.5,
+      "weapon": 3.0
+     },
+     "target": 2.6
+    },
+    {
+     "cap": "mobility",
+     "coverage": {
+      "combo": 0.2941,
+      "dressed": 2.2059
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 6.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.9118,
+     "gear_flips_target": true,
+     "soft_cap": 6.9,
+     "soft_coverage": {
+      "combo": 0.1449,
+      "dressed": 1.087
+     },
+     "supply": {
+      "combo": 1.0,
+      "doctrine": 6.5,
+      "dressed": 7.5,
+      "weapon": 1.0
+     },
+     "target": 3.4
+    },
+    {
+     "cap": "peel",
+     "coverage": {
+      "combo": 6.5385,
+      "dressed": 10.9615
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 11.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 4.4231,
+     "gear_flips_target": false,
+     "soft_cap": 5.1,
+     "soft_coverage": {
+      "combo": 3.3333,
+      "dressed": 5.5882
+     },
+     "supply": {
+      "combo": 17.0,
+      "doctrine": 24.5,
+      "dressed": 28.5,
+      "weapon": 17.0
+     },
+     "target": 2.6
+    },
+    {
+     "cap": "purge",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 3.3333
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 2.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.2222,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 0.3846,
+      "dressed": 1.1538
+     },
+     "supply": {
+      "combo": 1.0,
+      "doctrine": 3.0,
+      "dressed": 3.0,
+      "weapon": 1.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "resist_shred",
+     "coverage": {
+      "combo": 2.3077,
+      "dressed": 3.0769
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.7692,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 1.1538,
+      "dressed": 1.5385
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 3.0,
+      "dressed": 4.0,
+      "weapon": 3.0
+     },
+     "target": 1.3
+    },
+    {
+     "cap": "self_sustain",
+     "coverage": {
+      "combo": 0.5882,
+      "dressed": 0.5882
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 4.3,
+     "soft_coverage": {
+      "combo": 0.2326,
+      "dressed": 0.2326
+     },
+     "supply": {
+      "combo": 1.0,
+      "doctrine": 1.0,
+      "dressed": 1.0,
+      "weapon": 1.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "silence",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 6.6111
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 4.95,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 5.5,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 0.3846,
+      "dressed": 2.2885
+     },
+     "supply": {
+      "combo": 1.0,
+      "doctrine": 1.45,
+      "dressed": 5.95,
+      "weapon": 1.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "stun",
+     "coverage": {
+      "combo": 4.1176,
+      "dressed": 7.0882
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 5.05,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.9706,
+     "gear_flips_target": false,
+     "soft_cap": 4.3,
+     "soft_coverage": {
+      "combo": 1.6279,
+      "dressed": 2.8023
+     },
+     "supply": {
+      "combo": 7.0,
+      "doctrine": 8.8,
+      "dressed": 12.05,
+      "weapon": 7.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "sustained_dps",
+     "coverage": {
+      "combo": 2.6923,
+      "dressed": 7.5893
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 12.7322,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 4.897,
+     "gear_flips_target": false,
+     "soft_cap": 6.0,
+     "soft_coverage": {
+      "combo": 1.1667,
+      "dressed": 3.2887
+     },
+     "supply": {
+      "combo": 7.0,
+      "doctrine": 23.2644,
+      "dressed": 19.7322,
+      "weapon": 7.0
+     },
+     "target": 2.6
+    },
+    {
+     "cap": "tankiness",
+     "coverage": {
+      "combo": 1.5385,
+      "dressed": 7.755
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 1.0,
+      "units_eff": 1.7
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 16.163,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 6.2165,
+     "gear_flips_target": false,
+     "soft_cap": 5.1,
+     "soft_coverage": {
+      "combo": 0.7843,
+      "dressed": 3.9535
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 18.173,
+      "dressed": 20.163,
+      "weapon": 4.0
+     },
+     "target": 2.6
+    },
+    {
+     "cap": "zone_control",
+     "coverage": {
+      "combo": 0.7692,
+      "dressed": 2.3077
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 2.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.5385,
+     "gear_flips_target": true,
+     "soft_cap": 3.4,
+     "soft_coverage": {
+      "combo": 0.2941,
+      "dressed": 0.8824
+     },
+     "supply": {
+      "combo": 1.0,
+      "doctrine": 2.0,
+      "dressed": 3.0,
+      "weapon": 1.0
+     },
+     "target": 1.3
+    }
+   ],
+   "comp": "albioncompo_roads_oneshot_2026_07",
+   "content": "roads",
+   "fitness": {
+    "combo": 99.838794,
+    "doctrine": 101.530505,
+    "dressed": 102.23509,
+    "weapon": 99.838794
+   },
+   "gear_resolution": {
+    "members_dressed": 7,
+    "recorded": 44,
+    "resolved": 42
+   },
+   "mapped_from": "roads",
+   "party": "comp",
+   "size": 7,
+   "style": "balanced"
+  },
+  {
+   "caps": [
+    {
+     "cap": "anti_zone",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "burst_aoe",
+     "coverage": {
+      "combo": 0.6977,
+      "dressed": 1.9535
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 5.4,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.2558,
+     "gear_flips_target": true,
+     "soft_cap": 7.8,
+     "soft_coverage": {
+      "combo": 0.3846,
+      "dressed": 1.0769
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 7.4805,
+      "dressed": 8.4,
+      "weapon": 3.0
+     },
+     "target": 4.3
+    },
+    {
+     "cap": "cleanse",
+     "coverage": {
+      "combo": 2.2222,
+      "dressed": 2.2222
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 0.7692,
+      "dressed": 0.7692
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 2.0,
+      "dressed": 2.0,
+      "weapon": 2.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "clump_create",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 3.5,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "damage_debuff",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "disengage",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 3.8889
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 2.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.7778,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 0.3846,
+      "dressed": 1.3462
+     },
+     "supply": {
+      "combo": 1.0,
+      "doctrine": 3.5,
+      "dressed": 3.5,
+      "weapon": 1.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "engage",
+     "coverage": {
+      "combo": 0.5882,
+      "dressed": 2.6471
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 3.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.0588,
+     "gear_flips_target": true,
+     "soft_cap": 4.3,
+     "soft_coverage": {
+      "combo": 0.2326,
+      "dressed": 1.0465
+     },
+     "supply": {
+      "combo": 1.0,
+      "doctrine": 5.0,
+      "dressed": 4.5,
+      "weapon": 1.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_burst",
+     "coverage": {
+      "combo": 1.1765,
+      "dressed": 1.7647
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.5882,
+     "gear_flips_target": false,
+     "soft_cap": 3.5,
+     "soft_coverage": {
+      "combo": 0.5714,
+      "dressed": 0.8571
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 3.0,
+      "dressed": 3.0,
+      "weapon": 2.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_reduction",
+     "coverage": {
+      "combo": 2.2222,
+      "dressed": 2.2222
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 0.7692,
+      "dressed": 0.7692
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 2.0,
+      "dressed": 2.0,
+      "weapon": 2.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "heal_sustain",
+     "coverage": {
+      "combo": 1.1538,
+      "dressed": 1.7308
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 2.0,
+      "units_eff": 1.7
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 1.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.5769,
+     "gear_flips_target": false,
+     "soft_cap": 4.3,
+     "soft_coverage": {
+      "combo": 0.6977,
+      "dressed": 1.0465
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 4.5,
+      "dressed": 4.5,
+      "weapon": 3.0
+     },
+     "target": 2.6
+    },
+    {
+     "cap": "mobility",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 4.1176
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 7.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 4.1176,
+     "gear_flips_target": true,
+     "soft_cap": 5.2,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 1.3462
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 8.0,
+      "dressed": 7.0,
+      "weapon": 0.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "peel",
+     "coverage": {
+      "combo": 8.4615,
+      "dressed": 11.7308
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 8.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.2692,
+     "gear_flips_target": false,
+     "soft_cap": 5.2,
+     "soft_coverage": {
+      "combo": 4.2308,
+      "dressed": 5.8654
+     },
+     "supply": {
+      "combo": 22.0,
+      "doctrine": 26.5,
+      "dressed": 30.5,
+      "weapon": 22.0
+     },
+     "target": 2.6
+    },
+    {
+     "cap": "purge",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 1.1765
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 2.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.1765,
+     "gear_flips_target": true,
+     "soft_cap": 3.5,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.5714
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 2.0,
+      "dressed": 2.0,
+      "weapon": 0.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "resist_shred",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.5882
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.5882,
+     "gear_flips_target": false,
+     "soft_cap": 3.5,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.2857
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 1.0,
+      "weapon": 0.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "silence",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 6.6111
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 4.95,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 5.5,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 0.3846,
+      "dressed": 2.2885
+     },
+     "supply": {
+      "combo": 1.0,
+      "doctrine": 5.95,
+      "dressed": 5.95,
+      "weapon": 1.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "stun",
+     "coverage": {
+      "combo": 2.9412,
+      "dressed": 4.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.8,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.0588,
+     "gear_flips_target": false,
+     "soft_cap": 4.3,
+     "soft_coverage": {
+      "combo": 1.1628,
+      "dressed": 1.5814
+     },
+     "supply": {
+      "combo": 5.0,
+      "doctrine": 6.8,
+      "dressed": 6.8,
+      "weapon": 5.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "sustained_dps",
+     "coverage": {
+      "combo": 2.3077,
+      "dressed": 11.9808
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 25.15,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 9.6731,
+     "gear_flips_target": false,
+     "soft_cap": 6.0,
+     "soft_coverage": {
+      "combo": 1.0,
+      "dressed": 5.1917
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 36.4737,
+      "dressed": 31.15,
+      "weapon": 6.0
+     },
+     "target": 2.6
+    },
+    {
+     "cap": "tankiness",
+     "coverage": {
+      "combo": 1.1429,
+      "dressed": 5.1894
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 1.0,
+      "units_eff": 1.7
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 14.163,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 4.0466,
+     "gear_flips_target": false,
+     "soft_cap": 6.0,
+     "soft_coverage": {
+      "combo": 0.6667,
+      "dressed": 3.0272
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 24.663,
+      "dressed": 18.163,
+      "weapon": 4.0
+     },
+     "target": 3.5
+    },
+    {
+     "cap": "zone_control",
+     "coverage": {
+      "combo": 3.4615,
+      "dressed": 5.3846
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 5.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.9231,
+     "gear_flips_target": false,
+     "soft_cap": 6.0,
+     "soft_coverage": {
+      "combo": 1.5,
+      "dressed": 2.3333
+     },
+     "supply": {
+      "combo": 9.0,
+      "doctrine": 14.0,
+      "dressed": 14.0,
+      "weapon": 9.0
+     },
+     "target": 2.6
+    }
+   ],
+   "comp": "albioncompo_sob_blaze_os_2026_06",
+   "content": "castle_outpost",
+   "fitness": {
+    "combo": 75.419035,
+    "doctrine": 83.307278,
+    "dressed": 87.376154,
+    "weapon": 75.419035
+   },
+   "gear_resolution": {
+    "members_dressed": 7,
+    "recorded": 43,
+    "resolved": 41
+   },
+   "mapped_from": "zvz_7man",
+   "party": "comp",
+   "size": 7,
+   "style": "balanced"
+  },
+  {
+   "caps": [
+    {
+     "cap": "anti_zone",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "burst_aoe",
+     "coverage": {
+      "combo": 1.3953,
+      "dressed": 2.6163
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 5.25,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.2209,
+     "gear_flips_target": false,
+     "soft_cap": 7.8,
+     "soft_coverage": {
+      "combo": 0.7692,
+      "dressed": 1.4423
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 8.3644,
+      "dressed": 11.25,
+      "weapon": 6.0
+     },
+     "target": 4.3
+    },
+    {
+     "cap": "cleanse",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 1.5,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "clump_create",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 3.5,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "damage_debuff",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "disengage",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 10.5556
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 8.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 9.4444,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 0.3846,
+      "dressed": 3.6538
+     },
+     "supply": {
+      "combo": 1.0,
+      "doctrine": 8.5,
+      "dressed": 9.5,
+      "weapon": 1.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "engage",
+     "coverage": {
+      "combo": 2.9412,
+      "dressed": 3.8235
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.8824,
+     "gear_flips_target": false,
+     "soft_cap": 4.3,
+     "soft_coverage": {
+      "combo": 1.1628,
+      "dressed": 1.5116
+     },
+     "supply": {
+      "combo": 5.0,
+      "doctrine": 7.5,
+      "dressed": 6.5,
+      "weapon": 5.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_burst",
+     "coverage": {
+      "combo": 1.1765,
+      "dressed": 1.7059
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.9,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.5294,
+     "gear_flips_target": false,
+     "soft_cap": 3.5,
+     "soft_coverage": {
+      "combo": 0.5714,
+      "dressed": 0.8286
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 3.0,
+      "dressed": 2.9,
+      "weapon": 2.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_reduction",
+     "coverage": {
+      "combo": 4.4444,
+      "dressed": 11.1111
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 6.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 6.6667,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 1.5385,
+      "dressed": 3.8462
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 5.5,
+      "dressed": 10.0,
+      "weapon": 4.0
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "heal_sustain",
+     "coverage": {
+      "combo": 1.1538,
+      "dressed": 1.6731
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 2.0,
+      "units_eff": 1.7
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 1.35,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.5192,
+     "gear_flips_target": false,
+     "soft_cap": 4.3,
+     "soft_coverage": {
+      "combo": 0.6977,
+      "dressed": 1.0116
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 4.5,
+      "dressed": 4.35,
+      "weapon": 3.0
+     },
+     "target": 2.6
+    },
+    {
+     "cap": "mobility",
+     "coverage": {
+      "combo": 0.5882,
+      "dressed": 4.7059
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 7.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 4.1176,
+     "gear_flips_target": true,
+     "soft_cap": 5.2,
+     "soft_coverage": {
+      "combo": 0.1923,
+      "dressed": 1.5385
+     },
+     "supply": {
+      "combo": 1.0,
+      "doctrine": 8.5,
+      "dressed": 8.0,
+      "weapon": 1.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "peel",
+     "coverage": {
+      "combo": 6.5385,
+      "dressed": 9.6154
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 8.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.0769,
+     "gear_flips_target": false,
+     "soft_cap": 5.2,
+     "soft_coverage": {
+      "combo": 3.2692,
+      "dressed": 4.8077
+     },
+     "supply": {
+      "combo": 17.0,
+      "doctrine": 30.0,
+      "dressed": 25.0,
+      "weapon": 17.0
+     },
+     "target": 2.6
+    },
+    {
+     "cap": "purge",
+     "coverage": {
+      "combo": 2.3529,
+      "dressed": 2.3529
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 3.5,
+     "soft_coverage": {
+      "combo": 1.1429,
+      "dressed": 1.1429
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 9.5,
+      "dressed": 4.0,
+      "weapon": 4.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "resist_shred",
+     "coverage": {
+      "combo": 1.7647,
+      "dressed": 2.3529
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 1.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.5882,
+     "gear_flips_target": false,
+     "soft_cap": 3.5,
+     "soft_coverage": {
+      "combo": 0.8571,
+      "dressed": 1.1429
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 3.0,
+      "dressed": 4.0,
+      "weapon": 3.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "silence",
+     "coverage": {
+      "combo": 7.6543,
+      "dressed": 11.4815
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 3.444444,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.8272,
+     "gear_flips_target": false,
+     "soft_cap": 2.6,
+     "soft_coverage": {
+      "combo": 2.6496,
+      "dressed": 3.9744
+     },
+     "supply": {
+      "combo": 6.888889,
+      "doctrine": 14.338889,
+      "dressed": 10.333333,
+      "weapon": 6.888889
+     },
+     "target": 0.9
+    },
+    {
+     "cap": "stun",
+     "coverage": {
+      "combo": 4.0523,
+      "dressed": 6.0784
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 3.444444,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.0261,
+     "gear_flips_target": false,
+     "soft_cap": 4.3,
+     "soft_coverage": {
+      "combo": 1.6021,
+      "dressed": 2.4031
+     },
+     "supply": {
+      "combo": 6.888889,
+      "doctrine": 9.988889,
+      "dressed": 10.333333,
+      "weapon": 6.888889
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "sustained_dps",
+     "coverage": {
+      "combo": 2.6923,
+      "dressed": 8.2308
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 14.4,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 5.5385,
+     "gear_flips_target": false,
+     "soft_cap": 6.0,
+     "soft_coverage": {
+      "combo": 1.1667,
+      "dressed": 3.5667
+     },
+     "supply": {
+      "combo": 7.0,
+      "doctrine": 27.2949,
+      "dressed": 21.4,
+      "weapon": 7.0
+     },
+     "target": 2.6
+    },
+    {
+     "cap": "tankiness",
+     "coverage": {
+      "combo": 2.0,
+      "dressed": 7.8234
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 1.0,
+      "units_eff": 1.7
+     },
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 20.382,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 5.8234,
+     "gear_flips_target": false,
+     "soft_cap": 6.0,
+     "soft_coverage": {
+      "combo": 1.1667,
+      "dressed": 4.5637
+     },
+     "supply": {
+      "combo": 7.0,
+      "doctrine": 29.584,
+      "dressed": 27.382,
+      "weapon": 7.0
+     },
+     "target": 3.5
+    },
+    {
+     "cap": "zone_control",
+     "coverage": {
+      "combo": 2.3077,
+      "dressed": 3.4615
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 3.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.1538,
+     "gear_flips_target": false,
+     "soft_cap": 6.0,
+     "soft_coverage": {
+      "combo": 1.0,
+      "dressed": 1.5
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 9.0,
+      "dressed": 9.0,
+      "weapon": 6.0
+     },
+     "target": 2.6
+    }
+   ],
+   "comp": "albioncompo_sortasaucy_7man_ftb_2026_05",
+   "content": "castle_outpost",
+   "fitness": {
+    "combo": 86.789483,
+    "doctrine": 83.050793,
+    "dressed": 78.533916,
+    "weapon": 86.789483
+   },
+   "gear_resolution": {
+    "members_dressed": 7,
+    "recorded": 43,
+    "resolved": 42
+   },
+   "mapped_from": "zvz_7man",
+   "party": "comp",
+   "size": 7,
+   "style": "balanced"
+  },
+  {
+   "caps": [
+    {
+     "cap": "anti_zone",
+     "coverage": {
+      "combo": 2.5,
+      "dressed": 2.5
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 1.1765,
+      "dressed": 1.1765
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 2.0,
+      "dressed": 2.0,
+      "weapon": 2.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "buff_allies",
+     "coverage": {
+      "combo": 4.4,
+      "dressed": 8.8
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 11.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 4.4,
+     "gear_flips_target": false,
+     "soft_cap": 5.0,
+     "soft_coverage": {
+      "combo": 2.2,
+      "dressed": 4.4
+     },
+     "supply": {
+      "combo": 11.0,
+      "doctrine": 16.0,
+      "dressed": 22.0,
+      "weapon": 11.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "burst_aoe",
+     "coverage": {
+      "combo": 1.5,
+      "dressed": 2.3419
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 8.4192,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.8419,
+     "gear_flips_target": false,
+     "soft_cap": 16.7,
+     "soft_coverage": {
+      "combo": 0.8982,
+      "dressed": 1.4023
+     },
+     "supply": {
+      "combo": 15.0,
+      "doctrine": 21.9932,
+      "dressed": 23.4192,
+      "weapon": 15.0
+     },
+     "target": 10.0
+    },
+    {
+     "cap": "burst_st",
+     "coverage": {
+      "combo": 1.2278,
+      "dressed": 1.2598
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.054363,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.032,
+     "gear_flips_target": false,
+     "soft_cap": 3.3,
+     "soft_coverage": {
+      "combo": 0.6325,
+      "dressed": 0.649
+     },
+     "supply": {
+      "combo": 2.087266,
+      "doctrine": 4.769466,
+      "dressed": 2.141629,
+      "weapon": 2.087266
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "catch",
+     "coverage": {
+      "combo": 1.3852,
+      "dressed": 1.3852
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 23.2,
+     "soft_coverage": {
+      "combo": 0.7284,
+      "dressed": 0.7284
+     },
+     "supply": {
+      "combo": 16.9,
+      "doctrine": 16.9,
+      "dressed": 16.9,
+      "weapon": 16.9
+     },
+     "target": 12.2
+    },
+    {
+     "cap": "cleanse",
+     "coverage": {
+      "combo": 7.5,
+      "dressed": 7.5
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 4.6,
+     "soft_coverage": {
+      "combo": 1.3043,
+      "dressed": 1.3043
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 6.0,
+      "dressed": 6.0,
+      "weapon": 6.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "clump_create",
+     "coverage": {
+      "combo": 1.2,
+      "dressed": 1.2
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 4.2,
+     "soft_coverage": {
+      "combo": 0.7143,
+      "dressed": 0.7143
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 3.0,
+      "dressed": 3.0,
+      "weapon": 3.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "damage_debuff",
+     "coverage": {
+      "combo": 2.5,
+      "dressed": 5.625
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 2.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.125,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 1.1765,
+      "dressed": 2.6471
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 2.0,
+      "dressed": 4.5,
+      "weapon": 2.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "disengage",
+     "coverage": {
+      "combo": 0.6349,
+      "dressed": 5.3968
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 30.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 4.7619,
+     "gear_flips_target": true,
+     "soft_cap": 9.2,
+     "soft_coverage": {
+      "combo": 0.4348,
+      "dressed": 3.6957
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 23.0,
+      "dressed": 34.0,
+      "weapon": 4.0
+     },
+     "target": 6.3
+    },
+    {
+     "cap": "engage",
+     "coverage": {
+      "combo": 0.9402,
+      "dressed": 0.9402
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 23.0,
+     "soft_coverage": {
+      "combo": 0.4783,
+      "dressed": 0.4783
+     },
+     "supply": {
+      "combo": 11.0,
+      "doctrine": 15.0,
+      "dressed": 11.0,
+      "weapon": 11.0
+     },
+     "target": 11.7
+    },
+    {
+     "cap": "execute",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "heal_burst",
+     "coverage": {
+      "combo": 0.7407,
+      "dressed": 1.0802
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 2.75,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.3395,
+     "gear_flips_target": true,
+     "soft_cap": 10.7,
+     "soft_coverage": {
+      "combo": 0.5607,
+      "dressed": 0.8178
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 8.5,
+      "dressed": 8.75,
+      "weapon": 6.0
+     },
+     "target": 8.1
+    },
+    {
+     "cap": "heal_reduction",
+     "coverage": {
+      "combo": 2.9412,
+      "dressed": 3.8235
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.8824,
+     "gear_flips_target": false,
+     "soft_cap": 3.3,
+     "soft_coverage": {
+      "combo": 1.5152,
+      "dressed": 1.9697
+     },
+     "supply": {
+      "combo": 5.0,
+      "doctrine": 6.0,
+      "dressed": 6.5,
+      "weapon": 5.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_sustain",
+     "coverage": {
+      "combo": 0.8,
+      "dressed": 1.1333
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 2.0,
+      "units_eff": 4.2
+     },
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 2.5,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.3333,
+     "gear_flips_target": true,
+     "soft_cap": 13.8,
+     "soft_coverage": {
+      "combo": 0.4348,
+      "dressed": 0.6159
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 8.0,
+      "dressed": 8.5,
+      "weapon": 6.0
+     },
+     "target": 7.5
+    },
+    {
+     "cap": "mobility",
+     "coverage": {
+      "combo": 0.404,
+      "dressed": 1.4141
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 20.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.0101,
+     "gear_flips_target": true,
+     "soft_cap": 30.7,
+     "soft_coverage": {
+      "combo": 0.2606,
+      "dressed": 0.9121
+     },
+     "supply": {
+      "combo": 8.0,
+      "doctrine": 24.5,
+      "dressed": 28.0,
+      "weapon": 8.0
+     },
+     "target": 19.8
+    },
+    {
+     "cap": "peel",
+     "coverage": {
+      "combo": 1.3102,
+      "dressed": 1.7692
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 18.5,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.4591,
+     "gear_flips_target": false,
+     "soft_cap": 58.9,
+     "soft_coverage": {
+      "combo": 0.8964,
+      "dressed": 1.2105
+     },
+     "supply": {
+      "combo": 52.8,
+      "doctrine": 89.3,
+      "dressed": 71.3,
+      "weapon": 52.8
+     },
+     "target": 40.3
+    },
+    {
+     "cap": "purge",
+     "coverage": {
+      "combo": 0.6667,
+      "dressed": 1.3333
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 3.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.6667,
+     "gear_flips_target": true,
+     "soft_cap": 6.9,
+     "soft_coverage": {
+      "combo": 0.4348,
+      "dressed": 0.8696
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 11.0,
+      "dressed": 6.0,
+      "weapon": 3.0
+     },
+     "target": 4.5
+    },
+    {
+     "cap": "ranged_presence",
+     "coverage": {
+      "combo": 1.2,
+      "dressed": 1.2
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 10.0,
+     "soft_coverage": {
+      "combo": 0.6,
+      "dressed": 0.6
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 6.0,
+      "dressed": 6.0,
+      "weapon": 6.0
+     },
+     "target": 5.0
+    },
+    {
+     "cap": "resist_shred",
+     "coverage": {
+      "combo": 2.1,
+      "dressed": 2.1
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 12.6,
+     "soft_coverage": {
+      "combo": 0.8333,
+      "dressed": 0.8333
+     },
+     "supply": {
+      "combo": 10.5,
+      "doctrine": 11.5,
+      "dressed": 10.5,
+      "weapon": 10.5
+     },
+     "target": 5.0
+    },
+    {
+     "cap": "silence",
+     "coverage": {
+      "combo": 0.5634,
+      "dressed": 0.8451
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 2.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.2817,
+     "gear_flips_target": false,
+     "soft_cap": 10.2,
+     "soft_coverage": {
+      "combo": 0.3922,
+      "dressed": 0.5882
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 5.8,
+      "dressed": 6.0,
+      "weapon": 4.0
+     },
+     "target": 7.1
+    },
+    {
+     "cap": "stun",
+     "coverage": {
+      "combo": 5.6497,
+      "dressed": 7.9659
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 9.728,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.3162,
+     "gear_flips_target": false,
+     "soft_cap": 36.2,
+     "soft_coverage": {
+      "combo": 0.6555,
+      "dressed": 0.9242
+     },
+     "supply": {
+      "combo": 23.728889,
+      "doctrine": 33.056889,
+      "dressed": 33.456889,
+      "weapon": 23.728889
+     },
+     "target": 4.2
+    },
+    {
+     "cap": "sustained_dps",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 4.1585
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 43.882,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.0474,
+     "gear_flips_target": false,
+     "soft_cap": 19.9,
+     "soft_coverage": {
+      "combo": 0.804,
+      "dressed": 3.0091
+     },
+     "supply": {
+      "combo": 16.0,
+      "doctrine": 56.4737,
+      "dressed": 59.882,
+      "weapon": 16.0
+     },
+     "target": 14.4
+    },
+    {
+     "cap": "tankiness",
+     "coverage": {
+      "combo": 1.1957,
+      "dressed": 7.6987
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 1.0,
+      "units_eff": 3.3
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 59.828,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 6.503,
+     "gear_flips_target": false,
+     "soft_cap": 13.4,
+     "soft_coverage": {
+      "combo": 0.8209,
+      "dressed": 5.2857
+     },
+     "supply": {
+      "combo": 11.0,
+      "doctrine": 66.656,
+      "dressed": 70.828,
+      "weapon": 11.0
+     },
+     "target": 9.2
+    },
+    {
+     "cap": "zone_control",
+     "coverage": {
+      "combo": 1.0,
+      "dressed": 1.3333
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 3.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.3333,
+     "gear_flips_target": false,
+     "soft_cap": 13.8,
+     "soft_coverage": {
+      "combo": 0.6522,
+      "dressed": 0.8696
+     },
+     "supply": {
+      "combo": 9.0,
+      "doctrine": 15.0,
+      "dressed": 12.0,
+      "weapon": 9.0
+     },
+     "target": 9.0
+    }
+   ],
+   "comp": "albioncompo_ss_kite_20_2026_06",
+   "content": "blackzone_roam",
+   "fitness": {
+    "combo": 117.5667,
+    "doctrine": 122.048759,
+    "dressed": 122.659262,
+    "weapon": 117.5667
+   },
+   "gear_resolution": {
+    "members_dressed": 20,
+    "recorded": 128,
+    "resolved": 122
+   },
+   "mapped_from": "zvz_20man",
+   "party": "comp",
+   "size": 20,
+   "style": "kite"
+  },
+  {
+   "caps": [
+    {
+     "cap": "anti_zone",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "buff_allies",
+     "coverage": {
+      "combo": 1.6,
+      "dressed": 8.0
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 16.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 6.4,
+     "gear_flips_target": false,
+     "soft_cap": 5.0,
+     "soft_coverage": {
+      "combo": 0.8,
+      "dressed": 4.0
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 15.0,
+      "dressed": 20.0,
+      "weapon": 4.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "burst_aoe",
+     "coverage": {
+      "combo": 1.7,
+      "dressed": 2.17
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 4.7,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.47,
+     "gear_flips_target": false,
+     "soft_cap": 16.7,
+     "soft_coverage": {
+      "combo": 1.018,
+      "dressed": 1.2994
+     },
+     "supply": {
+      "combo": 17.0,
+      "doctrine": 23.4093,
+      "dressed": 21.7,
+      "weapon": 17.0
+     },
+     "target": 10.0
+    },
+    {
+     "cap": "burst_st",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 3.3,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "catch",
+     "coverage": {
+      "combo": 1.2705,
+      "dressed": 1.3525
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.082,
+     "gear_flips_target": false,
+     "soft_cap": 23.2,
+     "soft_coverage": {
+      "combo": 0.6681,
+      "dressed": 0.7112
+     },
+     "supply": {
+      "combo": 15.5,
+      "doctrine": 15.5,
+      "dressed": 16.5,
+      "weapon": 15.5
+     },
+     "target": 12.2
+    },
+    {
+     "cap": "cleanse",
+     "coverage": {
+      "combo": 10.0,
+      "dressed": 10.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 4.6,
+     "soft_coverage": {
+      "combo": 1.7391,
+      "dressed": 1.7391
+     },
+     "supply": {
+      "combo": 8.0,
+      "doctrine": 8.0,
+      "dressed": 8.0,
+      "weapon": 8.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "clump_create",
+     "coverage": {
+      "combo": 2.4,
+      "dressed": 2.4
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 4.2,
+     "soft_coverage": {
+      "combo": 1.4286,
+      "dressed": 1.4286
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 6.0,
+      "dressed": 6.0,
+      "weapon": 6.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "damage_debuff",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 3.125
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 2.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.125,
+     "gear_flips_target": true,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 1.4706
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 2.5,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "disengage",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 3.9683
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 18.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.8571,
+     "gear_flips_target": false,
+     "soft_cap": 9.2,
+     "soft_coverage": {
+      "combo": 0.7609,
+      "dressed": 2.7174
+     },
+     "supply": {
+      "combo": 7.0,
+      "doctrine": 21.0,
+      "dressed": 25.0,
+      "weapon": 7.0
+     },
+     "target": 6.3
+    },
+    {
+     "cap": "engage",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 1.453
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 4.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.3419,
+     "gear_flips_target": false,
+     "soft_cap": 23.0,
+     "soft_coverage": {
+      "combo": 0.5652,
+      "dressed": 0.7391
+     },
+     "supply": {
+      "combo": 13.0,
+      "doctrine": 19.5,
+      "dressed": 17.0,
+      "weapon": 13.0
+     },
+     "target": 11.7
+    },
+    {
+     "cap": "execute",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "heal_burst",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 1.5741
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 3.75,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.463,
+     "gear_flips_target": false,
+     "soft_cap": 10.7,
+     "soft_coverage": {
+      "combo": 0.8411,
+      "dressed": 1.1916
+     },
+     "supply": {
+      "combo": 9.0,
+      "doctrine": 13.35,
+      "dressed": 12.75,
+      "weapon": 9.0
+     },
+     "target": 8.1
+    },
+    {
+     "cap": "heal_reduction",
+     "coverage": {
+      "combo": 1.7647,
+      "dressed": 2.6471
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 1.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.8824,
+     "gear_flips_target": false,
+     "soft_cap": 3.3,
+     "soft_coverage": {
+      "combo": 0.9091,
+      "dressed": 1.3636
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 4.0,
+      "dressed": 4.5,
+      "weapon": 3.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_sustain",
+     "coverage": {
+      "combo": 1.6,
+      "dressed": 2.2067
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 2.0,
+      "units_eff": 4.2
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 4.55,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.6067,
+     "gear_flips_target": false,
+     "soft_cap": 13.8,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 1.1993
+     },
+     "supply": {
+      "combo": 12.0,
+      "doctrine": 16.95,
+      "dressed": 16.55,
+      "weapon": 12.0
+     },
+     "target": 7.5
+    },
+    {
+     "cap": "mobility",
+     "coverage": {
+      "combo": 0.6061,
+      "dressed": 1.5152
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 18.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.9091,
+     "gear_flips_target": true,
+     "soft_cap": 30.7,
+     "soft_coverage": {
+      "combo": 0.3909,
+      "dressed": 0.9772
+     },
+     "supply": {
+      "combo": 12.0,
+      "doctrine": 29.5,
+      "dressed": 30.0,
+      "weapon": 12.0
+     },
+     "target": 19.8
+    },
+    {
+     "cap": "peel",
+     "coverage": {
+      "combo": 1.0819,
+      "dressed": 2.1241
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 42.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.0422,
+     "gear_flips_target": false,
+     "soft_cap": 58.9,
+     "soft_coverage": {
+      "combo": 0.7402,
+      "dressed": 1.4533
+     },
+     "supply": {
+      "combo": 43.6,
+      "doctrine": 81.6,
+      "dressed": 85.6,
+      "weapon": 43.6
+     },
+     "target": 40.3
+    },
+    {
+     "cap": "purge",
+     "coverage": {
+      "combo": 1.3333,
+      "dressed": 1.3333
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 6.9,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 0.8696
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 10.0,
+      "dressed": 6.0,
+      "weapon": 6.0
+     },
+     "target": 4.5
+    },
+    {
+     "cap": "ranged_presence",
+     "coverage": {
+      "combo": 1.2,
+      "dressed": 1.2
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 10.0,
+     "soft_coverage": {
+      "combo": 0.6,
+      "dressed": 0.6
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 6.0,
+      "dressed": 6.0,
+      "weapon": 6.0
+     },
+     "target": 5.0
+    },
+    {
+     "cap": "resist_shred",
+     "coverage": {
+      "combo": 2.4,
+      "dressed": 2.4
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 12.6,
+     "soft_coverage": {
+      "combo": 0.9524,
+      "dressed": 0.9524
+     },
+     "supply": {
+      "combo": 12.0,
+      "doctrine": 13.0,
+      "dressed": 12.0,
+      "weapon": 12.0
+     },
+     "target": 5.0
+    },
+    {
+     "cap": "silence",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 2.9272
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 12.894444,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.8161,
+     "gear_flips_target": false,
+     "soft_cap": 10.2,
+     "soft_coverage": {
+      "combo": 0.7734,
+      "dressed": 2.0376
+     },
+     "supply": {
+      "combo": 7.888889,
+      "doctrine": 15.838889,
+      "dressed": 20.783333,
+      "weapon": 7.888889
+     },
+     "target": 7.1
+    },
+    {
+     "cap": "stun",
+     "coverage": {
+      "combo": 1.8078,
+      "dressed": 2.2998
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 2.066667,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.4921,
+     "gear_flips_target": false,
+     "soft_cap": 36.2,
+     "soft_coverage": {
+      "combo": 0.2097,
+      "dressed": 0.2668
+     },
+     "supply": {
+      "combo": 7.592593,
+      "doctrine": 9.659259,
+      "dressed": 9.659259,
+      "weapon": 7.592593
+     },
+     "target": 4.2
+    },
+    {
+     "cap": "sustained_dps",
+     "coverage": {
+      "combo": 1.3194,
+      "dressed": 4.4583
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 45.2,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.1389,
+     "gear_flips_target": false,
+     "soft_cap": 19.9,
+     "soft_coverage": {
+      "combo": 0.9548,
+      "dressed": 3.2261
+     },
+     "supply": {
+      "combo": 19.0,
+      "doctrine": 65.1025,
+      "dressed": 64.2,
+      "weapon": 19.0
+     },
+     "target": 14.4
+    },
+    {
+     "cap": "tankiness",
+     "coverage": {
+      "combo": 1.3043,
+      "dressed": 7.3352
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 1.0,
+      "units_eff": 3.3
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 55.484,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 6.0309,
+     "gear_flips_target": false,
+     "soft_cap": 13.4,
+     "soft_coverage": {
+      "combo": 0.8955,
+      "dressed": 5.0361
+     },
+     "supply": {
+      "combo": 12.0,
+      "doctrine": 74.41,
+      "dressed": 67.484,
+      "weapon": 12.0
+     },
+     "target": 9.2
+    },
+    {
+     "cap": "zone_control",
+     "coverage": {
+      "combo": 1.7778,
+      "dressed": 2.5556
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 7.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.7778,
+     "gear_flips_target": false,
+     "soft_cap": 13.8,
+     "soft_coverage": {
+      "combo": 1.1594,
+      "dressed": 1.6667
+     },
+     "supply": {
+      "combo": 16.0,
+      "doctrine": 22.0,
+      "dressed": 23.0,
+      "weapon": 16.0
+     },
+     "target": 9.0
+    }
+   ],
+   "comp": "cb_clonepeek_zvz20_2026_03",
+   "content": "blackzone_roam",
+   "fitness": {
+    "combo": 121.541043,
+    "doctrine": 112.793925,
+    "dressed": 113.821624,
+    "weapon": 121.541043
+   },
+   "gear_resolution": {
+    "members_dressed": 20,
+    "recorded": 102,
+    "resolved": 101
+   },
+   "mapped_from": "zvz_20man",
+   "party": "comp",
+   "size": 20,
+   "style": "balanced"
+  },
+  {
+   "caps": [
+    {
+     "cap": "anti_zone",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 1.1111
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 2.3,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 0.8696
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 2.0,
+      "dressed": 2.0,
+      "weapon": 2.0
+     },
+     "target": 1.8
+    },
+    {
+     "cap": "buff_allies",
+     "coverage": {
+      "combo": 2.4,
+      "dressed": 5.6
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 8.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.2,
+     "gear_flips_target": false,
+     "soft_cap": 6.9,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 2.029
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 13.0,
+      "dressed": 14.0,
+      "weapon": 6.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "burst_aoe",
+     "coverage": {
+      "combo": 1.5741,
+      "dressed": 2.6928
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 12.0822,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.1187,
+     "gear_flips_target": false,
+     "soft_cap": 16.7,
+     "soft_coverage": {
+      "combo": 1.018,
+      "dressed": 1.7414
+     },
+     "supply": {
+      "combo": 17.0,
+      "doctrine": 28.1915,
+      "dressed": 29.0822,
+      "weapon": 17.0
+     },
+     "target": 10.8
+    },
+    {
+     "cap": "burst_st",
+     "coverage": {
+      "combo": 0.5882,
+      "dressed": 0.6176
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.05,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0294,
+     "gear_flips_target": false,
+     "soft_cap": 3.3,
+     "soft_coverage": {
+      "combo": 0.303,
+      "dressed": 0.3182
+     },
+     "supply": {
+      "combo": 1.0,
+      "doctrine": 1.05,
+      "dressed": 1.05,
+      "weapon": 1.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "catch",
+     "coverage": {
+      "combo": 1.6202,
+      "dressed": 1.6202
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 26.3,
+     "soft_coverage": {
+      "combo": 0.7947,
+      "dressed": 0.7947
+     },
+     "supply": {
+      "combo": 20.9,
+      "doctrine": 20.9,
+      "dressed": 20.9,
+      "weapon": 20.9
+     },
+     "target": 12.9
+    },
+    {
+     "cap": "cleanse",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 1.1111
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 9.2,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 0.8696
+     },
+     "supply": {
+      "combo": 8.0,
+      "doctrine": 8.0,
+      "dressed": 8.0,
+      "weapon": 8.0
+     },
+     "target": 7.2
+    },
+    {
+     "cap": "clump_create",
+     "coverage": {
+      "combo": 2.4,
+      "dressed": 2.4
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 4.2,
+     "soft_coverage": {
+      "combo": 1.4286,
+      "dressed": 1.4286
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 6.0,
+      "dressed": 6.0,
+      "weapon": 6.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "damage_debuff",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "disengage",
+     "coverage": {
+      "combo": 1.5873,
+      "dressed": 2.5397
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 6.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.9524,
+     "gear_flips_target": false,
+     "soft_cap": 11.5,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 1.3913
+     },
+     "supply": {
+      "combo": 10.0,
+      "doctrine": 29.5,
+      "dressed": 16.0,
+      "weapon": 10.0
+     },
+     "target": 6.3
+    },
+    {
+     "cap": "engage",
+     "coverage": {
+      "combo": 3.3333,
+      "dressed": 4.5238
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 5.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.1905,
+     "gear_flips_target": false,
+     "soft_cap": 16.1,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 1.1801
+     },
+     "supply": {
+      "combo": 14.0,
+      "doctrine": 18.0,
+      "dressed": 19.0,
+      "weapon": 14.0
+     },
+     "target": 4.2
+    },
+    {
+     "cap": "execute",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "heal_burst",
+     "coverage": {
+      "combo": 1.4286,
+      "dressed": 2.013
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 4.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.5844,
+     "gear_flips_target": false,
+     "soft_cap": 12.6,
+     "soft_coverage": {
+      "combo": 0.873,
+      "dressed": 1.2302
+     },
+     "supply": {
+      "combo": 11.0,
+      "doctrine": 16.5,
+      "dressed": 15.5,
+      "weapon": 11.0
+     },
+     "target": 7.7
+    },
+    {
+     "cap": "heal_reduction",
+     "coverage": {
+      "combo": 1.7647,
+      "dressed": 1.7647
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 3.3,
+     "soft_coverage": {
+      "combo": 0.9091,
+      "dressed": 0.9091
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 3.0,
+      "dressed": 3.0,
+      "weapon": 3.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_sustain",
+     "coverage": {
+      "combo": 1.3433,
+      "dressed": 1.7985
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 2.0,
+      "units_eff": 4.2
+     },
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 3.05,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.4552,
+     "gear_flips_target": false,
+     "soft_cap": 13.1,
+     "soft_coverage": {
+      "combo": 0.687,
+      "dressed": 0.9198
+     },
+     "supply": {
+      "combo": 9.0,
+      "doctrine": 13.0,
+      "dressed": 12.05,
+      "weapon": 9.0
+     },
+     "target": 6.7
+    },
+    {
+     "cap": "mobility",
+     "coverage": {
+      "combo": 3.8095,
+      "dressed": 6.5476
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 11.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.7381,
+     "gear_flips_target": false,
+     "soft_cap": 18.4,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 1.4946
+     },
+     "supply": {
+      "combo": 16.0,
+      "doctrine": 32.0,
+      "dressed": 27.5,
+      "weapon": 16.0
+     },
+     "target": 4.2
+    },
+    {
+     "cap": "peel",
+     "coverage": {
+      "combo": 2.5822,
+      "dressed": 3.3378
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 17.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.7556,
+     "gear_flips_target": false,
+     "soft_cap": 60.6,
+     "soft_coverage": {
+      "combo": 0.9587,
+      "dressed": 1.2393
+     },
+     "supply": {
+      "combo": 58.1,
+      "doctrine": 94.1,
+      "dressed": 75.1,
+      "weapon": 58.1
+     },
+     "target": 22.5
+    },
+    {
+     "cap": "purge",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 3.6111
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 9.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.5,
+     "gear_flips_target": false,
+     "soft_cap": 5.8,
+     "soft_coverage": {
+      "combo": 0.6897,
+      "dressed": 2.2414
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 12.0,
+      "dressed": 13.0,
+      "weapon": 4.0
+     },
+     "target": 3.6
+    },
+    {
+     "cap": "ranged_presence",
+     "coverage": {
+      "combo": 1.4,
+      "dressed": 1.4
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 10.0,
+     "soft_coverage": {
+      "combo": 0.7,
+      "dressed": 0.7
+     },
+     "supply": {
+      "combo": 7.0,
+      "doctrine": 7.0,
+      "dressed": 7.0,
+      "weapon": 7.0
+     },
+     "target": 5.0
+    },
+    {
+     "cap": "resist_shred",
+     "coverage": {
+      "combo": 1.5,
+      "dressed": 1.5
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 10.9,
+     "soft_coverage": {
+      "combo": 0.6881,
+      "dressed": 0.6881
+     },
+     "supply": {
+      "combo": 7.5,
+      "doctrine": 7.5,
+      "dressed": 7.5,
+      "weapon": 7.5
+     },
+     "target": 5.0
+    },
+    {
+     "cap": "silence",
+     "coverage": {
+      "combo": 1.7647,
+      "dressed": 2.5588
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.35,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.7941,
+     "gear_flips_target": false,
+     "soft_cap": 5.8,
+     "soft_coverage": {
+      "combo": 0.5172,
+      "dressed": 0.75
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 4.35,
+      "dressed": 4.35,
+      "weapon": 3.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "stun",
+     "coverage": {
+      "combo": 6.5051,
+      "dressed": 8.7896
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 9.594667,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.2844,
+     "gear_flips_target": false,
+     "soft_cap": 8.3,
+     "soft_coverage": {
+      "combo": 3.2917,
+      "dressed": 4.4477
+     },
+     "supply": {
+      "combo": 27.321481,
+      "doctrine": 36.916148,
+      "dressed": 36.916148,
+      "weapon": 27.321481
+     },
+     "target": 4.2
+    },
+    {
+     "cap": "sustained_dps",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 3.2349
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 30.5822,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.1238,
+     "gear_flips_target": false,
+     "soft_cap": 19.7,
+     "soft_coverage": {
+      "combo": 0.8122,
+      "dressed": 2.3646
+     },
+     "supply": {
+      "combo": 16.0,
+      "doctrine": 62.2025,
+      "dressed": 46.5822,
+      "weapon": 16.0
+     },
+     "target": 14.4
+    },
+    {
+     "cap": "tankiness",
+     "coverage": {
+      "combo": 1.0,
+      "dressed": 4.9021
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 1.0,
+      "units_eff": 3.3
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 39.021,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.9021,
+     "gear_flips_target": false,
+     "soft_cap": 14.2,
+     "soft_coverage": {
+      "combo": 0.7042,
+      "dressed": 3.4522
+     },
+     "supply": {
+      "combo": 10.0,
+      "doctrine": 68.41,
+      "dressed": 49.021,
+      "weapon": 10.0
+     },
+     "target": 10.0
+    },
+    {
+     "cap": "zone_control",
+     "coverage": {
+      "combo": 2.0896,
+      "dressed": 2.6866
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 4.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.597,
+     "gear_flips_target": false,
+     "soft_cap": 16.1,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 1.118
+     },
+     "supply": {
+      "combo": 14.0,
+      "doctrine": 22.0,
+      "dressed": 18.0,
+      "weapon": 14.0
+     },
+     "target": 6.7
+    }
+   ],
+   "comp": "deadlyhooker_large_scale_2026_08",
+   "content": "territory_defense",
+   "fitness": {
+    "combo": 121.66978,
+    "doctrine": 110.634048,
+    "dressed": 112.555599,
+    "weapon": 121.66978
+   },
+   "gear_resolution": {
+    "members_dressed": 20,
+    "recorded": 88,
+    "resolved": 72
+   },
+   "mapped_from": "large_scale_zvz",
+   "party": "party_1",
+   "size": 20,
+   "style": "balanced"
+  },
+  {
+   "caps": [
+    {
+     "cap": "anti_zone",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 1.1111
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 2.3,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 0.8696
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 2.0,
+      "dressed": 2.0,
+      "weapon": 2.0
+     },
+     "target": 1.8
+    },
+    {
+     "cap": "buff_allies",
+     "coverage": {
+      "combo": 2.0,
+      "dressed": 3.6
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 4.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.6,
+     "gear_flips_target": false,
+     "soft_cap": 6.9,
+     "soft_coverage": {
+      "combo": 0.7246,
+      "dressed": 1.3043
+     },
+     "supply": {
+      "combo": 5.0,
+      "doctrine": 11.5,
+      "dressed": 9.0,
+      "weapon": 5.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "burst_aoe",
+     "coverage": {
+      "combo": 1.1574,
+      "dressed": 1.3426
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.6,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.1852,
+     "gear_flips_target": false,
+     "soft_cap": 13.36,
+     "soft_coverage": {
+      "combo": 0.7485,
+      "dressed": 0.8683
+     },
+     "supply": {
+      "combo": 10.0,
+      "doctrine": 16.6983,
+      "dressed": 11.6,
+      "weapon": 10.0
+     },
+     "target": 8.64
+    },
+    {
+     "cap": "burst_st",
+     "coverage": {
+      "combo": 0.7353,
+      "dressed": 0.7721
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.05,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0368,
+     "gear_flips_target": false,
+     "soft_cap": 2.64,
+     "soft_coverage": {
+      "combo": 0.3788,
+      "dressed": 0.3977
+     },
+     "supply": {
+      "combo": 1.0,
+      "doctrine": 3.6822,
+      "dressed": 1.05,
+      "weapon": 1.0
+     },
+     "target": 1.36
+    },
+    {
+     "cap": "catch",
+     "coverage": {
+      "combo": 1.531,
+      "dressed": 1.531
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 21.04,
+     "soft_coverage": {
+      "combo": 0.751,
+      "dressed": 0.751
+     },
+     "supply": {
+      "combo": 15.8,
+      "doctrine": 15.8,
+      "dressed": 15.8,
+      "weapon": 15.8
+     },
+     "target": 10.32
+    },
+    {
+     "cap": "cleanse",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 1.1111
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 9.2,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 0.8696
+     },
+     "supply": {
+      "combo": 8.0,
+      "doctrine": 8.0,
+      "dressed": 8.0,
+      "weapon": 8.0
+     },
+     "target": 7.2
+    },
+    {
+     "cap": "clump_create",
+     "coverage": {
+      "combo": 0.4,
+      "dressed": 0.4
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 4.2,
+     "soft_coverage": {
+      "combo": 0.2381,
+      "dressed": 0.2381
+     },
+     "supply": {
+      "combo": 1.0,
+      "doctrine": 1.0,
+      "dressed": 1.0,
+      "weapon": 1.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "damage_debuff",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "disengage",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 1.1111
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 11.5,
+     "soft_coverage": {
+      "combo": 0.6087,
+      "dressed": 0.6087
+     },
+     "supply": {
+      "combo": 7.0,
+      "doctrine": 19.5,
+      "dressed": 7.0,
+      "weapon": 7.0
+     },
+     "target": 6.3
+    },
+    {
+     "cap": "engage",
+     "coverage": {
+      "combo": 1.1905,
+      "dressed": 2.0833
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 3.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.8929,
+     "gear_flips_target": false,
+     "soft_cap": 12.88,
+     "soft_coverage": {
+      "combo": 0.3106,
+      "dressed": 0.5435
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 11.0,
+      "dressed": 7.0,
+      "weapon": 4.0
+     },
+     "target": 3.36
+    },
+    {
+     "cap": "execute",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "heal_burst",
+     "coverage": {
+      "combo": 1.2987,
+      "dressed": 1.5422
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.5,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.2435,
+     "gear_flips_target": false,
+     "soft_cap": 10.08,
+     "soft_coverage": {
+      "combo": 0.7937,
+      "dressed": 0.9425
+     },
+     "supply": {
+      "combo": 8.0,
+      "doctrine": 12.0,
+      "dressed": 9.5,
+      "weapon": 8.0
+     },
+     "target": 6.16
+    },
+    {
+     "cap": "heal_reduction",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 3.3,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_sustain",
+     "coverage": {
+      "combo": 1.4925,
+      "dressed": 1.6884
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 2.0,
+      "units_eff": 4.2
+     },
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.05,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.1959,
+     "gear_flips_target": false,
+     "soft_cap": 10.48,
+     "soft_coverage": {
+      "combo": 0.7634,
+      "dressed": 0.8635
+     },
+     "supply": {
+      "combo": 8.0,
+      "doctrine": 11.05,
+      "dressed": 9.05,
+      "weapon": 8.0
+     },
+     "target": 5.36
+    },
+    {
+     "cap": "mobility",
+     "coverage": {
+      "combo": 2.0833,
+      "dressed": 3.4226
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 4.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.3393,
+     "gear_flips_target": false,
+     "soft_cap": 14.72,
+     "soft_coverage": {
+      "combo": 0.4755,
+      "dressed": 0.7813
+     },
+     "supply": {
+      "combo": 7.0,
+      "doctrine": 23.0,
+      "dressed": 11.5,
+      "weapon": 7.0
+     },
+     "target": 3.36
+    },
+    {
+     "cap": "peel",
+     "coverage": {
+      "combo": 2.1333,
+      "dressed": 3.3667
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 22.2,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.2333,
+     "gear_flips_target": false,
+     "soft_cap": 48.48,
+     "soft_coverage": {
+      "combo": 0.7921,
+      "dressed": 1.25
+     },
+     "supply": {
+      "combo": 38.4,
+      "doctrine": 65.6,
+      "dressed": 60.6,
+      "weapon": 38.4
+     },
+     "target": 18.0
+    },
+    {
+     "cap": "purge",
+     "coverage": {
+      "combo": 1.3889,
+      "dressed": 3.0556
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 6.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.6667,
+     "gear_flips_target": false,
+     "soft_cap": 5.8,
+     "soft_coverage": {
+      "combo": 0.8621,
+      "dressed": 1.8966
+     },
+     "supply": {
+      "combo": 5.0,
+      "doctrine": 13.0,
+      "dressed": 11.0,
+      "weapon": 5.0
+     },
+     "target": 3.6
+    },
+    {
+     "cap": "ranged_presence",
+     "coverage": {
+      "combo": 1.5,
+      "dressed": 1.5
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 8.0,
+     "soft_coverage": {
+      "combo": 0.75,
+      "dressed": 0.75
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 6.0,
+      "dressed": 6.0,
+      "weapon": 6.0
+     },
+     "target": 4.0
+    },
+    {
+     "cap": "resist_shred",
+     "coverage": {
+      "combo": 1.1,
+      "dressed": 1.1
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 10.9,
+     "soft_coverage": {
+      "combo": 0.5046,
+      "dressed": 0.5046
+     },
+     "supply": {
+      "combo": 5.5,
+      "doctrine": 5.5,
+      "dressed": 5.5,
+      "weapon": 5.5
+     },
+     "target": 5.0
+    },
+    {
+     "cap": "silence",
+     "coverage": {
+      "combo": 2.9412,
+      "dressed": 4.3235
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 2.35,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.3824,
+     "gear_flips_target": false,
+     "soft_cap": 5.8,
+     "soft_coverage": {
+      "combo": 0.8621,
+      "dressed": 1.2672
+     },
+     "supply": {
+      "combo": 5.0,
+      "doctrine": 7.3,
+      "dressed": 7.35,
+      "weapon": 5.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "stun",
+     "coverage": {
+      "combo": 6.1429,
+      "dressed": 8.9815
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 9.538,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.8387,
+     "gear_flips_target": false,
+     "soft_cap": 6.64,
+     "soft_coverage": {
+      "combo": 3.1084,
+      "dressed": 4.5449
+     },
+     "supply": {
+      "combo": 20.64,
+      "doctrine": 29.978,
+      "dressed": 30.178,
+      "weapon": 20.64
+     },
+     "target": 3.36
+    },
+    {
+     "cap": "sustained_dps",
+     "coverage": {
+      "combo": 1.1285,
+      "dressed": 2.6432
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 17.45,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.5148,
+     "gear_flips_target": false,
+     "soft_cap": 15.76,
+     "soft_coverage": {
+      "combo": 0.8249,
+      "dressed": 1.9321
+     },
+     "supply": {
+      "combo": 13.0,
+      "doctrine": 50.7483,
+      "dressed": 30.45,
+      "weapon": 13.0
+     },
+     "target": 11.52
+    },
+    {
+     "cap": "tankiness",
+     "coverage": {
+      "combo": 0.5,
+      "dressed": 4.0698
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 1.0,
+      "units_eff": 3.3
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 28.558,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.5698,
+     "gear_flips_target": true,
+     "soft_cap": 11.36,
+     "soft_coverage": {
+      "combo": 0.3521,
+      "dressed": 2.866
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 59.806,
+      "dressed": 32.558,
+      "weapon": 4.0
+     },
+     "target": 8.0
+    },
+    {
+     "cap": "zone_control",
+     "coverage": {
+      "combo": 1.1194,
+      "dressed": 2.0522
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 5.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.9328,
+     "gear_flips_target": false,
+     "soft_cap": 12.88,
+     "soft_coverage": {
+      "combo": 0.4658,
+      "dressed": 0.854
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 12.0,
+      "dressed": 11.0,
+      "weapon": 6.0
+     },
+     "target": 5.36
+    }
+   ],
+   "comp": "deadlyhooker_large_scale_2026_08",
+   "content": "territory_defense",
+   "fitness": {
+    "combo": 106.702368,
+    "doctrine": 102.98383,
+    "dressed": 106.339331,
+    "weapon": 106.702368
+   },
+   "gear_resolution": {
+    "members_dressed": 16,
+    "recorded": 69,
+    "resolved": 51
+   },
+   "mapped_from": "large_scale_zvz",
+   "party": "party_2",
+   "size": 16,
+   "style": "balanced"
+  },
+  {
+   "caps": [
+    {
+     "cap": "anti_zone",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 1.1111
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 2.3,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 0.8696
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 2.0,
+      "dressed": 2.0,
+      "weapon": 2.0
+     },
+     "target": 1.8
+    },
+    {
+     "cap": "buff_allies",
+     "coverage": {
+      "combo": 2.0,
+      "dressed": 4.6
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 6.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.6,
+     "gear_flips_target": false,
+     "soft_cap": 6.9,
+     "soft_coverage": {
+      "combo": 0.7246,
+      "dressed": 1.6667
+     },
+     "supply": {
+      "combo": 5.0,
+      "doctrine": 11.5,
+      "dressed": 11.5,
+      "weapon": 5.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "burst_aoe",
+     "coverage": {
+      "combo": 0.9977,
+      "dressed": 1.191
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.461429,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.1933,
+     "gear_flips_target": true,
+     "soft_cap": 11.69,
+     "soft_coverage": {
+      "combo": 0.6452,
+      "dressed": 0.7703
+     },
+     "supply": {
+      "combo": 7.542857,
+      "doctrine": 12.221974,
+      "dressed": 9.004286,
+      "weapon": 7.542857
+     },
+     "target": 7.56
+    },
+    {
+     "cap": "burst_st",
+     "coverage": {
+      "combo": 2.6427,
+      "dressed": 2.6847
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.05,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.042,
+     "gear_flips_target": false,
+     "soft_cap": 2.31,
+     "soft_coverage": {
+      "combo": 1.3614,
+      "dressed": 1.383
+     },
+     "supply": {
+      "combo": 3.144828,
+      "doctrine": 8.459228,
+      "dressed": 3.194828,
+      "weapon": 3.144828
+     },
+     "target": 1.19
+    },
+    {
+     "cap": "catch",
+     "coverage": {
+      "combo": 1.1074,
+      "dressed": 1.1074
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 18.41,
+     "soft_coverage": {
+      "combo": 0.5432,
+      "dressed": 0.5432
+     },
+     "supply": {
+      "combo": 10.0,
+      "doctrine": 10.0,
+      "dressed": 10.0,
+      "weapon": 10.0
+     },
+     "target": 9.03
+    },
+    {
+     "cap": "cleanse",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 1.1111
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 9.2,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 0.8696
+     },
+     "supply": {
+      "combo": 8.0,
+      "doctrine": 8.0,
+      "dressed": 8.0,
+      "weapon": 8.0
+     },
+     "target": 7.2
+    },
+    {
+     "cap": "clump_create",
+     "coverage": {
+      "combo": 0.8,
+      "dressed": 0.8
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 4.2,
+     "soft_coverage": {
+      "combo": 0.4762,
+      "dressed": 0.4762
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 2.0,
+      "dressed": 2.0,
+      "weapon": 2.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "damage_debuff",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "disengage",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 1.1111
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 11.5,
+     "soft_coverage": {
+      "combo": 0.6087,
+      "dressed": 0.6087
+     },
+     "supply": {
+      "combo": 7.0,
+      "doctrine": 15.5,
+      "dressed": 7.0,
+      "weapon": 7.0
+     },
+     "target": 6.3
+    },
+    {
+     "cap": "engage",
+     "coverage": {
+      "combo": 2.7211,
+      "dressed": 3.4014
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 2.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.6803,
+     "gear_flips_target": false,
+     "soft_cap": 11.27,
+     "soft_coverage": {
+      "combo": 0.7098,
+      "dressed": 0.8873
+     },
+     "supply": {
+      "combo": 8.0,
+      "doctrine": 14.0,
+      "dressed": 10.0,
+      "weapon": 8.0
+     },
+     "target": 2.94
+    },
+    {
+     "cap": "execute",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "heal_burst",
+     "coverage": {
+      "combo": 1.1132,
+      "dressed": 1.475
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.95,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.3618,
+     "gear_flips_target": false,
+     "soft_cap": 8.82,
+     "soft_coverage": {
+      "combo": 0.6803,
+      "dressed": 0.9014
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 8.95,
+      "dressed": 7.95,
+      "weapon": 6.0
+     },
+     "target": 5.39
+    },
+    {
+     "cap": "heal_reduction",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 3.3,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_sustain",
+     "coverage": {
+      "combo": 1.7058,
+      "dressed": 2.2068
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 2.0,
+      "units_eff": 4.2
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 2.35,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.5011,
+     "gear_flips_target": false,
+     "soft_cap": 9.17,
+     "soft_coverage": {
+      "combo": 0.8724,
+      "dressed": 1.1287
+     },
+     "supply": {
+      "combo": 8.0,
+      "doctrine": 11.4,
+      "dressed": 10.35,
+      "weapon": 8.0
+     },
+     "target": 4.69
+    },
+    {
+     "cap": "mobility",
+     "coverage": {
+      "combo": 2.7211,
+      "dressed": 3.7415
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 3.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.0204,
+     "gear_flips_target": false,
+     "soft_cap": 12.88,
+     "soft_coverage": {
+      "combo": 0.6211,
+      "dressed": 0.854
+     },
+     "supply": {
+      "combo": 8.0,
+      "doctrine": 18.0,
+      "dressed": 11.0,
+      "weapon": 8.0
+     },
+     "target": 2.94
+    },
+    {
+     "cap": "peel",
+     "coverage": {
+      "combo": 1.2698,
+      "dressed": 2.7302
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 23.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.4603,
+     "gear_flips_target": false,
+     "soft_cap": 42.42,
+     "soft_coverage": {
+      "combo": 0.4715,
+      "dressed": 1.0137
+     },
+     "supply": {
+      "combo": 20.0,
+      "doctrine": 33.0,
+      "dressed": 43.0,
+      "weapon": 20.0
+     },
+     "target": 15.75
+    },
+    {
+     "cap": "purge",
+     "coverage": {
+      "combo": 1.3889,
+      "dressed": 1.9444
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 2.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.5556,
+     "gear_flips_target": false,
+     "soft_cap": 5.8,
+     "soft_coverage": {
+      "combo": 0.8621,
+      "dressed": 1.2069
+     },
+     "supply": {
+      "combo": 5.0,
+      "doctrine": 7.0,
+      "dressed": 7.0,
+      "weapon": 5.0
+     },
+     "target": 3.6
+    },
+    {
+     "cap": "ranged_presence",
+     "coverage": {
+      "combo": 0.8571,
+      "dressed": 0.8571
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 7.0,
+     "soft_coverage": {
+      "combo": 0.4286,
+      "dressed": 0.4286
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 3.0,
+      "dressed": 3.0,
+      "weapon": 3.0
+     },
+     "target": 3.5
+    },
+    {
+     "cap": "resist_shred",
+     "coverage": {
+      "combo": 1.9,
+      "dressed": 1.9
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 10.9,
+     "soft_coverage": {
+      "combo": 0.8716,
+      "dressed": 0.8716
+     },
+     "supply": {
+      "combo": 9.5,
+      "doctrine": 9.5,
+      "dressed": 9.5,
+      "weapon": 9.5
+     },
+     "target": 5.0
+    },
+    {
+     "cap": "silence",
+     "coverage": {
+      "combo": 1.7647,
+      "dressed": 5.2353
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 5.9,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.4706,
+     "gear_flips_target": false,
+     "soft_cap": 5.8,
+     "soft_coverage": {
+      "combo": 0.5172,
+      "dressed": 1.5345
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 8.9,
+      "dressed": 8.9,
+      "weapon": 3.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "stun",
+     "coverage": {
+      "combo": 0.6803,
+      "dressed": 1.0204
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.3401,
+     "gear_flips_target": true,
+     "soft_cap": 5.81,
+     "soft_coverage": {
+      "combo": 0.3442,
+      "dressed": 0.5164
+     },
+     "supply": {
+      "combo": 2.0,
+      "doctrine": 3.0,
+      "dressed": 3.0,
+      "weapon": 2.0
+     },
+     "target": 2.94
+    },
+    {
+     "cap": "sustained_dps",
+     "coverage": {
+      "combo": 1.1905,
+      "dressed": 2.4107
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 12.3,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.2202,
+     "gear_flips_target": false,
+     "soft_cap": 13.79,
+     "soft_coverage": {
+      "combo": 0.8702,
+      "dressed": 1.7621
+     },
+     "supply": {
+      "combo": 12.0,
+      "doctrine": 36.261,
+      "dressed": 24.3,
+      "weapon": 12.0
+     },
+     "target": 10.08
+    },
+    {
+     "cap": "tankiness",
+     "coverage": {
+      "combo": 0.5714,
+      "dressed": 4.6486
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 1.0,
+      "units_eff": 3.3
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 28.54,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 4.0771,
+     "gear_flips_target": true,
+     "soft_cap": 9.94,
+     "soft_coverage": {
+      "combo": 0.4024,
+      "dressed": 3.2736
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 45.405,
+      "dressed": 32.54,
+      "weapon": 4.0
+     },
+     "target": 7.0
+    },
+    {
+     "cap": "zone_control",
+     "coverage": {
+      "combo": 1.2793,
+      "dressed": 2.7719
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 7.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.4925,
+     "gear_flips_target": false,
+     "soft_cap": 11.27,
+     "soft_coverage": {
+      "combo": 0.5324,
+      "dressed": 1.1535
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 12.0,
+      "dressed": 13.0,
+      "weapon": 6.0
+     },
+     "target": 4.69
+    }
+   ],
+   "comp": "deadlyhooker_large_scale_2026_08",
+   "content": "territory_defense",
+   "fitness": {
+    "combo": 109.275829,
+    "doctrine": 108.232546,
+    "dressed": 110.216474,
+    "weapon": 109.275829
+   },
+   "gear_resolution": {
+    "members_dressed": 14,
+    "recorded": 60,
+    "resolved": 43
+   },
+   "mapped_from": "large_scale_zvz",
+   "party": "party_3",
+   "size": 14,
+   "style": "balanced"
+  },
+  {
+   "caps": [
+    {
+     "cap": "anti_zone",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 0.0
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 0.0,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "buff_allies",
+     "coverage": {
+      "combo": 1.6,
+      "dressed": 8.0
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 16.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 6.4,
+     "gear_flips_target": false,
+     "soft_cap": 5.0,
+     "soft_coverage": {
+      "combo": 0.8,
+      "dressed": 4.0
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 24.5,
+      "dressed": 20.0,
+      "weapon": 5.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "burst_aoe",
+     "coverage": {
+      "combo": 1.0371,
+      "dressed": 1.1751
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.379211,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.1379,
+     "gear_flips_target": false,
+     "soft_cap": 16.7,
+     "soft_coverage": {
+      "combo": 0.621,
+      "dressed": 0.7036
+     },
+     "supply": {
+      "combo": 10.371429,
+      "doctrine": 14.013403,
+      "dressed": 11.75064,
+      "weapon": 10.371429
+     },
+     "target": 10.0
+    },
+    {
+     "cap": "burst_st",
+     "coverage": {
+      "combo": 3.8654,
+      "dressed": 4.8471
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 1.66893,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.9817,
+     "gear_flips_target": false,
+     "soft_cap": 3.3,
+     "soft_coverage": {
+      "combo": 1.9913,
+      "dressed": 2.497
+     },
+     "supply": {
+      "combo": 6.571161,
+      "doctrine": 7.329504,
+      "dressed": 8.240091,
+      "weapon": 6.571161
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "catch",
+     "coverage": {
+      "combo": 1.1066,
+      "dressed": 1.1066
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 23.2,
+     "soft_coverage": {
+      "combo": 0.5819,
+      "dressed": 0.5819
+     },
+     "supply": {
+      "combo": 13.5,
+      "doctrine": 13.5,
+      "dressed": 13.5,
+      "weapon": 13.5
+     },
+     "target": 12.2
+    },
+    {
+     "cap": "cleanse",
+     "coverage": {
+      "combo": 5.0,
+      "dressed": 5.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 4.6,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 0.8696
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 4.0,
+      "dressed": 4.0,
+      "weapon": 4.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "clump_create",
+     "coverage": {
+      "combo": 2.0,
+      "dressed": 2.0
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 4.2,
+     "soft_coverage": {
+      "combo": 1.1905,
+      "dressed": 1.1905
+     },
+     "supply": {
+      "combo": 5.0,
+      "doctrine": 5.0,
+      "dressed": 5.0,
+      "weapon": 4.0
+     },
+     "target": 2.5
+    },
+    {
+     "cap": "damage_debuff",
+     "coverage": {
+      "combo": 0.0,
+      "dressed": 3.125
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 2.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.125,
+     "gear_flips_target": true,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 0.0,
+      "dressed": 1.4706
+     },
+     "supply": {
+      "combo": 0.0,
+      "doctrine": 0.0,
+      "dressed": 2.5,
+      "weapon": 0.0
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "disengage",
+     "coverage": {
+      "combo": 1.5873,
+      "dressed": 1.5873
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 9.2,
+     "soft_coverage": {
+      "combo": 1.087,
+      "dressed": 1.087
+     },
+     "supply": {
+      "combo": 10.0,
+      "doctrine": 20.0,
+      "dressed": 10.0,
+      "weapon": 7.0
+     },
+     "target": 6.3
+    },
+    {
+     "cap": "engage",
+     "coverage": {
+      "combo": 1.1966,
+      "dressed": 2.906
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 20.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.7094,
+     "gear_flips_target": false,
+     "soft_cap": 23.0,
+     "soft_coverage": {
+      "combo": 0.6087,
+      "dressed": 1.4783
+     },
+     "supply": {
+      "combo": 14.0,
+      "doctrine": 26.5,
+      "dressed": 34.0,
+      "weapon": 13.0
+     },
+     "target": 11.7
+    },
+    {
+     "cap": "execute",
+     "coverage": {
+      "combo": 3.5019,
+      "dressed": 4.3998
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.718304,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.8979,
+     "gear_flips_target": false,
+     "soft_cap": 1.7,
+     "soft_coverage": {
+      "combo": 1.6479,
+      "dressed": 2.0705
+     },
+     "supply": {
+      "combo": 2.801498,
+      "doctrine": 3.519802,
+      "dressed": 3.519802,
+      "weapon": 2.801498
+     },
+     "target": 0.8
+    },
+    {
+     "cap": "heal_burst",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 1.3333
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 1.8,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.2222,
+     "gear_flips_target": false,
+     "soft_cap": 10.7,
+     "soft_coverage": {
+      "combo": 0.8411,
+      "dressed": 1.0093
+     },
+     "supply": {
+      "combo": 9.0,
+      "doctrine": 13.5,
+      "dressed": 10.8,
+      "weapon": 9.0
+     },
+     "target": 8.1
+    },
+    {
+     "cap": "heal_reduction",
+     "coverage": {
+      "combo": 2.3529,
+      "dressed": 2.3529
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 3.3,
+     "soft_coverage": {
+      "combo": 1.2121,
+      "dressed": 1.2121
+     },
+     "supply": {
+      "combo": 4.0,
+      "doctrine": 4.0,
+      "dressed": 4.0,
+      "weapon": 5.0
+     },
+     "target": 1.7
+    },
+    {
+     "cap": "heal_sustain",
+     "coverage": {
+      "combo": 1.6,
+      "dressed": 1.9067
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 2.0,
+      "units_eff": 4.2
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 2.3,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.3067,
+     "gear_flips_target": false,
+     "soft_cap": 13.8,
+     "soft_coverage": {
+      "combo": 0.8696,
+      "dressed": 1.0362
+     },
+     "supply": {
+      "combo": 12.0,
+      "doctrine": 17.05,
+      "dressed": 14.3,
+      "weapon": 12.0
+     },
+     "target": 7.5
+    },
+    {
+     "cap": "mobility",
+     "coverage": {
+      "combo": 1.1616,
+      "dressed": 2.6768
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 30.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.5152,
+     "gear_flips_target": false,
+     "soft_cap": 30.7,
+     "soft_coverage": {
+      "combo": 0.7492,
+      "dressed": 1.7264
+     },
+     "supply": {
+      "combo": 23.0,
+      "doctrine": 45.5,
+      "dressed": 53.0,
+      "weapon": 22.0
+     },
+     "target": 19.8
+    },
+    {
+     "cap": "peel",
+     "coverage": {
+      "combo": 0.5931,
+      "dressed": 1.4988
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 36.5,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.9057,
+     "gear_flips_target": true,
+     "soft_cap": 58.9,
+     "soft_coverage": {
+      "combo": 0.4058,
+      "dressed": 1.0255
+     },
+     "supply": {
+      "combo": 23.9,
+      "doctrine": 72.9,
+      "dressed": 60.4,
+      "weapon": 43.55
+     },
+     "target": 40.3
+    },
+    {
+     "cap": "purge",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 1.1111
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 6.9,
+     "soft_coverage": {
+      "combo": 0.7246,
+      "dressed": 0.7246
+     },
+     "supply": {
+      "combo": 5.0,
+      "doctrine": 7.0,
+      "dressed": 5.0,
+      "weapon": 5.0
+     },
+     "target": 4.5
+    },
+    {
+     "cap": "ranged_presence",
+     "coverage": {
+      "combo": 0.6,
+      "dressed": 0.6
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 0.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.0,
+     "gear_flips_target": false,
+     "soft_cap": 10.0,
+     "soft_coverage": {
+      "combo": 0.3,
+      "dressed": 0.3
+     },
+     "supply": {
+      "combo": 3.0,
+      "doctrine": 3.0,
+      "dressed": 3.0,
+      "weapon": 3.0
+     },
+     "target": 5.0
+    },
+    {
+     "cap": "resist_shred",
+     "coverage": {
+      "combo": 2.1,
+      "dressed": 2.5
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 2.0,
+     "gear_delta_large": false,
+     "gear_delta_vs_target": 0.4,
+     "gear_flips_target": false,
+     "soft_cap": 12.6,
+     "soft_coverage": {
+      "combo": 0.8333,
+      "dressed": 0.9921
+     },
+     "supply": {
+      "combo": 10.5,
+      "doctrine": 12.5,
+      "dressed": 12.5,
+      "weapon": 11.0
+     },
+     "target": 5.0
+    },
+    {
+     "cap": "silence",
+     "coverage": {
+      "combo": 1.252,
+      "dressed": 4.3568
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 22.044444,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 3.1049,
+     "gear_flips_target": false,
+     "soft_cap": 10.2,
+     "soft_coverage": {
+      "combo": 0.8715,
+      "dressed": 3.0327
+     },
+     "supply": {
+      "combo": 8.888889,
+      "doctrine": 26.285189,
+      "dressed": 30.933333,
+      "weapon": 8.888889
+     },
+     "target": 7.1
+    },
+    {
+     "cap": "stun",
+     "coverage": {
+      "combo": 1.4286,
+      "dressed": 2.0595
+     },
+     "floor": null,
+     "gear_breaks_soft": false,
+     "gear_clears_floor": false,
+     "gear_delta": 2.65,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 0.631,
+     "gear_flips_target": false,
+     "soft_cap": 36.2,
+     "soft_coverage": {
+      "combo": 0.1657,
+      "dressed": 0.239
+     },
+     "supply": {
+      "combo": 6.0,
+      "doctrine": 8.5,
+      "dressed": 8.65,
+      "weapon": 7.0
+     },
+     "target": 4.2
+    },
+    {
+     "cap": "sustained_dps",
+     "coverage": {
+      "combo": 0.6944,
+      "dressed": 3.5205
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 40.6948,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 2.826,
+     "gear_flips_target": true,
+     "soft_cap": 19.9,
+     "soft_coverage": {
+      "combo": 0.5025,
+      "dressed": 2.5475
+     },
+     "supply": {
+      "combo": 10.0,
+      "doctrine": 52.5057,
+      "dressed": 50.6948,
+      "weapon": 16.0
+     },
+     "target": 14.4
+    },
+    {
+     "cap": "tankiness",
+     "coverage": {
+      "combo": 1.413,
+      "dressed": 5.9301
+     },
+     "floor": {
+      "armed": true,
+      "penalty_mult": 1.0,
+      "units_eff": 3.3
+     },
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 41.557,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 4.5171,
+     "gear_flips_target": false,
+     "soft_cap": 13.4,
+     "soft_coverage": {
+      "combo": 0.9701,
+      "dressed": 4.0714
+     },
+     "supply": {
+      "combo": 13.0,
+      "doctrine": 73.587,
+      "dressed": 54.557,
+      "weapon": 13.0
+     },
+     "target": 9.2
+    },
+    {
+     "cap": "zone_control",
+     "coverage": {
+      "combo": 1.1111,
+      "dressed": 2.4444
+     },
+     "floor": null,
+     "gear_breaks_soft": true,
+     "gear_clears_floor": false,
+     "gear_delta": 12.0,
+     "gear_delta_large": true,
+     "gear_delta_vs_target": 1.3333,
+     "gear_flips_target": false,
+     "soft_cap": 13.8,
+     "soft_coverage": {
+      "combo": 0.7246,
+      "dressed": 1.5942
+     },
+     "supply": {
+      "combo": 10.0,
+      "doctrine": 23.0,
+      "dressed": 22.0,
+      "weapon": 10.0
+     },
+     "target": 9.0
+    }
+   ],
+   "comp": "timothy_blap_blackzone_roam_2026_08",
+   "content": "blackzone_roam",
+   "fitness": {
+    "combo": 121.739026,
+    "doctrine": 117.265301,
+    "dressed": 120.036111,
+    "weapon": 126.411419
+   },
+   "gear_resolution": {
+    "members_dressed": 20,
+    "recorded": 128,
+    "resolved": 86
+   },
+   "mapped_from": "blackzone_roam",
+   "party": "blap",
+   "size": 20,
+   "style": "brawl"
+  }
+ ],
+ "skipped_comps": [
+  {
+   "comp": "albioncompo_hellgate5_2026_07",
+   "content": "hellgate_5v5"
+  },
+  {
+   "comp": "cb_kroozlt19_bomb_squad_2026_01",
+   "content": "bomb_squad_10"
+  },
+  {
+   "comp": "cb_shadowlagrange_tracking5_2026_01",
+   "content": "openworld_tracking_5"
+  }
+ ],
+ "watch_caps": [
+  "tankiness",
+  "purge",
+  "cleanse",
+  "heal_reduction",
+  "resist_shred",
+  "peel",
+  "mobility",
+  "heal_sustain",
+  "heal_burst",
+  "damage_debuff"
+ ]
+}

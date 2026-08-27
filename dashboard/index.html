@@ -1894,6 +1894,10 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
        engine.py). */
     this.pool = [];
     for (var pk in this.weapons) if (!this.weapons[pk].removed) this.pool.push(pk);
+    /* Candidate dressing is ON by default — production behavior.
+       setDressing(false) is a VALIDATION affordance (V3-W symmetric
+       weapon-only comparisons; mirrors engine.py dress_candidates). */
+    this.dressCandidates = true;
     this.setContent(content || "castle_outpost", size, style);
   }
 
@@ -2222,6 +2226,19 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     this._gearCache = {};
     this._defaultCache = {};
     this._nsCache = {};
+    this._variantCache = {};
+    this._dressedCache = {};
+  };
+
+  CompEngine.prototype.setDressing = function (enabled) {
+    /* Validation affordance (V3-W, 2026-08-27; mirrors engine.py
+       set_dressing): when OFF, every CANDIDATE evaluates naked —
+       kitVariants yields [["v0", null]] for all weapons, _dressedExtras
+       aliases the weapon-only combo vectors, and _comboScoreDressed's
+       identity check routes into _comboScore. Same formula, no second
+       scoring path. Clears the dressed caches so vectors built under the
+       other setting cannot leak. */
+    this.dressCandidates = enabled !== false;
     this._variantCache = {};
     this._dressedCache = {};
   };
@@ -3284,6 +3301,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
        single-slot swap (variant cap 2 — perf ruling); [["v0", null]]
        for weapons with no doctrine gear. NO doctrine passives anywhere
        in this path. */
+    if (!this.dressCandidates) return [["v0", null]];  /* V3-W switch */
     var out = this._variantCache[weapon];
     if (out !== undefined) return out;
     var self = this;
@@ -3708,9 +3726,9 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     return out;
   };
 
-  CompEngine.prototype.weaknesses = function (party, topN, combos) {
+  CompEngine.prototype.weaknesses = function (party, topN, combos, gears) {
     if (topN === undefined) topN = 3;
-    var s = this.effectiveSupply(party, combos), gaps = [];
+    var s = this.effectiveSupply(party, combos, gears), gaps = [];
     for (var cap in this.reqs) {
       var have = s[cap] || 0;
       gaps.push({ cap: cap,

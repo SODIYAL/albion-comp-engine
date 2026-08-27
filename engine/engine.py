@@ -25,7 +25,12 @@ loadout (None = the static default for the current content+style).
 import json, os, itertools
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DATASET = os.path.join(HERE, os.pardir, "pipeline", "out", "dataset-latest.json")
+# BION_DATASET: tooling override for the default dataset PATH (the
+# calibration sweep points test suites at patched coefficient copies —
+# pipeline/calibrate_scoring.py). Path plumbing only; never set in
+# production or normal test runs.
+DATASET = os.environ.get("BION_DATASET") or \
+    os.path.join(HERE, os.pardir, "pipeline", "out", "dataset-latest.json")
 
 # Mechanics-affected capability families (MECHANICS_TODO.md, 2026-08-13):
 # AoE Escalation multiplies AoE damage effectiveness by targets hit;
@@ -174,6 +179,11 @@ class Engine:
         # Insertion order is preserved: deterministic tie-breaks walk it, and
         # the JS mirror must walk the same sequence.
         self.pool = [w for w, d in self.weapons.items() if not d.get("removed")]
+        # Candidate dressing (dressed forge 2026-08-27) is ON by default —
+        # production behavior. set_dressing(False) is a VALIDATION affordance
+        # (V3-W symmetric weapon-only comparisons); nothing in the product
+        # turns it off.
+        self.dress_candidates = True
         self.set_content(content, size, style)
 
     # ---------------------------------------------------------------- context
@@ -484,6 +494,19 @@ class Engine:
         self._default_cache = {}
         self._gear_cache = {}
         self._ns_cache = {}
+        self._variant_cache = {}
+        self._dressed_cache = {}
+        self._dressed_pre_cache = {}
+
+    def set_dressing(self, enabled):
+        """Validation affordance (V3-W, 2026-08-27): when OFF, every
+        CANDIDATE evaluates naked — kit_variants yields [("v0", None)] for
+        all weapons, _dressed_extras aliases the weapon-only combo vectors,
+        and _combo_score_dressed's identity check routes into _combo_score.
+        Same formula, no second scoring path; with dressing ON, behavior is
+        bit-identical to before this switch existed. Clears the dressed
+        caches so vectors built under the other setting cannot leak."""
+        self.dress_candidates = bool(enabled)
         self._variant_cache = {}
         self._dressed_cache = {}
         self._dressed_pre_cache = {}
@@ -1035,6 +1058,8 @@ class Engine:
         order, then tier order); cached per set_content. NO doctrine
         passives anywhere in this path (role stays out of build_extra —
         generation must optimize the exact score the page displays)."""
+        if not self.dress_candidates:      # V3-W validation switch
+            return [("v0", None)]
         out = self._variant_cache.get(weapon)
         if out is not None:
             return out
@@ -2045,8 +2070,8 @@ class Engine:
             })
         return out
 
-    def weaknesses(self, party, top_n=3, combos=None):
-        s = self.effective_supply(party, combos)
+    def weaknesses(self, party, top_n=3, combos=None, gears=None):
+        s = self.effective_supply(party, combos, gears)
         gaps = [{"cap": cap,
                  "gap": self.weight(cap) * (1 - min(1.0, s.get(cap, 0) / self.target(cap)) ** self.gamma),
                  "have": s.get(cap, 0), "target": self.target(cap)}

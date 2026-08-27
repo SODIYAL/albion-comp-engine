@@ -1,0 +1,94 @@
+# Expert calibration cases — schema in README.md. Append-only; original
+# blind answers are never edited (later rulings go in `superseded:`).
+#
+# SEEDED 2026-08-27 from tests/VALIDATION.md's 2026-08-23 V3 round 1
+# (in-chat blind protocol, n=1 expert: the owner; seed-20260812
+# castle_outpost forms — parties verbatim from tests/tier2_form.md).
+# Only the round's DOCUMENTED named-weapon answers are transcribed; the
+# other 8 cases were answered role-shaped without recorded weapons and
+# are deliberately absent. All four are TRAIN — the round has been
+# discussed at length and drove same-day rulings.
+
+- id: v3r1-case2
+  kind: next_pick
+  source: "tests/VALIDATION.md 2026-08-23 round 1 (case 2 hit: 'Blight Staff called, engine #1')"
+  content: castle_outpost
+  size: 7
+  style: balanced
+  party: [MAIN_CURSEDSTAFF_AVALON, 2H_MACE_MORGANA, 2H_INFERNOSTAFF,
+          2H_BOW_KEEPER, MAIN_MACE_CRYSTAL, 2H_GLAIVE]
+  gears: null
+  expert:
+    need: null       # round log: weakness diagnoses matched expert reasoning
+                     # in cases 1/2/7 (tankiness/engage; heal_sustain) — the
+                     # per-case mapping is not recorded, so not structured here
+    best: 2H_NATURESTAFF_HELL     # Blight Staff
+    good: []
+    bad: null
+    confidence: null
+    reason: null
+  superseded: null
+  notes: "scored under the LEGACY harness (naked incumbents, dressed candidates)"
+
+- id: v3r1-case4
+  kind: next_pick
+  source: "tests/VALIDATION.md 2026-08-23 round 1 (case 4 miss: 'Polehammer called, engine ranked it 10th')"
+  content: castle_outpost
+  size: 7
+  style: balanced
+  party: [2H_KNUCKLES_KEEPER, 2H_FIRESTAFF, MAIN_HOLYSTAFF, 2H_GLACIALSTAFF]
+  gears: null
+  expert:
+    need: null
+    best: 2H_POLEHAMMER
+    good: []
+    bad: null
+    confidence: null
+    reason: null
+  superseded: >-
+    F-V3-1 RESOLVED 2026-08-23 — owner ruled CLUMP-FIRST IS RIGHT
+    ("dragging enemies into the ranged core's AoE is the stronger play at
+    outposts"); case 4 counts as a full engine hit. The blind answer
+    stands as history; the owner's final position is the engine's pick.
+  notes: "scored under the LEGACY harness (naked incumbents, dressed candidates)"
+
+- id: v3r1-case7
+  kind: next_pick
+  source: "tests/VALIDATION.md 2026-08-23 round 1 (case 7 hit: 'Hand of Justice + Hallowfall called, engine #1 and #2')"
+  content: castle_outpost
+  size: 7
+  style: balanced
+  party: [2H_DOUBLEBLADEDSTAFF_CRYSTAL, 2H_ARCANE_RINGPAIR_AVALON,
+          2H_COMBATSTAFF_MORGANA, 2H_GLAIVE_CRYSTAL]
+  gears: null
+  expert:
+    need: null
+    best: 2H_HAMMER_AVALON        # Hand of Justice
+    good: [MAIN_HOLYSTAFF_AVALON] # Hallowfall — both called together
+    bad: null
+    confidence: null
+    reason: null
+  superseded: null
+  notes: "scored under the LEGACY harness (naked incumbents, dressed candidates)"
+
+- id: v3r1-case8
+  kind: next_pick
+  source: "tests/VALIDATION.md 2026-08-23 round 1 (case 8 miss: 'Longbow-or-Greataxe called, engine ranked them 74th/14th and led with Hellfire Hands')"
+  content: castle_outpost
+  size: 7
+  style: balanced
+  party: [MAIN_HAMMER, MAIN_NATURESTAFF_KEEPER, 2H_CROSSBOWLARGE_MORGANA,
+          2H_SHAPESHIFTER_SET3]
+  gears: null
+  expert:
+    need: null
+    best: 2H_LONGBOW
+    good: [2H_AXE]                # Greataxe (the "or" alternative)
+    bad: null
+    confidence: null
+    reason: "expert wanted coherent ranged damage ('longbow to keep in line with ranged siegebow') — the F-V3-2 identity finding"
+  superseded: null
+  notes: >-
+    F-V3-2 (playstyle coherence) shipped comp_identity from this miss;
+    identity-aware SCORING remains parked. Scored under the LEGACY
+    harness (naked incumbents, dressed candidates).

@@ -28,6 +28,7 @@ Read before substantive work:
 - Playwright MCP: `file://` navigation is blocked — serve with `py -3 -m http.server --directory dashboard`; hash-only URL changes do NOT reload the page; write screenshots inside `.playwright-mcp/` (gitignored).
 - `engine/app_scoring.js` reads as BINARY to grep/ripgrep (a literal NUL byte serves as a cache-key separator) — search it with `Select-String`, read it with the Read tool.
 - Port 53321 may be held by the RUNNING companion (the user leaves it up) — check `localhost:53321/status` before binding a mock there.
+- `tests/test_cohort_families.py` spawns the builder as a subprocess and decodes its stdout as UTF-8; under a Git-Bash-spawned console the child Python emits cp1252 (an em-dash becomes byte 0x97) and the test dies with `UnicodeDecodeError`/`NoneType + str` — an ENVIRONMENT artifact, not a contract failure. Run it from PowerShell (7/7 passes) before suspecting the artifact.
 
 ## Tests
 
@@ -45,8 +46,11 @@ node tests/test_loadout_codec.js  # share-URL codec round-trips
 node tests/test_display_math.js   # killboard bucket + cohort-affinity/neighbour/family math (display layer)
 py -3 tests/test_cohort_families.py # observed-family artifact contracts (determinism, disjointness, no id leaks)
 py -3 tests/test_roles.py         # role-book contracts, kit-aware detection, advisory flags (descriptive)
-py -3 tests/tier2_blindtest.py v4 # leave-one-out vs published comps (role-level gate: 70%)
+py -3 tests/test_validation_modes.py # dressed-validation contracts: set_dressing switch, V3 form parser, metrics, builds_index gear join
+py -3 tests/tier2_blindtest.py v4 # leave-one-out vs published comps in 3 incumbent-gear classes (gate: legacy weapon_only role-level 70%; dressed sections report-only pending owner re-basing)
 ```
+
+Expert-round tooling (generate/score, human-in-the-loop — not CI gates): `tests/tier2_blindtest.py generate|score` (V3 blind forms, `score --mode w|d|both` — W = symmetric weapon-only via `set_dressing(False)`, D = production dressed, THE gate), `tests/gear_blindtest.py generate|score` (gear doctrine cards; answers file stays hidden from experts). Report-only audits (never part of a build): `pipeline/audit_validation_asymmetry.py`, `pipeline/audit_dressed_templates.py`, `pipeline/audit_frontline_floor.py`, `pipeline/audit_gear_synergy.py`, `pipeline/calibrate_scoring.py` (sensitivity harness over `calibration/`; patched-dataset golden counts via the `BION_DATASET` path override — never set it in normal runs). Findings + open owner rulings: `docs/superpowers/findings/2026-08-27-*.md`; calibration discipline: `calibration/README.md` (train/validation/holdout — holdout is never examined while tuning).
 
 ## Build chain
 

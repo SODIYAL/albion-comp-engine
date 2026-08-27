@@ -150,7 +150,17 @@ def py_results(cases):
                       "gears": r["gears"],
                       "score": r["score"], "feasible": r["feasible"],
                       "filler": r["filler"], "held": r["held"]}
+        # V3-W parity (2026-08-27): dressing OFF while incumbents keep their
+        # case gears — candidates must evaluate naked through the identity
+        # short-circuit; the toggle restores dressed state bit-identically.
+        e.set_dressing(False)
+        naked_rec = [{"weapon": r["weapon"], "score": r["score"],
+                      "combo": r["combo"], "kit": r["kit"]}
+                     for r in e.recommend(c["party"], 5, None,
+                                          c["combos"], c["gears"])]
+        e.set_dressing(True)
         out.append({
+            "recommend_naked_cand": naked_rec,
             "refine": None if rp is None else e.refine(
                 rp, max_passes=REFINE_PASSES, pool=c["refine_pool"]),
             "comp_score": e.comp_score(c["party"]),
@@ -195,7 +205,8 @@ def py_results(cases):
                                  for r in e.recommend(c["party"], 5,
                                                       combos=c["combos"])],
             "weaknesses": [{"cap": g["cap"], "gap": g["gap"]}
-                           for g in e.weaknesses(c["party"], 5)],
+                           for g in e.weaknesses(c["party"], 5, None,
+                                                 c["gears"])],
             "uncovered": sorted(e.uncovered_caps(c["party"])),
             "identity": e.comp_identity(c["party"], c["combos"]),
             "kill_pressure": e.kill_pressure(c["party"], c["combos"]),
@@ -346,6 +357,18 @@ def main():
                 if abs(ra["score"] - rb["score"]) > EPS:
                     errs.append(f"locked score {ra['weapon']}: "
                                 f"py={ra['score']!r} js={rb['score']!r}")
+        if [r["weapon"] for r in a["recommend_naked_cand"]] != \
+                [r["weapon"] for r in (b.get("recommend_naked_cand") or [])]:
+            errs.append("naked-candidate recommend order differs")
+        else:
+            for ra, rb in zip(a["recommend_naked_cand"],
+                              b.get("recommend_naked_cand") or []):
+                if abs(ra["score"] - rb["score"]) > EPS \
+                        or ra["combo"] != rb.get("combo") \
+                        or ra["kit"] != rb.get("kit") or ra["kit"]:
+                    errs.append(f"naked-cand {ra['weapon']}: "
+                                f"py={ra['score']!r}/{ra['combo']}/{ra['kit']} "
+                                f"js={rb['score']!r}/{rb.get('combo')}/{rb.get('kit')}")
         if [g["cap"] for g in a["weaknesses"]] != [g["cap"] for g in b["weaknesses"]]:
             errs.append("weakness order differs")
         if a["uncovered"] != b["uncovered"]:
