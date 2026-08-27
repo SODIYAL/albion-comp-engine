@@ -670,8 +670,8 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   position:relative; margin:10px auto 0;
   --wd:min(560px, calc(100vw - 64px));
   --wd:min(560px, 100cqi);
-  --card-w:clamp(64px, calc(var(--wd)*.175), 96px);
-  --card-h:clamp(68px, calc(var(--wd)*.165), 92px);
+  --card-w:clamp(72px, calc(var(--wd)*.205), 112px);
+  --card-h:clamp(76px, calc(var(--wd)*.195), 108px);
   --wr:calc(var(--wd)/2 - var(--card-h)/2 - 8px);
   width:var(--wd); height:var(--wd);
   /* semicircle stage: cards only ever ride the top arc, so the bottom
@@ -841,6 +841,21 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .wf-ring{font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase}
 .wf-ring b{color:var(--ink); font-weight:600}
 .wf-actions{display:flex; gap:8px}
+/* the comp board (owner 2026-08-27): roster under the wheel, one column
+   per played role — fills the space the shorter rim gave back */
+.wf-comp{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;
+  align-items:flex-start; width:100%}
+.wf-col{display:flex; flex-direction:column; gap:2px; min-width:88px; max-width:128px;
+  background:var(--sunk); border:1px solid var(--rule); border-top:2px solid var(--rc);
+  border-radius:10px; padding:7px 8px 8px; min-height:0}
+.wf-col-h{font-family:var(--mono); font-size:9px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--rc); white-space:nowrap; margin-bottom:3px}
+.wf-m{display:flex; align-items:center; gap:6px; background:none; border:0;
+  padding:2px 3px; border-radius:6px; color:var(--ink-2); font-size:10.5px;
+  text-align:left; min-width:0; cursor:pointer}
+.wf-m:hover{background:var(--surface-2); color:var(--ink)}
+.wf-m span{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.wf-m .icon{flex:none; border-radius:5px}
 
 /* ---------- capability readout ---------- */
 .groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:2px 34px}
@@ -1319,8 +1334,8 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
      as a full-width bar under the wheel (the hub can't hold a tappable
      button at this width without crushing the name) --- */
   .wheel{
-    --card-w:clamp(74px, calc(var(--wd)*.21), 96px);
-    --card-h:clamp(76px, calc(var(--wd)*.20), 92px);
+    --card-w:clamp(80px, calc(var(--wd)*.24), 108px);
+    --card-h:clamp(82px, calc(var(--wd)*.23), 104px);
   }
   .hub-rings circle{stroke-width:5}
   .hub-body{inset:21%}

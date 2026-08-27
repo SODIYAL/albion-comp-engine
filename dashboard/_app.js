@@ -722,9 +722,10 @@ function renderPickerChips(){
    updating each card's --a angle lets CSS transitions carry them around
    the rim instead of snapping. */
 /* degrees between rim cards — wider on phones so touch-sized cards never
-   overlap on the smaller radius (mobile pass 2026-08-21) */
-const wheelStepDeg = () => matchMedia("(max-width:640px)").matches ? 36 : 26;
-const WHEEL_WINDOW = 4;    /* cards rendered each side of the focus */
+   overlap on the smaller radius (mobile pass 2026-08-21). Owner 2026-08-27:
+   3 per side at a wider step so the fewer, larger cards stay readable. */
+const wheelStepDeg = () => matchMedia("(max-width:640px)").matches ? 40 : 31;
+const WHEEL_WINDOW = 3;    /* cards rendered each side of the focus */
 
 function wheelFocusIdx(keys, recs){
   /* keep the user's focus when it survives the filter; otherwise aim at
@@ -758,7 +759,7 @@ function renderWheelRing(keys, idx){
       el.setAttribute("role", "option");
       el.tabIndex = -1;
       el.title = `${WEAPONS[w].display_name || w} — click to focus`;
-      el.innerHTML = `${icon(w, 40)}<span class="ws-nm">${nameOf(w)}</span>`;
+      el.innerHTML = `${icon(w, 46)}<span class="ws-nm">${nameOf(w)}</span>`;
       /* spawn one step beyond the final angle so the entry animates inward */
       el.style.setProperty("--a", `${(o + Math.sign(o || 1)) * wheelStepDeg()}deg`);
       el.style.setProperty("--fade", "0");
@@ -917,6 +918,40 @@ function renderHub(keys, idx, recs){
     <span class="hub-score mono">${r ? (r.score >= 0 ? "+" : "−") + Math.abs(r.score).toFixed(2) : "—"}${marks}</span>
     <button class="cb-add hub-add" data-add="${w}">Add to comp</button>`;
 }
+/* The comp board (owner 2026-08-27): the roster under the wheel, one
+   column per PLAYED role — the role layer's own read (detect_role via
+   roleAdvisory, kits included), rendered verbatim. Columns wear the
+   role class color; members open their dossier. Display only. */
+function compBoard(){
+  if (!party.length || typeof ENG.roleAdvisory !== "function") return "";
+  const chests = {};
+  party.forEach((w, i) => {
+    const L = (typeof LOADOUT !== "undefined" && LOADOUT[i]) || null;
+    if (L && L.armor) chests[i] = L.armor;
+  });
+  const adv = ENG.roleAdvisory(party, chests);
+  if (!adv || !adv.members.length) return "";
+  const book = ENG.rolesBook || {};
+  const label = id => ((book[id] || {}).name || id).split(" / ")[0].split(" (")[0];
+  const CLS = { frontline: ["var(--role-tank)", 0], support: ["var(--role-support)", 1],
+                healer: ["var(--role-healer)", 2], dps: ["var(--role-melee)", 3] };
+  const cols = new Map();   /* role key -> {name, color, ord, ms} */
+  adv.members.forEach((m, i) => {
+    const key = m.role || m.class || "other";
+    const cls = (m.role && (book[m.role] || {}).class) || m.class;
+    const [color, ord] = CLS[cls] || ["var(--ink-3)", 4];
+    let c = cols.get(key);
+    if (!c){ c = { name: label(key), color, ord, ms: [] }; cols.set(key, c); }
+    c.ms.push(i);
+  });
+  const sorted = [...cols.values()].sort((a, b) => a.ord - b.ord || b.ms.length - a.ms.length);
+  return `<div class="wf-comp">${sorted.map(c => `
+    <div class="wf-col" style="--rc:${c.color}">
+      <span class="wf-col-h">${c.ms.length}× ${esc(c.name)}</span>
+      ${c.ms.map(i =>
+        `<button class="wf-m" data-detail="${party[i]}" title="${esc(nameOf(party[i]))} — slot ${i + 1}, click for the dossier">${icon(party[i], 26)}<span>${esc(nameOf(party[i]))}</span></button>`).join("")}
+    </div>`).join("")}</div>`;
+}
 function renderWheelFoot(keys, recs, rings){
   const sn = styleName();
   const slotLabel = recs === null
@@ -931,6 +966,9 @@ function renderWheelFoot(keys, recs, rings){
     : "") + (PROV.some(x => x === "f")
     ? `<button class="cb-forge" id="reforge" title="rebuild every forged slot for the current content, style and size — manual picks stay">reforge all</button>`
     : "");
+  /* the comp board replaces the ring tallies once members exist; the brass
+     party count moves up beside the wheel count */
+  const board = compBoard();
   $("wheel-foot").innerHTML = `
     ${WHEEL_FOCUS_W && recs !== null && party.length < HARD_CAP
       ? `<button class="cb-add wf-add-mobile" data-add="${WHEEL_FOCUS_W}">Add ${esc(nameOf(WHEEL_FOCUS_W))}</button>`
@@ -938,12 +976,11 @@ function renderWheelFoot(keys, recs, rings){
     <div class="wf-row">
       <span class="eyebrow">Next pick — ${slotLabel}${sn ? " · " + esc(sn) : ""}</span>
       <span class="wf-count">${keys.length} weapon${keys.length === 1 ? "" : "s"} on the wheel</span>
+      ${board ? `<span class="wf-ring" style="color:var(--brass)">party <b>${party.length}/${PLAN()}</b></span>` : ""}
     </div>
-    <div class="wf-row">
-      <span class="wf-rings">${rings.map(g =>
-        `<span class="wf-ring" style="color:${g.color}">${esc(g.label)} <b>${g.have}/${g.want}</b></span>`).join("")}</span>
-      ${forge ? `<span class="wf-actions">${forge}</span>` : ""}
-    </div>`;
+    ${board || `<div class="wf-row"><span class="wf-rings">${rings.map(g =>
+      `<span class="wf-ring" style="color:${g.color}">${esc(g.label)} <b>${g.have}/${g.want}</b></span>`).join("")}</span></div>`}
+    ${forge ? `<div class="wf-row"><span class="wf-actions">${forge}</span></div>` : ""}`;
 }
 function renderWheel(recs){
   renderPickerChips();
