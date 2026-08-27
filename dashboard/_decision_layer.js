@@ -230,9 +230,9 @@
       const tip = tipRef(groupTipHtml(a));
       const vc = a.floor ? "var(--gap)" : a.over ? "var(--over)" : "var(--ok-bright)";
       s += `<circle cx="${pts[i][0]}" cy="${pts[i][1]}" r="4" fill="${vc}" stroke="var(--panel-lo)" stroke-width="2" data-dltip="${tip}"/>`;
-      const ix = +px(ang(i), R + 24), iy = +py(ang(i), R + 24) - 3;
-      s += `<g data-dltip="${tip}" class="dl-radar-hit">${dlIcon(ix, iy, 17, a.meta.icon, a.meta.col)}`
-        + `<text x="${ix}" y="${iy + 17}" text-anchor="middle" class="dlr-pct"${a.floor ? ' fill="var(--gap)"' : a.over ? ' fill="var(--over)"' : ""}>${Math.round(a.cov * 100)}%</text></g>`;
+      const ix = +px(ang(i), R + 25), iy = +py(ang(i), R + 25) - 4;
+      s += `<g data-dltip="${tip}" class="dl-radar-hit">${dlIcon(ix, iy, 21, a.meta.icon, a.meta.col)}`
+        + `<text x="${ix}" y="${iy + 20}" text-anchor="middle" class="dlr-pct"${a.floor ? ' fill="var(--gap)"' : a.over ? ' fill="var(--over)"' : ""}>${Math.round(a.cov * 100)}%</text></g>`;
     });
     /* identity center */
     const id = (typeof ENG.compIdentity === "function") ? ENG.compIdentity(party, COMBOS_CUR) : null;

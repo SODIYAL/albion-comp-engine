@@ -4,14 +4,17 @@
    .main hero grid below — and the party runs across the bottom. */
 .decision-layer{display:grid;grid-template-columns:1fr;gap:14px;align-content:start;margin:0}
 .dl-status,.dl-need,.dl-pick{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
-.dl-status{display:flex;justify-content:center;gap:18px;align-items:center;border-top:2px solid var(--amber)}
-.dl-status.critical{border-top-color:var(--gap)}.dl-status.warning{border-top-color:var(--amber)}.dl-status.ready{border-top-color:var(--ok-bright)}
+/* the radar carries the status card alone (owner 2026-08-26: "remove this
+   box around our diagram") — no panel chrome; the tone lives in the
+   diagram's own colors */
+.dl-status{display:flex;justify-content:center;gap:18px;align-items:center;
+  background:none;border:0;box-shadow:none;padding:0}
 .dl-status strong,.dl-need strong{display:block;font-family:var(--serif);font-size:21px;line-height:1.15;margin:4px 0}
 .dl-kicker{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
 /* comp-status radar (owner 2026-08-26): the status card is the diagram —
    axis icons in the group's color, identity glyph in the center, every
    textual detail in the shared popup (#dl-tip). Display only. */
-.dl-radar{width:min(330px,100%);height:auto;overflow:visible;display:block}
+.dl-radar{width:min(410px,100%);height:auto;overflow:visible;display:block}
 .dl-radar text{font-family:var(--mono);font-variant-numeric:tabular-nums}
 .dl-radar-hit{cursor:default}
 .dlr-pct{font-size:9px;fill:var(--ink-3)}
@@ -125,7 +128,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   .dl-tools{grid-template-columns:1fr 1fr}
   /* one-screen density: the hero band must leave room for the party strip
      on a ~940px viewport, so the decision stack sheds slack height */
-  .dl-status{padding:12px 16px}
+  .dl-status{padding:0}
   .dl-pick{padding:14px 16px}
   .dl-needline{padding-bottom:10px;margin-bottom:10px}
   .dl-nl-main strong{font-size:19px}
