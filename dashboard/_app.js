@@ -94,20 +94,25 @@ const uncoveredCaps = p => ENG.uncoveredCaps(p, p === party ? COMBOS_CUR : null)
 const weaknesses = (p, n = 3) => ENG.weaknesses(p, n, p === party ? COMBOS_CUR : null);
 /* app_scoring.js term/rec field names -> the short ones this file renders */
 const explain = (p, cand) => inPickContext(() =>
-  ENG.explain(p, cand, p === party ? COMBOS_CUR : null))
+  ENG.explain(p, cand, p === party ? COMBOS_CUR : null,
+              p === party ? GEARS_CUR : null))
   .map(t => ({d: t.delta, ...t}));
-/* dressed-forge Task 6: pass GEARS_CUR to recommend/explain/pickReport
-   once the JS signatures land (Task 5). */
+/* every candidate surface prices picks against the party AS EQUIPPED
+   (dressed forge 2026-08-27): the loaded comp's gear reaches the same
+   _evalPick the score uses, and each suggestion carries the kit its
+   marginal assumed */
 const recommend = (p, n = 4) => inPickContext(() =>
-  ENG.recommend(p, n, null, p === party ? COMBOS_CUR : null))
+  ENG.recommend(p, n, null, p === party ? COMBOS_CUR : null,
+                p === party ? GEARS_CUR : null))
   .map(r => ({w: r.weapon, dFit: r.d_fitness, dSyn: r.d_synergy, meta: r.meta_prior,
-              viab: r.viability, combo: r.combo, score: r.score,
+              viab: r.viability, combo: r.combo, kit: r.kit, score: r.score,
               verdict: r.verdict, capsGain: r.caps_gain}));
 /* Signed pick decomposition (engine pickReport): the "why not" behind a
    pick — saturated caps, over-stack costs, duplicate penalty, count-once
    spell losses. Descriptive engine output; this file only renders it. */
 const pickReport = (p, cand) => inPickContext(() =>
-  ENG.pickReport(p, cand, p === party ? COMBOS_CUR : null));
+  ENG.pickReport(p, cand, p === party ? COMBOS_CUR : null,
+                 p === party ? GEARS_CUR : null));
 /* swapReview is a full-pool sweep per member (~40-100ms at 20-40 members) —
    memoized on the engine context + party + loadouts so facet clicks,
    companion polls and other no-op re-renders don't pay it again. */
@@ -115,12 +120,10 @@ const comboSig = () => COMBOS_CUR.join(",");
 const gearSig = () => GEARS_CUR.map(g => g ? g.join("+") : "-").join(",");
 let swapCache = { key: null, val: [] };
 function swapReviewCached(){
-  /* dressed-forge Task 6: pass GEARS_CUR once swapReview's JS signature
-     lands (Task 5); the gear signature already keys the cache so kit
-     edits invalidate correctly. */
   const key = `${CONTENT}|${SIZE}|${STYLE}|${party.join(",")}|${comboSig()}|${gearSig()}`;
   if (swapCache.key !== key)
-    swapCache = { key, val: party.length > 1 ? ENG.swapReview(party, 3, null, COMBOS_CUR) : [] };
+    swapCache = { key, val: party.length > 1
+      ? ENG.swapReview(party, 3, null, COMBOS_CUR, GEARS_CUR) : [] };
   return swapCache.val;
 }
 
@@ -931,7 +934,8 @@ function renderHub(keys, idx, recs){
      pool eval, so any card on the rim carries its true marginal score */
   let r = (recs || []).find(x => x.w === w);
   if (!r){
-    const rr = inPickContext(() => ENG.recommend(party, 1, [w], COMBOS_CUR));
+    const rr = inPickContext(() =>
+      ENG.recommend(party, 1, [w], COMBOS_CUR, GEARS_CUR));
     r = rr.length ? {w, score: rr[0].score} : null;
   }
   const isTop = !!(recs && recs.length && recs[0].w === w);
@@ -2163,8 +2167,18 @@ document.addEventListener("click", e => {
       PROV[i] = "f";
       COMBO[i] = r.combos[i];
       LOADOUT[i] = undefined;
-      /* gear from the caller reference; SPELLS from the combo the forge
-         actually scored — the kit shown is the kit valued */
+      /* the kit the forge actually VALUED lands first (dressed forge
+         2026-08-27: r.gears[i] is the chosen doctrine-kit variant, part
+         of the score) marked as engine picks; the caller reference then
+         fills only the slots the search left unset; SPELLS from the
+         combo the forge scored — the kit shown is the kit valued */
+      if (r.gears && r.gears[i] && r.gears[i].length){
+        const L = (LOADOUT[i] = { _eng: 1 });
+        for (const k of r.gears[i]){
+          const g = ENG.gear[k];
+          if (g && g.slot) L[g.slot] = k;
+        }
+      }
       loadoutPrefillGear(i);
       loadoutApplySpells(i, r.combos[i]);
     }
