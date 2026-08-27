@@ -744,6 +744,26 @@ def t_need_profiles():
           f"locked_engage={sl.get('engage_tank', 0)}")
 
 
+def t_dressed_state():
+    """F22a — party_state gears plumbing (dressed forge Task 2): the fit
+    marginal against a dressed party equals the exact fitness delta, and
+    gears=None stays bit-identical to the legacy call shape."""
+    e = Engine(content="castle", size=25, style="brawl")
+    p = ["2H_MACE", "MAIN_HOLYSTAFF_AVALON", "2H_LONGBOW"]
+    g = [["ARMOR_PLATE_SET2"], None, ["ARMOR_LEATHER_SET2"]]
+    st_naked = e.party_state(p)
+    st_old = e.party_state(p, None)          # legacy call shape
+    check("F22a party_state(gears=None) is unchanged and s_syn aliases s",
+          st_naked["s"] == st_old["s"] and st_naked["s_syn"] == st_old["s"])
+    st = e.party_state(p, None, g)
+    extra = e.member_extra("2H_HAMMER")
+    d_fit = e._marg_fit_from(st["s"], extra)
+    exact = (e.fitness(p + ["2H_HAMMER"], None, g + [None])
+             - e.fitness(p, None, g))
+    check("F22a dressed-party fit marginal == exact fitness delta (1e-9)",
+          abs(d_fit - exact) < 1e-9, f"{d_fit} vs {exact}")
+
+
 if __name__ == "__main__":
     t_invariant()
     t_synergy_gating()
@@ -766,6 +786,7 @@ if __name__ == "__main__":
     t_curse_slot_earned()
     t_resil_pen()
     t_need_profiles()
+    t_dressed_state()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")

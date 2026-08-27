@@ -1498,16 +1498,26 @@ class Engine:
                 - self.rho * self.redundancy(party))
 
     # -------------------------------------------------- candidate evaluation
-    def party_state(self, party, combos=None):
+    def party_state(self, party, combos=None, gears=None):
         """Everything a candidate marginal needs: effective supply, per-pair
         synergy state, exact-weapon counts, and the per-spell max non-stacking
         contributions (so _eval_pick can price a duplicate of a verified
-        non-stacking spell exactly). Build once per sweep."""
-        s, J = self._syn_state(party, combos)
+        non-stacking spell exactly). Build once per sweep.
+
+        `gears` (dressed forge, 2026-08-27): comp_score's own seams split
+        the supplies — fitness reads gear-inclusive supply, synergy stays
+        weapon-keyed (synergy() computes its own gears-free supply). So
+        `s` is the FIT supply (dressed when gears are given) and `s_syn`
+        the weapon-only supply every synergy term reads. gears=None keeps
+        both the same object — bit-identical to the pre-gears state."""
+        s_syn, J = self._syn_state(party, combos)
+        s = (self.effective_supply(party, combos, gears)
+             if gears and any(gears) else s_syn)
         pair_vals = []
         for p in range(len(self._active_syn)):
             a, b, _bonus = self._active_syn[p]
-            pair_vals.append(self._pair_value(p, s.get(a, 0.0), s.get(b, 0.0), J[p]))
+            pair_vals.append(self._pair_value(p, s_syn.get(a, 0.0),
+                                              s_syn.get(b, 0.0), J[p]))
         counts = {}
         for w in party:
             counts[w] = counts.get(w, 0) + 1
@@ -1520,8 +1530,8 @@ class Engine:
                     for cap, v in contrib.items():
                         if v > cur.get(cap, 0.0):
                             cur[cap] = v
-        return {"s": s, "J": J, "pair_vals": pair_vals, "counts": counts,
-                "ns_max": ns_max}
+        return {"s": s, "s_syn": s_syn, "J": J, "pair_vals": pair_vals,
+                "counts": counts, "ns_max": ns_max}
 
     def _marg_fit_from(self, s, extra):
         """Marginal fitness of adding effective caps `extra` to effective
@@ -1547,7 +1557,7 @@ class Engine:
         if extra_j is None:
             extra_j = extra
         total = 0.0
-        s, J, pv = state["s"], state["J"], state["pair_vals"]
+        s, J, pv = state["s_syn"], state["J"], state["pair_vals"]
         for p in range(len(self._active_syn)):
             a, b, _bonus = self._active_syn[p]
             j = min(extra_j.get(a, 0.0), extra_j.get(b, 0.0))
@@ -1630,7 +1640,7 @@ class Engine:
         combo touches (_combo_pre): an untouched pair's term is exactly
         pair_vals[p] - pair_vals[p] == 0.0, so the sum is identical."""
         total = 0.0
-        s, J, pv = state["s"], state["J"], state["pair_vals"]
+        s, J, pv = state["s_syn"], state["J"], state["pair_vals"]
         tab = self._syn_tab
         for p in pairs:
             a, b, bonus, ta, tb = tab[p]
@@ -1689,7 +1699,8 @@ class Engine:
         """Legacy shim (golden T14; explain callers migrated): the candidate's
         best loadout against bare supply `s`, with no member-level synergy
         state (J=0 — exact for an empty party). Returns (d_fit, d_syn, extra)."""
-        state = {"s": s, "J": [0.0] * len(self._active_syn), "pair_vals": [], "counts": {}}
+        state = {"s": s, "s_syn": s, "J": [0.0] * len(self._active_syn),
+                 "pair_vals": [], "counts": {}}
         for p in range(len(self._active_syn)):
             a, b, _bonus = self._active_syn[p]
             state["pair_vals"].append(self._pair_value(p, s.get(a, 0.0), s.get(b, 0.0), 0.0))
