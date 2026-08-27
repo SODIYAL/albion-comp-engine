@@ -1137,13 +1137,19 @@ class Engine:
                     "carries": list(self._item_effects.get(k) or []),
                     "passive": passive,
                     "why": [(c, round(d, 2)) for c, d in deltas[:3]]})
-            # Context-free: the doctrine tier (observed in this seat's
-            # real builds) is the prior — it ranks first, each tier by
-            # weighted value. Comp-aware: the EXACT marginal is the
-            # engine's own physics of what this comp needs and outranks
-            # tier membership (T22 — the tank's team head must win);
-            # doctrine stays as annotation + tie-break. The chest is
-            # pool-gated either way — the Hellion bug can't return.
+            # DOCTRINE-TIER-FIRST in both modes (owner ruling 2026-08-27,
+            # evidence-first: "search more comps to see what tanks are
+            # actually wearing"). The observed tier (this weapon's own
+            # builds, then the seat's) bounds the suggestion; within a
+            # tier, context-free ranks by observed count then weighted
+            # value, comp-aware by the EXACT marginal — the comp's needs
+            # pick WITHIN doctrine, never outside it. Marginal-first
+            # across the whole catalog optimized the comp pool instead
+            # of the member's job (the increment-1 root cause) the
+            # moment the full catalog was curated: it handed a control
+            # tank Mercenary Hood over the observed team pieces. The
+            # chest is pool-gated either way — the Hellion bug can't
+            # return; off-tier items stay ranked behind the tiers.
             def tier_rank(r):
                 return (0 if r["doctrine"] == "weapon"
                         else 1 if r["doctrine"] == "seat" else 2)
@@ -1153,7 +1159,7 @@ class Engine:
                     r["gear"]))
             else:
                 ranked.sort(key=lambda r: (
-                    -r["value"], tier_rank(r), -wslot.get(r["gear"], 0),
+                    tier_rank(r), -r["value"], -wslot.get(r["gear"], 0),
                     r["gear"]))
             options[slot] = ranked[:top_n]
         kit = {slot: opts[0] for slot, opts in options.items() if opts}

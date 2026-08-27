@@ -1,0 +1,512 @@
+# GEAR capability sheets — combat expansion (2026-08-27, owner directive
+# "add the combat pieces in"). Same rules as core.yaml: 1-7 scale, no
+# score without evidence (the item's real ability id from gear_spells, or
+# GEAR_STATS for consumables). Scores are calibrated against core.yaml's
+# anchors (Force Field kb=3, Windwall purge=4, Enfeeble=5, blink-class
+# disengage=3, sprints=2) and follow the standing directionality rulings:
+# self-buffs never ground buff_allies; a SELF-cleanse grounds tankiness,
+# not cleanse (Hellion Hood precedent). Rows marked "owner review" carry
+# a judgment the blind round should confirm.
+# Skipped on purpose: gatherer sets, decorative capes, bags, fish/economy
+# food (non-combat).
+
+# ----------------------------------------------------------------- heads
+- gear: HEAD_CLOTH_AVALON            # Cowl of Purity
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: interrupt,     score: 2, evidence: AVALON_BEAM}      # line beam: damage + interrupts casting + shock DoT
+
+- gear: HEAD_CLOTH_FEY               # Feyscale Hat
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: HYPER_FOCUS}      # uninterruptible + debuff immunity up to 8s
+    - {cap: sustained_dps, score: 2, evidence: HYPER_FOCUS}      # channels/casts cannot be stopped — cast uptime
+
+- gear: HEAD_CLOTH_HELL              # Fiend Cowl
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: purge,         score: 3, evidence: PURGE_HELMET}     # single-target full purge (Windwall AoE purge=4)
+
+- gear: HEAD_CLOTH_MORGANA           # Cultist Cowl
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: INNER_CORRUPTION} # 63 dmg per enemy action for 4s — punish pressure
+
+- gear: HEAD_CLOTH_ROYAL             # Royal Cowl
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: PERPETUALENERGY}  # zero energy costs 15s — cast economy window
+
+- gear: HEAD_CLOTH_SET1              # Scholar Cowl — energy-on-damage
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: ENERGYSHIELD2}    # +38% armor/MR 4s, restores energy when hit
+
+- gear: HEAD_CLOTH_SET3              # Mage Cowl
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: HELMET_FIREBREATH}  # cone DoT
+
+- gear: HEAD_LEATHER_SET1            # Mercenary Hood
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: interrupt,     score: 2, evidence: HOWL}             # cone: interrupt + 35% slow + -30% damage dealt
+    - {cap: slow,          score: 2, evidence: HOWL}
+    - {cap: damage_debuff, score: 2, evidence: HOWL}
+
+- gear: HEAD_LEATHER_SET2            # Hunter Hood
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: RETALIATE2}       # +20% resists 3s + 85% reflect
+
+- gear: HEAD_LEATHER_MORGANA         # Stalker Hood
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: SMELLOFBLOOD}     # +15% own damage pulse, reveals invisible
+    - {cap: resist_shred,  score: 2, evidence: SMELLOFBLOOD}     # -35% resists on enemies below 50% HP
+
+- gear: HEAD_LEATHER_ROYAL           # Royal Hood
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: GROWING_RAGE}     # stacking +damage while holding fire
+
+- gear: HEAD_LEATHER_UNDEAD          # Specter Hood — armor-ability reset
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: ARMOR_CD_RESET}   # resets chest cooldown — doubles the armor play (owner review: value rides the chest)
+
+- gear: HEAD_LEATHER_AVALON          # Hood of Tenacity — anti-heal head
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: heal_reduction, score: 3, evidence: NASTY_WOUNDS}    # swirl: -50% Healing Received AND Cast for 4s on entry
+
+- gear: HEAD_PLATE_AVALON            # Helmet of Valor — cleanse + purge smoke
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: cleanse,       score: 3, evidence: PURIFYING_SMOKE}  # targeted AoE: cleanses allies inside
+    - {cap: purge,         score: 3, evidence: PURIFYING_SMOKE}  # ...and purges enemies inside
+
+- gear: HEAD_PLATE_FEY               # Duskweaver Helmet
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: slow,          score: 2, evidence: SPIDER_THREAD}    # thread: 20% slow ignoring CCR
+    - {cap: catch,         score: 2, evidence: SPIDER_THREAD}    # combo dash to the enemy hit
+
+- gear: HEAD_PLATE_HELL              # Demon Helmet
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: silence,       score: 3, evidence: WEAPON_SILENCE}   # ranged AoE silence 3.3s (Smoke Bomb=3)
+
+- gear: HEAD_PLATE_ROYAL             # Royal Helmet
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: stun,          score: 3, evidence: ARTILLERY_COMMAND}  # ranged AoE 2.2s stun (Electric Shock=3)
+
+- gear: HEAD_PLATE_SET1              # Soldier Helmet
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: BLOCK}            # mobile damage+CC immune channel (Ice Block=2)
+
+- gear: HEAD_PLATE_UNDEAD            # Graveguard Helmet
+  slot: head
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: heal_burst,    score: 2, evidence: SACRIFICE_HEAL}   # heal ally 15% max HP at own-HP cost
+
+# ----------------------------------------------------------------- armors
+- gear: ARMOR_CLOTH_HELL             # Fiend Robe — the fear aura
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: peel,          score: 3, evidence: FEAR_AURA}        # aura: enemies flee 2s
+    - {cap: anti_dive,     score: 2, evidence: FEAR_AURA}
+
+- gear: ARMOR_CLOTH_KEEPER           # Druid Robe
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: SPELLRUSH}        # stacking +6% damage/heal per cast
+    - {cap: heal_sustain,  score: 2, evidence: SPELLRUSH}        # the same stack raises Healing Cast — healer throughput CD
+
+- gear: ARMOR_CLOTH_MORGANA          # Cultist Robe
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: self_sustain,  score: 2, evidence: LEVITATE}         # channel: restore HP+energy, +resists
+
+- gear: ARMOR_CLOTH_ROYAL            # Royal Robe — the ground rune
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: buff_allies,   score: 3, evidence: MAGICCIRCLE}      # rune: +10% dmg/heal + cast speed, up to 6 allies (stationary; Royal Banner aura=4)
+
+- gear: ARMOR_CLOTH_SET2             # Cleric Robe — Everlasting Spirit
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 3, evidence: LIFESAVIOR}       # next hit triggers 3s damage immunity (Mist=3)
+
+- gear: ARMOR_CLOTH_SET3             # Mage Robe
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: purge,         score: 2, evidence: PURGINGSHIELD2}   # reactive: purges attackers while shielded
+    - {cap: tankiness,     score: 2, evidence: PURGINGSHIELD2}   # +50% defense 4s
+
+- gear: ARMOR_LEATHER_AVALON         # Jacket of Tenacity
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: DYNAMIC_DEFENSE}  # +80% resist vs the target's damage type
+
+- gear: ARMOR_LEATHER_MORGANA        # Stalker Jacket
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: STORMSHIELD}      # 6m pulse field (Lifesteal Aura=2)
+
+- gear: ARMOR_LEATHER_SET1           # Mercenary Jacket
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: self_sustain,  score: 2, evidence: BLOODLUST}        # heal per direct hit, 6s (Hellion aura=3)
+
+- gear: ARMOR_LEATHER_SET2           # Hunter Jacket
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: HASTE}            # +20% AA speed +20% damage 8s
+
+- gear: ARMOR_LEATHER_SET3           # Assassin Jacket
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: AMBUSH}           # 7s invisibility
+    - {cap: burst_st,      score: 2, evidence: AMBUSH}           # stacked opener damage out of stealth
+
+- gear: ARMOR_LEATHER_UNDEAD         # Specter Jacket
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: BURNAURA}         # true-damage aura at own-HP cost
+
+- gear: ARMOR_PLATE_AVALON           # Armor of Valor — Requite
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: REFLECT_CHANNEL}  # +40% resists channel
+    - {cap: anti_dive,     score: 2, evidence: REFLECT_CHANNEL}  # silences attackers 2s per hit taken
+
+- gear: ARMOR_PLATE_ROYAL            # Royal Armor — the energy font chest
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: buff_allies,   score: 3, evidence: MANADRAIN}        # energy to 10 allies, scales with nearby enemies (Energy Field=3)
+
+- gear: ARMOR_PLATE_SET1             # Soldier Armor — Fury
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: ENRAGE}           # stacking +damage +CC duration when hit
+
+- gear: ARMOR_PLATE_UNDEAD           # Graveguard Armor — Soul Chain
+  slot: armor
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: clump_create,  score: 3, evidence: ARMORCHAIN}       # chain-pull the target to you
+    - {cap: catch,         score: 2, evidence: ARMORCHAIN}
+
+# ----------------------------------------------------------------- shoes
+- gear: SHOES_CLOTH_AVALON           # Sandals of Purity
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: HOVER_SPRINT}     # channel speed + root/slow immunity
+    - {cap: mobility,      score: 2, evidence: HOVER_SPRINT}
+
+- gear: SHOES_CLOTH_FEY              # Feyscale Sandals — Ethereal Form
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 3, evidence: TRANSLUCENT}      # untargetable immune form (2s windup)
+    - {cap: mobility,      score: 2, evidence: TRANSLUCENT}
+
+- gear: SHOES_CLOTH_HELL             # Fiend Sandals — Position Swap
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: SWAP}             # swap positions with target + brief immunity
+    - {cap: mobility,      score: 2, evidence: SWAP}
+
+- gear: SHOES_CLOTH_KEEPER           # Druid Sandals — Frost Walk
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: mobility,      score: 2, evidence: FROSTWALK}        # +60% speed trail
+    - {cap: slow,          score: 2, evidence: FROSTWALK}        # 80% slow on the trail
+
+- gear: SHOES_CLOTH_MORGANA          # Cultist Sandals — Rotten Ground
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: mobility,      score: 2, evidence: DEMONWALK}
+    - {cap: resist_shred,  score: 2, evidence: DEMONWALK}        # -15% resists on the trail
+    - {cap: heal_reduction, score: 2, evidence: DEMONWALK}       # -15% healing received on the trail
+
+- gear: SHOES_CLOTH_ROYAL            # Royal Sandals — Defenseless Rush
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: mobility,      score: 2, evidence: GLASS_MOVESPEED}  # +75% speed +75% damage at -75% defense
+    - {cap: sustained_dps, score: 2, evidence: GLASS_MOVESPEED}
+
+- gear: SHOES_CLOTH_SET1             # Scholar Sandals — Focused Run
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: CHANNELED_RUN}    # stun/root/slow immunity while channeling
+    - {cap: mobility,      score: 2, evidence: CHANNELED_RUN}
+
+- gear: SHOES_CLOTH_SET2             # Cleric Sandals — Blink
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 3, evidence: BLINK}            # instant teleport (Evasive Jump=3)
+    - {cap: mobility,      score: 2, evidence: BLINK}
+
+- gear: SHOES_CLOTH_SET3             # Mage Sandals — Delayed Teleport
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: DELAYED_TELEPORT} # 1s delay weakens the escape
+    - {cap: mobility,      score: 2, evidence: DELAYED_TELEPORT}
+
+- gear: SHOES_LEATHER_AVALON         # Shoes of Tenacity — Blind Spot
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: engage,        score: 2, evidence: BLINDSPOT}        # brief invis + speed into the target
+    - {cap: burst_st,      score: 2, evidence: BLINDSPOT}        # +90 bonus damage on the next hit
+
+- gear: SHOES_LEATHER_HELL           # Hellion Shoes — Mark of Sacrifice
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: engage,        score: 3, evidence: DEATHMARK}        # invisible channel + dash to the marked target
+    - {cap: mobility,      score: 2, evidence: DEATHMARK}
+
+- gear: SHOES_LEATHER_SET2           # Hunter Shoes — Rush
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: catch,         score: 2, evidence: OVERSPRINT}       # +120% speed + CC-duration window
+    - {cap: mobility,      score: 2, evidence: OVERSPRINT}
+
+- gear: SHOES_LEATHER_SET3           # Assassin Shoes — Swift Cut
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: engage,        score: 2, evidence: ASSASSIN_DASH}    # dash behind the target
+    - {cap: mobility,      score: 2, evidence: ASSASSIN_DASH}
+
+- gear: SHOES_LEATHER_UNDEAD         # Specter Shoes — Spectral Run
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: INVISIBLE_WALK}   # invisible repositioning channel
+    - {cap: mobility,      score: 2, evidence: INVISIBLE_WALK}
+
+- gear: SHOES_PLATE_AVALON           # Boots of Valor — Premonition
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: CC_BLOCK}         # replaces CC with a full self-cleanse + speed burst
+    - {cap: tankiness,     score: 2, evidence: CC_BLOCK}         # forced-movement immunity
+
+- gear: SHOES_PLATE_HELL             # Demon Boots — Vengeful Sprint
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: mobility,      score: 2, evidence: BERSERK_SPRINT}
+    - {cap: sustained_dps, score: 2, evidence: BERSERK_SPRINT}   # missing-HP-scaled speed + damage charges
+
+- gear: SHOES_PLATE_KEEPER           # Judicator Boots — Elbow Smash
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: engage,        score: 3, evidence: SHOULDERTACKLE}   # dash + AoE knock-up ignoring CCR
+    - {cap: knockback_displace, score: 2, evidence: SHOULDERTACKLE}
+
+- gear: SHOES_PLATE_ROYAL            # Royal Boots — Royal March
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: mobility,      score: 2, evidence: ROYAL_MARCH}      # stacking march + root/slow immunity
+    - {cap: engage,        score: 2, evidence: ROYAL_MARCH}
+
+- gear: SHOES_PLATE_SET2             # Knight Boots — Shield Charge
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: engage,        score: 2, evidence: CHARGE_SHIELD}    # charge to target
+    - {cap: peel,          score: 2, evidence: CHARGE_SHIELD}    # shields self AND the allied target
+
+- gear: SHOES_PLATE_SET3             # Guardian Boots — Giant
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: MAXHEALTHBUFF}    # +25% max/current HP, unpurgeable
+    - {cap: mobility,      score: 2, evidence: MAXHEALTHBUFF}
+
+- gear: SHOES_PLATE_UNDEAD           # Graveguard Boots — Battle Frenzy
+  slot: shoes
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: BATTLEFRENZY}     # speed + stun/root/slow immunity + partial cleanse
+    - {cap: mobility,      score: 2, evidence: BATTLEFRENZY}
+
+# ------------------------------------------------------------------ capes
+# City/faction capes are SELF procs (directionality rule: none ground
+# buff_allies). Evidence = the cape's passive id (on its gear_spells menu).
+- gear: CAPEITEM_AVALON              # Avalonian Cape — Force Pulse
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: damage_debuff, score: 2, evidence: PASSIVE_CAPE_AVALON}  # AA proc: AoE hit, -15% enemy damage 4s
+
+- gear: CAPEITEM_DEMON               # Demon Cape — lava puddle
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: PASSIVE_CAPE_DEMON}
+
+- gear: CAPEITEM_FW_BRECILIEN        # Brecilien Cape — Fey Barrier
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: PASSIVE_CAPE_FEY}     # shield + purge immunity on head-cast
+
+- gear: CAPEITEM_FW_BRIDGEWATCH      # Bridgewatch Cape — Sandstorm
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: slow,          score: 2, evidence: PASSIVE_CAPE_BRIDGEWATCH}  # 40% slow + -40% CCR zone
+    - {cap: zone_control,  score: 2, evidence: PASSIVE_CAPE_BRIDGEWATCH}
+
+- gear: CAPEITEM_FW_CAERLEON         # Caerleon Cape — Q reset
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_CAPE_CAERLEON}
+
+- gear: CAPEITEM_FW_FORTSTERLING     # Fort Sterling Cape — Untouchable
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: PASSIVE_CAPE_FORTSTERLING}  # self-cleanse on CC (self-cleanse -> tankiness precedent)
+
+- gear: CAPEITEM_FW_MARTLOCK         # Martlock Cape — Shield of Protection
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: PASSIVE_CAPE_MARTLOCK}  # +100% defense 5s below HP threshold, unpurgeable
+
+- gear: CAPEITEM_FW_THETFORD         # Thetford Cape — Chain Lightning
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_CAPE_THETFORD}
+
+- gear: CAPEITEM_HERETIC             # Heretic Cape — Devious Trap
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: root,          score: 2, evidence: PASSIVE_CAPE_HERETIC}  # 3 root traps on shoe-cast
+
+- gear: CAPEITEM_KEEPER              # Keeper Cape — Berserk
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_CAPE_KEEPER}   # +40% damage 5s below HP threshold
+
+- gear: CAPEITEM_MORGANA             # Morgana Cape — Mark of the Raven
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: PASSIVE_CAPE_MORGANA}  # -50% cast time +50% AA speed on E
+
+- gear: CAPEITEM_UNDEAD              # Undead Cape — Vanisher
+  slot: cape
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: PASSIVE_CAPE_UNDEAD}   # invisibility 6s at low HP
+
+# ---------------------------------------------------------------- potions
+# Consumables (no gear_spells menu) — GEAR_STATS sentinel, same as the
+# core.yaml potion rows. Effects summarized from the item descriptions;
+# every row here is flagged for owner review at the next blind round.
+- gear: T7_POTION_CLEANSE2           # Major Cleansing Potion
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: tankiness,     score: 2, evidence: GEAR_STATS}       # self-cleanse of CC/debuffs (self-cleanse -> tankiness precedent)
+
+- gear: T6_POTION_ENERGY             # Major Energy Potion
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # energy restore — cast economy
+
+- gear: T8_POTION_BERSERK            # Major Berserk Potion
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: sustained_dps, score: 2, evidence: GEAR_STATS}       # +damage at self-HP cost
+
+- gear: T8_POTION_COOLDOWN           # Major Poison Potion
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: heal_reduction, score: 2, evidence: GEAR_STATS}      # poison DoT + healing reduction on the target (owner review)
+
+- gear: T8_POTION_LAVA               # Major Hellfire Potion
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: burst_aoe,     score: 2, evidence: GEAR_STATS}       # ground fire burst
+
+- gear: T8_POTION_TORNADO            # Major Tornado in a Bottle
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: knockback_displace, score: 2, evidence: GEAR_STATS}  # tornado displaces enemies (owner review)
+
+- gear: T7_POTION_ACID               # Major Acid Potion
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: resist_shred,  score: 2, evidence: GEAR_STATS}       # acid pool shreds resistances (owner review)
+
+- gear: T8_POTION_CLEANSE            # Invisibility Potion
+  slot: potion
+  curated_as_of: 2026-08-27
+  capabilities:
+    - {cap: disengage,     score: 2, evidence: GEAR_STATS}       # self invisibility — the escape consumable

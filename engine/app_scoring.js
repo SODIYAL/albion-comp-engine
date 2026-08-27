@@ -1131,8 +1131,10 @@
                       carries: (this.itemEffects[k] || []).slice(),
                       passive: passive, why: why });
       }
-      /* Context-free: doctrine tier first. Comp-aware: exact marginal
-         first (T22) — mirrors engine.py ordering. */
+      /* DOCTRINE-TIER-FIRST in both modes (owner ruling 2026-08-27,
+         evidence-first): the observed tier bounds the suggestion;
+         context-free ranks by count then value within a tier,
+         comp-aware by the exact marginal — mirrors engine.py. */
       var gearCmp = function (a, b) {
         return a.gear < b.gear ? -1 : a.gear > b.gear ? 1 : 0;
       };
@@ -1148,8 +1150,8 @@
         });
       } else {
         ranked.sort(function (a, b) {
-          return (b.value - a.value)
-              || (tierRank(a) - tierRank(b))
+          return (tierRank(a) - tierRank(b))
+              || (b.value - a.value)
               || (wCount(b) - wCount(a))
               || gearCmp(a, b);
         });

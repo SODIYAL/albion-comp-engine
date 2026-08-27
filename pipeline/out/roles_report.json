@@ -1,5 +1,5 @@
 {
- "effect_candidates": ["HEAD_CLOTH_KEEPER", "HEAD_PLATE_SET2", "HEAD_PLATE_SET3"],
+ "effect_candidates": ["ARMOR_CLOTH_ROYAL", "ARMOR_PLATE_ROYAL", "HEAD_CLOTH_KEEPER", "HEAD_PLATE_SET2", "HEAD_PLATE_SET3"],
  "effect_quotas": {
   "comps": [
    {
@@ -236,6 +236,60 @@
   },
   {
    "active_caps": {
+    "anti_dive": 2,
+    "peel": 3
+   },
+   "class": "cloth",
+   "class_basis": "stats",
+   "id": "ARMOR_CLOTH_HELL",
+   "name": "Fiend Robe",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "armor",
+   "tank_pts": 139,
+   "tree_passives": ["PASSIVE_ARMOR_INCREASED_DAMAGE", "PASSIVE_ARMOR_INCREASED_CASTSPEED", "PASSIVE_ARMOR_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "heal_sustain": 2,
+    "sustained_dps": 2
+   },
+   "class": "cloth",
+   "class_basis": "stats",
+   "id": "ARMOR_CLOTH_KEEPER",
+   "name": "Druid Robe",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "armor",
+   "tank_pts": 155,
+   "tree_passives": ["PASSIVE_ARMOR_INCREASED_DAMAGE", "PASSIVE_ARMOR_INCREASED_CASTSPEED", "PASSIVE_ARMOR_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "self_sustain": 2
+   },
+   "class": "cloth",
+   "class_basis": "stats",
+   "id": "ARMOR_CLOTH_MORGANA",
+   "name": "Cultist Robe",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "armor",
+   "tank_pts": 123,
+   "tree_passives": ["PASSIVE_ARMOR_INCREASED_DAMAGE", "PASSIVE_ARMOR_INCREASED_CASTSPEED", "PASSIVE_ARMOR_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "buff_allies": 3
+   },
+   "class": "cloth",
+   "class_basis": "stats",
+   "id": "ARMOR_CLOTH_ROYAL",
+   "name": "Royal Robe",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "armor",
+   "tank_pts": 139,
+   "tree_passives": ["PASSIVE_ARMOR_INCREASED_DAMAGE", "PASSIVE_ARMOR_INCREASED_CASTSPEED", "PASSIVE_ARMOR_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
     "sustained_dps": 2
    },
    "class": "cloth",
@@ -246,6 +300,46 @@
    "slot": "armor",
    "tank_pts": 155,
    "tree_passives": ["PASSIVE_ARMOR_INCREASED_DAMAGE", "PASSIVE_ARMOR_INCREASED_CASTSPEED", "PASSIVE_ARMOR_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "tankiness": 3
+   },
+   "class": "cloth",
+   "class_basis": "stats",
+   "id": "ARMOR_CLOTH_SET2",
+   "name": "Cleric Robe",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "armor",
+   "tank_pts": 139,
+   "tree_passives": ["PASSIVE_ARMOR_INCREASED_DAMAGE", "PASSIVE_ARMOR_INCREASED_CASTSPEED", "PASSIVE_ARMOR_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "purge": 2,
+    "tankiness": 2
+   },
+   "class": "cloth",
+   "class_basis": "stats",
+   "id": "ARMOR_CLOTH_SET3",
+   "name": "Mage Robe",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "armor",
+   "tank_pts": 123,
+   "tree_passives": ["PASSIVE_ARMOR_INCREASED_DAMAGE", "PASSIVE_ARMOR_INCREASED_CASTSPEED", "PASSIVE_ARMOR_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "tankiness": 2
+   },
+   "class": "leather",
+   "class_basis": "stats",
+   "id": "ARMOR_LEATHER_AVALON",
+   "name": "Jacket of Tenacity",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "armor",
+   "tank_pts": 184,
+   "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
   },
   {
    "active_caps": {
@@ -277,6 +371,19 @@
   },
   {
    "active_caps": {
+    "sustained_dps": 2
+   },
+   "class": "leather",
+   "class_basis": "stats",
+   "id": "ARMOR_LEATHER_MORGANA",
+   "name": "Stalker Jacket",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "armor",
+   "tank_pts": 216,
+   "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
     "buff_allies": 4
    },
    "class": "leather",
@@ -287,6 +394,73 @@
    "slot": "armor",
    "tank_pts": 200,
    "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
+    "self_sustain": 2
+   },
+   "class": "leather",
+   "class_basis": "stats",
+   "id": "ARMOR_LEATHER_SET1",
+   "name": "Mercenary Jacket",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "armor",
+   "tank_pts": 216,
+   "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
+    "sustained_dps": 2
+   },
+   "class": "leather",
+   "class_basis": "stats",
+   "id": "ARMOR_LEATHER_SET2",
+   "name": "Hunter Jacket",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "armor",
+   "tank_pts": 200,
+   "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
+    "burst_st": 2,
+    "disengage": 2
+   },
+   "class": "leather",
+   "class_basis": "stats",
+   "id": "ARMOR_LEATHER_SET3",
+   "name": "Assassin Jacket",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "armor",
+   "tank_pts": 184,
+   "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
+    "sustained_dps": 2
+   },
+   "class": "leather",
+   "class_basis": "stats",
+   "id": "ARMOR_LEATHER_UNDEAD",
+   "name": "Specter Jacket",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "armor",
+   "tank_pts": 184,
+   "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
+    "anti_dive": 2,
+    "tankiness": 2
+   },
+   "class": "plate",
+   "class_basis": "stats",
+   "id": "ARMOR_PLATE_AVALON",
+   "name": "Armor of Valor",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "armor",
+   "tank_pts": 287,
+   "tree_passives": ["PASSIVE_ARMOR_MR_AR", "PASSIVE_ARMOR_CCDURATION", "PASSIVE_ARMOR_INCREASED_CCR", "PASSIVE_PLATEARMOR_HEALTH_REDUCTION", "PASSIVE_PLATEARMOR_THREATGENERATION"]
   },
   {
    "active_caps": {
@@ -333,6 +507,32 @@
   },
   {
    "active_caps": {
+    "buff_allies": 3
+   },
+   "class": "plate",
+   "class_basis": "stats",
+   "id": "ARMOR_PLATE_ROYAL",
+   "name": "Royal Armor",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "armor",
+   "tank_pts": 271,
+   "tree_passives": ["PASSIVE_ARMOR_MR_AR", "PASSIVE_ARMOR_CCDURATION", "PASSIVE_ARMOR_INCREASED_CCR", "PASSIVE_PLATEARMOR_HEALTH_REDUCTION", "PASSIVE_PLATEARMOR_THREATGENERATION"]
+  },
+  {
+   "active_caps": {
+    "sustained_dps": 2
+   },
+   "class": "plate",
+   "class_basis": "stats",
+   "id": "ARMOR_PLATE_SET1",
+   "name": "Soldier Armor",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "armor",
+   "tank_pts": 255,
+   "tree_passives": ["PASSIVE_ARMOR_MR_AR", "PASSIVE_ARMOR_CCDURATION", "PASSIVE_ARMOR_INCREASED_CCR", "PASSIVE_PLATEARMOR_HEALTH_REDUCTION", "PASSIVE_PLATEARMOR_THREATGENERATION"]
+  },
+  {
+   "active_caps": {
     "anti_dive": 3,
     "peel": 3,
     "purge": 4
@@ -362,12 +562,105 @@
   },
   {
    "active_caps": {
+    "catch": 2,
+    "clump_create": 3
+   },
+   "class": "plate",
+   "class_basis": "stats",
+   "id": "ARMOR_PLATE_UNDEAD",
+   "name": "Graveguard Armor",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "armor",
+   "tank_pts": 255,
+   "tree_passives": ["PASSIVE_ARMOR_MR_AR", "PASSIVE_ARMOR_CCDURATION", "PASSIVE_ARMOR_INCREASED_CCR", "PASSIVE_PLATEARMOR_HEALTH_REDUCTION", "PASSIVE_PLATEARMOR_THREATGENERATION"]
+  },
+  {
+   "active_caps": {
+    "interrupt": 2
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_CLOTH_AVALON",
+   "name": "Cowl of Purity",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "sustained_dps": 2,
+    "tankiness": 2
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_CLOTH_FEY",
+   "name": "Feyscale Hat",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "purge": 3
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_CLOTH_HELL",
+   "name": "Fiend Cowl",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
     "buff_allies": 3
    },
    "class": "cloth",
    "class_basis": "tree id (stats missing)",
    "id": "HEAD_CLOTH_KEEPER",
    "name": "Druid Cowl",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "sustained_dps": 2
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_CLOTH_MORGANA",
+   "name": "Cultist Cowl",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "sustained_dps": 2
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_CLOTH_ROYAL",
+   "name": "Royal Cowl",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "tankiness": 2
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_CLOTH_SET1",
+   "name": "Scholar Cowl",
    "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
    "slot": "head",
    "tank_pts": 0,
@@ -388,6 +681,32 @@
    "slot": "head",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "burst_aoe": 2
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_CLOTH_SET3",
+   "name": "Mage Cowl",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "heal_reduction": 3
+   },
+   "class": "leather",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_LEATHER_AVALON",
+   "name": "Hood of Tenacity",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
   },
   {
    "active_caps": {
@@ -419,6 +738,61 @@
   },
   {
    "active_caps": {
+    "resist_shred": 2,
+    "sustained_dps": 2
+   },
+   "class": "leather",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_LEATHER_MORGANA",
+   "name": "Stalker Hood",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
+    "sustained_dps": 2
+   },
+   "class": "leather",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_LEATHER_ROYAL",
+   "name": "Royal Hood",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
+    "damage_debuff": 2,
+    "interrupt": 2,
+    "slow": 2
+   },
+   "class": "leather",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_LEATHER_SET1",
+   "name": "Mercenary Hood",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
+    "tankiness": 2
+   },
+   "class": "leather",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_LEATHER_SET2",
+   "name": "Hunter Hood",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
     "sustained_dps": 2
    },
    "class": "leather",
@@ -432,6 +806,60 @@
   },
   {
    "active_caps": {
+    "sustained_dps": 2
+   },
+   "class": "leather",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_LEATHER_UNDEAD",
+   "name": "Specter Hood",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
+    "cleanse": 3,
+    "purge": 3
+   },
+   "class": "plate",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_PLATE_AVALON",
+   "name": "Helmet of Valor",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MR_AR", "PASSIVE_CCDURATION", "PASSIVE_INCREASED_CCR"]
+  },
+  {
+   "active_caps": {
+    "catch": 2,
+    "slow": 2
+   },
+   "class": "plate",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_PLATE_FEY",
+   "name": "Duskweaver Helmet",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MR_AR", "PASSIVE_CCDURATION", "PASSIVE_INCREASED_CCR"]
+  },
+  {
+   "active_caps": {
+    "silence": 3
+   },
+   "class": "plate",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_PLATE_HELL",
+   "name": "Demon Helmet",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MR_AR", "PASSIVE_CCDURATION", "PASSIVE_INCREASED_CCR"]
+  },
+  {
+   "active_caps": {
     "anti_dive": 2,
     "stun": 3,
     "tankiness": 2
@@ -440,6 +868,32 @@
    "class_basis": "tree id (stats missing)",
    "id": "HEAD_PLATE_KEEPER",
    "name": "Judicator Helmet",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MR_AR", "PASSIVE_CCDURATION", "PASSIVE_INCREASED_CCR"]
+  },
+  {
+   "active_caps": {
+    "stun": 3
+   },
+   "class": "plate",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_PLATE_ROYAL",
+   "name": "Royal Helmet",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MR_AR", "PASSIVE_CCDURATION", "PASSIVE_INCREASED_CCR"]
+  },
+  {
+   "active_caps": {
+    "tankiness": 2
+   },
+   "class": "plate",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_PLATE_SET1",
+   "name": "Soldier Helmet",
    "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
    "slot": "head",
    "tank_pts": 0,
@@ -469,6 +923,19 @@
    "class_basis": "tree id (stats missing)",
    "id": "HEAD_PLATE_SET3",
    "name": "Guardian Helmet",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "head",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MR_AR", "PASSIVE_CCDURATION", "PASSIVE_INCREASED_CCR"]
+  },
+  {
+   "active_caps": {
+    "heal_burst": 2
+   },
+   "class": "plate",
+   "class_basis": "tree id (stats missing)",
+   "id": "HEAD_PLATE_UNDEAD",
+   "name": "Graveguard Helmet",
    "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
    "slot": "head",
    "tank_pts": 0,
@@ -685,6 +1152,147 @@
   },
   {
    "active_caps": {
+    "disengage": 2,
+    "mobility": 2
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_CLOTH_AVALON",
+   "name": "Sandals of Purity",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "disengage": 3,
+    "mobility": 2
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_CLOTH_FEY",
+   "name": "Feyscale Sandals",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "disengage": 2,
+    "mobility": 2
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_CLOTH_HELL",
+   "name": "Fiend Sandals",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "mobility": 2,
+    "slow": 2
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_CLOTH_KEEPER",
+   "name": "Druid Sandals",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "heal_reduction": 2,
+    "mobility": 2,
+    "resist_shred": 2
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_CLOTH_MORGANA",
+   "name": "Cultist Sandals",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "mobility": 2,
+    "sustained_dps": 2
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_CLOTH_ROYAL",
+   "name": "Royal Sandals",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "disengage": 2,
+    "mobility": 2
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_CLOTH_SET1",
+   "name": "Scholar Sandals",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "disengage": 3,
+    "mobility": 2
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_CLOTH_SET2",
+   "name": "Cleric Sandals",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "disengage": 2,
+    "mobility": 2
+   },
+   "class": "cloth",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_CLOTH_SET3",
+   "name": "Mage Sandals",
+   "role_affinity": ["bomb_aoe", "kite_healer", "main_healer", "ranged_aoe", "shield_support", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_INCREASED_DAMAGE", "PASSIVE_CASTSPEED", "PASSIVE_REDUCED_ENERGYCOST"]
+  },
+  {
+   "active_caps": {
+    "burst_st": 2,
+    "engage": 2
+   },
+   "class": "leather",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_LEATHER_AVALON",
+   "name": "Shoes of Tenacity",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
     "disengage": 3,
     "mobility": 2
    },
@@ -692,6 +1300,20 @@
    "class_basis": "tree id (stats missing)",
    "id": "SHOES_LEATHER_FEY",
    "name": "Mistwalker Shoes",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
+    "engage": 3,
+    "mobility": 2
+   },
+   "class": "leather",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_LEATHER_HELL",
+   "name": "Hellion Shoes",
    "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
    "slot": "shoes",
    "tank_pts": 0,
@@ -742,6 +1364,62 @@
   },
   {
    "active_caps": {
+    "catch": 2,
+    "mobility": 2
+   },
+   "class": "leather",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_LEATHER_SET2",
+   "name": "Hunter Shoes",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
+    "engage": 2,
+    "mobility": 2
+   },
+   "class": "leather",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_LEATHER_SET3",
+   "name": "Assassin Shoes",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
+    "disengage": 2,
+    "mobility": 2
+   },
+   "class": "leather",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_LEATHER_UNDEAD",
+   "name": "Specter Shoes",
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
+  },
+  {
+   "active_caps": {
+    "disengage": 2,
+    "tankiness": 2
+   },
+   "class": "plate",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_PLATE_AVALON",
+   "name": "Boots of Valor",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_MR_AR", "PASSIVE_CCDURATION", "PASSIVE_INCREASED_CCR"]
+  },
+  {
+   "active_caps": {
     "engage": 3,
     "knockback_displace": 2,
     "mobility": 2
@@ -750,6 +1428,48 @@
    "class_basis": "tree id (stats missing)",
    "id": "SHOES_PLATE_FEY",
    "name": "Duskweaver Boots",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_MR_AR", "PASSIVE_CCDURATION", "PASSIVE_INCREASED_CCR"]
+  },
+  {
+   "active_caps": {
+    "mobility": 2,
+    "sustained_dps": 2
+   },
+   "class": "plate",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_PLATE_HELL",
+   "name": "Demon Boots",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_MR_AR", "PASSIVE_CCDURATION", "PASSIVE_INCREASED_CCR"]
+  },
+  {
+   "active_caps": {
+    "engage": 3,
+    "knockback_displace": 2
+   },
+   "class": "plate",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_PLATE_KEEPER",
+   "name": "Judicator Boots",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_MR_AR", "PASSIVE_CCDURATION", "PASSIVE_INCREASED_CCR"]
+  },
+  {
+   "active_caps": {
+    "engage": 2,
+    "mobility": 2
+   },
+   "class": "plate",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_PLATE_ROYAL",
+   "name": "Royal Boots",
    "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
    "slot": "shoes",
    "tank_pts": 0,
@@ -768,12 +1488,61 @@
    "slot": "shoes",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_MR_AR", "PASSIVE_CCDURATION", "PASSIVE_INCREASED_CCR"]
+  },
+  {
+   "active_caps": {
+    "engage": 2,
+    "peel": 2
+   },
+   "class": "plate",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_PLATE_SET2",
+   "name": "Knight Boots",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_MR_AR", "PASSIVE_CCDURATION", "PASSIVE_INCREASED_CCR"]
+  },
+  {
+   "active_caps": {
+    "mobility": 2,
+    "tankiness": 2
+   },
+   "class": "plate",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_PLATE_SET3",
+   "name": "Guardian Boots",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_MR_AR", "PASSIVE_CCDURATION", "PASSIVE_INCREASED_CCR"]
+  },
+  {
+   "active_caps": {
+    "disengage": 2,
+    "mobility": 2
+   },
+   "class": "plate",
+   "class_basis": "tree id (stats missing)",
+   "id": "SHOES_PLATE_UNDEAD",
+   "name": "Graveguard Boots",
+   "role_affinity": ["brawl_healer", "engage_tank", "off_tank", "shield_support", "stopper_tank", "sustained_brawler", "zone_support"],
+   "slot": "shoes",
+   "tank_pts": 0,
+   "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_MR_AR", "PASSIVE_CCDURATION", "PASSIVE_INCREASED_CCR"]
   }
  ],
  "kit_doctrine": {
   "bomb_aoe": {
    "by_weapon": {
     "2H_GLAIVE_CRYSTAL": {
+     "armor": [
+      {
+       "count": 1,
+       "id": "ARMOR_LEATHER_AVALON",
+       "sources": ["metabattle (7766:8995)"]
+      }
+     ],
      "cape": [
       {
        "count": 2,
@@ -817,11 +1586,23 @@
        "count": 2,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["deadlyhooker_large_scale_2026_08 (party_2:14,15)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_PLATE_UNDEAD",
+       "sources": ["metabattle (7766:8995)"]
       }
      ]
     }
    },
    "slots": {
+    "armor": [
+     {
+      "count": 1,
+      "id": "ARMOR_LEATHER_AVALON",
+      "sources": ["metabattle (7766:8995)"]
+     }
+    ],
     "cape": [
      {
       "count": 2,
@@ -865,6 +1646,11 @@
       "count": 2,
       "id": "SHOES_LEATHER_MORGANA",
       "sources": ["deadlyhooker_large_scale_2026_08 (party_2:14,15)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_PLATE_UNDEAD",
+      "sources": ["metabattle (7766:8995)"]
      }
     ]
    }
@@ -914,6 +1700,21 @@
       },
       {
        "count": 1,
+       "id": "HEAD_LEATHER_AVALON",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:7)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_LEATHER_SET1",
+       "sources": ["albioncompo_bist_roam15_2026_01 (comp:6)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_PLATE_SET1",
+       "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:16)"]
+      },
+      {
+       "count": 1,
        "id": "HEAD_PLATE_SET2",
        "sources": ["metabattle (7741:9075)"]
       }
@@ -935,6 +1736,11 @@
        "count": 6,
        "id": "T7_POTION_REVIVE",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9)", "albioncompo_bist_roam15_2026_01 (comp:6,8)", "albioncompo_ss_kite_20_2026_06 (comp:19)", "metabattle (7741:9075)"]
+      },
+      {
+       "count": 1,
+       "id": "T7_POTION_CLEANSE2",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:10)"]
       },
       {
        "count": 1,
@@ -1026,6 +1832,11 @@
      "build": "deadlyhooker_large_scale_2026_08:party_3:5",
      "id": "ARMOR_CLOTH_FEY",
      "weapon": "MAIN_HOLYSTAFF_AVALON"
+    },
+    {
+     "build": "timothy_blap_blackzone_roam_2026_08:blap:16",
+     "id": "ARMOR_CLOTH_SET2",
+     "weapon": "MAIN_HOLYSTAFF_AVALON"
     }
    ],
    "overrides": [
@@ -1093,6 +1904,21 @@
      },
      {
       "count": 1,
+      "id": "HEAD_LEATHER_AVALON",
+      "sources": ["cb_clonepeek_zvz20_2026_03 (comp:7)"]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_LEATHER_SET1",
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:6)"]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_PLATE_SET1",
+      "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:16)"]
+     },
+     {
+      "count": 1,
       "id": "HEAD_PLATE_SET2",
       "sources": ["metabattle (7741:9075)"]
      }
@@ -1119,6 +1945,11 @@
       "count": 6,
       "id": "T7_POTION_REVIVE",
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9)", "albioncompo_bist_roam15_2026_01 (comp:6,8)", "albioncompo_ss_kite_20_2026_06 (comp:19)", "metabattle (7741:9075)"]
+     },
+     {
+      "count": 1,
+      "id": "T7_POTION_CLEANSE2",
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:10)"]
      },
      {
       "count": 1,
@@ -1154,6 +1985,20 @@
        "id": "T8_MEAL_STEW",
        "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:4)"]
       }
+     ],
+     "head": [
+      {
+       "count": 1,
+       "id": "HEAD_LEATHER_MORGANA",
+       "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:4)"]
+      }
+     ],
+     "shoes": [
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_ROYAL",
+       "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:4)"]
+      }
      ]
     },
     "MAIN_RAPIER_MORGANA": {
@@ -1162,6 +2007,11 @@
        "count": 1,
        "id": "CAPEITEM_SMUGGLER",
        "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:15)"]
+      },
+      {
+       "count": 1,
+       "id": "CAPEITEM_UNDEAD",
+       "sources": ["metabattle (7645:8952)"]
       }
      ],
      "food": [
@@ -1172,6 +2022,11 @@
       }
      ],
      "head": [
+      {
+       "count": 1,
+       "id": "HEAD_LEATHER_MORGANA",
+       "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:15)"]
+      },
       {
        "count": 1,
        "id": "HEAD_LEATHER_SET3",
@@ -1200,6 +2055,11 @@
      "shoes": [
       {
        "count": 1,
+       "id": "SHOES_CLOTH_ROYAL",
+       "sources": ["metabattle (7645:8952)"]
+      },
+      {
+       "count": 1,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:15)"]
       }
@@ -1207,6 +2067,11 @@
     },
     "MAIN_SCIMITAR_MORGANA": {
      "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["metabattle (7658:8999)"]
+      },
       {
        "count": 1,
        "id": "CAPEITEM_SMUGGLER",
@@ -1255,6 +2120,13 @@
      ]
     }
    },
+   "off_uniform": [
+    {
+     "build": "cb_shadowlagrange_tracking5_2026_01:comp:4",
+     "id": "ARMOR_CLOTH_KEEPER",
+     "weapon": "2H_DAGGERPAIR"
+    }
+   ],
    "slots": {
     "armor": [
      {
@@ -1269,6 +2141,16 @@
       "count": 2,
       "id": "CAPEITEM_SMUGGLER",
       "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:13,15)"]
+     },
+     {
+      "count": 1,
+      "id": "CAPEITEM_FW_MARTLOCK",
+      "sources": ["metabattle (7658:8999)"]
+     },
+     {
+      "count": 1,
+      "id": "CAPEITEM_UNDEAD",
+      "sources": ["metabattle (7645:8952)"]
      }
     ],
     "food": [
@@ -1279,6 +2161,11 @@
      }
     ],
     "head": [
+     {
+      "count": 2,
+      "id": "HEAD_LEATHER_MORGANA",
+      "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:4)", "timothy_blap_blackzone_roam_2026_08 (blap:15)"]
+     },
      {
       "count": 1,
       "id": "HEAD_LEATHER_SET3",
@@ -1324,6 +2211,11 @@
       "count": 3,
       "id": "SHOES_LEATHER_MORGANA",
       "sources": ["metabattle (7658:8999)", "timothy_blap_blackzone_roam_2026_08 (blap:13,15)"]
+     },
+     {
+      "count": 2,
+      "id": "SHOES_CLOTH_ROYAL",
+      "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:4)", "metabattle (7645:8952)"]
      }
     ]
    }
@@ -1371,6 +2263,11 @@
        "count": 2,
        "id": "CAPEITEM_SMUGGLER",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:0)", "deadlyhooker_large_scale_2026_08 (party_1:0)"]
+      },
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["metabattle (7757:8974)"]
       }
      ],
      "food": [
@@ -1397,13 +2294,28 @@
        "count": 2,
        "id": "T7_POTION_REVIVE",
        "sources": ["cb_clonepeek_zvz20_2026_03 (comp:19)", "metabattle (7757:8974)"]
+      },
+      {
+       "count": 1,
+       "id": "T8_POTION_TORNADO",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:0)"]
       }
      ],
      "shoes": [
       {
+       "count": 2,
+       "id": "SHOES_CLOTH_SET2",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:0)", "deadlyhooker_large_scale_2026_08 (party_1:0)"]
+      },
+      {
        "count": 1,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["cb_clonepeek_zvz20_2026_03 (comp:19)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_PLATE_AVALON",
+       "sources": ["metabattle (7757:8974)"]
       }
      ]
     },
@@ -1455,6 +2367,11 @@
        "count": 1,
        "id": "CAPEITEM_FW_LYMHURST",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:5)"]
+      },
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:1)"]
       }
      ],
      "food": [
@@ -1479,6 +2396,11 @@
        "count": 1,
        "id": "HEAD_LEATHER_HELL",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:5)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_LEATHER_MORGANA",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:0)"]
       }
      ],
      "potion": [
@@ -1486,9 +2408,29 @@
        "count": 2,
        "id": "T7_POTION_REVIVE",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:5)", "albioncompo_ss_kite_20_2026_06 (comp:1)"]
+      },
+      {
+       "count": 1,
+       "id": "T8_POTION_LAVA",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:0)"]
+      },
+      {
+       "count": 1,
+       "id": "T8_POTION_TORNADO",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:3)"]
       }
      ],
      "shoes": [
+      {
+       "count": 2,
+       "id": "SHOES_CLOTH_SET2",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:3)", "albioncompo_ss_kite_20_2026_06 (comp:1)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_HELL",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:0)"]
+      },
       {
        "count": 1,
        "id": "SHOES_LEATHER_ROYAL",
@@ -1497,6 +2439,25 @@
      ]
     },
     "2H_SHAPESHIFTER_KEEPER": {
+     "armor": [
+      {
+       "count": 1,
+       "id": "ARMOR_PLATE_AVALON",
+       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:0)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_PLATE_SET1",
+       "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:1)"]
+      }
+     ],
+     "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_MORGANA",
+       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:0)"]
+      }
+     ],
      "food": [
       {
        "count": 2,
@@ -1519,6 +2480,11 @@
        "count": 1,
        "id": "HEAD_PLATE_KEEPER",
        "sources": ["albioncompo_ss_kite_20_2026_06 (comp:0)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_PLATE_SET1",
+       "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:1)"]
       }
      ],
      "potion": [
@@ -1526,6 +2492,23 @@
        "count": 2,
        "id": "T7_POTION_REVIVE",
        "sources": ["albioncompo_ss_kite_20_2026_06 (comp:0)", "cb_clonepeek_zvz20_2026_03 (comp:0)"]
+      }
+     ],
+     "shoes": [
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_MORGANA",
+       "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:1)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_SET2",
+       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:0)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_LEATHER_SET2",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:0)"]
       }
      ]
     },
@@ -1567,8 +2550,18 @@
       },
       {
        "count": 1,
+       "id": "HEAD_LEATHER_AVALON",
+       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:15)"]
+      },
+      {
+       "count": 1,
        "id": "HEAD_LEATHER_SET3",
        "sources": ["deadlyhooker_large_scale_2026_08 (party_1:17)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_PLATE_SET1",
+       "sources": ["cb_kroozlt19_bomb_squad_2026_01 (comp:1)"]
       }
      ],
      "offhand": [
@@ -1598,6 +2591,11 @@
        "count": 3,
        "id": "T7_POTION_REVIVE",
        "sources": ["albioncompo_ss_kite_20_2026_06 (comp:15)", "cb_kroozlt19_bomb_squad_2026_01 (comp:1)", "metabattle (7755:8913)"]
+      },
+      {
+       "count": 1,
+       "id": "T7_POTION_CLEANSE2",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:12)"]
       }
      ],
      "shoes": [
@@ -1608,8 +2606,18 @@
       },
       {
        "count": 1,
+       "id": "SHOES_LEATHER_AVALON",
+       "sources": ["cb_kroozlt19_bomb_squad_2026_01 (comp:1)"]
+      },
+      {
+       "count": 1,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:12)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_PLATE_AVALON",
+       "sources": ["metabattle (7755:8913)"]
       }
      ]
     },
@@ -1626,6 +2634,11 @@
        "count": 1,
        "id": "CAPEITEM_FW_LYMHURST",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:0)"]
+      },
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["metabattle (7679:8332)"]
       },
       {
        "count": 1,
@@ -1684,8 +2697,18 @@
      "shoes": [
       {
        "count": 1,
+       "id": "SHOES_CLOTH_SET2",
+       "sources": ["metabattle (7679:8332)"]
+      },
+      {
+       "count": 1,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:4)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_PLATE_AVALON",
+       "sources": ["albioncompo_bist_roam15_2026_01 (comp:0)"]
       }
      ]
     },
@@ -1695,6 +2718,11 @@
        "count": 1,
        "id": "ARMOR_PLATE_FEY",
        "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:3)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_PLATE_ROYAL",
+       "sources": ["albioncompo_push_monkey_7_2026_05 (comp:1)"]
       }
      ],
      "cape": [
@@ -1758,8 +2786,18 @@
      "weapon": "MAIN_ARCANESTAFF_UNDEAD"
     },
     {
+     "build": "deadlyhooker_large_scale_2026_08:party_1:17",
+     "id": "ARMOR_CLOTH_SET3",
+     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
+    },
+    {
      "build": "metabattle:7755:8913",
      "id": "ARMOR_LEATHER_ROYAL",
+     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
+    },
+    {
+     "build": "cb_kroozlt19_bomb_squad_2026_01:comp:1",
+     "id": "ARMOR_LEATHER_SET3",
      "weapon": "MAIN_ARCANESTAFF_UNDEAD"
     }
    ],
@@ -1791,9 +2829,24 @@
      },
      {
       "count": 1,
+      "id": "ARMOR_PLATE_AVALON",
+      "sources": ["albioncompo_ss_kite_20_2026_06 (comp:0)"]
+     },
+     {
+      "count": 1,
       "effect": "reflect_shell",
       "id": "ARMOR_PLATE_HELL",
       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:19)"]
+     },
+     {
+      "count": 1,
+      "id": "ARMOR_PLATE_ROYAL",
+      "sources": ["albioncompo_push_monkey_7_2026_05 (comp:1)"]
+     },
+     {
+      "count": 1,
+      "id": "ARMOR_PLATE_SET1",
+      "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:1)"]
      }
     ],
     "cape": [
@@ -1806,6 +2859,16 @@
       "count": 3,
       "id": "CAPEITEM_FW_LYMHURST",
       "sources": ["albioncompo_bist_roam15_2026_01 (comp:0,5)", "metabattle (7755:8913)"]
+     },
+     {
+      "count": 3,
+      "id": "CAPEITEM_FW_MARTLOCK",
+      "sources": ["albioncompo_ss_kite_20_2026_06 (comp:1)", "metabattle (7679:8332; 7757:8974)"]
+     },
+     {
+      "count": 1,
+      "id": "CAPEITEM_MORGANA",
+      "sources": ["albioncompo_ss_kite_20_2026_06 (comp:0)"]
      }
     ],
     "food": [
@@ -1853,6 +2916,11 @@
      },
      {
       "count": 2,
+      "id": "HEAD_PLATE_SET1",
+      "sources": ["cb_kroozlt19_bomb_squad_2026_01 (comp:1)", "cb_shadowlagrange_tracking5_2026_01 (comp:1)"]
+     },
+     {
+      "count": 2,
       "id": "HEAD_PLATE_SET2",
       "sources": ["metabattle (7679:8332)", "timothy_blap_blackzone_roam_2026_08 (blap:0)"]
      },
@@ -1860,6 +2928,16 @@
       "count": 1,
       "id": "HEAD_CLOTH_KEEPER",
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:12)"]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_LEATHER_AVALON",
+      "sources": ["albioncompo_ss_kite_20_2026_06 (comp:15)"]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_LEATHER_MORGANA",
+      "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:0)"]
      }
     ],
     "offhand": [
@@ -1899,13 +2977,38 @@
       "count": 11,
       "id": "T7_POTION_REVIVE",
       "sources": ["albioncompo_bist_roam15_2026_01 (comp:0,5)", "albioncompo_push_monkey_7_2026_05 (comp:1)", "albioncompo_ss_kite_20_2026_06 (comp:0,1,15)", "cb_clonepeek_zvz20_2026_03 (comp:0,19)", "cb_kroozlt19_bomb_squad_2026_01 (comp:1)", "metabattle (7755:8913; 7757:8974)"]
+     },
+     {
+      "count": 2,
+      "id": "T8_POTION_TORNADO",
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:0,3)"]
+     },
+     {
+      "count": 1,
+      "id": "T7_POTION_CLEANSE2",
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:12)"]
+     },
+     {
+      "count": 1,
+      "id": "T8_POTION_LAVA",
+      "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:0)"]
      }
     ],
     "shoes": [
      {
       "count": 6,
+      "id": "SHOES_CLOTH_SET2",
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:0,3)", "albioncompo_ss_kite_20_2026_06 (comp:0,1)", "deadlyhooker_large_scale_2026_08 (party_1:0)", "metabattle (7679:8332)"]
+     },
+     {
+      "count": 6,
       "id": "SHOES_LEATHER_MORGANA",
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:12)", "albioncompo_push_monkey_7_2026_05 (comp:1)", "cb_clonepeek_zvz20_2026_03 (comp:19)", "timothy_blap_blackzone_roam_2026_08 (blap:0,3,4)"]
+     },
+     {
+      "count": 3,
+      "id": "SHOES_PLATE_AVALON",
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:0)", "metabattle (7755:8913; 7757:8974)"]
      },
      {
       "count": 2,
@@ -1914,8 +3017,28 @@
      },
      {
       "count": 1,
+      "id": "SHOES_CLOTH_HELL",
+      "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:0)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_CLOTH_MORGANA",
+      "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:1)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_LEATHER_AVALON",
+      "sources": ["cb_kroozlt19_bomb_squad_2026_01 (comp:1)"]
+     },
+     {
+      "count": 1,
       "id": "SHOES_LEATHER_ROYAL",
       "sources": ["albioncompo_bist_roam15_2026_01 (comp:5)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_LEATHER_SET2",
+      "sources": ["cb_clonepeek_zvz20_2026_03 (comp:0)"]
      }
     ]
    }
@@ -1933,6 +3056,11 @@
        "count": 5,
        "id": "ARMOR_CLOTH_AVALON",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:6,8)", "albioncompo_ss_kite_20_2026_06 (comp:19)", "cb_clonepeek_zvz20_2026_03 (comp:7)", "metabattle (7741:9075)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:16)"]
       }
      ],
      "cape": [
@@ -1977,6 +3105,21 @@
       },
       {
        "count": 1,
+       "id": "HEAD_LEATHER_AVALON",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:7)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_LEATHER_SET1",
+       "sources": ["albioncompo_bist_roam15_2026_01 (comp:6)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_PLATE_SET1",
+       "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:16)"]
+      },
+      {
+       "count": 1,
        "id": "HEAD_PLATE_SET2",
        "sources": ["metabattle (7741:9075)"]
       }
@@ -2003,6 +3146,11 @@
        "count": 6,
        "id": "T7_POTION_REVIVE",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9)", "albioncompo_bist_roam15_2026_01 (comp:6,8)", "albioncompo_ss_kite_20_2026_06 (comp:19)", "metabattle (7741:9075)"]
+      },
+      {
+       "count": 1,
+       "id": "T7_POTION_CLEANSE2",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:10)"]
       },
       {
        "count": 1,
@@ -2047,6 +3195,11 @@
       "count": 5,
       "id": "ARMOR_CLOTH_AVALON",
       "sources": ["albioncompo_bist_roam15_2026_01 (comp:6,8)", "albioncompo_ss_kite_20_2026_06 (comp:19)", "cb_clonepeek_zvz20_2026_03 (comp:7)", "metabattle (7741:9075)"]
+     },
+     {
+      "count": 1,
+      "id": "ARMOR_CLOTH_SET2",
+      "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:16)"]
      }
     ],
     "cape": [
@@ -2091,6 +3244,21 @@
      },
      {
       "count": 1,
+      "id": "HEAD_LEATHER_AVALON",
+      "sources": ["cb_clonepeek_zvz20_2026_03 (comp:7)"]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_LEATHER_SET1",
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:6)"]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_PLATE_SET1",
+      "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:16)"]
+     },
+     {
+      "count": 1,
       "id": "HEAD_PLATE_SET2",
       "sources": ["metabattle (7741:9075)"]
      }
@@ -2120,6 +3288,11 @@
      },
      {
       "count": 1,
+      "id": "T7_POTION_CLEANSE2",
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:10)"]
+     },
+     {
+      "count": 1,
       "id": "T7_POTION_STONESKIN",
       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:7)"]
      }
@@ -2146,6 +3319,13 @@
   "main_healer": {
    "by_weapon": {
     "2H_HOLYSTAFF_HELL": {
+     "armor": [
+      {
+       "count": 1,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["metabattle (7641:8979)"]
+      }
+     ],
      "cape": [
       {
        "count": 1,
@@ -2175,11 +3355,21 @@
      "potion": [
       {
        "count": 1,
+       "id": "T6_POTION_ENERGY",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:8)"]
+      },
+      {
+       "count": 1,
        "id": "T7_POTION_STONESKIN",
        "sources": ["metabattle (7641:8979)"]
       }
      ],
      "shoes": [
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_SET1",
+       "sources": ["metabattle (7641:8979)"]
+      },
       {
        "count": 1,
        "id": "SHOES_LEATHER_ROYAL",
@@ -2193,6 +3383,11 @@
        "count": 3,
        "id": "ARMOR_CLOTH_AVALON",
        "sources": ["albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "cb_clonepeek_zvz20_2026_03 (comp:9)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)"]
       }
      ],
      "cape": [
@@ -2200,6 +3395,11 @@
        "count": 4,
        "id": "CAPEITEM_FW_LYMHURST",
        "sources": ["albioncompo_push_monkey_7_2026_05 (comp:6)", "albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)"]
+      },
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_FORTSTERLING",
+       "sources": ["albioncompo_hellgate5_2026_07 (comp:1)"]
       },
       {
        "count": 1,
@@ -2222,6 +3422,11 @@
      "head": [
       {
        "count": 2,
+       "id": "HEAD_CLOTH_ROYAL",
+       "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)"]
+      },
+      {
+       "count": 2,
        "id": "HEAD_LEATHER_SET3",
        "sources": ["albioncompo_push_monkey_7_2026_05 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)"]
       },
@@ -2229,6 +3434,11 @@
        "count": 1,
        "id": "HEAD_CLOTH_KEEPER",
        "sources": ["cb_clonepeek_zvz20_2026_03 (comp:9)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_LEATHER_AVALON",
+       "sources": ["albioncompo_roads_oneshot_2026_07 (comp:6)"]
       }
      ],
      "potion": [
@@ -2236,6 +3446,11 @@
        "count": 4,
        "id": "T7_POTION_STONESKIN",
        "sources": ["albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "cb_clonepeek_zvz20_2026_03 (comp:9)"]
+      },
+      {
+       "count": 1,
+       "id": "T7_POTION_CLEANSE2",
+       "sources": ["albioncompo_hellgate5_2026_07 (comp:1)"]
       },
       {
        "count": 1,
@@ -2267,6 +3482,11 @@
        "count": 3,
        "id": "ARMOR_CLOTH_AVALON",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:7)", "cb_clonepeek_zvz20_2026_03 (comp:6)", "metabattle (7771:8976)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["metabattle (7662:8977)", "timothy_blap_blackzone_roam_2026_08 (blap:19)"]
       }
      ],
      "cape": [
@@ -2298,6 +3518,16 @@
        "count": 2,
        "id": "HEAD_LEATHER_SET3",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:7)", "metabattle (7662:8977)"]
+      },
+      {
+       "count": 2,
+       "id": "HEAD_PLATE_SET1",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:6)", "timothy_blap_blackzone_roam_2026_08 (blap:19)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_CLOTH_SET1",
+       "sources": ["metabattle (7771:8976)"]
       }
      ],
      "potion": [
@@ -2320,6 +3550,11 @@
       },
       {
        "count": 1,
+       "id": "SHOES_CLOTH_SET1",
+       "sources": ["metabattle (7662:8977)"]
+      },
+      {
+       "count": 1,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:19)"]
       }
@@ -2331,6 +3566,11 @@
        "count": 1,
        "id": "ARMOR_CLOTH_AVALON",
        "sources": ["metabattle (7667:8978)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["deadlyhooker_large_scale_2026_08 (party_3:4)"]
       }
      ],
      "cape": [
@@ -2365,6 +3605,13 @@
        "id": "T7_POTION_STONESKIN",
        "sources": ["metabattle (7667:8978)"]
       }
+     ],
+     "shoes": [
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_SET1",
+       "sources": ["metabattle (7667:8978)"]
+      }
      ]
     },
     "MAIN_HOLYSTAFF_AVALON": {
@@ -2378,6 +3625,11 @@
        "count": 5,
        "id": "ARMOR_CLOTH_AVALON",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:6,8)", "albioncompo_ss_kite_20_2026_06 (comp:19)", "cb_clonepeek_zvz20_2026_03 (comp:7)", "metabattle (7741:9075)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:16)"]
       }
      ],
      "cape": [
@@ -2422,6 +3674,21 @@
       },
       {
        "count": 1,
+       "id": "HEAD_LEATHER_AVALON",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:7)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_LEATHER_SET1",
+       "sources": ["albioncompo_bist_roam15_2026_01 (comp:6)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_PLATE_SET1",
+       "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:16)"]
+      },
+      {
+       "count": 1,
        "id": "HEAD_PLATE_SET2",
        "sources": ["metabattle (7741:9075)"]
       }
@@ -2451,6 +3718,11 @@
       },
       {
        "count": 1,
+       "id": "T7_POTION_CLEANSE2",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:10)"]
+      },
+      {
+       "count": 1,
        "id": "T7_POTION_STONESKIN",
        "sources": ["cb_clonepeek_zvz20_2026_03 (comp:7)"]
       }
@@ -2475,6 +3747,11 @@
     }
    },
    "off_uniform": [
+    {
+     "build": "albioncompo_push_monkey_7_2026_05:comp:6",
+     "id": "ARMOR_LEATHER_AVALON",
+     "weapon": "2H_HOLYSTAFF_UNDEAD"
+    },
     {
      "build": "cb_clonepeek_zvz20_2026_03:comp:8",
      "id": "ARMOR_LEATHER_ROYAL",
@@ -2502,6 +3779,11 @@
       "count": 8,
       "id": "ARMOR_CLOTH_FEY",
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9,10)", "deadlyhooker_large_scale_2026_08 (party_1:6,7,8; party_2:5; party_3:5)"]
+     },
+     {
+      "count": 7,
+      "id": "ARMOR_CLOTH_SET2",
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "deadlyhooker_large_scale_2026_08 (party_3:4)", "metabattle (7641:8979; 7662:8977)", "timothy_blap_blackzone_roam_2026_08 (blap:16,19)"]
      }
     ],
     "cape": [
@@ -2514,6 +3796,11 @@
       "count": 11,
       "id": "CAPEITEM_SMUGGLER",
       "sources": ["deadlyhooker_large_scale_2026_08 (party_1:6,7,8; party_2:5,7; party_3:4,5)", "timothy_blap_blackzone_roam_2026_08 (blap:16,17,18,19)"]
+     },
+     {
+      "count": 1,
+      "id": "CAPEITEM_FW_FORTSTERLING",
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:1)"]
      }
     ],
     "food": [
@@ -2545,9 +3832,34 @@
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:10)", "albioncompo_ss_kite_20_2026_06 (comp:19)", "cb_clonepeek_zvz20_2026_03 (comp:8,9)"]
      },
      {
+      "count": 3,
+      "id": "HEAD_PLATE_SET1",
+      "sources": ["cb_clonepeek_zvz20_2026_03 (comp:6)", "timothy_blap_blackzone_roam_2026_08 (blap:16,19)"]
+     },
+     {
+      "count": 2,
+      "id": "HEAD_CLOTH_ROYAL",
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:1)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)"]
+     },
+     {
+      "count": 2,
+      "id": "HEAD_LEATHER_AVALON",
+      "sources": ["albioncompo_roads_oneshot_2026_07 (comp:6)", "cb_clonepeek_zvz20_2026_03 (comp:7)"]
+     },
+     {
       "count": 2,
       "id": "HEAD_PLATE_SET2",
       "sources": ["metabattle (7641:8979; 7741:9075)"]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_CLOTH_SET1",
+      "sources": ["metabattle (7771:8976)"]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_LEATHER_SET1",
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:6)"]
      }
     ],
     "offhand": [
@@ -2577,6 +3889,16 @@
       "count": 8,
       "id": "T7_POTION_STONESKIN",
       "sources": ["albioncompo_roads_oneshot_2026_07 (comp:6)", "albioncompo_sob_blaze_os_2026_06 (comp:6)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:6)", "cb_clonepeek_zvz20_2026_03 (comp:7,9)", "metabattle (7641:8979; 7662:8977; 7667:8978)"]
+     },
+     {
+      "count": 2,
+      "id": "T7_POTION_CLEANSE2",
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:10)", "albioncompo_hellgate5_2026_07 (comp:1)"]
+     },
+     {
+      "count": 1,
+      "id": "T6_POTION_ENERGY",
+      "sources": ["cb_clonepeek_zvz20_2026_03 (comp:8)"]
      }
     ],
     "shoes": [
@@ -2594,6 +3916,11 @@
       "count": 5,
       "id": "SHOES_LEATHER_MORGANA",
       "sources": ["albioncompo_push_monkey_7_2026_05 (comp:6)", "timothy_blap_blackzone_roam_2026_08 (blap:16,17,18,19)"]
+     },
+     {
+      "count": 3,
+      "id": "SHOES_CLOTH_SET1",
+      "sources": ["metabattle (7641:8979; 7662:8977; 7667:8978)"]
      }
     ]
    }
@@ -2653,9 +3980,24 @@
      ],
      "shoes": [
       {
+       "count": 2,
+       "id": "SHOES_PLATE_AVALON",
+       "sources": ["albioncompo_bist_roam15_2026_01 (comp:4)", "metabattle (7758:8614)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_SET2",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:6)"]
+      },
+      {
        "count": 1,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:6)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_PLATE_SET3",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:3)"]
       }
      ]
     }
@@ -2733,9 +4075,24 @@
     ],
     "shoes": [
      {
+      "count": 2,
+      "id": "SHOES_PLATE_AVALON",
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:4)", "metabattle (7758:8614)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_CLOTH_SET2",
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:6)"]
+     },
+     {
       "count": 1,
       "id": "SHOES_LEATHER_MORGANA",
       "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:6)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_PLATE_SET3",
+      "sources": ["cb_clonepeek_zvz20_2026_03 (comp:3)"]
      }
     ]
    }
@@ -2743,6 +4100,23 @@
   "ranged_aoe": {
    "by_weapon": {
     "2H_BOW_HELL": {
+     "armor": [
+      {
+       "count": 6,
+       "id": "ARMOR_LEATHER_SET3",
+       "sources": ["cb_kroozlt19_bomb_squad_2026_01 (comp:0,3,4,5,6,7)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_CLOTH_SET3",
+       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:18)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_LEATHER_SET2",
+       "sources": ["metabattle (7725:8930)"]
+      }
+     ],
      "cape": [
       {
        "count": 3,
@@ -2753,6 +4127,11 @@
        "count": 1,
        "id": "CAPEITEM_FW_LYMHURST",
        "sources": ["metabattle (7725:8930)"]
+      },
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:18)"]
       }
      ],
      "food": [
@@ -2763,6 +4142,16 @@
       }
      ],
      "head": [
+      {
+       "count": 6,
+       "id": "HEAD_PLATE_SET1",
+       "sources": ["cb_kroozlt19_bomb_squad_2026_01 (comp:0,3,4,5,6,7)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_CLOTH_AVALON",
+       "sources": ["metabattle (7725:8930)"]
+      },
       {
        "count": 1,
        "id": "HEAD_LEATHER_SET3",
@@ -2783,9 +4172,19 @@
      ],
      "shoes": [
       {
+       "count": 6,
+       "id": "SHOES_LEATHER_AVALON",
+       "sources": ["cb_kroozlt19_bomb_squad_2026_01 (comp:0,3,4,5,6,7)"]
+      },
+      {
        "count": 3,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["deadlyhooker_large_scale_2026_08 (party_2:13; party_3:12,13)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_ROYAL",
+       "sources": ["metabattle (7725:8930)"]
       },
       {
        "count": 1,
@@ -2795,6 +4194,13 @@
      ]
     },
     "2H_CROSSBOWLARGE_MORGANA": {
+     "armor": [
+      {
+       "count": 1,
+       "id": "ARMOR_LEATHER_SET2",
+       "sources": ["metabattle (7780:8938)"]
+      }
+     ],
      "cape": [
       {
        "count": 1,
@@ -2822,6 +4228,13 @@
        "id": "T7_POTION_REVIVE",
        "sources": ["metabattle (7780:8938)"]
       }
+     ],
+     "shoes": [
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_ROYAL",
+       "sources": ["metabattle (7780:8938)"]
+      }
      ]
     },
     "2H_CROSSBOW_CANNON_AVALON": {
@@ -2830,6 +4243,11 @@
        "count": 1,
        "id": "ARMOR_CLOTH_FEY",
        "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:5)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["metabattle (7712:8935)"]
       }
      ],
      "cape": [
@@ -2837,6 +4255,11 @@
        "count": 1,
        "id": "CAPEITEM_FW_LYMHURST",
        "sources": ["metabattle (7712:8935)"]
+      },
+      {
+       "count": 1,
+       "id": "CAPEITEM_MORGANA",
+       "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:5)"]
       }
      ],
      "food": [
@@ -2849,11 +4272,21 @@
      "head": [
       {
        "count": 1,
+       "id": "HEAD_CLOTH_AVALON",
+       "sources": ["metabattle (7712:8935)"]
+      },
+      {
+       "count": 1,
        "id": "HEAD_LEATHER_SET3",
        "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:5)"]
       }
      ],
      "potion": [
+      {
+       "count": 1,
+       "id": "T7_POTION_CLEANSE2",
+       "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:5)"]
+      },
       {
        "count": 1,
        "id": "T7_POTION_REVIVE",
@@ -2863,6 +4296,11 @@
      "shoes": [
       {
        "count": 1,
+       "id": "SHOES_CLOTH_ROYAL",
+       "sources": ["metabattle (7712:8935)"]
+      },
+      {
+       "count": 1,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:5)"]
       }
@@ -2870,6 +4308,11 @@
     },
     "2H_FIRE_RINGPAIR_AVALON": {
      "armor": [
+      {
+       "count": 3,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["albioncompo_hellgate5_2026_07 (comp:2)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:3)", "cb_clonepeek_zvz20_2026_03 (comp:16)"]
+      },
       {
        "count": 2,
        "id": "ARMOR_CLOTH_FEY",
@@ -2886,6 +4329,11 @@
        "count": 3,
        "id": "CAPEITEM_FW_LYMHURST",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:19)", "albioncompo_hellgate5_2026_07 (comp:2)", "metabattle (7726:8960)"]
+      },
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_THETFORD",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:3)"]
       },
       {
        "count": 1,
@@ -2910,6 +4358,21 @@
        "count": 3,
        "id": "HEAD_LEATHER_SET3",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:19)", "cb_clonepeek_zvz20_2026_03 (comp:16)", "deadlyhooker_large_scale_2026_08 (party_1:19)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_CLOTH_FEY",
+       "sources": ["albioncompo_hellgate5_2026_07 (comp:2)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_LEATHER_AVALON",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:3)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_PLATE_AVALON",
+       "sources": ["metabattle (7726:8960)"]
       }
      ],
      "potion": [
@@ -2929,6 +4392,11 @@
        "count": 2,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["cb_clonepeek_zvz20_2026_03 (comp:16)", "deadlyhooker_large_scale_2026_08 (party_1:19)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_SET1",
+       "sources": ["metabattle (7726:8960)"]
       },
       {
        "count": 1,
@@ -2969,6 +4437,13 @@
        "sources": ["metabattle (7754:8968)"]
       }
      ],
+     "head": [
+      {
+       "count": 1,
+       "id": "HEAD_PLATE_AVALON",
+       "sources": ["metabattle (7754:8968)"]
+      }
+     ],
      "potion": [
       {
        "count": 1,
@@ -2990,9 +4465,19 @@
        "count": 1,
        "id": "ARMOR_CLOTH_AVALON",
        "sources": ["albioncompo_roads_oneshot_2026_07 (comp:4)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:4)"]
       }
      ],
      "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_THETFORD",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:4)"]
+      },
       {
        "count": 1,
        "id": "CAPEITEM_SMUGGLER",
@@ -3011,9 +4496,19 @@
        "count": 1,
        "id": "HEAD_CLOTH_KEEPER",
        "sources": ["albioncompo_roads_oneshot_2026_07 (comp:4)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_LEATHER_AVALON",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:4)"]
       }
      ],
      "potion": [
+      {
+       "count": 1,
+       "id": "T7_POTION_CLEANSE2",
+       "sources": ["albioncompo_roads_oneshot_2026_07 (comp:4)"]
+      },
       {
        "count": 1,
        "id": "T7_POTION_STONESKIN",
@@ -3036,6 +4531,13 @@
        "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:3)"]
       }
      ],
+     "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_MORGANA",
+       "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:3)"]
+      }
+     ],
      "food": [
       {
        "count": 1,
@@ -3047,6 +4549,20 @@
       {
        "count": 1,
        "id": "HEAD_CLOTH_KEEPER",
+       "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:3)"]
+      }
+     ],
+     "potion": [
+      {
+       "count": 1,
+       "id": "T7_POTION_CLEANSE2",
+       "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:3)"]
+      }
+     ],
+     "shoes": [
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_ROYAL",
        "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:3)"]
       }
      ]
@@ -3070,6 +4586,11 @@
       }
      ],
      "cape": [
+      {
+       "count": 3,
+       "id": "CAPEITEM_MORGANA",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:13,14)", "albioncompo_ss_kite_20_2026_06 (comp:9)"]
+      },
       {
        "count": 2,
        "id": "CAPEITEM_FW_LYMHURST",
@@ -3103,6 +4624,11 @@
      "potion": [
       {
        "count": 2,
+       "id": "T7_POTION_CLEANSE2",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:13,14)"]
+      },
+      {
+       "count": 2,
        "id": "T7_POTION_REVIVE",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:9)", "albioncompo_ss_kite_20_2026_06 (comp:9)"]
       },
@@ -3127,6 +4653,11 @@
        "count": 1,
        "id": "SHOES_LEATHER_SET1",
        "sources": ["cb_clonepeek_zvz20_2026_03 (comp:11)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_PLATE_AVALON",
+       "sources": ["metabattle (7698:8971)"]
       }
      ]
     },
@@ -3135,6 +4666,13 @@
       {
        "count": 1,
        "id": "ARMOR_CLOTH_FEY",
+       "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:4)"]
+      }
+     ],
+     "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_MORGANA",
        "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:4)"]
       }
      ],
@@ -3152,6 +4690,13 @@
        "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:4)"]
       }
      ],
+     "potion": [
+      {
+       "count": 1,
+       "id": "T7_POTION_CLEANSE2",
+       "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:4)"]
+      }
+     ],
      "shoes": [
       {
        "count": 1,
@@ -3161,6 +4706,25 @@
      ]
     },
     "2H_LONGBOW": {
+     "armor": [
+      {
+       "count": 1,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["metabattle (7699:8928)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_LEATHER_AVALON",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:10)"]
+      }
+     ],
+     "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["metabattle (7699:8928)"]
+      }
+     ],
      "food": [
       {
        "count": 1,
@@ -3191,6 +4755,18 @@
        "id": "T7_POTION_REVIVE",
        "sources": ["cb_clonepeek_zvz20_2026_03 (comp:10)", "metabattle (7699:8928)"]
       }
+     ],
+     "shoes": [
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_ROYAL",
+       "sources": ["metabattle (7699:8928)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_PLATE_UNDEAD",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:10)"]
+      }
      ]
     },
     "MAIN_CURSEDSTAFF_CRYSTAL": {
@@ -3199,6 +4775,16 @@
        "count": 3,
        "id": "ARMOR_CLOTH_AVALON",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:18)", "albioncompo_roads_oneshot_2026_07 (comp:3)", "albioncompo_ss_kite_20_2026_06 (comp:14)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:5)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_CLOTH_SET3",
+       "sources": ["albioncompo_hellgate5_2026_07 (comp:3)"]
       }
      ],
      "cape": [
@@ -3206,6 +4792,11 @@
        "count": 5,
        "id": "CAPEITEM_SMUGGLER",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:18)", "albioncompo_push_monkey_7_2026_05 (comp:2)", "albioncompo_roads_oneshot_2026_07 (comp:3)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:5)", "albioncompo_ss_kite_20_2026_06 (comp:14)"]
+      },
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_THETFORD",
+       "sources": ["albioncompo_hellgate5_2026_07 (comp:3)"]
       }
      ],
      "food": [
@@ -3233,6 +4824,11 @@
       },
       {
        "count": 1,
+       "id": "HEAD_LEATHER_SET2",
+       "sources": ["albioncompo_roads_oneshot_2026_07 (comp:3)"]
+      },
+      {
+       "count": 1,
        "id": "HEAD_PLATE_SET3",
        "sources": ["albioncompo_push_monkey_7_2026_05 (comp:2)"]
       }
@@ -3255,6 +4851,11 @@
       }
      ],
      "potion": [
+      {
+       "count": 2,
+       "id": "T7_POTION_CLEANSE2",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:18)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:5)"]
+      },
       {
        "count": 2,
        "id": "T7_POTION_REVIVE",
@@ -3305,6 +4906,11 @@
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:13,14)", "albioncompo_sob_blaze_os_2026_06 (comp:4,5)", "deadlyhooker_large_scale_2026_08 (party_1:19)", "metabattle (7726:8960; 7754:8968)"]
      },
      {
+      "count": 7,
+      "id": "ARMOR_CLOTH_SET2",
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:2)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:3,4,5)", "cb_clonepeek_zvz20_2026_03 (comp:16)", "metabattle (7699:8928; 7712:8935)"]
+     },
+     {
       "count": 6,
       "id": "ARMOR_CLOTH_AVALON",
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:18,19)", "albioncompo_roads_oneshot_2026_07 (comp:3,4)", "albioncompo_ss_kite_20_2026_06 (comp:9,14)"]
@@ -3313,6 +4919,26 @@
       "count": 6,
       "id": "ARMOR_CLOTH_SET1",
       "sources": ["albioncompo_bist_roam15_2026_01 (comp:9)", "albioncompo_sob_blaze_os_2026_06 (comp:3)", "cb_clonepeek_zvz20_2026_03 (comp:11)", "deadlyhooker_large_scale_2026_08 (party_1:12,13)", "metabattle (7698:8971)"]
+     },
+     {
+      "count": 6,
+      "id": "ARMOR_LEATHER_SET3",
+      "sources": ["cb_kroozlt19_bomb_squad_2026_01 (comp:0,3,4,5,6,7)"]
+     },
+     {
+      "count": 2,
+      "id": "ARMOR_CLOTH_SET3",
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:3)", "albioncompo_ss_kite_20_2026_06 (comp:18)"]
+     },
+     {
+      "count": 2,
+      "id": "ARMOR_LEATHER_SET2",
+      "sources": ["metabattle (7725:8930; 7780:8938)"]
+     },
+     {
+      "count": 1,
+      "id": "ARMOR_LEATHER_AVALON",
+      "sources": ["cb_clonepeek_zvz20_2026_03 (comp:10)"]
      }
     ],
     "cape": [
@@ -3325,6 +4951,21 @@
       "count": 9,
       "id": "CAPEITEM_FW_LYMHURST",
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:19)", "albioncompo_bist_roam15_2026_01 (comp:9)", "albioncompo_hellgate5_2026_07 (comp:2)", "metabattle (7698:8971; 7712:8935; 7725:8930; 7726:8960; 7754:8968; 7780:8938)"]
+     },
+     {
+      "count": 6,
+      "id": "CAPEITEM_MORGANA",
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:13,14)", "albioncompo_sob_blaze_os_2026_06 (comp:3,4,5)", "albioncompo_ss_kite_20_2026_06 (comp:9)"]
+     },
+     {
+      "count": 3,
+      "id": "CAPEITEM_FW_THETFORD",
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:3)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:3,4)"]
+     },
+     {
+      "count": 2,
+      "id": "CAPEITEM_FW_MARTLOCK",
+      "sources": ["albioncompo_ss_kite_20_2026_06 (comp:18)", "metabattle (7699:8928)"]
      }
     ],
     "food": [
@@ -3351,9 +4992,29 @@
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:13,14,18,19)", "albioncompo_bist_roam15_2026_01 (comp:9)", "albioncompo_hellgate5_2026_07 (comp:3)", "albioncompo_sob_blaze_os_2026_06 (comp:4,5)", "albioncompo_ss_kite_20_2026_06 (comp:9,14)", "cb_clonepeek_zvz20_2026_03 (comp:11,16)", "deadlyhooker_large_scale_2026_08 (party_1:12,13,19; party_2:13)", "metabattle (7698:8971; 7699:8928)"]
      },
      {
+      "count": 6,
+      "id": "HEAD_PLATE_SET1",
+      "sources": ["cb_kroozlt19_bomb_squad_2026_01 (comp:0,3,4,5,6,7)"]
+     },
+     {
       "count": 3,
       "id": "HEAD_CLOTH_KEEPER",
       "sources": ["albioncompo_roads_oneshot_2026_07 (comp:4)", "albioncompo_sob_blaze_os_2026_06 (comp:3)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:5)"]
+     },
+     {
+      "count": 2,
+      "id": "HEAD_CLOTH_AVALON",
+      "sources": ["metabattle (7712:8935; 7725:8930)"]
+     },
+     {
+      "count": 2,
+      "id": "HEAD_LEATHER_AVALON",
+      "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:3,4)"]
+     },
+     {
+      "count": 2,
+      "id": "HEAD_PLATE_AVALON",
+      "sources": ["metabattle (7726:8960; 7754:8968)"]
      },
      {
       "count": 2,
@@ -3362,8 +5023,18 @@
      },
      {
       "count": 1,
+      "id": "HEAD_CLOTH_FEY",
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:2)"]
+     },
+     {
+      "count": 1,
       "id": "HEAD_LEATHER_FEY",
       "sources": ["metabattle (7780:8938)"]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_LEATHER_SET2",
+      "sources": ["albioncompo_roads_oneshot_2026_07 (comp:3)"]
      },
      {
       "count": 1,
@@ -3398,6 +5069,11 @@
       "count": 9,
       "id": "T7_POTION_STONESKIN",
       "sources": ["albioncompo_hellgate5_2026_07 (comp:2,3)", "albioncompo_roads_oneshot_2026_07 (comp:3)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:3,4)", "cb_clonepeek_zvz20_2026_03 (comp:11)", "metabattle (7698:8971; 7726:8960; 7754:8968)"]
+     },
+     {
+      "count": 8,
+      "id": "T7_POTION_CLEANSE2",
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:13,14,18)", "albioncompo_roads_oneshot_2026_07 (comp:4)", "albioncompo_sob_blaze_os_2026_06 (comp:3,4,5)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:5)"]
      }
     ],
     "shoes": [
@@ -3405,6 +5081,16 @@
       "count": 14,
       "id": "SHOES_LEATHER_MORGANA",
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:13,14)", "albioncompo_bist_roam15_2026_01 (comp:9)", "albioncompo_push_monkey_7_2026_05 (comp:2)", "albioncompo_sob_blaze_os_2026_06 (comp:4,5)", "cb_clonepeek_zvz20_2026_03 (comp:16)", "deadlyhooker_large_scale_2026_08 (party_1:12,13,19; party_2:13; party_3:12,13)", "metabattle (7754:8968)"]
+     },
+     {
+      "count": 6,
+      "id": "SHOES_LEATHER_AVALON",
+      "sources": ["cb_kroozlt19_bomb_squad_2026_01 (comp:0,3,4,5,6,7)"]
+     },
+     {
+      "count": 5,
+      "id": "SHOES_CLOTH_ROYAL",
+      "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:3)", "metabattle (7699:8928; 7712:8935; 7725:8930; 7780:8938)"]
      },
      {
       "count": 5,
@@ -3420,6 +5106,21 @@
       "count": 3,
       "id": "SHOES_LEATHER_SET1",
       "sources": ["albioncompo_hellgate5_2026_07 (comp:2,3)", "cb_clonepeek_zvz20_2026_03 (comp:11)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_CLOTH_SET1",
+      "sources": ["metabattle (7726:8960)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_PLATE_AVALON",
+      "sources": ["metabattle (7698:8971)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_PLATE_UNDEAD",
+      "sources": ["cb_clonepeek_zvz20_2026_03 (comp:10)"]
      }
     ]
    }
@@ -3470,13 +5171,38 @@
        "count": 4,
        "id": "T7_POTION_REVIVE",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:5)", "albioncompo_bist_roam15_2026_01 (comp:3)", "albioncompo_ss_kite_20_2026_06 (comp:2,4)"]
+      },
+      {
+       "count": 1,
+       "id": "T7_POTION_ACID",
+       "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:1)"]
+      },
+      {
+       "count": 1,
+       "id": "T8_POTION_TORNADO",
+       "sources": ["albioncompo_roads_oneshot_2026_07 (comp:2)"]
       }
      ],
      "shoes": [
       {
        "count": 2,
+       "id": "SHOES_CLOTH_SET2",
+       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:2,4)"]
+      },
+      {
+       "count": 2,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:5)", "albioncompo_roads_oneshot_2026_07 (comp:2)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_KEEPER",
+       "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:1)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_PLATE_AVALON",
+       "sources": ["albioncompo_bist_roam15_2026_01 (comp:3)"]
       }
      ]
     },
@@ -3486,6 +5212,11 @@
        "count": 3,
        "id": "CAPEITEM_SMUGGLER",
        "sources": ["deadlyhooker_large_scale_2026_08 (party_2:8; party_3:7)", "timothy_blap_blackzone_roam_2026_08 (blap:5)"]
+      },
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["metabattle (7661:8910)"]
       }
      ],
      "food": [
@@ -3515,6 +5246,11 @@
       }
      ],
      "shoes": [
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_SET1",
+       "sources": ["metabattle (7661:8910)"]
+      },
       {
        "count": 1,
        "id": "SHOES_LEATHER_MORGANA",
@@ -3574,6 +5310,11 @@
      "potion": [
       {
        "count": 1,
+       "id": "T7_POTION_CLEANSE2",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:11)"]
+      },
+      {
+       "count": 1,
        "id": "T7_POTION_REVIVE",
        "sources": ["albioncompo_ss_kite_20_2026_06 (comp:5)"]
       }
@@ -3587,6 +5328,13 @@
      ]
     },
     "2H_SHAPESHIFTER_SET2": {
+     "armor": [
+      {
+       "count": 1,
+       "id": "ARMOR_PLATE_ROYAL",
+       "sources": ["albioncompo_hellgate5_2026_07 (comp:4)"]
+      }
+     ],
      "cape": [
       {
        "count": 4,
@@ -3606,6 +5354,11 @@
        "count": 4,
        "id": "HEAD_LEATHER_SET3",
        "sources": ["cb_clonepeek_zvz20_2026_03 (comp:4)", "deadlyhooker_large_scale_2026_08 (party_2:12; party_3:10)", "timothy_blap_blackzone_roam_2026_08 (blap:7)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_LEATHER_AVALON",
+       "sources": ["albioncompo_hellgate5_2026_07 (comp:4)"]
       }
      ],
      "potion": [
@@ -3613,6 +5366,11 @@
        "count": 1,
        "id": "T7_POTION_REVIVE",
        "sources": ["cb_clonepeek_zvz20_2026_03 (comp:4)"]
+      },
+      {
+       "count": 1,
+       "id": "T8_POTION_LAVA",
+       "sources": ["albioncompo_hellgate5_2026_07 (comp:4)"]
       }
      ],
      "shoes": [
@@ -3625,6 +5383,11 @@
        "count": 1,
        "id": "SHOES_LEATHER_ROYAL",
        "sources": ["albioncompo_hellgate5_2026_07 (comp:4)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_PLATE_AVALON",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:4)"]
       }
      ]
     },
@@ -3641,6 +5404,11 @@
        "count": 4,
        "id": "CAPEITEM_SMUGGLER",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:4)", "deadlyhooker_large_scale_2026_08 (party_1:1; party_2:3; party_3:1)"]
+      },
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:6)"]
       }
      ],
      "food": [
@@ -3660,6 +5428,11 @@
        "count": 2,
        "id": "HEAD_PLATE_KEEPER",
        "sources": ["albioncompo_ss_kite_20_2026_06 (comp:6)", "deadlyhooker_large_scale_2026_08 (party_1:1)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_PLATE_HELL",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:4)"]
       }
      ],
      "offhand": [
@@ -3683,6 +5456,13 @@
       {
        "count": 2,
        "id": "T7_POTION_REVIVE",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:4)", "albioncompo_ss_kite_20_2026_06 (comp:6)"]
+      }
+     ],
+     "shoes": [
+      {
+       "count": 2,
+       "id": "SHOES_CLOTH_SET2",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:4)", "albioncompo_ss_kite_20_2026_06 (comp:6)"]
       }
      ]
@@ -3727,6 +5507,11 @@
       "count": 1,
       "id": "ARMOR_CLOTH_FEY",
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:11)"]
+     },
+     {
+      "count": 1,
+      "id": "ARMOR_PLATE_ROYAL",
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:4)"]
      }
     ],
     "cape": [
@@ -3739,6 +5524,11 @@
       "count": 3,
       "id": "CAPEITEM_FW_LYMHURST",
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:11)", "albioncompo_bist_roam15_2026_01 (comp:3)", "albioncompo_ss_kite_20_2026_06 (comp:5)"]
+     },
+     {
+      "count": 2,
+      "id": "CAPEITEM_FW_MARTLOCK",
+      "sources": ["albioncompo_ss_kite_20_2026_06 (comp:6)", "metabattle (7661:8910)"]
      }
     ],
     "food": [
@@ -3768,6 +5558,16 @@
       "count": 1,
       "id": "HEAD_CLOTH_KEEPER",
       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:5)"]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_LEATHER_AVALON",
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:4)"]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_PLATE_HELL",
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:4)"]
      }
     ],
     "offhand": [
@@ -3795,11 +5595,36 @@
      },
      {
       "count": 1,
+      "id": "T7_POTION_ACID",
+      "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:1)"]
+     },
+     {
+      "count": 1,
+      "id": "T7_POTION_CLEANSE2",
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:11)"]
+     },
+     {
+      "count": 1,
       "id": "T7_POTION_STONESKIN",
       "sources": ["metabattle (7661:8910)"]
+     },
+     {
+      "count": 1,
+      "id": "T8_POTION_LAVA",
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:4)"]
+     },
+     {
+      "count": 1,
+      "id": "T8_POTION_TORNADO",
+      "sources": ["albioncompo_roads_oneshot_2026_07 (comp:2)"]
      }
     ],
     "shoes": [
+     {
+      "count": 4,
+      "id": "SHOES_CLOTH_SET2",
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:4)", "albioncompo_ss_kite_20_2026_06 (comp:2,4,6)"]
+     },
      {
       "count": 4,
       "id": "SHOES_LEATHER_MORGANA",
@@ -3809,6 +5634,21 @@
       "count": 3,
       "id": "SHOES_LEATHER_ROYAL",
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:11)", "albioncompo_hellgate5_2026_07 (comp:4)", "albioncompo_ss_kite_20_2026_06 (comp:5)"]
+     },
+     {
+      "count": 2,
+      "id": "SHOES_PLATE_AVALON",
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:3)", "cb_clonepeek_zvz20_2026_03 (comp:4)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_CLOTH_KEEPER",
+      "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:1)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_CLOTH_SET1",
+      "sources": ["metabattle (7661:8910)"]
      },
      {
       "count": 1,
@@ -3824,11 +5664,22 @@
      "armor": [
       {
        "count": 1,
+       "id": "ARMOR_PLATE_AVALON",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:1)"]
+      },
+      {
+       "count": 1,
        "id": "ARMOR_PLATE_SET2",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:1)"]
       }
      ],
-     "cape": [],
+     "cape": [
+      {
+       "count": 2,
+       "id": "CAPEITEM_FW_BRIDGEWATCH",
+       "sources": ["albioncompo_hellgate5_2026_07 (comp:0)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:1)"]
+      }
+     ],
      "food": [
       {
        "count": 2,
@@ -3854,6 +5705,11 @@
       },
       {
        "count": 1,
+       "id": "HEAD_LEATHER_AVALON",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:1)"]
+      },
+      {
+       "count": 1,
        "id": "HEAD_LEATHER_SET3",
        "sources": ["albioncompo_hellgate5_2026_07 (comp:0)"]
       },
@@ -3873,6 +5729,11 @@
        "count": 1,
        "id": "T7_POTION_SLOWFIELD",
        "sources": ["albioncompo_hellgate5_2026_07 (comp:0)"]
+      },
+      {
+       "count": 1,
+       "id": "T8_POTION_LAVA",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:1)"]
       }
      ],
      "shoes": [
@@ -3899,10 +5760,38 @@
      ]
     },
     "2H_QUARTERSTAFF_AVALON": {
+     "armor": [
+      {
+       "count": 1,
+       "id": "ARMOR_PLATE_UNDEAD",
+       "sources": ["metabattle (7690:9142)"]
+      }
+     ],
+     "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_DEMON",
+       "sources": ["metabattle (7690:9142)"]
+      }
+     ],
      "food": [
       {
        "count": 1,
        "id": "T7_MEAL_OMELETTE",
+       "sources": ["metabattle (7690:9142)"]
+      }
+     ],
+     "potion": [
+      {
+       "count": 1,
+       "id": "T8_POTION_COOLDOWN",
+       "sources": ["metabattle (7690:9142)"]
+      }
+     ],
+     "shoes": [
+      {
+       "count": 1,
+       "id": "SHOES_LEATHER_SET2",
        "sources": ["metabattle (7690:9142)"]
       }
      ]
@@ -3913,9 +5802,24 @@
        "count": 2,
        "id": "ARMOR_PLATE_FEY",
        "sources": ["metabattle (7700:8988)", "timothy_blap_blackzone_roam_2026_08 (blap:2)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_PLATE_AVALON",
+       "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:0)"]
       }
      ],
      "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_BRIDGEWATCH",
+       "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:0)"]
+      },
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["metabattle (7700:8988)"]
+      },
       {
        "count": 1,
        "id": "CAPEITEM_SMUGGLER",
@@ -3946,18 +5850,39 @@
        "count": 1,
        "id": "T7_POTION_REVIVE",
        "sources": ["metabattle (7700:8988)"]
+      },
+      {
+       "count": 1,
+       "id": "T8_POTION_TORNADO",
+       "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:0)"]
       }
      ],
      "shoes": [
       {
        "count": 1,
+       "id": "SHOES_CLOTH_SET2",
+       "sources": ["metabattle (7700:8988)"]
+      },
+      {
+       "count": 1,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:2)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_PLATE_KEEPER",
+       "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:0)"]
       }
      ]
     },
     "2H_SHAPESHIFTER_SET3": {
-     "cape": [],
+     "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_CAERLEON",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:2)"]
+      }
+     ],
      "food": [
       {
        "count": 1,
@@ -3970,11 +5895,28 @@
        "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:2)"]
       }
      ],
+     "head": [
+      {
+       "count": 1,
+       "id": "HEAD_LEATHER_AVALON",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:2)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_PLATE_AVALON",
+       "sources": ["metabattle (7767:8989)"]
+      }
+     ],
      "potion": [
       {
        "count": 1,
        "id": "T7_POTION_STONESKIN",
        "sources": ["metabattle (7767:8989)"]
+      },
+      {
+       "count": 1,
+       "id": "T8_POTION_LAVA",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:2)"]
       }
      ],
      "shoes": [
@@ -3982,10 +5924,22 @@
        "count": 1,
        "id": "SHOES_LEATHER_ROYAL",
        "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:2)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_PLATE_UNDEAD",
+       "sources": ["metabattle (7767:8989)"]
       }
      ]
     },
     "MAIN_MACE_HELL": {
+     "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:12)"]
+      }
+     ],
      "food": [
       {
        "count": 1,
@@ -4007,6 +5961,13 @@
        "id": "T7_POTION_REVIVE",
        "sources": ["albioncompo_ss_kite_20_2026_06 (comp:12)"]
       }
+     ],
+     "shoes": [
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_SET2",
+       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:12)"]
+      }
      ]
     },
     "MAIN_ROCKMACE_KEEPER": {
@@ -4022,6 +5983,11 @@
        "count": 7,
        "id": "CAPEITEM_SMUGGLER",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:1,2)", "albioncompo_roads_oneshot_2026_07 (comp:1)", "albioncompo_sob_blaze_os_2026_06 (comp:2)", "deadlyhooker_large_scale_2026_08 (party_1:2,3; party_3:2)"]
+      },
+      {
+       "count": 2,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:8,10)"]
       }
      ],
      "food": [
@@ -4070,9 +6036,34 @@
        "count": 5,
        "id": "T7_POTION_REVIVE",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:1,2)", "albioncompo_ss_kite_20_2026_06 (comp:8,10)", "cb_clonepeek_zvz20_2026_03 (comp:2)"]
+      },
+      {
+       "count": 1,
+       "id": "T8_POTION_LAVA",
+       "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:2)"]
+      },
+      {
+       "count": 1,
+       "id": "T8_POTION_TORNADO",
+       "sources": ["albioncompo_roads_oneshot_2026_07 (comp:1)"]
       }
      ],
      "shoes": [
+      {
+       "count": 2,
+       "id": "SHOES_CLOTH_SET2",
+       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:8,10)"]
+      },
+      {
+       "count": 2,
+       "id": "SHOES_PLATE_AVALON",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:1,2)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_HELL",
+       "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:2)"]
+      },
       {
        "count": 1,
        "id": "SHOES_LEATHER_ROYAL",
@@ -4127,6 +6118,11 @@
      },
      {
       "count": 2,
+      "id": "ARMOR_PLATE_AVALON",
+      "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:0)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:1)"]
+     },
+     {
+      "count": 2,
       "effect": "weaken_aura",
       "id": "ARMOR_PLATE_SET3",
       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:1)", "timothy_blap_blackzone_roam_2026_08 (blap:1)"]
@@ -4135,6 +6131,11 @@
       "count": 1,
       "id": "ARMOR_PLATE_SET2",
       "sources": ["albioncompo_bist_roam15_2026_01 (comp:1)"]
+     },
+     {
+      "count": 1,
+      "id": "ARMOR_PLATE_UNDEAD",
+      "sources": ["metabattle (7690:9142)"]
      }
     ],
     "cape": [
@@ -4142,6 +6143,26 @@
       "count": 8,
       "id": "CAPEITEM_SMUGGLER",
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:1,2)", "albioncompo_roads_oneshot_2026_07 (comp:1)", "albioncompo_sob_blaze_os_2026_06 (comp:2)", "deadlyhooker_large_scale_2026_08 (party_1:2,3; party_3:2)", "timothy_blap_blackzone_roam_2026_08 (blap:2)"]
+     },
+     {
+      "count": 4,
+      "id": "CAPEITEM_FW_MARTLOCK",
+      "sources": ["albioncompo_ss_kite_20_2026_06 (comp:8,10,12)", "metabattle (7700:8988)"]
+     },
+     {
+      "count": 3,
+      "id": "CAPEITEM_FW_BRIDGEWATCH",
+      "sources": ["albioncompo_hellgate5_2026_07 (comp:0)", "albioncompo_sob_blaze_os_2026_06 (comp:0)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:1)"]
+     },
+     {
+      "count": 1,
+      "id": "CAPEITEM_DEMON",
+      "sources": ["metabattle (7690:9142)"]
+     },
+     {
+      "count": 1,
+      "id": "CAPEITEM_FW_CAERLEON",
+      "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:2)"]
      }
     ],
     "food": [
@@ -4176,6 +6197,16 @@
       "count": 3,
       "id": "HEAD_PLATE_KEEPER",
       "sources": ["albioncompo_bist_roam15_2026_01 (comp:1)", "albioncompo_roads_oneshot_2026_07 (comp:1)", "albioncompo_sob_blaze_os_2026_06 (comp:2)"]
+     },
+     {
+      "count": 2,
+      "id": "HEAD_LEATHER_AVALON",
+      "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:1,2)"]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_PLATE_AVALON",
+      "sources": ["metabattle (7767:8989)"]
      }
     ],
     "offhand": [
@@ -4207,6 +6238,16 @@
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:1,2)", "albioncompo_bist_roam15_2026_01 (comp:1)", "albioncompo_ss_kite_20_2026_06 (comp:8,10,12)", "cb_clonepeek_zvz20_2026_03 (comp:1,2)", "metabattle (7700:8988)"]
      },
      {
+      "count": 3,
+      "id": "T8_POTION_LAVA",
+      "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:2)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:1,2)"]
+     },
+     {
+      "count": 2,
+      "id": "T8_POTION_TORNADO",
+      "sources": ["albioncompo_roads_oneshot_2026_07 (comp:1)", "albioncompo_sob_blaze_os_2026_06 (comp:0)"]
+     },
+     {
       "count": 1,
       "id": "T7_POTION_SLOWFIELD",
       "sources": ["albioncompo_hellgate5_2026_07 (comp:0)"]
@@ -4215,9 +6256,19 @@
       "count": 1,
       "id": "T7_POTION_STONESKIN",
       "sources": ["metabattle (7767:8989)"]
+     },
+     {
+      "count": 1,
+      "id": "T8_POTION_COOLDOWN",
+      "sources": ["metabattle (7690:9142)"]
      }
     ],
     "shoes": [
+     {
+      "count": 4,
+      "id": "SHOES_CLOTH_SET2",
+      "sources": ["albioncompo_ss_kite_20_2026_06 (comp:8,10,12)", "metabattle (7700:8988)"]
+     },
      {
       "count": 3,
       "id": "SHOES_LEATHER_ROYAL",
@@ -4235,8 +6286,33 @@
      },
      {
       "count": 2,
+      "id": "SHOES_PLATE_AVALON",
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:1,2)"]
+     },
+     {
+      "count": 2,
       "id": "SHOES_PLATE_FEY",
       "sources": ["albioncompo_hellgate5_2026_07 (comp:0)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:1)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_CLOTH_HELL",
+      "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:2)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_LEATHER_SET2",
+      "sources": ["metabattle (7690:9142)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_PLATE_KEEPER",
+      "sources": ["albioncompo_sob_blaze_os_2026_06 (comp:0)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_PLATE_UNDEAD",
+      "sources": ["metabattle (7767:8989)"]
      }
     ]
    }
@@ -4249,6 +6325,11 @@
        "count": 1,
        "id": "ARMOR_LEATHER_FEY",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:12)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_PLATE_ROYAL",
+       "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:11)"]
       }
      ],
      "cape": [
@@ -4256,6 +6337,11 @@
        "count": 3,
        "id": "CAPEITEM_SMUGGLER",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:17)", "albioncompo_ss_kite_20_2026_06 (comp:16)", "deadlyhooker_large_scale_2026_08 (party_1:15)"]
+      },
+      {
+       "count": 1,
+       "id": "CAPEITEM_AVALON",
+       "sources": ["metabattle (7659:8921)"]
       },
       {
        "count": 1,
@@ -4280,6 +6366,11 @@
        "count": 6,
        "id": "HEAD_PLATE_SET2",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:17)", "albioncompo_ss_kite_20_2026_06 (comp:16)", "cb_clonepeek_zvz20_2026_03 (comp:12)", "deadlyhooker_large_scale_2026_08 (party_1:15)", "metabattle (7659:8921)", "timothy_blap_blackzone_roam_2026_08 (blap:11)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_PLATE_SET1",
+       "sources": ["albioncompo_bist_roam15_2026_01 (comp:12)"]
       }
      ],
      "potion": [
@@ -4287,6 +6378,11 @@
        "count": 3,
        "id": "T7_POTION_REVIVE",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:12)", "albioncompo_ss_kite_20_2026_06 (comp:16)", "cb_clonepeek_zvz20_2026_03 (comp:12)"]
+      },
+      {
+       "count": 1,
+       "id": "T7_POTION_CLEANSE2",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:17)"]
       },
       {
        "count": 1,
@@ -4304,10 +6400,27 @@
        "count": 2,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:12)", "timothy_blap_blackzone_roam_2026_08 (blap:11)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_ROYAL",
+       "sources": ["metabattle (7659:8921)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_PLATE_UNDEAD",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:12)"]
       }
      ]
     },
     "2H_CLEAVER_HELL": {
+     "armor": [
+      {
+       "count": 1,
+       "id": "ARMOR_PLATE_ROYAL",
+       "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:8)"]
+      }
+     ],
      "cape": [
       {
        "count": 2,
@@ -4318,6 +6431,11 @@
        "count": 1,
        "id": "CAPEITEM_FW_LYMHURST",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:10)"]
+      },
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["metabattle (7691:8998)"]
       }
      ],
      "food": [
@@ -4361,11 +6479,33 @@
        "count": 2,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:10)", "timothy_blap_blackzone_roam_2026_08 (blap:8)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_SET1",
+       "sources": ["metabattle (7691:8998)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_PLATE_AVALON",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:15)"]
       }
      ]
     },
     "2H_DUALAXE_KEEPER": {
+     "armor": [
+      {
+       "count": 1,
+       "id": "ARMOR_LEATHER_SET3",
+       "sources": ["metabattle (7663:8916)"]
+      }
+     ],
      "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_THETFORD",
+       "sources": ["metabattle (7663:8916)"]
+      },
       {
        "count": 1,
        "id": "CAPEITEM_SMUGGLER",
@@ -4379,14 +6519,36 @@
        "sources": ["albioncompo_push_monkey_7_2026_05 (comp:4)"]
       }
      ],
+     "head": [
+      {
+       "count": 1,
+       "id": "HEAD_CLOTH_HELL",
+       "sources": ["metabattle (7663:8916)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_PLATE_SET1",
+       "sources": ["albioncompo_push_monkey_7_2026_05 (comp:4)"]
+      }
+     ],
      "potion": [
       {
        "count": 1,
        "id": "T7_POTION_REVIVE",
        "sources": ["albioncompo_push_monkey_7_2026_05 (comp:4)"]
+      },
+      {
+       "count": 1,
+       "id": "T8_POTION_COOLDOWN",
+       "sources": ["metabattle (7663:8916)"]
       }
      ],
      "shoes": [
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_ROYAL",
+       "sources": ["metabattle (7663:8916)"]
+      },
       {
        "count": 1,
        "id": "SHOES_LEATHER_MORGANA",
@@ -4395,6 +6557,13 @@
      ]
     },
     "2H_DUALHAMMER_HELL": {
+     "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_CAERLEON",
+       "sources": ["albioncompo_push_monkey_7_2026_05 (comp:3)"]
+      }
+     ],
      "food": [
       {
        "count": 1,
@@ -4415,10 +6584,29 @@
        "id": "T7_POTION_REVIVE",
        "sources": ["albioncompo_push_monkey_7_2026_05 (comp:3)"]
       }
+     ],
+     "shoes": [
+      {
+       "count": 1,
+       "id": "SHOES_PLATE_AVALON",
+       "sources": ["albioncompo_push_monkey_7_2026_05 (comp:3)"]
+      }
      ]
     },
     "2H_HALBERD_MORGANA": {
+     "armor": [
+      {
+       "count": 2,
+       "id": "ARMOR_PLATE_ROYAL",
+       "sources": ["metabattle (7655:8917)", "timothy_blap_blackzone_roam_2026_08 (blap:10)"]
+      }
+     ],
      "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["metabattle (7655:8917)"]
+      },
       {
        "count": 1,
        "id": "CAPEITEM_SMUGGLER",
@@ -4435,6 +6623,11 @@
      "head": [
       {
        "count": 1,
+       "id": "HEAD_LEATHER_MORGANA",
+       "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:10)"]
+      },
+      {
+       "count": 1,
        "id": "HEAD_LEATHER_SET3",
        "sources": ["metabattle (7655:8917)"]
       }
@@ -4449,6 +6642,11 @@
      "shoes": [
       {
        "count": 1,
+       "id": "SHOES_CLOTH_ROYAL",
+       "sources": ["metabattle (7655:8917)"]
+      },
+      {
+       "count": 1,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:10)"]
       }
@@ -4456,6 +6654,11 @@
     },
     "2H_KNUCKLES_KEEPER": {
      "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["metabattle (7657:9009)"]
+      },
       {
        "count": 1,
        "id": "CAPEITEM_SMUGGLER",
@@ -4486,12 +6689,24 @@
      "shoes": [
       {
        "count": 1,
+       "id": "SHOES_CLOTH_ROYAL",
+       "sources": ["metabattle (7657:9009)"]
+      },
+      {
+       "count": 1,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:14)"]
       }
      ]
     },
     "2H_KNUCKLES_SET3": {
+     "armor": [
+      {
+       "count": 1,
+       "id": "ARMOR_LEATHER_AVALON",
+       "sources": ["albioncompo_bist_roam15_2026_01 (comp:11)"]
+      }
+     ],
      "cape": [
       {
        "count": 3,
@@ -4521,6 +6736,11 @@
        "count": 1,
        "id": "HEAD_LEATHER_SET3",
        "sources": ["metabattle (7513:9008)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_PLATE_SET1",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:17)"]
       }
      ],
      "potion": [
@@ -4528,6 +6748,11 @@
        "count": 4,
        "id": "T7_POTION_REVIVE",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:11)", "albioncompo_ss_kite_20_2026_06 (comp:11)", "cb_clonepeek_zvz20_2026_03 (comp:17)", "metabattle (7513:9008)"]
+      },
+      {
+       "count": 1,
+       "id": "T7_POTION_CLEANSE2",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:16)"]
       }
      ],
      "shoes": [
@@ -4540,11 +6765,21 @@
        "count": 2,
        "id": "SHOES_LEATHER_MORGANA",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:11)", "cb_clonepeek_zvz20_2026_03 (comp:17)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_ROYAL",
+       "sources": ["metabattle (7513:9008)"]
       }
      ]
     },
     "MAIN_SCIMITAR_MORGANA": {
      "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["metabattle (7658:8999)"]
+      },
       {
        "count": 1,
        "id": "CAPEITEM_SMUGGLER",
@@ -4603,6 +6838,11 @@
      "build": "albioncompo_ss_kite_20_2026_06:comp:11",
      "id": "ARMOR_CLOTH_AVALON",
      "weapon": "2H_KNUCKLES_SET3"
+    },
+    {
+     "build": "albioncompo_push_monkey_7_2026_05:comp:3",
+     "id": "ARMOR_CLOTH_KEEPER",
+     "weapon": "2H_DUALHAMMER_HELL"
     }
    ],
    "slots": {
@@ -4620,6 +6860,11 @@
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:17)", "albioncompo_ss_kite_20_2026_06 (comp:16)", "cb_clonepeek_zvz20_2026_03 (comp:12)", "deadlyhooker_large_scale_2026_08 (party_1:15)"]
      },
      {
+      "count": 4,
+      "id": "ARMOR_PLATE_ROYAL",
+      "sources": ["metabattle (7655:8917)", "timothy_blap_blackzone_roam_2026_08 (blap:8,10,11)"]
+     },
+     {
       "count": 2,
       "effect": "force_shield",
       "id": "ARMOR_PLATE_KEEPER",
@@ -4627,8 +6872,18 @@
      },
      {
       "count": 1,
+      "id": "ARMOR_LEATHER_AVALON",
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:11)"]
+     },
+     {
+      "count": 1,
       "id": "ARMOR_LEATHER_FEY",
       "sources": ["albioncompo_bist_roam15_2026_01 (comp:12)"]
+     },
+     {
+      "count": 1,
+      "id": "ARMOR_LEATHER_SET3",
+      "sources": ["metabattle (7663:8916)"]
      }
     ],
     "cape": [
@@ -4641,6 +6896,26 @@
       "count": 4,
       "id": "CAPEITEM_FW_LYMHURST",
       "sources": ["albioncompo_bist_roam15_2026_01 (comp:10,11,12)", "metabattle (7513:9008)"]
+     },
+     {
+      "count": 4,
+      "id": "CAPEITEM_FW_MARTLOCK",
+      "sources": ["metabattle (7655:8917; 7657:9009; 7658:8999; 7691:8998)"]
+     },
+     {
+      "count": 1,
+      "id": "CAPEITEM_AVALON",
+      "sources": ["metabattle (7659:8921)"]
+     },
+     {
+      "count": 1,
+      "id": "CAPEITEM_FW_CAERLEON",
+      "sources": ["albioncompo_push_monkey_7_2026_05 (comp:3)"]
+     },
+     {
+      "count": 1,
+      "id": "CAPEITEM_FW_THETFORD",
+      "sources": ["metabattle (7663:8916)"]
      }
     ],
     "food": [
@@ -4677,6 +6952,21 @@
       "sources": ["albioncompo_push_monkey_7_2026_05 (comp:3)", "metabattle (7513:9008; 7655:8917; 7657:9009)"]
      },
      {
+      "count": 3,
+      "id": "HEAD_PLATE_SET1",
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:12)", "albioncompo_push_monkey_7_2026_05 (comp:4)", "cb_clonepeek_zvz20_2026_03 (comp:17)"]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_CLOTH_HELL",
+      "sources": ["metabattle (7663:8916)"]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_LEATHER_MORGANA",
+      "sources": ["timothy_blap_blackzone_roam_2026_08 (blap:10)"]
+     },
+     {
       "count": 1,
       "id": "HEAD_PLATE_KEEPER",
       "sources": ["metabattle (7691:8998)"]
@@ -4704,6 +6994,16 @@
       "count": 5,
       "id": "T7_POTION_STONESKIN",
       "sources": ["metabattle (7655:8917; 7657:9009; 7658:8999; 7659:8921; 7691:8998)"]
+     },
+     {
+      "count": 2,
+      "id": "T7_POTION_CLEANSE2",
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:16,17)"]
+     },
+     {
+      "count": 1,
+      "id": "T8_POTION_COOLDOWN",
+      "sources": ["metabattle (7663:8916)"]
      }
     ],
     "shoes": [
@@ -4716,6 +7016,26 @@
       "count": 6,
       "id": "SHOES_LEATHER_FEY",
       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:16,17)", "albioncompo_ss_kite_20_2026_06 (comp:11,16)", "deadlyhooker_large_scale_2026_08 (party_1:14,15)"]
+     },
+     {
+      "count": 5,
+      "id": "SHOES_CLOTH_ROYAL",
+      "sources": ["metabattle (7513:9008; 7655:8917; 7657:9009; 7659:8921; 7663:8916)"]
+     },
+     {
+      "count": 2,
+      "id": "SHOES_PLATE_AVALON",
+      "sources": ["albioncompo_push_monkey_7_2026_05 (comp:3)", "cb_clonepeek_zvz20_2026_03 (comp:15)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_CLOTH_SET1",
+      "sources": ["metabattle (7691:8998)"]
+     },
+     {
+      "count": 1,
+      "id": "SHOES_PLATE_UNDEAD",
+      "sources": ["cb_clonepeek_zvz20_2026_03 (comp:12)"]
      }
     ]
    }
@@ -4731,6 +7051,11 @@
       }
      ],
      "cape": [
+      {
+       "count": 1,
+       "id": "CAPEITEM_FW_MARTLOCK",
+       "sources": ["metabattle (7642:8970)"]
+      },
       {
        "count": 1,
        "id": "CAPEITEM_SMUGGLER",
@@ -4755,6 +7080,13 @@
       {
        "count": 1,
        "id": "T7_POTION_STONESKIN",
+       "sources": ["metabattle (7642:8970)"]
+      }
+     ],
+     "shoes": [
+      {
+       "count": 1,
+       "id": "SHOES_CLOTH_SET2",
        "sources": ["metabattle (7642:8970)"]
       }
      ]
@@ -4802,6 +7134,11 @@
       "count": 2,
       "id": "CAPEITEM_SMUGGLER",
       "sources": ["deadlyhooker_large_scale_2026_08 (party_2:2,11)"]
+     },
+     {
+      "count": 1,
+      "id": "CAPEITEM_FW_MARTLOCK",
+      "sources": ["metabattle (7642:8970)"]
      }
     ],
     "food": [
@@ -4829,6 +7166,13 @@
      {
       "count": 1,
       "id": "T7_POTION_STONESKIN",
+      "sources": ["metabattle (7642:8970)"]
+     }
+    ],
+    "shoes": [
+     {
+      "count": 1,
+      "id": "SHOES_CLOTH_SET2",
       "sources": ["metabattle (7642:8970)"]
      }
     ]

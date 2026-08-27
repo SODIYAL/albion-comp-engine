@@ -407,12 +407,15 @@ def run():
           f"{hm_plate.get('tankiness', 0):.2f} (plate), cloth dmg gain "
           f"{tank_gain_cloth:.2f}")
 
-    # T22 — kit advisor (2026-08-20): comp-aware kits must differentiate by
-    # role. In a rounded castle-brawl 24-man, the control tank's best head
-    # is a team piece (peel/buff: Guardian or Knight Helmet or Cleric Cowl)
-    # while every slot returns ranked options with finite values for any
-    # weapon. (Deeper doctrine checks wait on the healing-throughput model —
-    # see MASTERSHEET §8.)
+    # T22 — kit advisor (2026-08-20; re-pinned 2026-08-27, owner ruling
+    # "search more comps to see what tanks are actually wearing"): the
+    # comp-aware tank head must come from the OBSERVED doctrine tier (the
+    # weapon's own builds, then the seat's) — never an off-tier piece the
+    # exact marginal likes because its caps are scarce in this comp. The
+    # full gear catalog made Mercenary Hood / Graveguard Helmet win exactly
+    # that way (the owner: nobody fields those on tanks), so comp-aware
+    # ranking went doctrine-tier-first. Every slot still returns ranked
+    # options with finite values for any weapon.
     e_kit = Engine(content="castle", size=25, style="brawl")
     kit_party = (["2H_MACE", "2H_HAMMER", "MAIN_ROCKMACE_KEEPER",
                   "2H_POLEHAMMER", "MAIN_MACE", "2H_QUARTERSTAFF",
@@ -424,13 +427,17 @@ def run():
                   "2H_DUALSICKLE_UNDEAD", BLOODLETTER, "2H_SCYTHE_HELL",
                   LONGBOW, "2H_FIRE_RINGPAIR_AVALON"])
     tank_kit = e_kit.kit_options(HEAVY_MACE, party=kit_party)
-    team_heads = {"HEAD_PLATE_SET3", "HEAD_PLATE_SET2", "HEAD_CLOTH_SET2"}
+    marginal_bait = {"HEAD_LEATHER_SET1", "HEAD_PLATE_UNDEAD"}
     slots_ok = all(tank_kit["options"].get(s)
                    for s in ("head", "armor", "shoes", "offhand",
                              "cape", "potion", "food"))
-    check("T22 kit advisor: comp-aware tank head is a team piece; all slots ranked",
-          tank_kit["kit"]["head"]["gear"] in team_heads and slots_ok,
-          f"tank head={tank_kit['kit']['head']['display_name']}; "
+    check("T22 kit advisor: comp-aware tank head comes from the observed "
+          "doctrine tier, never off-tier marginal bait; all slots ranked",
+          tank_kit["kit"]["head"]["doctrine"] in ("weapon", "seat")
+          and tank_kit["kit"]["head"]["gear"] not in marginal_bait
+          and slots_ok,
+          f"tank head={tank_kit['kit']['head']['display_name']} "
+          f"(doctrine={tank_kit['kit']['head']['doctrine']}); "
           f"slots={sorted(tank_kit['options'])}")
 
     # T23 — comp identity (V3 round 1 finding F-V3-2, 2026-08-23): what a
