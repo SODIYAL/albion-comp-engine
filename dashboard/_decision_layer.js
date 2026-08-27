@@ -536,7 +536,7 @@
     }
 
     if (!top){
-      host.innerHTML = `<div class="dl-status ${state.tone}">${statusRadar(state)}</div>`;
+      host.innerHTML = `<div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>`;
       renderPlayerTools(host);
       return;
     }
@@ -580,7 +580,7 @@
       }).join("")}</div></div>` : "";
 
     host.innerHTML = `
-      <div class="dl-status ${state.tone}">${statusRadar(state)}</div>
+      <div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>
       <div class="dl-pick">
         ${needline}
         ${chainLine(top)}

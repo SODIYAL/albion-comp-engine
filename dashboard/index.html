@@ -1348,8 +1348,9 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 /* the radar carries the status card alone (owner 2026-08-26: "remove this
    box around our diagram") — no panel chrome; the tone lives in the
    diagram's own colors */
-.dl-status{display:flex;justify-content:center;gap:18px;align-items:center;
+.dl-status{display:flex;flex-direction:column;align-items:stretch;gap:8px;
   background:none;border:0;box-shadow:none;padding:0}
+.dl-status .dl-radar{margin:0 auto}
 .dl-status strong,.dl-need strong{display:block;font-family:var(--serif);font-size:21px;line-height:1.15;margin:4px 0}
 .dl-kicker{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
 /* comp-status radar (owner 2026-08-26): the status card is the diagram —
@@ -7968,7 +7969,7 @@ render();
     }
 
     if (!top){
-      host.innerHTML = `<div class="dl-status ${state.tone}">${statusRadar(state)}</div>`;
+      host.innerHTML = `<div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>`;
       renderPlayerTools(host);
       return;
     }
@@ -8012,7 +8013,7 @@ render();
       }).join("")}</div></div>` : "";
 
     host.innerHTML = `
-      <div class="dl-status ${state.tone}">${statusRadar(state)}</div>
+      <div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>
       <div class="dl-pick">
         ${needline}
         ${chainLine(top)}
