@@ -5949,24 +5949,28 @@ function compBoard(){
   const adv = ENG.roleAdvisory(party, chests);
   if (!adv || !adv.members.length) return "";
   const book = ENG.rolesBook || {};
-  const label = id => ((book[id] || {}).name || id).split(" / ")[0].split(" (")[0];
-  const CLS = { frontline: ["var(--role-tank)", 0], support: ["var(--role-support)", 1],
-                healer: ["var(--role-healer)", 2], dps: ["var(--role-melee)", 3] };
-  const cols = new Map();   /* role key -> {name, color, ord, ms} */
+  const fine = id => id ? ((book[id] || {}).name || id).split(" / ")[0].split(" (")[0] : "";
+  /* four MAIN columns only (owner 2026-08-27: "only show main roles like
+     tank support dps and healers") — the fine played role stays in each
+     member's hover. Order matches the roster's own role sort. */
+  const CLS = { frontline: ["Tank", "var(--role-tank)", 0],
+                support:   ["Support", "var(--role-support)", 1],
+                dps:       ["DPS", "var(--role-melee)", 2],
+                healer:    ["Healer", "var(--role-healer)", 3] };
+  const cols = new Map();   /* class -> {name, color, ord, ms} */
   adv.members.forEach((m, i) => {
-    const key = m.role || m.class || "other";
-    const cls = (m.role && (book[m.role] || {}).class) || m.class;
-    const [color, ord] = CLS[cls] || ["var(--ink-3)", 4];
-    let c = cols.get(key);
-    if (!c){ c = { name: label(key), color, ord, ms: [] }; cols.set(key, c); }
-    c.ms.push(i);
+    const cls = (m.role && (book[m.role] || {}).class) || m.class || "dps";
+    const [name, color, ord] = CLS[cls] || ["Other", "var(--ink-3)", 4];
+    let c = cols.get(cls);
+    if (!c){ c = { name, color, ord, ms: [] }; cols.set(cls, c); }
+    c.ms.push({ i, role: fine(m.role) });
   });
-  const sorted = [...cols.values()].sort((a, b) => a.ord - b.ord || b.ms.length - a.ms.length);
+  const sorted = [...cols.values()].sort((a, b) => a.ord - b.ord);
   return `<div class="wf-comp">${sorted.map(c => `
     <div class="wf-col" style="--rc:${c.color}">
       <span class="wf-col-h">${c.ms.length}× ${esc(c.name)}</span>
-      ${c.ms.map(i =>
-        `<button class="wf-m" data-detail="${party[i]}" title="${esc(nameOf(party[i]))} — slot ${i + 1}, click for the dossier">${icon(party[i], 26)}<span>${esc(nameOf(party[i]))}</span></button>`).join("")}
+      ${c.ms.map(({ i, role }) =>
+        `<button class="wf-m" data-detail="${party[i]}" title="${esc(nameOf(party[i]))}${role ? ` — ${esc(role)}` : ""} — slot ${i + 1}, click for the dossier">${icon(party[i], 26)}<span>${esc(nameOf(party[i]))}</span></button>`).join("")}
     </div>`).join("")}</div>`;
 }
 function renderWheelFoot(keys, recs, rings){
