@@ -667,30 +667,36 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 /* the wheel proper — all rim geometry derives from --wd so the whole
    instrument scales with its column (100cqi = the center column's width) */
 .wheel{
-  position:relative; margin:10px auto 0;
-  --wd:min(560px, calc(100vw - 64px));
-  --wd:min(560px, 100cqi);
-  --card-w:clamp(72px, calc(var(--wd)*.205), 112px);
-  --card-h:clamp(76px, calc(var(--wd)*.195), 108px);
+  position:relative; margin:10px auto 8px;
+  --wd:min(720px, calc(100vw - 64px));
+  --wd:min(720px, 100cqi);
+  --card-w:clamp(76px, calc(var(--wd)*.185), 134px);
+  --card-h:clamp(80px, calc(var(--wd)*.175), 128px);
   --wr:calc(var(--wd)/2 - var(--card-h)/2 - 8px);
-  width:var(--wd); height:var(--wd);
-  /* semicircle stage: cards only ever ride the top arc, so the bottom
-     of the instrument fades into the table and hands its height to the
-     next-pick bar. The box stays square — rim geometry and the
-     drag-to-rotate center math are untouched; only paint and layout
-     flow change. */
-  -webkit-mask-image:linear-gradient(180deg, #000 68%, rgba(0,0,0,.5) 76%, transparent 85%);
-  mask-image:linear-gradient(180deg, #000 68%, rgba(0,0,0,.5) 76%, transparent 85%);
-  margin-bottom:calc(var(--wd)*-0.15);
+  /* SEMICIRCLE stage (owner 2026-08-27, reference wheels): the box is no
+     longer square — cards ride the top arc of a virtual --wd circle whose
+     center sits at (50%, --wd/2), and the hub is a smaller circle in the
+     arc's open mouth. Height = top arc + the hub's lower half; the width
+     freed goes to the comp board below. Drag-to-rotate math derives the
+     center from the WIDTH (see angleOf), never the box height. */
+  --hub-r:calc(var(--wd)*0.21);
+  width:var(--wd);
+  height:calc(var(--wd)/2 + var(--hub-r) + 12px);
 }
-.wheel:focus-visible{outline:2px solid var(--brass-bright); outline-offset:4px; border-radius:50%}
+.wheel:focus-visible{outline:2px solid var(--brass-bright); outline-offset:4px; border-radius:24px}
 .wheel-track{
-  position:absolute; inset:2px; border-radius:50%;
+  /* the full --wd circle, anchored to the top; its lower arc fades out
+     under the hub so only the semicircle reads */
+  position:absolute; left:2px; top:2px;
+  width:calc(var(--wd) - 4px); height:calc(var(--wd) - 4px);
+  border-radius:50%;
   border:1px solid var(--rule);
   background:radial-gradient(closest-side,
     transparent 60%, rgba(18,21,28,.55) 62%, rgba(8,10,15,.6) 82%,
     rgba(255,201,58,.10) 96%, transparent);
   box-shadow:inset 0 0 30px rgba(0,0,0,.5);
+  -webkit-mask-image:linear-gradient(180deg, #000 50%, rgba(0,0,0,.4) 60%, transparent 70%);
+  mask-image:linear-gradient(180deg, #000 50%, rgba(0,0,0,.4) 60%, transparent 70%);
 }
 .wheel-notch{
   position:absolute; top:-4px; left:50%; z-index:3;
@@ -698,7 +704,8 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   background:linear-gradient(135deg, var(--brass-bright), var(--brass-deep));
   border-radius:2px; box-shadow:0 0 14px rgba(255,201,58,.65);
 }
-.wheel-ring{position:absolute; inset:0; transform-origin:50% 50%}
+.wheel-ring{position:absolute; left:0; top:0;
+  width:var(--wd); height:var(--wd); transform-origin:50% 50%}
 .wheel.spun .wheel-ring{animation:wheel-spin 1.15s cubic-bezier(.16,.7,.25,1)}
 @keyframes wheel-spin{from{transform:rotate(2turn)}to{transform:rotate(0)}}
 /* rim cards ride the wheel: rotate to their angle, push out to the rim,
@@ -734,7 +741,11 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
    center column (setup rail open, three-column stage) shrinks the
    contents with the circle instead of cropping the weapon's name */
 .wheel-hub{
-  position:absolute; inset:calc(var(--card-h) + min(14px, var(--wd)*0.022)); border-radius:50%;
+  /* the hub floats in the arc's mouth: a --hub-r circle centered on the
+     virtual wheel center, decoupled from the rim radius */
+  position:absolute; left:50%; top:calc(var(--wd)/2);
+  width:calc(var(--hub-r)*2); height:calc(var(--hub-r)*2);
+  transform:translate(-50%, -50%); border-radius:50%;
   background:radial-gradient(closest-side, rgba(24,28,37,.94), rgba(13,16,22,.97));
   border:1px solid var(--rule-2);
   box-shadow:inset 0 0 42px rgba(0,0,0,.55), 0 0 34px -14px rgba(255,201,58,.3);
@@ -747,8 +758,9 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .hub-rings .ring-fill.empty{opacity:0}
 .hub-rings .ring-fill.done{filter:drop-shadow(0 0 4px currentColor)}
 .hub-body{
-  /* 23%: the packed rings gave the body back ~10% of the hub's radius */
-  position:absolute; inset:23%; display:flex; flex-direction:column;
+  /* 20%: the mouth-hub is a touch smaller than the old ring-bound one,
+     so the body claims a little more of its radius */
+  position:absolute; inset:20%; display:flex; flex-direction:column;
   align-items:center; justify-content:center; gap:min(3px, calc(var(--wd)*0.006));
   text-align:center; min-width:0;
 }
@@ -842,20 +854,22 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .wf-ring b{color:var(--ink); font-weight:600}
 .wf-actions{display:flex; gap:8px}
 /* the comp board (owner 2026-08-27): roster under the wheel, one column
-   per played role — fills the space the shorter rim gave back */
-.wf-comp{display:flex; gap:8px; flex-wrap:wrap; justify-content:center;
-  align-items:flex-start; width:100%}
-.wf-col{display:flex; flex-direction:column; gap:2px; min-width:88px; max-width:128px;
+   per main role — equal columns filling the wheel column's full width,
+   entries sized to read (the semicircle handed this row its space) */
+.wf-comp{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+  gap:10px; width:100%; max-width:calc(var(--wd, 720px) + 40px); margin:0 auto;
+  align-items:start}
+.wf-col{display:flex; flex-direction:column; gap:3px;
   background:var(--sunk); border:1px solid var(--rule); border-top:2px solid var(--rc);
-  border-radius:10px; padding:7px 8px 8px; min-height:0}
-.wf-col-h{font-family:var(--mono); font-size:9px; letter-spacing:.1em;
-  text-transform:uppercase; color:var(--rc); white-space:nowrap; margin-bottom:3px}
-.wf-m{display:flex; align-items:center; gap:6px; background:none; border:0;
-  padding:2px 3px; border-radius:6px; color:var(--ink-2); font-size:10.5px;
+  border-radius:12px; padding:9px 10px 10px; min-width:0}
+.wf-col-h{font-family:var(--mono); font-size:10px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--rc); white-space:nowrap; margin-bottom:4px}
+.wf-m{display:flex; align-items:center; gap:8px; background:none; border:0;
+  padding:3px 4px; border-radius:8px; color:var(--ink-2); font-size:12px;
   text-align:left; min-width:0; cursor:pointer}
 .wf-m:hover{background:var(--surface-2); color:var(--ink)}
 .wf-m span{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-.wf-m .icon{flex:none; border-radius:5px}
+.wf-m .icon{flex:none; border-radius:6px}
 
 /* ---------- capability readout ---------- */
 .groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:2px 34px}

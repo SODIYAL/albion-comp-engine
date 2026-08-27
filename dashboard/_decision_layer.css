@@ -123,8 +123,9 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   .dl-tools-fold{grid-column:1/-1;grid-row:auto}
   .shell[data-rail="min"] .ws-center{grid-column:2;grid-row:1/3}
   .shell[data-rail="min"] .ws-party{grid-column:1/-1;grid-row:auto}
-  /* the wheel cedes a little size to the one-screen budget */
-  .wheel{--wd:min(480px,100cqi)}
+  /* the semicircle freed the wheel's lower half, so the hero band can
+     afford the full-width instrument (owner 2026-08-27) */
+  .wheel{--wd:min(680px,100cqi)}
   /* caller tools sit full-width below the strip */
   .dl-tools{grid-template-columns:1fr 1fr}
   /* one-screen density: the hero band must leave room for the party strip

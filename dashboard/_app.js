@@ -759,7 +759,7 @@ function renderWheelRing(keys, idx){
       el.setAttribute("role", "option");
       el.tabIndex = -1;
       el.title = `${WEAPONS[w].display_name || w} — click to focus`;
-      el.innerHTML = `${icon(w, 46)}<span class="ws-nm">${nameOf(w)}</span>`;
+      el.innerHTML = `${icon(w, 54)}<span class="ws-nm">${nameOf(w)}</span>`;
       /* spawn one step beyond the final angle so the entry animates inward */
       el.style.setProperty("--a", `${(o + Math.sign(o || 1)) * wheelStepDeg()}deg`);
       el.style.setProperty("--fade", "0");
@@ -953,7 +953,7 @@ function compBoard(){
     <div class="wf-col" style="--rc:${c.color}">
       <span class="wf-col-h">${c.ms.length}× ${esc(c.name)}</span>
       ${c.ms.map(({ i, role }) =>
-        `<button class="wf-m" data-detail="${party[i]}" title="${esc(nameOf(party[i]))}${role ? ` — ${esc(role)}` : ""} — slot ${i + 1}, click for the dossier">${icon(party[i], 26)}<span>${esc(nameOf(party[i]))}</span></button>`).join("")}
+        `<button class="wf-m" data-detail="${party[i]}" title="${esc(nameOf(party[i]))}${role ? ` — ${esc(role)}` : ""} — slot ${i + 1}, click for the dossier">${icon(party[i], 32)}<span>${esc(nameOf(party[i]))}</span></button>`).join("")}
     </div>`).join("")}</div>`;
 }
 function renderWheelFoot(keys, recs, rings){
@@ -2352,8 +2352,10 @@ $("pick-filter").addEventListener("keydown", e => {
   let dragBase = null, lastA = null, dragTotal = 0, flingTimer = 0;
   const samples = [];   /* [time, cumulative degrees] within ~120ms */
   const angleOf = e => {
+    /* the semicircle box is not square: the virtual wheel center sits one
+       half-WIDTH below the top (the ring is a --wd circle anchored there) */
     const b = el.getBoundingClientRect();
-    return Math.atan2(e.clientY - (b.top + b.height / 2),
+    return Math.atan2(e.clientY - (b.top + b.width / 2),
                       e.clientX - (b.left + b.width / 2)) * 180 / Math.PI;
   };
   const stopFling = () => {
