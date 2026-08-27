@@ -4,7 +4,15 @@
 
 **Goal:** Content-labeled small-fight killboard sampling plus a deterministic comp-cluster miner for castle outposts, gated per step, ending with real cluster candidates ready for the owner's first blind ratification round.
 
-**Architecture:** A sibling sampler (`sample_content_rosters.py`) caches small albionbb battles with their listing metadata, labels each battle's content from a committed zone-rule table (`content_zones.yaml`), and emits near-complete rosters with per-player kits/IP into `content_rosters.json`. A new builder (`build_comp_clusters.py`) refuses to run unless that artifact passes its contract, then mines rosters two-level (seat signature → greedy weapon cores) into `comp_clusters.json`, stamping input SHA-256s. Both artifacts are display/evidence only.
+**Architecture:** A sibling sampler (`sample_content_rosters.py`) caches small albionbb battles with their listing metadata, labels each battle's content from a committed zone-rule table (`content_zones.yaml`), and emits near-complete rosters with weapons + fight item power into `content_rosters.json`. A new builder (`build_comp_clusters.py`) refuses to run unless that artifact passes its contract, then mines rosters two-level (seat signature → greedy weapon cores) into `comp_clusters.json`, stamping input SHA-256s. Both artifacts are display/evidence only.
+
+**2026-08-27 repo-audit amendment:** the committed `battles_cache/` (raw albionbb responses) proves kill events carry ONLY `Equipment.MainHand` + `Equipment.Mount` plus per-player `AverageItemPower` — no armor/head/shoes/cape. Killboard-observed KITS are therefore NOT available from this endpoint: the kit legs were removed from Tasks 3–4, the probe narrowed to the two genuinely open questions, and the spec's §6 "content-observed kit" evidence class needs an owner ruling (fallback: kits stay reference-build-doctrine-mined by the existing `derive_kit_doctrine`, with content labels on build records). IP (budget leg) and weapons survive unchanged.
+
+**What already exists — reuse, don't rebuild:**
+- `sample_battles.py` / `sample_rosters.py`: `get_json` (retry/backoff), `weapon_key` normalization (Name-preferred + tier/enchant strip), the seat-of-weapon rule (`role_menu[0]` else `unseated_+role_hint`), org-cohort discipline. Import, don't copy.
+- `pipeline/out/battles_cache/` (360 committed raw battles, sampled at `--min-players 6`) already contains small fights — equipment/IP/volume questions are answerable OFFLINE from it; only the zone question needs the network.
+- Kit machinery is BUILT: `derive_kit_doctrine` + `resolve_passive_doctrine` (build_dataset.py) + `roles.yaml kit_doctrine` (+ overrides). Plan B extends it with a content dimension; nothing in Plan A touches kits.
+- The comp builder is BUILT: `CompEngine.forge` (beam search, engine.py:2549), `suggest_pool` (:590), `detect_role` (:608), `kit_options` (:1034), need profiles on the predicate channel. Plan A never touches the engine; Plan B integrates via the existing predicate channel only.
 
 **Tech Stack:** Python 3 (stdlib only + PyYAML, matching the pipeline), script-style tests, `jsonfmt` shared serializer.
 
@@ -36,15 +44,17 @@
 
 This task is a spike inside the plan: its output is knowledge, not kept code.
 
+Already answered OFFLINE from the committed cache (record these in the findings doc, no network needed): kill events carry `Equipment.MainHand` + `Equipment.Mount` only (no armor/head/shoes/cape), `AverageItemPower` sits on Killer/Victim, and small fights exist in volume (`weapon_usage_v2.json` battles index holds fights down to ~11 players). Two questions remain open:
+
+- (a) Does the battle LISTING row (`/battles?minPlayers=N`) carry a zone/cluster field? (`sample_battles.py` discarded listing rows, so the cache cannot answer this.)
+- (b) Does any albionbb endpoint serve FULL equipment per kill (the site renders full gear on kill pages — check an event-detail endpoint)? This decides whether the spec's killboard-kit evidence class is recoverable later; it does NOT block this plan.
+
 - [ ] **Step 1: Write the probe script** (in the session scratchpad directory, not the repo)
 
 ```python
 #!/usr/bin/env python3
-"""THROWAWAY probe: what does albionbb expose for small fights?
-
-Answers (spec §3): (a) battle-level fields (zone/cluster name?),
-(b) noise level at minPlayers=14, (c) kill-event equipment + item power.
-"""
+"""THROWAWAY probe: (a) zone field on battle listing rows?
+(b) any endpoint with full equipment per kill?"""
 import json, time, urllib.request
 
 API = "https://api.albionbb.com/us"
@@ -61,23 +71,32 @@ def get(url):
 battles = get(f"{API}/battles?minPlayers=14&page=1") or []
 print(f"listing rows: {len(battles)}")
 if battles:
-    print("=== battle listing row keys ===")
-    print(json.dumps(battles[0], indent=1)[:2000])
-small = [b for b in battles if b.get("totalPlayers", 99) <= 30]
-print(f"rows with <=30 players: {len(small)} of {len(battles)}")
-if small:
-    b = small[0]
-    time.sleep(0.5)
-    ev = get(f"{API}/battles/kills?ids={b['albionId']}") or []
-    print(f"=== kill events for battle {b['albionId']}: {len(ev)} ===")
-    if ev:
-        print(json.dumps(ev[0], indent=1)[:3000])
+    print("=== battle listing row (FULL — looking for a zone field) ===")
+    print(json.dumps(battles[0], indent=1))
+    small = [b for b in battles if b.get("totalPlayers", 99) <= 30]
+    print(f"rows <=30 players: {len(small)} of {len(battles)}")
+    if small:
+        b = small[0]
+        time.sleep(0.5)
+        ev = (get(f"{API}/battles/kills?ids={b['albionId']}") or [])
+        if ev and ev[0].get("EventId") is not None:
+            eid = ev[0]["EventId"]
+            for path in (f"/kills/{eid}", f"/events/{eid}",
+                         f"/kill/{eid}"):
+                time.sleep(0.5)
+                try:
+                    detail = get(API + path)
+                    print(f"=== {path} responded — equipment keys: "
+                          f"{sorted(((detail.get('Victim') or {}).get('Equipment') or {}).keys())} ===")
+                    break
+                except Exception as e:
+                    print(f"{path}: {e}")
 ```
 
 - [ ] **Step 2: Run it and capture output**
 
 Run: `py -3 -u <scratchpad>/probe_smallfights.py > <scratchpad>/probe_out.txt` then read the file.
-Expected: JSON key dumps for one listing row and one kill event.
+Expected: one full listing row printed; event-detail endpoints either respond (note equipment keys) or 404.
 
 - [ ] **Step 3: Record findings in the notes doc**
 
@@ -86,12 +105,15 @@ Create `docs/superpowers/plans/2026-08-27-outpost-evidence-notes.md` answering, 
 ```markdown
 # Outpost evidence probe findings (2026-08-27 plan, Task 1)
 
+## From the committed cache (offline, verified 2026-08-27)
+- Kill-event equipment slots: MainHand, Mount ONLY — killboard kits NOT available via /battles/kills
+- Item power: AverageItemPower on Killer/Victim (per player)
+- Small-fight volume: battles_cache holds fights down to ~11 players (min-players 6 sampling)
+
+## From the probe (network)
 - Zone/cluster field on battle listing rows: <field name, or NONE>
-- Zone/cluster field on kill events: <field name, or NONE>
-- Equipment slots present on Killer/Victim: <list, e.g. MainHand, OffHand, Head, Armor, Shoes, Cape>
-- Item power field: <field name + which object it sits on, or NONE>
-- Small-battle volume: <N> of <M> page-1 rows had <=30 players
-- Example small battle id used: <albionId>
+- Full-equipment event-detail endpoint: <path + slot list, or NONE FOUND>
+- Small-battle volume on page 1: <N> of <M> rows had <=30 players
 - GO/NO-GO on zone segmentation: <GO | NO-GO>
 ```
 
@@ -351,14 +373,12 @@ Artifact schema (consumed by Task 4 — copy exactly):
   {"battle": 123, "content": "castle_outpost", "zone": "...",
    "org": "<12-hex org hash>", "n": 7, "wiped": true,
    "avg_ip": 1250.0,
-   "members": [{"weapon": "<catalog key>",
-                "kit": {"head": "...", "armor": "...", "shoes": "...",
-                        "cape": "..."}}]}
+   "weapons": ["<catalog key>", "..."]}
  ]
 }
 ```
 
-`avg_ip` is `null` when events carry no item power; `kit` values are raw killboard `Type` strings (normalization happens at cluster time); `members` sorted by (weapon, then kit armor) for determinism; `rosters` sorted by (battle, org).
+`avg_ip` is `null` when events carry no item power (mean of the side's per-player `AverageItemPower`); NO kit fields — the endpoint serves MainHand only (see the audit amendment at the top of this plan); `weapons` sorted; `rosters` sorted by (battle, org).
 
 - [ ] **Step 1: Extend the test with sampler checks (failing first)**
 
@@ -367,18 +387,12 @@ Add to `tests/test_content_rosters.py`, before `run()`'s print block — a fixtu
 ```python
 def fixture_event(killer_name, killer_org, killer_weap, victim_name,
                   victim_org, victim_weap, ts):
+    # Mirrors the REAL cached event shape (battles_cache): Equipment
+    # carries MainHand + Mount only; AverageItemPower per player.
     def player(nm, org, wt):
         return {"Name": nm, "AllianceName": org, "GuildName": org,
                 "AverageItemPower": 1250.0,
-                "Equipment": {
-                    "MainHand": {"Type": wt},
-                    "Head": {"Type": "T8_HEAD_CLOTH_SET3"},
-                    "Armor": {"Type": "T8_ARMOR_CLOTH_SET3"},
-                    "Shoes": {"Type": "T8_SHOES_CLOTH_SET3"},
-                    "Cape": {"Type": "T8_CAPEITEM_FW_MARTLOCK"}}}
-    # NOTE: adjust the equipment/IP field names to the Task 1 findings doc
-    # if the probe reported different ones.
-        return None  # unreachable — structure above returns via dict
+                "Equipment": {"MainHand": {"Type": wt}, "Mount": None}}
     return {"TimeStamp": ts,
             "Killer": player(killer_name, killer_org, killer_weap),
             "Victim": player(victim_name, victim_org, victim_weap)}
@@ -449,16 +463,14 @@ def run_sampler_checks():
                   if r["battle"] == 1002))
         check("no raw org names anywhere in the artifact",
               b"ALLIA" not in first and b"ALLIB" not in first)
-        check("members carry weapon keys resolved against the catalog",
-              all(m["weapon"] in set(wkeys)
-                  for r in doc["rosters"] for m in r["members"]))
-        check("kits carry raw Type strings; avg_ip present from fixture",
-              labeled[0]["members"][0]["kit"]["armor"]
-              == "T8_ARMOR_CLOTH_SET3"
-              and labeled[0]["avg_ip"] == 1250.0)
+        check("rosters carry weapon keys resolved against the catalog",
+              all(w in set(wkeys)
+                  for r in doc["rosters"] for w in r["weapons"]))
+        check("avg_ip is the side's per-player mean from the fixture",
+              labeled[0]["avg_ip"] == 1250.0)
 ```
 
-Call `run_sampler_checks()` from `run()` after `run_zone_loader_checks()`. (Fix `fixture_event` while implementing: the inner `player` helper should simply `return` the dict — the sketch above shows the shape; make it clean code.)
+Call `run_sampler_checks()` from `run()` after `run_zone_loader_checks()`.
 
 - [ ] **Step 2: Run to verify the new checks fail**
 
@@ -569,10 +581,6 @@ def main():
             k = k.split("_", 1)[1]
         return k if k in weapons else None
 
-    def kit_of(eq):
-        return {slot.lower(): ((eq.get(slot) or {}).get("Type") or "")
-                for slot in ("Head", "Armor", "Shoes", "Cape")}
-
     rosters, newest, labeled_battles = [], "", set()
     for name in sorted(os.listdir(args.cache)):
         with open(os.path.join(args.cache, name), encoding="utf-8") as f:
@@ -593,7 +601,6 @@ def main():
                 grp = p.get("AllianceName") or p.get("GuildName") or "?"
                 rec = players.setdefault(
                     nm, {"org": grp, "weapon": wk,
-                         "kit": kit_of(p.get("Equipment") or {}),
                          "ip": p.get("AverageItemPower"),
                          "kills": 0, "deaths": 0})
                 rec["kills" if is_k else "deaths"] += 1
@@ -610,14 +617,11 @@ def main():
             if not wiped:
                 continue    # winners stay partial — never emitted
             ips = [m["ip"] for m in ms if isinstance(m["ip"], (int, float))]
-            members = sorted(
-                ({"weapon": m["weapon"], "kit": m["kit"]} for m in ms),
-                key=lambda m: (m["weapon"], m["kit"]["armor"]))
             rosters.append({
                 "battle": bid, "content": content, "zone": zone,
                 "org": org_hash(grp), "n": len(ms), "wiped": True,
                 "avg_ip": round(sum(ips) / len(ips), 1) if ips else None,
-                "members": members})
+                "weapons": sorted(m["weapon"] for m in ms)})
     rosters.sort(key=lambda r: (r["battle"], r["org"]))
 
     doc = {"_meta": {
@@ -688,9 +692,8 @@ git commit -F /tmp/cm.txt
     "core": ["..."], "rosters": 9, "orgs": 4, "battles": 7,
     "wiped_share": 1.0, "battle_ids": [1, 2],
     "ip": {"p25": 1100.0, "median": 1250.0, "p75": 1380.0},
-    "seats": {"main_healer": {"weapons": [{"weapon": "...", "share": 0.9}],
-              "kits": {"armor": [{"item": "ARMOR_CLOTH_SET3",
-                                  "share": 0.8}]}}}}],
+    "seats": {"main_healer": {"weapons": [{"weapon": "...",
+                                           "share": 0.9}]}}}],
    "unassigned": 0}}}
 ```
 
@@ -702,7 +705,7 @@ CLI: `--rosters FILE`, `--dataset FILE`, `--out FILE` (defaults to the real path
 2. Seat of a weapon = `role_menu[0]`, else `"unseated_" + role_hint` (the `sample_rosters.seats_of` rule). Signature = sorted `(seat, count)` tuple.
 3. Group rosters by signature. Merge pass: order signatures by (-support, lexicographic); a signature with the same total size differing from an already-kept group's signature by exactly one substitution (multiset L1 distance == 2) merges into that group. Deterministic, single pass.
 4. Within each group, mine cores greedily and disjointly: find the best anchor pair exactly as `build_cohort_families.mine_bucket` does (same support/org/battle/lift gates, lexicographic tie-break) — then EXTEND: repeatedly scan weapons in lexicographic order, adding the one that maximizes `(support, orgs, battles)` while support stays ≥ MIN_ROSTERS and org/battle gates hold; stop when no extension qualifies. Members = rosters containing every core weapon. Emit cluster; remove members; repeat until no anchor qualifies.
-5. Per cluster: per-seat weapon alternatives with shares (≥ ALT_SHARE of members' players in that seat, floor 2 observations); per-seat kit aggregates for head/armor/shoes/cape — normalize raw Type by stripping `@N` and a leading `T<d>_` prefix, count, emit top 3 with shares; IP p25/median/p75 over members' `avg_ip` (skip nulls; emit null if none); `wiped_share` = share of member rosters with `wiped == true`; sorted `battle_ids`.
+5. Per cluster: per-seat weapon alternatives with shares (≥ ALT_SHARE of members' players in that seat, floor 2 observations); IP p25/median/p75 over members' `avg_ip` (skip nulls; emit null if none); `wiped_share` = share of member rosters with `wiped == true`; sorted `battle_ids`. NO kit aggregates — the killboard serves MainHand only (audit amendment above); kits remain the doctrine layer's job.
 6. Cluster ids: `f"{content}-{i:03d}"` in emission order (support desc, then anchor lexicographic). `_meta.semantics` states ids are stable only against the recorded input hashes.
 
 - [ ] **Step 1: Write the failing test**
@@ -748,23 +751,10 @@ def fixture_rosters(wa, wb, wc, wd):
         rs.append({"battle": 100 + i % 7, "content": "castle_outpost",
                    "zone": "Z", "org": f"{'abcd'[i % 4]:0>12}", "n": 4,
                    "wiped": True, "avg_ip": 1200.0 + 10 * i,
-                   "members": [
-                       {"weapon": wa, "kit": {"head": "T8_HEAD_PLATE_SET1",
-                        "armor": "T8_ARMOR_PLATE_SET1",
-                        "shoes": "T8_SHOES_PLATE_SET1", "cape": "T8_CAPE"}},
-                       {"weapon": wb, "kit": {"head": "T8_HEAD_CLOTH_SET1",
-                        "armor": "T8_ARMOR_CLOTH_SET1",
-                        "shoes": "T8_SHOES_CLOTH_SET1", "cape": "T8_CAPE"}},
-                       {"weapon": wc, "kit": {"head": "T8_HEAD_CLOTH_SET2",
-                        "armor": "T8_ARMOR_CLOTH_SET2",
-                        "shoes": "T8_SHOES_CLOTH_SET2", "cape": "T8_CAPE"}},
-                       {"weapon": wd, "kit": {"head": "T8_HEAD_LEATHER_SET1",
-                        "armor": "T8_ARMOR_LEATHER_SET1",
-                        "shoes": "T8_SHOES_LEATHER_SET1",
-                        "cape": "T8_CAPE"}}]})
+                   "weapons": sorted([wa, wb, wc, wd])})
     rs.append({"battle": 300, "content": "unlabeled", "zone": "",
                "org": "e" * 12, "n": 4, "wiped": True, "avg_ip": None,
-               "members": rs[0]["members"]})
+               "weapons": sorted([wa, wb, wc, wd])})
     return rs
 
 
@@ -822,10 +812,6 @@ def run():
               b'"org"' not in first and b"abcd" not in first)
         check("ip quartiles present and ordered",
               c["ip"]["p25"] <= c["ip"]["median"] <= c["ip"]["p75"])
-        check("kit aggregates normalized (no tier prefix, no enchant)",
-              all(not it["item"].startswith("T8_")
-                  for s in c["seats"].values()
-                  for sl in s["kits"].values() for it in sl))
         check("unlabeled rosters never enter mining",
               "300" not in json.dumps(c["battle_ids"]))
 
@@ -917,10 +903,9 @@ MIN_ORGS = 3
 MIN_BATTLES = 3
 MIN_LIFT = 1.2
 ALT_SHARE = 0.3     # per-seat alternative floor (share of seat players)
-KIT_TOP = 3         # kit items reported per slot
 
 ROSTER_KEYS = {"battle", "content", "zone", "org", "n", "wiped",
-               "avg_ip", "members"}
+               "avg_ip", "weapons"}
 META_KEYS = {"schema", "source", "zone_table_sha256", "battles_cached",
              "battles_labeled", "newest_event", "bias"}
 
@@ -947,16 +932,9 @@ def load_rosters(path):
     if not isinstance(rows, list):
         fail("rosters list missing")
     for r in rows:
-        if set(r) != ROSTER_KEYS or not isinstance(r["members"], list):
+        if set(r) != ROSTER_KEYS or not isinstance(r["weapons"], list):
             fail(f"roster row violates contract: battle {r.get('battle')}")
     return rows
-
-
-def norm_item(t):
-    k = (t or "").split("@")[0]
-    if "_" in k and k.split("_")[0].startswith("T"):
-        k = k.split("_", 1)[1]
-    return k
 
 
 def quart(vals):
@@ -975,7 +953,7 @@ def mine_content(rows, seat_of):
     sig_of = {}
     for i, r in enumerate(rows):
         sig = tuple(sorted(collections.Counter(
-            seat_of(m["weapon"]) for m in r["members"]).items()))
+            seat_of(w) for w in r["weapons"]).items()))
         sig_of[i] = sig
     # signature grouping + one-substitution merge (spec §4.3)
     support = collections.Counter(sig_of.values())
@@ -1009,8 +987,7 @@ def mine_content(rows, seat_of):
                 break
             core = extend_core(core, remaining, rows)
             members = [i for i in remaining
-                       if set(core) <= {m["weapon"]
-                                        for m in rows[i]["members"]}]
+                       if set(core) <= set(rows[i]["weapons"])]
             clusters.append(emit(core, members, rows, groups[gi],
                                  seat_of))
             assigned.update(members)
@@ -1028,14 +1005,12 @@ def extend_core(core, remaining, rows):
     core = list(core)
     while True:
         members = [i for i in remaining
-                   if set(core) <= {m["weapon"]
-                                    for m in rows[i]["members"]}]
-        cand = sorted({m["weapon"] for i in members
-                       for m in rows[i]["members"]} - set(core))
+                   if set(core) <= set(rows[i]["weapons"])]
+        cand = sorted({w for i in members
+                       for w in rows[i]["weapons"]} - set(core))
         best = None
         for w in cand:
-            sub = [i for i in members
-                   if w in {m["weapon"] for m in rows[i]["members"]}]
+            sub = [i for i in members if w in rows[i]["weapons"]]
             orgs = {rows[i]["org"] for i in sub}
             bats = {rows[i]["battle"] for i in sub}
             if len(sub) < MIN_ROSTERS or len(orgs) < MIN_ORGS \
@@ -1049,7 +1024,7 @@ def extend_core(core, remaining, rows):
         core.append(best[1])
 ```
 
-`emit(core, member_idx, rows, signature, seat_of)` builds the cluster dict from the Interfaces schema: counts, sorted `battle_ids`, `wiped_share`, `quart` of members' `avg_ip`, per-seat weapon shares (floor `max(2, ALT_SHARE * seat_player_count)`) and per-slot normalized kit top-`KIT_TOP` with shares. No org identifiers — orgs are counted, never emitted.
+`emit(core, member_idx, rows, signature, seat_of)` builds the cluster dict from the Interfaces schema: counts, sorted `battle_ids`, `wiped_share`, `quart` of members' `avg_ip`, and per-seat weapon shares (floor `max(2, ALT_SHARE * seat_player_count)`). No kit data (killboard serves MainHand only) and no org identifiers — orgs are counted, never emitted.
 
 `main()`: argparse (`--rosters`, `--dataset`, `--out` with real defaults), `load_rosters`, dataset existence check (`fail` if missing), `seat_of` closure from dataset weapons (`role_menu[0]` else `"unseated_" + role_hint`, mirroring `sample_rosters.seats_of`), group rows by `content` (skip `"unlabeled"`), mine each, then `jsonfmt.dump` the artifact with `_meta.inputs` = SHA-256 of both input files and the `params`/`semantics` from the Interfaces block. Note: with multiple contents later, the id prefix comes from the content key — write `f"{content}-{i + 1:03d}"`, not the literal.
 
@@ -1134,5 +1109,6 @@ Summarize for the owner: labeled roster count, cluster count with support number
 ## Self-Review (completed at write time)
 
 - **Spec coverage:** §3 sampler + zone table → Tasks 2–3; §3 scouting → Task 1; §4 miner → Task 4; §8a gates 1–2 → the two test files; §8c gates 1–2 → schema contract + exit-2 checks; §10 steps 1–3 → Tasks 1–5. §3's albioncompo/MetaBattle tag mapping is deferred to Plan B except the vocabulary check (Task 5 step 1) — deliberate: no albioncompo scaling happens before ratification exists.
-- **Placeholder scan:** no TBDs; two intentional adjust-points are tied to the Task 1 findings doc (`clusterName`, equipment/IP field names) with the literal working assumption written into the code.
+- **Placeholder scan:** no TBDs; one intentional adjust-point is tied to the Task 1 findings doc (the listing row's zone field name — the code's working assumption is `clusterName`). Equipment/IP field names are verified facts from the committed cache, not assumptions.
+- **Repo-audit amendment (2026-08-27):** kit legs removed from Tasks 3–4 (albionbb kill events carry MainHand + Mount only — verified in `battles_cache/` raw responses); probe narrowed to the zone-field and full-equipment-endpoint questions; reuse notes added (existing `get_json`, `weapon_key`, seat rule, `derive_kit_doctrine`, and the built forge/`kit_options`/`detect_role` surface). Spec §6's "content-observed kit" evidence class needs an owner ruling on the fallback (reference-build doctrine with content labels) — flagged for the blind round.
 - **Type consistency:** artifact schemas appear once in each producing task's Interfaces block and are consumed by name in the next task's test fixtures; `content_zones.load` return shape matches all three call sites.
