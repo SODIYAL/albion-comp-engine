@@ -710,31 +710,39 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 @keyframes wheel-spin{from{transform:rotate(2turn)}to{transform:rotate(0)}}
 /* rim cards ride the wheel: rotate to their angle, push out to the rim,
    and stay tilted with it — like chest segments on a fortune wheel */
+/* frameless rim cards (owner 2026-08-27: the weapon art is the star, no
+   box) — the card is an invisible hit area; the icon carries the weight
+   and the focused weapon glows instead of wearing a border */
 .wseg{
   position:absolute; left:50%; top:50%;
   width:var(--card-w); height:var(--card-h);
   margin-left:calc(var(--card-w)/-2); margin-top:calc(var(--card-h)/-2);
   transform:rotate(var(--a,0deg)) translateY(calc(var(--wr)*-1));
   opacity:var(--fade,1);
-  transition:transform .45s var(--ease), opacity .45s var(--ease),
-    border-color .18s var(--ease), box-shadow .18s var(--ease);
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
-  padding:5px 3px; background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
-  border:1px solid var(--rule); border-radius:12px;
-  box-shadow:0 2px 8px rgba(0,0,0,.45);
+  transition:transform .45s var(--ease), opacity .45s var(--ease);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+  padding:0; background:none; border:0; box-shadow:none;
 }
-.wseg:hover{border-color:var(--rule-2)}
+.wseg .icon{
+  width:clamp(52px, calc(var(--wd)*0.105), 82px); height:auto;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.55)) saturate(1.1);
+  transition:filter .18s var(--ease);
+}
+.wseg:hover .icon{filter:drop-shadow(0 4px 10px rgba(0,0,0,.55)) saturate(1.2) brightness(1.12)}
 .wseg.on{
-  border-color:rgba(255,201,58,.65); opacity:1;
-  box-shadow:0 0 20px -6px rgba(255,201,58,.6), 0 2px 8px rgba(0,0,0,.45);
+  opacity:1;
+  transform:rotate(var(--a,0deg)) translateY(calc(var(--wr)*-1)) scale(1.14);
 }
-.wseg .icon{filter:drop-shadow(0 2px 6px rgba(0,0,0,.5)) saturate(1.1)}
+.wseg.on .icon{
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.6)) drop-shadow(0 0 18px rgba(255,201,58,.55)) saturate(1.2);
+}
 .wseg .ws-nm{
-  font-size:9.5px; line-height:1.2; text-align:center; color:var(--ink-2);
+  font-size:10.5px; line-height:1.2; text-align:center; color:var(--ink-2);
   max-width:100%; padding:0 3px; overflow:hidden;
   display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+  text-shadow:0 2px 6px rgba(0,0,0,.8);
 }
-.wseg.on .ws-nm{color:var(--ink)}
+.wseg.on .ws-nm{color:var(--brass-bright)}
 
 /* the hub: party role rings closing around the focused weapon.
    Every fixed size in here is min()-capped against --wd so a narrower
@@ -864,12 +872,32 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   border-radius:12px; padding:9px 10px 10px; min-width:0}
 .wf-col-h{font-family:var(--mono); font-size:10px; letter-spacing:.12em;
   text-transform:uppercase; color:var(--rc); white-space:nowrap; margin-bottom:4px}
-.wf-m{display:flex; align-items:center; gap:8px; background:none; border:0;
-  padding:3px 4px; border-radius:8px; color:var(--ink-2); font-size:12px;
-  text-align:left; min-width:0; cursor:pointer}
-.wf-m:hover{background:var(--surface-2); color:var(--ink)}
-.wf-m span{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-.wf-m .icon{flex:none; border-radius:6px}
+/* board members are FULL dm tiles — same popover, same kit/dossier/remove
+   actions as the party strip (the board is on course to replace it) */
+.wf-comp .dm{display:block}
+.wf-mcard{
+  width:100%; height:auto; min-height:52px;
+  justify-content:flex-start; gap:10px; padding:5px 8px;
+  border-radius:10px; border-bottom-width:2px;
+}
+.wf-mcard .icon{flex:none; border-radius:7px}
+.wf-mnm{
+  flex:1; min-width:0; text-align:left; font-size:12.5px; line-height:1.15;
+  color:var(--ink-2);
+}
+.wf-mnm small{display:block; font-family:var(--mono); font-size:8.5px;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--ink-3);
+  margin-top:1px; overflow:hidden; text-overflow:ellipsis}
+.wf-mcard .n{position:static; margin-left:auto; font-size:9px; color:var(--ink-3); flex:none}
+/* row tiles don't zoom like the strip's squares — highlight in place */
+.wf-comp .dm:hover .dm-card, .wf-comp .dm:focus-within .dm-card{
+  transform:none; background:var(--surface-2); border-color:var(--rule-2);
+  box-shadow:0 4px 14px rgba(0,0,0,.4); z-index:6;
+}
+.wf-comp .dm:hover + .dm .dm-card, .wf-comp .dm:has(+ .dm:hover) .dm-card{transform:none}
+.wf-comp .dm .dm-pop{z-index:44}
+.wf-comp .dm:first-child .dm-pop{left:50%; transform:translateX(-50%)}
+.wf-comp .dm:last-child .dm-pop{left:50%; right:auto; transform:translateX(-50%)}
 
 /* ---------- capability readout ---------- */
 .groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:2px 34px}
@@ -5598,6 +5626,72 @@ function swapHint(m, i){
     `<button class="swap-opt" data-swapat="${i}" data-swapto="${o.weapon}"
        title="swap ${nameOf(m.weapon)} for ${nameOf(o.weapon)} (+${o.gain.toFixed(1)} score)">${nameOf(o.weapon)} +${o.gain.toFixed(1)}</button>`).join(" ")}</span>`;
 }
+/* THE member popover — served identically in the party strip and the
+   wheel's comp board. ctx carries the per-render roster analysis
+   (contribution, swap review, hintability, least-load-bearing index). */
+function memberPop(i, ctx){
+  const w = party[i];
+  const signed = v => (v < 0 ? "−" : "+") + Math.abs(v).toFixed(1);
+  const flag = i !== ctx.minI ? "" : ctx.contrib[i] < 0
+    ? ' · <b class="least">comp gains without it</b>'
+    : ' · <b class="least">least load-bearing</b>';
+  return `<div class="dm-pop" role="group" aria-label="Slot ${i+1} — ${nameOf(w)}">
+    <div class="dm-nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>${badgeHtml(w)}${PROV[i] === "f" ? '<span class="prov forged" title="slot generated by the forge — reforge all rebuilds it">forged</span>' : ""}</div>
+    <span class="fn">${roleOf(w, COMBOS_CUR[i])} · ${signed(ctx.contrib[i])} fit${flag}${ENG.isExcluded(w) ? ' · <b class="offcomp" title="owner rule: not a default large-group pick at this size — swap advice below">off-comp at size ' + SIZE + "</b>" : ""}${ctx.review[i] && ctx.review[i].redundant && !ENG.isExcluded(w) ? ' · <b class="redund" title="redundancy warning (display only, never a score change): valued as a pick into the rest of the party, this member closes no capability gap — its jobs are already covered without it">jobs covered without it</b>' : ""}</span>
+    ${ctx.hintable.has(i) ? swapHint(ctx.review[i], i) : ""}
+    <div class="dm-actions">
+      <button class="lo-open${LO_OPEN === i ? " on" : ""}" data-lo-open="${i}"
+        aria-expanded="${LO_OPEN === i}" aria-label="Loadout for ${nameOf(w)}"
+        >kit${(LOADOUT[i] || {})._eng ? '<span class="lo-eng-mark" title="engine kit — scored defaults, not a fielded build">&#9881;</span>' : ""}${loadoutCount(i) ? `<i>${loadoutCount(i)}</i>` : ""}</button>
+      <button class="dm-act" data-detail="${w}">dossier</button>
+      <button class="dm-act dm-x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">remove</button>
+    </div>
+  </div>`;
+}
+/* The wheel's comp board (owner 2026-08-27): the roster as four main-role
+   columns, each member a full dm tile with the SAME popover and actions as
+   the party strip — this board is on course to replace that strip. Built
+   during renderRoster (the render that runs exactly when roster state
+   changes) and cached, so wheel spins never pay for the roster analysis. */
+let BOARD_HTML = "";
+function buildCompBoard(ctx){
+  if (!party.length || typeof ENG.roleAdvisory !== "function") return "";
+  const chests = {};
+  party.forEach((w, i) => {
+    const L = (typeof LOADOUT !== "undefined" && LOADOUT[i]) || null;
+    if (L && L.armor) chests[i] = L.armor;
+  });
+  const adv = ENG.roleAdvisory(party, chests);
+  if (!adv || !adv.members.length) return "";
+  const book = ENG.rolesBook || {};
+  const fine = id => id ? ((book[id] || {}).name || id).split(" / ")[0].split(" (")[0] : "";
+  /* four MAIN columns only (owner: "only show main roles like tank
+     support dps and healers") — the fine played role rides each tile */
+  const CLS = { frontline: ["Tank", "var(--role-tank)", 0],
+                support:   ["Support", "var(--role-support)", 1],
+                dps:       ["DPS", "var(--role-melee)", 2],
+                healer:    ["Healer", "var(--role-healer)", 3] };
+  const cols = new Map();
+  adv.members.forEach((m, i) => {
+    const cls = (m.role && (book[m.role] || {}).class) || m.class || "dps";
+    const [name, color, ord] = CLS[cls] || ["Other", "var(--ink-3)", 4];
+    let c = cols.get(cls);
+    if (!c){ c = { name, color, ord, ms: [] }; cols.set(cls, c); }
+    c.ms.push({ i, role: fine(m.role) });
+  });
+  const sorted = [...cols.values()].sort((a, b) => a.ord - b.ord);
+  return `<div class="wf-comp">${sorted.map(c => `
+    <div class="wf-col" style="--rc:${c.color}">
+      <span class="wf-col-h">${c.ms.length}× ${esc(c.name)}</span>
+      ${c.ms.map(({ i, role }) =>
+        `<div class="dm wf-dm ${roleCls(party[i])}">
+          <button class="dm-card wf-mcard" data-member="${i}" aria-label="${esc(nameOf(party[i]))} — slot ${i + 1}, details">
+            ${icon(party[i], 44)}<span class="wf-mnm">${esc(nameOf(party[i]))}${role ? `<small>${esc(role)}</small>` : ""}</span><span class="n mono">${String(i + 1).padStart(2, "0")}</span>
+          </button>
+          ${memberPop(i, ctx)}
+        </div>`).join("")}
+    </div>`).join("")}</div>`;
+}
 function renderRoster(){
   /* contribution = fitness lost if this member left — the caller's
      "who is load-bearing" number. Lowest contributor gets flagged. */
@@ -5608,10 +5702,6 @@ function renderRoster(){
   const review = swapReviewCached();
   const hintable = swapEligible(review);
   const minI = party.length > 2 ? contrib.indexOf(Math.min(...contrib)) : -1;
-  const signed = v => (v < 0 ? "−" : "+") + Math.abs(v).toFixed(1);
-  const flag = i => i !== minI ? "" : contrib[i] < 0
-    ? ' · <b class="least">comp gains without it</b>'
-    : ' · <b class="least">least load-bearing</b>';
   /* party facet: a display filter over the roster — slot numbers and remove
      buttons keep their true indices */
   let idxs = party.map((_, i) => i);
@@ -5627,26 +5717,18 @@ function renderRoster(){
   /* dock cards: the card is the hover/focus target (desktop) or the tap
      target that opens the bottom sheet (≤960 — touch has no hover); the
      popover carries everything the old roster row said plus the
-     kit/dossier/remove actions */
+     kit/dossier/remove actions. memberPop is SHARED with the wheel's comp
+     board (owner 2026-08-27) so both docks say exactly the same things. */
   if (SHEET_OPEN !== null && !(SHEET_OPEN < party.length)) SHEET_OPEN = null;
+  const ctx = { contrib, review, hintable, minI };
   const cards = idxs.map(i => { const w = party[i]; return (
     `<div class="dm ${roleCls(w)}${SHEET_OPEN === i ? " sheet-open" : ""}">
       <button class="dm-card" data-member="${i}" aria-label="${nameOf(w)} — slot ${i+1}, details">
         <span class="n mono">${String(i+1).padStart(2,"0")}</span>${icon(w, 34)}
       </button>
-      <div class="dm-pop" role="group" aria-label="Slot ${i+1} — ${nameOf(w)}">
-        <div class="dm-nm"><button class="nm-btn" data-detail="${w}">${nameOf(w)}</button>${badgeHtml(w)}${PROV[i] === "f" ? '<span class="prov forged" title="slot generated by the forge — reforge all rebuilds it">forged</span>' : ""}</div>
-        <span class="fn">${roleOf(w, COMBOS_CUR[i])} · ${signed(contrib[i])} fit${flag(i)}${ENG.isExcluded(w) ? ' · <b class="offcomp" title="owner rule: not a default large-group pick at this size — swap advice below">off-comp at size ' + SIZE + "</b>" : ""}${review[i] && review[i].redundant && !ENG.isExcluded(w) ? ' · <b class="redund" title="redundancy warning (display only, never a score change): valued as a pick into the rest of the party, this member closes no capability gap — its jobs are already covered without it">jobs covered without it</b>' : ""}</span>
-        ${hintable.has(i) ? swapHint(review[i], i) : ""}
-        <div class="dm-actions">
-          <button class="lo-open${LO_OPEN === i ? " on" : ""}" data-lo-open="${i}"
-            aria-expanded="${LO_OPEN === i}" aria-label="Loadout for ${nameOf(w)}"
-            >kit${(LOADOUT[i] || {})._eng ? '<span class="lo-eng-mark" title="engine kit — scored defaults, not a fielded build">&#9881;</span>' : ""}${loadoutCount(i) ? `<i>${loadoutCount(i)}</i>` : ""}</button>
-          <button class="dm-act" data-detail="${w}">dossier</button>
-          <button class="dm-act dm-x" data-remove="${i}" aria-label="Remove ${nameOf(w)}">remove</button>
-        </div>
-      </div>
+      ${memberPop(i, ctx)}
     </div>`); });
+  BOARD_HTML = buildCompBoard(ctx);
   if (PARTY_FACET){
     cards.push(`<div class="dock-note">${idxs.length} of ${party.length} — ${esc(PARTY_FACET)} only · click the chip again for all</div>`);
   } else {
@@ -5950,44 +6032,6 @@ function renderHub(keys, idx, recs){
     <span class="hub-score mono">${r ? (r.score >= 0 ? "+" : "−") + Math.abs(r.score).toFixed(2) : "—"}${marks}</span>
     <button class="cb-add hub-add" data-add="${w}">Add to comp</button>`;
 }
-/* The comp board (owner 2026-08-27): the roster under the wheel, one
-   column per PLAYED role — the role layer's own read (detect_role via
-   roleAdvisory, kits included), rendered verbatim. Columns wear the
-   role class color; members open their dossier. Display only. */
-function compBoard(){
-  if (!party.length || typeof ENG.roleAdvisory !== "function") return "";
-  const chests = {};
-  party.forEach((w, i) => {
-    const L = (typeof LOADOUT !== "undefined" && LOADOUT[i]) || null;
-    if (L && L.armor) chests[i] = L.armor;
-  });
-  const adv = ENG.roleAdvisory(party, chests);
-  if (!adv || !adv.members.length) return "";
-  const book = ENG.rolesBook || {};
-  const fine = id => id ? ((book[id] || {}).name || id).split(" / ")[0].split(" (")[0] : "";
-  /* four MAIN columns only (owner 2026-08-27: "only show main roles like
-     tank support dps and healers") — the fine played role stays in each
-     member's hover. Order matches the roster's own role sort. */
-  const CLS = { frontline: ["Tank", "var(--role-tank)", 0],
-                support:   ["Support", "var(--role-support)", 1],
-                dps:       ["DPS", "var(--role-melee)", 2],
-                healer:    ["Healer", "var(--role-healer)", 3] };
-  const cols = new Map();   /* class -> {name, color, ord, ms} */
-  adv.members.forEach((m, i) => {
-    const cls = (m.role && (book[m.role] || {}).class) || m.class || "dps";
-    const [name, color, ord] = CLS[cls] || ["Other", "var(--ink-3)", 4];
-    let c = cols.get(cls);
-    if (!c){ c = { name, color, ord, ms: [] }; cols.set(cls, c); }
-    c.ms.push({ i, role: fine(m.role) });
-  });
-  const sorted = [...cols.values()].sort((a, b) => a.ord - b.ord);
-  return `<div class="wf-comp">${sorted.map(c => `
-    <div class="wf-col" style="--rc:${c.color}">
-      <span class="wf-col-h">${c.ms.length}× ${esc(c.name)}</span>
-      ${c.ms.map(({ i, role }) =>
-        `<button class="wf-m" data-detail="${party[i]}" title="${esc(nameOf(party[i]))}${role ? ` — ${esc(role)}` : ""} — slot ${i + 1}, click for the dossier">${icon(party[i], 32)}<span>${esc(nameOf(party[i]))}</span></button>`).join("")}
-    </div>`).join("")}</div>`;
-}
 function renderWheelFoot(keys, recs, rings){
   const sn = styleName();
   const slotLabel = recs === null
@@ -6003,8 +6047,10 @@ function renderWheelFoot(keys, recs, rings){
     ? `<button class="cb-forge" id="reforge" title="rebuild every forged slot for the current content, style and size — manual picks stay">reforge all</button>`
     : "");
   /* the comp board replaces the ring tallies once members exist; the brass
-     party count moves up beside the wheel count */
-  const board = compBoard();
+     party count moves up beside the wheel count. BOARD_HTML is built by
+     renderRoster (which runs on every roster-state change), so wheel spins
+     reuse it for free. */
+  const board = BOARD_HTML;
   $("wheel-foot").innerHTML = `
     ${WHEEL_FOCUS_W && recs !== null && party.length < HARD_CAP
       ? `<button class="cb-add wf-add-mobile" data-add="${WHEEL_FOCUS_W}">Add ${esc(nameOf(WHEEL_FOCUS_W))}</button>`
