@@ -100,8 +100,8 @@ check("the duplicate's fitness is LOWER under the verified non-stacking rule",
 
 # ---- the marginal invariant survives the adjustment (F1-style, 1e-9) --------
 state = syn_e.party_state([W], [c])
-score, _df, _ds, _meta, picked = syn_e._eval_pick(state, W)
-delta = (syn_e.comp_score([W, W], [c, picked])
+score, _df, _ds, _meta, picked, _var, vg = syn_e._eval_pick(state, W)
+delta = (syn_e.comp_score([W, W], [c, picked], [None, vg])
          - syn_e.comp_score([W], [c]))
 check("pick score == exact comp_score delta with the count-once rule (1e-9)",
       abs(score - delta) < 1e-9, f"score {score:.12f} delta {delta:.12f}")

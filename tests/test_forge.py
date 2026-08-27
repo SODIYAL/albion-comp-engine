@@ -87,8 +87,13 @@ def t_invariant():
                 base = e.comp_score(party, combos)
                 for _ in range(6):
                     cand = pool[rng.randrange(len(pool))]
-                    score, _df, _ds, _meta, combo = e._eval_pick(state, cand)
-                    actual = e.comp_score(party + [cand], combos + [combo]) - base
+                    # dressed forge 2026-08-27: the invariant now covers
+                    # the chosen kit variant — the delta includes vgears
+                    score, _df, _ds, _meta, combo, _var, vg = \
+                        e._eval_pick(state, cand)
+                    actual = e.comp_score(
+                        party + [cand], combos + [combo],
+                        [None] * len(party) + [vg]) - base
                     diff = abs(score - actual)
                     worst = max(worst, diff)
                     checked += 1
@@ -177,14 +182,29 @@ def t_size11_matrix():
                 # A filler slot with a strictly better legal replacement
                 # is still a refinement failure.
                 for fi in r["filler"]:
+                    # dressed forge 2026-08-27: the forge audits DRESSED —
+                    # this checker prices the same rosters with gears, and
+                    # 'better pick available' means a LEGAL one (the
+                    # comment always said legal): a replacement _add_ok
+                    # rejects (dup/group/role/seat caps) or whose combos
+                    # cannot keep the minima is not a refinement failure.
                     sub = party[:fi] + party[fi + 1:]
                     sub_c = r["combos"][:fi] + r["combos"][fi + 1:]
-                    held_val = e.comp_score(party, r["combos"]) \
-                        - e.comp_score(sub, sub_c)
-                    st = e.party_state(sub, sub_c)
-                    best = max(e._eval_pick(st, w)[0]
-                               for w in e.suggest_pool())
-                    if best > held_val + 1e-9:
+                    sub_g = r["gears"][:fi] + r["gears"][fi + 1:]
+                    held_val = e.comp_score(party, r["combos"], r["gears"]) \
+                        - e.comp_score(sub, sub_c, sub_g)
+                    st = e.party_state(sub, sub_c, sub_g)
+                    fctx = e._forge_ctx(list(e.suggest_pool()))
+                    cnt_r, rl_r, pd_r, gr_r = e._forge_counts(sub, sub_c)
+                    beam = {"state": st, "roles": rl_r, "preds": pd_r}
+                    best = None
+                    for w in e.suggest_pool():
+                        if not e._add_ok(fctx, cnt_r, rl_r, pd_r, gr_r, w):
+                            continue
+                        pk = e._forge_eval_pick(fctx, beam, w, 0)
+                        if pk is not None and (best is None or pk[0] > best):
+                            best = pk[0]
+                    if best is not None and best > held_val + 1e-9:
                         problems.append(
                             f"reducible filler slot {fi} "
                             f"({party[fi]} {held_val:+.4f}, "
@@ -796,6 +816,43 @@ def t_kit_variants():
               for i in range(len(dn["v0"]))))
 
 
+def t_dressed_eval():
+    """F22b/F23 — dressed evaluation (dressed forge Task 4): the reported
+    pick score is the exact comp_score delta INCLUDING the chosen
+    variant's gears against a dressed party; manual parties score
+    bit-identically regardless of the forge; forge returns gears/kits."""
+    e = Engine(content="castle", size=25, style="brawl")
+    p = ["2H_MACE", "MAIN_HOLYSTAFF_AVALON", "2H_LONGBOW"]
+    g = [["ARMOR_PLATE_SET2"], None, None]
+    st = e.party_state(p, None, g)
+    worst = 0.0
+    pool = sorted(e.suggest_pool())[:20]
+    for w in pool:
+        sc, _df, _ds, _m, combo, _var, vg = e._eval_pick(st, w)
+        exact = (e.comp_score(p + [w], [None] * 3 + [combo], g + [vg])
+                 - e.comp_score(p, None, g))
+        if abs(sc - exact) > worst:
+            worst = abs(sc - exact)
+    check("F22b dressed pick score == exact comp_score delta (1e-9)",
+          worst < 1e-9, f"worst {worst}")
+
+    manual = ["2H_MACE", "MAIN_HOLYSTAFF_AVALON", "2H_LONGBOW",
+              "2H_POLEHAMMER", "2H_ARCANESTAFF_HELL", "2H_HALBERD",
+              "2H_HOLYSTAFF"]
+    check("F23 manual party scores bit-identically with explicit no-gears",
+          e.comp_score(manual) == e.comp_score(manual, None, None))
+    r = e.forge(9, locked=manual)
+    check("F23 forge returns gears/kits; locked slots keep gears None",
+          "gears" in r and "kits" in r
+          and len(r["gears"]) == len(r["party"])
+          and all(r["gears"][i] is None for i in range(len(manual))),
+          f"keys={sorted(r)} gears={r.get('gears')}")
+    r2 = e.forge(9, locked=manual)
+    check("F23 dressed forge is deterministic",
+          r["party"] == r2["party"] and r["gears"] == r2["gears"]
+          and r["score"] == r2["score"])
+
+
 if __name__ == "__main__":
     t_invariant()
     t_synergy_gating()
@@ -820,6 +877,7 @@ if __name__ == "__main__":
     t_need_profiles()
     t_dressed_state()
     t_kit_variants()
+    t_dressed_eval()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")
