@@ -41,6 +41,26 @@ function syncEngine(){
      loadout depends on the styled weights, and pick-derived combos map
      through the current engine (2026-08-18) */
   COMBOS_CUR = party.map((_, i) => comboAt(i));
+  /* equipped gear reaches scoring (dressed forge Task 1, 2026-08-27):
+     the engine has scored full builds since the 2026-08-20 gear layer —
+     the page's fitness call just never passed them. Gear edits re-render,
+     and render() lands here, so this stays fresh. */
+  GEARS_CUR = party.map((_, i) =>
+    gearsFromLoadout(typeof LOADOUT !== "undefined" ? LOADOUT[i] : null));
+}
+/* LOADOUT entry -> engine gears list: CURATED pieces only (uncurated
+   picker items carry no capabilities and would churn the cache key),
+   fixed slot order, null when nothing curated is equipped. `gearDb`
+   is injectable for the node test; the page uses the engine's curated
+   catalog. */
+function gearsFromLoadout(lo, gearDb){
+  const db = gearDb || ENG.gear;
+  if (!lo) return null;
+  const out = [];
+  const slots = ["head", "armor", "shoes", "cape", "offhand", "potion", "food"];
+  for (let i = 0; i < slots.length; i++)
+    if (lo[slots[i]] && db[lo[slots[i]]]) out.push(lo[slots[i]]);
+  return out.length ? out : null;
 }
 /* The loadout combo actually scored for member i: an explicit stored combo
    (a forge result) wins; otherwise the member's real Q/W/passive picks map
@@ -76,6 +96,8 @@ const weaknesses = (p, n = 3) => ENG.weaknesses(p, n, p === party ? COMBOS_CUR :
 const explain = (p, cand) => inPickContext(() =>
   ENG.explain(p, cand, p === party ? COMBOS_CUR : null))
   .map(t => ({d: t.delta, ...t}));
+/* dressed-forge Task 6: pass GEARS_CUR to recommend/explain/pickReport
+   once the JS signatures land (Task 5). */
 const recommend = (p, n = 4) => inPickContext(() =>
   ENG.recommend(p, n, null, p === party ? COMBOS_CUR : null))
   .map(r => ({w: r.weapon, dFit: r.d_fitness, dSyn: r.d_synergy, meta: r.meta_prior,
@@ -90,9 +112,13 @@ const pickReport = (p, cand) => inPickContext(() =>
    memoized on the engine context + party + loadouts so facet clicks,
    companion polls and other no-op re-renders don't pay it again. */
 const comboSig = () => COMBOS_CUR.join(",");
+const gearSig = () => GEARS_CUR.map(g => g ? g.join("+") : "-").join(",");
 let swapCache = { key: null, val: [] };
 function swapReviewCached(){
-  const key = `${CONTENT}|${SIZE}|${STYLE}|${party.join(",")}|${comboSig()}`;
+  /* dressed-forge Task 6: pass GEARS_CUR once swapReview's JS signature
+     lands (Task 5); the gear signature already keys the cache so kit
+     edits invalidate correctly. */
+  const key = `${CONTENT}|${SIZE}|${STYLE}|${party.join(",")}|${comboSig()}|${gearSig()}`;
   if (swapCache.key !== key)
     swapCache = { key, val: party.length > 1 ? ENG.swapReview(party, 3, null, COMBOS_CUR) : [] };
   return swapCache.val;
@@ -102,10 +128,10 @@ function swapReviewCached(){
    (renderers used to re-derive them 3-4x per render pass) */
 let calcCache = { key: null, fit: 0, sup: null };
 function partyCalc(){
-  const key = `${CONTENT}|${SIZE}|${STYLE}|${party.join(",")}|${comboSig()}`;
+  const key = `${CONTENT}|${SIZE}|${STYLE}|${party.join(",")}|${comboSig()}|${gearSig()}`;
   if (calcCache.key !== key)
-    calcCache = { key, fit: ENG.fitness(party, COMBOS_CUR),
-                  sup: ENG.effectiveSupply(party, COMBOS_CUR) };
+    calcCache = { key, fit: ENG.fitness(party, COMBOS_CUR, GEARS_CUR),
+                  sup: ENG.effectiveSupply(party, COMBOS_CUR, GEARS_CUR) };
   return calcCache;
 }
 
@@ -440,6 +466,7 @@ let PROV = [];
 let COMBO = [];
 /* Resolved combos for the current party — recomputed in syncEngine. */
 let COMBOS_CUR = [];
+let GEARS_CUR = [];
 /* The last forge's honesty report: {feasible, filler, held} or null. */
 let FORGE_NOTE = null;
 let pickFilter = "";
@@ -572,7 +599,8 @@ function renderRoster(){
   const base = fitness(party);
   const contrib = party.map((w, i) =>
     base - ENG.fitness(party.filter((_, j) => j !== i),
-                       COMBOS_CUR.filter((_, j) => j !== i)));
+                       COMBOS_CUR.filter((_, j) => j !== i),
+                       GEARS_CUR.filter((_, j) => j !== i)));
   const review = swapReviewCached();
   const hintable = swapEligible(review);
   const minI = party.length > 2 ? contrib.indexOf(Math.min(...contrib)) : -1;

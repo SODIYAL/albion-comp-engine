@@ -264,5 +264,30 @@ function setUsage(baskets) {
         + `below=${JSON.stringify(below)} scaled=${scaled}`);
 }
 
+/* 9 — gearsFromLoadout (dressed forge Task 1): LOADOUT entry -> engine
+   gears list. Curated pieces only, fixed LO_SLOTS order, null when
+   nothing curated is equipped — the page's scoring truth depends on
+   this mapping being stable (the fitness cache key embeds it). */
+{
+  const mg = SRC.match(
+    /function gearsFromLoadout\(lo, gearDb\)\{\n[\s\S]*?\n\}/);
+  if (!mg) throw new Error("could not extract gearsFromLoadout from _app.js");
+  vm.runInContext(mg[0], ctx);
+  const GEAR_FIX = JSON.stringify({ HEAD_CLOTH_SET2: 1, ARMOR_PLATE_SET2: 1 });
+  const mapped = run(
+    `JSON.stringify(gearsFromLoadout({ head: "HEAD_CLOTH_SET2",
+       armor: "ARMOR_PLATE_SET2", shoes: "SHOES_NOT_CURATED", q: 1 },
+       ${GEAR_FIX}))`);
+  check("gearsFromLoadout maps curated slots in fixed order",
+        mapped === JSON.stringify(["HEAD_CLOTH_SET2", "ARMOR_PLATE_SET2"]),
+        mapped);
+  const empties = run(
+    `[gearsFromLoadout(undefined, ${GEAR_FIX}),
+      gearsFromLoadout({ q: 2 }, ${GEAR_FIX}),
+      gearsFromLoadout({ shoes: "SHOES_NOT_CURATED" }, ${GEAR_FIX})]`);
+  check("gearsFromLoadout: empty/uncurated -> null",
+        empties.every(v => v === null), JSON.stringify(empties));
+}
+
 console.log(`\n${pass}/${pass + fail} display-math tests passed`);
 process.exit(fail ? 1 : 0);
