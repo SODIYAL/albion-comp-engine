@@ -485,6 +485,8 @@
     this._gearCache = {};
     this._defaultCache = {};
     this._nsCache = {};
+    this._variantCache = {};
+    this._dressedCache = {};
   };
 
   CompEngine.prototype._withProfile = function (w, contrib) {
@@ -1421,13 +1423,24 @@
   };
 
   /* ------------------------------------------------ candidate evaluation */
-  CompEngine.prototype.partyState = function (party, combos) {
-    /* Everything a candidate marginal needs (mirrors engine.py). */
-    var st = this._synState(party, combos), s = st[0], J = st[1];
+  CompEngine.prototype.partyState = function (party, combos, gears) {
+    /* Everything a candidate marginal needs (mirrors engine.py).
+       Dressed forge 2026-08-27: `s` is the FIT supply (gear-inclusive
+       when gears are given), `sSyn` the weapon-only supply every synergy
+       term reads — comp_score's own seams. gears absent keeps both the
+       same object (bit-identical to the pre-gears state). */
+    var st = this._synState(party, combos), sSyn = st[0], J = st[1];
+    var anyGear = false;
+    if (gears) {
+      for (var gi = 0; gi < gears.length; gi++) {
+        if (gears[gi] && gears[gi].length) { anyGear = true; break; }
+      }
+    }
+    var s = anyGear ? this.effectiveSupply(party, combos, gears) : sSyn;
     var pairVals = [];
     for (var p = 0; p < this._activeSyn.length; p++) {
-      pairVals.push(this._pairValue(p, s[this._activeSyn[p][0]] || 0.0,
-                                    s[this._activeSyn[p][1]] || 0.0, J[p]));
+      pairVals.push(this._pairValue(p, sSyn[this._activeSyn[p][0]] || 0.0,
+                                    sSyn[this._activeSyn[p][1]] || 0.0, J[p]));
     }
     var counts = {};
     for (var i = 0; i < party.length; i++) {
@@ -1445,7 +1458,8 @@
         }
       }
     }
-    return { s: s, J: J, pairVals: pairVals, counts: counts, nsMax: nsMax };
+    return { s: s, sSyn: sSyn, J: J, pairVals: pairVals, counts: counts,
+             nsMax: nsMax };
   };
 
   CompEngine.prototype._margFitFrom = function (s, extra) {
@@ -1468,12 +1482,13 @@
        largest-single-member joint term J (mirrors engine.py). */
     if (extraJ === undefined || extraJ === null) extraJ = extra;
     var total = 0.0;
+    var sSyn = state.sSyn;
     for (var p = 0; p < this._activeSyn.length; p++) {
       var a = this._activeSyn[p][0], b = this._activeSyn[p][1];
       var j = Math.min(extraJ[a] || 0.0, extraJ[b] || 0.0);
       var j2 = state.J[p] > j ? state.J[p] : j;
-      total += this._pairValue(p, (state.s[a] || 0.0) + (extra[a] || 0.0),
-                               (state.s[b] || 0.0) + (extra[b] || 0.0), j2)
+      total += this._pairValue(p, (sSyn[a] || 0.0) + (extra[a] || 0.0),
+                               (sSyn[b] || 0.0) + (extra[b] || 0.0), j2)
              - state.pairVals[p];
     }
     return total;
@@ -1525,19 +1540,133 @@
     return { score: score, dFit: best.dFit, dSyn: best.dSyn, meta: meta, combo: best.combo };
   };
 
+  CompEngine.prototype.kitVariants = function (weapon) {
+    /* Doctrine kit variants for GENERATION (dressed forge 2026-08-27,
+       mirrors engine.py kit_variants): v0 = the seat's context-free
+       doctrine kit (off-tier slots stay unset), plus ONE divergent
+       single-slot swap (variant cap 2 — perf ruling); [["v0", null]]
+       for weapons with no doctrine gear. NO doctrine passives anywhere
+       in this path. */
+    var out = this._variantCache[weapon];
+    if (out !== undefined) return out;
+    var self = this;
+    var topCap = function (k) {
+      var extra = self.gearExtra(k);
+      var best = null;
+      var caps = Object.keys(extra).sort();
+      for (var ci = 0; ci < caps.length; ci++) {
+        var v = (self._weights[caps[ci]] || 0.0) * extra[caps[ci]];
+        if (best === null || v > best[1]) best = [caps[ci], v];
+      }
+      return best === null ? null : best[0];
+    };
+    var ko = this.kitOptions(weapon);
+    var SLOTS = ["head", "armor", "shoes", "cape", "offhand",
+                 "potion", "food"];
+    var v0 = {}, divergent = [];
+    for (var si = 0; si < SLOTS.length; si++) {
+      var slot = SLOTS[si];
+      var opts = (ko.options[slot] || []).filter(function (o) {
+        return !!o.doctrine;
+      });
+      if (!opts.length) continue;
+      v0[slot] = opts[0].gear;
+      var t0 = topCap(opts[0].gear);
+      for (var oi = 1; oi < opts.length; oi++) {
+        if (topCap(opts[oi].gear) !== t0) {
+          divergent.push([slot, opts[oi].gear]);
+          break;
+        }
+      }
+    }
+    var gl = function (d) {
+      var l = [];
+      for (var sj = 0; sj < SLOTS.length; sj++) {
+        if (d[SLOTS[sj]] !== undefined) l.push(d[SLOTS[sj]]);
+      }
+      return l;
+    };
+    if (!Object.keys(v0).length) {
+      out = [["v0", null]];
+    } else {
+      out = [["v0", gl(v0)]];
+      for (var n = 0; n < Math.min(1, divergent.length); n++) {
+        var alt = {};
+        for (var k in v0) alt[k] = v0[k];
+        alt[divergent[n][0]] = divergent[n][1];
+        out.push(["v" + (n + 1), gl(alt)]);
+      }
+    }
+    this._variantCache[weapon] = out;
+    return out;
+  };
+
+  CompEngine.prototype._dressedExtras = function (weapon) {
+    /* Per variant, the member's effective caps per combo index (mirrors
+       engine.py _dressed_extras). The naked variant reuses the
+       combo-extras objects THEMSELVES (identity keeps the exactness
+       proofs intact). */
+    var out = this._dressedCache[weapon];
+    if (out !== undefined) return out;
+    var extras = this._comboExtras(weapon);
+    out = {};
+    var variants = this.kitVariants(weapon);
+    for (var vi = 0; vi < variants.length; vi++) {
+      var vkey = variants[vi][0], glist = variants[vi][1];
+      if (glist === null) {
+        out[vkey] = extras;
+      } else {
+        var lst = [];
+        for (var i = 0; i < extras.length; i++)
+          lst.push(this.buildExtra(weapon, i, glist));
+        out[vkey] = lst;
+      }
+    }
+    this._dressedCache[weapon] = out;
+    return out;
+  };
+
+  CompEngine.prototype._comboScoreDressed = function (state, weapon, i,
+                                                     wextra, dextra) {
+    /* _comboScore for a DRESSED candidate: fit half prices the dressed
+       vector, synergy half the weapon-only vector — the exact
+       decomposition of compScore-with-gears (mirrors engine.py
+       _combo_score_dressed). Same object -> exactly _comboScore. */
+    if (dextra === wextra) return this._comboScore(state, weapon, i, wextra);
+    var adj = this._nonstackAdjust(state, weapon, i, dextra);
+    var dFit = this._margFitFrom(state.s, adj);
+    var dSyn = this._margSynFrom(state, wextra);
+    return { val: this.alpha * dFit + this.beta * dSyn,
+             dFit: dFit, dSyn: dSyn };
+  };
+
   CompEngine.prototype._evalPick = function (state, weapon) {
     /* THE candidate score — the exact compScore delta of adding `weapon`
-       with its best loadout (mirrors engine.py _eval_pick). Returns
-       {score, dFit, dSyn, meta, combo}. */
+       with its best loadout AND doctrine-kit variant (dressed forge
+       2026-08-27; mirrors engine.py _eval_pick). Returns
+       {score, dFit, dSyn, meta, combo, variant, vgears}. */
     var best = null;
     var extras = this._comboExtras(weapon);
-    for (var i = 0; i < extras.length; i++) {
-      var cs = this._comboScore(state, weapon, i, extras[i]);
-      if (best === null || cs.val > best.val)
-        best = { val: cs.val, dFit: cs.dFit, dSyn: cs.dSyn, combo: i };
+    var dressed = this._dressedExtras(weapon);
+    var variants = this.kitVariants(weapon);
+    for (var vi = 0; vi < variants.length; vi++) {
+      var vkey = variants[vi][0], vgears = variants[vi][1];
+      var dext = dressed[vkey];
+      for (var i = 0; i < extras.length; i++) {
+        var cs = this._comboScoreDressed(state, weapon, i, extras[i],
+                                         dext[i]);
+        if (best === null || cs.val > best.val)
+          best = { val: cs.val, dFit: cs.dFit, dSyn: cs.dSyn, combo: i,
+                   variant: vkey, vgears: vgears };
+      }
     }
-    if (best === null) best = { val: 0.0, dFit: 0.0, dSyn: 0.0, combo: null };
-    return this._pickTail(state, weapon, best);
+    if (best === null)
+      best = { val: 0.0, dFit: 0.0, dSyn: 0.0, combo: null,
+               variant: "v0", vgears: null };
+    var tail = this._pickTail(state, weapon, best);
+    tail.variant = best.variant;
+    tail.vgears = best.vgears;
+    return tail;
   };
 
   CompEngine.prototype._rawMemberCaps = function (weapon, combo) {
@@ -1609,7 +1738,7 @@
   CompEngine.prototype.bestLoadout = function (s, baseSyn, weapon) {
     /* Legacy shim (mirrors engine.py best_loadout): candidate loadout vs
        bare supply with J=0 — exact for an empty party. */
-    var state = { s: s, J: [], pairVals: [], counts: {} };
+    var state = { s: s, sSyn: s, J: [], pairVals: [], counts: {} };
     var p;
     for (p = 0; p < this._activeSyn.length; p++) {
       state.J.push(0.0);
@@ -1628,10 +1757,10 @@
     return best === null ? { dFit: 0.0, dSyn: 0.0, extra: {} } : best;
   };
 
-  CompEngine.prototype.explain = function (party, candidate, combos) {
+  CompEngine.prototype.explain = function (party, candidate, combos, gears) {
     /* Per-capability delta terms for the candidate's CHOSEN loadout —
        matches what _evalPick scored (mirrors engine.py explain). */
-    var state = this.partyState(party, combos);
+    var state = this.partyState(party, combos, gears);
     var pick = this._evalPick(state, candidate);
     var extra = this.memberExtra(candidate, pick.combo);
     var s = state.s, terms = [];
@@ -1662,12 +1791,15 @@
     return (cfg.redundant_gain_max === undefined) ? 0.05 : cfg.redundant_gain_max;
   };
 
-  CompEngine.prototype._pickCaps = function (state, weapon, combo) {
+  CompEngine.prototype._pickCaps = function (state, weapon, combo, vgears) {
     /* [rows, capsGain] — signed per-capability terms of the fitness
-       marginal (rows sum to _evalPick's dFit); capsGain is the
-       GAP-CLOSING part alone: below-target coverage + floor lift,
-       headroom-band depth excluded (mirrors engine.py _pick_caps). */
-    var extra = this.memberExtra(weapon, combo);
+       marginal for the DRESSED chosen variant (rows sum to _evalPick's
+       dFit); capsGain is the GAP-CLOSING part alone: below-target
+       coverage + floor lift, headroom-band depth excluded (mirrors
+       engine.py _pick_caps). */
+    var extra = (vgears && vgears.length)
+      ? this.buildExtra(weapon, combo, vgears)
+      : this.memberExtra(weapon, combo);
     var adj = this._nonstackAdjust(state, weapon, combo, extra);
     var s = state.s, rows = [], capsGain = 0.0;
     for (var cap in adj) {
@@ -1700,15 +1832,16 @@
     return "ok";
   };
 
-  CompEngine.prototype.pickReport = function (party, candidate, combos) {
+  CompEngine.prototype.pickReport = function (party, candidate, combos,
+                                              gears) {
     /* Full SIGNED decomposition of the candidate's pick score — the
        'why / why not' panel (mirrors engine.py pick_report). caps rows sum
        to d_fitness; alpha*d_fitness + beta*d_synergy + delta*meta
        + viability*viab - dup_penalty reconstructs the score.
        DESCRIPTIVE ONLY — computing it never changes a score. */
-    var state = this.partyState(party, combos);
+    var state = this.partyState(party, combos, gears);
     var pick = this._evalPick(state, candidate);
-    var pc = this._pickCaps(state, candidate, pick.combo);
+    var pc = this._pickCaps(state, candidate, pick.combo, pick.vgears);
     var rows = pc[0], capsGain = pc[1];
     var dup = (state.counts[candidate] || 0) + 1 - this._dupFree(candidate);
     var dupPenalty = dup > 0 ? this.rho * dup : 0.0;
@@ -1733,7 +1866,7 @@
     return {
       weapon: candidate,
       display_name: this.weapons[candidate].display_name,
-      combo: pick.combo, score: pick.score,
+      combo: pick.combo, kit: pick.vgears || [], score: pick.score,
       d_fitness: pick.dFit, d_synergy: pick.dSyn,
       meta_prior: pick.meta, viability: this.viabilityOf(candidate),
       dup_penalty: dupPenalty,
@@ -1750,9 +1883,10 @@
     return this._suggest;
   };
 
-  CompEngine.prototype.recommend = function (party, topN, pool, combos) {
+  CompEngine.prototype.recommend = function (party, topN, pool, combos,
+                                             gears) {
     if (topN === undefined) topN = 4;
-    var state = this.partyState(party, combos);
+    var state = this.partyState(party, combos, gears);
     var out = [];
     var keys = this._pool(pool);
     for (var i = 0; i < keys.length; i++) {
@@ -1764,7 +1898,7 @@
         status: this.weapons[w].status,
         d_fitness: ps.dFit, d_synergy: ps.dSyn, meta_prior: ps.meta,
         viability: this.viabilityOf(w),
-        combo: ps.combo,
+        combo: ps.combo, kit: ps.vgears || [],
         score: ps.score,
       });
     }
@@ -1773,14 +1907,16 @@
        suggestion that survives ranking can still be a depth pick in a
        saturated comp — say so instead of implying it fills a gap */
     for (i = 0; i < out.length; i++) {
-      var pc = this._pickCaps(state, out[i].weapon, out[i].combo);
+      var pc = this._pickCaps(state, out[i].weapon, out[i].combo,
+                              out[i].kit.length ? out[i].kit : null);
       out[i].caps_gain = pc[1];
       out[i].verdict = this._pickVerdict(out[i].score, pc[1]);
     }
     return out;
   };
 
-  CompEngine.prototype.swapReview = function (party, topN, pool, combos) {
+  CompEngine.prototype.swapReview = function (party, topN, pool, combos,
+                                              gears) {
     /* Per-member swap advisor (mirrors engine.py swap_review): each member
        valued exactly as _evalPick would value it into the REST of the
        party. `off_comp` flags viability-excluded members. */
@@ -1791,14 +1927,16 @@
       var rest = party.slice(0, i).concat(party.slice(i + 1));
       var restCombos = combos
         ? combos.slice(0, i).concat(combos.slice(i + 1)) : null;
-      var state = this.partyState(rest, restCombos);
+      var restGears = gears
+        ? gears.slice(0, i).concat(gears.slice(i + 1)) : null;
+      var state = this.partyState(rest, restCombos, restGears);
       var self = this;
       var curPick = this._evalPick(state, cur);
       var curScore = curPick.score;
       /* redundancy lens (roadmap item 3, mirrors engine.py): the member
          valued exactly as a pick into the rest — does it still close any
          gap, or are its jobs already covered without it? Flag only. */
-      var curPc = this._pickCaps(state, cur, curPick.combo);
+      var curPc = this._pickCaps(state, cur, curPick.combo, curPick.vgears);
       var curVerdict = this._pickVerdict(curScore, curPc[1]);
       var better = [];
       var keys = this._pool(pool);
@@ -2419,25 +2557,40 @@
     var state = beam.state;
     var best = null;
     var extras = this._comboExtras(w);
+    var dressed = this._dressedExtras(w);
+    var variants = this.kitVariants(w);
     var hasPred = false;
     for (var k in ctx.predMin) { hasPred = true; break; }
     for (var i = 0; i < extras.length; i++) {
+      /* predicate feasibility is per COMBO only — kit variants never
+         change predicate contributions (mirrors engine.py) */
       if (hasPred) {
         var need = this._forgeMinNeed(ctx, beam.roles, beam.preds, w,
                                       this._withProfile(
                                         w, this._predContrib(w, i)));
         if (need > slotsLeftAfter) continue;
       }
-      var cs = this._comboScore(state, w, i, extras[i]);
-      if (best === null || cs.val > best.val)
-        best = { val: cs.val, dFit: cs.dFit, dSyn: cs.dSyn, combo: i };
+      for (var vi = 0; vi < variants.length; vi++) {
+        var vkey = variants[vi][0], vgears = variants[vi][1];
+        var cs = this._comboScoreDressed(state, w, i, extras[i],
+                                         dressed[vkey][i]);
+        if (best === null || cs.val > best.val)
+          best = { val: cs.val, dFit: cs.dFit, dSyn: cs.dSyn, combo: i,
+                   variant: vkey, vgears: vgears };
+      }
     }
     if (best === null) return null;
-    return this._pickTail(state, w, best);
+    var tail = this._pickTail(state, w, best);
+    tail.variant = best.variant;
+    tail.vgears = best.vgears;
+    return tail;
   };
 
-  CompEngine.prototype._memberTag = function (w, combo) {
-    return w + "#" + (combo === null || combo === undefined ? "d" : String(combo));
+  CompEngine.prototype._memberTag = function (w, combo, vkey) {
+    /* Canonical member key for beam dedup — the kit-variant id is part
+       of the identity (dressed forge 2026-08-27; mirrors engine.py). */
+    return w + "#" + (combo === null || combo === undefined ? "d" : String(combo))
+             + "#" + (vkey === undefined || vkey === null ? "-" : vkey);
   };
 
   CompEngine.prototype._insertSorted = function (items, item) {
@@ -2473,14 +2626,16 @@
     var feasible = true;
 
     var fc = this._forgeCounts(locked, combos);
+    var gears0 = [];
+    for (var gi0 = 0; gi0 < locked.length; gi0++) gears0.push(null);
     var items0 = [];
     for (var li = 0; li < locked.length; li++)
       items0.push(this._memberTag(locked[li], combos[li]));
     items0.sort();
-    var beams = [{ party: locked, combos: combos,
+    var beams = [{ party: locked, combos: combos, gears: gears0,
                    counts: fc[0], roles: fc[1], preds: fc[2], groups: fc[3],
-                   state: this.partyState(locked, combos), items: items0,
-                   score: this.compScore(locked, combos) }];
+                   state: this.partyState(locked, combos, gears0), items: items0,
+                   score: this.compScore(locked, combos, gears0) }];
     for (var depth = locked.length; depth < size; depth++) {
       var slotsLeftAfter = size - depth - 1;
       var expansions = [];
@@ -2492,7 +2647,8 @@
                                    beam.groups, w, slotsLeftAfter)) continue;
           var pick = this._forgeEvalPick(ctx, beam, w, slotsLeftAfter);
           if (pick === null) continue;  /* no combo keeps minima satisfiable */
-          expansions.push([beam.score + pick.score, bi, w, pick.combo]);
+          expansions.push([beam.score + pick.score, bi, w, pick.combo,
+                           pick.variant, pick.vgears]);
         }
       }
       if (!expansions.length) { feasible = false; break; }
@@ -2505,39 +2661,43 @@
       for (var xi = 0; xi < expansions.length; xi++) {
         var ex = expansions[xi];
         var src = beams[ex[1]];
-        var items = this._insertSorted(src.items, this._memberTag(ex[2], ex[3]));
+        var items = this._insertSorted(src.items,
+                                       this._memberTag(ex[2], ex[3], ex[4]));
         var key = items.join("|");
         if (seen[key]) continue;
         seen[key] = true;
         var party2 = src.party.concat([ex[2]]);
         var combos2 = src.combos.concat([ex[3]]);
+        var gears2 = src.gears.concat([ex[5]]);
         var fc2 = this._forgeCounts(party2, combos2);
-        nextBeams.push({ party: party2, combos: combos2,
+        nextBeams.push({ party: party2, combos: combos2, gears: gears2,
                          counts: fc2[0], roles: fc2[1], preds: fc2[2], groups: fc2[3],
-                         state: this.partyState(party2, combos2), items: items,
-                         score: this.compScore(party2, combos2) });
+                         state: this.partyState(party2, combos2, gears2),
+                         items: items,
+                         score: this.compScore(party2, combos2, gears2) });
         if (nextBeams.length >= beamWidth) break;
       }
       beams = nextBeams;
     }
     var best = beams[0];
-    var party = best.party, combosOut = best.combos;
+    var party = best.party, combosOut = best.combos, gearsOut = best.gears;
     var fixed = locked.length;
     if (party.length > fixed) {
       /* refine -> pair-trade -> refine (mirrors engine.py forge) */
-      var rc = this._refineConstrained(ctx, party, combosOut, fixed);
-      rc = this._twoOpt(ctx, rc[0], rc[1], fixed);
-      rc = this._refineConstrained(ctx, rc[0], rc[1], fixed);
-      party = rc[0]; combosOut = rc[1];
+      var rc = this._refineConstrained(ctx, party, combosOut, gearsOut, fixed);
+      rc = this._twoOpt(ctx, rc[0], rc[1], rc[2], fixed);
+      rc = this._refineConstrained(ctx, rc[0], rc[1], rc[2], fixed);
+      party = rc[0]; combosOut = rc[1]; gearsOut = rc[2];
     }
     /* filler audit (mirrors engine.py): negative slots split into `held`
        (mandated by a minimum constraint) and `filler` (must not survive). */
     var filler = [], held = [];
-    var base = this.compScore(party, combosOut);
+    var base = this.compScore(party, combosOut, gearsOut);
     for (var i2 = fixed; i2 < party.length; i2++) {
       var sub = party.slice(0, i2).concat(party.slice(i2 + 1));
       var subC = combosOut.slice(0, i2).concat(combosOut.slice(i2 + 1));
-      if (base - this.compScore(sub, subC) >= -1e-9) continue;
+      var subG = gearsOut.slice(0, i2).concat(gearsOut.slice(i2 + 1));
+      if (base - this.compScore(sub, subC, subG) >= -1e-9) continue;
       var fcs = this._forgeCounts(sub, subC);
       var needed = false;
       for (var rr in ctx.roleMin) {
@@ -2560,7 +2720,24 @@
     for (var pf in ctx.predMin) {
       if ((fcf[2][pf] || 0) < ctx.predMin[pf]) feasible = false;
     }
-    return { party: party, combos: combosOut, score: base,
+    var kits = {};
+    for (var ki = fixed; ki < party.length; ki++) {
+      if (gearsOut[ki] && gearsOut[ki].length) {
+        var kv = this.kitVariants(party[ki]);
+        var vname = null;
+        for (var kvi = 0; kvi < kv.length; kvi++) {
+          var glk = kv[kvi][1];
+          if (glk && glk.length === gearsOut[ki].length
+              && glk.join("|") === gearsOut[ki].join("|")) {
+            vname = kv[kvi][0];
+            break;
+          }
+        }
+        kits[ki] = { variant: vname, gears: gearsOut[ki] };
+      }
+    }
+    return { party: party, combos: combosOut, gears: gearsOut, kits: kits,
+             score: base,
              feasible: feasible, filler: filler, held: held, locked: fixed };
   };
 
@@ -2583,52 +2760,58 @@
     return true;
   };
 
-  CompEngine.prototype._refineConstrained = function (ctx, party, combos, fixed, maxPasses) {
+  CompEngine.prototype._refineConstrained = function (ctx, party, combos,
+                                                      gears, fixed, maxPasses) {
     /* Steepest-descent 1-opt over generated slots, constraint-aware:
        minima are checked against the REST roster's combo-aware counts, so
        a swap can never trade away the spells a minimum was counting on
        (mirrors engine.py _refine_constrained, review 2026-08-19). */
-    party = party.slice(); combos = combos.slice();
+    party = party.slice(); combos = combos.slice(); gears = gears.slice();
     if (maxPasses === undefined) maxPasses = 8;
-    var best = this.compScore(party, combos);
+    var best = this.compScore(party, combos, gears);
     for (var pass = 0; pass < maxPasses; pass++) {
       var move = null, gain = 1e-9;
       for (var i = fixed; i < party.length; i++) {
         var rest = party.slice(0, i).concat(party.slice(i + 1));
         var restC = combos.slice(0, i).concat(combos.slice(i + 1));
+        var restG = gears.slice(0, i).concat(gears.slice(i + 1));
         var fcr = this._forgeCounts(rest, restC);
-        var state = this.partyState(rest, restC);
-        var baseRest = this.compScore(rest, restC);
+        var state = this.partyState(rest, restC, restG);
+        var baseRest = this.compScore(rest, restC, restG);
         var contrib = best - baseRest;
-        var orig = party[i];
         var beam = { state: state, roles: fcr[1], preds: fcr[2] };
         for (var j = 0; j < ctx.pool.length; j++) {
           var w = ctx.pool[j];
-          if (w === orig) continue;
+          /* w === party[i] deliberately NOT skipped (dressed forge
+             2026-08-27, mirrors engine.py): re-resolving the SAME
+             weapon's combo+kit can be the best move — identical picks
+             price d == 0 and are never taken. */
           if (!this._addOk(ctx, fcr[0], fcr[1], fcr[2], fcr[3], w)) continue;
           var pick = this._forgeEvalPick(ctx, beam, w, 0);
           if (pick === null) continue;
           var d = pick.score - contrib;
-          if (d > gain) { move = [i, w, pick.combo]; gain = d; }
+          if (d > gain) { move = [i, w, pick.combo, pick.vgears]; gain = d; }
         }
       }
       if (move === null) break;
       party[move[0]] = move[1];
       combos[move[0]] = move[2];
-      best = this.compScore(party, combos);
+      gears[move[0]] = move[3];
+      best = this.compScore(party, combos, gears);
     }
-    return [party, combos];
+    return [party, combos, gears];
   };
 
-  CompEngine.prototype._twoOpt = function (ctx, party, combos, fixed, worstK, candM) {
+  CompEngine.prototype._twoOpt = function (ctx, party, combos, gears,
+                                           fixed, worstK, candM) {
     /* Bounded 2-opt over the weakest generated slots (mirrors engine.py
        _two_opt). An accepted pair-move reorders the roster, so the pass
        restarts with freshly computed weakest slots (review 2026-08-18). */
-    party = party.slice(); combos = combos.slice();
+    party = party.slice(); combos = combos.slice(); gears = gears.slice();
     if (worstK === undefined) worstK = 4;
     if (candM === undefined) candM = 12;
-    var best = this.compScore(party, combos);
-    if (party.length - fixed < 2) return [party, combos];
+    var best = this.compScore(party, combos, gears);
+    if (party.length - fixed < 2) return [party, combos, gears];
     var improved = true, passes = 0;
     while (improved && passes < 3) {
       improved = false;
@@ -2637,7 +2820,8 @@
       for (var gi = fixed; gi < party.length; gi++) {
         var sub = party.slice(0, gi).concat(party.slice(gi + 1));
         var subC = combos.slice(0, gi).concat(combos.slice(gi + 1));
-        contribs.push([best - this.compScore(sub, subC), gi]);
+        var subG = gears.slice(0, gi).concat(gears.slice(gi + 1));
+        contribs.push([best - this.compScore(sub, subC, subG), gi]);
       }
       contribs.sort(function (a, b) {
         if (a[0] !== b[0]) return a[0] - b[0];
@@ -2651,12 +2835,13 @@
           if (j < i) { var tswap = i; i = j; j = tswap; }
           var rest = party.slice(0, i).concat(party.slice(i + 1, j)).concat(party.slice(j + 1));
           var restC = combos.slice(0, i).concat(combos.slice(i + 1, j)).concat(combos.slice(j + 1));
-          var state = this.partyState(rest, restC);
+          var restG = gears.slice(0, i).concat(gears.slice(i + 1, j)).concat(gears.slice(j + 1));
+          var state = this.partyState(rest, restC, restG);
           var ranked = [];
           for (var pi = 0; pi < ctx.pool.length; pi++) {
             var pw = ctx.pool[pi];
             var pk = this._evalPick(state, pw);
-            ranked.push([pk.score, pw, pk.combo]);
+            ranked.push([pk.score, pw, pk.combo, pk.vgears]);
           }
           ranked.sort(function (a, b) {
             if (a[0] !== b[0]) return b[0] - a[0];
@@ -2664,15 +2849,17 @@
           });
           var shortlist = ranked.slice(0, candM);
           for (var sa = 0; sa < shortlist.length && !improved; sa++) {
-            var wa = shortlist[sa][1], ca = shortlist[sa][2];
+            var wa = shortlist[sa][1], ca = shortlist[sa][2], ga = shortlist[sa][3];
             var pa = rest.concat([wa]);
             var pca = restC.concat([ca]);
-            var state2 = this.partyState(pa, pca);
+            var pga = restG.concat([ga]);
+            var state2 = this.partyState(pa, pca, pga);
             for (var sb = 0; sb < shortlist.length; sb++) {
               var wb = shortlist[sb][1];
               var pkb = this._evalPick(state2, wb);
               var candParty = pa.concat([wb]);
               var candCombos = pca.concat([pkb.combo]);
+              var candGears = pga.concat([pkb.vgears]);
               var fc = this._forgeCounts(candParty, candCombos);
               var counts = fc[0], roles = fc[1], preds = fc[2], groups = fc[3];
               var ok = true;
@@ -2706,10 +2893,11 @@
                 }
               }
               if (!ok) continue;
-              var d2 = this.compScore(candParty, candCombos) - best;
+              var d2 = this.compScore(candParty, candCombos, candGears) - best;
               if (d2 > 1e-9) {
                 party = candParty;
                 combos = candCombos;
+                gears = candGears;
                 best = best + d2;
                 improved = true;
                 break;
@@ -2719,7 +2907,7 @@
         }
       }
     }
-    return [party, combos];
+    return [party, combos, gears];
   };
 
   if (typeof module !== "undefined" && module.exports) module.exports = CompEngine;

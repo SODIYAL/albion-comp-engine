@@ -34,7 +34,8 @@ const out = cases.map((c, i) => {
     // alternation (the [] truthiness divergence shipped once)
     const combos = Math.floor(i / FORGE_EVERY) % 2 === 0 ? c.combos.slice(0, 2) : [];
     const r = e.forge(FORGE_SIZE, c.party.slice(0, 2), combos, c.refine_pool);
-    forged = { party: r.party, combos: r.combos, score: r.score,
+    forged = { party: r.party, combos: r.combos, gears: r.gears,
+               score: r.score,
                feasible: r.feasible, filler: r.filler, held: r.held };
   }
   return {
@@ -58,7 +59,7 @@ const out = cases.map((c, i) => {
     synergy_locked: e.synergy(c.party, c.combos),
     max_fitness: e.maxFitness(),
     recommend: e.recommend(c.party, 5).map((r) => ({
-      weapon: r.weapon, score: r.score, combo: r.combo,
+      weapon: r.weapon, score: r.score, combo: r.combo, kit: r.kit,
       caps_gain: r.caps_gain, verdict: r.verdict })),
     pick_report: c.refine_pool.length
       ? e.pickReport(c.party, c.refine_pool[0], c.combos) : null,
