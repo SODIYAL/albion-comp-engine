@@ -74,6 +74,7 @@
   capabilities:
     - {cap: sustained_dps, score: 2, evidence: SMELLOFBLOOD}     # +15% own damage pulse, reveals invisible
     - {cap: resist_shred,  score: 2, evidence: SMELLOFBLOOD}     # -35% resists on enemies below 50% HP
+    # (also reveals invisible enemies hit — `reveal` stays unpromoted, see effect_map.yaml)
 
 - gear: HEAD_LEATHER_ROYAL           # Royal Hood
   slot: head

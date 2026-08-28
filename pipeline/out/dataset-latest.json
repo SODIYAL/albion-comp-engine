@@ -51761,7 +51761,8 @@
    "display_name": "Oathkeepers",
    "evidence": {
     "buff_allies": [
-     "BLESSED_MACES"
+     "BLESSED_MACES",
+     "DEFENSIVESLAM"
     ],
     "engage": [
      "BLESSED_MACES"
@@ -51773,7 +51774,8 @@
      "CHARGE_ROOT"
     ],
     "peel": [
-     "GUARDRUNE"
+     "GUARDRUNE",
+     "DEFENSIVESLAM"
     ],
     "root": [
      "CHARGE_ROOT"
@@ -53196,6 +53198,11 @@
   },
   "2H_FLAIL": {
    "cap_delivery": {
+    "buff_allies": {
+     "max_targets": 10,
+     "radius": 8.0,
+     "spell": "DEFENSIVESLAM"
+    },
     "catch": {
      "radius": 1.0,
      "spell": "ROOTFIELD"
@@ -53230,6 +53237,7 @@
     }
    },
    "capabilities": {
+    "buff_allies": 3,
     "catch": 4,
     "engage": 4,
     "interrupt": 2,
@@ -53244,6 +53252,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Morning Star",
    "evidence": {
+    "buff_allies": [
+     "DEFENSIVESLAM"
+    ],
     "catch": [
      "ROOTFIELD"
     ],
@@ -53257,7 +53268,8 @@
      "ROOTFIELD"
     ],
     "peel": [
-     "ROOTFIELD"
+     "ROOTFIELD",
+     "DEFENSIVESLAM"
     ],
     "root": [
      "ROOTFIELD"
@@ -53292,7 +53304,8 @@
       "CHARGE_ROOT"
      ],
      [
-      "SACRED_GROUND"
+      "SACRED_GROUND",
+      "DEFENSIVESLAM"
      ]
     ],
     "slots": [
@@ -53314,6 +53327,9 @@
       {
        "slow": 2,
        "zone_control": 2
+      },
+      {
+       "buff_allies": 3
       }
      ]
     ]
@@ -59682,6 +59698,11 @@
   },
   "2H_MACE": {
    "cap_delivery": {
+    "buff_allies": {
+     "max_targets": 10,
+     "radius": 8.0,
+     "spell": "DEFENSIVESLAM"
+    },
     "engage": {
      "radius": 6.0,
      "spell": "CHARGE_ROOT"
@@ -59721,6 +59742,7 @@
     }
    },
    "capabilities": {
+    "buff_allies": 3,
     "engage": 4,
     "interrupt": 2,
     "peel": 6,
@@ -59734,6 +59756,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Heavy Mace",
    "evidence": {
+    "buff_allies": [
+     "DEFENSIVESLAM"
+    ],
     "engage": [
      "CHARGE_ROOT"
     ],
@@ -59741,7 +59766,8 @@
      "CHARGE_ROOT"
     ],
     "peel": [
-     "SHRIEKMACE"
+     "SHRIEKMACE",
+     "DEFENSIVESLAM"
     ],
     "purge": [
      "SHRIEKMACE"
@@ -59779,7 +59805,8 @@
       "CHARGE_ROOT"
      ],
      [
-      "SACRED_GROUND"
+      "SACRED_GROUND",
+      "DEFENSIVESLAM"
      ]
     ],
     "slots": [
@@ -59800,6 +59827,9 @@
       {
        "slow": 2,
        "zone_control": 4
+      },
+      {
+       "buff_allies": 3
       }
      ]
     ]
@@ -59849,6 +59879,11 @@
   },
   "2H_MACE_MORGANA": {
    "cap_delivery": {
+    "buff_allies": {
+     "max_targets": 10,
+     "radius": 8.0,
+     "spell": "DEFENSIVESLAM"
+    },
     "catch": {
      "escalation": {
       "duration": 0.08,
@@ -59903,6 +59938,7 @@
     }
    },
    "capabilities": {
+    "buff_allies": 3,
     "catch": 2,
     "clump_create": 6,
     "engage": 2,
@@ -59918,6 +59954,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Camlann Mace",
    "evidence": {
+    "buff_allies": [
+     "DEFENSIVESLAM"
+    ],
     "catch": [
      "VACUUMSLASH"
     ],
@@ -59931,7 +59970,8 @@
      "CHARGE_ROOT"
     ],
     "peel": [
-     "GUARDRUNE"
+     "GUARDRUNE",
+     "DEFENSIVESLAM"
     ],
     "root": [
      "CHARGE_ROOT"
@@ -59970,7 +60010,8 @@
       "GUARDRUNE"
      ],
      [
-      "SACRED_GROUND"
+      "SACRED_GROUND",
+      "DEFENSIVESLAM"
      ]
     ],
     "slots": [
@@ -59995,6 +60036,9 @@
       {
        "slow": 2,
        "zone_control": 2
+      },
+      {
+       "buff_allies": 3
       }
      ]
     ]
@@ -68647,6 +68691,11 @@
   },
   "MAIN_MACE": {
    "cap_delivery": {
+    "buff_allies": {
+     "max_targets": 10,
+     "radius": 8.0,
+     "spell": "DEFENSIVESLAM"
+    },
     "engage": {
      "radius": 5.0,
      "spell": "MACELEAP"
@@ -68674,6 +68723,7 @@
     }
    },
    "capabilities": {
+    "buff_allies": 3,
     "engage": 4,
     "interrupt": 2,
     "mobility": 4,
@@ -68686,6 +68736,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Mace",
    "evidence": {
+    "buff_allies": [
+     "DEFENSIVESLAM"
+    ],
     "engage": [
      "MACELEAP"
     ],
@@ -68696,7 +68749,8 @@
      "MACELEAP"
     ],
     "peel": [
-     "GUARDRUNE"
+     "GUARDRUNE",
+     "DEFENSIVESLAM"
     ],
     "root": [
      "CHARGE_ROOT"
@@ -68717,7 +68771,8 @@
     },
     "slot_names": [
      "e",
-     "w"
+     "w",
+     "q"
     ],
     "slot_spells": [
      [
@@ -68726,6 +68781,9 @@
      [
       "CHARGE_ROOT",
       "GUARDRUNE"
+     ],
+     [
+      "DEFENSIVESLAM"
      ]
     ],
     "slots": [
@@ -68743,6 +68801,11 @@
       },
       {
        "peel": 4
+      }
+     ],
+     [
+      {
+       "buff_allies": 3
       }
      ]
     ]
@@ -68792,6 +68855,11 @@
   },
   "MAIN_MACE_CRYSTAL": {
    "cap_delivery": {
+    "buff_allies": {
+     "max_targets": 10,
+     "radius": 8.0,
+     "spell": "DEFENSIVESLAM"
+    },
     "burst_aoe": {
      "escalation": {
       "value": 0.08
@@ -68846,6 +68914,7 @@
     }
    },
    "capabilities": {
+    "buff_allies": 3,
     "burst_aoe": 2,
     "catch": 4,
     "engage": 2,
@@ -68861,6 +68930,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Dreadstorm Monarch",
    "evidence": {
+    "buff_allies": [
+     "DEFENSIVESLAM"
+    ],
     "burst_aoe": [
      "MACE_CRYSTAL_FRAGMENT_STORM"
     ],
@@ -68874,7 +68946,8 @@
      "CHARGE_ROOT"
     ],
     "peel": [
-     "GUARDRUNE"
+     "GUARDRUNE",
+     "DEFENSIVESLAM"
     ],
     "resist_shred": [
      "MACE_CRYSTAL_FRAGMENT_STORM"
@@ -68901,7 +68974,8 @@
     },
     "slot_names": [
      "e",
-     "w"
+     "w",
+     "q"
     ],
     "slot_spells": [
      [
@@ -68910,6 +68984,9 @@
      [
       "CHARGE_ROOT",
       "GUARDRUNE"
+     ],
+     [
+      "DEFENSIVESLAM"
      ]
     ],
     "slots": [
@@ -68930,6 +69007,11 @@
       },
       {
        "peel": 4
+      }
+     ],
+     [
+      {
+       "buff_allies": 3
       }
      ]
     ]
@@ -68979,6 +69061,11 @@
   },
   "MAIN_MACE_HELL": {
    "cap_delivery": {
+    "buff_allies": {
+     "max_targets": 10,
+     "radius": 8.0,
+     "spell": "DEFENSIVESLAM"
+    },
     "burst_st": {
      "escalation": {
       "value": 0.08
@@ -69030,6 +69117,7 @@
     }
    },
    "capabilities": {
+    "buff_allies": 3,
     "burst_st": 2,
     "damage_debuff": 4,
     "engage": 2,
@@ -69046,6 +69134,9 @@
    "curated_as_of": "2026-08-12",
    "display_name": "Incubus Mace",
    "evidence": {
+    "buff_allies": [
+     "DEFENSIVESLAM"
+    ],
     "burst_st": [
      "SHRINKINGSMASH"
     ],
@@ -69065,7 +69156,8 @@
      "SHRINKINGSMASH"
     ],
     "peel": [
-     "GUARDRUNE"
+     "GUARDRUNE",
+     "DEFENSIVESLAM"
     ],
     "root": [
      "CHARGE_ROOT"
@@ -69101,7 +69193,8 @@
       "GUARDRUNE"
      ],
      [
-      "SACRED_GROUND"
+      "SACRED_GROUND",
+      "DEFENSIVESLAM"
      ]
     ],
     "slots": [
@@ -69127,6 +69220,9 @@
       {
        "slow": 2,
        "zone_control": 2
+      },
+      {
+       "buff_allies": 3
       }
      ]
     ]
@@ -70125,6 +70221,11 @@
      "radius": 9.0,
      "spell": "PRIMALSLAM"
     },
+    "buff_allies": {
+     "max_targets": 10,
+     "radius": 8.0,
+     "spell": "DEFENSIVESLAM"
+    },
     "engage": {
      "radius": 6.0,
      "spell": "CHARGE_ROOT"
@@ -70156,6 +70257,7 @@
    },
    "capabilities": {
     "anti_dive": 6,
+    "buff_allies": 3,
     "engage": 2,
     "interrupt": 2,
     "knockback_displace": 2,
@@ -70172,6 +70274,9 @@
     "anti_dive": [
      "PRIMALSLAM"
     ],
+    "buff_allies": [
+     "DEFENSIVESLAM"
+    ],
     "engage": [
      "CHARGE_ROOT"
     ],
@@ -70182,7 +70287,8 @@
      "PRIMALSLAM"
     ],
     "peel": [
-     "PRIMALSLAM"
+     "PRIMALSLAM",
+     "DEFENSIVESLAM"
     ],
     "root": [
      "CHARGE_ROOT"
@@ -70217,7 +70323,8 @@
       "CHARGE_ROOT"
      ],
      [
-      "SACRED_GROUND"
+      "SACRED_GROUND",
+      "DEFENSIVESLAM"
      ]
     ],
     "slots": [
@@ -70239,6 +70346,9 @@
      [
       {
        "slow": 2
+      },
+      {
+       "buff_allies": 3
       }
      ]
     ]

@@ -14,3 +14,14 @@ capabilities:
   - {cap: slow, score: 2, evidence: SACRED_GROUND}          # (QW)
   - {cap: zone_control, score: 2, evidence: SACRED_GROUND}  # (QW)
   - {cap: tankiness, score: 4, evidence: WEAPON_STATS}
+  # Defensive Slam (2026-08-27): a real GROUP defensive buff that was never
+  # curated — +0.15 damage resistances AND +0.15 Crowd Control Resistance
+  # for you and up to 10 allies in an 8m radius, for 4s, off a Q. The
+  # effect map already routes both halves (damageresistance+ /
+  # crowdcontrolresistance+, ally direction -> buff_allies, peel); nothing
+  # cited the spell, so five maces (Oathkeepers, Morning Star, Heavy Mace,
+  # Camlann, 1H Mace) were scoring zero for it. Calibrated against Royal
+  # Armor's 10-ally energy buff (buff_allies 3) and kept BELOW Guard Rune's
+  # outright CC immunity (peel 4) — a resistance is not an immunity.
+  - {cap: buff_allies, score: 3, evidence: DEFENSIVESLAM}   # +15% resists & CCR to 10 allies (owner review)
+  - {cap: peel, score: 2, evidence: DEFENSIVESLAM}          # CCR on the backline blunts pick attempts (owner review)

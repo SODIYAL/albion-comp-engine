@@ -27,9 +27,22 @@
 # curation): six poster-child weapons made the case — see the §2.2 amendment.
 # Template weight starts low/flat/PROVISIONAL like anti_zone's.
 #
-# STILL PROPOSED (not yet in design doc §2.2):
-#   reveal         strip invisibility (4 lines). Real but marginal; drop it if
-#                  you would rather keep the taxonomy lean.
+# STILL PROPOSED, and 2026-08-27 INVESTIGATED IN FULL (owner: "ok add these
+# effects too") — the answer was DON'T, and here is the evidence so nobody
+# re-opens it blind:
+#   * Every WEAPON source of remove:invisibility is a PURGE spell (Battle
+#     Howl, Arcane Orb, Cripple, Breakthrough, Iron Will, Devastating
+#     Strike, Enfeeble Blades). Invisibility is a buff, so purging strips
+#     it. Scoring `reveal` there would double-count purge on 7 lines.
+#   * Only TWO sources reveal WITHOUT purging — Guardian Armor's Enfeeble
+#     Aura and Stalker Hood's Mortal Agony, both GEAR. The effect catalogue
+#     indexes weapon spells only (367 entries; no gear actives), so the
+#     evidence layer cannot ground a gear-spell claim: the lint rejected
+#     both, correctly.
+#   * No comp in the corpus fields anti-stealth, so there is no demand to
+#     fit a template row against either.
+# Promote it when a content type exists whose comps actually field it
+# (ganking / small-scale), and when the catalogue covers gear spells.
 
 proposed_capabilities:
   reveal: "Strips invisibility from enemies (anti-stealth)."
@@ -147,6 +160,13 @@ effects:
     note: >
       Makes your own CC land harder. Genuinely distinct, but 1 weapon line — not
       worth a capability until something else needs it.
+      RE-CONFIRMED 2026-08-27: there is no "cut the enemy's CC resistance"
+      effect worth a capability. What the dumps actually carry is the
+      per-spell @ignorecrowdcontrolresistance FLAG on 54 equippable CC
+      spells — a spell QUALITY (this CC bypasses their resistance), the
+      same shape as resil_pen, not a supply a team fields. If it is ever
+      modelled it belongs beside resilience penetration as a multiplier on
+      the CC caps, never as a capability row.
   focusfireprotectionpenetration+:
     self:  [burst_st]
     note: Pierces the falloff that protects an already-focused target.

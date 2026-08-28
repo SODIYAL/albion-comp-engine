@@ -94,6 +94,11 @@
   capabilities:
     - {cap: damage_debuff, score: 5, evidence: ENFEEBLEAURA}     # -60% damage dealt, 7m aura, 5s — the biggest debuff in the game
     - {cap: peel,          score: 3, evidence: ENFEEBLEAURA}
+    # (2026-08-27 reveal investigation: this aura DOES reveal invisible
+    # enemies entering it — one of only two sources in the game that reveal
+    # without purging. Left uncurated: `reveal` stays unpromoted, see the
+    # note in effect_map.yaml, and the gear effect catalogue cannot ground
+    # a gear-spell claim anyway.)
 
 - gear: ARMOR_PLATE_FEY              # Duskweaver Armor
   slot: armor
