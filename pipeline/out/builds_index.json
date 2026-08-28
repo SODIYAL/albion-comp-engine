@@ -48,7 +48,7 @@
      "caller": "Bist (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -58,7 +58,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
      "note": "alts: boot=SHOES_LEATHER_MORGANA, cape=CAPEITEM_SMUGGLER, secondhand=None",
      "party_size": {
       "max": 15,
@@ -68,12 +73,8 @@
      "published": "2026-01-03",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_SET2",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "support",
      "source": {
@@ -114,7 +115,7 @@
      "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.67,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.92,
       "outcome": null,
       "party_size": 1.0,
@@ -126,6 +127,8 @@
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_ROYAL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "food": "T7_MEAL_OMELETTE",
       "head": "HEAD_PLATE_SET2",
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
@@ -140,10 +143,7 @@
      "published": "2026-08-12",
      "q": 3,
      "quarantined_fields": [],
-     "raw": {
-      "cape": "Smugglar",
-      "food": "7.1 omelette"
-     },
+     "raw": {},
      "role": "HP Cut",
      "source": {
       "author": "Timothy",
@@ -177,7 +177,7 @@
      "caller": "Bist (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -187,7 +187,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_FEY",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_PLATE_SET1",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_SET2, armor=ARMOR_LEATHER_HELL",
      "party_size": {
       "max": 15,
@@ -197,12 +202,8 @@
      "published": "2026-01-03",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_FEY",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_STEW_FISH",
-      "head": "HEAD_PLATE_SET1",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "dps",
      "source": {
@@ -243,7 +244,7 @@
      "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.83,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.92,
       "outcome": null,
       "party_size": 1.0,
@@ -256,6 +257,7 @@
      "gear": {
       "armor": "ARMOR_PLATE_ROYAL",
       "cape": "CAPEITEM_SMUGGLER",
+      "food": "T7_MEAL_OMELETTE",
       "head": "HEAD_PLATE_SET2",
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
@@ -270,9 +272,7 @@
      "published": "2026-08-12",
      "q": 2,
      "quarantined_fields": [],
-     "raw": {
-      "food": "7.1 omelette"
-     },
+     "raw": {},
      "role": "Pierce",
      "source": {
       "author": "Timothy",
@@ -306,7 +306,7 @@
      "caller": "Bist (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -316,7 +316,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_PLATE_SET2",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_SMUGGLER, food=MEAL_OMELETTE_AVALON, helm=HEAD_PLATE_SET1, armor=ARMOR_PLATE_ROYAL, secondhand=None",
      "party_size": {
       "max": 15,
@@ -326,12 +331,8 @@
      "published": "2026-01-03",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_HELL",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_STEW_FISH",
-      "head": "HEAD_PLATE_SET2",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "dps",
      "source": {
@@ -372,7 +373,7 @@
      "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.83,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.92,
       "outcome": null,
       "party_size": 1.0,
@@ -385,6 +386,7 @@
      "gear": {
       "armor": "ARMOR_PLATE_HELL",
       "cape": "CAPEITEM_SMUGGLER",
+      "food": "T7_MEAL_OMELETTE",
       "head": "HEAD_LEATHER_SET3",
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
@@ -399,9 +401,7 @@
      "published": "2026-08-12",
      "q": 1,
      "quarantined_fields": [],
-     "raw": {
-      "food": "7.1 omelette"
-     },
+     "raw": {},
      "role": "Support",
      "source": {
       "author": "Timothy",
@@ -435,7 +435,7 @@
      "caller": "Bist (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -445,7 +445,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
      "note": "alts: boot=SHOES_PLATE_SET3, cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH, armor=ARMOR_PLATE_HELL, secondhand=None",
      "party_size": {
       "max": 15,
@@ -455,12 +460,8 @@
      "published": "2026-01-03",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "support",
      "source": {
@@ -499,7 +500,7 @@
      "caller": "Timothy",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.83,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.83,
       "outcome": null,
       "party_size": 1.0,
@@ -512,6 +513,7 @@
      "gear": {
       "armor": "ARMOR_PLATE_HELL",
       "cape": "CAPEITEM_SMUGGLER",
+      "food": "T7_MEAL_OMELETTE",
       "head": "HEAD_LEATHER_SET3",
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
@@ -528,9 +530,7 @@
      "quarantined_fields": [
       "passive: index 5 exceeds the 4-option pool"
      ],
-     "raw": {
-      "food": "7.1 omelette"
-     },
+     "raw": {},
      "role": "Support",
      "source": {
       "author": "Timothy",
@@ -569,7 +569,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.83,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.92,
       "outcome": null,
       "party_size": 1.0,
@@ -582,6 +582,7 @@
      "gear": {
       "armor": "ARMOR_PLATE_ROYAL",
       "cape": "CAPEITEM_SMUGGLER",
+      "food": "T7_MEAL_OMELETTE",
       "head": "HEAD_LEATHER_MORGANA",
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
@@ -596,9 +597,7 @@
      "published": "2026-08-12",
      "q": 3,
      "quarantined_fields": [],
-     "raw": {
-      "food": "7.1 omelette"
-     },
+     "raw": {},
      "role": "Heal Cut",
      "source": {
       "author": "Timothy",
@@ -636,7 +635,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.83,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.92,
       "outcome": null,
       "party_size": 1.0,
@@ -650,6 +649,7 @@
       "armor": "ARMOR_PLATE_KEEPER",
       "cape": "CAPEITEM_SMUGGLER",
       "food": "T7_MEAL_OMELETTE_FISH",
+      "head": "HEAD_LEATHER_HELL",
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
@@ -663,9 +663,7 @@
      "published": "2026-08-12",
      "q": 1,
      "quarantined_fields": [],
-     "raw": {
-      "head": "Leather Hood(cleanse)"
-     },
+     "raw": {},
      "role": "Tanky Healer",
      "source": {
       "author": "Timothy",
@@ -701,7 +699,7 @@
      "caller": "Bist (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -711,7 +709,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET1",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: cape=CAPEITEM_SMUGGLER",
      "party_size": {
       "max": 15,
@@ -721,12 +724,8 @@
      "published": "2026-01-03",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_SET1",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "rdps",
      "source": {
@@ -767,7 +766,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.67,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.92,
       "outcome": null,
       "party_size": 1.0,
@@ -780,6 +779,8 @@
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
       "cape": "CAPEITEM_SMUGGLER",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_LEATHER_HELL",
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
@@ -793,10 +794,7 @@
      "published": "2026-08-12",
      "q": 2,
      "quarantined_fields": [],
-     "raw": {
-      "food": "8.1 beef stew",
-      "head": "Leather Hood(cleanse)"
-     },
+     "raw": {},
      "role": "Dps",
      "source": {
       "author": "Timothy",
@@ -832,7 +830,7 @@
      "caller": "Bist (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -842,7 +840,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_LEATHER_FEY",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_SMUGGLER, helm=None, armor=ARMOR_LEATHER_HELL, secondhand=None",
      "party_size": {
       "max": 15,
@@ -852,12 +855,8 @@
      "published": "2026-01-03",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_AVALON",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_FEY",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "dps",
      "source": {
@@ -898,7 +897,7 @@
      "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.83,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.92,
       "outcome": null,
       "party_size": 1.0,
@@ -910,6 +909,7 @@
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_SET3",
+      "cape": "CAPEITEM_SMUGGLER",
       "food": "T7_MEAL_OMELETTE_AVALON",
       "head": "HEAD_LEATHER_HELL",
       "potion": "T5_POTION_REVIVE",
@@ -925,9 +925,7 @@
      "published": "2026-08-12",
      "q": 3,
      "quarantined_fields": [],
-     "raw": {
-      "cape": "Smugglar"
-     },
+     "raw": {},
      "role": "Tank",
      "source": {
       "author": "Timothy",
@@ -961,7 +959,7 @@
      "caller": "Bist (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -971,7 +969,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_PLATE_KEEPER",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "alts: boot=SHOES_CLOTH_FEY, cape=CAPEITEM_SMUGGLER, helm=HEAD_LEATHER_SET3, armor=ARMOR_PLATE_HELL",
      "party_size": {
       "max": 15,
@@ -981,12 +984,8 @@
      "published": "2026-01-03",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_SET2",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_SANDWICH",
-      "head": "HEAD_PLATE_KEEPER",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_REVIVE"
      },
      "role": "tank",
      "source": {
@@ -1155,7 +1154,7 @@
      "caller": "Bist (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -1165,7 +1164,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
      "note": "alts: boot=SHOES_LEATHER_ROYAL, armor=ARMOR_CLOTH_SET2, secondhand=None",
      "party_size": {
       "max": 15,
@@ -1175,12 +1179,8 @@
      "published": "2026-01-03",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_SET1"
+      "potion": "POTION_REVIVE"
      },
      "role": "healer",
      "source": {
@@ -1219,7 +1219,7 @@
      "caller": "Bist (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -1229,7 +1229,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_LEATHER_HELL",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "alts: boot=SHOES_LEATHER_SET2, cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_KEEPER, secondhand=None",
      "party_size": {
       "max": 15,
@@ -1239,12 +1244,8 @@
      "published": "2026-01-03",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_SET2",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_HELL",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_REVIVE"
      },
      "role": "tank",
      "source": {
@@ -1351,7 +1352,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.83,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.92,
       "outcome": null,
       "party_size": 1.0,
@@ -1364,6 +1365,7 @@
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
       "cape": "CAPEITEM_SMUGGLER",
+      "food": "T7_MEAL_OMELETTE",
       "head": "HEAD_LEATHER_SET3",
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
@@ -1378,9 +1380,7 @@
      "published": "2026-08-12",
      "q": 4,
      "quarantined_fields": [],
-     "raw": {
-      "food": "7.1 omelette"
-     },
+     "raw": {},
      "role": "Support",
      "source": {
       "author": "Timothy",
@@ -1418,7 +1418,7 @@
      "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.86,
+      "item_mapping": 1.0,
       "loadout_completeness": 1.0,
       "outcome": null,
       "party_size": 1.0,
@@ -1431,6 +1431,7 @@
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
       "cape": "CAPEITEM_SMUGGLER",
+      "food": "T7_MEAL_OMELETTE",
       "head": "HEAD_LEATHER_SET3",
       "offhand": "OFF_SHIELD_AVALON",
       "potion": "T5_POTION_REVIVE",
@@ -1446,9 +1447,7 @@
      "published": "2026-08-12",
      "q": 3,
      "quarantined_fields": [],
-     "raw": {
-      "food": "7.1 omelette"
-     },
+     "raw": {},
      "role": "Purge",
      "source": {
       "author": "Timothy",
@@ -1480,7 +1479,7 @@
      "caller": "Bist (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -1490,7 +1489,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SHIELD_AVALON",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_SMUGGLER, food=None, helm=HEAD_PLATE_SET2, armor=ARMOR_PLATE_HELL, secondhand=None",
      "party_size": {
       "max": 15,
@@ -1500,13 +1505,8 @@
      "published": "2026-01-03",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_SHIELD_AVALON",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "support",
      "source": {
@@ -1546,7 +1546,7 @@
      "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.86,
+      "item_mapping": 1.0,
       "loadout_completeness": 1.0,
       "outcome": null,
       "party_size": 1.0,
@@ -1559,6 +1559,7 @@
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
       "cape": "CAPEITEM_SMUGGLER",
+      "food": "T8_MEAL_STEW",
       "head": "HEAD_PLATE_SET1",
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "potion": "T5_POTION_REVIVE",
@@ -1574,9 +1575,7 @@
      "published": "2026-08-12",
      "q": 2,
      "quarantined_fields": [],
-     "raw": {
-      "food": "8.1 beef stew"
-     },
+     "raw": {},
      "role": "Dps",
      "source": {
       "author": "Timothy",
@@ -1608,7 +1607,7 @@
      "caller": "Bist (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -1618,7 +1617,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_PLATE_SET1",
+      "offhand": "OFF_DEMONSKULL_HELL",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
      "note": "alts: cape=CAPEITEM_SMUGGLER, armor=ARMOR_LEATHER_FEY",
      "party_size": {
       "max": 15,
@@ -1628,13 +1633,8 @@
      "published": "2026-01-03",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_HELL",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET1",
-      "offhand": "OFF_DEMONSKULL_HELL",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "dps",
      "source": {
@@ -1670,7 +1670,7 @@
      "caller": "Bist (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -1680,7 +1680,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_PLATE_SET1",
+      "offhand": "OFF_DEMONSKULL_HELL",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_SET2, secondhand=None",
      "party_size": {
       "max": 15,
@@ -1690,13 +1696,8 @@
      "published": "2026-01-03",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_HELL",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET1",
-      "offhand": "OFF_DEMONSKULL_HELL",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "dps",
      "source": {
@@ -1858,7 +1859,7 @@
      "caller": "Bist (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -1868,7 +1869,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_LEATHER_SET1",
+      "offhand": "OFF_TOWERSHIELD_UNDEAD",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
      "note": "alts: helm=HEAD_PLATE_SET3, secondhand=OFF_HORN_KEEPER",
      "party_size": {
       "max": 15,
@@ -1878,13 +1885,8 @@
      "published": "2026-01-03",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE",
-      "head": "HEAD_LEATHER_SET1",
-      "offhand": "OFF_TOWERSHIELD_UNDEAD",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_SET1"
+      "potion": "POTION_REVIVE"
      },
      "role": "healer",
      "source": {
@@ -1920,7 +1922,7 @@
      "caller": "Bist (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -1930,7 +1932,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_PLATE_SET3",
+      "offhand": "OFF_TOWERSHIELD_UNDEAD",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
      "note": "alts: boot=SHOES_LEATHER_MORGANA, cape=None, helm=HEAD_LEATHER_SET1, secondhand=OFF_ORB_MORGANA",
      "party_size": {
       "max": 15,
@@ -1940,13 +1948,8 @@
      "published": "2026-01-03",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_PLATE_SET3",
-      "offhand": "OFF_TOWERSHIELD_UNDEAD",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_SET1"
+      "potion": "POTION_REVIVE"
      },
      "role": "healer",
      "source": {
@@ -1974,7 +1977,15 @@
    "MAIN_MACE": [
     {
      "alternatives": {
-      "gear": {},
+      "gear": {
+       "offhand": [
+        {
+         "condition": null,
+         "key": "OFF_SHIELD_AVALON",
+         "raw": "Aegis"
+        }
+       ]
+      },
       "weapons": []
      },
      "approval": "approved",
@@ -1986,7 +1997,7 @@
      "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.86,
+      "item_mapping": 1.0,
       "loadout_completeness": 1.0,
       "outcome": null,
       "party_size": 1.0,
@@ -2001,6 +2012,7 @@
       "cape": "CAPEITEM_SMUGGLER",
       "food": "T7_MEAL_OMELETTE_AVALON",
       "head": "HEAD_LEATHER_HELL",
+      "offhand": "OFF_SHIELD_HELL",
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
@@ -2014,9 +2026,7 @@
      "published": "2026-08-12",
      "q": 3,
      "quarantined_fields": [],
-     "raw": {
-      "offhand": "Caitiff or Aegis"
-     },
+     "raw": {},
      "role": "Tank",
      "source": {
       "author": "Timothy",
@@ -2048,7 +2058,7 @@
      "caller": "Bist (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -2058,7 +2068,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_CLOTH_SET2",
+      "offhand": "OFF_SHIELD",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
      "note": "alts: boot=SHOES_LEATHER_ROYAL, cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_KEEPER, potion=None",
      "party_size": {
       "max": 15,
@@ -2068,13 +2084,8 @@
      "published": "2026-01-03",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_SANDWICH_AVALON",
-      "head": "HEAD_CLOTH_SET2",
-      "offhand": "OFF_SHIELD",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "tank",
      "source": {
@@ -2102,7 +2113,15 @@
    "MAIN_MACE_CRYSTAL": [
     {
      "alternatives": {
-      "gear": {},
+      "gear": {
+       "offhand": [
+        {
+         "condition": null,
+         "key": "OFF_SHIELD_AVALON",
+         "raw": "Aegis"
+        }
+       ]
+      },
       "weapons": []
      },
      "approval": "approved",
@@ -2114,7 +2133,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.86,
+      "item_mapping": 1.0,
       "loadout_completeness": 1.0,
       "outcome": null,
       "party_size": 1.0,
@@ -2129,6 +2148,7 @@
       "cape": "CAPEITEM_SMUGGLER",
       "food": "T7_MEAL_OMELETTE_AVALON",
       "head": "HEAD_LEATHER_HELL",
+      "offhand": "OFF_SHIELD_HELL",
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
@@ -2142,9 +2162,7 @@
      "published": "2026-08-12",
      "q": 3,
      "quarantined_fields": [],
-     "raw": {
-      "offhand": "Caitiff or Aegis"
-     },
+     "raw": {},
      "role": "Tank",
      "source": {
       "author": "Timothy",
@@ -2180,7 +2198,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.86,
+      "item_mapping": 1.0,
       "loadout_completeness": 1.0,
       "outcome": null,
       "party_size": 1.0,
@@ -2193,6 +2211,7 @@
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
       "cape": "CAPEITEM_SMUGGLER",
+      "food": "T8_MEAL_STEW",
       "head": "HEAD_LEATHER_MORGANA",
       "offhand": "OFF_SPIKEDSHIELD_MORGANA",
       "potion": "T5_POTION_REVIVE",
@@ -2208,9 +2227,7 @@
      "published": "2026-08-12",
      "q": 2,
      "quarantined_fields": [],
-     "raw": {
-      "food": "8.1 beef stew"
-     },
+     "raw": {},
      "role": "Dps",
      "source": {
       "author": "Timothy",
@@ -2246,7 +2263,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.71,
+      "item_mapping": 1.0,
       "loadout_completeness": 1.0,
       "outcome": null,
       "party_size": 1.0,
@@ -2259,6 +2276,8 @@
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
       "cape": "CAPEITEM_SMUGGLER",
+      "food": "T8_MEAL_STEW",
+      "head": "HEAD_LEATHER_HELL",
       "offhand": "OFF_HORN_KEEPER",
       "potion": "T5_POTION_REVIVE",
       "shoes": "SHOES_LEATHER_MORGANA"
@@ -2273,10 +2292,7 @@
      "published": "2026-08-12",
      "q": 2,
      "quarantined_fields": [],
-     "raw": {
-      "food": "8.1 beef stew",
-      "head": "Leather hood(cleanse)"
-     },
+     "raw": {},
      "role": "Dps",
      "source": {
       "author": "Timothy",
@@ -2312,7 +2328,7 @@
      "caller": "Kroozlt19 (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -2322,7 +2338,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_SET3",
+      "head": "HEAD_PLATE_SET1",
+      "shoes": "SHOES_LEATHER_AVALON"
+     },
      "note": "BOMB TSQ LAMENTACIONES INVI",
      "party_size": {
       "max": 10,
@@ -2332,11 +2352,8 @@
      "published": "2026-01-12",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_SET3",
       "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET1",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -2374,7 +2391,7 @@
      "caller": "Kroozlt19 (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -2384,7 +2401,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_SET3",
+      "head": "HEAD_PLATE_SET1",
+      "shoes": "SHOES_LEATHER_AVALON"
+     },
      "note": "BOMB TSQ LAMENTACIONES INVI",
      "party_size": {
       "max": 10,
@@ -2394,11 +2415,8 @@
      "published": "2026-01-12",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_SET3",
       "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET1",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -2436,7 +2454,7 @@
      "caller": "Kroozlt19 (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -2446,7 +2464,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_SET3",
+      "head": "HEAD_PLATE_SET1",
+      "shoes": "SHOES_LEATHER_AVALON"
+     },
      "note": "BOMB TSQ LAMENTACIONES INVI",
      "party_size": {
       "max": 10,
@@ -2456,11 +2478,8 @@
      "published": "2026-01-12",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_SET3",
       "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET1",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -2498,7 +2517,7 @@
      "caller": "Kroozlt19 (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -2508,7 +2527,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_SET3",
+      "head": "HEAD_PLATE_SET1",
+      "shoes": "SHOES_LEATHER_AVALON"
+     },
      "note": "BOMB TSQ LAMENTACIONES INVI",
      "party_size": {
       "max": 10,
@@ -2518,11 +2541,8 @@
      "published": "2026-01-12",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_SET3",
       "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET1",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -2560,7 +2580,7 @@
      "caller": "Kroozlt19 (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -2570,7 +2590,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_SET3",
+      "head": "HEAD_PLATE_SET1",
+      "shoes": "SHOES_LEATHER_AVALON"
+     },
      "note": "BOMB TSQ LAMENTACIONES INVI",
      "party_size": {
       "max": 10,
@@ -2580,11 +2604,8 @@
      "published": "2026-01-12",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_SET3",
       "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET1",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -2622,7 +2643,7 @@
      "caller": "Kroozlt19 (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -2632,7 +2653,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_SET3",
+      "head": "HEAD_PLATE_SET1",
+      "shoes": "SHOES_LEATHER_AVALON"
+     },
      "note": "BOMB TSQ LAMENTACIONES INVI",
      "party_size": {
       "max": 10,
@@ -2642,11 +2667,8 @@
      "published": "2026-01-12",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_SET3",
       "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET1",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -2686,7 +2708,7 @@
      "caller": "Kroozlt19 (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -2696,7 +2718,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_SET3",
+      "head": "HEAD_PLATE_SET1",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_AVALON"
+     },
      "note": "BOMB TSQ BRUJERIA",
      "party_size": {
       "max": 10,
@@ -2706,12 +2733,8 @@
      "published": "2026-01-12",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_SET3",
       "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET1",
-      "offhand": "OFF_HORN_KEEPER",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -2750,7 +2773,7 @@
      "caller": "Kroozlt19 (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -2760,7 +2783,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_SET3",
+      "head": "HEAD_PLATE_SET1",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_AVALON"
+     },
      "note": "BOMB TSQ MALDICIONES DE VIDA",
      "party_size": {
       "max": 10,
@@ -2770,12 +2798,8 @@
      "published": "2026-01-12",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_SET3",
       "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET1",
-      "offhand": "OFF_HORN_KEEPER",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -3271,7 +3295,7 @@
      "caller": "anonymous albioncompo.com user (2dfe60fa)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -3281,7 +3305,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_CLOTH_FEY",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
      "note": null,
      "party_size": {
       "max": 5,
@@ -3291,12 +3320,8 @@
      "published": "2026-07-01",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_SET2",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE",
-      "head": "HEAD_CLOTH_FEY",
-      "potion": "POTION_STONESKIN",
-      "shoes": "SHOES_LEATHER_SET1"
+      "potion": "POTION_STONESKIN"
      },
      "role": "",
      "source": {
@@ -3391,7 +3416,7 @@
      "caller": "anonymous albioncompo.com user (2dfe60fa)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -3401,7 +3426,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_FW_FORTSTERLING",
+      "head": "HEAD_CLOTH_ROYAL",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": null,
      "party_size": {
       "max": 5,
@@ -3411,12 +3441,8 @@
      "published": "2026-07-01",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_SET2",
-      "cape": "CAPEITEM_FW_FORTSTERLING",
       "food": "MEAL_OMELETTE",
-      "head": "HEAD_CLOTH_ROYAL",
-      "potion": "POTION_CLEANSE2",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_CLEANSE2"
      },
      "role": "",
      "source": {
@@ -3455,7 +3481,7 @@
      "caller": "anonymous albioncompo.com user (2dfe60fa)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -3465,7 +3491,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_FW_BRIDGEWATCH",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_PLATE_FEY"
+     },
      "note": null,
      "party_size": {
       "max": 5,
@@ -3475,12 +3506,8 @@
      "published": "2026-07-01",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
-      "cape": "CAPEITEM_FW_BRIDGEWATCH",
       "food": "MEAL_OMELETTE",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_SLOWFIELD",
-      "shoes": "SHOES_PLATE_FEY"
+      "potion": "POTION_SLOWFIELD"
      },
      "role": "",
      "source": {
@@ -3631,7 +3658,7 @@
      "caller": "anonymous albioncompo.com user (2dfe60fa)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -3641,7 +3668,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_ROYAL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_AVALON",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": null,
      "party_size": {
       "max": 5,
@@ -3651,12 +3683,8 @@
      "published": "2026-07-01",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_ROYAL",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW_FISH",
-      "head": "HEAD_LEATHER_AVALON",
-      "potion": "POTION_LAVA",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_LAVA"
      },
      "role": "",
      "source": {
@@ -3807,7 +3835,7 @@
      "caller": "anonymous albioncompo.com user (2dfe60fa)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -3817,7 +3845,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET3",
+      "cape": "CAPEITEM_FW_THETFORD",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
      "note": null,
      "party_size": {
       "max": 5,
@@ -3827,13 +3861,8 @@
      "published": "2026-07-01",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_SET3",
-      "cape": "CAPEITEM_FW_THETFORD",
       "food": "MEAL_STEW_FISH",
-      "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_HORN_KEEPER",
-      "potion": "POTION_STONESKIN",
-      "shoes": "SHOES_LEATHER_SET1"
+      "potion": "POTION_STONESKIN"
      },
      "role": "",
      "source": {
@@ -3989,7 +4018,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -4002,7 +4031,8 @@
      "gear": {
       "armor": "ARMOR_PLATE_SET2",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_SET3"
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Peel/Control",
      "party_size": {
@@ -4012,9 +4042,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "support",
      "source": {
       "author": "Deadlyhooker",
@@ -4051,7 +4079,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -4064,7 +4092,8 @@
      "gear": {
       "armor": "ARMOR_PLATE_SET2",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_SET3"
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Peel/Control",
      "party_size": {
@@ -4074,9 +4103,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "support",
      "source": {
       "author": "Deadlyhooker",
@@ -4113,7 +4140,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -4126,7 +4153,8 @@
      "gear": {
       "armor": "ARMOR_PLATE_FEY",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_SET3"
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Peel/Control",
      "party_size": {
@@ -4136,9 +4164,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "support",
      "source": {
       "author": "Deadlyhooker",
@@ -4179,7 +4205,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -4192,7 +4218,8 @@
      "gear": {
       "armor": "ARMOR_LEATHER_ROYAL",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_SET3"
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_PLATE_UNDEAD"
      },
      "note": "Beam Spiked",
      "party_size": {
@@ -4202,9 +4229,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "GG"
-     },
+     "raw": {},
      "role": "dps",
      "source": {
       "author": "Deadlyhooker",
@@ -4241,7 +4266,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -4254,7 +4279,8 @@
      "gear": {
       "armor": "ARMOR_PLATE_HELL",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_SET3"
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_PLATE_UNDEAD"
      },
      "note": "2nd Occult for Tempo",
      "party_size": {
@@ -4264,9 +4290,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "GG"
-     },
+     "raw": {},
      "role": "dps",
      "source": {
       "author": "Deadlyhooker",
@@ -4380,7 +4404,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -4391,6 +4415,7 @@
      "content_candidates": null,
      "fit_exclude": null,
      "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
@@ -4403,9 +4428,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "armor": "RoP"
-     },
+     "raw": {},
      "role": "dps",
      "source": {
       "author": "Deadlyhooker",
@@ -4447,7 +4470,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.5,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -4458,7 +4481,9 @@
      "content_candidates": null,
      "fit_exclude": null,
      "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
       "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": null,
@@ -4469,10 +4494,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "armor": "RoP",
-      "head": "Cleanse"
-     },
+     "raw": {},
      "role": "dps",
      "source": {
       "author": "Deadlyhooker",
@@ -4514,7 +4536,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.5,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -4525,7 +4547,9 @@
      "content_candidates": null,
      "fit_exclude": null,
      "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
       "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_HELL",
       "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": null,
@@ -4536,10 +4560,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "armor": "RoP",
-      "head": "Cleanse"
-     },
+     "raw": {},
      "role": "dps",
      "source": {
       "author": "Deadlyhooker",
@@ -4580,7 +4601,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -4593,7 +4614,8 @@
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_PLATE_SET2"
+      "head": "HEAD_PLATE_SET2",
+      "shoes": "SHOES_PLATE_UNDEAD"
      },
      "note": null,
      "party_size": {
@@ -4603,9 +4625,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "GG"
-     },
+     "raw": {},
      "role": "dps",
      "source": {
       "author": "Deadlyhooker",
@@ -4719,7 +4739,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.8,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -4733,7 +4753,8 @@
       "armor": "ARMOR_PLATE_HELL",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_SHIELD_AVALON"
+      "offhand": "OFF_SHIELD_AVALON",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "E+W for engage",
      "party_size": {
@@ -4743,9 +4764,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "tank",
      "source": {
       "author": "Deadlyhooker",
@@ -4782,7 +4801,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -4795,7 +4814,8 @@
      "gear": {
       "armor": "ARMOR_PLATE_HELL",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_SET3"
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": null,
      "party_size": {
@@ -4805,9 +4825,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "tank",
      "source": {
       "author": "Deadlyhooker",
@@ -4848,7 +4866,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -4861,7 +4879,8 @@
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_SET3"
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Mimic Guard Rune",
      "party_size": {
@@ -4871,9 +4890,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "support",
      "source": {
       "author": "Deadlyhooker",
@@ -4910,7 +4927,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -4923,7 +4940,8 @@
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_SET3"
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "E on Engage",
      "party_size": {
@@ -4933,9 +4951,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "support",
      "source": {
       "author": "Deadlyhooker",
@@ -5046,7 +5062,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -5057,6 +5073,7 @@
      "content_candidates": null,
      "fit_exclude": null,
      "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
@@ -5069,9 +5086,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "armor": "RoP"
-     },
+     "raw": {},
      "role": "dps",
      "source": {
       "author": "Deadlyhooker",
@@ -5108,7 +5123,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -5119,6 +5134,7 @@
      "content_candidates": null,
      "fit_exclude": null,
      "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_LEATHER_SET3",
       "shoes": "SHOES_LEATHER_MORGANA"
@@ -5131,9 +5147,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "armor": "RoP"
-     },
+     "raw": {},
      "role": "dps",
      "source": {
       "author": "Deadlyhooker",
@@ -5182,7 +5196,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -5195,7 +5209,8 @@
      "gear": {
       "armor": "ARMOR_PLATE_FEY",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_HELL"
+      "head": "HEAD_LEATHER_HELL",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": null,
      "party_size": {
@@ -5205,9 +5220,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "main_tank",
      "source": {
       "author": "Deadlyhooker",
@@ -5377,13 +5390,13 @@
      "approval": "approved",
      "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
      "archetype": null,
-     "build_id": "deadlyhooker_large_scale_2026_08:party_2:6",
+     "build_id": "deadlyhooker_large_scale_2026_08:party_1:9",
      "caller": "Deadlyhooker",
      "canonical": true,
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.5,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -5394,8 +5407,71 @@
      "content_candidates": null,
      "fit_exclude": null,
      "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_SET3"
+      "head": "HEAD_LEATHER_HELL",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": "Cleanse Behe/Hellion",
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {},
+     "role": "support",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
+     },
+     "spells": {
+      "e": "HOLY_DISPEL",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {},
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "archetype": null,
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:6",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "content_candidates": null,
+     "fit_exclude": null,
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Offensive E on DPS",
      "party_size": {
@@ -5405,10 +5481,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "armor": "RoP",
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "support",
      "source": {
       "author": "Deadlyhooker",
@@ -5445,7 +5518,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.5,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -5456,8 +5529,10 @@
      "content_candidates": null,
      "fit_exclude": null,
      "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_SET3"
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Help us Kite",
      "party_size": {
@@ -5467,72 +5542,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "armor": "RoP",
-      "shoes": "Blink"
-     },
-     "role": "support",
-     "source": {
-      "author": "Deadlyhooker",
-      "family": "caller:deadlyhooker",
-      "kind": "caller_sheet",
-      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
-      "url": null
-     },
-     "spells": {
-      "e": "HOLY_DISPEL",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": null,
-     "unknowns": [
-      "gear.food",
-      "gear.potion",
-      "passive",
-      "q",
-      "w"
-     ]
-    },
-    {
-     "alternatives": {
-      "gear": {},
-      "weapons": []
-     },
-     "approval": "approved",
-     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
-     "archetype": null,
-     "build_id": "deadlyhooker_large_scale_2026_08:party_1:9",
-     "caller": "Deadlyhooker",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.25,
-      "loadout_completeness": 0.58,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 1.0,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "content_candidates": null,
-     "fit_exclude": null,
-     "gear": {
-      "cape": "CAPEITEM_SMUGGLER"
-     },
-     "note": "Cleanse Behe/Hellion",
-     "party_size": {
-      "max": 20,
-      "min": 20
-     },
-     "patch": "2026-07-21",
-     "published": "2026-08-12",
-     "quarantined_fields": [],
-     "raw": {
-      "armor": "RoP",
-      "head": "Cleanse",
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "support",
      "source": {
       "author": "Deadlyhooker",
@@ -5699,7 +5709,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -5712,7 +5722,8 @@
      "gear": {
       "armor": "ARMOR_PLATE_FEY",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_SET3"
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Big Boy Stall",
      "party_size": {
@@ -5722,9 +5733,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "tank",
      "source": {
       "author": "Deadlyhooker",
@@ -5773,7 +5782,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -5784,6 +5793,7 @@
      "content_candidates": null,
      "fit_exclude": null,
      "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_LEATHER_FEY",
       "shoes": "SHOES_LEATHER_FEY"
@@ -5796,9 +5806,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "armor": "RoP"
-     },
+     "raw": {},
      "role": "dps",
      "source": {
       "author": "Deadlyhooker",
@@ -5839,7 +5847,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -5852,7 +5860,8 @@
      "gear": {
       "armor": "ARMOR_CLOTH_SET2",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_SET3"
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": null,
      "party_size": {
@@ -5862,9 +5871,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "healer",
      "source": {
       "author": "Deadlyhooker",
@@ -5913,7 +5920,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -5926,7 +5933,8 @@
      "gear": {
       "armor": "ARMOR_PLATE_SET2",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_PLATE_KEEPER"
+      "head": "HEAD_PLATE_KEEPER",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "control enemy on our engage",
      "party_size": {
@@ -5936,9 +5944,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "tank",
      "source": {
       "author": "Deadlyhooker",
@@ -5983,7 +5989,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -5996,7 +6002,8 @@
      "gear": {
       "armor": "ARMOR_PLATE_SET2",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_PLATE_KEEPER"
+      "head": "HEAD_PLATE_KEEPER",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "control enemy on our engage",
      "party_size": {
@@ -6006,9 +6013,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "tank",
      "source": {
       "author": "Deadlyhooker",
@@ -6064,7 +6069,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -6077,7 +6082,8 @@
      "gear": {
       "armor": "ARMOR_PLATE_FEY",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_SET3"
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": null,
      "party_size": {
@@ -6087,9 +6093,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "support",
      "source": {
       "author": "Deadlyhooker",
@@ -6130,7 +6134,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -6143,7 +6147,8 @@
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_SET3"
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Perma ent form pls",
      "party_size": {
@@ -6153,9 +6158,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "support",
      "source": {
       "author": "Deadlyhooker",
@@ -6192,7 +6195,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.75,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -6205,7 +6208,8 @@
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
       "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_LEATHER_SET3"
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Perma Ent Form Pls",
      "party_size": {
@@ -6215,9 +6219,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "support",
      "source": {
       "author": "Deadlyhooker",
@@ -6266,7 +6268,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.8,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -6280,7 +6282,8 @@
       "armor": "ARMOR_PLATE_SET2",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_PLATE_KEEPER",
-      "offhand": "OFF_SHIELD_AVALON"
+      "offhand": "OFF_SHIELD_AVALON",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Use helm to help setup",
      "party_size": {
@@ -6290,9 +6293,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "support",
      "source": {
       "author": "Deadlyhooker",
@@ -6337,7 +6338,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.8,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -6351,7 +6352,8 @@
       "armor": "ARMOR_PLATE_SET2",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_SHIELD_AVALON"
+      "offhand": "OFF_SHIELD_AVALON",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Watch Bombs",
      "party_size": {
@@ -6361,9 +6363,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "support",
      "source": {
       "author": "Deadlyhooker",
@@ -6408,7 +6408,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.8,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -6422,7 +6422,8 @@
       "armor": "ARMOR_PLATE_SET2",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_SHIELD_AVALON"
+      "offhand": "OFF_SHIELD_AVALON",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Watch Bombs/Stop engages",
      "party_size": {
@@ -6432,9 +6433,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "support",
      "source": {
       "author": "Deadlyhooker",
@@ -6467,7 +6466,7 @@
        "armor": [
         {
          "condition": null,
-         "key": null,
+         "key": "ARMOR_CLOTH_AVALON",
          "raw": "RoP"
         }
        ],
@@ -6564,7 +6563,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.8,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -6578,7 +6577,8 @@
       "armor": "ARMOR_PLATE_HELL",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_TOTEM_KEEPER"
+      "offhand": "OFF_TOTEM_KEEPER",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": null,
      "party_size": {
@@ -6588,9 +6588,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "dps",
      "source": {
       "author": "Deadlyhooker",
@@ -6635,7 +6633,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.8,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -6649,7 +6647,8 @@
       "armor": "ARMOR_PLATE_HELL",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_SHIELD_AVALON"
+      "offhand": "OFF_SHIELD_AVALON",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Defensive Lifecurse",
      "party_size": {
@@ -6659,9 +6658,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "support",
      "source": {
       "author": "Deadlyhooker",
@@ -6710,7 +6707,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.8,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -6724,7 +6721,8 @@
       "armor": "ARMOR_PLATE_HELL",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_SHIELD_AVALON"
+      "offhand": "OFF_SHIELD_AVALON",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Offensive Obelisk",
      "party_size": {
@@ -6734,9 +6732,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "support",
      "source": {
       "author": "Deadlyhooker",
@@ -6769,7 +6765,7 @@
        "armor": [
         {
          "condition": null,
-         "key": null,
+         "key": "ARMOR_CLOTH_AVALON",
          "raw": "RoP"
         }
        ]
@@ -6785,7 +6781,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.8,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -6799,7 +6795,8 @@
       "armor": "ARMOR_CLOTH_FEY",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_PLATE_SET3",
-      "offhand": "OFF_HORN_KEEPER"
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Druid Cowl Swap if no Chariot",
      "party_size": {
@@ -6809,9 +6806,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "healer",
      "source": {
       "author": "Deadlyhooker",
@@ -6842,149 +6837,7 @@
        "armor": [
         {
          "condition": null,
-         "key": null,
-         "raw": "RoP"
-        }
-       ]
-      },
-      "weapons": []
-     },
-     "approval": "approved",
-     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
-     "archetype": null,
-     "build_id": "deadlyhooker_large_scale_2026_08:party_2:5",
-     "caller": "Deadlyhooker",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.8,
-      "loadout_completeness": 0.58,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 1.0,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "content_candidates": null,
-     "fit_exclude": null,
-     "gear": {
-      "armor": "ARMOR_CLOTH_FEY",
-      "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_PLATE_SET3",
-      "offhand": "OFF_HORN_KEEPER"
-     },
-     "note": null,
-     "party_size": {
-      "max": 20,
-      "min": 20
-     },
-     "patch": "2026-07-21",
-     "published": "2026-08-12",
-     "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
-     "role": "healer",
-     "source": {
-      "author": "Deadlyhooker",
-      "family": "caller:deadlyhooker",
-      "kind": "caller_sheet",
-      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
-      "url": null
-     },
-     "spells": {
-      "e": "DIVINE_JUMP",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": null,
-     "unknowns": [
-      "gear.food",
-      "gear.potion",
-      "passive",
-      "q",
-      "w"
-     ]
-    },
-    {
-     "alternatives": {
-      "gear": {
-       "armor": [
-        {
-         "condition": null,
-         "key": null,
-         "raw": "RoP"
-        }
-       ]
-      },
-      "weapons": []
-     },
-     "approval": "approved",
-     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
-     "archetype": null,
-     "build_id": "deadlyhooker_large_scale_2026_08:party_3:5",
-     "caller": "Deadlyhooker",
-     "confidence": {
-      "content_context": 1.0,
-      "item_mapping": 0.8,
-      "loadout_completeness": 0.58,
-      "outcome": null,
-      "party_size": 1.0,
-      "patch": 1.0,
-      "source_independence": null,
-      "spell_mapping": 0.25
-     },
-     "content_candidates": null,
-     "fit_exclude": null,
-     "gear": {
-      "armor": "ARMOR_CLOTH_FEY",
-      "cape": "CAPEITEM_SMUGGLER",
-      "head": "HEAD_PLATE_SET3",
-      "offhand": "OFF_HORN_KEEPER"
-     },
-     "note": null,
-     "party_size": {
-      "max": 20,
-      "min": 20
-     },
-     "patch": "2026-07-21",
-     "published": "2026-08-12",
-     "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
-     "role": "healer",
-     "source": {
-      "author": "Deadlyhooker",
-      "family": "caller:deadlyhooker",
-      "kind": "caller_sheet",
-      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
-      "url": null
-     },
-     "spells": {
-      "e": "DIVINE_JUMP",
-      "passive": null,
-      "q": null,
-      "w": null
-     },
-     "status": "normalized",
-     "style": null,
-     "unknowns": [
-      "gear.food",
-      "gear.potion",
-      "passive",
-      "q",
-      "w"
-     ]
-    },
-    {
-     "alternatives": {
-      "gear": {
-       "armor": [
-        {
-         "condition": null,
-         "key": null,
+         "key": "ARMOR_CLOTH_AVALON",
          "raw": "RoP"
         }
        ]
@@ -6998,7 +6851,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.6,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -7011,7 +6864,9 @@
      "gear": {
       "armor": "ARMOR_CLOTH_FEY",
       "cape": "CAPEITEM_SMUGGLER",
-      "offhand": "OFF_HORN_KEEPER"
+      "head": "HEAD_LEATHER_HELL",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Druid Cowl Swap if no Chariot",
      "party_size": {
@@ -7021,10 +6876,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "head": "Cleanse",
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "healer",
      "source": {
       "author": "Deadlyhooker",
@@ -7055,7 +6907,7 @@
        "armor": [
         {
          "condition": null,
-         "key": null,
+         "key": "ARMOR_CLOTH_AVALON",
          "raw": "RoP"
         }
        ]
@@ -7069,7 +6921,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.6,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -7082,7 +6934,9 @@
      "gear": {
       "armor": "ARMOR_CLOTH_FEY",
       "cape": "CAPEITEM_SMUGGLER",
-      "offhand": "OFF_HORN_KEEPER"
+      "head": "HEAD_LEATHER_HELL",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": null,
      "party_size": {
@@ -7092,10 +6946,77 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "head": "Cleanse",
-      "shoes": "Blink"
+     "raw": {},
+     "role": "healer",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
      },
+     "spells": {
+      "e": "DIVINE_JUMP",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {
+       "armor": [
+        {
+         "condition": null,
+         "key": "ARMOR_CLOTH_AVALON",
+         "raw": "RoP"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "archetype": null,
+     "build_id": "deadlyhooker_large_scale_2026_08:party_2:5",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "content_candidates": null,
+     "fit_exclude": null,
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_SET3",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {},
      "role": "healer",
      "source": {
       "author": "Deadlyhooker",
@@ -7132,7 +7053,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.6,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -7143,9 +7064,11 @@
      "content_candidates": null,
      "fit_exclude": null,
      "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_HORN_KEEPER"
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Play with DPS to Buff",
      "party_size": {
@@ -7155,10 +7078,77 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "armor": "RoP",
-      "shoes": "Blink"
+     "raw": {},
+     "role": "healer",
+     "source": {
+      "author": "Deadlyhooker",
+      "family": "caller:deadlyhooker",
+      "kind": "caller_sheet",
+      "record": "Shotcaller \"Deadlyhooker\" - large-content comp (castle, territory, mass alliance roam), up to 3 parties of 20; relayed verbatim by the project owner, 2026-08-12.",
+      "url": null
      },
+     "spells": {
+      "e": "DIVINE_JUMP",
+      "passive": null,
+      "q": null,
+      "w": null
+     },
+     "status": "normalized",
+     "style": null,
+     "unknowns": [
+      "gear.food",
+      "gear.potion",
+      "passive",
+      "q",
+      "w"
+     ]
+    },
+    {
+     "alternatives": {
+      "gear": {
+       "armor": [
+        {
+         "condition": null,
+         "key": "ARMOR_CLOTH_AVALON",
+         "raw": "RoP"
+        }
+       ]
+      },
+      "weapons": []
+     },
+     "approval": "approved",
+     "approval_basis": "shotcaller-authored sheet (explicit caller approval for their own comp)",
+     "archetype": null,
+     "build_id": "deadlyhooker_large_scale_2026_08:party_3:5",
+     "caller": "Deadlyhooker",
+     "confidence": {
+      "content_context": 1.0,
+      "item_mapping": 1.0,
+      "loadout_completeness": 0.58,
+      "outcome": null,
+      "party_size": 1.0,
+      "patch": 1.0,
+      "source_independence": null,
+      "spell_mapping": 0.25
+     },
+     "content_candidates": null,
+     "fit_exclude": null,
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_SET3",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
+     "note": null,
+     "party_size": {
+      "max": 20,
+      "min": 20
+     },
+     "patch": "2026-07-21",
+     "published": "2026-08-12",
+     "quarantined_fields": [],
+     "raw": {},
      "role": "healer",
      "source": {
       "author": "Deadlyhooker",
@@ -7207,7 +7197,7 @@
      "canonical_basis": "explicit shotcaller approval",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.8,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -7221,7 +7211,8 @@
       "armor": "ARMOR_PLATE_HELL",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_SHIELD_AVALON"
+      "offhand": "OFF_SHIELD_AVALON",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Guard Rune",
      "party_size": {
@@ -7231,9 +7222,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "tank",
      "source": {
       "author": "Deadlyhooker",
@@ -7278,7 +7267,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.8,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -7292,7 +7281,8 @@
       "armor": "ARMOR_PLATE_HELL",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_SHIELD_AVALON"
+      "offhand": "OFF_SHIELD_AVALON",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Guard Rune",
      "party_size": {
@@ -7302,9 +7292,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "tank",
      "source": {
       "author": "Deadlyhooker",
@@ -7349,7 +7337,7 @@
      "caller": "Deadlyhooker",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.8,
+      "item_mapping": 1.0,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -7363,7 +7351,8 @@
       "armor": "ARMOR_PLATE_HELL",
       "cape": "CAPEITEM_SMUGGLER",
       "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_SHIELD_AVALON"
+      "offhand": "OFF_SHIELD_AVALON",
+      "shoes": "SHOES_LEATHER_MORGANA"
      },
      "note": "Guard Rune",
      "party_size": {
@@ -7373,9 +7362,7 @@
      "patch": "2026-07-21",
      "published": "2026-08-12",
      "quarantined_fields": [],
-     "raw": {
-      "shoes": "Blink"
-     },
+     "raw": {},
      "role": "tank",
      "source": {
       "author": "Deadlyhooker",
@@ -7416,7 +7403,7 @@
      "caller": "ShadowLagrange (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -7426,7 +7413,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_KEEPER",
+      "head": "HEAD_LEATHER_MORGANA",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
      "note": "Dagger Pair tracking",
      "party_size": {
       "max": 5,
@@ -7436,11 +7427,8 @@
      "published": "2026-01-09",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_KEEPER",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_MORGANA",
-      "potion": "POTION_MOB_RESET",
-      "shoes": "SHOES_CLOTH_ROYAL"
+      "potion": "POTION_MOB_RESET"
      },
      "role": "",
      "source": {
@@ -7480,7 +7468,7 @@
      "caller": "ShadowLagrange (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -7490,7 +7478,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_KEEPER",
+      "head": "HEAD_CLOTH_KEEPER",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
      "note": "Crystal Reaper tracking",
      "party_size": {
       "max": 5,
@@ -7500,11 +7492,8 @@
      "published": "2026-01-09",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_KEEPER",
       "food": "MEAL_STEW",
-      "head": "HEAD_CLOTH_KEEPER",
-      "potion": "POTION_MOB_RESET",
-      "shoes": "SHOES_CLOTH_ROYAL"
+      "potion": "POTION_MOB_RESET"
      },
      "role": "",
      "source": {
@@ -7544,7 +7533,7 @@
      "caller": "ShadowLagrange (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -7554,7 +7543,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_SET1",
+      "head": "HEAD_PLATE_SET1",
+      "shoes": "SHOES_CLOTH_MORGANA"
+     },
      "note": "EarthRune tracking",
      "party_size": {
       "max": 5,
@@ -7564,11 +7557,8 @@
      "published": "2026-01-09",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_SET1",
       "food": "MEAL_OMELETTE",
-      "head": "HEAD_PLATE_SET1",
-      "potion": "POTION_MOB_RESET",
-      "shoes": "SHOES_CLOTH_MORGANA"
+      "potion": "POTION_MOB_RESET"
      },
      "role": "",
      "source": {
@@ -7608,7 +7598,7 @@
      "caller": "ShadowLagrange (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -7618,7 +7608,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_KEEPER",
+      "head": "HEAD_LEATHER_MORGANA",
+      "offhand": "OFF_LAMP_UNDEAD",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
      "note": "Demon Fang Tracking",
      "party_size": {
       "max": 5,
@@ -7628,12 +7623,8 @@
      "published": "2026-01-09",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_KEEPER",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_MORGANA",
-      "offhand": "OFF_LAMP_UNDEAD",
-      "potion": "POTION_MOB_RESET",
-      "shoes": "SHOES_CLOTH_ROYAL"
+      "potion": "POTION_MOB_RESET"
      },
      "role": "",
      "source": {
@@ -7672,7 +7663,7 @@
      "caller": "ShadowLagrange (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -7682,7 +7673,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "head": "HEAD_LEATHER_UNDEAD",
+      "offhand": "OFF_CENSER_AVALON",
+      "shoes": "SHOES_CLOTH_MORGANA"
+     },
      "note": "Forgebark Staff tracking",
      "party_size": {
       "max": 5,
@@ -7692,12 +7688,8 @@
      "published": "2026-01-09",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_ROYAL",
       "food": "MEAL_OMELETTE",
-      "head": "HEAD_LEATHER_UNDEAD",
-      "offhand": "OFF_CENSER_AVALON",
-      "potion": "POTION_MOB_RESET",
-      "shoes": "SHOES_CLOTH_MORGANA"
+      "potion": "POTION_MOB_RESET"
      },
      "role": "",
      "source": {
@@ -7738,7 +7730,7 @@
      "caller": "anonymous albioncompo.com user (5c73a3cf)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -7748,7 +7740,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: potion=POTION_CLEANSE2",
      "party_size": {
       "max": 7,
@@ -7758,12 +7755,8 @@
      "published": "2026-07-02",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_SET2",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_TORNADO",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_TORNADO"
      },
      "role": "",
      "source": {
@@ -7802,7 +7795,7 @@
      "caller": "anonymous albioncompo.com user (5c73a3cf)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -7812,7 +7805,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET1",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "GO-MORGANA-IF-CAPE-T10; alts: cape=CAPEITEM_MORGANA, armor=ARMOR_CLOTH_AVALON, potion=POTION_CLEANSE2",
      "party_size": {
       "max": 7,
@@ -7822,12 +7820,8 @@
      "published": "2026-07-02",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_SET1",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_STONESKIN",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_STONESKIN"
      },
      "role": "",
      "source": {
@@ -7871,7 +7865,7 @@
      "caller": "anonymous albioncompo.com user (5c73a3cf)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -7881,7 +7875,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_CLOTH_KEEPER",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "alts: armor=ARMOR_CLOTH_FEY, potion=POTION_STONESKIN",
      "party_size": {
       "max": 7,
@@ -7891,12 +7890,8 @@
      "published": "2026-07-02",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW",
-      "head": "HEAD_CLOTH_KEEPER",
-      "potion": "POTION_CLEANSE2",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_CLEANSE2"
      },
      "role": "",
      "source": {
@@ -7935,7 +7930,7 @@
      "caller": "anonymous albioncompo.com user (5c73a3cf)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -7945,7 +7940,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_HELL",
+      "shoes": "SHOES_PLATE_KEEPER"
+     },
      "note": null,
      "party_size": {
       "max": 7,
@@ -7955,12 +7955,8 @@
      "published": "2026-07-02",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_AVALON",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_SANDWICH_AVALON",
-      "head": "HEAD_LEATHER_HELL",
-      "potion": "POTION_ACID",
-      "shoes": "SHOES_PLATE_KEEPER"
+      "potion": "POTION_ACID"
      },
      "role": "",
      "source": {
@@ -7999,7 +7995,7 @@
      "caller": "anonymous albioncompo.com user (5c73a3cf)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -8009,7 +8005,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_LEATHER_AVALON",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "alts: helm=HEAD_CLOTH_ROYAL, potion=POTION_CLEANSE2",
      "party_size": {
       "max": 7,
@@ -8019,12 +8020,8 @@
      "published": "2026-07-02",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_FISH",
-      "head": "HEAD_LEATHER_AVALON",
-      "potion": "POTION_STONESKIN",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_STONESKIN"
      },
      "role": "",
      "source": {
@@ -8063,7 +8060,7 @@
      "caller": "anonymous albioncompo.com user (5c73a3cf)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -8073,7 +8070,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET2",
+      "offhand": "OFF_DEMONSKULL_HELL",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "alts: armor=ARMOR_CLOTH_FEY, potion=POTION_CLEANSE2",
      "party_size": {
       "max": 7,
@@ -8083,13 +8086,8 @@
      "published": "2026-07-02",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW_FISH",
-      "head": "HEAD_LEATHER_SET2",
-      "offhand": "OFF_DEMONSKULL_HELL",
-      "potion": "POTION_STONESKIN",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_STONESKIN"
      },
      "role": "",
      "source": {
@@ -8132,7 +8130,7 @@
      "caller": "anonymous albioncompo.com user (5c73a3cf)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -8142,7 +8140,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_KEEPER",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "alts: helm=HEAD_LEATHER_SET3, potion=POTION_SLOWFIELD, secondhand=OFF_SHIELD_AVALON",
      "party_size": {
       "max": 7,
@@ -8152,13 +8156,8 @@
      "published": "2026-07-02",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_PLATE_KEEPER",
-      "offhand": "OFF_HORN_KEEPER",
-      "potion": "POTION_TORNADO",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_TORNADO"
      },
      "role": "",
      "source": {
@@ -9945,7 +9944,7 @@
      "caller": "anonymous albioncompo.com user (5fa87240)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -9955,7 +9954,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
      "note": "alts: armor=ARMOR_PLATE_SET2",
      "party_size": {
       "max": 20,
@@ -9965,12 +9969,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_FEY",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_CLOTH_SET2"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10007,7 +10007,7 @@
      "caller": "anonymous albioncompo.com user (5fa87240)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -10017,7 +10017,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -10027,12 +10032,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_FEY",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_CLOTH_SET2"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10071,7 +10072,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -10081,7 +10082,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
      "note": "Bast?n Astral Monkey-Brauleo [member build by Jordyson888]",
      "party_size": {
       "max": 20,
@@ -10091,11 +10096,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_HELL",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10135,7 +10137,7 @@
      "caller": "anonymous albioncompo.com user (5fa87240)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -10145,7 +10147,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "cape": "CAPEITEM_FW_FORTSTERLING",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -10155,12 +10162,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_ROYAL",
-      "cape": "CAPEITEM_FW_FORTSTERLING",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_CLOTH_SET2"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10201,7 +10204,7 @@
      "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -10211,7 +10214,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_SET2",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -10221,12 +10229,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_ROYAL",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW_FISH",
-      "head": "HEAD_PLATE_SET2",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_FEY"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10263,7 +10267,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -10273,7 +10277,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "head": "HEAD_PLATE_SET2",
+      "shoes": "SHOES_PLATE_UNDEAD"
+     },
      "note": "DD | REALMBREAKER by Lunarus [member build by Lunarus]",
      "party_size": {
       "max": 20,
@@ -10283,11 +10291,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_ROYAL",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_PLATE_SET2",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_UNDEAD"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10332,7 +10337,7 @@
      "caller": "anonymous albioncompo.com user (5fa87240)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -10342,7 +10347,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET3",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "head": "HEAD_PLATE_SET3",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
      "note": "alts: helm=HEAD_LEATHER_SET3",
      "party_size": {
       "max": 20,
@@ -10352,12 +10362,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_SET3",
-      "cape": "CAPEITEM_FW_MARTLOCK",
       "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_FEY"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10396,7 +10402,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -10406,7 +10412,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "head": "HEAD_PLATE_SET2",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
      "note": "Small Scale - Entalhada - Suporte [member build by Machadex]",
      "party_size": {
       "max": 20,
@@ -10416,11 +10426,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
       "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET2",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10460,7 +10467,7 @@
      "caller": "anonymous albioncompo.com user (5fa87240)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -10470,7 +10477,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET1",
+      "cape": "CAPEITEM_MORGANA",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -10480,12 +10492,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_SET1",
-      "cape": "CAPEITEM_MORGANA",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_CLOTH_SET2"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10524,7 +10532,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -10534,7 +10542,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_PLATE_SET3"
+     },
      "note": "OathKeepers PvP [member build by Feniks360]",
      "party_size": {
       "max": 20,
@@ -10544,11 +10556,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_HELL",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_SET3"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10588,7 +10597,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -10598,7 +10607,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
      "note": "Locus ZVZ DOTH [member build by Artico6790]",
      "party_size": {
       "max": 20,
@@ -10608,11 +10621,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_HELL",
       "food": "MEAL_OMELETTE",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_SET1"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10652,7 +10662,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -10662,7 +10672,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "Alvorada Comp 1 [member build by xCisco]",
      "party_size": {
       "max": 20,
@@ -10672,11 +10686,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_SET2",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10716,7 +10727,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -10726,7 +10737,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "Mano de justicia - kiteo [member build by TurnDark]",
      "party_size": {
       "max": 20,
@@ -10736,11 +10751,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_HELL",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10782,7 +10794,7 @@
      "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -10792,7 +10804,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
      "note": "alts: armor=ARMOR_CLOTH_AVALON",
      "party_size": {
       "max": 20,
@@ -10802,12 +10819,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_FEY",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_FEY"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10844,7 +10857,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -10854,7 +10867,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "CA?A-ESPIRITOS [member build by Artico6790]",
      "party_size": {
       "max": 20,
@@ -10864,11 +10881,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
       "food": "MEAL_OMELETTE",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10913,7 +10927,7 @@
      "caller": "anonymous albioncompo.com user (5fa87240)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -10923,7 +10937,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_CLOTH_KEEPER",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -10933,12 +10952,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_CLOTH_KEEPER",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -10977,7 +10992,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -10987,7 +11002,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "head": "HEAD_CLOTH_KEEPER",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "??? ??? (?? ???? ????? ? ??? ????) [member build by Ironforge]",
      "party_size": {
       "max": 20,
@@ -10997,11 +11016,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_ROYAL",
       "food": "MEAL_OMELETTE",
-      "head": "HEAD_CLOTH_KEEPER",
-      "potion": "POTION_ENERGY",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_ENERGY"
      },
      "role": "",
      "source": {
@@ -11041,7 +11057,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.75,
       "loadout_completeness": 0.5,
       "outcome": null,
       "party_size": 1.0,
@@ -11051,7 +11067,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "head": "HEAD_CLOTH_KEEPER",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
      "note": "HEALER HG - MORS [member build by vhfoliveira]",
      "party_size": {
       "max": 20,
@@ -11061,10 +11081,7 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "head": "HEAD_CLOTH_KEEPER",
-      "potion": "POTION_STONESKIN",
-      "shoes": "SHOES_LEATHER_SET1"
+      "potion": "POTION_STONESKIN"
      },
      "role": "",
      "source": {
@@ -11107,7 +11124,7 @@
      "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -11117,7 +11134,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_MORGANA",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -11127,12 +11149,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_MORGANA",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_FEY"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -11169,7 +11187,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -11179,7 +11197,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET1",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
      "note": "Permafrost DPS [member build by Andsy]",
      "party_size": {
       "max": 20,
@@ -11189,11 +11211,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_SET1",
       "food": "MEAL_STEW_FISH",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_STONESKIN",
-      "shoes": "SHOES_LEATHER_SET1"
+      "potion": "POTION_STONESKIN"
      },
      "role": "",
      "source": {
@@ -11235,7 +11254,7 @@
      "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -11245,7 +11264,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_FEY",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -11255,12 +11279,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_FEY",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_FEY"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -11297,7 +11317,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -11307,7 +11327,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "head": "HEAD_PLATE_SET1",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "Brawl Spiked Gauntlets [member build by forenziec]",
      "party_size": {
       "max": 20,
@@ -11317,11 +11341,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_HELL",
       "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET1",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -11361,7 +11382,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -11371,7 +11392,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_AVALON",
+      "head": "HEAD_PLATE_SET2",
+      "shoes": "SHOES_PLATE_UNDEAD"
+     },
      "note": "ATENEA S25 - ARCO LARGO [member build by Soulkiva]",
      "party_size": {
       "max": 20,
@@ -11381,11 +11406,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_AVALON",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_PLATE_SET2",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_UNDEAD"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -11425,7 +11447,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -11435,7 +11457,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_SET3",
+      "head": "HEAD_LEATHER_HELL",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
      "note": "MA?A PESADA PYPELINE [member build by Robmalll]",
      "party_size": {
       "max": 20,
@@ -11445,11 +11471,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_SET3",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_HELL",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_SET1"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -11489,7 +11512,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -11499,7 +11522,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "head": "HEAD_PLATE_SET1",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
      "note": "Pustulento DOTH [member build by Artico6790]",
      "party_size": {
       "max": 20,
@@ -11509,11 +11536,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_PLATE_SET1",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_SET1"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -11553,7 +11577,7 @@
      "caller": "anonymous albioncompo.com user (5fa87240)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -11563,7 +11587,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "head": "HEAD_PLATE_KEEPER",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
      "note": "alts: food=MEAL_OMELETTE_AVALON, armor=ARMOR_PLATE_SET3",
      "party_size": {
       "max": 20,
@@ -11573,12 +11602,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_SET2",
-      "cape": "CAPEITEM_FW_MARTLOCK",
       "food": "MEAL_SANDWICH",
-      "head": "HEAD_PLATE_KEEPER",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_CLOTH_SET2"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -11624,7 +11649,7 @@
      "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -11634,7 +11659,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_AVALON",
+      "cape": "CAPEITEM_MORGANA",
+      "head": "HEAD_PLATE_KEEPER",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
      "note": "alts: boot=SHOES_CLOTH_SET2, cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH, helm=HEAD_LEATHER_SET3, armor=ARMOR_PLATE_AVALON, potion=POTION_REVIVE",
      "party_size": {
       "max": 20,
@@ -11644,12 +11674,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_AVALON",
-      "cape": "CAPEITEM_MORGANA",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_PLATE_KEEPER",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_CLOTH_SET2"
+      "potion": "POTION_REVIVE"
      },
      "role": "tank",
      "source": {
@@ -11686,7 +11712,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -11696,7 +11722,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "head": "HEAD_CLOTH_SET2",
+      "shoes": "SHOES_LEATHER_SET2"
+     },
      "note": "NeKso Build ZVZ Baston Terrunico [member build by NeKso]",
      "party_size": {
       "max": 20,
@@ -11706,11 +11736,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_CLOTH_SET2",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_SET2"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -11750,7 +11777,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.6,
       "loadout_completeness": 0.58,
       "outcome": null,
       "party_size": 1.0,
@@ -11760,7 +11787,11 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
      "note": "Enraizado ZvZ [member build by Jordyson888]",
      "party_size": {
       "max": 20,
@@ -11770,11 +11801,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
       "food": "MEAL_OMELETTE",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -11814,7 +11842,7 @@
      "caller": "anonymous albioncompo.com user (5fa87240)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -11824,7 +11852,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_SET3",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "head": "HEAD_PLATE_KEEPER",
+      "offhand": "OFF_TOTEM_KEEPER",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
      "note": "alts: food=MEAL_OMELETTE_AVALON, helm=HEAD_LEATHER_HELL, armor=ARMOR_PLATE_SET2, secondhand=OFF_SHIELD_AVALON",
      "party_size": {
       "max": 20,
@@ -11834,13 +11868,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_SET3",
-      "cape": "CAPEITEM_FW_MARTLOCK",
       "food": "MEAL_SANDWICH",
-      "head": "HEAD_PLATE_KEEPER",
-      "offhand": "OFF_TOTEM_KEEPER",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_CLOTH_SET2"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -11878,7 +11907,7 @@
      "caller": "anonymous albioncompo.com user (5fa87240)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -11888,7 +11917,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_AVALON",
+      "offhand": "OFF_SPIKEDSHIELD_MORGANA",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -11898,13 +11933,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW_FISH",
-      "head": "HEAD_LEATHER_AVALON",
-      "offhand": "OFF_SPIKEDSHIELD_MORGANA",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_FEY"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -11942,7 +11972,7 @@
      "caller": "anonymous albioncompo.com user (5fa87240)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -11952,7 +11982,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SPIKEDSHIELD_MORGANA",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -11962,13 +11998,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_SPIKEDSHIELD_MORGANA",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_FEY"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -12006,7 +12037,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -12016,7 +12047,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SHIELD_AVALON",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
      "note": "Maldici?n de Vida ZvZ [member build by Jordyson888]",
      "party_size": {
       "max": 20,
@@ -12026,12 +12062,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_HELL",
       "food": "MEAL_OMELETTE",
-      "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_SHIELD_AVALON",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -12077,7 +12109,7 @@
      "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -12087,7 +12119,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_CLOTH_KEEPER",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -12097,13 +12135,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_CLOTH_KEEPER",
-      "offhand": "OFF_HORN_KEEPER",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -12139,7 +12172,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -12149,7 +12182,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "head": "HEAD_LEATHER_AVALON",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
      "note": "SANCTI KTB/PISTES [member build by Baheera]",
      "party_size": {
       "max": 20,
@@ -12159,12 +12197,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
       "food": "MEAL_OMELETTE",
-      "head": "HEAD_LEATHER_AVALON",
-      "offhand": "OFF_HORN_KEEPER",
-      "potion": "POTION_STONESKIN",
-      "shoes": "SHOES_LEATHER_SET1"
+      "potion": "POTION_STONESKIN"
      },
      "role": "",
      "source": {
@@ -12203,7 +12237,7 @@
      "caller": "anonymous albioncompo.com user (5fa87240)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -12213,7 +12247,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_TOME_CRYSTAL",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
      "note": "alts: cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH",
      "party_size": {
       "max": 20,
@@ -12223,13 +12263,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_HELL",
-      "cape": "CAPEITEM_FW_MARTLOCK",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_TOME_CRYSTAL",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_CLOTH_SET2"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -12267,7 +12302,7 @@
      "caller": "anonymous albioncompo.com user (5fa87240)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -12277,7 +12312,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -12287,13 +12328,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_ROYAL",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_HORN_KEEPER",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_FEY"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -12333,7 +12369,7 @@
      "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -12343,7 +12379,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_TOTEM_KEEPER",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
      "note": "alts: food=MEAL_OMELETTE_AVALON",
      "party_size": {
       "max": 20,
@@ -12353,13 +12395,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_HELL",
-      "cape": "CAPEITEM_FW_MARTLOCK",
       "food": "MEAL_SANDWICH",
-      "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_TOTEM_KEEPER",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_CLOTH_SET2"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -12395,7 +12432,7 @@
      "caller": "anonymous albioncompo.com user (5fa87240)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -12405,7 +12442,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_FW_MARTLOCK",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_TOTEM_KEEPER",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
      "note": "alts: cape=CAPEITEM_SMUGGLER, food=MEAL_OMELETTE_AVALON, secondhand=OFF_SHIELD_AVALON",
      "party_size": {
       "max": 20,
@@ -12415,13 +12458,8 @@
      "published": "2026-06-27",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_HELL",
-      "cape": "CAPEITEM_FW_MARTLOCK",
       "food": "MEAL_SANDWICH",
-      "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_TOTEM_KEEPER",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_CLOTH_SET2"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -12457,7 +12495,7 @@
      "caller": "clonepeek (albiononline.com character builder)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -12467,7 +12505,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_FEY",
+      "head": "HEAD_LEATHER_HELL",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
      "note": "Brawl bedrock [member build by Fliriya]",
      "party_size": {
       "max": 20,
@@ -12477,12 +12520,8 @@
      "published": "2026-03-29",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_FEY",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_HELL",
-      "offhand": "OFF_HORN_KEEPER",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_SET1"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -12523,7 +12562,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -12533,7 +12572,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: boot=SHOES_CLOTH_SET2",
      "party_size": {
       "max": 20,
@@ -12543,12 +12587,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_FEY",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "tank",
      "source": {
@@ -12587,7 +12627,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -12597,7 +12637,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -12607,12 +12652,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_ROYAL",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -12651,7 +12692,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -12661,7 +12702,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_ROYAL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_SET2",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -12671,12 +12717,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_ROYAL",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET2",
-      "potion": "POTION_CLEANSE2",
-      "shoes": "SHOES_LEATHER_FEY"
+      "potion": "POTION_CLEANSE2"
      },
      "role": "",
      "source": {
@@ -12715,7 +12757,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -12725,7 +12767,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
      "note": "alts: boot=SHOES_PLATE_AVALON",
      "party_size": {
       "max": 20,
@@ -12735,12 +12782,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_HELL",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_CLOTH_SET2"
+      "potion": "POTION_REVIVE"
      },
      "role": "support",
      "source": {
@@ -12779,7 +12822,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -12789,7 +12832,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
      "note": "alts: boot=SHOES_LEATHER_MORGANA, armor=ARMOR_CLOTH_FEY",
      "party_size": {
       "max": 20,
@@ -12799,12 +12847,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_FEY"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -12843,7 +12887,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -12853,7 +12897,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
      "note": "alts: armor=ARMOR_PLATE_SET2",
      "party_size": {
       "max": 20,
@@ -12863,12 +12912,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_TORNADO",
-      "shoes": "SHOES_CLOTH_SET2"
+      "potion": "POTION_TORNADO"
      },
      "role": "",
      "source": {
@@ -12907,7 +12952,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -12917,7 +12962,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -12927,12 +12977,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_CLEANSE2",
-      "shoes": "SHOES_LEATHER_FEY"
+      "potion": "POTION_CLEANSE2"
      },
      "role": "rdps",
      "source": {
@@ -12971,7 +13017,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -12981,7 +13027,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -12991,12 +13042,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_FEY",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_CLEANSE2",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_CLEANSE2"
      },
      "role": "",
      "source": {
@@ -13035,7 +13082,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -13045,7 +13092,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_MORGANA",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -13055,12 +13107,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_FEY",
-      "cape": "CAPEITEM_MORGANA",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_CLEANSE2",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_CLEANSE2"
      },
      "role": "",
      "source": {
@@ -13097,7 +13145,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -13107,7 +13155,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_MORGANA",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -13117,12 +13170,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_FEY",
-      "cape": "CAPEITEM_MORGANA",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_CLEANSE2",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_CLEANSE2"
      },
      "role": "",
      "source": {
@@ -13161,7 +13210,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -13171,7 +13220,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_FEY",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -13181,12 +13235,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_FEY",
-      "potion": "POTION_CLEANSE2",
-      "shoes": "SHOES_LEATHER_FEY"
+      "potion": "POTION_CLEANSE2"
      },
      "role": "",
      "source": {
@@ -13225,7 +13275,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -13235,7 +13285,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_KEEPER",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -13245,12 +13300,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_SET2",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_PLATE_KEEPER",
-      "potion": "POTION_TORNADO",
-      "shoes": "SHOES_CLOTH_SET2"
+      "potion": "POTION_TORNADO"
      },
      "role": "",
      "source": {
@@ -13294,7 +13345,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -13304,7 +13355,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_SET3",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_HELL",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_CLOTH_SET2"
+     },
      "note": "alts: armor=ARMOR_PLATE_SET2, secondhand=OFF_JESTERCANE_HELL",
      "party_size": {
       "max": 20,
@@ -13314,13 +13371,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_SET3",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_PLATE_HELL",
-      "offhand": "OFF_HORN_KEEPER",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_CLOTH_SET2"
+      "potion": "POTION_REVIVE"
      },
      "role": "tank",
      "source": {
@@ -13358,7 +13410,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -13368,7 +13420,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_CLOTH_KEEPER",
+      "offhand": "OFF_DEMONSKULL_HELL",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -13378,13 +13436,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_FEY",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW",
-      "head": "HEAD_CLOTH_KEEPER",
-      "offhand": "OFF_DEMONSKULL_HELL",
-      "potion": "POTION_CLEANSE2",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_CLEANSE2"
      },
      "role": "rdps",
      "source": {
@@ -13422,7 +13475,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -13432,7 +13485,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_DEMONSKULL_HELL",
+      "shoes": "SHOES_LEATHER_FEY"
+     },
      "note": null,
      "party_size": {
       "max": 20,
@@ -13442,13 +13501,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_DEMONSKULL_HELL",
-      "potion": "POTION_CLEANSE2",
-      "shoes": "SHOES_LEATHER_FEY"
+      "potion": "POTION_CLEANSE2"
      },
      "role": "",
      "source": {
@@ -13486,7 +13540,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -13496,7 +13550,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_CLOTH_KEEPER",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -13506,13 +13566,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_FEY",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_CLOTH_KEEPER",
-      "offhand": "OFF_HORN_KEEPER",
-      "potion": "POTION_CLEANSE2",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_CLEANSE2"
      },
      "role": "",
      "source": {
@@ -13548,7 +13603,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -13558,7 +13613,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SHIELD",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -13568,13 +13629,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_FEY",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_SHIELD",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -13610,7 +13666,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -13620,7 +13676,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_SHIELD",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
      "party_size": {
       "max": 20,
@@ -13630,13 +13692,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_FEY",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_SHIELD",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -13674,7 +13731,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -13684,7 +13741,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_TOME_CRYSTAL",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
      "note": "alts: boot=SHOES_CLOTH_SET2",
      "party_size": {
       "max": 20,
@@ -13694,13 +13757,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_HELL",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_TOME_CRYSTAL",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -13741,7 +13799,7 @@
      "caller": "anonymous albioncompo.com user (45a1ab1f)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -13751,7 +13809,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "offhand": "OFF_TOME_CRYSTAL",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
      "note": "alts: boot=SHOES_CLOTH_SET2",
      "party_size": {
       "max": 20,
@@ -13761,13 +13825,8 @@
      "published": "2026-08-19",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_HELL",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "offhand": "OFF_TOME_CRYSTAL",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "",
      "source": {
@@ -13807,7 +13866,7 @@
      "caller": "anonymous albioncompo.com user (c834f5c8)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -13817,7 +13876,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_CLOTH_KEEPER"
+     },
      "note": null,
      "party_size": {
       "max": 7,
@@ -13827,12 +13891,8 @@
      "published": "2026-06-20",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_SET2",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_ACID",
-      "shoes": "SHOES_CLOTH_KEEPER"
+      "potion": "POTION_ACID"
      },
      "role": "support",
      "source": {
@@ -13871,7 +13931,7 @@
      "caller": "anonymous albioncompo.com user (b4882719)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -13881,7 +13941,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: potion=POTION_SLOWFIELD",
      "party_size": {
       "max": 7,
@@ -13891,12 +13956,8 @@
      "published": "2026-05-15",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "SUPPORT",
      "source": {
@@ -13935,7 +13996,7 @@
      "caller": "anonymous albioncompo.com user (c834f5c8)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -13945,7 +14006,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_MORGANA",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: potion=POTION_STONESKIN",
      "party_size": {
       "max": 7,
@@ -13955,12 +14021,8 @@
      "published": "2026-06-20",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_FEY",
-      "cape": "CAPEITEM_MORGANA",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_CLEANSE2",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_CLEANSE2"
      },
      "role": "rdps",
      "source": {
@@ -13999,7 +14061,7 @@
      "caller": "anonymous albioncompo.com user (b4882719)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -14009,7 +14071,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_SET1",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: helm=HEAD_LEATHER_MORGANA",
      "party_size": {
       "max": 7,
@@ -14019,12 +14086,8 @@
      "published": "2026-05-15",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_HELL",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW",
-      "head": "HEAD_PLATE_SET1",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "dps",
      "source": {
@@ -14068,7 +14131,7 @@
      "caller": "anonymous albioncompo.com user (b4882719)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -14078,7 +14141,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_KEEPER",
+      "cape": "CAPEITEM_FW_CAERLEON",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_PLATE_AVALON"
+     },
      "note": "alts: cape=CAPEITEM_SMUGGLER, armor=ARMOR_PLATE_SET1",
      "party_size": {
       "max": 7,
@@ -14088,12 +14156,8 @@
      "published": "2026-05-15",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_KEEPER",
-      "cape": "CAPEITEM_FW_CAERLEON",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_PLATE_AVALON"
+      "potion": "POTION_REVIVE"
      },
      "role": "DPS",
      "source": {
@@ -14137,7 +14201,7 @@
      "caller": "SortaSaucy (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -14147,7 +14211,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_FW_THETFORD",
+      "head": "HEAD_LEATHER_AVALON",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "ARTILLERY-FIRE; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_STEW_FISH, armor=ARMOR_CLOTH_FEY, potion=POTION_CLEANSE2",
      "party_size": {
       "max": 7,
@@ -14157,12 +14226,8 @@
      "published": "2026-05-26",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_SET2",
-      "cape": "CAPEITEM_FW_THETFORD",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_AVALON",
-      "potion": "POTION_STONESKIN",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_STONESKIN"
      },
      "role": "rdps",
      "source": {
@@ -14206,7 +14271,7 @@
      "caller": "SortaSaucy (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -14216,7 +14281,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_FW_THETFORD",
+      "head": "HEAD_LEATHER_AVALON",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "LANCE-FROST; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_STEW_FISH, armor=ARMOR_CLOTH_FEY, potion=POTION_CLEANSE2",
      "party_size": {
       "max": 7,
@@ -14226,12 +14296,8 @@
      "published": "2026-05-26",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_SET2",
-      "cape": "CAPEITEM_FW_THETFORD",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_AVALON",
-      "potion": "POTION_STONESKIN",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_STONESKIN"
      },
      "role": "rdps",
      "source": {
@@ -14270,7 +14336,7 @@
      "caller": "anonymous albioncompo.com user (c834f5c8)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -14280,7 +14346,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET1",
+      "cape": "CAPEITEM_MORGANA",
+      "head": "HEAD_CLOTH_KEEPER",
+      "shoes": "SHOES_CLOTH_ROYAL"
+     },
      "note": "alts: potion=POTION_STONESKIN",
      "party_size": {
       "max": 7,
@@ -14290,12 +14361,8 @@
      "published": "2026-06-20",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_SET1",
-      "cape": "CAPEITEM_MORGANA",
       "food": "MEAL_STEW",
-      "head": "HEAD_CLOTH_KEEPER",
-      "potion": "POTION_CLEANSE2",
-      "shoes": "SHOES_CLOTH_ROYAL"
+      "potion": "POTION_CLEANSE2"
      },
      "role": "rdps",
      "source": {
@@ -14341,7 +14408,7 @@
      "canonical_basis": "3 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -14351,7 +14418,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: armor=ARMOR_CLOTH_SET2",
      "party_size": {
       "max": 7,
@@ -14361,12 +14433,8 @@
      "published": "2026-05-15",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_AVALON",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_FISH",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "healer",
      "source": {
@@ -14403,7 +14471,7 @@
      "caller": "anonymous albioncompo.com user (c834f5c8)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -14413,7 +14481,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_AVALON",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "alts: potion=POTION_CLEANSE2",
      "party_size": {
       "max": 7,
@@ -14423,12 +14496,8 @@
      "published": "2026-06-20",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_AVALON",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_STONESKIN",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_STONESKIN"
      },
      "role": "healer",
      "source": {
@@ -14470,7 +14539,7 @@
      "caller": "SortaSaucy (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -14480,7 +14549,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_FW_LYMHURST",
+      "head": "HEAD_CLOTH_ROYAL",
+      "shoes": "SHOES_LEATHER_SET1"
+     },
      "note": "alts: boot=SHOES_LEATHER_ROYAL, cape=CAPEITEM_FW_FORTSTERLING, food=MEAL_OMELETTE_FISH, helm=HEAD_PLATE_UNDEAD, armor=ARMOR_CLOTH_AVALON, potion=POTION_ENERGY",
      "party_size": {
       "max": 7,
@@ -14490,12 +14564,8 @@
      "published": "2026-05-26",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_SET2",
-      "cape": "CAPEITEM_FW_LYMHURST",
       "food": "MEAL_OMELETTE_FISH",
-      "head": "HEAD_CLOTH_ROYAL",
-      "potion": "POTION_STONESKIN",
-      "shoes": "SHOES_LEATHER_SET1"
+      "potion": "POTION_STONESKIN"
      },
      "role": "healer",
      "source": {
@@ -14534,7 +14604,7 @@
      "caller": "anonymous albioncompo.com user (c834f5c8)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -14544,7 +14614,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_FEY",
+      "cape": "CAPEITEM_MORGANA",
+      "head": "HEAD_LEATHER_SET3",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: potion=POTION_STONESKIN",
      "party_size": {
       "max": 7,
@@ -14554,12 +14629,8 @@
      "published": "2026-06-20",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_FEY",
-      "cape": "CAPEITEM_MORGANA",
       "food": "MEAL_STEW",
-      "head": "HEAD_LEATHER_SET3",
-      "potion": "POTION_CLEANSE2",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_CLEANSE2"
      },
      "role": "rdps",
      "source": {
@@ -14598,7 +14669,7 @@
      "caller": "SortaSaucy (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -14608,7 +14679,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_AVALON",
+      "cape": "CAPEITEM_FW_BRIDGEWATCH",
+      "head": "HEAD_LEATHER_AVALON",
+      "shoes": "SHOES_PLATE_FEY"
+     },
      "note": "BRING-LURCHER-GIG-SWAP; alts: cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH_FISH, helm=HEAD_LEATHER_SET3, potion=POTION_REVIVE",
      "party_size": {
       "max": 7,
@@ -14618,12 +14694,8 @@
      "published": "2026-05-26",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_AVALON",
-      "cape": "CAPEITEM_FW_BRIDGEWATCH",
       "food": "MEAL_SANDWICH_AVALON",
-      "head": "HEAD_LEATHER_AVALON",
-      "potion": "POTION_LAVA",
-      "shoes": "SHOES_PLATE_FEY"
+      "potion": "POTION_LAVA"
      },
      "role": "tank",
      "source": {
@@ -14667,7 +14739,7 @@
      "caller": "SortaSaucy (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -14677,7 +14749,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_LEATHER_MORGANA",
+      "shoes": "SHOES_CLOTH_HELL"
+     },
      "note": "BRING-LURCHER-GIG-SWAP; alts: cape=CAPEITEM_FW_BRIDGEWATCH, food=MEAL_SANDWICH_FISH, helm=HEAD_LEATHER_SET3, potion=POTION_REVIVE",
      "party_size": {
       "max": 7,
@@ -14687,12 +14764,8 @@
      "published": "2026-05-26",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_SANDWICH_AVALON",
-      "head": "HEAD_LEATHER_MORGANA",
-      "potion": "POTION_LAVA",
-      "shoes": "SHOES_CLOTH_HELL"
+      "potion": "POTION_LAVA"
      },
      "role": "tank",
      "source": {
@@ -14731,7 +14804,7 @@
      "caller": "anonymous albioncompo.com user (c834f5c8)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -14741,7 +14814,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_AVALON",
+      "cape": "CAPEITEM_FW_BRIDGEWATCH",
+      "head": "HEAD_LEATHER_HELL",
+      "shoes": "SHOES_PLATE_KEEPER"
+     },
      "note": null,
      "party_size": {
       "max": 7,
@@ -14751,12 +14829,8 @@
      "published": "2026-06-20",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_AVALON",
-      "cape": "CAPEITEM_FW_BRIDGEWATCH",
       "food": "MEAL_SANDWICH_FISH",
-      "head": "HEAD_LEATHER_HELL",
-      "potion": "POTION_TORNADO",
-      "shoes": "SHOES_PLATE_KEEPER"
+      "potion": "POTION_TORNADO"
      },
      "role": "support",
      "source": {
@@ -14800,7 +14874,7 @@
      "caller": "SortaSaucy (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.67,
       "loadout_completeness": 0.67,
       "outcome": null,
       "party_size": 1.0,
@@ -14810,7 +14884,12 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_FW_CAERLEON",
+      "head": "HEAD_LEATHER_AVALON",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "BRING-LURCHER-GIG-SWAP; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_SANDWICH_FISH, helm=HEAD_PLATE_AVALON, potion=POTION_REVIVE",
      "party_size": {
       "max": 7,
@@ -14820,12 +14899,8 @@
      "published": "2026-05-26",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
-      "cape": "CAPEITEM_FW_CAERLEON",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_LEATHER_AVALON",
-      "potion": "POTION_LAVA",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_LAVA"
      },
      "role": "tank",
      "source": {
@@ -14871,7 +14946,7 @@
      "canonical_basis": "2 independent source families agree",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -14881,7 +14956,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_SET3",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: cape=CAPEITEM_FW_CAERLEON",
      "party_size": {
       "max": 7,
@@ -14891,13 +14972,8 @@
      "published": "2026-05-15",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW_FISH",
-      "head": "HEAD_PLATE_SET3",
-      "offhand": "OFF_HORN_KEEPER",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "rdps",
      "source": {
@@ -14938,7 +15014,7 @@
      "caller": "SortaSaucy (albioncompo.com, legacy record)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -14948,7 +15024,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_CLOTH_SET2",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_CLOTH_KEEPER",
+      "offhand": "OFF_HORN_KEEPER",
+      "shoes": "SHOES_LEATHER_ROYAL"
+     },
      "note": "PIERCE/SUPPORT/MANA; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_STEW_FISH, armor=ARMOR_CLOTH_FEY, potion=POTION_STONESKIN",
      "party_size": {
       "max": 7,
@@ -14958,13 +15040,8 @@
      "published": "2026-05-26",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_CLOTH_SET2",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE",
-      "head": "HEAD_CLOTH_KEEPER",
-      "offhand": "OFF_HORN_KEEPER",
-      "potion": "POTION_CLEANSE2",
-      "shoes": "SHOES_LEATHER_ROYAL"
+      "potion": "POTION_CLEANSE2"
      },
      "role": "RDPS",
      "source": {
@@ -15002,7 +15079,7 @@
      "caller": "anonymous albioncompo.com user (b4882719)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -15012,7 +15089,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_ROYAL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_KEEPER",
+      "offhand": "OFF_JESTERCANE_HELL",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: boot=SHOES_CLOTH_KEEPER, cape=CAPEITEM_FW_BRIDGEWATCH",
      "party_size": {
       "max": 7,
@@ -15022,13 +15105,8 @@
      "published": "2026-05-15",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_ROYAL",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_OMELETTE_AVALON",
-      "head": "HEAD_PLATE_KEEPER",
-      "offhand": "OFF_JESTERCANE_HELL",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "tank",
      "source": {
@@ -15066,7 +15144,7 @@
      "caller": "anonymous albioncompo.com user (c834f5c8)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -15076,7 +15154,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_PLATE_KEEPER",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_KEEPER",
+      "offhand": "OFF_SHIELD_AVALON",
+      "shoes": "SHOES_CLOTH_HELL"
+     },
      "note": "alts: helm=HEAD_LEATHER_SET3, armor=ARMOR_PLATE_FEY",
      "party_size": {
       "max": 7,
@@ -15086,13 +15170,8 @@
      "published": "2026-06-20",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_PLATE_KEEPER",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_SANDWICH_FISH",
-      "head": "HEAD_PLATE_KEEPER",
-      "offhand": "OFF_SHIELD_AVALON",
-      "potion": "POTION_LAVA",
-      "shoes": "SHOES_CLOTH_HELL"
+      "potion": "POTION_LAVA"
      },
      "role": "tank",
      "source": {
@@ -15130,7 +15209,7 @@
      "caller": "anonymous albioncompo.com user (b4882719)",
      "confidence": {
       "content_context": 1.0,
-      "item_mapping": 0.0,
+      "item_mapping": 0.71,
       "loadout_completeness": 0.75,
       "outcome": null,
       "party_size": 1.0,
@@ -15140,7 +15219,13 @@
      },
      "content_candidates": null,
      "fit_exclude": null,
-     "gear": {},
+     "gear": {
+      "armor": "ARMOR_LEATHER_HELL",
+      "cape": "CAPEITEM_SMUGGLER",
+      "head": "HEAD_PLATE_SET2",
+      "offhand": "OFF_DEMONSKULL_HELL",
+      "shoes": "SHOES_LEATHER_MORGANA"
+     },
      "note": "alts: boot=SHOES_CLOTH_KEEPER, secondhand=OFF_SPIKEDSHIELD_MORGANA",
      "party_size": {
       "max": 7,
@@ -15150,13 +15235,8 @@
      "published": "2026-05-15",
      "quarantined_fields": [],
      "raw": {
-      "armor": "ARMOR_LEATHER_HELL",
-      "cape": "CAPEITEM_SMUGGLER",
       "food": "MEAL_STEW_FISH",
-      "head": "HEAD_PLATE_SET2",
-      "offhand": "OFF_DEMONSKULL_HELL",
-      "potion": "POTION_REVIVE",
-      "shoes": "SHOES_LEATHER_MORGANA"
+      "potion": "POTION_REVIVE"
      },
      "role": "dps",
      "source": {

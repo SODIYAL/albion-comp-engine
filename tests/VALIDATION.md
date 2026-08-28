@@ -294,3 +294,69 @@ Full battery after the rulings: 57/57 golden (zero re-pins), 38/38 forge (F25/F2
 ## Standing regression suite
 
 `prototype_engine.py` graduates into the real repo as the seed of the unit-test suite: every golden case stays green through every tuning change, every patch-driven data update, and every scoring refactor. Add a golden case whenever an expert disagrees with the engine and the expert is right.
+
+## Gear-name resolution (2026-08-28)
+
+**GEAR RESOLVER: ITEM IDS + CALLER SHORTHAND (2026-08-28).** Asked what stood
+between us and accurate fitness numbers, the answer was measured rather than
+guessed: the evidence layer was silently discarding most of the gear the comps
+record. `match_gear` matched only DISPLAY NAMES, but 11 of 13 published comps
+write gear as game item IDs (`ARMOR_CLOTH_AVALON`, `HEAD_LEATHER_SET3`,
+`CAPEITEM_SMUGGLER`). Those cells resolved to nothing at all: 729 of 1124 gear
+cells were ID-style and **zero** of them resolved. Only Deadlyhooker and blap
+(display-name sources) carried gear into the index.
+
+Three fixes in `pipeline/builds_lib.py`, all identity or spelling facts, none a
+guess:
+
+- **Item-ID matching** (`_match_gear_key`/`key_form`) — an ID *is* the catalogue
+  key, so it is an identity match. Tier prefix and enchant suffix are normalized
+  off both sides (sources write `MEAL_STEW`, the catalogue says `T8_MEAL_STEW`).
+  Slot-checked, and returns None on a key collision rather than picking one. The
+  ID shape (all-caps, underscore-joined) cannot capture a display name.
+- **Caller shorthand** (`GEAR_ALIASES`, slot-scoped) — OWNER RULINGS, verbatim:
+  *"GG might be graveguard boots if it's on boot slot"*, *"blink would be stalker
+  shoes most likely for their double blink ability"*, *"cleanse might be any
+  leather helm with second ability"* (→ Hellion Hood). Plus spelling facts:
+  `RoP` → Robe of Purity, `Smugglar` → Smuggler Cape, and `helm` → `helmet`
+  (`WORD_FIXES`), the caller's word for the catalogue's.
+- **Notation** — a leading tier marker is stripped (`TIER_NUM_RX`: "7.1 omelette",
+  "8.1 beef stew", "T8 Beef Stew"); no catalogue name begins with a digit.
+  `split_alternatives` learned `" or "` alongside `/`, so "Caitiff or Aegis"
+  becomes a primary plus a recorded alternative instead of an unresolvable cell.
+
+One entry is INFERRED, not ruled, and is flagged for confirmation: a bare
+`omelette` is ambiguous in the catalogue (Pork / Avalonian Pork, both T7), and is
+listed as the plain line because callers name the Avalonian one explicitly
+("ava pork omelette"). It sits in the alias table where it can be overruled,
+rather than in a matcher tiebreak where it could not be seen.
+
+**Result: all 13 comps now carry gear** (was 3). Corpus-wide, 0 of 1117 recorded
+pieces are unresolved and **1086 = 97.2% reach a CURATED record** — the number
+that matters, since only curated pieces carry capabilities. Prior recorded figure
+was 387/485.
+
+**Resolution is not supply — the two were being conflated.** 31 pieces resolve to
+real game items that are not in the capability sheets and therefore contribute
+ZERO supply: 20× `T5_POTION_REVIVE`, 6× `T8_MEAL_STEW_FISH`, 4×
+`T7_MEAL_OMELETTE_FISH`, 1× `HEAD_GATHERER_HIDE`. `dusthole crab omelette`
+resolves correctly to `T7_MEAL_OMELETTE_FISH` and still supplies nothing. These
+are curation gaps, not resolver gaps, and they are the honest remainder.
+
+**Two of my own earlier claims were wrong and are retracted here.** (1) I reported
+that "only 4 comps have usable gear" was an extraction error on my side and that
+"11 of 13 comps were already 100% resolvable" — that was wrong in the other
+direction: those 11 comps resolved *no* gear, because the resolver could not read
+item IDs. (2) I read a ripgrep rendering of `split_alternatives` as containing an
+escape-sequence bug (`"n\a"` for `"n/a"`); the file was correct and ripgrep had
+mangled the display. Verified against the source before changing anything.
+
+Full battery green after the change, no re-pins: golden, forge, builds,
+provenance, interactions, roles, patch-history, cohort-families, validation-modes,
+js-parity, evidence-lint, codec, display-math, tier2 (78% weapon_only PASS,
+unchanged — tier2 reads gear through its own reader and was already ID-aware,
+which is exactly why it disagreed with the builds index and exposed this).
+
+This unblocks Step 1 (the unit re-fit) on data completeness: the person-unit
+measurement now has 14 sources and ~1086 curated pieces behind it instead of 3
+sources and 629.

@@ -38916,6 +38916,7 @@
     "offhand": [
      "OFF_DEMONSKULL_HELL",
      "OFF_JESTERCANE_HELL",
+     "OFF_SHIELD_HELL",
      "OFF_HORN_KEEPER",
      "OFF_LAMP_UNDEAD",
      "OFF_SHIELD",
@@ -38928,8 +38929,8 @@
      "T8_POTION_LAVA"
     ],
     "shoes": [
-     "SHOES_CLOTH_SET2",
      "SHOES_LEATHER_MORGANA",
+     "SHOES_CLOTH_SET2",
      "SHOES_PLATE_AVALON",
      "SHOES_LEATHER_FEY",
      "SHOES_CLOTH_HELL",
@@ -38956,6 +38957,12 @@
      "head": [
       [
        "HEAD_LEATHER_HELL",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
        1
       ]
      ]
@@ -39110,6 +39117,10 @@
      "shoes": [
       [
        "SHOES_CLOTH_SET2",
+       2
+      ],
+      [
+       "SHOES_LEATHER_MORGANA",
        2
       ],
       [
@@ -39327,6 +39338,10 @@
       [
        "OFF_SHIELD",
        1
+      ],
+      [
+       "OFF_SHIELD_HELL",
+       1
       ]
      ],
      "potion": [
@@ -39386,6 +39401,10 @@
      "offhand": [
       [
        "OFF_JESTERCANE_HELL",
+       1
+      ],
+      [
+       "OFF_SHIELD_HELL",
        1
       ]
      ],
@@ -39503,9 +39522,9 @@
      "T8_POTION_COOLDOWN"
     ],
     "shoes": [
+     "SHOES_LEATHER_MORGANA",
      "SHOES_CLOTH_SET2",
      "SHOES_LEATHER_ROYAL",
-     "SHOES_LEATHER_MORGANA",
      "SHOES_LEATHER_SET1",
      "SHOES_PLATE_AVALON",
      "SHOES_PLATE_FEY",
@@ -39531,6 +39550,10 @@
       [
        "CAPEITEM_FW_BRIDGEWATCH",
        2
+      ],
+      [
+       "CAPEITEM_SMUGGLER",
+       1
       ]
      ],
      "food": [
@@ -39844,6 +39867,10 @@
      ],
      "shoes": [
       [
+       "SHOES_LEATHER_MORGANA",
+       3
+      ],
+      [
        "SHOES_CLOTH_SET2",
        2
       ],
@@ -39934,9 +39961,9 @@
      "T7_POTION_REVIVE"
     ],
     "shoes": [
+     "SHOES_LEATHER_MORGANA",
      "SHOES_PLATE_AVALON",
      "SHOES_CLOTH_SET2",
-     "SHOES_LEATHER_MORGANA",
      "SHOES_PLATE_SET3"
     ]
    },
@@ -39959,7 +39986,7 @@
       ],
       [
        "T7_MEAL_OMELETTE",
-       1
+       2
       ]
      ],
      "head": [
@@ -39986,15 +40013,15 @@
      ],
      "shoes": [
       [
+       "SHOES_LEATHER_MORGANA",
+       3
+      ],
+      [
        "SHOES_PLATE_AVALON",
        2
       ],
       [
        "SHOES_CLOTH_SET2",
-       1
-      ],
-      [
-       "SHOES_LEATHER_MORGANA",
        1
       ],
       [
@@ -40047,6 +40074,7 @@
      "HEAD_LEATHER_SET3",
      "HEAD_PLATE_SET3",
      "HEAD_CLOTH_KEEPER",
+     "HEAD_LEATHER_HELL",
      "HEAD_PLATE_SET1",
      "HEAD_CLOTH_ROYAL",
      "HEAD_LEATHER_AVALON",
@@ -40066,9 +40094,9 @@
      "T6_POTION_ENERGY"
     ],
     "shoes": [
+     "SHOES_LEATHER_MORGANA",
      "SHOES_LEATHER_SET1",
      "SHOES_LEATHER_ROYAL",
-     "SHOES_LEATHER_MORGANA",
      "SHOES_CLOTH_SET1"
     ]
    },
@@ -40173,6 +40201,10 @@
       ],
       [
        "HEAD_LEATHER_AVALON",
+       1
+      ],
+      [
+       "HEAD_LEATHER_HELL",
        1
       ]
      ],
@@ -40318,6 +40350,10 @@
       [
        "SHOES_CLOTH_SET1",
        1
+      ],
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
       ]
      ]
     },
@@ -40329,7 +40365,7 @@
       ],
       [
        "ARMOR_CLOTH_AVALON",
-       5
+       6
       ],
       [
        "ARMOR_CLOTH_SET2",
@@ -40367,6 +40403,10 @@
       ],
       [
        "HEAD_CLOTH_KEEPER",
+       2
+      ],
+      [
+       "HEAD_LEATHER_HELL",
        2
       ],
       [
@@ -40416,16 +40456,16 @@
      ],
      "shoes": [
       [
+       "SHOES_LEATHER_MORGANA",
+       8
+      ],
+      [
        "SHOES_LEATHER_ROYAL",
        4
       ],
       [
        "SHOES_LEATHER_SET1",
        4
-      ],
-      [
-       "SHOES_LEATHER_MORGANA",
-       2
       ]
      ]
     }
@@ -40496,6 +40536,7 @@
      "HEAD_PLATE_SET3",
      "HEAD_LEATHER_SET3",
      "HEAD_CLOTH_KEEPER",
+     "HEAD_LEATHER_HELL",
      "HEAD_LEATHER_AVALON",
      "HEAD_LEATHER_SET1",
      "HEAD_PLATE_SET1",
@@ -40512,9 +40553,9 @@
      "T7_POTION_STONESKIN"
     ],
     "shoes": [
+     "SHOES_LEATHER_MORGANA",
      "SHOES_LEATHER_ROYAL",
-     "SHOES_LEATHER_SET1",
-     "SHOES_LEATHER_MORGANA"
+     "SHOES_LEATHER_SET1"
     ]
    },
    "kit_weapon": {
@@ -40526,7 +40567,7 @@
       ],
       [
        "ARMOR_CLOTH_AVALON",
-       5
+       6
       ],
       [
        "ARMOR_CLOTH_SET2",
@@ -40564,6 +40605,10 @@
       ],
       [
        "HEAD_CLOTH_KEEPER",
+       2
+      ],
+      [
+       "HEAD_LEATHER_HELL",
        2
       ],
       [
@@ -40613,16 +40658,16 @@
      ],
      "shoes": [
       [
+       "SHOES_LEATHER_MORGANA",
+       8
+      ],
+      [
        "SHOES_LEATHER_ROYAL",
        4
       ],
       [
        "SHOES_LEATHER_SET1",
        4
-      ],
-      [
-       "SHOES_LEATHER_MORGANA",
-       2
       ]
      ]
     }
@@ -40666,6 +40711,7 @@
      "HEAD_PLATE_SET3",
      "HEAD_LEATHER_SET3",
      "HEAD_CLOTH_KEEPER",
+     "HEAD_LEATHER_HELL",
      "HEAD_LEATHER_AVALON",
      "HEAD_LEATHER_SET1",
      "HEAD_PLATE_SET1",
@@ -40682,9 +40728,9 @@
      "T7_POTION_STONESKIN"
     ],
     "shoes": [
+     "SHOES_LEATHER_MORGANA",
      "SHOES_LEATHER_ROYAL",
-     "SHOES_LEATHER_SET1",
-     "SHOES_LEATHER_MORGANA"
+     "SHOES_LEATHER_SET1"
     ]
    },
    "kit_weapon": {
@@ -40720,6 +40766,10 @@
       ],
       [
        "HEAD_CLOTH_KEEPER",
+       2
+      ],
+      [
+       "HEAD_LEATHER_HELL",
        2
       ],
       [
@@ -40765,16 +40815,16 @@
      ],
      "shoes": [
       [
+       "SHOES_LEATHER_MORGANA",
+       8
+      ],
+      [
        "SHOES_LEATHER_ROYAL",
        4
       ],
       [
        "SHOES_LEATHER_SET1",
        4
-      ],
-      [
-       "SHOES_LEATHER_MORGANA",
-       2
       ]
      ]
     }
@@ -40807,10 +40857,10 @@
     "armor": [
      "ARMOR_PLATE_SET2",
      "ARMOR_PLATE_KEEPER",
+     "ARMOR_CLOTH_AVALON",
      "ARMOR_PLATE_FEY",
      "ARMOR_PLATE_HELL",
      "ARMOR_PLATE_SET3",
-     "ARMOR_CLOTH_AVALON",
      "ARMOR_CLOTH_FEY",
      "ARMOR_PLATE_ROYAL"
     ],
@@ -40828,6 +40878,7 @@
      "HEAD_PLATE_KEEPER",
      "HEAD_CLOTH_KEEPER",
      "HEAD_LEATHER_AVALON",
+     "HEAD_LEATHER_HELL",
      "HEAD_PLATE_HELL"
     ],
     "offhand": [
@@ -40844,8 +40895,8 @@
      "T8_POTION_TORNADO"
     ],
     "shoes": [
-     "SHOES_CLOTH_SET2",
      "SHOES_LEATHER_MORGANA",
+     "SHOES_CLOTH_SET2",
      "SHOES_LEATHER_ROYAL",
      "SHOES_PLATE_AVALON",
      "SHOES_CLOTH_KEEPER",
@@ -40903,11 +40954,11 @@
      ],
      "shoes": [
       [
-       "SHOES_CLOTH_SET2",
-       2
+       "SHOES_LEATHER_MORGANA",
+       5
       ],
       [
-       "SHOES_LEATHER_MORGANA",
+       "SHOES_CLOTH_SET2",
        2
       ],
       [
@@ -40934,7 +40985,7 @@
      "food": [
       [
        "T7_MEAL_OMELETTE",
-       2
+       3
       ]
      ],
      "head": [
@@ -40955,11 +41006,11 @@
      ],
      "shoes": [
       [
-       "SHOES_CLOTH_SET1",
-       1
+       "SHOES_LEATHER_MORGANA",
+       3
       ],
       [
-       "SHOES_LEATHER_MORGANA",
+       "SHOES_CLOTH_SET1",
        1
       ],
       [
@@ -40972,7 +41023,7 @@
      "armor": [
       [
        "ARMOR_CLOTH_AVALON",
-       1
+       4
       ],
       [
        "ARMOR_CLOTH_FEY",
@@ -41003,6 +41054,10 @@
       [
        "HEAD_CLOTH_KEEPER",
        1
+      ],
+      [
+       "HEAD_LEATHER_HELL",
+       1
       ]
      ],
      "potion": [
@@ -41016,6 +41071,10 @@
       ]
      ],
      "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       3
+      ],
       [
        "SHOES_LEATHER_ROYAL",
        2
@@ -41038,7 +41097,7 @@
      "food": [
       [
        "T7_MEAL_OMELETTE",
-       1
+       2
       ]
      ],
      "head": [
@@ -41064,7 +41123,7 @@
      "shoes": [
       [
        "SHOES_LEATHER_MORGANA",
-       1
+       3
       ],
       [
        "SHOES_LEATHER_ROYAL",
@@ -41134,6 +41193,10 @@
       ]
      ],
      "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       3
+      ],
       [
        "SHOES_CLOTH_SET2",
        2
@@ -41857,6 +41920,7 @@
      "T7_POTION_STONESKIN"
     ],
     "shoes": [
+     "SHOES_LEATHER_MORGANA",
      "SHOES_CLOTH_SET2"
     ]
    },
@@ -41900,6 +41964,10 @@
       [
        "SHOES_CLOTH_SET2",
        1
+      ],
+      [
+       "SHOES_LEATHER_MORGANA",
+       1
       ]
      ]
     },
@@ -41919,6 +41987,12 @@
      "offhand": [
       [
        "OFF_SHIELD_AVALON",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
        1
       ]
      ]
@@ -41955,9 +42029,9 @@
    "job": "The ranged damage core \u2014 AoE pressure on the clump from distance (RDPS in comp sheets).\n",
    "kit": {
     "armor": [
+     "ARMOR_CLOTH_AVALON",
      "ARMOR_CLOTH_FEY",
      "ARMOR_CLOTH_SET2",
-     "ARMOR_CLOTH_AVALON",
      "ARMOR_CLOTH_SET1",
      "ARMOR_LEATHER_SET3",
      "ARMOR_CLOTH_SET3",
@@ -41982,6 +42056,7 @@
      "HEAD_CLOTH_KEEPER",
      "HEAD_CLOTH_AVALON",
      "HEAD_LEATHER_AVALON",
+     "HEAD_LEATHER_HELL",
      "HEAD_PLATE_AVALON",
      "HEAD_PLATE_SET3",
      "HEAD_CLOTH_FEY",
@@ -42019,6 +42094,10 @@
        6
       ],
       [
+       "ARMOR_CLOTH_AVALON",
+       3
+      ],
+      [
        "ARMOR_CLOTH_SET3",
        1
       ],
@@ -42051,6 +42130,10 @@
       [
        "HEAD_PLATE_SET1",
        6
+      ],
+      [
+       "HEAD_LEATHER_HELL",
+       2
       ],
       [
        "HEAD_CLOTH_AVALON",
@@ -42789,6 +42872,7 @@
      "HEAD_LEATHER_FEY",
      "HEAD_LEATHER_SET3",
      "HEAD_PLATE_SET1",
+     "HEAD_LEATHER_HELL",
      "HEAD_CLOTH_HELL",
      "HEAD_LEATHER_MORGANA",
      "HEAD_PLATE_KEEPER"
@@ -42808,8 +42892,8 @@
      "SHOES_LEATHER_FEY",
      "SHOES_CLOTH_ROYAL",
      "SHOES_PLATE_AVALON",
-     "SHOES_CLOTH_SET1",
-     "SHOES_PLATE_UNDEAD"
+     "SHOES_PLATE_UNDEAD",
+     "SHOES_CLOTH_SET1"
     ]
    },
    "kit_weapon": {
@@ -42827,7 +42911,7 @@
      "cape": [
       [
        "CAPEITEM_SMUGGLER",
-       3
+       4
       ],
       [
        "CAPEITEM_AVALON",
@@ -42839,6 +42923,10 @@
       ]
      ],
      "food": [
+      [
+       "T7_MEAL_OMELETTE",
+       1
+      ],
       [
        "T7_MEAL_OMELETTE_AVALON",
        1
@@ -42915,7 +43003,7 @@
      "food": [
       [
        "T7_MEAL_OMELETTE",
-       1
+       2
       ],
       [
        "T8_MEAL_STEW",
@@ -42953,6 +43041,10 @@
       ],
       [
        "SHOES_PLATE_AVALON",
+       1
+      ],
+      [
+       "SHOES_PLATE_UNDEAD",
        1
       ]
      ]
@@ -43063,7 +43155,7 @@
      "food": [
       [
        "T7_MEAL_OMELETTE",
-       1
+       2
       ]
      ],
      "head": [
@@ -43107,10 +43199,14 @@
      "food": [
       [
        "T8_MEAL_STEW",
-       1
+       2
       ]
      ],
      "head": [
+      [
+       "HEAD_LEATHER_HELL",
+       1
+      ],
       [
        "HEAD_LEATHER_SET3",
        1
@@ -43209,10 +43305,14 @@
      "food": [
       [
        "T8_MEAL_STEW",
-       1
+       2
       ]
      ],
      "head": [
+      [
+       "HEAD_LEATHER_HELL",
+       1
+      ],
       [
        "HEAD_PLATE_SET2",
        1
@@ -43303,6 +43403,7 @@
    "job": "Synced burst on the clump \u2014 the bomb-squad seat (fiend/mage-robe uniform, bananatools bomb-squad guide).\n",
    "kit": {
     "armor": [
+     "ARMOR_CLOTH_AVALON",
      "ARMOR_LEATHER_AVALON"
     ],
     "cape": [
@@ -43327,6 +43428,10 @@
    "kit_weapon": {
     "2H_GLAIVE_CRYSTAL": {
      "armor": [
+      [
+       "ARMOR_CLOTH_AVALON",
+       2
+      ],
       [
        "ARMOR_LEATHER_AVALON",
        1
@@ -43419,6 +43524,7 @@
     ],
     "head": [
      "HEAD_LEATHER_MORGANA",
+     "HEAD_LEATHER_HELL",
      "HEAD_LEATHER_SET3",
      "HEAD_PLATE_SET2"
     ],
@@ -43471,7 +43577,7 @@
      "food": [
       [
        "T8_MEAL_STEW",
-       1
+       2
       ]
      ],
      "head": [
@@ -43525,10 +43631,14 @@
      "food": [
       [
        "T8_MEAL_STEW",
-       1
+       2
       ]
      ],
      "head": [
+      [
+       "HEAD_LEATHER_HELL",
+       1
+      ],
       [
        "HEAD_PLATE_SET2",
        1

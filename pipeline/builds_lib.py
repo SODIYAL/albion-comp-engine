@@ -72,6 +72,57 @@ SPELL_SLOTS = ("q", "w", "e", "passive")
 TIER_WORDS = (r"(?:adept's|expert's|master's|grandmaster's|elder's|minor|"
               r"major|beginner's|novice's|journeyman's)")
 
+# CALLER SHORTHAND (2026-08-28). Caller sheets are written for players, not
+# parsers: they abbreviate ("RoP"), typo ("Smugglar"), shorten the catalogue
+# word ("Guardian Helm" for Helmet), and — most often — name the ABILITY they
+# want rather than the item that carries it ("Blink" boots, "GG"). Every entry
+# below is either a spelling fact or an owner ruling, and each is slot-scoped
+# so a word can mean different items in different slots. This is a
+# VOCABULARY, not a guesser: anything not listed still falls through to the
+# matcher and stays raw text if it cannot be resolved (the §C rule).
+# Owner rulings 2026-08-28, verbatim:
+#   "GG might be graveguard boots if it's on boot slot"
+#   "blink would be stalker shoes most likely for their double blink ability"
+#   "cleanse might be any leather helm with second ability"
+GEAR_ALIASES = {
+    # (slot, shorthand) -> catalogue name
+    ("armor", "rop"): "Robe of Purity",
+    ("cape", "smugglar"): "Smuggler Cape",          # typo in Timothy's sheet
+    ("shoes", "gg"): "Graveguard Boots",            # owner ruling
+    ("shoes", "blink"): "Stalker Shoes",            # owner ruling: double blink
+    ("head", "cleanse"): "Hellion Hood",            # owner: a leather helm whose
+    ("head", "leather hood cleanse"): "Hellion Hood",  # 2nd ability cleanses
+    # Food. A bare "omelette" is ambiguous in the catalogue (Pork Omelette /
+    # Avalonian Pork Omelette, both T7), so it needs a listed ruling rather
+    # than a matcher tiebreak. Callers name the Avalonian line explicitly
+    # ("ava pork omelette") — an unqualified "omelette" is the plain one.
+    # INFERRED, not an owner ruling: flag for confirmation.
+    ("food", "omelette"): "Pork Omelette",
+}
+# Callers prefix a tier.enchant marker ("7.1 omelette", "8.1 beef stew",
+# "T8 Beef Stew"). It is notation, not part of any item name, and no
+# catalogue name begins with a digit — so a LEADING tier token is stripped
+# before matching. Trailing/interior digits are left alone.
+TIER_NUM_RX = re.compile(r"^\s*t?\d(?:\.\d+)?\s+", re.I)
+# "Helm" is the caller's word; the catalogue says "Helmet". Applied before
+# matching so "Guardian Helm" and "Soldier Helm" resolve like any other name.
+WORD_FIXES = ((r"\bhelm\b", "helmet"),)
+
+
+def apply_gear_alias(text, slot):
+    """Caller shorthand -> catalogue name, or the text unchanged."""
+    if not text:
+        return text
+    text = TIER_NUM_RX.sub("", str(text))
+    key = re.sub(r"[^a-z0-9 ]+", " ", text.lower())
+    key = " ".join(key.split())
+    hit = GEAR_ALIASES.get((slot, key))
+    if hit:
+        return hit
+    for pat, rep in WORD_FIXES:
+        text = re.sub(pat, rep, text, flags=re.I)
+    return text
+
 
 def norm_text(text):
     text = re.sub(r"\(.*?\)", " ", text or "")
@@ -97,9 +148,48 @@ def _token_prefix_match(tokens, name_tokens):
     return all(any(n.startswith(tok) for n in it) for tok in tokens)
 
 
+# An item ID: all-caps, underscore-joined, no spaces. Display names never
+# take this shape, so the ID path can never capture one.
+ITEM_ID_RX = re.compile(r"^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)+$")
+KEY_TIER_RX = re.compile(r"^T\d+_")
+KEY_ENCH_RX = re.compile(r"@\d+$")
+
+
+def key_form(key):
+    """Catalogue key stripped to its tier- and enchant-independent form:
+    'T8_MEAL_STEW@2' -> 'MEAL_STEW'."""
+    return KEY_TIER_RX.sub("", KEY_ENCH_RX.sub("", str(key).strip().upper()))
+
+
+def _match_gear_key(text, slot, catalogue):
+    """Exact catalogue key for an item ID, or None."""
+    if not text:
+        return None
+    raw = str(text).strip()
+    if not ITEM_ID_RX.match(raw):
+        return None
+    want = key_form(raw)
+    hits = [k for k, v in catalogue.items()
+            if v.get("slot") == slot and key_form(k) == want]
+    return hits[0] if len(hits) == 1 else None
+
+
 def match_gear(text, slot, catalogue):
     """A catalogue key for free-text `text` in `slot`, or None when absent or
-    ambiguous."""
+    ambiguous. An exact ITEM ID is honoured first, then caller shorthand is
+    translated (GEAR_ALIASES) so a sheet written for players still resolves;
+    anything unlisted falls through and stays raw text rather than being
+    guessed."""
+    # Most comp sources record gear as game item IDs ("ARMOR_CLOTH_AVALON"),
+    # not display names — an ID IS the catalogue key, so it is an identity
+    # match, not a guess. Consumable keys carry a tier the sources omit
+    # ("MEAL_STEW" for T8_MEAL_STEW), so the tier prefix and any enchant
+    # suffix are normalized off both sides. Still slot-checked, and still
+    # returns None if two keys collide.
+    key_hit = _match_gear_key(text, slot, catalogue)
+    if key_hit:
+        return key_hit
+    text = apply_gear_alias(text, slot)
     want = norm_text(text)
     if not want:
         return None
@@ -216,13 +306,19 @@ def resolve_spells(weapon, picks, weapon_lines):
     return spells, unknowns, quarantined
 
 
+ALT_SPLIT_RX = re.compile(r"\s*/\s*|\s+or\s+", re.I)
+
+
 def split_alternatives(text):
     """'Aegis/Taproot' -> ['Aegis', 'Taproot'] — structured alternatives
-    rather than slash-delimited text (§C). Single values come back as a
-    one-item list; None/empty as []. "N/A" means explicitly none."""
+    rather than slash-delimited text (§C). Callers write the alternation
+    with either separator ("Caitiff or Aegis"), so both split. Single values
+    come back as a one-item list; None/empty as []. "N/A" means explicitly
+    none, and is tested before the split so it never reads as an alternation
+    between "N" and "A"."""
     if not text or str(text).strip().lower() in ("n/a", "na", "-", "none"):
         return []
-    return [p.strip() for p in str(text).split("/") if p.strip()]
+    return [p.strip() for p in ALT_SPLIT_RX.split(str(text)) if p.strip()]
 
 
 # --------------------------------------------------------- slot -> build
