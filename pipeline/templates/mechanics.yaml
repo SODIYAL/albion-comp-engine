@@ -167,6 +167,20 @@ aoe_geometry:
 build_stats:
   # armor + magic resistance -> tankiness units. PROVISIONAL calibration:
   # a plate chest (161+126 = 287 points) ~ 1.15 units; cloth (123) ~ 0.5.
+  #
+  # ONE NUMBER, NOT TWO — asked and answered 2026-08-28. The wiki is right
+  # that resistance is directional ("cloth armors have higher MR than Armor,
+  # plate armors have higher Armor than MR, and leather armors have balanced
+  # Armor and MR"), and the item bank agrees: leather is exactly equal
+  # (98.2/98.2) while cloth (59.4/76.0) and plate (154.0/120.6) each carry a
+  # 22% skew. But the comps field 62% magical / 38% physical damage, and
+  # weighting each class by that real mix lands within 3% of the plain sum
+  # (cloth 67.7 -> 69.7, plate 137.3 -> 133.3, leather unchanged). Splitting
+  # would double the durability rows for a 3% correction that nothing could
+  # act on anyway: the owner ruled 2026-08-28 that the app models no enemy —
+  # "out playstyle dictates how we fight regardless of who or where" — so
+  # there is no damage type to resolve the split against. Revisit only if an
+  # enemy-composition input is ever added.
   tankiness_per_armor_point: 0.004
   # crowd-control resistance -> tankiness units (plate 50 ccr ~ 0.15 units)
   tankiness_per_ccr_point: 0.003
