@@ -303,6 +303,30 @@ class Engine:
                        for c, r in self.reqs.items()}
         self._weights = {c: r["weight"] * self.style_mults.get(c, 1.0)
                          for c, r in self.reqs.items()}
+        # OPTIONAL capabilities (owner ruling 2026-08-28). Some capabilities
+        # are real and worth having but are not something every comp must
+        # field: `anti_zone` exists on exactly ONE weapon in the catalogue
+        # (Exalted Staff, the crystal holy staff) and is a 30+ ZvZ tool;
+        # `execute` sits on five single-target melee weapons. Owner: "it's
+        # fine to keep those targets just maybe make some optional... as for
+        # execute keep that too but optional."
+        #
+        # Optional means: bringing it still earns its coverage exactly as
+        # before, but NOT bringing it is not a hole. Mechanically that is a
+        # DENOMINATOR-only rule — every fitness term for a capability at zero
+        # supply is already zero (coverage 0/target, headroom needs
+        # have>target, over-stack needs have>soft) — so an optional capability
+        # can only be dropped from max_fitness(), never from fitness(). No
+        # score, ranking, or pick value moves; only the percentage shown.
+        # A hard floor would break that identity, so the two are incompatible
+        # and the build fails loudly rather than scoring inconsistently.
+        self.optional = {c for c, r in self.reqs.items() if r.get("optional")}
+        bad = sorted(self.optional & set(self.floors))
+        if bad:
+            raise ValueError(
+                f"template '{self.content}': {', '.join(bad)} marked optional "
+                "but carries a hard floor — a floor is charged at zero supply, "
+                "so the capability is mandatory by construction")
         # Dedicated single-target VALUE devaluation by size (2026-08-18,
         # composition.yaml st_value_mult): concave coverage hands the FULL
         # weight to whoever fills an empty capability first, so a token
@@ -1592,11 +1616,23 @@ class Engine:
                                          else sf.get(cap, 0.0))
         return total
 
-    def max_fitness(self):
+    def max_fitness(self, party=None, combos=None, gears=None):
         """Supremum of fitness(): full coverage of every capability plus the
         headroom band maxed at each soft cap (review 2026-08-18 — without
-        the headroom factor a well-forged comp displayed over 100%)."""
-        return sum(self.weight(cap) for cap in self.reqs) * (1.0 + self.headroom)
+        the headroom factor a well-forged comp displayed over 100%).
+
+        Given a party, OPTIONAL capabilities the party fields none of drop
+        out of the supremum (owner ruling 2026-08-28): a comp is not marked
+        down for skipping a tool that lives on one weapon in the game. Called
+        with no party this returns the every-capability supremum, so legacy
+        callers are unchanged. fitness() is identical either way — see the
+        set_content note; this is a denominator-only rule."""
+        caps = self.reqs
+        if party is not None and self.optional:
+            s = self.effective_supply(party, combos, gears)
+            caps = [c for c in self.reqs
+                    if c not in self.optional or s.get(c, 0.0) > 0.0]
+        return sum(self.weight(cap) for cap in caps) * (1.0 + self.headroom)
 
     # ---------------------------------------------------------------- synergy
     def _syn_side(self, cap, amount):

@@ -89,7 +89,12 @@ const softCap = cap => ENG.softCap(cap);
    engine; ad-hoc parties (contribution what-ifs) pass their own slices. */
 const supply = p => p === party ? partyCalc().sup : ENG.effectiveSupply(p);
 const fitness = p => p === party ? partyCalc().fit : ENG.fitness(p);
-const maxFitness = () => ENG.maxFitness();
+/* The supremum is party-dependent since the optional ruling (2026-08-28):
+   an OPTIONAL capability the comp fields none of leaves the denominator, so
+   a comp is not marked down for skipping a one-weapon tool. Same loadout and
+   gear the numerator is scored with. */
+const maxFitness = (p = party) => ENG.maxFitness(
+  p, p === party ? COMBOS_CUR : null, p === party ? GEARS_CUR : null);
 const uncoveredCaps = p => ENG.uncoveredCaps(p, p === party ? COMBOS_CUR : null);
 const weaknesses = (p, n = 3) => ENG.weaknesses(p, n, p === party ? COMBOS_CUR : null);
 /* app_scoring.js term/rec field names -> the short ones this file renders */

@@ -272,6 +272,22 @@
       var m2 = this.styleMults[cap2];
       this._weights[cap2] = r.weight * (m2 === undefined ? 1.0 : m2);
     }
+    /* OPTIONAL capabilities (owner ruling 2026-08-28) — mirrors engine.py
+       set_content. Bringing one still earns its coverage; not bringing it is
+       not a hole. Every fitness term is already zero at zero supply, so this
+       is a DENOMINATOR-only rule: it can only leave maxFitness(), never
+       fitness(). A hard floor would break that identity — incompatible. */
+    this.optional = {};
+    for (var capO in this.reqs) {
+      if (this.reqs[capO].optional) {
+        if (capO in this.floors) {
+          throw new Error("template '" + this.content + "': " + capO +
+            " marked optional but carries a hard floor — a floor is charged " +
+            "at zero supply, so the capability is mandatory by construction");
+        }
+        this.optional[capO] = true;
+      }
+    }
     /* Dedicated single-target VALUE devaluation by size (composition.yaml
        st_value_mult; a template opts out with st_full_value — roads).
        Mirrors engine.py set_content. */
@@ -1428,11 +1444,21 @@
     return total;
   };
 
-  CompEngine.prototype.maxFitness = function () {
+  CompEngine.prototype.maxFitness = function (party, combos, gears) {
     /* Supremum of fitness(): full coverage + the headroom band maxed
-       (mirrors engine.py max_fitness, review 2026-08-18). */
-    var t = 0;
-    for (var cap in this.reqs) t += this.weight(cap);
+       (mirrors engine.py max_fitness, review 2026-08-18). Given a party,
+       OPTIONAL capabilities it fields none of drop out of the supremum
+       (owner ruling 2026-08-28) — a comp is not marked down for skipping a
+       tool that lives on one weapon in the game. No party = the
+       every-capability supremum, so legacy callers are unchanged. */
+    var t = 0, s = null, cap;
+    var hasOpt = false;
+    for (cap in this.optional) { hasOpt = true; break; }
+    if (party && hasOpt) s = this.effectiveSupply(party, combos, gears);
+    for (cap in this.reqs) {
+      if (s && this.optional[cap] && !(s[cap] > 0)) continue;
+      t += this.weight(cap);
+    }
     return t * (1.0 + this.headroom);
   };
 

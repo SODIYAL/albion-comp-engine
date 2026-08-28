@@ -54,12 +54,17 @@ requirements:
   silence:        {target: 2.5,  weight: 5,  soft_cap: 4.2,  scales: false}
   buff_allies:    {target: 2.5,  weight: 4,  soft_cap: 5.0,  scales: false}
   disengage:      {target: 0.8,  weight: 3,  soft_cap: 2.5,  scales: false}
-  execute:        {target: 0.8,  weight: 3,  soft_cap: 2.5,  scales: false}
+  # OPTIONAL (owner 2026-08-28): five single-target melee weapons carry it;
+  #   9 of 10 published comps field none. Keep the target, do not require it.
+  execute:        {target: 0.8,  weight: 3,  soft_cap: 2.5,  scales: false, optional: true}
   # REWEIGHT 2026-08-18 (see blackzone_roam.yaml note): from-zero windfall of
   # these provisional niche weights dominated tail recommendations. anti_zone
   # kept ABOVE the other contents (2, not 1): the standing Exalted slot in
   # all Deadlyhooker parties is castle/territory evidence.
-  anti_zone:      {target: 0.8,  weight: 2,  soft_cap: 1.7,  scales: false}
+  # OPTIONAL (owner 2026-08-28): supplied by ONE weapon in the catalogue
+  #   (Exalted Staff, the crystal holy staff) and fielded mainly by 30+ ZvZ
+  #   groups. Real target, but a comp without it is not missing anything.
+  anti_zone:      {target: 0.8,  weight: 2,  soft_cap: 1.7,  scales: false, optional: true}
   damage_debuff:  {target: 0.8,  weight: 1,  soft_cap: 1.7,  scales: false}
 
 hard_floors:

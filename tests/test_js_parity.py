@@ -196,6 +196,10 @@ def py_results(cases):
             "synergy": e.synergy(c["party"]),
             "synergy_locked": e.synergy(c["party"], c["combos"]),
             "max_fitness": e.max_fitness(),
+            # party-aware supremum (optional ruling 2026-08-28): optional
+            # capabilities the party fields none of leave the denominator
+            "max_fitness_party": e.max_fitness(c["party"], c["combos"],
+                                               c["gears"]),
             "recommend": [{"weapon": r["weapon"], "score": r["score"],
                            "combo": r["combo"], "kit": r["kit"],
                            "caps_gain": r["caps_gain"],
@@ -277,9 +281,10 @@ def main():
                 and a["refine_dressed"] != b.get("refine_dressed"):
             errs.append(f"refine_dressed: py={a['refine_dressed']} "
                         f"js={b.get('refine_dressed')}")
-        for k in ("fitness", "synergy", "max_fitness", "comp_score",
-                  "comp_score_locked", "fitness_locked", "synergy_locked",
-                  "redundancy", "fitness_build", "comp_score_build"):
+        for k in ("fitness", "synergy", "max_fitness", "max_fitness_party",
+                  "comp_score", "comp_score_locked", "fitness_locked",
+                  "synergy_locked", "redundancy", "fitness_build",
+                  "comp_score_build"):
             if a[k] is None and b.get(k) is None:
                 continue
             if a[k] is None or b.get(k) is None or abs(a[k] - b[k]) > EPS:

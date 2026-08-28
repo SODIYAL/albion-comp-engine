@@ -97,24 +97,98 @@ ten. Under the comp-fitting convention (target = 0.9x the least any good comp
 fields), a capability that good comps field zero of has a target that cannot be
 justified from the corpus.
 
-**Some spreads are too wide to be one number.** peel runs 1.7-2.5 in eight
-comps but 11.0 and 11.7 in the two roads comps; silence 0.9-3.0 except the same
-two roads comps at 6.6; zone_control ~2 except sob_blaze at 10.8. These are
-content- or style-shaped, not scale-shaped, which is direct evidence for the
-per-style / per-content target modifiers the re-fit was going to need anyway.
+**CORRECTED (same day).** This section first read: "peel runs 1.7-2.5 in eight
+comps but 11.0 and 11.7 in the two roads comps ... these are content- or
+style-shaped." **That was wrong, and it was wrong because a ratio was read as
+if it were a measurement.** Checking the raw numbers per person:
+
+```text
+style       content         n  comp                          peel/person  (target/person)
+brawl       blackzone_roam  7  push_monkey                      3.57        (2.01)
+brawl       blackzone_roam 15  bist_roam15                      5.11        (2.02)
+brawl       blackzone_roam 20  blap                             4.36        (2.01)
+brawl_clap  blackzone_roam 20  clonepeek                        4.28        (2.01)
+clap        blackzone_roam  7  sortasaucy                       3.43        (2.01)
+clap_kite   blackzone_roam 20  deadlyhooker                     4.32        (2.01)
+clap_kite   roads           7  roads_oneshot                    4.07        (0.37)
+clap_kite   roads           7  sob_blaze                        4.36        (0.37)
+kite        blackzone_roam 20  20v20_competitive                4.04        (2.01)
+kite        blackzone_roam 20  ss_kite_20                       3.57        (2.01)
+```
+
+**Peel per person is essentially CONSTANT -- 3.4 to 5.1 across every style,
+every content, every size.** The two roads comps sit at 4.07 and 4.36, dead in
+the middle of the pack. They did not field 5x the peel; the roads template asks
+for 0.37 per person where blackzone_roam asks 2.01, a 5.4x difference in the
+TARGET. The whole apparent spread was the denominator.
+
+This is the real finding, and it is stronger than the one it replaces: **the
+templates disagree with each other about peel far more than real comps do.**
+Same shape in silence (targets 0.13-1.01 per person) and zone_control
+(0.19-0.45). Comps are consistent; the templates are not. Every ratio in the
+big table above carries this hazard -- a high number can mean "comps bring a
+lot" OR "this template asks for little", and only the raw per-person view
+separates them. The re-fit should be done on raw per-person supply, not on
+ratios.
 
 ## Open questions for the owner
 
 1. **Re-fit basis.** Re-measure every target in person units from this table
    (shared base + content/style modifiers), or keep weapon-unit targets and
    change what counts as supply? The measurement supports the former.
-2. **execute and anti_zone.** Drop the rows, or are these capabilities real
-   needs the corpus happens not to cover (in which case the corpus, not the
-   template, is the gap)?
-3. **peel** -- still the standing open question. The corpus says the spread is
-   content-shaped (roads comps field 5x what others do). Game knowledge said
-   comp-relative. The two readings are compatible if roads play IS the
-   peel-heavy style; a ruling would settle it.
+2. **execute and anti_zone -- RULED 2026-08-28, shipped.** Owner: "the anti
+   zone is only on one weapon, the crystal healing staff and it's brought [by]
+   some zvz groups but usually when party is like 30+ people. so it's fine to
+   keep those targets just maybe make some optional. as for execute keep that
+   too but optional." Confirmed against the catalogue before implementing:
+   `anti_zone` is supplied by exactly ONE item, Exalted Staff
+   (`2H_HOLYSTAFF_CRYSTAL`); `execute` by five single-target melee weapons.
+   Both rows now carry `optional: true` in all six templates. See below.
+3. **peel -- RULED 2026-08-28.** Owner: "peel is about how you are fighting."
+   The corpus neither confirms nor contradicts it: once measured per person,
+   peel is flat at ~4 everywhere, so the data shows no content effect AND no
+   style effect. My earlier claim that the corpus showed a content effect was
+   an artifact (see the correction above). The ruling stands on game knowledge,
+   and converts into per-style target modifiers during the re-fit -- there is
+   no corpus-derived number to fit them to yet.
 4. **Uncurated pieces.** 31 recorded pieces resolve to real items with no
    capability sheet and so supply nothing: 20x revive potion, fish meals, one
    gatherer hood. Curate the revive potion, or rule it out of the model?
+
+## Shipped from these rulings (2026-08-28)
+
+`optional: true` on a template requirement row. Semantics: bringing the
+capability earns its coverage exactly as before; NOT bringing it is not a hole.
+
+Mechanically this is a **denominator-only rule, and provably so**: every
+fitness term for a capability at zero supply is already zero -- coverage is
+`min(1, 0/target)^gamma`, headroom requires `have > target`, over-stack
+requires `have > soft_cap`. So an optional capability can only leave
+`max_fitness()`, never `fitness()`. A hard floor IS charged at zero supply, so
+optional + hard floor is contradictory; both ports raise on that combination
+rather than scoring inconsistently. Neither capability has a floor in any
+template.
+
+Consequence: **no score, ranking, pick value, or forge decision moves** -- only
+the percentage shown. Confirmed by the full battery green with zero re-pins
+(57/57 golden, 38/38 forge, 60/60 parity including a new party-aware
+`max_fitness` case). Measured display effect:
+
+```text
+comp                       content          was     now   shift
+20v20_competitive          blackzone_roam  87.3%   87.5%   +0.2
+bist_roam15                blackzone_roam  78.9%   79.7%   +0.8
+push_monkey_7              blackzone_roam  69.0%   69.9%   +1.0
+roads_oneshot              roads           79.2%   82.5%   +3.3
+sob_blaze_os               roads           71.8%   74.8%   +3.0
+sortasaucy_7man            blackzone_roam  80.4%   81.6%   +1.1
+ss_kite_20                 blackzone_roam  87.1%   87.2%   +0.2
+clonepeek_zvz20            blackzone_roam  86.5%   87.4%   +0.9
+deadlyhooker               blackzone_roam  68.6%   69.2%   +0.7
+blap                       blackzone_roam  85.6%   86.2%   +0.7
+```
+
+The roads comps move most because roads carried `execute` at weight 4, the
+heaviest row in the corpus that nobody fields. The radar follows the same rule:
+an optional capability at zero supply leaves the axis instead of reading as a
+gap.

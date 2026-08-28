@@ -132,8 +132,12 @@
     for (const [g, caps] of Object.entries(groups)){
       const rows = caps.filter(c => REQS()[c]).map(c => {
         const have = s[c] || 0, t = target(c), soft = softCap(c);
-        return {cap: c, have, t, soft, floor: floorHit(c, sfl[c] || 0), over: have > soft};
-      });
+        return {cap: c, have, t, soft, floor: floorHit(c, sfl[c] || 0),
+                over: have > soft, optional: !!REQS()[c].optional};
+      /* An OPTIONAL capability the comp fields none of is not a gap (owner
+         2026-08-28) — it leaves the axis entirely, exactly as it leaves
+         max_fitness. Brought, it counts normally. */
+      }).filter(r => !(r.optional && r.have <= 0));
       if (!rows.length) continue;
       const tSum = rows.reduce((a, r) => a + Math.max(0, r.t), 0);
       const softSum = rows.reduce((a, r) => a + Math.max(0, r.soft), 0);

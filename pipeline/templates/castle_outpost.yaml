@@ -49,7 +49,10 @@ requirements:
   # REWEIGHT 2026-08-18 (see blackzone_roam.yaml note): 3 -> 1 — concave
   # from-zero coverage made weight 3 a +3.0 windfall that DID dominate tail
   # recommendations, defeating this row's own rule.
-  anti_zone:      {target: 0.9, weight: 1,  soft_cap: 1.7, scales: false}
+  # OPTIONAL (owner 2026-08-28): supplied by ONE weapon in the catalogue
+  #   (Exalted Staff, the crystal holy staff) and fielded mainly by 30+ ZvZ
+  #   groups. Real target, but a comp without it is not missing anything.
+  anti_zone:      {target: 0.9, weight: 1,  soft_cap: 1.7, scales: false, optional: true}
   # PROVISIONAL WEIGHT — promoted 2026-08-12 with the anti_zone treatment:
   # low and flat so an unvalidated number can never dominate a recommendation.
   # Scored so far only on the defining carriers (Black Monk 2, Incubus Mace 2,

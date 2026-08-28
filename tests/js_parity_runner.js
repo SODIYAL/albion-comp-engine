@@ -73,6 +73,7 @@ const out = cases.map((c, i) => {
     synergy: e.synergy(c.party),
     synergy_locked: e.synergy(c.party, c.combos),
     max_fitness: e.maxFitness(),
+    max_fitness_party: e.maxFitness(c.party, c.combos, c.gears),
     recommend: e.recommend(c.party, 5).map((r) => ({
       weapon: r.weapon, score: r.score, combo: r.combo, kit: r.kit,
       caps_gain: r.caps_gain, verdict: r.verdict })),

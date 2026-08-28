@@ -44395,6 +44395,7 @@
      "weight": 1
     },
     "anti_zone": {
+     "optional": true,
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.8,
@@ -44455,6 +44456,7 @@
      "weight": 8
     },
     "execute": {
+     "optional": true,
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.8,
@@ -44591,6 +44593,7 @@
    "name": "Castle Fight",
    "requirements": {
     "anti_zone": {
+     "optional": true,
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.8,
@@ -44651,6 +44654,7 @@
      "weight": 7
     },
     "execute": {
+     "optional": true,
      "scales": false,
      "soft_cap": 2.5,
      "target": 0.8,
@@ -44763,6 +44767,7 @@
      "weight": 1
     },
     "anti_zone": {
+     "optional": true,
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.9,
@@ -44923,6 +44928,7 @@
    "name": "Faction War (Red Zone)",
    "requirements": {
     "anti_zone": {
+     "optional": true,
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.8,
@@ -44983,6 +44989,7 @@
      "weight": 7
     },
     "execute": {
+     "optional": true,
      "scales": false,
      "soft_cap": 2.5,
      "target": 0.8,
@@ -45096,6 +45103,7 @@
      "weight": 1
     },
     "anti_zone": {
+     "optional": true,
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.9,
@@ -45156,6 +45164,7 @@
      "weight": 5
     },
     "execute": {
+     "optional": true,
      "scales": false,
      "soft_cap": 3.4,
      "target": 1.7,
@@ -45299,6 +45308,7 @@
      "weight": 1
     },
     "anti_zone": {
+     "optional": true,
      "scales": false,
      "soft_cap": 2.3,
      "target": 1.8,
@@ -45359,6 +45369,7 @@
      "weight": 7
     },
     "execute": {
+     "optional": true,
      "scales": false,
      "soft_cap": 1.7,
      "target": 0.8,

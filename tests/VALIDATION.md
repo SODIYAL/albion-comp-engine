@@ -360,3 +360,64 @@ which is exactly why it disagreed with the builds index and exposed this).
 This unblocks Step 1 (the unit re-fit) on data completeness: the person-unit
 measurement now has 14 sources and ~1086 curated pieces behind it instead of 3
 sources and 629.
+
+## Optional capabilities + the peel ruling (2026-08-28)
+
+**THREE OWNER RULINGS, verbatim:** *"the anti zone is only on one weapon, the
+crystal healing staff and it's brought [by] some zvz groups but usually when
+party is like 30+ people. so it's fine to keep those targets just maybe make
+some optional."* / *"as for execute keep that too but optional."* / *"peel is
+about how you are fighting."*
+
+**Verified before implementing.** `anti_zone` is supplied by exactly ONE item in
+the whole catalogue -- Exalted Staff, `2H_HOLYSTAFF_CRYSTAL`, the crystal holy
+staff, citing HOLY_DISPEL. `execute` is supplied by five single-target melee
+weapons (Bloodletter, Prowling Staff, Kingmaker, Infernal Scythe, Broadsword).
+The owner's description matched the data exactly.
+
+**SHIPPED: `optional: true` on a template requirement row** (both ports, all six
+templates that carry either row). Bringing the capability earns its coverage
+exactly as before; not bringing it is not a hole.
+
+This is a **DENOMINATOR-ONLY rule, and provably so**: every fitness term for a
+capability at zero supply is already zero -- coverage is `min(1, 0/target)^gamma`,
+`_headroom_bonus` returns 0 unless `have > target`, `_overstack` needs
+`have > soft_cap`. An optional capability can therefore only leave
+`max_fitness()`, never `fitness()`. The one term that IS charged at zero supply
+is `_floor_penalty`, so optional + hard floor is contradictory by construction;
+both ports raise on that combination rather than score inconsistently (neither
+capability has a floor in any template -- floors exist only on heal_sustain and
+tankiness). `max_fitness(party, combos, gears)` gained the party-aware form;
+called with no party it returns the every-capability supremum, so legacy callers
+are bit-identical. The dashboard passes the same loadout and gear the numerator
+uses, and the radar drops an absent optional capability from its axis instead of
+drawing it as a gap.
+
+**Consequence: no score, ranking, pick value, or forge decision moves.** Full
+battery green with ZERO re-pins (57/57 golden, 38/38 forge, 60/60 parity + embed,
+builds/provenance/interactions/roles/validation-modes/patch/cohort/lint/codec/
+display-math, tier2 78% weapon_only PASS). Parity gained a `max_fitness_party`
+case covering the new path in both ports. Displayed fitness moves +0.2 to +3.3
+points across the ten measured comps; the roads comps move most because roads
+carried `execute` at weight 4, the heaviest row nobody fields.
+
+**A FINDING OF MINE WAS WRONG AND IS CORRECTED HERE.** I reported that the corpus
+showed peel to be content-shaped -- "the two roads comps field 5x what everyone
+else does." That was a ratio misread as a measurement. Per person, peel is
+**flat at 3.4-5.1 across every style, content and size**; the two roads comps sit
+at 4.07 and 4.36, mid-pack. What actually differs is the TARGET: roads asks 0.37
+peel per person where blackzone_roam asks 2.01, a 5.4x spread. The templates
+disagree about peel far more than real comps do -- same shape in silence
+(0.13-1.01 per person) and zone_control (0.19-0.45). Corrected in
+`docs/superpowers/findings/2026-08-28-fielded-supply-per-person.md`.
+
+**Standing hazard this exposes, for the re-fit:** every supply/target RATIO
+carries two meanings -- "comps bring a lot" or "this template asks little" --
+and only raw per-person supply separates them. The re-fit must be done on raw
+per-person numbers, never on ratios.
+
+The peel ruling itself stands on game knowledge, not the corpus: the data shows
+no content effect and no style effect, so there is no fitted number to hang a
+per-style peel modifier on yet. Recorded as an owner ruling to convert into
+per-style target modifiers during the re-fit; NO number invented in the interim
+(the "never invent a number to fill a hole" rule).
