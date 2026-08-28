@@ -456,8 +456,24 @@ def v4(args):
         # `style:`, quoted from the comp's source — e.g. Timothy's blap is
         # "(brawl comp)"). Default balanced. Scoring a deliberate melee ball
         # under balanced misreads its missing ranged core as a deficiency.
+        # 2026-08-28: a record may be EXCLUDED outright (PvE content, the
+        # bomb-squad archetype, or a party its own author says is not built
+        # properly) — an excluded record is still evidence for other work,
+        # it just never teaches the model what a comp should look like.
+        if comp.get("fit_exclude"):
+            print(f"  skip {comp.get('id','?')}: fit_exclude — "
+                  f"{(comp['fit_exclude'].get('reason') or '').strip()[:80]}")
+            continue
         style = comp.get("style", "balanced")
         for party in comp.get("parties", []):
+            # per-party style/exclusion (this file's parties are not one comp
+            # shape); the record-level value is the fallback
+            if party.get("fit_exclude"):
+                print(f"  skip {comp.get('id','?')}:{party.get('name','?')}: "
+                      "fit_exclude — "
+                      f"{(party['fit_exclude'].get('reason') or '').strip()[:70]}")
+                continue
+            style = party.get("style") or comp.get("style", "balanced")
             all_slots = party.get("slots", [])
             # the builds_index join indexes the FULL slot list (battlemounts
             # included) — keep the original enumeration alongside the filter

@@ -21,6 +21,7 @@ observed: null
 patch: null   # the source does not state the game patch
 snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
 content: zvz_7man   # the source states only its coarse activity tag (zvz) and no
+style: clap_kite                # owner 2026-08-28: "is also clap+kite"
                     # content in the title; the owner reads it as roads OR
                     # castle_outpost (undecided 2026-08-21) - kept UNMAPPED until
                     # ruled, so the V4 gate skips it. When mapped, its labeled

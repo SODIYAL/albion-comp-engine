@@ -24,6 +24,19 @@ observed: null
 patch: null   # the source does not state the game patch
 snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
 content: bomb_squad_10   # an invisible Wailing-Bow one-shot bomb squad; no content stated; UNMAPPED
+# NO style: this is an ARCHETYPE, not a playstyle (comp_identity already
+# models bomb_squad separately). Owner 2026-08-28: "its a bomb squad which
+# is a bit different than regular party, their objective is to do as much
+# damage without much survivability (assassin jackets ability increases
+# damage even though its leather)". Its targets are deliberately atypical,
+# so folding it into clap would drag clap's durability numbers down.
+archetype: bomb_squad
+fit_exclude:
+  reason: >
+    Bomb-squad archetype, not a standard comp — max damage, minimal
+    survivability. Owner ruling 2026-08-28. Excluded from style/target
+    fitting; still valid evidence for bomb-squad work.
+  as_of: 2026-08-28
 party_size:
   min: 8
   max: 10

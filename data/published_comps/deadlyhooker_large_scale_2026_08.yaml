@@ -33,6 +33,12 @@ approval:
   as_of: '2026-08-12'
 parties:
 - name: party_1
+  # Owner 2026-08-28: "party 1 is the most relevant and its a clap kite with
+  # leaning clap". PER-PARTY style (this file's three parties are not one
+  # comp shape) — the reader falls back to the record-level `style:` when a
+  # party carries none.
+  style: clap_kite
+  style_lean: clap
   slots:
   - raw: HoJ/Golem
     weapons:
@@ -250,6 +256,14 @@ parties:
       boots: Stalker
       cape: Smuggler
 - name: party_2
+  # Owner 2026-08-28: "party 2 and 3 are kind of not built properly and would
+  # probably give wrong data for a comp i think". Kept as a record (it is
+  # what the caller actually fielded) but barred from fitting targets.
+  fit_exclude:
+    reason: >
+      Not built properly per the owner (2026-08-28); fitting targets against
+      it would teach the model a comp its own author does not stand behind.
+    as_of: 2026-08-28
   slots:
   - raw: Great Arcane
     weapons:
@@ -469,6 +483,12 @@ parties:
       boots: Feyscale
       cape: Undead
 - name: party_3
+  # Owner 2026-08-28: same ruling as party_2 — "not built properly and would
+  # probably give wrong data".
+  fit_exclude:
+    reason: >
+      Not built properly per the owner (2026-08-28); excluded from fitting.
+    as_of: 2026-08-28
   slots:
   - raw: Great Hammer
     weapons:

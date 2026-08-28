@@ -24,6 +24,14 @@ observed: null
 patch: null   # the source does not state the game patch
 snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
 content: openworld_tracking_5   # title '4-5 Man Tracking' - open-world hunting; no engine template for it; UNMAPPED
+# NO style: PvE content. Owner 2026-08-28: "this is a PVE comp to do
+# tracking content" — it answers a different question than any PvP
+# template, so it must never inform PvP targets.
+fit_exclude:
+  reason: >
+    PvE tracking comp, not PvP. Owner ruling 2026-08-28. Excluded from
+    style/target fitting.
+  as_of: 2026-08-28
 party_size:
   min: 5
   max: 5

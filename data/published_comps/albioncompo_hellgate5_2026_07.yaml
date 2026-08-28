@@ -20,6 +20,7 @@ observed: null
 patch: null   # the source does not state the game patch
 snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
 content: hellgate_5v5   # SOURCE-STATED via the site's activity tag 'hg5'; the
+style: clap                     # owner 2026-08-28: "hellgates 5v5 comp ... is clap"
                         # engine has no hellgate template yet (HANDOFF lists
                         # Hellgate 5v5 as planned), so V4 skips it until one exists.
 party_size:

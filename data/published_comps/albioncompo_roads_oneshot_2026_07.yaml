@@ -20,6 +20,7 @@ observed: null
 patch: null   # the source does not state the game patch
 snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
 content: roads   # source-stated: the author's own title says 'Roads' (the site's
+style: clap_kite                # owner 2026-08-28: "is clap+kite"
                  # coarse activity tag says zvz); owner concurred 2026-08-21.
                  # Maps to the roads template; the comp has NO role labels, so the
                  # V4 ROLE gate is unaffected - only weapon-level slots are added.

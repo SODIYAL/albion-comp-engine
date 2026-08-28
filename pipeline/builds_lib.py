@@ -331,10 +331,32 @@ def validate_comp_doc(doc, weapon_lines, templates=None):
         problems.append(f"{ident}: party_size must be {{min, max}}")
     # style is optional (identity Phase C: styles key stored builds to the
     # caller's declared intent) but when stated it must be a real style
+    # 2026-08-28: `clap_kite` was missing — the list predates it (the owner
+    # identified the fifth playstyle 2026-08-23) and nothing caught the gap
+    # until real comps were labelled with it. Kept as a literal tuple rather
+    # than read from styles.yaml so this validator stays independent of the
+    # dataset build, but it must track styles.yaml: five playstyles plus
+    # `balanced`, which declares no intent.
     style = doc.get("style")
     if style and style not in ("balanced", "brawl", "clap", "kite",
-                               "brawl_clap"):
+                               "brawl_clap", "clap_kite"):
         problems.append(f"{ident}: unknown style {style!r}")
+    # per-party style/exclusion (owner rulings 2026-08-28): one record's
+    # parties are not always one comp shape, and a party its own author says
+    # is not built properly must never teach the model what a comp looks like
+    for _p in (doc.get("parties") or []):
+        _ps = _p.get("style")
+        if _ps and _ps not in ("balanced", "brawl", "clap", "kite",
+                               "brawl_clap", "clap_kite"):
+            problems.append(f"{ident}:{_p.get('name','?')}: "
+                            f"unknown style {_ps!r}")
+        for _scope, _fx in ((f"{ident}", doc.get("fit_exclude")),
+                            (f"{ident}:{_p.get('name','?')}",
+                             _p.get("fit_exclude"))):
+            if _fx and not (_fx.get("reason") or "").strip():
+                problems.append(f"{_scope}: fit_exclude needs a reason "
+                                "(an exclusion without a stated why is "
+                                "indistinguishable from lost data)")
     if src.get("kind") in ONE_V_ONE_KINDS and ps and \
             ps.get("max", 0) > ONE_V_ONE_MAX_SIZE:
         problems.append(

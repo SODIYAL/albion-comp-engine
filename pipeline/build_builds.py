@@ -172,6 +172,14 @@ def variant_of(rec):
         "patch": rec.get("patch"),
         "party_size": rec.get("party_size"),
         "style": rec.get("style"),
+        # Owner style rulings 2026-08-28. `archetype` is NOT a style (the
+        # bomb squad is its own shape); `fit_exclude` marks a record — or a
+        # single party of one — that must never teach the model what a comp
+        # should look like (PvE content, an archetype, or a party its own
+        # author says is not built properly). Both travel with the evidence
+        # so every consumer sees the ruling rather than re-deriving it.
+        "archetype": rec.get("archetype"),
+        "fit_exclude": rec.get("fit_exclude"),
         "approval": (rec.get("approval") or {}).get("status"),
         "approval_basis": (rec.get("approval") or {}).get("basis"),
         "confidence": rec.get("confidence"),

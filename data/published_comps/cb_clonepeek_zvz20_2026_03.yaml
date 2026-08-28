@@ -24,6 +24,7 @@ observed: null
 patch: null   # the source does not state the game patch
 snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
 content: zvz_20man   # the author's description says only 'zvz' - kept UNMAPPED until the owner rules
+style: brawl_clap               # owner 2026-08-28: "is brawl clap"
 party_size:
   min: 20
   max: 20

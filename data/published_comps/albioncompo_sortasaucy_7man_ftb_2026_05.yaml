@@ -21,6 +21,9 @@ observed: null
 patch: null   # the source does not state the game patch
 snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
 content: zvz_7man   # the source states only its coarse activity tag (zvz); the
+style: clap                     # owner 2026-08-28: "more clap than clapkite
+                                #   but does have some kite elements" — labelled
+                                #   clap; the kite lean is recorded, not fitted
                     # title 'FTB' names no known content - kept UNMAPPED until the
                     # owner rules, so the V4 gate skips it. Its tank/healer labels
                     # join the role gate when mapped.
