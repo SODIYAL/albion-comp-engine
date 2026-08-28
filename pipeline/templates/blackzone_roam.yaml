@@ -92,6 +92,25 @@ requirements:
   buff_allies:    {target: 2.5,  weight: 4,  soft_cap: 5.0,  scales: false}
   cleanse:        {target: 0.8,  weight: 4,  soft_cap: 4.6,  scales: false}  # (comp-fit 2026-08-21)
   silence:        {target: 7.1,  weight: 4,  soft_cap: 10.2,  scales: false}  # (comp-fit 2026-08-21)
+  # ---------------------------------------------------------------------
+  # PROMOTED 2026-08-27 (owner: "first let's add those missing items").
+  # These six were curated on every weapon sheet and carried by the fight
+  # chain, but NO template scored them — a weapon's AoE root earned zero.
+  # Fitted from the four real blackzone comps by the standing 2026-08-21
+  # convention (target = 0.9x the least any good comp fields, soft = 1.15x
+  # the most), measured in the same weapon+spell-pick unit as every row
+  # above. WEIGHT 1 is the documented low-and-flat start for a newly
+  # promoted capability (design doc; anti_zone/damage_debuff precedent) —
+  # an unvalidated number must never dominate a recommendation. Raising
+  # them is an owner ruling once the effect on real picks is seen.
+  # slow/root/knockback scale with fight size (mechanics.yaml
+  # geometric_caps); the dedicated-slot tools do not.
+  slow:               {target: 8.1, weight: 1, soft_cap: 23.5, scales: true}
+  root:               {target: 5.5, weight: 1, soft_cap: 20.6, scales: true}
+  knockback_displace: {target: 4.2, weight: 1, soft_cap: 11.2, scales: true}
+  anti_dive:          {target: 1.2, weight: 1, soft_cap: 9.2,  scales: false}
+  interrupt:          {target: 0.9, weight: 1, soft_cap: 2.3,  scales: false}
+  max_health_cut:     {target: 0.9, weight: 1, soft_cap: 3.4,  scales: false}
   # capabilities must never dominate a recommendation on unvalidated numbers.
   # REWEIGHT 2026-08-18: still PROVISIONAL and deliberately "low and flat so
   # an unvalidated number can never dominate a recommendation" — but concave

@@ -44158,6 +44158,12 @@
    },
    "name": "Blackzone Roam",
    "requirements": {
+    "anti_dive": {
+     "scales": false,
+     "soft_cap": 9.2,
+     "target": 1.2,
+     "weight": 1
+    },
     "anti_zone": {
      "scales": false,
      "soft_cap": 1.7,
@@ -44242,6 +44248,24 @@
      "target": 7.5,
      "weight": 10
     },
+    "interrupt": {
+     "scales": false,
+     "soft_cap": 2.3,
+     "target": 0.9,
+     "weight": 1
+    },
+    "knockback_displace": {
+     "scales": true,
+     "soft_cap": 11.2,
+     "target": 4.2,
+     "weight": 1
+    },
+    "max_health_cut": {
+     "scales": false,
+     "soft_cap": 3.4,
+     "target": 0.9,
+     "weight": 1
+    },
     "mobility": {
      "scales": true,
      "soft_cap": 30.7,
@@ -44272,11 +44296,23 @@
      "target": 5.0,
      "weight": 5
     },
+    "root": {
+     "scales": true,
+     "soft_cap": 20.6,
+     "target": 5.5,
+     "weight": 1
+    },
     "silence": {
      "scales": false,
      "soft_cap": 10.2,
      "target": 7.1,
      "weight": 4
+    },
+    "slow": {
+     "scales": true,
+     "soft_cap": 23.5,
+     "target": 8.1,
+     "weight": 1
     },
     "stun": {
      "scales": true,
@@ -44490,6 +44526,12 @@
    },
    "name": "Castle Outpost",
    "requirements": {
+    "anti_dive": {
+     "scales": false,
+     "soft_cap": 4.6,
+     "target": 1.8,
+     "weight": 1
+    },
     "anti_zone": {
      "scales": false,
      "soft_cap": 1.7,
@@ -44550,6 +44592,18 @@
      "target": 2.6,
      "weight": 10
     },
+    "interrupt": {
+     "scales": false,
+     "soft_cap": 1.1,
+     "target": 0.9,
+     "weight": 1
+    },
+    "knockback_displace": {
+     "scales": true,
+     "soft_cap": 6.9,
+     "target": 1.8,
+     "weight": 1
+    },
     "mobility": {
      "scales": true,
      "soft_cap": 5.2,
@@ -44574,11 +44628,23 @@
      "target": 1.7,
      "weight": 5
     },
+    "root": {
+     "scales": true,
+     "soft_cap": 9.2,
+     "target": 0.9,
+     "weight": 1
+    },
     "silence": {
      "scales": false,
      "soft_cap": 2.6,
      "target": 0.9,
      "weight": 4
+    },
+    "slow": {
+     "scales": true,
+     "soft_cap": 8.0,
+     "target": 2.7,
+     "weight": 1
     },
     "stun": {
      "scales": true,
@@ -44793,6 +44859,12 @@
    "max_size": 7,
    "name": "Roads of Avalon",
    "requirements": {
+    "anti_dive": {
+     "scales": false,
+     "soft_cap": 13.1,
+     "target": 3.6,
+     "weight": 1
+    },
     "anti_zone": {
      "scales": false,
      "soft_cap": 1.7,
@@ -44877,6 +44949,24 @@
      "target": 2.6,
      "weight": 10
     },
+    "interrupt": {
+     "scales": false,
+     "soft_cap": 2.3,
+     "target": 0.9,
+     "weight": 1
+    },
+    "knockback_displace": {
+     "scales": true,
+     "soft_cap": 6.9,
+     "target": 1.8,
+     "weight": 1
+    },
+    "max_health_cut": {
+     "scales": false,
+     "soft_cap": 2.3,
+     "target": 0.9,
+     "weight": 1
+    },
     "mobility": {
      "scales": true,
      "soft_cap": 6.9,
@@ -44901,6 +44991,12 @@
      "target": 1.3,
      "weight": 4
     },
+    "root": {
+     "scales": true,
+     "soft_cap": 23.8,
+     "target": 6.3,
+     "weight": 1
+    },
     "self_sustain": {
      "scales": true,
      "soft_cap": 4.3,
@@ -44912,6 +45008,12 @@
      "soft_cap": 2.6,
      "target": 0.9,
      "weight": 5
+    },
+    "slow": {
+     "scales": true,
+     "soft_cap": 10.7,
+     "target": 3.6,
+     "weight": 1
     },
     "stun": {
      "scales": true,
@@ -44960,6 +45062,12 @@
    },
    "name": "Territory Defense",
    "requirements": {
+    "anti_dive": {
+     "scales": false,
+     "soft_cap": 10.3,
+     "target": 2.8,
+     "weight": 1
+    },
     "anti_zone": {
      "scales": false,
      "soft_cap": 2.3,
@@ -45044,6 +45152,24 @@
      "target": 6.7,
      "weight": 10
     },
+    "interrupt": {
+     "scales": false,
+     "soft_cap": 2.3,
+     "target": 0.9,
+     "weight": 1
+    },
+    "knockback_displace": {
+     "scales": true,
+     "soft_cap": 17.1,
+     "target": 2.8,
+     "weight": 1
+    },
+    "max_health_cut": {
+     "scales": false,
+     "soft_cap": 1.1,
+     "target": 0.9,
+     "weight": 1
+    },
     "mobility": {
      "scales": true,
      "soft_cap": 18.4,
@@ -45074,11 +45200,23 @@
      "target": 5.0,
      "weight": 5
     },
+    "root": {
+     "scales": true,
+     "soft_cap": 17.1,
+     "target": 4.7,
+     "weight": 1
+    },
     "silence": {
      "scales": false,
      "soft_cap": 5.8,
      "target": 1.7,
      "weight": 4
+    },
+    "slow": {
+     "scales": true,
+     "soft_cap": 28.1,
+     "target": 9.1,
+     "weight": 1
     },
     "stun": {
      "scales": true,

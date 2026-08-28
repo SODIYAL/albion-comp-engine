@@ -102,6 +102,19 @@ requirements:
   # these provisional niche weights dominated tail recommendations.
   anti_zone:      {target: 0.9, weight: 1,  soft_cap: 1.7, scales: false}
   damage_debuff:  {target: 0.9, weight: 1,  soft_cap: 1.7, scales: false}
+  # PROMOTED 2026-08-27 — see blackzone_roam.yaml for the full rationale.
+  # WEAKEST evidence of the four fitted contents: roads has ONE comp in the
+  # corpus, so the target is 0.9x that single observation and the soft cap
+  # cannot be observed at all — it uses the median soft/target spread the
+  # multi-comp contents show for the same capability (~2.6-3.8x), because
+  # a 1.15x band around a single point would flag overstack almost
+  # immediately. Re-fit when a second roads comp lands.
+  slow:               {target: 3.6, weight: 1, soft_cap: 10.7, scales: true}
+  root:               {target: 6.3, weight: 1, soft_cap: 23.8, scales: true}
+  knockback_displace: {target: 1.8, weight: 1, soft_cap: 6.9,  scales: true}
+  anti_dive:          {target: 3.6, weight: 1, soft_cap: 13.1, scales: false}
+  interrupt:          {target: 0.9, weight: 1, soft_cap: 2.3,  scales: false}
+  max_health_cut:     {target: 0.9, weight: 1, soft_cap: 2.3,  scales: false}
 
 # Floors are absolute units and arm BY SIZE — this is what makes a 3-man
 # without a healer "fine, just know the gap" while a 6–7-man without one is

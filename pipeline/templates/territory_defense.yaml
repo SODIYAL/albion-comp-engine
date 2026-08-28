@@ -82,6 +82,15 @@ requirements:
   # parties is territory/castle evidence. Still flat, still PROVISIONAL.
   anti_zone:      {target: 1.8,  weight: 2,  soft_cap: 2.3,  scales: false}  # (comp-fit 2026-08-21)
   damage_debuff:  {target: 0.8,  weight: 1,  soft_cap: 1.7,  scales: false}
+  # PROMOTED 2026-08-27 — see blackzone_roam.yaml for the full rationale.
+  # Fitted from the four real territory parties (Deadlyhooker P1-P3 + the
+  # 20v20), same 0.9x/1.15x convention, weight 1 low-and-flat start.
+  slow:               {target: 9.1, weight: 1, soft_cap: 28.1, scales: true}
+  root:               {target: 4.7, weight: 1, soft_cap: 17.1, scales: true}
+  knockback_displace: {target: 2.8, weight: 1, soft_cap: 17.1, scales: true}
+  anti_dive:          {target: 2.8, weight: 1, soft_cap: 10.3, scales: false}
+  interrupt:          {target: 0.9, weight: 1, soft_cap: 2.3,  scales: false}
+  max_health_cut:     {target: 0.9, weight: 1, soft_cap: 1.1,  scales: false}
 
 # Absolute-unit floors, same rationale + PROVISIONAL penalty_mult as
 # blackzone_roam (see that file / castle_outpost.yaml for the history).
