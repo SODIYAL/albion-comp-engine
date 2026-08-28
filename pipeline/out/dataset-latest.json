@@ -630,7 +630,7 @@
   },
   "ARMOR_CLOTH_HELL": {
    "capabilities": {
-    "anti_dive": 2,
+    "knockback_displace": 2,
     "peel": 3
    },
    "curated_as_of": "2026-08-27",
@@ -662,7 +662,7 @@
     }
    },
    "evidence": {
-    "anti_dive": [
+    "knockback_displace": [
      "FEAR_AURA"
     ],
     "peel": [
@@ -683,7 +683,7 @@
     "slots": [
      [
       {
-       "anti_dive": 2,
+       "knockback_displace": 2,
        "peel": 3
       }
      ]
@@ -2215,7 +2215,7 @@
   },
   "ARMOR_PLATE_HELL": {
    "capabilities": {
-    "tankiness": 3
+    "buff_allies": 3
    },
    "curated_as_of": "2026-08-20",
    "display_name": "Demon Armor",
@@ -2246,7 +2246,7 @@
     }
    },
    "evidence": {
-    "tankiness": [
+    "buff_allies": [
      "REFLECTAREA"
     ]
    },
@@ -2264,7 +2264,7 @@
     "slots": [
      [
       {
-       "tankiness": 3
+       "buff_allies": 3
       }
      ]
     ]
@@ -5324,11 +5324,6 @@
   },
   "HEAD_PLATE_SET2": {
    "cap_delivery": {
-    "buff_allies": {
-     "max_targets": 10,
-     "radius": 5.0,
-     "spell": "DISRUPTIONIMMUNITY"
-    },
     "peel": {
      "max_targets": 10,
      "radius": 5.0,
@@ -5336,7 +5331,6 @@
     }
    },
    "capabilities": {
-    "buff_allies": 2,
     "peel": 3
    },
    "curated_as_of": "2026-08-20",
@@ -5368,9 +5362,6 @@
     }
    },
    "evidence": {
-    "buff_allies": [
-     "DISRUPTIONIMMUNITY"
-    ],
     "peel": [
      "DISRUPTIONIMMUNITY"
     ]
@@ -5389,7 +5380,6 @@
     "slots": [
      [
       {
-       "buff_allies": 2,
        "peel": 3
       }
      ]
@@ -6253,8 +6243,7 @@
   },
   "SHOES_CLOTH_HELL": {
    "capabilities": {
-    "disengage": 2,
-    "mobility": 2
+    "disengage": 2
    },
    "curated_as_of": "2026-08-27",
    "display_name": "Fiend Sandals",
@@ -6287,9 +6276,6 @@
    "evidence": {
     "disengage": [
      "SWAP"
-    ],
-    "mobility": [
-     "SWAP"
     ]
    },
    "gear_class": "cloth",
@@ -6306,8 +6292,7 @@
     "slots": [
      [
       {
-       "disengage": 2,
-       "mobility": 2
+       "disengage": 2
       }
      ]
     ]
@@ -6999,8 +6984,8 @@
   },
   "SHOES_LEATHER_HELL": {
    "capabilities": {
-    "engage": 3,
-    "mobility": 2
+    "catch": 2,
+    "engage": 3
    },
    "curated_as_of": "2026-08-27",
    "display_name": "Hellion Shoes",
@@ -7031,10 +7016,10 @@
     }
    },
    "evidence": {
-    "engage": [
+    "catch": [
      "DEATHMARK"
     ],
-    "mobility": [
+    "engage": [
      "DEATHMARK"
     ]
    },
@@ -7052,8 +7037,8 @@
     "slots": [
      [
       {
-       "engage": 3,
-       "mobility": 2
+       "catch": 2,
+       "engage": 3
       }
      ]
     ]
@@ -7488,8 +7473,7 @@
   },
   "SHOES_LEATHER_UNDEAD": {
    "capabilities": {
-    "disengage": 2,
-    "mobility": 2
+    "disengage": 2
    },
    "curated_as_of": "2026-08-27",
    "display_name": "Specter Shoes",
@@ -7522,9 +7506,6 @@
    "evidence": {
     "disengage": [
      "INVISIBLE_WALK"
-    ],
-    "mobility": [
-     "INVISIBLE_WALK"
     ]
    },
    "gear_class": "leather",
@@ -7541,8 +7522,7 @@
     "slots": [
      [
       {
-       "disengage": 2,
-       "mobility": 2
+       "disengage": 2
       }
      ]
     ]

@@ -37,7 +37,9 @@
   curated_as_of: 2026-08-20
   capabilities:
     - {cap: peel,          score: 3, evidence: DISRUPTIONIMMUNITY}  # 10 allies immune to forced movement 6s
-    - {cap: buff_allies,   score: 2, evidence: DISRUPTIONIMMUNITY}
+    # dropped buff_allies 2 (2026-08-27): the effect map deliberately routes
+    # an ally IMMUNITY to peel and not to buff_allies ("protection AGAINST
+    # the effect"), and peel above already carries it.
 
 - gear: HEAD_PLATE_SET3              # Guardian Helmet
   slot: head
@@ -86,7 +88,11 @@
   slot: armor
   curated_as_of: 2026-08-20
   capabilities:
-    - {cap: tankiness,     score: 3, evidence: REFLECTAREA}      # mobile reflect aura, uninterruptible
+    # was tankiness 3 — BACKWARDS, and the weapon-only catalogue hid it: the
+    # aura grants magicresistance+/physicalarmor+ to ALLIES and applies
+    # magicresistance-/physicalarmor- to the WEARER. Demon Armor buys the
+    # group's durability with its own. Re-cited to what it actually does.
+    - {cap: buff_allies,   score: 3, evidence: REFLECTAREA}      # group resistances aura (wearer pays with their own)
 
 - gear: ARMOR_PLATE_SET3             # Guardian Armor
   slot: armor

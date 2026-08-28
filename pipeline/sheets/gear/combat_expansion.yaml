@@ -138,7 +138,10 @@
   curated_as_of: 2026-08-27
   capabilities:
     - {cap: peel,          score: 3, evidence: FEAR_AURA}        # aura: enemies flee 2s
-    - {cap: anti_dive,     score: 2, evidence: FEAR_AURA}
+    # was anti_dive 2 — the gear-indexed catalogue (2026-08-27) shows the
+    # aura's only enemy effect is forced_movement, which grounds
+    # displacement, not dive punishment. Re-cited, same score.
+    - {cap: knockback_displace, score: 2, evidence: FEAR_AURA}   # fear physically moves them off
 
 - gear: ARMOR_CLOTH_KEEPER           # Druid Robe
   slot: armor
@@ -255,7 +258,9 @@
   curated_as_of: 2026-08-27
   capabilities:
     - {cap: disengage,     score: 2, evidence: SWAP}             # swap positions with target + brief immunity
-    - {cap: mobility,      score: 2, evidence: SWAP}
+    # dropped mobility 2 (2026-08-27): the swap's only effect is
+    # invincibility — one repositioning trick is not group mobility, and
+    # the structured data never supported the claim.
 
 - gear: SHOES_CLOTH_KEEPER           # Druid Sandals — Frost Walk
   slot: shoes
@@ -312,7 +317,9 @@
   curated_as_of: 2026-08-27
   capabilities:
     - {cap: engage,        score: 3, evidence: DEATHMARK}        # invisible channel + dash to the marked target
-    - {cap: mobility,      score: 2, evidence: DEATHMARK}
+    # was mobility 2 — not supported; the mark's enemy effects include
+    # remove:movementbuff, so the dash-to-mark is a CATCH tool. Re-cited.
+    - {cap: catch,         score: 2, evidence: DEATHMARK}        # strips the target's speed buffs on arrival
 
 - gear: SHOES_LEATHER_SET2           # Hunter Shoes — Rush
   slot: shoes
@@ -333,7 +340,8 @@
   curated_as_of: 2026-08-27
   capabilities:
     - {cap: disengage,     score: 2, evidence: INVISIBLE_WALK}   # invisible repositioning channel
-    - {cap: mobility,      score: 2, evidence: INVISIBLE_WALK}
+    # dropped mobility 2 (2026-08-27): its effects are invisibility plus
+    # self-damage/energy penalties — no speed component at all.
 
 - gear: SHOES_PLATE_AVALON           # Boots of Valor — Premonition
   slot: shoes

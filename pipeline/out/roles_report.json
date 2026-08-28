@@ -1,5 +1,5 @@
 {
- "effect_candidates": ["ARMOR_CLOTH_ROYAL", "ARMOR_PLATE_ROYAL", "HEAD_CLOTH_KEEPER", "HEAD_PLATE_SET2", "HEAD_PLATE_SET3"],
+ "effect_candidates": ["ARMOR_CLOTH_ROYAL", "ARMOR_PLATE_ROYAL", "HEAD_CLOTH_KEEPER", "HEAD_PLATE_SET3"],
  "effect_quotas": {
   "comps": [
    {
@@ -236,7 +236,7 @@
   },
   {
    "active_caps": {
-    "anti_dive": 2,
+    "knockback_displace": 2,
     "peel": 3
    },
    "class": "cloth",
@@ -479,7 +479,7 @@
   },
   {
    "active_caps": {
-    "tankiness": 3
+    "buff_allies": 3
    },
    "class": "plate",
    "class_basis": "stats",
@@ -901,7 +901,6 @@
   },
   {
    "active_caps": {
-    "buff_allies": 2,
     "peel": 3
    },
    "class": "plate",
@@ -1180,8 +1179,7 @@
   },
   {
    "active_caps": {
-    "disengage": 2,
-    "mobility": 2
+    "disengage": 2
    },
    "class": "cloth",
    "class_basis": "tree id (stats missing)",
@@ -1307,8 +1305,8 @@
   },
   {
    "active_caps": {
-    "engage": 3,
-    "mobility": 2
+    "catch": 2,
+    "engage": 3
    },
    "class": "leather",
    "class_basis": "tree id (stats missing)",
@@ -1392,8 +1390,7 @@
   },
   {
    "active_caps": {
-    "disengage": 2,
-    "mobility": 2
+    "disengage": 2
    },
    "class": "leather",
    "class_basis": "tree id (stats missing)",

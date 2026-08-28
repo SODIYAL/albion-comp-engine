@@ -321,13 +321,24 @@ def main():
                       if k.startswith('SHAPESHIFT_'))
     weapon_lines = json.load(open(os.path.join(OUT, "weapon_lines.json"), encoding="utf-8"))
     spell_index = json.load(open(os.path.join(OUT, "spell_index.json"), encoding="utf-8"))
+    gear_lines = json.load(open(os.path.join(OUT, "gear_spells.json"), encoding="utf-8"))
 
     weapon_spells = {s for L in weapon_lines.values()
                      for slot in L["spells"].values() for s in slot}
+    # GEAR (2026-08-27, owner: "ok do extend the catalogue to gear"): armor,
+    # helmets, boots and capes carry abilities exactly like weapons, but only
+    # weapon spells were ever indexed — so every gear-sheet claim rested on
+    # prose + overrides and the lint could not check a single one (the reveal
+    # investigation hit this wall). Gear actives AND passives are indexed the
+    # same way; the effect walk itself is source-agnostic.
+    gear_spells = {s for L in gear_lines.values()
+                   for kind in ("actives", "passives") for s in (L.get(kind) or [])}
+    indexed_spells = weapon_spells | gear_spells
 
     effects = defaultdict(lambda: {"occurrences": 0, "targets": defaultdict(int),
                                    "example_spells": [], "direct_spells": [],
-                                   "via_spells": [], "weapon_lines": set()})
+                                   "via_spells": [], "weapon_lines": set(),
+                                   "gear_lines": set()})
     spell_effects, spell_direct = {}, {}
 
     for sid in reg:
@@ -338,7 +349,7 @@ def main():
             e["targets"][tgt] += 1
             if len(e["example_spells"]) < 6:
                 e["example_spells"].append(sid)
-        if sid in weapon_spells:
+        if sid in indexed_spells:
             direct_keys = {f"{n}{sg}" for n, sg, _ in direct_effects(reg[sid], forms)}
             rows = {}
             for n, sg, tgt in resolve_effects(sid, reg, forms=forms):
@@ -367,6 +378,11 @@ def main():
             for sid in slot_ids:
                 for entry in spell_effects.get(sid, []):
                     effects[entry["effect"]]["weapon_lines"].add(wkey)
+    for gkey, line in gear_lines.items():
+        for kind in ("actives", "passives"):
+            for sid in (line.get(kind) or []):
+                for entry in spell_effects.get(sid, []):
+                    effects[entry["effect"]]["gear_lines"].add(gkey)
 
     # which prose flag (if any) currently detects this effect
     prose_for = {}
@@ -392,21 +408,28 @@ def main():
             "via_spells": e["via_spells"],
             "weapon_lines": sorted(e["weapon_lines"]),
             "weapon_line_count": len(e["weapon_lines"]),
+            "gear_lines": sorted(e["gear_lines"]),
+            "gear_line_count": len(e["gear_lines"]),
             "prose_flag": prose_for[key],
             "capability": EFFECT_TO_CAPABILITY.get(key),
         }
 
+    # gap reporting spans BOTH sources now: an effect that only ever appears
+    # on armor was invisible to every report while the index was weapon-only
+    equipped = lambda v: v["weapon_line_count"] + v["gear_line_count"]
     combat_on_weapons = {k: v for k, v in out.items()
-                         if v["weapon_line_count"] > 0 and v["class"] in ("combat", "removal")}
+                         if equipped(v) > 0 and v["class"] in ("combat", "removal")}
     gaps = {k: v for k, v in combat_on_weapons.items() if not v["capability"]}
     no_prose = {k: v for k, v in combat_on_weapons.items() if not v["prose_flag"]}
     unclear = {k: v for k, v in out.items()
-               if v["class"] == "unclear" and v["weapon_line_count"] > 0}
+               if v["class"] == "unclear" and equipped(v) > 0}
 
     catalogue = {
         "_meta": {
             "spells_scanned": len(reg),
             "weapon_equippable_spells": len(weapon_spells),
+            "gear_equippable_spells": len(gear_spells),
+            "indexed_spells": len(spell_effects),
             "distinct_effects": len(out),
             "combat_effects_on_weapons": len(combat_on_weapons),
             "unmapped_to_capability": len(gaps),
@@ -415,7 +438,9 @@ def main():
             "note": ("EFFECT_TO_CAPABILITY is a PROPOSAL, not authoritative. "
                      "Every mapping needs domain sign-off before it drives scoring."),
         },
-        "effects": dict(sorted(out.items(), key=lambda kv: -kv[1]["weapon_line_count"])),
+        "effects": dict(sorted(out.items(),
+                               key=lambda kv: -(kv[1]["weapon_line_count"]
+                                                + kv[1]["gear_line_count"]))),
         "spell_effects": spell_effects,
     }
     os.makedirs(OUT, exist_ok=True)
@@ -423,9 +448,11 @@ def main():
 
     m = catalogue["_meta"]
     print(f"scanned {m['spells_scanned']} spells "
-          f"({m['weapon_equippable_spells']} weapon-equippable)")
+          f"({m['weapon_equippable_spells']} weapon-equippable, "
+          f"{m['gear_equippable_spells']} gear-equippable, "
+          f"{m['indexed_spells']} indexed)")
     print(f"distinct effects: {m['distinct_effects']}   "
-          f"combat effects reachable from weapons: {m['combat_effects_on_weapons']}")
+          f"combat effects reachable from equipment: {m['combat_effects_on_weapons']}")
     print(f"  UNMAPPED to any capability : {m['unmapped_to_capability']}")
     print(f"  no prose flag detects them : {m['no_prose_flag']}")
     print(f"  need combat/economy call   : {m['needs_classification']}")
@@ -434,14 +461,14 @@ def main():
     if args.report:
         def show(title, d, n=28):
             print(f"\n{'='*94}\n{title}\n{'='*94}")
-            rows = sorted(d.items(), key=lambda kv: -kv[1]["weapon_line_count"])[:n]
+            rows = sorted(d.items(), key=lambda kv: -equipped(kv[1]))[:n]
             for k, v in rows:
                 tg = ",".join(list(v["targets"])[:3])
-                print(f"  {k:<34}{v['weapon_line_count']:>4} lines  "
+                print(f"  {k:<34}{v['weapon_line_count']:>3}w {v['gear_line_count']:>3}g  "
                       f"prose={str(v['prose_flag']):<14}cap={str(v['capability']):<20}[{tg}]")
-                print(f"      e.g. {', '.join(v['weapon_spells'][:4]) or '-'}")
+                print(f"      e.g. {', '.join((v['direct_spells'] or v['via_spells'])[:4]) or '-'}")
 
-        show("GAPS — combat effects on weapons with NO capability mapping", gaps)
+        show("GAPS — combat effects on equipment with NO capability mapping", gaps)
         show("BLIND SPOTS — combat effects no prose regex detects", no_prose)
         show("NEEDS A HUMAN CALL — combat or economy?", unclear, 16)
 
