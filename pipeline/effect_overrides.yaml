@@ -101,7 +101,9 @@ add:
   INVULNERABILITY:                    # Protective Beam — refreshing 240 absorb bubble on an ally
     buff_allies: "channeled ally absorb shield; outside the structured vocab"
   SOUL_LINK:                          # "Redirects 0.5 of the damage taken by one target to the other"
-    peel: "halving the focus damage on a dived ally IS peel; damage redirection is outside the vocab"
+    # peel REMOVED (owner 2026-08-28): damage redirection halves what the ally
+    # takes but does nothing to the enemy — protection, not peel.
+    buff_allies: "damage redirection off a focused ally; redirection is outside the vocab"
   SHAPESHIFT_PANTHER:                 # "On the Prowl — you will turn invisible to players"
     engage: "stealth opener; the conditional invisibility was not parsed as an effect node"
     disengage: "stealth escape; same gap"
@@ -122,11 +124,15 @@ add:
     tankiness: "a cannot-die window is the purest tankiness; health floors are outside the vocab"
   ELECTRICSHOCK:                      # Electric Discharge — expanding AoE stun around self
     anti_dive: "a self-centered AoE stun is fired at the divers on you"
+  # OWNER RULING 2026-08-28: peel must hit the enemy or cancel the enemy's CC.
+  # Pure damage protection on an ally is buff_allies/tankiness, not peel — the
+  # `peel:` lines below were REMOVED (the "ally-armor rule" and the absorb-shield
+  # class). Owner: "I thought things peel would be like something that directly
+  # affects enemies in some way." Force Shield made Judicator Armor the
+  # highest-peel gear in the game on nothing but +0.25 ally resistances.
   EMERGENCY_SHIELD:                   # "Emergency Shield for up to 10 allies... absorbing damage"
-    peel: "group absorb shield on the focused allies; absorb shields are outside the vocab"
     buff_allies: "10-ally shield grant; same class as HOLYSHIELD/CRYSTALWAVE"
   FORCESHIELD:                        # Force Shield — "Increases damage resistances by 0.25" zone for allies
-    peel: "ally-resist zone dropped on the focused clump functions as peel (ally-armor rule)"
     buff_allies: "group resist grant inside the zone"
   WINDWALL:                           # Wind Wall — "Purges... Knocks back all enemies to the wall's edge"
     peel: "the wall shoves divers out and blocks the follow-up"
@@ -200,7 +206,8 @@ add:
     engage: "an unstoppable march to the fight is the frontline walk-in"
   CHARGE_SHIELD:                      # Shield Charge — "Charge towards the target... If the target is an ally, the shield is also applied to the target"
     engage: "the charge half; dashes are outside the vocab"
-    peel: "an absorb shield delivered onto a focused ally; HOLYSHIELD class"
+    # peel REMOVED (owner 2026-08-28): Shield Charge shields the ally and
+    # never touches the enemy — protection, not peel.
   MAXHEALTHBUFF:                      # Giant — "increasing your Max and Current Health by 0.25, and your Move Speed by 0.25"
     tankiness: "self max-HP grant; hitpoints grants misread via reference chain"
     mobility: "the speed half"

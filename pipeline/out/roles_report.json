@@ -495,7 +495,6 @@
   {
    "active_caps": {
     "buff_allies": 3,
-    "peel": 4,
     "zone_control": 2
    },
    "class": "plate",
@@ -918,7 +917,6 @@
   {
    "active_caps": {
     "buff_allies": 2,
-    "peel": 2,
     "tankiness": 2
    },
    "class": "plate",
@@ -1491,8 +1489,7 @@
   },
   {
    "active_caps": {
-    "engage": 2,
-    "peel": 2
+    "engage": 2
    },
    "class": "plate",
    "class_basis": "tree id (stats missing)",

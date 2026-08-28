@@ -3785,7 +3785,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
-   "e_utility_max": 2,
+   "e_utility_max": 0,
    "fit": {
     "brawl": {
      "gang": "situational",
@@ -3816,7 +3816,7 @@
    "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
-   "utility_pts": 4,
+   "utility_pts": 2,
    "weak_group_e": false
   },
   "2H_NATURESTAFF_HELL": {
@@ -6177,7 +6177,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
-   "e_utility_max": 4,
+   "e_utility_max": 0,
    "fit": {
     "brawl": {
      "gang": "situational",
@@ -6208,7 +6208,7 @@
    "nonstack_member": false,
    "role_flexible": true,
    "utility_carrier": false,
-   "utility_pts": 6,
+   "utility_pts": 2,
    "weak_group_e": false
   },
   "MAIN_NATURESTAFF_CRYSTAL": {

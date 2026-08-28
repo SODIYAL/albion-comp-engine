@@ -421,3 +421,78 @@ no content effect and no style effect, so there is no fitted number to hang a
 per-style peel modifier on yet. Recorded as an owner ruling to convert into
 per-style target modifiers during the re-fit; NO number invented in the interim
 (the "never invent a number to fill a hole" rule).
+
+## Peel is CC, not protection (owner ruling 2026-08-28)
+
+**The challenge.** Shown that Knight Boots and Cleric Cowl carried peel scores,
+the owner pushed back: *"knight boots and cleric cowl are peel? I thought cleric
+cowl is defensive stats not exactly peel. I thought things peel would be like
+something that directly affects enemies in some way."*
+
+**Checked before answering, and the challenge was half right.** Cleric Cowl's
+ability is Force Field -- *"Send out a shockwave, knocking back all enemies
+within a 6 radius around you by 9 (ignoring Crowd Control Resistance)"* -- a
+point-blank enemy knockback, so its peel is correct and the owner's guess about
+it was wrong. Knight Boots' ability is Shield Charge -- *"Charge towards the
+target... applies a shield on you... if the target is an ally, the shield is
+also applied to the target"* -- which never touches an enemy. That one was a
+genuine miss, and it opened a whole class.
+
+**The design doc already agreed with the owner** (albion-comp-engine-design.md
+§2.2): `clump_create` and `peel` "sit in Control because they are the two
+directional uses of CC (offensive stacking vs. defensive protection)". Peel was
+DEFINED as crowd control. The effect layer had drifted from that definition.
+
+**RULING (owner, from three offered options): peel = enemy CC, plus cancelling
+enemy CC on a teammate. Plain damage protection is NOT peel** -- it is
+buff_allies/tankiness. Immunities, CC-resistance and diminishing-returns grants
+KEEP peel (they defeat the enemy's CC, the defensive half of the same axis);
+resistance buffs, absorb shields, damage redirection and invincibility LOSE it.
+
+**Implemented.** `effect_map.yaml`: `physicalarmor+`, `magicresistance+`,
+`bonusdefensevsplayers+` and `invincibility` on an ALLY now map to
+`[buff_allies, tankiness]` instead of peel -- which also removed a live internal
+contradiction, since `hitpointsmaxbonus+` on an ally was ALREADY
+`[buff_allies, tankiness]`. `effect_overrides.yaml`: four hand-written peel
+overrides removed, each of which encoded the overruled assumption in its own
+justification string -- FORCESHIELD ("ally-resist zone... functions as peel
+(ally-armor rule)"), EMERGENCY_SHIELD ("group absorb shield"), CHARGE_SHIELD
+("an absorb shield delivered onto a focused ally"), SOUL_LINK ("halving the
+focus damage on a dived ally"). Every enemy-facing override was KEPT
+(PBAOE_KNOCKBACK, WINDWALL, CASTBUBBLE, ENFEEBLEAURA).
+
+**The lint then found every affected claim by itself** -- the fail-closed gate
+working exactly as designed. Five claims went ungrounded and were removed from
+the sheets, none replaced by an invented number:
+
+- `ARMOR_PLATE_KEEPER` Judicator Armor, peel 4 -> removed. **This was the
+  highest peel score on any gear in the game**, resting entirely on Force
+  Shield granting allies +25% resistances.
+- `HEAD_PLATE_SET3` Guardian Helmet, peel 2 -> removed (Emergency Shield).
+- `SHOES_PLATE_SET2` Knight Boots, peel 2 -> removed (Shield Charge) -- the
+  item the owner named.
+- `2H_NATURESTAFF` Nature Staff, peel 2 -> removed (ally resistances).
+- `MAIN_NATURESTAFF_AVALON` Ironroot Staff, peel 4 -> removed (Soul Link).
+
+**CONSEQUENCE FLAGGED FOR THE OWNER:** Ironroot Staff loses peel entirely. Its
+sheet comment literally called it "the soul-link peeler" and peel 4 was its
+defining score; it now carries buff_allies + heal_sustain and no peel. Soul Link
+redirects half the focus damage off an ally without doing anything to the enemy,
+so the ruling is unambiguous, but if Ironroot should still read as a protector
+the honest fix is a buff_allies/tankiness magnitude, NOT a restored peel row.
+Nothing was invented to preserve the old identity.
+
+**Measured effect.** Peel per person across the ten dressed comps falls from
+3.43-5.11 to **2.14-3.86** -- roughly a third of what the model counted as peel
+was damage protection. The blackzone comps now sit much closer to their own
+2.01-per-person target (push_monkey lands at 2.14 against 2.01). The
+measurement got more honest, not just smaller.
+
+Full battery green, **zero re-pins** (golden/forge/parity/validation-modes/
+roles/interactions/builds/provenance, evidence lint clean). The golden cases
+turned out not to depend on any of the five claims.
+
+**Still open, deliberately not decided:** `SHAPE_W_TETHERBEAM` keeps its peel
+override ("pulling an endangered ally out of danger"). Ally-repositioning is
+neither enemy CC nor CC-cancelling, but it is not damage protection either, so
+it falls outside what was ruled. Flagged rather than silently resolved.

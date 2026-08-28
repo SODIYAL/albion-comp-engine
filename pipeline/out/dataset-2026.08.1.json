@@ -2324,11 +2324,6 @@
      "radius": 7.0,
      "spell": "FORCESHIELD"
     },
-    "peel": {
-     "max_targets": 10,
-     "radius": 7.0,
-     "spell": "FORCESHIELD"
-    },
     "zone_control": {
      "max_targets": 10,
      "radius": 7.0,
@@ -2337,7 +2332,6 @@
    },
    "capabilities": {
     "buff_allies": 3,
-    "peel": 4,
     "zone_control": 2
    },
    "curated_as_of": "2026-08-20",
@@ -2372,9 +2366,6 @@
     "buff_allies": [
      "FORCESHIELD"
     ],
-    "peel": [
-     "FORCESHIELD"
-    ],
     "zone_control": [
      "FORCESHIELD"
     ]
@@ -2394,7 +2385,6 @@
      [
       {
        "buff_allies": 3,
-       "peel": 4,
        "zone_control": 2
       }
      ]
@@ -5430,16 +5420,10 @@
      "max_targets": 10,
      "radius": 5.0,
      "spell": "EMERGENCY_SHIELD"
-    },
-    "peel": {
-     "max_targets": 10,
-     "radius": 5.0,
-     "spell": "EMERGENCY_SHIELD"
     }
    },
    "capabilities": {
     "buff_allies": 2,
-    "peel": 2,
     "tankiness": 2
    },
    "curated_as_of": "2026-08-20",
@@ -5474,9 +5458,6 @@
     "buff_allies": [
      "EMERGENCY_SHIELD"
     ],
-    "peel": [
-     "EMERGENCY_SHIELD"
-    ],
     "tankiness": [
      "STONESKIN"
     ]
@@ -5496,8 +5477,7 @@
     "slots": [
      [
       {
-       "buff_allies": 2,
-       "peel": 2
+       "buff_allies": 2
       },
       {
        "tankiness": 2
@@ -8083,8 +8063,7 @@
   },
   "SHOES_PLATE_SET2": {
    "capabilities": {
-    "engage": 2,
-    "peel": 2
+    "engage": 2
    },
    "curated_as_of": "2026-08-27",
    "display_name": "Knight Boots",
@@ -8117,9 +8096,6 @@
    "evidence": {
     "engage": [
      "CHARGE_SHIELD"
-    ],
-    "peel": [
-     "CHARGE_SHIELD"
     ]
    },
    "gear_class": "plate",
@@ -8136,8 +8112,7 @@
     "slots": [
      [
       {
-       "engage": 2,
-       "peel": 2
+       "engage": 2
       }
      ]
     ]
@@ -60536,7 +60511,6 @@
     "heal_burst": 2,
     "heal_sustain": 4,
     "knockback_displace": 2,
-    "peel": 2,
     "self_sustain": 2,
     "slow": 2,
     "sustained_dps": 2,
@@ -60560,9 +60534,6 @@
     ],
     "knockback_displace": [
      "BRAMBLESEED"
-    ],
-    "peel": [
-     "BRIEROFLIFE"
     ],
     "self_sustain": [
      "PASSIVE_ARMOR_CASTER_NATURESTAFF"
@@ -60607,8 +60578,7 @@
      [
       {
        "buff_allies": 4,
-       "heal_sustain": 4,
-       "peel": 2
+       "heal_sustain": 4
       }
      ],
      [
@@ -69929,7 +69899,6 @@
     "heal_burst": 2,
     "heal_sustain": 4,
     "knockback_displace": 2,
-    "peel": 4,
     "self_sustain": 2,
     "slow": 2,
     "zone_control": 2
@@ -69939,6 +69908,7 @@
    "display_name": "Ironroot Staff",
    "evidence": {
     "buff_allies": [
+     "SOUL_LINK",
      "NATURERESILIENCE"
     ],
     "cleanse": [
@@ -69952,9 +69922,6 @@
     ],
     "knockback_displace": [
      "BRAMBLESEED"
-    ],
-    "peel": [
-     "SOUL_LINK"
     ],
     "self_sustain": [
      "PASSIVE_ARMOR_CASTER_NATURESTAFF"
@@ -69983,8 +69950,7 @@
      ],
      [
       "BRAMBLESEED",
-      "CLEANSEHEAL",
-      "NATURERESILIENCE"
+      "CLEANSEHEAL"
      ],
      [
       "PASSIVE_ARMOR_CASTER_NATURESTAFF"
@@ -69996,8 +69962,8 @@
     "slots": [
      [
       {
-       "heal_sustain": 4,
-       "peel": 4
+       "buff_allies": 4,
+       "heal_sustain": 4
       }
      ],
      [
@@ -70007,9 +69973,6 @@
       {
        "cleanse": 4,
        "heal_burst": 2
-      },
-      {
-       "buff_allies": 4
       }
      ],
      [

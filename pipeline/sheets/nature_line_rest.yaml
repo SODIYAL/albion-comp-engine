@@ -11,7 +11,8 @@
   capabilities:
     - {cap: heal_sustain, score: 4, evidence: BRIEROFLIFE}     # E: heal + heal-on-damage-taken armor
     - {cap: buff_allies,  score: 4, evidence: BRIEROFLIFE}     # +13% resistances on the target; W: Protection (QW)
-    - {cap: peel,         score: 2, evidence: BRIEROFLIFE}     # armor on the focused ally
+    # peel 2 REMOVED (owner ruling 2026-08-28): resistances on the focused ally
+    # are protection, not peel — nothing here touches the enemy.
 
 - weapon: 2H_NATURESTAFF_KEEPER      # Rampant Staff — trail healer
   curated_as_of: 2026-08-12
@@ -48,7 +49,15 @@
   except:
     - {cap: sustained_dps, evidence: THORNSAREA}
   capabilities:
-    - {cap: peel,         score: 4, evidence: SOUL_LINK}       # E: redirects HALF the focus damage off an ally (override)
+    # peel 4 REMOVED (owner ruling 2026-08-28). NOTE THE CONSEQUENCE: this was
+    # Ironroot's defining score and the weapon's own comment called it "the
+    # soul-link peeler". Soul Link redirects half the damage off the focused
+    # ally, which protects them without doing anything to the enemy, so under
+    # the ruling it is not peel. Ironroot now carries buff_allies + heal_sustain
+    # and no peel at all. Flagged for the owner: if Ironroot should still read
+    # as a protector, the honest fix is a buff_allies/tankiness magnitude, not
+    # a peel row — no score was invented here to preserve the old identity.
+    - {cap: buff_allies,  score: 4, evidence: SOUL_LINK}       # half the focus damage redirected off the ally
     - {cap: heal_sustain, score: 4, evidence: SOUL_LINK}       # link also transfers 75% of healing; W pool
 
 - weapon: MAIN_NATURESTAFF_CRYSTAL   # Forgebark Staff — toggle shield/root healer

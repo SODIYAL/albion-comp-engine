@@ -97,22 +97,36 @@ effects:
     note: Stealth opener or escape.
 
   # ---------------------------------------------------------------- durability
+  # OWNER RULING 2026-08-28. Peel is a directional use of CC (design doc §2.2:
+  # clump_create and peel are "the two directional uses of CC"), so it must
+  # either hit the enemy or cancel the enemy's CC. Plain damage protection on
+  # an ally is NOT peel — it is buff_allies/tankiness, which is how
+  # `hitpointsmaxbonus+` was already treated. Owner: "I thought things peel
+  # would be like something that directly affects enemies in some way."
+  # The challenge that found it: Judicator Armor scored the HIGHEST gear peel
+  # in the game (4) on a Force Shield that only grants allies +0.25
+  # resistances. `crowdcontrolresistance+`, `immunity:*` and `dr:*` KEEP peel
+  # — they cancel enemy CC, which is the defensive half of the same axis.
   invincibility:
     self:  [tankiness, engage, disengage]
-    ally:  [peel]
+    ally:  [buff_allies, tankiness]
     note: >
       The 1H Mace case. A damage-immune window is exactly what lets a bruiser
-      commit or withdraw through focus.
+      commit or withdraw through focus. On an ALLY it is damage protection,
+      not peel (owner 2026-08-28) — nothing about it touches the enemy.
   physicalarmor+:
     self:  [tankiness, self_sustain]
-    ally:  [buff_allies, peel]
-    note: Resistances on a focused ally function as peel.
+    ally:  [buff_allies, tankiness]
+    note: >
+      Resistances on a focused ally are protection, not peel (owner
+      2026-08-28) — same treatment as hitpointsmaxbonus+, which this used to
+      contradict.
   magicresistance+:
     self:  [tankiness, self_sustain]
-    ally:  [buff_allies, peel]
+    ally:  [buff_allies, tankiness]
   bonusdefensevsplayers+:
     self:  [tankiness]
-    ally:  [buff_allies, peel]
+    ally:  [buff_allies, tankiness]
   hitpointsmaxbonus+:
     self:  [tankiness]
     ally:  [buff_allies, tankiness]

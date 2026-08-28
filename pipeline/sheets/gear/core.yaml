@@ -45,7 +45,9 @@
   slot: head
   curated_as_of: 2026-08-20
   capabilities:
-    - {cap: peel,          score: 2, evidence: EMERGENCY_SHIELD} # 10-ally shield
+    # peel 2 REMOVED (owner ruling 2026-08-28): Emergency Shield absorbs
+    # damage for allies and never touches the enemy. Protection, not peel.
+    # The buff_allies row below already carries the same evidence.
     - {cap: buff_allies,   score: 2, evidence: EMERGENCY_SHIELD}
     - {cap: tankiness,     score: 2, evidence: STONESKIN}
 
@@ -72,7 +74,12 @@
   slot: armor
   curated_as_of: 2026-08-20
   capabilities:
-    - {cap: peel,          score: 4, evidence: FORCESHIELD}      # zone: +25% resists for allies inside, 8s
+    # peel 4 REMOVED (owner ruling 2026-08-28). This was the HIGHEST peel score
+    # on any gear in the game, and it rested entirely on Force Shield granting
+    # allies +25% resistances — nothing that touches an enemy. The owner's
+    # challenge ("I thought things peel would be like something that directly
+    # affects enemies in some way") found it. buff_allies below is the honest
+    # home for the same evidence; no score was moved or invented to replace it.
     - {cap: buff_allies,   score: 3, evidence: FORCESHIELD}
     - {cap: zone_control,  score: 2, evidence: FORCESHIELD}
 

@@ -377,7 +377,8 @@
   curated_as_of: 2026-08-27
   capabilities:
     - {cap: engage,        score: 2, evidence: CHARGE_SHIELD}    # charge to target
-    - {cap: peel,          score: 2, evidence: CHARGE_SHIELD}    # shields self AND the allied target
+    # peel 2 REMOVED (owner ruling 2026-08-28) — the owner named this item
+    # directly. Shield Charge charges and shields; it never touches an enemy.
 
 - gear: SHOES_PLATE_SET3             # Guardian Boots — Giant
   slot: shoes
