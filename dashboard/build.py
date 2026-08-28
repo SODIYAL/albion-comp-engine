@@ -199,10 +199,11 @@ def main():
             entry["fx"] = fx
         spell_facts[sid] = entry
     # Gear catalogue (fetch_gear_lines.py) — the loadout half: head, armor,
-    # shoes, cape, offhand, potion, food. Optional, and DISPLAY ONLY for now:
-    # no gear capabilities are curated yet, so the engine still scores weapons
-    # alone. Shipping the catalogue + art first is what lets the loadout UI be
-    # built against real items instead of placeholders.
+    # shoes, cape, offhand, potion, food. This is the full PICKER catalogue;
+    # it is distinct from dataset["gear"], the CURATED capability sheet
+    # (sheets/gear/core.yaml, 2026-08-20 full-build layer) that build_extra
+    # scores. Picker items outside the curated sheet contribute no
+    # capabilities yet — they render, equip, and carry stats only.
     gear_path = os.path.join(PIPE, "out", "gear_lines.json")
     gear_all = {}
     if os.path.exists(gear_path):

@@ -484,6 +484,9 @@ class Engine:
         self._default_cache = {}
         self._gear_cache = {}
         self._ns_cache = {}
+        self._variant_cache = {}
+        self._dressed_cache = {}
+        self._dressed_pre_cache = {}
 
     @staticmethod
     def _step_table(table, size):
@@ -1020,6 +1023,81 @@ class Engine:
                     out[cap] *= 1.0 + ccdur_pct
         return out
 
+    def kit_variants(self, weapon):
+        """Doctrine kit variants for GENERATION (dressed forge 2026-08-27):
+        v0 = the seat's doctrine kit exactly as kit_options ranks it
+        context-free (doctrine-tier-first; a slot whose ranked top is
+        off-tier stays UNSET — the forge never guesses off-doctrine
+        gear); v1/v2 = v0 with the first/second DIVERGENT single-slot
+        swap (a tier piece whose top weighted capability differs from
+        v0's piece in that slot). [("v0", None)] for weapons with no
+        doctrine gear at all — dressed == naked. Deterministic (slot
+        order, then tier order); cached per set_content. NO doctrine
+        passives anywhere in this path (role stays out of build_extra —
+        generation must optimize the exact score the page displays)."""
+        out = self._variant_cache.get(weapon)
+        if out is not None:
+            return out
+
+        def top_cap(k):
+            extra = self.gear_extra(k)
+            best = None
+            for cap in sorted(extra):
+                v = self._weights.get(cap, 0.0) * extra[cap]
+                if best is None or v > best[1]:
+                    best = (cap, v)
+            return best[0] if best else None
+
+        ko = self.kit_options(weapon)
+        v0, divergent = {}, []
+        for slot in ("head", "armor", "shoes", "cape", "offhand",
+                     "potion", "food"):
+            opts = [o for o in (ko["options"].get(slot) or [])
+                    if o.get("doctrine")]
+            if not opts:
+                continue
+            v0[slot] = opts[0]["gear"]
+            t0 = top_cap(opts[0]["gear"])
+            for o in opts[1:]:
+                if top_cap(o["gear"]) != t0:
+                    divergent.append((slot, o["gear"]))
+                    break   # one divergent alternative per slot
+        if not v0:
+            out = [("v0", None)]
+        else:
+            slots = ("head", "armor", "shoes", "cape", "offhand",
+                     "potion", "food")
+            def gl(d):
+                return [d[s] for s in slots if s in d]
+            # variant cap 2 (perf ruling, plan §6: dressed forge measured
+            # 2.8x baseline at 3 variants — v0 + the FIRST divergent swap
+            # keeps the search's kit dimension at ~2x cost; widen only
+            # with a fresh measurement)
+            out = [("v0", gl(v0))]
+            for n, (slot, piece) in enumerate(divergent[:1]):
+                alt = dict(v0)
+                alt[slot] = piece
+                out.append((f"v{n + 1}", gl(alt)))
+        self._variant_cache[weapon] = out
+        return out
+
+    def _dressed_extras(self, weapon):
+        """Per variant, the member's effective caps per combo index — the
+        beam's dressed vectors, precomputed so evaluation never calls
+        build_extra inline. The naked variant reuses the combo-extras
+        objects THEMSELVES (identity keeps the _combo_pre fast path and
+        its exactness proofs intact)."""
+        out = self._dressed_cache.get(weapon)
+        if out is None:
+            extras = self._combo_extras(weapon)
+            out = {}
+            for vkey, gl in self.kit_variants(weapon):
+                out[vkey] = (extras if gl is None else
+                             [self.build_extra(weapon, i, gl)
+                              for i in range(len(extras))])
+            self._dressed_cache[weapon] = out
+        return out
+
     def primary_seat(self, weapon):
         """The weapon's default SEAT role: the first uniform-carrying role
         on its menu (book order = evidence-preference order). Function
@@ -1137,13 +1215,19 @@ class Engine:
                     "carries": list(self._item_effects.get(k) or []),
                     "passive": passive,
                     "why": [(c, round(d, 2)) for c, d in deltas[:3]]})
-            # Context-free: the doctrine tier (observed in this seat's
-            # real builds) is the prior — it ranks first, each tier by
-            # weighted value. Comp-aware: the EXACT marginal is the
-            # engine's own physics of what this comp needs and outranks
-            # tier membership (T22 — the tank's team head must win);
-            # doctrine stays as annotation + tie-break. The chest is
-            # pool-gated either way — the Hellion bug can't return.
+            # DOCTRINE-TIER-FIRST in both modes (owner ruling 2026-08-27,
+            # evidence-first: "search more comps to see what tanks are
+            # actually wearing"). The observed tier (this weapon's own
+            # builds, then the seat's) bounds the suggestion; within a
+            # tier, context-free ranks by observed count then weighted
+            # value, comp-aware by the EXACT marginal — the comp's needs
+            # pick WITHIN doctrine, never outside it. Marginal-first
+            # across the whole catalog optimized the comp pool instead
+            # of the member's job (the increment-1 root cause) the
+            # moment the full catalog was curated: it handed a control
+            # tank Mercenary Hood over the observed team pieces. The
+            # chest is pool-gated either way — the Hellion bug can't
+            # return; off-tier items stay ranked behind the tiers.
             def tier_rank(r):
                 return (0 if r["doctrine"] == "weapon"
                         else 1 if r["doctrine"] == "seat" else 2)
@@ -1153,7 +1237,7 @@ class Engine:
                     r["gear"]))
             else:
                 ranked.sort(key=lambda r: (
-                    -r["value"], tier_rank(r), -wslot.get(r["gear"], 0),
+                    tier_rank(r), -r["value"], -wslot.get(r["gear"], 0),
                     r["gear"]))
             options[slot] = ranked[:top_n]
         kit = {slot: opts[0] for slot, opts in options.items() if opts}
@@ -1492,16 +1576,26 @@ class Engine:
                 - self.rho * self.redundancy(party))
 
     # -------------------------------------------------- candidate evaluation
-    def party_state(self, party, combos=None):
+    def party_state(self, party, combos=None, gears=None):
         """Everything a candidate marginal needs: effective supply, per-pair
         synergy state, exact-weapon counts, and the per-spell max non-stacking
         contributions (so _eval_pick can price a duplicate of a verified
-        non-stacking spell exactly). Build once per sweep."""
-        s, J = self._syn_state(party, combos)
+        non-stacking spell exactly). Build once per sweep.
+
+        `gears` (dressed forge, 2026-08-27): comp_score's own seams split
+        the supplies — fitness reads gear-inclusive supply, synergy stays
+        weapon-keyed (synergy() computes its own gears-free supply). So
+        `s` is the FIT supply (dressed when gears are given) and `s_syn`
+        the weapon-only supply every synergy term reads. gears=None keeps
+        both the same object — bit-identical to the pre-gears state."""
+        s_syn, J = self._syn_state(party, combos)
+        s = (self.effective_supply(party, combos, gears)
+             if gears and any(gears) else s_syn)
         pair_vals = []
         for p in range(len(self._active_syn)):
             a, b, _bonus = self._active_syn[p]
-            pair_vals.append(self._pair_value(p, s.get(a, 0.0), s.get(b, 0.0), J[p]))
+            pair_vals.append(self._pair_value(p, s_syn.get(a, 0.0),
+                                              s_syn.get(b, 0.0), J[p]))
         counts = {}
         for w in party:
             counts[w] = counts.get(w, 0) + 1
@@ -1514,8 +1608,8 @@ class Engine:
                     for cap, v in contrib.items():
                         if v > cur.get(cap, 0.0):
                             cur[cap] = v
-        return {"s": s, "J": J, "pair_vals": pair_vals, "counts": counts,
-                "ns_max": ns_max}
+        return {"s": s, "s_syn": s_syn, "J": J, "pair_vals": pair_vals,
+                "counts": counts, "ns_max": ns_max}
 
     def _marg_fit_from(self, s, extra):
         """Marginal fitness of adding effective caps `extra` to effective
@@ -1541,7 +1635,7 @@ class Engine:
         if extra_j is None:
             extra_j = extra
         total = 0.0
-        s, J, pv = state["s"], state["J"], state["pair_vals"]
+        s, J, pv = state["s_syn"], state["J"], state["pair_vals"]
         for p in range(len(self._active_syn)):
             a, b, _bonus = self._active_syn[p]
             j = min(extra_j.get(a, 0.0), extra_j.get(b, 0.0))
@@ -1624,7 +1718,7 @@ class Engine:
         combo touches (_combo_pre): an untouched pair's term is exactly
         pair_vals[p] - pair_vals[p] == 0.0, so the sum is identical."""
         total = 0.0
-        s, J, pv = state["s"], state["J"], state["pair_vals"]
+        s, J, pv = state["s_syn"], state["J"], state["pair_vals"]
         tab = self._syn_tab
         for p in pairs:
             a, b, bonus, ta, tb = tab[p]
@@ -1664,26 +1758,81 @@ class Engine:
                  - (self.rho * dup if dup > 0 else 0.0))
         return score, best[1], best[2], meta, best[3]
 
+    def _dressed_pre(self, weapon):
+        """_combo_pre's fit-items view over the DRESSED vectors (cached
+        per set_content): per variant per combo, the (cap, gain,
+        cap-table row) items of the dressed vector's in-template nonzero
+        gains. Synergy pairs are NOT duplicated here — the synergy half
+        of a dressed candidate reads the weapon-only extras, so
+        _combo_pre's pair lists stay the one source. The naked variant
+        aliases _combo_pre's item lists."""
+        pre = self._dressed_pre_cache.get(weapon)
+        if pre is None:
+            wpre = self._combo_pre(weapon)
+            extras = self._combo_extras(weapon)
+            pre = {}
+            for vkey, dext in self._dressed_extras(weapon).items():
+                if dext is extras:
+                    pre[vkey] = [it for it, _ps in wpre]
+                else:
+                    pre[vkey] = [[(cap, gain, self._cap_tab[cap])
+                                  for cap, gain in extra.items()
+                                  if gain and cap in self._cap_tab]
+                                 for extra in dext]
+            self._dressed_pre_cache[weapon] = pre
+        return pre
+
+    def _combo_score_dressed(self, state, weapon, i, wextra, dextra,
+                             vkey=None):
+        """_combo_score for a DRESSED candidate: the fit half prices the
+        dressed vector, the synergy half the weapon-only vector — the
+        exact decomposition of comp_score-with-gears (fitness reads
+        gears, synergy does not; verified 2026-08-27). When the vectors
+        are the same object this IS _combo_score. With `vkey` and no
+        non-stacking adjustment, the precomputed _pre views evaluate the
+        same numbers faster (F1/F22b pin the equality at 1e-9)."""
+        if dextra is wextra:
+            return self._combo_score(state, weapon, i, wextra)
+        adj = self._nonstack_adjust(state, weapon, i, dextra)
+        if adj is dextra and vkey is not None:
+            items = self._dressed_pre(weapon)[vkey][i]
+            _wi, pairs = self._combo_pre(weapon)[i]
+            d_fit = self._marg_fit_pre(state["s"], items)
+            d_syn = self._marg_syn_pre(state, wextra, pairs)
+        else:
+            d_fit = self._marg_fit_from(state["s"], adj)
+            d_syn = self._marg_syn_from(state, wextra)
+        return self.alpha * d_fit + self.beta * d_syn, d_fit, d_syn
+
     def _eval_pick(self, state, weapon):
         """THE candidate score — the exact comp_score delta of adding
-        `weapon` with its best loadout for this party. Every suggestion path
-        (recommend / swap_review / forge beam) reads this one helper so the
-        formula can never drift. Returns (score, d_fit, d_syn, meta, combo)."""
+        `weapon` with its best loadout AND doctrine-kit variant for this
+        party (dressed forge 2026-08-27). Every suggestion path
+        (recommend / swap_review / forge beam) reads this one helper so
+        the formula can never drift.
+        Returns (score, d_fit, d_syn, meta, combo, variant, vgears)."""
         best = None
         extras = self._combo_extras(weapon)
-        for i in range(len(extras)):
-            val, d_fit, d_syn = self._combo_score(state, weapon, i, extras[i])
-            if best is None or val > best[0]:
-                best = (val, d_fit, d_syn, i)
+        dressed = self._dressed_extras(weapon)
+        for vkey, vgears in self.kit_variants(weapon):
+            dext = dressed[vkey]
+            for i in range(len(extras)):
+                val, d_fit, d_syn = self._combo_score_dressed(
+                    state, weapon, i, extras[i], dext[i], vkey)
+                if best is None or val > best[0]:
+                    best = (val, d_fit, d_syn, i, vkey, vgears)
         if best is None:
-            best = (0.0, 0.0, 0.0, None)
-        return self._pick_tail(state, weapon, best)
+            best = (0.0, 0.0, 0.0, None, "v0", None)
+        score, d_fit, d_syn, meta, combo = self._pick_tail(
+            state, weapon, best[:4])
+        return score, d_fit, d_syn, meta, combo, best[4], best[5]
 
     def best_loadout(self, s, base_syn, weapon):
         """Legacy shim (golden T14; explain callers migrated): the candidate's
         best loadout against bare supply `s`, with no member-level synergy
         state (J=0 — exact for an empty party). Returns (d_fit, d_syn, extra)."""
-        state = {"s": s, "J": [0.0] * len(self._active_syn), "pair_vals": [], "counts": {}}
+        state = {"s": s, "s_syn": s, "J": [0.0] * len(self._active_syn),
+                 "pair_vals": [], "counts": {}}
         for p in range(len(self._active_syn)):
             a, b, _bonus = self._active_syn[p]
             state["pair_vals"].append(self._pair_value(p, s.get(a, 0.0), s.get(b, 0.0), 0.0))
@@ -1698,11 +1847,11 @@ class Engine:
             return 0.0, 0.0, {}
         return best[1], best[2], best[3]
 
-    def explain(self, party, candidate, combos=None):
+    def explain(self, party, candidate, combos=None, gears=None):
         """Per-capability delta terms for the candidate's CHOSEN loadout —
         these ARE the 'why' text, and they match what _eval_pick scored."""
-        state = self.party_state(party, combos)
-        _sc, _df, _ds, _meta, combo = self._eval_pick(state, candidate)
+        state = self.party_state(party, combos, gears)
+        _sc, _df, _ds, _meta, combo, _var, _vg = self._eval_pick(state, candidate)
         extra = self.member_extra(candidate, combo)
         s = state["s"]
         terms = []
@@ -1732,17 +1881,20 @@ class Engine:
         return (self.mechanics.get("negative_recs") or {}).get(
             "redundant_gain_max", 0.05)
 
-    def _pick_caps(self, state, weapon, combo):
-        """(rows, caps_gain) for the candidate's chosen combo against a
+    def _pick_caps(self, state, weapon, combo, vgears=None):
+        """(rows, caps_gain) for the candidate's chosen combo — DRESSED in
+        its chosen kit variant (dressed forge 2026-08-27) — against a
         party state. Each row carries the SIGNED per-capability terms of
         the fitness marginal — coverage, floor lift, over-stack cost — so
-        rows sum to _eval_pick's d_fitness (test-pinned at 1e-9).
+        rows sum to _eval_pick's d_fitness (test-pinned at 1e-9; without
+        the kit the rows would no longer reconstruct a dressed pick).
         caps_gain is the GAP-CLOSING part alone: below-target coverage +
         floor lift, headroom-band depth deliberately excluded — the small
         headroom bonus is what the engine pays a saturated depth pick, and
         counting it here would make 'redundant' unreachable exactly where
         the warning matters."""
-        extra = self.member_extra(weapon, combo)
+        extra = (self.build_extra(weapon, combo, vgears) if vgears
+                 else self.member_extra(weapon, combo))
         adj = self._nonstack_adjust(state, weapon, combo, extra)
         s = state["s"]
         rows, caps_gain = [], 0.0
@@ -1776,7 +1928,7 @@ class Engine:
             return "redundant"
         return "ok"
 
-    def pick_report(self, party, candidate, combos=None):
+    def pick_report(self, party, candidate, combos=None, gears=None):
         """Full SIGNED decomposition of the candidate's pick score — the
         'why / why not' panel behind a recommendation or a manual add.
         Every number is a term of the exact _eval_pick marginal for the
@@ -1786,9 +1938,10 @@ class Engine:
         `nonstack` names verified count-once spells the party already
         carries and the units the duplicate loses to them.
         DESCRIPTIVE ONLY — computing it never changes a score."""
-        state = self.party_state(party, combos)
-        score, d_fit, d_syn, meta, combo = self._eval_pick(state, candidate)
-        rows, caps_gain = self._pick_caps(state, candidate, combo)
+        state = self.party_state(party, combos, gears)
+        score, d_fit, d_syn, meta, combo, _var, vgears = \
+            self._eval_pick(state, candidate)
+        rows, caps_gain = self._pick_caps(state, candidate, combo, vgears)
         dup = state["counts"].get(candidate, 0) + 1 - self._dup_free(candidate)
         dup_penalty = self.rho * dup if dup > 0 else 0.0
         ns_lines = []
@@ -1812,7 +1965,7 @@ class Engine:
         return {
             "weapon": candidate,
             "display_name": self.weapons[candidate]["display_name"],
-            "combo": combo, "score": score,
+            "combo": combo, "kit": vgears or [], "score": score,
             "d_fitness": d_fit, "d_synergy": d_syn,
             "meta_prior": meta, "viability": self.viability_of(candidate),
             "dup_penalty": dup_penalty,
@@ -1821,18 +1974,19 @@ class Engine:
             "verdict": self._pick_verdict(score, caps_gain),
         }
 
-    def recommend(self, party, top_n=4, pool=None, combos=None):
-        state = self.party_state(party, combos)
+    def recommend(self, party, top_n=4, pool=None, combos=None, gears=None):
+        state = self.party_state(party, combos, gears)
         out = []
         for w in (pool or self.suggest_pool()):
-            score, d_fit, d_syn, meta, combo = self._eval_pick(state, w)
+            score, d_fit, d_syn, meta, combo, _var, vgears = \
+                self._eval_pick(state, w)
             out.append({
                 "weapon": w,
                 "display_name": self.weapons[w]["display_name"],
                 "status": self.weapons[w]["status"],
                 "d_fitness": d_fit, "d_synergy": d_syn, "meta_prior": meta,
                 "viability": self.viability_of(w),
-                "combo": combo,
+                "combo": combo, "kit": vgears or [],
                 "score": score,
             })
         out = sorted(out, key=lambda r: -r["score"])[:top_n]
@@ -1840,12 +1994,13 @@ class Engine:
         # a suggestion that survives ranking can still be a depth pick in
         # a saturated comp — say so instead of implying it fills a gap
         for r in out:
-            _rows, caps_gain = self._pick_caps(state, r["weapon"], r["combo"])
+            _rows, caps_gain = self._pick_caps(state, r["weapon"], r["combo"],
+                                               r["kit"] or None)
             r["caps_gain"] = caps_gain
             r["verdict"] = self._pick_verdict(r["score"], caps_gain)
         return out
 
-    def swap_review(self, party, top_n=3, pool=None, combos=None):
+    def swap_review(self, party, top_n=3, pool=None, combos=None, gears=None):
         """Per-member swap advisor. Each member's CURRENT weapon is valued
         exactly as _eval_pick would value it as a pick into the REST of the
         party, ranked against every alternative. `off_comp` flags members the
@@ -1855,13 +2010,15 @@ class Engine:
         for i, cur in enumerate(party):
             rest = party[:i] + party[i + 1:]
             rest_combos = (combos[:i] + combos[i + 1:]) if combos else None
-            state = self.party_state(rest, rest_combos)
+            rest_gears = (gears[:i] + gears[i + 1:]) if gears else None
+            state = self.party_state(rest, rest_combos, rest_gears)
             cur_pick = self._eval_pick(state, cur)
             cur_score = cur_pick[0]
             # redundancy lens (roadmap item 3): the member valued exactly as
             # a pick into the rest — does it still close any gap, or are its
             # jobs already covered without it? Descriptive flag only.
-            _rows, caps_gain = self._pick_caps(state, cur, cur_pick[4])
+            _rows, caps_gain = self._pick_caps(state, cur, cur_pick[4],
+                                               cur_pick[6])
             better = []
             for w in (pool or self.suggest_pool()):
                 if w == cur:
@@ -2511,7 +2668,12 @@ class Engine:
         state = beam["state"]
         best = None
         extras = self._combo_extras(w)
+        dressed = self._dressed_extras(w)
+        variants = self.kit_variants(w)
         for i in range(len(extras)):
+            # predicate feasibility is per COMBO only — kit variants never
+            # change predicate contributions (predicates are weapon/combo
+            # -keyed), so the check runs once per combo, outside variants
             if ctx["pred_min"]:
                 need = self._forge_min_need(
                     ctx, beam["roles"], beam["preds"], w,
@@ -2519,16 +2681,25 @@ class Engine:
                     | (self._profile_members.get(w) or frozenset()))
                 if need > slots_left_after:
                     continue
-            val, d_fit, d_syn = self._combo_score(state, w, i, extras[i])
-            if best is None or val > best[0]:
-                best = (val, d_fit, d_syn, i)
+            for vkey, vgears in variants:
+                val, d_fit, d_syn = self._combo_score_dressed(
+                    state, w, i, extras[i], dressed[vkey][i], vkey)
+                if best is None or val > best[0]:
+                    best = (val, d_fit, d_syn, i, vkey, vgears)
         if best is None:
             return None
-        return self._pick_tail(state, w, best)
+        score, d_fit, d_syn, meta, combo = self._pick_tail(
+            state, w, best[:4])
+        return score, d_fit, d_syn, meta, combo, best[4], best[5]
 
     @staticmethod
-    def _member_tag(w, combo):
-        return w + "#" + ("d" if combo is None else str(combo))
+    def _member_tag(w, combo, vkey="-"):
+        """Canonical member key for beam dedup. The kit-variant id is part
+        of the identity (dressed forge 2026-08-27): two beams differing
+        only by a member's kit are different rosters. Locked members and
+        naked picks tag '-'."""
+        return (w + "#" + ("d" if combo is None else str(combo))
+                + "#" + vkey)
 
     @staticmethod
     def _insert_sorted(items, item):
@@ -2577,12 +2748,13 @@ class Engine:
         feasible = True
 
         counts, roles, preds, groups = self._forge_counts(locked, combos)
-        state = self.party_state(locked, combos)
+        gears0 = [None] * len(locked)
+        state = self.party_state(locked, combos, gears0)
         items0 = sorted(self._member_tag(w, c) for w, c in zip(locked, combos))
-        beams = [{"party": locked, "combos": combos,
+        beams = [{"party": locked, "combos": combos, "gears": gears0,
                   "counts": counts, "roles": roles, "preds": preds,
                   "groups": groups, "state": state, "items": items0,
-                  "score": self.comp_score(locked, combos)}]
+                  "score": self.comp_score(locked, combos, gears0)}]
         for depth in range(len(locked), size):
             slots_left_after = size - depth - 1
             expansions = []
@@ -2596,8 +2768,9 @@ class Engine:
                     pick = self._forge_eval_pick(ctx, beam, w, slots_left_after)
                     if pick is None:
                         continue      # no combo keeps the minima satisfiable
-                    sc, combo = pick[0], pick[4]
-                    expansions.append((beam["score"] + sc, bi, w, combo))
+                    sc, combo, vkey, vgears = pick[0], pick[4], pick[5], pick[6]
+                    expansions.append((beam["score"] + sc, bi, w, combo,
+                                       vkey, vgears))
             if not expansions:
                 feasible = False
                 break
@@ -2607,46 +2780,56 @@ class Engine:
             # for the beam (it was the hottest line at size 60).
             expansions.sort(key=lambda t: -t[0])
             next_beams, seen = [], set()
-            for score, bi, w, combo in expansions:
+            for score, bi, w, combo, vkey, vgears in expansions:
                 beam = beams[bi]
-                items = self._insert_sorted(beam["items"], self._member_tag(w, combo))
+                items = self._insert_sorted(beam["items"],
+                                            self._member_tag(w, combo, vkey))
                 key = "|".join(items)
                 if key in seen:
                     continue
                 seen.add(key)
                 party2 = beam["party"] + [w]
                 combos2 = beam["combos"] + [combo]
+                gears2 = beam["gears"] + [vgears]
                 counts2, roles2, preds2, groups2 = self._forge_counts(party2, combos2)
                 next_beams.append({"party": party2, "combos": combos2,
+                                   "gears": gears2,
                                    "counts": counts2, "roles": roles2,
                                    "preds": preds2, "groups": groups2,
-                                   "state": self.party_state(party2, combos2),
+                                   "state": self.party_state(party2, combos2,
+                                                             gears2),
                                    "items": items,
-                                   "score": self.comp_score(party2, combos2)})
+                                   "score": self.comp_score(party2, combos2,
+                                                            gears2)})
                 if len(next_beams) >= beam_width:
                     break
             beams = next_beams
         best = beams[0]
         party, combos = best["party"], best["combos"]
+        gears = best["gears"]
         fixed = len(locked)
         if len(party) > fixed:
             # refine -> pair-trade -> refine: a 2-opt pair gain can leave one
             # of its two slots individually negative; the closing 1-opt pass
             # cleans that up (or the filler audit below surfaces it honestly)
-            party, combos = self._refine_constrained(ctx, party, combos, fixed)
-            party, combos = self._two_opt(ctx, party, combos, fixed)
-            party, combos = self._refine_constrained(ctx, party, combos, fixed)
+            party, combos, gears = self._refine_constrained(
+                ctx, party, combos, gears, fixed)
+            party, combos, gears = self._two_opt(
+                ctx, party, combos, gears, fixed)
+            party, combos, gears = self._refine_constrained(
+                ctx, party, combos, gears, fixed)
         # filler audit — a generated member that REDUCES the objective is
         # surfaced, never silently kept quiet. A negative slot whose removal
         # would break a minimum constraint is `held` (mandated structure);
         # one the constraints don't need is `filler` (must not survive the
         # refinement passes — pinned by tests/test_forge.py).
         filler, held = [], []
-        base = self.comp_score(party, combos)
+        base = self.comp_score(party, combos, gears)
         for i in range(fixed, len(party)):
             sub = party[:i] + party[i + 1:]
             sub_c = combos[:i] + combos[i + 1:]
-            if base - self.comp_score(sub, sub_c) >= -1e-9:
+            sub_g = gears[:i] + gears[i + 1:]
+            if base - self.comp_score(sub, sub_c, sub_g) >= -1e-9:
                 continue
             _counts, roles, preds, _groups = self._forge_counts(sub, sub_c)
             needed = False
@@ -2671,7 +2854,14 @@ class Engine:
         for pn, mn in ctx["pred_min"].items():
             if preds_f.get(pn, 0) < mn:
                 feasible = False
-        return {"party": party, "combos": combos, "score": base,
+        kits = {}
+        for i in range(fixed, len(party)):
+            if gears[i]:
+                kits[i] = {"variant": next(
+                    (vk for vk, gl in self.kit_variants(party[i])
+                     if gl == gears[i]), None), "gears": gears[i]}
+        return {"party": party, "combos": combos, "gears": gears,
+                "kits": kits, "score": base,
                 "feasible": feasible, "filler": filler, "held": held,
                 "locked": fixed}
 
@@ -2696,29 +2886,35 @@ class Engine:
             return False
         return True
 
-    def _refine_constrained(self, ctx, party, combos, fixed, max_passes=8):
+    def _refine_constrained(self, ctx, party, combos, gears, fixed,
+                            max_passes=8):
         """Steepest-descent 1-opt over generated slots, constraint-aware.
-        Replacement combos re-resolve dynamically (the replacement is scored
-        exactly as a pick into the rest of the party); minima are checked
-        against the REST roster's combo-aware counts, so a swap can never
-        trade away the spells a minimum was counting on."""
+        Replacement combos AND kit variants re-resolve dynamically (the
+        replacement is scored exactly as a dressed pick into the rest of
+        the party); minima are checked against the REST roster's
+        combo-aware counts, so a swap can never trade away the spells a
+        minimum was counting on."""
         party, combos = list(party), list(combos)
-        best = self.comp_score(party, combos)
+        gears = list(gears)
+        best = self.comp_score(party, combos, gears)
         for _ in range(max_passes):
             move, gain = None, 1e-9
             for i in range(fixed, len(party)):
                 rest = party[:i] + party[i + 1:]
                 rest_c = combos[:i] + combos[i + 1:]
+                rest_g = gears[:i] + gears[i + 1:]
                 counts_r, roles_r, preds_r, groups_r = \
                     self._forge_counts(rest, rest_c)
-                state = self.party_state(rest, rest_c)
-                base_rest = self.comp_score(rest, rest_c)
+                state = self.party_state(rest, rest_c, rest_g)
+                base_rest = self.comp_score(rest, rest_c, rest_g)
                 contrib = best - base_rest
-                orig = party[i]
                 beam = {"state": state, "roles": roles_r, "preds": preds_r}
                 for w in ctx["pool"]:
-                    if w == orig:
-                        continue
+                    # w == party[i] is deliberately NOT skipped (dressed
+                    # forge 2026-08-27): the beam froze this slot's
+                    # combo+kit under an earlier partial state, and
+                    # re-resolving the SAME weapon can be the best move —
+                    # identical picks price d == 0 and are never taken.
                     if not self._add_ok(ctx, counts_r, roles_r, preds_r,
                                         groups_r, w):
                         continue
@@ -2727,15 +2923,17 @@ class Engine:
                         continue
                     d = pick[0] - contrib
                     if d > gain:
-                        move, gain = (i, w, pick[4]), d
+                        move, gain = (i, w, pick[4], pick[6]), d
             if move is None:
                 break
             party[move[0]] = move[1]
             combos[move[0]] = move[2]
-            best = self.comp_score(party, combos)
-        return party, combos
+            gears[move[0]] = move[3]
+            best = self.comp_score(party, combos, gears)
+        return party, combos, gears
 
-    def _two_opt(self, ctx, party, combos, fixed, worst_k=4, cand_m=12):
+    def _two_opt(self, ctx, party, combos, gears, fixed, worst_k=4,
+                 cand_m=12):
         """Bounded 2-opt: re-solve the `worst_k` weakest generated slots in
         pairs, drawing replacements from the top `cand_m` single-slot
         candidates. Catches pair-trades 1-opt cannot see; bounded so the
@@ -2744,9 +2942,10 @@ class Engine:
         the pass restarts with freshly computed weakest slots — stale
         indexes used to re-solve arbitrary slots (review 2026-08-18)."""
         party, combos = list(party), list(combos)
-        best = self.comp_score(party, combos)
+        gears = list(gears)
+        best = self.comp_score(party, combos, gears)
         if len(party) - fixed < 2:
-            return party, combos
+            return party, combos, gears
         passes = 0
         improved = True
         while improved and passes < 3:
@@ -2757,7 +2956,8 @@ class Engine:
             for i in gen:
                 sub = party[:i] + party[i + 1:]
                 sub_c = combos[:i] + combos[i + 1:]
-                contribs.append((best - self.comp_score(sub, sub_c), i))
+                sub_g = gears[:i] + gears[i + 1:]
+                contribs.append((best - self.comp_score(sub, sub_c, sub_g), i))
             contribs.sort(key=lambda t: (t[0], t[1]))
             worst = [i for _c, i in contribs[:worst_k]]
             for x in range(len(worst)):
@@ -2771,23 +2971,28 @@ class Engine:
                         i, j = j, i
                     rest = party[:i] + party[i + 1:j] + party[j + 1:]
                     rest_c = combos[:i] + combos[i + 1:j] + combos[j + 1:]
-                    state = self.party_state(rest, rest_c)
+                    rest_g = gears[:i] + gears[i + 1:j] + gears[j + 1:]
+                    state = self.party_state(rest, rest_c, rest_g)
                     ranked = []
                     for w in ctx["pool"]:
-                        sc, _df, _ds, _meta, combo = self._eval_pick(state, w)
-                        ranked.append((sc, w, combo))
+                        sc, _df, _ds, _meta, combo, _v, vg = \
+                            self._eval_pick(state, w)
+                        ranked.append((sc, w, combo, vg))
                     ranked.sort(key=lambda t: (-t[0], t[1]))
                     shortlist = ranked[:cand_m]
-                    for sa, wa, ca in shortlist:
+                    for sa, wa, ca, ga in shortlist:
                         if improved:
                             break
                         pa = rest + [wa]
                         pca = rest_c + [ca]
-                        state2 = self.party_state(pa, pca)
-                        for _sb, wb, _cb in shortlist:
-                            sc_b, _df2, _ds2, _m2, cb2 = self._eval_pick(state2, wb)
+                        pga = rest_g + [ga]
+                        state2 = self.party_state(pa, pca, pga)
+                        for _sb, wb, _cb, _gb in shortlist:
+                            sc_b, _df2, _ds2, _m2, cb2, _v2, gb2 = \
+                                self._eval_pick(state2, wb)
                             cand_party = pa + [wb]
                             cand_combos = pca + [cb2]
+                            cand_gears = pga + [gb2]
                             counts, roles, preds, groups = \
                                 self._forge_counts(cand_party, cand_combos)
                             ok = True
@@ -2822,14 +3027,16 @@ class Engine:
                                         break
                             if not ok:
                                 continue
-                            d = self.comp_score(cand_party, cand_combos) - best
+                            d = self.comp_score(cand_party, cand_combos,
+                                                cand_gears) - best
                             if d > 1e-9:
                                 party = cand_party
                                 combos = cand_combos
+                                gears = cand_gears
                                 best = best + d
                                 improved = True
                                 break
-        return party, combos
+        return party, combos, gears
 
 
 if __name__ == "__main__":

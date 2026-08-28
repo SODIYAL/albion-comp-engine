@@ -628,6 +628,359 @@
    ],
    "unique_name": "ARMOR_CLOTH_FEY"
   },
+  "ARMOR_CLOTH_HELL": {
+   "capabilities": {
+    "anti_dive": 2,
+    "peel": 3
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Fiend Robe",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    }
+   },
+   "evidence": {
+    "anti_dive": [
+     "FEAR_AURA"
+    ],
+    "peel": [
+     "FEAR_AURA"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "FEAR_AURA"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "anti_dive": 2,
+       "peel": 3
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 22,
+    "energyregenerationbonus": 0.14,
+    "healbonus": 0.45,
+    "hitpointsregenerationbonus": 1.5,
+    "magicattackdamagebonus": 0.45,
+    "magicresistance": 78,
+    "magicspelldamagebonus": 0.45,
+    "physicalarmor": 61,
+    "physicalattackdamagebonus": 0.45,
+    "physicalspelldamagebonus": 0.45
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_INCREASED_DAMAGE",
+    "PASSIVE_ARMOR_INCREASED_CASTSPEED",
+    "PASSIVE_ARMOR_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "ARMOR_CLOTH_HELL"
+  },
+  "ARMOR_CLOTH_KEEPER": {
+   "capabilities": {
+    "heal_sustain": 2,
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Druid Robe",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    }
+   },
+   "evidence": {
+    "heal_sustain": [
+     "SPELLRUSH"
+    ],
+    "sustained_dps": [
+     "SPELLRUSH"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "SPELLRUSH"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "heal_sustain": 2,
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 24,
+    "energyregenerationbonus": 0.12,
+    "healbonus": 0.4,
+    "hitpointsregenerationbonus": 1.5,
+    "magicattackdamagebonus": 0.4,
+    "magicresistance": 87,
+    "magicspelldamagebonus": 0.4,
+    "physicalarmor": 68,
+    "physicalattackdamagebonus": 0.4,
+    "physicalspelldamagebonus": 0.4
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_INCREASED_DAMAGE",
+    "PASSIVE_ARMOR_INCREASED_CASTSPEED",
+    "PASSIVE_ARMOR_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "ARMOR_CLOTH_KEEPER"
+  },
+  "ARMOR_CLOTH_MORGANA": {
+   "capabilities": {
+    "self_sustain": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Cultist Robe",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    }
+   },
+   "evidence": {
+    "self_sustain": [
+     "LEVITATE"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "LEVITATE"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "self_sustain": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 20,
+    "energyregenerationbonus": 0.16,
+    "healbonus": 0.5,
+    "hitpointsregenerationbonus": 1.5,
+    "magicattackdamagebonus": 0.5,
+    "magicresistance": 69,
+    "magicspelldamagebonus": 0.5,
+    "physicalarmor": 54,
+    "physicalattackdamagebonus": 0.5,
+    "physicalspelldamagebonus": 0.5
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_INCREASED_DAMAGE",
+    "PASSIVE_ARMOR_INCREASED_CASTSPEED",
+    "PASSIVE_ARMOR_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "ARMOR_CLOTH_MORGANA"
+  },
+  "ARMOR_CLOTH_ROYAL": {
+   "cap_delivery": {
+    "buff_allies": {
+     "max_targets": 5,
+     "radius": 5.0,
+     "spell": "MAGICCIRCLE"
+    }
+   },
+   "capabilities": {
+    "buff_allies": 3
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Royal Robe",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    }
+   },
+   "evidence": {
+    "buff_allies": [
+     "MAGICCIRCLE"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "MAGICCIRCLE"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "buff_allies": 3
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 22,
+    "energyregenerationbonus": 0.14,
+    "healbonus": 0.45,
+    "hitpointsregenerationbonus": 1.5,
+    "magicattackdamagebonus": 0.45,
+    "magicresistance": 78,
+    "magicspelldamagebonus": 0.45,
+    "physicalarmor": 61,
+    "physicalattackdamagebonus": 0.45,
+    "physicalspelldamagebonus": 0.45
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_INCREASED_DAMAGE",
+    "PASSIVE_ARMOR_INCREASED_CASTSPEED",
+    "PASSIVE_ARMOR_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "ARMOR_CLOTH_ROYAL"
+  },
   "ARMOR_CLOTH_SET1": {
    "capabilities": {
     "sustained_dps": 2
@@ -711,6 +1064,264 @@
     "PASSIVE_ARMOR_REDUCED_ENERGYCOST"
    ],
    "unique_name": "ARMOR_CLOTH_SET1"
+  },
+  "ARMOR_CLOTH_SET2": {
+   "capabilities": {
+    "tankiness": 3
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Cleric Robe",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    }
+   },
+   "evidence": {
+    "tankiness": [
+     "LIFESAVIOR"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "LIFESAVIOR"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "tankiness": 3
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 22,
+    "energyregenerationbonus": 0.14,
+    "healbonus": 0.45,
+    "hitpointsregenerationbonus": 1.5,
+    "magicattackdamagebonus": 0.45,
+    "magicresistance": 78,
+    "magicspelldamagebonus": 0.45,
+    "physicalarmor": 61,
+    "physicalattackdamagebonus": 0.45,
+    "physicalspelldamagebonus": 0.45
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_INCREASED_DAMAGE",
+    "PASSIVE_ARMOR_INCREASED_CASTSPEED",
+    "PASSIVE_ARMOR_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "ARMOR_CLOTH_SET2"
+  },
+  "ARMOR_CLOTH_SET3": {
+   "capabilities": {
+    "purge": 2,
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Mage Robe",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.08
+    }
+   },
+   "evidence": {
+    "purge": [
+     "PURGINGSHIELD2"
+    ],
+    "tankiness": [
+     "PURGINGSHIELD2"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "PURGINGSHIELD2"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "purge": 2,
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "armor",
+   "stats": {
+    "crowdcontrolresistance": 20,
+    "energyregenerationbonus": 0.16,
+    "healbonus": 0.5,
+    "hitpointsregenerationbonus": 1.5,
+    "magicattackdamagebonus": 0.5,
+    "magicresistance": 69,
+    "magicspelldamagebonus": 0.5,
+    "physicalarmor": 54,
+    "physicalattackdamagebonus": 0.5,
+    "physicalspelldamagebonus": 0.5
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_INCREASED_DAMAGE",
+    "PASSIVE_ARMOR_INCREASED_CASTSPEED",
+    "PASSIVE_ARMOR_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "ARMOR_CLOTH_SET3"
+  },
+  "ARMOR_LEATHER_AVALON": {
+   "capabilities": {
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Jacket of Tenacity",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    }
+   },
+   "evidence": {
+    "tankiness": [
+     "DYNAMIC_DEFENSE"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "DYNAMIC_DEFENSE"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "armor",
+   "stats": {
+    "bonusccdurationvsplayers": 0.1,
+    "crowdcontrolresistance": 26,
+    "energyregenerationbonus": 0.1,
+    "healbonus": 0.3,
+    "hitpointsregenerationbonus": 1.5,
+    "magicattackdamagebonus": 0.3,
+    "magicresistance": 92,
+    "magicspelldamagebonus": 0.3,
+    "physicalarmor": 92,
+    "physicalattackdamagebonus": 0.3,
+    "physicalspelldamagebonus": 0.3
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_BALANCE",
+    "PASSIVE_ARMOR_INCREASED_AASPEED",
+    "PASSIVE_ARMOR_CD_REDUCTION"
+   ],
+   "unique_name": "ARMOR_LEATHER_AVALON"
   },
   "ARMOR_LEATHER_FEY": {
    "capabilities": {
@@ -892,6 +1503,99 @@
    ],
    "unique_name": "ARMOR_LEATHER_HELL"
   },
+  "ARMOR_LEATHER_MORGANA": {
+   "cap_delivery": {
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "STORMSHIELD"
+    }
+   },
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Stalker Jacket",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    }
+   },
+   "evidence": {
+    "sustained_dps": [
+     "STORMSHIELD"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "STORMSHIELD"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "armor",
+   "stats": {
+    "bonusccdurationvsplayers": 0.2,
+    "crowdcontrolresistance": 30,
+    "energyregenerationbonus": 0.06,
+    "healbonus": 0.2,
+    "hitpointsregenerationbonus": 1.5,
+    "magicattackdamagebonus": 0.2,
+    "magicresistance": 108,
+    "magicspelldamagebonus": 0.2,
+    "physicalarmor": 108,
+    "physicalattackdamagebonus": 0.2,
+    "physicalspelldamagebonus": 0.2
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_BALANCE",
+    "PASSIVE_ARMOR_INCREASED_AASPEED",
+    "PASSIVE_ARMOR_CD_REDUCTION"
+   ],
+   "unique_name": "ARMOR_LEATHER_MORGANA"
+  },
   "ARMOR_LEATHER_ROYAL": {
    "capabilities": {
     "buff_allies": 4
@@ -976,6 +1680,446 @@
     "PASSIVE_ARMOR_CD_REDUCTION"
    ],
    "unique_name": "ARMOR_LEATHER_ROYAL"
+  },
+  "ARMOR_LEATHER_SET1": {
+   "capabilities": {
+    "self_sustain": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Mercenary Jacket",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    }
+   },
+   "evidence": {
+    "self_sustain": [
+     "BLOODLUST"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "BLOODLUST"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "self_sustain": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "armor",
+   "stats": {
+    "bonusccdurationvsplayers": 0.2,
+    "crowdcontrolresistance": 30,
+    "energyregenerationbonus": 0.06,
+    "healbonus": 0.2,
+    "hitpointsregenerationbonus": 1.5,
+    "magicattackdamagebonus": 0.2,
+    "magicresistance": 108,
+    "magicspelldamagebonus": 0.2,
+    "physicalarmor": 108,
+    "physicalattackdamagebonus": 0.2,
+    "physicalspelldamagebonus": 0.2
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_BALANCE",
+    "PASSIVE_ARMOR_INCREASED_AASPEED",
+    "PASSIVE_ARMOR_CD_REDUCTION"
+   ],
+   "unique_name": "ARMOR_LEATHER_SET1"
+  },
+  "ARMOR_LEATHER_SET2": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Hunter Jacket",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    }
+   },
+   "evidence": {
+    "sustained_dps": [
+     "HASTE"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "HASTE"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "armor",
+   "stats": {
+    "bonusccdurationvsplayers": 0.15,
+    "crowdcontrolresistance": 28,
+    "energyregenerationbonus": 0.08,
+    "healbonus": 0.25,
+    "hitpointsregenerationbonus": 1.5,
+    "magicattackdamagebonus": 0.25,
+    "magicresistance": 100,
+    "magicspelldamagebonus": 0.25,
+    "physicalarmor": 100,
+    "physicalattackdamagebonus": 0.25,
+    "physicalspelldamagebonus": 0.25
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_BALANCE",
+    "PASSIVE_ARMOR_INCREASED_AASPEED",
+    "PASSIVE_ARMOR_CD_REDUCTION"
+   ],
+   "unique_name": "ARMOR_LEATHER_SET2"
+  },
+  "ARMOR_LEATHER_SET3": {
+   "capabilities": {
+    "burst_st": 2,
+    "disengage": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Assassin Jacket",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    }
+   },
+   "evidence": {
+    "burst_st": [
+     "AMBUSH"
+    ],
+    "disengage": [
+     "AMBUSH"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "AMBUSH"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "burst_st": 2,
+       "disengage": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "armor",
+   "stats": {
+    "bonusccdurationvsplayers": 0.1,
+    "crowdcontrolresistance": 26,
+    "energyregenerationbonus": 0.1,
+    "healbonus": 0.3,
+    "hitpointsregenerationbonus": 1.5,
+    "magicattackdamagebonus": 0.3,
+    "magicresistance": 92,
+    "magicspelldamagebonus": 0.3,
+    "physicalarmor": 92,
+    "physicalattackdamagebonus": 0.3,
+    "physicalspelldamagebonus": 0.3
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_BALANCE",
+    "PASSIVE_ARMOR_INCREASED_AASPEED",
+    "PASSIVE_ARMOR_CD_REDUCTION"
+   ],
+   "unique_name": "ARMOR_LEATHER_SET3"
+  },
+  "ARMOR_LEATHER_UNDEAD": {
+   "cap_delivery": {
+    "sustained_dps": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "BURNAURA"
+    }
+   },
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Specter Jacket",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.05
+    }
+   },
+   "evidence": {
+    "sustained_dps": [
+     "BURNAURA"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "BURNAURA"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "armor",
+   "stats": {
+    "bonusccdurationvsplayers": 0.1,
+    "crowdcontrolresistance": 26,
+    "energyregenerationbonus": 0.1,
+    "healbonus": 0.3,
+    "hitpointsregenerationbonus": 1.5,
+    "magicattackdamagebonus": 0.3,
+    "magicresistance": 92,
+    "magicspelldamagebonus": 0.3,
+    "physicalarmor": 92,
+    "physicalattackdamagebonus": 0.3,
+    "physicalspelldamagebonus": 0.3
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_BALANCE",
+    "PASSIVE_ARMOR_INCREASED_AASPEED",
+    "PASSIVE_ARMOR_CD_REDUCTION"
+   ],
+   "unique_name": "ARMOR_LEATHER_UNDEAD"
+  },
+  "ARMOR_PLATE_AVALON": {
+   "capabilities": {
+    "anti_dive": 2,
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Armor of Valor",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.2
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.1
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.2
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.2
+    }
+   },
+   "evidence": {
+    "anti_dive": [
+     "REFLECT_CHANNEL"
+    ],
+    "tankiness": [
+     "REFLECT_CHANNEL"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "REFLECT_CHANNEL"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "anti_dive": 2,
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "armor",
+   "stats": {
+    "bonusccdurationvsplayers": 0.5,
+    "crowdcontrolresistance": 50,
+    "hitpointsregenerationbonus": 1.5,
+    "magicresistance": 126,
+    "physicalarmor": 161
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_MR_AR",
+    "PASSIVE_ARMOR_CCDURATION",
+    "PASSIVE_ARMOR_INCREASED_CCR",
+    "PASSIVE_PLATEARMOR_HEALTH_REDUCTION",
+    "PASSIVE_PLATEARMOR_THREATGENERATION"
+   ],
+   "unique_name": "ARMOR_PLATE_AVALON"
   },
   "ARMOR_PLATE_FEY": {
    "capabilities": {
@@ -1266,6 +2410,182 @@
    ],
    "unique_name": "ARMOR_PLATE_KEEPER"
   },
+  "ARMOR_PLATE_ROYAL": {
+   "capabilities": {
+    "buff_allies": 3
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Royal Armor",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.2
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.1
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.2
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.2
+    }
+   },
+   "evidence": {
+    "buff_allies": [
+     "MANADRAIN"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "MANADRAIN"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "buff_allies": 3
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "armor",
+   "stats": {
+    "bonusccdurationvsplayers": 0.45,
+    "crowdcontrolresistance": 45,
+    "energyregenerationbonus": 0.02,
+    "healbonus": 0.05,
+    "hitpointsregenerationbonus": 1.5,
+    "magicattackdamagebonus": 0.05,
+    "magicresistance": 119,
+    "magicspelldamagebonus": 0.05,
+    "physicalarmor": 152,
+    "physicalattackdamagebonus": 0.05,
+    "physicalspelldamagebonus": 0.05
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_MR_AR",
+    "PASSIVE_ARMOR_CCDURATION",
+    "PASSIVE_ARMOR_INCREASED_CCR",
+    "PASSIVE_PLATEARMOR_HEALTH_REDUCTION",
+    "PASSIVE_PLATEARMOR_THREATGENERATION"
+   ],
+   "unique_name": "ARMOR_PLATE_ROYAL"
+  },
+  "ARMOR_PLATE_SET1": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Soldier Armor",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.2
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.1
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.2
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.2
+    }
+   },
+   "evidence": {
+    "sustained_dps": [
+     "ENRAGE"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "ENRAGE"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "armor",
+   "stats": {
+    "bonusccdurationvsplayers": 0.4,
+    "crowdcontrolresistance": 40,
+    "energyregenerationbonus": 0.04,
+    "healbonus": 0.1,
+    "hitpointsregenerationbonus": 1.5,
+    "magicattackdamagebonus": 0.1,
+    "magicresistance": 112,
+    "magicspelldamagebonus": 0.1,
+    "physicalarmor": 143,
+    "physicalattackdamagebonus": 0.1,
+    "physicalspelldamagebonus": 0.1
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_MR_AR",
+    "PASSIVE_ARMOR_CCDURATION",
+    "PASSIVE_ARMOR_INCREASED_CCR",
+    "PASSIVE_PLATEARMOR_HEALTH_REDUCTION",
+    "PASSIVE_PLATEARMOR_THREATGENERATION"
+   ],
+   "unique_name": "ARMOR_PLATE_SET1"
+  },
   "ARMOR_PLATE_SET2": {
    "cap_delivery": {
     "anti_dive": {
@@ -1465,6 +2785,318 @@
    ],
    "unique_name": "ARMOR_PLATE_SET3"
   },
+  "ARMOR_PLATE_UNDEAD": {
+   "capabilities": {
+    "catch": 2,
+    "clump_create": 3
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Graveguard Armor",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_ARMOR_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.2
+    },
+    "frontline": {
+     "id": "PASSIVE_ARMOR_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.1
+    },
+    "healer": {
+     "id": "PASSIVE_ARMOR_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.2
+    },
+    "support": {
+     "id": "PASSIVE_ARMOR_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.2
+    }
+   },
+   "evidence": {
+    "catch": [
+     "ARMORCHAIN"
+    ],
+    "clump_create": [
+     "ARMORCHAIN"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "ARMORCHAIN"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "catch": 2,
+       "clump_create": 3
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "armor",
+   "stats": {
+    "bonusccdurationvsplayers": 0.4,
+    "crowdcontrolresistance": 40,
+    "energyregenerationbonus": 0.04,
+    "healbonus": 0.1,
+    "hitpointsregenerationbonus": 1.5,
+    "magicattackdamagebonus": 0.1,
+    "magicresistance": 112,
+    "magicspelldamagebonus": 0.1,
+    "physicalarmor": 143,
+    "physicalattackdamagebonus": 0.1,
+    "physicalspelldamagebonus": 0.1
+   },
+   "tree_passives": [
+    "PASSIVE_ARMOR_MR_AR",
+    "PASSIVE_ARMOR_CCDURATION",
+    "PASSIVE_ARMOR_INCREASED_CCR",
+    "PASSIVE_PLATEARMOR_HEALTH_REDUCTION",
+    "PASSIVE_PLATEARMOR_THREATGENERATION"
+   ],
+   "unique_name": "ARMOR_PLATE_UNDEAD"
+  },
+  "CAPEITEM_AVALON": {
+   "cap_delivery": {
+    "damage_debuff": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "PASSIVE_CAPE_AVALON"
+    }
+   },
+   "capabilities": {
+    "damage_debuff": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Avalonian Cape",
+   "evidence": {
+    "damage_debuff": [
+     "PASSIVE_CAPE_AVALON"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "PASSIVE_CAPE_AVALON"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "damage_debuff": 2
+      }
+     ]
+    ]
+   },
+   "slot": "cape",
+   "stats": {},
+   "unique_name": "CAPEITEM_AVALON"
+  },
+  "CAPEITEM_DEMON": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "PASSIVE_CAPE_DEMON"
+    }
+   },
+   "capabilities": {
+    "burst_aoe": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Demon Cape",
+   "evidence": {
+    "burst_aoe": [
+     "PASSIVE_CAPE_DEMON"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "PASSIVE_CAPE_DEMON"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "burst_aoe": 2
+      }
+     ]
+    ]
+   },
+   "slot": "cape",
+   "stats": {},
+   "unique_name": "CAPEITEM_DEMON"
+  },
+  "CAPEITEM_FW_BRECILIEN": {
+   "capabilities": {
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Brecilien Cape",
+   "evidence": {
+    "tankiness": [
+     "PASSIVE_CAPE_FEY"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "PASSIVE_CAPE_FEY"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "slot": "cape",
+   "stats": {},
+   "unique_name": "CAPEITEM_FW_BRECILIEN"
+  },
+  "CAPEITEM_FW_BRIDGEWATCH": {
+   "capabilities": {
+    "slow": 2,
+    "zone_control": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Bridgewatch Cape",
+   "evidence": {
+    "slow": [
+     "PASSIVE_CAPE_BRIDGEWATCH"
+    ],
+    "zone_control": [
+     "PASSIVE_CAPE_BRIDGEWATCH"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "PASSIVE_CAPE_BRIDGEWATCH"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "slow": 2,
+       "zone_control": 2
+      }
+     ]
+    ]
+   },
+   "slot": "cape",
+   "stats": {},
+   "unique_name": "CAPEITEM_FW_BRIDGEWATCH"
+  },
+  "CAPEITEM_FW_CAERLEON": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Caerleon Cape",
+   "evidence": {
+    "sustained_dps": [
+     "PASSIVE_CAPE_CAERLEON"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "PASSIVE_CAPE_CAERLEON"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "slot": "cape",
+   "stats": {},
+   "unique_name": "CAPEITEM_FW_CAERLEON"
+  },
+  "CAPEITEM_FW_FORTSTERLING": {
+   "capabilities": {
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Fort Sterling Cape",
+   "evidence": {
+    "tankiness": [
+     "PASSIVE_CAPE_FORTSTERLING"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "PASSIVE_CAPE_FORTSTERLING"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "slot": "cape",
+   "stats": {},
+   "unique_name": "CAPEITEM_FW_FORTSTERLING"
+  },
   "CAPEITEM_FW_LYMHURST": {
    "capabilities": {},
    "curated_as_of": "2026-08-25",
@@ -1479,6 +3111,171 @@
    "slot": "cape",
    "stats": {},
    "unique_name": "CAPEITEM_FW_LYMHURST"
+  },
+  "CAPEITEM_FW_MARTLOCK": {
+   "capabilities": {
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Martlock Cape",
+   "evidence": {
+    "tankiness": [
+     "PASSIVE_CAPE_MARTLOCK"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "PASSIVE_CAPE_MARTLOCK"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "slot": "cape",
+   "stats": {},
+   "unique_name": "CAPEITEM_FW_MARTLOCK"
+  },
+  "CAPEITEM_FW_THETFORD": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Thetford Cape",
+   "evidence": {
+    "sustained_dps": [
+     "PASSIVE_CAPE_THETFORD"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "PASSIVE_CAPE_THETFORD"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "slot": "cape",
+   "stats": {},
+   "unique_name": "CAPEITEM_FW_THETFORD"
+  },
+  "CAPEITEM_HERETIC": {
+   "capabilities": {
+    "root": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Heretic Cape",
+   "evidence": {
+    "root": [
+     "PASSIVE_CAPE_HERETIC"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "PASSIVE_CAPE_HERETIC"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "root": 2
+      }
+     ]
+    ]
+   },
+   "slot": "cape",
+   "stats": {},
+   "unique_name": "CAPEITEM_HERETIC"
+  },
+  "CAPEITEM_KEEPER": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Keeper Cape",
+   "evidence": {
+    "sustained_dps": [
+     "PASSIVE_CAPE_KEEPER"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "PASSIVE_CAPE_KEEPER"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "slot": "cape",
+   "stats": {},
+   "unique_name": "CAPEITEM_KEEPER"
+  },
+  "CAPEITEM_MORGANA": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Morgana Cape",
+   "evidence": {
+    "sustained_dps": [
+     "PASSIVE_CAPE_MORGANA"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "PASSIVE_CAPE_MORGANA"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "slot": "cape",
+   "stats": {},
+   "unique_name": "CAPEITEM_MORGANA"
   },
   "CAPEITEM_SMUGGLER": {
    "capabilities": {
@@ -1502,6 +3299,272 @@
    "slot": "cape",
    "stats": {},
    "unique_name": "CAPEITEM_SMUGGLER"
+  },
+  "CAPEITEM_UNDEAD": {
+   "capabilities": {
+    "disengage": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Undead Cape",
+   "evidence": {
+    "disengage": [
+     "PASSIVE_CAPE_UNDEAD"
+    ]
+   },
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "passive"
+    ],
+    "slot_spells": [
+     [
+      "PASSIVE_CAPE_UNDEAD"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "disengage": 2
+      }
+     ]
+    ]
+   },
+   "slot": "cape",
+   "stats": {},
+   "unique_name": "CAPEITEM_UNDEAD"
+  },
+  "HEAD_CLOTH_AVALON": {
+   "cap_delivery": {
+    "interrupt": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 1.0,
+     "spell": "AVALON_BEAM"
+    }
+   },
+   "capabilities": {
+    "interrupt": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Cowl of Purity",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "interrupt": [
+     "AVALON_BEAM"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "AVALON_BEAM"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "interrupt": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "HEAD_CLOTH_AVALON"
+  },
+  "HEAD_CLOTH_FEY": {
+   "capabilities": {
+    "sustained_dps": 2,
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Feyscale Hat",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "sustained_dps": [
+     "HYPER_FOCUS"
+    ],
+    "tankiness": [
+     "HYPER_FOCUS"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "HYPER_FOCUS"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "sustained_dps": 2,
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "HEAD_CLOTH_FEY"
+  },
+  "HEAD_CLOTH_HELL": {
+   "capabilities": {
+    "purge": 3
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Fiend Cowl",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "purge": [
+     "PURGE_HELMET"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "PURGE_HELMET"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "purge": 3
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "HEAD_CLOTH_HELL"
   },
   "HEAD_CLOTH_KEEPER": {
    "cap_delivery": {
@@ -1582,6 +3645,225 @@
     "PASSIVE_REDUCED_ENERGYCOST"
    ],
    "unique_name": "HEAD_CLOTH_KEEPER"
+  },
+  "HEAD_CLOTH_MORGANA": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Cultist Cowl",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "sustained_dps": [
+     "INNER_CORRUPTION"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "INNER_CORRUPTION"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "HEAD_CLOTH_MORGANA"
+  },
+  "HEAD_CLOTH_ROYAL": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Royal Cowl",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "sustained_dps": [
+     "PERPETUALENERGY"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "PERPETUALENERGY"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "HEAD_CLOTH_ROYAL"
+  },
+  "HEAD_CLOTH_SET1": {
+   "capabilities": {
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Scholar Cowl",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "tankiness": [
+     "ENERGYSHIELD2"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "ENERGYSHIELD2"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "HEAD_CLOTH_SET1"
   },
   "HEAD_CLOTH_SET2": {
    "cap_delivery": {
@@ -1696,6 +3978,169 @@
     "PASSIVE_REDUCED_ENERGYCOST"
    ],
    "unique_name": "HEAD_CLOTH_SET2"
+  },
+  "HEAD_CLOTH_SET3": {
+   "cap_delivery": {
+    "burst_aoe": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "HELMET_FIREBREATH"
+    }
+   },
+   "capabilities": {
+    "burst_aoe": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Mage Cowl",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "burst_aoe": [
+     "HELMET_FIREBREATH"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "HELMET_FIREBREATH"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "burst_aoe": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "HEAD_CLOTH_SET3"
+  },
+  "HEAD_LEATHER_AVALON": {
+   "cap_delivery": {
+    "heal_reduction": {
+     "escalation": {
+      "value": 0.08
+     },
+     "radius": 5.0,
+     "spell": "NASTY_WOUNDS"
+    }
+   },
+   "capabilities": {
+    "heal_reduction": 3
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Hood of Tenacity",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "frontline": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "healer": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "support": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    }
+   },
+   "evidence": {
+    "heal_reduction": [
+     "NASTY_WOUNDS"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "NASTY_WOUNDS"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "heal_reduction": 3
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
+   "unique_name": "HEAD_LEATHER_AVALON"
   },
   "HEAD_LEATHER_FEY": {
    "capabilities": {
@@ -1870,6 +4315,343 @@
    ],
    "unique_name": "HEAD_LEATHER_HELL"
   },
+  "HEAD_LEATHER_MORGANA": {
+   "cap_delivery": {
+    "resist_shred": {
+     "radius": 6.0,
+     "spell": "SMELLOFBLOOD"
+    },
+    "sustained_dps": {
+     "radius": 6.0,
+     "spell": "SMELLOFBLOOD"
+    }
+   },
+   "capabilities": {
+    "resist_shred": 2,
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Stalker Hood",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "frontline": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "healer": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "support": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    }
+   },
+   "evidence": {
+    "resist_shred": [
+     "SMELLOFBLOOD"
+    ],
+    "sustained_dps": [
+     "SMELLOFBLOOD"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "SMELLOFBLOOD"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "resist_shred": 2,
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
+   "unique_name": "HEAD_LEATHER_MORGANA"
+  },
+  "HEAD_LEATHER_ROYAL": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Royal Hood",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "frontline": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "healer": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "support": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    }
+   },
+   "evidence": {
+    "sustained_dps": [
+     "GROWING_RAGE"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "GROWING_RAGE"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
+   "unique_name": "HEAD_LEATHER_ROYAL"
+  },
+  "HEAD_LEATHER_SET1": {
+   "cap_delivery": {
+    "damage_debuff": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "HOWL"
+    },
+    "interrupt": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "HOWL"
+    },
+    "slow": {
+     "escalation": {
+      "value": 0.08
+     },
+     "spell": "HOWL"
+    }
+   },
+   "capabilities": {
+    "damage_debuff": 2,
+    "interrupt": 2,
+    "slow": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Mercenary Hood",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "frontline": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "healer": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "support": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    }
+   },
+   "evidence": {
+    "damage_debuff": [
+     "HOWL"
+    ],
+    "interrupt": [
+     "HOWL"
+    ],
+    "slow": [
+     "HOWL"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "HOWL"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "damage_debuff": 2,
+       "interrupt": 2,
+       "slow": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
+   "unique_name": "HEAD_LEATHER_SET1"
+  },
+  "HEAD_LEATHER_SET2": {
+   "capabilities": {
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Hunter Hood",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "frontline": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "healer": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "support": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    }
+   },
+   "evidence": {
+    "tankiness": [
+     "RETALIATE2"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "RETALIATE2"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
+   "unique_name": "HEAD_LEATHER_SET2"
+  },
   "HEAD_LEATHER_SET3": {
    "capabilities": {
     "sustained_dps": 2
@@ -1942,6 +4724,342 @@
     "PASSIVE_CD_REDUCTION"
    ],
    "unique_name": "HEAD_LEATHER_SET3"
+  },
+  "HEAD_LEATHER_UNDEAD": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Specter Hood",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "frontline": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "healer": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "support": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    }
+   },
+   "evidence": {
+    "sustained_dps": [
+     "ARMOR_CD_RESET"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "ARMOR_CD_RESET"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
+   "unique_name": "HEAD_LEATHER_UNDEAD"
+  },
+  "HEAD_PLATE_AVALON": {
+   "cap_delivery": {
+    "cleanse": {
+     "radius": 4.0,
+     "spell": "PURIFYING_SMOKE"
+    },
+    "purge": {
+     "radius": 4.0,
+     "spell": "PURIFYING_SMOKE"
+    }
+   },
+   "capabilities": {
+    "cleanse": 3,
+    "purge": 3
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Helmet of Valor",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "frontline": {
+     "id": "PASSIVE_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    }
+   },
+   "evidence": {
+    "cleanse": [
+     "PURIFYING_SMOKE"
+    ],
+    "purge": [
+     "PURIFYING_SMOKE"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "PURIFYING_SMOKE"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "cleanse": 3,
+       "purge": 3
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
+   "unique_name": "HEAD_PLATE_AVALON"
+  },
+  "HEAD_PLATE_FEY": {
+   "cap_delivery": {
+    "catch": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "SPIDER_THREAD"
+    },
+    "slow": {
+     "max_targets": 1,
+     "radius": 2.0,
+     "spell": "SPIDER_THREAD"
+    }
+   },
+   "capabilities": {
+    "catch": 2,
+    "slow": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Duskweaver Helmet",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "frontline": {
+     "id": "PASSIVE_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    }
+   },
+   "evidence": {
+    "catch": [
+     "SPIDER_THREAD"
+    ],
+    "slow": [
+     "SPIDER_THREAD"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "SPIDER_THREAD"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "catch": 2,
+       "slow": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
+   "unique_name": "HEAD_PLATE_FEY"
+  },
+  "HEAD_PLATE_HELL": {
+   "cap_delivery": {
+    "silence": {
+     "escalation": {
+      "duration": 0.08
+     },
+     "radius": 4.0,
+     "spell": "WEAPON_SILENCE"
+    }
+   },
+   "capabilities": {
+    "silence": 3
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Demon Helmet",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "frontline": {
+     "id": "PASSIVE_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    }
+   },
+   "evidence": {
+    "silence": [
+     "WEAPON_SILENCE"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "WEAPON_SILENCE"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "silence": 3
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
+   "unique_name": "HEAD_PLATE_HELL"
   },
   "HEAD_PLATE_KEEPER": {
    "cap_delivery": {
@@ -2045,6 +5163,164 @@
     "PASSIVE_INCREASED_CCR"
    ],
    "unique_name": "HEAD_PLATE_KEEPER"
+  },
+  "HEAD_PLATE_ROYAL": {
+   "cap_delivery": {
+    "stun": {
+     "escalation": {
+      "duration": 0.08,
+      "value": 0.08
+     },
+     "radius": 3.0,
+     "spell": "ARTILLERY_COMMAND"
+    }
+   },
+   "capabilities": {
+    "stun": 3
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Royal Helmet",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "frontline": {
+     "id": "PASSIVE_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    }
+   },
+   "evidence": {
+    "stun": [
+     "ARTILLERY_COMMAND"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "ARTILLERY_COMMAND"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "stun": 3
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
+   "unique_name": "HEAD_PLATE_ROYAL"
+  },
+  "HEAD_PLATE_SET1": {
+   "capabilities": {
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Soldier Helmet",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "frontline": {
+     "id": "PASSIVE_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    }
+   },
+   "evidence": {
+    "tankiness": [
+     "BLOCK"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "BLOCK"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
+   "unique_name": "HEAD_PLATE_SET1"
   },
   "HEAD_PLATE_SET2": {
    "cap_delivery": {
@@ -2235,6 +5511,80 @@
     "PASSIVE_INCREASED_CCR"
    ],
    "unique_name": "HEAD_PLATE_SET3"
+  },
+  "HEAD_PLATE_UNDEAD": {
+   "capabilities": {
+    "heal_burst": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Graveguard Helmet",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "frontline": {
+     "id": "PASSIVE_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    }
+   },
+   "evidence": {
+    "heal_burst": [
+     "SACRIFICE_HEAL"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "SACRIFICE_HEAL"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "heal_burst": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "head",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
+   "unique_name": "HEAD_PLATE_UNDEAD"
   },
   "OFF_BOOK": {
    "capabilities": {},
@@ -2743,6 +6093,821 @@
    "tree_passives": [],
    "unique_name": "OFF_TOWERSHIELD_UNDEAD"
   },
+  "SHOES_CLOTH_AVALON": {
+   "capabilities": {
+    "disengage": 2,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Sandals of Purity",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "disengage": [
+     "HOVER_SPRINT"
+    ],
+    "mobility": [
+     "HOVER_SPRINT"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "HOVER_SPRINT"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "disengage": 2,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "SHOES_CLOTH_AVALON"
+  },
+  "SHOES_CLOTH_FEY": {
+   "capabilities": {
+    "disengage": 3,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Feyscale Sandals",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "disengage": [
+     "TRANSLUCENT"
+    ],
+    "mobility": [
+     "TRANSLUCENT"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "TRANSLUCENT"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "disengage": 3,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "SHOES_CLOTH_FEY"
+  },
+  "SHOES_CLOTH_HELL": {
+   "capabilities": {
+    "disengage": 2,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Fiend Sandals",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "disengage": [
+     "SWAP"
+    ],
+    "mobility": [
+     "SWAP"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "SWAP"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "disengage": 2,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "SHOES_CLOTH_HELL"
+  },
+  "SHOES_CLOTH_KEEPER": {
+   "capabilities": {
+    "mobility": 2,
+    "slow": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Druid Sandals",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "mobility": [
+     "FROSTWALK"
+    ],
+    "slow": [
+     "FROSTWALK"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "FROSTWALK"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "mobility": 2,
+       "slow": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "SHOES_CLOTH_KEEPER"
+  },
+  "SHOES_CLOTH_MORGANA": {
+   "capabilities": {
+    "heal_reduction": 2,
+    "mobility": 2,
+    "resist_shred": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Cultist Sandals",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "heal_reduction": [
+     "DEMONWALK"
+    ],
+    "mobility": [
+     "DEMONWALK"
+    ],
+    "resist_shred": [
+     "DEMONWALK"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "DEMONWALK"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "heal_reduction": 2,
+       "mobility": 2,
+       "resist_shred": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "SHOES_CLOTH_MORGANA"
+  },
+  "SHOES_CLOTH_ROYAL": {
+   "capabilities": {
+    "mobility": 2,
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Royal Sandals",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "mobility": [
+     "GLASS_MOVESPEED"
+    ],
+    "sustained_dps": [
+     "GLASS_MOVESPEED"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "GLASS_MOVESPEED"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "mobility": 2,
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "SHOES_CLOTH_ROYAL"
+  },
+  "SHOES_CLOTH_SET1": {
+   "capabilities": {
+    "disengage": 2,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Scholar Sandals",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "disengage": [
+     "CHANNELED_RUN"
+    ],
+    "mobility": [
+     "CHANNELED_RUN"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "CHANNELED_RUN"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "disengage": 2,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "SHOES_CLOTH_SET1"
+  },
+  "SHOES_CLOTH_SET2": {
+   "cap_delivery": {
+    "disengage": {
+     "radius": 1.0,
+     "spell": "BLINK"
+    },
+    "mobility": {
+     "radius": 1.0,
+     "spell": "BLINK"
+    }
+   },
+   "capabilities": {
+    "disengage": 3,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Cleric Sandals",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "disengage": [
+     "BLINK"
+    ],
+    "mobility": [
+     "BLINK"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "BLINK"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "disengage": 3,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "SHOES_CLOTH_SET2"
+  },
+  "SHOES_CLOTH_SET3": {
+   "cap_delivery": {
+    "disengage": {
+     "radius": 1.0,
+     "spell": "DELAYED_TELEPORT"
+    },
+    "mobility": {
+     "radius": 1.0,
+     "spell": "DELAYED_TELEPORT"
+    }
+   },
+   "capabilities": {
+    "disengage": 2,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Mage Sandals",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "frontline": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_DAMAGE",
+     "name": "Aggression",
+     "stat": "damage_heal_pct",
+     "value": 0.035
+    }
+   },
+   "evidence": {
+    "disengage": [
+     "DELAYED_TELEPORT"
+    ],
+    "mobility": [
+     "DELAYED_TELEPORT"
+    ]
+   },
+   "gear_class": "cloth",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "DELAYED_TELEPORT"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "disengage": 2,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "kite_healer",
+    "main_healer",
+    "ranged_aoe",
+    "shield_support",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_INCREASED_DAMAGE",
+    "PASSIVE_CASTSPEED",
+    "PASSIVE_REDUCED_ENERGYCOST"
+   ],
+   "unique_name": "SHOES_CLOTH_SET3"
+  },
+  "SHOES_LEATHER_AVALON": {
+   "capabilities": {
+    "burst_st": 2,
+    "engage": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Shoes of Tenacity",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "frontline": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "healer": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "support": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    }
+   },
+   "evidence": {
+    "burst_st": [
+     "BLINDSPOT"
+    ],
+    "engage": [
+     "BLINDSPOT"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "BLINDSPOT"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "burst_st": 2,
+       "engage": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
+   "unique_name": "SHOES_LEATHER_AVALON"
+  },
   "SHOES_LEATHER_FEY": {
    "cap_delivery": {
     "disengage": {
@@ -2831,6 +6996,85 @@
     "PASSIVE_CD_REDUCTION"
    ],
    "unique_name": "SHOES_LEATHER_FEY"
+  },
+  "SHOES_LEATHER_HELL": {
+   "capabilities": {
+    "engage": 3,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Hellion Shoes",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "frontline": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "healer": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "support": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    }
+   },
+   "evidence": {
+    "engage": [
+     "DEATHMARK"
+    ],
+    "mobility": [
+     "DEATHMARK"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "DEATHMARK"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "engage": 3,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
+   "unique_name": "SHOES_LEATHER_HELL"
   },
   "SHOES_LEATHER_MORGANA": {
    "capabilities": {
@@ -3084,6 +7328,323 @@
    ],
    "unique_name": "SHOES_LEATHER_SET1"
   },
+  "SHOES_LEATHER_SET2": {
+   "capabilities": {
+    "catch": 2,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Hunter Shoes",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "frontline": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "healer": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "support": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    }
+   },
+   "evidence": {
+    "catch": [
+     "OVERSPRINT"
+    ],
+    "mobility": [
+     "OVERSPRINT"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "OVERSPRINT"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "catch": 2,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
+   "unique_name": "SHOES_LEATHER_SET2"
+  },
+  "SHOES_LEATHER_SET3": {
+   "capabilities": {
+    "engage": 2,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Assassin Shoes",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "frontline": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "healer": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "support": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    }
+   },
+   "evidence": {
+    "engage": [
+     "ASSASSIN_DASH"
+    ],
+    "mobility": [
+     "ASSASSIN_DASH"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "ASSASSIN_DASH"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "engage": 2,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
+   "unique_name": "SHOES_LEATHER_SET3"
+  },
+  "SHOES_LEATHER_UNDEAD": {
+   "capabilities": {
+    "disengage": 2,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Specter Shoes",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "frontline": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "healer": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    },
+    "support": {
+     "id": "PASSIVE_CD_REDUCTION",
+     "name": "Quick Thinker",
+     "stat": null,
+     "value": 0.025
+    }
+   },
+   "evidence": {
+    "disengage": [
+     "INVISIBLE_WALK"
+    ],
+    "mobility": [
+     "INVISIBLE_WALK"
+    ]
+   },
+   "gear_class": "leather",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "INVISIBLE_WALK"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "disengage": 2,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "bomb_aoe",
+    "brawl_healer",
+    "dive_cleanup",
+    "off_tank",
+    "ranged_aoe",
+    "sustained_brawler"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_BALANCE",
+    "PASSIVE_INCREASED_AASPEED",
+    "PASSIVE_CD_REDUCTION"
+   ],
+   "unique_name": "SHOES_LEATHER_UNDEAD"
+  },
+  "SHOES_PLATE_AVALON": {
+   "capabilities": {
+    "disengage": 2,
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Boots of Valor",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "frontline": {
+     "id": "PASSIVE_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    }
+   },
+   "evidence": {
+    "disengage": [
+     "CC_BLOCK"
+    ],
+    "tankiness": [
+     "CC_BLOCK"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "CC_BLOCK"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "disengage": 2,
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
+   "unique_name": "SHOES_PLATE_AVALON"
+  },
   "SHOES_PLATE_FEY": {
    "cap_delivery": {
     "engage": {
@@ -3189,6 +7750,256 @@
    ],
    "unique_name": "SHOES_PLATE_FEY"
   },
+  "SHOES_PLATE_HELL": {
+   "capabilities": {
+    "mobility": 2,
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Demon Boots",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "frontline": {
+     "id": "PASSIVE_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    }
+   },
+   "evidence": {
+    "mobility": [
+     "BERSERK_SPRINT"
+    ],
+    "sustained_dps": [
+     "BERSERK_SPRINT"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "BERSERK_SPRINT"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "mobility": 2,
+       "sustained_dps": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
+   "unique_name": "SHOES_PLATE_HELL"
+  },
+  "SHOES_PLATE_KEEPER": {
+   "cap_delivery": {
+    "engage": {
+     "radius": 5.0,
+     "spell": "SHOULDERTACKLE"
+    },
+    "knockback_displace": {
+     "radius": 5.0,
+     "spell": "SHOULDERTACKLE"
+    }
+   },
+   "capabilities": {
+    "engage": 3,
+    "knockback_displace": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Judicator Boots",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "frontline": {
+     "id": "PASSIVE_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    }
+   },
+   "evidence": {
+    "engage": [
+     "SHOULDERTACKLE"
+    ],
+    "knockback_displace": [
+     "SHOULDERTACKLE"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "SHOULDERTACKLE"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "engage": 3,
+       "knockback_displace": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
+   "unique_name": "SHOES_PLATE_KEEPER"
+  },
+  "SHOES_PLATE_ROYAL": {
+   "capabilities": {
+    "engage": 2,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Royal Boots",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "frontline": {
+     "id": "PASSIVE_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    }
+   },
+   "evidence": {
+    "engage": [
+     "ROYAL_MARCH"
+    ],
+    "mobility": [
+     "ROYAL_MARCH"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "ROYAL_MARCH"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "engage": 2,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
+   "unique_name": "SHOES_PLATE_ROYAL"
+  },
   "SHOES_PLATE_SET1": {
    "capabilities": {
     "mobility": 2,
@@ -3269,6 +8080,269 @@
    ],
    "unique_name": "SHOES_PLATE_SET1"
   },
+  "SHOES_PLATE_SET2": {
+   "capabilities": {
+    "engage": 2,
+    "peel": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Knight Boots",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "frontline": {
+     "id": "PASSIVE_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    }
+   },
+   "evidence": {
+    "engage": [
+     "CHARGE_SHIELD"
+    ],
+    "peel": [
+     "CHARGE_SHIELD"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "CHARGE_SHIELD"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "engage": 2,
+       "peel": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
+   "unique_name": "SHOES_PLATE_SET2"
+  },
+  "SHOES_PLATE_SET3": {
+   "capabilities": {
+    "mobility": 2,
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Guardian Boots",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "frontline": {
+     "id": "PASSIVE_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    }
+   },
+   "evidence": {
+    "mobility": [
+     "MAXHEALTHBUFF"
+    ],
+    "tankiness": [
+     "MAXHEALTHBUFF"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "MAXHEALTHBUFF"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "mobility": 2,
+       "tankiness": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
+   "unique_name": "SHOES_PLATE_SET3"
+  },
+  "SHOES_PLATE_UNDEAD": {
+   "capabilities": {
+    "disengage": 2,
+    "mobility": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Graveguard Boots",
+   "doctrine_passives": {
+    "dps": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "frontline": {
+     "id": "PASSIVE_CCDURATION",
+     "name": "Authority",
+     "stat": "cc_duration_pct",
+     "value": 0.05
+    },
+    "healer": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    },
+    "support": {
+     "id": "PASSIVE_INCREASED_CCR",
+     "name": "Tenacity",
+     "stat": "ccr_pct",
+     "value": 0.1
+    }
+   },
+   "evidence": {
+    "disengage": [
+     "BATTLEFRENZY"
+    ],
+    "mobility": [
+     "BATTLEFRENZY"
+    ]
+   },
+   "gear_class": "plate",
+   "loadout": {
+    "always": {},
+    "slot_names": [
+     "active"
+    ],
+    "slot_spells": [
+     [
+      "BATTLEFRENZY"
+     ]
+    ],
+    "slots": [
+     [
+      {
+       "disengage": 2,
+       "mobility": 2
+      }
+     ]
+    ]
+   },
+   "role_affinity": [
+    "brawl_healer",
+    "engage_tank",
+    "off_tank",
+    "shield_support",
+    "stopper_tank",
+    "sustained_brawler",
+    "zone_support"
+   ],
+   "slot": "shoes",
+   "stats": {},
+   "tree_passives": [
+    "PASSIVE_MAXLOAD_SHOES",
+    "PASSIVE_MR_AR",
+    "PASSIVE_CCDURATION",
+    "PASSIVE_INCREASED_CCR"
+   ],
+   "unique_name": "SHOES_PLATE_UNDEAD"
+  },
+  "T6_POTION_ENERGY": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Energy Potion",
+   "evidence": {
+    "sustained_dps": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "potion",
+   "stats": {},
+   "unique_name": "T6_POTION_ENERGY"
+  },
   "T6_POTION_HEAL": {
    "capabilities": {
     "self_sustain": 2
@@ -3337,6 +8411,52 @@
    "slot": "food",
    "stats": {},
    "unique_name": "T7_MEAL_OMELETTE_AVALON"
+  },
+  "T7_POTION_ACID": {
+   "capabilities": {
+    "resist_shred": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Acid Potion",
+   "evidence": {
+    "resist_shred": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "resist_shred": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "potion",
+   "stats": {},
+   "unique_name": "T7_POTION_ACID"
+  },
+  "T7_POTION_CLEANSE2": {
+   "capabilities": {
+    "tankiness": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Cleansing Potion",
+   "evidence": {
+    "tankiness": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "tankiness": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "potion",
+   "stats": {},
+   "unique_name": "T7_POTION_CLEANSE2"
   },
   "T7_POTION_REVIVE": {
    "capabilities": {
@@ -3452,6 +8572,121 @@
    "slot": "food",
    "stats": {},
    "unique_name": "T8_MEAL_STEW"
+  },
+  "T8_POTION_BERSERK": {
+   "capabilities": {
+    "sustained_dps": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Berserk Potion",
+   "evidence": {
+    "sustained_dps": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "sustained_dps": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "potion",
+   "stats": {},
+   "unique_name": "T8_POTION_BERSERK"
+  },
+  "T8_POTION_CLEANSE": {
+   "capabilities": {
+    "disengage": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Invisibility Potion",
+   "evidence": {
+    "disengage": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "disengage": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "potion",
+   "stats": {},
+   "unique_name": "T8_POTION_CLEANSE"
+  },
+  "T8_POTION_COOLDOWN": {
+   "capabilities": {
+    "heal_reduction": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Poison Potion",
+   "evidence": {
+    "heal_reduction": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "heal_reduction": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "potion",
+   "stats": {},
+   "unique_name": "T8_POTION_COOLDOWN"
+  },
+  "T8_POTION_LAVA": {
+   "capabilities": {
+    "burst_aoe": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Hellfire Potion",
+   "evidence": {
+    "burst_aoe": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "burst_aoe": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "potion",
+   "stats": {},
+   "unique_name": "T8_POTION_LAVA"
+  },
+  "T8_POTION_TORNADO": {
+   "capabilities": {
+    "knockback_displace": 2
+   },
+   "curated_as_of": "2026-08-27",
+   "display_name": "Tornado in a Bottle",
+   "evidence": {
+    "knockback_displace": [
+     "GEAR_STATS"
+    ]
+   },
+   "loadout": {
+    "always": {
+     "knockback_displace": 2
+    },
+    "slot_names": [],
+    "slot_spells": [],
+    "slots": []
+   },
+   "slot": "potion",
+   "stats": {},
+   "unique_name": "T8_POTION_TORNADO"
   }
  },
  "gear_effects": [
@@ -33530,11 +38765,16 @@
      "ARMOR_PLATE_KEEPER",
      "ARMOR_PLATE_SET2",
      "ARMOR_PLATE_FEY",
-     "ARMOR_PLATE_HELL"
+     "ARMOR_PLATE_AVALON",
+     "ARMOR_PLATE_HELL",
+     "ARMOR_PLATE_ROYAL",
+     "ARMOR_PLATE_SET1"
     ],
     "cape": [
      "CAPEITEM_SMUGGLER",
-     "CAPEITEM_FW_LYMHURST"
+     "CAPEITEM_FW_LYMHURST",
+     "CAPEITEM_FW_MARTLOCK",
+     "CAPEITEM_MORGANA"
     ],
     "food": [
      "T7_MEAL_OMELETTE_AVALON",
@@ -33547,8 +38787,11 @@
      "HEAD_LEATHER_HELL",
      "HEAD_LEATHER_SET3",
      "HEAD_CLOTH_SET2",
+     "HEAD_PLATE_SET1",
      "HEAD_PLATE_SET2",
-     "HEAD_CLOTH_KEEPER"
+     "HEAD_CLOTH_KEEPER",
+     "HEAD_LEATHER_AVALON",
+     "HEAD_LEATHER_MORGANA"
     ],
     "offhand": [
      "OFF_DEMONSKULL_HELL",
@@ -33559,12 +38802,21 @@
      "OFF_SPIKEDSHIELD_MORGANA"
     ],
     "potion": [
-     "T7_POTION_REVIVE"
+     "T7_POTION_REVIVE",
+     "T8_POTION_TORNADO",
+     "T7_POTION_CLEANSE2",
+     "T8_POTION_LAVA"
     ],
     "shoes": [
+     "SHOES_CLOTH_SET2",
      "SHOES_LEATHER_MORGANA",
+     "SHOES_PLATE_AVALON",
      "SHOES_LEATHER_FEY",
-     "SHOES_LEATHER_ROYAL"
+     "SHOES_CLOTH_HELL",
+     "SHOES_CLOTH_MORGANA",
+     "SHOES_LEATHER_AVALON",
+     "SHOES_LEATHER_ROYAL",
+     "SHOES_LEATHER_SET2"
     ]
    },
    "kit_weapon": {
@@ -33603,6 +38855,10 @@
       [
        "CAPEITEM_SMUGGLER",
        2
+      ],
+      [
+       "CAPEITEM_FW_MARTLOCK",
+       1
       ]
      ],
      "food": [
@@ -33625,11 +38881,23 @@
       [
        "T7_POTION_REVIVE",
        2
+      ],
+      [
+       "T8_POTION_TORNADO",
+       1
       ]
      ],
      "shoes": [
       [
+       "SHOES_CLOTH_SET2",
+       2
+      ],
+      [
        "SHOES_LEATHER_MORGANA",
+       1
+      ],
+      [
+       "SHOES_PLATE_AVALON",
        1
       ]
      ]
@@ -33675,6 +38943,10 @@
       [
        "CAPEITEM_FW_LYMHURST",
        1
+      ],
+      [
+       "CAPEITEM_FW_MARTLOCK",
+       1
       ]
      ],
      "food": [
@@ -33695,15 +38967,35 @@
       [
        "HEAD_LEATHER_HELL",
        1
+      ],
+      [
+       "HEAD_LEATHER_MORGANA",
+       1
       ]
      ],
      "potion": [
       [
        "T7_POTION_REVIVE",
        2
+      ],
+      [
+       "T8_POTION_LAVA",
+       1
+      ],
+      [
+       "T8_POTION_TORNADO",
+       1
       ]
      ],
      "shoes": [
+      [
+       "SHOES_CLOTH_SET2",
+       2
+      ],
+      [
+       "SHOES_CLOTH_HELL",
+       1
+      ],
       [
        "SHOES_LEATHER_ROYAL",
        1
@@ -33711,6 +39003,22 @@
      ]
     },
     "2H_SHAPESHIFTER_KEEPER": {
+     "armor": [
+      [
+       "ARMOR_PLATE_AVALON",
+       1
+      ],
+      [
+       "ARMOR_PLATE_SET1",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_MORGANA",
+       1
+      ]
+     ],
      "food": [
       [
        "T7_MEAL_OMELETTE_AVALON",
@@ -33729,12 +39037,30 @@
       [
        "HEAD_PLATE_KEEPER",
        1
+      ],
+      [
+       "HEAD_PLATE_SET1",
+       1
       ]
      ],
      "potion": [
       [
        "T7_POTION_REVIVE",
        2
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_CLOTH_MORGANA",
+       1
+      ],
+      [
+       "SHOES_CLOTH_SET2",
+       1
+      ],
+      [
+       "SHOES_LEATHER_SET2",
+       1
       ]
      ]
     },
@@ -33769,7 +39095,15 @@
        1
       ],
       [
+       "HEAD_LEATHER_AVALON",
+       1
+      ],
+      [
        "HEAD_LEATHER_SET3",
+       1
+      ],
+      [
+       "HEAD_PLATE_SET1",
        1
       ]
      ],
@@ -33795,6 +39129,10 @@
       [
        "T7_POTION_REVIVE",
        3
+      ],
+      [
+       "T7_POTION_CLEANSE2",
+       1
       ]
      ],
      "shoes": [
@@ -33803,7 +39141,15 @@
        2
       ],
       [
+       "SHOES_LEATHER_AVALON",
+       1
+      ],
+      [
        "SHOES_LEATHER_MORGANA",
+       1
+      ],
+      [
+       "SHOES_PLATE_AVALON",
        1
       ]
      ]
@@ -33818,6 +39164,10 @@
      "cape": [
       [
        "CAPEITEM_FW_LYMHURST",
+       1
+      ],
+      [
+       "CAPEITEM_FW_MARTLOCK",
        1
       ],
       [
@@ -33867,7 +39217,15 @@
      ],
      "shoes": [
       [
+       "SHOES_CLOTH_SET2",
+       1
+      ],
+      [
        "SHOES_LEATHER_MORGANA",
+       1
+      ],
+      [
+       "SHOES_PLATE_AVALON",
        1
       ]
      ]
@@ -33876,6 +39234,10 @@
      "armor": [
       [
        "ARMOR_PLATE_FEY",
+       1
+      ],
+      [
+       "ARMOR_PLATE_ROYAL",
        1
       ]
      ],
@@ -33982,11 +39344,17 @@
      "ARMOR_PLATE_HELL",
      "ARMOR_PLATE_KEEPER",
      "ARMOR_PLATE_FEY",
+     "ARMOR_PLATE_AVALON",
      "ARMOR_PLATE_SET3",
-     "ARMOR_PLATE_SET2"
+     "ARMOR_PLATE_SET2",
+     "ARMOR_PLATE_UNDEAD"
     ],
     "cape": [
-     "CAPEITEM_SMUGGLER"
+     "CAPEITEM_SMUGGLER",
+     "CAPEITEM_FW_MARTLOCK",
+     "CAPEITEM_FW_BRIDGEWATCH",
+     "CAPEITEM_DEMON",
+     "CAPEITEM_FW_CAERLEON"
     ],
     "food": [
      "T7_MEAL_OMELETTE_AVALON",
@@ -33996,7 +39364,9 @@
     "head": [
      "HEAD_LEATHER_SET3",
      "HEAD_LEATHER_HELL",
-     "HEAD_PLATE_KEEPER"
+     "HEAD_PLATE_KEEPER",
+     "HEAD_LEATHER_AVALON",
+     "HEAD_PLATE_AVALON"
     ],
     "offhand": [
      "OFF_SHIELD_AVALON",
@@ -34006,25 +39376,43 @@
     ],
     "potion": [
      "T7_POTION_REVIVE",
+     "T8_POTION_LAVA",
+     "T8_POTION_TORNADO",
      "T7_POTION_SLOWFIELD",
-     "T7_POTION_STONESKIN"
+     "T7_POTION_STONESKIN",
+     "T8_POTION_COOLDOWN"
     ],
     "shoes": [
+     "SHOES_CLOTH_SET2",
      "SHOES_LEATHER_ROYAL",
      "SHOES_LEATHER_MORGANA",
      "SHOES_LEATHER_SET1",
-     "SHOES_PLATE_FEY"
+     "SHOES_PLATE_AVALON",
+     "SHOES_PLATE_FEY",
+     "SHOES_CLOTH_HELL",
+     "SHOES_LEATHER_SET2",
+     "SHOES_PLATE_KEEPER",
+     "SHOES_PLATE_UNDEAD"
     ]
    },
    "kit_weapon": {
     "2H_MACE": {
      "armor": [
       [
+       "ARMOR_PLATE_AVALON",
+       1
+      ],
+      [
        "ARMOR_PLATE_SET2",
        1
       ]
      ],
-     "cape": [],
+     "cape": [
+      [
+       "CAPEITEM_FW_BRIDGEWATCH",
+       2
+      ]
+     ],
      "food": [
       [
        "T7_MEAL_OMELETTE_AVALON",
@@ -34045,6 +39433,10 @@
        2
       ],
       [
+       "HEAD_LEATHER_AVALON",
+       1
+      ],
+      [
        "HEAD_LEATHER_SET3",
        1
       ],
@@ -34060,6 +39452,10 @@
       ],
       [
        "T7_POTION_SLOWFIELD",
+       1
+      ],
+      [
+       "T8_POTION_LAVA",
        1
       ]
      ],
@@ -34083,9 +39479,33 @@
      ]
     },
     "2H_QUARTERSTAFF_AVALON": {
+     "armor": [
+      [
+       "ARMOR_PLATE_UNDEAD",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_DEMON",
+       1
+      ]
+     ],
      "food": [
       [
        "T7_MEAL_OMELETTE",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T8_POTION_COOLDOWN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_SET2",
        1
       ]
      ]
@@ -34095,9 +39515,21 @@
       [
        "ARMOR_PLATE_FEY",
        2
+      ],
+      [
+       "ARMOR_PLATE_AVALON",
+       1
       ]
      ],
      "cape": [
+      [
+       "CAPEITEM_FW_BRIDGEWATCH",
+       1
+      ],
+      [
+       "CAPEITEM_FW_MARTLOCK",
+       1
+      ],
       [
        "CAPEITEM_SMUGGLER",
        1
@@ -34123,17 +39555,34 @@
       [
        "T7_POTION_REVIVE",
        1
+      ],
+      [
+       "T8_POTION_TORNADO",
+       1
       ]
      ],
      "shoes": [
       [
+       "SHOES_CLOTH_SET2",
+       1
+      ],
+      [
        "SHOES_LEATHER_MORGANA",
+       1
+      ],
+      [
+       "SHOES_PLATE_KEEPER",
        1
       ]
      ]
     },
     "2H_SHAPESHIFTER_SET3": {
-     "cape": [],
+     "cape": [
+      [
+       "CAPEITEM_FW_CAERLEON",
+       1
+      ]
+     ],
      "food": [
       [
        "T7_MEAL_OMELETTE",
@@ -34144,9 +39593,23 @@
        1
       ]
      ],
+     "head": [
+      [
+       "HEAD_LEATHER_AVALON",
+       1
+      ],
+      [
+       "HEAD_PLATE_AVALON",
+       1
+      ]
+     ],
      "potion": [
       [
        "T7_POTION_STONESKIN",
+       1
+      ],
+      [
+       "T8_POTION_LAVA",
        1
       ]
      ],
@@ -34154,10 +39617,20 @@
       [
        "SHOES_LEATHER_ROYAL",
        1
+      ],
+      [
+       "SHOES_PLATE_UNDEAD",
+       1
       ]
      ]
     },
     "MAIN_MACE_HELL": {
+     "cape": [
+      [
+       "CAPEITEM_FW_MARTLOCK",
+       1
+      ]
+     ],
      "food": [
       [
        "T7_MEAL_OMELETTE_AVALON",
@@ -34176,6 +39649,12 @@
        "T7_POTION_REVIVE",
        1
       ]
+     ],
+     "shoes": [
+      [
+       "SHOES_CLOTH_SET2",
+       1
+      ]
      ]
     },
     "MAIN_ROCKMACE_KEEPER": {
@@ -34189,6 +39668,10 @@
       [
        "CAPEITEM_SMUGGLER",
        7
+      ],
+      [
+       "CAPEITEM_FW_MARTLOCK",
+       2
       ]
      ],
      "food": [
@@ -34229,9 +39712,29 @@
       [
        "T7_POTION_REVIVE",
        5
+      ],
+      [
+       "T8_POTION_LAVA",
+       1
+      ],
+      [
+       "T8_POTION_TORNADO",
+       1
       ]
      ],
      "shoes": [
+      [
+       "SHOES_CLOTH_SET2",
+       2
+      ],
+      [
+       "SHOES_PLATE_AVALON",
+       2
+      ],
+      [
+       "SHOES_CLOTH_HELL",
+       1
+      ],
       [
        "SHOES_LEATHER_ROYAL",
        1
@@ -34311,7 +39814,10 @@
      "T7_POTION_REVIVE"
     ],
     "shoes": [
-     "SHOES_LEATHER_MORGANA"
+     "SHOES_PLATE_AVALON",
+     "SHOES_CLOTH_SET2",
+     "SHOES_LEATHER_MORGANA",
+     "SHOES_PLATE_SET3"
     ]
    },
    "kit_weapon": {
@@ -34360,7 +39866,19 @@
      ],
      "shoes": [
       [
+       "SHOES_PLATE_AVALON",
+       2
+      ],
+      [
+       "SHOES_CLOTH_SET2",
+       1
+      ],
+      [
        "SHOES_LEATHER_MORGANA",
+       1
+      ],
+      [
+       "SHOES_PLATE_SET3",
        1
       ]
      ]
@@ -34393,11 +39911,13 @@
    "kit": {
     "armor": [
      "ARMOR_CLOTH_AVALON",
-     "ARMOR_CLOTH_FEY"
+     "ARMOR_CLOTH_FEY",
+     "ARMOR_CLOTH_SET2"
     ],
     "cape": [
      "CAPEITEM_FW_LYMHURST",
-     "CAPEITEM_SMUGGLER"
+     "CAPEITEM_SMUGGLER",
+     "CAPEITEM_FW_FORTSTERLING"
     ],
     "food": [
      "T7_MEAL_OMELETTE",
@@ -34407,7 +39927,12 @@
      "HEAD_LEATHER_SET3",
      "HEAD_PLATE_SET3",
      "HEAD_CLOTH_KEEPER",
-     "HEAD_PLATE_SET2"
+     "HEAD_PLATE_SET1",
+     "HEAD_CLOTH_ROYAL",
+     "HEAD_LEATHER_AVALON",
+     "HEAD_PLATE_SET2",
+     "HEAD_CLOTH_SET1",
+     "HEAD_LEATHER_SET1"
     ],
     "offhand": [
      "OFF_HORN_KEEPER",
@@ -34416,16 +39941,25 @@
     ],
     "potion": [
      "T7_POTION_REVIVE",
-     "T7_POTION_STONESKIN"
+     "T7_POTION_STONESKIN",
+     "T7_POTION_CLEANSE2",
+     "T6_POTION_ENERGY"
     ],
     "shoes": [
      "SHOES_LEATHER_SET1",
      "SHOES_LEATHER_ROYAL",
-     "SHOES_LEATHER_MORGANA"
+     "SHOES_LEATHER_MORGANA",
+     "SHOES_CLOTH_SET1"
     ]
    },
    "kit_weapon": {
     "2H_HOLYSTAFF_HELL": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_SET2",
+       1
+      ]
+     ],
      "cape": [
       [
        "CAPEITEM_FW_LYMHURST",
@@ -34450,11 +39984,19 @@
      ],
      "potion": [
       [
+       "T6_POTION_ENERGY",
+       1
+      ],
+      [
        "T7_POTION_STONESKIN",
        1
       ]
      ],
      "shoes": [
+      [
+       "SHOES_CLOTH_SET1",
+       1
+      ],
       [
        "SHOES_LEATHER_ROYAL",
        1
@@ -34466,12 +40008,20 @@
       [
        "ARMOR_CLOTH_AVALON",
        3
+      ],
+      [
+       "ARMOR_CLOTH_SET2",
+       2
       ]
      ],
      "cape": [
       [
        "CAPEITEM_FW_LYMHURST",
        4
+      ],
+      [
+       "CAPEITEM_FW_FORTSTERLING",
+       1
       ],
       [
        "CAPEITEM_SMUGGLER",
@@ -34490,11 +40040,19 @@
      ],
      "head": [
       [
+       "HEAD_CLOTH_ROYAL",
+       2
+      ],
+      [
        "HEAD_LEATHER_SET3",
        2
       ],
       [
        "HEAD_CLOTH_KEEPER",
+       1
+      ],
+      [
+       "HEAD_LEATHER_AVALON",
        1
       ]
      ],
@@ -34502,6 +40060,10 @@
       [
        "T7_POTION_STONESKIN",
        4
+      ],
+      [
+       "T7_POTION_CLEANSE2",
+       1
       ],
       [
        "T7_POTION_REVIVE",
@@ -34528,6 +40090,10 @@
       [
        "ARMOR_CLOTH_AVALON",
        3
+      ],
+      [
+       "ARMOR_CLOTH_SET2",
+       2
       ]
      ],
      "cape": [
@@ -34554,6 +40120,14 @@
       [
        "HEAD_LEATHER_SET3",
        2
+      ],
+      [
+       "HEAD_PLATE_SET1",
+       2
+      ],
+      [
+       "HEAD_CLOTH_SET1",
+       1
       ]
      ],
      "potion": [
@@ -34572,6 +40146,10 @@
        3
       ],
       [
+       "SHOES_CLOTH_SET1",
+       1
+      ],
+      [
        "SHOES_LEATHER_MORGANA",
        1
       ]
@@ -34581,6 +40159,10 @@
      "armor": [
       [
        "ARMOR_CLOTH_AVALON",
+       1
+      ],
+      [
+       "ARMOR_CLOTH_SET2",
        1
       ]
      ],
@@ -34611,6 +40193,12 @@
        "T7_POTION_STONESKIN",
        1
       ]
+     ],
+     "shoes": [
+      [
+       "SHOES_CLOTH_SET1",
+       1
+      ]
      ]
     },
     "MAIN_HOLYSTAFF_AVALON": {
@@ -34622,6 +40210,10 @@
       [
        "ARMOR_CLOTH_AVALON",
        5
+      ],
+      [
+       "ARMOR_CLOTH_SET2",
+       1
       ]
      ],
      "cape": [
@@ -34658,6 +40250,18 @@
        2
       ],
       [
+       "HEAD_LEATHER_AVALON",
+       1
+      ],
+      [
+       "HEAD_LEATHER_SET1",
+       1
+      ],
+      [
+       "HEAD_PLATE_SET1",
+       1
+      ],
+      [
        "HEAD_PLATE_SET2",
        1
       ]
@@ -34680,6 +40284,10 @@
       [
        "T7_POTION_REVIVE",
        6
+      ],
+      [
+       "T7_POTION_CLEANSE2",
+       1
       ],
       [
        "T7_POTION_STONESKIN",
@@ -34753,7 +40361,8 @@
    "kit": {
     "armor": [
      "ARMOR_CLOTH_FEY",
-     "ARMOR_CLOTH_AVALON"
+     "ARMOR_CLOTH_AVALON",
+     "ARMOR_CLOTH_SET2"
     ],
     "cape": [
      "CAPEITEM_SMUGGLER",
@@ -34767,6 +40376,9 @@
      "HEAD_PLATE_SET3",
      "HEAD_LEATHER_SET3",
      "HEAD_CLOTH_KEEPER",
+     "HEAD_LEATHER_AVALON",
+     "HEAD_LEATHER_SET1",
+     "HEAD_PLATE_SET1",
      "HEAD_PLATE_SET2"
     ],
     "offhand": [
@@ -34776,6 +40388,7 @@
     ],
     "potion": [
      "T7_POTION_REVIVE",
+     "T7_POTION_CLEANSE2",
      "T7_POTION_STONESKIN"
     ],
     "shoes": [
@@ -34794,6 +40407,10 @@
       [
        "ARMOR_CLOTH_AVALON",
        5
+      ],
+      [
+       "ARMOR_CLOTH_SET2",
+       1
       ]
      ],
      "cape": [
@@ -34830,6 +40447,18 @@
        2
       ],
       [
+       "HEAD_LEATHER_AVALON",
+       1
+      ],
+      [
+       "HEAD_LEATHER_SET1",
+       1
+      ],
+      [
+       "HEAD_PLATE_SET1",
+       1
+      ],
+      [
        "HEAD_PLATE_SET2",
        1
       ]
@@ -34852,6 +40481,10 @@
       [
        "T7_POTION_REVIVE",
        6
+      ],
+      [
+       "T7_POTION_CLEANSE2",
+       1
       ],
       [
        "T7_POTION_STONESKIN",
@@ -34913,6 +40546,9 @@
      "HEAD_PLATE_SET3",
      "HEAD_LEATHER_SET3",
      "HEAD_CLOTH_KEEPER",
+     "HEAD_LEATHER_AVALON",
+     "HEAD_LEATHER_SET1",
+     "HEAD_PLATE_SET1",
      "HEAD_PLATE_SET2"
     ],
     "offhand": [
@@ -34922,6 +40558,7 @@
     ],
     "potion": [
      "T7_POTION_REVIVE",
+     "T7_POTION_CLEANSE2",
      "T7_POTION_STONESKIN"
     ],
     "shoes": [
@@ -34966,6 +40603,18 @@
        2
       ],
       [
+       "HEAD_LEATHER_AVALON",
+       1
+      ],
+      [
+       "HEAD_LEATHER_SET1",
+       1
+      ],
+      [
+       "HEAD_PLATE_SET1",
+       1
+      ],
+      [
        "HEAD_PLATE_SET2",
        1
       ]
@@ -34984,6 +40633,10 @@
       [
        "T7_POTION_REVIVE",
        6
+      ],
+      [
+       "T7_POTION_CLEANSE2",
+       1
       ],
       [
        "T7_POTION_STONESKIN",
@@ -35038,11 +40691,13 @@
      "ARMOR_PLATE_HELL",
      "ARMOR_PLATE_SET3",
      "ARMOR_CLOTH_AVALON",
-     "ARMOR_CLOTH_FEY"
+     "ARMOR_CLOTH_FEY",
+     "ARMOR_PLATE_ROYAL"
     ],
     "cape": [
      "CAPEITEM_SMUGGLER",
-     "CAPEITEM_FW_LYMHURST"
+     "CAPEITEM_FW_LYMHURST",
+     "CAPEITEM_FW_MARTLOCK"
     ],
     "food": [
      "T7_MEAL_OMELETTE_AVALON",
@@ -35051,7 +40706,9 @@
     "head": [
      "HEAD_LEATHER_SET3",
      "HEAD_PLATE_KEEPER",
-     "HEAD_CLOTH_KEEPER"
+     "HEAD_CLOTH_KEEPER",
+     "HEAD_LEATHER_AVALON",
+     "HEAD_PLATE_HELL"
     ],
     "offhand": [
      "OFF_SHIELD_AVALON",
@@ -35060,11 +40717,19 @@
     ],
     "potion": [
      "T7_POTION_REVIVE",
-     "T7_POTION_STONESKIN"
+     "T7_POTION_ACID",
+     "T7_POTION_CLEANSE2",
+     "T7_POTION_STONESKIN",
+     "T8_POTION_LAVA",
+     "T8_POTION_TORNADO"
     ],
     "shoes": [
+     "SHOES_CLOTH_SET2",
      "SHOES_LEATHER_MORGANA",
      "SHOES_LEATHER_ROYAL",
+     "SHOES_PLATE_AVALON",
+     "SHOES_CLOTH_KEEPER",
+     "SHOES_CLOTH_SET1",
      "SHOES_LEATHER_SET1"
     ]
    },
@@ -35106,12 +40771,32 @@
       [
        "T7_POTION_REVIVE",
        4
+      ],
+      [
+       "T7_POTION_ACID",
+       1
+      ],
+      [
+       "T8_POTION_TORNADO",
+       1
       ]
      ],
      "shoes": [
       [
+       "SHOES_CLOTH_SET2",
+       2
+      ],
+      [
        "SHOES_LEATHER_MORGANA",
        2
+      ],
+      [
+       "SHOES_CLOTH_KEEPER",
+       1
+      ],
+      [
+       "SHOES_PLATE_AVALON",
+       1
       ]
      ]
     },
@@ -35120,6 +40805,10 @@
       [
        "CAPEITEM_SMUGGLER",
        3
+      ],
+      [
+       "CAPEITEM_FW_MARTLOCK",
+       1
       ]
      ],
      "food": [
@@ -35145,6 +40834,10 @@
       ]
      ],
      "shoes": [
+      [
+       "SHOES_CLOTH_SET1",
+       1
+      ],
       [
        "SHOES_LEATHER_MORGANA",
        1
@@ -35194,6 +40887,10 @@
      ],
      "potion": [
       [
+       "T7_POTION_CLEANSE2",
+       1
+      ],
+      [
        "T7_POTION_REVIVE",
        1
       ]
@@ -35206,6 +40903,12 @@
      ]
     },
     "2H_SHAPESHIFTER_SET2": {
+     "armor": [
+      [
+       "ARMOR_PLATE_ROYAL",
+       1
+      ]
+     ],
      "cape": [
       [
        "CAPEITEM_SMUGGLER",
@@ -35222,11 +40925,19 @@
       [
        "HEAD_LEATHER_SET3",
        4
+      ],
+      [
+       "HEAD_LEATHER_AVALON",
+       1
       ]
      ],
      "potion": [
       [
        "T7_POTION_REVIVE",
+       1
+      ],
+      [
+       "T8_POTION_LAVA",
        1
       ]
      ],
@@ -35237,6 +40948,10 @@
       ],
       [
        "SHOES_LEATHER_ROYAL",
+       1
+      ],
+      [
+       "SHOES_PLATE_AVALON",
        1
       ]
      ]
@@ -35252,6 +40967,10 @@
       [
        "CAPEITEM_SMUGGLER",
        4
+      ],
+      [
+       "CAPEITEM_FW_MARTLOCK",
+       1
       ]
      ],
      "food": [
@@ -35268,6 +40987,10 @@
       [
        "HEAD_PLATE_KEEPER",
        2
+      ],
+      [
+       "HEAD_PLATE_HELL",
+       1
       ]
      ],
      "offhand": [
@@ -35287,6 +41010,12 @@
      "potion": [
       [
        "T7_POTION_REVIVE",
+       2
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_CLOTH_SET2",
        2
       ]
      ]
@@ -35992,7 +41721,8 @@
      "ARMOR_PLATE_HELL"
     ],
     "cape": [
-     "CAPEITEM_SMUGGLER"
+     "CAPEITEM_SMUGGLER",
+     "CAPEITEM_FW_MARTLOCK"
     ],
     "food": [
      "T7_MEAL_OMELETTE"
@@ -36005,6 +41735,9 @@
     ],
     "potion": [
      "T7_POTION_STONESKIN"
+    ],
+    "shoes": [
+     "SHOES_CLOTH_SET2"
     ]
    },
    "kit_weapon": {
@@ -36016,6 +41749,10 @@
       ]
      ],
      "cape": [
+      [
+       "CAPEITEM_FW_MARTLOCK",
+       1
+      ],
       [
        "CAPEITEM_SMUGGLER",
        1
@@ -36036,6 +41773,12 @@
      "potion": [
       [
        "T7_POTION_STONESKIN",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_CLOTH_SET2",
        1
       ]
      ]
@@ -36093,12 +41836,20 @@
    "kit": {
     "armor": [
      "ARMOR_CLOTH_FEY",
+     "ARMOR_CLOTH_SET2",
      "ARMOR_CLOTH_AVALON",
-     "ARMOR_CLOTH_SET1"
+     "ARMOR_CLOTH_SET1",
+     "ARMOR_LEATHER_SET3",
+     "ARMOR_CLOTH_SET3",
+     "ARMOR_LEATHER_SET2",
+     "ARMOR_LEATHER_AVALON"
     ],
     "cape": [
      "CAPEITEM_SMUGGLER",
-     "CAPEITEM_FW_LYMHURST"
+     "CAPEITEM_FW_LYMHURST",
+     "CAPEITEM_MORGANA",
+     "CAPEITEM_FW_THETFORD",
+     "CAPEITEM_FW_MARTLOCK"
     ],
     "food": [
      "T8_MEAL_STEW",
@@ -36107,9 +41858,15 @@
     ],
     "head": [
      "HEAD_LEATHER_SET3",
+     "HEAD_PLATE_SET1",
      "HEAD_CLOTH_KEEPER",
+     "HEAD_CLOTH_AVALON",
+     "HEAD_LEATHER_AVALON",
+     "HEAD_PLATE_AVALON",
      "HEAD_PLATE_SET3",
+     "HEAD_CLOTH_FEY",
      "HEAD_LEATHER_FEY",
+     "HEAD_LEATHER_SET2",
      "HEAD_PLATE_SET2"
     ],
     "offhand": [
@@ -36119,17 +41876,37 @@
     ],
     "potion": [
      "T7_POTION_REVIVE",
-     "T7_POTION_STONESKIN"
+     "T7_POTION_STONESKIN",
+     "T7_POTION_CLEANSE2"
     ],
     "shoes": [
      "SHOES_LEATHER_MORGANA",
+     "SHOES_LEATHER_AVALON",
+     "SHOES_CLOTH_ROYAL",
      "SHOES_LEATHER_FEY",
      "SHOES_LEATHER_ROYAL",
-     "SHOES_LEATHER_SET1"
+     "SHOES_LEATHER_SET1",
+     "SHOES_CLOTH_SET1",
+     "SHOES_PLATE_AVALON",
+     "SHOES_PLATE_UNDEAD"
     ]
    },
    "kit_weapon": {
     "2H_BOW_HELL": {
+     "armor": [
+      [
+       "ARMOR_LEATHER_SET3",
+       6
+      ],
+      [
+       "ARMOR_CLOTH_SET3",
+       1
+      ],
+      [
+       "ARMOR_LEATHER_SET2",
+       1
+      ]
+     ],
      "cape": [
       [
        "CAPEITEM_SMUGGLER",
@@ -36137,6 +41914,10 @@
       ],
       [
        "CAPEITEM_FW_LYMHURST",
+       1
+      ],
+      [
+       "CAPEITEM_FW_MARTLOCK",
        1
       ]
      ],
@@ -36147,6 +41928,14 @@
       ]
      ],
      "head": [
+      [
+       "HEAD_PLATE_SET1",
+       6
+      ],
+      [
+       "HEAD_CLOTH_AVALON",
+       1
+      ],
       [
        "HEAD_LEATHER_SET3",
        1
@@ -36164,8 +41953,16 @@
      ],
      "shoes": [
       [
+       "SHOES_LEATHER_AVALON",
+       6
+      ],
+      [
        "SHOES_LEATHER_MORGANA",
        3
+      ],
+      [
+       "SHOES_CLOTH_ROYAL",
+       1
       ],
       [
        "SHOES_LEATHER_FEY",
@@ -36174,6 +41971,12 @@
      ]
     },
     "2H_CROSSBOWLARGE_MORGANA": {
+     "armor": [
+      [
+       "ARMOR_LEATHER_SET2",
+       1
+      ]
+     ],
      "cape": [
       [
        "CAPEITEM_FW_LYMHURST",
@@ -36197,6 +42000,12 @@
        "T7_POTION_REVIVE",
        1
       ]
+     ],
+     "shoes": [
+      [
+       "SHOES_CLOTH_ROYAL",
+       1
+      ]
      ]
     },
     "2H_CROSSBOW_CANNON_AVALON": {
@@ -36204,11 +42013,19 @@
       [
        "ARMOR_CLOTH_FEY",
        1
+      ],
+      [
+       "ARMOR_CLOTH_SET2",
+       1
       ]
      ],
      "cape": [
       [
        "CAPEITEM_FW_LYMHURST",
+       1
+      ],
+      [
+       "CAPEITEM_MORGANA",
        1
       ]
      ],
@@ -36220,17 +42037,29 @@
      ],
      "head": [
       [
+       "HEAD_CLOTH_AVALON",
+       1
+      ],
+      [
        "HEAD_LEATHER_SET3",
        1
       ]
      ],
      "potion": [
       [
+       "T7_POTION_CLEANSE2",
+       1
+      ],
+      [
        "T7_POTION_REVIVE",
        1
       ]
      ],
      "shoes": [
+      [
+       "SHOES_CLOTH_ROYAL",
+       1
+      ],
       [
        "SHOES_LEATHER_MORGANA",
        1
@@ -36239,6 +42068,10 @@
     },
     "2H_FIRE_RINGPAIR_AVALON": {
      "armor": [
+      [
+       "ARMOR_CLOTH_SET2",
+       3
+      ],
       [
        "ARMOR_CLOTH_FEY",
        2
@@ -36252,6 +42085,10 @@
       [
        "CAPEITEM_FW_LYMHURST",
        3
+      ],
+      [
+       "CAPEITEM_FW_THETFORD",
+       1
       ],
       [
        "CAPEITEM_SMUGGLER",
@@ -36272,6 +42109,18 @@
       [
        "HEAD_LEATHER_SET3",
        3
+      ],
+      [
+       "HEAD_CLOTH_FEY",
+       1
+      ],
+      [
+       "HEAD_LEATHER_AVALON",
+       1
+      ],
+      [
+       "HEAD_PLATE_AVALON",
+       1
       ]
      ],
      "potion": [
@@ -36288,6 +42137,10 @@
       [
        "SHOES_LEATHER_MORGANA",
        2
+      ],
+      [
+       "SHOES_CLOTH_SET1",
+       1
       ],
       [
        "SHOES_LEATHER_FEY",
@@ -36322,6 +42175,12 @@
        1
       ]
      ],
+     "head": [
+      [
+       "HEAD_PLATE_AVALON",
+       1
+      ]
+     ],
      "potion": [
       [
        "T7_POTION_STONESKIN",
@@ -36340,9 +42199,17 @@
       [
        "ARMOR_CLOTH_AVALON",
        1
+      ],
+      [
+       "ARMOR_CLOTH_SET2",
+       1
       ]
      ],
      "cape": [
+      [
+       "CAPEITEM_FW_THETFORD",
+       1
+      ],
       [
        "CAPEITEM_SMUGGLER",
        1
@@ -36358,9 +42225,17 @@
       [
        "HEAD_CLOTH_KEEPER",
        1
+      ],
+      [
+       "HEAD_LEATHER_AVALON",
+       1
       ]
      ],
      "potion": [
+      [
+       "T7_POTION_CLEANSE2",
+       1
+      ],
       [
        "T7_POTION_STONESKIN",
        1
@@ -36380,6 +42255,12 @@
        1
       ]
      ],
+     "cape": [
+      [
+       "CAPEITEM_MORGANA",
+       1
+      ]
+     ],
      "food": [
       [
        "T8_MEAL_STEW",
@@ -36389,6 +42270,18 @@
      "head": [
       [
        "HEAD_CLOTH_KEEPER",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_CLEANSE2",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_CLOTH_ROYAL",
        1
       ]
      ]
@@ -36409,6 +42302,10 @@
       ]
      ],
      "cape": [
+      [
+       "CAPEITEM_MORGANA",
+       3
+      ],
       [
        "CAPEITEM_FW_LYMHURST",
        2
@@ -36436,6 +42333,10 @@
      ],
      "potion": [
       [
+       "T7_POTION_CLEANSE2",
+       2
+      ],
+      [
        "T7_POTION_REVIVE",
        2
       ],
@@ -36456,6 +42357,10 @@
       [
        "SHOES_LEATHER_SET1",
        1
+      ],
+      [
+       "SHOES_PLATE_AVALON",
+       1
       ]
      ]
     },
@@ -36463,6 +42368,12 @@
      "armor": [
       [
        "ARMOR_CLOTH_FEY",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_MORGANA",
        1
       ]
      ],
@@ -36478,6 +42389,12 @@
        1
       ]
      ],
+     "potion": [
+      [
+       "T7_POTION_CLEANSE2",
+       1
+      ]
+     ],
      "shoes": [
       [
        "SHOES_LEATHER_MORGANA",
@@ -36486,6 +42403,22 @@
      ]
     },
     "2H_LONGBOW": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_SET2",
+       1
+      ],
+      [
+       "ARMOR_LEATHER_AVALON",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_FW_MARTLOCK",
+       1
+      ]
+     ],
      "food": [
       [
        "T7_MEAL_OMELETTE_AVALON",
@@ -36511,6 +42444,16 @@
        "T7_POTION_REVIVE",
        2
       ]
+     ],
+     "shoes": [
+      [
+       "SHOES_CLOTH_ROYAL",
+       1
+      ],
+      [
+       "SHOES_PLATE_UNDEAD",
+       1
+      ]
      ]
     },
     "MAIN_CURSEDSTAFF_CRYSTAL": {
@@ -36518,12 +42461,24 @@
       [
        "ARMOR_CLOTH_AVALON",
        3
+      ],
+      [
+       "ARMOR_CLOTH_SET2",
+       1
+      ],
+      [
+       "ARMOR_CLOTH_SET3",
+       1
       ]
      ],
      "cape": [
       [
        "CAPEITEM_SMUGGLER",
        5
+      ],
+      [
+       "CAPEITEM_FW_THETFORD",
+       1
       ]
      ],
      "food": [
@@ -36546,6 +42501,10 @@
        1
       ],
       [
+       "HEAD_LEATHER_SET2",
+       1
+      ],
+      [
        "HEAD_PLATE_SET3",
        1
       ]
@@ -36565,6 +42524,10 @@
       ]
      ],
      "potion": [
+      [
+       "T7_POTION_CLEANSE2",
+       2
+      ],
       [
        "T7_POTION_REVIVE",
        2
@@ -36682,12 +42645,19 @@
     "armor": [
      "ARMOR_LEATHER_HELL",
      "ARMOR_LEATHER_ROYAL",
+     "ARMOR_PLATE_ROYAL",
      "ARMOR_PLATE_KEEPER",
-     "ARMOR_LEATHER_FEY"
+     "ARMOR_LEATHER_AVALON",
+     "ARMOR_LEATHER_FEY",
+     "ARMOR_LEATHER_SET3"
     ],
     "cape": [
      "CAPEITEM_SMUGGLER",
-     "CAPEITEM_FW_LYMHURST"
+     "CAPEITEM_FW_LYMHURST",
+     "CAPEITEM_FW_MARTLOCK",
+     "CAPEITEM_AVALON",
+     "CAPEITEM_FW_CAERLEON",
+     "CAPEITEM_FW_THETFORD"
     ],
     "food": [
      "T8_MEAL_STEW",
@@ -36698,6 +42668,9 @@
      "HEAD_PLATE_SET2",
      "HEAD_LEATHER_FEY",
      "HEAD_LEATHER_SET3",
+     "HEAD_PLATE_SET1",
+     "HEAD_CLOTH_HELL",
+     "HEAD_LEATHER_MORGANA",
      "HEAD_PLATE_KEEPER"
     ],
     "offhand": [
@@ -36706,11 +42679,17 @@
     ],
     "potion": [
      "T7_POTION_REVIVE",
-     "T7_POTION_STONESKIN"
+     "T7_POTION_STONESKIN",
+     "T7_POTION_CLEANSE2",
+     "T8_POTION_COOLDOWN"
     ],
     "shoes": [
      "SHOES_LEATHER_MORGANA",
-     "SHOES_LEATHER_FEY"
+     "SHOES_LEATHER_FEY",
+     "SHOES_CLOTH_ROYAL",
+     "SHOES_PLATE_AVALON",
+     "SHOES_CLOTH_SET1",
+     "SHOES_PLATE_UNDEAD"
     ]
    },
    "kit_weapon": {
@@ -36719,12 +42698,20 @@
       [
        "ARMOR_LEATHER_FEY",
        1
+      ],
+      [
+       "ARMOR_PLATE_ROYAL",
+       1
       ]
      ],
      "cape": [
       [
        "CAPEITEM_SMUGGLER",
        3
+      ],
+      [
+       "CAPEITEM_AVALON",
+       1
       ],
       [
        "CAPEITEM_FW_LYMHURST",
@@ -36745,12 +42732,20 @@
       [
        "HEAD_PLATE_SET2",
        6
+      ],
+      [
+       "HEAD_PLATE_SET1",
+       1
       ]
      ],
      "potion": [
       [
        "T7_POTION_REVIVE",
        3
+      ],
+      [
+       "T7_POTION_CLEANSE2",
+       1
       ],
       [
        "T7_POTION_STONESKIN",
@@ -36765,10 +42760,24 @@
       [
        "SHOES_LEATHER_MORGANA",
        2
+      ],
+      [
+       "SHOES_CLOTH_ROYAL",
+       1
+      ],
+      [
+       "SHOES_PLATE_UNDEAD",
+       1
       ]
      ]
     },
     "2H_CLEAVER_HELL": {
+     "armor": [
+      [
+       "ARMOR_PLATE_ROYAL",
+       1
+      ]
+     ],
      "cape": [
       [
        "CAPEITEM_SMUGGLER",
@@ -36776,6 +42785,10 @@
       ],
       [
        "CAPEITEM_FW_LYMHURST",
+       1
+      ],
+      [
+       "CAPEITEM_FW_MARTLOCK",
        1
       ]
      ],
@@ -36813,11 +42826,29 @@
       [
        "SHOES_LEATHER_MORGANA",
        2
+      ],
+      [
+       "SHOES_CLOTH_SET1",
+       1
+      ],
+      [
+       "SHOES_PLATE_AVALON",
+       1
       ]
      ]
     },
     "2H_DUALAXE_KEEPER": {
+     "armor": [
+      [
+       "ARMOR_LEATHER_SET3",
+       1
+      ]
+     ],
      "cape": [
+      [
+       "CAPEITEM_FW_THETFORD",
+       1
+      ],
       [
        "CAPEITEM_SMUGGLER",
        1
@@ -36829,13 +42860,31 @@
        1
       ]
      ],
+     "head": [
+      [
+       "HEAD_CLOTH_HELL",
+       1
+      ],
+      [
+       "HEAD_PLATE_SET1",
+       1
+      ]
+     ],
      "potion": [
       [
        "T7_POTION_REVIVE",
        1
+      ],
+      [
+       "T8_POTION_COOLDOWN",
+       1
       ]
      ],
      "shoes": [
+      [
+       "SHOES_CLOTH_ROYAL",
+       1
+      ],
       [
        "SHOES_LEATHER_MORGANA",
        1
@@ -36843,6 +42892,12 @@
      ]
     },
     "2H_DUALHAMMER_HELL": {
+     "cape": [
+      [
+       "CAPEITEM_FW_CAERLEON",
+       1
+      ]
+     ],
      "food": [
       [
        "T8_MEAL_STEW",
@@ -36860,10 +42915,26 @@
        "T7_POTION_REVIVE",
        1
       ]
+     ],
+     "shoes": [
+      [
+       "SHOES_PLATE_AVALON",
+       1
+      ]
      ]
     },
     "2H_HALBERD_MORGANA": {
+     "armor": [
+      [
+       "ARMOR_PLATE_ROYAL",
+       2
+      ]
+     ],
      "cape": [
+      [
+       "CAPEITEM_FW_MARTLOCK",
+       1
+      ],
       [
        "CAPEITEM_SMUGGLER",
        1
@@ -36877,6 +42948,10 @@
      ],
      "head": [
       [
+       "HEAD_LEATHER_MORGANA",
+       1
+      ],
+      [
        "HEAD_LEATHER_SET3",
        1
       ]
@@ -36889,6 +42964,10 @@
      ],
      "shoes": [
       [
+       "SHOES_CLOTH_ROYAL",
+       1
+      ],
+      [
        "SHOES_LEATHER_MORGANA",
        1
       ]
@@ -36896,6 +42975,10 @@
     },
     "2H_KNUCKLES_KEEPER": {
      "cape": [
+      [
+       "CAPEITEM_FW_MARTLOCK",
+       1
+      ],
       [
        "CAPEITEM_SMUGGLER",
        1
@@ -36921,12 +43004,22 @@
      ],
      "shoes": [
       [
+       "SHOES_CLOTH_ROYAL",
+       1
+      ],
+      [
        "SHOES_LEATHER_MORGANA",
        1
       ]
      ]
     },
     "2H_KNUCKLES_SET3": {
+     "armor": [
+      [
+       "ARMOR_LEATHER_AVALON",
+       1
+      ]
+     ],
      "cape": [
       [
        "CAPEITEM_SMUGGLER",
@@ -36951,12 +43044,20 @@
       [
        "HEAD_LEATHER_SET3",
        1
+      ],
+      [
+       "HEAD_PLATE_SET1",
+       1
       ]
      ],
      "potion": [
       [
        "T7_POTION_REVIVE",
        4
+      ],
+      [
+       "T7_POTION_CLEANSE2",
+       1
       ]
      ],
      "shoes": [
@@ -36967,11 +43068,19 @@
       [
        "SHOES_LEATHER_MORGANA",
        2
+      ],
+      [
+       "SHOES_CLOTH_ROYAL",
+       1
       ]
      ]
     },
     "MAIN_SCIMITAR_MORGANA": {
      "cape": [
+      [
+       "CAPEITEM_FW_MARTLOCK",
+       1
+      ],
       [
        "CAPEITEM_SMUGGLER",
        1
@@ -37073,6 +43182,9 @@
    "id": "bomb_aoe",
    "job": "Synced burst on the clump \u2014 the bomb-squad seat (fiend/mage-robe uniform, bananatools bomb-squad guide).\n",
    "kit": {
+    "armor": [
+     "ARMOR_LEATHER_AVALON"
+    ],
     "cape": [
      "CAPEITEM_SMUGGLER",
      "CAPEITEM_FW_LYMHURST"
@@ -37088,11 +43200,18 @@
      "T7_POTION_STONESKIN"
     ],
     "shoes": [
-     "SHOES_LEATHER_MORGANA"
+     "SHOES_LEATHER_MORGANA",
+     "SHOES_PLATE_UNDEAD"
     ]
    },
    "kit_weapon": {
     "2H_GLAIVE_CRYSTAL": {
+     "armor": [
+      [
+       "ARMOR_LEATHER_AVALON",
+       1
+      ]
+     ],
      "cape": [
       [
        "CAPEITEM_SMUGGLER",
@@ -37129,6 +43248,10 @@
       [
        "SHOES_LEATHER_MORGANA",
        2
+      ],
+      [
+       "SHOES_PLATE_UNDEAD",
+       1
       ]
      ]
     }
@@ -37167,12 +43290,15 @@
      "ARMOR_LEATHER_HELL"
     ],
     "cape": [
-     "CAPEITEM_SMUGGLER"
+     "CAPEITEM_SMUGGLER",
+     "CAPEITEM_FW_MARTLOCK",
+     "CAPEITEM_UNDEAD"
     ],
     "food": [
      "T8_MEAL_STEW"
     ],
     "head": [
+     "HEAD_LEATHER_MORGANA",
      "HEAD_LEATHER_SET3",
      "HEAD_PLATE_SET2"
     ],
@@ -37186,7 +43312,8 @@
      "T7_POTION_STONESKIN"
     ],
     "shoes": [
-     "SHOES_LEATHER_MORGANA"
+     "SHOES_LEATHER_MORGANA",
+     "SHOES_CLOTH_ROYAL"
     ]
    },
    "kit_weapon": {
@@ -37196,12 +43323,28 @@
        "T8_MEAL_STEW",
        1
       ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_MORGANA",
+       1
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_CLOTH_ROYAL",
+       1
+      ]
      ]
     },
     "MAIN_RAPIER_MORGANA": {
      "cape": [
       [
        "CAPEITEM_SMUGGLER",
+       1
+      ],
+      [
+       "CAPEITEM_UNDEAD",
        1
       ]
      ],
@@ -37212,6 +43355,10 @@
       ]
      ],
      "head": [
+      [
+       "HEAD_LEATHER_MORGANA",
+       1
+      ],
       [
        "HEAD_LEATHER_SET3",
        1
@@ -37235,6 +43382,10 @@
      ],
      "shoes": [
       [
+       "SHOES_CLOTH_ROYAL",
+       1
+      ],
+      [
        "SHOES_LEATHER_MORGANA",
        1
       ]
@@ -37242,6 +43393,10 @@
     },
     "MAIN_SCIMITAR_MORGANA": {
      "cape": [
+      [
+       "CAPEITEM_FW_MARTLOCK",
+       1
+      ],
       [
        "CAPEITEM_SMUGGLER",
        1

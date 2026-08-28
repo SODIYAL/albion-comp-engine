@@ -252,13 +252,36 @@ MediaWiki HTML, scrapeable" — that is now falsified for automated access. Sinc
 the dumps are the game's own data and resolve to the same numbers, the wiki is
 not needed as a source.
 
+## Daily killboard fetch (cache-only, scheduled)
+
+`pipeline/daily_fetch.ps1` runs as the Windows Task Scheduler job
+"AlbionCompForge Daily Fetch" (daily 09:30, interactive logon): it grows
+the gitignored battle caches with fresh GROUP fights (`sample_battles.py
+--min-players 10 --battles 120` + `sample_rosters.py --pages 15`, polite
+sleeps) and then restores the committed analysis artifacts to their
+pre-run bytes — fetch and analysis stay separate steps. 1v1/2v2 content
+(corrupted dungeons, mist duels) can never enter: the battles endpoint is
+only queried with a total-player floor (10 / 40), and analysis buckets by
+actual fight size besides. Log: `pipeline/out/fetch_logs/daily_fetch.log`
+(gitignored). WEEKLY CADENCE (or before a blind round): re-analyze
+offline (`--pages 0` on both samplers), review the numbers, rebuild
+dependents, run the gate list, commit — analysis is always a deliberate,
+reviewed step, never automated. Mind patch boundaries when reading
+accumulated windows: the cache spans balance patches; slice by
+`patch_history` dates before comparing metas.
+
 ## Known gaps / TODO
 
-- **Gear items have no sheets yet** — needed before archetype composition
-  (design doc §2.4). Killboard events DO record Head/Armor/Shoes/Cape/Potion/
-  Food, so gear *popularity* can be harvested from data; gear *capability*
-  still needs the same evidence-cited curation as weapons (one active spell per
-  piece, so seeding should get close to complete).
+- ~~Gear items have no sheets yet~~ — closed in two steps: the full-build
+  member model shipped the curated starter set (2026-08-20,
+  `sheets/gear/core.yaml`), and the combat expansion completed the
+  combat catalog (2026-08-27, `sheets/gear/combat_expansion.yaml`; 129
+  pieces total in `dataset["gear"]`, scored by `build_extra` in both
+  ports). Note the killboard caveat learned on the way: albionbb kill
+  events carry `Equipment.MainHand` + `Mount` only (verified in the raw
+  cache), so gear *popularity* per content is NOT harvestable from that
+  endpoint — observed-kit evidence comes from published/reference builds
+  instead.
 - ~~Usage sample is small (24 battles)~~ — superseded 2026-08-13 by
   `sample_battles.py` (~200 battles from the albionbb API, size-bucketed,
   per-battle cache, V7 coverage stat in `out/weapon_usage_v2.json`).

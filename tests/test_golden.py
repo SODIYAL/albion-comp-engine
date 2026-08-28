@@ -407,12 +407,15 @@ def run():
           f"{hm_plate.get('tankiness', 0):.2f} (plate), cloth dmg gain "
           f"{tank_gain_cloth:.2f}")
 
-    # T22 — kit advisor (2026-08-20): comp-aware kits must differentiate by
-    # role. In a rounded castle-brawl 24-man, the control tank's best head
-    # is a team piece (peel/buff: Guardian or Knight Helmet or Cleric Cowl)
-    # while every slot returns ranked options with finite values for any
-    # weapon. (Deeper doctrine checks wait on the healing-throughput model —
-    # see MASTERSHEET §8.)
+    # T22 — kit advisor (2026-08-20; re-pinned 2026-08-27, owner ruling
+    # "search more comps to see what tanks are actually wearing"): the
+    # comp-aware tank head must come from the OBSERVED doctrine tier (the
+    # weapon's own builds, then the seat's) — never an off-tier piece the
+    # exact marginal likes because its caps are scarce in this comp. The
+    # full gear catalog made Mercenary Hood / Graveguard Helmet win exactly
+    # that way (the owner: nobody fields those on tanks), so comp-aware
+    # ranking went doctrine-tier-first. Every slot still returns ranked
+    # options with finite values for any weapon.
     e_kit = Engine(content="castle", size=25, style="brawl")
     kit_party = (["2H_MACE", "2H_HAMMER", "MAIN_ROCKMACE_KEEPER",
                   "2H_POLEHAMMER", "MAIN_MACE", "2H_QUARTERSTAFF",
@@ -424,13 +427,17 @@ def run():
                   "2H_DUALSICKLE_UNDEAD", BLOODLETTER, "2H_SCYTHE_HELL",
                   LONGBOW, "2H_FIRE_RINGPAIR_AVALON"])
     tank_kit = e_kit.kit_options(HEAVY_MACE, party=kit_party)
-    team_heads = {"HEAD_PLATE_SET3", "HEAD_PLATE_SET2", "HEAD_CLOTH_SET2"}
+    marginal_bait = {"HEAD_LEATHER_SET1", "HEAD_PLATE_UNDEAD"}
     slots_ok = all(tank_kit["options"].get(s)
                    for s in ("head", "armor", "shoes", "offhand",
                              "cape", "potion", "food"))
-    check("T22 kit advisor: comp-aware tank head is a team piece; all slots ranked",
-          tank_kit["kit"]["head"]["gear"] in team_heads and slots_ok,
-          f"tank head={tank_kit['kit']['head']['display_name']}; "
+    check("T22 kit advisor: comp-aware tank head comes from the observed "
+          "doctrine tier, never off-tier marginal bait; all slots ranked",
+          tank_kit["kit"]["head"]["doctrine"] in ("weapon", "seat")
+          and tank_kit["kit"]["head"]["gear"] not in marginal_bait
+          and slots_ok,
+          f"tank head={tank_kit['kit']['head']['display_name']} "
+          f"(doctrine={tank_kit['kit']['head']['doctrine']}); "
           f"slots={sorted(tank_kit['options'])}")
 
     # T23 — comp identity (V3 round 1 finding F-V3-2, 2026-08-23): what a
@@ -793,14 +800,27 @@ def run():
           f"sat3rd={rep['verdict']}/{rep['caps_gain']:.2f} "
           f"gapfill={rep_ok['verdict']}/{rep_ok['caps_gain']:.1f}")
 
-    # exact duplicates past the free allowance price in and go negative
-    rep_dup = E.pick_report([LONGBOW, LONGBOW, LONGBOW, LONGBOW], LONGBOW)
-    check("T30c a 5th Longbow is a negative recommendation (dup penalty "
-          "priced, zero gap-closing)",
+    # exact duplicates past the free allowance price in and go negative.
+    # RE-PINNED 2026-08-27 (dressed forge, owner ruling): the fixture
+    # party wears its own doctrine kits — the real-world case; against a
+    # NAKED four-stack the 5th Longbow's kit closes ~28 units of real
+    # gaps and the engine honestly says so (pinned below as the model's
+    # documented honesty, not a bug).
+    lb_kit = dict(E.kit_variants(LONGBOW))["v0"]
+    lb4 = [LONGBOW, LONGBOW, LONGBOW, LONGBOW]
+    rep_dup = E.pick_report(lb4, LONGBOW, None, [lb_kit] * 4)
+    check("T30c a 5th Longbow into a DRESSED four-stack is a negative "
+          "recommendation (dup penalty priced, zero gap-closing)",
           rep_dup["verdict"] == "negative" and rep_dup["score"] <= 0
           and rep_dup["dup_penalty"] > 0 and rep_dup["caps_gain"] < 0.05,
           f"score={rep_dup['score']:.3f} dup_pen={rep_dup['dup_penalty']:.2f} "
           f"caps_gain={rep_dup['caps_gain']:.3f}")
+    rep_naked = E.pick_report(lb4, LONGBOW)
+    check("T30c honesty rider: against a NAKED four-stack the 5th's KIT "
+          "closes real gaps and the verdict says so",
+          rep_naked["caps_gain"] > 5 and rep_naked["verdict"] != "negative",
+          f"score={rep_naked['score']:.3f} "
+          f"caps_gain={rep_naked['caps_gain']:.2f}")
 
     # swap review carries the same lens per member — but its question is
     # "does the REST cover this member's jobs without it?", so with TWO

@@ -147,6 +147,7 @@ def py_results(cases):
             r = e.forge(fc["size"], locked=fc["locked"],
                         locked_combos=fc["locked_combos"], pool=fc["pool"])
             forged = {"party": r["party"], "combos": r["combos"],
+                      "gears": r["gears"],
                       "score": r["score"], "feasible": r["feasible"],
                       "filler": r["filler"], "held": r["held"]}
         out.append({
@@ -175,7 +176,8 @@ def py_results(cases):
             "synergy_locked": e.synergy(c["party"], c["combos"]),
             "max_fitness": e.max_fitness(),
             "recommend": [{"weapon": r["weapon"], "score": r["score"],
-                           "combo": r["combo"], "caps_gain": r["caps_gain"],
+                           "combo": r["combo"], "kit": r["kit"],
+                           "caps_gain": r["caps_gain"],
                            "verdict": r["verdict"]}
                           for r in e.recommend(c["party"], 5)],
             "pick_report": (e.pick_report(c["party"], c["refine_pool"][0],
@@ -260,8 +262,10 @@ def main():
             errs.append(f"size_bucket: py={a['size_bucket']} js={b['size_bucket']}")
         if a["forge"] is not None:
             fa, fb = a["forge"], b["forge"] or {}
-            if fa["party"] != fb.get("party") or fa["combos"] != fb.get("combos"):
-                errs.append(f"forge roster: py={fa['party']} js={fb.get('party')}")
+            if fa["party"] != fb.get("party") or fa["combos"] != fb.get("combos") \
+                    or fa["gears"] != fb.get("gears"):
+                errs.append(f"forge roster: py={fa['party']}/{fa['gears']} "
+                            f"js={fb.get('party')}/{fb.get('gears')}")
             elif abs(fa["score"] - fb.get("score", 1e9)) > EPS \
                     or fa["feasible"] != fb.get("feasible") \
                     or fa["filler"] != fb.get("filler") \
@@ -272,9 +276,11 @@ def main():
                         f"js={[r['weapon'] for r in b['recommend']]}")
         else:
             for ra, rb in zip(a["recommend"], b["recommend"]):
-                if abs(ra["score"] - rb["score"]) > EPS or ra["combo"] != rb["combo"]:
-                    errs.append(f"score {ra['weapon']}: py={ra['score']!r}/{ra['combo']} "
-                                f"js={rb['score']!r}/{rb['combo']}")
+                if abs(ra["score"] - rb["score"]) > EPS or ra["combo"] != rb["combo"] \
+                        or ra["kit"] != rb.get("kit"):
+                    errs.append(f"score {ra['weapon']}: "
+                                f"py={ra['score']!r}/{ra['combo']}/{ra['kit']} "
+                                f"js={rb['score']!r}/{rb['combo']}/{rb.get('kit')}")
                 elif ra["verdict"] != rb.get("verdict") \
                         or abs(ra["caps_gain"] - rb.get("caps_gain", 9e9)) > EPS:
                     errs.append(f"rec verdict {ra['weapon']}: "
@@ -286,6 +292,7 @@ def main():
         elif pa is not None:
             pb = pb or {}
             if (pa["verdict"] != pb.get("verdict") or pa["combo"] != pb.get("combo")
+                    or pa["kit"] != pb.get("kit")
                     or any(abs(pa[k] - pb.get(k, 9e9)) > EPS
                            for k in ("score", "d_fitness", "d_synergy",
                                      "meta_prior", "viability", "dup_penalty",
