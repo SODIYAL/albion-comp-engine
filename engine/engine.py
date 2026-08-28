@@ -8,8 +8,10 @@ throwaway with inline dicts into the real engine reading curated data.
 
 The objective (one, canonical — everything scores THIS, marginally or whole):
     U_c(s)   = weight * min(1, s/target)^gamma      concave utility
+             + headroom * weight * min(s-target, span)/span, span=soft-target
+                                                     headroom bonus
              - omax * weight * x/(1+x), x=(s-soft)/soft   over-stack penalty
-             - mult * weight * (floor - s)/floor     hard-floor penalty
+             - mult * weight * (floor - s_floor)/floor    hard-floor penalty
     fitness  = sum over capabilities
     synergy  = sum over TEMPLATE-ACTIVE pairs of
                bonus * max(0, min(capped_a, capped_b) - best_self_joint)
@@ -20,7 +22,20 @@ A candidate's pick score is EXACTLY comp(party+candidate) - comp(party) for the
 candidate's chosen loadout — the invariant tests/test_forge.py pins at 1e-9.
 Party members are weapon unique_names (e.g. "2H_MACE"), matching the dataset;
 an optional parallel `combos` list pins each member's one-spell-per-slot
-loadout (None = the static default for the current content+style).
+loadout (None = the static default for the current content+style), and an
+optional parallel `gears` list dresses each member with their worn kit
+(dressed forge 2026-08-27; None = weapon-only, bit-identical to the legacy
+path). TWO SUPPLIES, deliberately: coverage / headroom / over-stack read the
+DRESSED supply, while the hard-floor term reads `s_floor` — the weapon+loadout
+supply only (Option C, owner ruling 2026-08-27), so worn gear can never buy
+its way past a structural floor.
+
+KNOWN OPEN DEFECT (ruling pending, see HANDOFF.md): every `target` and
+`soft_cap` in the dataset was fitted in WEAPON+spell-pick units, while the
+supply above is measured on whole dressed people (~1.88x on average, ~7x on
+tankiness). The math here is unaffected — but the two sides of every
+comparison are currently in different units, and the correction must move
+every template row at once.
 """
 import json, os, itertools
 
@@ -380,6 +395,17 @@ class Engine:
         # still take a non-foundation gang slot — owner ruling, same
         # session). Balanced requires fits for at least ONE style at the
         # band; trio sizes gate nothing (standing Phase C rule).
+        # WHERE "situational" COMES FROM (all derived in
+        # build_dataset.derive_style_fit, audited in
+        # out/style_fit_report.json — this gate only reads the verdict):
+        # delivery vs style, the weak-group-E rule, the single-ally-heal-E
+        # healer rule, the non-stacking debuff rule, and — since
+        # 2026-08-27 — the CONDITIONAL-PAYLOAD rule: a group damage carrier
+        # whose every damage E needs ramp (consumes charges other spells
+        # build) or a non-ranged channel is situational at clap/kite/
+        # clap_kite, because those styles want damage that lands from one
+        # action. That is why Clarent Blade and Ursine Maulers stopped
+        # generating in clap comps while keeping every brawl slot.
         self._gen_situational = set()
         band = self._fit_band()
         if band != "trio":
@@ -1605,7 +1631,11 @@ class Engine:
         """THE party-level objective. Every suggestion path reports exact
         marginals of this same blend — see _eval_pick. `gears` (optional,
         full-build members) adds each member's gear contributions to the
-        fitness supply; synergy/meta/dup stay weapon-keyed for now."""
+        fitness supply. Synergy/meta/dup stay WEAPON-KEYED by ruling, not
+        by omission: synergy is weapon-interaction synergy (scoring.yaml
+        rule 3, owner 2026-08-27 — gear participation moved real comps
+        negatively under the current J rule), and meta prior / duplicate
+        pricing are properties of the weapon slot."""
         meta = 0.0
         viab = 0.0
         for w in party:

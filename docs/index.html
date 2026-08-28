@@ -1797,9 +1797,19 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
  * test.
  *
  * Used two ways:
- *   - inlined into dashboard/index.html by build_dashboard.py (browser —
+ *   - inlined into dashboard/index.html by dashboard/build.py (browser —
  *     dashboard/_app.js is rendering-only and calls this engine)
  *   - require()'d by tests/js_parity_runner.js (node)
+ *
+ * TWO SUPPLIES (mirrors engine.py): coverage / headroom / over-stack read the
+ * DRESSED supply (weapon + loadout + worn gear), while the hard-floor term
+ * reads the weapon+loadout supply only — Option C, owner ruling 2026-08-27,
+ * so worn gear can never buy its way past a structural floor.
+ *
+ * KNOWN OPEN DEFECT (ruling pending, see HANDOFF.md): dataset targets and
+ * soft caps were fitted in WEAPON+spell-pick units while supply is measured
+ * on whole dressed people. The math is unaffected; the two sides of every
+ * comparison are currently in different units.
  */
 (function (root) {
   "use strict";
