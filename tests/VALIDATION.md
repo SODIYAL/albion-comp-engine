@@ -496,3 +496,59 @@ turned out not to depend on any of the five claims.
 override ("pulling an endangered ally out of danger"). Ally-repositioning is
 neither enemy CC nor CC-cancelling, but it is not damage protection either, so
 it falls outside what was ruled. Flagged rather than silently resolved.
+
+### Peel ruling, second pass — the flagged loose ends closed (2026-08-28)
+
+Owner: *"ok fix it all up."* Both items left hanging by the first pass are
+resolved, and one of them turned out to be a MIS-CITATION rather than a bad
+claim — the capability was real, the evidence pointed at the wrong spell.
+
+**1. Tether Shift — peel removed, consistent with the ruling.** Held back on
+the first pass because ally-repositioning is neither enemy CC nor damage
+protection. Reading the whole spell settles it: *"Applies a shield that absorbs
+300 damage... if the ally is a guild, alliance or party member, pull them to
+your position. Attaching to an enemy: dash towards the attached enemy."* It
+shields the ally, repositions the ally, and its enemy half only moves YOU.
+Nothing touches an enemy or cancels enemy CC, so it falls with the absorb-shield
+class. Re-homed as `buff_allies` (the 300-absorb shield).
+
+**2. The shapeshifter pool's peel was REAL but mis-cited — fixed, not deleted.**
+Removing the Tether Shift override ungrounded `peel 2` across the whole
+shapeshifter line (9 sheets, one shared pool row). The row's own comment named
+the true source: *"W: tether-pull a party ally OUT; **Polymorph a diver**"*.
+Polymorph *"transform[s] the first unmounted, not transformed player hit into a
+helpless animal for 2.5"* — hard CC on an enemy, exactly peel under the ruling.
+The parser had captured only the mob-case max-health debuff, so the
+transformation is invisible to the structured vocabulary (which knows the
+concept only in negative form: `immunity:transformationcc`, `dr:DRTransformationCC`).
+Added `SHAPE_W_POLYMORPH.peel` to `effect_overrides.yaml` as a documented parser
+misfire and re-cited the pool row to it at the SAME score. **A true capability
+was nearly deleted because its citation was wrong; the fix was to correct the
+citation.**
+
+**3. Ironroot Staff's identity resolved on the honest axis.** peel 4 -> the
+`buff_allies 4` it now carries, header comment corrected from "the soul-link
+peeler" to "the soul-link protector". **The magnitude is ANCHORED, not
+invented**: Brier of Life (2H_NATURESTAFF, same file) scores `buff_allies 4` for
++13% resistances on one ally; Soul Link halves incoming damage on one ally —
+strictly stronger protection on the same single target — so 4 is a floor under
+this sheet's own scale, not a number chosen to match the row it replaced.
+
+**Swept for the same class of hole:** no peel row anywhere cites the
+`GEAR_STATS`/`WEAPON_STATS` sentinel, which the lint skips by design — so all 83
+surviving peel rows are map-verified, none unverifiable.
+
+Peel per person is unchanged from the first pass (2.14-3.86 across the ten
+dressed comps) — the shapeshifter re-citation restored exactly what the tether
+removal took. Full battery green, ZERO re-pins: golden, forge, parity+embed,
+builds, provenance, interactions, roles, validation-modes, patch-history,
+cohort-families, codec, display-math, evidence lint, tier2 (78% weapon_only
+PASS).
+
+**Deliberately still uncurated, and not "fixed" by invention:** the 31 recorded
+pieces that resolve to real items with no capability sheet. The resurrection
+potion (20 uses, every blap member) has no home in the vocabulary at all — it
+revives a dead ally, which is not heal, buff, or CC — so giving it a score would
+mean inventing a capability. The fish meals and the gatherer hood are the same
+story at smaller scale. Recorded as a curation gap, per the "say we do not know"
+rule.

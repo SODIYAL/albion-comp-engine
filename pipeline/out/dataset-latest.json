@@ -62697,6 +62697,14 @@
      "radius": 6.0,
      "spell": "SHAPE_W_AREA_PULL"
     },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "SHAPE_W_POLYMORPH"
+    },
     "resist_shred": {
      "escalation": {
       "value": 0.08
@@ -62770,7 +62778,7 @@
      "SHAPESHIFT_AVALONIAN_EAGLE"
     ],
     "peel": [
-     "SHAPE_W_TETHERBEAM"
+     "SHAPE_W_POLYMORPH"
     ],
     "resist_shred": [
      "SHAPE_Q_CONE_MELEE"
@@ -62813,7 +62821,7 @@
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
-      "SHAPE_W_TETHERBEAM"
+      "SHAPE_W_POLYMORPH"
      ]
     ],
     "slots": [
@@ -62924,6 +62932,14 @@
      "radius": 6.0,
      "spell": "SHAPE_W_AREA_PULL"
     },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "SHAPE_W_POLYMORPH"
+    },
     "resist_shred": {
      "escalation": {
       "value": 0.08
@@ -62993,7 +63009,7 @@
      "SHAPESHIFT_CRYSTAL_COBRA"
     ],
     "peel": [
-     "SHAPE_W_TETHERBEAM"
+     "SHAPE_W_POLYMORPH"
     ],
     "resist_shred": [
      "SHAPE_Q_CONE_MELEE"
@@ -63036,7 +63052,7 @@
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
-      "SHAPE_W_TETHERBEAM"
+      "SHAPE_W_POLYMORPH"
      ]
     ],
     "slots": [
@@ -63144,6 +63160,14 @@
      "radius": 6.0,
      "spell": "SHAPE_W_AREA_PULL"
     },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "SHAPE_W_POLYMORPH"
+    },
     "resist_shred": {
      "escalation": {
       "value": 0.08
@@ -63209,7 +63233,7 @@
      "SHAPE_W_TETHERBEAM"
     ],
     "peel": [
-     "SHAPE_W_TETHERBEAM"
+     "SHAPE_W_POLYMORPH"
     ],
     "resist_shred": [
      "SHAPE_Q_CONE_MELEE"
@@ -63248,7 +63272,8 @@
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
-      "SHAPE_W_TETHERBEAM"
+      "SHAPE_W_TETHERBEAM",
+      "SHAPE_W_POLYMORPH"
      ]
     ],
     "slots": [
@@ -63277,7 +63302,9 @@
        "zone_control": 2
       },
       {
-       "mobility": 2,
+       "mobility": 2
+      },
+      {
        "peel": 2
       }
      ]
@@ -63350,6 +63377,14 @@
      "radius": 6.0,
      "spell": "SHAPE_W_AREA_PULL"
     },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "SHAPE_W_POLYMORPH"
+    },
     "resist_shred": {
      "escalation": {
       "value": 0.08
@@ -63412,7 +63447,7 @@
      "SHAPESHIFT_ROCK_ELEMENTAL"
     ],
     "peel": [
-     "SHAPE_W_TETHERBEAM"
+     "SHAPE_W_POLYMORPH"
     ],
     "resist_shred": [
      "SHAPE_Q_CONE_MELEE"
@@ -63454,7 +63489,7 @@
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
-      "SHAPE_W_TETHERBEAM"
+      "SHAPE_W_POLYMORPH"
      ]
     ],
     "slots": [
@@ -63552,6 +63587,14 @@
      "radius": 6.0,
      "spell": "SHAPE_W_AREA_PULL"
     },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "SHAPE_W_POLYMORPH"
+    },
     "resist_shred": {
      "escalation": {
       "value": 0.08
@@ -63617,7 +63660,7 @@
      "SHAPESHIFT_WEREWOLF"
     ],
     "peel": [
-     "SHAPE_W_TETHERBEAM"
+     "SHAPE_W_POLYMORPH"
     ],
     "resist_shred": [
      "SHAPE_Q_CONE_MELEE"
@@ -63656,7 +63699,7 @@
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
-      "SHAPE_W_TETHERBEAM"
+      "SHAPE_W_POLYMORPH"
      ]
     ],
     "slots": [
@@ -63759,6 +63802,14 @@
      "radius": 6.0,
      "spell": "SHAPE_W_AREA_PULL"
     },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "SHAPE_W_POLYMORPH"
+    },
     "resist_shred": {
      "escalation": {
       "value": 0.08
@@ -63827,7 +63878,7 @@
      "SHAPE_W_TETHERBEAM"
     ],
     "peel": [
-     "SHAPE_W_TETHERBEAM"
+     "SHAPE_W_POLYMORPH"
     ],
     "resist_shred": [
      "SHAPE_Q_CONE_MELEE"
@@ -63867,7 +63918,8 @@
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
-      "SHAPE_W_TETHERBEAM"
+      "SHAPE_W_TETHERBEAM",
+      "SHAPE_W_POLYMORPH"
      ]
     ],
     "slots": [
@@ -63902,7 +63954,9 @@
        "slow": 2
       },
       {
-       "mobility": 2,
+       "mobility": 2
+      },
+      {
        "peel": 2
       }
      ]
@@ -63967,6 +64021,14 @@
      "max_targets": 5,
      "radius": 6.0,
      "spell": "SHAPE_W_AREA_PULL"
+    },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "SHAPE_W_POLYMORPH"
     },
     "resist_shred": {
      "escalation": {
@@ -64033,7 +64095,7 @@
      "SHAPE_W_TETHERBEAM"
     ],
     "peel": [
-     "SHAPE_W_TETHERBEAM"
+     "SHAPE_W_POLYMORPH"
     ],
     "resist_shred": [
      "SHAPE_Q_CONE_MELEE"
@@ -64075,7 +64137,8 @@
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
-      "SHAPE_W_TETHERBEAM"
+      "SHAPE_W_TETHERBEAM",
+      "SHAPE_W_POLYMORPH"
      ]
     ],
     "slots": [
@@ -64106,7 +64169,9 @@
        "zone_control": 2
       },
       {
-       "mobility": 2,
+       "mobility": 2
+      },
+      {
        "peel": 2
       }
      ]
@@ -64182,6 +64247,14 @@
      "radius": 6.0,
      "spell": "SHAPE_W_AREA_PULL"
     },
+    "peel": {
+     "escalation": {
+      "value": 0.08
+     },
+     "max_targets": 1,
+     "radius": 4.0,
+     "spell": "SHAPE_W_POLYMORPH"
+    },
     "resist_shred": {
      "escalation": {
       "value": 0.08
@@ -64245,7 +64318,7 @@
      "SHAPE_W_AREA_PULL"
     ],
     "peel": [
-     "SHAPE_W_TETHERBEAM"
+     "SHAPE_W_POLYMORPH"
     ],
     "resist_shred": [
      "SHAPE_Q_CONE_MELEE"
@@ -64292,7 +64365,7 @@
      [
       "SHAPE_W_AREA_PULL",
       "SHAPE_W_DAMAGE_AOE",
-      "SHAPE_W_TETHERBEAM"
+      "SHAPE_W_POLYMORPH"
      ]
     ],
     "slots": [

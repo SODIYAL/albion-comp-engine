@@ -77,10 +77,26 @@ suppress_flags:
 add:
   SHAPE_Q_DAMAGE_AND_SHIELD:          # "Applies a shield to yourself and up to 5 allies that absorbs 150"
     buff_allies: "ally damage-absorb shield; absorb shields are outside the structured vocab"
-  SHAPE_W_TETHERBEAM:                 # "If the ally is a guild/alliance/party member, pull them to your position"
-    peel: "pulling an endangered ally out of danger IS peel; ally-repositioning is outside the structured vocab"
+  SHAPE_W_TETHERBEAM:                 # "Applies a shield that absorbs 300... if the ally is a guild/alliance/party member, pull them to your position"
+    # peel REMOVED (owner 2026-08-28, resolved on the second pass). Held back
+    # from the first pass because ally-repositioning is neither enemy CC nor
+    # damage protection, so it sat outside the letter of the ruling. Reading
+    # the full spell settles it: Tether Shift shields the ally and yanks them
+    # to you, and its enemy half only dashes YOU to them. Nothing in it touches
+    # an enemy or cancels enemy CC, so it falls the same way as the absorb-
+    # shield class.
+    buff_allies: "300-absorb shield on the tethered ally; absorb shields are outside the structured vocab"
   SHAPE_W_AREA_PULL:                  # "pulling up to 5 enemies towards you, rooting them for 1.35"
     clump_create: "a 5-target enemy pull stacks enemies for AoE; the parser only captured the root"
+  SHAPE_W_POLYMORPH:                  # "transforming the first unmounted, not transformed player hit into a helpless animal for 2.5"
+    peel: >-
+      transformation CC on an ENEMY — a polymorphed diver is disabled outright.
+      The parser captured only the mob-case max-health debuff, so the
+      transformation itself is invisible to the vocabulary (the map knows the
+      concept only in negative form: immunity:transformationcc and
+      dr:DRTransformationCC). Re-cited here 2026-08-28: the shapeshifter pool's
+      peel row used to cite Tether Shift, which shields and pulls the ALLY and
+      never touches an enemy — wrong spell for a real capability.
   CURSEDHANDS_STACKUP:                # "Enchant the targeted ally's Auto-Attacks for the next 10"
     buff_allies: "ally auto-attack damage enchant; direct damage adds are outside the structured vocab"
   # HAMMERTACKLE clump_create — REMOVED 2026-08-13 by expert correction.

@@ -42,21 +42,24 @@
     - {cap: heal_sustain, score: 4, evidence: CIRCLEOFLIFE}    # rejuvenation charge engine
     - {cap: root,         score: 2, evidence: CIRCLEOFLIFE}    # thorn-charged enemies get rooted
 
-- weapon: MAIN_NATURESTAFF_AVALON    # Ironroot Staff — the soul-link peeler
+- weapon: MAIN_NATURESTAFF_AVALON    # Ironroot Staff — the soul-link protector
   curated_as_of: 2026-08-12
   role_hint: healer
   # deliberate non-takes of tree-pool spells (see sheets/pools/naturestaff.yaml)
   except:
     - {cap: sustained_dps, evidence: THORNSAREA}
   capabilities:
-    # peel 4 REMOVED (owner ruling 2026-08-28). NOTE THE CONSEQUENCE: this was
-    # Ironroot's defining score and the weapon's own comment called it "the
-    # soul-link peeler". Soul Link redirects half the damage off the focused
-    # ally, which protects them without doing anything to the enemy, so under
-    # the ruling it is not peel. Ironroot now carries buff_allies + heal_sustain
-    # and no peel at all. Flagged for the owner: if Ironroot should still read
-    # as a protector, the honest fix is a buff_allies/tankiness magnitude, not
-    # a peel row — no score was invented here to preserve the old identity.
+    # peel 4 REMOVED and re-homed as buff_allies (owner ruling 2026-08-28).
+    # Soul Link redirects half the damage off the focused ally and does nothing
+    # to the enemy, so it is protection, not peel. Ironroot keeps its identity
+    # as a protector — it just reads on the honest axis now, and the header
+    # comment was corrected from "peeler" to match.
+    #
+    # MAGNITUDE IS ANCHORED, NOT INVENTED: Brier of Life (2H_NATURESTAFF, this
+    # same file) scores buff_allies 4 for +13% resistances on one ally. Soul
+    # Link halves incoming damage on one ally — strictly stronger protection on
+    # the same single target — so 4 is a floor for it under this sheet's own
+    # scale, not a number chosen to match the peel row it replaced.
     - {cap: buff_allies,  score: 4, evidence: SOUL_LINK}       # half the focus damage redirected off the ally
     - {cap: heal_sustain, score: 4, evidence: SOUL_LINK}       # link also transfers 75% of healing; W pool
 

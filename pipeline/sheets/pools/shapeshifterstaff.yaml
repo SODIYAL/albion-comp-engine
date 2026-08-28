@@ -16,4 +16,9 @@ capabilities:
   - {cap: slow, score: 2, evidence: SHAPE_W_DAMAGE_AOE}                      # -10% inside the cloud — weak (QW)
   - {cap: zone_control, score: 2, evidence: SHAPE_W_DAMAGE_AOE}              # W: Distortion cloud, 3s DoT + slow (QW)
   - {cap: mobility, score: 2, evidence: SHAPE_W_TETHERBEAM}                  # W: dash-to-enemy tether (QW)
-  - {cap: peel, score: 2, evidence: SHAPE_W_TETHERBEAM}                      # W: tether-pull a party ally OUT; Polymorph a diver (QW)
+  # RE-CITED 2026-08-28 (owner peel ruling). This row used to cite Tether Shift
+  # on the strength of "tether-pull a party ally OUT" — but Tether Shift shields
+  # and repositions the ALLY and never touches an enemy, so it cannot ground
+  # peel. The row's own comment named the real source: Polymorph, which turns a
+  # diver into a helpless animal for 2.5s. Same score, correct spell.
+  - {cap: peel, score: 2, evidence: SHAPE_W_POLYMORPH}                       # W: Polymorph a diver (QW)
