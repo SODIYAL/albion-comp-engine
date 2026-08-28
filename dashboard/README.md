@@ -12,6 +12,31 @@ hand-edited.
 - `index.html`, `how-it-works.html` — **generated output**. Edit the sources
   and rebuild.
 
+## The two display contracts (owner rulings 2026-08-26/27)
+
+- **The comp-status card IS the radar.** One axis per capability GROUP (the
+  `GROUPS` map, "Other" guard included), the `comp_identity` glyph in the
+  hollow centre, and *every* piece of prose in a hover popup — the card
+  carries no explainer text and no fitness number of its own. Axis hovers
+  give the per-capability breakdown; the centre hover gives triage, exact
+  fitness, kill-pressure lights, role tally and advisory flags.
+- **The ceiling ruler.** The radar and the capability board both measure
+  against the comp-fitted **soft cap**, not the target: 100% means "the most
+  any good comp fields", per-capability supply counts only up to its own
+  ceiling (so nothing can read above 100), stacking past it shows as the
+  purple over-stack marker rather than a bigger number, and a brass tick
+  marks the target minimum. Floor state reads `supplyFloor` (the
+  weapon+loadout basis) per the Option C ruling, never the dressed supply.
+- **The wheel is a semicircle and the comp board is the roster dock.**
+  Frameless weapon art rides the top arc (the art is the star — no card
+  boxes); the hub floats in the arc's mouth; drag-to-rotate derives the
+  wheel centre from the box WIDTH, never its height. The board beneath it
+  REPLACED the old `ws-party` strip: four main-role columns of full `dm`
+  tiles that share `memberPop()` with what the strip used to render, plus
+  the open-slots column and the notes rail (duplicate checks + kit editor).
+  The board is built inside `renderRoster` and cached in `BOARD_HTML`, so
+  spinning the wheel never pays for the roster analysis.
+
 ## Boundary
 
 - **Display only.** No capability numbers and no scoring math live in this

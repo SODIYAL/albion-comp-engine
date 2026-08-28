@@ -212,18 +212,31 @@ the full checkout (as above) or use `sparse-checkout set --no-cone /items.json
 
 ```text
 py -3 pipeline/effect_catalogue.py <ao-bin-dumps path> --report
-   -> out/effect_catalogue.json          64 effects reachable from weapons
+   -> out/effect_catalogue.json   51 combat effects reachable from EQUIPMENT
+                                  (559 spells indexed: 367 weapon + 194 gear)
 pipeline/effect_map.yaml                 effect x direction -> capabilities
 pipeline/effect_lookup.py                shared: spell -> candidate capabilities
 py -3 pipeline/build_effect_review.py    -> review/effects.html
 ```
 
+**The catalogue covers GEAR as well as weapons** (2026-08-27). It indexed
+weapon spells only for most of the project's life, so every gear-sheet claim
+rested on prose + overrides and `evidence_lint.py` could not check a single
+one. Gear actives *and* passives are now indexed the same way; each effect
+records `gear_lines`/`gear_line_count` beside its weapon counts, and the gap
+reports (unmapped / no-prose / needs-a-call) span both sources — an effect
+that only ever appears on armor used to be invisible to all three. The first
+covered run turned the lint from silently skipping gear into six grounded
+errors, one of them a claim that was **backwards** (Demon Armor's aura buffs
+allies' resistances while reducing the wearer's own; it was recorded as the
+wearer's `tankiness`). Re-run the catalogue whenever the snapshot moves.
+
 Two layers, deliberately not collapsed:
 
 | layer | what | count | role |
 | --- | --- | --- | --- |
-| effects | game mechanics (`stun`, `movespeedbonus-`, `remove:buff`) | 64 reachable from weapons | evidence |
-| capabilities | comp-level needs (design doc §2.2) | 28 | scoring |
+| effects | game mechanics (`stun`, `movespeedbonus-`, `remove:buff`) | 51 combat effects reachable from equipment | evidence |
+| capabilities | comp-level needs (design doc §2.2) | 31 curated, all scored by at least one template (`reveal` stays proposed-only) | scoring |
 
 **The map is many-to-many and keyed by target direction.** One effect can ground
 several capabilities: 1H Mace's Deep Leap resolves to `dash` + `invincibility` +
@@ -234,6 +247,17 @@ An empty list is a real answer — a self-slow while channelling grounds nothing
 The effect layer yields **candidates**, never assertions. Whether a particular
 weapon's 3m dash is really an engage tool is a curation judgement; the lint's
 job is only to reject capabilities the spell cannot support at all.
+
+When the lint rejects a claim, **the default answer is to drop or re-cite the
+claim, not to reach for `effect_overrides.yaml`.** The override channel is for
+demonstrable parser misreads with the reason written down; it is not a way to
+keep a score the data contradicts. Two 2026-08-27 cases set the precedent:
+`reveal` was refused outright (every weapon source of `remove:invisibility` is
+a purge spell — invisibility is a buff — so a reveal row would double-count
+purge on seven lines, and the only two non-purge sources are gear), and five
+gear claims were re-cited to what their effects actually support rather than
+overridden (`mobility` claims on abilities with no speed component, an
+`anti_dive` claim whose only enemy effect was forced movement).
 
 Effects resolve **transitively**, and reference-following matches any attribute
 whose value names a real spell — an allowlist of node types missed real links
