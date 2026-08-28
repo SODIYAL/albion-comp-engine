@@ -1074,6 +1074,11 @@ function renderGroups(){
       const below = floorHit(c, sfl[c] || 0);
       const over = have > soft;
       const cls = over ? "over" : have === 0 ? "none" : have >= t ? "met" : "part";
+      /* bar ruler (owner 2026-08-27, same as the radar): 100% = the
+         comp-fitted ceiling (soft cap); the brass tick marks the target
+         minimum. Beyond-ceiling stacking shows purple, never a longer bar. */
+      const fillPct = Math.min(100, have / Math.max(soft, .001) * 100);
+      const tickPct = Math.min(100, t / Math.max(soft, .001) * 100);
       /* styles multiply a capability's WEIGHT, never its target — surface
          that emphasis here so switching playstyles visibly (and truthfully)
          changes the board: ×1.6 = this style values the cap more, ×0.7 less */
@@ -1085,7 +1090,7 @@ function renderGroups(){
       return `<div class="cap ${below ? "floor-hit" : ""}">
         <button class="cap-name" data-cap="${c}" title="${esc(prose(c))} — click for evidence">${c}${below ? '<span class="tag floor">below floor</span>' : ""}${over ? '<span class="tag over">overstacked</span>' : ""}${styleTag}</button>
         <span class="cap-val">${have.toFixed(0)} / ${t.toFixed(1)}</span>
-        <span class="cap-bar"><i class="${cls}" style="width:${over ? 100 : Math.min(100, have/t*100)}%"></i></span>
+        <span class="cap-bar"><i class="${cls}" style="width:${fillPct}%"></i><u class="cap-tick" style="left:${tickPct}%"></u></span>
       </div>`;
     }).join("");
     return rows ? `<div class="grp"><h3>${g}</h3>${rows}</div>` : "";

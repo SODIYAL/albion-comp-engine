@@ -76,8 +76,6 @@
     Tempo:     {col: "#E85D12", icon: "bolt"},
     Other:     {col: "#757A92", icon: "dot"},
   };
-  const DL_SCALE_MAX = 1.25;   // 125% of target = full radius (display cap)
-
   /* shared popup: content lives in DL_TIPS (rebuilt every render —
      indices are re-stamped with the markup), elements carry data-dltip */
   let DL_TIPS = [];
@@ -110,10 +108,18 @@
     return `<g transform="translate(${x - size/2},${y - size/2}) scale(${size/24})"><path d="${DL_ICONS[key]}" fill="${DL_ICON_FILL[key] ? col : "none"}" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>`;
   }
 
-  /* one axis per group: coverage = Σ min(have, soft) / Σ target — supply is
-     counted up to the point the engine stops crediting it, so one wildly
-     overstacked capability can't mask its siblings' gaps. Markers carry the
-     truth per capability in the popup. */
+  /* THE RULER (owner 2026-08-27: "we should never ever be above 100 for
+     anything but this 0-100 has to be based on ground facts"): 100% = the
+     comp-fitted CEILING — the soft cap, fitted at 1.15x the MOST any good
+     comp fields (2026-08-21 recalibration). The ceiling is style-neutral,
+     so playstyle tradeoffs read directly: a real brawl ball pushes toward
+     100% Frontline while sitting low on ranged Damage, a clap the
+     opposite — "these tradeoffs are what define the playstyle". Per-cap
+     supply is counted up to its own soft cap, so coverage can never
+     exceed 100 and one overstacked capability can't mask its siblings'
+     gaps; beyond-ceiling stacking shows as the purple marker, never as a
+     bigger number. Each axis carries a brass TICK at the target minimum
+     (Σ target / Σ soft). */
   function radarAxes(){
     const s = supply(party);
     const sfl = supplyFloor(party);   /* Option C floor basis (owner
@@ -130,9 +136,10 @@
       });
       if (!rows.length) continue;
       const tSum = rows.reduce((a, r) => a + Math.max(0, r.t), 0);
-      if (tSum <= 0) continue;
+      const softSum = rows.reduce((a, r) => a + Math.max(0, r.soft), 0);
+      if (tSum <= 0 || softSum <= 0) continue;
       const hSum = rows.reduce((a, r) => a + Math.min(r.have, r.soft), 0);
-      axes.push({g, rows, cov: hSum / tSum,
+      axes.push({g, rows, cov: hSum / softSum, tick: Math.min(1, tSum / softSum),
                  floor: rows.some(r => r.floor), over: rows.some(r => r.over),
                  meta: DL_GROUP_META[g] || DL_GROUP_META.Other});
     }
@@ -140,12 +147,13 @@
   }
   function groupTipHtml(a){
     const st = a.floor ? '<span class="dlt-bad">below a hard floor</span>'
-      : a.over ? '<span class="dlt-over">overstacked</span>'
-      : a.cov >= 1 ? '<span class="dlt-ok">target met</span>'
+      : a.over ? '<span class="dlt-over">stacked past what any good comp fields</span>'
+      : a.cov >= a.tick ? '<span class="dlt-ok">target met</span>'
       : '<span class="dlt-dim">below target</span>';
     const rows = a.rows.map(r =>
-      `<div class="dlt-line"><span>${esc(capLabel(r.cap))}${r.floor ? ' <b class="dlt-bad">⚑ floor</b>' : r.over ? ' <b class="dlt-over">▲</b>' : ""}</span><span>${r.have.toFixed(1)} / ${r.t.toFixed(1)}</span></div>`).join("");
-    return `<div class="dlt-head">${esc(a.g)} — ${Math.round(a.cov * 100)}% of target</div>${st}${rows}`;
+      `<div class="dlt-line"><span>${esc(capLabel(r.cap))}${r.floor ? ' <b class="dlt-bad">⚑ floor</b>' : r.over ? ' <b class="dlt-over">▲</b>' : ""}</span><span>${r.have.toFixed(1)} / ${r.t.toFixed(1)} · cap ${r.soft.toFixed(1)}</span></div>`).join("");
+    return `<div class="dlt-head">${esc(a.g)} — ${Math.round(a.cov * 100)}% of ceiling</div>${st}${rows}`
+      + `<div class="dlt-note">100% = the most any good comp fields (comp-fitted soft cap); the brass tick marks the target minimum</div>`;
   }
   function centerTipHtml(state, id, pct, f, max){
     let h = `<div class="dlt-head">${esc(state.label)}</div>`
@@ -219,14 +227,18 @@
     const ang = i => -Math.PI / 2 + i * 2 * Math.PI / N;
     const px = (a, r) => (cx + r * Math.cos(a)).toFixed(1);
     const py = (a, r) => (cy + r * Math.sin(a)).toFixed(1);
-    const rOf = cov => R * Math.min(cov, DL_SCALE_MAX) / DL_SCALE_MAX;
+    const rOf = cov => R * Math.max(0, Math.min(cov, 1));
     const ringPts = f => axes.map((_, i) => `${px(ang(i), rOf(f))},${py(ang(i), rOf(f))}`).join(" ");
-    let s = `<svg class="dl-radar" viewBox="0 0 ${W} ${H}" role="img" aria-label="Capability-group coverage versus template targets — hover the icons for detail">`;
+    let s = `<svg class="dl-radar" viewBox="0 0 ${W} ${H}" role="img" aria-label="Capability-group coverage versus the comp-fitted ceiling — hover the icons for detail">`;
     for (const f of [0.25, 0.5, 0.75])
       s += `<polygon points="${ringPts(f)}" fill="none" stroke="var(--rule)"/>`;
-    s += `<polygon points="${ringPts(1)}" fill="none" stroke="var(--brass-deep)" stroke-width="1.3" stroke-dasharray="3 4" opacity=".9"/>`;
+    s += `<polygon points="${ringPts(1)}" fill="none" stroke="var(--rule-2)" opacity=".9"/>`;
     axes.forEach((a, i) => {
       s += `<line x1="${cx}" y1="${cy}" x2="${px(ang(i), R)}" y2="${py(ang(i), R)}" stroke="var(--rule)" opacity=".7"/>`;
+      /* the target minimum: a brass tick across the spoke */
+      const rT = rOf(a.tick), k = 4.5;
+      const txc = cx + rT * Math.cos(ang(i)), tyc = cy + rT * Math.sin(ang(i));
+      s += `<line x1="${(txc + k * Math.sin(ang(i))).toFixed(1)}" y1="${(tyc - k * Math.cos(ang(i))).toFixed(1)}" x2="${(txc - k * Math.sin(ang(i))).toFixed(1)}" y2="${(tyc + k * Math.cos(ang(i))).toFixed(1)}" stroke="var(--brass-deep)" stroke-width="1.6"/>`;
     });
     const pts = axes.map((a, i) => [px(ang(i), rOf(a.cov)), py(ang(i), rOf(a.cov))]);
     s += `<polygon points="${pts.map(p => p.join(",")).join(" ")}" fill="rgba(35,191,110,.20)" stroke="var(--ok)" stroke-width="1.8" stroke-linejoin="round"/>`;
