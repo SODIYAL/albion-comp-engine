@@ -18,6 +18,7 @@
   function statusModel(){
     if (!party.length) return {tone:"empty", label:"Start your comp", critical:0, weak:0, excess:0};
     const s = supply(party);
+    const sfl = supplyFloor(party);   /* Option C floor basis */
     let critical = 0, weak = 0, excess = 0;
     /* Display-only triage thresholds — these classify, they never score.
        "Weak" = under 65% of target on a capability the template weights
@@ -25,7 +26,7 @@
     for (const cap of Object.keys(REQS())){
       const have = s[cap] || 0;
       const want = Math.max(.001, target(cap) || 0);
-      if (floorHit(cap, have)) critical++;
+      if (floorHit(cap, sfl[cap] || 0)) critical++;
       else if (have / want < .65 && ENG.weight(cap) >= 4) weak++;
       if (have > softCap(cap)) excess++;
     }
@@ -353,11 +354,12 @@
   function diagnosisRows(){
     if (!party.length) return [];
     const s = supply(party);
+    const sfl = supplyFloor(party);   /* Option C floor basis */
     const rows = weaknesses(party, 12).filter(x => x.gap >= .5).map(x => ({
       ...x,
       have:s[x.cap] || 0,
       want:target(x.cap),
-      floor:floorHit(x.cap, s[x.cap] || 0),
+      floor:floorHit(x.cap, sfl[x.cap] || 0),
       ratio:(s[x.cap] || 0) / Math.max(.001, target(x.cap))
     }));
     rows.sort((a,b) => Number(b.floor)-Number(a.floor)

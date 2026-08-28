@@ -114,10 +114,15 @@ def forge_case(i, c):
         return None
     # every second forge case passes an EMPTY locked_combos list — the
     # engines must both pad it to len(locked) with defaults (an empty array
-    # is truthy in JS and falsy in Python; that divergence shipped once)
+    # is truthy in JS and falsy in Python; that divergence shipped once).
+    # locked_gears (2026-08-27): the same alternation carries the case's
+    # gear for the first lock — supplied kits must be preserved verbatim
+    # and scored in both ports; [] entries normalize to naked.
     combos = c["combos"][:2] if (i // FORGE_EVERY) % 2 == 0 else []
+    lgears = (c["gears"][:2] if (i // FORGE_EVERY) % 2 == 0 else None)
     return {"size": FORGE_SIZE, "locked": c["party"][:2],
-            "locked_combos": combos, "pool": c["refine_pool"]}
+            "locked_combos": combos, "pool": c["refine_pool"],
+            "locked_gears": lgears}
 
 
 # kit_options is a full-catalog sweep (comp-aware = one fitness call per
@@ -145,14 +150,30 @@ def py_results(cases):
         forged = None
         if fc is not None:
             r = e.forge(fc["size"], locked=fc["locked"],
-                        locked_combos=fc["locked_combos"], pool=fc["pool"])
+                        locked_combos=fc["locked_combos"], pool=fc["pool"],
+                        locked_gears=fc["locked_gears"])
             forged = {"party": r["party"], "combos": r["combos"],
                       "gears": r["gears"],
                       "score": r["score"], "feasible": r["feasible"],
                       "filler": r["filler"], "held": r["held"]}
+        # V3-W parity (2026-08-27): dressing OFF while incumbents keep their
+        # case gears — candidates must evaluate naked through the identity
+        # short-circuit; the toggle restores dressed state bit-identically.
+        e.set_dressing(False)
+        naked_rec = [{"weapon": r["weapon"], "score": r["score"],
+                      "combo": r["combo"], "kit": r["kit"]}
+                     for r in e.recommend(c["party"], 5, None,
+                                          c["combos"], c["gears"])]
+        e.set_dressing(True)
         out.append({
+            "recommend_naked_cand": naked_rec,
             "refine": None if rp is None else e.refine(
                 rp, max_passes=REFINE_PASSES, pool=c["refine_pool"]),
+            # gear-aware refine (owner ruling 2026-08-27): dressed local
+            # search returns {party, gears}; incumbent kits from the case
+            "refine_dressed": None if rp is None else e.refine(
+                rp, max_passes=REFINE_PASSES, pool=c["refine_pool"],
+                fixed=0, gears=c["gears"][:len(rp)]),
             "comp_score": e.comp_score(c["party"]),
             "comp_score_locked": e.comp_score(c["party"], c["combos"]),
             "redundancy": e.redundancy(c["party"]),
@@ -195,7 +216,8 @@ def py_results(cases):
                                  for r in e.recommend(c["party"], 5,
                                                       combos=c["combos"])],
             "weaknesses": [{"cap": g["cap"], "gap": g["gap"]}
-                           for g in e.weaknesses(c["party"], 5)],
+                           for g in e.weaknesses(c["party"], 5, None,
+                                                 c["gears"])],
             "uncovered": sorted(e.uncovered_caps(c["party"])),
             "identity": e.comp_identity(c["party"], c["combos"]),
             "kill_pressure": e.kill_pressure(c["party"], c["combos"]),
@@ -251,6 +273,10 @@ def main():
         errs = []
         if a["refine"] is not None and a["refine"] != b["refine"]:
             errs.append(f"refine: py={a['refine']} js={b['refine']}")
+        if a["refine_dressed"] is not None \
+                and a["refine_dressed"] != b.get("refine_dressed"):
+            errs.append(f"refine_dressed: py={a['refine_dressed']} "
+                        f"js={b.get('refine_dressed')}")
         for k in ("fitness", "synergy", "max_fitness", "comp_score",
                   "comp_score_locked", "fitness_locked", "synergy_locked",
                   "redundancy", "fitness_build", "comp_score_build"):
@@ -346,6 +372,18 @@ def main():
                 if abs(ra["score"] - rb["score"]) > EPS:
                     errs.append(f"locked score {ra['weapon']}: "
                                 f"py={ra['score']!r} js={rb['score']!r}")
+        if [r["weapon"] for r in a["recommend_naked_cand"]] != \
+                [r["weapon"] for r in (b.get("recommend_naked_cand") or [])]:
+            errs.append("naked-candidate recommend order differs")
+        else:
+            for ra, rb in zip(a["recommend_naked_cand"],
+                              b.get("recommend_naked_cand") or []):
+                if abs(ra["score"] - rb["score"]) > EPS \
+                        or ra["combo"] != rb.get("combo") \
+                        or ra["kit"] != rb.get("kit") or ra["kit"]:
+                    errs.append(f"naked-cand {ra['weapon']}: "
+                                f"py={ra['score']!r}/{ra['combo']}/{ra['kit']} "
+                                f"js={rb['score']!r}/{rb.get('combo')}/{rb.get('kit')}")
         if [g["cap"] for g in a["weaknesses"]] != [g["cap"] for g in b["weaknesses"]]:
             errs.append("weakness order differs")
         if a["uncovered"] != b["uncovered"]:

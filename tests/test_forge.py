@@ -777,7 +777,11 @@ def t_dressed_state():
           st_naked["s"] == st_old["s"] and st_naked["s_syn"] == st_old["s"])
     st = e.party_state(p, None, g)
     extra = e.member_extra("2H_HAMMER")
-    d_fit = e._marg_fit_from(st["s"], extra)
+    # Option C (owner ruling 2026-08-27): on a dressed party the floor
+    # terms read the weapon+loadout basis — the marginal helper takes the
+    # naked supply and the candidate's weapon-only gains, exactly as
+    # _combo_score calls it.
+    d_fit = e._marg_fit_from(st["s"], extra, st["s_syn"], extra)
     exact = (e.fitness(p + ["2H_HAMMER"], None, g + [None])
              - e.fitness(p, None, g))
     check("F22a dressed-party fit marginal == exact fitness delta (1e-9)",
@@ -853,6 +857,79 @@ def t_dressed_eval():
           and r["score"] == r2["score"])
 
 
+def t_locked_gears():
+    """F25 (owner ruling 2026-08-27): a locked member supplied with
+    explicit gear keeps EXACTLY that gear — scored with it, never
+    re-dressed; a locked member without gear stays naked (no invented
+    kit). Existing `locked` calls are untouched (F23 still pins the
+    no-gears shape)."""
+    e = Engine(content="castle_outpost", size=7)
+    kit = ["HEAD_PLATE_SET2", "ARMOR_PLATE_KEEPER"]
+    r = e.forge(7, locked=["2H_MACE", "2H_LONGBOW"], locked_combos=[],
+                locked_gears=[kit, None])
+    preserved = r["gears"][0] == kit and r["gears"][1] is None
+    exact = abs(r["score"] - e.comp_score(r["party"], r["combos"],
+                                          r["gears"])) < 1e-9
+    r2 = e.forge(7, locked=["2H_MACE", "2H_LONGBOW"], locked_combos=[],
+                 locked_gears=[kit, None])
+    det = r["party"] == r2["party"] and r["gears"] == r2["gears"] \
+        and r["score"] == r2["score"]
+    rb = e.forge(7, locked=["2H_MACE", "2H_LONGBOW"], locked_combos=[])
+    back = rb["gears"][0] is None and rb["gears"][1] is None
+    check("F25 locked_gears: supplied kit preserved verbatim, naked lock "
+          "stays naked, score == dressed comp_score, deterministic, "
+          "legacy calls unchanged",
+          preserved and exact and det and back,
+          f"gears={r['gears'][:2]} score={r['score']:.4f} "
+          f"exact={exact} back={back}")
+
+
+def t_refine_gears():
+    """F26 (owner ruling 2026-08-27): refine() is gear-aware. With gears,
+    it optimizes the SAME dressed comp_score everything else uses —
+    incumbent kits preserved, replacements arrive in their best doctrine
+    variant, result returns {party, gears}, converged output admits no
+    further improving dressed swap. gears=None keeps the legacy
+    weapon-only list return."""
+    e = Engine(content="castle_outpost", size=7)
+    p = ["2H_LONGBOW", "2H_LONGBOW", "MAIN_HOLYSTAFF_AVALON", "2H_MACE"]
+    pool = e.pool[:12]
+    legacy = e.refine(p, max_passes=2, pool=pool)
+    check("F26a legacy refine returns a plain list (weapon-only path "
+          "unchanged)", isinstance(legacy, list) and len(legacy) == len(p),
+          f"type={type(legacy).__name__}")
+    g = [None, None, dict(e.kit_variants("MAIN_HOLYSTAFF_AVALON"))["v0"],
+         None]
+    r = e.refine(p, max_passes=8, pool=pool, fixed=0, gears=g)
+    shape = (isinstance(r, dict)
+             and len(r["party"]) == len(r["gears"]) == len(p))
+    base = e.comp_score(p, None, g)
+    final = e.comp_score(r["party"], None, r["gears"])
+    monotone = final >= base - 1e-9
+    # converged: no single (weapon x kit-variant) swap over the pool
+    # still improves the dressed comp_score
+    improvable = False
+    for i in range(len(r["party"])):
+        for w in pool:
+            if w == r["party"][i]:
+                continue
+            for _vk, vg in e.kit_variants(w):
+                cand = r["party"][:i] + [w] + r["party"][i + 1:]
+                cg = r["gears"][:i] + [vg] + r["gears"][i + 1:]
+                if e.comp_score(cand, None, cg) - final > 1e-9:
+                    improvable = True
+    r_fix = e.refine(p, max_passes=2, pool=pool, fixed=3, gears=g)
+    fixed_ok = (r_fix["party"][:3] == p[:3]
+                and r_fix["gears"][:3] == g[:3])
+    det = e.refine(p, max_passes=8, pool=pool, fixed=0, gears=g) == r
+    check("F26 dressed refine: dict result, monotone dressed comp_score, "
+          "converged (no improving dressed swap left), fixed slots + "
+          "supplied gear preserved, deterministic",
+          shape and monotone and not improvable and fixed_ok and det,
+          f"base={base:.4f} final={final:.4f} improvable={improvable} "
+          f"fixed_ok={fixed_ok}")
+
+
 if __name__ == "__main__":
     t_invariant()
     t_synergy_gating()
@@ -878,6 +955,8 @@ if __name__ == "__main__":
     t_dressed_state()
     t_kit_variants()
     t_dressed_eval()
+    t_locked_gears()
+    t_refine_gears()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} forge regression tests passed")

@@ -1,0 +1,2238 @@
+{
+ "baseline_train_metrics": {
+  "d": {
+   "acceptable_top3": 0.5,
+   "bad_n": 0,
+   "bad_pick_rate": null,
+   "conf_weighted_top3": 0.25,
+   "mean_rank": 27.75,
+   "median_rank": 17.0,
+   "n": 4,
+   "need_agreement": null,
+   "need_n": 0,
+   "outside_pool": 0,
+   "rank_n": 4,
+   "top1": 0.0,
+   "top3": 0.25
+  },
+  "w": {
+   "acceptable_top3": 0.5,
+   "bad_n": 0,
+   "bad_pick_rate": null,
+   "conf_weighted_top3": 0.5,
+   "mean_rank": 15.5,
+   "median_rank": 5.0,
+   "n": 4,
+   "need_agreement": null,
+   "need_n": 0,
+   "outside_pool": 0,
+   "rank_n": 4,
+   "top1": 0.5,
+   "top3": 0.5
+  }
+ },
+ "current_values": {
+  "alpha": 0.55,
+  "beta": 0.2,
+  "delta": 0.15,
+  "gamma": 0.7,
+  "headroom": 0.1,
+  "overstack_max": 0.5,
+  "rho": 0.25,
+  "viability_w": 0.15
+ },
+ "curve_probes": [
+  {
+   "cap": "purge",
+   "expert_question": "Parties with 0/1/2/3 meaningful purge sources (2H_MACE, 2H_KNUCKLES_AVALON, MAIN_ARCANESTAFF) \u2014 how valuable is EACH next source, relative to the previous one?",
+   "ladder": [
+    {
+     "fitness": -29.0,
+     "marginal_fitness": null,
+     "party": [],
+     "sources": 0,
+     "supply": 0.0
+    },
+    {
+     "fitness": 3.188894,
+     "marginal_fitness": 32.188894,
+     "party": [
+      "2H_MACE"
+     ],
+     "sources": 1,
+     "supply": 3.0
+    },
+    {
+     "fitness": 23.129115,
+     "marginal_fitness": 19.940221,
+     "party": [
+      "2H_MACE",
+      "2H_KNUCKLES_AVALON"
+     ],
+     "sources": 2,
+     "supply": 5.0
+    },
+    {
+     "fitness": 29.537838,
+     "marginal_fitness": 6.408723,
+     "party": [
+      "2H_MACE",
+      "2H_KNUCKLES_AVALON",
+      "MAIN_ARCANESTAFF"
+     ],
+     "sources": 3,
+     "supply": 7.0
+    }
+   ],
+   "soft_cap": 6.9,
+   "target": 4.5
+  },
+  {
+   "cap": "heal_sustain",
+   "expert_question": "Parties with 0/1/2/3 meaningful heal_sustain sources (2H_HOLYSTAFF, 2H_HOLYSTAFF_UNDEAD, 2H_NATURESTAFF_HELL) \u2014 how valuable is EACH next source, relative to the previous one?",
+   "ladder": [
+    {
+     "fitness": -29.0,
+     "marginal_fitness": null,
+     "party": [],
+     "sources": 0,
+     "supply": 0.0
+    },
+    {
+     "fitness": 5.481527,
+     "marginal_fitness": 34.481527,
+     "party": [
+      "2H_HOLYSTAFF"
+     ],
+     "sources": 1,
+     "supply": 3.0
+    },
+    {
+     "fitness": 14.746393,
+     "marginal_fitness": 9.264866,
+     "party": [
+      "2H_HOLYSTAFF",
+      "2H_HOLYSTAFF_UNDEAD"
+     ],
+     "sources": 2,
+     "supply": 6.0
+    },
+    {
+     "fitness": 21.990156,
+     "marginal_fitness": 7.243763,
+     "party": [
+      "2H_HOLYSTAFF",
+      "2H_HOLYSTAFF_UNDEAD",
+      "2H_NATURESTAFF_HELL"
+     ],
+     "sources": 3,
+     "supply": 9.0
+    }
+   ],
+   "soft_cap": 6.9,
+   "target": 3.75
+  },
+  {
+   "cap": "engage",
+   "expert_question": "Parties with 0/1/2/3 meaningful engage sources (2H_CLAYMORE, 2H_HAMMER, 2H_HAMMER_AVALON) \u2014 how valuable is EACH next source, relative to the previous one?",
+   "ladder": [
+    {
+     "fitness": -29.0,
+     "marginal_fitness": null,
+     "party": [],
+     "sources": 0,
+     "supply": 0.0
+    },
+    {
+     "fitness": -12.262689,
+     "marginal_fitness": 16.737311,
+     "party": [
+      "2H_CLAYMORE"
+     ],
+     "sources": 1,
+     "supply": 3.0
+    },
+    {
+     "fitness": 14.056015,
+     "marginal_fitness": 26.318704,
+     "party": [
+      "2H_CLAYMORE",
+      "2H_HAMMER"
+     ],
+     "sources": 2,
+     "supply": 6.0
+    },
+    {
+     "fitness": 37.519003,
+     "marginal_fitness": 23.462988,
+     "party": [
+      "2H_CLAYMORE",
+      "2H_HAMMER",
+      "2H_HAMMER_AVALON"
+     ],
+     "sources": 3,
+     "supply": 9.0
+    }
+   ],
+   "soft_cap": 11.5,
+   "target": 5.85
+  },
+  {
+   "cap": "peel",
+   "expert_question": "Parties with 0/1/2/3 meaningful peel sources (MAIN_ROCKMACE_KEEPER, 2H_MACE, 2H_QUARTERSTAFF) \u2014 how valuable is EACH next source, relative to the previous one?",
+   "ladder": [
+    {
+     "fitness": -29.0,
+     "marginal_fitness": null,
+     "party": [],
+     "sources": 0,
+     "supply": 0.0
+    },
+    {
+     "fitness": -11.373396,
+     "marginal_fitness": 17.626604,
+     "party": [
+      "MAIN_ROCKMACE_KEEPER"
+     ],
+     "sources": 1,
+     "supply": 6.9
+    },
+    {
+     "fitness": 10.731286,
+     "marginal_fitness": 22.104682,
+     "party": [
+      "MAIN_ROCKMACE_KEEPER",
+      "2H_MACE"
+     ],
+     "sources": 2,
+     "supply": 12.9
+    },
+    {
+     "fitness": 21.90269,
+     "marginal_fitness": 11.171404,
+     "party": [
+      "MAIN_ROCKMACE_KEEPER",
+      "2H_MACE",
+      "2H_QUARTERSTAFF"
+     ],
+     "sources": 3,
+     "supply": 18.9
+    }
+   ],
+   "soft_cap": 29.45,
+   "target": 20.15
+  },
+  {
+   "cap": "clump_create",
+   "expert_question": "Parties with 0/1/2/3 meaningful clump_create sources (2H_HAMMER_AVALON, 2H_MACE_MORGANA, MAIN_ARCANESTAFF_UNDEAD) \u2014 how valuable is EACH next source, relative to the previous one?",
+   "ladder": [
+    {
+     "fitness": -29.0,
+     "marginal_fitness": null,
+     "party": [],
+     "sources": 0,
+     "supply": 0.0
+    },
+    {
+     "fitness": 14.507509,
+     "marginal_fitness": 43.507509,
+     "party": [
+      "2H_HAMMER_AVALON"
+     ],
+     "sources": 1,
+     "supply": 3.0
+    },
+    {
+     "fitness": 23.80489,
+     "marginal_fitness": 9.297381,
+     "party": [
+      "2H_HAMMER_AVALON",
+      "2H_MACE_MORGANA"
+     ],
+     "sources": 2,
+     "supply": 6.0
+    },
+    {
+     "fitness": 36.308864,
+     "marginal_fitness": 12.503974,
+     "party": [
+      "2H_HAMMER_AVALON",
+      "2H_MACE_MORGANA",
+      "MAIN_ARCANESTAFF_UNDEAD"
+     ],
+     "sources": 3,
+     "supply": 8.0
+    }
+   ],
+   "soft_cap": 4.2,
+   "target": 2.5
+  },
+  {
+   "cap": "heal_reduction",
+   "expert_question": "Parties with 0/1/2/3 meaningful heal_reduction sources (2H_FIRE_RINGPAIR_AVALON, 2H_HALBERD_MORGANA, 2H_ROCKSTAFF_KEEPER) \u2014 how valuable is EACH next source, relative to the previous one?",
+   "ladder": [
+    {
+     "fitness": -29.0,
+     "marginal_fitness": null,
+     "party": [],
+     "sources": 0,
+     "supply": 0.0
+    },
+    {
+     "fitness": -10.083997,
+     "marginal_fitness": 18.916003,
+     "party": [
+      "2H_FIRE_RINGPAIR_AVALON"
+     ],
+     "sources": 1,
+     "supply": 2.0
+    },
+    {
+     "fitness": -1.905207,
+     "marginal_fitness": 8.17879,
+     "party": [
+      "2H_FIRE_RINGPAIR_AVALON",
+      "2H_HALBERD_MORGANA"
+     ],
+     "sources": 2,
+     "supply": 4.0
+    },
+    {
+     "fitness": 9.801798,
+     "marginal_fitness": 11.707005,
+     "party": [
+      "2H_FIRE_RINGPAIR_AVALON",
+      "2H_HALBERD_MORGANA",
+      "2H_ROCKSTAFF_KEEPER"
+     ],
+     "sources": 3,
+     "supply": 6.0
+    }
+   ],
+   "soft_cap": 3.3,
+   "target": 1.7
+  },
+  {
+   "cap": "resist_shred",
+   "expert_question": "Parties with 0/1/2/3 meaningful resist_shred sources (2H_CLEAVER_HELL, 2H_CROSSBOW, 2H_CURSEDSTAFF_MORGANA) \u2014 how valuable is EACH next source, relative to the previous one?",
+   "ladder": [
+    {
+     "fitness": -29.0,
+     "marginal_fitness": null,
+     "party": [],
+     "sources": 0,
+     "supply": 0.0
+    },
+    {
+     "fitness": -8.909127,
+     "marginal_fitness": 20.090873,
+     "party": [
+      "2H_CLEAVER_HELL"
+     ],
+     "sources": 1,
+     "supply": 2.0
+    },
+    {
+     "fitness": -1.510405,
+     "marginal_fitness": 7.398722,
+     "party": [
+      "2H_CLEAVER_HELL",
+      "2H_CROSSBOW"
+     ],
+     "sources": 2,
+     "supply": 4.0
+    },
+    {
+     "fitness": 5.191264,
+     "marginal_fitness": 6.701669,
+     "party": [
+      "2H_CLEAVER_HELL",
+      "2H_CROSSBOW",
+      "2H_CURSEDSTAFF_MORGANA"
+     ],
+     "sources": 3,
+     "supply": 6.0
+    }
+   ],
+   "soft_cap": 12.6,
+   "target": 5.0
+  },
+  {
+   "cap": "sustained_dps",
+   "expert_question": "Parties with 0/1/2/3 meaningful sustained_dps sources (2H_BOW, 2H_LONGBOW_UNDEAD, 2H_ARCANESTAFF_CRYSTAL) \u2014 how valuable is EACH next source, relative to the previous one?",
+   "ladder": [
+    {
+     "fitness": -29.0,
+     "marginal_fitness": null,
+     "party": [],
+     "sources": 0,
+     "supply": 0.0
+    },
+    {
+     "fitness": -17.872242,
+     "marginal_fitness": 11.127758,
+     "party": [
+      "2H_BOW"
+     ],
+     "sources": 1,
+     "supply": 3.0
+    },
+    {
+     "fitness": -13.325044,
+     "marginal_fitness": 4.547198,
+     "party": [
+      "2H_BOW",
+      "2H_LONGBOW_UNDEAD"
+     ],
+     "sources": 2,
+     "supply": 6.0
+    },
+    {
+     "fitness": -2.843779,
+     "marginal_fitness": 10.481265,
+     "party": [
+      "2H_BOW",
+      "2H_LONGBOW_UNDEAD",
+      "2H_ARCANESTAFF_CRYSTAL"
+     ],
+     "sources": 3,
+     "supply": 8.0
+    }
+   ],
+   "soft_cap": 9.95,
+   "target": 7.2
+  }
+ ],
+ "honesty": "SENSITIVITY MAP, NOT A CALIBRATION. Train n=4 (one expert, one content, legacy-harness answers); validation and holdout are EMPTY. No coefficient may move on this evidence \u2014 every value below remains PROVISIONAL at its shipped setting until expert rounds populate validation/holdout (calibration/README.md).",
+ "kind": "calibration_report",
+ "splits": {
+  "holdout": 0,
+  "train": 4,
+  "validation": 0
+ },
+ "style_multipliers": {
+  "status": "directional hypotheses (styles.yaml); no style-specific expert picks exist yet \u2014 Phase 12 waits for styled expert rounds"
+ },
+ "sweeps": {
+  "alpha": {
+   "current": 0.55,
+   "points": [
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.5,
+      "median_rank": 16.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.25,
+      "median_rank": 5.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.25,
+      "top3": 0.5
+     },
+     "value": 0.3
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.5,
+      "median_rank": 16.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.25,
+      "median_rank": 5.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.25,
+      "top3": 0.5
+     },
+     "value": 0.35
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.5,
+      "median_rank": 16.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.25,
+      "top3": 0.5
+     },
+     "value": 0.4
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.5,
+      "median_rank": 16.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.25,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.45
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.25,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.5
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.55
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 28.0,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.6
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 28.0,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.65
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 28.0,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.7
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 28.0,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.75
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 28.0,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.8
+    }
+   ]
+  },
+  "beta": {
+   "current": 0.2,
+   "points": [
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.5,
+      "median_rank": 16.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.0
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.5,
+      "median_rank": 16.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.05
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.1
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.15
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.2
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.5,
+      "median_rank": 16.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.25
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.5,
+      "median_rank": 16.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.3
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.5,
+      "median_rank": 16.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.35
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.5,
+      "median_rank": 16.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.4
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.5,
+      "median_rank": 16.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.45
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.25,
+      "median_rank": 16.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.5
+    }
+   ]
+  },
+  "delta": {
+   "current": 0.15,
+   "points": [
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.25,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 28.5,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.75,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.0
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.25,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 28.5,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.75,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.05
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 28.0,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.1
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.15
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.25,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.2
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.25,
+      "median_rank": 5.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.25,
+      "top3": 0.5
+     },
+     "value": 0.25
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.0,
+      "median_rank": 5.5,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.25,
+      "top3": 0.5
+     },
+     "value": 0.3
+    }
+   ]
+  },
+  "rho": {
+   "current": 0.25,
+   "points": [
+    {
+     "golden_regressions": 1,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.0
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.125
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.25
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.375
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.5
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.625
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.75
+    }
+   ]
+  },
+  "viability_w": {
+   "current": 0.15,
+   "points": [
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.0
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.05
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.1
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.15
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.2
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.25
+    },
+    {
+     "golden_regressions": 0,
+     "golden_total": 57,
+     "train_d": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.25,
+      "mean_rank": 27.75,
+      "median_rank": 17.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.0,
+      "top3": 0.25
+     },
+     "train_w": {
+      "acceptable_top3": 0.5,
+      "bad_n": 0,
+      "bad_pick_rate": null,
+      "conf_weighted_top3": 0.5,
+      "mean_rank": 15.5,
+      "median_rank": 5.0,
+      "n": 4,
+      "need_agreement": null,
+      "need_n": 0,
+      "outside_pool": 0,
+      "rank_n": 4,
+      "top1": 0.5,
+      "top3": 0.5
+     },
+     "value": 0.3
+    }
+   ]
+  }
+ },
+ "synergy_flip_points": [
+  {
+   "current_bonus": 1.5,
+   "expert_question": "Party already strong on clump_create (['2H_HAMMER_AVALON', '2H_MACE_MORGANA']). Next pick: 2H_HOLYSTAFF (better general coverage) or 2H_ICECRYSTAL_UNDEAD (excellent burst_aoe follow-up)?",
+   "flip_bonus": null,
+   "generic": "2H_HOLYSTAFF",
+   "pair": [
+    "clump_create",
+    "burst_aoe"
+   ],
+   "party": [
+    "2H_HAMMER_AVALON",
+    "2H_MACE_MORGANA"
+   ],
+   "points": [
+    {
+     "bonus": 0,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 0.25,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 0.5,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 0.75,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 1.0,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 1.25,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 1.5,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 1.75,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 2.0,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 2.5,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 3.0,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    }
+   ],
+   "specialist": "2H_ICECRYSTAL_UNDEAD"
+  },
+  {
+   "current_bonus": 0.8,
+   "expert_question": "Party already strong on engage (['2H_CLAYMORE', '2H_HAMMER']). Next pick: 2H_HOLYSTAFF (better general coverage) or 2H_TWINSCYTHE_HELL (excellent catch follow-up)?",
+   "flip_bonus": null,
+   "generic": "2H_HOLYSTAFF",
+   "pair": [
+    "engage",
+    "catch"
+   ],
+   "party": [
+    "2H_CLAYMORE",
+    "2H_HAMMER"
+   ],
+   "points": [
+    {
+     "bonus": 0,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 0.25,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 0.5,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 0.75,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 1.0,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 1.25,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 1.5,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 1.75,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 2.0,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 2.5,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    },
+    {
+     "bonus": 3.0,
+     "specialist_wins": false,
+     "winner": "2H_HOLYSTAFF"
+    }
+   ],
+   "specialist": "2H_TWINSCYTHE_HELL"
+  },
+  {
+   "current_bonus": 0.8,
+   "expert_question": "Party already strong on resist_shred (['2H_CLEAVER_HELL', '2H_CROSSBOW']). Next pick: 2H_WILDSTAFF (better general coverage) or 2H_DAGGERPAIR (excellent burst_st follow-up)?",
+   "flip_bonus": null,
+   "generic": "2H_WILDSTAFF",
+   "pair": [
+    "resist_shred",
+    "burst_st"
+   ],
+   "party": [
+    "2H_CLEAVER_HELL",
+    "2H_CROSSBOW"
+   ],
+   "points": [
+    {
+     "bonus": 0,
+     "specialist_wins": false,
+     "winner": "2H_WILDSTAFF"
+    },
+    {
+     "bonus": 0.25,
+     "specialist_wins": false,
+     "winner": "2H_WILDSTAFF"
+    },
+    {
+     "bonus": 0.5,
+     "specialist_wins": false,
+     "winner": "2H_WILDSTAFF"
+    },
+    {
+     "bonus": 0.75,
+     "specialist_wins": false,
+     "winner": "2H_WILDSTAFF"
+    },
+    {
+     "bonus": 1.0,
+     "specialist_wins": false,
+     "winner": "2H_WILDSTAFF"
+    },
+    {
+     "bonus": 1.25,
+     "specialist_wins": false,
+     "winner": "2H_WILDSTAFF"
+    },
+    {
+     "bonus": 1.5,
+     "specialist_wins": false,
+     "winner": "2H_WILDSTAFF"
+    },
+    {
+     "bonus": 1.75,
+     "specialist_wins": false,
+     "winner": "2H_WILDSTAFF"
+    },
+    {
+     "bonus": 2.0,
+     "specialist_wins": false,
+     "winner": "2H_WILDSTAFF"
+    },
+    {
+     "bonus": 2.5,
+     "specialist_wins": false,
+     "winner": "2H_WILDSTAFF"
+    },
+    {
+     "bonus": 3.0,
+     "specialist_wins": false,
+     "winner": "2H_WILDSTAFF"
+    }
+   ],
+   "specialist": "2H_DAGGERPAIR"
+  },
+  {
+   "current_bonus": 0.8,
+   "expert_question": "Party already strong on heal_reduction (['2H_FIRE_RINGPAIR_AVALON', '2H_HALBERD_MORGANA']). Next pick: MAIN_NATURESTAFF (better general coverage) or 2H_LONGBOW_UNDEAD (excellent sustained_dps follow-up)?",
+   "flip_bonus": null,
+   "generic": "MAIN_NATURESTAFF",
+   "pair": [
+    "heal_reduction",
+    "sustained_dps"
+   ],
+   "party": [
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HALBERD_MORGANA"
+   ],
+   "points": [
+    {
+     "bonus": 0,
+     "specialist_wins": false,
+     "winner": "MAIN_NATURESTAFF"
+    },
+    {
+     "bonus": 0.25,
+     "specialist_wins": false,
+     "winner": "MAIN_NATURESTAFF"
+    },
+    {
+     "bonus": 0.5,
+     "specialist_wins": false,
+     "winner": "MAIN_NATURESTAFF"
+    },
+    {
+     "bonus": 0.75,
+     "specialist_wins": false,
+     "winner": "MAIN_NATURESTAFF"
+    },
+    {
+     "bonus": 1.0,
+     "specialist_wins": false,
+     "winner": "MAIN_NATURESTAFF"
+    },
+    {
+     "bonus": 1.25,
+     "specialist_wins": false,
+     "winner": "MAIN_NATURESTAFF"
+    },
+    {
+     "bonus": 1.5,
+     "specialist_wins": false,
+     "winner": "MAIN_NATURESTAFF"
+    },
+    {
+     "bonus": 1.75,
+     "specialist_wins": false,
+     "winner": "MAIN_NATURESTAFF"
+    },
+    {
+     "bonus": 2.0,
+     "specialist_wins": false,
+     "winner": "MAIN_NATURESTAFF"
+    },
+    {
+     "bonus": 2.5,
+     "specialist_wins": false,
+     "winner": "MAIN_NATURESTAFF"
+    },
+    {
+     "bonus": 3.0,
+     "specialist_wins": false,
+     "winner": "MAIN_NATURESTAFF"
+    }
+   ],
+   "specialist": "2H_LONGBOW_UNDEAD"
+  }
+ ]
+}

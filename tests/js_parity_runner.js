@@ -31,15 +31,30 @@ const out = cases.map((c, i) => {
   let forged = null;
   if (i % FORGE_EVERY === 0) {
     // mirrors forge_case in test_js_parity.py incl. the empty-locked-combos
-    // alternation (the [] truthiness divergence shipped once)
-    const combos = Math.floor(i / FORGE_EVERY) % 2 === 0 ? c.combos.slice(0, 2) : [];
-    const r = e.forge(FORGE_SIZE, c.party.slice(0, 2), combos, c.refine_pool);
+    // alternation (the [] truthiness divergence shipped once) and the
+    // locked_gears alternation (2026-08-27)
+    const even = Math.floor(i / FORGE_EVERY) % 2 === 0;
+    const combos = even ? c.combos.slice(0, 2) : [];
+    const lgears = even ? c.gears.slice(0, 2) : null;
+    const r = e.forge(FORGE_SIZE, c.party.slice(0, 2), combos, c.refine_pool,
+                      undefined, lgears);
     forged = { party: r.party, combos: r.combos, gears: r.gears,
                score: r.score,
                feasible: r.feasible, filler: r.filler, held: r.held };
   }
+  // V3-W parity (2026-08-27): dressing OFF while incumbents keep their case
+  // gears — candidates must evaluate naked (mirrors test_js_parity.py).
+  e.setDressing(false);
+  const nakedRec = e.recommend(c.party, 5, null, c.combos, c.gears).map((r) => ({
+    weapon: r.weapon, score: r.score, combo: r.combo, kit: r.kit }));
+  e.setDressing(true);
   return {
+    recommend_naked_cand: nakedRec,
     refine: rp === null ? null : e.refine(rp, REFINE_PASSES, c.refine_pool),
+    // gear-aware refine (owner ruling 2026-08-27; mirrors test_js_parity.py)
+    refine_dressed: rp === null ? null
+      : e.refine(rp, REFINE_PASSES, c.refine_pool, 0,
+                 c.gears.slice(0, rp.length)),
     comp_score: e.compScore(c.party),
     comp_score_locked: e.compScore(c.party, c.combos),
     redundancy: e.redundancy(c.party),
@@ -72,7 +87,8 @@ const out = cases.map((c, i) => {
     })(),
     recommend_locked: e.recommend(c.party, 5, null, c.combos).map((r) => ({
       weapon: r.weapon, score: r.score })),
-    weaknesses: e.weaknesses(c.party, 5).map((g) => ({ cap: g.cap, gap: g.gap })),
+    weaknesses: e.weaknesses(c.party, 5, null, c.gears)
+      .map((g) => ({ cap: g.cap, gap: g.gap })),
     uncovered: e.uncoveredCaps(c.party).slice().sort(),
     identity: e.compIdentity(c.party, c.combos),
     kill_pressure: e.killPressure(c.party, c.combos),

@@ -28,6 +28,7 @@ Read before substantive work:
 - Playwright MCP: `file://` navigation is blocked — serve with `py -3 -m http.server --directory dashboard`; hash-only URL changes do NOT reload the page; write screenshots inside `.playwright-mcp/` (gitignored).
 - `engine/app_scoring.js` reads as BINARY to grep/ripgrep (a literal NUL byte serves as a cache-key separator) — search it with `Select-String`, read it with the Read tool.
 - Port 53321 may be held by the RUNNING companion (the user leaves it up) — check `localhost:53321/status` before binding a mock there.
+- `tests/test_cohort_families.py` spawns the builder as a subprocess and decodes its stdout as UTF-8; under a Git-Bash-spawned console the child Python emits cp1252 (an em-dash becomes byte 0x97) and the test dies with `UnicodeDecodeError`/`NoneType + str` — an ENVIRONMENT artifact, not a contract failure. Run it from PowerShell (7/7 passes) before suspecting the artifact.
 
 ## Tests
 
@@ -45,8 +46,11 @@ node tests/test_loadout_codec.js  # share-URL codec round-trips
 node tests/test_display_math.js   # killboard bucket + cohort-affinity/neighbour/family math (display layer)
 py -3 tests/test_cohort_families.py # observed-family artifact contracts (determinism, disjointness, no id leaks)
 py -3 tests/test_roles.py         # role-book contracts, kit-aware detection, advisory flags (descriptive)
-py -3 tests/tier2_blindtest.py v4 # leave-one-out vs published comps (role-level gate: 70%)
+py -3 tests/test_validation_modes.py # dressed-validation contracts: set_dressing switch, V3 form parser, metrics, builds_index gear join
+py -3 tests/tier2_blindtest.py v4 # leave-one-out vs published comps in 3 incumbent-gear classes (gate: legacy weapon_only role-level 70%; dressed sections report-only pending owner re-basing)
 ```
+
+Expert-round tooling (generate/score, human-in-the-loop — not CI gates): `tests/tier2_blindtest.py generate|score` (V3 blind forms, `score --mode w|d|both` — W = symmetric weapon-only via `set_dressing(False)`, D = production dressed, THE gate), `tests/gear_blindtest.py generate|score` (gear doctrine cards; answers file stays hidden from experts). Report-only audits (never part of a build): `pipeline/audit_validation_asymmetry.py`, `pipeline/audit_dressed_templates.py`, `pipeline/audit_frontline_floor.py`, `pipeline/audit_gear_synergy.py`, `pipeline/calibrate_scoring.py` (sensitivity harness over `calibration/`; patched-dataset golden counts via the `BION_DATASET` path override — never set it in normal runs). Findings + open owner rulings: `docs/superpowers/findings/2026-08-27-*.md`; calibration discipline: `calibration/README.md` (train/validation/holdout — holdout is never examined while tuning).
 
 ## Build chain
 
@@ -90,6 +94,7 @@ The validation loop that built the identity system: in-chat **blind rounds** wit
 - **Anti-circularity** (standing rule, VALIDATION.md): comps that calibrated a template must not drive retuning against their own gate results. Findings from gate runs are hypotheses for the owner/expert, not fixes. Template retunes need the owner's ruling.
 - **Judged at roster size**: the existing roster scores at actual size; `PLANNED` steers forge fill and warnings only. Do not collapse to `max(planned, roster)` scoring. Killboard *display* buckets are the opposite by design: `usageBucket()` in `_app.js` keys off `PLAN()` — the fights the comp is *for*.
 - **One spell per slot**: capability supply comes from resolved combos, never the flat union of a weapon's kit; forge constraints check the selected combo, not the sheet's theoretical maximum.
+- **Structural floors are source-aware** (Option C, owner ruling 2026-08-27): hard floors read the WEAPON+LOADOUT supply only — in `fitness`, every marginal path, `pick_report`/`explain`, and the dashboard's floor tags (`supplyFloor`). Worn gear counts toward coverage/headroom/overstack, never toward a structural floor, and a candidate's kit can never buy floor relief (the 2026-08-12 pseudo-tankiness ruling extended to the gear stat channel; `test_validation_modes.py` V5 pins it). Synergy is WEAPON-INTERACTION synergy — weapon+loadout supply only, never gear (scoring.yaml rule 3).
 - **Roster mutations** go through the central handlers (`data-add`, `data-swapat`) so loadout reset, provenance, prefill, and role re-sorting stay centralized; `sortPartyByRole()` applies one stable permutation across `party`/`PROV`/`COMBO`/`LOADOUT` — any new mutation path must preserve that.
 - **Descriptive layers never score**: `comp_identity`, `kill_pressure`, `fight_chain`, `pick_report`, the role layer (`detect_role`/`role_advisory` — test_roles R5), and the killboard surfaces describe — golden T23c/T25b/T26b/T30d literally prove fitness is untouched by computing them. The one sanctioned influence is the suggestion gate (bars suggestion POOLS, never scoring — forge F6/F13 pin the contract). Identity-aware *scoring* stays parked until more blind rounds validate the labels.
 - **E-first identity**: a weapon's identity is its E spell first (sheets are structured that way; `derive_style_fit` reads the E's delivery and footprint; a utility-E weapon like Harpoon is a utility carrier whose damage never anchors an identity split).

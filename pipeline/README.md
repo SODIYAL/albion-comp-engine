@@ -90,6 +90,30 @@ manual Armory imports (`armory_imports/`).
 `out/builds_validation.json` (problems, quarantines, promotion decisions).
 `dashboard/build.py` inlines the index; nothing in it feeds scoring.
 
+`gear_join.py` (2026-08-27) is the shared read-side of that evidence for
+the dressed-validation layer: it reconstructs per-member ACTUAL kits from
+`out/builds_index.json` (join key `comp_id:party_name:slot_index` over the
+FULL slot list, battlemounts included; conservative id normalization
+mirroring `build_dataset._normalize_gear_id` — unresolved pieces are
+counted, never guessed) plus `doctrine_gears` (kit_variants v0). Consumers:
+`tests/tier2_blindtest.py` (V3-D / V4 gear classes) and the dressed audits.
+
+## Dressed audits & calibration (2026-08-27, report-only — never part of a build)
+
+```text
+py -3 pipeline/audit_validation_asymmetry.py  # legacy vs V3-W vs dressed top-3 diffs -> out/validation_asymmetry_probe.json
+py -3 pipeline/audit_dressed_templates.py     # per-comp capability supply weapon/combo/dressed/doctrine vs targets, soft caps, floors -> out/dressed_template_audit.json
+py -3 pipeline/audit_frontline_floor.py       # adversarial no-tank parties vs the tankiness hard floor -> out/frontline_floor_audit.json
+py -3 pipeline/audit_gear_synergy.py          # gear-sourced synergy sides: measured + labeled hypotheticals -> out/gear_synergy_audit.json
+py -3 pipeline/calibrate_scoring.py [--golden] # sensitivity sweeps over calibration/ (train/validation/holdout) -> out/calibration_report.json
+```
+
+None of these writes anything a build reads; `calibrate_scoring.py` runs
+golden counts against a PATCHED TEMP COPY of the dataset via the
+`BION_DATASET` path override — the real dataset is never touched. Findings
+and the open owner rulings live in `docs/superpowers/findings/2026-08-27-*.md`;
+the split discipline in `calibration/README.md`.
+
 ## Moving to a new game patch
 
 Update `data/source_pins.yaml` to the new ao-bin-dumps commit
