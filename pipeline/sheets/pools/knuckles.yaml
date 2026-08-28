@@ -18,3 +18,7 @@ capabilities:
   - {cap: sustained_dps, score: 4, evidence: PASSIVE_KNUCKLE_BRAWLER}        # artifact variant passive
   - {cap: sustained_dps, score: 4, evidence: PASSIVE_KNUCKLE_BRAWLER_SPEED}  # Fatal Fury stacks + AA brawl
   - {cap: clump_create, score: 2, evidence: TRIPLE_KICK}                     # W: pulls 1 enemy player along the dash — the kidnap (QW)
+  # reflect (2026-08-28): Counter returns 150% — the biggest number in the
+  # game — but self-only, for a 0.8s counter-stance. Personal trick, not a
+  # comp tool. (structural: reflectdamageactive 1.50, target self)
+  - {cap: reflect, score: 2, evidence: KNUCKLE_COUNTER}                      # W: self-only counter-stance (QW)

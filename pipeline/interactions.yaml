@@ -30,6 +30,59 @@
 # Every non-unknown claim cites its source. Missing facts stay unknown —
 # never guessed (§12).
 
+- spell: REFLECTAREA
+  effect_name: "Protection of the Fiends (Demon Armor group reflect aura)"
+  duplicate: full
+  confidence: verified
+  source: >
+    Spell description @ ao-bin-dumps 5cf2e8e9: "Create an aura with a 7
+    radius around you while channeling ... Reflects 0.5 of incoming damage
+    to you and up to 9 allies as magical damage. Increases all damage
+    resistances of the affected allies by 0.43. Decreases your damage
+    resistances by 0.37." Structural: reflectdamageactive @amountpercent
+    0.50 @target friendotherplayers, plus magicresistance+/physicalarmor+
+    on ally and magicresistance-/physicalarmor- on self.
+    The aura is applied to OTHER players, so a second wearer stands inside
+    the first's aura and vice versa — each one's self-penalty is repaid by
+    the other's grant (-0.37 own vs +0.43 received). The duplicates are
+    independent auras (full stacking of the reflect itself).
+  as_of: 2026-08-28
+  verified_patch: "2026-07-21"
+  scoring_note: >
+    self_cost_offset_min_copies 2 — the ONLY super-additive duplicate rule in
+    the model, and deliberately narrow (owner 2026-08-28: "duplicate is worth
+    more only in special cases like demon armor"). With one wearer the
+    self-penalty stands; with two or more the wearers cover each other, so
+    the penalty is not charged. Corroborated by the observed effect quotas:
+    reflect shells appear 3,3,4,3,3 across the five near-complete 20-man
+    rosters in the corpus and NEVER as a single copy. This offsets a cost
+    only — it never adds supply, so a duplicate can never score better than
+    two independent first copies.
+  self_cost_offset_min_copies: 2
+  badges: [GROUP REFLECT, SELF-COST]
+  components:
+    - id: group_reflect
+      kind: buff
+      reflect: not_applicable
+      purge: unknown
+      cleanse: not_applicable
+      duplicate: full
+      notes: 50% of incoming damage returned for the wearer and up to 9 allies
+    - id: ally_resistances
+      kind: buff
+      reflect: not_applicable
+      purge: unknown
+      cleanse: not_applicable
+      duplicate: full
+      notes: +0.43 damage resistances to affected allies
+    - id: wearer_resistance_cost
+      kind: debuff
+      reflect: not_applicable
+      purge: unknown
+      cleanse: not_applicable
+      duplicate: full
+      notes: -0.37 damage resistances on the wearer while the aura runs
+
 - spell: SPEEDARCHER_KITE
   effect_name: "Enchanted Quiver (self arrow enchant)"
   duplicate: full

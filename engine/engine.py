@@ -110,6 +110,21 @@ class Engine:
             _rec = self.interactions[_sid]
             if _rec.get("confidence") == "verified" and _rec.get("nonstacking_caps"):
                 self.nonstack[_sid] = list(_rec["nonstacking_caps"])
+        # SUPER-ADDITIVE DUPLICATES (2026-08-28) — the mirror of the
+        # count-once rule above, and held to the same bar: a VERIFIED record
+        # declaring `self_cost_offset_min_copies: N` means N copies of the
+        # item cover each other's SELF-COST (Demon Armor wearers stand in one
+        # another's aura). Resolved here from the cost's evidence spell to
+        # the gear key that carries it, so the hot path is a dict lookup.
+        # gear key -> minimum copies. Cancels a cost, never adds supply.
+        self._cost_offsets = {}
+        for _gk, _g in (self.gear or {}).items():
+            for _cap, _sid in (_g.get("self_cost_evidence") or {}).items():
+                _rec = self.interactions.get(_sid) or {}
+                _n = _rec.get("self_cost_offset_min_copies")
+                if _rec.get("confidence") == "verified" and _n:
+                    self._cost_offsets[_gk] = min(
+                        self._cost_offsets.get(_gk, _n), _n)
         # Composition layer (pipeline/templates/composition.yaml): what the
         # FORGE may generate — role bands, copy limits, groups, viability,
         # size physics. Absent (older dataset) -> everything defaults open.
@@ -1010,7 +1025,8 @@ class Engine:
             choice = self.default_gear_choice(key)
         return extras[choice]
 
-    def build_extra(self, weapon, combo=None, gear=None, role=None):
+    def build_extra(self, weapon, combo=None, gear=None, role=None,
+                    waive_costs=None):
         """A FULL-BUILD member's effective caps: weapon loadout + every gear
         item's ABILITY contribution + the build's STAT channel. `gear` is a
         list of gear keys or (key, choice) pairs.
@@ -1071,7 +1087,48 @@ class Engine:
             for cap in bs.get("cc_mult_caps") or []:
                 if cap in out:
                     out[cap] *= 1.0 + ccdur_pct
+        # SELF-COSTS (2026-08-28): what the item costs its OWN wearer, in the
+        # same 1-7 sheet points as a capability score. Demon Armor's aura
+        # buys the group 0.43 damage resistances by spending 0.37 of the
+        # wearer's; the model recorded only the upside, which is how a
+        # backwards `tankiness` claim survived every review. Applied HERE —
+        # on the wearer's own vector — never as a subtraction from the team
+        # pool, so it composes correctly with per-member accounting.
+        # Charged last so a cost cannot be re-multiplied by the stat
+        # channels above, and floored at zero: an item may cancel its own
+        # contribution, never invert someone else's.
+        # `waive_costs` holds gear keys whose self-cost the PARTY has offset
+        # (see effective_supply / _self_cost_waivers) — Demon Armor wearers
+        # stand in each other's auras, so with 2+ copies nobody pays.
+        for item in (gear or []):
+            key = item[0] if isinstance(item, (list, tuple)) else item
+            if waive_costs and key in waive_costs:
+                continue
+            for cap, pts in ((self.gear.get(key) or {}).get("self_costs")
+                             or {}).items():
+                if cap in out:
+                    out[cap] = max(0.0, out[cap] - pts / self.score_unit)
         return out
+
+    def _self_cost_waivers(self, gears):
+        """Gear keys whose self-cost this party has offset. The ONLY
+        super-additive duplicate rule in the model, and deliberately narrow
+        (owner 2026-08-28: "duplicate is worth more only in special cases
+        like demon armor"): an item qualifies solely when a VERIFIED
+        interaction record on its cost's evidence spell declares
+        `self_cost_offset_min_copies: N` and the party fields N or more of
+        that item. It can only CANCEL A COST — never add supply — so a
+        duplicate still cannot out-earn two independent first copies."""
+        if not self._cost_offsets or not gears:
+            return frozenset()
+        counts = {}
+        for g in gears:
+            for item in (g or []):
+                key = item[0] if isinstance(item, (list, tuple)) else item
+                if key in self._cost_offsets:
+                    counts[key] = counts.get(key, 0) + 1
+        return frozenset(k for k, n in counts.items()
+                         if n >= self._cost_offsets[k])
 
     def kit_variants(self, weapon):
         """Doctrine kit variants for GENERATION (dressed forge 2026-08-27):
@@ -1412,9 +1469,11 @@ class Engine:
         gears (optional, full-build members): per-member list of gear keys
         or (key, choice) pairs; None = weapon-only (unchanged behavior)."""
         s = {}
+        waived = self._self_cost_waivers(gears) if gears else frozenset()
         for i, w in enumerate(party):
             extra = (self.build_extra(w, combos[i] if combos else None,
-                                      gears[i] if gears else None)
+                                      gears[i] if gears else None,
+                                      waive_costs=waived)
                      if gears and gears[i] else
                      self.member_extra(w, combos[i] if combos else None))
             for cap, v in extra.items():

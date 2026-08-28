@@ -67,6 +67,7 @@
   curated_as_of: 2026-08-27
   capabilities:
     - {cap: tankiness,     score: 2, evidence: RETALIATE2}       # +20% resists 3s + 85% reflect
+    - {cap: reflect,       score: 2, evidence: RETALIATE2}       # 85% but self-only, 3s (2026-08-28)
 
 - gear: HEAD_LEATHER_MORGANA         # Stalker Hood
   slot: head

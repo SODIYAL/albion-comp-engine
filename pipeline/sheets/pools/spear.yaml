@@ -13,3 +13,8 @@ capabilities:
   - {cap: self_sustain, score: 2, evidence: PASSIVE_HEALTHCHANCE_SPEAR}  # PASSIVE: Life Leech
   - {cap: root, score: 2, evidence: SKILLSHOT_PULL}                      # (QW)
   - {cap: sustained_dps, score: 4, evidence: SPIRITSPEAR}                # spear charge engine (QW)
+  # reflect (promoted 2026-08-28): Deflecting Spin returns 100% of incoming
+  # damage — but only to the spinner, and only while channelling. A personal
+  # defensive trick, not a comp tool: 2 on the ladder where Demon Armor's
+  # team-wide aura sits at 6. (structural: reflectdamageactive 1.00)
+  - {cap: reflect, score: 2, evidence: DEFLECTINGSTANCE}                 # W: self-only, channelled (QW)

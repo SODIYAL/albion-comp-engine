@@ -15,3 +15,7 @@ capabilities:
   - {cap: self_sustain, score: 2, evidence: PASSIVE_ARMORCHANCE_SWORD}  # PASSIVE: armor proc
   - {cap: peel, score: 2, evidence: SPLITTINGSLASH}                     # the root defensively; W: Interrupt (QW)
   - {cap: root, score: 2, evidence: SPLITTINGSLASH}                     # W: 1.25s line root (QW)
+  # reflect (2026-08-28): Parry returns 125% while immune to damage —
+  # self-only and brief. Same ladder rung as the other personal stances.
+  # (structural: reflectdamageactive 1.25, target self)
+  - {cap: reflect, score: 2, evidence: PARRY}                           # W: self-only parry stance (QW)

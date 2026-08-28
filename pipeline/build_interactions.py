@@ -113,6 +113,17 @@ def main():
         for pool in (line.get("spells") or {}).values():
             for sid in pool:
                 equippable_on.setdefault(sid, []).append(wk)
+    # GEAR equippability (2026-08-28): this layer was weapon-only "until gear
+    # records exist" — they do now (the first is Demon Armor's group reflect
+    # aura), so a gear ability is a legal record subject. Kept as its own map
+    # so the curation-backlog split below stays weapon-vs-gear.
+    gear_equippable_on = {}
+    with open(os.path.join(OUT, "gear_spells.json"), encoding="utf-8") as f:
+        gear_spells_db = json.load(f)
+    for gk, line in gear_spells_db.items():
+        for kind in ("actives", "passives"):
+            for sid in (line.get(kind) or []):
+                gear_equippable_on.setdefault(sid, []).append(gk)
 
     entries = yaml.safe_load(open(SRC, encoding="utf-8")) or []
     errors, spells = [], {}
@@ -123,8 +134,10 @@ def main():
             errors.append(f"{where}: unknown spell (not in spell_index)")
             continue
         weapons = sorted(equippable_on.get(sid, []))
-        if not weapons:
-            errors.append(f"{where}: spell is not equippable on any weapon")
+        gear_items = sorted(gear_equippable_on.get(sid, []))
+        if not weapons and not gear_items:
+            errors.append(f"{where}: spell is equippable on nothing "
+                          "(no weapon line, no gear piece)")
         conf = e.get("confidence")
         if conf not in CONFIDENCE:
             errors.append(f"{where}: confidence {conf!r} not in {sorted(CONFIDENCE)}")
@@ -178,6 +191,31 @@ def main():
                 f"{where}: verified non_reflectable cites the description, "
                 "but the description carries no reflect statement")
 
+        # SUPER-ADDITIVE DUPLICATES (2026-08-28) — the mirror of
+        # nonstacking_caps, and held to the same bar. `self_cost_offset_min_
+        # copies: N` says that once N members equip this spell, the item's
+        # curated self_costs stop being charged, because the copies cover
+        # each other (Demon Armor: each wearer stands in the others' aura).
+        # It can only ever CANCEL A COST — it never adds supply — so a
+        # duplicate still cannot out-earn two independent first copies.
+        # Owner 2026-08-28: "duplicate is worth more only in special cases
+        # like demon armor", so this is verified-only and must justify
+        # itself in a scoring_note like every other scoring coupling.
+        off = e.get("self_cost_offset_min_copies")
+        if off is not None:
+            if conf != "verified":
+                errors.append(f"{where}: self_cost_offset_min_copies requires "
+                              f"confidence verified (is {conf}) — unknown "
+                              "never changes a score")
+            if not isinstance(off, int) or off < 2:
+                errors.append(f"{where}: self_cost_offset_min_copies must be an "
+                              f"int >= 2 (is {off!r}) — offsetting at one copy "
+                              "would just be deleting the cost")
+            if not (e.get("scoring_note") or "").strip():
+                errors.append(f"{where}: self_cost_offset_min_copies requires a "
+                              "scoring_note explaining why copies cover "
+                              "each other")
+
         ns = e.get("nonstacking_caps") or []
         if ns:
             if conf != "verified":
@@ -215,6 +253,7 @@ def main():
             "name": spell_index[sid].get("name"),
             "effect_name": e.get("effect_name"),
             "weapons": weapons,
+            "gear_items": gear_items,
             "duplicate": dup,
             "reflect": reflect,
             "components": comps,
@@ -222,6 +261,7 @@ def main():
                                 if c.get("kind") == "cc" and c.get("cc_type")}),
             "badges": badges,
             "nonstacking_caps": sorted(ns),
+            "self_cost_offset_min_copies": off,
             "scoring_note": (e.get("scoring_note") or "").strip() or None,
             "confidence": conf,
             "source": (e.get("source") or "").strip(),
@@ -257,6 +297,9 @@ def main():
                             if s["confidence"] == "verified"),
             "with_nonstacking_caps": sum(1 for s in spells.values()
                                          if s["nonstacking_caps"]),
+            "with_self_cost_offset": sum(
+                1 for s in spells.values()
+                if s.get("self_cost_offset_min_copies")),
             "structural_unclaimed": unclaimed,
             "structural_unclaimed_gear": gear_unclaimed,
             "note": ("Spell-keyed PvP interaction records. Scoring reads ONLY "

@@ -2,7 +2,7 @@
  "_meta": {
   "adapter": "build_interactions",
   "adapter_version": "1",
-  "entries": 30,
+  "entries": 31,
   "note": "Spell-keyed PvP interaction records. Scoring reads ONLY verified nonstacking_caps; everything else is display/analysis. unknown is a stored answer, never a guess.",
   "source_commit": "5cf2e8e9b7021f98683181fa5b0e3c64575978e4",
   "structural_unclaimed": [],
@@ -10,8 +10,9 @@
    "INNER_CORRUPTION",
    "NASTY_WOUNDS"
   ],
-  "verified": 29,
-  "with_nonstacking_caps": 1
+  "verified": 30,
+  "with_nonstacking_caps": 1,
+  "with_self_cost_offset": 1
  },
  "spells": {
   "BLACKHOLE": {
@@ -50,6 +51,7 @@
    "confidence": "likely",
    "duplicate": "full",
    "effect_name": "Black Hole (pull + damage + slow)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -59,6 +61,7 @@
    "notes": null,
    "reflect": "unknown",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9 states pull, damage and slow; nothing about reflect or duplicate behavior. Two black holes are two ground zones (baseline behavior) \u2014 likely full, not verified.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [],
@@ -94,6 +97,7 @@
    "confidence": "verified",
    "duplicate": "shared_stack",
    "effect_name": "Vile Curse (target-side charge pool, stacks up to 4)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -105,6 +109,7 @@
    "notes": null,
    "reflect": "unknown",
    "scoring_note": "Multiple cursed wielders feed one 4-charge pool per target, so the Q's DoT supply does not multiply with wielders \u2014 party supply counts CURSEDOT's sustained_dps once across all members equipping it (largest single contribution), which is what let a forged 25-man stack six curse weapons at full value before this record landed.",
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: \"Applies one Vile Curse Charge ... Each Vile Curse Charge deals \u2026 magical damage over \u2026 (stacks up to 4 times)\" \u2014 the charges live ON THE TARGET and cap at 4 regardless of who applied them (DEATHCURSE2's verified record reads the same pool: \"damage based on the amount of Vile Curse Charges on the target\"). Owner ruling 2026-08-24, forge-quality round 4: \"the q spells \u2026 stack but don't do extra damage from more people.\"",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [],
@@ -146,6 +151,7 @@
    "confidence": "verified",
    "duplicate": "shared_stack",
    "effect_name": "Death Curse (consumes shared Vile Curse Charges)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -155,6 +161,7 @@
    "notes": null,
    "reflect": "non_reflectable",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: \"dealing magical damage based on the amount of Vile Curse Charges on the target \u2026 (the damage cannot be reflected)\". Vile Curse Charges are one pool ON THE TARGET that every curse caster feeds \u2014 duplicates accelerate the shared stack (a synergy, not a conflict; each cast's damage is its own instance).",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -184,6 +191,7 @@
    "confidence": "verified",
    "duplicate": "unknown",
    "effect_name": "Inner Shadow (armor-class-dependent zone)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -193,6 +201,7 @@
    "notes": null,
    "reflect": "non_reflectable",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: per-armor-class duration/ damage, \"(this damage cannot be reflected)\". Whether two Inner Shadows on one target coexist is NOT stated.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -233,6 +242,7 @@
    "confidence": "verified",
    "duplicate": "partial",
    "effect_name": "Enfeeble Blades (purging zone)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": true
@@ -242,6 +252,7 @@
    "notes": null,
    "reflect": "non_reflectable",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: channel \"(cannot be interrupted)\", blade damage \"(this damage cannot be reflected)\", \"Purges all buffs of enemies within the area.\"",
    "structural_interrupt_statements": [
     "5 radius around the targeted location while channeling for {1} (cannot be interrupted)."
@@ -278,6 +289,7 @@
    "confidence": "verified",
    "duplicate": "unknown",
    "effect_name": "Exploding Shot (sticky bomb)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -287,6 +299,7 @@
    "notes": null,
    "reflect": "partial",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: initial hit, then the bomb \"explodes ... (the damage can't be reflected)\". Whether two bombs coexist on one target is not stated.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -322,6 +335,7 @@
    "confidence": "verified",
    "duplicate": "partial",
    "effect_name": "Fire Artillery (orbs + burning patches, burn stacks to 4)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -331,6 +345,7 @@
    "notes": null,
    "reflect": "partial",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: orbs in a 3 radius, burning patch ignite \"(stacks up to 4 times)\" whose damage \"cannot be reflected\". Whether two casters share the 4-stack cap is not stated.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -380,6 +395,7 @@
    "confidence": "verified",
    "duplicate": "partial",
    "effect_name": "Flaming Phoenix (hit + burning ground + Healing Received -40%)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -389,6 +405,7 @@
    "notes": null,
    "reflect": "partial",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: initial 200 damage, ground fire for 6.5 whose ticks \"(this damage cannot be reflected)\", and \"reduces Healing Received by 0.4\". The initial hit's reflectability and the anti-heal's duplicate-caster stacking are NOT stated. The showcase partial-interaction ability: three components, three behaviors.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -423,6 +440,7 @@
    "confidence": "verified",
    "duplicate": "full",
    "effect_name": "Burning Field (hit + ground fire)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -432,6 +450,7 @@
    "notes": null,
    "reflect": "partial",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: 3-radius hit, ground fire \"(this damage cannot be reflected)\". Independent areas per caster.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -478,6 +497,7 @@
    "confidence": "verified",
    "duplicate": "partial",
    "effect_name": "Wall of Flames (wall + aflame fear)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -487,6 +507,7 @@
    "notes": null,
    "reflect": "partial",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: firewall damage over time \"(this damage cannot be reflected)\"; \"Enemies set aflame will flee\" \u2014 a fear. Fear stacking across casters unstated.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -529,6 +550,7 @@
    "confidence": "verified",
    "duplicate": "full",
    "effect_name": "Flame Tornado (moving zone + lingering burn)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -538,6 +560,7 @@
    "notes": null,
    "reflect": "partial",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: tornado zone ticks; enemies leaving keep taking damage \"(damage can't be reflected)\". Independent tornadoes per caster.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -577,6 +600,7 @@
    "confidence": "verified",
    "duplicate": "full",
    "effect_name": "Ice Crystal (stun + explosion)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -586,6 +610,7 @@
    "notes": null,
    "reflect": "non_reflectable",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: stun 1s, then explosion \"(the damage can't be reflected)\". Two casters place two independent crystals (ground zones) \u2014 full duplicate value for damage and control; stun diminishing-returns interaction is not stated.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -626,6 +651,7 @@
    "confidence": "verified",
    "duplicate": "partial",
    "effect_name": "Frozen Hell (blizzard; slow ignores CC Resistance)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -635,6 +661,7 @@
    "notes": null,
    "reflect": "partial",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: blizzard ticks \"(this damage cannot be reflected)\"; \"Slows by 0.5 (ignores Crowd Control Resistance)\" plus a stronger center slow, also ignoring CC Resistance.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -663,6 +690,7 @@
    "confidence": "verified",
    "duplicate": "full",
    "effect_name": "Explosive Mine (first player triggers)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -672,6 +700,7 @@
    "notes": null,
    "reflect": "non_reflectable",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: \"The first player to step on the mine will activate it ... (the damage can't be reflected)\". Independent mines per caster.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -701,6 +730,7 @@
    "confidence": "verified",
    "duplicate": "full",
    "effect_name": "Earth Crusher (charged self-centered blast)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": true
@@ -710,6 +740,7 @@
    "notes": null,
    "reflect": "non_reflectable",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: channel \"(can't be interrupted)\"; damage/radius scale with channel time \"(this damage cannot be reflected)\". Each caster charges their own blast.",
    "structural_interrupt_statements": [
     "totalduration$ (can't be interrupted)."
@@ -740,6 +771,7 @@
    "confidence": "verified",
    "duplicate": "full",
    "effect_name": "Demon Arrow (ramping pierce line)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -749,6 +781,7 @@
    "notes": null,
    "reflect": "non_reflectable",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: pierces all enemies, player damage ramps per enemy already hit \"(the damage can't be reflected)\". Independent arrows per caster.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -794,6 +827,7 @@
    "confidence": "verified",
    "duplicate": "partial",
    "effect_name": "Combustion (burn + AoE fear + fiery trail)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -803,6 +837,7 @@
    "notes": null,
    "reflect": "partial",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: target burn; \"The burning enemy and all enemies within a 4 radius will flee\" \u2014 a fear; the trail damage \"(the damage can't be reflected)\".",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -851,6 +886,7 @@
    "confidence": "verified",
    "duplicate": "full",
    "effect_name": "Avalanche (rolling snowball + knockback + trail)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -860,6 +896,7 @@
    "notes": null,
    "reflect": "partial",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: rolling damage \"(damage cannot be reflected)\", knockback 10, freezing trail slow, terrain explosion. Independent snowballs per caster.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -889,6 +926,7 @@
    "confidence": "verified",
    "duplicate": "full",
    "effect_name": "Ice Storm (moving zone)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -898,6 +936,7 @@
    "notes": null,
    "reflect": "non_reflectable",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: moving storm ticks \"(the damage can't be reflected)\". Independent storms per caster.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -945,6 +984,7 @@
    "confidence": "verified",
    "duplicate": "partial",
    "effect_name": "Aftershock (max & current Health -15%)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -954,6 +994,7 @@
    "notes": null,
    "reflect": "unknown",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: leap + AoE hit, cone throw-up, \"Decreases Max and current Health by 0.15 for 5.\" Whether two casters' Aftershock cuts stack is NOT stated \u2014 unknown, not assumed.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [],
@@ -987,6 +1028,7 @@
    "confidence": "verified",
    "duplicate": "full",
    "effect_name": "Raging Storm (stormcloud zone)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -996,6 +1038,7 @@
    "notes": null,
    "reflect": "non_reflectable",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: stormcloud DoT \"(this damage cannot be reflected)\" + lingering damage on enemies leaving the area. Independent zones per caster.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -1033,6 +1076,7 @@
    "confidence": "verified",
    "duplicate": "partial",
    "effect_name": "Magma Sphere (roll + max-Health true damage vs unmounted)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -1042,6 +1086,7 @@
    "notes": null,
    "reflect": "partial",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: rolling 240 damage; unmounted players take a share of Max Health as true damage over time \"(this damage can't be reflected)\". Cross-caster stacking of the burn unstated.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -1081,6 +1126,7 @@
    "confidence": "verified",
    "duplicate": "full",
    "effect_name": "Meteor (delayed burst + knockback)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -1090,6 +1136,7 @@
    "notes": null,
    "reflect": "non_reflectable",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: 434 damage in a 5 radius \"(this damage cannot be reflected)\", knockback 3. Independent meteors per caster.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -1127,6 +1174,7 @@
    "confidence": "verified",
    "duplicate": "partial",
    "effect_name": "Hundred Striking Fists (cone channel + delayed detonation)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": true
@@ -1136,6 +1184,7 @@
    "notes": null,
    "reflect": "partial",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9 (full text surfaced by the 700-char description cap, 2026-08-19): channel \"(can't be interrupted)\"; cone hits every 0.5; 2s after the last hit the target takes extra damage per hit received \"(stacks up to 10 times, damage can't be reflected)\". Cross-caster behavior of the detonation stack is not stated.",
    "structural_interrupt_statements": [
     "totalduration$ (can't be interrupted)."
@@ -1176,6 +1225,7 @@
    "confidence": "verified",
    "duplicate": "full",
    "effect_name": "Phantom Twin (remote projection combo)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -1185,6 +1235,7 @@
    "notes": null,
    "reflect": "partial",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: projection slashes at the target position \"(damage cannot be reflected)\" + slow; 3rd combo slam. Independent projections per caster.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -1194,6 +1245,65 @@
    "weapons": [
     "2H_DOUBLEBLADEDSTAFF_CRYSTAL"
    ]
+  },
+  "REFLECTAREA": {
+   "as_of": "2026-08-28",
+   "badges": [
+    "GROUP REFLECT",
+    "SELF-COST",
+    "DUPLICATE:FULL"
+   ],
+   "cc_types": [],
+   "components": [
+    {
+     "cleanse": "not_applicable",
+     "duplicate": "full",
+     "id": "group_reflect",
+     "kind": "buff",
+     "notes": "50% of incoming damage returned for the wearer and up to 9 allies",
+     "purge": "unknown",
+     "reflect": "not_applicable"
+    },
+    {
+     "cleanse": "not_applicable",
+     "duplicate": "full",
+     "id": "ally_resistances",
+     "kind": "buff",
+     "notes": "+0.43 damage resistances to affected allies",
+     "purge": "unknown",
+     "reflect": "not_applicable"
+    },
+    {
+     "cleanse": "not_applicable",
+     "duplicate": "full",
+     "id": "wearer_resistance_cost",
+     "kind": "debuff",
+     "notes": "-0.37 damage resistances on the wearer while the aura runs",
+     "purge": "unknown",
+     "reflect": "not_applicable"
+    }
+   ],
+   "confidence": "verified",
+   "duplicate": "full",
+   "effect_name": "Protection of the Fiends (Demon Armor group reflect aura)",
+   "gear_items": [
+    "ARMOR_PLATE_HELL"
+   ],
+   "interrupt": {
+    "can_interrupt": null,
+    "uninterruptible": null
+   },
+   "name": "Protection of the Fiends",
+   "nonstacking_caps": [],
+   "notes": null,
+   "reflect": "not_applicable",
+   "scoring_note": "self_cost_offset_min_copies 2 \u2014 the ONLY super-additive duplicate rule in the model, and deliberately narrow (owner 2026-08-28: \"duplicate is worth more only in special cases like demon armor\"). With one wearer the self-penalty stands; with two or more the wearers cover each other, so the penalty is not charged. Corroborated by the observed effect quotas: reflect shells appear 3,3,4,3,3 across the five near-complete 20-man rosters in the corpus and NEVER as a single copy. This offsets a cost only \u2014 it never adds supply, so a duplicate can never score better than two independent first copies.",
+   "self_cost_offset_min_copies": 2,
+   "source": "Spell description @ ao-bin-dumps 5cf2e8e9: \"Create an aura with a 7 radius around you while channeling ... Reflects 0.5 of incoming damage to you and up to 9 allies as magical damage. Increases all damage resistances of the affected allies by 0.43. Decreases your damage resistances by 0.37.\" Structural: reflectdamageactive @amountpercent 0.50 @target friendotherplayers, plus magicresistance+/physicalarmor+ on ally and magicresistance-/physicalarmor- on self. The aura is applied to OTHER players, so a second wearer stands inside the first's aura and vice versa \u2014 each one's self-penalty is repaid by the other's grant (-0.37 own vs +0.43 received). The duplicates are independent auras (full stacking of the reflect itself).",
+   "structural_interrupt_statements": [],
+   "structural_reflect_statements": [],
+   "verified_patch": "2026-07-21",
+   "weapons": []
   },
   "SHAPE_W_DAMAGE_AOE": {
    "as_of": "2026-08-19",
@@ -1233,6 +1343,7 @@
    "confidence": "verified",
    "duplicate": "full",
    "effect_name": "Distortion (zone + self Shift Charges)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -1242,6 +1353,7 @@
    "notes": null,
    "reflect": "partial",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: cloud ticks \"(this damage cannot be reflected)\" + slow; each enemy hit applies a Shift Charge ON THE CASTER (self resource \u2014 duplicates each charge their own).",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -1286,6 +1398,7 @@
    "confidence": "verified",
    "duplicate": "partial",
    "effect_name": "Shrinking Curse (max & current Health, damage, Healing Cast -40%)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -1295,6 +1408,7 @@
    "notes": null,
    "reflect": "unknown",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: \"decreasing max and current Health of all enemies hit by 0.4 and their damage dealt and Healing Cast by 0.4 for 8.\" Duplicate-caster stacking of the named debuff is NOT stated \u2014 unknown.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [],
@@ -1321,6 +1435,7 @@
    "confidence": "verified",
    "duplicate": "full",
    "effect_name": "Haunting Screams (moving haunt zone)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -1330,6 +1445,7 @@
    "notes": null,
    "reflect": "non_reflectable",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: moving 6-radius zone ticks \"(the damage can't be reflected)\" plus a players-only extra component. Independent zones per caster.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [
@@ -1360,6 +1476,7 @@
    "confidence": "verified",
    "duplicate": "full",
    "effect_name": "Enchanted Quiver (self arrow enchant)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -1369,6 +1486,7 @@
    "notes": null,
    "reflect": "not_applicable",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: \"Enchant 4 of YOUR arrows \u2026 YOUR Auto-Attack Speed / physical Auto-Attack damage\" \u2014 a self-targeted buff; each caster enchants their own arrows, so duplicates are fully independent. (Corrects the stale community example of a shared resistance-reduction Quiver \u2014 no such component exists in current data.)",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [],
@@ -1404,6 +1522,7 @@
    "confidence": "verified",
    "duplicate": "partial",
    "effect_name": "Thorn Growth (zone + Thorns Charges on enemies)",
+   "gear_items": [],
    "interrupt": {
     "can_interrupt": null,
     "uninterruptible": null
@@ -1413,6 +1532,7 @@
    "notes": null,
    "reflect": "non_reflectable",
    "scoring_note": null,
+   "self_cost_offset_min_copies": null,
    "source": "Spell description @ ao-bin-dumps 5cf2e8e9: growth ticks \"(this damage cannot be reflected)\"; every tick applies a Thorns Charge to enemies in the growth. Whether charges from two casters share one pool is not stated.",
    "structural_interrupt_statements": [],
    "structural_reflect_statements": [

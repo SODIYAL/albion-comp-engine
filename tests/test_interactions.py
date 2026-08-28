@@ -182,10 +182,53 @@ check("analyzer reports strengths, cc coverage and profiles",
 inter = BASE["interactions"]
 check("all curated spells are embedded in the dataset (9 seeds + the "
       "reflect backlog incl. PUMMELING_STRIKES surfaced by the fuller "
-      "descriptions + CURSEDOT, 2026-08-24)",
-      len(inter) == 30 and "DEATHCURSE2" in inter and "SPEEDARCHER_KITE" in inter
+      "descriptions + CURSEDOT, 2026-08-24 + REFLECTAREA, the first GEAR "
+      "record, 2026-08-28)",
+      len(inter) == 31 and "DEATHCURSE2" in inter and "SPEEDARCHER_KITE" in inter
       and "METEOR" in inter and "THORNSAREA" in inter
-      and "PUMMELING_STRIKES" in inter and "CURSEDOT" in inter)
+      and "PUMMELING_STRIKES" in inter and "CURSEDOT" in inter
+      and "REFLECTAREA" in inter)
+
+# ---- super-additive duplicates (owner ruling 2026-08-28) -----------------------
+# The mirror of the count-once rule, and deliberately the ONLY one: Demon
+# Armor's aura is applied to OTHER players, so two wearers stand in each
+# other's aura and neither pays the -0.37 self-penalty. Owner: "duplicate is
+# worth more only in special cases like demon armor" — hence verified-only,
+# scoring_note required, and it may cancel a cost but never add supply.
+rec = inter["REFLECTAREA"]
+check("the Demon Armor record is verified, cites its source and explains "
+      "the offset in a scoring_note",
+      rec["confidence"] == "verified" and rec["source"]
+      and rec["self_cost_offset_min_copies"] == 2 and rec["scoring_note"])
+check("REFLECTAREA is the ONLY self-cost offset in the corpus",
+      [s for s, r in inter.items() if r.get("self_cost_offset_min_copies")]
+      == ["REFLECTAREA"])
+
+demon = "ARMOR_PLATE_HELL"
+_tank = "2H_HAMMER_AVALON"
+e_sc = Engine(content="blackzone_roam", size=20)
+_party = [_tank] * 6
+_none = [[] for _ in range(6)]
+_one = [[demon]] + [[] for _ in range(5)]
+_two = [[demon], [demon]] + [[] for _ in range(4)]
+s_none = e_sc.effective_supply(_party, [None] * 6, _none)
+s_one = e_sc.effective_supply(_party, [None] * 6, _one)
+s_two = e_sc.effective_supply(_party, [None] * 6, _two)
+check("ONE Demon Armor costs the party tankiness (the wearer pays and "
+      "nobody covers them)",
+      s_one["tankiness"] < s_none["tankiness"],
+      f"none={s_none['tankiness']:.2f} one={s_one['tankiness']:.2f}")
+check("TWO Demon Armors cover each other — the cost is waived, so the pair "
+      "is worth more than twice one (the owner's never-bring-just-one rule)",
+      s_two["tankiness"] > s_none["tankiness"]
+      and (s_two["tankiness"] - s_none["tankiness"])
+          > 2 * (s_one["tankiness"] - s_none["tankiness"]),
+      f"none={s_none['tankiness']:.2f} one={s_one['tankiness']:.2f} "
+      f"two={s_two['tankiness']:.2f}")
+check("the offset cancels a COST only — reflect supply itself stays strictly "
+      "additive across copies",
+      abs(s_two["reflect"] - 2 * s_one["reflect"]) < 1e-9,
+      f"one={s_one['reflect']:.2f} two={s_two['reflect']:.2f}")
 check("the structural-reflect curation backlog is empty",
       json.load(open(os.path.join(PIPELINE, "out", "interactions.json"),
                      encoding="utf-8"))["_meta"]["structural_unclaimed"] == [])

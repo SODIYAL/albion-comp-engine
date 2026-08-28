@@ -120,6 +120,29 @@ effects:
     self:  [tankiness, engage]
     ally:  [peel, buff_allies]
     note: CC resistance is what lets a frontline actually reach the enemy.
+  reflect:
+    self:  [reflect]
+    ally:  [reflect, buff_allies]
+    # NO TEMPLATE ROW YET, and deliberately so (2026-08-28). Measured over
+    # the eight real comp parties: reflect is 0.0 in the weapon+spell-pick
+    # unit for EVERY one of them (the reflect Ws — Parry, Counter,
+    # Deflecting Spin — are never the default combo), so a target fitted in
+    # the current unit would be 0.9 x 0. In the person unit three comps
+    # field 9-12 and five field none — a genuine disagreement, which the
+    # standing 2026-08-21 convention says to leave untouched. Fit it during
+    # the pending unit re-fit, from the comps that actually field it.
+    # The Demon Armor mechanism does not wait on this: its SELF-COST lands
+    # on tankiness, which every template scores.
+    note: >
+      Damage reflect (`reflectdamageactive`, structural since 2026-08-28).
+      The BUFF is applied to self or allies, but the damage lands on whoever
+      attacked — so the capability is enemy-facing even though its direction
+      here is self/ally. Granting it to allies is also an ally buff.
+      Magnitude is the node's own @amountpercent (0.15 on a cloth shield to
+      1.5 on the war-glove Counter) and scope is its @target: the personal
+      stances are `self`, while Hunter Hood's Retaliate (`friendall`) and
+      Demon Armor's Protection of the Fiends (`friendotherplayers`) put the
+      reflect on the whole ball — which is what makes them ZvZ items.
   hitpointsregenerationbonus+:
     self:  [self_sustain]
     ally:  [heal_sustain, buff_allies]

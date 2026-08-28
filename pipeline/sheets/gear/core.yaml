@@ -93,6 +93,22 @@
     # magicresistance-/physicalarmor- to the WEARER. Demon Armor buys the
     # group's durability with its own. Re-cited to what it actually does.
     - {cap: buff_allies,   score: 3, evidence: REFLECTAREA}      # group resistances aura (wearer pays with their own)
+    # THE ONLY TEAM REFLECT IN THE GAME (2026-08-28). Every other reflect in
+    # the catalogue is self-only ("increasing YOUR damage resistances");
+    # this one reflects 50% for the wearer AND up to 9 allies, for 6s, while
+    # mobile and uninterruptible. That is why ZvZ comps field 3-4 of these
+    # and never one (observed effect quotas: 3,3,4,3,3 across five 20-mans).
+    # Top of the reflect ladder at 6; the personal stances sit at 2.
+    - {cap: reflect,       score: 6, evidence: REFLECTAREA}      # 50% reflect on the whole ball (structural: reflectdamageactive, friendotherplayers)
+  # SELF-COST (new field, 2026-08-28): what the wearer PAYS. The aura cuts
+  # the wearer's own damage resistances by 0.37 while it runs — the model
+  # recorded only the upside before, which is how "tankiness 3" survived
+  # review for so long. Applied to the WEARER's own supply, never the team
+  # pool, and offset when the party fields 2+ (see interactions.yaml:
+  # REFLECTAREA — wearers stand in each other's auras, which is the
+  # mechanism behind the never-bring-just-one rule).
+  self_costs:
+    - {cap: tankiness, points: 3, evidence: REFLECTAREA}         # -0.37 own damage resistances while channelling
 
 - gear: ARMOR_PLATE_SET3             # Guardian Armor
   slot: armor
@@ -141,6 +157,7 @@
     - {cap: knockback_displace, score: 3, evidence: CASTBUBBLE}  # bubble knocks back 12m
     - {cap: peel,          score: 3, evidence: CASTBUBBLE}
     - {cap: tankiness,     score: 2, evidence: FROSTSHIELD}      # +30% resists 8s, reflects + slows
+    - {cap: reflect,       score: 1, evidence: FROSTSHIELD}      # 15% self-only — the smallest reflect in the game (2026-08-28)
 
 - gear: ARMOR_CLOTH_FEY              # Feyscale Robe
   slot: armor

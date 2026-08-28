@@ -209,6 +209,7 @@
    "active_caps": {
     "knockback_displace": 3,
     "peel": 3,
+    "reflect": 1,
     "tankiness": 2
    },
    "class": "cloth",
@@ -479,7 +480,8 @@
   },
   {
    "active_caps": {
-    "buff_allies": 3
+    "buff_allies": 3,
+    "reflect": 6
    },
    "class": "plate",
    "class_basis": "stats",
@@ -780,6 +782,7 @@
   },
   {
    "active_caps": {
+    "reflect": 2,
     "tankiness": 2
    },
    "class": "leather",

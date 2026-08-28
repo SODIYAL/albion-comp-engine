@@ -72,6 +72,25 @@
       }
     }
     this.hasNonstack = Object.keys(this.nonstack).length > 0;
+    /* SUPER-ADDITIVE DUPLICATES (2026-08-28, mirrors engine.py): gear key ->
+       minimum copies that cover each other's SELF-COST, resolved from the
+       cost's evidence spell through a VERIFIED interaction record declaring
+       self_cost_offset_min_copies. Cancels a cost, never adds supply. */
+    this.costOffsets = {};
+    var gKeys = Object.keys(this.gear || {}).sort();
+    for (var gi2 = 0; gi2 < gKeys.length; gi2++) {
+      var gRec = this.gear[gKeys[gi2]] || {};
+      var ev = gRec.self_cost_evidence || {};
+      for (var ecap in ev) {
+        var irec = this.interactions[ev[ecap]] || {};
+        var minCopies = irec.self_cost_offset_min_copies;
+        if (irec.confidence === "verified" && minCopies) {
+          var cur = this.costOffsets[gKeys[gi2]];
+          this.costOffsets[gKeys[gi2]] =
+            (cur === undefined || minCopies < cur) ? minCopies : cur;
+        }
+      }
+    }
     /* Composition layer (composition.yaml -> dataset): forge constraints,
        duplication, viability, size physics. Mirrors engine.py __init__. */
     var comp = data.composition || {};
@@ -984,7 +1003,8 @@
     return extras[choice];
   };
 
-  CompEngine.prototype.buildExtra = function (weapon, combo, gear, role) {
+  CompEngine.prototype.buildExtra = function (weapon, combo, gear, role,
+                                              waiveCosts) {
     /* Full-build member: weapon loadout + gear abilities + the STAT
        channel (mirrors engine.py build_extra — same float order).
        CC-duration % (increment 2, owner 2026-08-25) multiplies the
@@ -1042,6 +1062,47 @@
       var cc = bs.cc_mult_caps || [];
       for (j = 0; j < cc.length; j++)
         if (cc[j] in out) out[cc[j]] *= 1.0 + ccdurPct;
+    }
+    /* SELF-COSTS (mirrors engine.py): what the item costs its OWN wearer —
+       Demon Armor's aura spends 0.37 of the wearer's resistances to give
+       allies 0.43. Charged last so the stat channels above cannot
+       re-multiply a cost, floored at zero, and skipped for items the party
+       has offset (see selfCostWaivers). */
+    for (var si = 0; si < (gear || []).length; si++) {
+      var sitem = gear[si];
+      var skey = Array.isArray(sitem) ? sitem[0] : sitem;
+      if (waiveCosts && waiveCosts[skey]) continue;
+      var costs = (this.gear[skey] || {}).self_costs || {};
+      for (var scap in costs) {
+        if (scap in out) {
+          out[scap] = Math.max(0.0, out[scap] - costs[scap] / this.scoreUnit);
+        }
+      }
+    }
+    return out;
+  };
+
+  /* Gear keys whose self-cost this party has offset — the ONLY
+     super-additive duplicate rule in the model, deliberately narrow (owner
+     2026-08-28). Mirrors engine.py _self_cost_waivers: a VERIFIED
+     interaction record on the cost's evidence spell declares
+     self_cost_offset_min_copies, and the party fields that many. Cancels a
+     cost, never adds supply. */
+  CompEngine.prototype.selfCostWaivers = function (gears) {
+    var out = {};
+    if (!this.costOffsets || !gears) return out;
+    var counts = {};
+    for (var i = 0; i < gears.length; i++) {
+      var g = gears[i] || [];
+      for (var j = 0; j < g.length; j++) {
+        var key = Array.isArray(g[j]) ? g[j][0] : g[j];
+        if (this.costOffsets[key] !== undefined) {
+          counts[key] = (counts[key] || 0) + 1;
+        }
+      }
+    }
+    for (var k in counts) {
+      if (counts[k] >= this.costOffsets[k]) out[k] = true;
     }
     return out;
   };
@@ -1251,9 +1312,11 @@
     /* Supply after physics AND the one-spell-per-slot rule; ALL scoring
        reads this (mirrors engine.py effective_supply). */
     var s = {}, c;
+    var waived = gears ? this.selfCostWaivers(gears) : null;
     for (var i = 0; i < party.length; i++) {
       var extra = (gears && gears[i] && gears[i].length)
-        ? this.buildExtra(party[i], combos ? combos[i] : null, gears[i])
+        ? this.buildExtra(party[i], combos ? combos[i] : null, gears[i],
+                          null, waived)
         : this.memberExtra(party[i], combos ? combos[i] : null);
       for (c in extra) s[c] = (s[c] || 0.0) + extra[c];
     }

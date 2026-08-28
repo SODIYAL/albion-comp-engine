@@ -71,6 +71,14 @@ MECHANIC_NODES = {
     "spellimmunity": "spell_immunity", "cceffectimmunity": "cc_immunity",
     "notinterruptible": "uninterruptible", "aura": "aura",
     "invisibility": "invisibility", "forcedmovement": "forced_movement",
+    # damage reflect (2026-08-28): `reflectdamageactive` carries
+    # @amountpercent (0.15 cloth shield .. 1.5 war-glove Counter) and a
+    # @target that says WHO gets the reflecting buff — self for the personal
+    # stances, friendall/friendotherplayers for the team ones (Hunter Hood's
+    # Retaliate, Demon Armor's Protection of the Fiends). The damage lands on
+    # whoever attacked, so the capability is enemy-facing while the buff
+    # itself is applied to self/allies — the map resolves that.
+    "reflectdamageactive": "reflect",
 }
 
 # @type values are the buff/debuff vocabulary. Classify them, don't guess.

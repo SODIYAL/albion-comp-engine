@@ -1,10 +1,10 @@
 {
  "_meta": {
   "combat_effects_on_weapons": 51,
-  "distinct_effects": 150,
+  "distinct_effects": 151,
   "gear_equippable_spells": 194,
   "indexed_spells": 559,
-  "needs_classification": 7,
+  "needs_classification": 8,
   "no_prose_flag": 42,
   "note": "EFFECT_TO_CAPABILITY is a PROPOSAL, not authoritative. Every mapping needs domain sign-off before it drives scoring.",
   "spells_scanned": 8940,
@@ -2372,6 +2372,27 @@
    "weapon_line_count": 57,
    "weapon_lines": ["2H_ARCANESTAFF", "2H_ARCANESTAFF_CRYSTAL", "2H_ARCANESTAFF_HELL", "2H_ARCANE_RINGPAIR_AVALON", "2H_CLAYMORE", "2H_CLAYMORE_AVALON", "2H_CLEAVER_HELL", "2H_COMBATSTAFF_MORGANA", "2H_DIVINESTAFF", "2H_DOUBLEBLADEDSTAFF", "2H_DOUBLEBLADEDSTAFF_CRYSTAL", "2H_DUALSCIMITAR_UNDEAD", "2H_DUALSWORD", "2H_ENIGMATICORB_MORGANA", "2H_ENIGMATICSTAFF", "2H_GLAIVE", "2H_GLAIVE_CRYSTAL", "2H_HARPOON_HELL", "2H_HOLYSTAFF", "2H_HOLYSTAFF_CRYSTAL", "2H_HOLYSTAFF_HELL", "2H_HOLYSTAFF_UNDEAD", "2H_IRONCLADEDSTAFF", "2H_NATURESTAFF", "2H_NATURESTAFF_HELL", "2H_NATURESTAFF_KEEPER", "2H_QUARTERSTAFF", "2H_QUARTERSTAFF_AVALON", "2H_ROCKSTAFF_KEEPER", "2H_SHAPESHIFTER_AVALON", "2H_SHAPESHIFTER_CRYSTAL", "2H_SHAPESHIFTER_HELL", "2H_SHAPESHIFTER_KEEPER", "2H_SHAPESHIFTER_MORGANA", "2H_SHAPESHIFTER_SET1", "2H_SHAPESHIFTER_SET2", "2H_SHAPESHIFTER_SET3", "2H_SPEAR", "2H_TRIDENT_UNDEAD", "2H_TWINSCYTHE_HELL", "2H_WILDSTAFF", "MAIN_ARCANESTAFF", "MAIN_ARCANESTAFF_UNDEAD", "MAIN_HOLYSTAFF", "MAIN_HOLYSTAFF_AVALON", "MAIN_HOLYSTAFF_MORGANA", "MAIN_MACE_HELL", "MAIN_NATURESTAFF", "MAIN_NATURESTAFF_AVALON", "MAIN_NATURESTAFF_CRYSTAL", "MAIN_NATURESTAFF_KEEPER", "MAIN_SCIMITAR_MORGANA", "MAIN_SPEAR", "MAIN_SPEAR_KEEPER", "MAIN_SPEAR_LANCE_AVALON", "MAIN_SWORD", "MAIN_SWORD_CRYSTAL"]
   },
+  "reflect": {
+   "capability": null,
+   "class": "unclear",
+   "definition": "",
+   "direct_spells": ["DEFLECTINGSTANCE", "PARRY", "KNUCKLE_COUNTER", "FROSTSHIELD", "FLAMESHIELD", "REFLECTAREA", "RETALIATE2"],
+   "example_spells": ["TEST_REFLECTACTIVE1", "TEST_REFLECTACTIVE2", "MOUNTSPELL_TANKBEETLE_RAISE_SPEARS", "MOUNTSPELL_GREYWOLF_FW_CAERLEON_SPITE", "MOUNTSPELL_GREYWOLF_FW_CAERLEON_SPITE_AREA", "MOUNTSPELL_GREYWOLF_FW_CAERLEON_SPITE_BUFF"],
+   "gear_line_count": 25,
+   "gear_lines": ["ARMOR_CLOTH_AVALON", "ARMOR_CLOTH_FEY", "ARMOR_CLOTH_HELL", "ARMOR_CLOTH_KEEPER", "ARMOR_CLOTH_MORGANA", "ARMOR_CLOTH_PROTOTYPE", "ARMOR_CLOTH_ROYAL", "ARMOR_CLOTH_SET1", "ARMOR_CLOTH_SET2", "ARMOR_CLOTH_SET3", "ARMOR_GATHERER_ORE", "ARMOR_GATHERER_WOOD", "ARMOR_LEATHER_AVALON", "ARMOR_LEATHER_FEY", "ARMOR_LEATHER_HELL", "ARMOR_LEATHER_MORGANA", "ARMOR_LEATHER_PROTOTYPE", "ARMOR_LEATHER_ROYAL", "ARMOR_LEATHER_SET1", "ARMOR_LEATHER_SET2", "ARMOR_LEATHER_SET3", "ARMOR_LEATHER_UNDEAD", "ARMOR_PLATE_HELL", "HEAD_LEATHER_SET2", "UNIQUE_INTERNAL_ARMOR_GAMEMASTER"],
+   "occurrences": 52,
+   "prose_flag": null,
+   "targets": {
+    "allplayers": 2,
+    "friendall": 21,
+    "friendfaction": 3,
+    "friendotherplayers": 2,
+    "self": 24
+   },
+   "via_spells": ["MIMIC", "WINDSHIELD", "PURGINGSHIELD"],
+   "weapon_line_count": 32,
+   "weapon_lines": ["2H_ARCANESTAFF", "2H_ARCANESTAFF_CRYSTAL", "2H_ARCANESTAFF_HELL", "2H_ARCANE_RINGPAIR_AVALON", "2H_CLAYMORE", "2H_CLAYMORE_AVALON", "2H_CLEAVER_HELL", "2H_DUALSCIMITAR_UNDEAD", "2H_DUALSWORD", "2H_ENIGMATICORB_MORGANA", "2H_ENIGMATICSTAFF", "2H_GLAIVE", "2H_GLAIVE_CRYSTAL", "2H_HARPOON_HELL", "2H_KNUCKLES_AVALON", "2H_KNUCKLES_CRYSTAL", "2H_KNUCKLES_HELL", "2H_KNUCKLES_KEEPER", "2H_KNUCKLES_MORGANA", "2H_KNUCKLES_SET1", "2H_KNUCKLES_SET2", "2H_KNUCKLES_SET3", "2H_SPEAR", "2H_TRIDENT_UNDEAD", "MAIN_ARCANESTAFF", "MAIN_ARCANESTAFF_UNDEAD", "MAIN_SCIMITAR_MORGANA", "MAIN_SPEAR", "MAIN_SPEAR_KEEPER", "MAIN_SPEAR_LANCE_AVALON", "MAIN_SWORD", "MAIN_SWORD_CRYSTAL"]
+  },
   "remove:buff": {
    "capability": null,
    "class": "removal",
@@ -4675,6 +4696,12 @@
     "dirs": ["self"],
     "effect": "physicalarmor+",
     "targets": ["self"]
+   },
+   {
+    "direct": true,
+    "dirs": ["ally"],
+    "effect": "reflect",
+    "targets": ["friendall"]
    }
   ],
   "DELAYED_TELEPORT": [
@@ -5575,6 +5602,12 @@
     "dirs": ["self"],
     "effect": "physicalarmor+",
     "targets": ["self"]
+   },
+   {
+    "direct": true,
+    "dirs": ["ally"],
+    "effect": "reflect",
+    "targets": ["friendall"]
    }
   ],
   "FLAMETORNADO": [],
@@ -5746,6 +5779,12 @@
     "direct": true,
     "dirs": ["self"],
     "effect": "physicalarmor+",
+    "targets": ["self"]
+   },
+   {
+    "direct": true,
+    "dirs": ["self"],
+    "effect": "reflect",
     "targets": ["self"]
    }
   ],
@@ -7051,6 +7090,12 @@
     "dirs": ["self"],
     "effect": "invincibility",
     "targets": ["self"]
+   },
+   {
+    "direct": true,
+    "dirs": ["self"],
+    "effect": "reflect",
+    "targets": ["self"]
    }
   ],
   "LANCE_CHARGE": [
@@ -7680,6 +7725,12 @@
    },
    {
     "direct": false,
+    "dirs": ["ally"],
+    "effect": "reflect",
+    "targets": ["friendall"]
+   },
+   {
+    "direct": false,
     "dirs": ["enemy"],
     "effect": "silence",
     "targets": ["enemy"]
@@ -7851,6 +7902,12 @@
     "direct": true,
     "dirs": ["self"],
     "effect": "invincibility",
+    "targets": ["self"]
+   },
+   {
+    "direct": true,
+    "dirs": ["self"],
+    "effect": "reflect",
     "targets": ["self"]
    }
   ],
@@ -9550,6 +9607,12 @@
    },
    {
     "direct": false,
+    "dirs": ["self"],
+    "effect": "reflect",
+    "targets": ["self"]
+   },
+   {
+    "direct": false,
     "dirs": ["enemy"],
     "effect": "remove:buff",
     "targets": ["enemy"]
@@ -9968,6 +10031,12 @@
     "dirs": ["self"],
     "effect": "physicalarmor-",
     "targets": ["self"]
+   },
+   {
+    "direct": true,
+    "dirs": ["ally", "self"],
+    "effect": "reflect",
+    "targets": ["friendotherplayers", "self"]
    }
   ],
   "REFLECT_CHANNEL": [
@@ -10099,6 +10168,12 @@
     "dirs": ["self"],
     "effect": "physicalarmor+",
     "targets": ["self"]
+   },
+   {
+    "direct": true,
+    "dirs": ["ally"],
+    "effect": "reflect",
+    "targets": ["friendall"]
    }
   ],
   "ROOTFIELD": [
@@ -11979,6 +12054,12 @@
     "direct": true,
     "dirs": ["self"],
     "effect": "physicalarmor+",
+    "targets": ["self"]
+   },
+   {
+    "direct": false,
+    "dirs": ["self"],
+    "effect": "reflect",
     "targets": ["self"]
    }
   ],

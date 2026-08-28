@@ -109,6 +109,26 @@ def load_gear_sheets(gear_lines, gear_spells):
             menu = gear_spells.get(key) or {}
             pseudo_line = {"spells": {"active": menu.get("actives") or [],
                                       "passive": menu.get("passives") or []}}
+            # SELF-COSTS (2026-08-28, the Demon Armor case): what wearing
+            # this item costs its OWN wearer. Demon Armor's aura buys the
+            # group 0.43 resistances by spending 0.37 of the wearer's — the
+            # model recorded only the upside, which is how a backwards
+            # `tankiness` claim survived review. A cost lands on the WEARER's
+            # supply (engine.build_extra), never on the team pool, and may
+            # be offset when the party fields enough copies (interactions
+            # `self_cost_offset_min_copies`). Same evidence discipline as a
+            # capability row: every cost cites its spell.
+            costs = {}
+            cost_evidence = {}
+            for c in entry.get("self_costs", []):
+                if not isinstance(c, dict):
+                    continue
+                cap, pts = c.get("cap"), c.get("points", 0)
+                if not cap or not pts:
+                    continue
+                costs[cap] = max(costs.get(cap, 0), pts)
+                if c.get("evidence"):
+                    cost_evidence[cap] = c["evidence"]
             gl = gear_lines.get(key) or {}
             gear[key] = {
                 # filled after loading: the item's combat stats (item_stats
@@ -123,6 +143,9 @@ def load_gear_sheets(gear_lines, gear_spells):
                 "evidence": evidence,
                 "loadout": build_loadout(caps, evidence, pseudo_line, uses),
             }
+            if costs:
+                gear[key]["self_costs"] = costs
+                gear[key]["self_cost_evidence"] = cost_evidence
     return gear
 
 
