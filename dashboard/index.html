@@ -8019,6 +8019,9 @@ render();
      truth per capability in the popup. */
   function radarAxes(){
     const s = supply(party);
+    const sfl = supplyFloor(party);   /* Option C floor basis (owner
+      2026-08-27): coverage quotes the DRESSED supply, but the below-floor
+      predicate reads the weapon+loadout basis the structural floors use */
     const grouped = new Set(Object.values(GROUPS).flat());
     const other = Object.keys(REQS()).filter(c => !grouped.has(c));
     const groups = other.length ? {...GROUPS, Other: other} : GROUPS;
@@ -8026,7 +8029,7 @@ render();
     for (const [g, caps] of Object.entries(groups)){
       const rows = caps.filter(c => REQS()[c]).map(c => {
         const have = s[c] || 0, t = target(c), soft = softCap(c);
-        return {cap: c, have, t, soft, floor: floorHit(c, have), over: have > soft};
+        return {cap: c, have, t, soft, floor: floorHit(c, sfl[c] || 0), over: have > soft};
       });
       if (!rows.length) continue;
       const tSum = rows.reduce((a, r) => a + Math.max(0, r.t), 0);
