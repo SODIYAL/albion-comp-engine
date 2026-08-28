@@ -180,6 +180,9 @@ def variant_of(rec):
         # so every consumer sees the ruling rather than re-deriving it.
         "archetype": rec.get("archetype"),
         "fit_exclude": rec.get("fit_exclude"),
+        # which content templates this comp may serve as evidence for when
+        # its own `content` names a format rather than a template
+        "content_candidates": rec.get("content_candidates"),
         "approval": (rec.get("approval") or {}).get("status"),
         "approval_basis": (rec.get("approval") or {}).get("basis"),
         "confidence": rec.get("confidence"),

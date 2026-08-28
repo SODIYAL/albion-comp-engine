@@ -20,6 +20,20 @@ observed: null
 patch: null   # the source does not state the game patch; created_at is the only date
 snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
 content: zvz_20v20   # the source's own label (name '20v20 competitive', activity zvz);
+# CONTENT CANDIDATES (owner ruling 2026-08-28). This record's stated
+# content names a FORMAT, not one of the engine's content templates:
+# "zvz 20man can be blackzone roaming or castle outposts or castle
+# defense, same with zvz 7man, it can also be avalonian roads", and
+# "any comp doing outposts or castles or roaming in blackzone could do
+# so in faction aswell". So it is evidence for SEVERAL templates rather
+# than one — which is how the four never-comp-fitted templates (castle,
+# castle_outpost, faction_war, roads) get real numbers instead of the
+# hand-set provisionals they still carry.
+content_candidates:
+  - blackzone_roam
+  - territory_defense
+  - castle
+  - faction_war
                      # NOT mapped to an engine template yet - V4 skips unmapped content
 style: kite   # curator annotation: owner's visual read 2026-08-21 (tentative, not source-stated)
 party_size:

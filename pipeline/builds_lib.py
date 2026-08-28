@@ -48,6 +48,12 @@ SOURCE_KINDS = ("caller_sheet", "metabattle", "armory_manual", "companion",
 # and selection never offers them for larger requests.
 ONE_V_ONE_KINDS = ("murderledger", "solo_1v1")
 ONE_V_ONE_MAX_SIZE = 2
+# The engine's content templates — the legal values for a record's
+# `content_candidates` (owner ruling 2026-08-28: one comp can be evidence for
+# several contents). Listed literally so this validator stays independent of
+# a built dataset; must track pipeline/templates/*.yaml.
+KNOWN_CONTENTS = ("blackzone_roam", "castle", "castle_outpost",
+                  "faction_war", "roads", "territory_defense")
 
 CONFIDENCE_DIMS = ("item_mapping", "spell_mapping", "patch",
                    "content_context", "party_size", "source_independence",
@@ -341,6 +347,24 @@ def validate_comp_doc(doc, weapon_lines, templates=None):
     if style and style not in ("balanced", "brawl", "clap", "kite",
                                "brawl_clap", "clap_kite"):
         problems.append(f"{ident}: unknown style {style!r}")
+    # CONTENT CANDIDATES (owner ruling 2026-08-28): a record's `content` may
+    # name a FORMAT ("zvz_20man") rather than one of the engine's content
+    # templates, and one comp can legitimately serve several — "zvz 20man can
+    # be blackzone roaming or castle outposts or castle defense ... any comp
+    # doing outposts or castles or roaming in blackzone could do so in
+    # faction aswell". Validated against the real template list so a typo or
+    # a renamed template surfaces here instead of silently dropping the comp
+    # out of every fit.
+    cands = doc.get("content_candidates")
+    if cands is not None:
+        if not isinstance(cands, list) or not cands:
+            problems.append(f"{ident}: content_candidates must be a non-empty list")
+        else:
+            for _c in cands:
+                if _c not in KNOWN_CONTENTS:
+                    problems.append(
+                        f"{ident}: content_candidate {_c!r} is not a content "
+                        f"template ({sorted(KNOWN_CONTENTS)})")
     # per-party style/exclusion (owner rulings 2026-08-28): one record's
     # parties are not always one comp shape, and a party its own author says
     # is not built properly must never teach the model what a comp looks like

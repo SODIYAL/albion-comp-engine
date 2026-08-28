@@ -56,6 +56,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_LEATHER_MORGANA, cape=CAPEITEM_SMUGGLER, secondhand=None",
@@ -121,6 +122,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_ROYAL",
@@ -183,6 +185,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_SET2, armor=ARMOR_LEATHER_HELL",
@@ -248,6 +251,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_ROYAL",
@@ -310,6 +314,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_SMUGGLER, food=MEAL_OMELETTE_AVALON, helm=HEAD_PLATE_SET1, armor=ARMOR_PLATE_ROYAL, secondhand=None",
@@ -375,6 +380,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_HELL",
@@ -437,6 +443,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_PLATE_SET3, cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH, armor=ARMOR_PLATE_HELL, secondhand=None",
@@ -500,6 +507,7 @@
       "source_independence": null,
       "spell_mapping": 0.75
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_HELL",
@@ -569,6 +577,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_ROYAL",
@@ -635,6 +644,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
@@ -699,6 +709,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: cape=CAPEITEM_SMUGGLER",
@@ -764,6 +775,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
@@ -828,6 +840,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_SMUGGLER, helm=None, armor=ARMOR_LEATHER_HELL, secondhand=None",
@@ -893,6 +906,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_SET3",
@@ -955,6 +969,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_CLOTH_FEY, cape=CAPEITEM_SMUGGLER, helm=HEAD_LEATHER_SET3, armor=ARMOR_PLATE_HELL",
@@ -1020,6 +1035,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
@@ -1085,6 +1101,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_SET2",
@@ -1146,6 +1163,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_LEATHER_ROYAL, armor=ARMOR_CLOTH_SET2, secondhand=None",
@@ -1209,6 +1227,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_LEATHER_SET2, cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_KEEPER, secondhand=None",
@@ -1274,6 +1293,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_FEY",
@@ -1339,6 +1359,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
@@ -1405,6 +1426,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
@@ -1466,6 +1488,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_PLATE_AVALON, cape=CAPEITEM_SMUGGLER, food=None, helm=HEAD_PLATE_SET2, armor=ARMOR_PLATE_HELL, secondhand=None",
@@ -1531,6 +1554,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
@@ -1592,6 +1616,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: cape=CAPEITEM_SMUGGLER, armor=ARMOR_LEATHER_FEY",
@@ -1653,6 +1678,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_SET2, secondhand=None",
@@ -1718,6 +1744,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_SET2",
@@ -1778,6 +1805,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
@@ -1838,6 +1866,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: helm=HEAD_PLATE_SET3, secondhand=OFF_HORN_KEEPER",
@@ -1899,6 +1928,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_LEATHER_MORGANA, cape=None, helm=HEAD_LEATHER_SET1, secondhand=OFF_ORB_MORGANA",
@@ -1964,6 +1994,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_FEY",
@@ -2025,6 +2056,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_LEATHER_ROYAL, cape=CAPEITEM_SMUGGLER, helm=HEAD_PLATE_KEEPER, potion=None",
@@ -2090,6 +2122,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_FEY",
@@ -2155,6 +2188,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
@@ -2220,6 +2254,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
@@ -2285,6 +2320,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "BOMB TSQ LAMENTACIONES INVI",
@@ -2346,6 +2382,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "BOMB TSQ LAMENTACIONES INVI",
@@ -2407,6 +2444,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "BOMB TSQ LAMENTACIONES INVI",
@@ -2468,6 +2506,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "BOMB TSQ LAMENTACIONES INVI",
@@ -2529,6 +2568,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "BOMB TSQ LAMENTACIONES INVI",
@@ -2590,6 +2630,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "BOMB TSQ LAMENTACIONES INVI",
@@ -2653,6 +2694,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "BOMB TSQ BRUJERIA",
@@ -2716,6 +2758,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "BOMB TSQ MALDICIONES DE VIDA",
@@ -2781,6 +2824,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_SET3",
@@ -2836,6 +2880,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_SET1",
@@ -2891,6 +2936,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_SET3",
@@ -2946,6 +2992,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_FEY",
@@ -3001,6 +3048,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_UNDEAD",
@@ -3056,6 +3104,7 @@
       "source_independence": null,
       "spell_mapping": 0.75
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_UNDEAD",
@@ -3118,6 +3167,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_FEY",
@@ -3175,6 +3225,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_FEY",
@@ -3228,6 +3279,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -3291,6 +3343,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_FEY",
@@ -3346,6 +3399,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -3409,6 +3463,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -3472,6 +3527,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_AVALON",
@@ -3527,6 +3583,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
@@ -3582,6 +3639,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -3645,6 +3703,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
@@ -3700,6 +3759,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_FEY",
@@ -3755,6 +3815,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -3818,6 +3879,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_AVALON",
@@ -3874,6 +3936,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
@@ -3934,6 +3997,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_SET2",
@@ -3995,6 +4059,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_SET2",
@@ -4056,6 +4121,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_FEY",
@@ -4121,6 +4187,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_ROYAL",
@@ -4182,6 +4249,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_HELL",
@@ -4255,6 +4323,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_ROYAL",
@@ -4319,6 +4388,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "cape": "CAPEITEM_SMUGGLER",
@@ -4385,6 +4455,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "cape": "CAPEITEM_SMUGGLER",
@@ -4451,6 +4522,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "cape": "CAPEITEM_SMUGGLER",
@@ -4516,6 +4588,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
@@ -4581,6 +4654,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_SET1",
@@ -4653,6 +4727,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_HELL",
@@ -4715,6 +4790,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_HELL",
@@ -4780,6 +4856,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
@@ -4841,6 +4918,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
@@ -4911,6 +4989,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_FEY",
@@ -4975,6 +5054,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "cape": "CAPEITEM_SMUGGLER",
@@ -5036,6 +5116,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "cape": "CAPEITEM_SMUGGLER",
@@ -5109,6 +5190,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_FEY",
@@ -5179,6 +5261,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_SET2",
@@ -5243,6 +5326,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_ROYAL",
@@ -5307,6 +5391,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "cape": "CAPEITEM_SMUGGLER",
@@ -5368,6 +5453,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "cape": "CAPEITEM_SMUGGLER",
@@ -5429,6 +5515,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "cape": "CAPEITEM_SMUGGLER"
@@ -5494,6 +5581,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_SET1",
@@ -5554,6 +5642,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_SET1",
@@ -5618,6 +5707,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_FEY",
@@ -5691,6 +5781,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "cape": "CAPEITEM_SMUGGLER",
@@ -5756,6 +5847,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_SET2",
@@ -5829,6 +5921,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_SET2",
@@ -5898,6 +5991,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_SET2",
@@ -5978,6 +6072,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_FEY",
@@ -6043,6 +6138,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
@@ -6104,6 +6200,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
@@ -6177,6 +6274,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_SET2",
@@ -6247,6 +6345,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_SET2",
@@ -6317,6 +6416,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_SET2",
@@ -6398,6 +6498,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_SET3",
@@ -6471,6 +6572,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_HELL",
@@ -6541,6 +6643,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_HELL",
@@ -6615,6 +6718,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_HELL",
@@ -6689,6 +6793,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_FEY",
@@ -6759,6 +6864,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_FEY",
@@ -6829,6 +6935,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_FEY",
@@ -6899,6 +7006,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_FEY",
@@ -6969,6 +7077,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_FEY",
@@ -7031,6 +7140,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "cape": "CAPEITEM_SMUGGLER",
@@ -7105,6 +7215,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_HELL",
@@ -7175,6 +7286,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_HELL",
@@ -7245,6 +7357,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_HELL",
@@ -7311,6 +7424,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "Dagger Pair tracking",
@@ -7374,6 +7488,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "Crystal Reaper tracking",
@@ -7437,6 +7552,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "EarthRune tracking",
@@ -7500,6 +7616,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "Demon Fang Tracking",
@@ -7563,6 +7680,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "Forgebark Staff tracking",
@@ -7628,6 +7746,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: potion=POTION_CLEANSE2",
@@ -7691,6 +7810,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "GO-MORGANA-IF-CAPE-T10; alts: cape=CAPEITEM_MORGANA, armor=ARMOR_CLOTH_AVALON, potion=POTION_CLEANSE2",
@@ -7759,6 +7879,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: armor=ARMOR_CLOTH_FEY, potion=POTION_STONESKIN",
@@ -7822,6 +7943,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -7885,6 +8007,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: helm=HEAD_CLOTH_ROYAL, potion=POTION_CLEANSE2",
@@ -7948,6 +8071,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: armor=ARMOR_CLOTH_FEY, potion=POTION_CLEANSE2",
@@ -8016,6 +8140,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: helm=HEAD_LEATHER_SET3, potion=POTION_SLOWFIELD, secondhand=OFF_SHIELD_AVALON",
@@ -8081,6 +8206,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_ROYAL",
@@ -8137,6 +8263,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
@@ -8192,6 +8319,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_SET2",
@@ -8247,6 +8375,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_SET2",
@@ -8302,6 +8431,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
@@ -8357,6 +8487,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_SET2",
@@ -8412,6 +8543,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_SET2",
@@ -8467,6 +8599,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_ROYAL",
@@ -8522,6 +8655,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
@@ -8577,6 +8711,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_AVALON",
@@ -8632,6 +8767,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_AVALON",
@@ -8687,6 +8823,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_ROYAL",
@@ -8742,6 +8879,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_FEY",
@@ -8797,6 +8935,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
@@ -8852,6 +8991,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_SET2",
@@ -8907,6 +9047,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_SET1",
@@ -8962,6 +9103,7 @@
       "source_independence": null,
       "spell_mapping": 0.75
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_FEY",
@@ -9021,6 +9163,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_AVALON",
@@ -9076,6 +9219,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
@@ -9131,6 +9275,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
@@ -9186,6 +9331,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
@@ -9241,6 +9387,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_SET2",
@@ -9296,6 +9443,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_SET2",
@@ -9351,6 +9499,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_CLOTH_AVALON",
@@ -9406,6 +9555,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_FEY",
@@ -9461,6 +9611,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_FEY",
@@ -9516,6 +9667,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
@@ -9571,6 +9723,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_ROYAL",
@@ -9627,6 +9780,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_PLATE_KEEPER",
@@ -9683,6 +9837,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
@@ -9739,6 +9894,7 @@
       "source_independence": null,
       "spell_mapping": 1.0
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {
       "armor": "ARMOR_LEATHER_HELL",
@@ -9797,6 +9953,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: armor=ARMOR_PLATE_SET2",
@@ -9858,6 +10015,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -9921,6 +10079,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "Bast?n Astral Monkey-Brauleo [member build by Jordyson888]",
@@ -9984,6 +10143,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -10049,6 +10209,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -10110,6 +10271,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "DD | REALMBREAKER by Lunarus [member build by Lunarus]",
@@ -10178,6 +10340,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: helm=HEAD_LEATHER_SET3",
@@ -10241,6 +10404,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "Small Scale - Entalhada - Suporte [member build by Machadex]",
@@ -10304,6 +10468,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -10367,6 +10532,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "OathKeepers PvP [member build by Feniks360]",
@@ -10430,6 +10596,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "Locus ZVZ DOTH [member build by Artico6790]",
@@ -10493,6 +10660,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "Alvorada Comp 1 [member build by xCisco]",
@@ -10556,6 +10724,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "Mano de justicia - kiteo [member build by TurnDark]",
@@ -10621,6 +10790,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: armor=ARMOR_CLOTH_AVALON",
@@ -10682,6 +10852,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "CA?A-ESPIRITOS [member build by Artico6790]",
@@ -10750,6 +10921,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -10813,6 +10985,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "??? ??? (?? ???? ????? ? ??? ????) [member build by Ironforge]",
@@ -10876,6 +11049,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "HEALER HG - MORS [member build by vhfoliveira]",
@@ -10941,6 +11115,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -11002,6 +11177,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "Permafrost DPS [member build by Andsy]",
@@ -11067,6 +11243,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -11128,6 +11305,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "Brawl Spiked Gauntlets [member build by forenziec]",
@@ -11191,6 +11369,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "ATENEA S25 - ARCO LARGO [member build by Soulkiva]",
@@ -11254,6 +11433,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "MA?A PESADA PYPELINE [member build by Robmalll]",
@@ -11317,6 +11497,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "Pustulento DOTH [member build by Artico6790]",
@@ -11380,6 +11561,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: food=MEAL_OMELETTE_AVALON, armor=ARMOR_PLATE_SET3",
@@ -11450,6 +11632,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_CLOTH_SET2, cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH, helm=HEAD_LEATHER_SET3, armor=ARMOR_PLATE_AVALON, potion=POTION_REVIVE",
@@ -11511,6 +11694,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "NeKso Build ZVZ Baston Terrunico [member build by NeKso]",
@@ -11574,6 +11758,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "Enraizado ZvZ [member build by Jordyson888]",
@@ -11637,6 +11822,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: food=MEAL_OMELETTE_AVALON, helm=HEAD_LEATHER_HELL, armor=ARMOR_PLATE_SET2, secondhand=OFF_SHIELD_AVALON",
@@ -11700,6 +11886,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -11763,6 +11950,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -11826,6 +12014,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "Maldici?n de Vida ZvZ [member build by Jordyson888]",
@@ -11896,6 +12085,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -11957,6 +12147,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "SANCTI KTB/PISTES [member build by Baheera]",
@@ -12020,6 +12211,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH",
@@ -12083,6 +12275,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -12148,6 +12341,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: food=MEAL_OMELETTE_AVALON",
@@ -12209,6 +12403,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: cape=CAPEITEM_SMUGGLER, food=MEAL_OMELETTE_AVALON, secondhand=OFF_SHIELD_AVALON",
@@ -12270,6 +12465,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "Brawl bedrock [member build by Fliriya]",
@@ -12335,6 +12531,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_CLOTH_SET2",
@@ -12398,6 +12595,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -12461,6 +12659,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -12524,6 +12723,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_PLATE_AVALON",
@@ -12587,6 +12787,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_LEATHER_MORGANA, armor=ARMOR_CLOTH_FEY",
@@ -12650,6 +12851,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: armor=ARMOR_PLATE_SET2",
@@ -12713,6 +12915,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -12776,6 +12979,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
@@ -12839,6 +13043,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -12900,6 +13105,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -12963,6 +13169,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -13026,6 +13233,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -13094,6 +13302,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: armor=ARMOR_PLATE_SET2, secondhand=OFF_JESTERCANE_HELL",
@@ -13157,6 +13366,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -13220,6 +13430,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -13283,6 +13494,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
@@ -13344,6 +13556,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
@@ -13405,6 +13618,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_LEATHER_MORGANA",
@@ -13468,6 +13682,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_CLOTH_SET2",
@@ -13534,6 +13749,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_CLOTH_SET2",
@@ -13599,6 +13815,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -13662,6 +13879,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: potion=POTION_SLOWFIELD",
@@ -13725,6 +13943,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: potion=POTION_STONESKIN",
@@ -13788,6 +14007,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: helm=HEAD_LEATHER_MORGANA",
@@ -13856,6 +14076,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: cape=CAPEITEM_SMUGGLER, armor=ARMOR_PLATE_SET1",
@@ -13924,6 +14145,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "ARTILLERY-FIRE; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_STEW_FISH, armor=ARMOR_CLOTH_FEY, potion=POTION_CLEANSE2",
@@ -13992,6 +14214,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "LANCE-FROST; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_STEW_FISH, armor=ARMOR_CLOTH_FEY, potion=POTION_CLEANSE2",
@@ -14055,6 +14278,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: potion=POTION_STONESKIN",
@@ -14125,6 +14349,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: armor=ARMOR_CLOTH_SET2",
@@ -14186,6 +14411,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: potion=POTION_CLEANSE2",
@@ -14252,6 +14478,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_LEATHER_ROYAL, cape=CAPEITEM_FW_FORTSTERLING, food=MEAL_OMELETTE_FISH, helm=HEAD_PLATE_UNDEAD, armor=ARMOR_CLOTH_AVALON, potion=POTION_ENERGY",
@@ -14315,6 +14542,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: potion=POTION_STONESKIN",
@@ -14378,6 +14606,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "BRING-LURCHER-GIG-SWAP; alts: cape=CAPEITEM_SMUGGLER, food=MEAL_SANDWICH_FISH, helm=HEAD_LEATHER_SET3, potion=POTION_REVIVE",
@@ -14446,6 +14675,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "BRING-LURCHER-GIG-SWAP; alts: cape=CAPEITEM_FW_BRIDGEWATCH, food=MEAL_SANDWICH_FISH, helm=HEAD_LEATHER_SET3, potion=POTION_REVIVE",
@@ -14509,6 +14739,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": null,
@@ -14577,6 +14808,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "BRING-LURCHER-GIG-SWAP; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_SANDWICH_FISH, helm=HEAD_PLATE_AVALON, potion=POTION_REVIVE",
@@ -14647,6 +14879,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: cape=CAPEITEM_FW_CAERLEON",
@@ -14713,6 +14946,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "PIERCE/SUPPORT/MANA; alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_STEW_FISH, armor=ARMOR_CLOTH_FEY, potion=POTION_STONESKIN",
@@ -14776,6 +15010,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_CLOTH_KEEPER, cape=CAPEITEM_FW_BRIDGEWATCH",
@@ -14839,6 +15074,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: helm=HEAD_LEATHER_SET3, armor=ARMOR_PLATE_FEY",
@@ -14902,6 +15138,7 @@
       "source_independence": null,
       "spell_mapping": 0.25
      },
+     "content_candidates": null,
      "fit_exclude": null,
      "gear": {},
      "note": "alts: boot=SHOES_CLOTH_KEEPER, secondhand=OFF_SPIKEDSHIELD_MORGANA",
