@@ -29,6 +29,15 @@
   var AOE_ESCALATION_CAPS = ["burst_aoe"];
   var RESILIENCE_CAPS = ["burst_st", "execute"];
 
+  var KEY_TIER_RX = /^T\d+_/;
+  var KEY_ENCH_RX = /@\d+$/;
+  function keyForm(key) {
+    /* A gear key stripped of tier and enchant: 'T7_POTION_REVIVE@2' ->
+       'POTION_REVIVE'. Mirrors engine.py _key_form / builds_lib.key_form. */
+    return String(key).trim().toUpperCase()
+      .replace(KEY_ENCH_RX, "").replace(KEY_TIER_RX, "");
+  }
+
   function CompEngine(data, content, size, style) {
     this.data = data;
     this.weapons = data.weapons;
@@ -57,6 +66,21 @@
     this.mechanics = data.mechanics || {};
     /* Gear capability sheets — full-build members (mirrors engine.py). */
     this.gear = data.gear || {};
+    /* Tier-agnostic index for gearKey(), built only for UNAMBIGUOUS
+       tier-stripped forms — a form two curated items share is dropped so the
+       lookup fails rather than guesses. Mirrors engine.py __init__. */
+    var _forms = {}, _gk;
+    for (_gk in this.gear) {
+      var _f = keyForm(_gk);
+      if (_forms[_f] === undefined) _forms[_f] = [];
+      _forms[_f].push(_gk);
+    }
+    this._gearAlias = {};
+    for (var _ff in _forms) {
+      if (_forms[_ff].length === 1 && !this.gear[_ff]) {
+        this._gearAlias[_ff] = _forms[_ff][0];
+      }
+    }
     /* PvP interaction records (build_interactions.py), spell-keyed. Scoring
        coupling: VERIFIED records' nonstacking_caps — party supply counts
        those caps once across members equipping the same spell. unknown/
@@ -960,7 +984,20 @@
   };
 
   /* ---- gear (full-build members, 2026-08-20; mirrors engine.py) ---- */
+  CompEngine.prototype.gearKey = function (key) {
+    /* The CURATED key for a worn item, ignoring tier (owner ruling
+       2026-08-28; mirrors engine.py gear_key). Consumables are curated at one
+       representative tier while comps record whatever tier they ran, so an
+       exact-key lookup scored 20 real Gigantify potions as nothing. Exact
+       keys win; an ambiguous tier-stripped form resolves to nothing rather
+       than guessing. */
+    if (this.gear[key]) return key;
+    var alias = this._gearAlias[keyForm(key)];
+    return alias === undefined ? key : alias;
+  };
+
   CompEngine.prototype.gearExtras = function (key) {
+    key = this.gearKey(key);
     var extras = this._gearCache[key];
     if (extras !== undefined) return extras;
     var g = this.gear[key];
@@ -1037,7 +1074,7 @@
                          : null;
     for (var i = 0; i < (gear || []).length; i++) {
       var item = gear[i];
-      var key = Array.isArray(item) ? item[0] : item;
+      var key = this.gearKey(Array.isArray(item) ? item[0] : item);
       var choice = Array.isArray(item) ? item[1] : null;
       var extra = this.gearExtra(key, choice);
       for (c in extra) out[c] = (out[c] || 0.0) + extra[c];
@@ -1086,7 +1123,7 @@
        has offset (see selfCostWaivers). */
     for (var si = 0; si < (gear || []).length; si++) {
       var sitem = gear[si];
-      var skey = Array.isArray(sitem) ? sitem[0] : sitem;
+      var skey = this.gearKey(Array.isArray(sitem) ? sitem[0] : sitem);
       if (waiveCosts && waiveCosts[skey]) continue;
       var costs = (this.gear[skey] || {}).self_costs || {};
       for (var scap in costs) {

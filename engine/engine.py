@@ -37,9 +37,18 @@ tankiness). The math here is unaffected — but the two sides of every
 comparison are currently in different units, and the correction must move
 every template row at once.
 """
-import json, os, itertools
+import json, os, itertools, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+
+_KEY_TIER_RX = re.compile(r"^T\d+_")
+_KEY_ENCH_RX = re.compile(r"@\d+$")
+
+
+def _key_form(key):
+    """A gear key stripped of tier and enchant: 'T7_POTION_REVIVE@2' ->
+    'POTION_REVIVE'. Mirrors pipeline/builds_lib.key_form — see gear_key()."""
+    return _KEY_TIER_RX.sub("", _KEY_ENCH_RX.sub("", str(key).strip().upper()))
 # BION_DATASET: tooling override for the default dataset PATH (the
 # calibration sweep points test suites at patched coefficient copies —
 # pipeline/calibrate_scoring.py). Path plumbing only; never set in
@@ -97,6 +106,14 @@ class Engine:
         self.mechanics = self.data.get("mechanics", {}) or {}
         # Gear capability sheets (full-build members, 2026-08-20)
         self.gear = self.data.get("gear", {}) or {}
+        # Tier-agnostic index for gear_key() (owner ruling 2026-08-28). Built
+        # only for UNAMBIGUOUS tier-stripped forms: if two curated items share
+        # one, the form is dropped so the lookup fails rather than guesses.
+        _forms = {}
+        for _k in self.gear:
+            _forms.setdefault(_key_form(_k), []).append(_k)
+        self._gear_alias = {f: ks[0] for f, ks in _forms.items()
+                            if len(ks) == 1 and f not in self.gear}
         # PvP interaction records (build_interactions.py, 2026-08-19),
         # spell-keyed. The scoring coupling is deliberately narrow: a
         # VERIFIED record may declare nonstacking_caps — capability names
@@ -1005,9 +1022,27 @@ class Engine:
     # dataset's `gear` section (sheets/gear/), carry cap_delivery, and go
     # through the SAME _eff physics (a Force Field's 6m AoE shove scales
     # geometrically like any weapon AoE).
+    def gear_key(self, key):
+        """The CURATED key for a worn item, ignoring tier.
+
+        Consumables (and some armor lines) are curated at ONE representative
+        tier while comps record whatever tier they actually ran: the sheets
+        carry `T7_POTION_REVIVE` (Major Gigantify), every blap member is
+        recorded on `T5_POTION_REVIVE` (plain Gigantify), and an exact-key
+        lookup scored 20 real potions as nothing. Tier is not part of an
+        item's identity in this model — a 1..7 sheet score is far coarser
+        than the tier ladder — so a recorded key falls back to its
+        tier-stripped form. Exact keys always win, and an ambiguous form
+        (two curated items sharing it) resolves to NOTHING rather than
+        guessing. Owner ruling 2026-08-28."""
+        if key in self.gear:
+            return key
+        return self._gear_alias.get(_key_form(key), key)
+
     def gear_extras(self, key):
         """Every ability-choice loadout of one gear item as effective-caps
         dicts (cached per set_content). Statless items have one entry."""
+        key = self.gear_key(key)
         extras = self._gear_cache.get(key)
         if extras is None:
             g = self.gear.get(key)
@@ -1072,6 +1107,7 @@ class Engine:
         seat_class = (self.roles.get(role) or {}).get("class") if role else None
         for item in (gear or []):
             key, choice = item if isinstance(item, (list, tuple)) else (item, None)
+            key = self.gear_key(key)
             for cap, v in self.gear_extra(key, choice).items():
                 out[cap] = out.get(cap, 0.0) + v
             st = (self.gear.get(key) or {}).get("stats") or {}
@@ -1125,7 +1161,8 @@ class Engine:
         # (see effective_supply / _self_cost_waivers) — Demon Armor wearers
         # stand in each other's auras, so with 2+ copies nobody pays.
         for item in (gear or []):
-            key = item[0] if isinstance(item, (list, tuple)) else item
+            key = self.gear_key(item[0] if isinstance(item, (list, tuple))
+                                else item)
             if waive_costs and key in waive_costs:
                 continue
             for cap, pts in ((self.gear.get(key) or {}).get("self_costs")

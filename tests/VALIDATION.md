@@ -552,3 +552,59 @@ revives a dead ally, which is not heal, buff, or CC — so giving it a score wou
 mean inventing a capability. The fish meals and the gatherer hood are the same
 story at smaller scale. Recorded as a curation gap, per the "say we do not know"
 rule.
+
+### Tier-agnostic gear lookup (owner ruling 2026-08-28)
+
+**A correction first.** I reported the 31 uncurated pieces as items with "no
+home in the capability vocabulary", singling out `T5_POTION_REVIVE` (20 uses,
+every blap member) as a resurrection potion that revives a dead ally and
+therefore cannot be scored. **That was wrong on both counts.** I read the item
+ID instead of the item. The game data names `T5_POTION_REVIVE` the **Gigantify
+Potion** — Albion reuses the legacy `REVIVE` id for it — and it is FULLY
+CURATED at `tankiness 2`, under `T7_POTION_REVIVE` (Major Gigantify). The comps
+run the plain tier, the sheets curated the Major tier, and an exact-key lookup
+scored 20 real potions as zero. A bug, not a vocabulary gap.
+
+**Root cause, and it is the day's recurring shape.** Consumables are curated at
+ONE representative tier (one row per potion type: `T7_POTION_REVIVE`,
+`T8_POTION_BERSERK`, `T6_POTION_ENERGY`...) while comps record whatever tier
+they actually ran. `builds_lib.match_gear` deliberately prefers the PLAIN tier
+when a name matches several ("Gig" -> the untiered Gigantify), which is correct
+for recording what was worn — but the ENGINE then looked the key up exactly and
+found nothing.
+
+**RULING (owner, from three options): ignore tier everywhere.** Implemented as
+`gear_key()` in both ports: exact key wins; otherwise fall back to the
+tier-and-enchant-stripped form (`_key_form` / `keyForm`, mirroring
+`builds_lib.key_form` added earlier the same day). The alias index is built
+only for UNAMBIGUOUS forms — if two curated items share one, the form is
+dropped and the lookup fails rather than guessing. Applied at every gear entry
+point: `gear_extras`, `build_extra`'s stat channels and doctrine passives, and
+the self-cost loop. Justification: tier is not part of an item's identity in
+this model — a 1..7 sheet score is far coarser than the tier ladder, and the
+sheets already curate one tier as the representative of a whole line.
+
+Verified: `T3/T5/T7_POTION_REVIVE` all resolve to the curated Gigantify
+(`tankiness 1.0` supply each); `T5_POTION_STONESKIN` -> Resistance Potion;
+`T5_POTION_CLEANSE2` -> Cleansing Potion; exact keys such as
+`ARMOR_CLOTH_AVALON` unchanged. blap's 20 members now carry the potion the
+model already knew about — party tankiness 75.56. **Full battery green with
+ZERO re-pins** (golden, forge, 60/60 parity + embed, builds, provenance,
+interactions, roles, validation-modes, display-math, lint): no golden fixture
+used a non-representative tier, so the change is additive to real comps only.
+
+**The four items, named** (the answer to "what are they"): `T5_POTION_REVIVE` x20
+= Gigantify Potion (blap) — FIXED by the above; `T8_MEAL_STEW_FISH` x6 =
+Deadwater Eel Stew (metabattle); `T7_MEAL_OMELETTE_FISH` x4 = Dusthole Crab
+Omelette (blap); `HEAD_GATHERER_HIDE` x1 = Adept's Skinner Cap (metabattle).
+
+**STILL OPEN, deliberately not guessed — the two fish meals.** They have no
+sheet at ANY tier, so tier-aliasing cannot reach them. Curating them needs to
+know what the foods actually do, and THE PIPELINE DOES NOT CARRY IT: meals
+appear in `gear_lines.json` with name and slot only, and the four curated foods
+were scored by human judgement citing the `GEAR_STATS` sentinel, which
+`evidence_lint` skips by design. So there is nothing in the repo to check a
+guess against. Closing this properly needs the real food bonuses (wiki via the
+Playwright MCP, or a dumps re-parse that captures meal nutrition) — 10 pieces,
+~1 supply unit each. The Skinner Cap is gathering gear recorded in a combat
+build and is correctly out of scope.
