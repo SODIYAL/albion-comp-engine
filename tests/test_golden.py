@@ -602,7 +602,15 @@ def run():
     # claimed; balanced falls back to the detected identity's chain; and
     # computing chains never touches fitness.
     e_brl20 = Engine(content="blackzone_roam", size=20, style="brawl")
-    fc_blap = e_brl20.fight_chain(blap)
+    # RE-PINNED 2026-08-29 (the unit re-fit). Targets now speak PERSON units,
+    # so the chain must be graded on a DRESSED party — grading a naked one
+    # against person-unit targets is the same unit error the re-fit removed,
+    # and naked blap now reads weak on Contact/Pressure, correctly (a party
+    # with no armor really is weak). blap is dressed here in its own doctrine
+    # kits, which is what the page does.
+    blap_kits = [dict(e_brl20.kit_variants(w))["v0"] for w in blap]
+    fc_blap = e_brl20.fight_chain(blap, gears=blap_kits)
+    fc_blap_naked = e_brl20.fight_chain(blap)
     brawl5 = [HEAVY_MACE, GREAT_HAMMER, "MAIN_HOLYSTAFF",
               "2H_DUALSCIMITAR_UNDEAD", "2H_CLAYMORE"]
     fc5 = e_brl20.fight_chain(brawl5, candidate="2H_CLEAVER_HELL")
@@ -833,13 +841,19 @@ def run():
     sr3 = {m["weapon"]: m for m in E.swap_review(three_heal)}
     an = E.analyze(heal_sat)
     bands = {x["cap"]: x["band"] for x in an["strengths"]}
+    # RE-PINNED 2026-08-29 (the unit re-fit): the heal_sustain SOFT CAP rose
+    # with every other row, so this two-healer party now sits inside the
+    # headroom band instead of past it. The load-bearing judgements — which
+    # is what this case is actually about — are unchanged: neither of two
+    # healers is redundant, a third still is, the tank stays clean, and
+    # fitness is still untouched by computing any of it.
     check("T30d swap review: both of 2 healers load-bearing, a 3rd flagged "
-          "redundant, the tank clean; analyze bands mark heals overstacked; "
-          "fitness untouched by all of it",
+          "redundant, the tank clean; analyze bands place heals in the "
+          "headroom band; fitness untouched by all of it",
           not sr2[GREAT_HOLY]["redundant"]
           and sr3["MAIN_HOLYSTAFF"]["redundant"]
           and not sr3[HEAVY_MACE]["redundant"]
-          and bands.get("heal_sustain") == "overstacked"
+          and bands.get("heal_sustain") == "headroom"
           and E.fitness(three_heal) == f_before,
           f"2-healer greatholy={sr2[GREAT_HOLY]['verdict']} "
           f"3rd-healer={sr3['MAIN_HOLYSTAFF']['verdict']} "

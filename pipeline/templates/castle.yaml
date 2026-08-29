@@ -28,32 +28,32 @@ base_size: 25
 validated_sizes: [25]
 
 requirements:
-  heal_sustain:   {target: 8.4, weight: 10, soft_cap: 12.5, scales: true}
-  heal_burst:     {target: 5.0,  weight: 6,  soft_cap: 8.4, scales: true}
-  tankiness:      {target: 12.5, weight: 9,  soft_cap: 17.6, scales: true}
-  peel:           {target: 9.2, weight: 8,  soft_cap: 14.2, scales: true}
-  burst_aoe:      {target: 14.2, weight: 9,  soft_cap: 20.9, scales: true}
-  zone_control:   {target: 8.4, weight: 6,  soft_cap: 14.2, scales: true}
-  engage:         {target: 5.0,  weight: 7,  soft_cap: 9.2, scales: true}
-  stun:           {target: 5.9,  weight: 5,  soft_cap: 10.9, scales: true}
-  sustained_dps:  {target: 7.5,  weight: 4,  soft_cap: 14.2, scales: true}
-  catch:          {target: 2.5,  weight: 3,  soft_cap: 5.9,  scales: true}
-  mobility:       {target: 5.0,  weight: 3,  soft_cap: 12.5, scales: true}
-  burst_st:       {target: 2.5,  weight: 3,  soft_cap: 5.9,  scales: true}
+  heal_sustain:   {target: 8.57, weight: 10, soft_cap: 15.97, scales: true}
+  heal_burst:     {target: 5,  weight: 6,  soft_cap: 14.89, scales: true}
+  tankiness:      {target: 48.44, weight: 9,  soft_cap: 114.12, scales: true}
+  peel:           {target: 9.2, weight: 8,  soft_cap: 21.4, scales: true}
+  burst_aoe:      {target: 14.2, weight: 9,  soft_cap: 39.67, scales: true}
+  zone_control:   {target: 8.4, weight: 6,  soft_cap: 47.33, scales: true}
+  engage:         {target: 5,  weight: 7,  soft_cap: 15.18, scales: true}
+  stun:           {target: 12.47,  weight: 5,  soft_cap: 15.02, scales: true}
+  sustained_dps:  {target: 19.42,  weight: 4,  soft_cap: 57.01, scales: true}
+  catch:          {target: 2.5,  weight: 3,  soft_cap: 6.11,  scales: true}
+  mobility:       {target: 5,  weight: 3,  soft_cap: 24.35, scales: true}
+  burst_st:       {target: 2.5,  weight: 3,  soft_cap: 16.45,  scales: true}
   # PROVISIONAL (2026-08-18) — ranged positioning, same rationale and
   # per-player rate as blackzone_roam (0.25/player, weight 4): the bomb has
   # to land on the gate choke from OUTSIDE it. Was only on blackzone_roam,
   # so every other large template forged melee balls for clap comps.
   ranged_presence: {target: 6.3, weight: 4,  soft_cap: 12.5, scales: true}
   # threshold needs
-  clump_create:   {target: 3.3,  weight: 8,  soft_cap: 5.0,  scales: false}
-  purge:          {target: 1.7,  weight: 6,  soft_cap: 3.3,  scales: false}
-  heal_reduction: {target: 1.7,  weight: 6,  soft_cap: 3.3,  scales: false}
-  resist_shred:   {target: 2.5,  weight: 5,  soft_cap: 5.0,  scales: false}
-  cleanse:        {target: 1.7,  weight: 5,  soft_cap: 3.3,  scales: false}
-  silence:        {target: 2.5,  weight: 5,  soft_cap: 4.2,  scales: false}
-  buff_allies:    {target: 2.5,  weight: 4,  soft_cap: 5.0,  scales: false}
-  disengage:      {target: 0.8,  weight: 3,  soft_cap: 2.5,  scales: false}
+  clump_create:   {target: 3.39,  weight: 8,  soft_cap: 6.84,  scales: false}
+  purge:          {target: 1.7,  weight: 6,  soft_cap: 8.8,  scales: false}
+  heal_reduction: {target: 1.7,  weight: 6,  soft_cap: 32.86,  scales: false}
+  resist_shred:   {target: 3.38,  weight: 5,  soft_cap: 5.94,  scales: false}
+  cleanse:        {target: 5.1,  weight: 5,  soft_cap: 5.865,  scales: false}
+  silence:        {target: 2.5,  weight: 5,  soft_cap: 20.09,  scales: false}
+  buff_allies:    {target: 11.57,  weight: 4,  soft_cap: 33.35,  scales: false}
+  disengage:      {target: 0.8,  weight: 3,  soft_cap: 9.38,  scales: false}
   # OPTIONAL (owner 2026-08-28): five single-target melee weapons carry it;
   #   9 of 10 published comps field none. Keep the target, do not require it.
   execute:        {target: 0.8,  weight: 3,  soft_cap: 2.5,  scales: false, optional: true}
@@ -64,8 +64,8 @@ requirements:
   # OPTIONAL (owner 2026-08-28): supplied by ONE weapon in the catalogue
   #   (Exalted Staff, the crystal holy staff) and fielded mainly by 30+ ZvZ
   #   groups. Real target, but a comp without it is not missing anything.
-  anti_zone:      {target: 0.8,  weight: 2,  soft_cap: 1.7,  scales: false, optional: true}
-  damage_debuff:  {target: 0.8,  weight: 1,  soft_cap: 1.7,  scales: false}
+  anti_zone:      {target: 1.8,  weight: 2,  soft_cap: 2.3,  scales: false, optional: true}
+  damage_debuff:  {target: 1.2,  weight: 1,  soft_cap: 6.57,  scales: false}
 
 hard_floors:
   heal_sustain: {min_party_size: 10, floor_units: 4.2, penalty_mult: 2.0}

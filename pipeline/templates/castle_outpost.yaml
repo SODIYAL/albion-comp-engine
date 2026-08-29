@@ -33,14 +33,14 @@ base_size: 7
 validated_sizes: [7]
 
 requirements:
-  heal_sustain:   {target: 2.6, weight: 10, soft_cap: 4.3, scales: true}
-  heal_burst:     {target: 1.7, weight: 6,  soft_cap: 3.5, scales: true}
-  tankiness:      {target: 3.5, weight: 9,  soft_cap: 6.0, scales: true}
-  peel:           {target: 2.6, weight: 8,  soft_cap: 5.2, scales: true}
-  burst_aoe:      {target: 4.3, weight: 8,  soft_cap: 7.8, scales: true}
-  clump_create:   {target: 1.7, weight: 7,  soft_cap: 3.5, scales: false}
-  engage:         {target: 1.7, weight: 7,  soft_cap: 4.3, scales: false}
-  purge:          {target: 1.7, weight: 6,  soft_cap: 3.5, scales: false}
+  heal_sustain:   {target: 2.65, weight: 10, soft_cap: 5.5, scales: true}
+  heal_burst:     {target: 1.7, weight: 6,  soft_cap: 6.21, scales: true}
+  tankiness:      {target: 13.56, weight: 9,  soft_cap: 38.9, scales: true}
+  peel:           {target: 2.6, weight: 8,  soft_cap: 7.84, scales: true}
+  burst_aoe:      {target: 4.3, weight: 8,  soft_cap: 14.8, scales: true}
+  clump_create:   {target: 1.75, weight: 7,  soft_cap: 4.79, scales: false}
+  engage:         {target: 1.7, weight: 7,  soft_cap: 7.09, scales: false}
+  purge:          {target: 1.7, weight: 6,  soft_cap: 9.33, scales: false}
   # PROVISIONAL WEIGHT — needs the domain expert. anti_zone (removing enemy
   # ground areas) is enemy-dependent: worth a lot against Permafrost/Frost-heavy
   # zone comps, near-worthless otherwise, exactly like purge vs buff-less comps
@@ -52,34 +52,34 @@ requirements:
   # OPTIONAL (owner 2026-08-28): supplied by ONE weapon in the catalogue
   #   (Exalted Staff, the crystal holy staff) and fielded mainly by 30+ ZvZ
   #   groups. Real target, but a comp without it is not missing anything.
-  anti_zone:      {target: 0.9, weight: 1,  soft_cap: 1.7, scales: false, optional: true}
+  anti_zone:      {target: 2.02, weight: 1,  soft_cap: 2.3, scales: false, optional: true}
   # PROVISIONAL WEIGHT — promoted 2026-08-12 with the anti_zone treatment:
   # low and flat so an unvalidated number can never dominate a recommendation.
   # Scored so far only on the defining carriers (Black Monk 2, Incubus Mace 2,
   # Spirithunter/Quarterstaff/DBS/Evensong 1); many more lines carry small
   # versions (Weakening, Frost Beam, Intimidating Presence) left at 0 pending
   # expert weighting. REWEIGHT 2026-08-18: 3 -> 1 (same rationale as anti_zone).
-  damage_debuff:  {target: 0.9, weight: 1,  soft_cap: 1.7, scales: false}
-  heal_reduction: {target: 0.9, weight: 6,  soft_cap: 2.6, scales: false}
-  resist_shred:   {target: 1.7, weight: 5,  soft_cap: 3.5, scales: false}
-  cleanse:        {target: 0.9, weight: 5,  soft_cap: 2.6, scales: false}
-  disengage:      {target: 0.9, weight: 4,  soft_cap: 2.6, scales: false}
-  zone_control:   {target: 2.6, weight: 4,  soft_cap: 6.0, scales: true}
-  silence:        {target: 0.9, weight: 4,  soft_cap: 2.6, scales: false}
-  stun:           {target: 1.7, weight: 4,  soft_cap: 4.3, scales: true}
-  sustained_dps:  {target: 2.6, weight: 5,  soft_cap: 6.0, scales: true}
+  damage_debuff:  {target: 1.35, weight: 1,  soft_cap: 6.57, scales: false}
+  heal_reduction: {target: 0.9, weight: 6,  soft_cap: 25.89, scales: false}
+  resist_shred:   {target: 2.29, weight: 5,  soft_cap: 4.15, scales: false}
+  cleanse:        {target: 2.7, weight: 5,  soft_cap: 3.9, scales: false}
+  disengage:      {target: 0.9, weight: 4,  soft_cap: 9.75, scales: false}
+  zone_control:   {target: 2.6, weight: 4,  soft_cap: 20, scales: true}
+  silence:        {target: 0.9, weight: 4,  soft_cap: 12.44, scales: false}
+  stun:           {target: 3.59, weight: 4,  soft_cap: 5.93, scales: true}
+  sustained_dps:  {target: 6.73, weight: 5,  soft_cap: 24.09, scales: true}
   # PROMOTED 2026-08-27 — see blackzone_roam.yaml for the full rationale
   # (curated on every sheet, carried by the fight chain, scored by nothing).
   # Fitted from the three real castle-outpost comps, same 0.9x/1.15x
   # convention, weight 1 low-and-flat start. max_health_cut gets NO row:
   # no comp in the corpus fields it here, and an invented number is worse
   # than an honest gap.
-  slow:               {target: 2.7, weight: 1, soft_cap: 8.0, scales: true}
-  root:               {target: 0.9, weight: 1, soft_cap: 9.2, scales: true}
-  knockback_displace: {target: 1.8, weight: 1, soft_cap: 6.9, scales: true}
-  anti_dive:          {target: 1.8, weight: 1, soft_cap: 4.6, scales: false}
-  interrupt:          {target: 0.9, weight: 1, soft_cap: 1.1, scales: false}
-  mobility:       {target: 1.7, weight: 3,  soft_cap: 5.2, scales: true}
+  slow:               {target: 2.7, weight: 1, soft_cap: 11.13, scales: true}
+  root:               {target: 1, weight: 1, soft_cap: 16.87, scales: true}
+  knockback_displace: {target: 2.22, weight: 1, soft_cap: 17.21, scales: true}
+  anti_dive:          {target: 3.86, weight: 1, soft_cap: 10.68, scales: false}
+  interrupt:          {target: 0.9, weight: 1, soft_cap: 1.57, scales: false}
+  mobility:       {target: 1.7, weight: 3,  soft_cap: 10.13, scales: true}
 
 # HARD FLOORS — capabilities where near-zero supply is catastrophic, not merely
 # suboptimal. Load-bearing: the first prototype run omitted these and failed 4/9

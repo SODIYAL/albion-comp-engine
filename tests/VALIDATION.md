@@ -952,3 +952,98 @@ per-style tuning at all. Sharpening these numbers needs a different
 instrument, not more of this one — more held-out labelled comps, or the expert
 blind rounds the harness was built for. Recorded so the next attempt does not
 re-run the same sweep expecting a signal.
+
+## THE UNIT RE-FIT — shipped (2026-08-29)
+
+Owner: *"go ahead."* The long-standing defect (HANDOFF.md, "KNOWN UNIT DEFECT,
+ruling pending"): every target and soft cap was fitted counting WEAPONS while
+the engine measures whole dressed PEOPLE, so the two sides of every comparison
+were in different units. tankiness read 4.2-6.6x target in every published comp.
+
+**SHIPPED: 152 rows across all six templates, moved together** (the "one unit,
+everywhere" rule — a partial move would leave the templates in mixed
+currencies). `weight`, `scales` and `optional` untouched. **Hard floors
+untouched**: Option C (owner 2026-08-27) makes floors read the WEAPON+LOADOUT
+supply only, so they are already in weapon units by design and must stay there.
+
+### Result
+
+```text
+                       before    after
+tankiness coverage    4.2-6.6  1.19-2.12     <- the defect, fixed
+median coverage           n/a       1.82     (still conservative)
+tier2 weapon_only         87%        70%     (naked; the retired unit)
+tier2 doctrine_inferred   26%        87%
+tier2 actual_gear         57%        87%     (real recorded kits)
+```
+
+Full battery green: golden, forge, parity, validation-modes, roles,
+interactions, builds, provenance, patch, cohort, display-math, codec, lint.
+
+### Three failed attempts, and why each failed — the method was the hard part
+
+1. **Re-derive every row from scratch** (0.9x least / 1.15x most, over all 28
+   dressed comps). REJECTED: the convention says "the least any GOOD comp
+   fields", and across a mixed-quality corpus the WEAKEST comp sets the target
+   — heal_burst collapsed to 0.11x because one comp fields almost none.
+2. **Scale by the median per-comp dressed/naked ratio.** REJECTED: the ratio
+   varies 1x-27x across comps, so the median overshoots for high-variance
+   capabilities. It pushed blap — a melee ball that deliberately carries little
+   escape — from 1.11 disengage coverage down to 0.37.
+3. **Scale by min(dressed)/min(naked) and max/max.** REJECTED as the whole
+   answer: min-based ratios are outlier-driven where the minimum naked supply
+   is near zero (engage x3.50, mobility x4.55 off single comps), and 3 of 4
+   reference comps ended up BELOW the tankiness target.
+
+### What shipped, and the two principles that fixed it
+
+Fit on the **OWNER-VETTED comps only** (the 11 the owner labelled by hand and
+ruled on, minus the two Deadlyhooker parties they excluded from fitting) —
+9 fully-dressed comp-parties — measured DRESSED, style-normalised, with the
+owner's own formula. Then:
+
+- **A UNIT CONVERSION CAN ONLY ADD.** Gear never removes supply, so a factor
+  below 1.0 is not a unit correction — it is a separate claim that the old
+  target was miscalibrated. Twelve came out below 1 and were CLAMPED to 1.0
+  (left exactly as they were). Without this clamp, burst_st's target fell 47%
+  and forge F3 broke: the cross-member `resist_shred x burst_st` synergy
+  saturated on a single member, so a real interaction silently priced at zero.
+  The clamp is what makes this a unit fix rather than a retune wearing its
+  clothes.
+- **Only 13 of 29 capabilities move at all**, and they are exactly the
+  gear-fed ones: buff_allies x4.63, tankiness x3.88, cleanse x3.00,
+  sustained_dps x2.59, anti_zone x2.25, anti_dive x2.14, stun x2.11,
+  damage_debuff x1.50, resist_shred x1.35, knockback_displace x1.23,
+  root x1.11, clump_create x1.03, heal_sustain x1.02. **The other 16 keep
+  their targets exactly** — peel, disengage, mobility, engage, catch,
+  burst_aoe and the rest were already right in person terms. So the original
+  calibration was never uniformly in weapon units; only the capabilities worn
+  armor supplies were wrong. That is a more precise statement of the defect
+  than the one in HANDOFF.md.
+
+### Two golden re-pins, both intended consequences
+
+- **T26 fight chain** graded blap NAKED and expected all-strong. Against
+  person-unit targets a naked party correctly reads weak — that is the same
+  unit error the re-fit removes. Re-pinned to grade blap DRESSED in its own
+  doctrine kits (what the page does): **all five stages strong**. The chain
+  lens was itself in the wrong unit; this fixed it.
+- **T30d** heal band moved overstacked -> headroom as the soft cap rose. The
+  load-bearing judgements this case is actually about are unchanged: neither
+  of two healers redundant, a third still redundant, tank clean, fitness
+  untouched.
+
+### OPEN — the gate now needs the owner's ruling
+
+`tier2`'s exit gate is still legacy `weapon_only` role-level (naked
+incumbents), which the re-fit necessarily degrades 87% -> 70%: it measures in
+the unit the model just left. It PASSES, but sits exactly on its 70%
+threshold, while both dressed classes jumped to 87%. **Ruling 2 (2026-08-27,
+"gate re-basing DEFERRED as directed") is now the blocking question** — the
+honest gate is `actual_gear`, which scores real recorded kits and is at its
+best-ever 87%. Recommend re-basing; not done unilaterally because the owner
+deferred it once already.
+
+Median coverage 1.82 says the targets remain CONSERVATIVE (good comps
+over-cover). That is the safe direction and the residual is a calibration
+question, no longer a unit question.
