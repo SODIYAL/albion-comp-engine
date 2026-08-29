@@ -1,0 +1,188 @@
+# AlbionCompo public comp, ingested 2026-08-29 from the site's
+# public listing (130 comps) via its compositions API. Slot rows
+# are VERBATIM source data (exact game item ids as the site
+# serves them); spell selections are NOT in the source's data
+# model and are recorded as null, never invented.
+kind: published_comp
+id: albioncompo_ranged_bomb_2026_07
+source:
+  kind: manual_link
+  family: albioncompo:a3809a3c1
+  author: anonymous albioncompo.com user (3809a3c1)
+  url: https://www.albioncompo.com/comp/PCDVE85F
+  record: >
+    Public composition "RANGED BOMB" (activity tag: zvz) on
+    albioncompo.com, listed publicly; retrieved from the site's
+    compositions API 2026-08-29. View count at retrieval: 48.
+  license: publicly shared on albioncompo.com (is_public true); author pseudonymous
+published: '2026-07-19'
+ingested: '2026-08-29'
+observed: null
+patch: null   # the source does not state the game patch
+snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
+content: zvz_10man   # the source's own activity tag is 'zvz'; size from the roster
+# CONTENT CANDIDATES (owner ruling 2026-08-28): a ZvZ size names
+# a FORMAT, not one engine template, so the record is evidence
+# for several.
+# 10-14 ZvZ: INTERPOLATED between the owner's two stated bands (20-man and 7-man). Flagged as such — the owner never graded this size directly.
+content_candidates:
+  - blackzone_roam
+  - castle_outpost
+  - faction_war
+  - roads
+style: clap   # AUTHOR-DECLARED: taken from the comp's own
+# name, "RANGED BOMB". Not a curator read and not the
+# engine's classifier — the author said it. ('bomb' reads as
+# clap: styles.yaml's clap blurb is "stack them and delete
+# them - one engage, one bomb".)
+party_size:
+  min: 10
+  max: 10
+approval:
+  status: candidate
+  basis: publicly shared comp by a pseudonymous author; no caller approval attached
+  approved_by: null
+  as_of: '2026-08-29'
+parties:
+- name: comp
+  slots:
+  - raw: T8_MAIN_ARCANESTAFF_UNDEAD
+    weapons:
+    - MAIN_ARCANESTAFF_UNDEAD
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_LAMP_UNDEAD
+      helm: HEAD_LEATHER_FEY
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_PLATE_UNDEAD
+      cape: CAPEITEM_FW_FORTSTERLING
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T8_2H_GLAIVE_CRYSTAL
+    weapons:
+    - 2H_GLAIVE_CRYSTAL
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_FEY
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_PLATE_UNDEAD
+      cape: CAPEITEM_FW_BRECILIEN
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T8_2H_BOW_HELL
+    weapons:
+    - 2H_BOW_HELL
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET1
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_PLATE_UNDEAD
+      cape: CAPEITEM_FW_FORTSTERLING
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T8_2H_ICECRYSTAL_UNDEAD
+    weapons:
+    - 2H_ICECRYSTAL_UNDEAD
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET1
+      armor: ARMOR_CLOTH_SET1
+      boots: SHOES_PLATE_UNDEAD
+      cape: CAPEITEM_FW_FORTSTERLING
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T8_2H_CURSEDSTAFF_MORGANA
+    weapons:
+    - 2H_CURSEDSTAFF_MORGANA
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_FEY
+      armor: ARMOR_CLOTH_SET1
+      boots: SHOES_LEATHER_SET2
+      cape: CAPEITEM_FW_FORTSTERLING
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE
+  - raw: T8_2H_ARCANESTAFF_HELL
+    weapons:
+    - 2H_ARCANESTAFF_HELL
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_LEATHER_ROYAL
+      boots: SHOES_LEATHER_SET2
+      cape: CAPEITEM_FW_FORTSTERLING
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE
+  - raw: T8_2H_DUALMACE_AVALON
+    weapons:
+    - 2H_DUALMACE_AVALON
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET2
+      armor: ARMOR_PLATE_HELL
+      boots: SHOES_LEATHER_SET2
+      cape: CAPEITEM_FW_MARTLOCK
+    potion: POTION_REVIVE
+    food: MEAL_SANDWICH
+  - raw: T8_MAIN_HOLYSTAFF_AVALON
+    weapons:
+    - MAIN_HOLYSTAFF_AVALON
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_HORN_KEEPER
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_FW_FORTSTERLING
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE_AVALON
+  - raw: T8_2H_HOLYSTAFF_CRYSTAL
+    weapons:
+    - 2H_HOLYSTAFF_CRYSTAL
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_KEEPER
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_FW_FORTSTERLING
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE_AVALON
+  - raw: T8_MAIN_CURSEDSTAFF_UNDEAD
+    weapons:
+    - MAIN_CURSEDSTAFF_UNDEAD
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_HORN_KEEPER
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_HELL
+      boots: SHOES_PLATE_UNDEAD
+      cape: CAPEITEM_FW_FORTSTERLING
+    potion: POTION_REVIVE
+    food: MEAL_SANDWICH

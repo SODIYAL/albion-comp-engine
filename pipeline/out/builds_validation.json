@@ -1,11 +1,11 @@
 {
  "counts": {
   "approved": 70,
-  "candidate": 167,
-  "canonical_defaults": 55,
+  "candidate": 555,
+  "canonical_defaults": 112,
   "quarantined_fields": 3,
   "quarantined_records": 3,
-  "records": 237
+  "records": 625
  },
  "exclusion_gate": [],
  "kind": "validation_result",
@@ -702,32 +702,554 @@
    "weapon": "MAIN_SCIMITAR_MORGANA"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_20man",
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_ava_raid_2026_05:comp:8",
+   "content": "zvz_10man",
    "weapon": "2H_ARCANESTAFF"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_20man",
-   "weapon": "2H_ARCANESTAFF_CRYSTAL"
-  },
-  {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
-   "content": "zvz_20man",
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_ranged_bomb_2026_07:comp:5",
+   "content": "zvz_10man",
    "weapon": "2H_ARCANESTAFF_HELL"
   },
   {
-   "basis": "2 independent source families agree",
-   "build_id": "albioncompo_ss_kite_20_2026_06:comp:16",
-   "content": "zvz_20man",
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
    "weapon": "2H_AXE_AVALON"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_BOW_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_CLAYMORE_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_CLEAVER_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_CROSSBOWLARGE_MORGANA"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_ranged_bomb_2026_07:comp:4",
+   "content": "zvz_10man",
+   "weapon": "2H_CURSEDSTAFF_MORGANA"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_DAGGER_KATAR_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_DUALAXE_KEEPER"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_ranged_bomb_2026_07:comp:6",
+   "content": "zvz_10man",
+   "weapon": "2H_DUALMACE_AVALON"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_10man_melee_2026_02:comp:7",
+   "content": "zvz_10man",
+   "weapon": "2H_FIRE_RINGPAIR_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_FROSTSTAFF"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_GLAIVE_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_HAMMER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_HAMMER_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_HOLYSTAFF_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_HOLYSTAFF_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_HOLYSTAFF_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_ICECRYSTAL_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_KNUCKLES_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_KNUCKLES_SET3"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_f2b_2026_06:comp:3",
+   "content": "zvz_10man",
+   "weapon": "2H_MACE"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_REPEATINGCROSSBOW_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_SCYTHE_CRYSTAL"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_ava_raid_2026_05:comp:4",
+   "content": "zvz_10man",
+   "weapon": "2H_SHAPESHIFTER_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_SHAPESHIFTER_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_SHAPESHIFTER_SET2"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "2H_SHAPESHIFTER_SET3"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "MAIN_ARCANESTAFF_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "MAIN_CURSEDSTAFF_AVALON"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_f2b_2026_06:comp:4",
+   "content": "zvz_10man",
+   "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_10man_melee_2026_02:comp:3",
+   "content": "zvz_10man",
+   "weapon": "MAIN_CURSEDSTAFF_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "MAIN_FROSTSTAFF_AVALON"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_new_composition_2026_04:comp:2",
+   "content": "zvz_10man",
+   "weapon": "MAIN_HOLYSTAFF_AVALON"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_10man_melee_2026_02:comp:0",
+   "content": "zvz_10man",
+   "weapon": "MAIN_MACE"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "MAIN_MACE_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "MAIN_NATURESTAFF_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "MAIN_NATURESTAFF_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_10man",
+   "weapon": "MAIN_SWORD_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_14man",
+   "weapon": "2H_ARCANESTAFF_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_14man",
+   "weapon": "2H_BOW_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_14man",
+   "weapon": "2H_CROSSBOWLARGE"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_14man",
+   "weapon": "2H_DUALMACE_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_14man",
+   "weapon": "2H_ENIGMATICORB_MORGANA"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_14man",
+   "weapon": "2H_GLAIVE_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_14man",
+   "weapon": "2H_HAMMER_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_14man",
+   "weapon": "2H_HOLYSTAFF_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_14man",
+   "weapon": "2H_ICECRYSTAL_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_14man",
+   "weapon": "2H_KNUCKLES_SET3"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_14man",
+   "weapon": "MAIN_ARCANESTAFF_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_14man",
+   "weapon": "MAIN_CURSEDSTAFF_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_14man",
+   "weapon": "MAIN_HOLYSTAFF_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_14man",
+   "weapon": "MAIN_NATURESTAFF_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_15man",
+   "weapon": "2H_ARCANESTAFF_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_15man",
+   "weapon": "2H_ARCANE_RINGPAIR_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_15man",
+   "weapon": "2H_FIRE_RINGPAIR_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_15man",
+   "weapon": "2H_FROSTSTAFF"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_15man",
+   "weapon": "2H_HOLYSTAFF_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_15man",
+   "weapon": "2H_MACE"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_15man",
+   "weapon": "2H_NATURESTAFF_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_15man",
+   "weapon": "2H_POLEHAMMER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_15man",
+   "weapon": "2H_SHAPESHIFTER_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_15man",
+   "weapon": "2H_SHAPESHIFTER_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_15man",
+   "weapon": "2H_SHAPESHIFTER_SET2"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_15man",
+   "weapon": "2H_SKULLORB_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_15man",
+   "weapon": "MAIN_HAMMER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_15man",
+   "weapon": "MAIN_HOLYSTAFF_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "2H_ARCANESTAFF"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "2H_ARCANESTAFF_CRYSTAL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "2H_AXE_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "2H_DUALMACE_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "2H_DUALSCIMITAR_UNDEAD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "2H_ENIGMATICORB_MORGANA"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "2H_FIRE_RINGPAIR_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "2H_KNUCKLES_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "2H_KNUCKLES_SET2"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "2H_KNUCKLES_SET3"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "2H_POLEHAMMER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "2H_ROCKSTAFF_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "MAIN_CURSEDSTAFF_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "MAIN_DAGGER_HELL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "MAIN_HOLYSTAFF_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "MAIN_MACE"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_19man",
+   "weapon": "MAIN_NATURESTAFF"
+  },
+  {
+   "basis": "6 independent source families agree",
+   "build_id": "albioncompo_brawl_by_lattex_2026_05:comp:3",
+   "content": "zvz_20man",
+   "weapon": "2H_ARCANESTAFF"
+  },
+  {
+   "basis": "4 independent source families agree",
+   "build_id": "albioncompo_brawl_by_lattex_2026_05:comp:7",
+   "content": "zvz_20man",
+   "weapon": "2H_ARCANESTAFF_CRYSTAL"
+  },
+  {
+   "basis": "5 independent source families agree",
+   "build_id": "albioncompo_kite_deff_2026_08:comp:10",
+   "content": "zvz_20man",
+   "weapon": "2H_ARCANESTAFF_HELL"
+  },
+  {
+   "basis": "3 independent source families agree",
+   "build_id": "albioncompo_brawl_by_lattex_2026_05:comp:6",
+   "content": "zvz_20man",
+   "weapon": "2H_ARCANE_RINGPAIR_AVALON"
+  },
+  {
+   "basis": "3 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:9",
+   "content": "zvz_20man",
+   "weapon": "2H_AXE"
+  },
+  {
+   "basis": "9 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:3",
+   "content": "zvz_20man",
+   "weapon": "2H_AXE_AVALON"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_kite_deff_2026_08:comp:17",
    "content": "zvz_20man",
    "weapon": "2H_BOW_HELL"
   },
@@ -735,11 +1257,29 @@
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
+   "weapon": "2H_CLAYMORE_AVALON"
+  },
+  {
+   "basis": "4 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:6",
+   "content": "zvz_20man",
    "weapon": "2H_CLEAVER_HELL"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_hard_zvz_brawl_20ppl_2026_08:comp:0",
+   "content": "zvz_20man",
+   "weapon": "2H_COMBATSTAFF_MORGANA"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_CROSSBOWLARGE_MORGANA"
+  },
+  {
+   "basis": "5 independent source families agree",
+   "build_id": "albioncompo_brawl_hit_20_2026_01:comp:12",
    "content": "zvz_20man",
    "weapon": "2H_CURSEDSTAFF_MORGANA"
   },
@@ -747,17 +1287,65 @@
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
-   "weapon": "2H_DUALMACE_AVALON"
+   "weapon": "2H_DAGGER_KATAR_AVALON"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
-   "weapon": "2H_ENIGMATICORB_MORGANA"
+   "weapon": "2H_DOUBLEBLADEDSTAFF_CRYSTAL"
+  },
+  {
+   "basis": "3 independent source families agree",
+   "build_id": "albioncompo_brawl_by_lattex_2026_05:comp:10",
+   "content": "zvz_20man",
+   "weapon": "2H_DUALAXE_KEEPER"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_DUALCROSSBOW_CRYSTAL"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_brawl_by_lattex_2026_05:comp:16",
+   "content": "zvz_20man",
+   "weapon": "2H_DUALHAMMER_HELL"
+  },
+  {
+   "basis": "9 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:11",
+   "content": "zvz_20man",
+   "weapon": "2H_DUALMACE_AVALON"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_brawl_by_lattex_2026_05:comp:13",
+   "content": "zvz_20man",
+   "weapon": "2H_DUALSCIMITAR_UNDEAD"
+  },
+  {
+   "basis": "4 independent source families agree",
+   "build_id": "albioncompo_brawl_hit_20_2026_01:comp:7",
+   "content": "zvz_20man",
+   "weapon": "2H_ENIGMATICORB_MORGANA"
+  },
+  {
+   "basis": "3 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:13",
+   "content": "zvz_20man",
+   "weapon": "2H_ENIGMATICSTAFF"
+  },
+  {
+   "basis": "3 independent source families agree",
+   "build_id": "albioncompo_new_composition_2026_08:comp:19",
+   "content": "zvz_20man",
+   "weapon": "2H_FIRESTAFF_HELL"
+  },
+  {
+   "basis": "8 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:5",
    "content": "zvz_20man",
    "weapon": "2H_FIRE_RINGPAIR_AVALON"
   },
@@ -765,77 +1353,167 @@
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
+   "weapon": "2H_FLAIL"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_FROSTSTAFF"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_GLAIVE_CRYSTAL"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_brawl_by_lattex_2026_05:comp:8",
+   "content": "zvz_20man",
+   "weapon": "2H_HALBERD"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_HAMMER"
+  },
+  {
+   "basis": "4 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:17",
+   "content": "zvz_20man",
    "weapon": "2H_HAMMER_AVALON"
   },
   {
    "basis": "2 independent source families agree",
-   "build_id": "albioncompo_ss_kite_20_2026_06:comp:17",
+   "build_id": "albioncompo_brawl_by_lattex_2026_05:comp:0",
+   "content": "zvz_20man",
+   "weapon": "2H_HAMMER_CRYSTAL"
+  },
+  {
+   "basis": "7 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:19",
    "content": "zvz_20man",
    "weapon": "2H_HARPOON_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
+   "basis": "4 independent source families agree",
+   "build_id": "albioncompo_builds_for_brawl_bomb_2026_06:comp:15",
    "content": "zvz_20man",
    "weapon": "2H_HOLYSTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
+   "basis": "3 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:12",
    "content": "zvz_20man",
    "weapon": "2H_HOLYSTAFF_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_brawl_by_lattex_2026_05:comp:19",
    "content": "zvz_20man",
    "weapon": "2H_HOLYSTAFF_UNDEAD"
   },
   {
-   "basis": "2 independent source families agree",
-   "build_id": "albioncompo_ss_kite_20_2026_06:comp:9",
+   "basis": "10 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:8",
    "content": "zvz_20man",
    "weapon": "2H_ICECRYSTAL_UNDEAD"
   },
   {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_KNUCKLES_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_KNUCKLES_HELL"
+  },
+  {
    "basis": "2 independent source families agree",
-   "build_id": "albioncompo_ss_kite_20_2026_06:comp:11",
+   "build_id": "albioncompo_brawl_by_lattex_2026_05:comp:14",
+   "content": "zvz_20man",
+   "weapon": "2H_KNUCKLES_KEEPER"
+  },
+  {
+   "basis": "3 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:4",
+   "content": "zvz_20man",
+   "weapon": "2H_KNUCKLES_SET2"
+  },
+  {
+   "basis": "10 independent source families agree",
+   "build_id": "albioncompo_brawl_hit_20_2026_01:comp:16",
    "content": "zvz_20man",
    "weapon": "2H_KNUCKLES_SET3"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
+   "basis": "4 independent source families agree",
+   "build_id": "albioncompo_builds_for_brawl_bomb_2026_06:comp:0",
    "content": "zvz_20man",
    "weapon": "2H_LONGBOW"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
+   "basis": "6 independent source families agree",
+   "build_id": "albioncompo_brawl_by_lattex_2026_05:comp:1",
    "content": "zvz_20man",
    "weapon": "2H_MACE"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
+   "basis": "5 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:10",
    "content": "zvz_20man",
    "weapon": "2H_NATURESTAFF_HELL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_new_composition_2026_08:comp:4",
+   "content": "zvz_20man",
+   "weapon": "2H_NATURESTAFF_KEEPER"
+  },
+  {
+   "basis": "8 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:14",
    "content": "zvz_20man",
    "weapon": "2H_POLEHAMMER"
   },
   {
-   "basis": "2 independent source families agree",
-   "build_id": "albioncompo_ss_kite_20_2026_06:comp:0",
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
    "content": "zvz_20man",
-   "weapon": "2H_SHAPESHIFTER_KEEPER"
+   "weapon": "2H_QUARTERSTAFF"
+  },
+  {
+   "basis": "5 independent source families agree",
+   "build_id": "albioncompo_hdcp_bomb_2026_06:comp:19",
+   "content": "zvz_20man",
+   "weapon": "2H_ROCKSTAFF_KEEPER"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_SHAPESHIFTER_AVALON"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_SHAPESHIFTER_CRYSTAL"
+  },
+  {
+   "basis": "5 independent source families agree",
+   "build_id": "albioncompo_brawl_hit_20_2026_01:comp:0",
+   "content": "zvz_20man",
+   "weapon": "2H_SHAPESHIFTER_KEEPER"
+  },
+  {
+   "basis": "7 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:15",
    "content": "zvz_20man",
    "weapon": "2H_SHAPESHIFTER_SET2"
   },
@@ -843,37 +1521,97 @@
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
-   "weapon": "MAIN_ARCANESTAFF"
+   "weapon": "2H_SKULLORB_HELL"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_comp_5_v2_2026_04:comp:13",
+   "content": "zvz_20man",
+   "weapon": "2H_TWINSCYTHE_HELL"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "2H_WILDSTAFF"
+  },
+  {
+   "basis": "7 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:16",
+   "content": "zvz_20man",
+   "weapon": "MAIN_ARCANESTAFF"
+  },
+  {
+   "basis": "4 independent source families agree",
+   "build_id": "albioncompo_kite_deff_2026_08:comp:18",
    "content": "zvz_20man",
    "weapon": "MAIN_ARCANESTAFF_UNDEAD"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_hdcp_bomb_2026_06:comp:3",
+   "content": "zvz_20man",
+   "weapon": "MAIN_CURSEDSTAFF_AVALON"
+  },
+  {
+   "basis": "5 independent source families agree",
+   "build_id": "albioncompo_builds_for_brawl_bomb_2026_06:comp:8",
    "content": "zvz_20man",
    "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
   },
   {
-   "basis": "single source family, no armory evidence, no shotcaller approval",
-   "build_id": null,
+   "basis": "7 independent source families agree",
+   "build_id": "albioncompo_brawl_hit_20_2026_01:comp:6",
    "content": "zvz_20man",
    "weapon": "MAIN_CURSEDSTAFF_UNDEAD"
   },
   {
-   "basis": "2 independent source families agree",
-   "build_id": "albioncompo_ss_kite_20_2026_06:comp:19",
+   "basis": "3 independent source families agree",
+   "build_id": "albioncompo_brawl_by_lattex_2026_05:comp:11",
    "content": "zvz_20man",
-   "weapon": "MAIN_HOLYSTAFF_AVALON"
+   "weapon": "MAIN_DAGGER_HELL"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
    "build_id": null,
    "content": "zvz_20man",
+   "weapon": "MAIN_FROSTSTAFF_KEEPER"
+  },
+  {
+   "basis": "4 independent source families agree",
+   "build_id": "albioncompo_builds_for_brawl_bomb_2026_06:comp:18",
+   "content": "zvz_20man",
+   "weapon": "MAIN_HAMMER"
+  },
+  {
+   "basis": "11 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:7",
+   "content": "zvz_20man",
+   "weapon": "MAIN_HOLYSTAFF_AVALON"
+  },
+  {
+   "basis": "4 independent source families agree",
+   "build_id": "albioncompo_c_2026_07:comp:0",
+   "content": "zvz_20man",
+   "weapon": "MAIN_MACE"
+  },
+  {
+   "basis": "3 independent source families agree",
+   "build_id": "albioncompo_comp_5_v2_2026_04:comp:16",
+   "content": "zvz_20man",
+   "weapon": "MAIN_MACE_CRYSTAL"
+  },
+  {
+   "basis": "5 independent source families agree",
+   "build_id": "albioncompo_builds_for_brawl_bomb_2026_06:comp:17",
+   "content": "zvz_20man",
    "weapon": "MAIN_MACE_HELL"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_hard_zvz_brawl_20ppl_2026_08:comp:19",
+   "content": "zvz_20man",
+   "weapon": "MAIN_NATURESTAFF"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",
@@ -883,9 +1621,33 @@
   },
   {
    "basis": "2 independent source families agree",
-   "build_id": "albioncompo_ss_kite_20_2026_06:comp:10",
+   "build_id": "albioncompo_brawl_by_lattex_2026_05:comp:12",
+   "content": "zvz_20man",
+   "weapon": "MAIN_RAPIER_MORGANA"
+  },
+  {
+   "basis": "4 independent source families agree",
+   "build_id": "albioncompo_new_composition_2026_08:comp:7",
    "content": "zvz_20man",
    "weapon": "MAIN_ROCKMACE_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "MAIN_SPEAR_KEEPER"
+  },
+  {
+   "basis": "single source family, no armory evidence, no shotcaller approval",
+   "build_id": null,
+   "content": "zvz_20man",
+   "weapon": "MAIN_SPEAR_LANCE_AVALON"
+  },
+  {
+   "basis": "2 independent source families agree",
+   "build_id": "albioncompo_brawl_by_lattex_2026_05:comp:9",
+   "content": "zvz_20man",
+   "weapon": "MAIN_SWORD_CRYSTAL"
   },
   {
    "basis": "single source family, no armory evidence, no shotcaller approval",

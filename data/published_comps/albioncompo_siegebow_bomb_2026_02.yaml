@@ -1,0 +1,200 @@
+# AlbionCompo public comp, ingested 2026-08-29 from the site's
+# public listing (130 comps) via its compositions API. Slot rows
+# are VERBATIM source data (exact game item ids as the site
+# serves them); spell selections are NOT in the source's data
+# model and are recorded as null, never invented.
+kind: published_comp
+id: albioncompo_siegebow_bomb_2026_02
+source:
+  kind: manual_link
+  family: albioncompo:community
+  author: anonymous albioncompo.com user (no account id on the record)
+  url: https://www.albioncompo.com/comp/V97J7AJR
+  record: >
+    Public composition "SIEGEBOW BOMB" (activity tag: zvz) on
+    albioncompo.com, listed publicly; retrieved from the site's
+    compositions API 2026-08-29. View count at retrieval: 0.
+  license: publicly shared on albioncompo.com (is_public true); author pseudonymous
+published: '2026-02-23'
+ingested: '2026-08-29'
+observed: null
+patch: null   # the source does not state the game patch
+snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
+content: zvz_10man   # the source's own activity tag is 'zvz'; size from the roster
+# CONTENT CANDIDATES (owner ruling 2026-08-28): a ZvZ size names
+# a FORMAT, not one engine template, so the record is evidence
+# for several.
+# 10-14 ZvZ: INTERPOLATED between the owner's two stated bands (20-man and 7-man). Flagged as such — the owner never graded this size directly.
+content_candidates:
+  - blackzone_roam
+  - castle_outpost
+  - faction_war
+  - roads
+style: clap   # AUTHOR-DECLARED: taken from the comp's own
+# name, "SIEGEBOW BOMB". Not a curator read and not the
+# engine's classifier — the author said it. ('bomb' reads as
+# clap: styles.yaml's clap blurb is "stack them and delete
+# them - one engage, one bomb".)
+party_size:
+  min: 10
+  max: 10
+approval:
+  status: candidate
+  basis: publicly shared comp by a pseudonymous author; no caller approval attached
+  approved_by: null
+  as_of: '2026-08-29'
+parties:
+- name: comp
+  slots:
+  - raw: T8_2H_DUALMACE_AVALON
+    weapons:
+    - 2H_DUALMACE_AVALON
+    - 2H_TWINSCYTHE_HELL
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_SET2
+      armor: ARMOR_PLATE_HELL
+      boots: SHOES_LEATHER_SET2
+      cape: CAPEITEM_FW_FORTSTERLING
+      note: "alts: boot=SHOES_PLATE_ROYAL"
+    potion: POTION_REVIVE
+    food: MEAL_SANDWICH
+  - raw: T8_2H_CROSSBOWLARGE_MORGANA
+    weapons:
+    - 2H_CROSSBOWLARGE_MORGANA
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_FEY
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_LEATHER_HELL
+      cape: CAPEITEM_FW_BRECILIEN
+      note: "alts: boot=SHOES_CLOTH_ROYAL"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T8_2H_CROSSBOWLARGE_MORGANA
+    weapons:
+    - 2H_CROSSBOWLARGE_MORGANA
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_FEY
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_LEATHER_HELL
+      cape: CAPEITEM_FW_BRECILIEN
+      note: "alts: boot=SHOES_CLOTH_ROYAL"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T8_2H_CROSSBOWLARGE_MORGANA
+    weapons:
+    - 2H_CROSSBOWLARGE_MORGANA
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_FEY
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_LEATHER_HELL
+      cape: CAPEITEM_FW_BRECILIEN
+      note: "alts: boot=SHOES_CLOTH_ROYAL"
+    potion: null
+    food: null
+  - raw: T8_2H_CROSSBOWLARGE_MORGANA
+    weapons:
+    - 2H_CROSSBOWLARGE_MORGANA
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_FEY
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_LEATHER_HELL
+      cape: CAPEITEM_FW_BRECILIEN
+      note: "alts: boot=SHOES_CLOTH_ROYAL"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T8_2H_CROSSBOWLARGE_MORGANA
+    weapons:
+    - 2H_CROSSBOWLARGE_MORGANA
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_FEY
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_LEATHER_HELL
+      cape: CAPEITEM_FW_BRECILIEN
+      note: "alts: boot=SHOES_CLOTH_ROYAL"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T8_2H_CURSEDSTAFF_MORGANA
+    weapons:
+    - 2H_CURSEDSTAFF_MORGANA
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_FEY
+      armor: ARMOR_LEATHER_ROYAL
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: boot=SHOES_LEATHER_HELL"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE
+  - raw: T8_MAIN_CURSEDSTAFF_UNDEAD
+    weapons:
+    - MAIN_CURSEDSTAFF_UNDEAD
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_HORN_KEEPER
+      helm: HEAD_PLATE_SET2
+      armor: ARMOR_LEATHER_ROYAL
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: boot=SHOES_CLOTH_SET2"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE
+  - raw: T8_2H_ARCANESTAFF_HELL
+    weapons:
+    - 2H_ARCANESTAFF_HELL
+    - 2H_ENIGMATICORB_MORGANA
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_CLOTH_ROYAL
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_SMUGGLER
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE_AVALON
+  - raw: T8_2H_HOLYSTAFF_HELL
+    weapons:
+    - 2H_HOLYSTAFF_HELL
+    - MAIN_HOLYSTAFF_AVALON
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET3
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_LEATHER_ROYAL
+      cape: CAPEITEM_FW_LYMHURST
+      note: "alts: boot=SHOES_LEATHER_MORGANA, cape=CAPEITEM_SMUGGLER"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE_FISH

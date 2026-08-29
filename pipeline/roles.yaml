@@ -359,8 +359,15 @@ kit_doctrine:
       offhand:
         drop:
           - {id: OFF_TOWERSHIELD_UNDEAD, source: "owner:2026-08-26 (grading board: Sarcophagus wrong for the brawl-heal seat)"}
-        add:
-          - {id: OFF_TORCH_CRYSTAL, source: "owner:2026-08-26 ('blueflame torch if user is on judicator armor too' — conditional on the Judicator pairing, recorded verbatim)"}
+        # OFF_TORCH_CRYSTAL add REMOVED 2026-08-29 — VINDICATED, not reversed.
+        # The owner ruled it in on 2026-08-26 ("blueflame torch if user is on
+        # judicator armor too"). The 23 albioncompo comps ingested 2026-08-29
+        # put Blueflame Torch in this seat's OBSERVED doctrine tier on its own,
+        # so the manual add became redundant and build_dataset's provenance
+        # gate refused the build rather than ship a ruling that no longer does
+        # anything ("add of OFF_TORCH_CRYSTAL already observed"). The ruling
+        # was right; the evidence caught up with it. Nothing about the
+        # resulting tier changed.
   passives:
     cloth:
       default: INCREASED_DAMAGE

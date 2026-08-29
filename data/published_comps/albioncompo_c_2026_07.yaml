@@ -1,0 +1,338 @@
+# AlbionCompo public comp, ingested 2026-08-29 from the site's
+# public listing (130 comps) via its compositions API. Slot rows
+# are VERBATIM source data (exact game item ids as the site
+# serves them); spell selections are NOT in the source's data
+# model and are recorded as null, never invented.
+kind: published_comp
+id: albioncompo_c_2026_07
+source:
+  kind: manual_link
+  family: albioncompo:aba3cb34b
+  author: anonymous albioncompo.com user (ba3cb34b)
+  url: https://www.albioncompo.com/comp/EWXE8KEN
+  record: >
+    Public composition "C" (activity tag: zvz) on
+    albioncompo.com, listed publicly; retrieved from the site's
+    compositions API 2026-08-29. View count at retrieval: 4.
+  license: publicly shared on albioncompo.com (is_public true); author pseudonymous
+published: '2026-07-15'
+ingested: '2026-08-29'
+observed: null
+patch: null   # the source does not state the game patch
+snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
+content: zvz_20man   # the source's own activity tag is 'zvz'; size from the roster
+# CONTENT CANDIDATES (owner ruling 2026-08-28): a ZvZ size names
+# a FORMAT, not one engine template, so the record is evidence
+# for several.
+# 15+ ZvZ: the owner's 20-man ruling (blackzone roaming / castle outposts / castle defense, and any of those in faction warfare).
+content_candidates:
+  - blackzone_roam
+  - territory_defense
+  - castle
+  - faction_war
+style: null   # the source states no style and the name
+# declares none; NOT guessed
+party_size:
+  min: 20
+  max: 20
+approval:
+  status: candidate
+  basis: publicly shared comp by a pseudonymous author; no caller approval attached
+  approved_by: null
+  as_of: '2026-08-29'
+parties:
+- name: comp
+  slots:
+  - raw: T8_MAIN_MACE
+    weapons:
+    - MAIN_MACE
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_HORN_KEEPER
+      helm: HEAD_PLATE_KEEPER
+      armor: ARMOR_PLATE_KEEPER
+      boots: SHOES_LEATHER_SET2
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: boot=SHOES_LEATHER_ROYAL"
+    potion: POTION_REVIVE
+    food: MEAL_SANDWICH_FISH
+  - raw: T8_MAIN_CURSEDSTAFF_UNDEAD
+    weapons:
+    - MAIN_CURSEDSTAFF_UNDEAD
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_HORN_KEEPER
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_HELL
+      boots: SHOES_PLATE_UNDEAD
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: boot=SHOES_LEATHER_MORGANA, food=MEAL_OMELETTE_AVALON"
+    potion: POTION_REVIVE
+    food: MEAL_OMELETTE
+  - raw: T8_2H_KNUCKLES_SET3
+    weapons:
+    - 2H_KNUCKLES_SET3
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_FEY
+      armor: ARMOR_LEATHER_HELL
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: armor=ARMOR_LEATHER_FEY, boot=SHOES_PLATE_UNDEAD, helm=HEAD_LEATHER_SET3"
+    potion: POTION_REVIVE
+    food: MEAL_STEW
+  - raw: T8_2H_AXE_AVALON
+    weapons:
+    - 2H_AXE_AVALON
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET2
+      armor: ARMOR_LEATHER_HELL
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: boot=SHOES_PLATE_UNDEAD, helm=HEAD_PLATE_SET3"
+    potion: null
+    food: MEAL_STEW
+  - raw: T8_2H_KNUCKLES_SET2
+    weapons:
+    - 2H_KNUCKLES_SET2
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_LEATHER_HELL
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: armor=ARMOR_LEATHER_FEY, boot=SHOES_PLATE_UNDEAD"
+    potion: null
+    food: MEAL_STEW
+  - raw: T8_2H_FIRE_RINGPAIR_AVALON
+    weapons:
+    - 2H_FIRE_RINGPAIR_AVALON
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_PLATE_UNDEAD
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: boot=SHOES_LEATHER_MORGANA"
+    potion: null
+    food: null
+  - raw: T8_2H_CLEAVER_HELL
+    weapons:
+    - 2H_CLEAVER_HELL
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_SET2
+      armor: ARMOR_PLATE_ROYAL
+      boots: SHOES_CLOTH_MORGANA
+      cape: CAPEITEM_SMUGGLER
+    potion: null
+    food: null
+  - raw: T8_MAIN_HOLYSTAFF_AVALON
+    weapons:
+    - MAIN_HOLYSTAFF_AVALON
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_ORB_MORGANA
+      helm: HEAD_CLOTH_SET1
+      armor: ARMOR_PLATE_KEEPER
+      boots: SHOES_LEATHER_ROYAL
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: boot=SHOES_LEATHER_SET1"
+    potion: null
+    food: null
+  - raw: T8_2H_ICECRYSTAL_UNDEAD
+    weapons:
+    - 2H_ICECRYSTAL_UNDEAD
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_CLOTH_SET1
+      boots: SHOES_PLATE_UNDEAD
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: boot=SHOES_LEATHER_MORGANA"
+    potion: null
+    food: null
+  - raw: T8_2H_AXE
+    weapons:
+    - 2H_AXE
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_SET1
+      boots: SHOES_PLATE_UNDEAD
+      cape: CAPEITEM_SMUGGLER
+    potion: null
+    food: null
+  - raw: T8_2H_NATURESTAFF_HELL
+    weapons:
+    - 2H_NATURESTAFF_HELL
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_LEATHER_FEY
+      boots: SHOES_LEATHER_SET1
+      cape: CAPEITEM_FW_LYMHURST
+      note: "alts: armor=ARMOR_CLOTH_AVALON, boot=SHOES_LEATHER_ROYAL"
+    potion: null
+    food: null
+  - raw: T8_2H_DUALMACE_AVALON
+    weapons:
+    - 2H_DUALMACE_AVALON
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_HELL
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_SMUGGLER
+    potion: null
+    food: MEAL_OMELETTE
+  - raw: T8_2H_HOLYSTAFF_HELL
+    weapons:
+    - 2H_HOLYSTAFF_HELL
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_KEEPER
+      armor: ARMOR_CLOTH_AVALON
+      boots: SHOES_LEATHER_SET1
+      cape: CAPEITEM_FW_LYMHURST
+      note: "alts: boot=SHOES_LEATHER_ROYAL"
+    potion: null
+    food: null
+  - raw: T8_2H_ENIGMATICSTAFF
+    weapons:
+    - 2H_ENIGMATICSTAFF
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_KEEPER
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_SMUGGLER
+    potion: null
+    food: null
+  - raw: T8_2H_POLEHAMMER
+    weapons:
+    - 2H_POLEHAMMER
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_PLATE_KEEPER
+      armor: ARMOR_PLATE_SET2
+      boots: SHOES_PLATE_UNDEAD
+      cape: CAPEITEM_SMUGGLER
+    potion: null
+    food: null
+  - raw: T8_2H_SHAPESHIFTER_SET2
+    weapons:
+    - 2H_SHAPESHIFTER_SET2
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_KEEPER
+      boots: SHOES_PLATE_SET3
+      cape: CAPEITEM_FW_CAERLEON
+      note: "alts: boot=SHOES_LEATHER_SET1"
+    potion: null
+    food: null
+  - raw: T8_MAIN_ARCANESTAFF
+    weapons:
+    - MAIN_ARCANESTAFF
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_HORN_KEEPER
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_HELL
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: boot=SHOES_PLATE_UNDEAD"
+    potion: null
+    food: null
+  - raw: T8_2H_HAMMER_AVALON
+    weapons:
+    - 2H_HAMMER_AVALON
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_KEEPER
+      boots: SHOES_CLOTH_SET2
+      cape: CAPEITEM_SMUGGLER
+    potion: null
+    food: null
+  - raw: T8_2H_MACE
+    weapons:
+    - 2H_MACE
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_HELL
+      armor: ARMOR_PLATE_SET2
+      boots: SHOES_PLATE_UNDEAD
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: boot=SHOES_PLATE_AVALON"
+    potion: POTION_REVIVE
+    food: MEAL_SANDWICH
+  - raw: T8_2H_HARPOON_HELL
+    weapons:
+    - 2H_HARPOON_HELL
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_LEATHER_ROYAL
+      boots: SHOES_PLATE_UNDEAD
+      cape: CAPEITEM_FW_LYMHURST
+    potion: null
+    food: null

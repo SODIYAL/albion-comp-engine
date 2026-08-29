@@ -286,13 +286,42 @@ check("H15 the same source within solo bounds validates",
 
 # ---- H.16 exact-weapon eligibility, no family-level leakage ---------------------
 excluded = ["MAIN_CURSEDSTAFF", "2H_IRONCLADEDSTAFF", "MAIN_FROSTSTAFF_AVALON"]
-leaks = []
+# What silently re-admits an excluded weapon is an APPROVED/CANONICAL record,
+# which is exactly what composition.yaml's documented exit path watches for
+# ("the evidence gate ... flags any excluded weapon that gains a CURRENT
+# approved canonical large-group build ... so the owner can lift the entry —
+# the data clears the gate, not a code change"). A CANDIDATE record from a
+# real published comp is not a leak and not a re-admission: it is the
+# evidence accumulating, which the design expects.
+#
+# This assertion used to be "no build records AT ALL", which was true only
+# while the corpus was small. The 23 albioncompo comps ingested 2026-08-29
+# brought one genuine candidate record (below), so the check now separates
+# the two cases instead of failing on expected evidence.
+KNOWN_CANDIDATE_EVIDENCE = {
+    # weapon -> build_id. OWNER-FACING: this record CONTRADICTS the stated
+    # reason for excluding the weapon ("no caller sheet, published build or
+    # observation fields them at party size >= 10"). AvA Raid is a published
+    # 10-man that fields it. Still candidate, so the exclusion stands and the
+    # gate has not fired — but the premise is now weaker than when it was
+    # written. Flagged for a ruling, not silently lifted.
+    "MAIN_FROSTSTAFF_AVALON": {"albioncompo_ava_raid_2026_05:comp:6"},
+}
+leaks, readmit = [], []
 for w in excluded:
     for ct, by_w in INDEX["by_content"].items():
         for v in by_w.get(w, []):
-            leaks.append((w, ct, v["build_id"]))
-check("H16 excluded exact weapons have no build records at all — cursed/"
-      "frost FAMILY records never leak onto them", not leaks, str(leaks[:3]))
+            bid, appr = v["build_id"], v.get("approval")
+            if appr in ("approved", "canonical"):
+                readmit.append((w, ct, bid, appr))
+            elif bid not in KNOWN_CANDIDATE_EVIDENCE.get(w, set()):
+                leaks.append((w, ct, bid, appr))
+check("H16 no excluded weapon carries an APPROVED/CANONICAL record — that "
+      "is what would silently re-admit it; lifting goes through the "
+      "exclusion gate and an owner ruling", not readmit, str(readmit[:3]))
+check("H16 no UNEXPECTED records on excluded weapons — cursed/frost FAMILY "
+      "records never leak onto them, and new candidate evidence must be "
+      "recorded deliberately", not leaks, str(leaks[:3]))
 check("H16 family cousins legitimately keep their own records",
       "MAIN_CURSEDSTAFF_UNDEAD" in INDEX["by_content"]["large_scale_zvz"])
 comp_cfg = yaml.safe_load(open(os.path.join(

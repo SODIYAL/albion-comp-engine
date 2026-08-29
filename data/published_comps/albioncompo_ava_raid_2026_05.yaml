@@ -1,0 +1,204 @@
+# AlbionCompo public comp, ingested 2026-08-29 from the site's
+# public listing (130 comps) via its compositions API. Slot rows
+# are VERBATIM source data (exact game item ids as the site
+# serves them); spell selections are NOT in the source's data
+# model and are recorded as null, never invented.
+kind: published_comp
+id: albioncompo_ava_raid_2026_05
+source:
+  kind: manual_link
+  family: albioncompo:community
+  author: anonymous albioncompo.com user (no account id on the record)
+  url: https://www.albioncompo.com/comp/353EEJ4S
+  record: >
+    Public composition "AvA Raid" (activity tag: zvz) on
+    albioncompo.com, listed publicly; retrieved from the site's
+    compositions API 2026-08-29. View count at retrieval: 0.
+  license: publicly shared on albioncompo.com (is_public true); author pseudonymous
+published: '2026-05-22'
+ingested: '2026-08-29'
+observed: null
+patch: null   # the source does not state the game patch
+snapshot_commit: 5cf2e8e9b7021f98683181fa5b0e3c64575978e4   # ids resolved against the pinned snapshot
+content: zvz_10man   # the source's own activity tag is 'zvz'; size from the roster
+# CONTENT CANDIDATES (owner ruling 2026-08-28): a ZvZ size names
+# a FORMAT, not one engine template, so the record is evidence
+# for several.
+# 10-14 ZvZ: INTERPOLATED between the owner's two stated bands (20-man and 7-man). Flagged as such — the owner never graded this size directly.
+content_candidates:
+  - blackzone_roam
+  - castle_outpost
+  - faction_war
+  - roads
+style: null   # the source states no style and the name
+# declares none; NOT guessed
+party_size:
+  min: 10
+  max: 10
+approval:
+  status: candidate
+  basis: publicly shared comp by a pseudonymous author; no caller approval attached
+  approved_by: null
+  as_of: '2026-08-29'
+parties:
+- name: comp
+  slots:
+  - raw: T8_2H_HAMMER_CRYSTAL
+    weapons:
+    - 2H_HAMMER_CRYSTAL
+    - 2H_COMBATSTAFF_MORGANA
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_AVALON
+      boots: SHOES_LEATHER_SET2
+      cape: CAPEITEM_FW_BRIDGEWATCH
+      note: "alts: helm=HEAD_PLATE_SET3"
+    potion: POTION_SLOWFIELD
+    food: MEAL_SANDWICH_FISH
+  - raw: T8_MAIN_MACE_HELL
+    weapons:
+    - MAIN_MACE_HELL
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_SHIELD_CRYSTAL
+      helm: HEAD_LEATHER_HELL
+      armor: ARMOR_PLATE_SET3
+      boots: SHOES_LEATHER_ROYAL
+      cape: CAPEITEM_SMUGGLER
+      note: "alts: potion=POTION_COOLDOWN, secondhand=OFF_HORN_KEEPER"
+    potion: POTION_MOB_RESET
+    food: MEAL_OMELETTE
+  - raw: T8_MAIN_NATURESTAFF_AVALON
+    weapons:
+    - MAIN_NATURESTAFF_AVALON
+    - MAIN_HOLYSTAFF_AVALON
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_CENSER_AVALON
+      helm: HEAD_PLATE_UNDEAD
+      armor: ARMOR_CLOTH_ROYAL
+      boots: SHOES_LEATHER_ROYAL
+      cape: CAPEITEM_FW_LYMHURST
+      note: "alts: helm=HEAD_CLOTH_KEEPER"
+    potion: POTION_ENERGY
+    food: MEAL_OMELETTE
+  - raw: T8_MAIN_NATURESTAFF_AVALON
+    weapons:
+    - MAIN_NATURESTAFF_AVALON
+    - 2H_HOLYSTAFF_HELL
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_HORN_KEEPER
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_LEATHER_ROYAL
+      boots: SHOES_LEATHER_ROYAL
+      cape: CAPEITEM_DEMON
+      note: "alts: helm=HEAD_CLOTH_KEEPER"
+    potion: POTION_ENERGY
+    food: MEAL_OMELETTE
+  - raw: T8_2H_SHAPESHIFTER_AVALON
+    weapons:
+    - 2H_SHAPESHIFTER_AVALON
+    - 2H_DAGGERPAIR
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_CLOTH_KEEPER
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_MORGANA
+      note: "alts: helm=HEAD_CLOTH_KEEPER"
+    potion: POTION_ENERGY
+    food: MEAL_STEW_FISH
+  - raw: T8_2H_REPEATINGCROSSBOW_UNDEAD
+    weapons:
+    - 2H_REPEATINGCROSSBOW_UNDEAD
+    - 2H_DAGGERPAIR
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_CLOTH_ROYAL
+      armor: ARMOR_CLOTH_KEEPER
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_FW_CAERLEON
+      note: "alts: helm=HEAD_LEATHER_SET3, potion=POTION_COOLDOWN"
+    potion: POTION_MOB_RESET
+    food: MEAL_STEW
+  - raw: T8_MAIN_FROSTSTAFF_AVALON
+    weapons:
+    - MAIN_FROSTSTAFF_AVALON
+    - 2H_DAGGERPAIR
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_LAMP_UNDEAD
+      helm: HEAD_CLOTH_ROYAL
+      armor: ARMOR_CLOTH_KEEPER
+      boots: SHOES_CLOTH_ROYAL
+      cape: CAPEITEM_MORGANA
+      note: "alts: helm=HEAD_LEATHER_MORGANA"
+    potion: POTION_ENERGY
+    food: MEAL_OMELETTE
+  - raw: T8_MAIN_CURSEDSTAFF_AVALON
+    weapons:
+    - MAIN_CURSEDSTAFF_AVALON
+    - MAIN_CURSEDSTAFF_CRYSTAL
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: OFF_HORN_KEEPER
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_PLATE_ROYAL
+      boots: SHOES_LEATHER_ROYAL
+      cape: CAPEITEM_FW_BRIDGEWATCH
+      note: "alts: armor=ARMOR_LEATHER_ROYAL, helm=HEAD_CLOTH_KEEPER"
+    potion: POTION_MOB_RESET
+    food: MEAL_STEW
+  - raw: T8_2H_ARCANESTAFF
+    weapons:
+    - 2H_ARCANESTAFF
+    - 2H_ENIGMATICSTAFF
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_LEATHER_ROYAL
+      boots: SHOES_LEATHER_ROYAL
+      cape: CAPEITEM_FW_LYMHURST
+      note: "alts: helm=HEAD_LEATHER_MORGANA"
+    potion: POTION_MOB_RESET
+    food: MEAL_OMELETTE
+  - raw: T8_2H_SCYTHE_CRYSTAL
+    weapons:
+    - 2H_SCYTHE_CRYSTAL
+    - MAIN_FIRESTAFF_KEEPER
+    role: null
+    role_raw: null
+    skills: null   # albioncompo has no spell fields
+    gear:
+      offhand: null
+      helm: HEAD_LEATHER_SET3
+      armor: ARMOR_CLOTH_KEEPER
+      boots: SHOES_LEATHER_MORGANA
+      cape: CAPEITEM_FW_LYMHURST
+      note: "alts: helm=HEAD_CLOTH_KEEPER"
+    potion: POTION_ENERGY
+    food: MEAL_STEW_FISH

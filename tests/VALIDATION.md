@@ -833,3 +833,68 @@ which ships nothing and is a true identity reference.
 declared), and every clap row beyond burst_aoe. The 27 usable comps are NOT
 yet ingested into `data/published_comps` — that is the durable next step, and
 it would take clap from n=5 measured to n=5 CITED, with provenance.
+
+### Corpus ingestion: 13 -> 36 published comps (2026-08-29)
+
+Owner: *"do what needs to be done."* The 27 usable albioncompo comps found the
+previous day were measured but not cited; they are now ingested as evidence.
+
+**23 new records** in `data/published_comps/`, same format as the existing
+albioncompo entries: slot rows VERBATIM (game item ids as the site serves
+them), spells `null` because the source has no spell fields, full provenance
+(share url, author family from the account id, retrieval date, view count,
+`is_public` licence note). Four excluded on quality: three where a weapon is
+not in the catalogue, three where not every member is fully geared, and one
+the AUTHOR marked unfinished ("Kite clap 7 man+ (Not finished)") — a comp its
+own author says is unfinished is not evidence of a real one.
+
+**Style labels are AUTHOR-DECLARED, taken from each comp's own name**
+("Brawl Hit 20", "kite deff", "HDCP BOMB", "Brawl Clap"), never from the
+engine's classifier — that would be circular. Comps whose names declare
+nothing carry `style: null` rather than a guess.
+
+**Corpus after: 36 comps (was 13).** By style: brawl 6 (was 3), clap 6
+(was 1), clap_kite 3, brawl_clap 3 (was 1), kite 3 (was 2), unlabelled 15.
+**Every thin style now has n>=3, and clap went from 1 to 6** — the sample-size
+problem that blocked every per-style question is gone. Build records
+237 -> 625; canonical defaults 55 -> 112; no new quarantines.
+
+**THREE GATES FIRED, ALL CORRECTLY — none was a false alarm:**
+
+1. **`build_dataset` refused the build (exit 2, provenance FAIL).** A
+   MASTERSHEET/roles kit override adds `OFF_TORCH_CRYSTAL` to
+   `brawl_healer/offhand`; with the new comps that item is now in the seat's
+   OBSERVED doctrine tier on its own, so the hand-ruling became redundant and
+   the gate refused to ship a ruling that no longer does anything. **The
+   owner's 2026-08-26 ruling was VINDICATED, not reversed** — the evidence
+   caught up with it. Override removed, reasoning kept in a comment, resulting
+   tier unchanged.
+2. **`test_roles` R18** pinned Polehammer's armor doctrine at `[5, 5]`; it is
+   `[9, 12]` now. The MECHANISM it guards is intact — the weapon's own
+   observed kit still outranks the seat aggregate and still resolves to Knight
+   by a clear majority. Count re-pinned with a note that `doctrine_n` tracks
+   corpus size, so the next such change reads as expected rather than as a
+   regression.
+3. **`test_builds` H16** asserted excluded weapons have "no build records AT
+   ALL". A new comp ("AvA Raid", 10 players) genuinely fields
+   `MAIN_FROSTSTAFF_AVALON`, which is on the >=10 exclusion list. **That is
+   not a family leak — it is a real record, and it contradicts the exclusion's
+   own stated reason** ("no caller sheet, published build or observation
+   fields them at party size >= 10"). The assertion was stricter than the
+   design it guards: composition.yaml's documented exit says an excluded
+   weapon is lifted when it gains an APPROVED CANONICAL build, via the
+   evidence gate and an owner ruling. Split into two checks — approved/
+   canonical records still fail hard (that is silent re-admission), while
+   known candidate evidence is recorded explicitly so a NEW one is still
+   visible. The exclusion STANDS (the record is candidate; `exclusion_gate` is
+   correctly empty). **OWNER RULING NEEDED: the premise for excluding
+   `MAIN_FROSTSTAFF_AVALON` at 10+ is now weaker than when it was written.**
+
+**tier2 improved for the third time today**, and it had no part in any of this:
+weapon_only role-level **74% -> 78% -> 83% -> 87%** across the day;
+weapon-level 15% -> 24%; **actual_gear role-level 39% -> 57%** (the biggest
+single jump, from the gear evidence). Full battery green.
+
+Not yet done: the per-style multipliers were fitted when clap had n=1. They
+should be re-derived now that clap has n=6 — the measurement, not the
+mechanism, is what is stale.

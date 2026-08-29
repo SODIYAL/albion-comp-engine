@@ -551,8 +551,14 @@ def t_weapon_doctrine():
     e = Engine(content="blackzone_roam", size=20)
     ko = e.kit_options("2H_POLEHAMMER", top_n=5)
     top = ko["kit"]["armor"]
+    # doctrine_n TRACKS CORPUS SIZE — it was [5, 5] until the 23 albioncompo
+    # comps landed 2026-08-29 and is [9, 12] now. The MECHANISM is what this
+    # pins: Polehammer's own observed kit (weapon-level doctrine) outranks the
+    # seat aggregate, and it still resolves to Knight by a clear majority. A
+    # change here after an evidence import is expected; a change in `gear` or
+    # `doctrine` is not.
     ph = (top["gear"] == "ARMOR_PLATE_SET2"
-          and top["doctrine"] == "weapon" and top["doctrine_n"] == [5, 5])
+          and top["doctrine"] == "weapon" and top["doctrine_n"] == [9, 12])
     hoj = e.kit_options("2H_HAMMER_AVALON", top_n=10)
     demon = next((o for o in hoj["options"]["armor"]
                   if o["gear"] == "ARMOR_PLATE_HELL"), None)
