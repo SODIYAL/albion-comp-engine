@@ -287,12 +287,20 @@
     this._penDr = 0.0;
     var focusNow = grown(styleMech.focus_attackers, multNow);
     if (focusNow) this._penDr = 1.0 - this._resilienceEff(focusNow);
-    /* Scaled targets/soft caps, styled weights (mirrors engine.py). */
+    /* Scaled targets/soft caps, styled weights (mirrors engine.py).
+       PER-STYLE TARGET MODIFIERS (styles.yaml target_mults): weight
+       multipliers say what a style VALUES, these say HOW MUCH OF IT it
+       needs. Target and soft cap scale together so the headroom band keeps
+       its shape; hard floors do NOT scale. Default is identity — every
+       style ships {} until the owner rules a value. */
+    this.targetMults = (styles[this.style] || {}).target_mults || {};
     this._targets = {}; this._softs = {}; this._weights = {};
     for (var cap2 in this.reqs) {
       var r = this.reqs[cap2];
-      this._targets[cap2] = r.scales ? r.target * this.size / this.baseSize : r.target;
-      this._softs[cap2] = r.scales ? r.soft_cap * this.size / this.baseSize : r.soft_cap;
+      var tm = this.targetMults[cap2];
+      tm = (tm === undefined) ? 1.0 : tm;
+      this._targets[cap2] = tm * (r.scales ? r.target * this.size / this.baseSize : r.target);
+      this._softs[cap2] = tm * (r.scales ? r.soft_cap * this.size / this.baseSize : r.soft_cap);
       var m2 = this.styleMults[cap2];
       this._weights[cap2] = r.weight * (m2 === undefined ? 1.0 : m2);
     }

@@ -43906,7 +43906,8 @@
     "focus_attackers": 4
    },
    "multipliers": {},
-   "name": "Balanced"
+   "name": "Balanced",
+   "target_mults": {}
   },
   "brawl": {
    "blurb": "stand and grind \u2014 sustain, stall and attrition win",
@@ -43983,7 +43984,8 @@
     "sustained_dps": 1.35,
     "tankiness": 1.35
    },
-   "name": "Brawl"
+   "name": "Brawl",
+   "target_mults": {}
   },
   "brawl_clap": {
    "blurb": "grind until they clump, then bomb \u2014 the hybrid",
@@ -44038,7 +44040,8 @@
     "sustained_dps": 1.1,
     "tankiness": 1.2
    },
-   "name": "Brawl-Clap"
+   "name": "Brawl-Clap",
+   "target_mults": {}
   },
   "clap": {
    "blurb": "stack them and delete them \u2014 one engage, one bomb",
@@ -44144,7 +44147,8 @@
     "sustained_dps": 0.6,
     "tankiness": 0.9
    },
-   "name": "Clap"
+   "name": "Clap",
+   "target_mults": {}
   },
   "clap_kite": {
    "blurb": "bomb from range, reset on cooldowns \u2014 kite between windows",
@@ -44229,7 +44233,8 @@
     "sustained_dps": 0.85,
     "tankiness": 0.8
    },
-   "name": "Clap-Kite"
+   "name": "Clap-Kite",
+   "target_mults": {}
   },
   "kite": {
    "blurb": "never take the fight \u2014 range, tempo and chip damage",
@@ -44342,7 +44347,8 @@
     "tankiness": 0.7,
     "zone_control": 1.1
    },
-   "name": "Kite"
+   "name": "Kite",
+   "target_mults": {}
   }
  },
  "templates": {

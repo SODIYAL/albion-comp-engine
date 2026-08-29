@@ -286,12 +286,64 @@ def t_structural_floors():
           f"score={r['score']!r} delta={delta!r} pick={r['weapon']}")
 
 
+# ------------------------------------------- V6 per-style target modifiers
+def t_target_mults():
+    """styles.yaml `target_mults` (2026-08-28): the per-style REQUIREMENT
+    overlay. Weight multipliers say what a style values; these say how much
+    of it the style needs. Contract: target and soft cap scale TOGETHER,
+    unlisted capabilities are untouched, hard floors never scale, and the
+    shipped dataset is the IDENTITY (every style empty until the owner
+    rules a value) so the mechanism cannot move a score on its own."""
+    import json, tempfile
+    base = Engine(content="blackzone_roam", size=20, style="kite")
+
+    # the shipped dataset must be the identity — no style may carry a value
+    styles = base.data.get("styles") or {}
+    unruled = {s: (v or {}).get("target_mults") or {} for s, v in styles.items()}
+    check("V6a shipped dataset is the identity: no style carries a "
+          "target_mult (a ruled value must be added deliberately)",
+          all(not tm for tm in unruled.values()),
+          f"non-empty: {[s for s, tm in unruled.items() if tm]}")
+
+    d = json.loads(json.dumps(base.data))
+    d["styles"]["kite"]["target_mults"] = {"disengage": 2.0, "peel": 0.5}
+    tmp = os.path.join(tempfile.gettempdir(), "bion_target_mults.json")
+    with open(tmp, "w", encoding="utf-8") as fh:
+        json.dump(d, fh)
+    e = Engine(dataset_path=tmp, content="blackzone_roam", size=20,
+               style="kite")
+
+    check("V6b target and soft cap scale together (>1)",
+          abs(e.target("disengage") - 2.0 * base.target("disengage")) < EPS
+          and abs(e.soft_cap("disengage")
+                  - 2.0 * base.soft_cap("disengage")) < EPS,
+          f"target {base.target('disengage')} -> {e.target('disengage')}, "
+          f"soft {base.soft_cap('disengage')} -> {e.soft_cap('disengage')}")
+    check("V6c a multiplier below 1 lowers the requirement",
+          abs(e.target("peel") - 0.5 * base.target("peel")) < EPS
+          and abs(e.soft_cap("peel") - 0.5 * base.soft_cap("peel")) < EPS,
+          f"target {base.target('peel')} -> {e.target('peel')}")
+    check("V6d unlisted capabilities are untouched",
+          abs(e.target("tankiness") - base.target("tankiness")) < EPS
+          and abs(e.target("stun") - base.target("stun")) < EPS)
+    check("V6e HARD FLOORS DO NOT SCALE — a style may not lower what keeps "
+          "the party alive",
+          all(abs(e._floors_eff.get(c, 0.0) - base._floors_eff.get(c, 0.0))
+              < EPS for c in set(base._floors_eff) | set(e._floors_eff)),
+          f"base={base._floors_eff} styled={e._floors_eff}")
+    # the JS port reads the same key the same way; parity covers it the
+    # moment a real value ships (both ports currently see {}).
+    check("V6f balanced stays the identity even when another style is ruled",
+          not (d["styles"]["balanced"].get("target_mults") or {}))
+
+
 if __name__ == "__main__":
     t_dressing_switch()
     t_form_parser()
     t_metrics()
     t_gear_join()
     t_structural_floors()
+    t_target_mults()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} validation-mode tests passed")

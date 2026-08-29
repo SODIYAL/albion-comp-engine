@@ -58,12 +58,35 @@
 # groupings are PROVISIONAL owner vocabulary: reword or re-map freely,
 # the engine follows the data. Balanced carries no chain — it falls back
 # to the detected identity's chain.
+#
+# `target_mults` blocks (2026-08-28) — the per-style REQUIREMENT overlay.
+# `multipliers` say what a style VALUES (weight); these say HOW MUCH OF IT it
+# NEEDS (target and soft cap). The distinction is the owner's case: "clap comp
+# would require more peel and disengage than brawl comp" — not merely that a
+# clap comp values disengage more, but that it needs a larger amount before
+# it is covered. Target and soft cap scale TOGETHER so the headroom band keeps
+# its shape. Hard floors do NOT scale, for the same reason the weight overlay
+# never touched them: a kite comp still needs its healers.
+#
+# EVERY STYLE SHIPS EMPTY AND THE MECHANISM IS THE IDENTITY until the owner
+# rules a value. This is deliberate. The corpus CANNOT fit these: of the eight
+# published blackzone_roam comps, brawl has 3 and kite has 2, while clap,
+# brawl_clap and clap_kite have exactly ONE each — so any per-style number
+# fitted today would be one comp's idiosyncrasy wearing a style's name. The
+# measurement that exists is recorded in
+# docs/superpowers/findings/2026-08-28-fielded-supply-per-person.md; the one
+# suggestive, replicated signal is disengage (brawl 0.77/person vs kite
+# 1.64/person, kite n=2), which points the same way the owner's claim does.
+# Per "never invent a number to fill a hole": a row appears here only when the
+# owner rules it or real comps supply the measurement.
 
 styles:
   balanced:
     name: Balanced
     blurb: no thumb on the scale — the content template as fitted
     multipliers: {}
+    # balanced is the identity by definition — this must stay empty
+    target_mults: {}
     mechanics: {expected_aoe_targets: 4, focus_attackers: 4}
 
   brawl:
@@ -91,6 +114,10 @@ styles:
       disengage: 0.85
       catch: 0.8
       mobility: 0.75
+    # target_mults: UNRULED (2026-08-28). Identity until the owner
+    # sets values — see the header note on why the corpus cannot fit
+    # them (this style has 3 published comps).
+    target_mults: {}
     # spread melee ball: cleaves clip ~3, damage split across whoever's in
     # reach, so few attackers stack on any one enemy
     mechanics: {expected_aoe_targets: 3, focus_attackers: 3}
@@ -124,6 +151,10 @@ styles:
       mobility: 0.85
       heal_reduction: 0.8
       sustained_dps: 0.6
+    # target_mults: UNRULED (2026-08-28). Identity until the owner
+    # sets values — see the header note on why the corpus cannot fit
+    # them (this style has 1 published comp).
+    target_mults: {}
     # synced bombs on a manufactured clump: AoE rides the escalation curve
     # toward its 8-target cap; ST damage is incidental (few attackers each)
     mechanics: {expected_aoe_targets: 7, focus_attackers: 3}
@@ -164,6 +195,10 @@ styles:
       engage: 0.7
       tankiness: 0.7
       clump_create: 0.7
+    # target_mults: UNRULED (2026-08-28). Identity until the owner
+    # sets values — see the header note on why the corpus cannot fit
+    # them (this style has 2 published comps).
+    target_mults: {}
     # ranged poke on the advancing clump; focus fire only on caught divers
     mechanics: {expected_aoe_targets: 4, focus_attackers: 4}
     # owner-ruled 2026-08-23: kite runs 1 healer at 7 and 2 at 20 ("mostly
@@ -203,6 +238,10 @@ styles:
       sustained_dps: 1.1
       catch: 0.85
       mobility: 0.85
+    # target_mults: UNRULED (2026-08-28). Identity until the owner
+    # sets values — see the header note on why the corpus cannot fit
+    # them (this style has 1 published comp).
+    target_mults: {}
     # the hybrid: grind spreads damage until the clump forms, then bomb it
     mechanics: {expected_aoe_targets: 5, focus_attackers: 3}
     chain:
@@ -235,6 +274,10 @@ styles:
       heal_sustain: 0.95
       sustained_dps: 0.85
       tankiness: 0.8
+    # target_mults: UNRULED (2026-08-28). Identity until the owner
+    # sets values — see the header note on why the corpus cannot fit
+    # them (this style has 1 published comp).
+    target_mults: {}
     # bombs on manufactured clumps between kite resets: escalation rides
     # toward the cap in the windows; focus fire stays incidental
     mechanics: {expected_aoe_targets: 6, focus_attackers: 3}

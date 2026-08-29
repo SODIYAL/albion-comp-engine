@@ -608,3 +608,61 @@ guess against. Closing this properly needs the real food bonuses (wiki via the
 Playwright MCP, or a dumps re-parse that captures meal nutrition) — 10 pieces,
 ~1 supply unit each. The Skinner Cap is gathering gear recorded in a combat
 build and is correctly out of scope.
+
+## Per-style target modifiers — the mechanism (2026-08-28)
+
+The owner's standing case: *"clap comp would require more peel and disengage
+than brawl comp."* Until now `styles.yaml` could not express that. Its
+`multipliers` scale a capability's WEIGHT — what a style VALUES — while every
+style in a content shared identical TARGETS, by explicit design ("targets, soft
+caps and hard floors are untouched"). So the model could say a clap comp cares
+more about disengage, never that it needs more of it before it counts as
+covered.
+
+**SHIPPED: `target_mults` on a style** (both ports, `test_validation_modes.py`
+V6a-V6f). Semantics, pinned by the contracts:
+
+- target and soft cap scale TOGETHER, so the headroom band keeps its shape
+  (kite disengage 6.3 -> 12.6 and 9.2 -> 18.4 at a 2.0 multiplier);
+- unlisted capabilities are untouched;
+- **HARD FLOORS NEVER SCALE** — the same rule the weight overlay has always
+  followed. A style may change what it emphasises and how much it needs, never
+  what keeps the party alive (V6e pins tankiness/heal_sustain floors identical
+  under a styled engine);
+- balanced is the identity by definition and must stay empty.
+
+**EVERY STYLE SHIPS EMPTY. The mechanism is the identity and changes nothing**
+— full battery green with zero re-pins, and V6a is a standing guard that fails
+if a value ever appears without a deliberate ruling. Both ports verified to
+agree on an injected multiplier (identical targets, soft caps and floors);
+js-parity will cover the path automatically the moment a real value ships,
+since both read the same dataset key.
+
+**WHY NO NUMBERS: the corpus cannot fit them, and this is the honest reason to
+stop.** Of the eight published blackzone_roam comps, brawl has 3 and kite has
+2, while **clap, brawl_clap and clap_kite have exactly ONE each**. Any
+per-style number fitted today would be one comp's idiosyncrasy wearing a
+style's name. Per-person means by style (blackzone_roam only, the content
+confound removed — both roads comps are clap_kite):
+
+```text
+                     brawl  brawl_clap   clap  clap_kite   kite
+(n comps)                3           1      1          1      2
+disengage             0.77        1.25   1.50       0.65   1.64
+peel                  2.92        3.08   2.29       3.42   3.60
+tankiness             3.06        2.12   3.05       1.93   2.17
+engage                1.54        0.85   0.93       1.55   0.75
+mobility              2.34        1.50   1.00       1.77   1.61
+stun                  0.89        0.48   1.62       1.36   1.77
+```
+
+**On the owner's specific claim, the corpus splits it.** DISENGAGE agrees:
+brawl is lowest at 0.77 and clap (1.50) and kite (1.64) roughly double it,
+and kite is the one non-brawl style with replication (n=2), so this is the
+strongest candidate for the first ruled value. PEEL does not: clap fields the
+LEAST peel of any style (2.29 vs brawl's 2.92). That contradiction is on n=1
+for clap and should not be treated as a refutation — but it is exactly why the
+number has to be ruled rather than fitted.
+
+Recorded for the owner to rule; nothing invented in the interim, per the
+"never invent a number to fill a hole" rule.

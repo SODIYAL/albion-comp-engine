@@ -312,11 +312,24 @@ class Engine:
             self._pen_dr = 1.0 - self._resilience_eff(focus_now)
         # Per-context caches — constant until the next set_content: scaled
         # targets/soft caps, styled weights, per-weapon loadout combos.
-        self._targets = {c: (r["target"] * self.size / self.base_size
-                             if r.get("scales") else r["target"])
+        # PER-STYLE TARGET MODIFIERS (styles.yaml `target_mults`). Weight
+        # multipliers say what a style VALUES; these say HOW MUCH OF IT the
+        # style actually needs — the owner's case: "clap comp would require
+        # more peel and disengage than brawl comp". Target and soft cap scale
+        # TOGETHER so the headroom band keeps its shape; hard floors do NOT
+        # scale (a kite comp still needs its healers — the same rule the
+        # weight overlay has always followed), though the existing clamp
+        # still keeps a floor from exceeding the target it guards.
+        # DEFAULT IS IDENTITY: every style ships {} until the owner rules a
+        # value, so this mechanism changes nothing on its own.
+        self.target_mults = (styles.get(style, {}) or {}).get(
+            "target_mults", {}) or {}
+        _tm = lambda c: self.target_mults.get(c, 1.0)
+        self._targets = {c: _tm(c) * (r["target"] * self.size / self.base_size
+                                      if r.get("scales") else r["target"])
                          for c, r in self.reqs.items()}
-        self._softs = {c: (r["soft_cap"] * self.size / self.base_size
-                           if r.get("scales") else r["soft_cap"])
+        self._softs = {c: _tm(c) * (r["soft_cap"] * self.size / self.base_size
+                                    if r.get("scales") else r["soft_cap"])
                        for c, r in self.reqs.items()}
         self._weights = {c: r["weight"] * self.style_mults.get(c, 1.0)
                          for c, r in self.reqs.items()}
