@@ -1149,3 +1149,66 @@ carries no equipment; the per-event union reached 54% WITH equipment from only
 
 Full battery green. `party_cache/` gitignored beside the other caches;
 `out/party_rosters.json` committed (83 KB, LF, no BOM).
+
+### The party sample's bias, MEASURED — and the ZvZ meta it shows (2026-08-29)
+
+**OWNER RULING:** *"it's okay if the losing party couldn't get a single kill
+it's not worth having their party information."* Accepted, and then checked,
+because "winner-biased by construction" turned out to OVERSTATE the problem.
+
+The filter is not "won the fight" — `GroupMembers` is emitted on ANY kill, so
+a party that traded a few and then got wiped is captured. Measured across 354
+captured parties (5+ members present):
+
+```text
+   dominant   (2x+ K/D)                216   61%
+   traded     (1-2x)                    68   19%
+   wiped-ish  (more deaths than kills)  70   20%
+   totals: 3785 kills / 1570 deaths, K/D 2.41
+```
+
+**Losing parties are well represented.** What actually drops out is the 10% of
+players in no captured party at all: **474 players holding 34 kills against
+475 deaths between them — K/D 0.07**, roughly one death each and almost no
+kills. That is not a composition being tested; the owner's ruling is right on
+the evidence. Coverage is **90% of all players** across the sampled battles.
+The artifact's `semantics` field and the module docstring were rewritten from
+"WINNER-BIASED" to the measured statement.
+
+**THE ZvZ META, from 38 fully-geared 15-20 man parties (677 members).** This
+supersedes the kill-event reading, which could only see players who killed or
+died:
+
+```text
+ #  weapon              slots  per party  in % of parties  seat
+ 1  Hallowfall             74      1.95         97%       main_healer
+ 2  Realmbreaker           35      0.92         68%       sustained_brawler
+ 3  Permafrost Prism       35      0.92         76%       ranged_aoe
+ 4  Dawnsong               34      0.89         66%       anti_heal
+ 5  Spirithunter           26      0.68         63%       pierce
+ 6  Polehammer             25      0.66         55%       engage_tank
+ 7  Bedrock Mace           23      0.61         39%       stopper_tank
+ 8  Blight Staff           22      0.58         50%       main_healer
+ 9  Spiked Gauntlets       21      0.55         55%       sustained_brawler
+10  Lifecurse Staff        21      0.55         47%       purge
+```
+
+**Hallowfall is in 37 of 38 ZvZ parties (97%) at ~2 per party** — the
+strongest single signal in any evidence layer this project has.
+
+**How much the attribution bias was distorting things:** Longbow ranked 3rd by
+kill events, 12th here (29% presence — a few squads stack several, most bring
+none). Battle Bracers 4th -> 15th. And **Bedrock Mace, Oathkeepers, Blight
+Staff, Fallen Staff and Great Arcane Staff appear in the party top-20 while
+being absent from the kill-event top-20 entirely** — support and tank weapons
+whose users survive, so kill attribution never saw them. That is the
+healers-under-attribute problem quantified.
+
+Note the two columns answer different questions and should not be collapsed:
+`slots` counts bodies (Longbow 20 slots but 29% presence — stacked when
+taken), `in parties` counts how many teams chose it (Earthrune 19 slots at 45%
+presence — one per party, taken more often).
+
+Small/mid parties (5-14) are a different game: Wailing Bow, Frost Staff, Bear
+Paws and Claws appear there and never in the ZvZ list — confirming the
+fight-size split the bucket data suggested, now with party structure behind it.

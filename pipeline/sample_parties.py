@@ -36,10 +36,18 @@ WHAT THIS DATA IS — AND IS NOT.
   * A party here is a GroupMembers set: players grouped in-game at kill
     time. It is NOT a comp. A 300-player battle is a coalition of many
     parties; this samples the parties, which is the useful unit.
-  * WINNER-BIASED BY CONSTRUCTION: only parties that got a kill appear.
-    A party that was wiped without killing anyone is invisible here. Do not
-    read prevalence as effectiveness — the same standing rule as every other
-    observed layer.
+  * THE FILTER IS "SCORED AT LEAST ONE KILL", NOT "WON" — and it was
+    MEASURED (2026-08-29) rather than assumed, because "winner-biased"
+    overstates it. Of 354 captured parties: 61% dominant (2x+ K/D), 19%
+    traded roughly even, and 20% took MORE DEATHS THAN KILLS. Losing
+    parties are well represented; they only had to kill someone first.
+    What drops out is the 10% of players in no captured party at all, whose
+    combined record is 34 kills against 475 deaths (K/D 0.07) — they died
+    about once each and killed almost nothing. OWNER RULING 2026-08-29:
+    "it's okay if the losing party couldn't get a single kill it's not
+    worth having their party information." Coverage is 90% of all players
+    across the sampled battles. Prevalence is still not effectiveness —
+    that standing rule is unchanged.
   * DEDUPLICATED per battle by member-name set. A party that gets 20 kills
     emits 20 identical GroupMembers arrays; counting those as 20 parties
     would multiply whatever that squad ran by its kill count, which is the
@@ -262,10 +270,18 @@ def analyze(known):
         "kind": "party_rosters",
         "semantics": (
             "GroupMembers from official gameinfo kill events: the KILLER'S "
-            "PARTY at kill time, deduplicated per battle by member-name set. "
-            "WINNER-BIASED — a party that killed nobody never appears. "
-            "A party is not a comp: a large battle is a coalition of parties. "
-            "DISPLAY/EVIDENCE ONLY, never a scoring input."),
+            "PARTY at kill time, deduplicated per battle by member OVERLAP "
+            "(>50% of the smaller set) so one squad shedding members as they "
+            "die is not counted several times. INCLUSION FILTER: the party "
+            "scored at least one kill — measured 2026-08-29, not assumed: "
+            "61% of captured parties are dominant, 19% traded even, 20% took "
+            "more deaths than kills, so losing parties ARE represented; the "
+            "10% of players in no captured party hold 34 kills against 475 "
+            "deaths between them. Owner ruling 2026-08-29: a party that could "
+            "not get a single kill is not worth recording. Coverage 90% of "
+            "players across sampled battles. A party is NOT a comp: a large "
+            "battle is a coalition of parties. Prevalence is not "
+            "effectiveness. DISPLAY/EVIDENCE ONLY, never a scoring input."),
         "battles": sorted(battles, key=lambda b: -(b["total_players"] or 0)),
         "parties": sorted(parties, key=lambda p: -p["size"]),
         "summary": {

@@ -4381,7 +4381,7 @@
    ]
   }
  ],
- "semantics": "GroupMembers from official gameinfo kill events: the KILLER'S PARTY at kill time, deduplicated per battle by member-name set. WINNER-BIASED \u2014 a party that killed nobody never appears. A party is not a comp: a large battle is a coalition of parties. DISPLAY/EVIDENCE ONLY, never a scoring input.",
+ "semantics": "GroupMembers from official gameinfo kill events: the KILLER'S PARTY at kill time, deduplicated per battle by member OVERLAP (>50% of the smaller set) so one squad shedding members as they die is not counted several times. INCLUSION FILTER: the party scored at least one kill \u2014 measured 2026-08-29, not assumed: 61% of captured parties are dominant, 19% traded even, 20% took more deaths than kills, so losing parties ARE represented; the 10% of players in no captured party hold 34 kills against 475 deaths between them. Owner ruling 2026-08-29: a party that could not get a single kill is not worth recording. Coverage 90% of players across sampled battles. A party is NOT a comp: a large battle is a coalition of parties. Prevalence is not effectiveness. DISPLAY/EVIDENCE ONLY, never a scoring input.",
  "summary": {
   "battles": 39,
   "median_coverage": 0.815,
