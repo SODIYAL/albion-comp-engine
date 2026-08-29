@@ -1,0 +1,4392 @@
+{
+ "battles": [
+  {
+   "battle": 1439399126,
+   "coverage": 0.669,
+   "events_fetched": 118,
+   "kill_events": 182,
+   "parties": 66,
+   "party_members_not_in_this_battle": 6,
+   "players_with_gear": 202,
+   "roster_known": 302,
+   "total_players": 302
+  },
+  {
+   "battle": 1439392325,
+   "coverage": 0.93,
+   "events_fetched": 93,
+   "kill_events": 95,
+   "parties": 48,
+   "party_members_not_in_this_battle": 2,
+   "players_with_gear": 186,
+   "roster_known": 200,
+   "total_players": 200
+  },
+  {
+   "battle": 1439400102,
+   "coverage": 0.643,
+   "events_fetched": 116,
+   "kill_events": 116,
+   "parties": 48,
+   "party_members_not_in_this_battle": 9,
+   "players_with_gear": 117,
+   "roster_known": 182,
+   "total_players": 182
+  },
+  {
+   "battle": 1439395225,
+   "coverage": 0.902,
+   "events_fetched": 48,
+   "kill_events": 48,
+   "parties": 15,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 92,
+   "roster_known": 102,
+   "total_players": 102
+  },
+  {
+   "battle": 1439404807,
+   "coverage": 0.866,
+   "events_fetched": 119,
+   "kill_events": 147,
+   "parties": 57,
+   "party_members_not_in_this_battle": 1,
+   "players_with_gear": 71,
+   "roster_known": 82,
+   "total_players": 82
+  },
+  {
+   "battle": 1439411133,
+   "coverage": 0.853,
+   "events_fetched": 29,
+   "kill_events": 31,
+   "parties": 13,
+   "party_members_not_in_this_battle": 3,
+   "players_with_gear": 58,
+   "roster_known": 68,
+   "total_players": 68
+  },
+  {
+   "battle": 1439402966,
+   "coverage": 0.907,
+   "events_fetched": 16,
+   "kill_events": 16,
+   "parties": 11,
+   "party_members_not_in_this_battle": 1,
+   "players_with_gear": 49,
+   "roster_known": 54,
+   "total_players": 54
+  },
+  {
+   "battle": 1439393984,
+   "coverage": 0.808,
+   "events_fetched": 31,
+   "kill_events": 32,
+   "parties": 12,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 42,
+   "roster_known": 52,
+   "total_players": 52
+  },
+  {
+   "battle": 1439392919,
+   "coverage": 0.978,
+   "events_fetched": 11,
+   "kill_events": 11,
+   "parties": 6,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 44,
+   "roster_known": 45,
+   "total_players": 45
+  },
+  {
+   "battle": 1439408052,
+   "coverage": 0.689,
+   "events_fetched": 15,
+   "kill_events": 16,
+   "parties": 11,
+   "party_members_not_in_this_battle": 18,
+   "players_with_gear": 31,
+   "roster_known": 45,
+   "total_players": 45
+  },
+  {
+   "battle": 1439400982,
+   "coverage": 0.791,
+   "events_fetched": 18,
+   "kill_events": 18,
+   "parties": 9,
+   "party_members_not_in_this_battle": 4,
+   "players_with_gear": 34,
+   "roster_known": 43,
+   "total_players": 43
+  },
+  {
+   "battle": 1439399044,
+   "coverage": 0.975,
+   "events_fetched": 21,
+   "kill_events": 21,
+   "parties": 13,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 39,
+   "roster_known": 40,
+   "total_players": 40
+  },
+  {
+   "battle": 1439401026,
+   "coverage": 0.974,
+   "events_fetched": 9,
+   "kill_events": 9,
+   "parties": 3,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 38,
+   "roster_known": 39,
+   "total_players": 39
+  },
+  {
+   "battle": 1439391218,
+   "coverage": 0.892,
+   "events_fetched": 16,
+   "kill_events": 17,
+   "parties": 8,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 33,
+   "roster_known": 37,
+   "total_players": 37
+  },
+  {
+   "battle": 1439402628,
+   "coverage": 0.722,
+   "events_fetched": 15,
+   "kill_events": 15,
+   "parties": 10,
+   "party_members_not_in_this_battle": 1,
+   "players_with_gear": 26,
+   "roster_known": 36,
+   "total_players": 36
+  },
+  {
+   "battle": 1439419213,
+   "coverage": 0.943,
+   "events_fetched": 8,
+   "kill_events": 8,
+   "parties": 8,
+   "party_members_not_in_this_battle": 2,
+   "players_with_gear": 33,
+   "roster_known": 35,
+   "total_players": 35
+  },
+  {
+   "battle": 1439405871,
+   "coverage": 0.647,
+   "events_fetched": 27,
+   "kill_events": 27,
+   "parties": 8,
+   "party_members_not_in_this_battle": 1,
+   "players_with_gear": 22,
+   "roster_known": 34,
+   "total_players": 34
+  },
+  {
+   "battle": 1439444049,
+   "coverage": 0.909,
+   "events_fetched": 5,
+   "kill_events": 5,
+   "parties": 5,
+   "party_members_not_in_this_battle": 5,
+   "players_with_gear": 30,
+   "roster_known": 33,
+   "total_players": 33
+  },
+  {
+   "battle": 1439396199,
+   "coverage": 0.625,
+   "events_fetched": 12,
+   "kill_events": 12,
+   "parties": 8,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 20,
+   "roster_known": 32,
+   "total_players": 32
+  },
+  {
+   "battle": 1439407156,
+   "coverage": 0.562,
+   "events_fetched": 15,
+   "kill_events": 15,
+   "parties": 5,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 18,
+   "roster_known": 32,
+   "total_players": 32
+  },
+  {
+   "battle": 1439408604,
+   "coverage": 0.688,
+   "events_fetched": 7,
+   "kill_events": 8,
+   "parties": 7,
+   "party_members_not_in_this_battle": 6,
+   "players_with_gear": 22,
+   "roster_known": 32,
+   "total_players": 32
+  },
+  {
+   "battle": 1439423672,
+   "coverage": 0.656,
+   "events_fetched": 13,
+   "kill_events": 13,
+   "parties": 10,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 21,
+   "roster_known": 32,
+   "total_players": 32
+  },
+  {
+   "battle": 1439398697,
+   "coverage": 0.935,
+   "events_fetched": 19,
+   "kill_events": 19,
+   "parties": 11,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 29,
+   "roster_known": 31,
+   "total_players": 31
+  },
+  {
+   "battle": 1439418472,
+   "coverage": 0.774,
+   "events_fetched": 7,
+   "kill_events": 7,
+   "parties": 7,
+   "party_members_not_in_this_battle": 1,
+   "players_with_gear": 24,
+   "roster_known": 31,
+   "total_players": 31
+  },
+  {
+   "battle": 1439420213,
+   "coverage": 0.871,
+   "events_fetched": 11,
+   "kill_events": 12,
+   "parties": 7,
+   "party_members_not_in_this_battle": 1,
+   "players_with_gear": 27,
+   "roster_known": 31,
+   "total_players": 31
+  },
+  {
+   "battle": 1439399553,
+   "coverage": 0.933,
+   "events_fetched": 7,
+   "kill_events": 7,
+   "parties": 6,
+   "party_members_not_in_this_battle": 1,
+   "players_with_gear": 28,
+   "roster_known": 30,
+   "total_players": 30
+  },
+  {
+   "battle": 1439407887,
+   "coverage": 0.533,
+   "events_fetched": 14,
+   "kill_events": 14,
+   "parties": 9,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 16,
+   "roster_known": 30,
+   "total_players": 30
+  },
+  {
+   "battle": 1439395339,
+   "coverage": 0.571,
+   "events_fetched": 12,
+   "kill_events": 12,
+   "parties": 3,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 16,
+   "roster_known": 28,
+   "total_players": 28
+  },
+  {
+   "battle": 1439396729,
+   "coverage": 0.75,
+   "events_fetched": 8,
+   "kill_events": 9,
+   "parties": 7,
+   "party_members_not_in_this_battle": 2,
+   "players_with_gear": 21,
+   "roster_known": 28,
+   "total_players": 28
+  },
+  {
+   "battle": 1439403931,
+   "coverage": 0.786,
+   "events_fetched": 18,
+   "kill_events": 19,
+   "parties": 11,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 22,
+   "roster_known": 28,
+   "total_players": 28
+  },
+  {
+   "battle": 1439421956,
+   "coverage": 0.857,
+   "events_fetched": 41,
+   "kill_events": 43,
+   "parties": 10,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 24,
+   "roster_known": 28,
+   "total_players": 28
+  },
+  {
+   "battle": 1439433903,
+   "coverage": 0.857,
+   "events_fetched": 7,
+   "kill_events": 7,
+   "parties": 5,
+   "party_members_not_in_this_battle": 7,
+   "players_with_gear": 24,
+   "roster_known": 28,
+   "total_players": 28
+  },
+  {
+   "battle": 1439397156,
+   "coverage": 0.815,
+   "events_fetched": 5,
+   "kill_events": 5,
+   "parties": 5,
+   "party_members_not_in_this_battle": 4,
+   "players_with_gear": 22,
+   "roster_known": 27,
+   "total_players": 27
+  },
+  {
+   "battle": 1439417932,
+   "coverage": 0.815,
+   "events_fetched": 5,
+   "kill_events": 5,
+   "parties": 5,
+   "party_members_not_in_this_battle": 7,
+   "players_with_gear": 22,
+   "roster_known": 27,
+   "total_players": 27
+  },
+  {
+   "battle": 1439393255,
+   "coverage": 0.577,
+   "events_fetched": 11,
+   "kill_events": 11,
+   "parties": 7,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 15,
+   "roster_known": 26,
+   "total_players": 26
+  },
+  {
+   "battle": 1439419129,
+   "coverage": 0.769,
+   "events_fetched": 15,
+   "kill_events": 15,
+   "parties": 11,
+   "party_members_not_in_this_battle": 0,
+   "players_with_gear": 20,
+   "roster_known": 26,
+   "total_players": 26
+  },
+  {
+   "battle": 1439436835,
+   "coverage": 0.923,
+   "events_fetched": 14,
+   "kill_events": 14,
+   "parties": 4,
+   "party_members_not_in_this_battle": 2,
+   "players_with_gear": 24,
+   "roster_known": 26,
+   "total_players": 26
+  },
+  {
+   "battle": 1439426961,
+   "coverage": 0.96,
+   "events_fetched": 4,
+   "kill_events": 4,
+   "parties": 4,
+   "party_members_not_in_this_battle": 2,
+   "players_with_gear": 24,
+   "roster_known": 25,
+   "total_players": 25
+  },
+  {
+   "battle": 1439432736,
+   "coverage": 0.72,
+   "events_fetched": 3,
+   "kill_events": 4,
+   "parties": 3,
+   "party_members_not_in_this_battle": 1,
+   "players_with_gear": 18,
+   "roster_known": 25,
+   "total_players": 25
+  }
+ ],
+ "kind": "party_rosters",
+ "parties": [
+  {
+   "battle": 1439393984,
+   "guilds": [
+    "The Rugrats"
+   ],
+   "known_weapons": 20,
+   "seen_in_events": 8,
+   "size": 20,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_FIRESTAFF_HELL",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HAMMER_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_NATURESTAFF_KEEPER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "2H_SHAPESHIFTER_SET2",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_FROSTSTAFF",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439395225,
+   "guilds": [
+    "4pm",
+    "Upside"
+   ],
+   "known_weapons": 20,
+   "seen_in_events": 27,
+   "size": 20,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_CURSEDSTAFF_MORGANA",
+    "2H_DUALMACE_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_HAMMER_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_HOLYSTAFF_CRYSTAL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_NATURESTAFF_KEEPER",
+    "2H_POLEHAMMER",
+    "MAIN_ARCANESTAFF",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_ROCKMACE_KEEPER",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439396199,
+   "guilds": [
+    "Benevolent Kool Aid",
+    "Never Care"
+   ],
+   "known_weapons": 20,
+   "seen_in_events": 12,
+   "size": 20,
+   "weapons": [
+    "2H_ARCANESTAFF_CRYSTAL",
+    "2H_CURSEDSTAFF_MORGANA",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_ENIGMATICSTAFF",
+    "2H_INFERNOSTAFF",
+    "2H_KNUCKLES_AVALON",
+    "2H_MACE",
+    "2H_MACE",
+    "2H_NATURESTAFF_HELL",
+    "2H_QUARTERSTAFF_AVALON",
+    "2H_SHAPESHIFTER_SET2",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_DAGGER_HELL",
+    "MAIN_HAMMER",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE_CRYSTAL"
+   ]
+  },
+  {
+   "battle": 1439399044,
+   "guilds": [
+    "Buster CaII",
+    "FUERZAS BRUTAS",
+    "Saint Kings",
+    "Sandstorms",
+    "TODOS SOMOS 1",
+    "WE COOKED"
+   ],
+   "known_weapons": 20,
+   "seen_in_events": 17,
+   "size": 20,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_AXE_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_HAMMER_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_MACE",
+    "2H_NATURESTAFF_HELL",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_SET2",
+    "MAIN_ARCANESTAFF",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_CRYSTAL",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [
+    "Core Vits",
+    "IFures",
+    "NO HOLDING",
+    "Okos Traders",
+    "Outlimits",
+    "POTA POTA POTA",
+    "The Last Dragon Lords"
+   ],
+   "known_weapons": 20,
+   "seen_in_events": 35,
+   "size": 20,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_AXE_AVALON",
+    "2H_BOW_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HAMMER_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_HOLYSTAFF_CRYSTAL",
+    "2H_HOLYSTAFF_HELL",
+    "2H_HOLYSTAFF_UNDEAD",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_ARCANESTAFF",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_CRYSTAL",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439401026,
+   "guilds": [
+    "D A E M O N"
+   ],
+   "known_weapons": 20,
+   "seen_in_events": 1,
+   "size": 20,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_ENIGMATICSTAFF",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_NATURESTAFF_HELL",
+    "2H_POLEHAMMER",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439402966,
+   "guilds": [
+    "Benevolent Kool Aid",
+    "Never Care"
+   ],
+   "known_weapons": 20,
+   "seen_in_events": 10,
+   "size": 20,
+   "weapons": [
+    "2H_ARCANESTAFF_CRYSTAL",
+    "2H_CURSEDSTAFF_MORGANA",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_ENIGMATICSTAFF",
+    "2H_INFERNOSTAFF",
+    "2H_KNUCKLES_AVALON",
+    "2H_MACE",
+    "2H_MACE",
+    "2H_NATURESTAFF_HELL",
+    "2H_SHAPESHIFTER_SET2",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_DAGGER_HELL",
+    "MAIN_HAMMER",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE_CRYSTAL",
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439391218,
+   "guilds": [
+    "Fleurir",
+    "Hero Lanniter",
+    "Hitsquad",
+    "NO HOLDING",
+    "Overprice",
+    "R 4 M P 4 G 3",
+    "Spartan Dreams"
+   ],
+   "known_weapons": 19,
+   "seen_in_events": 13,
+   "size": 19,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "2H_CLEAVER_HELL",
+    "2H_DUALSWORD",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_HARPOON_HELL",
+    "2H_HOLYSTAFF_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_LONGBOW",
+    "2H_LONGBOW",
+    "2H_LONGBOW",
+    "2H_MACE",
+    "2H_MACE",
+    "2H_NATURESTAFF_HELL",
+    "2H_RAM_KEEPER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "2H_SHAPESHIFTER_SET2",
+    "MAIN_DAGGER_HELL",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439392325,
+   "guilds": [
+    "Upsida",
+    "Upside"
+   ],
+   "known_weapons": 19,
+   "seen_in_events": 4,
+   "size": 19,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_DUALMACE_AVALON",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_ENIGMATICORB_MORGANA",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_ICEGAUNTLETS_HELL",
+    "2H_KNUCKLES_HELL",
+    "2H_NATURESTAFF_HELL",
+    "2H_POLEHAMMER",
+    "2H_WILDSTAFF",
+    "MAIN_CURSEDSTAFF_AVALON",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE",
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439392919,
+   "guilds": [
+    "Overprice"
+   ],
+   "known_weapons": 17,
+   "seen_in_events": 6,
+   "size": 19,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "2H_CLEAVER_HELL",
+    "2H_DUALMACE_AVALON",
+    "2H_ENIGMATICSTAFF",
+    "2H_HOLYSTAFF_HELL",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET3",
+    "2H_MACE",
+    "MAIN_CURSEDSTAFF_AVALON",
+    "MAIN_CURSEDSTAFF_CRYSTAL",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HAMMER",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "CAZA GANKER",
+    "ETHERNAL-GLORY",
+    "Faction Army",
+    "La forja de Ashmoor",
+    "Make Albion Great Again",
+    "Mind gap",
+    "Mute Zone",
+    "P S Y K O Z",
+    "PlVAS",
+    "PllVAS",
+    "Softblade Syndicate",
+    "YOU_ARE_DEAD",
+    "the guardians of wars"
+   ],
+   "known_weapons": 19,
+   "seen_in_events": 6,
+   "size": 19,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_ENIGMATICORB_MORGANA",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_ICEGAUNTLETS_HELL",
+    "2H_KNUCKLES_SET3",
+    "2H_NATURESTAFF_KEEPER",
+    "2H_POLEHAMMER",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_ARCANESTAFF",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "4pm",
+    "Aguapanela Encantada",
+    "Black Ursa",
+    "Catadores de Toto",
+    "Faction Army",
+    "G A N J E R O S",
+    "IT s ShoW TimE",
+    "MacroStrategy",
+    "Martlock Survivors",
+    "Outlimits",
+    "Overprice",
+    "SIGTRYG",
+    "THE EMPERATORS",
+    "lB E R S E R K",
+    "xFATAL FURYx"
+   ],
+   "known_weapons": 19,
+   "seen_in_events": 23,
+   "size": 19,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_ENIGMATICSTAFF",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_HELL",
+    "2H_KNUCKLES_SET3",
+    "2H_NATURESTAFF_KEEPER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_CURSEDSTAFF_CRYSTAL",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_ROCKMACE_KEEPER",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [
+    "G3NESYS",
+    "IMPERIVM ONLINE",
+    "Legion Brocoli",
+    "Ministry Of Bandits",
+    "N E X X U Z Z",
+    "NO HOLDING",
+    "PlVAS",
+    "SHINJU",
+    "SIEVEN",
+    "THE ENJAMBRE",
+    "TheSpartanSQUAD",
+    "dream realms"
+   ],
+   "known_weapons": 19,
+   "seen_in_events": 19,
+   "size": 19,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "2H_AXE_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_HOLYSTAFF_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_HELL",
+    "2H_LONGBOW",
+    "2H_LONGBOW",
+    "2H_LONGBOW",
+    "2H_NATURESTAFF_HELL",
+    "2H_NATURESTAFF_HELL",
+    "2H_POLEHAMMER",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE",
+    "MAIN_ROCKMACE_KEEPER",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439411133,
+   "guilds": [
+    "G3NESYS",
+    "IMPERIVM ONLINE",
+    "Legion Brocoli",
+    "Ministry Of Bandits",
+    "N E X X U Z Z",
+    "PlVAS",
+    "RADlANT",
+    "SHINJU",
+    "SIEVEN",
+    "TheSpartanSQUAD",
+    "dream realms"
+   ],
+   "known_weapons": 19,
+   "seen_in_events": 4,
+   "size": 19,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "2H_AXE_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_HOLYSTAFF_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_HELL",
+    "2H_LONGBOW",
+    "2H_LONGBOW",
+    "2H_NATURESTAFF_HELL",
+    "2H_NATURESTAFF_HELL",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE",
+    "MAIN_ROCKMACE_KEEPER",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439423672,
+   "guilds": [
+    "Catadores de Toto"
+   ],
+   "known_weapons": 19,
+   "seen_in_events": 13,
+   "size": 19,
+   "weapons": [
+    "2H_CLEAVER_HELL",
+    "2H_CLEAVER_HELL",
+    "2H_DUALAXE_KEEPER",
+    "2H_DUALAXE_KEEPER",
+    "2H_DUALHAMMER_HELL",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_DUALSICKLE_UNDEAD",
+    "2H_ENIGMATICSTAFF",
+    "2H_HAMMER",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_INFERNOSTAFF",
+    "2H_MACE",
+    "2H_NATURESTAFF_HELL",
+    "2H_SHAPESHIFTER_CRYSTAL",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_RAPIER_MORGANA",
+    "MAIN_SPEAR_LANCE_AVALON"
+   ]
+  },
+  {
+   "battle": 1439444049,
+   "guilds": [
+    "DARK MARINES",
+    "ETHERNAL-GLORY",
+    "Faction Army",
+    "Gank Kids",
+    "Hunters - of - Glory",
+    "L1FE OVER",
+    "La Orden de Escarcha",
+    "La forja de Ashmoor",
+    "Laus Murmuri",
+    "Los carneros",
+    "SWORDX",
+    "T-A-C-O-S",
+    "TU MAMMA",
+    "WON PIECE",
+    "YOU_ARE_DEAD"
+   ],
+   "known_weapons": 19,
+   "seen_in_events": 2,
+   "size": 19,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_AXE_AVALON",
+    "2H_CLEAVER_HELL",
+    "2H_CROSSBOWLARGE",
+    "2H_CROSSBOW_CANNON_AVALON",
+    "2H_DUALSWORD",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FROSTSTAFF",
+    "2H_HARPOON_HELL",
+    "2H_HOLYSTAFF_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_SHAPESHIFTER_KEEPER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_DAGGER_HELL",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439392325,
+   "guilds": [
+    "Upsida",
+    "Upside"
+   ],
+   "known_weapons": 18,
+   "seen_in_events": 9,
+   "size": 18,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_ARCANESTAFF",
+    "2H_AXE_AVALON",
+    "2H_AXE_AVALON",
+    "2H_HOLYSTAFF_CRYSTAL",
+    "2H_HOLYSTAFF_HELL",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET3",
+    "2H_MACE_MORGANA",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_AVALON",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HAMMER",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_RAPIER_MORGANA",
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439392919,
+   "guilds": [
+    "D A E M O N"
+   ],
+   "known_weapons": 18,
+   "seen_in_events": 4,
+   "size": 18,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_ENIGMATICSTAFF",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_POLEHAMMER",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439393984,
+   "guilds": [
+    "CHECKOUT",
+    "TU MAMMA"
+   ],
+   "known_weapons": 18,
+   "seen_in_events": 23,
+   "size": 18,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_DAGGER_KATAR_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_HAMMER_AVALON",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_MACE",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_CRYSTAL",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_NATURESTAFF_CRYSTAL",
+    "MAIN_ROCKMACE_KEEPER",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439396729,
+   "guilds": [
+    "Buster CaII",
+    "FUERZAS BRUTAS",
+    "Saint Kings",
+    "Sandstorms",
+    "TODOS SOMOS 1",
+    "WE COOKED"
+   ],
+   "known_weapons": 18,
+   "seen_in_events": 8,
+   "size": 18,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_AXE_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_HAMMER_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_MACE",
+    "2H_NATURESTAFF_HELL",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_SET2",
+    "MAIN_ARCANESTAFF",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_CRYSTAL",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "Orpheus inc",
+    "YOU_ARE_DEAD"
+   ],
+   "known_weapons": 18,
+   "seen_in_events": 11,
+   "size": 18,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_ENIGMATICSTAFF",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_NATURESTAFF_HELL",
+    "2H_NATURESTAFF_HELL",
+    "2H_POLEHAMMER",
+    "2H_TWINSCYTHE_HELL",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_AXE",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "Catadores de Toto",
+    "Mystic Tecolothy",
+    "Seguidores de Morgana"
+   ],
+   "known_weapons": 18,
+   "seen_in_events": 14,
+   "size": 18,
+   "weapons": [
+    "2H_BOW_AVALON",
+    "2H_CLAYMORE_AVALON",
+    "2H_DUALAXE_KEEPER",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_ENIGMATICSTAFF",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HOLYSTAFF_HELL",
+    "2H_LONGBOW",
+    "2H_MACE",
+    "2H_NATURESTAFF_HELL",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_CRYSTAL",
+    "2H_WILDSTAFF",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE",
+    "MAIN_SPEAR_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439401026,
+   "guilds": [
+    "Overprice"
+   ],
+   "known_weapons": 18,
+   "seen_in_events": 8,
+   "size": 18,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_AXE_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_ENIGMATICSTAFF",
+    "2H_HOLYSTAFF_HELL",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET3",
+    "2H_MACE",
+    "2H_SHAPESHIFTER_SET2",
+    "MAIN_ARCANESTAFF",
+    "MAIN_CURSEDSTAFF_AVALON",
+    "MAIN_CURSEDSTAFF_CRYSTAL",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HAMMER",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439407156,
+   "guilds": [
+    "CHECKOUT",
+    "TU MAMMA"
+   ],
+   "known_weapons": 18,
+   "seen_in_events": 15,
+   "size": 18,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_DAGGER_KATAR_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_HAMMER_AVALON",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_MACE",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_CRYSTAL",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_NATURESTAFF_CRYSTAL",
+    "MAIN_ROCKMACE_KEEPER",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439417932,
+   "guilds": [
+    "DARK MARINES",
+    "DARKM1GHT",
+    "ENTERT4INMENT",
+    "ETHERNAL-GLORY",
+    "Faction Army",
+    "Hunters - of - Glory",
+    "Laus Murmuri",
+    "Make Albion Great Again",
+    "Pirates creed",
+    "SWORDX",
+    "Softblade Syndicate",
+    "TU MAMMA",
+    "YOU_ARE_DEAD"
+   ],
+   "known_weapons": 18,
+   "seen_in_events": 3,
+   "size": 18,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_AXE_AVALON",
+    "2H_AXE_AVALON",
+    "2H_CURSEDSTAFF_MORGANA",
+    "2H_DUALMACE_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_HOLYSTAFF_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_ICEGAUNTLETS_HELL",
+    "2H_LONGBOW",
+    "2H_NATURESTAFF_KEEPER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_ROCKMACE_KEEPER",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439392325,
+   "guilds": [
+    "B U R N I N"
+   ],
+   "known_weapons": 17,
+   "seen_in_events": 10,
+   "size": 17,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_CURSEDSTAFF_MORGANA",
+    "2H_DUALMACE_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_LONGBOW",
+    "2H_NATURESTAFF_HELL",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_CRYSTAL",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_ROCKMACE_KEEPER",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439392325,
+   "guilds": [
+    "R E Q U 1 E M"
+   ],
+   "known_weapons": 17,
+   "seen_in_events": 6,
+   "size": 17,
+   "weapons": [
+    "2H_DUALMACE_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_DUALSWORD",
+    "2H_ENIGMATICORB_MORGANA",
+    "2H_HOLYSTAFF_HELL",
+    "2H_ICEGAUNTLETS_HELL",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "2H_MACE",
+    "2H_MACE_MORGANA",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_DAGGER_HELL",
+    "MAIN_FROSTSTAFF",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_ROCKMACE_KEEPER",
+    "MAIN_SPEAR_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439392325,
+   "guilds": [
+    "R E Q U 1 E M"
+   ],
+   "known_weapons": 17,
+   "seen_in_events": 6,
+   "size": 17,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_HOLYSTAFF_CRYSTAL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_HELL",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET3",
+    "2H_NATURESTAFF_KEEPER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "2H_WILDSTAFF",
+    "2H_WILDSTAFF",
+    "MAIN_CURSEDSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439402628,
+   "guilds": [
+    "Dont - Tread - On - Me",
+    "Hitsquad",
+    "Pack Yo Bags"
+   ],
+   "known_weapons": 17,
+   "seen_in_events": 8,
+   "size": 17,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_AXE_AVALON",
+    "2H_BOW_KEEPER",
+    "2H_CLAYMORE_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET3",
+    "MAIN_CURSEDSTAFF_AVALON",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HAMMER",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE",
+    "MAIN_MACE_HELL",
+    "MAIN_NATURESTAFF"
+   ]
+  },
+  {
+   "battle": 1439419213,
+   "guilds": [
+    "DARK MARINES",
+    "DARKM1GHT",
+    "ETHERNAL-GLORY",
+    "Faction Army",
+    "Hunters - of - Glory",
+    "La forja de Ashmoor",
+    "Laus Murmuri",
+    "SWORDX",
+    "Softblade Syndicate",
+    "TU MAMMA",
+    "The Rugrats",
+    "YOU_ARE_DEAD"
+   ],
+   "known_weapons": 17,
+   "seen_in_events": 2,
+   "size": 17,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_AXE_AVALON",
+    "2H_AXE_AVALON",
+    "2H_CURSEDSTAFF_MORGANA",
+    "2H_DUALMACE_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_HOLYSTAFF_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_ICEGAUNTLETS_HELL",
+    "2H_KNUCKLES_SET3",
+    "2H_LONGBOW",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439395339,
+   "guilds": [
+    "Fleurir",
+    "Hero Lanniter",
+    "Hitsquad",
+    "NO HOLDING",
+    "Overprice",
+    "R 4 M P 4 G 3",
+    "Spartan Dreams"
+   ],
+   "known_weapons": 16,
+   "seen_in_events": 12,
+   "size": 16,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "2H_CLEAVER_HELL",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_HARPOON_HELL",
+    "2H_HOLYSTAFF_HELL",
+    "2H_LONGBOW",
+    "2H_LONGBOW",
+    "2H_MACE",
+    "2H_MACE",
+    "2H_NATURESTAFF_HELL",
+    "2H_RAM_KEEPER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "2H_SHAPESHIFTER_SET2",
+    "MAIN_DAGGER_HELL",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439400982,
+   "guilds": [
+    "AIea iacta est",
+    "CrowNest",
+    "DESEERT",
+    "Durenfer GANK",
+    "H3rois da Tret4",
+    "La Pocho Taberna",
+    "TU MAMMA",
+    "The Skull Bearers",
+    "Too Pretty To Die",
+    "Tropa da KaBUM",
+    "Via Nocturna",
+    "banco7"
+   ],
+   "known_weapons": 16,
+   "seen_in_events": 10,
+   "size": 16,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE",
+    "2H_ENIGMATICORB_MORGANA",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_LONGBOW",
+    "2H_LONGBOW",
+    "2H_LONGBOW",
+    "2H_LONGBOW",
+    "2H_NATURESTAFF_HELL",
+    "2H_POLEHAMMER",
+    "2H_QUARTERSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439402966,
+   "guilds": [
+    "Gankers LetaLes"
+   ],
+   "known_weapons": 16,
+   "seen_in_events": 3,
+   "size": 16,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_HOLYSTAFF_HELL",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "2H_NATURESTAFF_HELL",
+    "2H_POLEHAMMER",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "2H_SHAPESHIFTER_SET2",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439392325,
+   "guilds": [
+    "Hitsquad"
+   ],
+   "known_weapons": 15,
+   "seen_in_events": 18,
+   "size": 15,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET3",
+    "2H_MACE",
+    "MAIN_CURSEDSTAFF_AVALON",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE",
+    "MAIN_MACE_HELL"
+   ]
+  },
+  {
+   "battle": 1439393255,
+   "guilds": [
+    "U Are My Profit"
+   ],
+   "known_weapons": 15,
+   "seen_in_events": 11,
+   "size": 15,
+   "weapons": [
+    "2H_DUALMACE_AVALON",
+    "2H_DUALSICKLE_UNDEAD",
+    "2H_ENIGMATICSTAFF",
+    "2H_HOLYSTAFF_UNDEAD",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_KEEPER",
+    "2H_KNUCKLES_KEEPER",
+    "2H_KNUCKLES_SET2",
+    "2H_MACE",
+    "2H_NATURESTAFF_HELL",
+    "2H_WILDSTAFF",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE",
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439395225,
+   "guilds": [
+    "Evil Reconnecting",
+    "Gankers LetaLes"
+   ],
+   "known_weapons": 15,
+   "seen_in_events": 1,
+   "size": 15,
+   "weapons": [
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_GLAIVE",
+    "2H_HOLYSTAFF_CRYSTAL",
+    "2H_HOLYSTAFF_HELL",
+    "2H_KNUCKLES_SET2",
+    "2H_LONGBOW",
+    "2H_MACE",
+    "2H_MACE",
+    "2H_POLEHAMMER",
+    "MAIN_HAMMER",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439395225,
+   "guilds": [
+    "Gankers LetaLes"
+   ],
+   "known_weapons": 15,
+   "seen_in_events": 3,
+   "size": 15,
+   "weapons": [
+    "2H_DUALMACE_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_HOLYSTAFF_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET3",
+    "2H_NATURESTAFF_HELL",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "2H_SHAPESHIFTER_SET2",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439404807,
+   "guilds": [
+    "Buster CaII",
+    "FUERZAS BRUTAS",
+    "Saint Kings",
+    "Sandstorms",
+    "TODOS SOMOS 1",
+    "WE COOKED"
+   ],
+   "known_weapons": 15,
+   "seen_in_events": 26,
+   "size": 15,
+   "weapons": [
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_HAMMER_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_NATURESTAFF_HELL",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_SET2",
+    "MAIN_ARCANESTAFF",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439411133,
+   "guilds": [
+    "IFures",
+    "NO HOLDING",
+    "Outlimits",
+    "POTA POTA POTA",
+    "The Last Dragon Lords",
+    "True Gentleman"
+   ],
+   "known_weapons": 14,
+   "seen_in_events": 10,
+   "size": 15,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HAMMER_AVALON",
+    "2H_HOLYSTAFF_CRYSTAL",
+    "2H_HOLYSTAFF_HELL",
+    "2H_HOLYSTAFF_UNDEAD",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439433903,
+   "guilds": [
+    "DARK MARINES",
+    "DARKM1GHT",
+    "Deicidio Supremacy",
+    "ETHERNAL-GLORY",
+    "Faction Army",
+    "Hunters - of - Glory",
+    "L1FE OVER",
+    "La forja de Ashmoor",
+    "Laus Murmuri",
+    "SWORDX",
+    "TU MAMMA",
+    "YOU_ARE_DEAD"
+   ],
+   "known_weapons": 15,
+   "seen_in_events": 6,
+   "size": 15,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_AXE_AVALON",
+    "2H_AXE_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_LONGBOW",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439392325,
+   "guilds": [
+    "EVIL GORGONITAS"
+   ],
+   "known_weapons": 14,
+   "seen_in_events": 5,
+   "size": 14,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_CURSEDSTAFF_MORGANA",
+    "2H_ENIGMATICSTAFF",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_ICECRYSTAL_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_ROCKMACE_KEEPER",
+    "MAIN_SWORD_CRYSTAL"
+   ]
+  },
+  {
+   "battle": 1439395225,
+   "guilds": [
+    "A P E I R O N"
+   ],
+   "known_weapons": 14,
+   "seen_in_events": 2,
+   "size": 14,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_AXE_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_NATURESTAFF_HELL",
+    "MAIN_ARCANESTAFF",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_ROCKMACE_KEEPER",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439399044,
+   "guilds": [
+    "The Irish Mafia"
+   ],
+   "known_weapons": 14,
+   "seen_in_events": 3,
+   "size": 14,
+   "weapons": [
+    "2H_ARCANESTAFF_CRYSTAL",
+    "2H_AXE_AVALON",
+    "2H_CLEAVER_HELL",
+    "2H_DUALAXE_KEEPER",
+    "2H_DUALHAMMER_HELL",
+    "2H_DUALMACE_AVALON",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_ICEGAUNTLETS_HELL",
+    "2H_KNUCKLES_SET3",
+    "2H_MACE",
+    "2H_SCYTHE_HELL",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "Last Dead",
+    "YOU_ARE_DEAD"
+   ],
+   "known_weapons": 14,
+   "seen_in_events": 7,
+   "size": 14,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_ENIGMATICSTAFF",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_KNUCKLES_HELL",
+    "2H_KNUCKLES_SET3",
+    "2H_LONGBOW",
+    "2H_MACE",
+    "2H_NATURESTAFF_HELL",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_ARCANESTAFF"
+   ]
+  },
+  {
+   "battle": 1439408604,
+   "guilds": [
+    "Catadores de Toto",
+    "ManduCorp",
+    "Mystic Tecolothy",
+    "R E Q U 1 E M"
+   ],
+   "known_weapons": 14,
+   "seen_in_events": 4,
+   "size": 14,
+   "weapons": [
+    "2H_CLAYMORE_AVALON",
+    "2H_CROSSBOW_CANNON_AVALON",
+    "2H_DUALAXE_KEEPER",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_LONGBOW",
+    "2H_NATURESTAFF_HELL",
+    "2H_POLEHAMMER",
+    "2H_REPEATINGCROSSBOW_UNDEAD",
+    "2H_SHAPESHIFTER_CRYSTAL",
+    "MAIN_HAMMER",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_SPEAR_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439407887,
+   "guilds": [
+    "Benevolent Kool Aid",
+    "Never Care"
+   ],
+   "known_weapons": 13,
+   "seen_in_events": 13,
+   "size": 13,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_CURSEDSTAFF_MORGANA",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_ENIGMATICSTAFF",
+    "2H_MACE",
+    "2H_SHAPESHIFTER_SET2",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_DAGGER_HELL",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE_CRYSTAL",
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439420213,
+   "guilds": [
+    "Grimboow",
+    "Holkan",
+    "MORGANA RATS",
+    "MeT4LCorp",
+    "Reign of Fire and Brimstone",
+    "Ruinwalkers",
+    "White St0nes",
+    "X EL ULTIMO REINO X"
+   ],
+   "known_weapons": 9,
+   "seen_in_events": 1,
+   "size": 13,
+   "weapons": [
+    "2H_AXE",
+    "2H_DUALCROSSBOW_HELL",
+    "2H_DUALCROSSBOW_HELL",
+    "2H_DUALMACE_AVALON",
+    "2H_DUALSWORD",
+    "2H_LONGBOW",
+    "2H_WILDSTAFF",
+    "MAIN_DAGGER_HELL",
+    "MAIN_FROSTSTAFF"
+   ]
+  },
+  {
+   "battle": 1439420213,
+   "guilds": [
+    "Capy Crew",
+    "Daddy8801",
+    "Durenfer GANK",
+    "Pure Vanity",
+    "Rogue Natives",
+    "Sea-Sky Fraternity",
+    "Treasure Tales",
+    "Tropa da KaBUM",
+    "Wrecking-Crew",
+    "banco7"
+   ],
+   "known_weapons": 13,
+   "seen_in_events": 10,
+   "size": 13,
+   "weapons": [
+    "2H_BOW_AVALON",
+    "2H_CROSSBOW",
+    "2H_DUALAXE_KEEPER",
+    "2H_HARPOON_HELL",
+    "2H_INFERNOSTAFF_MORGANA",
+    "2H_KNUCKLES_AVALON",
+    "2H_LONGBOW",
+    "MAIN_FROSTSTAFF",
+    "MAIN_FROSTSTAFF",
+    "MAIN_FROSTSTAFF",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439391218,
+   "guilds": [
+    "FUERZAS BRUTAS",
+    "Saint Kings",
+    "Sandstorms",
+    "TODOS SOMOS 1"
+   ],
+   "known_weapons": 12,
+   "seen_in_events": 3,
+   "size": 12,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_AXE_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HAMMER_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_MACE",
+    "2H_NATURESTAFF_HELL",
+    "MAIN_ARCANESTAFF",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439392325,
+   "guilds": [
+    "The Lonely Men"
+   ],
+   "known_weapons": 12,
+   "seen_in_events": 10,
+   "size": 12,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_ARCANESTAFF_HELL",
+    "2H_CROSSBOW",
+    "2H_CROSSBOW_CANNON_AVALON",
+    "2H_CURSEDSTAFF_MORGANA",
+    "2H_DUALMACE_AVALON",
+    "2H_POLEHAMMER",
+    "2H_QUARTERSTAFF_AVALON",
+    "2H_TWINSCYTHE_HELL",
+    "MAIN_ARCANESTAFF",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [
+    "EVIL GORGONITAS",
+    "FULLPUSH",
+    "HiDrA Reborn",
+    "Las Manzanas De Adan",
+    "Life is game",
+    "Mafia Sindical",
+    "Ministry Of Bandits",
+    "Neko no Ikari",
+    "X EL ULTIMO REINO X",
+    "escuadron salchicha"
+   ],
+   "known_weapons": 12,
+   "seen_in_events": 1,
+   "size": 12,
+   "weapons": [
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_HARPOON_HELL",
+    "2H_NATURESTAFF_HELL",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_ARCANESTAFF",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439400982,
+   "guilds": [
+    "ERADICATEUR",
+    "Faction Wars",
+    "Legion Brocoli",
+    "Los Caidos del Abismo",
+    "MUG MUGIWARAS",
+    "Your Iast Breath"
+   ],
+   "known_weapons": 12,
+   "seen_in_events": 3,
+   "size": 12,
+   "weapons": [
+    "2H_AXE",
+    "2H_AXE",
+    "2H_BOW_KEEPER",
+    "2H_CLAWPAIR",
+    "2H_DUALSICKLE_UNDEAD",
+    "2H_DUALSWORD",
+    "2H_DUALSWORD",
+    "2H_KNUCKLES_SET2",
+    "2H_NATURESTAFF",
+    "2H_REPEATINGCROSSBOW_UNDEAD",
+    "MAIN_FIRESTAFF",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439402966,
+   "guilds": [
+    "Evil Reconnecting",
+    "Gankers LetaLes"
+   ],
+   "known_weapons": 12,
+   "seen_in_events": 3,
+   "size": 12,
+   "weapons": [
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_HOLYSTAFF_HELL",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "MAIN_ARCANESTAFF",
+    "MAIN_HAMMER",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE",
+    "MAIN_RAPIER_MORGANA",
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439404807,
+   "guilds": [
+    "A S T R A L I U M",
+    "F7_X-I-T-E-D",
+    "LA IGLESIA",
+    "Legion Cuero",
+    "Legion_Martlock",
+    "Los Jibaros",
+    "TODOS SOMOS 1",
+    "ThetSOV"
+   ],
+   "known_weapons": 11,
+   "seen_in_events": 7,
+   "size": 12,
+   "weapons": [
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "2H_LONGBOW",
+    "2H_POLEHAMMER",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_FIRESTAFF",
+    "MAIN_FROSTSTAFF",
+    "MAIN_FROSTSTAFF",
+    "MAIN_FROSTSTAFF",
+    "MAIN_ROCKMACE_KEEPER",
+    "MAIN_SCIMITAR_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439392325,
+   "guilds": [
+    "Benevolent Kool Aid",
+    "Never Care"
+   ],
+   "known_weapons": 11,
+   "seen_in_events": 2,
+   "size": 11,
+   "weapons": [
+    "2H_CLAWPAIR",
+    "2H_CURSEDSTAFF_MORGANA",
+    "2H_DOUBLEBLADEDSTAFF",
+    "2H_DOUBLEBLADEDSTAFF",
+    "2H_DUALAXE_KEEPER",
+    "2H_DUALAXE_KEEPER",
+    "2H_DUALAXE_KEEPER",
+    "2H_MACE",
+    "2H_NATURESTAFF_HELL",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439397156,
+   "guilds": [
+    "YOU_ARE_DEAD"
+   ],
+   "known_weapons": 11,
+   "seen_in_events": 2,
+   "size": 11,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_BOW_HELL",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_ICECRYSTAL_UNDEAD",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_RAPIER_MORGANA",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "DARKM1GHT",
+    "ENTERT4INMENT",
+    "Faction Army",
+    "Gatitos-Esponjosos",
+    "L1FE OVER",
+    "Lethal Warri0rs",
+    "NO HOLDING",
+    "Pirates creed",
+    "PlVAS",
+    "TU MAMMA",
+    "The Rugrats"
+   ],
+   "known_weapons": 11,
+   "seen_in_events": 2,
+   "size": 11,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_DUALMACE_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_NATURESTAFF_HELL",
+    "2H_POLEHAMMER",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_ARCANESTAFF",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [
+    "ALQUIMISTASyt",
+    "Buster CaII",
+    "Children of the dunes",
+    "EVIL GORGONITAS",
+    "Eroth",
+    "Las Manzanas De Adan",
+    "ParadoxUniversal",
+    "S E M P I T E R N A L",
+    "escuadron salchicha"
+   ],
+   "known_weapons": 11,
+   "seen_in_events": 2,
+   "size": 11,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_CROSSBOW_CANNON_AVALON",
+    "2H_CROSSBOW_CANNON_AVALON",
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_FIRESTAFF_HELL",
+    "2H_KNUCKLES_SET2",
+    "2H_NATURESTAFF_KEEPER",
+    "2H_QUARTERSTAFF",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439404807,
+   "guilds": [
+    "M B M",
+    "cosplays minions"
+   ],
+   "known_weapons": 11,
+   "seen_in_events": 19,
+   "size": 11,
+   "weapons": [
+    "2H_DUALAXE_KEEPER",
+    "2H_DUALCROSSBOW_HELL",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HOLYSTAFF",
+    "2H_LONGBOW",
+    "2H_LONGBOW",
+    "2H_LONGBOW",
+    "2H_MACE_MORGANA",
+    "2H_SCYTHE_HELL",
+    "MAIN_FROSTSTAFF_KEEPER",
+    "MAIN_HOLYSTAFF"
+   ]
+  },
+  {
+   "battle": 1439408052,
+   "guilds": [
+    "YOU_ARE_DEAD"
+   ],
+   "known_weapons": 11,
+   "seen_in_events": 2,
+   "size": 11,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_POLEHAMMER",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439419129,
+   "guilds": [
+    "ETERNAL NIGHTS",
+    "ShonioKami",
+    "Silent Partners",
+    "X EL ULTIMO REINO X"
+   ],
+   "known_weapons": 11,
+   "seen_in_events": 10,
+   "size": 11,
+   "weapons": [
+    "2H_CLAWPAIR",
+    "2H_CROSSBOW",
+    "2H_DAGGERPAIR",
+    "2H_DUALAXE_KEEPER",
+    "2H_DUALAXE_KEEPER",
+    "2H_HOLYSTAFF_HELL",
+    "2H_INFERNOSTAFF",
+    "MAIN_AXE",
+    "MAIN_FROSTSTAFF",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439395225,
+   "guilds": [
+    "Just Basic",
+    "Sandstorms"
+   ],
+   "known_weapons": 10,
+   "seen_in_events": 4,
+   "size": 10,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_FIRESTAFF_HELL",
+    "2H_FIRESTAFF_HELL",
+    "2H_FIRESTAFF_HELL",
+    "2H_HAMMER_AVALON",
+    "2H_HOLYSTAFF_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_ICEGAUNTLETS_HELL",
+    "MAIN_FROSTSTAFF",
+    "MAIN_HAMMER"
+   ]
+  },
+  {
+   "battle": 1439395225,
+   "guilds": [
+    "4pm"
+   ],
+   "known_weapons": 10,
+   "seen_in_events": 8,
+   "size": 10,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_ARCANESTAFF_HELL",
+    "2H_DAGGER_KATAR_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_ICEGAUNTLETS_HELL",
+    "2H_MACE",
+    "2H_POLEHAMMER",
+    "MAIN_ARCANESTAFF",
+    "MAIN_MACE",
+    "MAIN_NATURESTAFF_CRYSTAL"
+   ]
+  },
+  {
+   "battle": 1439398697,
+   "guilds": [
+    "AVALONIAN-CATS",
+    "Abyssborn",
+    "F7_X-I-T-E-D",
+    "Legion_Martlock",
+    "Los Jibaros",
+    "So bad its funny",
+    "ThetSOV"
+   ],
+   "known_weapons": 10,
+   "seen_in_events": 6,
+   "size": 10,
+   "weapons": [
+    "2H_DUALCROSSBOW_HELL",
+    "2H_DUALSWORD",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "2H_LONGBOW",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_FIRESTAFF",
+    "MAIN_FROSTSTAFF",
+    "MAIN_HOLYSTAFF",
+    "MAIN_SPEAR"
+   ]
+  },
+  {
+   "battle": 1439399553,
+   "guilds": [
+    "R E Q U 1 E M"
+   ],
+   "known_weapons": 10,
+   "seen_in_events": 1,
+   "size": 10,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_HOLYSTAFF_CRYSTAL",
+    "2H_KNUCKLES_HELL",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET3",
+    "2H_SHAPESHIFTER_KEEPER",
+    "2H_WILDSTAFF",
+    "MAIN_CURSEDSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439397156,
+   "guilds": [
+    "Last Dead",
+    "YOU_ARE_DEAD"
+   ],
+   "known_weapons": 9,
+   "seen_in_events": 3,
+   "size": 9,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_KNUCKLES_SET3",
+    "2H_LONGBOW",
+    "2H_NATURESTAFF_HELL",
+    "2H_SHAPESHIFTER_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "Mind gap"
+   ],
+   "known_weapons": 9,
+   "seen_in_events": 6,
+   "size": 9,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_FIRESTAFF_HELL",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HOLYSTAFF",
+    "2H_HOLYSTAFF",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_LONGBOW",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_CRYSTAL"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [
+    "I SURGE I",
+    "Lethal Warri0rs",
+    "NO HOLDING",
+    "Roadside Reapers",
+    "Upside"
+   ],
+   "known_weapons": 8,
+   "seen_in_events": 12,
+   "size": 9,
+   "weapons": [
+    "2H_BOW_AVALON",
+    "2H_CROSSBOW_CANNON_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_ENIGMATICSTAFF",
+    "2H_HARPOON_HELL",
+    "MAIN_ARCANESTAFF",
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [
+    "Eroth"
+   ],
+   "known_weapons": 9,
+   "seen_in_events": 9,
+   "size": 9,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "2H_CROSSBOW_CANNON_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439403931,
+   "guilds": [
+    "CAOS TEMPEST",
+    "Furia Nocturnx",
+    "Mafia Sindical"
+   ],
+   "known_weapons": 9,
+   "seen_in_events": 13,
+   "size": 9,
+   "weapons": [
+    "2H_AXE",
+    "2H_BOW_KEEPER",
+    "2H_MACE",
+    "2H_NATURESTAFF_HELL",
+    "2H_SHAPESHIFTER_AVALON",
+    "MAIN_DAGGER_HELL",
+    "MAIN_FROSTSTAFF",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE_HELL"
+   ]
+  },
+  {
+   "battle": 1439405871,
+   "guilds": [
+    "No Hesitation",
+    "PlatinumEmpire",
+    "Rap Sneakers"
+   ],
+   "known_weapons": 9,
+   "seen_in_events": 4,
+   "size": 9,
+   "weapons": [
+    "2H_CLAYMORE_AVALON",
+    "2H_DUALSICKLE_UNDEAD",
+    "2H_HARPOON_HELL",
+    "2H_HOLYSTAFF_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_AVALON",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_ARCANESTAFF",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439411133,
+   "guilds": [
+    "Eroth"
+   ],
+   "known_weapons": 9,
+   "seen_in_events": 1,
+   "size": 9,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "2H_CROSSBOW_CANNON_AVALON",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_SET3",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439426961,
+   "guilds": [
+    "PRIMATA MOD"
+   ],
+   "known_weapons": 9,
+   "seen_in_events": 1,
+   "size": 9,
+   "weapons": [
+    "2H_DAGGERPAIR",
+    "2H_DUALAXE_KEEPER",
+    "2H_DUALAXE_KEEPER",
+    "2H_ROCKSTAFF_KEEPER",
+    "MAIN_CURSEDSTAFF",
+    "MAIN_FROSTSTAFF",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439392325,
+   "guilds": [
+    "R E Q U 1 E M"
+   ],
+   "known_weapons": 8,
+   "seen_in_events": 10,
+   "size": 8,
+   "weapons": [
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_UNDEAD"
+   ]
+  },
+  {
+   "battle": 1439392325,
+   "guilds": [
+    "ENDANGERED",
+    "FULL EG0"
+   ],
+   "known_weapons": 8,
+   "seen_in_events": 2,
+   "size": 8,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "2H_AXE_AVALON",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET2",
+    "2H_KNUCKLES_SET3",
+    "MAIN_CURSEDSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "BRIGA D BAR",
+    "Destin0 Final",
+    "Eximios",
+    "Fount N Mist Lumber Co",
+    "Los carneros",
+    "Nido de Hrafn",
+    "T-A-C-O-S",
+    "YOU_ARE_DEAD"
+   ],
+   "known_weapons": 8,
+   "seen_in_events": 1,
+   "size": 8,
+   "weapons": [
+    "2H_HOLYSTAFF",
+    "2H_HOLYSTAFF_HELL",
+    "2H_LONGBOW",
+    "2H_POLEHAMMER",
+    "2H_QUARTERSTAFF",
+    "MAIN_HOLYSTAFF",
+    "MAIN_ROCKMACE_KEEPER",
+    "MAIN_SPEAR"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "ASP3RA",
+    "Catadores de Toto",
+    "ENTERT4INMENT",
+    "MacroStrategy",
+    "Martlock Survivors",
+    "Romanos Invasores",
+    "THRONES OF THE ABYSS",
+    "The Travelers Gg"
+   ],
+   "known_weapons": 8,
+   "seen_in_events": 11,
+   "size": 8,
+   "weapons": [
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HAMMER_CRYSTAL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_HELL",
+    "2H_LONGBOW",
+    "2H_LONGBOW",
+    "2H_SHAPESHIFTER_KEEPER",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "CORRUPT0S",
+    "I M O R T A I S",
+    "LA PUTI BOMB",
+    "One-Day",
+    "picanha do lula"
+   ],
+   "known_weapons": 8,
+   "seen_in_events": 3,
+   "size": 8,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_AXE_AVALON",
+    "2H_BOW_KEEPER",
+    "2H_DAGGER_KATAR_AVALON",
+    "2H_DAGGER_KATAR_AVALON",
+    "2H_KNUCKLES_SET3",
+    "2H_MACE",
+    "MAIN_CURSEDSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439399553,
+   "guilds": [
+    "Laughing-Coffinn"
+   ],
+   "known_weapons": 8,
+   "seen_in_events": 3,
+   "size": 8,
+   "weapons": [
+    "2H_CLAWPAIR",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_LONGBOW",
+    "2H_QUARTERSTAFF",
+    "2H_QUARTERSTAFF_AVALON",
+    "2H_SPEAR",
+    "MAIN_FROSTSTAFF",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439418472,
+   "guilds": [
+    "Benevolent Kool Aid",
+    "Never Care"
+   ],
+   "known_weapons": 8,
+   "seen_in_events": 3,
+   "size": 8,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_CLAWPAIR",
+    "2H_CLAWPAIR",
+    "2H_DOUBLEBLADEDSTAFF",
+    "2H_DUALAXE_KEEPER",
+    "2H_ROCKSTAFF_KEEPER",
+    "MAIN_FROSTSTAFF",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439419129,
+   "guilds": [
+    "BELEGHOST",
+    "IFures"
+   ],
+   "known_weapons": 8,
+   "seen_in_events": 5,
+   "size": 8,
+   "weapons": [
+    "2H_CLAYMORE_AVALON",
+    "2H_CROSSBOWLARGE",
+    "2H_CROSSBOW_CANNON_AVALON",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_LONGBOW",
+    "2H_NATURESTAFF_HELL",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_SPEAR_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439421956,
+   "guilds": [
+    "M B M",
+    "cosplays minions"
+   ],
+   "known_weapons": 8,
+   "seen_in_events": 11,
+   "size": 8,
+   "weapons": [
+    "2H_AXE",
+    "2H_BOW_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HOLYSTAFF",
+    "2H_LONGBOW",
+    "2H_MACE_MORGANA",
+    "2H_QUARTERSTAFF_AVALON",
+    "MAIN_FROSTSTAFF_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439426961,
+   "guilds": [
+    "Benevolent Kool Aid",
+    "Never Care"
+   ],
+   "known_weapons": 8,
+   "seen_in_events": 1,
+   "size": 8,
+   "weapons": [
+    "2H_CLAWPAIR",
+    "2H_CLAWPAIR",
+    "2H_DAGGERPAIR",
+    "2H_DAGGERPAIR",
+    "2H_KNUCKLES_AVALON",
+    "2H_QUARTERSTAFF_AVALON",
+    "MAIN_FROSTSTAFF",
+    "MAIN_FROSTSTAFF"
+   ]
+  },
+  {
+   "battle": 1439432736,
+   "guilds": [
+    "Benevolent Kool Aid",
+    "Never Care"
+   ],
+   "known_weapons": 8,
+   "seen_in_events": 1,
+   "size": 8,
+   "weapons": [
+    "2H_DOUBLEBLADEDSTAFF",
+    "2H_DUALAXE_KEEPER",
+    "2H_NATURESTAFF_HELL",
+    "MAIN_FROSTSTAFF",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE_CRYSTAL"
+   ]
+  },
+  {
+   "battle": 1439433903,
+   "guilds": [
+    "0rden del Cuervo",
+    "Cuervos del Yunque",
+    "EVERLOCK",
+    "Lendarios BR",
+    "Martlockanos"
+   ],
+   "known_weapons": 7,
+   "seen_in_events": 1,
+   "size": 8,
+   "weapons": [
+    "2H_BOW_KEEPER",
+    "2H_DUALAXE_KEEPER",
+    "2H_DUALMACE_AVALON",
+    "2H_NATURESTAFF",
+    "2H_QUARTERSTAFF",
+    "MAIN_FIRESTAFF",
+    "MAIN_SPEAR_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439436835,
+   "guilds": [
+    "X Y R I S",
+    "xX Dopaacs Xx"
+   ],
+   "known_weapons": 8,
+   "seen_in_events": 1,
+   "size": 8,
+   "weapons": [
+    "2H_AXE",
+    "2H_CLEAVER_HELL",
+    "2H_CROSSBOW_CANNON_AVALON",
+    "2H_INFERNOSTAFF_MORGANA",
+    "2H_LONGBOW",
+    "2H_QUARTERSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE_HELL"
+   ]
+  },
+  {
+   "battle": 1439436835,
+   "guilds": [
+    "Ceniza Del Vacio",
+    "Hard Bass Land",
+    "Los Monkys Locos"
+   ],
+   "known_weapons": 8,
+   "seen_in_events": 9,
+   "size": 8,
+   "weapons": [
+    "2H_BOW_KEEPER",
+    "2H_CLAYMORE_AVALON",
+    "2H_FROSTSTAFF_CRYSTAL",
+    "2H_HAMMER_AVALON",
+    "2H_HOLYSTAFF_UNDEAD",
+    "2H_INFERNOSTAFF_MORGANA",
+    "MAIN_CURSEDSTAFF_AVALON",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439392325,
+   "guilds": [
+    "Annoyed Goofies",
+    "Benevolent Kool Aids",
+    "Obsidian Blades"
+   ],
+   "known_weapons": 7,
+   "seen_in_events": 6,
+   "size": 7,
+   "weapons": [
+    "2H_CLAWPAIR",
+    "2H_CLAWPAIR",
+    "2H_GLAIVE",
+    "2H_GLAIVE",
+    "2H_LONGBOW_UNDEAD",
+    "MAIN_FROSTSTAFF",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439398697,
+   "guilds": [
+    "Gati Army",
+    "Jack Bank",
+    "SuperSonic LegendS",
+    "Xyra"
+   ],
+   "known_weapons": 7,
+   "seen_in_events": 2,
+   "size": 7,
+   "weapons": [
+    "2H_HOLYSTAFF",
+    "MAIN_FIRESTAFF_KEEPER",
+    "MAIN_FIRESTAFF_KEEPER",
+    "MAIN_FROSTSTAFF_KEEPER",
+    "MAIN_NATURESTAFF_KEEPER",
+    "MAIN_SPEAR_KEEPER",
+    "MAIN_SPEAR_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "VASH ESTAMPIDA"
+   ],
+   "known_weapons": 7,
+   "seen_in_events": 2,
+   "size": 7,
+   "weapons": [
+    "2H_BOW_HELL",
+    "2H_CROSSBOW_CANNON_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_INFERNOSTAFF_MORGANA",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "Got Talent",
+    "Keepers of the Quagmire"
+   ],
+   "known_weapons": 7,
+   "seen_in_events": 4,
+   "size": 7,
+   "weapons": [
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "Hold My Pocket"
+   ],
+   "known_weapons": 7,
+   "seen_in_events": 1,
+   "size": 7,
+   "weapons": [
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_HARPOON_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_UNDEAD"
+   ]
+  },
+  {
+   "battle": 1439404807,
+   "guilds": [
+    "GENEI RY0D4N"
+   ],
+   "known_weapons": 7,
+   "seen_in_events": 26,
+   "size": 7,
+   "weapons": [
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_HARPOON_HELL",
+    "2H_KNUCKLES_SET2",
+    "2H_LONGBOW",
+    "2H_LONGBOW",
+    "2H_MACE",
+    "2H_NATURESTAFF_HELL"
+   ]
+  },
+  {
+   "battle": 1439405871,
+   "guilds": [
+    "X Y R I S",
+    "xX Dopaacs Xx"
+   ],
+   "known_weapons": 7,
+   "seen_in_events": 19,
+   "size": 7,
+   "weapons": [
+    "2H_CROSSBOW_CANNON_AVALON",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_INFERNOSTAFF_MORGANA",
+    "2H_LONGBOW",
+    "2H_QUARTERSTAFF",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_MACE_HELL"
+   ]
+  },
+  {
+   "battle": 1439421956,
+   "guilds": [
+    "Sprint With Me",
+    "The Celestial Lions"
+   ],
+   "known_weapons": 7,
+   "seen_in_events": 23,
+   "size": 7,
+   "weapons": [
+    "2H_CLEAVER_HELL",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_HAMMER_AVALON",
+    "2H_ICECRYSTAL_UNDEAD",
+    "2H_KNUCKLES_KEEPER",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439392919,
+   "guilds": [
+    "SWORDX"
+   ],
+   "known_weapons": 6,
+   "seen_in_events": 1,
+   "size": 6,
+   "weapons": [
+    "2H_CROSSBOW_CANNON_AVALON",
+    "2H_LONGBOW",
+    "2H_LONGBOW_UNDEAD",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_HOLYSTAFF_AVALON",
+    "MAIN_SPEAR_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [
+    "MKRss",
+    "NO HOLDING",
+    "Ninja In Pyjama",
+    "Victory or Valhalla - NA"
+   ],
+   "known_weapons": 6,
+   "seen_in_events": 17,
+   "size": 6,
+   "weapons": [
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "MAIN_ARCANESTAFF_UNDEAD"
+   ]
+  },
+  {
+   "battle": 1439404807,
+   "guilds": [
+    "A S T R A L I U M",
+    "F7_X-I-T-E-D",
+    "So bad its funny",
+    "ThetSOV"
+   ],
+   "known_weapons": 6,
+   "seen_in_events": 1,
+   "size": 6,
+   "weapons": [
+    "2H_BOW_AVALON",
+    "2H_KNUCKLES_SET2",
+    "MAIN_FROSTSTAFF",
+    "MAIN_FROSTSTAFF",
+    "MAIN_HOLYSTAFF",
+    "MAIN_SPEAR"
+   ]
+  },
+  {
+   "battle": 1439404807,
+   "guilds": [
+    "Gati Army",
+    "Jack Bank",
+    "SuperSonic LegendS",
+    "Xyra"
+   ],
+   "known_weapons": 6,
+   "seen_in_events": 30,
+   "size": 6,
+   "weapons": [
+    "2H_HOLYSTAFF",
+    "MAIN_FIRESTAFF_KEEPER",
+    "MAIN_FIRESTAFF_KEEPER",
+    "MAIN_FROSTSTAFF_KEEPER",
+    "MAIN_NATURESTAFF_KEEPER",
+    "MAIN_SPEAR_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439411133,
+   "guilds": [
+    "MKRss",
+    "NO HOLDING",
+    "Ninja In Pyjama",
+    "Victory or Valhalla - NA"
+   ],
+   "known_weapons": 6,
+   "seen_in_events": 7,
+   "size": 6,
+   "weapons": [
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_ICECRYSTAL_UNDEAD",
+    "MAIN_ARCANESTAFF_UNDEAD"
+   ]
+  },
+  {
+   "battle": 1439411133,
+   "guilds": [
+    "I SURGE I",
+    "NO HOLDING",
+    "Roadside Reapers",
+    "Upside"
+   ],
+   "known_weapons": 6,
+   "seen_in_events": 4,
+   "size": 6,
+   "weapons": [
+    "2H_BOW_AVALON",
+    "2H_CROSSBOW_CANNON_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_DUALMACE_AVALON",
+    "2H_ENIGMATICSTAFF",
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439418472,
+   "guilds": [
+    "Benevolent Kool Aid",
+    "Never Care"
+   ],
+   "known_weapons": 6,
+   "seen_in_events": 2,
+   "size": 6,
+   "weapons": [
+    "2H_CLAWPAIR",
+    "2H_DAGGERPAIR",
+    "2H_DOUBLEBLADEDSTAFF",
+    "2H_NATURESTAFF_HELL",
+    "2H_QUARTERSTAFF_AVALON",
+    "MAIN_FROSTSTAFF"
+   ]
+  },
+  {
+   "battle": 1439419213,
+   "guilds": [
+    "DARK MARINES",
+    "This-Promise"
+   ],
+   "known_weapons": 5,
+   "seen_in_events": 2,
+   "size": 6,
+   "weapons": [
+    "2H_LONGBOW",
+    "2H_WARBOW",
+    "MAIN_AXE",
+    "MAIN_CURSEDSTAFF",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439421956,
+   "guilds": [
+    "Gati Army",
+    "Jack Bank",
+    "Xyra"
+   ],
+   "known_weapons": 6,
+   "seen_in_events": 7,
+   "size": 6,
+   "weapons": [
+    "2H_MACE_MORGANA",
+    "MAIN_FIRESTAFF_KEEPER",
+    "MAIN_FIRESTAFF_KEEPER",
+    "MAIN_FROSTSTAFF_KEEPER",
+    "MAIN_SPEAR_KEEPER",
+    "MAIN_SPEAR_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439432736,
+   "guilds": [
+    "Benevolent Kool Aid",
+    "Never Care"
+   ],
+   "known_weapons": 6,
+   "seen_in_events": 1,
+   "size": 6,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_DAGGERPAIR",
+    "2H_DUALAXE_KEEPER",
+    "2H_DUALAXE_KEEPER",
+    "2H_KNUCKLES_AVALON",
+    "2H_QUARTERSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439444049,
+   "guilds": [
+    "GENEI RY0D4N",
+    "La Taberna Runica",
+    "Legion_Martlock",
+    "Montaraces",
+    "The_Genei Ryodan"
+   ],
+   "known_weapons": 6,
+   "seen_in_events": 1,
+   "size": 6,
+   "weapons": [
+    "2H_CROSSBOW",
+    "2H_CROSSBOWLARGE_MORGANA",
+    "2H_KNUCKLES_SET1",
+    "2H_LONGBOW",
+    "2H_QUARTERSTAFF",
+    "MAIN_1HCROSSBOW"
+   ]
+  },
+  {
+   "battle": 1439398697,
+   "guilds": [
+    "ILUMINATICS CORP",
+    "Insanos por PVE",
+    "R - I - S - E",
+    "Sprint With Me"
+   ],
+   "known_weapons": 5,
+   "seen_in_events": 1,
+   "size": 5,
+   "weapons": [
+    "2H_LONGBOW",
+    "MAIN_FIRESTAFF",
+    "MAIN_FROSTSTAFF",
+    "MAIN_NATURESTAFF",
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439398697,
+   "guilds": [
+    "GENEI RY0D4N"
+   ],
+   "known_weapons": 5,
+   "seen_in_events": 9,
+   "size": 5,
+   "weapons": [
+    "2H_HARPOON_HELL",
+    "2H_KNUCKLES_SET2",
+    "2H_LONGBOW",
+    "2H_MACE",
+    "2H_NATURESTAFF_HELL"
+   ]
+  },
+  {
+   "battle": 1439399044,
+   "guilds": [
+    "So os Buchas"
+   ],
+   "known_weapons": 5,
+   "seen_in_events": 1,
+   "size": 5,
+   "weapons": [
+    "2H_CLAYMORE_AVALON",
+    "2H_HALBERD",
+    "2H_LONGBOW",
+    "MAIN_FIRESTAFF",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "YOU_ARE_DEAD",
+    "the king of thetford"
+   ],
+   "known_weapons": 5,
+   "seen_in_events": 1,
+   "size": 5,
+   "weapons": [
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_WILDSTAFF",
+    "MAIN_HOLYSTAFF",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439399553,
+   "guilds": [
+    "R E Q U 1 E M"
+   ],
+   "known_weapons": 5,
+   "seen_in_events": 1,
+   "size": 5,
+   "weapons": [
+    "2H_DUALMACE_AVALON",
+    "2H_KNUCKLES_SET2",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_DAGGER_HELL",
+    "MAIN_FROSTSTAFF"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [
+    "BombSS",
+    "PllVAS",
+    "RADlANT",
+    "True Gentleman",
+    "soplame la vela"
+   ],
+   "known_weapons": 5,
+   "seen_in_events": 6,
+   "size": 5,
+   "weapons": [
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "2H_BOW_HELL",
+    "MAIN_ARCANESTAFF_UNDEAD",
+    "MAIN_CURSEDSTAFF_UNDEAD"
+   ]
+  },
+  {
+   "battle": 1439408052,
+   "guilds": [
+    "Last Dead",
+    "YOU_ARE_DEAD"
+   ],
+   "known_weapons": 5,
+   "seen_in_events": 4,
+   "size": 5,
+   "weapons": [
+    "2H_CURSEDSTAFF_MORGANA",
+    "2H_GLAIVE_CRYSTAL",
+    "2H_LONGBOW",
+    "2H_NATURESTAFF_HELL",
+    "2H_SHAPESHIFTER_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439408052,
+   "guilds": [
+    "HIERRO 55",
+    "Los Escudos de Huitzilopochtli",
+    "Project OO"
+   ],
+   "known_weapons": 5,
+   "seen_in_events": 1,
+   "size": 5,
+   "weapons": [
+    "2H_BOW_KEEPER",
+    "2H_MACE_MORGANA",
+    "2H_NATURESTAFF",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_SWORD"
+   ]
+  },
+  {
+   "battle": 1439418472,
+   "guilds": [
+    "Benevolent Kool Aid"
+   ],
+   "known_weapons": 5,
+   "seen_in_events": 1,
+   "size": 5,
+   "weapons": [
+    "2H_CLAWPAIR",
+    "2H_DUALAXE_KEEPER",
+    "2H_ENIGMATICORB_MORGANA",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_FROSTSTAFF"
+   ]
+  },
+  {
+   "battle": 1439418472,
+   "guilds": [
+    "Benevolent Kool Aid",
+    "Never Care"
+   ],
+   "known_weapons": 5,
+   "seen_in_events": 1,
+   "size": 5,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "2H_DOUBLEBLADEDSTAFF",
+    "2H_NATURESTAFF_HELL",
+    "2H_QUARTERSTAFF_AVALON",
+    "2H_ROCKSTAFF_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439395225,
+   "guilds": [
+    "N I G H T C A L L"
+   ],
+   "known_weapons": 4,
+   "seen_in_events": 1,
+   "size": 4,
+   "weapons": [
+    "2H_ARCANESTAFF_HELL",
+    "2H_CROSSBOW_CANNON_AVALON",
+    "2H_CURSEDSTAFF_MORGANA",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "Catadores de Toto",
+    "Project OO"
+   ],
+   "known_weapons": 4,
+   "seen_in_events": 1,
+   "size": 4,
+   "weapons": [
+    "2H_NATURESTAFF",
+    "MAIN_RAPIER_MORGANA",
+    "MAIN_RAPIER_MORGANA",
+    "MAIN_SWORD"
+   ]
+  },
+  {
+   "battle": 1439402628,
+   "guilds": [
+    "CARTEL DEL GOLF0",
+    "Road to Mamut Corporation"
+   ],
+   "known_weapons": 4,
+   "seen_in_events": 3,
+   "size": 4,
+   "weapons": [
+    "2H_BOW",
+    "2H_DAGGERPAIR",
+    "2H_DUALSWORD",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439403931,
+   "guilds": [
+    "Les Derniers Samourai",
+    "TeJoNeS eZqUiZoFreNiCoS"
+   ],
+   "known_weapons": 4,
+   "seen_in_events": 3,
+   "size": 4,
+   "weapons": [
+    "2H_BOW_KEEPER",
+    "2H_KNUCKLES_SET2",
+    "2H_LONGBOW",
+    "MAIN_FIRESTAFF_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439403931,
+   "guilds": [
+    "VENENO BLACK"
+   ],
+   "known_weapons": 4,
+   "seen_in_events": 1,
+   "size": 4,
+   "weapons": [
+    "2H_COMBATSTAFF_MORGANA",
+    "2H_DOUBLEBLADEDSTAFF",
+    "2H_QUARTERSTAFF",
+    "2H_QUARTERSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439403931,
+   "guilds": [
+    "GREMITIUS",
+    "Pay_For_It",
+    "Un Monton de Gordas"
+   ],
+   "known_weapons": 4,
+   "seen_in_events": 1,
+   "size": 4,
+   "weapons": [
+    "2H_AXE",
+    "2H_HOLYSTAFF_UNDEAD",
+    "2H_MACE_MORGANA",
+    "MAIN_FROSTSTAFF"
+   ]
+  },
+  {
+   "battle": 1439405871,
+   "guilds": [
+    "BRIGA D BAR",
+    "Escolinha do Bar"
+   ],
+   "known_weapons": 4,
+   "seen_in_events": 1,
+   "size": 4,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "MAIN_CURSEDSTAFF_UNDEAD",
+    "MAIN_HAMMER",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439408604,
+   "guilds": [
+    "Catadores de Toto",
+    "HIERRO 55"
+   ],
+   "known_weapons": 4,
+   "seen_in_events": 3,
+   "size": 4,
+   "weapons": [
+    "2H_BOW_KEEPER",
+    "2H_MACE_MORGANA",
+    "MAIN_RAPIER_MORGANA",
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439419213,
+   "guilds": [
+    "Furia Nocturnx"
+   ],
+   "known_weapons": 3,
+   "seen_in_events": 1,
+   "size": 4,
+   "weapons": [
+    "2H_INFERNOSTAFF_MORGANA",
+    "MAIN_MACE_HELL",
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439426961,
+   "guilds": [
+    "Benevolent Kool Aid"
+   ],
+   "known_weapons": 4,
+   "seen_in_events": 1,
+   "size": 4,
+   "weapons": [
+    "2H_DAGGERPAIR",
+    "2H_DUALAXE_KEEPER",
+    "MAIN_FROSTSTAFF",
+    "MAIN_FROSTSTAFF"
+   ]
+  },
+  {
+   "battle": 1439432736,
+   "guilds": [
+    "Benevolent Kool Aid"
+   ],
+   "known_weapons": 4,
+   "seen_in_events": 1,
+   "size": 4,
+   "weapons": [
+    "2H_DAGGERPAIR",
+    "2H_DUALSICKLE_UNDEAD",
+    "MAIN_FROSTSTAFF",
+    "MAIN_FROSTSTAFF"
+   ]
+  },
+  {
+   "battle": 1439436835,
+   "guilds": [
+    "Take Care"
+   ],
+   "known_weapons": 4,
+   "seen_in_events": 4,
+   "size": 4,
+   "weapons": [
+    "2H_DUALHAMMER_HELL",
+    "2H_HAMMER",
+    "MAIN_AXE",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439392325,
+   "guilds": [
+    "Upside"
+   ],
+   "known_weapons": 3,
+   "seen_in_events": 2,
+   "size": 3,
+   "weapons": [
+    "2H_KNUCKLES_SET2",
+    "MAIN_CURSEDSTAFF_CRYSTAL",
+    "MAIN_HOLYSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439392325,
+   "guilds": [
+    "Upside"
+   ],
+   "known_weapons": 3,
+   "seen_in_events": 1,
+   "size": 3,
+   "weapons": [
+    "2H_DUALMACE_AVALON",
+    "MAIN_CURSEDSTAFF_CRYSTAL",
+    "MAIN_CURSEDSTAFF_UNDEAD"
+   ]
+  },
+  {
+   "battle": 1439395225,
+   "guilds": [
+    "Benevolent Kool Aid",
+    "Never Care"
+   ],
+   "known_weapons": 3,
+   "seen_in_events": 2,
+   "size": 3,
+   "weapons": [
+    "2H_DOUBLEBLADEDSTAFF",
+    "2H_DOUBLEBLADEDSTAFF",
+    "MAIN_FROSTSTAFF"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "Silent Partners"
+   ],
+   "known_weapons": 3,
+   "seen_in_events": 1,
+   "size": 3,
+   "weapons": [
+    "2H_CROSSBOW",
+    "2H_DAGGERPAIR",
+    "MAIN_FROSTSTAFF"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "Catadores de Toto"
+   ],
+   "known_weapons": 3,
+   "seen_in_events": 1,
+   "size": 3,
+   "weapons": [
+    "2H_KNUCKLES_HELL",
+    "2H_NATURESTAFF_HELL",
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [
+    "Commotion",
+    "Evil AssassinsGreed",
+    "I Nothing I"
+   ],
+   "known_weapons": 3,
+   "seen_in_events": 2,
+   "size": 3,
+   "weapons": [
+    "2H_ARCANESTAFF",
+    "MAIN_CURSEDSTAFF_AVALON",
+    "MAIN_CURSEDSTAFF_UNDEAD"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [
+    "Eikonic",
+    "Steel Brotherho0d"
+   ],
+   "known_weapons": 3,
+   "seen_in_events": 3,
+   "size": 3,
+   "weapons": [
+    "2H_BOW",
+    "2H_LONGBOW",
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [
+    "Chubby Lovers"
+   ],
+   "known_weapons": 3,
+   "seen_in_events": 2,
+   "size": 3,
+   "weapons": [
+    "2H_BOW_HELL",
+    "2H_KNUCKLES_HELL",
+    "2H_LONGBOW"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [
+    "Eikonic",
+    "The Lonely Skibidi",
+    "The Rugrats"
+   ],
+   "known_weapons": 2,
+   "seen_in_events": 1,
+   "size": 3,
+   "weapons": [
+    "2H_FIRE_RINGPAIR_AVALON",
+    "2H_LONGBOW"
+   ]
+  },
+  {
+   "battle": 1439400982,
+   "guilds": [
+    "Escarveil",
+    "R0YAL_KNIGHTS",
+    "WON PIECE"
+   ],
+   "known_weapons": 3,
+   "seen_in_events": 1,
+   "size": 3,
+   "weapons": [
+    "2H_QUARTERSTAFF",
+    "2H_WILDSTAFF",
+    "MAIN_FIRESTAFF"
+   ]
+  },
+  {
+   "battle": 1439402628,
+   "guilds": [
+    "IFomes"
+   ],
+   "known_weapons": 3,
+   "seen_in_events": 2,
+   "size": 3,
+   "weapons": [
+    "2H_DUALAXE_KEEPER",
+    "2H_QUARTERSTAFF_AVALON",
+    "MAIN_DAGGER"
+   ]
+  },
+  {
+   "battle": 1439408052,
+   "guilds": [
+    "Catadores de Toto",
+    "R E Q U 1 E M"
+   ],
+   "known_weapons": 3,
+   "seen_in_events": 1,
+   "size": 3,
+   "weapons": [
+    "2H_DUALSCIMITAR_UNDEAD",
+    "2H_LONGBOW",
+    "2H_SHAPESHIFTER_CRYSTAL"
+   ]
+  },
+  {
+   "battle": 1439426961,
+   "guilds": [
+    "Benevolent Kool Aid"
+   ],
+   "known_weapons": 3,
+   "seen_in_events": 1,
+   "size": 3,
+   "weapons": [
+    "2H_CLAWPAIR",
+    "2H_DUALAXE_KEEPER",
+    "2H_DUALSICKLE_UNDEAD"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "IT s ShoW TimE",
+    "picanha do lula"
+   ],
+   "known_weapons": 2,
+   "seen_in_events": 1,
+   "size": 2,
+   "weapons": [
+    "2H_DAGGER_KATAR_AVALON",
+    "2H_QUARTERSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "CORRUPT0S",
+    "The _Toman"
+   ],
+   "known_weapons": 2,
+   "seen_in_events": 1,
+   "size": 2,
+   "weapons": [
+    "2H_KNUCKLES_SET3",
+    "MAIN_SWORD_CRYSTAL"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "HIERRO 55",
+    "Los Escudos de Huitzilopochtli"
+   ],
+   "known_weapons": 2,
+   "seen_in_events": 1,
+   "size": 2,
+   "weapons": [
+    "2H_BOW_KEEPER",
+    "MAIN_CURSEDSTAFF_UNDEAD"
+   ]
+  },
+  {
+   "battle": 1439399553,
+   "guilds": [
+    "R E Q U 1 E M"
+   ],
+   "known_weapons": 2,
+   "seen_in_events": 1,
+   "size": 2,
+   "weapons": [
+    "2H_AXE_AVALON",
+    "2H_KNUCKLES_SET2"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [],
+   "known_weapons": 2,
+   "seen_in_events": 1,
+   "size": 2,
+   "weapons": [
+    "2H_DUALMACE_AVALON",
+    "MAIN_ARCANESTAFF_UNDEAD"
+   ]
+  },
+  {
+   "battle": 1439404807,
+   "guilds": [
+    "DARKM1GHT",
+    "Jun Sannin"
+   ],
+   "known_weapons": 2,
+   "seen_in_events": 1,
+   "size": 2,
+   "weapons": [
+    "2H_FROSTSTAFF_CRYSTAL",
+    "2H_KNUCKLES_SET2"
+   ]
+  },
+  {
+   "battle": 1439417932,
+   "guilds": [
+    "Faction Army",
+    "Focus healer"
+   ],
+   "known_weapons": 2,
+   "seen_in_events": 1,
+   "size": 2,
+   "weapons": [
+    "2H_DUALAXE_KEEPER",
+    "2H_QUARTERSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439419213,
+   "guilds": [
+    "Faction Army",
+    "Focus healer"
+   ],
+   "known_weapons": 2,
+   "seen_in_events": 1,
+   "size": 2,
+   "weapons": [
+    "2H_DUALAXE_KEEPER",
+    "2H_QUARTERSTAFF_AVALON"
+   ]
+  },
+  {
+   "battle": 1439419213,
+   "guilds": [
+    "Blessed Hermanos Eternal"
+   ],
+   "known_weapons": 2,
+   "seen_in_events": 1,
+   "size": 2,
+   "weapons": [
+    "2H_DAGGERPAIR_CRYSTAL",
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439444049,
+   "guilds": [
+    "Evil-Gank",
+    "Mafia Farmera"
+   ],
+   "known_weapons": 2,
+   "seen_in_events": 1,
+   "size": 2,
+   "weapons": [
+    "2H_DAGGERPAIR",
+    "2H_DUALCROSSBOW_HELL"
+   ]
+  },
+  {
+   "battle": 1439392325,
+   "guilds": [
+    "Upside"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 2,
+   "size": 1,
+   "weapons": [
+    "2H_AXE_AVALON"
+   ]
+  },
+  {
+   "battle": 1439398697,
+   "guilds": [
+    "O U T N U M B 3 R E D"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_DAGGER_KATAR_AVALON"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "YOU_ARE_DEAD"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_BOW_AVALON"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "Martlock Survivors"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 7,
+   "size": 1,
+   "weapons": [
+    "2H_GLACIALSTAFF"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_FIRE_RINGPAIR_AVALON"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "MacroStrategy"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_CROSSBOW_CANNON_AVALON"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "SOMBRAS ASESINAS RD"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_QUARTERSTAFF"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "Commotion"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_CLAYMORE_AVALON"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [],
+   "known_weapons": 1,
+   "seen_in_events": 2,
+   "size": 1,
+   "weapons": [
+    "2H_GLACIALSTAFF"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "Laus Murmuri"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_INFERNOSTAFF_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "Martelo Forte"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "FLASH BANG"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_SHAPESHIFTER_SET2"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "Sprint With Me"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "MAIN_FIRESTAFF_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "xFATAL FURYx"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439399126,
+   "guilds": [
+    "Bryllanos"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "MAIN_ARCANESTAFF_UNDEAD"
+   ]
+  },
+  {
+   "battle": 1439399553,
+   "guilds": [],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "MAIN_DAGGER"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [
+    "Mafia Sindical"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_DAGGER_KATAR_AVALON"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [
+    "Militant"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 2,
+   "size": 1,
+   "weapons": [
+    "2H_INFERNOSTAFF_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439400102,
+   "guilds": [
+    "H-E-L-H-E-I-M"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_TRIDENT_UNDEAD"
+   ]
+  },
+  {
+   "battle": 1439400982,
+   "guilds": [
+    "Los 0cupas"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 3,
+   "size": 1,
+   "weapons": [
+    "2H_KNUCKLES_SET3"
+   ]
+  },
+  {
+   "battle": 1439400982,
+   "guilds": [
+    "LEGIONS ALFA"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "MAIN_CURSEDSTAFF"
+   ]
+  },
+  {
+   "battle": 1439402628,
+   "guilds": [],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439402628,
+   "guilds": [
+    "Upside"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_DUALAXE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439404807,
+   "guilds": [
+    "Grimboow"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_QUARTERSTAFF"
+   ]
+  },
+  {
+   "battle": 1439404807,
+   "guilds": [
+    "No Guild Agrees"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_QUARTERSTAFF"
+   ]
+  },
+  {
+   "battle": 1439404807,
+   "guilds": [
+    "FLASH BANG"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 4,
+   "size": 1,
+   "weapons": [
+    "2H_KNUCKLES_SET2"
+   ]
+  },
+  {
+   "battle": 1439404807,
+   "guilds": [
+    "Jun Sannin"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_LONGBOW"
+   ]
+  },
+  {
+   "battle": 1439404807,
+   "guilds": [
+    "DULUK"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "MAIN_AXE"
+   ]
+  },
+  {
+   "battle": 1439405871,
+   "guilds": [
+    "Wanted PKS"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 2,
+   "size": 1,
+   "weapons": [
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439407887,
+   "guilds": [
+    "Never Care"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_KNUCKLES_AVALON"
+   ]
+  },
+  {
+   "battle": 1439408052,
+   "guilds": [
+    "Explore The World"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "MAIN_FIRESTAFF_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439408052,
+   "guilds": [
+    "ImperialJade"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "MAIN_MACE"
+   ]
+  },
+  {
+   "battle": 1439408052,
+   "guilds": [
+    "Repercussion"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_CROSSBOW_CANNON_AVALON"
+   ]
+  },
+  {
+   "battle": 1439408052,
+   "guilds": [
+    "Martelo Forte"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 2,
+   "size": 1,
+   "weapons": [
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439408052,
+   "guilds": [],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_GLACIALSTAFF"
+   ]
+  },
+  {
+   "battle": 1439408052,
+   "guilds": [
+    "U Are My Profit"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "MAIN_ROCKMACE_KEEPER"
+   ]
+  },
+  {
+   "battle": 1439411133,
+   "guilds": [
+    "Romanos Invasores"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 3,
+   "size": 1,
+   "weapons": [
+    "2H_KNUCKLES_SET2"
+   ]
+  },
+  {
+   "battle": 1439417932,
+   "guilds": [
+    "YOU_ARE_DEAD"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_INFERNOSTAFF_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439419213,
+   "guilds": [
+    "N A G A S A K l"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "MAIN_RAPIER_MORGANA"
+   ]
+  },
+  {
+   "battle": 1439444049,
+   "guilds": [
+    "l SKYPIEA l"
+   ],
+   "known_weapons": 1,
+   "seen_in_events": 1,
+   "size": 1,
+   "weapons": [
+    "2H_DAGGER_KATAR_AVALON"
+   ]
+  }
+ ],
+ "semantics": "GroupMembers from official gameinfo kill events: the KILLER'S PARTY at kill time, deduplicated per battle by member-name set. WINNER-BIASED \u2014 a party that killed nobody never appears. A party is not a comp: a large battle is a coalition of parties. DISPLAY/EVIDENCE ONLY, never a scoring input.",
+ "summary": {
+  "battles": 39,
+  "median_coverage": 0.815,
+  "parties": 193,
+  "parties_5plus": 116,
+  "parties_full_gear": 184
+ }
+}

@@ -1078,3 +1078,74 @@ entry is closed and the historical statement kept for the record.
 Full battery green with the gate live: golden, forge, parity, validation-modes,
 roles, interactions, builds, provenance, patch-history, cohort-families,
 display-math, codec, evidence-lint, tier2.
+
+## Real party rosters from the killboard (2026-08-29)
+
+Owner asked how to see what was in a killer's party. It turns out the data
+exists and this project was not using it.
+
+**The finding that unlocked it: `GroupMembers`.** Every official gameinfo kill
+event carries the KILLER'S PARTY at kill time, each member with equipment,
+plus `Participants` (who damaged the victim). albionbb strips both fields;
+the official API keeps them. That is a real party roster — the exact unit the
+engine models — available at killboard scale, against a comp corpus of 36
+published compositions.
+
+**A standing note in CLAUDE.md is now WRONG and was corrected:** "the official
+gameinfo events endpoint 504s constantly" (verified 2026-08-13). Re-tested
+2026-08-29 — events LIST, battles LIST and single-event detail all returned
+200 in under a second, first try, and a 25-event probe succeeded 25/25 with
+retry. Either it was a transient outage or it has been fixed. albionbb is
+still preferred for DISCOVERY because it is the only source with a
+`minPlayers` filter.
+
+**THE THREE-STEP PIPELINE** (`pipeline/sample_parties.py`, network step, never
+part of a normal build), each step present because the previous one cannot
+answer the question:
+
+  1. DISCOVERY  albionbb `/battles?minPlayers=N` — the size filter. Fight size
+                comes from the battle LIST (`totalPlayers`); kill events carry
+                no size at all.
+  2. ROSTER     official `/battles/{id}` — EVERY player in the fight. No
+                equipment, but it is the honest DENOMINATOR: coverage becomes
+                measured instead of assumed.
+  3. PARTIES    official `/events/{id}` per kill — `GroupMembers` with gear.
+
+**FIRST HARVEST: 39 battles -> 193 distinct parties, 116 of size 5+, 184 with
+every member's weapon known, median per-battle coverage 0.815.** Size
+distribution reaches the top: 7 full 20-mans, 9 nineteens, 9 eighteens.
+**109 parties of 5+ carry a complete weapon list** — three times the published
+corpus, from fights that actually happened.
+
+**TWO BUGS FOUND IN MY OWN OUTPUT, both caught by numbers that could not be
+true.** Recording them because both are properties of the data, not slips:
+
+1. **Coverage came out at 1.061 — above 100%.** `GroupMembers` reports the
+   killer's WHOLE party including members who were NOT at that battle (a
+   20-man party with 8 people present still lists 20). Dividing by
+   `totalPlayers` therefore counted people the denominator never had.
+   Coverage now intersects the seen set with the official battle roster, and
+   the remainder is reported separately as
+   `party_members_not_in_this_battle` rather than silently inflating it.
+2. **One squad was counted five times.** Keying dedupe on the exact member-set
+   is not enough: a party loses members as they die, so a single 19-man
+   emitted 19/18/15/14/13-member arrays and read as five parties — which
+   would have multiplied that squad's weapons by its kill count and wrecked
+   every size statistic. Parties are now clustered by member OVERLAP (>50% of
+   the smaller set) and the LARGEST observation wins. On the validation batch
+   this collapsed 14 "parties" to 9 real squads.
+
+**Standing caveats, carried in the artifact's own `semantics` field:**
+WINNER-BIASED BY CONSTRUCTION — only parties that got a kill appear, so a
+party wiped without killing anyone is invisible. A party is NOT a comp: a
+300-player battle is a coalition of parties, and the party is the useful unit.
+DISPLAY/EVIDENCE ONLY, never a scoring input — it may inform owner rulings
+like every other observed layer, and nothing more.
+
+Also measured while proving the design (302-player battle): albionbb
+killer+victim sees 76% of the roster; official battle detail sees 100% but
+carries no equipment; the per-event union reached 54% WITH equipment from only
+36 of 182 events, adding 42 players the killer+victim route cannot see at all.
+
+Full battery green. `party_cache/` gitignored beside the other caches;
+`out/party_rosters.json` committed (83 KB, LF, no BOM).
