@@ -26,8 +26,10 @@ pins the effect). Scoring now runs explicit modes:
         weapon-model benchmark. Per-case gear sources are recorded.
 
 V4 leave-one-out likewise reports three incumbent-gear classes:
-  weapon_only        the legacy naked-incumbent metric — STILL the
-                     exit-code gate until an owner ruling re-bases it
+  weapon_only        the legacy naked-incumbent metric. REPORTED, NOT
+                     GATED since 2026-08-29: the unit re-fit moved every
+                     target into PERSON units, so scoring naked
+                     incumbents measures in the unit the model has left.
   doctrine_inferred  incumbents in kit_variants v0 (inferred, and labeled
                      so — the doctrine pools were mined from these same
                      comps, so this class is doubly weak-form)
@@ -35,6 +37,11 @@ V4 leave-one-out likewise reports three incumbent-gear classes:
                      actually records (builds_index join; published
                      comps carry gear on every slot). Unresolved pieces
                      stay off the member and are counted, never guessed.
+                     ** THIS IS THE EXIT-CODE GATE ** (owner ruling
+                     2026-08-29). It scores incumbents in their real
+                     kits — what the page does — and is the only class
+                     whose incumbents are not mined from the same
+                     doctrine the engine uses.
 Candidates always take the normal dressed path. Weapon-only reproduction
 is NOT production recommendation accuracy; the dressed sections are the
 production-faithful measurements.
@@ -542,10 +549,25 @@ def v4(args):
               f"{res}/{rec} recorded pieces resolved into the curated catalog")
     print(f"  dressed-vs-naked top-3 divergence: {len(divergences)}/"
           f"{base['w_total']} slots")
-    r = base
-    print(f"  gate {GATE:.0%} applies to the weapon_only ROLE metric "
-          f"(legacy — re-basing to a dressed class is an owner ruling) -> "
-          f"{'PASS' if r['r_total'] and r['r_hits'] / r['r_total'] >= GATE else 'FAIL/insufficient'}")
+    # GATE RE-BASED to actual_gear (owner ruling 2026-08-29), and it now
+    # ENFORCES — the v4 path used to return 0 unconditionally, so the verdict
+    # was printed and never checked. Why actual_gear: the unit re-fit moved
+    # every target into PERSON units, which makes weapon_only — naked
+    # incumbents — a measurement in the unit the model has left. It fell
+    # 87% -> 70% on the re-fit for that reason alone, while the dressed
+    # classes rose to 87%. actual_gear scores incumbents in their REAL
+    # recorded kits, which is what the page does, and it is the one class
+    # whose incumbents are not mined from the doctrine the engine also uses
+    # (doctrine_inferred is doubly weak-form — see the caveat below).
+    r = tallies["actual_gear"]
+    gate_ok = bool(r["r_total"]) and r["r_hits"] / r["r_total"] >= GATE
+    legacy = base["r_hits"] / base["r_total"] if base["r_total"] else 0.0
+    print(f"  GATE {GATE:.0%} on the actual_gear ROLE metric "
+          f"(re-based from weapon_only, owner 2026-08-29) -> "
+          f"{'PASS' if gate_ok else 'FAIL/insufficient'}"
+          f"  [{r['r_hits']}/{r['r_total']}]")
+    print(f"  legacy weapon_only role metric, reported not gated: "
+          f"{legacy:.0%} — naked incumbents, the pre-re-fit unit")
     print("  caveat: 20-size templates were role-ratio calibrated on these "
           "same comps — weak-form evidence until independent comps exist.")
     print("  caveat: kit doctrine was mined from these same comps' slots — "
@@ -575,7 +597,7 @@ def v4(args):
         with open(args.json, "w", encoding="utf-8", newline="\n") as f:
             json.dump(payload, f, indent=1, sort_keys=True)
         print(f"\nwrote {args.json}")
-    return 0
+    return 0 if gate_ok else 1
 
 
 if __name__ == "__main__":

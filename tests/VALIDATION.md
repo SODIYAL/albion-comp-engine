@@ -1047,3 +1047,34 @@ deferred it once already.
 Median coverage 1.82 says the targets remain CONSERVATIVE (good comps
 over-cover). That is the safe direction and the residual is a calibration
 question, no longer a unit question.
+
+### Gate re-based to actual_gear, and it now ENFORCES (owner ruling 2026-08-29)
+
+Ruling 2 (2026-08-27) deferred re-basing the tier2 exit gate off the legacy
+naked metric. The unit re-fit forced the question: `weapon_only` scores NAKED
+incumbents, so after targets moved to person units it measures in the unit the
+model has left — it fell 87% -> 70% for that reason alone, while both dressed
+classes rose to 87%. Owner: *"ok do that."*
+
+**Two changes, and the second matters more than the re-basing:**
+
+1. The gate now reads `actual_gear` role-level (70% threshold unchanged).
+   That class scores incumbents in the gear their published source actually
+   records — what the page does — and it is the only class whose incumbents
+   are not mined from the same doctrine the engine itself uses
+   (`doctrine_inferred` is doubly weak-form by construction).
+2. **THE GATE NOW ACTUALLY ENFORCES.** The v4 path ended in a bare
+   `return 0`, so the PASS/FAIL verdict had only ever been *printed* — the
+   command could not fail. That is why it exited 0 at 57% during the re-fit
+   trials without anyone noticing. It returns 1 on failure now, verified both
+   ways: PASS/exit 0 at the shipped 70% threshold, FAIL/exit 1 when the
+   threshold is temporarily raised to 95%.
+
+Current standing: **GATE PASS at 87% (20/23)**. `weapon_only` stays printed
+beside it, reported not gated, labelled as the pre-re-fit unit. Docstring,
+CLAUDE.md and HANDOFF.md updated; HANDOFF's "#1 THE UNIT RE-FIT (blocked)"
+entry is closed and the historical statement kept for the record.
+
+Full battery green with the gate live: golden, forge, parity, validation-modes,
+roles, interactions, builds, provenance, patch-history, cohort-families,
+display-math, codec, evidence-lint, tier2.
