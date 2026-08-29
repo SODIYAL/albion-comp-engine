@@ -151,10 +151,16 @@ styles:
       mobility: 0.85
       heal_reduction: 0.8
       sustained_dps: 0.6
-    # target_mults: UNRULED (2026-08-28). Identity until the owner
-    # sets values — see the header note on why the corpus cannot fit
-    # them (this style has 1 published comp).
-    target_mults: {}
+    # RULED-DERIVED 2026-08-28. Owner ruling already in this file:
+    # ranged_aoe_core min 7 at 20 and min 5 at 15-19, against
+    # composition.yaml's base 4 and 3 — ratios 1.75 and 1.67, mean 1.71.
+    # A clap comp is REQUIRED to field ~1.7x the base burst-AoE core, so
+    # scoring it against the base target handed it free over-coverage for
+    # doing the one thing its style demands.
+    # VALIDATED on the published comps: coverage spread across all styles
+    # tightens 2.38 -> 1.58 (see the findings doc). The same derivation was
+    # run for healing and tankiness and REJECTED by the same test.
+    target_mults: {burst_aoe: 1.71}
     # synced bombs on a manufactured clump: AoE rides the escalation curve
     # toward its 8-target cap; ST damage is incidental (few attackers each)
     mechanics: {expected_aoe_targets: 7, focus_attackers: 3}
@@ -195,10 +201,13 @@ styles:
       engage: 0.7
       tankiness: 0.7
       clump_create: 0.7
-    # target_mults: UNRULED (2026-08-28). Identity until the owner
-    # sets values — see the header note on why the corpus cannot fit
-    # them (this style has 2 published comps).
-    target_mults: {}
+    # RULED-DERIVED 2026-08-28. Owner ruling already in this file:
+    # ranged_aoe_core min 5 at 20 and min 4 at 15-19, against
+    # composition.yaml's base 4 and 3 — ratios 1.25 and 1.33, mean 1.29.
+    # Lower than clap's because kite pressure legitimately includes
+    # curse/sustained ranged damage the burst-AoE predicate does not count
+    # (the owner's own note above).
+    target_mults: {burst_aoe: 1.29}
     # ranged poke on the advancing clump; focus fire only on caught divers
     mechanics: {expected_aoe_targets: 4, focus_attackers: 4}
     # owner-ruled 2026-08-23: kite runs 1 healer at 7 and 2 at 20 ("mostly
@@ -274,10 +283,12 @@ styles:
       heal_sustain: 0.95
       sustained_dps: 0.85
       tankiness: 0.8
-    # target_mults: UNRULED (2026-08-28). Identity until the owner
-    # sets values — see the header note on why the corpus cannot fit
-    # them (this style has 1 published comp).
-    target_mults: {}
+    # RULED-DERIVED 2026-08-28. Owner ruling already in this file:
+    # ranged_aoe_core min 7 at 20 and min 5 at 15-19 — identical to clap,
+    # so the same 1.71. (clap_kite carries no ruled healer/frontline
+    # override at 15-19, and the healing/tankiness derivations were
+    # rejected by validation anyway.)
+    target_mults: {burst_aoe: 1.71}
     # bombs on manufactured clumps between kite resets: escalation rides
     # toward the cap in the windows; focus fire stays incidental
     mechanics: {expected_aoe_targets: 6, focus_attackers: 3}

@@ -666,3 +666,84 @@ number has to be ruled rather than fitted.
 
 Recorded for the owner to rule; nothing invented in the interim, per the
 "never invent a number to fill a hole" rule.
+
+### Per-style targets: looked up, derived from prior rulings, two thirds rejected (2026-08-28)
+
+Owner: *"you look it up."* Three routes were tried; the third worked.
+
+**1. External sources — nothing usable.** Web search returns weapon tier lists,
+not composition requirements. The one "ZvZ Clap and kite basic composition"
+page (albiononlinegrind) is a user's 18-build scrapbook mixing Crystal Arena
+and fame-farm builds, not a comp. MetaBattle's Albion wiki has no composition
+pages at all (`list=search` for "ZvZ composition" -> totalhits 0) — it is a
+build library, which is why the adapter only ever pulled builds. The
+clap/kite/brawl vocabulary lives in voice comms and Discord, not in any
+quantified public form.
+
+**2. Killboard rosters — blocked by CIRCULARITY, and this is worth recording.**
+The plan was to label the 139 near-complete observed rosters with the engine's
+own `comp_identity` and measure supply per style, for a real sample instead of
+n=1. Checked the classifier first: `comp_identity` computes
+`evade += mobility + disengage` and uses it to decide the kite half
+(engine.py, IDENTITY_HYBRID_EVADE). So labelling rosters that way and then
+"discovering" that kite comps field more disengage would be reproducing the
+definition. Abandoned. (`roster_mixes.json` is also stored as seat counts, not
+weapons, so it cannot yield capability supply without re-deriving from the
+118-battle cache.)
+
+**3. THE OWNER'S OWN PRIOR RULINGS — this is where the numbers were.** The
+model already contained style-varying requirements, in seat units, ruled by the
+owner in the 2026-08-23/26 forge rounds: `constraint_overrides` in styles.yaml
+(healer 3-4 brawl / 2-3 clap / 2 kite at 20; frontline bands; `ranged_aoe_core`
+min 7 clap / 5 kite at 20) against composition.yaml's style-blind base bands.
+**And the targets ignored all of it** — `heal_sustain` asked 7.50 of every
+style alike. The forge was told a kite 20-man runs 2 healers while the scorer
+still demanded brawl-level healing. That inconsistency IS the per-seat issue,
+and it was already inside the repo.
+
+Multipliers were derived as (ruled seat count) / (base band count) at each
+ruled size, then TESTED against the published comps: does coverage
+(supply/target) cluster tighter across styles, or scatter?
+
+```text
+capability      spread before -> after      verdict
+burst_aoe            2.38 -> 1.58           KEPT
+heal_sustain         1.93 -> 2.56           REJECTED
+heal_burst           2.04 -> 3.34           REJECTED
+tankiness            4.02 -> 4.93           REJECTED
+```
+
+**Two thirds of my own derivation failed its own test, and that is the finding.**
+The seat-count mapping only holds where the ruled seat count IS the capability.
+`ranged_aoe_core` counts members satisfying a burst-AoE predicate, so it maps
+almost one-to-one onto burst_aoe supply. Healer count does NOT predict healing
+supply — real kite comps already over-cover healing relative to brawl (1.74 and
+1.13 vs blap's 1.91) because gear, off-heals and support weapons carry much of
+it, so lowering their target made them over-cover harder. Frontline count does
+not predict tankiness at all: that is the known unit defect, where worn armor
+gives every member tankiness regardless of seat, and nothing about tankiness
+can be fitted before the unit re-fit.
+
+**SHIPPED — the one derivation that survived**, cited to the ruling it comes
+from: `clap` and `clap_kite` `burst_aoe: 1.71` (ruled ranged_aoe_core 7-at-20
+and 5-at-15-19 vs base 4 and 3 — ratios 1.75, 1.67), `kite` `burst_aoe: 1.29`
+(ruled 5 and 4 vs base 4 and 3 — 1.25, 1.33). brawl and balanced stay the
+reference at 1.0. Rationale: a clap comp is REQUIRED to field ~1.7x the base
+burst-AoE core, so scoring it against the base target handed it free
+over-coverage for doing the one thing its style demands.
+
+**INDEPENDENT CORROBORATION — the blind test improved.** tier2 leave-one-out
+against published comps, which had no part in the derivation:
+weapon_only role-level **74% -> 78%** (17/23 -> 18/23), weapon-level 15% -> 18%;
+actual_gear role-level **39% -> 43%** (9/23 -> 10/23). Full battery green, zero
+re-pins. `test_validation_modes` V6a now PINS the shipped set, so an
+undocumented multiplier fails the gate (it fired correctly the moment these
+values landed, which is what it was written for).
+
+**Still unruled and deliberately empty:** brawl and balanced (the reference),
+brawl_clap (the owner has never ruled it — it carries no constraint override
+either), and every capability other than burst_aoe. The owner's original case
+— "clap needs more peel and disengage than brawl" — remains unfitted: there is
+no ruled seat count that maps to peel or disengage, the corpus has n=1 for
+clap, and the killboard route is circular for exactly those two capabilities.
+That one still needs an owner ruling; nothing was invented in its place.

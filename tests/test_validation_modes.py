@@ -297,13 +297,23 @@ def t_target_mults():
     import json, tempfile
     base = Engine(content="blackzone_roam", size=20, style="kite")
 
-    # the shipped dataset must be the identity — no style may carry a value
+    # The shipped set is PINNED: every value present must be a recorded
+    # ruling, so an accidental or undocumented one fails here. Only the
+    # ranged_aoe_core -> burst_aoe derivation survived validation
+    # (2026-08-28); the healing and tankiness derivations were run the same
+    # way and REJECTED because they widened coverage spread instead of
+    # tightening it. balanced and brawl are the reference and stay empty.
+    RULED = {"balanced": {}, "brawl": {}, "brawl_clap": {},
+             "clap": {"burst_aoe": 1.71}, "kite": {"burst_aoe": 1.29},
+             "clap_kite": {"burst_aoe": 1.71}}
     styles = base.data.get("styles") or {}
-    unruled = {s: (v or {}).get("target_mults") or {} for s, v in styles.items()}
-    check("V6a shipped dataset is the identity: no style carries a "
-          "target_mult (a ruled value must be added deliberately)",
-          all(not tm for tm in unruled.values()),
-          f"non-empty: {[s for s, tm in unruled.items() if tm]}")
+    shipped = {s: (v or {}).get("target_mults") or {}
+               for s, v in styles.items()}
+    check("V6a shipped target_mults are exactly the recorded rulings "
+          "(an undocumented value fails here)",
+          shipped == RULED, f"shipped={shipped}")
+    check("V6a2 balanced is empty — it is the reference the others scale "
+          "against", not shipped.get("balanced"))
 
     d = json.loads(json.dumps(base.data))
     d["styles"]["kite"]["target_mults"] = {"disengage": 2.0, "peel": 0.5}
