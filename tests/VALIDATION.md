@@ -1212,3 +1212,64 @@ presence — one per party, taken more often).
 Small/mid parties (5-14) are a different game: Wailing Bow, Frost Staff, Bear
 Paws and Claws appear there and never in the ZvZ list — confirming the
 fight-size split the bucket data suggested, now with party structure behind it.
+
+### Party harvest scaled 39 -> 212 battles, and what ZvZ support actually is (2026-08-29)
+
+**HOW MUCH ZvZ THERE IS, measured.** A discovery-only crawl of the albionbb
+battle list (220 pages, no per-event fetches) found **4,400 battles of 20+
+players in 8 days** — 550/day at 20+, **260/day at 30+**, 108/day at 50+,
+34/day at 100+. Projected over a month that is ~7,800 fights of 30+. The first
+harvest of 39 battles was therefore about **half of one percent of a single
+day's** ZvZ. Scaled to 212 battles: **955 distinct parties, 656 of size 5+,
+912 with every member's weapon known, median coverage 0.851.** ZvZ parties
+(15-20, fully geared) went 38 -> **290**.
+
+**THE FEED ONLY REACHES BACK 8 DAYS** even at 220 pages (oldest 2026-08-22).
+A month-long picture cannot be backfilled from this endpoint — it has to be
+accumulated going forward. Worth knowing before anyone plans a monthly census.
+
+**THE SEAT STRUCTURE HELD ACROSS A 7.6x SAMPLE INCREASE**, which is the
+strongest evidence yet that this layer is measuring something real:
+
+```text
+                    38 parties   290 parties
+   pierce              2.76         3.16
+   main_healer         3.29         3.16
+   engage_tank         2.11         1.89
+   shield_support      1.34         1.76
+   stopper_tank        1.24         1.21
+```
+
+**OWNER QUESTION — "what kind of support is important":**
+
+```text
+   pierce          3.16/party   50% of the support block   in 97% of parties
+      Spirithunter, Battle Bracers, Occult Staff, Damnation Staff
+   shield_support  1.76         28%                            84%
+      Great Arcane, Rootbound, Enigmatic, Arcane Staff
+   anti_heal       0.85         13%                            58%
+      Dawnsong, Rotcaller
+   purge           0.43          7%                            39%
+      Lifecurse Staff
+   zone_support    0.12          2%                            12%
+```
+
+**Pierce is half of what "support" means in practice**, and only two seats sit
+at ~97-100% of parties: main_healer and pierce. Resist-shred is as
+non-negotiable as healing — a stronger statement than any template currently
+makes.
+
+**ZvZ weapon meta (290 parties, 5,164 members):** Hallowfall 2.12/party in 94%
+of parties (held from 97% at n=38 — real), Realmbreaker 0.89/74%, Battle
+Bracers 0.73/29%, Permafrost 0.73/60%, Spiked Gauntlets 0.70/70%,
+Spirithunter 0.59/57%, Bedrock Mace 0.58/37%, Dawnsong 0.56/45%, Oathkeepers
+0.53/50%.
+
+What the bigger sample CHANGED: Battle Bracers is 3rd by bodies but only 29%
+presence — a few squads run four or five, most run none, so slots and presence
+must not be collapsed. Spiked Gauntlets 9th -> 5th. **Oathkeepers 9th and
+off_tank in 51% of parties** — a real seat the 38-party read dismissed.
+
+**Still true and worth repeating:** 212 battles is ~0.4% of a week's 30+
+fights. Signals at 90%+ presence will hold; anything separated by a few points
+will not. Display/evidence only.
