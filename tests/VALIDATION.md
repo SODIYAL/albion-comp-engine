@@ -898,3 +898,57 @@ single jump, from the gear evidence). Full battery green.
 Not yet done: the per-style multipliers were fitted when clap had n=1. They
 should be re-derived now that clap has n=6 — the measurement, not the
 mechanism, is what is stale.
+
+### Re-derivation on the 36-comp corpus — NOTHING CHANGED, deliberately (2026-08-29)
+
+The per-style multipliers were fitted when clap had n=1. With the corpus at 36
+comps (clap n=4-6 labelled at n>=10) they were re-derived from the CORPUS
+itself rather than a scratch dump. Every shipped value held, and every one
+turned out to be the CONSERVATIVE end:
+
+```text
+style       cap          shipped   re-derived    gap    n
+clap        burst_aoe       1.71         1.93   +0.22   4
+kite        burst_aoe       1.29         1.75   +0.46   3
+kite        peel            1.25         1.22   -0.03   3
+kite        disengage       1.20         1.36   +0.16   3
+clap_kite   burst_aoe       1.71         1.92   +0.21   1
+clap_kite   peel            1.25         1.23   -0.02   1
+```
+
+`peel` re-measures to within 0.03 of what shipped, on an independent basis
+(the ruled/observed blend vs the full corpus). The rest sit below the newly
+measured effect, so the model currently UNDER-states every style difference it
+models — never over-states one.
+
+**The larger sample also revived a derivation I had rejected.** On the small
+sample the healer-count -> healing-target mapping widened coverage spread and
+was dropped. At n=3-5 it now matches observation closely: clap heal_sustain
+observed 0.73 against the 0.82 the ruled healer counts predicted, kite 0.64
+against 0.61. The earlier rejection was a small-sample artifact, not a fact
+about the model. New signals appeared too — `slow` runs clap 1.73 / clap_kite
+2.33 / kite 1.51 against brawl, consistently.
+
+**FOUR CANDIDATE SETS WERE TESTED AND NONE SHIPPED.** tier2 leave-one-out is
+the arbiter (it holds a published comp out and asks the engine to rebuild it,
+so it is not the thing being fitted):
+
+```text
+A  shipped (baseline)                       weapon_only 15/62 role 20/23 | actual_gear 13/23
+B  kite burst_aoe 1.29 -> 1.50              weapon_only 15/62 role 20/23 | actual_gear 13/23
+C  + healing (the revived derivation)       weapon_only 15/62 role 20/23 | actual_gear 13/23
+D  + slow (clap 1.73 / kite 1.51)           weapon_only 15/62 role 20/23 | actual_gear 13/23
+```
+
+Identical, to the case. Golden clean in all four. **The gate cannot tell these
+apart, so there is no evidential basis to prefer any of them over what ships**
+— and adding multipliers the gate cannot validate is fitting numbers to taste.
+Nothing was changed.
+
+**That flatness is itself the finding: tier2 has saturated as a discriminator
+for per-style targets at this corpus size.** It moved four times today
+(74 -> 78 -> 83 -> 87% role-level) and now does not respond to further
+per-style tuning at all. Sharpening these numbers needs a different
+instrument, not more of this one — more held-out labelled comps, or the expert
+blind rounds the harness was built for. Recorded so the next attempt does not
+re-run the same sweep expecting a signal.
