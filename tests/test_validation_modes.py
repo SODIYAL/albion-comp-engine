@@ -292,10 +292,14 @@ def t_target_mults():
     overlay. Weight multipliers say what a style values; these say how much
     of it the style needs. Contract: target and soft cap scale TOGETHER,
     unlisted capabilities are untouched, hard floors never scale, and the
-    shipped dataset is the IDENTITY (every style empty until the owner
-    rules a value) so the mechanism cannot move a score on its own."""
+    shipped set is exactly the recorded rulings.
+
+    The mechanism cases inject into BRAWL, which ships no multipliers, so
+    the baseline is a true identity. (They used to inject into kite; once
+    kite gained its own ruled values the baseline stopped being 1.0 and the
+    cases failed — correctly.)"""
     import json, tempfile
-    base = Engine(content="blackzone_roam", size=20, style="kite")
+    base = Engine(content="blackzone_roam", size=20, style="brawl")
 
     # The shipped set is PINNED: every value present must be a recorded
     # ruling, so an accidental or undocumented one fails here. Only the
@@ -304,8 +308,9 @@ def t_target_mults():
     # way and REJECTED because they widened coverage spread instead of
     # tightening it. balanced and brawl are the reference and stay empty.
     RULED = {"balanced": {}, "brawl": {}, "brawl_clap": {},
-             "clap": {"burst_aoe": 1.71}, "kite": {"burst_aoe": 1.29},
-             "clap_kite": {"burst_aoe": 1.71}}
+             "clap": {"burst_aoe": 1.71},
+             "kite": {"burst_aoe": 1.29, "peel": 1.25, "disengage": 1.2},
+             "clap_kite": {"burst_aoe": 1.71, "peel": 1.25}}
     styles = base.data.get("styles") or {}
     shipped = {s: (v or {}).get("target_mults") or {}
                for s, v in styles.items()}
@@ -316,12 +321,12 @@ def t_target_mults():
           "against", not shipped.get("balanced"))
 
     d = json.loads(json.dumps(base.data))
-    d["styles"]["kite"]["target_mults"] = {"disengage": 2.0, "peel": 0.5}
+    d["styles"]["brawl"]["target_mults"] = {"disengage": 2.0, "peel": 0.5}
     tmp = os.path.join(tempfile.gettempdir(), "bion_target_mults.json")
     with open(tmp, "w", encoding="utf-8") as fh:
         json.dump(d, fh)
     e = Engine(dataset_path=tmp, content="blackzone_roam", size=20,
-               style="kite")
+               style="brawl")
 
     check("V6b target and soft cap scale together (>1)",
           abs(e.target("disengage") - 2.0 * base.target("disengage")) < EPS

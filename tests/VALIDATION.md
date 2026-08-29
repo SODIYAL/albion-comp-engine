@@ -747,3 +747,89 @@ either), and every capability other than burst_aoe. The owner's original case
 no ruled seat count that maps to peel or disengage, the corpus has n=1 for
 clap, and the killboard route is circular for exactly those two capabilities.
 That one still needs an owner ruling; nothing was invented in its place.
+
+### Per-style targets, round 2: a second independent sample (2026-08-28)
+
+Owner: *"I will say you go with your recommendation based on what you find
+online."*
+
+**Found the source the corpus already came from.** Eight of the thirteen comps
+cite albioncompo.com. That site has **130 public comps** behind a clean JSON
+API (`/api/compositions/<CODE>`, found by watching the page's own network
+calls) carrying full item IDs per slot — weapon, helm, armor, boot, cape,
+offhand, potion, food. Exactly the shape the corpus wants, and item IDs are
+now readable since the resolver fix earlier today. Triage: 96 are ZvZ, and
+**27 are usable** (ZvZ, n>=10, every weapon in the catalogue, every member
+geared).
+
+**A NON-CIRCULAR STYLE LABEL, which was the blocker.** Labelling rosters with
+`comp_identity` is circular (it defines the kite half AS mobility+disengage).
+But many authors NAME the style themselves: "Brawl Hit 20", "BRAWL BY LATTEX",
+"Hard ZvZ Brawl 20ppl", "ss kite", "kite deff", "HDCP BOMB", "RANGED BOMB",
+"SIEGEBOW BOMB", "BUS BOMB", "Brawl Clap", "BUILDS FOR BRAWL BOMB". That label
+comes from the author, not from the engine, so measuring capabilities against
+it is not circular. ("Bomb" reads as clap — styles.yaml's own clap blurb is
+"stack them and delete them - one engage, one bomb".) 13 comps carry a
+declared style: clap 5, brawl 3, kite 2, brawl_clap 2, clap_kite 1. **Clap went
+from n=1 to n=5.**
+
+**INDEPENDENT CONFIRMATION OF THE SHIPPED burst_aoe VALUES.** Those were
+derived purely from the owner's ruled `ranged_aoe_core` seat counts. The
+author-labelled sample shares no input with that derivation:
+
+```text
+style        shipped   observed/brawl    gap
+clap            1.71             1.73   +0.02
+clap_kite       1.71             1.62   -0.09
+kite            1.29             1.51   +0.22
+brawl_clap         -             1.22   (unruled, stays 1.0)
+```
+
+Two derivations with nothing in common agreeing to 0.02 on clap is the
+strongest validation any number in this model has.
+
+**THE OWNER'S ORIGINAL CASE, ANSWERED — half right.** *"Clap comp would
+require more peel and disengage than brawl comp."* Testing each claim across
+BOTH samples (published corpus, author-labelled), as a ratio to that sample's
+own brawl:
+
+```text
+peel        published  declared   agree?
+brawl_clap       1.05      1.01   yes
+clap             0.78      1.07   NO - flips
+clap_kite        1.17      1.29   yes
+kite             1.23      1.27   yes
+
+disengage   published  declared   agree?
+brawl_clap       1.62      0.94   NO - flips
+clap             1.95      0.64   NO - flips
+clap_kite        0.84      1.10   NO - flips
+kite             2.13      1.17   yes
+```
+
+**CLAP is the half that fails.** Both of its claims flip sign between samples —
+peel 0.78x then 1.07x, disengage 1.95x then 0.64x. No clap row was written; two
+independent samples disagreeing is not evidence, it is noise, and inventing a
+number there is exactly what the standing rule forbids.
+
+**KITE is the half that holds**, and it replicated on both:
+- `peel 1.25` — 1.23x brawl published, 1.27x declared. Kite genuinely peels
+  more. `clap_kite` gets the same 1.25 (1.17x, 1.29x).
+- `disengage 1.20` — direction replicated (kite above brawl in both) but the
+  magnitude is unstable (2.13x, 1.17x), so this takes the CONSERVATIVE end
+  rather than the mean. kite only; clap_kite flips and gets no row.
+
+**tier2 improved again, twice in a row.** weapon_only role-level 74% (before
+any target_mults) -> 78% (burst_aoe) -> **83%** (peel/disengage), weapon-level
+15% -> 18% -> **24%**. The blind test had no part in any derivation. Full
+battery green, zero re-pins.
+
+Test note: V6b/V6c inject a multiplier and compare against a baseline, and
+used to do it on `kite`. Once kite gained shipped values its baseline stopped
+being 1.0 and those cases FAILED — correctly. They now inject into `brawl`,
+which ships nothing and is a true identity reference.
+
+**Still unruled:** `brawl_clap` (no ruled seat override, and only n=2
+declared), and every clap row beyond burst_aoe. The 27 usable comps are NOT
+yet ingested into `data/published_comps` — that is the durable next step, and
+it would take clap from n=5 measured to n=5 CITED, with provenance.

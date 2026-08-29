@@ -44237,7 +44237,8 @@
    },
    "name": "Clap-Kite",
    "target_mults": {
-    "burst_aoe": 1.71
+    "burst_aoe": 1.71,
+    "peel": 1.25
    }
   },
   "kite": {
@@ -44353,7 +44354,9 @@
    },
    "name": "Kite",
    "target_mults": {
-    "burst_aoe": 1.29
+    "burst_aoe": 1.29,
+    "disengage": 1.2,
+    "peel": 1.25
    }
   }
  },

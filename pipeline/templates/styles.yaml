@@ -201,13 +201,19 @@ styles:
       engage: 0.7
       tankiness: 0.7
       clump_create: 0.7
-    # RULED-DERIVED 2026-08-28. Owner ruling already in this file:
-    # ranged_aoe_core min 5 at 20 and min 4 at 15-19, against
-    # composition.yaml's base 4 and 3 — ratios 1.25 and 1.33, mean 1.29.
-    # Lower than clap's because kite pressure legitimately includes
-    # curse/sustained ranged damage the burst-AoE predicate does not count
-    # (the owner's own note above).
-    target_mults: {burst_aoe: 1.29}
+    # RULED-DERIVED + OBSERVED 2026-08-28.
+    #   burst_aoe 1.29 — from the owner's ruled ranged_aoe_core (5 at 20,
+    #     4 at 15-19 vs base 4 and 3). An INDEPENDENT sample of 13
+    #     author-labelled albioncompo comps puts kite at 1.51x brawl's
+    #     burst_aoe, so the ruled value is the conservative end of the range.
+    #   peel 1.25 — REPLICATED in two independent samples: 1.23x brawl in the
+    #     published corpus, 1.27x in the author-labelled sample. Kite really
+    #     does peel more, which is the half of the owner's case the evidence
+    #     supports (clap does NOT — it flips sign between samples).
+    #   disengage 1.20 — direction replicated in both samples (kite above
+    #     brawl in each) but the magnitude is unstable, 2.13x and 1.17x, so
+    #     this takes the CONSERVATIVE end rather than the mean.
+    target_mults: {burst_aoe: 1.29, peel: 1.25, disengage: 1.20}
     # ranged poke on the advancing clump; focus fire only on caught divers
     mechanics: {expected_aoe_targets: 4, focus_attackers: 4}
     # owner-ruled 2026-08-23: kite runs 1 healer at 7 and 2 at 20 ("mostly
@@ -283,12 +289,12 @@ styles:
       heal_sustain: 0.95
       sustained_dps: 0.85
       tankiness: 0.8
-    # RULED-DERIVED 2026-08-28. Owner ruling already in this file:
-    # ranged_aoe_core min 7 at 20 and min 5 at 15-19 — identical to clap,
-    # so the same 1.71. (clap_kite carries no ruled healer/frontline
-    # override at 15-19, and the healing/tankiness derivations were
-    # rejected by validation anyway.)
-    target_mults: {burst_aoe: 1.71}
+    # RULED-DERIVED + OBSERVED 2026-08-28.
+    #   burst_aoe 1.71 — ruled ranged_aoe_core identical to clap's; the
+    #     author-labelled sample independently puts it at 1.62x brawl.
+    #   peel 1.25 — replicated: 1.17x brawl published, 1.29x declared.
+    #     No disengage row: the two samples flip sign on it (0.84x, 1.10x).
+    target_mults: {burst_aoe: 1.71, peel: 1.25}
     # bombs on manufactured clumps between kite resets: escalation rides
     # toward the cap in the windows; focus fire stays incidental
     mechanics: {expected_aoe_targets: 6, focus_attackers: 3}
