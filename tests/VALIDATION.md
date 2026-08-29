@@ -1273,3 +1273,87 @@ off_tank in 51% of parties** — a real seat the 38-party read dismissed.
 **Still true and worth repeating:** 212 battles is ~0.4% of a week's 30+
 fights. Signals at 90%+ presence will hold; anything separated by a few points
 will not. Display/evidence only.
+
+## Observed BUILDS, and the role book tested against them (2026-08-29)
+
+Owner: *"can we use that to get what real equipment is being used and from
+there under what roles are played by what weapon."* Yes to both — after
+correcting a claim of mine.
+
+**CORRECTION FIRST.** I said the party harvest gave "real parties with full
+gear". It did not. Measured per event role:
+
+```text
+   Killer        7/8 equipment slots filled, item power ~1300
+   Victim        7/8
+   Participants  7/8
+   GroupMembers  1/8  — MainHand only, AverageItemPower 0
+```
+
+`GroupMembers` carries WEAPONS ONLY. The 955 parties were weapon rosters, not
+builds. Full kits live on Killer / Victim / Participants, so the sampler now
+takes party STRUCTURE from GroupMembers and BUILDS from the combat roles. A
+member who never killed, died or dealt damage yields a weapon and nothing
+more, and is recorded that way rather than guessed. Cache gained a `schema`
+field; schema-1 records (weapons only) re-fetch automatically.
+
+**HARVEST: 270 battles -> 1,283 parties (865 of size 5+) and 9,569 OBSERVED
+BUILDS**, 9,261 of them with 6+ equipment slots, armour evidence on 132
+weapons. Slot fill: MainHand/Head/Armor/Shoes 99%, Cape 98%, Potion 93%,
+Food 60% (food is eaten and not renewed), OffHand 29% (two-handers occupy
+both hands — a real fact, not a parse failure). Builds carry tier AND enchant
+(`T6_ARMOR_CLOTH_AVALON@2`), which the published corpus mostly does not.
+
+For scale: the curated evidence base was 625 gear pieces across 36 comps.
+
+**THE ROLE BOOK VALIDATES — independently.** `roles.yaml` seats were curated by
+hand; armour class is the owner's own role tell ("cloth wearing is a very good
+indicator"). Across 8,752 builds whose weapon has an assigned seat:
+
+```text
+   class         n     cloth  leather  plate
+   frontline   1247      6%      9%     85%
+   healer      2068     72%      9%     19%
+   dps         2848     46%     46%      9%
+   support     2589     23%     42%     35%
+```
+
+**Frontline 85% plate, healers 72% cloth** — the curation matches how people
+actually gear, from a source that had no part in making it. DPS splitting
+evenly cloth/leather matches the owner's own account (cloth for long-channel
+burst, leather for brawl DPS). **Support at 35% plate is the odd one**: a
+third of the "support" class is armoured like frontline, which suggests that
+class is holding two different jobs and may want splitting.
+
+**ONE CONTRADICTION, n=93:** **Nature Staff is seated `main_healer` but 53% of
+its users wear PLATE** (49 plate / 35 cloth / 9 leather). Every other healer
+weapon is cloth-dominant. Either it is played as a plate frontline healer or
+the seat is wrong for how it is actually used. Owner ruling wanted.
+
+**ROLE-BOOK GAPS — real usage, no seat assigned:**
+
+```text
+   Brimstone Staff      n=75   cloth 100%    IP 1457
+   Dual Swords          n=72   leather 86%   IP 1218
+   Kingmaker            n=55   leather 64%   IP 1395
+   Heron Spear          n=54   leather 44%   IP 1316
+   Great Nature Staff   n=43   cloth 63%     IP 1182
+   Holy Staff           n=36   cloth 86%     IP 1146
+```
+
+**Brimstone at 100% cloth over 75 builds** is exactly the profile the owner
+described (2026-08-27): "a user wearing scholar robe assassin hood has
+relatively no defensive but one would wear that if the role they have to play
+is burst damage on a spell with long channel time like brimstone". That is a
+burst-damage seat the role book does not have, now with evidence behind it.
+
+**ARTIFACT SIZE, flagged for a decision:** `party_rosters.json` is now 4.44 MB
+(it was 83 KB), essentially all of it the per-build gear. `pipeline/out/*.json`
+is committed on purpose as parsed game data, but this is a growing
+OBSERVATIONAL file — every future harvest enlarges it. If that becomes
+unwelcome, the split is obvious: commit the aggregates (`weapon_armour`,
+`parties`, `summary`) and gitignore the raw `builds` array beside the other
+caches. Not done unilaterally because the raw builds ARE the evidence and
+discarding them silently would be the wrong default.
+
+Display/evidence only, unchanged: nothing here feeds scoring.

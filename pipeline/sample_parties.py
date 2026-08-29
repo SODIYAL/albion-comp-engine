@@ -126,8 +126,14 @@ def fetch(args, known):
                 continue
             path = os.path.join(CACHE, f"{bid}.json")
             if os.path.exists(path):
-                seen_battles += 1
-                continue
+                # schema 1 cached weapons only — re-fetch it for the builds
+                try:
+                    with open(path, encoding="utf-8") as fh:
+                        if (json.load(fh) or {}).get("schema", 1) >= 2:
+                            seen_battles += 1
+                            continue
+                except Exception:
+                    pass
 
             # step 2 — the full roster (denominator)
             detail = get_json(f"{GAMEINFO}/battles/{bid}")
@@ -138,6 +144,7 @@ def fetch(args, known):
                 f"https://api.albionbb.com/{server}/battles/kills?ids={bid}"
             ) or []
             parties, participants, ev_ok = {}, {}, 0
+            builds = {}
             for x in kills[:args.max_events]:
                 eid = x.get("EventId")
                 if not eid:
@@ -146,6 +153,38 @@ def fetch(args, known):
                 if not d:
                     continue
                 ev_ok += 1
+                # FULL BUILDS come from Killer / Victim / Participants, which
+                # carry 7 of 8 equipment slots plus item power. GroupMembers
+                # does NOT: measured 2026-08-29, it fills MainHand only and
+                # reports AverageItemPower 0. So party STRUCTURE comes from
+                # GroupMembers and BUILDS come from the combat roles; a member
+                # who never killed, died or dealt damage yields a weapon and
+                # nothing else, and is recorded that way rather than guessed.
+                pool = [("killer", d.get("Killer")),
+                        ("victim", d.get("Victim"))]
+                pool += [("participant", m) for m in (d.get("Participants")
+                                                      or [])]
+                for how, m in pool:
+                    if not isinstance(m, dict) or not m.get("Name"):
+                        continue
+                    eq = m.get("Equipment") or {}
+                    gear = {}
+                    for slot in ("MainHand", "OffHand", "Head", "Armor",
+                                 "Shoes", "Cape", "Potion", "Food"):
+                        v = eq.get(slot)
+                        gear[slot] = (v or {}).get("Type") if isinstance(
+                            v, dict) else None
+                    n_filled = sum(1 for v in gear.values() if v)
+                    prev = builds.get(m["Name"])
+                    if prev is None or n_filled > prev["slots_filled"]:
+                        builds[m["Name"]] = {
+                            "name": m["Name"],
+                            "guild": m.get("GuildName") or None,
+                            "alliance": m.get("AllianceName") or None,
+                            "item_power": m.get("AverageItemPower"),
+                            "seen_as": how,
+                            "slots_filled": n_filled,
+                            "gear": gear}
                 for field, sink in (("GroupMembers", parties),
                                     ("Participants", participants)):
                     members = d.get(field) or []
@@ -176,7 +215,9 @@ def fetch(args, known):
                     sink[key]["seen_in_events"] += 1
 
             rec = {
+                "schema": 2,          # 2 = carries full builds; 1 did not
                 "battle": bid,
+                "builds": list(builds.values()),
                 "started_at": b.get("startedAt"),
                 "total_players": total,
                 "total_kills": b.get("totalKills"),
@@ -266,8 +307,59 @@ def analyze(known):
                 "guilds": sorted({m["guild"] for m in p["members"]
                                   if m["guild"]}),
                 "seen_in_events": c["events"]})
+    # OBSERVED BUILDS — full kits, and the weapon -> armour-class evidence
+    # that role assignment can actually be tested against. Armour class is
+    # the owner's own role tell ("cloth wearing is a very good indicator"),
+    # and unlike the hand-curated role menus it is measurable.
+    strip = lambda t: (re.sub(r"^T\d+_", "", str(t).split("@")[0])
+                       if t else None)
+    def armour_class(t):
+        k = (strip(t) or "").upper()
+        for cls in ("CLOTH", "LEATHER", "PLATE"):
+            if f"ARMOR_{cls}" in k:
+                return cls.lower()
+        return None
+    builds, by_weapon = [], {}
+    for name in sorted(os.listdir(CACHE)):
+        with open(os.path.join(CACHE, name), encoding="utf-8") as f:
+            rec = json.load(f)
+        for bd in rec.get("builds", []):
+            g = bd.get("gear") or {}
+            w = strip(g.get("MainHand"))
+            if not w or w not in known:
+                continue
+            ac = armour_class(g.get("Armor"))
+            builds.append({
+                "battle": rec["battle"], "weapon": w,
+                "armour_class": ac,
+                "item_power": bd.get("item_power"),
+                "seen_as": bd.get("seen_as"),
+                "slots_filled": bd.get("slots_filled"),
+                "gear": {s: strip(v) for s, v in g.items() if v}})
+            e = by_weapon.setdefault(w, {"n": 0, "cloth": 0, "leather": 0,
+                                         "plate": 0, "ip_sum": 0.0,
+                                         "ip_n": 0})
+            e["n"] += 1
+            if ac:
+                e[ac] += 1
+            if bd.get("item_power"):
+                e["ip_sum"] += bd["item_power"]
+                e["ip_n"] += 1
+    for w, e in by_weapon.items():
+        seen_ac = e["cloth"] + e["leather"] + e["plate"]
+        e["armour_majority"] = (max(("cloth", "leather", "plate"),
+                                    key=lambda c: e[c]) if seen_ac else None)
+        e["armour_majority_share"] = (round(max(e["cloth"], e["leather"],
+                                                e["plate"]) / seen_ac, 3)
+                                      if seen_ac else None)
+        e["mean_item_power"] = (round(e["ip_sum"] / e["ip_n"], 1)
+                                if e["ip_n"] else None)
+        e.pop("ip_sum", None)
+
     out = {
         "kind": "party_rosters",
+        "builds": sorted(builds, key=lambda b: (b["weapon"], b["battle"])),
+        "weapon_armour": dict(sorted(by_weapon.items())),
         "semantics": (
             "GroupMembers from official gameinfo kill events: the KILLER'S "
             "PARTY at kill time, deduplicated per battle by member OVERLAP "
@@ -291,6 +383,11 @@ def analyze(known):
             "parties_full_gear": sum(1 for p in parties
                                      if p["size"] and
                                      p["known_weapons"] == p["size"]),
+            "builds": len(builds),
+            "builds_full_kit": sum(1 for b in builds
+                                   if (b["slots_filled"] or 0) >= 6),
+            "weapons_with_armour_evidence": sum(
+                1 for e in by_weapon.values() if e["armour_majority"]),
             "median_coverage": (sorted(
                 b["coverage"] for b in battles if b["coverage"] is not None)
                 [len(battles) // 2] if battles else None),
@@ -304,6 +401,9 @@ def analyze(known):
           f"({s['parties_5plus']} of size 5+, {s['parties_full_gear']} with "
           f"every member's weapon known)")
     print(f"median per-battle gear coverage: {s['median_coverage']}")
+    print(f"{s['builds']} observed BUILDS ({s['builds_full_kit']} with 6+ "
+          f"equipment slots), armour evidence on "
+          f"{s['weapons_with_armour_evidence']} weapons")
     print(f"wrote out/party_rosters.json")
 
 
