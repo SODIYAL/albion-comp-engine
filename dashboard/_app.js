@@ -627,6 +627,9 @@ function memberPop(i, ctx){
    during renderRoster (the render that runs exactly when roster state
    changes) and cached, so wheel spins never pay for the roster analysis. */
 let BOARD_HTML = "", NOTES_HTML = "";
+/* the roster analysis behind the popovers, cached so the dash flyout can
+   rebuild a member's popover on hover without recomputing the party */
+let BOARD_CTX = null;
 function buildCompBoard(ctx){
   if (!party.length || typeof ENG.roleAdvisory !== "function") return "";
   const chests = {};
@@ -669,10 +672,12 @@ function buildCompBoard(ctx){
     <div class="wf-col" style="--rc:${c.color}">
       <span class="wf-col-h">${c.ms.length}× ${esc(c.name)}</span>
       ${c.ms.map(({ i, role }) =>
-        `<div class="dm wf-dm ${roleCls(party[i])}${SHEET_OPEN === i ? " sheet-open" : ""}">
+        `<div class="dm wf-dm ${roleCls(party[i])}${SHEET_OPEN === i ? " sheet-open" : ""}"
+          data-pfrole="${esc(c.name)}${role ? " · " + esc(role) : ""}" data-pfcolor="${c.color}">
           <button class="dm-card wf-mcard" data-member="${i}" aria-label="${esc(nameOf(party[i]))} — slot ${i + 1}, details">
             ${icon(party[i], 44)}<span class="wf-mnm">${esc(nameOf(party[i]))}${role ? `<small>${esc(role)}</small>` : ""}</span><span class="n mono">${String(i + 1).padStart(2, "0")}</span>
           </button>
+          <button class="wf-x" data-remove="${i}" title="remove ${esc(nameOf(party[i]))}" aria-label="Remove ${esc(nameOf(party[i]))}">&times;</button>
           ${memberPop(i, ctx)}
         </div>`).join("")}
     </div>`).join("")}${openCol}${scrim}</div>`;
@@ -693,18 +698,118 @@ function renderRoster(){
   const hintable = swapEligible(review);
   const minI = party.length > 2 ? contrib.indexOf(Math.min(...contrib)) : -1;
   if (SHEET_OPEN !== null && !(SHEET_OPEN < party.length)) SHEET_OPEN = null;
-  BOARD_HTML = buildCompBoard({ contrib, review, hintable, minI });
+  BOARD_CTX = { contrib, review, hintable, minI };
+  BOARD_HTML = buildCompBoard(BOARD_CTX);
   /* below the board: duplicate-interaction notices (spec §7 — the message
      names the exact effect, and unknown says "verify", never a penalty)
      and the open kit editor, full width */
   const notes = [];
   const inotes = interactionNotices();
   if (inotes) notes.push(inotes);
-  if (LO_OPEN !== null && party[LO_OPEN] !== undefined)
+  if (LO_OPEN !== null && party[LO_OPEN] !== undefined && !PDASH_KIT)
     notes.push(`<div class="kit-head fn">kit — ${nameOf(party[LO_OPEN])} · slot ${String(LO_OPEN + 1).padStart(2,"0")}</div>`
       + loadoutPanel(LO_OPEN));
   NOTES_HTML = notes.join("");
 }
+/* ---------------- party-dash kit flyout (owner 2026-09-01) ----------------
+   Hovering a member tile in the dash opens ONE surface left of the panel:
+   the member's worn kit + scored spells + role on top, then the same
+   popover block the tiles used to carry (fit, swap hints, kit/dossier/
+   remove — memberPop, rebuilt from the cached BOARD_CTX). Inside the dash
+   the per-tile hover popovers are suppressed (CSS) in favour of this;
+   the ≤960 tap-sheet path is untouched. Display only — reads state,
+   never scores. */
+let PDASH_FLY_I = null, PDASH_FLY_ROLE = "";
+/* sticky kit editor (owner 2026-09-01): once opened from the flyout, the
+   editor follows every member hovered until toggled shut */
+let PDASH_KIT = false;
+function pdashKitHtml(i, roleTxt){
+  const w = party[i];
+  const L = (typeof LOADOUT !== "undefined" && LOADOUT[i]) || {};
+  const gear = LO_SLOTS.filter(s => L[s]).map(s =>
+    `<span class="pf-g" title="${esc(loName(L[s]) + loAbilityTip(L[s]))}">${loArt(L[s], 30)}<span>${esc(loName(L[s]))}</span></span>`).join("");
+  /* spells: the combo the engine actually scores for this member, named
+     from the weapon's own pools */
+  const pools = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
+  const spellName = (pool, sid) => {
+    const e = (pools[pool] || []).find(x => x[0] === sid);
+    return e ? e[1] : null;
+  };
+  const sp = (ENG.comboSpells(w, COMBOS_CUR[i] === undefined ? null : COMBOS_CUR[i]) || [])
+    .map(([slot, sid]) => {
+      const nm = spellName(slot, sid);
+      return nm ? `<div><span class="k">${slot === "passive" ? "P" : slot.toUpperCase()}</span>${spellIcon(sid)}<span class="pf-spnm">${esc(nm)}</span></div>` : "";
+    }).join("");
+  return `<div class="pf-head">${icon(w, 38)}
+      <div class="pf-nm">${esc(nameOf(w))}${roleTxt ? `<span class="pf-role">${roleTxt}</span>` : ""}</div>
+      <span class="n mono">${String(i + 1).padStart(2, "0")}</span></div>
+    <div class="pf-sec">worn kit</div>
+    ${gear ? `<div class="pf-gear">${gear}</div>`
+           : `<div class="fn">no gear picked yet — the kit button below opens the editor</div>`}
+    ${sp ? `<div class="pf-sec">scored spells</div><div class="pf-spells">${sp}</div>` : ""}
+    ${typeof loDoctrineLine === "function" ? loDoctrineLine(i) : ""}`;
+}
+function pdashFlyFill(){
+  const i = PDASH_FLY_I, fly = $("pdash-fly");
+  if (i === null || !fly || party[i] === undefined) return;
+  DETAIL_W = party[i];   /* spell-facts toggles inside the flyout target it */
+  fly.innerHTML = pdashKitHtml(i, PDASH_FLY_ROLE)
+    + memberPop(i, BOARD_CTX)
+    + (LO_OPEN === i ? `<div class="pf-kit">${loadoutPanel(i)}</div>` : "")
+    + `<div class="pf-dossier">${detailHtml(party[i])}</div>`;
+}
+function refreshPdashFly(){
+  const fly = $("pdash-fly");
+  if (!fly || PDASH_FLY_I === null) return;
+  const st = fly.scrollTop;
+  pdashFlyFill();
+  fly.scrollTop = st;
+}
+function showPdashFly(i, tile){
+  /* hover surface only — touch widths keep the tap-sheet */
+  if (innerWidth <= 960 || !window.matchMedia("(hover: hover)").matches) return;
+  const fly = $("pdash-fly");
+  if (!fly || !BOARD_CTX || party[i] === undefined) return;
+  if (PDASH_FLY_I !== i){
+    PDASH_FLY_I = i;
+    PDASH_FLY_ROLE = tile.dataset.pfrole || "";
+    DETAIL_SPELL = null;   /* fold any open spell panel from another view */
+    if (PDASH_KIT){ LO_OPEN = i; LO_PICKING = null; loadoutSuggest(i); }
+    fly.style.setProperty("--rc", tile.dataset.pfcolor || "var(--ink-3)");
+    pdashFlyFill();
+    fly.scrollTop = 0;
+  }
+  fly.hidden = false;
+}
+function hidePdashFly(){
+  const f = $("pdash-fly");
+  if (f){ f.hidden = true; PDASH_FLY_I = null; }
+}
+function closePdash(){
+  hidePdashFly();
+  const pd = $("pdash");
+  if (pd && pd.dataset.open === "true"){
+    pd.dataset.open = "false";
+    const t = $("pdash-toggle");
+    if (t) t.setAttribute("aria-expanded", "false");
+  }
+}
+{
+  const pd = $("pdash");
+  if (pd){
+    pd.addEventListener("mouseover", e => {
+      /* switch on entering another tile; NEVER hide mid-panel — the path
+         from tile to flyout crosses column padding and the panel edge, and
+         hiding there made the flyout unreachable. mouseleave of the whole
+         panel (flyout included — it is a child) is the only hide. */
+      const dm = e.target.closest(".wf-dm");
+      const btn = dm && dm.querySelector("[data-member]");
+      if (btn) showPdashFly(+btn.dataset.member, dm);
+    });
+    pd.addEventListener("mouseleave", hidePdashFly);
+  }
+}
+
 const INOTE_LABEL = {high: "duplicate utility wasted",
                      warning: "duplicate utility warning",
                      info: "duplicate check", verify: "verify duplicate"};
@@ -861,9 +966,13 @@ function hubRingData(){
 function renderHubRings(rings){
   let r = 94;
   $("hub-rings").innerHTML = rings.map(g => {
-    const v = Math.max(0, Math.min(100, 100 * g.have / g.want));
+    /* SEMICIRCLE gauges (owner 2026-09-01): like the rim cards, a ring
+       lives on the top arc only — 100% spans the semicircle, so the dash
+       is half the pathLength (the CSS rotation starts it at 9 o'clock) */
+    const v = Math.max(0, Math.min(100, 100 * g.have / g.want)) / 2;
     const seg = `
-      <circle class="ring-track" cx="100" cy="100" r="${r}"></circle>
+      <circle class="ring-track" cx="100" cy="100" r="${r}"
+        pathLength="100" stroke-dasharray="50 50"></circle>
       <circle class="ring-fill${g.have >= g.want ? " done" : ""}${v <= 0 ? " empty" : ""}"
         cx="100" cy="100" r="${r}" pathLength="100"
         stroke-dasharray="${v.toFixed(2)} ${(100 - v).toFixed(2)}"
@@ -997,10 +1106,10 @@ function renderWheelFoot(keys, recs, rings){
     : "") + (PROV.some(x => x === "f")
     ? `<button class="cb-forge" id="reforge" title="rebuild every forged slot for the current content, style and size — manual picks stay">reforge all</button>`
     : "");
-  /* the comp board replaces the ring tallies once members exist; the brass
-     party count moves up beside the wheel count. BOARD_HTML is built by
-     renderRoster (which runs on every roster-state change), so wheel spins
-     reuse it for free. */
+  /* the comp board lives in the right-edge party dash (owner 2026-09-01,
+     "so we can see them all much easier") — the foot keeps the compact
+     tally rows. BOARD_HTML is built by renderRoster (the render that runs
+     on every roster-state change), so wheel spins reuse it for free. */
   const board = BOARD_HTML;
   $("wheel-foot").innerHTML = `
     ${WHEEL_FOCUS_W && recs !== null && party.length < HARD_CAP
@@ -1011,10 +1120,27 @@ function renderWheelFoot(keys, recs, rings){
       <span class="wf-count">${keys.length} weapon${keys.length === 1 ? "" : "s"} on the wheel</span>
       ${board ? `<span class="wf-ring" style="color:var(--brass)">party <b>${party.length}/${PLAN()}</b></span>` : ""}
     </div>
-    ${board || `<div class="wf-row"><span class="wf-rings">${rings.map(g =>
-      `<span class="wf-ring" style="color:${g.color}">${esc(g.label)} <b>${g.have}/${g.want}</b></span>`).join("")}</span></div>`}
-    ${NOTES_HTML ? `<div class="roster-notes wf-notes">${NOTES_HTML}</div>` : ""}
+    <div class="wf-row"><span class="wf-rings">${rings.map(g =>
+      `<span class="wf-ring" style="color:${g.color}">${esc(g.label)} <b>${g.have}/${g.want}</b></span>`).join("")}</span></div>
     ${forge ? `<div class="wf-row"><span class="wf-actions">${forge}</span></div>` : ""}`;
+  /* the dash mirrors the roster: board + notes rail (duplicate notices,
+     open kit editor) — same tiles, same delegated actions, new home */
+  const dash = $("pdash-body");
+  if (dash){
+    dash.innerHTML = board
+      ? board + (NOTES_HTML ? `<div class="roster-notes wf-notes">${NOTES_HTML}</div>` : "")
+      : `<div class="pdash-empty fn">No members yet — spin the wheel and add picks, or forge a full comp.</div>`;
+    const pc = $("pdash-count");
+    if (pc) pc.textContent = `${party.length}/${PLAN()}`;
+    /* tile height divides the viewport by the member count (see .pdash CSS) */
+    $("pdash").style.setProperty("--pdn", party.length || 1);
+    /* an open flyout survives the re-render (kit edits arrive through
+       render()) as long as its member still exists; otherwise it hides */
+    const fv = $("pdash-fly");
+    if (fv && !fv.hidden && PDASH_FLY_I !== null && party[PDASH_FLY_I] !== undefined)
+      refreshPdashFly();
+    else hidePdashFly();
+  }
 }
 function renderWheel(recs){
   renderPickerChips();
@@ -1670,9 +1796,10 @@ function statsBlock(key){
     <table class="ev-tbl st-tbl"><tbody>${rows.join("")}</tbody></table>
     ${ip ? `<div class="st-ip">item power — ${ip}</div>` : ""}`;
 }
-function renderDetail(w){
-  if (DETAIL_W !== w) DETAIL_SPELL = null;   /* new weapon, fold open panels */
-  DETAIL_W = w;
+/* the dossier body — one builder serving BOTH the drawer (wheel/evidence
+   clicks) and the party dash's kit flyout (owner 2026-09-01: "combine the
+   dossier and the popout into one thing") */
+function detailHtml(w){
   const d = WEAPONS[w], sp = (typeof SPELLS !== "undefined" && SPELLS[w]) || {};
   const vars = loVariants(w);
   const picks = { q: new Set(), w: new Set(), passive: new Set() };
@@ -1705,8 +1832,7 @@ function renderDetail(w){
         ${loLine(w, v)}
         <div class="fieldnote">${loProvenance(v)}</div></div>`).join("")}
     </div>` : "";
-  $("drawer-title").textContent = d.display_name;
-  $("drawer-body").innerHTML = `
+  return `
     <div class="dt-head">${heroArt(w, 84)}
       <div class="dt-id">
         <b>${nameOf(w)}</b>${badgeHtml(w)}
@@ -1725,7 +1851,14 @@ function renderDetail(w){
       </div>
       <div>${pool("e", "E — the identity")}${pool("q", "Q options")}${pool("w", "W options")}${pool("passive", "Passives")}${interactionBlock(w)}${lo}${statsBlock(w)}</div>
     </div>`;
+}
+function renderDetail(w){
+  if (DETAIL_W !== w) DETAIL_SPELL = null;   /* new weapon, fold open panels */
+  DETAIL_W = w;
+  $("drawer-title").textContent = WEAPONS[w].display_name;
+  $("drawer-body").innerHTML = detailHtml(w);
   $("drawer").dataset.open = "true";
+  closePdash();   /* the dash overlays the drawer — never show both */
 }
 /* Per-ability facts panel (2026-08-19): every effect the game data states
    for a spell — typed effects from the structured effect layer, the
@@ -1807,6 +1940,7 @@ function renderEvidence(cap){
     ? `<table class="ev-tbl"><thead><tr><th>Weapon</th><th>Score</th><th>Evidence spell</th><th>Item key</th></tr></thead><tbody>${rows.join("")}</tbody></table>`
     : `<p class="ev-empty">No weapon in this party supplies <span class="mono">${esc(cap)}</span>. Supply is 0 of ${target(cap).toFixed(1)} units.</p>`;
   $("drawer").dataset.open = "true";
+  closePdash();   /* the dash overlays the drawer — never show both */
 }
 function renderMetaStrip(){
   const sec = $("meta-sec");
@@ -2079,7 +2213,13 @@ function setRail(min){
 document.addEventListener("click", e => {
   /* loadout layer first: its controls live inside party rows, so a later
      [data-remove]/[data-detail] match must not swallow them */
-  if (loadoutHandleClick(e)){ render(); return; }
+  const loInFly = !!e.target.closest("#pdash-fly");
+  if (loadoutHandleClick(e)){
+    /* a kit toggle from the flyout makes the editor sticky there — it then
+       follows every member hovered until toggled shut (owner 2026-09-01) */
+    if (loInFly) PDASH_KIT = LO_OPEN !== null;
+    render(); return;
+  }
   /* member bottom sheet (≤960 only — desktop keeps the hover popover).
      data-member sits on the CARD; the popover is its sibling, so taps on
      the sheet's own kit/dossier/remove buttons never re-toggle it */
@@ -2124,7 +2264,10 @@ document.addEventListener("click", e => {
   if (spi){
     DETAIL_SPELL = DETAIL_SPELL === spi.dataset.spellinfo
       ? null : spi.dataset.spellinfo;
-    if (DETAIL_W) renderDetail(DETAIL_W);
+    /* a spell row inside the dash flyout re-renders the flyout in place —
+       never the drawer (the two never show together) */
+    if (spi.closest("#pdash-fly")) refreshPdashFly();
+    else if (DETAIL_W) renderDetail(DETAIL_W);
     return;
   }
   const det = e.target.closest("[data-detail]");
@@ -2236,6 +2379,7 @@ document.addEventListener("click", e => {
     const ri = +rm.dataset.remove;
     party.splice(ri, 1); PROV.splice(ri, 1); COMBO.splice(ri, 1);
     FORGE_NOTE = null; SHEET_OPEN = null;
+    hidePdashFly();   /* indices shift — a kept flyout would show the wrong member */
     loadoutRemove(ri); render(); return;
   }
   if (e.target.closest("#rail-toggle")){ setRail(true); return; }
@@ -2246,6 +2390,12 @@ document.addEventListener("click", e => {
     const s = $("shell"), open = s.dataset.msetup === "open";
     if (open) delete s.dataset.msetup; else s.dataset.msetup = "open";
     $("msetup").setAttribute("aria-expanded", String(!open));
+    return;
+  }
+  if (e.target.closest("#pdash-toggle")){
+    const d = $("pdash"), open = d.dataset.open === "true";
+    d.dataset.open = open ? "false" : "true";
+    $("pdash-toggle").setAttribute("aria-expanded", String(!open));
     return;
   }
   if (e.target.closest("#companion-connect")){ toggleCompanion(); return; }

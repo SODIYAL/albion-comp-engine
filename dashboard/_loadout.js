@@ -321,7 +321,7 @@ function loDoctrineLine(i){
      Translation-only — every fact comes straight off the engine. */
   if (typeof ENG === "undefined" || !ENG.primarySeat) return "";
   const seat = ENG.primarySeat(party[i]);
-  if (!seat) return "";
+  if (!seat) return `<div class="lo-ref" title="fail-closed generation (owner ruling 2026-09-01): kit suggestions only speak evidence — with no role-book seat there is no doctrine tier to bound them, so the engine proposes nothing rather than marginal-ranking the whole catalog. Your manual picks always score.">no role-book seat for this weapon — the engine suggests no kit; pick gear manually (it always scores)</div>`;
   const rec = (ENG.rolesBook || {})[seat] || {};
   const chest = (LOADOUT[i] || {}).armor;
   const dp = chest ? (((ENG.gear[chest] || {}).doctrine_passives || {})[rec["class"]] || null) : null;

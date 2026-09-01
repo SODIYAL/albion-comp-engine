@@ -667,7 +667,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 /* the wheel proper — all rim geometry derives from --wd so the whole
    instrument scales with its column (100cqi = the center column's width) */
 .wheel{
-  position:relative; margin:10px auto 8px;
+  position:relative; margin:10px auto 4px;
   --wd:min(720px, calc(100vw - 64px));
   --wd:min(720px, 100cqi);
   --card-w:clamp(76px, calc(var(--wd)*.185), 134px);
@@ -679,9 +679,16 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
      arc's open mouth. Height = top arc + the hub's lower half; the width
      freed goes to the comp board below. Drag-to-rotate math derives the
      center from the WIDTH (see angleOf), never the box height. */
-  --hub-r:calc(var(--wd)*0.21);
+  /* 0.30 (was 0.21): the role rings ride out to just shy of the rim cards,
+     so the hub interior breathes instead of leaving a dead moat of track.
+     The min() guard keeps a 10px moat at narrow widths, where the cards'
+     clamp() floors stop shrinking with --wd and would otherwise collide */
+  --hub-r:min(calc(var(--wd)*0.30), calc(var(--wr) - var(--card-h)/2 - 10px));
   width:var(--wd);
-  height:calc(var(--wd)/2 + var(--hub-r) + 12px);
+  /* 0.85: the hub's lower arc holds nothing below the Add button — the
+     box ends early and the hub's bottom fades out over the foot instead
+     of pushing it a dead half-circle down */
+  height:calc(var(--wd)/2 + var(--hub-r)*0.85);
 }
 .wheel:focus-visible{outline:2px solid var(--brass-bright); outline-offset:4px; border-radius:24px}
 .wheel-track{
@@ -757,51 +764,52 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   background:radial-gradient(closest-side, rgba(24,28,37,.94), rgba(13,16,22,.97));
   border:1px solid var(--rule-2);
   box-shadow:inset 0 0 42px rgba(0,0,0,.55), 0 0 34px -14px rgba(255,201,58,.3);
+  /* the lower arc dissolves before the foot row (the wheel box ends at
+     0.85 of the hub radius); the fade starts below the Add button (~82%) */
+  -webkit-mask-image:linear-gradient(180deg, #000 84%, transparent 97%);
+  mask-image:linear-gradient(180deg, #000 84%, transparent 97%);
 }
 .hub-rings{position:absolute; inset:5px; width:calc(100% - 10px); height:calc(100% - 10px)}
 .hub-rings circle{fill:none; stroke-width:6.5;
-  transform:rotate(-90deg); transform-origin:100px 100px}
+  /* 180deg turns the circle's start to 9 o'clock sweeping over the top —
+     the rings ride the same semicircle as the rim cards (renderHubRings
+     halves the dash so 100% spans exactly that top arc) */
+  transform:rotate(180deg); transform-origin:100px 100px}
 .hub-rings .ring-track{stroke:rgba(255,255,255,.055)}
-.hub-rings .ring-fill{stroke-linecap:round; transition:stroke-dasharray .5s var(--ease)}
+.hub-rings .ring-fill{stroke-linecap:round; transition:stroke-dasharray .5s var(--ease);
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.55))}
 .hub-rings .ring-fill.empty{opacity:0}
-.hub-rings .ring-fill.done{filter:drop-shadow(0 0 4px currentColor)}
+.hub-rings .ring-fill.done{
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.55)) drop-shadow(0 0 5px currentColor)}
+/* the band wears the wheel's material: a top-lit / bottom-shaded lip over
+   the rings only (the mask keeps the hub interior clean), so they read as
+   tread on the instrument instead of flat strokes floating on it */
+.wheel-hub::after{
+  content:""; position:absolute; inset:0; border-radius:50%;
+  pointer-events:none; z-index:1;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,0) 42%,
+      rgba(0,0,0,.38) 97%),
+    radial-gradient(closest-side, transparent 74%, rgba(0,0,0,.28) 78%,
+      transparent 86%, rgba(0,0,0,.5) 99.5%);
+  -webkit-mask-image:radial-gradient(closest-side, transparent 68%, #000 72%);
+  mask-image:radial-gradient(closest-side, transparent 68%, #000 72%);
+}
 .hub-body{
   /* 20%: the mouth-hub is a touch smaller than the old ring-bound one,
      so the body claims a little more of its radius */
-  position:absolute; inset:20%; display:flex; flex-direction:column;
-  align-items:center; justify-content:center; gap:min(3px, calc(var(--wd)*0.006));
+  position:absolute; inset:18%; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:min(5px, calc(var(--wd)*0.009));
   text-align:center; min-width:0;
 }
 .hub-body .icon{filter:drop-shadow(0 6px 14px rgba(0,0,0,.6)) saturate(1.15);
-  width:min(54px, calc(var(--wd)*0.1)); height:min(54px, calc(var(--wd)*0.1))}
-/* the elemental aura: a breathing glow behind the weapon art, keyed to
-   its tree by renderHub via data-aura on the hub */
+  width:min(88px, calc(var(--wd)*0.15)); height:min(88px, calc(var(--wd)*0.15))}
+/* the weapon art stands on its own — the old elemental aura halo read as
+   a smeared square behind the icon and was removed (owner 2026-09-01);
+   renderHub still stamps data-aura on the hub if a future skin wants it */
 .hub-art-slot{position:relative; display:grid; place-items:center}
-.hub-art-slot::before{
-  content:""; position:absolute; inset:-105%; border-radius:50%; z-index:0;
-  /* the halo overlays its siblings in hit-testing (z-index:0 vs their
-     static auto) — without this, it eats the caps row's hover/tooltips */
-  pointer-events:none;
-  background:radial-gradient(closest-side,
-    var(--aura, transparent), var(--aura, transparent) 22%, transparent 80%);
-  filter:blur(6px);
-  animation:aura-breathe 3s var(--ease) infinite alternate;
-}
-.hub-art-slot .icon{position:relative; z-index:1}
-@keyframes aura-breathe{
-  from{opacity:.75; transform:scale(.94)}
-  to{opacity:1; transform:scale(1.1)}
-}
-.wheel-hub[data-aura="fire"]{--aura:rgba(255,122,47,.9)}
-.wheel-hub[data-aura="fire"] .hub-art-slot::before{animation-duration:1.5s} /* flicker */
-.wheel-hub[data-aura="frost"]{--aura:rgba(77,205,255,.8)}
-.wheel-hub[data-aura="holy"]{--aura:rgba(255,223,122,.85)}
-.wheel-hub[data-aura="nature"]{--aura:rgba(53,230,138,.75)}
-.wheel-hub[data-aura="shadow"]{--aura:rgba(157,92,255,.85)}
-.wheel-hub[data-aura="arcane"]{--aura:rgba(125,92,255,.8)}
-.wheel-hub[data-aura="steel"]{--aura:rgba(170,180,205,.35)}
 .hub-nm{
-  font-family:var(--serif); font-size:min(15px, calc(var(--wd)*0.028));
+  font-family:var(--serif); font-size:min(20px, calc(var(--wd)*0.036));
   line-height:1.15; max-width:100%; flex:none;
   overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
 }
@@ -810,7 +818,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .hub-caps{display:flex; gap:5px; align-items:center; justify-content:center; margin:2px 0}
 .hub-cap{
   display:inline-flex; align-items:center; justify-content:center; flex:none;
-  width:min(24px, calc(var(--wd)*0.046)); height:min(24px, calc(var(--wd)*0.046));
+  width:min(29px, calc(var(--wd)*0.054)); height:min(29px, calc(var(--wd)*0.054));
   border:1px solid var(--rule-2); border-radius:7px; background:rgba(255,255,255,.03);
   cursor:help; transition:border-color .15s var(--ease);
 }
@@ -818,10 +826,10 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .hub-cap .sem-icon{width:74%; height:74%}
 .hub-cap.hub-cap-txt{
   width:auto; padding:0 8px; font-family:var(--mono);
-  font-size:min(9px, calc(var(--wd)*0.017)); letter-spacing:.06em;
+  font-size:min(10px, calc(var(--wd)*0.019)); letter-spacing:.06em;
   text-transform:uppercase; color:var(--ink-2); white-space:nowrap;
 }
-.hub-score{font-size:min(10.5px, calc(var(--wd)*0.02)); color:var(--brass)}
+.hub-score{font-size:min(13px, calc(var(--wd)*0.024)); color:var(--brass)}
 .hub-score .offcomp{font-style:normal}
 .hub-empty{font-size:12px; line-height:1.5; color:var(--ink-2); padding:0 6px}
 .cb-add{
@@ -835,8 +843,8 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   box-shadow:0 4px 20px -4px rgba(255,201,58,.65), inset 0 1px 0 rgba(255,255,255,.35)}
 .cb-add:active{transform:translateY(0)}
 .hub-add{
-  padding:min(7px, calc(var(--wd)*0.013)) min(15px, calc(var(--wd)*0.028));
-  font-size:min(11.5px, calc(var(--wd)*0.022)); margin-top:min(4px, calc(var(--wd)*0.007));
+  padding:min(9px, calc(var(--wd)*0.016)) min(19px, calc(var(--wd)*0.034));
+  font-size:min(13px, calc(var(--wd)*0.024)); margin-top:min(6px, calc(var(--wd)*0.01));
 }
 .cb-forge{
   padding:9px 14px; background:transparent; color:var(--brass);
@@ -847,7 +855,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 
 /* beneath the wheel: next-pick eyebrow, ring tallies, forge actions —
    layered above the wheel's faded bottom arc, in the space it gave up */
-.wheel-foot{display:flex; flex-direction:column; gap:9px; margin-top:0;
+.wheel-foot{display:flex; flex-direction:column; gap:7px; margin-top:0;
   position:relative; z-index:5}
 .wheel-foot .wf-row{
   display:flex; align-items:center; justify-content:center; gap:10px 16px; flex-wrap:wrap;
@@ -910,6 +918,135 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
    the lo-panel rules still apply) */
 .wf-notes{width:100%; max-width:calc(var(--wd, 720px) + 40px); margin:2px auto 0;
   text-align:left}
+
+/* ---------- party dash: the comp board in a right-edge pop-out ----------
+   (owner 2026-09-01: "make a clean dash on the right side which pops in
+   and out and put the party members there so we can see them all"). One
+   role section per row, every member a full dm tile with the same popover
+   and kit/dossier/remove actions — renderWheelFoot fills #pdash-body. */
+.pdash{
+  position:fixed; top:0; right:0; bottom:0; z-index:40;
+  width:min(430px, 92vw); transform:translateX(100%);
+  transition:transform .32s var(--ease);
+  background:rgba(13,16,22,.97); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  border-left:1px solid var(--rule-2); box-shadow:-20px 0 44px rgba(0,0,0,.5);
+  display:flex; flex-direction:column;
+}
+.pdash[data-open="true"]{transform:none}
+.pdash-tab{
+  position:absolute; top:50%; right:100%; transform:translateY(-50%);
+  writing-mode:vertical-rl; padding:16px 8px;
+  font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--brass); background:linear-gradient(90deg, var(--panel-hi), var(--panel-lo));
+  border:1px solid var(--rule-2); border-right:0; border-radius:10px 0 0 10px;
+  box-shadow:-8px 0 18px rgba(0,0,0,.4); cursor:pointer;
+  transition:color .18s var(--ease), border-color .18s var(--ease);
+}
+.pdash-tab b{color:var(--ink); font-weight:600}
+.pdash-tab:hover{color:var(--brass-bright); border-color:var(--brass-deep)}
+.pdash-body{overflow-y:auto; padding:12px 12px 18px; flex:1}
+.pdash-empty{padding:6px 2px}
+/* one column per role section — full-width tiles read in one scan, and
+   the 256px popover fits the panel without horizontal clipping */
+.pdash .wf-comp{grid-template-columns:1fr; max-width:none; gap:7px}
+.pdash .wf-notes{max-width:none}
+/* the whole party fits the viewport at once: tiles are compact and their
+   height divides the available run by the member count (--pdn, stamped by
+   renderWheelFoot), clamped so they never balloon or become unreadable */
+.pdash .wf-col{gap:2px; padding:6px 8px 7px; border-radius:10px}
+.pdash .wf-col-h{margin-bottom:2px}
+.pdash .wf-mcard{
+  min-height:clamp(30px, calc((100vh - 330px) / max(var(--pdn, 15), 1)), 42px);
+  gap:8px; padding:2px 7px; border-radius:8px;
+}
+.pdash .wf-mcard .icon{width:28px; height:28px}
+.pdash .wf-mnm{font-size:12px}
+.pdash .wf-mnm small{margin-top:0}
+/* popovers open BELOW the tile: above would clip at the panel's top edge,
+   below just extends the scrollable area (touch widths — the tap-sheet
+   path; on hover widths the kit flyout replaces them entirely) */
+.pdash .dm-pop{bottom:auto; top:calc(100% + 10px); z-index:46}
+.pdash .dm-pop::after{top:auto; bottom:100%}
+@media (min-width:961px){ .pdash .wf-comp .dm-pop{display:none} }
+
+/* -- the kit flyout: ONE hover surface left of the dash — worn kit,
+   scored spells, role and fit on top, then the member's FULL dossier
+   (owner 2026-09-01: "combine the dossier and the popout into one thing").
+   Near full height, scrolls; the drawer stays for non-party dossiers. -- */
+.pdash-fly{
+  position:absolute; right:calc(100% + 10px); top:10px; bottom:10px;
+  width:min(640px, calc(100vw - 520px)); z-index:41;
+  overflow-y:auto; overscroll-behavior:contain;
+  background:rgba(11,13,18,.99); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--rule-2); border-radius:14px;
+  box-shadow:var(--shadow-lift); padding:14px 16px 16px;
+}
+.pdash-fly[hidden]{display:none}
+/* hover bridge across the gap between flyout and panel */
+.pdash-fly::after{content:""; position:absolute; left:100%; top:0; bottom:0; width:12px}
+.pf-head{display:flex; align-items:center; gap:9px}
+.pf-head .icon{flex:none; border-radius:8px}
+.pf-head .n{margin-left:auto; font-family:var(--mono); font-size:9.5px; color:var(--ink-3)}
+.pf-nm{font-size:13.5px; min-width:0}
+.pf-role{display:block; font-family:var(--mono); font-size:9.5px; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--rc, var(--ink-3)); margin-top:2px}
+.pf-sec{font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-3); margin:8px 0 4px}
+/* two columns keep the kit and spell lists short — full names ride the
+   chip tooltips, the labels ellipsize */
+.pf-gear{display:grid; grid-template-columns:1fr 1fr; gap:5px}
+.pf-g{display:inline-flex; align-items:center; gap:7px; padding:3px 8px 3px 4px;
+  background:rgba(255,255,255,.03); border:1px solid var(--rule); border-radius:8px;
+  font-size:11.5px; color:var(--ink-2); cursor:help; min-width:0}
+.pf-g img{border-radius:6px; flex:none}
+.pf-g span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.pf-spells{display:grid; grid-template-columns:1fr 1fr; gap:4px 12px;
+  font-size:12px; color:var(--ink-2)}
+.pf-spells > div{display:flex; align-items:center; gap:6px; min-width:0}
+.pf-spells .pf-spnm{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.pf-spells .sp-ic{width:26px; height:26px; border-radius:6px; flex:none}
+.pf-spells .k{font-family:var(--mono); font-size:9.5px; color:var(--brass);
+  display:inline-block; width:12px; flex:none}
+/* the sticky kit editor, inlined under the actions */
+.pf-kit{border-top:1px solid var(--rule); margin-top:10px; padding-top:10px}
+/* the merged popover block: statically embedded under the kit sections —
+   the weapon's name is already the flyout's header, so only its badge row,
+   verdict line and actions carry down */
+.pdash-fly .dm-pop{position:static; visibility:visible; opacity:1; width:auto;
+  transform:none;   /* the base rule's translateX(-50%) survives position:static */
+  background:none; border:0; box-shadow:none; padding:8px 0 0; margin-top:9px;
+  border-top:1px solid var(--rule); border-radius:0}
+.pdash-fly .dm-pop::after{display:none}
+.pdash-fly .dm-pop .dm-nm .nm-btn{display:none}
+.pdash-fly .dm-pop .dm-nm{margin-bottom:4px}
+.pdash-fly .dm-actions{margin-top:7px}
+.pdash-fly .lo-ref{margin-top:8px}
+/* removal moved onto the tiles (hover ×) — the flyout drops its button;
+   the dossier is inlined below, so its button goes too */
+.pdash-fly .dm-act.dm-x{display:none}
+.pdash-fly .dm-act[data-detail]{display:none}
+/* the inlined dossier: separated from the kit block; its own header
+   duplicates the flyout's (name, badges, role) and is dropped */
+.pf-dossier{border-top:1px solid var(--rule); margin-top:12px; padding-top:12px}
+.pf-dossier .dt-head{display:none}
+.pf-dossier .dt-grid{grid-template-columns:1fr; gap:4px}
+
+/* hover ×: appears over the slot number on hover-capable screens; rides
+   the same delegated data-remove action the popover button used */
+.wf-x{
+  position:absolute; top:50%; right:7px; transform:translateY(-50%);
+  width:20px; height:20px; display:none; align-items:center; justify-content:center;
+  border-radius:50%; border:1px solid var(--rule-2); background:rgba(13,16,22,.92);
+  /* above the hovered card, which climbs to z-index:6 (board hover rule) */
+  color:var(--ink-3); font-size:13px; line-height:1; padding:0; cursor:pointer; z-index:7;
+  transition:color .15s var(--ease), border-color .15s var(--ease);
+}
+.wf-x:hover{color:var(--gap); border-color:var(--gap); background:var(--gap-wash)}
+@media (hover:hover){
+  .pdash .wf-dm{position:relative}
+  .pdash .wf-dm:hover .wf-x, .pdash .wf-dm:focus-within .wf-x{display:inline-flex}
+  .pdash .wf-dm:hover .wf-mcard .n{opacity:0}
+}
 
 /* ---------- capability readout ---------- */
 .groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:2px 34px}
@@ -1191,6 +1328,11 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .ev-empty{font-size:13px; color:var(--ink-2); padding:6px 0}
 .scroll-x{overflow-x:auto}
 
+.foot-chips{
+  display:flex; flex-wrap:wrap; gap:8px;
+  border-top:1px solid var(--rule); padding-top:16px;
+}
+.foot-chips + .footnote{border-top:0; padding-top:10px}
 .footnote{
   font-size:12px; line-height:1.65; color:var(--ink-3);
   border-top:1px solid var(--rule); padding-top:16px;
@@ -1364,7 +1506,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   /* --- density --- */
   .main{padding:14px 12px 70px; gap:22px}
   .masthead{padding:10px 12px; gap:8px 12px}
-  .masthead .chip{display:none}
+  .masthead .share-btn{padding:7px 10px; font-size:10px}
   .brandmark h1{font-size:18px}
   .brandmark .sub{display:none}
   .ws-fit .num{font-size:34px}
@@ -1426,8 +1568,10 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   </div>
   <div class="spacer"></div>
   <a class="about-link" href="how-it-works.html">How it works <span aria-hidden="true">→</span></a>
-  <span class="chip"><span class="dot" id="parity-dot"></span><span id="parity-chip">parity — checking</span></span>
-  <span class="chip">dataset <span class="mono" id="build-stamp">—</span></span>
+  <button class="share-btn lf-btn" id="companion-connect">connect live party</button>
+  <label class="lf-sync" id="companion-sync-wrap" hidden
+         title="keep the loaded comp following the live party: weapon swaps update their slot, newly visible weapons fill in, real Q/W picks flow into the loadouts — no re-load needed">
+    <input type="checkbox" id="companion-sync"> live sync</label>
 </header>
 
 <div class="shell" id="shell">
@@ -1548,19 +1692,28 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
     <section class="livefeed" id="companion" data-live="false">
       <div class="sec-label">Live party</div>
       <div class="lf-bar">
-        <button class="share-btn lf-btn" id="companion-connect">connect live party</button>
         <div class="status" id="companion-status" hidden></div>
         <button class="load-btn lf-btn" id="companion-load" hidden>load party into comp</button>
-        <label class="lf-sync" id="companion-sync-wrap" hidden
-               title="keep the loaded comp following the live party: weapon swaps update their slot, newly visible weapons fill in, real Q/W picks flow into the loadouts — no re-load needed">
-          <input type="checkbox" id="companion-sync"> live sync</label>
       </div>
       <div class="comp-members" id="companion-members"></div>
     </section>
 
+    <div class="foot-chips">
+      <span class="chip"><span class="dot" id="parity-dot"></span><span id="parity-chip">parity — checking</span></span>
+      <span class="chip">dataset <span class="mono" id="build-stamp">—</span></span>
+    </div>
     <p class="footnote" id="footnote"></p>
   </main>
 </div>
+
+<!-- Party dash: the comp board in a right-edge pop-out, toggled by its tab -->
+<aside class="pdash" id="pdash" data-open="false" aria-label="Party board">
+  <button class="pdash-tab" id="pdash-toggle" aria-expanded="false"
+    title="show or hide the party board">party <b id="pdash-count">0/0</b></button>
+  <div class="pdash-body" id="pdash-body"></div>
+  <!-- kit flyout: fills on hover over a member tile (showPdashFly) -->
+  <div class="pdash-fly" id="pdash-fly" hidden></div>
+</aside>
 
 <div class="drawer" id="drawer" data-open="false" role="dialog" aria-label="Evidence">
   <div class="drawer-hd">
