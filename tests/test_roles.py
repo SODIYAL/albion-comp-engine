@@ -499,7 +499,10 @@ def t_grading_rulings():
     menus = {w: (e.weapons[w].get("role_menu") or []) for w in e.weapons}
     memb = (
         menus.get("MAIN_ARCANESTAFF_UNDEAD") == ["engage_tank"]        # Witchwork: clump, not cleanse
-        and menus.get("2H_COMBATSTAFF_MORGANA") == ["shield_break"]    # Black Monk: purges ENEMY shields
+        # Black Monk: purges ENEMY shields (never shield_support); the
+        # seat-all pass (owner:2026-09-01) added its off_tank SEAT — the
+        # 2026-08-26 ruling's substance (function, not support seat) holds
+        and menus.get("2H_COMBATSTAFF_MORGANA") == ["off_tank", "shield_break"]
         and menus.get("2H_HOLYSTAFF") == ["brawl_healer"]              # Great Holy: brawl anchor only
         and menus.get("2H_GLACIALSTAFF") == ["ranged_aoe"]             # Glacial: dps, not support
         and menus.get("2H_ICECRYSTAL_UNDEAD") == ["ranged_aoe"]        # Permafrost: dps
@@ -551,14 +554,16 @@ def t_weapon_doctrine():
     e = Engine(content="blackzone_roam", size=20)
     ko = e.kit_options("2H_POLEHAMMER", top_n=5)
     top = ko["kit"]["armor"]
-    # doctrine_n TRACKS CORPUS SIZE — it was [5, 5] until the 23 albioncompo
-    # comps landed 2026-08-29 and is [9, 12] now. The MECHANISM is what this
-    # pins: Polehammer's own observed kit (weapon-level doctrine) outranks the
-    # seat aggregate, and it still resolves to Knight by a clear majority. A
-    # change here after an evidence import is expected; a change in `gear` or
-    # `doctrine` is not.
+    # doctrine_n TRACKS CORPUS SIZE — [5, 5] until the 23 albioncompo comps
+    # (2026-08-29), [9, 12] until the killboard stream joined the mining
+    # (2026-09-01, owner: "base it on seen evidence from the data we
+    # harvested"), [63, 95] now. The MECHANISM is what this pins:
+    # Polehammer's own observed kit (weapon-level doctrine) outranks the
+    # seat aggregate, and it still resolves to Knight by a clear majority.
+    # A change here after an evidence import is expected; a change in
+    # `gear` or `doctrine` is not.
     ph = (top["gear"] == "ARMOR_PLATE_SET2"
-          and top["doctrine"] == "weapon" and top["doctrine_n"] == [9, 12])
+          and top["doctrine"] == "weapon" and top["doctrine_n"] == [63, 95])
     hoj = e.kit_options("2H_HAMMER_AVALON", top_n=10)
     demon = next((o for o in hoj["options"]["armor"]
                   if o["gear"] == "ARMOR_PLATE_HELL"), None)
@@ -588,6 +593,47 @@ def t_weapon_doctrine():
           f"cb_reflect={cb and cb['copies'].get('reflect_shell')}")
 
 
+def t_fail_closed_generation():
+    # R19 — FAIL-CLOSED GENERATION (owner ruling 2026-09-01, "fix the
+    # underlying issue which allows these items and builds and kits to
+    # slide into the team comp"): the kit-suggestion channel only speaks
+    # evidence. (a) A seatless weapon gets NO kit and NO options — the
+    # old ungated fallback marginal-ranked the whole catalog, and in any
+    # full comp the one uncovered capability (usually silence) handed
+    # the same off-role helm (Hellion Hood) to every seatless member.
+    # (b) A seated slot with no doctrine tier stays UNSET. (c) role=None
+    # stays the explicit diagnostic escape. (d) Manual builds still
+    # score anything — the gate is suggestion-layer only.
+    e = Engine(content="faction_war", size=15, style="brawl")
+    # since the seat-all pass (owner:2026-09-01) every weapon holds a seat,
+    # so the seatless fixture is SYNTHESIZED: strip one weapon's menu
+    # in-memory — the fail-closed mechanism itself is what this pins
+    seatless = "MAIN_1HCROSSBOW"
+    e.weapons[seatless]["role_menu"] = []
+    assert e.primary_seat(seatless) is None, "fixture: menu strip failed"
+    ko = e.kit_options(seatless, top_n=300)
+    a = ko["kit"] == {} and ko["options"] == {} and ko["seat"] is None
+    ko_party = e.kit_options(seatless, party=["MAIN_MACE"], top_n=300)
+    a2 = ko_party["kit"] == {} and ko_party["options"] == {}
+    # (b) every option every seated weapon is offered is doctrine-cited
+    seated = e.kit_options("MAIN_MACE", top_n=300)
+    b = (seated["seat"] == "engage_tank" and seated["kit"]
+         and all(o["doctrine"] in ("weapon", "seat")
+                 for opts in seated["options"].values() for o in opts))
+    # (c) the diagnostic escape still serves the full catalog
+    unc = e.kit_options(seatless, top_n=300, role=None)
+    c = bool(unc["options"].get("head"))
+    # (d) manual builds score: the exact Hellion kit still evaluates
+    d = bool(e.build_extra(seatless, None, ["HEAD_LEATHER_HELL"]))
+    check("R19 fail-closed generation: seatless weapon -> no kit/options "
+          "(context-free and comp-aware); seated options all doctrine-"
+          "cited; role=None diagnostic escape intact; manual builds score",
+          a and a2 and b and c and d,
+          f"seatless kit={ko['kit']} seat={ko['seat']} "
+          f"seated_seat={seated['seat']} "
+          f"seated_slots={sorted(seated['options'])} manual={d}")
+
+
 if __name__ == "__main__":
     t_role_book()
     t_ruled_memberships()
@@ -607,6 +653,7 @@ if __name__ == "__main__":
     t_kit_annotations()
     t_grading_rulings()
     t_weapon_doctrine()
+    t_fail_closed_generation()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")

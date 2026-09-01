@@ -1357,3 +1357,147 @@ caches. Not done unilaterally because the raw builds ARE the evidence and
 discarding them silently would be the wrong default.
 
 Display/evidence only, unchanged: nothing here feeds scoring.
+
+## Fail-closed kit generation (owner ruling 2026-09-01)
+
+**The case:** the owner asked why Light Crossbow wore a mixed leather/plate
+kit at faction_war/15/brawl and why Hellion Hood was suggested "on so many
+seats and not just tank". Diagnosis: `kit_options` documented and served a
+fallback — a weapon with no role-book seat "keeps the pre-doctrine kit
+behavior", i.e. the WHOLE catalog marginal-ranked. 75 of 137 weapons resolve
+no seat, and in any full comp the marginal ranking has a predictable winner:
+almost every capability is saturated, silence almost never is, so Hellion
+Hood's silence +3 topped the head slot for practically every seatless member
+of every full comp. The 2026-08-26 "everyone-gets-Hellion fix" had gated only
+the CHEST; the head slot's doctrine bound silently evaporates at seat=None.
+(On real tanks Hellion is legitimate — weapon-tier observed doctrine.)
+
+**The ruling** (owner, rejecting per-item patches: "that's the problem with
+individual item rules, i want to fix the underlying issue which allows these
+items and builds and kits to slide in to the team comp"): **the kit
+suggestion channel only speaks evidence, end to end.**
+
+- No seat -> `kit_options` returns empty kit and options (`seat: None` so
+  the UI can say why). No fallback.
+- A seated slot with no doctrine tier stays UNSET — never catalog-filled.
+- `role=None` remains the explicit DIAGNOSTIC escape (audits/tests
+  comparing against the ungated catalog); it is never the default channel.
+- Manual builds still score anything — the gate is suggestion-layer only,
+  exactly like the weapon-side style/cost/generation-fit gates.
+
+Shipped in BOTH ports (engine.py + app_scoring.js, parity 60/60), pinned by
+test_roles R19. The loadout panel now says "no role-book seat for this
+weapon — the engine suggests no kit" instead of silently proposing nothing.
+`kit_variants`/the dressed forge were already doctrine-filtered and are
+byte-identical (forge 38/38, golden 59/59, validation-modes 25/25).
+
+**Follow-up this ruling makes urgent:** the 75 seatless weapons now get no
+generated kit at all until the role book covers them — seat curation
+(evidence-cited memberships, per roles-design.md) is the real fix and needs
+its own pass.
+
+## THE SEAT-ALL PASS (owner ruling 2026-09-01, same session)
+
+Owner: **"ok well lets fix seat for all weapons."** 73 of the 75 seatless
+weapons received seats in `pipeline/roles.yaml`; the role book now covers
+**135 of 137** (was 62).
+
+**Evidence discipline per entry:** the killboard build harvest
+(`pipeline/out/party_rosters.json` `weapon_armour` — observed armor-class
+distribution per weapon, 2026-08 harvest) picks the uniform; the derived
+E identity (delivery / damage scale / heal profile) picks the seat class;
+family precedent and standing rulings break ties. Every membership cites
+its build count and armor split (`killboard:party_rosters (N builds, X%
+class)`); entries with fewer than ~10 observed builds carry an explicit
+"thin" marker and lean on the owner's seat-all mandate. Notable baskets:
+Battle Bracers 350 builds 68% leather, Spirithunter 193 builds 75%
+leather, Lifecurse 133 builds 76% PLATE.
+
+**One new seat:** `curse_support` (class support, uniform cloth+plate —
+the killboard fields the front-rank curses in plate and the artillery
+ones in cloth). Members: Lifecurse, Damnation, Shadowcaller, 1H Cursed,
+Great Cursed, Demonic, Cursed Skull. Their purge/pierce FUNCTION roles
+stand; the derived curse_pressure job group is unchanged.
+
+**Two standing rulings respected, NOT overridden** (surfaced for the
+owner): 2H_SHAPESHIFTER_CRYSTAL and 2H_IRONCLADEDSTAFF stay off every
+menu — the 2026-08-26 grading board ruled them off ("not good for group
+content"; the Iron-clad stopper removal + ≥10 viability exclusion). A
+word from the owner seats them.
+
+**Ruling-preserving test re-pins:** R17's Black Monk menu pin extends to
+`[off_tank, shield_break]` (the 2026-08-26 ruling's substance — function,
+never shield_support — holds; the seat is new). R19's seatless fixture is
+now SYNTHESIZED (menu stripped in-memory) since no natural seatless
+weapon remains. T30/T30b/T30d re-pinned under `set_dressing(False)`: with
+1H Holy seated, a generation candidate evaluates DRESSED and its kit
+honestly closes real gear gaps in a naked fixture (T30c's documented
+honesty rider) — the weapon-level redundancy lens these cases pin runs in
+the V3-W symmetric mode instead.
+
+**Gates after the pass:** dataset release_clean (137/137 on menus incl.
+2 sweep-only), roles 19/19, golden 59/59, forge 38/38, parity 60/60,
+validation-modes 25/25, builds 54/54, interactions 37/37, provenance
+25/25. **tier2 v4 actual_gear role-level rose 70% → 87% (20/23), gate
+PASS.** (`test_cohort_families` 6/7 fails identically on clean HEAD —
+pre-existing, unrelated: the committed sample now yields 21 small-bucket
+families where the contract pins 0; needs its own look.)
+
+**Effect:** with fail-closed generation + full seat coverage, every
+weapon's kit suggestions are doctrine-bounded — e.g. Light Crossbow now
+draws the ranged_aoe observed tier (Mistwalker Jacket, Cleric Cowl)
+instead of the old catalog-marginal Hellion bait, and Lifecurse dresses
+in its killboard-majority Knight Armor.
+
+## KILLBOARD KIT DOCTRINE (owner ruling 2026-09-01, same session)
+
+Owner: **"now shall we add seats for different gear too and base it on
+seen evidence from the data we harvested from all the battles?"**
+
+The kit-doctrine mining (`derive_kit_doctrine`, build_dataset.py) now
+takes the KILLBOARD HARVEST as a second evidence stream beside the
+curated builds_index: `out/party_rosters.json` carries 9,569 real
+fielded builds (weapon + gear at kill time, ids pre-normalized to the
+catalog key space; ~54k gear observations resolve, ~95% per slot except
+food 84%). Same pools, same uniform gate, same effect-carrier
+exclusion; suggestion-layer only, scoring untouched.
+
+**Discipline:**
+
+- **Noise floor** — a killboard-only item needs `KB_MIN_SEAT = 3`
+  observations to enter a seat pool and `KB_MIN_WEAPON = 2` for a
+  weapon tier; an item the curated corpus already cites merges its
+  killboard count regardless.
+- **Provenance stays separate** — audit rows carry a `kb` count and a
+  `killboard:Nx` source token beside the build-id citations;
+  off-uniform chest sightings aggregate into the same off_uniform
+  report (never admitted). Winner bias is the harvest's documented
+  property and rides the citation.
+- **A hand ruling superseded by observation retires loudly**: the build
+  fail-closed BLOCKED on the 2026-08-26 Leering Cane `add` (stopper
+  offhand) the moment the killboard OBSERVED the cane there — the
+  owner's "incubus is mostly paired with leering cane" confirmed by
+  data; the add is retired with a comment, the affinity override and
+  every drop ruling stand.
+
+**Effect:** tiers went from a handful of curated items to observation-
+led pools (ranged_aoe head tier 25 items, engage_tank shoes 22, the new
+curse_support fully stocked), and per-weapon doctrine now exists for
+the whole catalog — Light Crossbow wears its OWN observed kit
+(Mercenary Jacket 3/7, Hunter Hood 5/5, Mistcaller 5/5, Guardian Boots
+5/5), Polehammer's Knight majority holds at 63/95.
+
+**Re-pins:** R18 doctrine_n [9,12]→[63,95] (corpus-size pin, mechanism
+unchanged); T30c caps_gain tolerance 0.05→0.6 (Longbow's v0 changed;
+substance — negative verdict, dup priced — holds).
+
+**Gates:** dataset release_clean, roles 19/19, golden 59/59, forge
+38/38, parity 60/60, validation-modes 25/25, builds 54/54, provenance
+25/25, interactions 37/37. **tier2 v4 actual_gear role-level: 78%
+(18/23), gate PASS** — down from the seat-all pass's 87%, still above
+the 70% gate and the 70% pre-session baseline. OBSERVATION FOR THE
+OWNER (not tuned, per anti-circularity): the killboard-widened
+candidate kits cost 2 role-level slots on this n=23 corpus — either
+noise or a hint that observation-led tiers dilute the curated signal
+when DRESSING CANDIDATES; the incumbents' actual gear is unaffected.
+A future blind round can separate the two.

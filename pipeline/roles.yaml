@@ -40,6 +40,13 @@ roles:
       - {id: 2H_POLEHAMMER, source: "comp:tank x4 (bist, sortasaucy, deadlyhooker); sheet engage 6 (Slowing Charge identity)"}
       - {id: 2H_HAMMER, source: "comp:deadlyhooker (main_tank) + sortasaucy_7man (tank)"}
       - {id: MAIN_MACE_CRYSTAL, source: "comp:albioncompo_push_monkey_7 + timothy_blap (tank); crystal cost gate composes"}
+      # --- seat-all pass (owner:2026-09-01 "lets fix seat for all weapons";
+      # killboard = party_rosters.json observed builds, 2026-08 harvest) ---
+      - {id: MAIN_HAMMER, source: "killboard:party_rosters (51 builds, 100% plate); hammer-family engage precedent (2H_HAMMER, HAMMER_AVALON); owner:2026-09-01 seat-all"}
+      - {id: 2H_HAMMER_UNDEAD, source: "killboard:party_rosters (11 builds, 82% plate); hammer-family engage precedent; owner:2026-09-01 seat-all"}
+      - {id: 2H_RAM_KEEPER, source: "killboard:party_rosters (10 builds, 100% plate); charge-slam engage E; owner:2026-09-01 seat-all"}
+      - {id: 2H_TWINSCYTHE_HELL, source: "killboard:party_rosters (19 builds, 89% plate); drag-to-self clump E (golden T18 catch geometry); owner:2026-09-01 seat-all"}
+      - {id: 2H_FLAIL, source: "owner:2026-09-01 seat-all (killboard: 0 builds — thin); pull E + tank role_hint, mace/flail clump family"}
   - id: stopper_tank
     class: frontline
     name: Defensive / Stopper Tank
@@ -69,6 +76,12 @@ roles:
     weapons:
       - {id: 2H_HAMMER_CRYSTAL, source: "guide:albiononlinegrind 'Off-Tank (Truebolt Hammer, Soldier Helmet + Duskweaver)'"}
       - {id: 2H_DUALMACE_AVALON, source: "comp:deadlyhooker (tank x2)"}
+      # --- seat-all pass (owner:2026-09-01) ---
+      - {id: 2H_COMBATSTAFF_MORGANA, source: "killboard:party_rosters (14 builds, 93% plate); second-line plate brawler — shield_break stays its primary FUNCTION (owner:2026-08-26 removed it from shield_support); owner:2026-09-01 seat-all"}
+      - {id: 2H_QUARTERSTAFF, source: "killboard:party_rosters (32 builds, 81% leather); peel/disengage bruiser kit; owner:2026-09-01 seat-all"}
+      # seat-all pass: 2H_IRONCLADEDSTAFF stays OFF every menu — the
+      # 2026-08-26 grading removal + standing >=10 viability exclusion
+      # stand until the owner re-rules (killboard 17 builds, 53% leather)
 
   # --------------------------------------------------------------- healer
   - id: main_healer
@@ -88,6 +101,12 @@ roles:
       - {id: 2H_HOLYSTAFF_HELL, source: "derived:foundation set; guide:albiononlinegrind Fallen Healer"}
       - {id: MAIN_NATURESTAFF, source: "derived:foundation set (heal_scale group + full_healer; Great Nature is the ruled single-scale sibling and stays OFF)"}
       - {id: 2H_WILDSTAFF, source: "derived:foundation set"}
+      # --- seat-all pass (owner:2026-09-01): SEAT membership only — the
+      # single-ally-heal generation gate (never generated at 10+) and the
+      # foundation set are untouched; these heal, so they sit a healer seat ---
+      - {id: MAIN_HOLYSTAFF, source: "killboard:party_rosters (36 builds, 86% cloth); single-scale healer (gang seat; the 10+ generation gate rides); owner:2026-09-01 seat-all"}
+      - {id: 2H_DIVINESTAFF, source: "killboard:party_rosters (6 builds, cloth majority — thin); holy-family healer; owner:2026-09-01 seat-all"}
+      - {id: MAIN_NATURESTAFF_CRYSTAL, source: "killboard:party_rosters (22 builds, 55% cloth); GROUP heal scale (the ruled hybrid — cost gate bars it below 30 regardless); owner:2026-09-01 seat-all"}
   - id: kite_healer
     class: healer
     name: Backline / Kite Healer
@@ -99,6 +118,11 @@ roles:
     weapons:
       - {id: MAIN_HOLYSTAFF_AVALON, source: "sheet identity 'mobile peeling healer'"}
       - {id: 2H_WILDSTAFF, source: "derived:foundation set; kite doctrine (mobility kit)"}
+      # --- seat-all pass (owner:2026-09-01) ---
+      - {id: 2H_NATURESTAFF, source: "killboard:party_rosters (43 builds, 63% cloth); regen/mobile heal identity — the owner's foundation ruling keeps it OFF main_healer, this is the kite flavor; owner:2026-09-01 seat-all"}
+      - {id: MAIN_HOLYSTAFF_MORGANA, source: "killboard:party_rosters (7 builds, 100% cloth — thin); mobility/utility heal E; owner:2026-09-01 seat-all"}
+      - {id: MAIN_NATURESTAFF_KEEPER, source: "killboard:party_rosters (10 builds, 80% cloth); regen kiting healer (owner: Druidic out of the FOUNDATION set — seat only); owner:2026-09-01 seat-all"}
+      - {id: MAIN_NATURESTAFF_AVALON, source: "owner:2026-09-01 seat-all (killboard: 2 builds — thin); nature-family mobile healer"}
   - id: brawl_healer
     class: healer
     name: Tanky Brawl Healer
@@ -216,6 +240,31 @@ roles:
       # more DPS than a support" and Permafrost "is dps and engage dps"
       # (both keep their ranged_aoe seats), Chillhowl "not good for
       # group content" (off every menu)
+      # seat-all pass (owner:2026-09-01): 2H_SHAPESHIFTER_CRYSTAL stays OFF
+      # every menu — the 2026-08-26 grading ruling ("not good for group
+      # content") stands until the owner re-rules; killboard is thin
+      # (6 builds) either way
+  - id: curse_support
+    class: support
+    name: Curse Support / Pressure
+    job: >
+      The curse line's stacking-pressure seat — vile curses, debuff
+      auras and purge/pierce/heal-cut riders on the enemy clump. The
+      engine's derived curse_pressure job group made the LINE a comp
+      object in 2026-08; this seat (seat-all pass, owner:2026-09-01)
+      gives its members a uniform: the killboard fields them in PLATE
+      and CLOTH (Lifecurse 76% plate of 133 builds, Damnation 64% cloth
+      of 83 — the front-rank curses tank up, the artillery ones stay
+      cloth).
+    uniform: {chest: [cloth, plate]}
+    weapons:
+      - {id: MAIN_CURSEDSTAFF_UNDEAD, source: "killboard:party_rosters (133 builds, 76% plate); its purge FUNCTION role stands; comp:support x3 (bist, deadlyhooker, timothy_blap); owner:2026-09-01 seat-all"}
+      - {id: 2H_CURSEDSTAFF_MORGANA, source: "killboard:party_rosters (83 builds, 64% cloth / 36% plate); its pierce FUNCTION role stands; comp:deadlyhooker (dps); owner:2026-09-01 seat-all"}
+      - {id: MAIN_CURSEDSTAFF_AVALON, source: "killboard:party_rosters (63 builds, 76% plate); owner:2026-09-01 seat-all"}
+      - {id: MAIN_CURSEDSTAFF, source: "killboard:party_rosters (26 builds, leather/cloth near-tie 13/11 — cited as observed); owner:2026-09-01 seat-all"}
+      - {id: 2H_SKULLORB_HELL, source: "killboard:party_rosters (7 builds, 57% cloth — thin); debuff-aura orb; owner:2026-09-01 seat-all"}
+      - {id: 2H_DEMONICSTAFF, source: "killboard:party_rosters (7 builds, mixed — thin); cursed-line artifact; owner:2026-09-01 seat-all"}
+      - {id: 2H_CURSEDSTAFF, source: "owner:2026-09-01 seat-all (killboard: 2 builds — thin); cursed-line staple"}
 
   # ------------------------------------------------------------------ dps
   - id: ranged_aoe
@@ -240,6 +289,29 @@ roles:
       - {id: 2H_ARCANE_RINGPAIR_AVALON, source: "comp:sortasaucy_7man (rdps)"}
       - {id: 2H_SHAPESHIFTER_AVALON, source: "comp:albioncompo_push_monkey_7 (rdps)"}
       - {id: MAIN_CURSEDSTAFF_CRYSTAL, source: "comp:rdps x2 (push_monkey, sortasaucy) — the damage flavor beside its curse_support seat"}
+      # --- seat-all pass (owner:2026-09-01): the ranged damage seat for
+      # every ranged-delivery damage E; single-scale members keep their
+      # standing size/generation exclusions (those ride viability) ---
+      - {id: 2H_BOW, source: "killboard:party_rosters (23 builds, 74% leather); derived:E ranged; owner:2026-09-01 seat-all"}
+      - {id: 2H_BOW_AVALON, source: "killboard:party_rosters (39 builds, 90% cloth); derived:E ranged group; owner:2026-09-01 seat-all"}
+      - {id: 2H_BOW_KEEPER, source: "killboard:party_rosters (67 builds, 57% leather); derived:E ranged group; owner:2026-09-01 seat-all"}
+      - {id: 2H_BOW_CRYSTAL, source: "owner:2026-09-01 seat-all (killboard: 4 builds — thin); derived:E ranged group"}
+      - {id: 2H_WARBOW, source: "killboard:party_rosters (27 builds, 81% leather); round-7 solo-class 5+ exclusion rides viability, not the seat; owner:2026-09-01 seat-all"}
+      - {id: 2H_LONGBOW_UNDEAD, source: "killboard:party_rosters (34 builds, 94% leather); owner:2026-09-01 seat-all"}
+      - {id: 2H_CROSSBOW, source: "killboard:party_rosters (21 builds, 52% cloth); owner:2026-09-01 seat-all"}
+      - {id: 2H_CROSSBOWLARGE, source: "killboard:party_rosters (12 builds, leather/cloth 6/6); artillery family precedent (Siegebow); owner:2026-09-01 seat-all"}
+      - {id: MAIN_1HCROSSBOW, source: "killboard:party_rosters (9 builds, 56% cloth — thin); derived:E ranged group; owner:2026-09-01 seat-all"}
+      - {id: 2H_REPEATINGCROSSBOW_UNDEAD, source: "killboard:party_rosters (9 builds, 78% cloth — thin); derived:E ranged group; owner:2026-09-01 seat-all"}
+      - {id: 2H_DUALCROSSBOW_CRYSTAL, source: "killboard:party_rosters (7 builds, 86% leather — thin); derived:E ranged group; owner:2026-09-01 seat-all"}
+      - {id: 2H_DUALCROSSBOW_HELL, source: "killboard:party_rosters (28 builds, 56% cloth); single-target-E 15+ exclusion rides viability (owner:2026-08 T28); owner:2026-09-01 seat-all"}
+      - {id: MAIN_FIRESTAFF, source: "killboard:party_rosters (31 builds, 81% cloth); fire-family precedent; owner:2026-09-01 seat-all"}
+      - {id: MAIN_FIRESTAFF_KEEPER, source: "killboard:party_rosters (21 builds, 62% cloth); owner:2026-09-01 seat-all"}
+      - {id: MAIN_FIRESTAFF_CRYSTAL, source: "owner:2026-09-01 seat-all (killboard: 2 builds — thin); fire-family precedent"}
+      - {id: 2H_INFERNOSTAFF, source: "killboard:party_rosters (24 builds, 58% cloth); owner:2026-09-01 seat-all"}
+      - {id: 2H_FIRESTAFF_HELL, source: "killboard:party_rosters (75 builds, 100% cloth); owner:2026-09-01 seat-all"}
+      - {id: MAIN_FROSTSTAFF, source: "killboard:party_rosters (84 builds, 51% leather / 33% plate); frost-family precedent; owner:2026-09-01 seat-all"}
+      - {id: 2H_ARCANESTAFF_CRYSTAL, source: "killboard:party_rosters (22 builds, 59% leather); derived:E ranged group beam; owner:2026-09-01 seat-all"}
+      - {id: 2H_SHAPESHIFTER_HELL, source: "owner:2026-09-01 seat-all (killboard: 6 builds, plate-leaning — thin); demon-form ranged AoE; round-7 solo-class exclusion rides viability"}
   - id: sustained_brawler
     class: dps
     name: Sustained Melee DPS
@@ -257,6 +329,30 @@ roles:
       - {id: 2H_DUALHAMMER_HELL, source: "comp:albioncompo_push_monkey_7 (dps)"}
       - {id: 2H_AXE, source: "owner:2026-08-24 ('its e can hit everyone in its vicinity ... it's okay')"}
       - {id: MAIN_SCIMITAR_MORGANA, source: "comp:timothy_blap (dps); owner:2026-08-25 ('clarent blade e is aoe damage')"}
+      # --- seat-all pass (owner:2026-09-01): melee/flex damage in contact ---
+      - {id: 2H_KNUCKLES_SET2, source: "killboard:party_rosters (350 builds, 68% leather — the largest observed basket in the harvest); round-7 group-pool ruling stands; owner:2026-09-01 seat-all"}
+      - {id: 2H_KNUCKLES_HELL, source: "killboard:party_rosters (75 builds, 75% leather); brawl-clap home (owner:2026-08 T29); owner:2026-09-01 seat-all"}
+      - {id: 2H_KNUCKLES_AVALON, source: "killboard:party_rosters (28 builds, 82% leather); its purge FUNCTION role stands; owner:2026-09-01 seat-all"}
+      - {id: 2H_KNUCKLES_SET1, source: "killboard:party_rosters (19 builds, mixed 11c/6l — thin); knuckle-family precedent; owner:2026-09-01 seat-all"}
+      - {id: 2H_KNUCKLES_CRYSTAL, source: "owner:2026-09-01 seat-all (killboard: 0 builds — thin); knuckle-family precedent"}
+      - {id: 2H_IRONGAUNTLETS_HELL, source: "owner:2026-09-01 seat-all (killboard: 0 builds — thin); melee sustain identity"}
+      - {id: 2H_HARPOON_HELL, source: "killboard:party_rosters (193 builds, 75% leather); the SEAT for its ruled pierce FUNCTION (owner:2026-08-24 'enables the whole dps line'); owner:2026-09-01 seat-all"}
+      - {id: MAIN_AXE, source: "killboard:party_rosters (74 builds, 89% leather); axe-family precedent (identity fit flags at 7+ ride the descriptive layer); owner:2026-09-01 seat-all"}
+      - {id: 2H_HALBERD, source: "killboard:party_rosters (24 builds, 67% leather); halberd-family precedent; owner:2026-09-01 seat-all"}
+      - {id: 2H_SCYTHE_HELL, source: "killboard:party_rosters (28 builds, 86% leather); owner:2026-09-01 seat-all"}
+      - {id: 2H_SCYTHE_CRYSTAL, source: "owner:2026-09-01 seat-all (killboard: 0 builds — thin); scythe-family precedent"}
+      - {id: 2H_DUALSWORD, source: "killboard:party_rosters (72 builds, 86% leather); sword-family precedent (Clarent); owner:2026-09-01 seat-all"}
+      - {id: 2H_CLAYMORE, source: "killboard:party_rosters (20 builds, 70% leather); owner:2026-09-01 seat-all"}
+      - {id: 2H_CLAYMORE_AVALON, source: "killboard:party_rosters (55 builds, 64% leather); derived:E melee group; owner:2026-09-01 seat-all"}
+      - {id: MAIN_SWORD, source: "killboard:party_rosters (8 builds, plate/leather 4/4 — thin); sword-family precedent; owner:2026-09-01 seat-all"}
+      - {id: MAIN_SWORD_CRYSTAL, source: "killboard:party_rosters (11 builds, 91% leather — thin); owner:2026-09-01 seat-all"}
+      - {id: MAIN_SPEAR_KEEPER, source: "killboard:party_rosters (54 builds, mixed 24l/18p/12c); derived:E flex group; owner:2026-09-01 seat-all"}
+      - {id: MAIN_SPEAR_LANCE_AVALON, source: "killboard:party_rosters (21 builds, 76% leather); derived:E flex group; owner:2026-09-01 seat-all"}
+      - {id: 2H_SPEAR, source: "killboard:party_rosters (7 builds, mixed — thin); spear-family precedent; owner:2026-09-01 seat-all"}
+      - {id: 2H_TRIDENT_UNDEAD, source: "owner:2026-09-01 seat-all (killboard: 2 builds — thin); the 20-man generation exclusion rides viability (E-audit ruling)"}
+      - {id: 2H_DOUBLEBLADEDSTAFF, source: "killboard:party_rosters (12 builds, 55% leather — thin); derived:E flex group; owner:2026-09-01 seat-all"}
+      - {id: 2H_DOUBLEBLADEDSTAFF_CRYSTAL, source: "owner:2026-09-01 seat-all (killboard: 5 builds — thin); quarterstaff-line damage flavor"}
+      - {id: 2H_SHAPESHIFTER_MORGANA, source: "owner:2026-09-01 seat-all (killboard: 4 builds — thin); werewolf-form sustain bruiser"}
   - id: bomb_aoe
     class: dps
     name: Bomb / One-shot AoE
@@ -268,6 +364,8 @@ roles:
       - {id: 2H_GLAIVE_CRYSTAL, source: "guide:metabattle Rift Glaive ZvZ Bombing Build; comp:deadlyhooker (dps x4)"}
       - {id: 2H_DAGGER_KATAR_AVALON, source: "guide:albiononlinegrind 'Solo Bomb (Bridled Fury, Royal Hood + Assassin Jacket)'"}
       - {id: 2H_DUALSCIMITAR_UNDEAD, source: "owner:2026-08-24 ('galatine pair is great for solo bombs')"}
+      # --- seat-all pass (owner:2026-09-01) ---
+      - {id: 2H_KNUCKLES_MORGANA, source: "killboard:party_rosters (9 builds, 89% cloth — thin); teleport-burst E is the bomb pattern; owner:2026-09-01 seat-all"}
       # 2H_ARCANESTAFF removed owner:2026-08-26 (grading board: "role of
       # great arcane staff is to stop enemies, its not a one shot aoe
       # weapon. it can work with the one shot dps to set them up" — its
@@ -286,6 +384,16 @@ roles:
       - {id: 2H_DUALSICKLE_UNDEAD, source: "RULE-queue adjudication 2026-08-25 (the dive daggers: Shadow Edge 4); owner:2026-08-26 ('never in medium-large scale (7+)' — viability exclusion at >=7, small-scale seat only)"}
       - {id: 2H_DAGGERPAIR, source: "RULE-queue adjudication 2026-08-25 (dive catch: Shadow Edge 4, AA-stack identity); owner:2026-08-26 ('never in medium-large scale (7+)' — viability exclusion at >=7, small-scale seat only)"}
       - {id: 2H_DAGGER_KATAR_AVALON, source: "guide:yt role guide (cleanup mention)"}
+      # --- seat-all pass (owner:2026-09-01): leather single-target chasers;
+      # small-scale seats — standing 7+/15+ exclusions ride viability ---
+      - {id: MAIN_DAGGER, source: "killboard:party_rosters (8 builds, 100% leather — thin); dagger-family cleanup precedent; 15+ exclusion rides viability (T28); owner:2026-09-01 seat-all"}
+      - {id: MAIN_DAGGER_HELL, source: "killboard:party_rosters (84 builds, 81% leather); dagger-family cleanup; owner:2026-09-01 seat-all"}
+      - {id: 2H_DAGGERPAIR_CRYSTAL, source: "owner:2026-09-01 seat-all (killboard: 2 builds — thin); dagger-family cleanup"}
+      - {id: 2H_CLAWPAIR, source: "killboard:party_rosters (26 builds, 92% leather); dive/shred identity (its shield_break Q rides as function); owner:2026-09-01 seat-all"}
+      - {id: 2H_GLAIVE, source: "killboard:party_rosters (13 builds, 69% leather); catch/fling E — the chaser's tool; owner:2026-09-01 seat-all"}
+      - {id: MAIN_SPEAR, source: "killboard:party_rosters (10 builds, 60% leather — thin); mobility-poke skirmisher; owner:2026-09-01 seat-all"}
+      - {id: 2H_ARCANESTAFF_HELL, source: "killboard:party_rosters (61 builds, 85% leather); the pick/pull catch identity (owner-graded off shield_support 2026-08-26 does not apply — that was Witchwork); owner:2026-09-01 seat-all"}
+      - {id: 2H_SHAPESHIFTER_SET1, source: "owner:2026-09-01 seat-all (killboard: 3 builds — thin); stealth-cat roam/pick form"}
 
   # ----------------------------------------------------------------- meta
   - id: battlemount_pilot
@@ -353,8 +461,12 @@ kit_doctrine:
       offhand:
         drop:
           - {id: OFF_TOME_CRYSTAL, source: "owner:2026-08-26 (grading board: 'leering cane' — Timelocked Grimoire out)"}
-        add:
-          - {id: OFF_JESTERCANE_HELL, source: "owner:2026-08-26 ('leering cane is not for brawl healer, its mostly for stop tanks that are one hand')"}
+        # OFF_JESTERCANE_HELL add RETIRED 2026-09-01: the killboard stream
+        # now OBSERVES the cane on stopper weapons directly (the owner's
+        # 'incubus is mostly paired with leering cane' — confirmed by
+        # data), so the hand-add became a redundant ruling and the build
+        # correctly blocked on it. The ruling's substance is superseded
+        # by observation; the R17 affinity override stands unchanged.
     brawl_healer:
       offhand:
         drop:

@@ -1112,7 +1112,20 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     the per-weapon tier: effect carriers are comp-level allocations
     ('maybe the composition didnt have enough demon armors so the
     engage tank has to take one'), tagged `effect:` in the seat pool
-    and quota-mined separately (mine_effect_quotas)."""
+    and quota-mined separately (mine_effect_quotas).
+
+    2026-09-01 (owner: 'add seats for different gear too and base it on
+    seen evidence from the data we harvested from all the battles'):
+    the KILLBOARD harvest (out/party_rosters.json builds — real fielded
+    kits at kill time, ids pre-normalized to the catalog key space)
+    joins the mining as a SECOND evidence stream. Provenance stays
+    separate (rows carry a `kb` count and a killboard source token) and
+    a NOISE FLOOR applies: a killboard-only item needs KB_MIN_SEAT
+    observations to enter a seat pool and KB_MIN_WEAPON to enter a
+    weapon tier — an item the curated corpus already cites merges its
+    killboard count regardless. Off-uniform chests are aggregated into
+    the same off_uniform report (never admitted); winner bias is the
+    harvest's documented property and rides the citation."""
     effect_map = effect_map or {}
     bi_path = os.path.join(OUT, "builds_index.json")
     if not os.path.exists(bi_path):
@@ -1121,6 +1134,15 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
         return {}
     with open(bi_path, encoding="utf-8") as f:
         by_content = (json.load(f) or {}).get("by_content") or {}
+    KB_MIN_SEAT, KB_MIN_WEAPON = 3, 2
+    kb_by_weapon = {}
+    kb_path = os.path.join(OUT, "party_rosters.json")
+    if os.path.exists(kb_path):
+        with open(kb_path, encoding="utf-8") as f:
+            for b in (json.load(f) or {}).get("builds") or []:
+                wk = b.get("weapon")
+                if wk and b.get("gear"):
+                    kb_by_weapon.setdefault(wk, []).append(b["gear"])
 
     def normalize(v):
         return _normalize_gear_id(v, gear)
@@ -1164,6 +1186,53 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                             gid, {"id": gid, "count": 0, "sources": set()})
                         went["count"] += 1
                         went["sources"].add(bid)
+        # ---- killboard stream (2026-09-01): mine separately, then merge
+        # above the noise floor with its own provenance token ----
+        kb_pools, kb_off = {}, {}
+        for m in (r.get("weapons") or []):
+            wk_id = m.get("id")
+            for gdict in kb_by_weapon.get(wk_id) or []:
+                for rk, v in gdict.items():
+                    slot = KIT_SLOT_MAP.get(rk.lower())
+                    gid = normalize(v) if slot else None
+                    if gid is None:
+                        continue
+                    if slot == "armor" and \
+                            (gear[gid].get("gear_class") or "") not in uni:
+                        key = (gid, wk_id)
+                        kb_off[key] = kb_off.get(key, 0) + 1
+                        continue
+                    ent = kb_pools.setdefault(slot, {}).setdefault(
+                        gid, {"count": 0, "weapons": {}})
+                    ent["count"] += 1
+                    ent["weapons"][wk_id] = ent["weapons"].get(wk_id, 0) + 1
+        for slot in sorted(kb_pools):
+            for gid in sorted(kb_pools[slot]):
+                e = kb_pools[slot][gid]
+                already = gid in (pools.get(slot) or {})
+                if e["count"] < KB_MIN_SEAT and not already:
+                    continue
+                ent = pools.setdefault(slot, {}).setdefault(
+                    gid, {"id": gid, "count": 0, "sources": set()})
+                ent["count"] += e["count"]
+                ent["kb"] = e["count"]
+                ent["sources"].add(f"killboard:{e['count']}x")
+                if gid in effect_map:
+                    continue   # effect carriers never enter weapon tiers
+                for wk_id in sorted(e["weapons"]):
+                    n = e["weapons"][wk_id]
+                    w_already = gid in ((wpools.get(wk_id) or {})
+                                        .get(slot) or {})
+                    if n < KB_MIN_WEAPON and not w_already:
+                        continue
+                    went = wpools.setdefault(wk_id, {}).setdefault(
+                        slot, {}).setdefault(
+                        gid, {"id": gid, "count": 0, "sources": set()})
+                    went["count"] += n
+                    went["sources"].add(f"killboard:{n}x")
+        for (gid, wk_id) in sorted(kb_off):
+            off_uniform.append({"id": gid, "weapon": wk_id,
+                                "build": f"killboard:{kb_off[(gid, wk_id)]}x"})
         kit = {}
         det = {}
         for slot, ents in sorted(pools.items()):
@@ -1174,6 +1243,8 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
             for e in ordered:
                 row = {"id": e["id"], "count": e["count"],
                        "sources": _fold_sources(e["sources"])}
+                if e.get("kb"):
+                    row["kb"] = e["kb"]   # killboard share of the count
                 if e["id"] in effect_map:
                     row["effect"] = effect_map[e["id"]]
                 rows.append(row)

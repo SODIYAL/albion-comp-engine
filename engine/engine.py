@@ -1307,16 +1307,28 @@ class Engine:
         so the kit answers what THIS comp still needs.
 
         THE ROLE GATE (`role`): "auto" resolves the weapon's primary
-        seat, an explicit seat id uses that seat, None keeps the old
-        ungated pool. With a seat: the CHEST pool hard-gates to the
-        uniform classes (a stopper tank can never be handed a dps
-        jacket — the everyone-gets-Hellion fix), every other slot ranks
-        its DOCTRINE tier first (items observed in the seat's reference
-        builds, cited in roles_report kit_doctrine) with the full
-        catalog behind it, and each option carries `doctrine`,
+        seat, an explicit seat id uses that seat, None is the explicit
+        DIAGNOSTIC escape (audits/tests comparing against the ungated
+        catalog) — never the default channel. With a seat: the CHEST
+        pool hard-gates to the uniform classes (a stopper tank can
+        never be handed a dps jacket), and EVERY slot serves ONLY its
+        DOCTRINE tier (this weapon's own observed items first, then the
+        seat's — items observed in reference builds, cited in
+        roles_report kit_doctrine). Each option carries `doctrine`,
         `carries` (typed gear effects) and `passive` (the seat's
-        doctrine passive pick for that piece). Suggestion-layer only —
-        manual builds score anything, role_advisory flags mismatches.
+        doctrine passive pick for that piece).
+
+        FAIL-CLOSED GENERATION (owner ruling 2026-09-01, "fix the
+        underlying issue which allows these items and builds and kits
+        to slide into the team comp"): the suggestion channel only
+        speaks evidence. No seat -> empty kit and options (the result
+        carries `seat: None` so the UI can say why); a seated slot
+        with no doctrine tier stays UNSET instead of falling back to
+        the marginal-ranked catalog — that fallback is how a full
+        comp's one uncovered capability (usually silence) handed the
+        same off-role helm to every seatless member. Suggestion-layer
+        only — manual builds score anything, role_advisory flags
+        mismatches.
 
         Returns {"kit": {slot: choice}, "options": {slot: [ranked choices]}}
         where a choice is {gear, display_name, value, why: [(cap, delta)],
@@ -1324,6 +1336,9 @@ class Engine:
         stacking is additive in the model, so per-slot ranking against the
         bare member is faithful."""
         seat = self.primary_seat(weapon) if role == "auto" else role
+        if role is not None and seat is None:
+            # fail closed: no seat, no suggestion (ruling 2026-09-01)
+            return {"kit": {}, "options": {}, "seat": None}
         seat_rec = self.roles.get(seat) or {}
         uniform = (seat_rec.get("uniform") or {}).get("chest") or []
         doctrine = seat_rec.get("kit") or {}
@@ -1365,8 +1380,17 @@ class Engine:
             doc_pool = set(doctrine.get(slot) or [])
             wslot = {p[0]: p[1] for p in (wdoc.get(slot) or [])}
             wtotal = sum(wslot.values())
+            pool_keys = sorted(by_slot[slot])
+            if role is not None:
+                # fail-closed generation (ruling 2026-09-01): only the
+                # doctrine tiers may be SUGGESTED; a slot with no
+                # observed evidence stays unset, never catalog-filled
+                pool_keys = [k for k in pool_keys
+                             if k in wslot or k in doc_pool]
+                if not pool_keys:
+                    continue
             ranked = []
-            for k in sorted(by_slot[slot]):
+            for k in pool_keys:
                 built = self.build_extra(weapon, combo, [k], role=seat)
                 deltas = sorted(
                     ((c, built.get(c, 0.0) - bare.get(c, 0.0))
@@ -1424,7 +1448,7 @@ class Engine:
                     r["gear"]))
             options[slot] = ranked[:top_n]
         kit = {slot: opts[0] for slot, opts in options.items() if opts}
-        return {"kit": kit, "options": options}
+        return {"kit": kit, "options": options, "seat": seat}
 
     def member_extra(self, weapon, combo=None):
         """What ONE party member actually brings: the combo's effective caps

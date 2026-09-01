@@ -1188,14 +1188,21 @@
        context-free weighted-delta value with the DOCTRINE TIER first;
        with `party` -> comp-aware exact fitness delta outranks tier
        membership (doctrine stays annotation + tie-break). `role`:
-       undefined/"auto" resolves the weapon's primary seat, null keeps
-       the old ungated pool, a seat id uses that seat. With a seat the
-       CHEST pool hard-gates to the uniform classes; options carry
-       doctrine/carries/passive. Suggestion-layer only — manual builds
-       score anything. `why` deltas are display-rounded. */
+       undefined/"auto" resolves the weapon's primary seat, null is the
+       explicit diagnostic escape (ungated pool), a seat id uses that
+       seat. With a seat the CHEST pool hard-gates to the uniform
+       classes; options carry doctrine/carries/passive.
+       FAIL-CLOSED GENERATION (owner ruling 2026-09-01, mirrors
+       engine.py): the suggestion channel only speaks evidence — no
+       seat -> empty kit/options (`seat: null` says why); a seated
+       slot with no doctrine tier stays unset, never catalog-filled.
+       Suggestion-layer only — manual builds score anything. `why`
+       deltas are display-rounded. */
     if (topN === undefined || topN === null) topN = 3;
     if (role === undefined) role = "auto";
     var seat = role === "auto" ? this.primarySeat(weapon) : role;
+    if (role !== null && (seat === null || seat === undefined))
+      return { kit: {}, options: {}, seat: null };
     var seatRec = this.rolesBook[seat] || {};
     var uniform = (seatRec.uniform || {}).chest || [];
     var doctrine = seatRec.kit || {};
@@ -1244,6 +1251,15 @@
       for (var wi = 0; wi < wp.length; wi++) {
         wslot[wp[wi][0]] = wp[wi][1];
         wtotal += wp[wi][1];
+      }
+      if (role !== null) {
+        /* fail-closed generation (ruling 2026-09-01): only doctrine
+           tiers may be suggested; an evidence-less slot stays unset */
+        keys = keys.filter(function (g) {
+          return Object.prototype.hasOwnProperty.call(wslot, g)
+              || docPool.indexOf(g) >= 0;
+        });
+        if (!keys.length) continue;
       }
       var ranked = [];
       for (var ki = 0; ki < keys.length; ki++) {
@@ -1311,7 +1327,7 @@
     }
     var kit = {};
     for (var s2 in options) if (options[s2].length) kit[s2] = options[s2][0];
-    return { kit: kit, options: options };
+    return { kit: kit, options: options, seat: seat };
   };
 
   CompEngine.prototype.memberExtra = function (weapon, combo) {
