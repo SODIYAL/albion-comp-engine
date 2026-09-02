@@ -29,19 +29,33 @@ def check(cond, label, detail=""):
         FAILURES.append(label)
 
 
+def seg(src, start, end, label):
+    """Slice src between two anchors. A missing anchor is a RECORDED failure,
+    never a traceback - a bare .index() here used to kill the whole report at
+    the first renamed anchor, hiding every later contract behind it."""
+    i = src.find(start)
+    j = src.find(end, i + len(start)) if i >= 0 else -1
+    if i < 0 or j < 0:
+        check(False, label, "anchor %r missing" % (start if i < 0 else end))
+        return ""
+    return src[i:j]
+
+
 SHELL = read("_shell.html")
 DECISION_CSS = read("_decision_layer.css")
 DECISION_JS = read("_decision_layer.js")
 APP = read("_app.js")
 LAYOUT = read("_layout.css")
-BUILD = open(os.path.join(DASH, "build.py"), encoding="utf-8").read()
+with open(os.path.join(DASH, "build.py"), encoding="utf-8") as f:
+    BUILD = f.read()
 
 print("L1 - layout source exists and is wired into the build")
 
 check(LAYOUT.strip() != "", "L1a _layout.css is non-empty")
 check("_layout.css" in BUILD, "L1b build.py reads _layout.css")
+_dc, _lc = BUILD.find("_decision_layer.css"), BUILD.find("_layout.css")
 check(
-    BUILD.index("_decision_layer.css") < BUILD.index("_layout.css"),
+    0 <= _dc < _lc,
     "L1c _layout.css is inlined AFTER _decision_layer.css",
     "source order is what lets layout rules win without !important",
 )
@@ -103,10 +117,28 @@ for m in re.finditer(r'<aside class="epanel"([^>]*)>', SHELL):
 
 check("setPanel" in APP, "L4h _app.js defines setPanel")
 check('"epanel:"' in APP, "L4i panel state persists under an epanel: key")
+# at <=960px BOTH rails become full-width fixed bottom bars; without
+# click-through the later-DOM rail's transparent box eats the other's taps
+check("pointer-events:none" in LAYOUT and "pointer-events:auto" in LAYOUT,
+      "L4j phone tab bars are click-through outside their tabs",
+      "setup/tools tabs sat under the right rail's invisible container")
+# phones collapse every panel into ONE bottom-sheet slot; a second open
+# panel just hides underneath with its tab still reading expanded
+_sp = seg(APP, "function setPanel", "function syncPanelRail", "L4k anchors")
+check('matchMedia("(max-width:960px)")' in _sp,
+      "L4k phones hold one open panel TOTAL, not one per edge")
+check("function setPanel(id, open, persist)" in APP,
+      "L4l setPanel can close without persisting")
+check('setPanel("pdash", false, false)' in APP,
+      "L4l closePdash's transient drawer-overlay close does not persist",
+      "opening the evidence drawer used to erase the saved panel choice")
+check('.epanel[data-open="true"]{z-index:42}' in LAYOUT,
+      "L4m an open panel rises above its rail on desktop",
+      "the rail sat on the kit flyout's hover path and mouseleave killed it")
 
 print("L5 - status bar")
 
-head = SHELL[SHELL.index('<header class="masthead">'):SHELL.index("</header>")]
+head = seg(SHELL, '<header class="masthead">', "</header>", "L5 masthead anchors")
 for el in ['id="fit-num"', 'id="fit-of"', 'id="fit-bar"', 'id="sb-identity"',
            'id="sb-count"', 'id="style"', 'id="size-input"', 'id="content"',
            'id="parity-chip"', 'id="build-stamp"']:
@@ -119,6 +151,12 @@ check('class="foot-chips"' not in SHELL and ".foot-chips{" not in SHELL,
       "markup and rule both gone; a mention in a comment is fine")
 check('"sb-identity"' in DECISION_JS, "L5f decision layer fills #sb-identity")
 check('"sb-count"' in APP, "L5g _app.js fills #sb-count")
+# the size input lives here now; the extrapolation/over-cap honesty notice
+# must be visible where the size is SET, not only inside the shut setup panel
+check('id="size-notice-mh"' in head,
+      "L5h the size honesty notice is mirrored beside the size controls",
+      "setting an unvalidated size used to warn only inside a closed panel")
+check('"size-notice-mh"' in APP, "L5i renderSetup fills the masthead notice")
 
 print("L6 - the in-flow rail is gone")
 
@@ -141,18 +179,29 @@ check('id="tools-panel"' in SHELL, "L7a caller-tools panel exists")
 check('id="live-panel"' in SHELL, "L7b live-party panel exists")
 check('data-panel="tools-panel"' in SHELL, "L7c tools panel has a tab")
 check('data-panel="live-panel"' in SHELL, "L7d live panel has a tab")
-main = SHELL[SHELL.index('<main class="main">'):SHELL.index("</main>")]
-check('class="livefeed"' not in main, "L7e livefeed left .main")
+main = seg(SHELL, '<main class="main">', "</main>", "L7 main anchors")
+check('class="livefeed"' not in main and main != "", "L7e livefeed left .main")
 check('id="meta-sec"' in main, "L7f killboard stays a deep board in .main")
 check("tools-panel" in DECISION_JS, "L7g tools fold mounts into its panel")
+# the connect button stayed in the masthead while its feedback moved into
+# the default-closed live panel - connecting must open the panel too
+check('setPanel("live-panel", true' in APP,
+      "L7h connecting the companion opens the live panel",
+      "status, troubleshooting and load-party rendered into a shut panel")
 
 print("L8 - the column grid")
 
 check("@media (min-width:1700px)" in LAYOUT, "L8a four-column breakpoint exists")
-check("@media (min-width:1400px) and (max-width:1699px)" in LAYOUT,
+check("@media (min-width:1400px) and (max-width:1699.98px)" in LAYOUT,
       "L8b three-column breakpoint exists")
-check("@media (min-width:1251px) and (max-width:1399px)" in LAYOUT,
+check("@media (min-width:1251px) and (max-width:1399.98px)" in LAYOUT,
       "L8c the 1251-1399 hero grid is preserved")
+# 125%/150% display scaling yields fractional viewport widths (1399.5px);
+# an integer max-width leaves an open interval matching NO band, and the
+# base >=1251 grid has no column template - the page collapsed to one column
+for b in ["max-width:1250px)", "max-width:1399px)", "max-width:1699px)"]:
+    check(b not in LAYOUT,
+          "L8g no integer band boundary leaves a fractional-width gap (%s)" % b)
 check("--wd:min(520px,100cqi)" in LAYOUT, "L8d wheel shrinks to 520px in the four-col grid")
 check('id="supply-sec"' in SHELL, "L8e capability supply section is placeable")
 # every selector the grid places must be a real .main child (or a child of a
@@ -169,9 +218,9 @@ check("dl-roles" in DECISION_JS, "L9d .dl-roles rendered")
 check(".dl-kp" in DECISION_CSS, "L9e .dl-kp chrome in _decision_layer.css")
 check(".dl-roles" in DECISION_CSS, "L9f .dl-roles chrome in _decision_layer.css")
 check(".dl-kp{" not in LAYOUT, "L9g .dl-kp chrome is NOT in _layout.css")
-tip = DECISION_JS[DECISION_JS.index("function centerTipHtml"):]
-tip = tip[:tip.index("function roleAdvisory")]
-check("ENG.killPressure" not in tip,
+tip = seg(DECISION_JS, "function centerTipHtml", "function roleAdvisory",
+          "L9h centerTipHtml anchors")
+check("ENG.killPressure" not in tip and tip != "",
       "L9h centerTipHtml no longer calls the engine directly",
       "it must go through the shared helper so tooltip and card agree")
 
@@ -195,10 +244,16 @@ check("setPickSearch" in APP, "L11f search popover has a state machine")
 # an active query must stay visible - a silently narrowed wheel was the risk
 check("syncPickSearch" in APP, "L11g an active query is mirrored onto the button")
 check('id="pick-search-q"' in SHELL, "L11h the button carries the query text")
-# the bar is ONE segmented container that never wraps (owner 2026-09-02)
-check("flex-wrap:nowrap" in SHELL[SHELL.index(".wf-bar{"):SHELL.index(".wf-bar{") + 400],
-      "L11i the bar never wraps to a second line")
-check("<select" not in SHELL[SHELL.index('class="wf-bar"'):SHELL.index("</main>")],
+# the bar is ONE segmented container that never wraps ON DESKTOP (owner
+# 2026-09-02); below 640px it wraps - it cannot scroll (overflow would clip
+# its own popups, see L11m) and its nowrap segments overpainted each other
+_wfb = SHELL.find(".wf-bar{")
+check(_wfb >= 0 and "flex-wrap:nowrap" in SHELL[_wfb:_wfb + 400],
+      "L11i the bar never wraps to a second line on desktop")
+check(".wf-bar{flex-wrap:wrap}" in SHELL,
+      "L11n below 640px the bar wraps",
+      "phones can neither scroll it nor fit it on one line")
+check("<select" not in seg(SHELL, 'class="wf-bar"', "</main>", "L11j bar anchors"),
       "L11j no native select in the bar - the tree menu carries icons")
 check('id="tree-menu"' in SHELL and "setTreeMenu" in APP,
       "L11k the tree dropdown is a real listbox")
@@ -206,16 +261,16 @@ check("treeIconFor" in APP, "L11l tree options carry a weapon icon")
 # The bar hosts three absolutely-positioned popups (chip flyouts, tree menu,
 # search). Any overflow other than visible makes it a clipping context and
 # silently cuts all three off - which shipped once on 2026-09-02.
-bar = SHELL[SHELL.index(".wf-bar{"):SHELL.index("}", SHELL.index(".wf-bar{"))]
+bar = seg(SHELL, ".wf-bar{", "}", "L11m bar rule anchors")
 bar = re.sub(r"/\*.*?\*/", "", bar, flags=re.S)   # a comment may say the word
-check(not re.search(r"overflow[-a-z]*\s*:", bar),
+check(not re.search(r"overflow[-a-z]*\s*:", bar) and bar != "",
       "L11m .wf-bar declares no overflow - it would clip its own popups",
       bar.strip())
 
 
 print("L12 - the hub gauges do not clip their own glow")
 
-hub = SHELL[SHELL.index(".hub-rings{"):SHELL.index("}", SHELL.index(".hub-rings{"))]
+hub = seg(SHELL, ".hub-rings{", "}", "L12 hub rule anchors")
 glow = ".hub-rings .ring-fill.done" in SHELL and "drop-shadow(0 0 5px currentColor)" in SHELL
 check(not glow or "overflow:visible" in hub,
       "L12a .hub-rings stays overflow:visible while .done carries a glow",
@@ -223,9 +278,8 @@ check(not glow or "overflow:visible" in hub,
 
 print("L13 - the wheel foot stopped repeating the page")
 
-foot = APP[APP.index('$("wheel-foot").innerHTML'):]
-foot = foot[:foot.index("const fslot")]
-check("party <b>" not in foot,
+foot = seg(APP, '$("wheel-foot").innerHTML', "const fslot", "L13 foot anchors")
+check("party <b>" not in foot and foot != "",
       "L13a the foot no longer prints party n/n",
       "the ring legend below it already did, and so do the masthead and tab")
 check("slotLabel" not in foot, "L13b slot number left to the pick card header")
@@ -234,21 +288,90 @@ check('id="forge-slot"' in SHELL, "L13d forge actions have a masthead home")
 check('id="forge-rail"' not in SHELL,
       "L13e the setup panel's half of the forge pair is gone")
 check("#forge-rail" not in APP, "L13f and its handler with it")
+# at the hard cap recs is null; gating BOTH buttons on recs left a 60/60
+# roster with no reforge control anywhere (the deleted rail button was the
+# only entry point in that state)
+check("const reforgeBtn" in APP and 'id="reforge"' in APP,
+      "L13g reforge stays reachable at the hard cap",
+      "reforge needs no recommendation capacity - it rebuilds forged slots")
+wf_head = seg(APP, "function renderWheelFoot", '$("wheel-foot")', "L13h foot head anchors")
+check("styleName()" not in wf_head and "slotLabel" not in wf_head,
+      "L13h the foot no longer computes labels it never renders")
+check(APP.count("${party.length}/${PLAN()}") == 1,
+      "L13i the party count string is built once for its two homes",
+      "two adjacent copies drift the masthead count from the party tab")
 
 print("L14 - the open slot adds to the party")
 
 check('id="open-slot-add"' in APP, "L14a the open slot is a real control")
 check("open-slot-add" in APP and "setPickSearch(" in APP,
       "L14b it opens the shared search rather than a second copy")
-check(APP.count('id="pick-search-pop"') <= 1,
-      "L14c there is exactly one search popover to keep in sync")
+check(SHELL.count('id="pick-search-pop"') == 1,
+      "L14c there is exactly one search popover to keep in sync",
+      "the markup lives in _shell.html - counting _app.js was vacuous")
 # it is re-parented into the board, which re-renders its innerHTML on every
 # roster change - it MUST be moved back out on close or it is destroyed
-sp = APP[APP.index("function setPickSearch"):]
-sp = sp[:sp.index("function renderPickHits")]
+sp = seg(APP, "function setPickSearch", "function renderPickHits", "L14d anchors")
 check("home.appendChild(pop)" in sp,
       "L14d the popover returns to the toolbar when it closes",
       "the party board would otherwise wipe it on the next render")
+# ... and while it is OPEN at the open slot, every renderWheel rebuilds the
+# board - the wipe site must park the live popover and re-seat it, or the
+# first keystroke in the open-slot search destroys the node for the session
+wff = seg(APP, "function renderWheelFoot", "function renderWheel(", "L14e anchors")
+check("parkedPickSearch(" in wff and "dash.innerHTML" in wff
+      and wff.find("parkedPickSearch(") < wff.find("dash.innerHTML")
+      and "reseatPickSearch(" in wff,
+      "L14e a live popover survives the board rebuild",
+      "park BEFORE dash.innerHTML, re-seat after - typing triggers renders")
+_ent = APP.find('$("pick-filter").addEventListener("keydown"')
+check(_ent >= 0 and "setPickSearch(false)" in APP[_ent:_ent + 400],
+      "L14f Enter-to-add dismisses the popover like the click path does")
+check('$("pick-search-pop").hidden' not in APP,
+      "L14g popover derefs are null-guarded",
+      "a destroyed popover must not throw on every Escape press")
+
+print("L15 - one palette for the group surfaces")
+
+meta = seg(DECISION_JS, "const DL_GROUP_META", "};", "L15 anchors")
+check("GROUP_COL." in meta,
+      "L15a the radar reads the app's GROUP_COL hues",
+      "the comment claims ONE source; the radar kept its own copy")
+check('"#' not in meta, "L15b no second hand-stepped hex table to drift")
+
+print("L16 - one engine walk per render pass")
+
+check("DL_MEMO" in DECISION_JS,
+      "L16a kill-pressure and role models are memoised per pass",
+      "killPressure ran 2x and roleAdvisory 3x on every render")
+check("function whyNotBlock(rec, shown, rep)" in DECISION_JS,
+      "L16b whyNotBlock reuses the pick report already in hand",
+      "two pickReport calls per render can silently diverge")
+
+print("L17 - the layout file carries no stale component chrome")
+
+for dead in [".dl-add{margin-top:10px}", ".dl-gains li{padding:6px 7px}",
+             "width:68px", "grid-template-columns:1fr 1fr"]:
+    check(dead not in LAYOUT, "L17a stale override %s gone from _layout.css" % dead,
+          "inlined last, it silently beat the redesigned component chrome")
+_wr = LAYOUT.find(".dl-col1, .dl-col3, .dl-pressure{display:flex")
+_mq = LAYOUT.find("@media (min-width:1251px)")
+check(0 <= _wr < _mq,
+      "L17b column wrappers keep their card gap at every width",
+      "below 1251px the wrapper divs stacked their cards flush")
+check(".dl-tools{display:grid;grid-template-columns:1fr;" in DECISION_CSS,
+      "L17c the tools fold is one column - it lives in a 430px panel",
+      "a viewport-keyed 2-col grid crushed the pool/swap cards to ~190px")
+check("@media(max-width:900px){.dl-tools" not in DECISION_CSS,
+      "L17d the dead viewport escape for the tools grid is gone")
+
+print("L18 - markup rewrites took their selectors with them")
+
+check(".wf-over{" in SHELL, "L18a the over-plan warning is styled",
+      "it rendered as default body text amid 10px mono chips")
+check(".dl-alt-row" not in DECISION_CSS, "L18b .dl-alt-row orphan gone")
+check(".wf-actions{" not in SHELL, "L18c .wf-actions orphan gone")
+check(".wheel-foot .eyebrow{" not in SHELL, "L18d .eyebrow orphan gone")
 
 if FAILURES:
 

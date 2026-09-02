@@ -544,6 +544,22 @@ function renderSetup(){
       : "")
     + (!ENG.extrapolated() ? "" :
     `<div class="notice"><b>Extrapolated.</b> This template is fitted and validated at size ${validatedSizes().join(", ")} only. Per-player targets are scaled linearly to ${SIZE}; flat threshold targets are unchanged. Tier-2 validation must confirm each size before this is trustworthy.</div>`);
+  /* honesty mirror (2026-09-02): the size input lives in the masthead now,
+     so the caveat must surface THERE the moment an unvalidated size is set —
+     the full prose stays in the setup panel this chip points at */
+  const mh = $("size-notice-mh");
+  if (mh){
+    const overCap = tpl().max_size && Math.max(SIZE, PLAN()) > tpl().max_size;
+    const extra = ENG.extrapolated();
+    mh.hidden = !(overCap || extra);
+    if (overCap){
+      mh.textContent = "over the in-game cap";
+      mh.title = `${tpl().name} parties are capped at ${tpl().max_size} in game — details in the setup panel`;
+    } else if (extra){
+      mh.textContent = "extrapolated size";
+      mh.title = `validated at size ${validatedSizes().join(", ")} only — targets are scaled to ${SIZE}; Tier-2 validation must confirm it. Details in the setup panel`;
+    }
+  }
 }
 /* The old role-tally chip row (and its roster facet filter) retired with
    the party strip (owner 2026-08-27) — the comp board's column headers
@@ -796,7 +812,9 @@ function hidePdashFly(){
 function closePdash(){
   hidePdashFly();
   const pd = $("pdash");
-  if (pd && pd.dataset.open === "true") setPanel("pdash", false);
+  /* transient: the drawer overlays the panel; closing here is geometry, not
+     a layout choice — never persist it over the user's saved preference */
+  if (pd && pd.dataset.open === "true") setPanel("pdash", false, false);
 }
 {
   const pd = $("pdash");
@@ -836,9 +854,10 @@ const TREE_NAMES = {
    cannot carry the tree's weapon icon, and the bar wants icon + name. */
 const TREE_ICON = {};
 function treeIconFor(t){
+  /* WEAPONS_BY_NAME is THE offerable list (retired weapons already dropped)
+     — one predicate, and a deterministic alphabetical face per tree */
   if (!(t in TREE_ICON))
-    TREE_ICON[t] = Object.keys(WEAPONS).find(
-      k => TREES[k] === t && !WEAPONS[k].removed) || null;
+    TREE_ICON[t] = WEAPONS_BY_NAME.find(k => TREES[k] === t) || null;
   return TREE_ICON[t];
 }
 function treeFace(t, size){
@@ -895,8 +914,8 @@ function setPickSearch(open, host){
   if (open){ renderPickHits(); $("pick-filter").focus(); }
 }
 function renderPickHits(){
-  const box = $("pick-search-hits");
-  if (!box || $("pick-search-pop").hidden) return;
+  const box = $("pick-search-hits"), pop = $("pick-search-pop");
+  if (!box || !pop || pop.hidden) return;
   const keys = filteredWeapons().slice(0, 40);
   box.innerHTML = keys.length
     ? keys.map(w => `<button class="wf-hit" data-add="${w}">${icon(w, 26)}<span>${nameOf(w)}</span></button>`).join("")
@@ -1171,20 +1190,46 @@ function renderHub(keys, idx, recs){
     <span class="hub-score mono">${r ? (r.score >= 0 ? "+" : "−") + Math.abs(r.score).toFixed(2) : "—"}${marks}</span>
     <button class="cb-add hub-add" data-add="${w}">Add to comp</button>`;
 }
+/* The shared search popover may be hosted inside the board (open slot);
+   the innerHTML rebuild below would destroy it mid-keystroke — typing in
+   its own filter triggers renderWheel. Park it out of the doomed subtree
+   first, then re-seat it at the fresh open slot with focus and caret
+   intact. The wipe site owns this invariant so EVERY render path is safe
+   (typing, Enter, wheel scroll, companion live-sync). */
+function parkedPickSearch(dash){
+  const pop = $("pick-search-pop");
+  if (!pop || pop.hidden || !dash.contains(pop)) return null;
+  const f = $("pick-filter");
+  const sel = f && document.activeElement === f
+    ? [f.selectionStart, f.selectionEnd] : null;
+  document.body.appendChild(pop);
+  return {pop, sel};
+}
+function reseatPickSearch(dash, parked){
+  if (!parked) return;
+  const btn = dash.querySelector("#open-slot-add");
+  const host = (btn && btn.parentNode) || document.querySelector(".wf-search");
+  (host || document.body).appendChild(parked.pop);
+  if (parked.sel){
+    const f = $("pick-filter");
+    if (f){
+      f.focus();
+      try { f.setSelectionRange(parked.sel[0], parked.sel[1]); }
+      catch (e) { /* type=search quirks */ }
+    }
+  }
+}
 function renderWheelFoot(keys, recs, rings){
-  const sn = styleName();
-  const slotLabel = recs === null
-    ? `roster cap — ${HARD_CAP}`
-    : party.length + 1 > PLANNED
-      ? `slot ${party.length + 1} — beyond planned ${PLANNED}`
-      : `slot ${party.length + 1} of ${PLAN()}`;
   /* same commands as ever: "forge the rest" locks current members,
-     "reforge all" rebuilds only the generated slots (2026-08-18) */
-  const forge = recs === null ? "" : (party.length < PLAN()
-    ? `<button class="cb-forge" id="forge">${party.length ? "forge the rest" : "forge a full comp"}</button>`
-    : "") + (PROV.some(x => x === "f")
+     "reforge all" rebuilds only the generated slots (2026-08-18).
+     reforge needs no recommendation capacity — it must stay reachable at
+     the hard cap (recs === null), where it used to vanish with the forge */
+  const reforgeBtn = PROV.some(x => x === "f")
     ? `<button class="cb-forge" id="reforge" title="rebuild every forged slot for the current content, style and size — manual picks stay">reforge all</button>`
-    : "");
+    : "";
+  const forge = (recs !== null && party.length < PLAN()
+    ? `<button class="cb-forge" id="forge">${party.length ? "forge the rest" : "forge a full comp"}</button>`
+    : "") + reforgeBtn;
   /* the comp board lives in the right-edge party dash (owner 2026-09-01,
      "so we can see them all much easier") — the foot keeps the compact
      tally rows. BOARD_HTML is built by renderRoster (the render that runs
@@ -1215,13 +1260,16 @@ function renderWheelFoot(keys, recs, rings){
      open kit editor) — same tiles, same delegated actions, new home */
   const dash = $("pdash-body");
   if (dash){
+    const parked = parkedPickSearch(dash);
     dash.innerHTML = board
       ? board + (NOTES_HTML ? `<div class="roster-notes wf-notes">${NOTES_HTML}</div>` : "")
       : `<div class="epanel-empty fn">No members yet — spin the wheel and add picks, or forge a full comp.</div>`;
+    reseatPickSearch(dash, parked);
+    const count = `${party.length}/${PLAN()}`;
     const pc = $("pdash-count");
-    if (pc) pc.textContent = `${party.length}/${PLAN()}`;
+    if (pc) pc.textContent = count;
     const sbc = $("sb-count");
-    if (sbc) sbc.textContent = `${party.length}/${PLAN()}`;
+    if (sbc) sbc.textContent = count;
     /* tile height divides the viewport by the member count (see .pdash CSS) */
     $("pdash").style.setProperty("--pdn", party.length || 1);
     /* an open flyout survives the re-render (kit edits arrive through
@@ -1341,7 +1389,10 @@ function renderGroups(){
     const sw = Math.max(5, Math.min(14, (step || 30) - 4));
     const arcs = rows.map((x, i) => {
       const r = n > 1 ? r0 + i * step : (r0 + R) / 2;
-      const tk = ringTick(cx, cy, r, x.tickPct / 100, sw / 2 + 2);
+      /* the tick sits proud of the stroke where it fits; on the outermost
+         thick rings the proud length would cross the viewBox floor (the
+         box clips on purpose) — clamp it, keeping 1px for the round cap */
+      const tk = ringTick(cx, cy, r, x.tickPct / 100, Math.min(sw / 2 + 2, H - cy - r - 1));
       const d = ringPath(cx, cy, r, x.fillPct / 100);
       return `<path class="ring-track" d="${ringPath(cx, cy, r, 1)}" stroke-width="${sw}"/>`
         + (d ? `<path class="ring ${x.cls}" d="${d}" stroke-width="${sw}"><title>${esc(x.c)} ${x.have.toFixed(0)} / ${x.t.toFixed(1)}</title></path>` : "")
@@ -2302,7 +2353,13 @@ function toggleCompanion(){
      disconnect/reconnect the first poll must re-render the connected state
      even when the party payload is identical to before */
   companionSig = null;
-  if (companionOn){ companionPoll(); companionTimer = setInterval(companionPoll, 5000); }
+  if (companionOn){
+    /* the feed's home is the live panel; the connect button is in the
+       masthead — open the panel or the click reads as a no-op with the
+       status, troubleshooting text and load button all hidden */
+    setPanel("live-panel", true);
+    companionPoll(); companionTimer = setInterval(companionPoll, 5000);
+  }
   else { clearInterval(companionTimer); companionTimer = null; companionData = null; renderCompanion(false); }
 }
 
@@ -2342,19 +2399,31 @@ function flashBtn(id, text, back){
 /* Edge panels: one state machine for every viewport-edge flyout. State is
    data-open on the panel, mirrored to its tab's aria-expanded, persisted so
    the layout choice survives reloads. Display only. */
-function setPanel(id, open){
+function setPanel(id, open, persist){
   const p = $(id);
   if (!p) return;
   const edge = p.dataset.edge;
   /* one panel per edge: opening one closes its neighbour, so two panels can
-     never stack on the same side */
-  if (open) document.querySelectorAll('.epanel[data-edge="' + edge + '"]')
-    .forEach(o => { if (o.id !== id) setPanel(o.id, false); });
+     never stack on the same side. On phones every panel shares ONE bottom
+     sheet, so opening closes the other edge too — WITHOUT persisting, so a
+     phone visit never erases the desktop layout choice. persist===false is
+     the transient close (drawer overlay, phone slot-sharing): the panel
+     shuts but the user's saved preference stays. */
+  if (open){
+    const phone = window.matchMedia("(max-width:960px)").matches;
+    document.querySelectorAll(".epanel").forEach(o => {
+      if (o.id === id) return;
+      if (o.dataset.edge === edge) setPanel(o.id, false);
+      else if (phone && o.dataset.open === "true") setPanel(o.id, false, false);
+    });
+  }
   p.dataset.open = open ? "true" : "false";
   const tab = document.querySelector('.epanel-tab[data-panel="' + id + '"]');
   if (tab) tab.setAttribute("aria-expanded", String(!!open));
-  try { localStorage.setItem("epanel:" + id, open ? "1" : ""); }
-  catch (e) { /* private mode */ }
+  if (persist !== false){
+    try { localStorage.setItem("epanel:" + id, open ? "1" : ""); }
+    catch (e) { /* private mode */ }
+  }
   syncPanelRail(edge);
 }
 /* the rail rides the open panel's outer edge (CSS does the moving) */
@@ -2438,7 +2507,8 @@ document.addEventListener("click", e => {
   if (det){ renderDetail(det.dataset.detail); return; }
   const openSlot = e.target.closest("#open-slot-add");
   if (openSlot){
-    setPickSearch($("pick-search-pop").hidden, openSlot.parentNode);
+    const pop = $("pick-search-pop");
+    if (pop) setPickSearch(pop.hidden, openSlot.parentNode);
     return;
   }
   if (e.target.closest("#tree-btn")){ setTreeMenu($("tree-menu").hidden); return; }
@@ -2449,11 +2519,15 @@ document.addEventListener("click", e => {
     renderWheel(RECS_CUR); renderPickHits(); return;
   }
   if (e.target.closest("#pick-search-clear")){
-    pickFilter = ""; $("pick-filter").value = "";
+    pickFilter = "";
+    const pf = $("pick-filter");
+    if (pf) pf.value = "";
     renderWheel(RECS_CUR); renderPickHits(); syncPickSearch(); return;
   }
   if (e.target.closest("#pick-search-btn")){
-    setPickSearch($("pick-search-pop").hidden); return;
+    const pop = $("pick-search-pop");
+    if (pop) setPickSearch(pop.hidden);
+    return;
   }
   const add = e.target.closest("[data-add]");
   if (add){ /* adding from the popover dismisses it */
@@ -2491,8 +2565,7 @@ document.addEventListener("click", e => {
        bodies and treated every forged slot as manual afterwards.
        "forge the rest" locks every current member; "reforge all" keeps
        only the manual/live slots and rebuilds the rest for the CURRENT
-       content, style and size. The rail's "forge full comp" fills open
-       slots, and on a fully forged roster acts as a reforge. */
+       content, style and size. */
     const goal = Math.min(PLAN(), HARD_CAP);
     const reforgeAll = forgeBtn.id === "reforge";
     const keep = party.map((_, i) => i)
@@ -2664,10 +2737,15 @@ document.addEventListener("keydown", e => {
     e.preventDefault(); e.target.click(); return;
   }
   if (e.key === "Escape"){
-    /* the search popover is the innermost dismissable thing */
-    if (!$("pick-search-pop").hidden){
-      setPickSearch(false); $("pick-search-btn").focus(); return; }
-    if (!$("tree-menu").hidden){ setTreeMenu(false); $("tree-btn").focus(); return; }
+    /* the search popover is the innermost dismissable thing. Every ref is
+       null-guarded: Escape must always reach the drawer branch */
+    const pop = $("pick-search-pop"), menu = $("tree-menu");
+    if (pop && !pop.hidden){
+      setPickSearch(false);
+      const b = $("pick-search-btn");
+      if (b) b.focus();
+      return; }
+    if (menu && !menu.hidden){ setTreeMenu(false); $("tree-btn").focus(); return; }
     $("drawer").dataset.open = "false"; return;
   }
   /* "/" jumps to the weapon filter from anywhere outside a text field */
@@ -2680,6 +2758,9 @@ $("pick-filter").addEventListener("keydown", e => {
   if (e.key !== "Enter") return;
   const keys = filteredWeapons();
   if (keys.length && party.length < HARD_CAP){
+    /* dismiss BEFORE the render, exactly like the click path — the board
+       rebuild must never catch the popover still hosted at the open slot */
+    setPickSearch(false);
     party.push(keys[0]); PROV.push("m"); COMBO.push(null); FORGE_NOTE = null;
     loadoutInsert(party.length - 1); sortPartyByRole(); render(); }
 });

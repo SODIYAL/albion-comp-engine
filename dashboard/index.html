@@ -135,6 +135,10 @@ button{font:inherit; color:inherit; cursor:pointer}
 }
 .chip .dot{width:6px; height:6px; border-radius:50%; background:var(--ok-bright); flex:none;
   box-shadow:0 0 8px var(--ok-bright)}
+/* the size honesty mirror: over-cap / extrapolated, beside the size input
+   that triggers it (the full prose lives in the setup panel) */
+.chip.warn{color:var(--amber); border-color:rgba(232,160,19,.4);
+  text-transform:uppercase; letter-spacing:.08em; font-size:9.5px}
 .about-link{
   font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
   color:var(--brass); text-decoration:none; white-space:nowrap;
@@ -491,7 +495,9 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 /* ---- the add-weapon bar ----
    ONE container on ONE line (owner 2026-09-02: "tight single row", modelled
    on a segmented status bar). Segments are divided by rules, not by their
-   own pill borders, and the bar never wraps - it scrolls if it must. */
+   own pill borders. On desktop the bar never wraps; below 640px it WRAPS -
+   it can never scroll (any overflow would clip its own popups, see below)
+   and its nowrap segments overpainted each other on phones. */
 .wf-bar{
   display:flex; align-items:stretch; flex-wrap:nowrap; margin-bottom:8px;
   min-width:0; max-width:100%;
@@ -853,22 +859,20 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 }
 .cb-forge:hover{background:var(--brass-wash); border-color:var(--brass)}
 
-/* beneath the wheel: next-pick eyebrow, ring tallies, forge actions —
-   layered above the wheel's faded bottom arc, in the space it gave up */
+/* beneath the wheel: ONE status row — the colour-matched ring legend, the
+   over-plan warning, and the filter count — layered above the wheel's
+   faded bottom arc, in the space it gave up */
 .wheel-foot{display:flex; flex-direction:column; gap:7px; margin-top:0;
   position:relative; z-index:5}
 .wheel-foot .wf-row{
   display:flex; align-items:center; justify-content:center; gap:10px 16px; flex-wrap:wrap;
 }
-.wheel-foot .eyebrow{
-  font-family:var(--mono); font-size:10px; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--brass);
-}
 .wf-count{font-family:var(--mono); font-size:10px; color:var(--ink-3)}
+.wf-over{font-family:var(--mono); font-size:10px; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--amber)}
 .wf-rings{display:flex; gap:6px 14px; flex-wrap:wrap; justify-content:center}
 .wf-ring{font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase}
 .wf-ring b{color:var(--ink); font-weight:600}
-.wf-actions{display:flex; gap:8px}
 /* the comp board (owner 2026-08-27): roster under the wheel, one column
    per main role — equal columns filling the wheel column's full width,
    entries sized to read (the semicircle handed this row its space) */
@@ -1487,7 +1491,10 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   .term{grid-template-columns:48px 1fr auto; gap:8px}
   .drawer{max-height:72vh; padding:14px 14px 18px}
 
-  /* --- filters: bigger touch targets; the bar scrolls rather than wraps --- */
+  /* --- filters: bigger touch targets; the bar WRAPS down here - its
+     nowrap segments exceed a phone viewport and it may never scroll
+     (overflow would clip the tree menu, chip flyouts and search popover) */
+  .wf-bar{flex-wrap:wrap}
   .wf-seg{padding:0 8px}
   .wf-seg-btn, .wf-search-btn, .wf-bar .pchip{padding-top:10px; padding-bottom:10px}
   .pgroup-t{padding:10px 15px; font-size:10.5px}
@@ -1532,7 +1539,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
    need→pick card. The layer shares the hero band with the wheel — see the
    .main hero grid below — and the party runs across the bottom. */
 .decision-layer{display:grid;grid-template-columns:1fr;gap:14px;align-content:start;margin:0}
-.dl-status,.dl-need,.dl-pick{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.dl-status,.dl-pick{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
 /* the radar carries the status card alone (owner 2026-08-26: "remove this
    box around our diagram") — no panel chrome; the tone lives in the
    diagram's own colors */
@@ -1664,7 +1671,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 /* Caller tools (PR #6): player pool + swap lab. Folded shut by default —
    the hero view keeps the party dock above the fold (standing owner rule);
    the workflows are one click away, and opening is remembered per session. */
-.dl-tools-fold{grid-column:1/-1;margin-top:2px}
+.dl-tools-fold{margin-top:2px}
 .dl-tools-fold summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;
   padding:9px 14px;background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));
   border:1px solid var(--rule);border-radius:12px;font-family:var(--mono);font-size:10px;
@@ -1674,7 +1681,9 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-tools-fold[open] summary::before{content:"\25BE"}
 .dl-tools-fold summary:hover{border-color:rgba(255,201,58,.45);color:var(--ink-2)}
 .dl-tools-fold summary .cnt{margin-left:auto;color:var(--brass);letter-spacing:0;text-transform:none}
-.dl-tools{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-top:10px}
+/* one column: the fold lives in the 430px tools panel now — a second
+   column crushed the pool and swap-lab cards to ~190px on every desktop */
+.dl-tools{display:grid;grid-template-columns:1fr;gap:14px;margin-top:10px}
 .dl-tool-card{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);min-width:0}
 .dl-tool-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
 .dl-tool-head h3{font-family:var(--serif);font-size:20px;margin:3px 0 0}
@@ -1719,27 +1728,23 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-swap-actions>b.up{color:var(--ok-bright)}.dl-swap-actions>b.down{color:var(--gap)}
 .dl-swap-actions button{background:transparent;border:1px solid var(--rule);color:var(--ink-2);border-radius:7px;padding:5px 7px;font-size:9.5px}
 .dl-swap-actions button:hover{border-color:var(--brass);color:var(--brass)}
-@media(max-width:900px){.dl-tools{grid-template-columns:1fr}}
-@media(max-width:720px){.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-alt-row{grid-template-columns:1fr}.dl-empty{display:block}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
+@media(max-width:720px){.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-empty{display:block}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
 
 /* ---- the column-3 split (owner 2026-09-02) ----
    The pick card used to stack six answers in one frame. Now: diagnosis,
-   fight chain, the pick. Chrome only; placement lives in _layout.css. */
-.dl-need, .dl-chain-card{
+   fight chain, the pick, kill pressure and role check each get a flat
+   card in ONE shared rule - four hand-kept copies drifted (.dl-need alone
+   kept a box-shadow from the old grouped rule). Chrome only; placement
+   lives in _layout.css. Kill pressure + role check are DESCRIPTIVE - they
+   translate engine output and never feed scoring; the radar tooltip
+   renders the same models through killPressureLine()/roleLines(). */
+.dl-need, .dl-chain-card, .dl-kp, .dl-roles{
   background:var(--panel-lo); border:1px solid var(--rule); border-radius:12px;
   padding:12px 14px;
 }
 .dl-need .dl-needline{padding-bottom:0; margin-bottom:0; border-bottom:0}
 .dl-need .dl-remain{margin-top:10px; padding-top:10px; border-top:1px solid var(--rule)}
 .dl-chain-card .dl-chain{margin:0}
-
-/* kill pressure + role check as cards (2026-09-02). Both DESCRIPTIVE - they
-   translate engine output and never feed scoring. The radar tooltip renders
-   the same models through killPressureLine()/roleLines(). */
-.dl-kp, .dl-roles{
-  background:var(--panel-lo); border:1px solid var(--rule); border-radius:12px;
-  padding:12px 14px;
-}
 .dl-kp-row{display:flex; align-items:center; gap:9px; padding:5px 0; font-size:13px}
 .dl-kp-dot{width:9px; height:9px; border-radius:50%; flex:none}
 .dl-kp-row.ok .dl-kp-dot{background:#3FD68C; box-shadow:0 0 8px rgba(63,214,140,.6)}
@@ -1791,7 +1796,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   .ws-center{grid-column:1; grid-row:2}
   .ws-right{grid-column:2; grid-row:1 / span 2}
 }
-@media (max-width:1250px){
+@media (max-width:1250.98px){
   .wheelstage{grid-template-columns:1fr}
   .ws-center{grid-column:auto; grid-row:auto; order:2}
   .ws-right{grid-column:auto; grid-row:auto; order:3}
@@ -1820,6 +1825,14 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .epanel[data-edge="right"]{right:0; transform:translateX(100%); border-left:1px solid var(--rule-2)}
 .epanel[data-edge="left"]{left:0; transform:translateX(-100%); border-right:1px solid var(--rule-2)}
 .epanel[data-open="true"]{transform:none}
+/* desktop: an OPEN panel rises above the rails so the kit flyout (a panel
+   child painted outside its left edge) is not occluded by its own tab —
+   the pointer crossing a non-descendant tab fired the panel's mouseleave
+   and killed the flyout mid-reach. Phones keep the rail on top: the tab
+   bar must stay tappable over the open sheet. */
+@media (min-width:961px){
+  .epanel[data-open="true"]{z-index:42}
+}
 .epanel-body{overflow-y:auto; padding:12px 12px 18px; flex:1}
 .epanel-empty{padding:6px 2px}
 
@@ -1867,6 +1880,11 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   .epanel-rail, .epanel-rail[data-edge="right"][data-open="true"],
   .epanel-rail[data-edge="left"][data-open="true"]{transform:none}
   .epanel-rail[data-edge="left"], .epanel-rail[data-edge="right"]{left:0; right:0}
+  /* the two full-width bars OVERLAP here: without click-through the
+     later-DOM right rail's transparent box ate every tap on the left
+     rail's setup/tools tabs (and on page content under the bar) */
+  .epanel-rail{pointer-events:none}
+  .epanel-tab{pointer-events:auto}
   .epanel-rail[data-edge="left"]{justify-content:flex-start; padding-left:8px}
   .epanel-rail[data-edge="right"]{justify-content:flex-end; padding-right:8px}
   .epanel-tab{writing-mode:horizontal-tb; padding:7px 12px; border-radius:8px 8px 0 0;
@@ -1884,28 +1902,26 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
    Shared across every grid band: the stage wrappers dissolve with
    display:contents so their children place directly on .main's grid, and
    the decision stack sheds slack height once it lives in a column. */
+/* column wrappers: their cards stack with independent heights, so a tall
+   card in one column never inflates the shared grid row of another. The
+   gap applies at EVERY width — below the grid bands these wrappers still
+   exist, and without it their cards stacked border-to-border. */
+.dl-col1, .dl-col3, .dl-pressure{display:flex; flex-direction:column; gap:14px; min-width:0}
 @media (min-width:1251px){
   .main{display:grid; align-items:start; gap:18px 24px}
   .main>*{grid-column:1/-1; min-width:0}
   .decision-layer{display:contents}
   .wheelstage{display:contents}
-  .dl-tools{grid-template-columns:1fr 1fr}
-  /* column wrappers: their cards stack with independent heights, so a tall
-     card in one column never inflates the shared grid row of another */
-  .dl-col1, .dl-col3, .dl-pressure{display:flex; flex-direction:column; gap:14px; min-width:0}
+  /* hero-density chrome. ONLY values the component files do not already
+     state — the old block carried stale copies of the retired chip design
+     (68px icon, chip-padded gain rows, the full-width Add's margin) that
+     beat the redesigned rules by inline order on every desktop width. */
   .dl-status{padding:0}
   .dl-pick{padding:14px 16px}
-  .dl-needline{padding-bottom:10px;margin-bottom:10px}
   .dl-nl-main strong{font-size:19px}
-  .dl-weapon{margin:8px 0 6px;gap:12px}
-  .dl-weapon img.icon{width:68px;height:68px}
   .dl-weapon .nm-btn{font-size:23px}
   .dl-pick p{margin:6px 0 8px;font-size:12.5px}
-  .dl-gains li{padding:6px 7px}
-  .dl-remain{margin-top:8px}
-  .dl-add{margin-top:10px}
-  .dl-alts{margin-top:8px;gap:4px}
-  .dl-alt{padding:5px 9px}
+  .dl-alts{margin-top:8px}
   /* deep boards stay full-width rows below the hero, in DOM order */
   #meta-sec, .footnote{grid-column:1/-1; grid-row:auto}
 }
@@ -1931,7 +1947,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
    lands in, so it is a first-class layout, not a fallback: column 4
    dissolves into a full-width row of three cards beneath the hero, and
    columns 1-3 keep their assignments. */
-@media (min-width:1400px) and (max-width:1699px){
+@media (min-width:1400px) and (max-width:1699.98px){
   .dl-col1{grid-column:1; grid-row:1/3}
   .main{grid-template-columns:minmax(300px,.85fr) minmax(500px,1.2fr) minmax(340px,1fr)}
   .dl-status{grid-column:1; grid-row:1/3}
@@ -1946,8 +1962,12 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   .wheel{--wd:min(500px,100cqi)}
 }
 
-/* the pre-existing two-column hero grid, unchanged behaviour */
-@media (min-width:1251px) and (max-width:1399px){
+/* the pre-existing two-column hero grid, unchanged behaviour.
+   Fractional bounds throughout these bands: 125%/150% display scaling
+   yields viewport widths like 1399.5px, and an integer max-width left an
+   open interval matching NO band — the base >=1251 grid has no column
+   template of its own, so the whole page collapsed to one column there. */
+@media (min-width:1251px) and (max-width:1399.98px){
   .dl-col1{grid-column:1; grid-row:1}
   .main{grid-template-columns:minmax(390px,1fr) minmax(0,1.5fr)}
   .dl-status{grid-column:1; grid-row:1}
@@ -2057,6 +2077,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     <label class="sb-field"><span>content</span><select id="content">
       <option value="castle_outpost">Castle Outpost</option>
     </select></label>
+    <span class="chip warn" id="size-notice-mh" hidden></span>
     <span class="sb-count" id="sb-count">0/0</span>
     <span class="mh-forge" id="forge-slot"></span>
     <div class="spacer"></div>
@@ -6570,6 +6591,22 @@ function renderSetup(){
       : "")
     + (!ENG.extrapolated() ? "" :
     `<div class="notice"><b>Extrapolated.</b> This template is fitted and validated at size ${validatedSizes().join(", ")} only. Per-player targets are scaled linearly to ${SIZE}; flat threshold targets are unchanged. Tier-2 validation must confirm each size before this is trustworthy.</div>`);
+  /* honesty mirror (2026-09-02): the size input lives in the masthead now,
+     so the caveat must surface THERE the moment an unvalidated size is set —
+     the full prose stays in the setup panel this chip points at */
+  const mh = $("size-notice-mh");
+  if (mh){
+    const overCap = tpl().max_size && Math.max(SIZE, PLAN()) > tpl().max_size;
+    const extra = ENG.extrapolated();
+    mh.hidden = !(overCap || extra);
+    if (overCap){
+      mh.textContent = "over the in-game cap";
+      mh.title = `${tpl().name} parties are capped at ${tpl().max_size} in game — details in the setup panel`;
+    } else if (extra){
+      mh.textContent = "extrapolated size";
+      mh.title = `validated at size ${validatedSizes().join(", ")} only — targets are scaled to ${SIZE}; Tier-2 validation must confirm it. Details in the setup panel`;
+    }
+  }
 }
 /* The old role-tally chip row (and its roster facet filter) retired with
    the party strip (owner 2026-08-27) — the comp board's column headers
@@ -6822,7 +6859,9 @@ function hidePdashFly(){
 function closePdash(){
   hidePdashFly();
   const pd = $("pdash");
-  if (pd && pd.dataset.open === "true") setPanel("pdash", false);
+  /* transient: the drawer overlays the panel; closing here is geometry, not
+     a layout choice — never persist it over the user's saved preference */
+  if (pd && pd.dataset.open === "true") setPanel("pdash", false, false);
 }
 {
   const pd = $("pdash");
@@ -6862,9 +6901,10 @@ const TREE_NAMES = {
    cannot carry the tree's weapon icon, and the bar wants icon + name. */
 const TREE_ICON = {};
 function treeIconFor(t){
+  /* WEAPONS_BY_NAME is THE offerable list (retired weapons already dropped)
+     — one predicate, and a deterministic alphabetical face per tree */
   if (!(t in TREE_ICON))
-    TREE_ICON[t] = Object.keys(WEAPONS).find(
-      k => TREES[k] === t && !WEAPONS[k].removed) || null;
+    TREE_ICON[t] = WEAPONS_BY_NAME.find(k => TREES[k] === t) || null;
   return TREE_ICON[t];
 }
 function treeFace(t, size){
@@ -6921,8 +6961,8 @@ function setPickSearch(open, host){
   if (open){ renderPickHits(); $("pick-filter").focus(); }
 }
 function renderPickHits(){
-  const box = $("pick-search-hits");
-  if (!box || $("pick-search-pop").hidden) return;
+  const box = $("pick-search-hits"), pop = $("pick-search-pop");
+  if (!box || !pop || pop.hidden) return;
   const keys = filteredWeapons().slice(0, 40);
   box.innerHTML = keys.length
     ? keys.map(w => `<button class="wf-hit" data-add="${w}">${icon(w, 26)}<span>${nameOf(w)}</span></button>`).join("")
@@ -7197,20 +7237,46 @@ function renderHub(keys, idx, recs){
     <span class="hub-score mono">${r ? (r.score >= 0 ? "+" : "−") + Math.abs(r.score).toFixed(2) : "—"}${marks}</span>
     <button class="cb-add hub-add" data-add="${w}">Add to comp</button>`;
 }
+/* The shared search popover may be hosted inside the board (open slot);
+   the innerHTML rebuild below would destroy it mid-keystroke — typing in
+   its own filter triggers renderWheel. Park it out of the doomed subtree
+   first, then re-seat it at the fresh open slot with focus and caret
+   intact. The wipe site owns this invariant so EVERY render path is safe
+   (typing, Enter, wheel scroll, companion live-sync). */
+function parkedPickSearch(dash){
+  const pop = $("pick-search-pop");
+  if (!pop || pop.hidden || !dash.contains(pop)) return null;
+  const f = $("pick-filter");
+  const sel = f && document.activeElement === f
+    ? [f.selectionStart, f.selectionEnd] : null;
+  document.body.appendChild(pop);
+  return {pop, sel};
+}
+function reseatPickSearch(dash, parked){
+  if (!parked) return;
+  const btn = dash.querySelector("#open-slot-add");
+  const host = (btn && btn.parentNode) || document.querySelector(".wf-search");
+  (host || document.body).appendChild(parked.pop);
+  if (parked.sel){
+    const f = $("pick-filter");
+    if (f){
+      f.focus();
+      try { f.setSelectionRange(parked.sel[0], parked.sel[1]); }
+      catch (e) { /* type=search quirks */ }
+    }
+  }
+}
 function renderWheelFoot(keys, recs, rings){
-  const sn = styleName();
-  const slotLabel = recs === null
-    ? `roster cap — ${HARD_CAP}`
-    : party.length + 1 > PLANNED
-      ? `slot ${party.length + 1} — beyond planned ${PLANNED}`
-      : `slot ${party.length + 1} of ${PLAN()}`;
   /* same commands as ever: "forge the rest" locks current members,
-     "reforge all" rebuilds only the generated slots (2026-08-18) */
-  const forge = recs === null ? "" : (party.length < PLAN()
-    ? `<button class="cb-forge" id="forge">${party.length ? "forge the rest" : "forge a full comp"}</button>`
-    : "") + (PROV.some(x => x === "f")
+     "reforge all" rebuilds only the generated slots (2026-08-18).
+     reforge needs no recommendation capacity — it must stay reachable at
+     the hard cap (recs === null), where it used to vanish with the forge */
+  const reforgeBtn = PROV.some(x => x === "f")
     ? `<button class="cb-forge" id="reforge" title="rebuild every forged slot for the current content, style and size — manual picks stay">reforge all</button>`
-    : "");
+    : "";
+  const forge = (recs !== null && party.length < PLAN()
+    ? `<button class="cb-forge" id="forge">${party.length ? "forge the rest" : "forge a full comp"}</button>`
+    : "") + reforgeBtn;
   /* the comp board lives in the right-edge party dash (owner 2026-09-01,
      "so we can see them all much easier") — the foot keeps the compact
      tally rows. BOARD_HTML is built by renderRoster (the render that runs
@@ -7241,13 +7307,16 @@ function renderWheelFoot(keys, recs, rings){
      open kit editor) — same tiles, same delegated actions, new home */
   const dash = $("pdash-body");
   if (dash){
+    const parked = parkedPickSearch(dash);
     dash.innerHTML = board
       ? board + (NOTES_HTML ? `<div class="roster-notes wf-notes">${NOTES_HTML}</div>` : "")
       : `<div class="epanel-empty fn">No members yet — spin the wheel and add picks, or forge a full comp.</div>`;
+    reseatPickSearch(dash, parked);
+    const count = `${party.length}/${PLAN()}`;
     const pc = $("pdash-count");
-    if (pc) pc.textContent = `${party.length}/${PLAN()}`;
+    if (pc) pc.textContent = count;
     const sbc = $("sb-count");
-    if (sbc) sbc.textContent = `${party.length}/${PLAN()}`;
+    if (sbc) sbc.textContent = count;
     /* tile height divides the viewport by the member count (see .pdash CSS) */
     $("pdash").style.setProperty("--pdn", party.length || 1);
     /* an open flyout survives the re-render (kit edits arrive through
@@ -7367,7 +7436,10 @@ function renderGroups(){
     const sw = Math.max(5, Math.min(14, (step || 30) - 4));
     const arcs = rows.map((x, i) => {
       const r = n > 1 ? r0 + i * step : (r0 + R) / 2;
-      const tk = ringTick(cx, cy, r, x.tickPct / 100, sw / 2 + 2);
+      /* the tick sits proud of the stroke where it fits; on the outermost
+         thick rings the proud length would cross the viewBox floor (the
+         box clips on purpose) — clamp it, keeping 1px for the round cap */
+      const tk = ringTick(cx, cy, r, x.tickPct / 100, Math.min(sw / 2 + 2, H - cy - r - 1));
       const d = ringPath(cx, cy, r, x.fillPct / 100);
       return `<path class="ring-track" d="${ringPath(cx, cy, r, 1)}" stroke-width="${sw}"/>`
         + (d ? `<path class="ring ${x.cls}" d="${d}" stroke-width="${sw}"><title>${esc(x.c)} ${x.have.toFixed(0)} / ${x.t.toFixed(1)}</title></path>` : "")
@@ -8328,7 +8400,13 @@ function toggleCompanion(){
      disconnect/reconnect the first poll must re-render the connected state
      even when the party payload is identical to before */
   companionSig = null;
-  if (companionOn){ companionPoll(); companionTimer = setInterval(companionPoll, 5000); }
+  if (companionOn){
+    /* the feed's home is the live panel; the connect button is in the
+       masthead — open the panel or the click reads as a no-op with the
+       status, troubleshooting text and load button all hidden */
+    setPanel("live-panel", true);
+    companionPoll(); companionTimer = setInterval(companionPoll, 5000);
+  }
   else { clearInterval(companionTimer); companionTimer = null; companionData = null; renderCompanion(false); }
 }
 
@@ -8368,19 +8446,31 @@ function flashBtn(id, text, back){
 /* Edge panels: one state machine for every viewport-edge flyout. State is
    data-open on the panel, mirrored to its tab's aria-expanded, persisted so
    the layout choice survives reloads. Display only. */
-function setPanel(id, open){
+function setPanel(id, open, persist){
   const p = $(id);
   if (!p) return;
   const edge = p.dataset.edge;
   /* one panel per edge: opening one closes its neighbour, so two panels can
-     never stack on the same side */
-  if (open) document.querySelectorAll('.epanel[data-edge="' + edge + '"]')
-    .forEach(o => { if (o.id !== id) setPanel(o.id, false); });
+     never stack on the same side. On phones every panel shares ONE bottom
+     sheet, so opening closes the other edge too — WITHOUT persisting, so a
+     phone visit never erases the desktop layout choice. persist===false is
+     the transient close (drawer overlay, phone slot-sharing): the panel
+     shuts but the user's saved preference stays. */
+  if (open){
+    const phone = window.matchMedia("(max-width:960px)").matches;
+    document.querySelectorAll(".epanel").forEach(o => {
+      if (o.id === id) return;
+      if (o.dataset.edge === edge) setPanel(o.id, false);
+      else if (phone && o.dataset.open === "true") setPanel(o.id, false, false);
+    });
+  }
   p.dataset.open = open ? "true" : "false";
   const tab = document.querySelector('.epanel-tab[data-panel="' + id + '"]');
   if (tab) tab.setAttribute("aria-expanded", String(!!open));
-  try { localStorage.setItem("epanel:" + id, open ? "1" : ""); }
-  catch (e) { /* private mode */ }
+  if (persist !== false){
+    try { localStorage.setItem("epanel:" + id, open ? "1" : ""); }
+    catch (e) { /* private mode */ }
+  }
   syncPanelRail(edge);
 }
 /* the rail rides the open panel's outer edge (CSS does the moving) */
@@ -8464,7 +8554,8 @@ document.addEventListener("click", e => {
   if (det){ renderDetail(det.dataset.detail); return; }
   const openSlot = e.target.closest("#open-slot-add");
   if (openSlot){
-    setPickSearch($("pick-search-pop").hidden, openSlot.parentNode);
+    const pop = $("pick-search-pop");
+    if (pop) setPickSearch(pop.hidden, openSlot.parentNode);
     return;
   }
   if (e.target.closest("#tree-btn")){ setTreeMenu($("tree-menu").hidden); return; }
@@ -8475,11 +8566,15 @@ document.addEventListener("click", e => {
     renderWheel(RECS_CUR); renderPickHits(); return;
   }
   if (e.target.closest("#pick-search-clear")){
-    pickFilter = ""; $("pick-filter").value = "";
+    pickFilter = "";
+    const pf = $("pick-filter");
+    if (pf) pf.value = "";
     renderWheel(RECS_CUR); renderPickHits(); syncPickSearch(); return;
   }
   if (e.target.closest("#pick-search-btn")){
-    setPickSearch($("pick-search-pop").hidden); return;
+    const pop = $("pick-search-pop");
+    if (pop) setPickSearch(pop.hidden);
+    return;
   }
   const add = e.target.closest("[data-add]");
   if (add){ /* adding from the popover dismisses it */
@@ -8517,8 +8612,7 @@ document.addEventListener("click", e => {
        bodies and treated every forged slot as manual afterwards.
        "forge the rest" locks every current member; "reforge all" keeps
        only the manual/live slots and rebuilds the rest for the CURRENT
-       content, style and size. The rail's "forge full comp" fills open
-       slots, and on a fully forged roster acts as a reforge. */
+       content, style and size. */
     const goal = Math.min(PLAN(), HARD_CAP);
     const reforgeAll = forgeBtn.id === "reforge";
     const keep = party.map((_, i) => i)
@@ -8690,10 +8784,15 @@ document.addEventListener("keydown", e => {
     e.preventDefault(); e.target.click(); return;
   }
   if (e.key === "Escape"){
-    /* the search popover is the innermost dismissable thing */
-    if (!$("pick-search-pop").hidden){
-      setPickSearch(false); $("pick-search-btn").focus(); return; }
-    if (!$("tree-menu").hidden){ setTreeMenu(false); $("tree-btn").focus(); return; }
+    /* the search popover is the innermost dismissable thing. Every ref is
+       null-guarded: Escape must always reach the drawer branch */
+    const pop = $("pick-search-pop"), menu = $("tree-menu");
+    if (pop && !pop.hidden){
+      setPickSearch(false);
+      const b = $("pick-search-btn");
+      if (b) b.focus();
+      return; }
+    if (menu && !menu.hidden){ setTreeMenu(false); $("tree-btn").focus(); return; }
     $("drawer").dataset.open = "false"; return;
   }
   /* "/" jumps to the weapon filter from anywhere outside a text field */
@@ -8706,6 +8805,9 @@ $("pick-filter").addEventListener("keydown", e => {
   if (e.key !== "Enter") return;
   const keys = filteredWeapons();
   if (keys.length && party.length < HARD_CAP){
+    /* dismiss BEFORE the render, exactly like the click path — the board
+       rebuild must never catch the popover still hosted at the open slot */
+    setPickSearch(false);
     party.push(keys[0]); PROV.push("m"); COMBO.push(null); FORGE_NOTE = null;
     loadoutInsert(party.length - 1); sortPartyByRole(); render(); }
 });
@@ -8929,18 +9031,17 @@ render();
     bomb:      "M14 10a7 7 0 1 1-8 8 7 7 0 0 1 8-8zM14 10l3-3M17 7l-1-1M17 7l1 1M19 3l.01.01M22 6l.01.01",
   };
   const DL_ICON_FILL = {bolt: true, dot: true};
-  /* Categorical group colors: the app's role palette re-stepped where the
-     colorblind validator demanded (Control teal, not peel-cyan — too close
-     to Frontline blue), validated on the panel surface incl. the wrap pair.
-     Fixed assignment, never cycled. */
+  /* Group hues come from _app.js's GROUP_COL (inlined before this file) —
+     ONE palette for the radar axes and the supply-ring headers, so the two
+     surfaces cannot drift. The CVD validation note lives on GROUP_COL. */
   const DL_GROUP_META = {
-    Sustain:   {col: "#1FAE58", icon: "plus"},
-    Frontline: {col: "#4D8DFF", icon: "shield"},
-    Control:   {col: "#17A386", icon: "link"},
-    Denial:    {col: "#C08800", icon: "ban"},
-    Damage:    {col: "#E00063", icon: "crosshair"},
-    Tempo:     {col: "#E85D12", icon: "bolt"},
-    Other:     {col: "#757A92", icon: "dot"},
+    Sustain:   {col: GROUP_COL.Sustain,   icon: "plus"},
+    Frontline: {col: GROUP_COL.Frontline, icon: "shield"},
+    Control:   {col: GROUP_COL.Control,   icon: "link"},
+    Denial:    {col: GROUP_COL.Denial,    icon: "ban"},
+    Damage:    {col: GROUP_COL.Damage,    icon: "crosshair"},
+    Tempo:     {col: GROUP_COL.Tempo,     icon: "bolt"},
+    Other:     {col: GROUP_COL.Other,     icon: "dot"},
   };
   /* shared popup: content lives in DL_TIPS (rebuilt every render —
      indices are re-stamped with the markup), elements carry data-dltip */
@@ -9027,8 +9128,14 @@ render();
   }
   /* Kill pressure and role check are DESCRIPTIVE — they translate engine
      output and never score. The radar tooltip and the standalone cards both
-     read these models, so the two surfaces can never disagree. */
+     read these models, so the two surfaces can never disagree — and both
+     are MEMOISED per render pass (DL_MEMO, cleared at renderDecisionLayer
+     entry): the tooltip + card pairing used to walk the whole comp twice
+     for kill pressure and three times for roles on every render. */
+  let DL_MEMO = {};
   function killPressureModel(){
+    if ("kp" in DL_MEMO) return DL_MEMO.kp;
+    DL_MEMO.kp = null;
     if (typeof ENG.killPressure !== "function") return null;
     const kp = ENG.killPressure(party, COMBOS_CUR);
     if (!kp) return null;
@@ -9037,7 +9144,8 @@ render();
       return {ok: l.ok, have: l.have, bar: l.bar,
               pct: l.bar > 0 ? Math.round(100 * l.have / l.bar) : 100};
     };
-    return {pierce: lens("pierce"), heal_cut: lens("heal_cut"), burst: lens("burst")};
+    DL_MEMO.kp = {pierce: lens("pierce"), heal_cut: lens("heal_cut"), burst: lens("burst")};
+    return DL_MEMO.kp;
   }
   const KP_LABEL = {pierce: "pierce", heal_cut: "heal-cut", burst: "burst"};
   function killPressureLine(){
@@ -9111,6 +9219,8 @@ render();
     return h;
   }
   function roleAdvisory(){
+    if ("adv" in DL_MEMO) return DL_MEMO.adv;
+    DL_MEMO.adv = null;
     if (!party.length || typeof ENG.roleAdvisory !== "function") return null;
     const chests = {};
     party.forEach((w, i) => {
@@ -9118,7 +9228,8 @@ render();
       if (L && L.armor) chests[i] = L.armor;
     });
     const adv = ENG.roleAdvisory(party, chests);
-    return adv && (adv.flags.length || Object.keys(adv.tally).length) ? adv : null;
+    DL_MEMO.adv = adv && (adv.flags.length || Object.keys(adv.tally).length) ? adv : null;
+    return DL_MEMO.adv;
   }
   function identityCenter(id){
     /* glyph + short label for the hollow center */
@@ -9262,9 +9373,11 @@ render();
      duplicate-copy penalty, verified count-once spell losses. Display
      only — the engine's Q18 investigation rejected a scoring-side
      redundancy penalty; the marginal already collapses, this SAYS so. */
-  function whyNotBlock(rec, shown){
+  function whyNotBlock(rec, shown, rep){
     if (!rec || typeof ENG.pickReport !== "function") return "";
-    const r = pickReport(party, rec.w);
+    /* the caller already computed this pick's report for the gain rows —
+       reuse it, so the row verdicts and the cost lines cannot diverge */
+    const r = rep || pickReport(party, rec.w);
     const lines = [];
     if (r.verdict !== "ok")
       r.caps.filter(x => x.saturated && !(shown && shown.has(x.cap))).slice(0, 3).forEach(x => {
@@ -9453,6 +9566,7 @@ render();
   function renderDecisionLayer(){
     const host = document.getElementById("decision-layer");
     if (!host) return;
+    DL_MEMO = {};   /* one engine walk per model per pass */
     /* statusRadar() refills this; on an empty comp it never runs, so clear
        first rather than leaving a stale verdict in the status bar */
     const sbi0 = document.getElementById("sb-identity");
@@ -9557,7 +9671,7 @@ render();
         </div>
         <p>${whySentence(party, top.w)}</p>
         ${observed}
-        ${whyNotBlock(top, shownCaps)}
+        ${whyNotBlock(top, shownCaps, rep)}
         ${altsHtml}
       </div>
       </div>

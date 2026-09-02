@@ -35,7 +35,7 @@
   .ws-center{grid-column:1; grid-row:2}
   .ws-right{grid-column:2; grid-row:1 / span 2}
 }
-@media (max-width:1250px){
+@media (max-width:1250.98px){
   .wheelstage{grid-template-columns:1fr}
   .ws-center{grid-column:auto; grid-row:auto; order:2}
   .ws-right{grid-column:auto; grid-row:auto; order:3}
@@ -64,6 +64,14 @@
 .epanel[data-edge="right"]{right:0; transform:translateX(100%); border-left:1px solid var(--rule-2)}
 .epanel[data-edge="left"]{left:0; transform:translateX(-100%); border-right:1px solid var(--rule-2)}
 .epanel[data-open="true"]{transform:none}
+/* desktop: an OPEN panel rises above the rails so the kit flyout (a panel
+   child painted outside its left edge) is not occluded by its own tab —
+   the pointer crossing a non-descendant tab fired the panel's mouseleave
+   and killed the flyout mid-reach. Phones keep the rail on top: the tab
+   bar must stay tappable over the open sheet. */
+@media (min-width:961px){
+  .epanel[data-open="true"]{z-index:42}
+}
 .epanel-body{overflow-y:auto; padding:12px 12px 18px; flex:1}
 .epanel-empty{padding:6px 2px}
 
@@ -111,6 +119,11 @@
   .epanel-rail, .epanel-rail[data-edge="right"][data-open="true"],
   .epanel-rail[data-edge="left"][data-open="true"]{transform:none}
   .epanel-rail[data-edge="left"], .epanel-rail[data-edge="right"]{left:0; right:0}
+  /* the two full-width bars OVERLAP here: without click-through the
+     later-DOM right rail's transparent box ate every tap on the left
+     rail's setup/tools tabs (and on page content under the bar) */
+  .epanel-rail{pointer-events:none}
+  .epanel-tab{pointer-events:auto}
   .epanel-rail[data-edge="left"]{justify-content:flex-start; padding-left:8px}
   .epanel-rail[data-edge="right"]{justify-content:flex-end; padding-right:8px}
   .epanel-tab{writing-mode:horizontal-tb; padding:7px 12px; border-radius:8px 8px 0 0;
@@ -128,28 +141,26 @@
    Shared across every grid band: the stage wrappers dissolve with
    display:contents so their children place directly on .main's grid, and
    the decision stack sheds slack height once it lives in a column. */
+/* column wrappers: their cards stack with independent heights, so a tall
+   card in one column never inflates the shared grid row of another. The
+   gap applies at EVERY width — below the grid bands these wrappers still
+   exist, and without it their cards stacked border-to-border. */
+.dl-col1, .dl-col3, .dl-pressure{display:flex; flex-direction:column; gap:14px; min-width:0}
 @media (min-width:1251px){
   .main{display:grid; align-items:start; gap:18px 24px}
   .main>*{grid-column:1/-1; min-width:0}
   .decision-layer{display:contents}
   .wheelstage{display:contents}
-  .dl-tools{grid-template-columns:1fr 1fr}
-  /* column wrappers: their cards stack with independent heights, so a tall
-     card in one column never inflates the shared grid row of another */
-  .dl-col1, .dl-col3, .dl-pressure{display:flex; flex-direction:column; gap:14px; min-width:0}
+  /* hero-density chrome. ONLY values the component files do not already
+     state — the old block carried stale copies of the retired chip design
+     (68px icon, chip-padded gain rows, the full-width Add's margin) that
+     beat the redesigned rules by inline order on every desktop width. */
   .dl-status{padding:0}
   .dl-pick{padding:14px 16px}
-  .dl-needline{padding-bottom:10px;margin-bottom:10px}
   .dl-nl-main strong{font-size:19px}
-  .dl-weapon{margin:8px 0 6px;gap:12px}
-  .dl-weapon img.icon{width:68px;height:68px}
   .dl-weapon .nm-btn{font-size:23px}
   .dl-pick p{margin:6px 0 8px;font-size:12.5px}
-  .dl-gains li{padding:6px 7px}
-  .dl-remain{margin-top:8px}
-  .dl-add{margin-top:10px}
-  .dl-alts{margin-top:8px;gap:4px}
-  .dl-alt{padding:5px 9px}
+  .dl-alts{margin-top:8px}
   /* deep boards stay full-width rows below the hero, in DOM order */
   #meta-sec, .footnote{grid-column:1/-1; grid-row:auto}
 }
@@ -175,7 +186,7 @@
    lands in, so it is a first-class layout, not a fallback: column 4
    dissolves into a full-width row of three cards beneath the hero, and
    columns 1-3 keep their assignments. */
-@media (min-width:1400px) and (max-width:1699px){
+@media (min-width:1400px) and (max-width:1699.98px){
   .dl-col1{grid-column:1; grid-row:1/3}
   .main{grid-template-columns:minmax(300px,.85fr) minmax(500px,1.2fr) minmax(340px,1fr)}
   .dl-status{grid-column:1; grid-row:1/3}
@@ -190,8 +201,12 @@
   .wheel{--wd:min(500px,100cqi)}
 }
 
-/* the pre-existing two-column hero grid, unchanged behaviour */
-@media (min-width:1251px) and (max-width:1399px){
+/* the pre-existing two-column hero grid, unchanged behaviour.
+   Fractional bounds throughout these bands: 125%/150% display scaling
+   yields viewport widths like 1399.5px, and an integer max-width left an
+   open interval matching NO band — the base >=1251 grid has no column
+   template of its own, so the whole page collapsed to one column there. */
+@media (min-width:1251px) and (max-width:1399.98px){
   .dl-col1{grid-column:1; grid-row:1}
   .main{grid-template-columns:minmax(390px,1fr) minmax(0,1.5fr)}
   .dl-status{grid-column:1; grid-row:1}

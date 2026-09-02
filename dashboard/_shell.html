@@ -135,6 +135,10 @@ button{font:inherit; color:inherit; cursor:pointer}
 }
 .chip .dot{width:6px; height:6px; border-radius:50%; background:var(--ok-bright); flex:none;
   box-shadow:0 0 8px var(--ok-bright)}
+/* the size honesty mirror: over-cap / extrapolated, beside the size input
+   that triggers it (the full prose lives in the setup panel) */
+.chip.warn{color:var(--amber); border-color:rgba(232,160,19,.4);
+  text-transform:uppercase; letter-spacing:.08em; font-size:9.5px}
 .about-link{
   font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
   color:var(--brass); text-decoration:none; white-space:nowrap;
@@ -491,7 +495,9 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 /* ---- the add-weapon bar ----
    ONE container on ONE line (owner 2026-09-02: "tight single row", modelled
    on a segmented status bar). Segments are divided by rules, not by their
-   own pill borders, and the bar never wraps - it scrolls if it must. */
+   own pill borders. On desktop the bar never wraps; below 640px it WRAPS -
+   it can never scroll (any overflow would clip its own popups, see below)
+   and its nowrap segments overpainted each other on phones. */
 .wf-bar{
   display:flex; align-items:stretch; flex-wrap:nowrap; margin-bottom:8px;
   min-width:0; max-width:100%;
@@ -853,22 +859,20 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 }
 .cb-forge:hover{background:var(--brass-wash); border-color:var(--brass)}
 
-/* beneath the wheel: next-pick eyebrow, ring tallies, forge actions —
-   layered above the wheel's faded bottom arc, in the space it gave up */
+/* beneath the wheel: ONE status row — the colour-matched ring legend, the
+   over-plan warning, and the filter count — layered above the wheel's
+   faded bottom arc, in the space it gave up */
 .wheel-foot{display:flex; flex-direction:column; gap:7px; margin-top:0;
   position:relative; z-index:5}
 .wheel-foot .wf-row{
   display:flex; align-items:center; justify-content:center; gap:10px 16px; flex-wrap:wrap;
 }
-.wheel-foot .eyebrow{
-  font-family:var(--mono); font-size:10px; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--brass);
-}
 .wf-count{font-family:var(--mono); font-size:10px; color:var(--ink-3)}
+.wf-over{font-family:var(--mono); font-size:10px; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--amber)}
 .wf-rings{display:flex; gap:6px 14px; flex-wrap:wrap; justify-content:center}
 .wf-ring{font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase}
 .wf-ring b{color:var(--ink); font-weight:600}
-.wf-actions{display:flex; gap:8px}
 /* the comp board (owner 2026-08-27): roster under the wheel, one column
    per main role — equal columns filling the wheel column's full width,
    entries sized to read (the semicircle handed this row its space) */
@@ -1487,7 +1491,10 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
   .term{grid-template-columns:48px 1fr auto; gap:8px}
   .drawer{max-height:72vh; padding:14px 14px 18px}
 
-  /* --- filters: bigger touch targets; the bar scrolls rather than wraps --- */
+  /* --- filters: bigger touch targets; the bar WRAPS down here - its
+     nowrap segments exceed a phone viewport and it may never scroll
+     (overflow would clip the tree menu, chip flyouts and search popover) */
+  .wf-bar{flex-wrap:wrap}
   .wf-seg{padding:0 8px}
   .wf-seg-btn, .wf-search-btn, .wf-bar .pchip{padding-top:10px; padding-bottom:10px}
   .pgroup-t{padding:10px 15px; font-size:10.5px}
@@ -1564,6 +1571,7 @@ button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
     <label class="sb-field"><span>content</span><select id="content">
       <option value="castle_outpost">Castle Outpost</option>
     </select></label>
+    <span class="chip warn" id="size-notice-mh" hidden></span>
     <span class="sb-count" id="sb-count">0/0</span>
     <span class="mh-forge" id="forge-slot"></span>
     <div class="spacer"></div>

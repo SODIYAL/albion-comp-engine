@@ -63,18 +63,17 @@
     bomb:      "M14 10a7 7 0 1 1-8 8 7 7 0 0 1 8-8zM14 10l3-3M17 7l-1-1M17 7l1 1M19 3l.01.01M22 6l.01.01",
   };
   const DL_ICON_FILL = {bolt: true, dot: true};
-  /* Categorical group colors: the app's role palette re-stepped where the
-     colorblind validator demanded (Control teal, not peel-cyan — too close
-     to Frontline blue), validated on the panel surface incl. the wrap pair.
-     Fixed assignment, never cycled. */
+  /* Group hues come from _app.js's GROUP_COL (inlined before this file) —
+     ONE palette for the radar axes and the supply-ring headers, so the two
+     surfaces cannot drift. The CVD validation note lives on GROUP_COL. */
   const DL_GROUP_META = {
-    Sustain:   {col: "#1FAE58", icon: "plus"},
-    Frontline: {col: "#4D8DFF", icon: "shield"},
-    Control:   {col: "#17A386", icon: "link"},
-    Denial:    {col: "#C08800", icon: "ban"},
-    Damage:    {col: "#E00063", icon: "crosshair"},
-    Tempo:     {col: "#E85D12", icon: "bolt"},
-    Other:     {col: "#757A92", icon: "dot"},
+    Sustain:   {col: GROUP_COL.Sustain,   icon: "plus"},
+    Frontline: {col: GROUP_COL.Frontline, icon: "shield"},
+    Control:   {col: GROUP_COL.Control,   icon: "link"},
+    Denial:    {col: GROUP_COL.Denial,    icon: "ban"},
+    Damage:    {col: GROUP_COL.Damage,    icon: "crosshair"},
+    Tempo:     {col: GROUP_COL.Tempo,     icon: "bolt"},
+    Other:     {col: GROUP_COL.Other,     icon: "dot"},
   };
   /* shared popup: content lives in DL_TIPS (rebuilt every render —
      indices are re-stamped with the markup), elements carry data-dltip */
@@ -161,8 +160,14 @@
   }
   /* Kill pressure and role check are DESCRIPTIVE — they translate engine
      output and never score. The radar tooltip and the standalone cards both
-     read these models, so the two surfaces can never disagree. */
+     read these models, so the two surfaces can never disagree — and both
+     are MEMOISED per render pass (DL_MEMO, cleared at renderDecisionLayer
+     entry): the tooltip + card pairing used to walk the whole comp twice
+     for kill pressure and three times for roles on every render. */
+  let DL_MEMO = {};
   function killPressureModel(){
+    if ("kp" in DL_MEMO) return DL_MEMO.kp;
+    DL_MEMO.kp = null;
     if (typeof ENG.killPressure !== "function") return null;
     const kp = ENG.killPressure(party, COMBOS_CUR);
     if (!kp) return null;
@@ -171,7 +176,8 @@
       return {ok: l.ok, have: l.have, bar: l.bar,
               pct: l.bar > 0 ? Math.round(100 * l.have / l.bar) : 100};
     };
-    return {pierce: lens("pierce"), heal_cut: lens("heal_cut"), burst: lens("burst")};
+    DL_MEMO.kp = {pierce: lens("pierce"), heal_cut: lens("heal_cut"), burst: lens("burst")};
+    return DL_MEMO.kp;
   }
   const KP_LABEL = {pierce: "pierce", heal_cut: "heal-cut", burst: "burst"};
   function killPressureLine(){
@@ -245,6 +251,8 @@
     return h;
   }
   function roleAdvisory(){
+    if ("adv" in DL_MEMO) return DL_MEMO.adv;
+    DL_MEMO.adv = null;
     if (!party.length || typeof ENG.roleAdvisory !== "function") return null;
     const chests = {};
     party.forEach((w, i) => {
@@ -252,7 +260,8 @@
       if (L && L.armor) chests[i] = L.armor;
     });
     const adv = ENG.roleAdvisory(party, chests);
-    return adv && (adv.flags.length || Object.keys(adv.tally).length) ? adv : null;
+    DL_MEMO.adv = adv && (adv.flags.length || Object.keys(adv.tally).length) ? adv : null;
+    return DL_MEMO.adv;
   }
   function identityCenter(id){
     /* glyph + short label for the hollow center */
@@ -396,9 +405,11 @@
      duplicate-copy penalty, verified count-once spell losses. Display
      only — the engine's Q18 investigation rejected a scoring-side
      redundancy penalty; the marginal already collapses, this SAYS so. */
-  function whyNotBlock(rec, shown){
+  function whyNotBlock(rec, shown, rep){
     if (!rec || typeof ENG.pickReport !== "function") return "";
-    const r = pickReport(party, rec.w);
+    /* the caller already computed this pick's report for the gain rows —
+       reuse it, so the row verdicts and the cost lines cannot diverge */
+    const r = rep || pickReport(party, rec.w);
     const lines = [];
     if (r.verdict !== "ok")
       r.caps.filter(x => x.saturated && !(shown && shown.has(x.cap))).slice(0, 3).forEach(x => {
@@ -587,6 +598,7 @@
   function renderDecisionLayer(){
     const host = document.getElementById("decision-layer");
     if (!host) return;
+    DL_MEMO = {};   /* one engine walk per model per pass */
     /* statusRadar() refills this; on an empty comp it never runs, so clear
        first rather than leaving a stale verdict in the status bar */
     const sbi0 = document.getElementById("sb-identity");
@@ -691,7 +703,7 @@
         </div>
         <p>${whySentence(party, top.w)}</p>
         ${observed}
-        ${whyNotBlock(top, shownCaps)}
+        ${whyNotBlock(top, shownCaps, rep)}
         ${altsHtml}
       </div>
       </div>

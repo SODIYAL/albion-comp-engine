@@ -33,10 +33,17 @@ Display layer only: no scoring, engine, forge or pipeline code changed, and
 golden/parity carried through unchanged at every step.
 
 - **A card grid**, four columns at ≥1700px and three from 1400px; below
-  1251px nothing changed. All layout rules moved into a new
-  `dashboard/_layout.css`, inlined last so it wins on source order.
+  1251px the pre-redesign flow (the new column wrappers keep their card gap
+  there). All layout rules moved into a new `dashboard/_layout.css`,
+  inlined last so it wins on source order. Band bounds are fractional
+  (`max-width:1399.98px`): integer bounds left scaled-display widths like
+  1399.5px matching no band, collapsing the page to one column.
 - **Edge panels.** The in-flow setup rail is gone; setup, caller tools,
-  party and live party are `.epanel` flyouts on the viewport edges.
+  party and live party are `.epanel` flyouts on the viewport edges. One
+  panel per edge on desktop, one TOTAL on phones (all sheets share the
+  bottom slot); the phone tab bars are click-through outside their tabs;
+  transient closes (drawer overlay) never persist; connecting the
+  companion opens the live panel its feed renders into.
 - **A status bar.** The masthead carries fitness, the identity verdict, and
   live style/size/content plus the forge actions — about 63px for both rows.
 - **Kill pressure and role check became cards.** They previously existed
@@ -47,7 +54,11 @@ golden/parity carried through unchanged at every step.
 - The pick card split into diagnosis / fight chain / the pick, and its gain
   rows absorbed the verdict that a second box used to repeat.
 
-New gate: `py -3 tests/test_dashboard_layout.py` (contracts L1–L14).
+New gate: `py -3 tests/test_dashboard_layout.py` (contracts L1–L18; the
+2026-09-02 review round added L15–L18 plus popover-lifetime, phone-rail,
+band-gap and honesty-mirror contracts, and `test_display_math.js` now
+sweeps the ring geometry across every group size with source-extracted
+constants instead of a hand copy).
 
 ## Current engine model
 

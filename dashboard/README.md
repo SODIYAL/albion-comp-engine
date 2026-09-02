@@ -23,10 +23,17 @@ component chrome only — colour, type, borders, motion.
 
 The layout is a four-column card grid at ≥1700px, three columns from 1400px
 (the band a 1080p screen at 120% zoom lands in, so it is built as a
-first-class layout, not a fallback), and unchanged below 1251px. Setup,
-caller tools, party and live party are `.epanel` flyouts pinned to the
-viewport edges: a shut panel costs zero layout, so the grid always gets the
-full width.
+first-class layout, not a fallback), and the pre-redesign flow below 1251px
+(the new column wrappers keep their card gap there too). Band boundaries use
+fractional bounds (`max-width:1399.98px`) — display scaling yields viewport
+widths like 1399.5px, and an integer bound left an open interval matching NO
+band, collapsing the page to one column. Setup, caller tools, party and live
+party are `.epanel` flyouts pinned to the viewport edges: a shut panel costs
+zero layout, so the grid always gets the full width. One panel opens per
+edge — per *phone* they collapse to one panel TOTAL (every sheet shares the
+bottom slot), the overlapping bottom tab bars are click-through outside
+their tabs, and a transient close (the evidence drawer overlaying the party
+panel) never persists over the user's saved layout choice.
 
 `tests/test_dashboard_layout.py` pins all of this. Several of its contracts
 exist because the bug they describe actually shipped — an `<svg>` clipping

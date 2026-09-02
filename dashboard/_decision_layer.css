@@ -3,7 +3,7 @@
    need→pick card. The layer shares the hero band with the wheel — see the
    .main hero grid below — and the party runs across the bottom. */
 .decision-layer{display:grid;grid-template-columns:1fr;gap:14px;align-content:start;margin:0}
-.dl-status,.dl-need,.dl-pick{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.dl-status,.dl-pick{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
 /* the radar carries the status card alone (owner 2026-08-26: "remove this
    box around our diagram") — no panel chrome; the tone lives in the
    diagram's own colors */
@@ -135,7 +135,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 /* Caller tools (PR #6): player pool + swap lab. Folded shut by default —
    the hero view keeps the party dock above the fold (standing owner rule);
    the workflows are one click away, and opening is remembered per session. */
-.dl-tools-fold{grid-column:1/-1;margin-top:2px}
+.dl-tools-fold{margin-top:2px}
 .dl-tools-fold summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;
   padding:9px 14px;background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));
   border:1px solid var(--rule);border-radius:12px;font-family:var(--mono);font-size:10px;
@@ -145,7 +145,9 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-tools-fold[open] summary::before{content:"\25BE"}
 .dl-tools-fold summary:hover{border-color:rgba(255,201,58,.45);color:var(--ink-2)}
 .dl-tools-fold summary .cnt{margin-left:auto;color:var(--brass);letter-spacing:0;text-transform:none}
-.dl-tools{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-top:10px}
+/* one column: the fold lives in the 430px tools panel now — a second
+   column crushed the pool and swap-lab cards to ~190px on every desktop */
+.dl-tools{display:grid;grid-template-columns:1fr;gap:14px;margin-top:10px}
 .dl-tool-card{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);min-width:0}
 .dl-tool-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
 .dl-tool-head h3{font-family:var(--serif);font-size:20px;margin:3px 0 0}
@@ -190,27 +192,23 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-swap-actions>b.up{color:var(--ok-bright)}.dl-swap-actions>b.down{color:var(--gap)}
 .dl-swap-actions button{background:transparent;border:1px solid var(--rule);color:var(--ink-2);border-radius:7px;padding:5px 7px;font-size:9.5px}
 .dl-swap-actions button:hover{border-color:var(--brass);color:var(--brass)}
-@media(max-width:900px){.dl-tools{grid-template-columns:1fr}}
-@media(max-width:720px){.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-alt-row{grid-template-columns:1fr}.dl-empty{display:block}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
+@media(max-width:720px){.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-empty{display:block}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
 
 /* ---- the column-3 split (owner 2026-09-02) ----
    The pick card used to stack six answers in one frame. Now: diagnosis,
-   fight chain, the pick. Chrome only; placement lives in _layout.css. */
-.dl-need, .dl-chain-card{
+   fight chain, the pick, kill pressure and role check each get a flat
+   card in ONE shared rule - four hand-kept copies drifted (.dl-need alone
+   kept a box-shadow from the old grouped rule). Chrome only; placement
+   lives in _layout.css. Kill pressure + role check are DESCRIPTIVE - they
+   translate engine output and never feed scoring; the radar tooltip
+   renders the same models through killPressureLine()/roleLines(). */
+.dl-need, .dl-chain-card, .dl-kp, .dl-roles{
   background:var(--panel-lo); border:1px solid var(--rule); border-radius:12px;
   padding:12px 14px;
 }
 .dl-need .dl-needline{padding-bottom:0; margin-bottom:0; border-bottom:0}
 .dl-need .dl-remain{margin-top:10px; padding-top:10px; border-top:1px solid var(--rule)}
 .dl-chain-card .dl-chain{margin:0}
-
-/* kill pressure + role check as cards (2026-09-02). Both DESCRIPTIVE - they
-   translate engine output and never feed scoring. The radar tooltip renders
-   the same models through killPressureLine()/roleLines(). */
-.dl-kp, .dl-roles{
-  background:var(--panel-lo); border:1px solid var(--rule); border-radius:12px;
-  padding:12px 14px;
-}
 .dl-kp-row{display:flex; align-items:center; gap:9px; padding:5px 0; font-size:13px}
 .dl-kp-dot{width:9px; height:9px; border-radius:50%; flex:none}
 .dl-kp-row.ok .dl-kp-dot{background:#3FD68C; box-shadow:0 0 8px rgba(63,214,140,.6)}
