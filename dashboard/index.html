@@ -1590,9 +1590,21 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-nd-chips em{font-style:normal;font-family:var(--mono);font-size:9px;color:var(--ink-3);align-self:center}
 .dl-pick{border-color:rgba(255,201,58,.5);box-shadow:var(--shadow),0 0 38px -20px rgba(255,201,58,.55)}
 .dl-pick-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.dl-score{font-family:var(--mono);font-size:10px;color:var(--brass)}
-.dl-weapon{display:flex;align-items:center;gap:14px;margin:10px 0 8px}.dl-weapon .nm-btn{font-family:var(--serif);font-size:27px;font-weight:600}.dl-weapon>div>span{display:block;color:var(--ink-3);font-size:11px;margin-top:2px}.dl-weapon .icon{filter:drop-shadow(0 7px 15px rgba(0,0,0,.55)) saturate(1.12)}
+/* the pick's identity block (owner 2026-09-02): a larger icon, the role
+   line tucked under the name, the gains directly beneath it, and Add moved
+   inline beside the name - the full-width button is gone. */
+.dl-weapon{display:flex;align-items:flex-start;gap:13px;margin:10px 0 8px}
+.dl-weapon .icon{flex:none;filter:drop-shadow(0 7px 15px rgba(0,0,0,.55)) saturate(1.12)}
+.dl-weapon-id{flex:1;min-width:0}
+.dl-weapon-top{display:flex;align-items:center;gap:10px;min-width:0}
+.dl-weapon .nm-btn{font-family:var(--serif);font-size:27px;font-weight:600;
+  min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left}
+.dl-weapon-role{display:block;color:var(--ink-3);font-size:11px;margin-top:1px}
 .dl-pick p{font-size:13px;line-height:1.55;color:var(--ink-2);margin:7px 0 10px}.dl-pick p em{color:var(--brass-bright);font-style:normal;font-weight:600}
-.dl-gains{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.dl-gains li{background:var(--sunk);border:1px solid var(--rule);border-radius:9px;padding:7px 8px;font-size:11px;color:var(--ink-2)}.dl-gains b{color:var(--ok-bright);font-family:var(--mono);margin-right:4px}.dl-gains span{display:block;color:var(--ink-3);font-family:var(--mono);font-size:9.5px;margin-top:2px}
+/* under the role line the column is narrower than the card, so the gains
+   flow rather than being forced into three equal tracks */
+.dl-gains{list-style:none;margin:7px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:5px}
+.dl-gains li{flex:1 1 auto;min-width:0;background:var(--sunk);border:1px solid var(--rule);border-radius:9px;padding:5px 8px;font-size:11px;color:var(--ink-2)}.dl-gains b{color:var(--ok-bright);font-family:var(--mono);margin-right:4px}.dl-gains span{display:block;color:var(--ink-3);font-family:var(--mono);font-size:9.5px;margin-top:2px}
 .dl-remain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px}.dl-remain>span:not(.dl-kicker){font-family:var(--mono);font-size:9.5px;padding:3px 7px;border-radius:99px;border:1px solid rgba(255,84,112,.28);color:var(--gap);background:var(--gap-wash)}.dl-remain .dl-kicker{width:100%}.dl-remain.clear>span:not(.dl-kicker){color:var(--ok-bright);border-color:rgba(35,191,110,.25);background:rgba(35,191,110,.07)}
 /* why-not block (roadmap item 3): the signed decomposition's negative and
    saturated terms — amber for a depth pick, red when the pick nets a cost */
@@ -1605,7 +1617,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-whynot.negative .dl-kicker,.dl-whynot.negative li::before{color:var(--gap)}
 .dl-score-dim{color:var(--amber)}
 .dl-alt-dim{opacity:.62}.dl-alt-dim .dl-alt-sc{color:var(--amber)}
-.dl-add{width:100%;margin-top:12px}
+/* Add is inline beside the name now, not a full-width footer button */
+.dl-add{flex:none;margin:0;padding:6px 12px;font-size:11.5px;white-space:nowrap}
 .dl-empty{grid-column:1/-1;grid-row:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px}.dl-empty p{margin:4px 0 0;color:var(--ink-2);font-size:12.5px}
 /* Deep diagnostics remain below the hero, but their heading says what they are. */
 #groups{margin-top:-4px}
@@ -1856,7 +1869,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   .dl-needline{padding-bottom:10px;margin-bottom:10px}
   .dl-nl-main strong{font-size:19px}
   .dl-weapon{margin:8px 0 6px;gap:12px}
-  .dl-weapon img.icon{width:56px;height:56px}
+  .dl-weapon img.icon{width:68px;height:68px}
   .dl-weapon .nm-btn{font-size:23px}
   .dl-pick p{margin:6px 0 8px;font-size:12.5px}
   .dl-gains li{padding:6px 7px}
@@ -9410,7 +9423,7 @@ render();
        click-to-add alternatives — a single take-it-or-leave-it pick is
        not a recommendation surface, so the runners-up live here now */
     const alts = (recs || []).slice(1, 4);
-    const altsHtml = alts.length ? `<div class="dl-alts"><span class="dl-kicker">instead — click to add</span><div class="dl-alt-row">${
+    const altsHtml = alts.length ? `<div class="dl-alts"><span class="dl-kicker">alternatives</span><div class="dl-alt-row">${
       alts.map(r => {
         const t0 = explain(party, r.w)[0];
         const dim = r.verdict && r.verdict !== "ok";
@@ -9434,12 +9447,20 @@ render();
       </div>
       <div class="dl-pick">
         <div class="dl-pick-head"><span class="dl-kicker">Best next pick · slot ${Math.min(party.length + 1, HARD_CAP)}</span><span class="dl-score${top.verdict && top.verdict !== "ok" ? " dl-score-dim" : ""}">${top.score >= 0 ? "+" : ""}${top.score.toFixed(2)} comp score${top.verdict === "redundant" ? " · depth only" : top.verdict === "negative" ? " · net cost" : ""}</span></div>
-        <div class="dl-weapon">${icon(top.w,72)}<div><button class="nm-btn" data-detail="${top.w}">${nameOf(top.w)}</button><span>${esc(roleOf(top.w, top.combo))}</span></div></div>
+        <div class="dl-weapon">${icon(top.w,84)}
+          <div class="dl-weapon-id">
+            <div class="dl-weapon-top">
+              <button class="nm-btn" data-detail="${top.w}">${nameOf(top.w)}</button>
+              <button class="cb-add dl-add" data-add="${top.w}"
+                title="Add ${nameOf(top.w)} to the comp">+ Add</button>
+            </div>
+            <span class="dl-weapon-role">${esc(roleOf(top.w, top.combo))}</span>
+            <ul class="dl-gains">${gains}</ul>
+          </div>
+        </div>
         <p>${whySentence(party, top.w)}</p>
-        <ul class="dl-gains">${gains}</ul>
         ${observed}
         ${whyNotBlock(top)}
-        <button class="cb-add dl-add" data-add="${top.w}">Add ${nameOf(top.w)}</button>
         ${altsHtml}
       </div>
       </div>

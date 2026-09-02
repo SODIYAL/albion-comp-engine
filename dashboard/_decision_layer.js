@@ -641,7 +641,7 @@
        click-to-add alternatives — a single take-it-or-leave-it pick is
        not a recommendation surface, so the runners-up live here now */
     const alts = (recs || []).slice(1, 4);
-    const altsHtml = alts.length ? `<div class="dl-alts"><span class="dl-kicker">instead — click to add</span><div class="dl-alt-row">${
+    const altsHtml = alts.length ? `<div class="dl-alts"><span class="dl-kicker">alternatives</span><div class="dl-alt-row">${
       alts.map(r => {
         const t0 = explain(party, r.w)[0];
         const dim = r.verdict && r.verdict !== "ok";
@@ -665,12 +665,20 @@
       </div>
       <div class="dl-pick">
         <div class="dl-pick-head"><span class="dl-kicker">Best next pick · slot ${Math.min(party.length + 1, HARD_CAP)}</span><span class="dl-score${top.verdict && top.verdict !== "ok" ? " dl-score-dim" : ""}">${top.score >= 0 ? "+" : ""}${top.score.toFixed(2)} comp score${top.verdict === "redundant" ? " · depth only" : top.verdict === "negative" ? " · net cost" : ""}</span></div>
-        <div class="dl-weapon">${icon(top.w,72)}<div><button class="nm-btn" data-detail="${top.w}">${nameOf(top.w)}</button><span>${esc(roleOf(top.w, top.combo))}</span></div></div>
+        <div class="dl-weapon">${icon(top.w,84)}
+          <div class="dl-weapon-id">
+            <div class="dl-weapon-top">
+              <button class="nm-btn" data-detail="${top.w}">${nameOf(top.w)}</button>
+              <button class="cb-add dl-add" data-add="${top.w}"
+                title="Add ${nameOf(top.w)} to the comp">+ Add</button>
+            </div>
+            <span class="dl-weapon-role">${esc(roleOf(top.w, top.combo))}</span>
+            <ul class="dl-gains">${gains}</ul>
+          </div>
+        </div>
         <p>${whySentence(party, top.w)}</p>
-        <ul class="dl-gains">${gains}</ul>
         ${observed}
         ${whyNotBlock(top)}
-        <button class="cb-add dl-add" data-add="${top.w}">Add ${nameOf(top.w)}</button>
         ${altsHtml}
       </div>
       </div>
