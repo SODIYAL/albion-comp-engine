@@ -289,5 +289,79 @@ function setUsage(baskets) {
         empties.every(v => v === null), JSON.stringify(empties));
 }
 
+/* ---- capability-ring geometry -------------------------------------------
+ * The supply board's arcs are the other display computation that does not
+ * show its own mistakes usefully: a ring drawn outside its viewBox still
+ * PAINTS (SVG overflow), so a wrong origin renders as arcs sitting on top
+ * of the legend text rather than as a blank chart. That shipped once
+ * (2026-09-02: cy was set to the bottom of the box instead of the top, so
+ * every arc ran 92px past it and covered the labels).
+ */
+{
+  const geo = SRC.match(/function ringPath\([\s\S]*?\n\}\nfunction ringTick\([\s\S]*?\n\}/);
+  if (!geo) throw new Error("could not extract ringPath/ringTick from _app.js");
+  const ctx = { Math };
+  vm.createContext(ctx);
+  vm.runInContext(geo[0], ctx);
+
+  /* renderGroups' geometry is EXTRACTED from the source, never copied - a
+     hand copy drifted once (the sw formula lost its || 30 fallback) and a
+     stale copy makes this guard validate itself instead of the page */
+  const constM = SRC.match(/const W = ([\d.]+), R = ([\d.]+), cx = ([\d.]+), cy = ([\d.]+), H = ([\d.]+), r0 = ([\d.]+);/);
+  if (!constM) throw new Error("could not extract renderGroups' geometry constants from _app.js");
+  const [W, R, cx, cy, H, r0] = constM.slice(1).map(Number);
+  const swM = SRC.match(/const sw = (Math\.max\([^\n]+\));/);
+  if (!swM) throw new Error("could not extract renderGroups' stroke formula from _app.js");
+  const halfM = SRC.match(/ringTick\(cx, cy, r, x\.tickPct \/ 100, (.+)\);/);
+  if (!halfM) throw new Error("could not extract renderGroups' tick half-length from _app.js");
+  /* a path is "M x0 y0 A r r 0 0 0 x1 y1" - take the FIRST and LAST pairs,
+     never every number pair (the radii and flags are not coordinates) */
+  const nums = d => (d.match(/-?[\d.]+/g) || []).map(Number);
+  const ends = d => { const n = nums(d); return [[n[0], n[1]], [n[n.length - 2], n[n.length - 1]]]; };
+
+  check("ringPath: zero coverage draws nothing",
+        vm.runInContext(`ringPath(${cx},${cy},${R},0)`, ctx) === "");
+
+  const full = ends(vm.runInContext(`ringPath(${cx},${cy},${R},1)`, ctx));
+  check("ringPath: full sweep ends level with its start",
+        full[0][1] === cy && full[1][1] === cy, JSON.stringify(full));
+  check("ringPath: full sweep spans the diameter",
+        Math.abs((full[1][0] - full[0][0]) - 2 * R) < 0.01, JSON.stringify(full));
+
+  const half = ends(vm.runInContext(`ringPath(${cx},${cy},${R},0.5)`, ctx));
+  check("ringPath: half sweep reaches the deepest point",
+        Math.abs(half[1][0] - cx) < 0.01 && Math.abs(half[1][1] - (cy + R)) < 0.01,
+        JSON.stringify(half));
+
+  /* THE REGRESSION GUARD. An arc's extreme is NOT its endpoints - a full
+     sweep ends level with its start while dipping r below it. The reachable
+     extremes are cy + r (any sweep past halfway) and cx +/- r. Sweep EVERY
+     group size 1..8: the stroke (and with it the tick half-length) GROWS as
+     n shrinks, so the widest ring count is the LEAST clipping-prone case -
+     testing only n=8 passed while every 2-6 cap group drew its tick past
+     the box. The outermost ring is r=R for all n>1; ticks get 1px of slack
+     for their own round line cap. */
+  for (let n = 1; n <= 8; n++){
+    const step = n > 1 ? (R - r0) / (n - 1) : 0;
+    const sw = vm.runInContext(
+      `(() => { const step = ${step}; return ${swM[1]}; })()`, ctx);
+    const rOut = n > 1 ? r0 + (n - 1) * step : (r0 + R) / 2;
+    const half = vm.runInContext(
+      `(() => { const sw = ${sw}, H = ${H}, cy = ${cy}, r = ${rOut}; return ${halfM[1]}; })()`, ctx);
+    const deepestArc = cy + rOut + sw / 2;
+    let tickY = 0, tickXmax = 0, tickXmin = Infinity;
+    for (let f = 0; f <= 100; f++){
+      const t = vm.runInContext(`ringTick(${cx},${cy},${rOut},${f / 100},${half})`, ctx).map(Number);
+      tickY = Math.max(tickY, t[1], t[3]);
+      tickXmax = Math.max(tickXmax, t[0], t[2]);
+      tickXmin = Math.min(tickXmin, t[0], t[2]);
+    }
+    check(`ring geometry fits the viewBox at n=${n} (arc ${deepestArc.toFixed(1)} <= ${H}, tick y ${tickY.toFixed(1)} <= ${H - 1})`,
+          deepestArc <= H && tickY <= H - 1 && tickXmax <= W && tickXmin >= 0,
+          `n=${n} sw=${sw.toFixed(2)} half=${half.toFixed(2)} tick y ${tickY.toFixed(2)} x ${tickXmin.toFixed(1)}..${tickXmax.toFixed(1)}`);
+  }
+
+}
+
 console.log(`\n${pass}/${pass + fail} display-math tests passed`);
 process.exit(fail ? 1 : 0);

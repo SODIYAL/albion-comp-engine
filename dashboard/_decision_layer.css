@@ -3,7 +3,7 @@
    need→pick card. The layer shares the hero band with the wheel — see the
    .main hero grid below — and the party runs across the bottom. */
 .decision-layer{display:grid;grid-template-columns:1fr;gap:14px;align-content:start;margin:0}
-.dl-status,.dl-need,.dl-pick{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+.dl-status,.dl-pick{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
 /* the radar carries the status card alone (owner 2026-08-26: "remove this
    box around our diagram") — no panel chrome; the tone lives in the
    diagram's own colors */
@@ -72,9 +72,36 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-nd-chips em{font-style:normal;font-family:var(--mono);font-size:9px;color:var(--ink-3);align-self:center}
 .dl-pick{border-color:rgba(255,201,58,.5);box-shadow:var(--shadow),0 0 38px -20px rgba(255,201,58,.55)}
 .dl-pick-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.dl-score{font-family:var(--mono);font-size:10px;color:var(--brass)}
-.dl-weapon{display:flex;align-items:center;gap:14px;margin:10px 0 8px}.dl-weapon .nm-btn{font-family:var(--serif);font-size:27px;font-weight:600}.dl-weapon>div>span{display:block;color:var(--ink-3);font-size:11px;margin-top:2px}.dl-weapon .icon{filter:drop-shadow(0 7px 15px rgba(0,0,0,.55)) saturate(1.12)}
+/* the pick's identity block (owner 2026-09-02): a larger icon, the role
+   line tucked under the name, the gains directly beneath it, and Add moved
+   inline beside the name - the full-width button is gone. */
+.dl-weapon{display:flex;align-items:flex-start;gap:13px;margin:10px 0 8px}
+.dl-weapon .icon{flex:none;filter:drop-shadow(0 7px 15px rgba(0,0,0,.55)) saturate(1.12)}
+.dl-weapon-id{flex:1;min-width:0}
+.dl-weapon-top{display:flex;align-items:center;gap:10px;min-width:0}
+.dl-weapon .nm-btn{font-family:var(--serif);font-size:27px;font-weight:600;
+  min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left}
+.dl-weapon-role{display:block;color:var(--ink-3);font-size:11px;margin-top:1px}
 .dl-pick p{font-size:13px;line-height:1.55;color:var(--ink-2);margin:7px 0 10px}.dl-pick p em{color:var(--brass-bright);font-style:normal;font-weight:600}
-.dl-gains{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.dl-gains li{background:var(--sunk);border:1px solid var(--rule);border-radius:9px;padding:7px 8px;font-size:11px;color:var(--ink-2)}.dl-gains b{color:var(--ok-bright);font-family:var(--mono);margin-right:4px}.dl-gains span{display:block;color:var(--ink-3);font-family:var(--mono);font-size:9.5px;margin-top:2px}
+/* Gains are DATA ROWS, not chips: three boxes in a narrow column wrapped
+   2+1 and made the orphan look like the biggest gain. One row each, and
+   each row carries its own verdict so a second box need not repeat it. */
+.dl-gains{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:1px}
+.dl-gains li{
+  display:grid;grid-template-columns:auto 1fr auto;gap:3px 9px;align-items:baseline;
+  padding:5px 0;border-top:1px solid var(--rule);font-size:11.5px;color:var(--ink-2);
+}
+.dl-gains li:first-child{border-top:0}
+.dl-gains b{color:var(--ok-bright);font-family:var(--mono);font-size:12px}
+.dl-gain-cap{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dl-gain-n{grid-column:2;font-family:var(--mono);font-size:9.5px;color:var(--ink-3)}
+.dl-gain-v{
+  grid-column:3;grid-row:1;font-family:var(--mono);font-size:9px;letter-spacing:.08em;
+  text-transform:uppercase;padding:2px 6px;border-radius:99px;white-space:nowrap;
+}
+.dl-gains li.closes .dl-gain-v{color:var(--ok-bright);background:rgba(35,191,110,.10)}
+.dl-gains li.depth .dl-gain-v{color:var(--ink-3);background:var(--sunk)}
+.dl-gains li.depth b{color:var(--ink-2)}
 .dl-remain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px}.dl-remain>span:not(.dl-kicker){font-family:var(--mono);font-size:9.5px;padding:3px 7px;border-radius:99px;border:1px solid rgba(255,84,112,.28);color:var(--gap);background:var(--gap-wash)}.dl-remain .dl-kicker{width:100%}.dl-remain.clear>span:not(.dl-kicker){color:var(--ok-bright);border-color:rgba(35,191,110,.25);background:rgba(35,191,110,.07)}
 /* why-not block (roadmap item 3): the signed decomposition's negative and
    saturated terms — amber for a depth pick, red when the pick nets a cost */
@@ -87,76 +114,28 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-whynot.negative .dl-kicker,.dl-whynot.negative li::before{color:var(--gap)}
 .dl-score-dim{color:var(--amber)}
 .dl-alt-dim{opacity:.62}.dl-alt-dim .dl-alt-sc{color:var(--amber)}
-.dl-add{width:100%;margin-top:12px}
+/* Add sits at the column's right edge, not against the name - butted up to
+   the title it read as part of the wordmark rather than as an action. The
+   name keeps its own width so the gap between them stays inert: clicking
+   the whitespace must not open the evidence drawer. */
+.dl-add{flex:none;margin:0 0 0 auto;padding:6px 13px;font-size:11.5px;white-space:nowrap;align-self:center}
 .dl-empty{grid-column:1/-1;grid-row:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px}.dl-empty p{margin:4px 0 0;color:var(--ink-2);font-size:12.5px}
-/* The old right flank duplicated the exact questions answered above. Keep its
-   underlying renderers alive, but remove that duplicate surface. */
-.ws-right{display:none}
-/* HERO GRID (owner 2026-08-22): one screen, no scrolling for the important
-   things. ≥1251px the main column becomes a grid — decision stack left,
-   wheel right (in the column the old pick card occupied), party strip
-   across the bottom, forge warnings full-width between. The wheelstage
-   dissolves (display:contents) so its children sit on the main grid;
-   below 1251px the shell's own single-column stage rules take over. */
-@media (min-width:1251px){
-  .main{display:grid;grid-template-columns:minmax(390px,1fr) minmax(0,1.5fr);gap:18px 24px;align-items:start}
-  .main>*{grid-column:1/-1;min-width:0}
-  /* both stage wrappers dissolve — their children sit on the main grid, so
-     the caller-tools fold can drop below the party strip and the wheel can
-     span the full left-column height */
-  .decision-layer{display:contents}
-  .wheelstage{display:contents}
-  /* explicit: the hero band. Everything after it (warn slot, the
-     relocated caller-tools fold, the deep boards) auto-places into
-     tight full-width rows in DOM order — no phantom row gaps. */
-  .dl-status{grid-column:1;grid-row:1}
-  .dl-pick{grid-column:1;grid-row:2}
-  .dl-empty{grid-column:1;grid-row:1/3}
-  .ws-center{grid-column:2;grid-row:1/3;order:0}
-  /* forge honesty reports live UNDER THE WHEEL (owner 2026-08-23): the
-     wheel column's next row, so quiet runs collapse to nothing there */
-  #warn-slot{grid-column:2;grid-row:3}
-  .dl-tools-fold{grid-column:1/-1;grid-row:auto}
-  .shell[data-rail="min"] .ws-center{grid-column:2;grid-row:1/3}
-  /* the semicircle freed the wheel's lower half, so the hero band can
-     afford the full-width instrument (owner 2026-08-27) */
-  .wheel{--wd:min(680px,100cqi)}
-  /* caller tools sit full-width below the strip */
-  .dl-tools{grid-template-columns:1fr 1fr}
-  /* one-screen density: the hero band must leave room for the party strip
-     on a ~940px viewport, so the decision stack sheds slack height */
-  .dl-status{padding:0}
-  .dl-pick{padding:14px 16px}
-  .dl-needline{padding-bottom:10px;margin-bottom:10px}
-  .dl-nl-main strong{font-size:19px}
-  .dl-weapon{margin:8px 0 6px;gap:12px}
-  .dl-weapon img.icon{width:56px;height:56px}
-  .dl-weapon .nm-btn{font-size:23px}
-  .dl-pick p{margin:6px 0 8px;font-size:12.5px}
-  .dl-gains li{padding:6px 7px}
-  .dl-remain{margin-top:8px}
-  .dl-add{margin-top:10px}
-  .dl-alts{margin-top:8px;gap:4px}
-  .dl-alt{padding:5px 9px}
-  /* (the party strip's layout rules retired 2026-08-27 with the strip —
-     the roster lives on the wheel's comp board) */
-}
 /* Deep diagnostics remain below the hero, but their heading says what they are. */
 #groups{margin-top:-4px}
 /* runners-up inside the pick card — one compact chip row (gain in tooltip) */
 .dl-alts{margin-top:10px}
-.dl-alt-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin-top:5px}
+.dl-alt-list{display:flex;flex-direction:column;gap:3px;margin-top:6px}
 .dl-alt{display:flex; align-items:center; gap:7px; min-width:0; text-align:left;
   padding:6px 8px; background:transparent; border:1px solid var(--rule); border-radius:10px;
   transition:border-color .15s var(--ease), background .15s var(--ease)}
 .dl-alt:hover{border-color:rgba(255,201,58,.5); background:var(--surface-2)}
 .dl-alt .icon{flex:none}
-.dl-alt-nm{flex:1; min-width:0; font-size:11.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.dl-alt-nm{flex:1; min-width:0; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .dl-alt-sc{font-family:var(--mono); font-size:10px; color:var(--brass); font-weight:600; flex:none}
 /* Caller tools (PR #6): player pool + swap lab. Folded shut by default —
    the hero view keeps the party dock above the fold (standing owner rule);
    the workflows are one click away, and opening is remembered per session. */
-.dl-tools-fold{grid-column:1/-1;margin-top:2px}
+.dl-tools-fold{margin-top:2px}
 .dl-tools-fold summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;
   padding:9px 14px;background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));
   border:1px solid var(--rule);border-radius:12px;font-family:var(--mono);font-size:10px;
@@ -166,7 +145,9 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-tools-fold[open] summary::before{content:"\25BE"}
 .dl-tools-fold summary:hover{border-color:rgba(255,201,58,.45);color:var(--ink-2)}
 .dl-tools-fold summary .cnt{margin-left:auto;color:var(--brass);letter-spacing:0;text-transform:none}
-.dl-tools{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-top:10px}
+/* one column: the fold lives in the 430px tools panel now — a second
+   column crushed the pool and swap-lab cards to ~190px on every desktop */
+.dl-tools{display:grid;grid-template-columns:1fr;gap:14px;margin-top:10px}
 .dl-tool-card{background:linear-gradient(180deg,var(--panel-hi),var(--panel-lo));border:1px solid var(--rule);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);min-width:0}
 .dl-tool-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
 .dl-tool-head h3{font-family:var(--serif);font-size:20px;margin:3px 0 0}
@@ -211,5 +192,33 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-swap-actions>b.up{color:var(--ok-bright)}.dl-swap-actions>b.down{color:var(--gap)}
 .dl-swap-actions button{background:transparent;border:1px solid var(--rule);color:var(--ink-2);border-radius:7px;padding:5px 7px;font-size:9.5px}
 .dl-swap-actions button:hover{border-color:var(--brass);color:var(--brass)}
-@media(max-width:900px){.dl-tools{grid-template-columns:1fr}}
-@media(max-width:720px){.dl-gains{grid-template-columns:1fr}.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-alt-row{grid-template-columns:1fr}.dl-empty{display:block}.wheelstage{gap:20px}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
+@media(max-width:720px){.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-empty{display:block}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
+
+/* ---- the column-3 split (owner 2026-09-02) ----
+   The pick card used to stack six answers in one frame. Now: diagnosis,
+   fight chain, the pick, kill pressure and role check each get a flat
+   card in ONE shared rule - four hand-kept copies drifted (.dl-need alone
+   kept a box-shadow from the old grouped rule). Chrome only; placement
+   lives in _layout.css. Kill pressure + role check are DESCRIPTIVE - they
+   translate engine output and never feed scoring; the radar tooltip
+   renders the same models through killPressureLine()/roleLines(). */
+.dl-need, .dl-chain-card, .dl-kp, .dl-roles{
+  background:var(--panel-lo); border:1px solid var(--rule); border-radius:12px;
+  padding:12px 14px;
+}
+.dl-need .dl-needline{padding-bottom:0; margin-bottom:0; border-bottom:0}
+.dl-need .dl-remain{margin-top:10px; padding-top:10px; border-top:1px solid var(--rule)}
+.dl-chain-card .dl-chain{margin:0}
+.dl-kp-row{display:flex; align-items:center; gap:9px; padding:5px 0; font-size:13px}
+.dl-kp-dot{width:9px; height:9px; border-radius:50%; flex:none}
+.dl-kp-row.ok .dl-kp-dot{background:#3FD68C; box-shadow:0 0 8px rgba(63,214,140,.6)}
+.dl-kp-row.bad .dl-kp-dot{background:#E0556B; box-shadow:0 0 8px rgba(224,85,107,.6)}
+.dl-kp-row b{font-weight:600; color:var(--ink)}
+.dl-kp-n{margin-left:auto; font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.dl-role-tally{display:flex; flex-wrap:wrap; gap:5px; margin:8px 0 4px}
+.dl-role-chip{font-family:var(--mono); font-size:11px; color:var(--ink-2);
+  background:var(--sunk); border:1px solid var(--rule); border-radius:99px; padding:3px 9px}
+.dl-role-chip b{color:var(--brass); font-weight:600}
+.dl-role-flag{font-size:12px; color:#F0A63C; margin-top:6px}
+.dl-note{font-size:10px; color:var(--ink-3); margin-top:8px}
+

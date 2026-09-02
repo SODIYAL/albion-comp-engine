@@ -63,18 +63,17 @@
     bomb:      "M14 10a7 7 0 1 1-8 8 7 7 0 0 1 8-8zM14 10l3-3M17 7l-1-1M17 7l1 1M19 3l.01.01M22 6l.01.01",
   };
   const DL_ICON_FILL = {bolt: true, dot: true};
-  /* Categorical group colors: the app's role palette re-stepped where the
-     colorblind validator demanded (Control teal, not peel-cyan — too close
-     to Frontline blue), validated on the panel surface incl. the wrap pair.
-     Fixed assignment, never cycled. */
+  /* Group hues come from _app.js's GROUP_COL (inlined before this file) —
+     ONE palette for the radar axes and the supply-ring headers, so the two
+     surfaces cannot drift. The CVD validation note lives on GROUP_COL. */
   const DL_GROUP_META = {
-    Sustain:   {col: "#1FAE58", icon: "plus"},
-    Frontline: {col: "#4D8DFF", icon: "shield"},
-    Control:   {col: "#17A386", icon: "link"},
-    Denial:    {col: "#C08800", icon: "ban"},
-    Damage:    {col: "#E00063", icon: "crosshair"},
-    Tempo:     {col: "#E85D12", icon: "bolt"},
-    Other:     {col: "#757A92", icon: "dot"},
+    Sustain:   {col: GROUP_COL.Sustain,   icon: "plus"},
+    Frontline: {col: GROUP_COL.Frontline, icon: "shield"},
+    Control:   {col: GROUP_COL.Control,   icon: "link"},
+    Denial:    {col: GROUP_COL.Denial,    icon: "ban"},
+    Damage:    {col: GROUP_COL.Damage,    icon: "crosshair"},
+    Tempo:     {col: GROUP_COL.Tempo,     icon: "bolt"},
+    Other:     {col: GROUP_COL.Other,     icon: "dot"},
   };
   /* shared popup: content lives in DL_TIPS (rebuilt every render —
      indices are re-stamped with the markup), elements carry data-dltip */
@@ -159,6 +158,82 @@
     return `<div class="dlt-head">${esc(a.g)} — ${Math.round(a.cov * 100)}% of ceiling</div>${st}${rows}`
       + `<div class="dlt-note">100% = the most any good comp fields (comp-fitted soft cap); the brass tick marks the target minimum</div>`;
   }
+  /* Kill pressure and role check are DESCRIPTIVE — they translate engine
+     output and never score. The radar tooltip and the standalone cards both
+     read these models, so the two surfaces can never disagree — and both
+     are MEMOISED per render pass (DL_MEMO, cleared at renderDecisionLayer
+     entry): the tooltip + card pairing used to walk the whole comp twice
+     for kill pressure and three times for roles on every render. */
+  let DL_MEMO = {};
+  function killPressureModel(){
+    if ("kp" in DL_MEMO) return DL_MEMO.kp;
+    DL_MEMO.kp = null;
+    if (typeof ENG.killPressure !== "function") return null;
+    const kp = ENG.killPressure(party, COMBOS_CUR);
+    if (!kp) return null;
+    const lens = k => {
+      const l = kp[k];
+      return {ok: l.ok, have: l.have, bar: l.bar,
+              pct: l.bar > 0 ? Math.round(100 * l.have / l.bar) : 100};
+    };
+    DL_MEMO.kp = {pierce: lens("pierce"), heal_cut: lens("heal_cut"), burst: lens("burst")};
+    return DL_MEMO.kp;
+  }
+  const KP_LABEL = {pierce: "pierce", heal_cut: "heal-cut", burst: "burst"};
+  function killPressureLine(){
+    const kp = killPressureModel();
+    if (!kp) return "";
+    const bit = k => kp[k].ok
+      ? `<b class="dlt-ok">\u2713 ${KP_LABEL[k]}</b>`
+      : `<b class="dlt-bad">\u2717 ${KP_LABEL[k]} ${kp[k].pct}%</b>`;
+    return `<div class="dlt-line"><span>kill pressure</span><span>${
+      bit("pierce")} ${bit("heal_cut")} ${bit("burst")}</span></div>`;
+  }
+  function killPressureCard(){
+    const kp = killPressureModel();
+    if (!kp) return "";
+    const light = k => `<div class="dl-kp-row ${kp[k].ok ? "ok" : "bad"}">
+      <span class="dl-kp-dot"></span><b>${KP_LABEL[k]}</b>
+      <span class="dl-kp-n">${kp[k].ok ? "covered" : kp[k].pct + "%"}</span></div>`;
+    return `<div class="dl-kp"><span class="dl-kicker">Kill pressure \u2014 can this comp finish a target?</span>
+      ${light("pierce")}${light("heal_cut")}${light("burst")}
+      <div class="dl-note">descriptive \u2014 kill pressure never scores</div></div>`;
+  }
+  function roleShort(k){
+    const nm = (((ENG.rolesBook || {})[k]) || {}).name || k;
+    return nm.split(" / ")[0].split(" (")[0];
+  }
+  function roleFlagText(f2){
+    return f2.kind === "no_engage_tank"
+      ? "no engage tank \u2014 nobody makes a clump"
+      : `${esc(nameOf(f2.weapon))}: worn chest fights its ${esc(roleShort(f2.role).toLowerCase())} job`;
+  }
+  function roleLines(){
+    const adv = roleAdvisory();
+    if (!adv) return "";
+    let h = "";
+    const tally = Object.entries(adv.tally)
+      .map(([k, n]) => `${n}\u00d7 ${esc(roleShort(k))}`).join(" \u00b7 ");
+    if (tally) h += `<div class="dlt-line"><span>roles</span><span>${tally}</span></div>`;
+    const fns = {};
+    adv.members.forEach(m => (m.functions || []).forEach(c => { fns[c] = (fns[c] || 0) + 1; }));
+    const fnTxt = Object.entries(fns).map(([k, n]) => `${n}\u00d7 ${esc(roleShort(k))}`).join(" \u00b7 ");
+    if (fnTxt) h += `<div class="dlt-line"><span>functions</span><span>${fnTxt}</span></div>`;
+    adv.flags.forEach(f2 => { h += `<div class="dlt-warn">\u26a0 ${roleFlagText(f2)}</div>`; });
+    return h;
+  }
+  function roleCard(){
+    const adv = roleAdvisory();
+    if (!adv) return "";
+    const tally = Object.entries(adv.tally).map(([k, n]) =>
+      `<span class="dl-role-chip"><b>${n}</b> ${esc(roleShort(k))}</span>`).join("");
+    const flags = adv.flags.map(f2 =>
+      `<div class="dl-role-flag">\u26a0 ${roleFlagText(f2)}</div>`).join("");
+    return `<div class="dl-roles"><span class="dl-kicker">Role check \u2014 who is actually in this comp</span>
+      <div class="dl-role-tally">${tally}</div>${flags}
+      <div class="dl-note">descriptive \u2014 roles never score</div></div>`;
+  }
+
   function centerTipHtml(state, id, pct, f, max){
     let h = `<div class="dlt-head">${esc(state.label)}</div>`
       + `<div class="dlt-line"><span>triage</span><span>${state.critical} critical · ${state.weak} weak · ${state.excess} overstacked</span></div>`
@@ -170,37 +245,14 @@
         ? "unfit for this playstyle at this size"
         : `pulls against the ${c.side === "melee" ? "ranged" : "melee"} core`}</div>`;
     });
-    if (typeof ENG.killPressure === "function"){
-      const kp = ENG.killPressure(party, COMBOS_CUR);
-      if (kp){
-        const bit = (k, lbl) => {
-          const l = kp[k];
-          const p = l.bar > 0 ? Math.round(100 * l.have / l.bar) : 100;
-          return l.ok ? `<b class="dlt-ok">✓ ${lbl}</b>` : `<b class="dlt-bad">✗ ${lbl} ${p}%</b>`;
-        };
-        h += `<div class="dlt-line"><span>kill pressure</span><span>${bit("pierce", "pierce")} ${bit("heal_cut", "heal-cut")} ${bit("burst", "burst")}</span></div>`;
-      }
-    }
-    const adv = roleAdvisory();
-    if (adv){
-      const label = k => (((ENG.rolesBook || {})[k]) || {}).name || k;
-      const short = k => label(k).split(" / ")[0].split(" (")[0];
-      const tally = Object.entries(adv.tally).map(([k, n]) => `${n}× ${esc(short(k))}`).join(" · ");
-      if (tally) h += `<div class="dlt-line"><span>roles</span><span>${tally}</span></div>`;
-      const fns = {};
-      adv.members.forEach(m => (m.functions || []).forEach(c => { fns[c] = (fns[c] || 0) + 1; }));
-      const fnTxt = Object.entries(fns).map(([k, n]) => `${n}× ${esc(short(k))}`).join(" · ");
-      if (fnTxt) h += `<div class="dlt-line"><span>functions</span><span>${fnTxt}</span></div>`;
-      adv.flags.forEach(f2 => {
-        h += `<div class="dlt-warn">⚠ ${f2.kind === "no_engage_tank"
-          ? "no engage tank — nobody makes a clump"
-          : `${esc(nameOf(f2.weapon))}: worn chest fights its ${esc(label(f2.role).toLowerCase())} job`}</div>`;
-      });
-    }
+    h += killPressureLine();
+    h += roleLines();
     h += `<div class="dlt-note">descriptive — identity, kill pressure and roles never score</div>`;
     return h;
   }
   function roleAdvisory(){
+    if ("adv" in DL_MEMO) return DL_MEMO.adv;
+    DL_MEMO.adv = null;
     if (!party.length || typeof ENG.roleAdvisory !== "function") return null;
     const chests = {};
     party.forEach((w, i) => {
@@ -208,7 +260,8 @@
       if (L && L.armor) chests[i] = L.armor;
     });
     const adv = ENG.roleAdvisory(party, chests);
-    return adv && (adv.flags.length || Object.keys(adv.tally).length) ? adv : null;
+    DL_MEMO.adv = adv && (adv.flags.length || Object.keys(adv.tally).length) ? adv : null;
+    return DL_MEMO.adv;
   }
   function identityCenter(id){
     /* glyph + short label for the hollow center */
@@ -257,6 +310,12 @@
     /* identity center */
     const id = (typeof ENG.compIdentity === "function") ? ENG.compIdentity(party, COMBOS_CUR) : null;
     const c = identityCenter(id);
+    /* mirror the identity verdict into the status bar — the same
+       identityCenter() value the hollow center draws, so the two can never
+       disagree, and no extra engine call is made */
+    const sbi = document.getElementById("sb-identity");
+    if (sbi) sbi.innerHTML = `<b class="${c.firm ? "firm" : ""}">${esc(c.name)}</b>`
+      + (c.sub ? `<span>${esc(c.sub.toUpperCase())}</span>` : "");
     const f = fitness(party), max = maxFitness();
     const pct = Math.max(0, Math.min(100, f / Math.max(1, max) * 100));
     const ctip = tipRef(centerTipHtml(state, id, pct, f, max));
@@ -346,12 +405,14 @@
      duplicate-copy penalty, verified count-once spell losses. Display
      only — the engine's Q18 investigation rejected a scoring-side
      redundancy penalty; the marginal already collapses, this SAYS so. */
-  function whyNotBlock(rec){
+  function whyNotBlock(rec, shown, rep){
     if (!rec || typeof ENG.pickReport !== "function") return "";
-    const r = pickReport(party, rec.w);
+    /* the caller already computed this pick's report for the gain rows —
+       reuse it, so the row verdicts and the cost lines cannot diverge */
+    const r = rep || pickReport(party, rec.w);
     const lines = [];
     if (r.verdict !== "ok")
-      r.caps.filter(x => x.saturated).slice(0, 3).forEach(x => {
+      r.caps.filter(x => x.saturated && !(shown && shown.has(x.cap))).slice(0, 3).forEach(x => {
         lines.push(`<li>${esc(capLabel(x.cap))} already ${+x.before.toFixed(1)} / ${x.target.toFixed(1)} — this adds ${x.delta > 0.05 ? "depth, not coverage" : "nothing"}</li>`);
       });
     const over = r.caps.reduce((t, x) => t + x.overstack_cost, 0);
@@ -362,11 +423,11 @@
       lines.push(`<li>${esc(n.name)} counts once for the party — a duplicate loses ${lost}</li>`);
     });
     if (!lines.length) return "";
+    /* the per-capability verdict now rides each gain row, so what is left
+       here is only what the pick COSTS - name it that */
     const head = r.verdict === "negative"
-      ? "Warning — this pick costs more than it adds"
-      : r.verdict === "redundant"
-        ? "Depth pick — the comp is saturated, it closes no gap"
-        : "What it does not add";
+      ? "What this pick costs"
+      : "What it does not add";
     return `<div class="dl-whynot ${r.verdict}"><span class="dl-kicker">${head}</span><ul>${lines.join("")}</ul></div>`;
   }
 
@@ -509,9 +570,8 @@
         <div class="dl-swap-list">${rows || `<span class="dl-tool-note">Nothing in the pool beats keeping this slot as-is${keys.length ? "" : " — no better options at this content and size"}.</span>`}</div>`;
     }
 
-    /* the fold lives AFTER the wheel stage in the DOM: on the hero grid it
-       auto-places below the party strip (keeping the one-screen budget),
-       and on stacked layouts it reads as the section after the stage */
+    /* the fold lives in the left-edge tools panel (2026-09-02): it is an
+       interactive workflow, not glance-info, so it costs the grid nothing */
     const old = document.getElementById("dl-tools-fold");
     if (old) old.remove();
     const fold = document.createElement("details");
@@ -530,17 +590,19 @@
       <div class="dl-tool-head"><div><span class="dl-kicker">Swap impact</span><h3>What changes if this slot swaps?</h3></div></div>
       ${swapHtml}
     </div></div>`;
-    /* anchor after the warn slot (which follows the stage since the
-       2026-08-23 under-the-wheel move) so stacked layouts keep the order
-       wheel -> forge reports -> caller tools */
-    const anchor = document.getElementById("warn-slot")
-      || document.querySelector(".wheelstage");
-    if (anchor) anchor.after(fold); else host.appendChild(fold);
+    const panel = document.getElementById("tools-panel-body");
+    if (panel) panel.appendChild(fold);
+    else host.appendChild(fold);
   }
 
   function renderDecisionLayer(){
     const host = document.getElementById("decision-layer");
     if (!host) return;
+    DL_MEMO = {};   /* one engine walk per model per pass */
+    /* statusRadar() refills this; on an empty comp it never runs, so clear
+       first rather than leaving a stale verdict in the status bar */
+    const sbi0 = document.getElementById("sb-identity");
+    if (sbi0) sbi0.innerHTML = "";
     const state = statusModel();
     const needs = diagnosisRows();
     const need = needs[0] || null;
@@ -582,7 +644,21 @@
         <span class="dl-nd-sub">The next slot improves depth instead of repairing a load-bearing hole.</span></div>
     </div>`;
 
-    const gains = terms.map(t => `<li><b>+${t.d.toFixed(1)}</b> ${esc(capLabel(t.cap))}<span>${t.before.toFixed(0)} → ${t.after.toFixed(0)} / ${t.target.toFixed(1)}</span></li>`).join("");
+    /* each gain says whether it CLOSES a gap or only adds depth - that
+       verdict used to live in a second box repeating these same three
+       capabilities and the same numbers */
+    const rep = (typeof ENG.pickReport === "function") ? pickReport(party, top.w) : null;
+    const satCaps = new Set((rep ? rep.caps : []).filter(x => x.saturated).map(x => x.cap));
+    const shownCaps = new Set(terms.map(t => t.cap));
+    const gains = terms.map(t => {
+      const depth = satCaps.has(t.cap);
+      return `<li class="${depth ? "depth" : "closes"}">
+        <b>+${t.d.toFixed(1)}</b>
+        <span class="dl-gain-cap">${esc(capLabel(t.cap))}</span>
+        <span class="dl-gain-n">${t.before.toFixed(0)} → ${t.after.toFixed(0)} / ${t.target.toFixed(1)}</span>
+        <span class="dl-gain-v">${depth ? "depth" : "closes gap"}</span>
+      </li>`;
+    }).join("");
     const remain = remaining.length ? `<div class="dl-remain"><span class="dl-kicker">Still weak after this pick</span>${remaining.map(x => `<span title="${x.have.toFixed(0)} / ${x.want.toFixed(1)}">${esc(capLabel(x.cap))}</span>`).join("")}</div>` : `<div class="dl-remain clear"><span class="dl-kicker">After this pick</span><span>Core gaps are covered.</span></div>`;
     /* observed killboard context (PR #5 integration): _app.js owns the
        cohort math; the note appears only when cohorts echo this pick */
@@ -591,7 +667,7 @@
        click-to-add alternatives — a single take-it-or-leave-it pick is
        not a recommendation surface, so the runners-up live here now */
     const alts = (recs || []).slice(1, 4);
-    const altsHtml = alts.length ? `<div class="dl-alts"><span class="dl-kicker">instead — click to add</span><div class="dl-alt-row">${
+    const altsHtml = alts.length ? `<div class="dl-alts"><span class="dl-kicker">alternatives</span><div class="dl-alt-list">${
       alts.map(r => {
         const t0 = explain(party, r.w)[0];
         const dim = r.verdict && r.verdict !== "ok";
@@ -600,20 +676,39 @@
           <span class="dl-alt-sc">${dim ? "◦ " : ""}${r.score.toFixed(2)}</span></button>`;
       }).join("")}</div></div>` : "";
 
+    /* three cards, not one stack (owner 2026-09-02): the diagnosis, the
+       fight chain and the pick each get their own frame. They ride a single
+       column wrapper so their heights stay independent of the grid's rows. */
     host.innerHTML = `
-      <div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>
+      <div class="dl-col1">
+        <div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>
+        <div class="dl-need">
+          ${needline}
+          ${remain}
+        </div>
+      </div>
+      <div class="dl-col3">
       <div class="dl-pick">
-        ${needline}
-        ${chainLine(top)}
         <div class="dl-pick-head"><span class="dl-kicker">Best next pick · slot ${Math.min(party.length + 1, HARD_CAP)}</span><span class="dl-score${top.verdict && top.verdict !== "ok" ? " dl-score-dim" : ""}">${top.score >= 0 ? "+" : ""}${top.score.toFixed(2)} comp score${top.verdict === "redundant" ? " · depth only" : top.verdict === "negative" ? " · net cost" : ""}</span></div>
-        <div class="dl-weapon">${icon(top.w,72)}<div><button class="nm-btn" data-detail="${top.w}">${nameOf(top.w)}</button><span>${esc(roleOf(top.w, top.combo))}</span></div></div>
+        <div class="dl-weapon">${icon(top.w,84)}
+          <div class="dl-weapon-id">
+            <div class="dl-weapon-top">
+              <button class="nm-btn" data-detail="${top.w}">${nameOf(top.w)}</button>
+              <button class="cb-add dl-add" data-add="${top.w}"
+                title="Add ${nameOf(top.w)} to the comp">+ Add</button>
+            </div>
+            <span class="dl-weapon-role">${esc(roleOf(top.w, top.combo))}</span>
+            <ul class="dl-gains">${gains}</ul>
+          </div>
+        </div>
         <p>${whySentence(party, top.w)}</p>
-        <ul class="dl-gains">${gains}</ul>
         ${observed}
-        ${remain}
-        ${whyNotBlock(top)}
-        <button class="cb-add dl-add" data-add="${top.w}">Add ${nameOf(top.w)}</button>
+        ${whyNotBlock(top, shownCaps, rep)}
         ${altsHtml}
+      </div>
+      </div>
+      <div class="dl-pressure">${killPressureCard()}${roleCard()}
+        <div class="dl-chain-card">${chainLine(top)}</div>
       </div>`;
     renderPlayerTools(host);
   }

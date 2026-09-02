@@ -3,14 +3,44 @@
 Comp Forge's planner UI: a single self-contained HTML page, generated — never
 hand-edited.
 
-- `_shell.html`, `_app.js`, `_loadout.js`, `_decision_layer.js/.css`,
-  `_explainer.html` — the **sources** (the `_` prefix marks them).
+- `_shell.html`, `_layout.css`, `_app.js`, `_loadout.js`,
+  `_decision_layer.js/.css`, `_explainer.html` — the **sources** (the `_`
+  prefix marks them).
 - `build.py` — the bundler: inlines the dataset, the engine
   (`engine/app_scoring.js`), the sources, and a parity fixture into
   `index.html` + `how-it-works.html` here and the GitHub Pages copies in
   `docs/`. Regenerate with `py -3 dashboard/build.py`.
 - `index.html`, `how-it-works.html` — **generated output**. Edit the sources
   and rebuild.
+
+## One home per layout rule (2026-09-02)
+
+`_layout.css` owns the `.shell`/`.main` grid, the wheel stage, the `.epanel`
+edge-panel system and **every** layout `@media` block. It is inlined LAST
+into `_shell.html`'s single `<style>`, so its rules win on source order and
+never need `!important`. `_shell.html` and `_decision_layer.css` keep
+component chrome only — colour, type, borders, motion.
+
+The layout is a four-column card grid at ≥1700px, three columns from 1400px
+(the band a 1080p screen at 120% zoom lands in, so it is built as a
+first-class layout, not a fallback), and the pre-redesign flow below 1251px
+(the new column wrappers keep their card gap there too). Band boundaries use
+fractional bounds (`max-width:1399.98px`) — display scaling yields viewport
+widths like 1399.5px, and an integer bound left an open interval matching NO
+band, collapsing the page to one column. Setup, caller tools, party and live
+party are `.epanel` flyouts pinned to the viewport edges: a shut panel costs
+zero layout, so the grid always gets the full width. One panel opens per
+edge — per *phone* they collapse to one panel TOTAL (every sheet shares the
+bottom slot), the overlapping bottom tab bars are click-through outside
+their tabs, and a transient close (the evidence drawer overlaying the party
+panel) never persists over the user's saved layout choice.
+
+`tests/test_dashboard_layout.py` pins all of this. Several of its contracts
+exist because the bug they describe actually shipped — an `<svg>` clipping
+its own glow, a toolbar clipping its own dropdowns, a popover destroyed by
+the panel it was re-parented into. **Display geometry fails silently:** the
+CSS stays valid and the JS still runs, so the only other gate is a person
+looking at it.
 
 ## The two display contracts (owner rulings 2026-08-26/27)
 

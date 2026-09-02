@@ -1,0 +1,280 @@
+/* LAYOUT — the single home for every rule that decides where things sit.
+   Inlined LAST into _shell.html's <style> block by build.py, so these rules
+   win on source order without needing !important. Component chrome (colour,
+   type, borders, motion) stays in _shell.html and _decision_layer.css; only
+   grid, flow, position, breakpoints and the edge-panel system live here.
+
+   Owns: .shell / .main grid, .wheelstage / .ws-*, the .epanel edge-panel
+   system, and every layout @media block. */
+
+/* ================= moved from _shell.html 2026-09-02 ================= */
+
+/* ---------- shell ----------
+   Full-bleed since 2026-09-02: the 1560px cap and the two-column rail grid
+   both retired when setup became an edge panel. One content region. */
+.shell{display:block; max-width:none; margin:0}
+
+/* side padding clears the fixed tab rails (~30px) at both edges, so a tab
+   never grazes the content it sits beside */
+.main{padding:26px 48px 90px; display:flex; flex-direction:column; gap:30px; min-width:0}
+@media (max-width:960px){
+  /* rails are a bottom bar down here, so the sides get their space back */
+  .main{padding-left:16px; padding-right:16px; padding-bottom:70px}
+}
+
+/* ---------- the wheel stage ----------
+   Below 1251px this is a real grid; at and above it the stage dissolves
+   (display:contents) and .ws-center places directly on the card grid. */
+.wheelstage{
+  display:grid;
+  grid-template-columns:minmax(196px,220px) minmax(0,1fr) minmax(280px,320px);
+  gap:30px; align-items:start;
+}
+@media (max-width:1560px){
+  .wheelstage{grid-template-columns:minmax(0,1fr) minmax(280px,360px)}
+  .ws-center{grid-column:1; grid-row:2}
+  .ws-right{grid-column:2; grid-row:1 / span 2}
+}
+@media (max-width:1250.98px){
+  .wheelstage{grid-template-columns:1fr}
+  .ws-center{grid-column:auto; grid-row:auto; order:2}
+  .ws-right{grid-column:auto; grid-row:auto; order:3}
+}
+@media (max-width:960px){
+  .ws-center{order:1}
+}
+.ws-flank{display:flex; flex-direction:column; gap:12px; min-width:0}
+
+.ws-center{min-width:0; container-type:inline-size}
+
+/* ---------- edge panels ----------
+   One component for every viewport-edge flyout. Fixed, so a shut panel
+   costs ZERO layout: the content grid always gets the full viewport.
+   Tabs stack in an .epanel-rail per edge; adding a surface is one <button>
+   plus one <aside>. Generalised from .pdash 2026-09-02. */
+.epanel{
+  --epw:min(430px, 92vw);          /* one width, shared with the tab rail */
+  position:fixed; top:0; bottom:0; z-index:40;
+  width:var(--epw);
+  transition:transform .32s var(--ease);
+  background:rgba(13,16,22,.97); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  box-shadow:0 0 44px rgba(0,0,0,.5);
+  display:flex; flex-direction:column;
+}
+.epanel[data-edge="right"]{right:0; transform:translateX(100%); border-left:1px solid var(--rule-2)}
+.epanel[data-edge="left"]{left:0; transform:translateX(-100%); border-right:1px solid var(--rule-2)}
+.epanel[data-open="true"]{transform:none}
+/* desktop: an OPEN panel rises above the rails so the kit flyout (a panel
+   child painted outside its left edge) is not occluded by its own tab —
+   the pointer crossing a non-descendant tab fired the panel's mouseleave
+   and killed the flyout mid-reach. Phones keep the rail on top: the tab
+   bar must stay tappable over the open sheet. */
+@media (min-width:961px){
+  .epanel[data-open="true"]{z-index:42}
+}
+.epanel-body{overflow-y:auto; padding:12px 12px 18px; flex:1}
+.epanel-empty{padding:6px 2px}
+
+/* the tab rails: one stacked column of tabs per edge, centred vertically
+   and pinned OUTSIDE the panel so they stay reachable when it is shut */
+.epanel-rail{
+  --epw:min(430px, 92vw);
+  position:fixed; top:50%; transform:translateY(-50%); z-index:41;
+  display:flex; flex-direction:column; gap:8px;
+  transition:transform .32s var(--ease);
+}
+.epanel-rail[data-edge="right"]{right:0}
+.epanel-rail[data-edge="left"]{left:0}
+/* the rail rides the open panel's outer edge, the way the old absolutely
+   positioned .pdash-tab did — otherwise an open panel sits under its tab */
+.epanel-rail[data-edge="right"][data-open="true"]{
+  transform:translateY(-50%) translateX(calc(-1 * var(--epw)))}
+.epanel-rail[data-edge="left"][data-open="true"]{
+  transform:translateY(-50%) translateX(var(--epw))}
+.epanel-tab{
+  writing-mode:vertical-rl; padding:16px 8px;
+  font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--brass); background:linear-gradient(90deg, var(--panel-hi), var(--panel-lo));
+  border:1px solid var(--rule-2); cursor:pointer;
+  transition:color .18s var(--ease), border-color .18s var(--ease);
+}
+.epanel-rail[data-edge="right"] .epanel-tab{
+  border-right:0; border-radius:10px 0 0 10px; box-shadow:-8px 0 18px rgba(0,0,0,.4)}
+.epanel-rail[data-edge="left"] .epanel-tab{
+  border-left:0; border-radius:0 10px 10px 0; box-shadow:8px 0 18px rgba(0,0,0,.4)}
+.epanel-tab b{color:var(--ink); font-weight:600}
+.epanel-tab:hover{color:var(--brass-bright); border-color:var(--brass-deep)}
+/* phones: panels are bottom sheets, rails a horizontal row above them */
+@media (max-width:960px){
+  .epanel{left:0; right:0; top:auto; bottom:0; width:auto; max-height:76vh;
+    border:1px solid var(--rule-2); border-bottom:0; border-radius:14px 14px 0 0}
+  .epanel[data-edge="left"], .epanel[data-edge="right"]{transform:translateY(100%)}
+  .epanel[data-open="true"]{transform:none}
+  /* the sheet's own content clears the tab bar that sits over its foot */
+  .epanel-body{padding-bottom:44px}
+  /* the rails become one bottom tab bar: tap another tab to switch panels,
+     tap the open one to close. They stay put — only the sheet moves. */
+  .epanel-rail{top:auto; bottom:0; flex-direction:row;
+    justify-content:center; width:100%; gap:6px}
+  .epanel-rail, .epanel-rail[data-edge="right"][data-open="true"],
+  .epanel-rail[data-edge="left"][data-open="true"]{transform:none}
+  .epanel-rail[data-edge="left"], .epanel-rail[data-edge="right"]{left:0; right:0}
+  /* the two full-width bars OVERLAP here: without click-through the
+     later-DOM right rail's transparent box ate every tap on the left
+     rail's setup/tools tabs (and on page content under the bar) */
+  .epanel-rail{pointer-events:none}
+  .epanel-tab{pointer-events:auto}
+  .epanel-rail[data-edge="left"]{justify-content:flex-start; padding-left:8px}
+  .epanel-rail[data-edge="right"]{justify-content:flex-end; padding-right:8px}
+  .epanel-tab{writing-mode:horizontal-tb; padding:7px 12px; border-radius:8px 8px 0 0;
+    border:1px solid var(--rule-2); border-bottom:0}
+}
+
+/* ============ moved from _decision_layer.css 2026-09-02 =============
+   appended AFTER the _shell.html rules so the old concatenation order
+   (shell first, decision second) is preserved exactly. */
+
+/* The old right flank duplicated the exact questions answered above. Keep its
+   underlying renderers alive, but remove that duplicate surface. */
+.ws-right{display:none}
+/* ================== THE CARD GRID (2026-09-02) ==================
+   Shared across every grid band: the stage wrappers dissolve with
+   display:contents so their children place directly on .main's grid, and
+   the decision stack sheds slack height once it lives in a column. */
+/* column wrappers: their cards stack with independent heights, so a tall
+   card in one column never inflates the shared grid row of another. The
+   gap applies at EVERY width — below the grid bands these wrappers still
+   exist, and without it their cards stacked border-to-border. */
+.dl-col1, .dl-col3, .dl-pressure{display:flex; flex-direction:column; gap:14px; min-width:0}
+@media (min-width:1251px){
+  .main{display:grid; align-items:start; gap:18px 24px}
+  .main>*{grid-column:1/-1; min-width:0}
+  .decision-layer{display:contents}
+  .wheelstage{display:contents}
+  /* hero-density chrome. ONLY values the component files do not already
+     state — the old block carried stale copies of the retired chip design
+     (68px icon, chip-padded gain rows, the full-width Add's margin) that
+     beat the redesigned rules by inline order on every desktop width. */
+  .dl-status{padding:0}
+  .dl-pick{padding:14px 16px}
+  .dl-nl-main strong{font-size:19px}
+  .dl-weapon .nm-btn{font-size:23px}
+  .dl-pick p{margin:6px 0 8px;font-size:12.5px}
+  .dl-alts{margin-top:8px}
+  /* deep boards stay full-width rows below the hero, in DOM order */
+  #meta-sec, .footnote{grid-column:1/-1; grid-row:auto}
+}
+
+/* FOUR COLUMNS (>=1700px): diagnosis, wheel, pick card, pressure. */
+@media (min-width:1700px){
+  .dl-col1{grid-column:1; grid-row:1/3}
+  .main{grid-template-columns:minmax(320px,.8fr) minmax(540px,1.15fr)
+                              minmax(380px,.95fr) minmax(380px,1fr)}
+  .dl-status{grid-column:1; grid-row:1/3}
+  .ws-center{grid-column:2; grid-row:1/3; order:0}
+  .dl-col3{grid-column:3; grid-row:1/3}
+  .dl-pressure{grid-column:4; grid-row:1}
+  #warn-slot{grid-column:4; grid-row:2}
+  /* the ring panels pack across the full width - six groups in one band,
+     which is where the form actually pays for itself */
+  #supply-sec{grid-column:1/-1; grid-row:3}
+  .dl-empty{grid-column:1; grid-row:1/3}
+  .wheel{--wd:min(520px,100cqi)}
+}
+
+/* THREE COLUMNS (1400-1699). This is the band a 1080p screen at 120% zoom
+   lands in, so it is a first-class layout, not a fallback: column 4
+   dissolves into a full-width row of three cards beneath the hero, and
+   columns 1-3 keep their assignments. */
+@media (min-width:1400px) and (max-width:1699.98px){
+  .dl-col1{grid-column:1; grid-row:1/3}
+  .main{grid-template-columns:minmax(300px,.85fr) minmax(500px,1.2fr) minmax(340px,1fr)}
+  .dl-status{grid-column:1; grid-row:1/3}
+  .ws-center{grid-column:2; grid-row:1/3; order:0}
+  .dl-col3{grid-column:3; grid-row:1/3}
+  .dl-empty{grid-column:1; grid-row:1/3}
+  /* the pressure pair spans the full width as one row of two cards */
+  .dl-pressure{grid-column:1/-1; grid-row:3; flex-direction:row}
+  .dl-pressure>*{flex:1 1 0}
+  #supply-sec{grid-column:1/-1; grid-row:4}
+  #warn-slot{grid-column:1/-1; grid-row:5}
+  .wheel{--wd:min(500px,100cqi)}
+}
+
+/* the pre-existing two-column hero grid, unchanged behaviour.
+   Fractional bounds throughout these bands: 125%/150% display scaling
+   yields viewport widths like 1399.5px, and an integer max-width left an
+   open interval matching NO band — the base >=1251 grid has no column
+   template of its own, so the whole page collapsed to one column there. */
+@media (min-width:1251px) and (max-width:1399.98px){
+  .dl-col1{grid-column:1; grid-row:1}
+  .main{grid-template-columns:minmax(390px,1fr) minmax(0,1.5fr)}
+  .dl-status{grid-column:1; grid-row:1}
+  .dl-col3{grid-column:1; grid-row:2}
+  .dl-empty{grid-column:1; grid-row:1/3}
+  .ws-center{grid-column:2; grid-row:1/3; order:0}
+  #warn-slot{grid-column:2; grid-row:3}
+  .dl-pressure{grid-column:1/-1; grid-row:auto; flex-direction:row}
+  .dl-pressure>*{flex:1 1 0}
+  .wheel{--wd:min(680px,100cqi)}
+}
+
+/* ---- stragglers found during the Task 2 move: layout rules that were
+   nested inside component media blocks rather than the ranges above ---- */
+@media (max-width:640px){
+  .main{padding:14px 12px 70px; gap:22px}
+}
+@media (max-width:720px){
+  .wheelstage{gap:20px}
+}
+
+/* ---------- masthead / status bar ----------
+   Two lines: identity + verdict on top, the constantly-turned knobs below.
+   Style and size change on nearly every interaction; burying them behind a
+   panel tab would cost more than the space it saves. */
+/* Compacted 2026-09-02 (owner: "about 60% of that space"). It was ~105px:
+   a 58px top row built around a 34px sigil and a 26px figure, over a 47px
+   control row on 32px inputs. Now ~64px - every control keeps a >=24px hit
+   target, and the brand sub-line goes because the wordmark already says it. */
+.masthead{display:flex; flex-direction:column; gap:0}
+.mh-top{display:flex; align-items:center; gap:18px; padding:4px 34px 3px; flex-wrap:wrap}
+.mh-bar{display:flex; align-items:center; gap:14px; padding:3px 34px 4px;
+  border-top:1px solid var(--rule); flex-wrap:wrap}
+.mh-top .spacer, .mh-bar .spacer{flex:1}
+
+/* brand: the sigil and wordmark carry it; the strapline is decoration here */
+.mh-top .brandmark{gap:9px}
+.mh-top .brandmark .sigil{width:24px; height:24px; font-size:13px; border-radius:7px}
+.mh-top .brandmark h1{font-size:16px; line-height:1.2}
+.mh-top .brandmark .sub{display:none}
+
+.sb-fit{margin-bottom:0; display:flex; align-items:baseline; gap:9px}
+.sb-fit .sec-label{margin:0}
+.sb-fit .num{font-size:19px}
+.sb-fit .of{font-size:11px}
+.sb-fit .meter-track{width:96px; height:6px; margin-top:0; align-self:center}
+
+/* controls shrink to a 24px rhythm - still a real hit target, half the height */
+.mh-bar select, .mh-bar .text-input{padding:3px 8px; font-size:12px; border-radius:8px}
+.mh-bar .size-btn, .mh-bar .size-input{height:24px; font-size:12px}
+.mh-bar .size-btn{min-width:24px}
+.mh-bar .size-input{width:48px}
+.masthead .chip{padding:3px 8px; font-size:10px}
+.masthead .about-link{padding:2px 0}
+.masthead .share-btn{padding:4px 10px; font-size:10px; margin-top:0; width:auto}
+.masthead .lf-sync{font-size:10px}
+/* forge and reforge are comp-level actions, so they sit with style, size
+   and content rather than half in a panel and half under the wheel */
+.mh-forge{display:flex; gap:6px}
+.mh-forge:empty{display:none}
+.mh-forge .cb-forge{margin:0; padding:4px 10px; font-size:10px; width:auto}
+.sb-identity{display:flex; align-items:center; gap:8px}
+.sb-field{display:flex; align-items:center; gap:7px}
+.sb-field>span{font-family:var(--mono); font-size:10px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3)}
+.sb-field select, .sb-field .size-input{margin:0}
+@media (max-width:960px){
+  .mh-top, .mh-bar{padding-left:16px; padding-right:16px; gap:12px}
+  .sb-fit .meter-track{width:80px}
+}
+

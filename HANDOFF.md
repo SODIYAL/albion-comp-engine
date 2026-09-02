@@ -24,6 +24,42 @@ The current planner is deliberately decision-first:
 
 Roles remain useful player-facing labels, but scoring is capability-driven.
 
+## Planner layout (2026-09-02)
+
+The planner was re-laid-out for density — spec
+`docs/superpowers/specs/2026-09-02-dashboard-density-redesign-design.md`,
+plan `docs/superpowers/plans/2026-09-02-dashboard-density-redesign.md`.
+Display layer only: no scoring, engine, forge or pipeline code changed, and
+golden/parity carried through unchanged at every step.
+
+- **A card grid**, four columns at ≥1700px and three from 1400px; below
+  1251px the pre-redesign flow (the new column wrappers keep their card gap
+  there). All layout rules moved into a new `dashboard/_layout.css`,
+  inlined last so it wins on source order. Band bounds are fractional
+  (`max-width:1399.98px`): integer bounds left scaled-display widths like
+  1399.5px matching no band, collapsing the page to one column.
+- **Edge panels.** The in-flow setup rail is gone; setup, caller tools,
+  party and live party are `.epanel` flyouts on the viewport edges. One
+  panel per edge on desktop, one TOTAL on phones (all sheets share the
+  bottom slot); the phone tab bars are click-through outside their tabs;
+  transient closes (drawer overlay) never persist; connecting the
+  companion opens the live panel its feed renders into.
+- **A status bar.** The masthead carries fitness, the identity verdict, and
+  live style/size/content plus the forge actions — about 63px for both rows.
+- **Kill pressure and role check became cards.** They previously existed
+  only as lines inside the radar's hover tooltip; both surfaces now read the
+  same model, and both remain descriptive (golden 59/59 proves it).
+- **Capability supply became nested rings**, faceted one panel per group,
+  on the same soft-cap ruler as the bars and the radar.
+- The pick card split into diagnosis / fight chain / the pick, and its gain
+  rows absorbed the verdict that a second box used to repeat.
+
+New gate: `py -3 tests/test_dashboard_layout.py` (contracts L1–L18; the
+2026-09-02 review round added L15–L18 plus popover-lifetime, phone-rail,
+band-gap and honesty-mirror contracts, and `test_display_math.js` now
+sweeps the ring geometry across every group size with source-extracted
+constants instead of a hand copy).
+
 ## Current engine model
 
 **2026-08-27 — the DRESSED FORGE shipped** (spec `docs/superpowers/specs/2026-08-27-dressed-forge-design.md`): forge and recommend evaluate every candidate as a full build — weapon + combo + doctrine kit (v0 + one divergent variant) — priced by the exact comp_score-with-gears the page displays, and forged members arrive with their kits prefilled (`_eng`-marked). The same day closed two adjacent gaps: the page now passes equipped LOADOUT gear into every scoring/suggestion call (the engine had scored full builds since 2026-08-20; the UI never sent them), and the gear capability catalog was completed (129 curated pieces, `sheets/gear/combat_expansion.yaml`). Owner rulings: kit suggestions are doctrine-tier-first in both modes (evidence-first, T22 re-pin), T30c re-pinned dressed with a naked-party honesty rider. Locked members are never re-dressed; doctrine passives never enter evaluation.
