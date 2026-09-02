@@ -668,15 +668,14 @@
        fight chain and the pick each get their own frame. They ride a single
        column wrapper so their heights stay independent of the grid's rows. */
     host.innerHTML = `
-      <div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>
+      <div class="dl-col1">
+        <div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>
+        <div class="dl-need">
+          ${needline}
+          ${remain}
+        </div>
+      </div>
       <div class="dl-col3">
-      <div class="dl-need">
-        ${needline}
-        ${remain}
-      </div>
-      <div class="dl-chain-card">
-        ${chainLine(top)}
-      </div>
       <div class="dl-pick">
         <div class="dl-pick-head"><span class="dl-kicker">Best next pick · slot ${Math.min(party.length + 1, HARD_CAP)}</span><span class="dl-score${top.verdict && top.verdict !== "ok" ? " dl-score-dim" : ""}">${top.score >= 0 ? "+" : ""}${top.score.toFixed(2)} comp score${top.verdict === "redundant" ? " · depth only" : top.verdict === "negative" ? " · net cost" : ""}</span></div>
         <div class="dl-weapon">${icon(top.w,84)}
@@ -696,7 +695,9 @@
         ${altsHtml}
       </div>
       </div>
-      <div class="dl-pressure">${killPressureCard()}${roleCard()}</div>`;
+      <div class="dl-pressure">${killPressureCard()}${roleCard()}
+        <div class="dl-chain-card">${chainLine(top)}</div>
+      </div>`;
     renderPlayerTools(host);
   }
 
