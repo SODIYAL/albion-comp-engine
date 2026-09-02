@@ -1,0 +1,8 @@
+/* LAYOUT — the single home for every rule that decides where things sit.
+   Inlined LAST into _shell.html's <style> block by build.py, so these rules
+   win on source order without needing !important. Component chrome (colour,
+   type, borders, motion) stays in _shell.html and _decision_layer.css; only
+   grid, flow, position, breakpoints and the edge-panel system live here.
+
+   Owns: .shell / .main grid, .wheelstage / .ws-*, the .epanel edge-panel
+   system, and every layout @media block. */

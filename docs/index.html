@@ -1770,6 +1770,15 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 @media(max-width:900px){.dl-tools{grid-template-columns:1fr}}
 @media(max-width:720px){.dl-gains{grid-template-columns:1fr}.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-alt-row{grid-template-columns:1fr}.dl-empty{display:block}.wheelstage{gap:20px}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
 
+/* LAYOUT — the single home for every rule that decides where things sit.
+   Inlined LAST into _shell.html's <style> block by build.py, so these rules
+   win on source order without needing !important. Component chrome (colour,
+   type, borders, motion) stays in _shell.html and _decision_layer.css; only
+   grid, flow, position, breakpoints and the edge-panel system live here.
+
+   Owns: .shell / .main grid, .wheelstage / .ws-*, the .epanel edge-panel
+   system, and every layout @media block. */
+
 </style>
 </head>
 <body>

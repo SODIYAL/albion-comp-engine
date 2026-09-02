@@ -107,7 +107,11 @@ def main():
         decision_css = f.read()
     with open(os.path.join(DASH, "_decision_layer.js"), encoding="utf-8") as f:
         decision_js = f.read()
-    shell = shell.replace("</style>", decision_css + "\n</style>", 1)
+    # Layout is inlined LAST so its rules win on source order — see
+    # dashboard/_layout.css and tests/test_dashboard_layout.py (L1c).
+    with open(os.path.join(DASH, "_layout.css"), encoding="utf-8") as f:
+        layout_css = f.read()
+    shell = shell.replace("</style>", decision_css + "\n" + layout_css + "\n</style>", 1)
     shell = shell.replace(
         '<main class="main">',
         '<main class="main">\n'
