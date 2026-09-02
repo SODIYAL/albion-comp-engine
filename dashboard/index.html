@@ -496,18 +496,23 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
    own pill borders, and the bar never wraps - it scrolls if it must. */
 .wf-bar{
   display:flex; align-items:stretch; flex-wrap:nowrap; margin-bottom:8px;
-  min-width:0; max-width:100%; overflow-x:auto; scrollbar-width:none;
+  min-width:0; max-width:100%;
+  /* NEVER give this an overflow other than visible: it would become a
+     clipping context and cut off the chip flyouts, the tree menu and the
+     search popover, all of which are absolutely positioned inside it */
   background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
   border:1px solid var(--rule-2); border-radius:12px;
 }
-.wf-bar::-webkit-scrollbar{display:none}
 .wf-seg{
   display:flex; align-items:center; gap:6px; padding:0 10px; min-width:0;
   border-left:1px solid var(--rule);
 }
 .wf-seg:first-child{border-left:0}
 .wf-seg:empty{display:none}
-#picker-chips{flex-wrap:nowrap}
+#picker-chips{flex-wrap:nowrap; gap:0}
+/* one rule per group, so the three read as segments of the same bar */
+#picker-chips .pgroup + .pgroup{border-left:1px solid var(--rule)}
+#picker-chips .pgroup + .pgroup .pgroup-t{padding-left:12px}
 .wf-tree{flex:none}
 
 /* segment buttons: flush, no pill of their own */
@@ -529,12 +534,13 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   border:1px dashed var(--rule-2);
 }
 
-/* the facet chips lose their pills inside the bar and become segments */
-.wf-bar .pchip{
-  background:none; border:0; border-radius:0; padding:8px 2px;
-  white-space:nowrap;
+/* the group triggers lose their pills inside the bar and become segments.
+   (.pchip is NOT this: those live inside the flyout, where a pill is right) */
+.wf-bar .pgroup{display:flex}
+.wf-bar .pgroup-t{
+  border:0; border-radius:0; padding:8px 4px; white-space:nowrap;
 }
-.wf-bar .pchip[aria-pressed="true"]{background:none}
+.wf-bar .pgroup-t[aria-pressed="true"]{box-shadow:none; color:var(--brass)}
 .wf-bar .facet{margin:0}
 
 /* the tree menu and the search popover share their surface */

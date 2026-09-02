@@ -203,6 +203,14 @@ check("<select" not in SHELL[SHELL.index('class="wf-bar"'):SHELL.index("</main>"
 check('id="tree-menu"' in SHELL and "setTreeMenu" in APP,
       "L11k the tree dropdown is a real listbox")
 check("treeIconFor" in APP, "L11l tree options carry a weapon icon")
+# The bar hosts three absolutely-positioned popups (chip flyouts, tree menu,
+# search). Any overflow other than visible makes it a clipping context and
+# silently cuts all three off - which shipped once on 2026-09-02.
+bar = SHELL[SHELL.index(".wf-bar{"):SHELL.index("}", SHELL.index(".wf-bar{"))]
+bar = re.sub(r"/\*.*?\*/", "", bar, flags=re.S)   # a comment may say the word
+check(not re.search(r"overflow[-a-z]*\s*:", bar),
+      "L11m .wf-bar declares no overflow - it would clip its own popups",
+      bar.strip())
 
 
 if FAILURES:
