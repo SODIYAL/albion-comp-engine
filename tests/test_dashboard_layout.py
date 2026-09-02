@@ -104,6 +104,22 @@ for m in re.finditer(r'<aside class="epanel"([^>]*)>', SHELL):
 check("setPanel" in APP, "L4h _app.js defines setPanel")
 check('"epanel:"' in APP, "L4i panel state persists under an epanel: key")
 
+print("L5 - status bar")
+
+head = SHELL[SHELL.index('<header class="masthead">'):SHELL.index("</header>")]
+for el in ['id="fit-num"', 'id="fit-of"', 'id="fit-bar"', 'id="sb-identity"',
+           'id="sb-count"', 'id="style"', 'id="size-input"', 'id="content"',
+           'id="parity-chip"', 'id="build-stamp"']:
+    check(el in head, "L5a masthead carries %s" % el)
+check(SHELL.count('id="fit-num"') == 1, "L5b #fit-num is not duplicated")
+check(SHELL.count('id="style"') == 1, "L5c #style is not duplicated")
+check(SHELL.count('id="size-input"') == 1, "L5d #size-input is not duplicated")
+check('class="foot-chips"' not in SHELL and ".foot-chips{" not in SHELL,
+      "L5e .foot-chips retired - its chips moved up",
+      "markup and rule both gone; a mention in a comment is fine")
+check('"sb-identity"' in DECISION_JS, "L5f decision layer fills #sb-identity")
+check('"sb-count"' in APP, "L5g _app.js fills #sb-count")
+
 if FAILURES:
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
     sys.exit(1)

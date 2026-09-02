@@ -257,6 +257,12 @@
     /* identity center */
     const id = (typeof ENG.compIdentity === "function") ? ENG.compIdentity(party, COMBOS_CUR) : null;
     const c = identityCenter(id);
+    /* mirror the identity verdict into the status bar — the same
+       identityCenter() value the hollow center draws, so the two can never
+       disagree, and no extra engine call is made */
+    const sbi = document.getElementById("sb-identity");
+    if (sbi) sbi.innerHTML = `<b class="${c.firm ? "firm" : ""}">${esc(c.name)}</b>`
+      + (c.sub ? `<span>${esc(c.sub.toUpperCase())}</span>` : "");
     const f = fitness(party), max = maxFitness();
     const pct = Math.max(0, Math.min(100, f / Math.max(1, max) * 100));
     const ctip = tipRef(centerTipHtml(state, id, pct, f, max));
@@ -541,6 +547,10 @@
   function renderDecisionLayer(){
     const host = document.getElementById("decision-layer");
     if (!host) return;
+    /* statusRadar() refills this; on an empty comp it never runs, so clear
+       first rather than leaving a stale verdict in the status bar */
+    const sbi0 = document.getElementById("sb-identity");
+    if (sbi0) sbi0.innerHTML = "";
     const state = statusModel();
     const needs = diagnosisRows();
     const need = needs[0] || null;

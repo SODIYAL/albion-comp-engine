@@ -292,3 +292,27 @@
 @media (max-width:720px){
   .wheelstage{gap:20px}
 }
+
+/* ---------- masthead / status bar ----------
+   Two lines: identity + verdict on top, the constantly-turned knobs below.
+   Style and size change on nearly every interaction; burying them behind a
+   panel tab would cost more than the space it saves. */
+.masthead{display:flex; flex-direction:column; gap:0}
+.mh-top{display:flex; align-items:center; gap:26px; padding:10px 34px 8px; flex-wrap:wrap}
+.mh-bar{display:flex; align-items:center; gap:18px; padding:6px 34px 8px;
+  border-top:1px solid var(--rule); flex-wrap:wrap}
+.mh-top .spacer, .mh-bar .spacer{flex:1}
+.sb-fit{margin-bottom:0; display:flex; align-items:baseline; gap:10px}
+.sb-fit .sec-label{margin:0}
+.sb-fit .num{font-size:26px}
+.sb-fit .meter-track{width:120px; margin-top:0; align-self:center}
+.sb-identity{display:flex; align-items:center; gap:8px}
+.sb-field{display:flex; align-items:center; gap:7px}
+.sb-field>span{font-family:var(--mono); font-size:10px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3)}
+.sb-field select, .sb-field .size-input{margin:0}
+@media (max-width:960px){
+  .mh-top, .mh-bar{padding-left:16px; padding-right:16px; gap:12px}
+  .sb-fit .meter-track{width:80px}
+}
+

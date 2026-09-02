@@ -1128,6 +1128,8 @@ function renderWheelFoot(keys, recs, rings){
       : `<div class="epanel-empty fn">No members yet — spin the wheel and add picks, or forge a full comp.</div>`;
     const pc = $("pdash-count");
     if (pc) pc.textContent = `${party.length}/${PLAN()}`;
+    const sbc = $("sb-count");
+    if (sbc) sbc.textContent = `${party.length}/${PLAN()}`;
     /* tile height divides the viewport by the member count (see .pdash CSS) */
     $("pdash").style.setProperty("--pdn", party.length || 1);
     /* an open flyout survives the re-render (kit edits arrive through
