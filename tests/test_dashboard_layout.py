@@ -213,6 +213,14 @@ check(not re.search(r"overflow[-a-z]*\s*:", bar),
       bar.strip())
 
 
+print("L12 - the hub gauges do not clip their own glow")
+
+hub = SHELL[SHELL.index(".hub-rings{"):SHELL.index("}", SHELL.index(".hub-rings{"))]
+glow = ".hub-rings .ring-fill.done" in SHELL and "drop-shadow(0 0 5px currentColor)" in SHELL
+check(not glow or "overflow:visible" in hub,
+      "L12a .hub-rings stays overflow:visible while .done carries a glow",
+      "an <svg> clips at its viewport, squaring off the outermost ring's glow")
+
 if FAILURES:
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
     sys.exit(1)
