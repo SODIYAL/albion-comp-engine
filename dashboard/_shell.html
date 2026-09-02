@@ -490,13 +490,54 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .pchip.u-chip{color:var(--brass)}
 
 /* ---------- weapon wheel: filters above the wheel ---------- */
-.wheel-filters{display:flex; flex-direction:column; gap:9px; margin-bottom:4px}
-.wf-filter-row{display:flex; gap:8px}
-.wf-filter-row select{width:auto; flex:0 1 190px}
-.wf-filter-row .text-input{flex:1; min-width:0}
-.wheel-filters #picker-chips{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
-@media (max-width:960px){ .wheel-filters #picker-chips{flex-direction:column; align-items:stretch} }
-.wheel-filters .facet{margin:0; justify-content:center}
+.wf-bar{display:flex; align-items:center; gap:8px; margin-bottom:6px; min-width:0}
+.wf-kicker{
+  font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink-3); white-space:nowrap; flex:none;
+}
+.wf-bar select{width:auto; flex:0 1 172px; min-width:0}
+.wf-bar #picker-chips{display:flex; gap:6px; align-items:center; min-width:0; flex-wrap:wrap}
+.wf-bar #facet-slot:not(:empty){margin-left:auto}
+.wf-bar .facet{margin:0}
+@media (max-width:960px){ .wf-bar{flex-wrap:wrap} }
+
+/* the search: an icon that carries its own query, so an active filter is
+   never invisible state */
+.wf-search{position:relative; flex:none; display:flex; align-items:center}
+.wf-search-btn{
+  display:flex; align-items:center; gap:6px; padding:5px 9px;
+  background:var(--sunk); border:1px solid var(--rule-2); border-radius:99px;
+  color:var(--ink-2); cursor:pointer;
+  transition:color .18s var(--ease), border-color .18s var(--ease);
+}
+.wf-search-btn:hover{color:var(--brass); border-color:var(--brass-deep)}
+.wf-search-btn[aria-expanded="true"], .wf-search-btn.active{
+  color:var(--brass); border-color:var(--brass-deep); background:var(--brass-wash)}
+.wf-q{font-family:var(--mono); font-size:11px; max-width:118px;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.wf-search-x{
+  margin-left:4px; width:18px; height:18px; border-radius:50%; flex:none;
+  background:transparent; border:1px solid var(--rule-2); color:var(--ink-3);
+  line-height:1; cursor:pointer;
+}
+.wf-search-x:hover{color:var(--gap); border-color:var(--gap)}
+.wf-pop{
+  position:absolute; top:calc(100% + 8px); left:0; z-index:45;
+  width:min(330px, 82vw); padding:10px;
+  background:var(--panel-hi); border:1px solid var(--rule-2); border-radius:12px;
+  box-shadow:0 18px 40px rgba(0,0,0,.55);
+}
+.wf-pop[hidden]{display:none}
+.wf-pop .text-input{width:100%}
+.wf-pop-hits{max-height:264px; overflow-y:auto; margin-top:8px}
+.wf-hit{
+  display:flex; align-items:center; gap:9px; width:100%; text-align:left;
+  padding:5px 6px; border:0; background:transparent; border-radius:8px;
+  color:var(--ink-2); font-size:12.5px; cursor:pointer;
+}
+.wf-hit:hover{background:var(--sunk); color:var(--ink)}
+.wf-hit img{width:26px; height:26px; flex:none}
+.wf-hit-none{padding:8px 6px; font-size:12px; color:var(--ink-3)}
 .prov{
   font-family:var(--mono); font-size:9px; letter-spacing:.06em; padding:2px 6px;
   border-radius:99px; flex:none; text-transform:uppercase;
@@ -1384,9 +1425,9 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   .term{grid-template-columns:48px 1fr auto; gap:8px}
   .drawer{max-height:72vh; padding:14px 14px 18px}
 
-  /* --- filters: stacked search, bigger touch targets --- */
-  .wf-filter-row{flex-direction:column}
-  .wf-filter-row select{flex:none; width:100%}
+  /* --- filters: bigger touch targets (the row wraps on its own) --- */
+  .wf-bar select{flex:1 1 100%}
+  .wf-search-btn{padding:8px 12px}
   .pgroup-t{padding:10px 15px; font-size:10.5px}
   .pchip{padding:8px 13px; font-size:11px}
 
@@ -1478,11 +1519,27 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
            "is meant to replace the party section below") — the roster,
            its notes and the kit editor all live in the wheel foot now -->
       <div class="ws-center">
-        <div class="sec-label">Add weapon</div>
-        <div class="wheel-filters">
-          <div class="wf-filter-row">
-            <select id="tree-filter" aria-label="Filter by weapon tree"></select>
-            <input class="text-input" id="pick-filter" placeholder="filter — type a weapon name" aria-label="Filter weapons" autocomplete="off">
+        <!-- ONE tight row (owner 2026-09-02): kicker, tree, search, facets.
+             The text filter lives behind the search icon, but an active
+             query stays ON the button - a silently narrowed wheel with no
+             visible cause was the thing to avoid. -->
+        <div class="wf-bar">
+          <span class="wf-kicker">Add weapon</span>
+          <select id="tree-filter" aria-label="Filter by weapon tree"></select>
+          <div class="wf-search">
+            <button class="wf-search-btn" id="pick-search-btn" aria-expanded="false"
+              aria-controls="pick-search-pop" title="search weapons — press /">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+              <span class="wf-q" id="pick-search-q" hidden></span>
+            </button>
+            <button class="wf-search-x" id="pick-search-clear" hidden
+              aria-label="Clear the weapon search">&times;</button>
+            <div class="wf-pop" id="pick-search-pop" hidden>
+              <input class="text-input" id="pick-filter" placeholder="type a weapon name"
+                aria-label="Filter weapons" autocomplete="off">
+              <div class="wf-pop-hits" id="pick-search-hits"></div>
+            </div>
           </div>
           <div id="picker-chips"></div>
           <div id="facet-slot"></div>

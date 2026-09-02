@@ -844,6 +844,40 @@ function renderTreeFilter(){
    an old permalink still loads and scores, but must never be offered. */
 const WEAPONS_BY_NAME = Object.keys(WEAPONS).filter(w => !WEAPONS[w].removed)
   .sort((a,b) => nameOf(a).localeCompare(nameOf(b)));
+/* ---- the add-weapon search -------------------------------------------
+   The icon opens a popover listing live hits; the wheel still filters
+   behind it. Hits are plain [data-add] buttons, so they go through the
+   central roster-mutation handler like every other add. */
+function setPickSearch(open){
+  const pop = $("pick-search-pop"), btn = $("pick-search-btn");
+  if (!pop || !btn) return;
+  pop.hidden = !open;
+  btn.setAttribute("aria-expanded", String(!!open));
+  if (open){ renderPickHits(); $("pick-filter").focus(); }
+}
+function renderPickHits(){
+  const box = $("pick-search-hits");
+  if (!box || $("pick-search-pop").hidden) return;
+  const keys = filteredWeapons().slice(0, 40);
+  box.innerHTML = keys.length
+    ? keys.map(w => `<button class="wf-hit" data-add="${w}">${icon(w, 26)}<span>${nameOf(w)}</span></button>`).join("")
+    : `<div class="wf-hit-none">no weapon matches that</div>`;
+}
+/* an active query rides the button - a narrowed wheel always shows why */
+function syncPickSearch(){
+  const q = $("pick-search-q"), x = $("pick-search-clear"), btn = $("pick-search-btn");
+  if (!q || !x || !btn) return;
+  const on = !!pickFilter;
+  q.hidden = !on; x.hidden = !on;
+  q.textContent = pickFilter;
+  btn.classList.toggle("active", on);
+}
+/* click anywhere outside the search closes it */
+document.addEventListener("click", e => {
+  const pop = $("pick-search-pop");
+  if (pop && !pop.hidden && !e.target.closest(".wf-search")) setPickSearch(false);
+});
+
 function filteredWeapons(){
   const q = pickFilter.trim().toLowerCase();
   return WEAPONS_BY_NAME
@@ -2351,8 +2385,17 @@ document.addEventListener("click", e => {
   }
   const det = e.target.closest("[data-detail]");
   if (det){ renderDetail(det.dataset.detail); return; }
+  if (e.target.closest("#pick-search-clear")){
+    pickFilter = ""; $("pick-filter").value = "";
+    renderWheel(RECS_CUR); renderPickHits(); syncPickSearch(); return;
+  }
+  if (e.target.closest("#pick-search-btn")){
+    setPickSearch($("pick-search-pop").hidden); return;
+  }
   const add = e.target.closest("[data-add]");
-  if (add){ if (party.length < HARD_CAP){
+  if (add){ /* adding from the popover dismisses it */
+    if (add.closest("#pick-search-pop")) setPickSearch(false);
+    if (party.length < HARD_CAP){
     party.push(add.dataset.add);
     PROV.push("m"); COMBO.push(null); FORGE_NOTE = null;
     loadoutInsert(party.length - 1);   /* prefill from the caller reference */
@@ -2548,7 +2591,10 @@ document.addEventListener("input", e => {
     if (box){ box.focus(); try { box.setSelectionRange(at, at); } catch (err) { /* type=search */ } }
     return;
   }
-  if (e.target.id === "pick-filter"){ pickFilter = e.target.value; renderWheel(RECS_CUR); }
+  if (e.target.id === "pick-filter"){
+    pickFilter = e.target.value; renderWheel(RECS_CUR);
+    renderPickHits(); syncPickSearch();
+  }
 });
 document.addEventListener("keydown", e => {
   if ((e.key === "Enter" || e.key === " ")
@@ -2558,10 +2604,15 @@ document.addEventListener("keydown", e => {
        Enter/Space do nothing (and would otherwise trigger the outer add) */
     e.preventDefault(); e.target.click(); return;
   }
-  if (e.key === "Escape"){ $("drawer").dataset.open = "false"; return; }
+  if (e.key === "Escape"){
+    /* the search popover is the innermost dismissable thing */
+    if (!$("pick-search-pop").hidden){
+      setPickSearch(false); $("pick-search-btn").focus(); return; }
+    $("drawer").dataset.open = "false"; return;
+  }
   /* "/" jumps to the weapon filter from anywhere outside a text field */
   if (e.key === "/" && !e.target.closest("input,select,textarea")){
-    e.preventDefault(); $("pick-filter").focus();
+    e.preventDefault(); setPickSearch(true);
   }
 });
 /* Enter in the filter adds the top match — repeatable for duplicate picks */

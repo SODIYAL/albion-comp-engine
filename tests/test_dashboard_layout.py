@@ -184,6 +184,19 @@ for cls in ["dl-need", "dl-chain-card", "dl-pick"]:
 check(".dl-col3{" in LAYOUT or ".dl-col3," in LAYOUT,
       "L10c .dl-col3 placed by _layout.css")
 
+print("L11 - the add-weapon bar is one row")
+
+check('class="wf-bar"' in SHELL, "L11a single-row bar exists")
+check("wheel-filters" not in SHELL, "L11b the stacked filter wrapper is gone")
+check("wf-filter-row" not in SHELL, "L11c its row wrapper is gone too")
+check('id="pick-filter"' in SHELL, "L11d the live filter input survives")
+check(SHELL.count('id="pick-filter"') == 1, "L11e and is not duplicated")
+check("setPickSearch" in APP, "L11f search popover has a state machine")
+# an active query must stay visible - a silently narrowed wheel was the risk
+check("syncPickSearch" in APP, "L11g an active query is mirrored onto the button")
+check('id="pick-search-q"' in SHELL, "L11h the button carries the query text")
+
+
 if FAILURES:
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
     sys.exit(1)
