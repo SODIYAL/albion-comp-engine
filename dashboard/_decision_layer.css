@@ -114,8 +114,11 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-whynot.negative .dl-kicker,.dl-whynot.negative li::before{color:var(--gap)}
 .dl-score-dim{color:var(--amber)}
 .dl-alt-dim{opacity:.62}.dl-alt-dim .dl-alt-sc{color:var(--amber)}
-/* Add is inline beside the name now, not a full-width footer button */
-.dl-add{flex:none;margin:0;padding:6px 12px;font-size:11.5px;white-space:nowrap}
+/* Add sits at the column's right edge, not against the name - butted up to
+   the title it read as part of the wordmark rather than as an action. The
+   name keeps its own width so the gap between them stays inert: clicking
+   the whitespace must not open the evidence drawer. */
+.dl-add{flex:none;margin:0 0 0 auto;padding:6px 13px;font-size:11.5px;white-space:nowrap;align-self:center}
 .dl-empty{grid-column:1/-1;grid-row:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px}.dl-empty p{margin:4px 0 0;color:var(--ink-2);font-size:12.5px}
 /* Deep diagnostics remain below the hero, but their heading says what they are. */
 #groups{margin-top:-4px}
