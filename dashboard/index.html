@@ -811,26 +811,26 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
    and kit/dossier/remove actions — renderWheelFoot fills #pdash-body. */
 /* one column per role section — full-width tiles read in one scan, and
    the 256px popover fits the panel without horizontal clipping */
-.pdash .wf-comp{grid-template-columns:1fr; max-width:none; gap:7px}
-.pdash .wf-notes{max-width:none}
+.epanel .wf-comp{grid-template-columns:1fr; max-width:none; gap:7px}
+.epanel .wf-notes{max-width:none}
 /* the whole party fits the viewport at once: tiles are compact and their
    height divides the available run by the member count (--pdn, stamped by
    renderWheelFoot), clamped so they never balloon or become unreadable */
-.pdash .wf-col{gap:2px; padding:6px 8px 7px; border-radius:10px}
-.pdash .wf-col-h{margin-bottom:2px}
-.pdash .wf-mcard{
+.epanel .wf-col{gap:2px; padding:6px 8px 7px; border-radius:10px}
+.epanel .wf-col-h{margin-bottom:2px}
+.epanel .wf-mcard{
   min-height:clamp(30px, calc((100vh - 330px) / max(var(--pdn, 15), 1)), 42px);
   gap:8px; padding:2px 7px; border-radius:8px;
 }
-.pdash .wf-mcard .icon{width:28px; height:28px}
-.pdash .wf-mnm{font-size:12px}
-.pdash .wf-mnm small{margin-top:0}
+.epanel .wf-mcard .icon{width:28px; height:28px}
+.epanel .wf-mnm{font-size:12px}
+.epanel .wf-mnm small{margin-top:0}
 /* popovers open BELOW the tile: above would clip at the panel's top edge,
    below just extends the scrollable area (touch widths — the tap-sheet
    path; on hover widths the kit flyout replaces them entirely) */
-.pdash .dm-pop{bottom:auto; top:calc(100% + 10px); z-index:46}
-.pdash .dm-pop::after{top:auto; bottom:100%}
-@media (min-width:961px){ .pdash .wf-comp .dm-pop{display:none} }
+.epanel .dm-pop{bottom:auto; top:calc(100% + 10px); z-index:46}
+.epanel .dm-pop::after{top:auto; bottom:100%}
+@media (min-width:961px){ .epanel .wf-comp .dm-pop{display:none} }
 
 /* -- the kit flyout: ONE hover surface left of the dash — worn kit,
    scored spells, role and fit on top, then the member's FULL dossier
@@ -906,9 +906,9 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 }
 .wf-x:hover{color:var(--gap); border-color:var(--gap); background:var(--gap-wash)}
 @media (hover:hover){
-  .pdash .wf-dm{position:relative}
-  .pdash .wf-dm:hover .wf-x, .pdash .wf-dm:focus-within .wf-x{display:inline-flex}
-  .pdash .wf-dm:hover .wf-mcard .n{opacity:0}
+  .epanel .wf-dm{position:relative}
+  .epanel .wf-dm:hover .wf-x, .epanel .wf-dm:focus-within .wf-x{display:inline-flex}
+  .epanel .wf-dm:hover .wf-mcard .n{opacity:0}
 }
 
 /* ---------- capability readout ---------- */
@@ -1687,28 +1687,58 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 
 .ws-center{min-width:0; container-type:inline-size}
 
-.pdash{
-  position:fixed; top:0; right:0; bottom:0; z-index:40;
-  width:min(430px, 92vw); transform:translateX(100%);
+/* ---------- edge panels ----------
+   One component for every viewport-edge flyout. Fixed, so a shut panel
+   costs ZERO layout: the content grid always gets the full viewport.
+   Tabs stack in an .epanel-rail per edge; adding a surface is one <button>
+   plus one <aside>. Generalised from .pdash 2026-09-02. */
+.epanel{
+  position:fixed; top:0; bottom:0; z-index:40;
+  width:min(430px, 92vw);
   transition:transform .32s var(--ease);
   background:rgba(13,16,22,.97); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-  border-left:1px solid var(--rule-2); box-shadow:-20px 0 44px rgba(0,0,0,.5);
+  box-shadow:0 0 44px rgba(0,0,0,.5);
   display:flex; flex-direction:column;
 }
-.pdash[data-open="true"]{transform:none}
-.pdash-tab{
-  position:absolute; top:50%; right:100%; transform:translateY(-50%);
+.epanel[data-edge="right"]{right:0; transform:translateX(100%); border-left:1px solid var(--rule-2)}
+.epanel[data-edge="left"]{left:0; transform:translateX(-100%); border-right:1px solid var(--rule-2)}
+.epanel[data-open="true"]{transform:none}
+.epanel-body{overflow-y:auto; padding:12px 12px 18px; flex:1}
+.epanel-empty{padding:6px 2px}
+
+/* the tab rails: one stacked column of tabs per edge, centred vertically
+   and pinned OUTSIDE the panel so they stay reachable when it is shut */
+.epanel-rail{
+  position:fixed; top:50%; transform:translateY(-50%); z-index:41;
+  display:flex; flex-direction:column; gap:8px;
+}
+.epanel-rail[data-edge="right"]{right:0}
+.epanel-rail[data-edge="left"]{left:0}
+.epanel-tab{
   writing-mode:vertical-rl; padding:16px 8px;
   font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
   color:var(--brass); background:linear-gradient(90deg, var(--panel-hi), var(--panel-lo));
-  border:1px solid var(--rule-2); border-right:0; border-radius:10px 0 0 10px;
-  box-shadow:-8px 0 18px rgba(0,0,0,.4); cursor:pointer;
+  border:1px solid var(--rule-2); cursor:pointer;
   transition:color .18s var(--ease), border-color .18s var(--ease);
 }
-.pdash-tab b{color:var(--ink); font-weight:600}
-.pdash-tab:hover{color:var(--brass-bright); border-color:var(--brass-deep)}
-.pdash-body{overflow-y:auto; padding:12px 12px 18px; flex:1}
-.pdash-empty{padding:6px 2px}
+.epanel-rail[data-edge="right"] .epanel-tab{
+  border-right:0; border-radius:10px 0 0 10px; box-shadow:-8px 0 18px rgba(0,0,0,.4)}
+.epanel-rail[data-edge="left"] .epanel-tab{
+  border-left:0; border-radius:0 10px 10px 0; box-shadow:8px 0 18px rgba(0,0,0,.4)}
+.epanel-tab b{color:var(--ink); font-weight:600}
+.epanel-tab:hover{color:var(--brass-bright); border-color:var(--brass-deep)}
+/* phones: panels are bottom sheets, rails a horizontal row above them */
+@media (max-width:960px){
+  .epanel{left:0; right:0; top:auto; bottom:0; width:auto; max-height:76vh;
+    border:1px solid var(--rule-2); border-bottom:0; border-radius:14px 14px 0 0}
+  .epanel[data-edge="left"], .epanel[data-edge="right"]{transform:translateY(100%)}
+  .epanel[data-open="true"]{transform:none}
+  .epanel-rail{top:auto; bottom:0; transform:none; flex-direction:row;
+    justify-content:center; width:100%; gap:6px}
+  .epanel-rail[data-edge="left"], .epanel-rail[data-edge="right"]{left:0; right:0}
+  .epanel-tab{writing-mode:horizontal-tb; padding:7px 12px; border-radius:8px 8px 0 0;
+    border:1px solid var(--rule-2); border-bottom:0}
+}
 
 /* the phone setup summary bar (hidden on desktop) */
 .msetup{display:none}
@@ -1958,11 +1988,17 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   </main>
 </div>
 
-<!-- Party dash: the comp board in a right-edge pop-out, toggled by its tab -->
-<aside class="pdash" id="pdash" data-open="false" aria-label="Party board">
-  <button class="pdash-tab" id="pdash-toggle" aria-expanded="false"
+<!-- edge panel rails: one stacked tab column per viewport edge. Tabs are
+     addressed by data-panel, so adding a surface is one button + one aside. -->
+<div class="epanel-rail" data-edge="left"></div>
+<div class="epanel-rail" data-edge="right">
+  <button class="epanel-tab" data-panel="pdash" aria-expanded="false"
     title="show or hide the party board">party <b id="pdash-count">0/0</b></button>
-  <div class="pdash-body" id="pdash-body"></div>
+</div>
+
+<!-- Party dash: the comp board in a right-edge pop-out, toggled by its tab -->
+<aside class="epanel" data-edge="right" data-open="false" id="pdash" aria-label="Party board">
+  <div class="epanel-body" id="pdash-body"></div>
   <!-- kit flyout: fills on hover over a member tile (showPdashFly) -->
   <div class="pdash-fly" id="pdash-fly" hidden></div>
 </aside>
@@ -6566,11 +6602,7 @@ function hidePdashFly(){
 function closePdash(){
   hidePdashFly();
   const pd = $("pdash");
-  if (pd && pd.dataset.open === "true"){
-    pd.dataset.open = "false";
-    const t = $("pdash-toggle");
-    if (t) t.setAttribute("aria-expanded", "false");
-  }
+  if (pd && pd.dataset.open === "true") setPanel("pdash", false);
 }
 {
   const pd = $("pdash");
@@ -6907,7 +6939,7 @@ function renderWheelFoot(keys, recs, rings){
   if (dash){
     dash.innerHTML = board
       ? board + (NOTES_HTML ? `<div class="roster-notes wf-notes">${NOTES_HTML}</div>` : "")
-      : `<div class="pdash-empty fn">No members yet — spin the wheel and add picks, or forge a full comp.</div>`;
+      : `<div class="epanel-empty fn">No members yet — spin the wheel and add picks, or forge a full comp.</div>`;
     const pc = $("pdash-count");
     if (pc) pc.textContent = `${party.length}/${PLAN()}`;
     /* tile height divides the viewport by the member count (see .pdash CSS) */
@@ -7988,6 +8020,27 @@ function setRail(min){
   try { localStorage.setItem(RAIL_KEY, min ? "min" : ""); } catch (e) { /* private mode */ }
 }
 
+/* Edge panels: one state machine for every viewport-edge flyout. State is
+   data-open on the panel, mirrored to its tab's aria-expanded, persisted so
+   the layout choice survives reloads. Display only. */
+function setPanel(id, open){
+  const p = $(id);
+  if (!p) return;
+  p.dataset.open = open ? "true" : "false";
+  const tab = document.querySelector('.epanel-tab[data-panel="' + id + '"]');
+  if (tab) tab.setAttribute("aria-expanded", String(!!open));
+  try { localStorage.setItem("epanel:" + id, open ? "1" : ""); }
+  catch (e) { /* private mode */ }
+}
+function restorePanels(){
+  document.querySelectorAll(".epanel").forEach(p => {
+    let v = "";
+    try { v = localStorage.getItem("epanel:" + p.id) || ""; }
+    catch (e) { /* private mode */ }
+    setPanel(p.id, v === "1");
+  });
+}
+
 document.addEventListener("click", e => {
   /* loadout layer first: its controls live inside party rows, so a later
      [data-remove]/[data-detail] match must not swallow them */
@@ -8170,10 +8223,10 @@ document.addEventListener("click", e => {
     $("msetup").setAttribute("aria-expanded", String(!open));
     return;
   }
-  if (e.target.closest("#pdash-toggle")){
-    const d = $("pdash"), open = d.dataset.open === "true";
-    d.dataset.open = open ? "false" : "true";
-    $("pdash-toggle").setAttribute("aria-expanded", String(!open));
+  const etab = e.target.closest(".epanel-tab");
+  if (etab){
+    const id = etab.dataset.panel;
+    setPanel(id, $(id).dataset.open !== "true");
     return;
   }
   if (e.target.closest("#companion-connect")){ toggleCompanion(); return; }
@@ -8407,6 +8460,7 @@ if (!loadHash() && !loadStored()){
   sortPartyByRole();
 }
 try { if (localStorage.getItem(RAIL_KEY) === "min") setRail(true); } catch (e) { /* private mode */ }
+restorePanels();
 renderTreeFilter();
 syncEngine();
 render();

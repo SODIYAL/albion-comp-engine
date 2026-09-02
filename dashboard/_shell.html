@@ -811,26 +811,26 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
    and kit/dossier/remove actions — renderWheelFoot fills #pdash-body. */
 /* one column per role section — full-width tiles read in one scan, and
    the 256px popover fits the panel without horizontal clipping */
-.pdash .wf-comp{grid-template-columns:1fr; max-width:none; gap:7px}
-.pdash .wf-notes{max-width:none}
+.epanel .wf-comp{grid-template-columns:1fr; max-width:none; gap:7px}
+.epanel .wf-notes{max-width:none}
 /* the whole party fits the viewport at once: tiles are compact and their
    height divides the available run by the member count (--pdn, stamped by
    renderWheelFoot), clamped so they never balloon or become unreadable */
-.pdash .wf-col{gap:2px; padding:6px 8px 7px; border-radius:10px}
-.pdash .wf-col-h{margin-bottom:2px}
-.pdash .wf-mcard{
+.epanel .wf-col{gap:2px; padding:6px 8px 7px; border-radius:10px}
+.epanel .wf-col-h{margin-bottom:2px}
+.epanel .wf-mcard{
   min-height:clamp(30px, calc((100vh - 330px) / max(var(--pdn, 15), 1)), 42px);
   gap:8px; padding:2px 7px; border-radius:8px;
 }
-.pdash .wf-mcard .icon{width:28px; height:28px}
-.pdash .wf-mnm{font-size:12px}
-.pdash .wf-mnm small{margin-top:0}
+.epanel .wf-mcard .icon{width:28px; height:28px}
+.epanel .wf-mnm{font-size:12px}
+.epanel .wf-mnm small{margin-top:0}
 /* popovers open BELOW the tile: above would clip at the panel's top edge,
    below just extends the scrollable area (touch widths — the tap-sheet
    path; on hover widths the kit flyout replaces them entirely) */
-.pdash .dm-pop{bottom:auto; top:calc(100% + 10px); z-index:46}
-.pdash .dm-pop::after{top:auto; bottom:100%}
-@media (min-width:961px){ .pdash .wf-comp .dm-pop{display:none} }
+.epanel .dm-pop{bottom:auto; top:calc(100% + 10px); z-index:46}
+.epanel .dm-pop::after{top:auto; bottom:100%}
+@media (min-width:961px){ .epanel .wf-comp .dm-pop{display:none} }
 
 /* -- the kit flyout: ONE hover surface left of the dash — worn kit,
    scored spells, role and fit on top, then the member's FULL dossier
@@ -906,9 +906,9 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 }
 .wf-x:hover{color:var(--gap); border-color:var(--gap); background:var(--gap-wash)}
 @media (hover:hover){
-  .pdash .wf-dm{position:relative}
-  .pdash .wf-dm:hover .wf-x, .pdash .wf-dm:focus-within .wf-x{display:inline-flex}
-  .pdash .wf-dm:hover .wf-mcard .n{opacity:0}
+  .epanel .wf-dm{position:relative}
+  .epanel .wf-dm:hover .wf-x, .epanel .wf-dm:focus-within .wf-x{display:inline-flex}
+  .epanel .wf-dm:hover .wf-mcard .n{opacity:0}
 }
 
 /* ---------- capability readout ---------- */
@@ -1545,11 +1545,17 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   </main>
 </div>
 
-<!-- Party dash: the comp board in a right-edge pop-out, toggled by its tab -->
-<aside class="pdash" id="pdash" data-open="false" aria-label="Party board">
-  <button class="pdash-tab" id="pdash-toggle" aria-expanded="false"
+<!-- edge panel rails: one stacked tab column per viewport edge. Tabs are
+     addressed by data-panel, so adding a surface is one button + one aside. -->
+<div class="epanel-rail" data-edge="left"></div>
+<div class="epanel-rail" data-edge="right">
+  <button class="epanel-tab" data-panel="pdash" aria-expanded="false"
     title="show or hide the party board">party <b id="pdash-count">0/0</b></button>
-  <div class="pdash-body" id="pdash-body"></div>
+</div>
+
+<!-- Party dash: the comp board in a right-edge pop-out, toggled by its tab -->
+<aside class="epanel" data-edge="right" data-open="false" id="pdash" aria-label="Party board">
+  <div class="epanel-body" id="pdash-body"></div>
   <!-- kit flyout: fills on hover over a member tile (showPdashFly) -->
   <div class="pdash-fly" id="pdash-fly" hidden></div>
 </aside>

@@ -73,7 +73,7 @@ check(
 print("L3 - one home per layout rule")
 
 OWNED = [".shell{", ".main{", ".wheelstage{", ".ws-flank{", ".ws-center{",
-         ".pdash{", ".pdash-tab{", ".pdash-body{"]
+         ".epanel{", ".epanel-tab{", ".epanel-body{"]
 for sel in OWNED:
     check(sel in LAYOUT, "L3a %s defined in _layout.css" % sel)
     check(sel not in SHELL, "L3b %s NOT left in _shell.html" % sel)
@@ -85,6 +85,24 @@ for marker in ["display:contents", ".ws-right", ".wheelstage", "min-width:1251px
     check(marker not in DECISION_CSS,
           "L3d page-grid marker %s absent from _decision_layer.css" % marker,
           "component grids are fine here; the page grid belongs to _layout.css")
+
+print("L4 - the edge-panel component")
+
+check(".epanel{" in LAYOUT, "L4a .epanel defined in _layout.css")
+check(".epanel-tab{" in LAYOUT, "L4b .epanel-tab defined in _layout.css")
+check('data-edge="right"' in LAYOUT, "L4c right edge styled")
+check('data-edge="left"' in LAYOUT, "L4d left edge styled")
+
+panels = re.findall(r'<aside class="epanel"[^>]*id="([a-z-]+)"', SHELL)
+tabs = set(re.findall(r'class="epanel-tab"[^>]*data-panel="([a-z-]+)"', SHELL))
+check(bool(panels), "L4e at least one .epanel exists in the markup")
+for p in panels:
+    check(p in tabs, "L4f panel %s has a tab" % p)
+for m in re.finditer(r'<aside class="epanel"([^>]*)>', SHELL):
+    check("data-edge=" in m.group(1), "L4g every .epanel declares data-edge")
+
+check("setPanel" in APP, "L4h _app.js defines setPanel")
+check('"epanel:"' in APP, "L4i panel state persists under an epanel: key")
 
 if FAILURES:
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))

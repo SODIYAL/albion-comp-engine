@@ -128,28 +128,58 @@
 
 .ws-center{min-width:0; container-type:inline-size}
 
-.pdash{
-  position:fixed; top:0; right:0; bottom:0; z-index:40;
-  width:min(430px, 92vw); transform:translateX(100%);
+/* ---------- edge panels ----------
+   One component for every viewport-edge flyout. Fixed, so a shut panel
+   costs ZERO layout: the content grid always gets the full viewport.
+   Tabs stack in an .epanel-rail per edge; adding a surface is one <button>
+   plus one <aside>. Generalised from .pdash 2026-09-02. */
+.epanel{
+  position:fixed; top:0; bottom:0; z-index:40;
+  width:min(430px, 92vw);
   transition:transform .32s var(--ease);
   background:rgba(13,16,22,.97); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-  border-left:1px solid var(--rule-2); box-shadow:-20px 0 44px rgba(0,0,0,.5);
+  box-shadow:0 0 44px rgba(0,0,0,.5);
   display:flex; flex-direction:column;
 }
-.pdash[data-open="true"]{transform:none}
-.pdash-tab{
-  position:absolute; top:50%; right:100%; transform:translateY(-50%);
+.epanel[data-edge="right"]{right:0; transform:translateX(100%); border-left:1px solid var(--rule-2)}
+.epanel[data-edge="left"]{left:0; transform:translateX(-100%); border-right:1px solid var(--rule-2)}
+.epanel[data-open="true"]{transform:none}
+.epanel-body{overflow-y:auto; padding:12px 12px 18px; flex:1}
+.epanel-empty{padding:6px 2px}
+
+/* the tab rails: one stacked column of tabs per edge, centred vertically
+   and pinned OUTSIDE the panel so they stay reachable when it is shut */
+.epanel-rail{
+  position:fixed; top:50%; transform:translateY(-50%); z-index:41;
+  display:flex; flex-direction:column; gap:8px;
+}
+.epanel-rail[data-edge="right"]{right:0}
+.epanel-rail[data-edge="left"]{left:0}
+.epanel-tab{
   writing-mode:vertical-rl; padding:16px 8px;
   font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
   color:var(--brass); background:linear-gradient(90deg, var(--panel-hi), var(--panel-lo));
-  border:1px solid var(--rule-2); border-right:0; border-radius:10px 0 0 10px;
-  box-shadow:-8px 0 18px rgba(0,0,0,.4); cursor:pointer;
+  border:1px solid var(--rule-2); cursor:pointer;
   transition:color .18s var(--ease), border-color .18s var(--ease);
 }
-.pdash-tab b{color:var(--ink); font-weight:600}
-.pdash-tab:hover{color:var(--brass-bright); border-color:var(--brass-deep)}
-.pdash-body{overflow-y:auto; padding:12px 12px 18px; flex:1}
-.pdash-empty{padding:6px 2px}
+.epanel-rail[data-edge="right"] .epanel-tab{
+  border-right:0; border-radius:10px 0 0 10px; box-shadow:-8px 0 18px rgba(0,0,0,.4)}
+.epanel-rail[data-edge="left"] .epanel-tab{
+  border-left:0; border-radius:0 10px 10px 0; box-shadow:8px 0 18px rgba(0,0,0,.4)}
+.epanel-tab b{color:var(--ink); font-weight:600}
+.epanel-tab:hover{color:var(--brass-bright); border-color:var(--brass-deep)}
+/* phones: panels are bottom sheets, rails a horizontal row above them */
+@media (max-width:960px){
+  .epanel{left:0; right:0; top:auto; bottom:0; width:auto; max-height:76vh;
+    border:1px solid var(--rule-2); border-bottom:0; border-radius:14px 14px 0 0}
+  .epanel[data-edge="left"], .epanel[data-edge="right"]{transform:translateY(100%)}
+  .epanel[data-open="true"]{transform:none}
+  .epanel-rail{top:auto; bottom:0; transform:none; flex-direction:row;
+    justify-content:center; width:100%; gap:6px}
+  .epanel-rail[data-edge="left"], .epanel-rail[data-edge="right"]{left:0; right:0}
+  .epanel-tab{writing-mode:horizontal-tb; padding:7px 12px; border-radius:8px 8px 0 0;
+    border:1px solid var(--rule-2); border-bottom:0}
+}
 
 /* the phone setup summary bar (hidden on desktop) */
 .msetup{display:none}

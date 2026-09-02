@@ -788,11 +788,7 @@ function hidePdashFly(){
 function closePdash(){
   hidePdashFly();
   const pd = $("pdash");
-  if (pd && pd.dataset.open === "true"){
-    pd.dataset.open = "false";
-    const t = $("pdash-toggle");
-    if (t) t.setAttribute("aria-expanded", "false");
-  }
+  if (pd && pd.dataset.open === "true") setPanel("pdash", false);
 }
 {
   const pd = $("pdash");
@@ -1129,7 +1125,7 @@ function renderWheelFoot(keys, recs, rings){
   if (dash){
     dash.innerHTML = board
       ? board + (NOTES_HTML ? `<div class="roster-notes wf-notes">${NOTES_HTML}</div>` : "")
-      : `<div class="pdash-empty fn">No members yet — spin the wheel and add picks, or forge a full comp.</div>`;
+      : `<div class="epanel-empty fn">No members yet — spin the wheel and add picks, or forge a full comp.</div>`;
     const pc = $("pdash-count");
     if (pc) pc.textContent = `${party.length}/${PLAN()}`;
     /* tile height divides the viewport by the member count (see .pdash CSS) */
@@ -2210,6 +2206,27 @@ function setRail(min){
   try { localStorage.setItem(RAIL_KEY, min ? "min" : ""); } catch (e) { /* private mode */ }
 }
 
+/* Edge panels: one state machine for every viewport-edge flyout. State is
+   data-open on the panel, mirrored to its tab's aria-expanded, persisted so
+   the layout choice survives reloads. Display only. */
+function setPanel(id, open){
+  const p = $(id);
+  if (!p) return;
+  p.dataset.open = open ? "true" : "false";
+  const tab = document.querySelector('.epanel-tab[data-panel="' + id + '"]');
+  if (tab) tab.setAttribute("aria-expanded", String(!!open));
+  try { localStorage.setItem("epanel:" + id, open ? "1" : ""); }
+  catch (e) { /* private mode */ }
+}
+function restorePanels(){
+  document.querySelectorAll(".epanel").forEach(p => {
+    let v = "";
+    try { v = localStorage.getItem("epanel:" + p.id) || ""; }
+    catch (e) { /* private mode */ }
+    setPanel(p.id, v === "1");
+  });
+}
+
 document.addEventListener("click", e => {
   /* loadout layer first: its controls live inside party rows, so a later
      [data-remove]/[data-detail] match must not swallow them */
@@ -2392,10 +2409,10 @@ document.addEventListener("click", e => {
     $("msetup").setAttribute("aria-expanded", String(!open));
     return;
   }
-  if (e.target.closest("#pdash-toggle")){
-    const d = $("pdash"), open = d.dataset.open === "true";
-    d.dataset.open = open ? "false" : "true";
-    $("pdash-toggle").setAttribute("aria-expanded", String(!open));
+  const etab = e.target.closest(".epanel-tab");
+  if (etab){
+    const id = etab.dataset.panel;
+    setPanel(id, $(id).dataset.open !== "true");
     return;
   }
   if (e.target.closest("#companion-connect")){ toggleCompanion(); return; }
@@ -2629,6 +2646,7 @@ if (!loadHash() && !loadStored()){
   sortPartyByRole();
 }
 try { if (localStorage.getItem(RAIL_KEY) === "min") setRail(true); } catch (e) { /* private mode */ }
+restorePanels();
 renderTreeFilter();
 syncEngine();
 render();
