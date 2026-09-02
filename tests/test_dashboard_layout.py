@@ -160,6 +160,30 @@ check('id="supply-sec"' in SHELL, "L8e capability supply section is placeable")
 for sel in ["#supply-sec", "#warn-slot", "#meta-sec"]:
     check(sel.lstrip("#.") in SHELL, "L8f grid target %s exists in markup" % sel)
 
+print("L9 - kill pressure and role check are cards")
+
+check("killPressureCard" in DECISION_JS, "L9a killPressureCard defined")
+check("roleCard" in DECISION_JS, "L9b roleCard defined")
+check("dl-kp" in DECISION_JS, "L9c .dl-kp rendered")
+check("dl-roles" in DECISION_JS, "L9d .dl-roles rendered")
+check(".dl-kp" in DECISION_CSS, "L9e .dl-kp chrome in _decision_layer.css")
+check(".dl-roles" in DECISION_CSS, "L9f .dl-roles chrome in _decision_layer.css")
+check(".dl-kp{" not in LAYOUT, "L9g .dl-kp chrome is NOT in _layout.css")
+tip = DECISION_JS[DECISION_JS.index("function centerTipHtml"):]
+tip = tip[:tip.index("function roleAdvisory")]
+check("ENG.killPressure" not in tip,
+      "L9h centerTipHtml no longer calls the engine directly",
+      "it must go through the shared helper so tooltip and card agree")
+
+print("L10 - the pick card is split into three")
+
+check("dl-col3" in DECISION_JS, "L10a column wrapper emitted")
+for cls in ["dl-need", "dl-chain-card", "dl-pick"]:
+    check('"%s"' % cls in DECISION_JS or 'class="%s"' % cls in DECISION_JS,
+          "L10b %s card emitted" % cls)
+check(".dl-col3{" in LAYOUT or ".dl-col3," in LAYOUT,
+      "L10c .dl-col3 placed by _layout.css")
+
 if FAILURES:
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
     sys.exit(1)

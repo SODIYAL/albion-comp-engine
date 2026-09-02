@@ -1566,6 +1566,38 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 @media(max-width:900px){.dl-tools{grid-template-columns:1fr}}
 @media(max-width:720px){.dl-gains{grid-template-columns:1fr}.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-alt-row{grid-template-columns:1fr}.dl-empty{display:block}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
 
+/* ---- the column-3 split (owner 2026-09-02) ----
+   The pick card used to stack six answers in one frame. Now: diagnosis,
+   fight chain, the pick. Chrome only; placement lives in _layout.css. */
+.dl-need, .dl-chain-card{
+  background:var(--panel-lo); border:1px solid var(--rule); border-radius:12px;
+  padding:12px 14px;
+}
+.dl-need .dl-needline{padding-bottom:0; margin-bottom:0; border-bottom:0}
+.dl-need .dl-remain{margin-top:10px; padding-top:10px; border-top:1px solid var(--rule)}
+.dl-chain-card .dl-chain{margin:0}
+
+/* kill pressure + role check as cards (2026-09-02). Both DESCRIPTIVE - they
+   translate engine output and never feed scoring. The radar tooltip renders
+   the same models through killPressureLine()/roleLines(). */
+.dl-kp, .dl-roles{
+  background:var(--panel-lo); border:1px solid var(--rule); border-radius:12px;
+  padding:12px 14px;
+}
+.dl-kp-row{display:flex; align-items:center; gap:9px; padding:5px 0; font-size:13px}
+.dl-kp-dot{width:9px; height:9px; border-radius:50%; flex:none}
+.dl-kp-row.ok .dl-kp-dot{background:#3FD68C; box-shadow:0 0 8px rgba(63,214,140,.6)}
+.dl-kp-row.bad .dl-kp-dot{background:#E0556B; box-shadow:0 0 8px rgba(224,85,107,.6)}
+.dl-kp-row b{font-weight:600; color:var(--ink)}
+.dl-kp-n{margin-left:auto; font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.dl-role-tally{display:flex; flex-wrap:wrap; gap:5px; margin:8px 0 4px}
+.dl-role-chip{font-family:var(--mono); font-size:11px; color:var(--ink-2);
+  background:var(--sunk); border:1px solid var(--rule); border-radius:99px; padding:3px 9px}
+.dl-role-chip b{color:var(--brass); font-weight:600}
+.dl-role-flag{font-size:12px; color:#F0A63C; margin-top:6px}
+.dl-note{font-size:10px; color:var(--ink-3); margin-top:8px}
+
+
 /* LAYOUT — the single home for every rule that decides where things sit.
    Inlined LAST into _shell.html's <style> block by build.py, so these rules
    win on source order without needing !important. Component chrome (colour,
@@ -1702,6 +1734,9 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   .decision-layer{display:contents}
   .wheelstage{display:contents}
   .dl-tools{grid-template-columns:1fr 1fr}
+  /* column wrappers: their cards stack with independent heights, so a tall
+     card in one column never inflates the shared grid row of another */
+  .dl-col3, .dl-pressure{display:flex; flex-direction:column; gap:14px; min-width:0}
   .dl-status{padding:0}
   .dl-pick{padding:14px 16px}
   .dl-needline{padding-bottom:10px;margin-bottom:10px}
@@ -1726,10 +1761,9 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   .dl-status{grid-column:1; grid-row:1}
   #supply-sec{grid-column:1; grid-row:2}
   .ws-center{grid-column:2; grid-row:1/3; order:0}
-  .dl-pick{grid-column:3; grid-row:1/3}
-  .dl-kp{grid-column:4; grid-row:1}
-  .dl-roles{grid-column:4; grid-row:2}
-  #warn-slot{grid-column:4; grid-row:3}
+  .dl-col3{grid-column:3; grid-row:1/3}
+  .dl-pressure{grid-column:4; grid-row:1}
+  #warn-slot{grid-column:4; grid-row:2}
   .dl-empty{grid-column:1; grid-row:1/3}
   .wheel{--wd:min(520px,100cqi)}
 }
@@ -1743,11 +1777,12 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   .dl-status{grid-column:1; grid-row:1}
   #supply-sec{grid-column:1; grid-row:2}
   .ws-center{grid-column:2; grid-row:1/3; order:0}
-  .dl-pick{grid-column:3; grid-row:1/3}
+  .dl-col3{grid-column:3; grid-row:1/3}
   .dl-empty{grid-column:1; grid-row:1/3}
-  .dl-kp{grid-column:1; grid-row:3}
-  .dl-roles{grid-column:2; grid-row:3}
-  #warn-slot{grid-column:3; grid-row:3}
+  /* the pressure pair spans the full width as one row of two cards */
+  .dl-pressure{grid-column:1/-1; grid-row:3; flex-direction:row}
+  .dl-pressure>*{flex:1 1 0}
+  #warn-slot{grid-column:1/-1; grid-row:4}
   .wheel{--wd:min(500px,100cqi)}
 }
 
@@ -1755,10 +1790,12 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 @media (min-width:1251px) and (max-width:1399px){
   .main{grid-template-columns:minmax(390px,1fr) minmax(0,1.5fr)}
   .dl-status{grid-column:1; grid-row:1}
-  .dl-pick{grid-column:1; grid-row:2}
+  .dl-col3{grid-column:1; grid-row:2}
   .dl-empty{grid-column:1; grid-row:1/3}
   .ws-center{grid-column:2; grid-row:1/3; order:0}
   #warn-slot{grid-column:2; grid-row:3}
+  .dl-pressure{grid-column:1/-1; grid-row:auto; flex-direction:row}
+  .dl-pressure>*{flex:1 1 0}
   .wheel{--wd:min(680px,100cqi)}
 }
 
@@ -8605,6 +8642,75 @@ render();
     return `<div class="dlt-head">${esc(a.g)} — ${Math.round(a.cov * 100)}% of ceiling</div>${st}${rows}`
       + `<div class="dlt-note">100% = the most any good comp fields (comp-fitted soft cap); the brass tick marks the target minimum</div>`;
   }
+  /* Kill pressure and role check are DESCRIPTIVE — they translate engine
+     output and never score. The radar tooltip and the standalone cards both
+     read these models, so the two surfaces can never disagree. */
+  function killPressureModel(){
+    if (typeof ENG.killPressure !== "function") return null;
+    const kp = ENG.killPressure(party, COMBOS_CUR);
+    if (!kp) return null;
+    const lens = k => {
+      const l = kp[k];
+      return {ok: l.ok, have: l.have, bar: l.bar,
+              pct: l.bar > 0 ? Math.round(100 * l.have / l.bar) : 100};
+    };
+    return {pierce: lens("pierce"), heal_cut: lens("heal_cut"), burst: lens("burst")};
+  }
+  const KP_LABEL = {pierce: "pierce", heal_cut: "heal-cut", burst: "burst"};
+  function killPressureLine(){
+    const kp = killPressureModel();
+    if (!kp) return "";
+    const bit = k => kp[k].ok
+      ? `<b class="dlt-ok">\u2713 ${KP_LABEL[k]}</b>`
+      : `<b class="dlt-bad">\u2717 ${KP_LABEL[k]} ${kp[k].pct}%</b>`;
+    return `<div class="dlt-line"><span>kill pressure</span><span>${
+      bit("pierce")} ${bit("heal_cut")} ${bit("burst")}</span></div>`;
+  }
+  function killPressureCard(){
+    const kp = killPressureModel();
+    if (!kp) return "";
+    const light = k => `<div class="dl-kp-row ${kp[k].ok ? "ok" : "bad"}">
+      <span class="dl-kp-dot"></span><b>${KP_LABEL[k]}</b>
+      <span class="dl-kp-n">${kp[k].ok ? "covered" : kp[k].pct + "%"}</span></div>`;
+    return `<div class="dl-kp"><span class="dl-kicker">Kill pressure \u2014 can this comp finish a target?</span>
+      ${light("pierce")}${light("heal_cut")}${light("burst")}
+      <div class="dl-note">descriptive \u2014 kill pressure never scores</div></div>`;
+  }
+  function roleShort(k){
+    const nm = (((ENG.rolesBook || {})[k]) || {}).name || k;
+    return nm.split(" / ")[0].split(" (")[0];
+  }
+  function roleFlagText(f2){
+    return f2.kind === "no_engage_tank"
+      ? "no engage tank \u2014 nobody makes a clump"
+      : `${esc(nameOf(f2.weapon))}: worn chest fights its ${esc(roleShort(f2.role).toLowerCase())} job`;
+  }
+  function roleLines(){
+    const adv = roleAdvisory();
+    if (!adv) return "";
+    let h = "";
+    const tally = Object.entries(adv.tally)
+      .map(([k, n]) => `${n}\u00d7 ${esc(roleShort(k))}`).join(" \u00b7 ");
+    if (tally) h += `<div class="dlt-line"><span>roles</span><span>${tally}</span></div>`;
+    const fns = {};
+    adv.members.forEach(m => (m.functions || []).forEach(c => { fns[c] = (fns[c] || 0) + 1; }));
+    const fnTxt = Object.entries(fns).map(([k, n]) => `${n}\u00d7 ${esc(roleShort(k))}`).join(" \u00b7 ");
+    if (fnTxt) h += `<div class="dlt-line"><span>functions</span><span>${fnTxt}</span></div>`;
+    adv.flags.forEach(f2 => { h += `<div class="dlt-warn">\u26a0 ${roleFlagText(f2)}</div>`; });
+    return h;
+  }
+  function roleCard(){
+    const adv = roleAdvisory();
+    if (!adv) return "";
+    const tally = Object.entries(adv.tally).map(([k, n]) =>
+      `<span class="dl-role-chip"><b>${n}</b> ${esc(roleShort(k))}</span>`).join("");
+    const flags = adv.flags.map(f2 =>
+      `<div class="dl-role-flag">\u26a0 ${roleFlagText(f2)}</div>`).join("");
+    return `<div class="dl-roles"><span class="dl-kicker">Role check \u2014 who is actually in this comp</span>
+      <div class="dl-role-tally">${tally}</div>${flags}
+      <div class="dl-note">descriptive \u2014 roles never score</div></div>`;
+  }
+
   function centerTipHtml(state, id, pct, f, max){
     let h = `<div class="dlt-head">${esc(state.label)}</div>`
       + `<div class="dlt-line"><span>triage</span><span>${state.critical} critical · ${state.weak} weak · ${state.excess} overstacked</span></div>`
@@ -8616,33 +8722,8 @@ render();
         ? "unfit for this playstyle at this size"
         : `pulls against the ${c.side === "melee" ? "ranged" : "melee"} core`}</div>`;
     });
-    if (typeof ENG.killPressure === "function"){
-      const kp = ENG.killPressure(party, COMBOS_CUR);
-      if (kp){
-        const bit = (k, lbl) => {
-          const l = kp[k];
-          const p = l.bar > 0 ? Math.round(100 * l.have / l.bar) : 100;
-          return l.ok ? `<b class="dlt-ok">✓ ${lbl}</b>` : `<b class="dlt-bad">✗ ${lbl} ${p}%</b>`;
-        };
-        h += `<div class="dlt-line"><span>kill pressure</span><span>${bit("pierce", "pierce")} ${bit("heal_cut", "heal-cut")} ${bit("burst", "burst")}</span></div>`;
-      }
-    }
-    const adv = roleAdvisory();
-    if (adv){
-      const label = k => (((ENG.rolesBook || {})[k]) || {}).name || k;
-      const short = k => label(k).split(" / ")[0].split(" (")[0];
-      const tally = Object.entries(adv.tally).map(([k, n]) => `${n}× ${esc(short(k))}`).join(" · ");
-      if (tally) h += `<div class="dlt-line"><span>roles</span><span>${tally}</span></div>`;
-      const fns = {};
-      adv.members.forEach(m => (m.functions || []).forEach(c => { fns[c] = (fns[c] || 0) + 1; }));
-      const fnTxt = Object.entries(fns).map(([k, n]) => `${n}× ${esc(short(k))}`).join(" · ");
-      if (fnTxt) h += `<div class="dlt-line"><span>functions</span><span>${fnTxt}</span></div>`;
-      adv.flags.forEach(f2 => {
-        h += `<div class="dlt-warn">⚠ ${f2.kind === "no_engage_tank"
-          ? "no engage tank — nobody makes a clump"
-          : `${esc(nameOf(f2.weapon))}: worn chest fights its ${esc(label(f2.role).toLowerCase())} job`}</div>`;
-      });
-    }
+    h += killPressureLine();
+    h += roleLines();
     h += `<div class="dlt-note">descriptive — identity, kill pressure and roles never score</div>`;
     return h;
   }
@@ -9052,21 +9133,31 @@ render();
           <span class="dl-alt-sc">${dim ? "◦ " : ""}${r.score.toFixed(2)}</span></button>`;
       }).join("")}</div></div>` : "";
 
+    /* three cards, not one stack (owner 2026-09-02): the diagnosis, the
+       fight chain and the pick each get their own frame. They ride a single
+       column wrapper so their heights stay independent of the grid's rows. */
     host.innerHTML = `
       <div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>
-      <div class="dl-pick">
+      <div class="dl-col3">
+      <div class="dl-need">
         ${needline}
+        ${remain}
+      </div>
+      <div class="dl-chain-card">
         ${chainLine(top)}
+      </div>
+      <div class="dl-pick">
         <div class="dl-pick-head"><span class="dl-kicker">Best next pick · slot ${Math.min(party.length + 1, HARD_CAP)}</span><span class="dl-score${top.verdict && top.verdict !== "ok" ? " dl-score-dim" : ""}">${top.score >= 0 ? "+" : ""}${top.score.toFixed(2)} comp score${top.verdict === "redundant" ? " · depth only" : top.verdict === "negative" ? " · net cost" : ""}</span></div>
         <div class="dl-weapon">${icon(top.w,72)}<div><button class="nm-btn" data-detail="${top.w}">${nameOf(top.w)}</button><span>${esc(roleOf(top.w, top.combo))}</span></div></div>
         <p>${whySentence(party, top.w)}</p>
         <ul class="dl-gains">${gains}</ul>
         ${observed}
-        ${remain}
         ${whyNotBlock(top)}
         <button class="cb-add dl-add" data-add="${top.w}">Add ${nameOf(top.w)}</button>
         ${altsHtml}
-      </div>`;
+      </div>
+      </div>
+      <div class="dl-pressure">${killPressureCard()}${roleCard()}</div>`;
     renderPlayerTools(host);
   }
 

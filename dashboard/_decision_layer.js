@@ -159,6 +159,75 @@
     return `<div class="dlt-head">${esc(a.g)} — ${Math.round(a.cov * 100)}% of ceiling</div>${st}${rows}`
       + `<div class="dlt-note">100% = the most any good comp fields (comp-fitted soft cap); the brass tick marks the target minimum</div>`;
   }
+  /* Kill pressure and role check are DESCRIPTIVE — they translate engine
+     output and never score. The radar tooltip and the standalone cards both
+     read these models, so the two surfaces can never disagree. */
+  function killPressureModel(){
+    if (typeof ENG.killPressure !== "function") return null;
+    const kp = ENG.killPressure(party, COMBOS_CUR);
+    if (!kp) return null;
+    const lens = k => {
+      const l = kp[k];
+      return {ok: l.ok, have: l.have, bar: l.bar,
+              pct: l.bar > 0 ? Math.round(100 * l.have / l.bar) : 100};
+    };
+    return {pierce: lens("pierce"), heal_cut: lens("heal_cut"), burst: lens("burst")};
+  }
+  const KP_LABEL = {pierce: "pierce", heal_cut: "heal-cut", burst: "burst"};
+  function killPressureLine(){
+    const kp = killPressureModel();
+    if (!kp) return "";
+    const bit = k => kp[k].ok
+      ? `<b class="dlt-ok">\u2713 ${KP_LABEL[k]}</b>`
+      : `<b class="dlt-bad">\u2717 ${KP_LABEL[k]} ${kp[k].pct}%</b>`;
+    return `<div class="dlt-line"><span>kill pressure</span><span>${
+      bit("pierce")} ${bit("heal_cut")} ${bit("burst")}</span></div>`;
+  }
+  function killPressureCard(){
+    const kp = killPressureModel();
+    if (!kp) return "";
+    const light = k => `<div class="dl-kp-row ${kp[k].ok ? "ok" : "bad"}">
+      <span class="dl-kp-dot"></span><b>${KP_LABEL[k]}</b>
+      <span class="dl-kp-n">${kp[k].ok ? "covered" : kp[k].pct + "%"}</span></div>`;
+    return `<div class="dl-kp"><span class="dl-kicker">Kill pressure \u2014 can this comp finish a target?</span>
+      ${light("pierce")}${light("heal_cut")}${light("burst")}
+      <div class="dl-note">descriptive \u2014 kill pressure never scores</div></div>`;
+  }
+  function roleShort(k){
+    const nm = (((ENG.rolesBook || {})[k]) || {}).name || k;
+    return nm.split(" / ")[0].split(" (")[0];
+  }
+  function roleFlagText(f2){
+    return f2.kind === "no_engage_tank"
+      ? "no engage tank \u2014 nobody makes a clump"
+      : `${esc(nameOf(f2.weapon))}: worn chest fights its ${esc(roleShort(f2.role).toLowerCase())} job`;
+  }
+  function roleLines(){
+    const adv = roleAdvisory();
+    if (!adv) return "";
+    let h = "";
+    const tally = Object.entries(adv.tally)
+      .map(([k, n]) => `${n}\u00d7 ${esc(roleShort(k))}`).join(" \u00b7 ");
+    if (tally) h += `<div class="dlt-line"><span>roles</span><span>${tally}</span></div>`;
+    const fns = {};
+    adv.members.forEach(m => (m.functions || []).forEach(c => { fns[c] = (fns[c] || 0) + 1; }));
+    const fnTxt = Object.entries(fns).map(([k, n]) => `${n}\u00d7 ${esc(roleShort(k))}`).join(" \u00b7 ");
+    if (fnTxt) h += `<div class="dlt-line"><span>functions</span><span>${fnTxt}</span></div>`;
+    adv.flags.forEach(f2 => { h += `<div class="dlt-warn">\u26a0 ${roleFlagText(f2)}</div>`; });
+    return h;
+  }
+  function roleCard(){
+    const adv = roleAdvisory();
+    if (!adv) return "";
+    const tally = Object.entries(adv.tally).map(([k, n]) =>
+      `<span class="dl-role-chip"><b>${n}</b> ${esc(roleShort(k))}</span>`).join("");
+    const flags = adv.flags.map(f2 =>
+      `<div class="dl-role-flag">\u26a0 ${roleFlagText(f2)}</div>`).join("");
+    return `<div class="dl-roles"><span class="dl-kicker">Role check \u2014 who is actually in this comp</span>
+      <div class="dl-role-tally">${tally}</div>${flags}
+      <div class="dl-note">descriptive \u2014 roles never score</div></div>`;
+  }
+
   function centerTipHtml(state, id, pct, f, max){
     let h = `<div class="dlt-head">${esc(state.label)}</div>`
       + `<div class="dlt-line"><span>triage</span><span>${state.critical} critical · ${state.weak} weak · ${state.excess} overstacked</span></div>`
@@ -170,33 +239,8 @@
         ? "unfit for this playstyle at this size"
         : `pulls against the ${c.side === "melee" ? "ranged" : "melee"} core`}</div>`;
     });
-    if (typeof ENG.killPressure === "function"){
-      const kp = ENG.killPressure(party, COMBOS_CUR);
-      if (kp){
-        const bit = (k, lbl) => {
-          const l = kp[k];
-          const p = l.bar > 0 ? Math.round(100 * l.have / l.bar) : 100;
-          return l.ok ? `<b class="dlt-ok">✓ ${lbl}</b>` : `<b class="dlt-bad">✗ ${lbl} ${p}%</b>`;
-        };
-        h += `<div class="dlt-line"><span>kill pressure</span><span>${bit("pierce", "pierce")} ${bit("heal_cut", "heal-cut")} ${bit("burst", "burst")}</span></div>`;
-      }
-    }
-    const adv = roleAdvisory();
-    if (adv){
-      const label = k => (((ENG.rolesBook || {})[k]) || {}).name || k;
-      const short = k => label(k).split(" / ")[0].split(" (")[0];
-      const tally = Object.entries(adv.tally).map(([k, n]) => `${n}× ${esc(short(k))}`).join(" · ");
-      if (tally) h += `<div class="dlt-line"><span>roles</span><span>${tally}</span></div>`;
-      const fns = {};
-      adv.members.forEach(m => (m.functions || []).forEach(c => { fns[c] = (fns[c] || 0) + 1; }));
-      const fnTxt = Object.entries(fns).map(([k, n]) => `${n}× ${esc(short(k))}`).join(" · ");
-      if (fnTxt) h += `<div class="dlt-line"><span>functions</span><span>${fnTxt}</span></div>`;
-      adv.flags.forEach(f2 => {
-        h += `<div class="dlt-warn">⚠ ${f2.kind === "no_engage_tank"
-          ? "no engage tank — nobody makes a clump"
-          : `${esc(nameOf(f2.weapon))}: worn chest fights its ${esc(label(f2.role).toLowerCase())} job`}</div>`;
-      });
-    }
+    h += killPressureLine();
+    h += roleLines();
     h += `<div class="dlt-note">descriptive — identity, kill pressure and roles never score</div>`;
     return h;
   }
@@ -606,21 +650,31 @@
           <span class="dl-alt-sc">${dim ? "◦ " : ""}${r.score.toFixed(2)}</span></button>`;
       }).join("")}</div></div>` : "";
 
+    /* three cards, not one stack (owner 2026-09-02): the diagnosis, the
+       fight chain and the pick each get their own frame. They ride a single
+       column wrapper so their heights stay independent of the grid's rows. */
     host.innerHTML = `
       <div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>
-      <div class="dl-pick">
+      <div class="dl-col3">
+      <div class="dl-need">
         ${needline}
+        ${remain}
+      </div>
+      <div class="dl-chain-card">
         ${chainLine(top)}
+      </div>
+      <div class="dl-pick">
         <div class="dl-pick-head"><span class="dl-kicker">Best next pick · slot ${Math.min(party.length + 1, HARD_CAP)}</span><span class="dl-score${top.verdict && top.verdict !== "ok" ? " dl-score-dim" : ""}">${top.score >= 0 ? "+" : ""}${top.score.toFixed(2)} comp score${top.verdict === "redundant" ? " · depth only" : top.verdict === "negative" ? " · net cost" : ""}</span></div>
         <div class="dl-weapon">${icon(top.w,72)}<div><button class="nm-btn" data-detail="${top.w}">${nameOf(top.w)}</button><span>${esc(roleOf(top.w, top.combo))}</span></div></div>
         <p>${whySentence(party, top.w)}</p>
         <ul class="dl-gains">${gains}</ul>
         ${observed}
-        ${remain}
         ${whyNotBlock(top)}
         <button class="cb-add dl-add" data-add="${top.w}">Add ${nameOf(top.w)}</button>
         ${altsHtml}
-      </div>`;
+      </div>
+      </div>
+      <div class="dl-pressure">${killPressureCard()}${roleCard()}</div>`;
     renderPlayerTools(host);
   }
 

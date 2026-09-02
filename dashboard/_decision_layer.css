@@ -161,3 +161,35 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-swap-actions button:hover{border-color:var(--brass);color:var(--brass)}
 @media(max-width:900px){.dl-tools{grid-template-columns:1fr}}
 @media(max-width:720px){.dl-gains{grid-template-columns:1fr}.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-alt-row{grid-template-columns:1fr}.dl-empty{display:block}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
+
+/* ---- the column-3 split (owner 2026-09-02) ----
+   The pick card used to stack six answers in one frame. Now: diagnosis,
+   fight chain, the pick. Chrome only; placement lives in _layout.css. */
+.dl-need, .dl-chain-card{
+  background:var(--panel-lo); border:1px solid var(--rule); border-radius:12px;
+  padding:12px 14px;
+}
+.dl-need .dl-needline{padding-bottom:0; margin-bottom:0; border-bottom:0}
+.dl-need .dl-remain{margin-top:10px; padding-top:10px; border-top:1px solid var(--rule)}
+.dl-chain-card .dl-chain{margin:0}
+
+/* kill pressure + role check as cards (2026-09-02). Both DESCRIPTIVE - they
+   translate engine output and never feed scoring. The radar tooltip renders
+   the same models through killPressureLine()/roleLines(). */
+.dl-kp, .dl-roles{
+  background:var(--panel-lo); border:1px solid var(--rule); border-radius:12px;
+  padding:12px 14px;
+}
+.dl-kp-row{display:flex; align-items:center; gap:9px; padding:5px 0; font-size:13px}
+.dl-kp-dot{width:9px; height:9px; border-radius:50%; flex:none}
+.dl-kp-row.ok .dl-kp-dot{background:#3FD68C; box-shadow:0 0 8px rgba(63,214,140,.6)}
+.dl-kp-row.bad .dl-kp-dot{background:#E0556B; box-shadow:0 0 8px rgba(224,85,107,.6)}
+.dl-kp-row b{font-weight:600; color:var(--ink)}
+.dl-kp-n{margin-left:auto; font-family:var(--mono); font-size:11px; color:var(--ink-3)}
+.dl-role-tally{display:flex; flex-wrap:wrap; gap:5px; margin:8px 0 4px}
+.dl-role-chip{font-family:var(--mono); font-size:11px; color:var(--ink-2);
+  background:var(--sunk); border:1px solid var(--rule); border-radius:99px; padding:3px 9px}
+.dl-role-chip b{color:var(--brass); font-weight:600}
+.dl-role-flag{font-size:12px; color:#F0A63C; margin-top:6px}
+.dl-note{font-size:10px; color:var(--ink-3); margin-top:8px}
+
