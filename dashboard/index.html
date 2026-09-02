@@ -924,13 +924,18 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 }
 
 /* ---------- capability readout ---------- */
-.groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:2px 34px}
+.groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:10px 22px; align-items:start}
 .grp{padding:12px 0 4px}
 .grp h3{
   font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--ink-2); margin-bottom:9px; padding-bottom:6px; border-bottom:1px solid var(--rule);
+  color:var(--ink-2); margin-bottom:6px; padding-bottom:6px; border-bottom:1px solid var(--rule);
+  display:flex; align-items:center; gap:7px;
 }
-.cap{display:grid; grid-template-columns:1fr auto; gap:2px 10px; padding:5.5px 0; align-items:center}
+/* the group's hue rides its header - the same hue its radar axis wears */
+.grp h3::before{content:""; width:8px; height:8px; border-radius:50%;
+  background:var(--gcol, var(--ink-3)); flex:none}
+.cap{display:grid; grid-template-columns:auto 1fr auto; gap:2px 8px; padding:3px 0; align-items:center}
 .cap-name{
   font-family:var(--mono); font-size:12px; color:var(--ink-2);
   background:none; border:0; padding:0; text-align:left; letter-spacing:.01em;
@@ -938,16 +943,30 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .cap-name:hover{color:var(--brass-bright); text-decoration:underline; text-underline-offset:2px;
   text-decoration-color:var(--brass-deep)}
 .cap-val{font-family:var(--mono); font-size:11.5px; color:var(--ink-3); white-space:nowrap}
-.cap-bar{grid-column:1/-1; height:4px; background:#1B202B; border-radius:99px; position:relative; overflow:hidden}
-.cap-bar i{position:absolute; inset:0 auto 0 0; border-radius:99px; transition:width .45s var(--ease)}
-.cap-bar i.met{background:var(--ok)}
-.cap-bar i.part{background:var(--amber)}
-.cap-bar i.none{background:var(--gap)}
-.cap-bar i.over{background:var(--over)}
-/* the target minimum on the soft-cap ruler (owner 2026-08-27: 100% = the
-   comp-fitted ceiling; the tick is where the target sits on that scale) */
-.cap-bar .cap-tick{position:absolute; top:-1px; bottom:-1px; width:2px;
-  margin-left:-1px; background:var(--brass-deep); border-radius:1px}
+/* ---- capability RINGS (2026-09-02) ----
+   Nested semicircles, one per capability, faceted one panel per group.
+   Same ruler as the bars they replace and as the radar (owner 2026-08-27):
+   100% = the comp-fitted ceiling, the brass tick marks the target minimum,
+   and beyond-ceiling stacking shows as a pip, never as a longer arc.
+   Arc colour is the reserved STATUS palette (met/part/none/over), never a
+   group hue - the group's hue lives on the panel header. */
+.cap-rings{display:block; width:100%; height:auto; overflow:visible; margin:2px 0 8px}
+.cap-rings .ring-track{fill:none; stroke:#1B202B; stroke-linecap:round}
+.cap-rings .ring{fill:none; stroke-linecap:round; transition:stroke-dashoffset .45s var(--ease)}
+.cap-rings .ring.met{stroke:var(--ok)}
+.cap-rings .ring.part{stroke:var(--amber)}
+.cap-rings .ring.none{stroke:var(--gap)}
+.cap-rings .ring.over{stroke:var(--over)}
+.cap-rings .ring-tick{stroke:var(--brass-deep); stroke-width:2; stroke-linecap:round}
+.cap-rings .ring-over{fill:var(--over)}
+/* the legend IS the table view: every exact value stays readable with no
+   hover, and each row keeps its evidence-drawer button */
+.cap-legend{list-style:none; margin:0; padding:0}
+.cap-sw{width:8px; height:8px; border-radius:2px; display:inline-block; flex:none}
+.cap-sw.met{background:var(--ok)}
+.cap-sw.part{background:var(--amber)}
+.cap-sw.none{background:var(--gap)}
+.cap-sw.over{background:var(--over)}
 .cap.floor-hit .cap-name{color:var(--gap); font-weight:600}
 .tag{font-family:var(--mono); font-size:9px; letter-spacing:.05em; padding:1px 5px; border-radius:3px; margin-left:5px}
 .tag.floor{background:var(--gap-wash); color:var(--gap)}
@@ -1758,12 +1777,14 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 @media (min-width:1700px){
   .main{grid-template-columns:minmax(320px,.8fr) minmax(540px,1.15fr)
                               minmax(380px,.95fr) minmax(380px,1fr)}
-  .dl-status{grid-column:1; grid-row:1}
-  #supply-sec{grid-column:1; grid-row:2}
+  .dl-status{grid-column:1; grid-row:1/3}
   .ws-center{grid-column:2; grid-row:1/3; order:0}
   .dl-col3{grid-column:3; grid-row:1/3}
   .dl-pressure{grid-column:4; grid-row:1}
   #warn-slot{grid-column:4; grid-row:2}
+  /* the ring panels pack across the full width - six groups in one band,
+     which is where the form actually pays for itself */
+  #supply-sec{grid-column:1/-1; grid-row:3}
   .dl-empty{grid-column:1; grid-row:1/3}
   .wheel{--wd:min(520px,100cqi)}
 }
@@ -1774,15 +1795,15 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
    columns 1-3 keep their assignments. */
 @media (min-width:1400px) and (max-width:1699px){
   .main{grid-template-columns:minmax(300px,.85fr) minmax(500px,1.2fr) minmax(340px,1fr)}
-  .dl-status{grid-column:1; grid-row:1}
-  #supply-sec{grid-column:1; grid-row:2}
+  .dl-status{grid-column:1; grid-row:1/3}
   .ws-center{grid-column:2; grid-row:1/3; order:0}
   .dl-col3{grid-column:3; grid-row:1/3}
   .dl-empty{grid-column:1; grid-row:1/3}
   /* the pressure pair spans the full width as one row of two cards */
   .dl-pressure{grid-column:1/-1; grid-row:3; flex-direction:row}
   .dl-pressure>*{flex:1 1 0}
-  #warn-slot{grid-column:1/-1; grid-row:4}
+  #supply-sec{grid-column:1/-1; grid-row:4}
+  #warn-slot{grid-column:1/-1; grid-row:5}
   .wheel{--wd:min(500px,100cqi)}
 }
 
@@ -6041,6 +6062,20 @@ function semanticIcon(key, extraClass = ""){
     : "";
 }
 
+/* Group hues. ONE source: the radar axes and the supply rings' headers both
+   read these, so the two surfaces can never drift apart. Validated for CVD
+   on the dark panel surface (#0E0E16) - all six checks pass, worst adjacent
+   pair Tempo/Damage dE 11.2 deutan, 15.2 normal. Do not re-step by eye. */
+const GROUP_COL = {
+  Sustain:   "#1FAE58",
+  Frontline: "#4D8DFF",
+  Control:   "#17A386",
+  Denial:    "#C08800",
+  Damage:    "#E00063",
+  Tempo:     "#E85D12",
+  Other:     "#757A92",
+};
+
 const GROUPS = {
   Sustain:   ["heal_burst","heal_sustain","cleanse","self_sustain"],
   Frontline: ["tankiness","engage","disengage","anti_dive","zone_control"],
@@ -6993,6 +7028,25 @@ function renderFitness(){
   $("fit-of").textContent = `/ ${Math.round(max)}`;
   $("fit-bar").style.width = `${Math.max(0, Math.min(100, f/max*100))}%`;
 }
+/* A capability's ring: a semicircle sweeping left -> bottom -> right, so
+   the flat side faces the labels above it. `frac` is the SAME fill fraction
+   the bars used - coverage of the soft cap, never of the target. */
+function ringPath(cx, cy, r, frac){
+  const f = Math.max(0, Math.min(1, frac));
+  const pt = a => [cx + r * Math.cos(a * Math.PI / 180),
+                   cy - r * Math.sin(a * Math.PI / 180)];
+  const [x0, y0] = pt(180), [x1, y1] = pt(180 + 180 * f);
+  if (f <= 0) return "";
+  /* sweep-flag 0: left -> bottom -> right is counter-clockwise on screen */
+  return `M${x0.toFixed(2)} ${y0.toFixed(2)} A${r} ${r} 0 0 0 ${x1.toFixed(2)} ${y1.toFixed(2)}`;
+}
+function ringTick(cx, cy, r, frac, half){
+  const a = 180 + 180 * Math.max(0, Math.min(1, frac));
+  const c = Math.cos(a * Math.PI / 180), sn = Math.sin(a * Math.PI / 180);
+  return [(cx + (r - half) * c).toFixed(2), (cy - (r - half) * sn).toFixed(2),
+          (cx + (r + half) * c).toFixed(2), (cy - (r + half) * sn).toFixed(2)];
+}
+
 function renderGroups(){
   const s = supply(party);
   /* Option C: the bars keep quoting the DRESSED supply (coverage), but
@@ -7025,13 +7079,39 @@ function renderGroups(){
       const mult = baseW ? styledW / baseW : 1;
       const styleTag = Math.abs(mult - 1) < 0.01 ? "" :
         `<span class="tag ${mult > 1 ? "style-up" : "style-down"}" title="this playstyle ${mult > 1 ? "raises" : "lowers"} ${c}'s weight (${baseW} → ${styledW.toFixed(1)}); targets never change with style — style changes what the engine emphasises, not what keeps a party alive">×${mult.toFixed(mult >= 1 ? 1 : 2)}</span>`;
-      return `<div class="cap ${below ? "floor-hit" : ""}">
-        <button class="cap-name" data-cap="${c}" title="${esc(prose(c))} — click for evidence">${c}${below ? '<span class="tag floor">below floor</span>' : ""}${over ? '<span class="tag over">overstacked</span>' : ""}${styleTag}</button>
-        <span class="cap-val">${have.toFixed(0)} / ${t.toFixed(1)}</span>
-        <span class="cap-bar"><i class="${cls}" style="width:${fillPct}%"></i><u class="cap-tick" style="left:${tickPct}%"></u></span>
-      </div>`;
+      return {c, have, t, cls, below, over, fillPct, tickPct, styleTag};
+    });
+    if (!rows.length) return "";
+    /* geometry: one nested ring per capability, innermost = first declared.
+       Thin marks with a >=4px surface gap between them. */
+    const W = 240, R = 100, cx = 120, cy = 104, H = 112, r0 = 24;
+    const n = rows.length;
+    const step = n > 1 ? (R - r0) / (n - 1) : 0;
+    const sw = Math.max(5, Math.min(14, (step || 30) - 4));
+    const arcs = rows.map((x, i) => {
+      const r = n > 1 ? r0 + i * step : (r0 + R) / 2;
+      const tk = ringTick(cx, cy, r, x.tickPct / 100, sw / 2 + 2);
+      const d = ringPath(cx, cy, r, x.fillPct / 100);
+      return `<path class="ring-track" d="${ringPath(cx, cy, r, 1)}" stroke-width="${sw}"/>`
+        + (d ? `<path class="ring ${x.cls}" d="${d}" stroke-width="${sw}"><title>${esc(x.c)} ${x.have.toFixed(0)} / ${x.t.toFixed(1)}</title></path>` : "")
+        + `<line class="ring-tick" x1="${tk[0]}" y1="${tk[1]}" x2="${tk[2]}" y2="${tk[3]}"/>`
+        + (x.over ? `<circle class="ring-over" cx="${(cx + r).toFixed(2)}" cy="${cy}" r="2.6"/>` : "");
     }).join("");
-    return rows ? `<div class="grp"><h3>${g}</h3>${rows}</div>` : "";
+    /* the legend is also the table view: every value stays readable without
+       hovering, and each row keeps the evidence-drawer button */
+    const legend = rows.map((x, i) => `<li class="cap ${x.below ? "floor-hit" : ""}">
+        <span class="cap-sw ${x.cls}"></span>
+        <button class="cap-name" data-cap="${x.c}" title="${esc(prose(x.c))} \u2014 click for evidence">${x.c}${x.below ? '<span class="tag floor">below floor</span>' : ""}${x.over ? '<span class="tag over">overstacked</span>' : ""}${x.styleTag}</button>
+        <span class="cap-val">${x.have.toFixed(0)} / ${x.t.toFixed(1)}</span>
+      </li>`).join("");
+    return `<div class="grp" style="--gcol:${GROUP_COL[g] || GROUP_COL.Other}">
+      <h3>${g}</h3>
+      <svg class="cap-rings" viewBox="0 0 ${W} ${H}" role="img"
+        aria-label="${esc(g)} capability supply against the comp-fitted ceiling; exact values are listed below">
+        ${arcs}
+      </svg>
+      <ul class="cap-legend">${legend}</ul>
+    </div>`;
   }).join("");
 }
 function renderWeaknesses(){

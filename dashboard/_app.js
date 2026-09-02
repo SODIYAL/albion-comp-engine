@@ -225,6 +225,20 @@ function semanticIcon(key, extraClass = ""){
     : "";
 }
 
+/* Group hues. ONE source: the radar axes and the supply rings' headers both
+   read these, so the two surfaces can never drift apart. Validated for CVD
+   on the dark panel surface (#0E0E16) - all six checks pass, worst adjacent
+   pair Tempo/Damage dE 11.2 deutan, 15.2 normal. Do not re-step by eye. */
+const GROUP_COL = {
+  Sustain:   "#1FAE58",
+  Frontline: "#4D8DFF",
+  Control:   "#17A386",
+  Denial:    "#C08800",
+  Damage:    "#E00063",
+  Tempo:     "#E85D12",
+  Other:     "#757A92",
+};
+
 const GROUPS = {
   Sustain:   ["heal_burst","heal_sustain","cleanse","self_sustain"],
   Frontline: ["tankiness","engage","disengage","anti_dive","zone_control"],
@@ -1177,6 +1191,25 @@ function renderFitness(){
   $("fit-of").textContent = `/ ${Math.round(max)}`;
   $("fit-bar").style.width = `${Math.max(0, Math.min(100, f/max*100))}%`;
 }
+/* A capability's ring: a semicircle sweeping left -> bottom -> right, so
+   the flat side faces the labels above it. `frac` is the SAME fill fraction
+   the bars used - coverage of the soft cap, never of the target. */
+function ringPath(cx, cy, r, frac){
+  const f = Math.max(0, Math.min(1, frac));
+  const pt = a => [cx + r * Math.cos(a * Math.PI / 180),
+                   cy - r * Math.sin(a * Math.PI / 180)];
+  const [x0, y0] = pt(180), [x1, y1] = pt(180 + 180 * f);
+  if (f <= 0) return "";
+  /* sweep-flag 0: left -> bottom -> right is counter-clockwise on screen */
+  return `M${x0.toFixed(2)} ${y0.toFixed(2)} A${r} ${r} 0 0 0 ${x1.toFixed(2)} ${y1.toFixed(2)}`;
+}
+function ringTick(cx, cy, r, frac, half){
+  const a = 180 + 180 * Math.max(0, Math.min(1, frac));
+  const c = Math.cos(a * Math.PI / 180), sn = Math.sin(a * Math.PI / 180);
+  return [(cx + (r - half) * c).toFixed(2), (cy - (r - half) * sn).toFixed(2),
+          (cx + (r + half) * c).toFixed(2), (cy - (r + half) * sn).toFixed(2)];
+}
+
 function renderGroups(){
   const s = supply(party);
   /* Option C: the bars keep quoting the DRESSED supply (coverage), but
@@ -1209,13 +1242,39 @@ function renderGroups(){
       const mult = baseW ? styledW / baseW : 1;
       const styleTag = Math.abs(mult - 1) < 0.01 ? "" :
         `<span class="tag ${mult > 1 ? "style-up" : "style-down"}" title="this playstyle ${mult > 1 ? "raises" : "lowers"} ${c}'s weight (${baseW} → ${styledW.toFixed(1)}); targets never change with style — style changes what the engine emphasises, not what keeps a party alive">×${mult.toFixed(mult >= 1 ? 1 : 2)}</span>`;
-      return `<div class="cap ${below ? "floor-hit" : ""}">
-        <button class="cap-name" data-cap="${c}" title="${esc(prose(c))} — click for evidence">${c}${below ? '<span class="tag floor">below floor</span>' : ""}${over ? '<span class="tag over">overstacked</span>' : ""}${styleTag}</button>
-        <span class="cap-val">${have.toFixed(0)} / ${t.toFixed(1)}</span>
-        <span class="cap-bar"><i class="${cls}" style="width:${fillPct}%"></i><u class="cap-tick" style="left:${tickPct}%"></u></span>
-      </div>`;
+      return {c, have, t, cls, below, over, fillPct, tickPct, styleTag};
+    });
+    if (!rows.length) return "";
+    /* geometry: one nested ring per capability, innermost = first declared.
+       Thin marks with a >=4px surface gap between them. */
+    const W = 240, R = 100, cx = 120, cy = 104, H = 112, r0 = 24;
+    const n = rows.length;
+    const step = n > 1 ? (R - r0) / (n - 1) : 0;
+    const sw = Math.max(5, Math.min(14, (step || 30) - 4));
+    const arcs = rows.map((x, i) => {
+      const r = n > 1 ? r0 + i * step : (r0 + R) / 2;
+      const tk = ringTick(cx, cy, r, x.tickPct / 100, sw / 2 + 2);
+      const d = ringPath(cx, cy, r, x.fillPct / 100);
+      return `<path class="ring-track" d="${ringPath(cx, cy, r, 1)}" stroke-width="${sw}"/>`
+        + (d ? `<path class="ring ${x.cls}" d="${d}" stroke-width="${sw}"><title>${esc(x.c)} ${x.have.toFixed(0)} / ${x.t.toFixed(1)}</title></path>` : "")
+        + `<line class="ring-tick" x1="${tk[0]}" y1="${tk[1]}" x2="${tk[2]}" y2="${tk[3]}"/>`
+        + (x.over ? `<circle class="ring-over" cx="${(cx + r).toFixed(2)}" cy="${cy}" r="2.6"/>` : "");
     }).join("");
-    return rows ? `<div class="grp"><h3>${g}</h3>${rows}</div>` : "";
+    /* the legend is also the table view: every value stays readable without
+       hovering, and each row keeps the evidence-drawer button */
+    const legend = rows.map((x, i) => `<li class="cap ${x.below ? "floor-hit" : ""}">
+        <span class="cap-sw ${x.cls}"></span>
+        <button class="cap-name" data-cap="${x.c}" title="${esc(prose(x.c))} \u2014 click for evidence">${x.c}${x.below ? '<span class="tag floor">below floor</span>' : ""}${x.over ? '<span class="tag over">overstacked</span>' : ""}${x.styleTag}</button>
+        <span class="cap-val">${x.have.toFixed(0)} / ${x.t.toFixed(1)}</span>
+      </li>`).join("");
+    return `<div class="grp" style="--gcol:${GROUP_COL[g] || GROUP_COL.Other}">
+      <h3>${g}</h3>
+      <svg class="cap-rings" viewBox="0 0 ${W} ${H}" role="img"
+        aria-label="${esc(g)} capability supply against the comp-fitted ceiling; exact values are listed below">
+        ${arcs}
+      </svg>
+      <ul class="cap-legend">${legend}</ul>
+    </div>`;
   }).join("");
 }
 function renderWeaknesses(){

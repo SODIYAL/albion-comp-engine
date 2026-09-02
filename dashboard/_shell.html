@@ -924,13 +924,18 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 }
 
 /* ---------- capability readout ---------- */
-.groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:2px 34px}
+.groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:10px 22px; align-items:start}
 .grp{padding:12px 0 4px}
 .grp h3{
   font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--ink-2); margin-bottom:9px; padding-bottom:6px; border-bottom:1px solid var(--rule);
+  color:var(--ink-2); margin-bottom:6px; padding-bottom:6px; border-bottom:1px solid var(--rule);
+  display:flex; align-items:center; gap:7px;
 }
-.cap{display:grid; grid-template-columns:1fr auto; gap:2px 10px; padding:5.5px 0; align-items:center}
+/* the group's hue rides its header - the same hue its radar axis wears */
+.grp h3::before{content:""; width:8px; height:8px; border-radius:50%;
+  background:var(--gcol, var(--ink-3)); flex:none}
+.cap{display:grid; grid-template-columns:auto 1fr auto; gap:2px 8px; padding:3px 0; align-items:center}
 .cap-name{
   font-family:var(--mono); font-size:12px; color:var(--ink-2);
   background:none; border:0; padding:0; text-align:left; letter-spacing:.01em;
@@ -938,16 +943,30 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .cap-name:hover{color:var(--brass-bright); text-decoration:underline; text-underline-offset:2px;
   text-decoration-color:var(--brass-deep)}
 .cap-val{font-family:var(--mono); font-size:11.5px; color:var(--ink-3); white-space:nowrap}
-.cap-bar{grid-column:1/-1; height:4px; background:#1B202B; border-radius:99px; position:relative; overflow:hidden}
-.cap-bar i{position:absolute; inset:0 auto 0 0; border-radius:99px; transition:width .45s var(--ease)}
-.cap-bar i.met{background:var(--ok)}
-.cap-bar i.part{background:var(--amber)}
-.cap-bar i.none{background:var(--gap)}
-.cap-bar i.over{background:var(--over)}
-/* the target minimum on the soft-cap ruler (owner 2026-08-27: 100% = the
-   comp-fitted ceiling; the tick is where the target sits on that scale) */
-.cap-bar .cap-tick{position:absolute; top:-1px; bottom:-1px; width:2px;
-  margin-left:-1px; background:var(--brass-deep); border-radius:1px}
+/* ---- capability RINGS (2026-09-02) ----
+   Nested semicircles, one per capability, faceted one panel per group.
+   Same ruler as the bars they replace and as the radar (owner 2026-08-27):
+   100% = the comp-fitted ceiling, the brass tick marks the target minimum,
+   and beyond-ceiling stacking shows as a pip, never as a longer arc.
+   Arc colour is the reserved STATUS palette (met/part/none/over), never a
+   group hue - the group's hue lives on the panel header. */
+.cap-rings{display:block; width:100%; height:auto; overflow:visible; margin:2px 0 8px}
+.cap-rings .ring-track{fill:none; stroke:#1B202B; stroke-linecap:round}
+.cap-rings .ring{fill:none; stroke-linecap:round; transition:stroke-dashoffset .45s var(--ease)}
+.cap-rings .ring.met{stroke:var(--ok)}
+.cap-rings .ring.part{stroke:var(--amber)}
+.cap-rings .ring.none{stroke:var(--gap)}
+.cap-rings .ring.over{stroke:var(--over)}
+.cap-rings .ring-tick{stroke:var(--brass-deep); stroke-width:2; stroke-linecap:round}
+.cap-rings .ring-over{fill:var(--over)}
+/* the legend IS the table view: every exact value stays readable with no
+   hover, and each row keeps its evidence-drawer button */
+.cap-legend{list-style:none; margin:0; padding:0}
+.cap-sw{width:8px; height:8px; border-radius:2px; display:inline-block; flex:none}
+.cap-sw.met{background:var(--ok)}
+.cap-sw.part{background:var(--amber)}
+.cap-sw.none{background:var(--gap)}
+.cap-sw.over{background:var(--over)}
 .cap.floor-hit .cap-name{color:var(--gap); font-weight:600}
 .tag{font-family:var(--mono); font-size:9px; letter-spacing:.05em; padding:1px 5px; border-radius:3px; margin-left:5px}
 .tag.floor{background:var(--gap-wash); color:var(--gap)}
