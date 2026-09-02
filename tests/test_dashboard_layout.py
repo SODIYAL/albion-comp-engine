@@ -146,6 +146,20 @@ check('class="livefeed"' not in main, "L7e livefeed left .main")
 check('id="meta-sec"' in main, "L7f killboard stays a deep board in .main")
 check("tools-panel" in DECISION_JS, "L7g tools fold mounts into its panel")
 
+print("L8 - the column grid")
+
+check("@media (min-width:1700px)" in LAYOUT, "L8a four-column breakpoint exists")
+check("@media (min-width:1400px) and (max-width:1699px)" in LAYOUT,
+      "L8b three-column breakpoint exists")
+check("@media (min-width:1251px) and (max-width:1399px)" in LAYOUT,
+      "L8c the 1251-1399 hero grid is preserved")
+check("--wd:min(520px,100cqi)" in LAYOUT, "L8d wheel shrinks to 520px in the four-col grid")
+check('id="supply-sec"' in SHELL, "L8e capability supply section is placeable")
+# every selector the grid places must be a real .main child (or a child of a
+# display:contents wrapper), else the rule silently does nothing
+for sel in ["#supply-sec", "#warn-slot", "#meta-sec"]:
+    check(sel.lstrip("#.") in SHELL, "L8f grid target %s exists in markup" % sel)
+
 if FAILURES:
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
     sys.exit(1)

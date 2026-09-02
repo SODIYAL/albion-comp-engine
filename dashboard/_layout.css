@@ -22,34 +22,24 @@
   .main{padding-left:16px; padding-right:16px; padding-bottom:70px}
 }
 
-/* popovers follow the dock's placement:
-   — left flank (three-column stage): open sideways toward the wheel —
-     they can never leave the viewport past the top of the page
-   — hero strip (961-1560px, party above the picker): open downward
-   — phones (≤960, party back under the wheel): stock upward popover */
+/* ---------- the wheel stage ----------
+   Below 1251px this is a real grid; at and above it the stage dissolves
+   (display:contents) and .ws-center places directly on the card grid. */
 .wheelstage{
   display:grid;
   grid-template-columns:minmax(196px,220px) minmax(0,1fr) minmax(280px,320px);
   gap:30px; align-items:start;
 }
-/* mid widths (≤1560 = the shell's max — three columns beside an expanded
-   rail would starve the wheel): the party NEVER leaves the hero view.
-   It rides as a strip ABOVE the picker, first thing on the stage;
-   analysis keeps the right flank */
 @media (max-width:1560px){
   .wheelstage{grid-template-columns:minmax(0,1fr) minmax(280px,360px)}
   .ws-center{grid-column:1; grid-row:2}
   .ws-right{grid-column:2; grid-row:1 / span 2}
 }
-/* a collapsed rail refunds ~300px — enough for the full three-column
-   stage again, so the party gets its flank back */
 @media (max-width:1250px){
   .wheelstage{grid-template-columns:1fr}
   .ws-center{grid-column:auto; grid-row:auto; order:2}
   .ws-right{grid-column:auto; grid-row:auto; order:3}
 }
-/* phones: the picker leads again — a full-width party strip would push
-   the wheel a screen down */
 @media (max-width:960px){
   .ws-center{order:1}
 }
@@ -134,38 +124,16 @@
 /* The old right flank duplicated the exact questions answered above. Keep its
    underlying renderers alive, but remove that duplicate surface. */
 .ws-right{display:none}
-/* HERO GRID (owner 2026-08-22): one screen, no scrolling for the important
-   things. ≥1251px the main column becomes a grid — decision stack left,
-   wheel right (in the column the old pick card occupied), party strip
-   across the bottom, forge warnings full-width between. The wheelstage
-   dissolves (display:contents) so its children sit on the main grid;
-   below 1251px the shell's own single-column stage rules take over. */
+/* ================== THE CARD GRID (2026-09-02) ==================
+   Shared across every grid band: the stage wrappers dissolve with
+   display:contents so their children place directly on .main's grid, and
+   the decision stack sheds slack height once it lives in a column. */
 @media (min-width:1251px){
-  .main{display:grid;grid-template-columns:minmax(390px,1fr) minmax(0,1.5fr);gap:18px 24px;align-items:start}
-  .main>*{grid-column:1/-1;min-width:0}
-  /* both stage wrappers dissolve — their children sit on the main grid, so
-     the caller-tools fold can drop below the party strip and the wheel can
-     span the full left-column height */
+  .main{display:grid; align-items:start; gap:18px 24px}
+  .main>*{grid-column:1/-1; min-width:0}
   .decision-layer{display:contents}
   .wheelstage{display:contents}
-  /* explicit: the hero band. Everything after it (warn slot, the
-     relocated caller-tools fold, the deep boards) auto-places into
-     tight full-width rows in DOM order — no phantom row gaps. */
-  .dl-status{grid-column:1;grid-row:1}
-  .dl-pick{grid-column:1;grid-row:2}
-  .dl-empty{grid-column:1;grid-row:1/3}
-  .ws-center{grid-column:2;grid-row:1/3;order:0}
-  /* forge honesty reports live UNDER THE WHEEL (owner 2026-08-23): the
-     wheel column's next row, so quiet runs collapse to nothing there */
-  #warn-slot{grid-column:2;grid-row:3}
-  .dl-tools-fold{grid-column:1/-1;grid-row:auto}
-  /* the semicircle freed the wheel's lower half, so the hero band can
-     afford the full-width instrument (owner 2026-08-27) */
-  .wheel{--wd:min(680px,100cqi)}
-  /* caller tools sit full-width below the strip */
   .dl-tools{grid-template-columns:1fr 1fr}
-  /* one-screen density: the hero band must leave room for the party strip
-     on a ~940px viewport, so the decision stack sheds slack height */
   .dl-status{padding:0}
   .dl-pick{padding:14px 16px}
   .dl-needline{padding-bottom:10px;margin-bottom:10px}
@@ -179,8 +147,51 @@
   .dl-add{margin-top:10px}
   .dl-alts{margin-top:8px;gap:4px}
   .dl-alt{padding:5px 9px}
-  /* (the party strip's layout rules retired 2026-08-27 with the strip —
-     the roster lives on the wheel's comp board) */
+  /* deep boards stay full-width rows below the hero, in DOM order */
+  #meta-sec, .footnote{grid-column:1/-1; grid-row:auto}
+}
+
+/* FOUR COLUMNS (>=1700px): diagnosis, wheel, pick card, pressure. */
+@media (min-width:1700px){
+  .main{grid-template-columns:minmax(320px,.8fr) minmax(540px,1.15fr)
+                              minmax(380px,.95fr) minmax(380px,1fr)}
+  .dl-status{grid-column:1; grid-row:1}
+  #supply-sec{grid-column:1; grid-row:2}
+  .ws-center{grid-column:2; grid-row:1/3; order:0}
+  .dl-pick{grid-column:3; grid-row:1/3}
+  .dl-kp{grid-column:4; grid-row:1}
+  .dl-roles{grid-column:4; grid-row:2}
+  #warn-slot{grid-column:4; grid-row:3}
+  .dl-empty{grid-column:1; grid-row:1/3}
+  .wheel{--wd:min(520px,100cqi)}
+}
+
+/* THREE COLUMNS (1400-1699). This is the band a 1080p screen at 120% zoom
+   lands in, so it is a first-class layout, not a fallback: column 4
+   dissolves into a full-width row of three cards beneath the hero, and
+   columns 1-3 keep their assignments. */
+@media (min-width:1400px) and (max-width:1699px){
+  .main{grid-template-columns:minmax(300px,.85fr) minmax(500px,1.2fr) minmax(340px,1fr)}
+  .dl-status{grid-column:1; grid-row:1}
+  #supply-sec{grid-column:1; grid-row:2}
+  .ws-center{grid-column:2; grid-row:1/3; order:0}
+  .dl-pick{grid-column:3; grid-row:1/3}
+  .dl-empty{grid-column:1; grid-row:1/3}
+  .dl-kp{grid-column:1; grid-row:3}
+  .dl-roles{grid-column:2; grid-row:3}
+  #warn-slot{grid-column:3; grid-row:3}
+  .wheel{--wd:min(500px,100cqi)}
+}
+
+/* the pre-existing two-column hero grid, unchanged behaviour */
+@media (min-width:1251px) and (max-width:1399px){
+  .main{grid-template-columns:minmax(390px,1fr) minmax(0,1.5fr)}
+  .dl-status{grid-column:1; grid-row:1}
+  .dl-pick{grid-column:1; grid-row:2}
+  .dl-empty{grid-column:1; grid-row:1/3}
+  .ws-center{grid-column:2; grid-row:1/3; order:0}
+  #warn-slot{grid-column:2; grid-row:3}
+  .wheel{--wd:min(680px,100cqi)}
 }
 
 /* ---- stragglers found during the Task 2 move: layout rules that were

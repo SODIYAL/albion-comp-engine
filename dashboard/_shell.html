@@ -1492,7 +1492,9 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
          stacked layouts read it right after the stage). Empty when quiet. -->
     <div id="warn-slot"></div>
 
-    <section>
+    <!-- id so the grid can place it: #groups is the inner board, this
+         section is the actual .main child -->
+    <section id="supply-sec">
       <div class="sec-label">Capability supply vs. target</div>
       <div class="groups" id="groups"></div>
     </section>
