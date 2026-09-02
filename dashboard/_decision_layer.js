@@ -396,12 +396,12 @@
      duplicate-copy penalty, verified count-once spell losses. Display
      only — the engine's Q18 investigation rejected a scoring-side
      redundancy penalty; the marginal already collapses, this SAYS so. */
-  function whyNotBlock(rec){
+  function whyNotBlock(rec, shown){
     if (!rec || typeof ENG.pickReport !== "function") return "";
     const r = pickReport(party, rec.w);
     const lines = [];
     if (r.verdict !== "ok")
-      r.caps.filter(x => x.saturated).slice(0, 3).forEach(x => {
+      r.caps.filter(x => x.saturated && !(shown && shown.has(x.cap))).slice(0, 3).forEach(x => {
         lines.push(`<li>${esc(capLabel(x.cap))} already ${+x.before.toFixed(1)} / ${x.target.toFixed(1)} — this adds ${x.delta > 0.05 ? "depth, not coverage" : "nothing"}</li>`);
       });
     const over = r.caps.reduce((t, x) => t + x.overstack_cost, 0);
@@ -412,11 +412,11 @@
       lines.push(`<li>${esc(n.name)} counts once for the party — a duplicate loses ${lost}</li>`);
     });
     if (!lines.length) return "";
+    /* the per-capability verdict now rides each gain row, so what is left
+       here is only what the pick COSTS - name it that */
     const head = r.verdict === "negative"
-      ? "Warning — this pick costs more than it adds"
-      : r.verdict === "redundant"
-        ? "Depth pick — the comp is saturated, it closes no gap"
-        : "What it does not add";
+      ? "What this pick costs"
+      : "What it does not add";
     return `<div class="dl-whynot ${r.verdict}"><span class="dl-kicker">${head}</span><ul>${lines.join("")}</ul></div>`;
   }
 
@@ -632,7 +632,21 @@
         <span class="dl-nd-sub">The next slot improves depth instead of repairing a load-bearing hole.</span></div>
     </div>`;
 
-    const gains = terms.map(t => `<li><b>+${t.d.toFixed(1)}</b> ${esc(capLabel(t.cap))}<span>${t.before.toFixed(0)} → ${t.after.toFixed(0)} / ${t.target.toFixed(1)}</span></li>`).join("");
+    /* each gain says whether it CLOSES a gap or only adds depth - that
+       verdict used to live in a second box repeating these same three
+       capabilities and the same numbers */
+    const rep = (typeof ENG.pickReport === "function") ? pickReport(party, top.w) : null;
+    const satCaps = new Set((rep ? rep.caps : []).filter(x => x.saturated).map(x => x.cap));
+    const shownCaps = new Set(terms.map(t => t.cap));
+    const gains = terms.map(t => {
+      const depth = satCaps.has(t.cap);
+      return `<li class="${depth ? "depth" : "closes"}">
+        <b>+${t.d.toFixed(1)}</b>
+        <span class="dl-gain-cap">${esc(capLabel(t.cap))}</span>
+        <span class="dl-gain-n">${t.before.toFixed(0)} → ${t.after.toFixed(0)} / ${t.target.toFixed(1)}</span>
+        <span class="dl-gain-v">${depth ? "depth" : "closes gap"}</span>
+      </li>`;
+    }).join("");
     const remain = remaining.length ? `<div class="dl-remain"><span class="dl-kicker">Still weak after this pick</span>${remaining.map(x => `<span title="${x.have.toFixed(0)} / ${x.want.toFixed(1)}">${esc(capLabel(x.cap))}</span>`).join("")}</div>` : `<div class="dl-remain clear"><span class="dl-kicker">After this pick</span><span>Core gaps are covered.</span></div>`;
     /* observed killboard context (PR #5 integration): _app.js owns the
        cohort math; the note appears only when cohorts echo this pick */
@@ -641,7 +655,7 @@
        click-to-add alternatives — a single take-it-or-leave-it pick is
        not a recommendation surface, so the runners-up live here now */
     const alts = (recs || []).slice(1, 4);
-    const altsHtml = alts.length ? `<div class="dl-alts"><span class="dl-kicker">alternatives</span><div class="dl-alt-row">${
+    const altsHtml = alts.length ? `<div class="dl-alts"><span class="dl-kicker">alternatives</span><div class="dl-alt-list">${
       alts.map(r => {
         const t0 = explain(party, r.w)[0];
         const dim = r.verdict && r.verdict !== "ok";
@@ -678,7 +692,7 @@
         </div>
         <p>${whySentence(party, top.w)}</p>
         ${observed}
-        ${whyNotBlock(top)}
+        ${whyNotBlock(top, shownCaps)}
         ${altsHtml}
       </div>
       </div>

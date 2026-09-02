@@ -83,10 +83,25 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left}
 .dl-weapon-role{display:block;color:var(--ink-3);font-size:11px;margin-top:1px}
 .dl-pick p{font-size:13px;line-height:1.55;color:var(--ink-2);margin:7px 0 10px}.dl-pick p em{color:var(--brass-bright);font-style:normal;font-weight:600}
-/* under the role line the column is narrower than the card, so the gains
-   flow rather than being forced into three equal tracks */
-.dl-gains{list-style:none;margin:7px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:5px}
-.dl-gains li{flex:1 1 auto;min-width:0;background:var(--sunk);border:1px solid var(--rule);border-radius:9px;padding:5px 8px;font-size:11px;color:var(--ink-2)}.dl-gains b{color:var(--ok-bright);font-family:var(--mono);margin-right:4px}.dl-gains span{display:block;color:var(--ink-3);font-family:var(--mono);font-size:9.5px;margin-top:2px}
+/* Gains are DATA ROWS, not chips: three boxes in a narrow column wrapped
+   2+1 and made the orphan look like the biggest gain. One row each, and
+   each row carries its own verdict so a second box need not repeat it. */
+.dl-gains{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:1px}
+.dl-gains li{
+  display:grid;grid-template-columns:auto 1fr auto;gap:3px 9px;align-items:baseline;
+  padding:5px 0;border-top:1px solid var(--rule);font-size:11.5px;color:var(--ink-2);
+}
+.dl-gains li:first-child{border-top:0}
+.dl-gains b{color:var(--ok-bright);font-family:var(--mono);font-size:12px}
+.dl-gain-cap{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dl-gain-n{grid-column:2;font-family:var(--mono);font-size:9.5px;color:var(--ink-3)}
+.dl-gain-v{
+  grid-column:3;grid-row:1;font-family:var(--mono);font-size:9px;letter-spacing:.08em;
+  text-transform:uppercase;padding:2px 6px;border-radius:99px;white-space:nowrap;
+}
+.dl-gains li.closes .dl-gain-v{color:var(--ok-bright);background:rgba(35,191,110,.10)}
+.dl-gains li.depth .dl-gain-v{color:var(--ink-3);background:var(--sunk)}
+.dl-gains li.depth b{color:var(--ink-2)}
 .dl-remain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px}.dl-remain>span:not(.dl-kicker){font-family:var(--mono);font-size:9.5px;padding:3px 7px;border-radius:99px;border:1px solid rgba(255,84,112,.28);color:var(--gap);background:var(--gap-wash)}.dl-remain .dl-kicker{width:100%}.dl-remain.clear>span:not(.dl-kicker){color:var(--ok-bright);border-color:rgba(35,191,110,.25);background:rgba(35,191,110,.07)}
 /* why-not block (roadmap item 3): the signed decomposition's negative and
    saturated terms — amber for a depth pick, red when the pick nets a cost */
@@ -106,13 +121,13 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 #groups{margin-top:-4px}
 /* runners-up inside the pick card — one compact chip row (gain in tooltip) */
 .dl-alts{margin-top:10px}
-.dl-alt-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin-top:5px}
+.dl-alt-list{display:flex;flex-direction:column;gap:3px;margin-top:6px}
 .dl-alt{display:flex; align-items:center; gap:7px; min-width:0; text-align:left;
   padding:6px 8px; background:transparent; border:1px solid var(--rule); border-radius:10px;
   transition:border-color .15s var(--ease), background .15s var(--ease)}
 .dl-alt:hover{border-color:rgba(255,201,58,.5); background:var(--surface-2)}
 .dl-alt .icon{flex:none}
-.dl-alt-nm{flex:1; min-width:0; font-size:11.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.dl-alt-nm{flex:1; min-width:0; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .dl-alt-sc{font-family:var(--mono); font-size:10px; color:var(--brass); font-weight:600; flex:none}
 /* Caller tools (PR #6): player pool + swap lab. Folded shut by default —
    the hero view keeps the party dock above the fold (standing owner rule);
@@ -173,7 +188,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-swap-actions button{background:transparent;border:1px solid var(--rule);color:var(--ink-2);border-radius:7px;padding:5px 7px;font-size:9.5px}
 .dl-swap-actions button:hover{border-color:var(--brass);color:var(--brass)}
 @media(max-width:900px){.dl-tools{grid-template-columns:1fr}}
-@media(max-width:720px){.dl-gains{grid-template-columns:1fr}.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-alt-row{grid-template-columns:1fr}.dl-empty{display:block}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
+@media(max-width:720px){.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-alt-row{grid-template-columns:1fr}.dl-empty{display:block}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
 
 /* ---- the column-3 split (owner 2026-09-02) ----
    The pick card used to stack six answers in one frame. Now: diagnosis,

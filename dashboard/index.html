@@ -1601,10 +1601,25 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
   min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left}
 .dl-weapon-role{display:block;color:var(--ink-3);font-size:11px;margin-top:1px}
 .dl-pick p{font-size:13px;line-height:1.55;color:var(--ink-2);margin:7px 0 10px}.dl-pick p em{color:var(--brass-bright);font-style:normal;font-weight:600}
-/* under the role line the column is narrower than the card, so the gains
-   flow rather than being forced into three equal tracks */
-.dl-gains{list-style:none;margin:7px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:5px}
-.dl-gains li{flex:1 1 auto;min-width:0;background:var(--sunk);border:1px solid var(--rule);border-radius:9px;padding:5px 8px;font-size:11px;color:var(--ink-2)}.dl-gains b{color:var(--ok-bright);font-family:var(--mono);margin-right:4px}.dl-gains span{display:block;color:var(--ink-3);font-family:var(--mono);font-size:9.5px;margin-top:2px}
+/* Gains are DATA ROWS, not chips: three boxes in a narrow column wrapped
+   2+1 and made the orphan look like the biggest gain. One row each, and
+   each row carries its own verdict so a second box need not repeat it. */
+.dl-gains{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:1px}
+.dl-gains li{
+  display:grid;grid-template-columns:auto 1fr auto;gap:3px 9px;align-items:baseline;
+  padding:5px 0;border-top:1px solid var(--rule);font-size:11.5px;color:var(--ink-2);
+}
+.dl-gains li:first-child{border-top:0}
+.dl-gains b{color:var(--ok-bright);font-family:var(--mono);font-size:12px}
+.dl-gain-cap{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dl-gain-n{grid-column:2;font-family:var(--mono);font-size:9.5px;color:var(--ink-3)}
+.dl-gain-v{
+  grid-column:3;grid-row:1;font-family:var(--mono);font-size:9px;letter-spacing:.08em;
+  text-transform:uppercase;padding:2px 6px;border-radius:99px;white-space:nowrap;
+}
+.dl-gains li.closes .dl-gain-v{color:var(--ok-bright);background:rgba(35,191,110,.10)}
+.dl-gains li.depth .dl-gain-v{color:var(--ink-3);background:var(--sunk)}
+.dl-gains li.depth b{color:var(--ink-2)}
 .dl-remain{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px}.dl-remain>span:not(.dl-kicker){font-family:var(--mono);font-size:9.5px;padding:3px 7px;border-radius:99px;border:1px solid rgba(255,84,112,.28);color:var(--gap);background:var(--gap-wash)}.dl-remain .dl-kicker{width:100%}.dl-remain.clear>span:not(.dl-kicker){color:var(--ok-bright);border-color:rgba(35,191,110,.25);background:rgba(35,191,110,.07)}
 /* why-not block (roadmap item 3): the signed decomposition's negative and
    saturated terms — amber for a depth pick, red when the pick nets a cost */
@@ -1624,13 +1639,13 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 #groups{margin-top:-4px}
 /* runners-up inside the pick card — one compact chip row (gain in tooltip) */
 .dl-alts{margin-top:10px}
-.dl-alt-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin-top:5px}
+.dl-alt-list{display:flex;flex-direction:column;gap:3px;margin-top:6px}
 .dl-alt{display:flex; align-items:center; gap:7px; min-width:0; text-align:left;
   padding:6px 8px; background:transparent; border:1px solid var(--rule); border-radius:10px;
   transition:border-color .15s var(--ease), background .15s var(--ease)}
 .dl-alt:hover{border-color:rgba(255,201,58,.5); background:var(--surface-2)}
 .dl-alt .icon{flex:none}
-.dl-alt-nm{flex:1; min-width:0; font-size:11.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.dl-alt-nm{flex:1; min-width:0; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .dl-alt-sc{font-family:var(--mono); font-size:10px; color:var(--brass); font-weight:600; flex:none}
 /* Caller tools (PR #6): player pool + swap lab. Folded shut by default —
    the hero view keeps the party dock above the fold (standing owner rule);
@@ -1691,7 +1706,7 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-swap-actions button{background:transparent;border:1px solid var(--rule);color:var(--ink-2);border-radius:7px;padding:5px 7px;font-size:9.5px}
 .dl-swap-actions button:hover{border-color:var(--brass);color:var(--brass)}
 @media(max-width:900px){.dl-tools{grid-template-columns:1fr}}
-@media(max-width:720px){.dl-gains{grid-template-columns:1fr}.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-alt-row{grid-template-columns:1fr}.dl-empty{display:block}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
+@media(max-width:720px){.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-alt-row{grid-template-columns:1fr}.dl-empty{display:block}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
 
 /* ---- the column-3 split (owner 2026-09-02) ----
    The pick card used to stack six answers in one frame. Now: diagnosis,
@@ -9178,12 +9193,12 @@ render();
      duplicate-copy penalty, verified count-once spell losses. Display
      only — the engine's Q18 investigation rejected a scoring-side
      redundancy penalty; the marginal already collapses, this SAYS so. */
-  function whyNotBlock(rec){
+  function whyNotBlock(rec, shown){
     if (!rec || typeof ENG.pickReport !== "function") return "";
     const r = pickReport(party, rec.w);
     const lines = [];
     if (r.verdict !== "ok")
-      r.caps.filter(x => x.saturated).slice(0, 3).forEach(x => {
+      r.caps.filter(x => x.saturated && !(shown && shown.has(x.cap))).slice(0, 3).forEach(x => {
         lines.push(`<li>${esc(capLabel(x.cap))} already ${+x.before.toFixed(1)} / ${x.target.toFixed(1)} — this adds ${x.delta > 0.05 ? "depth, not coverage" : "nothing"}</li>`);
       });
     const over = r.caps.reduce((t, x) => t + x.overstack_cost, 0);
@@ -9194,11 +9209,11 @@ render();
       lines.push(`<li>${esc(n.name)} counts once for the party — a duplicate loses ${lost}</li>`);
     });
     if (!lines.length) return "";
+    /* the per-capability verdict now rides each gain row, so what is left
+       here is only what the pick COSTS - name it that */
     const head = r.verdict === "negative"
-      ? "Warning — this pick costs more than it adds"
-      : r.verdict === "redundant"
-        ? "Depth pick — the comp is saturated, it closes no gap"
-        : "What it does not add";
+      ? "What this pick costs"
+      : "What it does not add";
     return `<div class="dl-whynot ${r.verdict}"><span class="dl-kicker">${head}</span><ul>${lines.join("")}</ul></div>`;
   }
 
@@ -9414,7 +9429,21 @@ render();
         <span class="dl-nd-sub">The next slot improves depth instead of repairing a load-bearing hole.</span></div>
     </div>`;
 
-    const gains = terms.map(t => `<li><b>+${t.d.toFixed(1)}</b> ${esc(capLabel(t.cap))}<span>${t.before.toFixed(0)} → ${t.after.toFixed(0)} / ${t.target.toFixed(1)}</span></li>`).join("");
+    /* each gain says whether it CLOSES a gap or only adds depth - that
+       verdict used to live in a second box repeating these same three
+       capabilities and the same numbers */
+    const rep = (typeof ENG.pickReport === "function") ? pickReport(party, top.w) : null;
+    const satCaps = new Set((rep ? rep.caps : []).filter(x => x.saturated).map(x => x.cap));
+    const shownCaps = new Set(terms.map(t => t.cap));
+    const gains = terms.map(t => {
+      const depth = satCaps.has(t.cap);
+      return `<li class="${depth ? "depth" : "closes"}">
+        <b>+${t.d.toFixed(1)}</b>
+        <span class="dl-gain-cap">${esc(capLabel(t.cap))}</span>
+        <span class="dl-gain-n">${t.before.toFixed(0)} → ${t.after.toFixed(0)} / ${t.target.toFixed(1)}</span>
+        <span class="dl-gain-v">${depth ? "depth" : "closes gap"}</span>
+      </li>`;
+    }).join("");
     const remain = remaining.length ? `<div class="dl-remain"><span class="dl-kicker">Still weak after this pick</span>${remaining.map(x => `<span title="${x.have.toFixed(0)} / ${x.want.toFixed(1)}">${esc(capLabel(x.cap))}</span>`).join("")}</div>` : `<div class="dl-remain clear"><span class="dl-kicker">After this pick</span><span>Core gaps are covered.</span></div>`;
     /* observed killboard context (PR #5 integration): _app.js owns the
        cohort math; the note appears only when cohorts echo this pick */
@@ -9423,7 +9452,7 @@ render();
        click-to-add alternatives — a single take-it-or-leave-it pick is
        not a recommendation surface, so the runners-up live here now */
     const alts = (recs || []).slice(1, 4);
-    const altsHtml = alts.length ? `<div class="dl-alts"><span class="dl-kicker">alternatives</span><div class="dl-alt-row">${
+    const altsHtml = alts.length ? `<div class="dl-alts"><span class="dl-kicker">alternatives</span><div class="dl-alt-list">${
       alts.map(r => {
         const t0 = explain(party, r.w)[0];
         const dim = r.verdict && r.verdict !== "ok";
@@ -9460,7 +9489,7 @@ render();
         </div>
         <p>${whySentence(party, top.w)}</p>
         ${observed}
-        ${whyNotBlock(top)}
+        ${whyNotBlock(top, shownCaps)}
         ${altsHtml}
       </div>
       </div>
