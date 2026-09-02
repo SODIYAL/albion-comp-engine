@@ -217,15 +217,37 @@
    Two lines: identity + verdict on top, the constantly-turned knobs below.
    Style and size change on nearly every interaction; burying them behind a
    panel tab would cost more than the space it saves. */
+/* Compacted 2026-09-02 (owner: "about 60% of that space"). It was ~105px:
+   a 58px top row built around a 34px sigil and a 26px figure, over a 47px
+   control row on 32px inputs. Now ~64px - every control keeps a >=24px hit
+   target, and the brand sub-line goes because the wordmark already says it. */
 .masthead{display:flex; flex-direction:column; gap:0}
-.mh-top{display:flex; align-items:center; gap:26px; padding:10px 34px 8px; flex-wrap:wrap}
-.mh-bar{display:flex; align-items:center; gap:18px; padding:6px 34px 8px;
+.mh-top{display:flex; align-items:center; gap:18px; padding:4px 34px 3px; flex-wrap:wrap}
+.mh-bar{display:flex; align-items:center; gap:14px; padding:3px 34px 4px;
   border-top:1px solid var(--rule); flex-wrap:wrap}
 .mh-top .spacer, .mh-bar .spacer{flex:1}
-.sb-fit{margin-bottom:0; display:flex; align-items:baseline; gap:10px}
+
+/* brand: the sigil and wordmark carry it; the strapline is decoration here */
+.mh-top .brandmark{gap:9px}
+.mh-top .brandmark .sigil{width:24px; height:24px; font-size:13px; border-radius:7px}
+.mh-top .brandmark h1{font-size:16px; line-height:1.2}
+.mh-top .brandmark .sub{display:none}
+
+.sb-fit{margin-bottom:0; display:flex; align-items:baseline; gap:9px}
 .sb-fit .sec-label{margin:0}
-.sb-fit .num{font-size:26px}
-.sb-fit .meter-track{width:120px; margin-top:0; align-self:center}
+.sb-fit .num{font-size:19px}
+.sb-fit .of{font-size:11px}
+.sb-fit .meter-track{width:96px; height:6px; margin-top:0; align-self:center}
+
+/* controls shrink to a 24px rhythm - still a real hit target, half the height */
+.mh-bar select, .mh-bar .text-input{padding:3px 8px; font-size:12px; border-radius:8px}
+.mh-bar .size-btn, .mh-bar .size-input{height:24px; font-size:12px}
+.mh-bar .size-btn{min-width:24px}
+.mh-bar .size-input{width:48px}
+.masthead .chip{padding:3px 8px; font-size:10px}
+.masthead .about-link{padding:2px 0}
+.masthead .share-btn{padding:4px 10px; font-size:10px; margin-top:0; width:auto}
+.masthead .lf-sync{font-size:10px}
 .sb-identity{display:flex; align-items:center; gap:8px}
 .sb-field{display:flex; align-items:center; gap:7px}
 .sb-field>span{font-family:var(--mono); font-size:10px; letter-spacing:.12em;
