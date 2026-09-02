@@ -70,6 +70,22 @@ check(
     "L2c exactly one sortPartyByRole definition",
 )
 
+print("L3 - one home per layout rule")
+
+OWNED = [".shell{", ".main{", ".wheelstage{", ".ws-flank{", ".ws-center{",
+         ".pdash{", ".pdash-tab{", ".pdash-body{"]
+for sel in OWNED:
+    check(sel in LAYOUT, "L3a %s defined in _layout.css" % sel)
+    check(sel not in SHELL, "L3b %s NOT left in _shell.html" % sel)
+    check(sel not in DECISION_CSS, "L3c %s NOT left in _decision_layer.css" % sel)
+# Component cards (.dl-gains, .dl-tools, .dl-alt-row) legitimately use their
+# own internal grids. What must NOT live here is the PAGE grid: the dissolve
+# trick, the stage children it re-parents, and the hero breakpoint.
+for marker in ["display:contents", ".ws-right", ".wheelstage", "min-width:1251px"]:
+    check(marker not in DECISION_CSS,
+          "L3d page-grid marker %s absent from _decision_layer.css" % marker,
+          "component grids are fine here; the page grid belongs to _layout.css")
+
 if FAILURES:
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
     sys.exit(1)

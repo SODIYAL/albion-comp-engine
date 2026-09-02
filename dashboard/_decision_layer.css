@@ -89,58 +89,6 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-alt-dim{opacity:.62}.dl-alt-dim .dl-alt-sc{color:var(--amber)}
 .dl-add{width:100%;margin-top:12px}
 .dl-empty{grid-column:1/-1;grid-row:1/-1;display:flex;align-items:center;justify-content:space-between;gap:16px}.dl-empty p{margin:4px 0 0;color:var(--ink-2);font-size:12.5px}
-/* The old right flank duplicated the exact questions answered above. Keep its
-   underlying renderers alive, but remove that duplicate surface. */
-.ws-right{display:none}
-/* HERO GRID (owner 2026-08-22): one screen, no scrolling for the important
-   things. ≥1251px the main column becomes a grid — decision stack left,
-   wheel right (in the column the old pick card occupied), party strip
-   across the bottom, forge warnings full-width between. The wheelstage
-   dissolves (display:contents) so its children sit on the main grid;
-   below 1251px the shell's own single-column stage rules take over. */
-@media (min-width:1251px){
-  .main{display:grid;grid-template-columns:minmax(390px,1fr) minmax(0,1.5fr);gap:18px 24px;align-items:start}
-  .main>*{grid-column:1/-1;min-width:0}
-  /* both stage wrappers dissolve — their children sit on the main grid, so
-     the caller-tools fold can drop below the party strip and the wheel can
-     span the full left-column height */
-  .decision-layer{display:contents}
-  .wheelstage{display:contents}
-  /* explicit: the hero band. Everything after it (warn slot, the
-     relocated caller-tools fold, the deep boards) auto-places into
-     tight full-width rows in DOM order — no phantom row gaps. */
-  .dl-status{grid-column:1;grid-row:1}
-  .dl-pick{grid-column:1;grid-row:2}
-  .dl-empty{grid-column:1;grid-row:1/3}
-  .ws-center{grid-column:2;grid-row:1/3;order:0}
-  /* forge honesty reports live UNDER THE WHEEL (owner 2026-08-23): the
-     wheel column's next row, so quiet runs collapse to nothing there */
-  #warn-slot{grid-column:2;grid-row:3}
-  .dl-tools-fold{grid-column:1/-1;grid-row:auto}
-  .shell[data-rail="min"] .ws-center{grid-column:2;grid-row:1/3}
-  /* the semicircle freed the wheel's lower half, so the hero band can
-     afford the full-width instrument (owner 2026-08-27) */
-  .wheel{--wd:min(680px,100cqi)}
-  /* caller tools sit full-width below the strip */
-  .dl-tools{grid-template-columns:1fr 1fr}
-  /* one-screen density: the hero band must leave room for the party strip
-     on a ~940px viewport, so the decision stack sheds slack height */
-  .dl-status{padding:0}
-  .dl-pick{padding:14px 16px}
-  .dl-needline{padding-bottom:10px;margin-bottom:10px}
-  .dl-nl-main strong{font-size:19px}
-  .dl-weapon{margin:8px 0 6px;gap:12px}
-  .dl-weapon img.icon{width:56px;height:56px}
-  .dl-weapon .nm-btn{font-size:23px}
-  .dl-pick p{margin:6px 0 8px;font-size:12.5px}
-  .dl-gains li{padding:6px 7px}
-  .dl-remain{margin-top:8px}
-  .dl-add{margin-top:10px}
-  .dl-alts{margin-top:8px;gap:4px}
-  .dl-alt{padding:5px 9px}
-  /* (the party strip's layout rules retired 2026-08-27 with the strip —
-     the roster lives on the wheel's comp board) */
-}
 /* Deep diagnostics remain below the hero, but their heading says what they are. */
 #groups{margin-top:-4px}
 /* runners-up inside the pick card — one compact chip row (gain in tooltip) */
@@ -212,4 +160,4 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .dl-swap-actions button{background:transparent;border:1px solid var(--rule);color:var(--ink-2);border-radius:7px;padding:5px 7px;font-size:9.5px}
 .dl-swap-actions button:hover{border-color:var(--brass);color:var(--brass)}
 @media(max-width:900px){.dl-tools{grid-template-columns:1fr}}
-@media(max-width:720px){.dl-gains{grid-template-columns:1fr}.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-alt-row{grid-template-columns:1fr}.dl-empty{display:block}.wheelstage{gap:20px}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
+@media(max-width:720px){.dl-gains{grid-template-columns:1fr}.dl-needline{flex-direction:column}.dl-nd-chips{max-width:none;justify-content:flex-start}.dl-nd-chips .dl-kicker{text-align:left}.dl-alt-row{grid-template-columns:1fr}.dl-empty{display:block}.dl-mini-rank{grid-template-columns:1fr}.dl-swap-row{align-items:flex-start}.dl-swap-actions{max-width:110px}}
