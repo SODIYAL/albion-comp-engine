@@ -1247,7 +1247,10 @@ function renderGroups(){
     if (!rows.length) return "";
     /* geometry: one nested ring per capability, innermost = first declared.
        Thin marks with a >=4px surface gap between them. */
-    const W = 240, R = 100, cx = 120, cy = 104, H = 112, r0 = 24;
+    /* the semicircle hangs BELOW its flat edge, so cy sits at the top of
+       the box and the deepest point (cy + R + half a stroke) is the
+       viewBox height - otherwise the arcs paint over the legend */
+    const W = 240, R = 96, cx = 120, cy = 8, H = 112, r0 = 22;
     const n = rows.length;
     const step = n > 1 ? (R - r0) / (n - 1) : 0;
     const sw = Math.max(5, Math.min(14, (step || 30) - 4));

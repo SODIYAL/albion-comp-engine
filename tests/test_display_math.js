@@ -289,5 +289,61 @@ function setUsage(baskets) {
         empties.every(v => v === null), JSON.stringify(empties));
 }
 
+/* ---- capability-ring geometry -------------------------------------------
+ * The supply board's arcs are the other display computation that does not
+ * show its own mistakes usefully: a ring drawn outside its viewBox still
+ * PAINTS (SVG overflow), so a wrong origin renders as arcs sitting on top
+ * of the legend text rather than as a blank chart. That shipped once
+ * (2026-09-02: cy was set to the bottom of the box instead of the top, so
+ * every arc ran 92px past it and covered the labels).
+ */
+{
+  const geo = SRC.match(/function ringPath\([\s\S]*?\n\}\nfunction ringTick\([\s\S]*?\n\}/);
+  if (!geo) throw new Error("could not extract ringPath/ringTick from _app.js");
+  const ctx = { Math };
+  vm.createContext(ctx);
+  vm.runInContext(geo[0], ctx);
+
+  /* the same constants renderGroups uses - keep in sync with it */
+  const W = 240, R = 96, cx = 120, cy = 8, H = 112, r0 = 22;
+  /* a path is "M x0 y0 A r r 0 0 0 x1 y1" - take the FIRST and LAST pairs,
+     never every number pair (the radii and flags are not coordinates) */
+  const nums = d => (d.match(/-?[\d.]+/g) || []).map(Number);
+  const ends = d => { const n = nums(d); return [[n[0], n[1]], [n[n.length - 2], n[n.length - 1]]]; };
+
+  check("ringPath: zero coverage draws nothing",
+        vm.runInContext(`ringPath(${cx},${cy},${R},0)`, ctx) === "");
+
+  const full = ends(vm.runInContext(`ringPath(${cx},${cy},${R},1)`, ctx));
+  check("ringPath: full sweep ends level with its start",
+        full[0][1] === cy && full[1][1] === cy, JSON.stringify(full));
+  check("ringPath: full sweep spans the diameter",
+        Math.abs((full[1][0] - full[0][0]) - 2 * R) < 0.01, JSON.stringify(full));
+
+  const half = ends(vm.runInContext(`ringPath(${cx},${cy},${R},0.5)`, ctx));
+  check("ringPath: half sweep reaches the deepest point",
+        Math.abs(half[1][0] - cx) < 0.01 && Math.abs(half[1][1] - (cy + R)) < 0.01,
+        JSON.stringify(half));
+
+  /* THE REGRESSION GUARD. An arc's extreme is NOT its endpoints - a full
+     sweep ends level with its start while dipping r below it. The reachable
+     extremes of this construction are cy + r (any sweep past halfway) and
+     cx +/- r, so bound those directly for the widest ring. */
+  const n = 8, step = (R - r0) / (n - 1), sw = Math.max(5, Math.min(14, step - 4));
+  const rMax = r0 + (n - 1) * step;
+  const deepest = cy + rMax + sw / 2;
+  const widest = cx + rMax + sw / 2;
+  const leftmost = cx - rMax - sw / 2;
+  check(`ring geometry fits the viewBox height (deepest ${deepest.toFixed(1)} <= ${H})`,
+        deepest <= H, `deepest ${deepest}`);
+  check(`ring geometry fits the viewBox width (${leftmost.toFixed(1)} .. ${widest.toFixed(1)} within 0..${W})`,
+        leftmost >= 0 && widest <= W, `${leftmost} .. ${widest}`);
+  /* and the tick, which is drawn proud of the stroke on both sides */
+  const t = vm.runInContext(`ringTick(${cx},${cy},${rMax},0.5,${sw / 2 + 2})`, ctx).map(Number);
+  check(`ring tick stays inside the viewBox (y ${Math.max(t[1], t[3]).toFixed(1)} <= ${H})`,
+        Math.max(t[1], t[3]) <= H, JSON.stringify(t));
+
+}
+
 console.log(`\n${pass}/${pass + fail} display-math tests passed`);
 process.exit(fail ? 1 : 0);

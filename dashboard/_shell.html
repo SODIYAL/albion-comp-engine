@@ -950,7 +950,10 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
    and beyond-ceiling stacking shows as a pip, never as a longer arc.
    Arc colour is the reserved STATUS palette (met/part/none/over), never a
    group hue - the group's hue lives on the panel header. */
-.cap-rings{display:block; width:100%; height:auto; overflow:visible; margin:2px 0 8px}
+/* NOT overflow:visible - a ring drawn outside its box must clip, so a
+   geometry mistake reads as a truncated arc instead of silently
+   painting over the legend (tests/test_display_math.js guards it) */
+.cap-rings{display:block; width:100%; height:auto; margin:2px 0 6px}
 .cap-rings .ring-track{fill:none; stroke:#1B202B; stroke-linecap:round}
 .cap-rings .ring{fill:none; stroke-linecap:round; transition:stroke-dashoffset .45s var(--ease)}
 .cap-rings .ring.met{stroke:var(--ok)}

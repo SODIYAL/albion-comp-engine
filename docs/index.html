@@ -950,7 +950,10 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
    and beyond-ceiling stacking shows as a pip, never as a longer arc.
    Arc colour is the reserved STATUS palette (met/part/none/over), never a
    group hue - the group's hue lives on the panel header. */
-.cap-rings{display:block; width:100%; height:auto; overflow:visible; margin:2px 0 8px}
+/* NOT overflow:visible - a ring drawn outside its box must clip, so a
+   geometry mistake reads as a truncated arc instead of silently
+   painting over the legend (tests/test_display_math.js guards it) */
+.cap-rings{display:block; width:100%; height:auto; margin:2px 0 6px}
 .cap-rings .ring-track{fill:none; stroke:#1B202B; stroke-linecap:round}
 .cap-rings .ring{fill:none; stroke-linecap:round; transition:stroke-dashoffset .45s var(--ease)}
 .cap-rings .ring.met{stroke:var(--ok)}
@@ -7084,7 +7087,10 @@ function renderGroups(){
     if (!rows.length) return "";
     /* geometry: one nested ring per capability, innermost = first declared.
        Thin marks with a >=4px surface gap between them. */
-    const W = 240, R = 100, cx = 120, cy = 104, H = 112, r0 = 24;
+    /* the semicircle hangs BELOW its flat edge, so cy sits at the top of
+       the box and the deepest point (cy + R + half a stroke) is the
+       viewBox height - otherwise the arcs paint over the legend */
+    const W = 240, R = 96, cx = 120, cy = 8, H = 112, r0 = 22;
     const n = rows.length;
     const step = n > 1 ? (R - r0) / (n - 1) : 0;
     const sw = Math.max(5, Math.min(14, (step || 30) - 4));
