@@ -1502,16 +1502,6 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
       <div class="meta-grid" id="meta-strip"></div>
     </section>
 
-    <!-- Live party feed: the companion's home, one card per in-game member -->
-    <section class="livefeed" id="companion" data-live="false">
-      <div class="sec-label">Live party</div>
-      <div class="lf-bar">
-        <div class="status" id="companion-status" hidden></div>
-        <button class="load-btn lf-btn" id="companion-load" hidden>load party into comp</button>
-      </div>
-      <div class="comp-members" id="companion-members"></div>
-    </section>
-
     <p class="footnote" id="footnote"></p>
   </main>
 </div>
@@ -1521,10 +1511,14 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 <div class="epanel-rail" data-edge="left">
   <button class="epanel-tab" data-panel="setup-panel" aria-expanded="false"
     title="show or hide setup">setup</button>
+  <button class="epanel-tab" data-panel="tools-panel" aria-expanded="false"
+    title="show or hide caller tools - player pool and swap impact">tools</button>
 </div>
 <div class="epanel-rail" data-edge="right">
   <button class="epanel-tab" data-panel="pdash" aria-expanded="false"
     title="show or hide the party board">party <b id="pdash-count">0/0</b></button>
+  <button class="epanel-tab" data-panel="live-panel" aria-expanded="false"
+    title="show or hide the live party feed">live</button>
 </div>
 
 <aside class="epanel" data-edge="left" data-open="false" id="setup-panel" aria-label="Setup">
@@ -1550,6 +1544,24 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
     <div class="btn-row">
       <button class="share-btn clear-btn" id="clear">clear comp</button>
     </div>
+  </div>
+</aside>
+
+<aside class="epanel" data-edge="left" data-open="false" id="tools-panel" aria-label="Caller tools">
+  <div class="epanel-body" id="tools-panel-body"></div>
+</aside>
+
+<aside class="epanel" data-edge="right" data-open="false" id="live-panel" aria-label="Live party">
+  <div class="epanel-body">
+  <!-- Live party feed: the companion's home, one card per in-game member -->
+  <section class="livefeed" id="companion" data-live="false">
+    <div class="sec-label">Live party</div>
+    <div class="lf-bar">
+      <div class="status" id="companion-status" hidden></div>
+      <button class="load-btn lf-btn" id="companion-load" hidden>load party into comp</button>
+    </div>
+    <div class="comp-members" id="companion-members"></div>
+    </section>
   </div>
 </aside>
 

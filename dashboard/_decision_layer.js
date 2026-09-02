@@ -515,9 +515,8 @@
         <div class="dl-swap-list">${rows || `<span class="dl-tool-note">Nothing in the pool beats keeping this slot as-is${keys.length ? "" : " — no better options at this content and size"}.</span>`}</div>`;
     }
 
-    /* the fold lives AFTER the wheel stage in the DOM: on the hero grid it
-       auto-places below the party strip (keeping the one-screen budget),
-       and on stacked layouts it reads as the section after the stage */
+    /* the fold lives in the left-edge tools panel (2026-09-02): it is an
+       interactive workflow, not glance-info, so it costs the grid nothing */
     const old = document.getElementById("dl-tools-fold");
     if (old) old.remove();
     const fold = document.createElement("details");
@@ -536,12 +535,9 @@
       <div class="dl-tool-head"><div><span class="dl-kicker">Swap impact</span><h3>What changes if this slot swaps?</h3></div></div>
       ${swapHtml}
     </div></div>`;
-    /* anchor after the warn slot (which follows the stage since the
-       2026-08-23 under-the-wheel move) so stacked layouts keep the order
-       wheel -> forge reports -> caller tools */
-    const anchor = document.getElementById("warn-slot")
-      || document.querySelector(".wheelstage");
-    if (anchor) anchor.after(fold); else host.appendChild(fold);
+    const panel = document.getElementById("tools-panel-body");
+    if (panel) panel.appendChild(fold);
+    else host.appendChild(fold);
   }
 
   function renderDecisionLayer(){

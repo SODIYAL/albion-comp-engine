@@ -135,6 +135,17 @@ for keep in ['id="forge-rail"', 'id="share"', 'id="export"', 'id="clear"',
              'id="size-notice"']:
     check(keep in SHELL, "L6f setup panel keeps %s" % keep)
 
+print("L7 - deep interactive surfaces live in panels")
+
+check('id="tools-panel"' in SHELL, "L7a caller-tools panel exists")
+check('id="live-panel"' in SHELL, "L7b live-party panel exists")
+check('data-panel="tools-panel"' in SHELL, "L7c tools panel has a tab")
+check('data-panel="live-panel"' in SHELL, "L7d live panel has a tab")
+main = SHELL[SHELL.index('<main class="main">'):SHELL.index("</main>")]
+check('class="livefeed"' not in main, "L7e livefeed left .main")
+check('id="meta-sec"' in main, "L7f killboard stays a deep board in .main")
+check("tools-panel" in DECISION_JS, "L7g tools fold mounts into its panel")
+
 if FAILURES:
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
     sys.exit(1)

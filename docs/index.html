@@ -1885,16 +1885,6 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
       <div class="meta-grid" id="meta-strip"></div>
     </section>
 
-    <!-- Live party feed: the companion's home, one card per in-game member -->
-    <section class="livefeed" id="companion" data-live="false">
-      <div class="sec-label">Live party</div>
-      <div class="lf-bar">
-        <div class="status" id="companion-status" hidden></div>
-        <button class="load-btn lf-btn" id="companion-load" hidden>load party into comp</button>
-      </div>
-      <div class="comp-members" id="companion-members"></div>
-    </section>
-
     <p class="footnote" id="footnote"></p>
   </main>
 </div>
@@ -1904,10 +1894,14 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 <div class="epanel-rail" data-edge="left">
   <button class="epanel-tab" data-panel="setup-panel" aria-expanded="false"
     title="show or hide setup">setup</button>
+  <button class="epanel-tab" data-panel="tools-panel" aria-expanded="false"
+    title="show or hide caller tools - player pool and swap impact">tools</button>
 </div>
 <div class="epanel-rail" data-edge="right">
   <button class="epanel-tab" data-panel="pdash" aria-expanded="false"
     title="show or hide the party board">party <b id="pdash-count">0/0</b></button>
+  <button class="epanel-tab" data-panel="live-panel" aria-expanded="false"
+    title="show or hide the live party feed">live</button>
 </div>
 
 <aside class="epanel" data-edge="left" data-open="false" id="setup-panel" aria-label="Setup">
@@ -1933,6 +1927,24 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     <div class="btn-row">
       <button class="share-btn clear-btn" id="clear">clear comp</button>
     </div>
+  </div>
+</aside>
+
+<aside class="epanel" data-edge="left" data-open="false" id="tools-panel" aria-label="Caller tools">
+  <div class="epanel-body" id="tools-panel-body"></div>
+</aside>
+
+<aside class="epanel" data-edge="right" data-open="false" id="live-panel" aria-label="Live party">
+  <div class="epanel-body">
+  <!-- Live party feed: the companion's home, one card per in-game member -->
+  <section class="livefeed" id="companion" data-live="false">
+    <div class="sec-label">Live party</div>
+    <div class="lf-bar">
+      <div class="status" id="companion-status" hidden></div>
+      <button class="load-btn lf-btn" id="companion-load" hidden>load party into comp</button>
+    </div>
+    <div class="comp-members" id="companion-members"></div>
+    </section>
   </div>
 </aside>
 
@@ -8936,9 +8948,8 @@ render();
         <div class="dl-swap-list">${rows || `<span class="dl-tool-note">Nothing in the pool beats keeping this slot as-is${keys.length ? "" : " — no better options at this content and size"}.</span>`}</div>`;
     }
 
-    /* the fold lives AFTER the wheel stage in the DOM: on the hero grid it
-       auto-places below the party strip (keeping the one-screen budget),
-       and on stacked layouts it reads as the section after the stage */
+    /* the fold lives in the left-edge tools panel (2026-09-02): it is an
+       interactive workflow, not glance-info, so it costs the grid nothing */
     const old = document.getElementById("dl-tools-fold");
     if (old) old.remove();
     const fold = document.createElement("details");
@@ -8957,12 +8968,9 @@ render();
       <div class="dl-tool-head"><div><span class="dl-kicker">Swap impact</span><h3>What changes if this slot swaps?</h3></div></div>
       ${swapHtml}
     </div></div>`;
-    /* anchor after the warn slot (which follows the stage since the
-       2026-08-23 under-the-wheel move) so stacked layouts keep the order
-       wheel -> forge reports -> caller tools */
-    const anchor = document.getElementById("warn-slot")
-      || document.querySelector(".wheelstage");
-    if (anchor) anchor.after(fold); else host.appendChild(fold);
+    const panel = document.getElementById("tools-panel-body");
+    if (panel) panel.appendChild(fold);
+    else host.appendChild(fold);
   }
 
   function renderDecisionLayer(){
