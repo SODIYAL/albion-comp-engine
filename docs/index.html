@@ -1784,27 +1784,17 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 }
 
 /* ---------- the wheel stage ----------
-   Below 1251px this is a real grid; at and above it the stage dissolves
-   (display:contents) and .ws-center places directly on the card grid. */
-.wheelstage{
-  display:grid;
-  grid-template-columns:minmax(196px,220px) minmax(0,1fr) minmax(280px,320px);
-  gap:30px; align-items:start;
-}
-@media (max-width:1560px){
-  .wheelstage{grid-template-columns:minmax(0,1fr) minmax(280px,360px)}
-  .ws-center{grid-column:1; grid-row:2}
-  .ws-right{grid-column:2; grid-row:1 / span 2}
-}
-@media (max-width:1250.98px){
-  .wheelstage{grid-template-columns:1fr}
-  .ws-center{grid-column:auto; grid-row:auto; order:2}
-  .ws-right{grid-column:auto; grid-row:auto; order:3}
-}
-@media (max-width:960px){
-  .ws-center{order:1}
-}
-.ws-flank{display:flex; flex-direction:column; gap:12px; min-width:0}
+   A single-child pass-through: the right flank (.ws-flank.ws-right) is
+   display:none with its renderers kept alive, and no left flank exists in
+   the markup, so exactly ONE child renders at every width. Below 1251px
+   the stage is a plain block around .ws-center; at and above it dissolves
+   entirely (display:contents in the card-grid block) so .ws-center places
+   directly on .main's grid. The 3-column template, the 1560px collapse
+   and the mobile order swaps placed flanks that never render — deleted
+   2026-09-02 (and the old template would have crushed the lone .ws-center
+   into its 196-220px first column). */
+.wheelstage{display:block}
+.ws-flank{min-width:0}   /* the hidden right flank; renderers still fill it */
 
 .ws-center{min-width:0; container-type:inline-size}
 
@@ -1813,8 +1803,12 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
    costs ZERO layout: the content grid always gets the full viewport.
    Tabs stack in an .epanel-rail per edge; adding a surface is one <button>
    plus one <aside>. Generalised from .pdash 2026-09-02. */
+/* ONE width for panel and rail — the rail's open-state transform rides
+   exactly the panel's edge, so they must read the SAME value. Declared on
+   :root because the rail is a fixed SIBLING, not a descendant: a copy on
+   each element was two values pretending to be one. */
+:root{--epw:min(430px, 92vw)}
 .epanel{
-  --epw:min(430px, 92vw);          /* one width, shared with the tab rail */
   position:fixed; top:0; bottom:0; z-index:40;
   width:var(--epw);
   transition:transform .32s var(--ease);
@@ -1825,21 +1819,20 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
 .epanel[data-edge="right"]{right:0; transform:translateX(100%); border-left:1px solid var(--rule-2)}
 .epanel[data-edge="left"]{left:0; transform:translateX(-100%); border-right:1px solid var(--rule-2)}
 .epanel[data-open="true"]{transform:none}
-/* desktop: an OPEN panel rises above the rails so the kit flyout (a panel
-   child painted outside its left edge) is not occluded by its own tab —
-   the pointer crossing a non-descendant tab fired the panel's mouseleave
-   and killed the flyout mid-reach. Phones keep the rail on top: the tab
-   bar must stay tappable over the open sheet. */
-@media (min-width:961px){
-  .epanel[data-open="true"]{z-index:42}
-}
+/* an OPEN panel rises above the rails so the kit flyout (a panel child
+   painted outside its left edge) is not occluded by its own tab — the
+   pointer crossing a non-descendant tab fired the panel's mouseleave and
+   killed the flyout mid-reach. Unconditional, with the phone block below
+   lowering it back: a desktop-side media pair would leave fractional
+   widths at the seam matching neither side, and phones must keep the tab
+   bar tappable over the sheet. */
+.epanel[data-open="true"]{z-index:42}
 .epanel-body{overflow-y:auto; padding:12px 12px 18px; flex:1}
 .epanel-empty{padding:6px 2px}
 
 /* the tab rails: one stacked column of tabs per edge, centred vertically
    and pinned OUTSIDE the panel so they stay reachable when it is shut */
 .epanel-rail{
-  --epw:min(430px, 92vw);
   position:fixed; top:50%; transform:translateY(-50%); z-index:41;
   display:flex; flex-direction:column; gap:8px;
   transition:transform .32s var(--ease);
@@ -1871,6 +1864,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
     border:1px solid var(--rule-2); border-bottom:0; border-radius:14px 14px 0 0}
   .epanel[data-edge="left"], .epanel[data-edge="right"]{transform:translateY(100%)}
   .epanel[data-open="true"]{transform:none}
+  /* the rail (z41) stays above the sheet: the tab bar must remain tappable */
+  .epanel[data-open="true"]{z-index:40}
   /* the sheet's own content clears the tab bar that sits over its foot */
   .epanel-body{padding-bottom:44px}
   /* the rails become one bottom tab bar: tap another tab to switch panels,
@@ -1984,9 +1979,6 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
    nested inside component media blocks rather than the ranges above ---- */
 @media (max-width:640px){
   .main{padding:14px 12px 70px; gap:22px}
-}
-@media (max-width:720px){
-  .wheelstage{gap:20px}
 }
 
 /* ---------- masthead / status bar ----------
@@ -9218,6 +9210,22 @@ render();
     h += `<div class="dlt-note">descriptive — identity, kill pressure and roles never score</div>`;
     return h;
   }
+  function identityModel(){
+    if ("id" in DL_MEMO) return DL_MEMO.id;
+    DL_MEMO.id = (typeof ENG.compIdentity === "function")
+      ? ENG.compIdentity(party, COMBOS_CUR) : null;
+    return DL_MEMO.id;
+  }
+  /* the status-bar mirror is an EXPLICIT render step, not a side effect of
+     evaluating statusRadar inside a template literal — anyone reusing the
+     radar markup elsewhere must not silently clobber the masthead */
+  function syncSbIdentity(){
+    const sbi = document.getElementById("sb-identity");
+    if (!sbi) return;
+    const c = identityCenter(identityModel());
+    sbi.innerHTML = `<b class="${c.firm ? "firm" : ""}">${esc(c.name)}</b>`
+      + (c.sub ? `<span>${esc(c.sub.toUpperCase())}</span>` : "");
+  }
   function roleAdvisory(){
     if ("adv" in DL_MEMO) return DL_MEMO.adv;
     DL_MEMO.adv = null;
@@ -9275,15 +9283,10 @@ render();
       s += `<g data-dltip="${tip}" class="dl-radar-hit">${dlIcon(ix, iy, 21, a.meta.icon, a.meta.col)}`
         + `<text x="${ix}" y="${iy + 20}" text-anchor="middle" class="dlr-pct"${a.floor ? ' fill="var(--gap)"' : a.over ? ' fill="var(--over)"' : ""}>${Math.round(a.cov * 100)}%</text></g>`;
     });
-    /* identity center */
-    const id = (typeof ENG.compIdentity === "function") ? ENG.compIdentity(party, COMBOS_CUR) : null;
+    /* identity center — the memoised model syncSbIdentity also reads, so
+       the hollow centre and the status bar can never disagree */
+    const id = identityModel();
     const c = identityCenter(id);
-    /* mirror the identity verdict into the status bar — the same
-       identityCenter() value the hollow center draws, so the two can never
-       disagree, and no extra engine call is made */
-    const sbi = document.getElementById("sb-identity");
-    if (sbi) sbi.innerHTML = `<b class="${c.firm ? "firm" : ""}">${esc(c.name)}</b>`
-      + (c.sub ? `<span>${esc(c.sub.toUpperCase())}</span>` : "");
     const f = fitness(party), max = maxFitness();
     const pct = Math.max(0, Math.min(100, f / Math.max(1, max) * 100));
     const ctip = tipRef(centerTipHtml(state, id, pct, f, max));
@@ -9567,8 +9570,8 @@ render();
     const host = document.getElementById("decision-layer");
     if (!host) return;
     DL_MEMO = {};   /* one engine walk per model per pass */
-    /* statusRadar() refills this; on an empty comp it never runs, so clear
-       first rather than leaving a stale verdict in the status bar */
+    /* syncSbIdentity() refills this; on an empty comp it never runs, so
+       clear first rather than leaving a stale verdict in the status bar */
     const sbi0 = document.getElementById("sb-identity");
     if (sbi0) sbi0.innerHTML = "";
     const state = statusModel();
@@ -9588,6 +9591,7 @@ render();
 
     if (!top){
       host.innerHTML = `<div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>`;
+      syncSbIdentity();
       renderPlayerTools(host);
       return;
     }
@@ -9678,6 +9682,7 @@ render();
       <div class="dl-pressure">${killPressureCard()}${roleCard()}
         <div class="dl-chain-card">${chainLine(top)}</div>
       </div>`;
+    syncSbIdentity();
     renderPlayerTools(host);
   }
 

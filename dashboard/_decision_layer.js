@@ -250,6 +250,22 @@
     h += `<div class="dlt-note">descriptive — identity, kill pressure and roles never score</div>`;
     return h;
   }
+  function identityModel(){
+    if ("id" in DL_MEMO) return DL_MEMO.id;
+    DL_MEMO.id = (typeof ENG.compIdentity === "function")
+      ? ENG.compIdentity(party, COMBOS_CUR) : null;
+    return DL_MEMO.id;
+  }
+  /* the status-bar mirror is an EXPLICIT render step, not a side effect of
+     evaluating statusRadar inside a template literal — anyone reusing the
+     radar markup elsewhere must not silently clobber the masthead */
+  function syncSbIdentity(){
+    const sbi = document.getElementById("sb-identity");
+    if (!sbi) return;
+    const c = identityCenter(identityModel());
+    sbi.innerHTML = `<b class="${c.firm ? "firm" : ""}">${esc(c.name)}</b>`
+      + (c.sub ? `<span>${esc(c.sub.toUpperCase())}</span>` : "");
+  }
   function roleAdvisory(){
     if ("adv" in DL_MEMO) return DL_MEMO.adv;
     DL_MEMO.adv = null;
@@ -307,15 +323,10 @@
       s += `<g data-dltip="${tip}" class="dl-radar-hit">${dlIcon(ix, iy, 21, a.meta.icon, a.meta.col)}`
         + `<text x="${ix}" y="${iy + 20}" text-anchor="middle" class="dlr-pct"${a.floor ? ' fill="var(--gap)"' : a.over ? ' fill="var(--over)"' : ""}>${Math.round(a.cov * 100)}%</text></g>`;
     });
-    /* identity center */
-    const id = (typeof ENG.compIdentity === "function") ? ENG.compIdentity(party, COMBOS_CUR) : null;
+    /* identity center — the memoised model syncSbIdentity also reads, so
+       the hollow centre and the status bar can never disagree */
+    const id = identityModel();
     const c = identityCenter(id);
-    /* mirror the identity verdict into the status bar — the same
-       identityCenter() value the hollow center draws, so the two can never
-       disagree, and no extra engine call is made */
-    const sbi = document.getElementById("sb-identity");
-    if (sbi) sbi.innerHTML = `<b class="${c.firm ? "firm" : ""}">${esc(c.name)}</b>`
-      + (c.sub ? `<span>${esc(c.sub.toUpperCase())}</span>` : "");
     const f = fitness(party), max = maxFitness();
     const pct = Math.max(0, Math.min(100, f / Math.max(1, max) * 100));
     const ctip = tipRef(centerTipHtml(state, id, pct, f, max));
@@ -599,8 +610,8 @@
     const host = document.getElementById("decision-layer");
     if (!host) return;
     DL_MEMO = {};   /* one engine walk per model per pass */
-    /* statusRadar() refills this; on an empty comp it never runs, so clear
-       first rather than leaving a stale verdict in the status bar */
+    /* syncSbIdentity() refills this; on an empty comp it never runs, so
+       clear first rather than leaving a stale verdict in the status bar */
     const sbi0 = document.getElementById("sb-identity");
     if (sbi0) sbi0.innerHTML = "";
     const state = statusModel();
@@ -620,6 +631,7 @@
 
     if (!top){
       host.innerHTML = `<div class="dl-status ${state.tone}"><div class="sec-label">Comp status</div>${statusRadar(state)}</div>`;
+      syncSbIdentity();
       renderPlayerTools(host);
       return;
     }
@@ -710,6 +722,7 @@
       <div class="dl-pressure">${killPressureCard()}${roleCard()}
         <div class="dl-chain-card">${chainLine(top)}</div>
       </div>`;
+    syncSbIdentity();
     renderPlayerTools(host);
   }
 

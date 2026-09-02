@@ -135,6 +135,16 @@ check('setPanel("pdash", false, false)' in APP,
 check('.epanel[data-open="true"]{z-index:42}' in LAYOUT,
       "L4m an open panel rises above its rail on desktop",
       "the rail sat on the kit flyout's hover path and mouseleave killed it")
+# the desktop/phone split must TILE: a (min-width:961px) media paired with
+# the <=960 block left 960.5px (scaled displays) matching neither - the
+# rule is unconditional and the phone block lowers it back
+check("min-width:961px" not in LAYOUT,
+      "L4m2 the z-order split is unconditional + phone reset, not a gapped pair")
+check('.epanel[data-open="true"]{z-index:40}' in LAYOUT,
+      "L4m3 phones keep the tab bar above the open sheet")
+check(LAYOUT.count("--epw:min(") == 1,
+      "L4n one --epw declaration - panel and rail must read the SAME width",
+      "two copies let the rail translate by a stale width and detach")
 
 print("L5 - status bar")
 
@@ -191,18 +201,27 @@ check('setPanel("live-panel", true' in APP,
 
 print("L8 - the column grid")
 
-check("@media (min-width:1700px)" in LAYOUT, "L8a four-column breakpoint exists")
-check("@media (min-width:1400px) and (max-width:1699.98px)" in LAYOUT,
-      "L8b three-column breakpoint exists")
-check("@media (min-width:1251px) and (max-width:1399.98px)" in LAYOUT,
-      "L8c the 1251-1399 hero grid is preserved")
+# SHAPE pins, never tuning values (a nudged breakpoint or wheel width must
+# not fail the gate - that trains mechanical re-pinning): grid bands are
+# the media blocks whose .main declares a track template. One two-, one
+# three- and one four-column band, each carrying a wheel-width override.
+_bands = [b for b in re.split(r"(?=@media )", LAYOUT)
+          if ".main{grid-template-columns:" in b]
+_tracks = sorted(b.split(".main{grid-template-columns:")[1].split("}")[0]
+                 .count("minmax(") for b in _bands)
+check(_tracks == [2, 3, 4],
+      "L8a one two-, one three- and one four-column band", str(_tracks))
+check(all("--wd:min(" in b for b in _bands),
+      "L8b every grid band sets its wheel width")
 # 125%/150% display scaling yields fractional viewport widths (1399.5px);
 # an integer max-width leaves an open interval matching NO band, and the
 # base >=1251 grid has no column template - the page collapsed to one column
-for b in ["max-width:1250px)", "max-width:1399px)", "max-width:1699px)"]:
-    check(b not in LAYOUT,
-          "L8g no integer band boundary leaves a fractional-width gap (%s)" % b)
-check("--wd:min(520px,100cqi)" in LAYOUT, "L8d wheel shrinks to 520px in the four-col grid")
+check(not re.search(r"max-width:1\d{3}px\)", LAYOUT),
+      "L8c no integer band boundary leaves a fractional-width gap")
+for _x in re.findall(r"max-width:(\d+)\.98px\)", LAYOUT):
+    check(("min-width:%dpx" % (int(_x) + 1)) in LAYOUT,
+          "L8d the band above max-width:%s.98px starts at %dpx - bands tile"
+          % (_x, int(_x) + 1))
 check('id="supply-sec"' in SHELL, "L8e capability supply section is placeable")
 # every selector the grid places must be a real .main child (or a child of a
 # display:contents wrapper), else the rule silently does nothing
@@ -338,6 +357,16 @@ check("GROUP_COL." in meta,
       "L15a the radar reads the app's GROUP_COL hues",
       "the comment claims ONE source; the radar kept its own copy")
 check('"#' not in meta, "L15b no second hand-stepped hex table to drift")
+# statusRadar is a markup function evaluated inside template literals - a
+# hidden #sb-identity write mid-evaluation coupled it to a clear two
+# functions away; the write is an explicit renderDecisionLayer step now
+_sr = seg(DECISION_JS, "function statusRadar", "let CHAIN_OPEN", "L15c anchors")
+check("sb-identity" not in _sr and _sr != "",
+      "L15c statusRadar builds markup only - no hidden status-bar write")
+check("function syncSbIdentity" in DECISION_JS,
+      "L15d the status-bar identity write is an explicit named step")
+check("function identityModel" in DECISION_JS,
+      "L15e compIdentity is memoised like the other per-pass models")
 
 print("L16 - one engine walk per render pass")
 
@@ -364,6 +393,16 @@ check(".dl-tools{display:grid;grid-template-columns:1fr;" in DECISION_CSS,
       "a viewport-keyed 2-col grid crushed the pool/swap cards to ~190px")
 check("@media(max-width:900px){.dl-tools" not in DECISION_CSS,
       "L17d the dead viewport escape for the tools grid is gone")
+# the wheel stage wraps ONE visible child everywhere (.ws-right is
+# display:none, no left flank exists in markup) - the multi-column stage
+# machinery placed flanks that never render
+check(".wheelstage{display:block}" in LAYOUT,
+      "L17e the stage is a plain block below the dissolve",
+      "its 3-col template would crush the lone .ws-center into column 1")
+for dead in ["max-width:1560px", ".ws-center{order:1}", "order:2}", "order:3}",
+             ".wheelstage{gap:20px}"]:
+    check(dead not in LAYOUT,
+          "L17f retired flank geometry %s gone from _layout.css" % dead)
 
 print("L18 - markup rewrites took their selectors with them")
 
