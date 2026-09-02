@@ -634,6 +634,45 @@ def t_fail_closed_generation():
           f"seated_slots={sorted(seated['options'])} manual={d}")
 
 
+def t_observed_build_overlay():
+    # R20 — THE OBSERVED-BUILD OVERLAY (owner ruling 2026-09-01: "i want
+    # gear that each seat is wearing to actually be based on what real
+    # people wear. the engine keeps making up some random builds"): the
+    # KIT pick follows the conditional-modal build mined from killboard
+    # builds — a coherent fielded combination, never per-slot marginal
+    # assembly. (a) archetypes ship in the book with step counts;
+    # (b) the kit pick carries observed_build [n, of] and matches the
+    # archetype item; (c) a slot the weapon's own archetype lacks falls
+    # back to the seat archetype or plain ranking; (d) role=None
+    # (diagnostic) gets no overlay.
+    e = Engine(content="blackzone_roam", size=20)
+    rec = e.roles.get("engage_tank") or {}
+    wb = (rec.get("kit_weapon_build") or {}).get("2H_POLEHAMMER") or {}
+    a = ("armor" in wb and wb["armor"][0] == "ARMOR_PLATE_SET2"
+         and wb["armor"][1] >= 2 and rec.get("kit_build"))
+    ko = e.kit_options("2H_POLEHAMMER", top_n=5)
+    top = ko["kit"].get("armor") or {}
+    b = (top.get("gear") == wb["armor"][0]        # the fielded item leads
+         and top.get("observed_build") == wb["armor"][1:3])   # [n, of]
+    # (c) every kit slot is either archetype-annotated or plain-ranked —
+    # and at least one slot of a thin-basket weapon uses the fallback
+    ko_lx = Engine(content="faction_war", size=15,
+                   style="brawl").kit_options("MAIN_1HCROSSBOW")
+    slots = ko_lx["kit"] or {}
+    c = bool(slots) and any(not v.get("observed_build")
+                            for v in slots.values()) \
+        and any(v.get("observed_build") for v in slots.values())
+    unc = e.kit_options("2H_POLEHAMMER", top_n=5, role=None)
+    d = not any(o.get("observed_build")
+                for opts in unc["options"].values() for o in opts)
+    check("R20 observed-build overlay: archetype ships with step counts; "
+          "the kit pick IS the fielded combination (observed_build "
+          "annotated); thin slots fall back; diagnostic mode unoverlaid",
+          bool(a) and b and c and d,
+          f"pole_armor={wb.get('armor')} top={top.get('gear')}/"
+          f"{top.get('observed_build')} lx_slots={len(slots)}")
+
+
 if __name__ == "__main__":
     t_role_book()
     t_ruled_memberships()
@@ -654,6 +693,7 @@ if __name__ == "__main__":
     t_grading_rulings()
     t_weapon_doctrine()
     t_fail_closed_generation()
+    t_observed_build_overlay()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")

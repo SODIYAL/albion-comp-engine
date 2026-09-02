@@ -1501,3 +1501,43 @@ candidate kits cost 2 role-level slots on this n=23 corpus — either
 noise or a hint that observation-led tiers dilute the curated signal
 when DRESSING CANDIDATES; the incumbents' actual gear is unaffected.
 A future blind round can separate the two.
+
+## THE OBSERVED-BUILD OVERLAY (owner ruling 2026-09-01, same session)
+
+Owner: **"i want gear that each seat is wearing to actually be based
+on what real people wear. the engine keeps making up some random
+builds."**
+
+The diagnosis: even with observation-bounded tiers, the KIT was still
+assembled slot-by-slot — comp-aware ranking picked each slot's
+marginal-value winner independently, producing combinations no player
+ever fielded, and a thin per-weapon tier could outrank a heavily
+observed seat norm.
+
+**The mechanism:** `_modal_build_chain` (build_dataset) mines a
+CONDITIONAL MODAL build per weapon (>= 3 observed builds; seat-level
+fallback over all member builds) from the killboard harvest — the
+most-observed chest first (uniform-gated, effect carriers excluded),
+then the most-observed head AMONG BUILDS WEARING THAT CHEST, and so on
+down the slots, each step needing >= 2 observations. The result is a
+coherent kit real players field together, cited with the step counts
+([54/136] = 54 of the 136 builds at that step). Ships as
+`kit_build`/`kit_weapon_build` on each seat; audit rows in
+roles_report (`archetype`/`weapon_archetypes`).
+
+**Both engine ports** overlay it in `kit_options`: the archetype item
+moves to the FRONT of its slot's options (annotated
+`observed_build: [n, of]`) so the kit pick and the dressed forge's v0
+ARE the fielded combination; every other option keeps its tier/
+marginal order for browsing; a gate that excludes the archetype item
+(uniform, brawl cloth) leaves the slot to normal ranking; `role=None`
+diagnostic mode gets no overlay. R20 pins all of it.
+
+**Results:** Heavy Mace now dresses as the real stopper meta (Knight
+Armor 42/142 + Hellion Hood 17/42 + Royal Shoes + Gigantify),
+Hallowfall as Robe of Purity 672/1169 + Guardian Helmet 171/672 +
+Mistcaller. Every gate stayed green WITHOUT re-pins (the killboard
+reality matched F24's pinned tank v0 exactly), and **tier2 v4
+actual_gear role-level rose 78% → 83% (19/23), gate PASS** — dressing
+candidates in what real people wear validates better than marginal
+assembly.

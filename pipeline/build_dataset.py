@@ -1075,6 +1075,51 @@ def _fold_sources(bids):
     return out
 
 
+def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
+    """The observed BUILD ARCHETYPE (owner ruling 2026-09-01: 'i want
+    gear that each seat is wearing to actually be based on what real
+    people wear'): a CONDITIONAL MODAL chain over real fielded builds —
+    the most-observed chest first (uniform-gated), then the
+    most-observed head AMONG BUILDS WEARING THAT CHEST, and so on — so
+    the result is a coherent combination people actually field
+    together, never a per-slot Frankenstein. Effect-carrier items stay
+    out (comp-level allocations, 2026-08-26 rule); a slot pick needs
+    >= 2 observations at its step; builds missing a slot stay in the
+    pool (partial kits are common). Returns {slot: [id, n, of]} where
+    n/of = observations at that step / pool size at that step."""
+    SLOT_ORDER = ("armor", "head", "shoes", "cape", "offhand",
+                  "potion", "food")
+    pool = []
+    for gd in build_dicts:
+        norm = {}
+        for rk, v in gd.items():
+            slot = KIT_SLOT_MAP.get(rk.lower())
+            gid = normalize(v) if slot else None
+            if gid:
+                norm[slot] = gid
+        if norm:
+            pool.append(norm)
+    sel = {}
+    for slot in SLOT_ORDER:
+        counts = {}
+        for b in pool:
+            gid = b.get(slot)
+            if not gid or gid in effect_map:
+                continue
+            if slot == "armor" and \
+                    (gear[gid].get("gear_class") or "") not in uni:
+                continue
+            counts[gid] = counts.get(gid, 0) + 1
+        if not counts:
+            continue
+        gid, n = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[0]
+        if n < 2:
+            continue
+        sel[slot] = [gid, n, len(pool)]
+        pool = [b for b in pool if b.get(slot) in (gid, None)]
+    return sel
+
+
 def _normalize_gear_id(v, gear):
     """Conservative raw-id -> catalog-id: exact, else a unique tier
     prefix away. Anything else stays unknown (never guessed)."""
@@ -1233,6 +1278,26 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
         for (gid, wk_id) in sorted(kb_off):
             off_uniform.append({"id": gid, "weapon": wk_id,
                                 "build": f"killboard:{kb_off[(gid, wk_id)]}x"})
+        # ---- observed build archetypes (owner ruling 2026-09-01): the
+        # coherent modal build per weapon (>= 3 observed builds), with a
+        # seat-level archetype over all member builds as the fallback ----
+        seat_builds, kit_weapon_build = [], {}
+        for m in (r.get("weapons") or []):
+            wk_id = m.get("id")
+            wb = kb_by_weapon.get(wk_id) or []
+            seat_builds.extend(wb)
+            if len(wb) >= 3:
+                sel = _modal_build_chain(wb, uni, effect_map, gear,
+                                         normalize)
+                if sel:
+                    kit_weapon_build[wk_id] = sel
+        kit_build = _modal_build_chain(seat_builds, uni, effect_map,
+                                       gear, normalize)
+        if kit_build:
+            r["kit_build"] = kit_build
+        if kit_weapon_build:
+            r["kit_weapon_build"] = {k: kit_weapon_build[k]
+                                     for k in sorted(kit_weapon_build)}
         kit = {}
         det = {}
         for slot, ents in sorted(pools.items()):
@@ -1270,6 +1335,10 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
             r["kit_weapon"] = kit_weapon
         if det or off_uniform or applied:
             detail[r["id"]] = {"slots": det}
+            if kit_build:
+                detail[r["id"]]["archetype"] = kit_build
+            if kit_weapon_build:
+                detail[r["id"]]["weapon_archetypes"] = kit_weapon_build
             if w_det:
                 detail[r["id"]]["by_weapon"] = w_det
             if applied:

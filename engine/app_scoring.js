@@ -1213,6 +1213,18 @@
        Mirrors engine.py. */
     var wdoc = (seatRec.kit_weapon || {})[weapon] || {};
     var seatClass = seatRec["class"] || null;
+    /* observed-build archetype (2026-09-01, mirrors engine.py): the KIT
+       pick follows what real players field — weapon's own conditional-
+       modal build first, seat fallback per slot; the archetype item
+       moves to the front of its slot's options. */
+    var arch = {};
+    if (role !== null) {
+      var wbArch = (seatRec.kit_weapon_build || {})[weapon] || {};
+      var sbArch = seatRec.kit_build || {};
+      var aslot;
+      for (aslot in sbArch) arch[aslot] = sbArch[aslot];
+      for (aslot in wbArch) arch[aslot] = wbArch[aslot];
+    }
     var bySlot = {}, k;
     for (k in this.gear) {
       var slot0 = this.gear[k].slot || "other";
@@ -1322,6 +1334,17 @@
               || (wCount(b) - wCount(a))
               || gearCmp(a, b);
         });
+      }
+      var av = arch[slot];
+      if (av) {
+        /* the observed build leads the slot (overlay ruling) */
+        for (var ai = 0; ai < ranked.length; ai++) {
+          if (ranked[ai].gear === av[0]) {
+            ranked[ai].observed_build = [av[1], av[2]];
+            ranked.unshift(ranked.splice(ai, 1)[0]);
+            break;
+          }
+        }
       }
       options[slot] = ranked.slice(0, topN);
     }

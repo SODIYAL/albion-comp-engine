@@ -1330,6 +1330,20 @@ class Engine:
         only — manual builds score anything, role_advisory flags
         mismatches.
 
+        THE OBSERVED-BUILD OVERLAY (owner ruling 2026-09-01, "i want
+        gear that each seat is wearing to actually be based on what
+        real people wear. the engine keeps making up some random
+        builds"): per-slot ranking assembles a Frankenstein no player
+        ever fielded, so the KIT pick now follows the observed BUILD
+        ARCHETYPE — the conditional-modal combination mined from real
+        killboard builds (this weapon's own archetype first, the
+        seat's as fallback; `kit_weapon_build`/`kit_build` in the role
+        book). The archetype item moves to the FRONT of its slot's
+        options (annotated `observed_build: [n, of]`); everything else
+        keeps its tier/marginal order for browsing. A gate that
+        excludes the archetype item (uniform, brawl cloth) simply
+        leaves that slot to the normal ranking.
+
         Returns {"kit": {slot: choice}, "options": {slot: [ranked choices]}}
         where a choice is {gear, display_name, value, why: [(cap, delta)],
         doctrine, carries, passive}. Greedy per slot (v1): cross-slot stat
@@ -1349,6 +1363,14 @@ class Engine:
         # weapon-tier options carry doctrine_n = [count, slot total].
         wdoc = (seat_rec.get("kit_weapon") or {}).get(weapon) or {}
         seat_class = seat_rec.get("class")
+        # observed-build archetype (2026-09-01): weapon's own first,
+        # seat fallback per slot
+        arch = {}
+        if role is not None:
+            wb = (seat_rec.get("kit_weapon_build") or {}).get(weapon) or {}
+            sb = seat_rec.get("kit_build") or {}
+            for slot in set(wb) | set(sb):
+                arch[slot] = wb.get(slot) or sb.get(slot)
         by_slot = {}
         for k, g in self.gear.items():
             by_slot.setdefault(g.get("slot") or "other", []).append(k)
@@ -1446,6 +1468,14 @@ class Engine:
                 ranked.sort(key=lambda r: (
                     tier_rank(r), -r["value"], -wslot.get(r["gear"], 0),
                     r["gear"]))
+            a = arch.get(slot)
+            if a:
+                # the observed build leads the slot (overlay ruling)
+                for i, rr in enumerate(ranked):
+                    if rr["gear"] == a[0]:
+                        rr["observed_build"] = [a[1], a[2]]
+                        ranked.insert(0, ranked.pop(i))
+                        break
             options[slot] = ranked[:top_n]
         kit = {slot: opts[0] for slot, opts in options.items() if opts}
         return {"kit": kit, "options": options, "seat": seat}
