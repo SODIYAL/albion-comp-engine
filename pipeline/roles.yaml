@@ -64,6 +64,7 @@ roles:
       # consistent with its standing >=10 viability exclusion
       - {id: 2H_ROCKSTAFF_KEEPER, source: "comp:timothy_blap (tank) + sob_blaze (support); anti-heal aura wall"}
       - {id: 2H_SHAPESHIFTER_SET3, source: "owner:2026-08-24 ('an alright d-tank especially for zoning'); comp:sortasaucy_7man (tank)"}
+      - {id: 2H_SHAPESHIFTER_CRYSTAL, source: "owner:2026-09-02 ('stillgaze is a d tank' — resolving the 2026-08-26 Chillhowl/Stillgaze name mix-up); killboard:party_rosters (6 builds, 100% plate — thin, but unanimous)"}
     doctrine:
       MAIN_MACE_HELL: "Sacred Ground Q + Snare Charge W (owner:2026-08-25 — 'incubus usually has sacred ground and snare charge not guard rune')"
   - id: off_tank
@@ -79,9 +80,10 @@ roles:
       # --- seat-all pass (owner:2026-09-01) ---
       - {id: 2H_COMBATSTAFF_MORGANA, source: "killboard:party_rosters (14 builds, 93% plate); second-line plate brawler — shield_break stays its primary FUNCTION (owner:2026-08-26 removed it from shield_support); owner:2026-09-01 seat-all"}
       - {id: 2H_QUARTERSTAFF, source: "killboard:party_rosters (32 builds, 81% leather); peel/disengage bruiser kit; owner:2026-09-01 seat-all"}
-      # seat-all pass: 2H_IRONCLADEDSTAFF stays OFF every menu — the
-      # 2026-08-26 grading removal + standing >=10 viability exclusion
-      # stand until the owner re-rules (killboard 17 builds, 53% leather)
+      # 2H_IRONCLADEDSTAFF stays OFF every menu — confirmed owner:2026-09-02
+      # ("just some random rat weapon that no one uses in zvz"), on top of
+      # the 2026-08-26 grading removal + standing >=10 viability exclusion
+      # (killboard 17 builds, 53% leather — small-scale population)
 
   # --------------------------------------------------------------- healer
   - id: main_healer
@@ -235,15 +237,16 @@ roles:
     weapons:
       - {id: 2H_ICEGAUNTLETS_HELL, source: "guide:albiononlinegrind 'Ice (Icicle) Support'; comp:deadlyhooker (tank)"}
       - {id: MAIN_FROSTSTAFF_KEEPER, source: "comp:deadlyhooker (support) + albioncompo_20v20 (tank)"}
-      - {id: MAIN_FROSTSTAFF_AVALON, source: "sheet: the crystal-save support (Frozen Crystal ally save)"}
-      # owner:2026-08-26 (grading board) — three removals: Glacial "is
-      # more DPS than a support" and Permafrost "is dps and engage dps"
-      # (both keep their ranged_aoe seats), Chillhowl "not good for
-      # group content" (off every menu)
-      # seat-all pass (owner:2026-09-01): 2H_SHAPESHIFTER_CRYSTAL stays OFF
-      # every menu — the 2026-08-26 grading ruling ("not good for group
-      # content") stands until the owner re-rules; killboard is thin
-      # (6 builds) either way
+      # MAIN_FROSTSTAFF_AVALON (Chillhowl) removed owner:2026-09-02:
+      # "single target e, no good for group content, mostly a corrupted
+      # dungeon weapon" — off every menu, matching its standing >=10
+      # viability exclusion (composition.yaml, owner 2026-08-18). NAME
+      # MIX-UP RESOLVED: the 2026-08-26 "Chillhowl off every menu"
+      # removal hit 2H_SHAPESHIFTER_CRYSTAL, which is actually STILLGAZE
+      # — now ruled a d-tank and seated in stopper_tank.
+      # owner:2026-08-26 (grading board) — two removals stand: Glacial
+      # "is more DPS than a support" and Permafrost "is dps and engage
+      # dps" (both keep their ranged_aoe seats)
   - id: curse_support
     class: support
     name: Curse Support / Pressure

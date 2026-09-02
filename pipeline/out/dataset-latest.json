@@ -41097,33 +41097,38 @@
    "kit_build": {
     "armor": [
      "ARMOR_PLATE_SET2",
-     77,
-     352
+     78,
+     358
     ],
     "cape": [
      "CAPEITEM_SMUGGLER",
-     3,
+     5,
      6
     ],
     "food": [
      "T7_MEAL_OMELETTE_AVALON",
      2,
-     3
+     4
     ],
     "head": [
      "HEAD_PLATE_KEEPER",
-     22,
-     77
+     23,
+     78
+    ],
+    "offhand": [
+     "OFF_HORN_KEEPER",
+     2,
+     5
     ],
     "potion": [
      "T7_POTION_REVIVE",
-     3,
-     3
+     4,
+     4
     ],
     "shoes": [
-     "SHOES_LEATHER_ROYAL",
+     "SHOES_LEATHER_MORGANA",
      6,
-     23
+     24
     ]
    },
    "kit_weapon": {
@@ -41485,6 +41490,72 @@
       ],
       [
        "SHOES_PLATE_KEEPER",
+       1
+      ]
+     ]
+    },
+    "2H_SHAPESHIFTER_CRYSTAL": {
+     "armor": [
+      [
+       "ARMOR_PLATE_AVALON",
+       2
+      ],
+      [
+       "ARMOR_PLATE_SET2",
+       2
+      ],
+      [
+       "ARMOR_PLATE_FEY",
+       1
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       7
+      ],
+      [
+       "CAPEITEM_FW_MARTLOCK",
+       2
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       2
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       3
+      ],
+      [
+       "HEAD_CLOTH_SET2",
+       2
+      ],
+      [
+       "HEAD_PLATE_KEEPER",
+       2
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       8
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_ROYAL",
+       4
+      ],
+      [
+       "SHOES_LEATHER_MORGANA",
+       3
+      ],
+      [
+       "SHOES_CLOTH_SET2",
        1
       ]
      ]
@@ -41953,6 +42024,28 @@
       19
      ]
     },
+    "2H_SHAPESHIFTER_CRYSTAL": {
+     "cape": [
+      "CAPEITEM_SMUGGLER",
+      2,
+      2
+     ],
+     "head": [
+      "HEAD_CLOTH_SET2",
+      2,
+      6
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      2,
+      2
+     ],
+     "shoes": [
+      "SHOES_LEATHER_ROYAL",
+      2,
+      2
+     ]
+    },
     "2H_SHAPESHIFTER_SET3": {
      "potion": [
       "T7_POTION_REVIVE",
@@ -42065,6 +42158,11 @@
     {
      "id": "2H_SHAPESHIFTER_SET3",
      "source": "owner:2026-08-24 ('an alright d-tank especially for zoning'); comp:sortasaucy_7man (tank)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_SHAPESHIFTER_CRYSTAL",
+     "source": "owner:2026-09-02 ('stillgaze is a d tank' \u2014 resolving the 2026-08-26 Chillhowl/Stillgaze name mix-up); killboard:party_rosters (6 builds, 100% plate \u2014 thin, but unanimous)",
      "tier": "primary"
     }
    ]
@@ -47689,16 +47787,13 @@
     "armor": [
      "ARMOR_PLATE_FEY",
      "ARMOR_PLATE_SET2",
-     "ARMOR_CLOTH_SET2",
      "ARMOR_PLATE_HELL",
-     "ARMOR_PLATE_KEEPER",
-     "ARMOR_CLOTH_KEEPER"
+     "ARMOR_PLATE_KEEPER"
     ],
     "cape": [
      "CAPEITEM_SMUGGLER",
      "CAPEITEM_FW_LYMHURST",
-     "CAPEITEM_FW_MARTLOCK",
-     "CAPEITEM_MORGANA"
+     "CAPEITEM_FW_MARTLOCK"
     ],
     "food": [
      "T7_MEAL_OMELETTE",
@@ -47708,27 +47803,22 @@
      "HEAD_LEATHER_SET3",
      "HEAD_CLOTH_SET2",
      "HEAD_CLOTH_SET3",
-     "HEAD_PLATE_KEEPER",
-     "HEAD_CLOTH_ROYAL"
+     "HEAD_PLATE_KEEPER"
     ],
     "offhand": [
      "OFF_SHIELD_AVALON",
-     "OFF_HORN_KEEPER",
-     "OFF_BOOK",
-     "OFF_LAMP_UNDEAD"
+     "OFF_HORN_KEEPER"
     ],
     "potion": [
      "T7_POTION_REVIVE",
      "T8_POTION_CLEANSE",
-     "T7_POTION_STONESKIN",
-     "T6_POTION_ENERGY"
+     "T7_POTION_STONESKIN"
     ],
     "shoes": [
      "SHOES_LEATHER_MORGANA",
      "SHOES_LEATHER_ROYAL",
      "SHOES_LEATHER_SET1",
      "SHOES_LEATHER_SET3",
-     "SHOES_CLOTH_ROYAL",
      "SHOES_CLOTH_SET2"
     ]
    },
@@ -47736,7 +47826,7 @@
     "armor": [
      "ARMOR_PLATE_FEY",
      12,
-     41
+     38
     ],
     "cape": [
      "CAPEITEM_SMUGGLER",
@@ -47830,59 +47920,11 @@
       ]
      ]
     },
-    "MAIN_FROSTSTAFF_AVALON": {
-     "armor": [
-      [
-       "ARMOR_CLOTH_KEEPER",
-       1
-      ]
-     ],
-     "cape": [
-      [
-       "CAPEITEM_MORGANA",
-       1
-      ]
-     ],
-     "food": [
-      [
-       "T7_MEAL_OMELETTE",
-       2
-      ]
-     ],
-     "head": [
-      [
-       "HEAD_CLOTH_ROYAL",
-       1
-      ]
-     ],
-     "offhand": [
-      [
-       "OFF_LAMP_UNDEAD",
-       2
-      ]
-     ],
-     "potion": [
-      [
-       "T6_POTION_ENERGY",
-       1
-      ]
-     ],
-     "shoes": [
-      [
-       "SHOES_CLOTH_ROYAL",
-       1
-      ]
-     ]
-    },
     "MAIN_FROSTSTAFF_KEEPER": {
      "armor": [
       [
        "ARMOR_PLATE_SET2",
        4
-      ],
-      [
-       "ARMOR_CLOTH_SET2",
-       2
       ]
      ],
      "cape": [
@@ -47931,10 +47973,6 @@
       [
        "OFF_HORN_KEEPER",
        5
-      ],
-      [
-       "OFF_BOOK",
-       2
       ]
      ],
      "potion": [
@@ -47991,13 +48029,6 @@
       10
      ]
     },
-    "MAIN_FROSTSTAFF_AVALON": {
-     "head": [
-      "HEAD_PLATE_SET3",
-      2,
-      3
-     ]
-    },
     "MAIN_FROSTSTAFF_KEEPER": {
      "armor": [
       "ARMOR_PLATE_SET2",
@@ -48047,11 +48078,6 @@
     {
      "id": "MAIN_FROSTSTAFF_KEEPER",
      "source": "comp:deadlyhooker (support) + albioncompo_20v20 (tank)",
-     "tier": "primary"
-    },
-    {
-     "id": "MAIN_FROSTSTAFF_AVALON",
-     "source": "sheet: the crystal-save support (Frozen Crystal ally save)",
      "tier": "primary"
     }
    ]
@@ -79987,6 +80013,9 @@
    "removed": false,
    "resil_pen": 0.1,
    "role_hint": "range",
+   "role_menu": [
+    "stopper_tank"
+   ],
    "role_menu_secondary": [
     "pierce"
    ],
@@ -85257,9 +85286,6 @@
    },
    "removed": false,
    "role_hint": "support",
-   "role_menu": [
-    "zone_support"
-   ],
    "role_menu_secondary": [
     "pierce"
    ],

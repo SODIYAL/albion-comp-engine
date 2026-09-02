@@ -506,7 +506,13 @@ def t_grading_rulings():
         and menus.get("2H_HOLYSTAFF") == ["brawl_healer"]              # Great Holy: brawl anchor only
         and menus.get("2H_GLACIALSTAFF") == ["ranged_aoe"]             # Glacial: dps, not support
         and menus.get("2H_ICECRYSTAL_UNDEAD") == ["ranged_aoe"]        # Permafrost: dps
-        and not menus.get("2H_SHAPESHIFTER_CRYSTAL")                   # Chillhowl: off every menu
+        # NAME MIX-UP resolved owner:2026-09-02 — this id is STILLGAZE
+        # ("a d tank" -> stopper_tank; killboard 6/6 plate), not
+        # Chillhowl; Chillhowl is MAIN_FROSTSTAFF_AVALON, now off every
+        # menu ("mostly a corrupted dungeon weapon") beside its standing
+        # >=10 exclusion
+        and menus.get("2H_SHAPESHIFTER_CRYSTAL") == ["stopper_tank"]
+        and not menus.get("MAIN_FROSTSTAFF_AVALON")
         and menus.get("2H_ARCANESTAFF") == ["shield_support"]          # Great Arcane: the setup role
         and not menus.get("2H_IRONCLADEDSTAFF"))                       # Iron-clad: off stopper menu
     rep = _json.load(open(os.path.join(ROOT, "pipeline", "out",

@@ -1541,3 +1541,29 @@ reality matched F24's pinned tank v0 exactly), and **tier2 v4
 actual_gear role-level rose 78% → 83% (19/23), gate PASS** — dressing
 candidates in what real people wear validates better than marginal
 assembly.
+
+## The two exceptions ruled + a name mix-up resolved (owner 2026-09-02)
+
+Owner: **"chillhowl - single target e, no good for group content
+mostly a corrupted dungeon weapon, stillgaze is a d tank, iron clad is
+just some random rat weapon that no one uses in zvz."**
+
+Resolving the seat-all pass's two open exceptions surfaced a NAME
+MIX-UP in the book: the 2026-08-26 grading removal labeled
+`2H_SHAPESHIFTER_CRYSTAL` as "Chillhowl", but that id is **Stillgaze
+Staff**; Chillhowl is `MAIN_FROSTSTAFF_AVALON` — which had kept a
+zone_support seat all along.
+
+- **Chillhowl (MAIN_FROSTSTAFF_AVALON)** — zone_support membership
+  removed; off every menu, matching its standing ≥10 viability
+  exclusion (composition.yaml, owner 2026-08-18).
+- **Stillgaze (2H_SHAPESHIFTER_CRYSTAL)** — seated `stopper_tank`
+  (killboard: 6/6 builds plate — thin but unanimous, and consistent
+  with the d-tank ruling).
+- **Iron-clad (2H_IRONCLADEDSTAFF)** — stays off every menu,
+  confirmed; killboard's 17 builds are a small-scale population.
+
+Role book: 135 → 135 of 137 (one in, one out — Chillhowl and
+Iron-clad are the two deliberate menu-less weapons, both also
+viability-excluded ≥10). R17 re-pinned with the corrected names. All
+gates green; tier2 v4 holds 83% (19/23) PASS.
