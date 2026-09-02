@@ -587,6 +587,13 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .wf-hit:hover{background:var(--sunk); color:var(--ink)}
 .wf-hit img{width:26px; height:26px; flex:none}
 .wf-hit-none{padding:8px 6px; font-size:12px; color:var(--ink-3)}
+/* the party board's open slot hosts the same popover, so it needs to be a
+   positioned ancestor too */
+.wf-col-open{position:relative}
+.wf-col-open .wf-pop{left:auto; right:0}
+button.wf-mcard.next{cursor:pointer; width:100%}
+button.wf-mcard.next:hover{border-color:var(--brass-deep)}
+button.wf-mcard.next:hover .dm-plus{color:var(--brass)}
 .prov{
   font-family:var(--mono); font-size:9px; letter-spacing:.06em; padding:2px 6px;
   border-radius:99px; flex:none; text-transform:uppercase;

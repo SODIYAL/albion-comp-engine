@@ -668,9 +668,10 @@ function buildCompBoard(ctx){
   const openCol = party.length < HARD_CAP ? `
     <div class="wf-col wf-col-open">
       <span class="wf-col-h">${open} open</span>
-      <div class="dm-card wf-mcard next" title="next slot — pick on the wheel">
+      <button class="dm-card wf-mcard next" id="open-slot-add"
+        title="search weapons and add to slot ${party.length + 1}">
         <span class="n mono">${String(party.length + 1).padStart(2, "0")}</span><span class="dm-plus">+</span>
-      </div>
+      </button>
     </div>` : "";
   /* the member sheet's scrim (≤960 — touch taps open a bottom sheet) */
   const scrim = SHEET_OPEN !== null
@@ -871,11 +872,26 @@ const WEAPONS_BY_NAME = Object.keys(WEAPONS).filter(w => !WEAPONS[w].removed)
    The icon opens a popover listing live hits; the wheel still filters
    behind it. Hits are plain [data-add] buttons, so they go through the
    central roster-mutation handler like every other add. */
-function setPickSearch(open){
+/* ONE popover, re-parented to whichever control opened it: the toolbar's
+   search icon, or the party board's open slot. Two copies of a live-filter
+   input would be two things to keep in sync. */
+function setPickSearch(open, host){
   const pop = $("pick-search-pop"), btn = $("pick-search-btn");
-  if (!pop || !btn) return;
+  if (!pop) return;
+  if (open){
+    const anchor = host || document.querySelector(".wf-search");
+    if (anchor && pop.parentNode !== anchor) anchor.appendChild(pop);
+  }
   pop.hidden = !open;
-  btn.setAttribute("aria-expanded", String(!!open));
+  if (!open){
+    /* HOME on close: the party board re-renders its innerHTML on every
+       roster change, which would take the popover with it if it were
+       still parented there */
+    const home = document.querySelector(".wf-search");
+    if (home && pop.parentNode !== home) home.appendChild(pop);
+  }
+  if (btn) btn.setAttribute("aria-expanded",
+    String(!!open && pop.parentNode === document.querySelector(".wf-search")));
   if (open){ renderPickHits(); $("pick-filter").focus(); }
 }
 function renderPickHits(){
@@ -898,7 +914,8 @@ function syncPickSearch(){
 /* click anywhere outside the search closes it */
 document.addEventListener("click", e => {
   const pop = $("pick-search-pop");
-  if (pop && !pop.hidden && !e.target.closest(".wf-search")) setPickSearch(false);
+  if (pop && !pop.hidden && !e.target.closest(".wf-search, .wf-col-open"))
+    setPickSearch(false);
   const menu = $("tree-menu");
   if (menu && !menu.hidden && !e.target.closest(".wf-tree")) setTreeMenu(false);
 });
@@ -2419,6 +2436,11 @@ document.addEventListener("click", e => {
   }
   const det = e.target.closest("[data-detail]");
   if (det){ renderDetail(det.dataset.detail); return; }
+  const openSlot = e.target.closest("#open-slot-add");
+  if (openSlot){
+    setPickSearch($("pick-search-pop").hidden, openSlot.parentNode);
+    return;
+  }
   if (e.target.closest("#tree-btn")){ setTreeMenu($("tree-menu").hidden); return; }
   const topt = e.target.closest("[data-tree]");
   if (topt){

@@ -235,6 +235,21 @@ check('id="forge-rail"' not in SHELL,
       "L13e the setup panel's half of the forge pair is gone")
 check("#forge-rail" not in APP, "L13f and its handler with it")
 
+print("L14 - the open slot adds to the party")
+
+check('id="open-slot-add"' in APP, "L14a the open slot is a real control")
+check("open-slot-add" in APP and "setPickSearch(" in APP,
+      "L14b it opens the shared search rather than a second copy")
+check(APP.count('id="pick-search-pop"') <= 1,
+      "L14c there is exactly one search popover to keep in sync")
+# it is re-parented into the board, which re-renders its innerHTML on every
+# roster change - it MUST be moved back out on close or it is destroyed
+sp = APP[APP.index("function setPickSearch"):]
+sp = sp[:sp.index("function renderPickHits")]
+check("home.appendChild(pop)" in sp,
+      "L14d the popover returns to the toolbar when it closes",
+      "the party board would otherwise wipe it on the next render")
+
 if FAILURES:
 
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
