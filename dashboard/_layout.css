@@ -134,8 +134,9 @@
    Tabs stack in an .epanel-rail per edge; adding a surface is one <button>
    plus one <aside>. Generalised from .pdash 2026-09-02. */
 .epanel{
+  --epw:min(430px, 92vw);          /* one width, shared with the tab rail */
   position:fixed; top:0; bottom:0; z-index:40;
-  width:min(430px, 92vw);
+  width:var(--epw);
   transition:transform .32s var(--ease);
   background:rgba(13,16,22,.97); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
   box-shadow:0 0 44px rgba(0,0,0,.5);
@@ -150,11 +151,19 @@
 /* the tab rails: one stacked column of tabs per edge, centred vertically
    and pinned OUTSIDE the panel so they stay reachable when it is shut */
 .epanel-rail{
+  --epw:min(430px, 92vw);
   position:fixed; top:50%; transform:translateY(-50%); z-index:41;
   display:flex; flex-direction:column; gap:8px;
+  transition:transform .32s var(--ease);
 }
 .epanel-rail[data-edge="right"]{right:0}
 .epanel-rail[data-edge="left"]{left:0}
+/* the rail rides the open panel's outer edge, the way the old absolutely
+   positioned .pdash-tab did — otherwise an open panel sits under its tab */
+.epanel-rail[data-edge="right"][data-open="true"]{
+  transform:translateY(-50%) translateX(calc(-1 * var(--epw)))}
+.epanel-rail[data-edge="left"][data-open="true"]{
+  transform:translateY(-50%) translateX(var(--epw))}
 .epanel-tab{
   writing-mode:vertical-rl; padding:16px 8px;
   font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
@@ -174,9 +183,17 @@
     border:1px solid var(--rule-2); border-bottom:0; border-radius:14px 14px 0 0}
   .epanel[data-edge="left"], .epanel[data-edge="right"]{transform:translateY(100%)}
   .epanel[data-open="true"]{transform:none}
-  .epanel-rail{top:auto; bottom:0; transform:none; flex-direction:row;
+  /* the sheet's own content clears the tab bar that sits over its foot */
+  .epanel-body{padding-bottom:44px}
+  /* the rails become one bottom tab bar: tap another tab to switch panels,
+     tap the open one to close. They stay put — only the sheet moves. */
+  .epanel-rail{top:auto; bottom:0; flex-direction:row;
     justify-content:center; width:100%; gap:6px}
+  .epanel-rail, .epanel-rail[data-edge="right"][data-open="true"],
+  .epanel-rail[data-edge="left"][data-open="true"]{transform:none}
   .epanel-rail[data-edge="left"], .epanel-rail[data-edge="right"]{left:0; right:0}
+  .epanel-rail[data-edge="left"]{justify-content:flex-start; padding-left:8px}
+  .epanel-rail[data-edge="right"]{justify-content:flex-end; padding-right:8px}
   .epanel-tab{writing-mode:horizontal-tb; padding:7px 12px; border-radius:8px 8px 0 0;
     border:1px solid var(--rule-2); border-bottom:0}
 }

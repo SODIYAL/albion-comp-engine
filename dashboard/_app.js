@@ -2212,11 +2212,25 @@ function setRail(min){
 function setPanel(id, open){
   const p = $(id);
   if (!p) return;
+  const edge = p.dataset.edge;
+  /* one panel per edge: opening one closes its neighbour, so two panels can
+     never stack on the same side */
+  if (open) document.querySelectorAll('.epanel[data-edge="' + edge + '"]')
+    .forEach(o => { if (o.id !== id) setPanel(o.id, false); });
   p.dataset.open = open ? "true" : "false";
   const tab = document.querySelector('.epanel-tab[data-panel="' + id + '"]');
   if (tab) tab.setAttribute("aria-expanded", String(!!open));
   try { localStorage.setItem("epanel:" + id, open ? "1" : ""); }
   catch (e) { /* private mode */ }
+  syncPanelRail(edge);
+}
+/* the rail rides the open panel's outer edge (CSS does the moving) */
+function syncPanelRail(edge){
+  const rail = document.querySelector('.epanel-rail[data-edge="' + edge + '"]');
+  if (!rail) return;
+  const anyOpen = !!document.querySelector(
+    '.epanel[data-edge="' + edge + '"][data-open="true"]');
+  rail.dataset.open = anyOpen ? "true" : "false";
 }
 function restorePanels(){
   document.querySelectorAll(".epanel").forEach(p => {
