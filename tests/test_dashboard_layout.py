@@ -195,6 +195,14 @@ check("setPickSearch" in APP, "L11f search popover has a state machine")
 # an active query must stay visible - a silently narrowed wheel was the risk
 check("syncPickSearch" in APP, "L11g an active query is mirrored onto the button")
 check('id="pick-search-q"' in SHELL, "L11h the button carries the query text")
+# the bar is ONE segmented container that never wraps (owner 2026-09-02)
+check("flex-wrap:nowrap" in SHELL[SHELL.index(".wf-bar{"):SHELL.index(".wf-bar{") + 400],
+      "L11i the bar never wraps to a second line")
+check("<select" not in SHELL[SHELL.index('class="wf-bar"'):SHELL.index("</main>")],
+      "L11j no native select in the bar - the tree menu carries icons")
+check('id="tree-menu"' in SHELL and "setTreeMenu" in APP,
+      "L11k the tree dropdown is a real listbox")
+check("treeIconFor" in APP, "L11l tree options carry a weapon icon")
 
 
 if FAILURES:

@@ -490,44 +490,89 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 .pchip.u-chip{color:var(--brass)}
 
 /* ---------- weapon wheel: filters above the wheel ---------- */
-.wf-bar{display:flex; align-items:center; gap:8px; margin-bottom:6px; min-width:0}
-.wf-kicker{
-  font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--ink-3); white-space:nowrap; flex:none;
+/* ---- the add-weapon bar ----
+   ONE container on ONE line (owner 2026-09-02: "tight single row", modelled
+   on a segmented status bar). Segments are divided by rules, not by their
+   own pill borders, and the bar never wraps - it scrolls if it must. */
+.wf-bar{
+  display:flex; align-items:stretch; flex-wrap:nowrap; margin-bottom:8px;
+  min-width:0; max-width:100%; overflow-x:auto; scrollbar-width:none;
+  background:linear-gradient(180deg, var(--panel-hi), var(--panel-lo));
+  border:1px solid var(--rule-2); border-radius:12px;
 }
-.wf-bar select{width:auto; flex:0 1 172px; min-width:0}
-.wf-bar #picker-chips{display:flex; gap:6px; align-items:center; min-width:0; flex-wrap:wrap}
-.wf-bar #facet-slot:not(:empty){margin-left:auto}
-.wf-bar .facet{margin:0}
-@media (max-width:960px){ .wf-bar{flex-wrap:wrap} }
+.wf-bar::-webkit-scrollbar{display:none}
+.wf-seg{
+  display:flex; align-items:center; gap:6px; padding:0 10px; min-width:0;
+  border-left:1px solid var(--rule);
+}
+.wf-seg:first-child{border-left:0}
+.wf-seg:empty{display:none}
+#picker-chips{flex-wrap:nowrap}
+.wf-tree{flex:none}
 
-/* the search: an icon that carries its own query, so an active filter is
-   never invisible state */
-.wf-search{position:relative; flex:none; display:flex; align-items:center}
-.wf-search-btn{
-  display:flex; align-items:center; gap:6px; padding:5px 9px;
-  background:var(--sunk); border:1px solid var(--rule-2); border-radius:99px;
-  color:var(--ink-2); cursor:pointer;
-  transition:color .18s var(--ease), border-color .18s var(--ease);
+/* segment buttons: flush, no pill of their own */
+.wf-seg-btn{
+  display:flex; align-items:center; gap:7px; padding:8px 2px; min-width:0;
+  background:none; border:0; border-radius:0; cursor:pointer;
+  font-family:var(--mono); font-size:11.5px; color:var(--ink);
+  white-space:nowrap; transition:color .18s var(--ease);
 }
-.wf-search-btn:hover{color:var(--brass); border-color:var(--brass-deep)}
-.wf-search-btn[aria-expanded="true"], .wf-search-btn.active{
-  color:var(--brass); border-color:var(--brass-deep); background:var(--brass-wash)}
-.wf-q{font-family:var(--mono); font-size:11px; max-width:118px;
-  overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-.wf-search-x{
-  margin-left:4px; width:18px; height:18px; border-radius:50%; flex:none;
-  background:transparent; border:1px solid var(--rule-2); color:var(--ink-3);
-  line-height:1; cursor:pointer;
+.wf-seg-btn:hover{color:var(--brass)}
+.wf-face{display:flex; align-items:center; gap:7px; min-width:0}
+.wf-face img{width:18px; height:18px; flex:none}
+.wf-face span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.wf-caret{color:var(--ink-3); flex:none}
+/* the "all trees" stand-in, so the face never jumps width when a real
+   weapon icon replaces it */
+.wf-all{
+  width:18px; height:18px; flex:none; border-radius:5px;
+  border:1px dashed var(--rule-2);
 }
-.wf-search-x:hover{color:var(--gap); border-color:var(--gap)}
-.wf-pop{
-  position:absolute; top:calc(100% + 8px); left:0; z-index:45;
-  width:min(330px, 82vw); padding:10px;
+
+/* the facet chips lose their pills inside the bar and become segments */
+.wf-bar .pchip{
+  background:none; border:0; border-radius:0; padding:8px 2px;
+  white-space:nowrap;
+}
+.wf-bar .pchip[aria-pressed="true"]{background:none}
+.wf-bar .facet{margin:0}
+
+/* the tree menu and the search popover share their surface */
+.wf-menu, .wf-pop{
+  position:absolute; top:calc(100% + 7px); left:0; z-index:45;
   background:var(--panel-hi); border:1px solid var(--rule-2); border-radius:12px;
   box-shadow:0 18px 40px rgba(0,0,0,.55);
 }
-.wf-pop[hidden]{display:none}
+.wf-menu[hidden], .wf-pop[hidden]{display:none}
+.wf-tree, .wf-search{position:relative}
+.wf-menu{padding:6px; width:max-content; min-width:210px; max-height:320px; overflow-y:auto}
+.wf-opt{
+  display:flex; align-items:center; gap:9px; width:100%; text-align:left;
+  padding:6px 8px; border:0; background:transparent; border-radius:8px;
+  color:var(--ink-2); font-family:var(--mono); font-size:12px; cursor:pointer;
+}
+.wf-opt img{width:20px; height:20px; flex:none}
+.wf-opt:hover{background:var(--sunk); color:var(--ink)}
+.wf-opt.on{color:var(--brass)}
+
+/* the search: an icon that carries its own query, so an active filter is
+   never invisible state */
+.wf-search-btn{
+  display:flex; align-items:center; gap:6px; padding:8px 2px;
+  background:none; border:0; color:var(--ink-2); cursor:pointer;
+  transition:color .18s var(--ease);
+}
+.wf-search-btn:hover{color:var(--brass)}
+.wf-search-btn[aria-expanded="true"], .wf-search-btn.active{color:var(--brass)}
+.wf-q{font-family:var(--mono); font-size:11px; max-width:110px;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.wf-search-x{
+  width:17px; height:17px; border-radius:50%; flex:none; line-height:1;
+  background:transparent; border:1px solid var(--rule-2); color:var(--ink-3);
+  cursor:pointer;
+}
+.wf-search-x:hover{color:var(--gap); border-color:var(--gap)}
+.wf-pop{width:min(330px, 82vw); padding:10px}
 .wf-pop .text-input{width:100%}
 .wf-pop-hits{max-height:264px; overflow-y:auto; margin-top:8px}
 .wf-hit{
@@ -1425,9 +1470,9 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
   .term{grid-template-columns:48px 1fr auto; gap:8px}
   .drawer{max-height:72vh; padding:14px 14px 18px}
 
-  /* --- filters: bigger touch targets (the row wraps on its own) --- */
-  .wf-bar select{flex:1 1 100%}
-  .wf-search-btn{padding:8px 12px}
+  /* --- filters: bigger touch targets; the bar scrolls rather than wraps --- */
+  .wf-seg{padding:0 8px}
+  .wf-seg-btn, .wf-search-btn, .wf-bar .pchip{padding-top:10px; padding-bottom:10px}
   .pgroup-t{padding:10px 15px; font-size:10.5px}
   .pchip{padding:8px 13px; font-size:11px}
 
@@ -1957,9 +2002,18 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
              query stays ON the button - a silently narrowed wheel with no
              visible cause was the thing to avoid. -->
         <div class="wf-bar">
-          <span class="wf-kicker">Add weapon</span>
-          <select id="tree-filter" aria-label="Filter by weapon tree"></select>
-          <div class="wf-search">
+          <div class="wf-seg wf-tree">
+            <button class="wf-seg-btn" id="tree-btn" aria-haspopup="listbox"
+              aria-expanded="false" aria-controls="tree-menu" title="filter by weapon tree">
+              <span class="wf-face" id="tree-btn-face"></span>
+              <svg class="wf-caret" viewBox="0 0 24 24" width="11" height="11" fill="none"
+                stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+            <div class="wf-menu" id="tree-menu" role="listbox" hidden
+              aria-label="Weapon tree"></div>
+          </div>
+          <div class="wf-seg wf-search">
             <button class="wf-search-btn" id="pick-search-btn" aria-expanded="false"
               aria-controls="pick-search-pop" title="search weapons — press /">
               <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
@@ -1974,8 +2028,8 @@ button.dl-ch{cursor:pointer;font:inherit;font-family:var(--mono);font-size:10px;
               <div class="wf-pop-hits" id="pick-search-hits"></div>
             </div>
           </div>
-          <div id="picker-chips"></div>
-          <div id="facet-slot"></div>
+          <div class="wf-seg" id="picker-chips"></div>
+          <div class="wf-seg" id="facet-slot"></div>
         </div>
         <div class="wheel" id="wheel" role="listbox" tabindex="0"
           aria-label="Weapon wheel. Arrow keys rotate, Enter adds the focused weapon">
@@ -6728,12 +6782,35 @@ const TREE_NAMES = {
   naturestaff:"Nature", quarterstaff:"Quarterstaff",
   shapeshifterstaff:"Shapeshifter", spear:"Spear", sword:"Sword",
 };
+/* The tree filter is a custom listbox, not a <select>: a native option
+   cannot carry the tree's weapon icon, and the bar wants icon + name. */
+const TREE_ICON = {};
+function treeIconFor(t){
+  if (!(t in TREE_ICON))
+    TREE_ICON[t] = Object.keys(WEAPONS).find(
+      k => TREES[k] === t && !WEAPONS[k].removed) || null;
+  return TREE_ICON[t];
+}
+function treeFace(t, size){
+  const w = t ? treeIconFor(t) : null;
+  const nm = t ? (TREE_NAMES[t] || t) : "All weapon trees";
+  return (w ? icon(w, size) : '<span class="wf-all" aria-hidden="true"></span>')
+    + `<span>${esc(nm)}</span>`;
+}
 function renderTreeFilter(){
   const present = [...new Set(Object.values(TREES))];
-  const opts = present.map(t => [t, TREE_NAMES[t] || t])
-    .sort((a,b) => a[1].localeCompare(b[1]))
-    .map(([t,n]) => `<option value="${t}">${n}</option>`).join("");
-  $("tree-filter").innerHTML = `<option value="">All weapon trees</option>` + opts;
+  const rows = [["", "All weapon trees"]].concat(
+    present.map(t => [t, TREE_NAMES[t] || t]).sort((a,b) => a[1].localeCompare(b[1])));
+  $("tree-menu").innerHTML = rows.map(([t]) =>
+    `<button class="wf-opt${treeFilter === t ? " on" : ""}" role="option" data-tree="${t}"
+      aria-selected="${treeFilter === t}">${treeFace(t, 20)}</button>`).join("");
+  $("tree-btn-face").innerHTML = treeFace(treeFilter, 18);
+}
+function setTreeMenu(open){
+  const m = $("tree-menu"), b = $("tree-btn");
+  if (!m || !b) return;
+  m.hidden = !open;
+  b.setAttribute("aria-expanded", String(!!open));
 }
 /* WEAPONS is static per page load — sort once, not per keystroke (the old
    per-render sort ran ~2,000 escape-regex + localeCompare calls each pass) */
@@ -6773,6 +6850,8 @@ function syncPickSearch(){
 document.addEventListener("click", e => {
   const pop = $("pick-search-pop");
   if (pop && !pop.hidden && !e.target.closest(".wf-search")) setPickSearch(false);
+  const menu = $("tree-menu");
+  if (menu && !menu.hidden && !e.target.closest(".wf-tree")) setTreeMenu(false);
 });
 
 function filteredWeapons(){
@@ -8282,6 +8361,13 @@ document.addEventListener("click", e => {
   }
   const det = e.target.closest("[data-detail]");
   if (det){ renderDetail(det.dataset.detail); return; }
+  if (e.target.closest("#tree-btn")){ setTreeMenu($("tree-menu").hidden); return; }
+  const topt = e.target.closest("[data-tree]");
+  if (topt){
+    treeFilter = topt.dataset.tree;
+    renderTreeFilter(); setTreeMenu(false);
+    renderWheel(RECS_CUR); renderPickHits(); return;
+  }
   if (e.target.closest("#pick-search-clear")){
     pickFilter = ""; $("pick-filter").value = "";
     renderWheel(RECS_CUR); renderPickHits(); syncPickSearch(); return;
@@ -8471,7 +8557,6 @@ document.addEventListener("change", e => {
     LIVE_SYNC = e.target.checked;
     if (LIVE_SYNC) syncLiveComp();
   }
-  if (e.target.id === "tree-filter"){ treeFilter = e.target.value; renderWheel(RECS_CUR); }
   if (e.target.id === "size-input"){
     const v = Math.round(+e.target.value);
     if (v >= 2 && v <= HARD_CAP){ PLANNED = v; FORGE_NOTE = null; render(); }
@@ -8505,6 +8590,7 @@ document.addEventListener("keydown", e => {
     /* the search popover is the innermost dismissable thing */
     if (!$("pick-search-pop").hidden){
       setPickSearch(false); $("pick-search-btn").focus(); return; }
+    if (!$("tree-menu").hidden){ setTreeMenu(false); $("tree-btn").focus(); return; }
     $("drawer").dataset.open = "false"; return;
   }
   /* "/" jumps to the weapon filter from anywhere outside a text field */

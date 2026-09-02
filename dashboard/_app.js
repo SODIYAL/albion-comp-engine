@@ -831,12 +831,35 @@ const TREE_NAMES = {
   naturestaff:"Nature", quarterstaff:"Quarterstaff",
   shapeshifterstaff:"Shapeshifter", spear:"Spear", sword:"Sword",
 };
+/* The tree filter is a custom listbox, not a <select>: a native option
+   cannot carry the tree's weapon icon, and the bar wants icon + name. */
+const TREE_ICON = {};
+function treeIconFor(t){
+  if (!(t in TREE_ICON))
+    TREE_ICON[t] = Object.keys(WEAPONS).find(
+      k => TREES[k] === t && !WEAPONS[k].removed) || null;
+  return TREE_ICON[t];
+}
+function treeFace(t, size){
+  const w = t ? treeIconFor(t) : null;
+  const nm = t ? (TREE_NAMES[t] || t) : "All weapon trees";
+  return (w ? icon(w, size) : '<span class="wf-all" aria-hidden="true"></span>')
+    + `<span>${esc(nm)}</span>`;
+}
 function renderTreeFilter(){
   const present = [...new Set(Object.values(TREES))];
-  const opts = present.map(t => [t, TREE_NAMES[t] || t])
-    .sort((a,b) => a[1].localeCompare(b[1]))
-    .map(([t,n]) => `<option value="${t}">${n}</option>`).join("");
-  $("tree-filter").innerHTML = `<option value="">All weapon trees</option>` + opts;
+  const rows = [["", "All weapon trees"]].concat(
+    present.map(t => [t, TREE_NAMES[t] || t]).sort((a,b) => a[1].localeCompare(b[1])));
+  $("tree-menu").innerHTML = rows.map(([t]) =>
+    `<button class="wf-opt${treeFilter === t ? " on" : ""}" role="option" data-tree="${t}"
+      aria-selected="${treeFilter === t}">${treeFace(t, 20)}</button>`).join("");
+  $("tree-btn-face").innerHTML = treeFace(treeFilter, 18);
+}
+function setTreeMenu(open){
+  const m = $("tree-menu"), b = $("tree-btn");
+  if (!m || !b) return;
+  m.hidden = !open;
+  b.setAttribute("aria-expanded", String(!!open));
 }
 /* WEAPONS is static per page load — sort once, not per keystroke (the old
    per-render sort ran ~2,000 escape-regex + localeCompare calls each pass) */
@@ -876,6 +899,8 @@ function syncPickSearch(){
 document.addEventListener("click", e => {
   const pop = $("pick-search-pop");
   if (pop && !pop.hidden && !e.target.closest(".wf-search")) setPickSearch(false);
+  const menu = $("tree-menu");
+  if (menu && !menu.hidden && !e.target.closest(".wf-tree")) setTreeMenu(false);
 });
 
 function filteredWeapons(){
@@ -2385,6 +2410,13 @@ document.addEventListener("click", e => {
   }
   const det = e.target.closest("[data-detail]");
   if (det){ renderDetail(det.dataset.detail); return; }
+  if (e.target.closest("#tree-btn")){ setTreeMenu($("tree-menu").hidden); return; }
+  const topt = e.target.closest("[data-tree]");
+  if (topt){
+    treeFilter = topt.dataset.tree;
+    renderTreeFilter(); setTreeMenu(false);
+    renderWheel(RECS_CUR); renderPickHits(); return;
+  }
   if (e.target.closest("#pick-search-clear")){
     pickFilter = ""; $("pick-filter").value = "";
     renderWheel(RECS_CUR); renderPickHits(); syncPickSearch(); return;
@@ -2574,7 +2606,6 @@ document.addEventListener("change", e => {
     LIVE_SYNC = e.target.checked;
     if (LIVE_SYNC) syncLiveComp();
   }
-  if (e.target.id === "tree-filter"){ treeFilter = e.target.value; renderWheel(RECS_CUR); }
   if (e.target.id === "size-input"){
     const v = Math.round(+e.target.value);
     if (v >= 2 && v <= HARD_CAP){ PLANNED = v; FORGE_NOTE = null; render(); }
@@ -2608,6 +2639,7 @@ document.addEventListener("keydown", e => {
     /* the search popover is the innermost dismissable thing */
     if (!$("pick-search-pop").hidden){
       setPickSearch(false); $("pick-search-btn").focus(); return; }
+    if (!$("tree-menu").hidden){ setTreeMenu(false); $("tree-btn").focus(); return; }
     $("drawer").dataset.open = "false"; return;
   }
   /* "/" jumps to the weapon filter from anywhere outside a text field */
