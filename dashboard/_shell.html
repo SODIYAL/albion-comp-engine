@@ -1447,46 +1447,6 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 </header>
 
 <div class="shell" id="shell">
-  <aside class="rail">
-    <!-- collapsed rail: a slim strip — expand arrow, setup, forge -->
-    <div class="rail-strip">
-      <button class="rs-btn" id="rail-expand" title="expand the setup rail" aria-label="Expand setup rail">&#10095;</button>
-      <button class="rs-btn" id="rail-expand-setup" title="open setup" aria-label="Open setup">&#9881;</button>
-      <button class="rs-btn rs-forge" id="forge-rail-mini" title="forge full comp" aria-label="Forge full comp">&#9874;</button>
-    </div>
-    <!-- phone setup summary: one tappable line, expands the controls -->
-    <button class="msetup" id="msetup" aria-expanded="false"
-      title="show or hide the setup controls">
-      <span id="msetup-sum">setup</span><span class="msetup-caret">&#9662;</span>
-    </button>
-    <div class="rail-body">
-    <button class="rail-toggle" id="rail-toggle" aria-expanded="true"
-      title="collapse the setup rail — more room for the wheel">&#10094; hide setup</button>
-    <section>
-      <div class="sec-label">Setup</div>
-      <div class="field">
-        <div class="size-hint" id="style-blurb"></div>
-      </div>
-      <div class="field">
-        <label>Party size presets</label>
-        <span id="size-presets"></span>
-        <div class="size-hint" id="size-hint"></div>
-      </div>
-      <div id="size-notice"></div>
-      <div class="btn-row">
-        <button class="share-btn forge-rail" id="forge-rail"
-          title="fill every open slot for the current content, style and size; on a fully forged roster this rebuilds the generated slots">forge full comp</button>
-      </div>
-      <div class="btn-row">
-        <button class="share-btn" id="share">copy share link</button>
-        <button class="share-btn" id="export">copy comp text</button>
-      </div>
-      <div class="btn-row">
-        <button class="share-btn clear-btn" id="clear">clear comp</button>
-      </div>
-    </section>
-    </div>
-  </aside>
 
   <main class="main">
     <!-- The forge wheel stage: analysis flanks left, the wheel centers,
@@ -1558,11 +1518,40 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
 
 <!-- edge panel rails: one stacked tab column per viewport edge. Tabs are
      addressed by data-panel, so adding a surface is one button + one aside. -->
-<div class="epanel-rail" data-edge="left"></div>
+<div class="epanel-rail" data-edge="left">
+  <button class="epanel-tab" data-panel="setup-panel" aria-expanded="false"
+    title="show or hide setup">setup</button>
+</div>
 <div class="epanel-rail" data-edge="right">
   <button class="epanel-tab" data-panel="pdash" aria-expanded="false"
     title="show or hide the party board">party <b id="pdash-count">0/0</b></button>
 </div>
+
+<aside class="epanel" data-edge="left" data-open="false" id="setup-panel" aria-label="Setup">
+  <div class="epanel-body">
+    <div class="sec-label">Setup</div>
+    <div class="field">
+      <div class="size-hint" id="style-blurb"></div>
+    </div>
+    <div class="field">
+      <label>Party size presets</label>
+      <span id="size-presets"></span>
+      <div class="size-hint" id="size-hint"></div>
+    </div>
+    <div id="size-notice"></div>
+    <div class="btn-row">
+      <button class="share-btn forge-rail" id="forge-rail"
+        title="fill every open slot for the current content, style and size; on a fully forged roster this rebuilds the generated slots">forge full comp</button>
+    </div>
+    <div class="btn-row">
+      <button class="share-btn" id="share">copy share link</button>
+      <button class="share-btn" id="export">copy comp text</button>
+    </div>
+    <div class="btn-row">
+      <button class="share-btn clear-btn" id="clear">clear comp</button>
+    </div>
+  </div>
+</aside>
 
 <!-- Party dash: the comp board in a right-edge pop-out, toggled by its tab -->
 <aside class="epanel" data-edge="right" data-open="false" id="pdash" aria-label="Party board">

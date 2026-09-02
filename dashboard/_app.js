@@ -530,13 +530,6 @@ function renderSetup(){
       : "")
     + (!ENG.extrapolated() ? "" :
     `<div class="notice"><b>Extrapolated.</b> This template is fitted and validated at size ${validatedSizes().join(", ")} only. Per-player targets are scaled linearly to ${SIZE}; flat threshold targets are unchanged. Tier-2 validation must confirm each size before this is trustworthy.</div>`);
-  /* phone setup summary bar: one line that says what's set */
-  const sumEl = $("msetup-sum");
-  if (sumEl){
-    const ct = content.selectedOptions[0]
-      ? content.selectedOptions[0].textContent : CONTENT;
-    sumEl.textContent = `${ct} · ${styleName() || STYLE} · ${PLAN()}`;
-  }
 }
 /* The old role-tally chip row (and its roster facet filter) retired with
    the party strip (owner 2026-08-27) — the comp board's column headers
@@ -2199,15 +2192,6 @@ function flashBtn(id, text, back){
   setTimeout(() => { $(id).textContent = back; }, 1400);
 }
 
-/* Collapsible setup rail: state on .shell[data-rail], persisted so the
-   layout choice survives reloads. Display only. */
-const RAIL_KEY = "compforge.rail";
-function setRail(min){
-  $("shell").dataset.rail = min ? "min" : "";
-  $("rail-toggle").setAttribute("aria-expanded", String(!min));
-  try { localStorage.setItem(RAIL_KEY, min ? "min" : ""); } catch (e) { /* private mode */ }
-}
-
 /* Edge panels: one state machine for every viewport-edge flyout. State is
    data-open on the panel, mirrored to its tab's aria-expanded, persisted so
    the layout choice survives reloads. Display only. */
@@ -2333,7 +2317,7 @@ document.addEventListener("click", e => {
     return;
   }
   const forgeBtn = e.target.closest("#forge") || e.target.closest("#reforge")
-                || e.target.closest("#forge-rail") || e.target.closest("#forge-rail-mini");
+                || e.target.closest("#forge-rail");
   if (forgeBtn){
     /* Deterministic constrained beam search in the engine (2026-08-18) —
        greedy top-1 append + a 1-opt pass used to force-fill negative-value
@@ -2344,7 +2328,7 @@ document.addEventListener("click", e => {
        slots, and on a fully forged roster acts as a reforge. */
     const goal = Math.min(PLAN(), HARD_CAP);
     const reforgeAll = forgeBtn.id === "reforge"
-      || ((forgeBtn.id === "forge-rail" || forgeBtn.id === "forge-rail-mini")
+      || ((forgeBtn.id === "forge-rail")
           && party.length >= goal && PROV.some(x => x === "f"));
     const keep = party.map((_, i) => i)
       .filter(i => reforgeAll ? PROV[i] !== "f" : true);
@@ -2414,16 +2398,6 @@ document.addEventListener("click", e => {
     FORGE_NOTE = null; SHEET_OPEN = null;
     hidePdashFly();   /* indices shift — a kept flyout would show the wrong member */
     loadoutRemove(ri); render(); return;
-  }
-  if (e.target.closest("#rail-toggle")){ setRail(true); return; }
-  if (e.target.closest("#rail-expand") || e.target.closest("#rail-expand-setup")){
-    setRail(false); return; }
-  if (e.target.closest("#msetup")){
-    /* phone setup summary bar: expands/collapses the full setup controls */
-    const s = $("shell"), open = s.dataset.msetup === "open";
-    if (open) delete s.dataset.msetup; else s.dataset.msetup = "open";
-    $("msetup").setAttribute("aria-expanded", String(!open));
-    return;
   }
   const etab = e.target.closest(".epanel-tab");
   if (etab){
@@ -2661,7 +2635,6 @@ if (!loadHash() && !loadStored()){
   party = SEED; PROV = party.map(() => "m");
   sortPartyByRole();
 }
-try { if (localStorage.getItem(RAIL_KEY) === "min") setRail(true); } catch (e) { /* private mode */ }
 restorePanels();
 renderTreeFilter();
 syncEngine();

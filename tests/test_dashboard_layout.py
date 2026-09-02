@@ -120,6 +120,21 @@ check('class="foot-chips"' not in SHELL and ".foot-chips{" not in SHELL,
 check('"sb-identity"' in DECISION_JS, "L5f decision layer fills #sb-identity")
 check('"sb-count"' in APP, "L5g _app.js fills #sb-count")
 
+print("L6 - the in-flow rail is gone")
+
+# plain substring checks: do NOT leave explanatory comments naming these
+for dead in ["data-rail", "rail-toggle", "rail-strip", "rail-expand",
+             "msetup", "rs-btn", "rs-forge", "RAIL_KEY", "setRail"]:
+    check(dead not in SHELL, "L6a %s absent from _shell.html" % dead)
+    check(dead not in LAYOUT, "L6b %s absent from _layout.css" % dead)
+    check(dead not in APP, "L6c %s absent from _app.js" % dead)
+check('id="setup-panel"' in SHELL, "L6d setup panel exists")
+check('data-panel="setup-panel"' in SHELL, "L6e setup panel has a tab")
+for keep in ['id="forge-rail"', 'id="share"', 'id="export"', 'id="clear"',
+             'id="size-presets"', 'id="size-hint"', 'id="style-blurb"',
+             'id="size-notice"']:
+    check(keep in SHELL, "L6f setup panel keeps %s" % keep)
+
 if FAILURES:
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
     sys.exit(1)
