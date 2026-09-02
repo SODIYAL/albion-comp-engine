@@ -248,6 +248,11 @@
 .masthead .about-link{padding:2px 0}
 .masthead .share-btn{padding:4px 10px; font-size:10px; margin-top:0; width:auto}
 .masthead .lf-sync{font-size:10px}
+/* forge and reforge are comp-level actions, so they sit with style, size
+   and content rather than half in a panel and half under the wheel */
+.mh-forge{display:flex; gap:6px}
+.mh-forge:empty{display:none}
+.mh-forge .cb-forge{margin:0; padding:4px 10px; font-size:10px; width:auto}
 .sb-identity{display:flex; align-items:center; gap:8px}
 .sb-field{display:flex; align-items:center; gap:7px}
 .sb-field>span{font-family:var(--mono); font-size:10px; letter-spacing:.12em;

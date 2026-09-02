@@ -1173,18 +1173,27 @@ function renderWheelFoot(keys, recs, rings){
      tally rows. BOARD_HTML is built by renderRoster (the render that runs
      on every roster-state change), so wheel spins reuse it for free. */
   const board = BOARD_HTML;
+  /* ONE line, carrying only what is NOT already on screen (owner
+     2026-09-02). The slot number is the pick card's header, the playstyle
+     is in the masthead and the radar centre, and "party n/n" appeared here
+     TWICE - once on its own and again as a ring. What survives: the ring
+     legend, which is colour-matched to the hub arcs it labels; the
+     over-plan warning; and the weapon count, only while a filter narrows
+     the wheel. The forge actions moved to the masthead. */
+  const overPlan = recs !== null && party.length + 1 > PLANNED;
+  const narrowed = keys.length !== WEAPONS_BY_NAME.length;
   $("wheel-foot").innerHTML = `
     ${WHEEL_FOCUS_W && recs !== null && party.length < HARD_CAP
       ? `<button class="cb-add wf-add-mobile" data-add="${WHEEL_FOCUS_W}">Add ${esc(nameOf(WHEEL_FOCUS_W))}</button>`
       : ""}
-    <div class="wf-row">
-      <span class="eyebrow">Next pick — ${slotLabel}${sn ? " · " + esc(sn) : ""}</span>
-      <span class="wf-count">${keys.length} weapon${keys.length === 1 ? "" : "s"} on the wheel</span>
-      ${board ? `<span class="wf-ring" style="color:var(--brass)">party <b>${party.length}/${PLAN()}</b></span>` : ""}
-    </div>
-    <div class="wf-row"><span class="wf-rings">${rings.map(g =>
-      `<span class="wf-ring" style="color:${g.color}">${esc(g.label)} <b>${g.have}/${g.want}</b></span>`).join("")}</span></div>
-    ${forge ? `<div class="wf-row"><span class="wf-actions">${forge}</span></div>` : ""}`;
+    <div class="wf-row wf-status">
+      <span class="wf-rings">${rings.map(g =>
+        `<span class="wf-ring" style="color:${g.color}">${esc(g.label)} <b>${g.have}/${g.want}</b></span>`).join("")}</span>
+      ${overPlan ? `<span class="wf-over">beyond planned ${PLANNED}</span>` : ""}
+      ${narrowed ? `<span class="wf-count">${keys.length} of ${WEAPONS_BY_NAME.length} on the wheel</span>` : ""}
+    </div>`;
+  const fslot = $("forge-slot");
+  if (fslot) fslot.innerHTML = forge;
   /* the dash mirrors the roster: board + notes rail (duplicate notices,
      open kit editor) — same tiles, same delegated actions, new home */
   const dash = $("pdash-body");
@@ -2453,8 +2462,7 @@ document.addEventListener("click", e => {
     }
     return;
   }
-  const forgeBtn = e.target.closest("#forge") || e.target.closest("#reforge")
-                || e.target.closest("#forge-rail");
+  const forgeBtn = e.target.closest("#forge") || e.target.closest("#reforge");
   if (forgeBtn){
     /* Deterministic constrained beam search in the engine (2026-08-18) —
        greedy top-1 append + a 1-opt pass used to force-fill negative-value
@@ -2464,9 +2472,7 @@ document.addEventListener("click", e => {
        content, style and size. The rail's "forge full comp" fills open
        slots, and on a fully forged roster acts as a reforge. */
     const goal = Math.min(PLAN(), HARD_CAP);
-    const reforgeAll = forgeBtn.id === "reforge"
-      || ((forgeBtn.id === "forge-rail")
-          && party.length >= goal && PROV.some(x => x === "f"));
+    const reforgeAll = forgeBtn.id === "reforge";
     const keep = party.map((_, i) => i)
       .filter(i => reforgeAll ? PROV[i] !== "f" : true);
     const locked = keep.map(i => party[i]);

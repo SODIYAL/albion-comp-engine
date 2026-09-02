@@ -130,7 +130,7 @@ for dead in ["data-rail", "rail-toggle", "rail-strip", "rail-expand",
     check(dead not in APP, "L6c %s absent from _app.js" % dead)
 check('id="setup-panel"' in SHELL, "L6d setup panel exists")
 check('data-panel="setup-panel"' in SHELL, "L6e setup panel has a tab")
-for keep in ['id="forge-rail"', 'id="share"', 'id="export"', 'id="clear"',
+for keep in ['id="share"', 'id="export"', 'id="clear"',
              'id="size-presets"', 'id="size-hint"', 'id="style-blurb"',
              'id="size-notice"']:
     check(keep in SHELL, "L6f setup panel keeps %s" % keep)
@@ -221,7 +221,22 @@ check(not glow or "overflow:visible" in hub,
       "L12a .hub-rings stays overflow:visible while .done carries a glow",
       "an <svg> clips at its viewport, squaring off the outermost ring's glow")
 
+print("L13 - the wheel foot stopped repeating the page")
+
+foot = APP[APP.index('$("wheel-foot").innerHTML'):]
+foot = foot[:foot.index("const fslot")]
+check("party <b>" not in foot,
+      "L13a the foot no longer prints party n/n",
+      "the ring legend below it already did, and so do the masthead and tab")
+check("slotLabel" not in foot, "L13b slot number left to the pick card header")
+check("esc(sn)" not in foot, "L13c playstyle left to the masthead and radar")
+check('id="forge-slot"' in SHELL, "L13d forge actions have a masthead home")
+check('id="forge-rail"' not in SHELL,
+      "L13e the setup panel's half of the forge pair is gone")
+check("#forge-rail" not in APP, "L13f and its handler with it")
+
 if FAILURES:
+
     print("\n%d contract(s) failed: %s" % (len(FAILURES), ", ".join(FAILURES)))
     sys.exit(1)
 print("\nall dashboard layout contracts pass")

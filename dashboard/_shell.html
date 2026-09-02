@@ -173,8 +173,6 @@ select:focus, .text-input:focus{border-color:var(--brass-deep)}
 .share-btn:hover{border-color:var(--brass-deep); color:var(--brass)}
 /* the rail's forge button — same command as the forge in the next-pick bar,
    dressed in the forge accent so it reads as the rail's primary action */
-.share-btn.forge-rail{color:var(--brass); border-color:rgba(255,201,58,.5)}
-.share-btn.forge-rail:hover{background:var(--brass-wash); border-color:var(--brass)}
 .clear-btn:hover{border-color:var(--gap); color:var(--gap)}
 .clear-btn[data-armed="1"]{border-color:var(--gap); color:var(--gap); background:var(--gap-wash)}
 .size-row{display:flex; gap:5px; flex-wrap:wrap; align-items:center}
@@ -1560,6 +1558,7 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
       <option value="castle_outpost">Castle Outpost</option>
     </select></label>
     <span class="sb-count" id="sb-count">0/0</span>
+    <span class="mh-forge" id="forge-slot"></span>
     <div class="spacer"></div>
     <span class="chip"><span class="dot" id="parity-dot"></span><span id="parity-chip">parity — checking</span></span>
     <span class="chip">dataset <span class="mono" id="build-stamp">—</span></span>
@@ -1680,10 +1679,6 @@ span.icon.ph{display:inline-block; background:var(--sunk); border:1px dashed var
       <div class="size-hint" id="size-hint"></div>
     </div>
     <div id="size-notice"></div>
-    <div class="btn-row">
-      <button class="share-btn forge-rail" id="forge-rail"
-        title="fill every open slot for the current content, style and size; on a fully forged roster this rebuilds the generated slots">forge full comp</button>
-    </div>
     <div class="btn-row">
       <button class="share-btn" id="share">copy share link</button>
       <button class="share-btn" id="export">copy comp text</button>
