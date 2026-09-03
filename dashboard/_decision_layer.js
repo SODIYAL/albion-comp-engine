@@ -463,9 +463,13 @@
     /* Existing members keep their actual resolved kits. The candidate keeps
        the combo CompEngine selected for this recommendation. */
     const combos = COMBOS_CUR.concat([rec.combo === undefined ? null : rec.combo]);
+    /* the candidate joins in the kit the engine valued it with; existing
+       members keep their worn gear — the same dressed basis the pick score
+       and the biggest-need row use (2026-09-03) */
+    const gears = GEARS_CUR.concat([rec.kit && rec.kit.length ? rec.kit : null]);
     return inPickContext(() => {
-      const sup = ENG.effectiveSupply(next, combos);
-      return ENG.weaknesses(next, 8, combos).filter(x => x.gap >= .5).slice(0,3)
+      const sup = ENG.effectiveSupply(next, combos, gears);
+      return ENG.weaknesses(next, 8, combos, gears).filter(x => x.gap >= .5).slice(0,3)
         .map(x => ({...x, have:sup[x.cap] || 0, want:ENG.target(x.cap)}));
     });
   }

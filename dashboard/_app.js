@@ -96,7 +96,12 @@ const fitness = p => p === party ? partyCalc().fit : ENG.fitness(p);
 const maxFitness = (p = party) => ENG.maxFitness(
   p, p === party ? COMBOS_CUR : null, p === party ? GEARS_CUR : null);
 const uncoveredCaps = p => ENG.uncoveredCaps(p, p === party ? COMBOS_CUR : null);
-const weaknesses = (p, n = 3) => ENG.weaknesses(p, n, p === party ? COMBOS_CUR : null);
+/* DRESSED like everything else on the page (2026-09-03): the biggest-need
+   ranking used to read the naked roster while the pick, the "have" number
+   and the radar read the worn kits, so a plate-clad 5-tank comp reported
+   "Biggest need: Frontline" and then recommended a healer. */
+const weaknesses = (p, n = 3) => ENG.weaknesses(
+  p, n, p === party ? COMBOS_CUR : null, p === party ? GEARS_CUR : null);
 /* app_scoring.js term/rec field names -> the short ones this file renders */
 const explain = (p, cand) => inPickContext(() =>
   ENG.explain(p, cand, p === party ? COMBOS_CUR : null,
@@ -152,7 +157,20 @@ const supplyFloor = p => p === party ? partyCalc().supFloor : ENG.effectiveSuppl
 const capsOf = w => WEAPONS[w].capabilities || {};
 /* one home for the role-hint default and the below-floor predicate — the
    latter delegates to the engine so display can never disagree with scoring */
-const roleHint = w => WEAPONS[w].role_hint || "other";
+/* Coarse role for tile colour and roster order. The SEAT the role book
+   gives the weapon wins over the sheet's role_hint (2026-09-03): the comp
+   board's columns already read the seat, so Grailseeker (hint melee, seat
+   stopper tank) used to sit in the Tank column wearing a dps-red tile.
+   Seat classes map onto the palette; a dps seat keeps the hint's
+   melee/range split. Function-only menus (no seat) fall back to the hint. */
+const SEAT_HINT = { frontline: "tank", support: "support", healer: "healer" };
+function roleHint(w){
+  const hint = WEAPONS[w].role_hint || "other";
+  const d = (typeof ENG !== "undefined" && ENG.detectRole) ? ENG.detectRole(w) : null;
+  if (!d || !d.role) return hint;
+  if (d.class === "dps") return (hint === "melee" || hint === "range") ? hint : "melee";
+  return SEAT_HINT[d.class] || hint;
+}
 /* roster role order — tanks first, then supports, damage (melee, range),
    healers: the order real caller sheets read in (Timothy's blap, the
    Deadlyhooker parties). The roster is ALWAYS kept in this order: every
@@ -185,7 +203,8 @@ function sortPartyByRole(){
       .sort((a, b) => a - b);
     FORGE_NOTE = { feasible: FORGE_NOTE.feasible,
                    filler: remap(FORGE_NOTE.filler),
-                   held: remap(FORGE_NOTE.held) };
+                   held: remap(FORGE_NOTE.held),
+                   unchanged: FORGE_NOTE.unchanged };
   }
 }
 const floorHit = (cap, have) => ENG.floorArmed(cap, have);
@@ -1483,6 +1502,9 @@ function renderWarning(){
     if (FORGE_NOTE.filler && FORGE_NOTE.filler.length)
       forgeBits += `<div class="warn"><span class="t">Forge</span>
         <span class="b"><b>Saturated tail.</b> Slot${FORGE_NOTE.filler.length > 1 ? "s" : ""} ${slotNames(FORGE_NOTE.filler)} reduce${FORGE_NOTE.filler.length > 1 ? "" : "s"} the comp score and no allowed replacement does better — the template is fully covered before size ${PLAN()}. Treat ${FORGE_NOTE.filler.length > 1 ? "these slots" : "this slot"} as provisional.</span></div>`;
+    if (FORGE_NOTE.unchanged)
+      forgeBits += `<div class="warn"><span class="t">Forge</span>
+        <span class="b"><b>Unchanged.</b> Reforge found the same roster. The search is deterministic — the same manual picks, content, style and size always give the same answer. Lock a different member, swap a pick, or change the style or size to get a different comp.</span></div>`;
     if (FORGE_NOTE.held && FORGE_NOTE.held.length)
       forgeBits += `<div class="warn"><span class="t">Forge</span>
         <span class="b"><b>Constraint-held.</b> Slot${FORGE_NOTE.held.length > 1 ? "s" : ""} ${slotNames(FORGE_NOTE.held)} score${FORGE_NOTE.held.length > 1 ? "" : "s"} slightly negative but ${FORGE_NOTE.held.length > 1 ? "are" : "is"} required by the composition minimums (healers/frontline/ranged core) — expert structure the capability score alone does not see.</span></div>`;
@@ -2591,6 +2613,11 @@ document.addEventListener("click", e => {
     ENG.setContent(CONTENT, forgeSize, STYLE);
     try { r = ENG.forge(forgeSize, locked, lockedCombos); }
     finally { ENG.setContent(CONTENT, SIZE, STYLE); }
+    /* The search is deterministic: same manual picks, content, style and
+       size -> the same roster. Say so (2026-09-03, "reforge all not
+       working") instead of silently re-rendering an identical comp. */
+    const unchanged = reforgeAll && party.length === r.party.length
+      && [...r.party].sort().join() === [...party].sort().join();
     party = r.party.slice();
     /* locked members keep only their EXPLICIT stored combos — pick-derived
        resolutions must keep re-resolving under future context changes
@@ -2617,7 +2644,7 @@ document.addEventListener("click", e => {
       loadoutPrefillGear(i);
       loadoutApplySpells(i, r.combos[i]);
     }
-    FORGE_NOTE = { feasible: r.feasible, filler: r.filler, held: r.held };
+    FORGE_NOTE = { feasible: r.feasible, filler: r.filler, held: r.held, unchanged };
     LO_OPEN = null; LO_PICKING = null;
     sortPartyByRole();    /* remaps the forge note's slot indexes too */
     render();

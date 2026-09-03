@@ -1567,3 +1567,77 @@ Role book: 135 → 135 of 137 (one in, one out — Chillhowl and
 Iron-clad are the two deliberate menu-less weapons, both also
 viability-excluded ≥10). R17 re-pinned with the corrected names. All
 gates green; tier2 v4 holds 83% (19/23) PASS.
+
+## Owner bug round 2026-09-03 — five defects behind "the engine is not functioning properly"
+
+Owner report (verbatim fragments): "overstacked in certain areas and
+understacked in others ... capability supply vs target is all wonky",
+"reforge all buttons not working on certain comps", "big need -
+frontline and then recommend we add some different type of weapon",
+"adds an offhand to two handed weapons", "support weapon like occult
+into dps column", "grailseeker has red color but its in tank column".
+Reproduced on a forged clap / territory_defense / 20 before touching
+anything; each finding below names the mechanism, not the symptom.
+
+1. **Biggest need was measured NAKED while everything else was
+   dressed.** `weaknesses()` in `_app.js` passed combos but not
+   `GEARS_CUR`, so the need ranking read the bare roster (tankiness
+   10 / 38.75 -> "Frontline") while the pick, the "have" number beside
+   it and the radar read the worn kits (tankiness 76 / 38.75). The
+   pick then correctly answered a different question, and the board
+   read over/understacked against a need it did not share. Fixed in
+   the display layer: `weaknesses` and `afterPickGaps` now take the
+   same gear basis as the pick (candidate joins in the kit the engine
+   valued it with). Zero scoring change.
+2. **Every two-hander was dressed with an off-hand.** The seat doctrine
+   pool is mined from the seat's one-handers too, and nothing in the
+   engine knew which weapons have a free hand — the dumps' `twohanded`
+   fact stopped at `weapon_lines.json`. Now `two_handed` rides the
+   dataset (116 true / 21 false, dumps-sourced) and `kit_options` drops
+   the slot for a two-hander in both ports, so `kit_variants`, the
+   dressed forge and the page prefill inherit it. T22 re-pinned (its old
+   pin DEMANDED an off-hand for Heavy Mace); R21 pins the gate.
+3. **Three role classifications disagreed.** The comp board's column
+   read the role-book SEAT, the tile colour and roster order read the
+   sheet's `role_hint`, and the forge's bands read `role_class` (hint +
+   composition overrides). Grailseeker: seat stopper_tank / hint melee /
+   class dps — a red tile in the tank column that the frontline band did
+   not count. Structural fix, no hand list: `role_class` now derives from
+   the primary SEAT's class (first uniformed menu role, the same
+   resolution `detect_role` uses; composition overrides still win; a
+   seatless weapon keeps its hint), both ports; the page's tile colour
+   and sort read the same seat. 11 weapons moved class (Grailseeker,
+   Stillgaze, Primal, Soulscythe, Black Monk, Witchwork -> frontline;
+   Icicle, Hoarfrost -> support; Forge Hammers, Rotcaller -> dps; Occult
+   -> support via 4). R22 pins the derivation. Generation-only effect:
+   the clap-20 forge now fills five frontline (Grailseeker counted) and
+   spends the freed dps slot on ranged AoE — Realmbreaker leaves it.
+4. **Occult Staff seated dive_cleanup (dps).** The 2026-09-01 seat-all
+   pass read the killboard's 85% leather as a dive identity; the E is
+   Time Corridor (ally move+attack speed, enemy slow) and the cited
+   metabattle build is literally "ZvZ Support". Owner 2026-09-03:
+   "support weapon like occult". Re-seated zone_support, leather
+   admitted to that seat's uniform on the Occult evidence; off
+   dive_cleanup. R23 pins it.
+5. **"Reforge all" is a deterministic search.** With no manual slots,
+   or the same manual slots, content, style and size, it returns the
+   identical roster and the page re-rendered it silently. Verified in
+   the browser: no exception, no change. The page now reports
+   "Unchanged" with the reason and what to change; a URL-loaded comp
+   (every slot manual) never shows the button at all, by design.
+
+NOT changed, for the owner: Spiked Gauntlets and Realmbreaker generating
+into clap dps are covered by the 2026-08-26 conditional-payload ruling
+(the owner named spiked gauntlet as an instant-delivery clap weapon and
+rejected a melee/ranged category rule), so the "bomb builds in clap"
+complaint has no derived rule left to apply without a new ruling.
+
+Gates after the fixes: golden 59/59, forge 38/38, roles 23/23,
+validation modes 25/25, parity 60/60 + embed, dashboard layout all,
+display math 28/28, codec 24/24, provenance 25/25, builds 54/54,
+interactions 37/37, patch history 14/14, evidence lint clean, tier2 v4
+actual_gear role-level 83% (19/23) PASS. `test_cohort_families.py` is
+6/7 on main BEFORE this round: its canary pin ("small == 0") dates from
+the 2026-08-25 artifact and the sample it mines was refreshed
+2026-08-29 — a sample-refresh re-pin the owner has to bless, not a
+regression from this work.

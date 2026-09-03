@@ -564,7 +564,7 @@
    "class_basis": "stats",
    "id": "ARMOR_LEATHER_AVALON",
    "name": "Jacket of Tenacity",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "armor",
    "tank_pts": 184,
    "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
@@ -578,7 +578,7 @@
    "class_basis": "stats",
    "id": "ARMOR_LEATHER_FEY",
    "name": "Mistwalker Jacket",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "armor",
    "tank_pts": 184,
    "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
@@ -592,7 +592,7 @@
    "class_basis": "stats",
    "id": "ARMOR_LEATHER_HELL",
    "name": "Hellion Jacket",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "armor",
    "tank_pts": 200,
    "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
@@ -605,7 +605,7 @@
    "class_basis": "stats",
    "id": "ARMOR_LEATHER_MORGANA",
    "name": "Stalker Jacket",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "armor",
    "tank_pts": 216,
    "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
@@ -618,7 +618,7 @@
    "class_basis": "stats",
    "id": "ARMOR_LEATHER_ROYAL",
    "name": "Royal Jacket",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "armor",
    "tank_pts": 200,
    "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
@@ -631,7 +631,7 @@
    "class_basis": "stats",
    "id": "ARMOR_LEATHER_SET1",
    "name": "Mercenary Jacket",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "armor",
    "tank_pts": 216,
    "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
@@ -644,7 +644,7 @@
    "class_basis": "stats",
    "id": "ARMOR_LEATHER_SET2",
    "name": "Hunter Jacket",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "armor",
    "tank_pts": 200,
    "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
@@ -658,7 +658,7 @@
    "class_basis": "stats",
    "id": "ARMOR_LEATHER_SET3",
    "name": "Assassin Jacket",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "armor",
    "tank_pts": 184,
    "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
@@ -671,7 +671,7 @@
    "class_basis": "stats",
    "id": "ARMOR_LEATHER_UNDEAD",
    "name": "Specter Jacket",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "armor",
    "tank_pts": 184,
    "tree_passives": ["PASSIVE_ARMOR_BALANCE", "PASSIVE_ARMOR_INCREASED_AASPEED", "PASSIVE_ARMOR_CD_REDUCTION"]
@@ -931,7 +931,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "HEAD_LEATHER_AVALON",
    "name": "Hood of Tenacity",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "head",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -944,7 +944,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "HEAD_LEATHER_FEY",
    "name": "Mistwalker Hood",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "head",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -959,7 +959,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "HEAD_LEATHER_HELL",
    "name": "Hellion Hood",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "head",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -973,7 +973,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "HEAD_LEATHER_MORGANA",
    "name": "Stalker Hood",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "head",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -986,7 +986,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "HEAD_LEATHER_ROYAL",
    "name": "Royal Hood",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "head",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -1001,7 +1001,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "HEAD_LEATHER_SET1",
    "name": "Mercenary Hood",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "head",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -1015,7 +1015,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "HEAD_LEATHER_SET2",
    "name": "Hunter Hood",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "head",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -1028,7 +1028,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "HEAD_LEATHER_SET3",
    "name": "Assassin Hood",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "head",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -1041,7 +1041,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "HEAD_LEATHER_UNDEAD",
    "name": "Specter Hood",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "head",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -1512,7 +1512,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "SHOES_LEATHER_AVALON",
    "name": "Shoes of Tenacity",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "shoes",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -1526,7 +1526,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "SHOES_LEATHER_FEY",
    "name": "Mistwalker Shoes",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "shoes",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -1540,7 +1540,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "SHOES_LEATHER_HELL",
    "name": "Hellion Shoes",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "shoes",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -1555,7 +1555,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "SHOES_LEATHER_MORGANA",
    "name": "Stalker Shoes",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "shoes",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -1569,7 +1569,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "SHOES_LEATHER_ROYAL",
    "name": "Royal Shoes",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "shoes",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -1583,7 +1583,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "SHOES_LEATHER_SET1",
    "name": "Mercenary Shoes",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "shoes",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -1597,7 +1597,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "SHOES_LEATHER_SET2",
    "name": "Hunter Shoes",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "shoes",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -1611,7 +1611,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "SHOES_LEATHER_SET3",
    "name": "Assassin Shoes",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "shoes",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -1624,7 +1624,7 @@
    "class_basis": "tree id (stats missing)",
    "id": "SHOES_LEATHER_UNDEAD",
    "name": "Specter Shoes",
-   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler"],
+   "role_affinity": ["bomb_aoe", "brawl_healer", "dive_cleanup", "off_tank", "ranged_aoe", "sustained_brawler", "zone_support"],
    "slot": "shoes",
    "tank_pts": 0,
    "tree_passives": ["PASSIVE_MAXLOAD_SHOES", "PASSIVE_BALANCE", "PASSIVE_INCREASED_AASPEED", "PASSIVE_CD_REDUCTION"]
@@ -5110,138 +5110,14 @@
   },
   "dive_cleanup": {
    "archetype": {
-    "armor": ["ARMOR_LEATHER_SET3", 157, 536],
+    "armor": ["ARMOR_LEATHER_SET3", 156, 475],
     "cape": ["CAPEITEM_FW_FORTSTERLING", 2, 14],
-    "head": ["HEAD_LEATHER_MORGANA", 38, 161],
+    "head": ["HEAD_LEATHER_MORGANA", 38, 160],
     "offhand": ["OFF_TORCH", 7, 12],
     "potion": ["T7_POTION_REVIVE", 5, 9],
     "shoes": ["SHOES_LEATHER_SET3", 9, 44]
    },
    "by_weapon": {
-    "2H_ARCANESTAFF_HELL": {
-     "cape": [
-      {
-       "count": 54,
-       "id": "CAPEITEM_SMUGGLER",
-       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_kite_deff_2026_08 (comp:10)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "deadlyhooker_large_scale_2026_08 (party_1:11; party_3:9)", "killboard (46x)"]
-      },
-      {
-       "count": 11,
-       "id": "CAPEITEM_FW_LYMHURST",
-       "sources": ["killboard (10x)", "metabattle (7760:8911)"]
-      },
-      {
-       "count": 5,
-       "id": "CAPEITEM_FW_FORTSTERLING",
-       "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (2x)"]
-      }
-     ],
-     "food": [
-      {
-       "count": 38,
-       "id": "T7_MEAL_OMELETTE",
-       "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:10)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "killboard (32x)", "metabattle (7760:8911)"]
-      },
-      {
-       "count": 11,
-       "id": "T7_MEAL_OMELETTE_AVALON",
-       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (7x)"]
-      }
-     ],
-     "head": [
-      {
-       "count": 53,
-       "id": "HEAD_LEATHER_SET3",
-       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_kite_deff_2026_08 (comp:10)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "deadlyhooker_large_scale_2026_08 (party_1:11; party_3:9)", "killboard (45x)"]
-      },
-      {
-       "count": 10,
-       "id": "HEAD_CLOTH_KEEPER",
-       "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "killboard (7x)"]
-      },
-      {
-       "count": 5,
-       "id": "HEAD_PLATE_SET2",
-       "sources": ["killboard (5x)"]
-      },
-      {
-       "count": 2,
-       "id": "HEAD_PLATE_SET1",
-       "sources": ["killboard (2x)"]
-      },
-      {
-       "count": 1,
-       "id": "HEAD_CLOTH_SET2",
-       "sources": ["metabattle (7760:8911)"]
-      }
-     ],
-     "offhand": [
-      {
-       "count": 1,
-       "id": "OFF_LAMP_UNDEAD",
-       "sources": ["metabattle (7760:8911)"]
-      }
-     ],
-     "potion": [
-      {
-       "count": 65,
-       "id": "T7_POTION_REVIVE",
-       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (57x)", "metabattle (7760:8911)"]
-      },
-      {
-       "count": 2,
-       "id": "T7_POTION_CLEANSE2",
-       "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:10)"]
-      },
-      {
-       "count": 2,
-       "id": "T8_POTION_TORNADO",
-       "sources": ["killboard (2x)"]
-      }
-     ],
-     "shoes": [
-      {
-       "count": 28,
-       "id": "SHOES_LEATHER_MORGANA",
-       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "killboard (25x)"]
-      },
-      {
-       "count": 15,
-       "id": "SHOES_PLATE_UNDEAD",
-       "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:10)", "deadlyhooker_large_scale_2026_08 (party_1:11; party_3:9)", "killboard (11x)"]
-      },
-      {
-       "count": 12,
-       "id": "SHOES_LEATHER_SET1",
-       "sources": ["albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "killboard (10x)"]
-      },
-      {
-       "count": 6,
-       "id": "SHOES_LEATHER_ROYAL",
-       "sources": ["killboard (6x)"]
-      },
-      {
-       "count": 5,
-       "id": "SHOES_LEATHER_SET2",
-       "sources": ["albioncompo_ranged_bomb_2026_07 (comp:5)", "killboard (4x)"]
-      },
-      {
-       "count": 2,
-       "id": "SHOES_CLOTH_SET2",
-       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (1x)"]
-      },
-      {
-       "count": 2,
-       "id": "SHOES_PLATE_SET3",
-       "sources": ["killboard (2x)"]
-      },
-      {
-       "count": 1,
-       "id": "SHOES_PLATE_AVALON",
-       "sources": ["metabattle (7760:8911)"]
-      }
-     ]
-    },
     "2H_CLAWPAIR": {
      "armor": [
       {
@@ -6540,24 +6416,9 @@
      "weapon": "MAIN_RAPIER_MORGANA"
     },
     {
-     "build": "albioncompo_siegebow_bomb_2026_02:comp:8",
-     "id": "ARMOR_CLOTH_ROYAL",
-     "weapon": "2H_ARCANESTAFF_HELL"
-    },
-    {
-     "build": "killboard:3x",
-     "id": "ARMOR_CLOTH_ROYAL",
-     "weapon": "2H_ARCANESTAFF_HELL"
-    },
-    {
      "build": "killboard:1x",
      "id": "ARMOR_CLOTH_SET1",
      "weapon": "2H_DAGGERPAIR"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_CLOTH_SET2",
-     "weapon": "2H_ARCANESTAFF_HELL"
     },
     {
      "build": "killboard:1x",
@@ -6610,19 +6471,9 @@
      "weapon": "MAIN_RAPIER_MORGANA"
     },
     {
-     "build": "deadlyhooker_large_scale_2026_08:party_3:9",
-     "id": "ARMOR_PLATE_HELL",
-     "weapon": "2H_ARCANESTAFF_HELL"
-    },
-    {
      "build": "killboard:1x",
      "id": "ARMOR_PLATE_HELL",
      "weapon": "MAIN_SPEAR"
-    },
-    {
-     "build": "killboard:4x",
-     "id": "ARMOR_PLATE_HELL",
-     "weapon": "2H_ARCANESTAFF_HELL"
     },
     {
      "build": "killboard:3x",
@@ -6648,11 +6499,6 @@
      "build": "albioncompo_hard_zvz_brawl_20ppl_2026_08:comp:14",
      "id": "ARMOR_PLATE_SET1",
      "weapon": "MAIN_DAGGER_HELL"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_PLATE_SET1",
-     "weapon": "2H_ARCANESTAFF_HELL"
     },
     {
      "build": "killboard:1x",
@@ -6723,10 +6569,10 @@
    "slots": {
     "armor": [
      {
-      "count": 158,
+      "count": 157,
       "id": "ARMOR_LEATHER_SET3",
-      "kb": 157,
-      "sources": ["killboard (157x)", "metabattle (7689:8953)"]
+      "kb": 156,
+      "sources": ["killboard (156x)", "metabattle (7689:8953)"]
      },
      {
       "count": 133,
@@ -6734,13 +6580,6 @@
       "id": "ARMOR_LEATHER_HELL",
       "kb": 119,
       "sources": ["albioncompo_10man_melee_2026_02 (comp:8,9)", "albioncompo_bist_roam15_2026_01 (comp:13,14)", "albioncompo_brawl_clap_2026_05 (comp:14)", "albioncompo_party_1_2026_03 (comp:13)", "albioncompo_party_2_2026_03 (comp:8,11)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:11)", "killboard (119x)", "metabattle (7645:8952; 7658:8999)", "timothy_blap_blackzone_roam_2026_08 (blap:12,13,15)"]
-     },
-     {
-      "count": 63,
-      "effect": "cooldown_banner",
-      "id": "ARMOR_LEATHER_ROYAL",
-      "kb": 53,
-      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:10)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "deadlyhooker_large_scale_2026_08 (party_1:11)", "killboard (53x)", "metabattle (7760:8911)"]
      },
      {
       "count": 25,
@@ -6775,22 +6614,22 @@
     ],
     "cape": [
      {
-      "count": 213,
+      "count": 159,
       "id": "CAPEITEM_SMUGGLER",
-      "kb": 190,
-      "sources": ["albioncompo_10man_melee_2026_02 (comp:8,9)", "albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_brawl_by_lattex_2026_05 (comp:11,12)", "albioncompo_brawl_clap_2026_05 (comp:14)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:7)", "albioncompo_hdcp_bomb_2026_06 (comp:11,17)", "albioncompo_kite_deff_2026_08 (comp:10)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_party_1_2026_03 (comp:13)", "albioncompo_party_2_2026_03 (comp:8,11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:11)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "deadlyhooker_large_scale_2026_08 (party_1:11; party_3:9)", "killboard (190x)", "timothy_blap_blackzone_roam_2026_08 (blap:12,13,15)"]
+      "kb": 144,
+      "sources": ["albioncompo_10man_melee_2026_02 (comp:8,9)", "albioncompo_brawl_by_lattex_2026_05 (comp:11,12)", "albioncompo_brawl_clap_2026_05 (comp:14)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:7)", "albioncompo_hdcp_bomb_2026_06 (comp:11,17)", "albioncompo_party_1_2026_03 (comp:13)", "albioncompo_party_2_2026_03 (comp:8,11)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:11)", "killboard (144x)", "timothy_blap_blackzone_roam_2026_08 (blap:12,13,15)"]
      },
      {
-      "count": 75,
+      "count": 64,
       "id": "CAPEITEM_FW_LYMHURST",
-      "kb": 71,
-      "sources": ["albioncompo_bist_roam15_2026_01 (comp:13,14)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:14)", "killboard (71x)", "metabattle (7760:8911)"]
+      "kb": 61,
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:13,14)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:14)", "killboard (61x)"]
      },
      {
-      "count": 54,
+      "count": 49,
       "id": "CAPEITEM_FW_FORTSTERLING",
-      "kb": 51,
-      "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (51x)"]
+      "kb": 49,
+      "sources": ["killboard (49x)"]
      },
      {
       "count": 25,
@@ -6861,30 +6700,24 @@
       "sources": ["albioncompo_10man_melee_2026_02 (comp:8,9)", "albioncompo_bist_roam15_2026_01 (comp:13,14)", "albioncompo_brawl_by_lattex_2026_05 (comp:11,12)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:2,7)", "albioncompo_comp_5_v2_2026_04 (comp:7)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:14)", "albioncompo_hdcp_bomb_2026_06 (comp:11)", "albioncompo_party_1_2026_03 (comp:13)", "albioncompo_party_2_2026_03 (comp:8,11)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:11)", "cb_shadowlagrange_tracking5_2026_01 (comp:2,4)", "killboard (190x)", "metabattle (7645:8952; 7658:8999)", "timothy_blap_blackzone_roam_2026_08 (blap:12,13,15)"]
      },
      {
-      "count": 53,
+      "count": 15,
       "id": "T7_MEAL_OMELETTE",
-      "kb": 47,
-      "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:10)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "killboard (47x)", "metabattle (7760:8911)"]
+      "kb": 15,
+      "sources": ["killboard (15x)"]
      },
      {
-      "count": 15,
+      "count": 4,
       "id": "T7_MEAL_OMELETTE_AVALON",
-      "kb": 11,
-      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (11x)"]
+      "kb": 4,
+      "sources": ["killboard (4x)"]
      }
     ],
     "head": [
      {
-      "count": 124,
-      "id": "HEAD_LEATHER_SET3",
-      "kb": 114,
-      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:7)", "albioncompo_kite_deff_2026_08 (comp:10)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "deadlyhooker_large_scale_2026_08 (party_1:11; party_3:9)", "killboard (114x)", "metabattle (7645:8952)"]
-     },
-     {
-      "count": 100,
+      "count": 98,
       "id": "HEAD_PLATE_SET1",
-      "kb": 95,
-      "sources": ["albioncompo_bist_roam15_2026_01 (comp:13,14)", "albioncompo_brawl_by_lattex_2026_05 (comp:11)", "albioncompo_brawl_clap_2026_05 (comp:14)", "killboard (95x)", "timothy_blap_blackzone_roam_2026_08 (blap:12)"]
+      "kb": 93,
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:13,14)", "albioncompo_brawl_by_lattex_2026_05 (comp:11)", "albioncompo_brawl_clap_2026_05 (comp:14)", "killboard (93x)", "timothy_blap_blackzone_roam_2026_08 (blap:12)"]
      },
      {
       "count": 90,
@@ -6893,10 +6726,16 @@
       "sources": ["albioncompo_brawl_by_lattex_2026_05 (comp:12)", "albioncompo_comp_5_v2_2026_04 (comp:7)", "albioncompo_party_2_2026_03 (comp:8)", "cb_shadowlagrange_tracking5_2026_01 (comp:2,4)", "killboard (84x)", "timothy_blap_blackzone_roam_2026_08 (blap:15)"]
      },
      {
-      "count": 84,
+      "count": 83,
       "id": "HEAD_CLOTH_SET2",
       "kb": 76,
-      "sources": ["albioncompo_10man_melee_2026_02 (comp:8,9)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:14)", "albioncompo_hdcp_bomb_2026_06 (comp:17)", "albioncompo_party_1_2026_03 (comp:13)", "albioncompo_party_2_2026_03 (comp:11)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:11)", "killboard (76x)", "metabattle (7760:8911)"]
+      "sources": ["albioncompo_10man_melee_2026_02 (comp:8,9)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:14)", "albioncompo_hdcp_bomb_2026_06 (comp:17)", "albioncompo_party_1_2026_03 (comp:13)", "albioncompo_party_2_2026_03 (comp:11)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:11)", "killboard (76x)"]
+     },
+     {
+      "count": 71,
+      "id": "HEAD_LEATHER_SET3",
+      "kb": 69,
+      "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:7)", "killboard (69x)", "metabattle (7645:8952)"]
      },
      {
       "count": 33,
@@ -6911,10 +6750,10 @@
       "sources": ["killboard (31x)", "metabattle (7689:8953)"]
      },
      {
-      "count": 19,
+      "count": 18,
       "id": "HEAD_CLOTH_SET3",
-      "kb": 19,
-      "sources": ["killboard (19x)"]
+      "kb": 18,
+      "sources": ["killboard (18x)"]
      },
      {
       "count": 11,
@@ -6927,12 +6766,6 @@
       "id": "HEAD_PLATE_SET3",
       "kb": 11,
       "sources": ["killboard (11x)"]
-     },
-     {
-      "count": 10,
-      "id": "HEAD_CLOTH_KEEPER",
-      "kb": 7,
-      "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "killboard (7x)"]
      },
      {
       "count": 10,
@@ -6951,12 +6784,6 @@
       "id": "HEAD_LEATHER_SET2",
       "kb": 6,
       "sources": ["killboard (6x)"]
-     },
-     {
-      "count": 6,
-      "id": "HEAD_PLATE_SET2",
-      "kb": 5,
-      "sources": ["killboard (5x)", "metabattle (7658:8999)"]
      },
      {
       "count": 5,
@@ -6981,6 +6808,11 @@
       "id": "HEAD_LEATHER_UNDEAD",
       "kb": 3,
       "sources": ["killboard (3x)"]
+     },
+     {
+      "count": 1,
+      "id": "HEAD_PLATE_SET2",
+      "sources": ["metabattle (7658:8999)"]
      }
     ],
     "offhand": [
@@ -7027,10 +6859,10 @@
       "sources": ["albioncompo_brawl_by_lattex_2026_05 (comp:11)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:14)", "killboard (11x)"]
      },
      {
-      "count": 10,
+      "count": 9,
       "id": "OFF_LAMP_UNDEAD",
       "kb": 8,
-      "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:2)", "killboard (8x)", "metabattle (7760:8911)"]
+      "sources": ["cb_shadowlagrange_tracking5_2026_01 (comp:2)", "killboard (8x)"]
      },
      {
       "count": 6,
@@ -7053,16 +6885,16 @@
     ],
     "potion": [
      {
-      "count": 358,
+      "count": 293,
       "id": "T7_POTION_REVIVE",
-      "kb": 333,
-      "sources": ["albioncompo_10man_melee_2026_02 (comp:8,9)", "albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_bist_roam15_2026_01 (comp:13,14)", "albioncompo_brawl_by_lattex_2026_05 (comp:11,12)", "albioncompo_brawl_clap_2026_05 (comp:14)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:2,7)", "albioncompo_comp_5_v2_2026_04 (comp:7)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:14)", "albioncompo_hdcp_bomb_2026_06 (comp:11,17)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_party_1_2026_03 (comp:13)", "albioncompo_party_2_2026_03 (comp:8,11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:11)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (333x)", "metabattle (7760:8911)"]
+      "kb": 276,
+      "sources": ["albioncompo_10man_melee_2026_02 (comp:8,9)", "albioncompo_bist_roam15_2026_01 (comp:13,14)", "albioncompo_brawl_by_lattex_2026_05 (comp:11,12)", "albioncompo_brawl_clap_2026_05 (comp:14)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:2,7)", "albioncompo_comp_5_v2_2026_04 (comp:7)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:14)", "albioncompo_hdcp_bomb_2026_06 (comp:11,17)", "albioncompo_party_1_2026_03 (comp:13)", "albioncompo_party_2_2026_03 (comp:8,11)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:11)", "killboard (276x)"]
      },
      {
-      "count": 69,
+      "count": 68,
       "id": "T8_POTION_COOLDOWN",
-      "kb": 68,
-      "sources": ["killboard (68x)", "metabattle (7689:8953)"]
+      "kb": 67,
+      "sources": ["killboard (67x)", "metabattle (7689:8953)"]
      },
      {
       "count": 31,
@@ -7089,24 +6921,24 @@
       "sources": ["killboard (4x)", "metabattle (7645:8952; 7658:8999)"]
      },
      {
-      "count": 5,
+      "count": 3,
       "id": "T7_POTION_CLEANSE2",
       "kb": 3,
-      "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:10)", "killboard (3x)"]
+      "sources": ["killboard (3x)"]
      },
      {
-      "count": 5,
+      "count": 3,
       "id": "T8_POTION_TORNADO",
-      "kb": 5,
-      "sources": ["killboard (5x)"]
+      "kb": 3,
+      "sources": ["killboard (3x)"]
      }
     ],
     "shoes": [
      {
-      "count": 175,
+      "count": 147,
       "id": "SHOES_LEATHER_MORGANA",
-      "kb": 158,
-      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_bist_roam15_2026_01 (comp:14)", "albioncompo_brawl_by_lattex_2026_05 (comp:12)", "albioncompo_brawl_clap_2026_05 (comp:14)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:7)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:14)", "albioncompo_hdcp_bomb_2026_06 (comp:11)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_party_1_2026_03 (comp:13)", "albioncompo_party_2_2026_03 (comp:8,11)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:11)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "killboard (158x)", "metabattle (7658:8999)", "timothy_blap_blackzone_roam_2026_08 (blap:12,13,15)"]
+      "kb": 133,
+      "sources": ["albioncompo_bist_roam15_2026_01 (comp:14)", "albioncompo_brawl_by_lattex_2026_05 (comp:12)", "albioncompo_brawl_clap_2026_05 (comp:14)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:7)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:14)", "albioncompo_hdcp_bomb_2026_06 (comp:11)", "albioncompo_party_1_2026_03 (comp:13)", "albioncompo_party_2_2026_03 (comp:8,11)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:11)", "killboard (133x)", "metabattle (7658:8999)", "timothy_blap_blackzone_roam_2026_08 (blap:12,13,15)"]
      },
      {
       "count": 40,
@@ -7115,22 +6947,10 @@
       "sources": ["killboard (40x)"]
      },
      {
-      "count": 37,
-      "id": "SHOES_LEATHER_SET2",
-      "kb": 36,
-      "sources": ["albioncompo_ranged_bomb_2026_07 (comp:5)", "killboard (36x)"]
-     },
-     {
       "count": 36,
       "id": "SHOES_CLOTH_FEY",
       "kb": 35,
       "sources": ["albioncompo_hdcp_bomb_2026_06 (comp:17)", "killboard (35x)"]
-     },
-     {
-      "count": 35,
-      "id": "SHOES_PLATE_SET1",
-      "kb": 35,
-      "sources": ["killboard (35x)"]
      },
      {
       "count": 34,
@@ -7140,9 +6960,21 @@
      },
      {
       "count": 34,
+      "id": "SHOES_PLATE_SET1",
+      "kb": 34,
+      "sources": ["killboard (34x)"]
+     },
+     {
+      "count": 33,
       "id": "SHOES_PLATE_AVALON",
       "kb": 27,
-      "sources": ["albioncompo_10man_melee_2026_02 (comp:8,9)", "albioncompo_bist_roam15_2026_01 (comp:13)", "albioncompo_brawl_by_lattex_2026_05 (comp:11)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:2)", "albioncompo_comp_5_v2_2026_04 (comp:7)", "killboard (27x)", "metabattle (7760:8911)"]
+      "sources": ["albioncompo_10man_melee_2026_02 (comp:8,9)", "albioncompo_bist_roam15_2026_01 (comp:13)", "albioncompo_brawl_by_lattex_2026_05 (comp:11)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:2)", "albioncompo_comp_5_v2_2026_04 (comp:7)", "killboard (27x)"]
+     },
+     {
+      "count": 32,
+      "id": "SHOES_LEATHER_SET2",
+      "kb": 32,
+      "sources": ["killboard (32x)"]
      },
      {
       "count": 31,
@@ -7151,34 +6983,28 @@
       "sources": ["killboard (31x)"]
      },
      {
-      "count": 28,
-      "id": "SHOES_LEATHER_SET1",
-      "kb": 26,
-      "sources": ["albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "killboard (26x)"]
-     },
-     {
-      "count": 26,
-      "id": "SHOES_CLOTH_SET2",
-      "kb": 25,
-      "sources": ["albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (25x)"]
-     },
-     {
       "count": 24,
-      "id": "SHOES_PLATE_UNDEAD",
-      "kb": 20,
-      "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:10)", "deadlyhooker_large_scale_2026_08 (party_1:11; party_3:9)", "killboard (20x)"]
+      "id": "SHOES_CLOTH_SET2",
+      "kb": 24,
+      "sources": ["killboard (24x)"]
      },
      {
-      "count": 22,
+      "count": 21,
       "id": "SHOES_CLOTH_SET1",
-      "kb": 22,
-      "sources": ["killboard (22x)"]
+      "kb": 21,
+      "sources": ["killboard (21x)"]
      },
      {
-      "count": 13,
-      "id": "SHOES_LEATHER_ROYAL",
-      "kb": 13,
-      "sources": ["killboard (13x)"]
+      "count": 16,
+      "id": "SHOES_LEATHER_SET1",
+      "kb": 16,
+      "sources": ["killboard (16x)"]
+     },
+     {
+      "count": 9,
+      "id": "SHOES_PLATE_UNDEAD",
+      "kb": 9,
+      "sources": ["killboard (9x)"]
      },
      {
       "count": 7,
@@ -7187,16 +7013,16 @@
       "sources": ["killboard (7x)"]
      },
      {
+      "count": 7,
+      "id": "SHOES_LEATHER_ROYAL",
+      "kb": 7,
+      "sources": ["killboard (7x)"]
+     },
+     {
       "count": 5,
       "id": "SHOES_PLATE_SET2",
       "kb": 5,
       "sources": ["killboard (5x)"]
-     },
-     {
-      "count": 4,
-      "id": "SHOES_PLATE_SET3",
-      "kb": 4,
-      "sources": ["killboard (4x)"]
      },
      {
       "count": 3,
@@ -7213,13 +7039,6 @@
     ]
    },
    "weapon_archetypes": {
-    "2H_ARCANESTAFF_HELL": {
-     "cape": ["CAPEITEM_SMUGGLER", 17, 19],
-     "food": ["T7_MEAL_OMELETTE", 7, 16],
-     "head": ["HEAD_LEATHER_SET3", 45, 61],
-     "potion": ["T7_POTION_REVIVE", 16, 17],
-     "shoes": ["SHOES_LEATHER_MORGANA", 19, 45]
-    },
     "2H_CLAWPAIR": {
      "armor": ["ARMOR_LEATHER_SET3", 21, 26],
      "cape": ["CAPEITEM_DEMON", 2, 3],
@@ -28474,13 +28293,139 @@
   },
   "zone_support": {
    "archetype": {
-    "armor": ["ARMOR_PLATE_FEY", 12, 38],
+    "armor": ["ARMOR_PLATE_FEY", 12, 99],
     "cape": ["CAPEITEM_SMUGGLER", 4, 5],
     "head": ["HEAD_LEATHER_SET3", 10, 12],
     "potion": ["T7_POTION_REVIVE", 4, 4],
     "shoes": ["SHOES_LEATHER_ROYAL", 5, 10]
    },
    "by_weapon": {
+    "2H_ARCANESTAFF_HELL": {
+     "armor": [
+      {
+       "count": 4,
+       "id": "ARMOR_CLOTH_ROYAL",
+       "sources": ["albioncompo_siegebow_bomb_2026_02 (comp:8)", "killboard (3x)"]
+      }
+     ],
+     "cape": [
+      {
+       "count": 54,
+       "id": "CAPEITEM_SMUGGLER",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_kite_deff_2026_08 (comp:10)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "deadlyhooker_large_scale_2026_08 (party_1:11; party_3:9)", "killboard (46x)"]
+      },
+      {
+       "count": 11,
+       "id": "CAPEITEM_FW_LYMHURST",
+       "sources": ["killboard (10x)", "metabattle (7760:8911)"]
+      },
+      {
+       "count": 5,
+       "id": "CAPEITEM_FW_FORTSTERLING",
+       "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (2x)"]
+      }
+     ],
+     "food": [
+      {
+       "count": 38,
+       "id": "T7_MEAL_OMELETTE",
+       "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:10)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "killboard (32x)", "metabattle (7760:8911)"]
+      },
+      {
+       "count": 11,
+       "id": "T7_MEAL_OMELETTE_AVALON",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (7x)"]
+      }
+     ],
+     "head": [
+      {
+       "count": 53,
+       "id": "HEAD_LEATHER_SET3",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_kite_deff_2026_08 (comp:10)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "deadlyhooker_large_scale_2026_08 (party_1:11; party_3:9)", "killboard (45x)"]
+      },
+      {
+       "count": 10,
+       "id": "HEAD_CLOTH_KEEPER",
+       "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "killboard (7x)"]
+      },
+      {
+       "count": 5,
+       "id": "HEAD_PLATE_SET2",
+       "sources": ["killboard (5x)"]
+      },
+      {
+       "count": 2,
+       "id": "HEAD_PLATE_SET1",
+       "sources": ["killboard (2x)"]
+      },
+      {
+       "count": 1,
+       "id": "HEAD_CLOTH_SET2",
+       "sources": ["metabattle (7760:8911)"]
+      }
+     ],
+     "offhand": [
+      {
+       "count": 1,
+       "id": "OFF_LAMP_UNDEAD",
+       "sources": ["metabattle (7760:8911)"]
+      }
+     ],
+     "potion": [
+      {
+       "count": 65,
+       "id": "T7_POTION_REVIVE",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (57x)", "metabattle (7760:8911)"]
+      },
+      {
+       "count": 2,
+       "id": "T7_POTION_CLEANSE2",
+       "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:10)"]
+      },
+      {
+       "count": 2,
+       "id": "T8_POTION_TORNADO",
+       "sources": ["killboard (2x)"]
+      }
+     ],
+     "shoes": [
+      {
+       "count": 28,
+       "id": "SHOES_LEATHER_MORGANA",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "killboard (25x)"]
+      },
+      {
+       "count": 15,
+       "id": "SHOES_PLATE_UNDEAD",
+       "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:10)", "deadlyhooker_large_scale_2026_08 (party_1:11; party_3:9)", "killboard (11x)"]
+      },
+      {
+       "count": 12,
+       "id": "SHOES_LEATHER_SET1",
+       "sources": ["albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "killboard (10x)"]
+      },
+      {
+       "count": 6,
+       "id": "SHOES_LEATHER_ROYAL",
+       "sources": ["killboard (6x)"]
+      },
+      {
+       "count": 5,
+       "id": "SHOES_LEATHER_SET2",
+       "sources": ["albioncompo_ranged_bomb_2026_07 (comp:5)", "killboard (4x)"]
+      },
+      {
+       "count": 2,
+       "id": "SHOES_CLOTH_SET2",
+       "sources": ["albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (1x)"]
+      },
+      {
+       "count": 1,
+       "id": "SHOES_PLATE_AVALON",
+       "sources": ["metabattle (7760:8911)"]
+      }
+     ]
+    },
     "2H_ICEGAUNTLETS_HELL": {
      "armor": [
       {
@@ -28528,6 +28473,11 @@
        "count": 2,
        "id": "HEAD_PLATE_KEEPER",
        "sources": ["killboard (2x)"]
+      },
+      {
+       "count": 2,
+       "id": "HEAD_PLATE_SET1",
+       "sources": ["killboard (2x)"]
       }
      ],
      "potion": [
@@ -28568,9 +28518,19 @@
     "MAIN_FROSTSTAFF_KEEPER": {
      "armor": [
       {
+       "count": 5,
+       "id": "ARMOR_LEATHER_SET3",
+       "sources": ["killboard (5x)"]
+      },
+      {
        "count": 4,
        "id": "ARMOR_PLATE_SET2",
        "sources": ["killboard (4x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["killboard (2x)"]
       }
      ],
      "cape": [
@@ -28655,6 +28615,11 @@
        "sources": ["killboard (4x)"]
       },
       {
+       "count": 2,
+       "id": "SHOES_CLOTH_SET1",
+       "sources": ["killboard (2x)"]
+      },
+      {
        "count": 1,
        "id": "SHOES_CLOTH_SET2",
        "sources": ["albioncompo_perma_comp_a_2026_08 (comp:17)"]
@@ -28662,15 +28627,15 @@
      ]
     }
    },
-   "off_uniform": [
-    {
-     "build": "killboard:5x",
-     "id": "ARMOR_LEATHER_SET3",
-     "weapon": "MAIN_FROSTSTAFF_KEEPER"
-    }
-   ],
    "slots": {
     "armor": [
+     {
+      "count": 61,
+      "effect": "cooldown_banner",
+      "id": "ARMOR_LEATHER_ROYAL",
+      "kb": 51,
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:10)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "deadlyhooker_large_scale_2026_08 (party_1:11)", "killboard (51x)", "metabattle (7760:8911)"]
+     },
      {
       "count": 14,
       "id": "ARMOR_PLATE_FEY",
@@ -28684,11 +28649,29 @@
       "sources": ["killboard (12x)"]
      },
      {
-      "count": 3,
+      "count": 8,
       "effect": "reflect_shell",
       "id": "ARMOR_PLATE_HELL",
-      "kb": 1,
-      "sources": ["albioncompo_perma_comp_a_2026_08 (comp:17)", "deadlyhooker_large_scale_2026_08 (party_2:11)", "killboard (1x)"]
+      "kb": 5,
+      "sources": ["albioncompo_perma_comp_a_2026_08 (comp:17)", "deadlyhooker_large_scale_2026_08 (party_2:11; party_3:9)", "killboard (5x)"]
+     },
+     {
+      "count": 6,
+      "id": "ARMOR_LEATHER_SET3",
+      "kb": 6,
+      "sources": ["killboard (6x)"]
+     },
+     {
+      "count": 4,
+      "id": "ARMOR_CLOTH_ROYAL",
+      "kb": 3,
+      "sources": ["albioncompo_siegebow_bomb_2026_02 (comp:8)", "killboard (3x)"]
+     },
+     {
+      "count": 3,
+      "id": "ARMOR_CLOTH_SET2",
+      "kb": 3,
+      "sources": ["killboard (3x)"]
      },
      {
       "count": 3,
@@ -28700,16 +28683,22 @@
     ],
     "cape": [
      {
-      "count": 30,
+      "count": 84,
       "id": "CAPEITEM_SMUGGLER",
-      "kb": 27,
-      "sources": ["albioncompo_perma_comp_a_2026_08 (comp:17)", "deadlyhooker_large_scale_2026_08 (party_2:2,11)", "killboard (27x)"]
+      "kb": 73,
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_kite_deff_2026_08 (comp:10)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13,17)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "deadlyhooker_large_scale_2026_08 (party_1:11; party_2:2,11; party_3:9)", "killboard (73x)"]
      },
      {
-      "count": 4,
+      "count": 15,
       "id": "CAPEITEM_FW_LYMHURST",
-      "kb": 4,
-      "sources": ["killboard (4x)"]
+      "kb": 14,
+      "sources": ["killboard (14x)", "metabattle (7760:8911)"]
+     },
+     {
+      "count": 6,
+      "id": "CAPEITEM_FW_FORTSTERLING",
+      "kb": 3,
+      "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (3x)"]
      },
      {
       "count": 1,
@@ -28719,36 +28708,54 @@
     ],
     "food": [
      {
-      "count": 12,
+      "count": 50,
       "id": "T7_MEAL_OMELETTE",
-      "kb": 11,
-      "sources": ["killboard (11x)", "metabattle (7642:8970)"]
+      "kb": 43,
+      "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:10)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "killboard (43x)", "metabattle (7642:8970; 7760:8911)"]
      },
      {
-      "count": 5,
+      "count": 16,
       "id": "T7_MEAL_OMELETTE_AVALON",
-      "kb": 4,
-      "sources": ["albioncompo_perma_comp_a_2026_08 (comp:17)", "killboard (4x)"]
+      "kb": 11,
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_perma_comp_a_2026_08 (comp:17)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (11x)"]
      }
     ],
     "head": [
      {
-      "count": 27,
+      "count": 80,
       "id": "HEAD_LEATHER_SET3",
-      "kb": 24,
-      "sources": ["deadlyhooker_large_scale_2026_08 (party_2:2,11)", "killboard (24x)", "metabattle (7642:8970)"]
+      "kb": 69,
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_kite_deff_2026_08 (comp:10)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "deadlyhooker_large_scale_2026_08 (party_1:11; party_2:2,11; party_3:9)", "killboard (69x)", "metabattle (7642:8970)"]
      },
      {
-      "count": 3,
+      "count": 10,
+      "id": "HEAD_CLOTH_KEEPER",
+      "kb": 7,
+      "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "killboard (7x)"]
+     },
+     {
+      "count": 7,
+      "id": "HEAD_PLATE_SET2",
+      "kb": 7,
+      "sources": ["killboard (7x)"]
+     },
+     {
+      "count": 4,
       "id": "HEAD_CLOTH_SET2",
       "kb": 3,
-      "sources": ["killboard (3x)"]
+      "sources": ["killboard (3x)", "metabattle (7760:8911)"]
      },
      {
-      "count": 3,
+      "count": 4,
       "id": "HEAD_CLOTH_SET3",
-      "kb": 3,
-      "sources": ["killboard (3x)"]
+      "kb": 4,
+      "sources": ["killboard (4x)"]
+     },
+     {
+      "count": 4,
+      "id": "HEAD_PLATE_SET1",
+      "kb": 4,
+      "sources": ["killboard (4x)"]
      },
      {
       "count": 3,
@@ -28769,20 +28776,36 @@
       "id": "OFF_HORN_KEEPER",
       "kb": 5,
       "sources": ["killboard (5x)"]
+     },
+     {
+      "count": 1,
+      "id": "OFF_LAMP_UNDEAD",
+      "sources": ["metabattle (7760:8911)"]
      }
     ],
     "potion": [
      {
-      "count": 30,
+      "count": 95,
       "id": "T7_POTION_REVIVE",
-      "kb": 29,
-      "sources": ["albioncompo_perma_comp_a_2026_08 (comp:17)", "killboard (29x)"]
+      "kb": 86,
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13,17)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (86x)", "metabattle (7760:8911)"]
      },
      {
       "count": 3,
       "id": "T8_POTION_CLEANSE",
       "kb": 3,
       "sources": ["killboard (3x)"]
+     },
+     {
+      "count": 3,
+      "id": "T8_POTION_TORNADO",
+      "kb": 3,
+      "sources": ["killboard (3x)"]
+     },
+     {
+      "count": 2,
+      "id": "T7_POTION_CLEANSE2",
+      "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:10)"]
      },
      {
       "count": 2,
@@ -28793,22 +28816,40 @@
     ],
     "shoes": [
      {
-      "count": 13,
+      "count": 41,
       "id": "SHOES_LEATHER_MORGANA",
-      "kb": 11,
-      "sources": ["deadlyhooker_large_scale_2026_08 (party_2:2,11)", "killboard (11x)"]
+      "kb": 36,
+      "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_siegebow_bomb_2026_02 (comp:8)", "deadlyhooker_large_scale_2026_08 (party_2:2,11)", "killboard (36x)"]
      },
      {
-      "count": 11,
+      "count": 17,
       "id": "SHOES_LEATHER_ROYAL",
-      "kb": 11,
-      "sources": ["killboard (11x)"]
+      "kb": 17,
+      "sources": ["killboard (17x)"]
+     },
+     {
+      "count": 17,
+      "id": "SHOES_LEATHER_SET1",
+      "kb": 15,
+      "sources": ["albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "killboard (15x)"]
+     },
+     {
+      "count": 16,
+      "id": "SHOES_PLATE_UNDEAD",
+      "kb": 12,
+      "sources": ["albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:10)", "deadlyhooker_large_scale_2026_08 (party_1:11; party_3:9)", "killboard (12x)"]
      },
      {
       "count": 5,
-      "id": "SHOES_LEATHER_SET1",
-      "kb": 5,
-      "sources": ["killboard (5x)"]
+      "id": "SHOES_LEATHER_SET2",
+      "kb": 4,
+      "sources": ["albioncompo_ranged_bomb_2026_07 (comp:5)", "killboard (4x)"]
+     },
+     {
+      "count": 4,
+      "id": "SHOES_CLOTH_SET2",
+      "kb": 1,
+      "sources": ["albioncompo_perma_comp_a_2026_08 (comp:17)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "killboard (1x)", "metabattle (7642:8970)"]
      },
      {
       "count": 4,
@@ -28817,13 +28858,27 @@
       "sources": ["killboard (4x)"]
      },
      {
+      "count": 3,
+      "id": "SHOES_CLOTH_SET1",
+      "kb": 3,
+      "sources": ["killboard (3x)"]
+     },
+     {
       "count": 2,
-      "id": "SHOES_CLOTH_SET2",
-      "sources": ["albioncompo_perma_comp_a_2026_08 (comp:17)", "metabattle (7642:8970)"]
+      "id": "SHOES_PLATE_AVALON",
+      "kb": 1,
+      "sources": ["killboard (1x)", "metabattle (7760:8911)"]
      }
     ]
    },
    "weapon_archetypes": {
+    "2H_ARCANESTAFF_HELL": {
+     "armor": ["ARMOR_CLOTH_ROYAL", 3, 61],
+     "cape": ["CAPEITEM_FW_FORTSTERLING", 2, 2],
+     "head": ["HEAD_CLOTH_KEEPER", 2, 3],
+     "potion": ["T7_POTION_REVIVE", 2, 2],
+     "shoes": ["SHOES_PLATE_UNDEAD", 2, 2]
+    },
     "2H_ICEGAUNTLETS_HELL": {
      "armor": ["ARMOR_PLATE_FEY", 12, 25],
      "cape": ["CAPEITEM_SMUGGLER", 4, 5],
@@ -28832,12 +28887,11 @@
      "shoes": ["SHOES_LEATHER_ROYAL", 5, 10]
     },
     "MAIN_FROSTSTAFF_KEEPER": {
-     "armor": ["ARMOR_PLATE_SET2", 4, 13],
-     "cape": ["CAPEITEM_SMUGGLER", 3, 3],
-     "head": ["HEAD_LEATHER_SET3", 4, 4],
-     "offhand": ["OFF_SHIELD_AVALON", 2, 3],
-     "potion": ["T7_POTION_REVIVE", 2, 2],
-     "shoes": ["SHOES_LEATHER_MORGANA", 3, 4]
+     "armor": ["ARMOR_LEATHER_SET3", 5, 13],
+     "head": ["HEAD_CLOTH_SET3", 3, 5],
+     "offhand": ["OFF_HORN_KEEPER", 2, 3],
+     "potion": ["T8_POTION_CLEANSE", 2, 2],
+     "shoes": ["SHOES_LEATHER_SET3", 3, 3]
     }
    }
   }
@@ -28845,7 +28899,7 @@
  "menus": {
   "2H_ARCANESTAFF": ["shield_support"],
   "2H_ARCANESTAFF_CRYSTAL": ["ranged_aoe"],
-  "2H_ARCANESTAFF_HELL": ["dive_cleanup"],
+  "2H_ARCANESTAFF_HELL": ["zone_support"],
   "2H_ARCANE_RINGPAIR_AVALON": ["anti_heal", "ranged_aoe"],
   "2H_AXE": ["sustained_brawler"],
   "2H_AXE_AVALON": ["sustained_brawler"],
@@ -30202,6 +30256,12 @@
      "name": "Hoarfrost Staff",
      "source": "comp:deadlyhooker (support) + albioncompo_20v20 (tank)",
      "tier": "primary"
+    },
+    {
+     "id": "2H_ARCANESTAFF_HELL",
+     "name": "Occult Staff",
+     "source": "owner:2026-09-03 ('support weapon like occult'); dumps: E Time Corridor = ally move+attack speed 0.6, enemy slow 0.3 (mass slow / lane control); guide:metabattle Occult Staff ZvZ Support (Royal Jacket); killboard:party_rosters (61 builds, 85% leather); sheet role_hint support",
+     "tier": "primary"
     }
    ]
   },
@@ -30764,12 +30824,6 @@
      "id": "MAIN_SPEAR",
      "name": "Spear",
      "source": "killboard:party_rosters (10 builds, 60% leather \u2014 thin); mobility-poke skirmisher; owner:2026-09-01 seat-all",
-     "tier": "primary"
-    },
-    {
-     "id": "2H_ARCANESTAFF_HELL",
-     "name": "Occult Staff",
-     "source": "killboard:party_rosters (61 builds, 85% leather); the pick/pull catch identity (owner-graded off shield_support 2026-08-26 does not apply \u2014 that was Witchwork); owner:2026-09-01 seat-all",
      "tier": "primary"
     },
     {

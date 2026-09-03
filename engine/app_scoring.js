@@ -122,19 +122,25 @@
     var rolesCfg = comp.roles || {};
     var byHint = rolesCfg.by_hint || {};
     var overrides = rolesCfg.overrides || {};
-    this.roleClass = {};
-    var k;
-    for (k in this.weapons) {
-      this.roleClass[k] = overrides[k] !== undefined ? overrides[k]
-        : (byHint[this.weapons[k].role_hint] !== undefined
-           ? byHint[this.weapons[k].role_hint] : "dps");
-    }
     /* The ROLE BOOK (roles-design.md, mirrors engine.py): fine roles with
        evidence-cited membership; weapons carry role_menu. Feeds
-       detectRole/roleAdvisory only — DESCRIPTIVE, never scoring. */
+       detectRole/roleAdvisory (DESCRIPTIVE, never scoring) and, since
+       2026-09-03, the coarse role class below. */
     this.rolesBook = {};
     var rb = data.roles || [];
     for (var ri = 0; ri < rb.length; ri++) this.rolesBook[rb[ri].id] = rb[ri];
+    /* Coarse role class: composition override > the class of the primary
+       SEAT (first uniformed menu role, the detectRole resolution) > the
+       sheet's role_hint. Mirrors engine.py (2026-09-03). */
+    this.roleClass = {};
+    var k;
+    for (k in this.weapons) {
+      var seatCls = this._primarySeatClass(k);
+      this.roleClass[k] = overrides[k] !== undefined ? overrides[k]
+        : (seatCls !== null ? seatCls
+           : (byHint[this.weapons[k].role_hint] !== undefined
+              ? byHint[this.weapons[k].role_hint] : "dps"));
+    }
     /* Typed gear-carried effects: item id -> effect ids (mirrors
        engine.py _item_effects); gearEffects keeps the records for
        display-name lookup. */
@@ -670,6 +676,18 @@
   CompEngine.prototype.roleOf = function (weapon) {
     /* Constraint role class: healer / frontline / support / dps. */
     return this.roleClass[weapon] === undefined ? "dps" : this.roleClass[weapon];
+  };
+  /* class of the weapon's primary SEAT role — first role_menu entry with a
+     chest uniform (function roles have none); null when unseated.
+     Mirrors engine.py _primary_seat_class. */
+  CompEngine.prototype._primarySeatClass = function (weapon) {
+    var menu = this.weapons[weapon].role_menu || [];
+    for (var i = 0; i < menu.length; i++) {
+      var rec = this.rolesBook[menu[i]] || {};
+      var chest = (rec.uniform || {}).chest || [];
+      if (chest.length) return rec["class"] === undefined ? null : rec["class"];
+    }
+    return null;
   };
 
   /* Role layer (roles-design.md increment 1; mirrors engine.py) —
@@ -1230,6 +1248,9 @@
       var slot0 = this.gear[k].slot || "other";
       (bySlot[slot0] = bySlot[slot0] || []).push(k);
     }
+    /* a two-hander has no off-hand: drop the slot before the seat pool
+       (mined from one-handers too) can propose one — mirrors engine.py */
+    if (this.weapons[weapon].two_handed) delete bySlot.offhand;
     var self = this;
     if (uniform.length) {
       var gated = (bySlot.armor || []).filter(function (g) {

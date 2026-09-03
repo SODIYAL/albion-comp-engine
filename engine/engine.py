@@ -150,15 +150,24 @@ class Engine:
         roles_cfg = comp.get("roles", {}) or {}
         by_hint = roles_cfg.get("by_hint", {}) or {}
         overrides = roles_cfg.get("overrides", {}) or {}
-        self.role_class = {}
-        for k, d in self.weapons.items():
-            self.role_class[k] = overrides.get(
-                k, by_hint.get(d.get("role_hint"), "dps"))
         # The ROLE BOOK (roles-design.md, owner-approved 2026-08-25):
         # fine roles with evidence-cited membership; weapons carry the
-        # derived role_menu. Feeds detect_role/role_advisory only —
-        # DESCRIPTIVE, nothing in the scoring path reads it.
+        # derived role_menu. Feeds detect_role/role_advisory (DESCRIPTIVE,
+        # nothing in the scoring path reads it) and, since 2026-09-03, the
+        # coarse role CLASS below.
         self.roles = {r.get("id"): r for r in (self.data.get("roles") or [])}
+        # Coarse role class (the constraint-band layer): composition
+        # override > the class of the weapon's primary SEAT (the first
+        # uniformed role on its menu — the same resolution detect_role
+        # uses) > the sheet's role_hint. One source for "what column is
+        # this" and "what band does it count in": Grailseeker is a d-tank
+        # by owner ruling, so it counts as frontline, not as a red dps
+        # tile sitting in the tank column (2026-09-03).
+        self.role_class = {}
+        for k, d in self.weapons.items():
+            seat_cls = self._primary_seat_class(k)
+            self.role_class[k] = overrides.get(
+                k, seat_cls or by_hint.get(d.get("role_hint"), "dps"))
         # Typed gear-carried effects (owner 2026-08-25): item id -> the
         # effect ids it grants; role_advisory reports "role + carrying".
         self._item_effects = {}
@@ -688,6 +697,17 @@ class Engine:
     def role_of(self, weapon):
         """Constraint role class: healer / frontline / support / dps."""
         return self.role_class.get(weapon, "dps")
+
+    def _primary_seat_class(self, weapon):
+        """Class of the weapon's primary SEAT role: the first entry on its
+        role_menu that carries a chest uniform (function roles — pierce,
+        purge, anti_heal, shield_break — have none and ride along). None
+        when the book seats the weapon nowhere."""
+        for rid in self.weapons[weapon].get("role_menu") or []:
+            rec = self.roles.get(rid) or {}
+            if ((rec.get("uniform") or {}).get("chest")):
+                return rec.get("class")
+        return None
 
     def is_excluded(self, weapon):
         """True when the viability rules bar this weapon from GENERATED comps
@@ -1374,6 +1394,12 @@ class Engine:
         by_slot = {}
         for k, g in self.gear.items():
             by_slot.setdefault(g.get("slot") or "other", []).append(k)
+        # A two-handed weapon has no off-hand (dataset `two_handed`, from
+        # the dumps). The seat's doctrine pool is mined from its
+        # one-handers too, so the slot is dropped here — never proposed,
+        # never dressed by the forge (2026-09-03).
+        if self.weapons[weapon].get("two_handed"):
+            by_slot.pop("offhand", None)
         if uniform:
             gated = [k for k in by_slot.get("armor", [])
                      if (self.gear[k].get("gear_class") or "") in uniform]

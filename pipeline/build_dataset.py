@@ -248,6 +248,13 @@ def load_sheets(weapon_lines, tune_sheets=None):
                 "status": status,
                 "in_game_data": line is not None,
                 "role_hint": entry.get("role_hint"),
+                # hands fact (dumps `twohanded`, parse_dumps `two_handed`):
+                # a two-handed weapon has no off-hand slot, so kit
+                # suggestion and forge dressing must never propose one
+                # (2026-09-03: seat-aggregate kits handed every 2H a torch
+                # or shield mined from the seat's one-handers)
+                "two_handed": (bool(line.get("two_handed")) if line
+                               else key.startswith("2H_")),
                 # retired by the game: still scoreable (old permalinks must
                 # load) but never recommended — see Engine.pool
                 "removed": bool(entry.get("removed")),

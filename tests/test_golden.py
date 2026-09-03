@@ -415,7 +415,9 @@ def run():
     # full gear catalog made Mercenary Hood / Graveguard Helmet win exactly
     # that way (the owner: nobody fields those on tanks), so comp-aware
     # ranking went doctrine-tier-first. Every slot still returns ranked
-    # options with finite values for any weapon.
+    # options with finite values for any weapon — every slot the weapon
+    # HAS: Heavy Mace is two-handed, so no off-hand is ranked (2026-09-03
+    # re-pin; the old pin demanded one, which was the defect).
     e_kit = Engine(content="castle", size=25, style="brawl")
     kit_party = (["2H_MACE", "2H_HAMMER", "MAIN_ROCKMACE_KEEPER",
                   "2H_POLEHAMMER", "MAIN_MACE", "2H_QUARTERSTAFF",
@@ -428,11 +430,13 @@ def run():
                   LONGBOW, "2H_FIRE_RINGPAIR_AVALON"])
     tank_kit = e_kit.kit_options(HEAVY_MACE, party=kit_party)
     marginal_bait = {"HEAD_LEATHER_SET1", "HEAD_PLATE_UNDEAD"}
-    slots_ok = all(tank_kit["options"].get(s)
-                   for s in ("head", "armor", "shoes", "offhand",
-                             "cape", "potion", "food"))
+    slots_ok = (all(tank_kit["options"].get(s)
+                    for s in ("head", "armor", "shoes",
+                              "cape", "potion", "food"))
+                and not tank_kit["options"].get("offhand"))
     check("T22 kit advisor: comp-aware tank head comes from the observed "
-          "doctrine tier, never off-tier marginal bait; all slots ranked",
+          "doctrine tier, never off-tier marginal bait; every slot a "
+          "two-hander has is ranked, and no off-hand",
           tank_kit["kit"]["head"]["doctrine"] in ("weapon", "seat")
           and tank_kit["kit"]["head"]["gear"] not in marginal_bait
           and slots_ok,

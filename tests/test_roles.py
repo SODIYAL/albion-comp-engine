@@ -679,6 +679,76 @@ def t_observed_build_overlay():
           f"{top.get('observed_build')} lx_slots={len(slots)}")
 
 
+def t_two_handed_no_offhand():
+    # R21 (owner 2026-09-03, "it adds an offhand to two handed weapons"):
+    # the dataset carries the dumps' hands fact and no suggestion or
+    # dressing path proposes an off-hand for a two-hander — the seat
+    # doctrine pool is mined from one-handers too, so without the gate
+    # every 2H bow wore the ranged seat's torch.
+    e = Engine(content="territory_defense", size=20, style="clap")
+    two = [w for w, d in e.weapons.items() if d.get("two_handed")]
+    one = [w for w, d in e.weapons.items() if not d.get("two_handed")]
+    fact_ok = (len(two) > 60 and "2H_BOW_HELL" in two
+               and "MAIN_HOLYSTAFF_AVALON" in one
+               and all(w.startswith("2H_") for w in two))
+    bad = []
+    for w in two:
+        ko = e.kit_options(w)
+        if ko["options"].get("offhand") or ko["kit"].get("offhand"):
+            bad.append(w)
+        for _vk, vg in e.kit_variants(w):
+            if any(g.startswith("OFF_") for g in (vg or [])):
+                bad.append(w + ":variant")
+    one_ok = bool(e.kit_options("MAIN_HOLYSTAFF_AVALON")["options"]
+                  .get("offhand"))
+    r = e.forge(20)
+    forge_bad = [r["party"][i] for i, g in enumerate(r["gears"] or [])
+                 if g and e.weapons[r["party"][i]].get("two_handed")
+                 and any(x.startswith("OFF_") for x in g)]
+    check("R21 two-handers carry the hands fact and never get an off-hand "
+          "(kit_options, kit_variants, forge dressing); one-handers still do",
+          fact_ok and not bad and one_ok and not forge_bad,
+          f"two={len(two)} bad={bad[:4]} forge_bad={forge_bad[:4]}")
+
+
+def t_role_class_from_seat():
+    # R22 (2026-09-03): the coarse role class the bands count follows the
+    # weapon's primary SEAT — the same resolution the comp board's columns
+    # use — so a tile can no longer wear one class in another's column.
+    # Function-first menus (Dawnsong: anti_heal then ranged_aoe) keep the
+    # seat's class, not the function's; composition overrides still win.
+    e = Engine()
+    overrides = ((e.comp_cfg.get("roles") or {}).get("overrides") or {})
+    bad = [w for w in e.weapons
+           if w not in overrides and e._primary_seat_class(w)
+           and e.role_of(w) != e._primary_seat_class(w)]
+    pins = (e.role_of("2H_QUARTERSTAFF_AVALON") == "frontline"
+            and e.role_of("2H_SHAPESHIFTER_CRYSTAL") == "frontline"
+            and e.role_of("2H_ARCANESTAFF_HELL") == "support"
+            and e.role_of("2H_FIRE_RINGPAIR_AVALON") == "dps"
+            and e.role_of("2H_HOLYSTAFF_CRYSTAL") == "support"
+            and e.role_of("2H_IRONCLADEDSTAFF") == "frontline")
+    check("R22 role class = primary seat class (Grailseeker/Stillgaze "
+          "frontline, Occult support, Dawnsong dps, Exalted override holds, "
+          "unseated Iron-clad keeps its tank hint)",
+          not bad and pins, f"bad={bad[:6]}")
+
+
+def t_occult_support_seat():
+    # R23 (owner 2026-09-03, "support weapon like occult into dps column"):
+    # Occult Staff seats zone_support (E Time Corridor = ally speed, enemy
+    # slow), is off dive_cleanup, and its observed leather kit reads
+    # on-uniform there.
+    e = Engine()
+    d = e.detect_role("2H_ARCANESTAFF_HELL", "ARMOR_LEATHER_ROYAL")
+    menu = e.weapons["2H_ARCANESTAFF_HELL"].get("role_menu") or []
+    check("R23 Occult Staff is a support seat (zone_support, leather "
+          "on-uniform) and off dive_cleanup",
+          d["role"] == "zone_support" and d["class"] == "support"
+          and d["kit_match"] is True and "dive_cleanup" not in menu,
+          f"detect={d} menu={menu}")
+
+
 if __name__ == "__main__":
     t_role_book()
     t_ruled_memberships()
@@ -700,6 +770,9 @@ if __name__ == "__main__":
     t_weapon_doctrine()
     t_fail_closed_generation()
     t_observed_build_overlay()
+    t_two_handed_no_offhand()
+    t_role_class_from_seat()
+    t_occult_support_seat()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")

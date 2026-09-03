@@ -60,6 +60,25 @@ band-gap and honesty-mirror contracts, and `test_display_math.js` now
 sweeps the ring geometry across every group size with source-extracted
 constants instead of a hand copy).
 
+## Owner bug round (2026-09-03)
+
+Five reported defects, all reproduced and fixed (VALIDATION.md carries
+the full record): the biggest-need row was measured on the naked roster
+while the pick and the radar read the worn kits (display layer now
+passes `GEARS_CUR` everywhere); every two-hander was dressed with an
+off-hand (the dataset now carries the dumps' `two_handed` fact and
+`kit_options` drops the slot in both ports); three role classifications
+disagreed (board column = seat, tile colour = role_hint, forge bands =
+role_class) — `role_class` now derives from the primary SEAT's class in
+both ports, and the page colours/sorts from the same seat; Occult Staff
+re-seated from dive_cleanup to zone_support (owner: "support weapon like
+occult"); "reforge all" reports "Unchanged" when the deterministic
+search returns the same roster instead of silently re-rendering it.
+Open for the owner: melee instant-payload weapons (Spiked Gauntlets,
+Realmbreaker) still generate into clap dps under the standing
+conditional-payload ruling; the `test_cohort_families.py` canary pin is
+stale since the 2026-08-29 sample refresh.
+
 ## Current engine model
 
 **2026-08-27 — the DRESSED FORGE shipped** (spec `docs/superpowers/specs/2026-08-27-dressed-forge-design.md`): forge and recommend evaluate every candidate as a full build — weapon + combo + doctrine kit (v0 + one divergent variant) — priced by the exact comp_score-with-gears the page displays, and forged members arrive with their kits prefilled (`_eng`-marked). The same day closed two adjacent gaps: the page now passes equipped LOADOUT gear into every scoring/suggestion call (the engine had scored full builds since 2026-08-20; the UI never sent them), and the gear capability catalog was completed (129 curated pieces, `sheets/gear/combat_expansion.yaml`). Owner rulings: kit suggestions are doctrine-tier-first in both modes (evidence-first, T22 re-pin), T30c re-pinned dressed with a naked-party honesty rider. Locked members are never re-dressed; doctrine passives never enter evaluation.

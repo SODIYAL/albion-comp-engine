@@ -1314,7 +1314,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "armor",
    "stats": {
@@ -1404,7 +1405,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "armor",
    "stats": {
@@ -1494,7 +1496,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "armor",
    "stats": {
@@ -1587,7 +1590,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "armor",
    "stats": {
@@ -1672,7 +1676,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "armor",
    "stats": {
@@ -1757,7 +1762,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "armor",
    "stats": {
@@ -1842,7 +1848,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "armor",
    "stats": {
@@ -1932,7 +1939,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "armor",
    "stats": {
@@ -2025,7 +2033,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "armor",
    "stats": {
@@ -4164,7 +4173,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "head",
    "stats": {},
@@ -4237,7 +4247,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "head",
    "stats": {},
@@ -4337,7 +4348,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "head",
    "stats": {},
@@ -4425,7 +4437,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "head",
    "stats": {},
@@ -4498,7 +4511,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "head",
    "stats": {},
@@ -4601,7 +4615,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "head",
    "stats": {},
@@ -4679,7 +4694,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "head",
    "stats": {},
@@ -4752,7 +4768,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "head",
    "stats": {},
@@ -4825,7 +4842,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "head",
    "stats": {},
@@ -6927,7 +6945,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "shoes",
    "stats": {},
@@ -7016,7 +7035,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "shoes",
    "stats": {},
@@ -7095,7 +7115,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "shoes",
    "stats": {},
@@ -7179,7 +7200,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "shoes",
    "stats": {},
@@ -7258,7 +7280,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "shoes",
    "stats": {},
@@ -7347,7 +7370,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "shoes",
    "stats": {},
@@ -7426,7 +7450,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "shoes",
    "stats": {},
@@ -7505,7 +7530,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "shoes",
    "stats": {},
@@ -7579,7 +7605,8 @@
     "dive_cleanup",
     "off_tank",
     "ranged_aoe",
-    "sustained_brawler"
+    "sustained_brawler",
+    "zone_support"
    ],
    "slot": "shoes",
    "stats": {},
@@ -47785,14 +47812,19 @@
    "job": "Ground denial and mass slows \u2014 the ice support seat (albiononlinegrind 'Ice (Icicle) Support').\n",
    "kit": {
     "armor": [
+     "ARMOR_LEATHER_ROYAL",
      "ARMOR_PLATE_FEY",
      "ARMOR_PLATE_SET2",
      "ARMOR_PLATE_HELL",
+     "ARMOR_LEATHER_SET3",
+     "ARMOR_CLOTH_ROYAL",
+     "ARMOR_CLOTH_SET2",
      "ARMOR_PLATE_KEEPER"
     ],
     "cape": [
      "CAPEITEM_SMUGGLER",
      "CAPEITEM_FW_LYMHURST",
+     "CAPEITEM_FW_FORTSTERLING",
      "CAPEITEM_FW_MARTLOCK"
     ],
     "food": [
@@ -47801,32 +47833,42 @@
     ],
     "head": [
      "HEAD_LEATHER_SET3",
+     "HEAD_CLOTH_KEEPER",
+     "HEAD_PLATE_SET2",
      "HEAD_CLOTH_SET2",
      "HEAD_CLOTH_SET3",
+     "HEAD_PLATE_SET1",
      "HEAD_PLATE_KEEPER"
     ],
     "offhand": [
      "OFF_SHIELD_AVALON",
-     "OFF_HORN_KEEPER"
+     "OFF_HORN_KEEPER",
+     "OFF_LAMP_UNDEAD"
     ],
     "potion": [
      "T7_POTION_REVIVE",
      "T8_POTION_CLEANSE",
+     "T8_POTION_TORNADO",
+     "T7_POTION_CLEANSE2",
      "T7_POTION_STONESKIN"
     ],
     "shoes": [
      "SHOES_LEATHER_MORGANA",
      "SHOES_LEATHER_ROYAL",
      "SHOES_LEATHER_SET1",
+     "SHOES_PLATE_UNDEAD",
+     "SHOES_LEATHER_SET2",
+     "SHOES_CLOTH_SET2",
      "SHOES_LEATHER_SET3",
-     "SHOES_CLOTH_SET2"
+     "SHOES_CLOTH_SET1",
+     "SHOES_PLATE_AVALON"
     ]
    },
    "kit_build": {
     "armor": [
      "ARMOR_PLATE_FEY",
      12,
-     38
+     99
     ],
     "cape": [
      "CAPEITEM_SMUGGLER",
@@ -47850,6 +47892,110 @@
     ]
    },
    "kit_weapon": {
+    "2H_ARCANESTAFF_HELL": {
+     "armor": [
+      [
+       "ARMOR_CLOTH_ROYAL",
+       4
+      ]
+     ],
+     "cape": [
+      [
+       "CAPEITEM_SMUGGLER",
+       54
+      ],
+      [
+       "CAPEITEM_FW_LYMHURST",
+       11
+      ],
+      [
+       "CAPEITEM_FW_FORTSTERLING",
+       5
+      ]
+     ],
+     "food": [
+      [
+       "T7_MEAL_OMELETTE",
+       38
+      ],
+      [
+       "T7_MEAL_OMELETTE_AVALON",
+       11
+      ]
+     ],
+     "head": [
+      [
+       "HEAD_LEATHER_SET3",
+       53
+      ],
+      [
+       "HEAD_CLOTH_KEEPER",
+       10
+      ],
+      [
+       "HEAD_PLATE_SET2",
+       5
+      ],
+      [
+       "HEAD_PLATE_SET1",
+       2
+      ],
+      [
+       "HEAD_CLOTH_SET2",
+       1
+      ]
+     ],
+     "offhand": [
+      [
+       "OFF_LAMP_UNDEAD",
+       1
+      ]
+     ],
+     "potion": [
+      [
+       "T7_POTION_REVIVE",
+       65
+      ],
+      [
+       "T7_POTION_CLEANSE2",
+       2
+      ],
+      [
+       "T8_POTION_TORNADO",
+       2
+      ]
+     ],
+     "shoes": [
+      [
+       "SHOES_LEATHER_MORGANA",
+       28
+      ],
+      [
+       "SHOES_PLATE_UNDEAD",
+       15
+      ],
+      [
+       "SHOES_LEATHER_SET1",
+       12
+      ],
+      [
+       "SHOES_LEATHER_ROYAL",
+       6
+      ],
+      [
+       "SHOES_LEATHER_SET2",
+       5
+      ],
+      [
+       "SHOES_CLOTH_SET2",
+       2
+      ],
+      [
+       "SHOES_PLATE_AVALON",
+       1
+      ]
+     ]
+    },
     "2H_ICEGAUNTLETS_HELL": {
      "armor": [
       [
@@ -47889,6 +48035,10 @@
       [
        "HEAD_PLATE_KEEPER",
        2
+      ],
+      [
+       "HEAD_PLATE_SET1",
+       2
       ]
      ],
      "potion": [
@@ -47923,8 +48073,16 @@
     "MAIN_FROSTSTAFF_KEEPER": {
      "armor": [
       [
+       "ARMOR_LEATHER_SET3",
+       5
+      ],
+      [
        "ARMOR_PLATE_SET2",
        4
+      ],
+      [
+       "ARMOR_CLOTH_SET2",
+       2
       ]
      ],
      "cape": [
@@ -47995,6 +48153,10 @@
        4
       ],
       [
+       "SHOES_CLOTH_SET1",
+       2
+      ],
+      [
        "SHOES_CLOTH_SET2",
        1
       ]
@@ -48002,6 +48164,33 @@
     }
    },
    "kit_weapon_build": {
+    "2H_ARCANESTAFF_HELL": {
+     "armor": [
+      "ARMOR_CLOTH_ROYAL",
+      3,
+      61
+     ],
+     "cape": [
+      "CAPEITEM_FW_FORTSTERLING",
+      2,
+      2
+     ],
+     "head": [
+      "HEAD_CLOTH_KEEPER",
+      2,
+      3
+     ],
+     "potion": [
+      "T7_POTION_REVIVE",
+      2,
+      2
+     ],
+     "shoes": [
+      "SHOES_PLATE_UNDEAD",
+      2,
+      2
+     ]
+    },
     "2H_ICEGAUNTLETS_HELL": {
      "armor": [
       "ARMOR_PLATE_FEY",
@@ -48031,34 +48220,29 @@
     },
     "MAIN_FROSTSTAFF_KEEPER": {
      "armor": [
-      "ARMOR_PLATE_SET2",
-      4,
+      "ARMOR_LEATHER_SET3",
+      5,
       13
      ],
-     "cape": [
-      "CAPEITEM_SMUGGLER",
-      3,
-      3
-     ],
      "head": [
-      "HEAD_LEATHER_SET3",
-      4,
-      4
+      "HEAD_CLOTH_SET3",
+      3,
+      5
      ],
      "offhand": [
-      "OFF_SHIELD_AVALON",
+      "OFF_HORN_KEEPER",
       2,
       3
      ],
      "potion": [
-      "T7_POTION_REVIVE",
+      "T8_POTION_CLEANSE",
       2,
       2
      ],
      "shoes": [
-      "SHOES_LEATHER_MORGANA",
+      "SHOES_LEATHER_SET3",
       3,
-      4
+      3
      ]
     }
    },
@@ -48066,7 +48250,8 @@
    "uniform": {
     "chest": [
      "cloth",
-     "plate"
+     "plate",
+     "leather"
     ]
    },
    "weapons": [
@@ -48078,6 +48263,11 @@
     {
      "id": "MAIN_FROSTSTAFF_KEEPER",
      "source": "comp:deadlyhooker (support) + albioncompo_20v20 (tank)",
+     "tier": "primary"
+    },
+    {
+     "id": "2H_ARCANESTAFF_HELL",
+     "source": "owner:2026-09-03 ('support weapon like occult'); dumps: E Time Corridor = ally move+attack speed 0.6, enemy slow 0.3 (mass slow / lane control); guide:metabattle Occult Staff ZvZ Support (Royal Jacket); killboard:party_rosters (61 builds, 85% leather); sheet role_hint support",
      "tier": "primary"
     }
    ]
@@ -58870,7 +59060,6 @@
     "armor": [
      "ARMOR_LEATHER_SET3",
      "ARMOR_LEATHER_HELL",
-     "ARMOR_LEATHER_ROYAL",
      "ARMOR_LEATHER_SET1",
      "ARMOR_LEATHER_AVALON",
      "ARMOR_LEATHER_FEY",
@@ -58898,24 +59087,23 @@
      "T7_MEAL_OMELETTE_AVALON"
     ],
     "head": [
-     "HEAD_LEATHER_SET3",
      "HEAD_PLATE_SET1",
      "HEAD_LEATHER_MORGANA",
      "HEAD_CLOTH_SET2",
+     "HEAD_LEATHER_SET3",
      "HEAD_LEATHER_ROYAL",
      "HEAD_CLOTH_HELL",
      "HEAD_CLOTH_SET3",
      "HEAD_LEATHER_SET1",
      "HEAD_PLATE_SET3",
-     "HEAD_CLOTH_KEEPER",
      "HEAD_PLATE_AVALON",
      "HEAD_LEATHER_HELL",
      "HEAD_LEATHER_SET2",
-     "HEAD_PLATE_SET2",
      "HEAD_CLOTH_AVALON",
      "HEAD_PLATE_ROYAL",
      "HEAD_LEATHER_FEY",
-     "HEAD_LEATHER_UNDEAD"
+     "HEAD_LEATHER_UNDEAD",
+     "HEAD_PLATE_SET2"
     ],
     "offhand": [
      "OFF_SPIKEDSHIELD_MORGANA",
@@ -58943,20 +59131,19 @@
     "shoes": [
      "SHOES_LEATHER_MORGANA",
      "SHOES_LEATHER_HELL",
-     "SHOES_LEATHER_SET2",
      "SHOES_CLOTH_FEY",
-     "SHOES_PLATE_SET1",
      "SHOES_CLOTH_ROYAL",
+     "SHOES_PLATE_SET1",
      "SHOES_PLATE_AVALON",
+     "SHOES_LEATHER_SET2",
      "SHOES_LEATHER_SET3",
-     "SHOES_LEATHER_SET1",
      "SHOES_CLOTH_SET2",
-     "SHOES_PLATE_UNDEAD",
      "SHOES_CLOTH_SET1",
-     "SHOES_LEATHER_ROYAL",
+     "SHOES_LEATHER_SET1",
+     "SHOES_PLATE_UNDEAD",
      "SHOES_CLOTH_SET3",
+     "SHOES_LEATHER_ROYAL",
      "SHOES_PLATE_SET2",
-     "SHOES_PLATE_SET3",
      "SHOES_CLOTH_KEEPER",
      "SHOES_LEATHER_FEY"
     ]
@@ -58964,8 +59151,8 @@
    "kit_build": {
     "armor": [
      "ARMOR_LEATHER_SET3",
-     157,
-     536
+     156,
+     475
     ],
     "cape": [
      "CAPEITEM_FW_FORTSTERLING",
@@ -58975,7 +59162,7 @@
     "head": [
      "HEAD_LEATHER_MORGANA",
      38,
-     161
+     160
     ],
     "offhand": [
      "OFF_TORCH",
@@ -58994,108 +59181,6 @@
     ]
    },
    "kit_weapon": {
-    "2H_ARCANESTAFF_HELL": {
-     "cape": [
-      [
-       "CAPEITEM_SMUGGLER",
-       54
-      ],
-      [
-       "CAPEITEM_FW_LYMHURST",
-       11
-      ],
-      [
-       "CAPEITEM_FW_FORTSTERLING",
-       5
-      ]
-     ],
-     "food": [
-      [
-       "T7_MEAL_OMELETTE",
-       38
-      ],
-      [
-       "T7_MEAL_OMELETTE_AVALON",
-       11
-      ]
-     ],
-     "head": [
-      [
-       "HEAD_LEATHER_SET3",
-       53
-      ],
-      [
-       "HEAD_CLOTH_KEEPER",
-       10
-      ],
-      [
-       "HEAD_PLATE_SET2",
-       5
-      ],
-      [
-       "HEAD_PLATE_SET1",
-       2
-      ],
-      [
-       "HEAD_CLOTH_SET2",
-       1
-      ]
-     ],
-     "offhand": [
-      [
-       "OFF_LAMP_UNDEAD",
-       1
-      ]
-     ],
-     "potion": [
-      [
-       "T7_POTION_REVIVE",
-       65
-      ],
-      [
-       "T7_POTION_CLEANSE2",
-       2
-      ],
-      [
-       "T8_POTION_TORNADO",
-       2
-      ]
-     ],
-     "shoes": [
-      [
-       "SHOES_LEATHER_MORGANA",
-       28
-      ],
-      [
-       "SHOES_PLATE_UNDEAD",
-       15
-      ],
-      [
-       "SHOES_LEATHER_SET1",
-       12
-      ],
-      [
-       "SHOES_LEATHER_ROYAL",
-       6
-      ],
-      [
-       "SHOES_LEATHER_SET2",
-       5
-      ],
-      [
-       "SHOES_CLOTH_SET2",
-       2
-      ],
-      [
-       "SHOES_PLATE_SET3",
-       2
-      ],
-      [
-       "SHOES_PLATE_AVALON",
-       1
-      ]
-     ]
-    },
     "2H_CLAWPAIR": {
      "armor": [
       [
@@ -60116,33 +60201,6 @@
     }
    },
    "kit_weapon_build": {
-    "2H_ARCANESTAFF_HELL": {
-     "cape": [
-      "CAPEITEM_SMUGGLER",
-      17,
-      19
-     ],
-     "food": [
-      "T7_MEAL_OMELETTE",
-      7,
-      16
-     ],
-     "head": [
-      "HEAD_LEATHER_SET3",
-      45,
-      61
-     ],
-     "potion": [
-      "T7_POTION_REVIVE",
-      16,
-      17
-     ],
-     "shoes": [
-      "SHOES_LEATHER_MORGANA",
-      19,
-      45
-     ]
-    },
     "2H_CLAWPAIR": {
      "armor": [
       "ARMOR_LEATHER_SET3",
@@ -60449,11 +60507,6 @@
     {
      "id": "MAIN_SPEAR",
      "source": "killboard:party_rosters (10 builds, 60% leather \u2014 thin); mobility-poke skirmisher; owner:2026-09-01 seat-all",
-     "tier": "primary"
-    },
-    {
-     "id": "2H_ARCANESTAFF_HELL",
-     "source": "killboard:party_rosters (61 builds, 85% leather); the pick/pull catch identity (owner-graded off shield_support 2026-08-26 does not apply \u2014 that was Witchwork); owner:2026-09-01 seat-all",
      "tier": "primary"
     },
     {
@@ -62433,6 +62486,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_ARCANESTAFF"
   },
   "2H_ARCANESTAFF_CRYSTAL": {
@@ -62606,6 +62660,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_ARCANESTAFF_CRYSTAL"
   },
   "2H_ARCANESTAFF_HELL": {
@@ -62745,7 +62800,7 @@
    "removed": false,
    "role_hint": "support",
    "role_menu": [
-    "dive_cleanup"
+    "zone_support"
    ],
    "role_menu_secondary": [
     "pierce"
@@ -62784,6 +62839,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_ARCANESTAFF_HELL"
   },
   "2H_ARCANE_RINGPAIR_AVALON": {
@@ -62992,6 +63048,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_ARCANE_RINGPAIR_AVALON"
   },
   "2H_AXE": {
@@ -63191,6 +63248,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_AXE"
   },
   "2H_AXE_AVALON": {
@@ -63421,6 +63479,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_AXE_AVALON"
   },
   "2H_BOW": {
@@ -63596,6 +63655,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_BOW"
   },
   "2H_BOW_AVALON": {
@@ -63809,6 +63869,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_BOW_AVALON"
   },
   "2H_BOW_CRYSTAL": {
@@ -64002,6 +64063,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_BOW_CRYSTAL"
   },
   "2H_BOW_HELL": {
@@ -64204,6 +64266,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_BOW_HELL"
   },
   "2H_BOW_KEEPER": {
@@ -64432,6 +64495,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_BOW_KEEPER"
   },
   "2H_CLAWPAIR": {
@@ -64626,6 +64690,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_CLAWPAIR"
   },
   "2H_CLAYMORE": {
@@ -64844,6 +64909,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_CLAYMORE"
   },
   "2H_CLAYMORE_AVALON": {
@@ -65069,6 +65135,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_CLAYMORE_AVALON"
   },
   "2H_CLEAVER_HELL": {
@@ -65291,6 +65358,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_CLEAVER_HELL"
   },
   "2H_COMBATSTAFF_MORGANA": {
@@ -65514,6 +65582,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_COMBATSTAFF_MORGANA"
   },
   "2H_CROSSBOW": {
@@ -65699,6 +65768,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_CROSSBOW"
   },
   "2H_CROSSBOWLARGE": {
@@ -65900,6 +65970,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_CROSSBOWLARGE"
   },
   "2H_CROSSBOWLARGE_MORGANA": {
@@ -66090,6 +66161,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_CROSSBOWLARGE_MORGANA"
   },
   "2H_CROSSBOW_CANNON_AVALON": {
@@ -66281,6 +66353,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_CROSSBOW_CANNON_AVALON"
   },
   "2H_CURSEDSTAFF": {
@@ -66475,6 +66548,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_CURSEDSTAFF"
   },
   "2H_CURSEDSTAFF_MORGANA": {
@@ -66651,6 +66725,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_CURSEDSTAFF_MORGANA"
   },
   "2H_DAGGERPAIR": {
@@ -66838,6 +66913,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_DAGGERPAIR"
   },
   "2H_DAGGERPAIR_CRYSTAL": {
@@ -67037,6 +67113,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_DAGGERPAIR_CRYSTAL"
   },
   "2H_DAGGER_KATAR_AVALON": {
@@ -67240,6 +67317,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_DAGGER_KATAR_AVALON"
   },
   "2H_DEMONICSTAFF": {
@@ -67433,6 +67511,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_DEMONICSTAFF"
   },
   "2H_DIVINESTAFF": {
@@ -67542,6 +67621,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_DIVINESTAFF"
   },
   "2H_DOUBLEBLADEDSTAFF": {
@@ -67753,6 +67833,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_DOUBLEBLADEDSTAFF"
   },
   "2H_DOUBLEBLADEDSTAFF_CRYSTAL": {
@@ -67980,6 +68061,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_DOUBLEBLADEDSTAFF_CRYSTAL"
   },
   "2H_DUALAXE_KEEPER": {
@@ -68177,6 +68259,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_DUALAXE_KEEPER"
   },
   "2H_DUALCROSSBOW_CRYSTAL": {
@@ -68367,6 +68450,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_DUALCROSSBOW_CRYSTAL"
   },
   "2H_DUALCROSSBOW_HELL": {
@@ -68556,6 +68640,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_DUALCROSSBOW_HELL"
   },
   "2H_DUALHAMMER_HELL": {
@@ -68821,6 +68906,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_DUALHAMMER_HELL"
   },
   "2H_DUALMACE_AVALON": {
@@ -68996,6 +69082,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_DUALMACE_AVALON"
   },
   "2H_DUALSCIMITAR_UNDEAD": {
@@ -69193,6 +69280,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_DUALSCIMITAR_UNDEAD"
   },
   "2H_DUALSICKLE_UNDEAD": {
@@ -69375,6 +69463,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_DUALSICKLE_UNDEAD"
   },
   "2H_DUALSWORD": {
@@ -69571,6 +69660,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_DUALSWORD"
   },
   "2H_ENIGMATICORB_MORGANA": {
@@ -69718,6 +69808,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_ENIGMATICORB_MORGANA"
   },
   "2H_ENIGMATICSTAFF": {
@@ -69869,6 +69960,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_ENIGMATICSTAFF"
   },
   "2H_FIRESTAFF": {
@@ -70025,6 +70117,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_FIRESTAFF"
   },
   "2H_FIRESTAFF_HELL": {
@@ -70181,6 +70274,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_FIRESTAFF_HELL"
   },
   "2H_FIRE_RINGPAIR_AVALON": {
@@ -70347,6 +70441,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_FIRE_RINGPAIR_AVALON"
   },
   "2H_FLAIL": {
@@ -70527,6 +70622,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_FLAIL"
   },
   "2H_FROSTSTAFF": {
@@ -70760,6 +70856,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_FROSTSTAFF"
   },
   "2H_FROSTSTAFF_CRYSTAL": {
@@ -70992,6 +71089,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_FROSTSTAFF_CRYSTAL"
   },
   "2H_GLACIALSTAFF": {
@@ -71223,6 +71321,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_GLACIALSTAFF"
   },
   "2H_GLAIVE": {
@@ -71380,6 +71479,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_GLAIVE"
   },
   "2H_GLAIVE_CRYSTAL": {
@@ -71564,6 +71664,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_GLAIVE_CRYSTAL"
   },
   "2H_HALBERD": {
@@ -71763,6 +71864,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_HALBERD"
   },
   "2H_HALBERD_MORGANA": {
@@ -71967,6 +72069,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_HALBERD_MORGANA"
   },
   "2H_HAMMER": {
@@ -72201,6 +72304,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_HAMMER"
   },
   "2H_HAMMER_AVALON": {
@@ -72447,6 +72551,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_HAMMER_AVALON"
   },
   "2H_HAMMER_CRYSTAL": {
@@ -72687,6 +72792,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_HAMMER_CRYSTAL"
   },
   "2H_HAMMER_UNDEAD": {
@@ -72939,6 +73045,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_HAMMER_UNDEAD"
   },
   "2H_HARPOON_HELL": {
@@ -73129,6 +73236,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_HARPOON_HELL"
   },
   "2H_HOLYSTAFF": {
@@ -73258,6 +73366,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_HOLYSTAFF"
   },
   "2H_HOLYSTAFF_CRYSTAL": {
@@ -73387,6 +73496,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_HOLYSTAFF_CRYSTAL"
   },
   "2H_HOLYSTAFF_HELL": {
@@ -73509,6 +73619,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_HOLYSTAFF_HELL"
   },
   "2H_HOLYSTAFF_UNDEAD": {
@@ -73631,6 +73742,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_HOLYSTAFF_UNDEAD"
   },
   "2H_ICECRYSTAL_UNDEAD": {
@@ -73860,6 +73972,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_ICECRYSTAL_UNDEAD"
   },
   "2H_ICEGAUNTLETS_HELL": {
@@ -74098,6 +74211,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_ICEGAUNTLETS_HELL"
   },
   "2H_INFERNOSTAFF": {
@@ -74243,6 +74357,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_INFERNOSTAFF"
   },
   "2H_INFERNOSTAFF_MORGANA": {
@@ -74406,6 +74521,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_INFERNOSTAFF_MORGANA"
   },
   "2H_IRONCLADEDSTAFF": {
@@ -74598,6 +74714,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_IRONCLADEDSTAFF"
   },
   "2H_IRONGAUNTLETS_HELL": {
@@ -74775,6 +74892,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_IRONGAUNTLETS_HELL"
   },
   "2H_KNUCKLES_AVALON": {
@@ -75037,6 +75155,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_KNUCKLES_AVALON"
   },
   "2H_KNUCKLES_CRYSTAL": {
@@ -75248,6 +75367,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_KNUCKLES_CRYSTAL"
   },
   "2H_KNUCKLES_HELL": {
@@ -75499,6 +75619,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_KNUCKLES_HELL"
   },
   "2H_KNUCKLES_KEEPER": {
@@ -75728,6 +75849,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_KNUCKLES_KEEPER"
   },
   "2H_KNUCKLES_MORGANA": {
@@ -75938,6 +76060,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_KNUCKLES_MORGANA"
   },
   "2H_KNUCKLES_SET1": {
@@ -76169,6 +76292,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_KNUCKLES_SET1"
   },
   "2H_KNUCKLES_SET2": {
@@ -76380,6 +76504,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_KNUCKLES_SET2"
   },
   "2H_KNUCKLES_SET3": {
@@ -76632,6 +76757,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_KNUCKLES_SET3"
   },
   "2H_LONGBOW": {
@@ -76790,6 +76916,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_LONGBOW"
   },
   "2H_LONGBOW_UNDEAD": {
@@ -76973,6 +77100,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_LONGBOW_UNDEAD"
   },
   "2H_MACE": {
@@ -77154,6 +77282,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_MACE"
   },
   "2H_MACE_MORGANA": {
@@ -77362,6 +77491,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_MACE_MORGANA"
   },
   "2H_NATURESTAFF": {
@@ -77543,6 +77673,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_NATURESTAFF"
   },
   "2H_NATURESTAFF_HELL": {
@@ -77742,6 +77873,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_NATURESTAFF_HELL"
   },
   "2H_NATURESTAFF_KEEPER": {
@@ -77937,6 +78069,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_NATURESTAFF_KEEPER"
   },
   "2H_POLEHAMMER": {
@@ -78180,6 +78313,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_POLEHAMMER"
   },
   "2H_QUARTERSTAFF": {
@@ -78388,6 +78522,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_QUARTERSTAFF"
   },
   "2H_QUARTERSTAFF_AVALON": {
@@ -78614,6 +78749,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_QUARTERSTAFF_AVALON"
   },
   "2H_RAM_KEEPER": {
@@ -78827,6 +78963,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_RAM_KEEPER"
   },
   "2H_REPEATINGCROSSBOW_UNDEAD": {
@@ -79004,6 +79141,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_REPEATINGCROSSBOW_UNDEAD"
   },
   "2H_ROCKSTAFF_KEEPER": {
@@ -79194,6 +79332,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_ROCKSTAFF_KEEPER"
   },
   "2H_SCYTHE_CRYSTAL": {
@@ -79377,6 +79516,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_SCYTHE_CRYSTAL"
   },
   "2H_SCYTHE_HELL": {
@@ -79587,6 +79727,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_SCYTHE_HELL"
   },
   "2H_SHAPESHIFTER_AVALON": {
@@ -79822,6 +79963,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_SHAPESHIFTER_AVALON"
   },
   "2H_SHAPESHIFTER_CRYSTAL": {
@@ -80053,6 +80195,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_SHAPESHIFTER_CRYSTAL"
   },
   "2H_SHAPESHIFTER_HELL": {
@@ -80273,6 +80416,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_SHAPESHIFTER_HELL"
   },
   "2H_SHAPESHIFTER_KEEPER": {
@@ -80491,6 +80635,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_SHAPESHIFTER_KEEPER"
   },
   "2H_SHAPESHIFTER_MORGANA": {
@@ -80701,6 +80846,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_SHAPESHIFTER_MORGANA"
   },
   "2H_SHAPESHIFTER_SET1": {
@@ -80932,6 +81078,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_SHAPESHIFTER_SET1"
   },
   "2H_SHAPESHIFTER_SET2": {
@@ -81149,6 +81296,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_SHAPESHIFTER_SET2"
   },
   "2H_SHAPESHIFTER_SET3": {
@@ -81373,6 +81521,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_SHAPESHIFTER_SET3"
   },
   "2H_SKULLORB_HELL": {
@@ -81554,6 +81703,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_SKULLORB_HELL"
   },
   "2H_SPEAR": {
@@ -81703,6 +81853,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": true,
    "unique_name": "2H_SPEAR"
   },
   "2H_TRIDENT_UNDEAD": {
@@ -81906,6 +82057,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_TRIDENT_UNDEAD"
   },
   "2H_TWINSCYTHE_HELL": {
@@ -82133,6 +82285,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_TWINSCYTHE_HELL"
   },
   "2H_WARBOW": {
@@ -82330,6 +82483,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_WARBOW"
   },
   "2H_WILDSTAFF": {
@@ -82520,6 +82674,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": true,
    "unique_name": "2H_WILDSTAFF"
   },
   "MAIN_1HCROSSBOW": {
@@ -82696,6 +82851,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_1HCROSSBOW"
   },
   "MAIN_ARCANESTAFF": {
@@ -82873,6 +83029,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_ARCANESTAFF"
   },
   "MAIN_ARCANESTAFF_UNDEAD": {
@@ -83088,6 +83245,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_ARCANESTAFF_UNDEAD"
   },
   "MAIN_AXE": {
@@ -83285,6 +83443,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": false,
    "unique_name": "MAIN_AXE"
   },
   "MAIN_CURSEDSTAFF": {
@@ -83460,6 +83619,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_CURSEDSTAFF"
   },
   "MAIN_CURSEDSTAFF_AVALON": {
@@ -83634,6 +83794,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_CURSEDSTAFF_AVALON"
   },
   "MAIN_CURSEDSTAFF_CRYSTAL": {
@@ -83835,6 +83996,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_CURSEDSTAFF_CRYSTAL"
   },
   "MAIN_CURSEDSTAFF_UNDEAD": {
@@ -84029,6 +84191,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_CURSEDSTAFF_UNDEAD"
   },
   "MAIN_DAGGER": {
@@ -84200,6 +84363,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": false,
    "unique_name": "MAIN_DAGGER"
   },
   "MAIN_DAGGER_HELL": {
@@ -84404,6 +84568,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_DAGGER_HELL"
   },
   "MAIN_FIRESTAFF": {
@@ -84558,6 +84723,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_FIRESTAFF"
   },
   "MAIN_FIRESTAFF_CRYSTAL": {
@@ -84733,6 +84899,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_FIRESTAFF_CRYSTAL"
   },
   "MAIN_FIRESTAFF_KEEPER": {
@@ -84889,6 +85056,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_FIRESTAFF_KEEPER"
   },
   "MAIN_FROSTSTAFF": {
@@ -85118,6 +85286,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_FROSTSTAFF"
   },
   "MAIN_FROSTSTAFF_AVALON": {
@@ -85323,6 +85492,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_FROSTSTAFF_AVALON"
   },
   "MAIN_FROSTSTAFF_KEEPER": {
@@ -85554,6 +85724,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_FROSTSTAFF_KEEPER"
   },
   "MAIN_HAMMER": {
@@ -85784,6 +85955,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_HAMMER"
   },
   "MAIN_HOLYSTAFF": {
@@ -85901,6 +86073,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_HOLYSTAFF"
   },
   "MAIN_HOLYSTAFF_AVALON": {
@@ -86023,6 +86196,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_HOLYSTAFF_AVALON"
   },
   "MAIN_HOLYSTAFF_MORGANA": {
@@ -86132,6 +86306,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_HOLYSTAFF_MORGANA"
   },
   "MAIN_MACE": {
@@ -86296,6 +86471,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_MACE"
   },
   "MAIN_MACE_CRYSTAL": {
@@ -86502,6 +86678,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_MACE_CRYSTAL"
   },
   "MAIN_MACE_HELL": {
@@ -86713,6 +86890,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_MACE_HELL"
   },
   "MAIN_NATURESTAFF": {
@@ -86912,6 +87090,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_NATURESTAFF"
   },
   "MAIN_NATURESTAFF_AVALON": {
@@ -87082,6 +87261,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_NATURESTAFF_AVALON"
   },
   "MAIN_NATURESTAFF_CRYSTAL": {
@@ -87280,6 +87460,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_NATURESTAFF_CRYSTAL"
   },
   "MAIN_NATURESTAFF_KEEPER": {
@@ -87447,6 +87628,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_NATURESTAFF_KEEPER"
   },
   "MAIN_RAPIER_MORGANA": {
@@ -87660,6 +87842,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": false,
    "unique_name": "MAIN_RAPIER_MORGANA"
   },
   "MAIN_ROCKMACE_KEEPER": {
@@ -87840,6 +88023,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_ROCKMACE_KEEPER"
   },
   "MAIN_SCIMITAR_MORGANA": {
@@ -88062,6 +88246,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_SCIMITAR_MORGANA"
   },
   "MAIN_SPEAR": {
@@ -88264,6 +88449,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": false,
    "unique_name": "MAIN_SPEAR"
   },
   "MAIN_SPEAR_KEEPER": {
@@ -88472,6 +88658,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_SPEAR_KEEPER"
   },
   "MAIN_SPEAR_LANCE_AVALON": {
@@ -88664,6 +88851,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_SPEAR_LANCE_AVALON"
   },
   "MAIN_SWORD": {
@@ -88857,6 +89045,7 @@
     },
     "utility_carrier": true
    },
+   "two_handed": false,
    "unique_name": "MAIN_SWORD"
   },
   "MAIN_SWORD_CRYSTAL": {
@@ -89032,6 +89221,7 @@
     },
     "utility_carrier": false
    },
+   "two_handed": false,
    "unique_name": "MAIN_SWORD_CRYSTAL"
   }
  }
