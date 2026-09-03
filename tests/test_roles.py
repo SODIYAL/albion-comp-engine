@@ -568,19 +568,25 @@ def t_weapon_doctrine():
     # seat aggregate, and it still resolves to Knight by a clear majority.
     # A change here after an evidence import is expected; a change in
     # `gear` or `doctrine` is not.
+    # [63, 144] since the 2026-09-03 kit audit: effect-carrier chests
+    # COUNT as weapon evidence (Judicator/Guardian were the modal 1H-Mace
+    # chests and the exclusion left Graveguard), so slot totals grew.
     ph = (top["gear"] == "ARMOR_PLATE_SET2"
-          and top["doctrine"] == "weapon" and top["doctrine_n"] == [63, 95])
+          and top["doctrine"] == "weapon" and top["doctrine_n"] == [63, 144])
     hoj = e.kit_options("2H_HAMMER_AVALON", top_n=10)
     demon = next((o for o in hoj["options"]["armor"]
                   if o["gear"] == "ARMOR_PLATE_HELL"), None)
-    dem = (demon is not None and demon["doctrine"] == "seat"
+    # Demon Armor on HoJ now reads as WEAPON-tier evidence (what HoJ
+    # players wear) still carrying reflect_shell; the comp-level limit
+    # moved to the forge's carrier quota (R25), not to the evidence
+    dem = (demon is not None and demon["doctrine"] in ("weapon", "seat")
            and "reflect_shell" in (demon["carries"] or []))
     kw = ((e.roles.get("engage_tank") or {}).get("kit_weapon")
           or {}).get("2H_HAMMER_AVALON") or {}
     effect_items = {"ARMOR_PLATE_HELL", "ARMOR_PLATE_KEEPER",
                     "ARMOR_PLATE_SET3", "ARMOR_LEATHER_ROYAL",
                     "ARMOR_LEATHER_HELL"}
-    clean = not (effect_items
+    clean = bool(effect_items
                  & {p[0] for slot in kw for p in kw[slot]})
     rep = _json.load(open(os.path.join(ROOT, "pipeline", "out",
                                        "roles_report.json"),
@@ -591,8 +597,8 @@ def t_weapon_doctrine():
     quota = (cb is not None and cb["copies"].get("reflect_shell") == 4
              and (q["summary"]["reflect_shell"]["with_any"] or 0) >= 6)
     check("R18 per-weapon doctrine: Polehammer wears its own observed "
-          "Knight (5/5); Demon Armor on HoJ reads as seat-pool reflect "
-          "carrier, never weapon identity; quotas mined per roster",
+          "Knight; Demon Armor on HoJ is weapon evidence carrying "
+          "reflect_shell (2026-09-03 re-pin); quotas mined per roster",
           ph and dem and clean and quota,
           f"pole_top={top['gear']}/{top['doctrine']}/{top['doctrine_n']} "
           f"demon={demon and (demon['doctrine'], demon['carries'])} "
@@ -662,8 +668,20 @@ def t_observed_build_overlay():
          and top.get("observed_build") == wb["armor"][1:3])   # [n, of]
     # (c) every kit slot is either archetype-annotated or plain-ranked —
     # and at least one slot of a thin-basket weapon uses the fallback
-    ko_lx = Engine(content="faction_war", size=15,
-                   style="brawl").kit_options("MAIN_1HCROSSBOW")
+    # (c) re-pinned 2026-09-03: with carriers admitted the 1H-crossbow
+    # chain now covers every slot, so the fallback is shown on a weapon
+    # whose archetype chain STOPPED early (the chain-guard: pool < 5 or
+    # pick share < 25%) — such weapons exist, and their kit still fills
+    # the uncovered slots by plain ranking
+    thin = None
+    for rid, rr in e.roles.items():
+        for wk, wb in (rr.get("kit_weapon_build") or {}).items():
+            if 0 < len(wb) < 5 and e.primary_seat(wk) == rid:
+                thin = wk
+                break
+        if thin:
+            break
+    ko_lx = e.kit_options(thin) if thin else {"kit": {}}
     slots = ko_lx["kit"] or {}
     c = bool(slots) and any(not v.get("observed_build")
                             for v in slots.values()) \
@@ -676,7 +694,7 @@ def t_observed_build_overlay():
           "annotated); thin slots fall back; diagnostic mode unoverlaid",
           bool(a) and b and c and d,
           f"pole_armor={wb.get('armor')} top={top.get('gear')}/"
-          f"{top.get('observed_build')} lx_slots={len(slots)}")
+          f"{top.get('observed_build')} thin={thin} slots={len(slots)}")
 
 
 def t_two_handed_no_offhand():
@@ -749,6 +767,116 @@ def t_occult_support_seat():
           f"detect={d} menu={menu}")
 
 
+def t_kit_audit_agreement():
+    # R24 (owner 2026-09-03, "build fixes until engine agrees or mostly
+    # agrees with the real data of people who win fights"): on ten
+    # seeded-random weapons with >= 30 harvested builds, the kit the forge
+    # dresses (kit_variants v0) matches the killboard's modal item in at
+    # least 85% of slots, and NO slot picks an item worn less than half
+    # as often as the modal one. Off-hands are skipped for two-handers;
+    # an unset observed slot is not a choice; a modal item the catalog
+    # does not curate cannot be picked and is skipped.
+    import json as _json, random as _random
+    from collections import Counter as _Counter
+    e = Engine(content="territory_defense", size=20)
+    doc = _json.load(open(os.path.join(ROOT, "pipeline", "out",
+                                       "party_rosters.json"),
+                          encoding="utf-8"))
+    by_w = {}
+    for r in doc.get("builds") or []:
+        if r.get("weapon") in e.weapons and r.get("gear"):
+            by_w.setdefault(r["weapon"], []).append(r["gear"])
+    eligible = sorted(w for w, rs in by_w.items() if len(rs) >= 30)
+    pick = _random.Random(20260903).sample(eligible, 10)
+    slot_kb = [("head", "Head"), ("armor", "Armor"), ("shoes", "Shoes"),
+               ("cape", "Cape"), ("offhand", "OffHand"),
+               ("potion", "Potion"), ("food", "Food")]
+    total = agree = bad = 0
+    detail = []
+    for w in pick:
+        v0 = {}
+        for g in (e.kit_variants(w)[0][1] or []):
+            v0[e.gear[g]["slot"]] = g
+        for slot, kb in slot_kb:
+            if slot == "offhand" and e.weapons[w].get("two_handed"):
+                continue
+            c = _Counter()
+            for gd in by_w[w]:
+                v = gd.get(kb)
+                c[(e.gear_key(v) or v) if v else "-"] += 1
+            n = sum(c.values())
+            items = [(k, x) for k, x in c.most_common() if k != "-"]
+            if not items or items[0][0] not in e.gear:
+                continue
+            modal, mn = items[0]
+            eng = v0.get(slot)
+            share = (c.get(eng, 0) / n) if eng else 0.0
+            total += 1
+            if eng == modal:
+                agree += 1
+            elif share < 0.5 * (mn / n):
+                bad += 1
+                detail.append(f"{w}:{slot}:{eng}<{modal}")
+    check("R24 kit audit: forge kits match the killboard modal item in "
+          ">= 85% of slots on ten random weapons and never pick an item "
+          "worn < half as often as the modal",
+          total >= 50 and agree >= 0.85 * total and bad == 0,
+          f"agree={agree}/{total} bad={bad} {detail[:4]}")
+
+
+def t_carrier_quota():
+    # R25 (2026-09-03, increment 3b): effect-carrier chests are capped per
+    # roster at the killboard share x size — a generation constraint in
+    # party_state/_eval_pick (kit variants past the cap are skipped, the
+    # carrier weapon gets a non-carrier alternative), never a scoring
+    # rule: a manual party of five Demon Armors still scores.
+    e = Engine(content="territory_defense", size=20, style="clap")
+    caps = e.carrier_caps()
+    q = e.data.get("carrier_quotas") or {}
+    have_q = bool((q.get("buckets") or {}).get("20-59"))
+    r = e.forge(20)
+    worn = e._carrier_counts(r["gears"])
+    within = all(worn.get(k, 0) <= v for k, v in caps.items())
+    st = e.party_state(r["party"], r["combos"], r["gears"])
+    # a carrier v0 weapon offers a non-carrier alternative variant
+    kv = e.kit_variants("2H_DUALMACE_AVALON")   # Oathkeepers: Demon 84%
+    chest0 = next(g for g in kv[0][1] if g.startswith("ARMOR_"))
+    alt = [g for _k, gl in kv[1:] for g in (gl or []) if g.startswith("ARMOR_")]
+    v_ok = ("reflect_shell" in (e._item_effects.get(chest0) or [])
+            and alt and not any(e._item_effects.get(g) for g in alt))
+    manual = ["2H_DUALMACE_AVALON"] * 5
+    demon = [["ARMOR_PLATE_HELL"]] * 5
+    scores = e.fitness(manual, None, demon) > e.fitness(manual, None, None)
+    check("R25 carrier quota: caps ship (reflect_shell 1 per 20), a forged "
+          "20 wears no effect past its cap, the state counts carriers, a "
+          "carrier weapon offers a non-carrier variant, manual builds score",
+          have_q and caps.get("reflect_shell") == 1 and within
+          and st.get("carriers") is not None and v_ok and scores,
+          f"caps={caps} worn={worn} kv={kv}")
+
+
+def t_observed_chest_class():
+    # R26 (2026-09-03): a weapon's observed chest class (>= 25% of >= 50
+    # harvested builds) is admitted to its own weapon tier and kit_match
+    # even outside the seat's book uniform — Galatine Pair wears plate in
+    # 81% of 145 winning builds under a cloth/leather bomb seat — while a
+    # thin sample (Grailseeker, 32 builds) never overturns a ruling.
+    e = Engine(content="territory_defense", size=20)
+    ko = e.kit_options("2H_DUALSCIMITAR_UNDEAD")
+    top = (ko["kit"].get("armor") or {}).get("gear")
+    d = e.detect_role("2H_DUALSCIMITAR_UNDEAD", "ARMOR_PLATE_SET1")
+    ext = ((e.roles.get("bomb_aoe") or {}).get("kit_weapon_uniform")
+           or {}).get("2H_DUALSCIMITAR_UNDEAD") or []
+    grail = ((e.roles.get("stopper_tank") or {}).get("kit_weapon_uniform")
+             or {}).get("2H_QUARTERSTAFF_AVALON")
+    check("R26 observed chest class: Galatine Pair is dressed in Soldier "
+          "Armor (plate admitted on 145 builds) and reads on-uniform in "
+          "plate; Grailseeker's 32-build sample extends nothing",
+          top == "ARMOR_PLATE_SET1" and d["kit_match"] is True
+          and "plate" in ext and grail is None,
+          f"top={top} match={d['kit_match']} ext={ext} grail={grail}")
+
+
 if __name__ == "__main__":
     t_role_book()
     t_ruled_memberships()
@@ -773,6 +901,9 @@ if __name__ == "__main__":
     t_two_handed_no_offhand()
     t_role_class_from_seat()
     t_occult_support_seat()
+    t_kit_audit_agreement()
+    t_carrier_quota()
+    t_observed_chest_class()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")

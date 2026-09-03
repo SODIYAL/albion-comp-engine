@@ -247,6 +247,7 @@ class Engine:
         self.template = self.data["templates"][content]
         self.content = content
         self.size = size
+        self._carrier_caps_cache = None   # carrier_caps() memo (size-keyed)
         self.reqs = self.template["requirements"]
         self.floors = self.template.get("hard_floors", {}) or {}
         self.base_size = self.template.get("base_size", size)
@@ -763,8 +764,9 @@ class Engine:
             return {"role": None, "class": self.role_of(weapon),
                     "kit_match": None, "functions": [],
                     "secondary": menu2}
-        uni_of = lambda rid: ((self.roles.get(rid) or {}).get("uniform")
-                              or {}).get("chest") or []
+        uni_of = lambda rid: self._chest_uniform(rid, weapon) \
+            if ((self.roles.get(rid) or {}).get("uniform")
+                or {}).get("chest") else []
         seats = [rid for rid in menu if uni_of(rid)]
         functions = [rid for rid in menu if not uni_of(rid)]
         if not seats:
@@ -1277,10 +1279,36 @@ class Engine:
             # keeps the search's kit dimension at ~2x cost; widen only
             # with a fresh measurement)
             out = [("v0", gl(v0))]
-            for n, (slot, piece) in enumerate(divergent[:1]):
+            # carrier quota (2026-09-03): when the observed modal chest
+            # grants a capped effect, the ONE alternative variant is the
+            # weapon's best non-carrier chest instead of the divergent
+            # swap — a capped-out roster still dresses the member in
+            # what its own builds wear next (Mace: Judicator -> Knight)
+            caps = self.carrier_caps()
+            chest = v0.get("armor")
+            carrier = bool(chest and any(
+                e in caps for e in (self._item_effects.get(chest) or [])))
+            alt_chest = None
+            if carrier:
+                # deeper look for the alternative only (the v0/divergent
+                # search keeps its historical depth of 3)
+                ko8 = self.kit_options(weapon, top_n=8)
+                for o in (ko8["options"].get("armor") or []):
+                    if not o.get("doctrine") or o["gear"] == chest:
+                        continue
+                    if not any(e in caps for e in
+                               (self._item_effects.get(o["gear"]) or [])):
+                        alt_chest = o["gear"]
+                        break
+            if alt_chest:
                 alt = dict(v0)
-                alt[slot] = piece
-                out.append((f"v{n + 1}", gl(alt)))
+                alt["armor"] = alt_chest
+                out.append(("v1", gl(alt)))
+            else:
+                for n, (slot, piece) in enumerate(divergent[:1]):
+                    alt = dict(v0)
+                    alt[slot] = piece
+                    out.append((f"v{n + 1}", gl(alt)))
         self._variant_cache[weapon] = out
         return out
 
@@ -1300,6 +1328,16 @@ class Engine:
                               for i in range(len(extras))])
             self._dressed_cache[weapon] = out
         return out
+
+    def _chest_uniform(self, seat, weapon):
+        """Chest classes admitted for `weapon` in `seat`: the book uniform
+        plus the weapon's own observed-majority class when the killboard
+        harvest is clear (dataset `kit_weapon_uniform`, 2026-09-03)."""
+        rec = self.roles.get(seat) or {}
+        ext = ((rec.get("kit_weapon_uniform") or {}).get(weapon))
+        if ext:
+            return list(ext)
+        return list((rec.get("uniform") or {}).get("chest") or [])
 
     def primary_seat(self, weapon):
         """The weapon's default SEAT role: the first uniform-carrying role
@@ -1374,7 +1412,11 @@ class Engine:
             # fail closed: no seat, no suggestion (ruling 2026-09-01)
             return {"kit": {}, "options": {}, "seat": None}
         seat_rec = self.roles.get(seat) or {}
-        uniform = (seat_rec.get("uniform") or {}).get("chest") or []
+        # the seat's book uniform, widened by THIS weapon's observed
+        # majority class where the harvest is clear (dataset
+        # kit_weapon_uniform, 2026-09-03: Galatine Pair fields plate in
+        # 81% of winning builds under a cloth/leather bomb seat)
+        uniform = self._chest_uniform(seat, weapon)
         doctrine = seat_rec.get("kit") or {}
         # Per-weapon doctrine tier (owner design 2026-08-26): THIS
         # weapon's own observed items (effect carriers excluded at the
@@ -1483,20 +1525,45 @@ class Engine:
             # tank Mercenary Hood over the observed team pieces. The
             # chest is pool-gated either way — the Hellion bug can't
             # return; off-tier items stay ranked behind the tiers.
+            # EVIDENCE-FIRST RANKING (2026-09-03 kit audit, owner: "the
+            # engine should be recommending things from there"): within
+            # the weapon tier, observed count leads. Comp-aware mode may
+            # reorder only the EVIDENCE BAND — items worn at least half as
+            # often as the slot's modal item — by the exact marginal;
+            # everything rarer follows by count. Value-first within the
+            # whole tier handed a mace Cleric Cowl (32 of 216) over
+            # Judicator Helmet (81 of 216) because the comp lacked a
+            # cleanse. The seat tier keeps the seat pool's own
+            # count order (the list ships count-sorted); value breaks
+            # ties only.
+            top_count = max(wslot.values()) if wslot else 0
+            seat_order = {g: i for i, g in
+                          enumerate(doctrine.get(slot) or [])}
+            in_band = lambda g: (wslot.get(g, 0) >= 0.5 * top_count)
+
             def tier_rank(r):
                 return (0 if r["doctrine"] == "weapon"
                         else 1 if r["doctrine"] == "seat" else 2)
-            if party is None:
-                ranked.sort(key=lambda r: (
-                    tier_rank(r), -wslot.get(r["gear"], 0), -r["value"],
-                    r["gear"]))
-            else:
-                ranked.sort(key=lambda r: (
-                    tier_rank(r), -r["value"], -wslot.get(r["gear"], 0),
-                    r["gear"]))
+
+            def sort_key(r):
+                g = r["gear"]
+                t = tier_rank(r)
+                if t == 0:
+                    if party is not None and in_band(g):
+                        return (0, 0, -r["value"], -wslot.get(g, 0), g)
+                    return (0, 0 if in_band(g) else 1,
+                            -wslot.get(g, 0), -r["value"], g)
+                if t == 1:
+                    return (1, seat_order.get(g, len(seat_order)), 0,
+                            -r["value"], g)
+                return (2, 0, -r["value"], 0, g)
+            ranked.sort(key=sort_key)
             a = arch.get(slot)
-            if a:
-                # the observed build leads the slot (overlay ruling)
+            # the observed build leads the slot (overlay ruling) — but
+            # never from outside the evidence band: a chain pick the
+            # weapon's builds wear less than half as often as the modal
+            # item stays where the count put it (2026-09-03)
+            if a and (not wslot or in_band(a[0])):
                 for i, rr in enumerate(ranked):
                     if rr["gear"] == a[0]:
                         rr["observed_build"] = [a[1], a[2]]
@@ -1505,6 +1572,68 @@ class Engine:
             options[slot] = ranked[:top_n]
         kit = {slot: opts[0] for slot, opts in options.items() if opts}
         return {"kit": kit, "options": options, "seat": seat}
+
+    def carrier_caps(self):
+        """Per-roster CAP on each effect-carrier chest at the current size:
+        killboard share of builds wearing it (dataset `carrier_quotas`,
+        nearest fight-size bucket) x size, half-up, min 1. {} when the
+        dataset carries no quotas (older datasets: unconstrained).
+        A GENERATION constraint (2026-09-03, increment 3b): party_state
+        counts the carriers a roster wears, and every dressed candidate
+        skips a kit variant whose chest would push an effect past its
+        cap — so five maces cannot all wear Judicator while real rosters
+        field about 1.5 per 20. Manual kits always score."""
+        if getattr(self, "_carrier_caps_cache", None) is not None:
+            return self._carrier_caps_cache
+        q = self.data.get("carrier_quotas") or {}
+        buckets = q.get("buckets") or {}
+        caps = {}
+        if buckets:
+            key = "60+" if (self.size >= 60 and "60+" in buckets) else "20-59"
+            share = (buckets.get(key) or {}).get("share") or {}
+            caps = {eff: max(1, self._half_up(s * self.size))
+                    for eff, s in sorted(share.items())}
+        self._carrier_caps_cache = caps
+        return caps
+
+    def _carrier_counts(self, gears):
+        """{effect: members wearing a chest that grants it} over a gears
+        list, for the capped effects only."""
+        caps = self.carrier_caps()
+        out = {}
+        if not caps:
+            return out
+        for g in gears or []:
+            for x in g or []:
+                for eff in self._item_effects.get(x) or []:
+                    if eff in caps:
+                        out[eff] = out.get(eff, 0) + 1
+        return out
+
+    def _variant_capped(self, state, vgears):
+        """True when dressing a candidate in `vgears` would push an
+        effect-carrier chest past its cap for this roster (party_state
+        `carriers`). Naked variants never are."""
+        carriers = state.get("carriers")
+        if not carriers or not vgears:
+            return False
+        caps = self.carrier_caps()
+        for x in vgears:
+            for eff in self._item_effects.get(x) or []:
+                if eff in caps and carriers.get(eff, 0) >= caps[eff]:
+                    return True
+        return False
+
+    def observed_share(self, weapon, gear_id):
+        """How often this weapon's fielded builds wear `gear_id` in its
+        slot (weapon-tier doctrine count / slot total), 0 when unseen."""
+        seat = self.primary_seat(weapon)
+        rec = self.roles.get(seat) or {}
+        slot = (self.gear.get(gear_id) or {}).get("slot")
+        wl = ((rec.get("kit_weapon") or {}).get(weapon) or {}).get(slot) or []
+        total = sum(n for _g, n in wl)
+        n = next((n for g, n in wl if g == gear_id), 0)
+        return (n / total) if total else 0.0
 
     def member_extra(self, weapon, combo=None):
         """What ONE party member actually brings: the combo's effective caps
@@ -1906,7 +2035,10 @@ class Engine:
                         if v > cur.get(cap, 0.0):
                             cur[cap] = v
         return {"s": s, "s_syn": s_syn, "J": J, "pair_vals": pair_vals,
-                "counts": counts, "ns_max": ns_max}
+                "counts": counts, "ns_max": ns_max,
+                # carrier quota (2026-09-03): what this roster already
+                # wears of each capped effect-carrier chest
+                "carriers": self._carrier_counts(gears)}
 
     def _marg_fit_from(self, s, extra, s_floor=None, extra_floor=None):
         """Marginal fitness of adding effective caps `extra` to effective
@@ -2174,6 +2306,8 @@ class Engine:
         extras = self._combo_extras(weapon)
         dressed = self._dressed_extras(weapon)
         for vkey, vgears in self.kit_variants(weapon):
+            if self._variant_capped(state, vgears):
+                continue   # carrier quota: this chest is spoken for
             dext = dressed[vkey]
             for i in range(len(extras)):
                 val, d_fit, d_syn = self._combo_score_dressed(
@@ -3133,6 +3267,8 @@ class Engine:
                 if need > slots_left_after:
                     continue
             for vkey, vgears in variants:
+                if self._variant_capped(state, vgears):
+                    continue   # carrier quota: this chest is spoken for
                 val, d_fit, d_syn = self._combo_score_dressed(
                     state, w, i, extras[i], dressed[vkey][i], vkey)
                 if best is None or val > best[0]:
@@ -3482,6 +3618,13 @@ class Engine:
                             if ok:
                                 for pn, mn in ctx["pred_min"].items():
                                     if preds.get(pn, 0) < mn:
+                                        ok = False
+                                        break
+                            if ok:
+                                caps = self.carrier_caps()
+                                for eff, c in self._carrier_counts(
+                                        cand_gears).items():
+                                    if c > caps.get(eff, 10 ** 9):
                                         ok = False
                                         break
                             if not ok:

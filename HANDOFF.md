@@ -60,6 +60,26 @@ band-gap and honesty-mirror contracts, and `test_display_math.js` now
 sweeps the ring geometry across every group size with source-extracted
 constants instead of a hand copy).
 
+## The kit audit (2026-09-03, same day)
+
+Owner: "judge 10 random weapons using the data we have for what people
+really wear vs what the engine gives ... build fixes until the engine
+agrees." Harness pinned as R24 (killboard modal item per slot vs the
+forge's v0 kit): ten seeded weapons 70% -> 89% exact agreement with the
+nine bad slots gone; all 67 weapons with >= 30 builds 88%, the four
+misses all catalogue gaps. Root causes and fixes (VALIDATION.md "THE KIT
+AUDIT"): effect-carrier chests now count as weapon evidence (the
+2026-08-26 exclusion is replaced by a derived CARRIER QUOTA — killboard
+share x size per fight-size bucket, enforced inside the search through
+`party_state.carriers` and capped kit variants, dataset
+`carrier_quotas`); a weapon's observed chest class (>= 25% of >= 50
+builds) is admitted to its own tier and kit_match (`kit_weapon_uniform`);
+the archetype chain stops outside real evidence and the overlay stays
+inside the evidence band; ranking is count-first in both modes with the
+comp marginal reordering only the band. Open: no harvested fights under
+20 players and no style split — lower the discovery floor and label
+rosters before trusting small-scale kits.
+
 ## Owner bug round (2026-09-03)
 
 Five reported defects, all reproduced and fixed (VALIDATION.md carries

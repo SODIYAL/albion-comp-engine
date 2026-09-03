@@ -1,4 +1,36 @@
 {
+ "carrier_quotas": {
+  "buckets": {
+   "20-59": {
+    "builds": 5020,
+    "share": {
+     "cooldown_banner": 0.0355,
+     "force_shield": 0.0743,
+     "lifesteal_aura": 0.0956,
+     "reflect_shell": 0.0341,
+     "weaken_aura": 0.0462
+    }
+   },
+   "60+": {
+    "builds": 4549,
+    "share": {
+     "cooldown_banner": 0.0473,
+     "force_shield": 0.0838,
+     "lifesteal_aura": 0.0754,
+     "reflect_shell": 0.0462,
+     "weaken_aura": 0.0578
+    }
+   }
+  },
+  "items": {
+   "cooldown_banner": ["ARMOR_LEATHER_ROYAL"],
+   "force_shield": ["ARMOR_PLATE_KEEPER"],
+   "lifesteal_aura": ["ARMOR_LEATHER_HELL"],
+   "reflect_shell": ["ARMOR_PLATE_HELL"],
+   "weaken_aura": ["ARMOR_PLATE_SET3"]
+  },
+  "note": "share of killboard builds wearing a chest that grants each typed gear effect, per fight-size bucket (official kill-event party rosters); the engine caps generated rosters at share x size"
+ },
  "effect_candidates": ["ARMOR_CLOTH_ROYAL", "ARMOR_PLATE_ROYAL", "HEAD_CLOTH_KEEPER", "HEAD_PLATE_SET3"],
  "effect_quotas": {
   "comps": [
@@ -1798,6 +1830,11 @@
        "count": 2,
        "id": "ARMOR_LEATHER_FEY",
        "sources": ["albioncompo_hdcp_bomb_2026_06 (comp:11)", "killboard (1x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_10man_melee_2026_02 (comp:8,9)"]
       }
      ],
      "cape": [
@@ -1904,8 +1941,18 @@
     "2H_DUALSCIMITAR_UNDEAD": {
      "armor": [
       {
+       "count": 122,
+       "id": "ARMOR_PLATE_SET1",
+       "sources": ["albioncompo_brawl_by_lattex_2026_05 (comp:13)", "albioncompo_brawl_clap_2026_05 (comp:11)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:4)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:13)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:10)", "killboard (117x)"]
+      },
+      {
        "count": 13,
        "id": "ARMOR_CLOTH_SET2",
+       "sources": ["killboard (13x)"]
+      },
+      {
+       "count": 13,
+       "id": "ARMOR_LEATHER_HELL",
        "sources": ["killboard (13x)"]
       }
      ],
@@ -2036,6 +2083,11 @@
        "count": 6,
        "id": "ARMOR_LEATHER_AVALON",
        "sources": ["killboard (5x)", "metabattle (7766:8995)"]
+      },
+      {
+       "count": 6,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (6x)"]
       },
       {
        "count": 4,
@@ -2210,36 +2262,6 @@
     }
    },
    "off_uniform": [
-    {
-     "build": "albioncompo_brawl_by_lattex_2026_05:comp:13",
-     "id": "ARMOR_PLATE_SET1",
-     "weapon": "2H_DUALSCIMITAR_UNDEAD"
-    },
-    {
-     "build": "albioncompo_brawl_clap_2026_05:comp:11",
-     "id": "ARMOR_PLATE_SET1",
-     "weapon": "2H_DUALSCIMITAR_UNDEAD"
-    },
-    {
-     "build": "albioncompo_builds_for_brawl_bomb_2026_06:comp:4",
-     "id": "ARMOR_PLATE_SET1",
-     "weapon": "2H_DUALSCIMITAR_UNDEAD"
-    },
-    {
-     "build": "albioncompo_hard_zvz_brawl_20ppl_2026_08:comp:13",
-     "id": "ARMOR_PLATE_SET1",
-     "weapon": "2H_DUALSCIMITAR_UNDEAD"
-    },
-    {
-     "build": "albioncompo_pt_3_offensive_wave_2026_03:comp:10",
-     "id": "ARMOR_PLATE_SET1",
-     "weapon": "2H_DUALSCIMITAR_UNDEAD"
-    },
-    {
-     "build": "killboard:117x",
-     "id": "ARMOR_PLATE_SET1",
-     "weapon": "2H_DUALSCIMITAR_UNDEAD"
-    },
     {
      "build": "killboard:1x",
      "id": "ARMOR_PLATE_SET1",
@@ -2494,6 +2516,15 @@
      }
     ]
    },
+   "uniform_extended": {
+    "2H_DUALSCIMITAR_UNDEAD": {
+     "classes": ["plate"],
+     "n": 145,
+     "share": {
+      "plate": 0.807
+     }
+    }
+   },
    "weapon_archetypes": {
     "2H_DAGGER_KATAR_AVALON": {
      "armor": ["ARMOR_LEATHER_SET3", 15, 40],
@@ -2504,12 +2535,12 @@
      "shoes": ["SHOES_CLOTH_FEY", 14, 15]
     },
     "2H_DUALSCIMITAR_UNDEAD": {
-     "armor": ["ARMOR_CLOTH_SET2", 13, 145],
-     "cape": ["CAPEITEM_KEEPER", 8, 10],
-     "food": ["T8_MEAL_STEW", 5, 8],
-     "head": ["HEAD_LEATHER_ROYAL", 10, 13],
-     "potion": ["T7_POTION_REVIVE", 8, 8],
-     "shoes": ["SHOES_CLOTH_SET3", 10, 10]
+     "armor": ["ARMOR_PLATE_SET1", 117, 145],
+     "cape": ["CAPEITEM_FW_LYMHURST", 49, 66],
+     "food": ["T8_MEAL_STEW", 22, 49],
+     "head": ["HEAD_LEATHER_SET3", 69, 117],
+     "potion": ["T7_POTION_REVIVE", 49, 50],
+     "shoes": ["SHOES_LEATHER_MORGANA", 66, 69]
     },
     "2H_GLAIVE_CRYSTAL": {
      "armor": ["ARMOR_CLOTH_AVALON", 125, 167],
@@ -2521,33 +2552,43 @@
     },
     "2H_KNUCKLES_MORGANA": {
      "armor": ["ARMOR_CLOTH_SET3", 7, 9],
-     "cape": ["CAPEITEM_KEEPER", 3, 4],
      "head": ["HEAD_LEATHER_ROYAL", 7, 7],
      "shoes": ["SHOES_PLATE_SET1", 4, 7]
     }
    }
   },
   "brawl_healer": {
-   "archetype": {
-    "armor": ["ARMOR_PLATE_ROYAL", 94, 1227],
-    "cape": ["CAPEITEM_FW_LYMHURST", 12, 18],
-    "food": ["T7_MEAL_OMELETTE_AVALON", 8, 10],
-    "head": ["HEAD_LEATHER_SET3", 39, 94],
-    "offhand": ["OFF_TORCH_CRYSTAL", 10, 12],
-    "potion": ["T7_POTION_REVIVE", 10, 10],
-    "shoes": ["SHOES_LEATHER_ROYAL", 18, 39]
-   },
    "by_weapon": {
     "2H_HOLYSTAFF": {
      "armor": [
+      {
+       "count": 37,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["killboard (37x)"]
+      },
       {
        "count": 5,
        "id": "ARMOR_LEATHER_SET3",
        "sources": ["killboard (5x)"]
       },
       {
+       "count": 3,
+       "id": "ARMOR_CLOTH_AVALON",
+       "sources": ["killboard (3x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_CLOTH_SET1",
+       "sources": ["killboard (2x)"]
+      },
+      {
        "count": 2,
        "id": "ARMOR_LEATHER_AVALON",
+       "sources": ["killboard (2x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_LEATHER_ROYAL",
        "sources": ["killboard (2x)"]
       },
       {
@@ -2680,6 +2721,21 @@
     "MAIN_HOLYSTAFF_AVALON": {
      "armor": [
       {
+       "count": 690,
+       "id": "ARMOR_CLOTH_AVALON",
+       "sources": ["albioncompo_bist_roam15_2026_01 (comp:6,8)", "albioncompo_brawl_by_lattex_2026_05 (comp:18)", "albioncompo_brawl_clap_2026_05 (comp:12)", "albioncompo_brawl_hit_20_2026_01 (comp:8,9,10)", "albioncompo_bus_bomb_2026_08 (comp:13)", "albioncompo_kite_deff_2026_08 (comp:11)", "albioncompo_new_composition_2026_04 (comp:2)", "albioncompo_new_composition_2026_08 (comp:5,6)", "albioncompo_perma_comp_a_2026_08 (comp:14)", "albioncompo_ranged_bomb_2026_07 (comp:7)", "albioncompo_ss_kite_20_2026_06 (comp:19)", "cb_clonepeek_zvz20_2026_03 (comp:7)", "deadlyhooker_large_scale_2026_08 (party_2:7)", "killboard (672x)", "metabattle (7741:9075)"]
+      },
+      {
+       "count": 207,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_brawl_clap_2026_05 (comp:13)", "albioncompo_c_2026_07 (comp:7)", "albioncompo_gold_portal_hold_2026_05 (comp:6,12)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:18)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:5,6,8)", "albioncompo_party_1_2026_03 (comp:16)", "albioncompo_party_2_2026_03 (comp:16,17)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:16,17)", "killboard (193x)", "timothy_blap_blackzone_roam_2026_08 (blap:17)"]
+      },
+      {
+       "count": 104,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["killboard (103x)", "timothy_blap_blackzone_roam_2026_08 (blap:16)"]
+      },
+      {
        "count": 95,
        "id": "ARMOR_PLATE_ROYAL",
        "sources": ["albioncompo_hdcp_bomb_2026_06 (comp:15)", "killboard (94x)"]
@@ -2691,13 +2747,43 @@
       },
       {
        "count": 24,
+       "id": "ARMOR_CLOTH_FEY",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:8,9,10)", "deadlyhooker_large_scale_2026_08 (party_1:6,7,8; party_2:5; party_3:5)", "killboard (16x)"]
+      },
+      {
+       "count": 24,
        "id": "ARMOR_LEATHER_FEY",
        "sources": ["killboard (24x)"]
+      },
+      {
+       "count": 8,
+       "id": "ARMOR_LEATHER_ROYAL",
+       "sources": ["killboard (8x)"]
       },
       {
        "count": 7,
        "id": "ARMOR_LEATHER_SET3",
        "sources": ["killboard (7x)"]
+      },
+      {
+       "count": 4,
+       "id": "ARMOR_CLOTH_SET3",
+       "sources": ["albioncompo_brawl_clap_2026_05 (comp:18)", "killboard (3x)"]
+      },
+      {
+       "count": 4,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (4x)"]
+      },
+      {
+       "count": 3,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["killboard (3x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_CLOTH_KEEPER",
+       "sources": ["killboard (2x)"]
       },
       {
        "count": 2,
@@ -2979,218 +3065,6 @@
      ]
     }
    },
-   "off_uniform": [
-    {
-     "build": "albioncompo_bist_roam15_2026_01:comp:6",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_bist_roam15_2026_01:comp:8",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_brawl_by_lattex_2026_05:comp:18",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_brawl_clap_2026_05:comp:12",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_brawl_hit_20_2026_01:comp:10",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_brawl_hit_20_2026_01:comp:8",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_brawl_hit_20_2026_01:comp:9",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_bus_bomb_2026_08:comp:13",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_kite_deff_2026_08:comp:11",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_new_composition_2026_04:comp:2",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_new_composition_2026_08:comp:5",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_new_composition_2026_08:comp:6",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_perma_comp_a_2026_08:comp:14",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_ranged_bomb_2026_07:comp:7",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_ss_kite_20_2026_06:comp:19",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "cb_clonepeek_zvz20_2026_03:comp:7",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "deadlyhooker_large_scale_2026_08:party_2:7",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "killboard:3x",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "2H_HOLYSTAFF"
-    },
-    {
-     "build": "killboard:672x",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "metabattle:7741:9075",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_20v20_competitive_2026_08:comp:10",
-     "id": "ARMOR_CLOTH_FEY",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_20v20_competitive_2026_08:comp:8",
-     "id": "ARMOR_CLOTH_FEY",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_20v20_competitive_2026_08:comp:9",
-     "id": "ARMOR_CLOTH_FEY",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "deadlyhooker_large_scale_2026_08:party_1:6",
-     "id": "ARMOR_CLOTH_FEY",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "deadlyhooker_large_scale_2026_08:party_1:7",
-     "id": "ARMOR_CLOTH_FEY",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "deadlyhooker_large_scale_2026_08:party_1:8",
-     "id": "ARMOR_CLOTH_FEY",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "deadlyhooker_large_scale_2026_08:party_2:5",
-     "id": "ARMOR_CLOTH_FEY",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "deadlyhooker_large_scale_2026_08:party_3:5",
-     "id": "ARMOR_CLOTH_FEY",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "killboard:16x",
-     "id": "ARMOR_CLOTH_FEY",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_CLOTH_HELL",
-     "weapon": "2H_HOLYSTAFF"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_CLOTH_HELL",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_CLOTH_KEEPER",
-     "weapon": "2H_HOLYSTAFF"
-    },
-    {
-     "build": "killboard:2x",
-     "id": "ARMOR_CLOTH_KEEPER",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_CLOTH_ROYAL",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_CLOTH_SET1",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "killboard:2x",
-     "id": "ARMOR_CLOTH_SET1",
-     "weapon": "2H_HOLYSTAFF"
-    },
-    {
-     "build": "killboard:103x",
-     "id": "ARMOR_CLOTH_SET2",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "killboard:37x",
-     "id": "ARMOR_CLOTH_SET2",
-     "weapon": "2H_HOLYSTAFF"
-    },
-    {
-     "build": "timothy_blap_blackzone_roam_2026_08:blap:16",
-     "id": "ARMOR_CLOTH_SET2",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "albioncompo_brawl_clap_2026_05:comp:18",
-     "id": "ARMOR_CLOTH_SET3",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_CLOTH_SET3",
-     "weapon": "2H_HOLYSTAFF"
-    },
-    {
-     "build": "killboard:3x",
-     "id": "ARMOR_CLOTH_SET3",
-     "weapon": "MAIN_HOLYSTAFF_AVALON"
-    }
-   ],
    "overrides": [
     {
      "id": "OFF_TOWERSHIELD_UNDEAD",
@@ -3591,34 +3465,51 @@
      }
     ]
    },
-   "weapon_archetypes": {
+   "uniform_extended": {
     "2H_HOLYSTAFF": {
-     "armor": ["ARMOR_LEATHER_SET3", 5, 58],
-     "cape": ["CAPEITEM_SMUGGLER", 2, 2],
-     "food": ["T7_MEAL_OMELETTE_AVALON", 2, 2],
-     "head": ["HEAD_PLATE_SET3", 3, 5],
-     "potion": ["T7_POTION_REVIVE", 2, 2],
-     "shoes": ["SHOES_CLOTH_SET1", 2, 3]
+     "classes": ["cloth"],
+     "n": 58,
+     "share": {
+      "cloth": 0.776
+     }
     },
     "MAIN_HOLYSTAFF_AVALON": {
-     "armor": ["ARMOR_PLATE_ROYAL", 94, 1169],
-     "cape": ["CAPEITEM_FW_LYMHURST", 12, 18],
-     "food": ["T7_MEAL_OMELETTE_AVALON", 8, 10],
-     "head": ["HEAD_LEATHER_SET3", 39, 94],
-     "offhand": ["OFF_TORCH_CRYSTAL", 10, 12],
-     "potion": ["T7_POTION_REVIVE", 10, 10],
-     "shoes": ["SHOES_LEATHER_ROYAL", 18, 39]
+     "classes": ["cloth"],
+     "n": 1169,
+     "share": {
+      "cloth": 0.683
+     }
+    }
+   },
+   "weapon_archetypes": {
+    "2H_HOLYSTAFF": {
+     "armor": ["ARMOR_CLOTH_SET2", 37, 58],
+     "cape": ["CAPEITEM_FW_LYMHURST", 2, 6],
+     "food": ["T7_MEAL_OMELETTE", 2, 6],
+     "head": ["HEAD_PLATE_SET3", 14, 37],
+     "potion": ["T7_POTION_STONESKIN", 2, 6],
+     "shoes": ["SHOES_CLOTH_SET1", 6, 14]
+    },
+    "MAIN_HOLYSTAFF_AVALON": {
+     "armor": ["ARMOR_CLOTH_AVALON", 672, 1169],
+     "cape": ["CAPEITEM_FW_LYMHURST", 85, 115],
+     "food": ["T7_MEAL_OMELETTE", 16, 31],
+     "head": ["HEAD_PLATE_SET3", 171, 672],
+     "offhand": ["OFF_HORN_KEEPER", 34, 85],
+     "potion": ["T7_POTION_REVIVE", 31, 34],
+     "shoes": ["SHOES_LEATHER_SET1", 115, 171]
     }
    }
   },
   "curse_support": {
    "archetype": {
-    "armor": ["ARMOR_CLOTH_SET1", 53, 321],
-    "cape": ["CAPEITEM_SMUGGLER", 23, 36],
-    "food": ["T7_MEAL_OMELETTE", 12, 23],
-    "head": ["HEAD_LEATHER_SET3", 51, 53],
-    "potion": ["T7_POTION_REVIVE", 21, 23],
-    "shoes": ["SHOES_LEATHER_MORGANA", 36, 51]
+    "armor": ["ARMOR_PLATE_HELL", 109, 321],
+    "cape": ["CAPEITEM_SMUGGLER", 34, 39],
+    "food": ["T7_MEAL_OMELETTE_AVALON", 9, 26],
+    "head": ["HEAD_LEATHER_SET3", 100, 109],
+    "offhand": ["OFF_SHIELD_AVALON", 26, 34],
+    "potion": ["T7_POTION_REVIVE", 26, 26],
+    "shoes": ["SHOES_LEATHER_MORGANA", 39, 100]
    },
    "by_weapon": {
     "2H_CURSEDSTAFF": {
@@ -3648,6 +3539,16 @@
        "count": 21,
        "id": "ARMOR_PLATE_ROYAL",
        "sources": ["albioncompo_brawl_hit_20_2026_01 (comp:12)", "killboard (20x)"]
+      },
+      {
+       "count": 6,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["albioncompo_new_composition_2026_08 (comp:11)", "killboard (5x)"]
+      },
+      {
+       "count": 6,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:11)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:16)", "killboard (4x)"]
       }
      ],
      "cape": [
@@ -4083,9 +3984,24 @@
     "MAIN_CURSEDSTAFF_AVALON": {
      "armor": [
       {
+       "count": 22,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_party_1_2026_03 (comp:5)", "killboard (21x)"]
+      },
+      {
+       "count": 19,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["albioncompo_hdcp_bomb_2026_06 (comp:3)", "killboard (18x)"]
+      },
+      {
        "count": 9,
        "id": "ARMOR_PLATE_ROYAL",
        "sources": ["albioncompo_ava_raid_2026_05 (comp:7)", "albioncompo_brawl_clap_2026_05 (comp:5)", "killboard (7x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["killboard (2x)"]
       }
      ],
      "cape": [
@@ -4279,9 +4195,24 @@
     "MAIN_CURSEDSTAFF_UNDEAD": {
      "armor": [
       {
+       "count": 95,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["albioncompo_brawl_hit_20_2026_01 (comp:6)", "albioncompo_c_2026_07 (comp:1)", "albioncompo_hdcp_bomb_2026_06 (comp:4)", "albioncompo_kite_deff_2026_08 (comp:7)", "albioncompo_party_1_2026_03 (comp:6)", "albioncompo_ranged_bomb_2026_07 (comp:9)", "cb_clonepeek_zvz20_2026_03 (comp:13)", "deadlyhooker_large_scale_2026_08 (party_2:9; party_3:8)", "killboard (86x)"]
+      },
+      {
+       "count": 10,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_bist_roam15_2026_01 (comp:2)", "albioncompo_comp_5_v2_2026_04 (comp:2)", "killboard (7x)", "timothy_blap_blackzone_roam_2026_08 (blap:9)"]
+      },
+      {
        "count": 9,
        "id": "ARMOR_CLOTH_SET2",
        "sources": ["killboard (9x)"]
+      },
+      {
+       "count": 4,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["killboard (4x)"]
       },
       {
        "count": 2,
@@ -5069,53 +5000,34 @@
      "potion": ["T7_POTION_REVIVE", 21, 23],
      "shoes": ["SHOES_LEATHER_MORGANA", 36, 51]
     },
-    "2H_DEMONICSTAFF": {
-     "cape": ["CAPEITEM_FW_FORTSTERLING", 2, 2],
-     "food": ["T8_MEAL_STEW", 2, 2],
-     "head": ["HEAD_LEATHER_SET3", 5, 7],
-     "potion": ["T7_POTION_REVIVE", 2, 2],
-     "shoes": ["SHOES_PLATE_SET1", 2, 5]
-    },
     "2H_SKULLORB_HELL": {
-     "armor": ["ARMOR_CLOTH_SET2", 3, 7],
-     "cape": ["CAPEITEM_FW_LYMHURST", 2, 3],
-     "potion": ["T7_POTION_REVIVE", 2, 2]
+     "armor": ["ARMOR_CLOTH_SET2", 3, 7]
     },
     "MAIN_CURSEDSTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 7, 26],
-     "food": ["T8_MEAL_STEW", 2, 2],
-     "head": ["HEAD_PLATE_SET3", 3, 7],
-     "offhand": ["OFF_LAMP_UNDEAD", 2, 3],
-     "shoes": ["SHOES_PLATE_SET1", 3, 3]
+     "head": ["HEAD_PLATE_SET3", 3, 7]
     },
     "MAIN_CURSEDSTAFF_AVALON": {
-     "armor": ["ARMOR_PLATE_ROYAL", 7, 63],
-     "cape": ["CAPEITEM_SMUGGLER", 3, 3],
-     "food": ["T7_MEAL_OMELETTE", 3, 3],
-     "head": ["HEAD_LEATHER_SET3", 6, 7],
-     "offhand": ["OFF_SHIELD_AVALON", 3, 3],
-     "potion": ["T7_POTION_REVIVE", 3, 3],
-     "shoes": ["SHOES_LEATHER_ROYAL", 3, 6]
+     "armor": ["ARMOR_PLATE_KEEPER", 21, 63],
+     "cape": ["CAPEITEM_SMUGGLER", 5, 6],
+     "head": ["HEAD_LEATHER_SET3", 13, 21],
+     "offhand": ["OFF_HORN_KEEPER", 3, 5],
+     "shoes": ["SHOES_LEATHER_MORGANA", 6, 13]
     },
     "MAIN_CURSEDSTAFF_UNDEAD": {
-     "armor": ["ARMOR_CLOTH_SET2", 9, 133],
-     "cape": ["CAPEITEM_FW_LYMHURST", 2, 2],
-     "food": ["T8_MEAL_STEW", 2, 2],
-     "head": ["HEAD_LEATHER_SET3", 4, 9],
-     "offhand": ["OFF_HORN_KEEPER", 2, 2],
-     "potion": ["T7_POTION_STONESKIN", 2, 2],
-     "shoes": ["SHOES_LEATHER_MORGANA", 2, 4]
+     "armor": ["ARMOR_PLATE_HELL", 86, 133],
+     "cape": ["CAPEITEM_SMUGGLER", 25, 30],
+     "food": ["T7_MEAL_OMELETTE_AVALON", 7, 21],
+     "head": ["HEAD_LEATHER_SET3", 80, 86],
+     "offhand": ["OFF_SHIELD_AVALON", 21, 25],
+     "potion": ["T7_POTION_REVIVE", 21, 21],
+     "shoes": ["SHOES_LEATHER_MORGANA", 30, 80]
     }
    }
   },
   "dive_cleanup": {
    "archetype": {
-    "armor": ["ARMOR_LEATHER_SET3", 156, 475],
-    "cape": ["CAPEITEM_FW_FORTSTERLING", 2, 14],
-    "head": ["HEAD_LEATHER_MORGANA", 38, 160],
-    "offhand": ["OFF_TORCH", 7, 12],
-    "potion": ["T7_POTION_REVIVE", 5, 9],
-    "shoes": ["SHOES_LEATHER_SET3", 9, 44]
+    "armor": ["ARMOR_LEATHER_SET3", 156, 475]
    },
    "by_weapon": {
     "2H_CLAWPAIR": {
@@ -5124,6 +5036,11 @@
        "count": 22,
        "id": "ARMOR_LEATHER_SET3",
        "sources": ["killboard (21x)", "metabattle (7689:8953)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (2x)"]
       }
      ],
      "cape": [
@@ -5223,6 +5140,11 @@
        "count": 32,
        "id": "ARMOR_LEATHER_SET3",
        "sources": ["killboard (32x)"]
+      },
+      {
+       "count": 5,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (5x)"]
       }
      ],
      "cape": [
@@ -5376,6 +5298,11 @@
        "count": 2,
        "id": "ARMOR_LEATHER_FEY",
        "sources": ["albioncompo_hdcp_bomb_2026_06 (comp:11)", "killboard (1x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_10man_melee_2026_02 (comp:8,9)"]
       }
      ],
      "cape": [
@@ -5485,6 +5412,11 @@
        "count": 12,
        "id": "ARMOR_LEATHER_SET3",
        "sources": ["killboard (12x)"]
+      },
+      {
+       "count": 8,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (8x)"]
       },
       {
        "count": 8,
@@ -5719,6 +5651,11 @@
     "MAIN_DAGGER_HELL": {
      "armor": [
       {
+       "count": 53,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_bist_roam15_2026_01 (comp:13,14)", "albioncompo_brawl_clap_2026_05 (comp:14)", "albioncompo_party_1_2026_03 (comp:13)", "albioncompo_party_2_2026_03 (comp:11)", "killboard (47x)", "timothy_blap_blackzone_roam_2026_08 (blap:12)"]
+      },
+      {
        "count": 15,
        "id": "ARMOR_LEATHER_AVALON",
        "sources": ["killboard (15x)"]
@@ -5868,6 +5805,11 @@
        "count": 62,
        "id": "ARMOR_LEATHER_SET3",
        "sources": ["killboard (62x)"]
+      },
+      {
+       "count": 58,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_party_2_2026_03 (comp:8)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:11)", "killboard (54x)", "metabattle (7645:8952)", "timothy_blap_blackzone_roam_2026_08 (blap:15)"]
       },
       {
        "count": 9,
@@ -6170,6 +6112,11 @@
     },
     "MAIN_SCIMITAR_MORGANA": {
      "armor": [
+      {
+       "count": 5,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (3x)", "metabattle (7658:8999)", "timothy_blap_blackzone_roam_2026_08 (blap:13)"]
+      },
       {
        "count": 3,
        "id": "ARMOR_LEATHER_SET1",
@@ -7041,16 +6988,13 @@
    "weapon_archetypes": {
     "2H_CLAWPAIR": {
      "armor": ["ARMOR_LEATHER_SET3", 21, 26],
-     "cape": ["CAPEITEM_DEMON", 2, 3],
      "head": ["HEAD_CLOTH_HELL", 11, 21],
-     "potion": ["T8_POTION_COOLDOWN", 2, 2],
      "shoes": ["SHOES_LEATHER_HELL", 3, 11]
     },
     "2H_DAGGERPAIR": {
      "armor": ["ARMOR_LEATHER_SET3", 32, 50],
      "cape": ["CAPEITEM_MORGANA", 3, 5],
      "head": ["HEAD_CLOTH_HELL", 8, 32],
-     "potion": ["T8_POTION_COOLDOWN", 3, 3],
      "shoes": ["SHOES_CLOTH_ROYAL", 5, 8]
     },
     "2H_DAGGER_KATAR_AVALON": {
@@ -7063,30 +7007,25 @@
     },
     "2H_DUALSICKLE_UNDEAD": {
      "armor": ["ARMOR_LEATHER_SET3", 12, 33],
-     "cape": ["CAPEITEM_AVALON", 3, 3],
      "head": ["HEAD_LEATHER_MORGANA", 9, 12],
-     "potion": ["T8_POTION_COOLDOWN", 2, 3],
      "shoes": ["SHOES_CLOTH_ROYAL", 3, 9]
     },
     "2H_GLAIVE": {
      "armor": ["ARMOR_LEATHER_SET3", 8, 13],
-     "cape": ["CAPEITEM_AVALON", 3, 3],
-     "head": ["HEAD_LEATHER_SET1", 3, 8],
-     "shoes": ["SHOES_LEATHER_SET2", 3, 4]
+     "head": ["HEAD_LEATHER_SET1", 3, 8]
     },
     "MAIN_DAGGER": {
      "armor": ["ARMOR_LEATHER_SET2", 6, 8],
-     "head": ["HEAD_LEATHER_SET3", 3, 7],
-     "offhand": ["OFF_TORCH", 4, 4]
+     "head": ["HEAD_LEATHER_SET3", 3, 7]
     },
     "MAIN_DAGGER_HELL": {
-     "armor": ["ARMOR_LEATHER_AVALON", 15, 84],
-     "cape": ["CAPEITEM_SMUGGLER", 9, 9],
-     "food": ["T8_MEAL_STEW", 7, 9],
-     "head": ["HEAD_CLOTH_SET2", 9, 15],
+     "armor": ["ARMOR_LEATHER_HELL", 47, 84],
+     "cape": ["CAPEITEM_SMUGGLER", 9, 16],
+     "food": ["T8_MEAL_STEW", 6, 9],
+     "head": ["HEAD_PLATE_SET1", 25, 47],
      "offhand": ["OFF_SPIKEDSHIELD_MORGANA", 9, 9],
      "potion": ["T7_POTION_REVIVE", 9, 9],
-     "shoes": ["SHOES_LEATHER_MORGANA", 9, 9]
+     "shoes": ["SHOES_LEATHER_MORGANA", 16, 25]
     },
     "MAIN_RAPIER_MORGANA": {
      "armor": ["ARMOR_LEATHER_SET3", 62, 196],
@@ -7097,26 +7036,29 @@
      "shoes": ["SHOES_PLATE_SET1", 13, 31]
     },
     "MAIN_SCIMITAR_MORGANA": {
-     "armor": ["ARMOR_LEATHER_SET1", 3, 10],
-     "potion": ["T6_POTION_HEAL", 2, 3]
+     "armor": ["ARMOR_LEATHER_HELL", 3, 10]
     },
     "MAIN_SPEAR": {
-     "armor": ["ARMOR_LEATHER_SET1", 3, 10],
-     "offhand": ["OFF_TORCH", 2, 3]
+     "armor": ["ARMOR_LEATHER_SET1", 3, 10]
     }
    }
   },
   "engage_tank": {
    "archetype": {
-    "armor": ["ARMOR_PLATE_SET2", 140, 863],
-    "cape": ["CAPEITEM_SMUGGLER", 8, 9],
-    "food": ["T8_MEAL_SANDWICH_AVALON", 2, 8],
-    "head": ["HEAD_PLATE_KEEPER", 37, 140],
-    "potion": ["T7_POTION_REVIVE", 8, 8],
-    "shoes": ["SHOES_LEATHER_ROYAL", 9, 37]
+    "armor": ["ARMOR_PLATE_KEEPER", 228, 863],
+    "cape": ["CAPEITEM_SMUGGLER", 26, 39],
+    "head": ["HEAD_LEATHER_SET3", 62, 228],
+    "shoes": ["SHOES_CLOTH_SET2", 39, 62]
    },
    "by_weapon": {
     "2H_FLAIL": {
+     "armor": [
+      {
+       "count": 1,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:3)"]
+      }
+     ],
      "cape": [
       {
        "count": 1,
@@ -7161,9 +7103,19 @@
        "sources": ["killboard (12x)"]
       },
       {
+       "count": 11,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_brawl_by_lattex_2026_05 (comp:4)", "killboard (10x)"]
+      },
+      {
        "count": 3,
        "id": "ARMOR_PLATE_FEY",
        "sources": ["deadlyhooker_large_scale_2026_08 (party_3:0)", "killboard (2x)"]
+      },
+      {
+       "count": 3,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_f2b_2026_06 (comp:1)", "killboard (2x)"]
       },
       {
        "count": 2,
@@ -7320,6 +7272,11 @@
     "2H_HAMMER_AVALON": {
      "armor": [
       {
+       "count": 31,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:0)", "albioncompo_c_2026_07 (comp:17)", "killboard (29x)"]
+      },
+      {
        "count": 17,
        "id": "ARMOR_PLATE_SET2",
        "sources": ["albioncompo_perma_comp_a_2026_08 (comp:0)", "deadlyhooker_large_scale_2026_08 (party_1:0)", "killboard (15x)"]
@@ -7328,6 +7285,16 @@
        "count": 7,
        "id": "ARMOR_PLATE_AVALON",
        "sources": ["albioncompo_bus_bomb_2026_08 (comp:10)", "albioncompo_kite_deff_2026_08 (comp:0)", "killboard (5x)"]
+      },
+      {
+       "count": 3,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:19)", "killboard (2x)"]
+      },
+      {
+       "count": 3,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["killboard (3x)"]
       },
       {
        "count": 1,
@@ -7548,9 +7515,24 @@
     "2H_MACE_MORGANA": {
      "armor": [
       {
+       "count": 7,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["killboard (6x)", "timothy_blap_blackzone_roam_2026_08 (blap:0)"]
+      },
+      {
+       "count": 6,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["killboard (6x)"]
+      },
+      {
        "count": 3,
        "id": "ARMOR_PLATE_SET2",
        "sources": ["killboard (3x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["killboard (2x)"]
       }
      ],
      "cape": [
@@ -7642,14 +7624,29 @@
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:3)", "albioncompo_bist_roam15_2026_01 (comp:5)", "albioncompo_brawl_hit_20_2026_01 (comp:1)", "albioncompo_c_2026_07 (comp:14)", "albioncompo_gold_portal_hold_2026_05 (comp:2)", "albioncompo_perma_comp_a_2026_08 (comp:1)", "albioncompo_ss_kite_20_2026_06 (comp:1)", "deadlyhooker_large_scale_2026_08 (party_1:5; party_2:4)", "killboard (54x)"]
       },
       {
+       "count": 32,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_new_composition_2026_08 (comp:1)", "killboard (31x)"]
+      },
+      {
        "count": 25,
        "id": "ARMOR_PLATE_FEY",
        "sources": ["albioncompo_brawl_clap_2026_05 (comp:1)", "albioncompo_party_2_2026_03 (comp:2)", "killboard (23x)"]
       },
       {
+       "count": 10,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:0)", "killboard (9x)"]
+      },
+      {
        "count": 7,
        "id": "ARMOR_PLATE_AVALON",
        "sources": ["albioncompo_comp_5_v2_2026_04 (comp:14)", "killboard (6x)"]
+      },
+      {
+       "count": 7,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["albioncompo_kite_deff_2026_08 (comp:1)", "killboard (6x)"]
       }
      ],
      "cape": [
@@ -7945,9 +7942,19 @@
     "2H_SHAPESHIFTER_KEEPER": {
      "armor": [
       {
+       "count": 108,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_brawl_hit_20_2026_01 (comp:0)", "albioncompo_f2b_2026_06 (comp:8)", "albioncompo_new_composition_2026_08 (comp:0)", "cb_clonepeek_zvz20_2026_03 (comp:0)", "killboard (104x)"]
+      },
+      {
        "count": 17,
        "id": "ARMOR_PLATE_AVALON",
        "sources": ["albioncompo_gold_portal_hold_2026_05 (comp:0)", "albioncompo_ss_kite_20_2026_06 (comp:0)", "killboard (15x)"]
+      },
+      {
+       "count": 14,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:16)", "albioncompo_party_2_2026_03 (comp:1)", "killboard (12x)"]
       },
       {
        "count": 11,
@@ -8094,6 +8101,11 @@
        "sources": ["albioncompo_comp_5_v2_2026_04 (comp:13)", "killboard (6x)"]
       },
       {
+       "count": 6,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_perma_comp_a_2026_08 (comp:16)", "killboard (5x)"]
+      },
+      {
        "count": 3,
        "id": "ARMOR_PLATE_AVALON",
        "sources": ["killboard (3x)"]
@@ -8193,9 +8205,44 @@
     "MAIN_ARCANESTAFF_UNDEAD": {
      "armor": [
       {
+       "count": 55,
+       "id": "ARMOR_CLOTH_AVALON",
+       "sources": ["albioncompo_bus_bomb_2026_08 (comp:0)", "albioncompo_kite_deff_2026_08 (comp:18)", "albioncompo_perma_comp_a_2026_08 (comp:9)", "albioncompo_ranged_bomb_2026_07 (comp:0)", "albioncompo_ss_kite_20_2026_06 (comp:15)", "killboard (50x)"]
+      },
+      {
+       "count": 39,
+       "id": "ARMOR_LEATHER_SET3",
+       "sources": ["cb_kroozlt19_bomb_squad_2026_01 (comp:1)", "killboard (38x)"]
+      },
+      {
+       "count": 27,
+       "id": "ARMOR_LEATHER_ROYAL",
+       "sources": ["killboard (26x)", "metabattle (7755:8913)"]
+      },
+      {
+       "count": 12,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["killboard (12x)"]
+      },
+      {
+       "count": 8,
+       "id": "ARMOR_LEATHER_FEY",
+       "sources": ["killboard (8x)"]
+      },
+      {
+       "count": 5,
+       "id": "ARMOR_CLOTH_FEY",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:12)", "albioncompo_new_composition_2026_08 (comp:17)", "killboard (3x)"]
+      },
+      {
        "count": 4,
        "id": "ARMOR_PLATE_FEY",
        "sources": ["killboard (4x)"]
+      },
+      {
+       "count": 3,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["killboard (3x)"]
       },
       {
        "count": 3,
@@ -8206,6 +8253,11 @@
        "count": 2,
        "id": "ARMOR_PLATE_SET1",
        "sources": ["killboard (2x)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_CLOTH_SET3",
+       "sources": ["deadlyhooker_large_scale_2026_08 (party_1:17)"]
       }
      ],
      "cape": [
@@ -8434,6 +8486,11 @@
     "MAIN_HAMMER": {
      "armor": [
       {
+       "count": 25,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:18)", "albioncompo_comp_5_v2_2026_04 (comp:15)", "albioncompo_gold_portal_hold_2026_05 (comp:4)", "albioncompo_hdcp_bomb_2026_06 (comp:1)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:0,1,2,3)", "killboard (17x)"]
+      },
+      {
        "count": 20,
        "id": "ARMOR_PLATE_FEY",
        "sources": ["albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:2)", "killboard (19x)"]
@@ -8595,6 +8652,16 @@
     "MAIN_MACE": {
      "armor": [
       {
+       "count": 74,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_bist_roam15_2026_01 (comp:0)", "albioncompo_c_2026_07 (comp:0)", "albioncompo_f2b_2026_06 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:0)", "killboard (69x)", "metabattle (7679:8332)"]
+      },
+      {
+       "count": 63,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_10man_melee_2026_02 (comp:0)", "albioncompo_brawl_clap_2026_05 (comp:0)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:4)", "killboard (60x)"]
+      },
+      {
        "count": 24,
        "id": "ARMOR_PLATE_SET2",
        "sources": ["albioncompo_party_1_2026_03 (comp:0)", "killboard (23x)"]
@@ -8613,6 +8680,11 @@
        "count": 11,
        "id": "ARMOR_PLATE_AVALON",
        "sources": ["killboard (11x)"]
+      },
+      {
+       "count": 3,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["killboard (3x)"]
       },
       {
        "count": 2,
@@ -8871,14 +8943,29 @@
     "MAIN_MACE_CRYSTAL": {
      "armor": [
       {
+       "count": 6,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_comp_5_v2_2026_04 (comp:16)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:5)", "killboard (4x)"]
+      },
+      {
        "count": 5,
        "id": "ARMOR_PLATE_ROYAL",
        "sources": ["albioncompo_push_monkey_7_2026_05 (comp:1)", "killboard (4x)"]
       },
       {
+       "count": 4,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_party_2_2026_03 (comp:4)", "killboard (3x)"]
+      },
+      {
        "count": 3,
        "id": "ARMOR_PLATE_FEY",
        "sources": ["killboard (2x)", "timothy_blap_blackzone_roam_2026_08 (blap:3)"]
+      },
+      {
+       "count": 3,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["killboard (3x)"]
       }
      ],
      "cape": [
@@ -8987,74 +9074,9 @@
    },
    "off_uniform": [
     {
-     "build": "albioncompo_bus_bomb_2026_08:comp:0",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
-     "build": "albioncompo_kite_deff_2026_08:comp:18",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
-     "build": "albioncompo_perma_comp_a_2026_08:comp:9",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
-     "build": "albioncompo_ranged_bomb_2026_07:comp:0",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
-     "build": "albioncompo_ss_kite_20_2026_06:comp:15",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
-     "build": "killboard:50x",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
-     "build": "albioncompo_20v20_competitive_2026_08:comp:12",
-     "id": "ARMOR_CLOTH_FEY",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
-     "build": "albioncompo_new_composition_2026_08:comp:17",
-     "id": "ARMOR_CLOTH_FEY",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
-     "build": "killboard:3x",
-     "id": "ARMOR_CLOTH_FEY",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_CLOTH_HELL",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_CLOTH_KEEPER",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_CLOTH_ROYAL",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
      "build": "killboard:1x",
      "id": "ARMOR_CLOTH_SET1",
      "weapon": "2H_TWINSCYTHE_HELL"
-    },
-    {
-     "build": "killboard:12x",
-     "id": "ARMOR_CLOTH_SET2",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
     },
     {
      "build": "killboard:2x",
@@ -9062,19 +9084,9 @@
      "weapon": "2H_POLEHAMMER"
     },
     {
-     "build": "deadlyhooker_large_scale_2026_08:party_1:17",
-     "id": "ARMOR_CLOTH_SET3",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
      "build": "killboard:1x",
      "id": "ARMOR_LEATHER_AVALON",
      "weapon": "2H_HAMMER"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_LEATHER_AVALON",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
     },
     {
      "build": "killboard:1x",
@@ -9085,11 +9097,6 @@
      "build": "killboard:1x",
      "id": "ARMOR_LEATHER_FEY",
      "weapon": "MAIN_MACE"
-    },
-    {
-     "build": "killboard:8x",
-     "id": "ARMOR_LEATHER_FEY",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
     },
     {
      "build": "killboard:2x",
@@ -9122,29 +9129,9 @@
      "weapon": "MAIN_MACE"
     },
     {
-     "build": "killboard:26x",
-     "id": "ARMOR_LEATHER_ROYAL",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
-     "build": "metabattle:7755:8913",
-     "id": "ARMOR_LEATHER_ROYAL",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
-     "build": "cb_kroozlt19_bomb_squad_2026_01:comp:1",
-     "id": "ARMOR_LEATHER_SET3",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
-    },
-    {
      "build": "killboard:2x",
      "id": "ARMOR_LEATHER_SET3",
      "weapon": "2H_HAMMER_UNDEAD"
-    },
-    {
-     "build": "killboard:38x",
-     "id": "ARMOR_LEATHER_SET3",
-     "weapon": "MAIN_ARCANESTAFF_UNDEAD"
     },
     {
      "build": "killboard:3x",
@@ -9682,35 +9669,35 @@
      }
     ]
    },
+   "uniform_extended": {
+    "MAIN_ARCANESTAFF_UNDEAD": {
+     "classes": ["cloth", "leather"],
+     "n": 153,
+     "share": {
+      "cloth": 0.444,
+      "leather": 0.477
+     }
+    }
+   },
    "weapon_archetypes": {
     "2H_HAMMER": {
      "armor": ["ARMOR_PLATE_SET2", 12, 30],
-     "cape": ["CAPEITEM_FW_MARTLOCK", 2, 2],
-     "food": ["T7_MEAL_OMELETTE", 2, 2],
-     "head": ["HEAD_PLATE_KEEPER", 4, 12],
-     "potion": ["T7_POTION_REVIVE", 2, 2],
-     "shoes": ["SHOES_CLOTH_HELL", 2, 4]
+     "head": ["HEAD_PLATE_KEEPER", 4, 12]
     },
     "2H_HAMMER_AVALON": {
-     "armor": ["ARMOR_PLATE_SET2", 15, 55],
-     "cape": ["CAPEITEM_SMUGGLER", 4, 4],
-     "head": ["HEAD_LEATHER_SET3", 7, 15],
-     "potion": ["T7_POTION_REVIVE", 4, 4],
-     "shoes": ["SHOES_CLOTH_SET2", 4, 7]
+     "armor": ["ARMOR_PLATE_KEEPER", 29, 55],
+     "cape": ["CAPEITEM_SMUGGLER", 15, 19],
+     "head": ["HEAD_LEATHER_SET3", 26, 29],
+     "potion": ["T7_POTION_REVIVE", 15, 15],
+     "shoes": ["SHOES_CLOTH_SET2", 19, 26]
     },
     "2H_HAMMER_UNDEAD": {
      "armor": ["ARMOR_PLATE_SET1", 5, 11],
-     "cape": ["CAPEITEM_FW_LYMHURST", 3, 3],
-     "food": ["T7_MEAL_OMELETTE", 3, 3],
-     "head": ["HEAD_PLATE_SET1", 4, 5],
-     "potion": ["T7_POTION_REVIVE", 3, 3],
-     "shoes": ["SHOES_LEATHER_SET3", 3, 4]
+     "head": ["HEAD_PLATE_SET1", 4, 5]
     },
     "2H_MACE_MORGANA": {
-     "armor": ["ARMOR_PLATE_SET2", 3, 19],
-     "cape": ["CAPEITEM_SMUGGLER", 2, 2],
-     "head": ["HEAD_LEATHER_SET3", 2, 3],
-     "potion": ["T7_POTION_REVIVE", 2, 2]
+     "armor": ["ARMOR_PLATE_KEEPER", 6, 19],
+     "head": ["HEAD_CLOTH_SET2", 3, 6]
     },
     "2H_POLEHAMMER": {
      "armor": ["ARMOR_PLATE_SET2", 54, 136],
@@ -9721,58 +9708,44 @@
      "shoes": ["SHOES_LEATHER_ROYAL", 9, 23]
     },
     "2H_RAM_KEEPER": {
-     "armor": ["ARMOR_PLATE_FEY", 4, 10],
-     "cape": ["CAPEITEM_FW_LYMHURST", 2, 3],
-     "head": ["HEAD_LEATHER_HELL", 3, 4],
-     "potion": ["T7_POTION_REVIVE", 2, 2],
-     "shoes": ["SHOES_LEATHER_MORGANA", 3, 3]
+     "armor": ["ARMOR_PLATE_FEY", 4, 10]
     },
     "2H_SHAPESHIFTER_KEEPER": {
-     "armor": ["ARMOR_PLATE_AVALON", 15, 144],
-     "cape": ["CAPEITEM_MORGANA", 3, 4],
-     "food": ["T8_MEAL_SANDWICH_AVALON", 3, 3],
-     "head": ["HEAD_LEATHER_SET3", 9, 15],
-     "potion": ["T7_POTION_REVIVE", 3, 3],
-     "shoes": ["SHOES_LEATHER_MORGANA", 4, 9]
+     "armor": ["ARMOR_PLATE_KEEPER", 104, 144],
+     "cape": ["CAPEITEM_SMUGGLER", 6, 11],
+     "food": ["T7_MEAL_OMELETTE_AVALON", 3, 6],
+     "head": ["HEAD_CLOTH_SET2", 28, 104],
+     "potion": ["T7_POTION_REVIVE", 6, 6],
+     "shoes": ["SHOES_CLOTH_SET2", 11, 28]
     },
     "2H_TWINSCYTHE_HELL": {
      "armor": ["ARMOR_PLATE_SET2", 6, 19],
-     "cape": ["CAPEITEM_MORGANA", 2, 2],
-     "head": ["HEAD_LEATHER_SET3", 3, 6],
-     "potion": ["T7_POTION_REVIVE", 2, 2],
-     "shoes": ["SHOES_LEATHER_SET2", 2, 3]
+     "head": ["HEAD_LEATHER_SET3", 3, 6]
     },
     "MAIN_ARCANESTAFF_UNDEAD": {
-     "armor": ["ARMOR_PLATE_FEY", 4, 153],
-     "cape": ["CAPEITEM_SMUGGLER", 4, 4],
-     "food": ["T7_MEAL_OMELETTE_AVALON", 4, 4],
-     "head": ["HEAD_LEATHER_SET3", 4, 4],
-     "offhand": ["OFF_SHIELD_AVALON", 4, 4],
-     "potion": ["T7_POTION_REVIVE", 4, 4],
-     "shoes": ["SHOES_PLATE_UNDEAD", 4, 4]
+     "armor": ["ARMOR_CLOTH_AVALON", 50, 153],
+     "cape": ["CAPEITEM_SMUGGLER", 17, 20],
+     "head": ["HEAD_LEATHER_SET3", 26, 50],
+     "offhand": ["OFF_LAMP_UNDEAD", 10, 17],
+     "potion": ["T7_POTION_REVIVE", 10, 10],
+     "shoes": ["SHOES_LEATHER_MORGANA", 20, 26]
     },
     "MAIN_HAMMER": {
      "armor": ["ARMOR_PLATE_FEY", 19, 51],
-     "cape": ["CAPEITEM_SMUGGLER", 3, 3],
      "head": ["HEAD_LEATHER_HELL", 7, 19],
-     "offhand": ["OFF_JESTERCANE_HELL", 3, 3],
-     "potion": ["T7_POTION_REVIVE", 3, 3],
      "shoes": ["SHOES_LEATHER_ROYAL", 3, 8]
     },
     "MAIN_MACE": {
-     "armor": ["ARMOR_PLATE_UNDEAD", 24, 219],
-     "cape": ["CAPEITEM_FW_BRIDGEWATCH", 11, 16],
-     "head": ["HEAD_PLATE_ROYAL", 11, 24],
-     "offhand": ["OFF_JESTERCANE_HELL", 11, 12],
-     "potion": ["T7_POTION_SLOWFIELD", 6, 11],
-     "shoes": ["SHOES_LEATHER_SET2", 16, 18]
+     "armor": ["ARMOR_PLATE_KEEPER", 69, 219],
+     "cape": ["CAPEITEM_SMUGGLER", 19, 21],
+     "food": ["T7_MEAL_OMELETTE_AVALON", 4, 7],
+     "head": ["HEAD_PLATE_KEEPER", 39, 69],
+     "offhand": ["OFF_HORN_KEEPER", 7, 20],
+     "potion": ["T7_POTION_REVIVE", 6, 7],
+     "shoes": ["SHOES_LEATHER_SET2", 21, 39]
     },
     "MAIN_MACE_CRYSTAL": {
-     "armor": ["ARMOR_PLATE_ROYAL", 4, 16],
-     "cape": ["CAPEITEM_SMUGGLER", 2, 2],
-     "food": ["T7_MEAL_OMELETTE_AVALON", 2, 2],
-     "head": ["HEAD_PLATE_KEEPER", 2, 4],
-     "shoes": ["SHOES_CLOTH_MORGANA", 2, 2]
+     "armor": ["ARMOR_PLATE_KEEPER", 4, 16]
     }
    }
   },
@@ -11186,17 +11159,11 @@
     },
     "MAIN_HOLYSTAFF_MORGANA": {
      "armor": ["ARMOR_CLOTH_SET2", 7, 7],
-     "cape": ["CAPEITEM_FW_LYMHURST", 2, 2],
-     "food": ["T7_MEAL_OMELETTE", 2, 2],
-     "head": ["HEAD_PLATE_SET3", 3, 7],
-     "offhand": ["OFF_HORN_KEEPER", 2, 2],
-     "shoes": ["SHOES_CLOTH_SET2", 2, 3]
+     "head": ["HEAD_PLATE_SET3", 3, 7]
     },
     "MAIN_NATURESTAFF_KEEPER": {
      "armor": ["ARMOR_CLOTH_SET2", 5, 10],
-     "head": ["HEAD_PLATE_SET1", 4, 5],
-     "offhand": ["OFF_BOOK", 2, 2],
-     "shoes": ["SHOES_CLOTH_SET3", 2, 4]
+     "head": ["HEAD_PLATE_SET1", 4, 5]
     }
    }
   },
@@ -12548,9 +12515,19 @@
     "MAIN_NATURESTAFF": {
      "armor": [
       {
+       "count": 30,
+       "id": "ARMOR_PLATE_ROYAL",
+       "sources": ["albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:19)", "killboard (29x)"]
+      },
+      {
        "count": 27,
        "id": "ARMOR_CLOTH_SET2",
        "sources": ["killboard (27x)"]
+      },
+      {
+       "count": 18,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["killboard (18x)"]
       },
       {
        "count": 4,
@@ -13285,11 +13262,6 @@
      "weapon": "2H_NATURESTAFF_KEEPER"
     },
     {
-     "build": "killboard:18x",
-     "id": "ARMOR_PLATE_KEEPER",
-     "weapon": "MAIN_NATURESTAFF"
-    },
-    {
      "build": "killboard:193x",
      "id": "ARMOR_PLATE_KEEPER",
      "weapon": "MAIN_HOLYSTAFF_AVALON"
@@ -13325,11 +13297,6 @@
      "weapon": "2H_HOLYSTAFF_UNDEAD"
     },
     {
-     "build": "albioncompo_hard_zvz_brawl_20ppl_2026_08:comp:19",
-     "id": "ARMOR_PLATE_ROYAL",
-     "weapon": "MAIN_NATURESTAFF"
-    },
-    {
      "build": "albioncompo_hdcp_bomb_2026_06:comp:15",
      "id": "ARMOR_PLATE_ROYAL",
      "weapon": "MAIN_HOLYSTAFF_AVALON"
@@ -13345,11 +13312,6 @@
      "weapon": "2H_NATURESTAFF_KEEPER"
     },
     {
-     "build": "killboard:29x",
-     "id": "ARMOR_PLATE_ROYAL",
-     "weapon": "MAIN_NATURESTAFF"
-    },
-    {
      "build": "killboard:3x",
      "id": "ARMOR_PLATE_ROYAL",
      "weapon": "2H_NATURESTAFF_HELL"
@@ -13360,11 +13322,6 @@
      "weapon": "MAIN_HOLYSTAFF_AVALON"
     },
     {
-     "build": "killboard:1x",
-     "id": "ARMOR_PLATE_SET1",
-     "weapon": "MAIN_NATURESTAFF"
-    },
-    {
      "build": "killboard:2x",
      "id": "ARMOR_PLATE_SET2",
      "weapon": "MAIN_HOLYSTAFF_AVALON"
@@ -13373,11 +13330,6 @@
      "build": "killboard:1x",
      "id": "ARMOR_PLATE_SET3",
      "weapon": "MAIN_HOLYSTAFF"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_PLATE_SET3",
-     "weapon": "MAIN_NATURESTAFF"
     },
     {
      "build": "killboard:3x",
@@ -13872,6 +13824,16 @@
      }
     ]
    },
+   "uniform_extended": {
+    "MAIN_NATURESTAFF": {
+     "classes": ["cloth", "plate"],
+     "n": 93,
+     "share": {
+      "cloth": 0.376,
+      "plate": 0.527
+     }
+    }
+   },
    "weapon_archetypes": {
     "2H_DIVINESTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 2, 6]
@@ -13885,12 +13847,7 @@
      "shoes": ["SHOES_LEATHER_MORGANA", 7, 14]
     },
     "2H_HOLYSTAFF_UNDEAD": {
-     "armor": ["ARMOR_CLOTH_SET2", 61, 111],
-     "cape": ["CAPEITEM_FW_CAERLEON", 7, 9],
-     "food": ["T7_MEAL_OMELETTE", 5, 7],
-     "head": ["HEAD_CLOTH_ROYAL", 15, 61],
-     "potion": ["T7_POTION_REVIVE", 7, 7],
-     "shoes": ["SHOES_LEATHER_SET1", 9, 15]
+     "armor": ["ARMOR_CLOTH_SET2", 61, 111]
     },
     "2H_NATURESTAFF_HELL": {
      "armor": ["ARMOR_CLOTH_SET2", 147, 314],
@@ -13918,9 +13875,7 @@
     },
     "MAIN_HOLYSTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 27, 36],
-     "food": ["T7_MEAL_OMELETTE", 2, 2],
      "head": ["HEAD_PLATE_SET3", 8, 27],
-     "potion": ["T7_POTION_REVIVE", 2, 2],
      "shoes": ["SHOES_CLOTH_HELL", 2, 8]
     },
     "MAIN_HOLYSTAFF_AVALON": {
@@ -13933,12 +13888,10 @@
      "shoes": ["SHOES_LEATHER_SET1", 115, 171]
     },
     "MAIN_NATURESTAFF": {
-     "armor": ["ARMOR_CLOTH_SET2", 27, 93],
-     "cape": ["CAPEITEM_FW_LYMHURST", 3, 5],
-     "head": ["HEAD_CLOTH_SET1", 8, 27],
-     "offhand": ["OFF_HORN_KEEPER", 3, 5],
-     "potion": ["T7_POTION_REVIVE", 3, 3],
-     "shoes": ["SHOES_CLOTH_SET1", 5, 8]
+     "armor": ["ARMOR_PLATE_ROYAL", 29, 93],
+     "cape": ["CAPEITEM_FW_LYMHURST", 4, 8],
+     "head": ["HEAD_LEATHER_SET3", 16, 29],
+     "shoes": ["SHOES_LEATHER_SET1", 8, 16]
     },
     "MAIN_NATURESTAFF_CRYSTAL": {
      "armor": ["ARMOR_CLOTH_FEY", 7, 22],
@@ -13952,17 +13905,35 @@
   },
   "off_tank": {
    "archetype": {
-    "armor": ["ARMOR_LEATHER_SET1", 14, 174],
-    "head": ["HEAD_LEATHER_SET2", 5, 14],
-    "potion": ["T7_POTION_REVIVE", 3, 5]
+    "armor": ["ARMOR_PLATE_HELL", 108, 174],
+    "cape": ["CAPEITEM_SMUGGLER", 41, 43],
+    "food": ["T7_MEAL_OMELETTE_AVALON", 14, 42],
+    "head": ["HEAD_LEATHER_SET3", 104, 108],
+    "potion": ["T7_POTION_REVIVE", 42, 42],
+    "shoes": ["SHOES_PLATE_SET3", 43, 104]
    },
    "by_weapon": {
     "2H_COMBATSTAFF_MORGANA": {
      "armor": [
       {
+       "count": 9,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:0)", "killboard (8x)"]
+      },
+      {
        "count": 3,
        "id": "ARMOR_PLATE_SET2",
        "sources": ["albioncompo_pt_3_offensive_wave_2026_03 (comp:4,5)", "killboard (1x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["killboard (2x)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_push_monkey_7_2026_05 (comp:0)"]
       }
      ],
      "cape": [
@@ -14044,6 +14015,21 @@
     "2H_DUALMACE_AVALON": {
      "armor": [
       {
+       "count": 123,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:6)", "albioncompo_brawl_hit_20_2026_01 (comp:5)", "albioncompo_bus_bomb_2026_08 (comp:7)", "albioncompo_c_2026_07 (comp:11)", "albioncompo_hdcp_bomb_2026_06 (comp:7)", "albioncompo_kite_deff_2026_08 (comp:3)", "albioncompo_party_1_2026_03 (comp:7)", "albioncompo_party_2_2026_03 (comp:14,15)", "albioncompo_perma_comp_a_2026_08 (comp:12)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:12,13)", "albioncompo_ranged_bomb_2026_07 (comp:6)", "albioncompo_siegebow_bomb_2026_02 (comp:0)", "cb_clonepeek_zvz20_2026_03 (comp:3)", "deadlyhooker_large_scale_2026_08 (party_1:10; party_2:10)", "killboard (105x)", "timothy_blap_blackzone_roam_2026_08 (blap:6)"]
+      },
+      {
+       "count": 15,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_bist_roam15_2026_01 (comp:4)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:10)", "albioncompo_comp_5_v2_2026_04 (comp:17)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:8)", "killboard (11x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_LEATHER_ROYAL",
+       "sources": ["killboard (1x)", "metabattle (7758:8614)"]
+      },
+      {
        "count": 2,
        "id": "ARMOR_PLATE_FEY",
        "sources": ["killboard (2x)"]
@@ -14051,6 +14037,11 @@
       {
        "count": 2,
        "id": "ARMOR_PLATE_SET2",
+       "sources": ["killboard (2x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_PLATE_SET3",
        "sources": ["killboard (2x)"]
       },
       {
@@ -14218,6 +14209,16 @@
        "count": 1,
        "id": "ARMOR_PLATE_AVALON",
        "sources": ["albioncompo_ava_raid_2026_05 (comp:0)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_brawl_by_lattex_2026_05 (comp:0)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_hdcp_bomb_2026_06 (comp:2)"]
       }
      ],
      "cape": [
@@ -14795,35 +14796,24 @@
    },
    "weapon_archetypes": {
     "2H_COMBATSTAFF_MORGANA": {
-     "cape": ["CAPEITEM_SMUGGLER", 4, 4],
-     "head": ["HEAD_LEATHER_SET3", 6, 14],
-     "potion": ["T7_POTION_REVIVE", 4, 4],
-     "shoes": ["SHOES_LEATHER_MORGANA", 4, 6]
+     "armor": ["ARMOR_PLATE_SET3", 8, 14],
+     "head": ["HEAD_LEATHER_SET3", 4, 8]
     },
     "2H_DUALMACE_AVALON": {
-     "armor": ["ARMOR_PLATE_FEY", 2, 126]
-    },
-    "2H_HAMMER_CRYSTAL": {
-     "cape": ["CAPEITEM_SMUGGLER", 2, 3],
-     "food": ["T7_MEAL_OMELETTE_AVALON", 2, 2],
-     "potion": ["T7_POTION_REVIVE", 2, 2]
+     "armor": ["ARMOR_PLATE_HELL", 105, 126],
+     "cape": ["CAPEITEM_SMUGGLER", 41, 43],
+     "food": ["T7_MEAL_OMELETTE_AVALON", 14, 42],
+     "head": ["HEAD_LEATHER_SET3", 101, 105],
+     "potion": ["T7_POTION_REVIVE", 42, 42],
+     "shoes": ["SHOES_PLATE_SET3", 43, 101]
     },
     "2H_QUARTERSTAFF": {
      "armor": ["ARMOR_LEATHER_SET1", 13, 31],
-     "head": ["HEAD_LEATHER_SET2", 5, 13],
-     "potion": ["T7_POTION_REVIVE", 3, 5]
+     "head": ["HEAD_LEATHER_SET2", 5, 13]
     }
    }
   },
   "ranged_aoe": {
-   "archetype": {
-    "armor": ["ARMOR_CLOTH_SET1", 519, 2180],
-    "cape": ["CAPEITEM_SMUGGLER", 98, 239],
-    "food": ["T8_MEAL_STEW", 29, 101],
-    "head": ["HEAD_LEATHER_SET3", 416, 521],
-    "potion": ["T7_POTION_REVIVE", 101, 104],
-    "shoes": ["SHOES_LEATHER_MORGANA", 235, 424]
-   },
    "by_weapon": {
     "2H_ARCANESTAFF_CRYSTAL": {
      "armor": [
@@ -14846,6 +14836,11 @@
        "count": 2,
        "id": "ARMOR_LEATHER_AVALON",
        "sources": ["killboard (2x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:18)", "killboard (1x)"]
       }
      ],
      "cape": [
@@ -15454,6 +15449,11 @@
       },
       {
        "count": 6,
+       "id": "ARMOR_LEATHER_ROYAL",
+       "sources": ["killboard (6x)"]
+      },
+      {
+       "count": 6,
        "id": "ARMOR_LEATHER_SET1",
        "sources": ["killboard (6x)"]
       },
@@ -15846,6 +15846,11 @@
       },
       {
        "count": 1,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:1)"]
+      },
+      {
+       "count": 1,
        "id": "ARMOR_LEATHER_SET2",
        "sources": ["metabattle (7780:8938)"]
       }
@@ -16132,6 +16137,11 @@
     },
     "2H_DUALCROSSBOW_CRYSTAL": {
      "armor": [
+      {
+       "count": 4,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (4x)"]
+      },
       {
        "count": 2,
        "id": "ARMOR_LEATHER_FEY",
@@ -16599,6 +16609,11 @@
        "sources": ["albioncompo_kite_deff_2026_08 (comp:12)", "killboard (12x)"]
       },
       {
+       "count": 12,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_party_1_2026_03 (comp:15)", "killboard (11x)"]
+      },
+      {
        "count": 11,
        "id": "ARMOR_LEATHER_SET2",
        "sources": ["killboard (11x)"]
@@ -16622,6 +16637,11 @@
        "count": 3,
        "id": "ARMOR_LEATHER_FEY",
        "sources": ["albioncompo_10man_melee_2026_02 (comp:7)", "albioncompo_gold_portal_hold_2026_05 (comp:3)", "killboard (1x)"]
+      },
+      {
+       "count": 3,
+       "id": "ARMOR_LEATHER_ROYAL",
+       "sources": ["killboard (3x)"]
       }
      ],
      "cape": [
@@ -16795,6 +16815,11 @@
       {
        "count": 3,
        "id": "ARMOR_CLOTH_SET1",
+       "sources": ["killboard (3x)"]
+      },
+      {
+       "count": 3,
+       "id": "ARMOR_LEATHER_HELL",
        "sources": ["killboard (3x)"]
       },
       {
@@ -17580,6 +17605,11 @@
        "count": 8,
        "id": "ARMOR_CLOTH_FEY",
        "sources": ["killboard (8x)"]
+      },
+      {
+       "count": 8,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:0)", "killboard (7x)"]
       },
       {
        "count": 4,
@@ -18415,14 +18445,34 @@
        "sources": ["albioncompo_f2b_2026_06 (comp:4)", "killboard (21x)"]
       },
       {
+       "count": 18,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["albioncompo_party_2_2026_03 (comp:6)", "killboard (17x)"]
+      },
+      {
+       "count": 7,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:8)", "albioncompo_push_monkey_7_2026_05 (comp:2)", "killboard (5x)"]
+      },
+      {
        "count": 4,
        "id": "ARMOR_CLOTH_SET2",
        "sources": ["albioncompo_sortasaucy_7man_ftb_2026_05 (comp:5)", "killboard (3x)"]
       },
       {
+       "count": 3,
+       "id": "ARMOR_LEATHER_ROYAL",
+       "sources": ["albioncompo_new_composition_2026_08_yvxwl29l (comp:16)", "killboard (2x)"]
+      },
+      {
        "count": 1,
        "id": "ARMOR_CLOTH_SET3",
        "sources": ["albioncompo_hellgate5_2026_07 (comp:3)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_PLATE_ROYAL",
+       "sources": ["albioncompo_new_composition_2026_04 (comp:9)"]
       }
      ],
      "cape": [
@@ -18892,8 +18942,23 @@
        "sources": ["killboard (38x)"]
       },
       {
+       "count": 15,
+       "id": "ARMOR_PLATE_UNDEAD",
+       "sources": ["killboard (14x)", "metabattle (7778:8966)"]
+      },
+      {
+       "count": 7,
+       "id": "ARMOR_PLATE_SET2",
+       "sources": ["killboard (7x)"]
+      },
+      {
        "count": 6,
        "id": "ARMOR_CLOTH_SET1",
+       "sources": ["killboard (6x)"]
+      },
+      {
+       "count": 6,
+       "id": "ARMOR_PLATE_SET3",
        "sources": ["killboard (6x)"]
       },
       {
@@ -18904,6 +18969,11 @@
       {
        "count": 2,
        "id": "ARMOR_CLOTH_HELL",
+       "sources": ["killboard (2x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_LEATHER_HELL",
        "sources": ["killboard (2x)"]
       },
       {
@@ -19188,24 +19258,9 @@
      "weapon": "2H_ARCANE_RINGPAIR_AVALON"
     },
     {
-     "build": "killboard:1x",
-     "id": "ARMOR_PLATE_FEY",
-     "weapon": "MAIN_FROSTSTAFF"
-    },
-    {
      "build": "killboard:2x",
      "id": "ARMOR_PLATE_FEY",
      "weapon": "2H_INFERNOSTAFF"
-    },
-    {
-     "build": "albioncompo_party_2_2026_03:comp:6",
-     "id": "ARMOR_PLATE_HELL",
-     "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
-    },
-    {
-     "build": "killboard:17x",
-     "id": "ARMOR_PLATE_HELL",
-     "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
     },
     {
      "build": "killboard:1x",
@@ -19218,19 +19273,9 @@
      "weapon": "2H_LONGBOW_UNDEAD"
     },
     {
-     "build": "albioncompo_builds_for_brawl_bomb_2026_06:comp:8",
-     "id": "ARMOR_PLATE_KEEPER",
-     "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
-    },
-    {
      "build": "albioncompo_gold_portal_hold_2026_05:comp:13",
      "id": "ARMOR_PLATE_KEEPER",
      "weapon": "2H_SHAPESHIFTER_AVALON"
-    },
-    {
-     "build": "albioncompo_push_monkey_7_2026_05:comp:2",
-     "id": "ARMOR_PLATE_KEEPER",
-     "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
     },
     {
      "build": "killboard:1x",
@@ -19258,11 +19303,6 @@
      "weapon": "2H_ARCANE_RINGPAIR_AVALON"
     },
     {
-     "build": "killboard:5x",
-     "id": "ARMOR_PLATE_KEEPER",
-     "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
-    },
-    {
      "build": "albioncompo_brawl_by_lattex_2026_05:comp:6",
      "id": "ARMOR_PLATE_ROYAL",
      "weapon": "2H_ARCANE_RINGPAIR_AVALON"
@@ -19271,11 +19311,6 @@
      "build": "albioncompo_hard_zvz_brawl_20ppl_2026_08:comp:7",
      "id": "ARMOR_PLATE_ROYAL",
      "weapon": "2H_ARCANE_RINGPAIR_AVALON"
-    },
-    {
-     "build": "albioncompo_new_composition_2026_04:comp:9",
-     "id": "ARMOR_PLATE_ROYAL",
-     "weapon": "MAIN_CURSEDSTAFF_CRYSTAL"
     },
     {
      "build": "killboard:1x",
@@ -19388,11 +19423,6 @@
      "weapon": "2H_CROSSBOW"
     },
     {
-     "build": "killboard:7x",
-     "id": "ARMOR_PLATE_SET2",
-     "weapon": "MAIN_FROSTSTAFF"
-    },
-    {
      "build": "killboard:1x",
      "id": "ARMOR_PLATE_SET3",
      "weapon": "2H_ICECRYSTAL_UNDEAD"
@@ -19421,21 +19451,6 @@
      "build": "killboard:1x",
      "id": "ARMOR_PLATE_SET3",
      "weapon": "2H_WARBOW"
-    },
-    {
-     "build": "killboard:6x",
-     "id": "ARMOR_PLATE_SET3",
-     "weapon": "MAIN_FROSTSTAFF"
-    },
-    {
-     "build": "killboard:14x",
-     "id": "ARMOR_PLATE_UNDEAD",
-     "weapon": "MAIN_FROSTSTAFF"
-    },
-    {
-     "build": "metabattle:7778:8966",
-     "id": "ARMOR_PLATE_UNDEAD",
-     "weapon": "MAIN_FROSTSTAFF"
     }
    ],
    "slots": {
@@ -20067,6 +20082,24 @@
      }
     ]
    },
+   "uniform_extended": {
+    "MAIN_CURSEDSTAFF_CRYSTAL": {
+     "classes": ["cloth", "plate"],
+     "n": 69,
+     "share": {
+      "cloth": 0.623,
+      "plate": 0.319
+     }
+    },
+    "MAIN_FROSTSTAFF": {
+     "classes": ["leather", "plate"],
+     "n": 84,
+     "share": {
+      "leather": 0.512,
+      "plate": 0.333
+     }
+    }
+   },
    "weapon_archetypes": {
     "2H_ARCANESTAFF_CRYSTAL": {
      "armor": ["ARMOR_LEATHER_MORGANA", 10, 22],
@@ -20077,16 +20110,11 @@
      "shoes": ["SHOES_CLOTH_ROYAL", 6, 10]
     },
     "2H_ARCANE_RINGPAIR_AVALON": {
-     "cape": ["CAPEITEM_SMUGGLER", 2, 2],
-     "head": ["HEAD_LEATHER_SET3", 4, 7],
-     "potion": ["T7_POTION_REVIVE", 2, 2],
-     "shoes": ["SHOES_LEATHER_SET1", 2, 4]
+     "head": ["HEAD_LEATHER_SET3", 4, 7]
     },
     "2H_BOW": {
      "armor": ["ARMOR_LEATHER_SET1", 13, 23],
-     "food": ["T8_MEAL_STEW", 2, 4],
      "head": ["HEAD_LEATHER_SET2", 5, 13],
-     "potion": ["T7_POTION_REVIVE", 3, 4],
      "shoes": ["SHOES_PLATE_SET1", 4, 5]
     },
     "2H_BOW_AVALON": {
@@ -20096,9 +20124,6 @@
      "head": ["HEAD_LEATHER_SET3", 27, 28],
      "potion": ["T7_POTION_REVIVE", 5, 8],
      "shoes": ["SHOES_LEATHER_MORGANA", 12, 27]
-    },
-    "2H_BOW_CRYSTAL": {
-     "armor": ["ARMOR_LEATHER_SET3", 2, 4]
     },
     "2H_BOW_HELL": {
      "armor": ["ARMOR_LEATHER_SET3", 116, 201],
@@ -20110,24 +20135,16 @@
     },
     "2H_BOW_KEEPER": {
      "armor": ["ARMOR_LEATHER_SET3", 24, 67],
-     "cape": ["CAPEITEM_SMUGGLER", 4, 4],
-     "food": ["T8_MEAL_STEW", 3, 4],
      "head": ["HEAD_LEATHER_SET3", 7, 24],
-     "potion": ["T7_POTION_REVIVE", 4, 4],
      "shoes": ["SHOES_CLOTH_SET3", 4, 7]
     },
     "2H_CROSSBOW": {
      "armor": ["ARMOR_CLOTH_SET1", 9, 21],
-     "cape": ["CAPEITEM_MORGANA", 3, 3],
-     "food": ["T8_MEAL_STEW", 3, 3],
-     "head": ["HEAD_LEATHER_ROYAL", 3, 9],
-     "potion": ["T8_POTION_COOLDOWN", 3, 3],
-     "shoes": ["SHOES_CLOTH_ROYAL", 3, 4]
+     "head": ["HEAD_LEATHER_ROYAL", 3, 9]
     },
     "2H_CROSSBOWLARGE": {
      "armor": ["ARMOR_CLOTH_SET2", 5, 12],
-     "head": ["HEAD_PLATE_SET3", 2, 5],
-     "potion": ["T7_POTION_REVIVE", 2, 2]
+     "head": ["HEAD_PLATE_SET3", 2, 5]
     },
     "2H_CROSSBOWLARGE_MORGANA": {
      "armor": ["ARMOR_CLOTH_SET2", 2, 8]
@@ -20141,24 +20158,16 @@
      "shoes": ["SHOES_LEATHER_FEY", 24, 55]
     },
     "2H_DUALCROSSBOW_CRYSTAL": {
-     "armor": ["ARMOR_LEATHER_FEY", 2, 7],
-     "cape": ["CAPEITEM_FW_LYMHURST", 2, 2],
-     "head": ["HEAD_LEATHER_SET3", 2, 2],
-     "potion": ["T7_POTION_REVIVE", 2, 2],
-     "shoes": ["SHOES_LEATHER_MORGANA", 2, 2]
+     "armor": ["ARMOR_LEATHER_HELL", 4, 7]
     },
     "2H_DUALCROSSBOW_HELL": {
      "armor": ["ARMOR_CLOTH_SET2", 10, 28],
      "head": ["HEAD_PLATE_SET3", 4, 11],
-     "potion": ["T7_POTION_REVIVE", 2, 4],
      "shoes": ["SHOES_PLATE_SET1", 3, 5]
     },
     "2H_FIRESTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 7, 10],
-     "cape": ["CAPEITEM_FW_LYMHURST", 4, 4],
-     "head": ["HEAD_CLOTH_SET3", 4, 7],
-     "potion": ["T7_POTION_SLOWFIELD", 3, 4],
-     "shoes": ["SHOES_CLOTH_SET2", 4, 4]
+     "head": ["HEAD_CLOTH_SET3", 4, 7]
     },
     "2H_FIRESTAFF_HELL": {
      "armor": ["ARMOR_CLOTH_SET1", 71, 75],
@@ -20179,7 +20188,6 @@
     "2H_FROSTSTAFF": {
      "armor": ["ARMOR_LEATHER_AVALON", 19, 35],
      "cape": ["CAPEITEM_SMUGGLER", 10, 13],
-     "food": ["T8_MEAL_STEW", 2, 10],
      "head": ["HEAD_CLOTH_SET2", 15, 19],
      "potion": ["T7_POTION_REVIVE", 10, 10],
      "shoes": ["SHOES_PLATE_AVALON", 13, 15]
@@ -20199,9 +20207,7 @@
     },
     "2H_INFERNOSTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 8, 24],
-     "head": ["HEAD_CLOTH_SET2", 3, 8],
-     "potion": ["T7_POTION_REVIVE", 2, 3],
-     "shoes": ["SHOES_LEATHER_SET2", 3, 3]
+     "head": ["HEAD_CLOTH_SET2", 3, 8]
     },
     "2H_INFERNOSTAFF_MORGANA": {
      "armor": ["ARMOR_CLOTH_SET1", 44, 66],
@@ -20213,50 +20219,28 @@
     },
     "2H_LONGBOW": {
      "armor": ["ARMOR_CLOTH_SET2", 152, 365],
-     "cape": ["CAPEITEM_FW_LYMHURST", 5, 13],
-     "food": ["T8_MEAL_STEW", 4, 6],
-     "head": ["HEAD_LEATHER_SET3", 44, 153],
-     "potion": ["T7_POTION_REVIVE", 6, 7],
-     "shoes": ["SHOES_LEATHER_MORGANA", 11, 49]
+     "head": ["HEAD_LEATHER_SET3", 44, 153]
     },
     "2H_LONGBOW_UNDEAD": {
      "armor": ["ARMOR_LEATHER_SET2", 29, 34],
-     "cape": ["CAPEITEM_MORGANA", 2, 3],
      "head": ["HEAD_LEATHER_SET3", 10, 29],
      "shoes": ["SHOES_LEATHER_SET2", 3, 10]
     },
     "2H_REPEATINGCROSSBOW_UNDEAD": {
      "armor": ["ARMOR_CLOTH_KEEPER", 5, 9],
-     "cape": ["CAPEITEM_SMUGGLER", 3, 3],
      "head": ["HEAD_LEATHER_ROYAL", 5, 5],
-     "potion": ["T7_POTION_REVIVE", 3, 3],
      "shoes": ["SHOES_CLOTH_ROYAL", 3, 5]
     },
-    "2H_SHAPESHIFTER_AVALON": {
-     "armor": ["ARMOR_CLOTH_SET1", 3, 27],
-     "cape": ["CAPEITEM_MORGANA", 2, 2],
-     "head": ["HEAD_LEATHER_SET3", 2, 3],
-     "potion": ["T7_POTION_REVIVE", 2, 2],
-     "shoes": ["SHOES_LEATHER_MORGANA", 2, 2]
-    },
     "2H_SHAPESHIFTER_HELL": {
-     "armor": ["ARMOR_LEATHER_SET2", 2, 6],
-     "cape": ["CAPEITEM_MORGANA", 2, 2],
-     "food": ["T8_MEAL_STEW", 2, 2],
-     "head": ["HEAD_PLATE_ROYAL", 2, 2],
-     "potion": ["T7_POTION_STONESKIN", 2, 2],
-     "shoes": ["SHOES_CLOTH_KEEPER", 2, 2]
+     "armor": ["ARMOR_LEATHER_SET2", 2, 6]
     },
     "2H_WARBOW": {
      "armor": ["ARMOR_LEATHER_SET3", 19, 27],
      "head": ["HEAD_PLATE_SET3", 7, 19],
-     "potion": ["T8_POTION_COOLDOWN", 3, 5],
      "shoes": ["SHOES_PLATE_SET1", 5, 7]
     },
     "MAIN_1HCROSSBOW": {
-     "armor": ["ARMOR_CLOTH_SET2", 4, 9],
-     "head": ["HEAD_LEATHER_SET2", 2, 4],
-     "offhand": ["OFF_HORN_KEEPER", 2, 2]
+     "armor": ["ARMOR_CLOTH_SET2", 4, 9]
     },
     "MAIN_CURSEDSTAFF_CRYSTAL": {
      "armor": ["ARMOR_CLOTH_FEY", 21, 69],
@@ -20270,34 +20254,29 @@
     "MAIN_FIRESTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 18, 31],
      "head": ["HEAD_PLATE_SET1", 5, 18],
-     "offhand": ["OFF_BOOK", 2, 3],
      "shoes": ["SHOES_LEATHER_SET1", 3, 5]
     },
     "MAIN_FIRESTAFF_KEEPER": {
      "armor": ["ARMOR_CLOTH_SET2", 9, 21],
-     "head": ["HEAD_CLOTH_SET3", 4, 9],
-     "offhand": ["OFF_BOOK", 3, 3],
-     "shoes": ["SHOES_PLATE_SET3", 3, 4]
+     "head": ["HEAD_CLOTH_SET3", 4, 9]
     },
     "MAIN_FROSTSTAFF": {
      "armor": ["ARMOR_LEATHER_SET3", 38, 84],
      "cape": ["CAPEITEM_SMUGGLER", 5, 10],
      "head": ["HEAD_CLOTH_AVALON", 16, 38],
      "offhand": ["OFF_JESTERCANE_HELL", 4, 5],
-     "potion": ["T6_POTION_HEAL", 2, 4],
      "shoes": ["SHOES_LEATHER_SET2", 10, 16]
     }
    }
   },
   "shield_support": {
    "archetype": {
-    "armor": ["ARMOR_PLATE_SET2", 82, 449],
-    "cape": ["CAPEITEM_SMUGGLER", 21, 23],
-    "food": ["T7_MEAL_OMELETTE", 3, 21],
-    "head": ["HEAD_LEATHER_SET3", 60, 83],
-    "offhand": ["OFF_SHIELD_AVALON", 9, 21],
-    "potion": ["T7_POTION_REVIVE", 20, 21],
-    "shoes": ["SHOES_LEATHER_MORGANA", 23, 60]
+    "armor": ["ARMOR_PLATE_KEEPER", 174, 449],
+    "cape": ["CAPEITEM_SMUGGLER", 40, 73],
+    "food": ["T7_MEAL_OMELETTE_AVALON", 15, 40],
+    "head": ["HEAD_LEATHER_SET3", 159, 175],
+    "potion": ["T7_POTION_REVIVE", 38, 40],
+    "shoes": ["SHOES_LEATHER_MORGANA", 73, 159]
    },
    "by_weapon": {
     "2H_ARCANESTAFF": {
@@ -20308,9 +20287,19 @@
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:3)", "albioncompo_brawl_by_lattex_2026_05 (comp:3)", "albioncompo_brawl_hit_20_2026_01 (comp:3)", "albioncompo_kite_deff_2026_08 (comp:2)", "albioncompo_new_composition_2026_08 (comp:2)", "albioncompo_party_1_2026_03 (comp:2)", "albioncompo_perma_comp_a_2026_08 (comp:3)", "albioncompo_roads_oneshot_2026_07 (comp:2)", "albioncompo_sob_blaze_os_2026_06 (comp:1)", "deadlyhooker_large_scale_2026_08 (party_1:4; party_2:0)", "killboard (51x)"]
       },
       {
+       "count": 15,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_brawl_clap_2026_05 (comp:2)", "albioncompo_f2b_2026_06 (comp:0)", "killboard (13x)"]
+      },
+      {
        "count": 9,
        "id": "ARMOR_PLATE_FEY",
        "sources": ["albioncompo_20v20_competitive_2026_08 (comp:5)", "albioncompo_ss_kite_20_2026_06 (comp:2,4)", "deadlyhooker_large_scale_2026_08 (party_2:1)", "killboard (5x)"]
+      },
+      {
+       "count": 6,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["killboard (6x)"]
       },
       {
        "count": 2,
@@ -20465,6 +20454,18 @@
      ]
     },
     "2H_ENIGMATICORB_MORGANA": {
+     "armor": [
+      {
+       "count": 30,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_brawl_clap_2026_05 (comp:4)", "albioncompo_brawl_hit_20_2026_01 (comp:7)", "albioncompo_bus_bomb_2026_08 (comp:9)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:6)", "deadlyhooker_large_scale_2026_08 (party_2:8; party_3:7)", "killboard (23x)", "metabattle (7661:8910)"]
+      },
+      {
+       "count": 19,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["albioncompo_party_1_2026_03 (comp:9)", "albioncompo_party_2_2026_03 (comp:13)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:15)", "cb_clonepeek_zvz20_2026_03 (comp:5)", "killboard (14x)", "timothy_blap_blackzone_roam_2026_08 (blap:5)"]
+      }
+     ],
      "cape": [
       {
        "count": 43,
@@ -20559,9 +20560,24 @@
     "2H_ENIGMATICSTAFF": {
      "armor": [
       {
+       "count": 16,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:9)", "albioncompo_c_2026_07 (comp:13)", "killboard (14x)"]
+      },
+      {
+       "count": 5,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_pt_3_offensive_wave_2026_03 (comp:14)", "killboard (4x)"]
+      },
+      {
        "count": 3,
        "id": "ARMOR_PLATE_SET2",
        "sources": ["killboard (3x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["killboard (2x)"]
       }
      ],
      "cape": [
@@ -20661,6 +20677,11 @@
        "count": 61,
        "id": "ARMOR_CLOTH_AVALON",
        "sources": ["albioncompo_kite_deff_2026_08 (comp:13)", "albioncompo_ranged_bomb_2026_07 (comp:8)", "albioncompo_ss_kite_20_2026_06 (comp:5)", "deadlyhooker_large_scale_2026_08 (party_1:9; party_2:6; party_3:6)", "killboard (55x)"]
+      },
+      {
+       "count": 25,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["killboard (25x)"]
       },
       {
        "count": 15,
@@ -20802,6 +20823,11 @@
     "2H_SHAPESHIFTER_SET2": {
      "armor": [
       {
+       "count": 108,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_brawl_hit_20_2026_01 (comp:4)", "albioncompo_c_2026_07 (comp:15)", "albioncompo_gold_portal_hold_2026_05 (comp:1)", "albioncompo_hdcp_bomb_2026_06 (comp:8)", "albioncompo_new_composition_2026_08 (comp:10)", "albioncompo_party_1_2026_03 (comp:8)", "cb_clonepeek_zvz20_2026_03 (comp:4)", "deadlyhooker_large_scale_2026_08 (party_2:12; party_3:10)", "killboard (98x)", "timothy_blap_blackzone_roam_2026_08 (blap:7)"]
+      },
+      {
        "count": 3,
        "id": "ARMOR_PLATE_ROYAL",
        "sources": ["albioncompo_hellgate5_2026_07 (comp:4)", "albioncompo_new_composition_2026_04 (comp:4)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:9)"]
@@ -20934,6 +20960,16 @@
        "count": 34,
        "id": "ARMOR_PLATE_SET2",
        "sources": ["albioncompo_comp_5_v2_2026_04 (comp:3)", "albioncompo_kite_deff_2026_08 (comp:4)", "albioncompo_party_1_2026_03 (comp:3)", "albioncompo_perma_comp_a_2026_08 (comp:2)", "deadlyhooker_large_scale_2026_08 (party_1:1; party_2:3; party_3:1)", "killboard (27x)"]
+      },
+      {
+       "count": 26,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:4)", "albioncompo_new_composition_2026_08 (comp:3)", "albioncompo_ss_kite_20_2026_06 (comp:6)", "killboard (23x)"]
+      },
+      {
+       "count": 6,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["albioncompo_c_2026_07 (comp:16)", "killboard (5x)"]
       },
       {
        "count": 2,
@@ -21579,16 +21615,18 @@
      "shoes": ["SHOES_LEATHER_ROYAL", 16, 42]
     },
     "2H_ENIGMATICORB_MORGANA": {
-     "cape": ["CAPEITEM_SMUGGLER", 10, 11],
-     "food": ["T7_MEAL_OMELETTE_AVALON", 4, 10],
-     "head": ["HEAD_LEATHER_SET3", 37, 37],
-     "potion": ["T7_POTION_REVIVE", 10, 10],
-     "shoes": ["SHOES_LEATHER_MORGANA", 11, 37]
+     "armor": ["ARMOR_PLATE_KEEPER", 23, 37],
+     "cape": ["CAPEITEM_SMUGGLER", 7, 8],
+     "food": ["T7_MEAL_OMELETTE_AVALON", 2, 7],
+     "head": ["HEAD_LEATHER_SET3", 23, 23],
+     "potion": ["T7_POTION_REVIVE", 7, 7],
+     "shoes": ["SHOES_LEATHER_MORGANA", 8, 23]
     },
     "2H_ENIGMATICSTAFF": {
-     "armor": ["ARMOR_PLATE_SET2", 3, 31],
-     "food": ["T7_MEAL_OMELETTE", 3, 3],
-     "potion": ["T7_POTION_REVIVE", 3, 3]
+     "armor": ["ARMOR_PLATE_KEEPER", 14, 31],
+     "cape": ["CAPEITEM_FW_LYMHURST", 2, 5],
+     "head": ["HEAD_LEATHER_SET3", 12, 14],
+     "shoes": ["SHOES_LEATHER_SET1", 5, 12]
     },
     "2H_HOLYSTAFF_CRYSTAL": {
      "armor": ["ARMOR_CLOTH_AVALON", 55, 127],
@@ -21599,11 +21637,11 @@
      "shoes": ["SHOES_LEATHER_MORGANA", 24, 49]
     },
     "2H_SHAPESHIFTER_SET2": {
+     "armor": ["ARMOR_PLATE_KEEPER", 98, 100],
      "cape": ["CAPEITEM_SMUGGLER", 25, 37],
-     "food": ["T7_MEAL_OMELETTE_AVALON", 6, 25],
-     "head": ["HEAD_LEATHER_SET3", 86, 100],
+     "head": ["HEAD_LEATHER_SET3", 85, 98],
      "potion": ["T7_POTION_REVIVE", 25, 25],
-     "shoes": ["SHOES_LEATHER_MORGANA", 37, 86]
+     "shoes": ["SHOES_LEATHER_MORGANA", 37, 85]
     },
     "MAIN_ARCANESTAFF": {
      "armor": ["ARMOR_PLATE_SET2", 27, 64],
@@ -21617,26 +21655,39 @@
   },
   "stopper_tank": {
    "archetype": {
-    "armor": ["ARMOR_PLATE_SET2", 78, 358],
-    "cape": ["CAPEITEM_SMUGGLER", 5, 6],
-    "food": ["T7_MEAL_OMELETTE_AVALON", 2, 4],
-    "head": ["HEAD_PLATE_KEEPER", 23, 78],
-    "offhand": ["OFF_HORN_KEEPER", 2, 5],
-    "potion": ["T7_POTION_REVIVE", 4, 4],
-    "shoes": ["SHOES_LEATHER_MORGANA", 6, 24]
+    "armor": ["ARMOR_PLATE_SET3", 105, 358],
+    "cape": ["CAPEITEM_SMUGGLER", 16, 17],
+    "head": ["HEAD_LEATHER_HELL", 43, 105],
+    "potion": ["T7_POTION_REVIVE", 16, 16],
+    "shoes": ["SHOES_LEATHER_ROYAL", 17, 43]
    },
    "by_weapon": {
     "2H_MACE": {
      "armor": [
+      {
+       "count": 91,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_brawl_by_lattex_2026_05 (comp:1)", "albioncompo_brawl_hit_20_2026_01 (comp:2)", "albioncompo_hdcp_bomb_2026_06 (comp:0)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:1,2)", "albioncompo_party_1_2026_03 (comp:1)", "cb_clonepeek_zvz20_2026_03 (comp:1)", "killboard (83x)", "timothy_blap_blackzone_roam_2026_08 (blap:1)"]
+      },
       {
        "count": 45,
        "id": "ARMOR_PLATE_SET2",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:1)", "albioncompo_c_2026_07 (comp:18)", "albioncompo_gold_portal_hold_2026_05 (comp:14)", "killboard (42x)"]
       },
       {
+       "count": 12,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_f2b_2026_06 (comp:3)", "albioncompo_hellgate5_2026_07 (comp:0)", "albioncompo_new_composition_2026_04 (comp:6)", "albioncompo_party_2_2026_03 (comp:7)", "killboard (8x)"]
+      },
+      {
        "count": 7,
        "id": "ARMOR_PLATE_FEY",
        "sources": ["killboard (7x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["killboard (2x)"]
       },
       {
        "count": 1,
@@ -21816,6 +21867,11 @@
        "count": 8,
        "id": "ARMOR_PLATE_SET2",
        "sources": ["killboard (8x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["killboard (2x)"]
       }
      ],
      "cape": [
@@ -21925,6 +21981,11 @@
        "count": 31,
        "id": "ARMOR_PLATE_FEY",
        "sources": ["albioncompo_brawl_by_lattex_2026_05 (comp:2)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:1)", "albioncompo_hdcp_bomb_2026_06 (comp:19)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:3,4)", "albioncompo_party_2_2026_03 (comp:3)", "killboard (23x)", "metabattle (7700:8988)", "timothy_blap_blackzone_roam_2026_08 (blap:2)"]
+      },
+      {
+       "count": 6,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_brawl_clap_2026_05 (comp:3)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:19)", "albioncompo_comp_5_v2_2026_04 (comp:11)", "killboard (3x)"]
       },
       {
        "count": 2,
@@ -22071,6 +22132,11 @@
     "2H_SHAPESHIFTER_CRYSTAL": {
      "armor": [
       {
+       "count": 3,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["killboard (3x)"]
+      },
+      {
        "count": 2,
        "id": "ARMOR_PLATE_AVALON",
        "sources": ["albioncompo_brawl_by_lattex_2026_05 (comp:5)", "killboard (1x)"]
@@ -22148,6 +22214,13 @@
      ]
     },
     "2H_SHAPESHIFTER_SET3": {
+     "armor": [
+      {
+       "count": 4,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_new_composition_2026_04 (comp:0)", "albioncompo_sortasaucy_7man_ftb_2026_05 (comp:2)", "killboard (1x)", "metabattle (7767:8989)"]
+      }
+     ],
      "cape": [
       {
        "count": 2,
@@ -22227,9 +22300,19 @@
     "MAIN_MACE_HELL": {
      "armor": [
       {
+       "count": 21,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["albioncompo_hdcp_bomb_2026_06 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:6)", "albioncompo_perma_comp_a_2026_08 (comp:18)", "albioncompo_ss_kite_20_2026_06 (comp:12)", "killboard (17x)"]
+      },
+      {
        "count": 9,
        "id": "ARMOR_PLATE_FEY",
        "sources": ["killboard (9x)"]
+      },
+      {
+       "count": 9,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_ava_raid_2026_05 (comp:1)", "killboard (8x)"]
       },
       {
        "count": 4,
@@ -22240,6 +22323,11 @@
        "count": 4,
        "id": "ARMOR_PLATE_UNDEAD",
        "sources": ["killboard (4x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:17)", "killboard (1x)"]
       }
      ],
      "cape": [
@@ -22403,14 +22491,29 @@
     "MAIN_ROCKMACE_KEEPER": {
      "armor": [
       {
+       "count": 78,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:1,2)", "albioncompo_new_composition_2026_08 (comp:7,8)", "albioncompo_perma_comp_a_2026_08 (comp:4)", "albioncompo_ss_kite_20_2026_06 (comp:8,10)", "deadlyhooker_large_scale_2026_08 (party_1:2,3; party_3:2)", "killboard (68x)"]
+      },
+      {
        "count": 20,
        "id": "ARMOR_PLATE_SET2",
        "sources": ["killboard (20x)"]
       },
       {
+       "count": 5,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["killboard (5x)"]
+      },
+      {
        "count": 3,
        "id": "ARMOR_PLATE_FEY",
        "sources": ["cb_clonepeek_zvz20_2026_03 (comp:2)", "killboard (2x)"]
+      },
+      {
+       "count": 3,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["albioncompo_roads_oneshot_2026_07 (comp:1)", "albioncompo_sob_blaze_os_2026_06 (comp:2)", "killboard (1x)"]
       }
      ],
      "cape": [
@@ -23032,11 +23135,11 @@
    },
    "weapon_archetypes": {
     "2H_MACE": {
-     "armor": ["ARMOR_PLATE_SET2", 42, 142],
-     "cape": ["CAPEITEM_SMUGGLER", 5, 6],
-     "head": ["HEAD_LEATHER_HELL", 17, 42],
-     "potion": ["T7_POTION_REVIVE", 5, 5],
-     "shoes": ["SHOES_LEATHER_ROYAL", 6, 17]
+     "armor": ["ARMOR_PLATE_SET3", 83, 142],
+     "cape": ["CAPEITEM_SMUGGLER", 15, 16],
+     "head": ["HEAD_LEATHER_HELL", 41, 83],
+     "potion": ["T7_POTION_REVIVE", 15, 15],
+     "shoes": ["SHOES_LEATHER_ROYAL", 16, 41]
     },
     "2H_QUARTERSTAFF_AVALON": {
      "armor": ["ARMOR_PLATE_UNDEAD", 9, 32],
@@ -23054,41 +23157,34 @@
      "shoes": ["SHOES_LEATHER_ROYAL", 7, 19]
     },
     "2H_SHAPESHIFTER_CRYSTAL": {
-     "cape": ["CAPEITEM_SMUGGLER", 2, 2],
-     "head": ["HEAD_CLOTH_SET2", 2, 6],
-     "potion": ["T7_POTION_REVIVE", 2, 2],
-     "shoes": ["SHOES_LEATHER_ROYAL", 2, 2]
-    },
-    "2H_SHAPESHIFTER_SET3": {
-     "potion": ["T7_POTION_REVIVE", 2, 3]
+     "armor": ["ARMOR_PLATE_SET3", 3, 6]
     },
     "MAIN_MACE_HELL": {
-     "armor": ["ARMOR_PLATE_FEY", 9, 44],
-     "cape": ["CAPEITEM_FW_BRIDGEWATCH", 9, 9],
-     "head": ["HEAD_PLATE_ROYAL", 9, 9],
-     "offhand": ["OFF_JESTERCANE_HELL", 9, 9],
-     "potion": ["T7_POTION_SLOWFIELD", 6, 9],
-     "shoes": ["SHOES_LEATHER_SET2", 9, 9]
+     "armor": ["ARMOR_PLATE_HELL", 17, 44],
+     "cape": ["CAPEITEM_SMUGGLER", 5, 6],
+     "food": ["T7_MEAL_OMELETTE_AVALON", 2, 5],
+     "head": ["HEAD_LEATHER_SET3", 15, 17],
+     "offhand": ["OFF_SHIELD_AVALON", 5, 5],
+     "potion": ["T7_POTION_REVIVE", 5, 5],
+     "shoes": ["SHOES_LEATHER_MORGANA", 6, 15]
     },
     "MAIN_ROCKMACE_KEEPER": {
-     "armor": ["ARMOR_PLATE_SET2", 20, 103],
-     "cape": ["CAPEITEM_SMUGGLER", 3, 3],
-     "food": ["T7_MEAL_OMELETTE_AVALON", 2, 2],
-     "head": ["HEAD_PLATE_KEEPER", 7, 20],
-     "offhand": ["OFF_HORN_KEEPER", 2, 3],
-     "potion": ["T7_POTION_REVIVE", 2, 2],
-     "shoes": ["SHOES_LEATHER_MORGANA", 3, 7]
+     "armor": ["ARMOR_PLATE_HELL", 68, 103],
+     "cape": ["CAPEITEM_SMUGGLER", 29, 30],
+     "food": ["T7_MEAL_OMELETTE_AVALON", 5, 19],
+     "head": ["HEAD_LEATHER_SET3", 62, 68],
+     "offhand": ["OFF_SHIELD_AVALON", 19, 29],
+     "potion": ["T7_POTION_REVIVE", 19, 19],
+     "shoes": ["SHOES_LEATHER_MORGANA", 30, 62]
     }
    }
   },
   "sustained_brawler": {
    "archetype": {
-    "armor": ["ARMOR_LEATHER_SET1", 169, 2124],
-    "cape": ["CAPEITEM_FW_FORTSTERLING", 6, 25],
-    "head": ["HEAD_PLATE_SET3", 43, 178],
-    "offhand": ["OFF_TORCH", 4, 18],
-    "potion": ["T8_POTION_CLEANSE", 4, 14],
-    "shoes": ["SHOES_PLATE_SET1", 19, 50]
+    "armor": ["ARMOR_LEATHER_HELL", 630, 2124],
+    "cape": ["CAPEITEM_SMUGGLER", 93, 161],
+    "head": ["HEAD_PLATE_SET1", 260, 639],
+    "shoes": ["SHOES_LEATHER_MORGANA", 154, 268]
    },
    "by_weapon": {
     "2H_AXE": {
@@ -23097,6 +23193,11 @@
        "count": 36,
        "id": "ARMOR_LEATHER_MORGANA",
        "sources": ["albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:11)", "killboard (35x)"]
+      },
+      {
+       "count": 13,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (13x)"]
       },
       {
        "count": 8,
@@ -23323,9 +23424,24 @@
     "2H_AXE_AVALON": {
      "armor": [
       {
+       "count": 163,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_10man_melee_2026_02 (comp:1)", "albioncompo_brawl_clap_2026_05 (comp:7)", "albioncompo_brawl_hit_20_2026_01 (comp:14)", "albioncompo_c_2026_07 (comp:3)", "albioncompo_new_composition_2026_04 (comp:5)", "albioncompo_party_1_2026_03 (comp:12)", "killboard (156x)", "metabattle (7659:8921)"]
+      },
+      {
+       "count": 142,
+       "id": "ARMOR_LEATHER_ROYAL",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:17)", "albioncompo_kite_deff_2026_08 (comp:8)", "albioncompo_new_composition_2026_08 (comp:12)", "albioncompo_perma_comp_a_2026_08 (comp:10)", "albioncompo_ss_kite_20_2026_06 (comp:16)", "cb_clonepeek_zvz20_2026_03 (comp:12)", "deadlyhooker_large_scale_2026_08 (party_1:15)", "killboard (135x)"]
+      },
+      {
        "count": 31,
        "id": "ARMOR_LEATHER_FEY",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:12)", "albioncompo_hdcp_bomb_2026_06 (comp:10)", "killboard (29x)"]
+      },
+      {
+       "count": 22,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["killboard (22x)"]
       },
       {
        "count": 14,
@@ -23335,6 +23451,11 @@
       {
        "count": 7,
        "id": "ARMOR_PLATE_FEY",
+       "sources": ["killboard (7x)"]
+      },
+      {
+       "count": 7,
+       "id": "ARMOR_PLATE_KEEPER",
        "sources": ["killboard (7x)"]
       },
       {
@@ -23550,6 +23671,11 @@
        "count": 3,
        "id": "ARMOR_LEATHER_SET3",
        "sources": ["killboard (3x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (2x)"]
       }
      ],
      "cape": [
@@ -23640,6 +23766,11 @@
     },
     "2H_CLAYMORE_AVALON": {
      "armor": [
+      {
+       "count": 30,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_new_composition_2026_04 (comp:7)", "killboard (29x)"]
+      },
       {
        "count": 18,
        "id": "ARMOR_PLATE_SET1",
@@ -23830,6 +23961,16 @@
        "sources": ["albioncompo_c_2026_07 (comp:6)", "killboard (36x)", "timothy_blap_blackzone_roam_2026_08 (blap:8)"]
       },
       {
+       "count": 16,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_10man_melee_2026_02 (comp:2)", "albioncompo_bist_roam15_2026_01 (comp:10)", "killboard (13x)", "metabattle (7691:8998)"]
+      },
+      {
+       "count": 14,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:15)", "deadlyhooker_large_scale_2026_08 (party_3:11)", "killboard (12x)"]
+      },
+      {
        "count": 10,
        "id": "ARMOR_LEATHER_SET1",
        "sources": ["killboard (10x)"]
@@ -23850,6 +23991,16 @@
        "sources": ["killboard (4x)"]
       },
       {
+       "count": 4,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["albioncompo_party_1_2026_03 (comp:4)", "killboard (3x)"]
+      },
+      {
+       "count": 3,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["albioncompo_hdcp_bomb_2026_06 (comp:6)", "killboard (2x)"]
+      },
+      {
        "count": 2,
        "id": "ARMOR_LEATHER_FEY",
        "sources": ["killboard (2x)"]
@@ -23857,6 +24008,11 @@
       {
        "count": 2,
        "id": "ARMOR_LEATHER_MORGANA",
+       "sources": ["killboard (2x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_LEATHER_ROYAL",
        "sources": ["killboard (2x)"]
       }
      ],
@@ -24171,6 +24327,11 @@
        "count": 3,
        "id": "ARMOR_PLATE_AVALON",
        "sources": ["albioncompo_comp_5_v2_2026_04 (comp:12)", "killboard (2x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (2x)"]
       }
      ],
      "cape": [
@@ -24236,6 +24397,11 @@
     },
     "2H_DUALAXE_KEEPER": {
      "armor": [
+      {
+       "count": 54,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_comp_5_v2_2026_04 (comp:9)", "albioncompo_new_composition_2026_04 (comp:1)", "albioncompo_push_monkey_7_2026_05 (comp:4)", "killboard (51x)"]
+      },
       {
        "count": 45,
        "id": "ARMOR_LEATHER_SET3",
@@ -24429,6 +24595,16 @@
        "count": 5,
        "id": "ARMOR_LEATHER_MORGANA",
        "sources": ["killboard (5x)"]
+      },
+      {
+       "count": 3,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["killboard (3x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (2x)"]
       }
      ],
      "cape": [
@@ -24548,6 +24724,11 @@
        "count": 32,
        "id": "ARMOR_LEATHER_SET1",
        "sources": ["killboard (32x)"]
+      },
+      {
+       "count": 13,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (13x)"]
       },
       {
        "count": 10,
@@ -24759,6 +24940,11 @@
     "2H_HALBERD": {
      "armor": [
       {
+       "count": 12,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (12x)"]
+      },
+      {
        "count": 6,
        "id": "ARMOR_PLATE_SET1",
        "sources": ["killboard (6x)"]
@@ -24898,6 +25084,11 @@
     "2H_HALBERD_MORGANA": {
      "armor": [
       {
+       "count": 3,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (3x)"]
+      },
+      {
        "count": 2,
        "id": "ARMOR_PLATE_ROYAL",
        "sources": ["metabattle (7655:8917)", "timothy_blap_blackzone_roam_2026_08 (blap:10)"]
@@ -24972,9 +25163,24 @@
     "2H_HARPOON_HELL": {
      "armor": [
       {
+       "count": 99,
+       "id": "ARMOR_LEATHER_ROYAL",
+       "sources": ["albioncompo_c_2026_07 (comp:19)", "deadlyhooker_large_scale_2026_08 (party_1:16)", "killboard (97x)"]
+      },
+      {
+       "count": 35,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_brawl_hit_20_2026_01 (comp:13)", "killboard (33x)", "metabattle (7660:8996)"]
+      },
+      {
        "count": 9,
        "id": "ARMOR_LEATHER_FEY",
        "sources": ["killboard (9x)"]
+      },
+      {
+       "count": 8,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["killboard (8x)"]
       },
       {
        "count": 6,
@@ -24995,6 +25201,11 @@
        "count": 2,
        "id": "ARMOR_PLATE_SET1",
        "sources": ["killboard (2x)"]
+      },
+      {
+       "count": 1,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["cb_clonepeek_zvz20_2026_03 (comp:14)"]
       }
      ],
      "cape": [
@@ -25145,6 +25356,11 @@
     },
     "2H_KNUCKLES_AVALON": {
      "armor": [
+      {
+       "count": 11,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_comp_5_v2_2026_04 (comp:19)", "albioncompo_new_composition_2026_04 (comp:3)", "killboard (9x)"]
+      },
       {
        "count": 10,
        "id": "ARMOR_LEATHER_SET3",
@@ -25303,6 +25519,11 @@
        "count": 22,
        "id": "ARMOR_LEATHER_SET2",
        "sources": ["killboard (22x)"]
+      },
+      {
+       "count": 13,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (12x)", "metabattle (7652:9006)"]
       },
       {
        "count": 11,
@@ -25473,6 +25694,11 @@
     },
     "2H_KNUCKLES_KEEPER": {
      "armor": [
+      {
+       "count": 30,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_brawl_by_lattex_2026_05 (comp:14)", "albioncompo_brawl_clap_2026_05 (comp:17)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:6)", "albioncompo_party_2_2026_03 (comp:9)", "killboard (24x)", "metabattle (7657:9009)", "timothy_blap_blackzone_roam_2026_08 (blap:14)"]
+      },
       {
        "count": 5,
        "id": "ARMOR_LEATHER_AVALON",
@@ -25652,6 +25878,16 @@
     "2H_KNUCKLES_SET2": {
      "armor": [
       {
+       "count": 143,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_brawl_hit_20_2026_01 (comp:18,19)", "albioncompo_c_2026_07 (comp:4)", "killboard (140x)"]
+      },
+      {
+       "count": 96,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["killboard (96x)"]
+      },
+      {
        "count": 36,
        "id": "ARMOR_LEATHER_SET3",
        "sources": ["killboard (36x)"]
@@ -25675,6 +25911,11 @@
        "count": 5,
        "id": "ARMOR_LEATHER_SET1",
        "sources": ["killboard (5x)"]
+      },
+      {
+       "count": 3,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["killboard (3x)"]
       },
       {
        "count": 2,
@@ -25911,9 +26152,24 @@
     "2H_KNUCKLES_SET3": {
      "armor": [
       {
+       "count": 121,
+       "id": "ARMOR_CLOTH_AVALON",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:16)", "albioncompo_bus_bomb_2026_08 (comp:11)", "albioncompo_kite_deff_2026_08 (comp:16)", "albioncompo_new_composition_2026_08 (comp:14)", "albioncompo_ss_kite_20_2026_06 (comp:11)", "deadlyhooker_large_scale_2026_08 (party_1:14)", "killboard (115x)"]
+      },
+      {
+       "count": 68,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_10man_melee_2026_02 (comp:4)", "albioncompo_builds_for_brawl_bomb_2026_06 (comp:5)", "albioncompo_c_2026_07 (comp:2)", "cb_clonepeek_zvz20_2026_03 (comp:17)", "killboard (63x)", "metabattle (7513:9008)"]
+      },
+      {
        "count": 59,
        "id": "ARMOR_LEATHER_AVALON",
        "sources": ["albioncompo_bist_roam15_2026_01 (comp:11)", "albioncompo_brawl_clap_2026_05 (comp:8)", "albioncompo_brawl_hit_20_2026_01 (comp:16)", "albioncompo_party_1_2026_03 (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:6)", "killboard (54x)"]
+      },
+      {
+       "count": 21,
+       "id": "ARMOR_CLOTH_SET3",
+       "sources": ["killboard (21x)"]
       },
       {
        "count": 21,
@@ -25924,6 +26180,26 @@
        "count": 12,
        "id": "ARMOR_LEATHER_FEY",
        "sources": ["albioncompo_hdcp_bomb_2026_06 (comp:9)", "killboard (11x)"]
+      },
+      {
+       "count": 6,
+       "id": "ARMOR_PLATE_SET3",
+       "sources": ["killboard (6x)"]
+      },
+      {
+       "count": 5,
+       "id": "ARMOR_CLOTH_MORGANA",
+       "sources": ["albioncompo_party_2_2026_03 (comp:10)", "killboard (4x)"]
+      },
+      {
+       "count": 5,
+       "id": "ARMOR_CLOTH_SET2",
+       "sources": ["killboard (5x)"]
+      },
+      {
+       "count": 3,
+       "id": "ARMOR_CLOTH_FEY",
+       "sources": ["killboard (3x)"]
       },
       {
        "count": 3,
@@ -26121,6 +26397,11 @@
     },
     "2H_SCYTHE_HELL": {
      "armor": [
+      {
+       "count": 21,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (19x)", "metabattle (7651:8919; 7694:8922)"]
+      },
       {
        "count": 2,
        "id": "ARMOR_LEATHER_SET3",
@@ -26326,6 +26607,11 @@
        "count": 3,
        "id": "ARMOR_PLATE_UNDEAD",
        "sources": ["killboard (3x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (2x)"]
       },
       {
        "count": 2,
@@ -26544,6 +26830,11 @@
     "MAIN_SCIMITAR_MORGANA": {
      "armor": [
       {
+       "count": 5,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (3x)", "metabattle (7658:8999)", "timothy_blap_blackzone_roam_2026_08 (blap:13)"]
+      },
+      {
        "count": 3,
        "id": "ARMOR_LEATHER_SET1",
        "sources": ["killboard (3x)"]
@@ -26663,6 +26954,11 @@
        "count": 14,
        "id": "ARMOR_PLATE_SET1",
        "sources": ["albioncompo_builds_for_brawl_bomb_2026_06 (comp:3)", "killboard (13x)"]
+      },
+      {
+       "count": 11,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["killboard (10x)", "metabattle (7759:8992)"]
       },
       {
        "count": 7,
@@ -26886,6 +27182,11 @@
     "MAIN_SPEAR_LANCE_AVALON": {
      "armor": [
       {
+       "count": 9,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_push_monkey_7_2026_05 (comp:5)", "killboard (8x)"]
+      },
+      {
        "count": 8,
        "id": "ARMOR_LEATHER_SET3",
        "sources": ["killboard (8x)"]
@@ -27067,6 +27368,11 @@
     "MAIN_SWORD_CRYSTAL": {
      "armor": [
       {
+       "count": 15,
+       "id": "ARMOR_LEATHER_HELL",
+       "sources": ["albioncompo_10man_melee_2026_02 (comp:5,6)", "albioncompo_party_1_2026_03 (comp:14)", "albioncompo_party_2_2026_03 (comp:12)", "albioncompo_pt_3_offensive_wave_2026_03 (comp:8,9)", "killboard (9x)"]
+      },
+      {
        "count": 3,
        "id": "ARMOR_PLATE_SET1",
        "sources": ["albioncompo_brawl_by_lattex_2026_05 (comp:9)", "albioncompo_hard_zvz_brawl_20ppl_2026_08 (comp:15)", "killboard (1x)"]
@@ -27163,49 +27469,14 @@
      "weapon": "2H_HARPOON_HELL"
     },
     {
-     "build": "albioncompo_20v20_competitive_2026_08:comp:16",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "2H_KNUCKLES_SET3"
-    },
-    {
-     "build": "albioncompo_bus_bomb_2026_08:comp:11",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "2H_KNUCKLES_SET3"
-    },
-    {
-     "build": "albioncompo_kite_deff_2026_08:comp:16",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "2H_KNUCKLES_SET3"
-    },
-    {
      "build": "albioncompo_kite_deff_2026_08:comp:9",
      "id": "ARMOR_CLOTH_AVALON",
      "weapon": "2H_HARPOON_HELL"
     },
     {
-     "build": "albioncompo_new_composition_2026_08:comp:14",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "2H_KNUCKLES_SET3"
-    },
-    {
      "build": "albioncompo_perma_comp_a_2026_08:comp:7",
      "id": "ARMOR_CLOTH_AVALON",
      "weapon": "2H_HARPOON_HELL"
-    },
-    {
-     "build": "albioncompo_ss_kite_20_2026_06:comp:11",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "2H_KNUCKLES_SET3"
-    },
-    {
-     "build": "deadlyhooker_large_scale_2026_08:party_1:14",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "2H_KNUCKLES_SET3"
-    },
-    {
-     "build": "killboard:115x",
-     "id": "ARMOR_CLOTH_AVALON",
-     "weapon": "2H_KNUCKLES_SET3"
     },
     {
      "build": "killboard:11x",
@@ -27238,11 +27509,6 @@
      "weapon": "2H_HARPOON_HELL"
     },
     {
-     "build": "killboard:3x",
-     "id": "ARMOR_CLOTH_FEY",
-     "weapon": "2H_KNUCKLES_SET3"
-    },
-    {
      "build": "killboard:8x",
      "id": "ARMOR_CLOTH_FEY",
      "weapon": "2H_HARPOON_HELL"
@@ -27266,11 +27532,6 @@
      "build": "killboard:1x",
      "id": "ARMOR_CLOTH_HELL",
      "weapon": "2H_KNUCKLES_SET1"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_CLOTH_HELL",
-     "weapon": "2H_KNUCKLES_SET3"
     },
     {
      "build": "killboard:1x",
@@ -27305,11 +27566,6 @@
     {
      "build": "killboard:1x",
      "id": "ARMOR_CLOTH_KEEPER",
-     "weapon": "2H_KNUCKLES_SET3"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_CLOTH_KEEPER",
      "weapon": "2H_SCYTHE_HELL"
     },
     {
@@ -27338,16 +27594,6 @@
      "weapon": "2H_DUALHAMMER_HELL"
     },
     {
-     "build": "albioncompo_party_2_2026_03:comp:10",
-     "id": "ARMOR_CLOTH_MORGANA",
-     "weapon": "2H_KNUCKLES_SET3"
-    },
-    {
-     "build": "killboard:4x",
-     "id": "ARMOR_CLOTH_MORGANA",
-     "weapon": "2H_KNUCKLES_SET3"
-    },
-    {
      "build": "killboard:1x",
      "id": "ARMOR_CLOTH_SET1",
      "weapon": "2H_AXE"
@@ -27356,11 +27602,6 @@
      "build": "killboard:1x",
      "id": "ARMOR_CLOTH_SET1",
      "weapon": "2H_KNUCKLES_SET1"
-    },
-    {
-     "build": "killboard:1x",
-     "id": "ARMOR_CLOTH_SET1",
-     "weapon": "2H_KNUCKLES_SET3"
     },
     {
      "build": "killboard:1x",
@@ -27411,11 +27652,6 @@
      "build": "killboard:5x",
      "id": "ARMOR_CLOTH_SET2",
      "weapon": "2H_KNUCKLES_SET2"
-    },
-    {
-     "build": "killboard:5x",
-     "id": "ARMOR_CLOTH_SET2",
-     "weapon": "2H_KNUCKLES_SET3"
     },
     {
      "build": "killboard:6x",
@@ -27471,11 +27707,6 @@
      "build": "killboard:1x",
      "id": "ARMOR_CLOTH_SET3",
      "weapon": "2H_SPEAR"
-    },
-    {
-     "build": "killboard:21x",
-     "id": "ARMOR_CLOTH_SET3",
-     "weapon": "2H_KNUCKLES_SET3"
     },
     {
      "build": "killboard:2x",
@@ -28109,33 +28340,38 @@
      }
     ]
    },
+   "uniform_extended": {
+    "2H_KNUCKLES_SET3": {
+     "classes": ["cloth", "leather"],
+     "n": 310,
+     "share": {
+      "cloth": 0.487,
+      "leather": 0.487
+     }
+    }
+   },
    "weapon_archetypes": {
     "2H_AXE": {
-     "armor": ["ARMOR_LEATHER_MORGANA", 35, 76],
-     "cape": ["CAPEITEM_AVALON", 2, 5],
-     "head": ["HEAD_CLOTH_HELL", 6, 36],
-     "potion": ["T7_POTION_REVIVE", 3, 3],
-     "shoes": ["SHOES_CLOTH_ROYAL", 4, 7]
+     "armor": ["ARMOR_LEATHER_MORGANA", 35, 76]
     },
     "2H_AXE_AVALON": {
-     "armor": ["ARMOR_LEATHER_FEY", 29, 391],
-     "cape": ["CAPEITEM_SMUGGLER", 4, 7],
-     "food": ["T8_MEAL_STEW", 2, 4],
-     "head": ["HEAD_PLATE_SET1", 11, 29],
-     "potion": ["T7_POTION_REVIVE", 4, 4],
-     "shoes": ["SHOES_LEATHER_MORGANA", 7, 11]
+     "armor": ["ARMOR_LEATHER_HELL", 156, 391],
+     "cape": ["CAPEITEM_SMUGGLER", 25, 25],
+     "food": ["T8_MEAL_STEW", 7, 21],
+     "head": ["HEAD_PLATE_SET2", 50, 156],
+     "potion": ["T7_POTION_REVIVE", 21, 25],
+     "shoes": ["SHOES_LEATHER_MORGANA", 25, 50]
     },
     "2H_CLAYMORE": {
      "armor": ["ARMOR_LEATHER_SET1", 5, 20],
-     "head": ["HEAD_PLATE_SET3", 2, 5],
-     "potion": ["T8_POTION_COOLDOWN", 2, 2]
+     "head": ["HEAD_PLATE_SET3", 2, 5]
     },
     "2H_CLAYMORE_AVALON": {
-     "armor": ["ARMOR_PLATE_SET1", 17, 55],
-     "food": ["T8_MEAL_STEW", 2, 2],
-     "head": ["HEAD_CLOTH_SET1", 4, 17],
-     "potion": ["T7_POTION_ACID", 2, 2],
-     "shoes": ["SHOES_CLOTH_SET2", 2, 4]
+     "armor": ["ARMOR_LEATHER_HELL", 29, 55],
+     "cape": ["CAPEITEM_SMUGGLER", 5, 5],
+     "head": ["HEAD_CLOTH_SET2", 8, 29],
+     "potion": ["T7_POTION_REVIVE", 5, 5],
+     "shoes": ["SHOES_LEATHER_MORGANA", 5, 8]
     },
     "2H_CLEAVER_HELL": {
      "armor": ["ARMOR_PLATE_ROYAL", 36, 96],
@@ -28146,62 +28382,48 @@
      "shoes": ["SHOES_PLATE_AVALON", 12, 25]
     },
     "2H_DOUBLEBLADEDSTAFF": {
-     "armor": ["ARMOR_PLATE_UNDEAD", 4, 12],
-     "cape": ["CAPEITEM_DEMON", 2, 5],
-     "potion": ["T8_POTION_COOLDOWN", 2, 2],
-     "shoes": ["SHOES_LEATHER_SET2", 4, 5]
+     "armor": ["ARMOR_PLATE_UNDEAD", 4, 12]
     },
     "2H_DOUBLEBLADEDSTAFF_CRYSTAL": {
-     "armor": ["ARMOR_PLATE_AVALON", 2, 5],
-     "cape": ["CAPEITEM_AVALON", 2, 2],
-     "head": ["HEAD_CLOTH_AVALON", 2, 2],
-     "potion": ["T7_POTION_REVIVE", 2, 2],
-     "shoes": ["SHOES_PLATE_UNDEAD", 2, 2]
+     "armor": ["ARMOR_LEATHER_HELL", 2, 5]
     },
     "2H_DUALAXE_KEEPER": {
-     "armor": ["ARMOR_LEATHER_SET3", 44, 116],
-     "cape": ["CAPEITEM_UNDEAD", 10, 20],
-     "food": ["T8_MEAL_STEW", 3, 5],
-     "head": ["HEAD_CLOTH_HELL", 26, 44],
-     "potion": ["T8_POTION_COOLDOWN", 4, 10],
-     "shoes": ["SHOES_CLOTH_ROYAL", 20, 26]
+     "armor": ["ARMOR_LEATHER_HELL", 51, 116],
+     "cape": ["CAPEITEM_FW_LYMHURST", 9, 16],
+     "food": ["T8_MEAL_STEW", 3, 9],
+     "head": ["HEAD_PLATE_SET1", 29, 51],
+     "potion": ["T7_POTION_REVIVE", 9, 9],
+     "shoes": ["SHOES_LEATHER_MORGANA", 16, 29]
     },
     "2H_DUALHAMMER_HELL": {
      "armor": ["ARMOR_LEATHER_MORGANA", 5, 20],
-     "food": ["T8_MEAL_STEW", 2, 2],
-     "head": ["HEAD_LEATHER_SET3", 2, 5],
-     "shoes": ["SHOES_LEATHER_SET3", 2, 2]
+     "head": ["HEAD_LEATHER_SET3", 2, 5]
     },
     "2H_DUALSWORD": {
-     "armor": ["ARMOR_LEATHER_SET1", 32, 72],
-     "cape": ["CAPEITEM_FW_FORTSTERLING", 4, 9],
-     "head": ["HEAD_LEATHER_SET2", 9, 39],
-     "potion": ["T8_POTION_CLEANSE", 2, 6],
-     "shoes": ["SHOES_PLATE_SET1", 5, 14]
+     "armor": ["ARMOR_LEATHER_SET1", 32, 72]
     },
     "2H_HALBERD": {
-     "armor": ["ARMOR_PLATE_SET1", 6, 24],
-     "cape": ["CAPEITEM_FW_FORTSTERLING", 3, 3],
-     "head": ["HEAD_LEATHER_MORGANA", 3, 6],
-     "shoes": ["SHOES_CLOTH_SET2", 3, 3]
+     "armor": ["ARMOR_LEATHER_HELL", 12, 24],
+     "cape": ["CAPEITEM_FW_LYMHURST", 5, 7],
+     "food": ["T8_MEAL_STEW", 5, 5],
+     "head": ["HEAD_CLOTH_SET2", 7, 12],
+     "potion": ["T7_POTION_REVIVE", 5, 5],
+     "shoes": ["SHOES_PLATE_AVALON", 7, 7]
     },
     "2H_HALBERD_MORGANA": {
-     "cape": ["CAPEITEM_FW_LYMHURST", 2, 7],
-     "food": ["T8_MEAL_STEW", 3, 3]
+     "armor": ["ARMOR_LEATHER_HELL", 3, 7]
     },
     "2H_HARPOON_HELL": {
-     "armor": ["ARMOR_LEATHER_FEY", 9, 193],
-     "cape": ["CAPEITEM_FW_LYMHURST", 2, 4],
-     "head": ["HEAD_LEATHER_SET3", 9, 9],
-     "potion": ["T7_POTION_REVIVE", 2, 2],
-     "shoes": ["SHOES_LEATHER_MORGANA", 4, 9]
+     "armor": ["ARMOR_LEATHER_ROYAL", 97, 193],
+     "cape": ["CAPEITEM_SMUGGLER", 52, 61],
+     "food": ["T8_MEAL_STEW", 27, 52],
+     "head": ["HEAD_LEATHER_SET3", 82, 97],
+     "potion": ["T7_POTION_REVIVE", 52, 52],
+     "shoes": ["SHOES_LEATHER_MORGANA", 61, 82]
     },
     "2H_KNUCKLES_AVALON": {
      "armor": ["ARMOR_LEATHER_SET3", 10, 28],
-     "cape": ["CAPEITEM_UNDEAD", 3, 3],
-     "food": ["T8_MEAL_STEW", 2, 3],
-     "head": ["HEAD_CLOTH_AVALON", 3, 10],
-     "potion": ["T7_POTION_REVIVE", 3, 3]
+     "head": ["HEAD_CLOTH_AVALON", 3, 10]
     },
     "2H_KNUCKLES_HELL": {
      "armor": ["ARMOR_LEATHER_SET2", 22, 75],
@@ -28212,96 +28434,84 @@
      "shoes": ["SHOES_LEATHER_MORGANA", 8, 11]
     },
     "2H_KNUCKLES_KEEPER": {
-     "armor": ["ARMOR_LEATHER_AVALON", 4, 36],
-     "cape": ["CAPEITEM_FW_LYMHURST", 3, 4],
-     "food": ["T8_MEAL_STEW", 3, 3],
-     "head": ["HEAD_LEATHER_SET3", 4, 4],
-     "potion": ["T7_POTION_REVIVE", 3, 3],
-     "shoes": ["SHOES_LEATHER_MORGANA", 4, 4]
-    },
-    "2H_KNUCKLES_SET1": {
-     "armor": ["ARMOR_LEATHER_SET3", 4, 19],
-     "head": ["HEAD_CLOTH_HELL", 2, 4],
-     "shoes": ["SHOES_LEATHER_SET3", 2, 2]
+     "armor": ["ARMOR_LEATHER_HELL", 24, 36],
+     "cape": ["CAPEITEM_SMUGGLER", 7, 9],
+     "food": ["T8_MEAL_STEW", 3, 7],
+     "head": ["HEAD_PLATE_SET1", 9, 24],
+     "potion": ["T7_POTION_REVIVE", 7, 7],
+     "shoes": ["SHOES_PLATE_AVALON", 9, 9]
     },
     "2H_KNUCKLES_SET2": {
-     "armor": ["ARMOR_LEATHER_SET3", 36, 350],
-     "cape": ["CAPEITEM_SMUGGLER", 2, 4],
-     "head": ["HEAD_CLOTH_SET3", 8, 36],
-     "shoes": ["SHOES_CLOTH_SET3", 2, 8]
+     "armor": ["ARMOR_LEATHER_HELL", 140, 350],
+     "cape": ["CAPEITEM_SMUGGLER", 38, 49],
+     "food": ["T8_MEAL_STEW", 25, 38],
+     "head": ["HEAD_PLATE_SET1", 71, 140],
+     "potion": ["T7_POTION_REVIVE", 37, 38],
+     "shoes": ["SHOES_LEATHER_MORGANA", 49, 72]
     },
     "2H_KNUCKLES_SET3": {
-     "armor": ["ARMOR_LEATHER_AVALON", 54, 310],
-     "cape": ["CAPEITEM_SMUGGLER", 7, 10],
-     "food": ["T8_MEAL_STEW", 4, 7],
-     "head": ["HEAD_LEATHER_FEY", 23, 54],
-     "potion": ["T7_POTION_REVIVE", 7, 7],
-     "shoes": ["SHOES_LEATHER_MORGANA", 10, 23]
+     "armor": ["ARMOR_CLOTH_AVALON", 115, 310],
+     "cape": ["CAPEITEM_SMUGGLER", 51, 58],
+     "food": ["T8_MEAL_STEW", 20, 47],
+     "head": ["HEAD_LEATHER_FEY", 108, 115],
+     "potion": ["T7_POTION_REVIVE", 47, 51],
+     "shoes": ["SHOES_LEATHER_FEY", 58, 108]
     },
     "2H_SCYTHE_HELL": {
-     "armor": ["ARMOR_LEATHER_SET3", 2, 28],
-     "potion": ["T8_POTION_CLEANSE", 2, 2]
-    },
-    "2H_SHAPESHIFTER_MORGANA": {
-     "cape": ["CAPEITEM_FW_CAERLEON", 3, 4],
-     "food": ["T8_MEAL_STEW", 2, 3]
+     "armor": ["ARMOR_LEATHER_HELL", 19, 28],
+     "cape": ["CAPEITEM_SMUGGLER", 8, 11],
+     "food": ["T8_MEAL_STEW", 4, 6],
+     "head": ["HEAD_PLATE_SET1", 16, 19],
+     "potion": ["T7_POTION_REVIVE", 6, 8],
+     "shoes": ["SHOES_LEATHER_MORGANA", 11, 16]
     },
     "2H_SPEAR": {
-     "armor": ["ARMOR_LEATHER_SET3", 2, 7],
-     "food": ["T8_MEAL_STEW", 2, 2]
+     "armor": ["ARMOR_LEATHER_SET3", 2, 7]
     },
     "MAIN_AXE": {
      "armor": ["ARMOR_LEATHER_SET1", 58, 74],
-     "cape": ["CAPEITEM_FW_LYMHURST", 2, 11],
      "head": ["HEAD_PLATE_SET3", 21, 58],
-     "offhand": ["OFF_TORCH", 6, 9],
-     "potion": ["T6_POTION_HEAL", 2, 6],
      "shoes": ["SHOES_PLATE_SET1", 11, 21]
     },
     "MAIN_SCIMITAR_MORGANA": {
-     "armor": ["ARMOR_LEATHER_SET1", 3, 10],
-     "potion": ["T6_POTION_HEAL", 2, 3]
-    },
-    "MAIN_SPEAR_KEEPER": {
-     "armor": ["ARMOR_PLATE_SET1", 13, 54],
-     "cape": ["CAPEITEM_SMUGGLER", 6, 6],
-     "head": ["HEAD_LEATHER_AVALON", 6, 13],
-     "offhand": ["OFF_TORCH_CRYSTAL", 6, 6],
-     "potion": ["T7_POTION_REVIVE", 6, 6],
-     "shoes": ["SHOES_PLATE_AVALON", 6, 6]
+     "armor": ["ARMOR_LEATHER_HELL", 3, 10]
     },
     "MAIN_SPEAR_LANCE_AVALON": {
-     "armor": ["ARMOR_LEATHER_SET3", 8, 21],
-     "food": ["T7_MEAL_OMELETTE", 2, 5],
-     "head": ["HEAD_CLOTH_SET3", 3, 8],
-     "offhand": ["OFF_HORN_KEEPER", 5, 5],
-     "potion": ["T7_POTION_REVIVE", 2, 5],
-     "shoes": ["SHOES_CLOTH_SET3", 2, 5]
+     "armor": ["ARMOR_LEATHER_HELL", 8, 21],
+     "head": ["HEAD_CLOTH_SET2", 3, 8]
     },
     "MAIN_SWORD": {
-     "armor": ["ARMOR_LEATHER_SET1", 4, 8],
-     "head": ["HEAD_PLATE_SET3", 2, 4]
+     "armor": ["ARMOR_LEATHER_SET1", 4, 8]
     },
     "MAIN_SWORD_CRYSTAL": {
-     "cape": ["CAPEITEM_SMUGGLER", 4, 4],
-     "head": ["HEAD_PLATE_SET1", 6, 11],
-     "offhand": ["OFF_TOTEM_KEEPER", 3, 4],
-     "potion": ["T7_POTION_REVIVE", 3, 3],
+     "armor": ["ARMOR_LEATHER_HELL", 9, 11],
+     "head": ["HEAD_PLATE_SET1", 6, 9],
      "shoes": ["SHOES_PLATE_UNDEAD", 4, 6]
     }
    }
   },
   "zone_support": {
    "archetype": {
-    "armor": ["ARMOR_PLATE_FEY", 12, 99],
-    "cape": ["CAPEITEM_SMUGGLER", 4, 5],
-    "head": ["HEAD_LEATHER_SET3", 10, 12],
-    "potion": ["T7_POTION_REVIVE", 4, 4],
-    "shoes": ["SHOES_LEATHER_ROYAL", 5, 10]
+    "armor": ["ARMOR_LEATHER_ROYAL", 51, 99],
+    "cape": ["CAPEITEM_SMUGGLER", 17, 19],
+    "food": ["T7_MEAL_OMELETTE", 7, 16],
+    "head": ["HEAD_LEATHER_SET3", 41, 51],
+    "potion": ["T7_POTION_REVIVE", 16, 17],
+    "shoes": ["SHOES_LEATHER_MORGANA", 19, 41]
    },
    "by_weapon": {
     "2H_ARCANESTAFF_HELL": {
      "armor": [
+      {
+       "count": 61,
+       "id": "ARMOR_LEATHER_ROYAL",
+       "sources": ["albioncompo_20v20_competitive_2026_08 (comp:7)", "albioncompo_bus_bomb_2026_08 (comp:5)", "albioncompo_kite_deff_2026_08 (comp:10)", "albioncompo_new_composition_2026_08 (comp:9)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:11)", "albioncompo_perma_comp_a_2026_08 (comp:13)", "albioncompo_ranged_bomb_2026_07 (comp:5)", "albioncompo_ss_kite_20_2026_06 (comp:3)", "deadlyhooker_large_scale_2026_08 (party_1:11)", "killboard (51x)", "metabattle (7760:8911)"]
+      },
+      {
+       "count": 5,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["deadlyhooker_large_scale_2026_08 (party_3:9)", "killboard (4x)"]
+      },
       {
        "count": 4,
        "id": "ARMOR_CLOTH_ROYAL",
@@ -28437,6 +28647,11 @@
        "count": 8,
        "id": "ARMOR_PLATE_SET2",
        "sources": ["killboard (8x)"]
+      },
+      {
+       "count": 2,
+       "id": "ARMOR_PLATE_KEEPER",
+       "sources": ["killboard (2x)"]
       }
      ],
      "cape": [
@@ -28526,6 +28741,11 @@
        "count": 4,
        "id": "ARMOR_PLATE_SET2",
        "sources": ["killboard (4x)"]
+      },
+      {
+       "count": 3,
+       "id": "ARMOR_PLATE_HELL",
+       "sources": ["albioncompo_perma_comp_a_2026_08 (comp:17)", "deadlyhooker_large_scale_2026_08 (party_2:11)", "killboard (1x)"]
       },
       {
        "count": 2,
@@ -28873,25 +29093,22 @@
    },
    "weapon_archetypes": {
     "2H_ARCANESTAFF_HELL": {
-     "armor": ["ARMOR_CLOTH_ROYAL", 3, 61],
-     "cape": ["CAPEITEM_FW_FORTSTERLING", 2, 2],
-     "head": ["HEAD_CLOTH_KEEPER", 2, 3],
-     "potion": ["T7_POTION_REVIVE", 2, 2],
-     "shoes": ["SHOES_PLATE_UNDEAD", 2, 2]
+     "armor": ["ARMOR_LEATHER_ROYAL", 51, 61],
+     "cape": ["CAPEITEM_SMUGGLER", 17, 19],
+     "food": ["T7_MEAL_OMELETTE", 7, 16],
+     "head": ["HEAD_LEATHER_SET3", 41, 51],
+     "potion": ["T7_POTION_REVIVE", 16, 17],
+     "shoes": ["SHOES_LEATHER_MORGANA", 19, 41]
     },
     "2H_ICEGAUNTLETS_HELL": {
      "armor": ["ARMOR_PLATE_FEY", 12, 25],
      "cape": ["CAPEITEM_SMUGGLER", 4, 5],
      "head": ["HEAD_LEATHER_SET3", 10, 12],
-     "potion": ["T7_POTION_REVIVE", 4, 4],
      "shoes": ["SHOES_LEATHER_ROYAL", 5, 10]
     },
     "MAIN_FROSTSTAFF_KEEPER": {
      "armor": ["ARMOR_LEATHER_SET3", 5, 13],
-     "head": ["HEAD_CLOTH_SET3", 3, 5],
-     "offhand": ["OFF_HORN_KEEPER", 2, 3],
-     "potion": ["T8_POTION_CLEANSE", 2, 2],
-     "shoes": ["SHOES_LEATHER_SET3", 3, 3]
+     "head": ["HEAD_CLOTH_SET3", 3, 5]
     }
    }
   }

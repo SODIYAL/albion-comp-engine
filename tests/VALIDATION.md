@@ -1641,3 +1641,86 @@ actual_gear role-level 83% (19/23) PASS. `test_cohort_families.py` is
 the 2026-08-25 artifact and the sample it mines was refreshed
 2026-08-29 — a sample-refresh re-pin the owner has to bless, not a
 regression from this work.
+
+## THE KIT AUDIT (owner 2026-09-03) — "judge 10 random weapons ... build fixes until the engine agrees with the real data of people who win fights"
+
+Owner examples: a 15-man clap Mace in Graveguard Armor ("why would it be
+better than Judicator, Guardian, even Knight"), Leering Cane on its
+off-hand, Hunter Hood on Oathkeepers ("people are most likely to use
+assassin hood or cleric cowl").
+
+**The harness** (`scratchpad kit_audit.py`, now pinned as R24): per slot,
+the killboard's modal item over a weapon's harvested builds (official
+kill-event party rosters, 9,569 builds, tier-agnostic ids) against the
+kit the forge dresses the weapon in (`kit_variants` v0). Ten weapons
+drawn with seed 20260903 from the 67 with >= 30 builds; then all 67.
+
+| | exact-modal agreement | slots where the pick is worn < half as often as the modal |
+|---|---|---|
+| ten weapons, before | 43/61 = 70% | 9 |
+| ten weapons, after | 54/61 = 89% | 0 |
+| all 67 weapons, after | 370/420 = 88% | 4, all catalogue gaps (a plain Cape, a fish) |
+
+**What people actually wear** (the numbers the engine was ignoring):
+Oathkeepers Demon Armor 105/126 small, 37/47 at 20-59, 68/79 at 60+, and
+Assassin Hood 112/40/72 of the same; 1H Mace Judicator 43 + Guardian 36
+of 137 at 20-59 with Graveguard fourth; Galatine Pair Soldier Armor
+(plate) 81% of 145 under a cloth/leather bomb seat; Witchwork cloth 33% /
+leather 25% under a plate engage seat.
+
+**Root causes, each fixed as a derivation, no hand lists:**
+
+1. **Effect-carrier chests were banned from weapon evidence** (the
+   2026-08-26 "comp-level allocation" rule; the allocator it promised,
+   increment 3b, was never built). Demon/Judicator/Guardian/Royal
+   Jacket/Hellion left every weapon tier and the archetype chain, so the
+   modal chest could never be suggested and the leftovers (Graveguard,
+   Duskweaver, Knight) were. Carriers now count like any piece; the
+   comp-level rule became the **carrier quota** below.
+2. **The seat uniform overrode the harvest.** Galatine's plate was
+   "off-uniform" and thrown away; the archetype chain then conditioned
+   on a 13-build cloth pocket and produced Royal Hood + Cleric Robe +
+   Mage Sandals + Keeper Cape. Now a class worn by >= 25% of >= 50
+   harvested builds is admitted for THAT weapon (dataset
+   `kit_weapon_uniform`, reported as `uniform_extended`); the seat
+   aggregate keeps the book uniform; thin samples (Grailseeker, 32
+   builds) overturn nothing (R6/R12 hold).
+3. **The archetype chain fronted rare pockets** (Hunter Hood 5/14 over
+   Assassin Hood 131/149). The chain now stops when its conditional pool
+   drops under 5 builds or the pick holds < 25% of it, and the overlay
+   may only front an item inside the evidence band (worn >= half as
+   often as the slot's modal item).
+4. **Comp-aware ranking was value-first within a tier** (a mace got
+   Cleric Cowl 32/216 over Judicator Helmet 81/216 because the comp
+   lacked cleanse). Count leads in both modes; the comp marginal reorders
+   only the evidence band; the seat tier keeps its count order.
+5. **Carrier quota (increment 3b, derived).** Killboard share of builds
+   wearing each carrier chest per fight-size bucket (dataset
+   `carrier_quotas`: 20-59 players and 60+, the harvest's own floor)
+   becomes a per-roster cap of share x size, half-up, min 1 — at 20:
+   Hellion 2, Judicator 1, Guardian 1, Demon 1, Royal Jacket 1. A
+   GENERATION constraint inside the search: `party_state` counts the
+   carriers a roster wears and every dressed candidate skips a kit
+   variant past the cap, a carrier-modal weapon carrying its best
+   non-carrier chest as the alternative (Mace: Judicator -> Knight). A
+   first version as a post-forge re-dress pass broke F5 (a refined
+   roster re-priced negative); the constraint form keeps every forge and
+   golden contract. Manual kits always score (R25).
+
+**Where the data disagrees with the owner:** Leering Cane IS the modal
+1H-Mace off-hand at 20-59 (64/137; Astral Aegis leads at 60+). The
+context-free kit keeps it; the comp-aware kit now prefers Astral Aegis
+inside the evidence band when the comp values it. The harvest has no
+fights under 20 players (discovery floor) and no style split — the
+next evidence round should lower the albionbb discovery floor and label
+rosters with comp_identity.
+
+Re-pins: T22 (two-hander has no off-hand slot), R18 (carriers are
+weapon evidence; Polehammer Knight 63/144), R20 (fallback shown on a
+chain-stopped weapon). New: R24 audit agreement, R25 carrier quota,
+R26 observed chest class. Gates: golden 59/59, forge 38/38, roles 26/26,
+validation modes 25/25, parity 60/60 + embed, layout, display math,
+codec, provenance, builds, interactions, patch history, lint, tier2 v4
+actual_gear role-level 87% (20/23) PASS. Browser: the JS forge dresses
+the clap-15 identically (Witchwork Robe of Purity, Occult Royal Jacket,
+one carrier, no off-hand on any two-hander, zero console errors).

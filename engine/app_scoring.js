@@ -235,6 +235,7 @@
     this.content = content;
     this.baseSize = this.template.base_size || size;
     this.size = (size === undefined || size === null) ? this.baseSize : size;
+    this._carrierCapsCache = null;   /* carrierCaps() memo (size-keyed) */
     this.reqs = this.template.requirements;
     this.floors = this.template.hard_floors || {};
     /* Playstyle overlay: multiplies capability WEIGHTS only (mirrors
@@ -713,7 +714,8 @@
                functions: [], secondary: menu2 };
     var self = this;
     var uniOf = function (rid) {
-      return (((self.rolesBook[rid] || {}).uniform) || {}).chest || [];
+      var book = (((self.rolesBook[rid] || {}).uniform) || {}).chest || [];
+      return book.length ? self._chestUniform(rid, weapon) : [];
     };
     var seats = menu.filter(function (r) { return uniOf(r).length > 0; });
     var functions = menu.filter(function (r) { return !uniOf(r).length; });
@@ -1186,6 +1188,15 @@
     return out;
   };
 
+  CompEngine.prototype._chestUniform = function (seat, weapon) {
+    /* chest classes admitted for `weapon` in `seat`: the book uniform plus
+       the weapon's observed-majority class where the harvest is clear
+       (dataset kit_weapon_uniform) -- mirrors engine.py _chest_uniform */
+    var rec = this.rolesBook[seat] || {};
+    var ext = (rec.kit_weapon_uniform || {})[weapon];
+    if (ext && ext.length) return ext.slice();
+    return ((rec.uniform || {}).chest || []).slice();
+  };
   CompEngine.prototype.primarySeat = function (weapon) {
     /* The weapon's default SEAT: first uniform-carrying role on its
        menu (mirrors engine.py primary_seat). */
@@ -1222,7 +1233,9 @@
     if (role !== null && (seat === null || seat === undefined))
       return { kit: {}, options: {}, seat: null };
     var seatRec = this.rolesBook[seat] || {};
-    var uniform = (seatRec.uniform || {}).chest || [];
+    /* book uniform widened by THIS weapon's observed majority class
+       (kit_weapon_uniform, 2026-09-03) -- mirrors engine.py */
+    var uniform = this._chestUniform(seat, weapon);
     var doctrine = seatRec.kit || {};
     /* Per-weapon doctrine tier (owner design 2026-08-26): this weapon's
        own observed items (effect carriers excluded at the build) outrank
@@ -1342,23 +1355,38 @@
         return r.doctrine === "weapon" ? 0 : r.doctrine === "seat" ? 1 : 2;
       };
       var wCount = function (r) { return wslot[r.gear] || 0; };
-      if (joined === null) {
-        ranked.sort(function (a, b) {
-          return (tierRank(a) - tierRank(b))
-              || (wCount(b) - wCount(a))
-              || (b.value - a.value) || gearCmp(a, b);
-        });
-      } else {
-        ranked.sort(function (a, b) {
-          return (tierRank(a) - tierRank(b))
-              || (b.value - a.value)
-              || (wCount(b) - wCount(a))
-              || gearCmp(a, b);
-        });
-      }
+      /* EVIDENCE-FIRST (2026-09-03, mirrors engine.py): count leads the
+         weapon tier; comp-aware may reorder only the evidence band (items
+         worn >= half as often as the modal one) by the marginal; the seat
+         tier keeps the seat pool's count order; value breaks ties. */
+      var topCount = 0;
+      for (var tk in wslot) if (wslot[tk] > topCount) topCount = wslot[tk];
+      var seatOrder = {};
+      for (var so = 0; so < docPool.length; so++) seatOrder[docPool[so]] = so;
+      var inBand = function (g) { return (wslot[g] || 0) >= 0.5 * topCount; };
+      var sortKey = function (r) {
+        var t = tierRank(r), g = r.gear;
+        if (t === 0) {
+          if (joined !== null && inBand(g))
+            return [0, 0, -r.value, -(wslot[g] || 0)];
+          return [0, inBand(g) ? 0 : 1, -(wslot[g] || 0), -r.value];
+        }
+        if (t === 1)
+          return [1, seatOrder[g] === undefined ? docPool.length : seatOrder[g],
+                  0, -r.value];
+        return [2, 0, -r.value, 0];
+      };
+      ranked.sort(function (a, b) {
+        var ka = sortKey(a), kb = sortKey(b);
+        for (var ci = 0; ci < ka.length; ci++) {
+          if (ka[ci] !== kb[ci]) return ka[ci] < kb[ci] ? -1 : 1;
+        }
+        return gearCmp(a, b);
+      });
       var av = arch[slot];
-      if (av) {
-        /* the observed build leads the slot (overlay ruling) */
+      if (av && (topCount === 0 || inBand(av[0]))) {
+        /* the observed build leads the slot (overlay ruling) -- never
+           from outside the evidence band */
         for (var ai = 0; ai < ranked.length; ai++) {
           if (ranked[ai].gear === av[0]) {
             ranked[ai].observed_build = [av[1], av[2]];
@@ -1374,6 +1402,68 @@
     return { kit: kit, options: options, seat: seat };
   };
 
+  CompEngine.prototype.carrierCaps = function () {
+    /* per-roster cap on each effect-carrier chest at this size (mirrors
+       engine.py carrier_caps): killboard share x size, half-up, min 1.
+       A GENERATION constraint: partyState counts what the roster wears,
+       candidates skip capped kit variants. */
+    if (this._carrierCapsCache !== null && this._carrierCapsCache !== undefined)
+      return this._carrierCapsCache;
+    var q = this.data.carrier_quotas || {};
+    var buckets = q.buckets || {};
+    var any = false;
+    for (var bk in buckets) { any = true; break; }
+    var caps = {};
+    if (any) {
+      var key = (this.size >= 60 && buckets["60+"]) ? "60+" : "20-59";
+      var share = (buckets[key] || {}).share || {};
+      for (var eff in share) caps[eff] = Math.max(1, Math.floor(share[eff] * this.size + 0.5));
+    }
+    this._carrierCapsCache = caps;
+    return caps;
+  };
+  CompEngine.prototype._carrierCounts = function (gears) {
+    /* {effect: members wearing a chest granting it} (mirrors engine.py) */
+    var caps = this.carrierCaps(), out = {}, anyCap = false;
+    for (var c0 in caps) { anyCap = true; break; }
+    if (!anyCap) return out;
+    for (var i = 0; i < (gears || []).length; i++) {
+      var g = gears[i] || [];
+      for (var j = 0; j < g.length; j++) {
+        var effs = this.itemEffects[g[j]] || [];
+        for (var k = 0; k < effs.length; k++) {
+          if (caps[effs[k]] !== undefined) out[effs[k]] = (out[effs[k]] || 0) + 1;
+        }
+      }
+    }
+    return out;
+  };
+  CompEngine.prototype._variantCapped = function (state, vgears) {
+    /* true when dressing in `vgears` would push a carrier past its cap */
+    var carriers = state.carriers;
+    if (!carriers || !vgears) return false;
+    var caps = this.carrierCaps();
+    for (var j = 0; j < vgears.length; j++) {
+      var effs = this.itemEffects[vgears[j]] || [];
+      for (var k = 0; k < effs.length; k++) {
+        var eff = effs[k];
+        if (caps[eff] !== undefined && (carriers[eff] || 0) >= caps[eff]) return true;
+      }
+    }
+    return false;
+  };
+  CompEngine.prototype.observedShare = function (weapon, gearId) {
+    var seat = this.primarySeat(weapon);
+    var rec = this.rolesBook[seat] || {};
+    var slot = (this.gear[gearId] || {}).slot;
+    var wl = ((rec.kit_weapon || {})[weapon] || {})[slot] || [];
+    var total = 0, n = 0;
+    for (var i = 0; i < wl.length; i++) {
+      total += wl[i][1];
+      if (wl[i][0] === gearId) n = wl[i][1];
+    }
+    return total ? n / total : 0.0;
+  };
   CompEngine.prototype.memberExtra = function (weapon, combo) {
     /* One member's effective caps for a combo (null -> static default). */
     var extras = this._comboExtras(weapon);
@@ -1699,7 +1789,9 @@
       }
     }
     return { s: s, sSyn: sSyn, J: J, pairVals: pairVals, counts: counts,
-             nsMax: nsMax };
+             nsMax: nsMax,
+             /* carrier quota (2026-09-03): what this roster already wears */
+             carriers: this._carrierCounts(gears) };
   };
 
   CompEngine.prototype._margFitFrom = function (s, extra, sFloor, extraFloor) {
@@ -1854,11 +1946,35 @@
       out = [["v0", null]];
     } else {
       out = [["v0", gl(v0)]];
-      for (var n = 0; n < Math.min(1, divergent.length); n++) {
-        var alt = {};
-        for (var k in v0) alt[k] = v0[k];
-        alt[divergent[n][0]] = divergent[n][1];
-        out.push(["v" + (n + 1), gl(alt)]);
+      /* carrier quota (2026-09-03, mirrors engine.py): a carrier modal
+         chest gets the best NON-carrier chest as its one alternative */
+      var caps = this.carrierCaps(), chest = v0.armor, carrier = false, ce;
+      if (chest) {
+        ce = this.itemEffects[chest] || [];
+        for (var q0 = 0; q0 < ce.length; q0++) if (caps[ce[q0]] !== undefined) carrier = true;
+      }
+      var altChest = null;
+      if (carrier) {
+        var aopts = this.kitOptions(weapon, null, null, 8).options.armor || [];
+        for (var ao = 0; ao < aopts.length; ao++) {
+          if (!aopts[ao].doctrine || aopts[ao].gear === chest) continue;
+          var ce2 = this.itemEffects[aopts[ao].gear] || [], isC = false;
+          for (var q1 = 0; q1 < ce2.length; q1++) if (caps[ce2[q1]] !== undefined) isC = true;
+          if (!isC) { altChest = aopts[ao].gear; break; }
+        }
+      }
+      if (altChest !== null) {
+        var alt0 = {};
+        for (var k0 in v0) alt0[k0] = v0[k0];
+        alt0.armor = altChest;
+        out.push(["v1", gl(alt0)]);
+      } else {
+        for (var n = 0; n < Math.min(1, divergent.length); n++) {
+          var alt = {};
+          for (var k in v0) alt[k] = v0[k];
+          alt[divergent[n][0]] = divergent[n][1];
+          out.push(["v" + (n + 1), gl(alt)]);
+        }
       }
     }
     this._variantCache[weapon] = out;
@@ -1920,6 +2036,7 @@
     var variants = this.kitVariants(weapon);
     for (var vi = 0; vi < variants.length; vi++) {
       var vkey = variants[vi][0], vgears = variants[vi][1];
+      if (this._variantCapped(state, vgears)) continue;   /* carrier quota */
       var dext = dressed[vkey];
       for (var i = 0; i < extras.length; i++) {
         var cs = this._comboScoreDressed(state, weapon, i, extras[i],
@@ -2936,6 +3053,7 @@
       }
       for (var vi = 0; vi < variants.length; vi++) {
         var vkey = variants[vi][0], vgears = variants[vi][1];
+        if (this._variantCapped(state, vgears)) continue;   /* carrier quota */
         var cs = this._comboScoreDressed(state, w, i, extras[i],
                                          dressed[vkey][i]);
         if (best === null || cs.val > best.val)
@@ -3266,6 +3384,10 @@
                 }
               }
               if (!ok) continue;
+              /* carrier quota (mirrors engine.py two-opt) */
+              var ccaps = this.carrierCaps(), ccnt = this._carrierCounts(candGears), over = false;
+              for (var ce0 in ccnt) if (ccnt[ce0] > (ccaps[ce0] === undefined ? 1e9 : ccaps[ce0])) over = true;
+              if (over) continue;
               var d2 = this.compScore(candParty, candCombos, candGears) - best;
               if (d2 > 1e-9) {
                 party = candParty;
