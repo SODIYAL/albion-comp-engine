@@ -574,6 +574,7 @@
     this._defaultCache = {};
     this._nsCache = {};
     this._variantCache = {};
+    this._variantFallback = {};
     this._dressedCache = {};
   };
 
@@ -587,6 +588,7 @@
        other setting cannot leak. */
     this.dressCandidates = enabled !== false;
     this._variantCache = {};
+    this._variantFallback = {};
     this._dressedCache = {};
   };
 
@@ -1422,32 +1424,44 @@
     this._carrierCapsCache = caps;
     return caps;
   };
-  CompEngine.prototype._carrierCounts = function (gears) {
-    /* {effect: members wearing a chest granting it} (mirrors engine.py) */
+  CompEngine.IDENTITY_CHEST_SHARE = 0.5;
+  CompEngine.prototype._identityChest = function (weapon, gearId) {
+    /* a chest at least half the weapon's builds wear is IDENTITY, exempt
+       from the carrier quota (mirrors engine.py _identity_chest) */
+    return this.observedShare(weapon, gearId) >= CompEngine.IDENTITY_CHEST_SHARE;
+  };
+  CompEngine.prototype._cappedEffects = function (gearId) {
+    var caps = this.carrierCaps(), effs = this.itemEffects[gearId] || [], out = [];
+    for (var k = 0; k < effs.length; k++) if (caps[effs[k]] !== undefined) out.push(effs[k]);
+    return out;
+  };
+  CompEngine.prototype._carrierCounts = function (party, gears) {
+    /* {effect: members wearing a DISCRETIONARY chest granting it}
+       (mirrors engine.py _carrier_counts) */
     var caps = this.carrierCaps(), out = {}, anyCap = false;
     for (var c0 in caps) { anyCap = true; break; }
     if (!anyCap) return out;
     for (var i = 0; i < (gears || []).length; i++) {
-      var g = gears[i] || [];
+      var g = gears[i] || [], w = i < party.length ? party[i] : null;
       for (var j = 0; j < g.length; j++) {
-        var effs = this.itemEffects[g[j]] || [];
-        for (var k = 0; k < effs.length; k++) {
-          if (caps[effs[k]] !== undefined) out[effs[k]] = (out[effs[k]] || 0) + 1;
-        }
+        var effs = this._cappedEffects(g[j]);
+        if (!effs.length || (w && this._identityChest(w, g[j]))) continue;
+        for (var k = 0; k < effs.length; k++) out[effs[k]] = (out[effs[k]] || 0) + 1;
       }
     }
     return out;
   };
-  CompEngine.prototype._variantCapped = function (state, vgears) {
-    /* true when dressing in `vgears` would push a carrier past its cap */
+  CompEngine.prototype._variantCapped = function (state, weapon, vgears) {
+    /* true when dressing `weapon` in `vgears` would push a DISCRETIONARY
+       carrier past its cap; identity chests never are */
     var carriers = state.carriers;
     if (!carriers || !vgears) return false;
     var caps = this.carrierCaps();
     for (var j = 0; j < vgears.length; j++) {
-      var effs = this.itemEffects[vgears[j]] || [];
+      var effs = this._cappedEffects(vgears[j]);
+      if (!effs.length || this._identityChest(weapon, vgears[j])) continue;
       for (var k = 0; k < effs.length; k++) {
-        var eff = effs[k];
-        if (caps[eff] !== undefined && (carriers[eff] || 0) >= caps[eff]) return true;
+        if ((carriers[effs[k]] || 0) >= caps[effs[k]]) return true;
       }
     }
     return false;
@@ -1791,7 +1805,7 @@
     return { s: s, sSyn: sSyn, J: J, pairVals: pairVals, counts: counts,
              nsMax: nsMax,
              /* carrier quota (2026-09-03): what this roster already wears */
-             carriers: this._carrierCounts(gears) };
+             carriers: this._carrierCounts(party, gears) };
   };
 
   CompEngine.prototype._margFitFrom = function (s, extra, sFloor, extraFloor) {
@@ -1928,7 +1942,12 @@
       if (!opts.length) continue;
       v0[slot] = opts[0].gear;
       var t0 = topCap(opts[0].gear);
+      /* evidence band (mirrors engine.py): a divergent alternative must be
+         worn >= half as often as the slot's modal piece */
+      var n0 = (opts[0].doctrine_n || [0, 0])[0];
       for (var oi = 1; oi < opts.length; oi++) {
+        var n1 = (opts[oi].doctrine_n || [0, 0])[0];
+        if (n0 && n1 < 0.5 * n0) continue;
         if (topCap(opts[oi].gear) !== t0) {
           divergent.push([slot, opts[oi].gear]);
           break;
@@ -1968,6 +1987,8 @@
         for (var k0 in v0) alt0[k0] = v0[k0];
         alt0.armor = altChest;
         out.push(["v1", gl(alt0)]);
+        /* the non-carrier chest serves the cap only (mirrors engine.py) */
+        this._variantFallback[weapon] = { v1: true };
       } else {
         for (var n = 0; n < Math.min(1, divergent.length); n++) {
           var alt = {};
@@ -2034,9 +2055,12 @@
     var extras = this._comboExtras(weapon);
     var dressed = this._dressedExtras(weapon);
     var variants = this.kitVariants(weapon);
+    var v0Capped = this._variantCapped(state, weapon, variants[0][1]);
+    var fallback = this._variantFallback[weapon] || {};
     for (var vi = 0; vi < variants.length; vi++) {
       var vkey = variants[vi][0], vgears = variants[vi][1];
-      if (this._variantCapped(state, vgears)) continue;   /* carrier quota */
+      if (this._variantCapped(state, weapon, vgears)) continue;   /* carrier quota */
+      if (fallback[vkey] && !v0Capped) continue;   /* cap fallback only */
       var dext = dressed[vkey];
       for (var i = 0; i < extras.length; i++) {
         var cs = this._comboScoreDressed(state, weapon, i, extras[i],
@@ -3040,6 +3064,8 @@
     var extras = this._comboExtras(w);
     var dressed = this._dressedExtras(w);
     var variants = this.kitVariants(w);
+    var v0CappedW = this._variantCapped(state, w, variants[0][1]);
+    var fallbackW = this._variantFallback[w] || {};
     var hasPred = false;
     for (var k in ctx.predMin) { hasPred = true; break; }
     for (var i = 0; i < extras.length; i++) {
@@ -3053,7 +3079,8 @@
       }
       for (var vi = 0; vi < variants.length; vi++) {
         var vkey = variants[vi][0], vgears = variants[vi][1];
-        if (this._variantCapped(state, vgears)) continue;   /* carrier quota */
+        if (this._variantCapped(state, w, vgears)) continue;   /* carrier quota */
+        if (fallbackW[vkey] && !v0CappedW) continue;   /* cap fallback only */
         var cs = this._comboScoreDressed(state, w, i, extras[i],
                                          dressed[vkey][i]);
         if (best === null || cs.val > best.val)
@@ -3385,7 +3412,7 @@
               }
               if (!ok) continue;
               /* carrier quota (mirrors engine.py two-opt) */
-              var ccaps = this.carrierCaps(), ccnt = this._carrierCounts(candGears), over = false;
+              var ccaps = this.carrierCaps(), ccnt = this._carrierCounts(candParty, candGears), over = false;
               for (var ce0 in ccnt) if (ccnt[ce0] > (ccaps[ce0] === undefined ? 1e9 : ccaps[ce0])) over = true;
               if (over) continue;
               var d2 = this.compScore(candParty, candCombos, candGears) - best;

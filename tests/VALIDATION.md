@@ -1724,3 +1724,31 @@ codec, provenance, builds, interactions, patch history, lint, tier2 v4
 actual_gear role-level 87% (20/23) PASS. Browser: the JS forge dresses
 the clap-15 identically (Witchwork Robe of Purity, Occult Royal Jacket,
 one carrier, no off-hand on any two-hander, zero console errors).
+
+**Addendum (owner, same day): "lifecurse support on kite in 20 man terry
+defense went to cleric robe ... most lifecurse would be on demon armor".**
+Confirmed and fixed. Harvest: Lifecurse wears Demon Armor 46/68 at 20-59
+and 40/65 at 60+ (plate 76%, cloth 9%); the engine's own evidence ranked
+Demon first. The Cleric Robe came from the new quota: one Demon per 20,
+and Bedrock Mace (72% Demon itself) had taken it first in that forge.
+Rule refined: a chest at least HALF a weapon's builds wear is that
+weapon's IDENTITY chest and is exempt from the quota (both ports,
+`_identity_chest`); the quota rations DISCRETIONARY carriers only — the
+tank that "has to take one". The same kite-20 now dresses Bedrock Mace
+AND Lifecurse in Demon Armor (R25 pins it). On the cloth question: cloth
+Lifecurse is 9% of winning builds and pairs with Assassin Hood / Soldier
+Helmet — a dps-style kit — but the book gives Lifecurse no dps seat
+(menu: purge function + curse_support, uniform cloth+plate because
+Damnation is a cloth curse support). Whether a cloth Lifecurse should
+detect as dps is an open owner ruling on the role book (add a dps seat
+for the 1H curse line, or narrow curse_support's uniform per weapon by
+observed class), not something the data alone can settle.
+Second half of the same case: with the exemption in place Lifecurse STILL
+took Cleric Robe, because the alternative kit variant (a 7%-worn robe)
+was free to beat the 79%-worn Demon on the exact score — the kite comp
+lacked cleanse. The variant builder now applies the evidence band too: a
+divergent alternative must be worn at least half as often as the slot's
+modal piece, and the non-carrier chest a carrier weapon carries is a CAP
+FALLBACK that the evaluators offer only when v0 is actually capped. The
+forge no longer gets to out-think a weapon's standard kit with a rarity;
+it may only choose among kits people wear. Both ports, parity 60/60.

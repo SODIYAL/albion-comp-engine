@@ -835,8 +835,20 @@ def t_carrier_quota():
     q = e.data.get("carrier_quotas") or {}
     have_q = bool((q.get("buckets") or {}).get("20-59"))
     r = e.forge(20)
-    worn = e._carrier_counts(r["gears"])
+    worn = e._carrier_counts(r["party"], r["gears"])
     within = all(worn.get(k, 0) <= v for k, v in caps.items())
+    # identity chests are exempt (owner 2026-09-03, the Lifecurse case):
+    # a kite-20 fielding Bedrock Mace AND Lifecurse — both >= 50% Demon
+    # wearers — dresses BOTH in Demon Armor; the cap rations only the
+    # discretionary wearer
+    ek = Engine(content="territory_defense", size=20, style="kite")
+    rk = ek.forge(20)
+    demon_ids = [rk["party"][i] for i, g in enumerate(rk["gears"])
+                 if g and "ARMOR_PLATE_HELL" in g]
+    life = ("MAIN_CURSEDSTAFF_UNDEAD" not in rk["party"]
+            or "MAIN_CURSEDSTAFF_UNDEAD" in demon_ids)
+    identity_ok = life and all(ek._identity_chest(w, "ARMOR_PLATE_HELL")
+                               for w in demon_ids)
     st = e.party_state(r["party"], r["combos"], r["gears"])
     # a carrier v0 weapon offers a non-carrier alternative variant
     kv = e.kit_variants("2H_DUALMACE_AVALON")   # Oathkeepers: Demon 84%
@@ -848,11 +860,13 @@ def t_carrier_quota():
     demon = [["ARMOR_PLATE_HELL"]] * 5
     scores = e.fitness(manual, None, demon) > e.fitness(manual, None, None)
     check("R25 carrier quota: caps ship (reflect_shell 1 per 20), a forged "
-          "20 wears no effect past its cap, the state counts carriers, a "
+          "20 wears no DISCRETIONARY carrier past its cap, identity chests "
+          "are exempt (Lifecurse keeps Demon beside Bedrock Mace), a "
           "carrier weapon offers a non-carrier variant, manual builds score",
           have_q and caps.get("reflect_shell") == 1 and within
-          and st.get("carriers") is not None and v_ok and scores,
-          f"caps={caps} worn={worn} kv={kv}")
+          and st.get("carriers") is not None and v_ok and scores
+          and identity_ok,
+          f"caps={caps} worn={worn} demon={demon_ids} kv={kv}")
 
 
 def t_observed_chest_class():

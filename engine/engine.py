@@ -600,6 +600,7 @@ class Engine:
         self._gear_cache = {}
         self._ns_cache = {}
         self._variant_cache = {}
+        self._variant_fallback = {}
         self._dressed_cache = {}
         self._dressed_pre_cache = {}
         self._floor_gain_cache = {}
@@ -614,6 +615,7 @@ class Engine:
         caches so vectors built under the other setting cannot leak."""
         self.dress_candidates = bool(enabled)
         self._variant_cache = {}
+        self._variant_fallback = {}
         self._dressed_cache = {}
         self._dressed_pre_cache = {}
 
@@ -1263,7 +1265,17 @@ class Engine:
                 continue
             v0[slot] = opts[0]["gear"]
             t0 = top_cap(opts[0]["gear"])
+            # EVIDENCE BAND (2026-09-03, the Lifecurse case): a divergent
+            # alternative must be worn at least half as often as the
+            # slot's modal piece — a 7%-worn Cleric Robe used to outscore
+            # a 79%-worn Demon Armor because the exact marginal liked its
+            # cleanse. Seat-tier options (no weapon counts) qualify only
+            # when the weapon tier is empty, as before.
+            n0 = (opts[0].get("doctrine_n") or [0, 0])[0]
             for o in opts[1:]:
+                n1 = (o.get("doctrine_n") or [0, 0])[0]
+                if n0 and n1 < 0.5 * n0:
+                    continue
                 if top_cap(o["gear"]) != t0:
                     divergent.append((slot, o["gear"]))
                     break   # one divergent alternative per slot
@@ -1304,6 +1316,10 @@ class Engine:
                 alt = dict(v0)
                 alt["armor"] = alt_chest
                 out.append(("v1", gl(alt)))
+                # the non-carrier chest exists to SERVE THE CAP: the
+                # evaluators offer it only when v0 is capped for the
+                # roster, never as a free score alternative
+                self._variant_fallback[weapon] = {"v1"}
             else:
                 for n, (slot, piece) in enumerate(divergent[:1]):
                     alt = dict(v0)
@@ -1596,31 +1612,55 @@ class Engine:
         self._carrier_caps_cache = caps
         return caps
 
-    def _carrier_counts(self, gears):
-        """{effect: members wearing a chest that grants it} over a gears
-        list, for the capped effects only."""
+    IDENTITY_CHEST_SHARE = 0.5   # a chest half the weapon's builds wear
+
+    def _identity_chest(self, weapon, gear_id):
+        """True when `gear_id` is the weapon's IDENTITY chest: worn by at
+        least half of its harvested builds. Identity carriers are exempt
+        from the comp-level carrier quota (owner 2026-09-03, the Lifecurse
+        case: Demon Armor on 79% of Lifecurse builds was rationed away
+        to a Cleric Robe because a Bedrock Mace — itself a 72% Demon
+        wearer — had taken the single per-20 Demon). The quota rations
+        DISCRETIONARY carriers — the tank that "has to take one" —
+        never a weapon's own standard kit."""
+        return self.observed_share(weapon, gear_id) >= \
+            self.IDENTITY_CHEST_SHARE
+
+    def _carrier_counts(self, party, gears):
+        """{effect: members wearing a DISCRETIONARY chest that grants it}
+        over a roster, for the capped effects only — identity chests
+        (_identity_chest) do not count against the quota."""
         caps = self.carrier_caps()
         out = {}
         if not caps:
             return out
-        for g in gears or []:
+        for i, g in enumerate(gears or []):
+            w = party[i] if i < len(party) else None
             for x in g or []:
-                for eff in self._item_effects.get(x) or []:
-                    if eff in caps:
-                        out[eff] = out.get(eff, 0) + 1
+                effs = [e for e in (self._item_effects.get(x) or [])
+                        if e in caps]
+                if not effs or (w and self._identity_chest(w, x)):
+                    continue
+                for eff in effs:
+                    out[eff] = out.get(eff, 0) + 1
         return out
 
-    def _variant_capped(self, state, vgears):
-        """True when dressing a candidate in `vgears` would push an
-        effect-carrier chest past its cap for this roster (party_state
-        `carriers`). Naked variants never are."""
+    def _variant_capped(self, state, weapon, vgears):
+        """True when dressing `weapon` in `vgears` would push a
+        DISCRETIONARY effect-carrier chest past its cap for this roster
+        (party_state `carriers`). The weapon's identity chest and naked
+        variants never are."""
         carriers = state.get("carriers")
         if not carriers or not vgears:
             return False
         caps = self.carrier_caps()
         for x in vgears:
-            for eff in self._item_effects.get(x) or []:
-                if eff in caps and carriers.get(eff, 0) >= caps[eff]:
+            effs = [e for e in (self._item_effects.get(x) or [])
+                    if e in caps]
+            if not effs or self._identity_chest(weapon, x):
+                continue
+            for eff in effs:
+                if carriers.get(eff, 0) >= caps[eff]:
                     return True
         return False
 
@@ -2038,7 +2078,7 @@ class Engine:
                 "counts": counts, "ns_max": ns_max,
                 # carrier quota (2026-09-03): what this roster already
                 # wears of each capped effect-carrier chest
-                "carriers": self._carrier_counts(gears)}
+                "carriers": self._carrier_counts(party, gears)}
 
     def _marg_fit_from(self, s, extra, s_floor=None, extra_floor=None):
         """Marginal fitness of adding effective caps `extra` to effective
@@ -2305,9 +2345,14 @@ class Engine:
         best = None
         extras = self._combo_extras(weapon)
         dressed = self._dressed_extras(weapon)
-        for vkey, vgears in self.kit_variants(weapon):
-            if self._variant_capped(state, vgears):
+        variants = self.kit_variants(weapon)
+        v0_capped = self._variant_capped(state, weapon, variants[0][1])
+        fallback = self._variant_fallback.get(weapon) or ()
+        for vkey, vgears in variants:
+            if self._variant_capped(state, weapon, vgears):
                 continue   # carrier quota: this chest is spoken for
+            if vkey in fallback and not v0_capped:
+                continue   # cap fallback only
             dext = dressed[vkey]
             for i in range(len(extras)):
                 val, d_fit, d_syn = self._combo_score_dressed(
@@ -3255,6 +3300,8 @@ class Engine:
         extras = self._combo_extras(w)
         dressed = self._dressed_extras(w)
         variants = self.kit_variants(w)
+        v0_capped = self._variant_capped(state, w, variants[0][1])
+        fallback = self._variant_fallback.get(w) or ()
         for i in range(len(extras)):
             # predicate feasibility is per COMBO only — kit variants never
             # change predicate contributions (predicates are weapon/combo
@@ -3267,8 +3314,10 @@ class Engine:
                 if need > slots_left_after:
                     continue
             for vkey, vgears in variants:
-                if self._variant_capped(state, vgears):
+                if self._variant_capped(state, w, vgears):
                     continue   # carrier quota: this chest is spoken for
+                if vkey in fallback and not v0_capped:
+                    continue   # cap fallback only
                 val, d_fit, d_syn = self._combo_score_dressed(
                     state, w, i, extras[i], dressed[vkey][i], vkey)
                 if best is None or val > best[0]:
@@ -3623,7 +3672,7 @@ class Engine:
                             if ok:
                                 caps = self.carrier_caps()
                                 for eff, c in self._carrier_counts(
-                                        cand_gears).items():
+                                        cand_party, cand_gears).items():
                                     if c > caps.get(eff, 10 ** 9):
                                         ok = False
                                         break
