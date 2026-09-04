@@ -1781,3 +1781,53 @@ uses the curated catalog's tier-free display name and strips the tier
 adjective otherwise. Evidence still open: the harvest has no fights
 under 20 players, so a party under 10 has NO kit evidence at all; a
 gang-band doctrine needs a lower discovery floor.
+
+## Harvest refresh (2026-09-04) — "lets do the data collection"
+
+Two explicit network runs of `pipeline/sample_parties.py` (official
+gameinfo kill events for detail, albionbb for discovery; the cache is
+per battle and idempotent): 120 new ZvZ battles at the 25-player floor,
+then 150 small-scale battles at an 8-player floor — the first fights
+under 25 players in the corpus. Cache 270 -> 523 battles (8 to 400
+players; 133 under 25), builds 9,569 -> 14,706.
+
+| | before | after |
+|---|---|---|
+| builds from killer parties of 10+ (the doctrine population) | 5,162 | 7,085 |
+| builds from parties under 10 (future gang doctrine; unused today) | 1,557 | 2,990 |
+| victims, no party record (excluded) | 2,850 | 4,631 |
+| weapons with 30+ ZvZ builds | 39 | 50 |
+| weapons with 10-29 | 36 | 36 |
+| weapons with 1-9 | 47 | 40 |
+| weapons with none | 15 | 11 |
+
+Still without ZvZ evidence: Arctic Staff, Black Hands, Crystal Reaper,
+Divine Staff, Forcepulse Bracers, Great Cursed Staff, Ironroot Staff,
+Pike, Skystrider Bow, Trinity Spear, Twin Slayers — they dress from the
+seat aggregate, fail-closed. Carrioncaller gained evidence (it was at
+zero and the forge fields it).
+
+Audit on the refreshed population: ten seeded weapons 55/61 = 90%
+exact, 0 bad; all 50 weapons with >= 30 ZvZ builds 283/313 = 90%, one
+miss (an uncurated plain sandwich). One rule tightened en route: the
+SEAT-level archetype (the fallback for slots a weapon's own chain
+lacks) fronted Greataxe's cape with the brawler seat's Smuggler Cape
+(101/156) over the weapon's own Lymhurst (19/41); a seat archetype now
+fronts only slots where the weapon has no counts of its own. Spot
+checks: Mace 136 ZvZ builds, Judicator 61 / Guardian 32, v0 Judicator
+Helmet + Judicator Armor + Mistcaller (the larger population moves the
+off-hand off Leering Cane); Lifecurse 95, Demon 69; Oathkeepers 98,
+Demon 77; Grailseeker 23 in ZvZ parties, Knight 8 / Assassin Jacket 6,
+still Hunter Shoes by count.
+
+Re-pins for corpus size: R18 (Polehammer Knight 45/103), R25 (identity
+Demon wearers unlimited; DISCRETIONARY Demon wearers within cap — the
+kite-20 now fields Incubus in Demon as the one discretionary wearer
+beside Lifecurse's identity Demon). Gates: golden 59/59, forge 38/38,
+roles 26/26, validation modes 25/25, parity 60/60 + embed, layout, node,
+provenance, builds, interactions, patch history, lint. **tier2 v4
+actual_gear role-level 74% (17/23), PASS at the 70% gate but down from
+87%** — the candidate's doctrine kit changed under the larger harvest
+and three role-level hits moved; under the anti-circularity rule this is
+a finding for the owner, not a retune (the blind-test comps must never
+drive doctrine or scoring against their own gate results).

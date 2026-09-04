@@ -572,9 +572,10 @@ def t_weapon_doctrine():
     # COUNT as weapon evidence (Judicator/Guardian were the modal 1H-Mace
     # chests and the exclusion left Graveguard), so slot totals grew;
     # [35, 82] once the same day's PARTY-SIZE FLOOR kept only builds from
-    # killer parties of 10+ (the Grailseeker gank-kit case).
+    # killer parties of 10+ (the Grailseeker gank-kit case); [45, 103]
+    # after the 2026-09-04 harvest (523 battles, 14,706 builds).
     ph = (top["gear"] == "ARMOR_PLATE_SET2"
-          and top["doctrine"] == "weapon" and top["doctrine_n"] == [35, 82])
+          and top["doctrine"] == "weapon" and top["doctrine_n"] == [45, 103])
     hoj = e.kit_options("2H_HAMMER_AVALON", top_n=10)
     demon = next((o for o in hoj["options"]["armor"]
                   if o["gear"] == "ARMOR_PLATE_HELL"), None)
@@ -850,8 +851,12 @@ def t_carrier_quota():
                  if g and "ARMOR_PLATE_HELL" in g]
     life = ("MAIN_CURSEDSTAFF_UNDEAD" not in rk["party"]
             or "MAIN_CURSEDSTAFF_UNDEAD" in demon_ids)
-    identity_ok = life and all(ek._identity_chest(w, "ARMOR_PLATE_HELL")
-                               for w in demon_ids)
+    # identity wearers are unlimited; DISCRETIONARY Demon wearers (a
+    # weapon whose builds wear it under half the time) stay within cap
+    disc = [w for w in demon_ids
+            if not ek._identity_chest(w, "ARMOR_PLATE_HELL")]
+    identity_ok = life and len(disc) <= ek.carrier_caps().get(
+        "reflect_shell", 10 ** 9)
     st = e.party_state(r["party"], r["combos"], r["gears"])
     # a carrier v0 weapon offers a non-carrier alternative variant
     kv = e.kit_variants("2H_DUALMACE_AVALON")   # Oathkeepers: Demon 84%

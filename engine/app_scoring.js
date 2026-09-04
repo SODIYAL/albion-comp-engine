@@ -1250,13 +1250,13 @@
        pick follows what real players field — weapon's own conditional-
        modal build first, seat fallback per slot; the archetype item
        moves to the front of its slot's options. */
-    var arch = {};
+    var arch = {}, archSeat = {};
     if (role !== null) {
       var wbArch = (seatRec.kit_weapon_build || {})[weapon] || {};
       var sbArch = seatRec.kit_build || {};
       var aslot;
-      for (aslot in sbArch) arch[aslot] = sbArch[aslot];
-      for (aslot in wbArch) arch[aslot] = wbArch[aslot];
+      for (aslot in sbArch) { arch[aslot] = sbArch[aslot]; archSeat[aslot] = true; }
+      for (aslot in wbArch) { arch[aslot] = wbArch[aslot]; delete archSeat[aslot]; }
     }
     var bySlot = {}, k;
     for (k in this.gear) {
@@ -1386,7 +1386,9 @@
         return gearCmp(a, b);
       });
       var av = arch[slot];
-      if (av && (topCount === 0 || inBand(av[0]))) {
+      /* seat archetype = fallback only where the weapon has no counts
+         (mirrors engine.py, 2026-09-04) */
+      if (av && (topCount === 0 || (!archSeat[slot] && inBand(av[0])))) {
         /* the observed build leads the slot (overlay ruling) -- never
            from outside the evidence band */
         for (var ai = 0; ai < ranked.length; ai++) {

@@ -1443,12 +1443,14 @@ class Engine:
         seat_class = seat_rec.get("class")
         # observed-build archetype (2026-09-01): weapon's own first,
         # seat fallback per slot
-        arch = {}
+        arch, arch_seat = {}, set()
         if role is not None:
             wb = (seat_rec.get("kit_weapon_build") or {}).get(weapon) or {}
             sb = seat_rec.get("kit_build") or {}
             for slot in set(wb) | set(sb):
                 arch[slot] = wb.get(slot) or sb.get(slot)
+                if slot not in wb:
+                    arch_seat.add(slot)   # seat-level fallback archetype
         by_slot = {}
         for k, g in self.gear.items():
             by_slot.setdefault(g.get("slot") or "other", []).append(k)
@@ -1578,8 +1580,13 @@ class Engine:
             # the observed build leads the slot (overlay ruling) — but
             # never from outside the evidence band: a chain pick the
             # weapon's builds wear less than half as often as the modal
-            # item stays where the count put it (2026-09-03)
-            if a and (not wslot or in_band(a[0])):
+            # item stays where the count put it (2026-09-03). The SEAT
+            # archetype is a fallback for slots the weapon's own chain
+            # lacks: where the weapon has its own counts, its modal item
+            # wins (2026-09-04 harvest audit: Greataxe wore the brawler
+            # seat's Smuggler Cape over its own Lymhurst 19/41).
+            if a and (not wslot or (slot not in arch_seat
+                                    and in_band(a[0]))):
                 for i, rr in enumerate(ranked):
                     if rr["gear"] == a[0]:
                         rr["observed_build"] = [a[1], a[2]]

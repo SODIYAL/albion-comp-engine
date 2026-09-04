@@ -82,9 +82,14 @@ per build (offline re-analysis) and doctrine/quotas/audit read parties
 of 10+ only, which removed the gank kits (Grailseeker in Hunter Shoes
 + Demon Cape + Poison Potion) that 2-8 man parties inside big battles
 had been contributing. Audit on that population: 92% exact on ten
-seeded weapons and on all 39 weapons with >= 30 ZvZ builds. Open: no
-harvested fights under 20 players and no style split — lower the
-discovery floor and label rosters before trusting small-scale kits.
+seeded weapons and on all 39 weapons with >= 30 ZvZ builds. 2026-09-04
+harvest refresh: 523 battles / 14,706 builds, 7,085 from killer
+parties of 10+ (50 weapons with 30+ ZvZ builds, 11 with none), plus the
+first 133 fights under 25 players (2,990 small-party builds, stamped
+but unused until a gang-band doctrine exists). Audit holds at 90% on
+the larger population; tier2 v4 sits at 74% (17/23), a reported drop
+from 87% left for the owner under anti-circularity. Open: no style
+split — label rosters before trusting style-specific kits.
 
 ## Owner bug round (2026-09-03)
 
