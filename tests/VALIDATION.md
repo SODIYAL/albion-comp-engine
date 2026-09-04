@@ -1877,3 +1877,31 @@ audit remain a reviewed, in-session step, so a bad night can never ship.
 Logs land in `pipeline/out/fetch_logs/` (gitignored). Remove with
 `Unregister-ScheduledTask -TaskName "CompForge overnight harvest"`.
 The machine has to be on (or wake) at 03:00 for it to run.
+
+## Style x size roster evidence pass (2026-09-04, owner: "ok lets do this now")
+
+`pipeline/audit_style_rosters.py` (report-only): 1,690 killer-party
+rosters of 10+ from the harvest, deduped by member overlap as the sampler
+does, labelled by `comp_identity` (brawl 487 / clap_kite 305 / kite 211 /
+brawl_clap 150 / clap 109 / split 428), kits joined by player name
+(doctrine v0 where absent: 30-50% of members, counted), measured DRESSED
+per style x band as distinct rosters. Board:
+`docs/superpowers/findings/2026-09-04-style-roster-evidence.md`; numbers
+and the blind-round answers: `out/style_roster_evidence.json`.
+
+What it says, before any ruling: full 20-stacks are scarce per style
+(5-54 distinct; most rosters are 10-19); at 20 the harvested medians run
+1.5-2x the current targets on tankiness, sustained dps, healing and
+burst AoE, and 3-10x on mobility, engage, peel, disengage and silence
+against the contents fitted on a handful of comps (castle, roads,
+faction war); ranged_presence sits at 0.6x for brawl (expected) and
+1.4x for clap_kite; anti_zone and execute are ~0 everywhere (nobody
+fields them). Structure at 20: 5 frontline / 3-5 support / 8-9 dps /
+3-4 healers across styles, 2 engage + 1-2 stoppers, a 5-6 ranged-AoE
+core for clap/clap_kite/kite against 1-1.5 for brawl, 10-12 pierce
+carriers.
+
+STANDING: nothing in the build reads this; the identity labels get a
+blind round (ten rosters in the board) before any number is proposed for
+a ruling; the evidence is content-agnostic and winner-biased and the
+board says so.
