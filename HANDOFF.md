@@ -94,8 +94,13 @@ tier2 v4 sits at 74% (17/23), a reported drop from 87% left for the
 owner under anti-circularity. **The harvest is now an OVERNIGHT TASK**:
 `pipeline/harvest_overnight.ps1`, Windows scheduled task "CompForge
 overnight harvest", daily 03:00 — it only harvests; rebuild + gates +
-audit + commit stay in-session. Open: no style split — label rosters
-before trusting style-specific kits.
+audit + commit stay in-session. The style x size ROSTER EVIDENCE pass
+shipped the same evening (`pipeline/audit_style_rosters.py`, board in
+`docs/superpowers/findings/2026-09-04-style-roster-evidence.md`): 1,690
+labelled rosters measured dressed per style x band against every
+template — proposals for the owner's ruling after the blind round,
+never applied by the build. Open: the blind round on the identity
+labels, then the ruling.
 
 ## Owner bug round (2026-09-03)
 
