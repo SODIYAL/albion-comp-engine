@@ -1905,3 +1905,36 @@ STANDING: nothing in the build reads this; the identity labels get a
 blind round (ten rosters in the board) before any number is proposed for
 a ruling; the evidence is content-agnostic and winner-biased and the
 board says so.
+
+### Blind round 1 on the harvested rosters (2026-09-04; owner: "dont take my word as final, its just what i think their comp is leaning towards")
+
+Ten killer-party rosters of 15+ from the style x size evidence board,
+weapons only, owner's call collected BEFORE the engine's label was read.
+
+| # | size | owner | engine (strength) | melee share | bomb share |
+|---|---|---|---|---|---|
+| 1 | 17 | clap_kite | clap_kite (leaning) | 48% | 50% |
+| 2 | 20 | brawl_clap | brawl (leaning) | 76% | 40% |
+| 3 | 17 | brawl | brawl (strong) | 100% | 46% |
+| 4 | 19 | kite | brawl_clap (leaning) | 50% | 53% |
+| 5 | 18 | brawl | brawl (strong) | 88% | 55% |
+| 6 | 18 | clap | clap_kite (leaning) | 42% | 41% |
+| 7 | 20 | clap_kite | brawl_clap (leaning) | 47% | 46% |
+| 8 | 17 | clap_kite | clap (strong) | 12% | 51% |
+| 9 | 15 | clap | clap (leaning) | 21% | 52% |
+| 10 | 15 | clap | clap_kite (leaning) | 24% | 40% |
+
+Exact agreement 4/10; 9/10 within one step on the brawl-clap-kite axis
+(the one far miss is #4). The three strong labels all agreed. Every
+miss is a HYBRID-HALF call, and they point two ways: the engine's kite
+half (evade points per member) fired where the owner saw pure clap (#6,
+#10) and stayed silent where the owner saw clap-kite (#8); the clap half
+did not fire on a 76%-melee roster whose bombs are Galatine pairs (#2);
+and in the mid band the commit-posture tiebreak chose brawl_clap where
+the owner read clap-kite (#7). Hypotheses for the owner, NOT rules: (a)
+melee AoE bomb lines (Galatine) count toward the clap half; (b) the kite
+half is a RANGED-COMPOSITION property (bows, ranged sustained pressure)
+rather than an evade-points property. No threshold moved. Next: the
+owner's definitions on (a) and (b), then a second round of twenty
+rosters before the identity thresholds are touched and before any
+number on the board is proposed for a ruling.
