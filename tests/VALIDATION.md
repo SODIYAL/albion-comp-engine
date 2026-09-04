@@ -1938,3 +1938,57 @@ rather than an evade-points property. No threshold moved. Next: the
 owner's definitions on (a) and (b), then a second round of twenty
 rosters before the identity thresholds are touched and before any
 number on the board is proposed for a ruling.
+
+
+### Rulings from blind round 1 (owner, 2026-09-04) and what they became
+
+Owner, on the clap half: "i have seen galatine pair be used as a solo
+bomb in a big fight but realmbreaker is usually used with the rest of
+the team hitting together so realmbreaker would be part of clap but
+galatine is not, it needs to charge its q stacks before it hits."
+Owner, on the kite half: "what makes a comp kite is basically them
+having tanks which can throw enemies away, bedrock mace, hoarfrost staff
+without having to commit their body into a fight. it also needs to have
+range dps so team can hit the enemy from range and keep moving ... it
+would also most likely have an occult staff to increase team movement
+... icicle staff to slow enemy in large spaces ... purity robe for that
+extra knockback."
+
+Both landed as DERIVATIONS, no weapon lists:
+
+- **Clap half.** A conditional-payload carrier (the 2026-08-26 ramp
+  fact, now stamped into `style_fit`) has its burst AoE counted as
+  SUSTAINED in comp_identity. Galatine, Clarent, Carving, Ursine, Rift
+  Glaive, Kingmaker, Greataxe, Ravenstrike, Infinity Blade stop being
+  bombs; Realmbreaker (instant leap-slam) stays one.
+- **Kite half = STANDOFF TOOLS.** New derived fact `style_fit.standoff_e`:
+  an E, damage-bearing or not, delivered at range (ground/enemy target,
+  cast range >= 9) that displaces (knockback_displace >= 2) and commits
+  nothing (no engage / clump / pull-catch, no self-move, no heal). Six
+  weapons carry it: Bedrock Mace, Hoarfrost Staff, Demonic Staff,
+  Brimstone, Infernal, Phantom Twinblade. (Bedrock's E is a utility E, so
+  the damage-only delivery read had it as MELEE — the fact is read from
+  every E bundle.) The hybrid needs standoff tools at scale: max(2, n/10
+  half-up) — two at 20, two at 10 (clap10 with its one Bedrock stays the
+  owner's pure clap); a pure kite needs at least one; a ranged core with
+  none must commit to its bomb and is a clap whatever its bomb share
+  (rosters 6 and 10). In the mid band the kite half outranks the
+  commit-posture tiebreak (roster 7). The old evade-points read
+  (IDENTITY_HYBRID_EVADE) is retired.
+- Occult's team speed, Icicle's slow and Purity's knockback are in the
+  owner's picture but not in the derivation yet: no capability separates
+  team-speed from self-mobility, and gear is not passed to
+  comp_identity. Recorded for the next round.
+
+Re-score with the rulings in: fixtures blap / clap10 / kite10 / DH P1 /
+20v20 all hold; the round moves 4/10 -> 7/10 exact. The three misses are
+explained and recorded: 2 (brawl_clap called, brawl read) follows the
+owner's own Galatine ruling; 4 (kite called, clap_kite read) is the
+mid-band hybrid with three Bedrocks; 8 (clap_kite called, clap read) has
+one Bedrock where a 17-stack needs two. T34 pins the facts, the five
+fixtures and the seven agreed rosters. Label distribution on the 1,690
+harvested rosters after the rulings: brawl 487, clap 320, clap_kite
+216, kite 185, brawl_clap 43, split 439 — brawl_clap collapsed from 150
+because Galatine-style bombs no longer make a clap half and the kite
+half now takes mid-band hybrids first. Board regenerated. Gates all
+green; tier2 v4 74% (17/23) unchanged.

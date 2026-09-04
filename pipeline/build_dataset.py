@@ -597,6 +597,39 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                     e_group = True
         if not slots and caps.get(AOE_CLAIM):
             e_group = True                       # flat-sheet fallback
+        # STANDOFF E (owner ruling 2026-09-04, blind round 1: "what makes
+        # a comp kite is basically them having tanks which can throw
+        # enemies away, bedrock mace, hoarfrost staff, without having to
+        # commit their body into a fight"): an E, damage-bearing or not,
+        # that is delivered at range (ground/enemy target, cast range >=
+        # RANGED_MIN_CASTRANGE), DISPLACES (knockback_displace >= 2) and
+        # commits nothing — no engage / clump / pull-catch, no self-move,
+        # no heal payload. Derived from the E's own facts; comp_identity
+        # counts these bodies as the KITE HALF of a hybrid (replacing the
+        # old evade-points read that misfired both ways in the round).
+        # Bedrock Mace's E is a utility E, so the damage-only e_reach
+        # above never saw its 18 m reach — this pass reads every bundle.
+        standoff_e = False
+        for i, slot in enumerate(slots):
+            if i >= len(names) or names[i] != "e":
+                continue
+            for j, bundle in enumerate(slot):
+                if bundle.get("knockback_displace", 0) < 2:
+                    continue
+                if (bundle.get("engage") or bundle.get("clump_create")
+                        or bundle.get("mobility")
+                        or bundle.get("heal_burst")
+                        or bundle.get("heal_sustain")
+                        or bundle.get("catch", 0) >= 4):
+                    continue
+                facts = spell_index.get(spells[i][j]) or {}
+                try:
+                    reach = float(facts.get("cast_range") or 0)
+                except (TypeError, ValueError):
+                    reach = 0.0
+                if (reach >= RANGED_MIN_CASTRANGE
+                        and facts.get("target") in RANGED_DELIVERY):
+                    standoff_e = True
         delivery = ("ranged" if attackrange >= RANGED_MIN_CASTRANGE
                     else "flex" if e_reach >= RANGED_MIN_CASTRANGE
                     else "melee")
@@ -726,7 +759,13 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                             fit[s][b] = verdict
 
         w["style_fit"] = {"delivery": delivery, "damage_scale": scale,
-                          "utility_carrier": utility_carrier, "fit": fit}
+                          "utility_carrier": utility_carrier, "fit": fit,
+                          # identity facts (owner 2026-09-04): a ramp-
+                          # dependent bomb is not a clap bomb (Galatine
+                          # "needs to charge its q stacks before it hits"),
+                          # a standoff E is a kite tool
+                          "conditional_payload": conditional_payload,
+                          "standoff_e": standoff_e}
         rec = {"delivery": delivery, "damage_scale": scale,
                "utility_carrier": utility_carrier,
                "damage_pts": dmg_pts, "utility_pts": util_pts,
@@ -738,6 +777,7 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                "e_ramp": e_ramp,
                "e_channel_nonranged": e_channel_nonranged,
                "conditional_payload": conditional_payload,
+               "standoff_e": standoff_e,
                "fit": fit, "basis": basis}
         if override_rec:
             rec["override"] = override_rec

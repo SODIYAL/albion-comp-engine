@@ -99,8 +99,14 @@ shipped the same evening (`pipeline/audit_style_rosters.py`, board in
 `docs/superpowers/findings/2026-09-04-style-roster-evidence.md`): 1,690
 labelled rosters measured dressed per style x band against every
 template — proposals for the owner's ruling after the blind round,
-never applied by the build. Open: the blind round on the identity
-labels, then the ruling.
+never applied by the build. Blind round 1 (ten harvested rosters) was
+graded the same day: 4/10 -> 7/10 exact after two owner rulings landed
+as derivations — the clap half excludes ramp-dependent bombs
+(`style_fit.conditional_payload` now in the dataset) and the kite half
+is STANDOFF TOOLS (`style_fit.standoff_e`: Bedrock Mace, Hoarfrost,
+Demonic Staff and the meteor bombs; hybrid needs max(2, n/10), kite at
+least one, none = clap). T34 pins it; VALIDATION.md carries the quotes.
+Open: a second round of twenty rosters, then the ruling on the numbers.
 
 ## Owner bug round (2026-09-03)
 

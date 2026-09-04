@@ -2746,7 +2746,16 @@ class Engine:
     # comps: DH P1 / 20v20 (aoe ~.53, evade ~2.6/member) read hybrid;
     # pure clap10 (evade 1.8) and pure kite10 (aoe .26) do not.
     IDENTITY_HYBRID_AOE = 0.40     # bomb share at/above -> clap half present
-    IDENTITY_HYBRID_EVADE = 2.0    # mobility+disengage pts/member -> kite half
+    IDENTITY_HYBRID_EVADE = 2.0    # (retired 2026-09-04; kept for the record)
+    # KITE HALF (owner ruling 2026-09-04, blind round 1): standoff tools —
+    # bodies whose E throws enemies away from range without committing
+    # (style_fit `standoff_e`: Bedrock Mace, Hoarfrost, Demonic Staff, the
+    # meteor knockback bombs) — for the hybrid, one per
+    # IDENTITY_KITE_TOOLS_PER members (half-up, never fewer than two); for
+    # a pure kite, at least one; none at all -> clap. The
+    # old evade-points read fired on pure claps carrying Occult/Witchwork
+    # mobility and missed the Bedrock-and-bows comps the owner calls kite.
+    IDENTITY_KITE_TOOLS_PER = 10
     IDENTITY_STYLES = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
 
     def _style_fit_of(self, weapon):
@@ -2780,6 +2789,7 @@ class Engine:
         recommendation order, or the forge."""
         n = len(party)
         melee = ranged = aoe = sus = st = commit = evade = 0.0
+        kite_tools = 0
         carriers = {"melee": [], "ranged": []}
         carrier_count = {}
         n_carrier_members = 0
@@ -2788,7 +2798,17 @@ class Engine:
         for i, w in enumerate(party):
             caps = self._raw_member_caps(w, combos[i] if combos else None)
             dmg = sum(caps.get(c, 0) for c in self.DAMAGE_CAPS_PROFILE)
-            aoe += caps.get("burst_aoe", 0)
+            sf0 = self._style_fit_of(w) or {}
+            # CLAP HALF (owner 2026-09-04): a ramp-dependent bomb is not a
+            # bomb — "galatine ... needs to charge its q stacks before it
+            # hits; realmbreaker ... would be part of clap" — so a
+            # conditional-payload carrier's burst AoE counts as sustained
+            if sf0.get("conditional_payload"):
+                sus += caps.get("burst_aoe", 0)
+            else:
+                aoe += caps.get("burst_aoe", 0)
+            if sf0.get("standoff_e"):
+                kite_tools += 1
             sus += caps.get("sustained_dps", 0)
             st += caps.get("burst_st", 0) + caps.get("execute", 0)
             commit += caps.get("engage", 0) + caps.get("clump_create", 0)
@@ -2821,10 +2841,20 @@ class Engine:
                 "sustained": sus / dmg_tot if dmg_tot else 0.0,
                 "single_target": st / dmg_tot if dmg_tot else 0.0}
         posture = commit / (commit + evade) if commit + evade else 0.5
+        # the HYBRID needs standoff tools at scale (two at 20, half-up per
+        # ten members, never fewer than two: clap10 with its one Bedrock
+        # stays the owner's pure clap); a KITE needs at least one — a
+        # ranged core with no tank that throws enemies away has to commit
+        # to its bomb and is a clap whatever its bomb share (blind round 1
+        # rosters 6 and 10)
+        kite_min = max(2, self._half_up(n / self.IDENTITY_KITE_TOOLS_PER))
+        kite_half = kite_tools >= kite_min
+        kite_any = kite_tools >= 1
         band = self._fit_band()
         out = {"style": None, "label": "", "strength": None,
                "melee_share": mel, "ranged_share": 1.0 - mel if tot else 0.5,
                "carriers": carriers, "mode": mode, "posture": posture,
+               "kite_tools": kite_tools, "kite_tools_min": kite_min,
                "band": band, "members": [], "conflicts": []}
         style_names = {k: (v.get("name") or k)
                        for k, v in (self.data.get("styles") or {}).items()}
@@ -2837,7 +2867,12 @@ class Engine:
                               else "leaning")
             out["label"] = f"{style_names.get('brawl', 'Brawl')} — melee ball"
         elif mel <= self.IDENTITY_RANGED_CORE:
-            clap = mode["aoe"] >= self.IDENTITY_CLAP_AOE
+            # a ranged core with NO standoff tools has to commit to its
+            # bomb — it is a clap whatever its bomb share (owner 2026-09-04,
+            # blind round 1 rosters 6 and 10: "clap" at 41% and 30% bomb
+            # share with commit tanks and no Bedrock/Hoarfrost); kite needs
+            # the tanks that throw enemies away
+            clap = mode["aoe"] >= self.IDENTITY_CLAP_AOE or not kite_any
             out["style"] = "clap" if clap else "kite"
             out["strength"] = ("strong"
                               if mel <= 1.0 - self.IDENTITY_STRONG
@@ -2854,8 +2889,7 @@ class Engine:
                 out["archetype"] = "bomb_squad"
                 out["label"] = ("Bomb squad — off-timer artillery "
                                 "(clap detachment)")
-            elif (mode["aoe"] >= self.IDENTITY_HYBRID_AOE
-                    and evade_pm >= self.IDENTITY_HYBRID_EVADE):
+            elif mode["aoe"] >= self.IDENTITY_HYBRID_AOE and kite_half:
                 out["style"] = "clap_kite"
                 out["strength"] = "leaning"
                 out["label"] = (f"{style_names.get('clap_kite', 'Clap-Kite')}"
@@ -2864,6 +2898,14 @@ class Engine:
                 out["label"] = (f"{style_names.get('clap', 'Clap')} — ranged bomb"
                                 if clap else
                                 f"{style_names.get('kite', 'Kite')} — ranged pressure")
+        elif mode["aoe"] >= self.IDENTITY_HYBRID_AOE and kite_half:
+            # mid band with standoff tools: the kite half outranks the
+            # commit-posture tiebreak (blind round 1, roster 7 — two
+            # Bedrock Maces at 47% melee read brawl_clap, owner clap_kite)
+            out["style"] = "clap_kite"
+            out["strength"] = "leaning"
+            out["label"] = (f"{style_names.get('clap_kite', 'Clap-Kite')}"
+                            " — bomb from range, throw them back")
         elif (mode["aoe"] >= self.IDENTITY_BC_AOE
               and posture >= self.IDENTITY_BC_POSTURE):
             out["style"] = "brawl_clap"
@@ -2893,10 +2935,9 @@ class Engine:
                     out["label"] = (f"{style_names.get('brawl', 'Brawl')}"
                                     " — melee ball")
                 else:
-                    clap = mode["aoe"] >= self.IDENTITY_CLAP_AOE
-                    evade_pm2 = evade / n if n else 0.0
-                    if (mode["aoe"] >= self.IDENTITY_HYBRID_AOE
-                            and evade_pm2 >= self.IDENTITY_HYBRID_EVADE):
+                    clap = (mode["aoe"] >= self.IDENTITY_CLAP_AOE
+                            or not kite_any)
+                    if mode["aoe"] >= self.IDENTITY_HYBRID_AOE and kite_half:
                         out["style"] = "clap_kite"
                         out["strength"] = "leaning"
                         out["label"] = (f"{style_names.get('clap_kite', 'Clap-Kite')}"

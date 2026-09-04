@@ -61579,6 +61579,7 @@
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -61608,6 +61609,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -61753,6 +61755,7 @@
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -61782,6 +61785,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -61932,6 +61936,7 @@
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -61961,6 +61966,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -62141,6 +62147,7 @@
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -62170,6 +62177,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -62341,6 +62349,7 @@
    "source": "sheets/axe_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "melee",
     "fit": {
@@ -62370,6 +62379,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -62572,6 +62582,7 @@
    "source": "sheets/realmbreaker.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -62601,6 +62612,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -62748,6 +62760,7 @@
    "source": "sheets/bow.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
     "fit": {
@@ -62777,6 +62790,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -62962,6 +62976,7 @@
    "source": "sheets/mistpiercer.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -62991,6 +63006,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -63156,6 +63172,7 @@
    "source": "sheets/bow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -63185,6 +63202,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -63359,6 +63377,7 @@
    "source": "sheets/wailing_bow.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -63388,6 +63407,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -63588,6 +63608,7 @@
    "source": "sheets/bow_of_badon.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -63617,6 +63638,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -63783,6 +63805,7 @@
    "source": "sheets/claws.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
     "fit": {
@@ -63812,6 +63835,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -64002,6 +64026,7 @@
    "source": "sheets/sword_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "flex",
     "fit": {
@@ -64031,6 +64056,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -64228,6 +64254,7 @@
    "source": "sheets/kingmaker.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "melee",
     "fit": {
@@ -64257,6 +64284,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -64451,6 +64479,7 @@
    "source": "sheets/carving_sword.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -64480,6 +64509,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -64675,6 +64705,7 @@
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -64704,6 +64735,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -64861,6 +64893,7 @@
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
     "fit": {
@@ -64890,6 +64923,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -65063,6 +65097,7 @@
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -65092,6 +65127,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -65254,6 +65290,7 @@
    "source": "sheets/siegebow.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
     "fit": {
@@ -65283,6 +65320,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -65446,6 +65484,7 @@
    "source": "sheets/energy_shaper.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -65475,6 +65514,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -65641,6 +65681,7 @@
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -65670,6 +65711,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -65818,6 +65860,7 @@
    "source": "sheets/damnation.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -65847,6 +65890,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -66006,6 +66050,7 @@
    "source": "sheets/dagger_pair.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
     "fit": {
@@ -66035,6 +66080,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -66206,6 +66252,7 @@
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
     "fit": {
@@ -66235,6 +66282,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -66410,6 +66458,7 @@
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
     "fit": {
@@ -66439,6 +66488,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -66604,6 +66654,7 @@
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -66633,6 +66684,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": true,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -66714,6 +66766,7 @@
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -66743,6 +66796,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -66926,6 +66980,7 @@
    "source": "sheets/double_bladed_staff.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -66955,6 +67010,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -67154,6 +67210,7 @@
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -67183,6 +67240,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": true,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -67352,6 +67410,7 @@
    "source": "sheets/bear_paws.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
     "fit": {
@@ -67381,6 +67440,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -67543,6 +67603,7 @@
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -67572,6 +67633,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -67733,6 +67795,7 @@
    "source": "sheets/boltcasters.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
     "fit": {
@@ -67762,6 +67825,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -67999,6 +68063,7 @@
    "source": "sheets/forge_hammers.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -68028,6 +68093,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -68175,6 +68241,7 @@
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -68204,6 +68271,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -68373,6 +68441,7 @@
    "source": "sheets/sword_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "melee",
     "fit": {
@@ -68402,6 +68471,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -68556,6 +68626,7 @@
    "source": "sheets/deathgivers.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
     "fit": {
@@ -68585,6 +68656,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -68753,6 +68825,7 @@
    "source": "sheets/dualswords.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -68782,6 +68855,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -68901,6 +68975,7 @@
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -68930,6 +69005,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -69053,6 +69129,7 @@
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -69082,6 +69159,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -69210,6 +69288,7 @@
    "source": "sheets/fire_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -69239,6 +69318,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -69367,6 +69447,7 @@
    "source": "sheets/fire_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -69396,6 +69477,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": true,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -69534,6 +69616,7 @@
    "source": "sheets/dawnsong.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -69563,6 +69646,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -69715,6 +69799,7 @@
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -69744,6 +69829,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -69949,6 +70035,7 @@
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -69978,6 +70065,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -70182,6 +70270,7 @@
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -70211,6 +70300,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -70414,6 +70504,7 @@
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -70443,6 +70534,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -70572,6 +70664,7 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
     "fit": {
@@ -70601,6 +70694,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -70757,6 +70851,7 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -70786,6 +70881,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -70957,6 +71053,7 @@
    "source": "sheets/axe_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
     "fit": {
@@ -70986,6 +71083,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -71162,6 +71260,7 @@
    "source": "sheets/axe_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -71191,6 +71290,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -71397,6 +71497,7 @@
    "source": "sheets/great_hammer.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -71426,6 +71527,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -71644,6 +71746,7 @@
    "source": "sheets/hand_of_justice.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -71673,6 +71776,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -71885,6 +71989,7 @@
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -71914,6 +72019,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -72138,6 +72244,7 @@
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -72167,6 +72274,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -72329,6 +72437,7 @@
    "source": "sheets/spirithunter.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
     "fit": {
@@ -72358,6 +72467,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -72459,6 +72569,7 @@
    "source": "sheets/great_holy.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -72488,6 +72599,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -72589,6 +72701,7 @@
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -72618,6 +72731,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -72712,6 +72826,7 @@
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -72741,6 +72856,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -72835,6 +72951,7 @@
    "source": "sheets/holy_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -72864,6 +72981,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -73065,6 +73183,7 @@
    "source": "sheets/permafrost_prism.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -73094,6 +73213,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -73304,6 +73424,7 @@
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -73333,6 +73454,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -73450,6 +73572,7 @@
    "source": "sheets/fire_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -73479,6 +73602,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": true,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -73614,6 +73738,7 @@
    "source": "sheets/blazing_staff.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -73643,6 +73768,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -73807,6 +73933,7 @@
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -73836,6 +73963,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -73985,6 +74113,7 @@
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
     "fit": {
@@ -74014,6 +74143,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -74248,6 +74378,7 @@
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -74277,6 +74408,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -74460,6 +74592,7 @@
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "flex",
     "fit": {
@@ -74489,6 +74622,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -74712,6 +74846,7 @@
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -74741,6 +74876,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -74942,6 +75078,7 @@
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -74971,6 +75108,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -75153,6 +75291,7 @@
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "melee",
     "fit": {
@@ -75182,6 +75321,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -75385,6 +75525,7 @@
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
     "fit": {
@@ -75414,6 +75555,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -75597,6 +75739,7 @@
    "source": "sheets/battle_bracers.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
     "fit": {
@@ -75626,6 +75769,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -75850,6 +75994,7 @@
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -75879,6 +76024,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -76009,6 +76155,7 @@
    "source": "sheets/longbow.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -76038,6 +76185,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -76193,6 +76341,7 @@
    "source": "sheets/bow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
     "fit": {
@@ -76222,6 +76371,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -76375,6 +76525,7 @@
    "source": "sheets/mace_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -76404,6 +76555,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -76584,6 +76736,7 @@
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -76613,6 +76766,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -76766,6 +76920,7 @@
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -76795,6 +76950,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -76966,6 +77122,7 @@
    "source": "sheets/nature_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -76995,6 +77152,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -77162,6 +77320,7 @@
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -77191,6 +77350,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -77406,6 +77566,7 @@
    "source": "sheets/polehammer.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -77435,6 +77596,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -77615,6 +77777,7 @@
    "source": "sheets/quarterstaff.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "flex",
     "fit": {
@@ -77644,6 +77807,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -77842,6 +78006,7 @@
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -77871,6 +78036,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -78056,6 +78222,7 @@
    "source": "sheets/grovekeeper.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -78085,6 +78252,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -78234,6 +78402,7 @@
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -78263,6 +78432,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -78425,6 +78595,7 @@
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -78454,6 +78625,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -78609,6 +78781,7 @@
    "source": "sheets/axe_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
     "fit": {
@@ -78638,6 +78811,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -78820,6 +78994,7 @@
    "source": "sheets/axe_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
     "fit": {
@@ -78849,6 +79024,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -79056,6 +79232,7 @@
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -79085,6 +79262,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -79288,6 +79466,7 @@
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
     "fit": {
@@ -79317,6 +79496,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -79509,6 +79689,7 @@
    "source": "sheets/hellspawn.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -79538,6 +79719,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -79728,6 +79910,7 @@
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -79757,6 +79940,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -79939,6 +80123,7 @@
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
     "fit": {
@@ -79968,6 +80153,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -80171,6 +80357,7 @@
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
     "fit": {
@@ -80200,6 +80387,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -80389,6 +80577,7 @@
    "source": "sheets/rootbound.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -80418,6 +80607,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -80614,6 +80804,7 @@
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -80643,6 +80834,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -80796,6 +80988,7 @@
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -80825,6 +81018,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -80946,6 +81140,7 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
     "fit": {
@@ -80975,6 +81170,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": true,
@@ -81150,6 +81346,7 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -81179,6 +81376,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -81378,6 +81576,7 @@
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -81407,6 +81606,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -81576,6 +81776,7 @@
    "source": "sheets/bow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -81605,6 +81806,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -81767,6 +81969,7 @@
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -81796,6 +81999,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": true,
@@ -81944,6 +82148,7 @@
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -81973,6 +82178,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -82122,6 +82328,7 @@
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -82151,6 +82358,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -82338,6 +82546,7 @@
    "source": "sheets/witchwork.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -82367,6 +82576,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -82536,6 +82746,7 @@
    "source": "sheets/battleaxe.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "flex",
     "fit": {
@@ -82565,6 +82776,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": false,
@@ -82712,6 +82924,7 @@
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -82741,6 +82954,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -82887,6 +83101,7 @@
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -82916,6 +83131,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -83089,6 +83305,7 @@
    "source": "sheets/rotcaller.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -83118,6 +83335,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -83284,6 +83502,7 @@
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -83313,6 +83532,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -83456,6 +83676,7 @@
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
     "fit": {
@@ -83485,6 +83706,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": false,
@@ -83661,6 +83883,7 @@
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
     "fit": {
@@ -83690,6 +83913,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -83816,6 +84040,7 @@
    "source": "sheets/fire_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -83845,6 +84070,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -83992,6 +84218,7 @@
    "source": "sheets/fire_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -84021,6 +84248,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -84149,6 +84377,7 @@
    "source": "sheets/fire_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -84178,6 +84407,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -84379,6 +84609,7 @@
    "source": "sheets/froststaff.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
     "fit": {
@@ -84408,6 +84639,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -84585,6 +84817,7 @@
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -84614,6 +84847,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -84817,6 +85051,7 @@
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -84846,6 +85081,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": true,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -85048,6 +85284,7 @@
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -85077,6 +85314,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -85166,6 +85404,7 @@
    "source": "sheets/holy_staff.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -85195,6 +85434,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -85289,6 +85529,7 @@
    "source": "sheets/holy_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -85318,6 +85559,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -85399,6 +85641,7 @@
    "source": "sheets/lifetouch.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -85428,6 +85671,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -85564,6 +85808,7 @@
    "source": "sheets/mace_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -85593,6 +85838,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -85771,6 +86017,7 @@
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -85800,6 +86047,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -85983,6 +86231,7 @@
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "flex",
     "fit": {
@@ -86012,6 +86261,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -86183,6 +86433,7 @@
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -86212,6 +86463,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -86354,6 +86606,7 @@
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -86383,6 +86636,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -86553,6 +86807,7 @@
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -86582,6 +86837,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -86721,6 +86977,7 @@
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
     "fit": {
@@ -86750,6 +87007,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -86935,6 +87193,7 @@
    "source": "sheets/bloodletter.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "flex",
     "fit": {
@@ -86964,6 +87223,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": false,
@@ -87116,6 +87376,7 @@
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
     "fit": {
@@ -87145,6 +87406,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": true,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -87339,6 +87601,7 @@
    "source": "sheets/sword_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -87368,6 +87631,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -87542,6 +87806,7 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
     "fit": {
@@ -87571,6 +87836,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": false,
@@ -87751,6 +88017,7 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -87780,6 +88047,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -87944,6 +88212,7 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -87973,6 +88242,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,
@@ -88138,6 +88408,7 @@
    "source": "sheets/sword_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
     "fit": {
@@ -88167,6 +88438,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": true
    },
    "two_handed": false,
@@ -88314,6 +88586,7 @@
    "source": "sheets/sword_line.yaml",
    "status": "curated",
    "style_fit": {
+    "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "melee",
     "fit": {
@@ -88343,6 +88616,7 @@
       "trio": "fits"
      }
     },
+    "standoff_e": false,
     "utility_carrier": false
    },
    "two_handed": false,

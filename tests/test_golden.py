@@ -1022,6 +1022,68 @@ def run():
           f"carving={carving in k_pool} longbow={'2H_LONGBOW' in k_pool} "
           f"core_min={(k20.get('ranged_aoe_core') or {}).get('min')}")
 
+    # T34 — THE KITE HALF IS STANDOFF TOOLS, THE CLAP HALF IS INSTANT
+    # (owner rulings 2026-09-04, blind round 1 on harvested rosters):
+    # "what makes a comp kite is basically them having tanks which can
+    # throw enemies away, bedrock mace, hoarfrost staff, without having to
+    # commit their body into a fight"; "galatine ... needs to charge its q
+    # stacks before it hits ... realmbreaker would be part of clap".
+    # Derived, no hand lists: style_fit.standoff_e = an E delivered at
+    # range that displaces and commits nothing (no engage/clump/pull, no
+    # self-move, no heal); style_fit.conditional_payload = the 2026-08-26
+    # ramp fact. comp_identity: a ramp-dependent bomb counts as sustained;
+    # the clap-kite hybrid needs standoff tools at scale (max(2, n/10
+    # half-up)); a pure kite needs at least one; a ranged core with none
+    # is a clap whatever its bomb share. Pins: the five owner-graded
+    # fixtures (blap brawl, clap10 clap, kite10 kite, DH P1 + 20v20
+    # clap-kite) and the seven rosters the owner and the engine agreed on
+    # in the round (2, 4 and 8 stay recorded misses: 2 follows the owner's
+    # own Galatine ruling, 4 is kite vs clap-kite in the mid band, 8 has
+    # one Bedrock where a 17-stack needs two).
+    e34 = Engine(content="territory_defense", size=20)
+    sf34 = lambda w: e34.weapons[w].get("style_fit") or {}
+    facts_ok = (sf34("MAIN_ROCKMACE_KEEPER").get("standoff_e") is True
+                and sf34("MAIN_FROSTSTAFF_KEEPER").get("standoff_e") is True
+                and sf34("2H_DEMONICSTAFF").get("standoff_e") is True
+                and not sf34("2H_HAMMER_AVALON").get("standoff_e")
+                and not sf34("2H_AXE_AVALON").get("standoff_e")
+                and not sf34(HALLOWFALL).get("standoff_e")
+                and sf34("2H_DUALSCIMITAR_UNDEAD").get("conditional_payload") is True
+                and sf34("2H_AXE_AVALON").get("conditional_payload") is False)
+    round1 = {
+        1: ('clap_kite', 'clap_kite', ['MAIN_ROCKMACE_KEEPER', '2H_FIRE_RINGPAIR_AVALON', '2H_DEMONICSTAFF', '2H_ARCANESTAFF', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_HAMMER_AVALON', 'MAIN_FROSTSTAFF_KEEPER', 'MAIN_MACE_HELL', '2H_DUALMACE_AVALON', '2H_ICECRYSTAL_UNDEAD', '2H_POLEHAMMER', '2H_GLAIVE_CRYSTAL', '2H_KNUCKLES_SET3', '2H_HARPOON_HELL']),
+        2: ('brawl_clap', None, ['2H_NATURESTAFF_HELL', 'MAIN_RAPIER_MORGANA', '2H_CLEAVER_HELL', '2H_HOLYSTAFF_HELL', '2H_DUALSCIMITAR_UNDEAD', '2H_DUALSCIMITAR_UNDEAD', '2H_ARCANESTAFF', '2H_HAMMER', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_MACE', '2H_CLAYMORE_AVALON', 'MAIN_CURSEDSTAFF_UNDEAD', '2H_LONGBOW', 'MAIN_MACE', '2H_DUALMACE_AVALON', '2H_AXE_AVALON', '2H_SHAPESHIFTER_SET2', 'MAIN_CURSEDSTAFF_CRYSTAL', '2H_KNUCKLES_SET3']),
+        3: ('brawl', 'brawl', ['2H_NATURESTAFF_HELL', 'MAIN_DAGGER_HELL', '2H_HOLYSTAFF_CRYSTAL', '2H_QUARTERSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_MACE', '2H_ENIGMATICORB_MORGANA', '2H_DUALMACE_AVALON', '2H_DUALMACE_AVALON', '2H_AXE_AVALON', '2H_AXE_AVALON', '2H_AXE_AVALON', '2H_AXE_AVALON', '2H_AXE_AVALON', '2H_SHAPESHIFTER_SET2', '2H_HAMMER_CRYSTAL']),
+        4: ('kite', None, ['MAIN_ROCKMACE_KEEPER', 'MAIN_ROCKMACE_KEEPER', 'MAIN_ROCKMACE_KEEPER', '2H_DAGGER_KATAR_AVALON', '2H_FIRE_RINGPAIR_AVALON', 'MAIN_NATURESTAFF_CRYSTAL', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_HAMMER_AVALON', '2H_MACE', '2H_DUALMACE_AVALON', '2H_ICECRYSTAL_UNDEAD', '2H_ICECRYSTAL_UNDEAD', '2H_AXE_AVALON', '2H_GLAIVE_CRYSTAL', '2H_GLAIVE_CRYSTAL', 'MAIN_CURSEDSTAFF_CRYSTAL', '2H_KNUCKLES_SET3', 'MAIN_ARCANESTAFF_UNDEAD']),
+        5: ('brawl', 'brawl', ['2H_KNUCKLES_SET2', '2H_COMBATSTAFF_MORGANA', '2H_COMBATSTAFF_MORGANA', '2H_CURSEDSTAFF_MORGANA', '2H_ENIGMATICSTAFF', '2H_HOLYSTAFF_HELL', '2H_DUALSCIMITAR_UNDEAD', '2H_DUALSCIMITAR_UNDEAD', '2H_DUALSCIMITAR_UNDEAD', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_MACE', 'MAIN_MACE', 'MAIN_NATURESTAFF', '2H_DUALMACE_AVALON', '2H_AXE_AVALON', '2H_SHAPESHIFTER_SET2']),
+        6: ('clap', 'clap', ['MAIN_ARCANESTAFF', 'MAIN_RAPIER_MORGANA', '2H_CURSEDSTAFF_MORGANA', '2H_FIRE_RINGPAIR_AVALON', '2H_FIRE_RINGPAIR_AVALON', 'MAIN_NATURESTAFF_CRYSTAL', '2H_ARCANESTAFF', 'MAIN_HOLYSTAFF_AVALON', '2H_HAMMER_AVALON', '2H_ENIGMATICORB_MORGANA', '2H_DUALMACE_AVALON', '2H_ARCANESTAFF_HELL', '2H_ICECRYSTAL_UNDEAD', '2H_POLEHAMMER', '2H_AXE_AVALON', '2H_KNUCKLES_SET3', '2H_HARPOON_HELL', 'MAIN_ARCANESTAFF_UNDEAD']),
+        7: ('clap_kite', 'clap_kite', ['MAIN_ARCANESTAFF', 'MAIN_ROCKMACE_KEEPER', 'MAIN_ROCKMACE_KEEPER', '2H_FIRE_RINGPAIR_AVALON', '2H_HOLYSTAFF_CRYSTAL', '2H_ARCANESTAFF', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_HAMMER_AVALON', '2H_DUALMACE_AVALON', '2H_ARCANESTAFF_HELL', '2H_ICECRYSTAL_UNDEAD', '2H_POLEHAMMER', '2H_NATURESTAFF_KEEPER', '2H_AXE_AVALON', '2H_GLAIVE_CRYSTAL', 'MAIN_CURSEDSTAFF_CRYSTAL', '2H_KNUCKLES_SET3', '2H_HARPOON_HELL', 'MAIN_ARCANESTAFF_UNDEAD']),
+        8: ('clap_kite', None, ['MAIN_ARCANESTAFF', 'MAIN_ROCKMACE_KEEPER', '2H_INFERNOSTAFF_MORGANA', '2H_CURSEDSTAFF_MORGANA', '2H_SHAPESHIFTER_KEEPER', '2H_HOLYSTAFF_HELL', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_MACE', '2H_ARCANESTAFF_HELL', '2H_ICECRYSTAL_UNDEAD', '2H_NATURESTAFF_KEEPER', '2H_AXE_AVALON', '2H_BOW_HELL', '2H_BOW_HELL', 'MAIN_ARCANESTAFF_UNDEAD', 'MAIN_ARCANESTAFF_UNDEAD']),
+        9: ('clap', 'clap', ['MAIN_ROCKMACE_KEEPER', '2H_FIRE_RINGPAIR_AVALON', '2H_SHAPESHIFTER_KEEPER', '2H_HOLYSTAFF_HELL', 'MAIN_NATURESTAFF_CRYSTAL', '2H_ARCANESTAFF', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_MACE_HELL', 'MAIN_CURSEDSTAFF_UNDEAD', '2H_DUALMACE_AVALON', '2H_ICECRYSTAL_UNDEAD', '2H_POLEHAMMER', '2H_SHAPESHIFTER_SET2', '2H_KNUCKLES_SET3', 'MAIN_ARCANESTAFF_UNDEAD']),
+        10: ('clap', 'clap', ['2H_CURSEDSTAFF_MORGANA', '2H_ARCANESTAFF', '2H_ARCANESTAFF', '2H_HAMMER', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_HAMMER_AVALON', 'MAIN_CURSEDSTAFF_UNDEAD', 'MAIN_MACE', '2H_ARCANESTAFF_HELL', '2H_ICECRYSTAL_UNDEAD', '2H_HOLYSTAFF_UNDEAD', '2H_GLAIVE_CRYSTAL', 'MAIN_CURSEDSTAFF_CRYSTAL']),
+    }
+    round_ok, round_bad = 0, []
+    for rid, (_owner, agreed_style, ids) in sorted(round1.items()):
+        if agreed_style is None:
+            continue
+        got = e34.comp_identity(ids).get("style")
+        if got == agreed_style:
+            round_ok += 1
+        else:
+            round_bad.append(f"r{rid}:{got}")
+    fx = {"DH_P1": (dh1, "clap_kite"), "20v20": (c20, "clap_kite"),
+          "blap": (blap, "brawl"), "clap10": (clap10, "clap"),
+          "kite10": (kite10, "kite")}
+    fx_bad = [k for k, (p, want) in fx.items()
+              if Engine(content="blackzone_roam", size=len(p))
+              .comp_identity(p).get("style") != want]
+    check("T34 identity rulings 2026-09-04: standoff_e / conditional_payload "
+          "facts derive as ruled; five graded fixtures hold; the seven "
+          "agreed blind-round rosters read as the owner called them",
+          facts_ok and not fx_bad and round_ok == 7,
+          f"facts={facts_ok} fixtures_bad={fx_bad} round={round_ok}/7 "
+          f"bad={round_bad}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

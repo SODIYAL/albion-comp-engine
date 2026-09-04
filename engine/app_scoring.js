@@ -2525,7 +2525,8 @@
       IDENTITY_BC_AOE = 0.45, IDENTITY_BC_POSTURE = 0.45,
       IDENTITY_CARRIER_MIN = 4, IDENTITY_MIN_MEMBERS = 3,
       IDENTITY_RANGED_ATTACK = 9.0,
-      IDENTITY_HYBRID_AOE = 0.40, IDENTITY_HYBRID_EVADE = 2.0;
+      IDENTITY_HYBRID_AOE = 0.40, IDENTITY_HYBRID_EVADE = 2.0,
+      IDENTITY_KITE_TOOLS_PER = 10;   /* standoff tools per members (2026-09-04) */
   var IDENTITY_STYLES = { brawl: true, clap: true, kite: true,
                           brawl_clap: true, clap_kite: true };
 
@@ -2548,7 +2549,7 @@
        comp_identity). */
     var n = party.length;
     var melee = 0.0, ranged = 0.0, aoe = 0.0, sus = 0.0, st = 0.0,
-        commit = 0.0, evade = 0.0;
+        commit = 0.0, evade = 0.0, kiteTools = 0;
     var carriers = { melee: [], ranged: [] };
     var carrierCount = {};
     var nCarrierMembers = 0;
@@ -2560,7 +2561,12 @@
       var dmg = 0;
       for (var di = 0; di < DAMAGE_CAPS_PROFILE.length; di++)
         dmg += caps[DAMAGE_CAPS_PROFILE[di]] || 0;
-      aoe += caps.burst_aoe || 0;
+      var sf0 = this._styleFitOf(w) || {};
+      /* clap half: a ramp-dependent bomb counts as sustained; standoff
+         E = kite tool (owner 2026-09-04, mirrors engine.py) */
+      if (sf0.conditional_payload) sus += caps.burst_aoe || 0;
+      else aoe += caps.burst_aoe || 0;
+      if (sf0.standoff_e) kiteTools += 1;
       sus += caps.sustained_dps || 0;
       st += (caps.burst_st || 0) + (caps.execute || 0);
       commit += (caps.engage || 0) + (caps.clump_create || 0);
@@ -2589,11 +2595,15 @@
                  sustained: dmgTot ? sus / dmgTot : 0.0,
                  single_target: dmgTot ? st / dmgTot : 0.0 };
     var posture = (commit + evade) ? commit / (commit + evade) : 0.5;
+    var kiteMin = Math.max(2, Math.floor(n / IDENTITY_KITE_TOOLS_PER + 0.5));
+    var kiteHalf = kiteTools >= kiteMin;   /* hybrid: tools at scale */
+    var kiteAny = kiteTools >= 1;          /* kite: at least one thrower */
     var band = this._fitBand();
     var out = { style: null, label: "", strength: null,
                 melee_share: mel, ranged_share: tot ? 1.0 - mel : 0.5,
                 carriers: carriers, mode: mode, posture: posture,
-                band: band, members: [], conflicts: [] };
+                band: band, members: [], conflicts: [],
+                kite_tools: kiteTools, kite_tools_min: kiteMin };
     var styles = this.data.styles || {};
     var sname = function (k, fb) {
       return (styles[k] && styles[k].name) || fb;
@@ -2607,7 +2617,9 @@
       out.strength = mel >= IDENTITY_STRONG ? "strong" : "leaning";
       out.label = sname("brawl", "Brawl") + " — melee ball";
     } else if (mel <= IDENTITY_RANGED_CORE) {
-      clap = mode.aoe >= IDENTITY_CLAP_AOE;
+      /* a ranged core with no standoff tools must commit: clap (owner
+         2026-09-04, mirrors engine.py) */
+      clap = mode.aoe >= IDENTITY_CLAP_AOE || !kiteAny;
       out.style = clap ? "clap" : "kite";
       out.strength = mel <= 1.0 - IDENTITY_STRONG ? "strong" : "leaning";
       /* Bomb-squad archetype + clap-kite hybrid (owner, blind label
@@ -2620,8 +2632,7 @@
       if (clap && topCarrier >= 3 && topCarrier * 2 >= nCarrierMembers) {
         out.archetype = "bomb_squad";
         out.label = "Bomb squad — off-timer artillery (clap detachment)";
-      } else if (mode.aoe >= IDENTITY_HYBRID_AOE &&
-                 evadePm >= IDENTITY_HYBRID_EVADE) {
+      } else if (mode.aoe >= IDENTITY_HYBRID_AOE && kiteHalf) {
         out.style = "clap_kite";
         out.strength = "leaning";
         out.label = sname("clap_kite", "Clap-Kite") +
@@ -2630,6 +2641,13 @@
         out.label = clap ? sname("clap", "Clap") + " — ranged bomb"
                          : sname("kite", "Kite") + " — ranged pressure";
       }
+    } else if (mode.aoe >= IDENTITY_HYBRID_AOE && kiteHalf) {
+      /* mid band with standoff tools: kite half outranks the posture
+         tiebreak (mirrors engine.py, blind round 1 roster 7) */
+      out.style = "clap_kite";
+      out.strength = "leaning";
+      out.label = sname("clap_kite", "Clap-Kite") +
+                  " -- bomb from range, throw them back";
     } else if (mode.aoe >= IDENTITY_BC_AOE && posture >= IDENTITY_BC_POSTURE) {
       out.style = "brawl_clap";
       out.strength = "leaning";
@@ -2656,10 +2674,8 @@
           out.strength = "leaning";
           out.label = sname("brawl", "Brawl") + " — melee ball";
         } else {
-          clap = mode.aoe >= IDENTITY_CLAP_AOE;
-          var evadePm2 = n ? evade / n : 0.0;
-          if (mode.aoe >= IDENTITY_HYBRID_AOE &&
-              evadePm2 >= IDENTITY_HYBRID_EVADE) {
+          clap = mode.aoe >= IDENTITY_CLAP_AOE || !kiteAny;
+          if (mode.aoe >= IDENTITY_HYBRID_AOE && kiteHalf) {
             out.style = "clap_kite";
             out.strength = "leaning";
             out.label = sname("clap_kite", "Clap-Kite") +

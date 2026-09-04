@@ -70,6 +70,8 @@ SEATS = ("engage_tank", "stopper_tank", "off_tank", "shield_support",
          "dive_cleanup")
 PREDS = ("ranged_aoe_core", "primary_heal", "pierce", "anti_heal",
          "engage_tank", "stopper_tank", "shield_support")
+# blind round 1 (2026-09-04, graded by the owner; pinned in test_golden T34)
+GRADED_BATTLES = [1439261314, 1439270346, 1439324226, 1439336518, 1439380503, 1442341916, 1442399167, 1442450338, 1443149088]
 
 
 def strip(t):
@@ -284,10 +286,18 @@ def main():
                 for c in caps}
             board[f"{style}|{band_key}"] = entry
 
-    # ---- blind-round form: ten unlabelled rosters, answers kept apart
+    # ---- blind-round form: unlabelled rosters, answers kept apart.
+    # Sampled from EVERY roster of 15+ in a deterministic order (never from
+    # the labelled subset — round 1's form silently re-sampled when the
+    # rulings changed the labels, and the pin had to be restored from git).
+    # Round 1's ten graded battles are excluded; round 2 is twenty.
     rng = random.Random(args.seed)
-    labelled = [r for r in rosters if r["style"] and r["size"] >= 15]
-    form = rng.sample(labelled, min(10, len(labelled)))
+    graded = set(GRADED_BATTLES)
+    pool = sorted((r for r in rosters if r["size"] >= 15
+                   and r["battle"] not in graded),
+                  key=lambda r: (r["battle"], tuple(sorted(
+                      m["weapon"] for m in r["members"]))))
+    form = rng.sample(pool, min(20, len(pool)))
     disp = lambda w: e.weapons[w]["display_name"]
     blind = [{"id": i + 1, "size": r["size"],
               "weapons": sorted(disp(m["weapon"]) for m in r["members"])}
@@ -377,8 +387,8 @@ def main():
                       f"{en['proposal'][c]['target']} -> {en['proposal'][c]['soft']} | "
                       + " | ".join(cells) + " |")
         md.append("")
-    md += ["## Blind round (owner: call the style BEFORE reading the engine's)", "",
-           "Ten harvested rosters of 15+, weapons only. Answers are in "
+    md += ["## Blind round 2 (owner: call the style BEFORE reading the engine's)", "",
+           "Twenty harvested rosters of 15+ (round 1's ten excluded), weapons only. Answers are in "
            "`out/style_roster_evidence.json` under `blind_answers`; do not open "
            "them before calling.", ""]
     for b in blind:

@@ -67,6 +67,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 15,
    "weak_group_e": false
@@ -116,6 +117,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 7,
    "weak_group_e": false
@@ -163,6 +165,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 11,
    "weak_group_e": false
@@ -212,6 +215,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 12,
    "weak_group_e": true
@@ -261,6 +265,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 11,
    "weak_group_e": false
@@ -310,6 +315,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 19,
    "weak_group_e": false
@@ -359,6 +365,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 8,
    "weak_group_e": false
@@ -408,6 +415,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 8,
    "weak_group_e": false
@@ -457,6 +465,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 8,
    "weak_group_e": false
@@ -506,6 +515,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 8,
    "weak_group_e": false
@@ -555,6 +565,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 8,
    "weak_group_e": false
@@ -604,6 +615,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 20,
    "weak_group_e": false
@@ -653,6 +665,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 16,
    "weak_group_e": false
@@ -702,6 +715,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 12,
    "weak_group_e": false
@@ -751,6 +765,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 16,
    "weak_group_e": false
@@ -800,6 +815,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 16,
    "weak_group_e": false
@@ -849,6 +865,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 16,
    "weak_group_e": false
@@ -898,6 +915,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 14,
    "weak_group_e": false
@@ -947,6 +965,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 14,
    "weak_group_e": false
@@ -996,6 +1015,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 14,
    "weak_group_e": false
@@ -1045,6 +1065,7 @@
    },
    "nonstack_member": true,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 7,
    "weak_group_e": false
@@ -1094,6 +1115,7 @@
    },
    "nonstack_member": true,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 7,
    "weak_group_e": false
@@ -1143,6 +1165,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 14,
    "weak_group_e": false
@@ -1192,6 +1215,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 12,
    "weak_group_e": false
@@ -1241,6 +1265,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 12,
    "weak_group_e": false
@@ -1290,6 +1315,7 @@
    },
    "nonstack_member": true,
    "role_flexible": true,
+   "standoff_e": true,
    "utility_carrier": false,
    "utility_pts": 13,
    "weak_group_e": false
@@ -1337,6 +1363,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 2,
    "weak_group_e": false
@@ -1386,6 +1413,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 20,
    "weak_group_e": false
@@ -1435,6 +1463,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": true,
    "utility_carrier": false,
    "utility_pts": 10,
    "weak_group_e": true
@@ -1484,6 +1513,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 15,
    "weak_group_e": false
@@ -1533,6 +1563,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 16,
    "weak_group_e": false
@@ -1582,6 +1613,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 14,
    "weak_group_e": false
@@ -1631,6 +1663,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 22,
    "weak_group_e": false
@@ -1678,6 +1711,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 11,
    "weak_group_e": false
@@ -1727,6 +1761,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 8,
    "weak_group_e": false
@@ -1776,6 +1811,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 16,
    "weak_group_e": false
@@ -1825,6 +1861,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 12,
    "weak_group_e": false
@@ -1872,6 +1909,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 7,
    "weak_group_e": false
@@ -1919,6 +1957,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 7,
    "weak_group_e": false
@@ -1968,6 +2007,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 4,
    "weak_group_e": false
@@ -2017,6 +2057,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": true,
    "utility_carrier": false,
    "utility_pts": 4,
    "weak_group_e": false
@@ -2066,6 +2107,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 8,
    "weak_group_e": false
@@ -2113,6 +2155,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 18,
    "weak_group_e": false
@@ -2162,6 +2205,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 10,
    "weak_group_e": false
@@ -2211,6 +2255,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 8,
    "weak_group_e": false
@@ -2260,6 +2305,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 14,
    "weak_group_e": false
@@ -2307,6 +2353,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 10,
    "weak_group_e": false
@@ -2356,6 +2403,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 6,
    "weak_group_e": false
@@ -2405,6 +2453,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 11,
    "weak_group_e": false
@@ -2454,6 +2503,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 13,
    "weak_group_e": false
@@ -2501,6 +2551,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 28,
    "weak_group_e": false
@@ -2548,6 +2599,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 34,
    "weak_group_e": false
@@ -2595,6 +2647,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 21,
    "weak_group_e": false
@@ -2642,6 +2695,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 27,
    "weak_group_e": false
@@ -2694,6 +2748,7 @@
     "source": "Owner ruling 2026-08-24 (round 7, in-chat)."
    },
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 12,
    "weak_group_e": false
@@ -2746,6 +2801,7 @@
     "source": "Owner ruling 2026-08-23 (forge-quality session, in-chat)."
    },
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 6,
    "weak_group_e": false
@@ -2793,6 +2849,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 2,
    "weak_group_e": false
@@ -2840,6 +2897,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 4,
    "weak_group_e": false
@@ -2887,6 +2945,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 2,
    "weak_group_e": false
@@ -2936,6 +2995,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 14,
    "weak_group_e": false
@@ -2985,6 +3045,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 14,
    "weak_group_e": true
@@ -3034,6 +3095,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": true,
    "utility_carrier": false,
    "utility_pts": 6,
    "weak_group_e": false
@@ -3083,6 +3145,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 4,
    "weak_group_e": false
@@ -3130,6 +3193,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 10,
    "weak_group_e": false
@@ -3179,6 +3243,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 14,
    "weak_group_e": false
@@ -3228,6 +3293,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 21,
    "weak_group_e": false
@@ -3277,6 +3343,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 18,
    "weak_group_e": false
@@ -3331,6 +3398,7 @@
     "source": "Owner ruling 2026-08-24 (forge-quality session, in-chat)."
    },
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 18,
    "weak_group_e": false
@@ -3380,6 +3448,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 16,
    "weak_group_e": false
@@ -3429,6 +3498,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 16,
    "weak_group_e": false
@@ -3478,6 +3548,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 14,
    "weak_group_e": false
@@ -3527,6 +3598,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 20,
    "weak_group_e": false
@@ -3576,6 +3648,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 15,
    "weak_group_e": false
@@ -3625,6 +3698,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 4,
    "weak_group_e": false
@@ -3674,6 +3748,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 8,
    "weak_group_e": false
@@ -3721,6 +3796,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 22,
    "weak_group_e": false
@@ -3768,6 +3844,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 21,
    "weak_group_e": false
@@ -3815,6 +3892,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 2,
    "weak_group_e": false
@@ -3862,6 +3940,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 2,
    "weak_group_e": false
@@ -3909,6 +3988,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 2,
    "weak_group_e": false
@@ -3956,6 +4036,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 31,
    "weak_group_e": false
@@ -4005,6 +4086,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 30,
    "weak_group_e": false
@@ -4054,6 +4136,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 18,
    "weak_group_e": false
@@ -4101,6 +4184,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 28,
    "weak_group_e": false
@@ -4150,6 +4234,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 14,
    "weak_group_e": false
@@ -4197,6 +4282,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 16,
    "weak_group_e": false
@@ -4246,6 +4332,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 11,
    "weak_group_e": false
@@ -4295,6 +4382,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 11,
    "weak_group_e": false
@@ -4344,6 +4432,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 12,
    "weak_group_e": false
@@ -4393,6 +4482,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 10,
    "weak_group_e": false
@@ -4447,6 +4537,7 @@
     "source": "Owner ruling 2026-08-24 (round 7, in-chat)."
    },
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 10,
    "weak_group_e": false
@@ -4494,6 +4585,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 12,
    "weak_group_e": false
@@ -4543,6 +4635,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 12,
    "weak_group_e": false
@@ -4592,6 +4685,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 14,
    "weak_group_e": false
@@ -4639,6 +4733,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 10,
    "weak_group_e": false
@@ -4688,6 +4783,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 10,
    "weak_group_e": false
@@ -4737,6 +4833,7 @@
    },
    "nonstack_member": true,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 5,
    "weak_group_e": false
@@ -4784,6 +4881,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 11,
    "weak_group_e": false
@@ -4838,6 +4936,7 @@
     "source": "Owner ruling 2026-08-24 (round 7, in-chat)."
    },
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 14,
    "weak_group_e": false
@@ -4887,6 +4986,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 18,
    "weak_group_e": false
@@ -4941,6 +5041,7 @@
     "source": "Owner ruling 2026-08-24 (round 7, in-chat)."
    },
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 8,
    "weak_group_e": false
@@ -4988,6 +5089,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 2,
    "weak_group_e": false
@@ -5037,6 +5139,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 14,
    "weak_group_e": false
@@ -5086,6 +5189,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 13,
    "weak_group_e": false
@@ -5135,6 +5239,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 15,
    "weak_group_e": false
@@ -5189,6 +5294,7 @@
     "source": "Owner ruling 2026-08-23 (identity design session, in-chat)."
    },
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 11,
    "weak_group_e": false
@@ -5238,6 +5344,7 @@
    },
    "nonstack_member": true,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 5,
    "weak_group_e": false
@@ -5287,6 +5394,7 @@
    },
    "nonstack_member": true,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 5,
    "weak_group_e": false
@@ -5336,6 +5444,7 @@
    },
    "nonstack_member": true,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 11,
    "weak_group_e": false
@@ -5385,6 +5494,7 @@
    },
    "nonstack_member": true,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 9,
    "weak_group_e": false
@@ -5434,6 +5544,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 12,
    "weak_group_e": false
@@ -5483,6 +5594,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 12,
    "weak_group_e": false
@@ -5537,6 +5649,7 @@
     "source": "Owner ruling 2026-08-24 (round 7, in-chat)."
    },
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 4,
    "weak_group_e": false
@@ -5586,6 +5699,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 6,
    "weak_group_e": false
@@ -5635,6 +5749,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 4,
    "weak_group_e": false
@@ -5684,6 +5799,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 18,
    "weak_group_e": false
@@ -5731,6 +5847,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 12,
    "weak_group_e": false
@@ -5780,6 +5897,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": true,
    "utility_carrier": false,
    "utility_pts": 14,
    "weak_group_e": false
@@ -5827,6 +5945,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 21,
    "weak_group_e": false
@@ -5874,6 +5993,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 2,
    "weak_group_e": false
@@ -5921,6 +6041,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 8,
    "weak_group_e": false
@@ -5968,6 +6089,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 4,
    "weak_group_e": false
@@ -6015,6 +6137,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 17,
    "weak_group_e": false
@@ -6064,6 +6187,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 19,
    "weak_group_e": false
@@ -6113,6 +6237,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 23,
    "weak_group_e": false
@@ -6160,6 +6285,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 4,
    "weak_group_e": false
@@ -6207,6 +6333,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 2,
    "weak_group_e": false
@@ -6254,6 +6381,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 4,
    "weak_group_e": false
@@ -6301,6 +6429,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 2,
    "weak_group_e": false
@@ -6350,6 +6479,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 14,
    "weak_group_e": false
@@ -6397,6 +6527,7 @@
    },
    "nonstack_member": false,
    "role_flexible": true,
+   "standoff_e": true,
    "utility_carrier": false,
    "utility_pts": 21,
    "weak_group_e": false
@@ -6446,6 +6577,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 8,
    "weak_group_e": false
@@ -6493,6 +6625,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 12,
    "weak_group_e": false
@@ -6542,6 +6675,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 12,
    "weak_group_e": false
@@ -6591,6 +6725,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 12,
    "weak_group_e": false
@@ -6640,6 +6775,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": true,
    "utility_pts": 8,
    "weak_group_e": false
@@ -6689,6 +6825,7 @@
    },
    "nonstack_member": false,
    "role_flexible": false,
+   "standoff_e": false,
    "utility_carrier": false,
    "utility_pts": 6,
    "weak_group_e": false
