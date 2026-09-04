@@ -1196,16 +1196,36 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     with open(bi_path, encoding="utf-8") as f:
         by_content = (json.load(f) or {}).get("by_content") or {}
     KB_MIN_SEAT, KB_MIN_WEAPON = 3, 2
+    KB_MIN_PARTY = 10          # killer-party members; the group band floor
     kb_by_weapon, kb_armour = {}, {}
     kb_path = os.path.join(OUT, "party_rosters.json")
     if os.path.exists(kb_path):
         with open(kb_path, encoding="utf-8") as f:
             kb_doc = json.load(f) or {}
+        # PARTY-SIZE FLOOR (2026-09-03, owner: "this grailseeker build is
+        # a ganking build not a zvz build"): only builds from KILLER
+        # PARTIES of >= KB_MIN_PARTY members are group doctrine — the
+        # engine's group band starts at 10. Smaller parties inside a
+        # big battle are gankers/roamers (Grailseeker: Hunter Shoes 20
+        # of 32, Demon Cape 21 of 32, Poison Potion 13 of 32, most from
+        # 2-8 man parties); victims carry no party record and are
+        # excluded as unknown rather than guessed. Class shares for the
+        # uniform extension are counted over the same filtered builds.
+        cls_counts = {}
         for b in kb_doc.get("builds") or []:
             wk = b.get("weapon")
-            if wk and b.get("gear"):
-                kb_by_weapon.setdefault(wk, []).append(b["gear"])
-        kb_armour = kb_doc.get("weapon_armour") or {}
+            if not (wk and b.get("gear")):
+                continue
+            if (b.get("party_size") or 0) < KB_MIN_PARTY:
+                continue
+            kb_by_weapon.setdefault(wk, []).append(b["gear"])
+            ac = b.get("armour_class")
+            e = cls_counts.setdefault(wk, {"n": 0, "cloth": 0,
+                                           "leather": 0, "plate": 0})
+            e["n"] += 1
+            if ac in e:
+                e[ac] += 1
+        kb_armour = cls_counts
     # OBSERVED CHEST CLASS (2026-09-03 kit audit; owner: "lockdown what
     # people are actually wearing"): a weapon whose fielded builds wear
     # an armour class in >= KB_UNI_SHARE of >= KB_UNI_MIN fielded builds
@@ -1593,6 +1613,8 @@ def mine_carrier_quotas(gear, effect_map):
     buckets = {"20-59": {"builds": 0, "wearers": {}},
                "60+": {"builds": 0, "wearers": {}}}
     for b in doc.get("builds") or []:
+        if (b.get("party_size") or 0) < 10:
+            continue   # killer parties of 10+ only (see derive_kit_doctrine)
         size = size_of.get(b.get("battle"), 0)
         key = "60+" if size >= 60 else "20-59"
         bk = buckets[key]

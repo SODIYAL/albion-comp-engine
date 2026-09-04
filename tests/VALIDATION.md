@@ -1752,3 +1752,32 @@ modal piece, and the non-carrier chest a carrier weapon carries is a CAP
 FALLBACK that the evaluators offer only when v0 is actually capped. The
 forge no longer gets to out-think a weapon's standard kit with a rarity;
 it may only choose among kits people wear. Both ports, parity 60/60.
+
+**Addendum 2 (owner): "this grailseeker build is a ganking build not a
+zvz build. also the heavy crossbow has soldier boots".** Both traced to
+the harvest's evidence UNIT. The sampler keys on BATTLE size (20+
+players), which admits 2-8 man gank parties fighting inside a big
+battle; Grailseeker's 32 builds were mostly those (Hunter Shoes 20,
+Demon Cape 21, Poison Potion 13, fish food 14), and Heavy Crossbow's 12
+builds likewise. Fixed at the source: `sample_parties.py` now stamps
+each build with `party_size` (the largest deduped killer party carrying
+that player name in the battle; victims have no party record and stay
+unknown), re-derived OFFLINE from the cached kill events (`--pages 0`,
+no network). Coverage: 5,162 builds from killer parties of 10+, 1,557
+from smaller parties, 2,850 unknown (victims). Doctrine mining, the
+uniform extension, the carrier quotas, the audit harness and R24 all
+read the 10+ population only (`KB_MIN_PARTY = 10`, the engine's group
+band floor). Result: Grailseeker dresses from its 15 ZvZ-party builds
+(Assassin Hood, Knight Armor, Hunter Shoes 7/15, Smuggler Cape,
+Gigantify); Heavy Crossbow has 2 such builds and falls back to the
+ranged-AoE seat kit — fail-closed, as designed. Audit on the ZvZ
+population: ten seeded weapons 58/63 = 92% exact, 0 bad; all 39 weapons
+with >= 30 ZvZ builds 225/245 = 92%, 1 miss (an uncurated plain beef
+sandwich). R18 re-pinned to the smaller corpus (Polehammer Knight
+35/82). The "Novice's Soldier Boots" label was a display defect:
+`gear_lines.json` names a line by its lowest-tier example item, so a
+T2-first line read "Novice's" beside "Adept's" elsewhere; the page now
+uses the curated catalog's tier-free display name and strips the tier
+adjective otherwise. Evidence still open: the harvest has no fights
+under 20 players, so a party under 10 has NO kit evidence at all; a
+gang-band doctrine needs a lower discovery floor.

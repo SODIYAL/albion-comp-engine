@@ -219,6 +219,22 @@ def main():
     # render -> neutral empty tile, so an artless entry degrades gracefully
     # instead of silently vanishing from the picker.
     gear = gear_all
+    # Tile names (2026-09-03, "Novice's Soldier Boots"): gear_lines names a
+    # line by its lowest-tier example item, so a T2-first line wore a
+    # "Novice's" prefix beside "Adept's" everywhere else. The curated
+    # catalog's tier-free display_name wins where the key is curated;
+    # otherwise the tier adjective is stripped.
+    _tier_adj = ("Beginner's ", "Novice's ", "Journeyman's ", "Adept's ",
+                 "Expert's ", "Master's ", "Grandmaster's ", "Elder's ")
+    for _k, _g in gear.items():
+        _cur = (data.get("gear") or {}).get(_k) or {}
+        if _cur.get("display_name"):
+            _g["name"] = _cur["display_name"]
+        else:
+            for _adj in _tier_adj:
+                if (_g.get("name") or "").startswith(_adj):
+                    _g["name"] = _g["name"][len(_adj):]
+                    break
     # PAGE WEIGHT: embed weapon art only. Gear art is hotlinked from the render
     # service at display size instead, the same way spell icons and the
     # full-res dossier art already are. Gear is ~270 of the ~400 icons, so

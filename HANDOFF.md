@@ -76,9 +76,15 @@ share x size per fight-size bucket, enforced inside the search through
 builds) is admitted to its own tier and kit_match (`kit_weapon_uniform`);
 the archetype chain stops outside real evidence and the overlay stays
 inside the evidence band; ranking is count-first in both modes with the
-comp marginal reordering only the band. Open: no harvested fights under
-20 players and no style split — lower the discovery floor and label
-rosters before trusting small-scale kits.
+comp marginal reordering only the band. Same day, second pass: the evidence UNIT is now the
+KILLER PARTY, not the battle — `sample_parties.py` stamps `party_size`
+per build (offline re-analysis) and doctrine/quotas/audit read parties
+of 10+ only, which removed the gank kits (Grailseeker in Hunter Shoes
++ Demon Cape + Poison Potion) that 2-8 man parties inside big battles
+had been contributing. Audit on that population: 92% exact on ten
+seeded weapons and on all 39 weapons with >= 30 ZvZ builds. Open: no
+harvested fights under 20 players and no style split — lower the
+discovery floor and label rosters before trusting small-scale kits.
 
 ## Owner bug round (2026-09-03)
 

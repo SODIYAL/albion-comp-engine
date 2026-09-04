@@ -570,9 +570,11 @@ def t_weapon_doctrine():
     # `gear` or `doctrine` is not.
     # [63, 144] since the 2026-09-03 kit audit: effect-carrier chests
     # COUNT as weapon evidence (Judicator/Guardian were the modal 1H-Mace
-    # chests and the exclusion left Graveguard), so slot totals grew.
+    # chests and the exclusion left Graveguard), so slot totals grew;
+    # [35, 82] once the same day's PARTY-SIZE FLOOR kept only builds from
+    # killer parties of 10+ (the Grailseeker gank-kit case).
     ph = (top["gear"] == "ARMOR_PLATE_SET2"
-          and top["doctrine"] == "weapon" and top["doctrine_n"] == [63, 144])
+          and top["doctrine"] == "weapon" and top["doctrine_n"] == [35, 82])
     hoj = e.kit_options("2H_HAMMER_AVALON", top_n=10)
     demon = next((o for o in hoj["options"]["armor"]
                   if o["gear"] == "ARMOR_PLATE_HELL"), None)
@@ -784,7 +786,8 @@ def t_kit_audit_agreement():
                           encoding="utf-8"))
     by_w = {}
     for r in doc.get("builds") or []:
-        if r.get("weapon") in e.weapons and r.get("gear"):
+        if r.get("weapon") in e.weapons and r.get("gear") \
+                and (r.get("party_size") or 0) >= 10:   # ZvZ killer parties
             by_w.setdefault(r["weapon"], []).append(r["gear"])
     eligible = sorted(w for w, rs in by_w.items() if len(rs) >= 30)
     pick = _random.Random(20260903).sample(eligible, 10)

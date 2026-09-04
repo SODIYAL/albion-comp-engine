@@ -323,6 +323,22 @@ def analyze(known):
     for name in sorted(os.listdir(CACHE)):
         with open(os.path.join(CACHE, name), encoding="utf-8") as f:
             rec = json.load(f)
+        # PARTY SIZE per build (2026-09-03, the Grailseeker case): the
+        # battle floor admits 2-8 man gank parties fighting inside a
+        # 20+ battle, and their kits (Hunter Shoes, Demon Cape, Poison
+        # Potion) were being mined as ZvZ doctrine. The party the killer
+        # belonged to is the real evidence unit; a build inherits the
+        # size of the largest deduped party carrying its player name in
+        # this battle. Victims are in no party record -> None (honest:
+        # unknown, never guessed).
+        size_by_name = {}
+        for p in rec.get("parties", []):
+            n_members = len(p.get("members") or [])
+            for m in p.get("members") or []:
+                nm = m.get("name")
+                if nm:
+                    size_by_name[nm] = max(size_by_name.get(nm, 0),
+                                           n_members)
         for bd in rec.get("builds", []):
             g = bd.get("gear") or {}
             w = strip(g.get("MainHand"))
@@ -334,6 +350,7 @@ def analyze(known):
                 "armour_class": ac,
                 "item_power": bd.get("item_power"),
                 "seen_as": bd.get("seen_as"),
+                "party_size": size_by_name.get(bd.get("name")),
                 "slots_filled": bd.get("slots_filled"),
                 "gear": {s: strip(v) for s, v in g.items() if v}})
             e = by_weapon.setdefault(w, {"n": 0, "cloth": 0, "leather": 0,
