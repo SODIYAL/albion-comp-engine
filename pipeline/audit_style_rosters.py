@@ -167,8 +167,16 @@ def main():
 
     # ---- 1. label every roster with comp_identity (group band for 10+)
     label_counts = {}
+    gk = e_label.gear_key
     for r in rosters:
-        ci = e_label.comp_identity([m["weapon"] for m in r["members"]])
+        # the worn chests reach the label (a split is decided by the kits)
+        gears = []
+        for m in r["members"]:
+            kit = m["kit"] or {}
+            chest = gk(kit["Armor"]) if kit.get("Armor") else None
+            gears.append([chest] if chest and chest in e_label.gear else None)
+        ci = e_label.comp_identity([m["weapon"] for m in r["members"]], None,
+                                   gears)
         r["style"] = ci.get("style")
         r["strength"] = ci.get("strength")
         r["label"] = ci.get("label")

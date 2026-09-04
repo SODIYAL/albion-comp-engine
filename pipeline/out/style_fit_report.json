@@ -66,6 +66,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -116,6 +117,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -164,6 +166,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -214,6 +217,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -264,6 +268,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -314,6 +319,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -364,6 +370,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -414,6 +421,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -464,6 +472,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -514,6 +523,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -564,6 +574,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -614,6 +625,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -664,6 +676,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -714,6 +727,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -764,6 +778,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -814,6 +829,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -864,6 +880,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -914,6 +931,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -964,6 +982,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -1014,6 +1033,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -1064,6 +1084,7 @@
     }
    },
    "nonstack_member": true,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -1114,6 +1135,7 @@
     }
    },
    "nonstack_member": true,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -1164,6 +1186,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -1214,6 +1237,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -1264,6 +1288,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -1314,6 +1339,7 @@
     }
    },
    "nonstack_member": true,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": true,
    "utility_carrier": false,
@@ -1362,6 +1388,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -1412,6 +1439,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -1462,6 +1490,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": true,
    "utility_carrier": false,
@@ -1512,6 +1541,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -1562,6 +1592,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -1612,6 +1643,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -1662,6 +1694,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -1710,6 +1743,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -1760,6 +1794,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -1810,6 +1845,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -1860,6 +1896,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -1908,6 +1945,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -1956,6 +1994,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2006,6 +2045,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2056,6 +2096,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": true,
    "utility_carrier": false,
@@ -2106,6 +2147,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2154,6 +2196,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2204,6 +2247,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2254,6 +2298,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2304,6 +2349,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2352,6 +2398,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": true,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -2361,7 +2408,7 @@
   "2H_GLAIVE_CRYSTAL": {
    "attackrange": 4,
    "basis": "derived",
-   "conditional_payload": true,
+   "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
    "delivery": "flex",
@@ -2371,7 +2418,7 @@
     "SPEAR_AOE_FINISHER"
    ],
    "e_debuff_max": 0,
-   "e_ramp": true,
+   "e_ramp": false,
    "e_reach": 17.0,
    "e_utility_max": 2,
    "fit": {
@@ -2386,22 +2433,23 @@
      "trio": "fits"
     },
     "clap": {
-     "gang": "situational",
-     "group": "situational",
+     "gang": "fits",
+     "group": "fits",
      "trio": "fits"
     },
     "clap_kite": {
-     "gang": "situational",
-     "group": "situational",
+     "gang": "fits",
+     "group": "fits",
      "trio": "fits"
     },
     "kite": {
-     "gang": "situational",
-     "group": "situational",
+     "gang": "fits",
+     "group": "fits",
      "trio": "fits"
     }
    },
    "nonstack_member": false,
+   "ramp_free": true,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2452,6 +2500,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2502,6 +2551,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2550,6 +2600,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2598,6 +2649,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2646,6 +2698,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2694,6 +2747,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2747,6 +2801,7 @@
     "reason": "Owner ruling (round 7, refining the 2026-08-23 situational grade): \"spirithunter is great in clap and clap kite, just read the e ability, it has a massive pierce that enables the whole dps line.\" The dump text agrees: Corrupting Steel pierces THROUGH all enemies, cuts damage resistances of every enemy hit, and its trail cuts magical resistance further \u2014 the pierce lens's own capability, delivered line-wide. The derivation grades the weapon single-scale because the E's damage (80) is incidental; the E's JOB is the Pierce stage of the CLAP chain (engage-clump-pierce-burst), so clap and its clap_kite hybrid take it as a fit. Brawl/kite keep the derived situational grade \u2014 the killboard fields it inside the brawl-ball family too (68% of F1's cohorts), but the owner promoted only the clap halves.",
     "source": "Owner ruling 2026-08-24 (round 7, in-chat)."
    },
+   "ramp_free": true,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -2800,6 +2855,7 @@
     "reason": "Owner ruling (forge-quality blind round): \"great holy is not a good fit for clap, it has to stop moving and needs everyone to clump in place to heal with e. that's not good\" and \"great holy I feel isn't really that good of a weapon in general but I only see it being useful in like brawl situations.\" The derivation grades healers style-flexible; the E-first rule overrules that here \u2014 Holy Explosion anchors the party in place, the opposite of what clap's engage-bomb-reset and kite's never-take-the-fight delivery need. Brawl (and brawl_clap's grind half) keep it; trio bands gate nothing by the standing Phase C rule.",
     "source": "Owner ruling 2026-08-23 (forge-quality session, in-chat)."
    },
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2848,6 +2904,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2896,6 +2953,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2944,6 +3002,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -2994,6 +3053,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3044,6 +3104,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3094,6 +3155,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": true,
    "utility_carrier": false,
@@ -3144,6 +3206,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3192,6 +3255,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3242,6 +3306,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -3292,6 +3357,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3342,6 +3408,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -3397,6 +3464,7 @@
     "reason": "Owner ruling (forge-quality round 4): \"flex bomber like hellfire, it's usually a brawl-clap weapon and not a clap option. realmbreaker gives multiple things like health cut, range e, easy way to engage followup \u2014 that's why it can work in clap.\" The flex all-rounder derivation grades both as clap-fits; the owner splits them: Hellfire's Boulder Toss is a brawler's ranged tool, not a clap bomb core, so clap drops to situational (the generation-fit gate then keeps it out of DEFAULT clap comps while brawl-clap \u2014 its home \u2014 keeps it, and a caller can always pick it manually). Realmbreaker stays as derived.",
     "source": "Owner ruling 2026-08-24 (forge-quality session, in-chat)."
    },
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3447,6 +3515,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3497,6 +3566,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3547,6 +3617,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3597,6 +3668,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3647,6 +3719,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3697,6 +3770,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3747,6 +3821,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -3795,6 +3870,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3843,6 +3919,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3891,6 +3968,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3939,6 +4017,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -3987,6 +4066,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4035,6 +4115,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4085,6 +4166,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4135,6 +4217,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4183,6 +4266,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4233,6 +4317,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4281,6 +4366,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4331,6 +4417,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4381,6 +4468,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4431,6 +4519,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4481,6 +4570,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -4536,6 +4626,7 @@
     "reason": "Owner ruling (round 7): \"hellspawn staff is another staff which is primarily single target damage and therefore not good in above 5 member parties normally.\" The E is the Hellfire Imp transformation (self-target, very high single-target offense) \u2014 the form's damage is solo-target; the derivation had graded the weapon group-scale through its sheet caps.",
     "source": "Owner ruling 2026-08-24 (round 7, in-chat)."
    },
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4584,6 +4675,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4634,6 +4726,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -4684,6 +4777,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -4732,6 +4826,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4782,6 +4877,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4832,6 +4928,7 @@
     }
    },
    "nonstack_member": true,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4880,6 +4977,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": true,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -4935,6 +5033,7 @@
     "reason": "Owner ruling (round 7 E-audit follow-up): \"trinity spear seems like a group tool but no one is doing auto attack damage usually so its never used in large scale. only time its used is for a swap for hitting castle gates or terry walls. to get the attack speed and start taking walls faster.. but never as the main weapon in party.\" The E derives group-fits (root-all + area impact + ally mist), but its headline buff is an AUTO-ATTACK steroid \u2014 worthless in large fights where nobody auto-attacks; the real large-scale use is a structure-siege weapon SWAP, not a comp slot. Gang keeps the derived verdict (the ruling names large scale only); manual picks score as always.",
     "source": "Owner ruling 2026-08-24 (round 7, in-chat)."
    },
+   "ramp_free": true,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -4985,6 +5084,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5040,6 +5140,7 @@
     "reason": "Owner ruling (round 7, observed-family reconciliation): \"warbow on the other hand would be terrible in a group setting because its e is single target damage and it can get easily blocked.\" The derivation read Magic Arrow's max_targets 5 as group-scale, but its footprint is a 3.0 x 2.5 line \u2014 in practice the first body eats it, exactly the blockable solo-arrow class the owner names. The E-first rule stands: max effective at 3, okay at 5, falls off hard beyond.",
     "source": "Owner ruling 2026-08-24 (round 7, in-chat)."
    },
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5088,6 +5189,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5138,6 +5240,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5188,6 +5291,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5238,6 +5342,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5293,6 +5398,7 @@
     "reason": "Owner ruling (V3-adjacent identity session): \"although it's an axe and provides healthcut and possibilities for mobility on its w spell, it doesn't fit in most group play styles bigger than 3 because its e spell, the primary identity, doesn't do as much damage as other options for a group setting (5+).\" The derivation reads its utility points (catch, engage, healthcut, root) as exempting it to 'situational'; the E-first identity rule overrules that \u2014 Axe Throw (burst_st 2, radius 1.5) is not a group damage tool, and the utility pieces do not carry a group slot on their own.",
     "source": "Owner ruling 2026-08-23 (identity design session, in-chat)."
    },
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -5343,6 +5449,7 @@
     }
    },
    "nonstack_member": true,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5393,6 +5500,7 @@
     }
    },
    "nonstack_member": true,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5443,6 +5551,7 @@
     }
    },
    "nonstack_member": true,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5493,6 +5602,7 @@
     }
    },
    "nonstack_member": true,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5543,6 +5653,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -5593,6 +5704,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5648,6 +5760,7 @@
     "reason": "Owner ruling (round 7): \"any primarily solo target abilities, like dagger pair 1 hand fire etc are max affective in 3 man situations and then good/okay at 5 man and then start falling off hard if party grows.\" Pyroblast is a channeled projectile that detonates on the FIRST enemy hit (dump text: \"upon impact with an enemy\") \u2014 a blockable solo nuke the derivation graded group-scale from its impact radius.",
     "source": "Owner ruling 2026-08-24 (round 7, in-chat)."
    },
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5698,6 +5811,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5748,6 +5862,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5798,6 +5913,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5846,6 +5962,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5896,6 +6013,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": true,
    "utility_carrier": false,
@@ -5944,6 +6062,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -5992,6 +6111,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -6040,6 +6160,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -6088,6 +6209,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -6136,6 +6258,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -6186,6 +6309,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -6236,6 +6360,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -6284,6 +6409,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -6332,6 +6458,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -6380,6 +6507,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -6428,6 +6556,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": false,
    "utility_carrier": false,
@@ -6478,6 +6607,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -6526,6 +6656,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": true,
    "standoff_e": true,
    "utility_carrier": false,
@@ -6576,6 +6707,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -6624,6 +6756,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": true,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -6674,6 +6807,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": true,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -6724,6 +6858,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": true,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,
@@ -6774,6 +6909,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": true,
@@ -6824,6 +6960,7 @@
     }
    },
    "nonstack_member": false,
+   "ramp_free": false,
    "role_flexible": false,
    "standoff_e": false,
    "utility_carrier": false,

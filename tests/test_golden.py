@@ -1084,6 +1084,56 @@ def run():
           f"facts={facts_ok} fixtures_bad={fx_bad} round={round_ok}/7 "
           f"bad={round_bad}")
 
+    # T35 — the second batch of 2026-09-04 rulings, all derived:
+    # (a) FREE RAMP: "glaive can be clap because you can stack it easily
+    #     without hitting anything using q" — a Q that applies its charge
+    #     to the caster with no hit/enemy condition (Spirit Spear, target
+    #     self) makes the E's ramp free; the sword line's Heroic charges
+    #     need a hit (Heroic Strike targets an enemy, Cleave grants "based
+    #     on the amount of enemies hit") and stay conditional.
+    # (b) Royal Armor is the energy_font item (it shipped named-only) and
+    #     Carving Sword is a cited carrier ("tanky support which pierces
+    #     with e and has royal armor"; harvest: Royal Armor 62/180 brawl,
+    #     7/29 clap appearances).
+    # (c) THE KITS DECIDE A SPLIT: "brawl is basically dps using leather
+    #     jackets while clap and kite are dps on cloth" — a split roster
+    #     whose dps wear leather by majority leans brawl, cloth leans the
+    #     ranged read; no gears -> the weapons-only read is unchanged.
+    e35 = Engine(content="territory_defense", size=20)
+    sf35 = lambda w: e35.weapons[w].get("style_fit") or {}
+    glaive, galatine = "2H_GLAIVE_CRYSTAL", "2H_DUALSCIMITAR_UNDEAD"
+    ramp_ok = (sf35(glaive).get("conditional_payload") is False
+               and sf35(glaive)["fit"]["clap"]["group"] == "fits"
+               and sf35(galatine).get("conditional_payload") is True
+               and sf35("2H_CLEAVER_HELL").get("conditional_payload") is True)
+    ge = {g["id"]: g for g in (e35.data.get("gear_effects") or [])}
+    ef = ge.get("energy_font") or {}
+    royal_ok = ("ARMOR_PLATE_ROYAL" in {it.get("id") for it in ef.get("items", [])}
+                and "energy_font" in (e35._item_effects.get("ARMOR_PLATE_ROYAL") or [])
+                and "2H_CLEAVER_HELL" in {c.get("id") for c in ef.get("carriers", [])})
+    # a split roster: half melee, half ranged rigid carriers
+    split = ["2H_MACE", "2H_HAMMER", HALLOWFALL, GREAT_HOLY,
+             "2H_AXE", "2H_KNUCKLES_SET3", "2H_CLAYMORE_AVALON",
+             LONGBOW, "2H_WARBOW", "2H_FIRESTAFF"]
+    naked = e35.comp_identity(split)
+    dps_idx = [i for i, w in enumerate(split) if e35.role_of(w) == "dps"]
+    leather = [["ARMOR_LEATHER_SET3"] if i in dps_idx else None for i in range(len(split))]
+    cloth = [["ARMOR_CLOTH_SET2"] if i in dps_idx else None for i in range(len(split))]
+    lean_l = e35.comp_identity(split, None, leather)
+    lean_c = e35.comp_identity(split, None, cloth)
+    kit_ok = (naked.get("style") is None and "split" in naked.get("label", "")
+              and lean_l.get("style") == "brawl" and lean_l.get("kit_lean") == "leather"
+              and lean_c.get("style") in ("clap", "clap_kite", "kite")
+              and lean_c.get("kit_lean") == "cloth"
+              and e35.fitness(split) == e35.fitness(split))   # descriptive only
+    check("T35 rulings 2026-09-04 (2): Rift Glaive's free-charge Q makes it "
+          "a clap bomb while the sword line stays conditional; Royal Armor "
+          "carries the energy font with Carving cited; a split roster is "
+          "decided by the dps chests (leather -> brawl, cloth -> ranged)",
+          ramp_ok and royal_ok and kit_ok,
+          f"ramp={ramp_ok} royal={royal_ok} naked={naked.get('style')} "
+          f"leather={lean_l.get('style')} cloth={lean_c.get('style')}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

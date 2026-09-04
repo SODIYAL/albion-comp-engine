@@ -253,7 +253,7 @@
   function identityModel(){
     if ("id" in DL_MEMO) return DL_MEMO.id;
     DL_MEMO.id = (typeof ENG.compIdentity === "function")
-      ? ENG.compIdentity(party, COMBOS_CUR) : null;
+      ? ENG.compIdentity(party, COMBOS_CUR, GEARS_CUR) : null;   /* kits decide a split */
     return DL_MEMO.id;
   }
   /* the status-bar mirror is an EXPLICIT render step, not a side effect of

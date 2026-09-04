@@ -1992,3 +1992,48 @@ harvested rosters after the rulings: brawl 487, clap 320, clap_kite
 because Galatine-style bombs no longer make a clap half and the kite
 half now takes mid-band hybrids first. Board regenerated. Gates all
 green; tier2 v4 74% (17/23) unchanged.
+
+
+### Rulings batch 2 (owner, 2026-09-04) — Glaive, Carving, and "look at what it is played with"
+
+Owner: "glaive can be clap because you can stack it easily without
+hitting anything using q and the e has a large range"; "carving wouldn't
+be a DPS on clap but might be a tanky support which pierces with e and
+has royal armor to provide team mana but you can check the actual builds
+and teams its played with"; "brawl is basically dps using leather
+jackets while clap and kite are dps usually if not always on cloth
+armor".
+
+- **Free ramp (derived).** The dumps carry the difference exactly: Rift
+  Glaive's Q Spirit Spear (target self) "applies one Spirit Spear Charge
+  on you" with no condition; the sword line's Heroic Strike targets an
+  enemy and Cleave grants charges "based on the amount of enemies hit".
+  A Q that applies its charge to the caster unconditionally now makes the
+  E's ramp FREE (`ramp_free` in the style-fit report), so the E is not a
+  conditional payload. The whole spear line reads ramp-free; the sword
+  line and the fist lines stay conditional. Rift Glaive is back to
+  "fits" for clap at group; T32/T33 hold (they never pinned Glaive).
+- **Carving Sword, checked against the harvest** as the owner asked: 180
+  appearances in brawl-labelled rosters, 29 in clap, 13 kite, 8
+  clap-kite, 5 brawl-clap; Royal Armor is its modal chest in every
+  style (62/180 brawl, 7/29 clap), then Hellion and Judicator. So it is
+  a Royal-Armor energy carrier that lives in brawl and is rare in clap —
+  consistent with the ruling. Royal Armor was listed as a named-only
+  item in the energy_font effect; it is now linked to the catalog item
+  and Carving is a cited carrier, so the role advisory reads "brawler
+  carrying energy aura". Its clap generation stays situational (the
+  harvest does not contradict that); whether a plate Carving should
+  DETECT as a pierce support rather than a brawler is an open book
+  question (the sustained_brawler seat admits plate, so it reads dps).
+- **The kits decide a split (derived, descriptive).** Measured on the
+  1,690 labelled rosters: dps-class members wear leather 60% in brawl,
+  cloth 52% in clap, 73% in clap-kite, 60% in kite — and the 439
+  "split" rosters read 55% leather, i.e. mostly brawls the delivery axis
+  could not settle. comp_identity now takes the worn kits (page passes
+  GEARS_CUR; the audit passes the harvested chests): when at least half
+  the dps have a known chest, a leather majority leans a SPLIT roster to
+  brawl and a cloth majority to the ranged read (clap / clap-kite / kite
+  by bomb share and standoff tools); plate or no majority leaves it
+  split; without gears the read is unchanged. Splits on the board fall
+  439 -> 190 (brawl 644, clap 366, clap_kite 259, kite 153, brawl_clap
+  78). T35 pins all three. Gates green; tier2 v4 74% unchanged.

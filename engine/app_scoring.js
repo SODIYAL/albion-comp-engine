@@ -2541,7 +2541,26 @@
     return this.size <= 3 ? "trio" : this.size <= 9 ? "gang" : "group";
   };
 
-  CompEngine.prototype.compIdentity = function (party, combos) {
+  CompEngine.prototype._kitLean = function (party, gears) {
+    /* dps chest-class majority from the worn kits (mirrors engine.py
+       _kit_lean): "leather" / "cloth" / null */
+    if (!gears) return null;
+    var dps = [], i;
+    for (i = 0; i < party.length; i++) if (this.roleOf(party[i]) === "dps") dps.push(i);
+    if (!dps.length) return null;
+    var counts = {}, known = 0;
+    for (i = 0; i < dps.length; i++) {
+      var gl = dps[i] < gears.length ? gears[dps[i]] : null, chest = null;
+      for (var j = 0; gl && j < gl.length; j++) if (gl[j].indexOf("ARMOR_") === 0) { chest = gl[j]; break; }
+      var cls = chest ? this._chestClass(chest) : null;
+      if (cls) { known += 1; counts[cls] = (counts[cls] || 0) + 1; }
+    }
+    if (known < 0.5 * dps.length) return null;
+    if ((counts.leather || 0) > 0.5 * known) return "leather";
+    if ((counts.cloth || 0) > 0.5 * known) return "cloth";
+    return null;
+  };
+  CompEngine.prototype.compIdentity = function (party, combos, gears) {
     /* What this comp is BECOMING, in playstyle vocabulary — v2: built up
        from MEMBER identities (weapon style_fit: E-first delivery + owner
        overrides). DESCRIPTIVE ONLY: nothing here feeds fitness,
@@ -2697,6 +2716,24 @@
             note: minority + " damage inside a " + majority + "-leaning " +
                   "core — commit to one side or cover the seam",
           });
+        }
+        /* the kits decide a split (owner 2026-09-04; mirrors engine.py) */
+        var kit = this._kitLean(party, gears);
+        if (kit === "leather") {
+          out.style = "brawl"; out.strength = "leaning"; out.kit_lean = "leather";
+          out.label = sname("brawl", "Brawl") + " — melee ball (by the kits: dps in leather)";
+        } else if (kit === "cloth") {
+          if (mode.aoe >= IDENTITY_HYBRID_AOE && kiteHalf) {
+            out.style = "clap_kite";
+            out.label = sname("clap_kite", "Clap-Kite") + " — bomb from range, throw them back (by the kits: dps in cloth)";
+          } else if (mode.aoe >= IDENTITY_CLAP_AOE || !kiteAny) {
+            out.style = "clap";
+            out.label = sname("clap", "Clap") + " — ranged bomb (by the kits: dps in cloth)";
+          } else {
+            out.style = "kite";
+            out.label = sname("kite", "Kite") + " — ranged pressure (by the kits: dps in cloth)";
+          }
+          out.strength = "leaning"; out.kit_lean = "cloth";
         }
       }
     }

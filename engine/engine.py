@@ -2758,6 +2758,31 @@ class Engine:
     IDENTITY_KITE_TOOLS_PER = 10
     IDENTITY_STYLES = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
 
+    def _kit_lean(self, party, gears):
+        """The chest class the DPS-class members wear by majority — 'leather'
+        / 'cloth' / None (plate, no majority, or fewer than half the dps with
+        a known chest). Reads the worn kits only; never a scoring input."""
+        if not gears:
+            return None
+        dps = [i for i, w in enumerate(party) if self.role_of(w) == "dps"]
+        if not dps:
+            return None
+        counts = {}
+        known = 0
+        for i in dps:
+            gl = gears[i] if i < len(gears) else None
+            chest = next((g for g in (gl or []) if g.startswith("ARMOR_")), None)
+            cls = self._chest_class(chest) if chest else None
+            if cls:
+                known += 1
+                counts[cls] = counts.get(cls, 0) + 1
+        if known < self.IDENTITY_KIT_KNOWN * len(dps):
+            return None
+        for cls in ("leather", "cloth"):
+            if counts.get(cls, 0) > self.IDENTITY_KIT_MAJORITY * known:
+                return cls
+        return None
+
     def _style_fit_of(self, weapon):
         """The weapon's derived style/size identity (build_dataset
         derive_style_fit + style_overrides.yaml). Absent on pre-identity
@@ -2770,7 +2795,10 @@ class Engine:
         return ("trio" if self.size <= 3
                 else "gang" if self.size <= 9 else "group")
 
-    def comp_identity(self, party, combos=None):
+    IDENTITY_KIT_MAJORITY = 0.5    # dps chest class share that decides a split
+    IDENTITY_KIT_KNOWN = 0.5       # share of dps with a known chest needed
+
+    def comp_identity(self, party, combos=None, gears=None):
         """What this comp is BECOMING, in the caller's own playstyle
         vocabulary (styles.yaml): brawl / clap / kite / brawl_clap, plus
         'mixed' for split identities and 'forming' while too small to say.
@@ -2960,6 +2988,38 @@ class Engine:
                                  "leaning core — commit to one side or "
                                  "cover the seam"),
                     })
+                # THE KITS DECIDE A SPLIT (owner 2026-09-04: "brawl is
+                # basically dps using leather jackets while clap and kite
+                # are dps usually if not always on cloth armor"; harvest
+                # 2026-09-04, dps-class members in 1,690 labelled 10+
+                # rosters: brawl 60% leather, clap 52% / clap_kite 73% /
+                # kite 60% cloth, and the 439 "split" rosters read 55%
+                # leather). When the worn kits are known for at least half
+                # the dps, a leather majority leans the split to brawl and
+                # a cloth majority to the ranged read (clap, clap-kite or
+                # kite by bomb share and standoff tools); plate or no
+                # majority leaves it split. Descriptive only.
+                kit = self._kit_lean(party, gears)
+                if kit == "leather":
+                    out["style"], out["strength"] = "brawl", "leaning"
+                    out["label"] = (f"{style_names.get('brawl', 'Brawl')}"
+                                    " — melee ball (by the kits: dps in leather)")
+                    out["kit_lean"] = "leather"
+                elif kit == "cloth":
+                    if mode["aoe"] >= self.IDENTITY_HYBRID_AOE and kite_half:
+                        out["style"] = "clap_kite"
+                        out["label"] = (f"{style_names.get('clap_kite', 'Clap-Kite')}"
+                                        " — bomb from range, throw them back (by the kits: dps in cloth)")
+                    elif mode["aoe"] >= self.IDENTITY_CLAP_AOE or not kite_any:
+                        out["style"] = "clap"
+                        out["label"] = (f"{style_names.get('clap', 'Clap')}"
+                                        " — ranged bomb (by the kits: dps in cloth)")
+                    else:
+                        out["style"] = "kite"
+                        out["label"] = (f"{style_names.get('kite', 'Kite')}"
+                                        " — ranged pressure (by the kits: dps in cloth)")
+                    out["strength"] = "leaning"
+                    out["kit_lean"] = "cloth"
         # ---- per-member fit verdicts (the declared style is the caller's
         # INTENT — owner ruling: picking brawl means asking for brawl
         # builds; balanced falls back to the detected lean) ----

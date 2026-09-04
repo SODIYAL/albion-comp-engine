@@ -50,6 +50,7 @@
     "builds": 7776,
     "share": {
      "cooldown_banner": 0.0422,
+     "energy_font": 0.0372,
      "force_shield": 0.0904,
      "lifesteal_aura": 0.1031,
      "reflect_shell": 0.0359,
@@ -60,6 +61,7 @@
     "builds": 7389,
     "share": {
      "cooldown_banner": 0.0487,
+     "energy_font": 0.0493,
      "force_shield": 0.0961,
      "lifesteal_aura": 0.082,
      "reflect_shell": 0.057,
@@ -70,6 +72,9 @@
   "items": {
    "cooldown_banner": [
     "ARMOR_LEATHER_ROYAL"
+   ],
+   "energy_font": [
+    "ARMOR_PLATE_ROYAL"
    ],
    "force_shield": [
     "ARMOR_PLATE_KEEPER"
@@ -8794,13 +8799,17 @@
     {
      "id": "2H_AXE_AVALON",
      "source": "owner:2026-08-25 (the Realmbreaker royal-armor example); guide:albiononlinegrind clap-kite comp 'Realmbreaker Support' slot"
+    },
+    {
+     "id": "2H_CLEAVER_HELL",
+     "source": "owner:2026-09-04 ('carving wouldn't be a DPS on clap but might be a tanky support which pierces with e and has royal armor to provide team mana'); killboard:party_rosters 10+ parties: Royal Armor on 62 of 180 brawl appearances and 7 of 29 clap appearances, the modal chest in every style it is fielded in"
     }
    ],
    "id": "energy_font",
    "items": [
     {
-     "named": "Royal Armor (plate) \u2014 Energy Source: 13 energy/1s to 10 allies within 15m; wiki /wiki/Energy_Source; NOT yet in the gear catalog",
-     "source": "guide:wiki Energy_Source; owner:2026-08-25 ('royal armor to give team that extra needed mana')"
+     "id": "ARMOR_PLATE_ROYAL",
+     "source": "gear catalog: Royal Armor (Energy Source: 13 energy/1s to 10 allies within 15m; wiki /wiki/Energy_Source); owner:2026-08-25 ('royal armor to give team that extra needed mana'); linked 2026-09-04 (it had shipped as a named-only item)"
     }
    ],
    "kind": "team_aura",
@@ -70851,7 +70860,7 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
-    "conditional_payload": true,
+    "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
     "fit": {
@@ -70866,18 +70875,18 @@
       "trio": "fits"
      },
      "clap": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "fits",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "fits",
       "trio": "fits"
      },
      "kite": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "fits",
+      "group": "fits",
       "trio": "fits"
      }
     },

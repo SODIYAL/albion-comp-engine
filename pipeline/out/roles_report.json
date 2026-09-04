@@ -5,6 +5,7 @@
     "builds": 7776,
     "share": {
      "cooldown_banner": 0.0422,
+     "energy_font": 0.0372,
      "force_shield": 0.0904,
      "lifesteal_aura": 0.1031,
      "reflect_shell": 0.0359,
@@ -15,6 +16,7 @@
     "builds": 7389,
     "share": {
      "cooldown_banner": 0.0487,
+     "energy_font": 0.0493,
      "force_shield": 0.0961,
      "lifesteal_aura": 0.082,
      "reflect_shell": 0.057,
@@ -24,6 +26,7 @@
   },
   "items": {
    "cooldown_banner": ["ARMOR_LEATHER_ROYAL"],
+   "energy_font": ["ARMOR_PLATE_ROYAL"],
    "force_shield": ["ARMOR_PLATE_KEEPER"],
    "lifesteal_aura": ["ARMOR_LEATHER_HELL"],
    "reflect_shell": ["ARMOR_PLATE_HELL"],
@@ -31,7 +34,7 @@
   },
   "note": "share of killboard builds wearing a chest that grants each typed gear effect, per fight-size bucket (official kill-event party rosters); the engine caps generated rosters at share x size"
  },
- "effect_candidates": ["ARMOR_CLOTH_ROYAL", "ARMOR_PLATE_ROYAL", "HEAD_CLOTH_KEEPER", "HEAD_PLATE_SET3"],
+ "effect_candidates": ["ARMOR_CLOTH_ROYAL", "HEAD_CLOTH_KEEPER", "HEAD_PLATE_SET3"],
  "effect_quotas": {
   "comps": [
    {
@@ -60,6 +63,7 @@
     "content": "zvz_10man",
     "copies": {
      "cooldown_banner": 2,
+     "energy_font": 1,
      "weaken_aura": 1
     },
     "seats": 10
@@ -77,6 +81,7 @@
     "comp": "albioncompo_brawl_by_lattex_2026_05:comp",
     "content": "zvz_20man",
     "copies": {
+     "energy_font": 2,
      "force_shield": 1,
      "lifesteal_aura": 1,
      "weaken_aura": 2
@@ -87,6 +92,7 @@
     "comp": "albioncompo_brawl_clap_2026_05:comp",
     "content": "zvz_19man",
     "copies": {
+     "energy_font": 2,
      "force_shield": 3,
      "lifesteal_aura": 3,
      "weaken_aura": 2
@@ -97,6 +103,7 @@
     "comp": "albioncompo_brawl_hit_20_2026_01:comp",
     "content": "zvz_20man",
     "copies": {
+     "energy_font": 1,
      "force_shield": 3,
      "lifesteal_aura": 4,
      "reflect_shell": 2,
@@ -129,6 +136,7 @@
     "content": "zvz_20man",
     "copies": {
      "cooldown_banner": 1,
+     "energy_font": 1,
      "force_shield": 5,
      "lifesteal_aura": 3,
      "reflect_shell": 3
@@ -139,6 +147,7 @@
     "comp": "albioncompo_comp_5_v2_2026_04:comp",
     "content": "zvz_20man",
     "copies": {
+     "energy_font": 1,
      "force_shield": 4,
      "lifesteal_aura": 2,
      "weaken_aura": 2
@@ -166,6 +175,7 @@
     "comp": "albioncompo_hard_zvz_brawl_20ppl_2026_08:comp",
     "content": "zvz_20man",
     "copies": {
+     "energy_font": 2,
      "force_shield": 5,
      "weaken_aura": 3
     },
@@ -175,6 +185,7 @@
     "comp": "albioncompo_hdcp_bomb_2026_06:comp",
     "content": "zvz_20man",
     "copies": {
+     "energy_font": 1,
      "force_shield": 1,
      "reflect_shell": 5,
      "weaken_aura": 3
@@ -194,6 +205,7 @@
     "comp": "albioncompo_new_composition_2026_04:comp",
     "content": "zvz_10man",
     "copies": {
+     "energy_font": 2,
      "force_shield": 2,
      "lifesteal_aura": 4
     },
@@ -215,6 +227,7 @@
     "content": "zvz_20man",
     "copies": {
      "cooldown_banner": 3,
+     "energy_font": 1,
      "force_shield": 4,
      "weaken_aura": 2
     },
@@ -334,6 +347,7 @@
     "comp": "timothy_blap_blackzone_roam_2026_08:blap",
     "content": "blackzone_roam",
     "copies": {
+     "energy_font": 3,
      "force_shield": 5,
      "lifesteal_aura": 4,
      "reflect_shell": 2,
@@ -348,6 +362,11 @@
     "copies": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3],
     "rosters": 31,
     "with_any": 14
+   },
+   "energy_font": {
+    "copies": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3],
+    "rosters": 31,
+    "with_any": 11
    },
    "force_shield": {
     "copies": [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5],
@@ -377,13 +396,17 @@
     {
      "id": "2H_AXE_AVALON",
      "source": "owner:2026-08-25 (the Realmbreaker royal-armor example); guide:albiononlinegrind clap-kite comp 'Realmbreaker Support' slot"
+    },
+    {
+     "id": "2H_CLEAVER_HELL",
+     "source": "owner:2026-09-04 ('carving wouldn't be a DPS on clap but might be a tanky support which pierces with e and has royal armor to provide team mana'); killboard:party_rosters 10+ parties: Royal Armor on 62 of 180 brawl appearances and 7 of 29 clap appearances, the modal chest in every style it is fielded in"
     }
    ],
    "id": "energy_font",
    "items": [
     {
-     "named": "Royal Armor (plate) \u2014 Energy Source: 13 energy/1s to 10 allies within 15m; wiki /wiki/Energy_Source; NOT yet in the gear catalog",
-     "source": "guide:wiki Energy_Source; owner:2026-08-25 ('royal armor to give team that extra needed mana')"
+     "id": "ARMOR_PLATE_ROYAL",
+     "source": "gear catalog: Royal Armor (Energy Source: 13 energy/1s to 10 allies within 15m; wiki /wiki/Energy_Source); owner:2026-08-25 ('royal armor to give team that extra needed mana'); linked 2026-09-04 (it had shipped as a named-only item)"
     }
    ],
    "kind": "team_aura",
@@ -3170,6 +3193,7 @@
      },
      {
       "count": 231,
+      "effect": "energy_font",
       "id": "ARMOR_PLATE_ROYAL",
       "kb": 230,
       "sources": ["albioncompo_hdcp_bomb_2026_06 (comp:15)", "killboard (230x)"]
@@ -4725,6 +4749,7 @@
      },
      {
       "count": 61,
+      "effect": "energy_font",
       "id": "ARMOR_PLATE_ROYAL",
       "kb": 58,
       "sources": ["albioncompo_ava_raid_2026_05 (comp:7)", "albioncompo_brawl_clap_2026_05 (comp:5)", "albioncompo_brawl_hit_20_2026_01 (comp:12)", "killboard (58x)"]
@@ -9521,6 +9546,7 @@
      },
      {
       "count": 23,
+      "effect": "energy_font",
       "id": "ARMOR_PLATE_ROYAL",
       "kb": 22,
       "sources": ["albioncompo_push_monkey_7_2026_05 (comp:1)", "killboard (22x)"]
@@ -14763,6 +14789,7 @@
      },
      {
       "count": 8,
+      "effect": "energy_font",
       "id": "ARMOR_PLATE_ROYAL",
       "kb": 7,
       "sources": ["albioncompo_brawl_clap_2026_05 (comp:6)", "killboard (7x)"]
@@ -21917,6 +21944,7 @@
      },
      {
       "count": 54,
+      "effect": "energy_font",
       "id": "ARMOR_PLATE_ROYAL",
       "kb": 51,
       "sources": ["albioncompo_hellgate5_2026_07 (comp:4)", "albioncompo_new_composition_2026_04 (comp:4)", "albioncompo_new_composition_2026_08_yvxwl29l (comp:9)", "killboard (51x)"]
@@ -23477,6 +23505,7 @@
      },
      {
       "count": 4,
+      "effect": "energy_font",
       "id": "ARMOR_PLATE_ROYAL",
       "kb": 4,
       "sources": ["killboard (4x)"]
@@ -28210,6 +28239,7 @@
      },
      {
       "count": 177,
+      "effect": "energy_font",
       "id": "ARMOR_PLATE_ROYAL",
       "kb": 170,
       "sources": ["albioncompo_brawl_by_lattex_2026_05 (comp:8)", "albioncompo_c_2026_07 (comp:6)", "albioncompo_comp_5_v2_2026_04 (comp:8)", "killboard (170x)", "metabattle (7655:8917)", "timothy_blap_blackzone_roam_2026_08 (blap:8,10,11)"]

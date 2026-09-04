@@ -710,11 +710,33 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
         # every damage-bearing E needs ramp or a held non-ranged channel ->
         # not an instant bomb -> out of clap/clap_kite generation at
         # gang/group. Only ever downgrades "fits"; overrides below still win.
+        # FREE RAMP (owner 2026-09-04: "glaive can be clap because you can
+        # stack it easily without hitting anything using q"): a charge the
+        # weapon's Q applies to the CASTER unconditionally (self-target,
+        # no hit / enemy condition in the sentence — Rift Glaive's Spirit
+        # Spear) makes the E's ramp free, so it is not conditional. A
+        # charge that needs a hit (Heroic Strike targets an enemy, Cleave
+        # grants "based on the amount of enemies hit") stays ramp. Only
+        # the Q counts — it is the spammable slot; a W granting one charge
+        # per long cooldown (Defense Run) is not a stacking route.
+        ramp_free = False
+        for qi, qslot in enumerate(slots):
+            if qi >= len(names) or names[qi] != "q":
+                continue
+            for qj in range(len(qslot)):
+                qf = spell_index.get(spells[qi][qj]) or {}
+                if qf.get("target") != "self":
+                    continue
+                for sent in re.split(r"(?<=[.!])\s+", qf.get("description") or ""):
+                    if (re.search(r"applies? (?:one|a|\d+)?\s*[\w' ]*charge", sent, re.I)
+                            and not re.search(r"hit|enem", sent, re.I)):
+                        ramp_free = True
         e_ramp = e_channel_nonranged = False
         e_conditional = bool(e_spells)
         for sid in e_spells:
             facts = spell_index.get(sid) or {}
-            ramp = bool(E_RAMP_RX.search(facts.get("description") or ""))
+            ramp = (bool(E_RAMP_RX.search(facts.get("description") or ""))
+                    and not ramp_free)
             chan = bool(facts.get("channel")) and delivery != "ranged"
             e_ramp = e_ramp or ramp
             e_channel_nonranged = e_channel_nonranged or chan
@@ -774,7 +796,7 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                "e_damage_pts": e_dmg_pts, "e_utility_max": e_util_max,
                "weak_group_e": weak_group_e,
                "e_debuff_max": e_debuff_max, "nonstack_member": nonstack,
-               "e_ramp": e_ramp,
+               "e_ramp": e_ramp, "ramp_free": ramp_free,
                "e_channel_nonranged": e_channel_nonranged,
                "conditional_payload": conditional_payload,
                "standoff_e": standoff_e,

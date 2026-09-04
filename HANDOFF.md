@@ -106,7 +106,13 @@ as derivations — the clap half excludes ramp-dependent bombs
 is STANDOFF TOOLS (`style_fit.standoff_e`: Bedrock Mace, Hoarfrost,
 Demonic Staff and the meteor bombs; hybrid needs max(2, n/10), kite at
 least one, none = clap). T34 pins it; VALIDATION.md carries the quotes.
-Open: a second round of twenty rosters, then the ruling on the numbers.
+Batch 2 the same day (T35): Rift Glaive's free-charge Q makes it a clap
+bomb again (derived `ramp_free`); Royal Armor is the linked energy_font
+item with Carving Sword a cited carrier (harvest-checked: Royal Armor is
+its modal chest, 180 brawl vs 29 clap appearances); and a SPLIT roster is
+now decided by the dps chests when kits are known (leather -> brawl,
+cloth -> ranged), which took the board's splits from 439 to 190. Open: a
+second round of twenty rosters, then the ruling on the numbers.
 
 ## Owner bug round (2026-09-03)
 

@@ -581,9 +581,10 @@ gear_effects:
     name: Energy aura
     kind: team_aura
     items:
-      - {named: "Royal Armor (plate) — Energy Source: 13 energy/1s to 10 allies within 15m; wiki /wiki/Energy_Source; NOT yet in the gear catalog", source: "guide:wiki Energy_Source; owner:2026-08-25 ('royal armor to give team that extra needed mana')"}
+      - {id: ARMOR_PLATE_ROYAL, source: "gear catalog: Royal Armor (Energy Source: 13 energy/1s to 10 allies within 15m; wiki /wiki/Energy_Source); owner:2026-08-25 ('royal armor to give team that extra needed mana'); linked 2026-09-04 (it had shipped as a named-only item)"}
     carriers:
       - {id: 2H_AXE_AVALON, source: "owner:2026-08-25 (the Realmbreaker royal-armor example); guide:albiononlinegrind clap-kite comp 'Realmbreaker Support' slot"}
+      - {id: 2H_CLEAVER_HELL, source: "owner:2026-09-04 ('carving wouldn't be a DPS on clap but might be a tanky support which pierces with e and has royal armor to provide team mana'); killboard:party_rosters 10+ parties: Royal Armor on 62 of 180 brawl appearances and 7 of 29 clap appearances, the modal chest in every style it is fielded in"}
   - id: cooldown_banner
     name: Cooldown aura
     kind: team_aura
