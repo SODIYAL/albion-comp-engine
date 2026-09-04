@@ -1831,3 +1831,49 @@ actual_gear role-level 74% (17/23), PASS at the 70% gate but down from
 and three role-level hits moved; under the anti-circularity rule this is
 a finding for the owner, not a retune (the blind-test comps must never
 drive doctrine or scoring against their own gate results).
+
+## Deep harvest + the overnight task (2026-09-04, evening)
+
+Owner: "lets see if you can just get more battle data in general", then
+"lets stop there for now and make this an overnight task". The deep pass
+walked the full discovery list at the 25-player floor (up to 40 pages x
+20 battles, cached ones skipped) and was stopped by the owner at 469 new
+battles before the 8-player pass began; the cache was folded in offline
+(`--pages 0`, no network). Cache 523 -> 994 battles (8 to 1,315
+players), builds 14,706 -> 32,001.
+
+| | morning | evening |
+|---|---|---|
+| builds from killer parties of 10+ | 7,085 | 15,165 |
+| builds from parties under 10 | 2,990 | 6,652 |
+| victims, no party record | 4,631 | 10,184 |
+| weapons with 30+ ZvZ builds | 50 | 72 |
+| weapons with 10-29 | 36 | 33 |
+| weapons with 1-9 | 40 | 28 |
+| weapons with none | 11 | 4 (Black Hands, Crystal Reaper, Ironroot, Trinity Spear) |
+
+The audit on the larger population surfaced one more archetype-chain
+defect: a conditional pool of 5-8 builds let a 7-of-8 cape (Greataxe:
+Smuggler inside the Mistwalker pocket) outrank the slot's 36-of-74 modal
+(Lymhurst), and a 4-of-5 shoe on Great Hammer beat Hunter Shoes 9-of-26.
+The chain now also stops unless its pick is at least half the slot's
+UNCONDITIONAL modal count over the whole population. Result: ten seeded
+weapons 58/63 = 92%; all 72 weapons with >= 30 ZvZ builds 429/450 = 95%,
+the single miss an uncurated plain cape.
+
+R18 re-pinned as a MECHANISM (Knight from the weapon tier, >= 40% of the
+slot over >= 35 builds): with the harvest now nightly, exact doctrine
+counts are never pinned again. Gates: golden 59/59, forge 38/38, roles
+26/26, validation modes 25/25, parity 60/60 + embed, layout, node,
+provenance, builds, interactions, patch history, lint; tier2 v4 stays
+at 74% (17/23), PASS — still an owner finding, not retuned.
+
+OVERNIGHT TASK: `pipeline/harvest_overnight.ps1` runs both passes (25
+then 8 player floor, 800 battles each, cache-skipping) and is registered
+as the Windows scheduled task "CompForge overnight harvest", daily at
+03:00 as the current user, 6-hour limit, runs late if the machine was
+asleep. It harvests only — the dataset rebuild, the gate list and the
+audit remain a reviewed, in-session step, so a bad night can never ship.
+Logs land in `pipeline/out/fetch_logs/` (gitignored). Remove with
+`Unregister-ScheduledTask -TaskName "CompForge overnight harvest"`.
+The machine has to be on (or wake) at 03:00 for it to run.

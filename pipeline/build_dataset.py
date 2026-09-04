@@ -1113,6 +1113,19 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
                 norm[slot] = gid
         if norm:
             pool.append(norm)
+    # unconditional modal count per slot over the WHOLE pool: a chain step
+    # may only pick an item that is also a real share of the population
+    # (>= CHAIN_MIN_SHARE of the slot's modal count), else it stops — a
+    # 7-of-8 cape inside one chest's pocket must not outrank a 36-of-74
+    # slot modal (2026-09-04 deep-harvest audit: Greataxe, Great Hammer)
+    uncond = {}
+    for b in pool:
+        for slot, gid in b.items():
+            if slot == "armor" and                     (gear[gid].get("gear_class") or "") not in uni:
+                continue
+            c = uncond.setdefault(slot, {})
+            c[gid] = c.get(gid, 0) + 1
+    uncond_top = {slot: max(c.values()) for slot, c in uncond.items()}
     sel = {}
     for slot in SLOT_ORDER:
         if len(pool) < CHAIN_MIN_POOL:
@@ -1129,7 +1142,7 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
         if not counts:
             continue
         gid, n = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[0]
-        if n < 2 or n < CHAIN_MIN_SHARE * len(pool):
+        if n < 2 or n < CHAIN_MIN_SHARE * len(pool)                 or n < 0.5 * uncond_top.get(slot, 0):
             break
         sel[slot] = [gid, n, len(pool)]
         pool = [b for b in pool if b.get(slot) in (gid, None)]

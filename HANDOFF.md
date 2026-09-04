@@ -86,10 +86,16 @@ seeded weapons and on all 39 weapons with >= 30 ZvZ builds. 2026-09-04
 harvest refresh: 523 battles / 14,706 builds, 7,085 from killer
 parties of 10+ (50 weapons with 30+ ZvZ builds, 11 with none), plus the
 first 133 fights under 25 players (2,990 small-party builds, stamped
-but unused until a gang-band doctrine exists). Audit holds at 90% on
-the larger population; tier2 v4 sits at 74% (17/23), a reported drop
-from 87% left for the owner under anti-circularity. Open: no style
-split — label rosters before trusting style-specific kits.
+but unused until a gang-band doctrine exists). The evening deep
+pass took the cache to 994 battles / 32,001 builds (15,165 from killer
+parties of 10+; 72 weapons with 30+ ZvZ builds, 4 with none) and the
+audit to 95% across those 72 after a last archetype-chain guard.
+tier2 v4 sits at 74% (17/23), a reported drop from 87% left for the
+owner under anti-circularity. **The harvest is now an OVERNIGHT TASK**:
+`pipeline/harvest_overnight.ps1`, Windows scheduled task "CompForge
+overnight harvest", daily 03:00 — it only harvests; rebuild + gates +
+audit + commit stay in-session. Open: no style split — label rosters
+before trusting style-specific kits.
 
 ## Owner bug round (2026-09-03)
 

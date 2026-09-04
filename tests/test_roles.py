@@ -573,9 +573,14 @@ def t_weapon_doctrine():
     # chests and the exclusion left Graveguard), so slot totals grew;
     # [35, 82] once the same day's PARTY-SIZE FLOOR kept only builds from
     # killer parties of 10+ (the Grailseeker gank-kit case); [45, 103]
-    # after the 2026-09-04 harvest (523 battles, 14,706 builds).
+    # then [88, 186] across the 2026-09-04 harvests. With the harvest now
+    # an overnight task the exact pair is no longer pinned: the MECHANISM
+    # is — Knight from the weapon tier, a clear plurality (>= 40% of the
+    # slot's builds) over a real sample (>= 35).
     ph = (top["gear"] == "ARMOR_PLATE_SET2"
-          and top["doctrine"] == "weapon" and top["doctrine_n"] == [45, 103])
+          and top["doctrine"] == "weapon"
+          and top["doctrine_n"][0] >= 35
+          and top["doctrine_n"][0] >= 0.4 * top["doctrine_n"][1])
     hoj = e.kit_options("2H_HAMMER_AVALON", top_n=10)
     demon = next((o for o in hoj["options"]["armor"]
                   if o["gear"] == "ARMOR_PLATE_HELL"), None)
