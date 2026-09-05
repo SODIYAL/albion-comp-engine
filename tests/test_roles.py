@@ -904,6 +904,172 @@ def t_observed_chest_class():
           f"top={top} match={d['kit_match']} ext={ext} grail={grail}")
 
 
+def t_one_player_one_vote():
+    # R27 (2026-09-04, distinct-player floors): a build is one player in
+    # one battle and a third of a weapon's builds are repeat sightings of
+    # the same people (median 0.67 voters per build), so doctrine counts
+    # ONE PLAYER, ONE VOTE per weapon — every harvested build carries a
+    # hashed player key, every killboard count is a player-weighted vote,
+    # every floor counts different people, and the uniform extension
+    # needs 35 VOTERS (the old 50-build floor in the new unit).
+    # The Heavy Crossbow case: Fey Shoes were worn 7 times by ONE player
+    # against Morgana Shoes 4 times by four — sightings fronted Fey, votes
+    # front Morgana and Fey cannot even enter the tier on one voter.
+    import json as _json
+    from collections import Counter as _Counter, defaultdict as _dd
+    doc = _json.load(open(os.path.join(ROOT, "pipeline", "out",
+                                       "party_rosters.json"),
+                          encoding="utf-8"))
+    builds = doc.get("builds") or []
+    keyed = all(b.get("player") for b in builds)
+    e = Engine(content="territory_defense", size=20)
+    # find, from the raw harvest, a (weapon, slot) where the top SIGHTING
+    # item comes from a single voter and a multi-voter item exists
+    by_ws = _dd(lambda: (_Counter(), _dd(set)))
+    per = _Counter()
+    for b in builds:
+        if (b.get("party_size") or 0) >= 10:
+            per[(b["weapon"], b["player"])] += 1
+    for b in builds:
+        if (b.get("party_size") or 0) < 10:
+            continue
+        for slot, item in (b.get("gear") or {}).items():
+            if slot == "MainHand" or not item:
+                continue
+            c, p = by_ws[(b["weapon"], slot)]
+            c[item] += 1
+            p[item].add(b["player"])
+    cases = []
+    for (w, slot), (c, p) in by_ws.items():
+        top, n = c.most_common(1)[0]
+        multi = [i for i in c if len(p[i]) >= 2]
+        if n >= 3 and len(p[top]) == 1 and multi:
+            cases.append((w, slot, top, n))
+    # every such single-voter top item must be absent from (or not first
+    # in) the shipped weapon tier — unless a CURATED reference build also
+    # cites it (curated items merge regardless of the killboard floor, by
+    # design; Infernal Scythe's Morgana Shoes)
+    rep = _json.load(open(os.path.join(ROOT, "pipeline", "out",
+                                       "roles_report.json"),
+                          encoding="utf-8"))
+    kd = rep.get("kit_doctrine") or rep
+    def _curated(rid, w, slot, gid):
+        rows = (((kd.get(rid) or {}).get("by_weapon") or {}).get(w) or {}
+                ).get(slot) or []
+        row = next((r for r in rows if r.get("id") == gid), None)
+        return bool(row) and any(not str(src).startswith("killboard:")
+                                 for src in (row.get("sources") or []))
+    wrong = []
+    slot_map = {"Head": "head", "Armor": "armor", "Shoes": "shoes",
+                "Cape": "cape", "OffHand": "offhand", "Potion": "potion",
+                "Food": "food"}
+    checked = 0
+    for w, slot, top, n in cases:
+        gid = e.gear_key(top)
+        if not gid or slot not in slot_map:
+            continue
+        for rid, rec in e.roles.items():
+            tier = ((rec.get("kit_weapon") or {}).get(w) or {}).get(slot_map[slot])
+            if tier is None:
+                continue
+            checked += 1
+            if tier and tier[0][0] == gid and not _curated(rid, w, slot_map[slot], gid):
+                wrong.append((w, slot, top, n))
+    # rows carry players beside the votes; extension is measured in voters
+    rows_with_players = sum(
+        1 for d in kd.values() if isinstance(d, dict)
+        for slot_rows in (d.get("slots") or {}).values()
+        for row in slot_rows if row.get("kb") and row.get("players"))
+    ext_n = {w: ext.get("n") for d in kd.values() if isinstance(d, dict)
+             for w, ext in (d.get("uniform_extended") or {}).items()}
+    galatine = ext_n.get("2H_DUALSCIMITAR_UNDEAD")
+    grail = ext_n.get("2H_DUALSICKLE_UNDEAD")
+    check("R27 one player, one vote: every harvested build carries a player "
+          "key; a single voter's repeat sightings never front a tier (the "
+          "Heavy Crossbow Fey Shoes case); rows carry players beside votes; "
+          "the uniform extension is measured in voters (Galatine in, "
+          "Grailseeker out)",
+          keyed and checked >= 5 and not wrong and rows_with_players >= 100
+          and galatine and galatine >= 35 and grail is None,
+          f"keyed={keyed} single-voter tops checked={checked} wrong={wrong[:3]} "
+          f"rows_with_players={rows_with_players} galatine_voters={galatine} "
+          f"grail={grail}")
+
+
+def t_doctrine_bands():
+    # R28 (2026-09-04, kit doctrine per size band): every seat with a kit
+    # ships a GANG band (`kit_bands.gang`, mined from 4-9 man killer
+    # parties and the small-scale curated contents, one player one vote,
+    # no grading overrides); the engine reads it at <= 9 members and the
+    # group band at 10+; the gang kit is the gang MODAL — on every weapon
+    # with >= 30 gang builds the size-7 kit matches the small-party
+    # modal item (or one worn >= half as often) in >= 85% of slots and
+    # never picks an item worn < half as often. Kits at 7 and 20 differ
+    # somewhere real (Hallowfall's head), so the band is not a copy.
+    import json as _json
+    from collections import Counter as _Counter, defaultdict as _dd
+    e7 = Engine(content="blackzone_roam", size=7)
+    e20 = Engine(content="blackzone_roam", size=20)
+    seats_kit = [r for r in e7.roles.values() if r.get("kit")]
+    banded = [r for r in seats_kit if (r.get("kit_bands") or {}).get("gang", {}).get("kit")]
+    ships = bool(seats_kit) and len(banded) == len(seats_kit)
+    reads = (e7._seat_kit(banded[0]) is banded[0]["kit_bands"]["gang"]
+             and e20._seat_kit(banded[0]) is banded[0]) if banded else False
+    doc = _json.load(open(os.path.join(ROOT, "pipeline", "out",
+                                       "party_rosters.json"),
+                          encoding="utf-8"))
+    by_w = _dd(list)
+    for b in doc.get("builds") or []:
+        if 4 <= (b.get("party_size") or 0) <= 9 and b.get("weapon") in e7.weapons:
+            by_w[b["weapon"]].append(b)
+    slots = {"Head": "head", "Armor": "armor", "Shoes": "shoes",
+             "Cape": "cape", "OffHand": "offhand", "Potion": "potion",
+             "Food": "food"}
+    agree = tot = bad = 0
+    misses = []
+    for w in sorted(w for w, bl in by_w.items() if len(bl) >= 30):
+        ko = e7.kit_options(w)
+        if not ko.get("seat"):
+            continue
+        kit = {sl: (v.get("gear") if isinstance(v, dict) else v)
+               for sl, v in (ko.get("kit") or {}).items()}
+        per = _Counter(b["player"] for b in by_w[w])
+        for raw, sl in slots.items():
+            if sl == "offhand" and e7.weapons[w].get("two_handed"):
+                continue
+            votes = _Counter()
+            for b in by_w[w]:
+                it = (b.get("gear") or {}).get(raw)
+                if it:
+                    votes[e7.gear_key(it) or it] += 1.0 / per[b["player"]]
+            if not votes:
+                continue
+            modal, mv = votes.most_common(1)[0]
+            if modal not in e7.gear or not kit.get(sl):
+                continue
+            tot += 1
+            if kit[sl] == modal or votes.get(kit[sl], 0) >= 0.5 * mv:
+                agree += 1
+            else:
+                bad += 1
+                misses.append(f"{w}:{sl}:{kit[sl]}<{modal}")
+    differs = False
+    for w in ("MAIN_HOLYSTAFF_AVALON", "2H_AXE_AVALON", "2H_LONGBOW"):
+        k7 = {sl: (v.get("gear") if isinstance(v, dict) else v)
+              for sl, v in (e7.kit_options(w).get("kit") or {}).items()}
+        k20 = {sl: (v.get("gear") if isinstance(v, dict) else v)
+               for sl, v in (e20.kit_options(w).get("kit") or {}).items()}
+        differs = differs or k7 != k20
+    check("R28 kit doctrine per size band: every kitted seat ships a gang "
+          "band read at <= 9 members (group at 10+); the size-7 kit is the "
+          "gang modal in >= 85% of slots with no bad pick on every weapon "
+          "with >= 30 gang builds; gang and group kits differ somewhere real",
+          ships and reads and tot >= 100 and agree >= 0.85 * tot and bad == 0
+          and differs,
+          f"seats={len(banded)}/{len(seats_kit)} reads={reads} audit={agree}/{tot} "
+          f"bad={bad} {misses[:3]} differs={differs}")
+
+
 if __name__ == "__main__":
     t_role_book()
     t_ruled_memberships()
@@ -931,6 +1097,8 @@ if __name__ == "__main__":
     t_kit_audit_agreement()
     t_carrier_quota()
     t_observed_chest_class()
+    t_one_player_one_vote()
+    t_doctrine_bands()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")

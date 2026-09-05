@@ -1173,12 +1173,18 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
     less than CHAIN_MIN_SHARE of it — later slots fall back to plain
     ranking rather than a rare build's tail. Builds missing a slot stay
     in the pool (partial kits are common). Returns {slot: [id, n, of]}
-    where n/of = observations at that step / pool size at that step."""
+    where n/of = observations at that step / pool size at that step.
+
+    ONE PLAYER, ONE VOTE (2026-09-04): `build_dicts` entries are
+    (gear, weight, player) — a player's builds on the weapon share one
+    vote between them — so counts and pool sizes are VOTES (rounded for
+    shipping) and a step's pick must be worn by >= 2 DIFFERENT players,
+    never one very active player twice."""
     SLOT_ORDER = ("armor", "head", "shoes", "cape", "offhand",
                   "potion", "food")
     CHAIN_MIN_POOL, CHAIN_MIN_SHARE = 5, 0.25
     pool = []
-    for gd in build_dicts:
+    for gd, wgt, player in build_dicts:
         norm = {}
         for rk, v in gd.items():
             slot = KIT_SLOT_MAP.get(rk.lower())
@@ -1186,40 +1192,45 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
             if gid:
                 norm[slot] = gid
         if norm:
-            pool.append(norm)
+            pool.append((norm, wgt, player))
     # unconditional modal count per slot over the WHOLE pool: a chain step
     # may only pick an item that is also a real share of the population
     # (>= CHAIN_MIN_SHARE of the slot's modal count), else it stops — a
     # 7-of-8 cape inside one chest's pocket must not outrank a 36-of-74
     # slot modal (2026-09-04 deep-harvest audit: Greataxe, Great Hammer)
     uncond = {}
-    for b in pool:
+    for b, wgt, _p in pool:
         for slot, gid in b.items():
-            if slot == "armor" and                     (gear[gid].get("gear_class") or "") not in uni:
+            if slot == "armor" and \
+                    (gear[gid].get("gear_class") or "") not in uni:
                 continue
             c = uncond.setdefault(slot, {})
-            c[gid] = c.get(gid, 0) + 1
+            c[gid] = c.get(gid, 0.0) + wgt
     uncond_top = {slot: max(c.values()) for slot, c in uncond.items()}
     sel = {}
     for slot in SLOT_ORDER:
-        if len(pool) < CHAIN_MIN_POOL:
+        pool_w = sum(wgt for _b, wgt, _p in pool)
+        if pool_w < CHAIN_MIN_POOL:
             break
-        counts = {}
-        for b in pool:
+        counts, players = {}, {}
+        for b, wgt, player in pool:
             gid = b.get(slot)
             if not gid:
                 continue
             if slot == "armor" and \
                     (gear[gid].get("gear_class") or "") not in uni:
                 continue
-            counts[gid] = counts.get(gid, 0) + 1
+            counts[gid] = counts.get(gid, 0.0) + wgt
+            players.setdefault(gid, set()).add(player)
         if not counts:
             continue
         gid, n = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[0]
-        if n < 2 or n < CHAIN_MIN_SHARE * len(pool)                 or n < 0.5 * uncond_top.get(slot, 0):
+        if (len(players[gid]) < 2 or n < CHAIN_MIN_SHARE * pool_w
+                or n < 0.5 * uncond_top.get(slot, 0)):
             break
-        sel[slot] = [gid, n, len(pool)]
-        pool = [b for b in pool if b.get(slot) in (gid, None)]
+        sel[slot] = [gid, int(round(n)), int(round(pool_w))]
+        pool = [(b, wgt, pl) for b, wgt, pl in pool
+                if b.get(slot) in (gid, None)]
     return sel
 
 
@@ -1236,8 +1247,24 @@ def _normalize_gear_id(v, gear):
     return cands.pop() if len(cands) == 1 else None
 
 
+# DOCTRINE BANDS (2026-09-04, "kit doctrine per size band"): the group
+# band (killer parties of 10+, every curated content) is the doctrine the
+# seat ships at top level; the GANG band (killer parties of 4-9, curated
+# small-scale contents only) ships under `kit_bands.gang` and the engine
+# reads it below 10 members, so a 5-man planner gets gank-scale kits
+# instead of ZvZ kits scaled down (Hunter Shoes and Demon Cape are gang
+# doctrine, not noise). Owner grading overrides apply to the group band
+# only (they were ruled on ZvZ kits). Trios (<= 3) read the gang band.
+DOCTRINE_BANDS = {
+    "group": {"party": (10, 10 ** 6), "curated": None},
+    "gang": {"party": (4, 9),
+             "curated": ("ganking_smallscale", "hellgate_5v5",
+                         "openworld_tracking_5", "roads", "zvz_7man")},
+}
+
+
 def derive_kit_doctrine(book, gear, problems, overrides=None,
-                        effect_map=None):
+                        effect_map=None, band="group"):
     """Increment 2 kit POOLS, evidence-led (roles-design.md: 'kit = the
     assigned role's uniform, evidence-led — reference builds first'):
     each seat role's observed per-slot items, mined from the reference
@@ -1269,9 +1296,15 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     joins the mining as a SECOND evidence stream. Provenance stays
     separate (rows carry a `kb` count and a killboard source token) and
     a NOISE FLOOR applies: a killboard-only item needs KB_MIN_SEAT
-    observations to enter a seat pool and KB_MIN_WEAPON to enter a
+    DISTINCT PLAYERS to enter a seat pool and KB_MIN_WEAPON to enter a
     weapon tier — an item the curated corpus already cites merges its
-    killboard count regardless. Off-uniform chests are aggregated into
+    killboard count regardless. ONE PLAYER, ONE VOTE (2026-09-04): a
+    build is one player in one battle and a third of a weapon's builds
+    are repeat sightings of the same people (median 0.67 distinct
+    players per build; Heavy Crossbow: one player in 7 of 20), so every
+    killboard count is a player-weighted VOTE — a player's builds on a
+    weapon share one vote — and every floor counts different people.
+    Counts ship rounded; rows carry `players` beside them. Off-uniform chests are aggregated into
     the same off_uniform report (never admitted); winner bias is the
     harvest's documented property and rides the citation."""
     effect_map = effect_map or {}
@@ -1283,7 +1316,11 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     with open(bi_path, encoding="utf-8") as f:
         by_content = (json.load(f) or {}).get("by_content") or {}
     KB_MIN_SEAT, KB_MIN_WEAPON = 3, 2
-    KB_MIN_PARTY = 10          # killer-party members; the group band floor
+    band_cfg = DOCTRINE_BANDS[band]
+    KB_MIN_PARTY, KB_MAX_PARTY = band_cfg["party"]   # killer-party members
+    if band_cfg["curated"] is not None:
+        by_content = {c: v for c, v in by_content.items()
+                      if c in band_cfg["curated"]}
     kb_by_weapon, kb_armour = {}, {}
     kb_path = os.path.join(OUT, "party_rosters.json")
     if os.path.exists(kb_path):
@@ -1299,19 +1336,29 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
         # excluded as unknown rather than guessed. Class shares for the
         # uniform extension are counted over the same filtered builds.
         cls_counts = {}
-        for b in kb_doc.get("builds") or []:
-            wk = b.get("weapon")
-            if not (wk and b.get("gear")):
-                continue
-            if (b.get("party_size") or 0) < KB_MIN_PARTY:
-                continue
-            kb_by_weapon.setdefault(wk, []).append(b["gear"])
+        kept = [b for b in (kb_doc.get("builds") or [])
+                if b.get("weapon") and b.get("gear")
+                and KB_MIN_PARTY <= (b.get("party_size") or 0) <= KB_MAX_PARTY]
+        # one player, one vote per weapon: a player's k builds on a
+        # weapon weigh 1/k each; a build with no player key is its own
+        # voter (unknown, never merged with anyone)
+        per_pw = {}
+        for i, b in enumerate(kept):
+            pk = b.get("player") or f"?{i}"
+            per_pw[(b["weapon"], pk)] = per_pw.get((b["weapon"], pk), 0) + 1
+        for i, b in enumerate(kept):
+            wk = b["weapon"]
+            pk = b.get("player") or f"?{i}"
+            wgt = 1.0 / per_pw[(wk, pk)]
+            kb_by_weapon.setdefault(wk, []).append((b["gear"], wgt, pk))
             ac = b.get("armour_class")
-            e = cls_counts.setdefault(wk, {"n": 0, "cloth": 0,
-                                           "leather": 0, "plate": 0})
-            e["n"] += 1
+            e = cls_counts.setdefault(wk, {"n": 0.0, "cloth": 0.0,
+                                           "leather": 0.0, "plate": 0.0,
+                                           "builds": 0})
+            e["n"] += wgt
+            e["builds"] += 1
             if ac in e:
-                e[ac] += 1
+                e[ac] += wgt
         kb_armour = cls_counts
     # OBSERVED CHEST CLASS (2026-09-03 kit audit; owner: "lockdown what
     # people are actually wearing"): a weapon whose fielded builds wear
@@ -1329,7 +1376,12 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     # (not only the majority): Witchwork splits cloth 33% / leather 25%
     # under a plate engage seat, and a majority-only rule left it gated
     # to the 2% plate chest.
-    KB_UNI_SHARE, KB_UNI_MIN = 0.25, 50
+    # KB_UNI_MIN is VOTERS since 2026-09-04 (one player, one vote): 35
+    # voters is the old 50-build floor re-expressed in the new unit (the
+    # median weapon has 0.67 voters per build; 61 weapons clear it vs 60
+    # before), so a thin sample still never overturns a book uniform —
+    # Grailseeker's 32 builds are 23 voters (R6/R12)
+    KB_UNI_SHARE, KB_UNI_MIN = 0.25, 35
     uni_ext = {}
     for wk, wa in sorted(kb_armour.items()):
         n = wa.get("n") or 0
@@ -1340,7 +1392,7 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                    if (wa.get(c) or 0) / n >= KB_UNI_SHARE}
         if classes:
             uni_ext[wk] = {"classes": sorted(classes), "share": classes,
-                           "n": n}
+                           "n": int(round(n)), "builds": wa.get("builds")}
 
     def normalize(v):
         return _normalize_gear_id(v, gear)
@@ -1355,6 +1407,10 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
         uni = set((r.get("uniform") or {}).get("chest") or [])
         if not uni:
             continue  # function/meta roles have no seat kit
+        # the group band writes the seat's top-level kit keys; any other
+        # band writes the same keys under kit_bands.<band>
+        tgt = (r if band == "group"
+               else r.setdefault("kit_bands", {}).setdefault(band, {}))
         pools, off_uniform, wpools = {}, [], {}
         for m in (r.get("weapons") or []):
             wk_id = m.get("id")
@@ -1392,9 +1448,15 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
         # ---- killboard stream (2026-09-01): mine separately, then merge
         # above the noise floor with its own provenance token ----
         kb_pools, kb_off, kb_wonly = {}, {}, {}
+        # each entry: votes (player-weighted) + the set of distinct players
+        def _vote(store, key, wgt, player):
+            ent = store.setdefault(key, {"votes": 0.0, "players": set()})
+            ent["votes"] += wgt
+            ent["players"].add(player)
+            return ent
         for m in (r.get("weapons") or []):
             wk_id = m.get("id")
-            for gdict in kb_by_weapon.get(wk_id) or []:
+            for gdict, wgt, player in kb_by_weapon.get(wk_id) or []:
                 for rk, v in gdict.items():
                     slot = KIT_SLOT_MAP.get(rk.lower())
                     gid = normalize(v) if slot else None
@@ -1405,57 +1467,56 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                     weapon_ok = seat_ok or cls in (
                         uni_ext.get(wk_id) or {}).get("classes", ())
                     if not weapon_ok:
-                        key = (gid, wk_id)
-                        kb_off[key] = kb_off.get(key, 0) + 1
+                        _vote(kb_off, (gid, wk_id), wgt, player)
                         continue
                     if not seat_ok:
                         # the weapon's own observed class: weapon tier
                         # only, never the seat aggregate
-                        wo = kb_wonly.setdefault(wk_id, {}).setdefault(
-                            slot, {})
-                        wo[gid] = wo.get(gid, 0) + 1
+                        _vote(kb_wonly.setdefault(wk_id, {}).setdefault(
+                            slot, {}), gid, wgt, player)
                         continue
-                    ent = kb_pools.setdefault(slot, {}).setdefault(
-                        gid, {"count": 0, "weapons": {}})
-                    ent["count"] += 1
-                    ent["weapons"][wk_id] = ent["weapons"].get(wk_id, 0) + 1
+                    ent = _vote(kb_pools.setdefault(slot, {}), gid, wgt,
+                                player)
+                    _vote(ent.setdefault("weapons", {}), wk_id, wgt, player)
+
+        def _cite(e):
+            return (f"killboard:{int(round(e['votes']))}x/"
+                    f"{len(e['players'])}p")
+
+        def _merge(store, gid, e):
+            ent = store.setdefault(
+                gid, {"id": gid, "count": 0, "sources": set()})
+            ent["count"] += int(round(e["votes"]))
+            ent["kb"] = int(round(e["votes"]))
+            ent["players"] = len(e["players"])
+            ent["sources"].add(_cite(e))
         for slot in sorted(kb_pools):
             for gid in sorted(kb_pools[slot]):
                 e = kb_pools[slot][gid]
                 already = gid in (pools.get(slot) or {})
-                if e["count"] < KB_MIN_SEAT and not already:
+                if len(e["players"]) < KB_MIN_SEAT and not already:
                     continue
-                ent = pools.setdefault(slot, {}).setdefault(
-                    gid, {"id": gid, "count": 0, "sources": set()})
-                ent["count"] += e["count"]
-                ent["kb"] = e["count"]
-                ent["sources"].add(f"killboard:{e['count']}x")
+                _merge(pools.setdefault(slot, {}), gid, e)
                 for wk_id in sorted(e["weapons"]):
-                    n = e["weapons"][wk_id]
+                    we = e["weapons"][wk_id]
                     w_already = gid in ((wpools.get(wk_id) or {})
                                         .get(slot) or {})
-                    if n < KB_MIN_WEAPON and not w_already:
+                    if len(we["players"]) < KB_MIN_WEAPON and not w_already:
                         continue
-                    went = wpools.setdefault(wk_id, {}).setdefault(
-                        slot, {}).setdefault(
-                        gid, {"id": gid, "count": 0, "sources": set()})
-                    went["count"] += n
-                    went["sources"].add(f"killboard:{n}x")
+                    _merge(wpools.setdefault(wk_id, {}).setdefault(slot, {}),
+                           gid, we)
         for wk_id in sorted(kb_wonly):
             for slot in sorted(kb_wonly[wk_id]):
-                for gid, n in sorted(kb_wonly[wk_id][slot].items()):
+                for gid, we in sorted(kb_wonly[wk_id][slot].items()):
                     w_already = gid in ((wpools.get(wk_id) or {})
                                         .get(slot) or {})
-                    if n < KB_MIN_WEAPON and not w_already:
+                    if len(we["players"]) < KB_MIN_WEAPON and not w_already:
                         continue
-                    went = wpools.setdefault(wk_id, {}).setdefault(
-                        slot, {}).setdefault(
-                        gid, {"id": gid, "count": 0, "sources": set()})
-                    went["count"] += n
-                    went["sources"].add(f"killboard:{n}x")
+                    _merge(wpools.setdefault(wk_id, {}).setdefault(slot, {}),
+                           gid, we)
         for (gid, wk_id) in sorted(kb_off):
             off_uniform.append({"id": gid, "weapon": wk_id,
-                                "build": f"killboard:{kb_off[(gid, wk_id)]}x"})
+                                "build": _cite(kb_off[(gid, wk_id)])})
         # ---- observed build archetypes (owner ruling 2026-09-01): the
         # coherent modal build per weapon (>= 3 observed builds), with a
         # seat-level archetype over all member builds as the fallback ----
@@ -1464,7 +1525,7 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
             wk_id = m.get("id")
             wb = kb_by_weapon.get(wk_id) or []
             seat_builds.extend(wb)
-            if len(wb) >= 3:
+            if sum(w for _g, w, _p in wb) >= 3:      # three votes, not sightings
                 w_uni = set(uni) | set(
                     (uni_ext.get(wk_id) or {}).get("classes") or ())
                 sel = _modal_build_chain(wb, w_uni, effect_map, gear,
@@ -1474,10 +1535,10 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
         kit_build = _modal_build_chain(seat_builds, uni, effect_map,
                                        gear, normalize)
         if kit_build:
-            r["kit_build"] = kit_build
+            tgt["kit_build"] = kit_build
         if kit_weapon_build:
-            r["kit_weapon_build"] = {k: kit_weapon_build[k]
-                                     for k in sorted(kit_weapon_build)}
+            tgt["kit_weapon_build"] = {k: kit_weapon_build[k]
+                                       for k in sorted(kit_weapon_build)}
         kit = {}
         det = {}
         for slot, ents in sorted(pools.items()):
@@ -1489,7 +1550,8 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                 row = {"id": e["id"], "count": e["count"],
                        "sources": _fold_sources(e["sources"])}
                 if e.get("kb"):
-                    row["kb"] = e["kb"]   # killboard share of the count
+                    row["kb"] = e["kb"]   # killboard votes in the count
+                    row["players"] = e.get("players")
                 if e["id"] in effect_map:
                     row["effect"] = effect_map[e["id"]]
                 rows.append(row)
@@ -1500,8 +1562,10 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                 ordered = sorted(ents.values(),
                                  key=lambda e: (-e["count"], e["id"]))
                 w_det.setdefault(wk_id, {})[slot] = [
-                    {"id": e["id"], "count": e["count"],
-                     "sources": _fold_sources(e["sources"])}
+                    dict({"id": e["id"], "count": e["count"],
+                          "sources": _fold_sources(e["sources"])},
+                         **({"players": e["players"]} if e.get("players")
+                            else {}))
                     for e in ordered]
                 kit_weapon.setdefault(wk_id, {})[slot] = [
                     [e["id"], e["count"]] for e in ordered]
@@ -1517,14 +1581,14 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                if m.get("id") in uni_ext
                and set(uni_ext[m.get("id")]["classes"]) - uni}
         if kit:
-            r["kit"] = kit
+            tgt["kit"] = kit
         if kit_weapon:
-            r["kit_weapon"] = kit_weapon
+            tgt["kit_weapon"] = kit_weapon
         if ext:
             # the engine's chest gate and kit_match admit these classes
             # for THIS weapon only (observed majority, see uni_ext)
-            r["kit_weapon_uniform"] = {wk: sorted(uni | set(e["classes"]))
-                                       for wk, e in sorted(ext.items())}
+            tgt["kit_weapon_uniform"] = {wk: sorted(uni | set(e["classes"]))
+                                         for wk, e in sorted(ext.items())}
         if det or off_uniform or applied or ext:
             detail[r["id"]] = {"slots": det}
             if ext:
@@ -1852,6 +1916,10 @@ def apply_roles(weapons, gear):
         book, gear, problems,
         (doc.get("kit_doctrine") or {}).get("overrides") or {},
         effect_map)
+    # the GANG band (4-9 man killer parties + small-scale curated
+    # contents; no grading overrides — those were ruled on ZvZ kits)
+    kit_detail_gang = derive_kit_doctrine(book, gear, problems, None,
+                                          effect_map, band="gang")
     effect_quotas = mine_effect_quotas(gear, effect_map, problems)
     carrier_quotas = mine_carrier_quotas(gear, effect_map)
     # unique actives that buff allies but sit in no gear_effect yet —
@@ -1873,6 +1941,7 @@ def apply_roles(weapons, gear):
         "gear_effects": effects,
         "items": gear_board,
         "kit_doctrine": kit_detail,
+        "kit_doctrine_gang": kit_detail_gang,
         "effect_quotas": effect_quotas,
         "carrier_quotas": carrier_quotas,
         "effect_candidates": effect_candidates,

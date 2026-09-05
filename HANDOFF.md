@@ -137,8 +137,16 @@ untouched). T37 pins the contract; T38 judges the five graded fixtures DRESSED
 synthetic ten-mans: 81-95% dressed vs 71-85% naked, every one clearing
 its band's engage and mobility targets; blap's disengage / knockback
 shortfall recorded as a committed ball, not tuned). Rerun order after a
-harvest: audit -> derive_style_bands -> build_dataset -> gates. Open: a
-gank read for non-ZvZ killer parties (roster 9).
+harvest: audit -> derive_style_bands -> build_dataset -> gates. Same
+evening, ONE PLAYER, ONE VOTE (R27, VALIDATION.md): harvested builds
+carry a hashed player key, doctrine weighs a player's builds on a weapon
+as one vote, every floor counts distinct people, the uniform extension
+needs 35 voters; 72 of 818 tiers changed modal, 337 single-voter items
+left. And KIT DOCTRINE PER SIZE BAND (R28): a gang band from 4-9 man
+killer parties under `kit_bands.gang`, read through `_seat_kit` at <= 9
+members in both ports (47 weapons audited at 7: 286/286 slots on the
+gang modal). Open: a gank read for non-ZvZ killer parties (roster 9);
+the 20+ band once the harvest can stand it (14 weapons with 50+ today).
 
 ## Owner bug round (2026-09-03)
 

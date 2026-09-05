@@ -1381,12 +1381,28 @@ class Engine:
             self._dressed_cache[weapon] = out
         return out
 
+    DOCTRINE_GANG_MAX = 9   # party sizes that read the gang doctrine band
+
+    def _seat_kit(self, rec):
+        """The seat's doctrine for THIS party size (2026-09-04, kit
+        doctrine per size band): below DOCTRINE_GANG_MAX+1 members the
+        gang band (`kit_bands.gang`, mined from 4-9 man killer parties)
+        when the seat has one, else the group band the seat carries at
+        top level. Every doctrine reader goes through here."""
+        if self.size <= self.DOCTRINE_GANG_MAX:
+            gang = (rec.get("kit_bands") or {}).get("gang")
+            if gang:
+                return gang
+        return rec
+
     def _chest_uniform(self, seat, weapon):
         """Chest classes admitted for `weapon` in `seat`: the book uniform
         plus the weapon's own observed-majority class when the killboard
-        harvest is clear (dataset `kit_weapon_uniform`, 2026-09-03)."""
+        harvest is clear (dataset `kit_weapon_uniform`, 2026-09-03), read
+        from the size band's doctrine."""
         rec = self.roles.get(seat) or {}
-        ext = ((rec.get("kit_weapon_uniform") or {}).get(weapon))
+        ext = ((self._seat_kit(rec).get("kit_weapon_uniform") or {})
+               .get(weapon))
         if ext:
             return list(ext)
         return list((rec.get("uniform") or {}).get("chest") or [])
@@ -1469,6 +1485,8 @@ class Engine:
         # kit_weapon_uniform, 2026-09-03: Galatine Pair fields plate in
         # 81% of winning builds under a cloth/leather bomb seat)
         uniform = self._chest_uniform(seat, weapon)
+        seat_class = seat_rec.get("class")
+        seat_rec = self._seat_kit(seat_rec)   # the size band's doctrine
         doctrine = seat_rec.get("kit") or {}
         # Per-weapon doctrine tier (owner design 2026-08-26): THIS
         # weapon's own observed items (effect carriers excluded at the
@@ -1476,7 +1494,6 @@ class Engine:
         # aggregate; `doctrine` becomes "weapon" / "seat" / False and
         # weapon-tier options carry doctrine_n = [count, slot total].
         wdoc = (seat_rec.get("kit_weapon") or {}).get(weapon) or {}
-        seat_class = seat_rec.get("class")
         # observed-build archetype (2026-09-01): weapon's own first,
         # seat fallback per slot
         arch, arch_seat = {}, set()
@@ -1713,7 +1730,8 @@ class Engine:
         seat = self.primary_seat(weapon)
         rec = self.roles.get(seat) or {}
         slot = (self.gear.get(gear_id) or {}).get("slot")
-        wl = ((rec.get("kit_weapon") or {}).get(weapon) or {}).get(slot) or []
+        wl = ((self._seat_kit(rec).get("kit_weapon") or {}).get(weapon)
+              or {}).get(slot) or []
         total = sum(n for _g, n in wl)
         n = next((n for g, n in wl if g == gear_id), 0)
         return (n / total) if total else 0.0

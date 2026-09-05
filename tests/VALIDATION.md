@@ -2232,3 +2232,62 @@ asserts the four have rows above twice the content minimums; T38 pins the
 dressed contract (recorded kits via `pipeline/gear_join.py`, doctrine kits
 for the synthetic ten-mans, dressed > naked on all five, every one clearing
 engage and mobility) and never the numbers.
+
+### One player, one vote (2026-09-04) — distinct-player floors
+
+A harvested build is one player in one battle. Measured on the 15,165
+builds from 10+ killer parties: 9,131 distinct player-weapon pairs, a
+median of 0.67 voters per build, and on thin weapons one person can be
+most of the sample (Heavy Crossbow: one player in 7 of 20 builds; Demonic
+Staff 5 of 15; Demon Hammer 5 of 14). Doctrine floors counted sightings,
+so two battles by one player cleared the weapon-tier floor of 2 and seven
+battles by one player fronted Fey Shoes on Heavy Crossbow over Morgana
+Shoes worn by four different people.
+
+Change, all derivation, no ruling: `sample_parties.py` stamps every build
+with a stable non-reversible player key (sha1 prefix; the name never
+leaves the cache); `derive_kit_doctrine` weighs each build 1/k where k is
+that player's builds on the weapon (one player, one vote per weapon),
+ranks by votes, applies every floor to DISTINCT PLAYERS (KB_MIN_SEAT 3,
+KB_MIN_WEAPON 2 voters; a chain step needs two different people), ships
+counts as rounded votes with `players` beside them and cites
+`killboard:<votes>x/<players>p`; the uniform extension floor moves from
+50 builds to 35 voters — the same strictness in the new unit (61 weapons
+clear it vs 60; Grailseeker's 32 builds are 23 voters and still extend
+nothing, R6/R12).
+
+Effect on the shipped doctrine: 818 weapon-slot tiers, modal item changed
+in 72 (thin weapons almost entirely), 337 single-voter items dropped out
+of tiers, 15 uniform extensions (was 16: Rampant's plate at 23 voters and
+Hellfire Hands' cloth at 21% of votes fall away, Bow of Badon's leather/
+plate at 58 voters comes in). Bloodletter's head goes from Morgana
+(45 sightings, 30 people) to Soldier Helmet (48 sightings, 43 people).
+Polehammer keeps Knight, 72 votes of 145. The kit audit (R24) holds at
+56/61 slots agreeing with the modal, none bad. R27 pins the mechanism.
+Gates green; tier2 74% unchanged.
+
+### Kit doctrine per size band (2026-09-04)
+
+The party-size floor of 2026-09-03 kept only 10+ killer parties in the
+doctrine, which fixed the Grailseeker gank kit in ZvZ but threw the 4,798
+small-party builds (3,505 voters, 69 weapons with 20+ builds) away — and a
+7-man planner was being dressed in ZvZ kits scaled down. Now two DOCTRINE
+BANDS: the GROUP band (10+ parties, every curated content) stays the
+seat's top-level kit; the GANG band (4-9 man killer parties plus the
+small-scale curated contents — ganking, hellgate 5v5, tracking 5, roads,
+7-man) ships under `kit_bands.gang`, mined by the same miner with the same
+one-player-one-vote floors and NO grading overrides (those were ruled on
+ZvZ kits). Both engine ports read every doctrine key through `_seat_kit`,
+which returns the gang band at <= 9 members (trios included) and the
+group band otherwise; the chest gate, kit_options, the archetype and
+observed_share all follow it. 20+ was not split from 10-19 (2,597 builds,
+14 weapons with 50+ — too thin to stand alone).
+
+Audit at size 7, every weapon with >= 30 gang builds (47 weapons, 286
+slots): the kit matches the small-party modal item in 286 of 286, no bad
+picks — the band is the gang modal by construction. Gang and group kits
+differ where the evidence does (Hallowfall's Guardian vs Assassin Hood at
+7 vs 20; Longbow's Lymhurst vs Smuggler cape). R28 pins it. No golden or
+forge pin moved (they dress at 7 through the same channel, and the gang
+modal happened to agree with the old scaled-down pick on the pinned
+cases). Gates green; tier2 74% unchanged.

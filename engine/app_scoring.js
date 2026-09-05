@@ -1220,12 +1220,21 @@
     return out;
   };
 
+  CompEngine.prototype._seatKit = function (rec) {
+    /* the seat's doctrine for THIS party size (mirrors engine.py
+       _seat_kit): the gang band below 10 members when the seat has one */
+    if (this.size <= DOCTRINE_GANG_MAX) {
+      var gang = (rec.kit_bands || {}).gang;
+      if (gang) return gang;
+    }
+    return rec;
+  };
   CompEngine.prototype._chestUniform = function (seat, weapon) {
     /* chest classes admitted for `weapon` in `seat`: the book uniform plus
        the weapon's observed-majority class where the harvest is clear
        (dataset kit_weapon_uniform) -- mirrors engine.py _chest_uniform */
     var rec = this.rolesBook[seat] || {};
-    var ext = (rec.kit_weapon_uniform || {})[weapon];
+    var ext = (this._seatKit(rec).kit_weapon_uniform || {})[weapon];
     if (ext && ext.length) return ext.slice();
     return ((rec.uniform || {}).chest || []).slice();
   };
@@ -1268,6 +1277,8 @@
     /* book uniform widened by THIS weapon's observed majority class
        (kit_weapon_uniform, 2026-09-03) -- mirrors engine.py */
     var uniform = this._chestUniform(seat, weapon);
+    var seatClass = seatRec["class"] || null;
+    seatRec = this._seatKit(seatRec);   /* the size band's doctrine */
     var doctrine = seatRec.kit || {};
     /* Per-weapon doctrine tier (owner design 2026-08-26): this weapon's
        own observed items (effect carriers excluded at the build) outrank
@@ -1275,7 +1286,6 @@
        weapon-tier options carry doctrine_n = [count, slot total].
        Mirrors engine.py. */
     var wdoc = (seatRec.kit_weapon || {})[weapon] || {};
-    var seatClass = seatRec["class"] || null;
     /* observed-build archetype (2026-09-01, mirrors engine.py): the KIT
        pick follows what real players field — weapon's own conditional-
        modal build first, seat fallback per slot; the archetype item
@@ -1502,7 +1512,7 @@
     var seat = this.primarySeat(weapon);
     var rec = this.rolesBook[seat] || {};
     var slot = (this.gear[gearId] || {}).slot;
-    var wl = ((rec.kit_weapon || {})[weapon] || {})[slot] || [];
+    var wl = ((this._seatKit(rec).kit_weapon || {})[weapon] || {})[slot] || [];
     var total = 0, n = 0;
     for (var i = 0; i < wl.length; i++) {
       total += wl[i][1];
@@ -2558,6 +2568,7 @@
       IDENTITY_RANGED_ATTACK = 9.0,
       IDENTITY_HYBRID_AOE = 0.45, IDENTITY_HYBRID_EVADE = 2.0,   /* 0.40 -> 0.45, blind round 2 */
       IDENTITY_KITE_TOOLS_PER = 10;   /* standoff tools per members (2026-09-04) */
+  var DOCTRINE_GANG_MAX = 9;   /* party sizes that read the gang doctrine band */
   var IDENTITY_STYLES = { brawl: true, clap: true, kite: true,
                           brawl_clap: true, clap_kite: true };
 

@@ -63,6 +63,7 @@ Usage:  py -3 pipeline/sample_parties.py [--battles 25] [--min-players 25]
         py -3 pipeline/sample_parties.py --pages 0     (offline re-analysis)
 """
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -345,12 +346,22 @@ def analyze(known):
             if not w or w not in known:
                 continue
             ac = armour_class(g.get("Armor"))
+            # PLAYER KEY (2026-09-04, distinct-player floors): a build is
+            # one player in one battle, and a third of a weapon's builds
+            # are repeat sightings of the same people (median 0.67
+            # distinct players per build; Heavy Crossbow: one player in 7
+            # of 20). Doctrine counts one player, one vote per weapon, so
+            # every build carries a stable, non-reversible player key —
+            # the name itself never leaves the cache.
+            nm = bd.get("name")
             builds.append({
                 "battle": rec["battle"], "weapon": w,
                 "armour_class": ac,
                 "item_power": bd.get("item_power"),
                 "seen_as": bd.get("seen_as"),
-                "party_size": size_by_name.get(bd.get("name")),
+                "party_size": size_by_name.get(nm),
+                "player": (hashlib.sha1(nm.encode("utf-8")).hexdigest()[:12]
+                           if nm else None),
                 "slots_filled": bd.get("slots_filled"),
                 "gear": {s: strip(v) for s, v in g.items() if v}})
             e = by_weapon.setdefault(w, {"n": 0, "cloth": 0, "leather": 0,
