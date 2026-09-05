@@ -1124,9 +1124,9 @@ def run():
     lean_l = e35.comp_identity(split, None, leather)
     lean_c = e35.comp_identity(split, None, cloth)
     kit_ok = (naked.get("style") is None and "split" in naked.get("label", "")
-              and lean_l.get("style") == "brawl" and lean_l.get("kit_lean") == "leather"
+              and lean_l.get("style") == "brawl" and lean_l.get("kit_lean") == "brawl"
               and lean_c.get("style") in ("clap", "clap_kite", "kite")
-              and lean_c.get("kit_lean") == "cloth"
+              and lean_c.get("kit_lean") == "ranged"
               and e35.fitness(split) == e35.fitness(split))   # descriptive only
     check("T35 rulings 2026-09-04 (2): Rift Glaive's free-charge Q makes it "
           "a clap bomb while the sword line stays conditional; Royal Armor "
@@ -1422,12 +1422,45 @@ def run():
           "weapons-decided clap to brawl; cloth keeps the clap; the "
           "bomb-squad detachment is exempt",
           naked40.get("style") == "clap" and lea40.get("style") == "brawl"
-          and lea40.get("kit_lean") == "leather" and clo40.get("style") == "clap"
+          and lea40.get("kit_lean") == "brawl" and clo40.get("style") == "clap"
           and sq_naked.get("archetype") == "bomb_squad"
           and sq_lea.get("archetype") == "bomb_squad" and fit40,
           f"naked={naked40.get('style')} leather={lea40.get('style')} "
           f"cloth={clo40.get('style')} squad={sq_naked.get('archetype')}/"
           f"{sq_lea.get('archetype')}:{sq_lea.get('style')}")
+
+    # T41 — PER-ITEM CHEST LEAN (2026-09-05, from the kit rounds): the
+    # chest ITEM separates styles where the class cannot — Royal Jacket
+    # (leather) is worn by ranged-style Realmbreakers without exception,
+    # Hellion (leather) by brawl or clap, Royal Armor (plate) by either.
+    # Mined by the audit from WEAPONS-ONLY labels of clean cores (no kit
+    # rule in the loop), shipped as `chest_lean`, read by the kit
+    # tie-break item-first with the owner's class rule as the fallback.
+    # Pinned on clap10 with every dps in Royal Jacket: leather by class,
+    # yet the split/clap override must NOT fire (ranged lean) — and the
+    # same roster in Hellion (no item lean, class -> brawl) does turn.
+    e41 = Engine(content="blackzone_roam", size=10)
+    cl41 = e41.data.get("chest_lean") or {}
+    royal_j = (cl41.get("items") or {}).get("ARMOR_LEATHER_ROYAL") or {}
+    hellion = (cl41.get("items") or {}).get("ARMOR_LEATHER_HELL") or {}
+    table_ok = (royal_j.get("lean") == "ranged" and royal_j.get("wearers", 0) >= 20
+                and hellion.get("lean") is None
+                and e41._chest_side("ARMOR_LEATHER_ROYAL") == "ranged"
+                and e41._chest_side("ARMOR_LEATHER_HELL") == "brawl"
+                and e41._chest_side("ARMOR_CLOTH_SET2") == "ranged"
+                and e41._chest_side("ARMOR_PLATE_ROYAL") is None)
+    dps41 = [i for i, w in enumerate(clap10) if e41.role_of(w) == "dps"]
+    royal41 = [["ARMOR_LEATHER_ROYAL"] if i in dps41 else None for i in range(len(clap10))]
+    hell41 = [["ARMOR_LEATHER_HELL"] if i in dps41 else None for i in range(len(clap10))]
+    ci_royal = e41.comp_identity(clap10, None, royal41)
+    ci_hell = e41.comp_identity(clap10, None, hell41)
+    check("T41 per-item chest lean (2026-09-05): Royal Jacket votes ranged "
+          "though leather, Hellion falls back to the class rule; clap10 in "
+          "Royal Jackets stays clap, in Hellions turns brawl",
+          table_ok and ci_royal.get("style") == "clap"
+          and ci_hell.get("style") == "brawl" and ci_hell.get("kit_lean") == "brawl",
+          f"table={table_ok} royal={royal_j} hellion={hellion} "
+          f"clap10 royal={ci_royal.get('style')} hellion={ci_hell.get('style')}")
 
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)

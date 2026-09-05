@@ -164,9 +164,11 @@ in Assassin Jackets. Landed: leather-majority dps overrule a
 weapons-decided clap to brawl, bomb squads exempt; board brawl 800 /
 clap 788. Open: a gank read for non-ZvZ killer parties (round 2 roster
 9; round-4 roster 3 was called "gank" too); the 20+ band once the
-harvest can stand it; a per-ITEM chest lean (Royal Jacket ranged, Hellion
-either, Judicator / Royal Armor blind) is the next derivation the kit
-rounds point at.
+harvest can stand it; the per-ITEM chest lean LANDED the same day (T41,
+`out/chest_lean.json` from the audit's weapons-only clean cores; eleven
+chests lean ranged incl. Royal Jacket / Tenacity / Hunter Jacket in
+leather, none leans brawl, the rest keep the class rule; board brawl 628
+/ clap 941).
 
 ## Owner bug round (2026-09-03)
 

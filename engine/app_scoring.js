@@ -2585,9 +2585,18 @@
     return this.size <= 3 ? "trio" : this.size <= 9 ? "gang" : "group";
   };
 
+  CompEngine.prototype._chestSide = function (chest) {
+    /* the style side a dps chest votes for: the item's harvest lean
+       (dataset chest_lean) first, else the class rule (mirrors engine.py) */
+    var items = (this.data.chest_lean || {}).items || {};
+    var lean = (items[chest] || {}).lean;
+    if (lean) return lean;
+    var cls = this._chestClass(chest);
+    return cls === "leather" ? "brawl" : cls === "cloth" ? "ranged" : null;
+  };
   CompEngine.prototype._kitLean = function (party, gears) {
-    /* dps chest-class majority from the worn kits (mirrors engine.py
-       _kit_lean): "leather" / "cloth" / null */
+    /* dps chest majority by style side from the worn kits (mirrors
+       engine.py _kit_lean): "brawl" / "ranged" / null */
     if (!gears) return null;
     var dps = [], i;
     for (i = 0; i < party.length; i++) if (this.roleOf(party[i]) === "dps") dps.push(i);
@@ -2596,12 +2605,14 @@
     for (i = 0; i < dps.length; i++) {
       var gl = dps[i] < gears.length ? gears[dps[i]] : null, chest = null;
       for (var j = 0; gl && j < gl.length; j++) if (gl[j].indexOf("ARMOR_") === 0) { chest = gl[j]; break; }
-      var cls = chest ? this._chestClass(chest) : null;
-      if (cls) { known += 1; counts[cls] = (counts[cls] || 0) + 1; }
+      if (!chest || !this._chestClass(chest)) continue;
+      known += 1;
+      var side = this._chestSide(chest);
+      if (side) counts[side] = (counts[side] || 0) + 1;
     }
     if (known < 0.5 * dps.length) return null;
-    if ((counts.leather || 0) > 0.5 * known) return "leather";
-    if ((counts.cloth || 0) > 0.5 * known) return "cloth";
+    if ((counts.brawl || 0) > 0.5 * known) return "brawl";
+    if ((counts.ranged || 0) > 0.5 * known) return "ranged";
     return null;
   };
   CompEngine.prototype.compIdentity = function (party, combos, gears) {
@@ -2808,29 +2819,29 @@
         }
         /* the kits decide a split (owner 2026-09-04; mirrors engine.py) */
         var kit = this._kitLean(party, gears);
-        if (kit === "leather") {
-          out.style = "brawl"; out.strength = "leaning"; out.kit_lean = "leather";
-          out.label = sname("brawl", "Brawl") + " — melee ball (by the kits: dps in leather)";
-        } else if (kit === "cloth") {
+        if (kit === "brawl") {
+          out.style = "brawl"; out.strength = "leaning"; out.kit_lean = "brawl";
+          out.label = sname("brawl", "Brawl") + " — melee ball (by the kits: brawl chests)";
+        } else if (kit === "ranged") {
           if (mode.aoe >= IDENTITY_HYBRID_AOE && kiteHalf) {
             out.style = "clap_kite";
-            out.label = sname("clap_kite", "Clap-Kite") + " — bomb from range, throw them back (by the kits: dps in cloth)";
+            out.label = sname("clap_kite", "Clap-Kite") + " — bomb from range, throw them back (by the kits: ranged chests)";
           } else if (mode.aoe >= IDENTITY_CLAP_AOE || !kiteAny) {
             out.style = "clap";
-            out.label = sname("clap", "Clap") + " — ranged bomb (by the kits: dps in cloth)";
+            out.label = sname("clap", "Clap") + " — ranged bomb (by the kits: ranged chests)";
           } else {
             out.style = "kite";
-            out.label = sname("kite", "Kite") + " — ranged pressure (by the kits: dps in cloth)";
+            out.label = sname("kite", "Kite") + " — ranged pressure (by the kits: ranged chests)";
           }
-          out.strength = "leaning"; out.kit_lean = "cloth";
+          out.strength = "leaning"; out.kit_lean = "ranged";
         }
       }
     }
     /* leather dps are a brawl whatever the weapons say (owner 2026-09-05;
        the bomb-squad archetype is the exception) -- mirrors engine.py */
-    if (out.style === "clap" && !out.archetype && this._kitLean(party, gears) === "leather") {
-      out.style = "brawl"; out.strength = "leaning"; out.kit_lean = "leather";
-      out.label = sname("brawl", "Brawl") + " — melee ball (by the kits: dps in leather, bombs or not)";
+    if (out.style === "clap" && !out.archetype && this._kitLean(party, gears) === "brawl") {
+      out.style = "brawl"; out.strength = "leaning"; out.kit_lean = "brawl";
+      out.label = sname("brawl", "Brawl") + " — melee ball (by the kits: brawl chests, bombs or not)";
     }
     /* per-member fit verdicts: the declared style is the caller's INTENT;
        balanced falls back to the detected lean */

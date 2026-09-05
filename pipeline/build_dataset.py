@@ -2223,6 +2223,18 @@ def main():
                 else:
                     gear_lines_db = json.load(f)
     gear = load_gear_sheets(gear_lines_db, gear_spells)
+    # per-item chest lean (audit_style_rosters.py -> out/chest_lean.json):
+    # optional, validated, fails closed on an unknown chest or lean
+    chest_lean = {}
+    cl_path = os.path.join(OUT, "chest_lean.json")
+    if os.path.exists(cl_path):
+        with open(cl_path, encoding="utf-8") as f:
+            chest_lean = json.load(f) or {}
+        for k, v in (chest_lean.get("items") or {}).items():
+            if k not in gear:
+                sys.exit(f"chest_lean.json: unknown chest '{k}'")
+            if v.get("lean") not in (None, "brawl", "ranged"):
+                sys.exit(f"chest_lean.json: {k}: bad lean {v.get('lean')!r}")
     # Build-stat channel: copy each gear item's combat-relevant base stats
     # from the item bank (T4-flat reference; IP scales them in game). The
     # engine turns absolute defense into tankiness units and % stats into
@@ -2495,6 +2507,12 @@ def main():
         # set_content AFTER the content row at 10+. Hard floors and weights
         # stay content/style facts; `balanced` never reads a band.
         "style_bands": style_bands,
+        # Per-item chest lean (out/chest_lean.json, audit_style_rosters.py,
+        # 2026-09-05): the style side a dps chest ITEM is worn on in clean
+        # weapons-only cores — the kit tie-break reads the item's lean
+        # first and the owner's class rule where an item has none.
+        # Descriptive only (comp_identity); never a scoring input.
+        "chest_lean": chest_lean,
         "mechanics": mechanics,
         # Composition constraints + viability + size physics (composition.yaml)
         # — what the FORGE may generate; never a bar to scoring a manual party.

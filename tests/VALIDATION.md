@@ -2485,3 +2485,45 @@ Permafrost squad in leather.
 After: brawl 800, clap 788, clap_kite 319, kite 250 (232 rosters moved;
 the 16 leather-dps "claps" left are bomb squads). The clap cell now reads
 cloth 360 / leather 16; the style rows re-derived on it. Gates green.
+
+### Per-item chest lean (2026-09-05, "let's do the per item chest")
+
+The kit rounds showed two leather chests with opposite signals (Royal
+Jacket ranged without exception, Hellion brawl or clap), so the kit
+tie-break now reads the chest ITEM first and the owner's class rule
+where an item has none. Derived without a loop: `audit_style_rosters.py`
+labels every roster WEAPONS-ONLY (no kits), keeps only clean cores (melee
+share >= 0.65 votes brawl, <= 0.35 votes ranged; the mid band and every
+kit-decided read stay out), and counts distinct dps wearers per chest; a
+chest with >= 20 wearers and >= 75% on one side carries that lean. Written
+to `out/chest_lean.json`, shipped as `chest_lean`, read by `_chest_side`
+in both ports. The table (dps wearers in clean cores):
+
+| chest | class | wearers | brawl | ranged | lean |
+|---|---|---|---|---|---|
+| Hellion Jacket | leather | 785 | 487 | 332 | class (brawl) |
+| Robe of Purity | cloth | 645 | 15 | 633 | ranged |
+| Scholar Robe | cloth | 520 | 16 | 506 | ranged |
+| Cleric Robe | cloth | 370 | 56 | 320 | ranged |
+| Royal Jacket | leather | 365 | 6 | 359 | ranged |
+| Assassin Jacket | leather | 307 | 134 | 181 | class (brawl) |
+| Jacket of Tenacity | leather | 283 | 68 | 223 | ranged |
+| Soldier Armor | plate | 240 | 168 | 79 | class (none) |
+| Hunter Jacket | leather | 177 | 24 | 156 | ranged |
+| Guardian Armor | plate | 154 | 106 | 50 | class (none) |
+| Royal Armor | plate | 100 | 59 | 43 | class (none) |
+| Judicator Armor | plate | 80 | 23 | 58 | class (none) |
+| Knight Armor | plate | 39 | 10 | 30 | ranged |
+| Demon Armor | plate | 28 | 3 | 25 | ranged |
+
+Eleven chests lean ranged, none reaches a brawl lean (Hellion 62%,
+Soldier 70%, Guardian 69% sit under the 75% line and keep the class
+rule), sixteen are class-default. The three leather chests that lean
+ranged — Royal Jacket, Jacket of Tenacity, Hunter Jacket — are the
+correction: under the class rule alone they voted brawl. Board after:
+brawl 628, clap 941, clap_kite 319, kite 251 (172 rosters whose dps wore
+those three chests move back to clap); rows re-derived. T41 pins the
+mechanism on clap10 dressed in Royal Jackets (stays clap) and Hellions
+(turns brawl); T35/T40 speak `kit_lean` = brawl / ranged now. Rerun
+order after a harvest: audit (writes chest_lean.json) -> derive rows ->
+build_dataset -> gates. Gates green; parity 60/60.

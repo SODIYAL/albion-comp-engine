@@ -28,248 +28,247 @@ bands:
     "10-14":
       sizes: [10, 14]
       ref_size: 12
-      distinct: 310
+      distinct: 256
       requirements:
         anti_dive:          {soft_cap:    5.75}   # p10/p50/p90 0.0/2.0/5.0; no minimum, content target stands
-        buff_allies:        {target:    3.15, soft_cap:   14.95}   # p10/p50/p90 3.5/8.0/13.0
-        burst_aoe:          {target:    5.59, soft_cap:   18.86}   # p10/p50/p90 6.2/11.4/16.4
-        burst_st:           {soft_cap:   23.22}   # p10/p50/p90 0.0/3.4/20.2; no minimum, content target stands
-        catch:              {target:    4.82, soft_cap:   20.09}   # p10/p50/p90 5.4/10.9/17.5
+        buff_allies:        {target:    3.15, soft_cap:   14.37}   # p10/p50/p90 3.5/8.0/12.5
+        burst_aoe:          {target:    5.43, soft_cap:   18.04}   # p10/p50/p90 6.0/11.2/15.7
+        burst_st:           {soft_cap:   25.01}   # p10/p50/p90 0.0/4.4/21.8; no minimum, content target stands
+        catch:              {target:    4.67, soft_cap:   20.70}   # p10/p50/p90 5.2/11.2/18.0
         cleanse:            {soft_cap:    4.60}   # p10/p50/p90 0.0/2.0/4.0; no minimum, content target stands
         clump_create:       {soft_cap:    3.45}   # p10/p50/p90 0.0/0.0/3.0; no minimum, content target stands
-        damage_debuff:      {soft_cap:    5.81}   # p10/p50/p90 0.0/2.5/5.0; no minimum, content target stands
-        disengage:          {target:    8.10, soft_cap:   24.21}   # p10/p50/p90 9.0/15.0/21.1
-        engage:             {target:    8.10, soft_cap:   23.00}   # p10/p50/p90 9.0/15.0/20.0
-        execute:            {soft_cap:    4.63}   # p10/p50/p90 0.0/0.0/4.0; no minimum, content target stands
-        heal_burst:         {target:    2.33, soft_cap:   13.81}   # p10/p50/p90 2.6/6.1/12.0
-        heal_reduction:     {soft_cap:    6.96}   # p10/p50/p90 0.0/2.0/6.0; no minimum, content target stands
-        heal_sustain:       {target:    2.70, soft_cap:   13.12}   # p10/p50/p90 3.0/7.2/11.4
+        damage_debuff:      {soft_cap:    5.75}   # p10/p50/p90 0.0/2.5/5.0; no minimum, content target stands
+        disengage:          {target:    8.10, soft_cap:   25.30}   # p10/p50/p90 9.0/15.0/22.0
+        engage:             {target:    8.10, soft_cap:   23.57}   # p10/p50/p90 9.0/15.0/20.5
+        execute:            {soft_cap:    5.66}   # p10/p50/p90 0.0/0.0/4.9; no minimum, content target stands
+        heal_burst:         {target:    1.35, soft_cap:   13.83}   # p10/p50/p90 1.5/6.0/12.0
+        heal_reduction:     {soft_cap:    7.47}   # p10/p50/p90 0.0/2.0/6.5; no minimum, content target stands
+        heal_sustain:       {target:    2.61, soft_cap:   13.14}   # p10/p50/p90 2.9/7.1/11.4
         interrupt:          {soft_cap:    2.30}   # p10/p50/p90 0.0/1.0/2.0; no minimum, content target stands
-        knockback_displace: {target:    3.09, soft_cap:   19.87}   # p10/p50/p90 3.4/8.7/17.3
+        knockback_displace: {target:    2.70, soft_cap:   21.17}   # p10/p50/p90 3.0/8.5/18.4
         max_health_cut:     {soft_cap:    2.30}   # p10/p50/p90 0.0/1.0/2.0; no minimum, content target stands
-        mobility:           {target:   18.00, soft_cap:   41.97}   # p10/p50/p90 20.0/27.5/36.5
-        peel:               {target:   15.55, soft_cap:   47.52}   # p10/p50/p90 17.3/27.8/41.3
+        mobility:           {target:   18.23, soft_cap:   42.55}   # p10/p50/p90 20.2/28.5/37.0
+        peel:               {target:   15.11, soft_cap:   47.59}   # p10/p50/p90 16.8/27.3/41.4
         purge:              {soft_cap:    9.20}   # p10/p50/p90 0.0/3.0/8.0; no minimum, content target stands
-        ranged_presence:    {target:    0.90, soft_cap:    4.60}   # p10/p50/p90 1.0/2.0/4.0
+        ranged_presence:    {soft_cap:    4.60}   # p10/p50/p90 0.0/2.0/4.0; no minimum, content target stands
         resist_shred:       {target:    2.70, soft_cap:   10.92}   # p10/p50/p90 3.0/6.0/9.5
-        root:               {target:    0.99, soft_cap:   12.76}   # p10/p50/p90 1.1/5.4/11.1
-        silence:            {soft_cap:   18.92}   # p10/p50/p90 0.0/2.9/16.4; no minimum, content target stands
-        slow:               {target:    2.44, soft_cap:   17.77}   # p10/p50/p90 2.7/7.5/15.4
-        stun:               {target:    1.92, soft_cap:   20.16}   # p10/p50/p90 2.1/8.5/17.5
-        sustained_dps:      {target:   28.24, soft_cap:   62.71}   # p10/p50/p90 31.4/42.4/54.5
-        tankiness:          {target:   24.31, soft_cap:   56.57}   # p10/p50/p90 27.0/37.8/49.2
-        zone_control:       {target:    2.70, soft_cap:   13.80}   # p10/p50/p90 3.0/7.0/12.0
+        root:               {target:    0.99, soft_cap:   13.33}   # p10/p50/p90 1.1/5.5/11.6
+        silence:            {soft_cap:   18.81}   # p10/p50/p90 0.0/1.5/16.4; no minimum, content target stands
+        slow:               {target:    2.12, soft_cap:   15.79}   # p10/p50/p90 2.4/7.1/13.7
+        stun:               {target:    2.04, soft_cap:   20.25}   # p10/p50/p90 2.3/8.1/17.6
+        sustained_dps:      {target:   29.08, soft_cap:   62.82}   # p10/p50/p90 32.3/42.6/54.6
+        tankiness:          {target:   23.96, soft_cap:   55.79}   # p10/p50/p90 26.6/37.7/48.5
+        zone_control:       {target:    2.70, soft_cap:   12.65}   # p10/p50/p90 3.0/6.0/11.0
     "15-19":
       sizes: [15, 19]
       ref_size: 17
-      distinct: 394
+      distinct: 299
       requirements:
-        anti_dive:          {soft_cap:    8.62}   # p10/p50/p90 0.0/3.5/7.5; no minimum, content target stands
+        anti_dive:          {soft_cap:    8.74}   # p10/p50/p90 0.0/3.5/7.6; no minimum, content target stands
         anti_zone:          {soft_cap:    2.30}   # p10/p50/p90 0.0/0.0/2.0; no minimum, content target stands
-        buff_allies:        {target:    6.75, soft_cap:   23.00}   # p10/p50/p90 7.5/14.0/20.0
-        burst_aoe:          {target:   10.00, soft_cap:   23.48}   # p10/p50/p90 11.1/16.4/20.4
-        burst_st:           {soft_cap:   13.94}   # p10/p50/p90 0.0/3.4/12.1; no minimum, content target stands
-        catch:              {target:    6.30, soft_cap:   23.47}   # p10/p50/p90 7.0/13.5/20.4
-        cleanse:            {target:    1.80, soft_cap:    9.03}   # p10/p50/p90 2.0/4.0/7.8
+        buff_allies:        {target:    6.30, soft_cap:   22.42}   # p10/p50/p90 7.0/14.0/19.5
+        burst_aoe:          {target:    9.96, soft_cap:   22.94}   # p10/p50/p90 11.1/16.1/19.9
+        burst_st:           {soft_cap:   16.24}   # p10/p50/p90 0.0/3.5/14.1; no minimum, content target stands
+        catch:              {target:    6.30, soft_cap:   24.38}   # p10/p50/p90 7.0/13.5/21.2
+        cleanse:            {target:    1.71, soft_cap:    6.90}   # p10/p50/p90 1.9/4.0/6.0
         clump_create:       {soft_cap:    3.45}   # p10/p50/p90 0.0/1.0/3.0; no minimum, content target stands
-        damage_debuff:      {soft_cap:   10.35}   # p10/p50/p90 0.0/4.5/9.0; no minimum, content target stands
-        disengage:          {target:   13.05, soft_cap:   33.35}   # p10/p50/p90 14.5/20.8/29.0
-        engage:             {target:   12.60, soft_cap:   31.05}   # p10/p50/p90 14.0/21.0/27.0
-        execute:            {soft_cap:    4.27}   # p10/p50/p90 0.0/0.0/3.7; no minimum, content target stands
-        heal_burst:         {target:    4.99, soft_cap:   18.34}   # p10/p50/p90 5.5/11.0/15.9
+        damage_debuff:      {soft_cap:   10.92}   # p10/p50/p90 0.0/4.5/9.5; no minimum, content target stands
+        disengage:          {target:   13.50, soft_cap:   33.92}   # p10/p50/p90 15.0/21.5/29.5
+        engage:             {target:   13.50, soft_cap:   31.05}   # p10/p50/p90 15.0/21.0/27.0
+        execute:            {soft_cap:    4.44}   # p10/p50/p90 0.0/0.0/3.9; no minimum, content target stands
+        heal_burst:         {target:    4.05, soft_cap:   17.94}   # p10/p50/p90 4.5/10.5/15.6
         heal_reduction:     {target:    0.90, soft_cap:    6.90}   # p10/p50/p90 1.0/3.0/6.0
-        heal_sustain:       {target:    5.67, soft_cap:   17.88}   # p10/p50/p90 6.3/11.7/15.6
+        heal_sustain:       {target:    5.44, soft_cap:   17.91}   # p10/p50/p90 6.0/11.6/15.6
         interrupt:          {soft_cap:    2.30}   # p10/p50/p90 0.0/1.0/2.0; no minimum, content target stands
-        knockback_displace: {target:    6.30, soft_cap:   29.32}   # p10/p50/p90 7.0/14.5/25.5
-        max_health_cut:     {soft_cap:    3.45}   # p10/p50/p90 0.0/1.0/3.0; no minimum, content target stands
-        mobility:           {target:   28.35, soft_cap:   56.35}   # p10/p50/p90 31.5/40.5/49.0
-        peel:               {target:   31.46, soft_cap:   72.97}   # p10/p50/p90 35.0/48.6/63.5
+        knockback_displace: {target:    6.03, soft_cap:   29.73}   # p10/p50/p90 6.7/15.0/25.9
+        max_health_cut:     {soft_cap:    4.60}   # p10/p50/p90 0.0/1.0/4.0; no minimum, content target stands
+        mobility:           {target:   29.70, soft_cap:   56.92}   # p10/p50/p90 33.0/42.0/49.5
+        peel:               {target:   31.41, soft_cap:   74.85}   # p10/p50/p90 34.9/48.6/65.1
         purge:              {target:    1.80, soft_cap:   11.50}   # p10/p50/p90 2.0/6.0/10.0
-        ranged_presence:    {target:    0.90, soft_cap:    6.90}   # p10/p50/p90 1.0/3.0/6.0
+        ranged_presence:    {target:    0.90, soft_cap:    5.75}   # p10/p50/p90 1.0/3.0/5.0
         resist_shred:       {target:    4.95, soft_cap:   15.52}   # p10/p50/p90 5.5/9.5/13.5
-        root:               {target:    3.19, soft_cap:   18.04}   # p10/p50/p90 3.5/8.7/15.7
-        silence:            {soft_cap:   28.90}   # p10/p50/p90 0.0/14.8/25.1; no minimum, content target stands
-        slow:               {target:    5.74, soft_cap:   26.25}   # p10/p50/p90 6.4/12.2/22.8
-        stun:               {target:    5.40, soft_cap:   27.70}   # p10/p50/p90 6.0/13.2/24.1
-        sustained_dps:      {target:   41.09, soft_cap:   81.67}   # p10/p50/p90 45.6/59.2/71.0
-        tankiness:          {target:   43.12, soft_cap:   81.65}   # p10/p50/p90 47.9/61.6/71.0
-        zone_control:       {target:    6.30, soft_cap:   19.55}   # p10/p50/p90 7.0/12.0/17.0
+        root:               {target:    3.19, soft_cap:   18.64}   # p10/p50/p90 3.5/8.8/16.2
+        silence:            {soft_cap:   28.95}   # p10/p50/p90 0.0/14.8/25.2; no minimum, content target stands
+        slow:               {target:    4.95, soft_cap:   22.05}   # p10/p50/p90 5.5/10.4/19.2
+        stun:               {target:    5.40, soft_cap:   27.63}   # p10/p50/p90 6.0/13.2/24.0
+        sustained_dps:      {target:   40.99, soft_cap:   80.99}   # p10/p50/p90 45.5/59.1/70.4
+        tankiness:          {target:   43.27, soft_cap:   80.37}   # p10/p50/p90 48.1/61.2/69.9
+        zone_control:       {target:    6.30, soft_cap:   18.40}   # p10/p50/p90 7.0/11.0/16.0
     "20":
       sizes: [20, 99]
       ref_size: 20
-      distinct: 68
+      distinct: 50
       requirements:
-        anti_dive:          {target:    0.63, soft_cap:    9.20}   # p10/p50/p90 0.7/4.5/8.0
+        anti_dive:          {soft_cap:    9.20}   # p10/p50/p90 0.0/4.5/8.0; no minimum, content target stands
         anti_zone:          {soft_cap:    2.30}   # p10/p50/p90 0.0/0.0/2.0; no minimum, content target stands
-        buff_allies:        {target:   11.12, soft_cap:   24.72}   # p10/p50/p90 12.3/16.8/21.5
-        burst_aoe:          {target:   13.92, soft_cap:   28.84}   # p10/p50/p90 15.5/20.3/25.1
-        burst_st:           {soft_cap:    8.38}   # p10/p50/p90 0.0/2.3/7.3; no minimum, content target stands
-        catch:              {target:    8.10, soft_cap:   23.68}   # p10/p50/p90 9.0/15.4/20.6
-        cleanse:            {target:    1.80, soft_cap:    9.20}   # p10/p50/p90 2.0/4.8/8.0
+        buff_allies:        {target:   10.75, soft_cap:   24.72}   # p10/p50/p90 11.9/17.0/21.5
+        burst_aoe:          {target:   13.73, soft_cap:   28.62}   # p10/p50/p90 15.3/20.7/24.9
+        burst_st:           {soft_cap:    9.53}   # p10/p50/p90 0.0/2.5/8.3; no minimum, content target stands
+        catch:              {target:    7.51, soft_cap:   23.61}   # p10/p50/p90 8.3/15.3/20.5
+        cleanse:            {target:    1.80, soft_cap:    9.20}   # p10/p50/p90 2.0/6.0/8.0
         clump_create:       {soft_cap:    3.45}   # p10/p50/p90 0.0/1.0/3.0; no minimum, content target stands
         damage_debuff:      {target:    2.25, soft_cap:   11.50}   # p10/p50/p90 2.5/5.0/10.0
-        disengage:          {target:   15.17, soft_cap:   37.89}   # p10/p50/p90 16.9/25.2/33.0
-        engage:             {target:   16.20, soft_cap:   33.35}   # p10/p50/p90 18.0/24.0/29.0
+        disengage:          {target:   15.66, soft_cap:   39.10}   # p10/p50/p90 17.4/25.8/34.0
+        engage:             {target:   17.10, soft_cap:   33.46}   # p10/p50/p90 19.0/24.0/29.1
         execute:            {soft_cap:    4.05}   # p10/p50/p90 0.0/0.0/3.5; no minimum, content target stands
-        heal_burst:         {target:    8.97, soft_cap:   17.94}   # p10/p50/p90 10.0/13.7/15.6
-        heal_reduction:     {target:    0.90, soft_cap:    6.32}   # p10/p50/p90 1.0/3.5/5.5
-        heal_sustain:       {target:    9.91, soft_cap:   18.70}   # p10/p50/p90 11.0/13.8/16.3
+        heal_burst:         {target:    8.84, soft_cap:   17.86}   # p10/p50/p90 9.8/13.7/15.5
+        heal_reduction:     {target:    0.90, soft_cap:    6.32}   # p10/p50/p90 1.0/3.2/5.5
+        heal_sustain:       {target:   10.20, soft_cap:   19.17}   # p10/p50/p90 11.3/13.8/16.7
         interrupt:          {soft_cap:    2.30}   # p10/p50/p90 0.0/1.0/2.0; no minimum, content target stands
-        knockback_displace: {target:   10.12, soft_cap:   32.49}   # p10/p50/p90 11.2/18.2/28.2
-        max_health_cut:     {target:    0.90, soft_cap:    3.79}   # p10/p50/p90 1.0/2.0/3.3
-        mobility:           {target:   33.75, soft_cap:   59.97}   # p10/p50/p90 37.5/46.5/52.1
-        peel:               {target:   42.63, soft_cap:   84.44}   # p10/p50/p90 47.4/59.4/73.4
-        purge:              {target:    3.60, soft_cap:   12.65}   # p10/p50/p90 4.0/8.0/11.0
-        ranged_presence:    {target:    1.80, soft_cap:    8.05}   # p10/p50/p90 2.0/4.0/7.0
-        resist_shred:       {target:    6.62, soft_cap:   17.25}   # p10/p50/p90 7.3/12.0/15.0
-        root:               {target:    3.78, soft_cap:   21.30}   # p10/p50/p90 4.2/10.7/18.5
-        silence:            {target:    4.11, soft_cap:   39.40}   # p10/p50/p90 4.6/16.3/34.3
-        slow:               {target:    6.30, soft_cap:   30.69}   # p10/p50/p90 7.0/15.4/26.7
-        stun:               {target:    5.37, soft_cap:   32.18}   # p10/p50/p90 6.0/16.5/28.0
-        sustained_dps:      {target:   49.95, soft_cap:   90.57}   # p10/p50/p90 55.5/67.2/78.8
-        tankiness:          {target:   59.80, soft_cap:   91.45}   # p10/p50/p90 66.4/72.5/79.5
-        zone_control:       {target:    9.00, soft_cap:   23.34}   # p10/p50/p90 10.0/15.0/20.3
+        knockback_displace: {target:   10.35, soft_cap:   32.49}   # p10/p50/p90 11.5/19.5/28.2
+        max_health_cut:     {target:    0.90, soft_cap:    4.60}   # p10/p50/p90 1.0/2.0/4.0
+        mobility:           {target:   35.51, soft_cap:   60.43}   # p10/p50/p90 39.5/47.0/52.5
+        peel:               {target:   43.40, soft_cap:   85.92}   # p10/p50/p90 48.2/59.2/74.7
+        purge:              {target:    3.51, soft_cap:   12.65}   # p10/p50/p90 3.9/8.0/11.0
+        ranged_presence:    {target:    1.80, soft_cap:    6.90}   # p10/p50/p90 2.0/3.0/6.0
+        resist_shred:       {target:    6.21, soft_cap:   17.25}   # p10/p50/p90 6.9/12.0/15.0
+        root:               {target:    3.77, soft_cap:   23.00}   # p10/p50/p90 4.2/11.2/20.0
+        silence:            {target:    6.79, soft_cap:   39.40}   # p10/p50/p90 7.5/17.9/34.3
+        slow:               {target:    6.06, soft_cap:   24.86}   # p10/p50/p90 6.7/13.4/21.6
+        stun:               {target:    4.91, soft_cap:   29.06}   # p10/p50/p90 5.5/14.3/25.3
+        sustained_dps:      {target:   50.22, soft_cap:   90.16}   # p10/p50/p90 55.8/66.5/78.4
+        tankiness:          {target:   58.84, soft_cap:   93.09}   # p10/p50/p90 65.4/71.8/81.0
+        zone_control:       {target:    8.91, soft_cap:   19.55}   # p10/p50/p90 9.9/14.0/17.0
   clap:
     "10-14":
       sizes: [10, 14]
       ref_size: 12
-      distinct: 288
+      distinct: 335
       requirements:
         anti_dive:          {soft_cap:    8.05}   # p10/p50/p90 0.0/3.0/7.0; no minimum, content target stands
-        anti_zone:          {soft_cap:    2.30}   # p10/p50/p90 0.0/0.0/2.0; no minimum, content target stands
         buff_allies:        {target:    2.70, soft_cap:   16.10}   # p10/p50/p90 3.0/8.0/14.0
-        burst_aoe:          {target:   11.33, soft_cap:   33.11}   # p10/p50/p90 12.6/20.6/28.8
-        burst_st:           {soft_cap:    9.67}   # p10/p50/p90 0.0/1.7/8.4; no minimum, content target stands
-        catch:              {target:    5.26, soft_cap:   21.45}   # p10/p50/p90 5.8/11.0/18.6
+        burst_aoe:          {target:   10.96, soft_cap:   32.29}   # p10/p50/p90 12.2/20.2/28.1
+        burst_st:           {soft_cap:    9.73}   # p10/p50/p90 0.0/1.7/8.5; no minimum, content target stands
+        catch:              {target:    5.40, soft_cap:   21.62}   # p10/p50/p90 6.0/11.0/18.8
         cleanse:            {soft_cap:    6.90}   # p10/p50/p90 0.0/2.0/6.0; no minimum, content target stands
         clump_create:       {soft_cap:    4.60}   # p10/p50/p90 0.0/2.0/4.0; no minimum, content target stands
-        damage_debuff:      {soft_cap:    5.75}   # p10/p50/p90 0.0/0.0/5.0; no minimum, content target stands
-        disengage:          {target:    5.40, soft_cap:   18.97}   # p10/p50/p90 6.0/11.0/16.5
-        engage:             {target:    6.30, soft_cap:   20.70}   # p10/p50/p90 7.0/12.2/18.0
+        damage_debuff:      {soft_cap:    5.75}   # p10/p50/p90 0.0/1.0/5.0; no minimum, content target stands
+        disengage:          {target:    5.40, soft_cap:   19.32}   # p10/p50/p90 6.0/11.5/16.8
+        engage:             {target:    7.20, soft_cap:   20.70}   # p10/p50/p90 8.0/12.0/18.0
         execute:            {soft_cap:    3.93}   # p10/p50/p90 0.0/0.0/3.4; no minimum, content target stands
-        heal_burst:         {target:    1.30, soft_cap:   14.98}   # p10/p50/p90 1.4/6.0/13.0
+        heal_burst:         {target:    1.32, soft_cap:   14.55}   # p10/p50/p90 1.5/6.1/12.7
         heal_reduction:     {soft_cap:    5.75}   # p10/p50/p90 0.0/3.0/5.0; no minimum, content target stands
-        heal_sustain:       {target:    2.53, soft_cap:   14.60}   # p10/p50/p90 2.8/7.2/12.7
+        heal_sustain:       {target:    2.61, soft_cap:   14.25}   # p10/p50/p90 2.9/7.2/12.4
         interrupt:          {soft_cap:    2.30}   # p10/p50/p90 0.0/1.0/2.0; no minimum, content target stands
-        knockback_displace: {target:    3.54, soft_cap:   20.12}   # p10/p50/p90 3.9/10.4/17.5
+        knockback_displace: {target:    3.60, soft_cap:   19.72}   # p10/p50/p90 4.0/10.0/17.1
         max_health_cut:     {soft_cap:    2.30}   # p10/p50/p90 0.0/1.0/2.0; no minimum, content target stands
-        mobility:           {target:   13.05, soft_cap:   34.50}   # p10/p50/p90 14.5/22.8/30.0
-        peel:               {target:   18.00, soft_cap:   59.22}   # p10/p50/p90 20.0/35.0/51.5
+        mobility:           {target:   13.50, soft_cap:   34.50}   # p10/p50/p90 15.0/23.0/30.0
+        peel:               {target:   18.00, soft_cap:   58.36}   # p10/p50/p90 20.0/34.0/50.8
         purge:              {soft_cap:    9.20}   # p10/p50/p90 0.0/3.0/8.0; no minimum, content target stands
-        ranged_presence:    {target:    2.70, soft_cap:    9.20}   # p10/p50/p90 3.0/5.0/8.0
-        resist_shred:       {target:    2.70, soft_cap:    9.37}   # p10/p50/p90 3.0/5.5/8.2
-        root:               {target:    1.80, soft_cap:   16.21}   # p10/p50/p90 2.0/6.8/14.1
-        silence:            {soft_cap:   18.72}   # p10/p50/p90 0.0/1.4/16.3; no minimum, content target stands
-        slow:               {target:    6.29, soft_cap:   27.46}   # p10/p50/p90 7.0/14.8/23.9
-        stun:               {target:    2.07, soft_cap:   41.53}   # p10/p50/p90 2.3/11.2/36.1
-        sustained_dps:      {target:   31.61, soft_cap:   70.81}   # p10/p50/p90 35.1/48.7/61.6
-        tankiness:          {target:   25.55, soft_cap:   52.78}   # p10/p50/p90 28.4/36.8/45.9
+        ranged_presence:    {target:    2.70, soft_cap:    8.05}   # p10/p50/p90 3.0/5.0/7.0
+        resist_shred:       {target:    2.70, soft_cap:    9.20}   # p10/p50/p90 3.0/5.5/8.0
+        root:               {target:    1.80, soft_cap:   16.41}   # p10/p50/p90 2.0/6.6/14.3
+        silence:            {soft_cap:   20.25}   # p10/p50/p90 0.0/1.4/17.6; no minimum, content target stands
+        slow:               {target:    6.30, soft_cap:   27.35}   # p10/p50/p90 7.0/14.7/23.8
+        stun:               {target:    2.04, soft_cap:   41.53}   # p10/p50/p90 2.3/11.4/36.1
+        sustained_dps:      {target:   30.67, soft_cap:   70.30}   # p10/p50/p90 34.1/47.2/61.1
+        tankiness:          {target:   25.64, soft_cap:   53.34}   # p10/p50/p90 28.5/36.8/46.4
         zone_control:       {target:    5.40, soft_cap:   17.25}   # p10/p50/p90 6.0/11.0/15.0
     "15-19":
       sizes: [15, 19]
       ref_size: 17
-      distinct: 383
+      distinct: 466
       requirements:
-        anti_dive:          {target:    1.35, soft_cap:   11.50}   # p10/p50/p90 1.5/5.5/10.0
+        anti_dive:          {target:    1.12, soft_cap:   11.50}   # p10/p50/p90 1.2/5.5/10.0
         anti_zone:          {soft_cap:    2.30}   # p10/p50/p90 0.0/0.0/2.0; no minimum, content target stands
         buff_allies:        {target:    6.75, soft_cap:   23.57}   # p10/p50/p90 7.5/14.0/20.5
-        burst_aoe:          {target:   15.50, soft_cap:   38.69}   # p10/p50/p90 17.2/25.1/33.6
-        burst_st:           {soft_cap:    8.67}   # p10/p50/p90 0.0/1.3/7.5; no minimum, content target stands
-        catch:              {target:    8.10, soft_cap:   27.02}   # p10/p50/p90 9.0/16.0/23.5
+        burst_aoe:          {target:   15.34, soft_cap:   38.11}   # p10/p50/p90 17.0/24.3/33.1
+        burst_st:           {soft_cap:    8.73}   # p10/p50/p90 0.0/1.3/7.6; no minimum, content target stands
+        catch:              {target:    7.65, soft_cap:   27.02}   # p10/p50/p90 8.5/15.5/23.5
         cleanse:            {target:    1.80, soft_cap:   11.50}   # p10/p50/p90 2.0/6.0/10.0
-        clump_create:       {target:    0.90, soft_cap:    5.75}   # p10/p50/p90 1.0/3.0/5.0
-        damage_debuff:      {soft_cap:    7.82}   # p10/p50/p90 0.0/2.5/6.8; no minimum, content target stands
-        disengage:          {target:    9.00, soft_cap:   25.87}   # p10/p50/p90 10.0/16.0/22.5
-        engage:             {target:   11.70, soft_cap:   28.52}   # p10/p50/p90 13.0/19.0/24.8
+        clump_create:       {target:    0.90, soft_cap:    5.75}   # p10/p50/p90 1.0/2.0/5.0
+        damage_debuff:      {soft_cap:    8.05}   # p10/p50/p90 0.0/2.5/7.0; no minimum, content target stands
+        disengage:          {target:    9.45, soft_cap:   26.45}   # p10/p50/p90 10.5/16.5/23.0
+        engage:             {target:   11.70, soft_cap:   27.60}   # p10/p50/p90 13.0/19.0/24.0
         execute:            {soft_cap:    4.27}   # p10/p50/p90 0.0/0.0/3.7; no minimum, content target stands
-        heal_burst:         {target:    5.26, soft_cap:   18.61}   # p10/p50/p90 5.8/11.0/16.2
+        heal_burst:         {target:    5.40, soft_cap:   18.57}   # p10/p50/p90 6.0/11.3/16.1
         heal_reduction:     {target:    0.90, soft_cap:    6.90}   # p10/p50/p90 1.0/3.0/6.0
-        heal_sustain:       {target:    6.34, soft_cap:   18.57}   # p10/p50/p90 7.0/11.9/16.1
+        heal_sustain:       {target:    6.34, soft_cap:   18.46}   # p10/p50/p90 7.0/12.0/16.1
         interrupt:          {soft_cap:    2.30}   # p10/p50/p90 0.0/1.0/2.0; no minimum, content target stands
-        knockback_displace: {target:    7.20, soft_cap:   27.02}   # p10/p50/p90 8.0/15.5/23.5
+        knockback_displace: {target:    6.75, soft_cap:   27.02}   # p10/p50/p90 7.5/14.8/23.5
         max_health_cut:     {soft_cap:    2.30}   # p10/p50/p90 0.0/1.0/2.0; no minimum, content target stands
-        mobility:           {target:   22.95, soft_cap:   47.03}   # p10/p50/p90 25.5/33.5/40.9
-        peel:               {target:   33.30, soft_cap:   81.65}   # p10/p50/p90 37.0/54.2/71.0
+        mobility:           {target:   22.95, soft_cap:   48.30}   # p10/p50/p90 25.5/33.8/42.0
+        peel:               {target:   32.96, soft_cap:   80.64}   # p10/p50/p90 36.6/53.2/70.1
         purge:              {target:    1.80, soft_cap:   12.65}   # p10/p50/p90 2.0/6.0/11.0
         ranged_presence:    {target:    3.60, soft_cap:    9.20}   # p10/p50/p90 4.0/6.0/8.0
-        resist_shred:       {target:    4.50, soft_cap:   12.65}   # p10/p50/p90 5.0/7.5/11.0
-        root:               {target:    3.60, soft_cap:   19.16}   # p10/p50/p90 4.0/9.6/16.7
-        silence:            {soft_cap:   25.64}   # p10/p50/p90 0.0/5.8/22.3; no minimum, content target stands
-        slow:               {target:    9.77, soft_cap:   35.41}   # p10/p50/p90 10.8/20.3/30.8
-        stun:               {target:    2.98, soft_cap:   51.60}   # p10/p50/p90 3.3/17.6/44.9
-        sustained_dps:      {target:   45.01, soft_cap:   93.41}   # p10/p50/p90 50.0/66.3/81.2
-        tankiness:          {target:   39.42, soft_cap:   73.15}   # p10/p50/p90 43.8/54.4/63.6
+        resist_shred:       {target:    4.50, soft_cap:   12.65}   # p10/p50/p90 5.0/8.0/11.0
+        root:               {target:    3.60, soft_cap:   18.95}   # p10/p50/p90 4.0/9.6/16.5
+        silence:            {soft_cap:   25.70}   # p10/p50/p90 0.0/6.0/22.4; no minimum, content target stands
+        slow:               {target:    9.65, soft_cap:   35.65}   # p10/p50/p90 10.7/19.8/31.0
+        stun:               {target:    3.60, soft_cap:   51.21}   # p10/p50/p90 4.0/17.4/44.5
+        sustained_dps:      {target:   44.70, soft_cap:   92.68}   # p10/p50/p90 49.7/65.9/80.6
+        tankiness:          {target:   39.61, soft_cap:   75.04}   # p10/p50/p90 44.0/55.2/65.2
         zone_control:       {target:    9.90, soft_cap:   23.00}   # p10/p50/p90 11.0/15.0/20.0
     "20":
       sizes: [20, 99]
       ref_size: 20
-      distinct: 73
+      distinct: 88
       requirements:
-        anti_dive:          {target:    2.70, soft_cap:   12.65}   # p10/p50/p90 3.0/6.5/11.0
+        anti_dive:          {target:    2.70, soft_cap:   12.82}   # p10/p50/p90 3.0/6.5/11.2
         anti_zone:          {soft_cap:    2.30}   # p10/p50/p90 0.0/0.0/2.0; no minimum, content target stands
-        buff_allies:        {target:   11.34, soft_cap:   26.45}   # p10/p50/p90 12.6/17.5/23.0
-        burst_aoe:          {target:   19.20, soft_cap:   42.25}   # p10/p50/p90 21.3/28.8/36.7
-        burst_st:           {soft_cap:    6.50}   # p10/p50/p90 0.0/1.1/5.7; no minimum, content target stands
-        catch:              {target:    9.45, soft_cap:   29.67}   # p10/p50/p90 10.5/19.5/25.8
-        cleanse:            {target:    3.60, soft_cap:   11.50}   # p10/p50/p90 4.0/6.0/10.0
+        buff_allies:        {target:   11.56, soft_cap:   26.45}   # p10/p50/p90 12.8/17.5/23.0
+        burst_aoe:          {target:   19.08, soft_cap:   41.18}   # p10/p50/p90 21.2/28.4/35.8
+        burst_st:           {soft_cap:    6.69}   # p10/p50/p90 0.0/1.2/5.8; no minimum, content target stands
+        catch:              {target:    9.31, soft_cap:   29.50}   # p10/p50/p90 10.3/18.2/25.6
+        cleanse:            {target:    1.80, soft_cap:   11.50}   # p10/p50/p90 2.0/6.0/10.0
         clump_create:       {target:    0.90, soft_cap:    6.90}   # p10/p50/p90 1.0/3.0/6.0
-        damage_debuff:      {soft_cap:   11.38}   # p10/p50/p90 0.0/2.5/9.9; no minimum, content target stands
-        disengage:          {target:   11.34, soft_cap:   29.90}   # p10/p50/p90 12.6/19.0/26.0
-        engage:             {target:   15.30, soft_cap:   31.97}   # p10/p50/p90 17.0/22.0/27.8
-        execute:            {soft_cap:    1.78}   # p10/p50/p90 0.0/0.0/1.6; no minimum, content target stands
-        heal_burst:         {target:    8.68, soft_cap:   17.25}   # p10/p50/p90 9.6/13.1/15.0
-        heal_reduction:     {target:    0.90, soft_cap:    8.05}   # p10/p50/p90 1.0/5.0/7.0
-        heal_sustain:       {target:    9.13, soft_cap:   20.48}   # p10/p50/p90 10.2/14.3/17.8
+        damage_debuff:      {soft_cap:   11.10}   # p10/p50/p90 0.0/3.5/9.7; no minimum, content target stands
+        disengage:          {target:   11.12, soft_cap:   30.07}   # p10/p50/p90 12.3/20.0/26.1
+        engage:             {target:   15.03, soft_cap:   32.20}   # p10/p50/p90 16.7/22.0/28.0
+        execute:            {soft_cap:    1.79}   # p10/p50/p90 0.0/0.0/1.6; no minimum, content target stands
+        heal_burst:         {target:    8.71, soft_cap:   17.87}   # p10/p50/p90 9.7/13.1/15.5
+        heal_reduction:     {target:    0.90, soft_cap:    8.05}   # p10/p50/p90 1.0/4.5/7.0
+        heal_sustain:       {target:    9.36, soft_cap:   19.77}   # p10/p50/p90 10.4/14.3/17.2
         interrupt:          {soft_cap:    2.30}   # p10/p50/p90 0.0/1.0/2.0; no minimum, content target stands
-        knockback_displace: {target:    8.78, soft_cap:   28.06}   # p10/p50/p90 9.8/18.0/24.4
+        knockback_displace: {target:    8.71, soft_cap:   28.17}   # p10/p50/p90 9.7/17.1/24.5
         max_health_cut:     {soft_cap:    3.45}   # p10/p50/p90 0.0/1.0/3.0; no minimum, content target stands
-        mobility:           {target:   28.35, soft_cap:   51.63}   # p10/p50/p90 31.5/38.0/44.9
-        peel:               {target:   40.59, soft_cap:   89.64}   # p10/p50/p90 45.1/65.8/78.0
-        purge:              {target:    2.70, soft_cap:   12.65}   # p10/p50/p90 3.0/7.0/11.0
+        mobility:           {target:   28.35, soft_cap:   53.07}   # p10/p50/p90 31.5/38.2/46.1
+        peel:               {target:   41.27, soft_cap:   89.50}   # p10/p50/p90 45.9/65.0/77.8
+        purge:              {target:    3.33, soft_cap:   12.65}   # p10/p50/p90 3.7/8.0/11.0
         ranged_presence:    {target:    3.60, soft_cap:   10.35}   # p10/p50/p90 4.0/7.0/9.0
-        resist_shred:       {target:    5.85, soft_cap:   14.26}   # p10/p50/p90 6.5/10.0/12.4
-        root:               {target:    4.50, soft_cap:   19.40}   # p10/p50/p90 5.0/11.2/16.9
-        silence:            {target:    1.30, soft_cap:   25.30}   # p10/p50/p90 1.4/9.2/22.0
-        slow:               {target:   12.15, soft_cap:   34.18}   # p10/p50/p90 13.5/22.5/29.7
-        stun:               {target:    7.92, soft_cap:   57.03}   # p10/p50/p90 8.8/31.5/49.6
-        sustained_dps:      {target:   51.87, soft_cap:  102.28}   # p10/p50/p90 57.6/72.2/88.9
-        tankiness:          {target:   51.63, soft_cap:   86.27}   # p10/p50/p90 57.4/64.6/75.0
-        zone_control:       {target:   11.88, soft_cap:   25.07}   # p10/p50/p90 13.2/17.0/21.8
+        resist_shred:       {target:    5.85, soft_cap:   14.37}   # p10/p50/p90 6.5/10.0/12.5
+        root:               {target:    4.50, soft_cap:   19.11}   # p10/p50/p90 5.0/11.2/16.6
+        silence:            {target:    1.30, soft_cap:   27.05}   # p10/p50/p90 1.4/11.2/23.5
+        slow:               {target:   11.90, soft_cap:   34.51}   # p10/p50/p90 13.2/22.4/30.0
+        stun:               {target:    7.92, soft_cap:   60.88}   # p10/p50/p90 8.8/29.9/52.9
+        sustained_dps:      {target:   48.36, soft_cap:  101.35}   # p10/p50/p90 53.7/71.8/88.1
+        tankiness:          {target:   51.94, soft_cap:   86.49}   # p10/p50/p90 57.7/65.7/75.2
+        zone_control:       {target:   11.70, soft_cap:   24.15}   # p10/p50/p90 13.0/17.5/21.0
   kite:
     "10-14":
       sizes: [10, 14]
       ref_size: 12
-      distinct: 111
+      distinct: 112
       requirements:
-        anti_dive:          {target:    0.90, soft_cap:   12.65}   # p10/p50/p90 1.0/5.0/11.0
+        anti_dive:          {target:    0.90, soft_cap:   12.48}   # p10/p50/p90 1.0/5.0/10.8
         anti_zone:          {soft_cap:    2.30}   # p10/p50/p90 0.0/0.0/2.0; no minimum, content target stands
-        buff_allies:        {target:    2.70, soft_cap:   17.82}   # p10/p50/p90 3.0/8.5/15.5
-        burst_aoe:          {target:    5.26, soft_cap:   20.73}   # p10/p50/p90 5.8/12.4/18.0
-        burst_st:           {target:    0.90, soft_cap:   11.88}   # p10/p50/p90 1.0/4.2/10.3
-        catch:              {target:    4.95, soft_cap:   18.40}   # p10/p50/p90 5.5/10.6/16.0
+        buff_allies:        {target:    2.75, soft_cap:   17.77}   # p10/p50/p90 3.0/8.5/15.4
+        burst_aoe:          {target:    5.28, soft_cap:   20.82}   # p10/p50/p90 5.9/12.5/18.1
+        burst_st:           {target:    0.09, soft_cap:   11.81}   # p10/p50/p90 0.1/4.2/10.3
+        catch:              {target:    4.54, soft_cap:   18.40}   # p10/p50/p90 5.0/10.6/16.0
         cleanse:            {soft_cap:    9.20}   # p10/p50/p90 0.0/4.0/8.0; no minimum, content target stands
         clump_create:       {soft_cap:    3.45}   # p10/p50/p90 0.0/1.0/3.0; no minimum, content target stands
         damage_debuff:      {soft_cap:    5.75}   # p10/p50/p90 0.0/2.5/5.0; no minimum, content target stands
-        disengage:          {target:    6.30, soft_cap:   20.70}   # p10/p50/p90 7.0/12.0/18.0
+        disengage:          {target:    6.30, soft_cap:   20.58}   # p10/p50/p90 7.0/12.0/17.9
         engage:             {target:    6.30, soft_cap:   18.40}   # p10/p50/p90 7.0/11.0/16.0
         execute:            {soft_cap:    3.88}   # p10/p50/p90 0.0/0.0/3.4; no minimum, content target stands
-        heal_burst:         {target:    1.12, soft_cap:   13.80}   # p10/p50/p90 1.2/5.8/12.0
+        heal_burst:         {target:    1.14, soft_cap:   13.73}   # p10/p50/p90 1.3/5.8/11.9
         heal_reduction:     {soft_cap:    4.60}   # p10/p50/p90 0.0/2.0/4.0; no minimum, content target stands
-        heal_sustain:       {target:    2.25, soft_cap:   14.26}   # p10/p50/p90 2.5/7.2/12.4
+        heal_sustain:       {target:    2.25, soft_cap:   14.23}   # p10/p50/p90 2.5/7.2/12.4
         interrupt:          {soft_cap:    3.45}   # p10/p50/p90 0.0/1.0/3.0; no minimum, content target stands
-        knockback_displace: {target:    4.05, soft_cap:   18.97}   # p10/p50/p90 4.5/9.8/16.5
+        knockback_displace: {target:    4.05, soft_cap:   18.92}   # p10/p50/p90 4.5/9.9/16.4
         max_health_cut:     {soft_cap:    1.15}   # p10/p50/p90 0.0/0.0/1.0; no minimum, content target stands
-        mobility:           {target:   14.40, soft_cap:   32.77}   # p10/p50/p90 16.0/22.0/28.5
-        peel:               {target:   19.57, soft_cap:   55.20}   # p10/p50/p90 21.8/35.5/48.0
+        mobility:           {target:   14.45, soft_cap:   32.77}   # p10/p50/p90 16.1/22.0/28.5
+        peel:               {target:   19.59, soft_cap:   55.18}   # p10/p50/p90 21.8/35.6/48.0
         purge:              {target:    0.90, soft_cap:   11.50}   # p10/p50/p90 1.0/5.0/10.0
-        ranged_presence:    {target:    1.80, soft_cap:    6.90}   # p10/p50/p90 2.0/4.0/6.0
+        ranged_presence:    {target:    1.89, soft_cap:    6.90}   # p10/p50/p90 2.1/4.0/6.0
         resist_shred:       {target:    2.70, soft_cap:    9.20}   # p10/p50/p90 3.0/5.0/8.0
-        root:               {target:    2.70, soft_cap:   19.65}   # p10/p50/p90 3.0/9.9/17.1
+        root:               {target:    2.70, soft_cap:   19.78}   # p10/p50/p90 3.0/9.9/17.2
         silence:            {soft_cap:   20.39}   # p10/p50/p90 0.0/4.3/17.7; no minimum, content target stands
-        slow:               {target:    4.91, soft_cap:   25.51}   # p10/p50/p90 5.5/12.9/22.2
-        stun:               {target:    1.08, soft_cap:   28.21}   # p10/p50/p90 1.2/11.4/24.5
-        sustained_dps:      {target:   28.39, soft_cap:   66.99}   # p10/p50/p90 31.6/44.6/58.2
-        tankiness:          {target:   23.79, soft_cap:   53.84}   # p10/p50/p90 26.4/36.5/46.8
+        slow:               {target:    5.00, soft_cap:   25.51}   # p10/p50/p90 5.5/12.9/22.2
+        stun:               {target:    1.12, soft_cap:   28.13}   # p10/p50/p90 1.2/11.8/24.5
+        sustained_dps:      {target:   28.42, soft_cap:   66.96}   # p10/p50/p90 31.6/44.6/58.2
+        tankiness:          {target:   23.83, soft_cap:   53.82}   # p10/p50/p90 26.5/36.6/46.8
         zone_control:       {target:    5.40, soft_cap:   17.25}   # p10/p50/p90 6.0/10.0/15.0
     "15-19":
       sizes: [15, 19]
@@ -346,110 +345,110 @@ bands:
     "10-14":
       sizes: [10, 14]
       ref_size: 12
-      distinct: 310
+      distinct: 256
       borrowed_from: "brawl|10-14"   # own cell: 13 distinct rosters
       requirements:
         anti_dive:          {soft_cap:    5.75}   # p10/p50/p90 0.0/2.0/5.0; no minimum, content target stands
-        buff_allies:        {target:    3.15, soft_cap:   14.95}   # p10/p50/p90 3.5/8.0/13.0
-        burst_aoe:          {target:    5.59, soft_cap:   18.86}   # p10/p50/p90 6.2/11.4/16.4
-        burst_st:           {soft_cap:   23.22}   # p10/p50/p90 0.0/3.4/20.2; no minimum, content target stands
-        catch:              {target:    4.82, soft_cap:   20.09}   # p10/p50/p90 5.4/10.9/17.5
+        buff_allies:        {target:    3.15, soft_cap:   14.37}   # p10/p50/p90 3.5/8.0/12.5
+        burst_aoe:          {target:    5.43, soft_cap:   18.04}   # p10/p50/p90 6.0/11.2/15.7
+        burst_st:           {soft_cap:   25.01}   # p10/p50/p90 0.0/4.4/21.8; no minimum, content target stands
+        catch:              {target:    4.67, soft_cap:   20.70}   # p10/p50/p90 5.2/11.2/18.0
         cleanse:            {soft_cap:    4.60}   # p10/p50/p90 0.0/2.0/4.0; no minimum, content target stands
         clump_create:       {soft_cap:    3.45}   # p10/p50/p90 0.0/0.0/3.0; no minimum, content target stands
-        damage_debuff:      {soft_cap:    5.81}   # p10/p50/p90 0.0/2.5/5.0; no minimum, content target stands
-        disengage:          {target:    8.10, soft_cap:   24.21}   # p10/p50/p90 9.0/15.0/21.1
-        engage:             {target:    8.10, soft_cap:   23.00}   # p10/p50/p90 9.0/15.0/20.0
-        execute:            {soft_cap:    4.63}   # p10/p50/p90 0.0/0.0/4.0; no minimum, content target stands
-        heal_burst:         {target:    2.33, soft_cap:   13.81}   # p10/p50/p90 2.6/6.1/12.0
-        heal_reduction:     {soft_cap:    6.96}   # p10/p50/p90 0.0/2.0/6.0; no minimum, content target stands
-        heal_sustain:       {target:    2.70, soft_cap:   13.12}   # p10/p50/p90 3.0/7.2/11.4
+        damage_debuff:      {soft_cap:    5.75}   # p10/p50/p90 0.0/2.5/5.0; no minimum, content target stands
+        disengage:          {target:    8.10, soft_cap:   25.30}   # p10/p50/p90 9.0/15.0/22.0
+        engage:             {target:    8.10, soft_cap:   23.57}   # p10/p50/p90 9.0/15.0/20.5
+        execute:            {soft_cap:    5.66}   # p10/p50/p90 0.0/0.0/4.9; no minimum, content target stands
+        heal_burst:         {target:    1.35, soft_cap:   13.83}   # p10/p50/p90 1.5/6.0/12.0
+        heal_reduction:     {soft_cap:    7.47}   # p10/p50/p90 0.0/2.0/6.5; no minimum, content target stands
+        heal_sustain:       {target:    2.61, soft_cap:   13.14}   # p10/p50/p90 2.9/7.1/11.4
         interrupt:          {soft_cap:    2.30}   # p10/p50/p90 0.0/1.0/2.0; no minimum, content target stands
-        knockback_displace: {target:    3.09, soft_cap:   19.87}   # p10/p50/p90 3.4/8.7/17.3
+        knockback_displace: {target:    2.70, soft_cap:   21.17}   # p10/p50/p90 3.0/8.5/18.4
         max_health_cut:     {soft_cap:    2.30}   # p10/p50/p90 0.0/1.0/2.0; no minimum, content target stands
-        mobility:           {target:   18.00, soft_cap:   41.97}   # p10/p50/p90 20.0/27.5/36.5
-        peel:               {target:   15.55, soft_cap:   47.52}   # p10/p50/p90 17.3/27.8/41.3
+        mobility:           {target:   18.23, soft_cap:   42.55}   # p10/p50/p90 20.2/28.5/37.0
+        peel:               {target:   15.11, soft_cap:   47.59}   # p10/p50/p90 16.8/27.3/41.4
         purge:              {soft_cap:    9.20}   # p10/p50/p90 0.0/3.0/8.0; no minimum, content target stands
-        ranged_presence:    {target:    0.90, soft_cap:    4.60}   # p10/p50/p90 1.0/2.0/4.0
+        ranged_presence:    {soft_cap:    4.60}   # p10/p50/p90 0.0/2.0/4.0; no minimum, content target stands
         resist_shred:       {target:    2.70, soft_cap:   10.92}   # p10/p50/p90 3.0/6.0/9.5
-        root:               {target:    0.99, soft_cap:   12.76}   # p10/p50/p90 1.1/5.4/11.1
-        silence:            {soft_cap:   18.92}   # p10/p50/p90 0.0/2.9/16.4; no minimum, content target stands
-        slow:               {target:    2.44, soft_cap:   17.77}   # p10/p50/p90 2.7/7.5/15.4
-        stun:               {target:    1.92, soft_cap:   20.16}   # p10/p50/p90 2.1/8.5/17.5
-        sustained_dps:      {target:   28.24, soft_cap:   62.71}   # p10/p50/p90 31.4/42.4/54.5
-        tankiness:          {target:   24.31, soft_cap:   56.57}   # p10/p50/p90 27.0/37.8/49.2
-        zone_control:       {target:    2.70, soft_cap:   13.80}   # p10/p50/p90 3.0/7.0/12.0
+        root:               {target:    0.99, soft_cap:   13.33}   # p10/p50/p90 1.1/5.5/11.6
+        silence:            {soft_cap:   18.81}   # p10/p50/p90 0.0/1.5/16.4; no minimum, content target stands
+        slow:               {target:    2.12, soft_cap:   15.79}   # p10/p50/p90 2.4/7.1/13.7
+        stun:               {target:    2.04, soft_cap:   20.25}   # p10/p50/p90 2.3/8.1/17.6
+        sustained_dps:      {target:   29.08, soft_cap:   62.82}   # p10/p50/p90 32.3/42.6/54.6
+        tankiness:          {target:   23.96, soft_cap:   55.79}   # p10/p50/p90 26.6/37.7/48.5
+        zone_control:       {target:    2.70, soft_cap:   12.65}   # p10/p50/p90 3.0/6.0/11.0
     "15-19":
       sizes: [15, 19]
       ref_size: 17
-      distinct: 394
+      distinct: 299
       borrowed_from: "brawl|15-19"   # own cell: 16 distinct rosters
       requirements:
-        anti_dive:          {soft_cap:    8.62}   # p10/p50/p90 0.0/3.5/7.5; no minimum, content target stands
+        anti_dive:          {soft_cap:    8.74}   # p10/p50/p90 0.0/3.5/7.6; no minimum, content target stands
         anti_zone:          {soft_cap:    2.30}   # p10/p50/p90 0.0/0.0/2.0; no minimum, content target stands
-        buff_allies:        {target:    6.75, soft_cap:   23.00}   # p10/p50/p90 7.5/14.0/20.0
-        burst_aoe:          {target:   10.00, soft_cap:   23.48}   # p10/p50/p90 11.1/16.4/20.4
-        burst_st:           {soft_cap:   13.94}   # p10/p50/p90 0.0/3.4/12.1; no minimum, content target stands
-        catch:              {target:    6.30, soft_cap:   23.47}   # p10/p50/p90 7.0/13.5/20.4
-        cleanse:            {target:    1.80, soft_cap:    9.03}   # p10/p50/p90 2.0/4.0/7.8
+        buff_allies:        {target:    6.30, soft_cap:   22.42}   # p10/p50/p90 7.0/14.0/19.5
+        burst_aoe:          {target:    9.96, soft_cap:   22.94}   # p10/p50/p90 11.1/16.1/19.9
+        burst_st:           {soft_cap:   16.24}   # p10/p50/p90 0.0/3.5/14.1; no minimum, content target stands
+        catch:              {target:    6.30, soft_cap:   24.38}   # p10/p50/p90 7.0/13.5/21.2
+        cleanse:            {target:    1.71, soft_cap:    6.90}   # p10/p50/p90 1.9/4.0/6.0
         clump_create:       {soft_cap:    3.45}   # p10/p50/p90 0.0/1.0/3.0; no minimum, content target stands
-        damage_debuff:      {soft_cap:   10.35}   # p10/p50/p90 0.0/4.5/9.0; no minimum, content target stands
-        disengage:          {target:   13.05, soft_cap:   33.35}   # p10/p50/p90 14.5/20.8/29.0
-        engage:             {target:   12.60, soft_cap:   31.05}   # p10/p50/p90 14.0/21.0/27.0
-        execute:            {soft_cap:    4.27}   # p10/p50/p90 0.0/0.0/3.7; no minimum, content target stands
-        heal_burst:         {target:    4.99, soft_cap:   18.34}   # p10/p50/p90 5.5/11.0/15.9
+        damage_debuff:      {soft_cap:   10.92}   # p10/p50/p90 0.0/4.5/9.5; no minimum, content target stands
+        disengage:          {target:   13.50, soft_cap:   33.92}   # p10/p50/p90 15.0/21.5/29.5
+        engage:             {target:   13.50, soft_cap:   31.05}   # p10/p50/p90 15.0/21.0/27.0
+        execute:            {soft_cap:    4.44}   # p10/p50/p90 0.0/0.0/3.9; no minimum, content target stands
+        heal_burst:         {target:    4.05, soft_cap:   17.94}   # p10/p50/p90 4.5/10.5/15.6
         heal_reduction:     {target:    0.90, soft_cap:    6.90}   # p10/p50/p90 1.0/3.0/6.0
-        heal_sustain:       {target:    5.67, soft_cap:   17.88}   # p10/p50/p90 6.3/11.7/15.6
+        heal_sustain:       {target:    5.44, soft_cap:   17.91}   # p10/p50/p90 6.0/11.6/15.6
         interrupt:          {soft_cap:    2.30}   # p10/p50/p90 0.0/1.0/2.0; no minimum, content target stands
-        knockback_displace: {target:    6.30, soft_cap:   29.32}   # p10/p50/p90 7.0/14.5/25.5
-        max_health_cut:     {soft_cap:    3.45}   # p10/p50/p90 0.0/1.0/3.0; no minimum, content target stands
-        mobility:           {target:   28.35, soft_cap:   56.35}   # p10/p50/p90 31.5/40.5/49.0
-        peel:               {target:   31.46, soft_cap:   72.97}   # p10/p50/p90 35.0/48.6/63.5
+        knockback_displace: {target:    6.03, soft_cap:   29.73}   # p10/p50/p90 6.7/15.0/25.9
+        max_health_cut:     {soft_cap:    4.60}   # p10/p50/p90 0.0/1.0/4.0; no minimum, content target stands
+        mobility:           {target:   29.70, soft_cap:   56.92}   # p10/p50/p90 33.0/42.0/49.5
+        peel:               {target:   31.41, soft_cap:   74.85}   # p10/p50/p90 34.9/48.6/65.1
         purge:              {target:    1.80, soft_cap:   11.50}   # p10/p50/p90 2.0/6.0/10.0
-        ranged_presence:    {target:    0.90, soft_cap:    6.90}   # p10/p50/p90 1.0/3.0/6.0
+        ranged_presence:    {target:    0.90, soft_cap:    5.75}   # p10/p50/p90 1.0/3.0/5.0
         resist_shred:       {target:    4.95, soft_cap:   15.52}   # p10/p50/p90 5.5/9.5/13.5
-        root:               {target:    3.19, soft_cap:   18.04}   # p10/p50/p90 3.5/8.7/15.7
-        silence:            {soft_cap:   28.90}   # p10/p50/p90 0.0/14.8/25.1; no minimum, content target stands
-        slow:               {target:    5.74, soft_cap:   26.25}   # p10/p50/p90 6.4/12.2/22.8
-        stun:               {target:    5.40, soft_cap:   27.70}   # p10/p50/p90 6.0/13.2/24.1
-        sustained_dps:      {target:   41.09, soft_cap:   81.67}   # p10/p50/p90 45.6/59.2/71.0
-        tankiness:          {target:   43.12, soft_cap:   81.65}   # p10/p50/p90 47.9/61.6/71.0
-        zone_control:       {target:    6.30, soft_cap:   19.55}   # p10/p50/p90 7.0/12.0/17.0
+        root:               {target:    3.19, soft_cap:   18.64}   # p10/p50/p90 3.5/8.8/16.2
+        silence:            {soft_cap:   28.95}   # p10/p50/p90 0.0/14.8/25.2; no minimum, content target stands
+        slow:               {target:    4.95, soft_cap:   22.05}   # p10/p50/p90 5.5/10.4/19.2
+        stun:               {target:    5.40, soft_cap:   27.63}   # p10/p50/p90 6.0/13.2/24.0
+        sustained_dps:      {target:   40.99, soft_cap:   80.99}   # p10/p50/p90 45.5/59.1/70.4
+        tankiness:          {target:   43.27, soft_cap:   80.37}   # p10/p50/p90 48.1/61.2/69.9
+        zone_control:       {target:    6.30, soft_cap:   18.40}   # p10/p50/p90 7.0/11.0/16.0
     "20":
       sizes: [20, 99]
       ref_size: 20
-      distinct: 68
+      distinct: 50
       borrowed_from: "brawl|20"   # own cell: 9 distinct rosters
       requirements:
-        anti_dive:          {target:    0.63, soft_cap:    9.20}   # p10/p50/p90 0.7/4.5/8.0
+        anti_dive:          {soft_cap:    9.20}   # p10/p50/p90 0.0/4.5/8.0; no minimum, content target stands
         anti_zone:          {soft_cap:    2.30}   # p10/p50/p90 0.0/0.0/2.0; no minimum, content target stands
-        buff_allies:        {target:   11.12, soft_cap:   24.72}   # p10/p50/p90 12.3/16.8/21.5
-        burst_aoe:          {target:   13.92, soft_cap:   28.84}   # p10/p50/p90 15.5/20.3/25.1
-        burst_st:           {soft_cap:    8.38}   # p10/p50/p90 0.0/2.3/7.3; no minimum, content target stands
-        catch:              {target:    8.10, soft_cap:   23.68}   # p10/p50/p90 9.0/15.4/20.6
-        cleanse:            {target:    1.80, soft_cap:    9.20}   # p10/p50/p90 2.0/4.8/8.0
+        buff_allies:        {target:   10.75, soft_cap:   24.72}   # p10/p50/p90 11.9/17.0/21.5
+        burst_aoe:          {target:   13.73, soft_cap:   28.62}   # p10/p50/p90 15.3/20.7/24.9
+        burst_st:           {soft_cap:    9.53}   # p10/p50/p90 0.0/2.5/8.3; no minimum, content target stands
+        catch:              {target:    7.51, soft_cap:   23.61}   # p10/p50/p90 8.3/15.3/20.5
+        cleanse:            {target:    1.80, soft_cap:    9.20}   # p10/p50/p90 2.0/6.0/8.0
         clump_create:       {soft_cap:    3.45}   # p10/p50/p90 0.0/1.0/3.0; no minimum, content target stands
         damage_debuff:      {target:    2.25, soft_cap:   11.50}   # p10/p50/p90 2.5/5.0/10.0
-        disengage:          {target:   15.17, soft_cap:   37.89}   # p10/p50/p90 16.9/25.2/33.0
-        engage:             {target:   16.20, soft_cap:   33.35}   # p10/p50/p90 18.0/24.0/29.0
+        disengage:          {target:   15.66, soft_cap:   39.10}   # p10/p50/p90 17.4/25.8/34.0
+        engage:             {target:   17.10, soft_cap:   33.46}   # p10/p50/p90 19.0/24.0/29.1
         execute:            {soft_cap:    4.05}   # p10/p50/p90 0.0/0.0/3.5; no minimum, content target stands
-        heal_burst:         {target:    8.97, soft_cap:   17.94}   # p10/p50/p90 10.0/13.7/15.6
-        heal_reduction:     {target:    0.90, soft_cap:    6.32}   # p10/p50/p90 1.0/3.5/5.5
-        heal_sustain:       {target:    9.91, soft_cap:   18.70}   # p10/p50/p90 11.0/13.8/16.3
+        heal_burst:         {target:    8.84, soft_cap:   17.86}   # p10/p50/p90 9.8/13.7/15.5
+        heal_reduction:     {target:    0.90, soft_cap:    6.32}   # p10/p50/p90 1.0/3.2/5.5
+        heal_sustain:       {target:   10.20, soft_cap:   19.17}   # p10/p50/p90 11.3/13.8/16.7
         interrupt:          {soft_cap:    2.30}   # p10/p50/p90 0.0/1.0/2.0; no minimum, content target stands
-        knockback_displace: {target:   10.12, soft_cap:   32.49}   # p10/p50/p90 11.2/18.2/28.2
-        max_health_cut:     {target:    0.90, soft_cap:    3.79}   # p10/p50/p90 1.0/2.0/3.3
-        mobility:           {target:   33.75, soft_cap:   59.97}   # p10/p50/p90 37.5/46.5/52.1
-        peel:               {target:   42.63, soft_cap:   84.44}   # p10/p50/p90 47.4/59.4/73.4
-        purge:              {target:    3.60, soft_cap:   12.65}   # p10/p50/p90 4.0/8.0/11.0
-        ranged_presence:    {target:    1.80, soft_cap:    8.05}   # p10/p50/p90 2.0/4.0/7.0
-        resist_shred:       {target:    6.62, soft_cap:   17.25}   # p10/p50/p90 7.3/12.0/15.0
-        root:               {target:    3.78, soft_cap:   21.30}   # p10/p50/p90 4.2/10.7/18.5
-        silence:            {target:    4.11, soft_cap:   39.40}   # p10/p50/p90 4.6/16.3/34.3
-        slow:               {target:    6.30, soft_cap:   30.69}   # p10/p50/p90 7.0/15.4/26.7
-        stun:               {target:    5.37, soft_cap:   32.18}   # p10/p50/p90 6.0/16.5/28.0
-        sustained_dps:      {target:   49.95, soft_cap:   90.57}   # p10/p50/p90 55.5/67.2/78.8
-        tankiness:          {target:   59.80, soft_cap:   91.45}   # p10/p50/p90 66.4/72.5/79.5
-        zone_control:       {target:    9.00, soft_cap:   23.34}   # p10/p50/p90 10.0/15.0/20.3
+        knockback_displace: {target:   10.35, soft_cap:   32.49}   # p10/p50/p90 11.5/19.5/28.2
+        max_health_cut:     {target:    0.90, soft_cap:    4.60}   # p10/p50/p90 1.0/2.0/4.0
+        mobility:           {target:   35.51, soft_cap:   60.43}   # p10/p50/p90 39.5/47.0/52.5
+        peel:               {target:   43.40, soft_cap:   85.92}   # p10/p50/p90 48.2/59.2/74.7
+        purge:              {target:    3.51, soft_cap:   12.65}   # p10/p50/p90 3.9/8.0/11.0
+        ranged_presence:    {target:    1.80, soft_cap:    6.90}   # p10/p50/p90 2.0/3.0/6.0
+        resist_shred:       {target:    6.21, soft_cap:   17.25}   # p10/p50/p90 6.9/12.0/15.0
+        root:               {target:    3.77, soft_cap:   23.00}   # p10/p50/p90 4.2/11.2/20.0
+        silence:            {target:    6.79, soft_cap:   39.40}   # p10/p50/p90 7.5/17.9/34.3
+        slow:               {target:    6.06, soft_cap:   24.86}   # p10/p50/p90 6.7/13.4/21.6
+        stun:               {target:    4.91, soft_cap:   29.06}   # p10/p50/p90 5.5/14.3/25.3
+        sustained_dps:      {target:   50.22, soft_cap:   90.16}   # p10/p50/p90 55.8/66.5/78.4
+        tankiness:          {target:   58.84, soft_cap:   93.09}   # p10/p50/p90 65.4/71.8/81.0
+        zone_control:       {target:    8.91, soft_cap:   19.55}   # p10/p50/p90 9.9/14.0/17.0
   clap_kite:
     "10-14":
       sizes: [10, 14]
