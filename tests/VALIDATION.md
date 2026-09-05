@@ -2291,3 +2291,68 @@ differ where the evidence does (Hallowfall's Guardian vs Assassin Hood at
 forge pin moved (they dress at 7 through the same channel, and the gang
 modal happened to agree with the old scaled-down pick on the pinned
 cases). Gates green; tier2 74% unchanged.
+
+### Blind round 3 (owner, 2026-09-05) — the 10-14 band
+
+Form: twenty rosters of 10-14 from the harvest, every graded battle
+excluded (`audit_style_rosters.py --blind-sizes 10 14 --blind-round 3`).
+Owner's calls, given first: 1 not sure, 2 clap, 3 clap-brawl, 4 clap-brawl,
+5 clap, 6 clap, 7 clap-brawl, 8 clap, 9 clap, 10 kite-clap, 11 kite-clap;
+rosters 12-20 were left uncalled ("do the rest") and stay ungraded.
+
+**Before:** 4/10 exact (2, 5, 6, 9), 3 and 7 half-right (clap for
+clap-brawl), four misses: 4 (kite: one Icicle in a 13-stack made a kite of
+a 0.48 bomb share), 8 (split: Battle Bracers x2 + Demonfang against
+Dawnsong and two cursed staffs, with Spiked Gauntlets and Realmbreaker
+joining the melee side by a two-point edge), 10 (clap: no standoff tool),
+11 (split: three Bloodletters outweighed a ranged core behind two
+Bedrocks).
+
+Every candidate rule was scored against ALL earlier pins (round 1's seven,
+round 2's eleven plus the dressed roster 5, the five fixtures) before
+landing — `score_rules.py` in the session scratchpad, eight combinations:
+
+- **A lone standoff body only makes a kite of a comp that is not bombing**
+  (`IDENTITY_LONE_TOOL_AOE` 0.45): below the hybrid floor of two tools, a
+  single Bedrock/Icicle turns a ranged core into a kite only when the bomb
+  share is under 0.45. Roster 4 -> clap; kite10 (one Bedrock, 0.26) stays
+  the owner's kite; nothing pinned moves.
+- **The bomb's delivery names the mid band**: a mixed roster with a real
+  bomb share (>= 0.45) that is neither a hybrid (tools at scale) nor a ball
+  carrying half the bomb reads clap — the mirror of "the ball carries the
+  bomb". Roster 8 -> clap; round 2 roster 16 (a recorded miss) turns to
+  the owner's clap too. Formerly split.
+- **Flex bombs go home only to a clearly melee core** (`IDENTITY_FLEX_HOME`
+  2.0): the rigid melee damage must be twice the rigid ranged damage
+  before Realmbreaker / Spiked Gauntlets count melee; a two-point edge no
+  longer drags a bomb comp to brawl. No pinned roster moves; the
+  five-Realmbreaker ball (no rigid ranged damage) stays brawl.
+- **REJECTED — utility carriers out of the numbers.** Excluding
+  Bloodletter / Spirithunter damage from the axis and the mode fixed
+  roster 11 but lifted round 2's rosters 8 and 10 (the owner's kites)
+  over the hybrid line and lost the dressed roster 5. Not landed; the
+  2026-08-23 rule (utility carriers anchor no split) stands as it was.
+
+**After:** 8/10 exact (2, 4, 5, 6, 8, 9 pinned as agreed; 3 and 7 read clap
+where the owner said clap-brawl and are not pinned). Two recorded misses:
+
+- 10 (kite-clap / clap): Camlann Mace x2, Polehammer, Mace x2, Grailseeker,
+  Hellfire Hands, Bloodletter, Spear, Energy Shaper, Fire Staff. No E the
+  derivation admits as a standoff tool: Camlann's Vacuum Slash is a pull
+  (clump 6), Grailseeker's Soulshaker is a ROOT FIELD at 20 m (root 4,
+  catch 4) that the catch >= 4 clause excludes. **Open question for the
+  owner:** is a root field laid at range — Grailseeker — a kite tool in
+  the Bedrock sense (hold them there and leave)? Admitting root >= 4 at
+  range with no self-move would make roster 10 a kite (one tool, bomb
+  share 0.30).
+- 11 (kite-clap / split): three Bloodletters at 10 damage points each
+  outweigh Longbow, Permafrost, Rotcaller and Energy Shaper; two Bedrocks
+  give the kite half but the bomb share reads 0.24. The rejected rule
+  above is the only derivation that fixed it, and it broke two kites.
+
+Labels on the board after the rules: brawl 415, clap 773, clap_kite 213,
+kite 151, brawl_clap 29, split 109 (was 503 / 665 / 213 / 191 / 29 / 89);
+`style_bands.yaml` re-derived on the new labels (every cell moved a
+little; the contract pins hold). T39 pins the rules and the six agreed
+rosters; the eleven battles join GRADED_BATTLES. Gates green; parity
+60/60.

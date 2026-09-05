@@ -75,7 +75,9 @@ PREDS = ("ranged_aoe_core", "primary_heal", "pierce", "anti_heal",
 GRADED_BATTLES = [1439261314, 1439270346, 1439324226, 1439336518, 1439380503, 1442341916, 1442399167, 1442450338, 1443149088,
                   1439323062, 1439423672, 1442916379, 1442381572, 1443149032, 1442340579, 1443089499, 1439330397,
                   1439163242, 1442365275, 1442813939, 1443067935, 1443196794, 1442359908, 1442270050, 1442373560,
-                  1439247869, 1439330979, 1439276629]
+                  1439247869, 1439330979, 1439276629,
+                  # round 3 (2026-09-05, the 10-14 band, rosters 1-11 called)
+                  1439331464, 1442240282, 1442879983, 1442360406, 1443108045, 1442343192, 1442339162, 1443074329, 1439338826, 1439172287, 1442358198]
 
 
 def strip(t):
@@ -159,6 +161,12 @@ def main():
     ap.add_argument("--min-size", type=int, default=10)
     ap.add_argument("--min-known", type=float, default=0.8)
     ap.add_argument("--seed", type=int, default=20260904)
+    ap.add_argument("--blind-sizes", type=int, nargs=2, default=(15, 99),
+                    metavar=("LO", "HI"),
+                    help="roster size range the blind form samples from "
+                         "(rounds 1-2: 15+; round 3: 10 14)")
+    ap.add_argument("--blind-round", type=int, default=3,
+                    help="round number printed on the form")
     args = ap.parse_args()
     if not os.path.isdir(CACHE):
         sys.exit("no party cache - run sample_parties.py first")
@@ -302,10 +310,12 @@ def main():
     # Sampled from EVERY roster of 15+ in a deterministic order (never from
     # the labelled subset — round 1's form silently re-sampled when the
     # rulings changed the labels, and the pin had to be restored from git).
-    # Round 1's ten graded battles are excluded; round 2 is twenty.
+    # Every graded battle is excluded; the size range is an argument
+    # (rounds 1-2 drew from 15+, round 3 from the 10-14 band).
     rng = random.Random(args.seed)
     graded = set(GRADED_BATTLES)
-    pool = sorted((r for r in rosters if r["size"] >= 15
+    lo_b, hi_b = args.blind_sizes
+    pool = sorted((r for r in rosters if lo_b <= r["size"] <= hi_b
                    and r["battle"] not in graded),
                   key=lambda r: (r["battle"], tuple(sorted(
                       m["weapon"] for m in r["members"]))))
@@ -399,8 +409,8 @@ def main():
                       f"{en['proposal'][c]['target']} -> {en['proposal'][c]['soft']} | "
                       + " | ".join(cells) + " |")
         md.append("")
-    md += ["## Blind round 2 (owner: call the style BEFORE reading the engine's)", "",
-           "Twenty harvested rosters of 15+ (round 1's ten excluded), weapons only. Answers are in "
+    md += [f"## Blind round {args.blind_round} (owner: call the style BEFORE reading the engine's)", "",
+           f"Twenty harvested rosters of {lo_b}-{hi_b} players (every graded battle excluded), weapons only. Answers are in "
            "`out/style_roster_evidence.json` under `blind_answers`; do not open "
            "them before calling.", ""]
     for b in blind:

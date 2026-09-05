@@ -145,8 +145,15 @@ needs 35 voters; 72 of 818 tiers changed modal, 337 single-voter items
 left. And KIT DOCTRINE PER SIZE BAND (R28): a gang band from 4-9 man
 killer parties under `kit_bands.gang`, read through `_seat_kit` at <= 9
 members in both ports (47 weapons audited at 7: 286/286 slots on the
-gang modal). Open: a gank read for non-ZvZ killer parties (roster 9);
-the 20+ band once the harvest can stand it (14 weapons with 50+ today).
+gang modal). BLIND ROUND 3 (2026-09-05, the 10-14 band, T39): 4/10 -> 8/10 exact
+through a lone-standoff-body rule, "the bomb's delivery names the mid
+band", and a clearly-melee tie-break for flex bombs; one rule rejected on
+the pins (utility carriers out of the numbers). Board re-labelled (clap
+773, brawl 415) and the style rows re-derived. Open: is Grailseeker's
+root field a kite tool (round 3 roster 10); rosters 12-20 of the round-3
+form are uncalled; a gank read for non-ZvZ killer parties (round 2 roster
+9); the 20+ band once the harvest can stand it (14 weapons with 50+
+today).
 
 ## Owner bug round (2026-09-03)
 

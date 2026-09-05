@@ -2823,6 +2823,8 @@ class Engine:
     # Witchwork mobility and missed the Bedrock-and-bows comps the owner
     # calls kite.
     IDENTITY_KITE_TOOLS_PER = 10
+    IDENTITY_FLEX_HOME = 2.0       # rigid melee : rigid ranged that pulls flex bombs home
+    IDENTITY_LONE_TOOL_AOE = 0.45  # a lone standoff body makes a kite only below this bomb share
     IDENTITY_STYLES = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
 
     def _kit_lean(self, party, gears):
@@ -2896,6 +2898,10 @@ class Engine:
             caps = self._raw_member_caps(w, combos[i] if combos else None)
             dmg = sum(caps.get(c, 0) for c in self.DAMAGE_CAPS_PROFILE)
             sf0 = self._style_fit_of(w) or {}
+            if sf0.get("standoff_e"):
+                kite_tools += 1
+            commit += caps.get("engage", 0) + caps.get("clump_create", 0)
+            evade += caps.get("mobility", 0) + caps.get("disengage", 0)
             # CLAP HALF (owner 2026-09-04): a ramp-dependent bomb is not a
             # bomb — "galatine ... needs to charge its q stacks before it
             # hits; realmbreaker ... would be part of clap" — so a
@@ -2907,12 +2913,8 @@ class Engine:
                 if (sf0.get("delivery") == "melee"
                         and sf0.get("damage_scale") == "group"):
                     melee_bomb += caps.get("burst_aoe", 0)
-            if sf0.get("standoff_e"):
-                kite_tools += 1
             sus += caps.get("sustained_dps", 0)
             st += caps.get("burst_st", 0) + caps.get("execute", 0)
-            commit += caps.get("engage", 0) + caps.get("clump_create", 0)
-            evade += caps.get("mobility", 0) + caps.get("disengage", 0)
             if dmg < self.IDENTITY_CARRIER_MIN:
                 continue
             sf = self._style_fit_of(w)
@@ -2948,7 +2950,15 @@ class Engine:
         # outweighed a ranged core they were in fact part of.
         rigid_melee = sum(d for _, _, d, sd in pending if sd == "melee")
         rigid_ranged = sum(d for _, _, d, sd in pending if sd == "ranged")
-        flex_side = "ranged" if rigid_ranged >= rigid_melee else "melee"
+        # a flex bomb goes home to the melee side only when the rigid core
+        # is CLEARLY melee (round 3, roster 8: Battle Bracers x2 + Demonfang
+        # against Dawnsong + two cursed staffs was 24 vs 22 rigid points,
+        # and the two flex bombs joining melee by two points read a bomb
+        # comp as a brawl; the owner's five-Realmbreaker ball has no
+        # rigid ranged damage at all)
+        flex_side = ("melee" if rigid_melee >= self.IDENTITY_FLEX_HOME
+                     * max(rigid_ranged, 1e-9) and rigid_ranged < rigid_melee
+                     else "ranged")
         for i, w, dmg, side in pending:
             if side == "flex":
                 side = flex_side
@@ -2975,7 +2985,13 @@ class Engine:
         per_ten = self._half_up(n / self.IDENTITY_KITE_TOOLS_PER)
         kite_min = max(2, per_ten)
         kite_half = kite_tools >= kite_min
-        kite_any = kite_tools >= max(1, per_ten)
+        # a single standoff body below the hybrid floor only makes a kite
+        # of a comp that is NOT bombing (round 3, roster 4: one Icicle in a
+        # 13-stack at 0.48 bomb share is the owner's clap; kite10 with its
+        # one Bedrock at 0.26 stays the owner's kite)
+        kite_any = (kite_tools >= kite_min
+                    or (kite_tools >= max(1, per_ten)
+                        and mode["aoe"] < self.IDENTITY_LONE_TOOL_AOE))
         bc_bomb = (melee_bomb / aoe if aoe else 0.0)
         band = self._fit_band()
         out = {"style": None, "label": "", "strength": None,
@@ -3049,6 +3065,15 @@ class Engine:
             out["strength"] = "leaning"
             out["label"] = (f"{style_names.get('brawl_clap', 'Brawl-Clap')}"
                             " — grind into the bomb")
+        elif mode["aoe"] >= self.IDENTITY_HYBRID_AOE:
+            # THE BOMB'S DELIVERY NAMES THE MID BAND (blind round 3,
+            # 2026-09-05, roster 8; round 2 roster 16): a mixed roster
+            # with a real bomb share whose bombs are mostly landed from
+            # range is a clap — the mirror of "the ball carries the bomb"
+            out["style"] = "clap"
+            out["strength"] = "leaning"
+            out["label"] = (f"{style_names.get('clap', 'Clap')}"
+                            " — ranged bomb (mixed bodies, bomb from range)")
         else:
             minority = ("melee" if (mel, len(carriers["melee"]))
                         < (1.0 - mel, len(carriers["ranged"]))
