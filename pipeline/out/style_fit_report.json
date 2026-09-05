@@ -4219,7 +4219,7 @@
    "nonstack_member": false,
    "ramp_free": false,
    "role_flexible": false,
-   "standoff_e": false,
+   "standoff_e": true,
    "utility_carrier": false,
    "utility_pts": 18,
    "weak_group_e": false
@@ -5915,7 +5915,7 @@
    "nonstack_member": false,
    "ramp_free": false,
    "role_flexible": false,
-   "standoff_e": false,
+   "standoff_e": true,
    "utility_carrier": false,
    "utility_pts": 18,
    "weak_group_e": false

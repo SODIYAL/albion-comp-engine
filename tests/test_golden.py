@@ -1329,6 +1329,66 @@ def run():
           f"kits={sum(1 for _, (_p, g, _s, _c) in fx38.items() if all(g))}/5 "
           f"dressed>naked={dressed_wins} clears={clears} " + " ".join(detail38))
 
+    # T39 — blind round 3 (owner, 2026-09-05; the 10-14 band, rosters 1-11
+    # called, 12-20 left uncalled). Two derived rules, one refinement, one
+    # negative result, all scored against every earlier pin before landing:
+    # (a) A LONE STANDOFF BODY below the hybrid floor only makes a kite of
+    #     a comp that is NOT bombing (bomb share < 0.45): one Icicle in a
+    #     13-stack at 0.48 is the owner's clap (roster 4); kite10 with its
+    #     one Bedrock at 0.26 stays the owner's kite.
+    # (b) THE BOMB'S DELIVERY NAMES THE MID BAND: a mixed roster with a
+    #     real bomb share (>= 0.45) whose bombs are mostly landed from
+    #     range is a clap (roster 8: Battle Bracers x2 + Demonfang against
+    #     Dawnsong and two cursed staffs, with Spiked + Realmbreaker) — the
+    #     mirror of "the ball carries the bomb"; round 2 roster 16 turns.
+    # (c) refinement: a flex bomb goes home to the melee side only when the
+    #     rigid core is CLEARLY melee (2x the rigid ranged damage); a
+    #     two-point edge no longer drags a bomb comp to brawl.
+    # (d) REJECTED: excluding utility carriers' damage (Bloodletter,
+    #     Spirithunter) from the axis and the mode fixed roster 11 but
+    #     lifted round 2's two kites over the hybrid line — not landed.
+    # Score: 4/10 -> 8/10 exact; 10 (no standoff tool the derivation
+    # admits — Grailseeker's root field is an open question) and 11 (three
+    # Bloodletters) stay recorded misses.
+    e39 = Engine(content="territory_defense", size=13)
+    round3 = {
+        1: ('?', None, ['2H_MACE', '2H_KNUCKLES_SET2', 'MAIN_CURSEDSTAFF_UNDEAD', '2H_MACE', '2H_DUALMACE_AVALON', '2H_LONGBOW', '2H_SCYTHE_HELL', '2H_KNUCKLES_SET2', '2H_KNUCKLES_KEEPER', '2H_FIRE_RINGPAIR_AVALON', 'MAIN_HOLYSTAFF_AVALON']),
+        2: ('clap', 'clap', ['MAIN_RAPIER_MORGANA', '2H_MACE', '2H_FIRE_RINGPAIR_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_FIRE_RINGPAIR_AVALON', '2H_FROSTSTAFF', '2H_FIRE_RINGPAIR_AVALON', '2H_ICEGAUNTLETS_HELL', 'MAIN_HOLYSTAFF_AVALON', '2H_NATURESTAFF_HELL', '2H_ICECRYSTAL_UNDEAD', '2H_FIRE_RINGPAIR_AVALON', '2H_ARCANESTAFF_HELL']),
+        3: ('clap/brawl', None, ['2H_SHAPESHIFTER_KEEPER', '2H_KNUCKLES_SET2', '2H_ICECRYSTAL_UNDEAD', 'MAIN_CURSEDSTAFF_UNDEAD', 'MAIN_MACE', '2H_CURSEDSTAFF_MORGANA', '2H_HOLYSTAFF_CRYSTAL', '2H_SHAPESHIFTER_SET2', 'MAIN_NATURESTAFF', '2H_DUALSWORD', '2H_FIRE_RINGPAIR_AVALON', '2H_AXE_AVALON', '2H_ENIGMATICSTAFF']),
+        4: ('clap/brawl', 'clap', ['MAIN_HOLYSTAFF_AVALON', '2H_MACE', '2H_DUALMACE_AVALON', 'MAIN_MACE', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_DAGGER_HELL', '2H_SHAPESHIFTER_SET2', '2H_COMBATSTAFF_MORGANA', '2H_AXE_AVALON', 'MAIN_CURSEDSTAFF_CRYSTAL', '2H_LONGBOW', 'MAIN_CURSEDSTAFF_UNDEAD', '2H_ICEGAUNTLETS_HELL']),
+        5: ('clap', 'clap', ['2H_LONGBOW', 'MAIN_CURSEDSTAFF_CRYSTAL', 'MAIN_HOLYSTAFF_AVALON', '2H_HOLYSTAFF_HELL', '2H_MACE', '2H_FROSTSTAFF', 'MAIN_MACE', '2H_LONGBOW', '2H_ICECRYSTAL_UNDEAD', 'MAIN_NATURESTAFF', '2H_FROSTSTAFF']),
+        6: ('clap', 'clap', ['2H_DUALMACE_AVALON', '2H_FIRE_RINGPAIR_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_LONGBOW', '2H_LONGBOW', '2H_LONGBOW', '2H_AXE_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HAMMER']),
+        7: ('clap/brawl', None, ['MAIN_RAPIER_MORGANA', '2H_ICECRYSTAL_UNDEAD', '2H_NATURESTAFF_HELL', '2H_HAMMER_AVALON', '2H_HARPOON_HELL', '2H_MACE', '2H_AXE_AVALON', '2H_KNUCKLES_HELL', '2H_LONGBOW', '2H_FIRESTAFF']),
+        8: ('clap', 'clap', ['MAIN_CURSEDSTAFF_UNDEAD', '2H_KNUCKLES_SET3', 'MAIN_HOLYSTAFF_AVALON', '2H_KNUCKLES_SET2', '2H_FIRE_RINGPAIR_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_MACE_MORGANA', '2H_CURSEDSTAFF_MORGANA', '2H_AXE_AVALON', '2H_DUALMACE_AVALON', '2H_SHAPESHIFTER_KEEPER', '2H_KNUCKLES_SET2', 'MAIN_DAGGER_HELL']),
+        9: ('clap', 'clap', ['2H_BOW_AVALON', '2H_DUALMACE_AVALON', '2H_NATURESTAFF_HELL', '2H_SHAPESHIFTER_SET2', '2H_FIRE_RINGPAIR_AVALON', '2H_HOLYSTAFF_UNDEAD', '2H_BOW_AVALON', '2H_LONGBOW', '2H_ICECRYSTAL_UNDEAD', '2H_HARPOON_HELL', '2H_SHAPESHIFTER_KEEPER', '2H_CROSSBOW_CANNON_AVALON', 'MAIN_ARCANESTAFF_UNDEAD', '2H_ICECRYSTAL_UNDEAD']),
+        10: ('kite_clap', None, ['2H_KNUCKLES_HELL', 'MAIN_RAPIER_MORGANA', '2H_POLEHAMMER', '2H_QUARTERSTAFF_AVALON', '2H_CROSSBOW_CANNON_AVALON', '2H_NATURESTAFF_HELL', 'MAIN_SPEAR', 'MAIN_FIRESTAFF', '2H_MACE_MORGANA', '2H_SHAPESHIFTER_SET2', 'MAIN_MACE', 'MAIN_MACE', '2H_MACE_MORGANA']),
+        11: ('kite_clap', None, ['MAIN_RAPIER_MORGANA', '2H_CLEAVER_HELL', 'MAIN_RAPIER_MORGANA', '2H_LONGBOW', '2H_ICECRYSTAL_UNDEAD', 'MAIN_RAPIER_MORGANA', 'MAIN_ROCKMACE_KEEPER', 'MAIN_CURSEDSTAFF_CRYSTAL', '2H_CROSSBOW_CANNON_AVALON', '2H_ARCANESTAFF_HELL', '2H_HOLYSTAFF_CRYSTAL', '2H_HOLYSTAFF_HELL', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_ROCKMACE_KEEPER']),
+    }
+    r3_ok, r3_bad = 0, []
+    for rid, (_owner, agreed_style, ids) in sorted(round3.items()):
+        if agreed_style is None:
+            continue
+        e39.set_content("territory_defense", len(ids))
+        got = e39.comp_identity(ids).get("style")
+        if got == agreed_style:
+            r3_ok += 1
+        else:
+            r3_bad.append(f"r{rid}:{got}")
+    # the lone-tool rule in isolation: the same one-Icicle 13-stack reads
+    # clap; strip its bombs to a kite share and it reads kite
+    e39.set_content("territory_defense", 13)
+    ci4 = e39.comp_identity(round3[4][2])
+    lone_ok = (ci4.get("kite_tools") == 1 and ci4.get("style") == "clap"
+               and ci4["mode"]["aoe"] >= e39.IDENTITY_LONE_TOOL_AOE)
+    kite10_ok = (Engine(content="blackzone_roam", size=10)
+                 .comp_identity(kite10).get("style") == "kite")
+    check("T39 blind round 3 (2026-09-05, the 10-14 band): a lone standoff body "
+          "only makes a kite of a comp that is not bombing; the bomb's delivery "
+          "names the mid band; flex bombs go home only to a clearly melee core; "
+          "the six agreed rosters read as the owner called them",
+          r3_ok == 6 and lone_ok and kite10_ok,
+          f"round={r3_ok}/6 bad={r3_bad} lone={lone_ok} kite10={kite10_ok}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

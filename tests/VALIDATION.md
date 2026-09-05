@@ -2291,3 +2291,137 @@ differ where the evidence does (Hallowfall's Guardian vs Assassin Hood at
 forge pin moved (they dress at 7 through the same channel, and the gang
 modal happened to agree with the old scaled-down pick on the pinned
 cases). Gates green; tier2 74% unchanged.
+
+### Blind round 3 (owner, 2026-09-05) — the 10-14 band
+
+Form: twenty rosters of 10-14 from the harvest, every graded battle
+excluded (`audit_style_rosters.py --blind-sizes 10 14 --blind-round 3`).
+Owner's calls, given first: 1 not sure, 2 clap, 3 clap-brawl, 4 clap-brawl,
+5 clap, 6 clap, 7 clap-brawl, 8 clap, 9 clap, 10 kite-clap, 11 kite-clap;
+rosters 12-20 were left uncalled ("do the rest") and stay ungraded.
+
+**Before:** 4/10 exact (2, 5, 6, 9), 3 and 7 half-right (clap for
+clap-brawl), four misses: 4 (kite: one Icicle in a 13-stack made a kite of
+a 0.48 bomb share), 8 (split: Battle Bracers x2 + Demonfang against
+Dawnsong and two cursed staffs, with Spiked Gauntlets and Realmbreaker
+joining the melee side by a two-point edge), 10 (clap: no standoff tool),
+11 (split: three Bloodletters outweighed a ranged core behind two
+Bedrocks).
+
+Every candidate rule was scored against ALL earlier pins (round 1's seven,
+round 2's eleven plus the dressed roster 5, the five fixtures) before
+landing — `score_rules.py` in the session scratchpad, eight combinations:
+
+- **A lone standoff body only makes a kite of a comp that is not bombing**
+  (`IDENTITY_LONE_TOOL_AOE` 0.45): below the hybrid floor of two tools, a
+  single Bedrock/Icicle turns a ranged core into a kite only when the bomb
+  share is under 0.45. Roster 4 -> clap; kite10 (one Bedrock, 0.26) stays
+  the owner's kite; nothing pinned moves.
+- **The bomb's delivery names the mid band**: a mixed roster with a real
+  bomb share (>= 0.45) that is neither a hybrid (tools at scale) nor a ball
+  carrying half the bomb reads clap — the mirror of "the ball carries the
+  bomb". Roster 8 -> clap; round 2 roster 16 (a recorded miss) turns to
+  the owner's clap too. Formerly split.
+- **Flex bombs go home only to a clearly melee core** (`IDENTITY_FLEX_HOME`
+  2.0): the rigid melee damage must be twice the rigid ranged damage
+  before Realmbreaker / Spiked Gauntlets count melee; a two-point edge no
+  longer drags a bomb comp to brawl. No pinned roster moves; the
+  five-Realmbreaker ball (no rigid ranged damage) stays brawl.
+- **REJECTED — utility carriers out of the numbers.** Excluding
+  Bloodletter / Spirithunter damage from the axis and the mode fixed
+  roster 11 but lifted round 2's rosters 8 and 10 (the owner's kites)
+  over the hybrid line and lost the dressed roster 5. Not landed; the
+  2026-08-23 rule (utility carriers anchor no split) stands as it was.
+
+**After:** 8/10 exact (2, 4, 5, 6, 8, 9 pinned as agreed; 3 and 7 read clap
+where the owner said clap-brawl and are not pinned). Two recorded misses:
+
+- 10 (kite-clap / clap): Camlann Mace x2, Polehammer, Mace x2, Grailseeker,
+  Hellfire Hands, Bloodletter, Spear, Energy Shaper, Fire Staff. No E the
+  derivation admits as a standoff tool: Camlann's Vacuum Slash is a pull
+  (clump 6), Grailseeker's Soulshaker is a ROOT FIELD at 20 m (root 4,
+  catch 4) that the catch >= 4 clause excludes. **Open question for the
+  owner:** is a root field laid at range — Grailseeker — a kite tool in
+  the Bedrock sense (hold them there and leave)? Admitting root >= 4 at
+  range with no self-move would make roster 10 a kite (one tool, bomb
+  share 0.30).
+- 11 (kite-clap / split): three Bloodletters at 10 damage points each
+  outweigh Longbow, Permafrost, Rotcaller and Energy Shaper; two Bedrocks
+  give the kite half but the bomb share reads 0.24. The rejected rule
+  above is the only derivation that fixed it, and it broke two kites.
+
+Labels on the board after the rules: brawl 415, clap 773, clap_kite 213,
+kite 151, brawl_clap 29, split 109 (was 503 / 665 / 213 / 191 / 29 / 89);
+`style_bands.yaml` re-derived on the new labels (every cell moved a
+little; the contract pins hold). T39 pins the rules and the six agreed
+rosters; the eleven battles join GRADED_BATTLES. Gates green; parity
+60/60.
+
+### Harvest refresh, first overnight run (2026-09-05) — 994 -> 2,042 battles
+
+The scheduled task fired at 03:00 and finished both passes by 06:46 (exit
+0): cache 994 -> 2,042 battles, 32,001 -> 51,125 builds, 3,590 -> 6,795
+distinct parties. Everything built for blind round 3 predates it (00:33-
+00:37), so the refresh is its own step and its own diff: audit ->
+derive_style_bands -> build_dataset -> dashboard -> gates.
+
+What doubled data moved:
+
+- Labelled rosters of 10+: 1,690 -> 2,351 (brawl 568, clap 1,073,
+  clap_kite 305, kite 210, brawl_clap 43, split 152). Every style x band
+  cell gained; kite at 20 still borrows from 15-19; brawl at 20 sits at
+  41 distinct rosters and now owns its numbers.
+- Style rows: 325 targets compared, median move 2%, p90 32% (the thin
+  cells). Contract pins hold (T37 pins the mechanism, never the numbers).
+- Doctrine: 822 weapon-slot tiers (12 new), modal item changed in 54;
+  carrier quotas within a point of before; 15 uniform extensions — Bow of
+  Badon's leather/plate falls away, GRAILSEEKER'S LEATHER COMES IN (below).
+- Round-3 form re-sampled as a round-4 draw from 10-14 (every graded
+  battle excluded); rosters 12-20 of the round-3 form are gone with it.
+
+Two audit pins moved with the unit, both test fixes not retunes: R24
+(the ten-weapon kit audit) now counts votes, not sightings — Fists of
+Avalon's Assassin Hood was 12 sightings from 6 voters and a sightings
+audit called the 4-vote Soldier Helmet a bad pick; R27's "single-voter
+tops" floor drops from 5 to 1 because doubled data leaves fewer of them
+(good).
+
+**OPEN — owner ruling needed (R6 / R12 / R26 red until it lands).**
+Grailseeker in 10+ killer parties now reads 52 builds from 35 voters —
+exactly the extension floor — with class votes plate 63% / leather 34% /
+cloth 3%; Assassin Jacket is its single most-worn chest (10.7 votes) in
+BOTH bands (10-14: leather 43%; 15+: leather 39%). The derived rule
+(>= 25% of >= 35 voters) admits leather to Grailseeker's weapon tier, so
+a Grailseeker in Hellion Jacket now reads on-uniform (`kit_match` True)
+— the exact case the 2026-08-25 role-layer bug report pinned as
+off-role, on the owner's plate d-tank ruling. Anti-circularity: the gate
+result is a hypothesis, not a fix. Options for the owner:
+(A) accept the harvest — a third of winning Grailseekers at 10+ wear
+Assassin Jacket, leather is a real Grailseeker kit; re-pin R6/R12/R26 on
+Incubus alone (which stays plate-only at 0% leather) and record
+Grailseeker as the extension example; or
+(B) hold the plate ruling — add a cited class-extension override to the
+kit doctrine (roles.yaml) dropping leather from Grailseeker's tier, a
+new override kind, since today's overrides address items not classes.
+
+**RULED (owner, 2026-09-05): "yeah grailseeker can be kite or d tank.
+accept."** Two rulings in one line:
+
+- **Accept:** leather is a real Grailseeker kit at 10+. R6 is re-pinned
+  on Incubus alone (0% leather, still off-role in Hellion Jacket) with
+  Grailseeker's Hellion reading on-uniform; R12 expects Grailseeker's
+  chest classes to be plate + leather; R26 and R27 record Grailseeker as
+  the extension example at the 35-voter floor (R27 had also been reading
+  the wrong id — Deathgivers — for "grail"; fixed).
+- **A root field laid at range is a kite tool** (the round-3 roster-10
+  question): `standoff_e` now admits an E with root >= 4 at cast range
+  >= 9 (ground/enemy/all), not itself a bomb, with no engage / self-move /
+  clump / heal — and a root's own catch claim does not disqualify it,
+  because a root catches by holding, not by pulling (the catch clause
+  still keeps Soulscythe's tornado out of the displace/slow paths).
+  Admits Grailseeker's Soulshaker and Frost Staff's Freezing Wind; Morning
+  Star and Trinity Spear stay out on engage/mobility. Round 3 roster 10
+  now reads kite on its one Grailseeker (owner: kite-clap — half-right,
+  no longer a miss); kite10 keeps its kite with two tools instead of one.
+  Board after: brawl 568, clap 1,020, clap_kite 319, kite 250, brawl_clap
+  42, split 152; rows re-derived. Gates green; parity 60/60.

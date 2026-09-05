@@ -145,8 +145,20 @@ needs 35 voters; 72 of 818 tiers changed modal, 337 single-voter items
 left. And KIT DOCTRINE PER SIZE BAND (R28): a gang band from 4-9 man
 killer parties under `kit_bands.gang`, read through `_seat_kit` at <= 9
 members in both ports (47 weapons audited at 7: 286/286 slots on the
-gang modal). Open: a gank read for non-ZvZ killer parties (roster 9);
-the 20+ band once the harvest can stand it (14 weapons with 50+ today).
+gang modal). BLIND ROUND 3 (2026-09-05, the 10-14 band, T39): 4/10 -> 8/10 exact
+through a lone-standoff-body rule, "the bomb's delivery names the mid
+band", and a clearly-melee tie-break for flex bombs; one rule rejected on
+the pins (utility carriers out of the numbers). Board re-labelled (clap
+773, brawl 415) and the style rows re-derived. FIRST OVERNIGHT HARVEST landed
+2026-09-05 (994 -> 2,042 battles, 51,125 builds); the refresh chain ran
+and the owner ruled the same morning ("grailseeker can be kite or d
+tank. accept"): Grailseeker's harvest-admitted leather stands (R6 / R12 /
+R26 / R27 re-pinned on Incubus as the off-role case) and ROOT FIELDS
+laid at range are standoff tools (Grailseeker, Frost Staff; round 3
+roster 10 reads kite). Board: brawl 568, clap 1,020, clap_kite 319, kite
+250. Open: a gank read for non-ZvZ killer parties (round 2 roster 9);
+the 20+ band once the harvest can stand it; round-4 form (10-14) drawn
+and uncalled at the bottom of the board.
 
 ## Owner bug round (2026-09-03)
 

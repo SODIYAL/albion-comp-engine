@@ -2567,7 +2567,9 @@
       IDENTITY_CARRIER_MIN = 4, IDENTITY_MIN_MEMBERS = 3,
       IDENTITY_RANGED_ATTACK = 9.0,
       IDENTITY_HYBRID_AOE = 0.45, IDENTITY_HYBRID_EVADE = 2.0,   /* 0.40 -> 0.45, blind round 2 */
-      IDENTITY_KITE_TOOLS_PER = 10;   /* standoff tools per members (2026-09-04) */
+      IDENTITY_KITE_TOOLS_PER = 10,   /* standoff tools per members (2026-09-04) */
+      IDENTITY_FLEX_HOME = 2.0,       /* rigid melee : rigid ranged that pulls flex bombs home */
+      IDENTITY_LONE_TOOL_AOE = 0.45;  /* a lone standoff body makes a kite only below this bomb share */
   var DOCTRINE_GANG_MAX = 9;   /* party sizes that read the gang doctrine band */
   var IDENTITY_STYLES = { brawl: true, clap: true, kite: true,
                           brawl_clap: true, clap_kite: true };
@@ -2664,7 +2666,10 @@
       if (pending[pi][3] === "melee") rigidMelee += pending[pi][2];
       else if (pending[pi][3] === "ranged") rigidRanged += pending[pi][2];
     }
-    var flexSide = rigidRanged >= rigidMelee ? "ranged" : "melee";
+    /* a flex bomb goes home to melee only when the rigid core is CLEARLY
+       melee (blind round 3; mirrors engine.py) */
+    var flexSide = (rigidMelee >= IDENTITY_FLEX_HOME * Math.max(rigidRanged, 1e-9)
+                    && rigidRanged < rigidMelee) ? "melee" : "ranged";
     for (pi = 0; pi < pending.length; pi++) {
       var pIdx = pending[pi][0], pW = pending[pi][1], pDmg = pending[pi][2],
           pSide = pending[pi][3] === "flex" ? flexSide : pending[pi][3];
@@ -2682,7 +2687,10 @@
     var perTen = Math.floor(n / IDENTITY_KITE_TOOLS_PER + 0.5);
     var kiteMin = Math.max(2, perTen);
     var kiteHalf = kiteTools >= kiteMin;                 /* hybrid: tools at scale */
-    var kiteAny = kiteTools >= Math.max(1, perTen);      /* kite: one per ten, never below one */
+    /* a lone standoff body below the hybrid floor only makes a kite of a
+       comp that is not bombing (blind round 3, roster 4; mirrors engine.py) */
+    var kiteAny = kiteTools >= kiteMin ||
+                  (kiteTools >= Math.max(1, perTen) && mode.aoe < IDENTITY_LONE_TOOL_AOE);
     var bcBomb = aoe ? meleeBomb / aoe : 0.0;
     var band = this._fitBand();
     var out = { style: null, label: "", strength: null,
@@ -2746,6 +2754,12 @@
       out.style = "brawl_clap";
       out.strength = "leaning";
       out.label = sname("brawl_clap", "Brawl-Clap") + " — grind into the bomb";
+    } else if (mode.aoe >= IDENTITY_HYBRID_AOE) {
+      /* the bomb's delivery names the mid band (blind round 3, roster 8;
+         mirrors engine.py) */
+      out.style = "clap";
+      out.strength = "leaning";
+      out.label = sname("clap", "Clap") + " — ranged bomb (mixed bodies, bomb from range)";
     } else {
       /* mirrors Python's tuple compare: (mel, nMelee) < (1-mel, nRanged) */
       var minority = (mel < 1.0 - mel ||
