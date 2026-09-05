@@ -618,6 +618,14 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
         # corridor speeds the team INTO a fight as readily as out of one,
         # and the owner's own clap10 fields it beside a Bedrock as a pure
         # clap — so the slow fields are Icicle, Arctic, Glacial, Chillhowl.
+        # ROOT FIELDS (owner 2026-09-05, "grailseeker can be kite or d
+        # tank"): a root laid at range holds them where they are and
+        # commits nothing — the same standoff job. A root's own `catch`
+        # claim is the hold itself, not a pull, so the catch >= 4 clause
+        # does not disqualify a root field (it still keeps pull-ins such
+        # as Soulscythe's tornado out of the displace/slow paths).
+        # Admits Grailseeker's Soulshaker and Frost Staff's Freezing Wind;
+        # Morning Star and Trinity Spear stay out (engage / self-move).
         standoff_e = False
         for i, slot in enumerate(slots):
             if i >= len(names) or names[i] != "e":
@@ -626,13 +634,15 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                 displaces = bundle.get("knockback_displace", 0) >= 2
                 slows = (bundle.get("slow", 0) >= 4
                          and bundle.get("burst_aoe", 0) < 4)
-                if not (displaces or slows):
+                roots = (bundle.get("root", 0) >= 4
+                         and bundle.get("burst_aoe", 0) < 4)
+                if not (displaces or slows or roots):
                     continue
                 if (bundle.get("engage") or bundle.get("clump_create")
                         or bundle.get("mobility")
                         or bundle.get("heal_burst")
                         or bundle.get("heal_sustain")
-                        or bundle.get("catch", 0) >= 4):
+                        or (bundle.get("catch", 0) >= 4 and not roots)):
                     continue
                 facts = spell_index.get(spells[i][j]) or {}
                 try:
@@ -1363,9 +1373,10 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     # OBSERVED CHEST CLASS (2026-09-03 kit audit; owner: "lockdown what
     # people are actually wearing"): a weapon whose fielded builds wear
     # an armour class in >= KB_UNI_SHARE of >= KB_UNI_MIN fielded builds
-    # has that class ADMITTED to its own weapon tier (50 builds: thin
-    # samples never overturn a book uniform — Grailseeker's 32 builds
-    # keep the owner's plate d-tank ruling, R6/R12)
+    # has that class ADMITTED to its own weapon tier (thin samples never
+    # overturn a book uniform; Grailseeker sat under the floor at 32
+    # builds until the first overnight harvest lifted it to 35 voters
+    # with leather at 34%, and the owner accepted — 2026-09-05)
     # and archetype even where the seat's book uniform disagrees —
     # Galatine Pair wears plate in 81% of 145 winning builds while its
     # bomb seat reads cloth/leather, and the old gate threw the modal
@@ -1379,8 +1390,9 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     # KB_UNI_MIN is VOTERS since 2026-09-04 (one player, one vote): 35
     # voters is the old 50-build floor re-expressed in the new unit (the
     # median weapon has 0.67 voters per build; 61 weapons clear it vs 60
-    # before), so a thin sample still never overturns a book uniform —
-    # Grailseeker's 32 builds are 23 voters (R6/R12)
+    # before), so a thin sample still never overturns a book uniform;
+    # a weapon that reaches the floor is evidence the owner rules on, not
+    # a ruling to defend (Grailseeker, 2026-09-05: accepted)
     KB_UNI_SHARE, KB_UNI_MIN = 0.25, 35
     uni_ext = {}
     for wk, wa in sorted(kb_armour.items()):

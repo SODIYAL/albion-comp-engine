@@ -2356,3 +2356,72 @@ kite 151, brawl_clap 29, split 109 (was 503 / 665 / 213 / 191 / 29 / 89);
 little; the contract pins hold). T39 pins the rules and the six agreed
 rosters; the eleven battles join GRADED_BATTLES. Gates green; parity
 60/60.
+
+### Harvest refresh, first overnight run (2026-09-05) — 994 -> 2,042 battles
+
+The scheduled task fired at 03:00 and finished both passes by 06:46 (exit
+0): cache 994 -> 2,042 battles, 32,001 -> 51,125 builds, 3,590 -> 6,795
+distinct parties. Everything built for blind round 3 predates it (00:33-
+00:37), so the refresh is its own step and its own diff: audit ->
+derive_style_bands -> build_dataset -> dashboard -> gates.
+
+What doubled data moved:
+
+- Labelled rosters of 10+: 1,690 -> 2,351 (brawl 568, clap 1,073,
+  clap_kite 305, kite 210, brawl_clap 43, split 152). Every style x band
+  cell gained; kite at 20 still borrows from 15-19; brawl at 20 sits at
+  41 distinct rosters and now owns its numbers.
+- Style rows: 325 targets compared, median move 2%, p90 32% (the thin
+  cells). Contract pins hold (T37 pins the mechanism, never the numbers).
+- Doctrine: 822 weapon-slot tiers (12 new), modal item changed in 54;
+  carrier quotas within a point of before; 15 uniform extensions — Bow of
+  Badon's leather/plate falls away, GRAILSEEKER'S LEATHER COMES IN (below).
+- Round-3 form re-sampled as a round-4 draw from 10-14 (every graded
+  battle excluded); rosters 12-20 of the round-3 form are gone with it.
+
+Two audit pins moved with the unit, both test fixes not retunes: R24
+(the ten-weapon kit audit) now counts votes, not sightings — Fists of
+Avalon's Assassin Hood was 12 sightings from 6 voters and a sightings
+audit called the 4-vote Soldier Helmet a bad pick; R27's "single-voter
+tops" floor drops from 5 to 1 because doubled data leaves fewer of them
+(good).
+
+**OPEN — owner ruling needed (R6 / R12 / R26 red until it lands).**
+Grailseeker in 10+ killer parties now reads 52 builds from 35 voters —
+exactly the extension floor — with class votes plate 63% / leather 34% /
+cloth 3%; Assassin Jacket is its single most-worn chest (10.7 votes) in
+BOTH bands (10-14: leather 43%; 15+: leather 39%). The derived rule
+(>= 25% of >= 35 voters) admits leather to Grailseeker's weapon tier, so
+a Grailseeker in Hellion Jacket now reads on-uniform (`kit_match` True)
+— the exact case the 2026-08-25 role-layer bug report pinned as
+off-role, on the owner's plate d-tank ruling. Anti-circularity: the gate
+result is a hypothesis, not a fix. Options for the owner:
+(A) accept the harvest — a third of winning Grailseekers at 10+ wear
+Assassin Jacket, leather is a real Grailseeker kit; re-pin R6/R12/R26 on
+Incubus alone (which stays plate-only at 0% leather) and record
+Grailseeker as the extension example; or
+(B) hold the plate ruling — add a cited class-extension override to the
+kit doctrine (roles.yaml) dropping leather from Grailseeker's tier, a
+new override kind, since today's overrides address items not classes.
+
+**RULED (owner, 2026-09-05): "yeah grailseeker can be kite or d tank.
+accept."** Two rulings in one line:
+
+- **Accept:** leather is a real Grailseeker kit at 10+. R6 is re-pinned
+  on Incubus alone (0% leather, still off-role in Hellion Jacket) with
+  Grailseeker's Hellion reading on-uniform; R12 expects Grailseeker's
+  chest classes to be plate + leather; R26 and R27 record Grailseeker as
+  the extension example at the 35-voter floor (R27 had also been reading
+  the wrong id — Deathgivers — for "grail"; fixed).
+- **A root field laid at range is a kite tool** (the round-3 roster-10
+  question): `standoff_e` now admits an E with root >= 4 at cast range
+  >= 9 (ground/enemy/all), not itself a bomb, with no engage / self-move /
+  clump / heal — and a root's own catch claim does not disqualify it,
+  because a root catches by holding, not by pulling (the catch clause
+  still keeps Soulscythe's tornado out of the displace/slow paths).
+  Admits Grailseeker's Soulshaker and Frost Staff's Freezing Wind; Morning
+  Star and Trinity Spear stay out on engage/mobility. Round 3 roster 10
+  now reads kite on its one Grailseeker (owner: kite-clap — half-right,
+  no longer a miss); kite10 keeps its kite with two tools instead of one.
+  Board after: brawl 568, clap 1,020, clap_kite 319, kite 250, brawl_clap
+  42, split 152; rows re-derived. Gates green; parity 60/60.

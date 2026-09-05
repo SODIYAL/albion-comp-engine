@@ -189,10 +189,17 @@ def t_original_bug_case():
     adv = e.role_advisory(party, chests={0: "ARMOR_LEATHER_HELL",
                                          1: "ARMOR_LEATHER_HELL"})
     m0, m1 = adv["members"][0], adv["members"][1]
-    check("R6 the reproduced bug: Incubus + Grailseeker in Hellion "
-          "Jacket both flag off-role kit (their SEATS wear plate; the "
-          "anti-heal FUNCTION rides along, never excuses the chest)",
-          m0.get("kit_match") is False and m1.get("kit_match") is False
+    # 2026-09-05 re-pin (owner: "grailseeker can be kite or d tank.
+    # accept"): the first overnight harvest put Grailseeker at 52 builds /
+    # 35 voters with leather at 34% (Assassin Jacket its most-worn chest
+    # in both bands), so leather is admitted to ITS tier and a Grailseeker
+    # in Hellion Jacket reads on-uniform. Incubus (0% leather) is the
+    # off-role case the bug report is now pinned on.
+    check("R6 the reproduced bug: Incubus in Hellion Jacket flags off-role "
+          "kit (its SEAT wears plate; the anti-heal FUNCTION rides along, "
+          "never excuses the chest); Grailseeker's harvest-admitted leather "
+          "reads on-uniform (owner 2026-09-05)",
+          m0.get("kit_match") is False and m1.get("kit_match") is True
           and "anti_heal" in (m0.get("functions") or []),
           f"incubus={m0} grailseeker={m1}")
 
@@ -344,7 +351,9 @@ def t_kit_uniform_gate():
     inc = e.kit_options("MAIN_MACE_HELL", top_n=300)
     grail = e.kit_options("2H_QUARTERSTAFF_AVALON", top_n=300)
     inc_ids = [o["gear"] for o in inc["options"]["armor"]]
-    gated = (classes(inc) == {"plate"} and classes(grail) == {"plate"}
+    # Grailseeker's tier admits leather since the 2026-09-05 harvest
+    # (owner accepted); Incubus stays plate-only
+    gated = (classes(inc) == {"plate"} and classes(grail) == {"leather", "plate"}
              and "ARMOR_LEATHER_HELL" not in inc_ids)
     unc = e.kit_options("MAIN_MACE_HELL", top_n=300, role=None)
     back_compat = "ARMOR_LEATHER_HELL" in [
@@ -352,8 +361,9 @@ def t_kit_uniform_gate():
     # manual scoring untouched: a Hellion-Jacket Incubus build still
     # evaluates (build_extra never gates)
     manual = e.build_extra("MAIN_MACE_HELL", None, ["ARMOR_LEATHER_HELL"])
-    check("R12 uniform-gated kits: Incubus + Grailseeker chests are plate "
-          "only; role=None keeps the ungated pool; manual builds score",
+    check("R12 uniform-gated kits: Incubus chests are plate only and "
+          "Grailseeker's are plate + its harvest-admitted leather; role=None "
+          "keeps the ungated pool; manual builds score",
           gated and back_compat and bool(manual),
           f"incubus classes={sorted(str(c) for c in classes(inc))} "
           f"armor={inc_ids[:3]}")
@@ -791,10 +801,23 @@ def t_kit_audit_agreement():
                                        "party_rosters.json"),
                           encoding="utf-8"))
     by_w = {}
+    # ONE PLAYER, ONE VOTE (2026-09-04): the audit counts in the miner's
+    # unit — a player's builds on a weapon share one vote — so the modal
+    # here is the modal the doctrine ranks by (2026-09-05 harvest refresh:
+    # Fists of Avalon's Assassin Hood was 12 sightings from 6 voters and
+    # a sightings audit called the 4-vote Soldier Helmet a bad pick)
+    per = {}
     for r in doc.get("builds") or []:
         if r.get("weapon") in e.weapons and r.get("gear") \
                 and (r.get("party_size") or 0) >= 10:   # ZvZ killer parties
-            by_w.setdefault(r["weapon"], []).append(r["gear"])
+            k = (r["weapon"], r.get("player"))
+            per[k] = per.get(k, 0) + 1
+    for r in doc.get("builds") or []:
+        if r.get("weapon") in e.weapons and r.get("gear") \
+                and (r.get("party_size") or 0) >= 10:   # ZvZ killer parties
+            g = dict(r["gear"])
+            g["_w"] = 1.0 / per[(r["weapon"], r.get("player"))]
+            by_w.setdefault(r["weapon"], []).append(g)
     eligible = sorted(w for w, rs in by_w.items() if len(rs) >= 30)
     pick = _random.Random(20260903).sample(eligible, 10)
     slot_kb = [("head", "Head"), ("armor", "Armor"), ("shoes", "Shoes"),
@@ -812,7 +835,7 @@ def t_kit_audit_agreement():
             c = _Counter()
             for gd in by_w[w]:
                 v = gd.get(kb)
-                c[(e.gear_key(v) or v) if v else "-"] += 1
+                c[(e.gear_key(v) or v) if v else "-"] += gd["_w"]
             n = sum(c.values())
             items = [(k, x) for k, x in c.most_common() if k != "-"]
             if not items or items[0][0] not in e.gear:
@@ -886,8 +909,10 @@ def t_observed_chest_class():
     # R26 (2026-09-03): a weapon's observed chest class (>= 25% of >= 50
     # harvested builds) is admitted to its own weapon tier and kit_match
     # even outside the seat's book uniform — Galatine Pair wears plate in
-    # 81% of 145 winning builds under a cloth/leather bomb seat — while a
-    # thin sample (Grailseeker, 32 builds) never overturns a ruling.
+    # 81% of 145 winning builds under a cloth/leather bomb seat. Grailseeker
+    # was the thin-sample example (32 builds, extends nothing) until the
+    # first overnight harvest (2026-09-05: 52 builds, 35 voters, leather
+    # 34%) and the owner's acceptance — it now extends leather.
     e = Engine(content="territory_defense", size=20)
     ko = e.kit_options("2H_DUALSCIMITAR_UNDEAD")
     top = (ko["kit"].get("armor") or {}).get("gear")
@@ -898,9 +923,9 @@ def t_observed_chest_class():
              or {}).get("2H_QUARTERSTAFF_AVALON")
     check("R26 observed chest class: Galatine Pair is dressed in Soldier "
           "Armor (plate admitted on 145 builds) and reads on-uniform in "
-          "plate; Grailseeker's 32-build sample extends nothing",
+          "plate; Grailseeker extends leather at 35 voters (owner 2026-09-05)",
           top == "ARMOR_PLATE_SET1" and d["kit_match"] is True
-          and "plate" in ext and grail is None,
+          and "plate" in ext and grail == ["leather", "plate"],
           f"top={top} match={d['kit_match']} ext={ext} grail={grail}")
 
 
@@ -983,14 +1008,14 @@ def t_one_player_one_vote():
     ext_n = {w: ext.get("n") for d in kd.values() if isinstance(d, dict)
              for w, ext in (d.get("uniform_extended") or {}).items()}
     galatine = ext_n.get("2H_DUALSCIMITAR_UNDEAD")
-    grail = ext_n.get("2H_DUALSICKLE_UNDEAD")
+    grail = ext_n.get("2H_QUARTERSTAFF_AVALON")   # 35 voters since 2026-09-05
     check("R27 one player, one vote: every harvested build carries a player "
           "key; a single voter's repeat sightings never front a tier (the "
           "Heavy Crossbow Fey Shoes case); rows carry players beside votes; "
-          "the uniform extension is measured in voters (Galatine in, "
-          "Grailseeker out)",
-          keyed and checked >= 5 and not wrong and rows_with_players >= 100
-          and galatine and galatine >= 35 and grail is None,
+          "the uniform extension is measured in voters (Galatine at 200, "
+          "Grailseeker at the 35 floor)",
+          keyed and checked >= 1 and not wrong and rows_with_players >= 100
+          and galatine and galatine >= 35 and grail and grail >= 35,
           f"keyed={keyed} single-voter tops checked={checked} wrong={wrong[:3]} "
           f"rows_with_players={rows_with_players} galatine_voters={galatine} "
           f"grail={grail}")
