@@ -2826,6 +2826,12 @@
         }
       }
     }
+    /* leather dps are a brawl whatever the weapons say (owner 2026-09-05;
+       the bomb-squad archetype is the exception) -- mirrors engine.py */
+    if (out.style === "clap" && !out.archetype && this._kitLean(party, gears) === "leather") {
+      out.style = "brawl"; out.strength = "leaning"; out.kit_lean = "leather";
+      out.label = sname("brawl", "Brawl") + " — melee ball (by the kits: dps in leather, bombs or not)";
+    }
     /* per-member fit verdicts: the declared style is the caller's INTENT;
        balanced falls back to the detected lean */
     var fitStyle = IDENTITY_STYLES[this.style] ? this.style : out.style;

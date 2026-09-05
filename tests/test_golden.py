@@ -1389,6 +1389,46 @@ def run():
           r3_ok == 6 and lone_ok and kite10_ok,
           f"round={r3_ok}/6 bad={r3_bad} lone={lone_ok} kite10={kite10_ok}")
 
+    # T40 — KIT ROUNDS (owner, 2026-09-05: builds shown without labels,
+    # graded against the styles of the rosters they were worn in).
+    # Realmbreaker 7/8, Hallowfall 6/8; the disagreement was the LABEL:
+    # 248 of 1,020 clap-labelled rosters had leather-majority dps, and
+    # every Judicator healer and Hellion Realmbreaker "in a clap" lived
+    # there. Ruling: "for leather dps it would mostly be melee and it
+    # would be brawl. point of clap is high dps which is not possible if
+    # majority of party is wearing leather" — a clap read decided by the
+    # weapons is overruled by leather-majority dps kits; the bomb-squad
+    # detachment ("secondary parties wearing assassin jackets to be a
+    # bomb squad") keeps its archetype. Pinned on clap10 (the owner's
+    # own clap) dressed three ways: naked it is clap; every dps in
+    # Assassin Jackets it is brawl; every dps in cloth it stays clap.
+    e40 = Engine(content="blackzone_roam", size=10)
+    dps40 = [i for i, w in enumerate(clap10) if e40.role_of(w) == "dps"]
+    leather40 = [["ARMOR_LEATHER_SET3"] if i in dps40 else None for i in range(len(clap10))]
+    cloth40 = [["ARMOR_CLOTH_SET2"] if i in dps40 else None for i in range(len(clap10))]
+    naked40 = e40.comp_identity(clap10)
+    lea40 = e40.comp_identity(clap10, None, leather40)
+    clo40 = e40.comp_identity(clap10, None, cloth40)
+    # the bomb-squad exception: four Permafrosts behind two tanks read as
+    # the detachment naked and stay the detachment in leather
+    squad = ["2H_HAMMER", "MAIN_ROCKMACE_KEEPER", HALLOWFALL,
+             PERMAFROST, PERMAFROST, PERMAFROST, PERMAFROST]
+    sq_dps = [i for i, w in enumerate(squad) if e40.role_of(w) == "dps"]
+    sq_leather = [["ARMOR_LEATHER_SET3"] if i in sq_dps else None for i in range(len(squad))]
+    e40.set_content("blackzone_roam", len(squad))
+    sq_naked, sq_lea = e40.comp_identity(squad), e40.comp_identity(squad, None, sq_leather)
+    fit40 = e40.fitness(clap10) == e40.fitness(clap10)   # descriptive only
+    check("T40 kit rounds (2026-09-05): leather-majority dps overrule a "
+          "weapons-decided clap to brawl; cloth keeps the clap; the "
+          "bomb-squad detachment is exempt",
+          naked40.get("style") == "clap" and lea40.get("style") == "brawl"
+          and lea40.get("kit_lean") == "leather" and clo40.get("style") == "clap"
+          and sq_naked.get("archetype") == "bomb_squad"
+          and sq_lea.get("archetype") == "bomb_squad" and fit40,
+          f"naked={naked40.get('style')} leather={lea40.get('style')} "
+          f"cloth={clo40.get('style')} squad={sq_naked.get('archetype')}/"
+          f"{sq_lea.get('archetype')}:{sq_lea.get('style')}")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

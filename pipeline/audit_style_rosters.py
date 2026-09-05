@@ -144,7 +144,10 @@ def load_rosters(known, min_size, min_known):
                 "total_players": rec.get("total_players"),
                 "guilds": tuple(sorted({m.get("guild") for m in members
                                         if m.get("guild")})),
-                "members": [{"weapon": w, "kit": kits.get(n)} for w, n in ws],
+                # `name` stays in memory for player-distinct counts (the
+                # kit blind rounds); nothing writes it out
+                "members": [{"weapon": w, "kit": kits.get(n), "name": n}
+                            for w, n in ws],
             })
     return rosters
 

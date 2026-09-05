@@ -3154,6 +3154,24 @@ class Engine:
                                         " — ranged pressure (by the kits: dps in cloth)")
                     out["strength"] = "leaning"
                     out["kit_lean"] = "cloth"
+        # LEATHER DPS ARE A BRAWL WHATEVER THE WEAPONS SAY (owner, kit
+        # round 2026-09-05: "clap dps will mostly be cloth ... for leather
+        # dps it would mostly be melee and it would be brawl. point of
+        # clap is high dps which is not possible if majority of party is
+        # wearing leather"). Measured: 248 of 1,020 clap-labelled rosters
+        # had leather-majority dps, and the Judicator healers and Hellion
+        # Realmbreakers "in claps" all lived there. A clap read decided by
+        # the weapons is overruled by a leather-majority dps kit; the
+        # bomb-squad detachment (a secondary party of Assassin Jackets
+        # bombing on a timer) is the owner's own exception and keeps its
+        # archetype. Descriptive only, like the split rule it extends.
+        if (out.get("style") == "clap" and not out.get("archetype")
+                and self._kit_lean(party, gears) == "leather"):
+            out["style"], out["strength"] = "brawl", "leaning"
+            out["kit_lean"] = "leather"
+            out["label"] = (f"{style_names.get('brawl', 'Brawl')}"
+                            " — melee ball (by the kits: dps in leather, "
+                            "bombs or not)")
         # ---- per-member fit verdicts (the declared style is the caller's
         # INTENT — owner ruling: picking brawl means asking for brawl
         # builds; balanced falls back to the detected lean) ----

@@ -2425,3 +2425,63 @@ accept."** Two rulings in one line:
   no longer a miss); kite10 keeps its kite with two tools instead of one.
   Board after: brawl 568, clap 1,020, clap_kite 319, kite 250, brawl_clap
   42, split 152; rows re-derived. Gates green; parity 60/60.
+
+### Kit blind rounds 1-2 (owner, 2026-09-05) — builds without labels
+
+A new round shape, the owner's idea mid-way through the round-4 roster
+form ("give me different builds for a weapon and I tell you what
+playstyle it might be part of"; the roster form's calls 1-10 stand as
+read — 1 support, 3 gank, 5-7 and 9 clap, 8 brawl, 10 kite-clap — and
+the form is otherwise abandoned). `pipeline/kit_blind_round.py`: a
+weapon's most-worn chest / helmet / boots builds from labelled 10+
+rosters, one line per distinct build ordered by distinct players, the
+answer being the styles of the rosters each build was worn in. Owner's
+grading convention: "one build can be part of multiple styles".
+
+**Realmbreaker (7/8).** Royal Jacket builds are ranged-style without
+exception (1 brawl in 189 players); Hellion Jacket builds are brawl OR
+clap (110 / 100), which the owner first read as brawl and then agreed
+with ("I agree with the harvest actually. it can be brawl or clap");
+Royal Armor (the energy carrier) is style-blind, 12 / 12. Two leather
+chests, opposite signals: the chest ITEM separates styles where the
+class cannot.
+
+**Hallowfall (6/8).** Robe of Purity builds are ranged (brawl 0-27%, and
+every brawl sighting sits under a Guardian Helmet; the Druid Cowl builds
+carry one brawl in 105 players). Judicator builds read brawl to the
+owner ("judicator armor has to be brawl") but the harvest had them 51%
+and 38% brawl — half in claps.
+
+**The disagreement was the label.** Owner: "very unlikely that clap
+comps that use cloth armor for dps will use plate for healer unless
+there are other healers not on plate". Tested: in the 190 clap-labelled
+rosters with a Judicator Hallowfall the dps wore leather 56%, 95 of 190
+rosters leather-majority, 48 cloth-majority. Across every label:
+
+| label | rosters | cloth dps | leather dps | plate dps | no majority |
+|---|---|---|---|---|---|
+| brawl | 568 | 6 | 358 | 66 | 32 |
+| clap | 1,020 | 360 | 248 | 17 | 131 |
+| clap_kite | 319 | 203 | 13 | 0 | 24 |
+| kite | 250 | 101 | 38 | 1 | 39 |
+
+A quarter of "clap" was leather-dps rosters the weapons had decided on
+their own (ranged-delivered bombs), so the round-2 kit rule — which fires
+only on splits — never saw them.
+
+**Ruling (owner): "I do not think clap dps will wear leather mostly. it
+would mostly be cloth. it could be that there are secondary parties
+which are wearing assassin jackets to be a bomb squad which is getting
+marked at clap mistakenly. for leather dps it would mostly be melee and
+it would be brawl. point of clap is mostly high dps which is not possible
+if majority of party is wearing leather."** Landed as derived: a clap
+read decided by the weapons is overruled to brawl by leather-majority
+dps kits; the bomb-squad archetype (one weapon holding half the carriers
+— the owner's "secondary party of assassin jackets") keeps its read.
+Cloth on a brawl read is NOT ruled and stays as it was. Both ports; T40
+pins it on the owner's own clap10 dressed three ways plus a four-
+Permafrost squad in leather.
+
+After: brawl 800, clap 788, clap_kite 319, kite 250 (232 rosters moved;
+the 16 leather-dps "claps" left are bomb squads). The clap cell now reads
+cloth 360 / leather 16; the style rows re-derived on it. Gates green.
