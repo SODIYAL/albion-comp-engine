@@ -111,8 +111,34 @@ bomb again (derived `ramp_free`); Royal Armor is the linked energy_font
 item with Carving Sword a cited carrier (harvest-checked: Royal Armor is
 its modal chest, 180 brawl vs 29 clap appearances); and a SPLIT roster is
 now decided by the dps chests when kits are known (leather -> brawl,
-cloth -> ranged), which took the board's splits from 439 to 190. Open: a
-second round of twenty rosters, then the ruling on the numbers.
+cloth -> ranged), which took the board's splits from 439 to 190. Blind
+round 2 (twenty rosters of 15-20, same day, T36): 8/16 -> 12/16 exact
+through three derived rules — flex bombs (Realmbreaker, Spiked Gauntlets,
+Rift Glaive) join the RIGID core instead of forming one, slow fields laid
+at range (Icicle, Arctic, Glacial, Chillhowl; not Occult, whose corridor
+is an engage tool in the owner's clap10) are standoff tools scaling one
+per ten members for the pure kite too, and brawl-clap means the BALL
+CARRIES THE BOMB (melee-delivered bombs hold half the bomb points; the
+commit-posture read is retired); hybrid bomb share 0.40 -> 0.45. Board
+after: brawl 503, clap 665, clap_kite 213, kite 191, brawl_clap 29, split
+89. THE RULING LANDED the same evening ("ok do it", four parts —
+VALIDATION.md "Style x band rows"): `pipeline/derive_style_bands.py`
+writes `templates/style_bands.yaml` from the board (cells >= 40 distinct
+rosters own their numbers, thin cells borrow and say so; a zero p10
+writes a soft-cap-only row; the movement four were excluded for an
+evening and admitted once measured — winners' weapon-only supply already
+runs 3-4x the content targets, so those targets were outlier minimums,
+not kit inflation), the dataset ships it as
+`style_bands`, and `set_content` in both ports reads the band for a
+DECLARED style at 10+ after the content row (per-style rows, so
+target_mults do not stack; hard floors, weights and `balanced`
+untouched). T37 pins the contract; T38 judges the five graded fixtures DRESSED
+(recorded kits via the builds_index join, doctrine kits for the two
+synthetic ten-mans: 81-95% dressed vs 71-85% naked, every one clearing
+its band's engage and mobility targets; blap's disengage / knockback
+shortfall recorded as a committed ball, not tuned). Rerun order after a
+harvest: audit -> derive_style_bands -> build_dataset -> gates. Open: a
+gank read for non-ZvZ killer parties (roster 9).
 
 ## Owner bug round (2026-09-03)
 

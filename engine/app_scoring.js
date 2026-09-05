@@ -311,6 +311,36 @@
       var m2 = this.styleMults[cap2];
       this._weights[cap2] = r.weight * (m2 === undefined ? 1.0 : m2);
     }
+    /* STYLE x SIZE ROWS (style_bands.yaml, owner 2026-09-04; mirrors
+       engine.py set_content): a declared style at min_size+ reads the
+       harvest's per-band target/soft after the content row, scaled from
+       ref_size; a soft-cap-only row keeps the content target; rows are
+       measured per style, so target_mults do not stack on them. */
+    this.bandRow = null; this.bandKey = null;
+    var bands = this.data.style_bands || {};
+    var bstyle = (bands.bands || {})[this.style];
+    if (bstyle && this.size >= (bands.min_size || 10)) {
+      for (var bk in bstyle) {
+        var brow = bstyle[bk];
+        if (brow.sizes[0] <= this.size && this.size <= brow.sizes[1]) {
+          this.bandRow = brow; this.bandKey = bk; break;
+        }
+      }
+    }
+    if (this.bandRow) {
+      var bref = this.bandRow.ref_size;
+      for (var capB in this.bandRow.requirements) {
+        if (!(capB in this._targets)) continue;
+        var bv = this.bandRow.requirements[capB];
+        if (bv.target !== undefined && bv.target !== null) {
+          this._targets[capB] = bv.target * this.size / bref;
+          this._softs[capB] = bv.soft_cap * this.size / bref;
+        } else {
+          var softB = bv.soft_cap * this.size / bref;
+          if (softB > this._targets[capB]) this._softs[capB] = softB;
+        }
+      }
+    }
     /* OPTIONAL capabilities (owner ruling 2026-08-28) — mirrors engine.py
        set_content. Bringing one still earns its coverage; not bringing it is
        not a hole. Every fitness term is already zero at zero supply, so this
@@ -2522,10 +2552,11 @@
      style-declared comp on file (see VALIDATION.md, V3 round 1). */
   var IDENTITY_MELEE_CORE = 0.65, IDENTITY_RANGED_CORE = 0.35,
       IDENTITY_STRONG = 0.80, IDENTITY_CLAP_AOE = 0.50,
-      IDENTITY_BC_AOE = 0.45, IDENTITY_BC_POSTURE = 0.45,
+      IDENTITY_BC_AOE = 0.45, IDENTITY_BC_POSTURE = 0.45,   /* posture retired 2026-09-04 (round 2) */
+      IDENTITY_BC_MELEE_BOMB = 0.5,   /* the ball itself carries half the bomb */
       IDENTITY_CARRIER_MIN = 4, IDENTITY_MIN_MEMBERS = 3,
       IDENTITY_RANGED_ATTACK = 9.0,
-      IDENTITY_HYBRID_AOE = 0.40, IDENTITY_HYBRID_EVADE = 2.0,
+      IDENTITY_HYBRID_AOE = 0.45, IDENTITY_HYBRID_EVADE = 2.0,   /* 0.40 -> 0.45, blind round 2 */
       IDENTITY_KITE_TOOLS_PER = 10;   /* standoff tools per members (2026-09-04) */
   var IDENTITY_STYLES = { brawl: true, clap: true, kite: true,
                           brawl_clap: true, clap_kite: true };
@@ -2568,7 +2599,8 @@
        comp_identity). */
     var n = party.length;
     var melee = 0.0, ranged = 0.0, aoe = 0.0, sus = 0.0, st = 0.0,
-        commit = 0.0, evade = 0.0, kiteTools = 0;
+        commit = 0.0, evade = 0.0, kiteTools = 0, meleeBomb = 0.0;
+    var pending = [];
     var carriers = { melee: [], ranged: [] };
     var carrierCount = {};
     var nCarrierMembers = 0;
@@ -2584,7 +2616,11 @@
       /* clap half: a ramp-dependent bomb counts as sustained; standoff
          E = kite tool (owner 2026-09-04, mirrors engine.py) */
       if (sf0.conditional_payload) sus += caps.burst_aoe || 0;
-      else aoe += caps.burst_aoe || 0;
+      else {
+        aoe += caps.burst_aoe || 0;
+        if (sf0.delivery === "melee" && sf0.damage_scale === "group")
+          meleeBomb += caps.burst_aoe || 0;
+      }
       if (sf0.standoff_e) kiteTools += 1;
       sus += caps.sustained_dps || 0;
       st += (caps.burst_st || 0) + (caps.execute || 0);
@@ -2600,12 +2636,30 @@
         delivery = ar >= IDENTITY_RANGED_ATTACK ? "ranged" : "melee";
       }
       var side = delivery === "ranged" ? "ranged" : "melee";
-      if (delivery === "flex") flex[w] = true;
-      sides[i] = side;
-      if (carriers[side].indexOf(w) === -1) carriers[side].push(w);
+      if (delivery === "flex") {
+        flex[w] = true;
+        /* a flex BOMB (unconditional group payload at range) joins the
+           rigid core below; single-target / ramp flex stays melee */
+        if (sf.damage_scale === "group" && !sf.conditional_payload) side = "flex";
+      }
+      pending.push([i, w, dmg, side]);
       carrierCount[w] = (carrierCount[w] || 0) + 1;
       nCarrierMembers += 1;
-      if (side === "ranged") ranged += dmg; else melee += dmg;
+    }
+    /* flex bombs join the rigid core (owner, blind rounds 1+2 2026-09-04;
+       mirrors engine.py comp_identity) */
+    var rigidMelee = 0.0, rigidRanged = 0.0, pi;
+    for (pi = 0; pi < pending.length; pi++) {
+      if (pending[pi][3] === "melee") rigidMelee += pending[pi][2];
+      else if (pending[pi][3] === "ranged") rigidRanged += pending[pi][2];
+    }
+    var flexSide = rigidRanged >= rigidMelee ? "ranged" : "melee";
+    for (pi = 0; pi < pending.length; pi++) {
+      var pIdx = pending[pi][0], pW = pending[pi][1], pDmg = pending[pi][2],
+          pSide = pending[pi][3] === "flex" ? flexSide : pending[pi][3];
+      sides[pIdx] = pSide;
+      if (carriers[pSide].indexOf(pW) === -1) carriers[pSide].push(pW);
+      if (pSide === "ranged") ranged += pDmg; else melee += pDmg;
     }
     var tot = melee + ranged;
     var dmgTot = aoe + sus + st;
@@ -2614,15 +2668,18 @@
                  sustained: dmgTot ? sus / dmgTot : 0.0,
                  single_target: dmgTot ? st / dmgTot : 0.0 };
     var posture = (commit + evade) ? commit / (commit + evade) : 0.5;
-    var kiteMin = Math.max(2, Math.floor(n / IDENTITY_KITE_TOOLS_PER + 0.5));
-    var kiteHalf = kiteTools >= kiteMin;   /* hybrid: tools at scale */
-    var kiteAny = kiteTools >= 1;          /* kite: at least one thrower */
+    var perTen = Math.floor(n / IDENTITY_KITE_TOOLS_PER + 0.5);
+    var kiteMin = Math.max(2, perTen);
+    var kiteHalf = kiteTools >= kiteMin;                 /* hybrid: tools at scale */
+    var kiteAny = kiteTools >= Math.max(1, perTen);      /* kite: one per ten, never below one */
+    var bcBomb = aoe ? meleeBomb / aoe : 0.0;
     var band = this._fitBand();
     var out = { style: null, label: "", strength: null,
                 melee_share: mel, ranged_share: tot ? 1.0 - mel : 0.5,
                 carriers: carriers, mode: mode, posture: posture,
                 band: band, members: [], conflicts: [],
-                kite_tools: kiteTools, kite_tools_min: kiteMin };
+                kite_tools: kiteTools, kite_tools_min: kiteMin,
+                kite_tools_pure: Math.max(1, perTen), melee_bomb_share: bcBomb };
     var styles = this.data.styles || {};
     var sname = function (k, fb) {
       return (styles[k] && styles[k].name) || fb;
@@ -2632,9 +2689,16 @@
     if (forming) {
       out.label = "still forming";
     } else if (mel >= IDENTITY_MELEE_CORE) {
-      out.style = "brawl";
-      out.strength = mel >= IDENTITY_STRONG ? "strong" : "leaning";
-      out.label = sname("brawl", "Brawl") + " — melee ball";
+      if (mode.aoe >= IDENTITY_BC_AOE && bcBomb >= IDENTITY_BC_MELEE_BOMB) {
+        /* the ball itself carries the bomb (round 2 roster 11) */
+        out.style = "brawl_clap";
+        out.strength = "leaning";
+        out.label = sname("brawl_clap", "Brawl-Clap") + " — grind into the bomb";
+      } else {
+        out.style = "brawl";
+        out.strength = mel >= IDENTITY_STRONG ? "strong" : "leaning";
+        out.label = sname("brawl", "Brawl") + " — melee ball";
+      }
     } else if (mel <= IDENTITY_RANGED_CORE) {
       /* a ranged core with no standoff tools must commit: clap (owner
          2026-09-04, mirrors engine.py) */
@@ -2667,7 +2731,7 @@
       out.strength = "leaning";
       out.label = sname("clap_kite", "Clap-Kite") +
                   " -- bomb from range, throw them back";
-    } else if (mode.aoe >= IDENTITY_BC_AOE && posture >= IDENTITY_BC_POSTURE) {
+    } else if (mode.aoe >= IDENTITY_BC_AOE && bcBomb >= IDENTITY_BC_MELEE_BOMB) {
       out.style = "brawl_clap";
       out.strength = "leaning";
       out.label = sname("brawl_clap", "Brawl-Clap") + " — grind into the bomb";

@@ -343,6 +343,42 @@ class Engine:
                        for c, r in self.reqs.items()}
         self._weights = {c: r["weight"] * self.style_mults.get(c, 1.0)
                          for c, r in self.reqs.items()}
+        # STYLE x SIZE ROWS (templates/style_bands.yaml, owner ruling
+        # 2026-09-04 after blind rounds 1+2): for a DECLARED style at
+        # min_size+, the harvest's per-style x band target/soft cap
+        # replaces the content row's for the capabilities the cell lists,
+        # scaled linearly from the cell's ref_size (person units both).
+        # A soft-cap-only row (no minimum from the harvest) keeps the
+        # content target and takes the harvest soft cap when it clears
+        # that target. The rows are MEASURED PER STYLE, so styles.yaml
+        # target_mults do not stack on them (clap's 1.71 burst_aoe was a
+        # proxy for exactly what the harvest now states). Hard floors,
+        # weights and `balanced` are untouched; below min_size the
+        # content row (with its target_mults) stands. The cell
+        # is exposed as `band_row` for display ("what winning claps at 20
+        # field"), never a second scorer.
+        self.band_row = None
+        self.band_key = None
+        bands = self.data.get("style_bands") or {}
+        if (style in (bands.get("bands") or {})
+                and self.size >= (bands.get("min_size") or 10)):
+            for bk, row in (bands["bands"][style] or {}).items():
+                lo, hi = row["sizes"]
+                if lo <= self.size <= hi:
+                    self.band_row, self.band_key = row, bk
+                    break
+        if self.band_row:
+            ref = float(self.band_row["ref_size"])
+            for c, v in self.band_row["requirements"].items():
+                if c not in self._targets:
+                    continue
+                if v.get("target") is not None:
+                    self._targets[c] = v["target"] * self.size / ref
+                    self._softs[c] = v["soft_cap"] * self.size / ref
+                else:
+                    soft = v["soft_cap"] * self.size / ref
+                    if soft > self._targets[c]:
+                        self._softs[c] = soft
         # OPTIONAL capabilities (owner ruling 2026-08-28). Some capabilities
         # are real and worth having but are not something every comp must
         # field: `anti_zone` exists on exactly ONE weapon in the catalogue
@@ -2737,7 +2773,12 @@ class Engine:
     IDENTITY_STRONG = 0.80         # a share past this reads "strong", not "leaning"
     IDENTITY_CLAP_AOE = 0.50       # ranged core at/above this bomb share -> clap
     IDENTITY_BC_AOE = 0.45         # mid band: bomb share half of brawl_clap
-    IDENTITY_BC_POSTURE = 0.45     # mid band: commit posture half of brawl_clap
+    IDENTITY_BC_POSTURE = 0.45     # (retired 2026-09-04, round 2; kept for the record)
+    # mid band: the BALL ITSELF carries the bomb — melee-side unconditional
+    # group payloads (Battle Bracers, Bear Paws) hold at least this share
+    # of the comp's bomb points (blind round 2, roster 11: five Battle
+    # Bracers read split because three Hallowfalls' evade sank "posture")
+    IDENTITY_BC_MELEE_BOMB = 0.5
     IDENTITY_CARRIER_MIN = 4       # raw damage points that make a damage carrier
     IDENTITY_MIN_MEMBERS = 3       # below this the comp is still "forming"
     IDENTITY_RANGED_ATTACK = 9.0   # attackrange at/above -> ranged delivery
@@ -2745,16 +2786,24 @@ class Engine:
     # bomb share and real reset mobility. Calibrated on the owner-labeled
     # comps: DH P1 / 20v20 (aoe ~.53, evade ~2.6/member) read hybrid;
     # pure clap10 (evade 1.8) and pure kite10 (aoe .26) do not.
-    IDENTITY_HYBRID_AOE = 0.40     # bomb share at/above -> clap half present
+    IDENTITY_HYBRID_AOE = 0.45     # bomb share at/above -> clap half present
+                                   # (0.40 -> 0.45 after blind round 2: the
+                                   # owner's kites with three standoff tools
+                                   # sat at 0.39-0.44, the clap-kites at 0.46+)
     IDENTITY_HYBRID_EVADE = 2.0    # (retired 2026-09-04; kept for the record)
     # KITE HALF (owner ruling 2026-09-04, blind round 1): standoff tools —
     # bodies whose E throws enemies away from range without committing
     # (style_fit `standoff_e`: Bedrock Mace, Hoarfrost, Demonic Staff, the
-    # meteor knockback bombs) — for the hybrid, one per
-    # IDENTITY_KITE_TOOLS_PER members (half-up, never fewer than two); for
-    # a pure kite, at least one; none at all -> clap. The
-    # old evade-points read fired on pure claps carrying Occult/Witchwork
-    # mobility and missed the Bedrock-and-bows comps the owner calls kite.
+    # meteor knockback bombs; since round 2 also the SLOW FIELDS delivered
+    # at range — Icicle, Arctic, Glacial, Chillhowl; not Occult, whose
+    # corridor is an engage tool in the owner's own clap10) —
+    # one per IDENTITY_KITE_TOOLS_PER members, half-up: the hybrid never
+    # below two (clap10 with its one Bedrock is the owner's pure clap), a
+    # pure kite never below one; fewer than that at scale -> clap (round
+    # 2, roster 15: one Icicle among seventeen commit bodies is a clap).
+    # The old evade-points read fired on pure claps carrying Occult/
+    # Witchwork mobility and missed the Bedrock-and-bows comps the owner
+    # calls kite.
     IDENTITY_KITE_TOOLS_PER = 10
     IDENTITY_STYLES = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
 
@@ -2817,6 +2866,8 @@ class Engine:
         recommendation order, or the forge."""
         n = len(party)
         melee = ranged = aoe = sus = st = commit = evade = 0.0
+        melee_bomb = 0.0
+        pending = []
         kite_tools = 0
         carriers = {"melee": [], "ranged": []}
         carrier_count = {}
@@ -2835,6 +2886,9 @@ class Engine:
                 sus += caps.get("burst_aoe", 0)
             else:
                 aoe += caps.get("burst_aoe", 0)
+                if (sf0.get("delivery") == "melee"
+                        and sf0.get("damage_scale") == "group"):
+                    melee_bomb += caps.get("burst_aoe", 0)
             if sf0.get("standoff_e"):
                 kite_tools += 1
             sus += caps.get("sustained_dps", 0)
@@ -2853,11 +2907,36 @@ class Engine:
             side = "ranged" if delivery == "ranged" else "melee"
             if delivery == "flex":
                 flex.add(w)
+                # a FLEX BOMB — an unconditional group payload landed at
+                # range (Realmbreaker, Spiked Gauntlets, Rift Glaive) —
+                # joins whichever RIGID core the roster has (below); a flex
+                # carrier with a single-target or ramp-dependent payload
+                # (Bloodletter, Ursine Maulers, Carving Sword) has to
+                # commit its body and is melee
+                if (sf.get("damage_scale") == "group"
+                        and not sf.get("conditional_payload")):
+                    side = "flex"
+            pending.append((i, w, dmg, side))
+            carrier_count[w] = carrier_count.get(w, 0) + 1
+            n_carrier_members += 1
+        # FLEX BOMBS JOIN THE RIGID CORE (owner, blind rounds 1+2
+        # 2026-09-04): "realmbreaker would be part of clap" — yet the
+        # round-1 roster of five Realmbreakers behind two Oathkeepers is
+        # the owner's brawl. A flex bomb serves either fight, so it never
+        # forms a core of its own: its damage sits with the rigid majority
+        # (ranged when the rigid ranged damage is at least the rigid
+        # melee damage, its home melee side otherwise). Round 2 rosters 3,
+        # 5, 16, 17 and 19 had read brawl because three flex bombs
+        # outweighed a ranged core they were in fact part of.
+        rigid_melee = sum(d for _, _, d, sd in pending if sd == "melee")
+        rigid_ranged = sum(d for _, _, d, sd in pending if sd == "ranged")
+        flex_side = "ranged" if rigid_ranged >= rigid_melee else "melee"
+        for i, w, dmg, side in pending:
+            if side == "flex":
+                side = flex_side
             sides[i] = side
             if w not in carriers[side]:
                 carriers[side].append(w)
-            carrier_count[w] = carrier_count.get(w, 0) + 1
-            n_carrier_members += 1
             if side == "ranged":
                 ranged += dmg
             else:
@@ -2875,14 +2954,17 @@ class Engine:
         # ranged core with no tank that throws enemies away has to commit
         # to its bomb and is a clap whatever its bomb share (blind round 1
         # rosters 6 and 10)
-        kite_min = max(2, self._half_up(n / self.IDENTITY_KITE_TOOLS_PER))
+        per_ten = self._half_up(n / self.IDENTITY_KITE_TOOLS_PER)
+        kite_min = max(2, per_ten)
         kite_half = kite_tools >= kite_min
-        kite_any = kite_tools >= 1
+        kite_any = kite_tools >= max(1, per_ten)
+        bc_bomb = (melee_bomb / aoe if aoe else 0.0)
         band = self._fit_band()
         out = {"style": None, "label": "", "strength": None,
                "melee_share": mel, "ranged_share": 1.0 - mel if tot else 0.5,
                "carriers": carriers, "mode": mode, "posture": posture,
                "kite_tools": kite_tools, "kite_tools_min": kite_min,
+               "kite_tools_pure": max(1, per_ten), "melee_bomb_share": bc_bomb,
                "band": band, "members": [], "conflicts": []}
         style_names = {k: (v.get("name") or k)
                        for k, v in (self.data.get("styles") or {}).items()}
@@ -2890,10 +2972,19 @@ class Engine:
         if forming:
             out["label"] = "still forming"
         elif mel >= self.IDENTITY_MELEE_CORE:
-            out["style"] = "brawl"
-            out["strength"] = ("strong" if mel >= self.IDENTITY_STRONG
-                              else "leaning")
-            out["label"] = f"{style_names.get('brawl', 'Brawl')} — melee ball"
+            if (mode["aoe"] >= self.IDENTITY_BC_AOE
+                    and bc_bomb >= self.IDENTITY_BC_MELEE_BOMB):
+                # a melee core whose BALL carries the bomb (five Battle
+                # Bracers, round 2 roster 11) grinds into it: brawl_clap
+                out["style"] = "brawl_clap"
+                out["strength"] = "leaning"
+                out["label"] = (f"{style_names.get('brawl_clap', 'Brawl-Clap')}"
+                                " — grind into the bomb")
+            else:
+                out["style"] = "brawl"
+                out["strength"] = ("strong" if mel >= self.IDENTITY_STRONG
+                                  else "leaning")
+                out["label"] = f"{style_names.get('brawl', 'Brawl')} — melee ball"
         elif mel <= self.IDENTITY_RANGED_CORE:
             # a ranged core with NO standoff tools has to commit to its
             # bomb — it is a clap whatever its bomb share (owner 2026-09-04,
@@ -2935,7 +3026,7 @@ class Engine:
             out["label"] = (f"{style_names.get('clap_kite', 'Clap-Kite')}"
                             " — bomb from range, throw them back")
         elif (mode["aoe"] >= self.IDENTITY_BC_AOE
-              and posture >= self.IDENTITY_BC_POSTURE):
+              and bc_bomb >= self.IDENTITY_BC_MELEE_BOMB):
             out["style"] = "brawl_clap"
             out["strength"] = "leaning"
             out["label"] = (f"{style_names.get('brawl_clap', 'Brawl-Clap')}"

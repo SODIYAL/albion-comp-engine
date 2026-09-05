@@ -2300,7 +2300,7 @@
    "nonstack_member": false,
    "ramp_free": false,
    "role_flexible": false,
-   "standoff_e": false,
+   "standoff_e": true,
    "utility_carrier": false,
    "utility_pts": 8,
    "weak_group_e": false
@@ -3106,7 +3106,7 @@
    "nonstack_member": false,
    "ramp_free": false,
    "role_flexible": false,
-   "standoff_e": false,
+   "standoff_e": true,
    "utility_carrier": false,
    "utility_pts": 14,
    "weak_group_e": true
@@ -5964,7 +5964,7 @@
    "nonstack_member": false,
    "ramp_free": false,
    "role_flexible": true,
-   "standoff_e": false,
+   "standoff_e": true,
    "utility_carrier": false,
    "utility_pts": 12,
    "weak_group_e": false

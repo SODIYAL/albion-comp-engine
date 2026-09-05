@@ -2037,3 +2037,198 @@ armor".
   split; without gears the read is unchanged. Splits on the board fall
   439 -> 190 (brawl 644, clap 366, clap_kite 259, kite 153, brawl_clap
   78). T35 pins all three. Gates green; tier2 v4 74% unchanged.
+
+### Blind round 2 (owner, 2026-09-04) — twenty harvested rosters of 15-20
+
+Form: the twenty rosters at the bottom of the style-roster board (sampled
+label-independently from every harvested killer party of 15+, round 1's
+ten excluded). Owner's calls collected before the engine's were opened:
+1 kite-clap, 2 brawl (not sure), 3 clap-kite, 4 kite-clap, 5 clap, 6 brawl,
+7 brawlish (not sure), 8 kite, 9 gank, 10 kite, 11 brawl-clap, 12 not sure,
+13 kite-clap, 14 not sure (daggers), 15 clap, 16 clap, 17 clap-brawl,
+18 brawl-clap, 19 clap-kite, 20 brawl. "Dont take my word as final."
+
+**Before:** engine agreed on 8 of the 16 called rosters (1, 2, 4, 6, 8,
+13, 15, 20). The eight disagreements came from two mechanisms, not eight:
+
+- **Flex bombs formed a melee core.** Rosters 3, 5, 16, 17 and 19 read
+  brawl because Realmbreaker / Spiked Gauntlets / Rift Glaive (flex: melee
+  stat line, E landed at range) counted their damage on the melee side
+  and outweighed the ranged core they were in fact part of ("realmbreaker
+  would be part of clap"). The docstring had always said a flex weapon
+  "never pulls against a core" — but nothing stopped three of them from
+  BEING the core. The first fix (flex bombs always ranged) broke round 1
+  roster 3, the owner's brawl of five Realmbreakers behind two
+  Oathkeepers. Ruling as derived: a flex carrier with an UNCONDITIONAL
+  GROUP payload joins whichever rigid core the roster has (ranged when the
+  rigid ranged damage is at least the rigid melee damage); a flex carrier
+  with a single-target or ramp-dependent payload (Bloodletter, Ursine
+  Maulers, Carving Sword) commits its body and is melee.
+- **The kite half saw only displacement.** Rosters 10 and 19 needed
+  Icicle/Occult as standoff bodies ("occult staff to increase team
+  movement ... icicle staff to slow"). Ruling as derived: a SLOW FIELD laid
+  at range (slow >= 4, cast range >= 9, ground/enemy/all target) whose E
+  is not itself a bomb (burst_aoe < 4 — Longbow's rain and Spiked
+  Gauntlets slow but are bombs) and commits nothing is a standoff tool:
+  Icicle, Arctic, Glacial, Chillhowl. Occult's corridor is claimed as
+  ENGAGE and stays out — the owner's own clap10 fixture fields it beside a
+  Bedrock as a pure clap, and counting it made clap10 a clap-kite.
+  Standoff tools now scale one per ten members for the PURE kite as well
+  (never below one; the hybrid never below two): one Icicle among
+  seventeen commit bodies is a clap (roster 15).
+- Two threshold corrections fell out of the same rosters, both read off
+  the owner's calls rather than tuned: the hybrid bomb-share threshold
+  moves 0.40 -> 0.45 (the owner's kites with tools at scale sat at
+  0.39-0.44, the clap-kites at 0.46-0.51; roster 10), and the brawl-clap
+  read replaces the commit-posture half (three Hallowfalls' evade sank it
+  on roster 11, five Battle Bracers) with THE BALL CARRIES THE BOMB:
+  melee-delivered unconditional bombs hold at least half the bomb
+  points, checked from a melee core as well as the mid band.
+
+**After:** 12 of 16 exact (1, 2, 4, 5, 6, 8, 10, 11, 13, 15, 19, 20); round
+1's seven agreed rosters and the five fixtures still hold (T34); the label
+distribution moves brawl 644 -> 503, clap 366 -> 665, clap_kite 259 ->
+213, kite 153 -> 191, brawl_clap 78 -> 29, split 190 -> 89. The four
+misses are recorded, not tuned:
+
+- 3 (clap-kite / clap): one Bedrock in a 16-stack, bomb share exactly
+  0.40. Same shape as round 1 roster 8; the per-ten rule stands.
+- 5 (called clap, RE-RULED brawl): Demonfang, Dagger Pair, Carving and
+  Ursine (34 melee points) against Longbow, Great Frost, Blazing, Evensong
+  and Rotcaller (32), Realmbreaker and Spiked Gauntlets joining the melee
+  majority by two points — a split on weapons alone. The harvest has
+  every dps in leather (Hellion, Stalker, Specter) and the engine reads
+  brawl by the kits. Owner, shown the chests: "I just said clap based on
+  weapon alone, I didn't see the equipment, so if it's leather dps mostly
+  then it's most likely brawl." Counted as an agreement; T36 pins both
+  reads (split naked, brawl dressed).
+- 16 (clap / brawl) and 17 (clap-brawl / brawl): Demonfang x2 + Battle
+  Bracers, Battle Bracers x3, each with Realmbreaker + Spiked; the rigid
+  melee core outweighs the ranged casters, so the flex bombs join it.
+- 18 (brawl-clap / brawl): Demonfang x3 + Galatine x2 + Ursine; the
+  Galatines are ramp bombs and the owner's own ruling keeps them out of
+  the bomb count. Compare roster 6 (Galatine x4 + Great Frost x2), which
+  the owner called brawl — the two calls cannot both be derived from the
+  Galatine count, so the engine keeps the ruling.
+- 9 was called "gank" — a 17-body killer party of Grailseeker, Claws,
+  Deathgivers, Bear Paws and Infinity Blade is not a ZvZ comp at all. The
+  engine has no gank label; it reads brawl. A gank read (leather +
+  single-target Es + no healer core) would be a derivation of its own —
+  open, not started.
+
+T36 pins the three rules, the facts (Icicle standoff, Occult/Longbow/
+Spiked/Permafrost not) and the eleven agreed rosters; round 2's twenty
+battles join GRADED_BATTLES so no later form re-samples them. Gates:
+golden 62/62, forge 38/38, roles 26/26, validation modes 25/25, parity
+60/60 + embed, provenance 25/25, builds 54/54, interactions 37/37, patch
+history 14/14, lint, display math 28/28, codec 24/24.
+
+### Style x band rows (owner ruling 2026-09-04, "ok do it") — THE STYLE x SIZE RE-KEY, part 1
+
+The ruling, four parts, all accepted: (1) a style x size layer BESIDE the
+content templates, never a replacement — a comp declared clap at 20 is
+judged against what winning claps at 20 field, the content row stays the
+fallback and the only source of hard floors (weapon units); (2) only cells
+with >= 40 distinct harvested rosters carry their own numbers (brawl and
+clap at every band, clap-kite at 15-19 and 20, kite at 10-14 and 15-19);
+the thin cells (brawl-clap everywhere, clap-kite 10-14, kite 20) borrow
+their nearest filled cell and say so in the file; (3) the standing
+convention (target 0.9 x p10, soft cap 1.15 x p90, dressed person units)
+with engage / mobility / knockback_displace / disengage EXCLUDED until
+their worn-kit claims are measured (they run 5-11x the content targets
+because every boot and cape carries a claim); (4) golden re-pins and a
+tier2 re-run, and the blind-round loop keeps validating the labels the
+rows are keyed on.
+
+Implementation: `pipeline/derive_style_bands.py` (explicit step, like the
+samplers) writes `pipeline/templates/style_bands.yaml` from the evidence
+board; `build_dataset.py` validates and ships it as `style_bands`;
+`set_content` in both ports reads the band for a declared style at 10+
+AFTER the content row, scaling target and soft cap linearly from the
+cell's ref size (12 / 17 / 20). Two rules that fell out of building it:
+
+- **A zero p10 is not a target.** Fitness divides by the target, and a
+  tenth of winning rosters field none of anti_dive, execute, silence and
+  the like. Such a capability writes a SOFT-CAP-ONLY row: the content
+  target stands and the harvest soft cap applies where it clears it.
+- **The rows are measured per style, so `target_mults` do not stack.**
+  The first cut multiplied the band row by clap's 1.71 burst_aoe target
+  modifier and read a 34.6 target where the harvest says 20.3; the
+  modifier was a proxy for exactly what the harvest now states. Below 10
+  and for `balanced`, the content row with its target_mults stands.
+
+What it does to the five graded fixtures (naked, under their declared
+style; the rows are dressed, so the fixtures sit low by construction):
+
+| fixture | n | style | balanced | before | after |
+|---|---|---|---|---|---|
+| blap | 20 | brawl | 84.0% | 82.9% | 81.4% |
+| DH P1 | 20 | clap_kite | 83.5% | 84.9% | 85.0% |
+| 20v20 | 20 | clap_kite | 83.2% | 84.6% | 84.9% |
+| clap10 | 10 | clap | 72.1% | 73.2% | 74.6% |
+| kite10 | 10 | kite | 64.5% | 66.4% | 71.2% |
+
+Recorded, not tuned: blap reads a point lower under brawl than under clap
+or kite after the layer, because winning brawls at 20 field more
+tankiness (target 58 vs the content row's 39) and sustained damage than a
+naked blap supplies. Whether that is the rows or the naked measurement is
+the next thing the loop should test, with a dressed blap. T37 pins the
+CONTRACT (band read, no target_mults stacking, soft-only rows keep the
+content target, balanced / under-10 / floors / weights untouched), never
+the numbers — they move with every harvest refresh. No golden case moved:
+62 -> 63/63; parity 60/60 + embed. One contract moved: validation modes V6
+(the target_mults mechanism) now runs its base and synthetic engines with
+the band rows stripped, because at a declared style of 10+ the rows
+supersede the multiplier by design. Forge 38/38, roles 26/26, validation
+modes 25/25, provenance, builds, interactions, patch history, lint,
+display math, codec; tier2 v4 74% (17/23) PASS unchanged.
+
+### The movement four, measured (owner 2026-09-04, "go ahead with your recommendation")
+
+The style x band ruling excluded engage, mobility, knockback_displace and
+disengage on my claim that "every boot and cape carries a claim" inflated
+them 5-11x. Measured on 300 winning rosters of 15+, normalised to 20
+bodies (medians, person units):
+
+| capability | weapons only | dressed | of which boots | content target -> soft |
+|---|---|---|---|---|
+| engage | 12.8 | 17.8 | 4.0 | 4.0 -> 25.2 |
+| mobility | 16.8 | 29.1 | 10.6 | 4.0 -> 34.0 |
+| knockback_displace | 11.3 | 17.6 | 0.0 | 3.3 -> 40.5 |
+| disengage | 8.8 | 15.6 | 6.0 | 6.3 -> 43.1 |
+
+The claim was wrong. The WEAPON-ONLY supply already runs 3-4x the content
+targets and boots add about a third; the published comps that fitted the
+targets carry boots on 509 of 579 slots, so the old fit was not missing
+gear. The content targets are outlier minimums off single comps (the
+2026-08-29 re-fit's own note: "engage x3.50, mobility x4.55 off single
+comps"); a mobility target of 4 at 20 is one member who can reposition.
+The harvest p10 is the first minimum with enough comps behind it.
+
+Ruling: the four are admitted under the same convention as the other 26
+(`EXCLUDED = ()` in derive_style_bands.py; the mechanism stays). Rows at
+20, clap: engage 15.3 -> 31.7, mobility 29.4 -> 52.7, knockback 9.0 ->
+27.5, disengage 11.3 -> 30.8.
+
+**The fixtures are judged dressed from here on.** The rows are measured on
+dressed winners; the five graded fixtures had been read naked:
+
+| fixture | naked | dressed (before the four) | dressed (with the four) |
+|---|---|---|---|
+| blap | 81.4% | 93.4% | 91.9% |
+| DH P1 | 85.0% | 93.6% | 93.8% |
+| 20v20 | 84.9% | 95.4% | 94.8% |
+| clap10 | 74.6% | 86.2% | 86.4% |
+| kite10 | 71.2% | 81.5% | 81.7% |
+
+Every dressed fixture clears the new engage and mobility targets with room
+(blap engage 33 / 17.6, mobility 52 / 35.5). The one honest miss is blap on
+disengage (7 vs the brawl target 16) and knockback (5.8 vs 10.3): winning
+brawls at 20 carry more escape in their bottom decile than blap does. The
+re-fit notes call blap "a melee ball that deliberately carries little
+escape"; it costs a point and a half and is RECORDED, not tuned — the next
+blind round on brawls should ask whether the escape is real. T37 now
+asserts the four have rows above twice the content minimums; T38 pins the
+dressed contract (recorded kits via `pipeline/gear_join.py`, doctrine kits
+for the synthetic ten-mans, dressed > naked on all five, every one clearing
+engage and mobility) and never the numbers.

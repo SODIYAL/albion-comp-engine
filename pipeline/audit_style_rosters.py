@@ -70,8 +70,12 @@ SEATS = ("engage_tank", "stopper_tank", "off_tank", "shield_support",
          "dive_cleanup")
 PREDS = ("ranged_aoe_core", "primary_heal", "pierce", "anti_heal",
          "engage_tank", "stopper_tank", "shield_support")
-# blind round 1 (2026-09-04, graded by the owner; pinned in test_golden T34)
-GRADED_BATTLES = [1439261314, 1439270346, 1439324226, 1439336518, 1439380503, 1442341916, 1442399167, 1442450338, 1443149088]
+# blind round 1 (ten rosters) + round 2 (twenty, 2026-09-04): both graded by
+# the owner and pinned in test_golden T34 / T36; never re-sampled into a form
+GRADED_BATTLES = [1439261314, 1439270346, 1439324226, 1439336518, 1439380503, 1442341916, 1442399167, 1442450338, 1443149088,
+                  1439323062, 1439423672, 1442916379, 1442381572, 1443149032, 1442340579, 1443089499, 1439330397,
+                  1439163242, 1442365275, 1442813939, 1443067935, 1443196794, 1442359908, 1442270050, 1442373560,
+                  1439247869, 1439330979, 1439276629]
 
 
 def strip(t):

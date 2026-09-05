@@ -321,6 +321,7 @@ def load_sheets(weapon_lines, tune_sheets=None):
 # and the report participates in release validation.
 RANGED_MIN_CASTRANGE = 9
 RANGED_DELIVERY = ("ground", "enemy")
+STANDOFF_DELIVERY = ("ground", "enemy", "all")   # Chillhowl's crystal targets all
 AOE_CLAIM = "burst_aoe"
 
 
@@ -609,12 +610,23 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
         # old evade-points read that misfired both ways in the round).
         # Bedrock Mace's E is a utility E, so the damage-only e_reach
         # above never saw its 18 m reach — this pass reads every bundle.
+        # Round 2 (2026-09-04, "occult staff to increase team movement ...
+        # icicle staff to slow"): a SLOW FIELD laid at range is the same
+        # standoff job — slow >= 4 whose E is not itself a bomb (burst_aoe
+        # < 4: Longbow's rain and Spiked Gauntlets are bombs that happen to
+        # slow). An E claimed as ENGAGE still disqualifies: Occult's
+        # corridor speeds the team INTO a fight as readily as out of one,
+        # and the owner's own clap10 fields it beside a Bedrock as a pure
+        # clap — so the slow fields are Icicle, Arctic, Glacial, Chillhowl.
         standoff_e = False
         for i, slot in enumerate(slots):
             if i >= len(names) or names[i] != "e":
                 continue
             for j, bundle in enumerate(slot):
-                if bundle.get("knockback_displace", 0) < 2:
+                displaces = bundle.get("knockback_displace", 0) >= 2
+                slows = (bundle.get("slow", 0) >= 4
+                         and bundle.get("burst_aoe", 0) < 4)
+                if not (displaces or slows):
                     continue
                 if (bundle.get("engage") or bundle.get("clump_create")
                         or bundle.get("mobility")
@@ -628,7 +640,7 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                 except (TypeError, ValueError):
                     reach = 0.0
                 if (reach >= RANGED_MIN_CASTRANGE
-                        and facts.get("target") in RANGED_DELIVERY):
+                        and facts.get("target") in STANDOFF_DELIVERY):
                     standoff_e = True
         delivery = ("ranged" if attackrange >= RANGED_MIN_CASTRANGE
                     else "flex" if e_reach >= RANGED_MIN_CASTRANGE
@@ -1998,6 +2010,7 @@ def derive_economics(weapons, composition, spell_index, overrides):
 
 def load_templates(tune=None):
     templates, scoring, styles, mechanics, composition = {}, {}, {}, {}, {}
+    style_bands = {}
     for path in sorted(glob.glob(os.path.join(HERE, "templates", "*.yaml"))):
         doc = _load_yaml(path)
         if not isinstance(doc, dict):
@@ -2007,6 +2020,25 @@ def load_templates(tune=None):
             scoring = doc
         elif base == "styles.yaml":
             styles = doc.get("styles", {})
+        elif base == "style_bands.yaml":
+            # style x size rows (derive_style_bands.py, owner 2026-09-04):
+            # per declared style x band, target/soft per capability read
+            # AFTER the content row at 10+. Validated here, fail closed.
+            style_bands = doc
+            for st, bands in (doc.get("bands") or {}).items():
+                for bk, row in (bands or {}).items():
+                    for fld in ("sizes", "ref_size", "requirements"):
+                        if fld not in row:
+                            sys.exit(f"style_bands.yaml: {st}/{bk} lacks '{fld}'")
+                    for cap, v in row["requirements"].items():
+                        # a row is {target, soft_cap} or {soft_cap} alone
+                        # (no minimum from the harvest: the content target
+                        # stands); a zero target is never written
+                        if not (v.get("soft_cap", 0) > v.get("target", 0)
+                                and (v.get("target") is None or v["target"] > 0)):
+                            sys.exit(f"style_bands.yaml: {st}/{bk}/{cap}: "
+                                     f"need soft_cap > target > 0 (or soft_cap "
+                                     f"alone), got {v}")
         elif base == "mechanics.yaml":
             mechanics = doc
         elif base == "composition.yaml":
@@ -2029,7 +2061,7 @@ def load_templates(tune=None):
                 sys.exit(f"MASTERSHEET.md tune:templates: {content} has no "
                          f"requirement '{cap}'")
             reqs[cap] = mastersheet.deep_merge(reqs[cap], fields or {})
-    return templates, scoring, styles, mechanics, composition
+    return templates, scoring, styles, mechanics, composition, style_bands
 
 
 def check_provenance(weapons, item_stats, stats_meta):
@@ -2083,7 +2115,7 @@ def main():
 
     weapon_lines = load_weapon_lines()
     weapons = load_sheets(weapon_lines, tune.get("sheets"))
-    templates, scoring, styles, mechanics, composition = load_templates(tune)
+    templates, scoring, styles, mechanics, composition, style_bands = load_templates(tune)
     stats_path = os.path.join(OUT, "item_stats.json")
     item_stats, stats_meta = {}, {}
     if os.path.exists(stats_path):
@@ -2377,6 +2409,11 @@ def main():
         "templates": templates,
         "scoring": scoring,
         "styles": styles,
+        # Style x size rows (templates/style_bands.yaml, derive_style_bands.py,
+        # owner 2026-09-04): target/soft per declared style x band, read by
+        # set_content AFTER the content row at 10+. Hard floors and weights
+        # stay content/style facts; `balanced` never reads a band.
+        "style_bands": style_bands,
         "mechanics": mechanics,
         # Composition constraints + viability + size physics (composition.yaml)
         # — what the FORGE may generate; never a bar to scoring a manual party.
