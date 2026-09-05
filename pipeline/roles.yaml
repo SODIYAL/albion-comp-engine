@@ -233,10 +233,15 @@ roles:
     job: >
       Ground denial and mass slows — the ice support seat
       (albiononlinegrind 'Ice (Icicle) Support').
-    uniform: {chest: [cloth, plate]}
+    # leather admitted 2026-09-03 for the Occult seat: killboard
+    # party_rosters 85% leather over 61 builds + metabattle's ZvZ Support
+    # build wears Royal Jacket (the team cooldown carrier, see
+    # gear_effects.cooldown_banner)
+    uniform: {chest: [cloth, plate, leather]}
     weapons:
       - {id: 2H_ICEGAUNTLETS_HELL, source: "guide:albiononlinegrind 'Ice (Icicle) Support'; comp:deadlyhooker (tank)"}
       - {id: MAIN_FROSTSTAFF_KEEPER, source: "comp:deadlyhooker (support) + albioncompo_20v20 (tank)"}
+      - {id: 2H_ARCANESTAFF_HELL, source: "owner:2026-09-03 ('support weapon like occult'); dumps: E Time Corridor = ally move+attack speed 0.6, enemy slow 0.3 (mass slow / lane control); guide:metabattle Occult Staff ZvZ Support (Royal Jacket); killboard:party_rosters (61 builds, 85% leather); sheet role_hint support"}
       # MAIN_FROSTSTAFF_AVALON (Chillhowl) removed owner:2026-09-02:
       # "single target e, no good for group content, mostly a corrupted
       # dungeon weapon" — off every menu, matching its standing >=10
@@ -395,7 +400,13 @@ roles:
       - {id: 2H_CLAWPAIR, source: "killboard:party_rosters (26 builds, 92% leather); dive/shred identity (its shield_break Q rides as function); owner:2026-09-01 seat-all"}
       - {id: 2H_GLAIVE, source: "killboard:party_rosters (13 builds, 69% leather); catch/fling E — the chaser's tool; owner:2026-09-01 seat-all"}
       - {id: MAIN_SPEAR, source: "killboard:party_rosters (10 builds, 60% leather — thin); mobility-poke skirmisher; owner:2026-09-01 seat-all"}
-      - {id: 2H_ARCANESTAFF_HELL, source: "killboard:party_rosters (61 builds, 85% leather); the pick/pull catch identity (owner-graded off shield_support 2026-08-26 does not apply — that was Witchwork); owner:2026-09-01 seat-all"}
+      # 2H_ARCANESTAFF_HELL (Occult) removed owner:2026-09-03 ("it will
+      # add support weapon like occult into dps column"): its E is Time
+      # Corridor — ally move/attack speed, enemy slow — a support tool,
+      # not a finisher. Re-seated in zone_support; the 2026-09-01
+      # seat-all placement read the killboard's leather share as a dive
+      # identity, which the metabattle "ZvZ Support" build (Royal Jacket)
+      # already contradicted.
       - {id: 2H_SHAPESHIFTER_SET1, source: "owner:2026-09-01 seat-all (killboard: 3 builds — thin); stealth-cat roam/pick form"}
 
   # ----------------------------------------------------------------- meta
@@ -570,9 +581,10 @@ gear_effects:
     name: Energy aura
     kind: team_aura
     items:
-      - {named: "Royal Armor (plate) — Energy Source: 13 energy/1s to 10 allies within 15m; wiki /wiki/Energy_Source; NOT yet in the gear catalog", source: "guide:wiki Energy_Source; owner:2026-08-25 ('royal armor to give team that extra needed mana')"}
+      - {id: ARMOR_PLATE_ROYAL, source: "gear catalog: Royal Armor (Energy Source: 13 energy/1s to 10 allies within 15m; wiki /wiki/Energy_Source); owner:2026-08-25 ('royal armor to give team that extra needed mana'); linked 2026-09-04 (it had shipped as a named-only item)"}
     carriers:
       - {id: 2H_AXE_AVALON, source: "owner:2026-08-25 (the Realmbreaker royal-armor example); guide:albiononlinegrind clap-kite comp 'Realmbreaker Support' slot"}
+      - {id: 2H_CLEAVER_HELL, source: "owner:2026-09-04 ('carving wouldn't be a DPS on clap but might be a tanky support which pierces with e and has royal armor to provide team mana'); killboard:party_rosters 10+ parties: Royal Armor on 62 of 180 brawl appearances and 7 of 29 clap appearances, the modal chest in every style it is fielded in"}
   - id: cooldown_banner
     name: Cooldown aura
     kind: team_aura

@@ -397,3 +397,40 @@ accumulated windows: the cache spans balance patches; slice by
   the whole arcane line (`CLEANSESPEED2` — including Witchwork), which makes it
   conditional there. `cleanse 0` on the curated holy sheets is correct, and gear
   is **not** a Tier-2 blocker.
+
+## Style x size rows (2026-09-04)
+
+`derive_style_bands.py` reads `out/style_roster_evidence.json` (the
+`audit_style_rosters.py` board) and writes `templates/style_bands.yaml`:
+per declared playstyle x size band, target = 0.9 x p10 and soft cap =
+1.15 x p90 of the dressed capability supply winning killer parties field
+(person units). Cells with fewer than 40 distinct rosters borrow their
+nearest filled cell (`borrowed_from`); a zero p10 writes a soft-cap-only
+row (the content target stands); nothing is excluded (the movement four
+were held back for an evening and admitted once measured — see
+tests/VALIDATION.md). `build_dataset`
+validates the file (fail closed) and ships it as `style_bands`; the engine
+reads it after the content row for a declared style at 10+. Explicit step:
+`sample_parties` -> `audit_style_rosters` -> `derive_style_bands` ->
+`build_dataset` -> gates.
+
+## One player, one vote (2026-09-04)
+
+`sample_parties.py` stamps every harvested build with a hashed `player`
+key (sha1 prefix of the name; the name stays in the cache). In
+`derive_kit_doctrine` a player's k builds on a weapon weigh 1/k each, so
+counts are votes; the noise floors (seat 3, weapon 2, a chain step 2)
+count DISTINCT voters and the uniform extension needs 35 voters. Rows
+ship rounded votes with `players` beside them and cite
+`killboard:<votes>x/<players>p`. Re-derive with `--pages 0` after
+changing the build record.
+
+## Doctrine bands (2026-09-04)
+
+`derive_kit_doctrine(band=...)` runs twice: `group` (killer parties of
+10+, every curated content; the seat's top-level `kit*` keys, grading
+overrides applied) and `gang` (parties of 4-9 plus the small-scale
+curated contents; `kit_bands.gang`, no overrides). `DOCTRINE_BANDS` in
+build_dataset.py is the table. The engine's `_seat_kit` picks the band by
+party size (gang at <= 9). `roles_report.json` carries the gang detail
+under `kit_doctrine_gang`.

@@ -322,6 +322,14 @@ def t_target_mults():
 
     d = json.loads(json.dumps(base.data))
     d["styles"]["brawl"]["target_mults"] = {"disengage": 2.0, "peel": 0.5}
+    # The style x size rows (style_bands, owner 2026-09-04, golden T37)
+    # supersede target_mults for a declared style at 10+ — the rows are
+    # measured per style, so a multiplier would double-count. V6 tests the
+    # multiplier MECHANISM on its own, so the synthetic dataset carries no
+    # band rows (base below keeps its own; the ratio is what is checked).
+    d.pop("style_bands", None)
+    base.data.pop("style_bands", None)
+    base.set_content("blackzone_roam", 20, "brawl")   # same footing: no band rows
     tmp = os.path.join(tempfile.gettempdir(), "bion_target_mults.json")
     with open(tmp, "w", encoding="utf-8") as fh:
         json.dump(d, fh)

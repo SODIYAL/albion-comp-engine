@@ -60,6 +60,113 @@ band-gap and honesty-mirror contracts, and `test_display_math.js` now
 sweeps the ring geometry across every group size with source-extracted
 constants instead of a hand copy).
 
+## The kit audit (2026-09-03, same day)
+
+Owner: "judge 10 random weapons using the data we have for what people
+really wear vs what the engine gives ... build fixes until the engine
+agrees." Harness pinned as R24 (killboard modal item per slot vs the
+forge's v0 kit): ten seeded weapons 70% -> 89% exact agreement with the
+nine bad slots gone; all 67 weapons with >= 30 builds 88%, the four
+misses all catalogue gaps. Root causes and fixes (VALIDATION.md "THE KIT
+AUDIT"): effect-carrier chests now count as weapon evidence (the
+2026-08-26 exclusion is replaced by a derived CARRIER QUOTA — killboard
+share x size per fight-size bucket, enforced inside the search through
+`party_state.carriers` and capped kit variants, dataset
+`carrier_quotas`); a weapon's observed chest class (>= 25% of >= 50
+builds) is admitted to its own tier and kit_match (`kit_weapon_uniform`);
+the archetype chain stops outside real evidence and the overlay stays
+inside the evidence band; ranking is count-first in both modes with the
+comp marginal reordering only the band. Same day, second pass: the evidence UNIT is now the
+KILLER PARTY, not the battle — `sample_parties.py` stamps `party_size`
+per build (offline re-analysis) and doctrine/quotas/audit read parties
+of 10+ only, which removed the gank kits (Grailseeker in Hunter Shoes
++ Demon Cape + Poison Potion) that 2-8 man parties inside big battles
+had been contributing. Audit on that population: 92% exact on ten
+seeded weapons and on all 39 weapons with >= 30 ZvZ builds. 2026-09-04
+harvest refresh: 523 battles / 14,706 builds, 7,085 from killer
+parties of 10+ (50 weapons with 30+ ZvZ builds, 11 with none), plus the
+first 133 fights under 25 players (2,990 small-party builds, stamped
+but unused until a gang-band doctrine exists). The evening deep
+pass took the cache to 994 battles / 32,001 builds (15,165 from killer
+parties of 10+; 72 weapons with 30+ ZvZ builds, 4 with none) and the
+audit to 95% across those 72 after a last archetype-chain guard.
+tier2 v4 sits at 74% (17/23), a reported drop from 87% left for the
+owner under anti-circularity. **The harvest is now an OVERNIGHT TASK**:
+`pipeline/harvest_overnight.ps1`, Windows scheduled task "CompForge
+overnight harvest", daily 03:00 — it only harvests; rebuild + gates +
+audit + commit stay in-session. The style x size ROSTER EVIDENCE pass
+shipped the same evening (`pipeline/audit_style_rosters.py`, board in
+`docs/superpowers/findings/2026-09-04-style-roster-evidence.md`): 1,690
+labelled rosters measured dressed per style x band against every
+template — proposals for the owner's ruling after the blind round,
+never applied by the build. Blind round 1 (ten harvested rosters) was
+graded the same day: 4/10 -> 7/10 exact after two owner rulings landed
+as derivations — the clap half excludes ramp-dependent bombs
+(`style_fit.conditional_payload` now in the dataset) and the kite half
+is STANDOFF TOOLS (`style_fit.standoff_e`: Bedrock Mace, Hoarfrost,
+Demonic Staff and the meteor bombs; hybrid needs max(2, n/10), kite at
+least one, none = clap). T34 pins it; VALIDATION.md carries the quotes.
+Batch 2 the same day (T35): Rift Glaive's free-charge Q makes it a clap
+bomb again (derived `ramp_free`); Royal Armor is the linked energy_font
+item with Carving Sword a cited carrier (harvest-checked: Royal Armor is
+its modal chest, 180 brawl vs 29 clap appearances); and a SPLIT roster is
+now decided by the dps chests when kits are known (leather -> brawl,
+cloth -> ranged), which took the board's splits from 439 to 190. Blind
+round 2 (twenty rosters of 15-20, same day, T36): 8/16 -> 12/16 exact
+through three derived rules — flex bombs (Realmbreaker, Spiked Gauntlets,
+Rift Glaive) join the RIGID core instead of forming one, slow fields laid
+at range (Icicle, Arctic, Glacial, Chillhowl; not Occult, whose corridor
+is an engage tool in the owner's clap10) are standoff tools scaling one
+per ten members for the pure kite too, and brawl-clap means the BALL
+CARRIES THE BOMB (melee-delivered bombs hold half the bomb points; the
+commit-posture read is retired); hybrid bomb share 0.40 -> 0.45. Board
+after: brawl 503, clap 665, clap_kite 213, kite 191, brawl_clap 29, split
+89. THE RULING LANDED the same evening ("ok do it", four parts —
+VALIDATION.md "Style x band rows"): `pipeline/derive_style_bands.py`
+writes `templates/style_bands.yaml` from the board (cells >= 40 distinct
+rosters own their numbers, thin cells borrow and say so; a zero p10
+writes a soft-cap-only row; the movement four were excluded for an
+evening and admitted once measured — winners' weapon-only supply already
+runs 3-4x the content targets, so those targets were outlier minimums,
+not kit inflation), the dataset ships it as
+`style_bands`, and `set_content` in both ports reads the band for a
+DECLARED style at 10+ after the content row (per-style rows, so
+target_mults do not stack; hard floors, weights and `balanced`
+untouched). T37 pins the contract; T38 judges the five graded fixtures DRESSED
+(recorded kits via the builds_index join, doctrine kits for the two
+synthetic ten-mans: 81-95% dressed vs 71-85% naked, every one clearing
+its band's engage and mobility targets; blap's disengage / knockback
+shortfall recorded as a committed ball, not tuned). Rerun order after a
+harvest: audit -> derive_style_bands -> build_dataset -> gates. Same
+evening, ONE PLAYER, ONE VOTE (R27, VALIDATION.md): harvested builds
+carry a hashed player key, doctrine weighs a player's builds on a weapon
+as one vote, every floor counts distinct people, the uniform extension
+needs 35 voters; 72 of 818 tiers changed modal, 337 single-voter items
+left. And KIT DOCTRINE PER SIZE BAND (R28): a gang band from 4-9 man
+killer parties under `kit_bands.gang`, read through `_seat_kit` at <= 9
+members in both ports (47 weapons audited at 7: 286/286 slots on the
+gang modal). Open: a gank read for non-ZvZ killer parties (roster 9);
+the 20+ band once the harvest can stand it (14 weapons with 50+ today).
+
+## Owner bug round (2026-09-03)
+
+Five reported defects, all reproduced and fixed (VALIDATION.md carries
+the full record): the biggest-need row was measured on the naked roster
+while the pick and the radar read the worn kits (display layer now
+passes `GEARS_CUR` everywhere); every two-hander was dressed with an
+off-hand (the dataset now carries the dumps' `two_handed` fact and
+`kit_options` drops the slot in both ports); three role classifications
+disagreed (board column = seat, tile colour = role_hint, forge bands =
+role_class) — `role_class` now derives from the primary SEAT's class in
+both ports, and the page colours/sorts from the same seat; Occult Staff
+re-seated from dive_cleanup to zone_support (owner: "support weapon like
+occult"); "reforge all" reports "Unchanged" when the deterministic
+search returns the same roster instead of silently re-rendering it.
+Open for the owner: melee instant-payload weapons (Spiked Gauntlets,
+Realmbreaker) still generate into clap dps under the standing
+conditional-payload ruling; the `test_cohort_families.py` canary pin is
+stale since the 2026-08-29 sample refresh.
+
 ## Current engine model
 
 **2026-08-27 — the DRESSED FORGE shipped** (spec `docs/superpowers/specs/2026-08-27-dressed-forge-design.md`): forge and recommend evaluate every candidate as a full build — weapon + combo + doctrine kit (v0 + one divergent variant) — priced by the exact comp_score-with-gears the page displays, and forged members arrive with their kits prefilled (`_eng`-marked). The same day closed two adjacent gaps: the page now passes equipped LOADOUT gear into every scoring/suggestion call (the engine had scored full builds since 2026-08-20; the UI never sent them), and the gear capability catalog was completed (129 curated pieces, `sheets/gear/combat_expansion.yaml`). Owner rulings: kit suggestions are doctrine-tier-first in both modes (evidence-first, T22 re-pin), T30c re-pinned dressed with a naked-party honesty rider. Locked members are never re-dressed; doctrine passives never enter evaluation.

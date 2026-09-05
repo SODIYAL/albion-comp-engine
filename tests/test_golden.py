@@ -20,6 +20,7 @@ import yaml
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, os.pardir)
 sys.path.insert(0, os.path.join(ROOT, "engine"))
+sys.path.insert(0, os.path.join(ROOT, "pipeline"))
 
 DATASET = os.path.join(ROOT, "pipeline", "out", "dataset-latest.json")
 if not os.path.exists(DATASET):
@@ -28,6 +29,7 @@ if not os.path.exists(DATASET):
                    check=False)
 
 from engine import Engine  # noqa: E402
+import gear_join  # noqa: E402  (the builds_index join that dresses published comps)
 
 E = Engine(content="castle_outpost", size=7)
 
@@ -415,7 +417,9 @@ def run():
     # full gear catalog made Mercenary Hood / Graveguard Helmet win exactly
     # that way (the owner: nobody fields those on tanks), so comp-aware
     # ranking went doctrine-tier-first. Every slot still returns ranked
-    # options with finite values for any weapon.
+    # options with finite values for any weapon — every slot the weapon
+    # HAS: Heavy Mace is two-handed, so no off-hand is ranked (2026-09-03
+    # re-pin; the old pin demanded one, which was the defect).
     e_kit = Engine(content="castle", size=25, style="brawl")
     kit_party = (["2H_MACE", "2H_HAMMER", "MAIN_ROCKMACE_KEEPER",
                   "2H_POLEHAMMER", "MAIN_MACE", "2H_QUARTERSTAFF",
@@ -428,11 +432,13 @@ def run():
                   LONGBOW, "2H_FIRE_RINGPAIR_AVALON"])
     tank_kit = e_kit.kit_options(HEAVY_MACE, party=kit_party)
     marginal_bait = {"HEAD_LEATHER_SET1", "HEAD_PLATE_UNDEAD"}
-    slots_ok = all(tank_kit["options"].get(s)
-                   for s in ("head", "armor", "shoes", "offhand",
-                             "cape", "potion", "food"))
+    slots_ok = (all(tank_kit["options"].get(s)
+                    for s in ("head", "armor", "shoes",
+                              "cape", "potion", "food"))
+                and not tank_kit["options"].get("offhand"))
     check("T22 kit advisor: comp-aware tank head comes from the observed "
-          "doctrine tier, never off-tier marginal bait; all slots ranked",
+          "doctrine tier, never off-tier marginal bait; every slot a "
+          "two-hander has is ranked, and no off-hand",
           tank_kit["kit"]["head"]["doctrine"] in ("weapon", "seat")
           and tank_kit["kit"]["head"]["gear"] not in marginal_bait
           and slots_ok,
@@ -1017,6 +1023,311 @@ def run():
           f"kite20 clarent={clarent in k_pool} ursine={ursine in k_pool} "
           f"carving={carving in k_pool} longbow={'2H_LONGBOW' in k_pool} "
           f"core_min={(k20.get('ranged_aoe_core') or {}).get('min')}")
+
+    # T34 — THE KITE HALF IS STANDOFF TOOLS, THE CLAP HALF IS INSTANT
+    # (owner rulings 2026-09-04, blind round 1 on harvested rosters):
+    # "what makes a comp kite is basically them having tanks which can
+    # throw enemies away, bedrock mace, hoarfrost staff, without having to
+    # commit their body into a fight"; "galatine ... needs to charge its q
+    # stacks before it hits ... realmbreaker would be part of clap".
+    # Derived, no hand lists: style_fit.standoff_e = an E delivered at
+    # range that displaces and commits nothing (no engage/clump/pull, no
+    # self-move, no heal); style_fit.conditional_payload = the 2026-08-26
+    # ramp fact. comp_identity: a ramp-dependent bomb counts as sustained;
+    # the clap-kite hybrid needs standoff tools at scale (max(2, n/10
+    # half-up)); a pure kite needs at least one; a ranged core with none
+    # is a clap whatever its bomb share. Pins: the five owner-graded
+    # fixtures (blap brawl, clap10 clap, kite10 kite, DH P1 + 20v20
+    # clap-kite) and the seven rosters the owner and the engine agreed on
+    # in the round (2, 4 and 8 stay recorded misses: 2 follows the owner's
+    # own Galatine ruling, 4 is kite vs clap-kite in the mid band, 8 has
+    # one Bedrock where a 17-stack needs two).
+    e34 = Engine(content="territory_defense", size=20)
+    sf34 = lambda w: e34.weapons[w].get("style_fit") or {}
+    facts_ok = (sf34("MAIN_ROCKMACE_KEEPER").get("standoff_e") is True
+                and sf34("MAIN_FROSTSTAFF_KEEPER").get("standoff_e") is True
+                and sf34("2H_DEMONICSTAFF").get("standoff_e") is True
+                and not sf34("2H_HAMMER_AVALON").get("standoff_e")
+                and not sf34("2H_AXE_AVALON").get("standoff_e")
+                and not sf34(HALLOWFALL).get("standoff_e")
+                and sf34("2H_DUALSCIMITAR_UNDEAD").get("conditional_payload") is True
+                and sf34("2H_AXE_AVALON").get("conditional_payload") is False)
+    round1 = {
+        1: ('clap_kite', 'clap_kite', ['MAIN_ROCKMACE_KEEPER', '2H_FIRE_RINGPAIR_AVALON', '2H_DEMONICSTAFF', '2H_ARCANESTAFF', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_HAMMER_AVALON', 'MAIN_FROSTSTAFF_KEEPER', 'MAIN_MACE_HELL', '2H_DUALMACE_AVALON', '2H_ICECRYSTAL_UNDEAD', '2H_POLEHAMMER', '2H_GLAIVE_CRYSTAL', '2H_KNUCKLES_SET3', '2H_HARPOON_HELL']),
+        2: ('brawl_clap', None, ['2H_NATURESTAFF_HELL', 'MAIN_RAPIER_MORGANA', '2H_CLEAVER_HELL', '2H_HOLYSTAFF_HELL', '2H_DUALSCIMITAR_UNDEAD', '2H_DUALSCIMITAR_UNDEAD', '2H_ARCANESTAFF', '2H_HAMMER', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_MACE', '2H_CLAYMORE_AVALON', 'MAIN_CURSEDSTAFF_UNDEAD', '2H_LONGBOW', 'MAIN_MACE', '2H_DUALMACE_AVALON', '2H_AXE_AVALON', '2H_SHAPESHIFTER_SET2', 'MAIN_CURSEDSTAFF_CRYSTAL', '2H_KNUCKLES_SET3']),
+        3: ('brawl', 'brawl', ['2H_NATURESTAFF_HELL', 'MAIN_DAGGER_HELL', '2H_HOLYSTAFF_CRYSTAL', '2H_QUARTERSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_MACE', '2H_ENIGMATICORB_MORGANA', '2H_DUALMACE_AVALON', '2H_DUALMACE_AVALON', '2H_AXE_AVALON', '2H_AXE_AVALON', '2H_AXE_AVALON', '2H_AXE_AVALON', '2H_AXE_AVALON', '2H_SHAPESHIFTER_SET2', '2H_HAMMER_CRYSTAL']),
+        4: ('kite', None, ['MAIN_ROCKMACE_KEEPER', 'MAIN_ROCKMACE_KEEPER', 'MAIN_ROCKMACE_KEEPER', '2H_DAGGER_KATAR_AVALON', '2H_FIRE_RINGPAIR_AVALON', 'MAIN_NATURESTAFF_CRYSTAL', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_HAMMER_AVALON', '2H_MACE', '2H_DUALMACE_AVALON', '2H_ICECRYSTAL_UNDEAD', '2H_ICECRYSTAL_UNDEAD', '2H_AXE_AVALON', '2H_GLAIVE_CRYSTAL', '2H_GLAIVE_CRYSTAL', 'MAIN_CURSEDSTAFF_CRYSTAL', '2H_KNUCKLES_SET3', 'MAIN_ARCANESTAFF_UNDEAD']),
+        5: ('brawl', 'brawl', ['2H_KNUCKLES_SET2', '2H_COMBATSTAFF_MORGANA', '2H_COMBATSTAFF_MORGANA', '2H_CURSEDSTAFF_MORGANA', '2H_ENIGMATICSTAFF', '2H_HOLYSTAFF_HELL', '2H_DUALSCIMITAR_UNDEAD', '2H_DUALSCIMITAR_UNDEAD', '2H_DUALSCIMITAR_UNDEAD', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_MACE', 'MAIN_MACE', 'MAIN_NATURESTAFF', '2H_DUALMACE_AVALON', '2H_AXE_AVALON', '2H_SHAPESHIFTER_SET2']),
+        6: ('clap', 'clap', ['MAIN_ARCANESTAFF', 'MAIN_RAPIER_MORGANA', '2H_CURSEDSTAFF_MORGANA', '2H_FIRE_RINGPAIR_AVALON', '2H_FIRE_RINGPAIR_AVALON', 'MAIN_NATURESTAFF_CRYSTAL', '2H_ARCANESTAFF', 'MAIN_HOLYSTAFF_AVALON', '2H_HAMMER_AVALON', '2H_ENIGMATICORB_MORGANA', '2H_DUALMACE_AVALON', '2H_ARCANESTAFF_HELL', '2H_ICECRYSTAL_UNDEAD', '2H_POLEHAMMER', '2H_AXE_AVALON', '2H_KNUCKLES_SET3', '2H_HARPOON_HELL', 'MAIN_ARCANESTAFF_UNDEAD']),
+        7: ('clap_kite', 'clap_kite', ['MAIN_ARCANESTAFF', 'MAIN_ROCKMACE_KEEPER', 'MAIN_ROCKMACE_KEEPER', '2H_FIRE_RINGPAIR_AVALON', '2H_HOLYSTAFF_CRYSTAL', '2H_ARCANESTAFF', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_HAMMER_AVALON', '2H_DUALMACE_AVALON', '2H_ARCANESTAFF_HELL', '2H_ICECRYSTAL_UNDEAD', '2H_POLEHAMMER', '2H_NATURESTAFF_KEEPER', '2H_AXE_AVALON', '2H_GLAIVE_CRYSTAL', 'MAIN_CURSEDSTAFF_CRYSTAL', '2H_KNUCKLES_SET3', '2H_HARPOON_HELL', 'MAIN_ARCANESTAFF_UNDEAD']),
+        8: ('clap_kite', None, ['MAIN_ARCANESTAFF', 'MAIN_ROCKMACE_KEEPER', '2H_INFERNOSTAFF_MORGANA', '2H_CURSEDSTAFF_MORGANA', '2H_SHAPESHIFTER_KEEPER', '2H_HOLYSTAFF_HELL', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_MACE', '2H_ARCANESTAFF_HELL', '2H_ICECRYSTAL_UNDEAD', '2H_NATURESTAFF_KEEPER', '2H_AXE_AVALON', '2H_BOW_HELL', '2H_BOW_HELL', 'MAIN_ARCANESTAFF_UNDEAD', 'MAIN_ARCANESTAFF_UNDEAD']),
+        9: ('clap', 'clap', ['MAIN_ROCKMACE_KEEPER', '2H_FIRE_RINGPAIR_AVALON', '2H_SHAPESHIFTER_KEEPER', '2H_HOLYSTAFF_HELL', 'MAIN_NATURESTAFF_CRYSTAL', '2H_ARCANESTAFF', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_MACE_HELL', 'MAIN_CURSEDSTAFF_UNDEAD', '2H_DUALMACE_AVALON', '2H_ICECRYSTAL_UNDEAD', '2H_POLEHAMMER', '2H_SHAPESHIFTER_SET2', '2H_KNUCKLES_SET3', 'MAIN_ARCANESTAFF_UNDEAD']),
+        10: ('clap', 'clap', ['2H_CURSEDSTAFF_MORGANA', '2H_ARCANESTAFF', '2H_ARCANESTAFF', '2H_HAMMER', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_HAMMER_AVALON', 'MAIN_CURSEDSTAFF_UNDEAD', 'MAIN_MACE', '2H_ARCANESTAFF_HELL', '2H_ICECRYSTAL_UNDEAD', '2H_HOLYSTAFF_UNDEAD', '2H_GLAIVE_CRYSTAL', 'MAIN_CURSEDSTAFF_CRYSTAL']),
+    }
+    round_ok, round_bad = 0, []
+    for rid, (_owner, agreed_style, ids) in sorted(round1.items()):
+        if agreed_style is None:
+            continue
+        got = e34.comp_identity(ids).get("style")
+        if got == agreed_style:
+            round_ok += 1
+        else:
+            round_bad.append(f"r{rid}:{got}")
+    fx = {"DH_P1": (dh1, "clap_kite"), "20v20": (c20, "clap_kite"),
+          "blap": (blap, "brawl"), "clap10": (clap10, "clap"),
+          "kite10": (kite10, "kite")}
+    fx_bad = [k for k, (p, want) in fx.items()
+              if Engine(content="blackzone_roam", size=len(p))
+              .comp_identity(p).get("style") != want]
+    check("T34 identity rulings 2026-09-04: standoff_e / conditional_payload "
+          "facts derive as ruled; five graded fixtures hold; the seven "
+          "agreed blind-round rosters read as the owner called them",
+          facts_ok and not fx_bad and round_ok == 7,
+          f"facts={facts_ok} fixtures_bad={fx_bad} round={round_ok}/7 "
+          f"bad={round_bad}")
+
+    # T35 — the second batch of 2026-09-04 rulings, all derived:
+    # (a) FREE RAMP: "glaive can be clap because you can stack it easily
+    #     without hitting anything using q" — a Q that applies its charge
+    #     to the caster with no hit/enemy condition (Spirit Spear, target
+    #     self) makes the E's ramp free; the sword line's Heroic charges
+    #     need a hit (Heroic Strike targets an enemy, Cleave grants "based
+    #     on the amount of enemies hit") and stay conditional.
+    # (b) Royal Armor is the energy_font item (it shipped named-only) and
+    #     Carving Sword is a cited carrier ("tanky support which pierces
+    #     with e and has royal armor"; harvest: Royal Armor 62/180 brawl,
+    #     7/29 clap appearances).
+    # (c) THE KITS DECIDE A SPLIT: "brawl is basically dps using leather
+    #     jackets while clap and kite are dps on cloth" — a split roster
+    #     whose dps wear leather by majority leans brawl, cloth leans the
+    #     ranged read; no gears -> the weapons-only read is unchanged.
+    e35 = Engine(content="territory_defense", size=20)
+    sf35 = lambda w: e35.weapons[w].get("style_fit") or {}
+    glaive, galatine = "2H_GLAIVE_CRYSTAL", "2H_DUALSCIMITAR_UNDEAD"
+    ramp_ok = (sf35(glaive).get("conditional_payload") is False
+               and sf35(glaive)["fit"]["clap"]["group"] == "fits"
+               and sf35(galatine).get("conditional_payload") is True
+               and sf35("2H_CLEAVER_HELL").get("conditional_payload") is True)
+    ge = {g["id"]: g for g in (e35.data.get("gear_effects") or [])}
+    ef = ge.get("energy_font") or {}
+    royal_ok = ("ARMOR_PLATE_ROYAL" in {it.get("id") for it in ef.get("items", [])}
+                and "energy_font" in (e35._item_effects.get("ARMOR_PLATE_ROYAL") or [])
+                and "2H_CLEAVER_HELL" in {c.get("id") for c in ef.get("carriers", [])})
+    # a split roster: half melee, half ranged rigid carriers
+    split = ["2H_MACE", "2H_HAMMER", HALLOWFALL, GREAT_HOLY,
+             "2H_AXE", "2H_KNUCKLES_SET3", "2H_CLAYMORE_AVALON",
+             LONGBOW, "2H_WARBOW", "2H_FIRESTAFF"]
+    naked = e35.comp_identity(split)
+    dps_idx = [i for i, w in enumerate(split) if e35.role_of(w) == "dps"]
+    leather = [["ARMOR_LEATHER_SET3"] if i in dps_idx else None for i in range(len(split))]
+    cloth = [["ARMOR_CLOTH_SET2"] if i in dps_idx else None for i in range(len(split))]
+    lean_l = e35.comp_identity(split, None, leather)
+    lean_c = e35.comp_identity(split, None, cloth)
+    kit_ok = (naked.get("style") is None and "split" in naked.get("label", "")
+              and lean_l.get("style") == "brawl" and lean_l.get("kit_lean") == "leather"
+              and lean_c.get("style") in ("clap", "clap_kite", "kite")
+              and lean_c.get("kit_lean") == "cloth"
+              and e35.fitness(split) == e35.fitness(split))   # descriptive only
+    check("T35 rulings 2026-09-04 (2): Rift Glaive's free-charge Q makes it "
+          "a clap bomb while the sword line stays conditional; Royal Armor "
+          "carries the energy font with Carving cited; a split roster is "
+          "decided by the dps chests (leather -> brawl, cloth -> ranged)",
+          ramp_ok and royal_ok and kit_ok,
+          f"ramp={ramp_ok} royal={royal_ok} naked={naked.get('style')} "
+          f"leather={lean_l.get('style')} cloth={lean_c.get('style')}")
+
+    # T36 — blind round 2 (owner, 2026-09-04, twenty harvested rosters of
+    # 15-20; owner's calls collected before the engine's were opened),
+    # three derived rules came out of it:
+    # (a) FLEX BOMBS JOIN THE RIGID CORE: Realmbreaker / Spiked Gauntlets
+    #     / Rift Glaive (unconditional group payload landed at range) sit
+    #     with the rigid majority — "part of clap" beside a ranged core,
+    #     a brawl behind Oathkeepers (round 1 roster 3, five Realmbreakers);
+    #     they never form a core of their own. Rosters 3/5/16/17/19 had
+    #     read brawl because three flex bombs outweighed a ranged core.
+    # (b) SLOW FIELDS ARE STANDOFF TOOLS ("icicle staff to slow"): an E
+    #     laid at range with slow >= 4 that is not itself a bomb (Icicle,
+    #     Arctic, Glacial, Chillhowl). Occult's corridor stays out — it is
+    #     claimed as engage and the owner's own clap10 fields it as a pure
+    #     clap. Tools scale one per ten members for the pure kite too
+    #     (one Icicle in a 17-stack is a clap, roster 15).
+    # (c) THE BALL CARRIES THE BOMB: brawl_clap is a melee core (or mid
+    #     band) whose melee-delivered unconditional bombs hold half the
+    #     bomb points (five Battle Bracers, roster 11); the commit-posture
+    #     read is retired (three Hallowfalls' evade sank it).
+    #     Hybrid bomb-share threshold 0.40 -> 0.45 (the owner's kites with
+    #     tools at scale sat at 0.39-0.44, the clap-kites at 0.46+).
+    # Score: 12/16 called rosters exact (7/10 in round 1); the four misses
+    # are recorded, not tuned: 3 (one Bedrock where a 16-stack needs two),
+    # 5 was called clap on weapons alone and re-ruled brawl once the owner
+    # saw the kits ("if it's leather dps mostly then it's most likely
+    # brawl") — split naked, brawl by the harvested chests, 16 and 17
+    # (Demonfang/Battle Bracers balls with flex bombs — melee core), 18
+    # (Galatine ramp bombs in a Demonfang ball: the owner's brawl-clap,
+    # the engine's brawl, consistent with the Galatine ruling).
+    e36 = Engine(content="territory_defense", size=20)
+    sf36 = lambda w: e36.weapons[w].get("style_fit") or {}
+    facts36 = (sf36("2H_ICEGAUNTLETS_HELL").get("standoff_e") is True      # Icicle
+               and sf36("2H_ICECRYSTAL_UNDEAD").get("standoff_e") is False # Permafrost (bomb)
+               and sf36("2H_ARCANESTAFF_HELL").get("standoff_e") is False  # Occult (engage)
+               and sf36(LONGBOW).get("standoff_e") is False                # rain is a bomb
+               and sf36("2H_KNUCKLES_SET3").get("standoff_e") is False)    # Spiked (bomb)
+    # the flex join, isolated: the same three Realmbreakers read with a
+    # ranged core and with a melee core; no gears anywhere
+    tanks = [GREAT_HAMMER, HEAVY_MACE, HALLOWFALL, HALLOWFALL, "2H_ARCANESTAFF"]
+    rb3 = ["2H_AXE_AVALON"] * 3
+    with_ranged = tanks + rb3 + [PERMAFROST, PERMAFROST, "2H_FIRE_RINGPAIR_AVALON", "2H_INFERNOSTAFF_MORGANA"]
+    with_melee = tanks + rb3 + ["MAIN_DAGGER_HELL", "MAIN_DAGGER_HELL", "2H_DUALAXE_KEEPER", "2H_CLEAVER_HELL"]
+    ci_r, ci_m = e36.comp_identity(with_ranged), e36.comp_identity(with_melee)
+    join_ok = (ci_r.get("style") == "clap" and "2H_AXE_AVALON" in ci_r["carriers"]["ranged"]
+               and ci_m.get("style") == "brawl" and "2H_AXE_AVALON" in ci_m["carriers"]["melee"])
+    round2 = {
+        1: ('clap_kite', 'clap_kite', ['2H_ICECRYSTAL_UNDEAD', '2H_HARPOON_HELL', '2H_ICECRYSTAL_UNDEAD', 'MAIN_HOLYSTAFF_AVALON', '2H_AXE_AVALON', '2H_ARCANESTAFF_HELL', '2H_DUALMACE_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_ROCKMACE_KEEPER', 'MAIN_CURSEDSTAFF_CRYSTAL', 'MAIN_ARCANESTAFF', '2H_POLEHAMMER', '2H_KNUCKLES_SET3', '2H_ARCANESTAFF', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_ROCKMACE_KEEPER']),
+        2: ('brawl', 'brawl', ['MAIN_HOLYSTAFF_AVALON', '2H_HAMMER', 'MAIN_HOLYSTAFF_AVALON', '2H_DUALHAMMER_HELL', 'MAIN_SPEAR_LANCE_AVALON', '2H_MACE', '2H_DUALSICKLE_UNDEAD', '2H_CLEAVER_HELL', '2H_DUALAXE_KEEPER', '2H_ENIGMATICSTAFF', 'MAIN_HOLYSTAFF_AVALON', '2H_DUALAXE_KEEPER', '2H_DUALSCIMITAR_UNDEAD', '2H_CLEAVER_HELL', '2H_ICECRYSTAL_UNDEAD', 'MAIN_RAPIER_MORGANA', '2H_NATURESTAFF_HELL', '2H_SHAPESHIFTER_CRYSTAL', '2H_INFERNOSTAFF']),
+        3: ('clap_kite', None, ['MAIN_HOLYSTAFF_AVALON', 'MAIN_HAMMER', '2H_CURSEDSTAFF_MORGANA', '2H_SHAPESHIFTER_SET2', '2H_HOLYSTAFF_CRYSTAL', '2H_HOLYSTAFF_CRYSTAL', '2H_SHAPESHIFTER_KEEPER', '2H_AXE_AVALON', 'MAIN_MACE', '2H_KNUCKLES_SET2', 'MAIN_NATURESTAFF', '2H_AXE_AVALON', '2H_NATURESTAFF_HELL', 'MAIN_CURSEDSTAFF_CRYSTAL', '2H_NATURESTAFF_HELL', 'MAIN_ROCKMACE_KEEPER']),
+        4: ('clap_kite', 'clap_kite', ['MAIN_FROSTSTAFF_KEEPER', '2H_KNUCKLES_SET3', '2H_FIRE_RINGPAIR_AVALON', '2H_ICECRYSTAL_UNDEAD', 'MAIN_CURSEDSTAFF_CRYSTAL', '2H_HARPOON_HELL', '2H_CLEAVER_HELL', '2H_LONGBOW', '2H_ARCANESTAFF_HELL', 'MAIN_ARCANESTAFF_UNDEAD', '2H_HOLYSTAFF_CRYSTAL', '2H_DUALMACE_AVALON', '2H_DUALMACE_AVALON', '2H_HAMMER_AVALON', '2H_ARCANESTAFF', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_ROCKMACE_KEEPER', '2H_ICECRYSTAL_UNDEAD']),
+        5: ('brawl', None, ['MAIN_DAGGER_HELL', '2H_DAGGERPAIR', '2H_MACE', '2H_MACE', 'MAIN_NATURESTAFF', '2H_AXE_AVALON', '2H_CLEAVER_HELL', '2H_KNUCKLES_KEEPER', '2H_KNUCKLES_SET3', '2H_LONGBOW', '2H_ARCANE_RINGPAIR_AVALON', '2H_FROSTSTAFF', 'MAIN_MACE', 'MAIN_HAMMER', 'MAIN_HOLYSTAFF_AVALON', '2H_INFERNOSTAFF_MORGANA', 'MAIN_CURSEDSTAFF_CRYSTAL']),
+        6: ('brawl', 'brawl', ['MAIN_HAMMER', '2H_DUALSCIMITAR_UNDEAD', 'MAIN_MACE', 'MAIN_HAMMER', '2H_DUALSCIMITAR_UNDEAD', 'MAIN_HOLYSTAFF_AVALON', '2H_SHAPESHIFTER_KEEPER', '2H_KNUCKLES_SET2', 'MAIN_HOLYSTAFF_AVALON', '2H_FROSTSTAFF', '2H_FROSTSTAFF', '2H_ENIGMATICSTAFF', 'MAIN_HOLYSTAFF_AVALON', '2H_DUALSCIMITAR_UNDEAD', 'MAIN_HOLYSTAFF_AVALON', '2H_MACE', '2H_ENIGMATICORB_MORGANA', '2H_DUALSCIMITAR_UNDEAD']),
+        7: (None, None, ['MAIN_HAMMER', '2H_FROSTSTAFF', '2H_KNUCKLES_SET3', '2H_ROCKSTAFF_KEEPER', '2H_HOLYSTAFF_CRYSTAL', '2H_AXE_AVALON', 'MAIN_MACE', '2H_KNUCKLES_SET2', '2H_KNUCKLES_SET2', '2H_KNUCKLES_SET2', '2H_CLEAVER_HELL', '2H_KNUCKLES_SET2', 'MAIN_CURSEDSTAFF_AVALON', '2H_ICECRYSTAL_UNDEAD', '2H_DUALMACE_AVALON', '2H_FROSTSTAFF', '2H_FROSTSTAFF', 'MAIN_CURSEDSTAFF_CRYSTAL', '2H_FROSTSTAFF']),
+        8: ('kite', 'kite', ['2H_POLEHAMMER', 'MAIN_RAPIER_MORGANA', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_ARCANESTAFF', '2H_AXE_AVALON', '2H_KNUCKLES_SET3', '2H_ICECRYSTAL_UNDEAD', '2H_BOW_HELL', '2H_HARPOON_HELL', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_ARCANESTAFF_UNDEAD', '2H_ARCANESTAFF_HELL', 'MAIN_CURSEDSTAFF_CRYSTAL', 'MAIN_ROCKMACE_KEEPER', '2H_NATURESTAFF_KEEPER', '2H_DUALMACE_AVALON', '2H_HOLYSTAFF_CRYSTAL', '2H_ARCANESTAFF', 'MAIN_ROCKMACE_KEEPER', '2H_HAMMER_AVALON']),
+        9: (None, None, ['2H_AXE', '2H_AXE_AVALON', '2H_CLAWPAIR', '2H_CLEAVER_HELL', '2H_FROSTSTAFF', '2H_GLAIVE', '2H_QUARTERSTAFF_AVALON', '2H_DUALSICKLE_UNDEAD', 'MAIN_HOLYSTAFF_AVALON', '2H_DUALAXE_KEEPER', 'MAIN_FROSTSTAFF', 'MAIN_SWORD_CRYSTAL', 'MAIN_CURSEDSTAFF_AVALON', '2H_HOLYSTAFF', '2H_NATURESTAFF', '2H_INFERNOSTAFF', '2H_ENIGMATICSTAFF']),
+        10: ('kite', 'kite', ['2H_SHAPESHIFTER_KEEPER', 'MAIN_ROCKMACE_KEEPER', 'MAIN_CURSEDSTAFF_CRYSTAL', '2H_HARPOON_HELL', '2H_AXE_AVALON', '2H_FIRE_RINGPAIR_AVALON', '2H_ICECRYSTAL_UNDEAD', 'MAIN_RAPIER_MORGANA', '2H_POLEHAMMER', 'MAIN_ARCANESTAFF_UNDEAD', '2H_FIRE_RINGPAIR_AVALON', '2H_ARCANESTAFF', 'MAIN_ROCKMACE_KEEPER', '2H_DUALMACE_AVALON', '2H_ARCANESTAFF_HELL', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_HOLYSTAFF_CRYSTAL']),
+        11: ('brawl_clap', 'brawl_clap', ['MAIN_HOLYSTAFF_AVALON', 'MAIN_ROCKMACE_KEEPER', '2H_CURSEDSTAFF_MORGANA', '2H_KNUCKLES_SET2', '2H_CROSSBOW_CANNON_AVALON', '2H_KNUCKLES_SET2', '2H_KNUCKLES_SET2', '2H_KNUCKLES_SET2', '2H_KNUCKLES_SET2', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_GLAIVE_CRYSTAL', '2H_MACE', '2H_LONGBOW', '2H_LONGBOW']),
+        12: (None, None, ['2H_TWINSCYTHE_HELL', '2H_HOLYSTAFF_CRYSTAL', '2H_DUALMACE_AVALON', '2H_COMBATSTAFF_MORGANA', '2H_MACE', '2H_ROCKSTAFF_KEEPER', '2H_MACE', '2H_WILDSTAFF', '2H_DUALAXE_KEEPER', '2H_DUALMACE_AVALON', '2H_CROSSBOWLARGE', '2H_SHAPESHIFTER_SET2', '2H_FIRE_RINGPAIR_AVALON', '2H_FIRE_RINGPAIR_AVALON', '2H_GLAIVE_CRYSTAL', 'MAIN_ARCANESTAFF_UNDEAD', '2H_ARCANESTAFF_HELL']),
+        13: ('clap_kite', 'clap_kite', ['2H_FIRE_RINGPAIR_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_HARPOON_HELL', '2H_INFERNOSTAFF', '2H_ICECRYSTAL_UNDEAD', 'MAIN_CURSEDSTAFF_AVALON', '2H_DUALMACE_AVALON', '2H_ICECRYSTAL_UNDEAD', '2H_GLAIVE_CRYSTAL', '2H_CROSSBOW_CANNON_AVALON', '2H_AXE_AVALON', '2H_POLEHAMMER', '2H_SHAPESHIFTER_KEEPER', 'MAIN_FROSTSTAFF_KEEPER', '2H_HOLYSTAFF_HELL', '2H_ARCANESTAFF_HELL', '2H_KNUCKLES_SET3', '2H_MACE_MORGANA', 'MAIN_FROSTSTAFF', '2H_POLEHAMMER']),
+        14: (None, None, ['2H_HOLYSTAFF_HELL', 'MAIN_DAGGER', '2H_HOLYSTAFF_UNDEAD', '2H_BOW_KEEPER', '2H_HOLYSTAFF_HELL', '2H_CURSEDSTAFF_MORGANA', 'MAIN_FIRESTAFF_KEEPER', '2H_LONGBOW_UNDEAD', '2H_HAMMER_UNDEAD', '2H_NATURESTAFF_HELL', 'MAIN_DAGGER', '2H_DUALMACE_AVALON', 'MAIN_MACE', 'MAIN_1HCROSSBOW', 'MAIN_CURSEDSTAFF_AVALON']),
+        15: ('clap', 'clap', ['2H_DUALMACE_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_HARPOON_HELL', '2H_ENIGMATICSTAFF', 'MAIN_HOLYSTAFF_AVALON', '2H_HOLYSTAFF_HELL', '2H_ICECRYSTAL_UNDEAD', '2H_DUALMACE_AVALON', '2H_GLAIVE_CRYSTAL', '2H_LONGBOW', '2H_SHAPESHIFTER_KEEPER', '2H_KNUCKLES_SET3', '2H_ICEGAUNTLETS_HELL', 'MAIN_ARCANESTAFF', '2H_NATURESTAFF_KEEPER', '2H_POLEHAMMER']),
+        16: ('clap', None, ['MAIN_DAGGER_HELL', 'MAIN_MACE', 'MAIN_1HCROSSBOW', '2H_KNUCKLES_SET3', '2H_ARCANESTAFF', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_CURSEDSTAFF_UNDEAD', '2H_SHAPESHIFTER_SET2', '2H_DUALMACE_AVALON', 'MAIN_CURSEDSTAFF_AVALON', '2H_CLEAVER_HELL', 'MAIN_NATURESTAFF_CRYSTAL', '2H_DUALMACE_AVALON', '2H_KNUCKLES_SET2', '2H_AXE_AVALON', '2H_MACE', 'MAIN_DAGGER_HELL', 'MAIN_FROSTSTAFF_KEEPER', '2H_HOLYSTAFF_CRYSTAL']),
+        17: ('brawl', None, ['2H_ARCANESTAFF', 'MAIN_HAMMER', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_MACE_HELL', '2H_KNUCKLES_SET3', '2H_AXE_AVALON', '2H_KNUCKLES_SET2', '2H_KNUCKLES_SET2', '2H_SHAPESHIFTER_KEEPER', '2H_KNUCKLES_SET2', '2H_ENIGMATICORB_MORGANA', '2H_SHAPESHIFTER_SET2', '2H_HARPOON_HELL', 'MAIN_CURSEDSTAFF_AVALON', 'MAIN_CURSEDSTAFF_UNDEAD', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON']),
+        18: ('brawl_clap', None, ['2H_HOLYSTAFF_UNDEAD', 'MAIN_NATURESTAFF', '2H_CURSEDSTAFF_MORGANA', '2H_ARCANESTAFF', 'MAIN_DAGGER_HELL', '2H_KNUCKLES_KEEPER', 'MAIN_DAGGER_HELL', 'MAIN_DAGGER_HELL', '2H_ROCKSTAFF_KEEPER', '2H_ARCANE_RINGPAIR_AVALON', 'MAIN_MACE', '2H_DUALSCIMITAR_UNDEAD', 'MAIN_HOLYSTAFF_AVALON', '2H_DUALSCIMITAR_UNDEAD', '2H_MACE', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_RAPIER_MORGANA']),
+        19: ('clap_kite', 'clap_kite', ['2H_HAMMER_AVALON', '2H_AXE_AVALON', '2H_KNUCKLES_SET3', 'MAIN_HOLYSTAFF_AVALON', '2H_DUALMACE_AVALON', '2H_ICECRYSTAL_UNDEAD', 'MAIN_CURSEDSTAFF_CRYSTAL', 'MAIN_ARCANESTAFF_UNDEAD', '2H_ICECRYSTAL_UNDEAD', '2H_POLEHAMMER', '2H_ARCANESTAFF_HELL', '2H_HOLYSTAFF_CRYSTAL', '2H_ARCANESTAFF', 'MAIN_HOLYSTAFF_AVALON', '2H_ICEGAUNTLETS_HELL', '2H_ARCANESTAFF', '2H_HOLYSTAFF_CRYSTAL', '2H_HARPOON_HELL', 'MAIN_ARCANESTAFF', 'MAIN_ROCKMACE_KEEPER']),
+        20: ('brawl', 'brawl', ['2H_COMBATSTAFF_MORGANA', '2H_ARCANE_RINGPAIR_AVALON', '2H_AXE_AVALON', 'MAIN_MACE_CRYSTAL', '2H_DUALSCIMITAR_UNDEAD', '2H_KNUCKLES_KEEPER', '2H_AXE_AVALON', '2H_SCYTHE_HELL', '2H_CLAYMORE_AVALON', 'MAIN_DAGGER_HELL', '2H_HAMMER_CRYSTAL', '2H_NATURESTAFF_HELL', '2H_CURSEDSTAFF_MORGANA', '2H_DUALMACE_AVALON', '2H_LONGBOW', 'MAIN_HOLYSTAFF_AVALON', '2H_ENIGMATICSTAFF', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON']),
+    }
+    r2_ok, r2_bad = 0, []
+    for rid, (_owner, agreed_style, ids) in sorted(round2.items()):
+        if agreed_style is None:
+            continue
+        got = e36.comp_identity(ids).get("style")
+        if got == agreed_style:
+            r2_ok += 1
+        else:
+            r2_bad.append(f"r{rid}:{got}")
+    # roster 5 as re-ruled: a dead heat on weapons (split), brawl once the
+    # harvested chests are known (every dps in leather)
+    r5_gears = [['ARMOR_LEATHER_HELL'], ['ARMOR_LEATHER_FEY'], ['ARMOR_PLATE_SET3'], None,
+                ['ARMOR_PLATE_ROYAL'], None, None, ['ARMOR_LEATHER_HELL'], ['ARMOR_LEATHER_AVALON'],
+                ['ARMOR_LEATHER_FEY'], None, ['ARMOR_LEATHER_AVALON'], ['ARMOR_PLATE_KEEPER'],
+                ['ARMOR_PLATE_SET3'], ['ARMOR_PLATE_KEEPER'], ['ARMOR_LEATHER_FEY'], ['ARMOR_LEATHER_FEY']]
+    r5_ok = (e36.comp_identity(round2[5][2]).get("style") is None
+             and e36.comp_identity(round2[5][2], None, r5_gears).get("style") == "brawl")
+    fit36 = e36.fitness(round2[11][2])
+    e36.comp_identity(round2[11][2])
+    check("T36 blind round 2 (2026-09-04): flex bombs join the rigid core, "
+          "slow fields are standoff tools (Occult is not), the ball carries "
+          "the bomb; the eleven agreed rosters read as the owner called them "
+          "and roster 5 is brawl by its leather kits",
+          facts36 and join_ok and r5_ok and r2_ok == 11
+          and e36.fitness(round2[11][2]) == fit36,
+          f"facts={facts36} join={join_ok} ({ci_r.get('style')}/{ci_m.get('style')}) "
+          f"r5={r5_ok} round={r2_ok}/11 bad={r2_bad}")
+
+    # T37 — STYLE x SIZE ROWS (owner ruling 2026-09-04, "ok do it", four
+    # parts): templates/style_bands.yaml (derive_style_bands.py from the
+    # harvest board) is read AFTER the content row for a DECLARED style at
+    # 10+. Contract pinned here, numbers not (they move with the harvest):
+    # (a) a declared style at 20 reads its band: clap's burst_aoe target
+    #     sits above balanced's and brawl's, brawl's tankiness above
+    #     clap's (what winning rosters field, per style);
+    # (b) the rows are measured per style, so styles.yaml target_mults do
+    #     NOT stack on them: clap's burst_aoe target equals the row x
+    #     size/ref exactly, not x1.71;
+    # (c) a soft-cap-only row (p10 = 0) keeps the CONTENT target;
+    # (d) `balanced` and any size below min_size read no band; hard
+    #     floors and weights are untouched by the band.
+    e37 = Engine(content="territory_defense", size=20, style="clap")
+    e37b = Engine(content="territory_defense", size=20, style="brawl")
+    e37z = Engine(content="territory_defense", size=20, style="balanced")
+    e37s = Engine(content="territory_defense", size=7, style="clap")
+    bands37 = e37.data.get("style_bands") or {}
+    row37 = (bands37.get("bands") or {}).get("clap", {}).get("20") or {}
+    reqs37 = row37.get("requirements") or {}
+    ba = reqs37.get("burst_aoe") or {}
+    band_ok = (e37.band_key == "20" and e37b.band_key == "20"
+               and e37z.band_key is None and e37s.band_key is None
+               and e37.target("burst_aoe") > e37z.target("burst_aoe")
+               and e37.target("burst_aoe") > e37b.target("burst_aoe")
+               and e37b.target("tankiness") > e37.target("tankiness")
+               # the movement four are IN (exclusion lifted 2026-09-04
+               # once measured): their band targets sit above the content
+               # row's outlier minimums (disengage 1.8x, the others 2-7x)
+               and all(reqs37.get(c, {}).get("target") is not None
+                       and e37.target(c) > e37z.target(c)
+                       for c in ("engage", "mobility", "knockback_displace",
+                                 "disengage")))
+    ref37 = float(row37.get("ref_size") or 20)
+    no_stack = (ba.get("target") is not None
+                and abs(e37.target("burst_aoe") - ba["target"] * 20 / ref37) < 1e-9
+                and abs(e37.soft_cap("burst_aoe") - ba["soft_cap"] * 20 / ref37) < 1e-9)
+    soft_only = [c for c, v in reqs37.items() if v.get("target") is None
+                 and c in e37z._targets]
+    soft_ok = all(abs(e37.target(c) - e37z.target(c) * e37.target_mults.get(c, 1.0)) < 1e-9
+                  for c in soft_only) and bool(soft_only)
+    floors_ok = (e37.floors == e37z.floors
+                 and e37._floors_eff == e37z._floors_eff
+                 and all(abs(e37.weight(c) - e37z.weight(c) * e37.style_mults.get(c, 1.0)) < 1e-9
+                         for c in e37.reqs))
+    check("T37 style x size rows (owner 2026-09-04): a declared style at 10+ "
+          "reads its harvest band after the content row; rows are per-style "
+          "so target_mults never stack; soft-only rows keep the content "
+          "target; the movement four are in; balanced / under-10 / floors / "
+          "weights untouched",
+          band_ok and no_stack and soft_ok and floors_ok,
+          f"band={band_ok} no_stack={no_stack} soft_only={soft_ok} ({len(soft_only)} caps) "
+          f"floors={floors_ok} clap@20 burst_aoe={e37.target('burst_aoe'):.1f} "
+          f"balanced={e37z.target('burst_aoe'):.1f} brawl={e37b.target('burst_aoe'):.1f}")
+
+    # T38 — THE FIXTURES ARE JUDGED DRESSED (owner 2026-09-04, "go ahead with
+    # your recommendation"): the style x size rows are measured on dressed
+    # winners, so the five graded fixtures are read in their recorded kits
+    # (builds_index join) or, for the two synthetic ten-mans, their doctrine
+    # kits. Contract, not numbers: dressed fitness beats naked on every
+    # fixture; every dressed fixture clears its band's engage and mobility
+    # targets (the two the exclusion had doubted); blap's disengage /
+    # knockback shortfall is RECORDED (a deliberately committed ball) and
+    # not pinned either way.
+    builds_flat = gear_join.load_builds_flat(ROOT)
+    def _dressed(comp_id, idx):
+        comp, party = _COMPS[comp_id], _COMPS[comp_id]["parties"][idx]
+        slots = [(j, s) for j, s in enumerate(party["slots"])
+                 if s.get("weapons") and s.get("role") != "battlemount"]
+        gl = []
+        for j, _s in slots:
+            bid = f"{comp_id}:{party.get('name', '?')}:{j}"
+            g, _r, _c = gear_join.slot_gears(builds_flat.get(bid), E.gear)
+            gl.append(g or None)
+        return [s["weapons"][0] for _, s in slots], gl
+    fx38 = {"blap": (*_dressed("timothy_blap_blackzone_roam_2026_08", 0), "brawl", "blackzone_roam"),
+            "DH_P1": (*_dressed("deadlyhooker_large_scale_2026_08", 0), "clap_kite", "territory_defense"),
+            "20v20": (*_dressed("albioncompo_20v20_competitive_2026_08", 0), "clap_kite", "territory_defense")}
+    for name, party38, st38 in (("clap10", clap10, "clap"), ("kite10", kite10, "kite")):
+        e38 = Engine(content="blackzone_roam", size=len(party38), style=st38)
+        fx38[name] = (party38, gear_join.doctrine_gears(e38, party38), st38, "blackzone_roam")
+    dressed_wins, clears, detail38 = [], [], []
+    for name, (party38, gears38, st38, ct38) in fx38.items():
+        e38 = Engine(content=ct38, size=len(party38), style=st38)
+        naked = e38.fitness(party38) / e38.max_fitness(party38)
+        dressed = e38.fitness(party38, None, gears38) / e38.max_fitness(party38, None, gears38)
+        sup = e38.effective_supply(party38, None, gears38)
+        dressed_wins.append(dressed > naked)
+        clears.append(all(sup.get(c, 0.0) >= e38.target(c) for c in ("engage", "mobility")))
+        detail38.append(f"{name}={naked:.1%}->{dressed:.1%}")
+    check("T38 the fixtures are judged dressed (owner 2026-09-04): recorded "
+          "kits via the builds_index join, doctrine kits for the ten-mans; "
+          "dressed beats naked on all five and every one clears its band's "
+          "engage and mobility targets",
+          all(dressed_wins) and all(clears) and len(fx38) == 5,
+          f"kits={sum(1 for _, (_p, g, _s, _c) in fx38.items() if all(g))}/5 "
+          f"dressed>naked={dressed_wins} clears={clears} " + " ".join(detail38))
 
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)

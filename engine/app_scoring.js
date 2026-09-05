@@ -122,19 +122,25 @@
     var rolesCfg = comp.roles || {};
     var byHint = rolesCfg.by_hint || {};
     var overrides = rolesCfg.overrides || {};
-    this.roleClass = {};
-    var k;
-    for (k in this.weapons) {
-      this.roleClass[k] = overrides[k] !== undefined ? overrides[k]
-        : (byHint[this.weapons[k].role_hint] !== undefined
-           ? byHint[this.weapons[k].role_hint] : "dps");
-    }
     /* The ROLE BOOK (roles-design.md, mirrors engine.py): fine roles with
        evidence-cited membership; weapons carry role_menu. Feeds
-       detectRole/roleAdvisory only — DESCRIPTIVE, never scoring. */
+       detectRole/roleAdvisory (DESCRIPTIVE, never scoring) and, since
+       2026-09-03, the coarse role class below. */
     this.rolesBook = {};
     var rb = data.roles || [];
     for (var ri = 0; ri < rb.length; ri++) this.rolesBook[rb[ri].id] = rb[ri];
+    /* Coarse role class: composition override > the class of the primary
+       SEAT (first uniformed menu role, the detectRole resolution) > the
+       sheet's role_hint. Mirrors engine.py (2026-09-03). */
+    this.roleClass = {};
+    var k;
+    for (k in this.weapons) {
+      var seatCls = this._primarySeatClass(k);
+      this.roleClass[k] = overrides[k] !== undefined ? overrides[k]
+        : (seatCls !== null ? seatCls
+           : (byHint[this.weapons[k].role_hint] !== undefined
+              ? byHint[this.weapons[k].role_hint] : "dps"));
+    }
     /* Typed gear-carried effects: item id -> effect ids (mirrors
        engine.py _item_effects); gearEffects keeps the records for
        display-name lookup. */
@@ -229,6 +235,7 @@
     this.content = content;
     this.baseSize = this.template.base_size || size;
     this.size = (size === undefined || size === null) ? this.baseSize : size;
+    this._carrierCapsCache = null;   /* carrierCaps() memo (size-keyed) */
     this.reqs = this.template.requirements;
     this.floors = this.template.hard_floors || {};
     /* Playstyle overlay: multiplies capability WEIGHTS only (mirrors
@@ -303,6 +310,36 @@
       this._softs[cap2] = tm * (r.scales ? r.soft_cap * this.size / this.baseSize : r.soft_cap);
       var m2 = this.styleMults[cap2];
       this._weights[cap2] = r.weight * (m2 === undefined ? 1.0 : m2);
+    }
+    /* STYLE x SIZE ROWS (style_bands.yaml, owner 2026-09-04; mirrors
+       engine.py set_content): a declared style at min_size+ reads the
+       harvest's per-band target/soft after the content row, scaled from
+       ref_size; a soft-cap-only row keeps the content target; rows are
+       measured per style, so target_mults do not stack on them. */
+    this.bandRow = null; this.bandKey = null;
+    var bands = this.data.style_bands || {};
+    var bstyle = (bands.bands || {})[this.style];
+    if (bstyle && this.size >= (bands.min_size || 10)) {
+      for (var bk in bstyle) {
+        var brow = bstyle[bk];
+        if (brow.sizes[0] <= this.size && this.size <= brow.sizes[1]) {
+          this.bandRow = brow; this.bandKey = bk; break;
+        }
+      }
+    }
+    if (this.bandRow) {
+      var bref = this.bandRow.ref_size;
+      for (var capB in this.bandRow.requirements) {
+        if (!(capB in this._targets)) continue;
+        var bv = this.bandRow.requirements[capB];
+        if (bv.target !== undefined && bv.target !== null) {
+          this._targets[capB] = bv.target * this.size / bref;
+          this._softs[capB] = bv.soft_cap * this.size / bref;
+        } else {
+          var softB = bv.soft_cap * this.size / bref;
+          if (softB > this._targets[capB]) this._softs[capB] = softB;
+        }
+      }
     }
     /* OPTIONAL capabilities (owner ruling 2026-08-28) — mirrors engine.py
        set_content. Bringing one still earns its coverage; not bringing it is
@@ -567,6 +604,7 @@
     this._defaultCache = {};
     this._nsCache = {};
     this._variantCache = {};
+    this._variantFallback = {};
     this._dressedCache = {};
   };
 
@@ -580,6 +618,7 @@
        other setting cannot leak. */
     this.dressCandidates = enabled !== false;
     this._variantCache = {};
+    this._variantFallback = {};
     this._dressedCache = {};
   };
 
@@ -671,6 +710,18 @@
     /* Constraint role class: healer / frontline / support / dps. */
     return this.roleClass[weapon] === undefined ? "dps" : this.roleClass[weapon];
   };
+  /* class of the weapon's primary SEAT role — first role_menu entry with a
+     chest uniform (function roles have none); null when unseated.
+     Mirrors engine.py _primary_seat_class. */
+  CompEngine.prototype._primarySeatClass = function (weapon) {
+    var menu = this.weapons[weapon].role_menu || [];
+    for (var i = 0; i < menu.length; i++) {
+      var rec = this.rolesBook[menu[i]] || {};
+      var chest = (rec.uniform || {}).chest || [];
+      if (chest.length) return rec["class"] === undefined ? null : rec["class"];
+    }
+    return null;
+  };
 
   /* Role layer (roles-design.md increment 1; mirrors engine.py) —
      DESCRIPTIVE: no scoring or generation path reads it. */
@@ -695,7 +746,8 @@
                functions: [], secondary: menu2 };
     var self = this;
     var uniOf = function (rid) {
-      return (((self.rolesBook[rid] || {}).uniform) || {}).chest || [];
+      var book = (((self.rolesBook[rid] || {}).uniform) || {}).chest || [];
+      return book.length ? self._chestUniform(rid, weapon) : [];
     };
     var seats = menu.filter(function (r) { return uniOf(r).length > 0; });
     var functions = menu.filter(function (r) { return !uniOf(r).length; });
@@ -1168,6 +1220,24 @@
     return out;
   };
 
+  CompEngine.prototype._seatKit = function (rec) {
+    /* the seat's doctrine for THIS party size (mirrors engine.py
+       _seat_kit): the gang band below 10 members when the seat has one */
+    if (this.size <= DOCTRINE_GANG_MAX) {
+      var gang = (rec.kit_bands || {}).gang;
+      if (gang) return gang;
+    }
+    return rec;
+  };
+  CompEngine.prototype._chestUniform = function (seat, weapon) {
+    /* chest classes admitted for `weapon` in `seat`: the book uniform plus
+       the weapon's observed-majority class where the harvest is clear
+       (dataset kit_weapon_uniform) -- mirrors engine.py _chest_uniform */
+    var rec = this.rolesBook[seat] || {};
+    var ext = (this._seatKit(rec).kit_weapon_uniform || {})[weapon];
+    if (ext && ext.length) return ext.slice();
+    return ((rec.uniform || {}).chest || []).slice();
+  };
   CompEngine.prototype.primarySeat = function (weapon) {
     /* The weapon's default SEAT: first uniform-carrying role on its
        menu (mirrors engine.py primary_seat). */
@@ -1204,7 +1274,11 @@
     if (role !== null && (seat === null || seat === undefined))
       return { kit: {}, options: {}, seat: null };
     var seatRec = this.rolesBook[seat] || {};
-    var uniform = (seatRec.uniform || {}).chest || [];
+    /* book uniform widened by THIS weapon's observed majority class
+       (kit_weapon_uniform, 2026-09-03) -- mirrors engine.py */
+    var uniform = this._chestUniform(seat, weapon);
+    var seatClass = seatRec["class"] || null;
+    seatRec = this._seatKit(seatRec);   /* the size band's doctrine */
     var doctrine = seatRec.kit || {};
     /* Per-weapon doctrine tier (owner design 2026-08-26): this weapon's
        own observed items (effect carriers excluded at the build) outrank
@@ -1212,24 +1286,26 @@
        weapon-tier options carry doctrine_n = [count, slot total].
        Mirrors engine.py. */
     var wdoc = (seatRec.kit_weapon || {})[weapon] || {};
-    var seatClass = seatRec["class"] || null;
     /* observed-build archetype (2026-09-01, mirrors engine.py): the KIT
        pick follows what real players field — weapon's own conditional-
        modal build first, seat fallback per slot; the archetype item
        moves to the front of its slot's options. */
-    var arch = {};
+    var arch = {}, archSeat = {};
     if (role !== null) {
       var wbArch = (seatRec.kit_weapon_build || {})[weapon] || {};
       var sbArch = seatRec.kit_build || {};
       var aslot;
-      for (aslot in sbArch) arch[aslot] = sbArch[aslot];
-      for (aslot in wbArch) arch[aslot] = wbArch[aslot];
+      for (aslot in sbArch) { arch[aslot] = sbArch[aslot]; archSeat[aslot] = true; }
+      for (aslot in wbArch) { arch[aslot] = wbArch[aslot]; delete archSeat[aslot]; }
     }
     var bySlot = {}, k;
     for (k in this.gear) {
       var slot0 = this.gear[k].slot || "other";
       (bySlot[slot0] = bySlot[slot0] || []).push(k);
     }
+    /* a two-hander has no off-hand: drop the slot before the seat pool
+       (mined from one-handers too) can propose one — mirrors engine.py */
+    if (this.weapons[weapon].two_handed) delete bySlot.offhand;
     var self = this;
     if (uniform.length) {
       var gated = (bySlot.armor || []).filter(function (g) {
@@ -1321,23 +1397,40 @@
         return r.doctrine === "weapon" ? 0 : r.doctrine === "seat" ? 1 : 2;
       };
       var wCount = function (r) { return wslot[r.gear] || 0; };
-      if (joined === null) {
-        ranked.sort(function (a, b) {
-          return (tierRank(a) - tierRank(b))
-              || (wCount(b) - wCount(a))
-              || (b.value - a.value) || gearCmp(a, b);
-        });
-      } else {
-        ranked.sort(function (a, b) {
-          return (tierRank(a) - tierRank(b))
-              || (b.value - a.value)
-              || (wCount(b) - wCount(a))
-              || gearCmp(a, b);
-        });
-      }
+      /* EVIDENCE-FIRST (2026-09-03, mirrors engine.py): count leads the
+         weapon tier; comp-aware may reorder only the evidence band (items
+         worn >= half as often as the modal one) by the marginal; the seat
+         tier keeps the seat pool's count order; value breaks ties. */
+      var topCount = 0;
+      for (var tk in wslot) if (wslot[tk] > topCount) topCount = wslot[tk];
+      var seatOrder = {};
+      for (var so = 0; so < docPool.length; so++) seatOrder[docPool[so]] = so;
+      var inBand = function (g) { return (wslot[g] || 0) >= 0.5 * topCount; };
+      var sortKey = function (r) {
+        var t = tierRank(r), g = r.gear;
+        if (t === 0) {
+          if (joined !== null && inBand(g))
+            return [0, 0, -r.value, -(wslot[g] || 0)];
+          return [0, inBand(g) ? 0 : 1, -(wslot[g] || 0), -r.value];
+        }
+        if (t === 1)
+          return [1, seatOrder[g] === undefined ? docPool.length : seatOrder[g],
+                  0, -r.value];
+        return [2, 0, -r.value, 0];
+      };
+      ranked.sort(function (a, b) {
+        var ka = sortKey(a), kb = sortKey(b);
+        for (var ci = 0; ci < ka.length; ci++) {
+          if (ka[ci] !== kb[ci]) return ka[ci] < kb[ci] ? -1 : 1;
+        }
+        return gearCmp(a, b);
+      });
       var av = arch[slot];
-      if (av) {
-        /* the observed build leads the slot (overlay ruling) */
+      /* seat archetype = fallback only where the weapon has no counts
+         (mirrors engine.py, 2026-09-04) */
+      if (av && (topCount === 0 || (!archSeat[slot] && inBand(av[0])))) {
+        /* the observed build leads the slot (overlay ruling) -- never
+           from outside the evidence band */
         for (var ai = 0; ai < ranked.length; ai++) {
           if (ranked[ai].gear === av[0]) {
             ranked[ai].observed_build = [av[1], av[2]];
@@ -1353,6 +1446,80 @@
     return { kit: kit, options: options, seat: seat };
   };
 
+  CompEngine.prototype.carrierCaps = function () {
+    /* per-roster cap on each effect-carrier chest at this size (mirrors
+       engine.py carrier_caps): killboard share x size, half-up, min 1.
+       A GENERATION constraint: partyState counts what the roster wears,
+       candidates skip capped kit variants. */
+    if (this._carrierCapsCache !== null && this._carrierCapsCache !== undefined)
+      return this._carrierCapsCache;
+    var q = this.data.carrier_quotas || {};
+    var buckets = q.buckets || {};
+    var any = false;
+    for (var bk in buckets) { any = true; break; }
+    var caps = {};
+    if (any) {
+      var key = (this.size >= 60 && buckets["60+"]) ? "60+" : "20-59";
+      var share = (buckets[key] || {}).share || {};
+      for (var eff in share) caps[eff] = Math.max(1, Math.floor(share[eff] * this.size + 0.5));
+    }
+    this._carrierCapsCache = caps;
+    return caps;
+  };
+  CompEngine.IDENTITY_CHEST_SHARE = 0.5;
+  CompEngine.prototype._identityChest = function (weapon, gearId) {
+    /* a chest at least half the weapon's builds wear is IDENTITY, exempt
+       from the carrier quota (mirrors engine.py _identity_chest) */
+    return this.observedShare(weapon, gearId) >= CompEngine.IDENTITY_CHEST_SHARE;
+  };
+  CompEngine.prototype._cappedEffects = function (gearId) {
+    var caps = this.carrierCaps(), effs = this.itemEffects[gearId] || [], out = [];
+    for (var k = 0; k < effs.length; k++) if (caps[effs[k]] !== undefined) out.push(effs[k]);
+    return out;
+  };
+  CompEngine.prototype._carrierCounts = function (party, gears) {
+    /* {effect: members wearing a DISCRETIONARY chest granting it}
+       (mirrors engine.py _carrier_counts) */
+    var caps = this.carrierCaps(), out = {}, anyCap = false;
+    for (var c0 in caps) { anyCap = true; break; }
+    if (!anyCap) return out;
+    for (var i = 0; i < (gears || []).length; i++) {
+      var g = gears[i] || [], w = i < party.length ? party[i] : null;
+      for (var j = 0; j < g.length; j++) {
+        var effs = this._cappedEffects(g[j]);
+        if (!effs.length || (w && this._identityChest(w, g[j]))) continue;
+        for (var k = 0; k < effs.length; k++) out[effs[k]] = (out[effs[k]] || 0) + 1;
+      }
+    }
+    return out;
+  };
+  CompEngine.prototype._variantCapped = function (state, weapon, vgears) {
+    /* true when dressing `weapon` in `vgears` would push a DISCRETIONARY
+       carrier past its cap; identity chests never are */
+    var carriers = state.carriers;
+    if (!carriers || !vgears) return false;
+    var caps = this.carrierCaps();
+    for (var j = 0; j < vgears.length; j++) {
+      var effs = this._cappedEffects(vgears[j]);
+      if (!effs.length || this._identityChest(weapon, vgears[j])) continue;
+      for (var k = 0; k < effs.length; k++) {
+        if ((carriers[effs[k]] || 0) >= caps[effs[k]]) return true;
+      }
+    }
+    return false;
+  };
+  CompEngine.prototype.observedShare = function (weapon, gearId) {
+    var seat = this.primarySeat(weapon);
+    var rec = this.rolesBook[seat] || {};
+    var slot = (this.gear[gearId] || {}).slot;
+    var wl = ((this._seatKit(rec).kit_weapon || {})[weapon] || {})[slot] || [];
+    var total = 0, n = 0;
+    for (var i = 0; i < wl.length; i++) {
+      total += wl[i][1];
+      if (wl[i][0] === gearId) n = wl[i][1];
+    }
+    return total ? n / total : 0.0;
+  };
   CompEngine.prototype.memberExtra = function (weapon, combo) {
     /* One member's effective caps for a combo (null -> static default). */
     var extras = this._comboExtras(weapon);
@@ -1678,7 +1845,9 @@
       }
     }
     return { s: s, sSyn: sSyn, J: J, pairVals: pairVals, counts: counts,
-             nsMax: nsMax };
+             nsMax: nsMax,
+             /* carrier quota (2026-09-03): what this roster already wears */
+             carriers: this._carrierCounts(party, gears) };
   };
 
   CompEngine.prototype._margFitFrom = function (s, extra, sFloor, extraFloor) {
@@ -1815,7 +1984,12 @@
       if (!opts.length) continue;
       v0[slot] = opts[0].gear;
       var t0 = topCap(opts[0].gear);
+      /* evidence band (mirrors engine.py): a divergent alternative must be
+         worn >= half as often as the slot's modal piece */
+      var n0 = (opts[0].doctrine_n || [0, 0])[0];
       for (var oi = 1; oi < opts.length; oi++) {
+        var n1 = (opts[oi].doctrine_n || [0, 0])[0];
+        if (n0 && n1 < 0.5 * n0) continue;
         if (topCap(opts[oi].gear) !== t0) {
           divergent.push([slot, opts[oi].gear]);
           break;
@@ -1833,11 +2007,37 @@
       out = [["v0", null]];
     } else {
       out = [["v0", gl(v0)]];
-      for (var n = 0; n < Math.min(1, divergent.length); n++) {
-        var alt = {};
-        for (var k in v0) alt[k] = v0[k];
-        alt[divergent[n][0]] = divergent[n][1];
-        out.push(["v" + (n + 1), gl(alt)]);
+      /* carrier quota (2026-09-03, mirrors engine.py): a carrier modal
+         chest gets the best NON-carrier chest as its one alternative */
+      var caps = this.carrierCaps(), chest = v0.armor, carrier = false, ce;
+      if (chest) {
+        ce = this.itemEffects[chest] || [];
+        for (var q0 = 0; q0 < ce.length; q0++) if (caps[ce[q0]] !== undefined) carrier = true;
+      }
+      var altChest = null;
+      if (carrier) {
+        var aopts = this.kitOptions(weapon, null, null, 8).options.armor || [];
+        for (var ao = 0; ao < aopts.length; ao++) {
+          if (!aopts[ao].doctrine || aopts[ao].gear === chest) continue;
+          var ce2 = this.itemEffects[aopts[ao].gear] || [], isC = false;
+          for (var q1 = 0; q1 < ce2.length; q1++) if (caps[ce2[q1]] !== undefined) isC = true;
+          if (!isC) { altChest = aopts[ao].gear; break; }
+        }
+      }
+      if (altChest !== null) {
+        var alt0 = {};
+        for (var k0 in v0) alt0[k0] = v0[k0];
+        alt0.armor = altChest;
+        out.push(["v1", gl(alt0)]);
+        /* the non-carrier chest serves the cap only (mirrors engine.py) */
+        this._variantFallback[weapon] = { v1: true };
+      } else {
+        for (var n = 0; n < Math.min(1, divergent.length); n++) {
+          var alt = {};
+          for (var k in v0) alt[k] = v0[k];
+          alt[divergent[n][0]] = divergent[n][1];
+          out.push(["v" + (n + 1), gl(alt)]);
+        }
       }
     }
     this._variantCache[weapon] = out;
@@ -1897,8 +2097,12 @@
     var extras = this._comboExtras(weapon);
     var dressed = this._dressedExtras(weapon);
     var variants = this.kitVariants(weapon);
+    var v0Capped = this._variantCapped(state, weapon, variants[0][1]);
+    var fallback = this._variantFallback[weapon] || {};
     for (var vi = 0; vi < variants.length; vi++) {
       var vkey = variants[vi][0], vgears = variants[vi][1];
+      if (this._variantCapped(state, weapon, vgears)) continue;   /* carrier quota */
+      if (fallback[vkey] && !v0Capped) continue;   /* cap fallback only */
       var dext = dressed[vkey];
       for (var i = 0; i < extras.length; i++) {
         var cs = this._comboScoreDressed(state, weapon, i, extras[i],
@@ -2358,10 +2562,13 @@
      style-declared comp on file (see VALIDATION.md, V3 round 1). */
   var IDENTITY_MELEE_CORE = 0.65, IDENTITY_RANGED_CORE = 0.35,
       IDENTITY_STRONG = 0.80, IDENTITY_CLAP_AOE = 0.50,
-      IDENTITY_BC_AOE = 0.45, IDENTITY_BC_POSTURE = 0.45,
+      IDENTITY_BC_AOE = 0.45, IDENTITY_BC_POSTURE = 0.45,   /* posture retired 2026-09-04 (round 2) */
+      IDENTITY_BC_MELEE_BOMB = 0.5,   /* the ball itself carries half the bomb */
       IDENTITY_CARRIER_MIN = 4, IDENTITY_MIN_MEMBERS = 3,
       IDENTITY_RANGED_ATTACK = 9.0,
-      IDENTITY_HYBRID_AOE = 0.40, IDENTITY_HYBRID_EVADE = 2.0;
+      IDENTITY_HYBRID_AOE = 0.45, IDENTITY_HYBRID_EVADE = 2.0,   /* 0.40 -> 0.45, blind round 2 */
+      IDENTITY_KITE_TOOLS_PER = 10;   /* standoff tools per members (2026-09-04) */
+  var DOCTRINE_GANG_MAX = 9;   /* party sizes that read the gang doctrine band */
   var IDENTITY_STYLES = { brawl: true, clap: true, kite: true,
                           brawl_clap: true, clap_kite: true };
 
@@ -2376,7 +2583,26 @@
     return this.size <= 3 ? "trio" : this.size <= 9 ? "gang" : "group";
   };
 
-  CompEngine.prototype.compIdentity = function (party, combos) {
+  CompEngine.prototype._kitLean = function (party, gears) {
+    /* dps chest-class majority from the worn kits (mirrors engine.py
+       _kit_lean): "leather" / "cloth" / null */
+    if (!gears) return null;
+    var dps = [], i;
+    for (i = 0; i < party.length; i++) if (this.roleOf(party[i]) === "dps") dps.push(i);
+    if (!dps.length) return null;
+    var counts = {}, known = 0;
+    for (i = 0; i < dps.length; i++) {
+      var gl = dps[i] < gears.length ? gears[dps[i]] : null, chest = null;
+      for (var j = 0; gl && j < gl.length; j++) if (gl[j].indexOf("ARMOR_") === 0) { chest = gl[j]; break; }
+      var cls = chest ? this._chestClass(chest) : null;
+      if (cls) { known += 1; counts[cls] = (counts[cls] || 0) + 1; }
+    }
+    if (known < 0.5 * dps.length) return null;
+    if ((counts.leather || 0) > 0.5 * known) return "leather";
+    if ((counts.cloth || 0) > 0.5 * known) return "cloth";
+    return null;
+  };
+  CompEngine.prototype.compIdentity = function (party, combos, gears) {
     /* What this comp is BECOMING, in playstyle vocabulary — v2: built up
        from MEMBER identities (weapon style_fit: E-first delivery + owner
        overrides). DESCRIPTIVE ONLY: nothing here feeds fitness,
@@ -2384,7 +2610,8 @@
        comp_identity). */
     var n = party.length;
     var melee = 0.0, ranged = 0.0, aoe = 0.0, sus = 0.0, st = 0.0,
-        commit = 0.0, evade = 0.0;
+        commit = 0.0, evade = 0.0, kiteTools = 0, meleeBomb = 0.0;
+    var pending = [];
     var carriers = { melee: [], ranged: [] };
     var carrierCount = {};
     var nCarrierMembers = 0;
@@ -2396,7 +2623,16 @@
       var dmg = 0;
       for (var di = 0; di < DAMAGE_CAPS_PROFILE.length; di++)
         dmg += caps[DAMAGE_CAPS_PROFILE[di]] || 0;
-      aoe += caps.burst_aoe || 0;
+      var sf0 = this._styleFitOf(w) || {};
+      /* clap half: a ramp-dependent bomb counts as sustained; standoff
+         E = kite tool (owner 2026-09-04, mirrors engine.py) */
+      if (sf0.conditional_payload) sus += caps.burst_aoe || 0;
+      else {
+        aoe += caps.burst_aoe || 0;
+        if (sf0.delivery === "melee" && sf0.damage_scale === "group")
+          meleeBomb += caps.burst_aoe || 0;
+      }
+      if (sf0.standoff_e) kiteTools += 1;
       sus += caps.sustained_dps || 0;
       st += (caps.burst_st || 0) + (caps.execute || 0);
       commit += (caps.engage || 0) + (caps.clump_create || 0);
@@ -2411,12 +2647,30 @@
         delivery = ar >= IDENTITY_RANGED_ATTACK ? "ranged" : "melee";
       }
       var side = delivery === "ranged" ? "ranged" : "melee";
-      if (delivery === "flex") flex[w] = true;
-      sides[i] = side;
-      if (carriers[side].indexOf(w) === -1) carriers[side].push(w);
+      if (delivery === "flex") {
+        flex[w] = true;
+        /* a flex BOMB (unconditional group payload at range) joins the
+           rigid core below; single-target / ramp flex stays melee */
+        if (sf.damage_scale === "group" && !sf.conditional_payload) side = "flex";
+      }
+      pending.push([i, w, dmg, side]);
       carrierCount[w] = (carrierCount[w] || 0) + 1;
       nCarrierMembers += 1;
-      if (side === "ranged") ranged += dmg; else melee += dmg;
+    }
+    /* flex bombs join the rigid core (owner, blind rounds 1+2 2026-09-04;
+       mirrors engine.py comp_identity) */
+    var rigidMelee = 0.0, rigidRanged = 0.0, pi;
+    for (pi = 0; pi < pending.length; pi++) {
+      if (pending[pi][3] === "melee") rigidMelee += pending[pi][2];
+      else if (pending[pi][3] === "ranged") rigidRanged += pending[pi][2];
+    }
+    var flexSide = rigidRanged >= rigidMelee ? "ranged" : "melee";
+    for (pi = 0; pi < pending.length; pi++) {
+      var pIdx = pending[pi][0], pW = pending[pi][1], pDmg = pending[pi][2],
+          pSide = pending[pi][3] === "flex" ? flexSide : pending[pi][3];
+      sides[pIdx] = pSide;
+      if (carriers[pSide].indexOf(pW) === -1) carriers[pSide].push(pW);
+      if (pSide === "ranged") ranged += pDmg; else melee += pDmg;
     }
     var tot = melee + ranged;
     var dmgTot = aoe + sus + st;
@@ -2425,11 +2679,18 @@
                  sustained: dmgTot ? sus / dmgTot : 0.0,
                  single_target: dmgTot ? st / dmgTot : 0.0 };
     var posture = (commit + evade) ? commit / (commit + evade) : 0.5;
+    var perTen = Math.floor(n / IDENTITY_KITE_TOOLS_PER + 0.5);
+    var kiteMin = Math.max(2, perTen);
+    var kiteHalf = kiteTools >= kiteMin;                 /* hybrid: tools at scale */
+    var kiteAny = kiteTools >= Math.max(1, perTen);      /* kite: one per ten, never below one */
+    var bcBomb = aoe ? meleeBomb / aoe : 0.0;
     var band = this._fitBand();
     var out = { style: null, label: "", strength: null,
                 melee_share: mel, ranged_share: tot ? 1.0 - mel : 0.5,
                 carriers: carriers, mode: mode, posture: posture,
-                band: band, members: [], conflicts: [] };
+                band: band, members: [], conflicts: [],
+                kite_tools: kiteTools, kite_tools_min: kiteMin,
+                kite_tools_pure: Math.max(1, perTen), melee_bomb_share: bcBomb };
     var styles = this.data.styles || {};
     var sname = function (k, fb) {
       return (styles[k] && styles[k].name) || fb;
@@ -2439,11 +2700,20 @@
     if (forming) {
       out.label = "still forming";
     } else if (mel >= IDENTITY_MELEE_CORE) {
-      out.style = "brawl";
-      out.strength = mel >= IDENTITY_STRONG ? "strong" : "leaning";
-      out.label = sname("brawl", "Brawl") + " — melee ball";
+      if (mode.aoe >= IDENTITY_BC_AOE && bcBomb >= IDENTITY_BC_MELEE_BOMB) {
+        /* the ball itself carries the bomb (round 2 roster 11) */
+        out.style = "brawl_clap";
+        out.strength = "leaning";
+        out.label = sname("brawl_clap", "Brawl-Clap") + " — grind into the bomb";
+      } else {
+        out.style = "brawl";
+        out.strength = mel >= IDENTITY_STRONG ? "strong" : "leaning";
+        out.label = sname("brawl", "Brawl") + " — melee ball";
+      }
     } else if (mel <= IDENTITY_RANGED_CORE) {
-      clap = mode.aoe >= IDENTITY_CLAP_AOE;
+      /* a ranged core with no standoff tools must commit: clap (owner
+         2026-09-04, mirrors engine.py) */
+      clap = mode.aoe >= IDENTITY_CLAP_AOE || !kiteAny;
       out.style = clap ? "clap" : "kite";
       out.strength = mel <= 1.0 - IDENTITY_STRONG ? "strong" : "leaning";
       /* Bomb-squad archetype + clap-kite hybrid (owner, blind label
@@ -2456,8 +2726,7 @@
       if (clap && topCarrier >= 3 && topCarrier * 2 >= nCarrierMembers) {
         out.archetype = "bomb_squad";
         out.label = "Bomb squad — off-timer artillery (clap detachment)";
-      } else if (mode.aoe >= IDENTITY_HYBRID_AOE &&
-                 evadePm >= IDENTITY_HYBRID_EVADE) {
+      } else if (mode.aoe >= IDENTITY_HYBRID_AOE && kiteHalf) {
         out.style = "clap_kite";
         out.strength = "leaning";
         out.label = sname("clap_kite", "Clap-Kite") +
@@ -2466,7 +2735,14 @@
         out.label = clap ? sname("clap", "Clap") + " — ranged bomb"
                          : sname("kite", "Kite") + " — ranged pressure";
       }
-    } else if (mode.aoe >= IDENTITY_BC_AOE && posture >= IDENTITY_BC_POSTURE) {
+    } else if (mode.aoe >= IDENTITY_HYBRID_AOE && kiteHalf) {
+      /* mid band with standoff tools: kite half outranks the posture
+         tiebreak (mirrors engine.py, blind round 1 roster 7) */
+      out.style = "clap_kite";
+      out.strength = "leaning";
+      out.label = sname("clap_kite", "Clap-Kite") +
+                  " -- bomb from range, throw them back";
+    } else if (mode.aoe >= IDENTITY_BC_AOE && bcBomb >= IDENTITY_BC_MELEE_BOMB) {
       out.style = "brawl_clap";
       out.strength = "leaning";
       out.label = sname("brawl_clap", "Brawl-Clap") + " — grind into the bomb";
@@ -2492,10 +2768,8 @@
           out.strength = "leaning";
           out.label = sname("brawl", "Brawl") + " — melee ball";
         } else {
-          clap = mode.aoe >= IDENTITY_CLAP_AOE;
-          var evadePm2 = n ? evade / n : 0.0;
-          if (mode.aoe >= IDENTITY_HYBRID_AOE &&
-              evadePm2 >= IDENTITY_HYBRID_EVADE) {
+          clap = mode.aoe >= IDENTITY_CLAP_AOE || !kiteAny;
+          if (mode.aoe >= IDENTITY_HYBRID_AOE && kiteHalf) {
             out.style = "clap_kite";
             out.strength = "leaning";
             out.label = sname("clap_kite", "Clap-Kite") +
@@ -2517,6 +2791,24 @@
             note: minority + " damage inside a " + majority + "-leaning " +
                   "core — commit to one side or cover the seam",
           });
+        }
+        /* the kits decide a split (owner 2026-09-04; mirrors engine.py) */
+        var kit = this._kitLean(party, gears);
+        if (kit === "leather") {
+          out.style = "brawl"; out.strength = "leaning"; out.kit_lean = "leather";
+          out.label = sname("brawl", "Brawl") + " — melee ball (by the kits: dps in leather)";
+        } else if (kit === "cloth") {
+          if (mode.aoe >= IDENTITY_HYBRID_AOE && kiteHalf) {
+            out.style = "clap_kite";
+            out.label = sname("clap_kite", "Clap-Kite") + " — bomb from range, throw them back (by the kits: dps in cloth)";
+          } else if (mode.aoe >= IDENTITY_CLAP_AOE || !kiteAny) {
+            out.style = "clap";
+            out.label = sname("clap", "Clap") + " — ranged bomb (by the kits: dps in cloth)";
+          } else {
+            out.style = "kite";
+            out.label = sname("kite", "Kite") + " — ranged pressure (by the kits: dps in cloth)";
+          }
+          out.strength = "leaning"; out.kit_lean = "cloth";
         }
       }
     }
@@ -2902,6 +3194,8 @@
     var extras = this._comboExtras(w);
     var dressed = this._dressedExtras(w);
     var variants = this.kitVariants(w);
+    var v0CappedW = this._variantCapped(state, w, variants[0][1]);
+    var fallbackW = this._variantFallback[w] || {};
     var hasPred = false;
     for (var k in ctx.predMin) { hasPred = true; break; }
     for (var i = 0; i < extras.length; i++) {
@@ -2915,6 +3209,8 @@
       }
       for (var vi = 0; vi < variants.length; vi++) {
         var vkey = variants[vi][0], vgears = variants[vi][1];
+        if (this._variantCapped(state, w, vgears)) continue;   /* carrier quota */
+        if (fallbackW[vkey] && !v0CappedW) continue;   /* cap fallback only */
         var cs = this._comboScoreDressed(state, w, i, extras[i],
                                          dressed[vkey][i]);
         if (best === null || cs.val > best.val)
@@ -3245,6 +3541,10 @@
                 }
               }
               if (!ok) continue;
+              /* carrier quota (mirrors engine.py two-opt) */
+              var ccaps = this.carrierCaps(), ccnt = this._carrierCounts(candParty, candGears), over = false;
+              for (var ce0 in ccnt) if (ccnt[ce0] > (ccaps[ce0] === undefined ? 1e9 : ccaps[ce0])) over = true;
+              if (over) continue;
               var d2 = this.compScore(candParty, candCombos, candGears) - best;
               if (d2 > 1e-9) {
                 party = candParty;

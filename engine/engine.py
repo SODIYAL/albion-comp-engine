@@ -150,15 +150,24 @@ class Engine:
         roles_cfg = comp.get("roles", {}) or {}
         by_hint = roles_cfg.get("by_hint", {}) or {}
         overrides = roles_cfg.get("overrides", {}) or {}
-        self.role_class = {}
-        for k, d in self.weapons.items():
-            self.role_class[k] = overrides.get(
-                k, by_hint.get(d.get("role_hint"), "dps"))
         # The ROLE BOOK (roles-design.md, owner-approved 2026-08-25):
         # fine roles with evidence-cited membership; weapons carry the
-        # derived role_menu. Feeds detect_role/role_advisory only —
-        # DESCRIPTIVE, nothing in the scoring path reads it.
+        # derived role_menu. Feeds detect_role/role_advisory (DESCRIPTIVE,
+        # nothing in the scoring path reads it) and, since 2026-09-03, the
+        # coarse role CLASS below.
         self.roles = {r.get("id"): r for r in (self.data.get("roles") or [])}
+        # Coarse role class (the constraint-band layer): composition
+        # override > the class of the weapon's primary SEAT (the first
+        # uniformed role on its menu — the same resolution detect_role
+        # uses) > the sheet's role_hint. One source for "what column is
+        # this" and "what band does it count in": Grailseeker is a d-tank
+        # by owner ruling, so it counts as frontline, not as a red dps
+        # tile sitting in the tank column (2026-09-03).
+        self.role_class = {}
+        for k, d in self.weapons.items():
+            seat_cls = self._primary_seat_class(k)
+            self.role_class[k] = overrides.get(
+                k, seat_cls or by_hint.get(d.get("role_hint"), "dps"))
         # Typed gear-carried effects (owner 2026-08-25): item id -> the
         # effect ids it grants; role_advisory reports "role + carrying".
         self._item_effects = {}
@@ -238,6 +247,7 @@ class Engine:
         self.template = self.data["templates"][content]
         self.content = content
         self.size = size
+        self._carrier_caps_cache = None   # carrier_caps() memo (size-keyed)
         self.reqs = self.template["requirements"]
         self.floors = self.template.get("hard_floors", {}) or {}
         self.base_size = self.template.get("base_size", size)
@@ -333,6 +343,42 @@ class Engine:
                        for c, r in self.reqs.items()}
         self._weights = {c: r["weight"] * self.style_mults.get(c, 1.0)
                          for c, r in self.reqs.items()}
+        # STYLE x SIZE ROWS (templates/style_bands.yaml, owner ruling
+        # 2026-09-04 after blind rounds 1+2): for a DECLARED style at
+        # min_size+, the harvest's per-style x band target/soft cap
+        # replaces the content row's for the capabilities the cell lists,
+        # scaled linearly from the cell's ref_size (person units both).
+        # A soft-cap-only row (no minimum from the harvest) keeps the
+        # content target and takes the harvest soft cap when it clears
+        # that target. The rows are MEASURED PER STYLE, so styles.yaml
+        # target_mults do not stack on them (clap's 1.71 burst_aoe was a
+        # proxy for exactly what the harvest now states). Hard floors,
+        # weights and `balanced` are untouched; below min_size the
+        # content row (with its target_mults) stands. The cell
+        # is exposed as `band_row` for display ("what winning claps at 20
+        # field"), never a second scorer.
+        self.band_row = None
+        self.band_key = None
+        bands = self.data.get("style_bands") or {}
+        if (style in (bands.get("bands") or {})
+                and self.size >= (bands.get("min_size") or 10)):
+            for bk, row in (bands["bands"][style] or {}).items():
+                lo, hi = row["sizes"]
+                if lo <= self.size <= hi:
+                    self.band_row, self.band_key = row, bk
+                    break
+        if self.band_row:
+            ref = float(self.band_row["ref_size"])
+            for c, v in self.band_row["requirements"].items():
+                if c not in self._targets:
+                    continue
+                if v.get("target") is not None:
+                    self._targets[c] = v["target"] * self.size / ref
+                    self._softs[c] = v["soft_cap"] * self.size / ref
+                else:
+                    soft = v["soft_cap"] * self.size / ref
+                    if soft > self._targets[c]:
+                        self._softs[c] = soft
         # OPTIONAL capabilities (owner ruling 2026-08-28). Some capabilities
         # are real and worth having but are not something every comp must
         # field: `anti_zone` exists on exactly ONE weapon in the catalogue
@@ -590,6 +636,7 @@ class Engine:
         self._gear_cache = {}
         self._ns_cache = {}
         self._variant_cache = {}
+        self._variant_fallback = {}
         self._dressed_cache = {}
         self._dressed_pre_cache = {}
         self._floor_gain_cache = {}
@@ -604,6 +651,7 @@ class Engine:
         caches so vectors built under the other setting cannot leak."""
         self.dress_candidates = bool(enabled)
         self._variant_cache = {}
+        self._variant_fallback = {}
         self._dressed_cache = {}
         self._dressed_pre_cache = {}
 
@@ -689,6 +737,17 @@ class Engine:
         """Constraint role class: healer / frontline / support / dps."""
         return self.role_class.get(weapon, "dps")
 
+    def _primary_seat_class(self, weapon):
+        """Class of the weapon's primary SEAT role: the first entry on its
+        role_menu that carries a chest uniform (function roles — pierce,
+        purge, anti_heal, shield_break — have none and ride along). None
+        when the book seats the weapon nowhere."""
+        for rid in self.weapons[weapon].get("role_menu") or []:
+            rec = self.roles.get(rid) or {}
+            if ((rec.get("uniform") or {}).get("chest")):
+                return rec.get("class")
+        return None
+
     def is_excluded(self, weapon):
         """True when the viability rules bar this weapon from GENERATED comps
         at the current content+size. Scoring is never blocked — the dashboard
@@ -743,8 +802,9 @@ class Engine:
             return {"role": None, "class": self.role_of(weapon),
                     "kit_match": None, "functions": [],
                     "secondary": menu2}
-        uni_of = lambda rid: ((self.roles.get(rid) or {}).get("uniform")
-                              or {}).get("chest") or []
+        uni_of = lambda rid: self._chest_uniform(rid, weapon) \
+            if ((self.roles.get(rid) or {}).get("uniform")
+                or {}).get("chest") else []
         seats = [rid for rid in menu if uni_of(rid)]
         functions = [rid for rid in menu if not uni_of(rid)]
         if not seats:
@@ -1241,7 +1301,17 @@ class Engine:
                 continue
             v0[slot] = opts[0]["gear"]
             t0 = top_cap(opts[0]["gear"])
+            # EVIDENCE BAND (2026-09-03, the Lifecurse case): a divergent
+            # alternative must be worn at least half as often as the
+            # slot's modal piece — a 7%-worn Cleric Robe used to outscore
+            # a 79%-worn Demon Armor because the exact marginal liked its
+            # cleanse. Seat-tier options (no weapon counts) qualify only
+            # when the weapon tier is empty, as before.
+            n0 = (opts[0].get("doctrine_n") or [0, 0])[0]
             for o in opts[1:]:
+                n1 = (o.get("doctrine_n") or [0, 0])[0]
+                if n0 and n1 < 0.5 * n0:
+                    continue
                 if top_cap(o["gear"]) != t0:
                     divergent.append((slot, o["gear"]))
                     break   # one divergent alternative per slot
@@ -1257,10 +1327,40 @@ class Engine:
             # keeps the search's kit dimension at ~2x cost; widen only
             # with a fresh measurement)
             out = [("v0", gl(v0))]
-            for n, (slot, piece) in enumerate(divergent[:1]):
+            # carrier quota (2026-09-03): when the observed modal chest
+            # grants a capped effect, the ONE alternative variant is the
+            # weapon's best non-carrier chest instead of the divergent
+            # swap — a capped-out roster still dresses the member in
+            # what its own builds wear next (Mace: Judicator -> Knight)
+            caps = self.carrier_caps()
+            chest = v0.get("armor")
+            carrier = bool(chest and any(
+                e in caps for e in (self._item_effects.get(chest) or [])))
+            alt_chest = None
+            if carrier:
+                # deeper look for the alternative only (the v0/divergent
+                # search keeps its historical depth of 3)
+                ko8 = self.kit_options(weapon, top_n=8)
+                for o in (ko8["options"].get("armor") or []):
+                    if not o.get("doctrine") or o["gear"] == chest:
+                        continue
+                    if not any(e in caps for e in
+                               (self._item_effects.get(o["gear"]) or [])):
+                        alt_chest = o["gear"]
+                        break
+            if alt_chest:
                 alt = dict(v0)
-                alt[slot] = piece
-                out.append((f"v{n + 1}", gl(alt)))
+                alt["armor"] = alt_chest
+                out.append(("v1", gl(alt)))
+                # the non-carrier chest exists to SERVE THE CAP: the
+                # evaluators offer it only when v0 is capped for the
+                # roster, never as a free score alternative
+                self._variant_fallback[weapon] = {"v1"}
+            else:
+                for n, (slot, piece) in enumerate(divergent[:1]):
+                    alt = dict(v0)
+                    alt[slot] = piece
+                    out.append((f"v{n + 1}", gl(alt)))
         self._variant_cache[weapon] = out
         return out
 
@@ -1280,6 +1380,32 @@ class Engine:
                               for i in range(len(extras))])
             self._dressed_cache[weapon] = out
         return out
+
+    DOCTRINE_GANG_MAX = 9   # party sizes that read the gang doctrine band
+
+    def _seat_kit(self, rec):
+        """The seat's doctrine for THIS party size (2026-09-04, kit
+        doctrine per size band): below DOCTRINE_GANG_MAX+1 members the
+        gang band (`kit_bands.gang`, mined from 4-9 man killer parties)
+        when the seat has one, else the group band the seat carries at
+        top level. Every doctrine reader goes through here."""
+        if self.size <= self.DOCTRINE_GANG_MAX:
+            gang = (rec.get("kit_bands") or {}).get("gang")
+            if gang:
+                return gang
+        return rec
+
+    def _chest_uniform(self, seat, weapon):
+        """Chest classes admitted for `weapon` in `seat`: the book uniform
+        plus the weapon's own observed-majority class when the killboard
+        harvest is clear (dataset `kit_weapon_uniform`, 2026-09-03), read
+        from the size band's doctrine."""
+        rec = self.roles.get(seat) or {}
+        ext = ((self._seat_kit(rec).get("kit_weapon_uniform") or {})
+               .get(weapon))
+        if ext:
+            return list(ext)
+        return list((rec.get("uniform") or {}).get("chest") or [])
 
     def primary_seat(self, weapon):
         """The weapon's default SEAT role: the first uniform-carrying role
@@ -1354,7 +1480,13 @@ class Engine:
             # fail closed: no seat, no suggestion (ruling 2026-09-01)
             return {"kit": {}, "options": {}, "seat": None}
         seat_rec = self.roles.get(seat) or {}
-        uniform = (seat_rec.get("uniform") or {}).get("chest") or []
+        # the seat's book uniform, widened by THIS weapon's observed
+        # majority class where the harvest is clear (dataset
+        # kit_weapon_uniform, 2026-09-03: Galatine Pair fields plate in
+        # 81% of winning builds under a cloth/leather bomb seat)
+        uniform = self._chest_uniform(seat, weapon)
+        seat_class = seat_rec.get("class")
+        seat_rec = self._seat_kit(seat_rec)   # the size band's doctrine
         doctrine = seat_rec.get("kit") or {}
         # Per-weapon doctrine tier (owner design 2026-08-26): THIS
         # weapon's own observed items (effect carriers excluded at the
@@ -1362,18 +1494,25 @@ class Engine:
         # aggregate; `doctrine` becomes "weapon" / "seat" / False and
         # weapon-tier options carry doctrine_n = [count, slot total].
         wdoc = (seat_rec.get("kit_weapon") or {}).get(weapon) or {}
-        seat_class = seat_rec.get("class")
         # observed-build archetype (2026-09-01): weapon's own first,
         # seat fallback per slot
-        arch = {}
+        arch, arch_seat = {}, set()
         if role is not None:
             wb = (seat_rec.get("kit_weapon_build") or {}).get(weapon) or {}
             sb = seat_rec.get("kit_build") or {}
             for slot in set(wb) | set(sb):
                 arch[slot] = wb.get(slot) or sb.get(slot)
+                if slot not in wb:
+                    arch_seat.add(slot)   # seat-level fallback archetype
         by_slot = {}
         for k, g in self.gear.items():
             by_slot.setdefault(g.get("slot") or "other", []).append(k)
+        # A two-handed weapon has no off-hand (dataset `two_handed`, from
+        # the dumps). The seat's doctrine pool is mined from its
+        # one-handers too, so the slot is dropped here — never proposed,
+        # never dressed by the forge (2026-09-03).
+        if self.weapons[weapon].get("two_handed"):
+            by_slot.pop("offhand", None)
         if uniform:
             gated = [k for k in by_slot.get("armor", [])
                      if (self.gear[k].get("gear_class") or "") in uniform]
@@ -1457,20 +1596,50 @@ class Engine:
             # tank Mercenary Hood over the observed team pieces. The
             # chest is pool-gated either way — the Hellion bug can't
             # return; off-tier items stay ranked behind the tiers.
+            # EVIDENCE-FIRST RANKING (2026-09-03 kit audit, owner: "the
+            # engine should be recommending things from there"): within
+            # the weapon tier, observed count leads. Comp-aware mode may
+            # reorder only the EVIDENCE BAND — items worn at least half as
+            # often as the slot's modal item — by the exact marginal;
+            # everything rarer follows by count. Value-first within the
+            # whole tier handed a mace Cleric Cowl (32 of 216) over
+            # Judicator Helmet (81 of 216) because the comp lacked a
+            # cleanse. The seat tier keeps the seat pool's own
+            # count order (the list ships count-sorted); value breaks
+            # ties only.
+            top_count = max(wslot.values()) if wslot else 0
+            seat_order = {g: i for i, g in
+                          enumerate(doctrine.get(slot) or [])}
+            in_band = lambda g: (wslot.get(g, 0) >= 0.5 * top_count)
+
             def tier_rank(r):
                 return (0 if r["doctrine"] == "weapon"
                         else 1 if r["doctrine"] == "seat" else 2)
-            if party is None:
-                ranked.sort(key=lambda r: (
-                    tier_rank(r), -wslot.get(r["gear"], 0), -r["value"],
-                    r["gear"]))
-            else:
-                ranked.sort(key=lambda r: (
-                    tier_rank(r), -r["value"], -wslot.get(r["gear"], 0),
-                    r["gear"]))
+
+            def sort_key(r):
+                g = r["gear"]
+                t = tier_rank(r)
+                if t == 0:
+                    if party is not None and in_band(g):
+                        return (0, 0, -r["value"], -wslot.get(g, 0), g)
+                    return (0, 0 if in_band(g) else 1,
+                            -wslot.get(g, 0), -r["value"], g)
+                if t == 1:
+                    return (1, seat_order.get(g, len(seat_order)), 0,
+                            -r["value"], g)
+                return (2, 0, -r["value"], 0, g)
+            ranked.sort(key=sort_key)
             a = arch.get(slot)
-            if a:
-                # the observed build leads the slot (overlay ruling)
+            # the observed build leads the slot (overlay ruling) — but
+            # never from outside the evidence band: a chain pick the
+            # weapon's builds wear less than half as often as the modal
+            # item stays where the count put it (2026-09-03). The SEAT
+            # archetype is a fallback for slots the weapon's own chain
+            # lacks: where the weapon has its own counts, its modal item
+            # wins (2026-09-04 harvest audit: Greataxe wore the brawler
+            # seat's Smuggler Cape over its own Lymhurst 19/41).
+            if a and (not wslot or (slot not in arch_seat
+                                    and in_band(a[0]))):
                 for i, rr in enumerate(ranked):
                     if rr["gear"] == a[0]:
                         rr["observed_build"] = [a[1], a[2]]
@@ -1479,6 +1648,93 @@ class Engine:
             options[slot] = ranked[:top_n]
         kit = {slot: opts[0] for slot, opts in options.items() if opts}
         return {"kit": kit, "options": options, "seat": seat}
+
+    def carrier_caps(self):
+        """Per-roster CAP on each effect-carrier chest at the current size:
+        killboard share of builds wearing it (dataset `carrier_quotas`,
+        nearest fight-size bucket) x size, half-up, min 1. {} when the
+        dataset carries no quotas (older datasets: unconstrained).
+        A GENERATION constraint (2026-09-03, increment 3b): party_state
+        counts the carriers a roster wears, and every dressed candidate
+        skips a kit variant whose chest would push an effect past its
+        cap — so five maces cannot all wear Judicator while real rosters
+        field about 1.5 per 20. Manual kits always score."""
+        if getattr(self, "_carrier_caps_cache", None) is not None:
+            return self._carrier_caps_cache
+        q = self.data.get("carrier_quotas") or {}
+        buckets = q.get("buckets") or {}
+        caps = {}
+        if buckets:
+            key = "60+" if (self.size >= 60 and "60+" in buckets) else "20-59"
+            share = (buckets.get(key) or {}).get("share") or {}
+            caps = {eff: max(1, self._half_up(s * self.size))
+                    for eff, s in sorted(share.items())}
+        self._carrier_caps_cache = caps
+        return caps
+
+    IDENTITY_CHEST_SHARE = 0.5   # a chest half the weapon's builds wear
+
+    def _identity_chest(self, weapon, gear_id):
+        """True when `gear_id` is the weapon's IDENTITY chest: worn by at
+        least half of its harvested builds. Identity carriers are exempt
+        from the comp-level carrier quota (owner 2026-09-03, the Lifecurse
+        case: Demon Armor on 79% of Lifecurse builds was rationed away
+        to a Cleric Robe because a Bedrock Mace — itself a 72% Demon
+        wearer — had taken the single per-20 Demon). The quota rations
+        DISCRETIONARY carriers — the tank that "has to take one" —
+        never a weapon's own standard kit."""
+        return self.observed_share(weapon, gear_id) >= \
+            self.IDENTITY_CHEST_SHARE
+
+    def _carrier_counts(self, party, gears):
+        """{effect: members wearing a DISCRETIONARY chest that grants it}
+        over a roster, for the capped effects only — identity chests
+        (_identity_chest) do not count against the quota."""
+        caps = self.carrier_caps()
+        out = {}
+        if not caps:
+            return out
+        for i, g in enumerate(gears or []):
+            w = party[i] if i < len(party) else None
+            for x in g or []:
+                effs = [e for e in (self._item_effects.get(x) or [])
+                        if e in caps]
+                if not effs or (w and self._identity_chest(w, x)):
+                    continue
+                for eff in effs:
+                    out[eff] = out.get(eff, 0) + 1
+        return out
+
+    def _variant_capped(self, state, weapon, vgears):
+        """True when dressing `weapon` in `vgears` would push a
+        DISCRETIONARY effect-carrier chest past its cap for this roster
+        (party_state `carriers`). The weapon's identity chest and naked
+        variants never are."""
+        carriers = state.get("carriers")
+        if not carriers or not vgears:
+            return False
+        caps = self.carrier_caps()
+        for x in vgears:
+            effs = [e for e in (self._item_effects.get(x) or [])
+                    if e in caps]
+            if not effs or self._identity_chest(weapon, x):
+                continue
+            for eff in effs:
+                if carriers.get(eff, 0) >= caps[eff]:
+                    return True
+        return False
+
+    def observed_share(self, weapon, gear_id):
+        """How often this weapon's fielded builds wear `gear_id` in its
+        slot (weapon-tier doctrine count / slot total), 0 when unseen."""
+        seat = self.primary_seat(weapon)
+        rec = self.roles.get(seat) or {}
+        slot = (self.gear.get(gear_id) or {}).get("slot")
+        wl = ((self._seat_kit(rec).get("kit_weapon") or {}).get(weapon)
+              or {}).get(slot) or []
+        total = sum(n for _g, n in wl)
+        n = next((n for g, n in wl if g == gear_id), 0)
+        return (n / total) if total else 0.0
 
     def member_extra(self, weapon, combo=None):
         """What ONE party member actually brings: the combo's effective caps
@@ -1880,7 +2136,10 @@ class Engine:
                         if v > cur.get(cap, 0.0):
                             cur[cap] = v
         return {"s": s, "s_syn": s_syn, "J": J, "pair_vals": pair_vals,
-                "counts": counts, "ns_max": ns_max}
+                "counts": counts, "ns_max": ns_max,
+                # carrier quota (2026-09-03): what this roster already
+                # wears of each capped effect-carrier chest
+                "carriers": self._carrier_counts(party, gears)}
 
     def _marg_fit_from(self, s, extra, s_floor=None, extra_floor=None):
         """Marginal fitness of adding effective caps `extra` to effective
@@ -2147,7 +2406,14 @@ class Engine:
         best = None
         extras = self._combo_extras(weapon)
         dressed = self._dressed_extras(weapon)
-        for vkey, vgears in self.kit_variants(weapon):
+        variants = self.kit_variants(weapon)
+        v0_capped = self._variant_capped(state, weapon, variants[0][1])
+        fallback = self._variant_fallback.get(weapon) or ()
+        for vkey, vgears in variants:
+            if self._variant_capped(state, weapon, vgears):
+                continue   # carrier quota: this chest is spoken for
+            if vkey in fallback and not v0_capped:
+                continue   # cap fallback only
             dext = dressed[vkey]
             for i in range(len(extras)):
                 val, d_fit, d_syn = self._combo_score_dressed(
@@ -2525,7 +2791,12 @@ class Engine:
     IDENTITY_STRONG = 0.80         # a share past this reads "strong", not "leaning"
     IDENTITY_CLAP_AOE = 0.50       # ranged core at/above this bomb share -> clap
     IDENTITY_BC_AOE = 0.45         # mid band: bomb share half of brawl_clap
-    IDENTITY_BC_POSTURE = 0.45     # mid band: commit posture half of brawl_clap
+    IDENTITY_BC_POSTURE = 0.45     # (retired 2026-09-04, round 2; kept for the record)
+    # mid band: the BALL ITSELF carries the bomb — melee-side unconditional
+    # group payloads (Battle Bracers, Bear Paws) hold at least this share
+    # of the comp's bomb points (blind round 2, roster 11: five Battle
+    # Bracers read split because three Hallowfalls' evade sank "posture")
+    IDENTITY_BC_MELEE_BOMB = 0.5
     IDENTITY_CARRIER_MIN = 4       # raw damage points that make a damage carrier
     IDENTITY_MIN_MEMBERS = 3       # below this the comp is still "forming"
     IDENTITY_RANGED_ATTACK = 9.0   # attackrange at/above -> ranged delivery
@@ -2533,9 +2804,51 @@ class Engine:
     # bomb share and real reset mobility. Calibrated on the owner-labeled
     # comps: DH P1 / 20v20 (aoe ~.53, evade ~2.6/member) read hybrid;
     # pure clap10 (evade 1.8) and pure kite10 (aoe .26) do not.
-    IDENTITY_HYBRID_AOE = 0.40     # bomb share at/above -> clap half present
-    IDENTITY_HYBRID_EVADE = 2.0    # mobility+disengage pts/member -> kite half
+    IDENTITY_HYBRID_AOE = 0.45     # bomb share at/above -> clap half present
+                                   # (0.40 -> 0.45 after blind round 2: the
+                                   # owner's kites with three standoff tools
+                                   # sat at 0.39-0.44, the clap-kites at 0.46+)
+    IDENTITY_HYBRID_EVADE = 2.0    # (retired 2026-09-04; kept for the record)
+    # KITE HALF (owner ruling 2026-09-04, blind round 1): standoff tools —
+    # bodies whose E throws enemies away from range without committing
+    # (style_fit `standoff_e`: Bedrock Mace, Hoarfrost, Demonic Staff, the
+    # meteor knockback bombs; since round 2 also the SLOW FIELDS delivered
+    # at range — Icicle, Arctic, Glacial, Chillhowl; not Occult, whose
+    # corridor is an engage tool in the owner's own clap10) —
+    # one per IDENTITY_KITE_TOOLS_PER members, half-up: the hybrid never
+    # below two (clap10 with its one Bedrock is the owner's pure clap), a
+    # pure kite never below one; fewer than that at scale -> clap (round
+    # 2, roster 15: one Icicle among seventeen commit bodies is a clap).
+    # The old evade-points read fired on pure claps carrying Occult/
+    # Witchwork mobility and missed the Bedrock-and-bows comps the owner
+    # calls kite.
+    IDENTITY_KITE_TOOLS_PER = 10
     IDENTITY_STYLES = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
+
+    def _kit_lean(self, party, gears):
+        """The chest class the DPS-class members wear by majority — 'leather'
+        / 'cloth' / None (plate, no majority, or fewer than half the dps with
+        a known chest). Reads the worn kits only; never a scoring input."""
+        if not gears:
+            return None
+        dps = [i for i, w in enumerate(party) if self.role_of(w) == "dps"]
+        if not dps:
+            return None
+        counts = {}
+        known = 0
+        for i in dps:
+            gl = gears[i] if i < len(gears) else None
+            chest = next((g for g in (gl or []) if g.startswith("ARMOR_")), None)
+            cls = self._chest_class(chest) if chest else None
+            if cls:
+                known += 1
+                counts[cls] = counts.get(cls, 0) + 1
+        if known < self.IDENTITY_KIT_KNOWN * len(dps):
+            return None
+        for cls in ("leather", "cloth"):
+            if counts.get(cls, 0) > self.IDENTITY_KIT_MAJORITY * known:
+                return cls
+        return None
 
     def _style_fit_of(self, weapon):
         """The weapon's derived style/size identity (build_dataset
@@ -2549,7 +2862,10 @@ class Engine:
         return ("trio" if self.size <= 3
                 else "gang" if self.size <= 9 else "group")
 
-    def comp_identity(self, party, combos=None):
+    IDENTITY_KIT_MAJORITY = 0.5    # dps chest class share that decides a split
+    IDENTITY_KIT_KNOWN = 0.5       # share of dps with a known chest needed
+
+    def comp_identity(self, party, combos=None, gears=None):
         """What this comp is BECOMING, in the caller's own playstyle
         vocabulary (styles.yaml): brawl / clap / kite / brawl_clap, plus
         'mixed' for split identities and 'forming' while too small to say.
@@ -2568,6 +2884,9 @@ class Engine:
         recommendation order, or the forge."""
         n = len(party)
         melee = ranged = aoe = sus = st = commit = evade = 0.0
+        melee_bomb = 0.0
+        pending = []
+        kite_tools = 0
         carriers = {"melee": [], "ranged": []}
         carrier_count = {}
         n_carrier_members = 0
@@ -2576,7 +2895,20 @@ class Engine:
         for i, w in enumerate(party):
             caps = self._raw_member_caps(w, combos[i] if combos else None)
             dmg = sum(caps.get(c, 0) for c in self.DAMAGE_CAPS_PROFILE)
-            aoe += caps.get("burst_aoe", 0)
+            sf0 = self._style_fit_of(w) or {}
+            # CLAP HALF (owner 2026-09-04): a ramp-dependent bomb is not a
+            # bomb — "galatine ... needs to charge its q stacks before it
+            # hits; realmbreaker ... would be part of clap" — so a
+            # conditional-payload carrier's burst AoE counts as sustained
+            if sf0.get("conditional_payload"):
+                sus += caps.get("burst_aoe", 0)
+            else:
+                aoe += caps.get("burst_aoe", 0)
+                if (sf0.get("delivery") == "melee"
+                        and sf0.get("damage_scale") == "group"):
+                    melee_bomb += caps.get("burst_aoe", 0)
+            if sf0.get("standoff_e"):
+                kite_tools += 1
             sus += caps.get("sustained_dps", 0)
             st += caps.get("burst_st", 0) + caps.get("execute", 0)
             commit += caps.get("engage", 0) + caps.get("clump_create", 0)
@@ -2593,11 +2925,36 @@ class Engine:
             side = "ranged" if delivery == "ranged" else "melee"
             if delivery == "flex":
                 flex.add(w)
+                # a FLEX BOMB — an unconditional group payload landed at
+                # range (Realmbreaker, Spiked Gauntlets, Rift Glaive) —
+                # joins whichever RIGID core the roster has (below); a flex
+                # carrier with a single-target or ramp-dependent payload
+                # (Bloodletter, Ursine Maulers, Carving Sword) has to
+                # commit its body and is melee
+                if (sf.get("damage_scale") == "group"
+                        and not sf.get("conditional_payload")):
+                    side = "flex"
+            pending.append((i, w, dmg, side))
+            carrier_count[w] = carrier_count.get(w, 0) + 1
+            n_carrier_members += 1
+        # FLEX BOMBS JOIN THE RIGID CORE (owner, blind rounds 1+2
+        # 2026-09-04): "realmbreaker would be part of clap" — yet the
+        # round-1 roster of five Realmbreakers behind two Oathkeepers is
+        # the owner's brawl. A flex bomb serves either fight, so it never
+        # forms a core of its own: its damage sits with the rigid majority
+        # (ranged when the rigid ranged damage is at least the rigid
+        # melee damage, its home melee side otherwise). Round 2 rosters 3,
+        # 5, 16, 17 and 19 had read brawl because three flex bombs
+        # outweighed a ranged core they were in fact part of.
+        rigid_melee = sum(d for _, _, d, sd in pending if sd == "melee")
+        rigid_ranged = sum(d for _, _, d, sd in pending if sd == "ranged")
+        flex_side = "ranged" if rigid_ranged >= rigid_melee else "melee"
+        for i, w, dmg, side in pending:
+            if side == "flex":
+                side = flex_side
             sides[i] = side
             if w not in carriers[side]:
                 carriers[side].append(w)
-            carrier_count[w] = carrier_count.get(w, 0) + 1
-            n_carrier_members += 1
             if side == "ranged":
                 ranged += dmg
             else:
@@ -2609,10 +2966,23 @@ class Engine:
                 "sustained": sus / dmg_tot if dmg_tot else 0.0,
                 "single_target": st / dmg_tot if dmg_tot else 0.0}
         posture = commit / (commit + evade) if commit + evade else 0.5
+        # the HYBRID needs standoff tools at scale (two at 20, half-up per
+        # ten members, never fewer than two: clap10 with its one Bedrock
+        # stays the owner's pure clap); a KITE needs at least one — a
+        # ranged core with no tank that throws enemies away has to commit
+        # to its bomb and is a clap whatever its bomb share (blind round 1
+        # rosters 6 and 10)
+        per_ten = self._half_up(n / self.IDENTITY_KITE_TOOLS_PER)
+        kite_min = max(2, per_ten)
+        kite_half = kite_tools >= kite_min
+        kite_any = kite_tools >= max(1, per_ten)
+        bc_bomb = (melee_bomb / aoe if aoe else 0.0)
         band = self._fit_band()
         out = {"style": None, "label": "", "strength": None,
                "melee_share": mel, "ranged_share": 1.0 - mel if tot else 0.5,
                "carriers": carriers, "mode": mode, "posture": posture,
+               "kite_tools": kite_tools, "kite_tools_min": kite_min,
+               "kite_tools_pure": max(1, per_ten), "melee_bomb_share": bc_bomb,
                "band": band, "members": [], "conflicts": []}
         style_names = {k: (v.get("name") or k)
                        for k, v in (self.data.get("styles") or {}).items()}
@@ -2620,12 +2990,26 @@ class Engine:
         if forming:
             out["label"] = "still forming"
         elif mel >= self.IDENTITY_MELEE_CORE:
-            out["style"] = "brawl"
-            out["strength"] = ("strong" if mel >= self.IDENTITY_STRONG
-                              else "leaning")
-            out["label"] = f"{style_names.get('brawl', 'Brawl')} — melee ball"
+            if (mode["aoe"] >= self.IDENTITY_BC_AOE
+                    and bc_bomb >= self.IDENTITY_BC_MELEE_BOMB):
+                # a melee core whose BALL carries the bomb (five Battle
+                # Bracers, round 2 roster 11) grinds into it: brawl_clap
+                out["style"] = "brawl_clap"
+                out["strength"] = "leaning"
+                out["label"] = (f"{style_names.get('brawl_clap', 'Brawl-Clap')}"
+                                " — grind into the bomb")
+            else:
+                out["style"] = "brawl"
+                out["strength"] = ("strong" if mel >= self.IDENTITY_STRONG
+                                  else "leaning")
+                out["label"] = f"{style_names.get('brawl', 'Brawl')} — melee ball"
         elif mel <= self.IDENTITY_RANGED_CORE:
-            clap = mode["aoe"] >= self.IDENTITY_CLAP_AOE
+            # a ranged core with NO standoff tools has to commit to its
+            # bomb — it is a clap whatever its bomb share (owner 2026-09-04,
+            # blind round 1 rosters 6 and 10: "clap" at 41% and 30% bomb
+            # share with commit tanks and no Bedrock/Hoarfrost); kite needs
+            # the tanks that throw enemies away
+            clap = mode["aoe"] >= self.IDENTITY_CLAP_AOE or not kite_any
             out["style"] = "clap" if clap else "kite"
             out["strength"] = ("strong"
                               if mel <= 1.0 - self.IDENTITY_STRONG
@@ -2642,8 +3026,7 @@ class Engine:
                 out["archetype"] = "bomb_squad"
                 out["label"] = ("Bomb squad — off-timer artillery "
                                 "(clap detachment)")
-            elif (mode["aoe"] >= self.IDENTITY_HYBRID_AOE
-                    and evade_pm >= self.IDENTITY_HYBRID_EVADE):
+            elif mode["aoe"] >= self.IDENTITY_HYBRID_AOE and kite_half:
                 out["style"] = "clap_kite"
                 out["strength"] = "leaning"
                 out["label"] = (f"{style_names.get('clap_kite', 'Clap-Kite')}"
@@ -2652,8 +3035,16 @@ class Engine:
                 out["label"] = (f"{style_names.get('clap', 'Clap')} — ranged bomb"
                                 if clap else
                                 f"{style_names.get('kite', 'Kite')} — ranged pressure")
+        elif mode["aoe"] >= self.IDENTITY_HYBRID_AOE and kite_half:
+            # mid band with standoff tools: the kite half outranks the
+            # commit-posture tiebreak (blind round 1, roster 7 — two
+            # Bedrock Maces at 47% melee read brawl_clap, owner clap_kite)
+            out["style"] = "clap_kite"
+            out["strength"] = "leaning"
+            out["label"] = (f"{style_names.get('clap_kite', 'Clap-Kite')}"
+                            " — bomb from range, throw them back")
         elif (mode["aoe"] >= self.IDENTITY_BC_AOE
-              and posture >= self.IDENTITY_BC_POSTURE):
+              and bc_bomb >= self.IDENTITY_BC_MELEE_BOMB):
             out["style"] = "brawl_clap"
             out["strength"] = "leaning"
             out["label"] = (f"{style_names.get('brawl_clap', 'Brawl-Clap')}"
@@ -2681,10 +3072,9 @@ class Engine:
                     out["label"] = (f"{style_names.get('brawl', 'Brawl')}"
                                     " — melee ball")
                 else:
-                    clap = mode["aoe"] >= self.IDENTITY_CLAP_AOE
-                    evade_pm2 = evade / n if n else 0.0
-                    if (mode["aoe"] >= self.IDENTITY_HYBRID_AOE
-                            and evade_pm2 >= self.IDENTITY_HYBRID_EVADE):
+                    clap = (mode["aoe"] >= self.IDENTITY_CLAP_AOE
+                            or not kite_any)
+                    if mode["aoe"] >= self.IDENTITY_HYBRID_AOE and kite_half:
                         out["style"] = "clap_kite"
                         out["strength"] = "leaning"
                         out["label"] = (f"{style_names.get('clap_kite', 'Clap-Kite')}"
@@ -2707,6 +3097,38 @@ class Engine:
                                  "leaning core — commit to one side or "
                                  "cover the seam"),
                     })
+                # THE KITS DECIDE A SPLIT (owner 2026-09-04: "brawl is
+                # basically dps using leather jackets while clap and kite
+                # are dps usually if not always on cloth armor"; harvest
+                # 2026-09-04, dps-class members in 1,690 labelled 10+
+                # rosters: brawl 60% leather, clap 52% / clap_kite 73% /
+                # kite 60% cloth, and the 439 "split" rosters read 55%
+                # leather). When the worn kits are known for at least half
+                # the dps, a leather majority leans the split to brawl and
+                # a cloth majority to the ranged read (clap, clap-kite or
+                # kite by bomb share and standoff tools); plate or no
+                # majority leaves it split. Descriptive only.
+                kit = self._kit_lean(party, gears)
+                if kit == "leather":
+                    out["style"], out["strength"] = "brawl", "leaning"
+                    out["label"] = (f"{style_names.get('brawl', 'Brawl')}"
+                                    " — melee ball (by the kits: dps in leather)")
+                    out["kit_lean"] = "leather"
+                elif kit == "cloth":
+                    if mode["aoe"] >= self.IDENTITY_HYBRID_AOE and kite_half:
+                        out["style"] = "clap_kite"
+                        out["label"] = (f"{style_names.get('clap_kite', 'Clap-Kite')}"
+                                        " — bomb from range, throw them back (by the kits: dps in cloth)")
+                    elif mode["aoe"] >= self.IDENTITY_CLAP_AOE or not kite_any:
+                        out["style"] = "clap"
+                        out["label"] = (f"{style_names.get('clap', 'Clap')}"
+                                        " — ranged bomb (by the kits: dps in cloth)")
+                    else:
+                        out["style"] = "kite"
+                        out["label"] = (f"{style_names.get('kite', 'Kite')}"
+                                        " — ranged pressure (by the kits: dps in cloth)")
+                    out["strength"] = "leaning"
+                    out["kit_lean"] = "cloth"
         # ---- per-member fit verdicts (the declared style is the caller's
         # INTENT — owner ruling: picking brawl means asking for brawl
         # builds; balanced falls back to the detected lean) ----
@@ -3095,6 +3517,8 @@ class Engine:
         extras = self._combo_extras(w)
         dressed = self._dressed_extras(w)
         variants = self.kit_variants(w)
+        v0_capped = self._variant_capped(state, w, variants[0][1])
+        fallback = self._variant_fallback.get(w) or ()
         for i in range(len(extras)):
             # predicate feasibility is per COMBO only — kit variants never
             # change predicate contributions (predicates are weapon/combo
@@ -3107,6 +3531,10 @@ class Engine:
                 if need > slots_left_after:
                     continue
             for vkey, vgears in variants:
+                if self._variant_capped(state, w, vgears):
+                    continue   # carrier quota: this chest is spoken for
+                if vkey in fallback and not v0_capped:
+                    continue   # cap fallback only
                 val, d_fit, d_syn = self._combo_score_dressed(
                     state, w, i, extras[i], dressed[vkey][i], vkey)
                 if best is None or val > best[0]:
@@ -3456,6 +3884,13 @@ class Engine:
                             if ok:
                                 for pn, mn in ctx["pred_min"].items():
                                     if preds.get(pn, 0) < mn:
+                                        ok = False
+                                        break
+                            if ok:
+                                caps = self.carrier_caps()
+                                for eff, c in self._carrier_counts(
+                                        cand_party, cand_gears).items():
+                                    if c > caps.get(eff, 10 ** 9):
                                         ok = False
                                         break
                             if not ok:

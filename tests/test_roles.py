@@ -568,19 +568,33 @@ def t_weapon_doctrine():
     # seat aggregate, and it still resolves to Knight by a clear majority.
     # A change here after an evidence import is expected; a change in
     # `gear` or `doctrine` is not.
+    # [63, 144] since the 2026-09-03 kit audit: effect-carrier chests
+    # COUNT as weapon evidence (Judicator/Guardian were the modal 1H-Mace
+    # chests and the exclusion left Graveguard), so slot totals grew;
+    # [35, 82] once the same day's PARTY-SIZE FLOOR kept only builds from
+    # killer parties of 10+ (the Grailseeker gank-kit case); [45, 103]
+    # then [88, 186] across the 2026-09-04 harvests. With the harvest now
+    # an overnight task the exact pair is no longer pinned: the MECHANISM
+    # is — Knight from the weapon tier, a clear plurality (>= 40% of the
+    # slot's builds) over a real sample (>= 35).
     ph = (top["gear"] == "ARMOR_PLATE_SET2"
-          and top["doctrine"] == "weapon" and top["doctrine_n"] == [63, 95])
+          and top["doctrine"] == "weapon"
+          and top["doctrine_n"][0] >= 35
+          and top["doctrine_n"][0] >= 0.4 * top["doctrine_n"][1])
     hoj = e.kit_options("2H_HAMMER_AVALON", top_n=10)
     demon = next((o for o in hoj["options"]["armor"]
                   if o["gear"] == "ARMOR_PLATE_HELL"), None)
-    dem = (demon is not None and demon["doctrine"] == "seat"
+    # Demon Armor on HoJ now reads as WEAPON-tier evidence (what HoJ
+    # players wear) still carrying reflect_shell; the comp-level limit
+    # moved to the forge's carrier quota (R25), not to the evidence
+    dem = (demon is not None and demon["doctrine"] in ("weapon", "seat")
            and "reflect_shell" in (demon["carries"] or []))
     kw = ((e.roles.get("engage_tank") or {}).get("kit_weapon")
           or {}).get("2H_HAMMER_AVALON") or {}
     effect_items = {"ARMOR_PLATE_HELL", "ARMOR_PLATE_KEEPER",
                     "ARMOR_PLATE_SET3", "ARMOR_LEATHER_ROYAL",
                     "ARMOR_LEATHER_HELL"}
-    clean = not (effect_items
+    clean = bool(effect_items
                  & {p[0] for slot in kw for p in kw[slot]})
     rep = _json.load(open(os.path.join(ROOT, "pipeline", "out",
                                        "roles_report.json"),
@@ -591,8 +605,8 @@ def t_weapon_doctrine():
     quota = (cb is not None and cb["copies"].get("reflect_shell") == 4
              and (q["summary"]["reflect_shell"]["with_any"] or 0) >= 6)
     check("R18 per-weapon doctrine: Polehammer wears its own observed "
-          "Knight (5/5); Demon Armor on HoJ reads as seat-pool reflect "
-          "carrier, never weapon identity; quotas mined per roster",
+          "Knight; Demon Armor on HoJ is weapon evidence carrying "
+          "reflect_shell (2026-09-03 re-pin); quotas mined per roster",
           ph and dem and clean and quota,
           f"pole_top={top['gear']}/{top['doctrine']}/{top['doctrine_n']} "
           f"demon={demon and (demon['doctrine'], demon['carries'])} "
@@ -662,8 +676,20 @@ def t_observed_build_overlay():
          and top.get("observed_build") == wb["armor"][1:3])   # [n, of]
     # (c) every kit slot is either archetype-annotated or plain-ranked —
     # and at least one slot of a thin-basket weapon uses the fallback
-    ko_lx = Engine(content="faction_war", size=15,
-                   style="brawl").kit_options("MAIN_1HCROSSBOW")
+    # (c) re-pinned 2026-09-03: with carriers admitted the 1H-crossbow
+    # chain now covers every slot, so the fallback is shown on a weapon
+    # whose archetype chain STOPPED early (the chain-guard: pool < 5 or
+    # pick share < 25%) — such weapons exist, and their kit still fills
+    # the uncovered slots by plain ranking
+    thin = None
+    for rid, rr in e.roles.items():
+        for wk, wb in (rr.get("kit_weapon_build") or {}).items():
+            if 0 < len(wb) < 5 and e.primary_seat(wk) == rid:
+                thin = wk
+                break
+        if thin:
+            break
+    ko_lx = e.kit_options(thin) if thin else {"kit": {}}
     slots = ko_lx["kit"] or {}
     c = bool(slots) and any(not v.get("observed_build")
                             for v in slots.values()) \
@@ -676,7 +702,372 @@ def t_observed_build_overlay():
           "annotated); thin slots fall back; diagnostic mode unoverlaid",
           bool(a) and b and c and d,
           f"pole_armor={wb.get('armor')} top={top.get('gear')}/"
-          f"{top.get('observed_build')} lx_slots={len(slots)}")
+          f"{top.get('observed_build')} thin={thin} slots={len(slots)}")
+
+
+def t_two_handed_no_offhand():
+    # R21 (owner 2026-09-03, "it adds an offhand to two handed weapons"):
+    # the dataset carries the dumps' hands fact and no suggestion or
+    # dressing path proposes an off-hand for a two-hander — the seat
+    # doctrine pool is mined from one-handers too, so without the gate
+    # every 2H bow wore the ranged seat's torch.
+    e = Engine(content="territory_defense", size=20, style="clap")
+    two = [w for w, d in e.weapons.items() if d.get("two_handed")]
+    one = [w for w, d in e.weapons.items() if not d.get("two_handed")]
+    fact_ok = (len(two) > 60 and "2H_BOW_HELL" in two
+               and "MAIN_HOLYSTAFF_AVALON" in one
+               and all(w.startswith("2H_") for w in two))
+    bad = []
+    for w in two:
+        ko = e.kit_options(w)
+        if ko["options"].get("offhand") or ko["kit"].get("offhand"):
+            bad.append(w)
+        for _vk, vg in e.kit_variants(w):
+            if any(g.startswith("OFF_") for g in (vg or [])):
+                bad.append(w + ":variant")
+    one_ok = bool(e.kit_options("MAIN_HOLYSTAFF_AVALON")["options"]
+                  .get("offhand"))
+    r = e.forge(20)
+    forge_bad = [r["party"][i] for i, g in enumerate(r["gears"] or [])
+                 if g and e.weapons[r["party"][i]].get("two_handed")
+                 and any(x.startswith("OFF_") for x in g)]
+    check("R21 two-handers carry the hands fact and never get an off-hand "
+          "(kit_options, kit_variants, forge dressing); one-handers still do",
+          fact_ok and not bad and one_ok and not forge_bad,
+          f"two={len(two)} bad={bad[:4]} forge_bad={forge_bad[:4]}")
+
+
+def t_role_class_from_seat():
+    # R22 (2026-09-03): the coarse role class the bands count follows the
+    # weapon's primary SEAT — the same resolution the comp board's columns
+    # use — so a tile can no longer wear one class in another's column.
+    # Function-first menus (Dawnsong: anti_heal then ranged_aoe) keep the
+    # seat's class, not the function's; composition overrides still win.
+    e = Engine()
+    overrides = ((e.comp_cfg.get("roles") or {}).get("overrides") or {})
+    bad = [w for w in e.weapons
+           if w not in overrides and e._primary_seat_class(w)
+           and e.role_of(w) != e._primary_seat_class(w)]
+    pins = (e.role_of("2H_QUARTERSTAFF_AVALON") == "frontline"
+            and e.role_of("2H_SHAPESHIFTER_CRYSTAL") == "frontline"
+            and e.role_of("2H_ARCANESTAFF_HELL") == "support"
+            and e.role_of("2H_FIRE_RINGPAIR_AVALON") == "dps"
+            and e.role_of("2H_HOLYSTAFF_CRYSTAL") == "support"
+            and e.role_of("2H_IRONCLADEDSTAFF") == "frontline")
+    check("R22 role class = primary seat class (Grailseeker/Stillgaze "
+          "frontline, Occult support, Dawnsong dps, Exalted override holds, "
+          "unseated Iron-clad keeps its tank hint)",
+          not bad and pins, f"bad={bad[:6]}")
+
+
+def t_occult_support_seat():
+    # R23 (owner 2026-09-03, "support weapon like occult into dps column"):
+    # Occult Staff seats zone_support (E Time Corridor = ally speed, enemy
+    # slow), is off dive_cleanup, and its observed leather kit reads
+    # on-uniform there.
+    e = Engine()
+    d = e.detect_role("2H_ARCANESTAFF_HELL", "ARMOR_LEATHER_ROYAL")
+    menu = e.weapons["2H_ARCANESTAFF_HELL"].get("role_menu") or []
+    check("R23 Occult Staff is a support seat (zone_support, leather "
+          "on-uniform) and off dive_cleanup",
+          d["role"] == "zone_support" and d["class"] == "support"
+          and d["kit_match"] is True and "dive_cleanup" not in menu,
+          f"detect={d} menu={menu}")
+
+
+def t_kit_audit_agreement():
+    # R24 (owner 2026-09-03, "build fixes until engine agrees or mostly
+    # agrees with the real data of people who win fights"): on ten
+    # seeded-random weapons with >= 30 harvested builds, the kit the forge
+    # dresses (kit_variants v0) matches the killboard's modal item in at
+    # least 85% of slots, and NO slot picks an item worn less than half
+    # as often as the modal one. Off-hands are skipped for two-handers;
+    # an unset observed slot is not a choice; a modal item the catalog
+    # does not curate cannot be picked and is skipped.
+    import json as _json, random as _random
+    from collections import Counter as _Counter
+    e = Engine(content="territory_defense", size=20)
+    doc = _json.load(open(os.path.join(ROOT, "pipeline", "out",
+                                       "party_rosters.json"),
+                          encoding="utf-8"))
+    by_w = {}
+    for r in doc.get("builds") or []:
+        if r.get("weapon") in e.weapons and r.get("gear") \
+                and (r.get("party_size") or 0) >= 10:   # ZvZ killer parties
+            by_w.setdefault(r["weapon"], []).append(r["gear"])
+    eligible = sorted(w for w, rs in by_w.items() if len(rs) >= 30)
+    pick = _random.Random(20260903).sample(eligible, 10)
+    slot_kb = [("head", "Head"), ("armor", "Armor"), ("shoes", "Shoes"),
+               ("cape", "Cape"), ("offhand", "OffHand"),
+               ("potion", "Potion"), ("food", "Food")]
+    total = agree = bad = 0
+    detail = []
+    for w in pick:
+        v0 = {}
+        for g in (e.kit_variants(w)[0][1] or []):
+            v0[e.gear[g]["slot"]] = g
+        for slot, kb in slot_kb:
+            if slot == "offhand" and e.weapons[w].get("two_handed"):
+                continue
+            c = _Counter()
+            for gd in by_w[w]:
+                v = gd.get(kb)
+                c[(e.gear_key(v) or v) if v else "-"] += 1
+            n = sum(c.values())
+            items = [(k, x) for k, x in c.most_common() if k != "-"]
+            if not items or items[0][0] not in e.gear:
+                continue
+            modal, mn = items[0]
+            eng = v0.get(slot)
+            share = (c.get(eng, 0) / n) if eng else 0.0
+            total += 1
+            if eng == modal:
+                agree += 1
+            elif share < 0.5 * (mn / n):
+                bad += 1
+                detail.append(f"{w}:{slot}:{eng}<{modal}")
+    check("R24 kit audit: forge kits match the killboard modal item in "
+          ">= 85% of slots on ten random weapons and never pick an item "
+          "worn < half as often as the modal",
+          total >= 50 and agree >= 0.85 * total and bad == 0,
+          f"agree={agree}/{total} bad={bad} {detail[:4]}")
+
+
+def t_carrier_quota():
+    # R25 (2026-09-03, increment 3b): effect-carrier chests are capped per
+    # roster at the killboard share x size — a generation constraint in
+    # party_state/_eval_pick (kit variants past the cap are skipped, the
+    # carrier weapon gets a non-carrier alternative), never a scoring
+    # rule: a manual party of five Demon Armors still scores.
+    e = Engine(content="territory_defense", size=20, style="clap")
+    caps = e.carrier_caps()
+    q = e.data.get("carrier_quotas") or {}
+    have_q = bool((q.get("buckets") or {}).get("20-59"))
+    r = e.forge(20)
+    worn = e._carrier_counts(r["party"], r["gears"])
+    within = all(worn.get(k, 0) <= v for k, v in caps.items())
+    # identity chests are exempt (owner 2026-09-03, the Lifecurse case):
+    # a kite-20 fielding Bedrock Mace AND Lifecurse — both >= 50% Demon
+    # wearers — dresses BOTH in Demon Armor; the cap rations only the
+    # discretionary wearer
+    ek = Engine(content="territory_defense", size=20, style="kite")
+    rk = ek.forge(20)
+    demon_ids = [rk["party"][i] for i, g in enumerate(rk["gears"])
+                 if g and "ARMOR_PLATE_HELL" in g]
+    life = ("MAIN_CURSEDSTAFF_UNDEAD" not in rk["party"]
+            or "MAIN_CURSEDSTAFF_UNDEAD" in demon_ids)
+    # identity wearers are unlimited; DISCRETIONARY Demon wearers (a
+    # weapon whose builds wear it under half the time) stay within cap
+    disc = [w for w in demon_ids
+            if not ek._identity_chest(w, "ARMOR_PLATE_HELL")]
+    identity_ok = life and len(disc) <= ek.carrier_caps().get(
+        "reflect_shell", 10 ** 9)
+    st = e.party_state(r["party"], r["combos"], r["gears"])
+    # a carrier v0 weapon offers a non-carrier alternative variant
+    kv = e.kit_variants("2H_DUALMACE_AVALON")   # Oathkeepers: Demon 84%
+    chest0 = next(g for g in kv[0][1] if g.startswith("ARMOR_"))
+    alt = [g for _k, gl in kv[1:] for g in (gl or []) if g.startswith("ARMOR_")]
+    v_ok = ("reflect_shell" in (e._item_effects.get(chest0) or [])
+            and alt and not any(e._item_effects.get(g) for g in alt))
+    manual = ["2H_DUALMACE_AVALON"] * 5
+    demon = [["ARMOR_PLATE_HELL"]] * 5
+    scores = e.fitness(manual, None, demon) > e.fitness(manual, None, None)
+    check("R25 carrier quota: caps ship (reflect_shell 1 per 20), a forged "
+          "20 wears no DISCRETIONARY carrier past its cap, identity chests "
+          "are exempt (Lifecurse keeps Demon beside Bedrock Mace), a "
+          "carrier weapon offers a non-carrier variant, manual builds score",
+          have_q and caps.get("reflect_shell") == 1 and within
+          and st.get("carriers") is not None and v_ok and scores
+          and identity_ok,
+          f"caps={caps} worn={worn} demon={demon_ids} kv={kv}")
+
+
+def t_observed_chest_class():
+    # R26 (2026-09-03): a weapon's observed chest class (>= 25% of >= 50
+    # harvested builds) is admitted to its own weapon tier and kit_match
+    # even outside the seat's book uniform — Galatine Pair wears plate in
+    # 81% of 145 winning builds under a cloth/leather bomb seat — while a
+    # thin sample (Grailseeker, 32 builds) never overturns a ruling.
+    e = Engine(content="territory_defense", size=20)
+    ko = e.kit_options("2H_DUALSCIMITAR_UNDEAD")
+    top = (ko["kit"].get("armor") or {}).get("gear")
+    d = e.detect_role("2H_DUALSCIMITAR_UNDEAD", "ARMOR_PLATE_SET1")
+    ext = ((e.roles.get("bomb_aoe") or {}).get("kit_weapon_uniform")
+           or {}).get("2H_DUALSCIMITAR_UNDEAD") or []
+    grail = ((e.roles.get("stopper_tank") or {}).get("kit_weapon_uniform")
+             or {}).get("2H_QUARTERSTAFF_AVALON")
+    check("R26 observed chest class: Galatine Pair is dressed in Soldier "
+          "Armor (plate admitted on 145 builds) and reads on-uniform in "
+          "plate; Grailseeker's 32-build sample extends nothing",
+          top == "ARMOR_PLATE_SET1" and d["kit_match"] is True
+          and "plate" in ext and grail is None,
+          f"top={top} match={d['kit_match']} ext={ext} grail={grail}")
+
+
+def t_one_player_one_vote():
+    # R27 (2026-09-04, distinct-player floors): a build is one player in
+    # one battle and a third of a weapon's builds are repeat sightings of
+    # the same people (median 0.67 voters per build), so doctrine counts
+    # ONE PLAYER, ONE VOTE per weapon — every harvested build carries a
+    # hashed player key, every killboard count is a player-weighted vote,
+    # every floor counts different people, and the uniform extension
+    # needs 35 VOTERS (the old 50-build floor in the new unit).
+    # The Heavy Crossbow case: Fey Shoes were worn 7 times by ONE player
+    # against Morgana Shoes 4 times by four — sightings fronted Fey, votes
+    # front Morgana and Fey cannot even enter the tier on one voter.
+    import json as _json
+    from collections import Counter as _Counter, defaultdict as _dd
+    doc = _json.load(open(os.path.join(ROOT, "pipeline", "out",
+                                       "party_rosters.json"),
+                          encoding="utf-8"))
+    builds = doc.get("builds") or []
+    keyed = all(b.get("player") for b in builds)
+    e = Engine(content="territory_defense", size=20)
+    # find, from the raw harvest, a (weapon, slot) where the top SIGHTING
+    # item comes from a single voter and a multi-voter item exists
+    by_ws = _dd(lambda: (_Counter(), _dd(set)))
+    per = _Counter()
+    for b in builds:
+        if (b.get("party_size") or 0) >= 10:
+            per[(b["weapon"], b["player"])] += 1
+    for b in builds:
+        if (b.get("party_size") or 0) < 10:
+            continue
+        for slot, item in (b.get("gear") or {}).items():
+            if slot == "MainHand" or not item:
+                continue
+            c, p = by_ws[(b["weapon"], slot)]
+            c[item] += 1
+            p[item].add(b["player"])
+    cases = []
+    for (w, slot), (c, p) in by_ws.items():
+        top, n = c.most_common(1)[0]
+        multi = [i for i in c if len(p[i]) >= 2]
+        if n >= 3 and len(p[top]) == 1 and multi:
+            cases.append((w, slot, top, n))
+    # every such single-voter top item must be absent from (or not first
+    # in) the shipped weapon tier — unless a CURATED reference build also
+    # cites it (curated items merge regardless of the killboard floor, by
+    # design; Infernal Scythe's Morgana Shoes)
+    rep = _json.load(open(os.path.join(ROOT, "pipeline", "out",
+                                       "roles_report.json"),
+                          encoding="utf-8"))
+    kd = rep.get("kit_doctrine") or rep
+    def _curated(rid, w, slot, gid):
+        rows = (((kd.get(rid) or {}).get("by_weapon") or {}).get(w) or {}
+                ).get(slot) or []
+        row = next((r for r in rows if r.get("id") == gid), None)
+        return bool(row) and any(not str(src).startswith("killboard:")
+                                 for src in (row.get("sources") or []))
+    wrong = []
+    slot_map = {"Head": "head", "Armor": "armor", "Shoes": "shoes",
+                "Cape": "cape", "OffHand": "offhand", "Potion": "potion",
+                "Food": "food"}
+    checked = 0
+    for w, slot, top, n in cases:
+        gid = e.gear_key(top)
+        if not gid or slot not in slot_map:
+            continue
+        for rid, rec in e.roles.items():
+            tier = ((rec.get("kit_weapon") or {}).get(w) or {}).get(slot_map[slot])
+            if tier is None:
+                continue
+            checked += 1
+            if tier and tier[0][0] == gid and not _curated(rid, w, slot_map[slot], gid):
+                wrong.append((w, slot, top, n))
+    # rows carry players beside the votes; extension is measured in voters
+    rows_with_players = sum(
+        1 for d in kd.values() if isinstance(d, dict)
+        for slot_rows in (d.get("slots") or {}).values()
+        for row in slot_rows if row.get("kb") and row.get("players"))
+    ext_n = {w: ext.get("n") for d in kd.values() if isinstance(d, dict)
+             for w, ext in (d.get("uniform_extended") or {}).items()}
+    galatine = ext_n.get("2H_DUALSCIMITAR_UNDEAD")
+    grail = ext_n.get("2H_DUALSICKLE_UNDEAD")
+    check("R27 one player, one vote: every harvested build carries a player "
+          "key; a single voter's repeat sightings never front a tier (the "
+          "Heavy Crossbow Fey Shoes case); rows carry players beside votes; "
+          "the uniform extension is measured in voters (Galatine in, "
+          "Grailseeker out)",
+          keyed and checked >= 5 and not wrong and rows_with_players >= 100
+          and galatine and galatine >= 35 and grail is None,
+          f"keyed={keyed} single-voter tops checked={checked} wrong={wrong[:3]} "
+          f"rows_with_players={rows_with_players} galatine_voters={galatine} "
+          f"grail={grail}")
+
+
+def t_doctrine_bands():
+    # R28 (2026-09-04, kit doctrine per size band): every seat with a kit
+    # ships a GANG band (`kit_bands.gang`, mined from 4-9 man killer
+    # parties and the small-scale curated contents, one player one vote,
+    # no grading overrides); the engine reads it at <= 9 members and the
+    # group band at 10+; the gang kit is the gang MODAL — on every weapon
+    # with >= 30 gang builds the size-7 kit matches the small-party
+    # modal item (or one worn >= half as often) in >= 85% of slots and
+    # never picks an item worn < half as often. Kits at 7 and 20 differ
+    # somewhere real (Hallowfall's head), so the band is not a copy.
+    import json as _json
+    from collections import Counter as _Counter, defaultdict as _dd
+    e7 = Engine(content="blackzone_roam", size=7)
+    e20 = Engine(content="blackzone_roam", size=20)
+    seats_kit = [r for r in e7.roles.values() if r.get("kit")]
+    banded = [r for r in seats_kit if (r.get("kit_bands") or {}).get("gang", {}).get("kit")]
+    ships = bool(seats_kit) and len(banded) == len(seats_kit)
+    reads = (e7._seat_kit(banded[0]) is banded[0]["kit_bands"]["gang"]
+             and e20._seat_kit(banded[0]) is banded[0]) if banded else False
+    doc = _json.load(open(os.path.join(ROOT, "pipeline", "out",
+                                       "party_rosters.json"),
+                          encoding="utf-8"))
+    by_w = _dd(list)
+    for b in doc.get("builds") or []:
+        if 4 <= (b.get("party_size") or 0) <= 9 and b.get("weapon") in e7.weapons:
+            by_w[b["weapon"]].append(b)
+    slots = {"Head": "head", "Armor": "armor", "Shoes": "shoes",
+             "Cape": "cape", "OffHand": "offhand", "Potion": "potion",
+             "Food": "food"}
+    agree = tot = bad = 0
+    misses = []
+    for w in sorted(w for w, bl in by_w.items() if len(bl) >= 30):
+        ko = e7.kit_options(w)
+        if not ko.get("seat"):
+            continue
+        kit = {sl: (v.get("gear") if isinstance(v, dict) else v)
+               for sl, v in (ko.get("kit") or {}).items()}
+        per = _Counter(b["player"] for b in by_w[w])
+        for raw, sl in slots.items():
+            if sl == "offhand" and e7.weapons[w].get("two_handed"):
+                continue
+            votes = _Counter()
+            for b in by_w[w]:
+                it = (b.get("gear") or {}).get(raw)
+                if it:
+                    votes[e7.gear_key(it) or it] += 1.0 / per[b["player"]]
+            if not votes:
+                continue
+            modal, mv = votes.most_common(1)[0]
+            if modal not in e7.gear or not kit.get(sl):
+                continue
+            tot += 1
+            if kit[sl] == modal or votes.get(kit[sl], 0) >= 0.5 * mv:
+                agree += 1
+            else:
+                bad += 1
+                misses.append(f"{w}:{sl}:{kit[sl]}<{modal}")
+    differs = False
+    for w in ("MAIN_HOLYSTAFF_AVALON", "2H_AXE_AVALON", "2H_LONGBOW"):
+        k7 = {sl: (v.get("gear") if isinstance(v, dict) else v)
+              for sl, v in (e7.kit_options(w).get("kit") or {}).items()}
+        k20 = {sl: (v.get("gear") if isinstance(v, dict) else v)
+               for sl, v in (e20.kit_options(w).get("kit") or {}).items()}
+        differs = differs or k7 != k20
+    check("R28 kit doctrine per size band: every kitted seat ships a gang "
+          "band read at <= 9 members (group at 10+); the size-7 kit is the "
+          "gang modal in >= 85% of slots with no bad pick on every weapon "
+          "with >= 30 gang builds; gang and group kits differ somewhere real",
+          ships and reads and tot >= 100 and agree >= 0.85 * tot and bad == 0
+          and differs,
+          f"seats={len(banded)}/{len(seats_kit)} reads={reads} audit={agree}/{tot} "
+          f"bad={bad} {misses[:3]} differs={differs}")
 
 
 if __name__ == "__main__":
@@ -700,6 +1091,14 @@ if __name__ == "__main__":
     t_weapon_doctrine()
     t_fail_closed_generation()
     t_observed_build_overlay()
+    t_two_handed_no_offhand()
+    t_role_class_from_seat()
+    t_occult_support_seat()
+    t_kit_audit_agreement()
+    t_carrier_quota()
+    t_observed_chest_class()
+    t_one_player_one_vote()
+    t_doctrine_bands()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")

@@ -63,6 +63,7 @@ Usage:  py -3 pipeline/sample_parties.py [--battles 25] [--min-players 25]
         py -3 pipeline/sample_parties.py --pages 0     (offline re-analysis)
 """
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -323,17 +324,44 @@ def analyze(known):
     for name in sorted(os.listdir(CACHE)):
         with open(os.path.join(CACHE, name), encoding="utf-8") as f:
             rec = json.load(f)
+        # PARTY SIZE per build (2026-09-03, the Grailseeker case): the
+        # battle floor admits 2-8 man gank parties fighting inside a
+        # 20+ battle, and their kits (Hunter Shoes, Demon Cape, Poison
+        # Potion) were being mined as ZvZ doctrine. The party the killer
+        # belonged to is the real evidence unit; a build inherits the
+        # size of the largest deduped party carrying its player name in
+        # this battle. Victims are in no party record -> None (honest:
+        # unknown, never guessed).
+        size_by_name = {}
+        for p in rec.get("parties", []):
+            n_members = len(p.get("members") or [])
+            for m in p.get("members") or []:
+                nm = m.get("name")
+                if nm:
+                    size_by_name[nm] = max(size_by_name.get(nm, 0),
+                                           n_members)
         for bd in rec.get("builds", []):
             g = bd.get("gear") or {}
             w = strip(g.get("MainHand"))
             if not w or w not in known:
                 continue
             ac = armour_class(g.get("Armor"))
+            # PLAYER KEY (2026-09-04, distinct-player floors): a build is
+            # one player in one battle, and a third of a weapon's builds
+            # are repeat sightings of the same people (median 0.67
+            # distinct players per build; Heavy Crossbow: one player in 7
+            # of 20). Doctrine counts one player, one vote per weapon, so
+            # every build carries a stable, non-reversible player key —
+            # the name itself never leaves the cache.
+            nm = bd.get("name")
             builds.append({
                 "battle": rec["battle"], "weapon": w,
                 "armour_class": ac,
                 "item_power": bd.get("item_power"),
                 "seen_as": bd.get("seen_as"),
+                "party_size": size_by_name.get(nm),
+                "player": (hashlib.sha1(nm.encode("utf-8")).hexdigest()[:12]
+                           if nm else None),
                 "slots_filled": bd.get("slots_filled"),
                 "gear": {s: strip(v) for s, v in g.items() if v}})
             e = by_weapon.setdefault(w, {"n": 0, "cloth": 0, "leather": 0,
