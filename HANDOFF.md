@@ -156,9 +156,19 @@ tank. accept"): Grailseeker's harvest-admitted leather stands (R6 / R12 /
 R26 / R27 re-pinned on Incubus as the off-role case) and ROOT FIELDS
 laid at range are standoff tools (Grailseeker, Frost Staff; round 3
 roster 10 reads kite). Board: brawl 568, clap 1,020, clap_kite 319, kite
-250. Open: a gank read for non-ZvZ killer parties (round 2 roster 9);
-the 20+ band once the harvest can stand it; round-4 form (10-14) drawn
-and uncalled at the bottom of the board.
+250. KIT BLIND ROUNDS (same day, `pipeline/kit_blind_round.py`, T40):
+Realmbreaker 7/8, Hallowfall 6/8, and the disagreement was the label —
+248 of 1,020 "claps" had leather-majority dps; owner: leather dps are
+melee and brawl, clap is cloth, the exception is a secondary bomb squad
+in Assassin Jackets. Landed: leather-majority dps overrule a
+weapons-decided clap to brawl, bomb squads exempt; board brawl 800 /
+clap 788. Open: a gank read for non-ZvZ killer parties (round 2 roster
+9; round-4 roster 3 was called "gank" too); the 20+ band once the
+harvest can stand it; the per-ITEM chest lean LANDED the same day (T41,
+`out/chest_lean.json` from the audit's weapons-only clean cores; eleven
+chests lean ranged incl. Royal Jacket / Tenacity / Hunter Jacket in
+leather, none leans brawl, the rest keep the class rule; board brawl 628
+/ clap 941).
 
 ## Owner bug round (2026-09-03)
 

@@ -144,9 +144,58 @@ def load_rosters(known, min_size, min_known):
                 "total_players": rec.get("total_players"),
                 "guilds": tuple(sorted({m.get("guild") for m in members
                                         if m.get("guild")})),
-                "members": [{"weapon": w, "kit": kits.get(n)} for w, n in ws],
+                # `name` stays in memory for player-distinct counts (the
+                # kit blind rounds); nothing writes it out
+                "members": [{"weapon": w, "kit": kits.get(n), "name": n}
+                            for w, n in ws],
             })
     return rosters
+
+
+LEAN_MIN_WEARERS = 20     # distinct dps wearers before a chest may carry a lean
+LEAN_SHARE = 0.75         # share of those wearers on one side
+
+
+def mine_chest_lean(engine, rosters, gk):
+    """Per-chest style lean from weapons-only labels of clean cores."""
+    votes = {}
+    for r in rosters:
+        party = [m["weapon"] for m in r["members"]]
+        engine.set_content(CONTENT_FOR_SUPPLY, r["size"])
+        ci = engine.comp_identity(party)          # weapons only, no kits
+        mel = ci.get("melee_share")
+        if mel is None or ci.get("label", "").startswith("still"):
+            continue
+        if mel >= engine.IDENTITY_MELEE_CORE:
+            side = "brawl"
+        elif mel <= engine.IDENTITY_RANGED_CORE:
+            side = "ranged"
+        else:
+            continue
+        for m in r["members"]:
+            if engine.role_of(m["weapon"]) != "dps" or not m["kit"]:
+                continue
+            chest = gk(m["kit"]["Armor"]) if m["kit"].get("Armor") else None
+            if not chest or chest not in engine.gear:
+                continue
+            votes.setdefault(chest, {"brawl": set(), "ranged": set()})[side].add(m["name"])
+    items = {}
+    for chest, v in sorted(votes.items()):
+        b, rg = len(v["brawl"]), len(v["ranged"])
+        n = len(v["brawl"] | v["ranged"])
+        lean = None
+        if n >= LEAN_MIN_WEARERS:
+            if b >= LEAN_SHARE * (b + rg):
+                lean = "brawl"
+            elif rg >= LEAN_SHARE * (b + rg):
+                lean = "ranged"
+        items[chest] = {"lean": lean, "brawl": b, "ranged": rg, "wearers": n,
+                        "class": engine._chest_class(chest)}
+    return {"_source": "audit_style_rosters.py: dps chests in weapons-only "
+                       "labelled clean cores (melee share >= 0.65 brawl, "
+                       "<= 0.35 ranged), distinct players",
+            "min_wearers": LEAN_MIN_WEARERS, "share": LEAN_SHARE,
+            "items": items}
 
 
 def band_of(size):
@@ -177,9 +226,35 @@ def main():
     print(f"rosters >= {args.min_size} with >= {args.min_known:.0%} weapons "
           f"known: {len(rosters)}")
 
+    # ---- 0. PER-ITEM CHEST LEAN (2026-09-05, the kit rounds: "Royal
+    # Jacket is ranged without exception, Hellion is brawl or clap" — two
+    # leather chests, opposite signals, so the chest ITEM separates styles
+    # where the class cannot). Mined WITHOUT the kit rules in the loop:
+    # rosters are read weapons-only (gears=None) and only CLEAN cores
+    # count — a melee core (melee share >= IDENTITY_MELEE_CORE) votes
+    # "brawl", a ranged core (<= IDENTITY_RANGED_CORE) votes "ranged";
+    # the mid band and every kit-decided read stay out. A dps chest with
+    # >= LEAN_MIN_WEARERS distinct wearers and >= LEAN_SHARE of them on
+    # one side carries that lean; everything else falls back to the
+    # class rule the owner ruled (leather -> brawl, cloth -> ranged).
+    # Written to out/chest_lean.json for build_dataset, and applied to
+    # the labelling engine here so one audit pass labels with it.
+    gk = e_label.gear_key
+    chest_lean = mine_chest_lean(e_label, rosters, gk)
+    e_label.data["chest_lean"] = chest_lean
+    e_label._chest_lean = chest_lean.get("items") or {}
+    with open(os.path.join(OUT, "chest_lean.json"), "w", encoding="utf-8",
+              newline="\n") as f:
+        json.dump(chest_lean, f, indent=1, sort_keys=True)
+        f.write("\n")
+    leaned = {k: v["lean"] for k, v in (chest_lean.get("items") or {}).items()}
+    print(f"chest leans: {sum(1 for v in leaned.values() if v == 'ranged')} ranged, "
+          f"{sum(1 for v in leaned.values() if v == 'brawl')} brawl, "
+          f"{sum(1 for v in leaned.values() if v is None)} class-default "
+          f"(>= {LEAN_MIN_WEARERS} wearers)")
+
     # ---- 1. label every roster with comp_identity (group band for 10+)
     label_counts = {}
-    gk = e_label.gear_key
     for r in rosters:
         # the worn chests reach the label (a split is decided by the kits)
         gears = []

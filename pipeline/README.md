@@ -434,3 +434,14 @@ curated contents; `kit_bands.gang`, no overrides). `DOCTRINE_BANDS` in
 build_dataset.py is the table. The engine's `_seat_kit` picks the band by
 party size (gang at <= 9). `roles_report.json` carries the gang detail
 under `kit_doctrine_gang`.
+
+## Per-item chest lean (2026-09-05)
+
+`audit_style_rosters.py` also mines `out/chest_lean.json`: for every dps
+chest, distinct wearers in WEAPONS-ONLY labelled clean cores (melee share
+>= 0.65 brawl, <= 0.35 ranged); >= 20 wearers and >= 75% on one side
+give the item a lean. `build_dataset` validates and ships it as
+`chest_lean`; `comp_identity`'s kit tie-break reads the item lean first
+and the class rule (leather -> brawl, cloth -> ranged) where an item has
+none. Descriptive only. Because the audit writes it, the post-harvest
+order is audit -> derive_style_bands -> build_dataset -> gates.

@@ -91,6 +91,202 @@
   },
   "note": "share of killboard builds wearing a chest that grants each typed gear effect, per fight-size bucket (official kill-event party rosters); the engine caps generated rosters at share x size"
  },
+ "chest_lean": {
+  "_source": "audit_style_rosters.py: dps chests in weapons-only labelled clean cores (melee share >= 0.65 brawl, <= 0.35 ranged), distinct players",
+  "items": {
+   "ARMOR_CLOTH_AVALON": {
+    "brawl": 15,
+    "class": "cloth",
+    "lean": "ranged",
+    "ranged": 633,
+    "wearers": 645
+   },
+   "ARMOR_CLOTH_FEY": {
+    "brawl": 1,
+    "class": "cloth",
+    "lean": "ranged",
+    "ranged": 184,
+    "wearers": 185
+   },
+   "ARMOR_CLOTH_HELL": {
+    "brawl": 12,
+    "class": "cloth",
+    "lean": null,
+    "ranged": 7,
+    "wearers": 18
+   },
+   "ARMOR_CLOTH_KEEPER": {
+    "brawl": 11,
+    "class": "cloth",
+    "lean": "ranged",
+    "ranged": 91,
+    "wearers": 102
+   },
+   "ARMOR_CLOTH_MORGANA": {
+    "brawl": 2,
+    "class": "cloth",
+    "lean": null,
+    "ranged": 5,
+    "wearers": 7
+   },
+   "ARMOR_CLOTH_ROYAL": {
+    "brawl": 0,
+    "class": "cloth",
+    "lean": null,
+    "ranged": 16,
+    "wearers": 16
+   },
+   "ARMOR_CLOTH_SET1": {
+    "brawl": 16,
+    "class": "cloth",
+    "lean": "ranged",
+    "ranged": 506,
+    "wearers": 520
+   },
+   "ARMOR_CLOTH_SET2": {
+    "brawl": 56,
+    "class": "cloth",
+    "lean": "ranged",
+    "ranged": 320,
+    "wearers": 370
+   },
+   "ARMOR_CLOTH_SET3": {
+    "brawl": 11,
+    "class": "cloth",
+    "lean": "ranged",
+    "ranged": 68,
+    "wearers": 79
+   },
+   "ARMOR_LEATHER_AVALON": {
+    "brawl": 68,
+    "class": "leather",
+    "lean": "ranged",
+    "ranged": 223,
+    "wearers": 283
+   },
+   "ARMOR_LEATHER_FEY": {
+    "brawl": 84,
+    "class": "leather",
+    "lean": null,
+    "ranged": 106,
+    "wearers": 184
+   },
+   "ARMOR_LEATHER_HELL": {
+    "brawl": 487,
+    "class": "leather",
+    "lean": null,
+    "ranged": 332,
+    "wearers": 785
+   },
+   "ARMOR_LEATHER_MORGANA": {
+    "brawl": 24,
+    "class": "leather",
+    "lean": null,
+    "ranged": 31,
+    "wearers": 55
+   },
+   "ARMOR_LEATHER_ROYAL": {
+    "brawl": 6,
+    "class": "leather",
+    "lean": "ranged",
+    "ranged": 359,
+    "wearers": 365
+   },
+   "ARMOR_LEATHER_SET1": {
+    "brawl": 26,
+    "class": "leather",
+    "lean": null,
+    "ranged": 65,
+    "wearers": 91
+   },
+   "ARMOR_LEATHER_SET2": {
+    "brawl": 24,
+    "class": "leather",
+    "lean": "ranged",
+    "ranged": 156,
+    "wearers": 177
+   },
+   "ARMOR_LEATHER_SET3": {
+    "brawl": 134,
+    "class": "leather",
+    "lean": null,
+    "ranged": 181,
+    "wearers": 307
+   },
+   "ARMOR_LEATHER_UNDEAD": {
+    "brawl": 0,
+    "class": "leather",
+    "lean": null,
+    "ranged": 1,
+    "wearers": 1
+   },
+   "ARMOR_PLATE_AVALON": {
+    "brawl": 1,
+    "class": "plate",
+    "lean": null,
+    "ranged": 3,
+    "wearers": 4
+   },
+   "ARMOR_PLATE_FEY": {
+    "brawl": 1,
+    "class": "plate",
+    "lean": null,
+    "ranged": 10,
+    "wearers": 11
+   },
+   "ARMOR_PLATE_HELL": {
+    "brawl": 3,
+    "class": "plate",
+    "lean": "ranged",
+    "ranged": 25,
+    "wearers": 28
+   },
+   "ARMOR_PLATE_KEEPER": {
+    "brawl": 23,
+    "class": "plate",
+    "lean": null,
+    "ranged": 58,
+    "wearers": 80
+   },
+   "ARMOR_PLATE_ROYAL": {
+    "brawl": 59,
+    "class": "plate",
+    "lean": null,
+    "ranged": 43,
+    "wearers": 100
+   },
+   "ARMOR_PLATE_SET1": {
+    "brawl": 168,
+    "class": "plate",
+    "lean": null,
+    "ranged": 79,
+    "wearers": 240
+   },
+   "ARMOR_PLATE_SET2": {
+    "brawl": 10,
+    "class": "plate",
+    "lean": "ranged",
+    "ranged": 30,
+    "wearers": 39
+   },
+   "ARMOR_PLATE_SET3": {
+    "brawl": 106,
+    "class": "plate",
+    "lean": null,
+    "ranged": 50,
+    "wearers": 154
+   },
+   "ARMOR_PLATE_UNDEAD": {
+    "brawl": 19,
+    "class": "plate",
+    "lean": null,
+    "ranged": 11,
+    "wearers": 30
+   }
+  },
+  "min_wearers": 20,
+  "share": 0.75
+ },
  "composition": {
   "constraint_bands": [
    {
@@ -78931,26 +79127,26 @@
   "bands": {
    "brawl": {
     "10-14": {
-     "distinct": 228,
+     "distinct": 256,
      "ref_size": 12,
      "requirements": {
       "anti_dive": {
        "soft_cap": 5.75
       },
       "buff_allies": {
-       "soft_cap": 14.55,
+       "soft_cap": 14.37,
        "target": 3.15
       },
       "burst_aoe": {
-       "soft_cap": 17.96,
-       "target": 5.24
+       "soft_cap": 18.04,
+       "target": 5.43
       },
       "burst_st": {
-       "soft_cap": 25.41
+       "soft_cap": 25.01
       },
       "catch": {
-       "soft_cap": 21.45,
-       "target": 5.4
+       "soft_cap": 20.7,
+       "target": 4.67
       },
       "cleanse": {
        "soft_cap": 4.6
@@ -78959,80 +79155,80 @@
        "soft_cap": 3.45
       },
       "damage_debuff": {
-       "soft_cap": 6.9
+       "soft_cap": 5.75
       },
       "disengage": {
-       "soft_cap": 25.87,
-       "target": 8.87
+       "soft_cap": 25.3,
+       "target": 8.1
       },
       "engage": {
-       "soft_cap": 24.15,
-       "target": 8.41
+       "soft_cap": 23.57,
+       "target": 8.1
       },
       "execute": {
-       "soft_cap": 6.18
+       "soft_cap": 5.66
       },
       "heal_burst": {
-       "soft_cap": 13.86,
-       "target": 1.34
+       "soft_cap": 13.83,
+       "target": 1.35
       },
       "heal_reduction": {
-       "soft_cap": 8.05
+       "soft_cap": 7.47
       },
       "heal_sustain": {
-       "soft_cap": 12.95,
+       "soft_cap": 13.14,
        "target": 2.61
       },
       "interrupt": {
-       "soft_cap": 2.64
+       "soft_cap": 2.3
       },
       "knockback_displace": {
-       "soft_cap": 21.29,
-       "target": 2.84
+       "soft_cap": 21.17,
+       "target": 2.7
       },
       "max_health_cut": {
        "soft_cap": 2.3
       },
       "mobility": {
-       "soft_cap": 43.7,
-       "target": 19.35
+       "soft_cap": 42.55,
+       "target": 18.23
       },
       "peel": {
-       "soft_cap": 48.56,
-       "target": 15.34
+       "soft_cap": 47.59,
+       "target": 15.11
       },
       "purge": {
        "soft_cap": 9.2
       },
       "ranged_presence": {
-       "soft_cap": 3.45
+       "soft_cap": 4.6
       },
       "resist_shred": {
        "soft_cap": 10.92,
        "target": 2.7
       },
       "root": {
-       "soft_cap": 14.8,
-       "target": 1.03
+       "soft_cap": 13.33,
+       "target": 0.99
       },
       "silence": {
-       "soft_cap": 18.95
+       "soft_cap": 18.81
       },
       "slow": {
-       "soft_cap": 15.16,
-       "target": 1.89
+       "soft_cap": 15.79,
+       "target": 2.12
       },
       "stun": {
-       "soft_cap": 21.23,
-       "target": 1.98
+       "soft_cap": 20.25,
+       "target": 2.04
       },
       "sustained_dps": {
-       "soft_cap": 63.73,
-       "target": 29.02
+       "soft_cap": 62.82,
+       "target": 29.08
       },
       "tankiness": {
-       "soft_cap": 56.48,
-       "target": 23.86
+       "soft_cap": 55.79,
+       "target": 23.96
       },
       "zone_control": {
        "soft_cap": 12.65,
@@ -79045,43 +79241,43 @@
      ]
     },
     "15-19": {
-     "distinct": 282,
+     "distinct": 299,
      "ref_size": 17,
      "requirements": {
       "anti_dive": {
-       "soft_cap": 9.2
+       "soft_cap": 8.74
       },
       "anti_zone": {
        "soft_cap": 2.3
       },
       "buff_allies": {
-       "soft_cap": 23.0,
+       "soft_cap": 22.42,
        "target": 6.3
       },
       "burst_aoe": {
-       "soft_cap": 23.14,
-       "target": 9.73
+       "soft_cap": 22.94,
+       "target": 9.96
       },
       "burst_st": {
-       "soft_cap": 16.1
+       "soft_cap": 16.24
       },
       "catch": {
-       "soft_cap": 24.29,
+       "soft_cap": 24.38,
        "target": 6.3
       },
       "cleanse": {
        "soft_cap": 6.9,
-       "target": 1.8
+       "target": 1.71
       },
       "clump_create": {
        "soft_cap": 3.45
       },
       "damage_debuff": {
-       "soft_cap": 11.5
+       "soft_cap": 10.92
       },
       "disengage": {
-       "soft_cap": 34.5,
-       "target": 13.95
+       "soft_cap": 33.92,
+       "target": 13.5
       },
       "engage": {
        "soft_cap": 31.05,
@@ -79091,72 +79287,72 @@
        "soft_cap": 4.44
       },
       "heal_burst": {
-       "soft_cap": 19.47,
-       "target": 4.17
+       "soft_cap": 17.94,
+       "target": 4.05
       },
       "heal_reduction": {
        "soft_cap": 6.9,
        "target": 0.9
       },
       "heal_sustain": {
-       "soft_cap": 18.0,
-       "target": 5.64
+       "soft_cap": 17.91,
+       "target": 5.44
       },
       "interrupt": {
        "soft_cap": 2.3
       },
       "knockback_displace": {
-       "soft_cap": 29.88,
-       "target": 5.88
+       "soft_cap": 29.73,
+       "target": 6.03
       },
       "max_health_cut": {
        "soft_cap": 4.6
       },
       "mobility": {
-       "soft_cap": 57.44,
+       "soft_cap": 56.92,
        "target": 29.7
       },
       "peel": {
-       "soft_cap": 75.18,
-       "target": 31.24
+       "soft_cap": 74.85,
+       "target": 31.41
       },
       "purge": {
        "soft_cap": 11.5,
        "target": 1.8
       },
       "ranged_presence": {
-       "soft_cap": 4.6,
+       "soft_cap": 5.75,
        "target": 0.9
       },
       "resist_shred": {
        "soft_cap": 15.52,
-       "target": 4.5
+       "target": 4.95
       },
       "root": {
-       "soft_cap": 20.01,
+       "soft_cap": 18.64,
        "target": 3.19
       },
       "silence": {
-       "soft_cap": 28.44
+       "soft_cap": 28.95
       },
       "slow": {
-       "soft_cap": 21.15,
-       "target": 4.91
+       "soft_cap": 22.05,
+       "target": 4.95
       },
       "stun": {
-       "soft_cap": 28.6,
+       "soft_cap": 27.63,
        "target": 5.4
       },
       "sustained_dps": {
-       "soft_cap": 81.14,
-       "target": 40.36
+       "soft_cap": 80.99,
+       "target": 40.99
       },
       "tankiness": {
-       "soft_cap": 81.6,
-       "target": 43.42
+       "soft_cap": 80.37,
+       "target": 43.27
       },
       "zone_control": {
-       "soft_cap": 17.25,
+       "soft_cap": 18.4,
        "target": 6.3
       }
      },
@@ -79166,7 +79362,7 @@
      ]
     },
     "20": {
-     "distinct": 41,
+     "distinct": 50,
      "ref_size": 20,
      "requirements": {
       "anti_dive": {
@@ -79177,18 +79373,18 @@
       },
       "buff_allies": {
        "soft_cap": 24.72,
-       "target": 11.25
+       "target": 10.75
       },
       "burst_aoe": {
-       "soft_cap": 28.3,
-       "target": 12.81
+       "soft_cap": 28.62,
+       "target": 13.73
       },
       "burst_st": {
-       "soft_cap": 10.2
+       "soft_cap": 9.53
       },
       "catch": {
-       "soft_cap": 22.77,
-       "target": 6.3
+       "soft_cap": 23.61,
+       "target": 7.51
       },
       "cleanse": {
        "soft_cap": 9.2,
@@ -79203,26 +79399,26 @@
       },
       "disengage": {
        "soft_cap": 39.1,
-       "target": 15.75
+       "target": 15.66
       },
       "engage": {
-       "soft_cap": 34.5,
+       "soft_cap": 33.46,
        "target": 17.1
       },
       "execute": {
        "soft_cap": 4.05
       },
       "heal_burst": {
-       "soft_cap": 18.22,
-       "target": 8.2
+       "soft_cap": 17.86,
+       "target": 8.84
       },
       "heal_reduction": {
-       "soft_cap": 5.75,
+       "soft_cap": 6.32,
        "target": 0.9
       },
       "heal_sustain": {
-       "soft_cap": 19.26,
-       "target": 10.71
+       "soft_cap": 19.17,
+       "target": 10.2
       },
       "interrupt": {
        "soft_cap": 2.3
@@ -79236,52 +79432,52 @@
        "target": 0.9
       },
       "mobility": {
-       "soft_cap": 60.95,
-       "target": 36.45
+       "soft_cap": 60.43,
+       "target": 35.51
       },
       "peel": {
-       "soft_cap": 86.48,
-       "target": 42.26
+       "soft_cap": 85.92,
+       "target": 43.4
       },
       "purge": {
        "soft_cap": 12.65,
-       "target": 3.6
+       "target": 3.51
       },
       "ranged_presence": {
-       "soft_cap": 5.75,
+       "soft_cap": 6.9,
        "target": 1.8
       },
       "resist_shred": {
        "soft_cap": 17.25,
-       "target": 5.4
+       "target": 6.21
       },
       "root": {
-       "soft_cap": 25.85,
-       "target": 3.78
+       "soft_cap": 23.0,
+       "target": 3.77
       },
       "silence": {
        "soft_cap": 39.4,
-       "target": 7.88
+       "target": 6.79
       },
       "slow": {
-       "soft_cap": 20.76,
-       "target": 4.68
+       "soft_cap": 24.86,
+       "target": 6.06
       },
       "stun": {
-       "soft_cap": 29.64,
-       "target": 3.74
+       "soft_cap": 29.06,
+       "target": 4.91
       },
       "sustained_dps": {
-       "soft_cap": 93.82,
-       "target": 50.05
+       "soft_cap": 90.16,
+       "target": 50.22
       },
       "tankiness": {
-       "soft_cap": 92.92,
-       "target": 58.55
+       "soft_cap": 93.09,
+       "target": 58.84
       },
       "zone_control": {
        "soft_cap": 19.55,
-       "target": 8.1
+       "target": 8.91
       }
      },
      "sizes": [
@@ -79293,26 +79489,26 @@
    "brawl_clap": {
     "10-14": {
      "borrowed_from": "brawl|10-14",
-     "distinct": 228,
+     "distinct": 256,
      "ref_size": 12,
      "requirements": {
       "anti_dive": {
        "soft_cap": 5.75
       },
       "buff_allies": {
-       "soft_cap": 14.55,
+       "soft_cap": 14.37,
        "target": 3.15
       },
       "burst_aoe": {
-       "soft_cap": 17.96,
-       "target": 5.24
+       "soft_cap": 18.04,
+       "target": 5.43
       },
       "burst_st": {
-       "soft_cap": 25.41
+       "soft_cap": 25.01
       },
       "catch": {
-       "soft_cap": 21.45,
-       "target": 5.4
+       "soft_cap": 20.7,
+       "target": 4.67
       },
       "cleanse": {
        "soft_cap": 4.6
@@ -79321,80 +79517,80 @@
        "soft_cap": 3.45
       },
       "damage_debuff": {
-       "soft_cap": 6.9
+       "soft_cap": 5.75
       },
       "disengage": {
-       "soft_cap": 25.87,
-       "target": 8.87
+       "soft_cap": 25.3,
+       "target": 8.1
       },
       "engage": {
-       "soft_cap": 24.15,
-       "target": 8.41
+       "soft_cap": 23.57,
+       "target": 8.1
       },
       "execute": {
-       "soft_cap": 6.18
+       "soft_cap": 5.66
       },
       "heal_burst": {
-       "soft_cap": 13.86,
-       "target": 1.34
+       "soft_cap": 13.83,
+       "target": 1.35
       },
       "heal_reduction": {
-       "soft_cap": 8.05
+       "soft_cap": 7.47
       },
       "heal_sustain": {
-       "soft_cap": 12.95,
+       "soft_cap": 13.14,
        "target": 2.61
       },
       "interrupt": {
-       "soft_cap": 2.64
+       "soft_cap": 2.3
       },
       "knockback_displace": {
-       "soft_cap": 21.29,
-       "target": 2.84
+       "soft_cap": 21.17,
+       "target": 2.7
       },
       "max_health_cut": {
        "soft_cap": 2.3
       },
       "mobility": {
-       "soft_cap": 43.7,
-       "target": 19.35
+       "soft_cap": 42.55,
+       "target": 18.23
       },
       "peel": {
-       "soft_cap": 48.56,
-       "target": 15.34
+       "soft_cap": 47.59,
+       "target": 15.11
       },
       "purge": {
        "soft_cap": 9.2
       },
       "ranged_presence": {
-       "soft_cap": 3.45
+       "soft_cap": 4.6
       },
       "resist_shred": {
        "soft_cap": 10.92,
        "target": 2.7
       },
       "root": {
-       "soft_cap": 14.8,
-       "target": 1.03
+       "soft_cap": 13.33,
+       "target": 0.99
       },
       "silence": {
-       "soft_cap": 18.95
+       "soft_cap": 18.81
       },
       "slow": {
-       "soft_cap": 15.16,
-       "target": 1.89
+       "soft_cap": 15.79,
+       "target": 2.12
       },
       "stun": {
-       "soft_cap": 21.23,
-       "target": 1.98
+       "soft_cap": 20.25,
+       "target": 2.04
       },
       "sustained_dps": {
-       "soft_cap": 63.73,
-       "target": 29.02
+       "soft_cap": 62.82,
+       "target": 29.08
       },
       "tankiness": {
-       "soft_cap": 56.48,
-       "target": 23.86
+       "soft_cap": 55.79,
+       "target": 23.96
       },
       "zone_control": {
        "soft_cap": 12.65,
@@ -79408,43 +79604,43 @@
     },
     "15-19": {
      "borrowed_from": "brawl|15-19",
-     "distinct": 282,
+     "distinct": 299,
      "ref_size": 17,
      "requirements": {
       "anti_dive": {
-       "soft_cap": 9.2
+       "soft_cap": 8.74
       },
       "anti_zone": {
        "soft_cap": 2.3
       },
       "buff_allies": {
-       "soft_cap": 23.0,
+       "soft_cap": 22.42,
        "target": 6.3
       },
       "burst_aoe": {
-       "soft_cap": 23.14,
-       "target": 9.73
+       "soft_cap": 22.94,
+       "target": 9.96
       },
       "burst_st": {
-       "soft_cap": 16.1
+       "soft_cap": 16.24
       },
       "catch": {
-       "soft_cap": 24.29,
+       "soft_cap": 24.38,
        "target": 6.3
       },
       "cleanse": {
        "soft_cap": 6.9,
-       "target": 1.8
+       "target": 1.71
       },
       "clump_create": {
        "soft_cap": 3.45
       },
       "damage_debuff": {
-       "soft_cap": 11.5
+       "soft_cap": 10.92
       },
       "disengage": {
-       "soft_cap": 34.5,
-       "target": 13.95
+       "soft_cap": 33.92,
+       "target": 13.5
       },
       "engage": {
        "soft_cap": 31.05,
@@ -79454,72 +79650,72 @@
        "soft_cap": 4.44
       },
       "heal_burst": {
-       "soft_cap": 19.47,
-       "target": 4.17
+       "soft_cap": 17.94,
+       "target": 4.05
       },
       "heal_reduction": {
        "soft_cap": 6.9,
        "target": 0.9
       },
       "heal_sustain": {
-       "soft_cap": 18.0,
-       "target": 5.64
+       "soft_cap": 17.91,
+       "target": 5.44
       },
       "interrupt": {
        "soft_cap": 2.3
       },
       "knockback_displace": {
-       "soft_cap": 29.88,
-       "target": 5.88
+       "soft_cap": 29.73,
+       "target": 6.03
       },
       "max_health_cut": {
        "soft_cap": 4.6
       },
       "mobility": {
-       "soft_cap": 57.44,
+       "soft_cap": 56.92,
        "target": 29.7
       },
       "peel": {
-       "soft_cap": 75.18,
-       "target": 31.24
+       "soft_cap": 74.85,
+       "target": 31.41
       },
       "purge": {
        "soft_cap": 11.5,
        "target": 1.8
       },
       "ranged_presence": {
-       "soft_cap": 4.6,
+       "soft_cap": 5.75,
        "target": 0.9
       },
       "resist_shred": {
        "soft_cap": 15.52,
-       "target": 4.5
+       "target": 4.95
       },
       "root": {
-       "soft_cap": 20.01,
+       "soft_cap": 18.64,
        "target": 3.19
       },
       "silence": {
-       "soft_cap": 28.44
+       "soft_cap": 28.95
       },
       "slow": {
-       "soft_cap": 21.15,
-       "target": 4.91
+       "soft_cap": 22.05,
+       "target": 4.95
       },
       "stun": {
-       "soft_cap": 28.6,
+       "soft_cap": 27.63,
        "target": 5.4
       },
       "sustained_dps": {
-       "soft_cap": 81.14,
-       "target": 40.36
+       "soft_cap": 80.99,
+       "target": 40.99
       },
       "tankiness": {
-       "soft_cap": 81.6,
-       "target": 43.42
+       "soft_cap": 80.37,
+       "target": 43.27
       },
       "zone_control": {
-       "soft_cap": 17.25,
+       "soft_cap": 18.4,
        "target": 6.3
       }
      },
@@ -79530,7 +79726,7 @@
     },
     "20": {
      "borrowed_from": "brawl|20",
-     "distinct": 41,
+     "distinct": 50,
      "ref_size": 20,
      "requirements": {
       "anti_dive": {
@@ -79541,18 +79737,18 @@
       },
       "buff_allies": {
        "soft_cap": 24.72,
-       "target": 11.25
+       "target": 10.75
       },
       "burst_aoe": {
-       "soft_cap": 28.3,
-       "target": 12.81
+       "soft_cap": 28.62,
+       "target": 13.73
       },
       "burst_st": {
-       "soft_cap": 10.2
+       "soft_cap": 9.53
       },
       "catch": {
-       "soft_cap": 22.77,
-       "target": 6.3
+       "soft_cap": 23.61,
+       "target": 7.51
       },
       "cleanse": {
        "soft_cap": 9.2,
@@ -79567,26 +79763,26 @@
       },
       "disengage": {
        "soft_cap": 39.1,
-       "target": 15.75
+       "target": 15.66
       },
       "engage": {
-       "soft_cap": 34.5,
+       "soft_cap": 33.46,
        "target": 17.1
       },
       "execute": {
        "soft_cap": 4.05
       },
       "heal_burst": {
-       "soft_cap": 18.22,
-       "target": 8.2
+       "soft_cap": 17.86,
+       "target": 8.84
       },
       "heal_reduction": {
-       "soft_cap": 5.75,
+       "soft_cap": 6.32,
        "target": 0.9
       },
       "heal_sustain": {
-       "soft_cap": 19.26,
-       "target": 10.71
+       "soft_cap": 19.17,
+       "target": 10.2
       },
       "interrupt": {
        "soft_cap": 2.3
@@ -79600,52 +79796,52 @@
        "target": 0.9
       },
       "mobility": {
-       "soft_cap": 60.95,
-       "target": 36.45
+       "soft_cap": 60.43,
+       "target": 35.51
       },
       "peel": {
-       "soft_cap": 86.48,
-       "target": 42.26
+       "soft_cap": 85.92,
+       "target": 43.4
       },
       "purge": {
        "soft_cap": 12.65,
-       "target": 3.6
+       "target": 3.51
       },
       "ranged_presence": {
-       "soft_cap": 5.75,
+       "soft_cap": 6.9,
        "target": 1.8
       },
       "resist_shred": {
        "soft_cap": 17.25,
-       "target": 5.4
+       "target": 6.21
       },
       "root": {
-       "soft_cap": 25.85,
-       "target": 3.78
+       "soft_cap": 23.0,
+       "target": 3.77
       },
       "silence": {
        "soft_cap": 39.4,
-       "target": 7.88
+       "target": 6.79
       },
       "slow": {
-       "soft_cap": 20.76,
-       "target": 4.68
+       "soft_cap": 24.86,
+       "target": 6.06
       },
       "stun": {
-       "soft_cap": 29.64,
-       "target": 3.74
+       "soft_cap": 29.06,
+       "target": 4.91
       },
       "sustained_dps": {
-       "soft_cap": 93.82,
-       "target": 50.05
+       "soft_cap": 90.16,
+       "target": 50.22
       },
       "tankiness": {
-       "soft_cap": 92.92,
-       "target": 58.55
+       "soft_cap": 93.09,
+       "target": 58.84
       },
       "zone_control": {
        "soft_cap": 19.55,
-       "target": 8.1
+       "target": 8.91
       }
      },
      "sizes": [
@@ -79656,29 +79852,26 @@
    },
    "clap": {
     "10-14": {
-     "distinct": 370,
+     "distinct": 335,
      "ref_size": 12,
      "requirements": {
       "anti_dive": {
        "soft_cap": 8.05
       },
-      "anti_zone": {
-       "soft_cap": 2.3
-      },
       "buff_allies": {
-       "soft_cap": 15.58,
+       "soft_cap": 16.1,
        "target": 2.7
       },
       "burst_aoe": {
-       "soft_cap": 32.03,
-       "target": 10.72
+       "soft_cap": 32.29,
+       "target": 10.96
       },
       "burst_st": {
-       "soft_cap": 9.56
+       "soft_cap": 9.73
       },
       "catch": {
-       "soft_cap": 21.85,
-       "target": 4.95
+       "soft_cap": 21.62,
+       "target": 5.4
       },
       "cleanse": {
        "soft_cap": 6.9
@@ -79690,8 +79883,8 @@
        "soft_cap": 5.75
       },
       "disengage": {
-       "soft_cap": 19.55,
-       "target": 5.81
+       "soft_cap": 19.32,
+       "target": 5.4
       },
       "engage": {
        "soft_cap": 20.7,
@@ -79701,22 +79894,22 @@
        "soft_cap": 3.93
       },
       "heal_burst": {
-       "soft_cap": 14.18,
-       "target": 1.35
+       "soft_cap": 14.55,
+       "target": 1.32
       },
       "heal_reduction": {
        "soft_cap": 5.75
       },
       "heal_sustain": {
-       "soft_cap": 14.5,
+       "soft_cap": 14.25,
        "target": 2.61
       },
       "interrupt": {
        "soft_cap": 2.3
       },
       "knockback_displace": {
-       "soft_cap": 19.87,
-       "target": 3.35
+       "soft_cap": 19.72,
+       "target": 3.6
       },
       "max_health_cut": {
        "soft_cap": 2.3
@@ -79726,42 +79919,42 @@
        "target": 13.5
       },
       "peel": {
-       "soft_cap": 58.07,
-       "target": 17.98
+       "soft_cap": 58.36,
+       "target": 18.0
       },
       "purge": {
        "soft_cap": 9.2
       },
       "ranged_presence": {
        "soft_cap": 8.05,
-       "target": 1.8
+       "target": 2.7
       },
       "resist_shred": {
-       "soft_cap": 9.26,
+       "soft_cap": 9.2,
        "target": 2.7
       },
       "root": {
-       "soft_cap": 16.09,
-       "target": 1.75
+       "soft_cap": 16.41,
+       "target": 1.8
       },
       "silence": {
-       "soft_cap": 18.91
+       "soft_cap": 20.25
       },
       "slow": {
-       "soft_cap": 27.32,
-       "target": 5.89
+       "soft_cap": 27.35,
+       "target": 6.3
       },
       "stun": {
-       "soft_cap": 41.22,
-       "target": 2.07
+       "soft_cap": 41.53,
+       "target": 2.04
       },
       "sustained_dps": {
-       "soft_cap": 69.77,
-       "target": 30.7
+       "soft_cap": 70.3,
+       "target": 30.67
       },
       "tankiness": {
-       "soft_cap": 53.33,
-       "target": 25.69
+       "soft_cap": 53.34,
+       "target": 25.64
       },
       "zone_control": {
        "soft_cap": 17.25,
@@ -79774,12 +79967,12 @@
      ]
     },
     "15-19": {
-     "distinct": 493,
+     "distinct": 466,
      "ref_size": 17,
      "requirements": {
       "anti_dive": {
-       "soft_cap": 10.92,
-       "target": 1.35
+       "soft_cap": 11.5,
+       "target": 1.12
       },
       "anti_zone": {
        "soft_cap": 2.3
@@ -79789,11 +79982,11 @@
        "target": 6.75
       },
       "burst_aoe": {
-       "soft_cap": 37.46,
-       "target": 15.25
+       "soft_cap": 38.11,
+       "target": 15.34
       },
       "burst_st": {
-       "soft_cap": 8.45
+       "soft_cap": 8.73
       },
       "catch": {
        "soft_cap": 27.02,
@@ -79815,14 +80008,14 @@
        "target": 9.45
       },
       "engage": {
-       "soft_cap": 28.75,
+       "soft_cap": 27.6,
        "target": 11.7
       },
       "execute": {
        "soft_cap": 4.27
       },
       "heal_burst": {
-       "soft_cap": 18.52,
+       "soft_cap": 18.57,
        "target": 5.4
       },
       "heal_reduction": {
@@ -79830,7 +80023,7 @@
        "target": 0.9
       },
       "heal_sustain": {
-       "soft_cap": 18.4,
+       "soft_cap": 18.46,
        "target": 6.34
       },
       "interrupt": {
@@ -79844,12 +80037,12 @@
        "soft_cap": 2.3
       },
       "mobility": {
-       "soft_cap": 48.76,
-       "target": 23.04
+       "soft_cap": 48.3,
+       "target": 22.95
       },
       "peel": {
-       "soft_cap": 80.5,
-       "target": 33.12
+       "soft_cap": 80.64,
+       "target": 32.96
       },
       "purge": {
        "soft_cap": 12.65,
@@ -79860,31 +80053,31 @@
        "target": 3.6
       },
       "resist_shred": {
-       "soft_cap": 13.22,
+       "soft_cap": 12.65,
        "target": 4.5
       },
       "root": {
-       "soft_cap": 18.85,
+       "soft_cap": 18.95,
        "target": 3.6
       },
       "silence": {
-       "soft_cap": 27.35
+       "soft_cap": 25.7
       },
       "slow": {
-       "soft_cap": 35.58,
-       "target": 9.36
+       "soft_cap": 35.65,
+       "target": 9.65
       },
       "stun": {
-       "soft_cap": 50.77,
-       "target": 3.86
+       "soft_cap": 51.21,
+       "target": 3.6
       },
       "sustained_dps": {
-       "soft_cap": 92.34,
-       "target": 44.74
+       "soft_cap": 92.68,
+       "target": 44.7
       },
       "tankiness": {
-       "soft_cap": 74.97,
-       "target": 39.95
+       "soft_cap": 75.04,
+       "target": 39.61
       },
       "zone_control": {
        "soft_cap": 23.0,
@@ -79897,11 +80090,11 @@
      ]
     },
     "20": {
-     "distinct": 96,
+     "distinct": 88,
      "ref_size": 20,
      "requirements": {
       "anti_dive": {
-       "soft_cap": 12.65,
+       "soft_cap": 12.82,
        "target": 2.7
       },
       "anti_zone": {
@@ -79909,18 +80102,18 @@
       },
       "buff_allies": {
        "soft_cap": 26.45,
-       "target": 10.35
+       "target": 11.56
       },
       "burst_aoe": {
-       "soft_cap": 41.01,
-       "target": 19.15
+       "soft_cap": 41.18,
+       "target": 19.08
       },
       "burst_st": {
-       "soft_cap": 6.82
+       "soft_cap": 6.69
       },
       "catch": {
-       "soft_cap": 29.9,
-       "target": 9.45
+       "soft_cap": 29.5,
+       "target": 9.31
       },
       "cleanse": {
        "soft_cap": 11.5,
@@ -79931,52 +80124,52 @@
        "target": 0.9
       },
       "damage_debuff": {
-       "soft_cap": 10.92
+       "soft_cap": 11.1
       },
       "disengage": {
-       "soft_cap": 31.91,
-       "target": 11.47
+       "soft_cap": 30.07,
+       "target": 11.12
       },
       "engage": {
        "soft_cap": 32.2,
-       "target": 15.3
+       "target": 15.03
       },
       "execute": {
-       "soft_cap": 2.92
+       "soft_cap": 1.79
       },
       "heal_burst": {
-       "soft_cap": 17.4,
-       "target": 8.87
+       "soft_cap": 17.87,
+       "target": 8.71
       },
       "heal_reduction": {
        "soft_cap": 8.05,
        "target": 0.9
       },
       "heal_sustain": {
-       "soft_cap": 19.39,
-       "target": 9.0
+       "soft_cap": 19.77,
+       "target": 9.36
       },
       "interrupt": {
        "soft_cap": 2.3
       },
       "knockback_displace": {
-       "soft_cap": 28.31,
-       "target": 8.78
+       "soft_cap": 28.17,
+       "target": 8.71
       },
       "max_health_cut": {
        "soft_cap": 3.45
       },
       "mobility": {
-       "soft_cap": 54.05,
-       "target": 28.8
+       "soft_cap": 53.07,
+       "target": 28.35
       },
       "peel": {
-       "soft_cap": 89.26,
-       "target": 42.86
+       "soft_cap": 89.5,
+       "target": 41.27
       },
       "purge": {
        "soft_cap": 12.65,
-       "target": 3.15
+       "target": 3.33
       },
       "ranged_presence": {
        "soft_cap": 10.35,
@@ -79987,32 +80180,32 @@
        "target": 5.85
       },
       "root": {
-       "soft_cap": 19.23,
-       "target": 4.19
+       "soft_cap": 19.11,
+       "target": 4.5
       },
       "silence": {
-       "soft_cap": 29.74,
-       "target": 1.33
+       "soft_cap": 27.05,
+       "target": 1.3
       },
       "slow": {
-       "soft_cap": 34.19,
-       "target": 13.16
+       "soft_cap": 34.51,
+       "target": 11.9
       },
       "stun": {
-       "soft_cap": 60.8,
-       "target": 8.01
+       "soft_cap": 60.88,
+       "target": 7.92
       },
       "sustained_dps": {
-       "soft_cap": 100.89,
-       "target": 50.14
+       "soft_cap": 101.35,
+       "target": 48.36
       },
       "tankiness": {
-       "soft_cap": 86.84,
-       "target": 52.06
+       "soft_cap": 86.49,
+       "target": 51.94
       },
       "zone_control": {
-       "soft_cap": 24.72,
-       "target": 12.6
+       "soft_cap": 24.15,
+       "target": 11.7
       }
      },
      "sizes": [
@@ -80388,31 +80581,31 @@
    },
    "kite": {
     "10-14": {
-     "distinct": 111,
+     "distinct": 112,
      "ref_size": 12,
      "requirements": {
       "anti_dive": {
-       "soft_cap": 12.65,
+       "soft_cap": 12.48,
        "target": 0.9
       },
       "anti_zone": {
        "soft_cap": 2.3
       },
       "buff_allies": {
-       "soft_cap": 17.82,
-       "target": 2.7
+       "soft_cap": 17.77,
+       "target": 2.75
       },
       "burst_aoe": {
-       "soft_cap": 20.73,
-       "target": 5.26
+       "soft_cap": 20.82,
+       "target": 5.28
       },
       "burst_st": {
-       "soft_cap": 11.88,
-       "target": 0.9
+       "soft_cap": 11.81,
+       "target": 0.09
       },
       "catch": {
        "soft_cap": 18.4,
-       "target": 4.95
+       "target": 4.54
       },
       "cleanse": {
        "soft_cap": 9.2
@@ -80424,7 +80617,7 @@
        "soft_cap": 5.75
       },
       "disengage": {
-       "soft_cap": 20.7,
+       "soft_cap": 20.58,
        "target": 6.3
       },
       "engage": {
@@ -80435,21 +80628,21 @@
        "soft_cap": 3.88
       },
       "heal_burst": {
-       "soft_cap": 13.8,
-       "target": 1.12
+       "soft_cap": 13.73,
+       "target": 1.14
       },
       "heal_reduction": {
        "soft_cap": 4.6
       },
       "heal_sustain": {
-       "soft_cap": 14.26,
+       "soft_cap": 14.23,
        "target": 2.25
       },
       "interrupt": {
        "soft_cap": 3.45
       },
       "knockback_displace": {
-       "soft_cap": 18.97,
+       "soft_cap": 18.92,
        "target": 4.05
       },
       "max_health_cut": {
@@ -80457,11 +80650,11 @@
       },
       "mobility": {
        "soft_cap": 32.77,
-       "target": 14.4
+       "target": 14.45
       },
       "peel": {
-       "soft_cap": 55.2,
-       "target": 19.57
+       "soft_cap": 55.18,
+       "target": 19.59
       },
       "purge": {
        "soft_cap": 11.5,
@@ -80469,14 +80662,14 @@
       },
       "ranged_presence": {
        "soft_cap": 6.9,
-       "target": 1.8
+       "target": 1.89
       },
       "resist_shred": {
        "soft_cap": 9.2,
        "target": 2.7
       },
       "root": {
-       "soft_cap": 19.65,
+       "soft_cap": 19.78,
        "target": 2.7
       },
       "silence": {
@@ -80484,19 +80677,19 @@
       },
       "slow": {
        "soft_cap": 25.51,
-       "target": 4.91
+       "target": 5.0
       },
       "stun": {
-       "soft_cap": 28.21,
-       "target": 1.08
+       "soft_cap": 28.13,
+       "target": 1.12
       },
       "sustained_dps": {
-       "soft_cap": 66.99,
-       "target": 28.39
+       "soft_cap": 66.96,
+       "target": 28.42
       },
       "tankiness": {
-       "soft_cap": 53.84,
-       "target": 23.79
+       "soft_cap": 53.82,
+       "target": 23.83
       },
       "zone_control": {
        "soft_cap": 17.25,

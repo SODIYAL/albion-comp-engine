@@ -75,6 +75,8 @@ class Engine:
             self.data = json.load(f)
         self.weapons = self.data["weapons"]
         self.scoring = self.data["scoring"]
+        # per-item chest lean (descriptive; comp_identity's kit tie-break)
+        self._chest_lean = (self.data.get("chest_lean") or {}).get("items") or {}
         # 1-7 scale (2026-08-20): score_unit converts sheet points to supply
         # units (2 points = 1 unit) — templates/floors/synergies stay in the
         # units they were calibrated in. Older datasets (0-3 sheets) carry no
@@ -2827,10 +2829,22 @@ class Engine:
     IDENTITY_LONE_TOOL_AOE = 0.45  # a lone standoff body makes a kite only below this bomb share
     IDENTITY_STYLES = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
 
+    def _chest_side(self, chest):
+        """The style side a dps chest votes for: the ITEM's harvest lean
+        (dataset `chest_lean`, 2026-09-05 kit rounds — Royal Jacket ranged
+        without exception, Hellion brawl-or-clap) first, else the owner's
+        class rule (leather -> brawl, cloth -> ranged, plate -> nothing)."""
+        lean = (self._chest_lean.get(chest) or {}).get("lean")
+        if lean:
+            return lean
+        cls = self._chest_class(chest)
+        return {"leather": "brawl", "cloth": "ranged"}.get(cls)
+
     def _kit_lean(self, party, gears):
-        """The chest class the DPS-class members wear by majority — 'leather'
-        / 'cloth' / None (plate, no majority, or fewer than half the dps with
-        a known chest). Reads the worn kits only; never a scoring input."""
+        """The style side the DPS-class members' chests vote for by majority
+        — 'brawl' / 'ranged' / None (no majority, or fewer than half the dps
+        with a known chest). Each chest votes by its item lean or its class
+        (_chest_side). Reads the worn kits only; never a scoring input."""
         if not gears:
             return None
         dps = [i for i, w in enumerate(party) if self.role_of(w) == "dps"]
@@ -2841,15 +2855,17 @@ class Engine:
         for i in dps:
             gl = gears[i] if i < len(gears) else None
             chest = next((g for g in (gl or []) if g.startswith("ARMOR_")), None)
-            cls = self._chest_class(chest) if chest else None
-            if cls:
-                known += 1
-                counts[cls] = counts.get(cls, 0) + 1
+            if not chest or not self._chest_class(chest):
+                continue
+            known += 1
+            side = self._chest_side(chest)
+            if side:
+                counts[side] = counts.get(side, 0) + 1
         if known < self.IDENTITY_KIT_KNOWN * len(dps):
             return None
-        for cls in ("leather", "cloth"):
-            if counts.get(cls, 0) > self.IDENTITY_KIT_MAJORITY * known:
-                return cls
+        for side in ("brawl", "ranged"):
+            if counts.get(side, 0) > self.IDENTITY_KIT_MAJORITY * known:
+                return side
         return None
 
     def _style_fit_of(self, weapon):
@@ -3134,26 +3150,44 @@ class Engine:
                 # kite by bomb share and standoff tools); plate or no
                 # majority leaves it split. Descriptive only.
                 kit = self._kit_lean(party, gears)
-                if kit == "leather":
+                if kit == "brawl":
                     out["style"], out["strength"] = "brawl", "leaning"
                     out["label"] = (f"{style_names.get('brawl', 'Brawl')}"
-                                    " — melee ball (by the kits: dps in leather)")
-                    out["kit_lean"] = "leather"
-                elif kit == "cloth":
+                                    " — melee ball (by the kits: brawl chests)")
+                    out["kit_lean"] = "brawl"
+                elif kit == "ranged":
                     if mode["aoe"] >= self.IDENTITY_HYBRID_AOE and kite_half:
                         out["style"] = "clap_kite"
                         out["label"] = (f"{style_names.get('clap_kite', 'Clap-Kite')}"
-                                        " — bomb from range, throw them back (by the kits: dps in cloth)")
+                                        " — bomb from range, throw them back (by the kits: ranged chests)")
                     elif mode["aoe"] >= self.IDENTITY_CLAP_AOE or not kite_any:
                         out["style"] = "clap"
                         out["label"] = (f"{style_names.get('clap', 'Clap')}"
-                                        " — ranged bomb (by the kits: dps in cloth)")
+                                        " — ranged bomb (by the kits: ranged chests)")
                     else:
                         out["style"] = "kite"
                         out["label"] = (f"{style_names.get('kite', 'Kite')}"
-                                        " — ranged pressure (by the kits: dps in cloth)")
+                                        " — ranged pressure (by the kits: ranged chests)")
                     out["strength"] = "leaning"
-                    out["kit_lean"] = "cloth"
+                    out["kit_lean"] = "ranged"
+        # LEATHER DPS ARE A BRAWL WHATEVER THE WEAPONS SAY (owner, kit
+        # round 2026-09-05: "clap dps will mostly be cloth ... for leather
+        # dps it would mostly be melee and it would be brawl. point of
+        # clap is high dps which is not possible if majority of party is
+        # wearing leather"). Measured: 248 of 1,020 clap-labelled rosters
+        # had leather-majority dps, and the Judicator healers and Hellion
+        # Realmbreakers "in claps" all lived there. A clap read decided by
+        # the weapons is overruled by a leather-majority dps kit; the
+        # bomb-squad detachment (a secondary party of Assassin Jackets
+        # bombing on a timer) is the owner's own exception and keeps its
+        # archetype. Descriptive only, like the split rule it extends.
+        if (out.get("style") == "clap" and not out.get("archetype")
+                and self._kit_lean(party, gears) == "brawl"):
+            out["style"], out["strength"] = "brawl", "leaning"
+            out["kit_lean"] = "brawl"
+            out["label"] = (f"{style_names.get('brawl', 'Brawl')}"
+                            " — melee ball (by the kits: brawl chests, "
+                            "bombs or not)")
         # ---- per-member fit verdicts (the declared style is the caller's
         # INTENT — owner ruling: picking brawl means asking for brawl
         # builds; balanced falls back to the detected lean) ----
