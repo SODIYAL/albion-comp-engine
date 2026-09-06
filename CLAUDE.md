@@ -44,6 +44,7 @@ py -3 tests/test_patch_history.py # dumps-diff staleness detection
 py -3 tests/test_js_parity.py     # Python <-> browser scoring, 60 random parties at 1e-9 + embed check
 node tests/test_loadout_codec.js  # share-URL codec round-trips
 node tests/test_display_math.js   # killboard bucket + cohort-affinity/neighbour/family math (display layer)
+node tests/test_live_party.js     # companion equipment -> loadout gear keys (tier/enchant rules, chest->armor, uncurated stays unset)
 py -3 tests/test_cohort_families.py # observed-family artifact contracts (determinism, disjointness, no id leaks)
 py -3 tests/test_roles.py         # role-book contracts, kit-aware detection, advisory flags (descriptive)
 py -3 tests/test_validation_modes.py # dressed-validation contracts: set_dressing switch, V3 form parser, metrics, builds_index gear join
