@@ -17,6 +17,11 @@ namespace CompForgeCompanion;
 ///
 /// Albion's real code still travels in parameter 252 (operations: 253); we
 /// keep it only for the histogram/schema diagnostics, never for dispatch.
+///
+/// Operation RESPONSES are dispatched the same way: the self-join (numeric
+/// objectId + character name) and the inspect reply (guid + 10-slot
+/// equipment) — the latter is the on-demand refresh for anyone the
+/// visibility rule has not shown you yet, yourself included.
 /// </summary>
 public sealed class AlbionEventParser : PhotonParser
 {
@@ -69,10 +74,13 @@ public sealed class AlbionEventParser : PhotonParser
         ResponsesSeen++;
         if (!TryGetShort(p, 253, out var op)) return;   // Albion ops always carry 253
         SampleSchema(_resSchema, op, p);
-        // Self-join fingerprint lives entirely in HandleSelfJoin (objectId at
-        // 0, plausible character name at 2) — it used to be half-duplicated
-        // here, so the true gate was split across two places.
-        if (HandleSelfJoin(p)) Bind("SelfJoin", op);
+        // Two response shapes matter, mutually exclusive on parameter 0:
+        //   Inspect  — a GUID at 0 (the inspected player) + 10-slot equipment
+        //   SelfJoin — a numeric objectId at 0 + plausible character name at 2
+        // Each fingerprint lives entirely in its handler (SelfJoin's used to
+        // be half-duplicated here, so the true gate was split across two places).
+        if (LooksLikeInspect(p)) { if (HandleInspect(p)) Bind("Inspect", op); }
+        else if (HandleSelfJoin(p)) Bind("SelfJoin", op);
     }
 
     // ---------------------------------------------------- shape fingerprints
@@ -87,6 +95,16 @@ public sealed class AlbionEventParser : PhotonParser
     private static bool LooksLikeEquipmentChanged(Dictionary<byte, object> p) =>
         IsNum(p, 0) && !(p.TryGetValue(1, out var n) && n is string)
         && HasNumArray(p, 10) && HasNumArray(p, 14);
+
+    // The INSPECT response (SAT: GetCharacterEquipment, op 148 at scope time —
+    // never dispatched by number here). Shape per SAT's
+    // GetCharacterEquipmentResponse: the inspected player's guid at 0, the
+    // 10-slot equipment array at 1, item power at 3. Only the guid-at-0 and
+    // the array are required; the array is found by size like every other
+    // handler, item power is the first floating-point param if present.
+    // Distinct from SelfJoin by construction: that one has a NUMBER at 0.
+    private static bool LooksLikeInspect(Dictionary<byte, object> p) =>
+        IsGuid(p, 0) && HasNumArray(p, 10);
 
     // OUR party roster. This is the fussy one: guild vault/bank tab listings
     // ALSO carry a numeric id + a string[] + a guid list, so the naive shape
@@ -184,6 +202,36 @@ public sealed class AlbionEventParser : PhotonParser
         return true;
     }
 
+    private bool HandleInspect(Dictionary<byte, object> p)
+    {
+        // An in-game inspect (right-click -> inspect) makes the server send
+        // the target's CURRENT loadout with real item TYPE ids, for anyone —
+        // yourself included — whether or not they are visible. That is the
+        // refresh path the visibility rule denies: a member who has not
+        // zoned or swapped gear near you, and your own kit before any swap.
+        // Attribution is by guid, which only the party roster carries, so the
+        // target must be in the party (self included, once a roster event has
+        // listed you). A stranger's inspect matches nobody and is dropped.
+        if (!TryGetGuid(p, 0, out var guid)) return false;
+        var name = _state.NameForGuid(guid);
+        if (name == null)
+        {
+            Log($"Inspect {guid}: not a party member — ignored");
+            return false;
+        }
+        var equipment = FindNumArray(p, 10);
+        // SAT does not read spells off this response; if the wire carries a
+        // 14-slot array (the same shape the visibility events use) take it,
+        // else the member keeps the picks they last broadcast.
+        var spells = FindNumArray(p, 14);
+        var itemPower = FindFloating(p);
+        if (!_state.UpdateLoadout(name, equipment, spells, itemPower, "Inspect"))
+            return false;
+        Log($"Inspect {name} eq={equipment?.Length} sp={spells?.Length} ip={itemPower?.ToString("F0") ?? "-"}");
+        EventsHandled++;
+        return true;
+    }
+
     private void Bind(string role, short code)
     {
         lock (_bindings)
@@ -233,6 +281,30 @@ public sealed class AlbionEventParser : PhotonParser
     /// system text) fail.</summary>
     private static bool IsPlausibleCharName(string s) =>
         s.Length is >= 3 and <= 16 && s.All(char.IsLetterOrDigit);
+
+    private static bool IsGuid(Dictionary<byte, object> p, byte k) =>
+        p.TryGetValue(k, out var o) && o is byte[] { Length: 16 };
+
+    private static bool TryGetGuid(Dictionary<byte, object> p, byte k, out Guid g)
+    {
+        g = Guid.Empty;
+        if (!(p.TryGetValue(k, out var o) && o is byte[] { Length: 16 } b)) return false;
+        g = new Guid(b);     // same construction as the roster's guid list
+        return true;
+    }
+
+    /// <summary>The first float/double parameter in key order (item power on
+    /// the inspect response), or null — found by TYPE, not fixed index.</summary>
+    private static double? FindFloating(Dictionary<byte, object> p)
+    {
+        foreach (var kv in p.OrderBy(x => x.Key))
+            switch (kv.Value)
+            {
+                case float f: return f;
+                case double d: return d;
+            }
+        return null;
+    }
 
     private static bool IsNum(Dictionary<byte, object> p, byte k) =>
         p.TryGetValue(k, out var o)
@@ -351,6 +423,7 @@ public sealed class AlbionEventParser : PhotonParser
         string[] a => $"string[{a.Length}]" + (a.Length > 0 ? " e.g. \"" + (a[0].Length > 16 ? a[0][..16] + "…" : a[0]) + "\"" : ""),
         byte[][] a => $"guidList(byte[{a.Length}][])",
         bool bo => $"bool:{bo}",
+        float or double => $"float:{v}",
         byte or sbyte or short or ushort or int or uint or long or ulong => $"num:{v}",
         _ => v.GetType().Name,
     };

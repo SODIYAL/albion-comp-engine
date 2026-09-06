@@ -32,8 +32,9 @@ Expected-by-design behavior seen in the run (not bugs):
 - Out-of-zone members are name-only until they come near (visibility rule).
 - Your OWN equipment shows empty until you swap any gear piece once —
   self-gear arrives on the change event.
-- `item_power` stays null: IP only rides the inspect operation (op 148),
-  which the companion does not fire passively.
+- `item_power` stays null until someone is INSPECTED: IP only rides the
+  inspect response, which the companion never fires itself — see "Inspect
+  refresh" below.
 
 **End-to-end CONFIRMED same day (second run):** Comp Forge's **connect live
 party** → **load party into comp** worked against the live companion — a
@@ -48,10 +49,37 @@ newly visible weapons fill in, a member's weapon swap updates their slot in
 place, and their real Q/W picks flow into the loadouts. Toggle in the
 connect panel; no re-load, no re-zone. What still needs a zone/visibility
 event is the WIRE side (the companion can only report what the game
-broadcasts); the remaining wire-side option is parsing the inspect
-response (op 148) so a manual in-game inspect refreshes any member — needs
-a live /schema capture of that response's shape first (inspect someone with
-the companion running and check /schema responses).
+broadcasts). The wire-side escape hatch SHIPPED 2026-09-06: the companion
+parses the INSPECT response, so a manual in-game inspect refreshes any
+party member on demand — yourself included, which closes the "own gear is
+empty until you swap" gap. Shape taken from SAT's
+`GetCharacterEquipmentResponse` (guid, 10-slot equipment, item power),
+matched by shape like every other handler; NOT yet confirmed against a live
+capture on the current patch — the first inspect with `--debug` on is the
+confirmation (see "Inspect refresh").
+
+## Inspect refresh (on-demand, 2026-09-06)
+
+Right-click a party member in game -> **Inspect**. The server answers with
+their CURRENT loadout using real item type ids, whether or not they are
+visible to you, and the companion records it (`"source": "Inspect"`,
+`item_power` filled). Inspect yourself and your own gear appears without
+swapping anything.
+
+- Attribution is by **guid**, which only the party roster event carries: the
+  target must be in your party, and a roster event must have listed them
+  (zone once after joining). A stranger's inspect matches nobody and is
+  dropped — party scope holds.
+- `/status` -> `detected_codes.Inspect` appears after the first successful
+  inspect (SAT lists the op as 148; the companion binds whatever number
+  carries the shape this patch). If it never appears while `--debug` prints
+  nothing for the inspect, the response shape has changed: look it up under
+  `/schema` -> `responses` (a `guid(byte[16])` at 0 next to a `short[10]`)
+  and adjust `LooksLikeInspect`.
+- Spells: SAT does not read spells off this response. The companion takes a
+  14-slot array if the wire carries one; otherwise the member keeps the
+  Q/W/E they last broadcast. Whether it is there is unverified — `--debug`
+  prints `sp=14` when it is, `sp=` when it is not.
 
 Everything below is the full run/troubleshooting reference.
 
@@ -95,6 +123,11 @@ works. `--port N` changes the port (default 53321).
     ]
   }
   ```
+
+  `source` names the last message that touched the member: `PartyRoster`
+  (name only), `NewCharacter` / `EquipmentChanged` (visibility broadcasts),
+  `Inspect` (an on-demand in-game inspect — the only source of `item_power`),
+  `cache` (restored roster, no gear yet).
 
   `weapon` is the engine `unique_name` (matches the Comp Forge dataset);
   `spells` are resolved server-side from raw indices to spell UniqueNames per
