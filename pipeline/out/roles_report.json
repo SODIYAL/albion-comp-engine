@@ -25937,7 +25937,7 @@
     },
     "MAIN_ARCANESTAFF": {
      "armor": ["ARMOR_PLATE_SET2", 41, 76],
-     "head": ["HEAD_LEATHER_SET3", 18, 42]
+     "head": ["HEAD_LEATHER_SET3", 18, 41]
     }
    }
   },
@@ -27793,7 +27793,7 @@
    "weapon_archetypes": {
     "2H_MACE": {
      "armor": ["ARMOR_PLATE_SET3", 153, 233],
-     "head": ["HEAD_LEATHER_HELL", 88, 154]
+     "head": ["HEAD_LEATHER_HELL", 88, 153]
     },
     "2H_QUARTERSTAFF_AVALON": {
      "armor": ["ARMOR_LEATHER_SET3", 11, 35],
@@ -43435,7 +43435,7 @@
    "weapon_archetypes": {
     "2H_HAMMER": {
      "armor": ["ARMOR_PLATE_KEEPER", 31, 60],
-     "head": ["HEAD_LEATHER_AVALON", 12, 30]
+     "head": ["HEAD_LEATHER_AVALON", 12, 31]
     },
     "2H_HAMMER_AVALON": {
      "armor": ["ARMOR_PLATE_KEEPER", 10, 28]
@@ -56046,7 +56046,7 @@
     },
     "2H_FIRESTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 11, 18],
-     "head": ["HEAD_CLOTH_KEEPER", 3, 12]
+     "head": ["HEAD_CLOTH_KEEPER", 3, 11]
     },
     "2H_FIRESTAFF_HELL": {
      "armor": ["ARMOR_CLOTH_SET1", 42, 46],
@@ -65895,7 +65895,7 @@
     },
     "2H_AXE_AVALON": {
      "armor": ["ARMOR_LEATHER_HELL", 69, 174],
-     "head": ["HEAD_PLATE_SET1", 28, 70]
+     "head": ["HEAD_PLATE_SET1", 28, 69]
     },
     "2H_CLAYMORE": {
      "armor": ["ARMOR_LEATHER_SET1", 7, 18],
@@ -65903,7 +65903,7 @@
     },
     "2H_CLAYMORE_AVALON": {
      "armor": ["ARMOR_LEATHER_HELL", 37, 83],
-     "head": ["HEAD_LEATHER_MORGANA", 18, 36]
+     "head": ["HEAD_LEATHER_MORGANA", 18, 37]
     },
     "2H_DOUBLEBLADEDSTAFF": {
      "armor": ["ARMOR_LEATHER_SET3", 6, 18],

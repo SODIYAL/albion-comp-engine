@@ -4,105 +4,34 @@ Owner-approved design (chat rounds, 2026-08-25) for the role layer: why
 generated kits were wrong, and how roles fix them. This is the durable
 record ("we want to fix this one time and not have to come back").
 
-## STATUS (2026-08-25, end of session)
+## STATUS
 
-**Increment 1 SHIPPED**, grown well past its original scope through eight
-owner grading passes (all recorded in tests/VALIDATION.md round 10):
+Increments 1, 2, 2.5 and 3 SHIPPED 2026-08-25/26; the layer kept growing
+through 2026-09-04 (fail-closed generation, the seat-all pass, killboard
+kit doctrine, the observed-build overlay, carrier quotas, one player one
+vote, size bands). The invariants are in CLAUDE.md ("One role read",
+"Kits are what winners wear"); every round, score and board grade is in
+`tests/VALIDATION.md` (round 10, the full-board entry, R12–R28); the
+current shipped surface is HANDOFF.md "Current engine model". The
+owner's words that shaped it, kept here because this is the durable
+design record:
 
-- the role book (`pipeline/roles.yaml`): 19 roles — seats + FUNCTION
-  roles (taxonomy v2) + the typed `gear_effects` catalog
-- the E-first TIERED SWEEP: function membership derived from every
-  weapon's own slot structure (E = primary, Q/W ability = secondary),
-  spell-classified splits (shield_break claims its spells away from
-  purge)
-- equipment classified under the UNIQUE-ABILITY-FIRST law: chests by
-  tree stat numbers, the FULL 18-offhand roster by stat profile,
-  heads/shoes by unique active; tree passives recorded
-- both engine ports: `detect_role` (seat + functions + secondary +
-  carrying), `role_advisory` (off-role-kit and no-engage-tank flags) —
-  descriptive, parity-carried, rendered in the status card
-- contracts: tests/test_roles.py R1–R11
+- "yes its the whole build. infact we might even need to include food,
+  potion and capes and you are right about passive defaults" — kits are
+  doctrine-led through every slot; passive doctrine resolved from the dumps.
+- "its not likely that hand of justice would be using demon armor ...
+  maybe the composition didnt have enough demon armors so the engage tank
+  has to take one" — an effect-carrier chest is a comp allocation, not
+  weapon doctrine (per-weapon tiers + effect quotas, later the carrier quota).
+- "what matters is what the data says" — the need profiles were ruled
+  after a blind round and the killboard roster evidence; the data's
+  engage-leaning split overruled the owner's own stopper-heavy blind call,
+  which survives as the territory-defense override.
 
-**Increment 2 SHIPPED** (same day; owner ruling: "yes its the whole
-build. infact we might even need to include food, potion and capes and
-you are right about passive defaults"):
-
-- generated kits are DOCTRINE-LED (`kit_options`, both ports, parity +
-  the R12–R16 contracts): the chest pool hard-gates to the seat's
-  uniform (the everyone-gets-Hellion bug is dead — R12); every other
-  slot (head/shoes/cape/offhand/food/potion) carries a doctrine tier
-  mined from the seat's OBSERVED reference builds (builds_index,
-  build-id cited, audited in roles_report `kit_doctrine`) — tier-first
-  in context-free mode, exact-marginal-first in comp-aware mode (T22:
-  the engine's own physics outranks a sparse observation). Manual
-  builds still score anything; role_advisory flags them.
-- PASSIVE DOCTRINE (owner-confirmed defaults): cloth → Aggression (+8%
-  damage & healing cast), leather → Quick Thinker (+5% CDR,
-  display-only — no invented channel), plate → Authority (+10% CC
-  duration) on the frontline and Tenacity (+20% CCR) elsewhere.
-  roles.yaml names only the FAMILY; ids resolve from each piece's own
-  dumps menu, magnitudes parse from the spell descriptions
-  (`doctrine_passives` per piece), and the resolved stats feed the
-  build channels.
-- the Leering-Cane pairing is EMERGENT PHYSICS, not a hand list: the
-  CC-duration stat (`bonusccdurationvsplayers`, now in the dataset)
-  multiplies the wearer's own duration-bearing CC via the new
-  `cc_mult_caps` build channel — worth something on Incubus, exactly
-  nothing on Great Fire (R13).
-- kit options annotate `doctrine` / `carries` (typed gear effects — the
-  Royal-Jacket-on-Realmbreaker variant surfaces cited, R16) /
-  `passive`; the loadout panel shows the seat + passive + carried
-  effect line.
-
-**Board GRADED 2026-08-26** — the owner reviewed all 465 rows of
-out/roles_report.json (seats, kit doctrine, gear effects, equipment)
-on the interactive grading artifact: 15 rulings, everything else
-accepted as shipped. Corrections landed same day (VALIDATION.md
-full-board entry): eight membership fixes in roles.yaml, the new cited
-`kit_doctrine.overrides` (drop/add on the mined pools, fail-closed)
-and `gear_affinity_overrides` layers, and the dive-dagger ≥7
-viability exclusion. R17 pins the batch.
-
-**Increment 2.5 SHIPPED 2026-08-26 — per-weapon doctrine + effect
-quotas** (owner design, from the Demon-Armor-on-Hand-of-Justice case:
-"its not likely that hand of justice would be using demon armor ...
-maybe the composition didnt have enough demon armors so the engage
-tank has to take one"). Verified on the data first: the sighting is
-cb_clonepeek seat 19, and that roster fields FOUR reflect shells —
-the chest is a comp allocation, not weapon doctrine. Shipped: (a)
-kit pools also mine PER WEAPON (`kit_weapon`, report `by_weapon`);
-the kit advisor's context-free ranking puts the weapon's own observed
-tier first (`doctrine`: weapon/seat/false, `doctrine_n` = [count,
-total] sample honesty); (b) chests granting a typed gear effect are
-EXCLUDED from the per-weapon tier, tagged `effect:` in seat pools,
-and quota-mined per near-complete observed roster
-(`mine_effect_quotas` → report `effect_quotas`, display-only until
-owner-graded — reflect shells: 7 of 8 rosters, typically 3 copies);
-(c) kit overrides extend to weapon scope (`overrides.<seat>.weapons`)
-and seat-level drops cascade into per-weapon pools. R18 pins it;
-60/60 parity carries the tier strings through both ports.
-
-**Increment 3 SHIPPED 2026-08-26 — NEED PROFILES gate the forge.**
-The blind round ran first (owner calls collected before any reveal),
-then the owner's directive "what matters is what the data says" drove
-the evidence pass: 8 curated rosters, 139 near-complete killboard
-fight rosters (new sanctioned sampler `pipeline/sample_rosters.py` →
-`out/roster_mixes.json`; wiped sides = least-biased roster snapshots)
-and Wardergrip's guide. Owner-ruled profiles in roles.yaml
-`need_profiles`: engage 2-3 / stopper 1-2 (engage-leaning default —
-the data overruled the owner's stopper-heavy blind call, which
-survives as the territory-defense override 2-4), off-tank <=1, shield
-support 1-3, zone <=1, pierce >=1 and heal-cut >=1 (fielded by 100% /
-92% of live party rosters). Wired in BOTH ports as generation
-constraints riding the predicate channel (seat minima in `pred_min`,
-membership contributions in `_forge_counts`, seat maxima as ctx
-`seat_max`) — armed at 15+, scaled by size/20 half-up, locked members
-count, manual parties always score. F21 pins it; both ports forge
-identical profile-constrained 20-mans.
-
-**Pending**: increment 3b (grading of the effect-quota table +
-mechanism pairing rules for effect carriers, then quota-aware kit
-allocation), increment 4 (uptime economics).
+**Pending**: increment 3b (grading of the effect-quota table + mechanism
+pairing rules for effect carriers, then quota-aware kit allocation),
+increment 4 (uptime economics); Chillhowl/Stillgaze and Iron-clad stay off
+every menu pending an owner word.
 
 ## The problem (owner observations, both verified)
 
