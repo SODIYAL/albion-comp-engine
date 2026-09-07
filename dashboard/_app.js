@@ -2210,7 +2210,8 @@ function renderMetaStrip(){
 }
 /* ------------------------------------------------ live party (companion)
    Polls the local companion app (companion/) for the real in-game party and
-   maps each member's weapon (an engine unique_name) into the comp. The
+   maps each member's weapon (an engine unique_name), real Q/W picks and
+   worn kit (curated pieces only) into the comp. The
    companion serves loopback-only, and browsers exempt http://localhost from
    mixed-content blocking, so the HTTPS page can read it directly. */
 const COMPANION_URL = "http://localhost:53321";
@@ -2263,13 +2264,19 @@ function renderCompanion(live, err){
   }
   const mem = companionData.members || [];
   const known = mem.filter(m => m.weapon && WEAPONS[m.weapon]);
+  const dressed = known.filter(m => liveGearPicks(m.equipment));
   status.innerHTML = `<span class="comp-dot"></span>connected — ${mem.length} in party${companionData.self ? ` · you: ${esc(companionData.self)}` : ""}
-    <span class="sub">${known.length} with a known weapon${mem.length > known.length ? `; ${mem.length - known.length} out of zone / unmapped` : ""}</span>`;
+    <span class="sub">${known.length} with a known weapon${dressed.length ? `, ${dressed.length} with a worn kit` : ""}${mem.length > known.length ? `; ${mem.length - known.length} out of zone / unmapped` : ""}</span>`;
   members.innerHTML = mem.map(m => {
     const k = m.weapon && WEAPONS[m.weapon];
     const wpn = k ? nameOf(m.weapon) : (m.weapon ? esc(m.weapon) : "— out of zone —");
+    /* what the companion has for the kit: curated pieces it can dress the
+       member in, and item power (only an in-game inspect carries it) */
+    const kit = k ? Object.keys(liveGearPicks(m.equipment) || {}).length : 0;
+    const ip = m.item_power ? `${Math.round(m.item_power)} IP` : "";
+    const meta = [kit ? `kit ${kit}/${LO_SLOTS.length}` : "", ip].filter(Boolean).join(" · ");
     return `<div class="comp-m ${k ? companionRoleClass(m.weapon) : ""}"><span class="cm-role"></span>
-      <span class="cm-name">${esc(m.name)}</span>
+      <span class="cm-name">${esc(m.name)}${meta ? `<span class="cm-kit">${meta}</span>` : ""}</span>
       <span class="cm-wpn ${k ? "" : "unknown"}">${k ? icon(m.weapon, 26) : ""}<span>${wpn}</span></span></div>`;
   }).join("");
   load.hidden = false; load.disabled = known.length === 0;
@@ -2305,9 +2312,55 @@ function liveSpellPicks(w, spells){
   }
   return Object.keys(out).length ? out : null;
 }
+/* companion equipment -> LOADOUT gear keys (2026-09-06, "flow the worn kit
+   into the loadout"). The companion reports full game ids
+   (T6_HEAD_CLOTH_SET1@1); the curated catalogue keys head/armor/shoes/
+   cape/offhand tier-stripped (HEAD_CLOTH_SET1) but potions and food
+   TIERED (T6_POTION_HEAL) — so match exact, then tier-stripped, then by
+   base across the catalogue (a T8 heal potion wears the curated T6
+   record: the capabilities are the item's, not the tier's). An item the
+   catalogue lacks leaves its slot UNSET — never invent a stand-in, the
+   member simply scores that slot naked. Companion slot names differ in
+   one place: its "chest" is the loadout's "armor". */
+const LIVE_SLOT = { head: "head", chest: "armor", shoes: "shoes", cape: "cape",
+                    offhand: "offhand", potion: "potion", food: "food" };
+let LIVE_BASE_MAP = null;
+function liveGearKey(item){
+  if (!item || typeof GEAR === "undefined") return null;
+  const noEnch = String(item).replace(/@\d+$/, "");
+  if (GEAR[noEnch]) return noEnch;
+  const base = noEnch.replace(/^T\d+_/, "");
+  if (GEAR[base]) return base;
+  if (!LIVE_BASE_MAP){
+    LIVE_BASE_MAP = {};
+    for (const k of Object.keys(GEAR)){
+      const b = k.replace(/^T\d+_/, "");
+      if (!(b in LIVE_BASE_MAP)) LIVE_BASE_MAP[b] = k;
+    }
+  }
+  return LIVE_BASE_MAP[base] || null;
+}
+function liveGearPicks(equipment){
+  if (!equipment) return null;
+  const out = {};
+  for (const [cs, slot] of Object.entries(LIVE_SLOT)){
+    const k = liveGearKey(equipment[cs]);
+    if (k && GEAR[k].slot === slot) out[slot] = k;
+  }
+  return Object.keys(out).length ? out : null;
+}
+/* the whole LOADOUT entry a live member contributes: real Q/W picks +
+   worn kit, or undefined when the companion knows neither yet. No engine
+   mark — this is a fielded build, not a scored default. */
+function liveLoadout(m){
+  const sp = liveSpellPicks(m.weapon, m.spells), gr = liveGearPicks(m.equipment);
+  if (!sp && !gr) return undefined;
+  return Object.assign({}, sp || {}, gr || {});
+}
 const liveSig = m => ({ w: m.weapon,
                         q: (m.spells || {}).q || null,
-                        w2: (m.spells || {}).w || null });
+                        w2: (m.spells || {}).w || null,
+                        g: Object.values(liveGearPicks(m.equipment) || {}).join("+") });
 
 function syncLiveComp(){
   if (!LIVE_SYNC || !LIVE_GUIDS || !companionData) return;
@@ -2315,24 +2368,25 @@ function syncLiveComp(){
   for (const m of (companionData.members || [])){
     if (!m.guid || !m.weapon || !WEAPONS[m.weapon]) continue;
     const sig = liveSig(m), prev = LIVE_GUIDS[m.guid];
-    if (prev && prev.w === sig.w && prev.q === sig.q && prev.w2 === sig.w2)
+    if (prev && prev.w === sig.w && prev.q === sig.q && prev.w2 === sig.w2
+        && prev.g === sig.g)
       continue;
-    const picks = liveSpellPicks(m.weapon, m.spells);
+    const lo = liveLoadout(m);
     if (prev && WEAPONS[prev.w]){
-      /* the member swapped weapons or picks: update their slot in place
-         (same state resets as the central data-swapat handler; no kit
-         prefill — the real kit is what just arrived) */
+      /* the member swapped weapons, picks or worn gear: update their slot
+         in place (same state resets as the central data-swapat handler; no
+         kit prefill — the real kit is what just arrived) */
       const i = party.findIndex((pw, ix) => pw === prev.w && PROV[ix] === "m");
       if (i !== -1){
         party[i] = m.weapon;
         COMBO[i] = null;
-        LOADOUT[i] = picks || undefined;
+        LOADOUT[i] = lo;
         changed = true;
       }
     } else if (party.length < HARD_CAP){
       /* newly visible (or newly joined) member: fill them in */
       party.push(m.weapon); PROV.push("m"); COMBO.push(null);
-      LOADOUT[party.length - 1] = picks || undefined;
+      LOADOUT[party.length - 1] = lo;
       changed = true;
     }
     LIVE_GUIDS[m.guid] = sig;
@@ -2356,10 +2410,12 @@ function loadCompanionParty(){
   COMBO = party.map(() => null);
   FORGE_NOTE = null;
   loadoutClear();
-  /* the members' REAL q/w picks score the comp from the first render */
+  /* the members' REAL q/w picks AND worn kit score the comp from the
+     first render (the dressed score the page displays reads GEARS_CUR,
+     which is derived from LOADOUT on every render) */
   live.forEach((m, i) => {
-    const picks = liveSpellPicks(m.weapon, m.spells);
-    if (picks) LOADOUT[i] = picks;
+    const lo = liveLoadout(m);
+    if (lo) LOADOUT[i] = lo;
   });
   LIVE_GUIDS = {};
   live.forEach(m => { if (m.guid) LIVE_GUIDS[m.guid] = liveSig(m); });

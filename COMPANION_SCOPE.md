@@ -35,6 +35,7 @@ earlier SAT-enum guesses — 34/95/237 — were a game version behind).
 | Gear/spell change | event 90 | 0=objId, 2=equip `short[10]`, 7=spells `short[14]` |
 | Full party roster | event 231 | 9=names `string[n]`, 8=guids `byte[16n]` |
 | Self join (name/objId only) | response op 2 | 0=objId, 2=name, 58=guild (52 is item INSTANCE ids — unusable) |
+| Inspect (on-demand gear + IP) | response op 148 (SAT enum; shape-bound) | 0=guid `byte[16]`, 1=equip `short[10]`, 3=item power `double` — per SAT `GetCharacterEquipmentResponse`; shipped 2026-09-06, NOT yet live-confirmed |
 
 Equipment slot order (both arrays), confirmed against a real loadout:
 `[0]mainhand [1]offhand [2]head [3]chest [4]shoes [5]bag [6]cape [7]mount
@@ -126,8 +127,12 @@ Integration paths, in order of preference:
   companion should fail loud when codes stop parsing, never silently).
 - Raw-socket mode needs admin; Npcap mode needs Npcap installed — pick one
   as default UX (lean: Npcap optional, fall back to raw sockets + prompt).
-- Unverified: whether inspect response carries spells on the wire (SAT
-  ignores them there); whether event 95 fires for ALL party members on
+- Unverified: whether the inspect response carries spells on the wire (SAT
+  ignores them there; the companion takes a 14-slot array opportunistically
+  since 2026-09-06 and `--debug` reports `sp=14`/`sp=` either way); whether
+  the inspect shape itself still holds on the current patch (first live
+  inspect with `--debug` confirms — `/status` `detected_codes.Inspect`);
+  whether event 95 fires for ALL party members on
   zone-in or only on change — if only on change, seed from NewCharacter
   (34, equipment only) and backfill spells opportunistically.
 - Windows-only as scoped (capture stack).
