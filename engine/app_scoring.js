@@ -236,7 +236,21 @@
     this.baseSize = this.template.base_size || size;
     this.size = (size === undefined || size === null) ? this.baseSize : size;
     this._carrierCapsCache = null;   /* carrierCaps() memo (size-keyed) */
-    this.reqs = this.template.requirements;
+    /* DEMAND RAMP (owner ruling 2026-09-07; mirrors engine.py set_content):
+       a row with ramp {none_until, full_at} is dropped at sizes <=
+       none_until, grows linearly to its measured value at full_at, and
+       proportionally beyond. */
+    this._ramp = {};
+    this.reqs = {};
+    for (var capR in this.template.requirements) {
+      var rowR = this.template.requirements[capR];
+      if (rowR.ramp) {
+        var fR = rampFactor(rowR.ramp, this.size);
+        if (fR <= 0) continue;
+        this._ramp[capR] = fR;
+      }
+      this.reqs[capR] = rowR;
+    }
     this.floors = this.template.hard_floors || {};
     /* Playstyle overlay: multiplies capability WEIGHTS only (mirrors
        engine.py). */
@@ -306,8 +320,10 @@
       var r = this.reqs[cap2];
       var tm = this.targetMults[cap2];
       tm = (tm === undefined) ? 1.0 : tm;
-      this._targets[cap2] = tm * (r.scales ? r.target * this.size / this.baseSize : r.target);
-      this._softs[cap2] = tm * (r.scales ? r.soft_cap * this.size / this.baseSize : r.soft_cap);
+      var sz2 = (cap2 in this._ramp) ? this._ramp[cap2]
+        : (r.scales ? this.size / this.baseSize : 1.0);
+      this._targets[cap2] = tm * r.target * sz2;
+      this._softs[cap2] = tm * r.soft_cap * sz2;
       var m2 = this.styleMults[cap2];
       this._weights[cap2] = r.weight * (m2 === undefined ? 1.0 : m2);
     }
@@ -809,6 +825,14 @@
     }
     return { members: members, tally: tally, flags: flags };
   };
+
+  function rampFactor(rp, size) {
+    /* mirrors engine.py _ramp_factor */
+    var lo = +rp.none_until, hi = +rp.full_at;
+    if (size <= lo) return 0.0;
+    if (size < hi) return (size - lo) / (hi - lo);
+    return size / hi;
+  }
 
   CompEngine.prototype.isStyleUnfit = function (weapon) {
     /* Unfit for the DECLARED style at this size band — bars suggestions

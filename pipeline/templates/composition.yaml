@@ -183,9 +183,10 @@ viability:
   # important in small groups as the engine values ... not restricting
   # weapons but rather focusing on mechanics." The mechanism that replaced
   # it lives in the templates' anti_zone rows (Exalted is the sole
-  # anti_zone supplier): no row where no small comp fields it, and demand
-  # that scales with fight size where comps do. `cost_tier` stays a dataset
-  # fact for display; nothing gates on it.
+  # anti_zone supplier): no row where no small comp fields it, and a
+  # DEMAND RAMP where comps do (nothing through 14, the measured value at
+  # 25, growing beyond). `cost_tier` stays a dataset fact for display;
+  # nothing gates on it.
   exclusions:
     # EVIDENCE-GATED ELIGIBILITY, not a permanent hardcoded ban (chapter-2
     # §F). Context attaches to the EXACT weapon: family-level evidence (a

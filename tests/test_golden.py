@@ -701,23 +701,28 @@ def run():
     # Exalted Staff is the catalogue's only anti_zone supplier; the
     # mechanism is the anti_zone row — none at the 7-man contents (no
     # 7-man comp in the corpus fields one; 2% of 4-9 man winner parties
-    # do), scaling with fight size elsewhere (32% of 20+ winners). Pinned
-    # at both ends: a default 7-man forge fields no Exalted with nothing
-    # barring it, a default 20-man still does, and a manual Exalted at 7
-    # scores like any healer.
+    # do) and a DEMAND RAMP elsewhere (owner, same day: "don't really need
+    # it at 10-14 and then need grows slightly as numbers grows and then
+    # becomes a good requirement at like 25+"; winners: 7% at 10-14, 21%
+    # at 15-19, 32% at 20+). Pinned at both ends: a default 7-man and a
+    # default 10-man forge field no Exalted with nothing barring it, a
+    # default 25-man does, and a manual Exalted at 7 scores like any
+    # healer.
     e_co7 = Engine(content="castle_outpost", size=7)
     p7 = e_co7.forge(7)["party"]
-    e_bz20 = Engine(content="blackzone_roam", size=20)
-    p20 = e_bz20.forge(20)["party"]
+    p10 = Engine(content="blackzone_roam", size=10).forge(10)["party"]
+    p25 = Engine(content="castle", size=25).forge(25)["party"]
     manual = e_co7.comp_score(["2H_HOLYSTAFF_CRYSTAL", "2H_MACE", "2H_LONGBOW"])
-    check("T42 no cost gate: Exalted absent from a default 7-man forge by "
-          "mechanics alone, present at 20, and scores when manual",
+    check("T42 no cost gate: Exalted absent from default 7- and 10-man "
+          "forges by mechanics alone, present at 25, and scores when manual",
           "2H_HOLYSTAFF_CRYSTAL" in set(e_co7.suggest_pool())
           and "2H_HOLYSTAFF_CRYSTAL" not in p7
-          and "2H_HOLYSTAFF_CRYSTAL" in p20
+          and "2H_HOLYSTAFF_CRYSTAL" not in p10
+          and "2H_HOLYSTAFF_CRYSTAL" in p25
           and manual == manual and manual > 0,
           f"p7={[E.weapons[w]['display_name'] for w in p7]} "
-          f"exalted@20={'2H_HOLYSTAFF_CRYSTAL' in p20} manual={manual:.2f}")
+          f"exalted@10={'2H_HOLYSTAFF_CRYSTAL' in p10} "
+          f"exalted@25={'2H_HOLYSTAFF_CRYSTAL' in p25} manual={manual:.2f}")
     check("T27b full-healer split matches the owner's named cases "
           "(Forgebark/Exalted hybrids, Great Holy/Redemption full)",
           E.weapons[GREAT_HOLY]["full_healer"]
