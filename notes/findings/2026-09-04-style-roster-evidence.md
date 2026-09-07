@@ -1,3 +1,5 @@
+> Superseded as the CURRENT board by `2026-09-05-style-roster-evidence.md` (same generator, larger sample). Kept because it is the board the 2026-09-04 style × band ruling was made against, and its blind round 3 form was graded in `tests/VALIDATION.md` (T39).
+
 # Style x size roster evidence (2026-09-04)
 
 Report-only (`pipeline/audit_style_rosters.py`). Source: killer-party rosters of 10+ from the official kill-event harvest, 1690 rosters with >= 80% weapons known; labelled by the engine's `comp_identity`; supply measured DRESSED (kits joined by player name, doctrine v0 where a member has no kit record) under `territory_defense` physics at the roster's size and labelled style. Counts below are by DISTINCT roster (guild set + weapon multiset).

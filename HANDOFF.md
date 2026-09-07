@@ -4,7 +4,7 @@ Comp Forge is an Albion Online party-composition recommendation engine and resea
 
 <https://sodiyal.github.io/albion-comp-engine/>
 
-This file is the current-state handoff. Historical implementation notes still live in the repository (`albion-comp-engine-design.md`, `MECHANICS_TODO.md`, `MASTERSHEET.md`, `pipeline/README.md`, and `tests/VALIDATION.md`) and should be consulted when changing mechanics, calibration, provenance, or validation.
+This file is the current-state handoff. `MASTERSHEET.md` is the LIVE expert control surface — its `tune:` blocks override everything at build time, so read it first for what the engine actually uses. `tests/VALIDATION.md` is the append-only ruling log. `albion-comp-engine-design.md`, `MECHANICS_TODO.md` and `pipeline/README.md` hold the design history, the mechanics backlog and the patch workflow. Consult them when changing mechanics, calibration, provenance, or validation.
 
 ## What the product is
 
@@ -27,8 +27,8 @@ Roles remain useful player-facing labels, but scoring is capability-driven.
 ## Planner layout (2026-09-02)
 
 The planner was re-laid-out for density — spec
-`docs/superpowers/specs/2026-09-02-dashboard-density-redesign-design.md`,
-plan `docs/superpowers/plans/2026-09-02-dashboard-density-redesign.md`.
+`notes/specs/2026-09-02-dashboard-density-redesign-design.md`,
+plan `notes/plans/2026-09-02-dashboard-density-redesign.md`.
 Display layer only: no scoring, engine, forge or pipeline code changed, and
 golden/parity carried through unchanged at every step.
 
@@ -96,7 +96,7 @@ owner under anti-circularity. **The harvest is now an OVERNIGHT TASK**:
 overnight harvest", daily 03:00 — it only harvests; rebuild + gates +
 audit + commit stay in-session. The style x size ROSTER EVIDENCE pass
 shipped the same evening (`pipeline/audit_style_rosters.py`, board in
-`docs/superpowers/findings/2026-09-04-style-roster-evidence.md`): 1,690
+`notes/findings/2026-09-04-style-roster-evidence.md`): 1,690
 labelled rosters measured dressed per style x band against every
 template — proposals for the owner's ruling after the blind round,
 never applied by the build. Blind round 1 (ten harvested rosters) was
@@ -191,9 +191,9 @@ stale since the 2026-08-29 sample refresh.
 
 ## Current engine model
 
-**2026-08-27 — the DRESSED FORGE shipped** (spec `docs/superpowers/specs/2026-08-27-dressed-forge-design.md`): forge and recommend evaluate every candidate as a full build — weapon + combo + doctrine kit (v0 + one divergent variant) — priced by the exact comp_score-with-gears the page displays, and forged members arrive with their kits prefilled (`_eng`-marked). The same day closed two adjacent gaps: the page now passes equipped LOADOUT gear into every scoring/suggestion call (the engine had scored full builds since 2026-08-20; the UI never sent them), and the gear capability catalog was completed (129 curated pieces, `sheets/gear/combat_expansion.yaml`). Owner rulings: kit suggestions are doctrine-tier-first in both modes (evidence-first, T22 re-pin), T30c re-pinned dressed with a naked-party honesty rider. Locked members are never re-dressed; doctrine passives never enter evaluation.
+**2026-08-27 — the DRESSED FORGE shipped** (spec `notes/specs/2026-08-27-dressed-forge-design.md`): forge and recommend evaluate every candidate as a full build — weapon + combo + doctrine kit (v0 + one divergent variant) — priced by the exact comp_score-with-gears the page displays, and forged members arrive with their kits prefilled (`_eng`-marked). The same day closed two adjacent gaps: the page now passes equipped LOADOUT gear into every scoring/suggestion call (the engine had scored full builds since 2026-08-20; the UI never sent them), and the gear capability catalog was completed (129 curated pieces, `sheets/gear/combat_expansion.yaml`). Owner rulings: kit suggestions are doctrine-tier-first in both modes (evidence-first, T22 re-pin), T30c re-pinned dressed with a naked-party honesty rider. Locked members are never re-dressed; doctrine passives never enter evaluation.
 
-**2026-08-27 (same day, follow-up pass) — DRESSED VALIDATION & CALIBRATION HARDENING** (plan `docs/superpowers/plans/2026-08-27-dressed-validation-calibration.md`; findings `docs/superpowers/findings/2026-08-27-*.md`; VALIDATION.md carries the dated entry + open rulings): the validation/calibration layers were re-based onto the dressed engine BEFORE any tuning. The audit found every historical V3/V4 number was an asymmetric hybrid (naked incumbents vs dressed candidates). Shipped, with zero scoring changes: `Engine.set_dressing(False)` (both ports, parity-pinned — the V3-W symmetric weapon-only mode), V3-D production-dressed scoring with the richer expert form + full metric set, V4 in three incumbent-gear classes (legacy gate unchanged; actual-gear kits joined from builds_index — published comps carry gear on all 201 slots), the dressed template audit, the adversarial frontline-floor audit, the gear-synergy audit, 16 gear blind cards, and the `calibration/` train/validation/holdout layer + `pipeline/calibrate_scoring.py` sensitivity harness. HEADLINE MEASUREMENTS: dressed incumbents collapse V4 role-level 78%→34–41% (11 of 12 lost hits are tank drops); worn-armor tankiness adds +419–622% of target everywhere and ordinary doctrine kits alone clear the tankiness hard floor for a no-tank 7-man — the 2026-08-12 pseudo-tankiness failure recreated through the gear stat channel (representation problem; Options A–D written, Option C source-aware floors recommended, OWNER RULING PENDING). Synergy stays weapon-only by recommendation (gear participation would move real comps negatively under the current J rule). Every coefficient remains at its shipped value, PROVISIONAL — the calibration report is a sensitivity map (train n=4; validation/holdout empty until fresh expert rounds).
+**2026-08-27 (same day, follow-up pass) — DRESSED VALIDATION & CALIBRATION HARDENING** (plan `notes/plans/2026-08-27-dressed-validation-calibration.md`; findings `notes/findings/2026-08-27-*.md`; VALIDATION.md carries the dated entry + open rulings): the validation/calibration layers were re-based onto the dressed engine BEFORE any tuning. The audit found every historical V3/V4 number was an asymmetric hybrid (naked incumbents vs dressed candidates). Shipped, with zero scoring changes: `Engine.set_dressing(False)` (both ports, parity-pinned — the V3-W symmetric weapon-only mode), V3-D production-dressed scoring with the richer expert form + full metric set, V4 in three incumbent-gear classes (legacy gate unchanged; actual-gear kits joined from builds_index — published comps carry gear on all 201 slots), the dressed template audit, the adversarial frontline-floor audit, the gear-synergy audit, 16 gear blind cards, and the `calibration/` train/validation/holdout layer + `pipeline/calibrate_scoring.py` sensitivity harness. HEADLINE MEASUREMENTS: dressed incumbents collapse V4 role-level 78%→34–41% (11 of 12 lost hits are tank drops); worn-armor tankiness adds +419–622% of target everywhere and ordinary doctrine kits alone clear the tankiness hard floor for a no-tank 7-man — the 2026-08-12 pseudo-tankiness failure recreated through the gear stat channel (representation problem; Options A–D written, Option C source-aware floors recommended, OWNER RULING PENDING). Synergy stays weapon-only by recommendation (gear participation would move real comps negatively under the current J rule). Every coefficient remains at its shipped value, PROVISIONAL — the calibration report is a sensitivity map (train n=4; validation/holdout empty until fresh expert rounds).
 
 **2026-08-27 (third pass, same day) — THE FIVE RULINGS LANDED** (VALIDATION.md carries the full record): **Option C structural floors** shipped in both ports — hard floors read the WEAPON+LOADOUT supply everywhere (fitness, every marginal, pick_report, explain, dashboard floor tags); worn gear still counts toward coverage/headroom/overstack but can never satisfy a structural floor, and a candidate's kit can never buy floor relief (V5a–V5f pin it; naked paths bit-identical; 2 V4 tank-drop slots recovered → actual_gear role 47%; the remaining dressed shortfall is the saturation/calibration question). A pre-existing forge pruning blind spot found en route (band-stranded predicate minima killing the beam) is fixed with per-predicate capacity gates in `_forge_feasible`. **Ruling 5**: `forge(locked_gears=)` preserves supplied lock kits verbatim (never re-dressed, never invented) and `refine(gears=)` runs the dressed local search returning `{party, gears}` (legacy calls bit-identical) — F25/F26. **Ruling 3**: synergy documented as WEAPON-INTERACTION SYNERGY (scoring.yaml rule 3). **Ruling 4**: round-2 blind forms committed (`tier2_form_r2_castle7.md`, `tier2_form_r2_blackzone20.md`; forms carry FORM_CONTEXT; gear cards regenerated). **Ruling 2**: the V4 exit gate deliberately stays on weapon_only role-level until the owner picks the dressed gate post-fix.
 
@@ -308,9 +308,9 @@ The planner now leads with:
 - **Caller tools** — the player-pool and swap-impact fold, collapsed by default
 - **Live party** — the companion feed (live-verified 2026-08-23) with **live sync**: after a load, weapon swaps update slots in place, newly visible weapons fill in, and members' real Q/W picks flow into the loadouts
 
-Layout (owner passes 2026-08-23, then 2026-08-27): the forge honesty reports (`#warn-slot`) live **under the wheel** — the wheel column's next row on the hero grid, right after the stage on stacked layouts — still never hidden. The old right-hand fitness / weakness / recommendation stack is intentionally hidden to avoid duplicating the same questions. The full capability board remains the deep diagnostic layer, and it now uses the same ceiling ruler as the radar (bar fills to the soft cap, brass tick at the target).
+Layout (owner passes 2026-08-23, 2026-08-27, then the 2026-09-02 density redesign described at the top of this file): the forge honesty reports (`#warn-slot`) sit directly under the wheel card in `.main`, placed by `_layout.css` — still never hidden. The old right-hand fitness / weakness / recommendation stack is intentionally hidden to avoid duplicating the same questions. The full capability board remains the deep diagnostic layer, and it now uses the same ceiling ruler as the radar (bar fills to the soft cap, brass tick at the target).
 
-**THE WHEEL IS A SEMICIRCLE AND THE PARTY STRIP IS GONE** (owner 2026-08-27). The wheel is no longer a square instrument: frameless weapon art rides the TOP ARC of a virtual `--wd` circle anchored at the top of a half-height box (the art is the star — no card boxes; the focused weapon scales up and glows brass), and the hub is a smaller circle floating in the arc's open mouth. Drag-to-rotate derives the centre from the box WIDTH, never its height. The width freed by the missing lower half goes to the **comp board**, which REPLACED the `ws-party` strip entirely: the roster in four main-role columns (Tank / Support / DPS / Healer, from `roleAdvisory`), each member a full `dm` tile sharing THE member popover with everything the strip's tiles carried (contribution, swap hints, off-comp/redundancy flags, kit/dossier/remove actions, the ≤960 bottom sheet). The strip's other jobs moved with it: open slots became a dashed brass column, duplicate-check notices and the kit editor became a notes rail under the board, and the role-filter tally chips retired outright (the column headers carry the counts). `memberPop()` is shared by construction so the docks can never disagree; the board is built in `renderRoster` and cached (`BOARD_HTML`), so wheel spins never pay for the roster analysis.
+**THE WHEEL IS A SEMICIRCLE AND THE PARTY STRIP IS GONE** (owner 2026-08-27). The wheel is no longer a square instrument: frameless weapon art rides the TOP ARC of a virtual `--wd` circle anchored at the top of a half-height box (the art is the star — no card boxes; the focused weapon scales up and glows brass), and the hub is a smaller circle floating in the arc's open mouth. Drag-to-rotate derives the centre from the box WIDTH, never its height. The **comp board** REPLACED the `ws-party` strip entirely (it sat under the wheel until the 2026-09-02 redesign moved it into the right-edge party flyout — see the layout section at the top of this file): the roster in four main-role columns (Tank / Support / DPS / Healer, from `roleAdvisory`), each member a full `dm` tile sharing THE member popover with everything the strip's tiles carried (contribution, swap hints, off-comp/redundancy flags, kit/dossier/remove actions, the ≤960 bottom sheet). The strip's other jobs moved with it: open slots became a dashed brass column, duplicate-check notices and the kit editor became a notes rail under the board, and the role-filter tally chips retired outright (the column headers carry the counts). `memberPop()` is shared by construction so the docks can never disagree; the board is built in `renderRoster` and cached (`BOARD_HTML`), so wheel spins never pay for the roster analysis.
 
 Source files:
 
@@ -499,28 +499,7 @@ The preferred product sequence is:
 
 Windows development environment historically uses `py -3` rather than `python`/`python3`.
 
-Core rebuild / gates:
-
-```text
-py -3 pipeline/evidence_lint.py
-py -3 pipeline/build_builds.py
-py -3 pipeline/build_dataset.py
-py -3 tests/test_golden.py
-py -3 tests/test_forge.py
-py -3 tests/test_roles.py
-py -3 tests/test_validation_modes.py
-py -3 tests/tier2_blindtest.py v4
-py -3 tests/test_js_parity.py
-node tests/test_loadout_codec.js
-node tests/test_display_math.js
-py -3 tests/test_patch_history.py
-py -3 tests/test_provenance.py
-py -3 tests/test_builds.py
-py -3 tests/test_cohort_families.py
-py -3 pipeline/build_interactions.py
-py -3 tests/test_interactions.py
-py -3 dashboard/build.py
-```
+Core rebuild / gates: the authoritative list is `CLAUDE.md` ("Tests" and "Build chain") — one list, kept current there; this file no longer carries a copy.
 
 The effect catalogue is NOT part of a normal build — it reads the pinned dumps
 directly and is regenerated only when the snapshot moves or its extraction

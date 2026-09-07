@@ -390,31 +390,24 @@ dumps or in-game measurement, not more searching.
   for AoE escalation: expected-targets-hit per content size (ties into Q2 —
   escalation caps at 8 targets, so clump-size assumptions matter most in the
   2–8 range).
-- [~] **Q7 — Resilience Penetration values.** VALUES FOUND (2026-08-25
-  research; wiki, labeled current to 30.000.1, unchanged through 31.020.1):
-  Realm Divided cut all melee resil-pen by 10pp (Battle Bracers −15).
-  Current tiers: Daggers 40% (Demonfang/Bridled Fury 25, Twin Slayers 20),
-  Prowling Staff 40%, Broadsword/Claymore/Pike/Glaive 30%, Dual Swords/
-  Carving/Spear line/Brawler Gloves 25%, most axes/war gloves 15–20%,
-  Maces/Hammers/Quarterstaffs 10% (Forge Hammers 20), Clarent/Spirithunter/
-  Rift Glaive 5%. Source: wiki Resilience_Penetration page + Realm Divided
-  combat thread. REMAINING: cross-check vs dumps, then the modeling
-  decision — sheet attribute vs fold into ST-damage effectiveness.
+- [x] **Q7 — Resilience Penetration.** CLOSED 2026-08-25, WIRED (priority
+  list item 3): the cited 69-row table lives in
+  `pipeline/resilience_penetration.yaml`, `build_dataset` stamps `resil_pen`,
+  both ports rebate burst_st/execute supply, F20 pins it. Optional
+  follow-up: dumps cross-check of the wiki values.
 - [x] **Q8 — CC Escalation duration curve.** ANSWERED 2026-08-20 from the
   dumps (same per-target factor as damage, 0.08; Spirit Animal 0.25 —
   see the SHIPPED block above). 2026-08-25 research confirms the curve is
   published NOWHERE (wiki states the mechanic exists, no numbers) — the
   dumps extraction is the only source and stands.
-- [ ] **Q9 (new) — Per-spell escalation eligibility.** Which of our curated
-  spells escalate? Wild Blood lists ~40 damage + 9 CC spells (fixed/improved,
-  possibly not exhaustive). Extraction pass over ao-bin-dumps needed to map
-  spell names → our weapon sheets/lines; results go through
-  `effect_overrides.yaml`-style evidence discipline.
-- [ ] **Q10 (new) — Does `burst_aoe` supply become escalation-weighted?**
-  If most meaningful ZvZ AoE spells escalate, a global multiplier on AoE
-  supply may suffice; if eligibility is patchy across our 137 weapons,
-  per-weapon escalation flags change relative weapon rankings within the
-  AoE class — this decides whether Q9 blocks implementation or refines it.
+- [x] **Q9 — Per-spell escalation eligibility.** ANSWERED 2026-08-20 from
+  the dumps (see the SHIPPED block above): 174/559 spells escalate, per
+  spell, carried on `cap_delivery.escalation`.
+- [x] **Q10 — Does `burst_aoe` supply become escalation-weighted?** REFUTED
+  2026-08-20: eligibility is NOT uniform across the AoE class. What follows
+  from it — per-spell gating of `burst_aoe` DAMAGE escalation — is the
+  deferred priority-list item 4; today only the global style multiplier
+  applies.
 - [ ] **Q11 (new) — Is asymmetric-numbers modeling in scope?** Disarray is
   RELATIVE: under the mirror-fight assumption (Q2 default) it is exactly a
   no-op, because both sides sit at the same level. It prices OUTNUMBERING,
@@ -584,9 +577,8 @@ trusted; disagreement → expert queue, never silently overridden.
   targets were calibrated on the flat supply model too and may want a full
   recalibration pass now that supply is loadout-aware (V4 is weak-form here —
   circularity); (b) base-party members still use flat-union supply, not a joint
-  best-loadout — a future refinement; (c) `explain()`/dashboard now report the
-  chosen loadout's caps, but the dashboard artifact under docs/ must be rebuilt
-  (`dashboard/build.py`) + deployed for the live site to reflect this.
+  best-loadout — a future refinement; (c) `explain()`/dashboard report the
+  chosen loadout's caps.
 - [~] **Q17 — usage-derived MetaPrior. BUILT + MEASURED 2026-08-14; NOT
   wired (deliberately).** `pipeline/build_meta_prior.py` produces a
   size-bucketed prior from `weapon_usage_v2.json` (share × n/(n+8) shrinkage,
@@ -635,9 +627,9 @@ SHIPPED overnight (committed, tested where possible without a live game):
 - **Connect-companion button** (`afa0f62`): Comp Forge rail control that polls
   the companion and loads the live party into a comp. Verified vs a mock.
 
-BLOCKED on one live run (needs the game + you): confirm spells resolve,
-auto-calibration binds, and the connect button pulls the live party. See
-`companion/README.md` "Status — pick up here".
+DONE — the live run happened 2026-08-23 (`companion/README.md` "Status —
+LIVE-CONFIRMED"): spells resolve, auto-calibration binds, connect + load +
+live sync work end to end.
 
 OPEN REQUIREMENT (2026-08-14, from live testing): **keep the roster live
 through mid-fight joins/leaves.** Today only the bulk roster event (231)
@@ -653,22 +645,22 @@ so the companion must be running before you zone into content (or trigger one
 zone) to capture the initial party.
 
 Upgrade menu, roughly highest-value first — pick when you resume:
-1. **The one live verification run** (finishes the whole companion arc).
+1. ~~The one live verification run~~ — DONE 2026-08-23.
 2. **Q17 usage-derived MetaPrior** — kills the Dagger Pair over-ranking using
    the 149-battle data already in hand; has a clean V4 on/off A/B. Biggest
    engine-quality win that needs no new data.
-3. **Spell picks into scoring** — now that the companion resolves each player's
-   real Q/W/E to sheet evidence IDs, feed them into the (QW)-conditional layer
-   so a comp is scored on actual loadouts, not line defaults.
+3. ~~Spell picks into scoring~~ — DONE 2026-08-23 (live sync maps each
+   member's real Q/W into the loadouts) and 2026-09-06 (worn kits too).
 4. **Magnitude audit queue** (below) — 16 RULE groups need your adjudication;
    each is a quick call that improves data quality.
 5. **Q16 content-level physics** — absolute Resilience/escalation by content so
    single-target damage is taxed at 20-man even under balanced (flips the
    Dagger Pair vs Bridled Fury case). Needs a template recalibration.
-6. **Gear sheets** — the biggest remaining build item (design doc §2.4);
-   unblocks archetype composition + the cleanse-if-running-X conditional UI.
+6. ~~Gear sheets~~ — DONE (`pipeline/sheets/gear/core.yaml` 2026-08-20,
+   `combat_expansion.yaml` 2026-08-27, 129 pieces).
 7. **Companion polish** — show spell names in the connect box / weapon drawer;
-   version-check cache refresh instead of the 7-day timer; item-power display.
+   version-check cache refresh instead of the 7-day timer. (Item-power display
+   shipped 2026-09-06 with the inspect parser.)
 
 ## Magnitude audit — dataset-wide (opened 2026-08-13)
 
@@ -726,19 +718,13 @@ recent-loadout history. CAVEAT: no `access-control-allow-origin` header
   FORGING: best comp where each member plays only weapons they demonstrably
   play (assignment problem over engine scores × player weapon pools).
   Decide CORS route: Worker proxy vs local helper JSON.
-- [~] **Stage 2 — live companion. WORKING (live-verified 2026-08-14) —
-  `companion/`**. Roster + weapon + full gear confirmed against a real
-  5-person party; spell-name resolution built (needs a live test); the Comp
-  Forge "connect companion" button is the remaining piece. Authoritative
-  resume notes: `companion/README.md` "Status — pick up here" + HANDOFF.
-  (Older detail below kept for context.)
-  Standalone MIT-stack C# console app: raw-socket capture → PhotonPackageParser
-  → party/equipment/spell handlers → `localhost:53321/party` JSON. Compiles
-  clean; item DB + HTTP + JSON verified without a live game. REMAINING: one
-  live-game run as Administrator to confirm the event-code indices parse
-  (party join, NewCharacter, EquipmentChanged) — codes may need a sync vs
-  SAT per the README patch ritual. Then the Comp Forge "connect companion"
-  button (poll /party, map weapon→slots). Scope: `COMPANION_SCOPE.md`.
+- [x] **Stage 2 — live companion. LIVE-CONFIRMED end to end 2026-08-23**
+  (`companion/README.md` "Status — LIVE-CONFIRMED"): roster, gear, spell-name
+  resolution, shape-based auto-calibration, the Comp Forge connect button,
+  load, and live sync; 2026-09-06 added the inspect response (on-demand gear
+  refresh + item power) and worn kits flowing into the loadouts. Still open:
+  incremental mid-fight join/leave (the OPEN REQUIREMENT above). Scope and
+  wire map: `COMPANION_SCOPE.md`.
 - [ ] **(superseded detail) Stage 2 — live companion (legitimate under the visibility rule).**
   No official live API, but the client SHOWS party roster and, via inspect/
   proximity, the gear of players in your zone — so a read-only local Photon
@@ -769,9 +755,13 @@ recent-loadout history. CAVEAT: no `access-control-allow-origin` header
 
 - Disarray: recorded in mechanics.yaml only — cancels in a mirror fight
   (Q11); revisit if templates gain an expected-enemy-size field.
-- CC Escalation: no duration numbers yet (Q8) — `stun`/`clump_create`
-  untouched by mechanics for now.
+- CC Escalation: `stun` IS wired (geometric transform + the dumps-derived
+  duration factor, Q8 — `mechanics.yaml` `cc_duration_caps`); only
+  `clump_create` stays untouched.
 - Resilience Penetration: WIRED 2026-08-25 (see Q7 in the priority list) —
   no longer in this list.
-- Per-spell escalation eligibility: global multiplier assumes the AoE class
-  escalates uniformly until Q9's dumps extraction says otherwise.
+- Per-spell `burst_aoe` escalation eligibility: extracted (Q9, 174/559) but
+  NOT wired — the global style multiplier still treats the AoE class
+  uniformly. Priority-list item 4; its stated precondition ("after a styled
+  expert pass") is a question for the owner now that blind rounds 1-4 have
+  run.

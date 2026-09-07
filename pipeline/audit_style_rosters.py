@@ -21,7 +21,7 @@ near-complete killer-party roster of 10+ players:
 
 Output per style x size band (10-14 / 15-19 / 20):
   out/style_roster_evidence.json  - every number below, machine-readable
-  docs/superpowers/findings/<date>-style-roster-evidence.md - the board
+  notes/findings/<date>-style-roster-evidence.md - the board
 
 For each capability the board shows the harvest's 10th / 50th / 90th
 percentile beside every content template's CURRENT target and soft cap at
@@ -57,7 +57,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 OUT = os.path.join(HERE, "out")
 CACHE = os.path.join(OUT, "party_cache")
-FINDINGS = os.path.join(ROOT, "docs", "superpowers", "findings")
+FINDINGS = os.path.join(ROOT, "notes", "findings")
 sys.path.insert(0, ROOT)
 from engine.engine import Engine  # noqa: E402
 
@@ -494,7 +494,7 @@ def main():
               encoding="utf-8", newline="\n") as f:
         f.write("\n".join(md) + "\n")
     print(f"board: {len(board)} style x band cells -> out/style_roster_evidence.json "
-          f"+ docs/superpowers/findings/{today}-style-roster-evidence.md")
+          f"+ notes/findings/{today}-style-roster-evidence.md")
 
 
 if __name__ == "__main__":

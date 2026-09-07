@@ -243,8 +243,8 @@
     this.style = style || "balanced";
     var styles = this.data.styles || {};
     this.styleMults = (styles[this.style] || {}).multipliers || {};
-    /* Mechanics overlay (2026-08-18): the linear grow() extrapolation is
-       replaced by the piecewise absolute size table (size_physics). The
+    /* Mechanics overlay: party-size counts come from the piecewise absolute
+       size table (size_physics), never a linear extrapolation. The
        Resilience ratio is factorized into a STYLE factor (never clamped)
        and a SIZE factor (clamped at 1.0 above stBoostMaxSize). Mirrors
        engine.py set_content. */
@@ -2187,28 +2187,6 @@
     return out;
   };
 
-  CompEngine.prototype.bestLoadout = function (s, baseSyn, weapon) {
-    /* Legacy shim (mirrors engine.py best_loadout): candidate loadout vs
-       bare supply with J=0 — exact for an empty party. */
-    var state = { s: s, sSyn: s, J: [], pairVals: [], counts: {} };
-    var p;
-    for (p = 0; p < this._activeSyn.length; p++) {
-      state.J.push(0.0);
-      state.pairVals.push(this._pairValue(p, s[this._activeSyn[p][0]] || 0.0,
-                                          s[this._activeSyn[p][1]] || 0.0, 0.0));
-    }
-    var best = null;
-    var extras = this._comboExtras(weapon);
-    for (var i = 0; i < extras.length; i++) {
-      var dFit = this._margFitFrom(s, extras[i]);
-      var dSyn = this._margSynFrom(state, extras[i]);
-      var val = this.alpha * dFit + this.beta * dSyn;
-      if (best === null || val > best.val)
-        best = { val: val, dFit: dFit, dSyn: dSyn, extra: extras[i] };
-    }
-    return best === null ? { dFit: 0.0, dSyn: 0.0, extra: {} } : best;
-  };
-
   CompEngine.prototype.explain = function (party, candidate, combos, gears) {
     /* Per-capability delta terms for the candidate's CHOSEN loadout —
        matches what _evalPick scored (mirrors engine.py explain). */
@@ -2562,11 +2540,11 @@
      style-declared comp on file (see VALIDATION.md, V3 round 1). */
   var IDENTITY_MELEE_CORE = 0.65, IDENTITY_RANGED_CORE = 0.35,
       IDENTITY_STRONG = 0.80, IDENTITY_CLAP_AOE = 0.50,
-      IDENTITY_BC_AOE = 0.45, IDENTITY_BC_POSTURE = 0.45,   /* posture retired 2026-09-04 (round 2) */
+      IDENTITY_BC_AOE = 0.45,
       IDENTITY_BC_MELEE_BOMB = 0.5,   /* the ball itself carries half the bomb */
       IDENTITY_CARRIER_MIN = 4, IDENTITY_MIN_MEMBERS = 3,
       IDENTITY_RANGED_ATTACK = 9.0,
-      IDENTITY_HYBRID_AOE = 0.45, IDENTITY_HYBRID_EVADE = 2.0,   /* 0.40 -> 0.45, blind round 2 */
+      IDENTITY_HYBRID_AOE = 0.45,     /* 0.40 -> 0.45, blind round 2 */
       IDENTITY_KITE_TOOLS_PER = 10,   /* standoff tools per members (2026-09-04) */
       IDENTITY_FLEX_HOME = 2.0,       /* rigid melee : rigid ranged that pulls flex bombs home */
       IDENTITY_LONE_TOOL_AOE = 0.45;  /* a lone standoff body makes a kite only below this bomb share */
@@ -2741,7 +2719,6 @@
       for (var tc in carrierCount) {
         if (carrierCount[tc] > topCarrier) topCarrier = carrierCount[tc];
       }
-      var evadePm = n ? evade / n : 0.0;
       if (clap && topCarrier >= 3 && topCarrier * 2 >= nCarrierMembers) {
         out.archetype = "bomb_squad";
         out.label = "Bomb squad — off-timer artillery (clap detachment)";
@@ -2760,7 +2737,7 @@
       out.style = "clap_kite";
       out.strength = "leaning";
       out.label = sname("clap_kite", "Clap-Kite") +
-                  " -- bomb from range, throw them back";
+                  " — bomb from range, throw them back";
     } else if (mode.aoe >= IDENTITY_BC_AOE && bcBomb >= IDENTITY_BC_MELEE_BOMB) {
       out.style = "brawl_clap";
       out.strength = "leaning";

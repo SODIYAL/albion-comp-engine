@@ -43,7 +43,7 @@ sheets/illustrative/      design-doc §2.3 placeholders — NOT a release
    │  py -3 pipeline/evidence_lint.py      ← CI gate, exit 1 blocks release
    │  py -3 pipeline/build_dataset.py
    ▼
-out/dataset-<version>.json + dataset-latest.json    ← single source of truth
+out/dataset-latest.json                             ← single source of truth
    │
    ├─ engine/engine.py            scoring engine (Python)
    ├─ tests/test_golden.py        golden regression cases
@@ -111,7 +111,7 @@ py -3 pipeline/calibrate_scoring.py [--golden] # sensitivity sweeps over calibra
 None of these writes anything a build reads; `calibrate_scoring.py` runs
 golden counts against a PATCHED TEMP COPY of the dataset via the
 `BION_DATASET` path override — the real dataset is never touched. Findings
-and the open owner rulings live in `docs/superpowers/findings/2026-08-27-*.md`;
+and the open owner rulings live in `notes/findings/2026-08-27-*.md`;
 the split discipline in `calibration/README.md`.
 
 ## Moving to a new game patch

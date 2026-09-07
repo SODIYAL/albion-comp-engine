@@ -101,7 +101,7 @@ The project has moved well beyond the original prototype described in early READ
 
 The system should still be treated as a decision-support tool rather than an authoritative statement of the Albion meta. Capability grading, content calibration, and validation against experienced callers remain ongoing work.
 
-**Known open defect (the honest caveat):** every "how much a team needs" number was measured by counting *weapons*, but the engine now measures whole *people* — weapon plus armour, cape and consumables, which is roughly twice as much supply on average and far more for durability. Until those reference numbers are re-measured in the same unit, gear-heavy capabilities read as over-supplied. The correction is scoped and evidenced (see `HANDOFF.md`); it is deliberately not applied piecemeal, because a half-converted set of numbers would be worse than a consistently wrong one.
+**Units (resolved 2026-08-29):** every "how much a team needs" number now speaks the unit the engine measures — whole *people* (weapon plus armour, cape and consumables). The template rows were re-fitted together, never piecemeal, and structural hard floors deliberately stay in weapon units (see `CLAUDE.md`, "One unit, everywhere").
 
 ## Observed evidence and caller tools (shipped August 2026)
 
@@ -151,25 +151,13 @@ See `tests/VALIDATION.md` for the validation history and gates.
 
 On Windows, use `py -3` rather than `python`/`python3`.
 
-The authoritative full command list is maintained in `HANDOFF.md` and `pipeline/README.md`. The main day-to-day gates include:
+The authoritative gate list and build chain live in `CLAUDE.md` ("Tests" and "Build chain"); `pipeline/README.md` covers the game-patch workflow. The minimal day-to-day loop:
 
 ```bash
 py -3 pipeline/evidence_lint.py
-py -3 pipeline/build_builds.py
 py -3 pipeline/build_dataset.py
 py -3 tests/test_golden.py
-py -3 tests/test_forge.py
-py -3 tests/tier2_blindtest.py v4
 py -3 tests/test_js_parity.py
-node tests/test_loadout_codec.js
-py -3 tests/test_patch_history.py
-py -3 tests/test_provenance.py
-py -3 tests/test_builds.py
-py -3 pipeline/build_interactions.py
-py -3 tests/test_interactions.py
-py -3 tests/test_roles.py
-py -3 tests/test_cohort_families.py
-node tests/test_display_math.js
 py -3 dashboard/build.py
 ```
 

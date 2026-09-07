@@ -236,7 +236,7 @@ def run():
     # (resist_shred). The flat union has all of them; the scored loadout must
     # never count both alternatives of a slot at once.
     ez = Engine(content="blackzone_roam", size=20)
-    _df, _ds, extra = ez.best_loadout(ez.effective_supply([]), 0.0, DAGGERS)
+    _df, _ds, extra = ez.best_loadout(ez.effective_supply([]), DAGGERS)
     flat = E.caps_of(DAGGERS)
     check("T14 one-spell-per-slot: DP loadout never counts both W (or both Q) picks",
           not ("catch" in extra and "disengage" in extra)

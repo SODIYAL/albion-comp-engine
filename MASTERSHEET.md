@@ -333,8 +333,9 @@ A member is no longer just weapon + weapon spells. The engine now models:
 - **Gear sheets**: `pipeline/sheets/gear/*.yaml` — same rules as weapon
   sheets (1–7 scale, no score without evidence; the evidence is the item's
   ability id, or `GEAR_STATS` for statless items like capes/potions/food).
-  Starter set = the items your doctrine names in §9; ~40 items curated
-  from the dumps descriptions. Add items by copying an entry.
+  Starter set = the items your doctrine names in §9; 129 items curated
+  (`core.yaml` + `combat_expansion.yaml`, 2026-08-27). Add items by
+  copying an entry.
 - **One ability per piece** — the loadout rule applies to gear too; the
   engine scores the chosen (or best) ability per slot.
 - **Item stats modify the person** (`build_stats` in the §4 mechanics
@@ -370,10 +371,10 @@ A member is no longer just weapon + weapon spells. The engine now models:
   whether raw throughput deserves value past the target is an expert
   call for the templates (a `heal_throughput` capability or a softer
   heal soft-cap), queued for the next tuning pass.
-- **Not yet**: gear inside the forge/recommend loops (the advisor and
-  the loadout panel are live in the page, and kit_options IS mirrored
-  and parity-checked in both engines — the remaining gap is the forge
-  pricing gear while it generates).
+- **Shipped 2026-08-27 (the dressed forge)**: forge and recommend
+  evaluate every candidate as weapon + combo + doctrine kit, priced by
+  the exact comp score the page displays; locked members are never
+  re-dressed (`notes/specs/2026-08-27-dressed-forge-design.md`).
 
 ### 8b. The role layer & forge structure — where those dials live
 
@@ -388,6 +389,8 @@ file — they live beside the role book, and every entry is cited:
 | Gear affinity rulings | replace a derived item-to-seat affinity | `pipeline/roles.yaml` `gear_affinity_overrides` |
 | **Need profiles** | fine-seat bands + function coverage the forge must field (engage 2-3 / stopper 1-2 default, terry stopper-heavy; pierce & heal-cut always) | `pipeline/roles.yaml` `need_profiles` |
 | Style role bands | healers/frontline/ranged-core per style & size (clap/clap_kite ranged core 7 at 20) | `pipeline/templates/styles.yaml` `constraint_overrides` |
+| Style × size rows | targets / soft caps per declared style × size band, GENERATED from the harvest board — never hand-edited, re-derived after every harvest (2026-09-04) | `pipeline/templates/style_bands.yaml` via `pipeline/derive_style_bands.py` |
+| Style-fit rulings | override a weapon's derived fits / situational / unfit verdict per style × band (cited, validated, release-blocking on errors) | `pipeline/style_overrides.yaml` |
 
 Same safety promise as this file: the build fails loudly on an unknown
 weapon, item, role or content id — a stale ruling never silently

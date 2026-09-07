@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Tankiness / frontline-floor adversarial audit (Phase 4, 2026-08-27).
-REPORT-ONLY — feeds docs/superpowers/findings/ and the owner ruling on
+REPORT-ONLY — feeds notes/findings/ and the owner ruling on
 whether ordinary worn armor may satisfy a structural frontline demand.
 
 Three realistic dressed parties at castle_outpost size 7 (tankiness
