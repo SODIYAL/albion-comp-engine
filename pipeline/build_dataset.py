@@ -10,7 +10,7 @@ Build the versioned dataset the engine and the SPA both consume
     templates/*.yaml           content templates + scoring config
         │
         ▼
-    out/dataset-<version>.json + out/dataset-latest.json
+    out/dataset-latest.json (the dataset version rides inside it)
 
 Why this exists: before it, capability numbers lived in BOTH a Python dict
 inside the prototype and the curated YAML sheets, and they had already
@@ -2545,10 +2545,12 @@ def main():
     }
 
     os.makedirs(OUT, exist_ok=True)
-    for name in (f"dataset-{args.version}.json", "dataset-latest.json"):
-        with open(os.path.join(OUT, name), "w", encoding="utf-8",
-                  newline="\n") as f:
-            json.dump(dataset, f, indent=1, sort_keys=True)
+    # One artifact: the version is a field inside it. The versioned copy
+    # that used to sit beside it was byte-identical, read by nothing and
+    # re-churned 1.8 MB on every rebuild (removed 2026-09-07).
+    with open(os.path.join(OUT, "dataset-latest.json"), "w", encoding="utf-8",
+              newline="\n") as f:
+        json.dump(dataset, f, indent=1, sort_keys=True)
 
     print(f"dataset v{args.version}: {len(weapons)} weapons "
           f"({len(curated)} curated, {len(illustrative)} illustrative), "
@@ -2572,7 +2574,7 @@ def main():
                   f"{'provenance; ' if not provenance_ok else ''}"
                   f"{len(illustrative)} illustrative sheet(s))")
     print(f"  release_clean : {dataset['_meta']['release_clean']}{blocked_by}")
-    print(f"  wrote out/dataset-{args.version}.json + out/dataset-latest.json")
+    print("  wrote out/dataset-latest.json")
     if not lint_ok:
         return 1
     if provenance_problems and not args.skip_provenance:

@@ -16,7 +16,7 @@
 
 **Tech Stack:** Python 3 (stdlib only + PyYAML, matching the pipeline), script-style tests, `jsonfmt` shared serializer.
 
-**Spec:** `docs/superpowers/specs/2026-08-27-castle-outpost-comp-book-design.md` (§3, §4, §8a items 1–2, §8c gates 1–2, §10 steps 1–3). Plan B (book, kits/budget, forge/UI, doctrine tests) is written after this plan lands and the first blind round runs.
+**Spec:** `notes/specs/2026-08-27-castle-outpost-comp-book-design.md` (§3, §4, §8a items 1–2, §8c gates 1–2, §10 steps 1–3). Plan B (book, kits/budget, forge/UI, doctrine tests) is written after this plan lands and the first blind round runs.
 
 ## Global Constraints
 
@@ -36,7 +36,7 @@
 
 **Files:**
 - Create: `<scratchpad>/probe_smallfights.py` (throwaway — NOT committed)
-- Create: `docs/superpowers/plans/2026-08-27-outpost-evidence-notes.md` (findings — committed)
+- Create: `notes/plans/2026-08-27-outpost-evidence-notes.md` (findings — committed)
 
 **Interfaces:**
 - Consumes: `api.albionbb.com` (sanctioned endpoint; explicit network step).
@@ -100,7 +100,7 @@ Expected: one full listing row printed; event-detail endpoints either respond (n
 
 - [ ] **Step 3: Record findings in the notes doc**
 
-Create `docs/superpowers/plans/2026-08-27-outpost-evidence-notes.md` answering, with the literal field names seen:
+Create `notes/plans/2026-08-27-outpost-evidence-notes.md` answering, with the literal field names seen:
 
 ```markdown
 # Outpost evidence probe findings (2026-08-27 plan, Task 1)
@@ -126,7 +126,7 @@ If a zone field exists: adjust the literal field names in Task 3's code to match
 - [ ] **Step 5: Commit the findings doc**
 
 ```bash
-git add docs/superpowers/plans/2026-08-27-outpost-evidence-notes.md
+git add notes/plans/2026-08-27-outpost-evidence-notes.md
 printf 'Probe findings: albionbb small-fight fields for outpost evidence\n' > /tmp/cm.txt
 git commit -F /tmp/cm.txt
 ```
@@ -1093,7 +1093,7 @@ Expected: all exit 0.
 - [ ] **Step 7: Commit artifacts + docs**
 
 ```bash
-git add pipeline/out/content_rosters.json pipeline/out/comp_clusters.json pipeline/content_zones.yaml CLAUDE.md pipeline/README.md HANDOFF.md docs/superpowers/plans/2026-08-27-outpost-evidence-notes.md
+git add pipeline/out/content_rosters.json pipeline/out/comp_clusters.json pipeline/content_zones.yaml CLAUDE.md pipeline/README.md HANDOFF.md notes/plans/2026-08-27-outpost-evidence-notes.md
 printf 'Outpost evidence: first labeled sample + clusters, gate chain documented\n' > /tmp/cm.txt
 git commit -F /tmp/cm.txt
 ```

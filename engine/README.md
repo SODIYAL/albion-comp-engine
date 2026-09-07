@@ -28,7 +28,7 @@ The scoring core of Comp Forge, in two parity-locked ports:
 - **Synergy is weapon-interaction synergy** (documented 2026-08-27):
   `synergy()` deliberately prices weapons only — worn-gear capabilities
   count in fitness, never in the pair bonuses (finding:
-  `docs/superpowers/findings/2026-08-27-gear-synergy-finding.md`).
+  `notes/findings/2026-08-27-gear-synergy-finding.md`).
 - **Structural floors are source-aware** (Option C, owner ruling
   2026-08-27): hard floors read the weapon+loadout supply in `fitness`
   and every marginal path — worn gear improves coverage/headroom/

@@ -1,6 +1,6 @@
 # Dressed Validation Report
 
-**Date:** 2026-08-27 · **Scope:** Phases 1–2 of the dressed-validation & calibration hardening pass (work order of the same date; plan `docs/superpowers/plans/2026-08-27-dressed-validation-calibration.md`).
+**Date:** 2026-08-27 · **Scope:** Phases 1–2 of the dressed-validation & calibration hardening pass (work order of the same date; plan `notes/plans/2026-08-27-dressed-validation-calibration.md`).
 
 Machine artifacts: `pipeline/out/validation_asymmetry_probe.json`, the `--json` dumps of `tests/tier2_blindtest.py v4`, `pipeline/out/dressed_template_audit.json`, `pipeline/out/frontline_floor_audit.json`, `pipeline/out/gear_synergy_audit.json`, `pipeline/out/calibration_report.json`.
 

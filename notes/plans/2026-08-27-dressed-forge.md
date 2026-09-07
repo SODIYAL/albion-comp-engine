@@ -8,7 +8,7 @@
 
 **Tech Stack:** Python 3 (`engine/engine.py`), ES5-ish JS mirror (`engine/app_scoring.js` — contains a literal NUL byte: search with `Select-String`, read with the Read tool, never grep), `dashboard/_app.js`, script-style tests.
 
-**Spec:** `docs/superpowers/specs/2026-08-27-dressed-forge-design.md`
+**Spec:** `notes/specs/2026-08-27-dressed-forge-design.md`
 
 ## Global Constraints
 

@@ -8,7 +8,7 @@
 
 **Tech Stack:** Vanilla HTML/CSS/JS single-file bundle. Python 3 bundler (`dashboard/build.py`). Script-style tests (NOT pytest) run directly with `py -3` / `node`.
 
-**Spec:** `docs/superpowers/specs/2026-09-02-dashboard-density-redesign-design.md`
+**Spec:** `notes/specs/2026-09-02-dashboard-density-redesign-design.md`
 
 ## Global Constraints
 
