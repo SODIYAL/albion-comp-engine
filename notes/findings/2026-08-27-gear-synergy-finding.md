@@ -1,6 +1,6 @@
 # Finding: should gear-sourced capabilities trigger synergy pairs?
 
-**Date:** 2026-08-27 · **Status:** MEASURED, recommendation below · **Owner decision required before any implementation.**
+**Date:** 2026-08-27 · **Status:** RULED 2026-08-27 — Model 2 adopted: synergy is WEAPON-INTERACTION synergy (`scoring.yaml` rule 3, HANDOFF.md ruling 3, `engine/README.md`). Kept as the measurement record.
 
 Evidence artifact: `pipeline/out/gear_synergy_audit.json` (report-only; the "if gear counted" numbers are labeled hypotheticals computed by mirroring the engine's own pair rule — no scoring path was touched).
 

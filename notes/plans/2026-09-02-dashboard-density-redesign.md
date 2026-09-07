@@ -1,5 +1,7 @@
 # Dashboard Density Redesign Implementation Plan
 
+> **STATUS 2026-09-02: EXECUTED.** Shipped (HANDOFF.md layout section; `tests/test_dashboard_layout.py` pins the contracts); the checkboxes below were never ticked. Kept as the work record.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Rebuild the Comp Forge planner's first screen as a four-column card grid with edge-anchored flyout panels, so capability supply, kill pressure, role check and caller tools are visible without scrolling.

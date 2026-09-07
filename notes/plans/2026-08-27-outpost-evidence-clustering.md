@@ -1,5 +1,7 @@
 # Castle Outpost Evidence + Clustering Implementation Plan (Plan A)
 
+> **STATUS: NOT STARTED — awaiting owner go/no-go.** None of its artifacts exist (`pipeline/sample_content_rosters.py`, `pipeline/build_comp_clusters.py`, `pipeline/content_zones.yaml`, `out/comp_clusters.json`) and nothing in CLAUDE.md or HANDOFF.md references it. Design: `notes/specs/2026-08-27-castle-outpost-comp-book-design.md`.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Content-labeled small-fight killboard sampling plus a deterministic comp-cluster miner for castle outposts, gated per step, ending with real cluster candidates ready for the owner's first blind ratification round.

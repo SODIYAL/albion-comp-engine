@@ -31,3 +31,5 @@ The soft caps were comp-fitted (2026-08-21) in weapon-loadout units, pre-dating 
 ## What this audit does NOT license
 
 No retune. The numbers say the template unit scale and the dressed supply live in different currencies; *which* currency the owner wants each rule to read (floors: see Option C in the tankiness finding; targets/softs: calibration rounds) is a ruling, not a patch.
+
+**Follow-up 2026-08-29:** the unit half of this finding was answered by the unit re-fit (targets and soft caps now speak person units — `tests/VALIDATION.md` "THE UNIT RE-FIT"); the floor half by Option C (hard floors read weapon+loadout supply only).

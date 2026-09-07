@@ -1,7 +1,7 @@
 # Castle Outpost Comp Book — Design
 
 **Date:** 2026-08-27
-**Status:** approved in chat section-by-section; this document is the written record
+**Status:** approved in chat section-by-section; this document is the written record. DESIGNED, NOT BUILT — the implementation plan (`notes/plans/2026-08-27-outpost-evidence-clustering.md`) has not started
 **Owner decisions embedded:** evidence-first clustering; all four evidence sources; correctness = comp + per-seat kits + budget tiers; vertical slice (castle outposts first); doctrine-coherence tests; stage gates between every step
 
 ## 1. Goal and end state

@@ -4,7 +4,7 @@ Comp Forge is an Albion Online party-composition recommendation engine and resea
 
 <https://sodiyal.github.io/albion-comp-engine/>
 
-This file is the current-state handoff. Historical implementation notes still live in the repository (`albion-comp-engine-design.md`, `MECHANICS_TODO.md`, `MASTERSHEET.md`, `pipeline/README.md`, and `tests/VALIDATION.md`) and should be consulted when changing mechanics, calibration, provenance, or validation.
+This file is the current-state handoff. `MASTERSHEET.md` is the LIVE expert control surface — its `tune:` blocks override everything at build time, so read it first for what the engine actually uses. `tests/VALIDATION.md` is the append-only ruling log. `albion-comp-engine-design.md`, `MECHANICS_TODO.md` and `pipeline/README.md` hold the design history, the mechanics backlog and the patch workflow. Consult them when changing mechanics, calibration, provenance, or validation.
 
 ## What the product is
 
@@ -308,9 +308,9 @@ The planner now leads with:
 - **Caller tools** — the player-pool and swap-impact fold, collapsed by default
 - **Live party** — the companion feed (live-verified 2026-08-23) with **live sync**: after a load, weapon swaps update slots in place, newly visible weapons fill in, and members' real Q/W picks flow into the loadouts
 
-Layout (owner passes 2026-08-23, then 2026-08-27): the forge honesty reports (`#warn-slot`) live **under the wheel** — the wheel column's next row on the hero grid, right after the stage on stacked layouts — still never hidden. The old right-hand fitness / weakness / recommendation stack is intentionally hidden to avoid duplicating the same questions. The full capability board remains the deep diagnostic layer, and it now uses the same ceiling ruler as the radar (bar fills to the soft cap, brass tick at the target).
+Layout (owner passes 2026-08-23, 2026-08-27, then the 2026-09-02 density redesign described at the top of this file): the forge honesty reports (`#warn-slot`) sit directly under the wheel card in `.main`, placed by `_layout.css` — still never hidden. The old right-hand fitness / weakness / recommendation stack is intentionally hidden to avoid duplicating the same questions. The full capability board remains the deep diagnostic layer, and it now uses the same ceiling ruler as the radar (bar fills to the soft cap, brass tick at the target).
 
-**THE WHEEL IS A SEMICIRCLE AND THE PARTY STRIP IS GONE** (owner 2026-08-27). The wheel is no longer a square instrument: frameless weapon art rides the TOP ARC of a virtual `--wd` circle anchored at the top of a half-height box (the art is the star — no card boxes; the focused weapon scales up and glows brass), and the hub is a smaller circle floating in the arc's open mouth. Drag-to-rotate derives the centre from the box WIDTH, never its height. The width freed by the missing lower half goes to the **comp board**, which REPLACED the `ws-party` strip entirely: the roster in four main-role columns (Tank / Support / DPS / Healer, from `roleAdvisory`), each member a full `dm` tile sharing THE member popover with everything the strip's tiles carried (contribution, swap hints, off-comp/redundancy flags, kit/dossier/remove actions, the ≤960 bottom sheet). The strip's other jobs moved with it: open slots became a dashed brass column, duplicate-check notices and the kit editor became a notes rail under the board, and the role-filter tally chips retired outright (the column headers carry the counts). `memberPop()` is shared by construction so the docks can never disagree; the board is built in `renderRoster` and cached (`BOARD_HTML`), so wheel spins never pay for the roster analysis.
+**THE WHEEL IS A SEMICIRCLE AND THE PARTY STRIP IS GONE** (owner 2026-08-27). The wheel is no longer a square instrument: frameless weapon art rides the TOP ARC of a virtual `--wd` circle anchored at the top of a half-height box (the art is the star — no card boxes; the focused weapon scales up and glows brass), and the hub is a smaller circle floating in the arc's open mouth. Drag-to-rotate derives the centre from the box WIDTH, never its height. The **comp board** REPLACED the `ws-party` strip entirely (it sat under the wheel until the 2026-09-02 redesign moved it into the right-edge party flyout — see the layout section at the top of this file): the roster in four main-role columns (Tank / Support / DPS / Healer, from `roleAdvisory`), each member a full `dm` tile sharing THE member popover with everything the strip's tiles carried (contribution, swap hints, off-comp/redundancy flags, kit/dossier/remove actions, the ≤960 bottom sheet). The strip's other jobs moved with it: open slots became a dashed brass column, duplicate-check notices and the kit editor became a notes rail under the board, and the role-filter tally chips retired outright (the column headers carry the counts). `memberPop()` is shared by construction so the docks can never disagree; the board is built in `renderRoster` and cached (`BOARD_HTML`), so wheel spins never pay for the roster analysis.
 
 Source files:
 
@@ -499,28 +499,7 @@ The preferred product sequence is:
 
 Windows development environment historically uses `py -3` rather than `python`/`python3`.
 
-Core rebuild / gates:
-
-```text
-py -3 pipeline/evidence_lint.py
-py -3 pipeline/build_builds.py
-py -3 pipeline/build_dataset.py
-py -3 tests/test_golden.py
-py -3 tests/test_forge.py
-py -3 tests/test_roles.py
-py -3 tests/test_validation_modes.py
-py -3 tests/tier2_blindtest.py v4
-py -3 tests/test_js_parity.py
-node tests/test_loadout_codec.js
-node tests/test_display_math.js
-py -3 tests/test_patch_history.py
-py -3 tests/test_provenance.py
-py -3 tests/test_builds.py
-py -3 tests/test_cohort_families.py
-py -3 pipeline/build_interactions.py
-py -3 tests/test_interactions.py
-py -3 dashboard/build.py
-```
+Core rebuild / gates: the authoritative list is `CLAUDE.md` ("Tests" and "Build chain") — one list, kept current there; this file no longer carries a copy.
 
 The effect catalogue is NOT part of a normal build — it reads the pinned dumps
 directly and is regenerated only when the snapshot moves or its extraction

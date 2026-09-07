@@ -2,6 +2,8 @@
 
 **Date:** 2026-08-27 · **Scope:** Phases 1–2 of the dressed-validation & calibration hardening pass (work order of the same date; plan `notes/plans/2026-08-27-dressed-validation-calibration.md`).
 
+> **STATUS (same day):** all three rulings asked for in §5 landed 2026-08-27 — Option C shipped (tankiness finding), the exit-code gate was re-based to `actual_gear` role-level and now enforces (`tests/VALIDATION.md`, CLAUDE.md test list), and locked members were ruled never re-dressed (HANDOFF.md, the 2026-08-27 rulings). Kept as the measurement record.
+
 Machine artifacts: `pipeline/out/validation_asymmetry_probe.json`, the `--json` dumps of `tests/tier2_blindtest.py v4`, `pipeline/out/dressed_template_audit.json`, `pipeline/out/frontline_floor_audit.json`, `pipeline/out/gear_synergy_audit.json`, `pipeline/out/calibration_report.json`.
 
 ## 1. The audit (Phase 1A) — what V3/V4 actually measured
