@@ -1,17 +1,21 @@
 # Playstyles — caller-intent overlays on top of a content template.
 #
-# PROVISIONAL — created 2026-08-13, weights NOT expert-adjudicated. Every
-# multiplier scales a capability's WEIGHT in the chosen content template
-# (targets, soft caps and hard floors are untouched: a kite comp still
-# needs its healers — style changes what you emphasise, not what keeps the
-# party alive; floor penalties are computed on the BASE weight for the
-# same reason). A capability absent from the template's requirements is
+# Created 2026-08-13; the weight MULTIPLIERS remain expert-unadjudicated,
+# while `mechanics` (Q14, 2026-08-25) and `constraint_overrides`
+# (2026-08-23/26) are owner-ruled. Every multiplier scales a capability's
+# WEIGHT in the chosen content template; hard floors are untouched (a kite
+# comp still needs its healers; floor penalties use the BASE weight).
+# Targets and soft caps are NOT untouched any more: `target_mults` below
+# scale them, and at 10+ a DECLARED style reads the GENERATED per-style
+# rows in templates/style_bands.yaml after the content row (owner ruling
+# 2026-09-04). A capability absent from the template's requirements is
 # unaffected by its multiplier.
 #
 # Vocabulary from the shotcaller world: brawl (stand and grind), clap
 # (stack them, one bomb), kite (never take the fight, bleed them),
-# brawl-clap (grind until they clump, then bomb). "Balanced" is the
-# identity — free mode, no thumb on the scale.
+# brawl-clap (grind until they clump, then bomb), clap-kite (the ranged
+# twin of brawl-clap: bomb from range, throw them back — owner-identified
+# 2026-08-23). "Balanced" is the identity — free mode, no thumb on the scale.
 #
 # `mechanics` blocks (added 2026-08-13; Q14 CLOSED 2026-08-25): how the
 # style DELIVERS damage. The owner delegated the magnitudes — "i cant give
@@ -78,7 +82,10 @@
 # suggestive, replicated signal is disengage (brawl 0.77/person vs kite
 # 1.64/person, kite n=2), which points the same way the owner's claim does.
 # Per "never invent a number to fill a hole": a row appears here only when the
-# owner rules it or real comps supply the measurement.
+# owner rules it or real comps supply the measurement. The harvest DOES
+# supply per-style measurements now — templates/style_bands.yaml, generated
+# by derive_style_bands.py, is where those rows live; nothing is hand-written
+# here.
 
 styles:
   balanced:

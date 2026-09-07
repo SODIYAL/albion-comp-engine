@@ -6,7 +6,10 @@
 # SCORING a hand-built or live party — a manual comp always loads and scores;
 # constraint violations there surface as advice (off-comp flags), never errors.
 #
-# PROVISIONAL — seeded from the only real large-group evidence in the repo:
+# PROVISIONAL — seeded 2026-08-12 from what was then the only real
+# large-group evidence in the repo (the killer-party harvest in
+# out/party_rosters.json and out/roster_mixes.json came later and has not
+# moved these bands):
 # the four curated caller parties in data/published_comps/ (Deadlyhooker
 # parties 1-3, castle/territory/mass-roam 3x20, 2026-08-12; Timothy "blap"
 # blackzone roam 20, 2026-08-12), battlemount slots excluded. Every number
@@ -14,9 +17,11 @@
 # the 20-size templates applies (VALIDATION V4).
 
 # ---------------------------------------------------------------------------
-# Role classes for constraint counting. Primary source is each sheet's
-# role_hint (dataset field); overrides correct the cases where the curated
-# hint and the caller's usage disagree.
+# Role classes for constraint counting. Resolution (2026-09-03, "one role
+# read"): an override here wins; otherwise the weapon's primary SEAT class
+# from the role book (roles.yaml); a seatless weapon keeps its sheet
+# role_hint. Overrides correct the cases where that read and the caller's
+# usage disagree.
 roles:
   by_hint: {healer: healer, tank: frontline, support: support, melee: dps, range: dps}
   overrides:

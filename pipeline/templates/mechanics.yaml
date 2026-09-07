@@ -5,8 +5,8 @@
 #
 # STATUS: CONSUMED since 2026-08-13 — build_dataset.py embeds this file and
 # both engine ports apply focus_fire / aoe_escalation / aoe_geometry /
-# build_stats as supply-side effectiveness multipliers (MECHANICS_TODO.md
-# implementation checklist). Numbers land here so there is exactly ONE
+# build_stats as supply-side effectiveness multipliers (MECHANICS_TODO.md,
+# "Closed" ledger: the 2026-08-13 first wiring). Numbers land here so there is exactly ONE
 # place to correct them after a patch — same rule as the capability sheets.
 
 # ---------------------------------------------------------------------------

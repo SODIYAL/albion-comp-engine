@@ -124,11 +124,17 @@ py -3 pipeline/fetch_snapshot.py
 py -3 pipeline/parse_dumps.py
 py -3 pipeline/fetch_item_stats.py
 py -3 pipeline/fetch_gear_lines.py
+py -3 pipeline/fetch_icons.py       # only when the patch adds weapons/items (out/icon_data.json feeds the pages)
+py -3 pipeline/evidence_lint.py
+py -3 pipeline/build_interactions.py
 py -3 pipeline/build_builds.py
 py -3 pipeline/build_dataset.py     # verifies the chain; exit 2 = blocked
+py -3 pipeline/build_cohort_families.py
 ```
 
-then the full gate list in HANDOFF.md. `build_dataset.py` fails closed if
+then the full gate list in CLAUDE.md ("Tests"). `build_dataset.py` accepts
+`--skip-lint` and `--skip-provenance` for local experiments only — a
+release never uses them (the provenance gate is the point). `build_dataset.py` fails closed if
 any input is missing, hash-drifted, adapter-stale, or from a different
 commit than the others.
 
@@ -204,9 +210,9 @@ the full checkout (as above) or use `sparse-checkout set --no-cone /items.json
   gathering tools and get no sheets.
 - Illustrative placeholders: 0 (all 8 replaced; `sheets/illustrative/` is a
   tombstone record of the §2.3 prototype numbers and their corrections).
-- Drafts: 0. All scores are Claude-proposed and lint-clean; the expert
-  correction pass and Tier-2 blind validation are the outstanding quality
-  gates.
+- Drafts: 0. All scores are lint-clean and have been through the expert
+  rounds recorded in `tests/VALIDATION.md`; the Tier-2 blind gate
+  (`tests/tier2_blindtest.py v4`) now enforces via exit code.
 
 ## The effect layer
 
@@ -217,7 +223,12 @@ py -3 pipeline/effect_catalogue.py <ao-bin-dumps path> --report
 pipeline/effect_map.yaml                 effect x direction -> capabilities
 pipeline/effect_lookup.py                shared: spell -> candidate capabilities
 py -3 pipeline/build_effect_review.py    -> review/effects.html
+py -3 pipeline/build_magnitude_review.py -> review/magnitude.html   (every score beside its dumps numbers)
+py -3 pipeline/build_stat_chart.py       -> review/stat_chart.html + out/stat_chart.json (needs the dumps cache)
 ```
+
+The boards are generated artifacts, not part of a build; regenerate them
+after a ruling changes what they show.
 
 **The catalogue covers GEAR as well as weapons** (2026-08-27). It indexed
 weapon spells only for most of the project's life, so every gear-sheet claim
@@ -300,19 +311,32 @@ MediaWiki HTML, scrapeable" — that is now falsified for automated access. Sinc
 the dumps are the game's own data and resolve to the same numbers, the wiki is
 not needed as a source.
 
-## Daily killboard fetch (cache-only, scheduled)
+## Scheduled killboard fetches (cache-only)
 
-`pipeline/daily_fetch.ps1` runs as the Windows Task Scheduler job
-"AlbionCompForge Daily Fetch" (daily 09:30, interactive logon): it grows
-the gitignored battle caches with fresh GROUP fights (`sample_battles.py
---min-players 10 --battles 120` + `sample_rosters.py --pages 15`, polite
-sleeps) and then restores the committed analysis artifacts to their
-pre-run bytes — fetch and analysis stay separate steps. 1v1/2v2 content
+Two scheduled jobs, two APIs, two caches — neither rebuilds or commits:
+
+- `pipeline/harvest_overnight.ps1` — "CompForge overnight harvest", daily
+  03:00 (the job CLAUDE.md names): `sample_parties.py` at the 25- and
+  8-player floors against the OFFICIAL gameinfo API, whose `GroupMembers`
+  carries the killer's party at kill time with gear → `out/party_cache/`
+  and `out/party_rosters.json`. This is the kit-doctrine and style × size
+  evidence. Rerun order afterwards: audit -> derive_style_bands ->
+  build_dataset -> gates.
+- `pipeline/daily_fetch.ps1` — "AlbionCompForge Daily Fetch", daily 09:30:
+  grows the albionbb battle caches with fresh GROUP fights
+  (`sample_battles.py --min-players 10 --battles 120` — `--no-topup` skips
+  the large-bucket top-up — plus `sample_rosters.py --pages 15`) and then
+  restores the committed analysis artifacts to their pre-run bytes.
+  `weapon_usage_v2.json` (prevalence, cohorts, families) still comes from
+  this channel; `roster_mixes.json` has no code reader any more (the need
+  profiles it informed are owner-ruled constants). 1v1/2v2 content
 (corrupted dungeons, mist duels) can never enter: the battles endpoint is
 only queried with a total-player floor (10 / 40), and analysis buckets by
 actual fight size besides. Log: `pipeline/out/fetch_logs/daily_fetch.log`
 (gitignored). WEEKLY CADENCE (or before a blind round): re-analyze
-offline (`--pages 0` on both samplers), review the numbers, rebuild
+offline (`sample_battles.py` re-reads `battles_cache/` without a flag;
+`sample_rosters.py --pages 0` and `sample_parties.py --pages 0` for the
+other two), review the numbers, rebuild
 dependents, run the gate list, commit — analysis is always a deliberate,
 reviewed step, never automated. Mind patch boundaries when reading
 accumulated windows: the cache spans balance patches; slice by
@@ -325,11 +349,11 @@ accumulated windows: the cache spans balance patches; slice by
   `sheets/gear/core.yaml`), and the combat expansion completed the
   combat catalog (2026-08-27, `sheets/gear/combat_expansion.yaml`; 129
   pieces total in `dataset["gear"]`, scored by `build_extra` in both
-  ports). Note the killboard caveat learned on the way: albionbb kill
-  events carry `Equipment.MainHand` + `Mount` only (verified in the raw
-  cache), so gear *popularity* per content is NOT harvestable from that
-  endpoint — observed-kit evidence comes from published/reference builds
-  instead.
+  ports). The albionbb kill events carry `Equipment.MainHand` + `Mount`
+  only, so worn kits are NOT harvestable from that endpoint — they come
+  from the official API's `GroupMembers` via `sample_parties.py`
+  (`out/party_rosters.json`, 2026-09-01 onward), which is what the kit
+  doctrine reads today, beside the published/reference builds.
 - ~~Usage sample is small (24 battles)~~ — superseded 2026-08-13 by
   `sample_battles.py` (~200 battles from the albionbb API, size-bucketed,
   per-battle cache, V7 coverage stat in `out/weapon_usage_v2.json`).
@@ -343,9 +367,11 @@ accumulated windows: the cache spans balance patches; slice by
   design; drafts contain effect capabilities only.
 - Six content templates exist (`blackzone_roam` 20, `territory_defense` 20,
   `castle` 25, `faction_war` 15, `castle_outpost` 7, `roads` 7) plus the playstyle
-  overlays in `templates/styles.yaml` — everything but castle_outpost is a
-  2026-08-1x PROVISIONAL draft; sizes off the validated list are linear
-  extrapolation and labelled as such in the UI.
+  overlays in `templates/styles.yaml` and the GENERATED style × size rows
+  in `templates/style_bands.yaml`. The content rows were comp-fitted
+  2026-08-21 and re-fitted to person units 2026-08-29 (all rows together);
+  castle and faction_war still rest on no comps in the corpus. Sizes off
+  the validated list are linear extrapolation and labelled as such in the UI.
 - ~~Default-kit harvester not built~~ — the MetaBattle adapter (46 pages,
   all group-PvP categories) + the caller comps now feed the mined
   kit-doctrine pools (`roles_report` `kit_doctrine`, per seat AND per

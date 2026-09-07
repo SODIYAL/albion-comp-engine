@@ -19,7 +19,9 @@
 # re-multiplied for other sizes. Sizes other than 7 are extrapolation and are
 # flagged as such in the UI until Tier-2 validation covers them (VALIDATION V3).
 #
-# target   — units of supply wanted across the whole party (a score of 3 = 3 units)
+# target   — units of supply wanted across the whole party, in PERSON units
+#            (weapon + worn kit) since the 2026-08-29 unit re-fit; hard floors
+#            stay in weapon units by ruling
 # weight   — importance; drives both fitness and the weakness ranking
 # soft_cap — supply beyond this starts costing points (over-stacking is a real
 #            failure mode, not a neutral outcome)

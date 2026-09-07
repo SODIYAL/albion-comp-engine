@@ -5,8 +5,14 @@
 #                  GROUP fights from api.albionbb.com, politely.
 # What this NEVER does: rebuild committed artifacts, run analysis, touch
 #                  scoring, or commit anything. The weekly cadence
-#                  (pipeline/README.md) re-analyzes offline (--pages 0)
-#                  and commits with the full gate list.
+#                  (pipeline/README.md) re-analyzes offline (sample_battles
+#                  re-reads its cache; sample_rosters --pages 0) and commits
+#                  with the full gate list.
+#
+# SIBLING JOB: pipeline/harvest_overnight.ps1 (03:00) is the OTHER channel —
+# sample_parties.py against the official API's GroupMembers (killer parties
+# with gear, out/party_cache/). This job feeds weapon_usage_v2.json
+# (prevalence, cohorts, families); that one feeds the kit doctrine.
 #
 # GROUP-FIGHT GUARANTEE (owner 2026-08-27: "not smallscale like corrupted
 # 1v1"): the battles endpoint aggregates kills into battles and is only

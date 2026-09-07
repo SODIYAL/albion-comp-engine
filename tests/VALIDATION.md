@@ -1,10 +1,10 @@
-# Validation Plan — Composition Engine
+# Validation — Composition Engine
 
-How we test the design *before* building it, what already ran (2026-08-12), and what remains. Principle: every risky claim in the design doc gets a cheap falsification test; build only after the cheap tests pass.
+The APPEND-ONLY ruling log: every dated round, every owner quote, every score, newest entries at the bottom of each section. Standing rule (anti-circularity): comps that calibrated a template must not drive retuning against their own gate results — findings from gate runs are hypotheses for the owner, never fixes. The opening tiers below are the original 2026-08-12 plan, kept as written: how the design was tested *before* building it. Principle then and now: every risky claim gets a cheap falsification test.
 
 ## Tier 1 — Model validity (ran today, no product code needed)
 
-**V1. Golden-case recommendation tests** — `prototype_engine.py`, runnable anytime (`python3 prototype_engine.py`).
+**V1. Golden-case recommendation tests** — `tests/prototype_engine.py`, the throwaway prototype (runnable: `py -3 tests/prototype_engine.py`); its cases live on in `tests/test_golden.py`.
 A ~250-line throwaway implementation of the scoring model (13 hand-scored weapons, 1 content template) against 9 assertions encoding what any experienced player knows to be true:
 
 | # | Case | Result |
@@ -48,7 +48,7 @@ there produced two more load-bearing findings of the V1 class:
 
 ## Tier 2 — Recommendation quality (before/while building MVP, needs humans)
 
-**V3. Expert blind test.** Give 10–15 partial parties to 3+ experienced shotcallers; collect their next-pick independently; compare with engine top-3. Target: expert pick appears in engine top-3 ≥70% of cases. This is the true accuracy metric — the curation prerequisite is now MET (all 137 weapons, 2026-08-12) and `tests/tier2_form.md` is regenerated against the full pool (seed 20260812). **V3 is the project's current critical path**; everything else is tuning noise until it runs.
+**V3. Expert blind test** (ran first 2026-08-23 — see the dated entries below; the V4 gate has since been re-based to `actual_gear` and enforces). Give 10–15 partial parties to 3+ experienced shotcallers; collect their next-pick independently; compare with engine top-3. Target: expert pick appears in engine top-3 ≥70% of cases. This is the true accuracy metric — the curation prerequisite is now MET (all 137 weapons, 2026-08-12) and `tests/tier2_form.md` is regenerated against the full pool (seed 20260812). **V3 is the project's current critical path**; everything else is tuning noise until it runs.
 
 **FIRST V3 ROUND (2026-08-23, n=1: the owner-expert, in-chat blind protocol)** — all 12 seed-20260812 castle_outpost cases answered blind (engine output withheld until each batch of picks was in), reasoning captured per case:
 

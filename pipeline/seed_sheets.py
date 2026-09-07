@@ -29,13 +29,30 @@ sys.path.insert(0, HERE)
 from effect_lookup import EffectLookup  # noqa: E402
 
 WEAPONS = json.load(open(os.path.join(HERE, "out", "weapon_lines.json"), encoding="utf-8"))
-USAGE = json.load(open(os.path.join(HERE, "out", "weapon_usage.json"), encoding="utf-8"))["weapons"]
 LOOKUP = EffectLookup()
 
-# Never auto-seeded: the effect layer cannot express these, so a machine guess
-# would be fabrication. They stay a curator's job.
+
+def _load_usage():
+    """Sightings per weapon, summed across weapon_usage_v2.json's fight-size
+    buckets (sample_battles.py). The v1 weapon_usage.json this read until
+    2026-09-07 was a frozen 24-battle sample nothing wrote any more."""
+    v2 = json.load(open(os.path.join(HERE, "out", "weapon_usage_v2.json"), encoding="utf-8"))
+    out = {}
+    for weapons in (v2.get("buckets") or {}).values():
+        for key, n in weapons.items():
+            out.setdefault(key, {"count": 0})["count"] += int(n)
+    return out
+
+
+USAGE = _load_usage()
+
+# Never auto-seeded: these are MAGNITUDE calls (how much damage, how big a
+# clump) the effect layer can name but not size, so a machine guess would be
+# fabrication. They stay a curator's job. (`energy_drain` sat here until
+# 2026-09-07; it is not a capability — a documented fabrication, see
+# sheets/illustrative/prototype_v0.yaml.)
 HUMAN_ONLY = {"zone_control", "burst_aoe", "burst_st", "sustained_dps", "execute",
-              "clump_create", "heal_burst", "anti_dive", "energy_drain"}
+              "clump_create", "heal_burst", "anti_dive"}
 
 
 def curated_keys():

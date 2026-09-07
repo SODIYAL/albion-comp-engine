@@ -1,6 +1,6 @@
 # Albion Composition Engine
 
-**Live planner: <https://sodiyal.github.io/albion-comp-engine/>**  
+**Live planner: <https://sodiyal.github.io/albion-comp-engine/>**
 **How it works: <https://sodiyal.github.io/albion-comp-engine/how-it-works.html>**
 
 Comp Forge is an Albion Online party-composition recommendation engine. Give it the content, expected party size, playstyle, and the weapons already in the group; it diagnoses the composition and recommends what should join next.

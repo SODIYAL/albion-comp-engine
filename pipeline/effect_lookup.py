@@ -155,9 +155,6 @@ class EffectLookup:
                 out[cap].append(reason)
         return out
 
-    def supports(self, spell_id, capability):
-        return capability in self.candidates(spell_id)
-
     def has_structured(self, spell_id):
         return bool(self.effects_of(spell_id))
 

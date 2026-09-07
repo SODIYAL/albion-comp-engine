@@ -12,7 +12,7 @@ event map, and legality reasoning: [../COMPANION_SCOPE.md](../COMPANION_SCOPE.md
 
 ## Status — LIVE-CONFIRMED (2026-08-23, owner's in-game run)
 
-The one live run happened, in an 11-member party on the current patch:
+The first live run happened, in an 11-member party on the current patch:
 
 - **Capture + parsing**: 2,973 Albion packets, 5,909 Photon events, 339
   handled, **0 parse errors** in 89s — the vendored Protocol18 parser is
@@ -123,7 +123,8 @@ works. `--port N` changes the port (default 53321).
     "members": [
       { "name": "Alstroameria", "weapon": "2H_HOLYSTAFF",
         "weapon_item": "T5_2H_HOLYSTAFF@1", "item_power": 796,
-        "equipment": { "head": "T6_HEAD_CLOTH_SET1", "chest": "…", "shoes": "…", "cape": "…" },
+        "equipment": { "head": "T6_HEAD_CLOTH_SET1", "chest": "…", "shoes": "…", "cape": "…",
+                       "offhand": "…", "potion": "…", "food": "…", "bag": "…", "mount": "…" },
         "spells": { "q": "HOLY_GENERIC_HEAL", "w": "SACRED_PULSE",
                     "e": "HOLY_BEAM_AVALON" },
         "source": "EquipmentChanged" }
