@@ -347,8 +347,7 @@ function badgeHtml(w){
 }
 
 /* The ADD-WEAPON picker's chip facet (its own chip bar, plus any
-   capability badge clicked on a weapon anywhere). The old PARTY_FACET
-   roster filter retired with the party strip (2026-08-27). */
+   capability badge clicked on a weapon anywhere). */
 let FACET = null;
 /* mobile pass 2026-08-21: which member's popover is open as a bottom
    sheet (touch has no hover) — display state only, never in the hash */
@@ -580,9 +579,6 @@ function renderSetup(){
     }
   }
 }
-/* The old role-tally chip row (and its roster facet filter) retired with
-   the party strip (owner 2026-08-27) — the comp board's column headers
-   carry the same counts, permanently visible and grouped. */
 /* Per-member swap advice (engine swapReview): a member's weapon is valued as
    if being picked into the rest of the party and ranked against every
    alternative. Hints show only when they're worth acting on — a decent pick
@@ -664,8 +660,8 @@ function memberPop(i, ctx){
   </div>`;
 }
 /* The wheel's comp board (owner 2026-08-27): the roster as four main-role
-   columns, each member a full dm tile with the SAME popover and actions as
-   the party strip — this board is on course to replace that strip. Built
+   columns, each member a full dm tile with the same popover and actions
+   the retired party strip carried (owner 2026-08-27). Built
    during renderRoster (the render that runs exactly when roster state
    changes) and cached, so wheel spins never pay for the roster analysis. */
 let BOARD_HTML = "", NOTES_HTML = "";

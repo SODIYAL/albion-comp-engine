@@ -260,9 +260,9 @@ class Engine:
         styles = self.data.get("styles", {}) or {}
         self.style_mults = (styles.get(style, {}) or {}).get("multipliers", {}) or {}
         # Mechanics overlay (templates/mechanics.yaml + per-style parameters).
-        # 2026-08-18: the linear grow() extrapolation is REPLACED by the
-        # piecewise absolute size table (composition.yaml size_physics) — a
-        # step function of party size multiplying each style's base counts.
+        # Party-size counts come from the piecewise absolute size table
+        # (composition.yaml size_physics) — a step function of party size
+        # multiplying each style's base counts, never a linear extrapolation.
         # Both the current (style, size) counts and the anchor (balanced,
         # base_size) read the SAME table, so template calibration at the base
         # is untouched, and size 11 is intentionally defined instead of a
@@ -2428,7 +2428,7 @@ class Engine:
             state, weapon, best[:4])
         return score, d_fit, d_syn, meta, combo, best[4], best[5]
 
-    def best_loadout(self, s, base_syn, weapon):
+    def best_loadout(self, s, weapon):
         """Legacy shim (golden T14; explain callers migrated): the candidate's
         best loadout against bare supply `s`, with no member-level synergy
         state (J=0 — exact for an empty party). Returns (d_fit, d_syn, extra)."""
@@ -2793,7 +2793,6 @@ class Engine:
     IDENTITY_STRONG = 0.80         # a share past this reads "strong", not "leaning"
     IDENTITY_CLAP_AOE = 0.50       # ranged core at/above this bomb share -> clap
     IDENTITY_BC_AOE = 0.45         # mid band: bomb share half of brawl_clap
-    IDENTITY_BC_POSTURE = 0.45     # (retired 2026-09-04, round 2; kept for the record)
     # mid band: the BALL ITSELF carries the bomb — melee-side unconditional
     # group payloads (Battle Bracers, Bear Paws) hold at least this share
     # of the comp's bomb points (blind round 2, roster 11: five Battle
@@ -2802,15 +2801,14 @@ class Engine:
     IDENTITY_CARRIER_MIN = 4       # raw damage points that make a damage carrier
     IDENTITY_MIN_MEMBERS = 3       # below this the comp is still "forming"
     IDENTITY_RANGED_ATTACK = 9.0   # attackrange at/above -> ranged delivery
-    # Clap-Kite hybrid (owner 2026-08-23): a ranged core with BOTH real
-    # bomb share and real reset mobility. Calibrated on the owner-labeled
-    # comps: DH P1 / 20v20 (aoe ~.53, evade ~2.6/member) read hybrid;
-    # pure clap10 (evade 1.8) and pure kite10 (aoe .26) do not.
+    # Clap-Kite hybrid (owner 2026-08-23): a ranged core with BOTH a real
+    # bomb share and a KITE HALF (standoff tools, below). Calibrated on the
+    # owner-labeled comps: DH P1 / 20v20 (aoe ~.53) read hybrid; pure
+    # kite10 (aoe .26) does not.
     IDENTITY_HYBRID_AOE = 0.45     # bomb share at/above -> clap half present
                                    # (0.40 -> 0.45 after blind round 2: the
                                    # owner's kites with three standoff tools
                                    # sat at 0.39-0.44, the clap-kites at 0.46+)
-    IDENTITY_HYBRID_EVADE = 2.0    # (retired 2026-09-04; kept for the record)
     # KITE HALF (owner ruling 2026-09-04, blind round 1): standoff tools —
     # bodies whose E throws enemies away from range without committing
     # (style_fit `standoff_e`: Bedrock Mace, Hoarfrost, Demonic Staff, the
@@ -3052,7 +3050,6 @@ class Engine:
             # for party" — not an ordinary clap. Signature: one weapon holds
             # at least half of at least 3 damage-carrier bodies.
             top_carrier = max(carrier_count.values()) if carrier_count else 0
-            evade_pm = evade / n if n else 0.0
             if (clap and top_carrier >= 3
                     and top_carrier * 2 >= n_carrier_members):
                 out["archetype"] = "bomb_squad"

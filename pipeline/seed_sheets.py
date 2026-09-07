@@ -6,13 +6,10 @@ For each weapon in the usage ranking, proposes a capability for every effect its
 equippable spells actually produce, resolved through the structured effect map
 (effect_map.yaml) rather than description keywords.
 
-WHAT CHANGED 2026-08-12. Seeding used to run off 13 prose regexes, which saw a
-fraction of the game: 100 weapon lines apply a movespeed debuff and the `slow`
-regex matched almost none of them. It also refused to propose structural
-capabilities (engage/peel/tankiness/...) on the grounds that they were pure
-judgement. That is no longer true for the ones the data can reach: 1H Mace's
-Deep Leap resolves to dash + invincibility + five immunities on self, which
-grounds engage, disengage, tankiness, mobility and catch mechanically.
+Structural capabilities (engage/peel/tankiness/...) are proposed wherever the
+effect data reaches them: 1H Mace's Deep Leap resolves to dash + invincibility
++ five immunities on self, which grounds engage, disengage, tankiness, mobility
+and catch mechanically.
 
 Everything is still provisional. Every row carries `review: TODO` and a comment
 naming the effect and direction it came from, so a curator can check the

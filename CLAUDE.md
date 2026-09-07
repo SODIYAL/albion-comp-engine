@@ -42,6 +42,7 @@ py -3 tests/test_interactions.py  # duplicate/reflect/cleanse semantics + JS par
 py -3 tests/test_provenance.py    # pinned-snapshot hash chain, byte-identical rebuilds, LF checks
 py -3 tests/test_patch_history.py # dumps-diff staleness detection
 py -3 tests/test_js_parity.py     # Python <-> browser scoring, 60 random parties at 1e-9 + embed check
+py -3 tests/test_dashboard_layout.py # generated-page layout contracts (L1-L18) + the display-only boundary (no new engine calls from the UI)
 node tests/test_loadout_codec.js  # share-URL codec round-trips
 node tests/test_display_math.js   # killboard bucket + cohort-affinity/neighbour/family math (display layer)
 node tests/test_live_party.js     # companion equipment -> loadout gear keys (tier/enchant rules, chest->armor, uncurated stays unset)
