@@ -396,25 +396,11 @@
       }
     }
     this._excluded = excl;
-    /* Economics gate (owner ruling 2026-08-23, mirrors engine.py): a cost
-       tier may be barred from SUGGESTIONS/generation below a party size
-       (crystal regear economics). Manual/locked picks always score;
-       swap_review flags them off_budget. */
-    this._costGated = {};
-    var cg = via.cost_gate || {};
-    for (var tier in cg) {
-      var cgMin = (cg[tier] || {}).min_size;
-      if (cgMin && this.size < cgMin) {
-        for (i = 0; i < this.pool.length; i++) {
-          if (this.weapons[this.pool[i]].cost_tier === tier)
-            this._costGated[this.pool[i]] = true;
-        }
-      }
-    }
+    /* No cost gate (owner ruling 2026-09-07, mirrors engine.py): the
+       crystal gate is retired; anti_zone demand carries the physics. */
     this._suggest = [];
     for (i = 0; i < this.pool.length; i++) {
-      if (!excl[this.pool[i]] && !this._costGated[this.pool[i]])
-        this._suggest.push(this.pool[i]);
+      if (!excl[this.pool[i]]) this._suggest.push(this.pool[i]);
     }
     /* Style-fit suggestion gate (identity Phase C — mirrors engine.py:
        style selection IS build intent; unfit weapons leave suggestions,
@@ -834,13 +820,6 @@
     /* Viability bar for GENERATED comps at this content+size — scoring is
        never blocked (mirrors engine.py is_excluded). */
     return !!this._excluded[weapon];
-  };
-
-  CompEngine.prototype.isCostGated = function (weapon) {
-    /* Cost-tier bar for GENERATED comps at this size (crystal regear
-       economics, owner ruling 2026-08-23) — suggestions only, scoring is
-       never blocked (mirrors engine.py is_cost_gated). */
-    return !!this._costGated[weapon];
   };
 
   CompEngine.prototype.suggestPool = function () {
@@ -2396,7 +2375,6 @@
         score: curScore, rank: better.length + 1,
         off_comp: this.isExcluded(cur),
         off_style: this.isStyleUnfit(cur),
-        off_budget: this.isCostGated(cur),
         caps_gain: curPc[1],
         verdict: curVerdict,
         redundant: curVerdict !== "ok",

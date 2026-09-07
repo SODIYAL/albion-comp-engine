@@ -275,7 +275,7 @@ Forge constraints are combo-aware: a weapon does not satisfy a minimum just beca
 
 Blind grading rounds with the owner converted every complaint into a structural rule (full log + verbatim rulings: `tests/VALIDATION.md`; pins F14–F19, T27–T29, T31):
 
-- **Economics** (`viability.cost_gate` + derived `cost_tier`): crystal weapons leave suggestions/generation below 30 players. Manual picks score, flagged `off_budget`.
+- **Economics — RETIRED 2026-09-07.** The 2026-08-23 crystal cost gate is gone ("remove the cost gate for weapons ... focusing on mechanics"): every cost tier is in every pool, `cost_tier` is a display fact only. What the gate was covering for — the Exalted Staff, sole `anti_zone` supplier, forged into everything — is now the `anti_zone` rows' physics: no row at the 7-man contents (no 7-man comp fields it; 2% of 4-9 man winners do), size-scaled everywhere else (32% of 20+ winners). Measured: no Exalted in any default 7-man forge, present from 10 up. T42 / F14.
 - **Healing foundation** (`primary_healer` + derived `full_healer`/`heal_scale`): band minima require healers whose E heals BIG and heals a GROUP — both derived from the E bundle + the spell's own area facts (`heal_overrides.yaml` carries cited sub-effect corrections). Single-ally-heal-E healers never generate at 10+.
 - **Style-aware role bands** (`styles.yaml constraint_overrides`): owner-ruled healer/frontline counts per style (20-man healers: brawl 3-4 / clap 2-3 / kite 2 / clap_kite 3-4; kite@7 = 1; brawl frontline capped at blap's 5).
 - **Generation-fit gate** (both ports): a DEFAULT generated comp fields damage picks whose derived verdict is **fits**. "Situational" is caller territory: manual picks score, never flagged.

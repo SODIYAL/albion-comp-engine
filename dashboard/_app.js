@@ -603,10 +603,10 @@ function swapEligible(review){
   const ok = new Set();
   review.forEach((m, i) => {
     if (!m) return;
-    /* viability-excluded, style-unfit and cost-gated members always get
-       their replacement advice — owner rules flag them regardless of rank
-       (2026-08-18; style gate 2026-08-23; cost gate 2026-08-23) */
-    if ((m.off_comp || m.off_style || m.off_budget) && m.options.length){ ok.add(i); return; }
+    /* viability-excluded and style-unfit members always get their
+       replacement advice — owner rules flag them regardless of rank
+       (2026-08-18; style gate 2026-08-23; the cost gate retired 2026-09-07) */
+    if ((m.off_comp || m.off_style) && m.options.length){ ok.add(i); return; }
     if (m.rank < SWAP_CFG.min_rank) return;
     const top = m.options.find(o => o.gain >= SWAP_CFG.min_gain);
     if (!top) return;
@@ -618,7 +618,7 @@ function swapEligible(review){
 }
 function swapHint(m, i){
   if (!m) return "";
-  const forced = (m.off_comp || m.off_style || m.off_budget) && m.options.length;
+  const forced = (m.off_comp || m.off_style) && m.options.length;
   if (!forced && m.rank < SWAP_CFG.min_rank) return "";
   const opts = forced ? m.options
     : m.options.filter(o => o.gain >= SWAP_CFG.min_gain);
@@ -628,8 +628,6 @@ function swapHint(m, i){
     ? `<b class="offcomp">off-comp at this size (owner rule) — swap to</b>`
     : m.off_style
       ? `<b class="offcomp">off-style for ${esc(styleName() || STYLE)} at this size — swap to</b>`
-      : m.off_budget
-      ? `<b class="offcomp">crystal regear cost — a rich-group pick below 30 (owner rule) — swap to</b>`
       : m.rank >= SWAP_CFG.offcomp_rank
       ? `<b class="offcomp">off-comp here — rank ${m.rank}/${pool}</b>`
       : `<span class="swap-lbl">better options</span>`;
