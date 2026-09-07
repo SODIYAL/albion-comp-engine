@@ -85,15 +85,17 @@ requirements:
   # OPTIONAL (owner 2026-08-28): supplied by ONE weapon in the catalogue
   #   (Exalted Staff, the crystal holy staff). Real target, but a comp
   #   without it is not missing anything.
-  # SCALES WITH FIGHT SIZE (owner ruling 2026-09-07, replacing the crystal
-  #   cost gate: "that type of cleanse is not as important in small groups
-  #   as the engine values"): zone removal is demand created by ENEMY
-  #   ground effects, and more enemies lay more of them. The base-size
-  #   number is what the owner-vetted comps field; below it the target
-  #   shrinks with the party. Harvest (winner parties, 2026-09-07): an
-  #   Exalted in 2% of 4-9 man parties, 7% at 10-14, 21% at 15-19, 32% at
-  #   20+ — display evidence for the direction, not the number.
-  anti_zone:      {target: 4.05,  weight: 2,  soft_cap: 4.6575,  scales: true,  optional: true}  # (comp-fit 2026-08-21)
+  # DEMAND RAMP (owner ruling 2026-09-07, replacing the crystal cost gate:
+  #   "that type of cleanse is not as important in small groups as the
+  #   engine values ... don't really need it at 10-14 and then need grows
+  #   slightly as numbers grows and then becomes a good requirement at like
+  #   25+"): zone removal is demand created by ENEMY ground effects, and more
+  #   enemies lay more of them. No requirement at all through 14; linear to
+  #   this row's measured value at 25; proportional beyond. Harvest (winner
+  #   parties, 2026-09-07): an Exalted in 2% of 4-9 man parties, 7% at
+  #   10-14, 21% at 15-19, 32% at 20+ — display evidence for the shape, the
+  #   anchors are the owner's.
+  anti_zone:      {target: 4.05,  weight: 2,  soft_cap: 4.6575,  ramp: {none_until: 14, full_at: 25}, optional: true}  # (comp-fit 2026-08-21)
   damage_debuff:  {target: 1.2,  weight: 1,  soft_cap: 6.57,  scales: false}
   # PROMOTED 2026-08-27 — see blackzone_roam.yaml for the full rationale.
   # Fitted from the four real territory parties (Deadlyhooker P1-P3 + the

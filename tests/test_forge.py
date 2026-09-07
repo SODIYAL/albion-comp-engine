@@ -34,7 +34,8 @@ Pins the structural contracts of the reworked engine:
   F14 no cost gate (owner ruling 2026-09-07, retiring the 2026-08-23 crystal
       gate): every cost tier sits in every suggest pool, swap_review carries
       no off_budget flag, and the anti_zone rows carry the physics instead —
-      no row in the 7-man templates, size-scaled elsewhere.
+      no row in the 7-man templates, a DEMAND RAMP elsewhere (nothing
+      through 14, the measured value at 25, proportional beyond).
   F15 primary-heal minimum (owner ruling 2026-08-23): a hybrid healer can
       never be the comp's sole healing foundation — every forge fields the
       band's full-healer minimum in addition to the healer role band.
@@ -439,7 +440,9 @@ def t_cost_gate():
     rather focusing on mechanics." No cost tier is barred anywhere;
     swap_review carries no off_budget flag; the Exalted Staff (sole
     anti_zone supplier) is judged by the anti_zone rows — none in the
-    7-man templates, size-scaled in the rest."""
+    7-man templates, and a DEMAND RAMP in the rest (owner, same day:
+    "don't really need it at 10-14 and then need grows slightly as
+    numbers grows and then becomes a good requirement at like 25+")."""
     CRYSTAL = ("2H_HOLYSTAFF_CRYSTAL", "MAIN_NATURESTAFF_CRYSTAL",
                "2H_DUALCROSSBOW_CRYSTAL")
     pools = [set(Engine(content=c, size=n).suggest_pool())
@@ -452,14 +455,20 @@ def t_cost_gate():
     e7 = Engine(content="castle_outpost", size=7)
     no_row_7 = ("anti_zone" not in e7.reqs
                 and "anti_zone" not in Engine(content="roads", size=7).reqs)
-    e10 = Engine(content="blackzone_roam", size=10)
-    scaled = abs(e10._targets["anti_zone"] - 1.8 * 10 / 20) < 1e-9 \
-        and abs(e._targets["anti_zone"] - 1.8) < 1e-9
+    e14 = Engine(content="blackzone_roam", size=14)
+    e25 = Engine(content="castle", size=25)
+    e30 = Engine(content="blackzone_roam", size=30)
+    ramp = ("anti_zone" not in e14.reqs
+            and abs(e._targets["anti_zone"] - 1.8 * 6 / 11) < 1e-9
+            and abs(e25._targets["anti_zone"] - 1.8) < 1e-9
+            and abs(e30._targets["anti_zone"] - 1.8 * 30 / 25) < 1e-9)
     check("F14 no cost gate: crystal in every suggest pool, no off_budget "
-          "flag, anti_zone has no 7-man row and scales with size elsewhere",
-          admitted and no_flag and no_row_7 and scaled,
+          "flag, anti_zone has no row through 14, ramps to its measured "
+          "value at 25 and grows beyond",
+          admitted and no_flag and no_row_7 and ramp,
           f"admitted={admitted} no_flag={no_flag} no_row_7={no_row_7} "
-          f"t10={e10._targets.get('anti_zone')} t20={e._targets.get('anti_zone')}")
+          f"t14={e14._targets.get('anti_zone')} t20={e._targets.get('anti_zone')} "
+          f"t25={e25._targets.get('anti_zone')} t30={e30._targets.get('anti_zone')}")
 
 
 def t_primary_heal():

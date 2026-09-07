@@ -250,9 +250,28 @@ class Engine:
         self.content = content
         self.size = size
         self._carrier_caps_cache = None   # carrier_caps() memo (size-keyed)
-        self.reqs = self.template["requirements"]
-        self.floors = self.template.get("hard_floors", {}) or {}
         self.base_size = self.template.get("base_size", size)
+        # DEMAND RAMP (owner ruling 2026-09-07, first for anti_zone: "don't
+        # really need it at 10-14 and then need grows slightly as numbers
+        # grows and then becomes a good requirement at like 25+"). A row
+        # carrying `ramp: {none_until, full_at}` is NOT a requirement at all
+        # at sizes <= none_until (the row is dropped for this context, exactly
+        # like a content with no row), grows linearly from zero to the row's
+        # measured value at full_at, and grows with the party beyond it (the
+        # same proportional rule `scales` uses). Target and soft cap move
+        # together. A ramp and `scales` never sit on the same row.
+        self._ramp = {}
+        reqs = {}
+        for c, r in self.template["requirements"].items():
+            rp = r.get("ramp")
+            if rp:
+                f = self._ramp_factor(rp, size)
+                if f <= 0.0:
+                    continue
+                self._ramp[c] = f
+            reqs[c] = r
+        self.reqs = reqs
+        self.floors = self.template.get("hard_floors", {}) or {}
         # Playstyle overlay (templates/styles.yaml): multiplies capability
         # WEIGHTS only. Targets/soft caps are content facts; hard floors stay
         # on the base weight — a kite comp still needs its healers.
@@ -337,11 +356,11 @@ class Engine:
         self.target_mults = (styles.get(style, {}) or {}).get(
             "target_mults", {}) or {}
         _tm = lambda c: self.target_mults.get(c, 1.0)
-        self._targets = {c: _tm(c) * (r["target"] * self.size / self.base_size
-                                      if r.get("scales") else r["target"])
+        _sz = lambda c, r: (self._ramp[c] if c in self._ramp
+                            else (self.size / self.base_size if r.get("scales") else 1.0))
+        self._targets = {c: _tm(c) * r["target"] * _sz(c, r)
                          for c, r in self.reqs.items()}
-        self._softs = {c: _tm(c) * (r["soft_cap"] * self.size / self.base_size
-                                    if r.get("scales") else r["soft_cap"])
+        self._softs = {c: _tm(c) * r["soft_cap"] * _sz(c, r)
                        for c, r in self.reqs.items()}
         self._weights = {c: r["weight"] * self.style_mults.get(c, 1.0)
                          for c, r in self.reqs.items()}
@@ -744,6 +763,18 @@ class Engine:
         at the current content+size. Scoring is never blocked — the dashboard
         flags such members off-comp with replacement advice instead."""
         return weapon in self._excluded
+
+    @staticmethod
+    def _ramp_factor(rp, size):
+        """Demand-ramp multiplier for a template row at `size`: 0 at or
+        below `none_until`, linear to 1 at `full_at`, size/full_at beyond
+        (mirrors app_scoring.js rampFactor)."""
+        lo, hi = float(rp["none_until"]), float(rp["full_at"])
+        if size <= lo:
+            return 0.0
+        if size < hi:
+            return (size - lo) / (hi - lo)
+        return size / hi
 
     def is_style_unfit(self, weapon):
         """True when the weapon's derived style_fit is UNFIT for the
