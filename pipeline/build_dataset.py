@@ -835,7 +835,8 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
 # ---------------------------------------------------------------------------
 # Weapon economics + primary-healer derivation (owner rulings 2026-08-23,
 # forge-quality blind round; config and the rulings' own words live in
-# composition.yaml — `viability.cost_gate` and `primary_healer`).
+# composition.yaml — `primary_healer`; the crystal cost gate that once sat
+# beside it was retired 2026-09-07, so `cost_tier` is a display fact only).
 #
 # cost_tier reads the unique_name's line suffix — the game's own naming:
 # ..._CRYSTAL crystal-artifact, ..._AVALON avalonian, the four faction
@@ -2401,8 +2402,8 @@ def main():
               encoding="utf-8", newline="\n") as f:
         json.dump({"_meta": {
             "rule": ("cost_tier from the unique_name's line suffix "
-                     "(crystal/avalonian/artifact/base; only crystal is "
-                     "gated — viability.cost_gate). full_healer (healing "
+                     "(crystal/avalonian/artifact/base; a display fact — "
+                     "no tier is gated since 2026-09-07). full_healer (healing "
                      "FOUNDATION) requires an E bundle with >= "
                      "primary_healer.e_heal_min summed heal points AND a "
                      "GROUP-scale heal (the spell's own radius/max_targets "

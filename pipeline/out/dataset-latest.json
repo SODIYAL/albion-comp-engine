@@ -42966,7 +42966,7 @@
     },
     {
      "id": "MAIN_MACE_CRYSTAL",
-     "source": "comp:albioncompo_push_monkey_7 + timothy_blap (tank); crystal cost gate composes",
+     "source": "comp:albioncompo_push_monkey_7 + timothy_blap (tank)",
      "tier": "primary"
     },
     {
