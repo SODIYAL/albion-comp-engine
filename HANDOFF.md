@@ -116,8 +116,10 @@ search returns the same roster instead of silently re-rendering it.
 
 **Open for the owner:** melee instant-payload weapons (Spiked Gauntlets,
 Realmbreaker) still generate into clap dps under the standing
-conditional-payload ruling; the `test_cohort_families.py` canary pin is
-stale since the 2026-08-29 sample refresh.
+conditional-payload ruling. (The `test_cohort_families.py` canary was
+re-pinned 2026-09-07 to a mechanism — the large bucket carries >= 3 families,
+no bucket more than its cohorts support — and the families artifact regenerated
+from the current sample.)
 
 ## Current engine model
 
@@ -329,7 +331,6 @@ Still open, by track:
 - **Mechanics**: `MECHANICS_TODO.md` (per-spell `burst_aoe` escalation gating, Q2/Q5/Q11/Q13, the PASV and TOP magnitude queues).
 - **Companion**: incremental mid-fight join/leave; the inspect response shape confirmed on a live run (`companion/README.md`).
 - **Product** (owner-deprioritized until comp quality satisfies): slot locks / constrained reforge; saved player profiles; enemy-comp counter drafting; fight-plan generation; the expert blind-validation workflow as a tool.
-- **Housekeeping**: the `test_cohort_families.py` canary pin.
 
 ## Current validation commands
 

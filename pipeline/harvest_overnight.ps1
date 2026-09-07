@@ -30,6 +30,10 @@ $logDir = Join-Path $root "pipeline\out\fetch_logs"
 New-Item -ItemType Directory -Force $logDir | Out-Null
 $stamp = Get-Date -Format "yyyy-MM-dd"
 $log = Join-Path $logDir "harvest-$stamp.log"
+# one log per night: keep a month, drop the rest
+Get-ChildItem $logDir -Filter "harvest-*.log" |
+    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-30) } |
+    Remove-Item -Force -ErrorAction SilentlyContinue
 Set-Location $root
 
 "=== overnight harvest $(Get-Date -Format s) ===" | Out-File $log -Encoding utf8 -Append

@@ -325,11 +325,12 @@ Two scheduled jobs, two APIs, two caches — neither rebuilds or commits:
 - `pipeline/daily_fetch.ps1` — "AlbionCompForge Daily Fetch", daily 09:30:
   grows the albionbb battle caches with fresh GROUP fights
   (`sample_battles.py --min-players 10 --battles 120` — `--no-topup` skips
-  the large-bucket top-up — plus `sample_rosters.py --pages 15`) and then
-  restores the committed analysis artifacts to their pre-run bytes.
-  `weapon_usage_v2.json` (prevalence, cohorts, families) still comes from
-  this channel; `roster_mixes.json` has no code reader any more (the need
-  profiles it informed are owner-ruled constants). 1v1/2v2 content
+  the large-bucket top-up) and then restores `weapon_usage_v2.json` to its
+  pre-run bytes. That artifact (prevalence, cohorts, families) is what this
+  channel feeds. The `sample_rosters.py` sweep was dropped from the job
+  2026-09-07: `roster_mixes.json` has no code reader (the need profiles it
+  informed are owner-ruled constants); run it by hand if the evidence is
+  ever wanted again. 1v1/2v2 content
 (corrupted dungeons, mist duels) can never enter: the battles endpoint is
 only queried with a total-player floor (10 / 40), and analysis buckets by
 actual fight size besides. Log: `pipeline/out/fetch_logs/daily_fetch.log`

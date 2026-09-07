@@ -1,0 +1,54 @@
+# The gate list from CLAUDE.md ("Tests" + "Build chain"), run on every push
+# and pull request. Nothing here touches the network: the pinned snapshot
+# and every generated artifact are committed, so the build chain verifies
+# them (test_provenance rebuilds the dataset and checks it byte-identical).
+name: gates
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: pip install -r requirements.txt
+
+      - name: build chain
+        run: |
+          python3 pipeline/evidence_lint.py
+          python3 pipeline/build_interactions.py
+          python3 pipeline/build_builds.py
+          python3 pipeline/build_dataset.py
+          python3 pipeline/build_cohort_families.py
+          python3 dashboard/build.py
+
+      - name: engine and evidence gates
+        run: |
+          python3 tests/test_golden.py
+          python3 tests/test_forge.py
+          python3 tests/test_builds.py
+          python3 tests/test_interactions.py
+          python3 tests/test_provenance.py
+          python3 tests/test_patch_history.py
+          python3 tests/test_js_parity.py
+          python3 tests/test_dashboard_layout.py
+          python3 tests/test_cohort_families.py
+          python3 tests/test_roles.py
+          python3 tests/test_validation_modes.py
+          python3 tests/tier2_blindtest.py v4
+
+      - name: display-layer gates
+        run: |
+          node tests/test_loadout_codec.js
+          node tests/test_display_math.js
+          node tests/test_live_party.js

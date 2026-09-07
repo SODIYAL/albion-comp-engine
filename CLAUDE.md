@@ -32,7 +32,7 @@ Read before substantive work:
 
 ## Tests
 
-Script-style, **not pytest** — they run at import and call `sys.exit`, so `pytest tests/` breaks. Run each directly; exit 0 = pass. Don't trust historical pass counts in docs — read the current output.
+Script-style, **not pytest** — they run at import and call `sys.exit`, so `pytest tests/` breaks. Run each directly; exit 0 = pass. Don't trust historical pass counts in docs — read the current output. CI (`.github/workflows/gates.yml`) runs this list plus the build chain on every push and pull request; it needs only `requirements.txt` (PyYAML) and node.
 
 ```text
 py -3 tests/test_golden.py        # recommendation golden cases (add one when an expert overrules the engine)

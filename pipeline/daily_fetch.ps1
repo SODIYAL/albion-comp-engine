@@ -45,8 +45,7 @@ $stamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 Add-Content $log "==== daily fetch $stamp ===="
 
 # preserve committed analysis artifacts (fetch-only discipline)
-$preserve = @("pipeline\out\weapon_usage_v2.json",
-              "pipeline\out\roster_mixes.json")
+$preserve = @("pipeline\out\weapon_usage_v2.json")
 $saved = @{}
 foreach ($rel in $preserve) {
     $p = Join-Path $repo $rel
@@ -61,8 +60,6 @@ Set-Location $repo
 # cmd-level redirection writes raw bytes — avoids PS 5.1's UTF-16 *>> logs
 cmd /c "py -3 -u pipeline\sample_battles.py --min-players 10 --battles 120 >> `"$log`" 2>&1"
 Add-Content $log "sample_battles exit: $LASTEXITCODE"
-cmd /c "py -3 -u pipeline\sample_rosters.py --pages 15 >> `"$log`" 2>&1"
-Add-Content $log "sample_rosters exit: $LASTEXITCODE"
 
 foreach ($p in $saved.Keys) {
     Copy-Item -Force $saved[$p] $p
