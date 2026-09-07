@@ -10,7 +10,7 @@ the gaps are enumerated up front.
 
 TWO LAYERS, deliberately not collapsed:
   effects       game mechanics (~40 combat-relevant)  -> the EVIDENCE layer
-  capabilities  comp-level needs (27, design doc §2.2) -> the SCORING layer
+  capabilities  comp-level needs (31 curated, design doc §2.2) -> the SCORING layer
 The mapping between them is many-to-many (a stun feeds both `peel` and
 `clump_create` depending on direction) and it is a human judgement. Keeping
 them separate is what lets the capability taxonomy survive balance patches:
@@ -39,8 +39,7 @@ sys.path.insert(0, HERE)
 from parse_dumps import FLAG_PATTERNS, load  # reuse the prose layer verbatim
 import jsonfmt  # noqa: E402
 
-MAX_DEPTH = 3          # applyspell recursion limit
-APPLY_KEYS = ("applyspell", "pulsingspell", "channelingspell", "spelleffectarea")
+MAX_DEPTH = 3          # reference-chain recursion limit
 
 # CONDITION nodes carry a PREDICATE, not an effect. `IfTargetCCEffect @type=stun`
 # means "if the target is stunned", and `IfTargetType @type=player` means "only

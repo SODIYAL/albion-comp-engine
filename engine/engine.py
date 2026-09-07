@@ -464,21 +464,10 @@ class Engine:
                 if wk not in allowed:
                     excl.add(wk)
         self._excluded = excl
-        # Economics gate (owner ruling 2026-08-23, composition.yaml
-        # viability.cost_gate): a cost tier may be barred from SUGGESTIONS
-        # and generation below a party size — crystal regear economics make
-        # it a rich-group choice, not a default the forge should produce.
-        # Exactly like an exclusion: manual/locked picks always score;
-        # swap_review flags them off_budget.
-        self._cost_gated = set()
-        for tier, rule in (via.get("cost_gate", {}) or {}).items():
-            mn = (rule or {}).get("min_size")
-            if mn and self.size < mn:
-                for wk in self.pool:
-                    if self.weapons[wk].get("cost_tier") == tier:
-                        self._cost_gated.add(wk)
-        self._suggest = [w for w in self.pool
-                         if w not in excl and w not in self._cost_gated]
+        # No cost gate (owner ruling 2026-09-07: "not restricting weapons but
+        # rather focusing on mechanics" — the 2026-08-23 crystal gate is
+        # retired; anti_zone demand in the templates carries the physics).
+        self._suggest = [w for w in self.pool if w not in excl]
         # Style-fit suggestion gate (identity Phase C — owner ruling
         # 2026-08-23: style selection IS build intent; "clap comp should
         # never get suggestions like battle-axe"). A weapon whose derived
@@ -762,13 +751,6 @@ class Engine:
         suggestions only — scoring is never blocked; the dashboard flags
         such members off-style."""
         return weapon in self._style_unfit
-
-    def is_cost_gated(self, weapon):
-        """True when the weapon's cost tier bars it from GENERATED comps at
-        this size (crystal regear economics, owner ruling 2026-08-23).
-        Suggestions only — a manual/locked pick always scores; the
-        dashboard flags such members off-budget."""
-        return weapon in self._cost_gated
 
     def suggest_pool(self):
         """The default candidate pool for every suggestion/generation path:
@@ -2644,7 +2626,6 @@ class Engine:
                 "score": cur_score, "rank": len(better) + 1,
                 "off_comp": self.is_excluded(cur),
                 "off_style": self.is_style_unfit(cur),
-                "off_budget": self.is_cost_gated(cur),
                 "caps_gain": caps_gain,
                 "verdict": self._pick_verdict(cur_score, caps_gain),
                 "redundant": self._pick_verdict(cur_score, caps_gain) != "ok",

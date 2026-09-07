@@ -11,14 +11,31 @@ Usage:
     py -3 pipeline/curate_helper.py 2H_POLEHAMMER MAIN_HOLYSTAFF_AVALON
     py -3 pipeline/curate_helper.py --top 5        # top N by usage, uncurated first
 """
-import json, os, sys, glob, argparse
+import json, os, glob, argparse
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
 
 WEAPONS = json.load(open(os.path.join(OUT, "weapon_lines.json"), encoding="utf-8"))
 SPELLS = json.load(open(os.path.join(OUT, "spell_index.json"), encoding="utf-8"))
-USAGE = json.load(open(os.path.join(OUT, "weapon_usage.json"), encoding="utf-8"))["weapons"]
+
+
+def load_usage():
+    """Sightings per weapon from weapon_usage_v2.json (sample_battles.py),
+    summed across the fight-size buckets, with the per-bucket split kept.
+    The v1 file this used to read was a frozen 24-battle sample from
+    2026-08-12 that nothing wrote any more."""
+    v2 = json.load(open(os.path.join(OUT, "weapon_usage_v2.json"), encoding="utf-8"))
+    out = {}
+    for bucket, weapons in (v2.get("buckets") or {}).items():
+        for key, n in weapons.items():
+            rec = out.setdefault(key, {"count": 0, "buckets": {}})
+            rec["count"] += int(n)
+            rec["buckets"][bucket] = int(n)
+    return out
+
+
+USAGE = load_usage()
 
 # Optional: recent per-patch spell changes (patch_history.py). Curation context
 # only — "this E was nerfed on 2026-05-26" — never evidence for a score.
@@ -26,9 +43,27 @@ _PH = os.path.join(OUT, "patch_history.json")
 PATCHES = (json.load(open(_PH, encoding="utf-8"))["patches"]
            if os.path.exists(_PH) else [])
 
-STRUCTURAL = ["engage", "peel", "clump_create", "tankiness", "burst_aoe", "burst_st",
-              "sustained_dps", "zone_control", "disengage", "anti_dive", "mobility",
-              "catch", "execute", "buff_allies", "self_sustain", "energy_drain"]
+# The capabilities the seeder never proposes (seed_sheets.HUMAN_ONLY: the
+# magnitude is a human call) plus, derived at runtime, everything in the
+# dataset taxonomy the effect layer cannot express at all. Never a hand list
+# of the whole taxonomy — the 2026-08 copy of that list still carried
+# `energy_drain`, a documented fabrication.
+def structural_caps():
+    from seed_sheets import HUMAN_ONLY  # noqa: E402 — sibling script
+    from effect_lookup import EffectLookup  # noqa: E402
+    ds_path = os.path.join(OUT, "dataset-latest.json")
+    taxonomy = set()
+    if os.path.exists(ds_path):
+        for w in json.load(open(ds_path, encoding="utf-8"))["weapons"].values():
+            taxonomy |= set((w.get("caps") or {}).keys())
+    lookup = EffectLookup()
+    expressible = set()
+    for sid in SPELLS:
+        try:
+            expressible |= set(lookup.candidates(sid).keys())
+        except Exception:
+            pass
+    return sorted(set(HUMAN_ONLY) | (taxonomy - expressible))
 
 
 def curated_keys():
@@ -50,7 +85,8 @@ def worksheet(key, width=104):
     u = USAGE.get(key, {})
     print("=" * width)
     print(f"{key}   {line['name']}")
-    print(f"   usage: {u.get('count', 0)} sightings   role_hint: {u.get('role', '—')}   "
+    split = ", ".join(f"{b} {n}" for b, n in sorted((u.get("buckets") or {}).items()))
+    print(f"   usage: {u.get('count', 0)} sightings ({split or 'none'})   "
           f"two_handed: {line.get('two_handed')}")
     print("=" * width)
     for slot in ("e", "q", "w", "passive"):
@@ -89,7 +125,7 @@ def worksheet(key, width=104):
                   f"metadata — in out/patch_history.json)")
 
     print(f"\n  Structural capabilities to judge (never auto-seeded):")
-    print(f"    {', '.join(STRUCTURAL)}")
+    print(f"    {', '.join(structural_caps())}")
     print()
 
 
@@ -105,6 +141,9 @@ def main():
         keys = [k for k, _ in sorted(USAGE.items(), key=lambda kv: -kv[1]["count"])
                 if k not in done][:args.top]
         print(f"# top {args.top} uncurated by usage: {keys}\n")
+        if not keys:
+            print("every weapon seen in the usage sample already has a curated sheet")
+            return
     if not keys:
         ap.error("give weapon keys or --top N")
     for k in keys:

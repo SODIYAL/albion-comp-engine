@@ -5,3 +5,8 @@
 dashboard/index.html   linguist-generated=true
 review/effects.html    linguist-generated=true
 pipeline/out/*.json    linguist-generated=true
+docs/index.html        linguist-generated=true
+docs/how-it-works.html linguist-generated=true
+dashboard/how-it-works.html linguist-generated=true
+review/magnitude.html  linguist-generated=true
+review/stat_chart.html linguist-generated=true

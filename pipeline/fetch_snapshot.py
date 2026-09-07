@@ -19,7 +19,6 @@ fetch_item_stats.py, fetch_gear_lines.py) read the cache offline.
 Usage:  py -3 pipeline/fetch_snapshot.py [--refresh] [--verify-only]
 """
 import argparse
-import json
 import os
 import sys
 import urllib.request

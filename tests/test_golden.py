@@ -672,31 +672,52 @@ def run():
           f"imp_terms={[(t['cap'], t['gain']) for t in imp.get('terms') or []]}")
 
     # T27 — forge-quality blind round (owner rulings 2026-08-23). The
-    # engine's darlings were overruled on ECONOMICS and E-identity, with
-    # the killboard sample corroborating (Exalted 0/0/5, Forgebark 0/0/2
-    # observed small/mid/large): crystal weapons leave the default pools
-    # below 30 players ("I wouldn't run it unless there were 30+ people
-    # involved"); Great Holy is brawl-only ("it has to stop moving and
-    # needs everyone to clump in place to heal with e — that's not good"
-    # for clap); a hybrid healer can never be the sole healing foundation
-    # ("too expensive to be the only healer ... the weapon needs to have
-    # high healing numbers on its e"). Contract details are pinned in
+    # engine's darlings were overruled on E-identity: Great Holy is
+    # brawl-only ("it has to stop moving and needs everyone to clump in
+    # place to heal with e — that's not good" for clap); a hybrid healer
+    # can never be the sole healing foundation ("too expensive to be the
+    # only healer ... the weapon needs to have high healing numbers on its
+    # e"). The same round's ECONOMICS ruling (crystal weapons out below 30)
+    # was RETIRED 2026-09-07 — see T42. Contract details are pinned in
     # tests/test_forge.py F14-F16; this golden pins the expert calls at
     # the suggestion surface where the blind round saw them.
     e_clap10 = Engine(content="blackzone_roam", size=10, style="clap")
     clap_pool = set(e_clap10.suggest_pool())
     e_brawl20 = Engine(content="blackzone_roam", size=20, style="brawl")
     brawl_pool = set(e_brawl20.suggest_pool())
-    check("T27 owner rulings: no Exalted/Forgebark below 30, Great Holy "
-          "barred from clap suggestions yet kept for brawl",
-          "2H_HOLYSTAFF_CRYSTAL" not in clap_pool
-          and "MAIN_NATURESTAFF_CRYSTAL" not in clap_pool
-          and GREAT_HOLY not in clap_pool
+    check("T27 owner rulings: Great Holy barred from clap suggestions yet "
+          "kept for brawl",
+          GREAT_HOLY not in clap_pool
           and HALLOWFALL in clap_pool
-          and GREAT_HOLY in brawl_pool
-          and "2H_HOLYSTAFF_CRYSTAL" not in brawl_pool,
+          and GREAT_HOLY in brawl_pool,
           f"clap10 has GH={GREAT_HOLY in clap_pool} "
           f"brawl20 has GH={GREAT_HOLY in brawl_pool}")
+    # T42 — the cost gate retired (owner 2026-09-07): "remove the cost gate
+    # for weapons. we had added cost gate because the engine kept putting
+    # the crystal holy staff in every comp for it's area cleanse but a
+    # better ruling might be that that type of cleanse is not as important
+    # in small groups as the engine values. this would follow in line with
+    # us not restricting weapons but rather focusing on mechanics." The
+    # Exalted Staff is the catalogue's only anti_zone supplier; the
+    # mechanism is the anti_zone row — none at the 7-man contents (no
+    # 7-man comp in the corpus fields one; 2% of 4-9 man winner parties
+    # do), scaling with fight size elsewhere (32% of 20+ winners). Pinned
+    # at both ends: a default 7-man forge fields no Exalted with nothing
+    # barring it, a default 20-man still does, and a manual Exalted at 7
+    # scores like any healer.
+    e_co7 = Engine(content="castle_outpost", size=7)
+    p7 = e_co7.forge(7)["party"]
+    e_bz20 = Engine(content="blackzone_roam", size=20)
+    p20 = e_bz20.forge(20)["party"]
+    manual = e_co7.comp_score(["2H_HOLYSTAFF_CRYSTAL", "2H_MACE", "2H_LONGBOW"])
+    check("T42 no cost gate: Exalted absent from a default 7-man forge by "
+          "mechanics alone, present at 20, and scores when manual",
+          "2H_HOLYSTAFF_CRYSTAL" in set(e_co7.suggest_pool())
+          and "2H_HOLYSTAFF_CRYSTAL" not in p7
+          and "2H_HOLYSTAFF_CRYSTAL" in p20
+          and manual == manual and manual > 0,
+          f"p7={[E.weapons[w]['display_name'] for w in p7]} "
+          f"exalted@20={'2H_HOLYSTAFF_CRYSTAL' in p20} manual={manual:.2f}")
     check("T27b full-healer split matches the owner's named cases "
           "(Forgebark/Exalted hybrids, Great Holy/Redemption full)",
           E.weapons[GREAT_HOLY]["full_healer"]

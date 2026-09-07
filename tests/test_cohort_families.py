@@ -97,12 +97,14 @@ def run():
 
     # the 2026-08 sample's known yield — a canary against silent gate drift
     # (update alongside a sample refresh, not to make a red test green)
-    check("committed sample yields families where the data supports them "
-          "(large >= 3) and none where it does not (small == 0)",
+    check("committed sample yields families where the data supports them: the large "
+          "bucket (the ZvZ meta) carries >= 3, and no bucket carries more families than "
+          "its usable cohorts could support at the published minimum",
           len(doc["buckets"].get("large") or []) >= 3
-          and len(doc["buckets"].get("small") or []) == 0,
-          f"large={len(doc['buckets'].get('large') or [])} "
-          f"small={len(doc['buckets'].get('small') or [])}")
+          and all(len(fams) * doc["params"]["min_cohorts"]
+                  <= sum(f["cohorts"] for f in fams) + doc["unassigned"][b]
+                  for b, fams in doc["buckets"].items()),
+          "  ".join(f"{b}={len(fams)}" for b, fams in doc["buckets"].items()))
 
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)

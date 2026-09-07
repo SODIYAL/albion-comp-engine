@@ -40,7 +40,6 @@ harvest: the row carries the soft cap only and the content target stands
 
     py -3 pipeline/derive_style_bands.py
 """
-import datetime
 import json
 import os
 import sys

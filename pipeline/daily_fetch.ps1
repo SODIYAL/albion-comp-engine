@@ -5,8 +5,14 @@
 #                  GROUP fights from api.albionbb.com, politely.
 # What this NEVER does: rebuild committed artifacts, run analysis, touch
 #                  scoring, or commit anything. The weekly cadence
-#                  (pipeline/README.md) re-analyzes offline (--pages 0)
-#                  and commits with the full gate list.
+#                  (pipeline/README.md) re-analyzes offline (sample_battles
+#                  re-reads its cache; sample_rosters --pages 0) and commits
+#                  with the full gate list.
+#
+# SIBLING JOB: pipeline/harvest_overnight.ps1 (03:00) is the OTHER channel —
+# sample_parties.py against the official API's GroupMembers (killer parties
+# with gear, out/party_cache/). This job feeds weapon_usage_v2.json
+# (prevalence, cohorts, families); that one feeds the kit doctrine.
 #
 # GROUP-FIGHT GUARANTEE (owner 2026-08-27: "not smallscale like corrupted
 # 1v1"): the battles endpoint aggregates kills into battles and is only
@@ -39,8 +45,7 @@ $stamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 Add-Content $log "==== daily fetch $stamp ===="
 
 # preserve committed analysis artifacts (fetch-only discipline)
-$preserve = @("pipeline\out\weapon_usage_v2.json",
-              "pipeline\out\roster_mixes.json")
+$preserve = @("pipeline\out\weapon_usage_v2.json")
 $saved = @{}
 foreach ($rel in $preserve) {
     $p = Join-Path $repo $rel
@@ -55,8 +60,6 @@ Set-Location $repo
 # cmd-level redirection writes raw bytes — avoids PS 5.1's UTF-16 *>> logs
 cmd /c "py -3 -u pipeline\sample_battles.py --min-players 10 --battles 120 >> `"$log`" 2>&1"
 Add-Content $log "sample_battles exit: $LASTEXITCODE"
-cmd /c "py -3 -u pipeline\sample_rosters.py --pages 15 >> `"$log`" 2>&1"
-Add-Content $log "sample_rosters exit: $LASTEXITCODE"
 
 foreach ($p in $saved.Keys) {
     Copy-Item -Force $saved[$p] $p

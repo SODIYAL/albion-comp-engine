@@ -31,9 +31,10 @@ Pins the structural contracts of the reworked engine:
   F12 predicate minima are combo-aware: locked non-qualifying kits are kept
       verbatim but never counted toward the ranged-AoE core.
   F13 style gate: unfit weapons leave suggestions/forge only.
-  F14 cost gate (owner ruling 2026-08-23): crystal weapons leave suggestions
-      and generation below 30 players; manual/locked picks score, flagged
-      off_budget; avalonian is never gated.
+  F14 no cost gate (owner ruling 2026-09-07, retiring the 2026-08-23 crystal
+      gate): every cost tier sits in every suggest pool, swap_review carries
+      no off_budget flag, and the anti_zone rows carry the physics instead —
+      no row in the 7-man templates, size-scaled elsewhere.
   F15 primary-heal minimum (owner ruling 2026-08-23): a hybrid healer can
       never be the comp's sole healing foundation — every forge fields the
       band's full-healer minimum in addition to the healer role band.
@@ -431,37 +432,34 @@ def t_style_gate():
 
 
 def t_cost_gate():
-    """F14 (owner ruling 2026-08-23, forge-quality blind round): crystal
-    weapons are a rich-group choice, not a default — "I wouldn't run it
-    unless there were 30+ people involved". Barred from suggestions and
-    generation below 30 exactly like an exclusion; manual and locked picks
-    still score, flagged off_budget; avalonian is never gated (Hand of
-    Justice at 7 is fine by the same ruling)."""
-    CRYSTAL = ("2H_HOLYSTAFF_CRYSTAL", "MAIN_NATURESTAFF_CRYSTAL")
+    """F14 (owner ruling 2026-09-07, retiring the 2026-08-23 crystal gate):
+    "remove the cost gate for weapons ... a better ruling might be that
+    that type of cleanse is not as important in small groups as the engine
+    values. this would follow in line with us not restricting weapons but
+    rather focusing on mechanics." No cost tier is barred anywhere;
+    swap_review carries no off_budget flag; the Exalted Staff (sole
+    anti_zone supplier) is judged by the anti_zone rows — none in the
+    7-man templates, size-scaled in the rest."""
+    CRYSTAL = ("2H_HOLYSTAFF_CRYSTAL", "MAIN_NATURESTAFF_CRYSTAL",
+               "2H_DUALCROSSBOW_CRYSTAL")
+    pools = [set(Engine(content=c, size=n).suggest_pool())
+             for c, n in (("castle_outpost", 7), ("roads", 7),
+                          ("blackzone_roam", 10), ("blackzone_roam", 20))]
+    admitted = all(w in p for p in pools for w in CRYSTAL)
     e = Engine(content="blackzone_roam", size=20, style="brawl")
-    barred = all(w not in set(e.suggest_pool()) for w in CRYSTAL)
-    not_rec = all(r["weapon"] not in CRYSTAL
-                  for r in e.recommend([], top_n=300))
-    r = e.forge(20)
-    forge_clean = all(e.weapons[w].get("cost_tier") != "crystal"
-                      for w in r["party"])
-    party = ["2H_HOLYSTAFF_CRYSTAL", "2H_MACE", "MAIN_HOLYSTAFF_AVALON"]
-    score = e.comp_score(party)
-    scoreable = score == score and score != 0.0
-    review = e.swap_review(party)
-    flagged = review[0]["off_budget"] and not review[1]["off_budget"]
-    locked = e.forge(20, locked=["2H_HOLYSTAFF_CRYSTAL"])
-    locked_kept = locked["party"][0] == "2H_HOLYSTAFF_CRYSTAL"
-    e30 = Engine(content="castle", size=30)
-    open30 = all(w in set(e30.suggest_pool()) for w in CRYSTAL)
-    avalon_open = "2H_HAMMER_AVALON" in set(
-        Engine(content="castle_outpost", size=7).suggest_pool())
-    check("F14 cost gate: crystal barred below 30 (suggest+forge), scores "
-          "when manual/locked, flagged off_budget; open at 30; avalonian free",
-          barred and not_rec and forge_clean and scoreable and flagged
-          and locked_kept and open30 and avalon_open,
-          f"score={score:.3f}, off_budget={[m['off_budget'] for m in review]}, "
-          f"open30={open30}, avalon_open={avalon_open}")
+    review = e.swap_review(["2H_HOLYSTAFF_CRYSTAL", "2H_MACE", "MAIN_HOLYSTAFF_AVALON"])
+    no_flag = all("off_budget" not in m for m in review)
+    e7 = Engine(content="castle_outpost", size=7)
+    no_row_7 = ("anti_zone" not in e7.reqs
+                and "anti_zone" not in Engine(content="roads", size=7).reqs)
+    e10 = Engine(content="blackzone_roam", size=10)
+    scaled = abs(e10._targets["anti_zone"] - 1.8 * 10 / 20) < 1e-9 \
+        and abs(e._targets["anti_zone"] - 1.8) < 1e-9
+    check("F14 no cost gate: crystal in every suggest pool, no off_budget "
+          "flag, anti_zone has no 7-man row and scales with size elsewhere",
+          admitted and no_flag and no_row_7 and scaled,
+          f"admitted={admitted} no_flag={no_flag} no_row_7={no_row_7} "
+          f"t10={e10._targets.get('anti_zone')} t20={e._targets.get('anti_zone')}")
 
 
 def t_primary_heal():

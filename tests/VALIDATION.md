@@ -1,10 +1,10 @@
-# Validation Plan — Composition Engine
+# Validation — Composition Engine
 
-How we test the design *before* building it, what already ran (2026-08-12), and what remains. Principle: every risky claim in the design doc gets a cheap falsification test; build only after the cheap tests pass.
+The APPEND-ONLY ruling log: every dated round, every owner quote, every score, newest entries at the bottom of each section. Standing rule (anti-circularity): comps that calibrated a template must not drive retuning against their own gate results — findings from gate runs are hypotheses for the owner, never fixes. The opening tiers below are the original 2026-08-12 plan, kept as written: how the design was tested *before* building it. Principle then and now: every risky claim gets a cheap falsification test.
 
 ## Tier 1 — Model validity (ran today, no product code needed)
 
-**V1. Golden-case recommendation tests** — `prototype_engine.py`, runnable anytime (`python3 prototype_engine.py`).
+**V1. Golden-case recommendation tests** — `tests/prototype_engine.py`, the throwaway prototype (runnable: `py -3 tests/prototype_engine.py`); its cases live on in `tests/test_golden.py`.
 A ~250-line throwaway implementation of the scoring model (13 hand-scored weapons, 1 content template) against 9 assertions encoding what any experienced player knows to be true:
 
 | # | Case | Result |
@@ -48,7 +48,7 @@ there produced two more load-bearing findings of the V1 class:
 
 ## Tier 2 — Recommendation quality (before/while building MVP, needs humans)
 
-**V3. Expert blind test.** Give 10–15 partial parties to 3+ experienced shotcallers; collect their next-pick independently; compare with engine top-3. Target: expert pick appears in engine top-3 ≥70% of cases. This is the true accuracy metric — the curation prerequisite is now MET (all 137 weapons, 2026-08-12) and `tests/tier2_form.md` is regenerated against the full pool (seed 20260812). **V3 is the project's current critical path**; everything else is tuning noise until it runs.
+**V3. Expert blind test** (ran first 2026-08-23 — see the dated entries below; the V4 gate has since been re-based to `actual_gear` and enforces). Give 10–15 partial parties to 3+ experienced shotcallers; collect their next-pick independently; compare with engine top-3. Target: expert pick appears in engine top-3 ≥70% of cases. This is the true accuracy metric — the curation prerequisite is now MET (all 137 weapons, 2026-08-12) and `tests/tier2_form.md` is regenerated against the full pool (seed 20260812). **V3 is the project's current critical path**; everything else is tuning noise until it runs.
 
 **FIRST V3 ROUND (2026-08-23, n=1: the owner-expert, in-chat blind protocol)** — all 12 seed-20260812 castle_outpost cases answered blind (engine output withheld until each batch of picks was in), reasoning captured per case:
 
@@ -2527,3 +2527,5 @@ mechanism on clap10 dressed in Royal Jackets (stays clap) and Hellions
 (turns brawl); T35/T40 speak `kit_lean` = brawl / ranged now. Rerun
 order after a harvest: audit (writes chest_lean.json) -> derive rows ->
 build_dataset -> gates. Gates green; parity 60/60.
+
+**THE COST GATE RETIRED (2026-09-07, owner ruling, in-chat).** Owner, verbatim: "remove the cost gate for weapons. we had added cost gate because the engine kept putting the crystal holy staff in every comp for it's area cleanse but a better ruling might be that that type of cleanse is not as important in small groups as the engine values. this would follow in line with us not restricting weapons but rather focusing on mechanics." Measured before changing anything: the Exalted Staff's sheet carries no `cleanse` at all — it is the catalogue's ONLY `anti_zone` supplier (Holy Dispel removes enemy ground areas), so with the gate lifted the forge took it in 8 of 8 contents, 7-man to 25-man, on an `anti_zone` target every template carried as `scales: false`. Evidence for the physics: no 7-man comp in the corpus fields an Exalted (push_monkey_7, sob_blaze_os, sortasaucy_7man); the curated comps that do are 20-mans, one 14 and one 10; the harvest (killer parties) fields one in 2.0% of 4-9 man parties, 7.2% at 10-14, 21.5% at 15-19, 32.1% at 20+. Shipped as mechanics, no weapon list: the gate removed from both ports and `composition.yaml` (`cost_tier` stays a display fact; `off_budget` gone from swap review and the page); `anti_zone` rows DELETED at castle_outpost and roads ("never invent a number" — the 2.02 target there was a fossil of the pre-08-27 anti_zone meaning, supported by no small comp) and set to `scales: true` at blackzone_roam / territory_defense / castle / faction_war (zone removal is demand created by enemy ground effects; more enemies lay more; the base-size number stays what the owner-vetted comps field). Result: no Exalted in any default 7-man forge (castle_outpost, roads, blackzone 7), Exalted still generated from 10 up (blackzone 10 target 0.9); other crystal weapons now compete on their merits (Arclight Blasters at 7, Rift Glaive at 20 clap). Open for the owner: whether 10-14 should field it (7% of winners do, one curated 10-man does) — the lever is the base-20 measurement the scaling reads, never a weapon rule. T42 + F14 pin it; T27 keeps its E-identity half.

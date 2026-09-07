@@ -10,6 +10,10 @@
 # rebuilding, the gate list and the audit stay a reviewed, in-session step
 # (pipeline/README.md, CLAUDE.md "Kits are what winners wear").
 #
+# SIBLING JOB: pipeline/daily_fetch.ps1 (09:30) grows the albionbb battle
+# caches behind weapon_usage_v2.json (prevalence, cohorts, families) — a
+# different API and cache; neither job subsumes the other.
+#
 # Registered as a Windows scheduled task (daily 03:00, current user, 6 h
 # limit, runs late if the machine was asleep) from PowerShell:
 #   $a = New-ScheduledTaskAction -Execute powershell.exe -Argument '-NoProfile -ExecutionPolicy Bypass -File "D:\VS Projects\Bion\pipeline\harvest_overnight.ps1"'
@@ -26,6 +30,10 @@ $logDir = Join-Path $root "pipeline\out\fetch_logs"
 New-Item -ItemType Directory -Force $logDir | Out-Null
 $stamp = Get-Date -Format "yyyy-MM-dd"
 $log = Join-Path $logDir "harvest-$stamp.log"
+# one log per night: keep a month, drop the rest
+Get-ChildItem $logDir -Filter "harvest-*.log" |
+    Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-30) } |
+    Remove-Item -Force -ErrorAction SilentlyContinue
 Set-Location $root
 
 "=== overnight harvest $(Get-Date -Format s) ===" | Out-File $log -Encoding utf8 -Append
