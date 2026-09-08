@@ -2531,3 +2531,121 @@ build_dataset -> gates. Gates green; parity 60/60.
 **THE COST GATE RETIRED (2026-09-07, owner ruling, in-chat).** Owner, verbatim: "remove the cost gate for weapons. we had added cost gate because the engine kept putting the crystal holy staff in every comp for it's area cleanse but a better ruling might be that that type of cleanse is not as important in small groups as the engine values. this would follow in line with us not restricting weapons but rather focusing on mechanics." Measured before changing anything: the Exalted Staff's sheet carries no `cleanse` at all — it is the catalogue's ONLY `anti_zone` supplier (Holy Dispel removes enemy ground areas), so with the gate lifted the forge took it in 8 of 8 contents, 7-man to 25-man, on an `anti_zone` target every template carried as `scales: false`. Evidence for the physics: no 7-man comp in the corpus fields an Exalted (push_monkey_7, sob_blaze_os, sortasaucy_7man); the curated comps that do are 20-mans, one 14 and one 10; the harvest (killer parties) fields one in 2.0% of 4-9 man parties, 7.2% at 10-14, 21.5% at 15-19, 32.1% at 20+. Shipped as mechanics, no weapon list: the gate removed from both ports and `composition.yaml` (`cost_tier` stays a display fact; `off_budget` gone from swap review and the page); `anti_zone` rows DELETED at castle_outpost and roads ("never invent a number" — the 2.02 target there was a fossil of the pre-08-27 anti_zone meaning, supported by no small comp) and set to `scales: true` at blackzone_roam / territory_defense / castle / faction_war (zone removal is demand created by enemy ground effects; more enemies lay more; the base-size number stays what the owner-vetted comps field). Result: no Exalted in any default 7-man forge (castle_outpost, roads, blackzone 7), Exalted still generated from 10 up (blackzone 10 target 0.9); other crystal weapons now compete on their merits (Arclight Blasters at 7, Rift Glaive at 20 clap). Open for the owner: whether 10-14 should field it (7% of winners do, one curated 10-man does) — the lever is the base-20 measurement the scaling reads, never a weapon rule. T42 + F14 pin it; T27 keeps its E-identity half.
 
 **THE ANTI_ZONE DEMAND RAMP (2026-09-07, owner ruling, same session).** Owner, on being told the scaled row still fielded the Exalted Staff at 10: "if only 7% of weapons do maybe it should be like a scaling thing. don't really need it at 10-14 and then need grows slightly as numbers grows and then becomes a good requirement at like 25+". Shipped as a general template-row mechanism, `ramp: {none_until, full_at}` in both ports: the row is DROPPED for the context at sizes <= none_until (identical to a content with no row — no target, no weight, nothing to chase), grows linearly from zero to the row's measured value at full_at, and grows with the party beyond it (the same proportional rule `scales` uses); target and soft cap move together; a row carries `ramp` or `scales`, never both. anti_zone rows at blackzone_roam / territory_defense / castle / faction_war carry `ramp: {none_until: 14, full_at: 25}` — the anchors are the owner's words, the row values stay the comp-fitted numbers. Measured after: no anti_zone requirement at 7, 10 or 14 (no Exalted forged); target 0.16 at 15, 0.98 at 20 (blackzone), 2.21 at 20 (territory), 1.8 at 25 (castle), 2.16 at 30. NOTED FOR THE OWNER: from 15 up the forge fields the Exalted Staff even on the 0.16 sliver — it is the sole supplier, so any nonzero row makes it the tie-break among otherwise equal healers; the ramp sets the SIZE of the need exactly as ruled, and whether a hybrid healer should win a tie on a sliver is a weight question, not a size one. T42 (7- and 10-man forges field none; 25-man does; manual scores) and F14 (the ramp values at 14/20/25/30) pin it; parity 60/60.
+
+### Blind round 4 (owner, 2026-09-08) — the 10-14 band, all twenty called
+
+Form: twenty rosters of 10-14 from the harvest (`--blind-round 4`, every
+graded battle excluded; the round-3 form's rosters 12-20 were re-drawn
+here). Calls came in two sittings: 1-10 on 2026-09-05 mid-way through the
+kit rounds (1 support, 3 gank, 5-7 and 9 clap, 8 brawl, 10 kite-clap; 2
+and 4 left uncalled), the rest today. Owner's calls today, in their words:
+2 "part of clap"; 4 "looking like a random roaming party"; 11 "looks
+brawl"; 12 "looks brawl"; 13 "looks clap kite possibly"; 14 "looks
+clapish, not sure"; 15 "looks like part bomb in brawl"; 16 "looks like
+clap"; 17 "looks like clap with kite potential"; 18 "gank group (you can
+tell by claws, dagger pair, whispering bow - these are catching and
+dismounting the enemy type of weapons)"; 19 "i am not sure why there are 3
+bloodletters, the only time i see bloodletters in large group fights is
+when its on a battlemount user who needs it just so they can run away if
+they get in trouble. so i assume this party is a 2nd or 3rd party of a
+larger group"; 20 "looks like part of a brawl squad". The owner's caveat
+on the whole form: "these groups i realize are not full groups but make
+part of a full party at times. my answers are based on the weapons in
+front of me alone but its hard to tell between clap and kite-clap and
+kite when looking at part of a group. so dont mind the differences too
+much."
+
+Engine labels are the audit's DRESSED reads (`blind_answers`); the naked
+`comp_identity` reproduction matches 19/20 — roster 18 reads split naked
+and clap with its kits.
+
+| # | owner | engine | grade |
+|---|-------|--------|-------|
+| 1 | support | clap strong | no style called (the support half: 3 Oathkeepers, 2 Hammers, Hallowfall, Dawnsong, Evensong) |
+| 2 | part of clap | split | abstain (melee 0.38, three points over the 0.35 ranged-core line) |
+| 3 | gank | brawl strong | gank — no gank read exists |
+| 4 | random roaming | clap strong | no style called |
+| 5 | clap | kite strong | MISS |
+| 6 | clap | clap leaning | exact |
+| 7 | clap | brawl_clap leaning | half (4 Battle Bracers, 7 supports; melee 1.0) |
+| 8 | brawl | brawl leaning | exact |
+| 9 | clap | clap strong | exact |
+| 10 | kite-clap | clap strong | half |
+| 11 | brawl | split | abstain (melee 0.47) |
+| 12 | brawl | brawl strong | exact |
+| 13 | clap-kite possibly | clap strong | half |
+| 14 | clapish | clap leaning | exact |
+| 15 | part bomb in brawl | brawl strong | exact |
+| 16 | clap | clap strong | exact |
+| 17 | clap with kite potential | clap strong | exact |
+| 18 | gank | clap leaning (dressed; split naked) | gank — no gank read exists |
+| 19 | not sure, a sub-party | split | both abstain |
+| 20 | part of brawl | brawl strong | exact |
+
+**Score:** of the 14 rosters where the owner named a style and the engine
+read one: 9 exact, 3 half-right (7, 10, 13 — every one on the clap /
+kite-clap / brawl-clap seam the owner said not to mind), 1 miss (5). Two
+abstentions where the owner called (2, 11), two gank calls the engine
+cannot make (3, 18), three rosters with no style called (1, 4, 19).
+
+**The misses, mechanically** (hypotheses for the owner — anti-circularity,
+NOTHING retuned):
+
+- **5 (clap / kite):** a ranged core (melee 0), bomb share 0.36 — under
+  the 0.45 lone-tool floor — and exactly ONE standoff tool: the Infernal
+  Staff's E (dumps `HUMAN_TORCH`, reach 12, utility 4, damage 2), which
+  `derive_style_fit` admits as a standoff E. So round 3's rule (a) made a
+  kite of a 14-stack fielding Blazing, Great Fire, Infernal, Longbow and
+  Realmbreaker, while the same label flags its two Great Holy Staffs
+  "off-kite at this size". Two levers, both owner questions: is the
+  Infernal Staff's E a standoff tool in the Bedrock sense (a hold-them-
+  there field) or a ranged utility bomb; and should one tool out-vote
+  five ranged damage dealers at 0.36 — the rule was fitted to one Icicle
+  in round 3's roster 4 and kite10's one Bedrock.
+- **11 (brawl / split):** melee 0.47. Rigid melee: Battle Bracers,
+  Galatine Pair, Greataxe; rigid ranged: Bow AND Witchwork Staff (a
+  frontline whose damage points count as a ranged carrier); flex: Heron
+  Spear and Realmbreaker, which the flex-home rule (rigid melee 2x rigid
+  ranged) leaves on the ranged side. The owner reads the four melee
+  bodies as the identity. Hypothesis: a frontline's damage points making
+  a ranged carrier — the same shape as round 3's REJECTED utility-carrier
+  rule, so it takes a ruling, not a retune.
+- **2 (part of clap / split):** Galatine Pair + Bloodletter melee against
+  Blazing + Shadowcaller ranged, Realmbreaker and Spiked Gauntlets flex;
+  melee 0.38. The owner hedged; recorded as an abstention.
+- **7 (clap / brawl_clap):** the owner's clap reads the seven supports,
+  the engine reads the only damage there is (four Battle Bracers). Not
+  pinned.
+
+**THE GANK READ now has a mechanism (open ruling, HANDOFF).** Three
+killer parties across the rounds — round 2 roster 9, round 4 rosters 3
+(Bear Paws x2, Galatine Pair x2, Deathgivers, Carrioncaller, Infernal
+Scythe, Ursine Maulers, Astral, Hallowfall: brawl strong 0.89) and 18 —
+the owner calls gank and the engine labels brawl or clap. The owner's
+tell, verbatim: "claws, dagger pair, whispering bow - these are catching
+and dismounting the enemy type of weapons". That is a derivable fact, not
+a weapon list: a damage core whose Es are catch / dismount / single-
+target-execute delivery with no bomb share. As it stands these rosters
+VOTE into the brawl and clap rows of `style_bands.yaml` at 10-14.
+Proposal for the owner, NOT built: a descriptive `gank` read at <= 14
+when the damage core is majority catch-and-execute delivery, which would
+label the roster on the board, keep it OUT of the five style rows, and
+never be a forge style (the five styles stand). Needs the owner's word
+before anything moves.
+
+**Facts recorded from the owner's reads:**
+
+- Bloodletter in a 10+ roster: "the only time i see bloodletters in large
+  group fights is when its on a battlemount user who needs it just so
+  they can run away". A Bloodletter stack marks a battlemount sub-party;
+  roster 19's three make it a 2nd/3rd party of a larger group. Consistent
+  with round 3 roster 11 (three Bloodletters, split): the Bloodletter is a
+  size-context tell, not a damage identity.
+- Killer parties of 10-14 are often PARTS of a bigger party; the owner's
+  calls on them are leaning reads, and clap / kite-clap / kite are not
+  reliably separable from a part.
+
+T43 pins the nine agreed rosters (6, 8, 9, 12, 14, 15, 16, 17, 20) naked
+against `comp_identity`; the twenty battles join `GRADED_BATTLES` so no
+form re-samples them. Nothing retuned; the two hypotheses and the gank
+proposal wait for the owner.

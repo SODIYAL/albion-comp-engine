@@ -1415,6 +1415,40 @@ def run():
           r3_ok == 6 and lone_ok and kite10_ok,
           f"round={r3_ok}/6 bad={r3_bad} lone={lone_ok} kite10={kite10_ok}")
 
+    # T43 — blind round 4 (owner, 2026-09-08; the 10-14 band, all twenty
+    # called: 1-10 on 09-05, the rest on 09-08). 9 exact / 3 half / 1 miss
+    # of 14 callable; two abstentions (2, 11), two gank calls the engine
+    # cannot make (3, 18), three uncalled (1, 4, 19). NOTHING retuned: the
+    # miss (5 — the Infernal Staff's E as a lone standoff tool at 0.36 bomb
+    # share) and the abstention (11 — Witchwork's damage points as a ranged
+    # carrier) are hypotheses for the owner, and the gank read is an open
+    # ruling that now has a mechanism in the owner's words ("claws, dagger
+    # pair, whispering bow - these are catching and dismounting the enemy
+    # type of weapons"). This pins the nine agreed rosters, weapons only,
+    # exactly as the owner called them.
+    round4 = {
+        6: ('clap', ['MAIN_RAPIER_MORGANA', '2H_CURSEDSTAFF_MORGANA', '2H_SHAPESHIFTER_KEEPER', '2H_CROSSBOW_CANNON_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HAMMER', '2H_MACE', '2H_LONGBOW', 'MAIN_MACE', '2H_ENIGMATICORB_MORGANA', 'MAIN_NATURESTAFF', '2H_DUALMACE_AVALON', '2H_AXE_AVALON']),
+        8: ('brawl', ['2H_SCYTHE_CRYSTAL', '2H_SCYTHE_CRYSTAL', '2H_SCYTHE_CRYSTAL', '2H_SCYTHE_CRYSTAL', '2H_HOLYSTAFF_HELL', 'MAIN_MACE_HELL', '2H_DUALMACE_AVALON', '2H_NATURESTAFF_KEEPER', 'MAIN_CURSEDSTAFF_AVALON', '2H_HAMMER_CRYSTAL']),
+        9: ('clap', ['2H_MACE_MORGANA', '2H_ENIGMATICSTAFF', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_MACE', '2H_LONGBOW', '2H_AXE_AVALON', '2H_HOLYSTAFF_UNDEAD', 'MAIN_CURSEDSTAFF_CRYSTAL', '2H_HAMMER_CRYSTAL']),
+        12: ('brawl', ['2H_KNUCKLES_SET2', '2H_DUALAXE_KEEPER', '2H_CLEAVER_HELL', 'MAIN_DAGGER_HELL', 'MAIN_MACE_CRYSTAL', '2H_AXE', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_CURSEDSTAFF_UNDEAD', 'MAIN_MACE', '2H_KNUCKLES_SET3', '2H_ROCKSTAFF_KEEPER']),
+        14: ('clap', ['MAIN_ARCANESTAFF', 'MAIN_RAPIER_MORGANA', 'MAIN_RAPIER_MORGANA', '2H_MACE_MORGANA', '2H_CROSSBOW_CANNON_AVALON', '2H_HOLYSTAFF_CRYSTAL', '2H_ARCANESTAFF', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_CURSEDSTAFF_UNDEAD', '2H_ICECRYSTAL_UNDEAD', '2H_NATURESTAFF_KEEPER', '2H_GLAIVE_CRYSTAL', '2H_SHAPESHIFTER_SET2']),
+        15: ('brawl', ['MAIN_RAPIER_MORGANA', '2H_DAGGER_KATAR_AVALON', '2H_DAGGER_KATAR_AVALON', '2H_DAGGER_KATAR_AVALON', 'MAIN_HOLYSTAFF_AVALON', '2H_MACE', 'MAIN_MACE', '2H_DUALMACE_AVALON', '2H_AXE_AVALON', '2H_KNUCKLES_SET3']),
+        16: ('clap', ['2H_FIRE_RINGPAIR_AVALON', '2H_SHAPESHIFTER_KEEPER', '2H_HOLYSTAFF_CRYSTAL', 'MAIN_CURSEDSTAFF_UNDEAD', '2H_LONGBOW', '2H_BOW_AVALON', 'MAIN_NATURESTAFF', '2H_DUALMACE_AVALON', '2H_ICECRYSTAL_UNDEAD', '2H_AXE_AVALON', '2H_HOLYSTAFF_UNDEAD', '2H_HARPOON_HELL', '2H_BOW_HELL']),
+        17: ('clap', ['MAIN_HOLYSTAFF_AVALON', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_HAMMER', '2H_LONGBOW', '2H_ARCANESTAFF_HELL', '2H_ICECRYSTAL_UNDEAD', '2H_POLEHAMMER', '2H_AXE_AVALON', '2H_SHAPESHIFTER_SET2', '2H_HARPOON_HELL', 'MAIN_ARCANESTAFF_UNDEAD']),
+        20: ('brawl', ['2H_KNUCKLES_SET2', '2H_KNUCKLES_SET2', '2H_DUALAXE_KEEPER', '2H_NATURESTAFF_HELL', '2H_AXE', 'MAIN_HOLYSTAFF_AVALON', 'MAIN_MACE', '2H_DUALMACE_AVALON', '2H_ICECRYSTAL_UNDEAD', '2H_POLEHAMMER']),
+    }
+    r4_ok, r4_bad = 0, []
+    for rid, (agreed_style, ids) in sorted(round4.items()):
+        e39.set_content("territory_defense", len(ids))
+        got = e39.comp_identity(ids).get("style")
+        if got == agreed_style:
+            r4_ok += 1
+        else:
+            r4_bad.append(f"r{rid}:{got}")
+    check("T43 blind round 4 (2026-09-08, the 10-14 band): the nine agreed "
+          "rosters read as the owner called them; nothing retuned",
+          r4_ok == 9, f"round={r4_ok}/9 bad={r4_bad}")
+
     # T40 — KIT ROUNDS (owner, 2026-09-05: builds shown without labels,
     # graded against the styles of the rosters they were worn in).
     # Realmbreaker 7/8, Hallowfall 6/8; the disagreement was the LABEL:

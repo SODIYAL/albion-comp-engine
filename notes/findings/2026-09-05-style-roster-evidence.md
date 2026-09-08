@@ -608,3 +608,34 @@ Twenty harvested rosters of 10-14 players (every graded battle excluded), weapon
 18. (13 players) Bear Paws, Bear Paws, Bow of Badon, Claws, Claws, Dagger Pair, Fists of Avalon, Forgebark Staff, Hallowfall, Permafrost Prism, Redemption Staff, Staff of Balance, Whispering Bow
 19. (11 players) Bedrock Mace, Bloodletter, Bloodletter, Bloodletter, Carving Sword, Exalted Staff, Fallen Staff, Longbow, Occult Staff, Permafrost Prism, Rotcaller Staff
 20. (10 players) Battle Bracers, Battle Bracers, Bear Paws, Blight Staff, Greataxe, Hallowfall, Mace, Oathkeepers, Permafrost Prism, Polehammer
+
+### Grading (2026-09-08) — calls 1-10 from 09-05, 2, 4 and 11-20 today
+
+Engine = the dressed `blind_answers`. Full record, the owner's words and the
+mechanical read of every miss: `tests/VALIDATION.md` "Blind round 4".
+
+| # | owner | engine | grade |
+|---|-------|--------|-------|
+| 1 | support | clap strong | no style called |
+| 2 | part of clap | split | abstain |
+| 3 | gank | brawl strong | gank (no read exists) |
+| 4 | random roaming | clap strong | no style called |
+| 5 | clap | kite strong | MISS (lone standoff tool: Infernal Staff's E; bomb share 0.36) |
+| 6 | clap | clap leaning | exact |
+| 7 | clap | brawl_clap leaning | half |
+| 8 | brawl | brawl leaning | exact |
+| 9 | clap | clap strong | exact |
+| 10 | kite-clap | clap strong | half |
+| 11 | brawl | split | abstain (melee 0.47; Witchwork counts as a ranged carrier) |
+| 12 | brawl | brawl strong | exact |
+| 13 | clap-kite possibly | clap strong | half |
+| 14 | clapish | clap leaning | exact |
+| 15 | part bomb in brawl | brawl strong | exact |
+| 16 | clap | clap strong | exact |
+| 17 | clap with kite potential | clap strong | exact |
+| 18 | gank | clap leaning | gank (no read exists) |
+| 19 | not sure, a sub-party | split | both abstain |
+| 20 | part of brawl | brawl strong | exact |
+
+9 exact, 3 half, 1 miss of 14 callable; 2 abstentions; 2 gank; 3 uncalled.
+T43 pins the nine agreed rosters; the twenty battles are in `GRADED_BATTLES`.

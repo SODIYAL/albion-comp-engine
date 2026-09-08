@@ -97,10 +97,19 @@ What a reader of this file needs:
   squad in Assassin Jackets (leather-majority dps overrule a
   weapons-decided clap, bomb squads exempt); a chest votes by its ITEM lean
   first (`out/chest_lean.json`), the class rule where it has none.
-- **Open for the owner:** a gank read for non-ZvZ killer parties (round 2
-  roster 9; round-4 roster 3 was called "gank" too); the 20+ band once the
-  harvest can stand it; blind round 4 (`notes/findings/2026-09-05-style-roster-evidence.md`)
-  is only partially graded.
+- **Blind round 4 graded 2026-09-08** (all twenty called; VALIDATION.md
+  "Blind round 4"): 9 exact / 3 half / 1 miss of 14 callable, two
+  abstentions, two gank calls. T43 pins the nine agreed rosters.
+- **Open for the owner:** the GANK READ for non-ZvZ killer parties now has
+  a mechanism in the owner's words ("claws, dagger pair, whispering bow -
+  these are catching and dismounting the enemy type of weapons"; round 2
+  roster 9, round 4 rosters 3 and 18) — proposal: a descriptive `gank`
+  read at <= 14 on a catch-and-execute damage core, kept OUT of the style
+  rows, never a forge style; until ruled, those rosters vote into brawl /
+  clap at 10-14. Two round-4 hypotheses: whether the Infernal Staff's E is
+  a standoff tool (it alone made a kite of round-4 roster 5), and whether
+  a frontline's damage points should make a ranged carrier (Witchwork,
+  roster 11). The 20+ band once the harvest can stand it.
 
 ## Owner bug round (2026-09-03)
 
@@ -329,7 +338,7 @@ Shipped roadmap items are one line each; their records are in VALIDATION.md and 
 Still open, by track:
 
 - **Role layer**: increment 3b (effect-quota-aware kit allocation + mechanism pairing rules for effect carriers), increment 4 (uptime economics); Chillhowl/Stillgaze (`2H_SHAPESHIFTER_CRYSTAL`) and Iron-clad stay off every menu pending an owner word.
-- **Identity**: the gank read for non-ZvZ killer parties; the 20+ band; blind round 4 grading; melee instant-payload weapons generating into clap dps (bug round above).
+- **Identity**: the gank read for non-ZvZ killer parties (mechanism proposed 2026-09-08, ruling pending); the Infernal-standoff and frontline-carrier hypotheses from round 4; the 20+ band; melee instant-payload weapons generating into clap dps (bug round above).
 - **Calibration**: the targets remain conservative (good comps over-cover ~1.8×); sharpening needs expert blind rounds (`calibration/README.md` discipline). Watch items: Hellfire under clap_kite, castle-25's saturated tail quality.
 - **Mechanics**: `MECHANICS_TODO.md` (per-spell `burst_aoe` escalation gating, Q2/Q5/Q11/Q13, the PASV and TOP magnitude queues).
 - **Companion**: incremental mid-fight join/leave; the inspect response shape confirmed on a live run (`companion/README.md`).
