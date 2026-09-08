@@ -531,9 +531,17 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
 
     Structural rules (all PROVISIONAL, reviewable in the audit report):
     - delivery side: autoattack range >= RANGED_MIN_CASTRANGE -> ranged;
-      melee autoattack whose E damage still lands at that range -> flex
-      (Realmbreaker: the damage arrives at range even though the body
-      follows); otherwise melee.
+      melee autoattack whose E damage still lands at that range -> flex;
+      otherwise melee. REACH IS PAYLOAD REACH, NOT TRAVEL (owner
+      2026-09-08: "when an e lands the caster should read as melee
+      delivery"): an E that moves the caster (the dumps' `dash` node,
+      spell_index `caster_moves`) lands where the body lands, so its cast
+      range counts toward flex only for a FLEX BOMB — an unconditional
+      group payload at the job bar, the exception the owner named first
+      (2026-09-04: Realmbreaker, Rift Glaive — "the damage arrives at
+      range even though the body follows"). Every other leap / charge is
+      melee delivery with a gap closer (Double Bladed, Carving Sword,
+      Daybreaker). Thrown and projected payloads carry no dash node.
     - damage scale: the E decides (E-first identity) — an E bundle claiming
       burst_aoe is group-scale; anything else is single-scale.
     - healers / frontline / support are style-flexible (their identity is
@@ -563,6 +571,7 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
         slots = lo.get("slots") or []
         spells = lo.get("slot_spells") or []
         e_spells, e_reach, e_group = [], 0.0, False
+        e_reach_delivered, caster_moves = 0.0, False
         e_dmg_pts, e_util_max, e_debuff_max = 0, 0, 0
         for i, slot in enumerate(slots):
             if i >= len(names) or names[i] != "e":
@@ -588,14 +597,27 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                 facts = spell_index.get(sid) or {}
                 cr = facts.get("cast_range")
                 e_spells.append(sid)
-                if cr is not None:
-                    e_reach = max(e_reach, float(cr))
                 radius = facts.get("radius")
                 radius = float(radius) if radius is not None else 0.0
                 mts = facts.get("max_targets") or 0
-                if (bundle.get(AOE_CLAIM) or radius >= GROUP_AOE_MIN_RADIUS
-                        or mts >= 3):
+                bundle_group = bool(bundle.get(AOE_CLAIM)
+                                    or radius >= GROUP_AOE_MIN_RADIUS
+                                    or mts >= 3)
+                if bundle_group:
                     e_group = True
+                moves = bool(facts.get("caster_moves"))
+                if moves:
+                    caster_moves = True
+                if cr is not None:
+                    reach = float(cr)
+                    e_reach = max(e_reach, reach)
+                    # DELIVERED reach (owner 2026-09-08): a leap's cast
+                    # range is travel — the payload lands where the body
+                    # lands — so it counts toward flex delivery only for a
+                    # FLEX BOMB (group payload at the job bar; the owner's
+                    # 2026-09-04 exception: Realmbreaker, Rift Glaive).
+                    if not moves or (bundle_group and bd >= E_DMG_JOB_MIN):
+                        e_reach_delivered = max(e_reach_delivered, reach)
         if not slots and caps.get(AOE_CLAIM):
             e_group = True                       # flat-sheet fallback
         # STANDOFF E (owner ruling 2026-09-04, blind round 1: "what makes
@@ -649,11 +671,14 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                     reach = float(facts.get("cast_range") or 0)
                 except (TypeError, ValueError):
                     reach = 0.0
+                # a standoff tool commits nothing — an E that moves the
+                # caster (dumps `dash` node) is a body commit by definition
                 if (reach >= RANGED_MIN_CASTRANGE
-                        and facts.get("target") in STANDOFF_DELIVERY):
+                        and facts.get("target") in STANDOFF_DELIVERY
+                        and not facts.get("caster_moves")):
                     standoff_e = True
         delivery = ("ranged" if attackrange >= RANGED_MIN_CASTRANGE
-                    else "flex" if e_reach >= RANGED_MIN_CASTRANGE
+                    else "flex" if e_reach_delivered >= RANGED_MIN_CASTRANGE
                     else "melee")
         scale = ("none" if not carrier
                  else "group" if e_group else "single")
@@ -809,12 +834,17 @@ def derive_style_fit(weapons, spell_index, item_stats, role_sets, overrides,
                           # "needs to charge its q stacks before it hits"),
                           # a standoff E is a kite tool
                           "conditional_payload": conditional_payload,
-                          "standoff_e": standoff_e}
+                          "standoff_e": standoff_e,
+                          # the E moves the caster (dumps dash node): its
+                          # reach is travel, not payload reach (2026-09-08)
+                          "caster_moves": caster_moves}
         rec = {"delivery": delivery, "damage_scale": scale,
                "utility_carrier": utility_carrier,
                "damage_pts": dmg_pts, "utility_pts": util_pts,
                "role_flexible": flexible, "attackrange": attackrange,
                "e_damage_spells": e_spells, "e_reach": e_reach,
+               "e_reach_delivered": e_reach_delivered,
+               "caster_moves": caster_moves,
                "e_damage_pts": e_dmg_pts, "e_utility_max": e_util_max,
                "weak_group_e": weak_group_e,
                "e_debuff_max": e_debuff_max, "nonstack_member": nonstack,
@@ -1075,6 +1105,14 @@ KIT_SLOT_MAP = {"armor": "armor", "head": "head", "shoes": "shoes",
 # votes — the 2026-09-04 Greataxe pocket (8 of ~74) stops, a 311-vote
 # Keeper pocket carries its helmet and boots.
 CHAIN_POCKET_SHARE, CHAIN_POCKET_VOTES = 0.20, 20
+# Chain STEP voter floor (owner 2026-09-08, "ok on arcane helmet"): every
+# step's pick must be worn by this many DISTINCT players — the same 5-voter
+# floor the tier modal and the cell's chest step already carry. The Arcane
+# Staff case: the clap cell's chest step (Knight Armor, 10 voters) chained
+# into a Judicator Helmet worn by 4 people, fronting it over the band's
+# Assassin Hood (19 of the same-chest wearers, 30 overall); a 4-player
+# pocket passed the 20%-share guard because shares hide thin counts.
+CHAIN_STEP_MIN_VOTERS = 5
 STYLE_CELL_MIN_VOTERS = 5   # distinct players before a weapon has a style cell
 POOL_MIN_PLAYERS, POOL_TOP_N = 5, 3   # seat pools: shipped items per slot (spec section 3)
 
@@ -1209,8 +1247,9 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
     ONE PLAYER, ONE VOTE (2026-09-04): `build_dicts` entries are
     (gear, weight, player) — a player's builds on the weapon share one
     vote between them — so counts and pool sizes are VOTES (rounded for
-    shipping) and a step's pick must be worn by >= 2 DIFFERENT players,
-    never one very active player twice."""
+    shipping) and a step's pick must be worn by CHAIN_STEP_MIN_VOTERS
+    DIFFERENT players (5 since 2026-09-08, was 2 — the Arcane Staff
+    Judicator Helmet pocket), never one very active player twice."""
     SLOT_ORDER = ("armor", "head", "shoes", "cape", "offhand",
                   "potion", "food")
     CHAIN_MIN_POOL, CHAIN_MIN_SHARE = 5, 0.25
@@ -1264,7 +1303,8 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
         if not counts:
             continue
         gid, n = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[0]
-        if (len(players[gid]) < 2 or n < CHAIN_MIN_SHARE * pool_w
+        if (len(players[gid]) < CHAIN_STEP_MIN_VOTERS
+                or n < CHAIN_MIN_SHARE * pool_w
                 or n / pool_w < 0.5 * uncond_share.get(slot, 0.0)):
             break
         sel[slot] = [gid, int(round(n)), int(round(pool_w))]
@@ -2280,6 +2320,42 @@ def derive_economics(weapons, composition, spell_index, overrides):
     return report, problems
 
 
+META_PRIOR_PATH = os.path.join(OUT, "meta_prior.json")
+
+
+def load_meta_prior(known_weapons):
+    """The GENERATED, size-bucketed meta prior (derive_meta_prior.py ->
+    out/meta_prior.json; owner ruling 2026-09-08). Fail closed, loudly: a
+    missing file, a file derived from a different party_rosters.json than
+    the one on disk, or a malformed bucket map blocks the build. Rows for
+    weapons the dataset does not carry are dropped; every kept value is in
+    (0, 1]. The engine detects the bucketed shape by its keys and reads it
+    through size_bucket() at roster size."""
+    import hashlib
+    if not os.path.exists(META_PRIOR_PATH):
+        sys.exit("out/meta_prior.json missing — the meta prior is GENERATED "
+                 "from the committed harvest since 2026-09-08: run "
+                 "py -3 pipeline/derive_meta_prior.py")
+    with open(META_PRIOR_PATH, encoding="utf-8") as f:
+        doc = json.load(f) or {}
+    want = (doc.get("_source") or {}).get("party_rosters_sha256")
+    with open(os.path.join(OUT, "party_rosters.json"), "rb") as f:
+        have = hashlib.sha256(f.read()).hexdigest()
+    if want != have:
+        sys.exit("out/meta_prior.json was derived from a different "
+                 "party_rosters.json — rerun derive_meta_prior.py")
+    prior = doc.get("meta_prior") or {}
+    if not prior or set(prior) - {"small", "mid", "large"}:
+        sys.exit("out/meta_prior.json: meta_prior must be bucketed "
+                 "small / mid / large")
+    out = {}
+    for bk in ("small", "mid", "large"):
+        rows = prior.get(bk) or {}
+        out[bk] = {w: float(v) for w, v in sorted(rows.items())
+                   if w in known_weapons and 0.0 < float(v) <= 1.0}
+    return out
+
+
 def load_templates(tune=None):
     templates, scoring, styles, mechanics, composition = {}, {}, {}, {}, {}
     style_bands = {}
@@ -2333,6 +2409,14 @@ def load_templates(tune=None):
     # requirement caps. Unknown keys fail the build — never silent.
     tune = tune or {}
     scoring = mastersheet.deep_merge(scoring, tune.get("scoring", {}))
+    # The meta prior is GENERATED (owner ruling 2026-09-08: one harvest
+    # prior replacing both hand lists) — a hand-set map in scoring.yaml or
+    # MASTERSHEET tune:scoring is a build error, never silently merged.
+    if scoring.get("meta_prior"):
+        sys.exit("scoring.meta_prior is GENERATED since 2026-09-08 "
+                 "(pipeline/derive_meta_prior.py -> out/meta_prior.json); "
+                 "remove the hand-set map from templates/scoring.yaml or "
+                 "MASTERSHEET.md tune:scoring")
     mechanics = mastersheet.deep_merge(mechanics, tune.get("mechanics", {}))
     for content, caps in (tune.get("templates") or {}).items():
         if content not in templates:
@@ -2399,6 +2483,11 @@ def main():
     weapon_lines = load_weapon_lines()
     weapons = load_sheets(weapon_lines, tune.get("sheets"))
     templates, scoring, styles, mechanics, composition, style_bands = load_templates(tune)
+    # observed relevance (owner 2026-09-08): the generated harvest prior
+    scoring["meta_prior"] = load_meta_prior(set(weapons))
+    print("  meta prior    : generated (out/meta_prior.json), "
+          + ", ".join(f"{bk} {len(rows)}" for bk, rows in scoring["meta_prior"].items())
+          + " weapon rows")
     stats_path = os.path.join(OUT, "item_stats.json")
     item_stats, stats_meta = {}, {}
     if os.path.exists(stats_path):

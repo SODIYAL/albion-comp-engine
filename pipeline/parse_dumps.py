@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from provenance import record_derived, snapshot_commit, snapshot_dir  # noqa: E402
 
 ADAPTER = "parse_dumps"
-ADAPTER_VERSION = "4"
+ADAPTER_VERSION = "5"   # 5: caster_moves (structural <dash> fact, 2026-09-08)
 
 TAG_RE = re.compile(r"\[(dmg|heal|cc|debuff|buff|mobility|other)\]")
 
@@ -342,6 +342,43 @@ def spell_channel(sid, registry, max_depth=10):
     visited.add(sid)
     return True if walk(node, 0) else None
 
+
+def spell_dash(sid, registry, max_depth=10):
+    """True when casting the spell MOVES THE CASTER — a `dash` node anywhere
+    in the spell tree (the game's leap / charge / dive-kick primitive:
+    Soaring Swipe, Vault Leap, Breakthrough, Aftershock, Lunging Stabs).
+    Structural fact behind the delivery rule (owner 2026-09-08: "when an
+    e lands the caster should read as melee delivery"): such an E lands its
+    payload where the caster lands, so its cast range is travel, not reach.
+    Thrown / projected payloads (Spear Throw, Soul Shaker, Tornado) carry no
+    dash node and keep their reach. None = no dash node found. Same
+    reference walk as spell_channel."""
+    visited = set()
+
+    def walk(node, depth):
+        if depth > max_depth or not isinstance(node, (dict, list)):
+            return False
+        if isinstance(node, list):
+            return any(walk(item, depth) for item in node)
+        for ref_attr in ("@spell", "@effect"):
+            ref = node.get(ref_attr)
+            if isinstance(ref, str) and ref in registry and ref not in visited:
+                visited.add(ref)
+                if walk(registry[ref], depth + 1):
+                    return True
+        for k, v in node.items():
+            if k == "dash":
+                return True
+            if not k.startswith("@") and walk(v, depth + 1):
+                return True
+        return False
+
+    node = registry.get(sid)
+    if node is None:
+        return None
+    visited.add(sid)
+    return True if walk(node, 0) else None
+
 def en(tuv_list):
     for v in (tuv_list if isinstance(tuv_list, list) else [tuv_list]):
         if v.get("@xml:lang") == "EN-US":
@@ -548,6 +585,10 @@ def main(dump_dir, source_commit):
             # channel-delivered payload (structural: a channelingspell node
             # anywhere in the spell tree). None = no channel found.
             "channel": spell_channel(sid, full_registry),
+            # the cast moves the caster (structural: a dash node anywhere in
+            # the spell tree) — a leap's cast range is travel, not payload
+            # reach (owner 2026-09-08). None = no dash found.
+            "caster_moves": spell_dash(sid, full_registry),
             # 700, not 400: the ability-detail view (2026-08-19) shows the
             # full resolved text — 400 cut 49 spells mid-fact (ramp tables,
             # multi-component Es)

@@ -2794,3 +2794,167 @@ the seat pool item, both marked; a 5+ vote slot keeps its own), R24 /
 R28 skip a slot whose killboard modal rests on fewer than 5 players — it
 is pooled, not matched (R24 56/58, R28 484/484). Parity 60/60; full gate
 list green.
+
+## 2026-09-08 — five rulings after the Codex review (owner, same day)
+
+Context: the owner answered a 13-question design review from Codex, then
+asked what the assistant thought. The assistant checked each answer
+against the engine and the killer-party harvest, reproduced the castle-25
+complaint, re-ran the V4 blind test with Hoarfrost's burst at 2 and at 3
+(byte-identical), and asked five follow-ups. The owner's words:
+
+- Double Bladed: "I think doublebalded is being ranked too high still,
+  check for the 11 distinct players wearing it in 10+ parties, if they
+  are gank parties of actual zvz parties. double bladed is a good ganking
+  weapon but not a good brawl weapon. but you need to check the actual
+  stats."
+- Delivery: "yes when an e lands the caster should read as melee
+  delivery. why would it touch grailseeker? grailseeker e does not move
+  the caster, its like one of the longest range snares, do you think
+  grailseeker moves the caster?" — the assistant had guessed; Soul Shaker
+  carries no dash node, so the rule never touches it (recorded as a miss).
+- Prior: "sure on 3" — one harvest prior replacing both hand lists,
+  tiebreak-sized, capped at the current 0.15.
+- Healers: "sure on healers at 25" — the one-per-five minimum extends to
+  brawl and both hybrids.
+- Arcane helmet: "ok on arcane hnelmet" — the 5-voter floor on every
+  chain step.
+- Hoarfrost: "you r hoarfrost ruling" — Avalanche burst_aoe 3.
+
+### The Double Bladed audit (the stats the owner asked for)
+
+Killer-party harvest, 2,042 battles. 24 parties of 10+ field a Double
+Bladed Staff. Nine are gank / dive squads — Bear Paws, Deathgivers,
+Claws, Dagger Pair, Battle Bracers cores in 21-43-player fights with 0-2
+healers (one 17-man carries seven gank tells and no healer). The other
+fifteen are real clap / clap-kite / kite rosters of 12-20 (Permafrost,
+Realmbreaker, Occult, Great Arcane cores in 42-387-player fights) that
+carry exactly ONE Double Bladed — a single player's choice, never a
+doctrine; one 20-man squad accounts for three of them. Wearers: 11
+distinct players at 10+, none at 20+; their kits are gank kits — Hunter
+Shoes 6 of 11, Graveguard Armor 5 of 11, gatherer hoods 3 of 11, item
+power 1030-1230, only 3 of 11 sightings as the killer. Gang band (4-9):
+1.6% of killer parties, 18 players, 11 of 20 builds in leather.
+
+Engine before: `fits` everywhere — the 15 m leap read as flex delivery
+and the E's own engage 4 rescued its 2-point damage — rank 12 of 79 in
+the castle-25 clap pool (bought for slow / peel / engage / catch while
+seated as dps) and forged into castle-25 brawl in a plate gank kit.
+
+Shipped: (1) the delivery rule below makes it melee (clap situational,
+kite unfit); (2) a viability exclusion at 10+ (composition.yaml,
+evidence-gated with the standard lift, gang band open) for the brawl
+damage seat the owner rejected. The role-book seat stays so a manual
+Double Bladed is still dressed and scored. F27.
+
+### Payload reach, not travel (the delivery rule)
+
+`parse_dumps` adapter 5 adds `caster_moves` to every spell: a `dash`
+node anywhere in the spell tree (58 of 559 indexed spells; 25 curated
+E spells — Soaring Swipe, Vault Leap, Breakthrough, Charge, Aftershock,
+Lunging Stabs, the dive kick ...). `derive_style_fit` now measures the
+DELIVERED reach: a caster-moving E's cast range is travel, not payload
+reach, and counts toward flex delivery only for a FLEX BOMB — group
+scale with E damage at the job bar (4), the owner's own 2026-09-04
+exception ("the damage arrives at range even though the body follows":
+Realmbreaker, Rift Glaive). Standoff tools additionally require no
+caster movement (no weapon changed). Delivery flips flex -> melee:
+Double Bladed, Carving Sword, Daybreaker, Claymore, Bloodletter,
+Forcepulse Bracers, Quarterstaff, Trinity Spear. Group-fit changes:
+Double Bladed clap fits -> situational and kite fits -> unfit; Daybreaker
+the same; Carving kite situational -> unfit. Unchanged: Realmbreaker
+(dash, flex bomb — 82.6% of 20+ clap killer parties, 92.6% of clap_kite,
+96.9% of kite), Rift Glaive (dash, flex bomb, 25-44%), Spiked Gauntlets
+(no dash, 85%), Grailseeker (no dash; standoff root field). Why the bomb
+exception is a fact and not a weapon list: the literal rule would have
+read Realmbreaker as melee and thrown the clap staples out of clap and
+kite generation. T45; parity 60/60.
+
+### The generated meta prior
+
+Two hand-set popularity bonuses were live in scoring, each worth up to
+0.15 and neither evidenced: the seven-weapon `meta_prior` (Hallowfall
+1.0, Heavy Mace 1.0, Great Hammer 0.8, Permafrost 0.8, Great Holy /
+Longbow / Mace 0.6) and composition.yaml's ~50-weapon viability `core`
+list. Both retired. `pipeline/derive_meta_prior.py` reads the COMMITTED
+party_rosters.json and writes out/meta_prior.json: per engine size
+bucket (party 2-5 small, 6-15 mid, 16+ large — Engine.size_bucket's
+axis, T46 pins the mirror), a weapon's share of the bucket's DISTINCT
+PLAYERS (one player, one vote; victims carry no party and cast none),
+shrunk n / (n + 8), normalized so the bucket's top weapon is 1.0, rows
+under 0.05 dropped (no signal, never a penalty). build_dataset attaches
+it, hash-gated to the artifact (fail closed), and REFUSES a hand-set map
+in scoring.yaml or MASTERSHEET tune:scoring. Rows: small 71, mid 63,
+large 40 weapons. Large bucket: Hallowfall 1.0 (three to five seats per
+party), Realmbreaker 0.377, Permafrost 0.30, Spiked Gauntlets 0.30,
+Battle Bracers 0.28, Dawnsong 0.27, Longbow 0.26, Spirithunter 0.24,
+Blight 0.21; Double Bladed 0 in every bucket; Dagger Pair small 0.31 /
+mid 0.12 / large 0. Both ports already carried the bucketed-map plumbing
+(2026-08-14); the engine reads it at ROSTER size while the dashboard's
+usage strip keeps keying off PLAN() — different axes by design. `delta`
+stays 0.15: tiebreak-sized, never a floor, never a seat. H18 re-pinned;
+golden and V4 (17/23) unchanged apart from the new pins. The old
+usage_v2-based `build_meta_prior.py` and its unwired artifact are gone.
+
+### Healers per five on every style but kite and balanced
+
+styles.yaml `role_min_per_players: {healer: 5}` now on brawl, brawl_clap
+and clap_kite (clap already). Harvest at 20, full solo killer parties:
+brawl 4 healers in 77% (n=22); clap 4 in 52%, 3 in 35% (n=69); clap_kite
+3 in 55%, 4 in 23% (n=64) — the clap_kite minimum sits one above the
+observed mode, recorded beside the ruling in styles.yaml. Forge after:
+castle 20 -> brawl 4 / clap 4 / clap_kite 5 / brawl_clap 4 / kite 5;
+castle 25 -> brawl 6 / clap 5 / clap_kite 6 / brawl_clap 6 / kite 6 /
+balanced 3. With the caps gone the scalar objective adds a healer beyond
+the minimum at 25 and at kite 20 — the scorer's preference, not expert
+confirmation (the same note the Codex round recorded for kite). OPEN FOR
+THE OWNER: `balanced` keeps the base band (3-5 at 20-29) and still
+forges 3 healers at castle 25; the guild sheet says "4 healers minimum"
+at 20+ with no style attached. F16.
+
+### Chain-step voter floor (the Arcane helmet)
+
+`CHAIN_STEP_MIN_VOTERS = 5` (was 2): every archetype chain step's pick
+needs five distinct players, the floor the tier modal and the cell chest
+step already carried. Arcane Staff's clap cell chained Knight Armor (10
+voters) into a Judicator Helmet worn by 4 people and fronted it; the
+chain now stops at the chest and the head slot reads the cell tier —
+Assassin Hood 6 players, Judicator Helmet 5, Cleric Cowl 2 — so Judicator
+survives as an evidence-band alternative the comp marginal may pick (it
+does, at castle 25 clap: plate helmet, tankiness), but no longer from a
+4-player pocket. The owner's "most people use cleric cowl on this
+weapon" is contradicted by the harvest — 10+ parties, distinct players:
+Assassin Hood 30, Judicator Helmet 24, Cleric Cowl 9, Hellion Hood 6;
+given Knight Armor: 19 / 12 / 5. Chain depth after: group band weapons
+with a chain 117 -> 101, reaching 4+ slots 39 -> 38, mean depth 3.22 ->
+3.33; gang band 119 -> 108, 24 -> 20, 2.64 -> 2.45. R35; R24 still >= 85%.
+
+### Hoarfrost burst_aoe 3
+
+MASTERSHEET tune:sheets; the sheet keeps 2 and says where the ruling
+lives. The 2026-08-20 hold (+0.5 unit tipped the blap tank slot, 69% vs
+70%) was re-measured before asking: V4 is byte-identical at 2 and at 3
+(17/23 actual_gear, 19/23 weapon_only), Hoarfrost stays 8th in the
+castle-25 clap pool either way — the hold was a symptom of team
+structure the engine lacked in August. T44.
+
+### Other numbers recorded this round (evidence, no ruling)
+
+- Detachments: 111 of 316 full 20-man killer parties (35%) share a battle
+  with a same-guild party of 10+; at 20 their healer counts differ little
+  from solo parties (clap median 3 vs 4); zero-healer parties live in the
+  10-14 band (12 of 261 solo clap parties there).
+- Energy carriers: Royal Armor on 3.65% of builds in 20-59-player battles
+  (about 0.7 per 20) against the guild sheet's "2 Royals per 10" — carrier
+  FLOORS stay an open owner ruling, and the harvest does not support the
+  guild number.
+- Dawnsong sits in 6.1% of 20+ clap-labelled killer parties and 25% of
+  kite ones, against "a classic weapon in clap comps" — with the caveat
+  that the style labels are the engine's own weapons-only read.
+
+Gates after this round: golden 72/72, forge 39/39, roles 39/39, builds
+55/55, parity 60/60 (embed check clean), validation modes 25/25,
+interactions 37/37, patch history 14/14, provenance 25/25 (byte-identical
+rebuild), cohort families 7/7, dashboard layout pass, codec 24/24,
+display math 28/28, live party pass, V4 actual_gear 17/23 PASS, evidence
+lint clean, release_clean true.

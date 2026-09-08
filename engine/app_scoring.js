@@ -698,8 +698,10 @@
   };
 
   CompEngine.prototype.sizeBucket = function () {
-    /* Usage-DISPLAY bucket, participant axis = 2 x party size (mirrors
-       engine.py size_bucket, corrected 2026-08-18). Display-only. */
+    /* Participant axis = 2 x party size (mirrors engine.py size_bucket,
+       corrected 2026-08-18). Keys the GENERATED meta prior (admitted
+       2026-09-08) through metaOf() at ROSTER size; the dashboard's usage
+       strip keys off PLAN() instead, deliberately. */
     var n = 2 * this.size;
     return n < 12 ? "small" : n <= 30 ? "mid" : "large";
   };

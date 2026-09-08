@@ -321,7 +321,7 @@ Two scheduled jobs, two APIs, two caches — neither rebuilds or commits:
   carries the killer's party at kill time with gear → `out/party_cache/`
   and `out/party_rosters.json`. This is the kit-doctrine and style × size
   evidence. Rerun order afterwards: audit -> derive_style_bands ->
-  derive_party_styles -> build_dataset -> gates. A FOCUSED NIGHT takes a fight-size band
+  derive_party_styles -> derive_meta_prior -> build_dataset -> gates. A FOCUSED NIGHT takes a fight-size band
   (`-MinPlayers 10 -MaxPlayers 14` = the 5v5 / 7v7 band, owner 2026-09-08)
   and runs one pass over it; `sample_parties.py --max-players` is a local
   ceiling on albionbb's `totalPlayers`, so the budget goes only to fights
@@ -444,7 +444,37 @@ tests/VALIDATION.md). `build_dataset`
 validates the file (fail closed) and ships it as `style_bands`; the engine
 reads it after the content row for a declared style at 10+. Explicit step:
 `sample_parties` -> `audit_style_rosters` -> `derive_style_bands` ->
-`derive_party_styles` -> `build_dataset` -> gates.
+`derive_party_styles` -> `derive_meta_prior` -> `build_dataset` -> gates.
+
+## The generated meta prior (2026-09-08)
+
+Owner ruling ("sure" to one harvest prior replacing both hand lists):
+the seven-weapon hand-set `meta_prior` in `templates/scoring.yaml` and
+the viability `core` list in `templates/composition.yaml` are retired.
+`derive_meta_prior.py` reads the COMMITTED `out/party_rosters.json` and
+writes `out/meta_prior.json`: per engine size bucket (party 2-5 small,
+6-15 mid, 16+ large — `Engine.size_bucket`'s axis, mirrored by
+`bucket_of()` and pinned equal in golden T46), a weapon's share of the
+bucket's DISTINCT PLAYERS (one player, one vote; a victim carries no
+party and casts none), shrunk `n / (n + 8)`, normalized so the bucket's
+top weapon is 1.0, rows under 0.05 omitted (no signal, never a penalty).
+`build_dataset` attaches it to `scoring.meta_prior`, refuses a file
+derived from a different artifact than the one on disk, and refuses a
+hand-set map anywhere in the config (fail closed, loudly). The engine
+detects the bucketed shape by its keys and reads it through
+`size_bucket()` at roster size; the recommendation weight `delta` (0.15)
+is the only dial. Explicit step, never part of a normal build:
+
+```text
+py -3 pipeline/derive_meta_prior.py
+```
+
+`parse_dumps` adapter 5 (same day) adds `caster_moves` to every indexed
+spell — a `dash` node anywhere in the spell tree, the game's leap /
+charge primitive. `derive_style_fit` reads it as the delivery rule
+"payload reach, not travel": a caster-moving E's cast range counts toward
+flex delivery only for a flex bomb (group payload at the job bar); a
+standoff tool must move nothing.
 
 ## Party styles and style cells (2026-09-08)
 
@@ -513,4 +543,4 @@ give the item a lean. `build_dataset` validates and ships it as
 and the class rule (leather -> brawl, cloth -> ranged) where an item has
 none. Descriptive only. Because the audit writes it, the post-harvest
 order is audit -> derive_style_bands -> derive_party_styles ->
-build_dataset -> gates.
+derive_meta_prior -> build_dataset -> gates.

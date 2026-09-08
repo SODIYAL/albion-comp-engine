@@ -5,8 +5,8 @@
   "mastersheet": [
    "guild_builds: present (shipped verbatim)",
    "mechanics: aoe_geometry",
-   "scoring: capability_synergies, meta_prior, score_unit, weights",
-   "sheets: 3 score override(s) on 3 weapon(s)"
+   "scoring: capability_synergies, score_unit, weights",
+   "sheets: 4 score override(s) on 4 weapon(s)"
   ],
   "note": "release candidate",
   "provenance": {
@@ -21,7 +21,7 @@
     "gear_spells.json": "ff7e2302a8a87fbbcd1fa5edf83dbbd6c8071f3b4e87f1ade178513116682dd1",
     "interactions.json": "47a3bd76f4f857ca2018425395c1e925f2004bb7e1f75f9a2fdd0bfa0493b2ec",
     "item_stats.json": "544d293670e4f3adc6daa83e940af115186902b216add0f8fddb9880c882712a",
-    "spell_index.json": "f7ad7c47e49ab3b10673bb3428557f65987efd38ab7d98e1e1b8cae2aed4af90",
+    "spell_index.json": "94a740d1776d3fd5c7171b9ca4cd37701b1ae4b4ac46feb0d1ac9eb4c357537d",
     "weapon_lines.json": "7487230bd2a923f0881daab390d7e924ce7137236b9f73a496e3609b641ac5e1"
    },
    "problems": [],
@@ -580,51 +580,7 @@
    }
   },
   "viability": {
-   "core": {
-    "large": [
-     "2H_HAMMER_AVALON",
-     "2H_SHAPESHIFTER_KEEPER",
-     "MAIN_ARCANESTAFF",
-     "MAIN_ROCKMACE_KEEPER",
-     "2H_ARCANESTAFF",
-     "2H_POLEHAMMER",
-     "MAIN_HOLYSTAFF_AVALON",
-     "2H_HOLYSTAFF_CRYSTAL",
-     "2H_DUALMACE_AVALON",
-     "2H_ARCANESTAFF_HELL",
-     "2H_ICECRYSTAL_UNDEAD",
-     "2H_KNUCKLES_SET3",
-     "2H_AXE_AVALON",
-     "2H_HARPOON_HELL",
-     "MAIN_ARCANESTAFF_UNDEAD",
-     "2H_CURSEDSTAFF_MORGANA",
-     "2H_FIRE_RINGPAIR_AVALON",
-     "MAIN_CURSEDSTAFF_CRYSTAL",
-     "2H_ICEGAUNTLETS_HELL",
-     "2H_ENIGMATICORB_MORGANA",
-     "MAIN_CURSEDSTAFF_UNDEAD",
-     "MAIN_FROSTSTAFF_KEEPER",
-     "2H_SHAPESHIFTER_SET2",
-     "2H_BOW_HELL",
-     "2H_GLAIVE_CRYSTAL",
-     "2H_HAMMER",
-     "2H_SHAPESHIFTER_CRYSTAL",
-     "2H_NATURESTAFF_KEEPER",
-     "2H_CLEAVER_HELL",
-     "2H_MACE_MORGANA",
-     "2H_MACE",
-     "2H_ROCKSTAFF_KEEPER",
-     "MAIN_MACE_CRYSTAL",
-     "MAIN_MACE",
-     "2H_HALBERD_MORGANA",
-     "MAIN_DAGGER_HELL",
-     "MAIN_SCIMITAR_MORGANA",
-     "2H_KNUCKLES_KEEPER",
-     "MAIN_RAPIER_MORGANA",
-     "2H_HOLYSTAFF_UNDEAD",
-     "2H_NATURESTAFF_HELL"
-    ]
-   },
+   "core": {},
    "core_bonus": 1.0,
    "core_min_size": 10,
    "exclusions": [
@@ -655,6 +611,19 @@
      "weapons": [
       "2H_DAGGERPAIR",
       "2H_DUALSICKLE_UNDEAD"
+     ]
+    },
+    {
+     "allow": {},
+     "evidence": {
+      "as_of": "2026-09-08",
+      "clears_when": "an approved canonical build for the exact weapon at party size >= 10",
+      "reason": "A ganking weapon, not a group damage seat. Owner 2026-09-08: \"double bladed is a good ganking weapon but not a good brawl weapon. but you need to check the actual stats.\" Checked the same day against the killer-party harvest (2,042 battles): 24 parties of 10+ field it \u2014 9 are gank/dive squads (Bear Paws / Deathgivers / Claws / Dagger Pair cores in 21-43-player fights, 0-2 healers) and the rest carry ONE Double Bladed inside a 12-20 man clap or clap-kite roster; 11 distinct wearers at 10+, none at 20+, in gank kits (Hunter Shoes 6 of 11, Graveguard 5 of 11, item power 1030-1230). Its E now derives MELEE delivery (a leap lands where the body lands), which bars clap/kite generation on its own; this entry bars the brawl damage seat the owner rejected (\"its E insufficient to earn a brawl damage seat over other quarterstaffs\"). The gang band stays open: 1.6% of 4-9 man killer parties, 18 players.\n",
+      "source": "owner ruling 2026-09-08 + party_rosters.json audit (tests/VALIDATION.md 2026-09-08, 'Five rulings after the Codex review')"
+     },
+     "min_size": 10,
+     "weapons": [
+      "2H_DOUBLEBLADEDSTAFF"
      ]
     }
    ]
@@ -41496,13 +41465,6 @@
         6
        ]
       },
-      "2H_MACE_MORGANA": {
-       "armor": [
-        "ARMOR_PLATE_KEEPER",
-        3,
-        9
-       ]
-      },
       "2H_POLEHAMMER": {
        "armor": [
         "ARMOR_PLATE_SET2",
@@ -41564,11 +41526,6 @@
         "ARMOR_PLATE_KEEPER",
         14,
         37
-       ],
-       "head": [
-        "HEAD_LEATHER_HELL",
-        4,
-        14
        ]
       },
       "MAIN_MACE": {
@@ -41593,11 +41550,6 @@
         "ARMOR_PLATE_ROYAL",
         8,
         16
-       ],
-       "head": [
-        "HEAD_LEATHER_HELL",
-        2,
-        8
        ]
       }
      },
@@ -42857,11 +42809,6 @@
         "ARMOR_PLATE_KEEPER",
         10,
         16
-       ],
-       "head": [
-        "HEAD_PLATE_SET1",
-        4,
-        10
        ]
       },
       "MAIN_HAMMER": {
@@ -42869,11 +42816,6 @@
         "ARMOR_PLATE_SET3",
         9,
         20
-       ],
-       "head": [
-        "HEAD_PLATE_KEEPER",
-        3,
-        9
        ]
       },
       "MAIN_MACE": {
@@ -42898,11 +42840,6 @@
         "ARMOR_PLATE_ROYAL",
         6,
         12
-       ],
-       "head": [
-        "HEAD_PLATE_KEEPER",
-        3,
-        6
        ]
       }
      }
@@ -44236,11 +44173,6 @@
         8,
         8
        ],
-       "food": [
-        "T7_MEAL_OMELETTE_AVALON",
-        2,
-        8
-       ],
        "head": [
         "HEAD_LEATHER_SET3",
         10,
@@ -44267,11 +44199,6 @@
         "HEAD_PLATE_KEEPER",
         5,
         6
-       ],
-       "shoes": [
-        "SHOES_LEATHER_MORGANA",
-        3,
-        5
        ]
       },
       "2H_SHAPESHIFTER_KEEPER": {
@@ -44279,11 +44206,6 @@
         "ARMOR_PLATE_KEEPER",
         22,
         24
-       ],
-       "cape": [
-        "CAPEITEM_MORGANA",
-        3,
-        6
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -44639,11 +44561,6 @@
         "ARMOR_PLATE_SET2",
         6,
         10
-       ],
-       "head": [
-        "HEAD_PLATE_KEEPER",
-        3,
-        6
        ]
       },
       "2H_SHAPESHIFTER_KEEPER": {
@@ -44651,11 +44568,6 @@
         "ARMOR_PLATE_KEEPER",
         7,
         10
-       ],
-       "head": [
-        "HEAD_LEATHER_SET3",
-        4,
-        7
        ]
       },
       "MAIN_MACE": {
@@ -44663,11 +44575,6 @@
         "ARMOR_PLATE_SET3",
         8,
         19
-       ],
-       "head": [
-        "HEAD_PLATE_ROYAL",
-        3,
-        8
        ]
       }
      }
@@ -46443,11 +46350,6 @@
       "ARMOR_PLATE_SET3",
       9,
       26
-     ],
-     "head": [
-      "HEAD_LEATHER_HELL",
-      4,
-      9
      ]
     },
     "2H_HAMMER_AVALON": {
@@ -46482,13 +46384,6 @@
       36
      ]
     },
-    "2H_HAMMER_UNDEAD": {
-     "armor": [
-      "ARMOR_PLATE_SET1",
-      4,
-      9
-     ]
-    },
     "2H_MACE_MORGANA": {
      "armor": [
       "ARMOR_PLATE_HELL",
@@ -46499,11 +46394,6 @@
       "HEAD_LEATHER_SET3",
       7,
       8
-     ],
-     "shoes": [
-      "SHOES_CLOTH_SET2",
-      3,
-      7
      ]
     },
     "2H_POLEHAMMER": {
@@ -46523,13 +46413,6 @@
       37
      ]
     },
-    "2H_RAM_KEEPER": {
-     "armor": [
-      "ARMOR_PLATE_FEY",
-      3,
-      10
-     ]
-    },
     "2H_SHAPESHIFTER_KEEPER": {
      "armor": [
       "ARMOR_PLATE_KEEPER",
@@ -46545,13 +46428,6 @@
       "SHOES_CLOTH_SET2",
       16,
       42
-     ]
-    },
-    "2H_TWINSCYTHE_HELL": {
-     "armor": [
-      "ARMOR_PLATE_SET3",
-      3,
-      10
      ]
     },
     "MAIN_ARCANESTAFF_UNDEAD": {
@@ -46615,11 +46491,6 @@
       "ARMOR_PLATE_ROYAL",
       8,
       25
-     ],
-     "head": [
-      "HEAD_PLATE_KEEPER",
-      4,
-      8
      ]
     }
    },
@@ -48172,18 +48043,6 @@
         "HEAD_LEATHER_HELL",
         5,
         8
-       ],
-       "shoes": [
-        "SHOES_LEATHER_SET2",
-        3,
-        5
-       ]
-      },
-      "2H_SHAPESHIFTER_CRYSTAL": {
-       "armor": [
-        "ARMOR_PLATE_SET3",
-        2,
-        5
        ]
       },
       "2H_SHAPESHIFTER_SET3": {
@@ -48732,11 +48591,6 @@
        "HEAD_LEATHER_HELL",
        12,
        27
-      ],
-      "shoes": [
-       "SHOES_LEATHER_MORGANA",
-       4,
-       12
       ]
      },
      "kit_weapon": {
@@ -48872,11 +48726,6 @@
         "HEAD_LEATHER_HELL",
         10,
         18
-       ],
-       "shoes": [
-        "SHOES_CLOTH_SET2",
-        3,
-        10
        ]
       },
       "2H_ROCKSTAFF_KEEPER": {
@@ -48889,11 +48738,6 @@
         "HEAD_LEATHER_HELL",
         6,
         7
-       ],
-       "shoes": [
-        "SHOES_LEATHER_ROYAL",
-        4,
-        6
        ]
       }
      }
@@ -49325,11 +49169,6 @@
         "HEAD_LEATHER_HELL",
         11,
         24
-       ],
-       "shoes": [
-        "SHOES_LEATHER_ROYAL",
-        3,
-        11
        ]
       },
       "2H_ROCKSTAFF_KEEPER": {
@@ -49337,11 +49176,6 @@
         "ARMOR_PLATE_FEY",
         5,
         7
-       ],
-       "head": [
-        "HEAD_LEATHER_HELL",
-        3,
-        5
        ]
       },
       "MAIN_MACE_HELL": {
@@ -49354,11 +49188,6 @@
         "HEAD_LEATHER_SET3",
         9,
         12
-       ],
-       "shoes": [
-        "SHOES_PLATE_AVALON",
-        4,
-        9
        ]
       },
       "MAIN_ROCKMACE_KEEPER": {
@@ -49366,11 +49195,6 @@
         "ARMOR_PLATE_HELL",
         18,
         20
-       ],
-       "cape": [
-        "CAPEITEM_SMUGGLER",
-        4,
-        5
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -49786,11 +49610,6 @@
         6,
         6
        ],
-       "food": [
-        "T7_MEAL_OMELETTE_AVALON",
-        2,
-        6
-       ],
        "head": [
         "HEAD_LEATHER_SET3",
         11,
@@ -49799,11 +49618,6 @@
        "offhand": [
         "OFF_SHIELD_AVALON",
         6,
-        6
-       ],
-       "potion": [
-        "T7_POTION_REVIVE",
-        4,
         6
        ],
        "shoes": [
@@ -50772,11 +50586,6 @@
       "ARMOR_LEATHER_SET3",
       11,
       35
-     ],
-     "head": [
-      "HEAD_CLOTH_HELL",
-      3,
-      11
      ]
     },
     "2H_ROCKSTAFF_KEEPER": {
@@ -50821,13 +50630,6 @@
       "HEAD_LEATHER_SET3",
       4,
       8
-     ]
-    },
-    "2H_SHAPESHIFTER_SET3": {
-     "armor": [
-      "ARMOR_PLATE_KEEPER",
-      2,
-      6
      ]
     },
     "MAIN_MACE_HELL": {
@@ -51833,25 +51635,11 @@
       }
      },
      "kit_weapon_build": {
-      "2H_COMBATSTAFF_MORGANA": {
-       "armor": [
-        "ARMOR_PLATE_SET3",
-        3,
-        6
-       ]
-      },
       "2H_DUALMACE_AVALON": {
        "armor": [
         "ARMOR_LEATHER_ROYAL",
         36,
         125
-       ]
-      },
-      "2H_HAMMER_CRYSTAL": {
-       "armor": [
-        "ARMOR_PLATE_KEEPER",
-        3,
-        7
        ]
       },
       "2H_QUARTERSTAFF": {
@@ -52468,11 +52256,6 @@
         "ARMOR_LEATHER_SET1",
         7,
         7
-       ],
-       "head": [
-        "HEAD_CLOTH_SET3",
-        3,
-        7
        ]
       }
      }
@@ -52507,11 +52290,6 @@
       "cape": [
        "CAPEITEM_SMUGGLER",
        7,
-       7
-      ],
-      "food": [
-       "T7_MEAL_OMELETTE_AVALON",
-       3,
        7
       ],
       "head": [
@@ -52586,11 +52364,6 @@
        "cape": [
         "CAPEITEM_SMUGGLER",
         7,
-        7
-       ],
-       "food": [
-        "T7_MEAL_OMELETTE_AVALON",
-        3,
         7
        ],
        "head": [
@@ -53106,11 +52879,6 @@
       "HEAD_LEATHER_SET3",
       6,
       11
-     ],
-     "shoes": [
-      "SHOES_LEATHER_ROYAL",
-      3,
-      6
      ]
     },
     "2H_DUALMACE_AVALON": {
@@ -53140,23 +52908,11 @@
       190
      ]
     },
-    "2H_HAMMER_CRYSTAL": {
-     "armor": [
-      "ARMOR_PLATE_SET3",
-      4,
-      10
-     ]
-    },
     "2H_QUARTERSTAFF": {
      "armor": [
       "ARMOR_LEATHER_SET1",
       11,
       19
-     ],
-     "head": [
-      "HEAD_CLOTH_SET3",
-      3,
-      11
      ]
     }
    },
@@ -55048,13 +54804,6 @@
       }
      },
      "kit_weapon_build": {
-      "2H_DIVINESTAFF": {
-       "armor": [
-        "ARMOR_CLOTH_SET3",
-        3,
-        6
-       ]
-      },
       "2H_HOLYSTAFF_HELL": {
        "armor": [
         "ARMOR_CLOTH_SET2",
@@ -55086,11 +54835,6 @@
         "ARMOR_CLOTH_AVALON",
         5,
         12
-       ],
-       "head": [
-        "HEAD_LEATHER_SET3",
-        2,
-        5
        ]
       },
       "2H_WILDSTAFF": {
@@ -55108,11 +54852,6 @@
         "HEAD_LEATHER_SET3",
         9,
         12
-       ],
-       "potion": [
-        "T7_POTION_REVIVE",
-        3,
-        6
        ],
        "shoes": [
         "SHOES_LEATHER_SET1",
@@ -55181,11 +54920,6 @@
         "ARMOR_CLOTH_SET2",
         6,
         18
-       ],
-       "head": [
-        "HEAD_CLOTH_SET1",
-        3,
-        6
        ]
       }
      },
@@ -56373,11 +56107,6 @@
         "ARMOR_CLOTH_AVALON",
         5,
         20
-       ],
-       "head": [
-        "HEAD_PLATE_SET1",
-        3,
-        5
        ]
       },
       "2H_HOLYSTAFF_UNDEAD": {
@@ -57524,11 +57253,6 @@
         "ARMOR_CLOTH_SET2",
         8,
         15
-       ],
-       "head": [
-        "HEAD_CLOTH_KEEPER",
-        4,
-        8
        ]
       },
       "MAIN_HOLYSTAFF": {
@@ -57536,11 +57260,6 @@
         "ARMOR_CLOTH_SET2",
         12,
         16
-       ],
-       "head": [
-        "HEAD_CLOTH_KEEPER",
-        4,
-        12
        ]
       },
       "MAIN_HOLYSTAFF_AVALON": {
@@ -58056,11 +57775,6 @@
         "ARMOR_CLOTH_AVALON",
         6,
         17
-       ],
-       "head": [
-        "HEAD_LEATHER_SET3",
-        2,
-        6
        ]
       },
       "2H_NATURESTAFF_HELL": {
@@ -58073,11 +57787,6 @@
         "HEAD_LEATHER_SET3",
         5,
         11
-       ],
-       "shoes": [
-        "SHOES_LEATHER_SET1",
-        3,
-        5
        ]
       },
       "2H_NATURESTAFF_KEEPER": {
@@ -58090,11 +57799,6 @@
         "HEAD_LEATHER_SET3",
         8,
         17
-       ],
-       "shoes": [
-        "SHOES_LEATHER_SET1",
-        4,
-        8
        ]
       },
       "MAIN_HOLYSTAFF_AVALON": {
@@ -58635,11 +58339,6 @@
         "ARMOR_CLOTH_AVALON",
         7,
         13
-       ],
-       "head": [
-        "HEAD_LEATHER_SET3",
-        4,
-        7
        ]
       },
       "2H_HOLYSTAFF_UNDEAD": {
@@ -58647,11 +58346,6 @@
         "ARMOR_CLOTH_SET2",
         11,
         13
-       ],
-       "head": [
-        "HEAD_CLOTH_KEEPER",
-        3,
-        11
        ]
       },
       "2H_NATURESTAFF_HELL": {
@@ -60263,13 +59957,6 @@
     }
    },
    "kit_weapon_build": {
-    "2H_DIVINESTAFF": {
-     "armor": [
-      "ARMOR_CLOTH_SET2",
-      2,
-      6
-     ]
-    },
     "2H_HOLYSTAFF_HELL": {
      "armor": [
       "ARMOR_CLOTH_SET2",
@@ -61480,11 +61167,6 @@
         14,
         32
        ],
-       "cape": [
-        "CAPEITEM_FW_MARTLOCK",
-        4,
-        8
-       ],
        "head": [
         "HEAD_CLOTH_SET1",
         10,
@@ -61511,11 +61193,6 @@
         "HEAD_LEATHER_SET3",
         9,
         12
-       ],
-       "potion": [
-        "T7_POTION_REVIVE",
-        3,
-        6
        ],
        "shoes": [
         "SHOES_LEATHER_SET1",
@@ -61555,11 +61232,6 @@
         "ARMOR_CLOTH_SET2",
         10,
         15
-       ],
-       "head": [
-        "HEAD_PLATE_SET3",
-        4,
-        10
        ]
       },
       "MAIN_NATURESTAFF_KEEPER": {
@@ -61567,11 +61239,6 @@
         "ARMOR_CLOTH_SET2",
         6,
         9
-       ],
-       "head": [
-        "HEAD_PLATE_SET1",
-        2,
-        6
        ]
       }
      }
@@ -62609,11 +62276,6 @@
         "ARMOR_CLOTH_SET2",
         8,
         15
-       ],
-       "head": [
-        "HEAD_CLOTH_KEEPER",
-        4,
-        8
        ]
       },
       "MAIN_HOLYSTAFF_AVALON": {
@@ -63618,11 +63280,6 @@
       "HEAD_CLOTH_SET1",
       7,
       10
-     ],
-     "shoes": [
-      "SHOES_LEATHER_SET1",
-      4,
-      7
      ]
     },
     "2H_WILDSTAFF": {
@@ -63672,13 +63329,6 @@
       "SHOES_LEATHER_MORGANA",
       91,
       188
-     ]
-    },
-    "MAIN_HOLYSTAFF_MORGANA": {
-     "armor": [
-      "ARMOR_CLOTH_SET2",
-      4,
-      6
      ]
     }
    },
@@ -65561,11 +65211,6 @@
        "ARMOR_PLATE_ROYAL",
        5,
        7
-      ],
-      "head": [
-       "HEAD_LEATHER_SET1",
-       2,
-       5
       ]
      },
      "kit_weapon": {
@@ -65602,11 +65247,6 @@
         "ARMOR_PLATE_ROYAL",
         5,
         7
-       ],
-       "head": [
-        "HEAD_LEATHER_SET1",
-        2,
-        5
        ]
       }
      }
@@ -67857,11 +67497,6 @@
         "HEAD_LEATHER_SET3",
         5,
         5
-       ],
-       "shoes": [
-        "SHOES_LEATHER_MORGANA",
-        3,
-        5
        ]
       },
       "2H_ENIGMATICSTAFF": {
@@ -67869,11 +67504,6 @@
         "ARMOR_PLATE_KEEPER",
         7,
         15
-       ],
-       "head": [
-        "HEAD_LEATHER_SET3",
-        3,
-        7
        ]
       },
       "2H_HOLYSTAFF_CRYSTAL": {
@@ -67885,11 +67515,6 @@
        "cape": [
         "CAPEITEM_FW_LYMHURST",
         5,
-        5
-       ],
-       "food": [
-        "T7_MEAL_OMELETTE_AVALON",
-        2,
         5
        ],
        "head": [
@@ -68644,11 +68269,6 @@
         "ARMOR_PLATE_SET2",
         6,
         11
-       ],
-       "head": [
-        "HEAD_LEATHER_SET3",
-        4,
-        6
        ]
       },
       "2H_ENIGMATICORB_MORGANA": {
@@ -68660,11 +68280,6 @@
        "head": [
         "HEAD_LEATHER_SET3",
         6,
-        6
-       ],
-       "shoes": [
-        "SHOES_PLATE_AVALON",
-        2,
         6
        ]
       },
@@ -68678,11 +68293,6 @@
         "CAPEITEM_SMUGGLER",
         6,
         8
-       ],
-       "food": [
-        "T7_MEAL_OMELETTE",
-        2,
-        6
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -69249,11 +68859,6 @@
         "HEAD_LEATHER_SET3",
         8,
         8
-       ],
-       "shoes": [
-        "SHOES_LEATHER_MORGANA",
-        2,
-        8
        ]
       },
       "2H_ENIGMATICSTAFF": {
@@ -69322,11 +68927,6 @@
         "ARMOR_PLATE_SET2",
         10,
         17
-       ],
-       "head": [
-        "HEAD_PLATE_KEEPER",
-        4,
-        10
        ]
       }
      }
@@ -69568,11 +69168,6 @@
         "HEAD_LEATHER_SET3",
         8,
         10
-       ],
-       "shoes": [
-        "SHOES_CLOTH_SET2",
-        3,
-        8
        ]
       },
       "2H_HOLYSTAFF_CRYSTAL": {
@@ -69585,11 +69180,6 @@
         "CAPEITEM_FW_LYMHURST",
         7,
         7
-       ],
-       "food": [
-        "T7_MEAL_OMELETTE",
-        2,
-        5
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -69613,11 +69203,6 @@
         10,
         10
        ],
-       "cape": [
-        "CAPEITEM_SMUGGLER",
-        3,
-        5
-       ],
        "head": [
         "HEAD_LEATHER_SET3",
         8,
@@ -69634,11 +69219,6 @@
         "ARMOR_PLATE_SET2",
         6,
         7
-       ],
-       "head": [
-        "HEAD_PLATE_KEEPER",
-        4,
-        6
        ]
       }
      }
@@ -69832,11 +69412,6 @@
         "HEAD_LEATHER_SET3",
         5,
         5
-       ],
-       "shoes": [
-        "SHOES_LEATHER_MORGANA",
-        3,
-        5
        ]
       },
       "2H_HOLYSTAFF_CRYSTAL": {
@@ -69849,11 +69424,6 @@
         "HEAD_LEATHER_SET3",
         6,
         6
-       ],
-       "shoes": [
-        "SHOES_LEATHER_MORGANA",
-        4,
-        6
        ]
       },
       "2H_SHAPESHIFTER_SET2": {
@@ -69861,11 +69431,6 @@
         "ARMOR_PLATE_KEEPER",
         9,
         10
-       ],
-       "cape": [
-        "CAPEITEM_SMUGGLER",
-        3,
-        5
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -71881,11 +71446,6 @@
         "HEAD_LEATHER_SET3",
         8,
         11
-       ],
-       "shoes": [
-        "SHOES_LEATHER_MORGANA",
-        2,
-        8
        ]
       },
       "2H_ICEGAUNTLETS_HELL": {
@@ -71898,18 +71458,6 @@
         "HEAD_LEATHER_SET3",
         6,
         9
-       ],
-       "shoes": [
-        "SHOES_LEATHER_ROYAL",
-        2,
-        6
-       ]
-      },
-      "MAIN_FROSTSTAFF_KEEPER": {
-       "armor": [
-        "ARMOR_PLATE_SET2",
-        2,
-        5
        ]
       }
      }
@@ -72388,11 +71936,6 @@
         5,
         7
        ],
-       "food": [
-        "T7_MEAL_OMELETTE",
-        2,
-        5
-       ],
        "head": [
         "HEAD_LEATHER_SET3",
         13,
@@ -72419,11 +71962,6 @@
         "HEAD_LEATHER_SET3",
         8,
         10
-       ],
-       "shoes": [
-        "SHOES_LEATHER_ROYAL",
-        4,
-        8
        ]
       }
      }
@@ -72616,11 +72154,6 @@
         7,
         7
        ],
-       "food": [
-        "T7_MEAL_OMELETTE",
-        3,
-        7
-       ],
        "head": [
         "HEAD_LEATHER_SET3",
         12,
@@ -72642,11 +72175,6 @@
         "ARMOR_PLATE_FEY",
         5,
         12
-       ],
-       "head": [
-        "HEAD_LEATHER_SET3",
-        4,
-        5
        ]
       }
      }
@@ -72689,11 +72217,6 @@
       "head": [
        "HEAD_LEATHER_SET3",
        6,
-       6
-      ],
-      "shoes": [
-       "SHOES_LEATHER_SET1",
-       2,
        6
       ]
      },
@@ -72779,11 +72302,6 @@
        "head": [
         "HEAD_LEATHER_SET3",
         6,
-        6
-       ],
-       "shoes": [
-        "SHOES_LEATHER_SET1",
-        2,
         6
        ]
       }
@@ -73194,13 +72712,6 @@
       "SHOES_LEATHER_MORGANA",
       11,
       28
-     ]
-    },
-    "MAIN_FROSTSTAFF_KEEPER": {
-     "armor": [
-      "ARMOR_LEATHER_SET3",
-      4,
-      15
      ]
     }
    },
@@ -74581,13 +74092,6 @@
       }
      },
      "kit_weapon_build": {
-      "2H_CURSEDSTAFF": {
-       "armor": [
-        "ARMOR_CLOTH_SET2",
-        2,
-        6
-       ]
-      },
       "2H_CURSEDSTAFF_MORGANA": {
        "armor": [
         "ARMOR_CLOTH_SET1",
@@ -74615,11 +74119,6 @@
         "ARMOR_CLOTH_SET2",
         5,
         13
-       ],
-       "head": [
-        "HEAD_LEATHER_SET3",
-        3,
-        7
        ]
       },
       "2H_SKULLORB_HELL": {
@@ -74627,11 +74126,6 @@
         "ARMOR_CLOTH_FEY",
         5,
         16
-       ],
-       "head": [
-        "HEAD_CLOTH_KEEPER",
-        2,
-        5
        ]
       },
       "MAIN_CURSEDSTAFF": {
@@ -75344,11 +74838,6 @@
         10,
         21
        ],
-       "cape": [
-        "CAPEITEM_SMUGGLER",
-        4,
-        5
-       ],
        "head": [
         "HEAD_LEATHER_SET3",
         10,
@@ -75375,11 +74864,6 @@
         "HEAD_LEATHER_SET3",
         16,
         16
-       ],
-       "offhand": [
-        "OFF_SHIELD_AVALON",
-        3,
-        5
        ],
        "shoes": [
         "SHOES_PLATE_AVALON",
@@ -76098,11 +75582,6 @@
         9,
         13
        ],
-       "food": [
-        "T7_MEAL_OMELETTE",
-        3,
-        9
-       ],
        "head": [
         "HEAD_LEATHER_SET3",
         20,
@@ -76134,11 +75613,6 @@
         "HEAD_LEATHER_SET3",
         15,
         15
-       ],
-       "offhand": [
-        "OFF_SHIELD_AVALON",
-        4,
-        6
        ],
        "shoes": [
         "SHOES_LEATHER_MORGANA",
@@ -76313,11 +75787,6 @@
         "HEAD_LEATHER_SET3",
         8,
         8
-       ],
-       "shoes": [
-        "SHOES_LEATHER_MORGANA",
-        4,
-        8
        ]
       },
       "MAIN_CURSEDSTAFF_UNDEAD": {
@@ -76329,11 +75798,6 @@
        "head": [
         "HEAD_LEATHER_SET3",
         6,
-        6
-       ],
-       "shoes": [
-        "SHOES_PLATE_AVALON",
-        3,
         6
        ]
       }
@@ -77217,20 +76681,6 @@
       86
      ]
     },
-    "2H_DEMONICSTAFF": {
-     "armor": [
-      "ARMOR_PLATE_SET2",
-      4,
-      12
-     ]
-    },
-    "2H_SKULLORB_HELL": {
-     "armor": [
-      "ARMOR_CLOTH_AVALON",
-      3,
-      11
-     ]
-    },
     "MAIN_CURSEDSTAFF": {
      "armor": [
       "ARMOR_CLOTH_SET2",
@@ -77241,11 +76691,6 @@
       "HEAD_PLATE_SET3",
       6,
       8
-     ],
-     "shoes": [
-      "SHOES_PLATE_SET1",
-      4,
-      6
      ]
     },
     "MAIN_CURSEDSTAFF_AVALON": {
@@ -82973,11 +82418,6 @@
         10,
         27
        ],
-       "cape": [
-        "CAPEITEM_FW_LYMHURST",
-        4,
-        6
-       ],
        "head": [
         "HEAD_LEATHER_SET3",
         9,
@@ -82994,11 +82434,6 @@
         "ARMOR_CLOTH_SET2",
         12,
         35
-       ],
-       "head": [
-        "HEAD_LEATHER_SET3",
-        3,
-        12
        ]
       },
       "2H_BOW_AVALON": {
@@ -83065,11 +82500,6 @@
         "HEAD_LEATHER_ROYAL",
         6,
         17
-       ],
-       "shoes": [
-        "SHOES_CLOTH_ROYAL",
-        4,
-        6
        ]
       },
       "2H_CROSSBOWLARGE": {
@@ -83089,11 +82519,6 @@
         "ARMOR_CLOTH_SET2",
         5,
         11
-       ],
-       "head": [
-        "HEAD_LEATHER_SET3",
-        3,
-        6
        ]
       },
       "2H_CROSSBOW_CANNON_AVALON": {
@@ -83106,13 +82531,6 @@
         "HEAD_LEATHER_FEY",
         17,
         45
-       ]
-      },
-      "2H_DUALCROSSBOW_CRYSTAL": {
-       "armor": [
-        "ARMOR_CLOTH_FEY",
-        3,
-        10
        ]
       },
       "2H_DUALCROSSBOW_HELL": {
@@ -83137,11 +82555,6 @@
         "ARMOR_CLOTH_SET2",
         11,
         18
-       ],
-       "head": [
-        "HEAD_CLOTH_KEEPER",
-        3,
-        12
        ]
       },
       "2H_FIRESTAFF_HELL": {
@@ -83215,11 +82628,6 @@
         "HEAD_CLOTH_KEEPER",
         6,
         8
-       ],
-       "shoes": [
-        "SHOES_LEATHER_ROYAL",
-        2,
-        6
        ]
       },
       "2H_GLACIALSTAFF": {
@@ -83227,11 +82635,6 @@
         "ARMOR_CLOTH_SET1",
         5,
         15
-       ],
-       "head": [
-        "HEAD_LEATHER_SET3",
-        4,
-        5
        ]
       },
       "2H_ICECRYSTAL_UNDEAD": {
@@ -83385,11 +82788,6 @@
         "HEAD_PLATE_SET3",
         5,
         9
-       ],
-       "shoes": [
-        "SHOES_PLATE_SET1",
-        2,
-        5
        ]
       },
       "MAIN_CURSEDSTAFF_CRYSTAL": {
@@ -85042,11 +84440,6 @@
         "HEAD_LEATHER_SET3",
         6,
         7
-       ],
-       "shoes": [
-        "SHOES_CLOTH_ROYAL",
-        3,
-        6
        ]
       },
       "2H_BOW_KEEPER": {
@@ -85054,22 +84447,12 @@
         "ARMOR_LEATHER_SET3",
         5,
         10
-       ],
-       "head": [
-        "HEAD_PLATE_ROYAL",
-        2,
-        5
        ]
       },
       "2H_FROSTSTAFF": {
        "armor": [
         "ARMOR_LEATHER_AVALON",
         6,
-        6
-       ],
-       "head": [
-        "HEAD_CLOTH_SET2",
-        2,
         6
        ]
       },
@@ -85083,11 +84466,6 @@
         "HEAD_LEATHER_SET3",
         6,
         6
-       ],
-       "shoes": [
-        "SHOES_LEATHER_MORGANA",
-        3,
-        6
        ]
       },
       "2H_LONGBOW": {
@@ -85100,11 +84478,6 @@
         "HEAD_LEATHER_SET3",
         7,
         13
-       ],
-       "shoes": [
-        "SHOES_LEATHER_SET1",
-        3,
-        7
        ]
       },
       "2H_LONGBOW_UNDEAD": {
@@ -85112,11 +84485,6 @@
         "ARMOR_LEATHER_SET2",
         6,
         9
-       ],
-       "head": [
-        "HEAD_LEATHER_SET3",
-        3,
-        6
        ]
       }
      }
@@ -86988,11 +86356,6 @@
         "ARMOR_LEATHER_SET3",
         12,
         36
-       ],
-       "head": [
-        "HEAD_PLATE_ROYAL",
-        4,
-        12
        ]
       },
       "2H_CROSSBOW_CANNON_AVALON": {
@@ -87017,11 +86380,6 @@
         "ARMOR_CLOTH_SET2",
         6,
         10
-       ],
-       "head": [
-        "HEAD_CLOTH_SET1",
-        2,
-        6
        ]
       },
       "2H_FIRESTAFF_HELL": {
@@ -87029,11 +86387,6 @@
         "ARMOR_CLOTH_SET1",
         14,
         14
-       ],
-       "cape": [
-        "CAPEITEM_MORGANA",
-        3,
-        5
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -87120,11 +86473,6 @@
         "HEAD_LEATHER_SET3",
         6,
         9
-       ],
-       "shoes": [
-        "SHOES_CLOTH_ROYAL",
-        4,
-        6
        ]
       },
       "2H_ICECRYSTAL_UNDEAD": {
@@ -87199,11 +86547,6 @@
         19,
         24
        ],
-       "cape": [
-        "CAPEITEM_MORGANA",
-        3,
-        5
-       ],
        "head": [
         "HEAD_LEATHER_SET3",
         5,
@@ -87220,11 +86563,6 @@
         "ARMOR_CLOTH_KEEPER",
         5,
         19
-       ],
-       "head": [
-        "HEAD_LEATHER_SET3",
-        4,
-        5
        ]
       },
       "2H_WARBOW": {
@@ -87232,11 +86570,6 @@
         "ARMOR_CLOTH_SET2",
         6,
         9
-       ],
-       "head": [
-        "HEAD_CLOTH_AVALON",
-        3,
-        6
        ]
       },
       "MAIN_FIRESTAFF": {
@@ -87244,11 +86577,6 @@
         "ARMOR_CLOTH_SET2",
         5,
         8
-       ],
-       "head": [
-        "HEAD_PLATE_SET3",
-        2,
-        5
        ]
       }
      },
@@ -87910,11 +87238,6 @@
         7,
         10
        ],
-       "cape": [
-        "CAPEITEM_SMUGGLER",
-        3,
-        5
-       ],
        "head": [
         "HEAD_LEATHER_SET3",
         5,
@@ -87931,11 +87254,6 @@
         "ARMOR_CLOTH_SET2",
         5,
         5
-       ],
-       "head": [
-        "HEAD_LEATHER_FEY",
-        3,
-        5
        ]
       },
       "2H_CROSSBOW_CANNON_AVALON": {
@@ -87943,11 +87261,6 @@
         "ARMOR_CLOTH_KEEPER",
         5,
         14
-       ],
-       "head": [
-        "HEAD_LEATHER_ROYAL",
-        3,
-        5
        ]
       },
       "2H_FIRESTAFF_HELL": {
@@ -88051,11 +87364,6 @@
         "HEAD_LEATHER_SET3",
         8,
         8
-       ],
-       "shoes": [
-        "SHOES_PLATE_UNDEAD",
-        3,
-        8
        ]
       },
       "2H_LONGBOW": {
@@ -88063,11 +87371,6 @@
         "ARMOR_CLOTH_AVALON",
         7,
         25
-       ],
-       "head": [
-        "HEAD_LEATHER_FEY",
-        3,
-        7
        ]
       },
       "MAIN_CURSEDSTAFF_CRYSTAL": {
@@ -88915,11 +88218,6 @@
         9,
         11
        ],
-       "cape": [
-        "CAPEITEM_SMUGGLER",
-        4,
-        5
-       ],
        "head": [
         "HEAD_LEATHER_SET3",
         9,
@@ -88936,11 +88234,6 @@
         "ARMOR_CLOTH_KEEPER",
         7,
         18
-       ],
-       "head": [
-        "HEAD_LEATHER_FEY",
-        3,
-        7
        ]
       },
       "2H_FIRESTAFF_HELL": {
@@ -88953,11 +88246,6 @@
         "CAPEITEM_MORGANA",
         6,
         10
-       ],
-       "food": [
-        "T8_MEAL_STEW",
-        4,
-        6
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -88985,11 +88273,6 @@
         "CAPEITEM_SMUGGLER",
         10,
         14
-       ],
-       "food": [
-        "T8_MEAL_STEW",
-        3,
-        10
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -89039,11 +88322,6 @@
         "HEAD_LEATHER_SET3",
         6,
         9
-       ],
-       "shoes": [
-        "SHOES_CLOTH_ROYAL",
-        4,
-        6
        ]
       },
       "2H_LONGBOW": {
@@ -89063,11 +88341,6 @@
         "ARMOR_LEATHER_SET2",
         8,
         9
-       ],
-       "head": [
-        "HEAD_CLOTH_HELL",
-        3,
-        8
        ]
       },
       "MAIN_CURSEDSTAFF_CRYSTAL": {
@@ -89091,11 +88364,6 @@
         5,
         7
        ],
-       "potion": [
-        "T7_POTION_REVIVE",
-        4,
-        5
-       ],
        "shoes": [
         "SHOES_LEATHER_MORGANA",
         7,
@@ -89107,11 +88375,6 @@
         "ARMOR_LEATHER_SET3",
         8,
         17
-       ],
-       "head": [
-        "HEAD_CLOTH_AVALON",
-        3,
-        8
        ]
       }
      }
@@ -93177,13 +92440,6 @@
       16
      ]
     },
-    "2H_BOW": {
-     "armor": [
-      "ARMOR_LEATHER_SET3",
-      3,
-      9
-     ]
-    },
     "2H_BOW_AVALON": {
      "armor": [
       "ARMOR_CLOTH_SET1",
@@ -93276,11 +92532,6 @@
       8,
       16
      ],
-     "potion": [
-      "T8_POTION_CLEANSE",
-      2,
-      5
-     ],
      "shoes": [
       "SHOES_CLOTH_ROYAL",
       8,
@@ -93304,11 +92555,6 @@
       "HEAD_LEATHER_SET3",
       5,
       11
-     ],
-     "shoes": [
-      "SHOES_PLATE_AVALON",
-      2,
-      5
      ]
     },
     "2H_CROSSBOW_CANNON_AVALON": {
@@ -93333,11 +92579,6 @@
       "ARMOR_CLOTH_SET2",
       7,
       22
-     ],
-     "head": [
-      "HEAD_PLATE_SET3",
-      2,
-      7
      ]
     },
     "2H_FIRESTAFF": {
@@ -93345,11 +92586,6 @@
       "ARMOR_CLOTH_SET2",
       9,
       17
-     ],
-     "head": [
-      "HEAD_CLOTH_SET1",
-      3,
-      9
      ]
     },
     "2H_FIRESTAFF_HELL": {
@@ -93458,11 +92694,6 @@
       "HEAD_LEATHER_SET3",
       8,
       12
-     ],
-     "shoes": [
-      "SHOES_CLOTH_ROYAL",
-      4,
-      8
      ]
     },
     "2H_ICECRYSTAL_UNDEAD": {
@@ -93502,11 +92733,6 @@
       "ARMOR_LEATHER_SET3",
       6,
       23
-     ],
-     "head": [
-      "HEAD_CLOTH_HELL",
-      3,
-      6
      ]
     },
     "2H_INFERNOSTAFF_MORGANA": {
@@ -93560,13 +92786,6 @@
       61
      ]
     },
-    "2H_REPEATINGCROSSBOW_UNDEAD": {
-     "armor": [
-      "ARMOR_CLOTH_KEEPER",
-      2,
-      5
-     ]
-    },
     "2H_SHAPESHIFTER_AVALON": {
      "armor": [
       "ARMOR_PLATE_SET1",
@@ -93589,23 +92808,11 @@
       16
      ]
     },
-    "2H_SHAPESHIFTER_HELL": {
-     "armor": [
-      "ARMOR_LEATHER_SET2",
-      2,
-      6
-     ]
-    },
     "2H_WARBOW": {
      "armor": [
       "ARMOR_CLOTH_SET2",
       8,
       17
-     ],
-     "head": [
-      "HEAD_CLOTH_AVALON",
-      3,
-      8
      ]
     },
     "MAIN_1HCROSSBOW": {
@@ -98993,11 +98200,6 @@
         "ARMOR_LEATHER_SET1",
         7,
         18
-       ],
-       "head": [
-        "HEAD_PLATE_SET3",
-        3,
-        7
        ]
       },
       "2H_CLAYMORE_AVALON": {
@@ -99022,11 +98224,6 @@
         "ARMOR_LEATHER_SET3",
         6,
         18
-       ],
-       "head": [
-        "HEAD_PLATE_SET1",
-        2,
-        6
        ]
       },
       "2H_DUALAXE_KEEPER": {
@@ -99070,11 +98267,6 @@
         "ARMOR_LEATHER_HELL",
         7,
         21
-       ],
-       "head": [
-        "HEAD_PLATE_SET3",
-        2,
-        7
        ]
       },
       "2H_HALBERD_MORGANA": {
@@ -99121,13 +98313,6 @@
         "ARMOR_LEATHER_HELL",
         10,
         34
-       ]
-      },
-      "2H_KNUCKLES_CRYSTAL": {
-       "armor": [
-        "ARMOR_LEATHER_HELL",
-        2,
-        7
        ]
       },
       "2H_KNUCKLES_HELL": {
@@ -99196,11 +98381,6 @@
         "HEAD_PLATE_SET1",
         9,
         18
-       ],
-       "shoes": [
-        "SHOES_LEATHER_MORGANA",
-        3,
-        9
        ]
       },
       "2H_SHAPESHIFTER_MORGANA": {
@@ -99213,11 +98393,6 @@
         "HEAD_LEATHER_MORGANA",
         6,
         12
-       ],
-       "shoes": [
-        "SHOES_CLOTH_AVALON",
-        2,
-        6
        ]
       },
       "MAIN_AXE": {
@@ -99237,11 +98412,6 @@
         "ARMOR_LEATHER_HELL",
         8,
         16
-       ],
-       "head": [
-        "HEAD_PLATE_SET1",
-        3,
-        8
        ]
       },
       "MAIN_SPEAR_KEEPER": {
@@ -99270,11 +98440,6 @@
         "ARMOR_LEATHER_HELL",
         7,
         10
-       ],
-       "head": [
-        "HEAD_PLATE_SET1",
-        3,
-        8
        ]
       }
      },
@@ -101477,11 +100642,6 @@
         "HEAD_LEATHER_SET3",
         6,
         10
-       ],
-       "shoes": [
-        "SHOES_CLOTH_ROYAL",
-        3,
-        6
        ]
       },
       "2H_AXE_AVALON": {
@@ -101558,11 +100718,6 @@
         12,
         18
        ],
-       "cape": [
-        "CAPEITEM_FW_LYMHURST",
-        3,
-        5
-       ],
        "head": [
         "HEAD_PLATE_SET1",
         5,
@@ -101579,11 +100734,6 @@
         "ARMOR_LEATHER_HELL",
         8,
         20
-       ],
-       "cape": [
-        "CAPEITEM_SMUGGLER",
-        3,
-        5
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -101653,11 +100803,6 @@
         16,
         30
        ],
-       "cape": [
-        "CAPEITEM_FW_LYMHURST",
-        4,
-        7
-       ],
        "head": [
         "HEAD_PLATE_SET1",
         11,
@@ -101680,11 +100825,6 @@
         6,
         10
        ],
-       "food": [
-        "T8_MEAL_STEW",
-        3,
-        5
-       ],
        "head": [
         "HEAD_PLATE_SET1",
         13,
@@ -101706,11 +100846,6 @@
         "ARMOR_LEATHER_HELL",
         5,
         9
-       ],
-       "head": [
-        "HEAD_CLOTH_SET2",
-        2,
-        5
        ]
       },
       "MAIN_SPEAR_KEEPER": {
@@ -101718,11 +100853,6 @@
         "ARMOR_LEATHER_HELL",
         5,
         10
-       ],
-       "head": [
-        "HEAD_PLATE_SET1",
-        2,
-        5
        ]
       }
      }
@@ -103037,11 +102167,6 @@
         "ARMOR_LEATHER_HELL",
         6,
         19
-       ],
-       "head": [
-        "HEAD_CLOTH_SET2",
-        2,
-        6
        ]
       },
       "2H_DUALSWORD": {
@@ -103105,11 +102230,6 @@
         "CAPEITEM_SMUGGLER",
         5,
         6
-       ],
-       "food": [
-        "T8_MEAL_STEW",
-        2,
-        5
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -103553,11 +102673,6 @@
         "ARMOR_LEATHER_SET3",
         5,
         5
-       ],
-       "head": [
-        "HEAD_CLOTH_HELL",
-        3,
-        5
        ]
       },
       "2H_HARPOON_HELL": {
@@ -103918,11 +103033,6 @@
         "CAPEITEM_SMUGGLER",
         5,
         7
-       ],
-       "food": [
-        "T7_MEAL_OMELETTE",
-        2,
-        5
        ],
        "head": [
         "HEAD_PLATE_SET2",
@@ -107446,11 +106556,6 @@
       "HEAD_LEATHER_SET3",
       8,
       9
-     ],
-     "shoes": [
-      "SHOES_LEATHER_MORGANA",
-      3,
-      8
      ]
     },
     "2H_DUALSWORD": {
@@ -107465,11 +106570,6 @@
       "ARMOR_LEATHER_HELL",
       16,
       27
-     ],
-     "cape": [
-      "CAPEITEM_FW_LYMHURST",
-      4,
-      6
      ],
      "head": [
       "HEAD_PLATE_SET1",
@@ -107487,11 +106587,6 @@
       "ARMOR_PLATE_ROYAL",
       6,
       15
-     ],
-     "head": [
-      "HEAD_LEATHER_AVALON",
-      2,
-      6
      ]
     },
     "2H_HARPOON_HELL": {
@@ -107531,11 +106626,6 @@
       "ARMOR_LEATHER_HELL",
       10,
       26
-     ],
-     "head": [
-      "HEAD_PLATE_SET1",
-      4,
-      10
      ]
     },
     "2H_KNUCKLES_HELL": {
@@ -107570,13 +106660,6 @@
       "SHOES_LEATHER_MORGANA",
       18,
       24
-     ]
-    },
-    "2H_KNUCKLES_SET1": {
-     "armor": [
-      "ARMOR_LEATHER_SET3",
-      3,
-      7
      ]
     },
     "2H_KNUCKLES_SET2": {
@@ -107654,11 +106737,6 @@
       7,
       11
      ],
-     "food": [
-      "T8_MEAL_STEW",
-      3,
-      6
-     ],
      "head": [
       "HEAD_PLATE_SET1",
       16,
@@ -107687,11 +106765,6 @@
       "ARMOR_LEATHER_HELL",
       6,
       19
-     ],
-     "head": [
-      "HEAD_CLOTH_SET2",
-      4,
-      8
      ]
     },
     "MAIN_SPEAR_LANCE_AVALON": {
@@ -107699,11 +106772,6 @@
       "ARMOR_LEATHER_HELL",
       6,
       15
-     ],
-     "head": [
-      "HEAD_PLATE_SET3",
-      2,
-      6
      ]
     },
     "MAIN_SWORD_CRYSTAL": {
@@ -107716,11 +106784,6 @@
       "HEAD_PLATE_SET1",
       5,
       6
-     ],
-     "shoes": [
-      "SHOES_PLATE_AVALON",
-      2,
-      5
      ]
     }
    },
@@ -108502,11 +107565,6 @@
         11,
         33
        ],
-       "cape": [
-        "CAPEITEM_FW_BRECILIEN",
-        4,
-        9
-       ],
        "head": [
         "HEAD_LEATHER_ROYAL",
         11,
@@ -108577,11 +107635,6 @@
         "ARMOR_CLOTH_SET2",
         6,
         12
-       ],
-       "head": [
-        "HEAD_PLATE_SET2",
-        3,
-        6
        ]
       }
      },
@@ -109287,11 +108340,6 @@
         9,
         9
        ],
-       "food": [
-        "T8_MEAL_STEW",
-        4,
-        9
-       ],
        "head": [
         "HEAD_LEATHER_ROYAL",
         14,
@@ -109597,11 +108645,6 @@
         "HEAD_LEATHER_ROYAL",
         6,
         6
-       ],
-       "shoes": [
-        "SHOES_CLOTH_FEY",
-        4,
-        6
        ]
       },
       "2H_GLAIVE_CRYSTAL": {
@@ -109825,11 +108868,6 @@
        7,
        8
       ],
-      "food": [
-       "T8_MEAL_STEW",
-       2,
-       7
-      ],
       "head": [
        "HEAD_LEATHER_SET3",
        11,
@@ -109913,11 +108951,6 @@
         "CAPEITEM_SMUGGLER",
         7,
         8
-       ],
-       "food": [
-        "T8_MEAL_STEW",
-        2,
-        7
        ],
        "head": [
         "HEAD_LEATHER_SET3",
@@ -112166,23 +111199,11 @@
         23
        ]
       },
-      "2H_DAGGERPAIR_CRYSTAL": {
-       "armor": [
-        "ARMOR_LEATHER_SET3",
-        2,
-        5
-       ]
-      },
       "2H_DAGGER_KATAR_AVALON": {
        "armor": [
         "ARMOR_LEATHER_SET3",
         11,
         33
-       ],
-       "cape": [
-        "CAPEITEM_FW_BRECILIEN",
-        4,
-        9
        ],
        "head": [
         "HEAD_LEATHER_ROYAL",
@@ -112217,11 +111238,6 @@
         "ARMOR_LEATHER_SET2",
         6,
         8
-       ],
-       "head": [
-        "HEAD_LEATHER_SET3",
-        3,
-        7
        ]
       },
       "MAIN_DAGGER_HELL": {
@@ -112234,11 +111250,6 @@
         "HEAD_PLATE_SET1",
         5,
         12
-       ],
-       "shoes": [
-        "SHOES_LEATHER_MORGANA",
-        2,
-        5
        ]
       },
       "MAIN_RAPIER_MORGANA": {
@@ -112263,18 +111274,6 @@
         "ARMOR_LEATHER_HELL",
         8,
         16
-       ],
-       "head": [
-        "HEAD_PLATE_SET1",
-        3,
-        8
-       ]
-      },
-      "MAIN_SPEAR": {
-       "armor": [
-        "ARMOR_LEATHER_SET1",
-        4,
-        10
        ]
       }
      }
@@ -113278,11 +112277,6 @@
         "HEAD_CLOTH_HELL",
         6,
         10
-       ],
-       "shoes": [
-        "SHOES_LEATHER_SET2",
-        3,
-        6
        ]
       },
       "2H_DAGGERPAIR": {
@@ -113295,11 +112289,6 @@
         "HEAD_CLOTH_HELL",
         6,
         13
-       ],
-       "shoes": [
-        "SHOES_LEATHER_HELL",
-        4,
-        6
        ]
       },
       "2H_DUALSICKLE_UNDEAD": {
@@ -113307,11 +112296,6 @@
         "ARMOR_LEATHER_SET3",
         6,
         14
-       ],
-       "head": [
-        "HEAD_CLOTH_HELL",
-        3,
-        6
        ]
       },
       "MAIN_DAGGER_HELL": {
@@ -113353,11 +112337,6 @@
         "ARMOR_LEATHER_HELL",
         5,
         9
-       ],
-       "head": [
-        "HEAD_CLOTH_SET2",
-        2,
-        5
        ]
       }
      }
@@ -113660,11 +112639,6 @@
         "HEAD_LEATHER_ROYAL",
         6,
         6
-       ],
-       "shoes": [
-        "SHOES_CLOTH_FEY",
-        4,
-        6
        ]
       },
       "MAIN_DAGGER_HELL": {
@@ -113699,11 +112673,6 @@
         "ARMOR_LEATHER_SET3",
         8,
         27
-       ],
-       "head": [
-        "HEAD_LEATHER_MORGANA",
-        3,
-        8
        ]
       }
      }
@@ -113743,11 +112712,6 @@
        "ARMOR_LEATHER_SET3",
        8,
        27
-      ],
-      "head": [
-       "HEAD_LEATHER_ROYAL",
-       3,
-       8
       ]
      },
      "kit_weapon": {
@@ -113800,11 +112764,6 @@
         "ARMOR_LEATHER_HELL",
         5,
         15
-       ],
-       "head": [
-        "HEAD_CLOTH_SET2",
-        2,
-        5
        ]
       }
      }
@@ -115009,20 +113968,6 @@
       8
      ]
     },
-    "2H_GLAIVE": {
-     "armor": [
-      "ARMOR_LEATHER_SET3",
-      4,
-      13
-     ]
-    },
-    "MAIN_DAGGER": {
-     "armor": [
-      "ARMOR_LEATHER_SET2",
-      3,
-      5
-     ]
-    },
     "MAIN_DAGGER_HELL": {
      "armor": [
       "ARMOR_LEATHER_HELL",
@@ -115067,11 +114012,6 @@
       "ARMOR_LEATHER_HELL",
       6,
       19
-     ],
-     "head": [
-      "HEAD_CLOTH_SET2",
-      4,
-      8
      ]
     },
     "MAIN_SPEAR": {
@@ -115079,11 +114019,6 @@
       "ARMOR_LEATHER_SET3",
       8,
       12
-     ],
-     "head": [
-      "HEAD_PLATE_SET3",
-      3,
-      8
      ]
     }
    },
@@ -115228,13 +114163,186 @@
    }
   ],
   "meta_prior": {
-   "2H_HAMMER": 0.8,
-   "2H_HOLYSTAFF": 0.6,
-   "2H_ICECRYSTAL_UNDEAD": 0.8,
-   "2H_LONGBOW": 0.6,
-   "2H_MACE": 1.0,
-   "MAIN_HOLYSTAFF_AVALON": 1.0,
-   "MAIN_MACE": 0.6
+   "large": {
+    "2H_ARCANESTAFF": 0.106,
+    "2H_ARCANESTAFF_HELL": 0.067,
+    "2H_AXE_AVALON": 0.377,
+    "2H_CLEAVER_HELL": 0.089,
+    "2H_CROSSBOW_CANNON_AVALON": 0.055,
+    "2H_CURSEDSTAFF_MORGANA": 0.118,
+    "2H_DUALAXE_KEEPER": 0.058,
+    "2H_DUALMACE_AVALON": 0.169,
+    "2H_DUALSCIMITAR_UNDEAD": 0.133,
+    "2H_FIRE_RINGPAIR_AVALON": 0.267,
+    "2H_FROSTSTAFF": 0.082,
+    "2H_GLAIVE_CRYSTAL": 0.142,
+    "2H_HAMMER_AVALON": 0.053,
+    "2H_HARPOON_HELL": 0.239,
+    "2H_HOLYSTAFF_CRYSTAL": 0.134,
+    "2H_HOLYSTAFF_HELL": 0.128,
+    "2H_HOLYSTAFF_UNDEAD": 0.084,
+    "2H_ICECRYSTAL_UNDEAD": 0.3,
+    "2H_KNUCKLES_KEEPER": 0.054,
+    "2H_KNUCKLES_SET2": 0.283,
+    "2H_KNUCKLES_SET3": 0.299,
+    "2H_LONGBOW": 0.264,
+    "2H_MACE": 0.142,
+    "2H_NATURESTAFF_HELL": 0.212,
+    "2H_NATURESTAFF_KEEPER": 0.082,
+    "2H_POLEHAMMER": 0.107,
+    "2H_SHAPESHIFTER_KEEPER": 0.128,
+    "2H_SHAPESHIFTER_SET2": 0.118,
+    "MAIN_ARCANESTAFF": 0.05,
+    "MAIN_ARCANESTAFF_UNDEAD": 0.106,
+    "MAIN_CURSEDSTAFF_AVALON": 0.068,
+    "MAIN_CURSEDSTAFF_CRYSTAL": 0.112,
+    "MAIN_CURSEDSTAFF_UNDEAD": 0.13,
+    "MAIN_DAGGER_HELL": 0.057,
+    "MAIN_HAMMER": 0.067,
+    "MAIN_HOLYSTAFF_AVALON": 1.0,
+    "MAIN_MACE": 0.125,
+    "MAIN_NATURESTAFF": 0.072,
+    "MAIN_RAPIER_MORGANA": 0.065,
+    "MAIN_ROCKMACE_KEEPER": 0.135
+   },
+   "mid": {
+    "2H_ARCANESTAFF": 0.057,
+    "2H_ARCANESTAFF_HELL": 0.064,
+    "2H_AXE": 0.156,
+    "2H_AXE_AVALON": 0.431,
+    "2H_BOW_AVALON": 0.157,
+    "2H_BOW_HELL": 0.212,
+    "2H_BOW_KEEPER": 0.136,
+    "2H_CLAWPAIR": 0.067,
+    "2H_CLAYMORE_AVALON": 0.08,
+    "2H_CLEAVER_HELL": 0.164,
+    "2H_CROSSBOW_CANNON_AVALON": 0.171,
+    "2H_CURSEDSTAFF_MORGANA": 0.08,
+    "2H_DAGGERPAIR": 0.117,
+    "2H_DAGGER_KATAR_AVALON": 0.066,
+    "2H_DUALAXE_KEEPER": 0.258,
+    "2H_DUALMACE_AVALON": 0.171,
+    "2H_DUALSCIMITAR_UNDEAD": 0.155,
+    "2H_DUALSICKLE_UNDEAD": 0.057,
+    "2H_DUALSWORD": 0.07,
+    "2H_FIRESTAFF_HELL": 0.065,
+    "2H_FIRE_RINGPAIR_AVALON": 0.329,
+    "2H_FROSTSTAFF": 0.084,
+    "2H_GLAIVE_CRYSTAL": 0.109,
+    "2H_HAMMER_AVALON": 0.056,
+    "2H_HARPOON_HELL": 0.188,
+    "2H_HOLYSTAFF": 0.099,
+    "2H_HOLYSTAFF_CRYSTAL": 0.065,
+    "2H_HOLYSTAFF_HELL": 0.136,
+    "2H_HOLYSTAFF_UNDEAD": 0.244,
+    "2H_ICECRYSTAL_UNDEAD": 0.399,
+    "2H_ICEGAUNTLETS_HELL": 0.05,
+    "2H_INFERNOSTAFF_MORGANA": 0.162,
+    "2H_KNUCKLES_HELL": 0.055,
+    "2H_KNUCKLES_KEEPER": 0.054,
+    "2H_KNUCKLES_SET2": 0.359,
+    "2H_KNUCKLES_SET3": 0.272,
+    "2H_LONGBOW": 0.591,
+    "2H_LONGBOW_UNDEAD": 0.103,
+    "2H_MACE": 0.189,
+    "2H_NATURESTAFF_HELL": 0.337,
+    "2H_POLEHAMMER": 0.179,
+    "2H_QUARTERSTAFF_AVALON": 0.061,
+    "2H_SHAPESHIFTER_AVALON": 0.054,
+    "2H_SHAPESHIFTER_KEEPER": 0.136,
+    "2H_SHAPESHIFTER_SET2": 0.118,
+    "MAIN_ARCANESTAFF_UNDEAD": 0.129,
+    "MAIN_AXE": 0.083,
+    "MAIN_CURSEDSTAFF": 0.054,
+    "MAIN_CURSEDSTAFF_AVALON": 0.09,
+    "MAIN_CURSEDSTAFF_CRYSTAL": 0.1,
+    "MAIN_CURSEDSTAFF_UNDEAD": 0.161,
+    "MAIN_DAGGER_HELL": 0.077,
+    "MAIN_FIRESTAFF": 0.077,
+    "MAIN_FROSTSTAFF": 0.138,
+    "MAIN_HAMMER": 0.062,
+    "MAIN_HOLYSTAFF": 0.061,
+    "MAIN_HOLYSTAFF_AVALON": 1.0,
+    "MAIN_MACE": 0.348,
+    "MAIN_MACE_HELL": 0.079,
+    "MAIN_NATURESTAFF": 0.088,
+    "MAIN_RAPIER_MORGANA": 0.287,
+    "MAIN_ROCKMACE_KEEPER": 0.105,
+    "MAIN_SPEAR_KEEPER": 0.066
+   },
+   "small": {
+    "2H_AXE": 0.4,
+    "2H_AXE_AVALON": 0.299,
+    "2H_BOW": 0.207,
+    "2H_BOW_AVALON": 0.258,
+    "2H_BOW_HELL": 0.232,
+    "2H_BOW_KEEPER": 0.405,
+    "2H_CLAWPAIR": 0.092,
+    "2H_CLAYMORE": 0.125,
+    "2H_CLAYMORE_AVALON": 0.216,
+    "2H_CLEAVER_HELL": 0.278,
+    "2H_CROSSBOW": 0.064,
+    "2H_CROSSBOWLARGE": 0.064,
+    "2H_CROSSBOW_CANNON_AVALON": 0.362,
+    "2H_DAGGERPAIR": 0.312,
+    "2H_DAGGER_KATAR_AVALON": 0.057,
+    "2H_DOUBLEBLADEDSTAFF_CRYSTAL": 0.076,
+    "2H_DUALAXE_KEEPER": 0.565,
+    "2H_DUALCROSSBOW_HELL": 0.117,
+    "2H_DUALHAMMER_HELL": 0.129,
+    "2H_DUALMACE_AVALON": 0.358,
+    "2H_DUALSCIMITAR_UNDEAD": 0.064,
+    "2H_DUALSICKLE_UNDEAD": 0.129,
+    "2H_DUALSWORD": 0.212,
+    "2H_FIRESTAFF_HELL": 0.121,
+    "2H_FIRE_RINGPAIR_AVALON": 0.295,
+    "2H_FROSTSTAFF": 0.06,
+    "2H_HALBERD_MORGANA": 0.249,
+    "2H_HAMMER": 0.153,
+    "2H_HAMMER_UNDEAD": 0.057,
+    "2H_HARPOON_HELL": 0.108,
+    "2H_HOLYSTAFF": 0.125,
+    "2H_HOLYSTAFF_UNDEAD": 0.78,
+    "2H_ICECRYSTAL_UNDEAD": 0.237,
+    "2H_INFERNOSTAFF": 0.072,
+    "2H_INFERNOSTAFF_MORGANA": 0.312,
+    "2H_KNUCKLES_AVALON": 0.104,
+    "2H_KNUCKLES_HELL": 0.117,
+    "2H_KNUCKLES_KEEPER": 0.053,
+    "2H_KNUCKLES_SET2": 0.329,
+    "2H_KNUCKLES_SET3": 0.068,
+    "2H_LONGBOW": 1.0,
+    "2H_LONGBOW_UNDEAD": 0.117,
+    "2H_MACE": 0.158,
+    "2H_NATURESTAFF": 0.174,
+    "2H_NATURESTAFF_HELL": 0.346,
+    "2H_POLEHAMMER": 0.291,
+    "2H_QUARTERSTAFF": 0.088,
+    "2H_QUARTERSTAFF_AVALON": 0.121,
+    "2H_SCYTHE_HELL": 0.053,
+    "2H_SHAPESHIFTER_AVALON": 0.072,
+    "2H_SHAPESHIFTER_HELL": 0.199,
+    "2H_SHAPESHIFTER_KEEPER": 0.064,
+    "2H_SHAPESHIFTER_MORGANA": 0.072,
+    "2H_SHAPESHIFTER_SET2": 0.125,
+    "2H_WARBOW": 0.076,
+    "MAIN_ARCANESTAFF_UNDEAD": 0.174,
+    "MAIN_AXE": 0.287,
+    "MAIN_CURSEDSTAFF": 0.153,
+    "MAIN_CURSEDSTAFF_CRYSTAL": 0.266,
+    "MAIN_CURSEDSTAFF_UNDEAD": 0.104,
+    "MAIN_FIRESTAFF": 0.266,
+    "MAIN_FROSTSTAFF": 0.22,
+    "MAIN_HAMMER": 0.072,
+    "MAIN_HOLYSTAFF": 0.48,
+    "MAIN_HOLYSTAFF_AVALON": 0.679,
+    "MAIN_HOLYSTAFF_MORGANA": 0.053,
+    "MAIN_MACE": 0.354,
+    "MAIN_MACE_HELL": 0.245,
+    "MAIN_NATURESTAFF": 0.092,
+    "MAIN_RAPIER_MORGANA": 0.582,
+    "MAIN_SPEAR_KEEPER": 0.224
+   }
   },
   "role_sets": {
    "frontline": [
@@ -117307,6 +116415,9 @@
     "tankiness": 1.35
    },
    "name": "Brawl",
+   "role_min_per_players": {
+    "healer": 5
+   },
    "target_mults": {}
   },
   "brawl_clap": {
@@ -117363,6 +116474,9 @@
     "tankiness": 1.2
    },
    "name": "Brawl-Clap",
+   "role_min_per_players": {
+    "healer": 5
+   },
    "target_mults": {}
   },
   "clap": {
@@ -117553,6 +116667,9 @@
     "tankiness": 0.8
    },
    "name": "Clap-Kite",
+   "role_min_per_players": {
+    "healer": 5
+   },
    "target_mults": {
     "burst_aoe": 1.71,
     "peel": 1.25
@@ -118927,6 +118044,7 @@
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -119103,6 +118221,7 @@
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -119284,6 +118403,7 @@
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -119495,6 +118615,7 @@
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -119697,6 +118818,7 @@
    "source": "sheets/axe_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "melee",
@@ -119930,6 +119052,7 @@
    "source": "sheets/realmbreaker.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
@@ -120108,6 +119231,7 @@
    "source": "sheets/bow.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
@@ -120324,6 +119448,7 @@
    "source": "sheets/mistpiercer.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -120520,6 +119645,7 @@
    "source": "sheets/bow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -120725,6 +119851,7 @@
    "source": "sheets/wailing_bow.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -120956,6 +120083,7 @@
    "source": "sheets/bow_of_badon.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -121153,6 +120281,7 @@
    "source": "sheets/claws.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
@@ -121374,9 +120503,10 @@
    "source": "sheets/sword_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "single",
-    "delivery": "flex",
+    "delivery": "melee",
     "fit": {
      "brawl": {
       "gang": "situational",
@@ -121602,6 +120732,7 @@
    "source": "sheets/kingmaker.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "melee",
@@ -121827,9 +120958,10 @@
    "source": "sheets/carving_sword.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": true,
     "damage_scale": "group",
-    "delivery": "flex",
+    "delivery": "melee",
     "fit": {
      "brawl": {
       "gang": "fits",
@@ -121852,8 +120984,8 @@
       "trio": "fits"
      },
      "kite": {
-      "gang": "situational",
-      "group": "situational",
+      "gang": "unfit",
+      "group": "unfit",
       "trio": "fits"
      }
     },
@@ -122053,6 +121185,7 @@
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
@@ -122241,6 +121374,7 @@
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
@@ -122445,6 +121579,7 @@
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -122638,6 +121773,7 @@
    "source": "sheets/siegebow.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
@@ -122832,6 +121968,7 @@
    "source": "sheets/energy_shaper.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -123029,6 +122166,7 @@
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -123208,6 +122346,7 @@
    "source": "sheets/damnation.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -123398,6 +122537,7 @@
    "source": "sheets/dagger_pair.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
@@ -123600,6 +122740,7 @@
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
@@ -123806,6 +122947,7 @@
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
@@ -124002,6 +123144,7 @@
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -124114,6 +123257,7 @@
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -124328,9 +123472,10 @@
    "source": "sheets/double_bladed_staff.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "group",
-    "delivery": "flex",
+    "delivery": "melee",
     "fit": {
      "brawl": {
       "gang": "fits",
@@ -124343,18 +123488,18 @@
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "unfit",
+      "group": "unfit",
       "trio": "fits"
      }
     },
@@ -124558,6 +123703,7 @@
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
@@ -124758,6 +123904,7 @@
    "source": "sheets/bear_paws.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
@@ -124951,6 +124098,7 @@
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -125143,6 +124291,7 @@
    "source": "sheets/boltcasters.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
@@ -125411,6 +124560,7 @@
    "source": "sheets/forge_hammers.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -125589,6 +124739,7 @@
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -125789,6 +124940,7 @@
    "source": "sheets/sword_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "melee",
@@ -125974,6 +125126,7 @@
    "source": "sheets/deathgivers.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
@@ -126173,6 +125326,7 @@
    "source": "sheets/dualswords.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
@@ -126323,6 +125477,7 @@
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -126477,6 +125632,7 @@
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -126636,6 +125792,7 @@
    "source": "sheets/fire_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -126795,6 +125952,7 @@
    "source": "sheets/fire_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -126964,6 +126122,7 @@
    "source": "sheets/dawnsong.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -127147,6 +126306,7 @@
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -127383,6 +126543,7 @@
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -127618,6 +126779,7 @@
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -127852,6 +127014,7 @@
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -128012,6 +127175,7 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
@@ -128199,6 +127363,7 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
@@ -128401,6 +127566,7 @@
    "source": "sheets/axe_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
@@ -128608,6 +127774,7 @@
    "source": "sheets/axe_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
@@ -128845,6 +128012,7 @@
    "source": "sheets/great_hammer.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -129094,6 +128262,7 @@
    "source": "sheets/hand_of_justice.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -129337,6 +128506,7 @@
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -129592,6 +128762,7 @@
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -129785,6 +128956,7 @@
    "source": "sheets/spirithunter.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
@@ -129917,6 +129089,7 @@
    "source": "sheets/great_holy.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -130049,6 +129222,7 @@
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -130174,6 +129348,7 @@
    "source": "sheets/holy_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -130299,6 +129474,7 @@
    "source": "sheets/holy_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -130531,6 +129707,7 @@
    "source": "sheets/permafrost_prism.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -130772,6 +129949,7 @@
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -130920,6 +130098,7 @@
    "source": "sheets/fire_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -131086,6 +130265,7 @@
    "source": "sheets/blazing_staff.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -131281,6 +130461,7 @@
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -131461,6 +130642,7 @@
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
@@ -131726,6 +130908,7 @@
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
@@ -131940,9 +131123,10 @@
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "single",
-    "delivery": "flex",
+    "delivery": "melee",
     "fit": {
      "brawl": {
       "gang": "situational",
@@ -132194,6 +131378,7 @@
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
@@ -132426,6 +131611,7 @@
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "flex",
@@ -132639,6 +131825,7 @@
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "melee",
@@ -132873,6 +132060,7 @@
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
@@ -133087,6 +132275,7 @@
    "source": "sheets/battle_bracers.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
@@ -133342,6 +132531,7 @@
    "source": "sheets/knuckles_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
@@ -133503,6 +132693,7 @@
    "source": "sheets/longbow.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -133689,6 +132880,7 @@
    "source": "sheets/bow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
@@ -133873,6 +133065,7 @@
    "source": "sheets/mace_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -134084,6 +133277,7 @@
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -134268,6 +133462,7 @@
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -134470,6 +133665,7 @@
    "source": "sheets/nature_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -134668,6 +133864,7 @@
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -134914,6 +134111,7 @@
    "source": "sheets/polehammer.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -135125,9 +134323,10 @@
    "source": "sheets/quarterstaff.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "none",
-    "delivery": "flex",
+    "delivery": "melee",
     "fit": {
      "brawl": {
       "gang": "fits",
@@ -135354,6 +134553,7 @@
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
@@ -135570,6 +134770,7 @@
    "source": "sheets/grovekeeper.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -135750,6 +134951,7 @@
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -135943,6 +135145,7 @@
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -136129,6 +135332,7 @@
    "source": "sheets/axe_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
@@ -136342,6 +135546,7 @@
    "source": "sheets/axe_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
@@ -136580,6 +135785,7 @@
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -136814,6 +136020,7 @@
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
@@ -137037,6 +136244,7 @@
    "source": "sheets/hellspawn.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -137258,6 +136466,7 @@
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -137471,6 +136680,7 @@
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
@@ -137705,6 +136915,7 @@
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "ranged",
@@ -137925,6 +137136,7 @@
    "source": "sheets/rootbound.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -138152,6 +137364,7 @@
    "source": "sheets/shapeshifter_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -138336,6 +137549,7 @@
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -138488,6 +137702,7 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
@@ -138694,9 +137909,10 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "group",
-    "delivery": "flex",
+    "delivery": "melee",
     "fit": {
      "brawl": {
       "gang": "fits",
@@ -138709,17 +137925,17 @@
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
+      "gang": "situational",
       "group": "unfit",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
+      "gang": "situational",
       "group": "unfit",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
+      "gang": "unfit",
       "group": "unfit",
       "trio": "fits"
      }
@@ -138924,6 +138140,7 @@
    "source": "sheets/quarterstaff_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
@@ -139124,6 +138341,7 @@
    "source": "sheets/bow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -139317,6 +138535,7 @@
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -139496,6 +138715,7 @@
    "source": "sheets/crossbow_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -139676,6 +138896,7 @@
    "source": "sheets/arcane_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -139894,6 +139115,7 @@
    "source": "sheets/witchwork.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -140094,6 +139316,7 @@
    "source": "sheets/battleaxe.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "flex",
@@ -140272,6 +139495,7 @@
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -140449,6 +139673,7 @@
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -140653,6 +139878,7 @@
    "source": "sheets/rotcaller.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -140850,6 +140076,7 @@
    "source": "sheets/curse_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -141024,6 +140251,7 @@
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
@@ -141231,6 +140459,7 @@
    "source": "sheets/dagger_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "melee",
@@ -141388,6 +140617,7 @@
    "source": "sheets/fire_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -141566,6 +140796,7 @@
    "source": "sheets/fire_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -141725,6 +140956,7 @@
    "source": "sheets/fire_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -141957,6 +141189,7 @@
    "source": "sheets/froststaff.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "ranged",
@@ -142165,6 +141398,7 @@
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -142281,7 +141515,7 @@
    },
    "capabilities": {
     "buff_allies": 2,
-    "burst_aoe": 2,
+    "burst_aoe": 3,
     "catch": 2,
     "disengage": 2,
     "knockback_displace": 2,
@@ -142360,7 +141594,7 @@
     "slots": [
      [
       {
-       "burst_aoe": 2,
+       "burst_aoe": 3,
        "catch": 2,
        "knockback_displace": 2,
        "peel": 4,
@@ -142399,6 +141633,7 @@
    "source": "sheets/frost_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -142632,6 +141867,7 @@
    "source": "sheets/hammer_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -142752,6 +141988,7 @@
    "source": "sheets/holy_staff.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -142877,6 +142114,7 @@
    "source": "sheets/holy_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -142989,6 +142227,7 @@
    "source": "sheets/lifetouch.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -143156,6 +142395,7 @@
    "source": "sheets/mace_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -143365,6 +142605,7 @@
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -143579,6 +142820,7 @@
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "flex",
@@ -143781,6 +143023,7 @@
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -143954,6 +143197,7 @@
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -144155,6 +143399,7 @@
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -144325,6 +143570,7 @@
    "source": "sheets/nature_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "ranged",
@@ -144541,9 +143787,10 @@
    "source": "sheets/bloodletter.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "single",
-    "delivery": "flex",
+    "delivery": "melee",
     "fit": {
      "brawl": {
       "gang": "situational",
@@ -144724,6 +143971,7 @@
    "source": "sheets/mace_line_rest.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "none",
     "delivery": "melee",
@@ -144949,6 +144197,7 @@
    "source": "sheets/sword_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "flex",
@@ -145154,6 +144403,7 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
@@ -145365,6 +144615,7 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": false,
     "damage_scale": "group",
     "delivery": "flex",
@@ -145560,9 +144811,10 @@
    "source": "sheets/spear_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "group",
-    "delivery": "flex",
+    "delivery": "melee",
     "fit": {
      "brawl": {
       "gang": "fits",
@@ -145575,18 +144827,18 @@
       "trio": "fits"
      },
      "clap": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "clap_kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "situational",
+      "group": "situational",
       "trio": "fits"
      },
      "kite": {
-      "gang": "fits",
-      "group": "fits",
+      "gang": "unfit",
+      "group": "unfit",
       "trio": "fits"
      }
     },
@@ -145756,6 +145008,7 @@
    "source": "sheets/sword_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": true,
     "conditional_payload": false,
     "damage_scale": "single",
     "delivery": "melee",
@@ -145934,6 +145187,7 @@
    "source": "sheets/sword_line.yaml",
    "status": "curated",
    "style_fit": {
+    "caster_moves": false,
     "conditional_payload": true,
     "damage_scale": "group",
     "delivery": "melee",

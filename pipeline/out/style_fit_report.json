@@ -6,8 +6,8 @@
    "trio": "<=3"
   },
   "delivery_counts": {
-   "flex": 24,
-   "melee": 41,
+   "flex": 16,
+   "melee": 49,
    "ranged": 72
   },
   "metabattle_review_queue": [],
@@ -27,6 +27,7 @@
   "2H_ARCANESTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 2,
    "damage_scale": "none",
@@ -37,6 +38,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -76,6 +78,7 @@
   "2H_ARCANESTAFF_CRYSTAL": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -88,6 +91,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -127,6 +131,7 @@
   "2H_ARCANESTAFF_HELL": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 2,
    "damage_scale": "none",
@@ -137,6 +142,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -176,6 +182,7 @@
   "2H_ARCANE_RINGPAIR_AVALON": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "group",
@@ -188,6 +195,7 @@
    "e_debuff_max": 3,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 15.0,
    "e_utility_max": 3,
    "fit": {
     "brawl": {
@@ -227,6 +235,7 @@
   "2H_AXE": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": true,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -239,6 +248,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 5.0,
+   "e_reach_delivered": 5.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -278,6 +288,7 @@
   "2H_AXE_AVALON": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -290,6 +301,7 @@
    "e_debuff_max": 2,
    "e_ramp": false,
    "e_reach": 10.0,
+   "e_reach_delivered": 10.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -329,6 +341,7 @@
   "2H_BOW": {
    "attackrange": 13,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "single",
@@ -341,6 +354,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -380,6 +394,7 @@
   "2H_BOW_AVALON": {
    "attackrange": 13,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 12,
    "damage_scale": "group",
@@ -392,6 +407,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 24.0,
+   "e_reach_delivered": 24.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -431,6 +447,7 @@
   "2H_BOW_CRYSTAL": {
    "attackrange": 13,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -443,6 +460,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 10.0,
+   "e_reach_delivered": 10.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -482,6 +500,7 @@
   "2H_BOW_HELL": {
    "attackrange": 13,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 10,
    "damage_scale": "group",
@@ -494,6 +513,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 24.0,
+   "e_reach_delivered": 24.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -533,6 +553,7 @@
   "2H_BOW_KEEPER": {
    "attackrange": 13,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "group",
@@ -545,6 +566,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 26.0,
+   "e_reach_delivered": 26.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -584,6 +606,7 @@
   "2H_CLAWPAIR": {
    "attackrange": 2,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "single",
@@ -596,6 +619,7 @@
    "e_debuff_max": 2,
    "e_ramp": false,
    "e_reach": 2.0,
+   "e_reach_delivered": 2.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -635,10 +659,11 @@
   "2H_CLAYMORE": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "single",
-   "delivery": "flex",
+   "delivery": "melee",
    "e_channel_nonranged": false,
    "e_damage_pts": 4,
    "e_damage_spells": [
@@ -647,6 +672,7 @@
    "e_debuff_max": 0,
    "e_ramp": true,
    "e_reach": 13.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 6,
    "fit": {
     "brawl": {
@@ -686,6 +712,7 @@
   "2H_CLAYMORE_AVALON": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": true,
    "damage_pts": 10,
    "damage_scale": "group",
@@ -698,6 +725,7 @@
    "e_debuff_max": 0,
    "e_ramp": true,
    "e_reach": 6.0,
+   "e_reach_delivered": 6.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -737,10 +765,11 @@
   "2H_CLEAVER_HELL": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": true,
    "damage_pts": 6,
    "damage_scale": "group",
-   "delivery": "flex",
+   "delivery": "melee",
    "e_channel_nonranged": false,
    "e_damage_pts": 2,
    "e_damage_spells": [
@@ -749,6 +778,7 @@
    "e_debuff_max": 4,
    "e_ramp": true,
    "e_reach": 11.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -772,8 +802,8 @@
      "trio": "fits"
     },
     "kite": {
-     "gang": "situational",
-     "group": "situational",
+     "gang": "unfit",
+     "group": "unfit",
      "trio": "fits"
     }
    },
@@ -788,6 +818,7 @@
   "2H_COMBATSTAFF_MORGANA": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "group",
@@ -800,6 +831,7 @@
    "e_debuff_max": 4,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 15.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -839,6 +871,7 @@
   "2H_CROSSBOW": {
    "attackrange": 11,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "single",
@@ -851,6 +884,7 @@
    "e_debuff_max": 4,
    "e_ramp": false,
    "e_reach": 16.0,
+   "e_reach_delivered": 16.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -890,6 +924,7 @@
   "2H_CROSSBOWLARGE": {
    "attackrange": 11,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -902,6 +937,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 24.0,
+   "e_reach_delivered": 24.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -941,6 +977,7 @@
   "2H_CROSSBOWLARGE_MORGANA": {
    "attackrange": 11,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "single",
@@ -953,6 +990,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 20.0,
+   "e_reach_delivered": 20.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -992,6 +1030,7 @@
   "2H_CROSSBOW_CANNON_AVALON": {
    "attackrange": 11,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -1004,6 +1043,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 26.0,
+   "e_reach_delivered": 26.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -1043,6 +1083,7 @@
   "2H_CURSEDSTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "none",
@@ -1055,6 +1096,7 @@
    "e_debuff_max": 2,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 15.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -1094,6 +1136,7 @@
   "2H_CURSEDSTAFF_MORGANA": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "none",
@@ -1106,6 +1149,7 @@
    "e_debuff_max": 4,
    "e_ramp": false,
    "e_reach": 12.0,
+   "e_reach_delivered": 12.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -1145,6 +1189,7 @@
   "2H_DAGGERPAIR": {
    "attackrange": 1.5,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 10,
    "damage_scale": "single",
@@ -1157,6 +1202,7 @@
    "e_debuff_max": 2,
    "e_ramp": false,
    "e_reach": 3.0,
+   "e_reach_delivered": 3.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -1196,6 +1242,7 @@
   "2H_DAGGERPAIR_CRYSTAL": {
    "attackrange": 2,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "group",
@@ -1208,6 +1255,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 7.0,
+   "e_reach_delivered": 7.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -1247,6 +1295,7 @@
   "2H_DAGGER_KATAR_AVALON": {
    "attackrange": 2,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "single",
@@ -1259,6 +1308,7 @@
    "e_debuff_max": 0,
    "e_ramp": true,
    "e_reach": 6.0,
+   "e_reach_delivered": 6.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -1298,6 +1348,7 @@
   "2H_DEMONICSTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "none",
@@ -1310,6 +1361,7 @@
    "e_debuff_max": 0,
    "e_ramp": true,
    "e_reach": 22.0,
+   "e_reach_delivered": 22.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -1349,6 +1401,7 @@
   "2H_DIVINESTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -1359,6 +1412,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -1398,10 +1452,11 @@
   "2H_DOUBLEBLADEDSTAFF": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "group",
-   "delivery": "flex",
+   "delivery": "melee",
    "e_channel_nonranged": false,
    "e_damage_pts": 2,
    "e_damage_spells": [
@@ -1410,6 +1465,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -1423,18 +1479,18 @@
      "trio": "fits"
     },
     "clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "situational",
      "trio": "fits"
     },
     "clap_kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "situational",
      "trio": "fits"
     },
     "kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "unfit",
+     "group": "unfit",
      "trio": "fits"
     }
    },
@@ -1449,6 +1505,7 @@
   "2H_DOUBLEBLADEDSTAFF_CRYSTAL": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "group",
@@ -1461,6 +1518,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 9.0,
+   "e_reach_delivered": 9.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -1500,6 +1558,7 @@
   "2H_DUALAXE_KEEPER": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -1512,6 +1571,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 8.0,
+   "e_reach_delivered": 8.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -1551,6 +1611,7 @@
   "2H_DUALCROSSBOW_CRYSTAL": {
    "attackrange": 11,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "group",
@@ -1563,6 +1624,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 8.0,
+   "e_reach_delivered": 8.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -1602,6 +1664,7 @@
   "2H_DUALCROSSBOW_HELL": {
    "attackrange": 11,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 10,
    "damage_scale": "single",
@@ -1614,6 +1677,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 13.0,
+   "e_reach_delivered": 13.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -1653,6 +1717,7 @@
   "2H_DUALHAMMER_HELL": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 2,
    "damage_scale": "none",
@@ -1665,6 +1730,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -1704,6 +1770,7 @@
   "2H_DUALMACE_AVALON": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -1714,6 +1781,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -1753,6 +1821,7 @@
   "2H_DUALSCIMITAR_UNDEAD": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": true,
    "damage_pts": 10,
    "damage_scale": "group",
@@ -1765,6 +1834,7 @@
    "e_debuff_max": 2,
    "e_ramp": true,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -1804,6 +1874,7 @@
   "2H_DUALSICKLE_UNDEAD": {
    "attackrange": 1.5,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "single",
@@ -1816,6 +1887,7 @@
    "e_debuff_max": 0,
    "e_ramp": true,
    "e_reach": 7.0,
+   "e_reach_delivered": 7.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -1855,6 +1927,7 @@
   "2H_DUALSWORD": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "group",
@@ -1867,6 +1940,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 13.0,
+   "e_reach_delivered": 13.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -1906,6 +1980,7 @@
   "2H_ENIGMATICORB_MORGANA": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 2,
    "damage_scale": "none",
@@ -1916,6 +1991,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -1955,6 +2031,7 @@
   "2H_ENIGMATICSTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 2,
    "damage_scale": "none",
@@ -1965,6 +2042,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -2004,6 +2082,7 @@
   "2H_FIRESTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -2016,6 +2095,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 15.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -2055,6 +2135,7 @@
   "2H_FIRESTAFF_HELL": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 10,
    "damage_scale": "group",
@@ -2067,6 +2148,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 15.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -2106,6 +2188,7 @@
   "2H_FIRE_RINGPAIR_AVALON": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 10,
    "damage_scale": "group",
@@ -2118,6 +2201,7 @@
    "e_debuff_max": 4,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 15.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -2157,6 +2241,7 @@
   "2H_FLAIL": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -2167,6 +2252,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 6,
    "fit": {
     "brawl": {
@@ -2206,6 +2292,7 @@
   "2H_FROSTSTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "group",
@@ -2218,6 +2305,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 15.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -2257,6 +2345,7 @@
   "2H_FROSTSTAFF_CRYSTAL": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "group",
@@ -2269,6 +2358,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 22.0,
+   "e_reach_delivered": 22.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -2308,6 +2398,7 @@
   "2H_GLACIALSTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "group",
@@ -2320,6 +2411,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 10.0,
+   "e_reach_delivered": 10.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -2359,6 +2451,7 @@
   "2H_GLAIVE": {
    "attackrange": 4,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "single",
@@ -2369,6 +2462,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -2408,6 +2502,7 @@
   "2H_GLAIVE_CRYSTAL": {
    "attackrange": 4,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -2420,6 +2515,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 17.0,
+   "e_reach_delivered": 17.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -2459,6 +2555,7 @@
   "2H_HALBERD": {
    "attackrange": 4,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -2471,6 +2568,7 @@
    "e_debuff_max": 2,
    "e_ramp": false,
    "e_reach": 7.0,
+   "e_reach_delivered": 7.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -2510,6 +2608,7 @@
   "2H_HALBERD_MORGANA": {
    "attackrange": 4,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "group",
@@ -2522,6 +2621,7 @@
    "e_debuff_max": 4,
    "e_ramp": false,
    "e_reach": 20.0,
+   "e_reach_delivered": 20.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -2561,6 +2661,7 @@
   "2H_HAMMER": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -2571,6 +2672,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 6,
    "fit": {
     "brawl": {
@@ -2610,6 +2712,7 @@
   "2H_HAMMER_AVALON": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -2620,6 +2723,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 6,
    "fit": {
     "brawl": {
@@ -2659,6 +2763,7 @@
   "2H_HAMMER_CRYSTAL": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -2669,6 +2774,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -2708,6 +2814,7 @@
   "2H_HAMMER_UNDEAD": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -2718,6 +2825,7 @@
    "e_debuff_max": 2,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -2757,6 +2865,7 @@
   "2H_HARPOON_HELL": {
    "attackrange": 4,
    "basis": "curated_override",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "single",
@@ -2767,6 +2876,7 @@
    "e_debuff_max": 4,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -2811,6 +2921,7 @@
   "2H_HOLYSTAFF": {
    "attackrange": 9,
    "basis": "curated_override",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -2821,6 +2932,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -2865,6 +2977,7 @@
   "2H_HOLYSTAFF_CRYSTAL": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -2875,6 +2988,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -2914,6 +3028,7 @@
   "2H_HOLYSTAFF_HELL": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -2924,6 +3039,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -2963,6 +3079,7 @@
   "2H_HOLYSTAFF_UNDEAD": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -2973,6 +3090,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -3012,6 +3130,7 @@
   "2H_ICECRYSTAL_UNDEAD": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -3024,6 +3143,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 15.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -3063,6 +3183,7 @@
   "2H_ICEGAUNTLETS_HELL": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "group",
@@ -3075,6 +3196,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 14.0,
+   "e_reach_delivered": 14.0,
    "e_utility_max": 3,
    "fit": {
     "brawl": {
@@ -3114,6 +3236,7 @@
   "2H_INFERNOSTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "group",
@@ -3126,6 +3249,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 12.0,
+   "e_reach_delivered": 12.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -3165,6 +3289,7 @@
   "2H_INFERNOSTAFF_MORGANA": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -3177,6 +3302,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 15.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -3216,6 +3342,7 @@
   "2H_IRONCLADEDSTAFF": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 2,
    "damage_scale": "none",
@@ -3226,6 +3353,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -3265,6 +3393,7 @@
   "2H_IRONGAUNTLETS_HELL": {
    "attackrange": 2,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "single",
@@ -3277,6 +3406,7 @@
    "e_debuff_max": 2,
    "e_ramp": false,
    "e_reach": 2.0,
+   "e_reach_delivered": 2.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -3316,6 +3446,7 @@
   "2H_KNUCKLES_AVALON": {
    "attackrange": 1.5,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 10,
    "damage_scale": "group",
@@ -3328,6 +3459,7 @@
    "e_debuff_max": 4,
    "e_ramp": false,
    "e_reach": 12.0,
+   "e_reach_delivered": 12.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -3367,10 +3499,11 @@
   "2H_KNUCKLES_CRYSTAL": {
    "attackrange": 1.5,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "single",
-   "delivery": "flex",
+   "delivery": "melee",
    "e_channel_nonranged": false,
    "e_damage_pts": 4,
    "e_damage_spells": [
@@ -3379,6 +3512,7 @@
    "e_debuff_max": 2,
    "e_ramp": false,
    "e_reach": 9.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -3418,6 +3552,7 @@
   "2H_KNUCKLES_HELL": {
    "attackrange": 1.5,
    "basis": "curated_override",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 10,
    "damage_scale": "group",
@@ -3430,6 +3565,7 @@
    "e_debuff_max": 2,
    "e_ramp": false,
    "e_reach": 10.0,
+   "e_reach_delivered": 10.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -3474,6 +3610,7 @@
   "2H_KNUCKLES_KEEPER": {
    "attackrange": 1.5,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": true,
    "damage_pts": 10,
    "damage_scale": "group",
@@ -3486,6 +3623,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 11.0,
+   "e_reach_delivered": 11.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -3525,6 +3663,7 @@
   "2H_KNUCKLES_MORGANA": {
    "attackrange": 1.5,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": true,
    "damage_pts": 10,
    "damage_scale": "group",
@@ -3537,6 +3676,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -3576,6 +3716,7 @@
   "2H_KNUCKLES_SET1": {
    "attackrange": 1.5,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 10,
    "damage_scale": "group",
@@ -3588,6 +3729,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 3.0,
+   "e_reach_delivered": 3.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -3627,6 +3769,7 @@
   "2H_KNUCKLES_SET2": {
    "attackrange": 1.5,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 12,
    "damage_scale": "group",
@@ -3639,6 +3782,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -3678,6 +3822,7 @@
   "2H_KNUCKLES_SET3": {
    "attackrange": 1.5,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 10,
    "damage_scale": "group",
@@ -3690,6 +3835,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 13.0,
+   "e_reach_delivered": 13.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -3729,6 +3875,7 @@
   "2H_LONGBOW": {
    "attackrange": 13,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -3741,6 +3888,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 15.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -3780,6 +3928,7 @@
   "2H_LONGBOW_UNDEAD": {
    "attackrange": 13,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "single",
@@ -3792,6 +3941,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -3831,6 +3981,7 @@
   "2H_MACE": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -3841,6 +3992,7 @@
    "e_debuff_max": 6,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 6,
    "fit": {
     "brawl": {
@@ -3880,6 +4032,7 @@
   "2H_MACE_MORGANA": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -3890,6 +4043,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 6,
    "fit": {
     "brawl": {
@@ -3929,6 +4083,7 @@
   "2H_NATURESTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 2,
    "damage_scale": "none",
@@ -3939,6 +4094,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -3978,6 +4134,7 @@
   "2H_NATURESTAFF_HELL": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 2,
    "damage_scale": "none",
@@ -3988,6 +4145,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -4027,6 +4185,7 @@
   "2H_NATURESTAFF_KEEPER": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 2,
    "damage_scale": "none",
@@ -4037,6 +4196,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -4076,6 +4236,7 @@
   "2H_POLEHAMMER": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -4086,6 +4247,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 6,
    "fit": {
     "brawl": {
@@ -4125,10 +4287,11 @@
   "2H_QUARTERSTAFF": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 2,
    "damage_scale": "none",
-   "delivery": "flex",
+   "delivery": "melee",
    "e_channel_nonranged": false,
    "e_damage_pts": 2,
    "e_damage_spells": [
@@ -4137,6 +4300,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 13.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 6,
    "fit": {
     "brawl": {
@@ -4176,6 +4340,7 @@
   "2H_QUARTERSTAFF_AVALON": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "group",
@@ -4188,6 +4353,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 20.0,
+   "e_reach_delivered": 20.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -4227,6 +4393,7 @@
   "2H_RAM_KEEPER": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -4237,6 +4404,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 6,
    "fit": {
     "brawl": {
@@ -4276,6 +4444,7 @@
   "2H_REPEATINGCROSSBOW_UNDEAD": {
    "attackrange": 11,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -4288,6 +4457,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 15.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -4327,6 +4497,7 @@
   "2H_ROCKSTAFF_KEEPER": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 2,
    "damage_scale": "none",
@@ -4337,6 +4508,7 @@
    "e_debuff_max": 4,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -4376,6 +4548,7 @@
   "2H_SCYTHE_CRYSTAL": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "group",
@@ -4388,6 +4561,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 3.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -4427,6 +4601,7 @@
   "2H_SCYTHE_HELL": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 10,
    "damage_scale": "group",
@@ -4439,6 +4614,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -4478,6 +4654,7 @@
   "2H_SHAPESHIFTER_AVALON": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "group",
@@ -4490,6 +4667,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -4529,6 +4707,7 @@
   "2H_SHAPESHIFTER_CRYSTAL": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "single",
@@ -4541,6 +4720,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -4580,6 +4760,7 @@
   "2H_SHAPESHIFTER_HELL": {
    "attackrange": 9,
    "basis": "curated_override",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "group",
@@ -4592,6 +4773,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -4636,6 +4818,7 @@
   "2H_SHAPESHIFTER_KEEPER": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -4646,6 +4829,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -4685,6 +4869,7 @@
   "2H_SHAPESHIFTER_MORGANA": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "single",
@@ -4697,6 +4882,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -4736,6 +4922,7 @@
   "2H_SHAPESHIFTER_SET1": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "single",
@@ -4748,6 +4935,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -4787,6 +4975,7 @@
   "2H_SHAPESHIFTER_SET2": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -4797,6 +4986,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -4836,6 +5026,7 @@
   "2H_SHAPESHIFTER_SET3": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "group",
@@ -4848,6 +5039,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -4887,6 +5079,7 @@
   "2H_SKULLORB_HELL": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "none",
@@ -4899,6 +5092,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 15.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -4938,6 +5132,7 @@
   "2H_SPEAR": {
    "attackrange": 4,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "single",
@@ -4948,6 +5143,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -4987,10 +5183,11 @@
   "2H_TRIDENT_UNDEAD": {
    "attackrange": 4,
    "basis": "curated_override",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "group",
-   "delivery": "flex",
+   "delivery": "melee",
    "e_channel_nonranged": false,
    "e_damage_pts": 2,
    "e_damage_spells": [
@@ -4999,6 +5196,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 12.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -5012,17 +5210,17 @@
      "trio": "fits"
     },
     "clap": {
-     "gang": "fits",
+     "gang": "situational",
      "group": "unfit",
      "trio": "fits"
     },
     "clap_kite": {
-     "gang": "fits",
+     "gang": "situational",
      "group": "unfit",
      "trio": "fits"
     },
     "kite": {
-     "gang": "fits",
+     "gang": "unfit",
      "group": "unfit",
      "trio": "fits"
     }
@@ -5043,6 +5241,7 @@
   "2H_TWINSCYTHE_HELL": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "group",
@@ -5055,6 +5254,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 25.0,
+   "e_reach_delivered": 25.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -5094,6 +5294,7 @@
   "2H_WARBOW": {
    "attackrange": 13,
    "basis": "curated_override",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -5106,6 +5307,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 26.0,
+   "e_reach_delivered": 26.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -5150,6 +5352,7 @@
   "2H_WILDSTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 2,
    "damage_scale": "none",
@@ -5160,6 +5363,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -5199,6 +5403,7 @@
   "MAIN_1HCROSSBOW": {
    "attackrange": 11,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "group",
@@ -5211,6 +5416,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 11.0,
+   "e_reach_delivered": 11.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -5250,6 +5456,7 @@
   "MAIN_ARCANESTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "none",
@@ -5262,6 +5469,7 @@
    "e_debuff_max": 4,
    "e_ramp": false,
    "e_reach": 25.0,
+   "e_reach_delivered": 25.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -5301,6 +5509,7 @@
   "MAIN_ARCANESTAFF_UNDEAD": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "group",
@@ -5313,6 +5522,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 14.0,
+   "e_reach_delivered": 14.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -5352,6 +5562,7 @@
   "MAIN_AXE": {
    "attackrange": 3,
    "basis": "curated_override",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "single",
@@ -5364,6 +5575,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 18.0,
+   "e_reach_delivered": 18.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -5408,6 +5620,7 @@
   "MAIN_CURSEDSTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "none",
@@ -5420,6 +5633,7 @@
    "e_debuff_max": 0,
    "e_ramp": true,
    "e_reach": 11.0,
+   "e_reach_delivered": 11.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -5459,6 +5673,7 @@
   "MAIN_CURSEDSTAFF_AVALON": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "none",
@@ -5471,6 +5686,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 15.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -5510,6 +5726,7 @@
   "MAIN_CURSEDSTAFF_CRYSTAL": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "none",
@@ -5522,6 +5739,7 @@
    "e_debuff_max": 4,
    "e_ramp": false,
    "e_reach": 3.0,
+   "e_reach_delivered": 3.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -5561,6 +5779,7 @@
   "MAIN_CURSEDSTAFF_UNDEAD": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "none",
@@ -5573,6 +5792,7 @@
    "e_debuff_max": 4,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 15.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -5612,6 +5832,7 @@
   "MAIN_DAGGER": {
    "attackrange": 2,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "single",
@@ -5624,6 +5845,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -5663,6 +5885,7 @@
   "MAIN_DAGGER_HELL": {
    "attackrange": 2,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -5675,6 +5898,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 3.0,
+   "e_reach_delivered": 3.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -5714,6 +5938,7 @@
   "MAIN_FIRESTAFF": {
    "attackrange": 9,
    "basis": "curated_override",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 10,
    "damage_scale": "group",
@@ -5726,6 +5951,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 15.0,
+   "e_reach_delivered": 15.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -5770,6 +5996,7 @@
   "MAIN_FIRESTAFF_CRYSTAL": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "group",
@@ -5782,6 +6009,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 14.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -5821,6 +6049,7 @@
   "MAIN_FIRESTAFF_KEEPER": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -5833,6 +6062,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 25.0,
+   "e_reach_delivered": 25.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -5872,6 +6102,7 @@
   "MAIN_FROSTSTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "group",
@@ -5884,6 +6115,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 12.0,
+   "e_reach_delivered": 12.0,
    "e_utility_max": 6,
    "fit": {
     "brawl": {
@@ -5923,6 +6155,7 @@
   "MAIN_FROSTSTAFF_AVALON": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -5933,6 +6166,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -5972,18 +6206,20 @@
   "MAIN_FROSTSTAFF_KEEPER": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
-   "damage_pts": 2,
+   "damage_pts": 3,
    "damage_scale": "none",
    "delivery": "ranged",
    "e_channel_nonranged": false,
-   "e_damage_pts": 2,
+   "e_damage_pts": 3,
    "e_damage_spells": [
     "ICEROCK_EXPLODE"
    ],
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 26.0,
+   "e_reach_delivered": 26.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -6023,6 +6259,7 @@
   "MAIN_HAMMER": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -6033,6 +6270,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -6072,6 +6310,7 @@
   "MAIN_HOLYSTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -6082,6 +6321,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -6121,6 +6361,7 @@
   "MAIN_HOLYSTAFF_AVALON": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -6131,6 +6372,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 6,
    "fit": {
     "brawl": {
@@ -6170,6 +6412,7 @@
   "MAIN_HOLYSTAFF_MORGANA": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -6180,6 +6423,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -6219,6 +6463,7 @@
   "MAIN_MACE": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -6229,6 +6474,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -6268,6 +6514,7 @@
   "MAIN_MACE_CRYSTAL": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 2,
    "damage_scale": "none",
@@ -6280,6 +6527,7 @@
    "e_debuff_max": 4,
    "e_ramp": false,
    "e_reach": 3.0,
+   "e_reach_delivered": 3.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -6319,6 +6567,7 @@
   "MAIN_MACE_HELL": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 2,
    "damage_scale": "none",
@@ -6331,6 +6580,7 @@
    "e_debuff_max": 4,
    "e_ramp": false,
    "e_reach": 10.0,
+   "e_reach_delivered": 10.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -6370,6 +6620,7 @@
   "MAIN_NATURESTAFF": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -6380,6 +6631,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -6419,6 +6671,7 @@
   "MAIN_NATURESTAFF_AVALON": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -6429,6 +6682,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -6468,6 +6722,7 @@
   "MAIN_NATURESTAFF_CRYSTAL": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -6478,6 +6733,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -6517,6 +6773,7 @@
   "MAIN_NATURESTAFF_KEEPER": {
    "attackrange": 9,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -6527,6 +6784,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {
@@ -6566,10 +6824,11 @@
   "MAIN_RAPIER_MORGANA": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 10,
    "damage_scale": "single",
-   "delivery": "flex",
+   "delivery": "melee",
    "e_channel_nonranged": false,
    "e_damage_pts": 8,
    "e_damage_spells": [
@@ -6578,6 +6837,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 11.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -6617,6 +6877,7 @@
   "MAIN_ROCKMACE_KEEPER": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 0,
    "damage_scale": "none",
@@ -6627,6 +6888,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 6,
    "fit": {
     "brawl": {
@@ -6666,6 +6928,7 @@
   "MAIN_SCIMITAR_MORGANA": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": true,
    "damage_pts": 8,
    "damage_scale": "group",
@@ -6678,6 +6941,7 @@
    "e_debuff_max": 0,
    "e_ramp": true,
    "e_reach": 20.0,
+   "e_reach_delivered": 20.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -6717,6 +6981,7 @@
   "MAIN_SPEAR": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 4,
    "damage_scale": "single",
@@ -6727,6 +6992,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -6766,6 +7032,7 @@
   "MAIN_SPEAR_KEEPER": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": false,
    "damage_pts": 7,
    "damage_scale": "group",
@@ -6778,6 +7045,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 22.0,
+   "e_reach_delivered": 22.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -6817,10 +7085,11 @@
   "MAIN_SPEAR_LANCE_AVALON": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 6,
    "damage_scale": "group",
-   "delivery": "flex",
+   "delivery": "melee",
    "e_channel_nonranged": false,
    "e_damage_pts": 2,
    "e_damage_spells": [
@@ -6829,6 +7098,7 @@
    "e_debuff_max": 4,
    "e_ramp": false,
    "e_reach": 16.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 4,
    "fit": {
     "brawl": {
@@ -6842,18 +7112,18 @@
      "trio": "fits"
     },
     "clap": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "situational",
      "trio": "fits"
     },
     "clap_kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "situational",
+     "group": "situational",
      "trio": "fits"
     },
     "kite": {
-     "gang": "fits",
-     "group": "fits",
+     "gang": "unfit",
+     "group": "unfit",
      "trio": "fits"
     }
    },
@@ -6868,6 +7138,7 @@
   "MAIN_SWORD": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": true,
    "conditional_payload": false,
    "damage_pts": 10,
    "damage_scale": "single",
@@ -6880,6 +7151,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 8.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 2,
    "fit": {
     "brawl": {
@@ -6919,6 +7191,7 @@
   "MAIN_SWORD_CRYSTAL": {
    "attackrange": 3,
    "basis": "derived",
+   "caster_moves": false,
    "conditional_payload": true,
    "damage_pts": 10,
    "damage_scale": "group",
@@ -6931,6 +7204,7 @@
    "e_debuff_max": 0,
    "e_ramp": false,
    "e_reach": 0.0,
+   "e_reach_delivered": 0.0,
    "e_utility_max": 0,
    "fit": {
     "brawl": {

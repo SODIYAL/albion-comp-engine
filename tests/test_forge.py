@@ -498,13 +498,14 @@ def t_primary_heal():
 
 
 def t_style_bands():
-    """F16: clap one healer per five, floor-rounded minimum, no maximum
-    (owner 2026-09-08 supersedes the 2026-08-23 cap). Kite may field more
-    than its existing minimum; brawl and hybrid rules are unchanged."""
+    """F16: one healer per five members, floor-rounded MINIMUM, no maximum
+    (owner 2026-09-08; extended the same day to brawl and both hybrids -
+    "sure on healers at 25"). Kite keeps its lower minima without a cap;
+    balanced keeps the base band."""
     ok = True
     lines = []
-    for style, lo, hi in (("brawl", 3, 4), ("clap", 4, 20), ("kite", 2, 20),
-                          ("clap_kite", 3, 4)):
+    for style, lo, hi in (("brawl", 4, 20), ("clap", 4, 20), ("kite", 2, 20),
+                          ("clap_kite", 4, 20)):
         e = Engine(content="blackzone_roam", size=20, style=style)
         r = e.forge(20)
         healers = sum(1 for w in r["party"] if e.role_of(w) == "healer")
@@ -537,9 +538,52 @@ def t_style_bands():
     if not rc25["feasible"] or len(rc25["party"]) != 25 or hc25 < 5:
         ok = False
     lines.append(f"castle clap@25: {hc25}h, feasible={rc25['feasible']}")
-    check("F16 clap healer minimum floor(size/5), kite flexible, "
-          "brawl/hybrid bands preserved; full 25-person castle forge", ok,
+    # the per-five minimum on brawl and both hybrids (owner 2026-09-08)
+    for st in ("brawl", "brawl_clap", "clap_kite"):
+        for size, minimum in ((20, 4), (24, 4), (25, 5)):
+            band = Engine(content="castle", size=size, style=st)._band["healer"]
+            if band != {"min": minimum}:
+                ok = False
+                lines.append(f"{st}@{size}: {band}")
+        eb25 = Engine(content="castle", size=25, style=st)
+        rb25 = eb25.forge(25)
+        hb25 = sum(eb25.role_of(w) == "healer" for w in rb25["party"])
+        if not rb25["feasible"] or hb25 < 5:
+            ok = False
+        lines.append(f"castle {st}@25: {hb25}h")
+    eb = Engine(content="castle", size=25)
+    if eb._band["healer"] != {"min": 3, "max": 5}:
+        ok = False
+        lines.append(f"balanced@25 band changed: {eb._band['healer']}")
+    check("F16 one healer per five as a minimum on clap, brawl and both "
+          "hybrids (4 at 20-24, 5 at 25-29, no cap); kite keeps its minima; "
+          "balanced keeps the base band; full 25-person castle forges", ok,
           "; ".join(lines))
+
+
+def t_double_bladed_gank():
+    """F27 (owner 2026-09-08: "double bladed is a good ganking weapon but
+    not a good brawl weapon. but you need to check the actual stats").
+    Checked against the killer-party harvest the same day: 24 parties of
+    10+ field it, 9 of them gank/dive squads, the rest carrying ONE inside
+    a clap roster; 11 distinct wearers at 10+ (gank kits: Hunter Shoes,
+    Graveguard), none at 20+. The exclusion (composition.yaml, evidence-
+    gated) bars 10+ generation; the gang band stays open (1.6% of 4-9 man
+    killer parties); manual picks still score."""
+    dbs = "2H_DOUBLEBLADEDSTAFF"
+    e25 = Engine(content="castle", size=25, style="brawl")
+    r = e25.forge(25)
+    e10 = Engine(content="blackzone_roam", size=10)
+    e7 = Engine(content="castle_outpost", size=7)
+    manual = e25.comp_score(["MAIN_HOLYSTAFF_AVALON", "2H_MACE", dbs])
+    check("F27 Double Bladed is barred from 10+ generation (gank weapon, "
+          "owner 2026-09-08 + harvest audit), open at 7; the castle-25 brawl "
+          "forge fields none; a manual Double Bladed still scores",
+          dbs not in set(e25.suggest_pool()) and dbs not in set(e10.suggest_pool())
+          and dbs in set(e7.suggest_pool()) and dbs not in r["party"]
+          and r["feasible"] and manual == manual and manual != 0.0,
+          f"in forge={dbs in r['party']} feasible={r['feasible']} "
+          f"manual={manual:.3f}")
 
 
 def t_generation_fit():
@@ -966,6 +1010,7 @@ if __name__ == "__main__":
     t_cost_gate()
     t_primary_heal()
     t_style_bands()
+    t_double_bladed_gank()
     t_generation_fit()
     t_dup_and_clump()
     t_curse_slot_earned()

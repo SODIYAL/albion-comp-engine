@@ -1522,6 +1522,67 @@ def run():
           f"table={table_ok} royal={royal_j} hellion={hellion} "
           f"clap10 royal={ci_royal.get('style')} hellion={ci_hell.get('style')}")
 
+    # T44 - Hoarfrost Avalanche burst_aoe RULED 3 (owner 2026-09-08, "sure
+    # on 3 ... you r hoarfrost ruling"). The 2026-08-20 rescore HELD it at
+    # 2 because +0.5 unit tipped the blap tank slot in V4 (69% vs 70%);
+    # re-measured 2026-09-08 with the structure that landed since, V4 is
+    # byte-identical at 2 and 3 (17/23 actual_gear), so the hold was a
+    # symptom of missing team structure. The ruling lives in MASTERSHEET
+    # tune:sheets; the sheet still reads 2 and says so.
+    hf = "MAIN_FROSTSTAFF_KEEPER"
+    e20h = Engine(content="blackzone_roam", size=20)
+    check("T44 Hoarfrost burst_aoe ruled 3 via MASTERSHEET (owner 2026-09-08); "
+          "the 2026-08-20 V4 hold is lifted",
+          e20h.caps_of(hf).get("burst_aoe") == 3
+          and E.weapons[hf]["capabilities"]["burst_aoe"] == 3,
+          f"burst_aoe={e20h.caps_of(hf).get('burst_aoe')}")
+
+    # T45 - reach is PAYLOAD reach, not travel (owner 2026-09-08: "yes when
+    # an e lands the caster should read as melee delivery"). The dumps'
+    # dash node (spell_index caster_moves) marks every leap / charge; such
+    # an E counts toward flex delivery only as a FLEX BOMB - the owner's
+    # 2026-09-04 exception (Realmbreaker, Rift Glaive: unconditional group
+    # payload at the job bar). Double Bladed's Soaring Swipe (80 damage +
+    # a slow, e_dmg 2) and Carving's dash are melee delivery; Spiked
+    # Gauntlets' arc and Grailseeker's Soul Shaker move nothing (the owner:
+    # "grailseeker e does not move the caster, its like one of the longest
+    # range snares") and keep flex / standoff. Harvest, same day:
+    # Realmbreaker in 83% of 20+ clap killer parties, Rift Glaive 25%,
+    # Double Bladed 0% (11 wearers at 10+, none at 20+).
+    e20d = Engine(content="castle", size=20, style="clap")
+    pool20 = set(e20d.suggest_pool())
+    sfd = lambda w: e20d.weapons[w]["style_fit"]  # noqa: E731
+    dbs, rb, rg = "2H_DOUBLEBLADEDSTAFF", "2H_AXE_AVALON", "2H_GLAIVE_CRYSTAL"
+    sg, gs, cv = "2H_KNUCKLES_SET3", "2H_QUARTERSTAFF_AVALON", "2H_CLEAVER_HELL"
+    check("T45 payload reach: a caster-moving E is melee delivery unless it "
+          "is a flex bomb - Double Bladed + Carving melee (clap situational, "
+          "kite unfit for the Double Bladed carrier); Realmbreaker + Rift "
+          "Glaive keep flex and the clap-20 pool; Spiked Gauntlets and "
+          "Grailseeker move nothing (Grailseeker stays a standoff tool)",
+          sfd(dbs)["delivery"] == "melee" and sfd(dbs)["caster_moves"]
+          and sfd(dbs)["fit"]["clap"]["group"] == "situational"
+          and sfd(dbs)["fit"]["kite"]["group"] == "unfit"
+          and dbs not in pool20
+          and sfd(cv)["delivery"] == "melee" and sfd(cv)["caster_moves"]
+          and sfd(rb)["delivery"] == "flex" and sfd(rb)["caster_moves"]
+          and rb in pool20
+          and sfd(rg)["delivery"] == "flex" and sfd(rg)["caster_moves"]
+          and rg in pool20
+          and sfd(sg)["delivery"] == "flex" and not sfd(sg)["caster_moves"]
+          and sfd(gs)["standoff_e"] and not sfd(gs)["caster_moves"],
+          f"dbs={sfd(dbs)['delivery']}/{sfd(dbs)['fit']['clap']['group']} "
+          f"carving={sfd(cv)['delivery']} realm={sfd(rb)['delivery']} "
+          f"rift={sfd(rg)['delivery']} spiked={sfd(sg)['delivery']} "
+          f"grail standoff={sfd(gs)['standoff_e']}")
+
+    # T46 - the generated prior's bucket rule mirrors the engine's
+    # size_bucket at every party size the harvest can carry.
+    import derive_meta_prior as dmp
+    bucket_ok = all(dmp.bucket_of(s) == Engine(content="castle", size=s).size_bucket()
+                    for s in range(2, 41))
+    check("T46 derive_meta_prior.bucket_of mirrors Engine.size_bucket for "
+          "party sizes 2-40", bucket_ok, "")
+
     print("=" * 74)
     passed = sum(1 for _, ok, _ in results if ok)
     for name, ok, detail in results:

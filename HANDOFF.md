@@ -8,14 +8,20 @@ This file is the current-state handoff. `MASTERSHEET.md` is the LIVE expert cont
 
 ## What the product is
 
-Owner ruling 2026-09-08 (mastersheet review): pure clap now requires at
-least floor(size / 5) healers from five members up, with no healer cap;
-20-24 requires four and 25-29 requires five. Kite's 5-29 overrides retain
-their existing minima without enforcing the former exact low counts.
-Both ports read `styles.yaml` `role_min_per_players`; F16 covers boundaries
-and a complete 25-member castle clap forge. Double Bladed's DPS-role,
-leap-delivery and weak-E utility exemption remain under investigation;
-the full owner design rulings are at the top of MASTERSHEET.md.
+Owner rulings 2026-09-08 (the mastersheet review and the five follow-ups
+after the Codex Q&A — VALIDATION.md "2026-09-08", two sections): one
+healer per five members as a MINIMUM (no cap) on clap, brawl and both
+hybrids (kite keeps its minima, balanced the base band — an open
+question); reach is PAYLOAD reach — an E that moves the caster (dumps
+`dash` node, spell_index `caster_moves`) is melee delivery unless it is a
+flex bomb, which put Double Bladed, Carving and Daybreaker on the melee
+side and left Realmbreaker / Rift Glaive / Grailseeker untouched; Double
+Bladed is a gank weapon (24 killer parties of 10+ checked) and is
+excluded from 10+ generation; the meta prior is GENERATED from the
+killer-party harvest (`derive_meta_prior.py` -> `out/meta_prior.json`),
+replacing the hand-set seven-weapon map and the viability core list;
+every archetype chain step needs 5 voters; Hoarfrost's Avalanche burst is
+3. Full owner design rulings: the top of MASTERSHEET.md.
 
 Comp Forge does **not** score parties by simplistic role counts. Weapons are represented as capability bundles and the engine asks:
 
@@ -87,7 +93,7 @@ What a reader of this file needs:
   Windows scheduled task "CompForge overnight harvest", daily 03:00. It
   only harvests; rebuild + gates + audit + commit stay in-session. Rerun
   order after a harvest: `sample_parties` -> `audit_style_rosters` ->
-  `derive_style_bands` -> `derive_party_styles` -> `build_dataset` ->
+  `derive_style_bands` -> `derive_party_styles` -> `derive_meta_prior` -> `build_dataset` ->
   gates. Because the corpus
   grows nightly, tests pin MECHANISMS, never exact counts. A FOCUSED night
   (`-MinPlayers 10 -MaxPlayers 14`, the 5v5 / 7v7 band, owner 2026-09-08)
@@ -144,6 +150,15 @@ What a reader of this file needs:
 - **Blind round 4 graded 2026-09-08** (all twenty called; VALIDATION.md
   "Blind round 4"): 9 exact / 3 half / 1 miss of 14 callable, two
   abstentions, two gank calls. T43 pins the nine agreed rosters.
+- **Open for the owner (2026-09-08, after the five rulings):** should
+  `balanced` carry the one-per-five healer minimum too? It keeps the base
+  band and still forges 3 healers at castle 25 (the guild sheet says 4 at
+  20+ with no style attached). Carrier FLOORS: the harvest has Royal
+  Armor on 3.65% of builds in 20-59-player battles (about 0.7 per 20)
+  against the guild's "2 per 10" — which effects are needs is the owner's
+  ruling. With the healer caps gone the forge adds one healer past the
+  minimum at 25 and at kite 20 (6 / 5) — the scorer's preference, to be
+  graded, not assumed right.
 - **Open for the owner:** the GANK READ for non-ZvZ killer parties now has
   a mechanism in the owner's words ("claws, dagger pair, whispering bow -
   these are catching and dismounting the enemy type of weapons"; round 2
@@ -228,7 +243,7 @@ The production engine currently includes:
 - overstack penalties
 - capability synergies (weapon-interaction only)
 - duplicate handling, including the one verified super-additive case (`self_cost_offset_min_copies`)
-- viability exclusions / priors
+- viability exclusions (evidence-gated) and the GENERATED harvest meta prior (2026-09-08: killer-party prevalence per size bucket, one player one vote; the hand-set map and the viability core list are retired)
 - Focus Fire / Resilience mechanics where modeled
 - per-weapon Resilience Penetration (cited wiki table wired as a supply-side rebate on the single-target Focus-Fire tax)
 - geometric AoE escalation for relevant utility
@@ -264,7 +279,7 @@ Killboard prevalence, observed pairings, reference comps, build sources, and exp
 
 Popularity is not effectiveness.
 
-**Killboard display-bucket rule (2026-08-22):** the killboard strip, prevalence footnotes, cohort affinity, neighbours and families key their fight-size bucket off `usageBucket()` in `dashboard/_app.js` — `2 × PLAN()`, the size the comp is **for** — not the judged roster size. Engine judgment still runs at roster size; nothing in scoring reads `sizeBucket()` (H18 pins the shipped meta prior to the hand-set flat map).
+**Killboard display-bucket rule (2026-08-22):** the killboard strip, prevalence footnotes, cohort affinity, neighbours and families key their fight-size bucket off `usageBucket()` in `dashboard/_app.js` — `2 × PLAN()`, the size the comp is **for** — not the judged roster size. Engine judgment still runs at roster size; the one scoring reader of `sizeBucket()` is the GENERATED meta prior (2026-09-08), which `meta_of()` keys at ROSTER size — so the strip's PLAN() axis and the prior's roster axis differ by design (H18 pins the prior to the generated artifact).
 
 ## Current live UX on `main`
 

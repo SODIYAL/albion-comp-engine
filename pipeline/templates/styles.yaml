@@ -131,8 +131,15 @@ styles:
     # spread melee ball: cleaves clip ~3, damage split across whoever's in
     # reach, so few attackers stack on any one enemy
     mechanics: {expected_aoe_targets: 3, focus_attackers: 3}
-    # owner-ruled 2026-08-23: at 20, brawl runs 3-4 healers and ~5 frontline
-    # (blap's count; the style-blind band let 6 through — "too many tanks")
+    # Owner ruling 2026-09-08 ("sure on healers at 25", extending the clap
+    # rule to brawl and the hybrids): one healer per five members, rounded
+    # down, as a MINIMUM with no maximum — 4 at 20-24, 5 at 25-29. Harvest
+    # check the same day: 77% of full 20-man brawl killer parties field
+    # exactly 4 healers (n=22). Supersedes the 2026-08-23 3-4 band's cap.
+    role_min_per_players: {healer: 5}
+    # owner-ruled 2026-08-23: at 20, brawl runs ~5 frontline (blap's count;
+    # the style-blind band let 6 through — "too many tanks"); the healer
+    # entry below is replaced by role_min_per_players above.
     constraint_overrides:
       - {min_size: 20, max_size: 29, healer: {min: 3, max: 4}, frontline: {min: 4, max: 5}}
     # owner's brawl sequence: contact -> pressure -> sustain -> denial -> secure
@@ -276,6 +283,9 @@ styles:
     target_mults: {}
     # the hybrid: grind spreads damage until the clump forms, then bomb it
     mechanics: {expected_aoe_targets: 5, focus_attackers: 3}
+    # Owner ruling 2026-09-08: the one-healer-per-five minimum applies to
+    # the hybrids too (4 at 20-24, 5 at 25-29, no maximum).
+    role_min_per_players: {healer: 5}
     chain:
       - {name: Contact, caps: [engage, tankiness]}
       - {name: Grind, caps: [sustained_dps, heal_sustain]}
@@ -315,8 +325,15 @@ styles:
     # bombs on manufactured clumps between kite resets: escalation rides
     # toward the cap in the windows; focus fire stays incidental
     mechanics: {expected_aoe_targets: 6, focus_attackers: 3}
+    # Owner ruling 2026-09-08: one healer per five members as a MINIMUM, no
+    # maximum (4 at 20-24, 5 at 25-29), extending the clap rule to the
+    # hybrids. Harvest note recorded with the ruling: 55% of full 20-man
+    # clap_kite killer parties field 3 healers and 23% field 4 (n=64) — the
+    # minimum sits above the observed mode here; owner's call, on record.
+    role_min_per_players: {healer: 5}
     # owner-ruled 2026-08-24 (round 5): "clap kite at 20 doesn't need 5
-    # healers, maybe 3 or 4 max". ranged_aoe_core 7 at 20 owner-ruled
+    # healers, maybe 3 or 4 max" (the healer entry below is now replaced by
+    # role_min_per_players). ranged_aoe_core 7 at 20 owner-ruled
     # 2026-08-26 (the melee-heavy clap_kite forge was the increment-3
     # motivating defect); 15-19 is the scaled interpolation.
     constraint_overrides:

@@ -735,8 +735,11 @@ class Engine:
         participants (both sides); a party of N fights battles of roughly 2N,
         so the axis maps through 2*size (2026-08-18 — party size used to be
         compared directly against participant counts, so an 11-man read the
-        under-12-participant sample). Usage stays display-only; the same
-        bucket feeds a size-bucketed meta prior if one is ever admitted."""
+        under-12-participant sample). This bucket keys the GENERATED meta
+        prior (admitted 2026-09-08, owner ruling: one harvest prior replacing
+        both hand lists) — meta_of() reads it at ROSTER size; the dashboard's
+        usage strip keys off PLAN() instead, deliberately (HANDOFF "Killboard
+        display-bucket rule")."""
         n = 2 * self.size
         return "small" if n < 12 else "mid" if n <= 30 else "large"
 

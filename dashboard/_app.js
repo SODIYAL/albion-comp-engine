@@ -1590,7 +1590,7 @@ function renderRecDetail(recs){
           return `<div class="formula">
           <span class="k">score</span> = ${ENG.alpha}·Δfitness + ${ENG.beta}·Δsynergy + ${ENG.delta}·metaPrior ± viability/duplication<br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= ${ENG.alpha}·<b>${top.dFit.toFixed(2)}</b> + ${ENG.beta}·<b>${top.dSyn.toFixed(2)}</b> + ${ENG.delta}·<b>${top.meta.toFixed(2)}</b>${adjBit} = <b>${top.score.toFixed(2)}</b><br>
-          <span class="k">score</span> is the exact change to the party's comp score if this pick joins with the loadout above. <span class="k">metaPrior</span> and the viability tier are hand-curated guard values — real win-lift arrives in Phase 3 from battle data.
+          <span class="k">score</span> is the exact change to the party's comp score if this pick joins with the loadout above. <span class="k">metaPrior</span> is observed relevance: the weapon's share of killer parties at this fight size (one player, one vote, shrunk on thin counts, the most-fielded weapon = 1) — a tiebreak-sized nudge that never buys a floor or a seat.
         </div>`;
         })()}
           </div>
@@ -1618,10 +1618,10 @@ function renderFootnote(){
    the size this comp is FOR — PLAN(), not the roster judged so far: a
    20-man plan with 3 members picked must quote large-fight evidence, not
    small ganks, or the cohort strip stays invisible for the whole planning
-   phase. (The old rule displayed ENG.sizeBucket() to provably match the
-   meta prior's bucket — dead since H18: the shipped prior is the hand-set
-   flat map, never bucketed.) Participant axis = 2 x party size, mirroring
-   engine size_bucket. */
+   phase. (The engine's meta prior IS bucketed since 2026-09-08 and reads
+   ENG.sizeBucket() at roster size; this strip deliberately keys off PLAN()
+   — the fights the comp is FOR — so the two axes differ by design.)
+   Participant axis = 2 x party size, mirroring engine size_bucket. */
 const USAGE_BUCKET_LABEL = { small: "small", mid: "mid-size", large: "large" };
 function usageBucket(){
   const n = 2 * PLAN();

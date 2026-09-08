@@ -1251,6 +1251,43 @@ def t_chain_guard():
           f"a={sel_a} b={sel_b} c={sel_c}")
 
 
+
+def t_chain_step_voters():
+    # R35 (owner 2026-09-08, "ok on arcane helmet"): every archetype chain
+    # step's pick must be worn by CHAIN_STEP_MIN_VOTERS (5) DISTINCT
+    # players — the same floor the tier modal and the cell chest step carry.
+    # The case: Arcane Staff's clap cell chained Knight Armor (10 voters)
+    # into a Judicator Helmet worn by 4 people and fronted it over the
+    # band's Assassin Hood (19 same-chest wearers); a 4-player pocket passed
+    # the 20%-share guard because shares hide thin counts.
+    import importlib.util as _ilu
+    spec = _ilu.spec_from_file_location(
+        "bd", os.path.join(ROOT, "pipeline", "build_dataset.py"))
+    bd = _ilu.module_from_spec(spec)
+    spec.loader.exec_module(bd)
+    gear = {g: {"gear_class": "plate"} for g in ("CHEST_A", "HELM_A", "HELM_X")}
+    ident = lambda v: v if v in gear else None  # noqa: E731
+
+    def population(n_helm_a):
+        # n_helm_a players wear HELM_A once each (one vote apiece); three
+        # other players wear HELM_X twice each at half weight (one vote
+        # apiece) — HELM_A is the modal head by votes (n vs 3) and clears
+        # the share guards; only the voter floor can stop it.
+        pop = [({"Armor": "CHEST_A", "Head": "HELM_A"}, 1.0, f"a{i}")
+               for i in range(n_helm_a)]
+        for i in range(3):
+            pop += [({"Armor": "CHEST_A", "Head": "HELM_X"}, 0.5, f"x{i}")] * 2
+        return pop
+    sel_thin = bd._modal_build_chain(population(4), {"plate"}, {}, gear, ident)
+    sel_ok = bd._modal_build_chain(population(5), {"plate"}, {}, gear, ident)
+    check("R35 chain step voter floor: a step whose modal item rests on 4 "
+          "players stops the chain (the Arcane Staff Judicator pocket); "
+          "5 players carry it",
+          bd.CHAIN_STEP_MIN_VOTERS == 5
+          and list(sel_thin) == ["armor"]
+          and list(sel_ok) == ["armor", "head"] and sel_ok["head"][0] == "HELM_A",
+          f"thin={sel_thin} ok={sel_ok}")
+
 def t_party_link():
     # R31 (2026-09-08, spec section 2 "Linkage"): a build links to its party
     # exactly through the analyzer's `party` index, and — for artifacts
@@ -1569,6 +1606,7 @@ if __name__ == "__main__":
     t_one_player_one_vote()
     t_doctrine_bands()
     t_chain_guard()
+    t_chain_step_voters()
     t_party_link()
     t_party_styles()
     t_style_cells()

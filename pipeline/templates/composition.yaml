@@ -221,30 +221,40 @@ viability:
         source: "owner ruling 2026-08-26 (roles grading board: 'never in medium-large scale (7+)')"
         as_of: "2026-08-26"
         clears_when: "an approved canonical build for the exact weapon at party size >= 7"
-  # Additive prior (scoring.weights.viability x core_bonus) for weapons a
-  # real caller has fielded in this size class. Large list = the union of
-  # the four data/published_comps/ parties' weapon slots (battlemounts excluded).
-  # No mid/small lists yet: no curated comps at those sizes exist — PROVISIONAL,
-  # empty means neutral, never a penalty.
+    - weapons: [2H_DOUBLEBLADEDSTAFF]
+      min_size: 10
+      allow: {}
+      evidence:
+        reason: >
+          A ganking weapon, not a group damage seat. Owner 2026-09-08:
+          "double bladed is a good ganking weapon but not a good brawl
+          weapon. but you need to check the actual stats." Checked the same
+          day against the killer-party harvest (2,042 battles): 24 parties
+          of 10+ field it — 9 are gank/dive squads (Bear Paws / Deathgivers
+          / Claws / Dagger Pair cores in 21-43-player fights, 0-2 healers)
+          and the rest carry ONE Double Bladed inside a 12-20 man clap or
+          clap-kite roster; 11 distinct wearers at 10+, none at 20+, in gank
+          kits (Hunter Shoes 6 of 11, Graveguard 5 of 11, item power
+          1030-1230). Its E now derives MELEE delivery (a leap lands where
+          the body lands), which bars clap/kite generation on its own; this
+          entry bars the brawl damage seat the owner rejected ("its E
+          insufficient to earn a brawl damage seat over other
+          quarterstaffs"). The gang band stays open: 1.6% of 4-9 man
+          killer parties, 18 players.
+        source: "owner ruling 2026-09-08 + party_rosters.json audit (tests/VALIDATION.md 2026-09-08, 'Five rulings after the Codex review')"
+        as_of: "2026-09-08"
+        clears_when: "an approved canonical build for the exact weapon at party size >= 10"
+  # RETIRED 2026-09-08 (owner: "sure" to one harvest prior replacing both
+  # hand lists — this core list and scoring.yaml's seven-weapon meta prior).
+  # Observed relevance is now the GENERATED, size-bucketed meta prior
+  # (pipeline/derive_meta_prior.py -> out/meta_prior.json: killer-party
+  # prevalence per fight-size bucket, one player one vote, shrunk toward
+  # zero on thin counts, capped at 1.0). `core` stays a valid, EMPTY key so
+  # scoring.weights.viability reads 0 for every weapon; nothing here is
+  # hand-listed any more.
   core_bonus: 1.0
-  core_min_size: 10   # the `large` list below applies at party size >= this
-  core:
-    large:   # size >= 10
-      [2H_HAMMER_AVALON, 2H_SHAPESHIFTER_KEEPER, MAIN_ARCANESTAFF,
-       MAIN_ROCKMACE_KEEPER, 2H_ARCANESTAFF, 2H_POLEHAMMER,
-       MAIN_HOLYSTAFF_AVALON, 2H_HOLYSTAFF_CRYSTAL, 2H_DUALMACE_AVALON,
-       2H_ARCANESTAFF_HELL, 2H_ICECRYSTAL_UNDEAD, 2H_KNUCKLES_SET3,
-       2H_AXE_AVALON, 2H_HARPOON_HELL, MAIN_ARCANESTAFF_UNDEAD,
-       2H_CURSEDSTAFF_MORGANA, 2H_FIRE_RINGPAIR_AVALON,
-       MAIN_CURSEDSTAFF_CRYSTAL, 2H_ICEGAUNTLETS_HELL,
-       2H_ENIGMATICORB_MORGANA, MAIN_CURSEDSTAFF_UNDEAD,
-       MAIN_FROSTSTAFF_KEEPER, 2H_SHAPESHIFTER_SET2, 2H_BOW_HELL,
-       2H_GLAIVE_CRYSTAL, 2H_HAMMER, 2H_SHAPESHIFTER_CRYSTAL,
-       2H_NATURESTAFF_KEEPER, 2H_CLEAVER_HELL, 2H_MACE_MORGANA, 2H_MACE,
-       2H_ROCKSTAFF_KEEPER, MAIN_MACE_CRYSTAL, MAIN_MACE,
-       2H_HALBERD_MORGANA, MAIN_DAGGER_HELL, MAIN_SCIMITAR_MORGANA,
-       2H_KNUCKLES_KEEPER, MAIN_RAPIER_MORGANA, 2H_HOLYSTAFF_UNDEAD,
-       2H_NATURESTAFF_HELL]
+  core_min_size: 10   # the `core` lists (none) would apply at party size >= this
+  core: {}
 
 # ---------------------------------------------------------------------------
 # Size physics — replaces the linear grow() extrapolation (removed
