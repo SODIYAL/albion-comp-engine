@@ -23,6 +23,27 @@
 # (schtasks.exe chokes on the space in the repo path.) Remove with:
 #   Unregister-ScheduledTask -TaskName "CompForge overnight harvest" -Confirm:$false
 # Logs: pipeline/out/fetch_logs/harvest-<date>.log (gitignored).
+#
+# FOCUSED NIGHT (owner 2026-09-08: "focus on 7v7 fights and 5v5 fights"):
+# pass a fight-size band and the script runs ONE pass over that band instead
+# of the two floors, spending the whole budget on fights of that size —
+#   powershell -NoProfile -ExecutionPolicy Bypass -File pipeline/harvest_overnight.ps1 -MinPlayers 10 -MaxPlayers 14
+# (5v5 = 10 listed players, 7v7 = 14; the ceiling is a local filter on
+# albionbb's totalPlayers, see sample_parties.py). To make the 03:00 task do
+# it for one night without touching the daily registration, add a one-shot
+# task and remove it in the morning:
+#   $a = New-ScheduledTaskAction -Execute powershell.exe -Argument '-NoProfile -ExecutionPolicy Bypass -File "D:\VS Projects\Bion\pipeline\harvest_overnight.ps1" -MinPlayers 10 -MaxPlayers 14'
+#   Register-ScheduledTask -TaskName "CompForge focused harvest" -Action $a -Trigger (New-ScheduledTaskTrigger -Once -At 3am) -Settings $s -Force
+#   Unregister-ScheduledTask -TaskName "CompForge focused harvest" -Confirm:$false
+# The cache keeps everything ever fetched and the analysis reads all of it,
+# so a focused night ADDS small-fight parties to the corpus; it never
+# narrows what party_rosters.json is derived from.
+
+param(
+    [int]$MinPlayers = 0,   # >0 with MaxPlayers: one banded pass
+    [int]$MaxPlayers = 0,   # 0 = no ceiling
+    [int]$Battles = 800
+)
 
 $ErrorActionPreference = "Continue"
 $root = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
@@ -37,11 +58,19 @@ Get-ChildItem $logDir -Filter "harvest-*.log" |
 Set-Location $root
 
 "=== overnight harvest $(Get-Date -Format s) ===" | Out-File $log -Encoding utf8 -Append
-foreach ($floor in @(25, 8)) {
-    "--- pass: min-players $floor, up to 800 battles ($(Get-Date -Format s))" | Out-File $log -Encoding utf8 -Append
-    & py -3 -u pipeline/sample_parties.py --battles 800 --min-players $floor --server us 2>&1 |
+if ($MinPlayers -gt 0 -or $MaxPlayers -gt 0) {
+    if ($MinPlayers -le 0) { $MinPlayers = 8 }
+    "--- focused pass: players $MinPlayers-$MaxPlayers, up to $Battles battles ($(Get-Date -Format s))" | Out-File $log -Encoding utf8 -Append
+    & py -3 -u pipeline/sample_parties.py --battles $Battles --min-players $MinPlayers --max-players $MaxPlayers --server us 2>&1 |
         Out-File $log -Encoding utf8 -Append
     "--- pass exit $LASTEXITCODE ($(Get-Date -Format s))" | Out-File $log -Encoding utf8 -Append
+} else {
+    foreach ($floor in @(25, 8)) {
+        "--- pass: min-players $floor, up to $Battles battles ($(Get-Date -Format s))" | Out-File $log -Encoding utf8 -Append
+        & py -3 -u pipeline/sample_parties.py --battles $Battles --min-players $floor --server us 2>&1 |
+            Out-File $log -Encoding utf8 -Append
+        "--- pass exit $LASTEXITCODE ($(Get-Date -Format s))" | Out-File $log -Encoding utf8 -Append
+    }
 }
 $n = (Get-ChildItem (Join-Path $root "pipeline\out\party_cache") -File).Count
 "=== done: cache holds $n battles ($(Get-Date -Format s)) ===" | Out-File $log -Encoding utf8 -Append

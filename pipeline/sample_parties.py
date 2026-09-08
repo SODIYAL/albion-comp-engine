@@ -59,8 +59,18 @@ WHAT THIS DATA IS — AND IS NOT.
     its own.
 
 Usage:  py -3 pipeline/sample_parties.py [--battles 25] [--min-players 25]
-                                         [--max-events 120] [--server us]
+                                         [--max-players 0] [--max-events 120]
+                                         [--server us] [--pages 40]
         py -3 pipeline/sample_parties.py --pages 0     (offline re-analysis)
+
+FIGHT-SIZE BAND. `--min-players` is the discovery floor albionbb filters on;
+`--max-players` (0 = none) is a local ceiling on the listed `totalPlayers`,
+so a pass can be pointed at one size class — `--min-players 10
+--max-players 14` walks the 5v5 / 7v7 band (owner 2026-09-08: "focus on 7v7
+fights and 5v5 fights") and spends its `--battles` budget only on fights in
+the band; everything larger is skipped, not fetched. The band is a DISCOVERY
+choice: the cache keeps every battle ever fetched and `analyze()` reads all
+of it, so a banded night adds to the corpus and never narrows it.
 """
 import argparse
 import hashlib
@@ -112,7 +122,8 @@ def fetch(args, known):
     server = args.server
     seen_battles = 0
     page = 1
-    while seen_battles < args.battles and page <= 40:
+    max_pages = args.pages if args.pages and args.pages > 0 else 40
+    while seen_battles < args.battles and page <= max_pages:
         url = (f"https://api.albionbb.com/{server}/battles"
                f"?minPlayers={args.min_players}&page={page}")
         lst = get_json(url) or []
@@ -125,6 +136,8 @@ def fetch(args, known):
             total = b.get("totalPlayers") or 0
             if not bid or total < args.min_players:
                 continue
+            if args.max_players and total > args.max_players:
+                continue        # outside the requested size band
             path = os.path.join(CACHE, f"{bid}.json")
             if os.path.exists(path):
                 # schema 1 cached weapons only — re-fetch it for the builds
@@ -439,12 +452,19 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--battles", type=int, default=25)
     ap.add_argument("--min-players", type=int, default=25)
+    ap.add_argument("--max-players", type=int, default=0,
+                    help="skip listed fights above this totalPlayers "
+                         "(0 = no ceiling); --min-players 10 --max-players "
+                         "14 is the 5v5 / 7v7 band")
     ap.add_argument("--max-events", type=int, default=120,
                     help="cap per battle; a 300-man fight has ~180 kills")
     ap.add_argument("--server", default="us", choices=["us", "eu", "asia"])
     ap.add_argument("--pages", type=int, default=None,
-                    help="0 = offline re-analysis, no network")
+                    help="0 = offline re-analysis, no network; N > 0 = "
+                         "discovery page cap (default 40, 20 battles each)")
     args = ap.parse_args()
+    if args.max_players and args.max_players < args.min_players:
+        sys.exit("--max-players must be >= --min-players")
 
     ds = os.path.join(OUT, "dataset-latest.json")
     with open(ds, encoding="utf-8") as f:

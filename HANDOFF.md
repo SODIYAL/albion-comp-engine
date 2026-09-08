@@ -79,7 +79,10 @@ What a reader of this file needs:
   only harvests; rebuild + gates + audit + commit stay in-session. Rerun
   order after a harvest: `sample_parties` -> `audit_style_rosters` ->
   `derive_style_bands` -> `build_dataset` -> gates. Because the corpus
-  grows nightly, tests pin MECHANISMS, never exact counts.
+  grows nightly, tests pin MECHANISMS, never exact counts. A FOCUSED night
+  (`-MinPlayers 10 -MaxPlayers 14`, the 5v5 / 7v7 band, owner 2026-09-08)
+  runs one pass over a fight-size band; it adds to the cache, never
+  narrows the analysis.
 - **The style × size ruling** ("ok do it", four parts — VALIDATION.md):
   `derive_style_bands.py` GENERATES `templates/style_bands.yaml` from the
   labelled-roster board; `set_content` reads the band for a declared style

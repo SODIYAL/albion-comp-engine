@@ -321,7 +321,12 @@ Two scheduled jobs, two APIs, two caches — neither rebuilds or commits:
   carries the killer's party at kill time with gear → `out/party_cache/`
   and `out/party_rosters.json`. This is the kit-doctrine and style × size
   evidence. Rerun order afterwards: audit -> derive_style_bands ->
-  build_dataset -> gates.
+  build_dataset -> gates. A FOCUSED NIGHT takes a fight-size band
+  (`-MinPlayers 10 -MaxPlayers 14` = the 5v5 / 7v7 band, owner 2026-09-08)
+  and runs one pass over it; `sample_parties.py --max-players` is a local
+  ceiling on albionbb's `totalPlayers`, so the budget goes only to fights
+  in the band. The cache keeps every battle and the analysis reads all of
+  it, so a focused night adds to the corpus, never narrows it.
 - `pipeline/daily_fetch.ps1` — "AlbionCompForge Daily Fetch", daily 09:30:
   grows the albionbb battle caches with fresh GROUP fights
   (`sample_battles.py --min-players 10 --battles 120` — `--no-topup` skips
