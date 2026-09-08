@@ -1224,13 +1224,49 @@
   };
 
   CompEngine.prototype._seatKit = function (rec) {
-    /* the seat's doctrine for THIS party size (mirrors engine.py
-       _seat_kit): the gang band below 10 members when the seat has one */
+    /* the seat's doctrine for THIS party size and DECLARED style (mirrors
+       engine.py _seat_kit): the gang band below 10 members; else a declared
+       style's cell (kit_styles.<style>) laid over the band -- the band
+       fills what the cell lacks; `balanced` never reads a cell (owner
+       2026-09-08). */
     if (this.size <= DOCTRINE_GANG_MAX) {
       var gang = (rec.kit_bands || {}).gang;
       if (gang) return gang;
     }
-    return rec;
+    var cell = IDENTITY_STYLES[this.style] ? (rec.kit_styles || {})[this.style] : null;
+    if (!cell) return rec;
+    var merged = {}, k;
+    for (k in rec) merged[k] = rec[k];
+    var kit = {};
+    for (k in (rec.kit || {})) kit[k] = rec.kit[k];
+    for (k in (cell.kit || {})) kit[k] = cell.kit[k];
+    merged.kit = kit;
+    /* per-weapon tiers merge per SLOT (the band fills every slot the cell
+       lacks); a chain replaces the weapon's whole chain; the uniform
+       extension replaces per weapon -- mirrors engine.py */
+    var kw = {}, w, sl;
+    for (w in (rec.kit_weapon || {})) {
+      kw[w] = {};
+      for (sl in rec.kit_weapon[w]) kw[w][sl] = rec.kit_weapon[w][sl];
+    }
+    for (w in (cell.kit_weapon || {})) {
+      if (!kw[w]) kw[w] = {};
+      for (sl in cell.kit_weapon[w]) kw[w][sl] = cell.kit_weapon[w][sl];
+    }
+    merged.kit_weapon = kw;
+    var keys = ["kit_weapon_build", "kit_weapon_uniform"], ki;
+    for (ki = 0; ki < keys.length; ki++) {
+      var perW = {};
+      for (k in (rec[keys[ki]] || {})) perW[k] = rec[keys[ki]][k];
+      for (k in (cell[keys[ki]] || {})) perW[k] = cell[keys[ki]][k];
+      merged[keys[ki]] = perW;
+    }
+    if (cell.kit_build) merged.kit_build = cell.kit_build;
+    var sw = [];
+    for (k in (cell.kit_weapon_build || {})) sw.push(k);
+    sw.sort();
+    merged._style_arch = { weapons: sw, seat: !!cell.kit_build };
+    return merged;
   };
   CompEngine.prototype._chestUniform = function (seat, weapon) {
     /* chest classes admitted for `weapon` in `seat`: the book uniform plus
@@ -1293,13 +1329,20 @@
        pick follows what real players field — weapon's own conditional-
        modal build first, seat fallback per slot; the archetype item
        moves to the front of its slot's options. */
-    var arch = {}, archSeat = {};
+    var arch = {}, archSeat = {}, archStyled = {};
     if (role !== null) {
       var wbArch = (seatRec.kit_weapon_build || {})[weapon] || {};
       var sbArch = seatRec.kit_build || {};
       var aslot;
       for (aslot in sbArch) { arch[aslot] = sbArch[aslot]; archSeat[aslot] = true; }
       for (aslot in wbArch) { arch[aslot] = wbArch[aslot]; delete archSeat[aslot]; }
+      /* which archetype slots came from the declared style's cell
+         (2026-09-08, mirrors engine.py): the option carries observed_style */
+      var styledArch = seatRec._style_arch || { weapons: [], seat: false };
+      for (aslot in arch) {
+        if ((wbArch[aslot] && styledArch.weapons.indexOf(weapon) >= 0)
+            || (archSeat[aslot] && styledArch.seat)) archStyled[aslot] = true;
+      }
     }
     var bySlot = {}, k;
     for (k in this.gear) {
@@ -1437,6 +1480,7 @@
         for (var ai = 0; ai < ranked.length; ai++) {
           if (ranked[ai].gear === av[0]) {
             ranked[ai].observed_build = [av[1], av[2]];
+            if (archStyled[slot]) ranked[ai].observed_style = this.style;
             ranked.unshift(ranked.splice(ai, 1)[0]);
             break;
           }

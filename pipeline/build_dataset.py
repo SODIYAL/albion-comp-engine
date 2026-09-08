@@ -1595,6 +1595,22 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
         for (gid, wk_id) in sorted(kb_off):
             off_uniform.append({"id": gid, "weapon": wk_id,
                                 "build": _cite(kb_off[(gid, wk_id)])})
+        if style is not None:
+            # CELL SLOT FLOOR (2026-09-08, measured the same day: 39 of 63
+            # cells whose modal chest differed from the band's fronted an
+            # item with < 5 votes over a 70-90 vote band modal): a cell's
+            # slot exists only where its MODAL item has
+            # STYLE_CELL_MIN_VOTERS distinct players; a thin slot is absent
+            # and the engine's merge keeps the band's. Same rule for the
+            # seat aggregate.
+            for store in ([wpools[k] for k in list(wpools)] + [pools]):
+                for slot in list(store):
+                    top = max(store[slot].values(), key=lambda e: e["count"])
+                    if (top.get("players") or 0) < STYLE_CELL_MIN_VOTERS:
+                        del store[slot]
+            for wk_id in list(wpools):
+                if not wpools[wk_id]:
+                    del wpools[wk_id]
         # ---- observed build archetypes (owner ruling 2026-09-01): the
         # coherent modal build per weapon (>= 3 observed builds), with a
         # seat-level archetype over all member builds as the fallback ----
@@ -1608,10 +1624,14 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                     (uni_ext.get(wk_id) or {}).get("classes") or ())
                 sel = _modal_build_chain(wb, w_uni, effect_map, gear,
                                          normalize)
+                if style is not None and sel and                         sel.get("armor", [None, 0])[1] < STYLE_CELL_MIN_VOTERS:
+                    sel = {}   # a cell chain needs a 5-vote chest step
                 if sel:
                     kit_weapon_build[wk_id] = sel
         kit_build = _modal_build_chain(seat_builds, uni, effect_map,
                                        gear, normalize)
+        if style is not None and kit_build and                 kit_build.get("armor", [None, 0])[1] < STYLE_CELL_MIN_VOTERS:
+            kit_build = {}
         if kit_build:
             tgt["kit_build"] = kit_build
         if kit_weapon_build:

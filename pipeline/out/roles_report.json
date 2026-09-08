@@ -67192,36 +67192,12 @@
         "sources": ["killboard (2x/2p)"]
        }
       ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_PLATE_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "potion": [
        {
         "count": 6,
         "id": "T7_POTION_REVIVE",
         "players": 6,
         "sources": ["killboard (6x/6p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      },
@@ -67746,48 +67722,6 @@
     },
     "by_weapon": {
      "2H_CURSEDSTAFF_MORGANA": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_PLATE_KEEPER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_PLATE_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_MORGANA",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "head": [
        {
         "count": 5,
@@ -67802,26 +67736,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 7,
         "sources": ["killboard (7x/7p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_UNDEAD",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -68266,9 +68180,6 @@
      ]
     },
     "weapon_archetypes": {
-     "2H_CURSEDSTAFF_MORGANA": {
-      "armor": ["ARMOR_PLATE_ROYAL", 3, 7]
-     },
      "MAIN_CURSEDSTAFF_AVALON": {
       "armor": ["ARMOR_PLATE_HELL", 10, 21],
       "cape": ["CAPEITEM_SMUGGLER", 4, 5],
@@ -68493,20 +68404,6 @@
       ]
      },
      "2H_DAGGER_KATAR_AVALON": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 17,
@@ -68591,38 +68488,6 @@
         "id": "ARMOR_LEATHER_HELL",
         "players": 6,
         "sources": ["killboard (5x/6p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_BRIDGEWATCH",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_THETFORD",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_UNDEAD",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ],
       "food": [
@@ -69045,42 +68910,12 @@
         "sources": ["killboard (6x/7p)"]
        }
       ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "HEAD_PLATE_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 4,
-        "id": "OFF_SPIKEDSHIELD_MORGANA",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "potion": [
        {
         "count": 8,
         "id": "T7_POTION_REVIVE",
         "players": 8,
         "sources": ["killboard (8x/8p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
        }
       ]
      }
@@ -69577,69 +69412,7 @@
      "shoes": ["SHOES_LEATHER_ROYAL", 7, 22]
     },
     "by_weapon": {
-     "2H_HAMMER": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_PLATE_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_BRIDGEWATCH",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
      "2H_POLEHAMMER": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_PLATE_FEY",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_PLATE_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "cape": [
        {
         "count": 6,
@@ -69650,20 +69423,6 @@
        {
         "count": 2,
         "id": "CAPEITEM_FW_LYMHURST",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T8_MEAL_SANDWICH_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
        }
@@ -69688,20 +69447,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 7,
         "sources": ["killboard (7x/7p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      },
@@ -70202,20 +69947,6 @@
         "sources": ["killboard (2x/2p)"]
        }
       ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 4,
-        "id": "HEAD_PLATE_KEEPER",
-        "players": 5,
-        "sources": ["killboard (4x/5p)"]
-       }
-      ],
       "offhand": [
        {
         "count": 5,
@@ -70242,26 +69973,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 11,
         "sources": ["killboard (11x/11p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      }
@@ -70603,12 +70314,6 @@
      ]
     },
     "weapon_archetypes": {
-     "2H_HAMMER": {
-      "armor": ["ARMOR_PLATE_SET2", 2, 5]
-     },
-     "2H_POLEHAMMER": {
-      "armor": ["ARMOR_PLATE_FEY", 4, 10]
-     },
      "2H_SHAPESHIFTER_KEEPER": {
       "armor": ["ARMOR_PLATE_KEEPER", 10, 16],
       "head": ["HEAD_PLATE_SET1", 4, 10]
@@ -70635,20 +70340,6 @@
     },
     "by_weapon": {
      "2H_WILDSTAFF": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_CLOTH_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "cape": [
        {
         "count": 8,
@@ -70697,20 +70388,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 10,
         "sources": ["killboard (10x/10p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      },
@@ -71220,9 +70897,6 @@
      }
     },
     "weapon_archetypes": {
-     "2H_WILDSTAFF": {
-      "armor": ["ARMOR_CLOTH_SET2", 4, 13]
-     },
      "MAIN_HOLYSTAFF_AVALON": {
       "armor": ["ARMOR_CLOTH_AVALON", 35, 115],
       "head": ["HEAD_PLATE_SET3", 12, 36]
@@ -71580,14 +71254,6 @@
       ]
      },
      "2H_NATURESTAFF_KEEPER": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "cape": [
        {
         "count": 6,
@@ -71598,34 +71264,6 @@
        {
         "count": 2,
         "id": "CAPEITEM_FW_MARTLOCK",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_KEEPER",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
        }
@@ -71654,20 +71292,6 @@
       ]
      },
      "2H_WILDSTAFF": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_CLOTH_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "cape": [
        {
         "count": 8,
@@ -71716,26 +71340,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 10,
         "sources": ["killboard (10x/10p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_CLOTH_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -72523,19 +72127,9 @@
       "armor": ["ARMOR_CLOTH_SET2", 22, 48],
       "head": ["HEAD_LEATHER_SET3", 7, 22]
      },
-     "2H_NATURESTAFF_KEEPER": {
-      "armor": ["ARMOR_CLOTH_SET2", 3, 9]
-     },
-     "2H_WILDSTAFF": {
-      "armor": ["ARMOR_CLOTH_SET2", 4, 13]
-     },
      "MAIN_HOLYSTAFF_AVALON": {
       "armor": ["ARMOR_CLOTH_AVALON", 35, 115],
       "head": ["HEAD_PLATE_SET3", 12, 36]
-     },
-     "MAIN_NATURESTAFF": {
-      "head": ["HEAD_LEATHER_SET3", 9, 18],
-      "shoes": ["SHOES_LEATHER_SET1", 4, 8]
      }
     }
    },
@@ -72633,28 +72227,6 @@
       ]
      },
      "2H_QUARTERSTAFF": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_PLATE_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "potion": [
        {
         "count": 5,
@@ -72665,20 +72237,6 @@
        {
         "count": 2,
         "id": "T8_POTION_COOLDOWN",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_PLATE_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET2",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
        }
@@ -72830,9 +72388,6 @@
       "cape": ["CAPEITEM_SMUGGLER", 5, 6],
       "head": ["HEAD_LEATHER_SET3", 14, 16],
       "shoes": ["SHOES_PLATE_SET3", 6, 14]
-     },
-     "2H_QUARTERSTAFF": {
-      "armor": ["ARMOR_LEATHER_MORGANA", 3, 7]
      }
     }
    },
@@ -72933,34 +72488,12 @@
         "sources": ["killboard (2x/2p)"]
        }
       ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_CAERLEON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_MARTLOCK",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "food": [
        {
         "count": 9,
         "id": "T8_MEAL_STEW",
         "players": 9,
         "sources": ["killboard (9x/9p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_PLATE_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ],
       "potion": [
@@ -72982,117 +72515,19 @@
         "players": 2,
         "sources": ["killboard (2x/2p)"]
        }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
       ]
      },
      "2H_CROSSBOW": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_CLOTH_SET1",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "cape": [
        {
         "count": 5,
         "id": "CAPEITEM_MORGANA",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T8_MEAL_STEW",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_CLOTH_ROYAL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
        }
       ]
      },
      "2H_CROSSBOW_CANNON_AVALON": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_KEEPER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T8_MEAL_STEW",
-        "players": 4,
-        "sources": ["killboard (3x/4p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_FEY",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 5,
@@ -73100,37 +72535,9 @@
         "players": 5,
         "sources": ["killboard (5x/5p)"]
        }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_CLOTH_ROYAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
       ]
      },
      "2H_FIRE_RINGPAIR_AVALON": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_FEY",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 5,
@@ -73181,50 +72588,12 @@
         "sources": ["killboard (6x/6p)"]
        }
       ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T8_MEAL_STEW",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 6,
         "id": "T7_POTION_REVIVE",
         "players": 6,
         "sources": ["killboard (6x/6p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
        }
       ]
      },
@@ -73235,28 +72604,6 @@
         "id": "ARMOR_CLOTH_SET1",
         "players": 6,
         "sources": ["killboard (6x/6p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ],
       "head": [
@@ -73273,76 +72620,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 6,
         "sources": ["killboard (6x/6p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ]
-     },
-     "2H_INFERNOSTAFF": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 2,
-        "id": "CAPEITEM_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 3,
-        "id": "T7_POTION_REVIVE",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_POTION_COOLDOWN",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_CLOTH_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      },
@@ -73477,68 +72754,12 @@
         "sources": ["killboard (6x/6p)"]
        }
       ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "food": [
        {
         "count": 5,
         "id": "T8_MEAL_STEW",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_POTION_CLEANSE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_POTION_COOLDOWN",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_CLOTH_ROYAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -73591,20 +72812,6 @@
       ]
      },
      "MAIN_FROSTSTAFF": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 5,
@@ -73647,14 +72854,6 @@
        {
         "count": 2,
         "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
        }
@@ -74084,15 +73283,6 @@
       "armor": ["ARMOR_LEATHER_SET3", 5, 10],
       "head": ["HEAD_PLATE_ROYAL", 2, 5]
      },
-     "2H_CROSSBOW": {
-      "armor": ["ARMOR_CLOTH_SET1", 4, 5]
-     },
-     "2H_CROSSBOW_CANNON_AVALON": {
-      "armor": ["ARMOR_CLOTH_SET2", 2, 6]
-     },
-     "2H_FIRE_RINGPAIR_AVALON": {
-      "armor": ["ARMOR_CLOTH_AVALON", 2, 7]
-     },
      "2H_FROSTSTAFF": {
       "armor": ["ARMOR_LEATHER_AVALON", 6, 6],
       "head": ["HEAD_CLOTH_SET2", 2, 6]
@@ -74101,9 +73291,6 @@
       "armor": ["ARMOR_CLOTH_SET1", 6, 8],
       "head": ["HEAD_LEATHER_SET3", 6, 6],
       "shoes": ["SHOES_LEATHER_MORGANA", 3, 6]
-     },
-     "2H_INFERNOSTAFF": {
-      "armor": ["ARMOR_LEATHER_SET3", 2, 5]
      },
      "2H_LONGBOW": {
       "armor": ["ARMOR_CLOTH_SET2", 11, 26],
@@ -74140,14 +73327,6 @@
         "sources": ["killboard (6x/6p)"]
        }
       ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "head": [
        {
         "count": 7,
@@ -74162,20 +73341,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 9,
         "sources": ["killboard (9x/9p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -74196,20 +73361,6 @@
         "sources": ["killboard (6x/7p)"]
        }
       ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "head": [
        {
         "count": 7,
@@ -74225,73 +73376,9 @@
         "players": 6,
         "sources": ["killboard (6x/6p)"]
        }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 1,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (1x/2p)"]
-       }
       ]
      },
      "2H_ENIGMATICSTAFF": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_PLATE_KEEPER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_CLOTH_FEY",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 5,
@@ -74299,37 +73386,9 @@
         "players": 5,
         "sources": ["killboard (5x/5p)"]
        }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
       ]
      },
      "2H_HOLYSTAFF_CRYSTAL": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_PLATE_ROYAL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 7,
@@ -74372,26 +73431,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 11,
         "sources": ["killboard (11x/11p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -74654,12 +73693,6 @@
       "head": ["HEAD_LEATHER_SET3", 6, 6],
       "shoes": ["SHOES_PLATE_AVALON", 2, 6]
      },
-     "2H_ENIGMATICSTAFF": {
-      "armor": ["ARMOR_PLATE_KEEPER", 4, 7]
-     },
-     "2H_HOLYSTAFF_CRYSTAL": {
-      "armor": ["ARMOR_PLATE_ROYAL", 4, 11]
-     },
      "2H_SHAPESHIFTER_SET2": {
       "armor": ["ARMOR_PLATE_KEEPER", 20, 20],
       "cape": ["CAPEITEM_SMUGGLER", 6, 8],
@@ -74763,74 +73796,6 @@
        }
       ]
      },
-     "2H_QUARTERSTAFF_AVALON": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_PLATE_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_DEMON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T8_MEAL_STEW",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 2,
-        "id": "T7_POTION_REVIVE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_SET2",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
      "2H_ROCKSTAFF_KEEPER": {
       "armor": [
        {
@@ -74900,84 +73865,12 @@
       ]
      },
      "MAIN_MACE_HELL": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_PLATE_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_PLATE_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_BRIDGEWATCH",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "offhand": [
        {
         "count": 5,
         "id": "OFF_SHIELD_AVALON",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 3,
-        "id": "T7_POTION_REVIVE",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      }
@@ -75175,9 +74068,6 @@
       "armor": ["ARMOR_PLATE_FEY", 7, 10],
       "head": ["HEAD_LEATHER_HELL", 6, 7],
       "shoes": ["SHOES_LEATHER_ROYAL", 4, 6]
-     },
-     "MAIN_MACE_HELL": {
-      "armor": ["ARMOR_PLATE_SET3", 4, 8]
      }
     }
    },
@@ -75434,68 +74324,12 @@
       ]
      },
      "2H_CLAYMORE": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_FW_CAERLEON",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "food": [
        {
         "count": 4,
         "id": "T8_MEAL_STEW",
         "players": 5,
         "sources": ["killboard (4x/5p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_CLOTH_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 3,
-        "id": "T7_POTION_REVIVE",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_POTION_COOLDOWN",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ],
       "shoes": [
@@ -75964,42 +74798,6 @@
       ]
      },
      "2H_DUALHAMMER_HELL": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_PLATE_SET1",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_THETFORD",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T8_MEAL_STEW",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "head": [
        {
         "count": 5,
@@ -76014,88 +74812,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 6,
         "sources": ["killboard (6x/6p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_CLOTH_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
-     "2H_DUALSWORD": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 4,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T8_MEAL_STEW",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -76286,20 +75002,6 @@
         "sources": ["killboard (5x/5p)"]
        }
       ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "food": [
        {
         "count": 6,
@@ -76315,31 +75017,9 @@
         "players": 6,
         "sources": ["killboard (6x/6p)"]
        }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
       ]
      },
      "2H_KNUCKLES_HELL": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "cape": [
        {
         "count": 6,
@@ -76360,26 +75040,6 @@
         "id": "T8_MEAL_STEW",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_ROYAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ],
       "potion": [
@@ -76840,38 +75500,6 @@
       ]
      },
      "MAIN_AXE": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_LEATHER_SET1",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_THETFORD",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_HELL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "offhand": [
        {
         "count": 5,
@@ -76886,14 +75514,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_PLATE_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      },
@@ -76934,42 +75554,12 @@
         "sources": ["killboard (6x/7p)"]
        }
       ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "HEAD_PLATE_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 4,
-        "id": "OFF_SPIKEDSHIELD_MORGANA",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "potion": [
        {
         "count": 8,
         "id": "T7_POTION_REVIVE",
         "players": 8,
         "sources": ["killboard (8x/8p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
        }
       ]
      },
@@ -76994,56 +75584,6 @@
         "sources": ["killboard (2x/2p)"]
        }
       ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T8_MEAL_STEW",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 4,
-        "id": "OFF_DEMONSKULL_HELL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "potion": [
        {
         "count": 5,
@@ -77057,165 +75597,15 @@
         "players": 2,
         "sources": ["killboard (2x/2p)"]
        }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
       ]
      },
      "MAIN_SPEAR_LANCE_AVALON": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 2,
-        "id": "OFF_SPIKEDSHIELD_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "OFF_TORCH",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 5,
         "id": "T7_POTION_REVIVE",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
-     "MAIN_SWORD_CRYSTAL": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T8_MEAL_STEW",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_PLATE_SET1",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 3,
-        "id": "OFF_SPIKEDSHIELD_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_UNDEAD",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      }
@@ -77765,9 +76155,6 @@
       "head": ["HEAD_PLATE_SET1", 16, 38],
       "shoes": ["SHOES_LEATHER_MORGANA", 13, 16]
      },
-     "2H_CLAYMORE": {
-      "armor": ["ARMOR_LEATHER_HELL", 2, 6]
-     },
      "2H_CLAYMORE_AVALON": {
       "armor": ["ARMOR_LEATHER_HELL", 18, 26],
       "head": ["HEAD_CLOTH_SET2", 5, 18]
@@ -77781,12 +76168,6 @@
       "armor": ["ARMOR_LEATHER_HELL", 35, 70],
       "head": ["HEAD_PLATE_SET1", 23, 35],
       "shoes": ["SHOES_LEATHER_MORGANA", 12, 23]
-     },
-     "2H_DUALHAMMER_HELL": {
-      "armor": ["ARMOR_PLATE_SET1", 4, 9]
-     },
-     "2H_DUALSWORD": {
-      "armor": ["ARMOR_LEATHER_HELL", 4, 9]
      },
      "2H_HALBERD": {
       "armor": ["ARMOR_LEATHER_HELL", 12, 18],
@@ -77802,9 +76183,6 @@
      },
      "2H_KNUCKLES_AVALON": {
       "armor": ["ARMOR_LEATHER_HELL", 5, 6]
-     },
-     "2H_KNUCKLES_HELL": {
-      "armor": ["ARMOR_LEATHER_HELL", 4, 9]
      },
      "2H_KNUCKLES_KEEPER": {
       "armor": ["ARMOR_LEATHER_HELL", 30, 39],
@@ -77832,9 +76210,6 @@
       "potion": ["T7_POTION_REVIVE", 5, 6],
       "shoes": ["SHOES_LEATHER_MORGANA", 10, 13]
      },
-     "MAIN_AXE": {
-      "armor": ["ARMOR_LEATHER_SET1", 4, 7]
-     },
      "MAIN_SCIMITAR_MORGANA": {
       "armor": ["ARMOR_LEATHER_HELL", 5, 9],
       "head": ["HEAD_CLOTH_SET2", 2, 5]
@@ -77842,12 +76217,6 @@
      "MAIN_SPEAR_KEEPER": {
       "armor": ["ARMOR_LEATHER_HELL", 5, 10],
       "head": ["HEAD_PLATE_SET1", 2, 5]
-     },
-     "MAIN_SPEAR_LANCE_AVALON": {
-      "armor": ["ARMOR_LEATHER_HELL", 3, 6]
-     },
-     "MAIN_SWORD_CRYSTAL": {
-      "armor": ["ARMOR_LEATHER_HELL", 3, 5]
      }
     }
    }
@@ -77876,14 +76245,6 @@
         "sources": ["killboard (7x/7p)"]
        }
       ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "offhand": [
        {
         "count": 7,
@@ -77898,20 +76259,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 7,
         "sources": ["killboard (7x/7p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      }
@@ -77939,15 +76286,6 @@
        "sources": ["killboard (7x/7p)"]
       }
      ],
-     "head": [
-      {
-       "count": 3,
-       "id": "HEAD_LEATHER_SET1",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
-      }
-     ],
      "offhand": [
       {
        "count": 7,
@@ -77965,22 +76303,6 @@
        "players": 7,
        "sources": ["killboard (7x/7p)"]
       }
-     ],
-     "shoes": [
-      {
-       "count": 3,
-       "id": "SHOES_LEATHER_ROYAL",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
-      },
-      {
-       "count": 3,
-       "id": "SHOES_LEATHER_SET1",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
-      }
      ]
     },
     "weapon_archetypes": {
@@ -77991,65 +76313,14 @@
     }
    },
    "dive_cleanup": {
-    "archetype": {
-     "armor": ["ARMOR_LEATHER_HELL", 3, 6]
-    },
     "by_weapon": {
      "MAIN_DAGGER_HELL": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T8_MEAL_STEW",
-        "players": 4,
-        "sources": ["killboard (3x/4p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 3,
-        "id": "OFF_SPIKEDSHIELD_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "potion": [
        {
         "count": 6,
         "id": "T7_POTION_REVIVE",
         "players": 6,
         "sources": ["killboard (6x/6p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
        }
       ]
      }
@@ -78065,52 +76336,6 @@
      }
     ],
     "slots": {
-     "armor": [
-      {
-       "count": 3,
-       "effect": "lifesteal_aura",
-       "id": "ARMOR_LEATHER_HELL",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
-      }
-     ],
-     "cape": [
-      {
-       "count": 4,
-       "id": "CAPEITEM_SMUGGLER",
-       "kb": 4,
-       "players": 4,
-       "sources": ["killboard (4x/4p)"]
-      }
-     ],
-     "food": [
-      {
-       "count": 3,
-       "id": "T8_MEAL_STEW",
-       "kb": 3,
-       "players": 4,
-       "sources": ["killboard (3x/4p)"]
-      }
-     ],
-     "head": [
-      {
-       "count": 3,
-       "id": "HEAD_CLOTH_SET2",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
-      }
-     ],
-     "offhand": [
-      {
-       "count": 3,
-       "id": "OFF_SPIKEDSHIELD_MORGANA",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
-      }
-     ],
      "potion": [
       {
        "count": 6,
@@ -78119,27 +76344,10 @@
        "players": 6,
        "sources": ["killboard (6x/6p)"]
       }
-     ],
-     "shoes": [
-      {
-       "count": 4,
-       "id": "SHOES_PLATE_AVALON",
-       "kb": 4,
-       "players": 4,
-       "sources": ["killboard (4x/4p)"]
-      }
      ]
-    },
-    "weapon_archetypes": {
-     "MAIN_DAGGER_HELL": {
-      "armor": ["ARMOR_LEATHER_HELL", 3, 6]
-     }
     }
    },
    "kite_healer": {
-    "archetype": {
-     "head": ["HEAD_LEATHER_SET1", 3, 7]
-    },
     "by_weapon": {
      "MAIN_HOLYSTAFF_AVALON": {
       "cape": [
@@ -78148,14 +76356,6 @@
         "id": "CAPEITEM_FW_LYMHURST",
         "players": 7,
         "sources": ["killboard (7x/7p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ],
       "offhand": [
@@ -78172,20 +76372,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 7,
         "sources": ["killboard (7x/7p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      }
@@ -78215,15 +76401,6 @@
        "sources": ["killboard (7x/7p)"]
       }
      ],
-     "head": [
-      {
-       "count": 3,
-       "id": "HEAD_LEATHER_SET1",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
-      }
-     ],
      "offhand": [
       {
        "count": 7,
@@ -78241,34 +76418,10 @@
        "players": 7,
        "sources": ["killboard (7x/7p)"]
       }
-     ],
-     "shoes": [
-      {
-       "count": 3,
-       "id": "SHOES_LEATHER_ROYAL",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
-      },
-      {
-       "count": 3,
-       "id": "SHOES_LEATHER_SET1",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
-      }
      ]
-    },
-    "weapon_archetypes": {
-     "MAIN_HOLYSTAFF_AVALON": {
-      "head": ["HEAD_LEATHER_SET1", 3, 7]
-     }
     }
    },
    "main_healer": {
-    "archetype": {
-     "head": ["HEAD_LEATHER_SET1", 3, 7]
-    },
     "by_weapon": {
      "MAIN_HOLYSTAFF_AVALON": {
       "cape": [
@@ -78277,14 +76430,6 @@
         "id": "CAPEITEM_FW_LYMHURST",
         "players": 7,
         "sources": ["killboard (7x/7p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ],
       "offhand": [
@@ -78301,20 +76446,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 7,
         "sources": ["killboard (7x/7p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      }
@@ -78344,15 +76475,6 @@
        "sources": ["killboard (7x/7p)"]
       }
      ],
-     "head": [
-      {
-       "count": 3,
-       "id": "HEAD_LEATHER_SET1",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
-      }
-     ],
      "offhand": [
       {
        "count": 7,
@@ -78370,28 +76492,7 @@
        "players": 7,
        "sources": ["killboard (7x/7p)"]
       }
-     ],
-     "shoes": [
-      {
-       "count": 3,
-       "id": "SHOES_LEATHER_ROYAL",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
-      },
-      {
-       "count": 3,
-       "id": "SHOES_LEATHER_SET1",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
-      }
      ]
-    },
-    "weapon_archetypes": {
-     "MAIN_HOLYSTAFF_AVALON": {
-      "head": ["HEAD_LEATHER_SET1", 3, 7]
-     }
     }
    },
    "sustained_brawler": {
@@ -78404,62 +76505,6 @@
      "shoes": ["SHOES_PLATE_AVALON", 17, 18]
     },
     "by_weapon": {
-     "2H_DUALAXE_KEEPER": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T8_MEAL_STEW",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_PLATE_SET1",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ]
-     },
      "2H_KNUCKLES_SET2": {
       "armor": [
        {
@@ -78622,9 +76667,6 @@
      ]
     },
     "weapon_archetypes": {
-     "2H_DUALAXE_KEEPER": {
-      "armor": ["ARMOR_LEATHER_HELL", 4, 5]
-     },
      "2H_KNUCKLES_SET2": {
       "armor": ["ARMOR_PLATE_SET3", 18, 23],
       "cape": ["CAPEITEM_SMUGGLER", 17, 16],
@@ -78664,32 +76706,6 @@
        {
         "count": 2,
         "id": "ARMOR_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_FW_FORTSTERLING",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_BRECILIEN",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_SMUGGLER",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
        }
@@ -78740,60 +76756,12 @@
       ]
      },
      "2H_DUALSCIMITAR_UNDEAD": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 4,
-        "id": "CAPEITEM_KEEPER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "food": [
        {
         "count": 6,
         "id": "T8_MEAL_STEW",
         "players": 6,
         "sources": ["killboard (6x/6p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_LEATHER_ROYAL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 4,
-        "id": "HEAD_PLATE_SET1",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ],
       "potion": [
@@ -79106,9 +77074,6 @@
       "head": ["HEAD_LEATHER_ROYAL", 6, 6],
       "shoes": ["SHOES_CLOTH_FEY", 4, 6]
      },
-     "2H_DUALSCIMITAR_UNDEAD": {
-      "armor": ["ARMOR_CLOTH_SET2", 3, 12]
-     },
      "2H_GLAIVE_CRYSTAL": {
       "armor": ["ARMOR_CLOTH_AVALON", 56, 76],
       "cape": ["CAPEITEM_SMUGGLER", 25, 34],
@@ -79122,14 +77087,6 @@
    "brawl_healer": {
     "by_weapon": {
      "2H_HOLYSTAFF": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 18,
@@ -79978,48 +77935,6 @@
        }
       ]
      },
-     "MAIN_CURSEDSTAFF": {
-      "cape": [
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_CAERLEON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 2,
-        "id": "OFF_LAMP_UNDEAD",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
      "MAIN_CURSEDSTAFF_AVALON": {
       "armor": [
        {
@@ -80711,32 +78626,6 @@
         "sources": ["killboard (6x/6p)"]
        }
       ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_FW_FORTSTERLING",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_BRECILIEN",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "food": [
        {
         "count": 5,
@@ -81310,74 +79199,6 @@
     },
     "by_weapon": {
      "2H_HAMMER": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_PLATE_SET2",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_PLATE_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_BRIDGEWATCH",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_MARTLOCK",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "HEAD_PLATE_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_KEEPER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 7,
@@ -81522,32 +79343,6 @@
       ]
      },
      "2H_MACE_MORGANA": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_PLATE_HELL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 4,
-        "id": "ARMOR_PLATE_KEEPER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_PLATE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_PLATE_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 9,
@@ -81562,58 +79357,12 @@
         "sources": ["killboard (2x/2p)"]
        }
       ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_HELL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_KEEPER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 11,
         "id": "T7_POTION_REVIVE",
         "players": 11,
         "sources": ["killboard (11x/11p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -81802,46 +79551,6 @@
         "id": "SHOES_PLATE_UNDEAD",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
-     "2H_RAM_KEEPER": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_PLATE_FEY",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_HELL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
        }
       ]
      },
@@ -83045,25 +80754,16 @@
      }
     },
     "weapon_archetypes": {
-     "2H_HAMMER": {
-      "armor": ["ARMOR_PLATE_SET2", 4, 11]
-     },
      "2H_HAMMER_AVALON": {
       "armor": ["ARMOR_PLATE_KEEPER", 15, 34],
       "cape": ["CAPEITEM_SMUGGLER", 6, 7],
       "head": ["HEAD_LEATHER_SET3", 10, 15],
       "shoes": ["SHOES_CLOTH_SET2", 7, 10]
      },
-     "2H_MACE_MORGANA": {
-      "armor": ["ARMOR_PLATE_HELL", 4, 12]
-     },
      "2H_POLEHAMMER": {
       "armor": ["ARMOR_PLATE_SET2", 27, 60],
       "head": ["HEAD_PLATE_KEEPER", 13, 27],
       "shoes": ["SHOES_LEATHER_ROYAL", 5, 13]
-     },
-     "2H_RAM_KEEPER": {
-      "armor": ["ARMOR_PLATE_FEY", 2, 5]
      },
      "2H_SHAPESHIFTER_KEEPER": {
       "armor": ["ARMOR_PLATE_KEEPER", 44, 54],
@@ -83408,68 +81108,6 @@
         "id": "SHOES_PLATE_SET1",
         "players": 3,
         "sources": ["killboard (2x/3p)"]
-       }
-      ]
-     },
-     "MAIN_HOLYSTAFF_MORGANA": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_KEEPER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 3,
-        "id": "OFF_HORN_KEEPER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 2,
-        "id": "T6_POTION_ENERGY",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_POTION_REVIVE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      }
@@ -83823,9 +81461,6 @@
       "armor": ["ARMOR_CLOTH_AVALON", 103, 209],
       "head": ["HEAD_LEATHER_SET3", 30, 104],
       "shoes": ["SHOES_LEATHER_SET1", 15, 30]
-     },
-     "MAIN_HOLYSTAFF_MORGANA": {
-      "armor": ["ARMOR_CLOTH_SET2", 3, 5]
      }
     }
    },
@@ -83837,62 +81472,6 @@
      "shoes": ["SHOES_LEATHER_SET1", 43, 78]
     },
     "by_weapon": {
-     "2H_DIVINESTAFF": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 3,
-        "id": "T7_POTION_REVIVE",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
      "2H_HOLYSTAFF_HELL": {
       "armor": [
        {
@@ -84672,32 +82251,6 @@
         "sources": ["killboard (2x/2p)"]
        }
       ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_CLOTH_KEEPER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 4,
-        "id": "HEAD_PLATE_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "offhand": [
        {
         "count": 8,
@@ -84730,26 +82283,6 @@
         "id": "T6_POTION_ENERGY",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_CLOTH_SET1",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
        }
       ]
      },
@@ -85176,20 +82709,6 @@
       ]
      },
      "MAIN_NATURESTAFF_CRYSTAL": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_CLOTH_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_FEY",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 6,
@@ -85202,20 +82721,6 @@
         "id": "CAPEITEM_SMUGGLER",
         "players": 4,
         "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 4,
-        "sources": ["killboard (3x/4p)"]
        }
       ],
       "head": [
@@ -85912,9 +83417,6 @@
      }
     },
     "weapon_archetypes": {
-     "2H_DIVINESTAFF": {
-      "armor": ["ARMOR_CLOTH_SET2", 2, 5]
-     },
      "2H_HOLYSTAFF_HELL": {
       "armor": ["ARMOR_CLOTH_SET2", 32, 87],
       "head": ["HEAD_CLOTH_KEEPER", 11, 32]
@@ -85949,9 +83451,6 @@
      "MAIN_NATURESTAFF": {
       "armor": ["ARMOR_PLATE_KEEPER", 11, 38],
       "head": ["HEAD_LEATHER_SET3", 6, 11]
-     },
-     "MAIN_NATURESTAFF_CRYSTAL": {
-      "armor": ["ARMOR_CLOTH_AVALON", 3, 10]
      }
     }
    },
@@ -86081,54 +83580,6 @@
        }
       ]
      },
-     "2H_HAMMER_CRYSTAL": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_PLATE_KEEPER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_MARTLOCK",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T8_MEAL_SANDWICH_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 3,
-        "id": "T7_POTION_REVIVE",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
      "2H_QUARTERSTAFF": {
       "armor": [
        {
@@ -86136,30 +83587,6 @@
         "id": "ARMOR_LEATHER_SET1",
         "players": 7,
         "sources": ["killboard (7x/7p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_CLOTH_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 2,
-        "id": "T8_POTION_COOLDOWN",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      }
@@ -86356,9 +83783,6 @@
       "potion": ["T7_POTION_REVIVE", 15, 15],
       "shoes": ["SHOES_PLATE_SET3", 17, 37]
      },
-     "2H_HAMMER_CRYSTAL": {
-      "armor": ["ARMOR_PLATE_KEEPER", 2, 5]
-     },
      "2H_QUARTERSTAFF": {
       "armor": ["ARMOR_LEATHER_SET1", 7, 7],
       "head": ["HEAD_CLOTH_SET3", 3, 7]
@@ -86368,20 +83792,6 @@
    "ranged_aoe": {
     "by_weapon": {
      "2H_ARCANESTAFF_CRYSTAL": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "cape": [
        {
         "count": 8,
@@ -86418,68 +83828,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 9,
         "sources": ["killboard (9x/9p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_CLOTH_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
-     "2H_ARCANE_RINGPAIR_AVALON": {
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 2,
-        "id": "T7_POTION_REVIVE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      },
@@ -86892,20 +84240,6 @@
       ]
      },
      "2H_CROSSBOWLARGE": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 5,
@@ -86919,73 +84253,9 @@
         "players": 2,
         "sources": ["killboard (2x/2p)"]
        }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "T7_POTION_STONESKIN",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_FEY",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
       ]
      },
      "2H_CROSSBOWLARGE_MORGANA": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 6,
@@ -87028,26 +84298,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 9,
         "sources": ["killboard (9x/9p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_CLOTH_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -87263,80 +84513,6 @@
        }
       ]
      },
-     "2H_DUALCROSSBOW_HELL": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_KEEPER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_CAERLEON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T8_MEAL_STEW",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_PLATE_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 3,
-        "id": "T7_POTION_REVIVE",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_POTION_COOLDOWN",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
      "2H_FIRESTAFF": {
       "armor": [
        {
@@ -87352,46 +84528,12 @@
         "sources": ["killboard (3x/3p)"]
        }
       ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "food": [
        {
         "count": 6,
         "id": "T8_MEAL_STEW",
         "players": 6,
         "sources": ["killboard (6x/6p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET1",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET3",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
        }
       ],
       "potion": [
@@ -87412,20 +84554,6 @@
         "id": "T8_POTION_COOLDOWN",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_PLATE_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      },
@@ -87844,26 +84972,6 @@
         "id": "ARMOR_CLOTH_SET2",
         "players": 3,
         "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_MARTLOCK",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ],
       "food": [
@@ -88866,40 +85974,12 @@
         "sources": ["killboard (2x/2p)"]
        }
       ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "food": [
        {
         "count": 5,
         "id": "T8_MEAL_STEW",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_CLOTH_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "HEAD_CLOTH_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ],
       "potion": [
@@ -88915,107 +85995,15 @@
         "players": 2,
         "sources": ["killboard (2x/2p)"]
        }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_SET2",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
       ]
      },
      "MAIN_1HCROSSBOW": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_FEY",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_CAERLEON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "offhand": [
        {
         "count": 5,
         "id": "OFF_SPIKEDSHIELD_MORGANA",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "T7_POTION_STONESKIN",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_SET1",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
        }
       ]
      },
@@ -89199,121 +86187,15 @@
         "players": 5,
         "sources": ["killboard (5x/5p)"]
        }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 3,
-        "id": "OFF_BOOK",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "OFF_HORN_KEEPER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 3,
-        "id": "T7_POTION_REVIVE",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_PLATE_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_CLOTH_ROYAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
       ]
      },
      "MAIN_FIRESTAFF_KEEPER": {
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "food": [
        {
         "count": 5,
         "id": "T8_MEAL_STEW",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 3,
-        "id": "OFF_DEMONSKULL_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ],
       "potion": [
@@ -89323,77 +86205,15 @@
         "players": 7,
         "sources": ["killboard (7x/7p)"]
        }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
       ]
      },
      "MAIN_FROSTSTAFF": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T8_MEAL_STEW",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "offhand": [
        {
         "count": 5,
         "id": "OFF_JESTERCANE_HELL",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 2,
-        "id": "T7_POTION_REVIVE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_POTION_COOLDOWN",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      }
@@ -90164,12 +86984,6 @@
      }
     },
     "weapon_archetypes": {
-     "2H_ARCANESTAFF_CRYSTAL": {
-      "armor": ["ARMOR_LEATHER_AVALON", 3, 10]
-     },
-     "2H_ARCANE_RINGPAIR_AVALON": {
-      "head": ["HEAD_LEATHER_SET3", 4, 5]
-     },
      "2H_BOW_AVALON": {
       "armor": ["ARMOR_CLOTH_SET1", 36, 40],
       "cape": ["CAPEITEM_SMUGGLER", 7, 15],
@@ -90188,20 +87002,10 @@
       "armor": ["ARMOR_LEATHER_SET3", 12, 36],
       "head": ["HEAD_PLATE_ROYAL", 4, 12]
      },
-     "2H_CROSSBOWLARGE": {
-      "armor": ["ARMOR_CLOTH_SET2", 4, 8]
-     },
-     "2H_CROSSBOWLARGE_MORGANA": {
-      "armor": ["ARMOR_CLOTH_SET2", 3, 10],
-      "head": ["HEAD_LEATHER_SET3", 2, 5]
-     },
      "2H_CROSSBOW_CANNON_AVALON": {
       "armor": ["ARMOR_CLOTH_KEEPER", 26, 75],
       "head": ["HEAD_LEATHER_FEY", 18, 29],
       "shoes": ["SHOES_LEATHER_FEY", 10, 18]
-     },
-     "2H_DUALCROSSBOW_HELL": {
-      "armor": ["ARMOR_CLOTH_SET2", 2, 7]
      },
      "2H_FIRESTAFF": {
       "armor": ["ARMOR_CLOTH_SET2", 6, 10],
@@ -90266,16 +87070,9 @@
       "armor": ["ARMOR_CLOTH_SET2", 6, 9],
       "head": ["HEAD_CLOTH_AVALON", 3, 6]
      },
-     "MAIN_1HCROSSBOW": {
-      "armor": ["ARMOR_CLOTH_SET2", 4, 10],
-      "head": ["HEAD_LEATHER_SET2", 2, 5]
-     },
      "MAIN_FIRESTAFF": {
       "armor": ["ARMOR_CLOTH_SET2", 5, 8],
       "head": ["HEAD_PLATE_SET3", 2, 5]
-     },
-     "MAIN_FROSTSTAFF": {
-      "armor": ["ARMOR_LEATHER_SET3", 2, 7]
      }
     }
    },
@@ -90404,20 +87201,6 @@
         "sources": ["killboard (8x/8p)"]
        }
       ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "head": [
        {
         "count": 11,
@@ -90432,38 +87215,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 11,
         "sources": ["killboard (11x/11p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_UNDEAD",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -91445,56 +88196,12 @@
         "sources": ["killboard (2x/2p)"]
        }
       ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_BRIDGEWATCH",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_LEATHER_HELL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "potion": [
        {
         "count": 4,
         "id": "T7_POTION_REVIVE",
         "players": 5,
         "sources": ["killboard (4x/5p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_CLOTH_FEY",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET2",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -91505,50 +88212,6 @@
         "id": "ARMOR_PLATE_SET3",
         "players": 5,
         "sources": ["killboard (4x/5p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_MARTLOCK",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_HELL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      },
@@ -92138,9 +88801,6 @@
       "armor": ["ARMOR_PLATE_FEY", 5, 7],
       "head": ["HEAD_LEATHER_HELL", 3, 5]
      },
-     "2H_SHAPESHIFTER_CRYSTAL": {
-      "armor": ["ARMOR_PLATE_SET3", 4, 5]
-     },
      "MAIN_MACE_HELL": {
       "armor": ["ARMOR_PLATE_HELL", 12, 29],
       "head": ["HEAD_LEATHER_SET3", 9, 12],
@@ -92207,40 +88867,12 @@
         "sources": ["killboard (9x/9p)"]
        }
       ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_HELL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 8,
         "id": "T7_POTION_REVIVE",
         "players": 8,
         "sources": ["killboard (8x/8p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_CLOTH_ROYAL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      },
@@ -92433,34 +89065,6 @@
       ]
      },
      "2H_CLAYMORE_AVALON": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_PLATE_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "food": [
        {
         "count": 4,
@@ -92469,40 +89073,12 @@
         "sources": ["killboard (4x/5p)"]
        }
       ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 4,
         "id": "T7_POTION_REVIVE",
         "players": 5,
         "sources": ["killboard (4x/5p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
        }
       ]
      },
@@ -92725,44 +89301,6 @@
         "sources": ["killboard (15x/15p)"]
        }
       ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_CLOTH_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "HEAD_PLATE_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 12,
@@ -92811,48 +89349,6 @@
       ]
      },
      "2H_DUALHAMMER_HELL": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_CAERLEON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "head": [
        {
         "count": 6,
@@ -92867,20 +89363,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 7,
         "sources": ["killboard (7x/7p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -92899,28 +89381,6 @@
         "sources": ["killboard (2x/2p)"]
        }
       ],
-      "cape": [
-       {
-        "count": 2,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_PLATE_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 5,
@@ -92934,119 +89394,15 @@
         "players": 3,
         "sources": ["killboard (3x/3p)"]
        }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
-     "2H_HALBERD": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 2,
-        "id": "T7_POTION_REVIVE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
       ]
      },
      "2H_HALBERD_MORGANA": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_PLATE_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "food": [
        {
         "count": 5,
         "id": "T8_MEAL_STEW",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ],
       "potion": [
@@ -93249,28 +89605,6 @@
       ]
      },
      "2H_KNUCKLES_AVALON": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "food": [
        {
         "count": 5,
@@ -93279,34 +89613,12 @@
         "sources": ["killboard (5x/6p)"]
        }
       ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "potion": [
        {
         "count": 9,
         "id": "T7_POTION_REVIVE",
         "players": 9,
         "sources": ["killboard (9x/9p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_CLOTH_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -93836,105 +90148,9 @@
         "players": 5,
         "sources": ["killboard (5x/5p)"]
        }
-      ],
-      "cape": [
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 2,
-        "id": "OFF_DEMONSKULL_HELL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "OFF_TORCH",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 2,
-        "id": "T6_POTION_HEAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_POTION_REVIVE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_POTION_COOLDOWN",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_CLOTH_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
       ]
      },
      "MAIN_SPEAR_KEEPER": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_PLATE_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 7,
@@ -93961,38 +90177,6 @@
         "id": "T8_MEAL_STEW",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "HEAD_PLATE_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ],
       "offhand": [
@@ -94051,72 +90235,12 @@
       ]
      },
      "MAIN_SPEAR_LANCE_AVALON": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_FW_MARTLOCK",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 2,
-        "id": "OFF_SPIKEDSHIELD_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 5,
         "id": "T7_POTION_REVIVE",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      }
@@ -94791,9 +90915,6 @@
       "head": ["HEAD_PLATE_SET2", 31, 46],
       "shoes": ["SHOES_LEATHER_MORGANA", 16, 31]
      },
-     "2H_CLAYMORE_AVALON": {
-      "armor": ["ARMOR_LEATHER_HELL", 3, 6]
-     },
      "2H_CLEAVER_HELL": {
       "armor": ["ARMOR_PLATE_ROYAL", 14, 41],
       "head": ["HEAD_PLATE_SET2", 12, 15],
@@ -94806,12 +90927,6 @@
      "2H_DUALSWORD": {
       "armor": ["ARMOR_LEATHER_SET1", 5, 11]
      },
-     "2H_HALBERD": {
-      "armor": ["ARMOR_LEATHER_HELL", 3, 5]
-     },
-     "2H_HALBERD_MORGANA": {
-      "armor": ["ARMOR_LEATHER_HELL", 3, 8]
-     },
      "2H_HARPOON_HELL": {
       "armor": ["ARMOR_LEATHER_ROYAL", 50, 85],
       "cape": ["CAPEITEM_SMUGGLER", 22, 30],
@@ -94819,9 +90934,6 @@
       "head": ["HEAD_LEATHER_SET3", 44, 51],
       "potion": ["T7_POTION_REVIVE", 22, 22],
       "shoes": ["SHOES_LEATHER_MORGANA", 30, 44]
-     },
-     "2H_KNUCKLES_AVALON": {
-      "armor": ["ARMOR_LEATHER_HELL", 3, 9]
      },
      "2H_KNUCKLES_HELL": {
       "armor": ["ARMOR_LEATHER_SET2", 13, 43],
@@ -94848,9 +90960,6 @@
      },
      "MAIN_AXE": {
       "armor": ["ARMOR_LEATHER_SET1", 5, 8]
-     },
-     "MAIN_SPEAR_LANCE_AVALON": {
-      "armor": ["ARMOR_LEATHER_HELL", 2, 5]
      }
     }
    },
@@ -94974,20 +91083,6 @@
         "id": "CAPEITEM_FW_LYMHURST",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 1,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (1x/2p)"]
        }
       ],
       "head": [
@@ -95355,46 +91450,6 @@
    },
    "brawl_healer": {
     "by_weapon": {
-     "2H_HOLYSTAFF": {
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_KEEPER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 3,
-        "id": "T7_POTION_REVIVE",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
      "MAIN_HOLYSTAFF_AVALON": {
       "armor": [
        {
@@ -95844,28 +91899,12 @@
       ]
      },
      "MAIN_CURSEDSTAFF_AVALON": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_PLATE_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "cape": [
        {
         "count": 5,
         "id": "CAPEITEM_SMUGGLER",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ],
       "head": [
@@ -95876,40 +91915,12 @@
         "sources": ["killboard (5x/5p)"]
        }
       ],
-      "offhand": [
-       {
-        "count": 3,
-        "id": "OFF_HORN_KEEPER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "OFF_SHIELD_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "potion": [
        {
         "count": 5,
         "id": "T7_POTION_REVIVE",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_UNDEAD",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -96164,9 +92175,6 @@
       "potion": ["T7_POTION_REVIVE", 9, 9],
       "shoes": ["SHOES_LEATHER_MORGANA", 13, 20]
      },
-     "MAIN_CURSEDSTAFF_AVALON": {
-      "armor": ["ARMOR_PLATE_HELL", 3, 6]
-     },
      "MAIN_CURSEDSTAFF_UNDEAD": {
       "armor": ["ARMOR_PLATE_HELL", 15, 21],
       "cape": ["CAPEITEM_SMUGGLER", 6, 9],
@@ -96284,20 +92292,6 @@
         "id": "CAPEITEM_FW_MARTLOCK",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "T8_MEAL_SANDWICH_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ],
       "head": [
@@ -96566,60 +92560,12 @@
       ]
      },
      "MAIN_MACE": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_PLATE_KEEPER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 3,
-        "id": "OFF_HORN_KEEPER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "potion": [
        {
         "count": 5,
         "id": "T7_POTION_REVIVE",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_SET2",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
        }
       ]
      }
@@ -96886,9 +92832,6 @@
      "MAIN_ARCANESTAFF_UNDEAD": {
       "armor": ["ARMOR_CLOTH_AVALON", 16, 40],
       "head": ["HEAD_LEATHER_SET3", 5, 16]
-     },
-     "MAIN_MACE": {
-      "armor": ["ARMOR_PLATE_KEEPER", 3, 5]
      }
     }
    },
@@ -96899,74 +92842,6 @@
      "shoes": ["SHOES_LEATHER_MORGANA", 13, 21]
     },
     "by_weapon": {
-     "2H_WILDSTAFF": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_CLOTH_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 1,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 2,
-        "sources": ["killboard (1x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_KEEPER",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
      "MAIN_HOLYSTAFF_AVALON": {
       "armor": [
        {
@@ -97313,9 +93188,6 @@
      ]
     },
     "weapon_archetypes": {
-     "2H_WILDSTAFF": {
-      "armor": ["ARMOR_CLOTH_AVALON", 3, 5]
-     },
      "MAIN_HOLYSTAFF_AVALON": {
       "armor": ["ARMOR_CLOTH_AVALON", 66, 82],
       "head": ["HEAD_LEATHER_SET3", 19, 66],
@@ -97418,48 +93290,12 @@
       ]
      },
      "2H_HOLYSTAFF_UNDEAD": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 6,
         "id": "CAPEITEM_FW_LYMHURST",
         "players": 6,
         "sources": ["killboard (6x/6p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ],
       "potion": [
@@ -97669,74 +93505,6 @@
        }
       ]
      },
-     "2H_WILDSTAFF": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_CLOTH_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 1,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 2,
-        "sources": ["killboard (1x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_KEEPER",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
      "MAIN_HOLYSTAFF_AVALON": {
       "armor": [
        {
@@ -97909,91 +93677,7 @@
        }
       ]
      },
-     "MAIN_NATURESTAFF": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 2,
-        "id": "OFF_HORN_KEEPER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "OFF_SHIELD",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
      "MAIN_NATURESTAFF_CRYSTAL": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_CLOTH_AVALON",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "cape": [
        {
         "count": 9,
@@ -98381,9 +94065,6 @@
       "armor": ["ARMOR_CLOTH_AVALON", 6, 17],
       "head": ["HEAD_LEATHER_SET3", 2, 6]
      },
-     "2H_HOLYSTAFF_UNDEAD": {
-      "armor": ["ARMOR_CLOTH_SET2", 3, 6]
-     },
      "2H_NATURESTAFF_HELL": {
       "armor": ["ARMOR_CLOTH_SET2", 11, 21],
       "head": ["HEAD_LEATHER_SET3", 5, 11],
@@ -98394,19 +94075,10 @@
       "head": ["HEAD_LEATHER_SET3", 8, 17],
       "shoes": ["SHOES_LEATHER_SET1", 4, 8]
      },
-     "2H_WILDSTAFF": {
-      "armor": ["ARMOR_CLOTH_AVALON", 3, 5]
-     },
      "MAIN_HOLYSTAFF_AVALON": {
       "armor": ["ARMOR_CLOTH_AVALON", 66, 82],
       "head": ["HEAD_LEATHER_SET3", 19, 66],
       "shoes": ["SHOES_LEATHER_MORGANA", 13, 19]
-     },
-     "MAIN_NATURESTAFF": {
-      "armor": ["ARMOR_CLOTH_AVALON", 2, 5]
-     },
-     "MAIN_NATURESTAFF_CRYSTAL": {
-      "armor": ["ARMOR_CLOTH_AVALON", 4, 13]
      }
     }
    },
@@ -98435,14 +94107,6 @@
         "id": "CAPEITEM_SMUGGLER",
         "players": 16,
         "sources": ["killboard (16x/16p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ],
       "head": [
@@ -98510,15 +94174,6 @@
        "kb": 16,
        "players": 16,
        "sources": ["killboard (16x/16p)"]
-      }
-     ],
-     "food": [
-      {
-       "count": 3,
-       "id": "T7_MEAL_OMELETTE_AVALON",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
       }
      ],
      "head": [
@@ -98653,36 +94308,6 @@
         "id": "ARMOR_CLOTH_SET2",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_FEY",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
        }
       ]
      },
@@ -99093,28 +94718,6 @@
         "sources": ["killboard (8x/8p)"]
        }
       ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "head": [
        {
         "count": 9,
@@ -99129,20 +94732,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 7,
         "sources": ["killboard (7x/7p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_CLOTH_ROYAL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_PLATE_UNDEAD",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      },
@@ -99381,42 +94970,12 @@
       ]
      },
      "MAIN_FROSTSTAFF": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 6,
         "id": "CAPEITEM_SMUGGLER",
         "players": 6,
         "sources": ["killboard (6x/6p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 4,
-        "sources": ["killboard (3x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ],
       "offhand": [
@@ -100028,20 +95587,6 @@
         "sources": ["killboard (3x/3p)"]
        }
       ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "head": [
        {
         "count": 8,
@@ -100090,20 +95635,6 @@
         "sources": ["killboard (6x/6p)"]
        }
       ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_PLATE_KEEPER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "offhand": [
        {
         "count": 5,
@@ -100118,20 +95649,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 7,
         "sources": ["killboard (7x/7p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      }
@@ -100319,20 +95836,6 @@
     },
     "by_weapon": {
      "2H_MACE": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_PLATE_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_PLATE_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 6,
@@ -100341,40 +95844,12 @@
         "sources": ["killboard (6x/6p)"]
        }
       ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_LEATHER_HELL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "potion": [
        {
         "count": 6,
         "id": "T7_POTION_REVIVE",
         "players": 6,
         "sources": ["killboard (6x/6p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -100691,9 +96166,6 @@
      ]
     },
     "weapon_archetypes": {
-     "2H_MACE": {
-      "armor": ["ARMOR_PLATE_SET3", 4, 6]
-     },
      "MAIN_ROCKMACE_KEEPER": {
       "armor": ["ARMOR_PLATE_HELL", 36, 43],
       "cape": ["CAPEITEM_SMUGGLER", 16, 16],
@@ -100810,46 +96282,6 @@
         "id": "ARMOR_LEATHER_SET3",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_UNDEAD",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T8_MEAL_STEW",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_CLOTH_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T8_POTION_COOLDOWN",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_CLOTH_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      },
@@ -100970,34 +96402,6 @@
       ]
      },
      "2H_KNUCKLES_HELL": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_LEATHER_SET2",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "food": [
        {
         "count": 6,
@@ -101423,9 +96827,6 @@
       "potion": ["T7_POTION_REVIVE", 12, 13],
       "shoes": ["SHOES_LEATHER_MORGANA", 19, 21]
      },
-     "2H_KNUCKLES_HELL": {
-      "armor": ["ARMOR_LEATHER_SET2", 4, 10]
-     },
      "2H_KNUCKLES_SET3": {
       "armor": ["ARMOR_CLOTH_AVALON", 33, 48],
       "cape": ["CAPEITEM_SMUGGLER", 11, 15],
@@ -101558,14 +96959,6 @@
         "sources": ["killboard (8x/8p)"]
        }
       ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "head": [
        {
         "count": 10,
@@ -101598,34 +96991,12 @@
       ]
      },
      "MAIN_FROSTSTAFF_KEEPER": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_PLATE_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_PLATE_FEY",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 6,
         "id": "CAPEITEM_SMUGGLER",
         "players": 6,
         "sources": ["killboard (6x/6p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ],
       "head": [
@@ -101642,14 +97013,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 6,
         "sources": ["killboard (6x/6p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
        }
       ]
      }
@@ -101799,9 +97162,6 @@
      "2H_ICEGAUNTLETS_HELL": {
       "armor": ["ARMOR_PLATE_FEY", 5, 12],
       "head": ["HEAD_LEATHER_SET3", 4, 5]
-     },
-     "MAIN_FROSTSTAFF_KEEPER": {
-      "armor": ["ARMOR_PLATE_HELL", 3, 6]
      }
     }
    }
@@ -101818,70 +97178,12 @@
     },
     "by_weapon": {
      "2H_DAGGER_KATAR_AVALON": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "food": [
        {
         "count": 4,
         "id": "T8_MEAL_STEW",
         "players": 5,
         "sources": ["killboard (4x/5p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "T7_POTION_ACID",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_CLOTH_FEY",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      },
@@ -102058,9 +97360,6 @@
      ]
     },
     "weapon_archetypes": {
-     "2H_DAGGER_KATAR_AVALON": {
-      "armor": ["ARMOR_LEATHER_SET3", 3, 7]
-     },
      "2H_GLAIVE_CRYSTAL": {
       "armor": ["ARMOR_CLOTH_AVALON", 12, 13],
       "cape": ["CAPEITEM_SMUGGLER", 7, 8],
@@ -102074,74 +97373,12 @@
    "brawl_healer": {
     "by_weapon": {
      "2H_HOLYSTAFF": {
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_KEEPER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 10,
         "id": "T7_POTION_REVIVE",
         "players": 10,
         "sources": ["killboard (10x/10p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_CLOTH_SET2",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -102549,14 +97786,6 @@
         "sources": ["killboard (4x/4p)"]
        }
       ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "head": [
        {
         "count": 9,
@@ -102589,78 +97818,12 @@
       ]
      },
      "MAIN_CURSEDSTAFF": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_CAERLEON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "food": [
        {
         "count": 8,
         "id": "T8_MEAL_STEW",
         "players": 8,
         "sources": ["killboard (8x/8p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_PLATE_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 3,
-        "id": "OFF_LAMP_UNDEAD",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "T8_POTION_COOLDOWN",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_PLATE_SET1",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_CLOTH_ROYAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -102747,38 +97910,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 14,
         "sources": ["killboard (14x/14p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_PLATE_UNDEAD",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_CLOTH_ROYAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      }
@@ -102999,9 +98130,6 @@
       "head": ["HEAD_LEATHER_SET3", 8, 8],
       "shoes": ["SHOES_LEATHER_MORGANA", 4, 8]
      },
-     "MAIN_CURSEDSTAFF": {
-      "armor": ["ARMOR_CLOTH_SET2", 4, 8]
-     },
      "MAIN_CURSEDSTAFF_UNDEAD": {
       "armor": ["ARMOR_PLATE_HELL", 6, 17],
       "head": ["HEAD_LEATHER_SET3", 6, 6],
@@ -103016,118 +98144,12 @@
     },
     "by_weapon": {
      "2H_DAGGER_KATAR_AVALON": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "food": [
        {
         "count": 4,
         "id": "T8_MEAL_STEW",
         "players": 5,
         "sources": ["killboard (4x/5p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "T7_POTION_ACID",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_CLOTH_FEY",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ]
-     },
-     "2H_DUALSICKLE_UNDEAD": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 2,
-        "id": "T7_POTION_REVIVE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_CLOTH_ROYAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -103160,40 +98182,6 @@
         "sources": ["killboard (2x/2p)"]
        }
       ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T8_MEAL_STEW",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "HEAD_PLATE_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "offhand": [
        {
         "count": 5,
@@ -103208,14 +98196,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 8,
         "sources": ["killboard (8x/8p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      }
@@ -103370,45 +98350,9 @@
        "players": 4,
        "sources": ["killboard (4x/4p)"]
       }
-     ],
-     "shoes": [
-      {
-       "count": 4,
-       "id": "SHOES_CLOTH_FEY",
-       "kb": 4,
-       "players": 4,
-       "sources": ["killboard (4x/4p)"]
-      },
-      {
-       "count": 4,
-       "id": "SHOES_CLOTH_ROYAL",
-       "kb": 4,
-       "players": 4,
-       "sources": ["killboard (4x/4p)"]
-      },
-      {
-       "count": 3,
-       "id": "SHOES_LEATHER_HELL",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
-      },
-      {
-       "count": 3,
-       "id": "SHOES_LEATHER_MORGANA",
-       "kb": 3,
-       "players": 4,
-       "sources": ["killboard (3x/4p)"]
-      }
      ]
     },
     "weapon_archetypes": {
-     "2H_DAGGER_KATAR_AVALON": {
-      "armor": ["ARMOR_LEATHER_SET3", 3, 7]
-     },
-     "2H_DUALSICKLE_UNDEAD": {
-      "armor": ["ARMOR_LEATHER_SET1", 2, 5]
-     },
      "MAIN_RAPIER_MORGANA": {
       "armor": ["ARMOR_LEATHER_HELL", 5, 15],
       "head": ["HEAD_CLOTH_SET2", 2, 5]
@@ -103418,34 +98362,12 @@
    "engage_tank": {
     "by_weapon": {
      "2H_HAMMER_AVALON": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_PLATE_KEEPER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_PLATE_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "cape": [
        {
         "count": 8,
         "id": "CAPEITEM_SMUGGLER",
         "players": 8,
         "sources": ["killboard (8x/8p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ],
       "head": [
@@ -103492,42 +98414,12 @@
       ]
      },
      "2H_MACE_MORGANA": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_PLATE_HELL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_PLATE_KEEPER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 5,
         "id": "CAPEITEM_SMUGGLER",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
        }
       ]
      },
@@ -103554,20 +98446,6 @@
         "sources": ["killboard (8x/8p)"]
        }
       ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_MEAL_SANDWICH_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "head": [
        {
         "count": 5,
@@ -103589,20 +98467,6 @@
         "players": 7,
         "sources": ["killboard (7x/7p)"]
        }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
       ]
      },
      "2H_SHAPESHIFTER_KEEPER": {
@@ -103618,28 +98482,6 @@
         "id": "ARMOR_PLATE_SET2",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ],
       "head": [
@@ -103669,31 +98511,9 @@
         "players": 9,
         "sources": ["killboard (9x/9p)"]
        }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_CLOTH_SET2",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
       ]
      },
      "MAIN_ARCANESTAFF_UNDEAD": {
-      "armor": [
-       {
-        "count": 1,
-        "id": "ARMOR_PLATE_SET2",
-        "players": 2,
-        "sources": ["killboard (1x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 10,
@@ -103816,26 +98636,6 @@
        {
         "count": 2,
         "id": "CAPEITEM_FW_MARTLOCK",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_MEAL_SANDWICH_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
        }
@@ -104236,12 +99036,6 @@
      ]
     },
     "weapon_archetypes": {
-     "2H_HAMMER_AVALON": {
-      "armor": ["ARMOR_PLATE_KEEPER", 4, 10]
-     },
-     "2H_MACE_MORGANA": {
-      "armor": ["ARMOR_PLATE_HELL", 2, 5]
-     },
      "2H_POLEHAMMER": {
       "armor": ["ARMOR_PLATE_SET2", 6, 10],
       "head": ["HEAD_PLATE_KEEPER", 3, 6]
@@ -104263,66 +99057,12 @@
     },
     "by_weapon": {
      "2H_WILDSTAFF": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_CLOTH_AVALON",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_CLOTH_FEY",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 4,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_FORTSTERLING",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "food": [
        {
         "count": 4,
         "id": "T7_MEAL_OMELETTE",
         "players": 5,
         "sources": ["killboard (4x/5p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_CLOTH_KEEPER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 4,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
        }
       ],
       "potion": [
@@ -104696,9 +99436,6 @@
      ]
     },
     "weapon_archetypes": {
-     "2H_WILDSTAFF": {
-      "armor": ["ARMOR_CLOTH_AVALON", 4, 10]
-     },
      "MAIN_HOLYSTAFF_AVALON": {
       "armor": ["ARMOR_CLOTH_AVALON", 20, 45],
       "head": ["HEAD_LEATHER_SET3", 6, 20]
@@ -104751,26 +99488,6 @@
        {
         "count": 2,
         "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_CLOTH_KEEPER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 4,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET2",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
        }
@@ -104833,32 +99550,6 @@
         "id": "T7_MEAL_OMELETTE",
         "players": 6,
         "sources": ["killboard (6x/6p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_CLOTH_KEEPER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ],
       "potion": [
@@ -105105,66 +99796,12 @@
       ]
      },
      "2H_WILDSTAFF": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_CLOTH_AVALON",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_CLOTH_FEY",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 4,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_FORTSTERLING",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "food": [
        {
         "count": 4,
         "id": "T7_MEAL_OMELETTE",
         "players": 5,
         "sources": ["killboard (4x/5p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_CLOTH_KEEPER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 4,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
        }
       ],
       "potion": [
@@ -105381,74 +100018,12 @@
       ]
      },
      "MAIN_NATURESTAFF": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_CLOTH_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "cape": [
        {
         "count": 6,
         "id": "CAPEITEM_FW_LYMHURST",
         "players": 6,
         "sources": ["killboard (6x/6p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 2,
-        "id": "OFF_HORN_KEEPER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "OFF_ORB_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ],
       "potion": [
@@ -105469,28 +100044,6 @@
       ]
      },
      "MAIN_NATURESTAFF_CRYSTAL": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_FEY",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "food": [
        {
         "count": 5,
@@ -105505,54 +100058,12 @@
         "sources": ["killboard (2x/2p)"]
        }
       ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_KEEPER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 4,
-        "id": "OFF_HORN_KEEPER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "OFF_CENSER_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 7,
         "id": "T7_POTION_REVIVE",
         "players": 7,
         "sources": ["killboard (7x/7p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_UNDEAD",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      }
@@ -105925,41 +100436,15 @@
       "head": ["HEAD_LEATHER_SET3", 7, 10],
       "shoes": ["SHOES_LEATHER_MORGANA", 4, 7]
      },
-     "2H_WILDSTAFF": {
-      "armor": ["ARMOR_CLOTH_AVALON", 4, 10]
-     },
      "MAIN_HOLYSTAFF_AVALON": {
       "armor": ["ARMOR_CLOTH_AVALON", 20, 45],
       "head": ["HEAD_LEATHER_SET3", 6, 20]
-     },
-     "MAIN_NATURESTAFF": {
-      "armor": ["ARMOR_CLOTH_SET2", 4, 10]
-     },
-     "MAIN_NATURESTAFF_CRYSTAL": {
-      "armor": ["ARMOR_CLOTH_FEY", 2, 7]
      }
     }
    },
    "off_tank": {
-    "archetype": {
-     "armor": ["ARMOR_PLATE_HELL", 4, 9]
-    },
     "by_weapon": {
      "2H_DUALMACE_AVALON": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_PLATE_HELL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "ARMOR_PLATE_KEEPER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "cape": [
        {
         "count": 5,
@@ -105983,14 +100468,6 @@
         "players": 7,
         "sources": ["killboard (7x/7p)"]
        }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_PLATE_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
       ]
      }
     },
@@ -105998,24 +100475,6 @@
      "2H_DUALMACE_AVALON": 9
     },
     "slots": {
-     "armor": [
-      {
-       "count": 4,
-       "effect": "reflect_shell",
-       "id": "ARMOR_PLATE_HELL",
-       "kb": 4,
-       "players": 4,
-       "sources": ["killboard (4x/4p)"]
-      },
-      {
-       "count": 3,
-       "effect": "force_shield",
-       "id": "ARMOR_PLATE_KEEPER",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
-      }
-     ],
      "cape": [
       {
        "count": 5,
@@ -106042,21 +100501,7 @@
        "players": 7,
        "sources": ["killboard (7x/7p)"]
       }
-     ],
-     "shoes": [
-      {
-       "count": 3,
-       "id": "SHOES_PLATE_SET3",
-       "kb": 3,
-       "players": 3,
-       "sources": ["killboard (3x/3p)"]
-      }
      ]
-    },
-    "weapon_archetypes": {
-     "2H_DUALMACE_AVALON": {
-      "armor": ["ARMOR_PLATE_HELL", 4, 9]
-     }
     }
    },
    "ranged_aoe": {
@@ -106130,34 +100575,6 @@
       ]
      },
      "2H_BOW_KEEPER": {
-      "cape": [
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_MARTLOCK",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 4,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_ROYAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 6,
@@ -106165,87 +100582,15 @@
         "players": 6,
         "sources": ["killboard (6x/6p)"]
        }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
       ]
      },
      "2H_CROSSBOW": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_CLOTH_SET1",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "food": [
        {
         "count": 5,
         "id": "T8_MEAL_STEW",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_ROYAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 3,
-        "id": "T8_POTION_COOLDOWN",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_POTION_REVIVE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_CLOTH_ROYAL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "SHOES_PLATE_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ]
      },
@@ -106362,40 +100707,6 @@
         "id": "SHOES_LEATHER_SET1",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
-     "2H_DUALCROSSBOW_HELL": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 1,
-        "id": "SHOES_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (1x/2p)"]
        }
       ]
      },
@@ -106572,36 +100883,6 @@
       ]
      },
      "2H_FROSTSTAFF": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "head": [
        {
         "count": 5,
@@ -106732,76 +101013,6 @@
       ]
      },
      "2H_INFERNOSTAFF": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T8_MEAL_STEW",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 1,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (1x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_HELL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 3,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (3x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_POTION_COOLDOWN",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "shoes": [
        {
         "count": 5,
@@ -106824,20 +101035,6 @@
         "id": "ARMOR_CLOTH_SET1",
         "players": 9,
         "sources": ["killboard (9x/9p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_FORTSTERLING",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ],
       "food": [
@@ -107134,28 +101331,6 @@
         "sources": ["killboard (7x/7p)"]
        }
       ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_CLOTH_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T8_POTION_COOLDOWN",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_POTION_REVIVE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "shoes": [
        {
         "count": 7,
@@ -107190,20 +101365,6 @@
        {
         "count": 2,
         "id": "CAPEITEM_FW_LYMHURST",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T8_MEAL_STEW",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
        }
@@ -107247,46 +101408,6 @@
        }
       ]
      },
-     "MAIN_FIRESTAFF": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_CLOTH_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_MEAL_STEW",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 3,
-        "id": "OFF_BOOK",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ]
-     },
      "MAIN_FROSTSTAFF": {
       "armor": [
        {
@@ -107294,66 +101415,6 @@
         "id": "ARMOR_LEATHER_SET3",
         "players": 8,
         "sources": ["killboard (8x/8p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_THETFORD",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "T8_MEAL_STEW",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_CLOTH_AVALON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ],
       "offhand": [
@@ -107975,15 +102036,9 @@
       "head": ["HEAD_LEATHER_SET3", 9, 9],
       "shoes": ["SHOES_LEATHER_MORGANA", 5, 9]
      },
-     "2H_CROSSBOW": {
-      "armor": ["ARMOR_CLOTH_SET1", 4, 6]
-     },
      "2H_CROSSBOW_CANNON_AVALON": {
       "armor": ["ARMOR_CLOTH_KEEPER", 7, 18],
       "head": ["HEAD_LEATHER_FEY", 3, 7]
-     },
-     "2H_DUALCROSSBOW_HELL": {
-      "armor": ["ARMOR_CLOTH_SET2", 2, 5]
      },
      "2H_FIRESTAFF_HELL": {
       "armor": ["ARMOR_CLOTH_SET1", 23, 24],
@@ -108001,17 +102056,11 @@
       "potion": ["T7_POTION_REVIVE", 10, 10],
       "shoes": ["SHOES_LEATHER_MORGANA", 14, 15]
      },
-     "2H_FROSTSTAFF": {
-      "armor": ["ARMOR_LEATHER_HELL", 2, 8]
-     },
      "2H_ICECRYSTAL_UNDEAD": {
       "armor": ["ARMOR_CLOTH_SET1", 20, 26],
       "cape": ["CAPEITEM_SMUGGLER", 5, 12],
       "head": ["HEAD_LEATHER_SET3", 17, 20],
       "shoes": ["SHOES_LEATHER_MORGANA", 12, 17]
-     },
-     "2H_INFERNOSTAFF": {
-      "armor": ["ARMOR_LEATHER_SET3", 2, 9]
      },
      "2H_INFERNOSTAFF_MORGANA": {
       "armor": ["ARMOR_CLOTH_SET1", 9, 13],
@@ -108033,9 +102082,6 @@
       "offhand": ["OFF_DEMONSKULL_HELL", 5, 7],
       "potion": ["T7_POTION_REVIVE", 4, 5],
       "shoes": ["SHOES_LEATHER_MORGANA", 7, 8]
-     },
-     "MAIN_FIRESTAFF": {
-      "armor": ["ARMOR_CLOTH_SET2", 3, 5]
      },
      "MAIN_FROSTSTAFF": {
       "armor": ["ARMOR_LEATHER_SET3", 8, 17],
@@ -108073,14 +102119,6 @@
         "sources": ["killboard (8x/8p)"]
        }
       ],
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "head": [
        {
         "count": 8,
@@ -108095,26 +102133,6 @@
         "id": "T7_POTION_REVIVE",
         "players": 8,
         "sources": ["killboard (8x/8p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 4,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -108227,20 +102245,6 @@
         "sources": ["killboard (2x/2p)"]
        }
       ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "head": [
        {
         "count": 8,
@@ -108263,56 +102267,6 @@
         "id": "SHOES_LEATHER_MORGANA",
         "players": 7,
         "sources": ["killboard (7x/7p)"]
-       }
-      ]
-     },
-     "MAIN_ARCANESTAFF": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_PLATE_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "offhand": [
-       {
-        "count": 4,
-        "id": "OFF_SHIELD_AVALON",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 3,
-        "id": "T7_POTION_REVIVE",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      }
@@ -108410,15 +102364,6 @@
        "sources": ["killboard (35x/35p)"]
       }
      ],
-     "offhand": [
-      {
-       "count": 4,
-       "id": "OFF_SHIELD_AVALON",
-       "kb": 4,
-       "players": 4,
-       "sources": ["killboard (4x/4p)"]
-      }
-     ],
      "potion": [
       {
        "count": 37,
@@ -108482,9 +102427,6 @@
       "cape": ["CAPEITEM_SMUGGLER", 3, 5],
       "head": ["HEAD_LEATHER_SET3", 8, 9],
       "shoes": ["SHOES_LEATHER_MORGANA", 5, 8]
-     },
-     "MAIN_ARCANESTAFF": {
-      "armor": ["ARMOR_PLATE_SET2", 3, 5]
      }
     }
    },
@@ -108495,28 +102437,12 @@
     },
     "by_weapon": {
      "2H_MACE": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_PLATE_SET3",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "cape": [
        {
         "count": 5,
         "id": "CAPEITEM_SMUGGLER",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_HELL",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
        }
       ],
       "potion": [
@@ -108526,61 +102452,9 @@
         "players": 6,
         "sources": ["killboard (6x/6p)"]
        }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
       ]
      },
      "2H_QUARTERSTAFF_AVALON": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_PLATE_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_DEMON",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T8_MEAL_STEW",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
       "potion": [
        {
         "count": 6,
@@ -108959,12 +102833,6 @@
      ]
     },
     "weapon_archetypes": {
-     "2H_MACE": {
-      "armor": ["ARMOR_PLATE_SET3", 4, 7]
-     },
-     "2H_QUARTERSTAFF_AVALON": {
-      "armor": ["ARMOR_PLATE_SET2", 3, 9]
-     },
      "MAIN_ROCKMACE_KEEPER": {
       "armor": ["ARMOR_PLATE_HELL", 11, 23],
       "cape": ["CAPEITEM_SMUGGLER", 6, 6],
@@ -109098,112 +102966,6 @@
        }
       ]
      },
-     "2H_CLEAVER_HELL": {
-      "armor": [
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T8_MEAL_STEW",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_MORGANA",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_POTION_COOLDOWN",
-        "players": 3,
-        "sources": ["killboard (2x/3p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "SHOES_PLATE_UNDEAD",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
-     "2H_DUALSWORD": {
-      "food": [
-       {
-        "count": 2,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_PLATE_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 2,
-        "id": "T6_POTION_HEAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ]
-     },
      "2H_HARPOON_HELL": {
       "armor": [
        {
@@ -109231,14 +102993,6 @@
         "id": "CAPEITEM_FW_FORTSTERLING",
         "players": 2,
         "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
        }
       ],
       "head": [
@@ -109279,56 +103033,6 @@
       ]
      },
      "2H_KNUCKLES_HELL": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 4,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 3,
-        "id": "CAPEITEM_FW_LYMHURST",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T8_MEAL_STEW",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 3,
-        "id": "HEAD_PLATE_SET2",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_PLATE_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 9,
@@ -109353,56 +103057,6 @@
       ]
      },
      "2H_KNUCKLES_SET2": {
-      "armor": [
-       {
-        "count": 3,
-        "id": "ARMOR_LEATHER_SET3",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "cape": [
-       {
-        "count": 3,
-        "id": "CAPEITEM_SMUGGLER",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 4,
-        "id": "T8_MEAL_STEW",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 3,
-        "id": "HEAD_PLATE_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_SET2",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET1",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "potion": [
        {
         "count": 8,
@@ -109410,31 +103064,9 @@
         "players": 8,
         "sources": ["killboard (8x/8p)"]
        }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_CLOTH_SET1",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
       ]
      },
      "2H_KNUCKLES_SET3": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_LEATHER_HELL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       },
-       {
-        "count": 2,
-        "id": "ARMOR_LEATHER_AVALON",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
       "cape": [
        {
         "count": 11,
@@ -109495,38 +103127,6 @@
        {
         "count": 3,
         "id": "SHOES_PLATE_UNDEAD",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ]
-     },
-     "MAIN_AXE": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_LEATHER_SET1",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 2,
-        "id": "T7_POTION_REVIVE",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "T8_POTION_COOLDOWN",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 3,
-        "id": "SHOES_PLATE_SET1",
         "players": 3,
         "sources": ["killboard (3x/3p)"]
        }
@@ -109889,15 +103489,6 @@
       "head": ["HEAD_LEATHER_SET3", 12, 14],
       "potion": ["T7_POTION_REVIVE", 5, 6],
       "shoes": ["SHOES_LEATHER_MORGANA", 10, 12]
-     },
-     "2H_KNUCKLES_HELL": {
-      "armor": ["ARMOR_LEATHER_SET2", 3, 10]
-     },
-     "2H_KNUCKLES_SET2": {
-      "armor": ["ARMOR_LEATHER_SET3", 3, 9]
-     },
-     "MAIN_AXE": {
-      "armor": ["ARMOR_LEATHER_SET1", 4, 5]
      }
     }
    },
@@ -109909,58 +103500,12 @@
     },
     "by_weapon": {
      "2H_ARCANESTAFF_HELL": {
-      "armor": [
-       {
-        "count": 4,
-        "id": "ARMOR_LEATHER_ROYAL",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
       "cape": [
        {
         "count": 5,
         "id": "CAPEITEM_SMUGGLER",
         "players": 5,
         "sources": ["killboard (5x/5p)"]
-       }
-      ],
-      "food": [
-       {
-        "count": 3,
-        "id": "T7_MEAL_OMELETTE",
-        "players": 3,
-        "sources": ["killboard (3x/3p)"]
-       }
-      ],
-      "head": [
-       {
-        "count": 2,
-        "id": "HEAD_CLOTH_KEEPER",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       },
-       {
-        "count": 2,
-        "id": "HEAD_LEATHER_SET3",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
-       }
-      ],
-      "potion": [
-       {
-        "count": 4,
-        "id": "T7_POTION_REVIVE",
-        "players": 4,
-        "sources": ["killboard (4x/4p)"]
-       }
-      ],
-      "shoes": [
-       {
-        "count": 2,
-        "id": "SHOES_LEATHER_ROYAL",
-        "players": 2,
-        "sources": ["killboard (2x/2p)"]
        }
       ]
      },
@@ -110169,9 +103714,6 @@
      ]
     },
     "weapon_archetypes": {
-     "2H_ARCANESTAFF_HELL": {
-      "armor": ["ARMOR_LEATHER_ROYAL", 4, 5]
-     },
      "2H_ICEGAUNTLETS_HELL": {
       "armor": ["ARMOR_PLATE_SET2", 6, 14],
       "head": ["HEAD_LEATHER_SET3", 6, 6],

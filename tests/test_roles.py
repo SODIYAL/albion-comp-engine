@@ -345,7 +345,10 @@ def t_kit_uniform_gate():
     # R12 — increment 2's kill shot for the original bug: a GENERATED kit
     # starts from the seat's uniform; the comp-marginal only ranks within
     # it. Manual picks still score anything (role_advisory flags them).
-    e = Engine(content="blackzone_roam", size=20, style="brawl")
+    # BAND contract at `balanced` (2026-09-08: under a DECLARED style the
+    # style cell speaks — see below — so the harvest-admission ruling is
+    # pinned where the band is what the engine reads)
+    e = Engine(content="blackzone_roam", size=20)
     classes = lambda ko: {e.gear[o["gear"]].get("gear_class")
                           for o in ko["options"].get("armor", [])}
     inc = e.kit_options("MAIN_MACE_HELL", top_n=300)
@@ -355,6 +358,22 @@ def t_kit_uniform_gate():
     # (owner accepted); Incubus stays plate-only
     gated = (classes(inc) == {"plate"} and classes(grail) == {"leather", "plate"}
              and "ARMOR_LEATHER_HELL" not in inc_ids)
+    # under a declared brawl the brawl CELL's armor tier is what the
+    # options serve where the cell has one (2026-09-08 style cells): the
+    # classes offered are exactly the classes the cell's tier carries
+    eb = Engine(content="blackzone_roam", size=20, style="brawl")
+    cell_tier = ((((eb.roles.get("stopper_tank") or {}).get("kit_styles")
+                   or {}).get("brawl") or {}).get("kit_weapon") or {}
+                 ).get("2H_QUARTERSTAFF_AVALON", {}).get("armor")
+    if cell_tier:
+        want = {eb.gear[g].get("gear_class") for g, _n in cell_tier
+                if eb.gear[g].get("gear_class") != "cloth"}
+        gb = eb.kit_options("2H_QUARTERSTAFF_AVALON", top_n=300)
+        cell_ok = {eb.gear[o["gear"]].get("gear_class")
+                   for o in gb["options"].get("armor", [])} == want
+    else:
+        cell_ok = True   # no brawl cell for Grailseeker on this harvest
+    gated = gated and cell_ok
     unc = e.kit_options("MAIN_MACE_HELL", top_n=300, role=None)
     back_compat = "ARMOR_LEATHER_HELL" in [
         o["gear"] for o in unc["options"]["armor"]]
@@ -854,6 +873,67 @@ def t_kit_audit_agreement():
           "worn < half as often as the modal",
           total >= 50 and agree >= 0.85 * total and bad == 0,
           f"agree={agree}/{total} bad={bad} {detail[:4]}")
+    # R24b (2026-09-08, spec notes/specs/2026-09-08-coherent-style-kits-
+    # design.md "Tests"): under a DECLARED style the modal the forge must
+    # match is the STYLE CELL's — the modal among the weapon's builds
+    # linked to parties labelled that style — wherever the cell exists
+    # (>= 5 voters); weapons without a clap cell are skipped.
+    sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+    import party_link
+    ps = _json.load(open(os.path.join(ROOT, "pipeline", "out",
+                                      "party_styles.json"), encoding="utf-8"))
+    label = {(r["battle"], r["index"]): r["style"] for r in ps["parties"]
+             if r.get("style")}
+    by_battle = party_link.parties_by_battle(doc)
+    es = Engine(content="territory_defense", size=20, style="clap")
+    by_ws, per_s = {}, {}
+    for r in doc.get("builds") or []:
+        if r.get("weapon") in es.weapons and r.get("gear") \
+                and (r.get("party_size") or 0) >= 10:
+            idx = party_link.link_build(r, by_battle, 10)
+            if label.get((r["battle"], idx)) != "clap":
+                continue
+            k = (r["weapon"], r.get("player"))
+            per_s[k] = per_s.get(k, 0) + 1
+            by_ws.setdefault(r["weapon"], []).append(r)
+    total_s = agree_s = bad_s = 0
+    detail_s = []
+    for w in pick:
+        rows = by_ws.get(w) or []
+        if len({r.get("player") for r in rows}) < 5:
+            continue          # no clap cell for this weapon
+        v0 = {}
+        for g in (es.kit_variants(w)[0][1] or []):
+            v0[es.gear[g]["slot"]] = g
+        for slot, kb in slot_kb:
+            if slot == "offhand" and es.weapons[w].get("two_handed"):
+                continue
+            c, who = _Counter(), {}
+            for r in rows:
+                v = r["gear"].get(kb)
+                key = (es.gear_key(v) or v) if v else "-"
+                c[key] += 1.0 / per_s[(w, r.get("player"))]
+                who.setdefault(key, set()).add(r.get("player"))
+            n = sum(c.values())
+            items = [(k, x) for k, x in c.most_common() if k != "-"]
+            if not items or items[0][0] not in es.gear:
+                continue
+            modal, mn = items[0]
+            if len(who.get(modal) or ()) < 5:
+                continue      # the cell carries no such slot (slot floor)
+            eng = v0.get(slot)
+            share = (c.get(eng, 0) / n) if eng else 0.0
+            total_s += 1
+            if eng == modal:
+                agree_s += 1
+            elif share < 0.5 * (mn / n):
+                bad_s += 1
+                detail_s.append(f"{w}:{slot}:{eng}<{modal}")
+    check("R24b styled kit audit: under a declared clap the forge kit "
+          "matches the clap cell's modal item in >= 85% of audited slots "
+          "and never picks an item worn < half as often",
+          total_s >= 10 and agree_s >= 0.85 * total_s and bad_s == 0,
+          f"agree={agree_s}/{total_s} bad={bad_s} {detail_s[:4]}")
 
 
 def t_carrier_quota():
@@ -1305,6 +1385,53 @@ def t_style_cells():
           f"thin={thin[:3]} gang={gang_cells}")
 
 
+def t_style_cell_reader():
+    # R33 (2026-09-08, spec section 2 "Engine"): a DECLARED style dresses a
+    # weapon from its style cell where one exists; balanced and a missing
+    # cell fall back to the band; the option names its style. Pinned on
+    # mechanism: the fixture is whichever weapon's clap and brawl cells both
+    # exist and disagree on the chest (neither cloth, which the brawl gate
+    # would hide), under its own primary seat.
+    band = Engine(content="territory_defense", size=20)
+    pick = None
+    for rid, rec in band.roles.items():
+        ks = rec.get("kit_styles") or {}
+        cw = (ks.get("clap") or {}).get("kit_weapon_build") or {}
+        bw = (ks.get("brawl") or {}).get("kit_weapon_build") or {}
+        for w in sorted(cw):
+            chain, bch = cw[w], bw.get(w) or {}
+            band_ch = (rec.get("kit_weapon_build") or {}).get(w) or {}
+            if (chain.get("armor") and bch.get("armor")
+                    and chain["armor"][0] != bch["armor"][0]
+                    and not bch["armor"][0].startswith("ARMOR_CLOTH")
+                    and band.primary_seat(w) == rid):
+                pick = (rid, w, chain["armor"][0], bch["armor"][0],
+                        (band_ch.get("armor") or [None])[0])
+                break
+        if pick:
+            break
+    ok = pick is not None
+    detail = f"pick={pick}"
+    if pick:
+        rid, w, clap_chest, brawl_chest, band_chest = pick
+        kc = Engine(content="territory_defense", size=20,
+                    style="clap").kit_options(w)
+        kb = Engine(content="territory_defense", size=20,
+                    style="brawl").kit_options(w)
+        kx = band.kit_options(w)
+        got = (kc["kit"].get("armor", {}).get("gear"),
+               kb["kit"].get("armor", {}).get("gear"),
+               kx["kit"].get("armor", {}).get("gear"))
+        styled = kc["kit"].get("armor", {}).get("observed_style")
+        ok = (got[0] == clap_chest and got[1] == brawl_chest
+              and got[2] == band_chest and styled == "clap"
+              and "observed_style" not in kx["kit"].get("armor", {}))
+        detail += f" got={got} styled={styled}"
+    check("R33 style cell reader: clap and brawl dress from their cells, "
+          "balanced from the band, the option names its style",
+          ok, detail)
+
+
 if __name__ == "__main__":
     t_role_book()
     t_ruled_memberships()
@@ -1338,6 +1465,7 @@ if __name__ == "__main__":
     t_party_link()
     t_party_styles()
     t_style_cells()
+    t_style_cell_reader()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")

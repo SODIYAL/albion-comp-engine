@@ -1399,16 +1399,45 @@ class Engine:
     DOCTRINE_GANG_MAX = 9   # party sizes that read the gang doctrine band
 
     def _seat_kit(self, rec):
-        """The seat's doctrine for THIS party size (2026-09-04, kit
-        doctrine per size band): below DOCTRINE_GANG_MAX+1 members the
-        gang band (`kit_bands.gang`, mined from 4-9 man killer parties)
-        when the seat has one, else the group band the seat carries at
-        top level. Every doctrine reader goes through here."""
+        """The seat's doctrine for THIS party size and DECLARED style
+        (2026-09-04 size bands; 2026-09-08 style cells, spec notes/specs/
+        2026-09-08-coherent-style-kits-design.md): below DOCTRINE_GANG_MAX+1
+        members the gang band (`kit_bands.gang`, mined from 4-9 man killer
+        parties) when the seat has one; else, under a declared style with
+        a cell (`kit_styles.<style>`), the cell laid over the band — the
+        band fills every weapon and slot the cell lacks; else the band.
+        `balanced` NEVER reads a cell (owner 2026-09-08): the detected
+        identity is descriptive and stays out of generation. Every
+        doctrine reader goes through here."""
         if self.size <= self.DOCTRINE_GANG_MAX:
             gang = (rec.get("kit_bands") or {}).get("gang")
             if gang:
                 return gang
-        return rec
+        cell = ((rec.get("kit_styles") or {}).get(self.style)
+                if self.style in self.IDENTITY_STYLES else None)
+        if not cell:
+            return rec
+        merged = dict(rec)
+        kit = dict(rec.get("kit") or {})
+        kit.update(cell.get("kit") or {})
+        merged["kit"] = kit
+        # per-weapon tiers merge per SLOT (the band fills every slot the
+        # cell lacks); a chain is coherent and replaces the weapon's whole
+        # chain; the uniform extension replaces per weapon
+        per_w = {w: dict(slots) for w, slots in (rec.get("kit_weapon") or {}).items()}
+        for w, slots in (cell.get("kit_weapon") or {}).items():
+            per_w.setdefault(w, {}).update(slots)
+        merged["kit_weapon"] = per_w
+        for key in ("kit_weapon_build", "kit_weapon_uniform"):
+            per_w = dict(rec.get(key) or {})
+            per_w.update(cell.get(key) or {})
+            merged[key] = per_w
+        if cell.get("kit_build"):
+            merged["kit_build"] = cell["kit_build"]
+        merged["_style_arch"] = {
+            "weapons": sorted(cell.get("kit_weapon_build") or {}),
+            "seat": bool(cell.get("kit_build"))}
+        return merged
 
     def _chest_uniform(self, seat, weapon):
         """Chest classes admitted for `weapon` in `seat`: the book uniform
@@ -1511,7 +1540,7 @@ class Engine:
         wdoc = (seat_rec.get("kit_weapon") or {}).get(weapon) or {}
         # observed-build archetype (2026-09-01): weapon's own first,
         # seat fallback per slot
-        arch, arch_seat = {}, set()
+        arch, arch_seat, arch_styled = {}, set(), set()
         if role is not None:
             wb = (seat_rec.get("kit_weapon_build") or {}).get(weapon) or {}
             sb = seat_rec.get("kit_build") or {}
@@ -1519,6 +1548,12 @@ class Engine:
                 arch[slot] = wb.get(slot) or sb.get(slot)
                 if slot not in wb:
                     arch_seat.add(slot)   # seat-level fallback archetype
+            # which archetype slots came from the declared style's cell
+            # (2026-09-08): the option carries `observed_style`
+            styled = seat_rec.get("_style_arch") or {}
+            arch_styled = {slot for slot in arch
+                           if (slot in wb and weapon in styled.get("weapons", ()))
+                           or (slot in arch_seat and styled.get("seat"))}
         by_slot = {}
         for k, g in self.gear.items():
             by_slot.setdefault(g.get("slot") or "other", []).append(k)
@@ -1658,6 +1693,8 @@ class Engine:
                 for i, rr in enumerate(ranked):
                     if rr["gear"] == a[0]:
                         rr["observed_build"] = [a[1], a[2]]
+                        if slot in arch_styled:
+                            rr["observed_style"] = self.style
                         ranked.insert(0, ranked.pop(i))
                         break
             options[slot] = ranked[:top_n]
