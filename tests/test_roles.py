@@ -1232,6 +1232,44 @@ def t_party_link():
           f"idx={idx} builds={ {w: b.get('party') for w, b in by_w.items()} }")
 
 
+def t_party_styles():
+    # R32 (2026-09-08, spec section 2 "Labels"): parties of 10+ in the
+    # committed artifact are labelled with the engine's weapons-only
+    # identity; smaller parties are skipped, forming rosters get null; the
+    # file records the artifact hash it was derived from.
+    import json as _json
+    sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+    import derive_party_styles as dps
+    clap = ["2H_FIRE_RINGPAIR_AVALON", "2H_SHAPESHIFTER_KEEPER",
+            "2H_HOLYSTAFF_CRYSTAL", "MAIN_CURSEDSTAFF_UNDEAD", "2H_LONGBOW",
+            "2H_BOW_AVALON", "MAIN_NATURESTAFF", "2H_DUALMACE_AVALON",
+            "2H_ICECRYSTAL_UNDEAD", "2H_AXE_AVALON", "2H_HOLYSTAFF_UNDEAD",
+            "2H_HARPOON_HELL", "2H_BOW_HELL"]        # round-4 roster 16
+    doc = {"parties": [
+        {"battle": 5, "size": 13, "weapons": sorted(clap)},
+        {"battle": 5, "size": 4, "weapons": ["MAIN_MACE"] * 4},
+        {"battle": 6, "size": 10, "weapons": ["NOT_A_WEAPON"] * 10, "index": 3},
+    ]}
+    out = dps.derive(doc, lambda size: Engine(content="territory_defense",
+                                              size=size))
+    rows = {(r["battle"], r["index"]): r for r in out["parties"]}
+    check("R32 party styles: a 13-stack labels clap, a 4-man is skipped, "
+          "an unknown-weapon roster is null, rows keep the recorded index",
+          rows.get((5, 0), {}).get("style") == "clap" and (5, 1) not in rows
+          and (6, 3) in rows and rows[(6, 3)]["style"] is None
+          and out["_min_size"] == 10,
+          f"rows={ {k: v['style'] for k, v in rows.items()} }")
+    ps_path = os.path.join(ROOT, "pipeline", "out", "party_styles.json")
+    pr_path = os.path.join(ROOT, "pipeline", "out", "party_rosters.json")
+    have = os.path.exists(ps_path)
+    live = (_json.load(open(ps_path, encoding="utf-8")) if have else {})
+    check("R32b committed party_styles.json matches the committed artifact "
+          "hash and uses LF",
+          have and live["_source"]["party_rosters_sha256"] == dps.sha256_of(pr_path)
+          and b"\r\n" not in open(ps_path, "rb").read(),
+          f"have={have}")
+
+
 if __name__ == "__main__":
     t_role_book()
     t_ruled_memberships()
@@ -1263,6 +1301,7 @@ if __name__ == "__main__":
     t_doctrine_bands()
     t_chain_guard()
     t_party_link()
+    t_party_styles()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")
