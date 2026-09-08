@@ -1432,6 +1432,52 @@ def t_style_cell_reader():
           ok, detail)
 
 
+def t_seat_pools():
+    # R34a (2026-09-08, spec section 3 "Seat pooling"): every seat with a
+    # kit ships two player-counted pools per band — the plain seat pool per
+    # slot and the CHEST-CONDITIONED pool (the seat's items among builds
+    # wearing each chest) — for the five poolable slots only, items with
+    # >= 2 players; style cells carry neither key.
+    e = Engine(content="territory_defense", size=20)
+    POOL_SLOTS = {"head", "shoes", "cape", "potion", "food"}
+    seats = pools = by_chest = 0
+    bad = []
+    for rid, rec in e.roles.items():
+        for band_name, band in (("group", rec),
+                                ("gang", (rec.get("kit_bands") or {}).get("gang") or {})):
+            if not band.get("kit"):
+                continue
+            seats += 1
+            kp = band.get("kit_pool") or {}
+            kc = band.get("kit_by_chest") or {}
+            if not kp:
+                bad.append(f"{rid}/{band_name}: no kit_pool")
+                continue
+            pools += 1
+            if set(kp) - POOL_SLOTS:
+                bad.append(f"{rid}/{band_name}: pool slots {sorted(set(kp) - POOL_SLOTS)}")
+            for slot, rows in kp.items():
+                if any((not isinstance(n, int)) or n < 2 or g not in e.gear
+                       for g, n in rows):
+                    bad.append(f"{rid}/{band_name}/{slot}: bad pool row")
+                if [n for _g, n in rows] != sorted((n for _g, n in rows), reverse=True):
+                    bad.append(f"{rid}/{band_name}/{slot}: pool not sorted")
+            for chest, slots in kc.items():
+                by_chest += 1
+                if chest not in e.gear or e.gear[chest].get("slot") != "armor":
+                    bad.append(f"{rid}/{band_name}: by_chest key {chest}")
+                if set(slots) - POOL_SLOTS:
+                    bad.append(f"{rid}/{band_name}/{chest}: slots {sorted(set(slots) - POOL_SLOTS)}")
+        for st, cell in (rec.get("kit_styles") or {}).items():
+            if "kit_pool" in cell or "kit_by_chest" in cell:
+                bad.append(f"{rid}/{st}: cell carries a pool")
+    check("R34a seat pools ship: player-counted seat pool and chest-"
+          "conditioned pool per band for the five poolable slots, sorted, "
+          "catalog ids, none on style cells",
+          seats > 0 and pools == seats and by_chest > 0 and not bad,
+          f"seats={seats} pools={pools} by_chest={by_chest} bad={bad[:4]}")
+
+
 if __name__ == "__main__":
     t_role_book()
     t_ruled_memberships()
@@ -1466,6 +1512,7 @@ if __name__ == "__main__":
     t_party_styles()
     t_style_cells()
     t_style_cell_reader()
+    t_seat_pools()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")

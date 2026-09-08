@@ -168,3 +168,36 @@ new artifact is LF.
 Dressed labels for the party file (needs member kits in the artifact);
 style cells in the gang band; using detected identity for balanced comps;
 all other levers from the 2026-09-08 list.
+
+## 3. Seat pooling for thin slots (approved 2026-09-08, "i leave it up 2 you to get the best results")
+
+Measured before designing (135 seated weapons, 844 forged tiles at 20,
+balanced): 627 tiles rest on a weapon item worn by 5+ players, 160 on a
+weapon item worn by 2-4 players, 57 on the seat fallback. Bootstrap on
+well-evidenced weapons (15+ voters, 20 draws each): the modal of 3 random
+players' builds matches the weapon's true modal for the helmet 58%, boots
+48%, cape 68%, potion 86%, food 80%. The seat's modal among builds wearing
+the SAME CHEST matches it 80% / 72% / 81% (helmet / boots / cape); the
+plain seat modal 66% / 62% / 75%, and 95% / 82% for potion / food.
+Conditioning on chest CLASS does not help (65% / 64% / 79%).
+
+Rule (both ports, inside the one kit reader):
+
+- A weapon slot is THIN when its weapon-tier modal carries fewer than
+  POOL_MIN_VOTES (5) votes (votes are player-weighted, so 5 votes means
+  at least 5 players).
+- Thin helmet / boots / cape: front the seat's modal among builds wearing
+  the chest THIS kit is dressed in (`kit_by_chest[chest][slot]`) when that
+  item has 5+ players; else the plain seat modal (`kit_pool[slot]`) at
+  5+; else keep the weapon's thin item — something observed beats nothing.
+- Thin potion / food: the plain seat modal at 5+, else the thin item.
+- Chest and off-hand are never pooled (identity and uniform; stat physics).
+- The pooled option carries `pooled: "seat|chest" | "seat"` and
+  `pooled_n: players`; the kit editor's engine-kit line names it.
+- The miner ships `kit_pool` and `kit_by_chest` per seat and per band
+  (group top level, gang under `kit_bands.gang`), player-counted, items
+  with 2+ players, from the same killboard builds the tiers use; style
+  cells ship none — the merged record keeps the band's pools.
+- R24 skips slots whose killboard modal has fewer than 5 players (the
+  pooling floor, mirrored like R24b); R34 pins the mechanism.
+

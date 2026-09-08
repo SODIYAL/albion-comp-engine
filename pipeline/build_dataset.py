@@ -1076,6 +1076,7 @@ KIT_SLOT_MAP = {"armor": "armor", "head": "head", "shoes": "shoes",
 # Keeper pocket carries its helmet and boots.
 CHAIN_POCKET_SHARE, CHAIN_POCKET_VOTES = 0.20, 20
 STYLE_CELL_MIN_VOTERS = 5   # distinct players before a weapon has a style cell
+POOL_MIN_PLAYERS, POOL_TOP_N = 5, 3   # seat pools: shipped items per slot (spec section 3)
 
 
 def resolve_passive_doctrine(doc, gear, problems):
@@ -1557,6 +1558,59 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                                 player)
                     _vote(ent.setdefault("weapons", {}), wk_id, wgt, player)
 
+        # SEAT POOLS (2026-09-08, spec notes/specs/2026-09-08-coherent-
+        # style-kits-design.md section 3): player-counted items per slot,
+        # plain and CONDITIONED ON THE BUILD'S OWN CHEST, for the five
+        # poolable slots. The engine's kit reader serves them where a
+        # weapon's slot evidence is thin (under POOL_MIN_VOTES): measured
+        # on this harvest, three players' helmets predict a weapon's true
+        # modal 58% of the time, the seat's helmet among same-chest wearers
+        # 80%. Chest and off-hand are never pooled. Style cells ship none.
+        POOL_SLOTS = ("head", "shoes", "cape", "potion", "food")
+        pool_players, chest_players = {}, {}
+        if style is None:
+            for m in (r.get("weapons") or []):
+                wk_id = m.get("id")
+                for gdict, _wgt, player in kb_by_weapon.get(wk_id) or []:
+                    norm_b = {}
+                    for rk, v in gdict.items():
+                        slot = KIT_SLOT_MAP.get(rk.lower())
+                        gid = normalize(v) if slot else None
+                        if gid:
+                            norm_b[slot] = gid
+                    chest = norm_b.get("armor")
+                    if chest:
+                        cls = gear[chest].get("gear_class") or ""
+                        if cls not in uni and cls not in (
+                                uni_ext.get(wk_id) or {}).get("classes", ()):
+                            chest = None   # an off-uniform chest conditions nothing
+                    for slot in POOL_SLOTS:
+                        gid = norm_b.get(slot)
+                        if not gid:
+                            continue
+                        pool_players.setdefault(slot, {}).setdefault(
+                            gid, set()).add(player)
+                        if chest:
+                            chest_players.setdefault(chest, {}).setdefault(
+                                slot, {}).setdefault(gid, set()).add(player)
+
+        def _ranked_pool(d):
+            # only what the reader can serve: items with POOL_MIN_PLAYERS
+            # distinct players, the top POOL_TOP_N per slot (the page
+            # embeds the dataset; the full pools cost 0.8 MB)
+            rows = sorted(((gid, len(pl)) for gid, pl in d.items()
+                           if len(pl) >= POOL_MIN_PLAYERS),
+                          key=lambda t: (-t[1], t[0]))
+            return [[gid, n] for gid, n in rows[:POOL_TOP_N]]
+        kit_pool = {slot: _ranked_pool(d) for slot, d in sorted(pool_players.items())
+                    if _ranked_pool(d)}
+        kit_by_chest = {}
+        for chest, slots in sorted(chest_players.items()):
+            rows = {slot: _ranked_pool(d) for slot, d in sorted(slots.items())
+                    if _ranked_pool(d)}
+            if rows:
+                kit_by_chest[chest] = rows
+
         def _cite(e):
             return (f"killboard:{int(round(e['votes']))}x/"
                     f"{len(e['players'])}p")
@@ -1680,6 +1734,10 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                and set(uni_ext[m.get("id")]["classes"]) - uni}
         if kit:
             tgt["kit"] = kit
+        if kit_pool:
+            tgt["kit_pool"] = kit_pool
+        if kit_by_chest:
+            tgt["kit_by_chest"] = kit_by_chest
         if kit_weapon:
             tgt["kit_weapon"] = kit_weapon
         if ext:
@@ -2259,6 +2317,17 @@ def load_templates(tune=None):
             composition = doc
         else:
             templates[doc["content"]] = doc
+    # Size-based generation minima must be safe to divide by in both ports.
+    for style, config in styles.items():
+        ratios = config.get("role_min_per_players", {})
+        if not isinstance(ratios, dict):
+            sys.exit(f"styles.yaml: {style}: role_min_per_players must be a mapping")
+        for role, per in ratios.items():
+            if (role not in ("healer", "frontline", "support", "dps")
+                    or type(per) is not int or per < 1):
+                sys.exit(f"styles.yaml: {style}: invalid role_min_per_players "
+                         f"entry {role}={per!r}")
+
     # MASTERSHEET overrides (the expert's single control surface): scoring
     # and mechanics deep-merge; template overrides address one content's
     # requirement caps. Unknown keys fail the build — never silent.
