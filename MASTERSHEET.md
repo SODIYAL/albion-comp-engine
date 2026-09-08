@@ -25,6 +25,51 @@ silently ignore your edit. And whatever is set here **wins** over the
 underlying files, so this file is the single place to look when asking
 "what is the engine actually using?"
 
+## Current owner rulings (2026-09-08)
+
+These supersede conflicting historical examples below. Distinguish the
+implemented rule from the research or implementation still required.
+
+- **Clap healer minimum — implemented:** one healer per five members,
+  rounded down: four at 20-24, five at 25-29. It is a minimum, not an exact
+  count or maximum. `styles.yaml` carries `role_min_per_players: {healer: 5}`;
+  both engines resolve it at the current forge size from five members up.
+  Existing smaller-party rules remain. Kite retains its lower minima but
+  no longer forces exactly one/two healers in its 5-29 size overrides.
+  The hybrids have separate rules; this ruling changes pure clap and kite.
+- **Complete force:** the planned roster must function without unmodelled
+  outside support. A captured in-game party (at most 20) may be only one
+  detachment in a larger allied force. A specialist tank/battlemount party
+  must not define standalone healer or damage requirements. Reliable
+  force reconstruction and evidence separation remain open work.
+- **Useful builds, not just capability totals:** judge the E's effect,
+  magnitude, cooldown, actual delivery and setup, then the chosen Q/W and
+  equipment. Assume an average competent player. Shields are not heals;
+  self-mobility is not automatically team mobility. Members need the mana,
+  protection and access to perform their assigned job. This is the design
+  requirement, not a claim that the current scalar model verifies all of it.
+- **Double Bladed investigation — open:** the current role book assigns
+  it a sustained-damage seat, its leap range produces `flex` delivery, and
+  E `engage` points rescue its weak E damage in the group-fit gate. The
+  owner rejects it as a clap damage pick and finds its E insufficient to
+  earn a brawl damage seat over other quarterstaffs. Worn plate does not
+  establish a damage job. Correct delivery, job and equipment classification;
+  do not disguise those errors by lowering supported spell magnitudes.
+- **Observed relevance:** substantial evidence from comparable teams should
+  strongly influence recommendation priority. Rare exceptions require a
+  concrete job/build explanation. The current fixed seven-weapon meta prior
+  below is still implemented; it is not that contextual evidence model.
+- **Correction discipline:** a bad generated team can expose wrong game
+  facts, capability judgments, role requirements or search decisions. Trace
+  the cause before changing a number. A test disagreement alone does not
+  settle a spell's rating. Preserve original expert answers and record why
+  an expectation changes; familiar examples remain training material.
+
+The `tune:` blocks do not implement the prose above automatically. Role
+structure lives in the files listed in section 8b. The independent
+validation/holdout sets are still empty, so the present coefficient values
+are provisional rather than independently calibrated.
+
 ---
 
 ## 1. Where the data comes from
@@ -85,12 +130,13 @@ What happens inside "capability gain", in order:
 The dashboard's "Why" panel shows these exact terms for any pick — the
 numbers there ARE the scoring, not a summary of it.
 
-**Known blind spots** (the improvement roadmap, in priority order):
-damage magnitude is flat (a 1v1 weapon's AoE reads equal to Kingmaker's —
-the 1–7 rubric in §7 fixes this); enabler value is missing (Soulscythe's
-knockup line that makes everyone's damage land earns nothing yet); the
-"who actually plays this at scale" reality-check exists but is unwired;
-gear coherence (Heavy Mace on cloth) has no layer at all yet.
+**Current limitations:** the 1-7 capability grades remain curated judgments,
+not direct damage/healing measurements. The rubric in section 7 guides a
+reviewer but does not compute the final grade from stored component answers.
+Equipment, roles, conditional payloads and observed-kit guidance now exist;
+their presence does not prove that every selected build can perform its
+assigned job. Contextual weapon prevalence, complete-force evidence, mana
+sufficiency and delivery/setup compatibility still require further work.
 
 ---
 

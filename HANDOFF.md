@@ -8,6 +8,15 @@ This file is the current-state handoff. `MASTERSHEET.md` is the LIVE expert cont
 
 ## What the product is
 
+Owner ruling 2026-09-08 (mastersheet review): pure clap now requires at
+least floor(size / 5) healers from five members up, with no healer cap;
+20-24 requires four and 25-29 requires five. Kite's 5-29 overrides retain
+their existing minima without enforcing the former exact low counts.
+Both ports read `styles.yaml` `role_min_per_players`; F16 covers boundaries
+and a complete 25-member castle clap forge. Double Bladed's DPS-role,
+leap-delivery and weak-E utility exemption remain under investigation;
+the full owner design rulings are at the top of MASTERSHEET.md.
+
 Comp Forge does **not** score parties by simplistic role counts. Weapons are represented as capability bundles and the engine asks:
 
 > What can this party do, what does this content/playstyle reward, and which next weapon improves the answer most?
@@ -117,6 +126,21 @@ What a reader of this file needs:
   re-pinned; parity 60/60. The five deferred levers: kill-vs-death
   contrast, item-power gating, seat-level pooling of thin slots, carrier
   floors, harvest targeting.
+- **Seat pooling (2026-09-08, owner: "i leave it up 2 you").** Of 844
+  forged tiles at 20, 160 rested on a weapon item worn by 2-4 players and
+  57 on the seat fallback. Bootstrap: three players' helmets predict the
+  weapon's true modal 58%, boots 48%, cape 68%; the seat's modal among
+  SAME-CHEST wearers 80% / 72% / 81%; potion / food the plain seat pool
+  95% / 82%. Shipped: `kit_pool` + `kit_by_chest` per seat and band, the
+  thin rule in both ports (under 5 votes -> pool item with 5+ players,
+  marked `pooled`), chest and off-hand never pooled. After: thin tiles on
+  poolable slots 129 -> 2; 94 tiles from the same-chest pool, 78 from the
+  seat pool. R34a/R34b; R24/R28 skip thin modals (56/58, 484/484). Item
+  power stays deferred: the harvest's `item_power` is the API's
+  AverageItemPower (a 4.3 cape drags an 8.3 weapon down), the per-slot
+  tier lives only in the raw cache — five owner questions are logged in
+  the chat record of 2026-09-08 (which slot decides, tier or relative
+  line, per band, quality, doctrine-only).
 - **Blind round 4 graded 2026-09-08** (all twenty called; VALIDATION.md
   "Blind round 4"): 9 exact / 3 half / 1 miss of 14 callable, two
   abstentions, two gank calls. T43 pins the nine agreed rosters.
@@ -357,7 +381,7 @@ Shipped roadmap items are one line each; their records are in VALIDATION.md and 
 
 Still open, by track:
 
-- **Role layer**: increment 3b's remaining half — carrier FLOORS (the cap exists; which effects are needs is the owner's ruling) + mechanism pairing rules for effect carriers; increment 4 (uptime economics); the five deferred kit levers of 2026-09-08 (kill-vs-death contrast needs a ruling — VALIDATION.md reserves effectiveness claims for win-lift); Chillhowl/Stillgaze (`2H_SHAPESHIFTER_CRYSTAL`) and Iron-clad stay off every menu pending an owner word.
+- **Role layer**: increment 3b's remaining half — carrier FLOORS (the cap exists; which effects are needs is the owner's ruling) + mechanism pairing rules for effect carriers; increment 4 (uptime economics); the four still-deferred kit levers of 2026-09-08 (kill-vs-death contrast needs a ruling — VALIDATION.md reserves effectiveness claims for win-lift; item-power gating needs the per-slot tier from the raw cache and five owner answers; carrier floors; harvest targeting); Chillhowl/Stillgaze (`2H_SHAPESHIFTER_CRYSTAL`) and Iron-clad stay off every menu pending an owner word.
 - **Identity**: the gank read for non-ZvZ killer parties (mechanism proposed 2026-09-08, ruling pending); the Infernal-standoff and frontline-carrier hypotheses from round 4; the 20+ band; melee instant-payload weapons generating into clap dps (bug round above).
 - **Calibration**: the targets remain conservative (good comps over-cover ~1.8×); sharpening needs expert blind rounds (`calibration/README.md` discipline). Watch items: Hellfire under clap_kite, castle-25's saturated tail quality.
 - **Mechanics**: `MECHANICS_TODO.md` (per-spell `burst_aoe` escalation gating, Q2/Q5/Q11/Q13, the PASV and TOP magnitude queues).

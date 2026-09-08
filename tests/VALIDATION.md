@@ -2719,3 +2719,78 @@ effectiveness claims for win-lift evidence — it needs a ruling before it
 orders anything), item-power gating, seat-level pooling of the 168 thin
 slots, carrier floors (which of the six effects are needs), and pointing
 focused harvest nights at 10-14 and 20+.
+
+## 2026-09-08 — mastersheet review: clap healer minimum and flexible kite
+
+Owner: "party shall have 1 healer per 5 people so 4 at 20 and 5 at 25
+etc for clap". Follow-up: keep four through 24; this is a MINIMUM and
+extra healers may be justified. Kite may have fewer but that is not an
+exact-count rule. This supersedes the 2026-08-23 clap 2-3 cap and kite's
+exact one/two healer bands, not the separately ruled hybrid profiles.
+
+Implemented `styles.clap.role_min_per_players: {healer: 5}` in both ports:
+from five members, floor(size / 5) replaces the healer band without a
+maximum. Kite's 5-29 overrides retain their existing minima and remove
+maxima. Scoring manual rosters is unchanged; these are forge constraints.
+Build-time validation rejects unknown ratio roles and nonpositive or
+noninteger divisors. MASTERSHEET.md now distinguishes live settings,
+historical guidance, and the still-open complete-force, role/delivery,
+contextual-prevalence and resource-sufficiency work.
+
+Validation: F16 covers 5/9/10/19/20/21/24/25/29/30/60 boundaries and a
+complete castle clap forge of 25. Generated clap has four healers at 20
+and five at 25; both are feasible. The test's kite at 20 selected five
+healers once its cap was removed: that is evidence of the current scorer's
+preference, not expert confirmation that five is strategically correct.
+38/38 forge, 69/69 golden, 60/60 Python/JS parity (now also compares the
+effective constraint band), 36/36 role, 25/25 validation-mode checks and
+dashboard layout pass. V4 actual-gear role gate passes 17/23; it remains
+weak-form evidence. No new independent validation/holdout cases were added.
+
+The owner's Double Bladed explanation is recorded as an open root-cause
+investigation rather than a numeric nerf: plate gank kits are not a group
+DPS job, the E commits the body, and its damage is insufficient to earn
+the clap/brawl damage seat over alternatives. Source inspection found
+the sustained_brawler membership, leap-range `flex` label, and `engage`
+utility exemption. Those mechanisms have not been changed in this patch.
+
+### Seat pooling for thin slots (2026-09-08, owner: "i leave it up 2 you to get the best results")
+
+Follow-on to the two levers above, after the owner asked what item-power
+gating and seat pooling meant. Item power: the harvest's `item_power` is
+the API's AverageItemPower, the per-player average across worn slots —
+the owner's own objection ("a 4.3 cape has 1200 ip but user might be
+using a 8.3 weapon") holds, and the per-slot tier survives only in the
+raw cache, so the gate is deferred behind five questions (which slot
+decides geared; tier line or relative; per size band; quality; doctrine
+votes only).
+
+Pooling, measured before designing. Forged tiles at 20, balanced, 135
+seated weapons: 844 tiles — 627 on a weapon item worn by 5+ players, 160
+on one worn by 2-4, 57 on the seat fallback. The kit reader was ALREADY
+falling to the seat's item on every slot where the weapon had nothing
+(the earlier "those slots stay unset" claim was wrong; corrected in
+chat). Bootstrap on weapons with 15+ voters, 20 draws each: the modal of
+3 random players' builds equals the true modal for the helmet 58%, boots
+48%, cape 68%, potion 86%, food 80%. The seat's modal among builds
+wearing the SAME chest: helmet 80%, boots 72%, cape 81%. The plain seat
+modal: 66% / 62% / 75%, and 95% / 82% for potion / food. Chest CLASS
+conditioning does not help (65% / 64% / 79%).
+
+Shipped: `kit_pool` and `kit_by_chest` per seat and band (items with 5+
+players, top 3 per slot, the five poolable slots; ~200 KB), the thin rule
+in both ports (a weapon slot whose own modal carries under 5 votes fronts
+the same-chest pool item for helmet / boots / cape, the plain seat pool
+item for potion / food, when it has 5+ players; marked `pooled` and
+`pooled_n`; chest and off-hand never pooled; a 5+ vote weapon modal is
+never overridden), the kit editor naming pooled slots. After: thin
+weapon tiles on poolable slots 129 -> 2; 94 tiles from the same-chest
+pool, 78 from the seat pool; the 25 thin chests and 6 thin off-hands stay
+the weapon's own by design.
+
+Pins: R34a (the pools' shape per band, none on style cells), R34b (a
+thin helmet / boots slot fronts the same-chest pool item, a thin potion
+the seat pool item, both marked; a 5+ vote slot keeps its own), R24 /
+R28 skip a slot whose killboard modal rests on fewer than 5 players — it
+is pooled, not matched (R24 56/58, R28 484/484). Parity 60/60; full gate
+list green.

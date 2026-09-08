@@ -59,6 +59,7 @@ const out = cases.map((c, i) => {
     comp_score_locked: e.compScore(c.party, c.combos),
     redundancy: e.redundancy(c.party),
     size_bucket: e.sizeBucket(),
+    constraint_band: e._band,
     forge: forged,
     swap: sp === null ? null : e.swapReview(sp).map((m) => ({
       weapon: m.weapon, score: m.score, rank: m.rank, off_comp: m.off_comp,

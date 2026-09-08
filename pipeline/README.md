@@ -467,6 +467,21 @@ reader `_seat_kit` lays a DECLARED style's cell over the band; `balanced`
 never reads a cell (owner 2026-09-08). Spec:
 `notes/specs/2026-09-08-coherent-style-kits-design.md`.
 
+**Seat pooling for thin slots** (same day, spec section 3; owner: "i leave
+it up 2 you to get the best results"). Measured first: three players'
+helmets predict a weapon's true modal 58% of the time, the seat's helmet
+among builds wearing the SAME chest 80% (boots 48% -> 72%, cape 68% ->
+81%); for potion and food the plain seat pool is right 95% / 82%. The
+miner ships `kit_pool` (plain) and `kit_by_chest` (chest-conditioned) per
+seat and band, player-counted, items with 5+ players, top 3 per slot, the
+five poolable slots only. The kit reader in both ports treats a weapon
+slot whose own modal carries under 5 votes as THIN and fronts the pool item
+(same-chest for helmet / boots / cape, plain for potion / food), marked
+`pooled` / `pooled_n`; chest and off-hand are never pooled; a 5+ vote
+weapon modal is never overridden. The audits (R24, R24b, R28) skip a slot
+whose killboard modal rests on fewer than 5 players — that slot is pooled,
+not matched.
+
 ## One player, one vote (2026-09-04)
 
 `sample_parties.py` stamps every harvested build with a hashed `player`

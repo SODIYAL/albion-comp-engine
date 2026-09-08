@@ -41,7 +41,7 @@ Pins the structural contracts of the reworked engine:
       band's full-healer minimum in addition to the healer role band.
   F16 style role bands (owner ruling 2026-08-23): the declared style
       overrides the brawl-calibrated bands — at 20, brawl 3-4 healers,
-      clap 2-3, kite exactly 2; kite at 7 runs 1.
+      clap one healer per five (floor, no max); kite retains minima only.
 
 Run:  py -3 tests/test_forge.py
 """
@@ -498,13 +498,12 @@ def t_primary_heal():
 
 
 def t_style_bands():
-    """F16 (owner ruling 2026-08-23): style-aware role bands — "having 5
-    healers in a party of 20 feels like too much, especially in clap and
-    kite". At 20: brawl 3-4 healers (frontline capped at blap's 5), clap
-    2-3, kite exactly 2; kite at 7 runs a single healer."""
+    """F16: clap one healer per five, floor-rounded minimum, no maximum
+    (owner 2026-09-08 supersedes the 2026-08-23 cap). Kite may field more
+    than its existing minimum; brawl and hybrid rules are unchanged."""
     ok = True
     lines = []
-    for style, lo, hi in (("brawl", 3, 4), ("clap", 2, 3), ("kite", 2, 2),
+    for style, lo, hi in (("brawl", 3, 4), ("clap", 4, 20), ("kite", 2, 20),
                           ("clap_kite", 3, 4)):
         e = Engine(content="blackzone_roam", size=20, style=style)
         r = e.forge(20)
@@ -523,11 +522,24 @@ def t_style_bands():
     ek = Engine(content="roads", size=7, style="kite")
     rk = ek.forge(7)
     kite7 = sum(1 for w in rk["party"] if ek.role_of(w) == "healer")
-    if kite7 != 1 or not rk["feasible"]:
+    if kite7 < 1 or not rk["feasible"] or "max" in ek._band["healer"]:
         ok = False
         lines.append(f"kite@7 healers {kite7}")
-    check("F16 style bands at 20: brawl 3-4h/<=5f, clap 2-3h, kite 2h, "
-          "clap_kite 3-4h (round 5); kite@7 1h", ok, "; ".join(lines))
+    for size, minimum in ((5, 1), (9, 1), (10, 2), (19, 3), (20, 4),
+                          (21, 4), (24, 4), (25, 5), (29, 5), (30, 6), (60, 12)):
+        ec = Engine(content="castle", size=size, style="clap")
+        if ec._band["healer"] != {"min": minimum}:
+            ok = False
+            lines.append(f"clap@{size}: {ec._band['healer']}")
+    ec25 = Engine(content="castle", size=25, style="clap")
+    rc25 = ec25.forge(25)
+    hc25 = sum(ec25.role_of(w) == "healer" for w in rc25["party"])
+    if not rc25["feasible"] or len(rc25["party"]) != 25 or hc25 < 5:
+        ok = False
+    lines.append(f"castle clap@25: {hc25}h, feasible={rc25['feasible']}")
+    check("F16 clap healer minimum floor(size/5), kite flexible, "
+          "brawl/hybrid bands preserved; full 25-person castle forge", ok,
+          "; ".join(lines))
 
 
 def t_generation_fit():
