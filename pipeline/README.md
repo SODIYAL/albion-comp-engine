@@ -321,7 +321,7 @@ Two scheduled jobs, two APIs, two caches — neither rebuilds or commits:
   carries the killer's party at kill time with gear → `out/party_cache/`
   and `out/party_rosters.json`. This is the kit-doctrine and style × size
   evidence. Rerun order afterwards: audit -> derive_style_bands ->
-  build_dataset -> gates. A FOCUSED NIGHT takes a fight-size band
+  derive_party_styles -> build_dataset -> gates. A FOCUSED NIGHT takes a fight-size band
   (`-MinPlayers 10 -MaxPlayers 14` = the 5v5 / 7v7 band, owner 2026-09-08)
   and runs one pass over it; `sample_parties.py --max-players` is a local
   ceiling on albionbb's `totalPlayers`, so the budget goes only to fights
@@ -444,7 +444,28 @@ tests/VALIDATION.md). `build_dataset`
 validates the file (fail closed) and ships it as `style_bands`; the engine
 reads it after the content row for a declared style at 10+. Explicit step:
 `sample_parties` -> `audit_style_rosters` -> `derive_style_bands` ->
-`build_dataset` -> gates.
+`derive_party_styles` -> `build_dataset` -> gates.
+
+## Party styles and style cells (2026-09-08)
+
+`derive_party_styles.py` reads the COMMITTED `out/party_rosters.json`,
+labels every killer party of 10+ with `Engine.comp_identity` on its
+weapons alone (naked matched the audit's dressed read 19/20 in blind round
+4; the committed artifact carries no member kits), and writes
+`out/party_styles.json` with the SHA-256 of the artifact it read.
+`build_dataset` refuses a party-styles file derived from a different
+artifact (exit 2); a missing file means no style cells that build.
+`pipeline/party_link.py` links a build to its party: exactly through the
+analyzer's `party` index (stamped since 2026-09-08 beside each party's
+`index`), else by (battle, weapon) only when exactly one 10+ party in the
+battle fields that weapon — never a guess. `derive_kit_doctrine(style=...)`
+then mines one kit cell per style under each seat's `kit_styles` from the
+linked builds, with the band's floors plus a 5-voter cell floor applied per
+weapon, per slot (the slot's modal item) and to the chain's chest step;
+thin cells and slots are absent, never filled. The engine's one doctrine
+reader `_seat_kit` lays a DECLARED style's cell over the band; `balanced`
+never reads a cell (owner 2026-09-08). Spec:
+`notes/specs/2026-09-08-coherent-style-kits-design.md`.
 
 ## One player, one vote (2026-09-04)
 
@@ -476,4 +497,5 @@ give the item a lean. `build_dataset` validates and ships it as
 `chest_lean`; `comp_identity`'s kit tie-break reads the item lean first
 and the class rule (leather -> brawl, cloth -> ranged) where an item has
 none. Descriptive only. Because the audit writes it, the post-harvest
-order is audit -> derive_style_bands -> build_dataset -> gates.
+order is audit -> derive_style_bands -> derive_party_styles ->
+build_dataset -> gates.

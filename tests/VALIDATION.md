@@ -2649,3 +2649,73 @@ T43 pins the nine agreed rosters (6, 8, 9, 12, 14, 15, 16, 17, 20) naked
 against `comp_identity`; the twenty battles join `GRADED_BATTLES` so no
 form re-samples them. Nothing retuned; the two hypotheses and the gank
 proposal wait for the owner.
+
+### Coherent builds and style cells (2026-09-08, owner: "go ahead with your recommendations")
+
+Owner's question: how to use the harvested comps "to increase the
+quality of the engine such that we start seeing better quality of
+equipment for every seat". Measured first (2,042 battles, 51,125 builds,
+19,153 players; 168 of 670 weapon-slot modals resting on under 5 players;
+item power captured and read by nothing; 19,596 victim builds harvested
+and never contrasted). Seven levers proposed in priority order: coherent
+builds, style-conditioned doctrine, kill-vs-death contrast, item-power
+gating, seat-level pooling of thin slots, carrier floors, harvest
+targeting. Owner: "ok go ahead and do 1 and 2". One question asked:
+balanced comps follow the DECLARED style only, never the detected
+identity ("Declared style only", owner 2026-09-08). Spec:
+`notes/specs/2026-09-08-coherent-style-kits-design.md`; plan:
+`notes/plans/2026-09-08-coherent-style-kits.md`.
+
+**1. The chain guard (R29).** The archetype chain already ran across all
+seven slots; it stopped after one or two for 92 of 118 weapons because
+its rare-pocket guard compared a conditional COUNT inside the shrinking
+pocket with the unconditional modal's COUNT over the population — once
+the chest pocket was under half the population it failed by
+construction. Now: shares against shares, plus a pocket floor (20% of
+the population or 20 votes) that still stops the 2026-09-04 Greataxe
+pocket (8 of ~74). Rebuilt dataset: weapons reaching 4+ slots 6 -> 39 of
+117 (depth 1: 50 -> 25, 2: 42 -> 26, 3: 17 -> 27, 4: 6 -> 6, 5: 0 -> 8,
+6: 0 -> 20, 7: 0 -> 5); seats with a 4+ slot archetype 0 -> 10 of 20.
+Golden, forge, roles, validation_modes green — no pin moved.
+
+**2. Style cells (R30–R33, R24b).** `derive_party_styles.py` labels every
+10+ party in the committed artifact weapons-only (2,361 parties: clap
+1,008 / brawl 410 / clap_kite 319 / kite 246 / brawl_clap 43 / none
+335), byte-identical across runs, hash-gated in `build_dataset` (a
+tampered hash blocks the build, verified exit 2). `party_link.py` links
+builds to parties (exact `party` index from the analyzer from the next
+harvest on; today's artifact links 11,186 of 21,162 group-band builds by
+a unique (battle, weapon), 9,218 of them to a labelled party). The
+doctrine ships `kit_styles.<style>` per seat: 254 weapon cells across 13
+seats, 1,200 slot tiers, 180 cell chains (depth 2: 59, 3: 50, 4: 23,
+5: 10, 6: 30, 7: 3).
+
+The trap the first cut walked into, measured the same day: 63 cells
+carried a modal chest different from the band's, and 39 of them fronted
+an item with under 5 votes over a 70-90 vote band modal (Polehammer's
+4-vote Fey plate over 90 Soldier Armors; a 1-vote plate Witchwork over
+70 cloth) — thin evidence overriding fat evidence, the "random builds"
+complaint in a new coat. Fixed as evidence strength, no new number: the
+5-voter cell floor applies per weapon, per slot (the slot's modal item)
+and to the chain's chest step; a thin slot is absent and the engine's
+merge keeps the band's. After: 24 cells differ, none thin, and the ones
+that differ are the kit-round findings (Realmbreaker under clap: Royal
+Jacket 46 over the band's Hellion 211; Hand of Justice under clap: Fey
+plate 11 over Soldier 49).
+
+Pins: R29 (three synthetic populations), R30 (cells: five styles only,
+two-plus cells on 13 seats, every cell weapon >= 5 voters, gang band
+carries none), R31 (party link both paths + the analyzer stamping),
+R32 (labels + the hash contract), R33 (a declared clap and brawl dress
+from their cells, balanced from the band, the option names its style —
+Polehammer under the engage tank was the first fixture, Realmbreaker
+after the slot floor), R24b (the kit audit under a declared clap judges
+against the clap cell's modal: 38/40 agree, 0 bad), R12 re-pinned (the
+Grailseeker leather admission at balanced, the brawl cell's classes
+under brawl). Parity 60/60; full gate list green.
+
+Deferred, for the owner: the kill-vs-death contrast (this file reserves
+effectiveness claims for win-lift evidence — it needs a ruling before it
+orders anything), item-power gating, seat-level pooling of the 168 thin
+slots, carrier floors (which of the six effects are needs), and pointing
+focused harvest nights at 10-14 and 20+.

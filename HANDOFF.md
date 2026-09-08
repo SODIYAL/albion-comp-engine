@@ -78,7 +78,8 @@ What a reader of this file needs:
   Windows scheduled task "CompForge overnight harvest", daily 03:00. It
   only harvests; rebuild + gates + audit + commit stay in-session. Rerun
   order after a harvest: `sample_parties` -> `audit_style_rosters` ->
-  `derive_style_bands` -> `build_dataset` -> gates. Because the corpus
+  `derive_style_bands` -> `derive_party_styles` -> `build_dataset` ->
+  gates. Because the corpus
   grows nightly, tests pin MECHANISMS, never exact counts. A FOCUSED night
   (`-MinPlayers 10 -MaxPlayers 14`, the 5v5 / 7v7 band, owner 2026-09-08)
   runs one pass over a fight-size band; it adds to the cache, never
@@ -97,6 +98,25 @@ What a reader of this file needs:
   squad in Assassin Jackets (leather-majority dps overrule a
   weapons-decided clap, bomb squads exempt); a chest votes by its ITEM lean
   first (`out/chest_lean.json`), the class rule where it has none.
+- **Coherent builds and style cells (2026-09-08, owner: "go ahead with
+  your recommendations"; spec `notes/specs/2026-09-08-coherent-style-kits-design.md`).**
+  Two of seven harvest levers proposed that day. (1) The archetype chain's
+  rare-pocket guard compared a conditional COUNT with the unconditional
+  modal's COUNT and stopped 92 of 118 weapons after one or two slots;
+  it now compares shares with a 20%-or-20-votes pocket floor — weapons
+  reaching 4+ slots 6 -> 39 of 117, seats with a 4+ slot archetype
+  0 -> 10 of 20 (R29). (2) Style cells: `derive_party_styles.py` labels
+  every 10+ party weapons-only from the committed artifact (2,361
+  parties, 2,026 labelled), `party_link.py` links builds to parties, and
+  the doctrine ships `kit_styles.<style>` per seat — 254 weapon cells
+  across 13 seats, 1,200 slot tiers, 180 cell chains; 24 cell chests
+  differ from the band, none under 5 votes (the first cut had 39 thin
+  ones, so the 5-voter floor applies per slot and to the chain's chest
+  step). The engine reads a cell only under a DECLARED style; `balanced`
+  keeps the band (owner ruling). R30–R33, R24b (38/40 under clap), R12
+  re-pinned; parity 60/60. The five deferred levers: kill-vs-death
+  contrast, item-power gating, seat-level pooling of thin slots, carrier
+  floors, harvest targeting.
 - **Blind round 4 graded 2026-09-08** (all twenty called; VALIDATION.md
   "Blind round 4"): 9 exact / 3 half / 1 miss of 14 callable, two
   abstentions, two gank calls. T43 pins the nine agreed rosters.
@@ -337,7 +357,7 @@ Shipped roadmap items are one line each; their records are in VALIDATION.md and 
 
 Still open, by track:
 
-- **Role layer**: increment 3b (effect-quota-aware kit allocation + mechanism pairing rules for effect carriers), increment 4 (uptime economics); Chillhowl/Stillgaze (`2H_SHAPESHIFTER_CRYSTAL`) and Iron-clad stay off every menu pending an owner word.
+- **Role layer**: increment 3b's remaining half — carrier FLOORS (the cap exists; which effects are needs is the owner's ruling) + mechanism pairing rules for effect carriers; increment 4 (uptime economics); the five deferred kit levers of 2026-09-08 (kill-vs-death contrast needs a ruling — VALIDATION.md reserves effectiveness claims for win-lift); Chillhowl/Stillgaze (`2H_SHAPESHIFTER_CRYSTAL`) and Iron-clad stay off every menu pending an owner word.
 - **Identity**: the gank read for non-ZvZ killer parties (mechanism proposed 2026-09-08, ruling pending); the Infernal-standoff and frontline-carrier hypotheses from round 4; the 20+ band; melee instant-payload weapons generating into clap dps (bug round above).
 - **Calibration**: the targets remain conservative (good comps over-cover ~1.8×); sharpening needs expert blind rounds (`calibration/README.md` discipline). Watch items: Hellfire under clap_kite, castle-25's saturated tail quality.
 - **Mechanics**: `MECHANICS_TODO.md` (per-spell `burst_aoe` escalation gating, Q2/Q5/Q11/Q13, the PASV and TOP magnitude queues).
