@@ -1069,6 +1069,13 @@ KIT_SLOT_MAP = {"armor": "armor", "head": "head", "shoes": "shoes",
                 "potion": "potion", "offhand": "offhand",
                 "secondhand": "offhand"}
 
+# Chain pocket floor (2026-09-08, spec notes/specs/2026-09-08-coherent-
+# style-kits-design.md): the conditional pool keeps chaining only while it
+# holds CHAIN_POCKET_SHARE of the weapon's population or CHAIN_POCKET_VOTES
+# votes — the 2026-09-04 Greataxe pocket (8 of ~74) stops, a 311-vote
+# Keeper pocket carries its helmet and boots.
+CHAIN_POCKET_SHARE, CHAIN_POCKET_VOTES = 0.20, 20
+
 
 def resolve_passive_doctrine(doc, gear, problems):
     """Increment 2 (owner 2026-08-25: 'you are right about passive
@@ -1186,6 +1193,17 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
     in the pool (partial kits are common). Returns {slot: [id, n, of]}
     where n/of = observations at that step / pool size at that step.
 
+    THE 2026-09-08 RESCALE (spec notes/specs/2026-09-08-coherent-style-
+    kits-design.md): the "rare pocket" guard used to compare a conditional
+    COUNT inside the shrinking pocket with the unconditional modal's COUNT
+    over the whole population — once the chest pocket was under half the
+    population it failed by construction, stopping 69 of 118 weapons after
+    one or two slots. Now: a pocket floor (CHAIN_POCKET_SHARE of the
+    population or CHAIN_POCKET_VOTES votes) is the rare-pocket defence and
+    the pick's SHARE of the pocket must be at least half the unconditional
+    modal's SHARE of the population. Measured on the 2,042-battle harvest:
+    weapons reaching 4+ slots 6 -> 37, mean depth 1.77 -> 2.62.
+
     ONE PLAYER, ONE VOTE (2026-09-04): `build_dicts` entries are
     (gear, weight, player) — a player's builds on the weapon share one
     vote between them — so counts and pool sizes are VOTES (rounded for
@@ -1204,11 +1222,14 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
                 norm[slot] = gid
         if norm:
             pool.append((norm, wgt, player))
-    # unconditional modal count per slot over the WHOLE pool: a chain step
-    # may only pick an item that is also a real share of the population
-    # (>= CHAIN_MIN_SHARE of the slot's modal count), else it stops — a
-    # 7-of-8 cape inside one chest's pocket must not outrank a 36-of-74
-    # slot modal (2026-09-04 deep-harvest audit: Greataxe, Great Hammer)
+    # unconditional modal SHARE per slot over the WHOLE pool: a chain step
+    # may only pick an item whose share of the pocket is at least half the
+    # slot modal's share of the population — shares against shares
+    # (2026-09-08; the old count-against-count form failed by construction
+    # once the pocket was under half the population). The rare-pocket
+    # defence (a 7-of-8 cape inside one chest's pocket must not outrank a
+    # 36-of-74 slot modal — 2026-09-04 deep-harvest audit: Greataxe, Great
+    # Hammer) is the POCKET FLOOR below: that pocket was 8 of ~74.
     uncond = {}
     for b, wgt, _p in pool:
         for slot, gid in b.items():
@@ -1217,12 +1238,17 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
                 continue
             c = uncond.setdefault(slot, {})
             c[gid] = c.get(gid, 0.0) + wgt
-    uncond_top = {slot: max(c.values()) for slot, c in uncond.items()}
+    total_w = sum(wgt for _b, wgt, _p in pool)
+    uncond_share = {slot: (max(c.values()) / total_w if total_w else 0.0)
+                    for slot, c in uncond.items()}
     sel = {}
     for slot in SLOT_ORDER:
         pool_w = sum(wgt for _b, wgt, _p in pool)
         if pool_w < CHAIN_MIN_POOL:
             break
+        if (pool_w < CHAIN_POCKET_SHARE * total_w
+                and pool_w < CHAIN_POCKET_VOTES):
+            break   # the pocket is too small a slice of the population
         counts, players = {}, {}
         for b, wgt, player in pool:
             gid = b.get(slot)
@@ -1237,7 +1263,7 @@ def _modal_build_chain(build_dicts, uni, effect_map, gear, normalize):
             continue
         gid, n = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[0]
         if (len(players[gid]) < 2 or n < CHAIN_MIN_SHARE * pool_w
-                or n < 0.5 * uncond_top.get(slot, 0)):
+                or n / pool_w < 0.5 * uncond_share.get(slot, 0.0)):
             break
         sel[slot] = [gid, int(round(n)), int(round(pool_w))]
         pool = [(b, wgt, pl) for b, wgt, pl in pool

@@ -1095,6 +1095,73 @@ def t_doctrine_bands():
           f"bad={bad} {misses[:3]} differs={differs}")
 
 
+def t_chain_guard():
+    # R29 (2026-09-08, spec notes/specs/2026-09-08-coherent-style-kits-design.md
+    # section 1): the archetype chain's "rare pocket" guard compares SHARES,
+    # never a conditional count against an unconditional count, and a pocket
+    # continues only while it holds >= 20% of the population or 20 votes.
+    import importlib.util as _ilu
+    spec = _ilu.spec_from_file_location(
+        "bd", os.path.join(ROOT, "pipeline", "build_dataset.py"))
+    bd = _ilu.module_from_spec(spec)
+    spec.loader.exec_module(bd)
+    gear = {g: {"gear_class": "plate"} for g in (
+        "CHEST_A", "CHEST_B", "CHEST_C", "CHEST_D", "HELM_A", "HELM_X",
+        "SHOES_A", "SHOES_X", "HELM_B", "HELM_Z", "SHOES_B", "SHOES_Z",
+        "CAPE_B", "CAPE_Z")}
+    for extra in "PQRSTUV":
+        gear[f"HELM_{extra}"] = {"gear_class": "plate"}
+    ident = lambda v: v if v in gear else None
+    # A: a 30% chest pocket whose wearers all share helmet + shoes; the
+    # other 70 wear one helmet and one pair of shoes between them. The
+    # old guard (30 < 0.5 x 70) stopped at the chest; shares pass.
+    pop_a = []
+    for i in range(30):
+        pop_a.append(({"Armor": "CHEST_A", "Head": "HELM_A",
+                       "Shoes": "SHOES_A"}, 1.0, f"a{i}"))
+    for i, ch in enumerate(["CHEST_B"] * 25 + ["CHEST_C"] * 25
+                           + ["CHEST_D"] * 20):
+        pop_a.append(({"Armor": ch, "Head": "HELM_X", "Shoes": "SHOES_X"},
+                      1.0, f"x{i}"))
+    sel_a = bd._modal_build_chain(pop_a, {"plate"}, {}, gear, ident)
+    # B: the 2026-09-04 Greataxe shape — the chain narrows to a 13-build
+    # pocket by the shoes step (13 of 74 = 18% < 20%, < 20 votes): the
+    # 7-of-13 cape inside it is never picked. Every step before it passes
+    # the share guard (HELM_B 24/44 vs HELM_Z 50/74; SHOES_B 13/24 vs
+    # SHOES_Z 31/74).
+    pop_b = []
+    for i in range(30):
+        pop_b.append(({"Armor": "CHEST_A", "Head": "HELM_Z",
+                       "Shoes": "SHOES_A", "Cape": "CAPE_Z"}, 1.0, f"b{i}"))
+    for i in range(44):
+        head = "HELM_B" if i < 24 else "HELM_Z"
+        shoes = "SHOES_B" if i < 13 else "SHOES_Z"
+        cape = "CAPE_B" if i < 7 else "CAPE_Z"
+        pop_b.append(({"Armor": "CHEST_B", "Head": head, "Shoes": shoes,
+                       "Cape": cape}, 1.0, f"c{i}"))
+    sel_b = bd._modal_build_chain(pop_b, {"plate"}, {}, gear, ident)
+    # C: a pick under half the unconditional modal's SHARE stops: helmet A
+    # is 8 of the 30-build pocket (27%) while helmet X is 70% of everyone.
+    pop_c = []
+    for i in range(30):
+        pop_c.append(({"Armor": "CHEST_A",
+                       "Head": "HELM_A" if i < 8 else f"HELM_{'PQRSTUV'[i % 7]}"},
+                      1.0, f"d{i}"))
+    for i, ch in enumerate(["CHEST_B"] * 25 + ["CHEST_C"] * 25
+                           + ["CHEST_D"] * 20):
+        pop_c.append(({"Armor": ch, "Head": "HELM_X"}, 1.0, f"e{i}"))
+    sel_c = bd._modal_build_chain(pop_c, {"plate"}, {}, gear, ident)
+    check("R29 chain guard: a 30% pocket carries its helmet and shoes; an "
+          "18% pocket stops before its 7-of-13 cape; a pick under half the "
+          "unconditional modal's share stops",
+          list(sel_a) == ["armor", "head", "shoes"]
+          and sel_a["armor"][0] == "CHEST_A" and sel_a["head"][0] == "HELM_A"
+          and list(sel_b) == ["armor", "head", "shoes"]
+          and "cape" not in sel_b and sel_b["shoes"][0] == "SHOES_B"
+          and list(sel_c) == ["armor"],
+          f"a={sel_a} b={sel_b} c={sel_c}")
+
+
 if __name__ == "__main__":
     t_role_book()
     t_ruled_memberships()
@@ -1124,6 +1191,7 @@ if __name__ == "__main__":
     t_observed_chest_class()
     t_one_player_one_vote()
     t_doctrine_bands()
+    t_chain_guard()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")

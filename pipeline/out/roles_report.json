@@ -1814,7 +1814,12 @@
  "kit_doctrine": {
   "bomb_aoe": {
    "archetype": {
-    "armor": ["ARMOR_CLOTH_AVALON", 152, 454]
+    "armor": ["ARMOR_CLOTH_AVALON", 152, 454],
+    "cape": ["CAPEITEM_SMUGGLER", 70, 86],
+    "food": ["T8_MEAL_STEW", 32, 67],
+    "head": ["HEAD_LEATHER_SET3", 129, 154],
+    "potion": ["T7_POTION_REVIVE", 67, 70],
+    "shoes": ["SHOES_LEATHER_MORGANA", 85, 130]
    },
    "by_weapon": {
     "2H_DAGGER_KATAR_AVALON": {
@@ -2714,18 +2719,24 @@
    },
    "weapon_archetypes": {
     "2H_DAGGER_KATAR_AVALON": {
-     "armor": ["ARMOR_CLOTH_SET2", 19, 53]
+     "armor": ["ARMOR_CLOTH_SET2", 19, 53],
+     "head": ["HEAD_LEATHER_ROYAL", 15, 19],
+     "shoes": ["SHOES_CLOTH_ROYAL", 9, 15]
     },
     "2H_DUALSCIMITAR_UNDEAD": {
      "armor": ["ARMOR_PLATE_SET1", 166, 200],
      "cape": ["CAPEITEM_FW_LYMHURST", 60, 96],
+     "food": ["T8_MEAL_STEW", 22, 60],
      "head": ["HEAD_LEATHER_SET3", 110, 167],
+     "potion": ["T7_POTION_REVIVE", 60, 61],
      "shoes": ["SHOES_LEATHER_MORGANA", 96, 110]
     },
     "2H_GLAIVE_CRYSTAL": {
      "armor": ["ARMOR_CLOTH_AVALON", 150, 190],
      "cape": ["CAPEITEM_SMUGGLER", 70, 86],
+     "food": ["T8_MEAL_STEW", 32, 67],
      "head": ["HEAD_LEATHER_SET3", 129, 152],
+     "potion": ["T7_POTION_REVIVE", 67, 70],
      "shoes": ["SHOES_LEATHER_MORGANA", 85, 130]
     },
     "2H_KNUCKLES_MORGANA": {
@@ -3965,13 +3976,24 @@
     },
     "MAIN_HOLYSTAFF_AVALON": {
      "armor": ["ARMOR_CLOTH_AVALON", 654, 1311],
-     "head": ["HEAD_LEATHER_SET3", 188, 656]
+     "cape": ["CAPEITEM_FW_LYMHURST", 52, 91],
+     "food": ["T7_MEAL_OMELETTE", 7, 24],
+     "head": ["HEAD_LEATHER_SET3", 188, 656],
+     "offhand": ["OFF_HORN_KEEPER", 26, 52],
+     "potion": ["T7_POTION_REVIVE", 23, 26],
+     "shoes": ["SHOES_LEATHER_MORGANA", 91, 188]
     }
    }
   },
   "curse_support": {
    "archetype": {
-    "armor": ["ARMOR_PLATE_HELL", 187, 530]
+    "armor": ["ARMOR_PLATE_HELL", 187, 530],
+    "cape": ["CAPEITEM_SMUGGLER", 70, 85],
+    "food": ["T7_MEAL_OMELETTE_AVALON", 20, 53],
+    "head": ["HEAD_LEATHER_SET3", 180, 188],
+    "offhand": ["OFF_SHIELD_AVALON", 53, 70],
+    "potion": ["T7_POTION_REVIVE", 53, 54],
+    "shoes": ["SHOES_LEATHER_MORGANA", 84, 180]
    },
    "by_weapon": {
     "2H_CURSEDSTAFF": {
@@ -5798,7 +5820,10 @@
    "weapon_archetypes": {
     "2H_CURSEDSTAFF_MORGANA": {
      "armor": ["ARMOR_CLOTH_SET1", 92, 165],
+     "cape": ["CAPEITEM_SMUGGLER", 32, 55],
+     "food": ["T7_MEAL_OMELETTE", 17, 33],
      "head": ["HEAD_LEATHER_SET3", 86, 92],
+     "potion": ["T7_POTION_REVIVE", 31, 33],
      "shoes": ["SHOES_LEATHER_MORGANA", 55, 86]
     },
     "2H_DEMONICSTAFF": {
@@ -5809,15 +5834,21 @@
     },
     "MAIN_CURSEDSTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 8, 30],
-     "head": ["HEAD_PLATE_SET3", 6, 8]
+     "head": ["HEAD_PLATE_SET3", 6, 8],
+     "shoes": ["SHOES_PLATE_SET1", 4, 6]
     },
     "MAIN_CURSEDSTAFF_AVALON": {
      "armor": ["ARMOR_PLATE_HELL", 42, 109],
-     "head": ["HEAD_LEATHER_SET3", 42, 43]
+     "head": ["HEAD_LEATHER_SET3", 42, 43],
+     "shoes": ["SHOES_LEATHER_MORGANA", 18, 42]
     },
     "MAIN_CURSEDSTAFF_UNDEAD": {
      "armor": ["ARMOR_PLATE_HELL", 134, 200],
+     "cape": ["CAPEITEM_SMUGGLER", 53, 65],
+     "food": ["T7_MEAL_OMELETTE_AVALON", 17, 42],
      "head": ["HEAD_LEATHER_SET3", 132, 134],
+     "offhand": ["OFF_SHIELD_AVALON", 44, 53],
+     "potion": ["T7_POTION_REVIVE", 43, 44],
      "shoes": ["SHOES_LEATHER_MORGANA", 65, 132]
     }
    }
@@ -8225,18 +8256,23 @@
    "weapon_archetypes": {
     "2H_CLAWPAIR": {
      "armor": ["ARMOR_LEATHER_SET3", 23, 39],
-     "head": ["HEAD_CLOTH_HELL", 13, 23]
+     "head": ["HEAD_CLOTH_HELL", 13, 23],
+     "shoes": ["SHOES_LEATHER_SET2", 6, 13]
     },
     "2H_DAGGERPAIR": {
      "armor": ["ARMOR_LEATHER_SET3", 39, 53],
-     "head": ["HEAD_CLOTH_HELL", 14, 40]
+     "head": ["HEAD_CLOTH_HELL", 14, 40],
+     "shoes": ["SHOES_LEATHER_HELL", 8, 14]
     },
     "2H_DAGGER_KATAR_AVALON": {
-     "armor": ["ARMOR_CLOTH_SET2", 19, 53]
+     "armor": ["ARMOR_CLOTH_SET2", 19, 53],
+     "head": ["HEAD_LEATHER_ROYAL", 15, 19],
+     "shoes": ["SHOES_CLOTH_ROYAL", 9, 15]
     },
     "2H_DUALSICKLE_UNDEAD": {
      "armor": ["ARMOR_LEATHER_SET3", 16, 31],
-     "head": ["HEAD_LEATHER_MORGANA", 8, 16]
+     "head": ["HEAD_LEATHER_MORGANA", 8, 16],
+     "shoes": ["SHOES_CLOTH_ROYAL", 4, 8]
     },
     "2H_GLAIVE": {
      "armor": ["ARMOR_LEATHER_SET3", 4, 13]
@@ -8246,13 +8282,18 @@
     },
     "MAIN_DAGGER_HELL": {
      "armor": ["ARMOR_LEATHER_HELL", 64, 100],
-     "head": ["HEAD_PLATE_SET1", 33, 64]
+     "cape": ["CAPEITEM_SMUGGLER", 11, 22],
+     "head": ["HEAD_PLATE_SET1", 33, 64],
+     "shoes": ["SHOES_LEATHER_MORGANA", 22, 32]
     },
     "MAIN_RAPIER_MORGANA": {
-     "armor": ["ARMOR_LEATHER_HELL", 59, 181]
+     "armor": ["ARMOR_LEATHER_HELL", 59, 181],
+     "head": ["HEAD_LEATHER_SET3", 21, 60],
+     "shoes": ["SHOES_LEATHER_MORGANA", 16, 21]
     },
     "MAIN_SCIMITAR_MORGANA": {
-     "armor": ["ARMOR_LEATHER_HELL", 6, 19]
+     "armor": ["ARMOR_LEATHER_HELL", 6, 19],
+     "head": ["HEAD_CLOTH_SET2", 4, 8]
     },
     "MAIN_SPEAR": {
      "armor": ["ARMOR_LEATHER_SET3", 8, 12],
@@ -8262,7 +8303,11 @@
   },
   "engage_tank": {
    "archetype": {
-    "armor": ["ARMOR_PLATE_KEEPER", 311, 1102]
+    "armor": ["ARMOR_PLATE_KEEPER", 311, 1102],
+    "cape": ["CAPEITEM_SMUGGLER", 26, 40],
+    "head": ["HEAD_PLATE_KEEPER", 101, 311],
+    "offhand": ["OFF_SHIELD_AVALON", 10, 28],
+    "shoes": ["SHOES_LEATHER_SET2", 40, 101]
    },
    "by_weapon": {
     "2H_FLAIL": {
@@ -11513,45 +11558,67 @@
     },
     "2H_HAMMER_AVALON": {
      "armor": ["ARMOR_PLATE_KEEPER", 44, 89],
-     "head": ["HEAD_LEATHER_SET3", 36, 44]
+     "cape": ["CAPEITEM_SMUGGLER", 25, 26],
+     "food": ["T7_MEAL_OMELETTE_AVALON", 9, 24],
+     "head": ["HEAD_LEATHER_SET3", 36, 44],
+     "potion": ["T7_POTION_REVIVE", 23, 25],
+     "shoes": ["SHOES_CLOTH_SET2", 26, 36]
     },
     "2H_HAMMER_UNDEAD": {
      "armor": ["ARMOR_PLATE_SET1", 4, 9]
     },
     "2H_MACE_MORGANA": {
-     "armor": ["ARMOR_PLATE_HELL", 8, 28]
+     "armor": ["ARMOR_PLATE_HELL", 8, 28],
+     "head": ["HEAD_LEATHER_SET3", 7, 8],
+     "shoes": ["SHOES_CLOTH_SET2", 3, 7]
     },
     "2H_POLEHAMMER": {
-     "armor": ["ARMOR_PLATE_SET2", 81, 177]
+     "armor": ["ARMOR_PLATE_SET2", 81, 177],
+     "head": ["HEAD_PLATE_KEEPER", 37, 81],
+     "shoes": ["SHOES_LEATHER_MORGANA", 14, 37]
     },
     "2H_RAM_KEEPER": {
      "armor": ["ARMOR_PLATE_FEY", 3, 10]
     },
     "2H_SHAPESHIFTER_KEEPER": {
      "armor": ["ARMOR_PLATE_KEEPER", 136, 182],
-     "head": ["HEAD_LEATHER_SET3", 42, 136]
+     "head": ["HEAD_LEATHER_SET3", 42, 136],
+     "shoes": ["SHOES_CLOTH_SET2", 16, 42]
     },
     "2H_TWINSCYTHE_HELL": {
      "armor": ["ARMOR_PLATE_SET3", 3, 10]
     },
     "MAIN_ARCANESTAFF_UNDEAD": {
-     "armor": ["ARMOR_CLOTH_AVALON", 65, 166]
+     "armor": ["ARMOR_CLOTH_AVALON", 65, 166],
+     "head": ["HEAD_LEATHER_SET3", 24, 65],
+     "shoes": ["SHOES_LEATHER_MORGANA", 19, 24]
     },
     "MAIN_HAMMER": {
-     "armor": ["ARMOR_PLATE_SET3", 41, 103]
+     "armor": ["ARMOR_PLATE_SET3", 41, 103],
+     "head": ["HEAD_LEATHER_HELL", 16, 41]
     },
     "MAIN_MACE": {
      "armor": ["ARMOR_PLATE_KEEPER", 87, 274],
-     "head": ["HEAD_PLATE_KEEPER", 56, 87]
+     "cape": ["CAPEITEM_SMUGGLER", 24, 29],
+     "head": ["HEAD_PLATE_KEEPER", 56, 87],
+     "offhand": ["OFF_SHIELD_AVALON", 10, 24],
+     "shoes": ["SHOES_LEATHER_SET2", 29, 56]
     },
     "MAIN_MACE_CRYSTAL": {
-     "armor": ["ARMOR_PLATE_ROYAL", 8, 25]
+     "armor": ["ARMOR_PLATE_ROYAL", 8, 25],
+     "head": ["HEAD_PLATE_KEEPER", 4, 8]
     }
    }
   },
   "kite_healer": {
    "archetype": {
-    "armor": ["ARMOR_CLOTH_AVALON", 666, 1386]
+    "armor": ["ARMOR_CLOTH_AVALON", 666, 1386],
+    "cape": ["CAPEITEM_FW_LYMHURST", 52, 91],
+    "food": ["T7_MEAL_OMELETTE", 7, 24],
+    "head": ["HEAD_LEATHER_SET3", 195, 668],
+    "offhand": ["OFF_HORN_KEEPER", 26, 52],
+    "potion": ["T7_POTION_REVIVE", 23, 26],
+    "shoes": ["SHOES_LEATHER_MORGANA", 91, 195]
    },
    "by_weapon": {
     "2H_NATURESTAFF": {
@@ -13043,11 +13110,17 @@
      "shoes": ["SHOES_LEATHER_SET1", 4, 7]
     },
     "2H_WILDSTAFF": {
-     "armor": ["ARMOR_CLOTH_SET2", 19, 50]
+     "armor": ["ARMOR_CLOTH_SET2", 19, 50],
+     "head": ["HEAD_CLOTH_KEEPER", 6, 19]
     },
     "MAIN_HOLYSTAFF_AVALON": {
      "armor": ["ARMOR_CLOTH_AVALON", 654, 1311],
-     "head": ["HEAD_LEATHER_SET3", 188, 656]
+     "cape": ["CAPEITEM_FW_LYMHURST", 52, 91],
+     "food": ["T7_MEAL_OMELETTE", 7, 24],
+     "head": ["HEAD_LEATHER_SET3", 188, 656],
+     "offhand": ["OFF_HORN_KEEPER", 26, 52],
+     "potion": ["T7_POTION_REVIVE", 23, 26],
+     "shoes": ["SHOES_LEATHER_MORGANA", 91, 188]
     },
     "MAIN_HOLYSTAFF_MORGANA": {
      "armor": ["ARMOR_CLOTH_SET2", 4, 6]
@@ -13056,7 +13129,13 @@
   },
   "main_healer": {
    "archetype": {
-    "armor": ["ARMOR_CLOTH_AVALON", 933, 2319]
+    "armor": ["ARMOR_CLOTH_AVALON", 933, 2319],
+    "cape": ["CAPEITEM_FW_LYMHURST", 87, 137],
+    "food": ["T7_MEAL_OMELETTE", 16, 53],
+    "head": ["HEAD_LEATHER_SET3", 306, 935],
+    "offhand": ["OFF_HORN_KEEPER", 26, 87],
+    "potion": ["T7_POTION_REVIVE", 52, 60],
+    "shoes": ["SHOES_LEATHER_MORGANA", 137, 306]
    },
    "by_weapon": {
     "2H_DIVINESTAFF": {
@@ -16304,37 +16383,53 @@
      "armor": ["ARMOR_CLOTH_SET2", 2, 6]
     },
     "2H_HOLYSTAFF_HELL": {
-     "armor": ["ARMOR_CLOTH_SET2", 68, 182]
+     "armor": ["ARMOR_CLOTH_SET2", 68, 182],
+     "head": ["HEAD_CLOTH_KEEPER", 20, 68]
     },
     "2H_HOLYSTAFF_UNDEAD": {
      "armor": ["ARMOR_CLOTH_SET2", 58, 143]
     },
     "2H_NATURESTAFF_HELL": {
-     "armor": ["ARMOR_CLOTH_SET2", 149, 346]
+     "armor": ["ARMOR_CLOTH_SET2", 149, 346],
+     "cape": ["CAPEITEM_FW_LYMHURST", 24, 31],
+     "food": ["T7_MEAL_OMELETTE", 12, 20],
+     "head": ["HEAD_LEATHER_SET3", 55, 149],
+     "potion": ["T7_POTION_REVIVE", 20, 25],
+     "shoes": ["SHOES_LEATHER_SET1", 30, 55]
     },
     "2H_NATURESTAFF_KEEPER": {
      "armor": ["ARMOR_CLOTH_AVALON", 62, 106],
-     "head": ["HEAD_LEATHER_SET3", 34, 62]
+     "head": ["HEAD_LEATHER_SET3", 34, 62],
+     "shoes": ["SHOES_LEATHER_SET1", 18, 34]
     },
     "2H_WILDSTAFF": {
-     "armor": ["ARMOR_CLOTH_SET2", 19, 50]
+     "armor": ["ARMOR_CLOTH_SET2", 19, 50],
+     "head": ["HEAD_CLOTH_KEEPER", 6, 19]
     },
     "MAIN_HOLYSTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 25, 37]
     },
     "MAIN_HOLYSTAFF_AVALON": {
      "armor": ["ARMOR_CLOTH_AVALON", 654, 1311],
-     "head": ["HEAD_LEATHER_SET3", 188, 656]
+     "cape": ["CAPEITEM_FW_LYMHURST", 52, 91],
+     "food": ["T7_MEAL_OMELETTE", 7, 24],
+     "head": ["HEAD_LEATHER_SET3", 188, 656],
+     "offhand": ["OFF_HORN_KEEPER", 26, 52],
+     "potion": ["T7_POTION_REVIVE", 23, 26],
+     "shoes": ["SHOES_LEATHER_MORGANA", 91, 188]
     },
     "MAIN_NATURESTAFF": {
-     "armor": ["ARMOR_PLATE_ROYAL", 32, 105]
+     "armor": ["ARMOR_PLATE_ROYAL", 32, 105],
+     "head": ["HEAD_LEATHER_SET3", 16, 32]
     }
    }
   },
   "off_tank": {
    "archetype": {
     "armor": ["ARMOR_PLATE_HELL", 203, 303],
+    "cape": ["CAPEITEM_SMUGGLER", 70, 81],
     "head": ["HEAD_LEATHER_SET3", 194, 203],
+    "potion": ["T7_POTION_REVIVE", 71, 71],
     "shoes": ["SHOES_PLATE_SET3", 81, 194]
    },
    "by_weapon": {
@@ -17390,7 +17485,9 @@
     },
     "2H_DUALMACE_AVALON": {
      "armor": ["ARMOR_PLATE_HELL", 199, 255],
+     "cape": ["CAPEITEM_SMUGGLER", 70, 81],
      "head": ["HEAD_LEATHER_SET3", 190, 199],
+     "potion": ["T7_POTION_REVIVE", 71, 71],
      "shoes": ["SHOES_PLATE_SET3", 81, 190]
     },
     "2H_HAMMER_CRYSTAL": {
@@ -24186,7 +24283,9 @@
    },
    "weapon_archetypes": {
     "2H_ARCANESTAFF_CRYSTAL": {
-     "armor": ["ARMOR_LEATHER_MORGANA", 19, 52]
+     "armor": ["ARMOR_LEATHER_MORGANA", 19, 52],
+     "head": ["HEAD_LEATHER_SET3", 16, 19],
+     "shoes": ["SHOES_CLOTH_ROYAL", 9, 16]
     },
     "2H_BOW": {
      "armor": ["ARMOR_LEATHER_SET3", 3, 9]
@@ -24194,34 +24293,46 @@
     "2H_BOW_AVALON": {
      "armor": ["ARMOR_CLOTH_SET1", 53, 62],
      "cape": ["CAPEITEM_SMUGGLER", 14, 24],
+     "food": ["T8_MEAL_STEW", 6, 14],
      "head": ["HEAD_LEATHER_SET3", 48, 53],
+     "potion": ["T7_POTION_REVIVE", 13, 14],
      "shoes": ["SHOES_LEATHER_MORGANA", 24, 48]
     },
     "2H_BOW_HELL": {
      "armor": ["ARMOR_LEATHER_SET3", 47, 114],
+     "cape": ["CAPEITEM_FW_FORTSTERLING", 27, 40],
+     "food": ["T8_MEAL_STEW", 14, 28],
      "head": ["HEAD_PLATE_SET1", 42, 47],
+     "potion": ["T7_POTION_REVIVE", 27, 28],
      "shoes": ["SHOES_LEATHER_AVALON", 40, 42]
     },
     "2H_BOW_KEEPER": {
-     "armor": ["ARMOR_LEATHER_SET3", 22, 70]
+     "armor": ["ARMOR_LEATHER_SET3", 22, 70],
+     "head": ["HEAD_PLATE_ROYAL", 8, 22]
     },
     "2H_CROSSBOW": {
      "armor": ["ARMOR_CLOTH_SET1", 16, 23],
-     "head": ["HEAD_LEATHER_ROYAL", 8, 16]
+     "cape": ["CAPEITEM_MORGANA", 5, 8],
+     "head": ["HEAD_LEATHER_ROYAL", 8, 16],
+     "potion": ["T8_POTION_CLEANSE", 2, 5],
+     "shoes": ["SHOES_CLOTH_ROYAL", 8, 8]
     },
     "2H_CROSSBOWLARGE": {
      "armor": ["ARMOR_CLOTH_SET2", 9, 18]
     },
     "2H_CROSSBOWLARGE_MORGANA": {
      "armor": ["ARMOR_CLOTH_SET2", 9, 21],
-     "head": ["HEAD_LEATHER_SET3", 5, 11]
+     "head": ["HEAD_LEATHER_SET3", 5, 11],
+     "shoes": ["SHOES_PLATE_AVALON", 2, 5]
     },
     "2H_CROSSBOW_CANNON_AVALON": {
      "armor": ["ARMOR_CLOTH_KEEPER", 48, 138],
-     "head": ["HEAD_LEATHER_FEY", 31, 52]
+     "head": ["HEAD_LEATHER_FEY", 31, 52],
+     "shoes": ["SHOES_LEATHER_FEY", 17, 31]
     },
     "2H_DUALCROSSBOW_HELL": {
-     "armor": ["ARMOR_CLOTH_SET2", 7, 22]
+     "armor": ["ARMOR_CLOTH_SET2", 7, 22],
+     "head": ["HEAD_PLATE_SET3", 2, 7]
     },
     "2H_FIRESTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 9, 17],
@@ -24230,35 +24341,55 @@
     "2H_FIRESTAFF_HELL": {
      "armor": ["ARMOR_CLOTH_SET1", 64, 67],
      "cape": ["CAPEITEM_MORGANA", 16, 28],
+     "food": ["T8_MEAL_STEW", 10, 16],
      "head": ["HEAD_LEATHER_SET3", 43, 64],
+     "potion": ["T7_POTION_REVIVE", 16, 17],
      "shoes": ["SHOES_LEATHER_MORGANA", 28, 43]
     },
     "2H_FIRE_RINGPAIR_AVALON": {
-     "armor": ["ARMOR_CLOTH_AVALON", 149, 380]
+     "armor": ["ARMOR_CLOTH_AVALON", 149, 380],
+     "cape": ["CAPEITEM_SMUGGLER", 86, 109],
+     "food": ["T8_MEAL_STEW", 44, 83],
+     "head": ["HEAD_LEATHER_SET3", 138, 150],
+     "potion": ["T7_POTION_REVIVE", 81, 86],
+     "shoes": ["SHOES_LEATHER_MORGANA", 109, 138]
     },
     "2H_FROSTSTAFF": {
      "armor": ["ARMOR_LEATHER_AVALON", 71, 123],
-     "head": ["HEAD_PLATE_SET1", 39, 71]
+     "cape": ["CAPEITEM_SMUGGLER", 31, 33],
+     "food": ["T8_MEAL_STEW", 10, 31],
+     "head": ["HEAD_PLATE_SET1", 39, 71],
+     "potion": ["T7_POTION_REVIVE", 31, 31],
+     "shoes": ["SHOES_LEATHER_MORGANA", 33, 39]
     },
     "2H_GLACIALSTAFF": {
      "armor": ["ARMOR_CLOTH_SET1", 12, 22],
-     "head": ["HEAD_LEATHER_SET3", 8, 12]
+     "head": ["HEAD_LEATHER_SET3", 8, 12],
+     "shoes": ["SHOES_CLOTH_ROYAL", 4, 8]
     },
     "2H_ICECRYSTAL_UNDEAD": {
      "armor": ["ARMOR_CLOTH_SET1", 347, 429],
      "cape": ["CAPEITEM_SMUGGLER", 109, 241],
+     "food": ["T8_MEAL_STEW", 38, 109],
      "head": ["HEAD_LEATHER_SET3", 330, 347],
+     "potion": ["T7_POTION_REVIVE", 109, 110],
      "shoes": ["SHOES_LEATHER_MORGANA", 241, 330]
     },
     "2H_INFERNOSTAFF": {
-     "armor": ["ARMOR_LEATHER_SET3", 6, 23]
+     "armor": ["ARMOR_LEATHER_SET3", 6, 23],
+     "head": ["HEAD_CLOTH_HELL", 3, 6]
     },
     "2H_INFERNOSTAFF_MORGANA": {
      "armor": ["ARMOR_CLOTH_SET1", 58, 110],
-     "head": ["HEAD_LEATHER_SET3", 43, 59]
+     "cape": ["CAPEITEM_SMUGGLER", 6, 22],
+     "head": ["HEAD_LEATHER_SET3", 43, 59],
+     "shoes": ["SHOES_CLOTH_ROYAL", 22, 43]
     },
     "2H_LONGBOW": {
-     "armor": ["ARMOR_CLOTH_SET2", 158, 494]
+     "armor": ["ARMOR_CLOTH_SET2", 158, 494],
+     "cape": ["CAPEITEM_SMUGGLER", 9, 25],
+     "head": ["HEAD_LEATHER_SET3", 51, 165],
+     "shoes": ["SHOES_LEATHER_MORGANA", 23, 53]
     },
     "2H_LONGBOW_UNDEAD": {
      "armor": ["ARMOR_LEATHER_SET2", 45, 61]
@@ -24268,7 +24399,9 @@
     },
     "2H_SHAPESHIFTER_AVALON": {
      "armor": ["ARMOR_PLATE_SET1", 24, 49],
-     "head": ["HEAD_LEATHER_SET3", 16, 24]
+     "cape": ["CAPEITEM_MORGANA", 7, 13],
+     "head": ["HEAD_LEATHER_SET3", 16, 24],
+     "shoes": ["SHOES_LEATHER_MORGANA", 13, 16]
     },
     "2H_SHAPESHIFTER_HELL": {
      "armor": ["ARMOR_LEATHER_SET2", 2, 6]
@@ -24281,12 +24414,16 @@
      "armor": ["ARMOR_CLOTH_SET2", 5, 13]
     },
     "MAIN_CURSEDSTAFF_CRYSTAL": {
-     "armor": ["ARMOR_CLOTH_FEY", 42, 153]
+     "armor": ["ARMOR_CLOTH_FEY", 42, 153],
+     "cape": ["CAPEITEM_SMUGGLER", 28, 33],
+     "head": ["HEAD_LEATHER_SET3", 38, 42],
+     "offhand": ["OFF_DEMONSKULL_HELL", 23, 28],
+     "potion": ["T7_POTION_REVIVE", 18, 23],
+     "shoes": ["SHOES_LEATHER_MORGANA", 33, 38]
     },
     "MAIN_FIRESTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 18, 31],
-     "head": ["HEAD_LEATHER_SET2", 6, 18],
-     "shoes": ["SHOES_PLATE_SET1", 5, 6]
+     "head": ["HEAD_LEATHER_SET2", 6, 18]
     },
     "MAIN_FROSTSTAFF": {
      "armor": ["ARMOR_LEATHER_SET3", 29, 83],
@@ -24296,7 +24433,10 @@
   },
   "shield_support": {
    "archetype": {
-    "armor": ["ARMOR_PLATE_KEEPER", 275, 658]
+    "armor": ["ARMOR_PLATE_KEEPER", 275, 658],
+    "cape": ["CAPEITEM_SMUGGLER", 64, 97],
+    "head": ["HEAD_LEATHER_SET3", 247, 276],
+    "shoes": ["SHOES_LEATHER_MORGANA", 96, 247]
    },
    "by_weapon": {
     "2H_ARCANESTAFF": {
@@ -25914,7 +26054,9 @@
    "weapon_archetypes": {
     "2H_ARCANESTAFF": {
      "armor": ["ARMOR_PLATE_SET2", 101, 144],
+     "cape": ["CAPEITEM_SMUGGLER", 28, 33],
      "head": ["HEAD_LEATHER_SET3", 83, 101],
+     "potion": ["T7_POTION_REVIVE", 26, 28],
      "shoes": ["SHOES_LEATHER_MORGANA", 32, 83]
     },
     "2H_ENIGMATICORB_MORGANA": {
@@ -25928,22 +26070,33 @@
      "shoes": ["SHOES_LEATHER_SET1", 10, 19]
     },
     "2H_HOLYSTAFF_CRYSTAL": {
-     "armor": ["ARMOR_CLOTH_AVALON", 56, 164]
+     "armor": ["ARMOR_CLOTH_AVALON", 56, 164],
+     "cape": ["CAPEITEM_FW_LYMHURST", 21, 28],
+     "head": ["HEAD_LEATHER_SET3", 48, 56],
+     "potion": ["T7_POTION_REVIVE", 15, 21],
+     "shoes": ["SHOES_LEATHER_MORGANA", 27, 48]
     },
     "2H_SHAPESHIFTER_SET2": {
      "armor": ["ARMOR_PLATE_KEEPER", 149, 157],
+     "cape": ["CAPEITEM_SMUGGLER", 46, 61],
      "head": ["HEAD_LEATHER_SET3", 138, 149],
+     "potion": ["T7_POTION_REVIVE", 44, 46],
      "shoes": ["SHOES_LEATHER_MORGANA", 61, 138]
     },
     "MAIN_ARCANESTAFF": {
      "armor": ["ARMOR_PLATE_SET2", 41, 76],
-     "head": ["HEAD_LEATHER_SET3", 18, 41]
+     "head": ["HEAD_LEATHER_SET3", 18, 42],
+     "shoes": ["SHOES_LEATHER_ROYAL", 7, 19]
     }
    }
   },
   "stopper_tank": {
    "archetype": {
-    "armor": ["ARMOR_PLATE_SET3", 196, 582]
+    "armor": ["ARMOR_PLATE_SET3", 196, 582],
+    "cape": ["CAPEITEM_SMUGGLER", 37, 37],
+    "head": ["HEAD_LEATHER_HELL", 95, 196],
+    "potion": ["T7_POTION_REVIVE", 36, 37],
+    "shoes": ["SHOES_LEATHER_ROYAL", 37, 95]
    },
    "by_weapon": {
     "2H_MACE": {
@@ -27793,7 +27946,10 @@
    "weapon_archetypes": {
     "2H_MACE": {
      "armor": ["ARMOR_PLATE_SET3", 153, 233],
-     "head": ["HEAD_LEATHER_HELL", 88, 153]
+     "cape": ["CAPEITEM_SMUGGLER", 34, 34],
+     "head": ["HEAD_LEATHER_HELL", 88, 154],
+     "potion": ["T7_POTION_REVIVE", 33, 34],
+     "shoes": ["SHOES_LEATHER_ROYAL", 34, 88]
     },
     "2H_QUARTERSTAFF_AVALON": {
      "armor": ["ARMOR_LEATHER_SET3", 11, 35],
@@ -27801,7 +27957,10 @@
     },
     "2H_ROCKSTAFF_KEEPER": {
      "armor": ["ARMOR_PLATE_FEY", 26, 38],
+     "cape": ["CAPEITEM_SMUGGLER", 9, 11],
+     "food": ["T7_MEAL_OMELETTE_AVALON", 6, 9],
      "head": ["HEAD_LEATHER_HELL", 20, 26],
+     "potion": ["T7_POTION_REVIVE", 9, 9],
      "shoes": ["SHOES_LEATHER_ROYAL", 11, 20]
     },
     "2H_SHAPESHIFTER_CRYSTAL": {
@@ -27818,7 +27977,11 @@
     },
     "MAIN_ROCKMACE_KEEPER": {
      "armor": ["ARMOR_PLATE_HELL", 150, 195],
+     "cape": ["CAPEITEM_SMUGGLER", 56, 58],
+     "food": ["T7_MEAL_OMELETTE_AVALON", 10, 36],
      "head": ["HEAD_LEATHER_SET3", 134, 150],
+     "offhand": ["OFF_SHIELD_AVALON", 36, 56],
+     "potion": ["T7_POTION_REVIVE", 34, 36],
      "shoes": ["SHOES_LEATHER_MORGANA", 57, 134]
     }
    }
@@ -27826,7 +27989,9 @@
   "sustained_brawler": {
    "archetype": {
     "armor": ["ARMOR_LEATHER_HELL", 850, 2640],
-    "head": ["HEAD_PLATE_SET1", 386, 860]
+    "cape": ["CAPEITEM_SMUGGLER", 161, 243],
+    "head": ["HEAD_PLATE_SET1", 386, 860],
+    "shoes": ["SHOES_LEATHER_MORGANA", 242, 387]
    },
    "by_weapon": {
     "2H_AXE": {
@@ -33690,31 +33855,45 @@
      "head": ["HEAD_LEATHER_SET3", 14, 38]
     },
     "2H_AXE_AVALON": {
-     "armor": ["ARMOR_LEATHER_HELL", 204, 546]
+     "armor": ["ARMOR_LEATHER_HELL", 204, 546],
+     "cape": ["CAPEITEM_SMUGGLER", 41, 60],
+     "food": ["T8_MEAL_STEW", 22, 41],
+     "head": ["HEAD_PLATE_SET1", 91, 204],
+     "potion": ["T7_POTION_REVIVE", 41, 41],
+     "shoes": ["SHOES_LEATHER_MORGANA", 60, 91]
     },
     "2H_CLAYMORE_AVALON": {
      "armor": ["ARMOR_LEATHER_HELL", 34, 61]
     },
     "2H_CLEAVER_HELL": {
      "armor": ["ARMOR_PLATE_ROYAL", 73, 162],
-     "head": ["HEAD_PLATE_SET2", 47, 74]
+     "cape": ["CAPEITEM_SMUGGLER", 21, 22],
+     "food": ["T7_MEAL_OMELETTE_AVALON", 11, 21],
+     "head": ["HEAD_PLATE_SET2", 47, 74],
+     "potion": ["T7_POTION_REVIVE", 21, 21],
+     "shoes": ["SHOES_PLATE_AVALON", 22, 47]
     },
     "2H_DOUBLEBLADEDSTAFF": {
      "armor": ["ARMOR_PLATE_UNDEAD", 6, 11]
     },
     "2H_DUALAXE_KEEPER": {
      "armor": ["ARMOR_LEATHER_HELL", 71, 160],
-     "head": ["HEAD_PLATE_SET1", 36, 71]
+     "head": ["HEAD_PLATE_SET1", 36, 71],
+     "shoes": ["SHOES_LEATHER_MORGANA", 18, 36]
     },
     "2H_DUALHAMMER_HELL": {
-     "armor": ["ARMOR_PLATE_SET1", 9, 28]
+     "armor": ["ARMOR_PLATE_SET1", 9, 28],
+     "head": ["HEAD_LEATHER_SET3", 8, 9],
+     "shoes": ["SHOES_LEATHER_MORGANA", 3, 8]
     },
     "2H_DUALSWORD": {
      "armor": ["ARMOR_LEATHER_SET1", 12, 37]
     },
     "2H_HALBERD": {
      "armor": ["ARMOR_LEATHER_HELL", 16, 27],
-     "head": ["HEAD_PLATE_SET1", 6, 16]
+     "cape": ["CAPEITEM_FW_LYMHURST", 4, 6],
+     "head": ["HEAD_PLATE_SET1", 6, 16],
+     "shoes": ["SHOES_LEATHER_MORGANA", 6, 6]
     },
     "2H_HALBERD_MORGANA": {
      "armor": ["ARMOR_PLATE_ROYAL", 6, 15],
@@ -33722,7 +33901,11 @@
     },
     "2H_HARPOON_HELL": {
      "armor": ["ARMOR_LEATHER_ROYAL", 157, 320],
-     "head": ["HEAD_LEATHER_SET3", 130, 158]
+     "cape": ["CAPEITEM_SMUGGLER", 69, 89],
+     "food": ["T8_MEAL_STEW", 20, 69],
+     "head": ["HEAD_LEATHER_SET3", 130, 158],
+     "potion": ["T7_POTION_REVIVE", 67, 69],
+     "shoes": ["SHOES_LEATHER_MORGANA", 89, 130]
     },
     "2H_KNUCKLES_AVALON": {
      "armor": ["ARMOR_LEATHER_HELL", 10, 26],
@@ -33734,29 +33917,43 @@
     },
     "2H_KNUCKLES_KEEPER": {
      "armor": ["ARMOR_LEATHER_HELL", 57, 83],
-     "head": ["HEAD_LEATHER_SET3", 24, 58]
+     "cape": ["CAPEITEM_SMUGGLER", 14, 20],
+     "head": ["HEAD_LEATHER_SET3", 24, 58],
+     "shoes": ["SHOES_LEATHER_MORGANA", 18, 24]
     },
     "2H_KNUCKLES_SET1": {
      "armor": ["ARMOR_LEATHER_SET3", 3, 7]
     },
     "2H_KNUCKLES_SET2": {
      "armor": ["ARMOR_LEATHER_HELL", 187, 424],
-     "head": ["HEAD_PLATE_SET1", 107, 187]
+     "cape": ["CAPEITEM_SMUGGLER", 52, 70],
+     "food": ["T8_MEAL_STEW", 33, 52],
+     "head": ["HEAD_PLATE_SET1", 107, 187],
+     "potion": ["T7_POTION_REVIVE", 51, 52],
+     "shoes": ["SHOES_LEATHER_MORGANA", 70, 107]
     },
     "2H_KNUCKLES_SET3": {
      "armor": ["ARMOR_CLOTH_AVALON", 141, 403],
-     "head": ["HEAD_LEATHER_FEY", 132, 144]
+     "cape": ["CAPEITEM_SMUGGLER", 49, 61],
+     "food": ["T8_MEAL_STEW", 22, 46],
+     "head": ["HEAD_LEATHER_FEY", 132, 144],
+     "potion": ["T7_POTION_REVIVE", 46, 49],
+     "shoes": ["SHOES_LEATHER_FEY", 61, 132]
     },
     "2H_SCYTHE_HELL": {
      "armor": ["ARMOR_LEATHER_HELL", 21, 27],
+     "cape": ["CAPEITEM_SMUGGLER", 7, 11],
+     "food": ["T8_MEAL_STEW", 3, 6],
      "head": ["HEAD_PLATE_SET1", 16, 21],
+     "potion": ["T7_POTION_REVIVE", 6, 7],
      "shoes": ["SHOES_LEATHER_MORGANA", 11, 16]
     },
     "MAIN_AXE": {
      "armor": ["ARMOR_LEATHER_SET1", 24, 35]
     },
     "MAIN_SCIMITAR_MORGANA": {
-     "armor": ["ARMOR_LEATHER_HELL", 6, 19]
+     "armor": ["ARMOR_LEATHER_HELL", 6, 19],
+     "head": ["HEAD_CLOTH_SET2", 4, 8]
     },
     "MAIN_SPEAR_LANCE_AVALON": {
      "armor": ["ARMOR_LEATHER_HELL", 6, 15],
@@ -33771,7 +33968,12 @@
   },
   "zone_support": {
    "archetype": {
-    "armor": ["ARMOR_LEATHER_ROYAL", 89, 195]
+    "armor": ["ARMOR_LEATHER_ROYAL", 89, 195],
+    "cape": ["CAPEITEM_SMUGGLER", 27, 34],
+    "food": ["T7_MEAL_OMELETTE", 10, 27],
+    "head": ["HEAD_LEATHER_SET3", 65, 89],
+    "potion": ["T7_POTION_REVIVE", 27, 27],
+    "shoes": ["SHOES_LEATHER_MORGANA", 33, 65]
    },
    "by_weapon": {
     "2H_ARCANESTAFF_HELL": {
@@ -34588,12 +34790,16 @@
    "weapon_archetypes": {
     "2H_ARCANESTAFF_HELL": {
      "armor": ["ARMOR_LEATHER_ROYAL", 89, 110],
+     "cape": ["CAPEITEM_SMUGGLER", 27, 34],
+     "food": ["T7_MEAL_OMELETTE", 10, 27],
      "head": ["HEAD_LEATHER_SET3", 65, 89],
+     "potion": ["T7_POTION_REVIVE", 27, 27],
      "shoes": ["SHOES_LEATHER_MORGANA", 33, 65]
     },
     "2H_ICEGAUNTLETS_HELL": {
      "armor": ["ARMOR_PLATE_SET2", 33, 70],
-     "head": ["HEAD_LEATHER_SET3", 28, 33]
+     "head": ["HEAD_LEATHER_SET3", 28, 33],
+     "shoes": ["SHOES_LEATHER_MORGANA", 11, 28]
     },
     "MAIN_FROSTSTAFF_KEEPER": {
      "armor": ["ARMOR_LEATHER_SET3", 4, 15]
@@ -35253,15 +35459,22 @@
    },
    "weapon_archetypes": {
     "2H_DAGGER_KATAR_AVALON": {
-     "armor": ["ARMOR_LEATHER_SET3", 11, 33]
+     "armor": ["ARMOR_LEATHER_SET3", 11, 33],
+     "cape": ["CAPEITEM_FW_BRECILIEN", 4, 9],
+     "head": ["HEAD_LEATHER_ROYAL", 11, 11],
+     "shoes": ["SHOES_CLOTH_FEY", 8, 11]
     },
     "2H_DUALSCIMITAR_UNDEAD": {
      "armor": ["ARMOR_PLATE_SET1", 40, 46],
+     "cape": ["CAPEITEM_SMUGGLER", 12, 24],
+     "food": ["T8_MEAL_STEW", 7, 12],
      "head": ["HEAD_LEATHER_SET3", 30, 41],
+     "potion": ["T7_POTION_REVIVE", 12, 12],
      "shoes": ["SHOES_LEATHER_MORGANA", 23, 30]
     },
     "2H_GLAIVE_CRYSTAL": {
      "armor": ["ARMOR_CLOTH_AVALON", 16, 26],
+     "cape": ["CAPEITEM_SMUGGLER", 5, 7],
      "head": ["HEAD_LEATHER_SET3", 15, 17],
      "shoes": ["SHOES_LEATHER_MORGANA", 6, 15]
     },
@@ -36289,10 +36502,15 @@
    "weapon_archetypes": {
     "2H_HOLYSTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 56, 66],
-     "head": ["HEAD_CLOTH_SET1", 15, 56]
+     "head": ["HEAD_CLOTH_SET1", 15, 56],
+     "shoes": ["SHOES_LEATHER_SET1", 8, 15]
     },
     "MAIN_HOLYSTAFF_AVALON": {
-     "armor": ["ARMOR_CLOTH_AVALON", 142, 361]
+     "armor": ["ARMOR_CLOTH_AVALON", 142, 361],
+     "cape": ["CAPEITEM_FW_LYMHURST", 20, 25],
+     "head": ["HEAD_PLATE_SET3", 46, 143],
+     "offhand": ["OFF_ORB_MORGANA", 6, 20],
+     "shoes": ["SHOES_LEATHER_SET1", 25, 46]
     }
    }
   },
@@ -38025,6 +38243,7 @@
     },
     "2H_CURSEDSTAFF_MORGANA": {
      "armor": ["ARMOR_CLOTH_SET1", 18, 27],
+     "cape": ["CAPEITEM_SMUGGLER", 5, 9],
      "head": ["HEAD_LEATHER_SET3", 14, 18],
      "shoes": ["SHOES_LEATHER_MORGANA", 9, 14]
     },
@@ -38033,7 +38252,8 @@
      "head": ["HEAD_LEATHER_SET3", 3, 7]
     },
     "2H_SKULLORB_HELL": {
-     "armor": ["ARMOR_CLOTH_FEY", 5, 16]
+     "armor": ["ARMOR_CLOTH_FEY", 5, 16],
+     "head": ["HEAD_CLOTH_KEEPER", 2, 5]
     },
     "MAIN_CURSEDSTAFF": {
      "armor": ["ARMOR_LEATHER_SET3", 21, 49],
@@ -38041,7 +38261,8 @@
     },
     "MAIN_CURSEDSTAFF_AVALON": {
      "armor": ["ARMOR_LEATHER_ROYAL", 14, 40],
-     "head": ["HEAD_LEATHER_UNDEAD", 9, 14]
+     "head": ["HEAD_LEATHER_UNDEAD", 9, 14],
+     "shoes": ["SHOES_LEATHER_SET1", 5, 9]
     }
    }
   },
@@ -40448,21 +40669,27 @@
    "weapon_archetypes": {
     "2H_CLAWPAIR": {
      "armor": ["ARMOR_LEATHER_SET3", 39, 51],
-     "head": ["HEAD_CLOTH_HELL", 22, 39]
+     "head": ["HEAD_CLOTH_HELL", 22, 39],
+     "shoes": ["SHOES_LEATHER_SET2", 8, 22]
     },
     "2H_DAGGERPAIR": {
      "armor": ["ARMOR_LEATHER_SET3", 83, 101],
-     "head": ["HEAD_CLOTH_HELL", 23, 83]
+     "head": ["HEAD_CLOTH_HELL", 23, 83],
+     "shoes": ["SHOES_CLOTH_ROYAL", 9, 23]
     },
     "2H_DAGGERPAIR_CRYSTAL": {
      "armor": ["ARMOR_LEATHER_SET3", 2, 5]
     },
     "2H_DAGGER_KATAR_AVALON": {
-     "armor": ["ARMOR_LEATHER_SET3", 11, 33]
+     "armor": ["ARMOR_LEATHER_SET3", 11, 33],
+     "cape": ["CAPEITEM_FW_BRECILIEN", 4, 9],
+     "head": ["HEAD_LEATHER_ROYAL", 11, 11],
+     "shoes": ["SHOES_CLOTH_FEY", 8, 11]
     },
     "2H_DUALSICKLE_UNDEAD": {
      "armor": ["ARMOR_LEATHER_SET3", 26, 46],
-     "head": ["HEAD_LEATHER_MORGANA", 13, 26]
+     "head": ["HEAD_LEATHER_MORGANA", 13, 26],
+     "shoes": ["SHOES_CLOTH_ROYAL", 7, 13]
     },
     "MAIN_DAGGER": {
      "armor": ["ARMOR_LEATHER_SET2", 6, 8],
@@ -40470,11 +40697,13 @@
     },
     "MAIN_DAGGER_HELL": {
      "armor": ["ARMOR_LEATHER_HELL", 12, 21],
-     "head": ["HEAD_PLATE_SET1", 5, 12]
+     "head": ["HEAD_PLATE_SET1", 5, 12],
+     "shoes": ["SHOES_LEATHER_MORGANA", 2, 5]
     },
     "MAIN_RAPIER_MORGANA": {
      "armor": ["ARMOR_LEATHER_SET3", 82, 187],
-     "head": ["HEAD_PLATE_SET1", 40, 82]
+     "head": ["HEAD_PLATE_SET1", 40, 82],
+     "shoes": ["SHOES_PLATE_SET1", 10, 40]
     },
     "MAIN_SCIMITAR_MORGANA": {
      "armor": ["ARMOR_LEATHER_HELL", 8, 16],
@@ -43435,21 +43664,26 @@
    "weapon_archetypes": {
     "2H_HAMMER": {
      "armor": ["ARMOR_PLATE_KEEPER", 31, 60],
-     "head": ["HEAD_LEATHER_AVALON", 12, 31]
+     "head": ["HEAD_LEATHER_AVALON", 12, 30],
+     "shoes": ["SHOES_CLOTH_HELL", 8, 12]
     },
     "2H_HAMMER_AVALON": {
-     "armor": ["ARMOR_PLATE_KEEPER", 10, 28]
+     "armor": ["ARMOR_PLATE_KEEPER", 10, 28],
+     "head": ["HEAD_LEATHER_SET3", 6, 10],
+     "shoes": ["SHOES_CLOTH_SET2", 5, 6]
     },
     "2H_MACE_MORGANA": {
      "armor": ["ARMOR_PLATE_KEEPER", 3, 9]
     },
     "2H_POLEHAMMER": {
      "armor": ["ARMOR_PLATE_SET2", 40, 112],
-     "head": ["HEAD_PLATE_KEEPER", 23, 40]
+     "head": ["HEAD_PLATE_KEEPER", 23, 40],
+     "shoes": ["SHOES_PLATE_KEEPER", 6, 23]
     },
     "2H_SHAPESHIFTER_KEEPER": {
      "armor": ["ARMOR_PLATE_KEEPER", 38, 60],
-     "head": ["HEAD_LEATHER_SET3", 13, 38]
+     "head": ["HEAD_LEATHER_SET3", 13, 38],
+     "shoes": ["SHOES_LEATHER_MORGANA", 6, 12]
     },
     "MAIN_ARCANESTAFF_UNDEAD": {
      "armor": ["ARMOR_LEATHER_SET3", 37, 74],
@@ -43462,16 +43696,23 @@
      "head": ["HEAD_LEATHER_HELL", 4, 14]
     },
     "MAIN_MACE": {
-     "armor": ["ARMOR_PLATE_SET3", 55, 187]
+     "armor": ["ARMOR_PLATE_SET3", 55, 187],
+     "head": ["HEAD_PLATE_KEEPER", 19, 55],
+     "shoes": ["SHOES_LEATHER_SET2", 9, 21]
     },
     "MAIN_MACE_CRYSTAL": {
-     "armor": ["ARMOR_PLATE_ROYAL", 8, 16]
+     "armor": ["ARMOR_PLATE_ROYAL", 8, 16],
+     "head": ["HEAD_LEATHER_HELL", 2, 8]
     }
    }
   },
   "kite_healer": {
    "archetype": {
-    "armor": ["ARMOR_CLOTH_SET2", 162, 436]
+    "armor": ["ARMOR_CLOTH_SET2", 162, 436],
+    "cape": ["CAPEITEM_FW_LYMHURST", 28, 30],
+    "head": ["HEAD_PLATE_SET3", 53, 163],
+    "offhand": ["OFF_HORN_KEEPER", 14, 28],
+    "shoes": ["SHOES_LEATHER_SET1", 30, 53]
    },
    "by_weapon": {
     "2H_NATURESTAFF": {
@@ -44853,16 +45094,23 @@
    "weapon_archetypes": {
     "2H_NATURESTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 14, 32],
-     "head": ["HEAD_CLOTH_SET1", 10, 14]
+     "cape": ["CAPEITEM_FW_MARTLOCK", 4, 8],
+     "head": ["HEAD_CLOTH_SET1", 10, 14],
+     "shoes": ["SHOES_LEATHER_SET1", 8, 10]
     },
     "2H_WILDSTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 12, 16],
      "cape": ["CAPEITEM_FW_LYMHURST", 6, 7],
      "head": ["HEAD_LEATHER_SET3", 9, 12],
+     "potion": ["T7_POTION_REVIVE", 3, 6],
      "shoes": ["SHOES_LEATHER_SET1", 7, 9]
     },
     "MAIN_HOLYSTAFF_AVALON": {
-     "armor": ["ARMOR_CLOTH_AVALON", 142, 361]
+     "armor": ["ARMOR_CLOTH_AVALON", 142, 361],
+     "cape": ["CAPEITEM_FW_LYMHURST", 20, 25],
+     "head": ["HEAD_PLATE_SET3", 46, 143],
+     "offhand": ["OFF_ORB_MORGANA", 6, 20],
+     "shoes": ["SHOES_LEATHER_SET1", 25, 46]
     },
     "MAIN_HOLYSTAFF_MORGANA": {
      "armor": ["ARMOR_CLOTH_SET2", 10, 15],
@@ -47625,20 +47873,27 @@
      "armor": ["ARMOR_CLOTH_SET2", 111, 161]
     },
     "2H_NATURESTAFF_KEEPER": {
-     "armor": ["ARMOR_CLOTH_AVALON", 5, 12]
+     "armor": ["ARMOR_CLOTH_AVALON", 5, 12],
+     "head": ["HEAD_LEATHER_SET3", 2, 5]
     },
     "2H_WILDSTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 12, 16],
      "cape": ["CAPEITEM_FW_LYMHURST", 6, 7],
      "head": ["HEAD_LEATHER_SET3", 9, 12],
+     "potion": ["T7_POTION_REVIVE", 3, 6],
      "shoes": ["SHOES_LEATHER_SET1", 7, 9]
     },
     "MAIN_HOLYSTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 44, 66],
-     "head": ["HEAD_CLOTH_SET1", 15, 44]
+     "head": ["HEAD_CLOTH_SET1", 15, 44],
+     "shoes": ["SHOES_LEATHER_SET1", 8, 15]
     },
     "MAIN_HOLYSTAFF_AVALON": {
-     "armor": ["ARMOR_CLOTH_AVALON", 142, 361]
+     "armor": ["ARMOR_CLOTH_AVALON", 142, 361],
+     "cape": ["CAPEITEM_FW_LYMHURST", 20, 25],
+     "head": ["HEAD_PLATE_SET3", 46, 143],
+     "offhand": ["OFF_ORB_MORGANA", 6, 20],
+     "shoes": ["SHOES_LEATHER_SET1", 25, 46]
     },
     "MAIN_NATURESTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 29, 58],
@@ -56004,7 +56259,10 @@
    },
    "weapon_archetypes": {
     "2H_ARCANESTAFF_CRYSTAL": {
-     "armor": ["ARMOR_LEATHER_MORGANA", 10, 27]
+     "armor": ["ARMOR_LEATHER_MORGANA", 10, 27],
+     "cape": ["CAPEITEM_FW_LYMHURST", 4, 6],
+     "head": ["HEAD_LEATHER_SET3", 9, 10],
+     "shoes": ["SHOES_CLOTH_ROYAL", 6, 9]
     },
     "2H_BOW": {
      "armor": ["ARMOR_CLOTH_SET2", 12, 35],
@@ -56012,18 +56270,22 @@
     },
     "2H_BOW_AVALON": {
      "armor": ["ARMOR_CLOTH_SET1", 102, 134],
+     "cape": ["CAPEITEM_SMUGGLER", 14, 38],
      "head": ["HEAD_LEATHER_SET3", 94, 102],
      "shoes": ["SHOES_LEATHER_MORGANA", 38, 94]
     },
     "2H_BOW_HELL": {
      "armor": ["ARMOR_LEATHER_SET3", 108, 140],
      "cape": ["CAPEITEM_FW_FORTSTERLING", 60, 91],
+     "food": ["T8_MEAL_STEW", 25, 59],
      "head": ["HEAD_PLATE_SET1", 91, 108],
+     "potion": ["T7_POTION_REVIVE", 58, 60],
      "shoes": ["SHOES_LEATHER_AVALON", 90, 91]
     },
     "2H_CROSSBOW": {
      "armor": ["ARMOR_CLOTH_SET1", 15, 29],
-     "head": ["HEAD_LEATHER_ROYAL", 6, 17]
+     "head": ["HEAD_LEATHER_ROYAL", 6, 17],
+     "shoes": ["SHOES_CLOTH_ROYAL", 4, 6]
     },
     "2H_CROSSBOWLARGE": {
      "armor": ["ARMOR_CLOTH_SET2", 8, 18],
@@ -56034,7 +56296,8 @@
      "head": ["HEAD_LEATHER_SET3", 3, 6]
     },
     "2H_CROSSBOW_CANNON_AVALON": {
-     "armor": ["ARMOR_CLOTH_KEEPER", 44, 114]
+     "armor": ["ARMOR_CLOTH_KEEPER", 44, 114],
+     "head": ["HEAD_LEATHER_FEY", 17, 45]
     },
     "2H_DUALCROSSBOW_CRYSTAL": {
      "armor": ["ARMOR_CLOTH_FEY", 3, 10]
@@ -56046,16 +56309,20 @@
     },
     "2H_FIRESTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 11, 18],
-     "head": ["HEAD_CLOTH_KEEPER", 3, 11]
+     "head": ["HEAD_CLOTH_KEEPER", 3, 12]
     },
     "2H_FIRESTAFF_HELL": {
      "armor": ["ARMOR_CLOTH_SET1", 42, 46],
      "cape": ["CAPEITEM_FW_BRECILIEN", 12, 17],
+     "food": ["T8_MEAL_STEW", 7, 12],
      "head": ["HEAD_CLOTH_FEY", 26, 42],
+     "potion": ["T7_POTION_REVIVE", 12, 12],
      "shoes": ["SHOES_PLATE_UNDEAD", 17, 26]
     },
     "2H_FIRE_RINGPAIR_AVALON": {
-     "armor": ["ARMOR_CLOTH_SET2", 72, 166]
+     "armor": ["ARMOR_CLOTH_SET2", 72, 166],
+     "head": ["HEAD_LEATHER_SET3", 30, 72],
+     "shoes": ["SHOES_LEATHER_MORGANA", 16, 30]
     },
     "2H_FROSTSTAFF": {
      "armor": ["ARMOR_LEATHER_AVALON", 13, 37],
@@ -56067,11 +56334,14 @@
      "shoes": ["SHOES_LEATHER_ROYAL", 2, 6]
     },
     "2H_GLACIALSTAFF": {
-     "armor": ["ARMOR_CLOTH_SET1", 5, 15]
+     "armor": ["ARMOR_CLOTH_SET1", 5, 15],
+     "head": ["HEAD_LEATHER_SET3", 4, 5]
     },
     "2H_ICECRYSTAL_UNDEAD": {
      "armor": ["ARMOR_CLOTH_SET1", 134, 184],
+     "cape": ["CAPEITEM_FW_LYMHURST", 20, 59],
      "head": ["HEAD_LEATHER_SET3", 115, 134],
+     "potion": ["T7_POTION_REVIVE", 20, 22],
      "shoes": ["SHOES_LEATHER_MORGANA", 59, 116]
     },
     "2H_INFERNOSTAFF": {
@@ -56081,37 +56351,46 @@
     },
     "2H_INFERNOSTAFF_MORGANA": {
      "armor": ["ARMOR_CLOTH_SET1", 80, 125],
+     "cape": ["CAPEITEM_FW_LYMHURST", 10, 40],
      "head": ["HEAD_LEATHER_SET3", 62, 80],
      "shoes": ["SHOES_CLOTH_ROYAL", 40, 63]
     },
     "2H_LONGBOW": {
      "armor": ["ARMOR_CLOTH_SET2", 188, 367],
-     "head": ["HEAD_LEATHER_SET3", 68, 192]
+     "cape": ["CAPEITEM_FW_LYMHURST", 9, 22],
+     "head": ["HEAD_LEATHER_SET3", 68, 192],
+     "shoes": ["SHOES_LEATHER_MORGANA", 22, 70]
     },
     "2H_LONGBOW_UNDEAD": {
      "armor": ["ARMOR_LEATHER_SET2", 46, 58],
-     "head": ["HEAD_LEATHER_SET3", 17, 46]
+     "head": ["HEAD_LEATHER_SET3", 17, 46],
+     "shoes": ["SHOES_CLOTH_ROYAL", 7, 17]
     },
     "2H_SHAPESHIFTER_AVALON": {
-     "armor": ["ARMOR_PLATE_SET1", 14, 43]
+     "armor": ["ARMOR_PLATE_SET1", 14, 43],
+     "head": ["HEAD_LEATHER_SET3", 7, 15]
     },
     "2H_SHAPESHIFTER_HELL": {
      "armor": ["ARMOR_PLATE_SET1", 21, 46],
-     "head": ["HEAD_PLATE_ROYAL", 17, 23]
+     "head": ["HEAD_PLATE_ROYAL", 17, 23],
+     "shoes": ["SHOES_LEATHER_MORGANA", 6, 17]
     },
     "2H_WARBOW": {
      "armor": ["ARMOR_LEATHER_SET3", 21, 34]
     },
     "MAIN_1HCROSSBOW": {
      "armor": ["ARMOR_CLOTH_SET2", 8, 19],
-     "head": ["HEAD_PLATE_SET3", 5, 9]
+     "head": ["HEAD_PLATE_SET3", 5, 9],
+     "shoes": ["SHOES_PLATE_SET1", 2, 5]
     },
     "MAIN_CURSEDSTAFF_CRYSTAL": {
-     "armor": ["ARMOR_CLOTH_SET2", 31, 93]
+     "armor": ["ARMOR_CLOTH_SET2", 31, 93],
+     "head": ["HEAD_PLATE_SET3", 12, 34]
     },
     "MAIN_FIRESTAFF": {
      "armor": ["ARMOR_CLOTH_SET2", 51, 90],
-     "head": ["HEAD_PLATE_SET3", 20, 51]
+     "head": ["HEAD_PLATE_SET3", 20, 51],
+     "shoes": ["SHOES_PLATE_SET1", 8, 20]
     },
     "MAIN_FIRESTAFF_KEEPER": {
      "armor": ["ARMOR_CLOTH_SET2", 13, 22]
@@ -56124,7 +56403,8 @@
   "shield_support": {
    "archetype": {
     "armor": ["ARMOR_PLATE_KEEPER", 67, 173],
-    "head": ["HEAD_LEATHER_SET3", 46, 67]
+    "head": ["HEAD_LEATHER_SET3", 46, 67],
+    "shoes": ["SHOES_LEATHER_SET1", 19, 46]
    },
    "by_weapon": {
     "2H_ARCANESTAFF": {
@@ -57372,11 +57652,17 @@
      "head": ["HEAD_LEATHER_SET3", 3, 7]
     },
     "2H_HOLYSTAFF_CRYSTAL": {
-     "armor": ["ARMOR_CLOTH_AVALON", 6, 22]
+     "armor": ["ARMOR_CLOTH_AVALON", 6, 22],
+     "cape": ["CAPEITEM_FW_LYMHURST", 5, 5],
+     "food": ["T7_MEAL_OMELETTE_AVALON", 2, 5],
+     "head": ["HEAD_LEATHER_SET3", 6, 6],
+     "potion": ["T7_POTION_REVIVE", 5, 5],
+     "shoes": ["SHOES_LEATHER_SET1", 5, 6]
     },
     "2H_SHAPESHIFTER_SET2": {
      "armor": ["ARMOR_PLATE_KEEPER", 47, 79],
-     "head": ["HEAD_LEATHER_SET3", 32, 47]
+     "head": ["HEAD_LEATHER_SET3", 32, 47],
+     "shoes": ["SHOES_LEATHER_SET1", 12, 32]
     },
     "MAIN_ARCANESTAFF": {
      "armor": ["ARMOR_PLATE_SET2", 9, 27]
@@ -59110,16 +59396,18 @@
    "weapon_archetypes": {
     "2H_MACE": {
      "armor": ["ARMOR_PLATE_KEEPER", 29, 89],
-     "head": ["HEAD_LEATHER_SET3", 17, 29],
-     "shoes": ["SHOES_PLATE_FEY", 15, 17]
+     "head": ["HEAD_LEATHER_SET3", 17, 29]
     },
     "2H_QUARTERSTAFF_AVALON": {
      "armor": ["ARMOR_PLATE_UNDEAD", 22, 50],
-     "head": ["HEAD_PLATE_ROYAL", 8, 22]
+     "cape": ["CAPEITEM_DEMON", 8, 16],
+     "head": ["HEAD_PLATE_ROYAL", 8, 22],
+     "shoes": ["SHOES_LEATHER_SET2", 16, 18]
     },
     "2H_ROCKSTAFF_KEEPER": {
      "armor": ["ARMOR_PLATE_FEY", 8, 16],
-     "head": ["HEAD_LEATHER_HELL", 5, 8]
+     "head": ["HEAD_LEATHER_HELL", 5, 8],
+     "shoes": ["SHOES_LEATHER_SET2", 3, 5]
     },
     "2H_SHAPESHIFTER_CRYSTAL": {
      "armor": ["ARMOR_PLATE_SET3", 2, 5]
@@ -59129,7 +59417,11 @@
     },
     "MAIN_MACE_HELL": {
      "armor": ["ARMOR_PLATE_FEY", 24, 77],
-     "head": ["HEAD_PLATE_ROYAL", 22, 25]
+     "cape": ["CAPEITEM_FW_BRIDGEWATCH", 20, 22],
+     "head": ["HEAD_PLATE_ROYAL", 22, 25],
+     "offhand": ["OFF_JESTERCANE_HELL", 19, 20],
+     "potion": ["T7_POTION_SLOWFIELD", 10, 19],
+     "shoes": ["SHOES_LEATHER_SET2", 22, 22]
     },
     "MAIN_ROCKMACE_KEEPER": {
      "armor": ["ARMOR_PLATE_SET2", 17, 38],
@@ -59139,7 +59431,10 @@
   },
   "sustained_brawler": {
    "archetype": {
-    "armor": ["ARMOR_LEATHER_HELL", 444, 1655]
+    "armor": ["ARMOR_LEATHER_HELL", 444, 1655],
+    "cape": ["CAPEITEM_SMUGGLER", 39, 75],
+    "head": ["HEAD_PLATE_SET1", 124, 452],
+    "shoes": ["SHOES_LEATHER_MORGANA", 73, 126]
    },
    "by_weapon": {
     "2H_AXE": {
@@ -65891,11 +66186,13 @@
    "weapon_archetypes": {
     "2H_AXE": {
      "armor": ["ARMOR_LEATHER_MORGANA", 88, 148],
-     "head": ["HEAD_LEATHER_SET3", 24, 88]
+     "head": ["HEAD_LEATHER_SET3", 24, 88],
+     "shoes": ["SHOES_CLOTH_ROYAL", 16, 24]
     },
     "2H_AXE_AVALON": {
      "armor": ["ARMOR_LEATHER_HELL", 69, 174],
-     "head": ["HEAD_PLATE_SET1", 28, 69]
+     "head": ["HEAD_PLATE_SET1", 28, 70],
+     "shoes": ["SHOES_LEATHER_MORGANA", 19, 28]
     },
     "2H_CLAYMORE": {
      "armor": ["ARMOR_LEATHER_SET1", 7, 18],
@@ -65903,7 +66200,8 @@
     },
     "2H_CLAYMORE_AVALON": {
      "armor": ["ARMOR_LEATHER_HELL", 37, 83],
-     "head": ["HEAD_LEATHER_MORGANA", 18, 37]
+     "head": ["HEAD_LEATHER_MORGANA", 18, 36],
+     "shoes": ["SHOES_LEATHER_MORGANA", 6, 18]
     },
     "2H_DOUBLEBLADEDSTAFF": {
      "armor": ["ARMOR_LEATHER_SET3", 6, 18],
@@ -65913,11 +66211,13 @@
      "armor": ["ARMOR_LEATHER_HELL", 74, 193]
     },
     "2H_DUALHAMMER_HELL": {
-     "armor": ["ARMOR_PLATE_SET1", 12, 40]
+     "armor": ["ARMOR_PLATE_SET1", 12, 40],
+     "head": ["HEAD_LEATHER_SET3", 7, 13]
     },
     "2H_DUALSWORD": {
      "armor": ["ARMOR_LEATHER_SET1", 42, 66],
-     "head": ["HEAD_LEATHER_SET2", 12, 44]
+     "head": ["HEAD_LEATHER_SET2", 12, 44],
+     "shoes": ["SHOES_PLATE_SET1", 6, 14]
     },
     "2H_HALBERD": {
      "armor": ["ARMOR_LEATHER_HELL", 7, 21],
@@ -65925,11 +66225,14 @@
     },
     "2H_HALBERD_MORGANA": {
      "armor": ["ARMOR_PLATE_ROYAL", 44, 70],
+     "cape": ["CAPEITEM_FW_THETFORD", 9, 18],
      "head": ["HEAD_LEATHER_MORGANA", 27, 44],
      "shoes": ["SHOES_LEATHER_MORGANA", 18, 27]
     },
     "2H_HARPOON_HELL": {
-     "armor": ["ARMOR_LEATHER_ROYAL", 23, 68]
+     "armor": ["ARMOR_LEATHER_ROYAL", 23, 68],
+     "head": ["HEAD_LEATHER_SET3", 18, 23],
+     "shoes": ["SHOES_LEATHER_MORGANA", 9, 18]
     },
     "2H_KNUCKLES_AVALON": {
      "armor": ["ARMOR_LEATHER_HELL", 10, 34]
@@ -65944,10 +66247,14 @@
     },
     "2H_KNUCKLES_KEEPER": {
      "armor": ["ARMOR_LEATHER_HELL", 16, 35],
-     "head": ["HEAD_LEATHER_SET3", 9, 18]
+     "head": ["HEAD_LEATHER_SET3", 9, 18],
+     "shoes": ["SHOES_LEATHER_MORGANA", 5, 9]
     },
     "2H_KNUCKLES_SET2": {
-     "armor": ["ARMOR_LEATHER_HELL", 47, 157]
+     "armor": ["ARMOR_LEATHER_HELL", 47, 157],
+     "cape": ["CAPEITEM_SMUGGLER", 12, 20],
+     "head": ["HEAD_PLATE_SET1", 30, 47],
+     "shoes": ["SHOES_LEATHER_MORGANA", 20, 30]
     },
     "2H_SCYTHE_HELL": {
      "armor": ["ARMOR_LEATHER_HELL", 18, 28],
@@ -65956,7 +66263,8 @@
     },
     "2H_SHAPESHIFTER_MORGANA": {
      "armor": ["ARMOR_LEATHER_HELL", 12, 23],
-     "head": ["HEAD_LEATHER_MORGANA", 6, 12]
+     "head": ["HEAD_LEATHER_MORGANA", 6, 12],
+     "shoes": ["SHOES_CLOTH_AVALON", 2, 6]
     },
     "MAIN_AXE": {
      "armor": ["ARMOR_LEATHER_SET1", 60, 83],
@@ -65983,7 +66291,8 @@
   },
   "zone_support": {
    "archetype": {
-    "armor": ["ARMOR_LEATHER_ROYAL", 15, 48]
+    "armor": ["ARMOR_LEATHER_ROYAL", 15, 48],
+    "head": ["HEAD_LEATHER_SET3", 10, 15]
    },
    "by_weapon": {
     "2H_ARCANESTAFF_HELL": {
@@ -66382,10 +66691,13 @@
    "weapon_archetypes": {
     "2H_ARCANESTAFF_HELL": {
      "armor": ["ARMOR_LEATHER_ROYAL", 11, 17],
-     "head": ["HEAD_LEATHER_SET3", 8, 11]
+     "head": ["HEAD_LEATHER_SET3", 8, 11],
+     "shoes": ["SHOES_LEATHER_MORGANA", 2, 8]
     },
     "2H_ICEGAUNTLETS_HELL": {
-     "armor": ["ARMOR_PLATE_SET2", 9, 26]
+     "armor": ["ARMOR_PLATE_SET2", 9, 26],
+     "head": ["HEAD_LEATHER_SET3", 6, 9],
+     "shoes": ["SHOES_LEATHER_ROYAL", 2, 6]
     },
     "MAIN_FROSTSTAFF_KEEPER": {
      "armor": ["ARMOR_PLATE_SET2", 2, 5]
