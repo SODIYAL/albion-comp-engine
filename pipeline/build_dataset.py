@@ -1075,6 +1075,7 @@ KIT_SLOT_MAP = {"armor": "armor", "head": "head", "shoes": "shoes",
 # votes — the 2026-09-04 Greataxe pocket (8 of ~74) stops, a 311-vote
 # Keeper pocket carries its helmet and boots.
 CHAIN_POCKET_SHARE, CHAIN_POCKET_VOTES = 0.20, 20
+STYLE_CELL_MIN_VOTERS = 5   # distinct players before a weapon has a style cell
 
 
 def resolve_passive_doctrine(doc, gear, problems):
@@ -1301,7 +1302,8 @@ DOCTRINE_BANDS = {
 
 
 def derive_kit_doctrine(book, gear, problems, overrides=None,
-                        effect_map=None, band="group"):
+                        effect_map=None, band="group", style=None,
+                        party_styles=None):
     """Increment 2 kit POOLS, evidence-led (roles-design.md: 'kit = the
     assigned role's uniform, evidence-led — reference builds first'):
     each seat role's observed per-slot items, mined from the reference
@@ -1343,7 +1345,19 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
     weapon share one vote — and every floor counts different people.
     Counts ship rounded; rows carry `players` beside them. Off-uniform chests are aggregated into
     the same off_uniform report (never admitted); winner bias is the
-    harvest's documented property and rides the citation."""
+    harvest's documented property and rides the citation.
+
+    STYLE CELLS (2026-09-08, spec notes/specs/2026-09-08-coherent-style-
+    kits-design.md): with `style` set (group band only) the killboard
+    builds are filtered to those linked (party_link) to a party labelled
+    that style (`party_styles` = {(battle, index): style} from
+    out/party_styles.json), curated reference builds drop out (they
+    carry no style), a weapon needs STYLE_CELL_MIN_VOTERS distinct
+    players in the cell, overrides do not apply (ruled on the band), and
+    everything the miner ships lands under the seat's
+    `kit_styles.<style>` — absent where thin, never filled from the band
+    or another style. The engine lays a DECLARED style's cell over the
+    band (`_seat_kit`); `balanced` never reads one (owner 2026-09-08)."""
     effect_map = effect_map or {}
     bi_path = os.path.join(OUT, "builds_index.json")
     if not os.path.exists(bi_path):
@@ -1352,6 +1366,8 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
         return {}
     with open(bi_path, encoding="utf-8") as f:
         by_content = (json.load(f) or {}).get("by_content") or {}
+    if style is not None:
+        by_content = {}           # curated builds carry no style label
     KB_MIN_SEAT, KB_MIN_WEAPON = 3, 2
     band_cfg = DOCTRINE_BANDS[band]
     KB_MIN_PARTY, KB_MAX_PARTY = band_cfg["party"]   # killer-party members
@@ -1359,6 +1375,7 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
         by_content = {c: v for c, v in by_content.items()
                       if c in band_cfg["curated"]}
     kb_by_weapon, kb_armour = {}, {}
+    cell_voters = {}   # style cells: weapon -> distinct players in the cell
     kb_path = os.path.join(OUT, "party_rosters.json")
     if os.path.exists(kb_path):
         with open(kb_path, encoding="utf-8") as f:
@@ -1376,6 +1393,25 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
         kept = [b for b in (kb_doc.get("builds") or [])
                 if b.get("weapon") and b.get("gear")
                 and KB_MIN_PARTY <= (b.get("party_size") or 0) <= KB_MAX_PARTY]
+        if style is not None:
+            # STYLE CELL: only builds linked to a party labelled `style`,
+            # and only weapons with STYLE_CELL_MIN_VOTERS distinct players
+            # in the cell (thin cells are absent, never filled)
+            import party_link
+            by_battle = party_link.parties_by_battle(kb_doc)
+            kept = [b for b in kept
+                    if (party_styles or {}).get(
+                        (b.get("battle"),
+                         party_link.link_build(b, by_battle, KB_MIN_PARTY)))
+                    == style]
+            voters = {}
+            for i, b in enumerate(kept):
+                voters.setdefault(b["weapon"], set()).add(
+                    b.get("player") or f"?{i}")
+            kept = [b for b in kept
+                    if len(voters[b["weapon"]]) >= STYLE_CELL_MIN_VOTERS]
+            cell_voters = {wk: len(v) for wk, v in sorted(voters.items())
+                           if len(v) >= STYLE_CELL_MIN_VOTERS}
         # one player, one vote per weapon: a player's k builds on a
         # weapon weigh 1/k each; a build with no player key is its own
         # voter (unknown, never merged with anyone)
@@ -1448,8 +1484,11 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
             continue  # function/meta roles have no seat kit
         # the group band writes the seat's top-level kit keys; any other
         # band writes the same keys under kit_bands.<band>
-        tgt = (r if band == "group"
-               else r.setdefault("kit_bands", {}).setdefault(band, {}))
+        if style is not None:
+            tgt = r.setdefault("kit_styles", {}).setdefault(style, {})
+        else:
+            tgt = (r if band == "group"
+                   else r.setdefault("kit_bands", {}).setdefault(band, {}))
         pools, off_uniform, wpools = {}, [], {}
         for m in (r.get("weapons") or []):
             wk_id = m.get("id")
@@ -1608,9 +1647,9 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                     for e in ordered]
                 kit_weapon.setdefault(wk_id, {})[slot] = [
                     [e["id"], e["count"]] for e in ordered]
-        applied = _apply_kit_overrides(
+        applied = ([] if style is not None else _apply_kit_overrides(
             r["id"], uni, kit, det, w_det, kit_weapon, gear,
-            (overrides or {}).get(r["id"]) or {}, problems)
+            (overrides or {}).get(r["id"]) or {}, problems))
         seats_seen.add(r["id"])
         # weapons whose observed majority chest class lies outside the
         # seat's book uniform (uni_ext): shipped for the engine's gate
@@ -1630,6 +1669,13 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                                          for wk, e in sorted(ext.items())}
         if det or off_uniform or applied or ext:
             detail[r["id"]] = {"slots": det}
+            if style is not None:
+                # the cell floor, reported per member weapon (R30 reads it)
+                cv = {m.get("id"): cell_voters[m.get("id")]
+                      for m in (r.get("weapons") or [])
+                      if m.get("id") in cell_voters}
+                if cv:
+                    detail[r["id"]]["cell_voters"] = cv
             if ext:
                 detail[r["id"]]["uniform_extended"] = ext
             if kit_build:
@@ -1643,9 +1689,15 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
             if off_uniform:
                 detail[r["id"]]["off_uniform"] = sorted(
                     off_uniform, key=lambda o: (o["id"], o["build"]))
-    for rid in sorted(set(overrides or {}) - seats_seen):
-        problems.append(f"kit override: {rid} is not a seat role with a "
-                        f"chest uniform — ruling cannot apply")
+        if style is not None and not tgt:
+            # a cell with nothing in it is absent, not an empty dict
+            r["kit_styles"].pop(style, None)
+            if not r["kit_styles"]:
+                r.pop("kit_styles", None)
+    if style is None:
+        for rid in sorted(set(overrides or {}) - seats_seen):
+            problems.append(f"kit override: {rid} is not a seat role with "
+                            f"a chest uniform — ruling cannot apply")
     return detail
 
 
@@ -1847,6 +1899,29 @@ def apply_roles(weapons, gear):
     book = doc.get("roles") or []
     effects = doc.get("gear_effects") or []
     problems, seen = [], set()
+    # party style labels (derive_party_styles.py -> out/party_styles.json,
+    # 2026-09-08): optional; a file derived from a DIFFERENT artifact than
+    # the one on disk blocks the release (fail closed, loudly); a missing
+    # file means no style cells this build
+    party_styles = {}
+    ps_path = os.path.join(OUT, "party_styles.json")
+    if os.path.exists(ps_path):
+        import hashlib
+        with open(ps_path, encoding="utf-8") as f:
+            ps_doc = json.load(f) or {}
+        want = (ps_doc.get("_source") or {}).get("party_rosters_sha256")
+        with open(os.path.join(OUT, "party_rosters.json"), "rb") as f:
+            have = hashlib.sha256(f.read()).hexdigest()
+        if want != have:
+            problems.append("party_styles.json was derived from a different "
+                            "party_rosters.json — rerun derive_party_styles.py")
+        else:
+            party_styles = {(r["battle"], r["index"]): r.get("style")
+                            for r in ps_doc.get("parties") or []
+                            if r.get("style")}
+    else:
+        print("party_styles.json missing — no style cells this build "
+              "(run derive_party_styles.py after a harvest)")
     # gear effects (owner 2026-08-25): typed gear-carried auras/actives —
     # items grant them (id = catalog-modeled, named = documented but not
     # yet curated); carriers are weapons evidenced to take that seat.
@@ -1959,6 +2034,16 @@ def apply_roles(weapons, gear):
     # contents; no grading overrides — those were ruled on ZvZ kits)
     kit_detail_gang = derive_kit_doctrine(book, gear, problems, None,
                                           effect_map, band="gang")
+    # STYLE CELLS (2026-09-08): one cell per declared style on the group
+    # band, from builds linked to labelled parties; absent where thin
+    kit_detail_styles = {}
+    if party_styles:
+        for st in ("brawl", "clap", "kite", "brawl_clap", "clap_kite"):
+            d = derive_kit_doctrine(book, gear, problems, None, effect_map,
+                                    band="group", style=st,
+                                    party_styles=party_styles)
+            if d:
+                kit_detail_styles[st] = d
     effect_quotas = mine_effect_quotas(gear, effect_map, problems)
     carrier_quotas = mine_carrier_quotas(gear, effect_map)
     # unique actives that buff allies but sit in no gear_effect yet —
@@ -1981,6 +2066,7 @@ def apply_roles(weapons, gear):
         "items": gear_board,
         "kit_doctrine": kit_detail,
         "kit_doctrine_gang": kit_detail_gang,
+        "kit_doctrine_styles": kit_detail_styles,
         "effect_quotas": effect_quotas,
         "carrier_quotas": carrier_quotas,
         "effect_candidates": effect_candidates,

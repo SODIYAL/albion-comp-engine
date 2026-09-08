@@ -1270,6 +1270,41 @@ def t_party_styles():
           f"have={have}")
 
 
+def t_style_cells():
+    # R30 (2026-09-08, spec section 2 "Doctrine"): the group band carries
+    # per-style kit cells mined from builds linked to labelled parties with
+    # the band's own floors plus a 5-voter cell floor; a cell is absent,
+    # never filled; the gang band carries none.
+    import json as _json
+    e = Engine(content="territory_defense", size=20)
+    styles_seen, cells, gang_cells, two_plus = set(), 0, 0, 0
+    for rid, rec in e.roles.items():
+        ks = rec.get("kit_styles") or {}
+        styles_seen |= set(ks)
+        cells += sum(1 for st, cell in ks.items() if cell.get("kit_weapon"))
+        if len(ks) >= 2:
+            two_plus += 1
+        gang_cells += len(((rec.get("kit_bands") or {}).get("gang") or {})
+                          .get("kit_styles") or {})
+    rep = _json.load(open(os.path.join(ROOT, "pipeline", "out",
+                                       "roles_report.json"), encoding="utf-8"))
+    det = rep.get("kit_doctrine_styles") or {}
+    thin = []
+    for st, seats in det.items():
+        for sid, d in seats.items():
+            cv = d.get("cell_voters") or {}
+            for w in (d.get("by_weapon") or {}):
+                if cv.get(w, 0) < 5:
+                    thin.append(f"{st}/{sid}/{w}:{cv.get(w)}")
+    check("R30 style cells: only the five styles, at least two seats carry "
+          "two or more cells, every cell weapon has >= 5 voters, the gang "
+          "band carries no cells",
+          bool(styles_seen) and styles_seen <= set(e.IDENTITY_STYLES)
+          and cells >= 4 and two_plus >= 2 and not thin and gang_cells == 0,
+          f"styles={sorted(styles_seen)} cells={cells} two_plus={two_plus} "
+          f"thin={thin[:3]} gang={gang_cells}")
+
+
 if __name__ == "__main__":
     t_role_book()
     t_ruled_memberships()
@@ -1302,6 +1337,7 @@ if __name__ == "__main__":
     t_chain_guard()
     t_party_link()
     t_party_styles()
+    t_style_cells()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")
