@@ -836,6 +836,7 @@ def t_kit_audit_agreement():
                 and (r.get("party_size") or 0) >= 10:   # ZvZ killer parties
             g = dict(r["gear"])
             g["_w"] = 1.0 / per[(r["weapon"], r.get("player"))]
+            g["_p"] = r.get("player")
             by_w.setdefault(r["weapon"], []).append(g)
     eligible = sorted(w for w, rs in by_w.items() if len(rs) >= 30)
     pick = _random.Random(20260903).sample(eligible, 10)
@@ -851,15 +852,19 @@ def t_kit_audit_agreement():
         for slot, kb in slot_kb:
             if slot == "offhand" and e.weapons[w].get("two_handed"):
                 continue
-            c = _Counter()
+            c, who = _Counter(), {}
             for gd in by_w[w]:
                 v = gd.get(kb)
-                c[(e.gear_key(v) or v) if v else "-"] += gd["_w"]
+                key = (e.gear_key(v) or v) if v else "-"
+                c[key] += gd["_w"]
+                who.setdefault(key, set()).add(gd["_p"])
             n = sum(c.values())
             items = [(k, x) for k, x in c.most_common() if k != "-"]
             if not items or items[0][0] not in e.gear:
                 continue
             modal, mn = items[0]
+            if len(who.get(modal) or ()) < 5:
+                continue      # a thin modal is pooled, not matched (2026-09-08)
             eng = v0.get(slot)
             share = (c.get(eng, 0) / n) if eng else 0.0
             total += 1
@@ -1142,16 +1147,20 @@ def t_doctrine_bands():
         for raw, sl in slots.items():
             if sl == "offhand" and e7.weapons[w].get("two_handed"):
                 continue
-            votes = _Counter()
+            votes, who = _Counter(), {}
             for b in by_w[w]:
                 it = (b.get("gear") or {}).get(raw)
                 if it:
-                    votes[e7.gear_key(it) or it] += 1.0 / per[b["player"]]
+                    key = e7.gear_key(it) or it
+                    votes[key] += 1.0 / per[b["player"]]
+                    who.setdefault(key, set()).add(b["player"])
             if not votes:
                 continue
             modal, mv = votes.most_common(1)[0]
             if modal not in e7.gear or not kit.get(sl):
                 continue
+            if len(who.get(modal) or ()) < 5:
+                continue      # a thin modal is pooled, not matched (2026-09-08)
             tot += 1
             if kit[sl] == modal or votes.get(kit[sl], 0) >= 0.5 * mv:
                 agree += 1
@@ -1478,6 +1487,58 @@ def t_seat_pools():
           f"seats={seats} pools={pools} by_chest={by_chest} bad={bad[:4]}")
 
 
+def t_seat_pooling():
+    # R34b (2026-09-08, spec section 3): where a weapon's slot evidence is
+    # THIN (its weapon-tier modal under POOL_MIN_VOTES votes) the kit reader
+    # fronts the seat's chest-conditioned pool item (helmet/boots/cape) or
+    # the plain seat pool item (potion/food) when that item has 5+ players,
+    # marks it `pooled`, and leaves a well-evidenced slot alone. Pinned on
+    # mechanism: the fixtures are found in the dataset, never hard-coded.
+    e = Engine(content="territory_defense", size=20)
+    found = {"chest": None, "plain": None, "keep": None}
+    for w in sorted(e.weapons):
+        seat = e.primary_seat(w)
+        if not seat or all(found.values()):
+            continue
+        rec = e._seat_kit(e.roles[seat])
+        wdoc = (rec.get("kit_weapon") or {}).get(w) or {}
+        ko = e.kit_options(w)
+        kit = ko.get("kit") or {}
+        chest = (kit.get("armor") or {}).get("gear")
+        for slot, key in (("head", "chest"), ("shoes", "chest"),
+                          ("potion", "plain")):
+            if found[key] or slot not in kit:
+                continue
+            wslot = wdoc.get(slot) or []
+            top_w = max((n for _g, n in wslot), default=0)
+            if top_w >= e.POOL_MIN_VOTES:
+                if not found["keep"] and "pooled" not in kit[slot]:
+                    found["keep"] = (w, slot, kit[slot]["gear"], top_w)
+                continue
+            if key == "chest":
+                rows = ((rec.get("kit_by_chest") or {}).get(chest) or {}).get(slot) or []
+            else:
+                rows = (rec.get("kit_pool") or {}).get(slot) or []
+            want = next((g for g, n in rows if n >= e.POOL_MIN_VOTES), None)
+            if want is None:
+                continue
+            got = kit[slot]
+            if got.get("gear") == want and got.get("pooled") in ("seat|chest", "seat") \
+                    and (got.get("pooled_n") or 0) >= e.POOL_MIN_VOTES:
+                found[key] = (w, slot, want, got.get("pooled"), got.get("pooled_n"))
+            else:
+                found[key] = ("MISS", w, slot, got.get("gear"), want, got.get("pooled"))
+    ok = (found["chest"] and found["chest"][0] != "MISS"
+          and found["chest"][3] == "seat|chest"
+          and found["plain"] and found["plain"][0] != "MISS"
+          and found["keep"] is not None)
+    check("R34b seat pooling: a thin helmet/boots slot fronts the seat's "
+          "same-chest pool item, a thin potion the seat pool item, both "
+          "marked pooled with their player count; a 5+ vote slot keeps "
+          "the weapon's own item",
+          bool(ok), f"chest={found['chest']} plain={found['plain']} keep={found['keep']}")
+
+
 if __name__ == "__main__":
     t_role_book()
     t_ruled_memberships()
@@ -1513,6 +1574,7 @@ if __name__ == "__main__":
     t_style_cells()
     t_style_cell_reader()
     t_seat_pools()
+    t_seat_pooling()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")

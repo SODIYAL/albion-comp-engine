@@ -603,6 +603,16 @@ class Engine:
                             merged[key] = rule
                     self._band = merged
                     break
+        # Size-based style minima (owner 2026-09-08): clap requires one
+        # healer per FIVE people, rounded down. This replaces the role's
+        # fixed band, including its maximum; extra healers remain legal.
+        # Below one full group the existing small-party band is retained.
+        if self._band is not None:
+            for role, per in (styles.get(self.style, {}) or {}).get(
+                    "role_min_per_players", {}).items():
+                if self.size >= per:
+                    self._band = dict(self._band)
+                    self._band[role] = {"min": self.size // per}
         # NEED PROFILES (increment 3, owner-ruled 2026-08-26): fine-seat
         # bands + function coverage minima for the FORGE, scaled by
         # size/reference_size (half-up, the pinned rounding rule) and
@@ -1697,6 +1707,44 @@ class Engine:
                             rr["observed_style"] = self.style
                         ranked.insert(0, ranked.pop(i))
                         break
+            # SEAT POOLING (2026-09-08, spec section 3): a THIN slot — the
+            # weapon's own modal under POOL_MIN_VOTES votes — is dressed
+            # from the seat's pool instead of a 2-4 player observation:
+            # helmet / boots / cape from the seat's builds wearing THE CHEST
+            # THIS KIT WEARS (options are ranked in slot order, armor
+            # first), potion / food from the plain seat pool; the first
+            # pool item with 5+ players that the doctrine tier already
+            # offers moves to the front, marked `pooled` / `pooled_n`.
+            # Measured: three players' helmets predict the true modal 58%,
+            # the same-chest seat pool 80%. Nothing pooled beats a 5+ vote
+            # weapon modal; chest and off-hand are never pooled.
+            if role is not None and slot in self.POOLED_SLOTS:
+                top_w = max(wslot.values()) if wslot else 0
+                if top_w < self.POOL_MIN_VOTES:
+                    cands = []
+                    if slot in self.CHEST_POOLED_SLOTS:
+                        chest = ((options.get("armor") or [{}])[0]).get("gear")
+                        if chest:
+                            cands.append(("seat|chest", (
+                                (seat_rec.get("kit_by_chest") or {})
+                                .get(chest) or {}).get(slot) or []))
+                    cands.append(("seat", (seat_rec.get("kit_pool") or {})
+                                  .get(slot) or []))
+                    placed = False
+                    for src, rows in cands:
+                        pick = next(((g, n) for g, n in rows
+                                     if n >= self.POOL_MIN_VOTES), None)
+                        if not pick:
+                            continue
+                        for i, rr in enumerate(ranked):
+                            if rr["gear"] == pick[0]:
+                                rr["pooled"] = src
+                                rr["pooled_n"] = pick[1]
+                                ranked.insert(0, ranked.pop(i))
+                                placed = True
+                                break
+                        if placed:
+                            break
             options[slot] = ranked[:top_n]
         kit = {slot: opts[0] for slot, opts in options.items() if opts}
         return {"kit": kit, "options": options, "seat": seat}
@@ -2875,6 +2923,15 @@ class Engine:
     IDENTITY_FLEX_HOME = 2.0       # rigid melee : rigid ranged that pulls flex bombs home
     IDENTITY_LONE_TOOL_AOE = 0.45  # a lone standoff body makes a kite only below this bomb share
     IDENTITY_STYLES = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
+    # SEAT POOLING (2026-09-08, spec notes/specs/2026-09-08-coherent-style-
+    # kits-design.md section 3): a weapon slot whose own modal carries fewer
+    # than POOL_MIN_VOTES votes is THIN; the kit reader then fronts the
+    # seat's chest-conditioned pool item (helmet / boots / cape) or the
+    # plain seat pool item (potion / food) when it has 5+ players. Chest and
+    # off-hand are never pooled.
+    POOL_MIN_VOTES = 5
+    POOLED_SLOTS = ("head", "shoes", "cape", "potion", "food")
+    CHEST_POOLED_SLOTS = ("head", "shoes", "cape")
 
     def _chest_side(self, chest):
         """The style side a dps chest votes for: the ITEM's harvest lean

@@ -552,6 +552,18 @@
         }
       }
     }
+    /* Size-based style minima, mirrored in engine.py (owner 2026-09-08).
+       Floor(size / per), with no inherited maximum. Small parties keep
+       their existing band until they reach one complete group. */
+    if (this._band !== null) {
+      var rolePer = (styles[this.style] || {}).role_min_per_players || {};
+      for (var ratioRole in rolePer) {
+        if (this.size >= rolePer[ratioRole]) {
+          this._band = Object.assign({}, this._band);
+          this._band[ratioRole] = {min: Math.floor(this.size / rolePer[ratioRole])};
+        }
+      }
+    }
     /* NEED PROFILES (increment 3, owner-ruled 2026-08-26) — mirrors
        engine.py: fine-seat bands + function coverage minima for the
        FORGE, scaled by size/reference_size (half-up, the pinned
@@ -1483,6 +1495,44 @@
             if (archStyled[slot]) ranked[ai].observed_style = this.style;
             ranked.unshift(ranked.splice(ai, 1)[0]);
             break;
+          }
+        }
+      }
+      /* SEAT POOLING (2026-09-08, mirrors engine.py): a THIN slot (the
+         weapon's own modal under POOL_MIN_VOTES votes) is dressed from the
+         seat's pool — helmet/boots/cape from the seat's builds wearing the
+         chest this kit wears (armor is ranked first), potion/food from the
+         plain seat pool; the first pool item with 5+ players the doctrine
+         tier already offers moves to the front, marked pooled/pooled_n. */
+      if (role !== null && POOLED_SLOTS[slot]) {
+        var topW = 0, tw;
+        for (tw in wslot) if (wslot[tw] > topW) topW = wslot[tw];
+        if (topW < POOL_MIN_VOTES) {
+          var cands = [];
+          if (CHEST_POOLED_SLOTS[slot]) {
+            var chestPick = ((options.armor || [])[0] || {}).gear;
+            if (chestPick) {
+              cands.push(["seat|chest",
+                (((seatRec.kit_by_chest || {})[chestPick]) || {})[slot] || []]);
+            }
+          }
+          cands.push(["seat", (seatRec.kit_pool || {})[slot] || []]);
+          var placed = false;
+          for (var ci = 0; ci < cands.length && !placed; ci++) {
+            var rows = cands[ci][1], pick = null;
+            for (var ri = 0; ri < rows.length; ri++) {
+              if (rows[ri][1] >= POOL_MIN_VOTES) { pick = rows[ri]; break; }
+            }
+            if (!pick) continue;
+            for (var pi = 0; pi < ranked.length; pi++) {
+              if (ranked[pi].gear === pick[0]) {
+                ranked[pi].pooled = cands[ci][0];
+                ranked[pi].pooled_n = pick[1];
+                ranked.unshift(ranked.splice(pi, 1)[0]);
+                placed = true;
+                break;
+              }
+            }
           }
         }
       }
@@ -2595,6 +2645,13 @@
       IDENTITY_FLEX_HOME = 2.0,       /* rigid melee : rigid ranged that pulls flex bombs home */
       IDENTITY_LONE_TOOL_AOE = 0.45;  /* a lone standoff body makes a kite only below this bomb share */
   var DOCTRINE_GANG_MAX = 9;   /* party sizes that read the gang doctrine band */
+  /* SEAT POOLING (2026-09-08, mirrors engine.py POOL_MIN_VOTES /
+     POOLED_SLOTS / CHEST_POOLED_SLOTS): a thin weapon slot is dressed from
+     the seat's pool (same-chest for helmet/boots/cape, plain for
+     potion/food) when the pool item has 5+ players */
+  var POOL_MIN_VOTES = 5;
+  var POOLED_SLOTS = { head: true, shoes: true, cape: true, potion: true, food: true };
+  var CHEST_POOLED_SLOTS = { head: true, shoes: true, cape: true };
   var IDENTITY_STYLES = { brawl: true, clap: true, kite: true,
                           brawl_clap: true, clap_kite: true };
 
