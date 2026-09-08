@@ -259,6 +259,7 @@ def analyze(known):
     if not os.path.isdir(CACHE) or not os.listdir(CACHE):
         sys.exit("no cache — run without --pages 0 first")
     battles, parties = [], []
+    battle_party_index = {}   # battle -> {member name: party index}
     for name in sorted(os.listdir(CACHE)):
         with open(os.path.join(CACHE, name), encoding="utf-8") as f:
             rec = json.load(f)
@@ -310,11 +311,25 @@ def analyze(known):
             else:
                 clusters.append({"names": names, "party": p,
                                  "events": p.get("seen_in_events", 1)})
-        for c in clusters:
+        # PARTY INDEX (2026-09-08, pipeline/party_link.py): each cluster's
+        # ordinal in this battle, stamped on the party record AND on every
+        # member's build (`party`) so a build links to its party exactly —
+        # the (battle, weapon) fallback in party_link is for artifacts
+        # harvested before this field existed. A name seen in several
+        # clusters keeps the largest (clusters are size-descending, the
+        # same rule size_by_name uses).
+        party_of_name = {}
+        for idx, c in enumerate(clusters):
+            for nm in c["names"]:
+                if nm and nm not in party_of_name:
+                    party_of_name[nm] = idx
+        battle_party_index[rec["battle"]] = party_of_name
+        for idx, c in enumerate(clusters):
             p = c["party"]
             ws = [m["weapon"] for m in p["members"] if m["weapon"]]
             parties.append({
                 "battle": rec["battle"],
+                "index": idx,
                 "size": len(p["members"]),
                 "known_weapons": len(ws),
                 "weapons": sorted(ws),
@@ -373,6 +388,7 @@ def analyze(known):
                 "item_power": bd.get("item_power"),
                 "seen_as": bd.get("seen_as"),
                 "party_size": size_by_name.get(nm),
+                "party": battle_party_index.get(rec["battle"], {}).get(nm),
                 "player": (hashlib.sha1(nm.encode("utf-8")).hexdigest()[:12]
                            if nm else None),
                 "slots_filled": bd.get("slots_filled"),

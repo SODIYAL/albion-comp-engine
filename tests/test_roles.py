@@ -1162,6 +1162,76 @@ def t_chain_guard():
           f"a={sel_a} b={sel_b} c={sel_c}")
 
 
+def t_party_link():
+    # R31 (2026-09-08, spec section 2 "Linkage"): a build links to its party
+    # exactly through the analyzer's `party` index, and — for artifacts
+    # harvested before the index existed — through (battle, weapon) only
+    # when exactly one 10+ party in that battle fields that weapon.
+    sys.path.insert(0, os.path.join(ROOT, "pipeline"))
+    import party_link
+    doc = {"parties": [
+        {"battle": 1, "size": 12, "weapons": ["2H_LONGBOW", "MAIN_MACE"]},
+        {"battle": 1, "size": 11, "weapons": ["2H_LONGBOW", "2H_AXE"]},
+        {"battle": 2, "size": 15, "weapons": ["2H_AXE"], "index": 4},
+        {"battle": 2, "size": 5, "weapons": ["MAIN_MACE"], "index": 0},
+    ]}
+    pb = party_link.parties_by_battle(doc)
+    idx_b1 = [p["index"] for p in pb[1]]
+    idx_b2 = [p["index"] for p in pb[2]]
+    exact = party_link.link_build({"battle": 1, "weapon": "2H_AXE", "party": 0}, pb)
+    unique = party_link.link_build({"battle": 1, "weapon": "MAIN_MACE"}, pb)
+    ambiguous = party_link.link_build({"battle": 1, "weapon": "2H_LONGBOW"}, pb)
+    small = party_link.link_build({"battle": 2, "weapon": "MAIN_MACE"}, pb)
+    check("R31 party link: ordinal fallback per battle, recorded index kept, "
+          "exact `party` wins, unique (battle, weapon) links, ambiguous and "
+          "under-size parties never link",
+          idx_b1 == [0, 1] and idx_b2 == [4, 0] and exact == 0
+          and unique == 0 and ambiguous is None and small is None,
+          f"b1={idx_b1} b2={idx_b2} exact={exact} unique={unique} "
+          f"amb={ambiguous} small={small}")
+    # the analyzer stamps both sides: run it on one synthetic cache record
+    import tempfile, json as _json, importlib.util as _ilu
+    spec = _ilu.spec_from_file_location(
+        "sp", os.path.join(ROOT, "pipeline", "sample_parties.py"))
+    sp = _ilu.module_from_spec(spec)
+    spec.loader.exec_module(sp)
+    tmp = tempfile.mkdtemp()
+    cache = os.path.join(tmp, "party_cache")
+    os.makedirs(cache)
+    members_a = [{"name": f"a{i}", "weapon": "2H_LONGBOW", "guild": "G"}
+                 for i in range(10)]
+    members_b = [{"name": f"b{i}", "weapon": "MAIN_MACE", "guild": "H"}
+                 for i in range(4)]
+    rec = {"battle": 77, "total_players": 14, "kill_events": 2,
+           "events_fetched": 2, "roster": [{"name": m["name"]}
+                                            for m in members_a + members_b],
+           "participant_sets": [],
+           "parties": [{"members": members_a, "seen_in_events": 1},
+                       {"members": members_b, "seen_in_events": 1}],
+           "builds": [{"name": "a3", "seen_as": "killer", "item_power": 1300,
+                       "slots_filled": 6,
+                       "gear": {"MainHand": "T8_2H_LONGBOW@1",
+                                "Armor": "T8_ARMOR_LEATHER_SET3"}},
+                      {"name": "b1", "seen_as": "killer", "item_power": 1200,
+                       "slots_filled": 6,
+                       "gear": {"MainHand": "T7_MAIN_MACE",
+                                "Armor": "T7_ARMOR_PLATE_SET2"}}]}
+    with open(os.path.join(cache, "77.json"), "w", encoding="utf-8") as f:
+        _json.dump(rec, f)
+    sp.CACHE, sp.OUT = cache, tmp
+    sp.analyze({"2H_LONGBOW", "MAIN_MACE"})
+    out = _json.load(open(os.path.join(tmp, "party_rosters.json"),
+                          encoding="utf-8"))
+    by_w = {b["weapon"]: b for b in out["builds"]}
+    idx = {tuple(p["weapons"])[0]: p.get("index") for p in out["parties"]}
+    check("R31b analyzer stamps `index` on parties and `party` on builds "
+          "(cluster order per battle; a member's build carries its party)",
+          idx.get("2H_LONGBOW") == 0 and idx.get("MAIN_MACE") == 1
+          and by_w["2H_LONGBOW"].get("party") == 0
+          and by_w["MAIN_MACE"].get("party") == 1,
+          f"idx={idx} builds={ {w: b.get('party') for w, b in by_w.items()} }")
+
+
 if __name__ == "__main__":
     t_role_book()
     t_ruled_memberships()
@@ -1192,6 +1262,7 @@ if __name__ == "__main__":
     t_one_player_one_vote()
     t_doctrine_bands()
     t_chain_guard()
+    t_party_link()
     passed = sum(1 for _n, ok, _d in RESULTS if ok)
     print("=" * 74)
     print(f"{passed}/{len(RESULTS)} role-layer tests passed")
