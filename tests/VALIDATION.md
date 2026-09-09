@@ -2958,3 +2958,56 @@ interactions 37/37, patch history 14/14, provenance 25/25 (byte-identical
 rebuild), cohort families 7/7, dashboard layout pass, codec 24/24,
 display math 28/28, live party pass, V4 actual_gear 17/23 PASS, evidence
 lint clean, release_clean true.
+
+## 2026-09-09 — first fold of the nightly corpus: 2,042 -> 3,583 battles
+
+The scheduled harvest lost three nights (09-06 to 09-08) to a closed
+console window — the task ran in the user's session with a visible
+PowerShell window and each run died with 0xC000013A the moment it was
+closed; the task is registered hidden since 09-08 (commit abd4a2a) and the
+09-09 03:00 run completed both passes in 58 minutes. Corpus after the
+fold: 3,583 battles, 11,547 killer parties (4,071 of 10+), 88,016 builds
+(85,227 full kits, 36,932 inside parties of 10+), 26,394 distinct
+players, median gear coverage 0.75.
+
+Chain rerun in the documented order. `audit_style_rosters`: 4,051 rosters
+of 10+ at >= 80% weapons known, labels brawl 1,124 / clap 1,638 /
+clap_kite 518 / kite 404 / brawl_clap 64 / split 303; chest leans 12
+ranged, 0 brawl, 15 class-default (board:
+`notes/findings/2026-09-09-style-roster-evidence.md`).
+`derive_style_bands`: 15 cells; kite|20 still borrows kite|15-19 (n=156)
+and brawl_clap borrows brawl in every band (n=462 / 520 / 98 — the label
+is real but thin). `derive_party_styles`: 4,071 parties, 3,496 labelled.
+`derive_meta_prior`: small bucket tops 2H_LONGBOW 1.0 /
+2H_HOLYSTAFF_UNDEAD 0.76 / MAIN_HOLYSTAFF_AVALON 0.70; mid
+MAIN_HOLYSTAFF_AVALON 1.0 / 2H_LONGBOW 0.66 / 2H_AXE_AVALON 0.45; large
+MAIN_HOLYSTAFF_AVALON 1.0 / 2H_AXE_AVALON 0.39 / 2H_LONGBOW 0.33.
+`build_dataset` release_clean, provenance verified.
+
+### Two gates tripped at a unit seam (no doctrine change)
+
+- **R24b, Dagger Pair under a declared clap.** The clap cell's Hunter
+  Hood row had 5 distinct wearers and 4.5 votes (one wore it in one of
+  two builds). The build's cell floor counts people and kept the slot;
+  the engine's thin-slot read counted the shipped ROUNDED votes (4) and
+  pooled the slot to the seat's same-chest pool, fronting Fiend Cowl (77
+  players) and Royal Sandals over the cell's Hunter Hood and Hellion
+  Shoes. Resolution: `kit_weapon` tier rows ship `[id, count, players]`
+  and both ports judge THIN on the modal row's people (R27: every doctrine
+  floor counts distinct people), votes only on a reference-only row.
+- **R28, Lifecurse in the gang band.** The chain fronted Soldier Helmet
+  (20 of the 36 Assassin Jacket wearers). The shipped gang counts read 25
+  against a Hunter Hood modal of 50 — a curated small-scale build plus
+  rounding — exactly the half-line the evidence band admits, while the
+  audit's killboard-only fractional votes read 24.5 against 50.5.
+  Resolution: the kit audits (R24 / R24b / R28) carry one vote of slack
+  at the half-line (`BAND_SLACK`); the mechanism pinned — never front an
+  item worn under half as often as the modal — is unchanged, and the
+  engine keeps ranking the dataset's integers.
+
+Gates after the fold: golden 72/72, forge 39/39, roles 39/39, builds
+55/55, interactions 37/37, provenance 25/25, patch history 14/14, parity
+clean (embed check), dashboard layout pass, cohort families 7/7,
+validation modes 25/25, V4 actual_gear 17/23 PASS (weapon_only 16/23,
+reported not gated), codec 24/24, display math 28/28, live party pass,
+evidence lint clean, release_clean true.
