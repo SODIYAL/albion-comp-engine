@@ -74,6 +74,7 @@ of it, so a banded night adds to the corpus and never narrows it.
 """
 import argparse
 import hashlib
+import collections
 import json
 import os
 import re
@@ -89,22 +90,32 @@ UA = {"User-Agent": "bion-comp-engine/sample_parties (albion comp research)"}
 GAMEINFO = "https://gameinfo.albiononline.com/api/gameinfo"
 
 
+# Why a request came back empty, tallied across a pass so the coverage line
+# can say whether a miss was the API lacking the event (404 — nothing to
+# fetch) or the harvest being throttled (429 / 5xx — lower --workers).
+ERRORS = collections.Counter()
+
+
 def get_json(url, tries=4, pause=1.5):
     """One request with backoff. Returns None rather than raising — the
     gameinfo API returns intermittent 502s and a single miss must not kill
-    a long harvest."""
+    a long harvest. Thread-safe: no state beyond the ERRORS tally."""
+    last = None
     for attempt in range(tries):
         try:
             req = urllib.request.Request(url, headers=UA)
             with urllib.request.urlopen(req, timeout=30) as r:
                 return json.loads(r.read())
         except urllib.error.HTTPError as ex:
+            last = str(ex.code)
             if ex.code in (429, 502, 503, 504):
                 time.sleep(pause * (attempt + 1))
                 continue
-            return None
-        except Exception:
+            break
+        except Exception as ex:
+            last = type(ex).__name__
             time.sleep(pause * (attempt + 1))
+    ERRORS[last or "unknown"] += 1
     return None
 
 
@@ -117,12 +128,128 @@ def weapon_key(t, known):
     return k if k in known else None
 
 
+def harvest_battle(args, known, b, bid, total, path):
+    """Steps 2-3 for ONE battle: the official roster, the kill list, every
+    kill event's parties and builds, written to its own cache file. Runs
+    on a worker thread (2026-09-09, `--workers`): the per-battle work is
+    independent — one file per battle, no shared state — so battles run
+    side by side while each battle's events stay sequential, and the file
+    a worker writes is byte-identical to what the old sequential loop
+    wrote. Returns (log line, kills counted, events fetched)."""
+    server = args.server
+    # step 2 — the full roster (denominator)
+    detail = get_json(f"{GAMEINFO}/battles/{bid}")
+    roster = list((detail or {}).get("players", {}).values())
+
+    # step 3 — per-kill parties
+    kills = get_json(
+        f"https://api.albionbb.com/{server}/battles/kills?ids={bid}"
+    ) or []
+    parties, participants, ev_ok = {}, {}, 0
+    builds = {}
+    for x in kills[:args.max_events]:
+        eid = x.get("EventId")
+        if not eid:
+            continue
+        # three tries (2026-09-09, was two): daytime 502s ran ~4% per call
+        # and a second 502 lost the event; the third try, 4.5 s later,
+        # costs nothing while other workers keep fetching
+        d = get_json(f"{GAMEINFO}/events/{eid}", tries=3)
+        if not d:
+            continue
+        ev_ok += 1
+        # FULL BUILDS come from Killer / Victim / Participants, which
+        # carry 7 of 8 equipment slots plus item power. GroupMembers
+        # does NOT: measured 2026-08-29, it fills MainHand only and
+        # reports AverageItemPower 0. So party STRUCTURE comes from
+        # GroupMembers and BUILDS come from the combat roles; a member
+        # who never killed, died or dealt damage yields a weapon and
+        # nothing else, and is recorded that way rather than guessed.
+        pool = [("killer", d.get("Killer")),
+                ("victim", d.get("Victim"))]
+        pool += [("participant", m) for m in (d.get("Participants")
+                                              or [])]
+        for how, m in pool:
+            if not isinstance(m, dict) or not m.get("Name"):
+                continue
+            eq = m.get("Equipment") or {}
+            gear = {}
+            for slot in ("MainHand", "OffHand", "Head", "Armor",
+                         "Shoes", "Cape", "Potion", "Food"):
+                v = eq.get(slot)
+                gear[slot] = (v or {}).get("Type") if isinstance(
+                    v, dict) else None
+            n_filled = sum(1 for v in gear.values() if v)
+            prev = builds.get(m["Name"])
+            if prev is None or n_filled > prev["slots_filled"]:
+                builds[m["Name"]] = {
+                    "name": m["Name"],
+                    "guild": m.get("GuildName") or None,
+                    "alliance": m.get("AllianceName") or None,
+                    "item_power": m.get("AverageItemPower"),
+                    "seen_as": how,
+                    "slots_filled": n_filled,
+                    "gear": gear}
+        for field, sink in (("GroupMembers", parties),
+                            ("Participants", participants)):
+            members = d.get(field) or []
+            if not members:
+                continue
+            named = []
+            for m in members:
+                nm = m.get("Name")
+                if not nm:
+                    continue
+                w = weapon_key(
+                    ((m.get("Equipment") or {}).get("MainHand")
+                     or {}).get("Type"), known)
+                named.append({
+                    "name": nm, "weapon": w,
+                    "guild": m.get("GuildName") or None,
+                    "alliance": m.get("AllianceName") or None})
+            if not named:
+                continue
+            # DEDUPE: a party that gets 20 kills must count ONCE
+            key = "|".join(sorted(m["name"] for m in named))
+            prev = sink.get(key)
+            if prev is None or sum(
+                    1 for m in named if m["weapon"]) > sum(
+                    1 for m in prev["members"] if m["weapon"]):
+                sink[key] = {"members": named,
+                             "seen_in_events": 0}
+            sink[key]["seen_in_events"] += 1
+
+    rec = {
+        "schema": 2,          # 2 = carries full builds; 1 did not
+        "battle": bid,
+        "builds": list(builds.values()),
+        "started_at": b.get("startedAt"),
+        "total_players": total,
+        "total_kills": b.get("totalKills"),
+        "roster": [{"name": p.get("name"),
+                    "guild": p.get("guildName") or None,
+                    "alliance": p.get("allianceName") or None,
+                    "kills": p.get("kills"), "deaths": p.get("deaths")}
+                   for p in roster],
+        "kill_events": len(kills),
+        "events_fetched": ev_ok,
+        "parties": list(parties.values()),
+        "participant_sets": list(participants.values()),
+    }
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(rec, f, indent=1, sort_keys=True)
+    return (f"  battle {bid}: {total} players, {len(kills)} kills, "
+            f"{ev_ok} events fetched, {len(parties)} distinct parties",
+            min(len(kills), args.max_events), ev_ok)
+
+
 def fetch(args, known):
     os.makedirs(CACHE, exist_ok=True)
     server = args.server
     seen_battles = 0
     page = 1
     max_pages = args.pages if args.pages and args.pages > 0 else 40
+    todo = []          # (b, bid, total, path) not yet in the cache
     while seen_battles < args.battles and page <= max_pages:
         url = (f"https://api.albionbb.com/{server}/battles"
                f"?minPlayers={args.min_players}&page={page}")
@@ -148,110 +275,37 @@ def fetch(args, known):
                             continue
                 except Exception:
                     pass
-
-            # step 2 — the full roster (denominator)
-            detail = get_json(f"{GAMEINFO}/battles/{bid}")
-            roster = list((detail or {}).get("players", {}).values())
-
-            # step 3 — per-kill parties
-            kills = get_json(
-                f"https://api.albionbb.com/{server}/battles/kills?ids={bid}"
-            ) or []
-            parties, participants, ev_ok = {}, {}, 0
-            builds = {}
-            for x in kills[:args.max_events]:
-                eid = x.get("EventId")
-                if not eid:
-                    continue
-                d = get_json(f"{GAMEINFO}/events/{eid}", tries=2)
-                if not d:
-                    continue
-                ev_ok += 1
-                # FULL BUILDS come from Killer / Victim / Participants, which
-                # carry 7 of 8 equipment slots plus item power. GroupMembers
-                # does NOT: measured 2026-08-29, it fills MainHand only and
-                # reports AverageItemPower 0. So party STRUCTURE comes from
-                # GroupMembers and BUILDS come from the combat roles; a member
-                # who never killed, died or dealt damage yields a weapon and
-                # nothing else, and is recorded that way rather than guessed.
-                pool = [("killer", d.get("Killer")),
-                        ("victim", d.get("Victim"))]
-                pool += [("participant", m) for m in (d.get("Participants")
-                                                      or [])]
-                for how, m in pool:
-                    if not isinstance(m, dict) or not m.get("Name"):
-                        continue
-                    eq = m.get("Equipment") or {}
-                    gear = {}
-                    for slot in ("MainHand", "OffHand", "Head", "Armor",
-                                 "Shoes", "Cape", "Potion", "Food"):
-                        v = eq.get(slot)
-                        gear[slot] = (v or {}).get("Type") if isinstance(
-                            v, dict) else None
-                    n_filled = sum(1 for v in gear.values() if v)
-                    prev = builds.get(m["Name"])
-                    if prev is None or n_filled > prev["slots_filled"]:
-                        builds[m["Name"]] = {
-                            "name": m["Name"],
-                            "guild": m.get("GuildName") or None,
-                            "alliance": m.get("AllianceName") or None,
-                            "item_power": m.get("AverageItemPower"),
-                            "seen_as": how,
-                            "slots_filled": n_filled,
-                            "gear": gear}
-                for field, sink in (("GroupMembers", parties),
-                                    ("Participants", participants)):
-                    members = d.get(field) or []
-                    if not members:
-                        continue
-                    named = []
-                    for m in members:
-                        nm = m.get("Name")
-                        if not nm:
-                            continue
-                        w = weapon_key(
-                            ((m.get("Equipment") or {}).get("MainHand")
-                             or {}).get("Type"), known)
-                        named.append({
-                            "name": nm, "weapon": w,
-                            "guild": m.get("GuildName") or None,
-                            "alliance": m.get("AllianceName") or None})
-                    if not named:
-                        continue
-                    # DEDUPE: a party that gets 20 kills must count ONCE
-                    key = "|".join(sorted(m["name"] for m in named))
-                    prev = sink.get(key)
-                    if prev is None or sum(
-                            1 for m in named if m["weapon"]) > sum(
-                            1 for m in prev["members"] if m["weapon"]):
-                        sink[key] = {"members": named,
-                                     "seen_in_events": 0}
-                    sink[key]["seen_in_events"] += 1
-
-            rec = {
-                "schema": 2,          # 2 = carries full builds; 1 did not
-                "battle": bid,
-                "builds": list(builds.values()),
-                "started_at": b.get("startedAt"),
-                "total_players": total,
-                "total_kills": b.get("totalKills"),
-                "roster": [{"name": p.get("name"),
-                            "guild": p.get("guildName") or None,
-                            "alliance": p.get("allianceName") or None,
-                            "kills": p.get("kills"), "deaths": p.get("deaths")}
-                           for p in roster],
-                "kill_events": len(kills),
-                "events_fetched": ev_ok,
-                "parties": list(parties.values()),
-                "participant_sets": list(participants.values()),
-            }
-            with open(path, "w", encoding="utf-8", newline="\n") as f:
-                json.dump(rec, f, indent=1, sort_keys=True)
+            todo.append((b, bid, total, path))
             seen_battles += 1
-            print(f"  battle {bid}: {total} players, {len(kills)} kills, "
-                  f"{ev_ok} events fetched, {len(parties)} distinct parties",
-                  flush=True)
         page += 1
+    # FETCH IN PARALLEL (2026-09-09): the harvest's cost is the kill-event
+    # detail fetch, ~1.8 s per event sequentially and one HTTP call each.
+    # Battles are independent units of work (own cache file, own log line),
+    # so a small pool runs them side by side; events within a battle stay
+    # sequential. `--workers 1` is the old loop. Coverage is reported at
+    # the end so a rate-limited night (429s exhaust get_json's retries and
+    # the event is skipped, not raised) is visible rather than silent:
+    # the sequential baseline was 0.987 (2026-09-09 nightly).
+    import concurrent.futures as cf
+    kills_total = events_total = 0
+    workers = max(1, args.workers)
+    print(f"{len(todo)} battles to fetch, {workers} worker(s)", flush=True)
+    with cf.ThreadPoolExecutor(max_workers=workers) as pool:
+        futs = [pool.submit(harvest_battle, args, known, *t) for t in todo]
+        for fut in cf.as_completed(futs):
+            try:
+                line, k, e = fut.result()
+            except Exception as ex:      # one bad battle must not kill a night
+                print(f"  battle failed: {ex!r}", flush=True)
+                continue
+            kills_total += k
+            events_total += e
+            print(line, flush=True)
+    cov = (events_total / kills_total) if kills_total else 1.0
+    flag = "" if cov >= 0.95 else "   WARNING: below the 0.95 floor — rate limited? lower --workers"
+    errs = ", ".join(f"{k} x{v}" for k, v in sorted(ERRORS.items())) or "none"
+    print(f"event coverage this pass: {events_total}/{kills_total} = {cov:.3f}"
+          f"  (request misses after retries: {errs}){flag}", flush=True)
     print(f"cache holds {len(os.listdir(CACHE))} battles", flush=True)
 
 
@@ -475,6 +529,9 @@ def main():
     ap.add_argument("--max-events", type=int, default=120,
                     help="cap per battle; a 300-man fight has ~180 kills")
     ap.add_argument("--server", default="us", choices=["us", "eu", "asia"])
+    ap.add_argument("--workers", type=int, default=4,
+                    help="battles fetched side by side (1 = sequential); "
+                         "the pass reports its event coverage")
     ap.add_argument("--pages", type=int, default=None,
                     help="0 = offline re-analysis, no network; N > 0 = "
                          "discovery page cap (default 40, 20 battles each)")

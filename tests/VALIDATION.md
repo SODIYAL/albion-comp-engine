@@ -3011,3 +3011,78 @@ clean (embed check), dashboard layout pass, cohort families 7/7,
 validation modes 25/25, V4 actual_gear 17/23 PASS (weapon_only 16/23,
 reported not gated), codec 24/24, display math 28/28, live party pass,
 evidence lint clean, release_clean true.
+
+## 2026-09-09 — harvest review: what the corpus taught, and the refined harvest (owner: "review your recommendations then go for it")
+
+### Did the fold improve the evidence (measured old artifact vs new)
+
+- Style board 2,351 -> 4,051 labelled rosters; the same 11 of 15 cells
+  clear the 40-roster floor (brawl_clap 19 / 27 / 12, kite|20 31).
+- Style-band targets: 533 of 770 leaves moved, median 1.9%, p90 12% —
+  the rows are stable properties of winning rosters; the large moves sat
+  on thin cells (brawl|20 silence target 6.79 -> 0.92 as the cell went
+  50 -> 98 rosters).
+- Kits at size 20: pooled (thin) slots 172 -> 108; of 101 changed slots,
+  80 had under ten votes or were pooled, 16 had 10-29, 5 flipped on 30+
+  (Longbow group helmet Soldier Helmet 232 over Hunter Hood; Realmbreaker
+  clap chest Hellion Jacket 187 over Royal Jacket). Churn is where the
+  evidence was thin.
+- Uniform extension: 67 -> 84 weapons above 35 group voters; 53 remain
+  under, ten of which gained two or fewer voters from 1,541 new battles
+  (Iron Gauntlets, Avalonian nature, the crystal weapons, most
+  shapeshifters) — not fielded in 10+ parties on US; silence is the
+  correct output. About 25 cross within ten more nights at the current
+  rate.
+- Meta prior rows: small 71 -> 82, mid 63 -> 68, large 40 -> 41.
+
+### Where the harvest spends its time (events fetched, one call each, ~1 s sequential)
+
+| fight size | battles | events | builds in parties of 10+ | gang builds | events per 10+ build |
+|---|---|---|---|---|---|
+| under 10 | 573 | 2,255 | 0 | 1,921 | — |
+| 10-14 | 756 | 3,746 | 135 | 3,895 | 27.7 |
+| 15-19 | 168 | 1,045 | 585 | 829 | 1.8 |
+| 20-49 | 1,466 | 17,778 | 15,589 | 5,707 | 1.1 |
+| 50+ | 620 | 22,277 | 20,623 | 4,078 | 1.1 |
+
+The proposal to raise the second floor from 8 to 15 was WITHDRAWN on
+review: fights under 15 players supply 5,816 of 16,430 gang-band builds
+(35%) at 1.2 events per build, and the 10-14 band is the owner's focused
+band (2026-09-08). Both floors stay.
+
+### Coverage, not speed, was the real gap (albionbb discovery list, 800 battles deep, measured 2026-09-09)
+
+| US floor | list spans | battles/day |
+|---|---|---|
+| 8 | 12.6 h | ~1,520 |
+| 10 | 13.5 h | ~1,420 |
+| 15 | 20.4 h | ~940 |
+| 20 | 39.3 h | ~490 |
+| 25 | 60.2 h | ~320 |
+
+EU: 25+ spans 70.7 h (~270/day), 8+ 14.8 h (~1,300/day); Asia 25+ 79 h
+(~240/day), 8+ 4.8 h (~3,960/day). One 03:00 pass saw every US ZvZ fight
+and about half of each day's 8-24-player fights — the 15-19 band, where
+kite and clap_kite rosters live. Adding EU would double the 25+ corpus
+but mixes a second server's meta into rows meant to describe the owner's
+fights — left as an OWNER CALL, not applied.
+
+### Applied
+
+1. The task runs TWICE DAILY, 03:00 and 15:00 (two triggers, hidden
+   window, 6 h limit, StartWhenAvailable), covering the day at every floor.
+2. `sample_parties.py --workers` (default 4): battles fetch side by side,
+   events within a battle stay sequential, cache files are byte-identical
+   to the sequential loop's. Every pass ends with an event-coverage line
+   and a tally of request misses by code (sequential baseline 0.987, the
+   09-09 nightly).
+3. Event fetches retry three times, not two: daytime 502s ran ~4% per
+   call and a second 502 lost the event. Probes: 25 ZvZ battles with two
+   tries 341/357 = 0.955 (the 16 misses re-fetched sequentially: 52 of 54
+   returned 200, two 502 — the API, not throttling); 139 small-scale
+   battles with three tries 730/733 = 0.996 (502 x2, one timeout), 324 s
+   wall including the analysis pass, ~3.7x the sequential rate.
+
+The 164 probe battles sit in the cache; the committed
+`party_rosters.json` was restored so the hash-gated derive steps stay
+consistent until the next in-session fold.

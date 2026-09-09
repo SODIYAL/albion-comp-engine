@@ -1,9 +1,26 @@
-# Overnight killboard harvest (owner 2026-09-04: "make this an overnight
-# task"). Runs the two sample_parties.py passes back to back — the 25-player
-# floor (ZvZ) and the 8-player floor (small scale) — each walking the full
-# reachable discovery list (40 pages x 20 battles) and skipping what the
-# per-battle cache already holds, so a nightly run fetches only the fights
-# that appeared since the last one. Network step, never part of a build.
+# Killboard harvest (owner 2026-09-04: "make this an overnight task";
+# 2026-09-09: "go for it" on twice daily + parallel). Runs the two
+# sample_parties.py passes back to back — the 25-player floor (ZvZ) and the
+# 8-player floor (small scale) — each walking the full reachable discovery
+# list (40 pages x 20 battles) and skipping what the per-battle cache
+# already holds, so a run fetches only the fights that appeared since the
+# last one. Network step, never part of a build.
+#
+# TWICE A DAY, because the discovery list is only 800 battles deep and how
+# far back that reaches depends on the floor (measured 2026-09-09, US):
+# 25+ spans ~60 h, 20+ ~39 h, 15+ ~20 h, 10+ ~13.5 h, 8+ ~12.6 h. One 03:00
+# pass therefore saw every ZvZ fight but missed about half of each day's
+# 8-24-player fights — the 15-19 band where kite and clap_kite rosters
+# live. Passes at 03:00 and 15:00 cover the day at every floor. The floor
+# stays at 8 (not 15): fights under 15 players supply 35% of the gang
+# band's builds at the same events-per-build cost as ZvZ.
+#
+# PARALLEL: sample_parties.py fetches battles four at a time (--workers,
+# default 4; events within a battle stay sequential, cache files are
+# byte-identical to the sequential loop's). A pass that took ~1 s per
+# event now takes ~0.25 s; every pass ends with an "event coverage" line
+# (sequential baseline 0.987) and a tally of request misses by HTTP code —
+# 502s are the API, 429s mean lower --workers.
 #
 # It does NOT rebuild the dataset or commit: the harvest lands in
 # pipeline/out/party_cache/ (gitignored) and pipeline/out/party_rosters.json;
@@ -14,12 +31,14 @@
 # caches behind weapon_usage_v2.json (prevalence, cohorts, families) — a
 # different API and cache; neither job subsumes the other.
 #
-# Registered as a Windows scheduled task (daily 03:00, current user, 6 h
-# limit, runs late if the machine was asleep, HIDDEN window) from PowerShell:
+# Registered as a Windows scheduled task (daily 03:00 AND 15:00, current
+# user, 6 h limit, runs late if the machine was asleep, HIDDEN window) from
+# PowerShell:
 #   $a = New-ScheduledTaskAction -Execute powershell.exe -Argument '-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File "D:\VS Projects\Bion\pipeline\harvest_overnight.ps1"'
-#   $t = New-ScheduledTaskTrigger -Daily -At 3am
+#   $t1 = New-ScheduledTaskTrigger -Daily -At 3am
+#   $t2 = New-ScheduledTaskTrigger -Daily -At 3pm
 #   $s = New-ScheduledTaskSettingsSet -ExecutionTimeLimit (New-TimeSpan -Hours 6) -StartWhenAvailable
-#   Register-ScheduledTask -TaskName "CompForge overnight harvest" -Action $a -Trigger $t -Settings $s -Force
+#   Register-ScheduledTask -TaskName "CompForge overnight harvest" -Action $a -Trigger @($t1, $t2) -Settings $s -Force
 # -WindowStyle Hidden matters (2026-09-08): without it the run pops a console
 # window on the desktop, and closing that window kills the harvest with
 # 0xC000013A — three nights were lost that way before the flag was added.
@@ -35,7 +54,7 @@
 # albionbb's totalPlayers, see sample_parties.py). To make the 03:00 task do
 # it for one night without touching the daily registration, add a one-shot
 # task and remove it in the morning:
-#   $a = New-ScheduledTaskAction -Execute powershell.exe -Argument '-NoProfile -ExecutionPolicy Bypass -File "D:\VS Projects\Bion\pipeline\harvest_overnight.ps1" -MinPlayers 10 -MaxPlayers 14'
+#   $a = New-ScheduledTaskAction -Execute powershell.exe -Argument '-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File "D:\VS Projects\Bion\pipeline\harvest_overnight.ps1" -MinPlayers 10 -MaxPlayers 14'
 #   Register-ScheduledTask -TaskName "CompForge focused harvest" -Action $a -Trigger (New-ScheduledTaskTrigger -Once -At 3am) -Settings $s -Force
 #   Unregister-ScheduledTask -TaskName "CompForge focused harvest" -Confirm:$false
 # The cache keeps everything ever fetched and the analysis reads all of it,
@@ -53,8 +72,8 @@ $root = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 $logDir = Join-Path $root "pipeline\out\fetch_logs"
 New-Item -ItemType Directory -Force $logDir | Out-Null
 $stamp = Get-Date -Format "yyyy-MM-dd"
-$log = Join-Path $logDir "harvest-$stamp.log"
-# one log per night: keep a month, drop the rest
+$log = Join-Path $logDir "harvest-$stamp.log"   # both daily runs append here
+# one log per day: keep a month, drop the rest
 Get-ChildItem $logDir -Filter "harvest-*.log" |
     Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-30) } |
     Remove-Item -Force -ErrorAction SilentlyContinue

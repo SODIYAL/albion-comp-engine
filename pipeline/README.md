@@ -316,8 +316,13 @@ not needed as a source.
 Two scheduled jobs, two APIs, two caches — neither rebuilds or commits:
 
 - `pipeline/harvest_overnight.ps1` — "CompForge overnight harvest", daily
-  03:00 (the job CLAUDE.md names): `sample_parties.py` at the 25- and
-  8-player floors against the OFFICIAL gameinfo API, whose `GroupMembers`
+  at 03:00 AND 15:00 (the job CLAUDE.md names; twice since 2026-09-09
+  because the 800-battle discovery list reaches back only ~13 h at the
+  8-player floor, ~60 h at 25 — one pass a day saw every ZvZ fight and
+  half the 8-24-player ones): `sample_parties.py` at the 25- and
+  8-player floors, battles fetched four at a time (`--workers`, each pass
+  ends with an event-coverage line and a request-miss tally; sequential
+  baseline 0.987), against the OFFICIAL gameinfo API, whose `GroupMembers`
   carries the killer's party at kill time with gear → `out/party_cache/`
   and `out/party_rosters.json`. This is the kit-doctrine and style × size
   evidence. Rerun order afterwards: audit -> derive_style_bands ->

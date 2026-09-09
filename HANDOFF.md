@@ -90,7 +90,10 @@ What a reader of this file needs:
   doctrine), the VOTER is the player (R27), and doctrine ships in two size
   bands, group and gang (R28).
 - **The harvest is an OVERNIGHT TASK**: `pipeline/harvest_overnight.ps1`,
-  Windows scheduled task "CompForge overnight harvest", daily 03:00. It
+  Windows scheduled task "CompForge overnight harvest", daily 03:00 AND
+  15:00 (2026-09-09: the discovery list reaches back ~13 h at the 8-player
+  floor, so one pass a day missed half the mid-size fights; battles now
+  fetch four at a time and each pass prints its event coverage). It
   only harvests; rebuild + gates + audit + commit stay in-session. Rerun
   order after a harvest: `sample_parties` -> `audit_style_rosters` ->
   `derive_style_bands` -> `derive_party_styles` -> `derive_meta_prior` -> `build_dataset` ->
