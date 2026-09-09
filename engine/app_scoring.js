@@ -1399,10 +1399,12 @@
     for (var si = 0; si < slots.length; si++) {
       var slot = slots[si], keys = bySlot[slot].slice().sort();
       var docPool = doctrine[slot] || [];
-      var wslot = {}, wtotal = 0, wp = wdoc[slot] || [];
+      var wslot = {}, wpeople = {}, wtotal = 0, wp = wdoc[slot] || [];
       for (var wi = 0; wi < wp.length; wi++) {
         wslot[wp[wi][0]] = wp[wi][1];
         wtotal += wp[wi][1];
+        /* third element: distinct people behind a killboard-fed row */
+        if (wp[wi].length > 2) wpeople[wp[wi][0]] = wp[wi][2];
       }
       if (role !== null) {
         /* fail-closed generation (ruling 2026-09-01): only doctrine
@@ -1511,9 +1513,18 @@
          plain seat pool; the first pool item with 5+ players the doctrine
          tier already offers moves to the front, marked pooled/pooled_n. */
       if (role !== null && POOLED_SLOTS[slot]) {
-        var topW = 0, tw;
-        for (tw in wslot) if (wslot[tw] > topW) topW = wslot[tw];
-        if (topW < POOL_MIN_VOTES) {
+        /* THIN counts distinct PEOPLE where the row carries them (every
+           doctrine floor counts people, R27), votes on a reference-only
+           row -- mirrors engine.py 2026-09-09 */
+        var topW = 0, modalW = null, tw;
+        for (tw in wslot) {
+          if (wslot[tw] > topW || (wslot[tw] === topW && (modalW === null || tw > modalW))) {
+            topW = wslot[tw]; modalW = tw;
+          }
+        }
+        var topPeople = (modalW !== null && Object.prototype.hasOwnProperty.call(wpeople, modalW))
+          ? wpeople[modalW] : topW;
+        if (topPeople < POOL_MIN_VOTES) {
           var cands = [];
           if (CHEST_POOLED_SLOTS[slot]) {
             var chestPick = ((options.armor || [])[0] || {}).gear;

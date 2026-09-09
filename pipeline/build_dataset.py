@@ -1759,8 +1759,16 @@ def derive_kit_doctrine(book, gear, problems, overrides=None,
                          **({"players": e["players"]} if e.get("players")
                             else {}))
                     for e in ordered]
+                # [id, count, players]: the third element is the distinct
+                # people behind a killboard-fed row (absent on a reference-
+                # only row), so the engine's thin-slot read can count
+                # PEOPLE like every other doctrine floor (R27; 2026-09-09:
+                # a 5-person Hunter Hood at 4.5 votes rounded to 4 and was
+                # pooled away under a declared clap)
                 kit_weapon.setdefault(wk_id, {})[slot] = [
-                    [e["id"], e["count"]] for e in ordered]
+                    [e["id"], e["count"]] + ([e["players"]]
+                                             if e.get("players") else [])
+                    for e in ordered]
         applied = ([] if style is not None else _apply_kit_overrides(
             r["id"], uni, kit, det, w_det, kit_weapon, gear,
             (overrides or {}).get(r["id"]) or {}, problems))

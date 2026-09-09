@@ -1615,6 +1615,10 @@ class Engine:
             doc_pool = set(doctrine.get(slot) or [])
             wslot = {p[0]: p[1] for p in (wdoc.get(slot) or [])}
             wtotal = sum(wslot.values())
+            # distinct people behind each row where the build shipped it
+            # (a third element; absent on reference-only rows)
+            wpeople = {p[0]: p[2] for p in (wdoc.get(slot) or [])
+                       if len(p) > 2}
             pool_keys = sorted(by_slot[slot])
             if role is not None:
                 # fail-closed generation (ruling 2026-09-01): only the
@@ -1731,10 +1735,18 @@ class Engine:
             # offers moves to the front, marked `pooled` / `pooled_n`.
             # Measured: three players' helmets predict the true modal 58%,
             # the same-chest seat pool 80%. Nothing pooled beats a 5+ vote
-            # weapon modal; chest and off-hand are never pooled.
+            # weapon modal; chest and off-hand are never pooled. THIN is
+            # counted in distinct PEOPLE where the row carries them (every
+            # doctrine floor counts people, R27; the build's cell floor
+            # already kept the slot on 5 people while its 4.5 votes
+            # rounded to 4 — 2026-09-09, Dagger Pair under clap), votes
+            # only on a reference-only row.
             if role is not None and slot in self.POOLED_SLOTS:
                 top_w = max(wslot.values()) if wslot else 0
-                if top_w < self.POOL_MIN_VOTES:
+                modal_w = (max(wslot, key=lambda g: (wslot[g], g))
+                           if wslot else None)
+                top_people = wpeople.get(modal_w, top_w)
+                if top_people < self.POOL_MIN_VOTES:
                     cands = []
                     if slot in self.CHEST_POOLED_SLOTS:
                         chest = ((options.get("armor") or [{}])[0]).get("gear")
@@ -1846,8 +1858,8 @@ class Engine:
         slot = (self.gear.get(gear_id) or {}).get("slot")
         wl = ((self._seat_kit(rec).get("kit_weapon") or {}).get(weapon)
               or {}).get(slot) or []
-        total = sum(n for _g, n in wl)
-        n = next((n for g, n in wl if g == gear_id), 0)
+        total = sum(p[1] for p in wl)
+        n = next((p[1] for p in wl if p[0] == gear_id), 0)
         return (n / total) if total else 0.0
 
     def member_extra(self, weapon, combo=None):
@@ -2946,7 +2958,8 @@ class Engine:
     IDENTITY_STYLES = ("brawl", "clap", "kite", "brawl_clap", "clap_kite")
     # SEAT POOLING (2026-09-08, spec notes/specs/2026-09-08-coherent-style-
     # kits-design.md section 3): a weapon slot whose own modal carries fewer
-    # than POOL_MIN_VOTES votes is THIN; the kit reader then fronts the
+    # than POOL_MIN_VOTES distinct people (votes where the row carries no
+    # people count) is THIN; the kit reader then fronts the
     # seat's chest-conditioned pool item (helmet / boots / cape) or the
     # plain seat pool item (potion / food) when it has 5+ players. Chest and
     # off-hand are never pooled.

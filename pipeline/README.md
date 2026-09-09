@@ -520,8 +520,10 @@ key (sha1 prefix of the name; the name stays in the cache). In
 counts are votes; the noise floors (seat 3, weapon 2, a chain step 2)
 count DISTINCT voters and the uniform extension needs 35 voters. Rows
 ship rounded votes with `players` beside them and cite
-`killboard:<votes>x/<players>p`. Re-derive with `--pages 0` after
-changing the build record.
+`killboard:<votes>x/<players>p`; the compact `kit_weapon` tier rows are
+`[id, count, players]` (2026-09-09; `players` absent on a reference-only
+row) so the engine's thin-slot read counts people like every other
+floor. Re-derive with `--pages 0` after changing the build record.
 
 ## Doctrine bands (2026-09-04)
 
