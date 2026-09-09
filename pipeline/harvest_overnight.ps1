@@ -15,11 +15,14 @@
 # different API and cache; neither job subsumes the other.
 #
 # Registered as a Windows scheduled task (daily 03:00, current user, 6 h
-# limit, runs late if the machine was asleep) from PowerShell:
-#   $a = New-ScheduledTaskAction -Execute powershell.exe -Argument '-NoProfile -ExecutionPolicy Bypass -File "D:\VS Projects\Bion\pipeline\harvest_overnight.ps1"'
+# limit, runs late if the machine was asleep, HIDDEN window) from PowerShell:
+#   $a = New-ScheduledTaskAction -Execute powershell.exe -Argument '-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File "D:\VS Projects\Bion\pipeline\harvest_overnight.ps1"'
 #   $t = New-ScheduledTaskTrigger -Daily -At 3am
 #   $s = New-ScheduledTaskSettingsSet -ExecutionTimeLimit (New-TimeSpan -Hours 6) -StartWhenAvailable
 #   Register-ScheduledTask -TaskName "CompForge overnight harvest" -Action $a -Trigger $t -Settings $s -Force
+# -WindowStyle Hidden matters (2026-09-08): without it the run pops a console
+# window on the desktop, and closing that window kills the harvest with
+# 0xC000013A — three nights were lost that way before the flag was added.
 # (schtasks.exe chokes on the space in the repo path.) Remove with:
 #   Unregister-ScheduledTask -TaskName "CompForge overnight harvest" -Confirm:$false
 # Logs: pipeline/out/fetch_logs/harvest-<date>.log (gitignored).
